@@ -9,6 +9,7 @@ import OracleMachines.Knowledge
 import OracleMachines.BoundedSearch
 import OracleMachines.CompactExpansion
 import OracleMachines.SearchMachine
+import OracleMachines.Components
 import Lean.Util.CollectAxioms
 
 /-!

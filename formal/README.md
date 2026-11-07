@@ -294,3 +294,30 @@ arguments retain their conventional proofs and literature audit. This directory
 provides machine-checked proofs for the claims mapped above, not for the entire
 manuscript. The underlying results remain elementary consequences of established
 theory; machine checking is not a novelty claim.
+
+## Structural expansion and certified component transfer
+
+`Components.lean` adds checked conjunct paths and renaming, with
+`componentEmbedding_unsat` and `componentLRAT_sound` establishing transfer of a
+negative result to a larger formula. Paths cannot descend through negation.
+The executable accepts only one wrapper around an existing base certificate.
+
+`componentSystem_sat_iff` proves exact composition of components with disjoint
+private variables and a shared interface. `boundaryRelation_exact` and
+`surviving_exact` connect finite interface truth tables to actual formula
+satisfiability. `surviving_expand` gives incremental intersection;
+`repeated_component` and `equivalent_summaries` justify summary reuse.
+`shared_variable_counterexample` rules out composing bare SAT bits on an
+overlapping variable. `summaryTable_size` gives exactly 2^b summary bits.
+
+The `structuralBudget` ledger charges d distinct shapes of evaluation size s
+and m occurrences: d * 2^(b+k) * s + m * 2^b. Its expansion and linear bounds
+are arithmetic theorems for this declared budget, not a proof of Python/CDCL
+instruction counts or of finding a small separator. `summaryBits` counts the
+dictionary and current relation only; mappings, shape descriptions, witnesses,
+parsing, proof checks and archived requests must be added. Fixed b and k allow
+unbounded total private variables without a general-SAT consequence.
+
+The complete build now audits 1,264 declarations, including 694 theorem
+declarations. All earlier modules remain included. The runtime component policy
+currently implements the empty-interface case, with independent final checks.

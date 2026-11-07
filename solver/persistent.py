@@ -28,6 +28,8 @@ sys.path.insert(0, str(ROOT))
 from solver.resources import BudgetExceeded, Deadline, Ledger, exchange, stop_process, bounded_run
 from solver.incremental import DEFAULT_INCREMENTAL, Incremental
 from solver.learning import Predictor, features
+from solver.knowledge_store import KnowledgeStore
+from solver.components import ComponentSolver
 DEFAULT_ENGINE = ROOT / "formal/.lake/build/bin/oracleSolver"
 DEFAULT_CACHE = ROOT / "solver/.cache/results.sqlite3"
 PORTFOLIO_SIZE = 4
@@ -73,6 +75,7 @@ class PersistentSolver:
                  backend: str = "auto", cadical: Path | None = None, timeout: float = 30,
                  query_timeout: float = 30, verify_cache: bool = False,
                  incremental: bool = False, learned: bool = False, reuse_exact: bool = True,
+                 components: bool = False,
                  max_input_bytes: int = 8 * 1024**2, max_message_bytes: int = 64 * 1024**2,
                  max_proof_bytes: int = 16 * 1024**2):
         start = time.perf_counter_ns()
@@ -111,7 +114,7 @@ class PersistentSolver:
                 # Serialize migrations as well as ordinary writes.
                 self.db.execute("BEGIN IMMEDIATE")
                 version = self.db.execute("PRAGMA user_version").fetchone()[0]
-                if version not in (0, 1, 2, 3, 4, 5):
+                if version not in (0, 1, 2, 3, 4, 5, 6):
                     raise ValueError(f"Unsupported cache schema {version}; records left unchanged")
                 self.db.execute("""CREATE TABLE IF NOT EXISTS results (
                     engine TEXT NOT NULL, bits TEXT NOT NULL, answer INTEGER NOT NULL,
@@ -147,11 +150,16 @@ class PersistentSolver:
                     for row in self.db.execute("""SELECT p.*,r.created_ns FROM proofs p JOIN results r
                             ON p.engine=r.engine AND p.bits=r.bits WHERE r.answer=0""").fetchall():
                         self._index_candidate(row["engine"], "proof", row["bits"], row["certificate"], row["created_ns"])
-                self.db.execute("PRAGMA user_version=5")
+                KnowledgeStore.create(self.db)
+                self.db.execute("PRAGMA user_version=6")
         except Exception:
             self.db.close()
             raise
         self.process: subprocess.Popen | None = None
+        self.components = ComponentSolver(self.db, self.engine_id) if components else None
+        if self.incremental:
+            bridge = hashlib.sha256(DEFAULT_INCREMENTAL.read_bytes()).hexdigest()
+            self.incremental.store = KnowledgeStore(self.db, self.engine_id + ":" + bridge + ":dag-v1")
         self.setup_ns = time.perf_counter_ns() - start
 
     def __enter__(self):
@@ -297,7 +305,11 @@ class PersistentSolver:
     def _verify_certificate(self, bits, certificate):
         return self._request({"bits": bits, "mode": "verify_certificate", "certificate": certificate})["valid"]
 
-    def _fast_live(self, bits: str, candidates=None, proofs=None) -> dict:
+    def _fast_live(self, bits: str, candidates=None, proofs=None, *, allow_components=True) -> dict:
+        if self.components is not None and allow_components:
+            result = self.components.solve(self, bits)
+            if result is not None:
+                return result
         r = self._request({"bits": bits, "mode": "prepare",
                            "candidates": candidates or [], "proofs": proofs or [],
                            "search_budget": 64 if self.backend == "auto" else 0})
@@ -469,7 +481,8 @@ class PersistentSolver:
         else:
             result = self._fast_live(bits, candidates, proofs)
         answer, witness = result["answer"], result["witness"]
-        learned_hit = predicted is not None and result["reuse_kind"] == "witness" and witness == predicted
+        learned_hit = (predicted is not None and result["reuse_kind"] == "witness"
+                       and result.get("backend") != "components" and witness == predicted)
         result.update(learned_proposed=predicted is not None, learned_accepted=learned_hit,
                       model_bytes=0)
         self._check_deadline()
@@ -510,13 +523,13 @@ class PersistentSolver:
                     self.db.execute("INSERT INTO models VALUES (?,?,?) ON CONFLICT(engine) DO UPDATE SET state=excluded.state,checksum=excluded.checksum",
                                     (self.engine_id, model_text, hashlib.sha256(model_text.encode()).hexdigest()))
                     result["model_bytes"] = len(model_text.encode())
-            details = {k: result[k] for k in ("backend", "counted_complete", "external_ns", "verification_ns", "cnf_clauses", "proof_bytes", "incremental", "learned_proposed", "learned_accepted", "model_bytes") if k in result}
+            details = {k: result[k] for k in ("backend", "counted_complete", "external_ns", "verification_ns", "cnf_clauses", "proof_bytes", "incremental", "components", "learned_proposed", "learned_accepted", "model_bytes") if k in result}
             self.db.execute("INSERT OR IGNORE INTO measurements VALUES (?,?,?)",
                             (self.engine_id, bits, json.dumps(details, sort_keys=True)))
             if answer and learn:
                 self._activate(bits)
         return {"answer": answer, "witness": witness,
-                "source": "learned_witness" if learned_hit else {"witness": "verified_witness", "refutation": "verified_refutation",
+                "source": ("component_witness" if answer else "component_refutation") if result.get("backend") == "components" else "learned_witness" if learned_hit else {"witness": "verified_witness", "refutation": "verified_refutation",
                            "none": "fallback"}[result["reuse_kind"]],
                 "nodes": result["nodes"],
                 **details,
@@ -582,6 +595,7 @@ def main() -> int:
     parser.add_argument("--max-proof-bytes", type=int, default=16 * 1024**2)
     parser.add_argument("--incremental", action="store_true", help="Use the persistent CDCL proposal engine")
     parser.add_argument("--learned", action="store_true", help="Learn a bounded shared witness predictor")
+    parser.add_argument("--components", action="store_true", help="Reuse renamed disjoint components and checked conjunct refutations")
     sub = parser.add_subparsers(dest="command", required=True)
     solve = sub.add_parser("solve")
     solve.add_argument("bits")
@@ -595,7 +609,7 @@ def main() -> int:
         with PersistentSolver(args.cache, args.engine, backend=args.backend, cadical=args.cadical,
                               timeout=args.timeout, query_timeout=args.query_timeout,
                               verify_cache=args.verify_cache, max_proof_bytes=args.max_proof_bytes,
-                              incremental=args.incremental, learned=args.learned) as solver:
+                              incremental=args.incremental, learned=args.learned, components=args.components) as solver:
             if args.command == "serve":
                 for line in sys.stdin:
                     try:

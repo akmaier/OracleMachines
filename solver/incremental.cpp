@@ -10,8 +10,19 @@
 
 struct Learned : CaDiCaL::Learner {
   unsigned long long clauses = 0;
-  bool learning(int) override { return true; }
-  void learn(int literal) override { if (!literal) ++clauses; }
+  unsigned long long omitted = 0;
+  std::vector<std::vector<int>> exported;
+  std::vector<int> current;
+  bool learning(int size) override {
+    ++clauses;
+    if (size < 1 || size > 64 || exported.size() >= 4096) { ++omitted; return false; }
+    current.clear();
+    return true;
+  }
+  void learn(int literal) override {
+    if (literal) current.push_back(literal);
+    else exported.push_back(current);
+  }
 };
 
 int main() {
@@ -46,6 +57,7 @@ int main() {
       }
       if (!ended) return 2;
     } else if (command == "SOLVE") {
+      learned.exported.clear();
       int root;
       if (!(input >> root) || !root || root == INT32_MIN || std::abs(root) > maximum) return 2;
       std::vector<int> model;
@@ -78,6 +90,16 @@ int main() {
           if (i) std::cout << ',';
           std::cout << solver.val(model[i]);
         }
+      }
+      std::cout << "],\"export_omitted_total\":" << learned.omitted << ",\"learned_export\":[";
+      for (size_t i = 0; i < learned.exported.size(); ++i) {
+        if (i) std::cout << ',';
+        std::cout << '[';
+        for (size_t j = 0; j < learned.exported[i].size(); ++j) {
+          if (j) std::cout << ',';
+          std::cout << learned.exported[i][j];
+        }
+        std::cout << ']';
       }
       std::cout << "]}" << std::endl;
     } else return 2;

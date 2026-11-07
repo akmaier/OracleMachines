@@ -63,3 +63,33 @@ current-engine results and 129 proofs, and retains a bounded current model.
 and hashes confirming preservation. Four historical experiment datasets are
 unchanged. `expanded-pilot/` preserves the development failures; `expanded/`
 contains the final data and source/binary fingerprints.
+
+## Structural follow-up on items 1 and 4
+
+The next implementation milestone adds bounded-interface composition in
+`Components.lean` and durable structural knowledge in the service. The formal
+result allows total variables to grow through disjoint private blocks: the
+exponential parameter is local plus interface width. Its declared acquisition
+budget charges each distinct shape once; intersections charge each occurrence.
+It does not prove that arbitrary SAT admits such a decomposition.
+
+`--components` implements the empty-interface case. It normalizes variable names,
+shares component results and content-addressed terms/shapes/maps/prefix nodes,
+and checks the recomposed witness. A native checked conjunct certificate allows
+renamed UNSAT cores to survive new constraints, including component mergers.
+It does not transfer under arbitrary deletion or negation. Nonempty-interface
+summary construction and separator discovery remain implementation gaps.
+
+Incremental sessions now archive stable circuit definitions and selected short
+learned clauses in immutable compressed objects. Restarts replay a bounded
+clause subset; concurrent workers fork sessions. This is untrusted proposal
+state, not incremental LRAT certification. General negative proposals still
+require an independent proof. Active caps never delete the historical archive.
+The original full-input result archive still grows independently of structural
+compression; all storage categories must remain in the accounting.
+
+Validation at this milestone: 69 integration tests pass; the Lean axiom audit
+checks 1,264 declarations / 694 theorem declarations. Tests cover incompatible
+positive components, renamed and extended negative cores, forged component
+records, truth-table comparisons, durable clauses, poisoned replay state,
+concurrent sessions and schema migration without lost results.

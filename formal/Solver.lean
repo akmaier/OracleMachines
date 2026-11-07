@@ -2,6 +2,7 @@ import OracleMachines.Cache
 import OracleMachines.Parsing
 import OracleMachines.BoundedSearch
 import OracleMachines.CompactExpansion
+import OracleMachines.Components
 import Std.Sat.CNF.Dimacs
 import Std.Tactic.BVDecide.LRAT.Parser
 import Lean.Data.Json
@@ -35,7 +36,7 @@ def parseProof : Nat → Json → Except String Refutation
     return .split i l h
 
 
-def certificateValid (f : Formula) (certificate : Json) : Except String Bool := do
+def baseCertificateValid (f : Formula) (certificate : Json) : Except String Bool := do
   match (certificate.getObjValAs? String "format").toOption with
   | some "aig_false" => return circuitFalse f
   | some "lrat" =>
@@ -46,6 +47,24 @@ def certificateValid (f : Formula) (certificate : Json) : Except String Bool := 
   | none =>
     let tree ← parseProof (certificate.compress.length + 1) certificate
     return (checkRefutation f [] tree).1
+
+def certificateValid (f : Formula) (certificate : Json) : Except String Bool := do
+  if (certificate.getObjValAs? String "format").toOption != some "component" then
+    return ← baseCertificateValid f certificate
+  let encoded ← certificate.getObjValAs? String "bits"
+  let bits ← parseBits encoded
+  let base ← match (decodeRun bits).1 with
+    | some base => pure base
+    | none => throw "Invalid component formula"
+  let paths ← certificate.getObjValAs? (Array String) "paths"
+  if paths.size > 4096 then throw "Too many component conjunct paths"
+  let parsedPaths ← paths.toList.mapM parseBits
+  let ids ← certificate.getObjValAs? (Array Nat) "variables"
+  if ids.size < base.width then throw "Incomplete component variable map"
+  if !componentEmbedding f base parsedPaths ids.toList then return false
+  let proof ← certificate.getObjVal? "proof"
+  -- Only a base certificate is allowed: wrappers cannot recursively expand.
+  return ← baseCertificateValid base proof
 
 /-- Modern preprocessing and LRAT checking have no complete abstract cost ledger. -/
 def fastRespond (f : Formula) (parseWork : Nat) (request : Json) : Except String Json := do

@@ -206,8 +206,16 @@ the next query replaces that assumption. SAT models pass the original-formula
 Lean checker. Negative proposals require a fresh standalone LRAT proof and check.
 Consequently, this is not an incremental UNSAT certificate integration. Metrics
 record retained clauses before/after solving and newly added definitions.
-Internal state is ephemeral: restart or the 200,000-node budget resets it.
-The durable result/proof archive is never reset by that operation.
+Selected internal state now survives restart. Schema 6 stores immutable,
+content-addressed zlib objects: stable circuit definitions and deltas of learned
+clauses. Each process forks a session; concurrent sessions never mix variable
+IDs. Export keeps clauses of at most 64 literals, at most 4,096 per query;
+restart replays at most 20,000 clauses, preferring short clauses. The 200,000-node
+budget starts a new active session without deleting the archive. Solver
+heuristics, activities and trails are not checkpointed. Restored clauses are
+untrusted proposals; SAT still needs a checked model and general UNSAT still
+needs independently checked LRAT. Replay and storage have real costs; these
+limits are not a bound on the entire archive or peak Python memory.
 
 `--learned` enables five shared bounded perceptron weights over syntactic literal
 polarity features. Training uses only newly acquired, checked SAT witnesses.
@@ -218,8 +226,41 @@ than only retrieving old ones. This size excludes the growing result archive
 and input features. Wrong proposals cause fallback; there is no UNSAT prediction,
 general-SAT learning guarantee, or universal speedup claim. `learn:false` disables
 the witness/proof portfolio and model updates, but an explicitly enabled
-incremental engine still retains its live clauses. `learned_witness` is an
+incremental engine still retains its clauses. `learned_witness` is an
 additional result source.
+
+## Structural expansion and component reuse
+
+`--components` enables a separate, persistent structural policy. The service
+splits top-level conjuncts into variable-connected components, renames their
+variables by first occurrence and acquires each canonical component once.
+Renamed copies reuse its witness or refutation. Positive witnesses are joined
+only across disjoint variable sets and checked against the original formula.
+A new connecting constraint merges components, so incompatible partial answers
+are never simply combined. Normalization preserves term order: it does not find
+arbitrary Boolean equivalences or graph isomorphisms.
+
+Negative reuse checks a component certificate in Lean: paths must select actual
+conjuncts, the selected conjunction must equal the renamed archived formula,
+and its base proof must verify. This supports renamed cores and added
+constraints without a fresh SAT search. A bounded index of four recent negative
+instances also finds cores inside merged components. Deletion and negation do
+not justify this transfer. Hashes and compression alone never certify answers.
+
+Shared terms, shapes, variable maps and expansion-prefix nodes form an immutable
+content-addressed DAG. Identical objects are stored once. The whole-query result
+archive still retains original inputs and certificates; its growth is reported
+separately. `learn:false` disables the portfolio/predictor, but explicitly
+enabled component and incremental policies remain active. Component results
+appear as `component_witness` or `component_refutation`, with hit/acquisition and
+storage metrics. Partial checked components can remain after a query timeout;
+no incomplete whole-query answer is cached.
+
+`Components.lean` proves the more general bounded-interface composition rule.
+The current runtime decomposition uses an empty interface; it does not yet
+discover separators or construct nonempty interface tables. For fixed interface
+width and local width, the abstract enumeration budget is linear in component
+occurrences. Large connected components remain unrestricted SAT problems.
 
 ## Deadlines, strict cache checks, and measured resources
 

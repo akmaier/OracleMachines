@@ -192,7 +192,7 @@ The next proof obligations are concrete:
    certificate allocation need their own bound.
 
 A general polynomial SAT algorithm is a separate algorithmic requirement.
-Completing these verification steps for the current exhaustive solver will not
+Completing these verification steps for the reference exhaustive solver will not
 remove its exponential assignment dependence.
 
 ## Current lazy search and certificate portfolios

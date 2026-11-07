@@ -164,7 +164,7 @@ size can still be exponential.
 Build the executable with `cd formal && lake build oracleSolver`. Then, from
 the repository root, run `python3 solver/persistent.py solve 010`. Subsequent
 calls reuse the result from `solver/.cache/results.sqlite3`; new formulas can
-also reuse a retained satisfying assignment after checking it. SAT and UNSAT
+also reuse retained witnesses and refutation trees after checking them. SAT and UNSAT
 results accumulate without eviction. The [service documentation](solver/README.md)
 covers encoding, storage, restart behavior, integrity checks, and testing.
 The database is local and ignored by Git; source code and reproducible experiment

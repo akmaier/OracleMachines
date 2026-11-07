@@ -84,7 +84,7 @@
 \vspace{-0.7cm}
 
 \begin{abstract}
-Whether $\Pclass=\NPclass$ does not by itself determine whether a System 1/System 2 architecture saves computation. Learning allows us to spend computation once and reuse the result. Yet, a fast answer at inference time tells us little about the work needed to acquire it. Here, we use Boolean satisfiability to examine this trade. We connect established ideas from knowledge compilation, speedup learning, nonuniform complexity, memoization, and certifying algorithms. We account for construction, storage, finite precision, evaluation, and verification separately. Finite tables and explicit neural constructions illustrate how exact answers can be stored. Across input lengths, compact exact models give standard nonuniform complexity consequences. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. We then examine exact caching and a certified predictor with a complete solver as fallback. Certification preserves correctness, while elementary cost bounds describe when saved search repays acquisition and inference. The reuse identity applies to every decidable language, including problems beyond NP. Its validity requires neither $\Pclass=\NPclass$ nor $\Pclass\neq\NPclass$; actual savings require the stated cost inequalities. Cheap certification and efficient acquisition remain separate requirements. Explicit budgets also limit additional work when prediction fails. A Lean development verifies binary parsing, an exhaustive SAT core, exact expansion, restricted polynomial bounds, and certified witness reuse. A persistent service retains previous results. Controlled experiments exhibit both reduced core work and overhead that can erase elapsed-time savings. Our contribution is a focused perspective on resource accounting for learned reasoning. Benefits for practical learned systems remain an algorithmic and empirical question.
+Whether $\Pclass=\NPclass$ does not by itself determine whether a System 1/System 2 architecture saves computation. Learning allows us to spend computation once and reuse the result. Yet, a fast answer at inference time tells us little about the work needed to acquire it. Here, we use Boolean satisfiability to examine this trade. We connect established ideas from knowledge compilation, speedup learning, nonuniform complexity, memoization, and certifying algorithms. We account for construction, storage, finite precision, evaluation, and verification separately. Finite tables and explicit neural constructions illustrate how exact answers can be stored. Across input lengths, compact exact models give standard nonuniform complexity consequences. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. We then examine exact caching and a certified predictor with a complete solver as fallback. Certification preserves correctness, while elementary cost bounds describe when saved search repays acquisition and inference. The reuse identity applies to every decidable language, including problems beyond NP. Its validity requires neither $\Pclass=\NPclass$ nor $\Pclass\neq\NPclass$; actual savings require the stated cost inequalities. Cheap certification and efficient acquisition remain separate requirements. Explicit budgets also limit additional work when prediction fails. A Lean development verifies binary parsing, exact expansion, restricted bounds for an exhaustive reference solver, and lazy search with reusable witnesses and refutations. A persistent service retains previous results and certificates. Controlled experiments exhibit both reduced core work and overhead that can erase elapsed-time savings. Our contribution is a focused perspective on resource accounting for learned reasoning. Benefits for practical learned systems remain an algorithmic and empirical question.
 \end{abstract}
 
 \section{Introduction}
@@ -95,7 +95,7 @@ Knowledge compilation already makes this distinction precise. We must consider b
 
 The theory of compilability studies how preprocessing a fixed part of an instance can simplify later queries \citep{cadoli2002}. Representation size is central to its complexity questions. In our table construction, we fix only the maximum input length and cover all formulas up to that length. Yet, the resulting table may be exponentially large. It therefore provides a baseline rather than a tractability result under succinctness constraints. The Learning to Reason framework also considers acquisition and later query answering together. It makes the environment and the learning interface explicit \citep{khardon1997}.
 
-Here, we bring these established ideas together in a perspective on exact SAT. Our central architectural conclusion is that the efficiency rationale for combining acquired knowledge with selective deliberation does not depend on resolving $\Pclass$ versus $\NPclass$. Either resolution leaves us to compare avoided work with acquisition, retrieval, verification, and control costs. To make this distinction precise, we compare a finite input domain, a fixed oracle language, and nonuniform advice across input lengths. We then add certification and account for its cost. The proofs are elementary; we claim no new complexity separation or neural capacity bound. A Lean-verified exhaustive solver and controlled reuse experiments make the accounting concrete. We ask when reusable knowledge repays its acquisition.
+Here, we bring these established ideas together in a perspective on exact SAT. Our central architectural conclusion is that the efficiency rationale for combining acquired knowledge with selective deliberation does not depend on resolving $\Pclass$ versus $\NPclass$. Either resolution leaves us to compare avoided work with acquisition, retrieval, verification, and control costs. To make this distinction precise, we compare a finite input domain, a fixed oracle language, and nonuniform advice across input lengths. We then add certification and account for its cost. The proofs are elementary; we claim no new complexity separation or neural capacity bound. Lean-verified solvers and controlled reuse experiments make the accounting concrete. We ask when reusable knowledge repays its acquisition.
 
 We start with a simple observation. For any fixed maximum input length, we can store all membership answers in a finite object. With a suitable representation and access model, later evaluation is efficient. Yet, that object may be large and expensive to construct. Nor does its existence supply one efficient algorithm for all input lengths. Note that these are separate questions. Keeping them separate allows us to interpret learning as amortization of reasoning without hiding the acquisition cost.
 
@@ -847,7 +847,7 @@ The development proves exact coverage, preservation, eventual coverage, and the 
 \subsection{A restricted bound for the executable core}
 \label{sec:concrete-core}
 
-We next connect the cost calculation to a particular program. Its input is an already parsed formula $f$. Let $v(f)$ be zero for a formula without variables and otherwise one plus its largest variable index. Let $L(f)$ be the binary encoding length. Define an evaluation weight by
+We next connect the cost calculation to the exhaustive reference program, retained alongside the improved solver below. Its input is an already parsed formula $f$. Let $v(f)$ be zero for a formula without variables and otherwise one plus its largest variable index. Let $L(f)$ be the binary encoding length. Define an evaluation weight by
 \begin{align}
 W(\bot)&=1, & W(x_i)&=i+2, \\
 W(\neg f)&=W(f)+1, & W(f\land g)&=W(f)+W(g)+1.
@@ -939,28 +939,58 @@ For evaluation, induction over $f$ gives a transition trace that pushes its valu
 For the data bound, let $C$ be the remaining encoded code length and $V$ the value-stack length. Define a potential $P=C+V$ in an execution state and $P=C+V+j+1$ in a read state with remaining unary index $j$. Every transition makes $P$ nonincreasing. Initially $P=|x|$. Let $R$ be the current assignment-suffix length in a read state and zero otherwise. Then $R\leq A$ throughout execution. Our measure is $M=A+R+P+1$, including the original assignment and one control tag. This gives \eqref{eq:evaluator-data}. Lean checks the trace, both invariants, and their transfer to every successfully decoded input.
 \end{proof}
 
-Hence, the restricted decision bounds above cover all accepted binary requests, using their original input length. They are not limited to inputs constructed by our encoder. Note that this transition machine evaluates one assignment. A false value is not an UNSAT verdict; exhaustive search still supplies negative satisfiability answers. The result also does not bound the full solver's live memory: its eager assignment list can be exponential. The native service retains the recursive evaluator, whose count this separate machine realizes exactly. Combining parser, width discovery, assignment generation, and search into one transition semantics remains a further proof obligation. A simulation on a bit-machine must additionally account for data access and representation. These are distinct steps toward a complete runtime proof.
+Hence, the restricted decision bounds above cover all accepted binary requests, using their original input length. They are not limited to inputs constructed by our encoder. Note that this transition machine evaluates one assignment. A false value is not an UNSAT verdict. The reference solver obtains negative answers by exhaustive search; the improved solver below supplies refutation trees. The result also does not bound either full solver's live memory. The reference solver's eager assignment list can be exponential. The native service retains the recursive evaluator for complete-witness checks, whose count this separate machine realizes exactly. Its partial evaluator and search need separate transition proofs. Combining parsing and full search into one transition semantics remains a further proof obligation. A simulation on a bit-machine must additionally account for data access and representation. These are distinct steps toward a complete runtime proof.
 
 \subsection{Certified witness reuse and persistent results}
 \label{sec:persistent-solver}
 
-The concrete fast path retains one satisfying assignment from an earlier solve. It evaluates that assignment on the entire next formula. A successful check returns SAT. A failed check invokes the exhaustive solver. A new satisfying assignment replaces the active witness; an UNSAT answer leaves that witness available. This is a minimal learner that transfers a previous solution to a different input. It supplies no learned negative certificate or exact compact representation of a whole domain.
+Our first concrete fast path retains one satisfying assignment from an earlier solve. It evaluates that assignment on the entire next formula. A successful check returns SAT. A failed check invokes the exhaustive solver. A new satisfying assignment replaces the active witness; an UNSAT answer leaves that witness available. This is a minimal learner that transfers a previous solution to a different input. It supplies no learned negative certificate or exact compact representation of a whole domain.
 
-Let $H(f,s)$ be the counted hybrid work from state $s$, including checking the candidate, fallback, and copying a newly acquired assignment. Lean proves correctness for every initial state and the bound
+Let $H(f,s)$ be the counted work of this reference hybrid from state $s$, including checking the candidate, fallback, and copying a newly acquired assignment. Lean proves correctness for every initial state and the bound
 \begin{equation}
 H(f,s)\leq T(f)+W(f)+2v(f)+4.
 \label{eq:concrete-overhead}
 \end{equation}
 For a stream, one further control unit is charged per query to the hybrid; the decision baseline pays $T(f)+2$. The checked savings identity follows the actual sequence of updated states. It therefore applies to this adaptive policy. A separate repeated-hit theorem gives strict savings when the accumulated per-query margin exceeds an explicitly charged acquisition bill. Neither result assumes a resolution of $\Pclass$ versus $\NPclass$.
 
-The service also accumulates exact results in a persistent SQLite database. Every completed SAT or UNSAT answer is stored under its complete binary input and engine fingerprint. All acquired SAT witnesses remain stored; the latest active witness is retained across restarts. An exact cache hit avoids another solver call. A new input may instead benefit from witness transfer. There is no eviction, so storage grows with distinct requests. The functional Lean cache proof establishes that insertion preserves exactness and every earlier entry, assuming an exact initial cache.
+The service also accumulates exact results in a persistent SQLite database. Every completed SAT or UNSAT answer is stored under its complete binary input and engine fingerprint. All acquired SAT witnesses remain stored; the latest active witness is retained across restarts. The current service also archives refutations and proposes several earlier certificates, as described below. An exact cache hit avoids another solver call. A new input may instead benefit from witness transfer. There is no eviction, so storage grows with distinct requests. The functional Lean cache proof establishes that insertion preserves exactness and every earlier entry, assuming an exact initial cache.
 
-Persistence has an additional trust boundary. The Python adapter, SQLite transactions, serialization, and disk integrity are not kernel-verified. Records produced by the solver are trusted on reuse. Checksums detect accidental corruption; they do not authenticate a deliberately changed database. A semantic audit can re-solve stored instances and check their witnesses. Engine changes create a separate namespace and preserve older records. Integration tests cover process restarts, retained negative answers, transfer after restart, concurrent writers, malformed inputs, and integrity failures. The service reports malformed encodings as errors rather than storing them as UNSAT. A schema upgrade retains earlier answers and marks previously unmeasured parsing costs as unknown. Revalidation recomputes earlier engines' inputs with the current engine, preserving the original records.
+Persistence has an additional trust boundary. The Python adapter, SQLite transactions, serialization, and disk integrity are not kernel-verified. Records produced by the solver are trusted on reuse. Checksums detect accidental corruption; they do not authenticate a deliberately changed database. A semantic audit re-solves stored instances with reuse disabled and checks retained witnesses and refutations. Engine changes create a separate namespace and preserve older records. Integration tests cover process restarts, retained negative answers, transfer after restart, concurrent writers, malformed inputs, and integrity failures. The service reports malformed encodings as errors rather than storing them as UNSAT. A schema upgrade retains earlier answers and marks previously unmeasured parsing costs as unknown. Revalidation recomputes earlier engines' inputs with the current engine, preserving the original records.
+
+
+\subsection{Lazy search and reusable refutations}
+\label{sec:lazy-search}
+
+We can reduce avoidable search without changing the decision problem. Let $d(f)$ count the distinct variable indices that occur in $f$. This differs from $v(f)$: the formula $x_{100}$ has $d(f)=1$ and $v(f)=101$. The new solver collects these indices and branches only on them. It keeps their original identities in a sparse partial assignment. We evaluate the formula using the values true, false, and unknown. A known value holds for every extending total assignment. Hence, true ends the search with a witness, false closes the branch, and unknown requires another variable choice. The implementation explores one branch at a time and does not construct the list of all assignments.
+
+\begin{samepage}
+\begin{proposition}[Pruned search and checked negative answers]
+\label{prop:lazy-search}
+The lazy solver decides satisfiability and returns a satisfying assignment on SAT inputs. On UNSAT inputs it returns a refutation tree accepted by a sound checker. If $B(f)$ is the number of visited search nodes, then
+\begin{equation}
+B(f)+1\leq 2^{d(f)+1}.
+\label{eq:lazy-nodes}
+\end{equation}
+Checking any proposed witness or refutation against the current formula, followed by this solver on rejection, preserves exact decision.
+\end{proposition}
+\end{samepage}
+
+\begin{proof}
+Structural induction shows that a known partial value agrees with every extending total valuation. Once all occurring variables are assigned, the partial value is known. Induction over the pending variable list therefore gives termination and completeness: a true value supplies a satisfying extension, a false value excludes all extensions of that branch, and an unresolved node explores both values of its next variable. Filling unassigned positions with false gives the returned dense witness without changing satisfaction.
+
+A refutation leaf is accepted only when partial evaluation is false. An internal node is accepted only when both child trees are accepted under the two values of its variable. Induction on the tree excludes every satisfying total valuation, since each valuation takes one of those two branches. The search constructs such a tree whenever it finds no witness. With $k$ pending variables, the visited-node bound satisfies $B(0)\leq1$ and $B(k)\leq1+2B(k-1)$; early termination only decreases it. Thus $B(k)+1\leq2^{k+1}$. Deduplication gives $k=d(f)$ at the root. Finally, each accepted proposal has a sound check, while rejection invokes the complete fallback. Lean checks these claims, including witness materialization and the composition with arbitrary proposal lists.
+\end{proof}
+
+The persistent policy tries at most four distinct stored witnesses and four distinct stored refutations. It checks each against the new formula. For example, a refutation of $x_0\land\neg x_0$ can certify a larger conjunction containing that contradiction. It cannot certify the negation of that contradiction. A stored negative bit alone does not authorize this transfer. The service retains all results and certificates, while restricting active refutation proposals to 65,536 serialized bytes each. This restriction bounds the proposals tried, not the archive. Exact cache hits retain the local-store trust assumption stated above.
+
+Search pruning and reuse across related SAT queries are established techniques. \citet{een2003extensible} describe DPLL-based search, conflict-driven learning, and an incremental interface for related problems. Our implementation makes a smaller part of this design explicit for the present formula syntax. It does not implement CNF conversion, unit propagation, or conflict-driven clause learning. Its purpose is a checked resource-accounting example, with no algorithmic novelty claim.
+
+Note the limits of \eqref{eq:lazy-nodes}. It bounds visited nodes, not machine time. Collecting indices, deduplicating them, sparse lookup, formula evaluation, and producing a dense witness still require work. The new ledger charges these operations and all proposal checks. The earlier fixed-width constants and one-witness bound \eqref{eq:concrete-overhead} remain results about their original implementations; we do not transfer them to this ledger. Refutation trees may be exponential, and their construction, checking, serialization, and storage must be paid for. A bounded number of proposed trees does not make those costs constant. The full transition-machine and live-memory bounds remain open. The improvement removes unused-variable enumeration and permits early pruning; it supplies no polynomial bound for unrestricted SAT.
 
 \subsection{A reproducible mechanism study}
 \label{sec:mechanism-study}
 
-We compare four variants of the same native Lean core: repeated exhaustive solving, witness reuse without an exact cache, an exact cache without witness transfer, and the persistent hybrid combining both. Each run starts without answers or a witness. Acquisition therefore occurs inside the measured stream. The exhaustive baseline eagerly constructs every assignment and uses no SAT preprocessing or clause learning. It is a reference for the reuse mechanism, not a competitive SAT solver.
+Our first study compared four variants of the exhaustive native Lean core: repeated exhaustive solving, witness reuse without an exact cache, an exact cache without witness transfer, and the persistent hybrid combining both. Each run starts without answers or a witness. Acquisition therefore occurs inside the measured stream. The exhaustive baseline eagerly constructs every assignment and uses no SAT preprocessing or clause learning. It is a reference for the reuse mechanism, not a competitive SAT solver.
 
 The frozen synthetic streams use variable widths $2$, $4$, $8$, and $12$, with 32 queries per stream and three repetitions. We include repeated SAT formulas, distinct formulas satisfied by one assignment, a single change in that assignment, alternating incompatible assignments, distinct UNSAT formulas, and a mixed SAT/UNSAT stream. Distinct formulas are constructed by adding even numbers of negations to a conjunction requiring all variables to be true or all to be false. UNSAT formulas add a contradictory literal. These simple families isolate reuse and failure; they are not a sample of practical SAT instances. The experiment checks all 9,216 answers from 288 runs against their known labels. Inputs, raw records, engine fingerprints, and analysis code are retained in the repository.\footnote{See \url{https://github.com/akmaier/OracleMachines/tree/main/experiments}.}
 
@@ -991,6 +1021,42 @@ Mixed SAT/UNSAT & 0.535378 & 1.000024 & 0.535378 & 225.10 & 187.20 \\
 We report parsing, solver-core work, and elapsed time separately. The table combines parsing with first-solve acquisition, certification, fallback, witness copying, and query control. A database hit records zero parser and core operations because it does not invoke Lean; lookup and writes still cost time. The original run without explicit parser counts is also retained; its core counts agree exactly with those of the updated engine. Elapsed totals include engine fingerprinting, database initialization, parsing, process communication, queries, persistence, and shutdown. All variants use the same front end and pay its setup cost, including an empty database for the two variants without caching. Engine compilation, Python interpreter startup, observer statistics, and experiment orchestration are excluded. Database sizes are reported after close; peak process memory and energy are not measured. Timings are medians of three local runs, without a claim of statistical generalization.
 
 The study supplies an executed example of the accounting conditions. It does not establish a practical neural learner, a benefit under an arbitrary workload, or an unrestricted complexity result. More demanding comparisons must use competitive solvers, controlled memory budgets, representative instances, and longer runs that separate recurring service work from startup.
+
+
+\subsection{Comparison with the improved fallback}
+\label{sec:lazy-study}
+
+The new run preserves all 24 ordered streams from the earlier study and adds sparse-index formulas, immediate contradictions, and conjunction extensions of an UNSAT formula. We compare five variants: lazy solving, the retained exhaustive reference, single-witness reuse, exact caching, and the persistent witness/refutation policy. Four widths, nine workloads, three repetitions, and 32 queries per stream give 540 runs and 17,280 checked answers. The original streams have unchanged hashes, and the exhaustive reference reproduces their earlier counted work exactly. All runs again start without stored answers.
+
+Table~\ref{tab:lazy-results} reports the 12-variable results. On the shared-witness stream, lazy solving uses 550,976 counted operations, compared with 18,907,904 for the exhaustive reference. Persistent reuse reduces this to 47,633. The alternating stream now obtains 30 witness transfers after acquiring the two incompatible witnesses. Distinct UNSAT queries obtain 31 refutation transfers. The mixed stream obtains 15 witness and 15 refutation transfers. These are checked transfers to distinct binary inputs, not exact-cache hits.
+
+\begin{table}[htbp]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrrr}
+\hline
+& \multicolumn{3}{c}{Parser + core work} & \multicolumn{2}{c}{Total time (ms)} \\
+Workload & Lazy & Lazy/eager & Hybrid/lazy & Lazy & Hybrid \\
+\hline
+Repeated SAT & 513,280 & 0.034604 & 0.031258 & 134.74 & 135.62 \\
+Distinct, same witness & 550,976 & 0.029140 & 0.086452 & 136.49 & 141.83 \\
+One witness change & 475,472 & 0.053117 & 0.129650 & 139.67 & 145.41 \\
+Alternating witnesses & 478,352 & 0.048152 & 0.137023 & 140.62 & 146.72 \\
+Distinct UNSAT & 543,712 & 0.027978 & 0.425747 & 135.12 & 138.55 \\
+Mixed SAT/UNSAT & 547,328 & 0.028550 & 0.282432 & 137.13 & 143.59 \\
+Sparse index & 29,376 & 0.027543 & 0.494656 & 134.28 & 139.59 \\
+Immediate contradiction & 64,224 & 0.003350 & 0.464764 & 134.68 & 140.52 \\
+UNSAT extension & 69,760 & 0.003518 & 0.457024 & 140.20 & 141.34 \\
+\hline
+\end{tabular}
+\caption{Improved fallback and persistent reuse on 32-query streams at maximum variable width 12. Lazy and eager use their respective explicit ledgers; the ratios are not ratios of machine instructions. The hybrid uses the lazy fallback. Timings include setup and shutdown and are medians of three runs.}
+\label{tab:lazy-results}
+\end{table}
+
+The improved fallback changes the practical comparison. Reuse reduces counted work in these streams, yet its median total time is slightly higher than lazy solving alone in every displayed row. Database writes, checksums, candidate retrieval, and serialization matter at this scale. Hence, the earlier gain against eager enumeration does not establish a gain against the stronger baseline. These easy workloads and three local repetitions support a mechanism comparison, not a general timing conclusion.
+
+A separate integration case solves $x_{100}$ in three search nodes and returns its correctly indexed 101-bit witness. An immediate false conjunct closes a formula containing 30 variables at the root. Four hundred generated formulas agree with independent truth tables and with the exhaustive reference. Restart tests retain both witness alternatives and refutations; forged certificates are rejected. Revalidation of the persistent store adds 355 current-engine records and 129 refutations while preserving all 710 earlier records unchanged. Every current record passes a fresh semantic audit. The raw runs also retain certificate payload sizes and final database sizes; they do not measure peak heap use.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
@@ -1133,6 +1199,12 @@ Deolalikar, V. (2010).
 $P$ is not equal to $NP$.
 Circulated manuscript, 6 August; failed separation claim.
 \url{https://wscor.win.tue.nl/woeginger/P-versus-NP/Deolalikar.pdf}.
+
+\bibitem[E\'en and S\"orensson(2003)]{een2003extensible}
+E\'en, N., and S\"orensson, N. (2003).
+An extensible SAT-solver.
+\emph{Theory and Applications of Satisfiability Testing}, LNCS 2919, 502--518.
+\href{https://doi.org/10.1007/978-3-540-24605-3_37}{doi:10.1007/978-3-540-24605-3\_37}.
 
 \bibitem[Ferrara et~al.(2007)Ferrara, Liberatore, and Schaerf]{ferrara2007preprocessing}
 Ferrara, A., Liberatore, P., and Schaerf, M. (2007).

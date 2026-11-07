@@ -1059,3 +1059,112 @@ labels and 52 bibliography entries; all citations and references resolve.
 The 30-page PDF builds without warnings or overfull/underfull boxes. Every page
 was rendered and visually inspected, with the complete new proposition, proof,
 and scope discussion checked at full page size on page 22.
+
+## Lazy search, persistent certificates, and a stronger baseline
+
+The current solver now branches only on distinct occurring variables and uses
+three-valued partial evaluation to close branches early. It retains original
+variable identities, so a stored witness remains meaningful on later inputs.
+The formula `x100` visits three search nodes and returns a 101-bit witness; no
+assignments are enumerated for its unused lower indices. The previous eager
+implementation remains available as the `exhaustive` reference mode.
+
+### Checked claims and limits
+
+`Search.lean` proves that a known partial value agrees with every extending
+valuation, that search decides satisfiability, that successful sparse witnesses
+materialize correctly, and that every negative result supplies a checked
+refutation. With `d` distinct occurring variables, the search visits at most
+`2^(d+1)-1` nodes. This is a node bound, not an elapsed-time bound. Collection,
+deduplication, sparse reads, partial evaluation, search, and witness construction
+all contribute to the new operation ledger.
+
+A refutation has conflict leaves and variable-split nodes. The checker accepts
+a leaf only when partial evaluation is false, and accepts a split only when both
+children are valid. Its soundness proof excludes every satisfying valuation.
+`Knowledge.lean` proves exactness of the policy that checks arbitrary witness
+and refutation proposals, then invokes the fallback when none succeeds.
+Cross-query negative reuse therefore requires a fresh proof check. A failing
+assignment is never treated as a proof of UNSAT. An old refutation can establish
+a conjunction extension of the original contradiction, but cannot establish its
+negation or an unrelated contradiction merely because their shapes resemble it.
+
+The persistent portfolio proposes up to four distinct witnesses and four distinct
+refutations. It prioritizes the active witness and then recent acquisitions.
+Negative proposals are capped at 65,536 serialized bytes each. All acquired
+records and certificates remain archived, including certificates too large for
+this proposal policy. The new schema adds a separately checksummed proof table
+without altering prior semantic row checksums. Exact-cache hits still trust the
+local store; the proof checks protect transfer to a different input. Audit runs
+the fallback fresh, then validates stored witnesses and refutations.
+
+Refutation trees may be exponential, as may the archive. Bounded proposal count
+is not a constant checking-cost guarantee. This implementation has neither CNF
+conversion nor unit propagation, clause learning, or a structural-width solver.
+The reference solver's fixed-width constants and single-witness overhead theorem
+remain attached to their original definitions. The new search requires further
+work for a combined transition-machine, bit-level simulation, and live-memory
+bound. None of these changes resolves unrestricted P versus NP.
+
+### Literature attribution
+
+[Eén and Sörensson (2003), *An Extensible SAT-solver*](https://research.chalmers.se/en/publication/74325)
+already present conflict-driven solving and an incremental interface for related
+SAT problems. The institutional publication record confirms LNCS 2919,
+502--518 and DOI 10.1007/978-3-540-24605-3_37. The
+[authors' extended paper](https://ai.dmi.unibas.ch/research/reading_group/een-sorensson-sat2003.pdf)
+was checked for its search organization and incremental interface, including
+its distinction between an unconditional contradiction and UNSAT under
+assumptions. The manuscript and BibTeX now cite this precedent.
+
+The [Marques-Silva, Lynce, and Malik chapter](https://www.cs.utexas.edu/~isil/cs389L/CDCL.pdf)
+also describes three-valued partial assignments, conflict backtracking, unit
+propagation, and clause learning. Our implementation instantiates a smaller
+backtracking-and-checking mechanism on the existing syntax. We claim no novelty
+for pruning, incremental reuse, or the search-tree induction, and do not describe
+this solver as CDCL.
+
+### Executed evidence
+
+The pinned build and axiom audit pass: 973 namespace declarations and 533 theorem
+declarations, including generated helpers, with only Lean's standard logical
+axioms. The two new modules add 24 named source theorems. All 21 integration tests
+pass. Four hundred generated formulas agree with independent Python truth tables
+and the eager reference. Tests also exercise sparse indices, root conflicts,
+refutation transfer across restart, alternating witnesses, invalid and forged
+proofs, old schema migration, and concurrent writers.
+
+The new study is saved separately in `experiments/results/lazy-search/`.
+It comprises 540 runs and 17,280 checked answers, including the 24 original
+ordered streams and 12 added sparse/pruning/negative-transfer streams. All
+original stream hashes are unchanged. The old eager reference reproduces every
+historical baseline count, and all three saved raw datasets match their hashes.
+The current binary SHA-256 is
+`0849dafb4df5220102ab5b7dae9aabd84e486e860cf336d35a21ab1328078461`.
+The new raw-run SHA-256 is
+`1256a38e82327cfb0a77b20ff96bf82f66b9d6f7f88c874734b8af4230cc3194`.
+
+At maximum width 12, the distinct shared-witness stream uses 18,907,904 counted
+operations with eager solving, 550,976 with lazy solving, and 47,633 with the
+persistent portfolio. Alternating witnesses obtain 30 successful transfers after
+two acquisitions. Distinct UNSAT queries obtain 31 refutation transfers. Yet the
+persistent policy's median total time exceeds lazy solving alone in every
+width-12 workload. On the shared-witness stream it takes 141.83 ms versus
+136.49 ms. The paper reports this limitation: lowering core work does not
+establish an elapsed-time benefit when persistence and serialization matter.
+The operation-ledger ratio is not a machine-instruction ratio.
+
+The persistent store retains all 710 old rows byte-for-byte at the SQL-field
+level and adds 355 current-engine records: 226 SAT and 129 UNSAT, with 129
+refutations. A fresh semantic audit checks every current result and certificate;
+SQLite integrity is `ok`. The replay report includes a hash of the entire prior
+row set and is committed alongside the experiments. The database itself remains
+local and ignored by Git.
+
+All 19 previous proof environments, five lemmas, nine propositions, and five
+corollaries remain textually unchanged relative to `1fda8c5`. The added
+proposition gives the search and certificate argument. The manuscript now has
+85 unique labels and 53 bibliography entries, with all citations and references
+resolved. The 32-page PDF builds without warnings or overfull/underfull boxes.
+The full document was rendered for layout review; the new proof and results table
+were inspected at full-page resolution.

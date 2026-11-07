@@ -79,7 +79,7 @@ payload by `(v+1)2^v + v + 2L + 2`; `search_machine_restricted_space` bounds it 
 to this machine. The proof does not yet compose candidate generation and parsing
 into the same transition system or measure physical heap bytes. It describes
 the eager reference, not the production lazy/CDCL path. The complete audit now
-passes for 1,195 declarations, including 650 theorem declarations.
+passes for 1,197 declarations, including 651 theorem declarations.
 
 Stages are numbered 1 through `n`; the base stage is charged separately. Queries
 inside each stage use zero-based indices. A stage may have no queries, but its

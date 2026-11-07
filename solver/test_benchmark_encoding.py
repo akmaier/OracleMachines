@@ -34,3 +34,11 @@ class BenchmarkEncodingTests(unittest.TestCase):
             s.solve(bits, learn=False)
             self.assertEqual(s.solve(bits, learn=False)["source"], "fallback")
             self.assertEqual(s.stats()["entries"], 1)
+
+    def test_large_encoding_does_not_consume_one_native_frame_per_bit(self):
+        bits = encode_dimacs(dimacs([[301]] * 2048))
+        self.assertGreater(len(bits), 500000)
+        with tempfile.TemporaryDirectory() as directory, PersistentSolver(Path(directory)/"results.sqlite3", query_timeout=5) as s:
+            result = s.solve(bits)
+            self.assertTrue(result["answer"])
+            self.assertEqual(result["witness"][300], "1")

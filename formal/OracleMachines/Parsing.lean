@@ -196,6 +196,14 @@ theorem lengthRun_spec (bits : Word) :
   | nil => simp [lengthRun]
   | cons b tail ih => simp [lengthRun, ih]
 
+def lengthRunImpl (bits : Word) : Run Nat := (bits.length, bits.length + 1)
+
+/-- Preserve the exact ledger while using the library's stack-safe list length. -/
+@[csimp] theorem lengthRun_compiled :
+    lengthRun = lengthRunImpl := by
+  funext bits
+  exact Prod.ext (lengthRun_spec bits).1 (lengthRun_spec bits).2
+
 def decodeRun (bits : Word) : Run (Option Formula) :=
   let len := lengthRun bits
   let parsed := parseProgramRun (len.1 + 1) bits

@@ -24,10 +24,17 @@ First implementation milestone:
   phases, deadline-aware I/O, monitored external files, and strict cache checking
   are implemented. Internal clauses remain live-session state; saved results,
   certificates and models survive restart.
-- Lean's transitive axiom audit: 1,195 declarations / 650 theorem declarations.
-  All 56 integration tests pass, including truth-table comparisons, timeout
+- Lean's transitive axiom audit: 1,197 declarations / 651 theorem declarations.
+  All 57 integration tests pass, including truth-table comparisons, timeout
   recovery, forged proposals/cache entries, concurrent model updates, and DIMACS
   conversion. No proof admits or new axioms were introduced.
 
 The public/chronological benchmark and manuscript reconciliation follow in the
 next milestone. The stronger claims in the final column remain open.
+
+The public pilot exposed native stack exhaustion during counted length discovery.
+A proved compiler replacement now preserves the exact value and ledger while
+using stack-safe list length; ASCII decoding accumulates iteratively as well.
+A regression test covers an encoding over 500,000 bits. The pilot is retained
+in `experiments/results/expanded-pilot/`, including 32 failures (12 direct
+DIMACS trailer errors, 20 checked-path stack overflows).

@@ -176,7 +176,7 @@ includes newly acquired results found by local preprocessing.
 python3 -m unittest discover -s solver -p 'test_*.py' -v
 ```
 
-All 56 integration tests pass with both native binaries built. The original tests cover retention, restart,
+All 57 integration tests pass with both native binaries built. The original tests cover retention, restart,
 engine namespaces, concurrent writers, corruption, schema migration, witness and
 tree transfer, sparse indices, and 400 formulas compared with independent truth
 tables and the eager reference. Accelerated tests add 120 seeded CNFs checked

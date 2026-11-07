@@ -162,11 +162,16 @@ def worker(mode, group, seconds):
         try:
             for index, case in enumerate(group["cases"]):
                 start = time.perf_counter_ns()
+                if solver:
+                    solver.last_metrics = {}
                 row = dict(event="query", index=index, name=case["name"], phase=case["phase"], expected=case["expected"])
                 try:
                     if mode == "direct":
                         cnf = directory / "query.cnf"
-                        cnf.write_text(case["dimacs"])
+                        variables, clauses = parse_dimacs(case["dimacs"])
+                        # SATLIB's historical '%' trailer is outside strict
+                        # DIMACS. Normalize syntax, preserving the original CNF.
+                        cnf.write_text(dimacs(clauses, variables))
                         run = bounded_run([str(find_cadical()), "--quiet", str(cnf)], directory,
                                           Deadline(seconds), seconds, 64*1024**2, directory/"unused.proof", 16*1024**2)
                         if run.returncode not in (10, 20):

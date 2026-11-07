@@ -8,11 +8,13 @@ import Lean.Data.Json
 
 open OracleMachines OracleMachines.SAT Lean
 
-def parseBits (s : String) : Except String Word :=
-  s.toList.mapM fun c =>
-    if c == '0' then .ok false
-    else if c == '1' then .ok true
-    else .error "Bits must contain only 0 and 1"
+def parseBits (s : String) : Except String Word := do
+  -- Accumulation avoids one native call frame per input bit.
+  let reversed ← s.toList.foldlM (fun acc c =>
+    if c == '0' then .ok (false :: acc)
+    else if c == '1' then .ok (true :: acc)
+    else .error "Bits must contain only 0 and 1") []
+  return reversed.reverse
 
 def showBits (bits : Word) : String := String.mk (bits.map (fun b => if b then '1' else '0'))
 

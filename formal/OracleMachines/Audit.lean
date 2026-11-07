@@ -3,6 +3,7 @@ import OracleMachines.Limits
 import OracleMachines.Reuse
 import OracleMachines.Cache
 import OracleMachines.Restricted
+import OracleMachines.StackMachine
 import Lean.Util.CollectAxioms
 
 /-!

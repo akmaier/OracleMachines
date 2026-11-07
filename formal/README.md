@@ -37,6 +37,7 @@ native-decision axioms fail the audit. Warnings are treated as errors.
 | SAT/UNSAT and encoding errors | [Decision.lean](OracleMachines/Decision.lean): `decision_sat_iff`, `decision_unsat_iff`, `not_sat_iff_invalid_or_unsat` | A partial decision distinguishes satisfiable formulas, unsatisfiable formulas, and invalid strings. UNSAT is the complement only within valid encodings. |
 | Binary SAT and bounded expansion | [Encoding.lean](OracleMachines/Encoding.lean): `decode_encode`, `encode_injective`, `solveEncoded_correct`, `satTable_correct`, `expandSAT_eq` | A concrete binary postfix encoding round-trips. The binary solver decides its defined SAT language, and incremental expansion produces the exact next bounded-domain table. |
 | Executable cost semantics | [CostedSAT.lean](OracleMachines/CostedSAT.lean): `readRun_trace`, `evalRun_trace`, `solveRun_value`, `solveRun_bound`, `solveRun_fixed_width` | The instrumented evaluator realizes an explicit operational trace, the instrumented solver returns the verified solver's witness, and its counted work has a bound polynomial in encoding length for a fixed variable cap. |
+| Explicit evaluator machine | [StackMachine.lean](OracleMachines/StackMachine.lean): `compile_machine_steps`, `evalMachine_correct`, `evalMachine_space` | One transition handles one instruction or one unary-index lookup step. Execution takes exactly the evaluator's reported count. Every reachable state has at most `2*A + L + S + 1` data units for assignment length `A`, encoded program length `L`, and initial stack length `S`. |
 | Proposition 12.4: restricted core bound | `solveRun_bound`, `solveRun_fixed_width` | The same counted implementation has `T <= W^2 + 2^v (W+13) + 2`; fixing `v <= K` gives coefficient `14*2^K+3` and degree 2 in encoding length plus one. |
 | Binary parsing and combined decision | [Parsing.lean](OracleMachines/Parsing.lean): `decodeRun_value`, `decodeRun_bound`, `decideRun_sat`, `decideRun_unsat`, `decideRun_fixed_width` | The counted parser agrees with the existing parser, costs at most `8L+7`, and composes with the solver. On `encode f` with width at most `K`, total counted decision work is at most `(14*2^K+12)(L+1)^2`. |
 | Growing variable count | [Restricted.lean](OracleMachines/Restricted.lean): `decideRun_small_assignment_space`, `decideRun_logarithmic_width`, `small_assignment_space_requires_length` | If `2^v <= L+1` (in particular `v <= floor(log2(L+1))`), parser plus decision costs at most `24(L+1)^2`. Enforcing that premise by padding requires length at least `2^v-1`. |
@@ -141,6 +142,25 @@ and does not give a polynomial reduction from all SAT inputs.
 
 Counter arithmetic, garbage collection, physical memory traffic, and
 compilation to a bit-machine still require a separate simulation argument.
+
+`StackMachine.lean` makes one part of that connection explicit. `evalStep`
+executes supplied postfix code without calling the recursive evaluator. Loading
+a variable enters a read state; each subsequent transition inspects one
+assignment cell and decrements the unary index. The checked execution takes
+exactly `(evalRun f a).2` transitions and halts with the correct Boolean. The
+existing bound therefore gives at most `W(f) <= L(f)` transitions.
+
+The machine also has an invariant on every reachable state, including prefixes
+of an execution. Remaining code bits, stack bits, and a unary read index have
+nonincreasing total size. The read suffix never exceeds the original assignment.
+Counting that suffix separately gives `2*A + L + S + 1` data units, including
+the read-only assignment and one control tag. This is a data-size bound, not
+physical heap usage: addresses, list headers, serialization delimiters, and
+garbage collection remain outside it. The code must already be supplied;
+compilation, parser execution, assignment enumeration, and the full solver do
+not yet have a combined transition-machine simulation. The native service
+continues to use `evalRun`; its evaluator count is realized exactly by this
+separately proved machine, rather than being a measurement of native instructions.
 
 The native executable and [persistent service](../solver/README.md) use this
 verified core. SQLite retains complete SAT/UNSAT results and a reusable witness

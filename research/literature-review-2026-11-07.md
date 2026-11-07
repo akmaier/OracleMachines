@@ -2,6 +2,17 @@
 
 Review date: 7 November 2026. Draft assessed: `paper/bounded_domain_sat_and_amortized_reasoning.tex`, commit `1600c68`.
 
+Revision status: the subsequent manuscript revision incorporates the closest
+precedents and the Deolalikar/Wen discussion recommended below, with 15 additional
+references. It also clarifies input-independent advice and decision-to-search
+coverage; adds a finite-workload cache bound, an expected break-even proposition,
+and a bounded-overhead proposition; and states the remaining algorithmic and
+empirical questions with an evaluation protocol. The review below records the
+assessment of the earlier draft; its revision recommendations are no longer a list
+of wholly outstanding manuscript edits. Compact exact learning, practical savings,
+and performance under memory limits or changing workloads remain unestablished
+by this perspective.
+
 The literature contains substantially closer precedents than the initial review identified. In particular, Lin et al. (2021) already combine neural parameters, arbitrary preprocessing or oracle assistance, polynomial advice, computational limitations, and bounded-length lookup representations. Hertrich and Skutella (2023) explicitly distinguish uniform neural constructions from nonuniform existence when drawing consequences from NP-hardness. The broad connection between neural representations and complexity classes therefore needs to be presented as established literature. The draft can contribute a focused exposition of these distinctions for exact SAT, oracle terminology, certification, and amortized reuse; the search does not establish that this particular exposition is unique.
 
 The widely reported failed proof identified by the author is Vinay Deolalikar's August 2010 claim that P differs from NP. It belongs in a discussion of the limits of inferring algorithmic complexity from representation or solution-space structure. It is not a learning-based proof of P=NP.

@@ -25,6 +25,12 @@ finite restrictions of language classes, oracle simulation, explicit ReLU
 representations, nonuniform advice, caching, and certified fallback. System 1 and
 System 2 serve as a computational analogy, not as complexity classes.
 
+The expanded draft compares these ideas with neural-advice and speedup-learning
+literature, discusses the failed Deolalikar argument and Wen's learned-oracle
+claims, and proves conditional expected-savings and bounded-overhead results.
+Its final section identifies remaining research questions and an evaluation
+protocol; no experimental speedup or efficient exact-learning algorithm is claimed.
+
 The central question is when the expense of acquiring reusable knowledge is repaid
 by reduced future computation. Exact representability alone establishes neither
 compactness nor efficient learning, and a correct hybrid need not be faster overall.
@@ -65,7 +71,8 @@ The [annotated literature review](research/literature-review-2026-11-07.md) comp
 the draft with work on neural advice, speedup learning, compilation, and failed
 complexity proofs, including Deolalikar and Wen. It includes
 [supplementary BibTeX](research/related-work.bib) and saved OpenAlex/SemOpenAlex
-query evidence.
+query evidence. The closest precedents and relevant historical cautions are now
+integrated into the manuscript's self-contained bibliography.
 
 ## License
 

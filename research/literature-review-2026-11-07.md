@@ -155,6 +155,46 @@ with polynomial or superpolynomial solver costs. A formal comparison with one
 solver does not establish optimality against all algorithms, and a competing
 solver could itself include memoization.
 
+### The architectural claim and the narrower priority question
+
+The author's intended conclusion concerns the rationale for the combined
+architecture: **the benefit of acquiring reusable knowledge and selectively
+invoking expensive reasoning does not depend on resolving P versus NP**. This
+is a different priority question from whether memoization or a cost-benefit
+identity is known. The earlier assessment establishes prior publication of
+those components; it does not establish prior explicit publication of this
+architectural conclusion.
+
+A further targeted search combined variants of P=NP, P versus NP, System 1,
+System 2, dual-process/dual-system architectures, metareasoning, bounded
+rationality, and amortized reasoning. It did not identify a verified publication
+that explicitly states and proves this architectural conclusion under both
+alternatives. This is a search outcome, not evidence sufficient to claim first
+publication. The present manuscript frames the point as a synthesis supported
+by its unconditional cost comparisons.
+
+Two additional primary sources help delimit the claim:
+
+- **Vincent Conitzer (2008), Metareasoning as a Formal Computational Problem.**
+  [AAAI workshop paper](https://cdn.aaai.org/Workshops/2008/WS-08-07/WS08-07-005.pdf).
+  The section on implications for metareasoning systems explains how hardness
+  of optimal computation selection can depend on P versus NP or P versus
+  PSPACE, while actual workloads can have easier structure. Thus, global
+  irrelevance of complexity separations to every aspect of the architecture
+  would be too broad. The unconditional savings criterion is the narrower claim.
+
+- **Xin Li (2026), The Two Dragons of Cognition: Recursive Condensation for
+  Predictive Processing. Frontiers in Computational Neuroscience 20, 1778902.**
+  [Publication](https://doi.org/10.3389/fncom.2026.1778902) ·
+  [Full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC13050847/).
+  This published conceptual account connects memory-amortized inference,
+  learned oracle-like responses, and computational complexity. Sections 2 and
+  7 treat P differing from NP as a constraint; they do not establish our
+  two-alternative conclusion. Its claimed application of Savitch's theorem
+  requires separate scrutiny: that theorem gives a space simulation, not a
+  polynomial-time retrieval or efficient-learning guarantee. Relevant passages
+  were screened; its full mathematical and neurobiological account was not audited.
+
 ### What the P-versus-NP qualification adds
 
 The publications above establish the component ideas without requiring a

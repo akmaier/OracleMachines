@@ -4,6 +4,12 @@ A perspective on **resource accounting for learned reasoning**: how preprocessin
 stored knowledge, neural representations, and exact solvers redistribute computation
 between acquiring an answer and using it later.
 
+The central architectural conclusion is that **the efficiency rationale for
+combining System 1 and System 2 survives either resolution of P versus NP**.
+Either way, the relevant comparison is avoided computation versus acquisition,
+retrieval, verification, and control costs. Actual savings depend on the workload
+and implementation.
+
 The project connects established ideas from complexity theory, knowledge
 compilation, memoization, and amortized inference to the interaction between fast
 and deliberative computation. Its contribution is an explanatory synthesis; the

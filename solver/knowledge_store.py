@@ -46,6 +46,9 @@ class KnowledgeStore:
             engine TEXT NOT NULL, id TEXT NOT NULL, row_index INTEGER NOT NULL,
             answer INTEGER NOT NULL CHECK(answer IN (0,1)), choice INTEGER CHECK(choice IN (0,1)),
             PRIMARY KEY(engine,id,row_index))""")
+        db.execute("""CREATE TABLE IF NOT EXISTS interface_symbolic (
+            engine TEXT NOT NULL, id TEXT NOT NULL, object_id TEXT NOT NULL,
+            PRIMARY KEY(engine,id))""")
         db.execute("""CREATE TABLE IF NOT EXISTS expansion_states (
             engine TEXT NOT NULL, id TEXT NOT NULL, manifest TEXT NOT NULL,
             answer INTEGER NOT NULL, evidence TEXT NOT NULL, created_ns INTEGER NOT NULL,

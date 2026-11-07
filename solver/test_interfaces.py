@@ -123,7 +123,7 @@ class InterfaceTests(unittest.TestCase):
         with PersistentSolver(self.path,interfaces=True) as s:
             b=s.expand(a['state'],add={'end':neg(var(12))})
             self.assertFalse(b['answer'])
-            self.assertGreater(b['interfaces']['node_hits'],10)
+            self.assertGreater(b['interfaces']['reused_buckets'],10)
             self.assertGreater(b['interfaces']['native_definitions'],0)
 
     def test_forged_negative_context_is_rejected(self):

@@ -78,6 +78,7 @@ class PersistentSolver:
                  query_timeout: float = 30, verify_cache: bool = False,
                  incremental: bool = False, incremental_proofs: bool = False, learned: bool = False, reuse_exact: bool = True,
                  components: bool = False, interfaces: bool = False, max_interface: int = 3,
+                 symbolic: bool = False,
                  max_input_bytes: int = 8 * 1024**2, max_message_bytes: int = 64 * 1024**2,
                  max_proof_bytes: int = 16 * 1024**2):
         start = time.perf_counter_ns()
@@ -158,7 +159,7 @@ class PersistentSolver:
             self.db.close()
             raise
         self.process: subprocess.Popen | None = None
-        self.interfaces = InterfaceSolver(self, max_interface) if interfaces else None
+        self.interfaces = InterfaceSolver(self, max_interface, symbolic=symbolic) if interfaces or symbolic else None
         self.components = ComponentSolver(self.db, self.engine_id) if components else None
         if self.incremental:
             bridge = hashlib.sha256(DEFAULT_INCREMENTAL.read_bytes()).hexdigest()
@@ -645,6 +646,7 @@ def main() -> int:
     parser.add_argument("--components", action="store_true", help="Reuse renamed disjoint components and checked conjunct refutations")
     parser.add_argument("--interfaces", action="store_true", help="Use checked local-interface elimination and delta expansion")
     parser.add_argument("--max-interface", type=int, default=3)
+    parser.add_argument("--symbolic", action="store_true", help="Build bounded BDD proposals directly from syntax and projections; implies interfaces")
     sub = parser.add_subparsers(dest="command", required=True)
     solve = sub.add_parser("solve")
     solve.add_argument("bits")
@@ -658,7 +660,7 @@ def main() -> int:
         with PersistentSolver(args.cache, args.engine, backend=args.backend, cadical=args.cadical,
                               timeout=args.timeout, query_timeout=args.query_timeout,
                               verify_cache=args.verify_cache, max_proof_bytes=args.max_proof_bytes,
-                              incremental=args.incremental, incremental_proofs=args.incremental_proofs, learned=args.learned, components=args.components, interfaces=args.interfaces, max_interface=args.max_interface) as solver:
+                              incremental=args.incremental, incremental_proofs=args.incremental_proofs, learned=args.learned, components=args.components, interfaces=args.interfaces, max_interface=args.max_interface, symbolic=args.symbolic) as solver:
             if args.command == "serve":
                 for line in sys.stdin:
                     try:

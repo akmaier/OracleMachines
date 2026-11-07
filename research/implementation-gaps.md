@@ -184,3 +184,23 @@ provenance, Lean-only fallback, and component certificates combined with the new
 proof option. All 95 tests pass. The compatibility fixes affect combinations
 outside the timed modes (except a backend dispatch guard on width fallback);
 the native binary and its Lean audit are unchanged.
+
+## Scaling follow-up: indexed planning and direct symbolic proposals
+
+The planner now maintains incidence counts instead of rebuilding adjacency at
+every elimination step. Persistent plans route changed sources through affected
+buckets in a retained order and stop propagation at identical output identities.
+The counters separate affected buckets, reused buckets, source comparisons and
+snapshot copying. Width failure rebuilds an order or uses checked fallback.
+Copying/serializing plans, collecting active constraints and checking final
+answers remain global operations; this is not an O(delta) whole-query bound.
+
+The opt-in `--symbolic` path constructs reduced ordered decision diagrams from
+formula syntax and performs conjunction, restriction and existential projection
+directly. It archives symbolic proposals and enforces node/work caps. Native
+factor-row and original-answer checks remain authoritative, including after
+restart. This avoids Python truth-table acquisition, but native verification,
+small-scope row-cache capacity and worst-case diagram growth are still charged.
+Twenty-eight interface/scaling tests pass at this milestone, including exhaustive
+small-formula comparisons, random edits, archived branching, poisoned symbolic
+proposals, caps and an 80-variable parity diagram built without table rows.

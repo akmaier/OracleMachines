@@ -15,6 +15,8 @@ from solver.incremental import parse_postfix
 from solver.knowledge_store import KnowledgeStore
 from solver.relations import assignments, row_index, pack, unpack, project
 from solver.manifests import Manifest
+from solver import planning
+from solver.symbolic import BDD
 from solver.resources import BudgetExceeded, Deadline
 
 
@@ -27,7 +29,11 @@ def counters():
         node_hits=0,node_acquisitions=0,native_definitions=0,native_replays=0,native_rows=0,
         ordering_candidates=0,ordering_edges=0,max_bag=0,manifest_reads=0,manifest_writes=0,
         semantic_duplicates=0,relation_payload_bytes=0,archive_new_objects=0,row_hits=0,native_row_acquisitions=0,native_row_checks=0,
-        planned_rows=0,unknown_rows=0,active_cache_nodes=0)
+        planned_rows=0,unknown_rows=0,active_cache_nodes=0,planned_buckets=0,
+        affected_buckets=0,reused_buckets=0,propagation_stops=0,dependency_updates=0,
+        plan_copy_entries=0,source_comparisons=0,plan_rebuilds=0,
+        symbolic_operations=0,symbolic_nodes=0,symbolic_hits=0,symbolic_replays=0,
+        symbolic_rows=0,symbolic_fallbacks=0)
 
 
 def evaluate(nodes,assignment):
@@ -42,7 +48,7 @@ def evaluate(nodes,assignment):
 
 
 class InterfaceSolver:
-    def __init__(self,service,max_interface=3,active_nodes=1024):
+    def __init__(self,service,max_interface=3,active_nodes=1024,symbolic=False):
         if not 0<=max_interface<=10:raise ValueError('Interface cap must be between zero and ten')
         self.service=service
         self.db=service.db
@@ -57,6 +63,64 @@ class InterfaceSolver:
         self.verified_rows=set()
         self.metrics=counters()
         self.deadline=None
+        self.symbolic=symbolic
+        self.bdd=BDD()
+        self.symbolic_roots={}
+        self.symbolic_disabled=False
+
+    def begin_symbolic(self):
+        if len(self.bdd.nodes)>self.bdd.max_nodes//2:
+            self.bdd=BDD();self.symbolic_roots.clear()
+        self.bdd.begin(self.deadline)
+        self.symbolic_disabled=False
+
+    def symbolic_root(self,node,depth=0):
+        if depth>256:raise BudgetExceeded('Symbolic dependency depth exceeded')
+        token=node['id']
+        if token in self.symbolic_roots:return self.symbolic_roots[token]
+        saved=self.db.execute('SELECT object_id FROM interface_symbolic WHERE engine=? AND id=?',
+            (self.engine,token)).fetchone()
+        if saved:
+            root=self.bdd.restore(self.store.get(saved[0],'symbolic_relation'))
+            self.metrics['symbolic_replays']+=1
+        else:
+            definition=node['definition']
+            if definition['kind']=='leaf':
+                program=node.get('program')
+                if program is None:
+                    program,_=parse_postfix(definition['bits'],self.deadline)
+                    self.metrics['parsed_nodes']+=len(program)
+                root=self.bdd.formula(program)
+            else:
+                root=1
+                for parent in definition['parents']:
+                    root=self.bdd.apply('and',root,self.symbolic_root(self.read(parent),depth+1))
+                root=self.bdd.exists(root,definition['variable'])
+            with self.service._phase('interface_storage'),self.db:
+                obj=self.store.put('symbolic_relation',self.bdd.dump(root))[0]
+                self.db.execute('INSERT OR IGNORE INTO interface_symbolic VALUES (?,?,?)',(self.engine,token,obj))
+        self.symbolic_roots[token]=root
+        return root
+
+    def symbolic_row(self,node,assignment):
+        root=self.symbolic_root(node)
+        value=self.bdd.evaluate(root,assignment)
+        choice=None
+        if value and node['definition']['kind']=='project':
+            assignment=dict(assignment)
+            variable=node['definition']['variable']
+            for b in (False,True):
+                assignment[variable]=b
+                if all(self.bdd.evaluate(self.symbolic_root(self.read(p)),assignment)
+                       for p in node['definition']['parents']):
+                    choice=b;break
+            if choice is None:raise ValueError('Symbolic projection has no supporting branch')
+        self.metrics['symbolic_rows']+=1
+        return value,choice
+
+    def finish_symbolic(self):
+        self.metrics.update(symbolic_operations=self.bdd.work,symbolic_nodes=len(self.bdd.nodes),
+                            symbolic_hits=self.bdd.hits)
 
     def remember(self,name,node):
         self.cache[name]=node;self.cache.move_to_end(name)
@@ -138,7 +202,17 @@ class InterfaceSolver:
         definition=node['definition']
         assignment={v:bool(index & (1<<(len(node['scope'])-j-1))) for j,v in enumerate(node['scope'])}
         choice=None
-        if definition['kind']=='leaf':
+        symbolic_result=None
+        if self.symbolic and not self.symbolic_disabled:
+            try:
+                with self.service._phase('interface_symbolic'):
+                    symbolic_result=self.symbolic_row(node,assignment)
+            except (BudgetExceeded,RecursionError):
+                self.deadline.check()
+                self.symbolic_disabled=True;self.metrics['symbolic_fallbacks']+=1
+        if symbolic_result is not None:
+            value,choice=symbolic_result
+        elif definition['kind']=='leaf':
             with self.service._phase('interface_acquisition'):
                 nodes=node.get('program')
                 if nodes is None:
@@ -233,63 +307,53 @@ class InterfaceSolver:
             self.bound.add(token)
         return record['leaves']
 
-    def eliminate(self,active,previous_order=()):
-        factors={name:self.read(name) for name in active}
-        if any(v is None for v in factors.values()):raise ValueError('Missing active factor')
-        steps=[];order=[]
-        old_order=iter(previous_order)
-        while True:
-            self.deadline.check()
-            for q in factors.values():
-                if not q['scope'] and not self.acquire(q,0):return False,None,q['id'],order
-            variables=set(v for q in factors.values() for v in q['scope'])
-            if not variables:break
-            adjacency={v:set() for v in variables}
-            for q in factors.values():
-                for v in q['scope']:
-                    adjacency[v].update(q['scope'])
-                    self.metrics['ordering_edges']+=len(q['scope'])
-            preferred=next((v for v in old_order if v in variables),None)
-            with self.service._phase('interface_decomposition'):
-                if preferred is not None and len(adjacency[preferred])<=self.max_interface+1:
-                    variable=preferred
-                else:
-                    self.metrics['ordering_candidates']+=len(variables)
-                    variable=min(variables,key=lambda v:(len(adjacency[v]),v))
-                bag=adjacency[variable]
-                if len(bag)>self.max_interface+1:raise BudgetExceeded('No small interface found within width cap')
-                self.metrics['max_bag']=max(self.metrics['max_bag'],len(bag))
-            bucket=[q for q in factors.values() if variable in q['scope']]
-            # Equal ordered-scope relations can share behavior. Choose one proof
-            # representative, but retain all acquired witnesses in the step DAG.
-            unique={}
-            for q in bucket:
-                behavior=(tuple(q['scope']),q['relation']) if all(v is not None for v in q['rows']) else ('unknown',q['id'])
-                if behavior in unique:self.metrics['semantic_duplicates']+=1
-                else:unique[behavior]=q
-            inputs=sorted(unique.values(),key=lambda q:q['id'])
-            definition=dict(kind='project',variable=variable,parents=[q['id'] for q in inputs])
-            name=identity(definition)
-            with self.service._phase('interface_matching'):
-                node=self.read(name)
-            if node is None:
-                with self.service._phase('interface_combination'):
-                    scope=sorted(set(v for q in inputs for v in q['scope'])-{variable})
-                    rows=[None]*(1<<len(scope));choices=[None]*len(rows)
-                node=self.save(definition,scope,rows,choices)
-            else:self.metrics['node_hits']+=1
-            for q in bucket:del factors[q['id']]
-            factors[name]=node
-            order.append(variable);steps.append(node)
+    def project_node(self,variable,names):
+        bucket=[self.read(name) for name in names]
+        unique={}
+        for q in bucket:
+            behavior=(tuple(q['scope']),q['relation']) if all(v is not None for v in q['rows']) else ('unknown',q['id'])
+            if behavior in unique:self.metrics['semantic_duplicates']+=1
+            else:unique[behavior]=q
+        inputs=sorted(unique.values(),key=lambda q:q['id'])
+        definition=dict(kind='project',variable=variable,parents=[q['id'] for q in inputs])
+        name=identity(definition)
+        with self.service._phase('interface_matching'):
+            node=self.read(name)
+        if node is None:
+            scope=sorted(set(v for q in inputs for v in q['scope'])-{variable})
+            node=self.save(definition,scope,[None]*(1<<len(scope)))
+        else:self.metrics['node_hits']+=1
+        return name
+
+    def eliminate(self,active,previous_order=(),previous_plan=None):
+        with self.service._phase('interface_decomposition'):
+            if previous_plan is not None:
+                try:
+                    plan=planning.update(previous_plan,active,self.read,self.project_node,
+                        self.max_interface,self.deadline,self.metrics)
+                except BudgetExceeded:
+                    self.deadline.check()
+                    self.metrics['plan_rebuilds']+=1
+                    plan=planning.build(active,self.read,self.project_node,
+                        self.max_interface,self.deadline,self.metrics)
+            else:
+                plan=planning.build(active,self.read,self.project_node,
+                    self.max_interface,self.deadline,self.metrics,previous_order)
+        self.current_plan=plan
+        for name in plan['constants']:
+            if not self.acquire(self.read(name),0):return False,None,name,plan['order']
         assignment={}
-        for node in reversed(steps):
+        for variable in reversed(plan['order']):
+            token=plan['buckets'].get(str(variable),{}).get('output')
+            if token is None:continue
+            node=self.read(token)
             row=row_index(node['scope'],assignment)
             if not self.acquire(node,row):raise ValueError('Inconsistent lazy witness path')
             choice=node['choice_values'][row]
             if choice is None:raise ValueError('Unknown interface row cannot produce a witness')
-            assignment[node['definition']['variable']]=choice
+            assignment[variable]=choice
         witness=''.join('1' if assignment.get(i,False) else '0' for i in range(max(assignment,default=-1)+1))
-        return True,witness,None,order
+        return True,witness,None,plan['order']
 
     def certificate(self,root):
         definitions=[];seen=set();stack=[(root,False)]
@@ -303,9 +367,9 @@ class InterfaceSolver:
                 seen.add(name);definitions.append(dict(id=name,definition=node['definition']))
         return dict(format='factor_dag',root=root,definitions=definitions)
 
-    def run(self,active,previous_order=(),constraints=None):
+    def run(self,active,previous_order=(),constraints=None,previous_plan=None):
         with self.service._phase('interface_planning'):
-            answer,witness,root,order=self.eliminate(list(dict.fromkeys(active)),previous_order)
+            answer,witness,root,order=self.eliminate(list(dict.fromkeys(active)),previous_order,previous_plan)
         if answer:
             for name in active:self.ensure(name)
         else:self.ensure(root)
@@ -328,6 +392,7 @@ class InterfaceSolver:
         self.deadline=self.service._deadline or Deadline(self.service.query_timeout)
         self.metrics=counters();self.new_nodes=set();before=self.store.inserted_objects
         self.reset_if_full()
+        self.begin_symbolic()
         try:
             token,active=self.constraint(bits)
             self.bind_constraint(token)
@@ -341,6 +406,7 @@ class InterfaceSolver:
             # Width failure leaves evidence intact and delegates the original
             # query to the existing checked complete solver.
             return None,str(error),dict(self.metrics)
+        self.finish_symbolic()
         self.metrics['archive_new_objects']=self.store.inserted_objects-before
         self.metrics['active_cache_nodes']=len(self.cache)
         self.metrics['unknown_rows']=sum(sum(v is None for v in q['rows']) for q in self.cache.values())
@@ -353,12 +419,16 @@ class InterfaceSolver:
         self.deadline=self.service._deadline or Deadline(self.service.query_timeout)
         self.metrics=counters();self.new_nodes=set();before=self.store.inserted_objects
         self.reset_if_full()
-        root=None;previous_order=[]
+        self.begin_symbolic()
+        root=None;previous_order=[];previous_plan=None
         if base is not None:
             row=self.db.execute('SELECT manifest,evidence FROM expansion_states WHERE engine=? AND id=?',(self.engine,base)).fetchone()
             if row is None:raise ValueError('Unknown expansion base in this checker namespace')
             root=row['manifest'] or None
-            previous_order=self.store.get(row['evidence'],'expansion_result')['order']
+            previous_result=self.store.get(row['evidence'],'expansion_result')
+            previous_order=previous_result['order']
+            if previous_result.get('plan'):
+                previous_plan=self.store.get(previous_result['plan'],'elimination_plan')
         if not isinstance(add,dict) or not isinstance(remove,list):raise ValueError('Expansion requires add map and remove list')
         if len(add)+len(remove)>4096:raise BudgetExceeded('Expansion delta too large')
         if any(not isinstance(k,str) or not k or len(k)>256 for k in list(add)+remove):raise ValueError('Invalid constraint name')
@@ -374,13 +444,16 @@ class InterfaceSolver:
         active=[];constraints=[token for _,token in manifest.items(root)]
         try:
             for token in constraints:active.extend(self.bind_constraint(token))
-            result=self.run(list(dict.fromkeys(active)),previous_order,constraints)
+            result=self.run(list(dict.fromkeys(active)),previous_order,constraints,previous_plan)
+            with self.service._phase('interface_storage'),self.db:
+                result['plan']=self.store.put('elimination_plan',self.current_plan)[0]
         except BudgetExceeded as error:
             self.deadline.check()
             bits=conjunction([self.store.get(t,'expansion_constraint')['bits'] for t in constraints])
             if len(bits)>self.service.max_input_bytes:raise BudgetExceeded('Fallback reconstruction exceeds input cap')
             result=self.service._live(bits,mode="baseline") if self.service.backend=="lean" else self.service._fast_live(bits,allow_components=False,allow_interfaces=False)
             result.update(root=None,order=[],fallback_reason=str(error))
+        self.finish_symbolic()
         self.metrics['archive_new_objects']=self.store.inserted_objects-before
         self.metrics['active_cache_nodes']=len(self.cache)
         self.metrics['unknown_rows']=sum(sum(v is None for v in q['rows']) for q in self.cache.values())

@@ -6,6 +6,7 @@ import OracleMachines.Restricted
 import OracleMachines.StackMachine
 import OracleMachines.Canonical
 import OracleMachines.Knowledge
+import OracleMachines.CDCL
 import Lean.Util.CollectAxioms
 
 /-!

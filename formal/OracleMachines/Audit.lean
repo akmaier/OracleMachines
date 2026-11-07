@@ -2,6 +2,7 @@ import OracleMachines.Invariant
 import OracleMachines.Limits
 import OracleMachines.Reuse
 import OracleMachines.Cache
+import OracleMachines.Parsing
 import Lean.Util.CollectAxioms
 
 /-!

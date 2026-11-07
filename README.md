@@ -66,7 +66,8 @@ domains. Separate results state the uniform expansion bounds that would imply
 polynomial-time decision and the workload conditions that amortize costly
 expansion. The correctness induction supplies neither bound by itself and does
 not prove P = NP.
-The executable development now supplies an exact SAT solver, a restricted
+The executable development now supplies an exact SAT solver, a counted binary
+parser, a restricted
 polynomial bound for a fixed variable cap, and a certified witness-reuse policy.
 The [persistent solver](solver/README.md) retains every completed result across
 restarts. The [reproducible study](experiments/README.md) compares reuse with repeated

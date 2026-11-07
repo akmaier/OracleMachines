@@ -3,6 +3,8 @@
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import tempfile
+import sqlite3
+import time
 import unittest
 
 from solver.persistent import DEFAULT_ENGINE, PersistentSolver, checksum
@@ -93,6 +95,53 @@ class PersistenceTests(unittest.TestCase):
             self.assertEqual(s.solve(VAR0)["source"], "fallback")
             self.assertEqual(s.stats()["entries"], 1)
             self.assertEqual(s.stats()["all_engine_entries"], 2)
+
+    def test_parser_cost_is_retained_after_restart(self):
+        with PersistentSolver(self.path) as s:
+            first = s.solve(DOUBLE_NOT_VAR0)
+            self.assertGreater(first["parse_work"], 0)
+            self.assertLessEqual(first["parse_work"], 8 * len(DOUBLE_NOT_VAR0) + 7)
+            self.assertEqual(first["counted_work"], first["core_work"] + first["parse_work"])
+        with PersistentSolver(self.path) as s:
+            hit = s.solve(DOUBLE_NOT_VAR0)
+            self.assertEqual(hit["counted_work"], 0)
+            self.assertEqual(hit["original_acquisition_parse_work"], first["parse_work"])
+            self.assertIsNone(s.process)
+
+    def test_v1_migration_retains_answers_and_marks_unknown_cost(self):
+        # Real legacy schema, not a mock of the migration implementation.
+        with sqlite3.connect(self.path) as db:
+            db.execute("""CREATE TABLE results (
+                engine TEXT NOT NULL, bits TEXT NOT NULL, answer INTEGER NOT NULL,
+                witness TEXT, acquisition_core_work INTEGER NOT NULL,
+                created_ns INTEGER NOT NULL, checksum TEXT NOT NULL,
+                PRIMARY KEY (engine,bits), CHECK (answer IN (0,1)))""")
+            db.execute("CREATE TABLE active_witness (engine TEXT PRIMARY KEY, bits TEXT NOT NULL)")
+            db.execute("INSERT INTO results VALUES (?,?,?,?,?,?,?)",
+                       ("legacy", UNSAT, 0, None, 46, time.time_ns(), checksum("legacy", UNSAT, False, None)))
+            db.execute("PRAGMA user_version=1")
+        with PersistentSolver(self.path) as s:
+            old = s.db.execute("SELECT * FROM results WHERE engine='legacy'").fetchone()
+            self.assertEqual(old["answer"], 0)
+            self.assertIsNone(old["acquisition_parse_work"])
+            self.assertEqual(s.db.execute("PRAGMA user_version").fetchone()[0], 2)
+            self.assertEqual(s.revalidate(), {"previous_inputs": 1, "revalidated": 1, "already_current": 0})
+            self.assertEqual(s.stats()["all_engine_entries"], 2)
+            self.assertFalse(s.solve(UNSAT)["answer"])
+            self.assertEqual(s.revalidate()["already_current"], 1)
+            self.assertEqual(s.audit()["checked"], 1)
+
+    def test_revalidation_recomputes_instead_of_trusting_old_answers(self):
+        with PersistentSolver(self.path) as s:
+            with s.db:
+                s.db.execute("""INSERT INTO results
+                    (engine,bits,answer,witness,acquisition_core_work,created_ns,checksum)
+                    VALUES (?,?,?,?,?,?,?)""", ("old", VAR0, 0, None, 0,
+                    time.time_ns(), checksum("old", VAR0, False, None)))
+            self.assertEqual(s.revalidate()["revalidated"], 1)
+            self.assertTrue(s.solve(VAR0)["answer"])
+            self.assertEqual(s.db.execute("SELECT answer FROM results WHERE engine='old'").fetchone()[0], 0)
+            self.assertEqual(s.audit()["checked"], 1)
 
     def test_concurrent_writers_keep_exact_results(self):
         with PersistentSolver(self.path):

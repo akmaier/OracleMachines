@@ -1,4 +1,5 @@
 import OracleMachines.Cache
+import OracleMachines.Parsing
 import Lean.Data.Json
 
 open OracleMachines OracleMachines.SAT Lean
@@ -17,7 +18,8 @@ def respond (request : Json) : Except String Json := do
   let candidate ← match (request.getObjValAs? (Option String) "candidate").toOption.getD none with
     | none => pure none
     | some s => some <$> parseBits s
-  let f ← match decode bits with
+  let parsed := decodeRun bits
+  let f ← match parsed.1 with
     | none => .error "Invalid formula encoding"
     | some f => .ok f
   let mode := (request.getObjValAs? String "mode").toOption.getD "hybrid"
@@ -25,13 +27,15 @@ def respond (request : Json) : Except String Json := do
     let result := solveRun f
     return Json.mkObj [("answer", toJson result.1.isSome),
       ("witness", toJson (result.1.map showBits)), ("fast", toJson false),
-      ("core_work", toJson (result.2 + 2))]
+      ("core_work", toJson (result.2 + 2)), ("parse_work", toJson parsed.2),
+      ("counted_work", toJson (parsed.2 + result.2 + 2))]
   if mode != "hybrid" then throw "Unknown solver mode"
   let result := hybridRun candidate f
   let witness := if result.answer then result.state.map showBits else none
   return Json.mkObj [
     ("answer", toJson result.answer), ("witness", toJson witness),
-    ("fast", toJson result.fast), ("core_work", toJson (result.work + 1))]
+    ("fast", toJson result.fast), ("core_work", toJson (result.work + 1)), ("parse_work", toJson parsed.2),
+    ("counted_work", toJson (parsed.2 + result.work + 1))]
 
 def main : IO Unit := do
   let stdin ← IO.getStdin

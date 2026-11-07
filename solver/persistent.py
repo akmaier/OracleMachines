@@ -45,19 +45,28 @@ class PersistentSolver:
         self.db.row_factory = sqlite3.Row
         self.db.execute("PRAGMA journal_mode=WAL")
         self.db.execute("PRAGMA synchronous=FULL")
-        version = self.db.execute("PRAGMA user_version").fetchone()[0]
-        if version not in (0, 1):
+        try:
+            with self.db:
+                # Serialize migrations as well as ordinary writes.
+                self.db.execute("BEGIN IMMEDIATE")
+                version = self.db.execute("PRAGMA user_version").fetchone()[0]
+                if version not in (0, 1, 2):
+                    raise ValueError(f"Unsupported cache schema {version}; records left unchanged")
+                self.db.execute("""CREATE TABLE IF NOT EXISTS results (
+                    engine TEXT NOT NULL, bits TEXT NOT NULL, answer INTEGER NOT NULL,
+                    witness TEXT, acquisition_core_work INTEGER NOT NULL,
+                    created_ns INTEGER NOT NULL, checksum TEXT NOT NULL,
+                    acquisition_parse_work INTEGER,
+                    PRIMARY KEY (engine, bits), CHECK (answer IN (0, 1)))""")
+                self.db.execute("""CREATE TABLE IF NOT EXISTS active_witness (
+                    engine TEXT PRIMARY KEY, bits TEXT NOT NULL)""")
+                if version == 1:
+                    # NULL means the historical parser cost was not measured.
+                    self.db.execute("ALTER TABLE results ADD COLUMN acquisition_parse_work INTEGER")
+                self.db.execute("PRAGMA user_version=2")
+        except Exception:
             self.db.close()
-            raise ValueError(f"Unsupported cache schema {version}; database left unchanged")
-        with self.db:
-            self.db.execute("""CREATE TABLE IF NOT EXISTS results (
-                engine TEXT NOT NULL, bits TEXT NOT NULL, answer INTEGER NOT NULL,
-                witness TEXT, acquisition_core_work INTEGER NOT NULL,
-                created_ns INTEGER NOT NULL, checksum TEXT NOT NULL,
-                PRIMARY KEY (engine, bits), CHECK (answer IN (0, 1)))""")
-            self.db.execute("""CREATE TABLE IF NOT EXISTS active_witness (
-                engine TEXT PRIMARY KEY, bits TEXT NOT NULL)""")
-            self.db.execute("PRAGMA user_version=1")
+            raise
         self.process: subprocess.Popen | None = None
         self.setup_ns = time.perf_counter_ns() - start
 
@@ -118,6 +127,11 @@ class PersistentSolver:
             raise ValueError(response["error"])
         if type(response.get("answer")) is not bool or type(response.get("core_work")) is not int:
             raise ValueError("Invalid engine response; no answer was cached")
+        if (type(response.get("parse_work")) is not int or response["parse_work"] < 0
+                or response["core_work"] < 0
+                or type(response.get("counted_work")) is not int
+                or response["counted_work"] != response["core_work"] + response["parse_work"]):
+            raise ValueError("Invalid engine accounting; no answer was cached")
         if response["answer"]:
             check_bits(response.get("witness"))
         elif response.get("witness") is not None:
@@ -135,16 +149,18 @@ class PersistentSolver:
                 with self.db:
                     self._activate(bits)
             return {"answer": bool(row["answer"]), "witness": row["witness"],
-                    "source": "cache", "core_work": 0,
+                    "source": "cache", "core_work": 0, "parse_work": 0, "counted_work": 0,
                     "original_acquisition_core_work": row["acquisition_core_work"],
+                    "original_acquisition_parse_work": row["acquisition_parse_work"],
                     "wall_ns": time.perf_counter_ns() - start}
         result = self._live(bits, self._candidate() if learn else None)
         answer, witness = result["answer"], result["witness"]
         with self.db:
             self.db.execute("""INSERT OR IGNORE INTO results
-                (engine,bits,answer,witness,acquisition_core_work,created_ns,checksum)
-                VALUES (?,?,?,?,?,?,?)""", (self.engine_id, bits, int(answer), witness,
-                result["core_work"], time.time_ns(), checksum(self.engine_id, bits, answer, witness)))
+                (engine,bits,answer,witness,acquisition_core_work,created_ns,checksum,acquisition_parse_work)
+                VALUES (?,?,?,?,?,?,?,?)""", (self.engine_id, bits, int(answer), witness,
+                result["core_work"], time.time_ns(), checksum(self.engine_id, bits, answer, witness),
+                result["parse_work"]))
             stored = self.db.execute("SELECT * FROM results WHERE engine=? AND bits=?",
                                      (self.engine_id, bits)).fetchone()
             self._validate(stored)
@@ -154,7 +170,8 @@ class PersistentSolver:
                 self._activate(bits)
         return {"answer": answer, "witness": witness,
                 "source": "verified_witness" if result["fast"] else "fallback",
-                "core_work": result["core_work"], "wall_ns": time.perf_counter_ns() - start}
+                "core_work": result["core_work"], "parse_work": result["parse_work"],
+                "counted_work": result["counted_work"], "wall_ns": time.perf_counter_ns() - start}
 
     def stats(self) -> dict:
         row = self.db.execute("""SELECT count(*) AS entries, coalesce(sum(answer),0) AS sat
@@ -162,6 +179,22 @@ class PersistentSolver:
         total = self.db.execute("SELECT count(*) FROM results").fetchone()[0]
         return {"engine": self.engine_id, "entries": row["entries"], "sat": row["sat"],
                 "unsat": row["entries"] - row["sat"], "all_engine_entries": total}
+
+    def revalidate(self) -> dict:
+        """Recompute older engines' inputs; keep their original records intact.
+
+        Old answer bits are never imported as current-engine answers. Progress is
+        committed per input, so an interrupted replay can safely be resumed.
+        """
+        bits = [row[0] for row in self.db.execute(
+            "SELECT DISTINCT bits FROM results WHERE engine != ? ORDER BY bits",
+            (self.engine_id,))]
+        solved = cached = 0
+        for encoded in bits:
+            result = self.solve(encoded)
+            cached += result["source"] == "cache"
+            solved += result["source"] != "cache"
+        return {"previous_inputs": len(bits), "revalidated": solved, "already_current": cached}
 
     def audit(self) -> dict:
         rows = self.db.execute("SELECT * FROM results WHERE engine=? ORDER BY bits",
@@ -186,6 +219,7 @@ def main() -> int:
     solve.add_argument("--no-learn", action="store_true")
     sub.add_parser("stats")
     sub.add_parser("audit")
+    sub.add_parser("revalidate")
     args = parser.parse_args()
     try:
         with PersistentSolver(args.cache, args.engine) as solver:
@@ -193,6 +227,8 @@ def main() -> int:
                 result = solver.solve(args.bits, learn=not args.no_learn)
             elif args.command == "stats":
                 result = solver.stats()
+            elif args.command == "revalidate":
+                result = solver.revalidate()
             else:
                 result = solver.audit()
             result["setup_ns"] = solver.setup_ns

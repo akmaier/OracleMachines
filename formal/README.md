@@ -38,6 +38,7 @@ native-decision axioms fail the audit. Warnings are treated as errors.
 | Binary SAT and bounded expansion | [Encoding.lean](OracleMachines/Encoding.lean): `decode_encode`, `encode_injective`, `solveEncoded_correct`, `satTable_correct`, `expandSAT_eq` | A concrete binary postfix encoding round-trips. The binary solver decides its defined SAT language, and incremental expansion produces the exact next bounded-domain table. |
 | Executable cost semantics | [CostedSAT.lean](OracleMachines/CostedSAT.lean): `readRun_trace`, `evalRun_trace`, `solveRun_value`, `solveRun_bound`, `solveRun_fixed_width` | The instrumented evaluator realizes an explicit operational trace, the instrumented solver returns the verified solver's witness, and its counted work has a bound polynomial in encoding length for a fixed variable cap. |
 | Proposition 12.4: restricted core bound | `solveRun_bound`, `solveRun_fixed_width` | The same counted implementation has `T <= W^2 + 2^v (W+13) + 2`; fixing `v <= K` gives coefficient `14*2^K+3` and degree 2 in encoding length plus one. |
+| Binary parsing and combined decision | [Parsing.lean](OracleMachines/Parsing.lean): `decodeRun_value`, `decodeRun_bound`, `decideRun_sat`, `decideRun_unsat`, `decideRun_fixed_width` | The counted parser agrees with the existing parser, costs at most `8L+7`, and composes with the solver. On `encode f` with width at most `K`, total counted decision work is at most `(14*2^K+12)(L+1)^2`. |
 | Certified adaptive policy | [Hybrid.lean](OracleMachines/Hybrid.lean): `hybridRun_correct`, `serve_correct`, `hybridRun_overhead`, `actual_savings_identity`, `repeated_hit_savings` | A previously acquired witness is checked on each new formula; fallback is exact. Costs include validation, fallback, copying the acquired witness, and stream control. The savings identity follows the actual changing state. |
 | Accumulated exact results | [Cache.lean](OracleMachines/Cache.lean): `cache_lookup_sound`, `cacheStep_correct`, `cacheStep_exact`, `cacheStep_retains` | Every completed result remains available, including negative answers; lookup and insertion preserve exactness, assuming the loaded cache is intact. |
 | Obligations for another representation | [Invariant.lean](OracleMachines/Invariant.lean): `expansion_invariant`, `answer_at_cover` | The base, preservation, and exact new-coverage hypotheses imply exactness at every finite stage and at a covering stage for each input. |
@@ -120,9 +121,19 @@ work <= (14 * 2^K + 3) * (L + 1)^2.
 
 This is a restricted result with an explicit exponential dependence on `K`.
 It is not a polynomial bound with shared constants as `K` grows. The full table
-still has exponentially many entries. Binary parsing, garbage collection,
-physical memory traffic, and compilation of this abstract evaluator to a
-bit-machine are outside the counted-core theorem.
+still has exponentially many entries. The separate `Parsing.lean` development
+now charges binary syntax parsing: length discovery, unary index scanning,
+instruction allocation, and formula-stack assembly. Its result equals `decode`
+and costs at most `8L+7`, including malformed-input rejection. Formula subtrees
+are shared rather than copied. The parser uses already materialized Boolean-list
+input; JSON and ASCII-to-bit conversion remain outside this model.
+
+`decideRun` returns `none` for malformed encodings, `some true` for SAT, and
+`some false` for UNSAT. For an input `encode f` with width at most `K`, parsing
+plus exact decision costs at most `(14*2^K+12)(L+1)^2`. Malformed encodings are
+rejected within `8L+8`. These are numerical bounds in the explicit abstract
+model. Counter arithmetic, garbage collection, physical memory traffic, and
+compilation to a bit-machine still require a separate simulation argument.
 
 The native executable and [persistent service](../solver/README.md) use this
 verified core. SQLite retains complete SAT/UNSAT results and a reusable witness

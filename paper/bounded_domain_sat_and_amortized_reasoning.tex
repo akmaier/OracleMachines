@@ -30,7 +30,7 @@
 \renewcommand{\headrulewidth}{0.3pt}
 \setlength{\parindent}{1.15em}
 \setlength{\parskip}{0.2em}
-\setlength{\bibsep}{0.5em}
+\setlength{\bibsep}{0.45em}
 \captionsetup{font=small,labelfont=bf,skip=9pt}
 \emergencystretch=2em
 \widowpenalty=10000
@@ -247,7 +247,7 @@ Let $S\subseteq D_N$. Since $S$ is finite, it can be represented by a finite tri
 Every subset of $D_N$ consequently occurs as the restriction of a language in $\Pclass$, and therefore also as the restriction of a language in $\NPclass$. The reverse inclusions in $2^{D_N}$ hold by definition.
 \end{proof}
 
-This is a standard finite-language observation, not a SAT-specific tractability result. In fact, writing $\mathsf{REG}$ for the regular languages, the same proof gives
+The underlying standard fact is that every finite language is regular; see \citet[Remark~1.12, p.~12]{rigo2014}. Lemma~\ref{lem:restriction} is an immediate corollary, not a SAT-specific tractability result. Writing $\mathsf{REG}$ for the regular languages and using $\mathsf{REG}\subseteq\Pclass\subseteq\NPclass$, the same argument gives
 \begin{equation}
 \mathsf{REG}\restr D_N=\Pclass\restr D_N=\NPclass\restr D_N=2^{D_N}.
 \end{equation}
@@ -818,6 +818,12 @@ Moses, Y., and Tennenholtz, M. (1996).
 Off-line reasoning for on-line efficiency: Knowledge bases.
 \emph{Artificial Intelligence}, 83(2), 229--239.
 \href{https://doi.org/10.1016/0004-3702(95)00015-1}{doi:10.1016/0004-3702(95)00015-1}.
+
+\bibitem[Rigo(2014)]{rigo2014}
+Rigo, M. (2014).
+\emph{Formal Languages, Automata and Numeration Systems 2: Applications to Recognizability and Decidability}.
+ISTE and Wiley. Chapter~1, Remark~1.12, p.~12.
+\href{https://doi.org/10.1002/9781119042853}{doi:10.1002/9781119042853}.
 
 \bibitem[Selsam and Bj\o rner(2019)]{selsam2019core}
 Selsam, D., and Bj\o rner, N. (2019).

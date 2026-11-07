@@ -89,11 +89,26 @@ They do not establish efficient exact learning on unrestricted instances.
 The seven-item follow-up adds compact restricted coverage, a complete assignment
 search transition system with payload bounds, live CaDiCaL clause reuse, a bounded
 persistent predictor, query deadlines, strict cache checks, and disjoint measured
-phases. All 57 tests and the 651-theorem axiom audit pass. The expanded study checks
+phases. All 69 tests and the 694-theorem axiom audit pass. The expanded study checks
 1,260 answers on public and chronological streams and reports gains, overhead,
 and memory costs. [Implementation scope](research/implementation-gaps.md) records
 which engineering gaps are addressed and which stronger mathematical claims
 remain open. None of these changes establishes unrestricted polynomial SAT.
+
+The structural follow-up targets items 1 and 4. Lean proves exact composition
+through a bounded shared interface, so total variables may grow while local
+acquisition stays bounded. `--components` implements independent-component reuse
+under variable renaming and checked transfer of UNSAT cores to added constraints.
+`--incremental` now saves stable circuit definitions and selected learned clauses
+across restarts. Shared immutable terms, shapes, maps and prefixes reduce
+duplication; full request archival costs remain.
+
+The [structural study](experiments/results/structural/summary.json) checks another
+420 answers. One acquired shape serves 127 component occurrences through
+expansion to 128 variables. Connected-chain and storage controls show the limits:
+separator discovery and nonempty-interface compilation remain unimplemented,
+and the whole database can grow despite sharing. Try
+`python3 solver/persistent.py --components --incremental serve`.
 
 The central question is when the expense of acquiring reusable knowledge is repaid
 by reduced future computation. Exact representability alone establishes neither

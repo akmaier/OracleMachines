@@ -39,7 +39,7 @@ A regression test covers an encoding over 500,000 bits. The pilot is retained
 in `experiments/results/expanded-pilot/`, including 32 failures (12 direct
 DIMACS trailer errors, 20 checked-path stack overflows).
 
-Final evidence and disposition:
+Evidence at the first follow-up milestone (items 1 and 4 are extended below):
 
 | Item | Implemented and checked | Remaining boundary |
 | --- | --- | --- |
@@ -93,3 +93,30 @@ checks 1,264 declarations / 694 theorem declarations. Tests cover incompatible
 positive components, renamed and extended negative cores, forged component
 records, truth-table comparisons, durable clauses, poisoned replay state,
 concurrent sessions and schema migration without lost results.
+
+The structural study completes this follow-up with 420/420 correct answers.
+One two-variable component shape serves 127 occurrences across expansion to
+128 variables; one UNSAT core survives six connected extensions. The chain
+control still needs seven acquisitions. The full component database is larger
+than the checked baseline despite reduced duplication, so no whole-archive
+compression or universal speedup claim is made. The paper now contains both
+restricted structural proofs, prior-work attribution, measured overheads and
+remaining boundaries.
+
+Current next steps for items 1 and 4:
+
+1. Find and verify small separators, then implement the nonempty-interface
+   relations proved in Lean. The present runtime uses disjoint components only.
+2. Support proof-carrying incremental learned clauses and certification of
+   general negative proposals. Current certified negative reuse transfers
+   existing conjunct cores; otherwise an independent LRAT run remains necessary.
+3. Extend the declared structural ledger to concrete acquisition, normalization,
+   compressed retrieval and verification costs. Establish total-memory policies
+   without confusing an immutable evidence archive with a bounded active model.
+4. Broaden equivalence detection beyond first-occurrence renaming and fixed term
+   order, while charging the matching cost. The four-instance negative index
+   deliberately provides incomplete retrieval.
+
+These are implementation and restricted-proof tasks. No argument currently
+bounds local/interface width, exact representation size or acquisition time
+polynomially for unrestricted SAT.

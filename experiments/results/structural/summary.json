@@ -1,0 +1,1917 @@
+{
+  "host": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "python": "3.14.5 (main, May 10 2026, 10:21:34) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "fingerprints": {
+    "formal/.lake/build/bin/oracleSolver": "8e9ae380aa4c103cf0d7b77cfd1a9a29b67c6e686d0f0ebdd9fd0efc9153968c",
+    "formal/.lake/build/bin/oracleIncremental": "238faac3c25bec38736bb81b8355e4a0e09ad153882c754421cf13530a89a42b",
+    "solver/components.py": "9ec539ef364de3fd8f237b5f30b35de5f8baa237c88d744884b8338a62358291",
+    "solver/knowledge_store.py": "73fb1adadb4314bf20bef2cf28780f98d4781e85df4951263bd5055e849839bb",
+    "solver/incremental.py": "d851641ff97fcd4e9b294932265c0d7a63ddb29bede722394f3e5cc6d8eea5d8",
+    "solver/incremental.cpp": "7ea4de926b6c854f1b90bde0285208d1e38874986ca8a478d2ec4a64287f5bc3",
+    "solver/persistent.py": "d20ad24d2be94f44e38206d95f81f64faa8a54f3bc5c2abf5cb0ee8170bbf750",
+    "experiments/run_structural.py": "e3060fcaac045895ab094955985efb6951bb8d48d9ae3140baf6d41165a7ca40"
+  },
+  "runs": 60,
+  "summary": [
+    {
+      "stream": "independent_copies",
+      "mode": "checked",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 169.728459,
+      "median_process_ms": 224.633042,
+      "acquisitions": [
+        0,
+        0,
+        0
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [],
+          "setup_ns": 125952834,
+          "input_archive_bytes": 26148,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 270336
+        },
+        {
+          "event": "storage",
+          "kinds": [],
+          "setup_ns": 88509791,
+          "input_archive_bytes": 26148,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 270336
+        },
+        {
+          "event": "storage",
+          "kinds": [],
+          "setup_ns": 90575833,
+          "input_archive_bytes": 26148,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 270336
+        }
+      ]
+    },
+    {
+      "stream": "independent_copies",
+      "mode": "incremental_live",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 137.129125,
+      "median_process_ms": 195.418792,
+      "acquisitions": [
+        0,
+        0,
+        0
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 7340,
+              "compressed_bytes": 2828
+            }
+          ],
+          "setup_ns": 90566915,
+          "input_archive_bytes": 26148,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 274432
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 7340,
+              "compressed_bytes": 2828
+            }
+          ],
+          "setup_ns": 94325082,
+          "input_archive_bytes": 26148,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 274432
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 7340,
+              "compressed_bytes": 2828
+            }
+          ],
+          "setup_ns": 90457667,
+          "input_archive_bytes": 26148,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 274432
+        }
+      ]
+    },
+    {
+      "stream": "independent_copies",
+      "mode": "incremental_restart",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 377.584876,
+      "median_process_ms": 431.383292,
+      "acquisitions": [
+        0,
+        0,
+        0
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_base",
+              "objects": 6,
+              "raw_bytes": 6528,
+              "compressed_bytes": 2534
+            },
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 7340,
+              "compressed_bytes": 2828
+            }
+          ],
+          "setup_ns": 98754625,
+          "input_archive_bytes": 26148,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 282624
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_base",
+              "objects": 6,
+              "raw_bytes": 6528,
+              "compressed_bytes": 2534
+            },
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 7340,
+              "compressed_bytes": 2828
+            }
+          ],
+          "setup_ns": 98477500,
+          "input_archive_bytes": 26148,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 282624
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_base",
+              "objects": 6,
+              "raw_bytes": 6528,
+              "compressed_bytes": 2534
+            },
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 7340,
+              "compressed_bytes": 2828
+            }
+          ],
+          "setup_ns": 97918167,
+          "input_archive_bytes": 26148,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 282624
+        }
+      ]
+    },
+    {
+      "stream": "independent_copies",
+      "mode": "components_live",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 138.905875,
+      "median_process_ms": 193.614,
+      "acquisitions": [
+        1,
+        1,
+        1
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 64,
+              "raw_bytes": 466,
+              "compressed_bytes": 978
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 64,
+              "raw_bytes": 12866,
+              "compressed_bytes": 8838
+            },
+            {
+              "kind": "component_result",
+              "objects": 1,
+              "raw_bytes": 101,
+              "compressed_bytes": 82
+            },
+            {
+              "kind": "component_shape",
+              "objects": 1,
+              "raw_bytes": 135,
+              "compressed_bytes": 104
+            },
+            {
+              "kind": "component_term",
+              "objects": 2,
+              "raw_bytes": 38,
+              "compressed_bytes": 38
+            }
+          ],
+          "setup_ns": 88722833,
+          "input_archive_bytes": 26148,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 311296
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 64,
+              "raw_bytes": 466,
+              "compressed_bytes": 978
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 64,
+              "raw_bytes": 12866,
+              "compressed_bytes": 8838
+            },
+            {
+              "kind": "component_result",
+              "objects": 1,
+              "raw_bytes": 101,
+              "compressed_bytes": 82
+            },
+            {
+              "kind": "component_shape",
+              "objects": 1,
+              "raw_bytes": 135,
+              "compressed_bytes": 104
+            },
+            {
+              "kind": "component_term",
+              "objects": 2,
+              "raw_bytes": 38,
+              "compressed_bytes": 38
+            }
+          ],
+          "setup_ns": 89790498,
+          "input_archive_bytes": 26148,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 311296
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 64,
+              "raw_bytes": 466,
+              "compressed_bytes": 978
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 64,
+              "raw_bytes": 12866,
+              "compressed_bytes": 8838
+            },
+            {
+              "kind": "component_result",
+              "objects": 1,
+              "raw_bytes": 101,
+              "compressed_bytes": 82
+            },
+            {
+              "kind": "component_shape",
+              "objects": 1,
+              "raw_bytes": 135,
+              "compressed_bytes": 104
+            },
+            {
+              "kind": "component_term",
+              "objects": 2,
+              "raw_bytes": 38,
+              "compressed_bytes": 38
+            }
+          ],
+          "setup_ns": 88681833,
+          "input_archive_bytes": 26148,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 311296
+        }
+      ]
+    },
+    {
+      "stream": "independent_copies",
+      "mode": "components_restart",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 347.261251,
+      "median_process_ms": 402.518916,
+      "acquisitions": [
+        1,
+        1,
+        1
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 64,
+              "raw_bytes": 466,
+              "compressed_bytes": 978
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 64,
+              "raw_bytes": 12866,
+              "compressed_bytes": 8838
+            },
+            {
+              "kind": "component_result",
+              "objects": 1,
+              "raw_bytes": 101,
+              "compressed_bytes": 82
+            },
+            {
+              "kind": "component_shape",
+              "objects": 1,
+              "raw_bytes": 135,
+              "compressed_bytes": 104
+            },
+            {
+              "kind": "component_term",
+              "objects": 2,
+              "raw_bytes": 38,
+              "compressed_bytes": 38
+            }
+          ],
+          "setup_ns": 95360205,
+          "input_archive_bytes": 26148,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 311296
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 64,
+              "raw_bytes": 466,
+              "compressed_bytes": 978
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 64,
+              "raw_bytes": 12866,
+              "compressed_bytes": 8838
+            },
+            {
+              "kind": "component_result",
+              "objects": 1,
+              "raw_bytes": 101,
+              "compressed_bytes": 82
+            },
+            {
+              "kind": "component_shape",
+              "objects": 1,
+              "raw_bytes": 135,
+              "compressed_bytes": 104
+            },
+            {
+              "kind": "component_term",
+              "objects": 2,
+              "raw_bytes": 38,
+              "compressed_bytes": 38
+            }
+          ],
+          "setup_ns": 94508002,
+          "input_archive_bytes": 26148,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 311296
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 64,
+              "raw_bytes": 466,
+              "compressed_bytes": 978
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 64,
+              "raw_bytes": 12866,
+              "compressed_bytes": 8838
+            },
+            {
+              "kind": "component_result",
+              "objects": 1,
+              "raw_bytes": 101,
+              "compressed_bytes": 82
+            },
+            {
+              "kind": "component_shape",
+              "objects": 1,
+              "raw_bytes": 135,
+              "compressed_bytes": 104
+            },
+            {
+              "kind": "component_term",
+              "objects": 2,
+              "raw_bytes": 38,
+              "compressed_bytes": 38
+            }
+          ],
+          "setup_ns": 95451875,
+          "input_archive_bytes": 26148,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 311296
+        }
+      ]
+    },
+    {
+      "stream": "connected_chain",
+      "mode": "checked",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 166.747624,
+      "median_process_ms": 221.984167,
+      "acquisitions": [
+        0,
+        0,
+        0
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [],
+          "setup_ns": 89539458,
+          "input_archive_bytes": 15480,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 221184
+        },
+        {
+          "event": "storage",
+          "kinds": [],
+          "setup_ns": 89898748,
+          "input_archive_bytes": 15480,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 221184
+        },
+        {
+          "event": "storage",
+          "kinds": [],
+          "setup_ns": 89767165,
+          "input_archive_bytes": 15480,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 221184
+        }
+      ]
+    },
+    {
+      "stream": "connected_chain",
+      "mode": "incremental_live",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 134.33425,
+      "median_process_ms": 193.053292,
+      "acquisitions": [
+        0,
+        0,
+        0
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 6274,
+              "compressed_bytes": 2450
+            }
+          ],
+          "setup_ns": 90850292,
+          "input_archive_bytes": 15480,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 225280
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 6274,
+              "compressed_bytes": 2450
+            }
+          ],
+          "setup_ns": 90183292,
+          "input_archive_bytes": 15480,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 225280
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 6274,
+              "compressed_bytes": 2450
+            }
+          ],
+          "setup_ns": 90200791,
+          "input_archive_bytes": 15480,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 225280
+        }
+      ]
+    },
+    {
+      "stream": "connected_chain",
+      "mode": "incremental_restart",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 402.004624,
+      "median_process_ms": 465.264292,
+      "acquisitions": [
+        0,
+        0,
+        0
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_base",
+              "objects": 6,
+              "raw_bytes": 5607,
+              "compressed_bytes": 2202
+            },
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 6274,
+              "compressed_bytes": 2450
+            }
+          ],
+          "setup_ns": 117925290,
+          "input_archive_bytes": 15480,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 233472
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_base",
+              "objects": 6,
+              "raw_bytes": 5607,
+              "compressed_bytes": 2202
+            },
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 6274,
+              "compressed_bytes": 2450
+            }
+          ],
+          "setup_ns": 97198749,
+          "input_archive_bytes": 15480,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 233472
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_base",
+              "objects": 6,
+              "raw_bytes": 5607,
+              "compressed_bytes": 2202
+            },
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 6274,
+              "compressed_bytes": 2450
+            }
+          ],
+          "setup_ns": 100974750,
+          "input_archive_bytes": 15480,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 233472
+        }
+      ]
+    },
+    {
+      "stream": "connected_chain",
+      "mode": "components_live",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 174.767,
+      "median_process_ms": 229.762375,
+      "acquisitions": [
+        7,
+        7,
+        7
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 7,
+              "raw_bytes": 360,
+              "compressed_bytes": 290
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 7,
+              "raw_bytes": 980,
+              "compressed_bytes": 767
+            },
+            {
+              "kind": "component_result",
+              "objects": 7,
+              "raw_bytes": 16055,
+              "compressed_bytes": 1574
+            },
+            {
+              "kind": "component_shape",
+              "objects": 7,
+              "raw_bytes": 17025,
+              "compressed_bytes": 9853
+            },
+            {
+              "kind": "component_term",
+              "objects": 128,
+              "raw_bytes": 10496,
+              "compressed_bytes": 3172
+            }
+          ],
+          "setup_ns": 98183333,
+          "input_archive_bytes": 15480,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 274432
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 7,
+              "raw_bytes": 360,
+              "compressed_bytes": 290
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 7,
+              "raw_bytes": 980,
+              "compressed_bytes": 767
+            },
+            {
+              "kind": "component_result",
+              "objects": 7,
+              "raw_bytes": 16055,
+              "compressed_bytes": 1574
+            },
+            {
+              "kind": "component_shape",
+              "objects": 7,
+              "raw_bytes": 17025,
+              "compressed_bytes": 9853
+            },
+            {
+              "kind": "component_term",
+              "objects": 128,
+              "raw_bytes": 10496,
+              "compressed_bytes": 3172
+            }
+          ],
+          "setup_ns": 89634041,
+          "input_archive_bytes": 15480,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 274432
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 7,
+              "raw_bytes": 360,
+              "compressed_bytes": 290
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 7,
+              "raw_bytes": 980,
+              "compressed_bytes": 767
+            },
+            {
+              "kind": "component_result",
+              "objects": 7,
+              "raw_bytes": 16055,
+              "compressed_bytes": 1574
+            },
+            {
+              "kind": "component_shape",
+              "objects": 7,
+              "raw_bytes": 17025,
+              "compressed_bytes": 9853
+            },
+            {
+              "kind": "component_term",
+              "objects": 128,
+              "raw_bytes": 10496,
+              "compressed_bytes": 3172
+            }
+          ],
+          "setup_ns": 90243833,
+          "input_archive_bytes": 15480,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 274432
+        }
+      ]
+    },
+    {
+      "stream": "connected_chain",
+      "mode": "components_restart",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 382.652125,
+      "median_process_ms": 437.020917,
+      "acquisitions": [
+        7,
+        7,
+        7
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 7,
+              "raw_bytes": 360,
+              "compressed_bytes": 290
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 7,
+              "raw_bytes": 980,
+              "compressed_bytes": 767
+            },
+            {
+              "kind": "component_result",
+              "objects": 7,
+              "raw_bytes": 16055,
+              "compressed_bytes": 1574
+            },
+            {
+              "kind": "component_shape",
+              "objects": 7,
+              "raw_bytes": 17025,
+              "compressed_bytes": 9853
+            },
+            {
+              "kind": "component_term",
+              "objects": 128,
+              "raw_bytes": 10496,
+              "compressed_bytes": 3172
+            }
+          ],
+          "setup_ns": 94869210,
+          "input_archive_bytes": 15480,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 274432
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 7,
+              "raw_bytes": 360,
+              "compressed_bytes": 290
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 7,
+              "raw_bytes": 980,
+              "compressed_bytes": 767
+            },
+            {
+              "kind": "component_result",
+              "objects": 7,
+              "raw_bytes": 16055,
+              "compressed_bytes": 1574
+            },
+            {
+              "kind": "component_shape",
+              "objects": 7,
+              "raw_bytes": 17025,
+              "compressed_bytes": 9853
+            },
+            {
+              "kind": "component_term",
+              "objects": 128,
+              "raw_bytes": 10496,
+              "compressed_bytes": 3172
+            }
+          ],
+          "setup_ns": 95157167,
+          "input_archive_bytes": 15480,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 274432
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 7,
+              "raw_bytes": 360,
+              "compressed_bytes": 290
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 7,
+              "raw_bytes": 980,
+              "compressed_bytes": 767
+            },
+            {
+              "kind": "component_result",
+              "objects": 7,
+              "raw_bytes": 16055,
+              "compressed_bytes": 1574
+            },
+            {
+              "kind": "component_shape",
+              "objects": 7,
+              "raw_bytes": 17025,
+              "compressed_bytes": 9853
+            },
+            {
+              "kind": "component_term",
+              "objects": 128,
+              "raw_bytes": 10496,
+              "compressed_bytes": 3172
+            }
+          ],
+          "setup_ns": 94423583,
+          "input_archive_bytes": 15480,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 274432
+        }
+      ]
+    },
+    {
+      "stream": "negative_core",
+      "mode": "checked",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 166.182208,
+      "median_process_ms": 221.6625,
+      "acquisitions": [
+        0,
+        0,
+        0
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [],
+          "setup_ns": 88674792,
+          "input_archive_bytes": 5345,
+          "proof_archive_bytes": 18616,
+          "result_count": 7,
+          "database_bytes": 196608
+        },
+        {
+          "event": "storage",
+          "kinds": [],
+          "setup_ns": 88515416,
+          "input_archive_bytes": 5345,
+          "proof_archive_bytes": 18616,
+          "result_count": 7,
+          "database_bytes": 196608
+        },
+        {
+          "event": "storage",
+          "kinds": [],
+          "setup_ns": 89662917,
+          "input_archive_bytes": 5345,
+          "proof_archive_bytes": 18616,
+          "result_count": 7,
+          "database_bytes": 196608
+        }
+      ]
+    },
+    {
+      "stream": "negative_core",
+      "mode": "incremental_live",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 173.014083,
+      "median_process_ms": 229.899667,
+      "acquisitions": [
+        0,
+        0,
+        0
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 3719,
+              "compressed_bytes": 1535
+            }
+          ],
+          "setup_ns": 89808417,
+          "input_archive_bytes": 5345,
+          "proof_archive_bytes": 18616,
+          "result_count": 7,
+          "database_bytes": 200704
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 3719,
+              "compressed_bytes": 1535
+            }
+          ],
+          "setup_ns": 90378292,
+          "input_archive_bytes": 5345,
+          "proof_archive_bytes": 18616,
+          "result_count": 7,
+          "database_bytes": 200704
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 3719,
+              "compressed_bytes": 1535
+            }
+          ],
+          "setup_ns": 90139708,
+          "input_archive_bytes": 5345,
+          "proof_archive_bytes": 18616,
+          "result_count": 7,
+          "database_bytes": 200704
+        }
+      ]
+    },
+    {
+      "stream": "negative_core",
+      "mode": "incremental_restart",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 429.230749,
+      "median_process_ms": 495.555833,
+      "acquisitions": [
+        0,
+        0,
+        0
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_base",
+              "objects": 6,
+              "raw_bytes": 3913,
+              "compressed_bytes": 1603
+            },
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 3719,
+              "compressed_bytes": 1535
+            }
+          ],
+          "setup_ns": 105815374,
+          "input_archive_bytes": 5345,
+          "proof_archive_bytes": 18616,
+          "result_count": 7,
+          "database_bytes": 208896
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_base",
+              "objects": 6,
+              "raw_bytes": 3913,
+              "compressed_bytes": 1603
+            },
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 3719,
+              "compressed_bytes": 1535
+            }
+          ],
+          "setup_ns": 102536831,
+          "input_archive_bytes": 5345,
+          "proof_archive_bytes": 18616,
+          "result_count": 7,
+          "database_bytes": 208896
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_base",
+              "objects": 6,
+              "raw_bytes": 3913,
+              "compressed_bytes": 1603
+            },
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 3719,
+              "compressed_bytes": 1535
+            }
+          ],
+          "setup_ns": 98110417,
+          "input_archive_bytes": 5345,
+          "proof_archive_bytes": 18616,
+          "result_count": 7,
+          "database_bytes": 208896
+        }
+      ]
+    },
+    {
+      "stream": "negative_core",
+      "mode": "components_live",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 139.399042,
+      "median_process_ms": 197.366542,
+      "acquisitions": [
+        1,
+        1,
+        1
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 7,
+              "raw_bytes": 360,
+              "compressed_bytes": 290
+            },
+            {
+              "kind": "component_negative_instance",
+              "objects": 1,
+              "raw_bytes": 109,
+              "compressed_bytes": 59
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 7,
+              "raw_bytes": 980,
+              "compressed_bytes": 767
+            },
+            {
+              "kind": "component_result",
+              "objects": 1,
+              "raw_bytes": 535,
+              "compressed_bytes": 279
+            },
+            {
+              "kind": "component_shape",
+              "objects": 7,
+              "raw_bytes": 9923,
+              "compressed_bytes": 5710
+            },
+            {
+              "kind": "component_term",
+              "objects": 67,
+              "raw_bytes": 3226,
+              "compressed_bytes": 1572
+            }
+          ],
+          "setup_ns": 92250875,
+          "input_archive_bytes": 5345,
+          "proof_archive_bytes": 4060,
+          "result_count": 7,
+          "database_bytes": 212992
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 7,
+              "raw_bytes": 360,
+              "compressed_bytes": 290
+            },
+            {
+              "kind": "component_negative_instance",
+              "objects": 1,
+              "raw_bytes": 109,
+              "compressed_bytes": 59
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 7,
+              "raw_bytes": 980,
+              "compressed_bytes": 767
+            },
+            {
+              "kind": "component_result",
+              "objects": 1,
+              "raw_bytes": 535,
+              "compressed_bytes": 279
+            },
+            {
+              "kind": "component_shape",
+              "objects": 7,
+              "raw_bytes": 9923,
+              "compressed_bytes": 5710
+            },
+            {
+              "kind": "component_term",
+              "objects": 67,
+              "raw_bytes": 3226,
+              "compressed_bytes": 1572
+            }
+          ],
+          "setup_ns": 93439667,
+          "input_archive_bytes": 5345,
+          "proof_archive_bytes": 4060,
+          "result_count": 7,
+          "database_bytes": 212992
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 7,
+              "raw_bytes": 360,
+              "compressed_bytes": 290
+            },
+            {
+              "kind": "component_negative_instance",
+              "objects": 1,
+              "raw_bytes": 109,
+              "compressed_bytes": 59
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 7,
+              "raw_bytes": 980,
+              "compressed_bytes": 767
+            },
+            {
+              "kind": "component_result",
+              "objects": 1,
+              "raw_bytes": 535,
+              "compressed_bytes": 279
+            },
+            {
+              "kind": "component_shape",
+              "objects": 7,
+              "raw_bytes": 9923,
+              "compressed_bytes": 5710
+            },
+            {
+              "kind": "component_term",
+              "objects": 67,
+              "raw_bytes": 3226,
+              "compressed_bytes": 1572
+            }
+          ],
+          "setup_ns": 92413624,
+          "input_archive_bytes": 5345,
+          "proof_archive_bytes": 4060,
+          "result_count": 7,
+          "database_bytes": 212992
+        }
+      ]
+    },
+    {
+      "stream": "negative_core",
+      "mode": "components_restart",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 350.911167,
+      "median_process_ms": 406.731791,
+      "acquisitions": [
+        1,
+        1,
+        1
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 7,
+              "raw_bytes": 360,
+              "compressed_bytes": 290
+            },
+            {
+              "kind": "component_negative_instance",
+              "objects": 1,
+              "raw_bytes": 109,
+              "compressed_bytes": 59
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 7,
+              "raw_bytes": 980,
+              "compressed_bytes": 767
+            },
+            {
+              "kind": "component_result",
+              "objects": 1,
+              "raw_bytes": 535,
+              "compressed_bytes": 279
+            },
+            {
+              "kind": "component_shape",
+              "objects": 7,
+              "raw_bytes": 9923,
+              "compressed_bytes": 5710
+            },
+            {
+              "kind": "component_term",
+              "objects": 67,
+              "raw_bytes": 3226,
+              "compressed_bytes": 1572
+            }
+          ],
+          "setup_ns": 95121084,
+          "input_archive_bytes": 5345,
+          "proof_archive_bytes": 4060,
+          "result_count": 7,
+          "database_bytes": 212992
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 7,
+              "raw_bytes": 360,
+              "compressed_bytes": 290
+            },
+            {
+              "kind": "component_negative_instance",
+              "objects": 1,
+              "raw_bytes": 109,
+              "compressed_bytes": 59
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 7,
+              "raw_bytes": 980,
+              "compressed_bytes": 767
+            },
+            {
+              "kind": "component_result",
+              "objects": 1,
+              "raw_bytes": 535,
+              "compressed_bytes": 279
+            },
+            {
+              "kind": "component_shape",
+              "objects": 7,
+              "raw_bytes": 9923,
+              "compressed_bytes": 5710
+            },
+            {
+              "kind": "component_term",
+              "objects": 67,
+              "raw_bytes": 3226,
+              "compressed_bytes": 1572
+            }
+          ],
+          "setup_ns": 99596248,
+          "input_archive_bytes": 5345,
+          "proof_archive_bytes": 4060,
+          "result_count": 7,
+          "database_bytes": 212992
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 7,
+              "raw_bytes": 360,
+              "compressed_bytes": 290
+            },
+            {
+              "kind": "component_negative_instance",
+              "objects": 1,
+              "raw_bytes": 109,
+              "compressed_bytes": 59
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 7,
+              "raw_bytes": 980,
+              "compressed_bytes": 767
+            },
+            {
+              "kind": "component_result",
+              "objects": 1,
+              "raw_bytes": 535,
+              "compressed_bytes": 279
+            },
+            {
+              "kind": "component_shape",
+              "objects": 7,
+              "raw_bytes": 9923,
+              "compressed_bytes": 5710
+            },
+            {
+              "kind": "component_term",
+              "objects": 67,
+              "raw_bytes": 3226,
+              "compressed_bytes": 1572
+            }
+          ],
+          "setup_ns": 95045043,
+          "input_archive_bytes": 5345,
+          "proof_archive_bytes": 4060,
+          "result_count": 7,
+          "database_bytes": 212992
+        }
+      ]
+    },
+    {
+      "stream": "shared_definitions",
+      "mode": "checked",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 165.058583,
+      "median_process_ms": 222.735292,
+      "acquisitions": [
+        0,
+        0,
+        0
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [],
+          "setup_ns": 95386250,
+          "input_archive_bytes": 5328,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 163840
+        },
+        {
+          "event": "storage",
+          "kinds": [],
+          "setup_ns": 89830916,
+          "input_archive_bytes": 5328,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 163840
+        },
+        {
+          "event": "storage",
+          "kinds": [],
+          "setup_ns": 89547375,
+          "input_archive_bytes": 5328,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 163840
+        }
+      ]
+    },
+    {
+      "stream": "shared_definitions",
+      "mode": "incremental_live",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 134.089709,
+      "median_process_ms": 191.364625,
+      "acquisitions": [
+        0,
+        0,
+        0
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 1401,
+              "compressed_bytes": 762
+            }
+          ],
+          "setup_ns": 91796915,
+          "input_archive_bytes": 5328,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 163840
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 1401,
+              "compressed_bytes": 762
+            }
+          ],
+          "setup_ns": 91815874,
+          "input_archive_bytes": 5328,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 163840
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 1401,
+              "compressed_bytes": 762
+            }
+          ],
+          "setup_ns": 89952251,
+          "input_archive_bytes": 5328,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 163840
+        }
+      ]
+    },
+    {
+      "stream": "shared_definitions",
+      "mode": "incremental_restart",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 370.888583,
+      "median_process_ms": 424.548959,
+      "acquisitions": [
+        0,
+        0,
+        0
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_base",
+              "objects": 6,
+              "raw_bytes": 6870,
+              "compressed_bytes": 2601
+            },
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 1401,
+              "compressed_bytes": 762
+            }
+          ],
+          "setup_ns": 97864666,
+          "input_archive_bytes": 5328,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 172032
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_base",
+              "objects": 6,
+              "raw_bytes": 6870,
+              "compressed_bytes": 2601
+            },
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 1401,
+              "compressed_bytes": 762
+            }
+          ],
+          "setup_ns": 97862625,
+          "input_archive_bytes": 5328,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 172032
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "incremental_base",
+              "objects": 6,
+              "raw_bytes": 6870,
+              "compressed_bytes": 2601
+            },
+            {
+              "kind": "incremental_delta",
+              "objects": 7,
+              "raw_bytes": 1401,
+              "compressed_bytes": 762
+            }
+          ],
+          "setup_ns": 125020793,
+          "input_archive_bytes": 5328,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 172032
+        }
+      ]
+    },
+    {
+      "stream": "shared_definitions",
+      "mode": "components_live",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 159.234126,
+      "median_process_ms": 228.497291,
+      "acquisitions": [
+        2,
+        2,
+        2
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 8,
+              "raw_bytes": 58,
+              "compressed_bytes": 121
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 8,
+              "raw_bytes": 1554,
+              "compressed_bytes": 1082
+            },
+            {
+              "kind": "component_result",
+              "objects": 2,
+              "raw_bytes": 861,
+              "compressed_bytes": 242
+            },
+            {
+              "kind": "component_shape",
+              "objects": 2,
+              "raw_bytes": 1677,
+              "compressed_bytes": 975
+            },
+            {
+              "kind": "component_term",
+              "objects": 25,
+              "raw_bytes": 725,
+              "compressed_bytes": 562
+            }
+          ],
+          "setup_ns": 93086418,
+          "input_archive_bytes": 5328,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 172032
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 8,
+              "raw_bytes": 58,
+              "compressed_bytes": 121
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 8,
+              "raw_bytes": 1554,
+              "compressed_bytes": 1082
+            },
+            {
+              "kind": "component_result",
+              "objects": 2,
+              "raw_bytes": 861,
+              "compressed_bytes": 242
+            },
+            {
+              "kind": "component_shape",
+              "objects": 2,
+              "raw_bytes": 1677,
+              "compressed_bytes": 975
+            },
+            {
+              "kind": "component_term",
+              "objects": 25,
+              "raw_bytes": 725,
+              "compressed_bytes": 562
+            }
+          ],
+          "setup_ns": 102435835,
+          "input_archive_bytes": 5328,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 172032
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 8,
+              "raw_bytes": 58,
+              "compressed_bytes": 121
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 8,
+              "raw_bytes": 1554,
+              "compressed_bytes": 1082
+            },
+            {
+              "kind": "component_result",
+              "objects": 2,
+              "raw_bytes": 861,
+              "compressed_bytes": 242
+            },
+            {
+              "kind": "component_shape",
+              "objects": 2,
+              "raw_bytes": 1677,
+              "compressed_bytes": 975
+            },
+            {
+              "kind": "component_term",
+              "objects": 25,
+              "raw_bytes": 725,
+              "compressed_bytes": 562
+            }
+          ],
+          "setup_ns": 169898585,
+          "input_archive_bytes": 5328,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 172032
+        }
+      ]
+    },
+    {
+      "stream": "shared_definitions",
+      "mode": "components_restart",
+      "queries": 21,
+      "statuses": {
+        "ok": 21
+      },
+      "median_total_ms": 349.101709,
+      "median_process_ms": 405.386667,
+      "acquisitions": [
+        2,
+        2,
+        2
+      ],
+      "last_storage": [
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 8,
+              "raw_bytes": 58,
+              "compressed_bytes": 121
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 8,
+              "raw_bytes": 1554,
+              "compressed_bytes": 1082
+            },
+            {
+              "kind": "component_result",
+              "objects": 2,
+              "raw_bytes": 861,
+              "compressed_bytes": 242
+            },
+            {
+              "kind": "component_shape",
+              "objects": 2,
+              "raw_bytes": 1677,
+              "compressed_bytes": 975
+            },
+            {
+              "kind": "component_term",
+              "objects": 25,
+              "raw_bytes": 725,
+              "compressed_bytes": 562
+            }
+          ],
+          "setup_ns": 106598791,
+          "input_archive_bytes": 5328,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 172032
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 8,
+              "raw_bytes": 58,
+              "compressed_bytes": 121
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 8,
+              "raw_bytes": 1554,
+              "compressed_bytes": 1082
+            },
+            {
+              "kind": "component_result",
+              "objects": 2,
+              "raw_bytes": 861,
+              "compressed_bytes": 242
+            },
+            {
+              "kind": "component_shape",
+              "objects": 2,
+              "raw_bytes": 1677,
+              "compressed_bytes": 975
+            },
+            {
+              "kind": "component_term",
+              "objects": 25,
+              "raw_bytes": 725,
+              "compressed_bytes": 562
+            }
+          ],
+          "setup_ns": 93882958,
+          "input_archive_bytes": 5328,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 172032
+        },
+        {
+          "event": "storage",
+          "kinds": [
+            {
+              "kind": "component_map",
+              "objects": 8,
+              "raw_bytes": 58,
+              "compressed_bytes": 121
+            },
+            {
+              "kind": "component_prefix",
+              "objects": 8,
+              "raw_bytes": 1554,
+              "compressed_bytes": 1082
+            },
+            {
+              "kind": "component_result",
+              "objects": 2,
+              "raw_bytes": 861,
+              "compressed_bytes": 242
+            },
+            {
+              "kind": "component_shape",
+              "objects": 2,
+              "raw_bytes": 1677,
+              "compressed_bytes": 975
+            },
+            {
+              "kind": "component_term",
+              "objects": 25,
+              "raw_bytes": 725,
+              "compressed_bytes": 562
+            }
+          ],
+          "setup_ns": 94517710,
+          "input_archive_bytes": 5328,
+          "proof_archive_bytes": 0,
+          "result_count": 7,
+          "database_bytes": 172032
+        }
+      ]
+    }
+  ]
+}

@@ -99,6 +99,8 @@ class StructureTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'witness rejected'):
                 s.solve(var(9), learn=False)
             self.assertEqual(s.stats()['entries'], 1)
+            # Semantic audit must not consult the forged proposal component.
+            self.assertEqual(s.audit()['checked'], 1)
 
     def test_prefix_dag_shares_previous_stages_and_shapes(self):
         with PersistentSolver(self.path, components=True) as s:

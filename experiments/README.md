@@ -263,3 +263,39 @@ The uniform resource bound for SAT with no size restriction remains unresolved.
 Proved polynomial bounds apply to a fixed variable cap or to a specified
 logarithmic relation between variable width and input length. These conditions
 do not apply to every SAT instance.
+
+## Structural expansion and restart study
+
+Run `python3 experiments/run_structural.py --output /tmp/oracle-structural-new`
+with an output directory that does not yet exist. The frozen evidence is in
+[results/structural](results/structural): 60 fresh-process runs, 420 checked
+answers (105 UNSAT), four seven-query streams, five modes, three repetitions.
+Whole-input reuse, the portfolio and predictor are disabled. Modes isolate
+checked solving, live internal state, restarted internal state, live component
+reuse, and restarted component reuse. The source and native binary fingerprints
+identify the measured versions. A later administrative-audit change does not
+alter the timed solve paths.
+
+Independent XOR copies reach 128 variables using one acquired two-variable
+shape and 126 reuses. The negative-core stream reuses one checked refutation
+through six connected extensions. The connected-chain control acquires seven
+growing shapes: small separators exist but this implementation does not use
+them. Median stream totals include setup, queries, and per-query restart close.
+They exclude live-mode final close and interpreter startup; complete subprocess
+time is retained separately. No build/test work ran concurrently with these
+workers, but host load is uncontrolled and three repetitions are insufficient
+for strong small-difference claims.
+
+Unique structural payloads on independent copies occupy 13,606 raw bytes and
+10,040 compressed bytes; small maps alone expand from 466 to 978 bytes. The
+complete database occupies 311,296 bytes, larger than the checked baseline's
+270,336 bytes. Full inputs remain archived. Report object sharing, compression,
+index overhead, complete database bytes and replay time separately. These are
+synthetic mechanism results, not general-SAT or minimum-memory results.
+
+The persistence report records 355 current-engine revalidations, semantic audit,
+2,130 retained total results and 516 proofs. All 1,775 older-engine results and
+387 older proofs remain, along with models and measurements. The report notes a
+serialization-only failure after the initial successful replay; the recorded
+rerun checks all current results and retained older namespaces. Five earlier
+raw study files are unchanged.

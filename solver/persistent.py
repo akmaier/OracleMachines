@@ -305,7 +305,8 @@ class PersistentSolver:
     def _verify_certificate(self, bits, certificate):
         return self._request({"bits": bits, "mode": "verify_certificate", "certificate": certificate})["valid"]
 
-    def _fast_live(self, bits: str, candidates=None, proofs=None, *, allow_components=True) -> dict:
+    def _fast_live(self, bits: str, candidates=None, proofs=None, *, allow_components=True,
+                   allow_incremental=True) -> dict:
         if self.components is not None and allow_components:
             result = self.components.solve(self, bits)
             if result is not None:
@@ -317,7 +318,7 @@ class PersistentSolver:
         if not r.get("pending"):
             return r
         incremental_metrics = None
-        if self.incremental is not None:
+        if self.incremental is not None and allow_incremental:
             with self._phase("incremental_solver"):
                 proposal = self.incremental.propose(bits, self._deadline or Deadline(self.query_timeout))
             incremental_metrics = {k: v for k, v in proposal.items() if k not in ("witness", "values")}
@@ -566,7 +567,7 @@ class PersistentSolver:
                                (self.engine_id,)).fetchall()
         for row in rows:
             self._validate(row)
-            result = self._fast_live(row["bits"])
+            result = self._fast_live(row["bits"], allow_components=False, allow_incremental=False)
             if result["answer"] != bool(row["answer"]):
                 raise ValueError("Cache semantic audit failed")
             if row["answer"] and not self._live(row["bits"], row["witness"])["fast"]:

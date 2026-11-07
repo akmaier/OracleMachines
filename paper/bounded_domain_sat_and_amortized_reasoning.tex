@@ -85,7 +85,7 @@
 \vspace{-0.7cm}
 
 \begin{abstract}
-Whether $\Pclass=\NPclass$ does not by itself determine whether a System 1/System 2 architecture saves computation. Learning allows us to spend computation once and reuse the result. Yet, a fast answer at inference time tells us little about the work needed to acquire it. Here, we use Boolean satisfiability to examine this trade. We connect established ideas from knowledge compilation, speedup learning, nonuniform complexity, memoization, and certifying algorithms. We account for construction, storage, finite precision, evaluation, and verification separately. Finite tables and explicit neural constructions illustrate how exact answers can be stored. Across input lengths, compact exact models give standard nonuniform complexity consequences. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. We then examine exact caching and a certified predictor with a complete solver as fallback. Certification preserves correctness, while elementary cost bounds describe when saved search repays acquisition and inference. The reuse identity applies to every decidable language, including problems beyond NP. Its validity requires neither $\Pclass=\NPclass$ nor $\Pclass\neq\NPclass$; actual savings require the stated cost inequalities. Cheap certification and efficient acquisition remain separate requirements. Explicit budgets also limit additional work when prediction fails. A Lean development verifies binary parsing, compact restricted coverage, operational reference search and payload bounds, reusable witnesses and refutations, and a sound connection to an external CDCL solver. A persistent service retains results, certificates, and a bounded online predictor; a live solver session also reuses internal clauses. Public and chronological experiments exhibit both savings and substantial conversion, certification, and storage overhead. Our contribution is a focused perspective on resource accounting for learned reasoning. Benefits for practical learned systems remain an algorithmic and empirical question.
+Whether $\Pclass=\NPclass$ does not by itself determine whether a System 1/System 2 architecture saves computation. Learning allows us to spend computation once and reuse the result. Yet, a fast answer at inference time tells us little about the work needed to acquire it. Here, we use Boolean satisfiability to examine this trade. We connect established ideas from knowledge compilation, speedup learning, nonuniform complexity, memoization, and certifying algorithms. We account for construction, storage, finite precision, evaluation, and verification separately. Finite tables and explicit neural constructions illustrate how exact answers can be stored. Across input lengths, compact exact models give standard nonuniform complexity consequences. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. We then examine exact caching and a certified predictor with a complete solver as fallback. Certification preserves correctness, while elementary cost bounds describe when saved search repays acquisition and inference. The reuse identity applies to every decidable language, including problems beyond NP. Its validity requires neither $\Pclass=\NPclass$ nor $\Pclass\neq\NPclass$; actual savings require the stated cost inequalities. Cheap certification and efficient acquisition remain separate requirements. Explicit budgets also limit additional work when prediction fails. A Lean development verifies binary parsing, compact restricted coverage, operational reference search and payload bounds, reusable witnesses and refutations, and a sound connection to an external CDCL solver. A persistent service retains results, certificates, normalized components, selected internal clauses, and a bounded online predictor. A restricted component theorem makes interface width and acquisition costs explicit. Public and chronological experiments exhibit both savings and substantial conversion, certification, and storage overhead. Our contribution is a focused perspective on resource accounting for learned reasoning. Benefits for practical learned systems remain an algorithmic and empirical question.
 \end{abstract}
 
 \section{Introduction}
@@ -800,6 +800,44 @@ More precisely, if a fixed polynomial stage cap $p(n)$ guarantees coverage and c
 
 Proposition~\ref{prop:inductive-expansion} establishes none of the polynomial budgets in Corollary~\ref{cor:polynomial-expansion}. Indeed, the same table induction works for an $\mathsf{EXPTIME}$-complete language, although $\Pclass\subsetneq\mathsf{EXPTIME}$ \citep{sipser2020theory}. Thus, exactness at every finite stage cannot imply uniform polynomial-time decision. Establishing the stronger invariant for SAT remains unresolved here.
 
+\subsection{Expansion through reusable components}
+\label{sec:structural-expansion}
+
+Let us look for a restriction that can remain useful as the total number of variables grows. We need not enumerate assignments to every variable together if the formula separates into components with a small shared interface. Component caching and decomposable knowledge compilation already exploit this principle \citep{sang2004components,bacchus2009backtracking,darwiche2002}. The following elementary specialization makes the expansion invariant and its resource parameters explicit. It is not a new tractability result.
+
+\begin{proposition}[Exact expansion through a fixed interface]
+\label{prop:component-expansion}
+Let $F_m=\bigwedge_{i=1}^m f_i(B,P_i)$, where $B$ consists of $b$ shared Boolean variables and the private sets $P_i$ are pairwise disjoint and disjoint from $B$, with $|P_i|\leq k$. Define
+\begin{equation}
+R_i(a)=\ind\{\exists p_i\colon f_i(a,p_i)=1\},\qquad
+A_0=\bits^b,\qquad A_{j+1}=\{a\in A_j:R_{j+1}(a)=1\}.
+\label{eq:interface-expansion}
+\end{equation}
+Then $F_m$ is satisfiable if and only if $A_m\neq\varnothing$. Each relation uses $2^b$ truth-table bits. Repeated relations can share one table, and adding the same relation twice does not change the surviving set.
+
+Suppose first-occurrence renaming of private variables, preserving the ordered interface, identifies $d_m$ distinct syntactic component shapes through stage $m$. Suppose evaluating any one shape on one complete local assignment costs at most $s$ in the chosen evaluation model. Exhaustive acquisition and table combination have the abstract budget
+\begin{equation}
+E_m=d_m\,2^{b+k}s+m\,2^b.
+\label{eq:component-budget}
+\end{equation}
+Here a table-entry combination is one abstract operation; reading, normalization, dictionary access, allocation, control, and any witness or certificate handling are charged separately as $H_m$. The corresponding accounted upper bound is $H_m+E_m$, with any implementation-dependent constant for table-entry operations included consistently. The relation dictionary and one current surviving relation use $(d_m+1)2^b$ bits, excluding component descriptions, occurrence maps, outputs, and retained history.
+\end{proposition}
+
+\begin{proof}
+A satisfying assignment of $F_m$ restricts to one shared assignment $a$ and a private assignment satisfying each $f_i$. Hence $a\in A_m$. Conversely, choose $a\in A_m$ and, for each component, a private witness for $R_i(a)=1$. The private sets are disjoint, so these witnesses and $a$ join into one satisfying assignment. Induction on $j$ gives $A_j=\{a:\bigwedge_{i=1}^j R_i(a)=1\}$. Repetition is idempotent because intersecting a set with the same set twice changes nothing further.
+
+For each new shape, enumerate at most $2^b2^k$ complete local assignments, charging at most $s$ per evaluation. Store its feasible-interface table once. Each occurrence requires at most $2^b$ table-entry combinations; a renamed copy uses the same ordered-interface relation. Summing gives the stated abstract budget. The dictionary has $d_m$ tables and the current state has one more, establishing the storage count. Everything excluded from these two counts remains in $H_m$ or in the additional storage categories.
+\end{proof}
+
+For fixed $b,k,s$, we have $d_m\leq m$ and therefore
+$E_m\leq m(2^{b+k}s+2^b)$. Total variables can grow as $b+mk$ while this budget stays linear in $m$. If $s$ and $H_m$ have polynomial bounds, the restricted construction has a polynomial bound. In contrast, unrestricted SAT need not have bounded local or interface width. A decomposition must be supplied or found with its cost charged. This proposition describes a growing conjunction, not coverage of every formula of a given encoding length. It does not satisfy Corollary~\ref{cor:polynomial-expansion} for unrestricted SAT.
+
+Two details prevent an invalid induction. First, adding a constraint changes the query: a previously satisfiable conjunction can become unsatisfiable. We preserve old answers under their old input keys; for the new conjunction, feasible interface assignments can only disappear. Second, storing only one SAT bit per component is insufficient when $b>0$. The components $x$ and $\neg x$ are individually satisfiable and jointly unsatisfiable. Their interface relations have empty intersection. With $b=0$, private witnesses can instead be joined independently.
+
+Compression also has several meanings here. Renamed shapes share syntax and results; equal interface relations can share behavior even when syntax differs; repeated expansion prefixes can share immutable nodes. Discovering semantic equality still requires work. There are $2^{2^b}$ possible Boolean interface relations, so no lossless coding of all of them makes every relation asymptotically smaller than its $2^b$-bit table. A compact formula describing a relation does not itself make projection or nonemptiness cheap. Byte compression is a further engineering choice and may enlarge small objects.
+
+\texttt{Components.lean} checks the semantic equivalence, finite-table exactness, expansion intersection, repetition, equivalent-summary replacement, and table size. It also checks the expansion and linear inequalities for the declared budget. Those arithmetic theorems do not verify the runtime of the Python implementation, the acquisition solver, or separator discovery. The implemented component policy below currently uses the $b=0$ case.
+
 \subsection{Amortization while the domain grows}
 
 Costly expansion may still be repaid by later queries. Let us state the workload condition rather than interchange the fixed-domain and growing-domain limits.
@@ -1112,7 +1150,7 @@ Let $A(f)$ be the compiled AIG and $C(f)$ its CNF translation. Compilation prese
 Induction on $f$ establishes equality between its evaluation and that of $A(f)$. Cached graph extension preserves existing references; the constant, variable, negation, and conjunction constructors preserve their respective Boolean meanings. Thus, a constant-false root excludes every satisfying valuation. For LRAT acceptance, the standard-library checker theorem gives unsatisfiability of $C(f)$. The standard-library AIG-to-CNF theorem transfers this conclusion to $A(f)$, and evaluation preservation transfers it to $f$. The positive case follows directly from witness evaluation.
 \end{proof}
 
-The Lean module \texttt{CDCL.lean} composes these results with the pinned standard library \citep{lean2025sat}. It does not invoke a native-decision axiom. The transitive audit passes for 1,197 declarations, including 651 theorem declarations. The executable still relies on compilation, runtime execution, serialization, and the service adapter outside the kernel proof. An external verdict or clause number alone is never enough for a new accepted answer.
+The Lean module \texttt{CDCL.lean} composes these results with the pinned standard library \citep{lean2025sat}. It does not invoke a native-decision axiom. At that milestone, the transitive audit passed for 1,197 declarations, including 651 theorem declarations; the structural extension below increases these counts. The executable still relies on compilation, runtime execution, serialization, and the service adapter outside the kernel proof. An external verdict or clause number alone is never enough for a new accepted answer.
 
 The automatic policy first tries stored witnesses and certificates, circuit simplification, and two uniform-phase witnesses. It then allows 64 local search nodes before external solving. Exhaustion of this preliminary budget means that no proposal was found. Every returned proposal is checked independently; exhaustion never becomes an UNSAT verdict. External timeouts and failed checks return errors without storing a decision. Consequently, the bounded service promises sound completed answers, not unconditional termination with an answer.
 
@@ -1162,7 +1200,7 @@ The repository retains all earlier datasets unchanged and saves the new inputs, 
 \subsection{Live clause reuse, learned proposals, and service budgets}
 \label{sec:expanded-service}
 
-We now also provide a long-lived CaDiCaL session. Shared circuit definitions remain in that session; each query adds definitions as needed and supplies a root assumption. CaDiCaL can retain internal learned clauses across calls. Its incremental API and clause-management methods are established techniques \citep{biere2024cadical,fazekas2024incremental}. Our adapter remains outside the kernel proof. A proposed SAT assignment therefore passes the original-formula evaluator. A negative proposal triggers a fresh standalone LRAT run and check. This additional work is deliberate: live clause reuse alone does not supply checked incremental UNSAT certification. Internal clauses are lost on restart or a session-cap reset; archived results and certificates remain.
+We now also provide a long-lived CaDiCaL session. Shared circuit definitions remain in that session; each query adds definitions as needed and supplies a root assumption. CaDiCaL can retain internal learned clauses across calls. Its incremental API and clause-management methods are established techniques \citep{biere2024cadical,fazekas2024incremental}. Our adapter remains outside the kernel proof. A proposed SAT assignment therefore passes the original-formula evaluator. A negative proposal triggers a fresh standalone LRAT run and check. This additional work is deliberate: live clause reuse alone does not supply checked incremental UNSAT certification. In the public-study implementation below, internal clauses remain session-local. Section~\ref{sec:structural-service} adds durable clause replay and checked component reuse; its experiment is recorded separately.
 
 To distinguish generalization from retrieval, we add a small online linear predictor using the perceptron update principle \citep{rosenblatt1958}. Five shared integer weights score literal-polarity features, independently of variable identity. Feature counts and weights are clipped, and counters saturate; serialized parameters stay below 256 bytes. This excludes input features and the growing archive. We train only on newly acquired, checked SAT witnesses, charging label acquisition and updates within the stream. Model updates and answer insertion commit together. Saved parameters survive restart within the same checker namespace. Predictions are candidate assignments, never negative verdicts. The witness checker preserves answer soundness even when the model is wrong. No convergence, exact-learning, or general-SAT efficiency theorem is asserted for this clipped heuristic.
 
@@ -1210,6 +1248,52 @@ Regressions remain visible. On random UNSAT, incremental median latency is 19.31
 
 All 57 integration tests pass, including independently enumerated truth tables, changed assumptions, forged positive and negative proposals, strict-cache checks, verification deadlines, concurrent model updates, and a large-input regression. Replay preserves all 1,420 previous result rows and 258 certificates, adds 355 current-engine results, and audits all of them. Host scheduling and background activity were not controlled; the first few seconds also overlapped integration tests. Small timing differences therefore require caution. These checks and three local timing repetitions are evidence for the implementation's stated boundaries. They do not supply a full bit-machine simulation, guaranteed speedup under shift, or a competitive modern SAT benchmark.
 
+
+\subsection{Durable structural reuse and compression}
+\label{sec:structural-service}
+
+The component policy flattens top-level conjunctions and groups terms by shared variables. Each group receives local indices in first-occurrence order. Thus, renamed copies with the same term order share a stored result. We retain content-addressed objects for terms, shapes, variable maps, and expansion-prefix nodes. A prefix node points to its predecessor and one mapped shape. Previously stored prefixes remain available without duplicating their subgraphs. This is syntactic sharing; we neither solve general graph isomorphism nor identify all logically equivalent formulas.
+
+For a positive result, we join witnesses only for variable-disjoint components and check the resulting assignment on the original formula. New connecting constraints merge components and can require a new acquisition. For a negative result, we use a checked transfer rule.
+
+\begin{proposition}[Transfer of a component refutation]
+\label{prop:component-refutation}
+Suppose selected paths descend only through conjunctions of $F$, and the conjunction of the selected subformulas equals $G$ after a supplied variable renaming. If a sound checker accepts a refutation of $G$, then $F$ is unsatisfiable.
+\end{proposition}
+
+\begin{proof}
+Any satisfying assignment of $F$ satisfies every selected conjunct and therefore their conjunction. Composing that assignment with the renaming gives a satisfying assignment of $G$, contradicting its checked refutation. Injectivity of the renaming is unnecessary for this negative implication. It does not justify composing positive witnesses on overlapping variables.
+\end{proof}
+
+The native checker validates the paths, exact renamed formula, and base certificate. An immutable stored certificate can therefore prove a renamed component unsatisfiable, or remain applicable when new conjuncts connect it to other variables. A bounded index also considers four recent negative instances as subsets of current conjuncts. Deletion or negation supplies no such implication. The corresponding Lean results are \texttt{componentEmbedding\_unsat} and \texttt{componentLRAT\_sound}; JSON and database handling remain outside the kernel. Every newly composed result passes the native checker.
+
+The incremental engine now also saves stable circuit definitions and selected learned clauses as compressed immutable objects and session deltas. It exports at most 4,096 clauses per query, each at most 64 literals, and replays at most 20,000 clauses after restart, preferring shorter ones. Concurrent workers fork sessions, keeping variable identities separate. Active node limits start a new session without erasing the archive. This saves a subset of solver knowledge, not its entire trail, heuristic state, or activities. Restored clauses remain untrusted proposals: SAT needs a checked original-formula witness; general negative proposals still need fresh, independently checked LRAT. Component refutations provide a narrower negative route that avoids new search.
+
+We test four fixed streams at seven stages, five policies, and three repetitions: 60 runs and 420 correct answers, including 105 UNSAT answers. The streams add independent renamed XOR blocks, extend a connected XOR chain, add constraints to an UNSAT core, or reuse shared definitions with changing roots. Exact-input reuse, the proposal portfolio, and the predictor are disabled to expose the selected mechanism. Each run starts with an empty database and fresh process; restart policies reopen the service after each query. Setup, query work, and restart shutdown contribute to the reported totals. Full worker times and raw failures are also recorded. All runs complete without an error. These synthetic streams test mechanisms, not general SAT performance.
+
+\begin{table}[htbp]
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{lrrrrr}
+\toprule
+Stream & Checked & Live clauses & Replay & Components & Components/restart \\
+\midrule
+Independent copies & 169.73 & 137.13 & 377.58 & 138.91 & 347.26 \\
+Connected chain & 166.75 & 134.33 & 402.00 & 174.77 & 382.65 \\
+Negative core & 166.18 & 173.01 & 429.23 & 139.40 & 350.91 \\
+Shared definitions & 165.06 & 134.09 & 370.89 & 159.23 & 349.10 \\
+\bottomrule
+\end{tabular}
+\caption{Median total milliseconds for each seven-query structural stream. Replay restarts the incremental service after every query. Components/restart does the same for the component policy. All modes retain completed results. Totals include service setup; normal live-mode final shutdown and Python interpreter startup are outside this column and included in the separately retained worker time. Three repetitions on the same local host do not establish significant small timing differences.}
+\label{tab:structural-study}
+\end{table}
+
+On independent copies, expansion reaches 64 components and 128 global variables. Across all seven stages, one two-variable shape is acquired once, and 126 further component occurrences reuse it, including after restart. The structural store contains two term objects, one shape, one result, 64 variable maps, and 64 prefix nodes. Unique object payloads total 13,606 bytes before zlib and 10,040 bytes after it. Individual maps grow from 466 to 978 bytes under compression. The whole-query input archive still occupies 26,148 payload bytes, and the complete SQLite database grows to 311,296 bytes, compared with 270,336 bytes for checked solving. Sharing reduces duplicated component work and representation; it does not make the entire retained history smaller in this experiment.
+
+The negative stream acquires one core result and verifies its embedding at all six later stages, despite added connecting constraints. Restart replay also retains two exported clauses from the first negative query, but each negative proposal still triggers fresh LRAT. The connected-chain control exposes the implementation gap: it acquires seven distinct growing components and takes 174.77\,ms, against 166.75\,ms for checked solving. This chain has small separators, yet our zero-interface decomposition does not exploit them. Durable reuse therefore supplies neither a universal speedup nor the nonempty-interface algorithm of Proposition~\ref{prop:component-expansion}.
+
+All 69 service tests pass, including random truth-table comparisons, forged component records, invalid embeddings, poisoned replay clauses, concurrent sessions, and migrations. The current axiom audit checks 1,264 declarations, including 694 theorem declarations. The live database retains 1,775 earlier results and 387 proofs, and adds 355 revalidated results and 129 proofs in the new checker namespace. Earlier experiment files remain unchanged. The structural records preserve hashes, per-query acquisition and replay metrics, object sizes, and the remaining archival costs.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
@@ -1260,7 +1344,7 @@ Their thematic proximity helps us state the missing obligations. We must specify
 We now have explicit conditions for exactness and savings, restricted compact expansion, an operational reference search, and checked service experiments. Establishing the conditions for a practical learned system still requires further algorithms and measurements. The following questions describe these remaining obligations. They do not claim unexplored territory across the wider literature.
 
 \paragraph{Compactness and acquisition.}
-Proposition~\ref{prop:compact-coverage} gives one compact construction on a restricted family. Which richer families support similarly useful representations? To answer this, we must fix the SAT instance family, coverage, precision, acquisition interface, and budget. Tractable subclasses or distributional guarantees may support positive results without meeting Proposition~\ref{prop:advice} on all inputs. For unrestricted SAT, polynomial-size exact models remain unestablished here. So do lower bounds excluding them. In particular, our exponential ReLU construction tells us neither that this size is necessary nor that a smaller model can be learned efficiently.
+Propositions~\ref{prop:compact-coverage} and~\ref{prop:component-expansion} give restricted constructions. The component result allows growing total variable count, but the service does not yet discover separators or compile nonempty-interface relations. Which richer families support useful representations with charged acquisition? To answer this, we must fix the SAT instance family, coverage, precision, acquisition interface, and budget. Tractable subclasses or distributional guarantees may support positive results without meeting Proposition~\ref{prop:advice} on all inputs. For unrestricted SAT, polynomial-size exact models remain unestablished here. So do lower bounds excluding them. In particular, our exponential ReLU construction tells us neither that this size is necessary nor that a smaller model can be learned efficiently.
 
 \paragraph{Generalization, memory, and changing workloads.}
 The bounded predictor demonstrates checked transfer to new witnesses. When does learning save more work than caching under the same total memory budget? Equation~\eqref{eq:cache-distribution} gives a reference without eviction. Yet, memory limits, eviction, retraining, and distribution shifts change the costs. We cannot apply the fixed-policy threshold in Proposition~\ref{prop:savings} unchanged to adaptation. We must evaluate conditional savings at each history and include updates. Certification still preserves correctness after a workload change within the covered domain. It need not preserve fallback frequency or expected savings.
@@ -1269,7 +1353,7 @@ The bounded predictor demonstrates checked transfer to new witnesses. When does 
 Which certificates can the fast path produce and check within its budget? A short certificate may exist even when we cannot find it cheaply. As positive and negative verification differ, we should report their outcomes separately. A timeout on prediction can hand control to fallback when time remains; a service-wide deadline cannot guarantee that fallback completes. Proposition~\ref{prop:overhead} bounds additional work if we implement its solver and update-budget assumptions. Note that aborting the fallback as well changes the guarantee. The resulting service may return ``unknown'' and is incomplete.
 
 \paragraph{A reproducible comparison.}
-Sections~\ref{sec:cdcl-study} and \ref{sec:expanded-study} fix encodings, query order, solver versions, and local hardware, and compare solving, exact caching, and certified reuse. Larger studies should additionally impose comparable total memory budgets and use modern application suites. Test streams should include repeated queries, distinct held-out formulas, and changed workloads. Both satisfiable and unsatisfiable instances are needed. We should distinguish reuse of identical inputs from transfer to new ones. A frozen test stream and chronological records of online learning prevent us from using later answers earlier.
+Sections~\ref{sec:cdcl-study}, \ref{sec:expanded-study}, and~\ref{sec:structural-service} fix encodings, query order, solver versions, and local hardware, and compare solving, exact caching, and certified reuse. Larger studies should additionally impose comparable total memory budgets and use modern application suites. Test streams should include repeated queries, distinct held-out formulas, and changed workloads. Both satisfiable and unsatisfiable instances are needed. We should distinguish reuse of identical inputs from transfer to new ones. A frozen test stream and chronological records of online learning prevent us from using later answers earlier.
 
 For each method, we should report acquisition and label-generation costs, parameter and cache bytes, verification work, certified success, conditional fallback cost, and updates. Total cost must be reported against query count. Latency distributions show how long users wait; aggregate work also charges concurrent hardware. Timeouts and unsolved cases must remain in the comparison. If acquisition cost is unavailable, we can compare online performance but cannot establish end-to-end break-even. Section~\ref{sec:mechanism-study} implements a small synthetic comparison with actual acquisition and service costs. Section~\ref{sec:expanded-study} adds public instances, chronological learning, shift, and measured resources. Larger application suites, simultaneous process-tree memory, and competitive current solvers remain necessary for broader performance conclusions.
 
@@ -1292,6 +1376,12 @@ Ailon, N., Chazelle, B., Clarkson, K.~L., Liu, D., Mulzer, W., and Seshadhri, C.
 Self-improving algorithms.
 \emph{SIAM Journal on Computing}, 40(2), 350--375.
 \href{https://doi.org/10.1137/090766437}{doi:10.1137/090766437}.
+
+\bibitem[Bacchus et~al.(2009)Bacchus, Dalmao, and Pitassi]{bacchus2009backtracking}
+Bacchus, F., Dalmao, S., and Pitassi, T. (2009).
+Solving \#SAT and Bayesian inference with backtracking search.
+\emph{Journal of Artificial Intelligence Research}, 34, 391--442.
+\href{https://doi.org/10.1613/jair.2648}{doi:10.1613/jair.2648}.
 
 \bibitem[Baker et~al.(1975)Baker, Gill, and Solovay]{baker1975}
 Baker, T., Gill, J., and Solovay, R. (1975).
@@ -1596,6 +1686,12 @@ Siegelmann, H.~T., and Sontag, E.~D. (1995).
 On the computational power of neural nets.
 \emph{Journal of Computer and System Sciences}, 50(1), 132--150.
 \href{https://doi.org/10.1006/jcss.1995.1013}{doi:10.1006/jcss.1995.1013}.
+
+\bibitem[Sang et~al.(2004)Sang, Bacchus, Beame, Kautz, and Pitassi]{sang2004components}
+Sang, T., Bacchus, F., Beame, P., Kautz, H., and Pitassi, T. (2004).
+Combining component caching and clause learning for effective model counting.
+\emph{Seventh International Conference on Theory and Applications of Satisfiability Testing (SAT 2004)}.
+\url{https://www.satisfiability.org/SAT04/accepted/65.html}.
 
 \bibitem[Sipser(2020)]{sipser2020theory}
 Sipser, M. (2020).

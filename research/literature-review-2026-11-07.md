@@ -1274,3 +1274,53 @@ bibliography entries, with every citation and cross-reference resolved. The
 34-page PDF builds without warnings or overfull/underfull boxes. All pages
 were rendered for layout review; the new proof and timing table were inspected
 at full-page resolution. All four saved raw datasets still match their hashes.
+
+## Structural expansion, component caching, and restart persistence
+
+This follow-up concerns implementation gaps 1 and 4. The useful restriction is
+small local plus interface width, rather than a cap on the total number of
+variables. The manuscript now proves that feasible interface relations compose
+by intersection when private variables are disjoint. It explicitly charges
+acquisition of every new shape and separates relation-table storage from shape
+syntax, variable maps, witnesses, certificates and the full request archive.
+
+This is established algorithmic territory:
+
+- [Sang, Bacchus, Beame, Kautz and Pitassi (SAT 2004)](https://www.satisfiability.org/SAT04/accepted/65.html)
+  combine component caching and clause learning for model counting. Their
+  official conference record and paper identify both practical gains and subtle
+  interactions affecting correctness. Our Boolean SAT service does not implement
+  their counting algorithm or claim that this combination is new.
+- [Bacchus, Dalmao and Pitassi (JAIR 2009)](https://doi.org/10.1613/jair.2648),
+  *Solving #SAT and Bayesian Inference with Backtracking Search*, analyze
+  memoized backtracking and structural time-space tradeoffs. The
+  [author-submitted record](https://arxiv.org/abs/1401.3458) confirms the journal
+  year, volume 34 and pages 391–442; the 2014 arXiv deposit is not the publication
+  year. We checked its abstract and bibliographic record, not every proof.
+- [Darwiche and Marquis (JAIR 2002)](https://www.cs.cmu.edu/afs/cs.cmu.edu/project/jair/pub/volume17/darwiche02a.pdf)
+  define decomposability through disjoint variables at conjunctions and compare
+  succinctness with supported operations. The definitions and opening sections
+  were inspected. Our interface-table specialization is consistent with that
+  framework, without establishing a new compilation-language result.
+
+Together with the cutwidth/caching work discussed earlier, these sources make
+it inappropriate to claim novelty for efficient structural reuse itself.
+The contribution here is its explicit accounting, restricted Lean proof,
+checked transfer boundary and persistent implementation. This targeted primary-
+source follow-up is not a new exhaustive OpenAlex search or a priority proof.
+
+The implementation handles empty-interface decomposition. It normalizes variable
+names while preserving term order, checks composed witnesses, and verifies an
+UNSAT core's conjunct embedding under renaming and added constraints. It does
+not infer SAT of a conjunction from overlapping SAT components. It also saves
+selected internal clauses as untrusted proposal state; full incremental LRAT
+certification, separator discovery and nonempty-interface compilation remain
+open. An independent administrative audit bypasses both proposal stores.
+
+All 69 tests and the 1,264-declaration / 694-theorem axiom audit pass. The 420-answer
+structural study includes a connected-chain counterexample to practical gains
+from the present decomposition. One acquired shape serves 127 occurrences in
+the independent-copy stream, but the complete database is larger than the
+checked baseline because archival input storage and indexing remain. Hash
+sharing and byte compression are neither a universal compression theorem nor
+an unrestricted polynomial-time SAT result. The manuscript retains these losses.

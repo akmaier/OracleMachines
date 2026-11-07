@@ -139,7 +139,8 @@ class LayeredSolver:
             raise ValueError('Relation mask exceeds the supplied layer width')
         if any(type(v) is not int or not 0<=v<(1<<self.states) for v in (left,right)):
             raise ValueError('Endpoint mask exceeds the supplied layer width')
-        if len(replace)+len(append)>4096:raise BudgetExceeded('Chain delta exceeds 4096 edges')
+        if len(replace)+len(append)>(65536 if base is None else 4096):
+            raise BudgetExceeded('Layer input exceeds 65536 initial edges or 4096 delta edges')
         self.metrics=dict(node_reads=0,node_writes=0,compositions=0,native_definitions=0,witness_checks=0,
                           retention_visits=0,native_evictions=0)
         before=self.store.inserted_objects

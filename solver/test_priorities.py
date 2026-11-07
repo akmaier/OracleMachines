@@ -1,5 +1,6 @@
 """Regression tests for final outcomes, live retention and semantic provenance."""
 import random
+import itertools
 import tempfile
 import unittest
 from pathlib import Path
@@ -10,6 +11,50 @@ from solver.test_interfaces import xor,neg,chain,var
 
 
 class PriorityTests(unittest.TestCase):
+    def test_polarity_baseline_needs_no_training_and_is_checked(self):
+        from experiments.run_priorities import PolaritySolver,encoding_size
+        from experiments.run_expanded import dimacs,encode_dimacs
+        clauses=[[i if i%2 else -i] for i in range(1,25)]
+        bits=encode_dimacs(dimacs(clauses))
+        self.assertEqual(encoding_size(clauses),len(bits))
+        with tempfile.TemporaryDirectory() as d,PolaritySolver(Path(d)/'s.db') as s:
+            result=s.solve(bits)
+            self.assertTrue(result['answer'])
+            self.assertEqual(result['source'],'verified_witness')
+            self.assertEqual(s.db.execute('SELECT count(*) FROM models').fetchone()[0],0)
+
+    def test_checked_cnf_compilation_matches_exhaustive_source(self):
+        rng=random.Random(1781)
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            for width in (1,2):
+                layers=[list(range(i*width+1,(i+1)*width+1)) for i in range(4)]
+                for _ in range(25):
+                    clauses=[]
+                    for _ in range(12):
+                        edge=rng.randrange(3);scope=layers[edge]+layers[edge+1]
+                        clauses.append([rng.choice(scope)*rng.choice([-1,1]) for _ in range(rng.randrange(1,4))])
+                    expected=any(all(any(values[abs(lit)-1]==(lit>0) for lit in c) for c in clauses)
+                        for values in itertools.product([False,True],repeat=4*width))
+                    result=s.layered_cnf(width,clauses,layers,witness=True)
+                    self.assertEqual(result['answer'],expected)
+                    self.assertEqual(result['compilation']['passes'],2)
+                    if expected:
+                        values={v:bool(result['witness'][i]&(1<<j)) for i,b in enumerate(layers) for j,v in enumerate(b)}
+                        self.assertTrue(all(any(values[abs(lit)]==(lit>0) for lit in c) for c in clauses))
+            self.assertFalse(s.layered_cnf(1,[[]],[[1],[]])['answer'])
+            self.assertTrue(s.layered_cnf(1,[],[[],[]])['answer'])
+            for clauses,layers in [([[1,3]],[[1],[2],[3]]),([[2]],[[1],[]]),([[1]],[[1],[1]]),([[0]],[[1],[]])]:
+                with self.assertRaises(ValueError):s.layered_cnf(1,clauses,layers)
+
+    def test_source_binding_and_logical_length_reject_forgery(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            result=s.layered(1,append=[15,0])
+            with self.assertRaisesRegex(ValueError,'identity suffix'):
+                s._request(dict(mode='layered_query',root=result['root'],size=1,left=3,right=3,witness=False))
+            with self.assertRaisesRegex(ValueError,'differs'):
+                s._request(dict(mode='layered_source_query',root=result['root'],width=1,
+                    clauses=[],layers=[[1],[2],[3]],witness=False))
+
     def test_semantic_rebinding_keeps_current_provenance_across_restart(self):
         with tempfile.TemporaryDirectory() as d:
             path=Path(d)/'s.db'

@@ -250,6 +250,7 @@ def factorEquate (db : FactorStore) (memo : FactorRowStore) (classes : FactorCla
     for row in words b.factor.scope.length do
       let prior := observe a.factor.scope (scopeVal b.factor.scope row)
       if let some value := memo[(old,prior)]? then
+        if cache.size ≥ 1048576 && !cache.contains (new,row) then throw "Native row cache capacity exceeded"
         cache := cache.insert (new,row) value
   else
     for row in words a.factor.scope.length do

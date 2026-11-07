@@ -1,6 +1,6 @@
 import OracleMachines.FragmentProtocol
 import OracleMachines.ChainProtocol
-import OracleMachines.LayeredProtocol
+import OracleMachines.LayeredSource
 import OracleMachines.Cache
 import OracleMachines.Parsing
 import OracleMachines.BoundedSearch
@@ -257,7 +257,11 @@ def main : IO Unit := do
       | .error e => pure (.error e)
       | .ok request =>
         let mode := (request.getObjValAs? String "mode").toOption.getD ""
-        if mode == "layered_define" then
+        if mode == "layered_compile" then
+          pure (OracleMachines.Layered.compileRequest request)
+        else if mode == "layered_source_query" then
+          pure (OracleMachines.Layered.sourceQuery layers request)
+        else if mode == "layered_define" then
           match OracleMachines.Layered.defineNodes layers request with
           | .error e => pure (.error e)
           | .ok (state, response) => layers := state; pure (.ok response)

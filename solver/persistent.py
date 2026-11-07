@@ -724,7 +724,15 @@ class PersistentSolver:
             self.db.set_progress_handler(None,0)
             self._ledger=self._deadline=None
 
-    def layered(self, width, base=None, *, replace=None, append=None, left=None, right=None, witness=False):
+    def layered_cnf(self,width,clauses,layers,*,witness=False):
+        """Compile CNF whose supplied disjoint variable blocks are adjacent.
+
+        IDs are positive DIMACS variable numbers, literals are signed integers.
+        Compilation and a second independent source/root binding pass are charged.
+        """
+        return self.layered(width,witness=witness,_source=dict(clauses=clauses,layers=layers))
+
+    def layered(self, width, base=None, *, replace=None, append=None, left=None, right=None, witness=False,_source=None):
         """Supplied bounded-width layer relations; no automatic SAT decomposition."""
         if type(width) is not int or not 1<=width<=4:raise ValueError('Layer width must be 1 to 4')
         if self._ledger is not None:raise RuntimeError('Concurrent query')
@@ -732,12 +740,32 @@ class PersistentSolver:
         try:
             self._database_budget()
             self.db.set_progress_handler(lambda:int(time.monotonic()>=self._deadline.end),1000)
+            source_request=None
+            if _source is not None:
+                if base is not None or replace or append or left is not None or right is not None:
+                    raise ValueError('Source compilation requires a fresh full source request')
+                source_request=dict(width=width,**_source)
+                with self._phase('source_encoding'):
+                    source_bytes=len(json.dumps(source_request).encode())
+                if source_bytes>self.max_input_bytes:raise BudgetExceeded('CNF source exceeds input cap')
+                compiled=self._request(dict(mode='layered_compile',**source_request))
+                append=compiled['masks']
             if self.layers is None or self.layers.width!=width:
                 if self.layers is not None:self._request(dict(mode='layered_reset'))
                 self.layers=LayeredSolver(self,width)
             any_state=(1<<(1<<width))-1
             result=self.layers.run(base,{} if replace is None else replace,[] if append is None else append,
                 any_state if left is None else left,any_state if right is None else right,witness)
+            if source_request is not None:
+                checked=self._request(dict(mode='layered_source_query',root=result['root'],witness=witness,**source_request))
+                if checked['answer'] is not result['answer'] or checked['witness']!=result['witness']:
+                    raise ValueError('Source binding disagrees with layered result')
+                with self._phase('source_storage'),self.db:
+                    binding=self.layers.store.put('layered_source',dict(**source_request,state=result['state'],
+                        root=result['root'],answer=result['answer']))[0]
+                result.update(source='compiled_adjacent_cnf',source_binding=binding,
+                    compilation=dict(input_bytes=source_bytes,relation_cells=compiled['relation_cells'],
+                                     passes=2,source_edges=len(append)))
             with self._phase('storage_accounting'):result['storage']=self.archive_usage()
             self.last_metrics=self._ledger.finish();result.update(self.last_metrics)
             return result
@@ -815,6 +843,7 @@ def main() -> int:
     parser.add_argument("--adaptive", action="store_true", help="Select checked or interface solving from measured complete-query times")
     parser.add_argument("--max-archive-bytes", type=int, help="Bound logical SQLite pages; stop acquisition at capacity and preserve all history")
     parser.add_argument('--active-cache-bytes',type=int,default=2*1024**2,help='Per-cache retained JSON payload cap; not a process memory cap')
+    parser.add_argument('--native-layer-cells',type=int,default=1024**2,help='Retained native relation cells; not an RSS limit')
     parser.add_argument('--symbolic-node-limit',type=int,default=50000)
     parser.add_argument('--wal-checkpoint-bytes',type=int,default=4*1024**2)
     parser.add_argument("--symbolic", action="store_true", help="Build bounded BDD proposals directly from syntax and projections; implies interfaces")
@@ -832,7 +861,8 @@ def main() -> int:
                               timeout=args.timeout, query_timeout=args.query_timeout,
                               verify_cache=args.verify_cache, max_proof_bytes=args.max_proof_bytes,
                               incremental=args.incremental, incremental_proofs=args.incremental_proofs, learned=args.learned, components=args.components, interfaces=args.interfaces, max_interface=args.max_interface, symbolic=args.symbolic, adaptive=args.adaptive, max_archive_bytes=args.max_archive_bytes, active_cache_bytes=args.active_cache_bytes,
-                              symbolic_node_limit=args.symbolic_node_limit,wal_checkpoint_bytes=args.wal_checkpoint_bytes) as solver:
+                              symbolic_node_limit=args.symbolic_node_limit,wal_checkpoint_bytes=args.wal_checkpoint_bytes,
+                              native_layer_cells=args.native_layer_cells) as solver:
             if args.command == "serve":
                 for line in sys.stdin:
                     try:
@@ -844,6 +874,9 @@ def main() -> int:
                         elif request.get("op") == "layered":
                             result = solver.layered(request['width'],request.get('base'),replace=request.get('replace',{}),
                                 append=request.get('append',[]),left=request.get('left'),right=request.get('right'),
+                                witness=request.get('witness',False))
+                        elif request.get("op") == "layered_cnf":
+                            result=solver.layered_cnf(request['width'],request['clauses'],request['layers'],
                                 witness=request.get('witness',False))
                         elif request.get("op") == "chain":
                             result = solver.chain(request.get("base"), replace=request.get("replace", {}),

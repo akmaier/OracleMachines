@@ -4,8 +4,8 @@
 All variants use the same wrapper setup and parsed-input service. Baseline calls
 the exhaustive core on every query; witness reuse has no exact-result cache;
 exact_cache has no cross-formula witness transfer; persistent_hybrid has both.
-Elapsed times include RPC, parsing, cache access, writes, and process shutdown. Core operation
-counts exclude those frontend costs and are reported separately.
+Elapsed times include RPC, parsing, cache access, writes, and process shutdown. Core and parsing operation
+counts are reported separately; RPC and persistence remain elapsed-time costs.
 """
 
 import argparse
@@ -69,7 +69,7 @@ def run_one(mode, bits, expected, path, engine):
     with PersistentSolver(path, engine) as solver:
         start = time.perf_counter_ns()
         state = None
-        core_work = hits = transferred = fallbacks = 0
+        core_work = parse_work = hits = transferred = fallbacks = 0
         answers, latency_ns = [], []
         for query in bits:
             query_start = time.perf_counter_ns()
@@ -87,6 +87,9 @@ def run_one(mode, bits, expected, path, engine):
             latency_ns.append(time.perf_counter_ns() - query_start)
             answers.append(r["answer"])
             core_work += r["core_work"]
+            parse_work += r["parse_work"]
+            if r["counted_work"] != r["core_work"] + r["parse_work"]:
+                raise AssertionError("Inconsistent parser/core accounting")
             hits += source == "cache"
             transferred += source == "verified_witness"
             fallbacks += source == "fallback"
@@ -96,7 +99,8 @@ def run_one(mode, bits, expected, path, engine):
         stats = solver.stats()
         payload = solver.db.execute("SELECT coalesce(sum(length(bits) + coalesce(length(witness),0)),0) "
                                     "FROM results WHERE engine=?", (solver.engine_id,)).fetchone()[0]
-        row = dict(mode=mode, core_work=core_work, cache_hits=hits,
+        row = dict(mode=mode, core_work=core_work, parse_work=parse_work,
+                   counted_work=core_work + parse_work, cache_hits=hits,
                    witness_hits=transferred, fallbacks=fallbacks,
                    service_ns=service_ns, setup_ns=solver.setup_ns, latency_ns=latency_ns,
                    stored_entries=stats["entries"], input_witness_bytes=payload,
@@ -110,13 +114,16 @@ def run_one(mode, bits, expected, path, engine):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, default=ROOT / "experiments/results")
+    parser.add_argument("--output", type=Path, default=ROOT / "experiments/results/with-parsing")
     parser.add_argument("--engine", type=Path, default=DEFAULT_ENGINE)
     parser.add_argument("--queries", type=int, default=32)
     parser.add_argument("--repeats", type=int, default=3)
     args = parser.parse_args()
     if args.queries < 2 or args.repeats < 1:
         parser.error("Use at least two queries and one repeat")
+    if any((args.output / name).exists() for name in
+           ("inputs.json", "workloads.jsonl", "summary.json", "metadata.json")):
+        parser.error("Results already exist; choose a new --output directory to retain earlier runs")
     args.output.mkdir(parents=True, exist_ok=True)
     rows, streams = [], []
     with tempfile.TemporaryDirectory(prefix="oracle-workloads-") as scratch:
@@ -142,13 +149,16 @@ def main():
     for stream in streams:
         selected = [r for r in rows if r["width"] == stream["width"] and r["workload"] == stream["workload"]]
         baseline = next(r["core_work"] for r in selected if r["mode"] == "baseline")
+        total_baseline = next(r["counted_work"] for r in selected if r["mode"] == "baseline")
         for mode in MODES:
             group = [r for r in selected if r["mode"] == mode]
-            if len({r["core_work"] for r in group}) != 1:
+            if len({(r["core_work"], r["parse_work"]) for r in group}) != 1:
                 raise AssertionError("Operation counts changed across identical runs")
             row = dict(width=stream["width"], workload=stream["workload"], mode=mode,
                        core_work=group[0]["core_work"],
                        core_ratio=group[0]["core_work"] / baseline,
+                       parse_work=group[0]["parse_work"], counted_work=group[0]["counted_work"],
+                       counted_ratio=group[0]["counted_work"] / total_baseline,
                        service_ms_median=statistics.median(r["service_ns"] for r in group) / 1e6,
                        total_ms_median=statistics.median(r["total_ns"] for r in group) / 1e6,
                        setup_ms_median=statistics.median(r["setup_ns"] for r in group) / 1e6,
@@ -158,12 +168,12 @@ def main():
                        cache_hits=group[0]["cache_hits"], witness_hits=group[0]["witness_hits"])
             summaries.append(row)
     (args.output / "summary.json").write_text(json.dumps(summaries, indent=2) + "\n")
-    metadata = dict(platform=platform.platform(), machine=platform.machine(), python=sys.version,
+    metadata = dict(cost_model="parser-and-core-v2", platform=platform.platform(), machine=platform.machine(), python=sys.version,
                     engine_sha256=rows[0]["engine"], queries=args.queries, repeats=args.repeats,
                     runs=len(rows), checked_answers=len(rows) * args.queries,
                     raw_sha256=hashlib.sha256(raw.encode()).hexdigest(),
                     limitations="Synthetic exact-core mechanism study; not a neural or competitive SAT benchmark. "
-                                 "Core counts exclude parsing, RPC, and persistence; elapsed times include them and shutdown. "
+                                 "Counted work includes parser and core operations; RPC and persistence appear only in elapsed times, which include shutdown. "
                                  "All modes pay the same wrapper setup; setup is also reported separately. Observer statistics and the experiment runner are excluded. Database bytes are measured after close; process peak memory is not measured.")
     (args.output / "metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")
     print(json.dumps(metadata, indent=2))

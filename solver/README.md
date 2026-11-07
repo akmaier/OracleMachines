@@ -81,10 +81,8 @@ The active witness is tried first, followed by recent acquisitions. Proof
 proposals are limited to 65,536 serialized bytes; larger proofs remain archived.
 A bounded proposal count does not make certificate checking constant cost.
 Exact hits avoid parsing and solving, and do not rewrite an unchanged active
-witness. CaDiCaL starts a new process on each unresolved query, so its internal
-learned clauses are not retained between queries. Persistent results, witnesses,
-and certificates are retained. A proof-logging incremental CaDiCaL session would
-require an additional checked integration.
+witness. The default CaDiCaL path starts a new process per unresolved query.
+The optional incremental path below retains internal clauses across queries.
 
 ## Persistence and trust
 
@@ -114,8 +112,9 @@ writes. Native compilation/runtime, Python, SQLite, JSON, process communication,
 and disk integrity are outside the kernel proof. Copy an active database using
 SQLite backup tools, or close all connections first to include its WAL contents.
 
-Schema version 4 adds a distinct-proposal index and a measurement table. It
-preserves the version-3 checksummed proof archive and all earlier result rows.
+Schema version 5 adds checksummed predictor states, retaining the version-4
+distinct-proposal index and measurement table, the version-3 proof archive,
+and all earlier result rows.
 The version-1 migration adds parser costs; historical unmeasured parser costs
 remain SQL `NULL`, never zero. Missing historical certificates are not invented.
 
@@ -177,7 +176,7 @@ includes newly acquired results found by local preprocessing.
 python3 -m unittest discover -s solver -p 'test_*.py' -v
 ```
 
-All 34 integration tests pass. The original tests cover retention, restart,
+All 56 integration tests pass with both native binaries built. The original tests cover retention, restart,
 engine namespaces, concurrent writers, corruption, schema migration, witness and
 tree transfer, sparse indices, and 400 formulas compared with independent truth
 tables and the eager reference. Accelerated tests add 120 seeded CNFs checked
@@ -185,6 +184,85 @@ against truth tables, valid and forged external models/proofs, wrong-formula
 and malformed LRAT, timeouts, unavailable-solver fallback, search-budget
 exhaustion, gate sharing, indexed retrieval, and the warm JSON-lines interface.
 Tests use temporary databases; they never replace the persistent store.
+
+## Live clause reuse and learned proposals
+
+Build the optional CaDiCaL C++ bridge from the pinned official source:
+
+```sh
+git clone --branch rel-2.1.2 https://github.com/arminbiere/cadical.git /tmp/oracle-cadical
+cd /tmp/oracle-cadical
+./configure
+make -j4
+cd /path/to/OracleMachines
+./solver/build_incremental.sh /tmp/oracle-cadical
+python3 solver/persistent.py --incremental --learned serve
+```
+
+The build helper checks commit `3ff42f04384489916f017acd6d5e7cbfa7257be7`
+and rejects modified tracked source. This bridge keeps shared Tseitin definitions
+and CaDiCaL's learned clauses in a live process. Each query uses a root assumption;
+the next query replaces that assumption. SAT models pass the original-formula
+Lean checker. Negative proposals require a fresh standalone LRAT proof and check.
+Consequently, this is not an incremental UNSAT certificate integration. Metrics
+record retained clauses before/after solving and newly added definitions.
+Internal state is ephemeral: restart or the 200,000-node budget resets it.
+The durable result/proof archive is never reset by that operation.
+
+`--learned` enables five shared bounded perceptron weights over syntactic literal
+polarity features. Training uses only newly acquired, checked SAT witnesses.
+Updates and result insertion share one transaction, including concurrent writers.
+The predictor has bounded serialized parameters (under 256 bytes), survives
+restart in the current engine namespace, and can propose new witnesses rather
+than only retrieving old ones. This size excludes the growing result archive
+and input features. Wrong proposals cause fallback; there is no UNSAT prediction,
+general-SAT learning guarantee, or universal speedup claim. `learn:false` disables
+the witness/proof portfolio and model updates, but an explicitly enabled
+incremental engine still retains its live clauses. `learned_witness` is an
+additional result source.
+
+## Deadlines, strict cache checks, and measured resources
+
+`--query-timeout` (default 30 seconds) covers lookup, native writes/reads,
+preparation, solving, checking, training, and persistence. The separate
+`--timeout` can impose a shorter external-solver limit. An expired native worker
+is killed and reaped; later requests start a fresh one. SQLite checks use progress
+callbacks and a remaining-time busy timeout. Python loops check cooperatively.
+This is not a hard real-time scheduling guarantee, and initialization is separate.
+Every accepted result commits atomically; interruption does not create an UNSAT
+entry. Budget exhaustion returns an error, so a budgeted service is incomplete.
+
+Default caps are 8 MiB of binary input, 64 MiB per native message/external output,
+and 16 MiB per LRAT proof (`--max-proof-bytes`). External output goes to temporary
+files and file sizes are monitored every 20 ms. These are limits on accepted/read
+data; disk growth may overshoot between polls. They are not physical RAM limits.
+The API exposes all three byte caps. Unbounded input handling in the outer JSON
+transport remains a deployment concern; use a bounded request proxy for hostile
+network traffic.
+
+`--verify-cache` rechecks saved SAT witnesses or UNSAT certificates on every exact
+hit. Historical negatives without certificates are solved again. Checksums alone
+are not semantic checks or authentication. Strict hits charge their parsing and
+checking and no longer report a zero formal core count. Runtime and I/O remain
+outside Lean's kernel proof.
+
+`phase_ns` partitions measured query wall time into disjoint phases, including
+serialization, native request modes, prediction, training, external solving,
+lookup/retrieval, persistence, and residual control. The sum equals `wall_ns`.
+`service_cpu_ns` measures Python process CPU; `reaped_children_cpu_ns` measures
+the CPU of children reaped during the query. Live native workers are absent from
+that child count until reaped. RSS fields are process-lifetime high-water marks
+for the service and reaped children; they are neither a simultaneous process-tree
+peak nor per-query allocation. The live bridge separately reports its own RSS.
+These measurements do not turn the modern pipeline into a formally counted one.
+
+Native `mode:"restricted"` with optional `stage` demonstrates compact coverage
+of valid inputs whose width is at most `floor(log2(length+1))`. An uncovered input
+returns `answer:null`, including out-of-family inputs. `coverage_cells` and the
+reference decision bound describe that restricted construction. Queries still
+solve the formula; the bound excludes coverage-guard overhead and compiled costs.
+The Python API's `reuse_exact=False` is an experimental baseline that recomputes
+queries while retaining every result in the archive.
 
 [Reproducible experiments](../experiments/README.md) include initialization,
 verification, persistence, and shutdown costs and retain every historical dataset.

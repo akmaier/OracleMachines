@@ -62,6 +62,25 @@ module `OracleMachines.lean` imports the complete development and its audit.
 
 ## Conventions and boundary of the formalization
 
+The follow-up adds two independently scoped modules. `CompactExpansion.lean`
+stores a unary coverage cap of `n` cells, constructs it in `n` allocation steps,
+preserves answers at each extension, and eventually covers every valid
+logarithmic-width input. It uses the established `24(L+1)^2` reference decision
+bound; building coverage to `L` plus that decision costs at most `25(L+1)^2`
+in those ledgers. Coverage tests, promise tests, and compiled execution are not
+charged by that bound. It is a compact algorithm plus a cap, not a precomputed
+answer table or a solution to unrestricted SAT.
+
+`SearchMachine.lean` composes the evaluator into explicit assignment-selection
+and completion transitions. `search_machine_complete` bounds a complete search
+trace by `1 + 2^v(W+2)` steps. `search_machine_space` bounds every reachable state's
+payload by `(v+1)2^v + v + 2L + 2`; `search_machine_restricted_space` bounds it by
+`5(L+1)^2` when `2^v <= L+1`. Candidate assignments and parsed code are supplied
+to this machine. The proof does not yet compose candidate generation and parsing
+into the same transition system or measure physical heap bytes. It describes
+the eager reference, not the production lazy/CDCL path. The complete audit now
+passes for 1,195 declarations, including 650 theorem declarations.
+
 Stages are numbered 1 through `n`; the base stage is charged separately. Queries
 inside each stage use zero-based indices. A stage may have no queries, but its
 expansion cost is still included. Natural-number costs express step budgets;

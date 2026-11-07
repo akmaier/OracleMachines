@@ -93,25 +93,25 @@ class FastTests(unittest.TestCase):
                 s._verify_certificate(HARD_UNSAT, {"format": "lrat", "text": "garbage"})
 
     def test_external_solver_cannot_inject_negative_answer(self):
-        def fake(args, **_):
+        def fake(args, *_pos, **_):
             Path(args[-1]).write_text("99 0 0\n")
             return subprocess.CompletedProcess(args, 20, "s UNSATISFIABLE\n", "")
         with PersistentSolver(self.path, backend="cadical") as s:
-            with patch("solver.persistent.subprocess.run", side_effect=fake):
+            with patch("solver.persistent.bounded_run", side_effect=fake):
                 with self.assertRaisesRegex(ValueError, "UNSAT proof rejected"):
                     s.solve(MIXED)
             self.assertEqual(s.stats()["entries"], 0)
 
     def test_external_solver_cannot_inject_positive_answer(self):
         with PersistentSolver(self.path, backend="cadical") as s:
-            with patch("solver.persistent.subprocess.run", return_value=subprocess.CompletedProcess([], 10, "s SATISFIABLE\nv 0\n", "")):
+            with patch("solver.persistent.bounded_run", return_value=subprocess.CompletedProcess([], 10, "s SATISFIABLE\nv 0\n", "")):
                 with self.assertRaisesRegex(ValueError, "SAT witness rejected"):
                     s.solve(HARD_UNSAT)
             self.assertEqual(s.stats()["entries"], 0)
 
     def test_timeout_has_no_negative_cache_entry(self):
         with PersistentSolver(self.path, backend="cadical") as s:
-            with patch("solver.persistent.subprocess.run", side_effect=subprocess.TimeoutExpired("cadical", 0.01)):
+            with patch("solver.persistent.bounded_run", side_effect=subprocess.TimeoutExpired("cadical", 0.01)):
                 with self.assertRaisesRegex(RuntimeError, "timed out"):
                     s.solve(MIXED)
             self.assertEqual(s.stats()["entries"], 0)
@@ -129,7 +129,7 @@ class FastTests(unittest.TestCase):
             limited = s._request({"bits": MIXED, "mode": "prepare", "search_budget": 1})
             self.assertTrue(limited["pending"])
             self.assertNotIn("answer", limited)
-            with patch("solver.persistent.subprocess.run", side_effect=AssertionError("Should fit the local budget")):
+            with patch("solver.persistent.bounded_run", side_effect=AssertionError("Should fit the local budget")):
                 r = s.solve(MIXED)
             self.assertTrue(r["answer"])
             self.assertEqual(r["backend"], "preprocess")

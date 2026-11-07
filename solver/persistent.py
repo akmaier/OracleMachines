@@ -9,9 +9,11 @@ attacker. `audit` re-solves stored instances. No result is evicted automatically
 from __future__ import annotations
 
 import argparse
+from contextlib import nullcontext
 import functools
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import shutil
@@ -22,6 +24,10 @@ import tempfile
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from solver.resources import BudgetExceeded, Deadline, Ledger, exchange, stop_process, bounded_run
+from solver.incremental import DEFAULT_INCREMENTAL, Incremental
+from solver.learning import Predictor, features
 DEFAULT_ENGINE = ROOT / "formal/.lake/build/bin/oracleSolver"
 DEFAULT_CACHE = ROOT / "solver/.cache/results.sqlite3"
 PORTFOLIO_SIZE = 4
@@ -64,16 +70,31 @@ def check_bits(bits: str) -> None:
 
 class PersistentSolver:
     def __init__(self, cache: Path = DEFAULT_CACHE, engine: Path = DEFAULT_ENGINE, *,
-                 backend: str = "auto", cadical: Path | None = None, timeout: float = 30):
+                 backend: str = "auto", cadical: Path | None = None, timeout: float = 30,
+                 query_timeout: float = 30, verify_cache: bool = False,
+                 incremental: bool = False, learned: bool = False, reuse_exact: bool = True,
+                 max_input_bytes: int = 8 * 1024**2, max_message_bytes: int = 64 * 1024**2,
+                 max_proof_bytes: int = 16 * 1024**2):
         start = time.perf_counter_ns()
         self.engine = Path(engine).resolve()
         if not self.engine.is_file():
             raise FileNotFoundError("Build the engine first: cd formal && lake build oracleSolver")
         if backend not in ("auto", "lean", "cadical"):
             raise ValueError("Unknown solver backend")
-        if timeout <= 0:
-            raise ValueError("The external solver timeout must be positive")
+        if not all(math.isfinite(t) and t > 0 for t in (timeout, query_timeout)):
+            raise ValueError("Solver and query timeouts must be finite and positive")
+        if min(max_input_bytes, max_message_bytes, max_proof_bytes) <= 0:
+            raise ValueError("Resource byte limits must be positive")
         self.backend, self.timeout = backend, timeout
+        self.query_timeout, self.verify_cache = query_timeout, verify_cache
+        self.max_input_bytes, self.max_message_bytes, self.max_proof_bytes = max_input_bytes, max_message_bytes, max_proof_bytes
+        self._deadline = self._ledger = None
+        self.last_metrics = {}
+        self.use_learning = learned
+        self.reuse_exact = reuse_exact
+        if incremental and not DEFAULT_INCREMENTAL.is_file():
+            raise FileNotFoundError("Build the incremental bridge with solver/build_incremental.sh first")
+        self.incremental = Incremental(max_bytes=max_message_bytes) if incremental else None
         self.cadical = Path(cadical).resolve() if cadical is not None else find_cadical()
         if backend == "cadical" and (self.cadical is None or not self.cadical.is_file()):
             raise FileNotFoundError("CaDiCaL is unavailable; run solver/build.sh or set ORACLE_CADICAL")
@@ -90,7 +111,7 @@ class PersistentSolver:
                 # Serialize migrations as well as ordinary writes.
                 self.db.execute("BEGIN IMMEDIATE")
                 version = self.db.execute("PRAGMA user_version").fetchone()[0]
-                if version not in (0, 1, 2, 3, 4):
+                if version not in (0, 1, 2, 3, 4, 5):
                     raise ValueError(f"Unsupported cache schema {version}; records left unchanged")
                 self.db.execute("""CREATE TABLE IF NOT EXISTS results (
                     engine TEXT NOT NULL, bits TEXT NOT NULL, answer INTEGER NOT NULL,
@@ -117,6 +138,8 @@ class PersistentSolver:
                 self.db.execute("""CREATE TABLE IF NOT EXISTS measurements (
                     engine TEXT NOT NULL, bits TEXT NOT NULL, details TEXT NOT NULL,
                     PRIMARY KEY(engine,bits))""")
+                self.db.execute("""CREATE TABLE IF NOT EXISTS models (
+                    engine TEXT PRIMARY KEY, state TEXT NOT NULL, checksum TEXT NOT NULL)""")
                 if version < 4:
                     # An index of distinct proposals; the archive remains intact.
                     for row in self.db.execute("SELECT engine,bits,witness,created_ns FROM results WHERE answer=1").fetchall():
@@ -124,7 +147,7 @@ class PersistentSolver:
                     for row in self.db.execute("""SELECT p.*,r.created_ns FROM proofs p JOIN results r
                             ON p.engine=r.engine AND p.bits=r.bits WHERE r.answer=0""").fetchall():
                         self._index_candidate(row["engine"], "proof", row["bits"], row["certificate"], row["created_ns"])
-                self.db.execute("PRAGMA user_version=4")
+                self.db.execute("PRAGMA user_version=5")
         except Exception:
             self.db.close()
             raise
@@ -138,12 +161,22 @@ class PersistentSolver:
         self.close()
 
     def close(self):
+        if self.incremental:
+            self.incremental.close()
         if self.process is not None:
-            self.process.stdin.close()
-            self.process.wait(timeout=30)
-            self.process.stdout.close()
+            stop_process(self.process)
             self.process = None
         self.db.close()
+
+    def _phase(self, name):
+        return self._ledger.phase(name) if self._ledger else nullcontext()
+
+    def _check_deadline(self):
+        if self._deadline:
+            self._deadline.check()
+
+    def _remaining(self):
+        return self._deadline.remaining() if self._deadline else self.query_timeout
 
     def _validate(self, row: sqlite3.Row) -> None:
         check_bits(row["bits"])
@@ -222,12 +255,18 @@ class PersistentSolver:
                 [str(self.engine)], stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                 text=True, bufsize=1,
             )
-        self.process.stdin.write(json.dumps(request) + "\n")
-        self.process.stdin.flush()
-        line = self.process.stdout.readline()
-        if not line:
-            raise RuntimeError("Lean solver exited without a result; no answer was cached")
-        response = json.loads(line)
+        try:
+            with self._phase("serialization"):
+                payload = (json.dumps(request) + "\n").encode()
+            with self._phase("native_" + request.get("mode", "hybrid")):
+                line = exchange(self.process, payload, self._deadline or Deadline(self.query_timeout),
+                                self.max_message_bytes)
+            with self._phase("serialization"):
+                response = json.loads(line)
+        except (BudgetExceeded, RuntimeError, OSError, ValueError):
+            stop_process(self.process)
+            self.process = None
+            raise
         if "error" in response:
             raise ValueError(response["error"])
         return response
@@ -265,12 +304,28 @@ class PersistentSolver:
         r.update(backend="preprocess", core_work=None, counted_work=None, counted_complete=False)
         if not r.get("pending"):
             return r
+        incremental_metrics = None
+        if self.incremental is not None:
+            with self._phase("incremental_solver"):
+                proposal = self.incremental.propose(bits, self._deadline or Deadline(self.query_timeout))
+            incremental_metrics = {k: v for k, v in proposal.items() if k not in ("witness", "values")}
+            if proposal["verdict"] == 10:
+                checked = self._request({"bits": bits, "mode": "verify_witness", "witness": proposal["witness"]})
+                if not checked["valid"]:
+                    self.incremental.close()
+                    raise ValueError("Incremental SAT witness rejected; no answer was cached")
+                return dict(answer=True, witness=proposal["witness"], certificate=None, fast=False,
+                            reuse_kind="none", backend="incremental", nodes=None, core_work=None,
+                            parse_work=r["parse_work"] + checked["parse_work"], counted_work=None,
+                            counted_complete=False, incremental=incremental_metrics)
+            # Negative or inconclusive proposals do not decide UNSAT. A fresh,
+            # independently checked proof is required on the original formula.
         if self.cadical is None:
             # Availability changes performance, never the decision semantics.
             fallback = self._live(bits, mode="baseline")
             fallback["parse_work"] += r["parse_work"]
             fallback.update(backend="lean_fallback", counted_complete=False,
-                            core_work=None, counted_work=None, nodes=None)
+                            core_work=None, counted_work=None, nodes=None, incremental=incremental_metrics)
             return fallback
         with tempfile.TemporaryDirectory(prefix="oracle-cdcl-") as directory:
             cnf = Path(directory) / "query.cnf"
@@ -278,9 +333,11 @@ class PersistentSolver:
             cnf.write_text(r["dimacs"])
             started = time.perf_counter_ns()
             try:
-                run = subprocess.run([str(self.cadical), "--lrat", "--no-binary", "--quiet",
-                                      str(cnf), str(proof)], capture_output=True, text=True,
-                                     timeout=self.timeout)
+                with self._phase("external_solver"):
+                    run = bounded_run([str(self.cadical), "--lrat", "--no-binary", "--quiet",
+                                       str(cnf), str(proof)], Path(directory),
+                                      self._deadline or Deadline(self.query_timeout), self.timeout,
+                                      self.max_message_bytes, proof, self.max_proof_bytes)
             except subprocess.TimeoutExpired as exc:
                 raise RuntimeError("CaDiCaL timed out; no SAT/UNSAT answer was cached") from exc
             external_ns = time.perf_counter_ns() - started
@@ -303,6 +360,8 @@ class PersistentSolver:
                 r["parse_work"] += checked["parse_work"]
                 answer, certificate = True, None
             elif run.returncode == 20:
+                if proof.stat().st_size > self.max_proof_bytes:
+                    raise BudgetExceeded("LRAT proof exceeds the configured byte limit")
                 certificate = {"format": "lrat", "text": proof.read_text()}
                 checked = self._request({"bits": bits, "mode": "verify_certificate", "certificate": certificate})
                 r["parse_work"] += checked["parse_work"]
@@ -315,30 +374,94 @@ class PersistentSolver:
                         reuse_kind="none", backend="cadical", nodes=None, core_work=None,
                         parse_work=r["parse_work"], counted_work=None, counted_complete=False,
                         external_ns=external_ns, verification_ns=time.perf_counter_ns() - verification_start,
-                        cnf_clauses=r["clauses"], proof_bytes=proof.stat().st_size if proof.exists() else 0)
+                        cnf_clauses=r["clauses"], proof_bytes=proof.stat().st_size if proof.exists() else 0,
+                        incremental=incremental_metrics)
 
     def solve(self, bits: str, *, learn: bool = True) -> dict:
+        """Deadline covers lookup, preprocessing, subprocesses, and checking.
+
+        Python/SQLite checkpoints are cooperative; this is not a hard real-time
+        scheduling guarantee. A completed atomic commit retains a valid result
+        even if the caller subsequently disconnects.
+        """
+        if self._ledger is not None:
+            raise RuntimeError("Concurrent requests need separate PersistentSolver instances")
+        self._ledger, self._deadline = Ledger(), Deadline(self.query_timeout)
+        try:
+            self._database_budget()
+            self.db.set_progress_handler(lambda: int(time.monotonic() >= self._deadline.end), 1000)
+            result = self._solve_impl(bits, learn=learn)
+            self.last_metrics = self._ledger.finish()
+            result.update(self.last_metrics)
+            return result
+        except BaseException:
+            self.last_metrics = self._ledger.finish()
+            raise
+        finally:
+            self.db.set_progress_handler(None, 0)
+            self._deadline = self._ledger = None
+
+    def _database_budget(self):
+        self.db.execute("PRAGMA busy_timeout=" + str(max(1, int(self._remaining() * 1000))))
+
+    def _solve_impl(self, bits: str, *, learn: bool = True) -> dict:
         start = time.perf_counter_ns()
-        check_bits(bits)
-        row = self.db.execute("SELECT * FROM results WHERE engine=? AND bits=?",
-                              (self.engine_id, bits)).fetchone()
+        with self._phase("input"):
+            if isinstance(bits, str) and len(bits) > self.max_input_bytes:
+                raise BudgetExceeded("Input exceeds the configured byte limit")
+            check_bits(bits)
+        self._check_deadline()
+        with self._phase("lookup"):
+            row = self.db.execute("SELECT * FROM results WHERE engine=? AND bits=?",
+                                  (self.engine_id, bits)).fetchone() if self.reuse_exact else None
         if row is not None:
             self._validate(row)
+            check_parse_work = 0
+            if self.verify_cache:
+                if row["answer"]:
+                    checked = self._request({"bits": bits, "mode": "verify_witness", "witness": row["witness"]})
+                else:
+                    proof = self.db.execute("SELECT * FROM proofs WHERE engine=? AND bits=?",
+                                            (self.engine_id, bits)).fetchone()
+                    if proof is None:
+                        fresh = self._fast_live(bits)
+                        checked = dict(valid=not fresh["answer"], parse_work=fresh["parse_work"])
+                    else:
+                        checked = self._request({"bits": bits, "mode": "verify_certificate",
+                                                 "certificate": self._validate_proof(proof)})
+                if not checked["valid"]:
+                    raise ValueError("Cached certificate rejected; no answer was accepted")
+                check_parse_work = checked["parse_work"]
             measurement = self.db.execute("SELECT details FROM measurements WHERE engine=? AND bits=?",
                                           (self.engine_id, bits)).fetchone()
             measured = json.loads(measurement[0]) if measurement else {"counted_complete": True}
             if row["answer"] and learn:
+                self._database_budget()
                 with self.db:
                     self._activate(bits)
             return {"answer": bool(row["answer"]), "witness": row["witness"],
-                    "source": "cache", "core_work": 0, "parse_work": 0, "counted_work": 0,
-                    "nodes": 0,
-                    "counted_complete": True,
+                    "source": "cache", "core_work": None if self.verify_cache else 0,
+                    "parse_work": check_parse_work, "counted_work": None if self.verify_cache else 0,
+                    "nodes": None if self.verify_cache else 0,
+                    "counted_complete": not self.verify_cache, "cache_verified": self.verify_cache,
                     "original_acquisition_core_work": row["acquisition_core_work"] if measured["counted_complete"] else None,
                     "original_acquisition_parse_work": row["acquisition_parse_work"],
                     "original_measurements": measured,
                     "wall_ns": time.perf_counter_ns() - start}
-        candidates, proofs = (self._candidates(), self._proofs()) if learn else ([], [])
+        with self._phase("retrieval"):
+            candidates, proofs = (self._candidates(), self._proofs()) if learn else ([], [])
+        predictor = observed = predicted = None
+        if self.use_learning and learn and self.backend != "lean":
+            with self._phase("prediction"):
+                model = self.db.execute("SELECT * FROM models WHERE engine=?", (self.engine_id,)).fetchone()
+                if model and model["checksum"] != hashlib.sha256(model["state"].encode()).hexdigest():
+                    raise ValueError("Predictor integrity check failed")
+                predictor = Predictor(json.loads(model["state"]) if model else None)
+                observed = features(bits, self._deadline)
+                if predictor.state["examples"]:
+                    predicted = predictor.predict(observed)
+                    candidates = [predicted] + [c for c in candidates if c != predicted][:PORTFOLIO_SIZE - 1]
+        self._check_deadline()
         if self.backend == "lean":
             result = self._live(bits, candidates=candidates, proofs=[p for p in proofs if not isinstance(p, dict)],
                                 mode="hybrid" if learn else "baseline")
@@ -346,8 +469,13 @@ class PersistentSolver:
         else:
             result = self._fast_live(bits, candidates, proofs)
         answer, witness = result["answer"], result["witness"]
-        with self.db:
-            self.db.execute("""INSERT OR IGNORE INTO results
+        learned_hit = predicted is not None and result["reuse_kind"] == "witness" and witness == predicted
+        result.update(learned_proposed=predicted is not None, learned_accepted=learned_hit,
+                      model_bytes=0)
+        self._check_deadline()
+        self._database_budget()
+        with self._phase("persistence"), self.db:
+            inserted = self.db.execute("""INSERT OR IGNORE INTO results
                 (engine,bits,answer,witness,acquisition_core_work,created_ns,checksum,acquisition_parse_work)
                 VALUES (?,?,?,?,?,?,?,?)""", (self.engine_id, bits, int(answer), witness,
                 result["core_work"] if result["core_work"] is not None else 0,
@@ -368,13 +496,27 @@ class PersistentSolver:
                 self._index_candidate(self.engine_id, "proof", bits, proof["certificate"], time.time_ns())
             else:
                 self._index_candidate(self.engine_id, "witness", bits, stored["witness"], time.time_ns())
-            details = {k: result[k] for k in ("backend", "counted_complete", "external_ns", "verification_ns", "cnf_clauses", "proof_bytes") if k in result}
+            if predictor is not None and answer:
+                # Read/update under the acquired write transaction so concurrent
+                # acquisitions do not overwrite each other's training progress.
+                with self._phase("training"):
+                    current = self.db.execute("SELECT * FROM models WHERE engine=?", (self.engine_id,)).fetchone()
+                    if current and current["checksum"] != hashlib.sha256(current["state"].encode()).hexdigest():
+                        raise ValueError("Predictor integrity check failed")
+                    latest = Predictor(json.loads(current["state"]) if current else None)
+                    if inserted.rowcount:
+                        latest.update(observed, stored["witness"], self._deadline)
+                    model_text = latest.dump()
+                    self.db.execute("INSERT INTO models VALUES (?,?,?) ON CONFLICT(engine) DO UPDATE SET state=excluded.state,checksum=excluded.checksum",
+                                    (self.engine_id, model_text, hashlib.sha256(model_text.encode()).hexdigest()))
+                    result["model_bytes"] = len(model_text.encode())
+            details = {k: result[k] for k in ("backend", "counted_complete", "external_ns", "verification_ns", "cnf_clauses", "proof_bytes", "incremental", "learned_proposed", "learned_accepted", "model_bytes") if k in result}
             self.db.execute("INSERT OR IGNORE INTO measurements VALUES (?,?,?)",
                             (self.engine_id, bits, json.dumps(details, sort_keys=True)))
             if answer and learn:
                 self._activate(bits)
         return {"answer": answer, "witness": witness,
-                "source": {"witness": "verified_witness", "refutation": "verified_refutation",
+                "source": "learned_witness" if learned_hit else {"witness": "verified_witness", "refutation": "verified_refutation",
                            "none": "fallback"}[result["reuse_kind"]],
                 "nodes": result["nodes"],
                 **details,
@@ -435,6 +577,11 @@ def main() -> int:
     parser.add_argument("--backend", choices=("auto", "lean", "cadical"), default="auto")
     parser.add_argument("--cadical", type=Path)
     parser.add_argument("--timeout", type=float, default=30)
+    parser.add_argument("--query-timeout", type=float, default=30)
+    parser.add_argument("--verify-cache", action="store_true", help="Recheck stored certificates before accepting exact hits")
+    parser.add_argument("--max-proof-bytes", type=int, default=16 * 1024**2)
+    parser.add_argument("--incremental", action="store_true", help="Use the persistent CDCL proposal engine")
+    parser.add_argument("--learned", action="store_true", help="Learn a bounded shared witness predictor")
     sub = parser.add_subparsers(dest="command", required=True)
     solve = sub.add_parser("solve")
     solve.add_argument("bits")
@@ -446,7 +593,9 @@ def main() -> int:
     args = parser.parse_args()
     try:
         with PersistentSolver(args.cache, args.engine, backend=args.backend, cadical=args.cadical,
-                              timeout=args.timeout) as solver:
+                              timeout=args.timeout, query_timeout=args.query_timeout,
+                              verify_cache=args.verify_cache, max_proof_bytes=args.max_proof_bytes,
+                              incremental=args.incremental, learned=args.learned) as solver:
             if args.command == "serve":
                 for line in sys.stdin:
                     try:

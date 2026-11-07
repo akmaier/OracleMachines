@@ -1,6 +1,7 @@
 import OracleMachines.Cache
 import OracleMachines.Parsing
 import OracleMachines.BoundedSearch
+import OracleMachines.CompactExpansion
 import Std.Sat.CNF.Dimacs
 import Std.Tactic.BVDecide.LRAT.Parser
 import Lean.Data.Json
@@ -99,6 +100,13 @@ def respond (request : Json) : Except String Json := do
     | none => .error "Invalid formula encoding"
     | some f => .ok f
   let mode := (request.getObjValAs? String "mode").toOption.getD "hybrid"
+  if mode == "restricted" then
+    let stage := (request.getObjValAs? Nat "stage").toOption.getD bits.length
+    if stage > 1000000 then throw "Coverage state exceeds the service cell limit"
+    let answer := compactAnswer (coverageState stage) bits
+    return Json.mkObj [("answer", toJson answer), ("covered", toJson answer.isSome),
+      ("coverage_cells", toJson stage), ("reference_query_bound", toJson (24 * (bits.length + 1) ^ 2)),
+      ("counted_complete", toJson false)]
   if mode == "prepare" || mode == "verify_certificate" || mode == "verify_witness" then
     return ← fastRespond f parsed.2 request
   if mode == "exhaustive" then

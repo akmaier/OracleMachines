@@ -369,3 +369,15 @@ from checked certificates after restart; JSON/state bookkeeping still needs an
 end-to-end refinement theorem. No whole-service bit-machine bound is claimed.
 
 The full build now audits **1,650 declarations / 879 theorem declarations**.
+
+The balanced-chain follow-up adds `BalancedChain.lean` and `ChainProtocol.lean`:
+exact four-entry Boolean composition, associativity, identity padding, balanced
+updates, preservation of all other leaves, and exactly height+1 copied nodes per
+replacement. Native joins materialize four entries eagerly and carry the proved
+summary invariant. `ProofFragments.lean` proves hinted RUP entailment, reuse under
+added permanent premises, and UNSAT soundness through the existing circuit CNF
+translation; `FragmentProtocol.lean` integrates the checker into native sessions.
+The cost theorem is for tree operations, not all Python/SQLite/IPC work. The
+fragment protocol's external session orchestration remains outside a complete
+kernel-verified refinement. The transitive audit still rejects admits and custom
+axioms.

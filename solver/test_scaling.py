@@ -161,7 +161,8 @@ class ScalingTests(unittest.TestCase):
             self.assertEqual(routes[:2], ['checked', 'interfaces'])
         with PersistentSolver(self.path, adaptive=True, reuse_exact=False) as s:
             result = s.solve(MIXED, learn=False)
-            self.assertEqual(result['routing']['observations'], 5)
+            self.assertLessEqual(result['routing']['observations'], 5)
+            self.assertTrue(result['routing']['features']['complete'])
             self.assertEqual(s.db.execute('SELECT count(*) FROM route_observations').fetchone()[0],6)
 
     def test_archive_cap_preserves_history_and_never_means_unsat(self):

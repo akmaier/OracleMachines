@@ -1,3 +1,5 @@
+import OracleMachines.FragmentProtocol
+import OracleMachines.ChainProtocol
 import OracleMachines.Cache
 import OracleMachines.Parsing
 import OracleMachines.BoundedSearch
@@ -85,12 +87,12 @@ def incrementalCertificateValid (f : Formula) (certificate : Json) : Except Stri
   return checkIncrementalLRAT f graph proof
 
 def incrementalPrepare (graph : Std.Sat.AIG Nat) (request : Json) :
-    Except String (Std.Sat.AIG Nat × Json) := do
+    Except String (Std.Sat.AIG Nat × Formula × Std.Sat.CNF Nat × Json) := do
   let f ← request.getObjValAs? String "bits" >>= parseFormulaBits
   let entry := (compileCircuit f graph).entry
   if entry.aig.decls.size > 200000 then throw "Incremental graph capacity exceeded"
   let cnf := incrementalCNF entry
-  return (entry.aig, Json.mkObj [("dimacs", toJson cnf.dimacs),
+  return (entry.aig, f, cnf, Json.mkObj [("dimacs", toJson cnf.dimacs),
     ("width", toJson f.width), ("nodes", toJson entry.aig.decls.size)])
 
 def certificateValid (f : Formula) (certificate : Json) : Except String Bool := do
@@ -239,6 +241,8 @@ def main : IO Unit := do
   let mut bindings : FactorBindings := {}
   let mut rows : FactorRowStore := {}
   let mut graph : Std.Sat.AIG Nat := Std.Sat.AIG.empty
+  let mut fragments : OracleMachines.Fragments.Session := {}
+  let mut chains : OracleMachines.Chain.Store := {}
   let mut negatives : Std.HashMap String Formula := {}
   repeat
     let line ← stdin.getLine
@@ -248,7 +252,15 @@ def main : IO Unit := do
       | .error e => pure (.error e)
       | .ok request =>
         let mode := (request.getObjValAs? String "mode").toOption.getD ""
-        if mode == "negative_reuse" then
+        if mode == "chain_define" then
+          match OracleMachines.Chain.defineNodes chains request with
+          | .error e => pure (.error e)
+          | .ok (state, response) => chains := state; pure (.ok response)
+        else if mode == "chain_query" then
+          pure (OracleMachines.Chain.query chains request)
+        else if mode == "chain_reset" then
+          chains := {}; pure (.ok (Json.mkObj [("valid", toJson true)]))
+        else if mode == "negative_reuse" then
           pure do
             let name ← request.getObjValAs? String "id"
             let bits ← request.getObjValAs? String "bits" >>= parseBits
@@ -273,6 +285,19 @@ def main : IO Unit := do
               if negatives.size ≥ 64 then negatives := {}
               negatives := negatives.insert name f
             pure (.ok (Json.mkObj [("valid", toJson valid)]))
+        else if mode == "fragment_extend" then
+          match OracleMachines.Fragments.extend fragments request with
+          | .error e => pure (.error e)
+          | .ok (state, response) => fragments := state; pure (.ok response)
+        else if mode == "fragment_verify" then
+          match OracleMachines.Fragments.verify fragments request with
+          | .error e => pure (.error e)
+          | .ok (f, response) =>
+            if (response.getObjValAs? Bool "valid").toOption == some true then
+              if let some name := (request.getObjValAs? String "id").toOption then
+                if negatives.size ≥ 64 then negatives := {}
+                negatives := negatives.insert name f
+            pure (.ok response)
         else if mode == "incremental_verify" then
           match verifyLiveIncremental graph request with
           | .error e => pure (.error e)
@@ -285,9 +310,13 @@ def main : IO Unit := do
         else if mode == "incremental_prepare" then
           match incrementalPrepare graph request with
           | .error e => pure (.error e)
-          | .ok (state, response) => graph := state; pure (.ok response)
+          | .ok (state, f, cnf, response) =>
+            graph := state
+            fragments := OracleMachines.Fragments.prepare fragments
+              ((request.getObjValAs? String "bits").toOption.getD "") f cnf
+            pure (.ok response)
         else if mode == "incremental_reset" then
-          graph := Std.Sat.AIG.empty; pure (.ok (Json.mkObj [("valid", toJson true)]))
+          graph := Std.Sat.AIG.empty; fragments := {}; pure (.ok (Json.mkObj [("valid", toJson true)]))
         else if mode == "factor_define_many" then
           let checked := do
             let definitions ← request.getObjValAs? (Array Json) "definitions"

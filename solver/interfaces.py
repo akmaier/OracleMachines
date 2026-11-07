@@ -26,15 +26,25 @@ def batched(method):
     """Commit one checked interface operation; discard volatile proposals on rollback."""
     @wraps(method)
     def run(self, *args, **kwargs):
+        original=self.service._deadline
+        speculative=method.__name__=='solve'
+        if speculative:
+            remaining=original.remaining() if original else self.service.query_timeout
+            self.service._deadline=Deadline(min(1.0,remaining*0.4))
         try:
             with self.service._phase('interface_commit'), self.db:
                 self.batch_depth += 1
                 try:return method(self, *args, **kwargs)
                 finally:self.batch_depth -= 1
-        except BaseException:
+        except BaseException as error:
             self.cache.clear()
             self.symbolic_roots.clear()
+            if speculative and isinstance(error,BudgetExceeded):
+                if original:original.check()
+                return None,str(error),dict(self.metrics)
             raise
+        finally:
+            self.service._deadline=original
     return run
 
 
@@ -504,7 +514,7 @@ class InterfaceSolver:
             previous_result=self.store.get(row['evidence'],'expansion_result')
             previous_order=previous_result['order']
             if previous_result.get('plan'):
-                previous_plan=self.store.get(previous_result['plan'],'elimination_plan')
+                previous_plan=planning.load_plan(previous_result['plan'],self.store,self.deadline,self.metrics)
         if not isinstance(add,dict) or not isinstance(remove,list):raise ValueError('Expansion requires add map and remove list')
         if len(add)+len(remove)>4096:raise BudgetExceeded('Expansion delta too large')
         if any(not isinstance(k,str) or not k or len(k)>256 for k in list(add)+remove):raise ValueError('Invalid constraint name')
@@ -525,7 +535,7 @@ class InterfaceSolver:
                 active.extend(record['leaves'])
             result=self.run(list(dict.fromkeys(active)),previous_order,constraints,previous_plan)
             with self.service._phase('interface_storage'),self.transaction():
-                result['plan']=self.store.put('elimination_plan',self.current_plan)[0]
+                result['plan']=planning.save_plan(self.current_plan,self.store,self.deadline,self.metrics)
         except BudgetExceeded as error:
             self.deadline.check()
             bits=conjunction([self.store.get(t,'expansion_constraint')['bits'] for t in constraints])

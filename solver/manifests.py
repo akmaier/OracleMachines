@@ -58,6 +58,13 @@ class Manifest:
         while successor[2] is not None:successor=self.read(successor[2])
         return self.balance(successor[0],successor[1],l,self.update(r,successor[0],None))
 
+    def get(self,root,key,default=None):
+        while root:
+            k,value,left,right,_=self.read(root)
+            if key==k:return value
+            root=left if key<k else right
+        return default
+
     def items(self,root):
         stack=[]
         while root or stack:

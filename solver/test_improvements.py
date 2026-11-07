@@ -30,7 +30,7 @@ class ImprovementTests(unittest.TestCase):
                 projected=b.and_exists(*roots,(1,3))
                 for values in itertools.product((False,True),repeat=4):
                     a=dict(enumerate(values))
-                    expected=any(b.evaluate(roots[0],dict(a,**{} )|{1:x,3:y}) and
+                    expected=any(b.evaluate(roots[0],a|{1:x,3:y}) and
                                  b.evaluate(roots[1],a|{1:x,3:y})
                                  for x,y in itertools.product((False,True),repeat=2))
                     self.assertEqual(b.evaluate(projected,a),expected)
@@ -54,6 +54,22 @@ class ImprovementTests(unittest.TestCase):
                 with self.assertRaises(ValueError):s.expand(first['state'],add={'new':var(17)})
             self.assertEqual(s.db.execute('SELECT count(*) FROM knowledge_objects').fetchone()[0],before)
             self.assertTrue(s.expand(first['state'],add={'new':var(17)})['answer'])
+
+    def test_adaptive_guard_and_speculation_preserve_fallback_time(self):
+        from solver.resources import BudgetExceeded
+        bits=balanced([xor(i,j) for i in range(6) for j in range(i)],conj,'0010')
+        with tempfile.TemporaryDirectory() as d, PersistentSolver(Path(d)/'s.db',adaptive=True,max_interface=1) as s:
+            result=s.solve(bits,learn=False)
+            self.assertEqual(result['routing']['reason'],'structural_guard')
+            self.assertEqual(s.db.execute('SELECT count(*) FROM interface_nodes').fetchone()[0],0)
+        with tempfile.TemporaryDirectory() as d, PersistentSolver(Path(d)/'s.db',interfaces=True) as s:
+            def expire(_):
+                self.assertLessEqual(s._remaining(),1.0)
+                s._deadline.end=0
+                raise BudgetExceeded('Injected speculative deadline')
+            with patch.object(s.interfaces,'preflight',side_effect=expire):
+                self.assertTrue(s.solve(var(0),learn=False)['answer'])
+            self.assertEqual(s.db.execute('SELECT count(*) FROM interface_nodes').fetchone()[0],0)
 
     def test_preflight_rejects_before_interface_writes_or_registration(self):
         bits=balanced([xor(i,j) for i in range(6) for j in range(i)],conj,'0010')

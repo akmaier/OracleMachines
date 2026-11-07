@@ -39,12 +39,14 @@ class ProofIncremental:
         self.process=None;self.worker=None;self.loaded=False
         self.restored_nodes=self.restored_clauses=0
         self.history=[];self.steps=[];self.local={};self.sent=set();self.by_clause={}
+        self.checked_sent=0;self.fragment_target=None
         self.restored_nodes=0;self.restored_clauses=0
 
     def close(self):
         stop_process(self.process);self.process=None;self.worker=None;self.loaded=False
         self.restored_nodes=self.restored_clauses=0
         self.history=[];self.steps=[];self.local={};self.sent=set();self.by_clause={}
+        self.checked_sent=0;self.fragment_target=None
 
     def core_id(self,bits):
         return hashlib.sha256(bits.encode()).hexdigest()
@@ -84,6 +86,9 @@ class ProofIncremental:
         # A reset/dead worker requires full standalone replay instead.
         if self.worker is not self.service.process or self.worker is None or self.worker.poll() is not None:
             return self.service._request(dict(mode='verify_certificate',bits=bits,certificate=certificate))
+        if self.fragment_target is not None:
+            checked=self.service._request(dict(mode='fragment_verify',bits=bits,target=self.fragment_target,id=self.core_id(bits)))
+            if checked['valid']:return checked
         return self.service._request(dict(mode='incremental_verify',bits=bits,text=certificate['text'],id=self.core_id(bits)))
 
     def load(self,deadline):
@@ -138,6 +143,19 @@ class ProofIncremental:
         lines.append(' '.join(map(str,[len(clauses)+len(lines)+1,0,1,final,0])))
         return dict(format='incremental_lrat',history=list(self.history),text='\n'.join(lines)+'\n')
 
+    def check_fragments(self,root,deadline):
+        accepted=checked=0
+        while self.checked_sent<len(self.steps):
+            deadline.check()
+            batch=self.steps[self.checked_sent:self.checked_sent+128]
+            response=self.service._request(dict(mode='fragment_extend',start=self.checked_sent,steps=batch))
+            self.checked_sent+=len(batch)
+            accepted+=response['accepted'];checked+=response['checked']
+        ref=self.by_clause.get((-root,)) or self.by_clause.get(())
+        self.fragment_target=ref[1] if ref and ref[0]=='s' else None
+        return dict(fragments_checked=checked,fragments_accepted=accepted,
+                    fragment_prefix=self.checked_sent,fragment_target=self.fragment_target)
+
     def propose(self,bits,deadline):
         try:
             self.load(deadline)
@@ -177,12 +195,14 @@ class ProofIncremental:
                     index=len(self.steps);self.steps.append(step);new_steps.append(step)
                     self.local[identifier]=['s',index];self.by_clause[key]=['s',index]
                 else:unsupported+=1
+            with self.service._phase('incremental_fragments'):
+                fragment_metrics=self.check_fragments(root,deadline)
             self.history.append(bits)
             raw,packed=self.store.append([bits],new_steps) if self.store else (0,0)
             certificate=None
             if response['verdict']==20 and not response.get('proof_overflow'):
                 certificate=self.certificate(root,clauses,deadline)
-            response.update(certificate=certificate,new_definition_clauses=new_definitions,
+            response.update(**fragment_metrics,certificate=certificate,new_definition_clauses=new_definitions,
                 shared_nodes=compiled['nodes'],restored_nodes=self.restored_nodes,
                 restored_clauses=self.restored_clauses,archived_new_clauses=len(new_steps),
                 archived_clauses=len(self.steps),delta_raw_bytes=raw,delta_compressed_bytes=packed,

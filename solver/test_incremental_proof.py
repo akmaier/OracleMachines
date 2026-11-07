@@ -16,6 +16,29 @@ class ProofIncrementalTests(unittest.TestCase):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
         self.path=Path(self.temp.name)/'cache.db'
 
+    def test_fragments_are_checked_once_and_assumptions_are_not_axioms(self):
+        with PersistentSolver(self.path,backend='cadical',incremental_proofs=True) as s:
+            first=s.solve(HARD_UNSAT,learn=False)
+            self.assertTrue(first['incremental']['checked_fragment_reuse'])
+            self.assertGreater(first['incremental']['fragments_accepted'],0)
+            second=s.solve(MIXED,learn=False)
+            self.assertTrue(second['answer'])
+            self.assertEqual(second['incremental']['fragments_checked'],0)
+            s._request(dict(mode='incremental_reset'))
+            prepared=s._request(dict(mode='incremental_prepare',bits=MIXED))
+            clauses=dimacs_clauses(prepared['dimacs']);root=clauses[0]
+            result=s._request(dict(mode='fragment_extend',start=0,steps=[
+                dict(clause=root,parents=[['b',root]]),
+                dict(clause=clauses[1],parents=[['b',clauses[1]]]),
+                dict(clause=clauses[1],parents=[['s',1]])]))
+            self.assertEqual(result['accepted'],2)
+            self.assertFalse(s._request(dict(mode='fragment_verify',bits=MIXED,target=0))['valid'])
+            with self.assertRaises(ValueError):s._request(dict(mode='fragment_verify',bits=HARD_UNSAT,target=1))
+            s._request(dict(mode='incremental_reset'))
+            s._request(dict(mode='incremental_prepare',bits=MIXED))
+            forged=s._request(dict(mode='fragment_extend',start=0,steps=[dict(clause=[],parents=[['s',1]])]))
+            self.assertEqual(forged['accepted'],0)
+
     def test_component_wrapper_uses_a_compatible_checked_certificate(self):
         with PersistentSolver(self.path,backend='cadical',components=True,incremental_proofs=True) as s:
             with patch.object(s.incremental,'propose',side_effect=AssertionError('Unsupported wrapper format')):

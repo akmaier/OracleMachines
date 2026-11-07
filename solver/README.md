@@ -458,3 +458,50 @@ eliminated variable have been included. Safe-point garbage collection remaps all
 retained roots and clears stale computed-table entries. Explicit alternative
 variable orders are supported for controlled experiments, with ordering metadata
 checked on replay. Native rows and original-formula checks remain authoritative.
+
+## Balanced chain versions and checked proof fragments
+
+The JSON-lines service accepts an explicit binary-relation chain:
+
+```json
+{"op":"chain","append":[6,6,6,6],"left":1,"right":1,"witness":true}
+{"op":"chain","base":"<state>","replace":{"1":9},"left":1,"right":1}
+```
+
+Bit `2*x+y` of an edge mask permits endpoint values `(x,y)`; mask 6 is
+inequality and mask 9 is equality. Endpoint masks permit false (1), true (2),
+or either (3). New requests default to unrestricted endpoints; endpoint masks
+are query assumptions, and must be supplied again if desired. A perfect tree
+padded with equality relations shares unchanged nodes across versions. A single
+replacement copies exactly height+1 nodes and composes height summaries.
+`BalancedChain.lean` proves exact composition, update preservation and this
+logarithmic-in-capacity ledger. Native construction uses those verified joins
+and rejects wrong proposed summaries or unbalanced children. Witness output is
+optional, linear in chain length, and checked against every edge. General SAT
+is not automatically converted into a chain. Input conversion, storage, native
+replay and Python indexing remain charged separately from the formal tree ledger.
+
+General interface plans now retain bucket maps as immutable AVL objects rather
+than serializing every unchanged bucket again. Source/order lists and final
+context checking can still be linear. Existing version-1 plans remain readable.
+
+Incremental proof mode now checks newly observed RUP fragments in a native
+session and reuses accepted clauses. Dependencies refer either to checked earlier
+fragments or to actual permanent circuit definitions. Root assumptions are
+excluded from the permanent base. Graph reset clears all fragments; a changed
+base retains them only when every old base clause remains present. Replayed
+clauses after restart are checked again. Unsupported/rejected fragments cannot
+justify answers; standalone LRAT checking and acquisition remain fallbacks.
+The archive retains complete standalone certificates, so serialization/replay of
+those certificates is still charged. `ProofFragments.lean` proves RUP soundness,
+weakening under added premises, and the composition with the circuit CNF theorem.
+The JSON/session bookkeeping is not a complete kernel-verified state-machine
+refinement or cost proof.
+
+Adaptive routing now groups measured costs by input size, variable count, graph
+density and a bounded sample of reusable factors. Leaf-width/initial-degree
+screening can select the checked route without registering factors. Feature
+extraction gets at most 100 ms and 10% of remaining time; a full interface attempt
+gets at most one second and 40% of remaining time, reserving time for fallback.
+Every attempted route and selection cost is charged; no universal speedup or
+adversarial-regret guarantee follows.

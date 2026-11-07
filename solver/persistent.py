@@ -32,6 +32,7 @@ from solver.learning import Predictor, features
 from solver.knowledge_store import KnowledgeStore
 from solver.components import ComponentSolver
 from solver.interfaces import InterfaceSolver
+from solver.chain import ChainSolver
 from solver.routing import Router
 DEFAULT_ENGINE = ROOT / "formal/.lake/build/bin/oracleSolver"
 DEFAULT_CACHE = ROOT / "solver/.cache/results.sqlite3"
@@ -166,15 +167,17 @@ class PersistentSolver:
                         self._index_candidate(row["engine"], "proof", row["bits"], row["certificate"], row["created_ns"])
                 KnowledgeStore.create(self.db)
                 Router.create(self.db)
+                ChainSolver.create(self.db)
                 self.db.execute("PRAGMA user_version=8")
         except Exception:
             self.db.close()
             raise
         self.process: subprocess.Popen | None = None
+        self.chains = ChainSolver(self)
         self.interfaces = InterfaceSolver(self, max_interface, symbolic=symbolic) if interfaces or symbolic or adaptive else None
-        routing_namespace = self.engine_id + ":routes-v1:" + json.dumps(
+        routing_namespace = self.engine_id + ":routes-v2:" + json.dumps(
             [backend, symbolic, max_interface, components, incremental, incremental_proofs], separators=(",", ":"))
-        self.router = Router(self.db, routing_namespace) if adaptive and backend != "lean" else None
+        self.router = Router(self.db, routing_namespace, self.engine_id) if adaptive and backend != "lean" else None
         self.components = ComponentSolver(self.db, self.engine_id) if components else None
         if self.incremental:
             bridge = hashlib.sha256(DEFAULT_INCREMENTAL.read_bytes()).hexdigest()
@@ -374,6 +377,7 @@ class PersistentSolver:
                         checked=self.incremental.verify_live(bits,certificate) if isinstance(self.incremental, ProofIncremental) else self._request(dict(bits=bits,mode="verify_certificate",certificate=certificate))
                     incremental_metrics["proof_accepted"]=checked["valid"]
                     incremental_metrics["history_recompiled"]=checked.get("history_recompiled")
+                    incremental_metrics["checked_fragment_reuse"]=checked.get("checked_fragment_reuse",False)
                     if checked["valid"]:
                         return dict(answer=False,witness=None,certificate=certificate,fast=False,
                             reuse_kind="none",backend="incremental_lrat",nodes=None,core_work=None,
@@ -552,7 +556,7 @@ class PersistentSolver:
         self._check_deadline()
         if self.router is not None:
             with self._phase("routing_selection"):
-                self._route_decision = self.router.choose(bits)
+                self._route_decision = self.router.choose(bits,self._deadline,self.interfaces.max_interface)
         if self.backend == "lean":
             result = self._live(bits, candidates=candidates, proofs=[p for p in proofs if not isinstance(p, dict)],
                                 mode="hybrid" if learn else "baseline")
@@ -638,6 +642,26 @@ class PersistentSolver:
         finally:
             self.db.set_progress_handler(None, 0)
             self._ledger = self._deadline = None
+
+    def chain(self, base=None, *, replace=None, append=None, left=3, right=3, witness=False):
+        """Explicit binary-relation chain API; old versions remain archived."""
+        if self._ledger is not None:raise RuntimeError("Concurrent query")
+        self._ledger,self._deadline=Ledger(),Deadline(self.query_timeout)
+        try:
+            self._database_budget()
+            self.db.set_progress_handler(lambda:int(time.monotonic()>=self._deadline.end),1000)
+            result=self.chains.run(base,{} if replace is None else replace,[] if append is None else append,left,right,witness)
+            with self._phase("storage_accounting"):result["storage"]=self.archive_usage()
+            self.last_metrics=self._ledger.finish();result.update(self.last_metrics)
+            return result
+        except BaseException as error:
+            self.last_metrics=self._ledger.finish()
+            if isinstance(error,sqlite3.Error) and getattr(error,"sqlite_errorcode",None)==sqlite3.SQLITE_FULL:
+                raise BudgetExceeded("Chain archive cap reached; previous versions retained") from error
+            raise
+        finally:
+            self.db.set_progress_handler(None,0)
+            self._ledger=self._deadline=None
 
     def stats(self) -> dict:
         row = self.db.execute("""SELECT count(*) AS entries, coalesce(sum(answer),0) AS sat
@@ -727,6 +751,10 @@ def main() -> int:
                             raise ValueError("A request must be a JSON object")
                         if request.get("op") == "expand":
                             result = solver.expand(request.get("base"), add=request.get("add", {}), remove=request.get("remove", []))
+                        elif request.get("op") == "chain":
+                            result = solver.chain(request.get("base"), replace=request.get("replace", {}),
+                                append=request.get("append", []), left=request.get("left", 3),
+                                right=request.get("right", 3), witness=request.get("witness", False))
                         else:
                             result = solver.solve(request["bits"], learn=request.get("learn", True))
                     except (KeyError, ValueError, RuntimeError, OSError, sqlite3.Error) as exc:

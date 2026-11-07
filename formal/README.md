@@ -37,6 +37,7 @@ native-decision axioms fail the audit. Warnings are treated as errors.
 | Binary SAT and bounded expansion | [Encoding.lean](OracleMachines/Encoding.lean): `decode_encode`, `encode_injective`, `solveEncoded_correct`, `satTable_correct`, `expandSAT_eq` | A concrete binary postfix encoding round-trips. The binary solver decides its defined SAT language, and incremental expansion produces the exact next bounded-domain table. |
 | Executable cost semantics | [CostedSAT.lean](OracleMachines/CostedSAT.lean): `readRun_trace`, `evalRun_trace`, `solveRun_value`, `solveRun_bound`, `solveRun_fixed_width` | The instrumented evaluator realizes an explicit operational trace, the instrumented solver returns the verified solver's witness, and its counted work has a bound polynomial in encoding length for a fixed variable cap. |
 | Certified adaptive policy | [Hybrid.lean](OracleMachines/Hybrid.lean): `hybridRun_correct`, `serve_correct`, `hybridRun_overhead`, `actual_savings_identity`, `repeated_hit_savings` | A previously acquired witness is checked on each new formula; fallback is exact. Costs include validation, fallback, copying the acquired witness, and stream control. The savings identity follows the actual changing state. |
+| Accumulated exact results | [Cache.lean](OracleMachines/Cache.lean): `cache_lookup_sound`, `cacheStep_correct`, `cacheStep_exact`, `cacheStep_retains` | Every completed result remains available, including negative answers; lookup and insertion preserve exactness, assuming the loaded cache is intact. |
 | Obligations for another representation | [Invariant.lean](OracleMachines/Invariant.lean): `expansion_invariant`, `answer_at_cover` | The base, preservation, and exact new-coverage hypotheses imply exactness at every finite stage and at a covering stage for each input. |
 | Construction recurrence | [Resources.lean](OracleMachines/Resources.lean): `cumulative_eq` | Recursive construction cost equals base cost plus every expansion cost. |
 | Arithmetic in Corollary 12.2 | `polynomial_stage_sum`, `full_polynomial_bound`, `bounded_expansion_cost` | Shared polynomial stage budgets yield a single polynomial bound including reading, base construction, expansion, and evaluation. |
@@ -118,7 +119,15 @@ still has exponentially many entries. Binary parsing, garbage collection,
 physical memory traffic, and compilation of this abstract evaluator to a
 bit-machine are outside the counted-core theorem.
 
-The rest of the paper's neural, oracle, certification, and expected-savings
+The native executable and [persistent service](../solver/README.md) use this
+verified core. SQLite retains complete SAT/UNSAT results and a reusable witness
+across process restarts. The functional cache invariant is checked in Lean;
+database transactions, serialization, engine fingerprinting, and the Python
+adapter are integration-tested, not kernel-verified. Build the executable with
+`lake build oracleSolver`. [Workload experiments](../experiments/README.md)
+compare actual operation counts and elapsed service costs.
+
+The rest of the paper's neural, oracle, and general expected-savings
 arguments retain their conventional proofs and literature audit. This directory
 provides machine-checked proofs for the claims mapped above, not for the entire
 manuscript. The underlying results remain elementary consequences of established

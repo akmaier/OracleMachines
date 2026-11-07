@@ -62,8 +62,12 @@ domains. Separate results state the uniform expansion bounds that would imply
 polynomial-time decision and the workload conditions that amortize costly
 expansion. The correctness induction supplies neither bound by itself and does
 not prove P = NP.
-Its final section identifies remaining research questions and an evaluation
-protocol; no experimental speedup or efficient exact-learning algorithm is claimed.
+The executable development now supplies an exact SAT solver, a restricted
+polynomial bound for a fixed variable cap, and a certified witness-reuse policy.
+The [persistent solver](solver/README.md) retains every completed result across
+restarts. Controlled workloads compare reuse with repeated exhaustive solving;
+they do not establish a competitive SAT solver or efficient exact learning on
+unrestricted instances.
 
 The central question is when the expense of acquiring reusable knowledge is repaid
 by reduced future computation. Exact representability alone establishes neither
@@ -102,6 +106,13 @@ formal/
   lakefile.toml
   lake-manifest.json
   README.md
+solver/
+  persistent.py
+  test_persistent.py
+  README.md
+experiments/
+  run_workloads.py
+  results/
 research/
 README.md
 LICENSE
@@ -125,8 +136,21 @@ lake build
 
 The toolchain and dependencies are pinned. The default build audits all project
 declarations for admitted proofs and additional axioms. The formalization treats
-runtime costs as explicit numerical ledgers; it does not supply an efficient SAT
-algorithm or formalize P versus NP.
+general runtime costs as explicit numerical ledgers and connects a concrete
+SAT core to an operational cost model. Its cost bound is polynomial in formula
+length only for a **fixed** variable cap, with exponential dependence on that
+cap. It does not formalize P versus NP or prove an unrestricted polynomial bound.
+
+## Persistent solver
+
+Build the executable with `cd formal && lake build oracleSolver`. Then, from
+the repository root, run `python3 solver/persistent.py solve 010`. Subsequent
+calls reuse the result from `solver/.cache/results.sqlite3`; new formulas can
+also reuse a retained satisfying assignment after checking it. SAT and UNSAT
+results accumulate without eviction. The [service documentation](solver/README.md)
+covers encoding, storage, restart behavior, integrity checks, and testing.
+The database is local and ignored by Git; source code and reproducible experiment
+results are versioned.
 
 ## Literature review
 

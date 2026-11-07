@@ -1,0 +1,161 @@
+{
+  "date": "2026-11-07",
+  "requests": [
+    {
+      "file": "beyond-np-forward.json",
+      "bytes": 27463,
+      "url": "https://semopenalex.org/sparql?query=PREFIX+d%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0APREFIX+c%3A+%3Chttp%3A%2F%2Fpurl.org%2Fspar%2Fcito%2F%3E%0APREFIX+f%3A+%3Chttp%3A%2F%2Fpurl.org%2Fspar%2Ffabio%2F%3E%0ASELECT+%3Fseed+%3Fw+%3Ftitle+%3Fyear+WHERE+%7B%0A+VALUES+%3Fseed+%7B+%3Chttps%3A%2F%2Fsemopenalex.org%2Fwork%2FW2077974960%3E+%3Chttps%3A%2F%2Fsemopenalex.org%2Fwork%2FW2085393535%3E+%3Chttps%3A%2F%2Fsemopenalex.org%2Fwork%2FW1561938299%3E+%7D%0A+%3Fw+c%3Acites+%3Fseed+.+%3Fw+d%3Atitle+%3Ftitle+%3B+f%3AhasPublicationYear+%3Fyear+.%0A+FILTER%28REGEX%28STR%28%3Ftitle%29%2C+%22learn%7Creason%7Ccompil%7Ccach%7CPSPACE%7CExpTime%7Cmetareason%7Clogic%7Cpreprocess%7CBDD%22%2C+%22i%22%29%29%0A%7D+ORDER+BY+DESC%28%3Fyear%29+LIMIT+80%0A&format=json",
+      "status": "ok"
+    },
+    {
+      "file": "openalex-ferrara2016bdd.json",
+      "bytes": 19087,
+      "url": "https://api.openalex.org/works/https://doi.org/10.1109/TC.2015.2512872",
+      "status": "ok"
+    },
+    {
+      "file": "ferrara2016.pdf",
+      "url": "https://iris.uniroma1.it/retrieve/e3835315-ef45-15e8-e053-a505fe0a3de9/Ferrara_Postprint_The%20-size-of-BDDs_2016.pdf",
+      "status": "HTTP Error 403: Forbidden"
+    },
+    {
+      "file": "liberatore-research.html",
+      "url": "https://www.diag.uniroma1.it/~liberato/research.shtml",
+      "status": "HTTP Error 404: Not Found"
+    },
+    {
+      "file": "beyond-np-search-model-checking.json",
+      "bytes": 150041,
+      "url": "https://api.openalex.org/works?search=model+checking+preprocessing&per-page=10",
+      "status": "ok"
+    },
+    {
+      "file": "beyond-np-search-dual-process.json",
+      "bytes": 178478,
+      "url": "https://api.openalex.org/works?search=dual+process+computational+complexity&per-page=10",
+      "status": "ok"
+    },
+    {
+      "file": "beyond-np-search-memoization.json",
+      "bytes": 166264,
+      "url": "https://api.openalex.org/works?search=memoization+computational+complexity&per-page=10",
+      "status": "ok"
+    },
+    {
+      "file": "beyond-np-search-exact-hypotheses.json",
+      "url": "https://api.openalex.org/works?search=%22system+1%22+%22system+2%22+%22P%3DNP%22&per-page=10",
+      "status": "ok",
+      "total_hits": 163,
+      "returned": [
+        {
+          "id": "https://openalex.org/W3094757558",
+          "title": "Postulate-based proof of the P != NP hypothesis",
+          "year": 2020
+        },
+        {
+          "id": "https://openalex.org/W4409358553",
+          "title": "On the Nature of Logic and the P vs NP Prob-lem",
+          "year": 2025
+        },
+        {
+          "id": "https://openalex.org/W2124435847",
+          "title": "Algorithms and complexity for periodic real-time scheduling",
+          "year": 2012
+        },
+        {
+          "id": "https://openalex.org/W3093055466",
+          "title": "The difficulty of prime factorization is a consequence of the positional numeral system",
+          "year": 2016
+        },
+        {
+          "id": "https://openalex.org/W7140118821",
+          "title": "Global Regularity and Spectral Confinement via the MDL Ynor Dissipative Invariant",
+          "year": 2026
+        },
+        {
+          "id": "https://openalex.org/W4402672103",
+          "title": "NPHardEval: Dynamic Benchmark on Reasoning Ability of Large Language Models via Complexity Classes",
+          "year": 2024
+        },
+        {
+          "id": "https://openalex.org/W3006071951",
+          "title": "Stochastic Numerical P Systems With Application in Data Clustering Problems",
+          "year": 2020
+        },
+        {
+          "id": "https://openalex.org/W2564648803",
+          "title": "Formal verification of P systems",
+          "year": 2016
+        },
+        {
+          "id": "https://openalex.org/W2592926057",
+          "title": "Oppositional based grey wolf optimization algorithm for economic dispatch problem of power system",
+          "year": 2017
+        },
+        {
+          "id": "https://openalex.org/W2951199621",
+          "title": "Deciding Graph non-Hamiltonicity via a Closure Algorithm",
+          "year": 2016
+        }
+      ]
+    },
+    {
+      "file": "beyond-np-search-riedmiller.json",
+      "url": "https://api.openalex.org/works?search=Exploring+the+Computational+Necessity+of+Dual+Processes+for+Intelligence&per-page=10",
+      "status": "ok",
+      "total_hits": 63136,
+      "returned": [
+        {
+          "id": "https://openalex.org/W4294927208",
+          "title": "Computational Processes for General Intelligence",
+          "year": 2022
+        },
+        {
+          "id": "https://openalex.org/W4297386562",
+          "title": "Computational Processes for General Intelligence",
+          "year": 2022
+        },
+        {
+          "id": "https://openalex.org/W4292071027",
+          "title": "Computational Processes for General Intelligence",
+          "year": 2022
+        },
+        {
+          "id": "https://openalex.org/W4307248928",
+          "title": "Computational Processes for General Intelligence",
+          "year": 2022
+        },
+        {
+          "id": "https://openalex.org/W4304693487",
+          "title": "Computational Processes for General Intelligence",
+          "year": 2022
+        },
+        {
+          "id": "https://openalex.org/W4361867737",
+          "title": "Computational Processes for General Intelligence",
+          "year": 2022
+        },
+        {
+          "id": "https://openalex.org/W4311058607",
+          "title": "Computational Processes for General Intelligence",
+          "year": 2022
+        },
+        {
+          "id": "https://openalex.org/W4293294421",
+          "title": "Computational Processes for General Intelligence",
+          "year": 2022
+        },
+        {
+          "id": "https://openalex.org/W4308594579",
+          "title": "Computational Processes for General Intelligence",
+          "year": 2022
+        },
+        {
+          "id": "https://openalex.org/W4294770606",
+          "title": "Computational Processes for General Intelligence",
+          "year": 2022
+        }
+      ]
+    }
+  ]
+}

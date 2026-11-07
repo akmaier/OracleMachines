@@ -17,6 +17,10 @@ A targeted priority check below assesses the reuse corollary and fixed-policy
 savings result as they appeared in commit `42c17ee`. Its new references and
 attribution have also been incorporated into the manuscript.
 
+A further [publication-status reassessment](#publication-status-of-the-generalized-observations)
+checks the generalized observations from commit `41d8e4d`. It adds five manuscript
+references and records the new OpenAlex/SemOpenAlex search below.
+
 The literature contains substantially closer precedents than the initial review identified. In particular, Lin et al. (2021) already combine neural parameters, arbitrary preprocessing or oracle assistance, polynomial advice, computational limitations, and bounded-length lookup representations. Hertrich and Skutella (2023) explicitly distinguish uniform neural constructions from nonuniform existence when drawing consequences from NP-hardness. The broad connection between neural representations and complexity classes therefore needs to be presented as established literature. The draft can contribute a focused exposition of these distinctions for exact SAT, oracle terminology, certification, and amortized reuse; the search does not establish that this particular exposition is unique.
 
 The widely reported failed proof identified by the author is Vinay Deolalikar's August 2010 claim that P differs from NP. It belongs in a discussion of the limits of inferring algorithmic complexity from representation or solution-space structure. It is not a learning-based proof of P=NP.
@@ -478,3 +482,129 @@ fixed-policy/cost combinations also checked the expected-cost formula with
 perfectly correlated queries, confirming that independence is unnecessary.
 These small cases check arithmetic and edge conditions; they are not substitutes
 for the general proofs. The revised LaTeX builds without warnings.
+
+## Publication status of the generalized observations
+
+**Question checked, 7 November 2026:** Are the observations extending reuse
+beyond NP, separating finite existence from effective construction, and limiting
+the P-versus-NP claim already established in the literature?
+
+**Assessment:** yes at the level of the mathematical mechanisms. Some have direct
+published algorithmic precedents; others are elementary consequences of standard
+definitions and theorems. We found no basis for claiming a new theorem from their
+combination. The manuscript now makes this attribution explicit in Section 11
+and adds a closely related dual-process thesis in Section 12. Its defensible
+contribution remains a focused synthesis of resource accounting for learned
+reasoning.
+
+| Observation | Prior work and status | Consequence for this draft |
+| --- | --- | --- |
+| Reusing an exact answer can help any terminating solver. | [Michie's memo functions](https://doi.org/10.1038/218019a0); [Goré and Nguyen's global caching](https://doi.org/10.1007/s10817-011-9243-0). | Established reuse mechanism; our identity is elementary accounting. |
+| Net savings require avoided work to repay overhead. | [Minton's utility analysis](https://cdn.aaai.org/AAAI/1988/AAAI88-100.pdf), examined in the earlier priority check. | Adding setup cost gives an elementary break-even condition. |
+| The same criterion applies under either P-versus-NP outcome. | Memoization and utility accounting use actual costs; [self-improving algorithms](https://doi.org/10.1137/090766437) already accelerate polynomial-time tasks. | The hypothesis-free applicability is a consequence of these mechanisms, even without identical wording in an earlier paper. |
+| Finite answer tables exist without an effective uniform constructor. | [Turing's computable sequences](https://doi.org/10.1112/plms/s2-42.1.230). | The effective-table equivalence reformulates decidability. |
+| Uniform polynomial construction and evaluation cannot solve every EXPTIME-complete input. | [Hartmanis and Stearns's hierarchy foundation](https://doi.org/10.1090/S0002-9947-1965-0170805-7), with the modern consequence in [Sipser's Lecture 22](https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/50cb369d1be3c7fbe0886e318aea13c2_MIT18_404f20_lec22.pdf). | Standard hierarchy consequence, independent of P versus NP. |
+| Short deterministic certificates and optimal control need additional assumptions. | The NP verifier definition and [Conitzer's metareasoning analysis](https://cdn.aaai.org/Workshops/2008/WS-08-07/WS08-07-005.pdf). | Reuse does not supply cheap verification or an efficiently computable optimal policy. |
+
+### Newly incorporated references and checked passages
+
+**Goré and Nguyen (2013), ExpTime Tableaux for ALC Using Sound Global Caching.**
+Journal of Automated Reasoning 50(4), 355–381; online 2011.
+[Publisher](https://doi.org/10.1007/s10817-011-9243-0) ·
+[Author manuscript](https://users.cecs.anu.edu.au/~rpg/Publications/ALC/sound-global-caching.pdf).
+Checked the introduction, Remark 1.1, Theorem 5.3, and Theorem 6.2 with its
+complexity argument. This is a direct published EXPTIME-complete example.
+Remark 1.1 corrects an error in the 2007 workshop algorithm; we cite the journal
+version. This is internal subproblem reuse, not a learned cross-query system.
+
+**Ferrara, Liberatore, and Schaerf (2007), Model Checking and Preprocessing.**
+AI*IA 2007, LNCS 4733, 48–59.
+[Publisher](https://doi.org/10.1007/978-3-540-74782-6_6).
+Checked publisher metadata and abstract. The paper studies repeated queries
+with a preprocessed model or formula and polynomial-size output. The full
+chapter was not obtained. Accordingly, the manuscript cites its problem setting
+without restating a particular lower-bound theorem or omitting its assumptions.
+
+**Turing (1937), On Computable Numbers, with an Application to the
+Entscheidungsproblem.** Proceedings of the London Mathematical Society
+s2-42(1), 230–265.
+[Publication](https://doi.org/10.1112/plms/s2-42.1.230) ·
+[Reprint](https://people.math.ethz.ch/~halorenz/4students/Literatur/TuringComputableNumbers.pdf).
+Checked the original article's Sections 1–2, especially printed pp. 232–233.
+This supports the sequence-computability foundation. Our finite-table statement
+is a reformulation using the characteristic sequence in length-lexicographic
+order, not a theorem attributed verbatim to Turing. The bibliography follows
+the publisher's 1937 date.
+
+**Hartmanis and Stearns (1965), On the Computational Complexity of Algorithms.**
+Transactions of the American Mathematical Society 117, 285–306.
+[Publisher PDF](https://www.ams.org/journals/tran/1965-117-00/S0002-9947-1965-0170805-7/S0002-9947-1965-0170805-7.pdf).
+Checked the introduction and Section IV, particularly Theorem 9, pp. 298–299.
+This supplies historical attribution for the time hierarchy. We retain Sipser
+for the modern language-class formulation P strictly contained in EXPTIME;
+we do not attribute a later sharpened simulation bound to the original paper.
+
+**Riedmiller (2025), Exploring the Computational Necessity of Dual Processes
+for Intelligence.** MSc thesis, University of Amsterdam, ILLC MoL-2025-18.
+[Institutional text](https://eprints.illc.uva.nl/2389/1/MoL-2025-18.text.pdf).
+Checked the abstract and Chapter 4, especially Sections 4.2–4.3, printed
+pp. 57–63. Its bounded-reasoning discussion explicitly invokes P≠NP and
+ETH/SETH. This is close thematic prior work, clearly labeled a thesis. We do
+not adopt its broader necessity claim or treat its hardness discussion as our
+conditional savings result.
+
+### Additional sources and version limits
+
+Ferrara, Liberatore, and Schaerf's related
+[2010 preprint](https://arxiv.org/abs/1012.3018), *On the Size of Data Structures
+Used in Symbolic Model Checking*, was checked in Sections 2.3 and 3.2.
+Theorems 6–7 make representation-size obstructions conditional on class
+separations; the following paragraph explicitly rejects an unconditional
+version. Such bounds must not be paraphrased as proving that preprocessing
+never saves work. OpenAlex links this preprint to the authors'
+[2016 IEEE article](https://doi.org/10.1109/TC.2015.2512872), *The Size of BDDs
+and Other Data Structures in Temporal Logics Model Checking*. Its publication
+metadata and institutional abstract were verified, but its deposited final
+text returned HTTP 403. We therefore do not claim to have checked the final
+article's theorem wording or numbering.
+
+The citation graph also returned later global-caching work on hybrid PDL,
+SHIQ, and SHOQ, and work on preprocessing limits and average-case compilability.
+These are discovery leads, not independently audited theorems in this review.
+Keyword searches also returned proposed P-versus-NP proofs and philosophical
+preprints. Their metadata or titles do not establish either a complexity
+separation or priority for the cost identity.
+
+### Search coverage and reproducibility
+
+This pass saved 12 SemOpenAlex exact-title records and 50 filtered incoming
+citation edges from the global-caching and preprocessing seeds. Records include
+duplicates and online/journal versions. Five additional direct OpenAlex work
+lookups verified publication metadata. Six OpenAlex searches each returned
+10 candidates: global caching; model checking preprocessing; dual process
+computational complexity; memoization computational complexity; quoted
+System 1/System 2/P=NP terms; and the thesis title. All 60 returned titles
+were screened; only relevant primary sources were examined further. Broad
+search totals include many irrelevant results and are not counts of relevant
+papers. The thesis did not appear among its query's first ten results and was
+verified through its institutional repository instead.
+
+The earlier anonymous OpenAlex quota failure did not recur in this pass.
+Primary-source discovery also used publisher pages, arXiv, author repositories,
+and targeted web queries. The saved queries, responses, URLs, source-check
+notes, and checksums are in
+[the evidence directory](evidence/2026-11-07/manifest.json).
+This is a targeted follow-up search, not an exhaustive priority proof. We did
+not verify an earlier publication with exactly our combined formulation under
+both P-versus-NP alternatives. That absence does not establish novelty: the
+underlying deductions already follow from established results.
+
+### Checks on this revision
+
+The 12 proof environments, 45 equation environments, and all lemma, proposition,
+and corollary statements are unchanged from the audited commit. All 51 labels
+and 46 bibliography entries resolve. The 22-page PDF builds without LaTeX
+warnings; all pages were visually inspected, with the revised Sections 11–12
+also checked at full page size. The evidence manifest verifies 41 saved files,
+including all unchanged earlier records, and lists 14 direct OpenAlex work
+lookups across the review passes.

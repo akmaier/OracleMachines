@@ -1,7 +1,7 @@
 {
   "review_date": "2026-11-07",
   "semopenalex_endpoint": "https://semopenalex.org/sparql",
-  "openalex_search_status": "Shared anonymous IP quota rejected search; individual work lookups succeeded",
+  "openalex_search_status": "Earlier anonymous search was quota-rejected; six follow-up searches succeeded on 2026-11-07. Individual work lookups also succeeded.",
   "direct_openalex_verified_works": [
     "W3171737424",
     "W2099977515",
@@ -11,7 +11,12 @@
     "W1680127546",
     "W2762452592",
     "W3200005047",
-    "W4414737936"
+    "W4414737936",
+    "W2077974960",
+    "W1561938299",
+    "W1782039574",
+    "W2126160338",
+    "W2125495920"
   ],
   "title_match_records": 45,
   "backward_edges": 414,
@@ -32,6 +37,66 @@
       "path": "backward.rq",
       "sha256": "97e464468d3e1c91eb91a59cded8b6998d644e0672bb95dfb8ca736fb3fece6a",
       "bytes": 598
+    },
+    {
+      "path": "beyond-np-forward.json",
+      "sha256": "a6a2f460b8c2c64520cd4bb0fc0a2d31f52f453dbe2b892b2e343dab949a275e",
+      "bytes": 27463
+    },
+    {
+      "path": "beyond-np-forward.rq",
+      "sha256": "8a0bfcc9a697e30daf802dc1d0c0b6baa995a45ecaafd78b64ae1b775245cf29",
+      "bytes": 510
+    },
+    {
+      "path": "beyond-np-openalex-search.json",
+      "sha256": "7c44fa6c28cd68cce23469bdf3d993e485ecdb9f7ed898a542e5cb3658665a12",
+      "bytes": 116074
+    },
+    {
+      "path": "beyond-np-review-sources.json",
+      "sha256": "6aa43e8657fbc26e03a32eaee0ffe8f3376539a46256eb394f42f827ebd8118d",
+      "bytes": 3177
+    },
+    {
+      "path": "beyond-np-search-dual-process.json",
+      "sha256": "1fb4a5096f5e4b55f6e527f5b67003e0ae192914ea9d65554cf61d76bd24a45d",
+      "bytes": 178478
+    },
+    {
+      "path": "beyond-np-search-exact-hypotheses.json",
+      "sha256": "2f2dafb4655a1c43f4b7ffdcbe13efc9c0d54556ccdea9a71d9c4dc1bf2443a7",
+      "bytes": 165724
+    },
+    {
+      "path": "beyond-np-search-log.json",
+      "sha256": "ff5fcba4404f978c0b2bf79c1ae6c458976b4c0ed280d9de2068a51215a6fed6",
+      "bytes": 6198
+    },
+    {
+      "path": "beyond-np-search-memoization.json",
+      "sha256": "b9c82272421569d0cfe9ed826185ad3da69bc5083fca9e2c327a3d9f279be30f",
+      "bytes": 166264
+    },
+    {
+      "path": "beyond-np-search-model-checking.json",
+      "sha256": "8166aed80cad719896c491818201b058581c4f4c25ebba58692c8c3228525da1",
+      "bytes": 150041
+    },
+    {
+      "path": "beyond-np-search-riedmiller.json",
+      "sha256": "5eb90ea705ece43fbd2ad18d588b4ee6f1009422adc4367246b7f2340dc4e5cb",
+      "bytes": 139673
+    },
+    {
+      "path": "beyond-np-titles.json",
+      "sha256": "e0bb45a90320345333d8cfe5c3163aee68d38ba4b6f5db36903df5c9ecf7948f",
+      "bytes": 5161
+    },
+    {
+      "path": "beyond-np-titles.rq",
+      "sha256": "044076f9c484a56016ba6d72406c8bd29a3f0e73544f5f9eac041c68720b3057",
+      "bytes": 953
     },
     {
       "path": "expanded-titles.json",
@@ -94,9 +159,29 @@
       "bytes": 17460
     },
     {
+      "path": "openalex-ferrara2007preprocessing.json",
+      "sha256": "6ae967ba79eb2148a6ca29e8503b4952cb336aa1b19bebb466b03290b34b06c9",
+      "bytes": 12279
+    },
+    {
+      "path": "openalex-ferrara2016bdd.json",
+      "sha256": "bd3dde7c6e38ce6457e9adc95cdeb929902d4412961f87e28a8eb5d907c748c1",
+      "bytes": 19087
+    },
+    {
       "path": "openalex-ganapini2025sofai.json",
       "sha256": "cb66adacf5d33766e329beaa5f7fcdd5fd08c1784c52a6b7f4eb59fc0d6f077a",
       "bytes": 23690
+    },
+    {
+      "path": "openalex-gore2013caching.json",
+      "sha256": "dbc80b9c6669d491e22a60f19f8764d328cef3d6fc15c99c83e1c7b4ad2152b0",
+      "bytes": 16083
+    },
+    {
+      "path": "openalex-hartmanis1965complexity.json",
+      "sha256": "9c55871185d5885ae8ee109413d8d1c558457a5a0131a3b68454238078065c1c",
+      "bytes": 14315
     },
     {
       "path": "openalex-lin2021.json",
@@ -112,6 +197,11 @@
       "path": "openalex-test.json",
       "sha256": "91a240afeb37d47d60048415b51159879ca732c4643a21830b9fcc87500a4d8c",
       "bytes": 812
+    },
+    {
+      "path": "openalex-turing1937computable.json",
+      "sha256": "8a1c2b6e548224037b89a5cb7c1984fa1f5a5d089a396e9e6e62f9571ecf2613",
+      "bytes": 8961
     },
     {
       "path": "reuse-titles.json",
@@ -153,5 +243,14 @@
       "W4414737936"
     ],
     "scope": "Targeted discovery plus primary-source passage checks; not an exhaustive proof of priority. SOFAI is absent from this SemOpenAlex title response but verified by publisher text and a direct OpenAlex DOI lookup."
+  },
+  "beyond_np_priority_check": {
+    "assessed_commit": "41d8e4d",
+    "semopenalex_title_match_records": 12,
+    "filtered_forward_edges": 50,
+    "direct_openalex_additional_work_lookups": 5,
+    "openalex_searches": 6,
+    "returned_candidates_per_search": 10,
+    "scope": "Targeted discovery, title screening and selected primary passages. Not exhaustive. See beyond-np-review-sources.json for version and access limits."
   }
 }

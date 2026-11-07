@@ -1,0 +1,8 @@
+PREFIX d: <http://purl.org/dc/terms/>
+PREFIX c: <http://purl.org/spar/cito/>
+PREFIX f: <http://purl.org/spar/fabio/>
+SELECT ?seed ?w ?title ?year WHERE {
+ VALUES ?seed { <https://semopenalex.org/work/W2077974960> <https://semopenalex.org/work/W2085393535> <https://semopenalex.org/work/W1561938299> }
+ ?w c:cites ?seed . ?w d:title ?title ; f:hasPublicationYear ?year .
+ FILTER(REGEX(STR(?title), "learn|reason|compil|cach|PSPACE|ExpTime|metareason|logic|preprocess|BDD", "i"))
+} ORDER BY DESC(?year) LIMIT 80

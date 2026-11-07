@@ -685,11 +685,18 @@ Let us now replace SAT by a more demanding decision problem. Corollary~\ref{cor:
 
 Proposition~\ref{prop:soundness} also applies whenever the proposed answers can be soundly checked and fallback terminates. Proposition~\ref{prop:savings} gives the corresponding expected-cost comparison when its expectations are finite. The budgeted-overhead argument only needs the same solver and cost assumptions. Thus, the reuse rationale extends throughout decidable computation. Membership in a large complexity class alone guarantees neither frequent reuse nor affordable acquisition.
 
+\paragraph{Published examples beyond NP.}
+\citet{gore2013caching} give a sound and complete global-caching tableau procedure for concept satisfiability relative to a TBox in the description logic $\mathcal{ALC}$, an $\mathsf{EXPTIME}$-complete problem. Reusing graph nodes avoids repeated expansion and yields an exponential-time algorithm. Their reuse occurs among subproblems within a solve; Corollary~\ref{cor:reuse-savings} counts repeated external queries. Both exploit repeated work. Hence, applying reuse to demanding decidable problems is established algorithmic practice.
+
+\citet{ferrara2007preprocessing} study preprocessing for repeated temporal model-checking queries, with polynomial-size compiled representations. This is a direct precedent for asking how much prior work can be reused under a storage constraint. Such compilability questions concern worst-case complexity after preprocessing. Our workload comparison instead charges acquisition and compares total work against a specified solver. A worst-case obstruction to compact compilation need not exclude savings on a particular workload.
+
 \paragraph{Certification needs its own assumptions.}
 SAT has short, efficiently checkable positive witnesses. This property does not automatically extend to a more general language $L$. A deterministic polynomial-time verifier with polynomial-length certificates for every positive instance, and none for negative instances, would put $L$ in $\NPclass$. Providing such certificates for both answers would put $L$ in $\NPclass\cap\coNP$. For example, true quantified Boolean formulas form a $\mathsf{PSPACE}$-complete language \citep{sipser2020theory}. Universally short positive certificates with such a verifier would imply $\mathsf{PSPACE}=\NPclass$. Hence, we may use sound certificates for selected instances or longer proofs, but must charge their full cost. An exact cache can instead rely on an earlier exact solve and trustworthy storage. These certificate implications concern ordinary deterministic checks; randomized interactive protocols require their own soundness and cost analysis.
 
 \paragraph{Finite existence and effective acquisition.}
 For any language $L$, even an undecidable one, $L\cap D_N$ has a finite answer table. Yet, producing these tables uniformly is an additional requirement.
+
+The distinction is a reformulation of standard computability. In the terminology introduced by \citet{turing1937computable}, a computable binary sequence has one machine that produces all its bits. Order the strings by length and then lexicographically. The membership bits of $L$ form such a sequence exactly when membership is decidable. The following proposition expresses the same fact through finite tables; it is not an additional computability result.
 
 \begin{proposition}[Effective finite tables]
 \label{prop:effective-tables}
@@ -707,12 +714,14 @@ If $L$ is decidable, enumerate $D_N$, run its decider on each string, and write 
 
 Consequently, finite representability alone does not give a complete computable fallback or acquisition method for an undecidable problem. Previously established individual answers may still be reused, but our total-decider guarantees do not extend to all of its inputs.
 
-The polynomial version of Proposition~\ref{prop:advice} also applies to any language: compact exact advice with a uniform polynomial evaluator gives $L\in\Ppoly$, while polynomial-time uniform construction gives $L\in\Pclass$. For an $\mathsf{EXPTIME}$-complete language, the latter is impossible by the deterministic time hierarchy theorem, which gives $\Pclass\subsetneq\mathsf{EXPTIME}$ \citep{sipser2020theory}. This obstruction holds even if $\Pclass=\NPclass$. Reuse can therefore be useful in settings where a uniform polynomial-time solution is already ruled out, without removing the first-solve cost.
+The polynomial version of Proposition~\ref{prop:advice} also applies to any language: compact exact advice with a uniform polynomial evaluator gives $L\in\Ppoly$, while polynomial-time uniform construction gives $L\in\Pclass$. For an $\mathsf{EXPTIME}$-complete language, the latter is impossible by the deterministic time hierarchy theorem, which gives $\Pclass\subsetneq\mathsf{EXPTIME}$ \citep{hartmanis1965complexity,sipser2020theory}. This standard consequence holds even if $\Pclass=\NPclass$. Reuse can therefore be useful in settings where a uniform polynomial-time solution is already ruled out, without removing the first-solve cost.
 
 \paragraph{What the architectural conclusion establishes.}
 Our comparison concerns a specified restarted solver and a specified workload. A faster solver, its own cache, a memory limit, or a stream of distinct inputs can remove the advantage. Even a repeated input only yields eventual savings when its avoided solving cost exceeds the recurring retrieval cost. For tasks returning a large object, we must also charge storing and delivering that output on every query. The one-bit decision bounds do not give free witness or output production.
 
 Choosing when to deliberate is itself computation. \citet{conitzer2008metareasoning} discusses metareasoning problems whose optimal solutions are NP-hard or PSPACE-hard, with consequences that depend on the relevant class separations. Our identities assume an implemented policy and charge its control cost; they do not supply an efficient optimal policy. Hence, the precise conclusion is that the accounting criterion and the possibility of reuse savings do not require resolving $\Pclass$ versus $\NPclass$. Complexity still constrains acquisition, certification, and optimal control.
+
+These observations connect established memoization and utility accounting with standard computability and hierarchy facts. Their generality does not establish a new speedup theorem or a necessary architecture for intelligence. The contribution here is to state the assumptions together, so that we can assess a learned reasoning system without confusing stored answers with efficient uniform acquisition.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
@@ -720,6 +729,8 @@ Choosing when to deliberate is itself computation. \citet{conitzer2008metareason
 The finite table gives us an extreme form of acquired knowledge. Once we have computed every answer, online use requires only recognition and retrieval. Exact caching builds this knowledge incrementally. Learning aims for a smaller representation that transfers across inputs. In each case, we reuse earlier computational effort.
 
 Explicit fast/slow arbitration also has published precedents. \citet{milli2021rational} study when a dual-process architecture is optimal after charging action, reasoning, and metareasoning costs. Their models concern decision quality and computational cost. \citet{ganapini2025sofai} implement the SOFAI architecture: a fast solver acts first, and metacognitive control decides whether to invoke a slow solver. Their grid-based experiments report improved efficiency at comparable or better decision quality than the studied individual solvers. These results support cost-aware arbitration. They do not provide exact SAT certification or our full acquisition-cost comparison. Hence, the fast-first architecture itself is established prior work.
+
+The MSc thesis of \citet{riedmiller2025dual} also connects dual-process reasoning with computational complexity and bounded resources. Its hardness discussion invokes $\Pclass\neq\NPclass$ and exponential-time hypotheses. Our conditional accounting needs neither assumption. This difference concerns the scope of the argument; it does not make the reuse principle new.
 
 We find the same acquisition-and-use distinction in amortized inference. \citet{stuhlmuller2013} spend computation learning stochastic inverses for later inference in Bayesian networks. Their setting is probabilistic. Still, the transfer of work from later queries to earlier learning is directly relevant.
 
@@ -854,6 +865,12 @@ $P$ is not equal to $NP$.
 Circulated manuscript, 6 August; failed separation claim.
 \url{https://wscor.win.tue.nl/woeginger/P-versus-NP/Deolalikar.pdf}.
 
+\bibitem[Ferrara et~al.(2007)Ferrara, Liberatore, and Schaerf]{ferrara2007preprocessing}
+Ferrara, A., Liberatore, P., and Schaerf, M. (2007).
+Model checking and preprocessing.
+In \emph{AI*IA 2007: Artificial Intelligence and Human-Oriented Computing}, LNCS~4733, pp.~48--59.
+\href{https://doi.org/10.1007/978-3-540-74782-6_6}{doi:10.1007/978-3-540-74782-6\_6}.
+
 \bibitem[Fortnow(2022)]{fortnow2022fifty}
 Fortnow, L. (2022).
 Fifty years of P vs. NP and the possibility of the impossible.
@@ -878,6 +895,19 @@ Gershman, S.~J., and Goodman, N.~D. (2014).
 Amortized inference in probabilistic reasoning.
 In \emph{Proceedings of the 36th Annual Conference of the Cognitive Science Society}.
 \url{https://escholarship.org/uc/item/34j1h7k5}.
+
+\bibitem[Gor\'e and Nguyen(2013)]{gore2013caching}
+Gor\'e, R., and Nguyen, L.~A. (2013).
+ExpTime tableaux for $\mathcal{ALC}$ using sound global caching.
+\emph{Journal of Automated Reasoning}, 50(4), 355--381.
+Published online in 2011; the journal version corrects the earlier workshop algorithm.
+\href{https://doi.org/10.1007/s10817-011-9243-0}{doi:10.1007/s10817-011-9243-0}.
+
+\bibitem[Hartmanis and Stearns(1965)]{hartmanis1965complexity}
+Hartmanis, J., and Stearns, R.~E. (1965).
+On the computational complexity of algorithms.
+\emph{Transactions of the American Mathematical Society}, 117, 285--306.
+\href{https://doi.org/10.1090/S0002-9947-1965-0170805-7}{doi:10.1090/S0002-9947-1965-0170805-7}.
 
 \bibitem[Hertrich and Skutella(2023)]{hertrich2023knapsack}
 Hertrich, C., and Skutella, M. (2023).
@@ -964,6 +994,12 @@ Off-line reasoning for on-line efficiency: Knowledge bases.
 \emph{Artificial Intelligence}, 83(2), 229--239.
 \href{https://doi.org/10.1016/0004-3702(95)00015-1}{doi:10.1016/0004-3702(95)00015-1}.
 
+\bibitem[Riedmiller(2025)]{riedmiller2025dual}
+Riedmiller, C.~Z. (2025).
+\emph{Exploring the computational necessity of dual processes for intelligence}.
+MSc thesis, Institute for Logic, Language and Computation, University of Amsterdam, MoL-2025-18.
+\url{https://eprints.illc.uva.nl/2389/1/MoL-2025-18.text.pdf}.
+
 \bibitem[Rigo(2014)]{rigo2014}
 Rigo, M. (2014).
 \emph{Formal Languages, Automata and Numeration Systems 2: Applications to Recognizability and Decidability}.
@@ -1006,6 +1042,12 @@ Tadepalli, P., and Natarajan, B.~K. (1996).
 A formal framework for speedup learning from problems and solutions.
 \emph{Journal of Artificial Intelligence Research}, 4, 445--475.
 \href{https://doi.org/10.1613/jair.154}{doi:10.1613/jair.154}.
+
+\bibitem[Turing(1937)]{turing1937computable}
+Turing, A.~M. (1937).
+On computable numbers, with an application to the Entscheidungsproblem.
+\emph{Proceedings of the London Mathematical Society}, s2-42(1), 230--265.
+\href{https://doi.org/10.1112/plms/s2-42.1.230}{doi:10.1112/plms/s2-42.1.230}.
 
 \bibitem[Wen(2010a)]{wen2010mirrored}
 Wen, H.~X. (2010a).

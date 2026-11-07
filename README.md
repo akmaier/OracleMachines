@@ -52,6 +52,11 @@ The literature comparison attributes the utility criterion to Minton, discusses
 self-improving algorithms for polynomial-time tasks, and relates fast/slow
 arbitration to Milli et al. and SOFAI. These are established precedents for the
 paper's explanatory cost bounds.
+The follow-up search adds Goré and Nguyen's published global-caching solver for
+an EXPTIME-complete problem and Ferrara et al.'s model-checking preprocessing
+work. The finite-table construction criterion is explicitly attributed to
+standard computability, and the EXPTIME obstruction to the time hierarchy.
+These connections strengthen the perspective without establishing theorem novelty.
 Its final section identifies remaining research questions and an evaluation
 protocol; no experimental speedup or efficient exact-learning algorithm is claimed.
 
@@ -101,6 +106,9 @@ integrated into the manuscript's self-contained bibliography.
 The review also contains a [detailed proof audit](research/literature-review-2026-11-07.md#detailed-argument-audit-and-scope-beyond-np)
 covering every formal argument, the repaired accounting omission, and the limits
 of extending the result beyond NP.
+The [publication-status reassessment](research/literature-review-2026-11-07.md#publication-status-of-the-generalized-observations)
+maps the generalized claims to prior work and distinguishes checked publications,
+an MSc thesis, and sources whose full text could not be verified.
 
 ## License
 

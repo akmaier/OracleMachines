@@ -871,7 +871,43 @@ T_{\mathrm{local}}\leq H+q_\ell s(w+2)+q_p(2d+3).
 \end{equation}
 Here $H$ charges row retrieval and index construction, parsing, ordering, matching, representation conversion, verification, storage, and control. Native rechecking also belongs in $H$; it is not free because a Python acquisition is cached. Restarts may repeat that work. \texttt{InterfaceCosts.lean} proves the local evaluator, complete-table, short-circuit, and unknown-row bounds. It does not prove a small bound on $H$, on the number of affected rows, or on the native compiled runtime. \texttt{Interfaces.lean} proves the elimination equivalence. The JSON protocol, dependency bookkeeping, and database remain outside an end-to-end kernel theorem.
 
-Complete relation payloads select among constant, dense bitmap, sparse, and reduced ordered decision-diagram encodings by their actual serialized size. Reduced diagrams and their variable-order dependence are established \citep{bryant1986bdd}. In our implementation they encode acquired tables; they do not implement symbolic projection without table acquisition. More powerful BDD-based bucket elimination is already studied: \citet{mengel2023bdd} obtains efficient proofs for standard pigeonhole formulas using different elimination and BDD orders, but also proves exponential behavior after certain restrictions with those same orders. More generally, \citet{itsykson2024limits} give exponential lower bounds for OBDD conjunction, existential elimination, and reordering algorithms on specified unsatisfiable families. These are limitations of stated representations and operations, not lower bounds against every SAT algorithm or hybrid. They explain why compression and good performance on one expansion pattern cannot complete the unrestricted induction.
+Complete relation payloads select among constant, dense bitmap, sparse, and reduced ordered decision-diagram encodings by their actual serialized size. Reduced diagrams and their variable-order dependence are established \citep{bryant1986bdd}. In the first implementation they encode acquired tables. The follow-up below adds direct symbolic operations before row acquisition. More powerful BDD-based bucket elimination is already studied: \citet{mengel2023bdd} obtains efficient proofs for standard pigeonhole formulas using different elimination and BDD orders, but also proves exponential behavior after certain restrictions with those same orders. More generally, \citet{itsykson2024limits} give exponential lower bounds for OBDD conjunction, existential elimination, and reordering algorithms on specified unsatisfiable families. These are limitations of stated representations and operations, not lower bounds against every SAT algorithm or hybrid. They explain why compression and good performance on one expansion pattern cannot complete the unrestricted induction.
+
+\subsection{Restricted scaling of affected work}
+\label{sec:affected-scaling}
+
+We can now make the missing resource conditions more explicit. Fix an elimination order. Route each source factor to the first variable of its scope in that order. Its projected output enters a later bucket. An edit changes only buckets reachable from the changed sources. If recomputation yields the same output identity, propagation through that output stops. This supports local scheduling, although the reachable set can be the whole graph. Our indexed implementation retains these dependencies across immutable snapshots. A width violation triggers a new ordering attempt or checked fallback. Copying and serializing a plan, collecting active sources, and final checking remain charged global work.
+
+Suppose $\delta$ sources change, each affected node has at most $b$ successors, and the remaining dependency depth is at most $h$. Counting repeated paths gives the upper envelope $A_0=\delta$ and $A_{h+1}=\delta+bA_h$. Hence
+\begin{equation}
+A_h\leq\delta(b+1)^h.
+\label{eq:affected-envelope}
+\end{equation}
+This is an upper bound under stated graph conditions. It is not a bound independent of graph size. A chain can have small fanout and growing depth; a small edit can then affect every later summary. Reconvergent paths and unchanged outputs may reduce actual work.
+
+\begin{proposition}[Conditional scaling of an update stream]
+\label{prop:conditional-update}
+Let $N$ bound the input-size parameter used consistently throughout a finite stream of $m$ updates. For update $i$, let $a_i$ bound affected summaries, $r_i$ bound acquired rows per summary, $c_i$ bound work per row, and $H_i$ include all remaining work. Suppose
+\begin{equation}
+T_i\leq H_i+a_i r_i c_i,
+\qquad a_i,r_i,c_i,H_i\leq C(N+1)^k
+\label{eq:conditional-update-premises}
+\end{equation}
+for common $C,k\in\mathbb N$. Then
+\begin{equation}
+\sum_{i=1}^{m}T_i\leq m(C+C^3)(N+1)^{3k}.
+\label{eq:conditional-update-bound}
+\end{equation}
+If each update adds at most $B$ storage units, an immutable archive starting at $S_0$ uses at most $S_0+mB$ units. If every update adds at least one unit, a fixed archive capacity $K$ permits at most $K$ such updates.
+\end{proposition}
+
+\begin{proof}
+Put $p=(N+1)^k\geq1$. Each update costs at most $Cp+C^3p^3\leq(C+C^3)p^3$. Sum this inequality over the updates. Summing the nonnegative archive increments gives both storage statements. For \eqref{eq:affected-envelope}, induction gives $A_0=\delta$. If $A_h\leq\delta(b+1)^h$, then $A_{h+1}\leq\delta+b\delta(b+1)^h\leq\delta(b+1)^{h+1}$, since $(b+1)^h\geq1$.
+\end{proof}
+
+For table-based summaries, $r_i\leq2^{w_i}$ is sufficient. In particular, $w_i\leq\lfloor\log_2(N+1)\rfloor$ gives $2^{w_i}\leq N+1$. Direct symbolic operations require their own bounds on intermediate diagrams and operation counts; small final diagrams alone do not establish those bounds. The common constants and the overhead premise are essential. Here $H_i$ includes decomposition, source comparison, snapshot copying, matching, proof checking, restart, storage, and control. The number of updates needed to cover an input must also be charged. Polynomially many updates and polynomial archive increments yield a restricted polynomial ledger. Establishing these conditions uniformly for every SAT input, together with an appropriate machine simulation and coverage construction, remains the missing unrestricted argument.
+
+\texttt{Scaling.lean} checks these inequalities and the archive-capacity obstruction. It also checks restriction, conjunction, and existential projection for a symbolic decision-tree reference, and transfer from a verified unsatisfiable conjunct. The Python ROBDD manager implements sharing, memoization, and ordered operations as proposal optimizations. Native factor-row and original-formula checks remain authoritative. The tree semantics do not constitute an end-to-end proof of that manager, the scheduler, SQLite, or their machine costs.
 
 \subsection{Amortization while the domain grows}
 
@@ -1344,9 +1380,9 @@ Let $G$ be any previously compiled AIG, and compile $f$ into an extension $G'$ w
 Suppose $v$ satisfies $f$. Evaluate every node of the acyclic graph under $v$ and assign each auxiliary variable its node value. This extends $v$ to an assignment satisfying every clause of $D_{G'}$. Compiler correctness gives $r_f=1$ under that assignment. Hence $D_{G'}\land r_f$ is satisfiable, contradicting acceptance by the sound refutation checker. Previous formulas only contributed node definitions, each of which has such an extension for every original valuation; their roots were not asserted as permanent units.
 \end{proof}
 
-\texttt{IncrementalProof.lean} proves this implication and composes it with the pinned standard library's LRAT soundness theorem. Replayed clauses are proposals: the proof that uses them must check against the reconstructed definitions and current root. A forged saved clause therefore cannot become an unchecked axiom. Unsupported traces, excessive proof size, or a rejected certificate use independent checked fallback while budget remains. This removes the fresh-CDCL requirement for supported negative traces. It does not make checking incremental in cost: graph reconstruction and proof traversal may revisit retained work. The earlier adapter remains available for comparison.
+\texttt{IncrementalProof.lean} proves this implication and composes it with the pinned standard library's LRAT soundness theorem. Replayed clauses are proposals: the proof that uses them must check against the reconstructed definitions and current root. A forged saved clause therefore cannot become an unchecked axiom. Unsupported traces, excessive proof size, or a rejected certificate use independent checked fallback while budget remains. This removes the fresh-CDCL requirement for supported negative traces. The follow-up checks live traces against the existing native graph, avoiding history recompilation for that check. Once a refutation is accepted, its formula can be reused as a checked unsatisfiable conjunct of a later query. A selected archived core is revalidated once after restart. Each transfer checks the new conjunct relation; deleting a required conjunct invalidates reuse. Definition collection, general proof traversal, and restart may still revisit retained work. General per-clause incremental verification remains open. The earlier adapter remains available for comparison.
 
-Our new study uses six synthetic streams: chain, tree, and hub expansion; local replacement, deletion, and a distant bridge; shifts beyond the width cap; and negative-core extension followed by removal. Each of six modes receives the same logical snapshots. Three sequential repetitions with rotated mode order produce 108 runs and 792 correct answers, including 198 negative answers, under a three-second query deadline. No timeout or incorrect answer occurs. Full-input and delta transport are distinguished; every mode retains its completed results. The source, native binaries, inputs, phase ledgers, failures, and storage categories are recorded separately from all previous studies.
+Our first local-interface study uses six synthetic streams: chain, tree, and hub expansion; local replacement, deletion, and a distant bridge; shifts beyond the width cap; and negative-core extension followed by removal. Each of six modes receives the same logical snapshots. Three sequential repetitions with rotated mode order produce 108 runs and 792 correct answers, including 198 negative answers, under a three-second query deadline. No timeout or incorrect answer occurs. Full-input and delta transport are distinguished; every mode retains its completed results. The source, native binaries, inputs, phase ledgers, failures, and storage categories are recorded separately from all previous studies.
 
 \begin{table}[b]
 \centering
@@ -1374,8 +1410,48 @@ Delta transport reduces the local-edit stream from 29,436 to 4,810 JSON bytes. Y
 
 For the chain's delta run, 151 factor definitions share five relation payload objects, including unknown summaries; 359 acquired row entries and separate evidence remain stored. The full database is 528,384 bytes, compared with 253,952 bytes for checked solving. This is behavioral sharing, not whole-archive compression. In a separate encoding test on 4,096 known rows, parity uses a 266-byte decision diagram versus a 1,404-byte known/value bitmap; the seeded random relation selects the 1,404-byte bitmap. Diagram construction first receives the complete rows, and its time is recorded. Small encoded size alone says nothing about finding those rows cheaply.
 
-All 95 service tests pass. They include changed assumptions, poisoned partial rows, forged proof hints, restart, width fallback, and negative checks that disallow a fresh standalone solve. The Lean audit checks 1,554 declarations, including 837 theorem declarations. Before replay, we saved a full local database backup and row fingerprints. Every one of the 2,130 older result rows and 516 proofs is unchanged; 355 revalidated current-engine results and 129 proofs bring the totals to 2,485 results and 645 proofs. An independent semantic audit checks all 355 current inputs. Earlier experiment files are unchanged. These checks establish the implemented boundaries; unrestricted small width, compact exact representations, bounded total archive size, and a complete machine-cost proof remain open.
+At this earlier milestone, all 95 service tests passed. They include changed assumptions, poisoned partial rows, forged proof hints, restart, width fallback, and negative checks that disallow a fresh standalone solve. That Lean audit checked 1,554 declarations, including 837 theorem declarations. Before replay, we saved a full local database backup and row fingerprints. Every one of the 2,130 older result rows and 516 proofs is unchanged; 355 revalidated current-engine results and 129 proofs bring the totals to 2,485 results and 645 proofs. An independent semantic audit checks all 355 current inputs. Earlier experiment files are unchanged. These checks establish the implemented boundaries; unrestricted small width, compact exact representations, bounded total archive size, and a complete machine-cost proof remain open.
 
+
+\subsection{Indexed updates and direct symbolic acquisition}
+\label{sec:scaling-study}
+
+The follow-up implements the scheduler of Section~\ref{sec:affected-scaling} and direct reduced-diagram operations. Formula syntax produces a diagram; conjunction and existential projection operate on those diagrams before any Python table enumeration. A unique table and bounded memoization share repeated subproblems. Node or operation exhaustion invokes the checked lazy path while time remains. Native row verification remains independent and may still do substantial work. The service's local scope cap is unchanged.
+
+We also add measured route selection for full-input queries. The policy first samples checked solving and interface solving within input-length buckets. It then chooses the lower observed mean query cost, with periodic exploration. Only the chosen route runs. Observations include solving, verification and answer persistence. Selection, observation writes, and storage telemetry remain in the total elapsed ledger. This policy has no universal speedup or regret guarantee. It illustrates charged arbitration under a changing history.
+
+The experiment uses seven streams and seven modes, with three sequential repetitions and rotated mode order. It extends the chain to 128 edges, adds repeated distant edits, and includes 11 public SATLIB instances from random SAT, random UNSAT, graph coloring and AIM, together with a distribution shift. Every worker has a five-second query deadline and an 8\,MiB logical SQLite page cap. All 1,470 answers are correct, including 672 UNSAT answers, over 147 runs. Table~\ref{tab:scaling-study} reports the measured totals. There are no timeouts or failed answers. The largest logical database is 3,829,760 bytes, so the cap does not bind. WAL files, temporary storage and simultaneous process-tree RAM are outside this cap. A separate capacity test checks that reaching the limit preserves committed history and returns a resource error instead of a verdict.
+
+\begin{table}[b]
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{lrrrrr}
+\toprule
+Stream & Checked & Delta & Symbolic & Adaptive & Proof \\
+\midrule
+Local edits & 194.86 & 273.58 & 233.62 & 237.50 & 151.70 \\
+Width shift & 170.18 & 170.65 & 166.47 & 173.07 & 135.12 \\
+Proof reuse & 171.20 & 144.34 & 137.83 & 165.22 & 131.39 \\
+Chain to 128 edges & 185.64 & 341.59 & 293.10 & 186.51 & 165.38 \\
+Distant edits & 283.35 & 566.34 & 377.54 & 418.48 & 237.90 \\
+Public SATLIB & 267.18 & 663.01 & 662.76 & 361.60 & 515.63 \\
+Distribution shift & 233.18 & 436.85 & 433.00 & 257.17 & 320.35 \\
+\bottomrule
+\end{tabular}
+\caption{Median total stream milliseconds in the scaling follow-up. Delta uses indexed updates; Symbolic additionally uses direct BDD operations; Adaptive selects a full-input route; Proof uses the live incremental proof engine. Totals include setup and query work. Full-input interface and restarted proof modes, per-query timings, ranges, storage and source hashes are retained in the repository. The common page cap is not an equal-total-memory comparison.}
+\label{tab:scaling-study}
+\end{table}
+
+An endpoint edit in the 32-edge chain recomputes one bucket and reuses 32. It still copies 67 plan entries. A bridge can affect all 33 buckets; on the larger distant-edit stream, all 65 can be affected. Direct symbolic acquisition reduces that stream from 566.34\,ms to 377.54\,ms, while checked solving takes 283.35\,ms. Thus, avoiding row acquisition reduces one cost without ensuring overall savings. On public SATLIB, every input exceeds the interface heuristic cap and uses checked fallback. Adaptive selection reduces the full-input interface total from 675.13\,ms to 361.60\,ms; the checked baseline takes 267.18\,ms. Exploration and unsuccessful interface attempts remain charged.
+
+A separate symbolic construction builds parity on 128 variables without enumerating its $2^{128}$ rows. The retained diagram has 255 nodes and occupies 3,166 serialized bytes. Construction and projection allocate 48,897 nodes and charge 194,319 manager operations. This distinguishes retained size from peak construction state. Parity is a favorable family, and neither number bounds arbitrary intermediate diagrams. In the service chain experiment, the checked database uses 626,688 bytes, indexed delta uses 1,286,144, and symbolic delta uses 1,159,168. All preserve their completed results. Compression of a relation does not remove plans, partial rows, derivations, or history.
+
+Across the live and restarted proof modes, 54 queries transfer a checked negative core: 27 use an existing native fact and 27 first revalidate the archived proof. General proof traversal and restart costs remain. The revised service passes 106 tests; the Lean audit checks 1,650 declarations, including 879 theorem declarations. Tests cover random edits against exhaustive answers, symbolic operations, forged stored proposals, assumption removal, archive limits, routing persistence and standalone replay of transferred certificates.
+
+Before revalidation we saved another complete local backup. All 2,485 older results, 645 proofs, and other historical rows remain unchanged, as do all 44 earlier experiment files. Revalidation adds 355 current-engine results and 129 proofs, giving 2,840 results and 774 proofs. An independent semantic audit checks all 355 current inputs.
+
+These measurements support specific reuse mechanisms. Three repetitions on one machine do not resolve small timing differences. SATLIB supplies historical public cases, not a representative modern application suite. Nor does the experiment establish a uniform small-width ordering, a bound on arbitrary affected regions, polynomial symbolic intermediates, or the overhead premise of Proposition~\ref{prop:conditional-update}. Those obligations remain explicit.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
@@ -1435,7 +1511,7 @@ The bounded predictor demonstrates checked transfer to new witnesses. When does 
 Which certificates can the fast path produce and check within its budget? A short certificate may exist even when we cannot find it cheaply. As positive and negative verification differ, we should report their outcomes separately. A timeout on prediction can hand control to fallback when time remains; a service-wide deadline cannot guarantee that fallback completes. Proposition~\ref{prop:overhead} bounds additional work if we implement its solver and update-budget assumptions. Note that aborting the fallback as well changes the guarantee. The resulting service may return ``unknown'' and is incomplete.
 
 \paragraph{A reproducible comparison.}
-Sections~\ref{sec:cdcl-study}, \ref{sec:expanded-study}, \ref{sec:structural-service}, and~\ref{sec:incremental-proof-service} fix encodings, query order, solver versions, and local hardware, and compare solving, exact caching, and certified reuse. Larger studies should additionally impose comparable total memory budgets and use modern application suites. Test streams should include repeated queries, distinct held-out formulas, and changed workloads. Both satisfiable and unsatisfiable instances are needed. We should distinguish reuse of identical inputs from transfer to new ones. A frozen test stream and chronological records of online learning prevent us from using later answers earlier.
+Sections~\ref{sec:cdcl-study}, \ref{sec:expanded-study}, \ref{sec:structural-service}, \ref{sec:incremental-proof-service}, and~\ref{sec:scaling-study} fix encodings, query order, solver versions, and local hardware, and compare solving, exact caching, and certified reuse. The follow-up imposes a common logical archive-page cap; this is not a bound on WAL files, temporary storage, or total RAM. Larger studies should additionally impose comparable total memory budgets and use modern application suites. Test streams should include repeated queries, distinct held-out formulas, and changed workloads. Both satisfiable and unsatisfiable instances are needed. We should distinguish reuse of identical inputs from transfer to new ones. A frozen test stream and chronological records of online learning prevent us from using later answers earlier.
 
 For each method, we should report acquisition and label-generation costs, parameter and cache bytes, verification work, certified success, conditional fallback cost, and updates. Total cost must be reported against query count. Latency distributions show how long users wait; aggregate work also charges concurrent hardware. Timeouts and unsolved cases must remain in the comparison. If acquisition cost is unavailable, we can compare online performance but cannot establish end-to-end break-even. Section~\ref{sec:mechanism-study} implements a small synthetic comparison with actual acquisition and service costs. Section~\ref{sec:expanded-study} adds public instances, chronological learning, shift, and measured resources. Larger application suites, simultaneous process-tree memory, and competitive current solvers remain necessary for broader performance conclusions.
 

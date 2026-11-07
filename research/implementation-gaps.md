@@ -226,3 +226,33 @@ polynomial bounds on affected work, representation capacity, per-row work and
 all overhead remain explicit hypotheses. The full audit now checks 1,650
 declarations / 879 theorem declarations. The ROBDD optimizer and native protocol
 state are still outside an end-to-end kernel theorem.
+
+
+The follow-up benchmark has 147 sequential runs and 1,470/1,470 correct answers
+(672 UNSAT), including larger chains, distant edits, 11 public SATLIB instances
+and distribution shifts. An endpoint edit recomputes one of 33 buckets; a bridge
+can affect them all. Direct symbolic proposals improve the distant-edit stream
+from 566.34 ms to 377.54 ms, while checked solving takes 283.35 ms. All public
+instances exceed the interface width cap and use checked fallback. Adaptive
+selection reduces wasted interface work but does not beat checked solving here.
+Every mode has the same 8 MiB logical-page cap; no run reaches it. Total RAM and
+WAL storage are not bounded by that cap. Full results, peak allocations, archive
+costs, source hashes and uncertainty limits are retained in the scaling study.
+
+Remaining obligations: avoid global plan/source copying and final scans; bound
+or predict affected regions under edits; improve symbolic intermediate size and
+variable order with charged matching; reuse general verified proof fragments;
+prove native protocol/optimizer refinement and full machine costs; bound total
+process-tree memory; evaluate modern application suites and stronger routing.
+The uniform polynomial coverage/acquisition/representation/verification bounds
+for all SAT instances remain unproved. No unrestricted lower bound is claimed.
+
+
+Final verification: 106 tests pass; all 27 earlier manuscript proof texts are
+unchanged, and the conditional scaling proposition adds one proof. The rebuilt
+45-page PDF has no overfull boxes or unresolved references and was visually
+reviewed. A new backup preserves the live archive; all 2,485 old results, 645
+proofs and other older rows remain unchanged, along with 44 previous experiment
+files. There are now 2,840 results and 774 proofs, including 355 revalidated
+current-engine inputs independently audited. Validation/source hashes and row
+fingerprints are recorded with the scaling study.

@@ -114,10 +114,10 @@ The five-step extension now adds local bucket elimination, persistent add/replac
 remove snapshots, lazy checked rows, semantic relation storage, and checked
 incremental LRAT. Use `--interfaces` for the delta API and `--incremental-proofs`
 for the proof-enabled live CDCL path; they can be combined for checked fallback.
-The [new study](experiments/results/interfaces/README.md) reports 792 correct
+The [first interface study](experiments/results/interfaces/README.md) reports 792 correct
 answers, local reuse and transport savings, and the overheads of checking,
-restart and archival storage. All 95 tests pass; Lean audits 837 theorem
-declarations. All 2,130 older results and 516 proofs remain unchanged, with 355
+restart and archival storage. That milestone passed 95 tests and audited 837
+theorem declarations. All 2,130 older results and 516 proofs remain unchanged, with 355
 newly revalidated results and 129 proofs added. The manuscript now includes the
 local elimination and shared-circuit proof arguments, their cost boundaries,
 and published BDD representation limits. Small width, affected-state size and
@@ -237,3 +237,20 @@ an unconditional polynomial-time conclusion.
 ## License
 
 This repository includes an [MIT license](LICENSE).
+
+
+## Scaling follow-up
+
+The solver now supports affected-bucket updates, direct bounded BDD operations,
+live graph/proof reuse, checked negative-core transfer, logical archive caps and
+measured full-query route selection. All historical results remain persistent.
+The [scaling study](experiments/results/scaling/README.md) records 1,470 correct
+answers, including 672 UNSAT, across 147 runs. **106 tests pass**; the Lean audit
+checks **879 theorem declarations**. The [formal notes](formal/README.md) state
+conditional resource bounds and the remaining refinement obligations.
+
+Reuse reduces selected acquisition/planning costs, but checked solving remains
+faster on several measured streams. Direct symbolic compression does not give a
+polynomial bound on arbitrary intermediate diagrams. Logical database limits do
+not bound whole-process memory; capacity exhaustion preserves history and stops
+acquisition. The unrestricted polynomial SAT argument remains open.

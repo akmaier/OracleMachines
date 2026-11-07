@@ -367,8 +367,8 @@ The native Lean compiler maintains a shared AIG and stable variable identities.
 Only its definitional clauses are permanent; a query root is an assumption.
 CaDiCaL's tracer exports original/derived clause IDs and antecedents. The adapter
 archives backward proof dependencies and reconstructs an LRAT certificate for
-each negative query. The Lean checker rebuilds the graph and checks the entire
-reachable proof against the current root. SAT witnesses still pass the original
+each negative query. The Lean checker uses the existing graph for live traces and checks the reachable
+proof against the current root. Standalone certificate replay reconstructs the graph. SAT witnesses still pass the original
 formula evaluator. A rejected or unavailable incremental certificate falls back
 to independent checked solving; it never establishes UNSAT.
 
@@ -389,3 +389,56 @@ traces, not the cost of incremental proof checking or arbitrary proof events.
 Component wrappers retain their supported base-certificate formats; combining
 `--components` with `--incremental-proofs` uses the checked base solver for leaf
 acquisition. Interface expansion fallback honors `--backend lean`.
+
+
+## Indexed updates, symbolic proposals, and measured selection
+
+The default interface planner now builds incidence indexes once and updates them
+as variables are eliminated. Delta snapshots retain the bucket plan. Changed
+sources schedule only affected buckets in the retained order; unchanged output
+identities stop propagation. Plan copies, active-source comparisons, snapshot
+serialization and final checks remain charged global work. A width violation
+tries a fresh ordering and then checked fallback.
+
+`--symbolic` implies interfaces and builds bounded ROBDD proposals directly from
+formula syntax, conjunction, restriction and existential projection. It does not
+first enumerate a truth table. Symbolic objects are persisted, while native row
+checks and final original-formula checks remain mandatory. The manager caps
+allocated nodes (50,000), computed-table entries (200,000) and work per query
+(500,000 manager operations). On exhaustion it uses the checked lazy path if
+time remains. Reference-tree semantics are proved; Python unique-table and memo
+bookkeeping are not kernel-verified. Small-scope row cache capacity and the
+service interface cap remain in force.
+
+```sh
+python3 solver/persistent.py --symbolic --cache /tmp/oracle-symbolic.db serve
+python3 solver/persistent.py --adaptive --max-archive-bytes 8388608 serve
+```
+
+`--adaptive` applies to full-input solve requests. It samples checked/interface
+routes by input-length bucket, uses prior measured mean query durations, and
+periodically explores. Only the chosen route runs. Selection and observation
+persistence have separate elapsed phases; the learning target includes solving,
+checking and answer persistence but excludes the observation's own write and
+subsequent storage telemetry (both still included in total wall time). Historical
+observations persist. Exact cache hits are not treated as route observations.
+Delta requests continue using their explicit interface policy. This selector has
+no universal speedup, regret, or workload-shift guarantee.
+
+`--incremental-proofs` now retains verified negative cores in the native session.
+A matching archived incremental refutation is checked once after restart, then
+reused only after checking its conjunct relation to each new formula. Native
+facts are not restored from an unchecked flag. The standalone `conjunct`
+certificate contains the base formula and original proof; it remains auditable.
+Generic per-clause verification reuse is still open.
+
+`--max-archive-bytes` sets SQLite's logical main-database page limit. At capacity,
+acquisition returns a resource error and retains all committed history. It never
+turns capacity failure into UNSAT. A cap smaller than an existing database is
+rejected. This option does not bound WAL growth, temporary files, process RAM, or
+another connection that chooses a different cap. Per-query `storage` records
+report logical pages, physical database/WAL sizes and these limitations. See the
+[SQLite documentation](https://www.sqlite.org/pragma.html#pragma_max_page_count).
+
+The scaling study and raw measurements are in
+[`experiments/results/scaling`](../experiments/results/scaling/README.md).

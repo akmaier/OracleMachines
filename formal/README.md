@@ -347,4 +347,25 @@ no complete CDCL, database, serializer or native machine instruction theorem is
 claimed. The new interface path and optional `--incremental-proofs` extend the
 historical milestone descriptions above.
 
-The current full build audits 1,554 declarations, including 837 theorem declarations.
+The local-interface milestone audited 1,554 declarations, including 837 theorem declarations.
+
+
+## Restricted scaling obligations
+
+`Scaling.lean` adds symbolic-tree restriction, conjunction and existential
+projection correctness; checked conjunct-refutation transfer; a depth/fanout
+upper envelope for affected work; and conditional update/stream/archive bounds.
+If affected summaries, row capacity, per-row work and all overhead each admit
+one bound C*(N+1)^k, declared update work is at most (C+C^3)*(N+1)^(3*k).
+Logarithmic local width suffices to bound complete-table row capacity by N+1.
+Coverage, acquisition and the other resource premises are not inferred from
+finite-stage correctness. The archive theorem also proves that retaining at
+least one new unit per update cannot support unbounded updates under a fixed cap.
+
+The symbolic reference is a tree, not a proof of Python's reduced-DAG optimizer.
+The live LRAT check reuses the existing AIG and applies the established soundness
+theorem for arbitrary previous graphs. Native verified-core state is replayed
+from checked certificates after restart; JSON/state bookkeeping still needs an
+end-to-end refinement theorem. No whole-service bit-machine bound is claimed.
+
+The full build now audits **1,650 declarations / 879 theorem declarations**.

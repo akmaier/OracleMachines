@@ -59,6 +59,14 @@ README.md
 LICENSE
 ```
 
+## Literature review
+
+The [annotated literature review](research/literature-review-2026-11-07.md) compares
+the draft with work on neural advice, speedup learning, compilation, and failed
+complexity proofs, including Deolalikar and Wen. It includes
+[supplementary BibTeX](research/related-work.bib) and saved OpenAlex/SemOpenAlex
+query evidence.
+
 ## License
 
 This repository includes an [MIT license](LICENSE).

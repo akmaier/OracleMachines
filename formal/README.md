@@ -40,6 +40,7 @@ native-decision axioms fail the audit. Warnings are treated as errors.
 | Explicit evaluator machine | [StackMachine.lean](OracleMachines/StackMachine.lean): `compile_machine_steps`, `evalMachine_correct`, `evalMachine_space` | One transition handles one instruction or one unary-index lookup step. Execution takes exactly the evaluator's reported count. Every reachable state has at most `2*A + L + S + 1` data units for assignment length `A`, encoded program length `L`, and initial stack length `S`. |
 | Proposition 12.4: restricted core bound | `solveRun_bound`, `solveRun_fixed_width` | The same counted implementation has `T <= W^2 + 2^v (W+13) + 2`; fixing `v <= K` gives coefficient `14*2^K+3` and degree 2 in encoding length plus one. |
 | Binary parsing and combined decision | [Parsing.lean](OracleMachines/Parsing.lean): `decodeRun_value`, `decodeRun_bound`, `decideRun_sat`, `decideRun_unsat`, `decideRun_fixed_width` | The counted parser agrees with the existing parser, costs at most `8L+7`, and composes with the solver. On `encode f` with width at most `K`, total counted decision work is at most `(14*2^K+12)(L+1)^2`. |
+| Coverage of every accepted input | [Canonical.lean](OracleMachines/Canonical.lean): `encode_decode`, `parseProgram_decode`, `decideRun_valid_fixed_width`, `decideRun_valid_logarithmic_width`, `parsed_eval_steps`, `parsed_eval_space` | Successful decoding implies `encode f = bits`. The restricted decision bounds and evaluator transition/data-size bounds therefore apply to arbitrary accepted requests, measured against the original binary length. |
 | Growing variable count | [Restricted.lean](OracleMachines/Restricted.lean): `decideRun_small_assignment_space`, `decideRun_logarithmic_width`, `small_assignment_space_requires_length` | If `2^v <= L+1` (in particular `v <= floor(log2(L+1))`), parser plus decision costs at most `24(L+1)^2`. Enforcing that premise by padding requires length at least `2^v-1`. |
 | Certified adaptive policy | [Hybrid.lean](OracleMachines/Hybrid.lean): `hybridRun_correct`, `serve_correct`, `hybridRun_overhead`, `actual_savings_identity`, `repeated_hit_savings` | A previously acquired witness is checked on each new formula; fallback is exact. Costs include validation, fallback, copying the acquired witness, and stream control. The savings identity follows the actual changing state. |
 | Accumulated exact results | [Cache.lean](OracleMachines/Cache.lean): `cache_lookup_sound`, `cacheStep_correct`, `cacheStep_exact`, `cacheStep_retains` | Every completed result remains available, including negative answers; lookup and insertion preserve exactness, assuming the loaded cache is intact. |
@@ -140,6 +141,13 @@ a promised-family result. Padding that retains the variable range and enforces
 the premise requires `L >= 2^v-1`; it can therefore require exponential length
 and does not give a polynomial reduction from all SAT inputs.
 
+`Canonical.lean` checks the converse round trip: `decode bits = some f` implies
+`encode f = bits`. The index parser consumes precisely its unary prefix, the
+instruction parser accounts for every input bit, and assembly reconstructs
+exactly the consumed program. Thus the bounds on `encode f` cover **every**
+successfully decoded request, using the request's own length. Malformed input
+retains its separate rejection bound.
+
 Counter arithmetic, garbage collection, physical memory traffic, and
 compilation to a bit-machine still require a separate simulation argument.
 
@@ -161,6 +169,10 @@ compilation, parser execution, assignment enumeration, and the full solver do
 not yet have a combined transition-machine simulation. The native service
 continues to use `evalRun`; its evaluator count is realized exactly by this
 separately proved machine, rather than being a measurement of native instructions.
+`parsed_eval_steps` and `parsed_eval_space` apply these conclusions directly to
+the program produced by parsing a valid request. This machine evaluates **one
+assignment**; a false result is not an UNSAT verdict. Exhaustive search is still
+needed for a negative satisfiability answer.
 
 The native executable and [persistent service](../solver/README.md) use this
 verified core. SQLite retains complete SAT/UNSAT results and a reusable witness

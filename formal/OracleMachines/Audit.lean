@@ -4,6 +4,7 @@ import OracleMachines.Reuse
 import OracleMachines.Cache
 import OracleMachines.Restricted
 import OracleMachines.StackMachine
+import OracleMachines.Canonical
 import Lean.Util.CollectAxioms
 
 /-!

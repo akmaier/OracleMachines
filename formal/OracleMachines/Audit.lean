@@ -5,7 +5,7 @@ import OracleMachines.Cache
 import OracleMachines.Restricted
 import OracleMachines.StackMachine
 import OracleMachines.Canonical
-import OracleMachines.Search
+import OracleMachines.Knowledge
 import Lean.Util.CollectAxioms
 
 /-!

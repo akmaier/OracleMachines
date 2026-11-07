@@ -43,6 +43,8 @@ native-decision axioms fail the audit. Warnings are treated as errors.
 | Coverage of every accepted input | [Canonical.lean](OracleMachines/Canonical.lean): `encode_decode`, `parseProgram_decode`, `decideRun_valid_fixed_width`, `decideRun_valid_logarithmic_width`, `parsed_eval_steps`, `parsed_eval_space` | Successful decoding implies `encode f = bits`. The restricted decision bounds and evaluator transition/data-size bounds therefore apply to arbitrary accepted requests, measured against the original binary length. |
 | Growing variable count | [Restricted.lean](OracleMachines/Restricted.lean): `decideRun_small_assignment_space`, `decideRun_logarithmic_width`, `small_assignment_space_requires_length` | If `2^v <= L+1` (in particular `v <= floor(log2(L+1))`), parser plus decision costs at most `24(L+1)^2`. Enforcing that premise by padding requires length at least `2^v-1`. |
 | Certified adaptive policy | [Hybrid.lean](OracleMachines/Hybrid.lean): `hybridRun_correct`, `serve_correct`, `hybridRun_overhead`, `actual_savings_identity`, `repeated_hit_savings` | A previously acquired witness is checked on each new formula; fallback is exact. Costs include validation, fallback, copying the acquired witness, and stream control. The savings identity follows the actual changing state. |
+| Lazy search and pruning | [Search.lean](OracleMachines/Search.lean): `partialRun_sound`, `solveSparse_correct`, `solveSparse_certificate`, `solveSparse_nodes`, `materialize_satisfies` | Branch only on distinct occurring variables; partial truth and falsity are sound; every UNSAT search returns a checked refutation; at most `2^(d+1)-1` nodes; dense witness conversion preserves satisfaction. |
+| Reusable positive and negative certificates | [Knowledge.lean](OracleMachines/Knowledge.lean): `probeWitnesses_sound`, `probeRefutations_checked`, `solveSearch_verified`, `reuseSearch_verified`, `reuseSearch_correct` | Arbitrary proposed witnesses and refutations are checked against the current formula. The combined policy decides SAT correctly, without trusting proposal provenance. |
 | Accumulated exact results | [Cache.lean](OracleMachines/Cache.lean): `cache_lookup_sound`, `cacheStep_correct`, `cacheStep_exact`, `cacheStep_retains` | Every completed result remains available, including negative answers; lookup and insertion preserve exactness, assuming the loaded cache is intact. |
 | Obligations for another representation | [Invariant.lean](OracleMachines/Invariant.lean): `expansion_invariant`, `answer_at_cover` | The base, preservation, and exact new-coverage hypotheses imply exactness at every finite stage and at a covering stage for each input. |
 | Construction recurrence | [Resources.lean](OracleMachines/Resources.lean): `cumulative_eq` | Recursive construction cost equals base cost plus every expansion cost. |
@@ -97,7 +99,7 @@ unproved. This refers to general satisfiability, not UNSAT (unsatisfiability).
 The conventional NP-completeness of SAT and coNP-completeness of UNSAT are
 not formalized as complexity-class claims here.
 
-## Concrete cost model
+## Reference implementation and its concrete cost model
 
 `CostedSAT.lean` operates on an already parsed formula. It charges formula-node
 dispatch, Boolean operations, sequential list-cell access, and cell allocation.
@@ -167,13 +169,14 @@ physical heap usage: addresses, list headers, serialization delimiters, and
 garbage collection remain outside it. The code must already be supplied; it can
 come directly from the parser, without recompiling the formula. Parser execution,
 assignment enumeration, and the full solver do not yet have a combined
-transition-machine simulation. The native service
-continues to use `evalRun`; its evaluator count is realized exactly by this
-separately proved machine, rather than being a measurement of native instructions.
+transition-machine simulation. The native service uses `evalRun` when checking complete witness proposals; its
+evaluator count is realized exactly by this separately proved machine. The new
+partial evaluator has no corresponding transition-machine proof yet.
 `parsed_eval_steps` and `parsed_eval_space` apply these conclusions directly to
 the program produced by parsing a valid request. This machine evaluates **one
-assignment**; a false result is not an UNSAT verdict. Exhaustive search is still
-needed for a negative satisfiability answer.
+assignment**; a false result is not an UNSAT verdict. The reference solver
+searches all assignments for a negative answer; the new solver instead supplies
+a tree of sound partial contradictions covering both branches at each split.
 
 The next proof obligations are concrete:
 
@@ -184,16 +187,48 @@ The next proof obligations are concrete:
    with charged access, copying, and index operations. The current data-size
    potential is useful for this, but is not itself that simulation.
 3. Bound the full solver's live data, rather than just one evaluation. The
-   present engine eagerly materializes exponentially many assignments;
-   efficient evaluation alone does not remove that cost.
+   reference engine materializes all assignments. The new engine avoids that
+   list but may construct an exponential refutation tree. Its search-stack and
+   certificate allocation need their own bound.
 
 A general polynomial SAT algorithm is a separate algorithmic requirement.
 Completing these verification steps for the current exhaustive solver will not
 remove its exponential assignment dependence.
 
-The native executable and [persistent service](../solver/README.md) use this
-verified core. SQLite retains complete SAT/UNSAT results and a reusable witness
-across process restarts. The functional cache invariant is checked in Lean;
+## Current lazy search and certificate portfolios
+
+`Search.lean` provides the current fallback. `occursRun` and `distinctRun` collect
+the distinct indices without renaming them. A sparse assignment stores only
+chosen variables. `partialRun` returns true, false, or unknown; a known value
+holds for every extending total valuation. `searchSparse` branches only while
+unknown, with false tried first. It produces a satisfying sparse assignment or
+a refutation tree. `materialize_satisfies` justifies the dense compatibility
+witness returned by the service. The search bound is `nodes + 1 <= 2^(d+1)` for
+`d` distinct indices. It bounds nodes, not elapsed time or heap allocation.
+
+`checkRefutation_sound` proves that accepting a tree excludes every satisfying
+valuation. A conflict leaf must evaluate to false under the current partial
+assignment. A split must validate both children. `Knowledge.lean` composes this
+checker with complete-witness checking and the fallback, proving correctness
+for arbitrary proposal lists. The Python/native interface limits each portfolio
+to four entries; correctness does not rely on this limit. A previous refutation
+may prove a related query, including a conjunction extension, only after checking
+it against that query. No input-shape heuristic or cached negative bit suffices.
+
+These definitions charge variable collection, deduplication, sparse lookup,
+partial evaluation, search, witness materialization, and proposal checking in a
+new abstract ledger. The fixed-width coefficients and one-witness overhead bound
+above still refer to the earlier eager solver and policy. They are not claimed
+for the new ledger. No composed transition-machine, physical memory, or general
+polynomial resource bound has been added for this fallback. Unit propagation,
+clause learning, and structural-width algorithms remain future implementations.
+
+The default audit now checks 973 declarations, including 533 theorem declarations
+(with generated helpers), and accepts only the standard logical axioms.
+
+The native executable and [persistent service](../solver/README.md) use the lazy
+core and verified portfolios by default. SQLite retains complete SAT/UNSAT
+results, witnesses, and refutations across process restarts. The functional cache invariant is checked in Lean;
 database transactions, serialization, engine fingerprinting, and the Python
 adapter are integration-tested, not kernel-verified. Build the executable with
 `lake build oracleSolver`. [Workload experiments](../experiments/README.md)

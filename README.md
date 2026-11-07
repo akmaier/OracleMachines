@@ -68,13 +68,16 @@ expansion. The correctness induction supplies neither bound by itself and does
 not prove P = NP.
 The executable development now supplies an exact SAT solver, a counted binary
 parser, polynomial bounds for fixed or logarithmically growing variable ranges,
-and a certified witness-reuse policy.
+and certified witness reuse. The current fallback adds lazy search on distinct
+occurring variables, sound partial-assignment pruning, and reusable checked
+refutation trees. Bounded witness and refutation portfolios survive restarts;
+all earlier results remain archived.
 An explicit evaluator machine realizes the reported evaluation count exactly
 and has a checked bound on intermediate data size. A converse encoding proof
 extends the restricted bounds to every accepted binary request.
 The [persistent solver](solver/README.md) retains every completed result across
 restarts. The [reproducible study](experiments/README.md) compares reuse with repeated
-exhaustive solving;
+lazy solving and retains the earlier exhaustive reference;
 they do not establish a competitive SAT solver or efficient exact learning on
 unrestricted instances.
 
@@ -151,8 +154,10 @@ for a **fixed** variable cap and for variable width at most `floor(log2(L+1))`,
 where `L` is the encoded length. These restrictions do not give a bound for all
 SAT inputs or a formalization of P versus NP.
 The evaluator's transition and data-size proofs are a component of a runtime
-argument; a combined machine simulation for parsing and exhaustive search
-remains open.
+argument for complete-witness evaluation; combined machine simulations for
+parsing, partial evaluation, and full search remain open. The lazy search has a
+checked bound of `2^(d+1)-1` nodes for `d` distinct occurring variables. Refutation
+size can still be exponential.
 
 ## Persistent solver
 

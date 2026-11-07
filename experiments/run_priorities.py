@@ -89,6 +89,7 @@ def worker(mode,cases,cap,timeout):
                     setup=time.perf_counter_ns()
                     if mode!='direct' and service is None:service=(PolaritySolver if mode=='polarity' else PersistentSolver)(directory/'s.db',**options)
                     row['setup_ns']=time.perf_counter_ns()-setup
+                    if service is not None:service.last_metrics={}
                     if mode=='direct':
                         variables,clauses=parse_dimacs(c['dimacs'])
                         path=directory/'query.cnf';path.write_text(dimacs(clauses,variables))

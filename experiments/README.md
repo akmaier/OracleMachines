@@ -320,3 +320,28 @@ process-tree/scratch samples, chain-update counters and symbolic microstudies.
 The report explains partial stream times, API differences, source hashes,
 reproduction commands and the limits of sampled memory. No earlier study is
 replaced. All previous live archive rows and 63 historical files are preserved.
+
+## Seven-priority follow-up
+
+The [priority study](results/priorities/README.md) uses a frozen chronological
+stream and previously unused application members. Its eight modes include a
+checked deterministic polarity proposal and matched live/restarted incremental
+proof solving. Separate diagnostics measure distinct width-four relations,
+semantic equality with current provenance, deletion, restart and checked source
+compilation. The [pilot](results/priorities-pilot/README.md) retains the direct
+reference's SATLIB-normalization defect; the final comparison reruns every mode
+after that harness-only repair.
+
+```sh
+python3 experiments/run_priorities.py \
+  --artifact /path/to/oracle-tacas2026.zip \
+  --archives /path/to/oraclemachines-satlib \
+  --output /tmp/oracle-priority-new-run
+```
+
+Each output directory must be new. The source manifests record member selection,
+labels and hashes; compressed input/run files preserve all planned queries and
+failures. Three-second query deadlines, a 64 MiB logical archive cap, and sampled
+process-tree/scratch watchdogs are declared separately. They are not a hard
+total-memory or physical-storage guarantee. The direct CNF reference does not
+use the service's certificate/archive boundary.

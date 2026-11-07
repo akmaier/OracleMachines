@@ -34,6 +34,18 @@ class PriorityTests(unittest.TestCase):
         with redirect_stdout(out):worker('direct',[case],64*1024**2,3)
         self.assertEqual(json.loads(out.getvalue())['status'],'ok')
 
+    def test_preallocation_failure_does_not_borrow_previous_ledger(self):
+        from contextlib import redirect_stdout
+        from io import StringIO
+        import json
+        from experiments.run_priorities import worker
+        case=dict(stage=0,name='first',phase='test',expected=True,encoding_bytes=3,dimacs='p cnf 1 1\n1 0\n')
+        out=StringIO()
+        with redirect_stdout(out):worker('checked',[case,case|{'stage':1,'encoding_bytes':9*1024**2}],64*1024**2,3)
+        rows=[json.loads(line) for line in out.getvalue().splitlines()]
+        self.assertEqual(rows[0]['status'],'ok');self.assertEqual(rows[1]['status'],'error')
+        self.assertEqual(rows[1]['failure_metrics'],{})
+
     def test_checked_cnf_compilation_matches_exhaustive_source(self):
         rng=random.Random(1781)
         with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:

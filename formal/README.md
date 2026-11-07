@@ -35,6 +35,7 @@ native-decision axioms fail the audit. Warnings are treated as errors.
 | Explicit table size | `length_words`, `length_domain`, `table_answer_count` | There are `2^n` words at length `n` and `2^(n+1)-1` answer entries through stage `n`, including the empty word. |
 | Concrete SAT solver | [SAT.lean](OracleMachines/SAT.lean): `solve_correct`, `solve_false_iff`, `witness_sound`, `no_witness_iff`, `extend_exact` | Exhaustive finite-assignment search decides ordinary propositional satisfiability and supplies checked witnesses. Appending a finite batch of its answers preserves exactness. |
 | Binary SAT and bounded expansion | [Encoding.lean](OracleMachines/Encoding.lean): `decode_encode`, `encode_injective`, `solveEncoded_correct`, `satTable_correct`, `expandSAT_eq` | A concrete binary postfix encoding round-trips. The binary solver decides its defined SAT language, and incremental expansion produces the exact next bounded-domain table. |
+| Executable cost semantics | [CostedSAT.lean](OracleMachines/CostedSAT.lean): `readRun_trace`, `evalRun_trace`, `solveRun_value`, `solveRun_bound`, `solveRun_fixed_width` | The instrumented evaluator realizes an explicit operational trace, the instrumented solver returns the verified solver's witness, and its counted work has a bound polynomial in encoding length for a fixed variable cap. |
 | Obligations for another representation | [Invariant.lean](OracleMachines/Invariant.lean): `expansion_invariant`, `answer_at_cover` | The base, preservation, and exact new-coverage hypotheses imply exactness at every finite stage and at a covering stage for each input. |
 | Construction recurrence | [Resources.lean](OracleMachines/Resources.lean): `cumulative_eq` | Recursive construction cost equals base cost plus every expansion cost. |
 | Arithmetic in Corollary 12.2 | `polynomial_stage_sum`, `full_polynomial_bound`, `bounded_expansion_cost` | Shared polynomial stage budgets yield a single polynomial bound including reading, base construction, expansion, and evaluation. |
@@ -76,14 +77,45 @@ concrete solver on a typed propositional syntax and proves its correctness;
 that result requires no exact-solver hypothesis. `Encoding.lean` supplies a
 binary postfix parser, proves encoding round trips, and connects the solver to
 exact expansion on all binary words up to each length. Malformed encodings are
-rejected. Execution-cost proofs are the next obligation.
+rejected. `CostedSAT.lean` now connects an executable solver core to explicit
+operation counts and proves its correctness and cost bounds together.
 
 `PolynomiallyBounded` is a predicate on numerical functions. It is **not** a
-formal definition of the class P. The project does not model Turing-machine or
-RAM execution, verify the charged costs of a learned implementation, or
-formalize NP-completeness, advice classes, or the time hierarchy. In particular,
-the formal conditional bound does not discharge the missing uniform SAT
-construction and evaluation budgets.
+formal definition of the class P. The project does not yet prove a simulation
+from its abstract cost semantics to Turing-machine or compiled Lean execution,
+or formalize NP-completeness, advice classes, or the time hierarchy. In
+particular, the unrestricted uniform SAT budgets remain unproved.
+
+## Concrete cost model
+
+`CostedSAT.lean` operates on an already parsed formula. It charges formula-node
+dispatch, Boolean operations, sequential list-cell access, and cell allocation.
+`ReadTrace` and `EvalTrace` are inductive execution judgments; the executable
+functions' returned answers and counts realize those judgments. Both operands
+of a conjunction are evaluated. Variable indices are treated as unary data;
+lookup walks the assignment, and width discovery charges unary comparisons.
+Assignment generation charges prefix allocation, list copying, and control.
+The counters are instrumentation; their own integer arithmetic is not included.
+No conversion of these units to elapsed machine instructions is claimed.
+
+For evaluation weight `W`, variable width `v`, and binary encoding length `L`,
+the checked solver bound is
+
+```text
+work <= W^2 + 2^v (W + 13) + 2,     W <= L.
+```
+
+For any **fixed** variable cap `K` with `v <= K`, Lean proves
+
+```text
+work <= (14 * 2^K + 3) * (L + 1)^2.
+```
+
+This is a restricted result with an explicit exponential dependence on `K`.
+It is not a polynomial bound with shared constants as `K` grows. The full table
+still has exponentially many entries. Binary parsing, garbage collection,
+physical memory traffic, and compilation of this abstract evaluator to a
+bit-machine are outside the counted-core theorem.
 
 The rest of the paper's neural, oracle, certification, and expected-savings
 arguments retain their conventional proofs and literature audit. This directory

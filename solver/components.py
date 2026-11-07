@@ -159,7 +159,7 @@ class ComponentSolver:
             with service._phase("component_lookup"):
                 entry = self.entry(component["key"])
             if entry is None:
-                acquired = service._fast_live(component["bits"], allow_components=False)
+                acquired = service._fast_live(component["bits"], allow_components=False, allow_interfaces=False)
                 parse_work += acquired["parse_work"]
                 entry = dict(bits=component["bits"], answer=acquired["answer"], witness=acquired["witness"],
                              certificate=acquired.get("certificate"))

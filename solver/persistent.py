@@ -30,6 +30,7 @@ from solver.incremental import DEFAULT_INCREMENTAL, Incremental
 from solver.learning import Predictor, features
 from solver.knowledge_store import KnowledgeStore
 from solver.components import ComponentSolver
+from solver.interfaces import InterfaceSolver
 DEFAULT_ENGINE = ROOT / "formal/.lake/build/bin/oracleSolver"
 DEFAULT_CACHE = ROOT / "solver/.cache/results.sqlite3"
 PORTFOLIO_SIZE = 4
@@ -75,7 +76,7 @@ class PersistentSolver:
                  backend: str = "auto", cadical: Path | None = None, timeout: float = 30,
                  query_timeout: float = 30, verify_cache: bool = False,
                  incremental: bool = False, learned: bool = False, reuse_exact: bool = True,
-                 components: bool = False,
+                 components: bool = False, interfaces: bool = False, max_interface: int = 3,
                  max_input_bytes: int = 8 * 1024**2, max_message_bytes: int = 64 * 1024**2,
                  max_proof_bytes: int = 16 * 1024**2):
         start = time.perf_counter_ns()
@@ -114,7 +115,7 @@ class PersistentSolver:
                 # Serialize migrations as well as ordinary writes.
                 self.db.execute("BEGIN IMMEDIATE")
                 version = self.db.execute("PRAGMA user_version").fetchone()[0]
-                if version not in (0, 1, 2, 3, 4, 5, 6):
+                if version not in (0, 1, 2, 3, 4, 5, 6, 7):
                     raise ValueError(f"Unsupported cache schema {version}; records left unchanged")
                 self.db.execute("""CREATE TABLE IF NOT EXISTS results (
                     engine TEXT NOT NULL, bits TEXT NOT NULL, answer INTEGER NOT NULL,
@@ -151,11 +152,12 @@ class PersistentSolver:
                             ON p.engine=r.engine AND p.bits=r.bits WHERE r.answer=0""").fetchall():
                         self._index_candidate(row["engine"], "proof", row["bits"], row["certificate"], row["created_ns"])
                 KnowledgeStore.create(self.db)
-                self.db.execute("PRAGMA user_version=6")
+                self.db.execute("PRAGMA user_version=7")
         except Exception:
             self.db.close()
             raise
         self.process: subprocess.Popen | None = None
+        self.interfaces = InterfaceSolver(self, max_interface) if interfaces else None
         self.components = ComponentSolver(self.db, self.engine_id) if components else None
         if self.incremental:
             bridge = hashlib.sha256(DEFAULT_INCREMENTAL.read_bytes()).hexdigest()
@@ -306,7 +308,16 @@ class PersistentSolver:
         return self._request({"bits": bits, "mode": "verify_certificate", "certificate": certificate})["valid"]
 
     def _fast_live(self, bits: str, candidates=None, proofs=None, *, allow_components=True,
-                   allow_incremental=True) -> dict:
+                   allow_incremental=True, allow_interfaces=True) -> dict:
+        interface_fallback = None
+        if self.interfaces is not None and allow_interfaces:
+            result, reason, metrics = self.interfaces.solve(bits)
+            if result is not None:
+                return result
+            fallback = self._fast_live(bits, candidates, proofs, allow_components=allow_components,
+                                       allow_incremental=allow_incremental, allow_interfaces=False)
+            fallback["interface_fallback"] = dict(reason=reason, metrics=metrics)
+            return fallback
         if self.components is not None and allow_components:
             result = self.components.solve(self, bits)
             if result is not None:
@@ -315,6 +326,8 @@ class PersistentSolver:
                            "candidates": candidates or [], "proofs": proofs or [],
                            "search_budget": 64 if self.backend == "auto" else 0})
         r.update(backend="preprocess", core_work=None, counted_work=None, counted_complete=False)
+        if interface_fallback is not None:
+            r["interface_fallback"] = interface_fallback
         if not r.get("pending"):
             return r
         incremental_metrics = None
@@ -483,7 +496,7 @@ class PersistentSolver:
             result = self._fast_live(bits, candidates, proofs)
         answer, witness = result["answer"], result["witness"]
         learned_hit = (predicted is not None and result["reuse_kind"] == "witness"
-                       and result.get("backend") != "components" and witness == predicted)
+                       and result.get("backend") not in ("components", "interfaces") and witness == predicted)
         result.update(learned_proposed=predicted is not None, learned_accepted=learned_hit,
                       model_bytes=0)
         self._check_deadline()
@@ -524,18 +537,38 @@ class PersistentSolver:
                     self.db.execute("INSERT INTO models VALUES (?,?,?) ON CONFLICT(engine) DO UPDATE SET state=excluded.state,checksum=excluded.checksum",
                                     (self.engine_id, model_text, hashlib.sha256(model_text.encode()).hexdigest()))
                     result["model_bytes"] = len(model_text.encode())
-            details = {k: result[k] for k in ("backend", "counted_complete", "external_ns", "verification_ns", "cnf_clauses", "proof_bytes", "incremental", "components", "learned_proposed", "learned_accepted", "model_bytes") if k in result}
+            details = {k: result[k] for k in ("backend", "counted_complete", "external_ns", "verification_ns", "cnf_clauses", "proof_bytes", "incremental", "components", "interfaces", "interface_fallback", "learned_proposed", "learned_accepted", "model_bytes") if k in result}
             self.db.execute("INSERT OR IGNORE INTO measurements VALUES (?,?,?)",
                             (self.engine_id, bits, json.dumps(details, sort_keys=True)))
             if answer and learn:
                 self._activate(bits)
         return {"answer": answer, "witness": witness,
-                "source": ("component_witness" if answer else "component_refutation") if result.get("backend") == "components" else "learned_witness" if learned_hit else {"witness": "verified_witness", "refutation": "verified_refutation",
+                "source": ("interface_witness" if answer else "interface_refutation") if result.get("backend") == "interfaces" else ("component_witness" if answer else "component_refutation") if result.get("backend") == "components" else "learned_witness" if learned_hit else {"witness": "verified_witness", "refutation": "verified_refutation",
                            "none": "fallback"}[result["reuse_kind"]],
                 "nodes": result["nodes"],
                 **details,
                 "core_work": result["core_work"], "parse_work": result["parse_work"],
                 "counted_work": result["counted_work"], "wall_ns": time.perf_counter_ns() - start}
+
+    def expand(self, base=None, *, add=None, remove=None):
+        if self.interfaces is None:
+            raise ValueError("Enable --interfaces for expansion requests")
+        if self._ledger is not None:
+            raise RuntimeError("Concurrent requests need separate solver instances")
+        self._ledger, self._deadline = Ledger(), Deadline(self.query_timeout)
+        try:
+            self._database_budget()
+            self.db.set_progress_handler(lambda: int(time.monotonic() >= self._deadline.end), 1000)
+            result = self.interfaces.expand(base, add or {}, remove or [])
+            self.last_metrics = self._ledger.finish()
+            result.update(self.last_metrics)
+            return result
+        except BaseException:
+            self.last_metrics = self._ledger.finish()
+            raise
+        finally:
+            self.db.set_progress_handler(None, 0)
+            self._ledger = self._deadline = None
 
     def stats(self) -> dict:
         row = self.db.execute("""SELECT count(*) AS entries, coalesce(sum(answer),0) AS sat
@@ -567,7 +600,7 @@ class PersistentSolver:
                                (self.engine_id,)).fetchall()
         for row in rows:
             self._validate(row)
-            result = self._fast_live(row["bits"], allow_components=False, allow_incremental=False)
+            result = self._fast_live(row["bits"], allow_components=False, allow_incremental=False, allow_interfaces=False)
             if result["answer"] != bool(row["answer"]):
                 raise ValueError("Cache semantic audit failed")
             if row["answer"] and not self._live(row["bits"], row["witness"])["fast"]:
@@ -597,6 +630,8 @@ def main() -> int:
     parser.add_argument("--incremental", action="store_true", help="Use the persistent CDCL proposal engine")
     parser.add_argument("--learned", action="store_true", help="Learn a bounded shared witness predictor")
     parser.add_argument("--components", action="store_true", help="Reuse renamed disjoint components and checked conjunct refutations")
+    parser.add_argument("--interfaces", action="store_true", help="Use checked local-interface elimination and delta expansion")
+    parser.add_argument("--max-interface", type=int, default=3)
     sub = parser.add_subparsers(dest="command", required=True)
     solve = sub.add_parser("solve")
     solve.add_argument("bits")
@@ -610,14 +645,17 @@ def main() -> int:
         with PersistentSolver(args.cache, args.engine, backend=args.backend, cadical=args.cadical,
                               timeout=args.timeout, query_timeout=args.query_timeout,
                               verify_cache=args.verify_cache, max_proof_bytes=args.max_proof_bytes,
-                              incremental=args.incremental, learned=args.learned, components=args.components) as solver:
+                              incremental=args.incremental, learned=args.learned, components=args.components, interfaces=args.interfaces, max_interface=args.max_interface) as solver:
             if args.command == "serve":
                 for line in sys.stdin:
                     try:
                         request = json.loads(line)
                         if not isinstance(request, dict):
                             raise ValueError("A request must be a JSON object")
-                        result = solver.solve(request["bits"], learn=request.get("learn", True))
+                        if request.get("op") == "expand":
+                            result = solver.expand(request.get("base"), add=request.get("add", {}), remove=request.get("remove", []))
+                        else:
+                            result = solver.solve(request["bits"], learn=request.get("learn", True))
                     except (KeyError, ValueError, RuntimeError, OSError, sqlite3.Error) as exc:
                         result = {"error": str(exc)}
                     print(json.dumps(result, sort_keys=True), flush=True)

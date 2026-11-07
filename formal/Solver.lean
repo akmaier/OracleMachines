@@ -2,7 +2,7 @@ import OracleMachines.Cache
 import OracleMachines.Parsing
 import OracleMachines.BoundedSearch
 import OracleMachines.CompactExpansion
-import OracleMachines.Components
+import OracleMachines.InterfaceProtocol
 import Std.Sat.CNF.Dimacs
 import Std.Tactic.BVDecide.LRAT.Parser
 import Lean.Data.Json
@@ -48,7 +48,30 @@ def baseCertificateValid (f : Formula) (certificate : Json) : Except String Bool
     let tree ← parseProof (certificate.compress.length + 1) certificate
     return (checkRefutation f [] tree).1
 
+def parseFormulaBits (s : String) : Except String Formula := do
+  let bits ← parseBits s
+  match (decodeRun bits).1 with
+  | some f => return f
+  | none => throw "Invalid formula encoding"
+
+def factorCertificateValid (f : Formula) (certificate : Json) : Except String Bool := do
+  let definitions ← certificate.getObjValAs? (Array Json) "definitions"
+  if definitions.size > 16384 then throw "Factor certificate too large"
+  let mut state : FactorStore := {}
+  for definition in definitions do
+    let result ← factorDefine parseFormulaBits showBits state definition
+    state := result.1
+  let root ← certificate.getObjValAs? String "root"
+  let leaves ← factorLeaves state root
+  for name in leaves do
+    let some node := state[name]? | throw "Missing certificate leaf"
+    let some leaf := node.source | throw "Expected original leaf"
+    if !formulaIsConjunct f leaf then return false
+  factorNegative state root leaves
+
 def certificateValid (f : Formula) (certificate : Json) : Except String Bool := do
+  if (certificate.getObjValAs? String "format").toOption == some "factor_dag" then
+    return ← factorCertificateValid f certificate
   if (certificate.getObjValAs? String "format").toOption != some "component" then
     return ← baseCertificateValid f certificate
   let encoded ← certificate.getObjValAs? String "bits"
@@ -166,10 +189,29 @@ def respond (request : Json) : Except String Json := do
 def main : IO Unit := do
   let stdin ← IO.getStdin
   let stdout ← IO.getStdout
+  let mut factors : FactorStore := {}
+  let mut bindings : FactorBindings := {}
   repeat
     let line ← stdin.getLine
     if line.isEmpty then break
-    let result := (Json.parse line).bind respond
+    let parsed := Json.parse line
+    let result ← match parsed with
+      | .error e => pure (.error e)
+      | .ok request =>
+        let mode := (request.getObjValAs? String "mode").toOption.getD ""
+        if mode == "factor_define" then
+          match factorDefine parseFormulaBits showBits factors request with
+          | .error e => pure (.error e)
+          | .ok (state, response) => factors := state; pure (.ok response)
+        else if mode == "factor_bind" then
+          match factorBind parseFormulaBits factors bindings request with
+          | .error e => pure (.error e)
+          | .ok (state, response) => bindings := state; pure (.ok response)
+        else if mode == "factor_query_bound" then pure (factorQueryBound factors bindings parseBits request)
+        else if mode == "factor_query" then pure (factorQuery factors parseBits request)
+        else if mode == "factor_reset" then
+          factors := {}; bindings := {}; pure (.ok (Json.mkObj [("valid", toJson true)]))
+        else pure (respond request)
     let response := match result with
       | .ok value => value
       | .error message => Json.mkObj [("error", toJson message)]

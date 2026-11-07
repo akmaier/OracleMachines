@@ -120,3 +120,20 @@ Current next steps for items 1 and 4:
 These are implementation and restricted-proof tasks. No argument currently
 bounds local/interface width, exact representation size or acquisition time
 polynomially for unrestricted SAT.
+
+## Implementation of local interfaces: first milestone
+
+The local-interface engine now performs checked variable elimination, retains
+its dependency DAG, shares semantic relation payloads, and accepts persistent
+add/replace/remove snapshots. Native checks establish the original-constraint
+partition, every table/projection, and the final query context. This includes
+negative reuse after extension and rejection after removal of an assumption.
+Lean proves the exact bucket-elimination rule and unaffected-factor invariance.
+Snapshot maps are persistent AVL trees; all previous roots and results remain.
+
+New relations select constant, dense bitmap, sparse, or reduced ordered decision
+DAG encodings by actual serialized size. Immutable object storage uses raw or
+zlib bytes, whichever is smaller. Existing schemas and old zlib objects remain
+readable. General incremental clause proof integration, lazy row acquisition,
+expanded cost proofs, the benchmark and manuscript reconciliation are the next
+parts of the same requested five-step implementation.

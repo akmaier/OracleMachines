@@ -36,6 +36,16 @@ class KnowledgeStore:
             engine TEXT NOT NULL, key TEXT NOT NULL, instance TEXT NOT NULL,
             created_ns INTEGER NOT NULL, PRIMARY KEY(engine,key,instance))""")
         db.execute("CREATE INDEX IF NOT EXISTS component_negative_recent ON component_negatives(engine,created_ns DESC)")
+        columns = {r[1] for r in db.execute("PRAGMA table_info(knowledge_objects)")}
+        if "codec" not in columns:
+            db.execute("ALTER TABLE knowledge_objects ADD COLUMN codec TEXT NOT NULL DEFAULT 'zlib'")
+        db.execute("""CREATE TABLE IF NOT EXISTS interface_nodes (
+            engine TEXT NOT NULL, id TEXT NOT NULL, evidence TEXT NOT NULL,
+            relation TEXT NOT NULL, PRIMARY KEY(engine,id))""")
+        db.execute("""CREATE TABLE IF NOT EXISTS expansion_states (
+            engine TEXT NOT NULL, id TEXT NOT NULL, manifest TEXT NOT NULL,
+            answer INTEGER NOT NULL, evidence TEXT NOT NULL, created_ns INTEGER NOT NULL,
+            PRIMARY KEY(engine,id))""")
 
     def __init__(self, db, namespace):
         self.db, self.namespace = db, namespace
@@ -48,20 +58,28 @@ class KnowledgeStore:
         if len(raw) > MAX_OBJECT:
             raise ValueError("Knowledge object exceeds the configured decoding limit")
         token = hashlib.sha256(kind.encode() + b"\0" + raw).hexdigest()
-        packed = zlib.compress(raw, 1)
-        cursor = self.db.execute("INSERT OR IGNORE INTO knowledge_objects VALUES (?,?,?,?)",
-                                 (token, kind, len(raw), packed))
+        compressed = zlib.compress(raw, 1)
+        packed, codec = (compressed, 'zlib') if len(compressed) < len(raw) else (raw, 'raw')
+        cursor = self.db.execute("INSERT OR IGNORE INTO knowledge_objects (id,kind,raw_bytes,payload,codec) VALUES (?,?,?,?,?)",
+                                 (token, kind, len(raw), packed, codec))
         self.inserted_objects += cursor.rowcount
         return token, len(raw), len(packed)
 
     def get(self, token, kind):
-        row = self.db.execute("SELECT kind,raw_bytes,payload FROM knowledge_objects WHERE id=?", (token,)).fetchone()
+        row = self.db.execute("SELECT kind,raw_bytes,payload,codec FROM knowledge_objects WHERE id=?", (token,)).fetchone()
         if row is None or row[0] != kind or not 0 <= row[1] <= MAX_OBJECT:
             raise ValueError("Missing or invalid knowledge object")
-        decoder = zlib.decompressobj()
-        raw = decoder.decompress(row[2], row[1] + 1)
-        if len(raw) != row[1] or not decoder.eof or decoder.unused_data or decoder.unconsumed_tail:
-            raise ValueError("Invalid compressed knowledge object size")
+        if row[3] == 'raw':
+            raw = row[2]
+            if len(raw) != row[1]:
+                raise ValueError("Invalid raw knowledge object size")
+        elif row[3] == 'zlib':
+            decoder = zlib.decompressobj()
+            raw = decoder.decompress(row[2], row[1] + 1)
+            if len(raw) != row[1] or not decoder.eof or decoder.unused_data or decoder.unconsumed_tail:
+                raise ValueError("Invalid compressed knowledge object size")
+        else:
+            raise ValueError("Unknown knowledge object codec")
         if hashlib.sha256(kind.encode() + b"\0" + raw).hexdigest() != token:
             raise ValueError("Knowledge object integrity check failed")
         return json.loads(raw)

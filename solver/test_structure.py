@@ -195,7 +195,7 @@ class RestartTests(unittest.TestCase):
         with PersistentSolver(self.path, incremental=True, components=True) as s:
             for t, rows in before.items():
                 self.assertEqual(rows, list(map(tuple, s.db.execute('SELECT * FROM '+t))))
-            self.assertEqual(s.db.execute('PRAGMA user_version').fetchone()[0], 6)
+            self.assertEqual(s.db.execute('PRAGMA user_version').fetchone()[0], 7)
 
 
 if __name__ == '__main__':

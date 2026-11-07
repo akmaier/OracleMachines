@@ -307,3 +307,43 @@ queries while retaining every result in the archive.
 
 [Reproducible experiments](../experiments/README.md) include initialization,
 verification, persistence, and shutdown costs and retain every historical dataset.
+
+## Checked local interfaces and expansion snapshots
+
+`--interfaces --max-interface 3` enables persistent factor elimination. Each
+factor stores a relation over its ordered scope; projection joins a bucket and
+forgets one variable. A deterministic small-degree heuristic and previous
+elimination order control the bags. Queries outside the width cap use the old
+checked solver. The native process checks every new or replayed factor and
+validates the final source-constraint context, so a saved negative result cannot
+survive removal of a required assumption. Factor DAG certificates can also be
+checked independently against the original formula.
+
+The JSON-lines service additionally accepts:
+
+```json
+{"op":"expand","add":{"first":"010"}}
+{"op":"expand","base":"<state from previous result>","add":{"second":"0110"},"remove":[]}
+```
+
+Names identify constraints. Adding an existing name replaces it; removing a name
+requires it to exist. Each returned state is immutable and can be extended or
+revisited after restart. Persistent AVL manifests share unchanged map subtrees.
+Only supplied constraints are parsed again. Planning and final witness checking
+can still visit the active graph; these costs are charged. Delta requests that
+exceed the width budget currently return an error without a completed snapshot.
+
+Relation payloads use separate known/value bitmaps: unknown never means false.
+Equal relations share one payload even when their evidence differs. Schema 7
+adds raw-or-zlib object encoding, selecting compression only when it is smaller;
+legacy zlib objects remain readable and all old records remain intact. Python's
+active node cache is capped; the archive is append-only. Native worker capacity
+and interface limits bound accepted evidence, not total process memory.
+
+`Interfaces.lean` proves leaf-table exactness, projection exactness and
+entailment, unchanged-factor preservation, bucket-elimination equivalence,
+empty-relation refutation, and semantic replacement. `InterfaceProtocol.lean`
+uses these operations in the native checked DAG service. JSON, DAG bookkeeping,
+Python, SQLite and native execution remain implementation boundaries. The
+resource record includes all seven phase categories; measured work and the
+complete compiled-machine instruction count remain distinct.

@@ -34,6 +34,7 @@ native-decision axioms fail the audit. Warnings are treated as errors.
 | Proposition 12.1: exact expansion | [Expansion.lean](OracleMachines/Expansion.lean): `table_lookup`, `table_append`, `preserves_answers`, `eventually_covered`, `exact_on_domain` | All binary words up to each length receive the supplied solver's answer; old entries remain; requests outside coverage return `none`. |
 | Explicit table size | `length_words`, `length_domain`, `table_answer_count` | There are `2^n` words at length `n` and `2^(n+1)-1` answer entries through stage `n`, including the empty word. |
 | Concrete SAT solver | [SAT.lean](OracleMachines/SAT.lean): `solve_correct`, `solve_false_iff`, `witness_sound`, `no_witness_iff`, `extend_exact` | Exhaustive finite-assignment search decides ordinary propositional satisfiability and supplies checked witnesses. Appending a finite batch of its answers preserves exactness. |
+| SAT/UNSAT and encoding errors | [Decision.lean](OracleMachines/Decision.lean): `decision_sat_iff`, `decision_unsat_iff`, `not_sat_iff_invalid_or_unsat` | A partial decision distinguishes satisfiable formulas, unsatisfiable formulas, and invalid strings. UNSAT is the complement only within valid encodings. |
 | Binary SAT and bounded expansion | [Encoding.lean](OracleMachines/Encoding.lean): `decode_encode`, `encode_injective`, `solveEncoded_correct`, `satTable_correct`, `expandSAT_eq` | A concrete binary postfix encoding round-trips. The binary solver decides its defined SAT language, and incremental expansion produces the exact next bounded-domain table. |
 | Executable cost semantics | [CostedSAT.lean](OracleMachines/CostedSAT.lean): `readRun_trace`, `evalRun_trace`, `solveRun_value`, `solveRun_bound`, `solveRun_fixed_width` | The instrumented evaluator realizes an explicit operational trace, the instrumented solver returns the verified solver's witness, and its counted work has a bound polynomial in encoding length for a fixed variable cap. |
 | Proposition 12.4: restricted core bound | `solveRun_bound`, `solveRun_fixed_width` | The same counted implementation has `T <= W^2 + 2^v (W+13) + 2`; fixing `v <= K` gives coefficient `14*2^K+3` and degree 2 in encoding length plus one. |
@@ -87,7 +88,10 @@ operation counts and proves its correctness and cost bounds together.
 formal definition of the class P. The project does not yet prove a simulation
 from its abstract cost semantics to Turing-machine or compiled Lean execution,
 or formalize NP-completeness, advice classes, or the time hierarchy. In
-particular, the unrestricted uniform SAT budgets remain unproved.
+particular, uniform polynomial SAT budgets with no fixed size cap remain
+unproved. This refers to general satisfiability, not UNSAT (unsatisfiability).
+The conventional NP-completeness of SAT and coNP-completeness of UNSAT are
+not formalized as complexity-class claims here.
 
 ## Concrete cost model
 

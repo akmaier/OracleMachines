@@ -1,4 +1,5 @@
 import OracleMachines.Hybrid
+import OracleMachines.Decision
 
 /-!
 # Exact accumulated results
@@ -63,5 +64,13 @@ theorem cacheStep_exact (cache : Table) (exact : CacheExact cache) (bits : Word)
 theorem cacheStep_retains (cache : Table) (bits : Word) (entry : Word × Bool)
     (h : entry ∈ cache) : entry ∈ (cacheStep cache bits).2 := by
   cases hl : lookup bits cache <;> simp [cacheStep, hl, remember, h]
+
+/-- Only valid encodings permit interpreting a cached false bit as UNSAT. -/
+theorem cache_lookup_unsat (cache : Table) (exact : CacheExact cache)
+    (bits : Word) (valid : ValidEncoding bits) (found : lookup bits cache = some false) :
+    EncodedUNSAT bits := by
+  have h := cache_lookup_sound cache exact bits false found
+  apply (valid_not_sat_iff_unsat bits valid).mp
+  simpa using h.symm
 
 end OracleMachines.SAT

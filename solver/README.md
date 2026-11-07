@@ -1,7 +1,9 @@
 # Persistent exact results
 
 This service combines the Lean-verified SAT core with a local SQLite store.
-Every completed SAT or UNSAT decision is retained. SAT records also retain the
+Every completed SAT or UNSAT verdict is retained. SAT means that the valid
+formula is satisfiable; UNSAT means it is unsatisfiable. A malformed encoding
+is an error, never an UNSAT verdict. Neither name refers to a size restriction. SAT records also retain the
 satisfying assignment. The active witness can solve a different formula after
 verification; otherwise, the exhaustive solver runs. Cache entries and learned
 state survive closing the process and restarting it.

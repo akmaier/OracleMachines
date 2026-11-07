@@ -4,6 +4,10 @@ A perspective on **resource accounting for learned reasoning**: how preprocessin
 stored knowledge, neural representations, and exact solvers redistribute computation
 between acquiring an answer and using it later.
 
+**Terminology:** SAT with no fixed size cap remains the satisfiability problem.
+UNSAT denotes unsatisfiable valid formulas and is coNP-complete. An invalid
+encoding is neither a satisfiable nor an unsatisfiable formula.
+
 The central architectural conclusion is that **the efficiency rationale for
 combining System 1 and System 2 survives either resolution of P versus NP**.
 Either way, the relevant comparison is avoided computation versus acquisition,

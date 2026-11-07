@@ -116,11 +116,13 @@ Learning to reduce future computation is the subject of speedup learning. \citet
 
 \subsection{The bounded SAT domain}
 
-Let us fix a standard binary encoding of Boolean formulas. We write the unrestricted satisfiability language as
+Let us fix a standard binary encoding of Boolean formulas. We write the satisfiability language, with no fixed size cap, as
 \begin{equation}
 \SAT=\{\langle\varphi\rangle:\exists a\ \varphi(a)=1\}.
 \end{equation}
-SAT is NP-complete. We can check a proposed satisfying assignment in polynomial time in the encoded formula length \citep{cook1971}. We assign malformed encodings the answer zero. Our encoding ensures that a formula of length $n$ has at most $n$ distinct variables. Evaluating the formula on an assignment takes time polynomial in $n$.
+SAT is NP-complete. Here, \emph{UNSAT} denotes the language of valid formulas with no satisfying assignment; it is $\coNP$-complete. ``SAT with no fixed size cap'' and UNSAT are different notions. On valid formula encodings, UNSAT is the complement of SAT. Since we reject malformed strings, the complement of SAT over all binary strings also contains those malformed strings. Our service distinguishes an invalid encoding from an UNSAT verdict. A deterministic decider for SAT also decides UNSAT after checking validity and reversing its answer, so a uniform polynomial bound for either would give one for the other. This does not give short UNSAT certificates: universally short, polynomially checkable negative certificates would imply $\NPclass=\coNP$ \citep{sipser2020theory,cook1979}.
+
+We can check a proposed satisfying assignment in polynomial time in the encoded formula length \citep{cook1971}. We assign malformed encodings the answer zero. Our encoding ensures that a formula of length $n$ has at most $n$ distinct variables. Evaluating the formula on an assignment takes time polynomial in $n$.
 
 For $N\in\mathbb{N}$, let
 \begin{equation}
@@ -873,7 +875,7 @@ $G(v)+6=8\cdot2^v+4v$, hence $G(v)\leq12\cdot2^v$. Search costs at most $1+2^v(W
 
 This bound extends beyond a single finite set: formulas over the fixed variable set may have unbounded length. The coefficient still grows exponentially in $K$. Allowing $K$ to grow with the input therefore does not give shared polynomial constants. Moreover, a polynomial bound for one solve does not make an explicit table over all bounded-length inputs polynomial in size. The table still contains exponentially many answers.
 
-The units in this proposition belong to the stated core model. Counter arithmetic is instrumentation and is not itself charged. Parsing, garbage collection, serialization, disk access, and the simulation of these operations on a bit-machine remain outside the theorem. We have not formalized the complexity classes, SAT's NP-completeness, or the advice and hierarchy results in Lean. Hence, the checked numerical bound is not a formal proof of membership in a machine-defined complexity class. The remaining unrestricted obligation is still a uniform efficient exact constructor or solver with its full runtime bound.
+The units in this proposition belong to the stated core model. Counter arithmetic is instrumentation and is not itself charged. Parsing, garbage collection, serialization, disk access, and the simulation of these operations on a bit-machine remain outside the theorem. We have not formalized the complexity classes, SAT's NP-completeness, or the advice and hierarchy results in Lean. Hence, the checked numerical bound is not a formal proof of membership in a machine-defined complexity class. The remaining general SAT obligation is still a uniform efficient exact constructor or solver for inputs with no fixed size cap, together with its full runtime bound.
 
 \subsection{Certified witness reuse and persistent results}
 \label{sec:persistent-solver}

@@ -1,6 +1,8 @@
 import OracleMachines.Cache
 import OracleMachines.Parsing
-import OracleMachines.Knowledge
+import OracleMachines.BoundedSearch
+import Std.Sat.CNF.Dimacs
+import Std.Tactic.BVDecide.LRAT.Parser
 import Lean.Data.Json
 
 open OracleMachines OracleMachines.SAT Lean
@@ -29,6 +31,66 @@ def parseProof : Nat → Json → Except String Refutation
     let h ← parseProof fuel a[2]!
     return .split i l h
 
+
+def certificateValid (f : Formula) (certificate : Json) : Except String Bool := do
+  match (certificate.getObjValAs? String "format").toOption with
+  | some "aig_false" => return circuitFalse f
+  | some "lrat" =>
+    let proofText ← certificate.getObjValAs? String "text"
+    let proof ← Std.Tactic.BVDecide.LRAT.parseLRATProof proofText.toUTF8
+    return checkLRAT f proof
+  | some _ => throw "Unknown certificate format"
+  | none =>
+    let tree ← parseProof (certificate.compress.length + 1) certificate
+    return (checkRefutation f [] tree).1
+
+/-- Modern preprocessing and LRAT checking have no complete abstract cost ledger. -/
+def fastRespond (f : Formula) (parseWork : Nat) (request : Json) : Except String Json := do
+  let mode ← request.getObjValAs? String "mode"
+  if mode == "verify_certificate" then
+    let certificate ← request.getObjVal? "certificate"
+    return Json.mkObj [("valid", toJson (← certificateValid f certificate)), ("parse_work", toJson parseWork)]
+  if mode == "verify_witness" then
+    let witness ← request.getObjValAs? String "witness" >>= parseBits
+    return Json.mkObj [("valid", toJson (evalRun f witness).1), ("parse_work", toJson parseWork)]
+  let fields := [("core_work", Json.null), ("parse_work", toJson parseWork),
+    ("counted_work", Json.null), ("counted_complete", toJson false),
+    ("nodes", Json.null)]
+  let finish := fun (w : Option Word) (certificate : Json) (kind : String) => Json.mkObj
+    (fields ++ [("answer", toJson w.isSome), ("witness", toJson (w.map showBits)),
+      ("certificate", certificate), ("reuse_kind", toJson kind), ("fast", toJson (kind != "none"))])
+  let candidates := (request.getObjValAs? (Array String) "candidates").toOption.getD #[]
+  if candidates.size > 4 then throw "At most four witness candidates are supported"
+  for candidate in candidates do
+    let word ← parseBits candidate
+    if (evalRun f word).1 then return finish (some word) Json.null "witness"
+  let certificates := (request.getObjValAs? (Array Json) "proofs").toOption.getD #[]
+  if certificates.size > 4 then throw "At most four refutation candidates are supported"
+  for certificate in certificates do
+    if ← certificateValid f certificate then return finish none certificate "refutation"
+  let circuit := compiledCircuit f
+  if circuit.aig.getConstant circuit.ref == some false then
+    return finish none (Json.mkObj [("format", toJson "aig_false")]) "none"
+  -- Cheap phase proposals avoid a subprocess for common all-positive/negative cases.
+  for value in [false, true] do
+    let word := List.replicate f.width value
+    if (evalRun f word).1 then return finish (some word) Json.null "none"
+  let budget := (request.getObjValAs? Nat "search_budget").toOption.getD 0
+  if budget > 512 then throw "The preliminary search budget must be at most 512 nodes"
+  if budget > 0 then
+    let support :=  (distinctRun (occursRun f).1).1
+    let attempt := boundedSearch f support [] budget
+    if let some proposal := attempt.1 then
+      if let some sparse := proposal.assignment then
+        let word := (materialize sparse f.width).1
+        if (evalRun f word).1 then return finish (some word) Json.null "none"
+      else if (checkRefutation f [] proposal.proof).1 then
+        return finish none (showProof proposal.proof) "none"
+  let cnf := Std.Sat.AIG.toCNF circuit
+  return Json.mkObj (fields ++ [("pending", toJson true), ("dimacs", toJson cnf.dimacs),
+    ("width", toJson f.width), ("offset", toJson circuit.aig.decls.size),
+    ("clauses", toJson cnf.length)])
+
 def respond (request : Json) : Except String Json := do
   let encoded ← request.getObjValAs? String "bits"
   let bits ← parseBits encoded
@@ -37,6 +99,8 @@ def respond (request : Json) : Except String Json := do
     | none => .error "Invalid formula encoding"
     | some f => .ok f
   let mode := (request.getObjValAs? String "mode").toOption.getD "hybrid"
+  if mode == "prepare" || mode == "verify_certificate" || mode == "verify_witness" then
+    return ← fastRespond f parsed.2 request
   if mode == "exhaustive" then
     let result := solveRun f
     return Json.mkObj [("answer", toJson result.1.isSome),

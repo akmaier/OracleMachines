@@ -27,26 +27,26 @@ class PersistenceTests(unittest.TestCase):
         self.path = Path(self.temp.name) / "results.sqlite3"
 
     def test_results_survive_restart_without_starting_solver(self):
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             self.assertTrue(s.solve(VAR0)["answer"])
             self.assertFalse(s.solve(UNSAT)["answer"])
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             self.assertEqual(s.solve(VAR0)["source"], "cache")
             self.assertEqual(s.solve(UNSAT)["source"], "cache")
             self.assertIsNone(s.process)
             self.assertEqual(s.stats()["entries"], 2)
 
     def test_learned_witness_transfers_after_restart(self):
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             self.assertEqual(s.solve(VAR0)["source"], "fallback")
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             r = s.solve(DOUBLE_NOT_VAR0)
             self.assertTrue(r["answer"])
             self.assertEqual(r["source"], "verified_witness")
             self.assertEqual(s.stats()["entries"], 2)
 
     def test_new_learning_retains_old_answers(self):
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             s.solve(VAR0)
             self.assertTrue(s.solve(NOT_VAR0)["answer"])
             self.assertEqual(s.solve(VAR0)["source"], "cache")
@@ -55,14 +55,14 @@ class PersistenceTests(unittest.TestCase):
             self.assertEqual(s.audit(), {"checked": 3, "valid": True})
 
     def test_empty_witness_is_retained(self):
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             self.assertEqual(s.solve(TRUE)["witness"], "")
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             self.assertEqual(s.solve(TRUE)["source"], "cache")
             self.assertEqual(s.audit()["checked"], 1)
 
     def test_bad_or_incomplete_inputs_are_not_cached(self):
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             for bits in ("x", "0", "", "11", "0111"):
                 with self.assertRaises(ValueError):
                     s.solve(bits)
@@ -70,7 +70,7 @@ class PersistenceTests(unittest.TestCase):
             self.assertTrue(s.solve(VAR0)["answer"])
 
     def test_corruption_is_rejected(self):
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             s.solve(VAR0)
             with s.db:
                 s.db.execute("UPDATE results SET answer=0, witness=NULL")
@@ -78,7 +78,7 @@ class PersistenceTests(unittest.TestCase):
                 s.solve(VAR0)
 
     def test_semantic_audit_rejects_forged_negative_record(self):
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             s.solve(VAR0)
             forged = checksum(s.engine_id, VAR0, False, None)
             with s.db:
@@ -87,25 +87,25 @@ class PersistenceTests(unittest.TestCase):
                 s.audit()
 
     def test_engine_namespaces_preserve_old_records(self):
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             r = s.solve(VAR0)
             old = "previous-engine"
             with s.db:
                 s.db.execute("UPDATE results SET engine=?, checksum=?",
                              (old, checksum(old, VAR0, True, r["witness"])))
                 s.db.execute("DELETE FROM active_witness")
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             self.assertEqual(s.solve(VAR0)["source"], "fallback")
             self.assertEqual(s.stats()["entries"], 1)
             self.assertEqual(s.stats()["all_engine_entries"], 2)
 
     def test_parser_cost_is_retained_after_restart(self):
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             first = s.solve(DOUBLE_NOT_VAR0)
             self.assertGreater(first["parse_work"], 0)
             self.assertLessEqual(first["parse_work"], 8 * len(DOUBLE_NOT_VAR0) + 7)
             self.assertEqual(first["counted_work"], first["core_work"] + first["parse_work"])
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             hit = s.solve(DOUBLE_NOT_VAR0)
             self.assertEqual(hit["counted_work"], 0)
             self.assertEqual(hit["original_acquisition_parse_work"], first["parse_work"])
@@ -123,11 +123,11 @@ class PersistenceTests(unittest.TestCase):
             db.execute("INSERT INTO results VALUES (?,?,?,?,?,?,?)",
                        ("legacy", UNSAT, 0, None, 46, time.time_ns(), checksum("legacy", UNSAT, False, None)))
             db.execute("PRAGMA user_version=1")
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             old = s.db.execute("SELECT * FROM results WHERE engine='legacy'").fetchone()
             self.assertEqual(old["answer"], 0)
             self.assertIsNone(old["acquisition_parse_work"])
-            self.assertEqual(s.db.execute("PRAGMA user_version").fetchone()[0], 3)
+            self.assertEqual(s.db.execute("PRAGMA user_version").fetchone()[0], 4)
             self.assertEqual(s.revalidate(), {"previous_inputs": 1, "revalidated": 1, "already_current": 0})
             self.assertEqual(s.stats()["all_engine_entries"], 2)
             self.assertFalse(s.solve(UNSAT)["answer"])
@@ -135,7 +135,7 @@ class PersistenceTests(unittest.TestCase):
             self.assertEqual(s.audit()["checked"], 1)
 
     def test_revalidation_recomputes_instead_of_trusting_old_answers(self):
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             with s.db:
                 s.db.execute("""INSERT INTO results
                     (engine,bits,answer,witness,acquisition_core_work,created_ns,checksum)
@@ -147,22 +147,22 @@ class PersistenceTests(unittest.TestCase):
             self.assertEqual(s.audit()["checked"], 1)
 
     def test_concurrent_writers_keep_exact_results(self):
-        with PersistentSolver(self.path):
+        with PersistentSolver(self.path, backend="lean"):
             pass
 
         def run(bits):
-            with PersistentSolver(self.path) as s:
+            with PersistentSolver(self.path, backend="lean") as s:
                 return s.solve(bits)["answer"]
 
         with ThreadPoolExecutor(max_workers=2) as pool:
             answers = list(pool.map(run, [VAR0, UNSAT, VAR0, NOT_VAR0]))
         self.assertEqual(answers, [True, False, True, True])
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             self.assertEqual(s.stats()["entries"], 3)
             self.assertEqual(s.audit()["checked"], 3)
 
     def test_sparse_variable_does_not_enumerate_unused_indices(self):
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             r = s._live("01" + "1" * 100 + "0", mode="baseline")
             self.assertEqual(r["witness"], "0" * 100 + "1")
             self.assertEqual(r["nodes"], 3)
@@ -172,24 +172,24 @@ class PersistenceTests(unittest.TestCase):
         formula = VAR0
         for i in range(1, 30):
             formula += "01" + "1" * i + "0" + "11"
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             r = s._live("00" + formula + "11", mode="baseline")
             self.assertFalse(r["answer"])
             self.assertEqual(r["nodes"], 1)
             self.assertEqual(r["certificate"], "conflict")
 
     def test_portfolio_retains_alternating_witnesses(self):
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             s.solve(VAR0)
             s.solve(NOT_VAR0)
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             for bits in (DOUBLE_NOT_VAR0, NOT_VAR0 + "1010", VAR0 + "10101010"):
                 self.assertEqual(s.solve(bits)["source"], "verified_witness")
 
     def test_refutation_transfers_to_conjunction_after_restart(self):
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             s.solve(UNSAT)
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             extension = UNSAT + "01" + "1" * 100 + "0" + "11"
             r = s.solve(extension)
             self.assertFalse(r["answer"])
@@ -199,7 +199,7 @@ class PersistenceTests(unittest.TestCase):
             self.assertEqual(s.audit()["checked"], 2)
 
     def test_refutation_does_not_transfer_under_negation_or_renaming(self):
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             s.solve(UNSAT)
             self.assertTrue(s.solve(UNSAT + "10")["answer"])
             var1 = "0110"
@@ -208,7 +208,7 @@ class PersistenceTests(unittest.TestCase):
             self.assertEqual(r["source"], "fallback")
 
     def test_invalid_refutations_cannot_reject_satisfiable_formula(self):
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             for p in ("conflict", [0, "conflict", "conflict"],
                       [0, "conflict", [0, "conflict", "conflict"]]):
                 r = s._live(VAR0, proofs=[p])
@@ -219,7 +219,7 @@ class PersistenceTests(unittest.TestCase):
                     s._live(VAR0, proofs=[p])
 
     def test_refutation_corruption_and_semantic_audit(self):
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             s.solve(UNSAT)
             certificate = json.dumps("conflict")
             with s.db:
@@ -235,13 +235,13 @@ class PersistenceTests(unittest.TestCase):
             self.assertEqual(s.solve(UNSAT + "1010")["source"], "fallback")
 
     def test_v2_migration_preserves_records_without_inventing_proofs(self):
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             s.solve(UNSAT)
             old_rows = [tuple(r) for r in s.db.execute("SELECT * FROM results")]
             with s.db:
                 s.db.execute("DROP TABLE proofs")
                 s.db.execute("PRAGMA user_version=2")
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             self.assertEqual([tuple(r) for r in s.db.execute("SELECT * FROM results")], old_rows)
             self.assertEqual(s.stats()["refutations"], 0)
             self.assertEqual(s.audit()["checked"], 1)
@@ -274,7 +274,7 @@ class PersistenceTests(unittest.TestCase):
                 return not evaluate(f[1], assignment)
             return evaluate(f[1], assignment) and evaluate(f[2], assignment)
 
-        with PersistentSolver(self.path) as s:
+        with PersistentSolver(self.path, backend="lean") as s:
             for _ in range(400):
                 f = generate(5)
                 expected = any(evaluate(f, a) for a in itertools.product((False, True), repeat=4))

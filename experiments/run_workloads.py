@@ -75,7 +75,7 @@ MODES = ["baseline", "exhaustive", "witness", "exact_cache", "persistent_hybrid"
 
 
 def run_one(mode, bits, expected, path, engine):
-    with PersistentSolver(path, engine) as solver:
+    with PersistentSolver(path, engine, backend="lean") as solver:
         start = time.perf_counter_ns()
         state = None
         core_work = parse_work = hits = transferred = refuted = fallbacks = nodes = 0

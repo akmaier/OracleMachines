@@ -59,6 +59,8 @@ class KnowledgeStore:
         self.session = None
         self.ordinal = 0
         self.inserted_objects = 0
+        self.serialized_bytes = self.inserted_raw_bytes = self.inserted_packed_bytes = 0
+        self.object_reads = self.read_packed_bytes = 0
 
     def put(self, kind, value):
         raw = json.dumps(value, separators=(",", ":"), sort_keys=True).encode()
@@ -70,10 +72,15 @@ class KnowledgeStore:
         cursor = self.db.execute("INSERT OR IGNORE INTO knowledge_objects (id,kind,raw_bytes,payload,codec) VALUES (?,?,?,?,?)",
                                  (token, kind, len(raw), packed, codec))
         self.inserted_objects += cursor.rowcount
+        self.serialized_bytes += len(raw)
+        self.inserted_raw_bytes += len(raw)*cursor.rowcount
+        self.inserted_packed_bytes += len(packed)*cursor.rowcount
         return token, len(raw), len(packed)
 
     def get(self, token, kind):
         row = self.db.execute("SELECT kind,raw_bytes,payload,codec FROM knowledge_objects WHERE id=?", (token,)).fetchone()
+        self.object_reads += 1
+        if row is not None:self.read_packed_bytes += len(row[2])
         if row is None or row[0] != kind or not 0 <= row[1] <= MAX_OBJECT:
             raise ValueError("Missing or invalid knowledge object")
         if row[3] == 'raw':

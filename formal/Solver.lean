@@ -1,6 +1,7 @@
 import OracleMachines.FragmentProtocol
 import OracleMachines.ChainProtocol
 import OracleMachines.LayeredSource
+import OracleMachines.SourceUpdates
 import OracleMachines.Cache
 import OracleMachines.Parsing
 import OracleMachines.BoundedSearch
@@ -248,6 +249,7 @@ def main : IO Unit := do
   let mut fragments : OracleMachines.Fragments.Session := {}
   let mut chains : OracleMachines.Chain.Store := {}
   let mut layers : OracleMachines.Layered.Store := {}
+  let mut sourceLayers : OracleMachines.SourceUpdates.Store := {}
   let mut negatives : Std.HashMap String Formula := {}
   repeat
     let line ← stdin.getLine
@@ -257,7 +259,27 @@ def main : IO Unit := do
       | .error e => pure (.error e)
       | .ok request =>
         let mode := (request.getObjValAs? String "mode").toOption.getD ""
-        if mode == "layered_compile" then
+        if mode == "source_init" then
+          match OracleMachines.SourceUpdates.initializeLayout sourceLayers request with
+          | .error e => pure (.error e)
+          | .ok (state, response) => sourceLayers := state; pure (.ok response)
+        else if mode == "source_compile" then
+          pure (OracleMachines.SourceUpdates.compileEdges sourceLayers request)
+        else if mode == "source_define" then
+          match OracleMachines.SourceUpdates.defineNodes sourceLayers request with
+          | .error e => pure (.error e)
+          | .ok (state, response) => sourceLayers := state; pure (.ok response)
+        else if mode == "source_drop" then
+          match OracleMachines.SourceUpdates.dropNodes sourceLayers request with
+          | .error e => pure (.error e)
+          | .ok (state, response) => sourceLayers := state; pure (.ok response)
+        else if mode == "source_query" then
+          pure (OracleMachines.SourceUpdates.query sourceLayers request)
+        else if mode == "source_patch" then
+          pure (OracleMachines.SourceUpdates.patchQuery sourceLayers request)
+        else if mode == "source_bind" then
+          pure (OracleMachines.SourceUpdates.bindSource sourceLayers request)
+        else if mode == "layered_compile" then
           pure (OracleMachines.Layered.compileRequest request)
         else if mode == "layered_source_query" then
           pure (OracleMachines.Layered.sourceQuery layers request)

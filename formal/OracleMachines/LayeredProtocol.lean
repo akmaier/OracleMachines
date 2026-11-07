@@ -48,7 +48,7 @@ def retain (store : Store) (request : Json) : Except String (Store × Json) := d
   let mut out : Store := {}
   for id in ids do
     let some node := store.nodes[id]? | throw "Unknown retained node"
-    out ← out.insert id node
+    if !out.nodes.contains id then out ← out.insert id node
   for id in ids do
     let some (body, tree) := out.nodes[id]? | throw "Missing retained node"
     if tree.height > 0 then

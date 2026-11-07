@@ -22,6 +22,8 @@ def compose(a,b,q):
 
 
 class LayeredSolver:
+    node_kind='layered_node'
+    mode_prefix='layered'
     def __init__(self, service, width):
         if type(width) is not int or not 1<=width<=4:raise ValueError("Layer width must be 1 to 4")
         self.width,self.states=width,1<<width
@@ -44,13 +46,13 @@ class LayeredSolver:
         if token in self.cache:
             self.cache.move_to_end(token);node=self.cache[token]
         else:
-            node=self.store.get(token,'layered_node');self.cache[token]=node
+            node=self.store.get(token,self.node_kind);self.cache[token]=node
         if node['width']!=self.width:raise ValueError('Layer width differs from saved version')
         return node
 
     def save(self,node):
         node=dict(node,width=self.width)
-        token=self.store.put('layered_node',node)[0]
+        token=self.store.put(self.node_kind,node)[0]
         self.metrics['node_writes']+=1
         self.cache[token]=node
         if token in self.cache:self.cache.move_to_end(token)
@@ -144,16 +146,19 @@ class LayeredSolver:
                 for child in self.native_children.pop(token):
                     self.native_incoming[child]-=1
                     if self.native_incoming[child]==0 and child in self.inactive:self.evictable.add(child)
-            checked=self.service._request(dict(mode='layered_drop',ids=batch))
+            checked=self.service._request(dict(mode=self.mode_prefix+'_drop',ids=batch))
             if not checked['valid']:raise ValueError('Native eviction rejected')
             self.metrics['native_evictions']+=len(batch)
             self.metrics['retention_visits']+=len(batch);needed-=len(batch)
 
-    def ensure(self,root):
+    def reset_native(self):
+        self.service._request(dict(mode=self.mode_prefix+'_reset'))
+
+    def ensure(self,root,*,defer_eviction=False):
         if self.worker is not self.service.process or self.worker is None or self.worker.poll() is not None:
             self.forget_native()
             # Also handles a failed Python/SQLite operation with a live worker.
-            self.service._request(dict(mode='layered_reset'))
+            self.reset_native()
             self.worker=self.service.process
         self.activate(root)
         cap=min(200000,self.service.native_layer_cells//self.states**2)
@@ -168,11 +173,11 @@ class LayeredSolver:
                 stack.extend([(token,True),(node['right'],False),(node['left'],False)])
             else:
                 pending.append(dict(id=token,**node));seen.add(token)
-        if len(self.verified)+len(pending)>cap:
+        if len(self.verified)+len(pending)>cap and not defer_eviction:
             self.evict(len(self.verified)+len(pending)-cap)
         for offset in range(0,len(pending),128):
             batch=pending[offset:offset+128]
-            result=self.service._request(dict(mode='layered_define',nodes=batch))
+            result=self.service._request(dict(mode=self.mode_prefix+'_define',nodes=batch))
             if not result['valid']:raise ValueError('Native chain definitions rejected')
             for node in batch:
                 token=node['id'];self.verified.add(token)
@@ -183,6 +188,9 @@ class LayeredSolver:
                     self.evictable.discard(child)
             self.worker=self.service.process
             self.metrics['native_definitions']+=len(batch)
+            self.metrics['native_source_cells']=self.metrics.get('native_source_cells',0)+result.get('source_cells',0)
+            self.metrics['native_literal_test_bound']=self.metrics.get('native_literal_test_bound',0)+result.get('literal_test_bound',0)
+        self.metrics['peak_native_cells']=max(self.metrics.get('peak_native_cells',0),len(self.verified)*self.states**2)
 
     def run(self,base,replace,append,left,right,witness):
         if not isinstance(replace,dict) or not isinstance(append,list):raise ValueError('Expected replacement map and append list')

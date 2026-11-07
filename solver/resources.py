@@ -38,6 +38,10 @@ class Ledger:
         self.children_cpu = children_cpu_ns()
         self.phases = {}
         self.stack = []
+        self.events = {}
+
+    def count(self,name,amount=1):
+        self.events[name]=self.events.get(name,0)+amount
 
     @contextmanager
     def phase(self, name):
@@ -57,7 +61,7 @@ class Ledger:
         phases = dict(self.phases)
         phases["control"] = wall - sum(phases.values())
         assert phases["control"] >= 0
-        return dict(wall_ns=wall, phase_ns=phases,
+        return dict(wall_ns=wall, phase_ns=phases, service_events=dict(self.events),
                     service_cpu_ns=time.process_time_ns() - self.cpu,
                     reaped_children_cpu_ns=children_cpu_ns() - self.children_cpu,
                     service_peak_rss_bytes=peak_rss(resource.RUSAGE_SELF),

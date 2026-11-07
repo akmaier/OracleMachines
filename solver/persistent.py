@@ -34,6 +34,8 @@ from solver.components import ComponentSolver
 from solver.interfaces import InterfaceSolver
 from solver.chain import ChainSolver
 from solver.layered import LayeredSolver
+from solver.source_updates import SourceSolver
+from copy import deepcopy
 from solver.routing import Router
 DEFAULT_ENGINE = ROOT / "formal/.lake/build/bin/oracleSolver"
 DEFAULT_CACHE = ROOT / "solver/.cache/results.sqlite3"
@@ -176,6 +178,7 @@ class PersistentSolver:
                 Router.create(self.db)
                 ChainSolver.create(self.db)
                 LayeredSolver.create(self.db)
+                SourceSolver.create(self.db)
                 self.db.execute("PRAGMA user_version=8")
         except Exception:
             self.db.close()
@@ -183,6 +186,7 @@ class PersistentSolver:
         self.process: subprocess.Popen | None = None
         self.chains = ChainSolver(self)
         self.layers = None
+        self.source_layers = None
         self.interfaces = InterfaceSolver(self, max_interface, symbolic=symbolic) if interfaces or symbolic or adaptive else None
         routing_namespace = self.engine_id + ":routes-v3:" + json.dumps(
             [backend, symbolic, max_interface, components, incremental, incremental_proofs], separators=(",", ":"))
@@ -290,6 +294,7 @@ class PersistentSolver:
 
     def _request(self, request: dict) -> dict:
         if self.process is None:
+            if self._ledger is not None:self._ledger.count('native_worker_starts')
             self.process = subprocess.Popen(
                 [str(self.engine)], stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                 text=True, bufsize=1,
@@ -297,11 +302,14 @@ class PersistentSolver:
         try:
             with self._phase("serialization"):
                 payload = (json.dumps(request) + "\n").encode()
+                if self._ledger is not None:
+                    self._ledger.count('native_requests');self._ledger.count('native_request_bytes',len(payload))
             with self._phase("native_" + request.get("mode", "hybrid")):
                 line = exchange(self.process, payload, self._deadline or Deadline(self.query_timeout),
                                 self.max_message_bytes)
             with self._phase("serialization"):
                 response = json.loads(line)
+                if self._ledger is not None:self._ledger.count('native_response_bytes',len(line.encode()))
         except (BudgetExceeded, RuntimeError, OSError, ValueError):
             stop_process(self.process)
             self.process = None
@@ -539,7 +547,7 @@ class PersistentSolver:
                 self.db.execute('PRAGMA busy_timeout=0')
                 try:checkpoint=list(self.db.execute('PRAGMA wal_checkpoint(TRUNCATE)').fetchone())
                 finally:self._database_budget()
-        caches={name:obj.cache.report() for name,obj in [('chain',self.chains),('layered',self.layers),('interfaces',self.interfaces)] if obj is not None}
+        caches={name:obj.cache.report() for name,obj in [('chain',self.chains),('layered',self.layers),('source',self.source_layers),('interfaces',self.interfaces)] if obj is not None}
         pages=self.db.execute("PRAGMA page_count").fetchone()[0]
         size=self.db.execute("PRAGMA page_size").fetchone()[0]
         free=self.db.execute("PRAGMA freelist_count").fetchone()[0]
@@ -551,6 +559,7 @@ class PersistentSolver:
             active_caches=caches,symbolic_node_limit=self.symbolic_node_limit,
             native_layer_cells_cap=self.native_layer_cells,
             native_layer_cells=0 if self.layers is None else len(self.layers.verified)*self.layers.states**2,
+            native_source_cells=0 if self.source_layers is None else len(self.source_layers.verified)*self.source_layers.states**2,
             wal_checkpoint_threshold=self.wal_checkpoint_bytes,checkpoint_result=checkpoint)
 
     def _database_budget(self):
@@ -724,6 +733,56 @@ class PersistentSolver:
             self.db.set_progress_handler(None,0)
             self._ledger=self._deadline=None
 
+    def source_cnf(self,width=None,clauses=None,layers=None,*,base=None,replace=None,witness=False):
+        """Checked adjacent-block source versions; replace an edge's entire CNF.
+
+        Initial requests supply width, clauses and a disjoint ordered partition.
+        Updates supply base and a map from edge indices to replacement clauses;
+        [] deletes those clauses. Decisions omit full witnesses by default.
+        """
+        if self._ledger is not None:raise RuntimeError('Concurrent query')
+        self._ledger,self._deadline=Ledger(),Deadline(self.query_timeout)
+        try:
+            self._database_budget()
+            self.db.set_progress_handler(lambda:int(time.monotonic()>=self._deadline.end),1000)
+            with self._phase('source_input'):
+                payload=dict(width=width,clauses=clauses,layers=layers,base=base,replace=replace,witness=witness)
+                input_bytes=len(json.dumps(payload).encode())
+                if input_bytes>self.max_input_bytes:raise BudgetExceeded('Source request exceeds input cap')
+                # Cached source nodes must not retain caller-owned mutable lists.
+                width,clauses,layers,base,replace,witness=deepcopy((width,clauses,layers,base,replace,witness))
+                store=KnowledgeStore(self.db,self.engine_id)
+                if base is None:
+                    if type(width) is not int or not 1<=width<=4:raise ValueError('Source width must be 1 to 4')
+                    if not isinstance(clauses,list) or not isinstance(layers,list) or len(layers)<2:
+                        raise ValueError('Supply CNF clauses and at least two variable blocks')
+                    layout=dict(width=width,layers=layers)
+                    with self.db:layout_id=store.put('source_layout',layout)[0]
+                else:
+                    if width is not None or clauses is not None or layers is not None:
+                        raise ValueError('Source edits keep the saved partition; supply only base and replacements')
+                    if self.db.execute('SELECT 1 FROM source_states WHERE engine=? AND id=?',(self.engine_id,base)).fetchone() is None:
+                        raise ValueError('Unknown source version in this checker namespace')
+                    layout_id=store.get(base,'source_version')['layout']
+                    if self.source_layers is not None and self.source_layers.layout_id==layout_id:
+                        layout=self.source_layers.layout
+                    else:layout=store.get(layout_id,'source_layout')
+                if self.source_layers is None or self.source_layers.layout_id!=layout_id:
+                    self.source_layers=SourceSolver(self,layout_id,layout)
+            result=self.source_layers.run(base,clauses,{} if replace is None else replace,witness)
+            result['source_updates']['input_bytes']=input_bytes
+            result['source_updates']['input_store']={field:getattr(store,field) for field in SourceSolver.storage_fields}
+            with self._phase('storage_accounting'):result['storage']=self.archive_usage()
+            self.last_metrics=self._ledger.finish();result.update(self.last_metrics)
+            return result
+        except BaseException as error:
+            self.last_metrics=self._ledger.finish()
+            if isinstance(error,sqlite3.Error) and getattr(error,'sqlite_errorcode',None)==sqlite3.SQLITE_FULL:
+                raise BudgetExceeded('Source archive cap reached; previous versions retained') from error
+            raise
+        finally:
+            self.db.set_progress_handler(None,0);self._ledger=self._deadline=None
+
     def layered_cnf(self,width,clauses,layers,*,witness=False):
         """Compile CNF whose supplied disjoint variable blocks are adjacent.
 
@@ -878,6 +937,9 @@ def main() -> int:
                         elif request.get("op") == "layered_cnf":
                             result=solver.layered_cnf(request['width'],request['clauses'],request['layers'],
                                 witness=request.get('witness',False))
+                        elif request.get('op')=='source_cnf':
+                            result=solver.source_cnf(request.get('width'),request.get('clauses'),request.get('layers'),
+                                base=request.get('base'),replace=request.get('replace'),witness=request.get('witness',False))
                         elif request.get("op") == "chain":
                             result = solver.chain(request.get("base"), replace=request.get("replace", {}),
                                 append=request.get("append", []), left=request.get("left", 3),

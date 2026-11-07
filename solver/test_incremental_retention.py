@@ -65,5 +65,12 @@ class IncrementalRetentionTests(unittest.TestCase):
                 s.layered(4,a['state'],append=[rng.getrandbits(256)|1])
             self.assertTrue(s.layered(4,a['state'],left=1,right=1)['answer'])
 
+    def test_legacy_retention_duplicate_ids_do_not_inflate_native_references(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            r=s.layered(1,append=[9,15]);node=s.layers.read(r['root'])
+            ids=[r['root'],node['left'],node['right']]
+            s._request(dict(mode='layered_retain',ids=ids+ids))
+            self.assertEqual(s._request(dict(mode='layered_drop',ids=ids))['evicted'],3)
+
 
 if __name__=='__main__':unittest.main()

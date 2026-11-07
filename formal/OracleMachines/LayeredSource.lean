@@ -31,6 +31,9 @@ theorem compileLocal_exact (width : Nat) (cnf : LocalCNF) (x y : Fin (2^width)) 
 structure CompiledSource where
   width : Nat
   buckets : Array LocalCNF
+  layers : Array (Array Nat)
+  positions : Std.HashMap Nat (Nat × Nat)
+  original : Array (Array (Array Int))
 
 def compileSource (request : Json) : Except String CompiledSource := do
   let width ← request.getObjValAs? Nat "width"
@@ -48,6 +51,7 @@ def compileSource (request : Json) : Except String CompiledSource := do
   let clauses ← request.getObjValAs? (Array (Array Int)) "clauses"
   if clauses.size > 200000 then throw "Source clause cap exceeded"
   let mut buckets : Array LocalCNF := Array.replicate (layers.size-1) #[]
+  let mut original : Array (Array (Array Int)) := Array.replicate (layers.size-1) #[]
   let mut literals := 0
   for clause in clauses do
     literals := literals+clause.size
@@ -66,12 +70,14 @@ def compileSource (request : Json) : Except String CompiledSource := do
     let localClause := located.map fun (layer,slot,positive) =>
       LocalLiteral.mk (decide (layer = edge+1)) slot positive
     buckets := buckets.modify edge (·.push localClause)
-  return ⟨width,buckets⟩
+    original := original.modify edge (·.push clause)
+  return ⟨width,buckets,layers,positions,original⟩
 
 def compileRequest (request : Json) : Except String Json := do
   let source ← compileSource request
   let masks := source.buckets.map fun bucket => relationMask (compileLocal source.width bucket)
   return Json.mkObj [("masks",toJson masks),("edges",toJson masks.size),
+    ("buckets",toJson source.original),
     ("relation_cells",toJson (masks.size*(2^source.width)^2))]
 
 def Tree.leaves {q : Nat} : {h : Nat} → Tree q h → List (Relation q)

@@ -122,6 +122,7 @@ class FastTests(unittest.TestCase):
             r = s.solve(MIXED)
             self.assertTrue(r["answer"])
             self.assertEqual(r["backend"], "lean_fallback")
+            self.assertIsNone(r["nodes"])
 
     def test_bounded_attempt_exhaustion_does_not_mean_unsat(self):
         with PersistentSolver(self.path, backend="auto") as s:

@@ -270,7 +270,7 @@ class PersistentSolver:
             fallback = self._live(bits, mode="baseline")
             fallback["parse_work"] += r["parse_work"]
             fallback.update(backend="lean_fallback", counted_complete=False,
-                            core_work=None, counted_work=None)
+                            core_work=None, counted_work=None, nodes=None)
             return fallback
         with tempfile.TemporaryDirectory(prefix="oracle-cdcl-") as directory:
             cnf = Path(directory) / "query.cnf"

@@ -39,6 +39,7 @@ native-decision axioms fail the audit. Warnings are treated as errors.
 | Executable cost semantics | [CostedSAT.lean](OracleMachines/CostedSAT.lean): `readRun_trace`, `evalRun_trace`, `solveRun_value`, `solveRun_bound`, `solveRun_fixed_width` | The instrumented evaluator realizes an explicit operational trace, the instrumented solver returns the verified solver's witness, and its counted work has a bound polynomial in encoding length for a fixed variable cap. |
 | Proposition 12.4: restricted core bound | `solveRun_bound`, `solveRun_fixed_width` | The same counted implementation has `T <= W^2 + 2^v (W+13) + 2`; fixing `v <= K` gives coefficient `14*2^K+3` and degree 2 in encoding length plus one. |
 | Binary parsing and combined decision | [Parsing.lean](OracleMachines/Parsing.lean): `decodeRun_value`, `decodeRun_bound`, `decideRun_sat`, `decideRun_unsat`, `decideRun_fixed_width` | The counted parser agrees with the existing parser, costs at most `8L+7`, and composes with the solver. On `encode f` with width at most `K`, total counted decision work is at most `(14*2^K+12)(L+1)^2`. |
+| Growing variable count | [Restricted.lean](OracleMachines/Restricted.lean): `decideRun_small_assignment_space`, `decideRun_logarithmic_width`, `small_assignment_space_requires_length` | If `2^v <= L+1` (in particular `v <= floor(log2(L+1))`), parser plus decision costs at most `24(L+1)^2`. Enforcing that premise by padding requires length at least `2^v-1`. |
 | Certified adaptive policy | [Hybrid.lean](OracleMachines/Hybrid.lean): `hybridRun_correct`, `serve_correct`, `hybridRun_overhead`, `actual_savings_identity`, `repeated_hit_savings` | A previously acquired witness is checked on each new formula; fallback is exact. Costs include validation, fallback, copying the acquired witness, and stream control. The savings identity follows the actual changing state. |
 | Accumulated exact results | [Cache.lean](OracleMachines/Cache.lean): `cache_lookup_sound`, `cacheStep_correct`, `cacheStep_exact`, `cacheStep_retains` | Every completed result remains available, including negative answers; lookup and insertion preserve exactness, assuming the loaded cache is intact. |
 | Obligations for another representation | [Invariant.lean](OracleMachines/Invariant.lean): `expansion_invariant`, `answer_at_cover` | The base, preservation, and exact new-coverage hypotheses imply exactness at every finite stage and at a covering stage for each input. |
@@ -132,7 +133,13 @@ input; JSON and ASCII-to-bit conversion remain outside this model.
 `some false` for UNSAT. For an input `encode f` with width at most `K`, parsing
 plus exact decision costs at most `(14*2^K+12)(L+1)^2`. Malformed encodings are
 rejected within `8L+8`. These are numerical bounds in the explicit abstract
-model. Counter arithmetic, garbage collection, physical memory traffic, and
+model. `Restricted.lean` also proves a bound with growing variable width:
+`v <= Nat.log 2 (L+1)` gives at most `24(L+1)^2` counted operations. This is
+a promised-family result. Satisfiability-preserving padding to enforce its
+premise requires `L >= 2^v-1`, so it does not give a polynomial reduction from
+all SAT inputs.
+
+Counter arithmetic, garbage collection, physical memory traffic, and
 compilation to a bit-machine still require a separate simulation argument.
 
 The native executable and [persistent service](../solver/README.md) use this

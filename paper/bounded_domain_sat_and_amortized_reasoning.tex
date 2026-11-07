@@ -25,7 +25,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small Bounded-domain SAT and amortized reasoning}
-\fancyhead[R]{\small Technical note}
+\fancyhead[R]{\small Perspective}
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0.3pt}
 \setlength{\parindent}{1.15em}
@@ -74,7 +74,7 @@
 }
 
 \title{\vspace{-1.0cm}\textbf{Bounded-Domain SAT, Compiled Knowledge,\\and Amortized Reasoning}\\[0.5em]
-\large A complexity-theoretic account of fast and deliberative computation}
+\large A perspective on resource accounting for learned reasoning}
 \author{}
 \date{7 November 2026}
 
@@ -83,16 +83,20 @@
 \vspace{-0.7cm}
 
 \begin{abstract}
-An NP-complete problem restricted to a fixed finite input domain admits an exact, precomputed answer representation. With an appropriate access model, the online cost of answering a query can be polynomial even when constructing and storing the representation is expensive. We formalize this observation for Boolean satisfiability, prove equality of the finite-domain restrictions of deterministic and nondeterministic polynomial-time language classes, and distinguish that equality from both the unrestricted P versus NP question and the relativized equalities of Baker, Gill, and Solovay. We then replace exhaustive tables by neural representations and identify the separate roles of model size, finite precision, inference time, training time, and uniform constructibility. An explicit ReLU construction establishes exact representability on a bounded domain without asserting compactness. Finally, an amortization lemma for exact caching and a certified learned-prediction-and-fallback architecture provide a computational interpretation of the interaction between System 1 and System 2. The resulting account concerns the redistribution and reuse of computation, rather than a collapse of unrestricted complexity classes.
+Learned reasoning redistributes computation between acquiring knowledge and using it. This perspective brings together established ideas from knowledge compilation, nonuniform complexity, memoization, amortized inference, and certifying algorithms to make that redistribution explicit. Boolean satisfiability provides a concrete setting in which construction cost, representation size, finite precision, online evaluation, and correctness can be accounted for separately. Elementary finite-domain constructions illustrate exact tabulation and neural memorization; they are background facts rather than new complexity-class collapses. Polynomial-size exact models yield a nonuniform conclusion, while uniform polynomial-time construction would yield a polynomial-time SAT algorithm. Exact caching illustrates reuse over repeated queries, and a terminating certified fallback architecture preserves correctness independently of predictor accuracy. Neither guarantee alone establishes an end-to-end speedup. The contribution is a unified resource-accounting perspective on fast and deliberative computation, with explicit assumptions for assessing when acquired knowledge repays its cost.
 \end{abstract}
 
 \section{Introduction}
 
 A difficult decision problem may be expensive to solve on first encounter and inexpensive to answer subsequently. If an exact answer has already been computed and retained, a later query can be answered by retrieval rather than renewed search. A learned representation may extend this reuse beyond identical inputs by capturing regularities shared by different instances. These observations motivate a distinction between the cost of acquiring knowledge and the cost of using it.
 
-Knowledge compilation provides a related framework: the size of a compiled representation and the tractability of the queries it supports are distinct design dimensions \citep{darwiche2002}. In the present setting, the compiled object represents the answers to a family of bounded-size SAT instances. This is a particular compilation construction, not an assertion that every conventional knowledge-compilation method stores the answers to all possible instances.
+Knowledge compilation provides a foundational framework: the size of a compiled representation and the tractability of the queries it supports are distinct design dimensions \citep{darwiche2002}. In the present setting, the compiled object represents the answers to a family of bounded-size SAT instances. This is a particular compilation construction, not an assertion that every conventional knowledge-compilation method stores the answers to all possible instances.
 
-The central observation is precise but limited. For every fixed maximum input length, all membership answers can be encoded in a finite object. This establishes efficient online evaluation under explicit representation and access assumptions. It does not establish that the object has polynomial size, that it can be constructed in polynomial time, or that one uniform algorithm solves all input lengths efficiently. The purpose of this note is to make these distinctions explicit while retaining the useful interpretation of learning as amortization of reasoning.
+The theory of compilability formalizes how preprocessing a fixed part of an instance can simplify subsequent queries, with representation-size constraints central to the resulting complexity questions \citep{cadoli2002}. Here only the maximum input length is fixed, and the table covers all formulas up to that length. Allowing an exponentially large table gives an elementary baseline; it does not establish tractability under the succinctness constraints studied in compilability. The Learning to Reason framework likewise treats knowledge acquisition and subsequent query answering together, making the agent's environment and learning interface explicit \citep{khardon1997}.
+
+This article is a perspective and explanatory synthesis of these established ideas. The elementary proofs make resource assumptions inspectable; no new complexity separation, neural capacity bound, or empirical speedup is claimed. The organizing question is when expenditure on reusable knowledge is repaid by lower subsequent computation, and what correctness guarantees survive this transfer. The proposed synthesis makes an explicit connection between learned reasoning and three distinct complexity settings: finite-domain restriction, access to a fixed oracle language, and model families supplied as nonuniform advice. This connection identifies which interpretation of a learned ``oracle'' is justified by its representation and acquisition assumptions. Prior work on reasoning distillation motivates the computational transfer; the oracle and complexity-class distinctions require the separate analysis developed here.
+
+The finite-domain observation used as a starting point is precise but limited. For every fixed maximum input length, all membership answers can be encoded in a finite object. This establishes efficient online evaluation under explicit representation and access assumptions. It does not establish that the object has polynomial size, that it can be constructed in polynomial time, or that one uniform algorithm solves all input lengths efficiently. The purpose of this note is to make these distinctions explicit while retaining the useful interpretation of learning as amortization of reasoning.
 
 The terms \emph{System 1} and \emph{System 2} are used here as a computational analogy. The former denotes rapid retrieval or evaluation of acquired knowledge, and the latter denotes additional computation used to obtain an answer not already supported by that knowledge. Neither term is identified with a complexity class.
 
@@ -233,6 +237,10 @@ Let $S\subseteq D_N$. Since $S$ is finite, it can be represented by a finite tri
 Every subset of $D_N$ consequently occurs as the restriction of a language in $\Pclass$, and therefore also as the restriction of a language in $\NPclass$. The reverse inclusions in $2^{D_N}$ hold by definition.
 \end{proof}
 
+This is a standard finite-language observation, not a SAT-specific tractability result. In fact, writing $\mathsf{REG}$ for the regular languages, the same proof gives
+\begin{equation}
+\mathsf{REG}\restr D_N=\Pclass\restr D_N=\NPclass\restr D_N=2^{D_N}.
+\end{equation}
 The equality is not specific to SAT or to learning. It records the fact that asymptotic complexity distinctions cannot be inferred from a single finite domain. Its operational interpretation is nevertheless useful: for a prescribed domain, exact answers can be made available through an appropriate compiled representation.
 
 The quantifiers are essential. The statement that
@@ -346,7 +354,7 @@ At one fixed $N$, such a representation exists without a learning theorem. The m
 
 \begin{lemma}[Neural realization of a finite answer table]
 \label{lem:relu}
-For every fixed $N$, the SAT decision function on exactly $N$ input bits has an exact one-hidden-layer ReLU representation with at most $2^N$ hidden units and $O((N+1)2^N)$ parameters.
+For every fixed $N$, the SAT decision function on exactly $N$ input bits has an exact one-hidden-layer ReLU representation with at most $2^N$ hidden units and $O((N+1)2^N)$ parameters. With a fixed dense serialization convention, architecture and parameters admit an $O((N+1)2^N)$-bit description. Evaluation on binary inputs can use exact integer arithmetic with $O(\log(N+2))$ bits per numerical intermediate.
 \end{lemma}
 
 \begin{proof}
@@ -366,8 +374,12 @@ Define the linear readout
 f_N(x)=\sum_{u\in\SAT\cap\bits^N}r_u(x).
 \label{eq:relu-sat}
 \end{equation}
-Exactly one indicator $r_u$ is nonzero at each binary input if all indicators are present; after selecting the accepting indices, the sum is one precisely on SAT encodings. Each unit has $N$ input weights and a bias. The unit weights are $+1$ or $-1$, and the bias has magnitude at most $N$. The claimed size bound follows. An empty sum is implemented as the constant zero function.
+Exactly one indicator $r_u$ is nonzero at each binary input if all indicators are present; after selecting the accepting indices, the sum is one precisely on SAT encodings. Each unit has $N$ input weights and a bias. The unit weights are $+1$ or $-1$, and the bias is $1-|u|_1$, of magnitude at most $\max\{1,N\}$. The parameter-count bound follows. An empty sum is implemented as the constant zero function.
+
+For the description bound, serialize the dense layers in a fixed order, encoding each input weight by one bit, each bias by $O(\log(N+2))$ bits, and each readout weight (equal to one) by constant space. The dimensions require only $O(N+\log(N+2))$ header bits. For at most $2^N$ hidden units this totals $O((N+\log(N+2))2^N)=O((N+1)2^N)$ bits. Each hidden preactivation and each sequential partial sum used to compute it has magnitude $O(N+1)$. On binary inputs at most one hidden output is one, so every partial readout sum is zero or one. Thus $O(\log(N+2))$ bits suffice for each numerical intermediate; loop indices and addresses are accounted for separately.
 \end{proof}
+
+Finite-sample memorization is a well-established expressivity question; for example, \citet{yun2019} analyze capacity bounds for ReLU networks with different depth and width constraints. The construction here is the elementary Boolean-cube indicator construction and makes no optimality claim.
 
 This construction is explicit and exact on binary inputs, but it is not a polynomial-size construction in $N$. Evaluating all hidden units by a conventional dense forward pass can require $O(N2^N)$ arithmetic operations. The accepting units themselves are selected using the already-known SAT answers. Consequently, the construction does not resolve the cost of acquiring those answers.
 
@@ -395,6 +407,12 @@ The first assertion is the definition of polynomial-time computation with polyno
 For the second assertion, given $x$ of length $n$, construct $\theta_n$ and then run $E(x,\theta_n)$. Both stages take polynomial time, so this is a uniform polynomial-time decider for SAT. Composing it with the polynomial-time reductions supplied by NP-completeness puts every language in $\NPclass$ in $\Pclass$.
 \end{proof}
 
+The first conclusion is an application of the standard advice framework \citep{karp1980}. It also has a stronger known consequence: $\SAT\in\Ppoly$ implies $\NPclass\subseteq\Ppoly$. To see this, a reduction from length-$n$ inputs produces SAT instances of lengths at most $p(n)$ for a polynomial $p$; concatenating the advice strings for all lengths up to $p(n)$ still uses polynomial space. The Karp--Lipton theorem, in its second-level form incorporating Sipser's improvement, then yields
+\begin{equation}
+\mathsf{PH}=\Sigma_2^{\Pclass},
+\end{equation}
+where $\mathsf{PH}$ is the polynomial hierarchy \citep{karp1982}. Thus compact exact model families are a substantial complexity-theoretic hypothesis even without an efficient construction algorithm. This consequence does not by itself assert $\Pclass=\NPclass$.
+
 The hypothesis includes correctness on all inputs, not merely on a training distribution. If construction is described as learning, the uniform polynomial budget must include data acquisition, exact label generation when required, parameter fitting, and any other computation needed to obtain the exact model. Unlimited preprocessing cannot be converted into a uniform polynomial-time algorithm by charging only inference.
 
 A fixed model for each length and a model retrained after every query also require different descriptions. The latter is a stateful procedure whose answers may depend on query history. It is not automatically a fixed oracle language. Nevertheless, if its state has polynomial size and it performs polynomially many polynomial-cost updates, those updates can be simulated within polynomial time. Any external exact-solving costs must be added rather than hidden inside the update operation.
@@ -402,7 +420,7 @@ A fixed model for each length and a model retrained after every query also requi
 \section{Amortization by exact caching}
 \label{sec:cache}
 
-The simplest System 1/System 2 implementation is an exact dictionary. On a previously solved input, the fast component retrieves the answer. On a cache miss, a complete solver computes the answer and the result is stored. The solver is an ordinary deterministic algorithm; its designation as System 2 supplies no nondeterministic computational power.
+Memoization stores the results of earlier computations for later reuse, a connection to machine learning articulated by \citet{michie1968}. The simplest System 1/System 2 implementation is an exact dictionary. On a previously solved input, the fast component retrieves the answer. On a cache miss, a complete solver computes the answer and the result is stored. The solver is an ordinary deterministic algorithm; its designation as System 2 supplies no nondeterministic computational power.
 
 \begin{lemma}[Amortized cost of exact reuse]
 \label{lem:cache}
@@ -450,13 +468,19 @@ certifies a positive answer when it evaluates to one. A failed check does not ce
 
 An exact hybrid can return a previously cached exact answer, accept a satisfying assignment after verification, or invoke a complete solver. A negative result may also be accepted using a sound checked refutation; generating and checking the refutation are part of the cost, and no polynomial upper bound on its length is assumed. The fallback criterion must be implementable. There is no free mechanism that recognizes all erroneous model predictions.
 
+This separation between an answer-producing procedure and a trusted checker follows the established principle of certifying algorithms \citep{mcconnell2011}. Neural guidance can also be integrated within exact search: NeuroCore uses learned unsatisfiable-core predictions to guide branching in existing SAT solvers \citep{selsam2019core}. Such guidance differs from the separate fast path considered here, but likewise separates prediction quality from logical correctness.
+
+For a refutation $\pi$, a checker polynomial in $|\varphi|+|\pi|$ need not run in time polynomial in $|\varphi|$ alone. In the Cook--Reckhow framework, the existence of a sound, complete, polynomially checkable propositional proof system with polynomial-size proofs for every tautology is equivalent to $\NPclass=\coNP$ \citep{cook1979}. The corresponding statement for UNSAT follows by negation. The architecture assumes neither universally short negative certificates nor an efficient procedure for finding them.
+
 \begin{proposition}[Soundness of certified fallback]
-If every fast-path acceptance is justified by an exact cache entry or a sound verifier, and every remaining query is answered by a terminating exact solver, then the hybrid decides SAT correctly on its domain, irrespective of the predictor's error rate.
+Assume the fast-path procedure terminates on every input, returning either a certified answer or a fallback signal. If each returned answer is justified by an exact cache entry or a sound verifier for that answer, and each fallback signal invokes a terminating exact solver, then the hybrid is a total correct SAT decider on its domain, irrespective of the predictor's error rate.
 \end{proposition}
 
 \begin{proof}
-A fast-path answer is correct by its certification condition. Any input not answered on that path reaches the exact solver and is answered correctly there. These cases exhaust the queries, and termination follows from bounded fast-path computation and solver termination.
+A fast-path answer is correct by its certification condition. Any input not answered on that path reaches the exact solver and is answered correctly there. Fast-path termination ensures that one of these cases is reached on every input. Solver termination then guarantees termination of the entire decision procedure.
 \end{proof}
+
+A finite timeout covering prediction, certificate generation, and checking can enforce the fast-path termination condition. An unfinished or failed check must trigger fallback. Soundness alone is insufficient: a predictor that loops forever can otherwise prevent the complete solver from being reached.
 
 \begin{figure}[tbp]
 \centering
@@ -512,16 +536,27 @@ C_{\mathrm{solve}}(X)+C_{\mathrm{update}}(X)
 \end{equation}
 When $\rho_N=0$, the second term is interpreted as zero. For an adaptive model, the same identity can be applied conditionally on the query history and then averaged over that history. A low fallback rate can yield a substantial expected speedup without any polynomial worst-case guarantee. Rare expensive cases must still be counted.
 
+These identities account for work; they do not prove that the hybrid is faster. For a specified solver-only baseline with cost $B_i$ on query $i$, end-to-end improvement on the same sequence requires
+\begin{equation}
+C_{\mathrm{initial}}+\sum_{i=1}^{Q}C_{\mathrm{fast},i}
++\sum_{i\in F}(C_{\mathrm{solve},i}+C_{\mathrm{update},i})
+<\sum_{i=1}^{Q}B_i.
+\label{eq:break-even}
+\end{equation}
+For comparison with a cache-only baseline, its actual lookup, storage, and miss-solving costs must replace the right-hand side. All terms must use the same cost model. Verification overhead, training expenditure, or a concentration of hard instances among fallbacks can prevent improvement even when prediction accuracy is high. Establishing a speedup therefore requires an additional theorem under explicit workload assumptions or measurements against these baselines; no such speedup result is asserted here.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 
 The finite table represents an extreme form of acquired knowledge. After all relevant answers have been computed, the online phase needs only recognition and retrieval. Exact caching acquires that knowledge incrementally, while learning attempts a more economical representation that can transfer information across inputs. The common mechanism is reuse of earlier computational effort.
 
+Amortized inference also has algorithmic precedents: \citet{stuhlmuller2013} invest computation in learning stochastic inverses to support subsequent inference in Bayesian networks. Their probabilistic setting differs from exact SAT decision, but directly illustrates the acquisition-versus-use distinction.
+
 This interpretation has a cognitive counterpart. \citet{gershman2014} study amortized inference, in which earlier sub-inferences are reused across related queries, and report experimental evidence consistent with such reuse. It is an account of interactions between inference and memory, not a demonstration that human cognition solves unrestricted NP-complete problems in polynomial time.
 
 Reliable fast judgment also depends on the task environment. \citet{kahneman2009} emphasize environmental predictability and opportunities to learn its regularities when assessing intuitive expertise. In the present framework, these considerations motivate examining the query distribution and the scope over which stored or learned knowledge remains applicable. Subjective confidence is not used as an exactness guarantee.
 
-A direct machine-learning analogue is investigated by \citet{yu2024}: outputs produced using higher-compute reasoning procedures are distilled into models that answer without reproducing the same intermediate reasoning sequence. Their reported successes for several techniques provide empirical support for transferring some online computation into parameters. They do not establish exactness on all inputs or eliminate the need for additional reasoning on every task.
+A direct machine-learning analogue is investigated by \citet{yu2024}: outputs produced using higher-compute reasoning procedures are distilled into models that answer without reproducing the same intermediate reasoning sequence. Their reported successes for several techniques provide empirical support for transferring some online computation into parameters. They do not establish exactness on all inputs or eliminate the need for additional reasoning on every task. We cite this work for the distillation mechanism, not for an oracle-machine analysis or a connection to $\Pclass$ versus $\NPclass$. The connection pursued in this perspective is to ask what such a distilled representation would imply under progressively stronger assumptions: exactness on a fixed finite domain, polynomial-time evaluation with polynomial-size advice across lengths, and uniform polynomial-time acquisition. These assumptions lead to different conclusions, as Sections~\ref{sec:restriction}, \ref{sec:oracles}, and~\ref{sec:uniformity} explain.
 
 The appropriate resource description is therefore joint rather than one-dimensional:
 \begin{equation}
@@ -533,21 +568,17 @@ The appropriate resource description is therefore joint rather than one-dimensio
 \end{equation}
 where $\rho_N$ is fallback frequency and $\varepsilon_N$ is the error rate under a specified evaluation criterion. For the certified exact hybrid, $\varepsilon_N=0$ under the stated assumptions even when the predictor alone is inaccurate. Its fallback cost may nevertheless be large.
 
-An exhaustive table offers exactness at high storage and acquisition cost. A compact predictor may offer economical reuse but needs an explicit correctness or error model. A solver-predictor combination trades occasional additional computation against lower average response cost. This motivates studying when the expense of acquiring reusable knowledge is repaid by reduced future search.
+An exhaustive table offers exactness at high storage and acquisition cost. A compact predictor may offer economical reuse but needs an explicit correctness or error model. A solver-predictor combination may lower average response cost when saved search exceeds its acquisition and operating overhead. This motivates studying when the expense of acquiring reusable knowledge is repaid by reduced future search.
 
 Topological compactness and sparse training coverage alone do not determine any of these complexity conclusions. Here the bounded domain is finite because its binary encoding length is bounded. A previously unseen input need not be difficult, a sparse training set need not force retraining on every query, and failure of one predictor is not a lower bound against every algorithm. These distinctions keep the System 1/System 2 interpretation separate from unsupported complexity-class claims.
 
 \section{Conclusion}
 
-For every fixed finite input domain, the answers to SAT admit a finite exact representation and an efficient online retrieval mechanism under an explicit access model. The corresponding language-class identity is
-\begin{equation}
-\Pclass\restr D_N=\NPclass\restr D_N=2^{D_N}.
-\end{equation}
-This identity does not imply $\Pclass=\NPclass$, and a finite SAT oracle does not reproduce the unrestricted relativized equalities of Baker, Gill, and Solovay. Representation size, construction cost, and uniformity remain decisive when the domain bound grows.
+A resource-accounting perspective on learned reasoning separates the expense of acquiring knowledge from the expense of storing, evaluating, and certifying it. Connecting this distinction to oracle machines and the P versus NP question requires specifying whether the representation is fixed, supplied separately for each input length, or constructed uniformly. The established theories of compilation, nonuniform computation, memoization, and amortized inference provide complementary ways to describe this transfer of work across time and across related queries.
 
-Neural networks provide an alternative representation of acquired information. Exact finite-domain representability can be proved constructively, but compactness, efficient evaluation, and successful acquisition are separate hypotheses. Polynomial-size exact models supplied separately for each length yield a nonuniform conclusion; a uniform polynomial-time construction of such SAT models would yield a uniform polynomial-time SAT algorithm.
+Finite-domain tabulation and neural memorization supply transparent baseline constructions. Their existence is elementary and does not establish compactness, efficient acquisition, or unrestricted tractability. Polynomial-size exact model families have the standard nonuniform consequences, including the Karp--Lipton collapse under the stated assumptions; uniform polynomial-time construction would instead give a polynomial-time SAT algorithm.
 
-The constructive insight is the transfer of work across time and across related queries. Exact reasoning can produce knowledge that later retrieval or learned evaluation uses cheaply. Caching gives a formal amortization bound, and certified fallback preserves correctness while allowing learned shortcuts. In this sense, fast processing can be the product of earlier deliberation rather than evidence that the distinction between searching for a solution and checking one has disappeared at every scale.
+Caching supplies an accounting bound for exact reuse. A terminating certified fallback procedure supplies correctness independently of predictor accuracy. Neither establishes end-to-end acceleration without further assumptions about costs and queries. A useful evaluation must jointly report acquisition, storage, inference, verification, fallback, and update costs against solver-only and cache-only baselines. This is the practical question highlighted by the synthesis: under what conditions does reusable knowledge repay the computation required to obtain it?
 
 \FloatBarrier
 \begin{thebibliography}{99}
@@ -563,6 +594,18 @@ Blum, A., and Rivest, R.~L. (1988).
 Training a 3-node neural network is NP-complete.
 \emph{Advances in Neural Information Processing Systems}, 1.
 \url{https://proceedings.neurips.cc/paper/1988/hash/3def184ad8f4755ff269862ea77393dd-Abstract.html}.
+
+\bibitem[Cadoli et~al.(2002)Cadoli, Donini, Liberatore, and Schaerf]{cadoli2002}
+Cadoli, M., Donini, F.~M., Liberatore, P., and Schaerf, M. (2002).
+Preprocessing of intractable problems.
+\emph{Information and Computation}, 176(2), 89--120.
+\href{https://doi.org/10.1006/inco.2001.3043}{doi:10.1006/inco.2001.3043}.
+
+\bibitem[Cook and Reckhow(1979)]{cook1979}
+Cook, S.~A., and Reckhow, R.~A. (1979).
+The relative efficiency of propositional proof systems.
+\emph{Journal of Symbolic Logic}, 44(1), 36--50.
+\href{https://doi.org/10.2307/2273702}{doi:10.2307/2273702}.
 
 \bibitem[Cook(1971)]{cook1971}
 Cook, S.~A. (1971).
@@ -588,6 +631,42 @@ Conditions for intuitive expertise: A failure to disagree.
 \emph{American Psychologist}, 64(6), 515--526.
 \href{https://doi.org/10.1037/a0016755}{doi:10.1037/a0016755}.
 
+\bibitem[Karp and Lipton(1980)]{karp1980}
+Karp, R.~M., and Lipton, R.~J. (1980).
+Some connections between nonuniform and uniform complexity classes.
+In \emph{Proceedings of the Twelfth Annual ACM Symposium on Theory of Computing}, pp.~302--309.
+\href{https://doi.org/10.1145/800141.804678}{doi:10.1145/800141.804678}.
+
+\bibitem[Karp and Lipton(1982)]{karp1982}
+Karp, R.~M., and Lipton, R.~J. (1982).
+Turing machines that take advice.
+\emph{L'Enseignement Math\'ematique}, 28, 191--209.
+\href{https://doi.org/10.5169/seals-52237}{doi:10.5169/seals-52237}.
+
+\bibitem[Khardon and Roth(1997)]{khardon1997}
+Khardon, R., and Roth, D. (1997).
+Learning to reason.
+\emph{Journal of the ACM}, 44(5), 697--725.
+\href{https://doi.org/10.1145/265910.265918}{doi:10.1145/265910.265918}.
+
+\bibitem[McConnell et~al.(2011)McConnell, Mehlhorn, N\"aher, and Schweitzer]{mcconnell2011}
+McConnell, R.~M., Mehlhorn, K., N\"aher, S., and Schweitzer, P. (2011).
+Certifying algorithms.
+\emph{Computer Science Review}, 5(2), 119--161.
+\href{https://doi.org/10.1016/j.cosrev.2010.09.009}{doi:10.1016/j.cosrev.2010.09.009}.
+
+\bibitem[Michie(1968)]{michie1968}
+Michie, D. (1968).
+``Memo'' functions and machine learning.
+\emph{Nature}, 218, 19--22.
+\href{https://doi.org/10.1038/218019a0}{doi:10.1038/218019a0}.
+
+\bibitem[Selsam and Bj\o rner(2019)]{selsam2019core}
+Selsam, D., and Bj\o rner, N. (2019).
+Guiding high-performance SAT solvers with unsat-core predictions.
+In \emph{Theory and Applications of Satisfiability Testing (SAT 2019)}.
+\url{https://arxiv.org/abs/1903.04671}.
+
 \bibitem[Selsam et~al.(2019)Selsam, Lamm, B\"unz, Liang, de~Moura, and Dill]{selsam2019}
 Selsam, D., Lamm, M., B\"unz, B., Liang, P., de~Moura, L., and Dill, D.~L. (2019).
 Learning a SAT solver from single-bit supervision.
@@ -600,11 +679,24 @@ On the computational power of neural nets.
 \emph{Journal of Computer and System Sciences}, 50(1), 132--150.
 \href{https://doi.org/10.1006/jcss.1995.1013}{doi:10.1006/jcss.1995.1013}.
 
+\bibitem[Stuhlm\"uller et~al.(2013)Stuhlm\"uller, Taylor, and Goodman]{stuhlmuller2013}
+Stuhlm\"uller, A., Taylor, J., and Goodman, N.~D. (2013).
+Learning stochastic inverses.
+\emph{Advances in Neural Information Processing Systems}, 26.
+\url{https://proceedings.neurips.cc/paper/2013/hash/7f53f8c6c730af6aeb52e66eb74d8507-Abstract.html}.
+
 \bibitem[Yu et~al.(2024)Yu, Xu, Weston, and Kulikov]{yu2024}
 Yu, P., Xu, J., Weston, J., and Kulikov, I. (2024).
 Distilling System 2 into System 1.
 \emph{arXiv:2407.06023}.
 \url{https://arxiv.org/abs/2407.06023}.
+
+
+\bibitem[Yun et~al.(2019)Yun, Sra, and Jadbabaie]{yun2019}
+Yun, C., Sra, S., and Jadbabaie, A. (2019).
+Small ReLU networks are powerful memorizers: A tight analysis of memorization capacity.
+\emph{Advances in Neural Information Processing Systems}, 32.
+\url{https://arxiv.org/abs/1810.07770}.
 
 \end{thebibliography}
 \end{document}

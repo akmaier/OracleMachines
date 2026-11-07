@@ -10,7 +10,35 @@ structure CheckedTree where
   tree : Tree (2^width) height
   valid : tree.Valid
 
-abbrev Store := Std.HashMap String (Json × CheckedTree)
+structure Store where
+  nodes : Std.HashMap String (Json × CheckedTree) := {}
+  incoming : Std.HashMap String Nat := {}
+
+def children (body : Json) : Except String (List String) := do
+  if (← body.getObjValAs? Nat "height") == 0 then return []
+  return [← body.getObjValAs? String "left", ← body.getObjValAs? String "right"]
+
+def Store.insert (store : Store) (id : String) (node : Json × CheckedTree) : Except String Store := do
+  let mut incoming := store.incoming
+  for child in ← children node.1 do
+    incoming := incoming.insert child (incoming[child]?.getD 0 + 1)
+  return { nodes := store.nodes.insert id node, incoming := incoming }
+
+/-- Delete only unreferenced identities, in parent-before-child order. A surviving
+checked node therefore never loses a named dependency. No full-store scan. -/
+def dropNodes (store : Store) (request : Json) : Except String (Store × Json) := do
+  let ids ← request.getObjValAs? (Array String) "ids"
+  if ids.size > 4096 then throw "Eviction batch exceeds capacity"
+  let mut out := store
+  for id in ids do
+    let some node := out.nodes[id]? | throw "Unknown evicted node"
+    if out.incoming[id]?.getD 0 != 0 then throw "Cannot evict a referenced node"
+    for child in ← children node.1 do
+      let count := out.incoming[child]?.getD 0
+      if count == 0 then throw "Invalid native reference count"
+      out := { out with incoming := out.incoming.insert child (count-1) }
+    out := { out with nodes := out.nodes.erase id, incoming := out.incoming.erase id }
+  return (out, Json.mkObj [("valid",toJson true),("evicted",toJson ids.size)])
 
 /-- Retention changes availability, never the checked meaning of an identity.
 The caller supplies a dependency-closed live set; trees retain their children. -/
@@ -19,15 +47,15 @@ def retain (store : Store) (request : Json) : Except String (Store × Json) := d
   if ids.size > 200000 then throw "Retention set exceeds capacity"
   let mut out : Store := {}
   for id in ids do
-    let some node := store[id]? | throw "Unknown retained node"
-    out := out.insert id node
+    let some node := store.nodes[id]? | throw "Unknown retained node"
+    out ← out.insert id node
   for id in ids do
-    let some (body, tree) := out[id]? | throw "Missing retained node"
+    let some (body, tree) := out.nodes[id]? | throw "Missing retained node"
     if tree.height > 0 then
       let left ← body.getObjValAs? String "left"
       let right ← body.getObjValAs? String "right"
-      if !out.contains left || !out.contains right then throw "Retention set is not dependency closed"
-  return (out, Json.mkObj [("valid", toJson true), ("retained", toJson out.size)])
+      if !out.nodes.contains left || !out.nodes.contains right then throw "Retention set is not dependency closed"
+  return (out, Json.mkObj [("valid", toJson true), ("retained", toJson out.nodes.size)])
 
 theorem cast_valid {q h k : Nat} (eq : h = k) (t : Tree q h) (valid : t.Valid) :
     (eq ▸ t).Valid := by subst k; exact valid
@@ -54,10 +82,10 @@ def defineNodes (store : Store) (request : Json) : Except String (Store × Json)
   let mut out := store
   for node in nodes do
     let id ← node.getObjValAs? String "id"
-    if let some old := out[id]? then
+    if let some old := out.nodes[id]? then
       if old.1 != node then throw "Chain identity collision"
     else
-      if out.size ≥ 200000 then throw "Native chain store capacity exceeded"
+      if out.nodes.size ≥ 200000 then throw "Native chain store capacity exceeded"
       let width ← node.getObjValAs? Nat "width"
       if width == 0 || width > 4 then throw "Layer width must be 1 to 4"
       let height ← node.getObjValAs? Nat "height"
@@ -69,8 +97,8 @@ def defineNodes (store : Store) (request : Json) : Except String (Store × Json)
         else do
           let left ← node.getObjValAs? String "left"
           let right ← node.getObjValAs? String "right"
-          let some (_, a) := out[left]? | throw "Missing left chain child"
-          let some (_, b) := out[right]? | throw "Missing right chain child"
+          let some (_, a) := out.nodes[left]? | throw "Missing left chain child"
+          let some (_, b) := out.nodes[right]? | throw "Missing right chain child"
           if w : a.width = b.width then
             if h : a.height = b.height then
               let bt : Tree (2^a.width) a.height := h.symm ▸ w.symm ▸ b.tree
@@ -83,7 +111,7 @@ def defineNodes (store : Store) (request : Json) : Except String (Store × Json)
             else throw "Unbalanced layered node"
           else throw "Layer width mismatch"
 
-      out := out.insert id (node, checked)
+      out ← out.insert id (node, checked)
   return (out, Json.mkObj [("valid", toJson true)])
 
 /-- Prepend each left endpoint. Every accepted split has a middle state. -/
@@ -174,7 +202,7 @@ theorem identity_suffix_preserves_prefix {q h : Nat} (t : Tree q h) (valid : t.V
 
 def query (store : Store) (request : Json) : Except String Json := do
   let root ← request.getObjValAs? String "root"
-  let some (_, checked) := store[root]? | throw "Unknown chain root"
+  let some (_, checked) := store.nodes[root]? | throw "Unknown chain root"
   let size ← request.getObjValAs? Nat "size"
   if size > 2^checked.height then throw "Chain size exceeds capacity"
   if size < 2^checked.height && !relationEqual (splitSummary checked.tree size).2 identity then

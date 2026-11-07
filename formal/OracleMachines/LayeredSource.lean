@@ -116,7 +116,7 @@ This intentionally charges a linear source-binding pass. -/
 def sourceQuery (store : Store) (request : Json) : Except String Json := do
   let source ← compileSource request
   let root ← request.getObjValAs? String "root"
-  let some (_, checked) := store[root]? | throw "Unknown source root"
+  let some (_, checked) := store.nodes[root]? | throw "Unknown source root"
   if w : source.width = checked.width then
     let expected : List (Relation (2^checked.width)) := source.buckets.toList.map fun bucket =>
       w ▸ compileLocal source.width bucket

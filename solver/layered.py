@@ -29,6 +29,8 @@ class LayeredSolver:
         self.service=service;self.db=service.db
         self.store=KnowledgeStore(self.db,service.engine_id)
         self.cache=PayloadCache(service.active_cache_bytes,2048);self.verified=set();self.worker=None
+        self.live_root=None;self.live_refs={};self.live_children={}
+        self.native_children={};self.native_incoming={};self.inactive=set();self.evictable=set()
         self.metrics={}
 
     @staticmethod
@@ -94,9 +96,69 @@ class LayeredSolver:
         if position!=size:raise ValueError('Incomplete chain witness')
         self.metrics['witness_checks']=position
 
+    def forget_native(self):
+        self.worker=None;self.verified.clear();self.live_root=None
+        self.live_refs.clear();self.live_children.clear();self.native_children.clear()
+        self.native_incoming.clear();self.inactive.clear();self.evictable.clear()
+
+    def activate(self,root):
+        """Add the new root before removing the old one; shared subtrees stay live.
+
+        Counts include live parent edges and the current root reference. Old
+        versions remain in SQLite; native inactive roots can be evicted later.
+        """
+        if root==self.live_root:return
+        stack=[root]
+        while stack:
+            self.service._check_deadline();token=stack.pop()
+            self.metrics['reachability_updates']+=1
+            prior=self.live_refs.get(token,0);self.live_refs[token]=prior+1
+            if prior:continue
+            self.inactive.discard(token);self.evictable.discard(token)
+            node=self.read(token)
+            children=(node['left'],node['right']) if node['height'] else ()
+            self.live_children[token]=children;stack.extend(children)
+        stack=[] if self.live_root is None else [self.live_root]
+        while stack:
+            self.service._check_deadline();token=stack.pop()
+            self.metrics['reachability_updates']+=1
+            self.live_refs[token]-=1
+            if self.live_refs[token]:continue
+            del self.live_refs[token]
+            stack.extend(self.live_children.pop(token))
+            if token in self.verified:
+                self.inactive.add(token)
+                if self.native_incoming.get(token,0)==0:self.evictable.add(token)
+        self.live_root=root
+
+    def evict(self,needed):
+        """Incremental parent-before-child eviction; native code checks counts."""
+        while needed>0:
+            batch=[]
+            for _ in range(min(needed,128)):
+                self.service._check_deadline()
+                if not self.evictable:raise ValueError('Native retention reference invariant failed')
+                token=self.evictable.pop();batch.append(token)
+                self.inactive.remove(token);self.verified.remove(token)
+                self.native_incoming.pop(token,None)
+                for child in self.native_children.pop(token):
+                    self.native_incoming[child]-=1
+                    if self.native_incoming[child]==0 and child in self.inactive:self.evictable.add(child)
+            checked=self.service._request(dict(mode='layered_drop',ids=batch))
+            if not checked['valid']:raise ValueError('Native eviction rejected')
+            self.metrics['native_evictions']+=len(batch)
+            self.metrics['retention_visits']+=len(batch);needed-=len(batch)
+
     def ensure(self,root):
         if self.worker is not self.service.process or self.worker is None or self.worker.poll() is not None:
-            self.verified.clear()
+            self.forget_native()
+            # Also handles a failed Python/SQLite operation with a live worker.
+            self.service._request(dict(mode='layered_reset'))
+            self.worker=self.service.process
+        self.activate(root)
+        cap=min(200000,self.service.native_layer_cells//self.states**2)
+        if len(self.live_refs)>cap:
+            raise BudgetExceeded('Native layered working set exceeds cell budget; archive retained')
         pending=[];seen=set();stack=[(root,False)]
         while stack:
             token,ready=stack.pop()
@@ -106,29 +168,19 @@ class LayeredSolver:
                 stack.extend([(token,True),(node['right'],False),(node['left'],False)])
             else:
                 pending.append(dict(id=token,**node));seen.add(token)
-        cap=min(200000,self.service.native_layer_cells//self.states**2)
         if len(self.verified)+len(pending)>cap:
-            # Traverse the live closure only under pressure. Retain all of it,
-            # or refuse explicitly; a smaller-than-working-set reset thrashes.
-            live=set();stack=[root]
-            while stack:
-                self.service._check_deadline()
-                token=stack.pop()
-                if token in live:continue
-                live.add(token);self.metrics['retention_visits']+=1
-                if len(live)>cap:
-                    raise BudgetExceeded('Native layered working set exceeds cell budget; archive retained')
-                node=self.read(token)
-                if node['height']:stack.extend([node['left'],node['right']])
-            keep=self.verified & live
-            self.service._request(dict(mode='layered_retain',ids=sorted(keep)))
-            self.metrics['native_evictions']+=len(self.verified)-len(keep)
-            self.verified=keep
+            self.evict(len(self.verified)+len(pending)-cap)
         for offset in range(0,len(pending),128):
             batch=pending[offset:offset+128]
             result=self.service._request(dict(mode='layered_define',nodes=batch))
             if not result['valid']:raise ValueError('Native chain definitions rejected')
-            self.verified.update(n['id'] for n in batch)
+            for node in batch:
+                token=node['id'];self.verified.add(token)
+                children=(node['left'],node['right']) if node['height'] else ()
+                self.native_children[token]=children
+                for child in children:
+                    self.native_incoming[child]=self.native_incoming.get(child,0)+1
+                    self.evictable.discard(child)
             self.worker=self.service.process
             self.metrics['native_definitions']+=len(batch)
 
@@ -142,7 +194,7 @@ class LayeredSolver:
         if len(replace)+len(append)>(65536 if base is None else 4096):
             raise BudgetExceeded('Layer input exceeds 65536 initial edges or 4096 delta edges')
         self.metrics=dict(node_reads=0,node_writes=0,compositions=0,native_definitions=0,witness_checks=0,
-                          retention_visits=0,native_evictions=0)
+                          retention_visits=0,native_evictions=0,reachability_updates=0)
         before=self.store.inserted_objects
         try:
             with self.service._phase('layered_storage'),self.db:
@@ -179,4 +231,5 @@ class LayeredSolver:
             return dict(state=evidence,source='balanced_layers',**record,layered=dict(self.metrics),counted_complete=False)
         except BaseException:
             self.cache.clear()
+            self.forget_native()
             raise

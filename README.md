@@ -95,9 +95,38 @@ keeping the PDF, run `latexmk -c` from `paper/`.
 ```text
 paper/
   bounded_domain_sat_and_amortized_reasoning.tex
+formal/
+  OracleMachines.lean
+  OracleMachines/
+  lean-toolchain
+  lakefile.toml
+  lake-manifest.json
+  README.md
+research/
 README.md
 LICENSE
 ```
+
+## Lean verification
+
+The [Lean project](formal/README.md) checks the expansion invariant, explicit
+table size, conditional polynomial cost bound, staged savings criterion, and
+amortization limits. It also proves that the explicit table and exponential
+expansion costs are not polynomially bounded. A theorem map identifies the exact
+coverage and remaining obligations.
+
+With Lean's version manager installed, run:
+
+```sh
+cd formal
+lake exe cache get
+lake build
+```
+
+The toolchain and dependencies are pinned. The default build audits all project
+declarations for admitted proofs and additional axioms. The formalization treats
+runtime costs as explicit numerical ledgers; it does not supply an efficient SAT
+algorithm or formalize P versus NP.
 
 ## Literature review
 

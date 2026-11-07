@@ -694,3 +694,70 @@ The revised manuscript contains 15 proof environments, 53 equation environments,
 every previously audited formal statement, proof, and displayed equation is
 unchanged. The 24-page PDF builds without warnings. All rendered pages were
 visually inspected, with the new section on pages 17–19 checked at full page size.
+
+## Lean verification of expansion and resource limits
+
+The repository now contains a [Lean project](../formal/README.md) with 40 named
+theorems. It uses Lean 4.24.0 and mathlib v4.24.0, with transitive dependency
+commits recorded in `formal/lake-manifest.json`. The theorem map in its README
+identifies which claims from Section 12 are checked and which remain outside
+the formalization.
+
+The checked results cover finite binary-word enumeration, the empty-word base,
+exact finite-table answers, preservation under expansion, eventual coverage,
+and the answer-entry count. A separate theorem proves the invariant for an
+arbitrary state representation, conditional on exact base answers, preservation,
+and exact new coverage. The numerical cost results prove the cumulative
+recurrence, the uniform polynomial stage-sum bound, an explicit monomial bound,
+and closure under a polynomial coverage schedule. They also prove staged cost
+accounting, the necessary-and-sufficient criterion using actual query costs,
+and the sufficient criterion using a retrieval upper bound.
+
+The limits are now proved generally, rather than only exercised by the previous
+finite arithmetic checks. Exponential stage costs have exponential cumulative
+cost, and neither that sequence nor the explicit table's entry count is
+polynomially bounded. The average expansion contribution diverges for one query
+per stage and tends to zero for `4^j` queries per stage, including any fixed base
+cost. A cast lemma connects real-valued geometric sums to natural query counts.
+The accounting proof separately establishes eventual positive query count when
+that count tends to infinity. Lean's totalized division at zero has no
+average-cost interpretation; the documentation states this boundary explicitly.
+
+### What remains unproved
+
+The solver used to label the table is supplied as a parameter. Its correctness
+for a language is an explicit premise. No SAT parser, SAT solver, computability
+predicate, machine model, or complexity class has been formalized in this
+development. A total function in Lean's logic can be noncomputably specified;
+its type alone does not certify an executable algorithm. The concrete table
+definitions use finite recursion when supplied an executable solver.
+
+The list implementation stores keys and answers and performs sequential lookup.
+It verifies coverage and answer-entry count, not the packed addressing scheme,
+physical memory consumption, or direct-access time. Cost functions are charged
+numerical ledgers. Their connection to implementation steps remains an
+obligation. The conditional polynomial calculation does not provide a uniform
+efficient exact SAT constructor, an efficient learned representation, or an
+empirical speedup. These distinctions are now explicit in Section 12.4 of the
+paper. The cited conventional complexity results and the paper's other proofs
+remain outside this Lean development.
+
+### Verification and manuscript changes
+
+`lake build` succeeds with warnings treated as errors. The integrated axiom
+audit checks 116 project declarations, including 89 theorem declarations when
+Lean-generated equations and helper theorems are counted. Only `propext`,
+`Classical.choice`, and `Quot.sound` are permitted. There are no admitted proofs
+or additional axioms in the project. Temporary negative-control files containing
+a custom axiom and an admitted proof were both rejected by the same audit; they
+are not part of the repository.
+
+The manuscript adds the explicit polynomial bound and clarifies the need to
+charge a coverage schedule, expansion control, and evaluation. Its formal
+statements retain their previous wording; one proof gains the explicit bound.
+Section 12.4 describes the verification scope and the remaining algorithmic
+obligations. The revised 25-page PDF has 15 proof environments, 54 equation
+environments, 64 unique labels, and 46 bibliography entries. All cross-references
+resolve, the final LaTeX pass has no warnings, and all rendered pages were
+visually inspected, including full-page checks of the changed material on
+pages 18–20.

@@ -775,6 +775,13 @@ O(n+1)+C_0+c\,n(n+1)^k+d(2n+1)^r,
 \label{eq:polynomial-expansion}
 \end{equation}
 which is polynomial in $n$. The first term covers reading the input and determining its length. All later stage-control work is included in the stated budgets. This is one uniform algorithm for all inputs, so $L\in\Pclass$. The SAT conclusion follows from NP-completeness.
+
+We can make the polynomial bound explicit. If input reading costs at most $q(n+1)$, then, for every $n\geq0$,
+\begin{equation}
+T(x)\leq \bigl(q+C_0+c+d\,2^r\bigr)(n+1)^{k+r+1}.
+\label{eq:explicit-polynomial-budget}
+\end{equation}
+This deliberately loose bound uses the same coefficient and exponent at every input length. It follows by bounding each term in \eqref{eq:polynomial-expansion} by the displayed power. It remains conditional on the stated budgets for the implemented construction and evaluator.
 \end{proof}
 
 Note that this corollary requires a stronger induction invariant than finite termination. For example, the finite stage costs $a_j=2^j$ give
@@ -785,6 +792,8 @@ C_N=C_0+2^{N+1}-2.
 Every stage terminates, while cumulative cost grows exponentially. A bound polynomial in $|K_{j-1}|$ would also be insufficient when that state is exponential in $j$. In the corollary's bit model, a polynomial construction budget itself limits how much explicit state can be written.
 
 For other increasing finite domains, we also need an effective schedule that reaches every input. A polynomial bound in the stage number yields a polynomial input-length bound only with a suitable relation between those quantities; reaching all length-$n$ inputs within polynomially many stages is a sufficient condition. The choice $D_N=\bits^{\leq N}$ makes this relation explicit.
+
+More precisely, if a fixed polynomial stage cap $p(n)$ guarantees coverage and cumulative construction cost is bounded by a polynomial $F(N)$, then construction through that cap costs at most $F(p(n))$, again a polynomial. Computing the cap, controlling expansion, and evaluating the query must also fit the budget. Mere existence of a finite covering stage does not establish these conditions.
 
 Proposition~\ref{prop:inductive-expansion} establishes none of the polynomial budgets in Corollary~\ref{cor:polynomial-expansion}. Indeed, the same table induction works for an $\mathsf{EXPTIME}$-complete language, although $\Pclass\subsetneq\mathsf{EXPTIME}$ \citep{sipser2020theory}. Thus, exactness at every finite stage cannot imply uniform polynomial-time decision. Establishing the stronger invariant for SAT remains unresolved here.
 
@@ -825,6 +834,15 @@ The right-hand side is exactly the average expansion contribution, proving the l
 \end{proof}
 
 For illustration, if $a_j=2^j$ and $Q_j=1$, the expansion contribution grows without bound. With the same expansion costs and $Q_j=4^j$, it tends to zero. These are workload examples, not estimates for SAT training or guarantees about query arrivals. Even in the second case, storage, query cost, and expansion latency may grow. More queries yield savings only if their avoided solver work is sufficient. The result concerns aggregate work, not a bound on the delay of each query, and does not require either resolution of $\Pclass$ versus $\NPclass$.
+
+\subsection{Machine-checked claims and remaining obligations}
+\label{sec:lean-scope}
+
+The accompanying Lean~4 development checks the mathematical core of this section.\footnote{Sources, pinned dependencies, build instructions, and a theorem map are available in \url{https://github.com/akmaier/OracleMachines/tree/main/formal}.} It constructs successive finite tables, proves exact coverage and preservation, and counts their answer entries. A separate induction states the obligations for a different state representation: correctness at the base, preservation of old answers, and exact answers on every new input. The cost proofs establish the cumulative recurrence, the uniform polynomial bound, closure under polynomial coverage schedules, and the staged savings criterion. They also establish the two contrasting amortization limits above. All proofs are checked without admitted statements; an automated audit permits only Lean's standard logical axioms.
+
+The formalization also proves that the explicit table's entry count and the cumulative costs $a_j=2^j$ admit no polynomial bound. Thus, it checks a counterexample to the missing inference from finite correctness to efficient construction. This concerns the specified table and cost sequence. It is no lower bound for all SAT representations or algorithms.
+
+Note the boundary of these checks. The executable table uses a supplied total Boolean solver and stores explicit keys with their answers. Its list lookup does not implement the direct-access layout of Lemma~\ref{lem:table}. Solver correctness for a chosen language is an explicit hypothesis. The cost functions are mathematical ledgers; we have not verified their correspondence to an implementation's machine steps. Nor have we formalized the complexity classes, SAT's NP-completeness, or the hierarchy results in Lean. Those parts retain their cited, conventional proofs. A uniformly efficient exact SAT expansion scheme, its complete runtime bounds, and measurements of a learned system remain to be supplied. The machine-checked induction does not discharge these obligations.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}

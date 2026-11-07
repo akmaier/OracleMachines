@@ -21,6 +21,10 @@ A further [publication-status reassessment](#publication-status-of-the-generaliz
 checks the generalized observations from commit `41d8e4d`. It adds five manuscript
 references and records the new OpenAlex/SemOpenAlex search below.
 
+The subsequent [induction audit](#inductive-expansion-proof-and-limitations)
+records the new constructive expansion proof and its resource limitations,
+added after commit `23ec82c`.
+
 The literature contains substantially closer precedents than the initial review identified. In particular, Lin et al. (2021) already combine neural parameters, arbitrary preprocessing or oracle assistance, polynomial advice, computational limitations, and bounded-length lookup representations. Hertrich and Skutella (2023) explicitly distinguish uniform neural constructions from nonuniform existence when drawing consequences from NP-hardness. The broad connection between neural representations and complexity classes therefore needs to be presented as established literature. The draft can contribute a focused exposition of these distinctions for exact SAT, oracle terminology, certification, and amortized reuse; the search does not establish that this particular exposition is unique.
 
 The widely reported failed proof identified by the author is Vinay Deolalikar's August 2010 claim that P differs from NP. It belongs in a discussion of the limits of inferring algorithmic complexity from representation or solution-space structure. It is not a learning-based proof of P=NP.
@@ -608,3 +612,85 @@ warnings; all pages were visually inspected, with the revised Sections 11–12
 also checked at full page size. The evidence manifest verifies 41 saved files,
 including all unchanged earlier records, and lists 14 direct OpenAlex work
 lookups across the review passes.
+
+## Inductive expansion proof and limitations
+
+The manuscript now gives the proposed induction explicitly in Section 12,
+*Inductive expansion and its resource limits*. It adds three formal results.
+They refine the earlier effective-table and reuse statements; no new complexity
+separation, learning guarantee, or publication-priority claim is made.
+
+| Result | What the proof establishes | Additional obligation or limitation |
+| --- | --- | --- |
+| Proposition 12.1: inductive exact expansion | The base table answers the empty string; each step appends exact answers for the next length. Every finite stage terminates and preserves old answers. | A terminating exact decider supplies all new labels. The induction does not bound its cost or establish that learning alone finds those labels. |
+| Corollary 12.2: uniformly bounded expansion | Fixed polynomial bounds on every stage and on evaluation give one polynomial-time decider. | Costs must be polynomial in the stage/input-length parameter with shared constants, in the ordinary bit model, including construction and control. No such SAT scheme is supplied. |
+| Proposition 12.3: staged expansion and reuse | Total work includes the base state, every expansion, and all query work. Subtraction gives an exact strict-savings criterion. | Growing domains amortize only when cumulative expansion cost is small relative to cumulative query count; enough net query savings must also repay it. |
+
+### Proof audit
+
+The coverage invariant is exactness on all strings of length at most N, together
+with retention of the earlier answer bits. The empty-string base case is
+included. The step contains a finite number of calls to a total decider and
+appends their answers at the next disjoint block of addresses. Induction thus
+establishes both correctness and termination at every finite stage. On a query
+of length n, construction can stop at stage n; no completed infinite table is
+required. This argument depends on decidability, consistent with Proposition
+11.1 and the existing Turing citation.
+
+For the polynomial-time corollary, the sum of n stage budgets bounded by
+c(j+1)^k is at most c n(n+1)^k. Adding fixed base cost, input reading, and a
+polynomial evaluator gives a uniform polynomial runtime. The construction must
+pay for all explicit state, copying, and index/control work. A polynomial bound
+in the size of an exponentially large previous state is insufficient. Likewise,
+a polynomial bound in an arbitrary enumeration's stage number needs a suitable
+bound relating coverage stage to input length.
+
+The cost proof uses the recurrence T_j = T_(j-1) + a_j + query work at stage j.
+All expansion costs remain charged even when a phase serves no queries. The
+average-cost statement is used only when total query count is positive, and
+its limit assumes that count tends to infinity. The baseline is a fixed exact
+solver restarted on every query, using the same work measure. The upper bound
+on query cost gives a sufficient savings condition; the condition using actual
+query costs is necessary and sufficient.
+
+### Explicit limits and counterexamples
+
+Finite termination does not imply a polynomial resource bound: stage costs
+2^j sum to 2^(N+1)-2. Materializing the explicit answer table also requires
+2^(N+1)-1 answer bits. This is a cost of the stated table construction, not a
+lower bound on every possible SAT representation. The same induction works
+for EXPTIME-complete languages, which cannot have uniform polynomial-time
+deciders by the cited hierarchy theorem.
+
+Fast lookup remains conditional on the access model. Neither the correctness
+induction nor the staged accounting makes exponentially large storage free,
+gives cheap sequential-tape access, or bounds the cost of producing long
+outputs. A cache populated only on demand covers its retained solved inputs;
+it need not cover the whole bounded domain. A learned replacement must preserve
+old correctness and establish exactness on every newly covered input.
+
+The fixed-domain limit in Section 9 cannot be carried over to an expanding
+domain without a growth condition. For expansion costs 2^j, one query per
+phase leaves divergent average expansion cost, while 4^j queries per phase
+make that contribution vanish. Neither workload is asserted to describe an
+actual SAT system. Vanishing expansion cost per query still permits growing
+query cost, memory, and expansion latency. The result is aggregate-work
+accounting and does not give a worst-case response-time guarantee.
+
+### Verification scope
+
+Finite checks covered all 128 labelings of the seven strings in D_2, checking
+the base case and both expansion steps (384 coverage checks). Arithmetic checks
+covered 28,848 staged cost configurations, including zero-query phases, nonzero
+base costs, and retrieval more expensive than solving. The average-cost identity
+was checked with exact rational arithmetic in the 27,680 configurations with
+positive total query count. A further 165 cases checked the polynomial sum
+bound and exponential recurrence, including N=0, and 32 cases checked the two
+geometric-sum examples. These checks exercise edge cases and arithmetic; they
+do not replace the general proofs.
+
+The revised manuscript contains 15 proof environments, 53 equation environments,
+62 unique labels, and 46 bibliography entries. All cross-references resolve;
+every previously audited formal statement, proof, and displayed equation is
+unchanged. The 24-page PDF builds without warnings. All rendered pages were
+visually inspected, with the new section on pages 17–19 checked at full page size.

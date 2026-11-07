@@ -57,6 +57,11 @@ an EXPTIME-complete problem and Ferrara et al.'s model-checking preprocessing
 work. The finite-table construction criterion is explicitly attributed to
 standard computability, and the EXPTIME obstruction to the time hierarchy.
 These connections strengthen the perspective without establishing theorem novelty.
+An explicit induction now constructs exact answers on successively larger finite
+domains. Separate results state the uniform expansion bounds that would imply
+polynomial-time decision and the workload conditions that amortize costly
+expansion. The correctness induction supplies neither bound by itself and does
+not prove P = NP.
 Its final section identifies remaining research questions and an evaluation
 protocol; no experimental speedup or efficient exact-learning algorithm is claimed.
 
@@ -109,6 +114,9 @@ of extending the result beyond NP.
 The [publication-status reassessment](research/literature-review-2026-11-07.md#publication-status-of-the-generalized-observations)
 maps the generalized claims to prior work and distinguishes checked publications,
 an MSc thesis, and sources whose full text could not be verified.
+The [induction audit](research/literature-review-2026-11-07.md#inductive-expansion-proof-and-limitations)
+checks the expanding-domain proof, its cost conditions, and counterexamples to
+an unconditional polynomial-time conclusion.
 
 ## License
 

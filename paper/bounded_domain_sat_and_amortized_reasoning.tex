@@ -99,7 +99,7 @@ Here, we bring these established ideas together in a perspective on exact SAT. O
 
 We start with a simple observation. For any fixed maximum input length, we can store all membership answers in a finite object. With a suitable representation and access model, later evaluation is efficient. Yet, that object may be large and expensive to construct. Nor does its existence supply one efficient algorithm for all input lengths. Note that these are separate questions. Keeping them separate allows us to interpret learning as amortization of reasoning without hiding the acquisition cost.
 
-We use \emph{System 1} and \emph{System 2} as a computational analogy. System 1 retrieves or evaluates acquired knowledge. System 2 performs additional computation to obtain an answer. Neither term denotes a complexity class. The reuse arguments apply to any decidable language. SAT supplies a concrete example with inexpensive positive verification; Section~\ref{sec:beyond-np} explains which conclusions extend to larger classes and which need additional assumptions.
+We use \emph{System 1} and \emph{System 2} as a computational analogy. System 1 retrieves or evaluates acquired knowledge. System 2 performs additional computation to obtain an answer. Neither term denotes a complexity class. The reuse arguments apply to any decidable language. SAT supplies a concrete example with inexpensive positive verification; Section~\ref{sec:beyond-np} explains which conclusions extend to larger classes and which need additional assumptions. Section~\ref{sec:inductive-expansion} proves exact coverage by induction and separates it from bounds on expansion and amortization.
 
 \subsection{Closest precedents and scope}
 
@@ -482,7 +482,7 @@ It follows that
 \leq c_N+\frac{C+|D_N|s_N}{Q}.
 \label{eq:amortized}
 \end{equation}
-Hence, at fixed $N$, the upper bound on the solving contribution per query tends to zero as $Q$ grows. We pay for each distinct answer at most once. Note that this limit increases the number of queries while keeping the domain fixed. It gives no polynomial bound as $N$ grows.
+Hence, at fixed $N$, the upper bound on the solving contribution per query tends to zero as $Q$ grows. We pay for each distinct answer at most once. Note that this limit increases the number of queries while keeping the domain fixed. It gives no polynomial bound as $N$ grows. Section~\ref{sec:inductive-expansion} treats growing domains and states the additional condition needed to amortize their expansion.
 
 With random access, a trie or dictionary can provide polynomial overhead per query in $N$. Yet, it may accumulate exponentially many entries. We must therefore report storage as well. The bound assumes sufficient address space and charges memory initialization to $C$ or to insertion. On a sequential tape, lookup may instead depend on the accumulated storage. A stream of distinct inputs can invoke the solver on every query. Eviction, memory limits, or changes in the task can also make us pay again for earlier work. As such, the no-eviction assumption is essential to the lemma.
 
@@ -723,6 +723,109 @@ Choosing when to deliberate is itself computation. \citet{conitzer2008metareason
 
 These observations connect established memoization and utility accounting with standard computability and hierarchy facts. Their generality does not establish a new speedup theorem or a necessary architecture for intelligence. The contribution here is to state the assumptions together, so that we can assess a learned reasoning system without confusing stored answers with efficient uniform acquisition.
 
+\section{Inductive expansion and its resource limits}
+\label{sec:inductive-expansion}
+
+Let us make the expansion argument explicit. We can first establish exact answers on a finite domain and then extend that domain. The finite-restriction identity in Section~\ref{sec:restriction} provides no bound on the cost of this extension. We therefore prove correctness by induction and account for construction separately. This is an incremental form of Proposition~\ref{prop:effective-tables}, using standard computability and memoization ideas \citep{turing1937computable,michie1968}.
+
+\subsection{Exact coverage at every finite stage}
+
+\begin{proposition}[Inductive exact expansion]
+\label{prop:inductive-expansion}
+Let $L\subseteq\bits^*$ be decidable, and fix a deterministic decider $S$ for $L$. There is one effective construction of finite answer tables $K_0,K_1,\ldots$ such that, for every $N$,
+\begin{equation}
+K_N[h(x)]=\ind_L(x)\quad(x\in D_N),\qquad
+K_{N+1}[h(x)]=K_N[h(x)]\quad(x\in D_N),
+\label{eq:expansion-invariant}
+\end{equation}
+where $h$ is the address function in Lemma~\ref{lem:table}. Each stage terminates. Let $C_0$ include initialization and construction of $K_0$. If each invocation of $S$ starts from the same initial state and costs $s(x)$, the incremental construction costs satisfy
+\begin{equation}
+a_j=b_j+\sum_{x\in\bits^j}s(x),\qquad
+C_N=C_0+\sum_{j=1}^{N}a_j,
+\label{eq:expansion-cost}
+\end{equation}
+where $b_j$ includes all other work at stage $j$, including enumeration, input preparation, storage, copying, and control. All costs use the same additive work model. No polynomial bound is asserted.
+\end{proposition}
+
+\begin{proof}
+For the base case, $D_0=\{\varepsilon\}$. Run $S$ on the empty string and store its answer at address $h(\varepsilon)=0$. The call terminates and establishes the invariant for $K_0$.
+
+Assume that $K_N$ has been constructed and is exact on $D_N$. Enumerate the $2^{N+1}$ strings of length $N+1$ in lexicographic order. Run $S$ on each string and append its answer. These calls all terminate, and there are finitely many of them. Their addresses form the next contiguous block after those of $D_N$. Thus, the new entries are exact and the old entries remain unchanged. This proves the invariant and termination at stage $N+1$. Induction establishes both for every finite $N$.
+
+Stage $j$ invokes $S$ exactly once on each length-$j$ string. Adding these solver costs and $b_j$ gives $a_j$. The construction recurrence is $C_j=C_{j-1}+a_j$, with base cost $C_0$. Induction on this recurrence proves \eqref{eq:expansion-cost}.
+\end{proof}
+
+Every input belongs to some $D_N$, so every input is eventually covered. This does not require constructing an infinite table before answering a query. On an input of length $n$, we can stop expansion at $K_n$. A total computable evaluator can then read the appropriate entry, rejecting malformed tables or requests beyond their stated coverage. This gives a decider, as in Proposition~\ref{prop:effective-tables}.
+
+Once a table is available, Lemma~\ref{lem:table} gives inexpensive decision queries under its explicit direct-access assumptions. The induction alone supplies no access-time guarantee on a sequential tape. It also supplies no free construction, compact storage, or inexpensive production of large outputs. The table contains $2^{N+1}-1$ answer bits, so even writing its entries takes exponential work in the ordinary bit model. This remains true for this table construction even if $\Pclass=\NPclass$.
+
+A learned representation may replace the table, but it must preserve the invariant: old answers remain correct and every newly covered input receives an exact answer. Successful training on a sample does not establish this step. Certified fallback can obtain the missing answers; its cost belongs in $a_j$. Nor does a cache populated only on demand necessarily cover all of $D_N$. Its guaranteed coverage is the set of inputs actually solved and retained.
+
+\subsection{The additional invariant needed for polynomial time}
+
+\begin{corollary}[Uniformly bounded expansion]
+\label{cor:polynomial-expansion}
+For a language $L\subseteq\bits^*$, suppose a uniform exact expansion scheme, possibly using compressed states, starts from a fixed finite $K_0$ exact on $D_0$, and produces $K_j$ exact on $D_j$ after stage $j$. In the ordinary deterministic bit model, assume that stage $j\geq1$ costs at most $c(j+1)^k$, including all state construction, copying, index preparation, and control. Assume also that one fixed evaluator answers every $x\in D_N$ from $K_N$ in at most $d(N+|x|+1)^r$ steps. The constants $c,d>0$ and nonnegative integers $k,r$ are independent of the stage. No external advice, oracle answers, or preinitialized growing memory are supplied without charging their construction. Then $L\in\Pclass$. For $L=\SAT$, these assumptions imply $\Pclass=\NPclass$.
+\end{corollary}
+
+\begin{proof}
+Given $x$ of length $n$, construct $K_0$, perform stages $1$ through $n$, and evaluate $x$ using $K_n$. Exact coverage gives the correct answer. The total time is bounded by
+\begin{equation}
+O(n+1)+C_0+c\,n(n+1)^k+d(2n+1)^r,
+\label{eq:polynomial-expansion}
+\end{equation}
+which is polynomial in $n$. The first term covers reading the input and determining its length. All later stage-control work is included in the stated budgets. This is one uniform algorithm for all inputs, so $L\in\Pclass$. The SAT conclusion follows from NP-completeness.
+\end{proof}
+
+Note that this corollary requires a stronger induction invariant than finite termination. For example, the finite stage costs $a_j=2^j$ give
+\begin{equation}
+C_N=C_0+2^{N+1}-2.
+\label{eq:exponential-expansion}
+\end{equation}
+Every stage terminates, while cumulative cost grows exponentially. A bound polynomial in $|K_{j-1}|$ would also be insufficient when that state is exponential in $j$. In the corollary's bit model, a polynomial construction budget itself limits how much explicit state can be written.
+
+For other increasing finite domains, we also need an effective schedule that reaches every input. A polynomial bound in the stage number yields a polynomial input-length bound only with a suitable relation between those quantities; reaching all length-$n$ inputs within polynomially many stages is a sufficient condition. The choice $D_N=\bits^{\leq N}$ makes this relation explicit.
+
+Proposition~\ref{prop:inductive-expansion} establishes none of the polynomial budgets in Corollary~\ref{cor:polynomial-expansion}. Indeed, the same table induction works for an $\mathsf{EXPTIME}$-complete language, although $\Pclass\subsetneq\mathsf{EXPTIME}$ \citep{sipser2020theory}. Thus, exactness at every finite stage cannot imply uniform polynomial-time decision. Establishing the stronger invariant for SAT remains unresolved here.
+
+\subsection{Amortization while the domain grows}
+
+Costly expansion may still be repaid by later queries. Let us state the workload condition rather than interchange the fixed-domain and growing-domain limits.
+
+\begin{proposition}[Cost of staged expansion and reuse]
+\label{prop:staged-reuse}
+Consider an exact expansion scheme with base cost $C_0$ and actual expansion costs $a_j\geq0$. After stage $j$, serve $Q_j\geq0$ queries $x_{j,t}\in D_j$ from the resulting state, without further expansion during that phase. Let $r_{j,t}$ charge all query work, including retrieval, verification if used, and answer delivery, and suppose $r_{j,t}\leq\ell_j$. For $M_m=\sum_{j=1}^m Q_j>0$, total work through phase $m$ satisfies
+\begin{equation}
+T_m=C_0+\sum_{j=1}^m a_j+
+\sum_{j=1}^m\sum_{t=1}^{Q_j}r_{j,t}
+\leq C_0+\sum_{j=1}^m\bigl(a_j+Q_j\ell_j\bigr).
+\label{eq:staged-cost}
+\end{equation}
+For comparison, fix an exact solver with cost $s(x)$ when restarted on input $x$, and let $B_m=\sum_{j,t}s(x_{j,t})$. Its costs use the same work model. Strict savings hold exactly when
+\begin{equation}
+\sum_{j=1}^m\sum_{t=1}^{Q_j}\bigl(s(x_{j,t})-r_{j,t}\bigr)
+>C_0+\sum_{j=1}^m a_j.
+\label{eq:staged-savings}
+\end{equation}
+The condition $B_m-\sum_j Q_j\ell_j>C_0+\sum_j a_j$ is sufficient. Along a sequence with $M_m\to\infty$, the expansion contribution to average query cost vanishes if and only if
+\begin{equation}
+\frac{C_0+\sum_{j=1}^m a_j}{M_m}\longrightarrow0.
+\label{eq:staged-amortization}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Start with $T_0=C_0$. Phase $j$ adds $a_j+\sum_{t=1}^{Q_j}r_{j,t}$. Induction over phases gives the equality in \eqref{eq:staged-cost}; the bound follows from $r_{j,t}\leq\ell_j$. Subtracting $T_m$ from $B_m$ proves \eqref{eq:staged-savings} and its sufficient condition. Finally,
+\begin{equation}
+\frac{T_m}{M_m}-
+\frac{\sum_{j=1}^m\sum_{t=1}^{Q_j}r_{j,t}}{M_m}
+=\frac{C_0+\sum_{j=1}^m a_j}{M_m}.
+\end{equation}
+The right-hand side is exactly the average expansion contribution, proving the last assertion.
+\end{proof}
+
+For illustration, if $a_j=2^j$ and $Q_j=1$, the expansion contribution grows without bound. With the same expansion costs and $Q_j=4^j$, it tends to zero. These are workload examples, not estimates for SAT training or guarantees about query arrivals. Even in the second case, storage, query cost, and expansion latency may grow. More queries yield savings only if their avoided solver work is sufficient. The result concerns aggregate work, not a bound on the delay of each query, and does not require either resolution of $\Pclass$ versus $\NPclass$.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 
@@ -789,7 +892,7 @@ For each method, we should report acquisition and label-generation costs, parame
 
 The efficiency rationale for System 1/System 2 computation survives either resolution of $\Pclass$ versus $\NPclass$ and extends to arbitrary decidable languages. Retrieval or certified prediction can avoid enough work to repay its costs under either hypothesis. Whether it does so depends on the solver, representation, and workload. Here, we examined this distinction through SAT and accounted separately for acquisition, storage, evaluation, and certification. A fixed representation, advice for each input length, and a uniform constructor support different complexity consequences. Compilation, nonuniform computation, memoization, and amortized inference provide the underlying theories.
 
-Finite tables and neural memorization give transparent baselines. We can construct exact answers on a fixed domain. Yet, this leaves compactness and efficient acquisition unresolved. Across input lengths, polynomial-size exact model families have the standard nonuniform consequences, including the Karp--Lipton collapse. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. Note that these conclusions require different hypotheses.
+Finite tables and neural memorization give transparent baselines. We can construct exact answers on a fixed domain. Inductive expansion preserves exactness at every finite stage for any decidable language. It does not establish a uniform polynomial bound on construction or storage. Amortizing a growing domain requires enough queries to repay its accumulated expansion cost. Across input lengths, polynomial-size exact model families have the standard nonuniform consequences, including the Karp--Lipton collapse. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. Note that these conclusions require different hypotheses.
 
 Caching shows how to reuse exact answers. Certification with terminating fallback preserves correctness even when a predictor is inaccurate. For a fixed policy with finite expected costs, we obtain expected savings when avoided solver work exceeds fast-path cost and repays acquisition. These conditions apply under either $\Pclass=\NPclass$ or $\Pclass\neq\NPclass$; even polynomial-cost solving can leave useful work to avoid. Beyond NP, the same accounting applies, while short certificates and efficient acquisition need separate justification. Finite tables for an undecidable language do not supply a uniform computable constructor. Explicit budgets also bound the additional work when prediction fails. Still, we must establish these conditions for an actual learned system. Hence, useful evaluation should report acquisition, storage, inference, verification, fallback, and updates together. Comparing with both a solver alone and an exact cache then addresses the practical question: when does reusable knowledge repay its acquisition?
 

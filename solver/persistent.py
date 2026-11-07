@@ -84,6 +84,7 @@ class PersistentSolver:
                  symbolic: bool = False, adaptive: bool = False,
                  max_archive_bytes: int | None = None, active_cache_bytes: int = 2*1024**2,
                  symbolic_node_limit: int = 50000, wal_checkpoint_bytes: int = 4*1024**2,
+                 native_layer_cells: int = 1024**2,
                  max_input_bytes: int = 8 * 1024**2, max_message_bytes: int = 64 * 1024**2,
                  max_proof_bytes: int = 16 * 1024**2):
         start = time.perf_counter_ns()
@@ -96,9 +97,10 @@ class PersistentSolver:
             raise ValueError("Solver and query timeouts must be finite and positive")
         if min(max_input_bytes, max_message_bytes, max_proof_bytes) <= 0:
             raise ValueError("Resource byte limits must be positive")
-        if any(type(v) is not int or v<=0 for v in (active_cache_bytes,symbolic_node_limit,wal_checkpoint_bytes)):
+        if any(type(v) is not int or v<=0 for v in (active_cache_bytes,symbolic_node_limit,wal_checkpoint_bytes,native_layer_cells)):
             raise ValueError('Active payload, symbolic node and WAL thresholds must be positive integers')
         self.active_cache_bytes,self.symbolic_node_limit,self.wal_checkpoint_bytes=active_cache_bytes,symbolic_node_limit,wal_checkpoint_bytes
+        self.native_layer_cells=native_layer_cells
         self.backend, self.timeout = backend, timeout
         self.query_timeout, self.verify_cache = query_timeout, verify_cache
         self.max_input_bytes, self.max_message_bytes, self.max_proof_bytes = max_input_bytes, max_message_bytes, max_proof_bytes
@@ -460,26 +462,33 @@ class PersistentSolver:
             raise RuntimeError("Concurrent requests need separate PersistentSolver instances")
         self._ledger, self._deadline = Ledger(), Deadline(self.query_timeout)
         self._route_decision = None
+        observation_attempted = False
         try:
             self._database_budget()
             self.db.set_progress_handler(lambda: int(time.monotonic() >= self._deadline.end), 1000)
             result = self._solve_impl(bits, learn=learn)
-            if self._route_decision is not None:
-                elapsed = time.perf_counter_ns() - self._ledger.start
-                with self._phase("routing_observation"):
-                    self.router.observe(self._route_decision, elapsed, True)
-                result["routing"] = dict(self._route_decision, observed_ns=elapsed)
             with self._phase("storage_accounting"):
                 result["storage"] = self.archive_usage()
+            if self._route_decision is not None:
+                elapsed = time.perf_counter_ns() - self._ledger.start
+                result["routing"] = dict(self._route_decision, observed_ns=elapsed)
+                observation_attempted = True
+                try:
+                    with self._phase("routing_observation"):
+                        self.router.observe(self._route_decision, elapsed, True)
+                except Exception as error:
+                    # Telemetry is best effort. Do not turn a completed checked
+                    # response into a second, contradictory route observation.
+                    result["routing"]["observation_error"] = str(error)
             self.last_metrics = self._ledger.finish()
             result.update(self.last_metrics)
             return result
         except BaseException as error:
-            if self._route_decision is not None:
+            if self._route_decision is not None and not observation_attempted:
                 try:
                     with self._phase("routing_observation"):
                         self.router.observe(self._route_decision, time.perf_counter_ns()-self._ledger.start, False)
-                except (sqlite3.Error, BudgetExceeded):
+                except Exception:
                     pass
             self.last_metrics = self._ledger.finish()
             if isinstance(error, sqlite3.Error) and getattr(error,"sqlite_errorcode",None)==sqlite3.SQLITE_FULL:
@@ -509,6 +518,8 @@ class PersistentSolver:
             database_file_bytes=self.cache.stat().st_size,wal_bytes=wal.stat().st_size if wal.exists() else 0,
             physical_storage_hard_bound=False,whole_process_memory_bound=False,
             active_caches=caches,symbolic_node_limit=self.symbolic_node_limit,
+            native_layer_cells_cap=self.native_layer_cells,
+            native_layer_cells=0 if self.layers is None else len(self.layers.verified)*self.layers.states**2,
             wal_checkpoint_threshold=self.wal_checkpoint_bytes,checkpoint_result=checkpoint)
 
     def _database_budget(self):

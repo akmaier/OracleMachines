@@ -12,6 +12,23 @@ structure CheckedTree where
 
 abbrev Store := Std.HashMap String (Json × CheckedTree)
 
+/-- Retention changes availability, never the checked meaning of an identity.
+The caller supplies a dependency-closed live set; trees retain their children. -/
+def retain (store : Store) (request : Json) : Except String (Store × Json) := do
+  let ids ← request.getObjValAs? (Array String) "ids"
+  if ids.size > 200000 then throw "Retention set exceeds capacity"
+  let mut out : Store := {}
+  for id in ids do
+    let some node := store[id]? | throw "Unknown retained node"
+    out := out.insert id node
+  for id in ids do
+    let some (body, tree) := out[id]? | throw "Missing retained node"
+    if tree.height > 0 then
+      let left ← body.getObjValAs? String "left"
+      let right ← body.getObjValAs? String "right"
+      if !out.contains left || !out.contains right then throw "Retention set is not dependency closed"
+  return (out, Json.mkObj [("valid", toJson true), ("retained", toJson out.size)])
+
 theorem cast_valid {q h k : Nat} (eq : h = k) (t : Tree q h) (valid : t.Valid) :
     (eq ▸ t).Valid := by subst k; exact valid
 

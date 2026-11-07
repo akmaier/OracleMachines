@@ -97,8 +97,6 @@ class LayeredSolver:
     def ensure(self,root):
         if self.worker is not self.service.process or self.worker is None or self.worker.poll() is not None:
             self.verified.clear()
-        if len(self.verified)>max(64,48000//(self.states*self.states)):
-            self.service._request(dict(mode='layered_reset'));self.verified.clear()
         pending=[];seen=set();stack=[(root,False)]
         while stack:
             token,ready=stack.pop()
@@ -108,6 +106,24 @@ class LayeredSolver:
                 stack.extend([(token,True),(node['right'],False),(node['left'],False)])
             else:
                 pending.append(dict(id=token,**node));seen.add(token)
+        cap=min(200000,self.service.native_layer_cells//self.states**2)
+        if len(self.verified)+len(pending)>cap:
+            # Traverse the live closure only under pressure. Retain all of it,
+            # or refuse explicitly; a smaller-than-working-set reset thrashes.
+            live=set();stack=[root]
+            while stack:
+                self.service._check_deadline()
+                token=stack.pop()
+                if token in live:continue
+                live.add(token);self.metrics['retention_visits']+=1
+                if len(live)>cap:
+                    raise BudgetExceeded('Native layered working set exceeds cell budget; archive retained')
+                node=self.read(token)
+                if node['height']:stack.extend([node['left'],node['right']])
+            keep=self.verified & live
+            self.service._request(dict(mode='layered_retain',ids=sorted(keep)))
+            self.metrics['native_evictions']+=len(self.verified)-len(keep)
+            self.verified=keep
         for offset in range(0,len(pending),128):
             batch=pending[offset:offset+128]
             result=self.service._request(dict(mode='layered_define',nodes=batch))
@@ -124,7 +140,8 @@ class LayeredSolver:
         if any(type(v) is not int or not 0<=v<(1<<self.states) for v in (left,right)):
             raise ValueError('Endpoint mask exceeds the supplied layer width')
         if len(replace)+len(append)>4096:raise BudgetExceeded('Chain delta exceeds 4096 edges')
-        self.metrics=dict(node_reads=0,node_writes=0,compositions=0,native_definitions=0,witness_checks=0)
+        self.metrics=dict(node_reads=0,node_writes=0,compositions=0,native_definitions=0,witness_checks=0,
+                          retention_visits=0,native_evictions=0)
         before=self.store.inserted_objects
         try:
             with self.service._phase('layered_storage'),self.db:
@@ -155,7 +172,9 @@ class LayeredSolver:
                 self.db.execute('INSERT OR IGNORE INTO layered_states VALUES (?,?,?,?)',
                                 (self.service.engine_id,evidence,evidence,time.time_ns()))
             self.metrics.update(new_objects=self.store.inserted_objects-before,height=self.read(root)['height'],
-                                active_cache_nodes=len(self.cache),composition_cell_bound=self.metrics['compositions']*self.states**3)
+                                active_cache_nodes=len(self.cache),native_cells=len(self.verified)*self.states**2,
+                                native_cells_cap=self.service.native_layer_cells,
+                                composition_cell_bound=self.metrics['compositions']*self.states**3)
             return dict(state=evidence,source='balanced_layers',**record,layered=dict(self.metrics),counted_complete=False)
         except BaseException:
             self.cache.clear()

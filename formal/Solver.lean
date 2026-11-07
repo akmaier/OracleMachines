@@ -258,6 +258,10 @@ def main : IO Unit := do
           match OracleMachines.Layered.defineNodes layers request with
           | .error e => pure (.error e)
           | .ok (state, response) => layers := state; pure (.ok response)
+        else if mode == "layered_retain" then
+          match OracleMachines.Layered.retain layers request with
+          | .error e => pure (.error e)
+          | .ok (state, response) => layers := state; pure (.ok response)
         else if mode == "layered_query" then
           pure (OracleMachines.Layered.query layers request)
         else if mode == "layered_reset" then

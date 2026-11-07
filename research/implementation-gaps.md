@@ -322,3 +322,94 @@ It establishes an O(log n / log log n) relabeling-update bound for a fixed regul
 tree language. The fixed language, tree representation and permitted edits
 matter. Implementing that richer interface is a possible next restricted step;
 it does not remove unrestricted SAT's missing structural hypotheses.
+
+## Post-implementation gap analysis
+
+This analysis reviews commit `ee3ba62` and adds deterministic diagnostics in
+`experiments/results/gap-analysis/`. It does not change the solver or reinterpret
+an operation counter as total execution cost. The seven identifiers below keep
+1/3/4/6/7 aligned with the preceding selected tasks; 2 and 5 name the remaining
+cost and certification obligations.
+
+Three concrete mechanisms now deserve priority over adding another instance
+family. First, semantic equality does not stop general-plan propagation. Second,
+the native layered-cache policy can repeatedly discard the entire useful working
+set. Third, a late query failure can create both a successful and a failed route
+observation for the same request. These are distinct from the open uniform
+complexity question.
+
+| Gap | Current evidence and remaining obligation | Concrete completion criterion |
+| --- | --- | --- |
+| 1. Uniform structural coverage | The layered family is supplied to the solver. At Boolean width b, summaries use 2^(2b) cells and the abstract composition budget is 2^(3b). No general-CNF recognizer/compiler or bound on width across arbitrary edits is proved. | Define a broader promised family, check its decomposition, and charge recognition, compilation, expansion count and updates. Logarithmic width in input length could support a polynomial restricted bound; that width guarantee must be proved, not assumed for arbitrary SAT. |
+| 2. Executable cost refinement | `replacementWork` charges q^3 by definition and proves the resulting recurrence. This does not prove that native calls, table allocation, bit arithmetic, hashing, persistence and replay obey that ledger. The previous materialization defect illustrates the distinction. | Prove bounds for a costed executable composition and tree update, connect them to the supplied representation, then add explicit service/replay terms. Keep compiled-runtime costs separate until justified. |
+| 3. Semantic reuse and global work | Version-three metadata avoids whole-plan copies. However, propagation compares output evidence identities. Equal projected truth tables with different parent identities can invalidate every bucket. Full context traversal, full witnesses and certificate extraction remain global; lazy recursion falls back at depth 256. | Separate semantic relation identity from current provenance, certify equality before stopping value propagation, preserve assumption/deletion checks, and use iterative evaluation. For a decision-only interface, establish an explicit bound on context updates as well as summary updates. |
+| 4. Active retention and archive costs | Small Python payload caches preserve historical evidence, but native retention has a separate reset policy. A 256-edge width-four working set exceeds its reset threshold and replays all 511 nodes on every query. Fixed active limits still do not bound RSS, transient allocations, WAL or the growing archive. | Manage the live native working set explicitly, reuse unchanged verified root answers, and report what happens when the working set exceeds budget. Charge replay/eviction amortization. Preserve durable history in a separately budgeted archive; define refusal or storage expansion at capacity. |
+| 5. Request-to-proof connection | `Tree.Valid` and summary exactness are proved. The layered protocol does not yet have a complete theorem connecting JSON masks, logical length, identity padding, endpoint restrictions, witness extraction and persistent updates to the user's source formula. General proof sizes and restart costs are unbounded here. | Prove protocol invariants, mask conversions, witness soundness/completeness and source-compilation correctness. Extend negative-proof context checks through edits and replay; do not assume polynomial UNSAT certificates for unrestricted instances. |
+| 6. End-to-end arbitration | The route selector chooses only checked versus interfaces. It does not gate predictor/portfolio attempts. Portfolio `native_prepare` takes a median 10,806.82 ms on the chronological stream versus 52.23 ms for checked mode. A post-solve accounting failure also produces two contradictory observations for one request. | Record one final outcome per request; distinguish attempted path and fallback. Add proposal-specific measurements and budgets with reserved fallback capacity, then route among relevant mechanisms using complete measured cost. Test late failures and workload shifts. |
+| 7. Evidence and attribution | The main study is reproducible and preserves failures, but application inputs are tiny all-UNSAT prefixes. Public examples were previously used during development. Prediction gains are on signed units, with no accepted prediction on the public shift. Repeated-relation layers mask native working-set pressure. | Freeze genuinely unused, larger mixed-label application streams; include distinct-relation and adversarial edits, cold/warm/restart modes, matched incremental baselines and a cheap deterministic signed-unit heuristic. Use enforced total-resource limits if claiming them. |
+
+### Reproduced semantic-propagation gap
+
+A 16-edge XOR chain is satisfiable. Replacing its first XOR by equality leaves
+the first eliminated relation over variable 1 equal to `[true, true]`. The
+projected scope and complete values are identical before and after the edit.
+The evidence identity changes, because it records different parents. The current
+planner therefore recomputes all 17 buckets: zero reused buckets and zero
+propagation stops. No incorrect SAT answer occurs.
+
+This exposes the difference between sharing a compressed relation payload and
+using semantic equality to stop value propagation. A repair must retain new
+provenance even when the value is unchanged. Reusing an old proof after deleting
+one of its assumptions would be unsound. Full witness output may also need to
+change even when the root decision is unchanged.
+
+Evidence: `semantic.json`; implementation: `solver/planning.py` (`output !=
+old_output`), `solver/interfaces.py` (`project_node` and `run`).
+
+### Reproduced native replay gap
+
+Use 256 distinct random relations with a planted zero-state path. At width three,
+the first query registers 511 native nodes, a replacement registers nine, and an
+unchanged query registers zero. At width four, the reset threshold is 187 nodes.
+The first query registers 511 nodes, already exceeding that threshold. Both the
+replacement and the unchanged next query reset and register all 511 again.
+The unchanged query reports zero Python compositions but 511 native definitions.
+
+This is a performance and accounting gap, not a refutation of the abstract
+logarithmic tree-replacement theorem. It also shows that the reset threshold is
+not a hard occupancy bound: the pending batch can exceed it. Raising the number
+alone does not resolve the general working-set/memory tradeoff. An unchanged
+verified root can be memoized; larger edits need an explicit retention/replay
+policy with stated memory assumptions.
+
+Evidence: `replay.json`; implementation: `solver/layered.py`, lines 97–117.
+
+### Reproduced routing-observation gap
+
+Inject a failure in `archive_usage` after solving one satisfiable query. The API
+raises an error, but `route_observations` contains success=1 and success=0 for the
+same attempted route. `solve` records success before storage accounting, then
+its exception handler records failure. This is a fault-injection result, not a
+failure observed in the timed study. The accepted solver result can remain
+correctly persisted while the service request fails; those outcomes need
+separate meanings rather than two indistinguishable request observations.
+
+Evidence: `routing.json`; implementation: `solver/persistent.py`, lines 466–481.
+The existing score regression tests inject route observations directly and do
+not cover this late-failure path.
+
+### Priority and interpretation
+
+The fastest useful sequence is: repair final-outcome recording; stop native
+reset/replay on unchanged working sets; separate semantic value propagation from
+provenance maintenance; then remove recursive depth limitations and bound full
+context checks. Validate each against these diagnostics before enlarging the
+benchmark. Exact-count claims should include native replay, not only Python
+composition counters.
+
+For the paper, the main theoretical gap remains uniform resource control.
+Inductive exactness at each finite stage does not establish polynomial
+construction, representation, verification or cumulative expansion cost. The
+current results support a perspective on accounting for reusable reasoning and
+restricted verified constructions. They do not establish a new general SAT
+complexity result or a universal System 1/System 2 speedup.

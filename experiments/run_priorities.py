@@ -90,7 +90,8 @@ def worker(mode,cases,cap,timeout):
                     if mode!='direct' and service is None:service=(PolaritySolver if mode=='polarity' else PersistentSolver)(directory/'s.db',**options)
                     row['setup_ns']=time.perf_counter_ns()-setup
                     if mode=='direct':
-                        path=directory/'query.cnf';path.write_text(c['dimacs'])
+                        variables,clauses=parse_dimacs(c['dimacs'])
+                        path=directory/'query.cnf';path.write_text(dimacs(clauses,variables))
                         run=bounded_run([str(harness.find_cadical()),'--quiet',str(path)],directory,Deadline(timeout),timeout,
                             64*1024**2,directory/'unused.proof',16*1024**2)
                         if run.returncode not in (10,20):raise ValueError(f'CaDiCaL exit {run.returncode}')

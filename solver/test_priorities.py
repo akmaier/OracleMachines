@@ -23,6 +23,17 @@ class PriorityTests(unittest.TestCase):
             self.assertEqual(result['source'],'verified_witness')
             self.assertEqual(s.db.execute('SELECT count(*) FROM models').fetchone()[0],0)
 
+    def test_direct_reference_normalizes_satlib_delimiters(self):
+        from contextlib import redirect_stdout
+        from io import StringIO
+        import json
+        from experiments.run_priorities import worker
+        case=dict(stage=0,name='satlib-format',phase='test',expected=True,encoding_bytes=3,
+                  dimacs='c comment\np cnf 1 1\n1 0\n%\n0\n')
+        out=StringIO()
+        with redirect_stdout(out):worker('direct',[case],64*1024**2,3)
+        self.assertEqual(json.loads(out.getvalue())['status'],'ok')
+
     def test_checked_cnf_compilation_matches_exhaustive_source(self):
         rng=random.Random(1781)
         with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:

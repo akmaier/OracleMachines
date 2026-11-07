@@ -1,0 +1,37 @@
+/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/encoder.py:254: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x1080a8220>
+  _iterencode = c_make_encoder(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/maier/Documents/code/OracleMachines/solver/symbolic.py:49: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x108b96c50>
+  def cached(self, key, compute):
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+======================================================================
+ERROR: test_counter_layers_logarithmic_update_and_invalid_summary (test_gap_work.LayeredTests.test_counter_layers_logarithmic_update_and_invalid_summary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_gap_work.py", line 77, in test_counter_layers_logarithmic_update_and_invalid_summary
+    first=s.layered(3,append=[increment]*256,left=1,right=1)
+  File "/Users/maier/Documents/code/OracleMachines/solver/persistent.py", line 696, in layered
+    result=self.layers.run(base,{} if replace is None else replace,[] if append is None else append,
+        any_state if left is None else left,any_state if right is None else right,witness)
+  File "/Users/maier/Documents/code/OracleMachines/solver/layered.py", line 149, in run
+    self.ensure(root)
+    ~~~~~~~~~~~^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/solver/layered.py", line 113, in ensure
+    result=self.service._request(dict(mode='layered_define',nodes=batch))
+  File "/Users/maier/Documents/code/OracleMachines/solver/persistent.py", line 299, in _request
+    line = exchange(self.process, payload, self._deadline or Deadline(self.query_timeout),
+                    self.max_message_bytes)
+  File "/Users/maier/Documents/code/OracleMachines/solver/resources.py", line 136, in exchange
+    deadline.check()
+    ~~~~~~~~~~~~~~^^
+  File "/Users/maier/Documents/code/OracleMachines/solver/resources.py", line 31, in check
+    self.remaining()
+    ~~~~~~~~~~~~~~^^
+  File "/Users/maier/Documents/code/OracleMachines/solver/resources.py", line 27, in remaining
+    raise BudgetExceeded("Query deadline exceeded; no unchecked decision was accepted")
+solver.resources.BudgetExceeded: Query deadline exceeded; no unchecked decision was accepted
+
+----------------------------------------------------------------------
+Ran 119 tests in 41.741s
+
+FAILED (errors=1)

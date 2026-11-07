@@ -272,3 +272,21 @@ and every older dataset. The live archive retains all historical rows and now
 contains 3,550 results and 1,032 proofs. The [gap register](research/implementation-gaps.md)
 and revised manuscript distinguish these implementation results from the open
 unrestricted width, representation, acquisition and full-machine obligations.
+
+## Bounded layers and comparable inputs
+
+The latest [study](experiments/results/structured/README.md) adds checked Boolean
+layers of width 1–4, persistent source/order indexes, payload-limited active
+caches, WAL checkpoint controls, and failure-aware route scores. The layer
+replacement theorem exposes exponential width dependence and logarithmic depth;
+full witnesses and service overhead remain separate. Native materialization was
+also repaired after inspecting generated C.
+
+All **119 tests pass**, and Lean audits **991 theorem declarations**. A new
+175-run comparison completes 2,450 queries correctly, with enabled learning,
+three additional artifact families and identical full-formula service inputs.
+Learning helps the signed-unit stream but does not improve the public-only
+streams. A separate cache-pressure study retains every historical state while
+measuring the cost of smaller active retention. All older datasets and archive
+rows remain unchanged; the live store now holds 3,905 results and 1,161 proofs.
+The [gap register](research/implementation-gaps.md) records what remains open.

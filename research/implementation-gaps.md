@@ -291,3 +291,34 @@ The live archive retains all 3,195 previous results, 903 proofs, and other old
 rows. New revalidation/audit adds 355 answers and 129 proofs, for 3,550 total
 results and 1,032 proofs. All 63 historical experiment files are unchanged.
 The reports are in `experiments/results/followup/`; previous studies stay intact.
+
+## Current work on gaps 1, 3, 4, 6, and 7
+
+The numbering below is the gap list selected for this task; earlier milestone
+numbering above is retained as history.
+
+| Gap | Completed change | Remaining limit |
+| --- | --- | --- |
+| 1. Beyond Boolean chains | Supplied bounded Boolean layers, checked finite-state joins, exact summaries, preserved old leaves and roots, explicit width-dependent replacement ledger. | No arbitrary-graph decomposition or unrestricted SAT width/acquisition bound; table size is exponential in layer width. |
+| 3. Global planning metadata | Persistent source reference counts, rank/order, constants and bucket indexes; local named deltas avoid whole-source comparison and plan copying. | Full active-context validation, full witnesses and certificates remain global; an edit may propagate across all buckets. |
+| 4. Compression and active memory | Payload-bounded proposal caches, symbolic root trimming/node caps, charged safe-point WAL checkpoint attempts; all archived evidence retained. | Serialized payload is not heap/RSS. Transient objects, native memory and blocked WAL checkpoints prevent a hard total bound; archive growth remains. |
+| 6. Failure-aware routing | Recent completed-answer cost with a query-budget penalty per failure; failed-only routes cannot win by being fast. | Periodic exploration still retries; no universal speedup or regret theorem under arbitrary shifts. |
+| 7. Broader comparable evidence | Frozen full-formula inputs across modes, enabled online learning, separate delta/layer evidence, new artifact families and sampled watchdog thresholds. | Small application prefixes, selected SATLIB examples and a toy prediction family remain limited evidence; sampled thresholds are not hard memory limits. |
+
+The native audit exposed a concrete refinement pitfall: Lean arity expansion
+could delay a function-valued `freeze` until lookup. The earlier mathematical
+summary and replacement proofs remained sound, but the compiled representation
+could repeat acquisition. Both chain and layered joins now materialize data
+before creating lookup closures. Generated C confirms that ordering. This is
+implementation evidence, not a formal compiler or complete runtime-cost proof.
+The development timeout is retained with the new study. All 119 tests pass on
+the corrected build; the transitive Lean audit checks 1,957 declarations and
+991 theorem declarations without admits or new axioms.
+
+A relevant published extension is Amarilli, Barloy, Jachiet and Paperman (MFCS
+2025), *Dynamic Membership for Regular Tree Languages*,
+[DOI 10.4230/LIPIcs.MFCS.2025.8](https://doi.org/10.4230/LIPIcs.MFCS.2025.8).
+It establishes an O(log n / log log n) relabeling-update bound for a fixed regular
+tree language. The fixed language, tree representation and permitted edits
+matter. Implementing that richer interface is a possible next restricted step;
+it does not remove unrestricted SAT's missing structural hypotheses.

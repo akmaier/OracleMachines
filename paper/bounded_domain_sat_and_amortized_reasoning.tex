@@ -84,7 +84,7 @@
 \vspace{-0.7cm}
 
 \begin{abstract}
-Learning allows us to spend computation once and reuse the result. Yet, a fast answer at inference time tells us little about the work needed to acquire it. Here, we use Boolean satisfiability to examine this trade. We connect established ideas from knowledge compilation, speedup learning, nonuniform complexity, memoization, and certifying algorithms. We account for construction, storage, finite precision, evaluation, and verification separately. Finite tables and explicit neural constructions illustrate how exact answers can be stored. Their size and construction cost remain part of the computation. Across input lengths, compact exact models give the standard nonuniform complexity consequences. Uniform polynomial-time construction would instead give a polynomial-time SAT algorithm. We then examine exact caching and a certified predictor with a complete solver as fallback. Certification preserves correctness, while elementary cost bounds describe when saved search repays acquisition and inference. These bounds also limit the additional work when prediction fails. Hence, our contribution is a focused perspective on resource accounting for learned reasoning. Whether a learned system meets the conditions for savings remains an algorithmic and empirical question.
+Learning allows us to spend computation once and reuse the result. Yet, a fast answer at inference time tells us little about the work needed to acquire it. Here, we use Boolean satisfiability to examine this trade. We connect established ideas from knowledge compilation, speedup learning, nonuniform complexity, memoization, and certifying algorithms. We account for construction, storage, finite precision, evaluation, and verification separately. Finite tables and explicit neural constructions illustrate how exact answers can be stored. Their size and construction cost remain part of the computation. Across input lengths, compact exact models give the standard nonuniform complexity consequences. Uniform polynomial-time construction would instead give a polynomial-time SAT algorithm. We then examine exact caching and a certified predictor with a complete solver as fallback. Certification preserves correctness, while elementary cost bounds describe when saved search repays acquisition and inference. The savings conditions hold under either $\Pclass=\NPclass$ or $\Pclass\neq\NPclass$. Explicit budgets also limit the additional work when prediction fails. Hence, our contribution is a focused perspective on resource accounting for learned reasoning. Whether a learned system meets the conditions for savings remains an algorithmic and empirical question.
 \end{abstract}
 
 \section{Introduction}
@@ -486,6 +486,48 @@ To examine a finite workload, let queries be independent with common probabiliti
 \end{equation}
 The bracket is the probability that $x$ occurs at least once. We solve it exactly once if it occurs. Summing expectations gives the bound. Note that the occurrence indicators for different strings need not be independent. For a uniform distribution over $M$ inputs, we expect $M[1-(1-1/M)^Q]$ solves. If $Q$ is small compared with $M$, this is close to $Q$, i.e.\ almost every query requires a solve. Hence, the fixed-domain limit alone says little about savings at a practical query volume.
 
+\subsection{Savings under either complexity hypothesis}
+\label{sec:reuse-savings}
+
+Do we need $\Pclass\neq\NPclass$ for reuse to help? Let us compare the same solver with and without an exact cache. The relevant quantity is the work we avoid on repeated inputs. This is standard memoization accounting \citep{michie1968}. Its benefit must repay the cost of recognizing when stored knowledge applies, as in the utility problem of speedup learning \citep{minton1988utility}.
+
+\begin{corollary}[Exact reuse versus repeated solving]
+\label{cor:reuse-savings}
+Under the assumptions of Lemma~\ref{lem:cache}, let $m_Q(x)$ count the occurrences of $x$ in the query sequence. Each solver invocation starts from the same initial state and costs $s(x)$, with or without the cache. Let $C\geq0$ be cache setup cost, and let $L_Q\leq Qc_N$ be the actual total lookup, insertion, and controller cost. The solver-only baseline costs $B_Q=\sum_{x\in U_Q}m_Q(x)s(x)$. The total cost $T_Q^{\mathrm{reuse}}$, including setup, satisfies
+\begin{equation}
+\boxed{B_Q-T_Q^{\mathrm{reuse}}
+=\sum_{x\in U_Q}\bigl(m_Q(x)-1\bigr)s(x)-C-L_Q.}
+\label{eq:reuse-savings}
+\end{equation}
+Thus, reuse is strictly faster if and only if avoided repeated solving exceeds setup and dictionary costs. A sufficient condition is
+\begin{equation}
+\sum_{x\in U_Q}\bigl(m_Q(x)-1\bigr)s(x)>C+Qc_N.
+\label{eq:reuse-sufficient}
+\end{equation}
+Neither statement requires a hypothesis about $\Pclass$ and $\NPclass$.
+\end{corollary}
+
+\begin{proof}
+The cache invokes the solver once for each distinct input. Hence,
+$T_Q^{\mathrm{reuse}}=C+L_Q+\sum_{x\in U_Q}s(x)$.
+Subtracting this identity from $B_Q$ proves \eqref{eq:reuse-savings}. The sufficient condition follows from $L_Q\leq Qc_N$. The argument uses exact reuse and additive costs, with no assumption on how $s(x)$ grows with input length.
+\end{proof}
+
+If $\Pclass=\NPclass$, SAT has a uniform polynomial-time solver. Still, polynomial time need not be as cheap as retrieval. We can save work whenever \eqref{eq:reuse-sufficient} holds for the chosen solver. Conversely, a sufficiently fast solver can make cache overhead more expensive than solving again. Equality of the classes alone decides neither comparison.
+
+If $\Pclass\neq\NPclass$, the same identity applies. Repeated difficult instances may offer large savings, while their first solves remain fully charged. A sequence of distinct inputs saves no solver calls. Note that $\Pclass\neq\NPclass$ supplies neither an exponential lower bound nor a guarantee that a particular workload is difficult. It excludes a uniform polynomial-time exact SAT decider on all inputs. Our workload-dependent savings do not supply such a decider.
+
+\paragraph{A scaling example with polynomial solving cost.}
+Consider $Q$ repetitions of one length-$n$ input. Let its solving cost be $s_n>0$, setup cost be $C_n$, and dictionary cost be at most $\ell_n$ per query. We obtain
+\begin{equation}
+\frac{T_Q^{\mathrm{reuse}}}{B_Q}
+\leq \frac{C_n}{Qs_n}+\frac{\ell_n}{s_n}+\frac{1}{Q}.
+\label{eq:reuse-ratio}
+\end{equation}
+For example, suppose $s_n=\Theta(n^k)$ for some $k>1$, $\ell_n=O(n)$, $C_n=O(n)$, and $Q=n$. The ratio is then $O(n^{1-k}+n^{-1})$ and tends to zero. Even polynomial-cost solving can therefore admit a growing speedup through reuse. These are illustrative assumptions for a specified solver and repeated-input family, not a SAT lower bound or an experimental result. The lookup budget includes reading and comparing the input. Only one input and its answer need to be stored.
+
+The comparison is with the specified solver restarted on each query. It does not establish superiority over every algorithm; another solver may implement the same reuse. More generally, every decidable task permits this accounting. SAT makes the distinction from worst-case complexity especially clear.
+
 \section{Certified learning and adaptive fallback}
 \label{sec:hybrid}
 
@@ -601,6 +643,8 @@ If $\delta>0$, the hybrid beats the solver-only expected total $Q\mu$ whenever $
 The online cost on $x$ is $f(x)+(1-H(x))s(x)$. Taking its expectation gives $\mu-\delta$. Summing over $Q$ queries and adding $C$ proves the identity and the threshold. Independence between queries is unnecessary because the policy is fixed and only the marginal expectations are used.
 \end{proof}
 
+Like Corollary~\ref{cor:reuse-savings}, this result holds under either $\Pclass=\NPclass$ or $\Pclass\neq\NPclass$. It extends the cost comparison to certified answers on inputs that need not have appeared before. Here, ``known'' means available through exact retrieval or a sound check. Model confidence alone does not justify skipping the solver. For an adaptive system, the success indicator and overhead depend on earlier queries, and update costs must also be charged.
+
 Hence, we must measure solver time avoided on certified successes. Raw accuracy alone misses this quantity. For example, assume $\Prb(H=1)\geq\alpha\geq0$, every success has $s(x)\geq b\geq0$, and $\E[f(X)]\leq a$. Then $\delta\geq\alpha b-a$, so $\alpha b>a$ suffices for positive online savings.
 
 Let us also consider a counterexample. With probability $0.99$, the solver costs one unit and the fast path succeeds. On the remaining inputs, the solver costs $10^6$ units and the fast path fails. If the fast path always costs two units, then $\delta=0.99-2<0$. We save only $0.99$ units per query on average, but spend two units to do so. Even a 99\% certified success rate therefore increases expected online cost. This workload is illustrative; we report no measurement here.
@@ -685,7 +729,7 @@ Learning can make a later answer cheap by spending computation earlier. Here, we
 
 Finite tables and neural memorization give transparent baselines. We can construct exact answers on a fixed domain. Yet, this leaves compactness and efficient acquisition unresolved. Across input lengths, polynomial-size exact model families have the standard nonuniform consequences, including the Karp--Lipton collapse. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. Note that these conclusions require different hypotheses.
 
-Caching shows how to reuse exact answers. Certification with terminating fallback preserves correctness even when a predictor is inaccurate. For a fixed policy, we obtain expected savings when avoided solver work exceeds fast-path cost and repays acquisition. Explicit budgets also bound the additional work when prediction fails. Still, we must establish these conditions for an actual learned system. Hence, useful evaluation should report acquisition, storage, inference, verification, fallback, and updates together. Comparing with both a solver alone and an exact cache then addresses the practical question: when does reusable knowledge repay its acquisition?
+Caching shows how to reuse exact answers. Certification with terminating fallback preserves correctness even when a predictor is inaccurate. For a fixed policy, we obtain expected savings when avoided solver work exceeds fast-path cost and repays acquisition. These conditions apply under either $\Pclass=\NPclass$ or $\Pclass\neq\NPclass$; even polynomial-cost solving can leave useful work to avoid. Explicit budgets also bound the additional work when prediction fails. Still, we must establish these conditions for an actual learned system. Hence, useful evaluation should report acquisition, storage, inference, verification, fallback, and updates together. Comparing with both a solver alone and an exact cache then addresses the practical question: when does reusable knowledge repay its acquisition?
 
 \FloatBarrier
 \begingroup

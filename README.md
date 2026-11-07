@@ -29,6 +29,9 @@ System 2 serve as a computational analogy, not as complexity classes.
 The expanded draft compares these ideas with neural-advice and speedup-learning
 literature, discusses the failed Deolalikar argument and Wen's learned-oracle
 claims, and proves conditional expected-savings and bounded-overhead results.
+An exact reuse identity states when avoiding repeated solves repays cache costs.
+These savings conditions apply whether P = NP or P != NP, and a scaling example
+shows how reuse can help even when solving has polynomial cost.
 Its final section identifies remaining research questions and an evaluation
 protocol; no experimental speedup or efficient exact-learning algorithm is claimed.
 

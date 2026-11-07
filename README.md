@@ -16,6 +16,7 @@ The current draft is **Bounded-Domain SAT, Compiled Knowledge, and Amortized
 Reasoning: A perspective on resource accounting for learned reasoning**.
 
 - [LaTeX source](paper/bounded_domain_sat_and_amortized_reasoning.tex)
+- Author: Andreas Maier
 - Status: working draft
 - Format: self-contained LaTeX with embedded bibliography and TikZ figures
 

@@ -18,6 +18,7 @@
 \usetikzlibrary{arrows.meta,positioning,calc,fit,backgrounds}
 \usepackage{caption}
 \usepackage{placeins}
+\usepackage{booktabs}
 \usepackage[authoryear,round]{natbib}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
@@ -84,7 +85,7 @@
 \vspace{-0.7cm}
 
 \begin{abstract}
-Whether $\Pclass=\NPclass$ does not by itself determine whether a System 1/System 2 architecture saves computation. Learning allows us to spend computation once and reuse the result. Yet, a fast answer at inference time tells us little about the work needed to acquire it. Here, we use Boolean satisfiability to examine this trade. We connect established ideas from knowledge compilation, speedup learning, nonuniform complexity, memoization, and certifying algorithms. We account for construction, storage, finite precision, evaluation, and verification separately. Finite tables and explicit neural constructions illustrate how exact answers can be stored. Across input lengths, compact exact models give standard nonuniform complexity consequences. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. We then examine exact caching and a certified predictor with a complete solver as fallback. Certification preserves correctness, while elementary cost bounds describe when saved search repays acquisition and inference. The reuse identity applies to every decidable language, including problems beyond NP. Its validity requires neither $\Pclass=\NPclass$ nor $\Pclass\neq\NPclass$; actual savings require the stated cost inequalities. Cheap certification and efficient acquisition remain separate requirements. Explicit budgets also limit additional work when prediction fails. A Lean development verifies binary parsing, exact expansion, restricted bounds for an exhaustive reference solver, and lazy search with reusable witnesses and refutations. A persistent service retains previous results and certificates. Controlled experiments exhibit both reduced core work and overhead that can erase elapsed-time savings. Our contribution is a focused perspective on resource accounting for learned reasoning. Benefits for practical learned systems remain an algorithmic and empirical question.
+Whether $\Pclass=\NPclass$ does not by itself determine whether a System 1/System 2 architecture saves computation. Learning allows us to spend computation once and reuse the result. Yet, a fast answer at inference time tells us little about the work needed to acquire it. Here, we use Boolean satisfiability to examine this trade. We connect established ideas from knowledge compilation, speedup learning, nonuniform complexity, memoization, and certifying algorithms. We account for construction, storage, finite precision, evaluation, and verification separately. Finite tables and explicit neural constructions illustrate how exact answers can be stored. Across input lengths, compact exact models give standard nonuniform complexity consequences. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. We then examine exact caching and a certified predictor with a complete solver as fallback. Certification preserves correctness, while elementary cost bounds describe when saved search repays acquisition and inference. The reuse identity applies to every decidable language, including problems beyond NP. Its validity requires neither $\Pclass=\NPclass$ nor $\Pclass\neq\NPclass$; actual savings require the stated cost inequalities. Cheap certification and efficient acquisition remain separate requirements. Explicit budgets also limit additional work when prediction fails. A Lean development verifies binary parsing, exact expansion, restricted bounds for an exhaustive reference solver, lazy search with reusable witnesses and refutations, and a sound connection to an external CDCL solver. A persistent service retains previous results and certificates. Controlled experiments exhibit both reduced core work and overhead that can erase elapsed-time savings. Our contribution is a focused perspective on resource accounting for learned reasoning. Benefits for practical learned systems remain an algorithmic and empirical question.
 \end{abstract}
 
 \section{Introduction}
@@ -983,7 +984,7 @@ A refutation leaf is accepted only when partial evaluation is false. An internal
 
 The persistent policy tries at most four distinct stored witnesses and four distinct stored refutations. It checks each against the new formula. For example, a refutation of $x_0\land\neg x_0$ can certify a larger conjunction containing that contradiction. It cannot certify the negation of that contradiction. A stored negative bit alone does not authorize this transfer. The service retains all results and certificates, while restricting active refutation proposals to 65,536 serialized bytes each. This restriction bounds the proposals tried, not the archive. Exact cache hits retain the local-store trust assumption stated above.
 
-Search pruning and reuse across related SAT queries are established techniques. \citet{een2003extensible} describe DPLL-based search, conflict-driven learning, and an incremental interface for related problems. Our implementation makes a smaller part of this design explicit for the present formula syntax. It does not implement CNF conversion, unit propagation, or conflict-driven clause learning. Its purpose is a checked resource-accounting example, with no algorithmic novelty claim.
+Search pruning and reuse across related SAT queries are established techniques. \citet{een2003extensible} describe DPLL-based search, conflict-driven learning, and an incremental interface for related problems. This lazy implementation makes a smaller part of the design explicit for the present formula syntax. It does not implement CNF conversion, unit propagation, or conflict-driven clause learning. Section~\ref{sec:checked-cdcl} adds these techniques through a checked external solver. Both serve as resource-accounting examples, with no algorithmic novelty claim.
 
 Note the limits of \eqref{eq:lazy-nodes}. It bounds visited nodes, not machine time. Collecting indices, deduplicating them, sparse lookup, formula evaluation, and producing a dense witness still require work. The new ledger charges these operations and all proposal checks. The earlier fixed-width constants and one-witness bound \eqref{eq:concrete-overhead} remain results about their original implementations; we do not transfer them to this ledger. Refutation trees may be exponential, and their construction, checking, serialization, and storage must be paid for. A bounded number of proposed trees does not make those costs constant. The full transition-machine and live-memory bounds remain open. The improvement removes unused-variable enumeration and permits early pruning; it supplies no polynomial bound for unrestricted SAT.
 
@@ -1057,6 +1058,71 @@ UNSAT extension & 69,760 & 0.003518 & 0.457024 & 140.20 & 141.34 \\
 The improved fallback changes the practical comparison. Reuse reduces counted work in these streams, yet its median total time is slightly higher than lazy solving alone in every displayed row. Database writes, checksums, candidate retrieval, and serialization matter at this scale. Hence, the earlier gain against eager enumeration does not establish a gain against the stronger baseline. These easy workloads and three local repetitions support a mechanism comparison, not a general timing conclusion.
 
 A separate integration case solves $x_{100}$ in three search nodes and returns its correctly indexed 101-bit witness. An immediate false conjunct closes a formula containing 30 variables at the root. Four hundred generated formulas agree with independent truth tables and with the exhaustive reference. Restart tests retain both witness alternatives and refutations; forged certificates are rejected. Revalidation of the persistent store adds 355 current-engine records and 129 refutations while preserving all 710 earlier records unchanged. Every current record passes a fresh semantic audit. The raw runs also retain certificate payload sizes and final database sizes; they do not measure peak heap use.
+
+\subsection{A checked connection to mature CDCL solving}
+\label{sec:checked-cdcl}
+
+Let us now replace elementary search on the unresolved queries with an established solver. The aim is to reuse mature search techniques while keeping each completed answer checkable. We compile the formula into a shared AND/inverter graph (AIG), simplifying constants and identical gates during construction. Lean's standard library translates that graph into CNF. We then run CaDiCaL with proof logging. Its CDCL engine supplies propagation, clause learning, restarts, phase heuristics, and formula simplification \citep{biere2024cadical}. The experiment uses version 2.1.2 bundled with the pinned Lean toolchain. This is a reproducible integration baseline; newer CaDiCaL 3.0 techniques have also been published \citep{pollitt2026cadical}.
+
+A positive result needs a witness that satisfies the original formula. A negative result needs a certificate checked against CNF reconstructed from that formula. We use the standard-library LRAT checker, following the certifying approach of \citet{cruzfilipe2017lrat}. Its hints make proof checking a different task from discovering the proof. They give no polynomial bound on proof size in the input length.
+
+\begin{samepage}
+\begin{proposition}[Sound acceptance through the compiled representation]
+\label{prop:cdcl-boundary}
+Let $A(f)$ be the compiled AIG and $C(f)$ its CNF translation. Compilation preserves evaluation under every valuation. If the checked root of $A(f)$ is constant false, or the LRAT checker accepts a proof for $C(f)$, then $f$ is unsatisfiable. A complete assignment accepted by the original formula evaluator certifies satisfiability.
+\end{proposition}
+\end{samepage}
+
+\begin{proof}
+Induction on $f$ establishes equality between its evaluation and that of $A(f)$. Cached graph extension preserves existing references; the constant, variable, negation, and conjunction constructors preserve their respective Boolean meanings. Thus, a constant-false root excludes every satisfying valuation. For LRAT acceptance, the standard-library checker theorem gives unsatisfiability of $C(f)$. The standard-library AIG-to-CNF theorem transfers this conclusion to $A(f)$, and evaluation preservation transfers it to $f$. The positive case follows directly from witness evaluation.
+\end{proof}
+
+The Lean module \texttt{CDCL.lean} composes these results with the pinned standard library \citep{lean2025sat}. It does not invoke a native-decision axiom. The transitive audit passes for 1,035 declarations, including 563 theorem declarations. The executable still relies on compilation, runtime execution, serialization, and the service adapter outside the kernel proof. An external verdict or clause number alone is never enough for a new accepted answer.
+
+The automatic policy first tries stored witnesses and certificates, circuit simplification, and two uniform-phase witnesses. It then allows 64 local search nodes before external solving. Exhaustion of this preliminary budget means that no proposal was found. Every returned proposal is checked independently; exhaustion never becomes an UNSAT verdict. External timeouts and failed checks return errors without storing a decision. Consequently, the bounded service promises sound completed answers, not unconditional termination with an answer.
+
+We also reduce the cost of using acquired knowledge. An index of distinct proposals bounds retrieval without scanning every archived duplicate. An unchanged active witness requires no database rewrite. A JSON-lines service retains its database connection and native checker across requests, amortizing startup and fingerprinting. Each acquisition still commits durably before its response. All older result rows remain archived. The new engine revalidates 355 inputs while preserving 1,065 earlier rows and their proofs; every current result passes a fresh semantic audit.
+
+These improvements leave explicit obligations. We have no complete operation ledger for AIG construction, CDCL, or LRAT checking, so modern acquisitions report unknown total abstract work rather than zero. Known parser work and measured elapsed time remain separate. The earlier numerical bounds describe their original implementations. The adapter also starts a fresh CaDiCaL process on each unresolved query: saved results and certificates persist, but its internal learned clauses do not. Certified incremental solving already has published methods \citep{fazekas2024incremental}; integrating such a session with the checked formula boundary remains work for this implementation. No part of this construction proves a polynomial bound for unrestricted SAT.
+
+\subsection{Measured costs with checked CDCL}
+\label{sec:cdcl-study}
+
+The new study uses ten streams of eight queries, five variants, and three repetitions in rotating order. All 150 runs complete, yielding 1,200 correct answers with no timeout at the eight-second run limit. Labels follow from construction: forced units, a contradictory implication chain, planted 3-SAT, and pigeonhole formulas. Distinct queries append double negations; one stream repeats exactly. These are controlled transfer cases, not held-out practical SAT instances.
+
+We compare lazy search, checked CDCL without preliminary search, the automatic policy, exact caching, and the full persistent policy. Every run starts in a fresh process with an empty database. Table~\ref{tab:cdcl-results} separates warm query service from total cost. Totals include fingerprinting, database setup, native startup, a trivial warmup without retained knowledge, all query acquisition and verification, durable writes, and shutdown. Python interpreter startup and observer statistics are excluded. Modern work counts are unmeasured; we compare elapsed time rather than transferring the old operation ledger.
+
+\begin{table}[htbp]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrrrr}
+\toprule
+& \multicolumn{4}{c}{Warm service (ms)} & \multicolumn{2}{c}{Total (ms)} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-7}
+Stream & Lazy & CDCL & Auto & Persistent & Lazy & Persistent \\
+\midrule
+Mixed units, 12 & 0.63 & 30.01 & 0.76 & 2.64 & 125.63 & 128.67 \\
+Late conflict, 17 & 6337.46 & 0.61 & 0.61 & 2.99 & 6462.20 & 127.77 \\
+Implication chain, 24 & 2.88 & 33.55 & 3.62 & 4.93 & 128.31 & 129.20 \\
+Planted 3-SAT, 20 & 603.55 & 41.40 & 52.33 & 15.52 & 729.92 & 140.57 \\
+Pigeonhole $3\to2$ & 0.91 & 32.01 & 1.02 & 2.94 & 126.61 & 128.13 \\
+Pigeonhole $4\to3$ & 9.48 & 32.93 & 35.75 & 10.53 & 135.23 & 135.07 \\
+Pigeonhole $5\to4$ & 205.19 & 36.61 & 44.70 & 15.66 & 329.42 & 140.48 \\
+Pigeonhole $6\to5$ & 5468.43 & 55.98 & 64.55 & 28.42 & 5596.71 & 154.45 \\
+Pigeonhole $5\to5$ & 377.43 & 35.41 & 41.36 & 11.05 & 500.89 & 135.26 \\
+Repeated planted SAT & 608.76 & 39.52 & 52.39 & 9.44 & 733.35 & 134.20 \\
+\bottomrule
+\end{tabular}
+\caption{Medians of three runs on eight-query streams. The first four stream suffixes give variable counts. CDCL includes shared circuit simplification and checked results. Auto adds a bounded local attempt; persistent adds exact caching and checked proposal reuse. All acquisition occurs inside each stream.}
+\label{tab:cdcl-results}
+\end{table}
+
+On the six-into-five pigeonhole stream, total time falls from 5596.71\,ms with lazy search to 154.45\,ms with persistent reuse. The automatic policy alone makes eight external calls; the persistent policy makes one and checks seven transferred refutations. The planted and larger satisfiable streams similarly reuse checked witnesses. The late contradiction is eliminated by circuit simplification without external search.
+
+The losing cases matter too. Preliminary search avoids unnecessary subprocesses on mixed units, the chain, and the smallest pigeonhole stream. On harder instances it adds work before CDCL. Tiny streams remain slightly slower with database persistence than with lazy search alone. On repeated planted SAT, exact caching already obtains seven hits and takes 132.81\,ms total, against 134.20\,ms for the full policy. Hence, additional reuse mechanisms need not repay their overhead. Three local repetitions and these syntactic families establish neither universal acceleration nor competitive SAT performance. Peak memory, large proof logs, and broad application workloads remain unmeasured.
+
+The repository retains all earlier datasets unchanged and saves the new inputs, raw runs, fingerprints, and timing components separately. Integration tests additionally compare 120 seeded CNFs with independent truth tables and reject forged external models, invalid or wrong-formula LRAT proofs, and timeouts. Together with the earlier checks, all 34 service tests pass. These results support the checked integration and expose its costs; they do not change the asymptotic conclusion of the finite-expansion argument.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
@@ -1158,6 +1224,12 @@ Fast, slow, and metacognitive thinking in AI.
 \emph{npj Artificial Intelligence}, 1, 27.
 \href{https://doi.org/10.1038/s44387-025-00027-5}{doi:10.1038/s44387-025-00027-5}.
 
+\bibitem[Biere et~al.(2024)Biere, Faller, Fazekas, Fleury, Froleyks, and Pollitt]{biere2024cadical}
+Biere, A., Faller, T., Fazekas, K., Fleury, M., Froleyks, N., and Pollitt, F. (2024).
+CaDiCaL 2.0.
+\emph{Computer Aided Verification}, LNCS 14681, 133--152.
+\href{https://doi.org/10.1007/978-3-031-65627-9_7}{doi:10.1007/978-3-031-65627-9\_7}.
+
 \bibitem[Blum and Rivest(1988)]{blum1988}
 Blum, A., and Rivest, R.~L. (1988).
 Training a 3-node neural network is NP-complete.
@@ -1176,17 +1248,23 @@ Metareasoning as a formal computational problem.
 In \emph{Metareasoning: Thinking about Thinking}, AAAI Workshop Technical Report WS-08-07, pp.~29--33.
 \url{https://cdn.aaai.org/Workshops/2008/WS-08-07/WS08-07-005.pdf}.
 
+\bibitem[Cook and Reckhow(1979)]{cook1979}
+Cook, S.~A., and Reckhow, R.~A. (1979).
+The relative efficiency of propositional proof systems.
+\emph{Journal of Symbolic Logic}, 44(1), 36--50.
+\href{https://doi.org/10.2307/2273702}{doi:10.2307/2273702}.
+
 \bibitem[Cook(1971)]{cook1971}
 Cook, S.~A. (1971).
 The complexity of theorem-proving procedures.
 In \emph{Proceedings of the Third Annual ACM Symposium on Theory of Computing}, pp.~151--158.
 \href{https://doi.org/10.1145/800157.805047}{doi:10.1145/800157.805047}.
 
-\bibitem[Cook and Reckhow(1979)]{cook1979}
-Cook, S.~A., and Reckhow, R.~A. (1979).
-The relative efficiency of propositional proof systems.
-\emph{Journal of Symbolic Logic}, 44(1), 36--50.
-\href{https://doi.org/10.2307/2273702}{doi:10.2307/2273702}.
+\bibitem[Cruz-Filipe et~al.(2017)Cruz-Filipe, Heule, Hunt, Kaufmann, and Schneider-Kamp]{cruzfilipe2017lrat}
+Cruz-Filipe, L., Heule, M.~J.~H., Hunt, W.~A., Jr., Kaufmann, M., and Schneider-Kamp, P. (2017).
+Efficient certified RAT verification.
+\emph{Automated Deduction---CADE 26}, LNCS 10395, 220--236.
+\href{https://doi.org/10.1007/978-3-319-63046-5_14}{doi:10.1007/978-3-319-63046-5\_14}.
 
 \bibitem[Darwiche and Marquis(2002)]{darwiche2002}
 Darwiche, A., and Marquis, P. (2002).
@@ -1206,11 +1284,24 @@ An extensible SAT-solver.
 \emph{Theory and Applications of Satisfiability Testing}, LNCS 2919, 502--518.
 \href{https://doi.org/10.1007/978-3-540-24605-3_37}{doi:10.1007/978-3-540-24605-3\_37}.
 
+\bibitem[Fazekas et~al.(2024)Fazekas, Pollitt, Fleury, and Biere]{fazekas2024incremental}
+Fazekas, K., Pollitt, F., Fleury, M., and Biere, A. (2024).
+Certifying incremental SAT solving.
+\emph{Proceedings of LPAR 2024}, EPiC Series in Computing 100, 321--340.
+\href{https://doi.org/10.29007/pdcc}{doi:10.29007/pdcc}.
+
 \bibitem[Ferrara et~al.(2007)Ferrara, Liberatore, and Schaerf]{ferrara2007preprocessing}
 Ferrara, A., Liberatore, P., and Schaerf, M. (2007).
 Model checking and preprocessing.
 In \emph{AI*IA 2007: Artificial Intelligence and Human-Oriented Computing}, LNCS~4733, pp.~48--59.
 \href{https://doi.org/10.1007/978-3-540-74782-6_6}{doi:10.1007/978-3-540-74782-6\_6}.
+
+\bibitem[Fortnow and Santhanam(2011)]{fortnow2011compression}
+Fortnow, L., and Santhanam, R. (2011).
+Infeasibility of instance compression and succinct PCPs for NP.
+\emph{Journal of Computer and System Sciences}, 77(1), 91--106.
+Earlier conference version at STOC 2008.
+\href{https://doi.org/10.1016/j.jcss.2010.06.007}{doi:10.1016/j.jcss.2010.06.007}.
 
 \bibitem[Fortnow(2022)]{fortnow2022fifty}
 Fortnow, L. (2022).
@@ -1223,13 +1314,6 @@ Fortnow, L. (2026).
 How does machine learning manage complexity?
 Preprint, \emph{arXiv:2604.07233}; also ECCC TR26-053.
 \url{https://arxiv.org/abs/2604.07233}.
-
-\bibitem[Fortnow and Santhanam(2011)]{fortnow2011compression}
-Fortnow, L., and Santhanam, R. (2011).
-Infeasibility of instance compression and succinct PCPs for NP.
-\emph{Journal of Computer and System Sciences}, 77(1), 91--106.
-Earlier conference version at STOC 2008.
-\href{https://doi.org/10.1016/j.jcss.2010.06.007}{doi:10.1016/j.jcss.2010.06.007}.
 
 \bibitem[Gershman and Goodman(2014)]{gershman2014}
 Gershman, S.~J., and Goodman, N.~D. (2014).
@@ -1292,6 +1376,13 @@ Khardon, R., and Roth, D. (1997).
 Learning to reason.
 \emph{Journal of the ACM}, 44(5), 697--725.
 \href{https://doi.org/10.1145/265910.265918}{doi:10.1145/265910.265918}.
+
+\bibitem[Lean contributors(2025)]{lean2025sat}
+Lean contributors (2025).
+Lean 4.24.0 standard library: AIG-to-CNF translation and LRAT checker.
+Software, pinned version used in the accompanying formalization.
+\url{https://github.com/leanprover/lean4/tree/v4.24.0/src/Std/Sat}.
+\url{https://github.com/leanprover/lean4/tree/v4.24.0/src/Std/Tactic/BVDecide/LRAT}.
 
 \bibitem[Lin et~al.(2021)Lin, Jaech, Li, Gormley, and Eisner]{lin2021limitations}
 Lin, C.-C., Jaech, A., Li, X., Gormley, M.~R., and Eisner, J. (2021).
@@ -1363,6 +1454,12 @@ An improved exponential-time algorithm for $k$-SAT.
 \emph{Journal of the ACM}, 52(3):337--364.
 \url{https://cseweb.ucsd.edu/~paturi/myPapers/pubs/PaturiPudlakSaksZane_2005_jacm.pdf}.
 
+
+\bibitem[Pollitt et~al.(2026)Pollitt, Fleury, Fazekas, Froleyks, Schidler, Schreiber, and Biere]{pollitt2026cadical}
+Pollitt, F., Fleury, M., Fazekas, K., Froleyks, N., Schidler, A., Schreiber, D., and Biere, A. (2026).
+CaDiCaL 3.0 (Tool Paper).
+\emph{SAT 2026}, LIPIcs 377, 40:1--40:14.
+\href{https://doi.org/10.4230/LIPIcs.SAT.2026.40}{doi:10.4230/LIPIcs.SAT.2026.40}.
 
 \bibitem[Prasad et~al.(2001)Prasad, Chong, and Keutzer]{prasad2001atpg}
 Prasad, M.~R., Chong, P., and Keutzer, K. (2001).

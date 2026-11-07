@@ -68,18 +68,23 @@ expansion. The correctness induction supplies neither bound by itself and does
 not prove P = NP.
 The executable development now supplies an exact SAT solver, a counted binary
 parser, polynomial bounds for fixed or logarithmically growing variable ranges,
-and certified witness reuse. The current fallback adds lazy search on distinct
+and certified witness reuse. A reference fallback adds lazy search on distinct
 occurring variables, sound partial-assignment pruning, and reusable checked
 refutation trees. Bounded witness and refutation portfolios survive restarts;
 all earlier results remain archived.
+The default service now adds shared AIG simplification, a bounded local attempt,
+and CaDiCaL's mature CDCL engine. SAT witnesses and LRAT UNSAT proofs must pass
+Lean checkers. The formula-to-CNF connection is proved; the external solver's
+verdict is never sufficient. Indexed proposals and a long-lived JSON-lines
+service reduce retrieval and startup overhead. These modern paths report wall
+time and explicitly mark their abstract work counts as unmeasured.
 An explicit evaluator machine realizes the reported evaluation count exactly
 and has a checked bound on intermediate data size. A converse encoding proof
 extends the restricted bounds to every accepted binary request.
 The [persistent solver](solver/README.md) retains every completed result across
-restarts. The [reproducible study](experiments/README.md) compares reuse with repeated
-lazy solving and retains the earlier exhaustive reference;
-they do not establish a competitive SAT solver or efficient exact learning on
-unrestricted instances.
+restarts. The [reproducible studies](experiments/README.md) compare reuse with
+lazy solving and checked CDCL, while retaining the earlier exhaustive reference.
+They do not establish efficient exact learning on unrestricted instances.
 
 The central question is when the expense of acquiring reusable knowledge is repaid
 by reduced future computation. Exact representability alone establishes neither
@@ -161,14 +166,17 @@ size can still be exponential.
 
 ## Persistent solver
 
-Build the executable with `cd formal && lake build oracleSolver`. Then, from
+Build the executable with `./solver/build.sh`. Then, from
 the repository root, run `python3 solver/persistent.py solve 010`. Subsequent
 calls reuse the result from `solver/.cache/results.sqlite3`; new formulas can
-also reuse retained witnesses and refutation trees after checking them. SAT and UNSAT
+also reuse retained witnesses and refutation certificates after checking them. SAT and UNSAT
 results accumulate without eviction. The [service documentation](solver/README.md)
 covers encoding, storage, restart behavior, integrity checks, and testing.
 The database is local and ignored by Git; source code and reproducible experiment
 results are versioned.
+Use `python3 solver/persistent.py serve` for multiple JSON-lines queries in one
+process. The default `auto` backend combines local checks with certified CDCL;
+`--backend lean` retains the original counted lazy solver.
 
 ## Literature review
 

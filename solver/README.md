@@ -1,21 +1,18 @@
-# Persistent exact results
+# Persistent checked SAT service
 
-This service combines the Lean-verified SAT core with a local SQLite store.
-Every completed SAT or UNSAT verdict is retained. SAT means that the valid
-formula is satisfiable; UNSAT means it is unsatisfiable. A malformed encoding
-is an error, never an UNSAT verdict. Neither name refers to a size restriction. SAT records also retain the
-satisfying assignment. UNSAT records retain refutation trees. Up to four stored
-witnesses and four stored refutations are checked against a new formula before
-the lazy solver runs. The active witness is tried first; other distinct witnesses
-and refutations are proposed in reverse acquisition order. Cache entries and learned
-state survive closing the process and restarting it.
+Every completed SAT or UNSAT verdict is retained. SAT means that a valid formula
+is satisfiable; UNSAT means it is unsatisfiable. A malformed encoding is an error,
+never an UNSAT verdict. SAT records retain satisfying assignments. UNSAT records
+retain checked refutation trees, LRAT proofs, or certificates that the compiled
+circuit simplifies to false. Results and certificates survive restarts without
+eviction.
 
-Build from the repository root, with the pinned Lean toolchain available:
+## Build and use
+
+With the pinned Lean toolchain available, run from the repository root:
 
 ```sh
-cd formal
-lake build OracleMachines oracleSolver
-cd ..
+./solver/build.sh
 python3 solver/persistent.py solve 010
 python3 solver/persistent.py solve 010
 python3 solver/persistent.py solve 0101010
@@ -24,108 +21,170 @@ python3 solver/persistent.py audit
 python3 solver/persistent.py revalidate
 ```
 
+The build helper records the toolchain's bundled CaDiCaL path locally. The
+measured version is 2.1.2 with ASCII LRAT output. The default `--backend auto`
+uses verified simplification and a bounded local attempt before calling
+CaDiCaL. `--backend cadical` skips that local search; `--backend lean` retains
+the counted lazy solver. Set `ORACLE_CADICAL` or pass `--cadical /path/to/cadical`
+to choose a compatible binary. Without CaDiCaL, `auto` uses the complete lazy
+fallback. An external timeout (default 30 seconds, configurable with `--timeout`)
+returns an error and stores no SAT/UNSAT verdict.
+
 `010` encodes variable 0. The first call solves it and retains witness `1`.
-The second retrieves the exact cached result. `0101010` is its double negation;
-the stored witness can certify that different input. `0100101011` is the
-contradiction `x0 AND NOT x0` and has a retained UNSAT result after solving.
-The input format is defined in [Encoding.lean](../formal/OracleMachines/Encoding.lean).
+The second retrieves the exact result. `0101010` is its double negation; the
+stored witness can certify that different input. `0100101011` encodes
+`x0 AND NOT x0`. The [encoding](../formal/OracleMachines/Encoding.lean) uses
+binary postfix instructions and unary variable indices.
+
+Keep the service warm for multiple queries:
+
+```sh
+python3 solver/persistent.py serve
+```
+
+Send one JSON object per line, for example `{"bits":"010"}` or
+`{"bits":"0101010","learn":false}`. Each line gets a result or error; EOF closes
+the service. One process keeps SQLite and the native checker open and amortizes
+engine fingerprinting. Every newly acquired result still commits before its
+response. `learn:false` disables cross-formula proposals and active-witness
+updates, while exact results are still retained and reused.
+
+## Checked acceleration
+
+The automatic policy tries saved proposals, shared circuit simplification,
+all-false/all-true witnesses, and up to 64 local search nodes. Exhausting this
+node budget means no answer yet. Every successful local proposal is independently
+checked. The policy then invokes CaDiCaL, which supplies mature unit propagation,
+watched literals, clause learning, restart and phase heuristics, preprocessing,
+and inprocessing. This integration uses its default techniques; it does not
+implement every SAT algorithm or guarantee that one policy wins on all inputs.
+
+[CDCL.lean](../formal/OracleMachines/CDCL.lean) proves that our cached AND/inverter
+graph preserves the original formula's value. Lean's standard library provides
+the CNF translation theorem and LRAT checker. A SAT model is checked directly on
+the original formula. An UNSAT proof is checked against CNF reconstructed from
+that formula. A CaDiCaL verdict, exit status, or temporary DIMACS file is never
+sufficient for acceptance. Invalid certificates, failed subprocesses, and
+timeouts store no answer. This is soundness of completed answers, not a
+termination guarantee under finite service budgets. The standard-library
+theorems compose directly, without a native-decision axiom; the axiom audit passes.
+
+Identical gates share circuit nodes; constants and complementary terms simplify.
+A proof can transfer across some syntactic changes, such as double negation,
+but every transfer is checked on the current formula. An LRAT proof refers to
+specific clause identifiers; arbitrary conjunction extensions need not preserve
+it. SAT witnesses and tree proofs retain their respective reuse rules.
+
+At most four stored witnesses and four stored proofs are proposed on each new
+formula. An index of distinct proposals avoids scanning archived duplicates.
+The active witness is tried first, followed by recent acquisitions. Proof
+proposals are limited to 65,536 serialized bytes; larger proofs remain archived.
+A bounded proposal count does not make certificate checking constant cost.
+Exact hits avoid parsing and solving, and do not rewrite an unchanged active
+witness. CaDiCaL starts a new process on each unresolved query, so its internal
+learned clauses are not retained between queries. Persistent results, witnesses,
+and certificates are retained. A proof-logging incremental CaDiCaL session would
+require an additional checked integration.
+
+## Persistence and trust
 
 The default database is `solver/.cache/results.sqlite3`, which Git ignores.
 Use `--cache /absolute/path/results.sqlite3` before the subcommand to choose a
-durable location. Do not use a temporary directory for results you want to keep.
-SQLite transactions and full synchronization commit a new result and its active
-witness and negative certificate together. WAL mode permits concurrent readers and serialized writers.
-There is no eviction or automatic deletion of earlier results. Storage therefore
-grows with the number and size of distinct queries.
+durable location. SQLite transactions and full synchronization commit a new
+result, certificate, and active witness together. WAL mode permits concurrent
+readers and serialized writers. There is no automatic deletion of earlier
+results; storage grows with the number and size of distinct queries.
 
-Results are keyed by the **complete binary input** and the SHA-256 fingerprint of
-the compiled engine. A rebuilt engine gets its own namespace when its binary
-changes; earlier records remain in the database. A checksum covers each record's engine identifier, input, answer, and witness
-against accidental corruption. `revalidate` solves the inputs retained by older
-engines with the current engine and commits each result. It never imports an old
-answer as a current result, never removes the old records, and can resume after
-interruption. An already-current result is reused normally. Errors, malformed
-inputs, and interrupted calls
-are never stored as UNSAT.
+Results are keyed by the complete binary input and SHA-256 fingerprint of the
+compiled checker. When that binary changes, a new namespace is used and old
+records remain. The process-local fingerprint cache is invalidated by a change
+in file identity, size, or timestamps. `revalidate` solves older engines' inputs
+with the current engine and commits each result. It never imports an old answer
+as a current decision, removes old records, or invents historical proof provenance.
+An interrupted replay can resume. Malformed or interrupted queries are never
+stored as UNSAT.
 
-The cache is a trusted local store produced by this solver. Checksums do not
-authenticate data against deliberate edits. `audit` re-solves every current
-engine record with reuse disabled and checks retained SAT witnesses and
-refutation certificates; this can be expensive. The
-Lean cache proof assumes a loaded cache satisfies the invariant established by
-prior writes. Python, SQLite, process communication, serialization, and disk
-integrity are outside that proof. Copy the database with SQLite's backup tools
-or after closing all connections; an active WAL database has auxiliary files.
+The database is a trusted local store produced by this solver. Row checksums
+detect accidental corruption; they do not authenticate against deliberate edits.
+Exact hits trust that store. Cross-formula proposals are always checked afresh.
+`audit` solves every current input with reuse disabled and independently checks
+its saved witness or certificate. This can be expensive. Lean's functional
+cache proof assumes a loaded cache satisfies the invariant established by prior
+writes. Native compilation/runtime, Python, SQLite, JSON, process communication,
+and disk integrity are outside the kernel proof. Copy an active database using
+SQLite backup tools, or close all connections first to include its WAL contents.
 
-`core_work` is the abstract operation ledger of the Lean evaluator and solver; `parse_work`
-charges binary syntax parsing. `counted_work` is their sum. On an exact cache
-hit both are zero because the native engine is not invoked; lookup and disk work
-still appear in `wall_ns`. `setup_ns` separately reports connection and engine
-fingerprinting time. JSON, ASCII conversion, database operations, and the native
-runtime are not covered by these formal operation bounds.
+Schema version 4 adds a distinct-proposal index and a measurement table. It
+preserves the version-3 checksummed proof archive and all earlier result rows.
+The version-1 migration adds parser costs; historical unmeasured parser costs
+remain SQL `NULL`, never zero. Missing historical certificates are not invented.
 
-`original_acquisition_core_work` and `original_acquisition_parse_work` retain
-the first acquisition's measured costs on cache hits. Schema version 3 adds a
-separate checksummed refutation archive, preserving version-1 and version-2 rows.
-The version-1 migration also adds parser costs. Historical
-unmeasured parser costs remain SQL `NULL` (JSON `null`), not zero; original
-answers, witnesses, checksums, and engine namespaces remain intact. Missing
-historical certificates are not invented; revalidation creates them in a new
-engine namespace.
+## Accounting
 
+With `--backend lean`, `core_work` is the abstract operation ledger of the
+verified lazy evaluator and search; `parse_work` charges binary parsing, and
+`counted_work` is their sum. Modern acquisitions instead return `core_work`,
+`counted_work`, and `nodes` as JSON `null`, with `counted_complete:false`. CNF
+construction, bounded preliminary search, CDCL, and LRAT checking have no complete
+abstract ledger. Parser work alone is known, including both parses when an
+external answer needs verification. It must not be interpreted as total work.
 
-## Search and reuse
+`wall_ns` includes query handling, IPC, verification, lookup, and committed
+writes. `PersistentSolver.setup_ns` separately records connection and engine
+fingerprinting time. External solves expose `external_ns`, `verification_ns`,
+`cnf_clauses`, and `proof_bytes`; verification includes reparsing, proof/model
+handling, and the native check. JSON, ASCII conversion, database operations, and
+runtime costs are covered by elapsed time, not the old formal operation bound.
 
-The fallback collects and deduplicates occurring variable indices. It explores
-assignments depth first, evaluating the formula with three-valued logic at each
-node. A partial true value supplies a satisfying extension; a partial false
-value closes the branch. The solver never constructs the list of all assignments.
-For example, `x100` needs three search nodes and returns a 101-bit witness, with
-unused positions false. Original variable identities are preserved.
+An exact hit has zero parser/core work because it runs no native query; lookup
+and disk costs still appear in wall time. `original_acquisition_core_work`,
+`original_acquisition_parse_work`, and `original_measurements` describe the
+first acquisition, with unknown modern core cost exposed as `null`. The legacy
+non-null SQL core-cost column uses a zero placeholder for modern acquisitions;
+the measurement flag is authoritative. Consumers must use that flag or the public
+interface, never interpret the raw placeholder as free acquisition.
 
-A negative result carries a tree whose leaves certify partial contradictions
-and whose internal nodes check both values of a variable. Lean proves the
-checker sound and proves that the fallback produces an accepted tree for every
-UNSAT result. The same tree can be checked on a later formula, for example a
-larger conjunction containing the original contradiction. A failed certificate
-check falls back to search. Negating a contradiction does not preserve its
-refutation. No negative answer is inferred from one failing full assignment.
+## Counted lazy reference and native protocol
 
-The proposal limit does not evict archived results. Refutation proposals are
-also limited to 65,536 serialized bytes each; larger certificates are retained
-but excluded from the active portfolio. Candidate selection and serialization
-are charged in elapsed time. The native checker charges its actual work.
-Bounding candidate count does not give the earlier one-witness overhead constant.
+The lazy reference branches on distinct occurring variables, using three-valued
+partial evaluation to close branches early. It never constructs a list of all
+assignments. For example, `x100` needs three search nodes and returns a correctly
+indexed 101-bit witness. A negative result carries a tree with checked partial
+contradictions at leaves and both variable values checked at every split.
+Lean proves the checker sound and the search complete, with at most
+`2^(d+1)-1` nodes for `d` distinct occurring variables. A failing single assignment
+is never evidence of UNSAT. Trees, search, and the durable archive can still be
+exponential. Neither this reference nor the CDCL path proves a polynomial bound
+for general SAT.
 
-For `d` distinct occurring variables, Lean proves at most `2^(d+1)-1` search
-nodes. Sparse lookup, deduplication, formula traversal, and dense witness output
-still cost work. A refutation tree and the durable archive can be exponential.
-This is verified pruning and certificate reuse, without CNF conversion, unit
-propagation, conflict-driven clause learning, or a polynomial general-SAT bound.
-The earlier exhaustive implementation remains available as native JSON mode
-`exhaustive`; `baseline` uses the new search without reuse, and `hybrid` enables
-verified proposals. Earlier fixed-width cost constants describe that earlier
-implementation and are not transferred to the new ledger.
+The old eager reference remains native mode `exhaustive`; `baseline` is lazy
+search without proposals; `hybrid` enables checked proposals. Requests accept
+`bits`, `mode`, `candidates` (at most four bit strings), and `proofs` (at most
+four trees). The singular `candidate` field remains compatible. Tree proofs
+are `"conflict"` or `[index, low, high]`. Earlier fixed-width coefficients and
+single-witness overhead bounds describe their original implementations.
 
-Native JSON requests accept `bits`, `mode`, `candidates` (at most four bit
-strings), and `proofs` (at most four trees). The legacy singular `candidate`
-field is also accepted. A refutation is `"conflict"` or `[index, low, high]`.
-Results include `certificate`, `nodes`, and `reuse_kind` (`none`, `witness`, or
-`refutation`). The Python service reports `source` as `cache`, `fallback`,
-`verified_witness`, or `verified_refutation`. Exact cache hits still trust the
-local store; cross-formula proposals are independently checked.
+Modern requests use `prepare`, `verify_witness`, and `verify_certificate`.
+LRAT certificates have `format:"lrat"` and a `text` field; constant-false
+certificates have `format:"aig_false"`. The Python service handles CNF export,
+external solving, and independent verification. Public `source` values are
+`cache`, `fallback`, `verified_witness`, and `verified_refutation`; `fallback`
+includes newly acquired results found by local preprocessing.
 
-Run integration tests against the real compiled engine:
+## Validation
 
 ```sh
 python3 -m unittest discover -s solver -p 'test_*.py' -v
 ```
 
-The tests cover SAT and UNSAT retention, restart without launching the solver,
-witness transfer across restarts, preservation after learning a new witness,
-empty witnesses, malformed inputs, corruption, semantic audit, engine
-namespaces, concurrent writers, parser-cost retention, legacy-schema migration,
-and recomputation of earlier engines' inputs. They also compare 400 generated
-formulas with independent truth tables and the old exhaustive backend, exercise
-sparse indices and early pruning, and check certificate transfer and rejection. The test databases use temporary directories;
-they never replace the default persistent database.
+All 34 integration tests pass. The original tests cover retention, restart,
+engine namespaces, concurrent writers, corruption, schema migration, witness and
+tree transfer, sparse indices, and 400 formulas compared with independent truth
+tables and the eager reference. Accelerated tests add 120 seeded CNFs checked
+against truth tables, valid and forged external models/proofs, wrong-formula
+and malformed LRAT, timeouts, unavailable-solver fallback, search-budget
+exhaustion, gate sharing, indexed retrieval, and the warm JSON-lines interface.
+Tests use temporary databases; they never replace the persistent store.
+
+[Reproducible experiments](../experiments/README.md) include initialization,
+verification, persistence, and shutdown costs and retain every historical dataset.

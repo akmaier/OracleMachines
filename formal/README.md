@@ -45,6 +45,8 @@ native-decision axioms fail the audit. Warnings are treated as errors.
 | Certified adaptive policy | [Hybrid.lean](OracleMachines/Hybrid.lean): `hybridRun_correct`, `serve_correct`, `hybridRun_overhead`, `actual_savings_identity`, `repeated_hit_savings` | A previously acquired witness is checked on each new formula; fallback is exact. Costs include validation, fallback, copying the acquired witness, and stream control. The savings identity follows the actual changing state. |
 | Lazy search and pruning | [Search.lean](OracleMachines/Search.lean): `partialRun_sound`, `solveSparse_correct`, `solveSparse_certificate`, `solveSparse_nodes`, `materialize_satisfies` | Branch only on distinct occurring variables; partial truth and falsity are sound; every UNSAT search returns a checked refutation; at most `2^(d+1)-1` nodes; dense witness conversion preserves satisfaction. |
 | Reusable positive and negative certificates | [Knowledge.lean](OracleMachines/Knowledge.lean): `probeWitnesses_sound`, `probeRefutations_checked`, `solveSearch_verified`, `reuseSearch_verified`, `reuseSearch_correct` | Arbitrary proposed witnesses and refutations are checked against the current formula. The combined policy decides SAT correctly, without trusting proposal provenance. |
+| Proposition 12.9: checked CDCL boundary | [CDCL.lean](OracleMachines/CDCL.lean): `compiledCircuit_correct`, `circuitFalse_sound`, `compiledCNF_unsat`, `checkLRAT_sound` | Shared AIG construction preserves formula evaluation. Standard-library CNF translation and LRAT checking compose to exclude a satisfying valuation whenever a proof is accepted. |
+| Bounded preliminary attempt | [BoundedSearch.lean](OracleMachines/BoundedSearch.lean): `boundedSearch_remaining_le` | A finite node budget never increases. Exhaustion returns no proposal; the executable independently checks every proposed witness or tree before acceptance. |
 | Accumulated exact results | [Cache.lean](OracleMachines/Cache.lean): `cache_lookup_sound`, `cacheStep_correct`, `cacheStep_exact`, `cacheStep_retains` | Every completed result remains available, including negative answers; lookup and insertion preserve exactness, assuming the loaded cache is intact. |
 | Obligations for another representation | [Invariant.lean](OracleMachines/Invariant.lean): `expansion_invariant`, `answer_at_cover` | The base, preservation, and exact new-coverage hypotheses imply exactness at every finite stage and at a covering stage for each input. |
 | Construction recurrence | [Resources.lean](OracleMachines/Resources.lean): `cumulative_eq` | Recursive construction cost equals base cost plus every expansion cost. |
@@ -197,7 +199,7 @@ remove its exponential assignment dependence.
 
 ## Current lazy search and certificate portfolios
 
-`Search.lean` provides the current fallback. `occursRun` and `distinctRun` collect
+`Search.lean` provides the counted lazy fallback. `occursRun` and `distinctRun` collect
 the distinct indices without renaming them. A sparse assignment stores only
 chosen variables. `partialRun` returns true, false, or unknown; a known value
 holds for every extending total valuation. `searchSparse` branches only while
@@ -220,19 +222,53 @@ partial evaluation, search, witness materialization, and proposal checking in a
 new abstract ledger. The fixed-width coefficients and one-witness overhead bound
 above still refer to the earlier eager solver and policy. They are not claimed
 for the new ledger. No composed transition-machine, physical memory, or general
-polynomial resource bound has been added for this fallback. Unit propagation,
-clause learning, and structural-width algorithms remain future implementations.
+polynomial resource bound has been added for this fallback. The default service
+uses the checked CDCL boundary below; structural-width algorithms remain future work.
 
-The default audit now checks 973 declarations, including 533 theorem declarations
+The default audit now checks 1035 declarations, including 563 theorem declarations
 (with generated helpers), and accepts only the standard logical axioms.
 
-The native executable and [persistent service](../solver/README.md) use the lazy
-core and verified portfolios by default. SQLite retains complete SAT/UNSAT
+The native executable and [persistent service](../solver/README.md) retain the lazy
+core and verified portfolios. SQLite retains complete SAT/UNSAT
 results, witnesses, and refutations across process restarts. The functional cache invariant is checked in Lean;
 database transactions, serialization, engine fingerprinting, and the Python
 adapter are integration-tested, not kernel-verified. Build the executable with
 `lake build oracleSolver`. [Workload experiments](../experiments/README.md)
 compare actual operation counts and elapsed service costs.
+
+## Default checked CDCL service
+
+`CDCL.lean` recursively compiles formulas into cached AND/inverter graphs,
+preserving the value under every valuation. The graph shares duplicate gates
+and simplifies constants. `compiledCNF_unsat` composes that theorem with
+`Std.Sat.AIG.toCNF_equisat`. `checkLRAT_sound` then composes the standard
+library's `LRAT.check_sound` with the formula-to-CNF theorem. This uses the
+pinned Lean 4.24.0 implementation directly, without invoking `bv_decide` or
+introducing a native-decision axiom. The build's transitive axiom audit passes.
+
+The Python adapter runs the bundled CaDiCaL 2.1.2 and returns an answer only
+after a checked witness or proof. SAT models are evaluated on the original
+formula. For UNSAT, the checker reconstructs CNF from that formula before
+checking the LRAT actions; the external DIMACS file and clause identifiers are
+not a trusted shortcut. Constant-false AIGs use `circuitFalse_sound` instead.
+
+The automatic policy first tries saved proposals, constant simplification,
+all-false/all-true witnesses, and a 64-node local attempt. `BoundedSearch.lean`
+is a proposal generator: a returned witness or refutation is checked again.
+Budget exhaustion means no proposal, never UNSAT. Its node budget does not
+bound the work of an individual partial evaluation. External timeouts and
+rejected certificates return errors without persisting a decision; thus this
+bounded service is sound on completed answers, not an unconditional total
+decider. If CaDiCaL is unavailable, the complete lazy fallback remains available.
+
+The new connection proves semantics, not a complete cost model for CNF
+construction, CDCL, or LRAT. Modern results therefore use `null` for total
+abstract work and search nodes, with `counted_complete=false`. Parser work
+alone is measured, including both parses when an external result is checked.
+The earlier coefficients continue to describe their original definitions.
+Native compilation/runtime, JSON, the Python adapter, and SQLite remain outside
+the kernel proof. Cross-query witnesses and certificates persist, but the
+current adapter does not retain CaDiCaL's internal clause database between calls.
 
 The rest of the paper's neural, oracle, and general expected-savings
 arguments retain their conventional proofs and literature audit. This directory

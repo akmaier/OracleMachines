@@ -1168,3 +1168,109 @@ proposition gives the search and certificate argument. The manuscript now has
 resolved. The 32-page PDF builds without warnings or overfull/underfull boxes.
 The full document was rendered for layout review; the new proof and results table
 were inspected at full-page resolution.
+
+## Checked CDCL, indexed persistence, and measured acceleration
+
+The next implementation replaces expensive unresolved search with CaDiCaL,
+while retaining the earlier reference solvers and their proofs. This is a
+certifying integration of established techniques, not a new SAT algorithm.
+
+### Primary sources and publication status
+
+- [Biere et al., *CaDiCaL 2.0*, CAV 2024](https://doi.org/10.1007/978-3-031-65627-9_7):
+  the [authors' full paper](https://cca.informatik.uni-freiburg.de/papers/BiereFallerFazekasFleuryFroleyksPollitt-CAV24-Springer.pdf)
+  describes the CDCL architecture and preprocessing/inprocessing. Our measured
+  binary is 2.1.2, bundled with the pinned toolchain.
+- [Cruz-Filipe et al., *Efficient Certified RAT Verification*, CADE 2017](https://doi.org/10.1007/978-3-319-63046-5_14):
+  the [author-hosted manuscript](https://www.cs.utexas.edu/~marijn/publications/lrat.pdf)
+  gives LRAT proof hints and certified checking. Publication metadata were
+  cross-checked against the University of Southern Denmark record.
+- [Lean 4.24.0 standard-library source](https://github.com/leanprover/lean4/tree/v4.24.0/src/Std/Tactic/BVDecide/LRAT):
+  we inspected the pinned local AIG-to-CNF and LRAT checker implementations,
+  then composed their theorems directly. This is a software citation, not a
+  claim that we developed those checkers. We do not invoke the `bv_decide`
+  tactic or its native-decision mechanism.
+- [Fazekas et al., *Certifying Incremental SAT Solving*, LPAR 2024](https://doi.org/10.29007/pdcc):
+  the [authors' full paper](https://kfazekas.github.io/papers/FazekasPollittFleuryBiere-LPAR24.pdf)
+  develops incremental proof formats and checking. This is relevant to the
+  remaining task of retaining live CDCL state; our adapter currently starts
+  a new CaDiCaL process for every unresolved input.
+- [Pollitt et al., *CaDiCaL 3.0*, SAT 2026](https://doi.org/10.4230/LIPIcs.SAT.2026.40):
+  the publisher record and abstract describe newer simplification techniques
+  and improved proof logging. We cite this current work and do not describe
+  our bundled 2.1.2 binary as the latest release or benchmark its successors.
+
+These sources establish that the algorithmic ingredients, proof checking, and
+incremental certification are published. The new local contribution is their
+checked connection to this paper's formula syntax and durable service, with an
+explicit distinction between semantic correctness and measured resource cost.
+
+### Formal and integration boundary
+
+`CDCL.lean` proves evaluation preservation for cached AIG construction,
+constant-false soundness, transfer of CNF unsatisfiability, and LRAT acceptance
+soundness. SAT models are checked against the original formula. An UNSAT proof
+is checked against CNF reconstructed from that formula, not against a file
+supplied by the external process. Wrong model mappings or clause identifiers
+therefore cannot justify a false accepted result. Compiled execution, JSON,
+Python, and database integrity remain outside the kernel proof.
+
+`BoundedSearch.lean` adds a finite-budget proposal generator before external
+solving. It returns no proposal on exhaustion. Its remaining-budget monotonicity
+is proved; returned witnesses and refutation trees are independently checked.
+The default node budget is 64. A node budget is not a constant time budget:
+partial evaluation still traverses a formula. External timeouts return errors
+without caching a verdict. Thus completed answers are sound, while a finite
+budget does not guarantee a decision on every input.
+
+The axiom audit passes for 1,035 namespace declarations, including 563 theorem
+declarations. All 34 integration tests pass, including 120 seeded CNFs compared
+with independent truth tables, forged external SAT/UNSAT output, wrong-formula
+and malformed LRAT, timeouts, bounded-search exhaustion, sparse variable
+mapping, cached gates, indexed proposals, and JSON-lines service. The original
+400-formula and persistence tests remain in place.
+
+Modern acquisition has no full abstract cost ledger. Total core work and node
+counts are exposed as `null`, with `counted_complete=false`; known parser work
+and elapsed measurements remain separate. The original fixed-width theorems
+continue to describe the earlier implementation. No polynomial general-SAT
+bound, proof-size bound, or physical-memory bound follows from the new checker.
+
+### Performance and retention evidence
+
+`experiments/results/cdcl/` retains 150 completed runs and 1,200 correct answers:
+ten constructed streams, eight queries each, five variants, and three rotating
+repetitions. No run hit the eight-second limit. Each worker begins with an empty
+database; setup, native warmup, service, and shutdown are reported separately
+and included in totals. All query acquisitions occur inside the stream.
+Modern wall times are not interpreted as the historical operation ledger.
+
+On the six-into-five pigeonhole stream, median total time is 5596.71 ms with
+lazy solving, 180.28 ms with checked CDCL, and 154.45 ms with persistent reuse.
+The latter makes one external call and checks seven transferred refutations.
+On the planted 20-variable stream, persistent reuse takes 140.57 ms versus
+729.92 ms with lazy solving. AIG simplification eliminates the late syntactic
+contradiction before external solving. In contrast, tiny mixed-unit queries
+remain slower with persistence: 128.67 ms versus 125.63 ms for lazy solving.
+The automatic local attempt avoids subprocesses on easy cases but adds work
+when CDCL is eventually needed. Exact caching alone is slightly faster than
+the full policy on the repeated planted stream. These synthetic results expose
+both benefits and overhead; they do not establish universal acceleration.
+
+The complete earlier datasets remain untouched. The current checker SHA-256 is
+`0f3993f2115509e512ae327045e1e9a29db066ba127c167318043eaf15dc2e56`;
+the new raw-run SHA-256 is
+`0cfe05acb96b0c0c29a12755ca415afdacb7b3a8145d0ef84fd6675f93e809a7`.
+Schema 4 indexes distinct proposals and stores measurement provenance. All
+1,065 old result rows and 129 old proofs remain unchanged at the SQL-field
+level. Replay adds 355 current results (226 SAT, 129 UNSAT), each audited with
+fresh solving and certificate checks. SQLite integrity is `ok`; total retained
+results are now 1,420. The committed replay report hashes the preserved rows;
+the database itself remains local and ignored by Git.
+
+The final manuscript retains all 20 earlier proof environments unchanged and
+adds the compiled-boundary proposition. It has 89 unique labels and 58
+bibliography entries, with every citation and cross-reference resolved. The
+34-page PDF builds without warnings or overfull/underfull boxes. All pages
+were rendered for layout review; the new proof and timing table were inspected
+at full-page resolution. All four saved raw datasets still match their hashes.

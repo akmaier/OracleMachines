@@ -1,5 +1,77 @@
 # Executed reuse and persistence study
 
+## Checked CDCL and warm service
+
+The newest study compares the counted lazy reference, checked CaDiCaL without
+reuse, the automatic local-search/CDCL policy without reuse, automatic exact
+caching, and the full persistent policy. Run it separately from the historical
+operation-ledger study:
+
+```sh
+./solver/build.sh
+python3 experiments/run_cdcl.py --output /tmp/oracle-cdcl-new-run
+```
+
+Ten synthetic streams, eight queries per stream, five modes, and three rotating
+repetitions give **150 completed runs and 1,200 correct answers**. No run reached
+the eight-second worker limit; the runner retains timed-out runs if they occur.
+Inputs include alternating-sign forced units, a late syntactic contradiction,
+a contradictory implication chain, seeded planted 3-SAT, and satisfiable and
+unsatisfiable pigeonhole formulas. Distinct queries append double negations;
+one stream repeats exactly. The labels follow from construction, independently
+of the solver, but these related-query streams are not held-out generalization
+tests. The random seed, full inputs, binary fingerprints, and CaDiCaL 2.1.2 flags
+are saved.
+
+| Eight-query stream | Lazy service ms | CDCL service ms | Auto service ms | Persistent service ms | Lazy total ms | Persistent total ms |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Mixed units, 12 variables | 0.63 | 30.01 | 0.76 | 2.64 | 125.63 | 128.67 |
+| Late contradiction, 17 variables | 6337.46 | 0.61 | 0.61 | 2.99 | 6462.20 | 127.77 |
+| Implication chain, 24 variables | 2.88 | 33.55 | 3.62 | 4.93 | 128.31 | 129.20 |
+| Planted 3-SAT, 20 variables | 603.55 | 41.40 | 52.33 | 15.52 | 729.92 | 140.57 |
+| Pigeonhole 3 into 2 | 0.91 | 32.01 | 1.02 | 2.94 | 126.61 | 128.13 |
+| Pigeonhole 4 into 3 | 9.48 | 32.93 | 35.75 | 10.53 | 135.23 | 135.07 |
+| Pigeonhole 5 into 4 | 205.19 | 36.61 | 44.70 | 15.66 | 329.42 | 140.48 |
+| Pigeonhole 6 into 5 | 5468.43 | 55.98 | 64.55 | 28.42 | 5596.71 | 154.45 |
+| Satisfiable pigeonhole 5 into 5 | 377.43 | 35.41 | 41.36 | 11.05 | 500.89 | 135.26 |
+| Repeated planted 3-SAT | 608.76 | 39.52 | 52.39 | 9.44 | 733.35 | 134.20 |
+
+Values are medians of three runs, not uncertainty bounds. Each run starts in a
+new Python worker and empty database. Setup includes binary fingerprinting and
+schema initialization. Native startup and a trivial warmup are measured
+separately and included in totals; warmup stores no knowledge. Service includes
+all query acquisition, model/proof checking, IPC, retrieval, and committed writes.
+Shutdown is also charged. Python interpreter startup and observer statistics are
+excluded. Consequently these warm service columns must not be compared directly
+to the older study's service columns, which included first native startup.
+
+The automatic 64-node attempt avoids eight subprocesses on the tiny mixed-unit,
+chain, and 3-into-2 streams. On harder streams it adds work before CDCL.
+Persistent reuse reduces external calls from eight to one on the planted and
+larger pigeonhole streams. It transfers seven checked witnesses or proofs to
+distinct inputs. Exact caching alone has no hits on these distinct streams;
+on repeated planted SAT it gives seven hits and a median 132.81 ms total, versus
+134.20 ms for the full policy. Additional reuse machinery need not pay for itself.
+The late contradiction is eliminated by AIG simplification without CDCL search.
+
+The six-into-five stream drops from 5596.71 to 154.45 ms total (about 36 times),
+while tiny mixed units remain slightly slower with persistence. Neither result
+is a universal speedup. This is an integration study with one mature solver and
+easy-to-label structured streams, not a competitive SAT evaluation. There is no
+full modern operation ledger: modern work and node counts remain `null`, with
+`counted_complete=false`. Old cost theorems are not transferred to CDCL. Peak
+memory, energy, large proof logs, and broad solver-competition workloads remain
+unmeasured. Internal CDCL clauses are not retained between subprocess calls.
+
+- [Frozen inputs](results/cdcl/inputs.json).
+- [Raw runs](results/cdcl/workloads.jsonl), [summary](results/cdcl/summary.json),
+  and [metadata](results/cdcl/metadata.json).
+- [Persistent-store audit](results/cdcl/persistence.json): all 1,065 previous
+  result rows and 129 previous proofs unchanged; 355 current records and 129
+  certificates added; all current records audited; SQLite integrity `ok`.
+
+## Earlier counted mechanism studies
+
 This is a deterministic mechanism study of the actual Lean engine and SQLite
 service. It compares lazy solving, the original exhaustive reference, single
 witness reuse, exact caching, and persistent witness/refutation portfolios. It is not a neural-learning or competitive SAT benchmark.

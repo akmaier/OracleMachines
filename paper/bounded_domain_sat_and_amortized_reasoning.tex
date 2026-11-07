@@ -876,7 +876,7 @@ Complete relation payloads select among constant, dense bitmap, sparse, and redu
 \subsection{Restricted scaling of affected work}
 \label{sec:affected-scaling}
 
-We can now make the missing resource conditions more explicit. Fix an elimination order. Route each source factor to the first variable of its scope in that order. Its projected output enters a later bucket. An edit changes only buckets reachable from the changed sources. If recomputation yields the same output identity, propagation through that output stops. This supports local scheduling, although the reachable set can be the whole graph. Our indexed implementation retains these dependencies across immutable snapshots. A width violation triggers a new ordering attempt or checked fallback. The first implementation copied and serialized whole plans. The later version stores bucket maps through persistent balanced-tree paths. Collecting active sources, copying order lists, and final checking can still require global work.
+We can now make the missing resource conditions more explicit. Fix an elimination order. Route each source factor to the first variable of its scope in that order. Its projected output enters a later bucket. An edit changes only buckets reachable from the changed sources. If recomputation yields the same output identity, propagation through that output stops. This supports local scheduling, although the reachable set can be the whole graph. Our indexed implementation retains these dependencies across immutable snapshots. A width violation triggers a new ordering attempt or checked fallback. The first implementation copied and serialized whole plans. The later version stores bucket maps through persistent balanced-tree paths. The version-three indexes described in Section~\ref{sec:structured-study} remove whole-source comparisons and order copying for named deltas. Final active-context checking can still require global work.
 
 Suppose $\delta$ sources change, each affected node has at most $b$ successors, and the remaining dependency depth is at most $h$. Counting repeated paths gives the upper envelope $A_0=\delta$ and $A_{h+1}=\delta+bA_h$. Hence
 \begin{equation}
@@ -937,6 +937,30 @@ This construction does not depend on a fixed upper bound on chain length. Its su
 The algorithmic principle is established. The 16 binary Boolean relations form a finite monoid under composition, so replacement is a dynamic word problem \citep{frandsen1997dynamic}. General dynamic membership algorithms even improve the logarithmic update bound in the unit-cost RAM model with logarithmic word length \citep{amarilli2021dynamic}. Path copying is standard persistence \citep{driscoll1989persistent}. Our role here is to instantiate these ideas, verify the summary and replacement invariants, and expose the remaining service costs. We claim neither a new dynamic complexity bound nor optimality of this tree.
 
 \texttt{BalancedChain.lean} checks exact composition, associativity, identity padding, preservation of other leaves, and an exact $h+1$ replacement ledger. Tree height is part of the type. Native joins materialize the four entries and carry the proved summary invariant. The persistent Python path stores immutable node references and checks proposed summaries through those native joins. The mathematical tree ledger does not verify Python/SQLite operations or the complete JSON protocol. It supplies concrete affected-work and summary-size bounds for Proposition~\ref{prop:conditional-update}. The other resource premises still require justification. It supplies no small-interface or efficient-coverage guarantee for unrestricted SAT.
+
+\subsection{From Boolean edges to bounded Boolean layers}
+\label{sec:layered}
+
+The same argument supports several interacting bits at each position. Let a layer contain $b\geq1$ Boolean variables, and write $q=2^b$ for its possible states. We are supplied with relations $R_i\subseteq[q]\times[q]$ between adjacent layers and endpoint restrictions. This family includes fixed-width ladders and finite-state transition systems of arbitrary depth. A relation may impose a local condition on both layers; constraints spanning distant layers require a different decomposition. The decomposition and the relation tables are inputs to the result below. Finding them and compiling a general formula into them are additional tasks.
+
+\begin{proposition}[Replacement in supplied bounded layers]
+\label{prop:layered}
+For a chain of $m\geq1$ such relations, padded to capacity $M=2^h$ with $m\leq M<2m$, exact segment summaries require $q^2$ Boolean cells each. A replacement in the persistent balanced tree changes $h+1$ nodes and performs $h$ compositions. Charging one unit per copied node and a full $q^3$ middle-state scan per composition gives the declared budget
+\[
+B(q,h)=h+1+hq^3.
+\]
+Root decision takes at most $q^2$ endpoint tests. Initial summary construction has Boolean-operation cost $O(mq^3)$, and retaining $u$ replacements needs at most $(2M-1+u(h+1))q^2$ summary cells before content sharing. For fixed $b$, the update budget is logarithmic in $m$; its dependence on $b$ is exponential.
+\end{proposition}
+
+\begin{proof}
+Replace the two-element middle-state set in Equation~\eqref{eq:chain-compose} by $[q]$. For each of the $q^2$ endpoint pairs, composition searches at most $q$ middle states. Thus a full scan uses $q^3$ pair tests. Exactness follows by the same induction: an accepted middle state joins two compatible satisfying subpaths, and every satisfying path provides such a state. The update copies one leaf and one node per ancestor; untouched subtrees preserve all other relations. Consequently its ledger satisfies $W(q,0)=1$ and $W(q,h+1)=1+q^3+W(q,h)$, giving $B(q,h)$. The node and retained-cell counts follow from the complete-tree count and path copying. Since $q=2^b$, summary size is $2^{2b}$ and composition's full-scan budget is $2^{3b}$.
+\end{proof}
+
+The ledger counts logical tests and node events, not individual bit-machine instructions. Materializing tables, addressing entries, storing masks, serialization, and persistence need their own implementation costs. A complete witness contains $m+1$ layer states; the implemented traversal searches up to $q$ middle states per internal node and then checks the original edges. For fixed width its work is linear in capacity. Restart can require replaying all distinct retained nodes used by the requested root. Neither operation is covered by the logarithmic replacement claim.
+
+\texttt{Layered.lean} proves exact composition, summary semantics, replacement preservation, the selected-leaf update, invariance of other leaves, and the stated recursive budget. The native service accepts widths one through four and checks each proposed join. The theory allows other finite widths. The service does not formally refine arbitrary CNF conversion or all Python/JSON/SQLite state transitions. This restriction keeps the boundary of the checked result explicit.
+
+This extension remains an instance of established bounded-width elimination and finite-monoid maintenance \citep{dechter1999bucket,amarilli2021dynamic}. It is also useful to look beyond paths: \citet{amarilli2025trees} give an $O(\log n/\log\log n)$ update bound for membership in a fixed regular tree language under relabeling. Their result provides a published precedent for richer tree structure, with a fixed language and update model. Our implementation does not yet supply that tree-language interface or its bound. Neither result yields small summaries for unrestricted SAT.
 
 \subsection{Amortization while the domain grows}
 
@@ -1533,6 +1557,49 @@ The parent process also samples worker and descendant RSS and scratch storage, r
 
 The revised service passes 114 tests, and Lean audits 1,828 declarations, including 941 theorem declarations, without admitted proofs or additional axioms. Revalidation adds 355 current-engine answers and 129 proofs. All 3,195 previous results, 903 proofs, other historical rows, and 63 earlier experiment files remain unchanged. The live archive now holds 3,550 results and 1,032 proofs; all 355 current inputs pass an independent semantic audit. The unrestricted width, intermediate-size, acquisition, whole-service refinement and resource-bound obligations remain open.
 
+\subsection{Bounded layers, indexed metadata, and comparable full inputs}
+\label{sec:structured-study}
+
+The next revision addresses five specific gaps. First, it implements the supplied-layer family of Proposition~\ref{prop:layered}. Wider states also exposed a compiled-code problem: a function-valued summary could be expanded into a lookup function that rebuilt its table on demand. A 256-edge, three-bit test timed out. We retain this development failure. Both Boolean-chain and layered joins now construct summary data before creating lookup closures; inspection of generated C confirms this ordering. The mathematical invariant was unchanged, but the earlier eager-materialization claim required this implementation repair.
+
+Second, version-three elimination plans use persistent maps for source reference counts, variable ranks, order, constants and buckets. A named edit reads the old and new constraint records and changes only their source counts and affected search paths. Two constraints may contribute the same leaf; deleting one must not remove the remaining reference. Tests cover this case, branching and restart. Final validation still traverses the active context. In the separate study, endpoint edits at lengths 16 and 64 use two source-delta reads, zero whole-set comparisons, zero copied metadata entries and one affected bucket. At length 256 the lazy dependency-depth cap invokes checked fallback, so that case does not demonstrate local planning. It is retained with its reason.
+
+Third, proposal caches have configurable serialized-payload and entry limits. Symbolic nodes have a separate cap, and safe-point WAL checkpoints are attempted once the configured threshold is exceeded. Historical results and evidence are retained. These controls bound selected retained representations, not total heap or RSS: native structures, transient objects, separate indexes and blocked checkpoints remain relevant. A full archive cannot grow forever under a fixed storage cap.
+
+Fourth, routing uses the most recent 32 observations per route and feature bucket. Its score divides elapsed work plus a remaining-query-budget penalty for each failure by completed answers. A route with no successful completion has no finite score. A regression test confirms that a fast failure does not beat a slower completed answer, and that recent successful observations can change the choice. Historical observations remain stored. Periodic exploration still retries routes; this policy has no general regret or speedup guarantee.
+
+Finally, we freeze a new full-input experiment before timing. It uses the first two increments of each of \texttt{roverg10}, \texttt{transportg29} and \texttt{entertainment08} from the 2026 artifact \citep{schreiber2026realtime}, six selected SATLIB instances, and a chronological stream with 16 training formulas, 32 distinct later signed-unit formulas, a six-instance public shift and four exact repetitions. All later answers are unavailable before their queries; the online learner may update after a checked answer. The application prefixes are deliberately small and all unsatisfiable. They are not representative full application runs. The selected SATLIB instances appeared in earlier project studies; they are unseen within these fresh worker streams, not a previously unused development set.
+
+Every service mode receives the same complete formula and pays conversion, setup, checking, persistence and any training costs. Checked mode disables reuse; Exact enables identical-input reuse; Portfolio adds checked witness/refutation proposals; Learned adds the predictor to that portfolio. Proof uses the live incremental-proof engine, and Adaptive selects its route. Direct runs the pinned standalone CaDiCaL on normalized original CNF without our certification or archive, so it is a separate performance reference. We use five sequential repetitions with rotating mode order, a five-second query deadline and a common 64\,MiB logical archive cap. A parent watchdog samples process-tree RSS and scratch files at a requested 20\,ms interval and stops workers above 512\,MiB RSS or 256\,MiB scratch. Sampling can miss peaks and overshoot thresholds; it is not a hard equal-total-memory bound. No builds or tests overlap these timings.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrrrrrr}
+\toprule
+Stream & Direct & Checked & Exact & Portfolio & Learned & Proof & Adaptive \\
+\midrule
+Rover prefix & 12.95 & 441.33 & 448.19 & 458.16 & 461.60 & 563.57 & 456.78 \\
+Transport prefix & 11.50 & 152.23 & 153.35 & 156.59 & 156.46 & 161.26 & 155.30 \\
+Entertainment & 12.04 & 173.96 & 174.45 & 177.18 & 179.80 & 195.12 & 178.84 \\
+SATLIB selection & 33.80 & 207.70 & 205.80 & 224.35 & 230.97 & 325.95 & 216.18 \\
+Chronological shift & 305.65 & 533.08 & 505.29 & 11327.88 & 317.00 & 769.08 & 470.36 \\
+\bottomrule
+\end{tabular}
+\caption{Median complete-stream milliseconds, including service setup and input conversion, over five repetitions. Every run completes. Direct has no independent certification or persistence; other columns use the same full-input service boundary. No delta or layered timings are mixed into this table. Ranges, raw records and resource samples are archived separately.}
+\label{tab:structured}
+\end{table}
+
+All 175 runs complete, with 2,450 correct answers, including 350 negatives. Of these, 2,100 answers and 300 negatives use the checked service; the remainder are direct-reference results. No budget failure occurs. Table~\ref{tab:structured} shows a limited positive result: learning reduces the chronological stream from 533.08\,ms checked to 317.00\,ms. It supplies 47 accepted novel predictions per repetition, including all 32 later signed-unit formulas, but no accepted prediction on the public shift. Its updates remain charged. The portfolio alone takes 11,327.88\,ms on that stream; unsuccessful proposal work can dominate acquisition savings. Learning is slower than checked solving on the public-only streams. Adaptive reaches 470.36\,ms on the chronological stream but does not beat checked solving on the three application prefixes. These observations support conditional resource accounting, not a universal fast-first advantage.
+
+The separate layered study tests widths two, three and four, lengths 16 through 1,024, and two active-payload settings. All 72 answers are correct. At length 1,024, each replacement performs ten compositions and eleven node-write attempts. Full witness checking visits 1,024 edges. The declared composition budgets are 640, 5,120 and 40,960 middle-state tests respectively; width has not disappeared from the accounting. These supplied-relation measurements are not a fair full-CNF speed comparison and are not presented as one.
+
+A separate pressure experiment uses 256 distinct eight-state relations, 20 persistent edits and three repetitions per cache setting. Both a 4\,KiB and a 2\,MiB retained-payload cap preserve the same 21 states; three sampled roots per run also pass checked replay after restart. All 144 answers are correct. The small cache retains 3,833 serialized bytes and evicts 12,741 entries during the stream; the larger one retains 143,990 bytes without eviction. Median query-ledger totals are 175.94 and 86.95\,ms respectively. Both archives contain 713 objects, with 109,997 raw payload bytes compressed to 79,530 stored bytes, and the same 413,696-byte closed database. Reducing active retention therefore preserves evidence here at a measurable retrieval cost; it does not shrink the archive or establish a whole-memory bound.
+
+Revalidation adds 355 current-engine results and 129 proofs. All 3,550 previous results, 1,032 proofs and other historical rows remain unchanged, as do 73 earlier experiment files. The live store now contains 3,905 results and 1,161 proofs; all 355 current-engine inputs pass an independent semantic audit.
+
+The largest sampled process-tree RSS is 250.45\,MiB; scratch reaches 20.98\,MiB and WAL plus shared-memory files 10.96\,MiB. The maximum sample interval is 147.38\,ms, and 51 process reads are missed. No watchdog threshold is reached. The corrected service passes 119 tests, and Lean audits 1,957 declarations, including 991 theorem declarations. The complete refinement and machine-cost obligations remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 
@@ -1582,7 +1649,7 @@ Their thematic proximity helps us state the missing obligations. We must specify
 We now have explicit conditions for exactness and savings, restricted compact expansion, an operational reference search, and checked service experiments. Establishing the conditions for a practical learned system still requires further algorithms and measurements. The following questions describe these remaining obligations. They do not claim unexplored territory across the wider literature.
 
 \paragraph{Compactness and acquisition.}
-Propositions~\ref{prop:compact-coverage}, \ref{prop:component-expansion}, and~\ref{prop:balanced-chain} give restricted constructions. The component and local-elimination results allow growing total variable count. The service now uses a bounded-width heuristic and lazy nonempty-interface relations, but finding a small decomposition and limiting affected dependencies remain restrictions. Which richer families support useful representations with charged acquisition? To answer this, we must fix the SAT instance family, coverage, precision, acquisition interface, and budget. Tractable subclasses or distributional guarantees may support positive results without meeting Proposition~\ref{prop:advice} on all inputs. For unrestricted SAT, polynomial-size exact models remain unestablished here. So do lower bounds excluding them. In particular, our exponential ReLU construction tells us neither that this size is necessary nor that a smaller model can be learned efficiently.
+Propositions~\ref{prop:compact-coverage}, \ref{prop:component-expansion}, \ref{prop:balanced-chain}, and~\ref{prop:layered} give restricted constructions. The component and local-elimination results allow growing total variable count. The service now uses a bounded-width heuristic and lazy nonempty-interface relations, but finding a small decomposition and limiting affected dependencies remain restrictions. Which richer families support useful representations with charged acquisition? To answer this, we must fix the SAT instance family, coverage, precision, acquisition interface, and budget. Tractable subclasses or distributional guarantees may support positive results without meeting Proposition~\ref{prop:advice} on all inputs. For unrestricted SAT, polynomial-size exact models remain unestablished here. So do lower bounds excluding them. In particular, our exponential ReLU construction tells us neither that this size is necessary nor that a smaller model can be learned efficiently.
 
 \paragraph{Generalization, memory, and changing workloads.}
 The bounded predictor demonstrates checked transfer to new witnesses. When does learning save more work than caching under the same total memory budget? Equation~\eqref{eq:cache-distribution} gives a reference without eviction. Yet, memory limits, eviction, retraining, and distribution shifts change the costs. We cannot apply the fixed-policy threshold in Proposition~\ref{prop:savings} unchanged to adaptation. We must evaluate conditional savings at each history and include updates. Certification still preserves correctness after a workload change within the covered domain. It need not preserve fallback frequency or expected savings.
@@ -1591,7 +1658,7 @@ The bounded predictor demonstrates checked transfer to new witnesses. When does 
 Which certificates can the fast path produce and check within its budget? A short certificate may exist even when we cannot find it cheaply. As positive and negative verification differ, we should report their outcomes separately. A timeout on prediction can hand control to fallback when time remains; a service-wide deadline cannot guarantee that fallback completes. Proposition~\ref{prop:overhead} bounds additional work if we implement its solver and update-budget assumptions. Note that aborting the fallback as well changes the guarantee. The resulting service may return ``unknown'' and is incomplete.
 
 \paragraph{A reproducible comparison.}
-Sections~\ref{sec:cdcl-study}, \ref{sec:expanded-study}, \ref{sec:structural-service}, \ref{sec:incremental-proof-service}, \ref{sec:scaling-study}, and~\ref{sec:followup-study} fix encodings, query order, solver versions, and local hardware, and compare solving, exact caching, and certified reuse. The follow-up imposes a common logical archive-page cap; this is not a bound on WAL files, temporary storage, or total RAM. Larger studies should additionally impose comparable total memory budgets and use modern application suites. Test streams should include repeated queries, distinct held-out formulas, and changed workloads. Both satisfiable and unsatisfiable instances are needed. We should distinguish reuse of identical inputs from transfer to new ones. A frozen test stream and chronological records of online learning prevent us from using later answers earlier.
+Sections~\ref{sec:cdcl-study}, \ref{sec:expanded-study}, \ref{sec:structural-service}, \ref{sec:incremental-proof-service}, \ref{sec:scaling-study}, \ref{sec:followup-study}, and~\ref{sec:structured-study} fix encodings, query order, solver versions, and local hardware, and compare solving, exact caching, and certified reuse. The follow-up imposes a common logical archive-page cap; this is not a bound on WAL files, temporary storage, or total RAM. Larger studies should additionally impose comparable total memory budgets and use modern application suites. Test streams should include repeated queries, distinct held-out formulas, and changed workloads. Both satisfiable and unsatisfiable instances are needed. We should distinguish reuse of identical inputs from transfer to new ones. A frozen test stream and chronological records of online learning prevent us from using later answers earlier.
 
 For each method, we should report acquisition and label-generation costs, parameter and cache bytes, verification work, certified success, conditional fallback cost, and updates. Total cost must be reported against query count. Latency distributions show how long users wait; aggregate work also charges concurrent hardware. Timeouts and unsolved cases must remain in the comparison. If acquisition cost is unavailable, we can compare online performance but cannot establish end-to-end break-even. Section~\ref{sec:mechanism-study} implements a small synthetic comparison with actual acquisition and service costs. Section~\ref{sec:expanded-study} adds public instances, chronological learning, shift, and measured resources. Section~\ref{sec:followup-study} adds selected current artifact inputs, a held-out counter, and sampled process-tree memory. Larger application suites, hard comparable resource budgets, and competitive current solvers remain necessary for broader performance conclusions.
 
@@ -1619,6 +1686,13 @@ Self-improving algorithms.
 Amarilli, A., Jachiet, L., and Paperman, C. (2021).
 Dynamic membership for regular languages.
 \emph{ICALP 2021}. Full version with proofs: \url{https://arxiv.org/abs/2102.07728}.
+
+\bibitem[Amarilli et~al.(2025)Amarilli, Barloy, Jachiet, and Paperman]{amarilli2025trees}
+Amarilli, A., Barloy, C., Jachiet, L., and Paperman, C. (2025).
+Dynamic membership for regular tree languages.
+\emph{MFCS 2025}, LIPIcs 345, 8:1--8:18.
+\href{https://doi.org/10.4230/LIPIcs.MFCS.2025.8}{doi:10.4230/LIPIcs.MFCS.2025.8}.
+Full version: \url{https://arxiv.org/abs/2504.17536}.
 
 \bibitem[Bacchus et~al.(2009)Bacchus, Dalmao, and Pitassi]{bacchus2009backtracking}
 Bacchus, F., Dalmao, S., and Pitassi, T. (2009).

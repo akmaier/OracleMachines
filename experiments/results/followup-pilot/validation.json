@@ -1,0 +1,36 @@
+{
+  "tests": {
+    "command": "python3 -m unittest discover -s solver -p 'test_*.py' -q",
+    "passed": 114,
+    "log_sha256": "1dc6f7cc69d2c2193afed5495f43b8189f861964f4633804abc197957ec403ce"
+  },
+  "lean": {
+    "command": "lake build OracleMachines oracleSolver",
+    "toolchain": "leanprover/lean4:v4.24.0",
+    "passed": true,
+    "audited_declarations": 1827,
+    "audited_theorem_declarations": 941,
+    "log_sha256": "0c7053b99208bfc4f9388025f431601133088f97a99901b9a070cdbceaa9c094"
+  },
+  "benchmark": {
+    "runs": 210,
+    "attempts": 2289,
+    "correct": 2259,
+    "correct_unsat": 1188,
+    "statuses": {
+      "ok": 2259,
+      "error": 30
+    },
+    "missing_records": 0,
+    "nonzero_worker_exits": 0,
+    "all_61_measured_fingerprints_match": true,
+    "chain_answers": 144,
+    "chain_answers_correct": true
+  },
+  "limits": [
+    "Sampled process-tree RSS is not a hard memory bound.",
+    "Tree operation ledgers do not verify Python/SQLite/IPC costs.",
+    "Fragment soundness does not prove complete external session refinement.",
+    "No unrestricted polynomial SAT guarantee."
+  ]
+}

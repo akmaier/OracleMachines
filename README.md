@@ -32,6 +32,10 @@ claims, and proves conditional expected-savings and bounded-overhead results.
 An exact reuse identity states when avoiding repeated solves repays cache costs.
 These savings conditions apply whether P = NP or P != NP, and a scaling example
 shows how reuse can help even when solving has polynomial cost.
+The literature comparison attributes the utility criterion to Minton, discusses
+self-improving algorithms for polynomial-time tasks, and relates fast/slow
+arbitration to Milli et al. and SOFAI. These are established precedents for the
+paper's explanatory cost bounds.
 Its final section identifies remaining research questions and an evaluation
 protocol; no experimental speedup or efficient exact-learning algorithm is claimed.
 

@@ -13,6 +13,10 @@ of wholly outstanding manuscript edits. Compact exact learning, practical saving
 and performance under memory limits or changing workloads remain unestablished
 by this perspective.
 
+A targeted priority check below assesses the reuse corollary and fixed-policy
+savings result as they appeared in commit `42c17ee`. Its new references and
+attribution have also been incorporated into the manuscript.
+
 The literature contains substantially closer precedents than the initial review identified. In particular, Lin et al. (2021) already combine neural parameters, arbitrary preprocessing or oracle assistance, polynomial advice, computational limitations, and bounded-length lookup representations. Hertrich and Skutella (2023) explicitly distinguish uniform neural constructions from nonuniform existence when drawing consequences from NP-hardness. The broad connection between neural representations and complexity classes therefore needs to be presented as established literature. The draft can contribute a focused exposition of these distinctions for exact SAT, oracle terminology, certification, and amortized reuse; the search does not establish that this particular exposition is unique.
 
 The widely reported failed proof identified by the author is Vinay Deolalikar's August 2010 claim that P differs from NP. It belongs in a discussion of the limits of inferring algorithmic complexity from representation or solution-space structure. It is not a learning-based proof of P=NP.
@@ -62,6 +66,142 @@ The paper formalizes problem-solving performance improving with experience and d
 **Prasad Tadepalli and Balas K. Natarajan. A Formal Framework for Speedup Learning from Problems and Solutions. JAIR 4, 445–475, 1996.** [Publication](https://doi.org/10.1613/jair.154) · [Author paper](https://web.engr.oregonstate.edu/~tadepall/papers/speedup-learning.pdf) · [OpenAlex](https://openalex.org/W1680127546).
 
 This formal framework studies acquiring efficient problem-solving behavior from examples, using control rules and macro-operators, with constructive sufficient conditions. It makes the idea of learning as acceleration a longstanding theoretical topic. It is more specific than the draft's cache accounting and should be discussed alongside Khardon–Roth. Abstract and introductory framework checked; no claim is made here to have independently reverified all its learning theorems.
+
+## Targeted priority check: reuse savings under either P-versus-NP hypothesis
+
+**Question checked, 7 November 2026:** Is the claim that a fast retrieval or
+certified prediction path can save computation, whether P=NP or P differs from
+NP, already published?
+
+**Assessment:** the underlying reuse principle and benefit-minus-overhead
+criterion are established. The manuscript's cache identity is an elementary
+specialization of memoization accounting. Its expected online savings have a
+particularly close explicit predecessor in Minton's utility formula. Neither
+adding a setup-cost break-even threshold nor observing that the derivation uses
+no P-versus-NP hypothesis establishes novelty. The exact SAT notation and
+certification assumptions remain useful for exposition. This search did not
+locate a publication stating the identical SAT corollary with both alternatives
+named, and cannot establish that none exists.
+
+### Closest publications and the precise overlap
+
+1. **Donald Michie (1968), “Memo” Functions and Machine Learning. Nature 218,
+   19–22.** [Publication](https://doi.org/10.1038/218019a0) ·
+   [Original scan](https://www.cs.utexas.edu/~hunt/research/hash-cons/hash-cons-papers/michie-memo-nature-1968.pdf).
+   The original opening describes combining a computation procedure with stored
+   input-output answers and adding each freshly computed result to the stored
+   part. This directly precedes the “solve when unknown, retrieve when known”
+   architecture. It supplies the mechanism, rather than our displayed cost identity.
+
+2. **Steven Minton (1988), Quantitative Results Concerning the Utility of
+   Explanation-Based Learning. AAAI, 564–569.**
+   [Proceedings](https://cdn.aaai.org/AAAI/1988/AAAI88-100.pdf), Section 4.3,
+   printed p. 566. Its explicit utility formula multiplies conditional savings
+   by application frequency, then subtracts matching cost. This closely matches
+   the structure of our expected online savings. Minton evaluates search-control
+   rules; our certified successes avoid an entire baseline solve. The paper
+   does not state our initial-cost threshold or SAT corollary.
+
+3. **Nir Ailon, Bernard Chazelle, Kenneth L. Clarkson, Ding Liu, Wolfgang
+   Mulzer, and C. Seshadhri (2011), Self-Improving Algorithms. SIAM Journal on
+   Computing 40(2), 350–375.**
+   [Publication](https://doi.org/10.1137/090766437) ·
+   [Author preprint](https://arxiv.org/pdf/0907.0884), Theorems 1.1 and 1.3.
+   For sorting and Delaunay triangulation under unknown product distributions,
+   training supports expected limiting time governed by output entropy, with
+   an O(n log n) worst-case bound. This is a constructive example of learning
+   improving polynomial-time tasks. The introductory guarantees were checked;
+   the complete proofs were not independently reverified.
+
+4. **Smitha Milli, Falk Lieder, and Thomas L. Griffiths (2021), A Rational
+   Reinterpretation of Dual-Process Theories. Cognition 217, 104881.**
+   [Publication](https://doi.org/10.1016/j.cognition.2021.104881) ·
+   [Published author-hosted PDF](https://cocosci.princeton.edu/papers/millirational.pdf).
+   Section 3 charges action, reasoning, and metareasoning separately. Its models
+   and simulations identify conditions favoring fast/slow systems. This is
+   direct prior work on the efficiency rationale for dual-process arbitration;
+   it concerns decision quality and computation, rather than exact SAT certification.
+
+5. **Marianna Bergamaschi Ganapini et al. (2025), Fast, Slow, and Metacognitive
+   Thinking in AI. npj Artificial Intelligence 1, 27.**
+   [Publication](https://doi.org/10.1038/s44387-025-00027-5).
+   SOFAI starts with a fast solver and uses metacognitive control to decide
+   whether to invoke a slow solver. Its grid-based evaluation compares time and
+   decision quality with individual solvers. Publisher-indexed architecture and
+   results text and OpenAlex metadata were checked. This is an architectural
+   and empirical precedent, not an exact SAT or full acquisition-cost theorem.
+
+### Mapping the utility formula to our proposition
+
+Our policy has certified success indicator H, baseline cost s, and fast-path
+cost f. The identity
+
+\[
+\mathbb E[Hs]
+=\Pr(H=1)\,\mathbb E[s\mid H=1]
+\]
+
+uses the right side as zero when success has probability zero. Thus
+`delta = E[Hs] - E[f]` has the conditional-benefit-times-frequency-minus-overhead
+structure already used in the utility literature. The specialization charges
+the entire solve as avoided work on a certified success. Adding acquisition
+cost C gives `E[baseline - hybrid] = Q delta - C`. This algebra explains the
+break-even condition and does not provide an algorithm that achieves positive
+delta.
+
+The cache comparison makes an even weaker demand: count how many solves are
+avoided for identical inputs and subtract actual cache costs. It is compatible
+with polynomial or superpolynomial solver costs. A formal comparison with one
+solver does not establish optimality against all algorithms, and a competing
+solver could itself include memoization.
+
+### What the P-versus-NP qualification adds
+
+The publications above establish the component ideas without requiring a
+resolution of P versus NP. This review did not locate their authors explicitly
+stating our two-case SAT corollary. The conclusion that its derivation applies
+under either hypothesis is **our interpretation of the unconditional cost
+identity**, not a quotation or theorem attributed to those authors. In
+particular, the polynomial-time tasks in Ailon et al. show why NP-hardness is
+unnecessary for useful learned acceleration. This does not guarantee that a
+particular SAT workload is faster under either hypothesis.
+
+For broader complexity context, **Martin Avanzini and Ugo Dal Lago,
+On Sharing, Memoization, and Polynomial Time**, appeared at
+[STACS 2015](https://doi.org/10.4230/LIPIcs.STACS.2015.62) and in
+[Information and Computation 261 (2018), 3–22](https://doi.org/10.1016/j.ic.2018.05.003).
+They prove cost-model invariance and results on ramified recurrence. This is
+related formal memoization literature, but not the same cross-query savings
+identity. The abstract and STACS introduction/conclusion were checked.
+
+A search also surfaced **Qi Wang et al. (29 October 2026), Does Scaling Toward
+AGI Depend on What System-1 Lets System-2 Execute?**
+[arXiv:2610.39497](https://arxiv.org/abs/2610.39497).
+Its abstract describes selective expensive execution and conditional cost
+savings. Only the abstract and submission record were screened. It is a recent
+preprint, not used here as proof of the exact SAT result or as evidence of
+peer-reviewed publication.
+
+### Search record and implications for the manuscript
+
+Targeted searches combined memoization, lookup overhead, amortized analysis,
+speedup learning, utility, metareasoning, dual processes, and both spellings of
+P=NP/P≠NP. Primary publications and author-hosted copies were then inspected.
+SemOpenAlex exact-title queries returned 13 records, including duplicates and
+misdated Minton records; the original AAAI proceedings establish 1988. The
+SOFAI title was absent from that response, but its publisher text and direct
+OpenAlex DOI lookup verify publication in 2025. The three direct OpenAlex
+lookups for Ailon, Milli, and SOFAI all succeeded. Raw responses and the query
+are saved in the evidence directory. Indexed dates and title matches alone
+were not treated as mathematical evidence or exhaustive priority coverage.
+
+The manuscript now attributes the expected-cost structure specifically to
+Minton Section 4.3, adds Ailon et al. as a constructive polynomial-time
+precedent, and discusses Milli et al. and SOFAI as fast/slow-arbitration prior
+work. The appropriate contribution remains a perspective with explicit SAT
+correctness and accounting assumptions. A new learning guarantee, a stronger
+bound under realistic resource constraints, or a reproducible end-to-end
+evaluation would require additional research.
 
 ## Deolalikar and the failure of the claimed separation
 

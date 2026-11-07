@@ -528,6 +528,8 @@ For example, suppose $s_n=\Theta(n^k)$ for some $k>1$, $\ell_n=O(n)$, $C_n=O(n)$
 
 The comparison is with the specified solver restarted on each query. It does not establish superiority over every algorithm; another solver may implement the same reuse. More generally, every decidable task permits this accounting. SAT makes the distinction from worst-case complexity especially clear.
 
+Rigorous learning-based speedups also exist for problems already solvable in polynomial time. \citet{ailon2011self} construct self-improving algorithms for sorting and Delaunay triangulation under unknown product distributions. After training, their expected limiting time adapts to the distribution's output entropy, while retaining an $O(n\log n)$ worst-case bound. These results include learning and storage guarantees under their stated assumptions. They go beyond retrieving identical earlier inputs. They also show why useful learning-based acceleration need not depend on NP-hardness. Our elementary accounting supplies neither their algorithms nor their distributional guarantees.
+
 \section{Certified learning and adaptive fallback}
 \label{sec:hybrid}
 
@@ -645,6 +647,8 @@ The online cost on $x$ is $f(x)+(1-H(x))s(x)$. Taking its expectation gives $\mu
 
 Like Corollary~\ref{cor:reuse-savings}, this result holds under either $\Pclass=\NPclass$ or $\Pclass\neq\NPclass$. It extends the cost comparison to certified answers on inputs that need not have appeared before. Here, ``known'' means available through exact retrieval or a sound check. Model confidence alone does not justify skipping the solver. For an adaptive system, the success indicator and overhead depend on earlier queries, and update costs must also be charged.
 
+The online cost criterion closely matches an explicit predecessor. In Section~4.3, \citet[p.~566]{minton1988utility} defines rule utility as average savings on application times application frequency, minus average matching cost. Here, $\E[H(X)s(X)]=\Prb(H=1)\E[s(X)\mid H=1]$, with the product interpreted as zero if success has probability zero. Our $\delta$ has that same benefit-minus-cost structure, specialized to a certified path that avoids the entire baseline solve. The initial cost $C$ then gives an elementary total-cost threshold. We present this as an application of established utility accounting. The absence of a $\Pclass$-versus-$\NPclass$ assumption does not establish a separate novelty claim.
+
 Hence, we must measure solver time avoided on certified successes. Raw accuracy alone misses this quantity. For example, assume $\Prb(H=1)\geq\alpha\geq0$, every success has $s(x)\geq b\geq0$, and $\E[f(X)]\leq a$. Then $\delta\geq\alpha b-a$, so $\alpha b>a$ suffices for positive online savings.
 
 Let us also consider a counterexample. With probability $0.99$, the solver costs one unit and the fast path succeeds. On the remaining inputs, the solver costs $10^6$ units and the fast path fails. If the fast path always costs two units, then $\delta=0.99-2<0$. We save only $0.99$ units per query on average, but spend two units to do so. Even a 99\% certified success rate therefore increases expected online cost. This workload is illustrative; we report no measurement here.
@@ -669,6 +673,8 @@ We have bounded the additional work by the fast-path and update budgets. This is
 \label{sec:discussion}
 
 The finite table gives us an extreme form of acquired knowledge. Once we have computed every answer, online use requires only recognition and retrieval. Exact caching builds this knowledge incrementally. Learning aims for a smaller representation that transfers across inputs. In each case, we reuse earlier computational effort.
+
+Explicit fast/slow arbitration also has published precedents. \citet{milli2021rational} study when a dual-process architecture is optimal after charging action, reasoning, and metareasoning costs. Their models concern decision quality and computational cost. \citet{ganapini2025sofai} implement the SOFAI architecture: a fast solver acts first, and metacognitive control decides whether to invoke a slow solver. Their grid-based experiments report improved efficiency at comparable or better decision quality than the studied individual solvers. These results support cost-aware arbitration. They do not provide exact SAT certification or our full acquisition-cost comparison. Hence, the fast-first architecture itself is established prior work.
 
 We find the same acquisition-and-use distinction in amortized inference. \citet{stuhlmuller2013} spend computation learning stochastic inverses for later inference in Bayesian networks. Their setting is probabilistic. Still, the transfer of work from later queries to earlier learning is directly relevant.
 
@@ -737,6 +743,12 @@ Caching shows how to reuse exact answers. Certification with terminating fallbac
 \raggedright
 \begin{thebibliography}{99}
 
+\bibitem[Ailon et~al.(2011)Ailon, Chazelle, Clarkson, Liu, Mulzer, and Seshadhri]{ailon2011self}
+Ailon, N., Chazelle, B., Clarkson, K.~L., Liu, D., Mulzer, W., and Seshadhri, C. (2011).
+Self-improving algorithms.
+\emph{SIAM Journal on Computing}, 40(2), 350--375.
+\href{https://doi.org/10.1137/090766437}{doi:10.1137/090766437}.
+
 \bibitem[Baker et~al.(1975)Baker, Gill, and Solovay]{baker1975}
 Baker, T., Gill, J., and Solovay, R. (1975).
 Relativizations of the $\mathcal P = ?\mathcal{NP}$ question.
@@ -748,6 +760,12 @@ Balc\'azar, J.~L., Gavald\`a, R., and Siegelmann, H.~T. (1997).
 Computational power of neural networks: A characterization in terms of Kolmogorov complexity.
 \emph{IEEE Transactions on Information Theory}, 43(4), 1175--1183.
 \href{https://doi.org/10.1109/18.605580}{doi:10.1109/18.605580}.
+
+\bibitem[Bergamaschi Ganapini et~al.(2025)Bergamaschi Ganapini, Campbell, Fabiano, Horesh, Lenchner, Loreggia, Mattei, Rossi, Srivastava, and Venable]{ganapini2025sofai}
+Bergamaschi Ganapini, M., Campbell, M., Fabiano, F., Horesh, L., Lenchner, J., Loreggia, A., Mattei, N., Rossi, F., Srivastava, B., and Venable, K.~B. (2025).
+Fast, slow, and metacognitive thinking in AI.
+\emph{npj Artificial Intelligence}, 1, 27.
+\href{https://doi.org/10.1038/s44387-025-00027-5}{doi:10.1038/s44387-025-00027-5}.
 
 \bibitem[Blum and Rivest(1988)]{blum1988}
 Blum, A., and Rivest, R.~L. (1988).
@@ -876,6 +894,12 @@ Michie, D. (1968).
 ``Memo'' functions and machine learning.
 \emph{Nature}, 218, 19--22.
 \href{https://doi.org/10.1038/218019a0}{doi:10.1038/218019a0}.
+
+\bibitem[Milli et~al.(2021)Milli, Lieder, and Griffiths]{milli2021rational}
+Milli, S., Lieder, F., and Griffiths, T.~L. (2021).
+A rational reinterpretation of dual-process theories.
+\emph{Cognition}, 217, 104881.
+\href{https://doi.org/10.1016/j.cognition.2021.104881}{doi:10.1016/j.cognition.2021.104881}.
 
 \bibitem[Minton(1988)]{minton1988utility}
 Minton, S. (1988).

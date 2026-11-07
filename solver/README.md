@@ -547,3 +547,58 @@ failures, divided by completed answers. A route with no successful completion
 has no finite score. The last 32 observations inform each score; all observations
 remain archived. Periodic exploration still retries routes. This is a measured
 heuristic, not a regret bound or a guarantee of faster complete solving.
+
+## Priority fixes and checked CNF input
+
+Use `layered_cnf(width, clauses, layers, witness=False)` for a CNF with a supplied
+ordered partition. Literals are signed DIMACS integers; each positive variable
+ID occurs in exactly one block, and blocks contain at most `width` variables.
+Every clause must fit within one block or two adjacent blocks. For example:
+
+```python
+result = solver.layered_cnf(1, [[1, 2], [-1, -2], [1]], [[1], [2]], witness=True)
+```
+
+The JSON-lines operation is `{"op":"layered_cnf","width":1,"clauses":[[1,2],[-1,-2],[1]],"layers":[[1],[2]],"witness":true}`.
+There must be at least two blocks; an empty block can supply an unused boundary.
+Empty clauses correctly produce UNSAT. The native checker compiles the source,
+checks the proposed tree, and independently binds every source edge and identity
+padding leaf to that tree. Both compilation passes, full binding and storage are
+charged. `source_binding` identifies the archived source evidence; `state` is the
+ordinary relation-tree version. Subsequent `layered` edits describe relations,
+not automatically an edited version of the original CNF. Re-submit the complete
+source to obtain a new source binding. Unsupported decompositions are errors,
+never UNSAT. Finding a useful partition remains the caller's responsibility.
+
+`--native-layer-cells` defaults to 1,048,576 retained relation cells. Under
+pressure, the worker retains the complete dependency closure of the requested
+root and evicts only other native entries. A working set larger than this cap is
+refused before native registration; the durable archive is unchanged. Reports
+include retained cells, the cap, retention visits, evictions and replayed
+registrations. This bounds a logical retained representation, not actual RSS or
+transient Python/native allocations. Restart and older-branch access may replay
+archived definitions. Source input and native definition caps still apply.
+
+General elimination now distinguishes semantic value work from provenance work.
+A complete equality check can establish an equivalent new summary. Downstream
+projections with matching checked parent meanings reuse known row values, while
+new evidence records the new parents. `semantic_stops` and `provenance_rebinds`
+measure these cases; `affected_buckets` still includes every changed evidence
+node. The suffix can remain linear. Row acquisition uses an explicit continuation
+stack, so the old Python depth-256 fallback is removed. Native capacities,
+symbolic recursion limits, full context checks, witnesses and certificates remain
+separate limits.
+
+Witness/refutation proposal attempts have separate native calls and measurements.
+Their combined allowance is at most 250 ms and 10% of the remaining query budget.
+A timeout kills the owned worker and resumes checked fallback with the original
+deadline; replay costs remain charged. This bounds speculative effort but does
+not guarantee fallback completion or learn an optimal gating policy. The Lean
+reference backend retains its separately counted behavior.
+
+A route observation now follows successful storage accounting. An API failure
+gets at most one failed observation, rather than both success and failure.
+Telemetry-write failures do not invalidate an already completed checked response;
+they are returned as `routing.observation_error`. Logging is best effort and may
+be absent under storage/deadline failure. A correctly committed answer can remain
+in the archive even if a later service step fails.

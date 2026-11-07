@@ -78,7 +78,7 @@
 \title{\vspace{-1.0cm}\textbf{Bounded-Domain SAT, Compiled Knowledge,\\and Amortized Reasoning}\\[0.5em]
 \large A perspective on resource accounting for learned reasoning}
 \author{Andreas Maier}
-\date{7 November 2026}
+\date{8 November 2026}
 
 \begin{document}
 \maketitle
@@ -958,9 +958,33 @@ Replace the two-element middle-state set in Equation~\eqref{eq:chain-compose} by
 
 The ledger counts logical tests and node events, not individual bit-machine instructions. Materializing tables, addressing entries, storing masks, serialization, and persistence need their own implementation costs. A complete witness contains $m+1$ layer states; the implemented traversal searches up to $q$ middle states per internal node and then checks the original edges. For fixed width its work is linear in capacity. Restart can require replaying all distinct retained nodes used by the requested root. Neither operation is covered by the logarithmic replacement claim.
 
-\texttt{Layered.lean} proves exact composition, summary semantics, replacement preservation, the selected-leaf update, invariance of other leaves, and the stated recursive budget. The native service accepts widths one through four and checks each proposed join. The theory allows other finite widths. The service does not formally refine arbitrary CNF conversion or all Python/JSON/SQLite state transitions. This restriction keeps the boundary of the checked result explicit.
+\texttt{Layered.lean} proves exact composition, summary semantics, replacement preservation, the selected-leaf update, invariance of other leaves, and the stated recursive budget. The native service accepts widths one through four and checks each proposed join. The theory allows other finite widths. Section~\ref{sec:source-binding} adds a checked compiler for an explicit adjacent-block promise. The service does not formally refine arbitrary CNF conversion or all Python/JSON/SQLite state transitions. This restriction keeps the boundary of the checked result explicit.
 
 This extension remains an instance of established bounded-width elimination and finite-monoid maintenance \citep{dechter1999bucket,amarilli2021dynamic}. It is also useful to look beyond paths: \citet{amarilli2025trees} give an $O(\log n/\log\log n)$ update bound for membership in a fixed regular tree language under relabeling. Their result provides a published precedent for richer tree structure, with a fixed language and update model. Our implementation does not yet supply that tree-language interface or its bound. Neither result yields small summaries for unrestricted SAT.
+
+\subsection{Checked source compilation and semantic reuse}
+\label{sec:source-binding}
+
+Let us now make the source of the layer relations explicit. We are given a CNF and an ordered partition of its variables into disjoint blocks. Each block contains at most $b$ variables. Every clause must refer to one block or two adjacent blocks. This is a promise about the supplied representation. The checker verifies it before compilation. It does not discover a suitable partition for arbitrary SAT.
+
+\begin{proposition}[Compilation under an adjacent-block promise]
+\label{prop:adjacent-source}
+Suppose that the supplied partition has $m+1\geq2$ blocks and that the CNF contains $c$ clauses and $L$ literal occurrences. Set $q=2^b$. We can compile each clause into one adjacent-layer relation such that the CNF is satisfiable exactly when the resulting chain has an accepting path with unrestricted endpoints. Evaluating the local truth tables uses $O(q^2(L+c+m))$ literal, clause and cell events. Balanced summary construction adds $O(mq^3)$ middle-state tests. These counts exclude reading and indexing the source, bit arithmetic, storage and protocol work.
+\end{proposition}
+
+\begin{proof}
+Assign each clause to an edge containing all of its variables. A clause confined to the final block belongs to the last edge. Other single-block clauses may use the following edge. Assign an empty clause to the first edge, where it makes the relation empty. For each edge, enumerate its $q^2$ endpoint pairs and retain a pair precisely when all assigned clauses hold. Each literal is tested on at most $q^2$ pairs. Clause visits, including empty clauses, contribute at most $cq^2$ events, and initializing the edge tables uses $mq^2$ cell events.
+
+A satisfying valuation supplies one state for every block. Its adjacent state pairs satisfy all edge relations. Conversely, an accepting path gives a consistent valuation because each variable belongs to one block. Every source clause then holds on its assigned edge. Unused bit positions impose no restriction. Identity padding extends the final state without changing these conditions. Proposition~\ref{prop:layered} supplies the summary-construction bound.
+\end{proof}
+
+This is a concrete instance of bounded-width elimination \citep{dechter1999bucket}. It gives no new general-SAT tractability result. The runtime supports $1\leq b\leq4$. It checks distinct variable IDs, complete coverage of source literals and adjacency. After compilation, a second native pass recomputes the local relations and compares every source edge and padding leaf with the checked tree. Both passes and this linear source-binding work are charged. Subsequent edits to relation masks do not automatically represent edits to the original CNF; a new source claim requires a new binding.
+
+The formal cost development also moves beyond a declared recurrence. \texttt{LayeredCosts.lean} implements short-circuit composition with returned test counts, materializes its results, and carries these counts through replacement. Lean proves equality with the uninstrumented tree operations and the bound $h+1+hq^3$ on tests plus copied-node events. The counter does not measure allocation bytes, integer operations or compiled instructions. Those costs remain separate.
+
+\texttt{LayeredProtocol.lean} now proves exactness of the executable rowwise relation comparison and soundness of accepted full-tree witness traces. Such a witness has $2^h+1$ states. It also proves that a tree's prefix and suffix relations compose to its summary. Hence, an identity suffix preserves the prefix decision. The protocol checks this condition before accepting a shortened logical length. This can add $O(q^3\log M)$ work beyond the endpoint tests when the padding invariant is not already available. \texttt{LayeredSource.lean} proves the local clause semantics, sequence composition and the mathematical source-binding implication. The complete refinement through parsing, partition construction, JSON, persistent state and truncated witness output remains open.
+
+We also distinguish the value of a summary from its evidence. Suppose a changed factor has the same complete relation as its predecessor. Downstream conjunction and projection preserve this equality. Their known row values can therefore be reused. Yet, the new evidence must retain the current parents. Otherwise, a deleted assumption could remain inside an old negative proof. The service first checks equality, then checks matching parent meanings before transferring known rows. New provenance nodes and the final active-context check remain necessary. Lean verifies the semantic substitution lemmas; the equivalence-class and row-cache implementation still needs a complete state-invariant proof. Thus stopping value computation need not stop evidence propagation.
 
 \subsection{Amortization while the domain grows}
 
@@ -1600,6 +1624,46 @@ Revalidation adds 355 current-engine results and 129 proofs. All 3,550 previous 
 
 The largest sampled process-tree RSS is 250.45\,MiB; scratch reaches 20.98\,MiB and WAL plus shared-memory files 10.96\,MiB. The maximum sample interval is 147.38\,ms, and 51 process reads are missed. No watchdog threshold is reached. The corrected service passes 119 tests, and Lean audits 1,957 declarations, including 991 theorem declarations. The complete refinement and machine-cost obligations remain open.
 
+\subsection{Priority repairs and a stronger comparison}
+\label{sec:priority-study}
+
+The next diagnostics exposed three concrete problems. A late accounting failure could log both success and failure for one request. A width-four native cache could discard a working set larger than its own reset threshold. Equal relation values also propagated through the full evidence chain. We now record the final route outcome after storage accounting, retain a complete live native closure or refuse it explicitly, and separate checked value reuse from new provenance. Iterative row evaluation removes the earlier depth-256 Python fallback. Witness and refutation proposals receive separate measurements and a combined allowance of at most 250\,ms and 10\% of remaining query time. Checked fallback keeps the original deadline. This reserves capacity; it does not guarantee completion or optimal arbitration.
+
+For a fresh comparison, we freeze 32 signed-unit formulas, eight previously unused random SATLIB members, three unused circuit-fault instances, later \texttt{towers05} horizons including its final SAT case, and two \texttt{unsat300cubes} horizons \citep{satlib,schreiber2026realtime}. We add a deterministic polarity proposal with no training and compare live with restarted incremental-proof workers. Every service mode receives the same complete formulas and disables exact-input reuse. Query, archive, input and proof limits are respectively three seconds, 64\,MiB of logical pages, 8\,MiB and 16\,MiB. Conversion, setup, checking, persistence and training remain charged. Three sequential rotating repetitions give 48 runs and 1,152 attempted queries.
+
+The recorded development pilot revealed a direct-reference formatting defect: raw SATLIB delimiters reached CaDiCaL without the normalization used by the service. We preserve that pilot, repair the harness and rerun every mode with fresh databases. These instances were unused in the earlier project studies. The final comparison is a rerun of this follow-up pilot, not a second blind holdout. No solver policy or instance selection was tuned after the pilot.
+
+\begin{table}[tbp]
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+Mode & Chronological ms & Application ms & Application completed \\
+\midrule
+Direct CNF reference & 163.24 & 3656.86 & 24/24 \\
+Checked & 458.58 & 6034.49 & 9/24 \\
+Portfolio & 2850.59 & 7737.82 & 9/24 \\
+Learned & 649.47 & 7778.52 & 9/24 \\
+Polarity heuristic & 263.01 & 7398.72 & 9/24 \\
+Live proof & 762.92 & 12285.01 & 9/24 \\
+Restarted proof & 4547.90 & 16058.84 & 9/24 \\
+Adaptive & 446.86 & 6188.64 & 9/24 \\
+\bottomrule
+\end{tabular}
+\caption{Median charged stream time over three repetitions. All chronological queries complete. Application times include failures and correspond to different completed subsets; they are not a speed ranking for equal completed work. Completion counts aggregate the three repetitions. Direct uses original CNF without the service's certification or archive.}
+\label{tab:priorities}
+\end{table}
+
+The comparison records 1,047 correct answers, including 141 negatives, and 105 explicit resource-limit failures. No answer is wrong. The checked service supplies 903 of the correct answers and 114 negatives; the direct reference supplies the remainder. The failures comprise 39 archive-cap failures, 21 encoded-input rejections, 30 proof-size failures and 15 query deadlines. The final Towers SAT horizon needs 181,707,058 bytes in the unary formula encoding. It exceeds the service's input cap and remains a recorded failure, while the direct CNF reference solves it. Hence, encoding, certification and retained history can dominate a problem that another input interface handles readily.
+
+The polarity baseline changes the interpretation of the earlier learning result. It supplies 32 accepted unit proposals per repetition, compared with 30 from the learner. Neither supplies an accepted public-shift or application proposal. On this chronological stream, polarity takes 263.01\,ms, checked solving 458.58\,ms and learning 649.47\,ms. Thus the synthetic benefit does not require learning. The result supports checked reuse on this distribution, with no evidence here for a learning-specific advantage. Portfolio checking still takes 2,850.59\,ms despite the reserved budget. Bounding an unproductive attempt does not make it useful.
+
+Separate structural diagnostics record 69 correct answers. At 256 and 1,024 distinct width-four relations, initial native registration needs 511 and 2,047 nodes. A replacement needs nine and eleven; an unchanged query needs zero. The native cell cap equals the live working set, and older roots remain available from the archive. In semantic chains of 16, 64 and 320 edges, an XOR-to-equality edit acquires two combination rows and checks five new native rows. It rebinds 16, 64 and 320 successor projections while changing 17, 65 and 321 evidence buckets. Value acquisition stays small in this example. Provenance and context work remain global. Checked source compilation at lengths 16, 64 and 256 charges both compilation passes and full source binding.
+
+All 129 regression tests pass. Lean audits 2,090 declarations, including 1,047 theorem declarations, without admits or added axioms. Revalidation retains every previous row and all 93 earlier experiment files. The live archive contains 4,260 results and 1,290 proofs, and the new expansion branches and source bindings pass restart checks.
+
+The scratch observer reaches 84.26\,MiB. Process-tree RSS is unavailable: all 9,655 process reads fail, leaving zero valid samples. We report missing RSS rather than a zero-memory result and draw no total-memory conclusion. The archived raw log also retains 18 input rejections whose diagnostic ledger belonged to the previous request. The derived analysis removes that inapplicable field without changing outcomes or elapsed times; the current harness clears it at the request boundary. These limitations, the original records and source fingerprints remain in the artifact. General decomposition discovery, complete protocol and machine-cost refinement, global context maintenance, cost-sensitive gating and hard total-resource bounds are still open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 
@@ -1658,7 +1722,7 @@ The bounded predictor demonstrates checked transfer to new witnesses. When does 
 Which certificates can the fast path produce and check within its budget? A short certificate may exist even when we cannot find it cheaply. As positive and negative verification differ, we should report their outcomes separately. A timeout on prediction can hand control to fallback when time remains; a service-wide deadline cannot guarantee that fallback completes. Proposition~\ref{prop:overhead} bounds additional work if we implement its solver and update-budget assumptions. Note that aborting the fallback as well changes the guarantee. The resulting service may return ``unknown'' and is incomplete.
 
 \paragraph{A reproducible comparison.}
-Sections~\ref{sec:cdcl-study}, \ref{sec:expanded-study}, \ref{sec:structural-service}, \ref{sec:incremental-proof-service}, \ref{sec:scaling-study}, \ref{sec:followup-study}, and~\ref{sec:structured-study} fix encodings, query order, solver versions, and local hardware, and compare solving, exact caching, and certified reuse. The follow-up imposes a common logical archive-page cap; this is not a bound on WAL files, temporary storage, or total RAM. Larger studies should additionally impose comparable total memory budgets and use modern application suites. Test streams should include repeated queries, distinct held-out formulas, and changed workloads. Both satisfiable and unsatisfiable instances are needed. We should distinguish reuse of identical inputs from transfer to new ones. A frozen test stream and chronological records of online learning prevent us from using later answers earlier.
+Sections~\ref{sec:cdcl-study}, \ref{sec:expanded-study}, \ref{sec:structural-service}, \ref{sec:incremental-proof-service}, \ref{sec:scaling-study}, \ref{sec:followup-study}, \ref{sec:structured-study}, and~\ref{sec:priority-study} fix encodings, query order, solver versions, and local hardware, and compare solving, exact caching, and certified reuse. The follow-up imposes a common logical archive-page cap; this is not a bound on WAL files, temporary storage, or total RAM. Larger studies should additionally impose comparable total memory budgets and use modern application suites. Test streams should include repeated queries, distinct held-out formulas, and changed workloads. Both satisfiable and unsatisfiable instances are needed. We should distinguish reuse of identical inputs from transfer to new ones. A frozen test stream and chronological records of online learning prevent us from using later answers earlier.
 
 For each method, we should report acquisition and label-generation costs, parameter and cache bytes, verification work, certified success, conditional fallback cost, and updates. Total cost must be reported against query count. Latency distributions show how long users wait; aggregate work also charges concurrent hardware. Timeouts and unsolved cases must remain in the comparison. If acquisition cost is unavailable, we can compare online performance but cannot establish end-to-end break-even. Section~\ref{sec:mechanism-study} implements a small synthetic comparison with actual acquisition and service costs. Section~\ref{sec:expanded-study} adds public instances, chronological learning, shift, and measured resources. Section~\ref{sec:followup-study} adds selected current artifact inputs, a held-out counter, and sampled process-tree memory. Larger application suites, hard comparable resource budgets, and competitive current solvers remain necessary for broader performance conclusions.
 

@@ -290,3 +290,27 @@ streams. A separate cache-pressure study retains every historical state while
 measuring the cost of smaller active retention. All older datasets and archive
 rows remain unchanged; the live store now holds 3,905 results and 1,161 proofs.
 The [gap register](research/implementation-gaps.md) records what remains open.
+
+## Seven-priority follow-up
+
+The current implementation separates semantic row reuse from current provenance,
+uses iterative lazy evaluation, retains complete native layered working sets,
+and records final route outcomes once. Speculative witness/proof checking now
+has a separate budget and measured outcomes. A new `layered_cnf` API checks and
+compiles CNF under a supplied adjacent-block partition; it does not discover a
+bounded-width decomposition for unrestricted SAT.
+
+**129 tests pass**, and Lean audits **1,047 theorem declarations**. The new
+costed reference returns operation counts and is proved equivalent to tree
+replacement. Additional proofs cover relation comparison, full witness traces,
+prefix/suffix composition and mathematical source binding. Whole-service cost
+and protocol refinement remain open. The [priority gap register](research/implementation-gaps.md#seven-priority-implementation-follow-up)
+distinguishes implemented improvements from those remaining obligations.
+
+The [new evaluation](experiments/results/priorities/README.md) adds unused public
+members, larger mixed-label application sources, a no-training polarity baseline,
+matched live/restarted proof modes and distinct-relation pressure. Its
+[development pilot](experiments/results/priorities-pilot/README.md) is preserved.
+Every previous database row and all 93 historical experiment files remain intact.
+The live solver contains **4,260 results / 1,290 proofs**, plus saved expansion
+branches and source bindings checked again after restart.

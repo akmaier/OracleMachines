@@ -403,3 +403,43 @@ serialization, storage, full witnesses and restart. It is not a complete compile
 machine-cost theorem. The protocol/session/request binding also remains a
 refinement obligation. These are established bounded-width dynamic-programming
 and finite-monoid ideas, with a checked implementation and explicit accounting.
+
+## Priority follow-up: executable counts and source binding
+
+The current build audits **2,090 declarations / 1,047 theorem declarations**.
+`LayeredCosts.lean` implements short-circuit `anyRun`, a materialized table of
+values and test counts, `joinRun`, and `replaceRun`. Lean proves that their values
+agree with the existing composition/join/replacement functions, that a join
+performs at most `q^3` middle-state tests, and that replacement's test-plus-node
+counter is at most `h+1+h*q^3`. These are counts produced by an executable
+reference, rather than only a declared recurrence. They do not count vector
+allocation bytes, integer bit operations, IPC, database work or native machine
+instructions. The production join remains the uninstrumented equivalent.
+
+`LayeredProtocol.lean` now proves that the executable rowwise relation comparison
+is exact, that accepted witness extraction constructs a valid full-tree trace of
+length `2^h+1`, and that splitting a valid tree yields prefix/suffix relations
+whose composition is its summary. An identity suffix therefore preserves the
+prefix decision. Native queries reject a shortened logical length when this
+suffix condition fails. This check can add `O(q^3 log M)` work to a request;
+the `q^2` endpoint-query bound presumes that the padding invariant is available.
+Proposed join masks are decoded and compared rowwise, so acceptance no longer
+depends on an unproved encode/decode round trip.
+
+`LayeredSource.lean` compiles CNF under a supplied disjoint ordered partition of
+positive variable IDs. Every clause must belong to one block or two adjacent
+blocks; each block has at most four variables. The native checker rejects
+missing/repeated variables and nonadjacent clauses. It recomputes compilation
+and compares every source edge and padding leaf against the checked tree before
+binding its answer to the source. Local clause semantics, sequence composition,
+and the mathematical source-binding implication are proved. Discovery of the
+partition, correctness of all JSON/array/hash-map orchestration, and a complete
+source-API refinement theorem remain open. This is a restricted tractable family,
+not a compiler for unrestricted CNF with guaranteed bounded width.
+
+For general factors, `factors_equal_matching` and `project_equal_conjunctions`
+justify the semantic rule used by the new native rebind checker. Equal relations
+can transfer row values while new nodes retain current parent/source identities.
+The equivalence-class cache and row-cache implementation still lack a complete
+state-invariant refinement proof. Deletion and restart tests complement, rather
+than replace, that missing theorem.

@@ -413,3 +413,39 @@ construction, representation, verification or cumulative expansion cost. The
 current results support a perspective on accounting for reusable reasoning and
 restricted verified constructions. They do not establish a new general SAT
 complexity result or a universal System 1/System 2 speedup.
+
+## Seven-priority implementation follow-up
+
+The follow-up preserves the preceding diagnostics as historical evidence.
+Implementation commits `d3321a7`, `580e1b1`, and `b080a39` address the practical
+priorities before broadening the experiment. None closes the unrestricted
+uniform-complexity question.
+
+| Gap | Implemented progress | Remaining obligation |
+| --- | --- | --- |
+| 1. Structural coverage | Native CNF compilation checks a supplied disjoint ordered partition, width 1–4, with each clause confined to adjacent blocks. A second pass binds source edges and identity padding to the checked root. | Discover useful partitions; cover broader decompositions and edits; prove width/coverage/acquisition bounds for the promised family. No arbitrary-SAT width guarantee follows. |
+| 2. Executable cost | A costed executable composition and replacement reference returns counts and the same values as production operations. Lean proves at most `q^3` middle-state tests per join and `h+1+h*q^3` tests plus node events per replacement. | Refine allocation, bit arithmetic, compiler execution, hashing, IPC, persistence and replay costs. This is not a whole-service machine-cost proof. |
+| 3. Semantic reuse | Complete native equality checking and checked parent matching let downstream factors reuse row values while retaining new provenance. Iterative Python evaluation removes the depth-256 limit. | Evidence IDs still propagate; final context checks, witnesses and certificates can remain global. Prove the equivalence/row-cache state invariants and reduce context work without invalid assumption reuse. Symbolic and native capacity limits remain. |
+| 4. Retention | Native layered retention keeps a complete live dependency closure, reports logical cells, and refuses a working set that exceeds its configured cap. Old versions remain durable. | Bound actual RSS/transient allocation and physical storage, rather than selected cells/pages; charge history replay and unbounded archive growth. |
+| 5. Request/proof connection | Lean proves exact rowwise relation comparison, accepted full-tree witness traces/lengths, prefix/suffix composition, identity-padding preservation, local CNF clause semantics and mathematical source binding. Runtime checks reject forged shortened lengths and source/root mismatches. | Complete the refinement through JSON, partition construction, hash maps, Python, SQLite, truncated witnesses and restart state. General UNSAT proof-size bounds are not supplied. |
+| 6. Arbitration | Final outcomes are logged at most once. Proposals have separate calls, outcomes and elapsed measurements, with at most 250 ms/10% reserved for all attempts before fallback. | Learn cost-sensitive gates among prediction, portfolio and solving; bound feature/model/replay overhead and failures. Budget reservation alone gives neither optimal routing nor a universal speedup. |
+| 7. Evidence | A frozen study uses previously unused mixed-label circuit instances, later application horizons, a deterministic polarity baseline, matched live/restarted proof modes, distinct width-four relations, semantic edits/deletions and source compilation. All failures are retained. | Broader representative workloads, more repetitions, current competing solvers, hard comparable total-resource limits and independent replication. |
+
+The semantic diagnostic now establishes one equality and rebinds 16 successor
+projections after replacing the first XOR by equality in a 16-edge chain. It
+performs two combination-row acquisitions while still updating all 17 evidence
+buckets. This is a reduction in value computation, not a constant-time complete
+update. Tests include adding a contradiction, deleting a necessary assumption,
+branching from the old version and restart.
+
+With 256 distinct width-four relations, initial registration needs 511 native
+nodes, replacement nine, and an unchanged query zero. At a cap exactly equal to
+the live set, nine obsolete native entries are evicted on replacement; the new
+root fits without replaying all 511. A smaller cap refuses the request, while the
+saved roots remain queryable after reopening with sufficient capacity.
+
+The full-tree witness and source-binding theorems concern explicit mathematical
+objects. Their presence does not certify every executable protocol branch. The
+current audit includes 2,090 declarations and 1,047 theorem declarations, with
+no admits or added axioms. The distinction between these proved components and
+the remaining implementation refinement is part of the result.

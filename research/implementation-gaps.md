@@ -137,3 +137,30 @@ zlib bytes, whichever is smaller. Existing schemas and old zlib objects remain
 readable. General incremental clause proof integration, lazy row acquisition,
 expanded cost proofs, the benchmark and manuscript reconciliation are the next
 parts of the same requested five-step implementation.
+
+
+## Five-step implementation: proof and lazy-acquisition milestone
+
+1. Local bucket elimination handles nonempty interfaces and preserves the old
+   order when it fits the width cap. Width failure uses checked complete solving.
+2. Persistent manifests and factor dependencies preserve every previous state.
+   Deltas parse supplied constraints; row and factor caches reuse unchanged
+   dependencies. Planning and final checks can still scan the active graph.
+3. Lazy rows are now operational, not just an encoding. Unknown rows cannot
+   refute a query. Native row recomputation checks acquired/replayed proposals.
+   `--incremental-proofs` additionally archives assumption-aware proof dependencies
+   and checks negative live traces using Lean LRAT. Supported UNSAT queries no
+   longer require a fresh CDCL solve. Unsupported/invalid traces use fallback.
+4. Complete relations share behavior independently of syntax/evidence. Exact
+   constant/bitmap/sparse/BDD encoding chooses the smallest serialized payload;
+   raw-or-zlib storage never expands individual new object payloads. Partial
+   rows, evidence and historical versions still consume additional archive space.
+5. `InterfaceCosts.lean` connects local evaluation and projection to explicit
+   operation bounds. All elapsed phases, acquisition/replay counters and storage
+   remain charged. A whole-machine/CDCL/SQLite cost theorem remains open.
+
+The complete Lean build audits 1,554 declarations / 837 theorem declarations.
+All 92 integration tests pass, including poisoned partial rows, forged proof
+hints, changed assumptions, restart replay and negative certificates checked
+without permitting a fresh standalone solve. Benchmarking and manuscript
+reconciliation complete this same five-step follow-up in the next commit.

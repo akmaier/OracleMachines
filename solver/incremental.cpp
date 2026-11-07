@@ -1,6 +1,7 @@
 // Persistent untrusted SAT proposal engine. Final decisions are checked by Lean.
 // Protocol: ADD <literals ending in 0>; SOLVE <root> <model vars ending in 0>.
 #include "cadical.hpp"
+#include "tracer.hpp"
 #include <chrono>
 #include <iostream>
 #include <sstream>
@@ -25,11 +26,30 @@ struct Learned : CaDiCaL::Learner {
   }
 };
 
-int main() {
+struct ProofTrace : CaDiCaL::Tracer {
+  struct Event { uint64_t id; bool original; std::vector<int> clause; std::vector<uint64_t> hints; };
+  std::vector<Event> events;
+  size_t literals = 0;
+  bool overflow = false;
+  void add(uint64_t id, bool original, const std::vector<int>& clause, const std::vector<uint64_t>& hints) {
+    if (overflow || events.size() >= 200000 || literals + clause.size() + hints.size() > 4000000) {
+      overflow = true; return;
+    }
+    events.push_back({id, original, clause, hints}); literals += clause.size() + hints.size();
+  }
+  void add_original_clause(uint64_t id, bool, const std::vector<int>& c, bool) override { add(id, true, c, {}); }
+  void add_derived_clause(uint64_t id, bool, const std::vector<int>& c, const std::vector<uint64_t>& hints) override { add(id, false, c, hints); }
+  void add_assumption_clause(uint64_t id, const std::vector<int>& c, const std::vector<uint64_t>& hints) override { add(id, false, c, hints); }
+};
+
+int main(int argc, char **argv) {
+  const bool proof_mode = argc == 2 && std::string(argv[1]) == "--proof";
+  ProofTrace trace;
   CaDiCaL::Solver solver;
   solver.set("quiet", 1);
   Learned learned;
   solver.connect_learner(&learned);
+  if (proof_mode) solver.connect_proof_tracer(&trace, true);
   unsigned long long queries = 0;
   int maximum = 0;
   std::string line;
@@ -70,6 +90,7 @@ int main() {
       const auto retained_before = solver.redundant();
       const auto start = std::chrono::steady_clock::now();
       const int answer = solver.solve();
+      if (proof_mode && answer == 20) solver.conclude();
       const auto nanos = std::chrono::duration_cast<std::chrono::nanoseconds>(
           std::chrono::steady_clock::now() - start).count();
       struct rusage usage;
@@ -101,8 +122,20 @@ int main() {
         }
         std::cout << ']';
       }
+      std::cout << "],\"proof_overflow\":" << (trace.overflow ? "true" : "false") << ",\"proof_events\":[";
+      for (size_t i = 0; i < trace.events.size(); ++i) {
+        if (i) std::cout << ',';
+        const auto &e = trace.events[i];
+        std::cout << "[" << e.id << ',' << (e.original ? "true" : "false") << ",[";
+        for (size_t j = 0; j < e.clause.size(); ++j) { if (j) std::cout << ','; std::cout << e.clause[j]; }
+        std::cout << "],[";
+        for (size_t j = 0; j < e.hints.size(); ++j) { if (j) std::cout << ','; std::cout << e.hints[j]; }
+        std::cout << "]]";
+      }
       std::cout << "]}" << std::endl;
+      trace.events.clear(); trace.literals = 0;
     } else return 2;
   }
   solver.disconnect_learner();
+  if (proof_mode) solver.disconnect_proof_tracer(&trace);
 }

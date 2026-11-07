@@ -127,7 +127,7 @@ class PersistenceTests(unittest.TestCase):
             old = s.db.execute("SELECT * FROM results WHERE engine='legacy'").fetchone()
             self.assertEqual(old["answer"], 0)
             self.assertIsNone(old["acquisition_parse_work"])
-            self.assertEqual(s.db.execute("PRAGMA user_version").fetchone()[0], 7)
+            self.assertEqual(s.db.execute("PRAGMA user_version").fetchone()[0], 8)
             self.assertEqual(s.revalidate(), {"previous_inputs": 1, "revalidated": 1, "already_current": 0})
             self.assertEqual(s.stats()["all_engine_entries"], 2)
             self.assertFalse(s.solve(UNSAT)["answer"])

@@ -330,11 +330,15 @@ Names identify constraints. Adding an existing name replaces it; removing a name
 requires it to exist. Each returned state is immutable and can be extended or
 revisited after restart. Persistent AVL manifests share unchanged map subtrees.
 Only supplied constraints are parsed again. Planning and final witness checking
-can still visit the active graph; these costs are charged. Delta requests that
-exceed the width budget currently return an error without a completed snapshot.
+can still visit the active graph; these costs are charged. Width failures reconstruct the active conjunction and use the checked fallback,
+including an indivisible constraint that exceeds the leaf-width cap. Deadline
+or reconstruction-size exhaustion returns an error without a completed snapshot.
 
 Relation payloads use separate known/value bitmaps: unknown never means false.
-Equal relations share one payload even when their evidence differs. Schema 7
+Rows are acquired on demand, with short-circuit evaluation and persistent checked
+row proposals. Replayed rows are recalculated by the native worker before use;
+unknown entries never support a refutation. Equal complete relations share one
+payload even when their evidence differs. Schema 8
 adds raw-or-zlib object encoding, selecting compression only when it is smaller;
 legacy zlib objects remain readable and all old records remain intact. Python's
 active node cache is capped; the archive is append-only. Native worker capacity
@@ -347,3 +351,37 @@ uses these operations in the native checked DAG service. JSON, DAG bookkeeping,
 Python, SQLite and native execution remain implementation boundaries. The
 resource record includes all seven phase categories; measured work and the
 complete compiled-machine instruction count remain distinct.
+
+
+`InterfaceCosts.lean` proves a local evaluator bound of s*(w+2) for s syntax
+nodes and w scope variables, at most 2^w rows per complete table, and a charged
+short-circuit conjunction/projection bound. The executable records acquired
+rows, native row checks/rechecks, DAG hits, ordering work, and all elapsed phases.
+These local reference bounds leave graph planning, representation conversion,
+verification, persistence and restart in explicit additional costs.
+
+## Checked incremental negative proofs
+
+`--incremental-proofs` enables the proof-carrying alternative to `--incremental`.
+The native Lean compiler maintains a shared AIG and stable variable identities.
+Only its definitional clauses are permanent; a query root is an assumption.
+CaDiCaL's tracer exports original/derived clause IDs and antecedents. The adapter
+archives backward proof dependencies and reconstructs an LRAT certificate for
+each negative query. The Lean checker rebuilds the graph and checks the entire
+reachable proof against the current root. SAT witnesses still pass the original
+formula evaluator. A rejected or unavailable incremental certificate falls back
+to independent checked solving; it never establishes UNSAT.
+
+The `incremental_lrat` certificate is portable across service restart and bound
+to the original formula. `IncrementalProof.lean` proves that every original input
+valuation extends to the permanent graph definitions, and proves the resulting
+LRAT check sound for any previous graph. Temporary root assumptions cannot leak
+into the permanent checker base. Replayed learned clauses remain proposals until
+the proof that uses them is checked. The existing untrusted clause adapter and
+its archives remain supported by `--incremental`.
+
+Proof histories are bounded to 512 queries and 100,000 derivation steps per
+active branch; replay prefers at most 20,000 short clauses. Prior branches remain
+archived. Native graph preparation and negative checking can traverse the whole
+retained graph/proof. This closes the fresh-solve requirement for supported
+traces, not the cost of incremental proof checking or arbitrary proof events.

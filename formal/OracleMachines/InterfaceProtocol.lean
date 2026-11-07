@@ -12,6 +12,8 @@ structure CheckedFactor where
   source : Option Formula
   parents : List String
   signature : String
+  lazy : Bool := false
+  eliminated : Nat := 0
 
 abbrev FactorStore := Std.HashMap String CheckedFactor
 
@@ -47,11 +49,12 @@ def factorDefine (parse : String → Except String Formula) (bitsOut : Word → 
     (db : FactorStore) (request : Json) : Except String (FactorStore × Json) := do
   let name ← request.getObjValAs? String "id"
   let body ← request.getObjVal? "definition"
-  let signature := body.compress
+  let lazy := (request.getObjValAs? Bool "lazy").toOption.getD false
+  let signature := body.compress ++ toString lazy
   if let some old := db[name]? then
     if old.signature != signature then throw "Factor identity reused with a different definition"
-    return (db, Json.mkObj [("cached", toJson true), ("scope", toJson old.factor.scope),
-      ("rows", toJson (bitsOut (factorRows old.factor)))])
+    return (db, Json.mkObj [("lazy", toJson old.lazy), ("cached", toJson true), ("scope", toJson old.factor.scope),
+      ("rows", toJson (if old.lazy then "" else bitsOut (factorRows old.factor)))])
   if db.size ≥ 16384 then throw "Checked factor worker capacity exceeded"
   let kind ← body.getObjValAs? String "kind"
   let (factor, source, parents) ← if kind == "leaf" then do
@@ -59,7 +62,7 @@ def factorDefine (parse : String → Except String Formula) (bitsOut : Word → 
       let scope ← body.getObjValAs? (List Nat) "scope"
       if scope.length > 12 || scope.eraseDups != scope then throw "Invalid factor scope"
       if !(occurs f).all (scope.contains ·) then throw "Factor scope omits a variable"
-      pure (formulaFactor f scope, some f, [])
+      pure (if lazy then ⟨scope, []⟩ else formulaFactor f scope, some f, [])
     else if kind == "project" then do
       let parents ← body.getObjValAs? (List String) "parents"
       if parents.isEmpty || parents.length > 4096 then throw "Invalid factor parents"
@@ -67,11 +70,12 @@ def factorDefine (parse : String → Except String Formula) (bitsOut : Word → 
       let inputs ← loadFactors db parents
       let scope := projectScope inputs x
       if scope.length > 11 then throw "Factor interface exceeds width limit"
-      pure (projectFactor inputs x, none, parents)
+      if !lazy && parents.any (fun p => (db[p]?).any (·.lazy)) then throw "Lazy parents require row checking"
+      pure (if lazy then ⟨scope, []⟩ else projectFactor inputs x, none, parents)
     else throw "Unknown factor definition"
-  let node : CheckedFactor := ⟨factor, source, parents, signature⟩
-  return (db.insert name node, Json.mkObj [("cached", toJson false),
-    ("scope", toJson factor.scope), ("rows", toJson (bitsOut (factorRows factor)))])
+  let node : CheckedFactor := ⟨factor, source, parents, signature, lazy, (body.getObjValAs? Nat "variable").toOption.getD 0⟩
+  return (db.insert name node, Json.mkObj [("lazy", toJson lazy), ("cached", toJson false),
+    ("scope", toJson factor.scope), ("rows", toJson (if lazy then "" else bitsOut (factorRows factor)))])
 
 /-- Reachable source leaves. Backward-only construction prevents cycles; visited
 nodes are shared and visited once even when the proof graph reconverges. -/
@@ -99,7 +103,7 @@ def factorLeaves (db : FactorStore) (root : String) : Except String (List String
 
 def factorNegative (db : FactorStore) (root : String) (active : List String) : Except String Bool := do
   let some node := db[root]? | throw "Unknown factor root"
-  if !node.factor.allowed.isEmpty then return false
+  if node.lazy || !node.factor.allowed.isEmpty then return false
   let leaves ← factorLeaves db root
   return leaves.all (active.contains ·)
 
@@ -173,5 +177,82 @@ def factorQueryBound (db : FactorStore) (bindings : FactorBindings)
       let root ← request.getObjValAs? String "root"
       factorNegative db root active
   return Json.mkObj [("valid", toJson valid), ("checked_factors", toJson db.size)]
+
+/-- A missing row is unknown. This cache contains only values calculated from
+validated definitions, never values supplied by the planner. -/
+abbrev FactorRowStore := Std.HashMap (String × Word) Bool
+
+def factorRow : Nat → FactorStore → FactorRowStore → String → Word →
+    Except String (FactorRowStore × Bool × Nat)
+  | 0, _, _, _, _ => .error "Factor row dependency depth exhausted"
+  | fuel + 1, db, memo, name, bits => do
+    let some node := db[name]? | throw "Unknown row factor"
+    if bits.length != node.factor.scope.length then throw "Wrong row width"
+    if let some value := memo[(name, bits)]? then return (memo, value, 0)
+    if memo.size ≥ 1048576 then throw "Native row cache capacity exceeded"
+    let mut cache := memo
+    let mut work := 1
+    let v := scopeVal node.factor.scope bits
+    let value ← if let some f := node.source then pure (f.eval v)
+      else do
+        let x := node.eliminated
+        let mut possible := false
+        for b in [false, true] do
+          if !possible then
+            let mut branch := true
+            for parent in node.parents do
+              if branch then
+                let some input := db[parent]? | throw "Missing row parent"
+                let row := observe input.factor.scope (Function.update v x b)
+                let (next, result, used) ← factorRow fuel db cache parent row
+                cache := next
+                work := work + used
+                branch := result
+            possible := possible || branch
+        pure possible
+    return (cache.insert (name, bits) value, value, work)
+
+def factorRowRequest (db : FactorStore) (memo : FactorRowStore)
+    (parseBits : String → Except String Word) (request : Json) :
+    Except String (FactorRowStore × Json) := do
+  let name ← request.getObjValAs? String "id"
+  let row ← request.getObjValAs? String "row" >>= parseBits
+  let (cache, answer, work) ← factorRow (db.size + 1) db memo name row
+  return (cache, Json.mkObj [("value", toJson answer), ("acquired_rows", toJson work)])
+
+def factorNegativeLazy (db : FactorStore) (memo : FactorRowStore)
+    (root : String) (active : List String) : Except String (FactorRowStore × Bool) := do
+  let some node := db[root]? | throw "Unknown negative root"
+  let leaves ← factorLeaves db root
+  if !leaves.all (active.contains ·) then return (memo, false)
+  let mut cache := memo
+  for row in words node.factor.scope.length do
+    let (next, possible, _) ← factorRow (db.size + 1) db cache root row
+    cache := next
+    if possible then return (cache, false)
+  return (cache, true)
+
+def factorQueryLazy (db : FactorStore) (bindings : FactorBindings) (memo : FactorRowStore)
+    (parseBits : String → Except String Word) (request : Json) :
+    Except String (FactorRowStore × Json) := do
+  let mut active := []
+  if (request.getObjValAs? String "mode").toOption == some "factor_query_bound" then
+    let constraints ← request.getObjValAs? (List String) "constraints"
+    if constraints.length > 16384 then throw "Too many active constraints"
+    for name in constraints do
+      let some binding := bindings[name]? | throw "Unknown original constraint binding"
+      active := binding.2 ++ active
+  else active ← request.getObjValAs? (List String) "active"
+  for name in active do
+    let some node := db[name]? | throw "Unknown active leaf"
+    if node.source.isNone then throw "Active factor is not an original constraint"
+  let answer ← request.getObjValAs? Bool "answer"
+  let (cache, valid) ← if answer then do
+      let witness ← request.getObjValAs? String "witness" >>= parseBits
+      pure (memo, ← factorPositive db active witness)
+    else do
+      let root ← request.getObjValAs? String "root"
+      factorNegativeLazy db memo root active
+  return (cache, Json.mkObj [("valid", toJson valid), ("checked_factors", toJson db.size)])
 
 end OracleMachines.SAT

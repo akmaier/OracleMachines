@@ -27,6 +27,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from solver.resources import BudgetExceeded, Deadline, Ledger, exchange, stop_process, bounded_run
 from solver.incremental import DEFAULT_INCREMENTAL, Incremental
+from solver.incremental_proof import ProofIncremental
 from solver.learning import Predictor, features
 from solver.knowledge_store import KnowledgeStore
 from solver.components import ComponentSolver
@@ -75,7 +76,7 @@ class PersistentSolver:
     def __init__(self, cache: Path = DEFAULT_CACHE, engine: Path = DEFAULT_ENGINE, *,
                  backend: str = "auto", cadical: Path | None = None, timeout: float = 30,
                  query_timeout: float = 30, verify_cache: bool = False,
-                 incremental: bool = False, learned: bool = False, reuse_exact: bool = True,
+                 incremental: bool = False, incremental_proofs: bool = False, learned: bool = False, reuse_exact: bool = True,
                  components: bool = False, interfaces: bool = False, max_interface: int = 3,
                  max_input_bytes: int = 8 * 1024**2, max_message_bytes: int = 64 * 1024**2,
                  max_proof_bytes: int = 16 * 1024**2):
@@ -96,9 +97,9 @@ class PersistentSolver:
         self.last_metrics = {}
         self.use_learning = learned
         self.reuse_exact = reuse_exact
-        if incremental and not DEFAULT_INCREMENTAL.is_file():
+        if (incremental or incremental_proofs) and not DEFAULT_INCREMENTAL.is_file():
             raise FileNotFoundError("Build the incremental bridge with solver/build_incremental.sh first")
-        self.incremental = Incremental(max_bytes=max_message_bytes) if incremental else None
+        self.incremental = ProofIncremental(self,max_bytes=max_message_bytes) if incremental_proofs else Incremental(max_bytes=max_message_bytes) if incremental else None
         self.cadical = Path(cadical).resolve() if cadical is not None else find_cadical()
         if backend == "cadical" and (self.cadical is None or not self.cadical.is_file()):
             raise FileNotFoundError("CaDiCaL is unavailable; run solver/build.sh or set ORACLE_CADICAL")
@@ -115,7 +116,7 @@ class PersistentSolver:
                 # Serialize migrations as well as ordinary writes.
                 self.db.execute("BEGIN IMMEDIATE")
                 version = self.db.execute("PRAGMA user_version").fetchone()[0]
-                if version not in (0, 1, 2, 3, 4, 5, 6, 7):
+                if version not in (0, 1, 2, 3, 4, 5, 6, 7, 8):
                     raise ValueError(f"Unsupported cache schema {version}; records left unchanged")
                 self.db.execute("""CREATE TABLE IF NOT EXISTS results (
                     engine TEXT NOT NULL, bits TEXT NOT NULL, answer INTEGER NOT NULL,
@@ -152,7 +153,7 @@ class PersistentSolver:
                             ON p.engine=r.engine AND p.bits=r.bits WHERE r.answer=0""").fetchall():
                         self._index_candidate(row["engine"], "proof", row["bits"], row["certificate"], row["created_ns"])
                 KnowledgeStore.create(self.db)
-                self.db.execute("PRAGMA user_version=7")
+                self.db.execute("PRAGMA user_version=8")
         except Exception:
             self.db.close()
             raise
@@ -161,7 +162,7 @@ class PersistentSolver:
         self.components = ComponentSolver(self.db, self.engine_id) if components else None
         if self.incremental:
             bridge = hashlib.sha256(DEFAULT_INCREMENTAL.read_bytes()).hexdigest()
-            self.incremental.store = KnowledgeStore(self.db, self.engine_id + ":" + bridge + ":dag-v1")
+            self.incremental.store = KnowledgeStore(self.db, self.engine_id + ":" + bridge + (":proof-dag-v1" if incremental_proofs else ":dag-v1"))
         self.setup_ns = time.perf_counter_ns() - start
 
     def __enter__(self):
@@ -334,7 +335,7 @@ class PersistentSolver:
         if self.incremental is not None and allow_incremental:
             with self._phase("incremental_solver"):
                 proposal = self.incremental.propose(bits, self._deadline or Deadline(self.query_timeout))
-            incremental_metrics = {k: v for k, v in proposal.items() if k not in ("witness", "values")}
+            incremental_metrics = {k: v for k, v in proposal.items() if k not in ("witness", "values", "certificate", "proof_events")}
             if proposal["verdict"] == 10:
                 checked = self._request({"bits": bits, "mode": "verify_witness", "witness": proposal["witness"]})
                 if not checked["valid"]:
@@ -344,6 +345,17 @@ class PersistentSolver:
                             reuse_kind="none", backend="incremental", nodes=None, core_work=None,
                             parse_work=r["parse_work"] + checked["parse_work"], counted_work=None,
                             counted_complete=False, incremental=incremental_metrics)
+            if proposal["verdict"] == 20 and proposal.get("certificate"):
+                certificate=proposal["certificate"]
+                if len(json.dumps(certificate).encode())<=self.max_proof_bytes:
+                    with self._phase("incremental_proof_verification"):
+                        checked=self._request(dict(bits=bits,mode="verify_certificate",certificate=certificate))
+                    incremental_metrics["proof_accepted"]=checked["valid"]
+                    if checked["valid"]:
+                        return dict(answer=False,witness=None,certificate=certificate,fast=False,
+                            reuse_kind="none",backend="incremental_lrat",nodes=None,core_work=None,
+                            parse_work=r["parse_work"]+checked["parse_work"],counted_work=None,
+                            counted_complete=False,incremental=incremental_metrics)
             # Negative or inconclusive proposals do not decide UNSAT. A fresh,
             # independently checked proof is required on the original formula.
         if self.cadical is None:
@@ -559,7 +571,7 @@ class PersistentSolver:
         try:
             self._database_budget()
             self.db.set_progress_handler(lambda: int(time.monotonic() >= self._deadline.end), 1000)
-            result = self.interfaces.expand(base, add or {}, remove or [])
+            result = self.interfaces.expand(base, {} if add is None else add, [] if remove is None else remove)
             self.last_metrics = self._ledger.finish()
             result.update(self.last_metrics)
             return result
@@ -627,6 +639,7 @@ def main() -> int:
     parser.add_argument("--query-timeout", type=float, default=30)
     parser.add_argument("--verify-cache", action="store_true", help="Recheck stored certificates before accepting exact hits")
     parser.add_argument("--max-proof-bytes", type=int, default=16 * 1024**2)
+    parser.add_argument("--incremental-proofs", action="store_true", help="Use persistent circuit definitions and independently checked incremental LRAT traces")
     parser.add_argument("--incremental", action="store_true", help="Use the persistent CDCL proposal engine")
     parser.add_argument("--learned", action="store_true", help="Learn a bounded shared witness predictor")
     parser.add_argument("--components", action="store_true", help="Reuse renamed disjoint components and checked conjunct refutations")
@@ -645,7 +658,7 @@ def main() -> int:
         with PersistentSolver(args.cache, args.engine, backend=args.backend, cadical=args.cadical,
                               timeout=args.timeout, query_timeout=args.query_timeout,
                               verify_cache=args.verify_cache, max_proof_bytes=args.max_proof_bytes,
-                              incremental=args.incremental, learned=args.learned, components=args.components, interfaces=args.interfaces, max_interface=args.max_interface) as solver:
+                              incremental=args.incremental, incremental_proofs=args.incremental_proofs, learned=args.learned, components=args.components, interfaces=args.interfaces, max_interface=args.max_interface) as solver:
             if args.command == "serve":
                 for line in sys.stdin:
                     try:

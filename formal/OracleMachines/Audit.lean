@@ -1,3 +1,5 @@
+import OracleMachines.InterfaceCosts
+import OracleMachines.IncrementalProof
 import OracleMachines.Invariant
 import OracleMachines.Limits
 import OracleMachines.Reuse

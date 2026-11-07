@@ -24,6 +24,44 @@ class InterfaceTests(unittest.TestCase):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
         self.path=Path(self.temp.name)/'results.sqlite3'
 
+    def test_lazy_rows_remain_unknown_and_are_persistent(self):
+        bits=disj(var(0),disj(var(1),var(2)))
+        with PersistentSolver(self.path,interfaces=True) as s:
+            result=s.expand(add={'clause':bits})
+            self.assertTrue(result['answer'])
+            self.assertGreater(result['interfaces']['unknown_rows'],0)
+            self.assertLess(result['interfaces']['leaf_rows'],8)
+            count=s.db.execute('SELECT count(*) FROM interface_rows').fetchone()[0]
+            self.assertGreater(count,0)
+        with PersistentSolver(self.path,interfaces=True) as s:
+            repeated=s.expand(result['state'])
+            self.assertTrue(repeated['answer'])
+            self.assertEqual(repeated['interfaces']['leaf_rows'],0)
+            self.assertGreater(repeated['interfaces']['native_replays'],0)
+            self.assertGreater(repeated['interfaces']['native_row_acquisitions'],0)
+
+    def test_poisoned_partial_row_is_rechecked_after_restart(self):
+        with PersistentSolver(self.path,interfaces=True) as s:
+            result=s.expand(add={'clause':disj(var(0),var(1))})
+            with s.db:s.db.execute('UPDATE interface_rows SET answer=1-answer')
+        with PersistentSolver(self.path,interfaces=True) as s:
+            with self.assertRaises(ValueError):s.expand(result['state'])
+            self.assertEqual(s.db.execute('SELECT count(*) FROM expansion_states').fetchone()[0],1)
+
+    def test_delta_broad_leaf_falls_back_and_can_be_removed(self):
+        with PersistentSolver(self.path,interfaces=True,max_interface=1) as s:
+            broad=disj(var(0),disj(var(1),var(2)))
+            a=s.expand(add={'large':broad})
+            self.assertTrue(a['answer']);self.assertIsNotNone(a['fallback_reason'])
+            b=s.expand(a['state'],remove=['large'])
+            self.assertTrue(b['answer']);self.assertIsNone(b['fallback_reason'])
+            self.assertTrue(s.expand(a['state'])['answer'])
+
+    def test_invalid_empty_delta_types_are_not_silently_coerced(self):
+        with PersistentSolver(self.path,interfaces=True) as s:
+            with self.assertRaises(ValueError):s.expand(add=[])
+            with self.assertRaises(ValueError):s.expand(remove={})
+
     def test_invalid_delta_encoding_cannot_be_normalized_into_a_valid_formula(self):
         with PersistentSolver(self.path,interfaces=True) as s:
             with self.assertRaises(ValueError):s.expand(add={'bad':'01x0'})

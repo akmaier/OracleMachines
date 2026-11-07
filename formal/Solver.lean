@@ -2,6 +2,7 @@ import OracleMachines.Cache
 import OracleMachines.Parsing
 import OracleMachines.BoundedSearch
 import OracleMachines.CompactExpansion
+import OracleMachines.IncrementalProof
 import OracleMachines.InterfaceProtocol
 import Std.Sat.CNF.Dimacs
 import Std.Tactic.BVDecide.LRAT.Parser
@@ -59,7 +60,9 @@ def factorCertificateValid (f : Formula) (certificate : Json) : Except String Bo
   if definitions.size > 16384 then throw "Factor certificate too large"
   let mut state : FactorStore := {}
   for definition in definitions do
-    let result ← factorDefine parseFormulaBits showBits state definition
+    let lazyDefinition := Json.mkObj [("id", ← definition.getObjVal? "id"),
+      ("definition", ← definition.getObjVal? "definition"), ("lazy", toJson true)]
+    let result ← factorDefine parseFormulaBits showBits state lazyDefinition
     state := result.1
   let root ← certificate.getObjValAs? String "root"
   let leaves ← factorLeaves state root
@@ -67,9 +70,32 @@ def factorCertificateValid (f : Formula) (certificate : Json) : Except String Bo
     let some node := state[name]? | throw "Missing certificate leaf"
     let some leaf := node.source | throw "Expected original leaf"
     if !formulaIsConjunct f leaf then return false
-  factorNegative state root leaves
+  return (← factorNegativeLazy state {} root leaves).2
+
+def incrementalCertificateValid (f : Formula) (certificate : Json) : Except String Bool := do
+  let history ← certificate.getObjValAs? (Array String) "history"
+  if history.size > 512 then throw "Incremental certificate history too large"
+  let mut graph : Std.Sat.AIG Nat := Std.Sat.AIG.empty
+  for bits in history do
+    let previous ← parseFormulaBits bits
+    graph := (compileCircuit previous graph).entry.aig
+    if graph.decls.size > 200000 then throw "Incremental certificate graph too large"
+  let text ← certificate.getObjValAs? String "text"
+  let proof ← Std.Tactic.BVDecide.LRAT.parseLRATProof text.toUTF8
+  return checkIncrementalLRAT f graph proof
+
+def incrementalPrepare (graph : Std.Sat.AIG Nat) (request : Json) :
+    Except String (Std.Sat.AIG Nat × Json) := do
+  let f ← request.getObjValAs? String "bits" >>= parseFormulaBits
+  let entry := (compileCircuit f graph).entry
+  if entry.aig.decls.size > 200000 then throw "Incremental graph capacity exceeded"
+  let cnf := incrementalCNF entry
+  return (entry.aig, Json.mkObj [("dimacs", toJson cnf.dimacs),
+    ("width", toJson f.width), ("nodes", toJson entry.aig.decls.size)])
 
 def certificateValid (f : Formula) (certificate : Json) : Except String Bool := do
+  if (certificate.getObjValAs? String "format").toOption == some "incremental_lrat" then
+    return ← incrementalCertificateValid f certificate
   if (certificate.getObjValAs? String "format").toOption == some "factor_dag" then
     return ← factorCertificateValid f certificate
   if (certificate.getObjValAs? String "format").toOption != some "component" then
@@ -191,6 +217,8 @@ def main : IO Unit := do
   let stdout ← IO.getStdout
   let mut factors : FactorStore := {}
   let mut bindings : FactorBindings := {}
+  let mut rows : FactorRowStore := {}
+  let mut graph : Std.Sat.AIG Nat := Std.Sat.AIG.empty
   repeat
     let line ← stdin.getLine
     if line.isEmpty then break
@@ -199,7 +227,13 @@ def main : IO Unit := do
       | .error e => pure (.error e)
       | .ok request =>
         let mode := (request.getObjValAs? String "mode").toOption.getD ""
-        if mode == "factor_define" then
+        if mode == "incremental_prepare" then
+          match incrementalPrepare graph request with
+          | .error e => pure (.error e)
+          | .ok (state, response) => graph := state; pure (.ok response)
+        else if mode == "incremental_reset" then
+          graph := Std.Sat.AIG.empty; pure (.ok (Json.mkObj [("valid", toJson true)]))
+        else if mode == "factor_define" then
           match factorDefine parseFormulaBits showBits factors request with
           | .error e => pure (.error e)
           | .ok (state, response) => factors := state; pure (.ok response)
@@ -207,10 +241,16 @@ def main : IO Unit := do
           match factorBind parseFormulaBits factors bindings request with
           | .error e => pure (.error e)
           | .ok (state, response) => bindings := state; pure (.ok response)
-        else if mode == "factor_query_bound" then pure (factorQueryBound factors bindings parseBits request)
-        else if mode == "factor_query" then pure (factorQuery factors parseBits request)
+        else if mode == "factor_row" then
+          match factorRowRequest factors rows parseBits request with
+          | .error e => pure (.error e)
+          | .ok (state, response) => rows := state; pure (.ok response)
+        else if mode == "factor_query_bound" || mode == "factor_query" then
+          match factorQueryLazy factors bindings rows parseBits request with
+          | .error e => pure (.error e)
+          | .ok (state, response) => rows := state; pure (.ok response)
         else if mode == "factor_reset" then
-          factors := {}; bindings := {}; pure (.ok (Json.mkObj [("valid", toJson true)]))
+          factors := {}; bindings := {}; rows := {}; pure (.ok (Json.mkObj [("valid", toJson true)]))
         else pure (respond request)
     let response := match result with
       | .ok value => value

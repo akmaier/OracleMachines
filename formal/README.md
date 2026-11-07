@@ -324,3 +324,25 @@ unbounded total private variables without a general-SAT consequence.
 The complete build now audits 1,264 declarations, including 694 theorem
 declarations. All earlier modules remain included. The runtime component policy
 currently implements the empty-interface case, with independent final checks.
+
+
+## Local elimination, lazy rows, and incremental LRAT
+
+- `Interfaces.lean`: exact bucket elimination (`eliminate_sat_iff`), leaf and
+  projection semantics, unaffected-factor invariance and semantic replacement.
+- `InterfaceProtocol.lean`: native definitions, memoized row calculation,
+  original-constraint bindings and negative dependency-context checks. JSON/state
+  bookkeeping is executable Lean, not an end-to-end kernel theorem.
+- `InterfaceCosts.lean`: counted local evaluation, complete-table acquisition,
+  short-circuit projection, and sound lower/upper interpretations of unknown rows.
+- `IncrementalProof.lean`: a shared-graph definitional CNF with stable variables;
+  `incrementalCNF_unsat` and `checkIncrementalLRAT_sound` connect a checked proof
+  to the original formula for any previous AIG. Its state invariants come from
+  the pinned Lean standard library; the local traversal adaptation is covered
+  by [the third-party notice](THIRD_PARTY_NOTICES.md).
+
+The Python planner, persisted proof hints and external solver remain untrusted
+proposals. Formal local-operation bounds are separate from the elapsed ledger;
+no complete CDCL, database, serializer or native machine instruction theorem is
+claimed. The new interface path and optional `--incremental-proofs` extend the
+historical milestone descriptions above.

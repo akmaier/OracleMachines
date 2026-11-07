@@ -26,7 +26,8 @@ def counters():
     return dict(input_bytes=0,parsed_nodes=0,leaf_rows=0,combination_rows=0,table_probes=0,
         node_hits=0,node_acquisitions=0,native_definitions=0,native_replays=0,native_rows=0,
         ordering_candidates=0,ordering_edges=0,max_bag=0,manifest_reads=0,manifest_writes=0,
-        semantic_duplicates=0,relation_payload_bytes=0,archive_new_objects=0)
+        semantic_duplicates=0,relation_payload_bytes=0,archive_new_objects=0,row_hits=0,native_row_acquisitions=0,native_row_checks=0,
+        planned_rows=0,unknown_rows=0,active_cache_nodes=0)
 
 
 def evaluate(nodes,assignment):
@@ -53,6 +54,7 @@ class InterfaceSolver:
         self.verified=set()
         self.worker=None
         self.bound=set()
+        self.verified_rows=set()
         self.metrics=counters()
         self.deadline=None
 
@@ -71,12 +73,16 @@ class InterfaceSolver:
         if identity(node['definition'])!=name:raise ValueError('Interface evidence identity mismatch')
         relation=self.store.get(row['relation'],'interface_relation')
         node.update(id=name,relation=row['relation'],rows=unpack(relation,len(node['scope'])))
+        node['choice_values']=unpack(node['choices'],len(node['scope'])) if node['choices'] is not None else [None]*len(node['rows'])
+        for row in self.db.execute('SELECT row_index,answer,choice FROM interface_rows WHERE engine=? AND id=?',(self.engine,name)):
+            if not 0<=row[0]<len(node['rows']):raise ValueError('Invalid stored row index')
+            node['rows'][row[0]]=bool(row[1]);node['choice_values'][row[0]]=None if row[2] is None else bool(row[2])
         return self.remember(name,node)
 
     def ensure(self,name):
         """Replay checked DAG nodes once per native worker; cap active state."""
         if self.worker is not self.service.process or self.worker is None or self.worker.poll() is not None:
-            self.verified.clear();self.bound.clear();self.worker=self.service.process
+            self.verified.clear();self.bound.clear();self.verified_rows.clear();self.worker=self.service.process
         stack=[(name,False)]
         while stack:
             self.deadline.check()
@@ -90,18 +96,81 @@ class InterfaceSolver:
                 stack.extend((p,False) for p in reversed(parents) if p not in self.verified)
                 continue
             with self.service._phase('interface_verification'):
-                result=self.service._request(dict(mode='factor_define',id=token,definition=node['definition']))
+                result=self.service._request(dict(mode='factor_define',id=token,definition=node['definition'],lazy=True))
             self.worker=self.service.process
-            native_scope=result['scope'];rows=result['rows']
-            if set(native_scope)!=set(node['scope']) or len(rows)!=1<<len(native_scope):
-                raise ValueError('Checked factor has different scope')
-            for bits,answer in zip(assignments(len(native_scope)),rows):
-                expected=node['rows'][row_index(node['scope'],dict(zip(native_scope,bits)))]
-                if expected is None or expected!=(answer=='1'):
-                    raise ValueError('Saved interface relation rejected')
+            native_scope=result['scope']
+            if set(native_scope)!=set(node['scope']):raise ValueError('Checked factor has different scope')
+            node['native_scope']=native_scope
             self.verified.add(token)
             self.metrics['native_definitions']+=1
-            self.metrics['native_rows']+=len(rows)
+            if token not in self.new_nodes:self.metrics['native_replays']+=1
+
+    def check_row(self,node,index,answer):
+        self.ensure(node['id'])
+        key=(node['id'],index)
+        if key in self.verified_rows:return
+        # Native scope order need not equal the planner's sorted order.
+        scope=node.get('native_scope')
+        if scope is None:
+            result=self.service._request(dict(mode='factor_define',id=node['id'],definition=node['definition'],lazy=True))
+            scope=result['scope'];node['native_scope']=scope
+        assignment={v:bool(index & (1<<(len(node['scope'])-j-1))) for j,v in enumerate(node['scope'])}
+        word=''.join('1' if assignment[v] else '0' for v in scope)
+        with self.service._phase('interface_verification'):
+            result=self.service._request(dict(mode='factor_row',id=node['id'],row=word))
+        if result['value'] is not answer:raise ValueError('Saved or proposed interface row rejected')
+        self.metrics['native_row_acquisitions']+=result['acquired_rows']
+        self.metrics['native_row_checks']+=1
+        self.verified_rows.add(key)
+
+    def acquire(self,node,index,depth=0):
+        with self.service._phase('interface_combination'):
+            return self._acquire(node,index,depth)
+
+    def _acquire(self,node,index,depth=0):
+        self.deadline.check()
+        if depth>256:raise BudgetExceeded('Lazy dependency depth exceeds active cap')
+        known=node['rows'][index]
+        if known is not None:
+            self.check_row(node,index,known)
+            self.metrics['row_hits']+=1
+            return known
+        definition=node['definition']
+        assignment={v:bool(index & (1<<(len(node['scope'])-j-1))) for j,v in enumerate(node['scope'])}
+        choice=None
+        if definition['kind']=='leaf':
+            with self.service._phase('interface_acquisition'):
+                nodes=node.get('program')
+                if nodes is None:
+                    nodes,_=parse_postfix(definition['bits'],self.deadline)
+                    node['program']=nodes;self.metrics['parsed_nodes']+=len(nodes)
+                value=evaluate(nodes,assignment)
+                self.metrics['leaf_rows']+=1
+        else:
+            value=False
+            for b in (False,True):
+                assignment[definition['variable']]=b
+                possible=True
+                for name in definition['parents']:
+                    parent=self.read(name)
+                    self.metrics['table_probes']+=1
+                    if not self.acquire(parent,row_index(parent['scope'],assignment),depth+1):
+                        possible=False;break
+                if possible:value=True;choice=b;break
+            self.metrics['combination_rows']+=1
+        self.check_row(node,index,value)
+        node['rows'][index]=value;node['choice_values'][index]=choice
+        with self.service._phase('interface_storage'),self.db:
+            self.db.execute('INSERT OR IGNORE INTO interface_rows VALUES (?,?,?,?,?)',
+                (self.engine,node['id'],index,int(value),None if choice is None else int(choice)))
+            if all(v is not None for v in node['rows']):
+                relation,raw,_=self.store.put('interface_relation',pack(node['rows']))
+                evidence=dict(definition=definition,scope=node['scope'],choices=pack(node['choice_values']))
+                evidence_id=self.store.put('interface_evidence',evidence)[0]
+                self.db.execute('UPDATE interface_nodes SET relation=?,evidence=? WHERE engine=? AND id=?',
+                    (relation,evidence_id,self.engine,node['id']))
+                node['relation']=relation;self.metrics['relation_payload_bytes']+=raw
+        return value
 
     def save(self,definition,scope,rows,choices=None):
         name=identity(definition)
@@ -111,7 +180,9 @@ class InterfaceSolver:
             rel,raw,_=self.store.put('interface_relation',relation)
             evidence=self.store.put('interface_evidence',node)[0]
             self.db.execute('INSERT OR IGNORE INTO interface_nodes VALUES (?,?,?,?)',(self.engine,name,evidence,rel))
-        node.update(id=name,rows=rows,relation=rel)
+        node.update(id=name,rows=rows,relation=rel,choice_values=choices if choices is not None else [None]*len(rows))
+        self.new_nodes.add(name)
+        self.metrics['planned_rows']+=len(rows)
         self.remember(name,node)
         # Results in this table are proposals until native checking succeeds.
         self.ensure(name)
@@ -128,13 +199,9 @@ class InterfaceSolver:
         found=self.read(identity(definition))
         if found is not None:
             self.metrics['node_hits']+=1;return found
-        rows=[]
-        with self.service._phase('interface_acquisition'):
-            for word in assignments(len(scope)):
-                self.deadline.check()
-                rows.append(evaluate(nodes,dict(zip(scope,word))))
-                self.metrics['leaf_rows']+=1
-        return self.save(definition,scope,rows)
+        result=self.save(definition,scope,[None]*(1<<len(scope)))
+        result['program']=nodes
+        return result
 
     def constraint(self,bits):
         if not isinstance(bits,str) or any(c not in '01' for c in bits):
@@ -144,15 +211,20 @@ class InterfaceSolver:
         with self.service._phase('interface_analysis'):
             groups,_,_=analyze(bits,self.deadline)
         leaves=[]
-        for group in groups:
-            for term in group['global_parts']:leaves.append(self.leaf(term)['id'])
+        reason=None
+        try:
+            for group in groups:
+                for term in group['global_parts']:leaves.append(self.leaf(term)['id'])
+        except BudgetExceeded as error:
+            self.deadline.check();reason=str(error);leaves=[]
         with self.db:
-            token=self.store.put('expansion_constraint',dict(bits=bits,leaves=leaves))[0]
-        self.bind_constraint(token)
+            token=self.store.put('expansion_constraint',dict(bits=bits,leaves=leaves,fallback=reason))[0]
+        if reason is None:self.bind_constraint(token)
         return token,leaves
 
     def bind_constraint(self,token):
         record=self.store.get(token,'expansion_constraint')
+        if record.get('fallback'):raise BudgetExceeded(record['fallback'])
         for name in record['leaves']:self.ensure(name)
         if token not in self.bound:
             with self.service._phase('interface_verification'):
@@ -169,7 +241,7 @@ class InterfaceSolver:
         while True:
             self.deadline.check()
             for q in factors.values():
-                if all(v is False for v in q['rows']):return False,None,q['id'],order
+                if not q['scope'] and not self.acquire(q,0):return False,None,q['id'],order
             variables=set(v for q in factors.values() for v in q['scope'])
             if not variables:break
             adjacency={v:set() for v in variables}
@@ -192,7 +264,7 @@ class InterfaceSolver:
             # representative, but retain all acquired witnesses in the step DAG.
             unique={}
             for q in bucket:
-                behavior=(tuple(q['scope']),q['relation'])
+                behavior=(tuple(q['scope']),q['relation']) if all(v is not None for v in q['rows']) else ('unknown',q['id'])
                 if behavior in unique:self.metrics['semantic_duplicates']+=1
                 else:unique[behavior]=q
             inputs=sorted(unique.values(),key=lambda q:q['id'])
@@ -202,7 +274,8 @@ class InterfaceSolver:
                 node=self.read(name)
             if node is None:
                 with self.service._phase('interface_combination'):
-                    scope,rows,choices=project(inputs,variable,self.deadline,self.metrics)
+                    scope=sorted(set(v for q in inputs for v in q['scope'])-{variable})
+                    rows=[None]*(1<<len(scope));choices=[None]*len(rows)
                 node=self.save(definition,scope,rows,choices)
             else:self.metrics['node_hits']+=1
             for q in bucket:del factors[q['id']]
@@ -211,8 +284,8 @@ class InterfaceSolver:
         assignment={}
         for node in reversed(steps):
             row=row_index(node['scope'],assignment)
-            choices=unpack(node['choices'],len(node['scope']))
-            choice=choices[row]
+            if not self.acquire(node,row):raise ValueError('Inconsistent lazy witness path')
+            choice=node['choice_values'][row]
             if choice is None:raise ValueError('Unknown interface row cannot produce a witness')
             assignment[node['definition']['variable']]=choice
         witness=''.join('1' if assignment.get(i,False) else '0' for i in range(max(assignment,default=-1)+1))
@@ -231,7 +304,8 @@ class InterfaceSolver:
         return dict(format='factor_dag',root=root,definitions=definitions)
 
     def run(self,active,previous_order=(),constraints=None):
-        answer,witness,root,order=self.eliminate(list(dict.fromkeys(active)),previous_order)
+        with self.service._phase('interface_planning'):
+            answer,witness,root,order=self.eliminate(list(dict.fromkeys(active)),previous_order)
         if answer:
             for name in active:self.ensure(name)
         else:self.ensure(root)
@@ -245,11 +319,18 @@ class InterfaceSolver:
         certificate=None if answer else self.certificate(root)
         return dict(answer=answer,witness=witness,root=root,order=order,certificate=certificate)
 
+    def reset_if_full(self):
+        if len(self.verified)>12000 or len(self.verified_rows)>500000:
+            self.service._request(dict(mode='factor_reset'))
+            self.verified.clear();self.verified_rows.clear();self.bound.clear()
+
     def solve(self,bits):
         self.deadline=self.service._deadline or Deadline(self.service.query_timeout)
-        self.metrics=counters();before=self.store.inserted_objects
+        self.metrics=counters();self.new_nodes=set();before=self.store.inserted_objects
+        self.reset_if_full()
         try:
-            _,active=self.constraint(bits)
+            token,active=self.constraint(bits)
+            self.bind_constraint(token)
             result=self.run(active)
             with self.service._phase('interface_verification'):
                 request=dict(mode='verify_witness',bits=bits,witness=result['witness']) if result['answer'] else dict(mode='verify_certificate',bits=bits,certificate=result['certificate'])
@@ -261,6 +342,8 @@ class InterfaceSolver:
             # query to the existing checked complete solver.
             return None,str(error),dict(self.metrics)
         self.metrics['archive_new_objects']=self.store.inserted_objects-before
+        self.metrics['active_cache_nodes']=len(self.cache)
+        self.metrics['unknown_rows']=sum(sum(v is None for v in q['rows']) for q in self.cache.values())
         return dict(answer=result['answer'],witness=result['witness'],certificate=result['certificate'],
             backend='interfaces',reuse_kind='witness' if result['answer'] else 'refutation',
             core_work=None,counted_work=None,counted_complete=False,nodes=None,parse_work=checked['parse_work'],
@@ -268,7 +351,8 @@ class InterfaceSolver:
 
     def expand(self,base,add,remove):
         self.deadline=self.service._deadline or Deadline(self.service.query_timeout)
-        self.metrics=counters();before=self.store.inserted_objects
+        self.metrics=counters();self.new_nodes=set();before=self.store.inserted_objects
+        self.reset_if_full()
         root=None;previous_order=[]
         if base is not None:
             row=self.db.execute('SELECT manifest,evidence FROM expansion_states WHERE engine=? AND id=?',(self.engine,base)).fetchone()
@@ -287,10 +371,9 @@ class InterfaceSolver:
         for name,bits in add.items():
             token,_=self.constraint(bits)
             with self.db:root=manifest.update(root,name,token)
-        active=[];constraints=[]
-        for _,token in manifest.items(root):
-            active.extend(self.bind_constraint(token));constraints.append(token)
+        active=[];constraints=[token for _,token in manifest.items(root)]
         try:
+            for token in constraints:active.extend(self.bind_constraint(token))
             result=self.run(list(dict.fromkeys(active)),previous_order,constraints)
         except BudgetExceeded as error:
             self.deadline.check()
@@ -299,10 +382,12 @@ class InterfaceSolver:
             result=self.service._fast_live(bits,allow_components=False,allow_interfaces=False)
             result.update(root=None,order=[],fallback_reason=str(error))
         self.metrics['archive_new_objects']=self.store.inserted_objects-before
+        self.metrics['active_cache_nodes']=len(self.cache)
+        self.metrics['unknown_rows']=sum(sum(v is None for v in q['rows']) for q in self.cache.values())
         with self.service._phase('interface_storage'),self.db:
             evidence=self.store.put('expansion_result',result)[0]
             state=identity(dict(engine=self.engine,manifest=root))
             self.db.execute('INSERT OR IGNORE INTO expansion_states VALUES (?,?,?,?,?,?)',
                 (self.engine,state,root or '',int(result['answer']),evidence,time.time_ns()))
-        return dict(state=state,answer=result['answer'],witness=result['witness'],source='interface_expansion',
+        return dict(state=state,answer=result['answer'],witness=result['witness'],source='interface_expansion',fallback_reason=result.get('fallback_reason'),
                     interfaces=dict(self.metrics),counted_complete=False)

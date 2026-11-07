@@ -10,6 +10,12 @@ Either way, the relevant comparison is avoided computation versus acquisition,
 retrieval, verification, and control costs. Actual savings depend on the workload
 and implementation.
 
+The exact reuse identity applies to **every decidable language**, including
+problems in PSPACE, EXPTIME, and EXPSPACE. This generality concerns the cost
+comparison. Cheap certification, compact storage, and efficient acquisition need
+their own justification, and finite tables for an undecidable language do not
+provide a uniform computable way to construct them.
+
 The project connects established ideas from complexity theory, knowledge
 compilation, memoization, and amortized inference to the interaction between fast
 and deliberative computation. Its contribution is an explanatory synthesis; the
@@ -38,6 +44,10 @@ claims, and proves conditional expected-savings and bounded-overhead results.
 An exact reuse identity states when avoiding repeated solves repays cache costs.
 These savings conditions apply whether P = NP or P != NP, and a scaling example
 shows how reuse can help even when solving has polynomial cost.
+The detailed argument audit makes setup costs explicit in every cache bound,
+states the finite-expectation assumptions for unbounded query domains, and proves
+that uniform computable construction of exact finite tables is equivalent to
+decidability. It also explains why optimal metareasoning can remain hard.
 The literature comparison attributes the utility criterion to Minton, discusses
 self-improving algorithms for polynomial-time tasks, and relates fast/slow
 arbitration to Milli et al. and SOFAI. These are established precedents for the
@@ -87,6 +97,10 @@ complexity proofs, including Deolalikar and Wen. It includes
 [supplementary BibTeX](research/related-work.bib) and saved OpenAlex/SemOpenAlex
 query evidence. The closest precedents and relevant historical cautions are now
 integrated into the manuscript's self-contained bibliography.
+
+The review also contains a [detailed proof audit](research/literature-review-2026-11-07.md#detailed-argument-audit-and-scope-beyond-np)
+covering every formal argument, the repaired accounting omission, and the limits
+of extending the result beyond NP.
 
 ## License
 

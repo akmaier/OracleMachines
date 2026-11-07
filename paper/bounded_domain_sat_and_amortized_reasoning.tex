@@ -84,7 +84,7 @@
 \vspace{-0.7cm}
 
 \begin{abstract}
-Whether $\Pclass=\NPclass$ does not by itself determine whether a System 1/System 2 architecture saves computation. Learning allows us to spend computation once and reuse the result. Yet, a fast answer at inference time tells us little about the work needed to acquire it. Here, we use Boolean satisfiability to examine this trade. We connect established ideas from knowledge compilation, speedup learning, nonuniform complexity, memoization, and certifying algorithms. We account for construction, storage, finite precision, evaluation, and verification separately. Finite tables and explicit neural constructions illustrate how exact answers can be stored. Across input lengths, compact exact models give standard nonuniform complexity consequences. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. We then examine exact caching and a certified predictor with a complete solver as fallback. Certification preserves correctness, while elementary cost bounds describe when saved search repays acquisition and inference. These conditions hold under either $\Pclass=\NPclass$ or $\Pclass\neq\NPclass$. Hence, the efficiency rationale for combining acquired knowledge with selective deliberation survives either resolution. Explicit budgets also limit additional work when prediction fails. Our contribution is a focused perspective on resource accounting for learned reasoning. Whether a learned system meets the savings conditions remains an algorithmic and empirical question.
+Whether $\Pclass=\NPclass$ does not by itself determine whether a System 1/System 2 architecture saves computation. Learning allows us to spend computation once and reuse the result. Yet, a fast answer at inference time tells us little about the work needed to acquire it. Here, we use Boolean satisfiability to examine this trade. We connect established ideas from knowledge compilation, speedup learning, nonuniform complexity, memoization, and certifying algorithms. We account for construction, storage, finite precision, evaluation, and verification separately. Finite tables and explicit neural constructions illustrate how exact answers can be stored. Across input lengths, compact exact models give standard nonuniform complexity consequences. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. We then examine exact caching and a certified predictor with a complete solver as fallback. Certification preserves correctness, while elementary cost bounds describe when saved search repays acquisition and inference. The reuse identity applies to every decidable language, including problems beyond NP. Its validity requires neither $\Pclass=\NPclass$ nor $\Pclass\neq\NPclass$; actual savings require the stated cost inequalities. Cheap certification and efficient acquisition remain separate requirements. Explicit budgets also limit additional work when prediction fails. Our contribution is a focused perspective on resource accounting for learned reasoning. Whether a learned system meets the savings conditions remains an algorithmic and empirical question.
 \end{abstract}
 
 \section{Introduction}
@@ -99,7 +99,7 @@ Here, we bring these established ideas together in a perspective on exact SAT. O
 
 We start with a simple observation. For any fixed maximum input length, we can store all membership answers in a finite object. With a suitable representation and access model, later evaluation is efficient. Yet, that object may be large and expensive to construct. Nor does its existence supply one efficient algorithm for all input lengths. Note that these are separate questions. Keeping them separate allows us to interpret learning as amortization of reasoning without hiding the acquisition cost.
 
-We use \emph{System 1} and \emph{System 2} as a computational analogy. System 1 retrieves or evaluates acquired knowledge. System 2 performs additional computation to obtain an answer. Neither term denotes a complexity class.
+We use \emph{System 1} and \emph{System 2} as a computational analogy. System 1 retrieves or evaluates acquired knowledge. System 2 performs additional computation to obtain an answer. Neither term denotes a complexity class. The reuse arguments apply to any decidable language. SAT supplies a concrete example with inexpensive positive verification; Section~\ref{sec:beyond-np} explains which conclusions extend to larger classes and which need additional assumptions.
 
 \subsection{Closest precedents and scope}
 
@@ -253,6 +253,14 @@ We use the standard fact that every finite language is regular; see \citet[Remar
 \mathsf{REG}\restr D_N=\Pclass\restr D_N=\NPclass\restr D_N=2^{D_N}.
 \end{equation}
 Hence, this equality holds independently of SAT or learning. A single finite domain cannot reveal the asymptotic distinction between these classes. Still, the operational interpretation is useful. For a prescribed domain, we can make exact answers available through compilation.
+
+More generally, the same proof gives
+\begin{equation}
+\mathcal C\restr D_N=2^{D_N}
+\qquad\text{whenever }\mathsf{REG}\subseteq\mathcal C.
+\label{eq:general-finite}
+\end{equation}
+This includes $\mathsf{PSPACE}$, $\mathsf{EXPTIME}$, and $\mathsf{EXPSPACE}$. Every subset of $D_N$ is already regular, and a restriction cannot be anything other than a subset of $D_N$. The equality concerns sets of restricted languages. It places no common bound on acquiring their finite representations.
 
 Note that the order of the quantifiers matters. The statement
 \begin{equation}
@@ -437,7 +445,7 @@ We find this distinction explicitly in \citet{lin2021limitations} and \citet{her
 \paragraph{Decision versus witness production.}
 We can recover one satisfying assignment from an exact SAT decider by self-reduction. After a positive decision, tentatively fix a variable to zero and query the restricted formula. Keep zero if a satisfying extension exists; otherwise choose one. Repeat for the remaining variables. Each choice preserves a satisfying extension. Hence, at most $n$ additional queries produce an assignment. With a standard encoding, the restricted formulas have length at most a polynomial $p(n)$ and can be constructed in polynomial time. Uniform polynomial-time decision therefore also gives polynomial-time witness production. Note that a finite table must cover \emph{all} intermediate encodings. Covering the original input alone is insufficient. For a nonuniform family, the concatenated advice up to length $p(n)$ still uses polynomial space. This procedure returns one witness. Enumerating all witnesses remains a different task.
 
-We must also distinguish a fixed model from one retrained after every query. Retraining creates a stateful procedure. Its answers may depend on the query history, so we cannot automatically identify it with a fixed oracle language. Still, polynomially many polynomial-cost updates on polynomial-size state can be simulated in polynomial time. Any external exact-solving work must be charged separately.
+We must also distinguish a fixed model from one retrained after every query. Retraining creates a stateful procedure. Its answers may depend on the query history, so we cannot automatically identify it with a fixed oracle language. Still, given its initial state, polynomially many polynomial-cost updates on polynomial-size state can be simulated in polynomial time. This does not make acquisition of that initial state free or uniform. Any external exact-solving work must also be charged separately.
 
 \paragraph{Limits of efficient compression.}
 A related extension asks whether we can efficiently compress many bounded-size instances. \citet{fortnow2011compression} consider OR-SAT: given $m$ formulas of length at most $n$, decide whether any is satisfiable. Their Theorem~1.2 rules out a deterministic compression computable in time polynomial in $m$ and $n$ with output length polynomial in $n$, unless $\NPclass\subseteq\mathsf{coNP/poly}$ and the polynomial hierarchy collapses. Membership in a fixed target language must preserve the OR-SAT answer. Note that this concerns one aggregate decision bit for a supplied list. It differs from storing a reusable table of every answer. Still, it shows why bounded instance size alone does not justify efficient compression. An exponentially expensive table constructor need not satisfy the polynomial compression-time requirement.
@@ -449,19 +457,19 @@ Memoization stores earlier results for later reuse. \citet{michie1968} already c
 
 \begin{lemma}[Amortized cost of exact reuse]
 \label{lem:cache}
-Let $x_1,\ldots,x_Q\in D_N$ be a query sequence. Assume an initially empty cache retains every exact answer without eviction. Let $c_N$ bound the per-query lookup, bookkeeping, and insertion cost, and let $s(x)$ be the runtime of the complete solver on a previously uncached input $x$. If
+Let $x_1,\ldots,x_Q\in D_N$, with $Q\geq1$, be a query sequence. Assume an initially empty cache retains every exact answer without eviction, at setup cost $C\geq0$. Let $c_N$ bound all per-query work outside the solver, including input comparison, lookup, allocation, bookkeeping, insertion, and answer delivery. Each invocation of the same deterministic complete solver starts from the same initial state and costs $s(x)$. If
 \begin{equation}
 U_Q=\{x_i:1\leq i\leq Q\},
 \end{equation}
 then the total runtime satisfies
 \begin{equation}
-\boxed{T_Q\leq Qc_N+\sum_{x\in U_Q}s(x).}
+\boxed{T_Q\leq C+Qc_N+\sum_{x\in U_Q}s(x).}
 \label{eq:cache-bound}
 \end{equation}
 \end{lemma}
 
 \begin{proof}
-Every query incurs at most $c_N$ dictionary overhead. Each distinct input invokes the solver only at its first occurrence. The answer is then retained, so all later occurrences use retrieval. Summing the two types of cost gives \eqref{eq:cache-bound}.
+Every query incurs at most $c_N$ non-solving work. Each distinct input invokes the solver only at its first occurrence. The answer is then retained, so all later occurrences use retrieval. Adding setup cost and summing the two types of online cost gives \eqref{eq:cache-bound}.
 \end{proof}
 
 Because the domain is finite and the solver terminates on every input,
@@ -470,17 +478,17 @@ s_N=\max_{x\in D_N}s(x)<\infty.
 \end{equation}
 It follows that
 \begin{equation}
-\frac{T_Q}{Q}\leq c_N+\frac{|U_Q|s_N}{Q}
-\leq c_N+\frac{|D_N|s_N}{Q}.
+\frac{T_Q}{Q}\leq c_N+\frac{C+|U_Q|s_N}{Q}
+\leq c_N+\frac{C+|D_N|s_N}{Q}.
 \label{eq:amortized}
 \end{equation}
 Hence, at fixed $N$, the upper bound on the solving contribution per query tends to zero as $Q$ grows. We pay for each distinct answer at most once. Note that this limit increases the number of queries while keeping the domain fixed. It gives no polynomial bound as $N$ grows.
 
-With random access, a trie or dictionary can provide polynomial overhead per query in $N$. Yet, it may accumulate exponentially many entries. We must therefore report storage as well. A stream of distinct inputs can invoke the solver on every query. Eviction, memory limits, or changes in the task can also make us pay again for earlier work. As such, the no-eviction assumption is essential to the lemma.
+With random access, a trie or dictionary can provide polynomial overhead per query in $N$. Yet, it may accumulate exponentially many entries. We must therefore report storage as well. The bound assumes sufficient address space and charges memory initialization to $C$ or to insertion. On a sequential tape, lookup may instead depend on the accumulated storage. A stream of distinct inputs can invoke the solver on every query. Eviction, memory limits, or changes in the task can also make us pay again for earlier work. As such, the no-eviction assumption is essential to the lemma.
 
 To examine a finite workload, let queries be independent with common probabilities $p_x=\Prb(X=x)$. We obtain
 \begin{equation}
-\E[T_Q]\leq Qc_N+
+\E[T_Q]\leq C+Qc_N+
 \sum_{x\in D_N}s(x)\bigl[1-(1-p_x)^Q\bigr].
 \label{eq:cache-distribution}
 \end{equation}
@@ -493,7 +501,7 @@ Do we need $\Pclass\neq\NPclass$ for reuse to help? Let us compare the same solv
 
 \begin{corollary}[Exact reuse versus repeated solving]
 \label{cor:reuse-savings}
-Under the assumptions of Lemma~\ref{lem:cache}, let $m_Q(x)$ count the occurrences of $x$ in the query sequence. Each solver invocation starts from the same initial state and costs $s(x)$, with or without the cache. Let $C\geq0$ be cache setup cost, and let $L_Q\leq Qc_N$ be the actual total lookup, insertion, and controller cost. The solver-only baseline costs $B_Q=\sum_{x\in U_Q}m_Q(x)s(x)$. The total cost $T_Q^{\mathrm{reuse}}$, including setup, satisfies
+Let $L\subseteq\bits^*$ be any decidable language and $x_1,\ldots,x_Q$ any finite query sequence. Let $U_Q$ be its set of distinct inputs and $m_Q(x)$ the multiplicity of $x$. Each invocation of a fixed deterministic decider for $L$ starts from the same initial state and costs $s(x)$, with or without the cache. An initially empty cache retains every exact answer without eviction. Let $C\geq0$ be its setup cost and $L_Q$ its actual total work outside the solver. If the non-solving work on query $i$ is at most $c_i$, then $L_Q\leq\sum_{i=1}^Q c_i$. All costs use the same additive work model. The solver-only baseline costs $B_Q=\sum_{x\in U_Q}m_Q(x)s(x)$. The total cost $T_Q^{\mathrm{reuse}}$, including setup, satisfies
 \begin{equation}
 \boxed{B_Q-T_Q^{\mathrm{reuse}}
 =\sum_{x\in U_Q}\bigl(m_Q(x)-1\bigr)s(x)-C-L_Q.}
@@ -501,16 +509,16 @@ Under the assumptions of Lemma~\ref{lem:cache}, let $m_Q(x)$ count the occurrenc
 \end{equation}
 Thus, reuse is strictly faster if and only if avoided repeated solving exceeds setup and dictionary costs. A sufficient condition is
 \begin{equation}
-\sum_{x\in U_Q}\bigl(m_Q(x)-1\bigr)s(x)>C+Qc_N.
+\sum_{x\in U_Q}\bigl(m_Q(x)-1\bigr)s(x)>C+\sum_{i=1}^Q c_i.
 \label{eq:reuse-sufficient}
 \end{equation}
-Neither statement requires a hypothesis about $\Pclass$ and $\NPclass$.
+For queries in $D_N$ with the common overhead bound of Lemma~\ref{lem:cache}, we can take $c_i=c_N$. Neither statement requires a hypothesis about $\Pclass$ and $\NPclass$.
 \end{corollary}
 
 \begin{proof}
 The cache invokes the solver once for each distinct input. Hence,
 $T_Q^{\mathrm{reuse}}=C+L_Q+\sum_{x\in U_Q}s(x)$.
-Subtracting this identity from $B_Q$ proves \eqref{eq:reuse-savings}. The sufficient condition follows from $L_Q\leq Qc_N$. The argument uses exact reuse and additive costs, with no assumption on how $s(x)$ grows with input length.
+Subtracting this identity from $B_Q$ proves \eqref{eq:reuse-savings}. The sufficient condition follows from $L_Q\leq\sum_i c_i$. The argument uses exact reuse and additive costs, with no assumption on how $s(x)$ grows with input length. Decidability ensures that every solver invocation terminates.
 \end{proof}
 
 If $\Pclass=\NPclass$, SAT has a uniform polynomial-time solver. Still, polynomial time need not be as cheap as retrieval. We can save work whenever \eqref{eq:reuse-sufficient} holds for the chosen solver. Conversely, a sufficiently fast solver can make cache overhead more expensive than solving again. Equality of the classes alone decides neither comparison.
@@ -552,7 +560,8 @@ SATzilla provides an earlier practical precedent: it learns to select a solver f
 Let $\pi$ be a refutation. A checker polynomial in $|\varphi|+|\pi|$ may still be expensive with respect to $|\varphi|$ alone. In the Cook--Reckhow framework, we can ask whether there exists a sound, complete, polynomially checkable proof system with polynomial-size proofs for every tautology. Such a system exists if and only if $\NPclass=\coNP$ \citep{cook1979}. The corresponding statement for UNSAT follows by negation. Hence, we assume neither universally short negative certificates nor an efficient method for finding them.
 
 \begin{proposition}[Soundness of certified fallback]
-Assume the fast-path procedure terminates on every input, returning either a certified answer or a fallback signal. If each returned answer is justified by an exact cache entry or a sound verifier for that answer, and each fallback signal invokes a terminating exact solver, then the hybrid is a total correct SAT decider on its domain, irrespective of the predictor's error rate.
+\label{prop:soundness}
+Fix a decision language $L$ and a query domain. Assume the fast-path procedure terminates on every input in that domain, returning either a certified answer or a fallback signal. If each returned answer is justified by an exact cache entry or a sound verifier for membership or nonmembership in $L$, and each fallback signal invokes a terminating exact solver for $L$, then the hybrid is a total correct decider on its domain, irrespective of the predictor's error rate.
 \end{proposition}
 
 \begin{proof}
@@ -628,12 +637,12 @@ For a cache-only comparison, we replace the right-hand side by the cache's actua
 
 \begin{proposition}[Expected break-even for a fixed policy]
 \label{prop:savings}
-Fix a query distribution on $D_N$, a deterministic baseline solver with runtime $s(x)$, and a deterministic certified fast-path policy that remains unchanged across queries. On fallback, run that same solver from its usual initial state. Let $H(x)$ indicate certified fast-path success, and let $f(x)$ include all fast-path and controller costs. There are no online updates. Put
+Fix a query distribution on a domain $D\subseteq\bits^*$, a deterministic total baseline solver for a decidable language $L$ with runtime $s(x)$, and a terminating deterministic certified fast-path policy that remains unchanged across queries. On fallback, run that same solver from its usual initial state. Let $H(x)$ indicate certified fast-path success, and let $f(x)$ include all fast-path and controller costs. There are no online updates. Assume finite initial acquisition cost $C$ and $\E[s(X)]<\infty$, $\E[f(X)]<\infty$. Put
 \begin{equation}
 \mu=\E[s(X)],\qquad
 \delta=\E[H(X)s(X)]-\E[f(X)].
 \end{equation}
-For initial acquisition cost $C$ and $Q$ queries with the specified marginal distribution,
+For $Q$ queries with the specified marginal distribution,
 \begin{equation}
 \E[T_Q]=C+Q(\mu-\delta).
 \label{eq:savings}
@@ -645,7 +654,7 @@ If $\delta>0$, the hybrid beats the solver-only expected total $Q\mu$ whenever $
 The online cost on $x$ is $f(x)+(1-H(x))s(x)$. Taking its expectation gives $\mu-\delta$. Summing over $Q$ queries and adding $C$ proves the identity and the threshold. Independence between queries is unnecessary because the policy is fixed and only the marginal expectations are used.
 \end{proof}
 
-Like Corollary~\ref{cor:reuse-savings}, this result holds under either $\Pclass=\NPclass$ or $\Pclass\neq\NPclass$. It extends the cost comparison to certified answers on inputs that need not have appeared before. Here, ``known'' means available through exact retrieval or a sound check. Model confidence alone does not justify skipping the solver. For an adaptive system, the success indicator and overhead depend on earlier queries, and update costs must also be charged.
+Like Corollary~\ref{cor:reuse-savings}, this result holds under either $\Pclass=\NPclass$ or $\Pclass\neq\NPclass$. It extends the cost comparison to certified answers on inputs that need not have appeared before. Here, ``known'' means available through exact retrieval or a sound check. Model confidence alone does not justify skipping the solver. Finite expectations follow automatically on a fixed finite domain for the terminating procedures above. On unbounded domains, they need a separate assumption: finite cost on every input need not have finite expectation. For an adaptive system, the success indicator and overhead depend on earlier queries, and update costs must also be charged.
 
 The online cost criterion closely matches an explicit predecessor. In Section~4.3, \citet[p.~566]{minton1988utility} defines rule utility as average savings on application times application frequency, minus average matching cost. Here, $\E[H(X)s(X)]=\Prb(H=1)\E[s(X)\mid H=1]$, with the product interpreted as zero if success has probability zero. Our $\delta$ has that same benefit-minus-cost structure, specialized to a certified path that avoids the entire baseline solve. The initial cost $C$ then gives an elementary total-cost threshold. We present this as an application of established utility accounting. The absence of a $\Pclass$-versus-$\NPclass$ assumption does not establish a separate novelty claim.
 
@@ -668,6 +677,42 @@ On a certified success the solver cost is zero; otherwise it is $s(x_i)$. Both c
 \end{proof}
 
 We have bounded the additional work by the fast-path and update budgets. This is an additive guarantee. It neither proves savings nor supplies a universal multiplicative bound. Note that the baseline solver and its resources must remain available. We must include any initialization, interference, or copying cost. The result concerns work in the chosen cost model. Shared hardware needs a separate wall-clock analysis. Even with polynomial fast-path and update budgets, the solver term $s(x)$ may remain expensive.
+
+\section{Scope beyond NP}
+\label{sec:beyond-np}
+
+Let us now replace SAT by a more demanding decision problem. Corollary~\ref{cor:reuse-savings} applies to any decidable language, including languages complete for $\mathsf{PSPACE}$, $\mathsf{EXPTIME}$, or $\mathsf{EXPSPACE}$. These classes permit polynomial space, exponential time, and exponential space, respectively. They all admit terminating exact solvers; see \citet{sipser2020theory} for the standard definitions and hierarchy results. The first solve can be extremely expensive. Still, retrieving its exact answer later avoids that solve. No polynomial bound on $s(x)$ entered the identity.
+
+Proposition~\ref{prop:soundness} also applies whenever the proposed answers can be soundly checked and fallback terminates. Proposition~\ref{prop:savings} gives the corresponding expected-cost comparison when its expectations are finite. The budgeted-overhead argument only needs the same solver and cost assumptions. Thus, the reuse rationale extends throughout decidable computation. Membership in a large complexity class alone guarantees neither frequent reuse nor affordable acquisition.
+
+\paragraph{Certification needs its own assumptions.}
+SAT has short, efficiently checkable positive witnesses. This property does not automatically extend to a more general language $L$. A deterministic polynomial-time verifier with polynomial-length certificates for every positive instance, and none for negative instances, would put $L$ in $\NPclass$. Providing such certificates for both answers would put $L$ in $\NPclass\cap\coNP$. For example, true quantified Boolean formulas form a $\mathsf{PSPACE}$-complete language \citep{sipser2020theory}. Universally short positive certificates with such a verifier would imply $\mathsf{PSPACE}=\NPclass$. Hence, we may use sound certificates for selected instances or longer proofs, but must charge their full cost. An exact cache can instead rely on an earlier exact solve and trustworthy storage. These certificate implications concern ordinary deterministic checks; randomized interactive protocols require their own soundness and cost analysis.
+
+\paragraph{Finite existence and effective acquisition.}
+For any language $L$, even an undecidable one, $L\cap D_N$ has a finite answer table. Yet, producing these tables uniformly is an additional requirement.
+
+\begin{proposition}[Effective finite tables]
+\label{prop:effective-tables}
+A language $L\subseteq\bits^*$ is decidable if and only if there exist a total computable constructor $G$ and a total computable evaluator $E$ such that, for every $N$, $K_N=G(1^N)$ is finite and
+\begin{equation}
+E(x,K_N)=\ind_L(x)\qquad(x\in D_N).
+\label{eq:effective-tables}
+\end{equation}
+No time or size bound is assumed here.
+\end{proposition}
+
+\begin{proof}
+If $L$ is decidable, enumerate $D_N$, run its decider on each string, and write the finite answer table. Every call terminates, so the constructor terminates. A total evaluator reads the indexed answer, rejecting malformed tables and out-of-domain requests. Conversely, on input $x$, run $G(1^{|x|})$ and then $E(x,K_{|x|})$. Both terminate and the result is the membership bit for $L$.
+\end{proof}
+
+Consequently, finite representability alone does not give a complete computable fallback or acquisition method for an undecidable problem. Previously established individual answers may still be reused, but our total-decider guarantees do not extend to all of its inputs.
+
+The polynomial version of Proposition~\ref{prop:advice} also applies to any language: compact exact advice with a uniform polynomial evaluator gives $L\in\Ppoly$, while polynomial-time uniform construction gives $L\in\Pclass$. For an $\mathsf{EXPTIME}$-complete language, the latter is impossible by the deterministic time hierarchy theorem, which gives $\Pclass\subsetneq\mathsf{EXPTIME}$ \citep{sipser2020theory}. This obstruction holds even if $\Pclass=\NPclass$. Reuse can therefore be useful in settings where a uniform polynomial-time solution is already ruled out, without removing the first-solve cost.
+
+\paragraph{What the architectural conclusion establishes.}
+Our comparison concerns a specified restarted solver and a specified workload. A faster solver, its own cache, a memory limit, or a stream of distinct inputs can remove the advantage. Even a repeated input only yields eventual savings when its avoided solving cost exceeds the recurring retrieval cost. For tasks returning a large object, we must also charge storing and delivering that output on every query. The one-bit decision bounds do not give free witness or output production.
+
+Choosing when to deliberate is itself computation. \citet{conitzer2008metareasoning} discusses metareasoning problems whose optimal solutions are NP-hard or PSPACE-hard, with consequences that depend on the relevant class separations. Our identities assume an implemented policy and charge its control cost; they do not supply an efficient optimal policy. Hence, the precise conclusion is that the accounting criterion and the possibility of reuse savings do not require resolving $\Pclass$ versus $\NPclass$. Complexity still constrains acquisition, certification, and optimal control.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
@@ -731,11 +776,11 @@ For each method, we should report acquisition and label-generation costs, parame
 
 \section{Conclusion}
 
-The efficiency rationale for System 1/System 2 computation survives either resolution of $\Pclass$ versus $\NPclass$. Retrieval or certified prediction can avoid enough work to repay its costs under either hypothesis. Whether it does so depends on the solver, representation, and workload. Here, we examined this distinction through SAT and accounted separately for acquisition, storage, evaluation, and certification. A fixed representation, advice for each input length, and a uniform constructor support different complexity consequences. Compilation, nonuniform computation, memoization, and amortized inference provide the underlying theories.
+The efficiency rationale for System 1/System 2 computation survives either resolution of $\Pclass$ versus $\NPclass$ and extends to arbitrary decidable languages. Retrieval or certified prediction can avoid enough work to repay its costs under either hypothesis. Whether it does so depends on the solver, representation, and workload. Here, we examined this distinction through SAT and accounted separately for acquisition, storage, evaluation, and certification. A fixed representation, advice for each input length, and a uniform constructor support different complexity consequences. Compilation, nonuniform computation, memoization, and amortized inference provide the underlying theories.
 
 Finite tables and neural memorization give transparent baselines. We can construct exact answers on a fixed domain. Yet, this leaves compactness and efficient acquisition unresolved. Across input lengths, polynomial-size exact model families have the standard nonuniform consequences, including the Karp--Lipton collapse. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. Note that these conclusions require different hypotheses.
 
-Caching shows how to reuse exact answers. Certification with terminating fallback preserves correctness even when a predictor is inaccurate. For a fixed policy, we obtain expected savings when avoided solver work exceeds fast-path cost and repays acquisition. These conditions apply under either $\Pclass=\NPclass$ or $\Pclass\neq\NPclass$; even polynomial-cost solving can leave useful work to avoid. Explicit budgets also bound the additional work when prediction fails. Still, we must establish these conditions for an actual learned system. Hence, useful evaluation should report acquisition, storage, inference, verification, fallback, and updates together. Comparing with both a solver alone and an exact cache then addresses the practical question: when does reusable knowledge repay its acquisition?
+Caching shows how to reuse exact answers. Certification with terminating fallback preserves correctness even when a predictor is inaccurate. For a fixed policy with finite expected costs, we obtain expected savings when avoided solver work exceeds fast-path cost and repays acquisition. These conditions apply under either $\Pclass=\NPclass$ or $\Pclass\neq\NPclass$; even polynomial-cost solving can leave useful work to avoid. Beyond NP, the same accounting applies, while short certificates and efficient acquisition need separate justification. Finite tables for an undecidable language do not supply a uniform computable constructor. Explicit budgets also bound the additional work when prediction fails. Still, we must establish these conditions for an actual learned system. Hence, useful evaluation should report acquisition, storage, inference, verification, fallback, and updates together. Comparing with both a solver alone and an exact cache then addresses the practical question: when does reusable knowledge repay its acquisition?
 
 \FloatBarrier
 \begingroup
@@ -778,6 +823,12 @@ Cadoli, M., Donini, F.~M., Liberatore, P., and Schaerf, M. (2002).
 Preprocessing of intractable problems.
 \emph{Information and Computation}, 176(2), 89--120.
 \href{https://doi.org/10.1006/inco.2001.3043}{doi:10.1006/inco.2001.3043}.
+
+\bibitem[Conitzer(2008)]{conitzer2008metareasoning}
+Conitzer, V. (2008).
+Metareasoning as a formal computational problem.
+In \emph{Metareasoning: Thinking about Thinking}, AAAI Workshop Technical Report WS-08-07, pp.~29--33.
+\url{https://cdn.aaai.org/Workshops/2008/WS-08-07/WS08-07-005.pdf}.
 
 \bibitem[Cook(1971)]{cook1971}
 Cook, S.~A. (1971).
@@ -936,6 +987,13 @@ Siegelmann, H.~T., and Sontag, E.~D. (1995).
 On the computational power of neural nets.
 \emph{Journal of Computer and System Sciences}, 50(1), 132--150.
 \href{https://doi.org/10.1006/jcss.1995.1013}{doi:10.1006/jcss.1995.1013}.
+
+\bibitem[Sipser(2020)]{sipser2020theory}
+Sipser, M. (2020).
+Theory of computation, MIT 18.404J, Fall 2020.
+Lectures 18 (PSPACE-completeness) and 22 (provably intractable problems, oracles).
+\emph{MIT OpenCourseWare}, course notes.
+\url{https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/}.
 
 \bibitem[Stuhlm\"uller et~al.(2013)Stuhlm\"uller, Taylor, and Goodman]{stuhlmuller2013}
 Stuhlm\"uller, A., Taylor, J., and Goodman, N.~D. (2013).

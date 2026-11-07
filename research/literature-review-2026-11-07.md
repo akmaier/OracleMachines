@@ -332,3 +332,149 @@ The direct OpenAlex search endpoint rejected the query because the shared anonym
 Other sources were arXiv, ECCC, ACL Anthology, AAAI/IJCAI proceedings, publisher metadata, institutional and author repositories, DBLP bibliographic records, Woeginger's historical catalogue, and primary technical commentary. Web searches included combinations of P=NP/P≠NP with preprocessing, precomputation, lookup, neural networks, learning, oracle, refutation, and withdrawal, followed by searches for named works and authors. The work did not run independent native searches inside every commercial scholarly database; publisher pages were reached through web search and citation links.
 
 All SPARQL queries, raw graph responses, the direct OpenAlex responses, and the quota rejection are under [evidence/2026-11-07](evidence/2026-11-07/). [Supplementary BibTeX](related-work.bib) supplies the main newly identified references. The review is a targeted literature assessment, not a proof of bibliographic exhaustiveness. Publication identity and status were checked separately from graph labels; in particular, ambiguous generic P≠NP title matches were not assigned to Deolalikar.
+
+## Detailed argument audit and scope beyond NP
+
+**Audit date: 7 November 2026. Baseline: commit `2d11d92`.** This audit checks
+every formal statement and its proof, the surrounding cost estimates, and the
+proposed extension beyond NP. The accompanying revision repairs the setup-cost
+omission below and generalizes the reuse and certified-policy statements. This
+is a mathematical review, not machine-checked verification or an independent
+reproof of every cited external theorem.
+
+**Assessment.** No contradiction or fatal flaw was found in the central reuse
+identity, finite-domain argument, or advice implication under their explicit
+assumptions. One cost omission required correction. Several interpretations
+would go beyond what the arguments prove: guaranteed speedup for every workload,
+cheap verification for arbitrary hard problems, efficient optimal arbitration,
+or effective acquisition for an undecidable language. The revised manuscript
+rules out these readings explicitly.
+
+### Findings and corrections
+
+1. **Setup cost was missing from the first cache bound.** Lemma 9.1 called its
+   quantity total runtime but began from an empty cache without charging setup.
+   The later reuse corollary did charge setup. The lemma and both its average
+   and distributional consequences now include `C`. For example, one distinct
+   query with solving cost 1, dictionary cost 1, and setup cost 10 has total cost
+   12. The earlier displayed bound would give 2 if interpreted end to end.
+   It was valid only as an online bound with setup excluded. The revision makes
+   the accounting consistent.
+2. **The reuse proof uses no NP-specific premise.** Corollary 9.2 now quantifies
+   over any decidable language and any finite sequence of finite binary inputs.
+   It uses actual non-solving work `L_Q` and optional per-query bounds `c_i`.
+   No fixed maximum input length or polynomial solver bound is needed. The
+   finite-domain result remains a specialization. Solver invocations start
+   from the same state, the cache starts empty, and answers are retained.
+3. **Expectations need an extra condition on unbounded domains.** Proposition
+   10.2 now requires finite expected baseline and fast-path costs. Previously
+   the finite domain and terminating procedures supplied these automatically.
+   For an unbounded counterexample, let `Pr(X = 0^n) = 2^-n` for `n >= 1`, and
+   let a deliberately slow decider cost `2^n` on `0^n`. Every run terminates,
+   while its expected cost is infinite. If a sound fast policy answers all
+   those inputs at finite expected cost, writing `mu - delta` would produce
+   the undefined subtraction infinity minus infinity. The realized finite
+   sequence identity remains valid.
+4. **Simulation from a supplied state is not uniform acquisition.** Section 8
+   now says explicitly that its polynomial update simulation is given the
+   initial state. Obtaining that state still requires its own cost and
+   uniformity argument. Polynomial updates cannot erase a nonuniform advice
+   assumption or unpaid training computation.
+5. **The abstraction charges all extra work.** Setup or insertion pays for
+   allocation and initialization. Lookup includes input reading, exact key
+   comparison, bookkeeping, and delivery of the answer bit. Random-access
+   overhead requires sufficient address space; sequential-tape lookup can
+   depend on total storage. The comparison is additive work, with the same
+   solver cost on every miss. Resource contention, a warm-started baseline,
+   or changes to fallback search require a new comparison.
+
+### Check of the mathematical arguments
+
+The identifiers below are LaTeX labels where available; they remain stable if
+section numbering changes.
+
+| Argument | Audit and necessary assumptions |
+| --- | --- |
+| Direct addressing (`lem:table`) | For length `n`, `2^n - 1 + val(x)` covers exactly the interval `[2^n - 1, 2^(n+1) - 2]`. The intervals partition the required addresses, including the empty string at zero. Linear bit work suffices to form the address. Fast retrieval depends on the explicit initialized random-access model; it is not a claim about free access on a sequential tape. |
+| Table construction and witnesses | At length `n` there are `2^n` strings and at most `2^n` assignments per well-formed formula. Summing yields the stated upper bound `O(4^N poly(N))`, not a lower bound. One assignment per positive entry fits in `O(N 2^N)` bits. Enumerating all assignments has a separate output cost. |
+| Finite restrictions (`lem:restriction`) and finite NP-hardness corollary | A trie with a rejecting sink gives a fixed finite automaton for every subset of the fixed finite domain. Runtime is linear in the query length, while machine description size depends on the domain. Composition with an NP-hardness reduction would put all of NP in P. The new generalization to any class containing REG follows from the same two inclusions. Neither argument identifies the unrestricted classes. |
+| Oracle elimination (`lem:eliminate`) | Polynomially many polynomial-length queries to a fixed polynomial-time decider have polynomial aggregate cost. Replacing queries on each nondeterministic branch preserves acceptance. A finite oracle and a length-indexed family of tables are different resources. |
+| Dense and recurrent neural costs | The arithmetic counts hold for the specified architecture, prescribed epochs, available labels, bounded-cost activations, and stated arithmetic precision. They do not bound the number of iterations needed to learn an exact model. Recurrent steps, generated tokens, label acquisition, and the actual bit lengths remain separate charged resources. |
+| ReLU table (`lem:relu`) | The preactivation is `1 - HammingDistance(x,u)` on the Boolean cube. Each selected unit is exactly its vertex indicator; at most one is nonzero. Input weights take one bit, biases take logarithmically many bits, and dense serialization gives the stated description bound. Hidden partial sums have magnitude `O(N+1)` and readout sums are at most one. Addresses and loop counters are explicitly outside the numerical-intermediate bound. Empty accepting sets and `N=0` are covered. |
+| Advice and uniform construction (`prop:advice`) | One shared finite string per input length is polynomial advice. A uniform polynomial constructor followed by the evaluator is a polynomial decider. Advice for all possible reduction-output lengths can be concatenated within a polynomial bound. The Karp-Lipton consequence is an attributed external theorem, not reproved here. P differing from NP alone does not exclude nonuniform polynomial-size SAT advice. |
+| Decision to witness | Each self-reduction query preserves a satisfying extension. At most one query per variable is needed after a positive initial answer. The table or advice must cover the intermediate encoding lengths; merely covering the original input length is insufficient. This returns one witness. |
+| Cache amortization (`lem:cache`) and occurrence expectation | Each distinct input is solved once under no eviction. Include setup as corrected above. Under i.i.d. queries, the chance of seeing `x` by query `Q` is `1-(1-p_x)^Q`. No independence of occurrence indicators for different strings is needed. The vanishing solving contribution holds at fixed finite domain with enough memory; it is not a joint limit in domain size and query count. |
+| Reuse savings (`cor:reuse-savings`) | Subtract `C + L_Q + sum_distinct s(x)` from `sum_distinct m_Q(x)s(x)`. This proves an exact identity against a specified restarted solver, not optimality among all algorithms. Its sufficient condition uses an upper bound on overhead; failure of that sufficient condition does not itself prove a loss. Actual avoided work versus actual overhead is necessary and sufficient. |
+| Polynomial scaling example | For one repeated input, dividing by `Q s_n` gives `C_n/(Q s_n) + ell_n/s_n + 1/Q`. Under the stated bounds and `Q=n`, this tends to zero. The assumptions describe a selected solver and family. They do not prove that SAT requires that solving cost or that every language admits this advantage. |
+| Certified fallback (`prop:soundness`) | Each accepted fast answer is sound; all other inputs reach a terminating exact solver. Fast-path termination is essential and includes certificate generation and checking. The proof is independent of the decision language. A timeout on the fallback would instead allow incomplete answers. |
+| Negative certificates | Checking a proof in polynomial time in its combined input and proof length does not bound that proof length. The cited Cook-Reckhow equivalence concerns existence of a polynomially bounded proof system, not every proof system or an efficient algorithm for finding proofs. |
+| Fixed-policy savings (`prop:savings`) | The per-query cost is exactly `f(x) + (1-H(x))s(x)`. Linearity of expectation gives the claimed total under fixed marginals; queries need not be independent. The revised finite-expectation conditions justify subtraction. A history-dependent policy or online updates cannot simply reuse the same fixed `delta`. |
+| Budgeted overhead (`prop:overhead`) | Each query costs at most its unchanged baseline cost plus the full fast-path and update budgets. Summing gives the additive bound. It implies neither a speedup nor a universal multiplicative ratio and assumes the baseline resources remain available. |
+| Effective finite tables (`prop:effective-tables`, added) | A decider constructs every finite table by enumeration. Conversely, a total uniform constructor and evaluator decide any input by constructing the table at that input's length. This proves equivalence with decidability, with no resource bound. It pinpoints why mere finite representability of an undecidable language does not make it learnable or computable. |
+
+### What extends beyond NP
+
+The exact cost identity applies to every decidable language, including complete
+problems for PSPACE, EXPTIME, and EXPSPACE. All first solves remain charged.
+No complexity-class equality or inequality occurs in the subtraction. A larger
+class does not itself imply a more favorable workload or a cheaper cache.
+
+The finite-restriction equality is broader still: every language class containing
+REG realizes every subset of a fixed finite binary domain. An individual
+undecidable language has finite restrictions too, but a uniform computable
+constructor for all of them would decide the original language. The new
+proposition supplies the exact converse as well.
+
+Certification does not transfer for free. A universal polynomial-length,
+deterministically polynomial-checkable positive certificate system puts its
+language in NP. Such systems for both answers put it in NP intersect coNP.
+Applied to a PSPACE-complete language, the first condition implies PSPACE=NP.
+The manuscript permits longer certificates or coverage of selected inputs and
+charges generation and checking. Prior exact cache entries need not be
+recertified by a short proof if their provenance and storage are trusted.
+
+Uniform polynomial acquisition and evaluation for an EXPTIME-complete language
+would put EXPTIME in P, contrary to the time hierarchy theorem. Thus the reuse
+accounting also applies where the impossibility of a polynomial-time uniform
+decider is already established, independently of P versus NP. It provides
+workload-specific savings, not such a decider.
+
+For function problems, the same accounting can be formulated for a fixed exact
+solver, but all output copying, storage, and delivery must be included. A cached
+long output is not a constant-cost decision bit. The revised manuscript states
+this limit without claiming a new function-complexity theorem.
+
+The primary background checks used Michael Sipser's MIT course materials:
+[Lecture 18, PSPACE-completeness](https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/resources/lecture-18-pspace-completeness/)
+and [Lecture 22, hierarchy results and oracles](https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/50cb369d1be3c7fbe0886e318aea13c2_MIT18_404f20_lec22.pdf),
+particularly Lecture 22 slides 2-4. These support the standard class definitions,
+TQBF completeness, and hierarchy consequences; the generalized reuse proof and
+effective-table equivalence are given directly in our manuscript.
+
+### Scope of the architectural claim
+
+The statement that P versus NP is irrelevant to every aspect of a dual-process
+architecture would be too strong. The revised claim concerns validity of the
+accounting criterion and the possibility of conditional savings. Acquiring
+knowledge, producing certificates, and finding an optimal policy have their own
+complexity constraints. Conitzer's
+[2008 paper](https://cdn.aaai.org/Workshops/2008/WS-08-07/WS08-07-005.pdf),
+especially printed page 31, gives an explicit published reason to retain this
+qualification. Its discussion of NP-hard and PSPACE-hard optimal metareasoning
+was checked again and is now cited in the manuscript. No new priority claim
+follows from extending an elementary accounting identity to more language classes.
+
+### Revision checks
+
+The revised source contains 12 proof environments, 45 displayed equation
+environments, 51 unique labels, and 41 bibliography entries. All internal
+references and citation keys resolve. In addition to the argument review,
+finite sanity checks covered direct addresses through maximum length 10;
+5,461 pairs of ReLU vertices through length 6; all 278 Boolean functions on
+domains of 0 through 3 input bits; and 1,093 cache streams over three inputs
+through six queries, with nonzero setup and state-dependent overhead. Exact
+rational enumeration verified the occurrence expectation. Twenty-four
+fixed-policy/cost combinations also checked the expected-cost formula with
+perfectly correlated queries, confirming that independence is unnecessary.
+These small cases check arithmetic and edge conditions; they are not substitutes
+for the general proofs. The revised LaTeX builds without warnings.

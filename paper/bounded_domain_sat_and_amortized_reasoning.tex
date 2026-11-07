@@ -84,7 +84,7 @@
 \vspace{-0.7cm}
 
 \begin{abstract}
-Whether $\Pclass=\NPclass$ does not by itself determine whether a System 1/System 2 architecture saves computation. Learning allows us to spend computation once and reuse the result. Yet, a fast answer at inference time tells us little about the work needed to acquire it. Here, we use Boolean satisfiability to examine this trade. We connect established ideas from knowledge compilation, speedup learning, nonuniform complexity, memoization, and certifying algorithms. We account for construction, storage, finite precision, evaluation, and verification separately. Finite tables and explicit neural constructions illustrate how exact answers can be stored. Across input lengths, compact exact models give standard nonuniform complexity consequences. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. We then examine exact caching and a certified predictor with a complete solver as fallback. Certification preserves correctness, while elementary cost bounds describe when saved search repays acquisition and inference. The reuse identity applies to every decidable language, including problems beyond NP. Its validity requires neither $\Pclass=\NPclass$ nor $\Pclass\neq\NPclass$; actual savings require the stated cost inequalities. Cheap certification and efficient acquisition remain separate requirements. Explicit budgets also limit additional work when prediction fails. A Lean development verifies an exhaustive SAT core, exact expansion, a fixed-variable cost bound, and certified witness reuse. A persistent service retains previous results. Controlled experiments exhibit both reduced core work and overhead that can erase elapsed-time savings. Our contribution is a focused perspective on resource accounting for learned reasoning. Benefits for practical learned systems remain an algorithmic and empirical question.
+Whether $\Pclass=\NPclass$ does not by itself determine whether a System 1/System 2 architecture saves computation. Learning allows us to spend computation once and reuse the result. Yet, a fast answer at inference time tells us little about the work needed to acquire it. Here, we use Boolean satisfiability to examine this trade. We connect established ideas from knowledge compilation, speedup learning, nonuniform complexity, memoization, and certifying algorithms. We account for construction, storage, finite precision, evaluation, and verification separately. Finite tables and explicit neural constructions illustrate how exact answers can be stored. Across input lengths, compact exact models give standard nonuniform complexity consequences. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. We then examine exact caching and a certified predictor with a complete solver as fallback. Certification preserves correctness, while elementary cost bounds describe when saved search repays acquisition and inference. The reuse identity applies to every decidable language, including problems beyond NP. Its validity requires neither $\Pclass=\NPclass$ nor $\Pclass\neq\NPclass$; actual savings require the stated cost inequalities. Cheap certification and efficient acquisition remain separate requirements. Explicit budgets also limit additional work when prediction fails. A Lean development verifies binary parsing, an exhaustive SAT core, exact expansion, restricted polynomial bounds, and certified witness reuse. A persistent service retains previous results. Controlled experiments exhibit both reduced core work and overhead that can erase elapsed-time savings. Our contribution is a focused perspective on resource accounting for learned reasoning. Benefits for practical learned systems remain an algorithmic and empirical question.
 \end{abstract}
 
 \section{Introduction}
@@ -120,7 +120,7 @@ Let us fix a standard binary encoding of Boolean formulas. We write the satisfia
 \begin{equation}
 \SAT=\{\langle\varphi\rangle:\exists a\ \varphi(a)=1\}.
 \end{equation}
-SAT is NP-complete. Here, \emph{UNSAT} denotes the language of valid formulas with no satisfying assignment; it is $\coNP$-complete. ``SAT with no fixed size cap'' and UNSAT are different notions. On valid formula encodings, UNSAT is the complement of SAT. Since we reject malformed strings, the complement of SAT over all binary strings also contains those malformed strings. Our service distinguishes an invalid encoding from an UNSAT verdict. A deterministic decider for SAT also decides UNSAT after checking validity and reversing its answer, so a uniform polynomial bound for either would give one for the other. This does not give short UNSAT certificates: universally short, polynomially checkable negative certificates would imply $\NPclass=\coNP$ \citep{sipser2020theory,cook1979}.
+SAT is NP-complete. Here, \emph{UNSAT} denotes the language of valid formulas with no satisfying assignment; it is $\coNP$-complete. ``SAT with no fixed size cap'' and UNSAT are different notions. On valid formula encodings, UNSAT is the complement of SAT. Since we reject malformed strings, the complement of SAT over all binary strings also contains those malformed strings. Our service distinguishes an invalid encoding from an UNSAT verdict. A deterministic decider for SAT also decides UNSAT after checking validity and reversing its answer, so a uniform polynomial bound for either would give one for the other. Reversing an answer does not turn satisfying assignments into UNSAT certificates. Universally short, polynomially checkable negative certificates would imply $\NPclass=\coNP$ \citep{williams2025conp,cook1979}.
 
 We can check a proposed satisfying assignment in polynomial time in the encoded formula length \citep{cook1971}. We assign malformed encodings the answer zero. Our encoding ensures that a formula of length $n$ has at most $n$ distinct variables. Evaluating the formula on an assignment takes time polynomial in $n$.
 
@@ -873,9 +873,43 @@ Structural induction bounds width discovery by $W(f)^2$ and one assignment evalu
 $G(v)+6=8\cdot2^v+4v$, hence $G(v)\leq12\cdot2^v$. Search costs at most $1+2^v(W(f)+1)$. Adding these costs and solver dispatch gives \eqref{eq:concrete-core}. For $v(f)\leq K$, use $W(f)\leq L(f)$ and $2^{v(f)}\leq2^K$. Bounding each term by a multiple of $(L(f)+1)^2$ gives \eqref{eq:fixed-cap-core}. Lean checks these inequalities together with equality of the counted solver's result and the verified solver's result. Inductive execution judgments also connect the evaluator's returned values and counts to its operational rules.
 \end{proof}
 
-This bound extends beyond a single finite set: formulas over the fixed variable set may have unbounded length. The coefficient still grows exponentially in $K$. Allowing $K$ to grow with the input therefore does not give shared polynomial constants. Moreover, a polynomial bound for one solve does not make an explicit table over all bounded-length inputs polynomial in size. The table still contains exponentially many answers.
+This bound extends beyond a single finite set: formulas over the fixed variable set may have unbounded length. The coefficient still grows exponentially in $K$. Allowing $K$ to grow without a rate bound therefore supplies no shared polynomial bound. Moreover, a polynomial bound for one solve does not make an explicit table over all bounded-length inputs polynomial in size. The table still contains exponentially many answers.
 
-The units in this proposition belong to the stated core model. Counter arithmetic is instrumentation and is not itself charged. Parsing, garbage collection, serialization, disk access, and the simulation of these operations on a bit-machine remain outside the theorem. We have not formalized the complexity classes, SAT's NP-completeness, or the advice and hierarchy results in Lean. Hence, the checked numerical bound is not a formal proof of membership in a machine-defined complexity class. The remaining general SAT obligation is still a uniform efficient exact constructor or solver for inputs with no fixed size cap, together with its full runtime bound.
+The binary parser now has a separate checked cost bound. It scans a Boolean list, reads unary variable indices, allocates instructions, and assembles the formula using shared subtrees. For an input of length $L$, the counted parsing cost is at most $8L+7$. The counted parser returns exactly the same result as the original parser. Invalid encodings produce no SAT/UNSAT verdict.
+
+\begin{corollary}[Including binary parsing]
+\label{cor:parsed-bound}
+Let $D(f)$ count parsing of the binary encoding of $f$, exhaustive solving, and decision control. If $v(f)\leq K$, then
+\begin{equation}
+D(f)\leq \bigl(14\cdot2^K+12\bigr)\bigl(L(f)+1\bigr)^2.
+\label{eq:parsed-bound}
+\end{equation}
+A malformed binary input of length $L$ is rejected within $8L+8$ counted operations.
+\end{corollary}
+
+\begin{proof}
+Length discovery costs $L+1$. Token parsing costs at most $2L+1$ and produces at most $L$ instructions. Assembly costs at most five units per instruction plus one. Adding final stack validation and dispatch gives $8L+7$. The index-reading proof charges only the consumed prefix, so the unconsumed suffix is not repeatedly charged. For valid input, add this parser bound and two control units to \eqref{eq:fixed-cap-core}; $8L+9\leq9(L+1)^2$ gives \eqref{eq:parsed-bound}. Invalid input needs one control unit after parsing. Lean checks the parser's equivalence, these budgets, and the combined SAT/UNSAT decision semantics.
+\end{proof}
+
+We can also let the variable range grow under a specified relation to input length.
+\begin{corollary}[A logarithmically growing variable range]
+\label{cor:logarithmic-width}
+If $2^{v(f)}\leq L(f)+1$, in particular if $v(f)\leq\lfloor\log_2(L(f)+1)\rfloor$, then
+\begin{equation}
+D(f)\leq24\bigl(L(f)+1\bigr)^2.
+\label{eq:logarithmic-width}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Write $L=L(f)$ and $W=W(f)$. Adding parsing and control to \eqref{eq:concrete-core} bounds $D(f)$ by $W^2+2^{v(f)}(W+13)+8L+11$. The premise and $W\leq L$ bound this by $2L^2+22L+24$, which is at most $24(L+1)^2$. The logarithmic premise implies the stated assignment-space bound. Both implications are checked in Lean.
+\end{proof}
+
+This permits unbounded variable counts on a restricted family. It is an elementary consequence of exhaustive enumeration, whose exponential dependence on the number of variables is an established baseline \citep{paturi2005improved}. The premise still requires $L(f)\geq2^{v(f)}-1$. Enforcing it by padding while retaining the original variable range can therefore require exponentially long input. Polynomial work in that padded length supplies no polynomial reduction from general SAT and no uniform bound for every expansion stage.
+
+More useful restrictions can exploit circuit structure. \citet{prasad2001atpg} study efficient ATPG on circuits with logarithmically bounded cutwidth. \citet{muller2024cutwidth} analyze cached circuit SAT under a supplied variable ordering and bounded fan-out, obtaining polynomial bounds when cutwidth grows logarithmically. Their structural cutwidth is different from our maximum-variable-index parameter. The institutional abstract for PolySAT reports a related restricted bound and circuit experiments \citep{muller2026polysat}; we have verified its publication record and abstract, not its full proof. These precedents support the restricted approach without making polynomial behavior of cached SAT a new claim.
+
+The units in this proposition belong to the stated core model. Counter arithmetic is instrumentation and is not itself charged. Binary syntax parsing is now included in the combined bound. ASCII and JSON conversion, garbage collection, serialization, disk access, and the simulation of these operations on a bit-machine remain outside it. We have not formalized the complexity classes, SAT's NP-completeness, or the advice and hierarchy results in Lean. Hence, the checked numerical bound is not a formal proof of membership in a machine-defined complexity class. The remaining general SAT obligation is still a uniform efficient exact constructor or solver for inputs with no fixed size cap, together with its full runtime bound.
 
 \subsection{Certified witness reuse and persistent results}
 \label{sec:persistent-solver}
@@ -891,7 +925,7 @@ For a stream, one further control unit is charged per query to the hybrid; the d
 
 The service also accumulates exact results in a persistent SQLite database. Every completed SAT or UNSAT answer is stored under its complete binary input and engine fingerprint. All acquired SAT witnesses remain stored; the latest active witness is retained across restarts. An exact cache hit avoids another solver call. A new input may instead benefit from witness transfer. There is no eviction, so storage grows with distinct requests. The functional Lean cache proof establishes that insertion preserves exactness and every earlier entry, assuming an exact initial cache.
 
-Persistence has an additional trust boundary. The Python adapter, SQLite transactions, serialization, and disk integrity are not kernel-verified. Records produced by the solver are trusted on reuse. Checksums detect accidental corruption; they do not authenticate a deliberately changed database. A semantic audit can re-solve stored instances and check their witnesses. Engine changes create a separate namespace and preserve older records. Integration tests cover process restarts, retained negative answers, transfer after restart, concurrent writers, malformed inputs, and integrity failures. The service reports malformed encodings as errors rather than storing them as UNSAT.
+Persistence has an additional trust boundary. The Python adapter, SQLite transactions, serialization, and disk integrity are not kernel-verified. Records produced by the solver are trusted on reuse. Checksums detect accidental corruption; they do not authenticate a deliberately changed database. A semantic audit can re-solve stored instances and check their witnesses. Engine changes create a separate namespace and preserve older records. Integration tests cover process restarts, retained negative answers, transfer after restart, concurrent writers, malformed inputs, and integrity failures. The service reports malformed encodings as errors rather than storing them as UNSAT. A schema upgrade retains earlier answers and marks previously unmeasured parsing costs as unknown. Revalidation recomputes earlier engines' inputs with the current engine, preserving the original records.
 
 \subsection{A reproducible mechanism study}
 \label{sec:mechanism-study}
@@ -900,7 +934,7 @@ We compare four variants of the same native Lean core: repeated exhaustive solvi
 
 The frozen synthetic streams use variable widths $2$, $4$, $8$, and $12$, with 32 queries per stream and three repetitions. We include repeated SAT formulas, distinct formulas satisfied by one assignment, a single change in that assignment, alternating incompatible assignments, distinct UNSAT formulas, and a mixed SAT/UNSAT stream. Distinct formulas are constructed by adding even numbers of negations to a conjunction requiring all variables to be true or all to be false. UNSAT formulas add a contradictory literal. These simple families isolate reuse and failure; they are not a sample of practical SAT instances. The experiment checks all 9,216 answers from 288 runs against their known labels. Inputs, raw records, engine fingerprints, and analysis code are retained in the repository.\footnote{See \url{https://github.com/akmaier/OracleMachines/tree/main/experiments}.}
 
-Table~\ref{tab:mechanism-results} shows the 12-variable streams. Distinct formulas sharing a witness require one fallback and 31 successful transfers. Their hybrid core work is 467,333 operations, compared with 18,880,128 for repeated solving. The exact cache alone has no hits. A single witness change requires two fallbacks; alternating witnesses give no transfer and add work. Distinct UNSAT formulas also incur overhead. The mixed stream retains its active witness through negative answers and obtains 15 transfers. The persistent hybrid improves elapsed time on the transfer stream in these runs, while smaller instances can lose that benefit to setup and persistence.
+Table~\ref{tab:mechanism-results} shows the 12-variable streams. Distinct formulas sharing a witness require one fallback and 31 successful transfers. Their hybrid uses 495,109 counted operations, including parsing, compared with 18,907,904 for repeated solving. The exact cache alone has no hits. A single witness change requires two fallbacks; alternating witnesses give no transfer and add work. Distinct UNSAT formulas also incur overhead. The mixed stream retains its active witness through negative answers and obtains 15 transfers. The persistent hybrid improves elapsed time on the transfer stream in these runs, while smaller instances can lose that benefit to setup and persistence.
 
 \begin{table}[htbp]
 \centering
@@ -908,23 +942,23 @@ Table~\ref{tab:mechanism-results} shows the 12-variable streams. Distinct formul
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{lrrrrr}
 \hline
-& \multicolumn{3}{c}{Core work / baseline} & \multicolumn{2}{c}{Total time (ms)} \\
+& \multicolumn{3}{c}{Parser + core / baseline} & \multicolumn{2}{c}{Total time (ms)} \\
 Workload & Witness & Cache & Hybrid & Baseline & Hybrid \\
 \hline
-Repeated SAT & 0.031476 & 0.031252 & 0.031252 & 203.40 & 141.52 \\
-Distinct, same witness & 0.024753 & 1.000046 & 0.024753 & 229.40 & 146.58 \\
-One witness change & 0.056118 & 1.000097 & 0.056118 & 181.37 & 143.70 \\
-Alternating witnesses & 1.000532 & 1.000087 & 1.000532 & 185.69 & 189.06 \\
-Distinct UNSAT & 1.000003 & 1.000003 & 1.000003 & 228.61 & 234.41 \\
-Mixed SAT/UNSAT & 0.534690 & 1.000024 & 0.534690 & 230.92 & 193.68 \\
+Repeated SAT & 0.032577 & 0.031252 & 0.031252 & 198.93 & 136.50 \\
+Distinct, same witness & 0.026185 & 1.000046 & 0.026185 & 223.18 & 141.01 \\
+One witness change & 0.059270 & 1.000097 & 0.059270 & 175.14 & 140.25 \\
+Alternating witnesses & 1.000531 & 1.000087 & 1.000531 & 181.31 & 186.34 \\
+Distinct UNSAT & 1.000003 & 1.000003 & 1.000003 & 227.37 & 229.87 \\
+Mixed SAT/UNSAT & 0.535378 & 1.000024 & 0.535378 & 225.10 & 187.20 \\
 \hline
 \end{tabular}
-\caption{Executed reuse study: 32 queries at variable width 12. Core ratios include acquisition and state updates. Total elapsed times are medians of three runs on the recorded macOS arm64 environment and include front-end setup and shutdown. Ratios above one indicate extra core work. The baseline is the same exhaustive solver without reuse.}
+\caption{Executed reuse study: 32 queries at variable width 12. Counted-work ratios include parsing, acquisition, and state updates. Total elapsed times are medians of three runs on the recorded macOS arm64 environment and include front-end setup and shutdown. Ratios above one indicate extra counted work. The baseline is the same exhaustive solver without reuse.}
 \label{tab:mechanism-results}
 \end{table}
 
 
-We report core operations and elapsed time separately. Core counts include first-solve acquisition, certification, fallback, witness copying, and query control. A database hit records zero core operations because it does not invoke Lean; lookup and writes still cost time. Elapsed totals include engine fingerprinting, database initialization, parsing, process communication, queries, persistence, and shutdown. All variants use the same front end and pay its setup cost, including an empty database for the two variants without caching. Engine compilation, Python interpreter startup, observer statistics, and experiment orchestration are excluded. Database sizes are reported after close; peak process memory and energy are not measured. Timings are medians of three local runs, without a claim of statistical generalization.
+We report parsing, solver-core work, and elapsed time separately. The table combines parsing with first-solve acquisition, certification, fallback, witness copying, and query control. A database hit records zero parser and core operations because it does not invoke Lean; lookup and writes still cost time. The original run without explicit parser counts is also retained; its core counts agree exactly with those of the updated engine. Elapsed totals include engine fingerprinting, database initialization, parsing, process communication, queries, persistence, and shutdown. All variants use the same front end and pay its setup cost, including an empty database for the two variants without caching. Engine compilation, Python interpreter startup, observer statistics, and experiment orchestration are excluded. Database sizes are reported after close; peak process memory and energy are not measured. Timings are medians of three local runs, without a claim of statistical generalization.
 
 The study supplies an executed example of the accounting conditions. It does not establish a practical neural learner, a benefit under an arbitrary workload, or an unrestricted complexity result. More demanding comparisons must use competitive solvers, controlled memory budgets, representative instances, and longer runs that separate recurring service work from startup.
 
@@ -1199,6 +1233,35 @@ Off-line reasoning for on-line efficiency: Knowledge bases.
 \emph{Artificial Intelligence}, 83(2), 229--239.
 \href{https://doi.org/10.1016/0004-3702(95)00015-1}{doi:10.1016/0004-3702(95)00015-1}.
 
+\bibitem[M{\"u}ller and Drechsler(2024)]{muller2024cutwidth}
+M{\"u}ller, L. and Drechsler, R. (2024).
+SAT can ensure polynomial bounds for the verification of circuits with limited cutwidth.
+In \emph{27th Euromicro Conference on Digital System Design (DSD)}.
+\url{https://agra.informatik.uni-bremen.de/doc/konf/DSD2024_LM.pdf}.
+
+
+\bibitem[M{\"u}ller et~al.(2026)M{\"u}ller, Goll{\"u}cke, and Drechsler]{muller2026polysat}
+M{\"u}ller, L., Goll{\"u}cke, M., and Drechsler, R. (2026).
+PolySAT: A fast Cache-SAT implementation for solving Boolean problems with parameterized complexity.
+\emph{IEEE Embedded Systems Letters}.
+doi:10.1109/LES.2026.3727512. Publication record and abstract checked at
+\url{https://www.dfki.de/en/web/research/projects-and-publications/publication/17741}.
+
+
+\bibitem[Paturi et~al.(2005)Paturi, Pudl{\'a}k, Saks, and Zane]{paturi2005improved}
+Paturi, R., Pudl{\'a}k, P., Saks, M.~E., and Zane, F. (2005).
+An improved exponential-time algorithm for $k$-SAT.
+\emph{Journal of the ACM}, 52(3):337--364.
+\url{https://cseweb.ucsd.edu/~paturi/myPapers/pubs/PaturiPudlakSaksZane_2005_jacm.pdf}.
+
+
+\bibitem[Prasad et~al.(2001)Prasad, Chong, and Keutzer]{prasad2001atpg}
+Prasad, M.~R., Chong, P., and Keutzer, K. (2001).
+Why is combinational ATPG efficiently solvable for practical VLSI circuits?
+\emph{Journal of Electronic Testing}, 17:509--527.
+doi:10.1023/A:1012820722053.
+
+
 \bibitem[Riedmiller(2025)]{riedmiller2025dual}
 Riedmiller, C.~Z. (2025).
 \emph{Exploring the computational necessity of dual processes for intelligence}.
@@ -1265,6 +1328,11 @@ Wen, H.~X. (2010b).
 Knowledge recognition algorithm enables $P=NP$.
 \emph{arXiv:1009.0884}. Unestablished $P=NP$ claim.
 \url{https://arxiv.org/abs/1009.0884}.
+
+\bibitem[Williams(2025)]{williams2025conp}
+Williams, R. (2025).
+Finish NP-completeness, coNP and friends. Lecture~19, MIT 6.1400.
+\url{https://people.csail.mit.edu/rrw/6.1400-2025/lec19-color.pdf}.
 
 \bibitem[Xu et~al.(2008)Xu, Hutter, Hoos, and Leyton-Brown]{xu2008satzilla}
 Xu, L., Hutter, F., Hoos, H.~H., and Leyton-Brown, K. (2008).

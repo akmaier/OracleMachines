@@ -121,8 +121,8 @@ work <= (14 * 2^K + 3) * (L + 1)^2.
 ```
 
 This is a restricted result with an explicit exponential dependence on `K`.
-It is not a polynomial bound with shared constants as `K` grows. The full table
-still has exponentially many entries. The separate `Parsing.lean` development
+It does not by itself give a polynomial bound as `K` grows without restriction.
+The full table still has exponentially many entries. The separate `Parsing.lean` development
 now charges binary syntax parsing: length discovery, unary index scanning,
 instruction allocation, and formula-stack assembly. Its result equals `decode`
 and costs at most `8L+7`, including malformed-input rejection. Formula subtrees
@@ -135,9 +135,9 @@ plus exact decision costs at most `(14*2^K+12)(L+1)^2`. Malformed encodings are
 rejected within `8L+8`. These are numerical bounds in the explicit abstract
 model. `Restricted.lean` also proves a bound with growing variable width:
 `v <= Nat.log 2 (L+1)` gives at most `24(L+1)^2` counted operations. This is
-a promised-family result. Satisfiability-preserving padding to enforce its
-premise requires `L >= 2^v-1`, so it does not give a polynomial reduction from
-all SAT inputs.
+a promised-family result. Padding that retains the variable range and enforces
+the premise requires `L >= 2^v-1`; it can therefore require exponential length
+and does not give a polynomial reduction from all SAT inputs.
 
 Counter arithmetic, garbage collection, physical memory traffic, and
 compilation to a bit-machine still require a separate simulation argument.

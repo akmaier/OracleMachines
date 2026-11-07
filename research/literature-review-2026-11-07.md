@@ -845,3 +845,128 @@ references resolve. The full axiom audit and executable build pass. The LaTeX
 build produces 27 pages without warnings. All rendered pages were visually
 inspected, with the new proof, persistence discussion, and result table on pages
 20–22 checked at full page size.
+
+## SAT versus UNSAT; parsing and a growing-variable restriction
+
+The user correctly flagged the need to distinguish SAT with no fixed size cap
+from UNSAT. The earlier phrase “unrestricted SAT” referred to general
+satisfiability; UNSAT means unsatisfiable formulas. The manuscript now states this
+at the definition. SAT is NP-complete; UNSAT is coNP-complete. For the encoding
+convention here, malformed binary strings lie outside SAT but are not valid
+unsatisfiable formulas. The complement over all strings is therefore the union
+of invalid encodings and valid UNSAT encodings. The service returns an error for
+invalid input. [Williams's MIT lecture, slides 19–23](https://people.csail.mit.edu/rrw/6.1400-2025/lec19-color.pdf)
+checks the conventional complement and coNP-completeness facts. The existing
+Cook–Reckhow discussion retains the distinction between exact decision and
+universally short negative certificates.
+
+### New checked results
+
+`Decision.lean` defines valid-formula `EncodedUNSAT` and a three-outcome decision:
+`none`, `some true`, and `some false`. It proves their equivalence to invalid,
+SAT, and UNSAT inputs. The total Boolean solver's false result means invalid
+**or** UNSAT. The exact-cache UNSAT theorem explicitly requires validity.
+These are language-semantic results; complexity classes are not defined in Lean.
+
+`Parsing.lean` closes the previous omission of binary syntax parsing from the
+counted model. Unary-index scanning is charged by consumed input, instruction
+parsing costs at most `2L+1`, and instruction count is at most `L`. Assembly
+costs at most `5I+1` for `I` instructions. Length discovery, assembly, final
+validation, and control give a parser bound `8L+7`. The counted parser equals
+the original parser on every binary input, including malformed inputs. Adding
+decision gives `(14*2^K+12)(L+1)^2` on `encode f` when `f.width <= K`.
+Malformed encodings receive no decision within `8L+8` counted units.
+
+`Restricted.lean` permits a growing variable range: if `2^v <= L+1`, then parsing
+plus exact decision costs at most `24(L+1)^2`. The logarithmic-width theorem
+derives the premise from `v <= Nat.log 2 (L+1)`. A further lemma states the
+length consequence `L >= 2^v-1`. Thus padding to force the premise while keeping
+the variable range is not established as a polynomial reduction from general
+SAT. The restriction is on the supplied inputs; this does not prove efficient
+construction of every finite-domain table or solve P versus NP.
+
+The library now contains 131 named source theorems. The default audit passes for
+653 namespace declarations, including 383 theorem declarations with generated
+helpers. No additional axioms or admitted proofs are accepted. The underlying
+model charges Boolean-list operations and constructor allocation with shared
+formula subtrees. ASCII/JSON conversion, instrumentation arithmetic, physical
+memory management, native compilation/runtime, and SQLite remain outside the
+formal step bound. The new theorem does not claim to close those obligations.
+
+### Executable and persistent evidence
+
+The native service now invokes the counted parser. It reports `parse_work`,
+`core_work`, and their sum `counted_work`. Cache hits perform no native parser or
+solver work, while lookup and synchronization still contribute to elapsed time.
+Schema version 2 preserves all earlier rows and adds parser-acquisition costs;
+legacy unknown costs remain NULL, not zero. The resumable `revalidate` command
+re-solves earlier engines' inputs instead of trusting their old answer bits.
+
+All 12 integration tests pass, including real version-1 schema migration,
+restart retention of parser costs, and recomputation despite a deliberately
+incorrect old-engine answer in an isolated test database. The local store
+retains its 355 original records and 355 revalidated records for the new engine:
+226 satisfiable and 129 unsatisfiable formulas in each namespace. All current
+records pass semantic audit; no original records were removed.
+
+The updated [study](../experiments/README.md) preserves the earlier raw results
+and adds a separate `results/with-parsing` dataset. All 9,216 new answers across
+288 runs match their known labels. Every solver-core count matches the original
+run; the new total adds parser work. At width 12, the distinct-same-witness
+hybrid uses 495,109 combined operations against 18,907,904 for the baseline.
+Median total elapsed times are 141.01 ms and 223.18 ms respectively. Losing
+workloads remain reported. Saved-result overwriting is now rejected unless the
+caller selects a different output directory. Input hashes, raw-record hash,
+parser + core totals, and setup + service + shutdown sums are checked.
+
+### Publication context of restricted polynomial behavior
+
+These new bounds are a verified specialization of known enumeration principles,
+not a claim of newly discovered SAT tractability. The introduction of
+[Paturi et al. (2005)](https://cseweb.ucsd.edu/~paturi/myPapers/pubs/PaturiPudlakSaksZane_2005_jacm.pdf),
+printed p. 338, describes exhaustive enumeration as the exponential baseline
+before improved k-SAT algorithms. Substituting a logarithmic variable budget into
+that dependence is our elementary inference; the explicit constants belong to
+our counted implementation.
+
+There are also substantially more practical structural restrictions:
+
+- [Prasad, Chong, and Keutzer (2001)](https://link.springer.com/article/10.1023/A:1012820722053)
+  study ATPG on circuits with logarithmically bounded cutwidth. The publisher
+  abstract and publication details were checked; the full journal proof was not
+  available for independent audit. This is older prior work on restricted
+  polynomial behavior, not the same parameter as our variable-index bound.
+- [Müller and Drechsler (2024)](https://agra.informatik.uni-bremen.de/doc/konf/DSD2024_LM.pdf)
+  analyze a caching SAT procedure for circuit CNFs. Sections III-B and IV-C
+  specify a static ordering, distinct residual subformulas, and a bound depending
+  on cutwidth and maximum fan-out. With bounded fan-out, logarithmic cutwidth
+  gives their polynomial bound. The ordering and residual-formula handling are
+  part of their algorithmic setting. The relevant sections were read; this is
+  not a Lean verification of their solver. The [DFKI DSD record](https://www.dfki.de/web/forschung/projekte-publikationen/publikation/15125)
+  confirms the 2024 conference publication, separate from the workshop version.
+- [PolySAT (2026)](https://www.dfki.de/en/web/research/projects-and-publications/publication/17741),
+  by Müller, Gollücke, and Drechsler, reports a related cutwidth-based guarantee
+  and circuit experiments. The institutional abstract and the authors' journal
+  listing confirm IEEE Embedded Systems Letters and DOI
+  `10.1109/LES.2026.3727512`. The DOI endpoint was inaccessible through the search
+  tool, and the full proof was not checked. The manuscript labels that boundary.
+
+The important distinction is structural cutwidth versus the largest variable
+index plus one. The former can remain small on large useful circuit families;
+our exhaustive solver does not exploit it. A practical structural solver,
+verified per-state handling costs, and a representative comparison remain tasks
+beyond the present mechanism study. The new bibliography entries and comparison
+make these precedents explicit.
+
+### Final validation of this revision
+
+Relative to commit `653b343`, all five lemmas, eight propositions, three existing
+corollaries, 16 existing proof environments, and 57 existing equation
+environments remain textually unchanged. The manuscript adds two corollaries,
+two proofs, and two equation environments. Its 76 labels are unique, and all
+references and citations resolve against 51 bibliography entries. The final
+LaTeX build produces 29 pages without warnings or overfull/underfull boxes.
+All pages were rendered and visually inspected; the terminology, new bounds,
+and updated results table were also inspected at full page size. The Lean
+audit, native executable build, integration tests, and preserved-data checks
+described above passed.

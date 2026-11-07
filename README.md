@@ -67,8 +67,8 @@ polynomial-time decision and the workload conditions that amortize costly
 expansion. The correctness induction supplies neither bound by itself and does
 not prove P = NP.
 The executable development now supplies an exact SAT solver, a counted binary
-parser, a restricted
-polynomial bound for a fixed variable cap, and a certified witness-reuse policy.
+parser, polynomial bounds for fixed or logarithmically growing variable ranges,
+and a certified witness-reuse policy.
 The [persistent solver](solver/README.md) retains every completed result across
 restarts. The [reproducible study](experiments/README.md) compares reuse with repeated
 exhaustive solving;
@@ -143,9 +143,10 @@ lake build
 The toolchain and dependencies are pinned. The default build audits all declarations in the formal library
 namespace for admitted proofs and additional axioms. The formalization treats
 general runtime costs as explicit numerical ledgers and connects a concrete
-SAT core to an operational cost model. Its cost bound is polynomial in formula
-length only for a **fixed** variable cap, with exponential dependence on that
-cap. It does not formalize P versus NP or prove an unrestricted polynomial bound.
+SAT parser and core to an operational cost model. It proves polynomial bounds
+for a **fixed** variable cap and for variable width at most `floor(log2(L+1))`,
+where `L` is the encoded length. These restrictions do not give a bound for all
+SAT inputs or a formalization of P versus NP.
 
 ## Persistent solver
 

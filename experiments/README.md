@@ -1,8 +1,26 @@
 # Executed reuse and persistence study
 
+## Expanded public and chronological study
+
+The [new study](results/expanded/README.md) covers 28 public SATLIB instances
+and four structural/learning streams: 162 runs, 1,260 correct answers, no failures
+under a three-second query deadline. It compares direct and checked solving,
+exact caching, archived proposals, live clauses, and a compact online predictor.
+It reports latency tails, complete worker cost, phase accounting, process RSS,
+proof/model/database sizes, transfer and distribution shift. The
+[development pilot](results/expanded-pilot/README.md) retains failures that led
+to a proved stack-safe length rewrite. All older studies below remain unchanged.
+
+Run `experiments/run_expanded.py` with the five source archives listed in its
+manifest and an empty output directory. See the linked study for build commands,
+selection rules, measurements and limitations. Small medians do not imply a
+universal speedup; the checked unary interface is much slower than direct DIMACS
+on the circuit examples, and extra reuse can lose on UNSAT.
+
+
 ## Checked CDCL and warm service
 
-The newest study compares the counted lazy reference, checked CaDiCaL without
+The earlier CDCL study compares the counted lazy reference, checked CaDiCaL without
 reuse, the automatic local-search/CDCL policy without reuse, automatic exact
 caching, and the full persistent policy. Run it separately from the historical
 operation-ledger study:

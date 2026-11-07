@@ -86,6 +86,15 @@ restarts. The [reproducible studies](experiments/README.md) compare reuse with
 lazy solving and checked CDCL, while retaining the earlier exhaustive reference.
 They do not establish efficient exact learning on unrestricted instances.
 
+The seven-item follow-up adds compact restricted coverage, a complete assignment
+search transition system with payload bounds, live CaDiCaL clause reuse, a bounded
+persistent predictor, query deadlines, strict cache checks, and disjoint measured
+phases. All 57 tests and the 651-theorem axiom audit pass. The expanded study checks
+1,260 answers on public and chronological streams and reports gains, overhead,
+and memory costs. [Implementation scope](research/implementation-gaps.md) records
+which engineering gaps are addressed and which stronger mathematical claims
+remain open. None of these changes establishes unrestricted polynomial SAT.
+
 The central question is when the expense of acquiring reusable knowledge is repaid
 by reduced future computation. Exact representability alone establishes neither
 compactness nor efficient learning, and a correct hybrid need not be faster overall.

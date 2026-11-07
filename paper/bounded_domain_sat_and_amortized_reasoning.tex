@@ -85,7 +85,7 @@
 \vspace{-0.7cm}
 
 \begin{abstract}
-Whether $\Pclass=\NPclass$ does not by itself determine whether a System 1/System 2 architecture saves computation. Learning allows us to spend computation once and reuse the result. Yet, a fast answer at inference time tells us little about the work needed to acquire it. Here, we use Boolean satisfiability to examine this trade. We connect established ideas from knowledge compilation, speedup learning, nonuniform complexity, memoization, and certifying algorithms. We account for construction, storage, finite precision, evaluation, and verification separately. Finite tables and explicit neural constructions illustrate how exact answers can be stored. Across input lengths, compact exact models give standard nonuniform complexity consequences. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. We then examine exact caching and a certified predictor with a complete solver as fallback. Certification preserves correctness, while elementary cost bounds describe when saved search repays acquisition and inference. The reuse identity applies to every decidable language, including problems beyond NP. Its validity requires neither $\Pclass=\NPclass$ nor $\Pclass\neq\NPclass$; actual savings require the stated cost inequalities. Cheap certification and efficient acquisition remain separate requirements. Explicit budgets also limit additional work when prediction fails. A Lean development verifies binary parsing, exact expansion, restricted bounds for an exhaustive reference solver, lazy search with reusable witnesses and refutations, and a sound connection to an external CDCL solver. A persistent service retains previous results and certificates. Controlled experiments exhibit both reduced core work and overhead that can erase elapsed-time savings. Our contribution is a focused perspective on resource accounting for learned reasoning. Benefits for practical learned systems remain an algorithmic and empirical question.
+Whether $\Pclass=\NPclass$ does not by itself determine whether a System 1/System 2 architecture saves computation. Learning allows us to spend computation once and reuse the result. Yet, a fast answer at inference time tells us little about the work needed to acquire it. Here, we use Boolean satisfiability to examine this trade. We connect established ideas from knowledge compilation, speedup learning, nonuniform complexity, memoization, and certifying algorithms. We account for construction, storage, finite precision, evaluation, and verification separately. Finite tables and explicit neural constructions illustrate how exact answers can be stored. Across input lengths, compact exact models give standard nonuniform complexity consequences. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. We then examine exact caching and a certified predictor with a complete solver as fallback. Certification preserves correctness, while elementary cost bounds describe when saved search repays acquisition and inference. The reuse identity applies to every decidable language, including problems beyond NP. Its validity requires neither $\Pclass=\NPclass$ nor $\Pclass\neq\NPclass$; actual savings require the stated cost inequalities. Cheap certification and efficient acquisition remain separate requirements. Explicit budgets also limit additional work when prediction fails. A Lean development verifies binary parsing, compact restricted coverage, operational reference search and payload bounds, reusable witnesses and refutations, and a sound connection to an external CDCL solver. A persistent service retains results, certificates, and a bounded online predictor; a live solver session also reuses internal clauses. Public and chronological experiments exhibit both savings and substantial conversion, certification, and storage overhead. Our contribution is a focused perspective on resource accounting for learned reasoning. Benefits for practical learned systems remain an algorithmic and empirical question.
 \end{abstract}
 
 \section{Introduction}
@@ -942,6 +942,41 @@ For the data bound, let $C$ be the remaining encoded code length and $V$ the val
 
 Hence, the restricted decision bounds above cover all accepted binary requests, using their original input length. They are not limited to inputs constructed by our encoder. Note that this transition machine evaluates one assignment. A false value is not an UNSAT verdict. The reference solver obtains negative answers by exhaustive search; the improved solver below supplies refutation trees. The result also does not bound either full solver's live memory. The reference solver's eager assignment list can be exponential. The native service retains the recursive evaluator for complete-witness checks, whose count this separate machine realizes exactly. Its partial evaluator and search need separate transition proofs. Combining parsing and full search into one transition semantics remains a further proof obligation. A simulation on a bit-machine must additionally account for data access and representation. These are distinct steps toward a complete runtime proof.
 
+\subsection{Compact restricted expansion and operational search}
+\label{sec:compact-expansion}
+
+The table is not the only possible state representation. On a tractable family, we can retain a solver and a coverage cap instead of all answers. This changes what expansion means: the state records which inputs we promise to answer, while each query still pays for computation. The following construction makes that distinction explicit.
+
+\begin{proposition}[Compact coverage on the logarithmic-width family]
+\label{prop:compact-coverage}
+Let $R$ be the valid encodings $x$ with decoded width $v\leq\lfloor\log_2(|x|+1)\rfloor$. Represent stage $n$ by a unary list of $n$ cells. On $x\in R$ with $|x|\leq n$, run the counted reference decider; otherwise return no answer. Expansion by one cell preserves all earlier answers, and every $x\in R$ is covered at stage $|x|$. Construction to stage $n$ uses $n$ cell-allocation transitions and $n$ state cells. For $L=|x|$, construction to stage $L$ plus the reference parser/decision ledger is at most $25(L+1)^2$.
+\end{proposition}
+
+\begin{proof}
+The state length equals its stage by induction. Increasing that length preserves the guard $|x|\leq n$ and leaves the decoder and solver unchanged. At $n=|x|$, the guard holds. The solver's soundness supplies the correct SAT or UNSAT result. Each expansion allocates one cell, so construction and state size are linear in the stage. The logarithmic-width decision bound is $24(L+1)^2$. Adding $L\leq(L+1)^2$ proves the stated ledger bound. The Lean module \texttt{CompactExpansion.lean} checks these statements.
+\end{proof}
+
+Note the scope of the last bound. It adds the explicit construction transitions to the existing parser/decision ledger. It does not charge the coverage and promise tests, duplicate parsing in the demonstration interface, or compiled execution. In particular, scanning a much larger unary cap can cost more than reading a short query. This is neither a full service-time bound nor a table of previously computed answers. The restriction on width remains essential; extending coverage does not remove it.
+
+\begin{proposition}[Search transitions and intermediate data]
+\label{prop:search-machine}
+For a parsed formula $f$ of width $v$, weight $W$, and encoding length $L$, supply its postfix program and the list of all $2^v$ assignments. There is a complete assignment-search trace of at most
+\[
+  1+2^v(W+2)
+\]
+transitions, returning the reference solver's witness or no witness. Every reachable state has payload at most
+\[
+  (v+1)2^v+v+2L+2.
+\]
+If $2^v\leq L+1$, this payload is at most $5(L+1)^2$.
+\end{proposition}
+
+\begin{proof}
+A nonempty search step selects an assignment, executes its evaluator trace, and consumes the resulting Boolean. Evaluation costs at most $W$ transitions. Selection and completion add two. An empty candidate list takes one terminal transition, yielding the stated bound by induction on the candidate list. For storage, count each pending assignment's bits and one list cell. Their initial payload is at most $(v+1)2^v$. Selecting an assignment transfers that payload to the evaluator. The evaluator's code/stack potential never increases, and its read suffix never exceeds the assignment length. These invariants give the displayed bound at every reachable state. Finally, $v\leq W\leq L$ and $2^v\leq L+1$ imply the quadratic bound. The Lean module \texttt{SearchMachine.lean} checks the traces and invariants.
+\end{proof}
+
+This extends the operational proof from one evaluation to complete assignment search. Candidate generation and parsing are still supplied separately. Payload symbols do not measure physical heap bytes or pointer representation. Moreover, this machine describes the eager reference; the production lazy and CDCL paths require their own machine simulations. A compiler rewrite for counted length discovery preserves both its value and ledger while avoiding one native stack frame per input bit. Its equality is also proved in Lean.
+
 \subsection{Certified witness reuse and persistent results}
 \label{sec:persistent-solver}
 
@@ -1077,13 +1112,13 @@ Let $A(f)$ be the compiled AIG and $C(f)$ its CNF translation. Compilation prese
 Induction on $f$ establishes equality between its evaluation and that of $A(f)$. Cached graph extension preserves existing references; the constant, variable, negation, and conjunction constructors preserve their respective Boolean meanings. Thus, a constant-false root excludes every satisfying valuation. For LRAT acceptance, the standard-library checker theorem gives unsatisfiability of $C(f)$. The standard-library AIG-to-CNF theorem transfers this conclusion to $A(f)$, and evaluation preservation transfers it to $f$. The positive case follows directly from witness evaluation.
 \end{proof}
 
-The Lean module \texttt{CDCL.lean} composes these results with the pinned standard library \citep{lean2025sat}. It does not invoke a native-decision axiom. The transitive audit passes for 1,035 declarations, including 563 theorem declarations. The executable still relies on compilation, runtime execution, serialization, and the service adapter outside the kernel proof. An external verdict or clause number alone is never enough for a new accepted answer.
+The Lean module \texttt{CDCL.lean} composes these results with the pinned standard library \citep{lean2025sat}. It does not invoke a native-decision axiom. The transitive audit passes for 1,197 declarations, including 651 theorem declarations. The executable still relies on compilation, runtime execution, serialization, and the service adapter outside the kernel proof. An external verdict or clause number alone is never enough for a new accepted answer.
 
 The automatic policy first tries stored witnesses and certificates, circuit simplification, and two uniform-phase witnesses. It then allows 64 local search nodes before external solving. Exhaustion of this preliminary budget means that no proposal was found. Every returned proposal is checked independently; exhaustion never becomes an UNSAT verdict. External timeouts and failed checks return errors without storing a decision. Consequently, the bounded service promises sound completed answers, not unconditional termination with an answer.
 
 We also reduce the cost of using acquired knowledge. An index of distinct proposals bounds retrieval without scanning every archived duplicate. An unchanged active witness requires no database rewrite. A JSON-lines service retains its database connection and native checker across requests, amortizing startup and fingerprinting. Each acquisition still commits durably before its response. All older result rows remain archived. The new engine revalidates 355 inputs while preserving 1,065 earlier rows and their proofs; every current result passes a fresh semantic audit.
 
-These improvements leave explicit obligations. We have no complete operation ledger for AIG construction, CDCL, or LRAT checking, so modern acquisitions report unknown total abstract work rather than zero. Known parser work and measured elapsed time remain separate. The earlier numerical bounds describe their original implementations. The adapter also starts a fresh CaDiCaL process on each unresolved query: saved results and certificates persist, but its internal learned clauses do not. Certified incremental solving already has published methods \citep{fazekas2024incremental}; integrating such a session with the checked formula boundary remains work for this implementation. No part of this construction proves a polynomial bound for unrestricted SAT.
+These improvements leave explicit obligations. We have no complete operation ledger for AIG construction, CDCL, or LRAT checking, so modern acquisitions report unknown total abstract work rather than zero. Known parser work and measured elapsed time remain separate. The earlier numerical bounds describe their original implementations. The default adapter starts a fresh CaDiCaL process on each unresolved query. Section~\ref{sec:expanded-service} adds live clause reuse with separately checked answers. Fully incremental negative certification remains an additional obligation; published methods already address it \citep{fazekas2024incremental}. No part of this construction proves a polynomial bound for unrestricted SAT.
 
 \subsection{Measured costs with checked CDCL}
 \label{sec:cdcl-study}
@@ -1120,9 +1155,61 @@ Repeated planted SAT & 608.76 & 39.52 & 52.39 & 9.44 & 733.35 & 134.20 \\
 
 On the six-into-five pigeonhole stream, total time falls from 5596.71\,ms with lazy search to 154.45\,ms with persistent reuse. The automatic policy alone makes eight external calls; the persistent policy makes one and checks seven transferred refutations. The planted and larger satisfiable streams similarly reuse checked witnesses. The late contradiction is eliminated by circuit simplification without external search.
 
-The losing cases matter too. Preliminary search avoids unnecessary subprocesses on mixed units, the chain, and the smallest pigeonhole stream. On harder instances it adds work before CDCL. Tiny streams remain slightly slower with database persistence than with lazy search alone. On repeated planted SAT, exact caching already obtains seven hits and takes 132.81\,ms total, against 134.20\,ms for the full policy. Hence, additional reuse mechanisms need not repay their overhead. Three local repetitions and these syntactic families establish neither universal acceleration nor competitive SAT performance. Peak memory, large proof logs, and broad application workloads remain unmeasured.
+The losing cases matter too. Preliminary search avoids unnecessary subprocesses on mixed units, the chain, and the smallest pigeonhole stream. On harder instances it adds work before CDCL. Tiny streams remain slightly slower with database persistence than with lazy search alone. On repeated planted SAT, exact caching already obtains seven hits and takes 132.81\,ms total, against 134.20\,ms for the full policy. Hence, additional reuse mechanisms need not repay their overhead. Three local repetitions and these syntactic families establish neither universal acceleration nor competitive SAT performance. That study did not measure peak memory, large proof logs, or broad application workloads.
 
-The repository retains all earlier datasets unchanged and saves the new inputs, raw runs, fingerprints, and timing components separately. Integration tests additionally compare 120 seeded CNFs with independent truth tables and reject forged external models, invalid or wrong-formula LRAT proofs, and timeouts. Together with the earlier checks, all 34 service tests pass. These results support the checked integration and expose its costs; they do not change the asymptotic conclusion of the finite-expansion argument.
+The repository retains all earlier datasets unchanged and saves the new inputs, raw runs, fingerprints, and timing components separately. Integration tests additionally compare 120 seeded CNFs with independent truth tables and reject forged external models, invalid or wrong-formula LRAT proofs, and timeouts. At that implementation milestone, all 34 service tests passed. These results support the checked integration and expose its costs; they do not change the asymptotic conclusion of the finite-expansion argument.
+
+\subsection{Live clause reuse, learned proposals, and service budgets}
+\label{sec:expanded-service}
+
+We now also provide a long-lived CaDiCaL session. Shared circuit definitions remain in that session; each query adds definitions as needed and supplies a root assumption. CaDiCaL can retain internal learned clauses across calls. Its incremental API and clause-management methods are established techniques \citep{biere2024cadical,fazekas2024incremental}. Our adapter remains outside the kernel proof. A proposed SAT assignment therefore passes the original-formula evaluator. A negative proposal triggers a fresh standalone LRAT run and check. This additional work is deliberate: live clause reuse alone does not supply checked incremental UNSAT certification. Internal clauses are lost on restart or a session-cap reset; archived results and certificates remain.
+
+To distinguish generalization from retrieval, we add a small online linear predictor using the perceptron update principle \citep{rosenblatt1958}. Five shared integer weights score literal-polarity features, independently of variable identity. Feature counts and weights are clipped, and counters saturate; serialized parameters stay below 256 bytes. This excludes input features and the growing archive. We train only on newly acquired, checked SAT witnesses, charging label acquisition and updates within the stream. Model updates and answer insertion commit together. Saved parameters survive restart within the same checker namespace. Predictions are candidate assignments, never negative verdicts. The witness checker preserves answer soundness even when the model is wrong. No convergence, exact-learning, or general-SAT efficiency theorem is asserted for this clipped heuristic.
+
+The service records disjoint elapsed phases for retrieval, serialization, native preparation and checks, prediction, training, external solving, persistence, and residual control. Their sum equals measured query wall time. Setup is separate. CPU counters distinguish the Python process from children reaped during the query; live child CPU is not included until reaping. Reported RSS values are process-lifetime high-water marks, not simultaneous process-tree peaks or formal memory bounds. Proof, model, and final database sizes are recorded separately. Thus, elapsed accounting covers the service while the complete abstract operation ledger for the modern path remains unknown.
+
+A query deadline now covers native I/O, solving, verification, and database work. Expired workers are killed and reaped; database writes are atomic. Input, message, and proof limits bound accepted data. External output is file-backed and monitored, so transient disk growth can overshoot between checks. Python and SQLite enforce deadlines cooperatively. These controls are not a hard real-time or kernel-verified deployment guarantee. An exhausted budget returns an error and no unchecked verdict, making the budgeted service incomplete. Optional strict cache mode rechecks every saved witness or certificate; historical negatives without a certificate are solved again. Checksums alone continue to provide only an integrity check.
+
+\subsection{Public instances and chronological transfer}
+\label{sec:expanded-study}
+
+We extend the mechanism study to fixed selections from SATLIB: random satisfiable and unsatisfiable 3-SAT, graph colouring, AIM, and circuit fault analysis \citep{satlib}. The selection rule, archive and instance hashes, solver fingerprints, chronological events, and all errors are retained. These are older, small benchmarks, including families known to admit effective preprocessing. They broaden the earlier synthetic study without constituting a modern SAT-competition evaluation.
+
+We select six random SAT, six random UNSAT, six graph-colouring, six AIM (three of each verdict), and four circuit instances (two of each verdict) by the published filename rule. Four additional streams test signed-unit transfer, a shift from units to graph colouring and back, different roots over shared planted structure, and exact repetition. Each method sees 70 queries per repetition. Six modes and three repetitions yield 162 runs and 1,260 correct completed answers, including 198 negative answers, with no timeout or missing event under the three-second query budget. The retained development pilot includes the earlier format and stack-overflow failures; its timings are not pooled with this comparison.
+
+The direct baseline solves the original CNF through the same bounded external-process wrapper, after normalizing legacy DIMACS trailers. It does not certify the result. Checked solving uses our unary postfix encoding, circuit translation, model/proof checks, and durable writes, with exact reuse disabled. Other modes add exact caching, the stored witness/proof portfolio, a live incremental engine, or the combined portfolio, incremental engine, and learned predictor. The incremental-only mode disables the stored proposal portfolio and model. All modes with a service retain results; disabling reuse never deletes acquired evidence. Each stream starts in a fresh worker and empty database. Queries execute chronologically, so later labels cannot train earlier proposals.
+
+\begin{table}[htbp]
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{lrrrrr}
+\toprule
+Stream & Direct & Checked & Portfolio & Incremental & Learned \\
+\midrule
+Random SAT, 50 & 5.56 & 12.22 & 14.00 & 9.94 & 13.13 \\
+Random UNSAT, 50 & 5.32 & 14.39 & 23.83 & 19.31 & 28.86 \\
+Graph colouring & 5.36 & 12.94 & 10.33 & 9.09 & 7.26 \\
+AIM & 5.33 & 12.32 & 17.43 & 13.10 & 18.08 \\
+Circuit faults & 7.34 & 857.26 & 957.52 & 887.56 & 1045.45 \\
+Signed-unit transfer & 5.18 & 5.88 & 6.02 & 0.54 & 0.53 \\
+Distribution shift & 5.25 & 12.48 & 7.43 & 8.82 & 6.81 \\
+Shared definitions & 5.20 & 7.14 & 5.26 & 1.97 & 2.24 \\
+Exact repetition & 5.22 & 6.93 & 0.34 & 0.33 & 0.35 \\
+\bottomrule
+\end{tabular}
+\caption{Median query latency in milliseconds, pooling three chronological repetitions. Conversion, first-use startup, checks, training, and committed writes are included where applicable. ``Learned'' is the combined policy, so its differences do not isolate learning alone. Direct solving uses a different input interface and omits certification. Full worker times and latency tails are retained separately.}
+\label{tab:expanded-results}
+\end{table}
+
+On the shared-definition stream, the first incremental call retains three learned clauses. Subsequent calls begin with those clauses and add 13 clauses each, compared with 784 additions initially. Median query latency falls from 7.14\,ms for checked solving to 1.97\,ms with live reuse. Whole-worker medians, including startup, initialization, conversion, all queries, instrumentation, and shutdown, are 245.98 and 200.28\,ms. Thus, query ratios overstate the gain on short streams. These observations establish retention and shared-state use; they do not isolate the causal benefit of the three clauses from the other retained solver state.
+
+The predictor certifies all 24 held-out signed-unit queries across the repetitions, using witnesses different from the first training witness. The complete ten-query stream has nine learned hits per repetition. Yet incremental solving alone has almost the same median latency (0.54 versus 0.53\,ms), and its whole-worker median is slightly lower (184.02 versus 184.47\,ms). After the shift to graph colouring, there are no learned hits on those graph queries; stored-witness reuse and the fallback still supply correct answers. The first return to units also needs fallback before learned hits resume. This is transfer in a simple tractable family, not evidence of efficient exact learning for general SAT.
+
+Regressions remain visible. On random UNSAT, incremental median latency is 19.31\,ms versus 14.39\,ms for checked solving, and the combined learned policy takes 28.86\,ms. Negative proposals still pay for independent certification. On circuit faults, checked and combined-policy medians are 857.26 and 1045.45\,ms, whereas direct solving takes 7.34\,ms. Unary expansion, the checked interface, and persistence dominate this comparison; it is not a comparison of CaDiCaL search alone. The largest observed child-process RSS high-water mark is about 350\,MiB, and the largest service-process mark is about 213\,MiB. These maxima must not be added as a simultaneous peak. The largest final database is about 90.8\,MiB, despite model states of at most 56 bytes in these runs. Compact parameters do not make the complete service compact.
+
+All 57 integration tests pass, including independently enumerated truth tables, changed assumptions, forged positive and negative proposals, strict-cache checks, verification deadlines, concurrent model updates, and a large-input regression. Replay preserves all 1,420 previous result rows and 258 certificates, adds 355 current-engine results, and audits all of them. Host scheduling and background activity were not controlled; the first few seconds also overlapped integration tests. Small timing differences therefore require caution. These checks and three local timing repetitions are evidence for the implementation's stated boundaries. They do not supply a full bit-machine simulation, guaranteed speedup under shift, or a competitive modern SAT benchmark.
+
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
@@ -1170,21 +1257,21 @@ Their thematic proximity helps us state the missing obligations. We must specify
 \section{Remaining questions and an evaluation protocol}
 \label{sec:open}
 
-We now have explicit conditions for exactness and savings, a verified concrete core, and a controlled study of witness reuse. Establishing the conditions for a practical learned system still requires further algorithms and measurements. The following questions describe these remaining obligations. They do not claim unexplored territory across the wider literature.
+We now have explicit conditions for exactness and savings, restricted compact expansion, an operational reference search, and checked service experiments. Establishing the conditions for a practical learned system still requires further algorithms and measurements. The following questions describe these remaining obligations. They do not claim unexplored territory across the wider literature.
 
 \paragraph{Compactness and acquisition.}
-Can we construct a representation smaller than a table and evaluate it with a useful correctness guarantee? To answer this, we must fix the SAT instance family, coverage, precision, acquisition interface, and budget. Tractable subclasses or distributional guarantees may support positive results without meeting Proposition~\ref{prop:advice} on all inputs. For unrestricted SAT, polynomial-size exact models remain unestablished here. So do lower bounds excluding them. In particular, our exponential ReLU construction tells us neither that this size is necessary nor that a smaller model can be learned efficiently.
+Proposition~\ref{prop:compact-coverage} gives one compact construction on a restricted family. Which richer families support similarly useful representations? To answer this, we must fix the SAT instance family, coverage, precision, acquisition interface, and budget. Tractable subclasses or distributional guarantees may support positive results without meeting Proposition~\ref{prop:advice} on all inputs. For unrestricted SAT, polynomial-size exact models remain unestablished here. So do lower bounds excluding them. In particular, our exponential ReLU construction tells us neither that this size is necessary nor that a smaller model can be learned efficiently.
 
 \paragraph{Generalization, memory, and changing workloads.}
-When does learning save more work than caching under the same memory budget? Equation~\eqref{eq:cache-distribution} gives a reference without eviction. Yet, memory limits, eviction, retraining, and distribution shifts change the costs. We cannot apply the fixed-policy threshold in Proposition~\ref{prop:savings} unchanged to adaptation. We must evaluate conditional savings at each history and include updates. Certification still preserves correctness after a workload change within the covered domain. It need not preserve fallback frequency or expected savings.
+The bounded predictor demonstrates checked transfer to new witnesses. When does learning save more work than caching under the same total memory budget? Equation~\eqref{eq:cache-distribution} gives a reference without eviction. Yet, memory limits, eviction, retraining, and distribution shifts change the costs. We cannot apply the fixed-policy threshold in Proposition~\ref{prop:savings} unchanged to adaptation. We must evaluate conditional savings at each history and include updates. Certification still preserves correctness after a workload change within the covered domain. It need not preserve fallback frequency or expected savings.
 
 \paragraph{Certification and deployment budgets.}
-Which certificates can the fast path produce and check within its budget? A short certificate may exist even when we cannot find it cheaply. As positive and negative verification differ, we should report their outcomes separately. A timeout ensures access to fallback. Proposition~\ref{prop:overhead} bounds additional work if we implement its solver and update-budget assumptions. Note that aborting the fallback as well changes the guarantee. The resulting service may return ``unknown'' and is incomplete.
+Which certificates can the fast path produce and check within its budget? A short certificate may exist even when we cannot find it cheaply. As positive and negative verification differ, we should report their outcomes separately. A timeout on prediction can hand control to fallback when time remains; a service-wide deadline cannot guarantee that fallback completes. Proposition~\ref{prop:overhead} bounds additional work if we implement its solver and update-budget assumptions. Note that aborting the fallback as well changes the guarantee. The resulting service may return ``unknown'' and is incomplete.
 
 \paragraph{A reproducible comparison.}
-In an empirical study, we would first fix encodings, generators, query order, memory limits, solver versions, and hardware. We would then compare a solver alone, an exact cache, and a certified learned hybrid. Test streams should include repeated queries, distinct held-out formulas, and changed workloads. Both satisfiable and unsatisfiable instances are needed. We should distinguish reuse of identical inputs from transfer to new ones. A frozen test stream and chronological records of online learning prevent us from using later answers earlier.
+Sections~\ref{sec:cdcl-study} and \ref{sec:expanded-study} fix encodings, query order, solver versions, and local hardware, and compare solving, exact caching, and certified reuse. Larger studies should additionally impose comparable total memory budgets and use modern application suites. Test streams should include repeated queries, distinct held-out formulas, and changed workloads. Both satisfiable and unsatisfiable instances are needed. We should distinguish reuse of identical inputs from transfer to new ones. A frozen test stream and chronological records of online learning prevent us from using later answers earlier.
 
-For each method, we should report acquisition and label-generation costs, parameter and cache bytes, verification work, certified success, conditional fallback cost, and updates. Total cost must be reported against query count. Latency distributions show how long users wait; aggregate work also charges concurrent hardware. Timeouts and unsolved cases must remain in the comparison. If acquisition cost is unavailable, we can compare online performance but cannot establish end-to-end break-even. Section~\ref{sec:mechanism-study} implements a small synthetic comparison with actual acquisition and service costs. The broader protocol remains necessary for a practical learned system and a competitive solver baseline.
+For each method, we should report acquisition and label-generation costs, parameter and cache bytes, verification work, certified success, conditional fallback cost, and updates. Total cost must be reported against query count. Latency distributions show how long users wait; aggregate work also charges concurrent hardware. Timeouts and unsolved cases must remain in the comparison. If acquisition cost is unavailable, we can compare online performance but cannot establish end-to-end break-even. Section~\ref{sec:mechanism-study} implements a small synthetic comparison with actual acquisition and service costs. Section~\ref{sec:expanded-study} adds public instances, chronological learning, shift, and measured resources. Larger application suites, simultaneous process-tree memory, and competitive current solvers remain necessary for broader performance conclusions.
 
 \section{Conclusion}
 
@@ -1479,6 +1566,18 @@ Rigo, M. (2014).
 \emph{Formal Languages, Automata and Numeration Systems 2: Applications to Recognizability and Decidability}.
 ISTE and Wiley. Chapter~1, Remark~1.12, p.~12.
 \href{https://doi.org/10.1002/9781119042853}{doi:10.1002/9781119042853}.
+
+\bibitem[Rosenblatt(1958)]{rosenblatt1958}
+Rosenblatt, F. (1958).
+The perceptron: A probabilistic model for information storage and organization in the brain.
+\emph{Psychological Review}, 65(6), 386--408.
+\href{https://doi.org/10.1037/h0042519}{doi:10.1037/h0042519}.
+
+\bibitem[SATLIB(2000)]{satlib}
+SATLIB (2000).
+Benchmark problems and instance descriptions.
+\url{https://www.cs.ubc.ca/~hoos/SATLIB/benchm.html}.
+Accessed 7 November 2026; selected archive and instance hashes are retained in the repository.
 
 \bibitem[Selsam and Bj\o rner(2019)]{selsam2019core}
 Selsam, D., and Bj\o rner, N. (2019).

@@ -24,6 +24,27 @@ class InterfaceTests(unittest.TestCase):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
         self.path=Path(self.temp.name)/'results.sqlite3'
 
+    def test_delta_fallback_respects_lean_backend(self):
+        from solver.test_fast import HARD_UNSAT
+        with PersistentSolver(self.path,backend='lean',interfaces=True,max_interface=0) as s:
+            with patch('solver.persistent.bounded_run',side_effect=AssertionError('External solver')):
+                self.assertFalse(s.expand(add={'f':HARD_UNSAT})['answer'])
+
+    def test_equal_complete_relations_share_payload_not_provenance(self):
+        bits=disj(var(0),var(1))
+        with PersistentSolver(self.path,interfaces=True) as s:
+            s.expand(add={'first':bits,'second':neg(neg(bits))})
+            leaves=[s.interfaces.read(r[0]) for r in s.db.execute('SELECT id FROM interface_nodes')]
+            leaves=[node for node in leaves if node['definition']['kind']=='leaf']
+            self.assertEqual(len(leaves),2)
+            for node in leaves:
+                for i in range(len(node['rows'])):s.interfaces.acquire(node,i)
+            self.assertEqual(leaves[0]['relation'],leaves[1]['relation'])
+            self.assertNotEqual(leaves[0]['id'],leaves[1]['id'])
+            evidence=s.db.execute('SELECT count(DISTINCT evidence) FROM interface_nodes WHERE id IN (?,?)',
+                (leaves[0]['id'],leaves[1]['id'])).fetchone()[0]
+            self.assertEqual(evidence,2)
+
     def test_lazy_rows_remain_unknown_and_are_persistent(self):
         bits=disj(var(0),disj(var(1),var(2)))
         with PersistentSolver(self.path,interfaces=True) as s:

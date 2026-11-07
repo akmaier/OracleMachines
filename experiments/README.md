@@ -299,3 +299,13 @@ The persistence report records 355 current-engine revalidations, semantic audit,
 serialization-only failure after the initial successful replay; the recorded
 rerun checks all current results and retained older namespaces. Five earlier
 raw study files are unchanged.
+
+## Local interfaces and incremental proofs
+
+The [local-interface study](results/interfaces/README.md) adds 108 sequential runs
+and 792 correct answers. It compares full and delta requests, local edits and
+width failures, live proof-enabled CDCL, and restarts. Local acquisition and
+transport often shrink while total interface overhead remains visible. All
+negative proof-mode queries use accepted incremental LRAT. The complete archive
+can still be larger than checked solving. Run `experiments/run_interfaces.py`
+with a new output directory; do not overwrite any historical study.

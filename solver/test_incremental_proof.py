@@ -8,13 +8,21 @@ from unittest.mock import patch
 
 from solver.persistent import PersistentSolver
 from solver.incremental_proof import dimacs_clauses
-from solver.test_fast import HARD_UNSAT,MIXED,cnf_bits,neg
+from solver.test_fast import HARD_UNSAT,MIXED,cnf_bits,neg,conj,var
 
 
 class ProofIncrementalTests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
         self.path=Path(self.temp.name)/'cache.db'
+
+    def test_component_wrapper_uses_a_compatible_checked_certificate(self):
+        with PersistentSolver(self.path,backend='cadical',components=True,incremental_proofs=True) as s:
+            with patch.object(s.incremental,'propose',side_effect=AssertionError('Unsupported wrapper format')):
+                result=s.solve(conj(HARD_UNSAT,var(20)),learn=False)
+            self.assertFalse(result['answer'])
+            self.assertEqual(result['backend'],'components')
+            self.assertEqual(s.audit()['checked'],1)
 
     def test_general_unsat_uses_checked_live_trace_and_restarts(self):
         for bits in [HARD_UNSAT,neg(neg(HARD_UNSAT))]:
@@ -34,7 +42,7 @@ class ProofIncrementalTests(unittest.TestCase):
             self.assertFalse(s.solve(HARD_UNSAT,learn=False)['answer'])
             self.assertTrue(s.solve(MIXED,learn=False)['answer'])
             self.assertTrue(s.solve(neg(MIXED),learn=False)['answer'])
-            self.assertGreaterEqual(s.incremental.process.poll() is None,True)
+            self.assertIsNone(s.incremental.process.poll())
 
     def test_saved_false_clause_cannot_forge_negative_answer(self):
         with PersistentSolver(self.path,backend='cadical',incremental_proofs=True) as s:

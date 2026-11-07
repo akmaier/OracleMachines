@@ -1324,3 +1324,50 @@ the independent-copy stream, but the complete database is larger than the
 checked baseline because archival input storage and indexing remain. Hash
 sharing and byte compression are neither a universal compression theorem nor
 an unrestricted polynomial-time SAT result. The manuscript retains these losses.
+
+## Local-interface implementation and representation limits
+
+The five-step follow-up implements established mechanisms rather than claiming a
+new general SAT algorithm. Primary-source checks on 7 November 2026 support the
+following attribution and boundaries:
+
+- Dechter, *Bucket elimination: A unifying framework for reasoning*, Artificial
+  Intelligence 113 (1999), 41–85: variable elimination and induced-width time/space
+  dependence. [Author's paper](https://ics.uci.edu/~dechter/publications/r76A.pdf).
+  Our local projection and unchanged-factor argument specialize this framework.
+- Driscoll, Sarnak, Sleator and Tarjan, *Making data structures persistent*, JCSS
+  38 (1989), 86–124: retaining versions is established data-structure practice.
+  [Author-hosted paper](https://www.cs.cmu.edu/~sleator/papers/making-data-structures-persistent.pdf).
+  The implementation uses immutable AVL paths; it makes no new persistence claim.
+- Bryant, *Graph-based algorithms for Boolean function manipulation*, IEEE TC
+  C-35(8) (1986), 677–691: reduced ordered diagrams are established.
+  [Author's publication list](https://www.cs.cmu.edu/~bryant/pubs.html).
+  Our codec receives known table rows before constructing its diagram.
+- Mengel, *Bounds on BDD-Based Bucket Elimination*, SAT 2023, LIPIcs 271, 16:1–16:11:
+  differing elimination/representation orders can solve the standard pigeonhole
+  family efficiently, while specified restrictions with those orders lead to
+  exponential behavior. This is a published conference paper, not merely its
+  arXiv version. [Publisher](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SAT.2023.16).
+- Itsykson and Ovcharov, *On Limits of Symbolic Approach to SAT Solving*, SAT 2024,
+  LIPIcs 305, 19:1–19:22: exponential lower bounds apply to OBDD conjunction,
+  existential elimination and reordering algorithms on particular unsatisfiable
+  families, including binary pigeonhole formulas. They do not rule out all SAT
+  algorithms, every representation, or arbitrary hybrid systems.
+  [Publisher](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SAT.2024.19).
+- Fazekas, Pollitt, Fleury and Biere, *Certifying Incremental SAT Solving*, LPAR
+  2024, 321–340, already proposes incremental proof formats/checkers and studies
+  resolution hints. Our new assumption-aware trace path uses CaDiCaL and a Lean
+  LRAT boundary; it is an integration and verification contribution here.
+  [Institutional record](https://repositum.tuwien.at/handle/20.500.12708/211102).
+
+Bryant's 2023 *Notes on “Bounds on BDD-Based Bucket Elimination”* is explicitly
+listed as an unpublished note on [arXiv](https://arxiv.org/abs/2306.10337).
+It supplies experimental context but is not substituted for Mengel's published
+result. The manuscript cites the published bounds and distinguishes them from
+our complete-table codec and measured synthetic examples.
+
+The new measurements support affected-node reuse, lazy unknown-aware acquisition,
+transport savings and checked incremental negatives. They also show propagation
+under bridge edits, restart costs, and larger total databases despite relation
+sharing. Thus none supplies the missing unrestricted polynomial construction,
+small-interface guarantee, cheap exact learning theorem, or whole-machine bound.

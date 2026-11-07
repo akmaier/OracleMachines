@@ -836,7 +836,42 @@ Two details prevent an invalid induction. First, adding a constraint changes the
 
 Compression also has several meanings here. Renamed shapes share syntax and results; equal interface relations can share behavior even when syntax differs; repeated expansion prefixes can share immutable nodes. Discovering semantic equality still requires work. There are $2^{2^b}$ possible Boolean interface relations, so no lossless coding of all of them makes every relation asymptotically smaller than its $2^b$-bit table. A compact formula describing a relation does not itself make projection or nonemptiness cheap. Byte compression is a further engineering choice and may enlarge small objects.
 
-\texttt{Components.lean} checks the semantic equivalence, finite-table exactness, expansion intersection, repetition, equivalent-summary replacement, and table size. It also checks the expansion and linear inequalities for the declared budget. Those arithmetic theorems do not verify the runtime of the Python implementation, the acquisition solver, or separator discovery. The implemented component policy below currently uses the $b=0$ case.
+\texttt{Components.lean} checks the semantic equivalence, finite-table exactness, expansion intersection, repetition, equivalent-summary replacement, and table size. It also checks the expansion and linear inequalities for the declared budget. Those arithmetic theorems do not verify the runtime of the Python implementation, the acquisition solver, or separator discovery. The component policy below uses the $b=0$ case. The local elimination policy in Section~\ref{sec:local-interfaces} implements nonempty interfaces.
+
+
+\subsection{Local interfaces and affected dependencies}
+\label{sec:local-interfaces}
+
+A single shared interface can become unnecessarily large. Instead, let us eliminate one variable at a time and retain each intermediate relation with its dependencies. This is bucket elimination, with complexity governed by the induced width of the chosen ordering \citep{dechter1999bucket}. The restriction concerns the largest intermediate scope, not only the scopes of the original clauses. We use the standard equivalence below to state exactly what an expansion may reuse.
+
+\begin{proposition}[Checked local elimination]
+\label{prop:local-elimination}
+Let $\mathcal B$ be the current factors containing $x$, and let $\mathcal U$ be the other factors. Put $S=(\bigcup_{g\in\mathcal B}\operatorname{vars}(g))\setminus\{x\}$ and
+\begin{equation}
+R(a)=\bigvee_{b\in\bits}\;\bigwedge_{g\in\mathcal B}g(a,x=b),\qquad a\in\bits^S.
+\label{eq:local-projection}
+\end{equation}
+Then $\bigwedge(\mathcal B\cup\mathcal U)$ is satisfiable if and only if $R\land\bigwedge\mathcal U$ is satisfiable. A factor whose variables exclude $x$ is unaffected by assigning $x$. Every resulting relation is entailed by its source factors. Consequently, an empty derived relation refutes any active conjunction containing all of those sources.
+
+An unchanged checked factor definition, ordered scope, and parent definitions may be reused. Equal complete relations on the same ordered scope may share a payload, while retaining their separate derivations. After deletion or replacement, a negative derivation is reusable only if all its required source constraints remain active.
+\end{proposition}
+
+\begin{proof}
+A satisfying assignment restricts to $a$ on $S$ and supplies one successful value $b$ in \eqref{eq:local-projection}. Conversely, a successful row has a value $b$ satisfying every bucket factor. Extend the remaining assignment by $x=b$. No factor in $\mathcal U$ contains $x$, so this extension preserves them. This proves both directions. Every assignment satisfying all bucket factors also satisfies their existential projection; induction along the dependency graph establishes entailment from source factors. An empty relation excludes every such assignment. Substitution of equal relations preserves all evaluations. The last condition ensures that a reused refutation still has its premises; the implication generally fails when a required source has been removed.
+\end{proof}
+
+The implementation stores a directed acyclic graph of these definitions. It keeps the previous elimination order when that order fits the width cap and otherwise uses a deterministic degree heuristic. This gives useful decompositions of chains, trees, and stars in the experiment below. It is neither an optimal-width algorithm nor a guarantee that a local edit affects only a bounded number of summaries. A new edge can alter the ordering or a long dependency path. Even when summary acquisition is local, planning, checking a final witness, and retrieving the active manifest can visit the whole graph.
+
+We acquire rows only when an evaluation requests them. A row is either unknown, checked false, or checked true; a successful projection also stores its choice of $b$. Unknown is treated as possible in an upper approximation and impossible in a lower approximation. It therefore cannot justify a refutation. The native worker calculates requested rows from validated definitions and memoizes them. Restart requires checking saved proposals again. Immutable snapshots retain old conjunctions and answers through add, replace, and remove operations. Their manifest uses path copying in a balanced tree, an established persistence technique \citep{driscoll1989persistent}.
+
+For a concrete local ledger, let a leaf have $s$ syntax nodes and at most $w$ scope variables. Our counted reference evaluator uses at most $s(w+2)$ operations per requested row, including linear scope lookup. Complete acquisition therefore costs at most $2^w s(w+2)$ in this model. A short-circuit projection over $d$ already retrieved values per branch uses at most $2d+3$ Boolean/list operations. Thus, for $q_\ell$ requested leaf rows and $q_p$ requested projection rows with these uniform bounds,
+\begin{equation}
+T_{\mathrm{local}}\leq H+q_\ell s(w+2)+q_p(2d+3).
+\label{eq:lazy-interface-budget}
+\end{equation}
+Here $H$ charges row retrieval and index construction, parsing, ordering, matching, representation conversion, verification, storage, and control. Native rechecking also belongs in $H$; it is not free because a Python acquisition is cached. Restarts may repeat that work. \texttt{InterfaceCosts.lean} proves the local evaluator, complete-table, short-circuit, and unknown-row bounds. It does not prove a small bound on $H$, on the number of affected rows, or on the native compiled runtime. \texttt{Interfaces.lean} proves the elimination equivalence. The JSON protocol, dependency bookkeeping, and database remain outside an end-to-end kernel theorem.
+
+Complete relation payloads select among constant, dense bitmap, sparse, and reduced ordered decision-diagram encodings by their actual serialized size. Reduced diagrams and their variable-order dependence are established \citep{bryant1986bdd}. In our implementation they encode acquired tables; they do not implement symbolic projection without table acquisition. More powerful BDD-based bucket elimination is already studied: \citet{mengel2023bdd} obtains efficient proofs for standard pigeonhole formulas using different elimination and BDD orders, but also proves exponential behavior after certain restrictions with those same orders. More generally, \citet{itsykson2024limits} give exponential lower bounds for OBDD conjunction, existential elimination, and reordering algorithms on specified unsatisfiable families. These are limitations of stated representations and operations, not lower bounds against every SAT algorithm or hybrid. They explain why compression and good performance on one expansion pattern cannot complete the unrestricted induction.
 
 \subsection{Amortization while the domain grows}
 
@@ -1156,7 +1191,7 @@ The automatic policy first tries stored witnesses and certificates, circuit simp
 
 We also reduce the cost of using acquired knowledge. An index of distinct proposals bounds retrieval without scanning every archived duplicate. An unchanged active witness requires no database rewrite. A JSON-lines service retains its database connection and native checker across requests, amortizing startup and fingerprinting. Each acquisition still commits durably before its response. All older result rows remain archived. The new engine revalidates 355 inputs while preserving 1,065 earlier rows and their proofs; every current result passes a fresh semantic audit.
 
-These improvements leave explicit obligations. We have no complete operation ledger for AIG construction, CDCL, or LRAT checking, so modern acquisitions report unknown total abstract work rather than zero. Known parser work and measured elapsed time remain separate. The earlier numerical bounds describe their original implementations. The default adapter starts a fresh CaDiCaL process on each unresolved query. Section~\ref{sec:expanded-service} adds live clause reuse with separately checked answers. Fully incremental negative certification remains an additional obligation; published methods already address it \citep{fazekas2024incremental}. No part of this construction proves a polynomial bound for unrestricted SAT.
+These improvements leave explicit obligations. We have no complete operation ledger for AIG construction, CDCL, or LRAT checking, so modern acquisitions report unknown total abstract work rather than zero. Known parser work and measured elapsed time remain separate. The earlier numerical bounds describe their original implementations. The default adapter starts a fresh CaDiCaL process on each unresolved query. Section~\ref{sec:expanded-service} adds live clause reuse with separately checked answers. At that milestone, incremental negative certification remained an additional obligation. Published methods already address it \citep{fazekas2024incremental}; Section~\ref{sec:incremental-proof-service} adds a checked trace path to this service. No part of this construction proves a polynomial bound for unrestricted SAT.
 
 \subsection{Measured costs with checked CDCL}
 \label{sec:cdcl-study}
@@ -1293,7 +1328,54 @@ On independent copies, expansion reaches 64 components and 128 global variables.
 
 The negative stream acquires one core result and verifies its embedding at all six later stages, despite added connecting constraints. Restart replay also retains two exported clauses from the first negative query, but each negative proposal still triggers fresh LRAT. The connected-chain control exposes the implementation gap: it acquires seven distinct growing components and takes 174.77\,ms, against 166.75\,ms for checked solving. This chain has small separators, yet our zero-interface decomposition does not exploit them. Durable reuse therefore supplies neither a universal speedup nor the nonempty-interface algorithm of Proposition~\ref{prop:component-expansion}.
 
-All 69 service tests pass, including random truth-table comparisons, forged component records, invalid embeddings, poisoned replay clauses, concurrent sessions, and migrations. The current axiom audit checks 1,264 declarations, including 694 theorem declarations. The live database retains 1,775 earlier results and 387 proofs, and adds 355 revalidated results and 129 proofs in the new checker namespace. Earlier experiment files remain unchanged. The structural records preserve hashes, per-query acquisition and replay metrics, object sizes, and the remaining archival costs.
+All 69 service tests pass, including random truth-table comparisons, forged component records, invalid embeddings, poisoned replay clauses, concurrent sessions, and migrations. The axiom audit at that milestone checks 1,264 declarations, including 694 theorem declarations. The live database retains 1,775 earlier results and 387 proofs, and adds 355 revalidated results and 129 proofs in the new checker namespace. Earlier experiment files remain unchanged. The structural records preserve hashes, per-query acquisition and replay metrics, object sizes, and the remaining archival costs.
+
+\subsection{Checked incremental proofs and local-interface measurements}
+\label{sec:incremental-proof-service}
+
+The new proof-enabled adapter maintains a shared AIG compiled by Lean. Its permanent CNF contains definitions for graph nodes. Query roots are supplied as assumptions. A stable variable numbering separates original variables from graph nodes and survives graph extension. CaDiCaL's tracing interface provides clause identities and antecedents \citep{biere2024cadical}. We store backward dependencies and reconstruct an LRAT proof of the current negative query. This implements an established certification approach; incremental proof formats and checkers predate this work \citep{fazekas2024incremental}.
+
+\begin{proposition}[Negative checking over a shared circuit]
+\label{prop:incremental-proof}
+Let $G$ be any previously compiled AIG, and compile $f$ into an extension $G'$ with root literal $r_f$. Let $D_{G'}$ contain the definitional clauses of all nodes of $G'$. If a sound LRAT checker accepts a refutation of $D_{G'}\land r_f$, then $f$ is unsatisfiable. No previous query-root assumption is needed in the permanent base.
+\end{proposition}
+
+\begin{proof}
+Suppose $v$ satisfies $f$. Evaluate every node of the acyclic graph under $v$ and assign each auxiliary variable its node value. This extends $v$ to an assignment satisfying every clause of $D_{G'}$. Compiler correctness gives $r_f=1$ under that assignment. Hence $D_{G'}\land r_f$ is satisfiable, contradicting acceptance by the sound refutation checker. Previous formulas only contributed node definitions, each of which has such an extension for every original valuation; their roots were not asserted as permanent units.
+\end{proof}
+
+\texttt{IncrementalProof.lean} proves this implication and composes it with the pinned standard library's LRAT soundness theorem. Replayed clauses are proposals: the proof that uses them must check against the reconstructed definitions and current root. A forged saved clause therefore cannot become an unchecked axiom. Unsupported traces, excessive proof size, or a rejected certificate use independent checked fallback while budget remains. This removes the fresh-CDCL requirement for supported negative traces. It does not make checking incremental in cost: graph reconstruction and proof traversal may revisit retained work. The earlier adapter remains available for comparison.
+
+Our new study uses six synthetic streams: chain, tree, and hub expansion; local replacement, deletion, and a distant bridge; shifts beyond the width cap; and negative-core extension followed by removal. Each of six modes receives the same logical snapshots. Three sequential repetitions with rotated mode order produce 108 runs and 792 correct answers, including 198 negative answers, under a three-second query deadline. No timeout or incorrect answer occurs. Full-input and delta transport are distinguished; every mode retains its completed results. The source, native binaries, inputs, phase ledgers, failures, and storage categories are recorded separately from all previous studies.
+
+\begin{table}[b]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrrrr}
+\toprule
+Stream & Checked & Full & Delta & Delta/restart & Proof & Proof/restart \\
+\midrule
+Chain expansion & 169.81 & 202.26 & 210.44 & 465.71 & 140.71 & 392.60 \\
+Tree expansion & 167.20 & 230.42 & 224.70 & 491.23 & 137.54 & 382.25 \\
+Hub expansion & 166.98 & 203.15 & 211.00 & 468.37 & 137.17 & 384.13 \\
+Local edits & 184.52 & 273.73 & 276.57 & 651.38 & 153.37 & 501.47 \\
+Width shift & 165.27 & 165.30 & 167.60 & 393.21 & 134.69 & 381.26 \\
+Proof reuse & 165.89 & 145.14 & 142.18 & 359.01 & 132.67 & 378.70 \\
+\bottomrule
+\end{tabular}
+\caption{Median total query milliseconds for the local-interface study. Full and Delta use the interface engine; Proof uses live CDCL with checked incremental LRAT. Totals include service setup and query work; restart modes also include each shutdown. Whole-worker measurements additionally retain final shutdown and interpreter overhead. The modes use equal time limits, not equal total memory. Three repetitions of small synthetic streams do not establish significant small differences or representative SAT performance.}
+\label{tab:interface-study}
+\end{table}
+
+The chain reaches 48 edges and 49 variables while every bag has at most two variables. Extending from 32 to 48 edges reuses 32 projection nodes and acquires 49 factor definitions, including new leaves and the changed terminal projection. In the local-edit stream, changing the endpoint condition acquires only two definitions and two rows while reusing 32 projection nodes. Deleting that condition acquires one definition and one row, with no new leaf evaluation. A distant bridge instead creates 35 definitions and 152 rows. These examples distinguish local reuse from changes that propagate through the graph.
+
+Delta transport reduces the local-edit stream from 29,436 to 4,810 JSON bytes. Yet its median total remains 276.57\,ms against 184.52\,ms for checked solving. Interface bookkeeping, native checking, and persistence can outweigh avoided acquisition. Live proof-enabled CDCL completes all 33 negative queries in its three repetitions through accepted incremental LRAT certificates; the restarted proof mode also checks all 33. Neither mode uses standalone CDCL fallback on this study. Rebuilding workers remains expensive, as Table~\ref{tab:interface-study} shows.
+
+For the chain's delta run, 151 factor definitions share five relation payload objects, including unknown summaries; 359 acquired row entries and separate evidence remain stored. The full database is 528,384 bytes, compared with 253,952 bytes for checked solving. This is behavioral sharing, not whole-archive compression. In a separate encoding test on 4,096 known rows, parity uses a 266-byte decision diagram versus a 1,404-byte known/value bitmap; the seeded random relation selects the 1,404-byte bitmap. Diagram construction first receives the complete rows, and its time is recorded. Small encoded size alone says nothing about finding those rows cheaply.
+
+All 95 service tests pass. They include changed assumptions, poisoned partial rows, forged proof hints, restart, width fallback, and negative checks that disallow a fresh standalone solve. The Lean audit checks 1,554 declarations, including 837 theorem declarations. Before replay, we saved a full local database backup and row fingerprints. Every one of the 2,130 older result rows and 516 proofs is unchanged; 355 revalidated current-engine results and 129 proofs bring the totals to 2,485 results and 645 proofs. An independent semantic audit checks all 355 current inputs. Earlier experiment files are unchanged. These checks establish the implemented boundaries; unrestricted small width, compact exact representations, bounded total archive size, and a complete machine-cost proof remain open.
+
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
@@ -1344,7 +1426,7 @@ Their thematic proximity helps us state the missing obligations. We must specify
 We now have explicit conditions for exactness and savings, restricted compact expansion, an operational reference search, and checked service experiments. Establishing the conditions for a practical learned system still requires further algorithms and measurements. The following questions describe these remaining obligations. They do not claim unexplored territory across the wider literature.
 
 \paragraph{Compactness and acquisition.}
-Propositions~\ref{prop:compact-coverage} and~\ref{prop:component-expansion} give restricted constructions. The component result allows growing total variable count, but the service does not yet discover separators or compile nonempty-interface relations. Which richer families support useful representations with charged acquisition? To answer this, we must fix the SAT instance family, coverage, precision, acquisition interface, and budget. Tractable subclasses or distributional guarantees may support positive results without meeting Proposition~\ref{prop:advice} on all inputs. For unrestricted SAT, polynomial-size exact models remain unestablished here. So do lower bounds excluding them. In particular, our exponential ReLU construction tells us neither that this size is necessary nor that a smaller model can be learned efficiently.
+Propositions~\ref{prop:compact-coverage} and~\ref{prop:component-expansion} give restricted constructions. The component and local-elimination results allow growing total variable count. The service now uses a bounded-width heuristic and lazy nonempty-interface relations, but finding a small decomposition and limiting affected dependencies remain restrictions. Which richer families support useful representations with charged acquisition? To answer this, we must fix the SAT instance family, coverage, precision, acquisition interface, and budget. Tractable subclasses or distributional guarantees may support positive results without meeting Proposition~\ref{prop:advice} on all inputs. For unrestricted SAT, polynomial-size exact models remain unestablished here. So do lower bounds excluding them. In particular, our exponential ReLU construction tells us neither that this size is necessary nor that a smaller model can be learned efficiently.
 
 \paragraph{Generalization, memory, and changing workloads.}
 The bounded predictor demonstrates checked transfer to new witnesses. When does learning save more work than caching under the same total memory budget? Equation~\eqref{eq:cache-distribution} gives a reference without eviction. Yet, memory limits, eviction, retraining, and distribution shifts change the costs. We cannot apply the fixed-policy threshold in Proposition~\ref{prop:savings} unchanged to adaptation. We must evaluate conditional savings at each history and include updates. Certification still preserves correctness after a workload change within the covered domain. It need not preserve fallback frequency or expected savings.
@@ -1353,7 +1435,7 @@ The bounded predictor demonstrates checked transfer to new witnesses. When does 
 Which certificates can the fast path produce and check within its budget? A short certificate may exist even when we cannot find it cheaply. As positive and negative verification differ, we should report their outcomes separately. A timeout on prediction can hand control to fallback when time remains; a service-wide deadline cannot guarantee that fallback completes. Proposition~\ref{prop:overhead} bounds additional work if we implement its solver and update-budget assumptions. Note that aborting the fallback as well changes the guarantee. The resulting service may return ``unknown'' and is incomplete.
 
 \paragraph{A reproducible comparison.}
-Sections~\ref{sec:cdcl-study}, \ref{sec:expanded-study}, and~\ref{sec:structural-service} fix encodings, query order, solver versions, and local hardware, and compare solving, exact caching, and certified reuse. Larger studies should additionally impose comparable total memory budgets and use modern application suites. Test streams should include repeated queries, distinct held-out formulas, and changed workloads. Both satisfiable and unsatisfiable instances are needed. We should distinguish reuse of identical inputs from transfer to new ones. A frozen test stream and chronological records of online learning prevent us from using later answers earlier.
+Sections~\ref{sec:cdcl-study}, \ref{sec:expanded-study}, \ref{sec:structural-service}, and~\ref{sec:incremental-proof-service} fix encodings, query order, solver versions, and local hardware, and compare solving, exact caching, and certified reuse. Larger studies should additionally impose comparable total memory budgets and use modern application suites. Test streams should include repeated queries, distinct held-out formulas, and changed workloads. Both satisfiable and unsatisfiable instances are needed. We should distinguish reuse of identical inputs from transfer to new ones. A frozen test stream and chronological records of online learning prevent us from using later answers earlier.
 
 For each method, we should report acquisition and label-generation costs, parameter and cache bytes, verification work, certified success, conditional fallback cost, and updates. Total cost must be reported against query count. Latency distributions show how long users wait; aggregate work also charges concurrent hardware. Timeouts and unsolved cases must remain in the comparison. If acquisition cost is unavailable, we can compare online performance but cannot establish end-to-end break-even. Section~\ref{sec:mechanism-study} implements a small synthetic comparison with actual acquisition and service costs. Section~\ref{sec:expanded-study} adds public instances, chronological learning, shift, and measured resources. Larger application suites, simultaneous process-tree memory, and competitive current solvers remain necessary for broader performance conclusions.
 
@@ -1413,6 +1495,12 @@ Training a 3-node neural network is NP-complete.
 \emph{Advances in Neural Information Processing Systems}, 1.
 \url{https://proceedings.neurips.cc/paper/1988/hash/3def184ad8f4755ff269862ea77393dd-Abstract.html}.
 
+\bibitem[Bryant(1986)]{bryant1986bdd}
+Bryant, R.~E. (1986).
+Graph-based algorithms for Boolean function manipulation.
+\emph{IEEE Transactions on Computers}, C-35(8), 677--691.
+\href{https://doi.org/10.1109/TC.1986.1676819}{doi:10.1109/TC.1986.1676819}.
+
 \bibitem[Cadoli et~al.(2002)Cadoli, Donini, Liberatore, and Schaerf]{cadoli2002}
 Cadoli, M., Donini, F.~M., Liberatore, P., and Schaerf, M. (2002).
 Preprocessing of intractable problems.
@@ -1449,11 +1537,23 @@ A knowledge compilation map.
 \emph{Journal of Artificial Intelligence Research}, 17, 229--264.
 \href{https://doi.org/10.1613/jair.989}{doi:10.1613/jair.989}.
 
+\bibitem[Dechter(1999)]{dechter1999bucket}
+Dechter, R. (1999).
+Bucket elimination: A unifying framework for reasoning.
+\emph{Artificial Intelligence}, 113(1--2), 41--85.
+\href{https://doi.org/10.1016/S0004-3702(99)00059-4}{doi:10.1016/S0004-3702(99)00059-4}.
+
 \bibitem[Deolalikar(2010)]{deolalikar2010claim}
 Deolalikar, V. (2010).
 $P$ is not equal to $NP$.
 Circulated manuscript, 6 August; failed separation claim.
 \url{https://wscor.win.tue.nl/woeginger/P-versus-NP/Deolalikar.pdf}.
+
+\bibitem[Driscoll et~al.(1989)Driscoll, Sarnak, Sleator, and Tarjan]{driscoll1989persistent}
+Driscoll, J.~R., Sarnak, N., Sleator, D.~D., and Tarjan, R.~E. (1989).
+Making data structures persistent.
+\emph{Journal of Computer and System Sciences}, 38(1), 86--124.
+\href{https://doi.org/10.1016/0022-0000(89)90034-2}{doi:10.1016/0022-0000(89)90034-2}.
 
 \bibitem[E\'en and S\"orensson(2003)]{een2003extensible}
 E\'en, N., and S\"orensson, N. (2003).
@@ -1524,6 +1624,12 @@ Technical objections to Deolalikar's claimed proof.
 Letter published by R.~Lipton in ``Fatal Flaws in Deolalikar's Proof?'', 12 August.
 \url{https://rjlipton.com/2010/08/12/fatal-flaws-in-deolalikars-proof/}.
 
+\bibitem[Itsykson and Ovcharov(2024)]{itsykson2024limits}
+Itsykson, D., and Ovcharov, S. (2024).
+On limits of symbolic approach to SAT solving.
+\emph{Proceedings of SAT 2024}, LIPIcs 305, 19:1--19:22.
+\href{https://doi.org/10.4230/LIPIcs.SAT.2024.19}{doi:10.4230/LIPIcs.SAT.2024.19}.
+
 \bibitem[Juba(2013)]{juba2013implicit}
 Juba, B. (2013).
 Implicit learning of common sense for reasoning.
@@ -1591,6 +1697,12 @@ Michie, D. (1968).
 ``Memo'' functions and machine learning.
 \emph{Nature}, 218, 19--22.
 \href{https://doi.org/10.1038/218019a0}{doi:10.1038/218019a0}.
+
+\bibitem[Mengel(2023)]{mengel2023bdd}
+Mengel, S. (2023).
+Bounds on BDD-based bucket elimination.
+\emph{Proceedings of SAT 2023}, LIPIcs 271, 16:1--16:11.
+\href{https://doi.org/10.4230/LIPIcs.SAT.2023.16}{doi:10.4230/LIPIcs.SAT.2023.16}.
 
 \bibitem[Milli et~al.(2021)Milli, Lieder, and Griffiths]{milli2021rational}
 Milli, S., Lieder, F., and Griffiths, T.~L. (2021).
@@ -1752,6 +1864,7 @@ Yun, C., Sra, S., and Jadbabaie, A. (2019).
 Small ReLU networks are powerful memorizers: A tight analysis of memorization capacity.
 \emph{Advances in Neural Information Processing Systems}, 32.
 \url{https://arxiv.org/abs/1810.07770}.
+
 
 \end{thebibliography}
 \endgroup

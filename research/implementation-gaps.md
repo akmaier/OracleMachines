@@ -103,7 +103,7 @@ compression or universal speedup claim is made. The paper now contains both
 restricted structural proofs, prior-work attribution, measured overheads and
 remaining boundaries.
 
-Current next steps for items 1 and 4:
+Next steps recorded at the structural milestone:
 
 1. Find and verify small separators, then implement the nonempty-interface
    relations proved in Lean. The present runtime uses disjoint components only.
@@ -164,3 +164,23 @@ All 92 integration tests pass, including poisoned partial rows, forged proof
 hints, changed assumptions, restart replay and negative certificates checked
 without permitting a fresh standalone solve. Benchmarking and manuscript
 reconciliation complete this same five-step follow-up in the next commit.
+
+
+The five-step follow-up is now implemented and documented in the manuscript.
+The new study has 108 runs and 792/792 correct answers, including 198 negatives.
+Both proof-enabled modes certify all their negatives through incremental LRAT.
+Interface delta reuse reduces local acquisition and transport but often loses
+on total time; the archive also remains larger. The paper attributes bucket
+elimination, persistent structures, BDDs and incremental proof checking to prior
+work, and adds published representation-specific lower bounds.
+
+Remaining research limits are unrestricted width and representation size,
+affected-dependency bounds under arbitrary edits, proof/restart cost, bounded
+whole-archive memory, and a full machine-cost theorem. These are stronger than
+the completed implementation tasks. No polynomial-time SAT claim follows.
+
+Final compatibility review adds tests for semantic payload sharing with separate
+provenance, Lean-only fallback, and component certificates combined with the new
+proof option. All 95 tests pass. The compatibility fixes affect combinations
+outside the timed modes (except a backend dispatch guard on width fallback);
+the native binary and its Lean audit are unchanged.

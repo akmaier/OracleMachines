@@ -290,7 +290,7 @@ alone is measured, including both parses when an external result is checked.
 The earlier coefficients continue to describe their original definitions.
 Native compilation/runtime, JSON, the Python adapter, and SQLite remain outside
 the kernel proof. Cross-query witnesses and certificates persist, but the
-current adapter does not retain CaDiCaL's internal clause database between calls.
+original adapter does not retain CaDiCaL's internal clause database between calls.
 
 The rest of the paper's neural, oracle, and general expected-savings
 arguments retain their conventional proofs and literature audit. This directory
@@ -321,7 +321,7 @@ dictionary and current relation only; mappings, shape descriptions, witnesses,
 parsing, proof checks and archived requests must be added. Fixed b and k allow
 unbounded total private variables without a general-SAT consequence.
 
-The complete build now audits 1,264 declarations, including 694 theorem
+The structural milestone audits 1,264 declarations, including 694 theorem
 declarations. All earlier modules remain included. The runtime component policy
 currently implements the empty-interface case, with independent final checks.
 
@@ -346,3 +346,5 @@ proposals. Formal local-operation bounds are separate from the elapsed ledger;
 no complete CDCL, database, serializer or native machine instruction theorem is
 claimed. The new interface path and optional `--incremental-proofs` extend the
 historical milestone descriptions above.
+
+The current full build audits 1,554 declarations, including 837 theorem declarations.

@@ -159,7 +159,11 @@ class ComponentSolver:
             with service._phase("component_lookup"):
                 entry = self.entry(component["key"])
             if entry is None:
-                acquired = service._fast_live(component["bits"], allow_components=False, allow_interfaces=False)
+                # Component wrappers accept the legacy base proof formats. A full
+                # shared-graph certificate is checked through its own root path.
+                compatible = getattr(service.incremental, "certificate_format", None) != "incremental_lrat"
+                acquired = service._fast_live(component["bits"], allow_components=False,
+                                              allow_interfaces=False, allow_incremental=compatible)
                 parse_work += acquired["parse_work"]
                 entry = dict(bits=component["bits"], answer=acquired["answer"], witness=acquired["witness"],
                              certificate=acquired.get("certificate"))

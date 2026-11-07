@@ -379,7 +379,7 @@ class InterfaceSolver:
             self.deadline.check()
             bits=conjunction([self.store.get(t,'expansion_constraint')['bits'] for t in constraints])
             if len(bits)>self.service.max_input_bytes:raise BudgetExceeded('Fallback reconstruction exceeds input cap')
-            result=self.service._fast_live(bits,allow_components=False,allow_interfaces=False)
+            result=self.service._live(bits,mode="baseline") if self.service.backend=="lean" else self.service._fast_live(bits,allow_components=False,allow_interfaces=False)
             result.update(root=None,order=[],fallback_reason=str(error))
         self.metrics['archive_new_objects']=self.store.inserted_objects-before
         self.metrics['active_cache_nodes']=len(self.cache)

@@ -385,3 +385,7 @@ active branch; replay prefers at most 20,000 short clauses. Prior branches remai
 archived. Native graph preparation and negative checking can traverse the whole
 retained graph/proof. This closes the fresh-solve requirement for supported
 traces, not the cost of incremental proof checking or arbitrary proof events.
+
+Component wrappers retain their supported base-certificate formats; combining
+`--components` with `--incremental-proofs` uses the checked base solver for leaf
+acquisition. Interface expansion fallback honors `--backend lean`.

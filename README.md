@@ -89,7 +89,7 @@ They do not establish efficient exact learning on unrestricted instances.
 The seven-item follow-up adds compact restricted coverage, a complete assignment
 search transition system with payload bounds, live CaDiCaL clause reuse, a bounded
 persistent predictor, query deadlines, strict cache checks, and disjoint measured
-phases. All 69 tests and the 694-theorem axiom audit pass. The expanded study checks
+phases. At that milestone, all 69 tests and the 694-theorem axiom audit pass. The expanded study checks
 1,260 answers on public and chronological streams and reports gains, overhead,
 and memory costs. [Implementation scope](research/implementation-gaps.md) records
 which engineering gaps are addressed and which stronger mathematical claims
@@ -106,9 +106,22 @@ duplication; full request archival costs remain.
 The [structural study](experiments/results/structural/summary.json) checks another
 420 answers. One acquired shape serves 127 component occurrences through
 expansion to 128 variables. Connected-chain and storage controls show the limits:
-separator discovery and nonempty-interface compilation remain unimplemented,
+that component-only milestone leaves nonempty interfaces for the next extension,
 and the whole database can grow despite sharing. Try
 `python3 solver/persistent.py --components --incremental serve`.
+
+The five-step extension now adds local bucket elimination, persistent add/replace/
+remove snapshots, lazy checked rows, semantic relation storage, and checked
+incremental LRAT. Use `--interfaces` for the delta API and `--incremental-proofs`
+for the proof-enabled live CDCL path; they can be combined for checked fallback.
+The [new study](experiments/results/interfaces/README.md) reports 792 correct
+answers, local reuse and transport savings, and the overheads of checking,
+restart and archival storage. All 95 tests pass; Lean audits 837 theorem
+declarations. All 2,130 older results and 516 proofs remain unchanged, with 355
+newly revalidated results and 129 proofs added. The manuscript now includes the
+local elimination and shared-circuit proof arguments, their cost boundaries,
+and published BDD representation limits. Small width, affected-state size and
+cheap acquisition for unrestricted SAT remain unproved.
 
 The central question is when the expense of acquiring reusable knowledge is repaid
 by reduced future computation. Exact representability alone establishes neither

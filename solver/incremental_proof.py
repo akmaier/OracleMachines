@@ -31,6 +31,7 @@ def dimacs_clauses(text):
 
 
 class ProofIncremental:
+    certificate_format = "incremental_lrat"
     def __init__(self,service,max_bytes=64*1024**2,store=None,max_replay_clauses=20000):
         self.service=service;self.max_bytes=max_bytes;self.store=store
         self.max_replay_clauses=max_replay_clauses

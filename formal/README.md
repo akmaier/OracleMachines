@@ -164,15 +164,32 @@ nonincreasing total size. The read suffix never exceeds the original assignment.
 Counting that suffix separately gives `2*A + L + S + 1` data units, including
 the read-only assignment and one control tag. This is a data-size bound, not
 physical heap usage: addresses, list headers, serialization delimiters, and
-garbage collection remain outside it. The code must already be supplied;
-compilation, parser execution, assignment enumeration, and the full solver do
-not yet have a combined transition-machine simulation. The native service
+garbage collection remain outside it. The code must already be supplied; it can
+come directly from the parser, without recompiling the formula. Parser execution,
+assignment enumeration, and the full solver do not yet have a combined
+transition-machine simulation. The native service
 continues to use `evalRun`; its evaluator count is realized exactly by this
 separately proved machine, rather than being a measurement of native instructions.
 `parsed_eval_steps` and `parsed_eval_space` apply these conclusions directly to
 the program produced by parsing a valid request. This machine evaluates **one
 assignment**; a false result is not an UNSAT verdict. Exhaustive search is still
 needed for a negative satisfiability answer.
+
+The next proof obligations are concrete:
+
+1. Give parser, width discovery, assignment generation, and search explicit
+   transition semantics, and compose them with this evaluator. Charge all
+   control, copying, and construction work in that combined machine.
+2. Specify a finite-alphabet configuration encoding and prove a simulation
+   with charged access, copying, and index operations. The current data-size
+   potential is useful for this, but is not itself that simulation.
+3. Bound the full solver's live data, rather than just one evaluation. The
+   present engine eagerly materializes exponentially many assignments;
+   efficient evaluation alone does not remove that cost.
+
+A general polynomial SAT algorithm is a separate algorithmic requirement.
+Completing these verification steps for the current exhaustive solver will not
+remove its exponential assignment dependence.
 
 The native executable and [persistent service](../solver/README.md) use this
 verified core. SQLite retains complete SAT/UNSAT results and a reusable witness

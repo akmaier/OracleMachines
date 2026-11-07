@@ -69,6 +69,9 @@ not prove P = NP.
 The executable development now supplies an exact SAT solver, a counted binary
 parser, polynomial bounds for fixed or logarithmically growing variable ranges,
 and a certified witness-reuse policy.
+An explicit evaluator machine realizes the reported evaluation count exactly
+and has a checked bound on intermediate data size. A converse encoding proof
+extends the restricted bounds to every accepted binary request.
 The [persistent solver](solver/README.md) retains every completed result across
 restarts. The [reproducible study](experiments/README.md) compares reuse with repeated
 exhaustive solving;
@@ -147,6 +150,9 @@ SAT parser and core to an operational cost model. It proves polynomial bounds
 for a **fixed** variable cap and for variable width at most `floor(log2(L+1))`,
 where `L` is the encoded length. These restrictions do not give a bound for all
 SAT inputs or a formalization of P versus NP.
+The evaluator's transition and data-size proofs are a component of a runtime
+argument; a combined machine simulation for parsing and exhaustive search
+remains open.
 
 ## Persistent solver
 

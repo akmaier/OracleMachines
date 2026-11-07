@@ -909,7 +909,37 @@ This permits unbounded variable counts on a restricted family. It is an elementa
 
 More useful restrictions can exploit circuit structure. \citet{prasad2001atpg} study efficient ATPG on circuits with logarithmically bounded cutwidth. \citet{muller2024cutwidth} analyze cached circuit SAT under a supplied variable ordering and bounded fan-out, obtaining polynomial bounds when cutwidth grows logarithmically. Their structural cutwidth is different from our maximum-variable-index parameter. The institutional abstract for PolySAT reports a related restricted bound and circuit experiments \citep{muller2026polysat}; we have verified its publication record and abstract, not its full proof. These precedents support the restricted approach without making polynomial behavior of cached SAT a new claim.
 
-The units in this proposition belong to the stated core model. Counter arithmetic is instrumentation and is not itself charged. Binary syntax parsing is now included in the combined bound. ASCII and JSON conversion, garbage collection, serialization, disk access, and the simulation of these operations on a bit-machine remain outside it. We have not formalized the complexity classes, SAT's NP-completeness, or the advice and hierarchy results in Lean. Hence, the checked numerical bound is not a formal proof of membership in a machine-defined complexity class. The remaining general SAT obligation is still a uniform efficient exact constructor or solver for inputs with no fixed size cap, together with its full runtime bound.
+The units in these bounds belong to the stated model. Counter arithmetic is instrumentation and is not itself charged. Binary syntax parsing is now included in the combined bound. ASCII and JSON conversion, garbage collection, serialization, disk access, and the simulation of these operations on a bit-machine remain outside it. We have not formalized the complexity classes, SAT's NP-completeness, or the advice and hierarchy results in Lean. Hence, the checked numerical bound is not a formal proof of membership in a machine-defined complexity class. The remaining general SAT obligation is still a uniform efficient exact constructor or solver for inputs with no fixed size cap, together with its full runtime bound.
+
+\subsection{From accepted inputs to evaluator transitions}
+\label{sec:evaluator-machine}
+
+We can make the evaluator's execution more explicit. Compiler correctness proofs have long related expression evaluation to machine execution \citep{mccarthy1967compiler}. Here, we specialize this approach to the counted Boolean evaluator. Let us supply its postfix program to a machine with a Boolean value stack. A transition executes one instruction or advances one cell in a variable read. Loading a variable enters a read state. Each read step decrements its unary index and advances through the assignment. An empty assignment suffix gives the default value false. Negation and conjunction operate on the stack. Exhausted code halts; stack underflow enters a fault state. The transition function does not call the recursive evaluator.
+
+\begin{proposition}[Accepted inputs and explicit evaluation]
+\label{prop:evaluator-machine}
+Suppose a binary input $x$ decodes to $f$. Then $x$ is exactly the encoding of $f$, and the parsed instructions are its compiled postfix program. For any assignment list $a$, the machine started with this program and an empty value stack halts with the value of $f$ under $a$. Its transition count $E(f,a)$ equals the recursive evaluator's count and satisfies
+\begin{equation}
+E(f,a)\leq W(f)\leq |x|.
+\label{eq:evaluator-steps}
+\end{equation}
+Let $A=|a|$. At every reachable configuration, the data-size measure defined below satisfies
+\begin{equation}
+M\leq 2A+|x|+1.
+\label{eq:evaluator-data}
+\end{equation}
+This measure counts data symbols and one control tag, including a separate copy of the current assignment suffix. Addresses, list headers, and serialization delimiters are outside the measure.
+\end{proposition}
+
+\begin{proof}
+First, the unary reader consumes precisely the prefix representing its returned index. Induction over instruction parsing then shows that encoding the returned program reproduces every input bit. For assembly, concatenate the compiled formulas on the stack from bottom to top. Each successful instruction appends exactly itself to this reconstructed program. Starting with an empty stack and ending with $[f]$ therefore reconstructs the compiled program of $f$. Composing these facts proves the converse encoding round trip.
+
+For evaluation, induction over $f$ gives a transition trace that pushes its value and preserves any stack below it. A variable instruction takes one step followed by exactly the counted list-read steps. A negation adds one step after its operand; a conjunction adds one step after both operands. These are the recurrences of the recursive evaluator. Thus, the trace has exactly its counted length. The earlier evaluation bound and the converse round trip give \eqref{eq:evaluator-steps}.
+
+For the data bound, let $C$ be the remaining encoded code length and $V$ the value-stack length. Define a potential $P=C+V$ in an execution state and $P=C+V+j+1$ in a read state with remaining unary index $j$. Every transition makes $P$ nonincreasing. Initially $P=|x|$. Let $R$ be the current assignment-suffix length in a read state and zero otherwise. Then $R\leq A$ throughout execution. Our measure is $M=A+R+P+1$, including the original assignment and one control tag. This gives \eqref{eq:evaluator-data}. Lean checks the trace, both invariants, and their transfer to every successfully decoded input.
+\end{proof}
+
+Hence, the restricted decision bounds above cover all accepted binary requests, using their original input length. They are not limited to inputs constructed by our encoder. Note that this transition machine evaluates one assignment. A false value is not an UNSAT verdict; exhaustive search still supplies negative satisfiability answers. The result also does not bound the full solver's live memory: its eager assignment list can be exponential. The native service retains the recursive evaluator, whose count this separate machine realizes exactly. Combining parser, width discovery, assignment generation, and search into one transition semantics remains a further proof obligation. A simulation on a bit-machine must additionally account for data access and representation. These are distinct steps toward a complete runtime proof.
 
 \subsection{Certified witness reuse and persistent results}
 \label{sec:persistent-solver}
@@ -1196,6 +1226,13 @@ Lin, C.-C., Jaech, A., Li, X., Gormley, M.~R., and Eisner, J. (2021).
 Limitations of autoregressive models and their alternatives.
 In \emph{Proceedings of NAACL-HLT}, pp.~5147--5173.
 \href{https://doi.org/10.18653/v1/2021.naacl-main.405}{doi:10.18653/v1/2021.naacl-main.405}.
+
+\bibitem[McCarthy and Painter(1967)]{mccarthy1967compiler}
+McCarthy, J., and Painter, J. (1967).
+Correctness of a compiler for arithmetic expressions.
+In \emph{Mathematical Aspects of Computer Science}, Proceedings of Symposia in Applied Mathematics, vol.~19.
+American Mathematical Society.
+\url{https://www-formal.stanford.edu/jmc/mcpain.pdf}.
 
 \bibitem[McConnell et~al.(2011)McConnell, Mehlhorn, N\"aher, and Schweitzer]{mcconnell2011}
 McConnell, R.~M., Mehlhorn, K., N\"aher, S., and Schweitzer, P. (2011).

@@ -970,3 +970,92 @@ All pages were rendered and visually inspected; the terminology, new bounds,
 and updated results table were also inspected at full page size. The Lean
 audit, native executable build, integration tests, and preserved-data checks
 described above passed.
+
+## Explicit evaluator transitions and accepted-input coverage
+
+The next development addresses part of the program-to-machine obligation.
+`StackMachine.lean` defines an executable transition function over instruction,
+value-stack, and variable-read states. It never calls the recursive evaluator.
+A load instruction enters a read state; each read transition inspects one list
+cell and decrements a unary index. Negation and conjunction operate on the value
+stack. Empty code halts, while underflow faults.
+
+`compile_machine_steps` gives an exact execution trace for every formula,
+assignment, continuation, and initial stack. The trace takes precisely
+`(evalRun f a).2` transitions. `evalMachine_correct` proves that the executable
+machine reaches the expected terminal value with `weight f` fuel. Thus the
+previous evaluator count is realized by an explicit transition system, rather
+than only related to another recursive cost function.
+
+The data invariant holds for every reachable state. The sum of remaining
+encoded code, Boolean stack, and unary read index is nonincreasing. The current
+read suffix has length at most that of the original assignment. Counting the
+assignment and suffix separately, plus one control tag, gives
+`2*A + L + S + 1` data units for assignment length `A`, encoded program length
+`L`, and initial stack length `S`. This does not count addresses, list headers,
+serialization delimiters, or garbage collection. It is not a physical heap bound
+or a space bound for the complete exhaustive solver.
+
+`Canonical.lean` closes the one-sided encoding argument. The unary reader
+consumes exactly the prefix it recognizes. The instruction parser reproduces
+every input bit when its output is encoded. An assembly invariant reconstructs
+the consumed program from the formula stack. Consequently,
+`decode bits = some f` implies `encode f = bits`. The original round trip proved
+only the other direction. Fixed-cap and logarithmic-width decision bounds now
+cover every accepted binary input, in its own length. The parsed program also
+inherits the evaluator transition and data-size bounds directly; this route
+does not require runtime recompilation of the parsed formula.
+
+The evaluation result is the value under **one assignment**. A false value is
+not an UNSAT verdict. General negative answers still depend on the exhaustive
+search proof. No part of this development identifies SAT without a size cap
+with UNSAT or removes the exponential assignment dependence.
+
+### Literature and scope
+
+[McCarthy and Painter (1967)](https://www-formal.stanford.edu/jmc/mcpain.pdf)
+give the established methodological precedent: expression semantics, an
+instruction-level machine, and a correctness proof by structural induction.
+Their target uses an accumulator and registers; ours uses a Boolean stack and
+explicit sequential reads. The author's reprint, including its publication
+note, machine semantics, theorem statement, and induction method, was checked.
+The manuscript attributes the method and makes no novelty claim for expression
+compiler correctness. Its constants concern this implementation.
+
+The new prose follows the didactic, short-sentence guidance in the author's
+[Agent4CT style vocabulary](https://github.com/akmaier/Agent4CT/blob/main/paper/STYLE_WORDS.md),
+which was located and reread for this revision.
+
+The remaining verification tasks are to compose explicit machines for parsing,
+width discovery, assignment generation, and search; supply a finite-alphabet
+configuration encoding and a charged simulation; and bound the full solver's
+live data. The current eager assignment generator still constructs an
+exponential list. Completing these verification steps will establish the
+behavior of that solver, not a polynomial general-SAT algorithm. The formal
+README records these obligations for subsequent work.
+
+### Validation and retained results
+
+The pinned Lean build passes with 152 named source theorems, including 21 added
+in this revision. The default axiom audit checks 776 namespace declarations,
+including 455 theorem declarations with generated helpers, and permits only
+the three standard logical axioms. The evaluator-machine proof and accepted-input
+proofs were committed and pushed as separate milestones.
+
+The native engine fingerprint remains
+`f1fa5902307898b48e78ad910b630cb78dae35a4510cf2f999a937949bbd9104`, matching the
+current saved study. Both historical raw-study hashes still match their
+metadata. Each retained dataset contains 288 runs and 9,216 checked answers;
+this revision adds formal evidence, not a new timing run. The local database
+retains 710 records across two engine namespaces, representing the same 355
+distinct inputs: 226 SAT and 129 UNSAT per namespace. Its read-only SQLite
+integrity check passes.
+
+All 710 stored row checksums also validate. Relative to `e60e671`, all five
+lemmas, eight existing propositions, five corollaries, 18 existing proofs, and
+59 existing equation environments remain textually unchanged. The new
+proposition adds one proof and two equations. The final manuscript has 80 unique
+labels and 52 bibliography entries; all citations and references resolve.
+The 30-page PDF builds without warnings or overfull/underfull boxes. Every page
+was rendered and visually inspected, with the complete new proposition, proof,
+and scope discussion checked at full page size on page 22.

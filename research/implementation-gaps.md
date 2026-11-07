@@ -449,3 +449,203 @@ objects. Their presence does not certify every executable protocol branch. The
 current audit includes 2,090 declarations and 1,047 theorem declarations, with
 no admits or added axioms. The distinction between these proved components and
 the remaining implementation refinement is part of the result.
+
+## Gap analysis after the seven-priority follow-up
+
+This 8 November 2026 analysis reviews runtime commit `269f095`. The final-outcome
+logging defect, reset thrashing on unchanged layered roots, and Python's
+depth-256 lazy-evaluation limit have targeted repairs and passing regressions.
+They should not be listed as unchanged open defects. Remaining practical gaps
+concern work outside relation evaluation, source coverage and proof refinement.
+
+The new [diagnostic audit](../experiments/results/priority-gap-audit/README.md)
+records temporary-store experiments and SQL deltas. The original priority study
+revalidates: 1,047 correct completions, 105 resource failures and no wrong answers
+among 1,152 attempts. The ten priority regressions pass again. These checks are
+neither a complete correctness proof nor an independent replication.
+
+### Semantic reuse works, but provenance updates remain global (gap 3)
+
+The 16/64/320-edge equal-projection edits acquire only five native rows and two
+combination rows. Nevertheless, they rebind 16/64/320 successor projections and
+change 17/65/321 buckets. Existing three-repeat median edit times are
+8.811/33.920/240.298 ms. The operation counts, rather than these few timing points,
+identify the remaining global work.
+
+The new audit finds **zero new `interface_relation` objects** in all three edits.
+At 320 edges it nevertheless inserts 3,430 knowledge objects with 550,879
+compressed payload bytes and grows logical database allocation by 1,556,480
+bytes. Most objects are persistent-map nodes, interface evidence and elimination
+buckets. Another 639 row-cache records store checked values under new evidence
+identities. The intermediate counter reports 3,429 objects because the final
+result is inserted after it is sampled.
+
+Behavior already shares well here. The remaining question is whether evidence
+can be maintained locally. New parent identities still flow through the suffix
+(`solver/interfaces.py:398`, `solver/planning.py`). Each native rebind enumerates
+all interface assignments, even if few rows are known
+(`formal/OracleMachines/InterfaceProtocol.lean:250`). General expansion also
+enumerates the manifest, reconstructs SAT witnesses and extracts full negative
+proof DAGs. The native negative-context check uses list membership for every
+reachable leaf; distinct leaves and active identities can require quadratically
+many identity comparisons.
+
+**Next obligation:** maintain shared semantic values separately from versioned
+derivations and checked context roots, then update provenance and context by
+deltas. Prove that removed assumptions cannot justify a new result. Add a
+decision-only general-expansion API and charge full witness/certificate output
+separately. Measure new SQL bytes and context visits, not only computed rows.
+Simply stopping parent-identity propagation would invalidate provenance.
+
+### Retention scans the live graph under pressure (gap 4)
+
+The repair reduces new native definitions to 9/11 per 256/1,024-edge edit.
+At a cap equal to the live closure, however, **each of six consecutive edits
+visits all 511/2,047 live nodes**, reading 554/2,100 nodes in total. Doubling the
+cap reduces those edits to zero retention visits and 43/53 node reads. Unchanged
+queries require no closure scan at either cap.
+
+`solver/layered.py:110` builds the live set, sorts retained IDs and sends them
+all to native code. `LayeredProtocol.retain` rebuilds a map and checks dependency
+closure. Logarithmic summary recomputation is therefore not a logarithmic
+complete update at the tight cap. Headroom postpones this work; six edits do not
+establish long-stream amortization. Historical branch selection and restart have
+separate replay costs. General factor retention still resets its whole worker
+at a separate threshold (`solver/interfaces.py:495`).
+
+**Next obligation:** maintain live reachability incrementally for specified
+active roots, or prove a batch-retention amortized bound with explicit headroom
+and branch-switch assumptions. Test many eviction cycles and report total
+visits, transport and native work. Retain durable history with an explicit
+archive-capacity policy. Logical cells/pages do not bound actual RSS, transient
+allocation or physical disk.
+
+### Source-bound incremental CNF updates are missing (gap 1)
+
+The compiler checks a supplied disjoint ordered partition with blocks of at most
+four variables and clauses confined to neighboring blocks. It neither discovers
+the partition nor covers general bounded-width decompositions. For example,
+clauses `(x OR y_i)` with more than eleven distinct neighbors of `x` cannot fit
+this width-four partition: every neighbor must fit in `x`'s block or its two
+adjacent blocks. These formulas are easy to satisfy by setting `x` true. The
+restriction therefore excludes some very simple families.
+
+More immediately, `layered_cnf` requires a **fresh full source request**.
+It compiles twice and compares every source edge against the checked tree.
+Generic `layered` edits can reuse its state, but their new answers concern
+edited relations and have no new binding to an edited original CNF. The source
+API has no end-to-end logarithmic update guarantee.
+
+**Next obligation:** introduce persistent checked source versions, clause-to-block
+indexes and validated local source deltas. Preserve source identity through
+replacement, deletion and restart. Prove this precise family before extending
+to overlapping path/tree decompositions. Charge initial decomposition and
+compilation. An unrestricted-SAT width or compactness guarantee remains a
+research premise, not an implementation detail.
+
+### Proved components do not yet prove the stateful service (gap 5)
+
+The Lean results establish local clause semantics, mathematical source binding,
+full-tree witness traces, and value equality of costed and production tree
+operations. They do not establish the complete executable pipeline.
+
+The most consequential next invariant concerns native factor equivalence classes
+and transferred rows. `factorEquate` and `factor_rebind` maintain mutable hash-map
+state; semantic lemmas justify the intended operations, but no theorem preserves
+their store invariant through every protocol transition. JSON/partition
+construction, native memo state, truncated witnesses, SQLite/Python recovery and
+restart remain obligations. An axiom audit establishes proof hygiene, not that
+every runtime branch satisfies its specification. These diagnostics found no
+wrong answer.
+
+**Next obligation:** prove that every stored row equals evaluation of its current
+immutable definition and that every equivalence class denotes one relation on
+its named scope. Prove preservation under define, acquire, equate, rebind and
+reset; compose this with source/context binding and restart. State the remaining
+trusted runtime boundary. General short UNSAT certificates are not assumed;
+a proof-size refusal is not an UNSAT verdict.
+
+### The complete cost ledger remains unproved (gap 2)
+
+`LayeredCosts.lean` proves at most `q^3` tested middle states per join and
+`h+1+h*q^3` tests/node events per reference replacement. It excludes allocation,
+bit arithmetic, masks, hash maps, JSON, Python/SQL work, retention, source binding
+and replay. The diagnostics show that these exclusions can dominate. Equality
+also costs work to discover; `factorClass` has neither path compression nor
+union by rank, and its cost is absent from the row-acquisition count.
+
+**Next obligation:** implement a ledger for these terms and prove a restricted
+service bound with explicit resident-state, output and restart conditions.
+Measure actual new payload bytes separately from bytes serialized:
+`relation_payload_bytes` increases even when SQL deduplicates every relation.
+Functional equivalence of counted and production operations alone supplies no
+native instruction or bit-machine bound.
+
+### Budgeted speculation is not cost-sensitive selection (gap 6)
+
+At-most-once final observations and the shared proposal deadline are implemented.
+The limit is 250 ms or 10% of time remaining **when proposals start**, whichever
+is smaller. Retrieval and feature/model work happen beforehand; training and
+archive work happen afterward. A proposal timeout kills the native worker and
+can incur later replay. These costs are measured in elapsed time but are not
+bounded by the proposal budget. The router chooses checked versus interfaces,
+not which predictor/portfolio actions are worthwhile.
+
+The manuscript's fixed-policy break-even proposition does not directly prove
+performance of this adaptive service. It excludes online updates and requires
+the same baseline on fallback. An adaptive guarantee must charge updates and
+interference as well as benefits from accepted answers.
+
+**Next obligation:** gate mechanisms by avoided solver cost versus all incremental
+costs, including worker-state loss. Keep an always-checked option and test workload
+shifts. Regret or overhead guarantees need explicit workload/resource assumptions;
+a timeout alone proves no universal speedup.
+
+### Application evidence is insufficient for an efficiency claim (gap 7)
+
+Chronological median times are 649.47 ms learned, 458.58 ms checked and 263.01 ms
+for the deterministic polarity baseline. The learner accepts 30/32 signed units
+per repetition; polarity accepts all 32. Neither accepts a public-shift or
+application proposal. This supports a synthetic heuristic benefit, not a
+learning-specific gain on those public applications.
+
+Every service mode completes 9/24 application attempts, on different subsets.
+Full-stream times include failures and cannot rank equivalent completed work.
+Direct CNF completes 24/24 with a different certification/storage boundary.
+All process-tree RSS reads failed, leaving no valid RSS peak measurement.
+
+Representation is a concrete bottleneck: the saved Towers-38 CNF has 517,974 bytes,
+while unary formula encoding needs 181,707,058 bytes, roughly 351 times as much.
+Every service mode rejects it at the 8 MiB input cap. Full-study failures comprise
+21 input-cap, 39 archive-cap, 30 proof-size and 15 deadline failures. These are
+resource failures, not SAT/UNSAT decisions or complexity lower bounds.
+
+**Next obligation:** verify a compact source interface, then compare matched
+certified baselines on the same completed inputs. Report completion rates,
+paired costs, storage growth and functioning RSS observation. Freeze a new
+holdout after choosing the policy; add repetitions and realistic edit, restart
+and branch streams. Universal System 1/System 2 superiority is not established.
+
+### The theoretical premise and recommended order
+
+Exact finite-domain expansion does not imply uniform polynomial construction.
+A cost bound in the number of stored components does not bound how many
+components or expansions cover every length-n SAT instance. The missing invariant
+must jointly control width, acquisition, representation size, coverage schedule,
+maintenance and evaluation. The manuscript states these conditions; it does not
+prove them for unrestricted SAT. This audit supplies neither that proof nor a
+counterexample to the conditional mathematics.
+
+The practical order is **3, 4, 1, 5, 2, 6, 7**: reduce provenance and retention
+work, connect local edits to source CNF, prove the new state transitions, complete
+the restricted cost account, improve selection, then test the resulting claim.
+Maintain regression checks throughout. Compact general input encoding is an
+independent prerequisite for meaningful application evaluation and can precede
+the final experiment.
+
+A concrete next theorem should cover decision-only local CNF edits in a supplied
+fixed-width decomposition: preserve checked source identity and current-context
+validity, include retention and evidence in the full-update bound, and give
+explicit additional terms for restart, history selection and full output. This
+would strengthen the resource-accounting contribution without assuming a solution
+to P versus NP.

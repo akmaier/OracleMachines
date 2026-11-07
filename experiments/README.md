@@ -88,8 +88,9 @@ local timing repetitions.
 
 A cache hit reports zero **core** work because no Lean query runs. It is not a
 zero-cost service operation. Instrumentation-counter arithmetic is excluded from
-the abstract core but contributes to elapsed time. Observer statistics and the
-experiment runner are excluded from the elapsed totals. Hardware scheduling,
+the abstract core but contributes to elapsed time. Engine compilation, Python
+interpreter startup, observer statistics, and the experiment runner are excluded
+from the elapsed totals. Hardware scheduling,
 filesystem cache, and the small repetition count limit timing conclusions.
 
 ## Saved evidence and proof boundary

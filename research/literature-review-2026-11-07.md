@@ -697,6 +697,9 @@ visually inspected, with the new section on pages 17–19 checked at full page s
 
 ## Lean verification of expansion and resource limits
 
+This subsection records the earlier `332e8cd` milestone. Its outstanding
+implementation obligations are reassessed in the next subsection below.
+
 The repository now contains a [Lean project](../formal/README.md) with 40 named
 theorems. It uses Lean 4.24.0 and mathlib v4.24.0, with transitive dependency
 commits recorded in `formal/lake-manifest.json`. The theorem map in its README
@@ -761,3 +764,84 @@ environments, 64 unique labels, and 46 bibliography entries. All cross-reference
 resolve, the final LaTeX pass has no warnings, and all rendered pages were
 visually inspected, including full-page checks of the changed material on
 pages 18–20.
+
+## Concrete SAT core, persistent results, and executed cost study
+
+The follow-up development addresses the four implementation obligations without
+claiming the missing unrestricted SAT bound. The current formal library contains
+102 explicitly named source theorems. Its default build audits 555 declarations,
+including 312 theorem declarations when Lean-generated equations and helpers are
+counted. Lean 4.24.0 and the pinned mathlib build pass with warnings as errors;
+only `propext`, `Classical.choice`, and `Quot.sound` are allowed.
+
+| Obligation | New evidence | Remaining boundary |
+| --- | --- | --- |
+| Concrete expansion | `SAT.lean` verifies exhaustive satisfiability and witness search. `Encoding.lean` verifies binary round trips and instantiates exact finite-domain expansion with that solver. | The explicit answer table is exponential. Its list lookup does not implement the paper's packed direct-access layout. |
+| Uniform resource bounds | `CostedSAT.lean` proves `T <= W^2 + 2^v (W+13) + 2` and, for a fixed variable cap `K`, `T <= (14*2^K+3)(L+1)^2`. | The coefficient is exponential in `K`; this is not a uniform unrestricted SAT bound. No polynomial full-table construction follows. |
+| Program-to-proof connection | The executable counted evaluator realizes inductive read/evaluation judgments; the counted solver returns the proved solver's result. `Hybrid.lean` verifies the concrete adaptive policy, overhead, and history-dependent savings. `Cache.lean` proves exact-result insertion and retention. | Counter arithmetic, binary parsing cost, native compilation/runtime, JSON, Python, SQLite, and disk integrity are outside the core cost proof. Complexity classes and machine simulation remain conventional rather than formalized. |
+| Workload savings | A native Lean process and the SQLite adapter execute 288 reproducible runs with 9,216 correct answers. Fresh state charges acquisition inside each run. Core work, complete wrapper setup, service time, shutdown, and persistent database sizes are separately recorded. | Synthetic mechanism controls with three timing repetitions are not representative SAT or neural-learning benchmarks. Interpreter startup, engine compilation, observer work, peak process memory, and energy are not included in the timing/storage claims. |
+
+### Persistence and its trust boundary
+
+The local service accumulates every completed SAT/UNSAT result and retains SAT
+witnesses. It separately records an active witness for transfer to new formulas.
+State survives process restarts. Complete binary keys avoid treating a hash
+collision as input equality; engine fingerprints separate versions without
+removing older results. SQLite transactions commit answers and active state;
+there is no eviction. Negative answers are retained only after an exact solve,
+not after invalid input, an error, or an interrupted computation.
+
+The exact-cache invariant assumes an intact cache produced by prior writes.
+Checksums detect accidental changes to semantic fields but do not authenticate
+hostile edits. `audit` can re-solve the current engine's retained records and
+check positive witnesses. All nine integration tests pass against the real
+compiled engine, covering restart, positive/negative retention, cross-formula
+transfer, concurrent writers, version namespaces, malformed inputs, checksums,
+and detection of a deliberately forged negative answer during semantic audit.
+A separate local service demonstration retains two SAT answers and one UNSAT
+answer across process invocations. After the isolated benchmark, all 352 distinct
+experiment inputs were solved through the normal persistent service as well,
+with their labels checked. The local database now retains 355 records: 226 SAT
+and 129 UNSAT. All 355 pass a fresh semantic audit. This replay does not change
+the fresh-state benchmark records. The database is ignored by Git and remains
+in `solver/.cache/results.sqlite3`.
+
+### Results and interpretation
+
+The [saved study](../experiments/README.md) includes six ordered workloads at
+variable widths 2, 4, 8, and 12. The first true formula requires all variables to
+be true. Even negation wrappers produce distinct inputs sharing that witness.
+Contrasting controls change the required assignment, alternate incompatible
+assignments, or introduce an explicit contradictory literal. These syntactically
+simple formulas isolate the reuse mechanism. The baseline eagerly materializes
+all assignments and performs no preprocessing or clause learning.
+
+At width 12, the persistent hybrid uses 467,333 core operations on 32 distinct
+formulas sharing a witness, against 18,880,128 for repeated solving. Its median
+total time is 146.58 ms versus 229.40 ms with the same front end. The first solve
+is charged, and there are 31 successful transfers. The exact cache alone has no
+hits on that stream. Alternating witnesses and distinct UNSAT streams add work
+and have slower hybrid total times. Small core-work ratios therefore cannot be
+read as proportional wall-clock speedups. The checked-in records include all
+variants and widths, including losing cases, rather than only the favorable
+example. Input hashes, raw-record hash, mode counts, acquisition/hit accounting,
+and setup + service + shutdown totals were independently checked.
+
+### Manuscript changes and verification
+
+Sections 12.4–12.7 now distinguish verified expansion, the restricted executable
+core bound, persistent witness/result reuse, and the executed mechanism study.
+The new proposition and proof state exactly which operations are charged. The
+text explains that fixed-variable formulas can have unbounded length, while the
+constant remains exponential in the cap. It also retains the distinction between
+one-query cost and full-domain construction. Abstract, introduction, evaluation
+protocol, and conclusion reflect the new evidence without a novelty claim.
+
+All 15 previous proof environments, all previous proposition/lemma/corollary
+statements, and all 54 previous equation environments remain textually unchanged.
+The new version has 16 proofs, 57 equation environments plus the new aligned
+weight definition, 72 unique labels, and the same 46 bibliography entries. All
+references resolve. The full axiom audit and executable build pass. The LaTeX
+build produces 27 pages without warnings. All rendered pages were visually
+inspected, with the new proof, persistence discussion, and result table on pages
+20–22 checked at full page size.

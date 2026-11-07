@@ -65,7 +65,8 @@ not prove P = NP.
 The executable development now supplies an exact SAT solver, a restricted
 polynomial bound for a fixed variable cap, and a certified witness-reuse policy.
 The [persistent solver](solver/README.md) retains every completed result across
-restarts. Controlled workloads compare reuse with repeated exhaustive solving;
+restarts. The [reproducible study](experiments/README.md) compares reuse with repeated
+exhaustive solving;
 they do not establish a competitive SAT solver or efficient exact learning on
 unrestricted instances.
 
@@ -134,8 +135,8 @@ lake exe cache get
 lake build
 ```
 
-The toolchain and dependencies are pinned. The default build audits all project
-declarations for admitted proofs and additional axioms. The formalization treats
+The toolchain and dependencies are pinned. The default build audits all declarations in the formal library
+namespace for admitted proofs and additional axioms. The formalization treats
 general runtime costs as explicit numerical ledgers and connects a concrete
 SAT core to an operational cost model. Its cost bound is polynomial in formula
 length only for a **fixed** variable cap, with exponential dependence on that

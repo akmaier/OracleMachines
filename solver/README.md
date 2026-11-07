@@ -35,7 +35,7 @@ grows with the number and size of distinct queries.
 
 Results are keyed by the **complete binary input** and the SHA-256 fingerprint of
 the compiled engine. A rebuilt engine gets its own namespace when its binary
-changes; earlier records remain in the database. A checksum protects each row
+changes; earlier records remain in the database. A checksum covers each record's engine identifier, input, answer, and witness
 against accidental corruption. Errors, malformed inputs, and interrupted calls
 are never stored as UNSAT.
 

@@ -50,12 +50,16 @@ def defineNodes (store : Store) (request : Json) : Except String (Store × Json)
       out := out.insert id (node, checked)
   return (out, Json.mkObj [("valid", toJson true)])
 
-/-- Produce endpoints through each segment. Output work is linear in capacity. -/
-def witness : {h : Nat} → Tree h → Bool → Bool → List Bool
-  | 0, .leaf _, x, y => [x,y]
-  | _+1, .branch _ l r, x, z =>
+/-- Prepend each edge's left endpoint, avoiding repeated list concatenation. -/
+def witnessPrefix : {h : Nat} → Tree h → Bool → Bool → List Bool → List Bool
+  | 0, .leaf _, x, _, tail => x :: tail
+  | _+1, .branch _ l r, x, z, tail =>
     let y := !(l.summary x false && r.summary false z)
-    witness l x y ++ (witness r y z).tail
+    witnessPrefix l x y (witnessPrefix r y z tail)
+
+/-- Produce endpoints through each segment. Output work is linear in capacity. -/
+def witness {h : Nat} (tree : Tree h) (x y : Bool) : List Bool :=
+  witnessPrefix tree x y [y]
 
 def query (store : Store) (request : Json) : Except String Json := do
   let root ← request.getObjValAs? String "root"
@@ -68,8 +72,9 @@ def query (store : Store) (request : Json) : Except String Json := do
   let want ← request.getObjValAs? Bool "witness"
   let pair := [(false,false),(false,true),(true,false),(true,true)].find? (fun (x,y) =>
     left.testBit x.toNat && right.testBit y.toNat && checked.tree.summary x y)
-  let word := pair.map (fun (x,y) => (witness checked.tree x y).take (size+1))
   return Json.mkObj [("answer", toJson pair.isSome),
-    ("witness", if want then toJson word else Json.null),
+    ("witness", if want then
+        toJson (pair.map (fun (x,y) => (witness checked.tree x y).take (size+1)))
+      else Json.null),
     ("height", toJson checked.height)]
 end OracleMachines.Chain

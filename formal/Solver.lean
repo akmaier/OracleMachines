@@ -288,6 +288,20 @@ def main : IO Unit := do
           | .ok (state, response) => graph := state; pure (.ok response)
         else if mode == "incremental_reset" then
           graph := Std.Sat.AIG.empty; pure (.ok (Json.mkObj [("valid", toJson true)]))
+        else if mode == "factor_define_many" then
+          let checked := do
+            let definitions ← request.getObjValAs? (Array Json) "definitions"
+            if definitions.size > 128 then throw "Too many definitions in one batch"
+            let mut state := factors
+            let mut responses : Array Json := #[]
+            for definition in definitions do
+              let (next, response) ← factorDefine parseFormulaBits showBits state definition
+              state := next
+              responses := responses.push response
+            return (state, Json.mkObj [("results", toJson responses)])
+          match checked with
+          | .error e => pure (.error e)
+          | .ok (state, response) => factors := state; pure (.ok response)
         else if mode == "factor_define" then
           match factorDefine parseFormulaBits showBits factors request with
           | .error e => pure (.error e)

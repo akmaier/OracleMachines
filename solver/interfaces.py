@@ -6,6 +6,8 @@ and UNSAT needs an empty relation whose checked source leaves remain active.
 All graph objects are immutable. Fallback handles instances exceeding width caps.
 """
 from collections import OrderedDict
+from contextlib import contextmanager
+from functools import wraps
 import hashlib
 import json
 import time
@@ -18,6 +20,22 @@ from solver.manifests import Manifest
 from solver import planning
 from solver.symbolic import BDD
 from solver.resources import BudgetExceeded, Deadline
+
+
+def batched(method):
+    """Commit one checked interface operation; discard volatile proposals on rollback."""
+    @wraps(method)
+    def run(self, *args, **kwargs):
+        try:
+            with self.service._phase('interface_commit'), self.db:
+                self.batch_depth += 1
+                try:return method(self, *args, **kwargs)
+                finally:self.batch_depth -= 1
+        except BaseException:
+            self.cache.clear()
+            self.symbolic_roots.clear()
+            raise
+    return run
 
 
 def identity(value):
@@ -33,7 +51,8 @@ def counters():
         affected_buckets=0,reused_buckets=0,propagation_stops=0,dependency_updates=0,
         plan_copy_entries=0,source_comparisons=0,plan_rebuilds=0,
         symbolic_operations=0,symbolic_nodes=0,symbolic_hits=0,symbolic_replays=0,
-        symbolic_rows=0,symbolic_fallbacks=0)
+        symbolic_rows=0,symbolic_fallbacks=0,symbolic_collected_nodes=0,
+        preflight_rejected=0,preflight_buckets=0,native_definition_batches=0)
 
 
 def evaluate(nodes,assignment):
@@ -67,11 +86,21 @@ class InterfaceSolver:
         self.bdd=BDD()
         self.symbolic_roots={}
         self.symbolic_disabled=False
+        self.batch_depth=0
+
+    @contextmanager
+    def transaction(self):
+        if self.batch_depth:
+            yield
+        else:
+            with self.db:yield
 
     def begin_symbolic(self):
-        if len(self.bdd.nodes)>self.bdd.max_nodes//2:
-            self.bdd=BDD();self.symbolic_roots.clear()
         self.bdd.begin(self.deadline)
+        if len(self.bdd.nodes)>self.bdd.max_nodes//2:
+            before=len(self.bdd.nodes)
+            self.symbolic_roots=self.bdd.collect(self.symbolic_roots)
+            self.metrics['symbolic_collected_nodes']+=before-len(self.bdd.nodes)
         self.symbolic_disabled=False
 
     def symbolic_root(self,node,depth=0):
@@ -93,10 +122,12 @@ class InterfaceSolver:
                 root=self.bdd.formula(program)
             else:
                 root=1
-                for parent in definition['parents']:
+                parents=definition['parents']
+                for parent in parents[:-1]:
                     root=self.bdd.apply('and',root,self.symbolic_root(self.read(parent),depth+1))
-                root=self.bdd.exists(root,definition['variable'])
-            with self.service._phase('interface_storage'),self.db:
+                last=self.symbolic_root(self.read(parents[-1]),depth+1) if parents else 1
+                root=self.bdd.and_exists(root,last,(definition['variable'],))
+            with self.service._phase('interface_storage'),self.transaction():
                 obj=self.store.put('symbolic_relation',self.bdd.dump(root))[0]
                 self.db.execute('INSERT OR IGNORE INTO interface_symbolic VALUES (?,?,?)',(self.engine,token,obj))
         if len(self.symbolic_roots)>=self.active_nodes:self.symbolic_roots.clear()
@@ -148,11 +179,11 @@ class InterfaceSolver:
         """Replay checked DAG nodes once per native worker; cap active state."""
         if self.worker is not self.service.process or self.worker is None or self.worker.poll() is not None:
             self.verified.clear();self.bound.clear();self.verified_rows.clear();self.worker=self.service.process
-        stack=[(name,False)]
+        stack=[(name,False)];pending=[];scheduled=set()
         while stack:
             self.deadline.check()
             token,ready=stack.pop()
-            if token in self.verified:continue
+            if token in self.verified or token in scheduled:continue
             node=self.read(token)
             if node is None:raise ValueError('Missing interface evidence')
             parents=node['definition'].get('parents',[])
@@ -160,15 +191,23 @@ class InterfaceSolver:
                 stack.append((token,True))
                 stack.extend((p,False) for p in reversed(parents) if p not in self.verified)
                 continue
+            pending.append(node);scheduled.add(token)
+        for offset in range(0,len(pending),128):
+            batch=pending[offset:offset+128]
             with self.service._phase('interface_verification'):
-                result=self.service._request(dict(mode='factor_define',id=token,definition=node['definition'],lazy=True))
+                response=self.service._request(dict(mode='factor_define_many',definitions=[
+                    dict(id=node['id'],definition=node['definition'],lazy=True) for node in batch]))
+            results=response['results']
+            if len(results)!=len(batch):raise ValueError('Incomplete native definition batch')
             self.worker=self.service.process
-            native_scope=result['scope']
-            if set(native_scope)!=set(node['scope']):raise ValueError('Checked factor has different scope')
-            node['native_scope']=native_scope
-            self.verified.add(token)
-            self.metrics['native_definitions']+=1
-            if token not in self.new_nodes:self.metrics['native_replays']+=1
+            self.metrics['native_definition_batches']+=1
+            for node,result in zip(batch,results):
+                token=node['id'];native_scope=result['scope']
+                if set(native_scope)!=set(node['scope']):raise ValueError('Checked factor has different scope')
+                node['native_scope']=native_scope
+                self.verified.add(token)
+                self.metrics['native_definitions']+=1
+                if token not in self.new_nodes:self.metrics['native_replays']+=1
 
     def check_row(self,node,index,answer):
         self.ensure(node['id'])
@@ -235,7 +274,7 @@ class InterfaceSolver:
             self.metrics['combination_rows']+=1
         self.check_row(node,index,value)
         node['rows'][index]=value;node['choice_values'][index]=choice
-        with self.service._phase('interface_storage'),self.db:
+        with self.service._phase('interface_storage'),self.transaction():
             self.db.execute('INSERT OR IGNORE INTO interface_rows VALUES (?,?,?,?,?)',
                 (self.engine,node['id'],index,int(value),None if choice is None else int(choice)))
             if all(v is not None for v in node['rows']):
@@ -251,7 +290,7 @@ class InterfaceSolver:
         name=identity(definition)
         relation=pack(rows)
         node=dict(definition=definition,scope=scope,choices=pack(choices) if choices is not None else None)
-        with self.service._phase('interface_storage'),self.db:
+        with self.service._phase('interface_storage'),self.transaction():
             rel,raw,_=self.store.put('interface_relation',relation)
             evidence=self.store.put('interface_evidence',node)[0]
             self.db.execute('INSERT OR IGNORE INTO interface_nodes VALUES (?,?,?,?)',(self.engine,name,evidence,rel))
@@ -260,7 +299,6 @@ class InterfaceSolver:
         self.metrics['planned_rows']+=len(rows)
         self.remember(name,node)
         # Results in this table are proposals until native checking succeeds.
-        self.ensure(name)
         self.metrics['relation_payload_bytes']+=raw
         self.metrics['node_acquisitions']+=1
         return node
@@ -278,13 +316,14 @@ class InterfaceSolver:
         result['program']=nodes
         return result
 
-    def constraint(self,bits):
+    def constraint(self,bits,groups=None):
         if not isinstance(bits,str) or any(c not in '01' for c in bits):
             raise ValueError('A constraint encoding must contain only zero and one')
         self.metrics['input_bytes']+=len(bits)
         if len(bits)>self.service.max_input_bytes:raise BudgetExceeded('Constraint exceeds input budget')
-        with self.service._phase('interface_analysis'):
-            groups,_,_=analyze(bits,self.deadline)
+        if groups is None:
+            with self.service._phase('interface_analysis'):
+                groups,_,_=analyze(bits,self.deadline)
         leaves=[]
         reason=None
         try:
@@ -292,9 +331,8 @@ class InterfaceSolver:
                 for term in group['global_parts']:leaves.append(self.leaf(term)['id'])
         except BudgetExceeded as error:
             self.deadline.check();reason=str(error);leaves=[]
-        with self.db:
+        with self.transaction():
             token=self.store.put('expansion_constraint',dict(bits=bits,leaves=leaves,fallback=reason))[0]
-        if reason is None:self.bind_constraint(token)
         return token,leaves
 
     def bind_constraint(self,token):
@@ -342,6 +380,7 @@ class InterfaceSolver:
                     self.max_interface,self.deadline,self.metrics,previous_order)
         self.current_plan=plan
         for name in plan['constants']:
+            self.ensure(name)
             if not self.acquire(self.read(name),0):return False,None,name,plan['order']
         assignment={}
         for variable in reversed(plan['order']):
@@ -374,6 +413,8 @@ class InterfaceSolver:
         if answer:
             for name in active:self.ensure(name)
         else:self.ensure(root)
+        if constraints is not None:
+            for token in constraints:self.bind_constraint(token)
         # The final context check prevents reusing a negative derivation after
         # one of its assumptions has been deleted or replaced.
         for name in active:self.ensure(name)
@@ -389,14 +430,47 @@ class InterfaceSolver:
             self.service._request(dict(mode='factor_reset'))
             self.verified.clear();self.verified_rows.clear();self.bound.clear()
 
+    def preflight(self,bits):
+        """Bounded, write-free simulation of the same width heuristic.
+
+        Failure means route to a checked fallback, never a SAT/UNSAT claim.
+        The speculative planner receives at most 20% of remaining query time.
+        """
+        local=Deadline(min(0.25,self.deadline.remaining()*0.2))
+        metrics=counters();factors={}
+        with self.service._phase('interface_preflight'):
+            try:
+                groups,_,_=analyze(bits,local)
+                for group in groups:
+                    for term in group['global_parts']:
+                        nodes,_=parse_postfix(term,local)
+                        scope=sorted({n[1] for n in nodes if n[0]=='var'})
+                        if len(scope)>self.max_interface+1:
+                            raise BudgetExceeded('Preflight leaf exceeds interface cap')
+                        factors[str(len(factors))]=dict(scope=scope)
+                def project_scope(variable,names):
+                    key=str(len(factors))
+                    factors[key]=dict(scope=sorted({v for n in names for v in factors[n]['scope']}-{variable}))
+                    return key
+                planning.build(list(factors),factors.get,project_scope,self.max_interface,local,metrics)
+                self.metrics['preflight_buckets']=metrics['planned_buckets']
+                return groups
+            except BudgetExceeded:
+                self.metrics['preflight_rejected']+=1
+                self.deadline.check()
+                raise BudgetExceeded('Structural preflight rejected or exhausted its reserved budget')
+
+    @batched
     def solve(self,bits):
         self.deadline=self.service._deadline or Deadline(self.service.query_timeout)
         self.metrics=counters();self.new_nodes=set();before=self.store.inserted_objects
         self.reset_if_full()
         self.begin_symbolic()
         try:
-            token,active=self.constraint(bits)
-            self.bind_constraint(token)
+            groups=self.preflight(bits)
+            token,active=self.constraint(bits,groups)
+            record=self.store.get(token,'expansion_constraint')
+            if record.get('fallback'):raise BudgetExceeded(record['fallback'])
             result=self.run(active)
             with self.service._phase('interface_verification'):
                 request=dict(mode='verify_witness',bits=bits,witness=result['witness']) if result['answer'] else dict(mode='verify_certificate',bits=bits,certificate=result['certificate'])
@@ -416,6 +490,7 @@ class InterfaceSolver:
             core_work=None,counted_work=None,counted_complete=False,nodes=None,parse_work=checked['parse_work'],
             interfaces=dict(self.metrics)),None,None
 
+    @batched
     def expand(self,base,add,remove):
         self.deadline=self.service._deadline or Deadline(self.service.query_timeout)
         self.metrics=counters();self.new_nodes=set();before=self.store.inserted_objects
@@ -438,15 +513,18 @@ class InterfaceSolver:
         # Valid partial evidence may commit even if the entire expansion fails;
         # an answer snapshot is committed only after native verification.
         for name in remove:
-            with self.db:root=manifest.update(root,name,None)
+            with self.transaction():root=manifest.update(root,name,None)
         for name,bits in add.items():
             token,_=self.constraint(bits)
-            with self.db:root=manifest.update(root,name,token)
+            with self.transaction():root=manifest.update(root,name,token)
         active=[];constraints=[token for _,token in manifest.items(root)]
         try:
-            for token in constraints:active.extend(self.bind_constraint(token))
+            for token in constraints:
+                record=self.store.get(token,'expansion_constraint')
+                if record.get('fallback'):raise BudgetExceeded(record['fallback'])
+                active.extend(record['leaves'])
             result=self.run(list(dict.fromkeys(active)),previous_order,constraints,previous_plan)
-            with self.service._phase('interface_storage'),self.db:
+            with self.service._phase('interface_storage'),self.transaction():
                 result['plan']=self.store.put('elimination_plan',self.current_plan)[0]
         except BudgetExceeded as error:
             self.deadline.check()
@@ -458,7 +536,7 @@ class InterfaceSolver:
         self.metrics['archive_new_objects']=self.store.inserted_objects-before
         self.metrics['active_cache_nodes']=len(self.cache)
         self.metrics['unknown_rows']=sum(sum(v is None for v in q['rows']) for q in self.cache.values())
-        with self.service._phase('interface_storage'),self.db:
+        with self.service._phase('interface_storage'),self.transaction():
             evidence=self.store.put('expansion_result',result)[0]
             state=identity(dict(engine=self.engine,manifest=root))
             self.db.execute('INSERT OR IGNORE INTO expansion_states VALUES (?,?,?,?,?,?)',

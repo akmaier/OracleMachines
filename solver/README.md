@@ -442,3 +442,19 @@ report logical pages, physical database/WAL sizes and these limitations. See the
 
 The scaling study and raw measurements are in
 [`experiments/results/scaling`](../experiments/results/scaling/README.md).
+
+## Batched interface acquisition and symbolic projection
+
+Interface operations now commit their writes together with full synchronization;
+failed operations roll back their new objects and clear volatile proposal caches.
+Expansion snapshots remain atomic and all previously committed states survive.
+Native factor definitions are submitted in topological batches of at most 128.
+Full-input interface attempts first run a write-free width simulation, bounded by
+20% of remaining query time and 250 ms, before storing or registering factors.
+Rejection routes to the existing checked solver and never means UNSAT.
+
+BDD projection uses fused conjunction and abstraction after all factors for the
+eliminated variable have been included. Safe-point garbage collection remaps all
+retained roots and clears stale computed-table entries. Explicit alternative
+variable orders are supported for controlled experiments, with ordering metadata
+checked on replay. Native rows and original-formula checks remain authoritative.

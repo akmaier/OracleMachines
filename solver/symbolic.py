@@ -9,12 +9,19 @@ from solver.resources import BudgetExceeded
 
 
 class BDD:
-    def __init__(self, max_nodes=50000, max_work=500000):
+    def __init__(self, max_nodes=50000, max_work=500000, order=()):
         self.max_nodes, self.max_work = max_nodes, max_work
         self.nodes = []
         self.unique, self.memo = {}, {}
         self.work = self.hits = 0
         self.deadline = None
+        self.order = tuple(order)
+        if len(set(self.order)) != len(self.order):
+            raise ValueError('Repeated BDD ordering variable')
+        self.ranks = {v: i for i, v in enumerate(self.order)}
+
+    def rank(self, variable):
+        return (0, self.ranks[variable]) if variable in self.ranks else (1, variable)
 
     def begin(self, deadline):
         self.deadline = deadline
@@ -75,7 +82,7 @@ class BDD:
         def compute():
             lv, ll, lh = self.nodes[left - 2]
             rv, rl, rh = self.nodes[right - 2]
-            v = min(lv, rv)
+            v = min(lv, rv, key=self.rank)
             if lv != v:ll = lh = left
             if rv != v:rl = rh = right
             return self.node(v, self.apply(op, ll, rl), self.apply(op, lh, rh))
@@ -84,15 +91,61 @@ class BDD:
     def restrict(self, root, variable, value):
         if root < 2:return root
         v, low, high = self.nodes[root - 2]
-        if v > variable:return root
+        if self.rank(v) > self.rank(variable):return root
         if v == variable:return high if value else low
         return self.cached(('restrict', root, variable, value),
             lambda: self.node(v, self.restrict(low, variable, value),
                              self.restrict(high, variable, value)))
 
     def exists(self, root, variable):
-        return self.apply('or', self.restrict(root, variable, False),
-                          self.restrict(root, variable, True))
+        return self.and_exists(root, 1, (variable,))
+
+    def and_exists(self, left, right, variables):
+        """Relational product: do not materialize the unprojected conjunction.
+
+        Call only after every factor containing an eliminated variable has been
+        joined. This is a proposal operation; native checks remain authoritative.
+        """
+        eliminated = tuple(sorted(set(variables)))
+        def visit(a, b):
+            if a > b:a, b = b, a
+            if a == 0:return 0
+            if a < 2 and b < 2:return a & b
+            def compute():
+                av = self.nodes[a - 2][0] if a >= 2 else None
+                bv = self.nodes[b - 2][0] if b >= 2 else None
+                v = min((x for x in (av, bv) if x is not None), key=self.rank)
+                al, ah = self.nodes[a - 2][1:] if av == v else (a, a)
+                bl, bh = self.nodes[b - 2][1:] if bv == v else (b, b)
+                lo, hi = visit(al, bl), visit(ah, bh)
+                return self.apply('or', lo, hi) if v in eliminated else self.node(v, lo, hi)
+            return self.cached(('and_exists', a, b, eliminated), compute)
+        return visit(left, right)
+
+    def collect(self, roots):
+        """Compact reachable nodes and return remapped roots; callers replace ALL roots.
+
+        Run at a safe point, never while a recursive operation holds node IDs.
+        Computed-table entries are discarded because their IDs become stale.
+        """
+        translated = {0: 0, 1: 1}
+        nodes = []
+        for root in roots.values():
+            stack = [(root, False)]
+            while stack:
+                self.tick()
+                current, ready = stack.pop()
+                if current in translated:continue
+                v, low, high = self.nodes[current - 2]
+                if ready:
+                    translated[current] = len(nodes) + 2
+                    nodes.append((v, translated[low], translated[high]))
+                else:stack.extend([(current, True), (high, False), (low, False)])
+        result = {key: translated[value] for key, value in roots.items()}
+        self.nodes = nodes
+        self.unique = {node: i + 2 for i, node in enumerate(nodes)}
+        self.memo.clear()
+        return result
 
     def formula(self, nodes):
         values = []
@@ -126,11 +179,15 @@ class BDD:
                 nodes.append([v, numbered[low], numbered[high]])
             else:
                 pending.extend([(current, True), (high, False), (low, False)])
-        return dict(version=1, root=numbered[root], nodes=nodes)
+        result = dict(version=1, root=numbered[root], nodes=nodes)
+        if self.order:result['order'] = list(self.order)
+        return result
 
     def restore(self, value):
         if value.get('version') != 1 or len(value['nodes']) > self.max_nodes:
             raise ValueError('Invalid symbolic object')
+        if tuple(value.get('order', ())) != self.order:
+            raise ValueError('Symbolic ordering mismatch')
         translated = [0, 1]
         for i, row in enumerate(value['nodes'], 2):
             self.tick()
@@ -139,7 +196,7 @@ class BDD:
             v, low, high = row
             if low >= i or high >= i or low == high:
                 raise ValueError('Invalid symbolic dependency')
-            if any(child >= 2 and value['nodes'][child - 2][0] <= v for child in (low, high)):
+            if any(child >= 2 and self.rank(value['nodes'][child - 2][0]) <= self.rank(v) for child in (low, high)):
                 raise ValueError('Unordered symbolic diagram')
             translated.append(self.node(v, translated[low], translated[high]))
         root = value['root']

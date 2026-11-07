@@ -220,6 +220,49 @@ def factorRowRequest (db : FactorStore) (memo : FactorRowStore)
   let (cache, answer, work) ← factorRow (db.size + 1) db memo name row
   return (cache, Json.mkObj [("value", toJson answer), ("acquired_rows", toJson work)])
 
+/-- Equivalence classes refer only to immutable checked definitions. They never
+replace source/provenance edges. A reset drops them along with the row cache. -/
+abbrev FactorClasses := Std.HashMap String String
+
+def factorClass : Nat → FactorClasses → String → String
+  | 0, _, name => name
+  | n+1, classes, name => match classes[name]? with
+    | none => name
+    | some parent => factorClass n classes parent
+
+def factorEquate (db : FactorStore) (memo : FactorRowStore) (classes : FactorClasses)
+    (request : Json) : Except String (FactorRowStore × FactorClasses × Json) := do
+  let old ← request.getObjValAs? String "old"
+  let new ← request.getObjValAs? String "new"
+  let some a := db[old]? | throw "Unknown old factor"
+  let some b := db[new]? | throw "Unknown new factor"
+  let rejected := (memo, classes, Json.mkObj [("valid", toJson false)])
+  if a.factor.scope.length != b.factor.scope.length ||
+      !a.factor.scope.all (b.factor.scope.contains ·) then return rejected
+  let representative := factorClass (db.size+1) classes
+  let mut cache := memo
+  if (request.getObjValAs? String "mode").toOption == some "factor_rebind" then
+    if a.source.isSome || b.source.isSome || a.eliminated != b.eliminated then return rejected
+    let left := a.parents.map representative
+    let right := b.parents.map representative
+    if !left.all (right.contains ·) || !right.all (left.contains ·) then return rejected
+    -- Reindex the old checked rows. Missing values remain unknown.
+    for row in words b.factor.scope.length do
+      let prior := observe a.factor.scope (scopeVal b.factor.scope row)
+      if let some value := memo[(old,prior)]? then
+        cache := cache.insert (new,row) value
+  else
+    for row in words a.factor.scope.length do
+      let other := observe b.factor.scope (scopeVal a.factor.scope row)
+      let (next, av, _) ← factorRow (db.size+1) db cache old row
+      let (next, bv, _) ← factorRow (db.size+1) db next new other
+      cache := next
+      if av != bv then return rejected
+  let x := representative old
+  let y := representative new
+  let out := if x == y then classes else classes.insert y x
+  return (cache, out, Json.mkObj [("valid", toJson true)])
+
 def factorNegativeLazy (db : FactorStore) (memo : FactorRowStore)
     (root : String) (active : List String) : Except String (FactorRowStore × Bool) := do
   let some node := db[root]? | throw "Unknown negative root"

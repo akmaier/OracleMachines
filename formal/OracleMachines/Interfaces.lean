@@ -162,6 +162,27 @@ theorem replace_equal_factor (fs : List InterfaceFactor) (a b : InterfaceFactor)
     factorsEval (a :: fs) v = factorsEval (b :: fs) v := by
   simp [factorsEval, same v]
 
+/-- Value reuse is valid for equal conjunctions, independently of the identities
+of their evidence nodes. The current source edges must still be checked. -/
+theorem project_equal_conjunctions (a b : List InterfaceFactor) (x : Nat)
+    (same : ∀ v, factorsEval a v = factorsEval b v) (v : Nat → Bool) :
+    (projectFactor a x).eval v = (projectFactor b x).eval v := by
+  simp only [projectFactor_exact, projectPred, same]
+
+theorem factors_equal_matching (a b : List InterfaceFactor)
+    (forward : ∀ f ∈ a, ∃ g ∈ b, ∀ v, f.eval v = g.eval v)
+    (backward : ∀ g ∈ b, ∃ f ∈ a, ∀ v, g.eval v = f.eval v)
+    (v : Nat → Bool) : factorsEval a v = factorsEval b v := by
+  apply Bool.eq_iff_iff.mpr
+  simp only [factorsEval, List.all_eq_true]
+  constructor
+  · intro h g hg
+    obtain ⟨f,hf,same⟩ := backward g hg
+    rw [same]; exact h f hf
+  · intro h f hf
+    obtain ⟨g,hg,same⟩ := forward f hf
+    rw [same]; exact h g hg
+
 /-- All phases are charged; enumeration is the exponential part only. -/
 structure InterfaceCosts where
   input : Nat

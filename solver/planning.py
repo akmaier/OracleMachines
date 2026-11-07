@@ -81,7 +81,7 @@ def build(active, read, project, cap, deadline, metrics, preferred=()):
                 buckets=buckets, constants=constants if isinstance(constants,Sources) else sorted(constants))
 
 
-def update(previous, active, read, project, cap, deadline, metrics):
+def update(previous, active, read, project, cap, deadline, metrics, rebind=None):
     """Immutable snapshot update; width failure lets the caller rebuild an order."""
     if previous.get('version') != 1:
         raise ValueError('Unknown elimination plan version')
@@ -149,6 +149,7 @@ def update(previous, active, read, project, cap, deadline, metrics):
         buckets[str(v)] = dict(inputs=names, output=output)
         metrics['affected_buckets'] += 1
         if output != old_output:
+            if rebind is not None:rebind(old_output,output)
             if old_output is not None:
                 route(old_output, False)
             if output is not None:

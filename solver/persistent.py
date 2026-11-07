@@ -336,6 +336,35 @@ class PersistentSolver:
     def _verify_certificate(self, bits, certificate):
         return self._request({"bits": bits, "mode": "verify_certificate", "certificate": certificate})["valid"]
 
+    def _try_proposals(self,bits,candidates,proofs):
+        """Charge each checked proposal; reserve at least 90% for fallback.
+
+        A timed-out native worker is reaped by _request. Its volatile caches
+        are replayed on demand, and immutable historical evidence is retained.
+        """
+        original=self._deadline
+        remaining=original.remaining() if original else self.query_timeout
+        budget=min(0.25,remaining*0.1)
+        local=Deadline(budget);attempts=[]
+        self._proposal_metrics=dict(budget_seconds=budget,attempts=attempts)
+        try:
+            self._deadline=local
+            for kind,values in [('witness',candidates or []),('proof',proofs or [])]:
+                for value in values:
+                    start=time.perf_counter_ns();record=dict(kind=kind)
+                    attempts.append(record)
+                    try:
+                        local.check()
+                        result=self._request(dict(mode='propose',bits=bits,
+                            candidates=[value] if kind=='witness' else [],proofs=[value] if kind=='proof' else []))
+                        record['outcome']='miss' if result.get('pending') else 'accepted'
+                        if not result.get('pending'):return result
+                    except BudgetExceeded:
+                        record['outcome']='budget';return None
+                    finally:record['elapsed_ns']=time.perf_counter_ns()-start
+        finally:self._deadline=original
+        return None
+
     def _fast_live(self, bits: str, candidates=None, proofs=None, *, allow_components=True,
                    allow_incremental=True, allow_interfaces=True) -> dict:
         interface_fallback = None
@@ -351,9 +380,10 @@ class PersistentSolver:
             result = self.components.solve(self, bits)
             if result is not None:
                 return result
-        r = self._request({"bits": bits, "mode": "prepare",
-                           "candidates": candidates or [], "proofs": proofs or [],
-                           "search_budget": 64 if self.backend == "auto" else 0})
+        r = self._try_proposals(bits,candidates,proofs) if candidates or proofs else None
+        if r is None:
+            r = self._request({"bits": bits, "mode": "prepare", "candidates": [], "proofs": [],
+                               "search_budget": 64 if self.backend == "auto" else 0})
         r.update(backend="preprocess", core_work=None, counted_work=None, counted_complete=False)
         if interface_fallback is not None:
             r["interface_fallback"] = interface_fallback
@@ -463,6 +493,7 @@ class PersistentSolver:
         self._ledger, self._deadline = Ledger(), Deadline(self.query_timeout)
         self._route_decision = None
         observation_attempted = False
+        self._proposal_metrics = None
         try:
             self._database_budget()
             self.db.set_progress_handler(lambda: int(time.monotonic() >= self._deadline.end), 1000)
@@ -592,6 +623,7 @@ class PersistentSolver:
             result.update(backend="lean", counted_complete=True)
         else:
             result = self._fast_live(bits, candidates, proofs)
+        if self._proposal_metrics is not None:result['proposals']=self._proposal_metrics
         answer, witness = result["answer"], result["witness"]
         learned_hit = (predicted is not None and result["reuse_kind"] == "witness"
                        and result.get("backend") not in ("components", "interfaces") and witness == predicted)
@@ -635,7 +667,7 @@ class PersistentSolver:
                     self.db.execute("INSERT INTO models VALUES (?,?,?) ON CONFLICT(engine) DO UPDATE SET state=excluded.state,checksum=excluded.checksum",
                                     (self.engine_id, model_text, hashlib.sha256(model_text.encode()).hexdigest()))
                     result["model_bytes"] = len(model_text.encode())
-            details = {k: result[k] for k in ("backend", "counted_complete", "external_ns", "verification_ns", "cnf_clauses", "proof_bytes", "incremental", "components", "interfaces", "interface_fallback", "learned_proposed", "learned_accepted", "model_bytes") if k in result}
+            details = {k: result[k] for k in ("backend", "counted_complete", "external_ns", "verification_ns", "cnf_clauses", "proof_bytes", "incremental", "components", "interfaces", "interface_fallback", "learned_proposed", "learned_accepted", "model_bytes", "proposals") if k in result}
             self.db.execute("INSERT OR IGNORE INTO measurements VALUES (?,?,?)",
                             (self.engine_id, bits, json.dumps(details, sort_keys=True)))
             if answer and learn:

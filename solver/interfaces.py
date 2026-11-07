@@ -63,7 +63,8 @@ def counters():
         plan_copy_entries=0,source_comparisons=0,source_delta_reads=0,constant_delta_reads=0,plan_rebuilds=0,
         symbolic_operations=0,symbolic_nodes=0,symbolic_hits=0,symbolic_replays=0,
         symbolic_rows=0,symbolic_fallbacks=0,symbolic_collected_nodes=0,
-        preflight_rejected=0,preflight_buckets=0,native_definition_batches=0)
+        preflight_rejected=0,preflight_buckets=0,native_definition_batches=0,
+        evaluation_stack_peak=0,semantic_stops=0,provenance_rebinds=0,equality_rows=0)
 
 
 def evaluate(nodes,assignment):
@@ -249,8 +250,21 @@ class InterfaceSolver:
             return self._acquire(node,index,depth)
 
     def _acquire(self,node,index,depth=0):
+        # Explicit continuations preserve short-circuiting without Python's
+        # recursion limit. Every stored row still crosses the native checker.
+        stack=[self._acquire_steps(node,index)];value=None
+        while stack:
+            self.deadline.check()
+            self.metrics['evaluation_stack_peak']=max(self.metrics['evaluation_stack_peak'],len(stack))
+            try:
+                parent,row=stack[-1].send(value)
+                stack.append(self._acquire_steps(parent,row));value=None
+            except StopIteration as done:
+                value=done.value;stack.pop()
+        return value
+
+    def _acquire_steps(self,node,index):
         self.deadline.check()
-        if depth>256:raise BudgetExceeded('Lazy dependency depth exceeds active cap')
         known=node['rows'][index]
         if known is not None:
             self.check_row(node,index,known)
@@ -285,7 +299,7 @@ class InterfaceSolver:
                 for name in definition['parents']:
                     parent=self.read(name)
                     self.metrics['table_probes']+=1
-                    if not self.acquire(parent,row_index(parent['scope'],assignment),depth+1):
+                    if not (yield parent,row_index(parent['scope'],assignment)):
                         possible=False;break
                 if possible:value=True;choice=b;break
             self.metrics['combination_rows']+=1
@@ -381,12 +395,48 @@ class InterfaceSolver:
         else:self.metrics['node_hits']+=1
         return name
 
+    def rebind_values(self,old_name,new_name):
+        """Reuse values only after native equality checking; keep new parents.
+
+        Evidence still propagates through the suffix. That global provenance
+        work is counted separately from relation evaluation, not hidden.
+        """
+        if old_name is None or new_name is None:return
+        old,new=self.read(old_name),self.read(new_name)
+        if old['scope']!=new['scope']:return
+        self.ensure(old_name);self.ensure(new_name)
+        request=dict(mode='factor_rebind',old=old_name,new=new_name)
+        checked=self.service._request(request)
+        if checked['valid']:
+            for i,value in enumerate(old['rows']):
+                if value is not None and new['rows'][i] is None:
+                    new['rows'][i]=value;new['choice_values'][i]=old['choice_values'][i]
+                    self.db.execute('INSERT OR IGNORE INTO interface_rows VALUES (?,?,?,?,?)',
+                        (self.engine,new_name,i,int(value),None if old['choice_values'][i] is None else int(old['choice_values'][i])))
+            if all(v is not None for v in new['rows']):
+                relation,raw,_=self.store.put('interface_relation',pack(new['rows']))
+                evidence=self.store.put('interface_evidence',dict(definition=new['definition'],
+                    scope=new['scope'],choices=pack(new['choice_values'])))[0]
+                self.db.execute('UPDATE interface_nodes SET relation=?,evidence=? WHERE engine=? AND id=?',
+                    (relation,evidence,self.engine,new_name))
+                new['relation']=relation;self.metrics['relation_payload_bytes']+=raw
+            self.metrics['provenance_rebinds']+=1
+            return
+        # Equality is a bounded-width operation, never inferred from a hash or
+        # a single observed row. Different values resume ordinary acquisition.
+        for i in range(len(old['rows'])):
+            self.metrics['equality_rows']+=1
+            if self.acquire(old,i)!=self.acquire(new,i):return
+        checked=self.service._request(request|{'mode':'factor_equate'})
+        if not checked['valid']:raise ValueError('Native relation equality rejected')
+        self.metrics['semantic_stops']+=1
+
     def eliminate(self,active,previous_order=(),previous_plan=None):
         with self.service._phase('interface_decomposition'):
             if previous_plan is not None:
                 try:
                     plan=planning.update(previous_plan,active,self.read,self.project_node,
-                        self.max_interface,self.deadline,self.metrics)
+                        self.max_interface,self.deadline,self.metrics,self.rebind_values)
                 except BudgetExceeded:
                     self.deadline.check()
                     self.metrics['plan_rebuilds']+=1

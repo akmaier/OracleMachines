@@ -162,6 +162,8 @@ def fastRespond (f : Formula) (parseWork : Nat) (request : Json) : Except String
   if certificates.size > 4 then throw "At most four refutation candidates are supported"
   for certificate in certificates do
     if ← certificateValid f certificate then return finish none certificate "refutation"
+  if mode == "propose" then
+    return Json.mkObj (fields ++ [("pending", toJson true)])
   let circuit := compiledCircuit f
   if circuit.aig.getConstant circuit.ref == some false then
     return finish none (Json.mkObj [("format", toJson "aig_false")]) "none"
@@ -200,7 +202,7 @@ def respond (request : Json) : Except String Json := do
     return Json.mkObj [("answer", toJson answer), ("covered", toJson answer.isSome),
       ("coverage_cells", toJson stage), ("reference_query_bound", toJson (24 * (bits.length + 1) ^ 2)),
       ("counted_complete", toJson false)]
-  if mode == "prepare" || mode == "verify_certificate" || mode == "verify_witness" then
+  if mode == "prepare" || mode == "propose" || mode == "verify_certificate" || mode == "verify_witness" then
     return ← fastRespond f parsed.2 request
   if mode == "exhaustive" then
     let result := solveRun f
@@ -239,6 +241,7 @@ def main : IO Unit := do
   let stdin ← IO.getStdin
   let stdout ← IO.getStdout
   let mut factors : FactorStore := {}
+  let mut factorClasses : FactorClasses := {}
   let mut bindings : FactorBindings := {}
   let mut rows : FactorRowStore := {}
   let mut graph : Std.Sat.AIG Nat := Std.Sat.AIG.empty
@@ -353,6 +356,10 @@ def main : IO Unit := do
           match factorBind parseFormulaBits factors bindings request with
           | .error e => pure (.error e)
           | .ok (state, response) => bindings := state; pure (.ok response)
+        else if mode == "factor_equate" || mode == "factor_rebind" then
+          match factorEquate factors rows factorClasses request with
+          | .error e => pure (.error e)
+          | .ok (state, classes, response) => rows := state; factorClasses := classes; pure (.ok response)
         else if mode == "factor_row" then
           match factorRowRequest factors rows parseBits request with
           | .error e => pure (.error e)
@@ -362,7 +369,7 @@ def main : IO Unit := do
           | .error e => pure (.error e)
           | .ok (state, response) => rows := state; pure (.ok response)
         else if mode == "factor_reset" then
-          factors := {}; bindings := {}; rows := {}; pure (.ok (Json.mkObj [("valid", toJson true)]))
+          factors := {}; bindings := {}; rows := {}; factorClasses := {}; pure (.ok (Json.mkObj [("valid", toJson true)]))
         else pure (respond request)
     let response := match result with
       | .ok value => value

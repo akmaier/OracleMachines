@@ -1,7 +1,7 @@
 import OracleMachines.Invariant
 import OracleMachines.Limits
 import OracleMachines.Reuse
-import OracleMachines.SAT
+import OracleMachines.Encoding
 import Lean.Util.CollectAxioms
 
 /-!

@@ -34,6 +34,7 @@ native-decision axioms fail the audit. Warnings are treated as errors.
 | Proposition 12.1: exact expansion | [Expansion.lean](OracleMachines/Expansion.lean): `table_lookup`, `table_append`, `preserves_answers`, `eventually_covered`, `exact_on_domain` | All binary words up to each length receive the supplied solver's answer; old entries remain; requests outside coverage return `none`. |
 | Explicit table size | `length_words`, `length_domain`, `table_answer_count` | There are `2^n` words at length `n` and `2^(n+1)-1` answer entries through stage `n`, including the empty word. |
 | Concrete SAT solver | [SAT.lean](OracleMachines/SAT.lean): `solve_correct`, `solve_false_iff`, `witness_sound`, `no_witness_iff`, `extend_exact` | Exhaustive finite-assignment search decides ordinary propositional satisfiability and supplies checked witnesses. Appending a finite batch of its answers preserves exactness. |
+| Binary SAT and bounded expansion | [Encoding.lean](OracleMachines/Encoding.lean): `decode_encode`, `encode_injective`, `solveEncoded_correct`, `satTable_correct`, `expandSAT_eq` | A concrete binary postfix encoding round-trips. The binary solver decides its defined SAT language, and incremental expansion produces the exact next bounded-domain table. |
 | Obligations for another representation | [Invariant.lean](OracleMachines/Invariant.lean): `expansion_invariant`, `answer_at_cover` | The base, preservation, and exact new-coverage hypotheses imply exactness at every finite stage and at a covering stage for each input. |
 | Construction recurrence | [Resources.lean](OracleMachines/Resources.lean): `cumulative_eq` | Recursive construction cost equals base cost plus every expansion cost. |
 | Arithmetic in Corollary 12.2 | `polynomial_stage_sum`, `full_polynomial_bound`, `bounded_expansion_cost` | Shared polynomial stage budgets yield a single polynomial bound including reading, base construction, expansion, and evaluation. |
@@ -72,8 +73,10 @@ itself, a verified algorithm with a runtime bound: it may have been specified
 noncomputably. The executable definitions operate when given executable solver,
 state, and update functions. The separate `SAT.lean` module now supplies a
 concrete solver on a typed propositional syntax and proves its correctness;
-that result requires no exact-solver hypothesis. A binary parser, the connection
-to bounded binary domains, and execution-cost proofs are the next obligations.
+that result requires no exact-solver hypothesis. `Encoding.lean` supplies a
+binary postfix parser, proves encoding round trips, and connects the solver to
+exact expansion on all binary words up to each length. Malformed encodings are
+rejected. Execution-cost proofs are the next obligation.
 
 `PolynomiallyBounded` is a predicate on numerical functions. It is **not** a
 formal definition of the class P. The project does not model Turing-machine or

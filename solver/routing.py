@@ -1,9 +1,8 @@
-"""Measured two-route selection; no universal speedup or regret claim.
+"""Failure-aware routing over a recent window; historical evidence is retained.
 
-Only the chosen route runs. Each input-size bucket first samples both routes,
-then uses measured mean complete-query time, with periodic exploration. Failed
-queries are charged. The selection and durable observation costs are explicit
-ledger phases. Historical observations are retained.
+Scores charge elapsed time and a query-budget penalty for every failed request,
+per completed answer. An observed route with no successes has no finite score.
+Periodic exploration can retry it. This policy supplies no regret guarantee.
 """
 import time
 import hashlib
@@ -76,6 +75,7 @@ class Router:
             return dict(complete=False,reject=True,reason='profile_budget')
 
     def choose(self, bits, deadline=None, max_interface=3):
+        failure_budget_ns=int((deadline.remaining() if deadline else 30)*1e9)
         profile=self.profile(bits,deadline,max_interface)
         feature_key=[len(bits).bit_length(),profile.get('variables',0).bit_length(),
                      profile.get('density_bucket',0),profile.get('reusable_sample',0)//3,
@@ -85,6 +85,15 @@ class Router:
                                (self.namespace, bucket)).fetchall()
         totals = {r[0]: (r[1], r[2]) for r in rows}
         count = sum(v[0] for v in totals.values())
+        scores={};recent={}
+        for route in self.routes:
+            observations=self.db.execute('''SELECT elapsed_ns,success FROM route_observations
+                WHERE engine=? AND bucket=? AND route=? ORDER BY rowid DESC LIMIT 32''',
+                (self.namespace,bucket,route)).fetchall()
+            completed=sum(r[1] for r in observations)
+            cost=sum(r[0]+(0 if r[1] else failure_budget_ns) for r in observations)
+            scores[route]=cost/completed if completed else None
+            recent[route]=dict(attempts=len(observations),completed=completed)
         if profile['reject']:
             return dict(bucket=bucket,route='checked',reason='structural_guard',observations=count,features=profile)
         for route in self.routes:
@@ -94,9 +103,10 @@ class Router:
             route = self.routes[(count // 8) % 2]
             reason = 'periodic_sample'
         else:
-            route = min(self.routes, key=lambda r: totals[r][1] / totals[r][0])
-            reason = 'measured_mean'
-        return dict(bucket=bucket, route=route, reason=reason, observations=count,features=profile)
+            route = min(self.routes, key=lambda r: float('inf') if scores[r] is None else scores[r])
+            reason = 'completion_cost'
+        return dict(bucket=bucket, route=route, reason=reason, observations=count,features=profile,
+                    scores_ns=scores,recent=recent,failure_budget_ns=failure_budget_ns)
 
     def observe(self, decision, elapsed_ns, success):
         with self.db:

@@ -1,5 +1,6 @@
 import OracleMachines.FragmentProtocol
 import OracleMachines.ChainProtocol
+import OracleMachines.LayeredProtocol
 import OracleMachines.Cache
 import OracleMachines.Parsing
 import OracleMachines.BoundedSearch
@@ -243,6 +244,7 @@ def main : IO Unit := do
   let mut graph : Std.Sat.AIG Nat := Std.Sat.AIG.empty
   let mut fragments : OracleMachines.Fragments.Session := {}
   let mut chains : OracleMachines.Chain.Store := {}
+  let mut layers : OracleMachines.Layered.Store := {}
   let mut negatives : Std.HashMap String Formula := {}
   repeat
     let line ← stdin.getLine
@@ -252,7 +254,15 @@ def main : IO Unit := do
       | .error e => pure (.error e)
       | .ok request =>
         let mode := (request.getObjValAs? String "mode").toOption.getD ""
-        if mode == "chain_define" then
+        if mode == "layered_define" then
+          match OracleMachines.Layered.defineNodes layers request with
+          | .error e => pure (.error e)
+          | .ok (state, response) => layers := state; pure (.ok response)
+        else if mode == "layered_query" then
+          pure (OracleMachines.Layered.query layers request)
+        else if mode == "layered_reset" then
+          layers := {}; pure (.ok (Json.mkObj [("valid", toJson true)]))
+        else if mode == "chain_define" then
           match OracleMachines.Chain.defineNodes chains request with
           | .error e => pure (.error e)
           | .ok (state, response) => chains := state; pure (.ok response)

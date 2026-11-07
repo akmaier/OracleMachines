@@ -1,3 +1,4 @@
+import OracleMachines.LayeredProtocol
 import OracleMachines.FragmentProtocol
 import OracleMachines.ChainProtocol
 import OracleMachines.Scaling

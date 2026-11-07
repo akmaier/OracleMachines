@@ -5,7 +5,7 @@ checked by the native engine; SAT is checked on all active original constraints,
 and UNSAT needs an empty relation whose checked source leaves remain active.
 All graph objects are immutable. Fallback handles instances exceeding width caps.
 """
-from collections import OrderedDict
+from solver.active_cache import PayloadCache
 from contextlib import contextmanager
 from functools import wraps
 import hashlib
@@ -18,6 +18,7 @@ from solver.knowledge_store import KnowledgeStore
 from solver.relations import assignments, row_index, pack, unpack, project
 from solver.manifests import Manifest
 from solver import planning
+from solver.plan_indexes import Sources, Order
 from solver.symbolic import BDD
 from solver.resources import BudgetExceeded, Deadline
 
@@ -59,7 +60,7 @@ def counters():
         semantic_duplicates=0,relation_payload_bytes=0,archive_new_objects=0,row_hits=0,native_row_acquisitions=0,native_row_checks=0,
         planned_rows=0,unknown_rows=0,active_cache_nodes=0,planned_buckets=0,
         affected_buckets=0,reused_buckets=0,propagation_stops=0,dependency_updates=0,
-        plan_copy_entries=0,source_comparisons=0,plan_rebuilds=0,
+        plan_copy_entries=0,source_comparisons=0,source_delta_reads=0,constant_delta_reads=0,plan_rebuilds=0,
         symbolic_operations=0,symbolic_nodes=0,symbolic_hits=0,symbolic_replays=0,
         symbolic_rows=0,symbolic_fallbacks=0,symbolic_collected_nodes=0,
         preflight_rejected=0,preflight_buckets=0,native_definition_batches=0)
@@ -85,7 +86,7 @@ class InterfaceSolver:
         self.engine=service.engine_id
         self.max_interface=max_interface
         self.active_nodes=active_nodes
-        self.cache=OrderedDict()
+        self.cache=PayloadCache(service.active_cache_bytes,active_nodes)
         self.verified=set()
         self.worker=None
         self.bound=set()
@@ -93,7 +94,7 @@ class InterfaceSolver:
         self.metrics=counters()
         self.deadline=None
         self.symbolic=symbolic
-        self.bdd=BDD()
+        self.bdd=BDD(max_nodes=service.symbolic_node_limit)
         self.symbolic_roots={}
         self.symbolic_disabled=False
         self.batch_depth=0
@@ -106,6 +107,10 @@ class InterfaceSolver:
             with self.db:yield
 
     def begin_symbolic(self):
+        self.cache.refresh()
+        # Every retained symbolic proposal is durable; trimming active roots is safe.
+        if len(self.symbolic_roots)>self.active_nodes:
+            self.symbolic_roots=dict(list(self.symbolic_roots.items())[-self.active_nodes:])
         self.bdd.begin(self.deadline)
         if len(self.bdd.nodes)>self.bdd.max_nodes//2:
             before=len(self.bdd.nodes)
@@ -161,11 +166,13 @@ class InterfaceSolver:
         return value,choice
 
     def finish_symbolic(self):
+        self.cache.refresh()
         self.metrics.update(symbolic_operations=self.bdd.work,symbolic_nodes=len(self.bdd.nodes),
                             symbolic_hits=self.bdd.hits)
 
     def remember(self,name,node):
-        self.cache[name]=node;self.cache.move_to_end(name)
+        self.cache[name]=node
+        if name in self.cache:self.cache.move_to_end(name)
         while len(self.cache)>self.active_nodes:self.cache.popitem(last=False)
         return node
 
@@ -419,7 +426,7 @@ class InterfaceSolver:
 
     def run(self,active,previous_order=(),constraints=None,previous_plan=None):
         with self.service._phase('interface_planning'):
-            answer,witness,root,order=self.eliminate(list(dict.fromkeys(active)),previous_order,previous_plan)
+            answer,witness,root,order=self.eliminate(active if isinstance(active,Sources) else list(dict.fromkeys(active)),previous_order,previous_plan)
         if answer:
             for name in active:self.ensure(name)
         else:self.ensure(root)
@@ -430,10 +437,10 @@ class InterfaceSolver:
         for name in active:self.ensure(name)
         with self.service._phase('interface_verification'):
             checked=self.service._request(dict(mode='factor_query_bound' if constraints is not None else 'factor_query',
-                active=active,constraints=constraints,answer=answer,witness=witness,root=root))
+                active=list(active),constraints=constraints,answer=answer,witness=witness,root=root))
         if not checked['valid']:raise ValueError('Checked interface answer rejected')
         certificate=None if answer else self.certificate(root)
-        return dict(answer=answer,witness=witness,root=root,order=order,certificate=certificate)
+        return dict(answer=answer,witness=witness,root=root,order=[] if isinstance(order,Order) else order,certificate=certificate)
 
     def reset_if_full(self):
         if len(self.verified)>12000 or len(self.verified_rows)>500000:
@@ -520,20 +527,36 @@ class InterfaceSolver:
         if any(not isinstance(k,str) or not k or len(k)>256 for k in list(add)+remove):raise ValueError('Invalid constraint name')
         if set(add)&set(remove) or len(set(remove))!=len(remove):raise ValueError('Conflicting expansion delta')
         manifest=Manifest(self.store,self.deadline,self.metrics)
-        # Valid partial evidence may commit even if the entire expansion fails;
-        # an answer snapshot is committed only after native verification.
+        sources=previous_plan['active'].fork() if previous_plan and isinstance(previous_plan['active'],Sources) else None
+        def change_sources(token,delta):
+            if sources is None or token is None:return
+            record=self.store.get(token,'expansion_constraint')
+            if record.get('fallback'):raise ValueError('Fallback constraint in indexed plan')
+            for leaf in record['leaves']:sources.change(leaf,delta)
         for name in remove:
-            with self.transaction():root=manifest.update(root,name,None)
+            old=manifest.get(root,name)
+            change_sources(old,-1)
+            root=manifest.update(root,name,None)
         for name,bits in add.items():
+            old=manifest.get(root,name)
             token,_=self.constraint(bits)
-            with self.transaction():root=manifest.update(root,name,token)
-        active=[];constraints=[token for _,token in manifest.items(root)]
+            record=self.store.get(token,'expansion_constraint')
+            # A new unsupported factor makes this update use the complete path.
+            if record.get('fallback'):sources=None
+            if token!=old:
+                change_sources(old,-1);change_sources(token,1)
+                root=manifest.update(root,name,token)
+        constraints=[token for _,token in manifest.items(root)]
         try:
-            for token in constraints:
-                record=self.store.get(token,'expansion_constraint')
-                if record.get('fallback'):raise BudgetExceeded(record['fallback'])
-                active.extend(record['leaves'])
-            result=self.run(list(dict.fromkeys(active)),previous_order,constraints,previous_plan)
+            if sources is None:
+                sources=Sources(manifest)
+                for token in constraints:
+                    record=self.store.get(token,'expansion_constraint')
+                    if record.get('fallback'):raise BudgetExceeded(record['fallback'])
+                    for leaf in record['leaves']:sources.change(leaf,1)
+                # Legacy plans must compare their old sources during migration.
+                if previous_plan is not None:previous_plan=None
+            result=self.run(sources,previous_order,constraints,previous_plan)
             with self.service._phase('interface_storage'),self.transaction():
                 result['plan']=planning.save_plan(self.current_plan,self.store,self.deadline,self.metrics)
         except BudgetExceeded as error:

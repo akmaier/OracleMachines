@@ -63,7 +63,12 @@ def Tree.Valid : {h : Nat} → Tree h → Prop
   | _, .branch v l r => l.Valid ∧ r.Valid ∧ v = compose l.summary r.summary
 
 def join {h : Nat} (l r : Tree h) : Tree (h+1) :=
-  .branch (freeze (compose l.summary r.summary)) l r
+  let summary := compose l.summary r.summary
+  let ff := summary false false
+  let ft := summary false true
+  let tf := summary true false
+  let tt := summary true true
+  .branch (fun x y => if x then (if y then tt else tf) else (if y then ft else ff)) l r
 
 theorem join_valid {h : Nat} (l r : Tree h) (hl : l.Valid) (hr : r.Valid) :
     (join l r).Valid := ⟨hl, hr, freeze_eq _⟩

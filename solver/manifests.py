@@ -3,17 +3,21 @@
 Keys are caller-supplied constraint names. No result or prior snapshot is evicted.
 Only changed search paths allocate nodes. Full iteration is explicitly charged.
 """
+from solver.active_cache import PayloadCache
+
 class Manifest:
     def __init__(self, store, deadline, metrics):
         self.store,self.deadline,self.metrics=store,deadline,metrics
-        self.cache={}
+        self.cache=PayloadCache(65536,256)
 
     def read(self, root):
         if root is None:return None
         self.deadline.check()
         self.metrics['manifest_reads']+=1
-        if root not in self.cache:self.cache[root]=self.store.get(root,'expansion_map')
-        return self.cache[root]
+        if root in self.cache:
+            self.cache.move_to_end(root);return self.cache[root]
+        node=self.store.get(root,'expansion_map');self.cache[root]=node
+        return node
 
     def height(self, root):
         return self.read(root)[4] if root else 0
@@ -65,9 +69,9 @@ class Manifest:
             root=left if key<k else right
         return default
 
-    def items(self,root):
+    def items(self,root,reverse=False):
         stack=[]
         while root or stack:
             while root:
-                node=self.read(root);stack.append(node);root=node[2]
-            node=stack.pop();yield node[0],node[1];root=node[3]
+                node=self.read(root);stack.append(node);root=node[3 if reverse else 2]
+            node=stack.pop();yield node[0],node[1];root=node[2 if reverse else 3]

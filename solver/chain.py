@@ -5,7 +5,7 @@ bit x. Padding is identity (mask 9). The explicit API avoids pretending that
 recognizing arbitrary SAT as a chain is free. Updates path-copy immutable nodes;
 full witness output and native replay after restart are separately charged.
 """
-from collections import OrderedDict
+from solver.active_cache import PayloadCache
 import time
 from solver.knowledge_store import KnowledgeStore
 from solver.resources import BudgetExceeded
@@ -20,7 +20,7 @@ class ChainSolver:
     def __init__(self, service):
         self.service=service;self.db=service.db
         self.store=KnowledgeStore(self.db,service.engine_id)
-        self.cache=OrderedDict();self.verified=set();self.worker=None
+        self.cache=PayloadCache(service.active_cache_bytes,2048);self.verified=set();self.worker=None
         self.metrics={}
 
     @staticmethod
@@ -31,18 +31,17 @@ class ChainSolver:
 
     def read(self,token):
         self.service._check_deadline();self.metrics['node_reads']+=1
-        if token not in self.cache:
-            self.cache[token]=self.store.get(token,'chain_node')
-        self.cache.move_to_end(token)
-        while len(self.cache)>2048:self.cache.popitem(last=False)
-        return self.cache[token]
+        if token in self.cache:
+            self.cache.move_to_end(token);node=self.cache[token]
+        else:
+            node=self.store.get(token,'chain_node');self.cache[token]=node
+        return node
 
     def save(self,node):
         token=self.store.put('chain_node',node)[0]
         self.metrics['node_writes']+=1
         self.cache[token]=node
-        self.cache.move_to_end(token)
-        while len(self.cache)>2048:self.cache.popitem(last=False)
+        if token in self.cache:self.cache.move_to_end(token)
         return token
 
     def leaf(self,mask):return self.save(dict(height=0,mask=mask))

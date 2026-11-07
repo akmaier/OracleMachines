@@ -383,3 +383,23 @@ kernel-verified refinement. The transitive audit still rejects admits and custom
 axioms.
 
 The current full build audits **1,828 declarations / 941 theorem declarations**.
+
+## Supplied finite-state layers
+
+`Layered.lean` generalizes the Boolean chain to `q` states per boundary. It proves
+existential composition, associativity/identity, summary exactness, preservation
+under replacement, replacement at the selected position and invariance elsewhere.
+The declared replacement ledger is `h+1+h*q^3` for capacity `2^h`; summaries need
+`q^2` Boolean cells. For `b` Boolean variables per layer, `q=2^b`, so width remains
+exponential. Materialization returns a vector before creating a lookup closure;
+generated native code was inspected to ensure eager construction. This also
+repairs delayed materialization in the original Boolean-chain join.
+
+`LayeredProtocol.lean` carries valid trees across native checked definitions and
+queries. The runtime accepts width 1–4. It checks every proposed join; witness
+output is optional and independently checked by the Python caller. The abstract
+work ledger excludes source conversion, decomposition discovery, bit arithmetic,
+serialization, storage, full witnesses and restart. It is not a complete compiled
+machine-cost theorem. The protocol/session/request binding also remains a
+refinement obligation. These are established bounded-width dynamic-programming
+and finite-monoid ideas, with a checked implementation and explicit accounting.

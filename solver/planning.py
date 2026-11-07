@@ -2,13 +2,14 @@
 
 Plans are proposals, not certificates. A fixed order routes each factor to its
 first remaining variable. A changed output invalidates only its successor;
-identical outputs stop propagation. Copying/serializing a snapshot and obtaining
-the active source set still cost linear work and are counted separately.
+identical outputs stop propagation. Version-three metadata uses persistent
+indexes; full active-context validation is still charged separately.
 """
 import heapq
 
 from solver.resources import BudgetExceeded
 from solver.manifests import Manifest
+from solver.plan_indexes import Order, Sources, restore
 
 
 def build(active, read, project, cap, deadline, metrics, preferred=()):
@@ -76,29 +77,33 @@ def build(active, read, project, cap, deadline, metrics, preferred=()):
         buckets[str(v)] = dict(inputs=names, output=output)
         order.append(v)
         metrics['planned_buckets'] += 1
-    return dict(version=1, active=sorted(active), order=order,
-                buckets=buckets, constants=sorted(constants))
+    return dict(version=1, active=active if isinstance(active,Sources) else sorted(active), order=order,
+                buckets=buckets, constants=constants if isinstance(constants,Sources) else sorted(constants))
 
 
 def update(previous, active, read, project, cap, deadline, metrics):
     """Immutable snapshot update; width failure lets the caller rebuild an order."""
     if previous.get('version') != 1:
         raise ValueError('Unknown elimination plan version')
-    order = list(previous['order'])
-    if len(set(order)) != len(order):
-        raise ValueError('Repeated variable in saved elimination order')
-    rank = {v: i for i, v in enumerate(order)}
-    old_sources, new_sources = set(previous['active']), set(active)
-    added, removed = new_sources - old_sources, old_sources - new_sources
-    new_variables = sorted({v for n in added for v in read(n)['scope']} - rank.keys())
+    if isinstance(previous['order'],Order):
+        order=previous['order'].fork();rank=order
+    else:
+        order=list(previous['order'])
+        if len(set(order))!=len(order):raise ValueError('Repeated variable in saved elimination order')
+        rank={v:i for i,v in enumerate(order)}
+    if isinstance(active,Sources):
+        added,removed=active.added,active.removed
+    else:
+        old_sources,new_sources=set(previous['active']),set(active)
+        added,removed=new_sources-old_sources,old_sources-new_sources
+        metrics['source_comparisons']+=len(old_sources)+len(new_sources)
+    new_variables=sorted({v for n in added for v in read(n)['scope'] if v not in rank})
     for v in new_variables:
-        rank[v] = len(order)
+        if not isinstance(order,Order):rank[v]=len(order)
         order.append(v)
-    # Unchanged bucket lists are shared. Mutations replace an individual bucket.
-    buckets = previous['buckets'].fork() if isinstance(previous['buckets'], Buckets) else dict(previous['buckets'])
-    constants = set(previous['constants'])
-    metrics['plan_copy_entries'] += (0 if isinstance(buckets,Buckets) else len(buckets)) + len(constants) + len(order)
-    metrics['source_comparisons'] += len(old_sources) + len(new_sources)
+    buckets=previous['buckets'].fork() if isinstance(previous['buckets'],Buckets) else dict(previous['buckets'])
+    constants=previous['constants'].fork() if isinstance(previous['constants'],Sources) else set(previous['constants'])
+    metrics['plan_copy_entries']+=(0 if isinstance(buckets,Buckets) else len(buckets)) + (0 if isinstance(constants,Sources) else len(constants)) + (0 if isinstance(order,Order) else len(order))
     pending, dirty = [], set()
 
     def route(name, adding):
@@ -151,8 +156,8 @@ def update(previous, active, read, project, cap, deadline, metrics):
         else:
             metrics['propagation_stops'] += 1
     metrics['reused_buckets'] += len(order) - metrics['affected_buckets']
-    return dict(version=1, active=sorted(active), order=order,
-                buckets=buckets, constants=sorted(constants))
+    return dict(version=1, active=active if isinstance(active,Sources) else sorted(active), order=order,
+                buckets=buckets, constants=constants if isinstance(constants,Sources) else sorted(constants))
 
 
 class Buckets:
@@ -191,13 +196,30 @@ def save_plan(plan,store,deadline,metrics):
         indexed=Buckets(Manifest(store,deadline,metrics),None)
         indexed.changes=buckets
         buckets=indexed
-    value={k:v for k,v in plan.items() if k!='buckets'}
-    value.update(version=2,bucket_root=buckets.persist())
+    manifest=Manifest(store,deadline,metrics)
+    order=plan['order']
+    if not isinstance(order,Order):
+        old=order;order=Order(manifest)
+        for v in old:order.append(v)
+    active=plan['active']
+    if not isinstance(active,Sources):
+        old=active;active=Sources(manifest)
+        for key in old:active.change(key,1)
+    constants=plan['constants']
+    if not isinstance(constants,Sources):
+        old=constants;constants=Sources(manifest,counter="constant_delta_reads")
+        for key in old:constants.add(key)
+    value=dict(version=3,bucket_root=buckets.persist(),rank_root=order.rank_root,
+        order_root=order.order_root,order_size=len(order),source_root=active.root,source_size=len(active),
+        constant_root=constants.root,constant_size=len(constants))
     return store.put('elimination_plan',value)[0]
 
 
 def load_plan(token,store,deadline,metrics):
     plan=store.get(token,'elimination_plan')
+    if plan.get('version')==3:
+        return dict(version=1,buckets=Buckets(Manifest(store,deadline,metrics),plan['bucket_root']),
+                    **restore(plan,store,deadline,metrics))
     if plan.get('version')==2:
         plan['buckets']=Buckets(Manifest(store,deadline,metrics),plan.pop('bucket_root'))
         plan['version']=1

@@ -505,3 +505,45 @@ extraction gets at most 100 ms and 10% of remaining time; a full interface attem
 gets at most one second and 40% of remaining time, reserving time for fallback.
 Every attempted route and selection cost is charged; no universal speedup or
 adversarial-regret guarantee follows.
+
+## Bounded layers, indexed metadata, and active payload limits
+
+`PersistentSolver.layered(width, base=None, replace={}, append=[], left=None,
+right=None, witness=False)` accepts explicitly supplied adjacent-layer relations.
+For `q = 2**width`, relation bit `q*x+y` permits states `x,y`; endpoint bit `x`
+permits state `x`. Width is 1–4 in the runtime. The JSON-lines equivalent uses
+`op: "layered"` and the same fields. A state encodes `width` Boolean variables,
+so this includes small transition systems and ladders with interacting bits.
+It does not discover a decomposition or compile arbitrary SAT for free.
+
+The service stores immutable balanced trees and checks new joins in Lean. One
+replacement copies `height+1` nodes and composes `height` summaries. Dense
+summaries have `q*q` entries; the declared full-scan composition budget is `q**3`.
+Complete witnesses and restart replay are separately charged. Old roots remain
+queryable. The runtime caps heights, batches and active native definitions;
+capacity errors do not mean UNSAT. Python/JSON/SQLite protocol refinement remains
+outside the kernel theorem. Native tables are now materialized inside the join:
+inspection of generated C exposed arity expansion delaying the earlier
+function-valued `freeze`, including on Boolean chains.
+
+Version-three elimination plans persist source reference counts, ranks, order,
+constants and bucket indexes. A named delta looks up changed constraints and
+path-copies affected index nodes; duplicate sources remain until their last
+reference is removed. Old plan versions remain readable. The counters separate
+source delta reads from whole-set comparisons and plan copying. Final active
+context checks, witnesses and negative certificates can still scan globally.
+
+`--active-cache-bytes` (default 2 MiB per proposal cache),
+`--symbolic-node-limit` (50,000), and `--wal-checkpoint-bytes` (4 MiB) control
+retained proposals, symbolic nodes and safe-point WAL checkpoint attempts.
+Payload bytes measure serialized JSON, not Python heap or total RSS. Mutable
+entries are remeasured at operation boundaries. Oversized transient objects,
+native state, indexes, other caches and blocked checkpoints prevent interpreting
+these controls as a hard total-memory or physical-storage bound. Immutable
+historical evidence is never evicted by these controls.
+
+Adaptive routing now scores recent elapsed cost plus a query-budget penalty for
+failures, divided by completed answers. A route with no successful completion
+has no finite score. The last 32 observations inform each score; all observations
+remain archived. Periodic exploration still retries routes. This is a measured
+heuristic, not a regret bound or a guarantee of faster complete solving.

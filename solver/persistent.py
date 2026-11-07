@@ -33,6 +33,7 @@ from solver.knowledge_store import KnowledgeStore
 from solver.components import ComponentSolver
 from solver.interfaces import InterfaceSolver
 from solver.chain import ChainSolver
+from solver.layered import LayeredSolver
 from solver.routing import Router
 DEFAULT_ENGINE = ROOT / "formal/.lake/build/bin/oracleSolver"
 DEFAULT_CACHE = ROOT / "solver/.cache/results.sqlite3"
@@ -81,7 +82,8 @@ class PersistentSolver:
                  incremental: bool = False, incremental_proofs: bool = False, learned: bool = False, reuse_exact: bool = True,
                  components: bool = False, interfaces: bool = False, max_interface: int = 3,
                  symbolic: bool = False, adaptive: bool = False,
-                 max_archive_bytes: int | None = None,
+                 max_archive_bytes: int | None = None, active_cache_bytes: int = 2*1024**2,
+                 symbolic_node_limit: int = 50000, wal_checkpoint_bytes: int = 4*1024**2,
                  max_input_bytes: int = 8 * 1024**2, max_message_bytes: int = 64 * 1024**2,
                  max_proof_bytes: int = 16 * 1024**2):
         start = time.perf_counter_ns()
@@ -94,6 +96,9 @@ class PersistentSolver:
             raise ValueError("Solver and query timeouts must be finite and positive")
         if min(max_input_bytes, max_message_bytes, max_proof_bytes) <= 0:
             raise ValueError("Resource byte limits must be positive")
+        if any(type(v) is not int or v<=0 for v in (active_cache_bytes,symbolic_node_limit,wal_checkpoint_bytes)):
+            raise ValueError('Active payload, symbolic node and WAL thresholds must be positive integers')
+        self.active_cache_bytes,self.symbolic_node_limit,self.wal_checkpoint_bytes=active_cache_bytes,symbolic_node_limit,wal_checkpoint_bytes
         self.backend, self.timeout = backend, timeout
         self.query_timeout, self.verify_cache = query_timeout, verify_cache
         self.max_input_bytes, self.max_message_bytes, self.max_proof_bytes = max_input_bytes, max_message_bytes, max_proof_bytes
@@ -168,14 +173,16 @@ class PersistentSolver:
                 KnowledgeStore.create(self.db)
                 Router.create(self.db)
                 ChainSolver.create(self.db)
+                LayeredSolver.create(self.db)
                 self.db.execute("PRAGMA user_version=8")
         except Exception:
             self.db.close()
             raise
         self.process: subprocess.Popen | None = None
         self.chains = ChainSolver(self)
+        self.layers = None
         self.interfaces = InterfaceSolver(self, max_interface, symbolic=symbolic) if interfaces or symbolic or adaptive else None
-        routing_namespace = self.engine_id + ":routes-v2:" + json.dumps(
+        routing_namespace = self.engine_id + ":routes-v3:" + json.dumps(
             [backend, symbolic, max_interface, components, incremental, incremental_proofs], separators=(",", ":"))
         self.router = Router(self.db, routing_namespace, self.engine_id) if adaptive and backend != "lean" else None
         self.components = ComponentSolver(self.db, self.engine_id) if components else None
@@ -484,6 +491,15 @@ class PersistentSolver:
             self._route_decision = None
 
     def archive_usage(self):
+        # A safe-point checkpoint is charged, may be blocked by another reader,
+        # and supplies no hard physical-disk bound.
+        wal=Path(str(self.cache)+'-wal');checkpoint=None
+        if not self.db.in_transaction and wal.exists() and wal.stat().st_size>self.wal_checkpoint_bytes:
+            with self._phase('archive_checkpoint'):
+                self.db.execute('PRAGMA busy_timeout=0')
+                try:checkpoint=list(self.db.execute('PRAGMA wal_checkpoint(TRUNCATE)').fetchone())
+                finally:self._database_budget()
+        caches={name:obj.cache.report() for name,obj in [('chain',self.chains),('layered',self.layers),('interfaces',self.interfaces)] if obj is not None}
         pages=self.db.execute("PRAGMA page_count").fetchone()[0]
         size=self.db.execute("PRAGMA page_size").fetchone()[0]
         free=self.db.execute("PRAGMA freelist_count").fetchone()[0]
@@ -491,7 +507,9 @@ class PersistentSolver:
         return dict(database_pages=pages,page_bytes=size,logical_database_bytes=pages*size,
             free_pages=free,configured_page_cap_bytes=None if self.max_archive_bytes is None else self.max_archive_bytes//size*size,
             database_file_bytes=self.cache.stat().st_size,wal_bytes=wal.stat().st_size if wal.exists() else 0,
-            physical_storage_hard_bound=False,whole_process_memory_bound=False)
+            physical_storage_hard_bound=False,whole_process_memory_bound=False,
+            active_caches=caches,symbolic_node_limit=self.symbolic_node_limit,
+            wal_checkpoint_threshold=self.wal_checkpoint_bytes,checkpoint_result=checkpoint)
 
     def _database_budget(self):
         self.db.execute("PRAGMA busy_timeout=" + str(max(1, int(self._remaining() * 1000))))
@@ -663,6 +681,31 @@ class PersistentSolver:
             self.db.set_progress_handler(None,0)
             self._ledger=self._deadline=None
 
+    def layered(self, width, base=None, *, replace=None, append=None, left=None, right=None, witness=False):
+        """Supplied bounded-width layer relations; no automatic SAT decomposition."""
+        if type(width) is not int or not 1<=width<=4:raise ValueError('Layer width must be 1 to 4')
+        if self._ledger is not None:raise RuntimeError('Concurrent query')
+        self._ledger,self._deadline=Ledger(),Deadline(self.query_timeout)
+        try:
+            self._database_budget()
+            self.db.set_progress_handler(lambda:int(time.monotonic()>=self._deadline.end),1000)
+            if self.layers is None or self.layers.width!=width:
+                if self.layers is not None:self._request(dict(mode='layered_reset'))
+                self.layers=LayeredSolver(self,width)
+            any_state=(1<<(1<<width))-1
+            result=self.layers.run(base,{} if replace is None else replace,[] if append is None else append,
+                any_state if left is None else left,any_state if right is None else right,witness)
+            with self._phase('storage_accounting'):result['storage']=self.archive_usage()
+            self.last_metrics=self._ledger.finish();result.update(self.last_metrics)
+            return result
+        except BaseException as error:
+            self.last_metrics=self._ledger.finish()
+            if isinstance(error,sqlite3.Error) and getattr(error,'sqlite_errorcode',None)==sqlite3.SQLITE_FULL:
+                raise BudgetExceeded('Layer archive cap reached; previous versions retained') from error
+            raise
+        finally:
+            self.db.set_progress_handler(None,0);self._ledger=self._deadline=None
+
     def stats(self) -> dict:
         row = self.db.execute("""SELECT count(*) AS entries, coalesce(sum(answer),0) AS sat
             FROM results WHERE engine=?""", (self.engine_id,)).fetchone()
@@ -728,6 +771,9 @@ def main() -> int:
     parser.add_argument("--max-interface", type=int, default=3)
     parser.add_argument("--adaptive", action="store_true", help="Select checked or interface solving from measured complete-query times")
     parser.add_argument("--max-archive-bytes", type=int, help="Bound logical SQLite pages; stop acquisition at capacity and preserve all history")
+    parser.add_argument('--active-cache-bytes',type=int,default=2*1024**2,help='Per-cache retained JSON payload cap; not a process memory cap')
+    parser.add_argument('--symbolic-node-limit',type=int,default=50000)
+    parser.add_argument('--wal-checkpoint-bytes',type=int,default=4*1024**2)
     parser.add_argument("--symbolic", action="store_true", help="Build bounded BDD proposals directly from syntax and projections; implies interfaces")
     sub = parser.add_subparsers(dest="command", required=True)
     solve = sub.add_parser("solve")
@@ -742,7 +788,8 @@ def main() -> int:
         with PersistentSolver(args.cache, args.engine, backend=args.backend, cadical=args.cadical,
                               timeout=args.timeout, query_timeout=args.query_timeout,
                               verify_cache=args.verify_cache, max_proof_bytes=args.max_proof_bytes,
-                              incremental=args.incremental, incremental_proofs=args.incremental_proofs, learned=args.learned, components=args.components, interfaces=args.interfaces, max_interface=args.max_interface, symbolic=args.symbolic, adaptive=args.adaptive, max_archive_bytes=args.max_archive_bytes) as solver:
+                              incremental=args.incremental, incremental_proofs=args.incremental_proofs, learned=args.learned, components=args.components, interfaces=args.interfaces, max_interface=args.max_interface, symbolic=args.symbolic, adaptive=args.adaptive, max_archive_bytes=args.max_archive_bytes, active_cache_bytes=args.active_cache_bytes,
+                              symbolic_node_limit=args.symbolic_node_limit,wal_checkpoint_bytes=args.wal_checkpoint_bytes) as solver:
             if args.command == "serve":
                 for line in sys.stdin:
                     try:
@@ -751,6 +798,10 @@ def main() -> int:
                             raise ValueError("A request must be a JSON object")
                         if request.get("op") == "expand":
                             result = solver.expand(request.get("base"), add=request.get("add", {}), remove=request.get("remove", []))
+                        elif request.get("op") == "layered":
+                            result = solver.layered(request['width'],request.get('base'),replace=request.get('replace',{}),
+                                append=request.get('append',[]),left=request.get('left'),right=request.get('right'),
+                                witness=request.get('witness',False))
                         elif request.get("op") == "chain":
                             result = solver.chain(request.get("base"), replace=request.get("replace", {}),
                                 append=request.get("append", []), left=request.get("left", 3),

@@ -876,7 +876,7 @@ Complete relation payloads select among constant, dense bitmap, sparse, and redu
 \subsection{Restricted scaling of affected work}
 \label{sec:affected-scaling}
 
-We can now make the missing resource conditions more explicit. Fix an elimination order. Route each source factor to the first variable of its scope in that order. Its projected output enters a later bucket. An edit changes only buckets reachable from the changed sources. If recomputation yields the same output identity, propagation through that output stops. This supports local scheduling, although the reachable set can be the whole graph. Our indexed implementation retains these dependencies across immutable snapshots. A width violation triggers a new ordering attempt or checked fallback. Copying and serializing a plan, collecting active sources, and final checking remain charged global work.
+We can now make the missing resource conditions more explicit. Fix an elimination order. Route each source factor to the first variable of its scope in that order. Its projected output enters a later bucket. An edit changes only buckets reachable from the changed sources. If recomputation yields the same output identity, propagation through that output stops. This supports local scheduling, although the reachable set can be the whole graph. Our indexed implementation retains these dependencies across immutable snapshots. A width violation triggers a new ordering attempt or checked fallback. The first implementation copied and serialized whole plans. The later version stores bucket maps through persistent balanced-tree paths. Collecting active sources, copying order lists, and final checking can still require global work.
 
 Suppose $\delta$ sources change, each affected node has at most $b$ successors, and the remaining dependency depth is at most $h$. Counting repeated paths gives the upper envelope $A_0=\delta$ and $A_{h+1}=\delta+bA_h$. Hence
 \begin{equation}
@@ -908,6 +908,35 @@ Put $p=(N+1)^k\geq1$. Each update costs at most $Cp+C^3p^3\leq(C+C^3)p^3$. Sum t
 For table-based summaries, $r_i\leq2^{w_i}$ is sufficient. In particular, $w_i\leq\lfloor\log_2(N+1)\rfloor$ gives $2^{w_i}\leq N+1$. Direct symbolic operations require their own bounds on intermediate diagrams and operation counts; small final diagrams alone do not establish those bounds. The common constants and the overhead premise are essential. Here $H_i$ includes decomposition, source comparison, snapshot copying, matching, proof checking, restart, storage, and control. The number of updates needed to cover an input must also be charged. Polynomially many updates and polynomial archive increments yield a restricted polynomial ledger. Establishing these conditions uniformly for every SAT input, together with an appropriate machine simulation and coverage construction, remains the missing unrestricted argument.
 
 \texttt{Scaling.lean} checks these inequalities and the archive-capacity obstruction. It also checks restriction, conjunction, and existential projection for a symbolic decision-tree reference, and transfer from a verified unsatisfiable conjunct. The Python ROBDD manager implements sharing, memoization, and ordered operations as proposal optimizations. Native factor-row and original-formula checks remain authoritative. The tree semantics do not constitute an end-to-end proof of that manager, the scheduler, SQLite, or their machine costs.
+
+\subsection{A concrete logarithmic update bound for chains}
+\label{sec:balanced-chain}
+
+Let us now discharge the affected-work premise for a restricted family. Consider a chain of $m\geq1$ binary Boolean constraints $R_i(x_i,x_{i+1})$. Each constraint is a relation with four entries. For adjacent segments, define
+\begin{equation}
+(A\circ B)(a,c)=\bigvee_{b\in\bits} A(a,b)\land B(b,c).
+\label{eq:chain-compose}
+\end{equation}
+This operation is associative. Its identity is equality of the two endpoints. Hence, a segment can be replaced by its endpoint relation without losing any information needed to join it to the remaining chain.
+
+\begin{proposition}[Persistent balanced chain updates]
+\label{prop:balanced-chain}
+Pad a chain with identity relations to capacity $M=2^h$, where $m\leq M<2m$, and store its segment relations in a perfect binary tree. Materialize all four entries at each internal node. Replacing one edge then requires exactly $h$ relation compositions and $h+1$ copied tree nodes in the path-copying implementation. Unchanged subtrees and separately retained old roots remain valid. The root relation decides satisfiability under supplied endpoint restrictions with a constant number of Boolean operations.
+
+Initial construction uses $O(m)$ relation operations. At fixed capacity, retaining $u$ replacements uses at most $2M-1+u(h+1)$ tree nodes before sharing identical nodes. Appending an edge is supported by replacing an identity leaf; doubling a full tree with an identity subtree adds $O(h+1)$ work in the shared construction. These bounds charge summary operations and tree nodes. They exclude input conversion, dictionary lookup, serialization, durable storage, native replay, and complete witness output.
+\end{proposition}
+
+\begin{proof}
+For a segment of one edge, its stored relation is exact. Suppose the two child summaries are exact. Equation~\eqref{eq:chain-compose} accepts endpoints precisely when some shared Boolean value joins a satisfying left assignment to a satisfying right assignment. Induction on tree height therefore proves exactness. Associativity follows by exchanging the two finite existential choices in a three-segment composition; identity padding leaves the endpoint relation unchanged.
+
+A replacement copies its leaf and recomputes exactly one ancestor at each of the $h$ levels. No other leaf or subtree changes. Each composition evaluates four outputs, each over two possible middle values, so it has fixed Boolean cost. A complete tree has $2M-1$ nodes. Adding at most $h+1$ nodes for each replacement gives the stated retained-node bound. Bottom-up construction is linear in capacity. At a capacity doubling, build the identity subtree by reusing two references to the same child at each level, join it to the old root, and replace the first new leaf. Each of these paths has length $O(h+1)$. Finally, checking the at most four allowed endpoint pairs decides satisfiability from the exact root relation.
+\end{proof}
+
+This construction does not depend on a fixed upper bound on chain length. Its summaries stay small because every segment has only two Boolean boundary variables. Yet, an arbitrary new constraint joining distant positions need not preserve this form. A complete satisfying assignment also contains $m+1$ Boolean values, so explicit output requires $\Omega(m)$ work. The service therefore exposes witness output as an optional, separately checked operation. Decision-only queries skip witness construction; requested witnesses use a linear traversal without repeated list concatenation. It does not infer that the complete query, including persistence, takes logarithmic time.
+
+The algorithmic principle is established. The 16 binary Boolean relations form a finite monoid under composition, so replacement is a dynamic word problem \citep{frandsen1997dynamic}. General dynamic membership algorithms even improve the logarithmic update bound in the unit-cost RAM model with logarithmic word length \citep{amarilli2021dynamic}. Path copying is standard persistence \citep{driscoll1989persistent}. Our role here is to instantiate these ideas, verify the summary and replacement invariants, and expose the remaining service costs. We claim neither a new dynamic complexity bound nor optimality of this tree.
+
+\texttt{BalancedChain.lean} checks exact composition, associativity, identity padding, preservation of other leaves, and an exact $h+1$ replacement ledger. Tree height is part of the type. Native joins materialize the four entries and carry the proved summary invariant. The persistent Python path stores immutable node references and checks proposed summaries through those native joins. The mathematical tree ledger does not verify Python/SQLite operations or the complete JSON protocol. It supplies concrete affected-work and summary-size bounds for Proposition~\ref{prop:conditional-update}. The other resource premises still require justification. It supplies no small-interface or efficient-coverage guarantee for unrestricted SAT.
 
 \subsection{Amortization while the domain grows}
 
@@ -1380,7 +1409,7 @@ Let $G$ be any previously compiled AIG, and compile $f$ into an extension $G'$ w
 Suppose $v$ satisfies $f$. Evaluate every node of the acyclic graph under $v$ and assign each auxiliary variable its node value. This extends $v$ to an assignment satisfying every clause of $D_{G'}$. Compiler correctness gives $r_f=1$ under that assignment. Hence $D_{G'}\land r_f$ is satisfiable, contradicting acceptance by the sound refutation checker. Previous formulas only contributed node definitions, each of which has such an extension for every original valuation; their roots were not asserted as permanent units.
 \end{proof}
 
-\texttt{IncrementalProof.lean} proves this implication and composes it with the pinned standard library's LRAT soundness theorem. Replayed clauses are proposals: the proof that uses them must check against the reconstructed definitions and current root. A forged saved clause therefore cannot become an unchecked axiom. Unsupported traces, excessive proof size, or a rejected certificate use independent checked fallback while budget remains. This removes the fresh-CDCL requirement for supported negative traces. The follow-up checks live traces against the existing native graph, avoiding history recompilation for that check. Once a refutation is accepted, its formula can be reused as a checked unsatisfiable conjunct of a later query. A selected archived core is revalidated once after restart. Each transfer checks the new conjunct relation; deleting a required conjunct invalidates reuse. Definition collection, general proof traversal, and restart may still revisit retained work. General per-clause incremental verification remains open. The earlier adapter remains available for comparison.
+\texttt{IncrementalProof.lean} proves this implication and composes it with the pinned standard library's LRAT soundness theorem. Replayed clauses are proposals: the proof that uses them must check against the reconstructed definitions and current root. A forged saved clause therefore cannot become an unchecked axiom. Unsupported traces, excessive proof size, or a rejected certificate use independent checked fallback while budget remains. This removes the fresh-CDCL requirement for supported negative traces. The follow-up checks live traces against the existing native graph, avoiding history recompilation for that check. Once a refutation is accepted, its formula can be reused as a checked unsatisfiable conjunct of a later query. A selected archived core is revalidated once after restart. Each transfer checks the new conjunct relation; deleting a required conjunct invalidates reuse. Definition collection, general proof traversal, and restart may still revisit retained work. The subsequent fragment checker in Section~\ref{sec:followup-study} also reuses accepted individual RUP derivations. General proof and runtime bounds remain open. The earlier adapter remains available for comparison.
 
 Our first local-interface study uses six synthetic streams: chain, tree, and hub expansion; local replacement, deletion, and a distant bridge; shifts beyond the width cap; and negative-core extension followed by removal. Each of six modes receives the same logical snapshots. Three sequential repetitions with rotated mode order produce 108 runs and 792 correct answers, including 198 negative answers, under a three-second query deadline. No timeout or incorrect answer occurs. Full-input and delta transport are distinguished; every mode retains its completed results. The source, native binaries, inputs, phase ledgers, failures, and storage categories are recorded separately from all previous studies.
 
@@ -1453,6 +1482,57 @@ Before revalidation we saved another complete local backup. All 2,485 older resu
 
 These measurements support specific reuse mechanisms. Three repetitions on one machine do not resolve small timing differences. SATLIB supplies historical public cases, not a representative modern application suite. Nor does the experiment establish a uniform small-width ordering, a bound on arbitrary affected regions, polynomial symbolic intermediates, or the overhead premise of Proposition~\ref{prop:conditional-update}. Those obligations remain explicit.
 
+\subsection{Durable batching, balanced summaries, and checked fragments}
+\label{sec:followup-study}
+
+The next implementation targets costs exposed by the preceding study. Interface acquisition now uses one fully synchronized transaction per operation and topological native-definition batches of at most 128 nodes. A failed operation rolls back its new objects and clears volatile proposals. Previously committed answers remain available. Bucket maps use immutable balanced-tree paths; unchanged buckets are no longer serialized into each new plan. Source lists, ordering metadata, and final checks still have costs that can grow with the active problem.
+
+Before writing interface evidence, a full-input request performs a bounded, write-free width simulation. Adaptive routing also uses variable count, graph density, and a bounded sample of reusable factors. Its screening can select the ordinary checked solver before factor registration. Feature extraction receives at most 100\,ms and 10\% of remaining time. A full interface attempt receives at most one second and 40\% of remaining time, reserving budget for fallback. The elapsed ledger charges failed attempts and route selection. These are empirical controller choices, not a speedup guarantee.
+
+Symbolic projection now combines conjunction and existential abstraction. Eliminating a variable is allowed only after including every factor that depends on it. This avoids materializing some unprojected intermediates, an established relational-product operation supported by CUDD \citep{somenziCudd}. Safe-point collection keeps reachable nodes, remaps retained roots, and discards stale memo entries. Explicit variable orders permit controlled comparisons. The optimizer remains a proposal mechanism whose rows are checked independently; none of these operations rules out exponential intermediate diagrams.
+
+For negative answers, a native store retains individual clauses only after checking their hinted reverse-unit-propagation derivations. Each parent must be an actual permanent circuit clause or an earlier accepted fragment. A query-root assumption is used only in the final check. Graph reset discards the active fragment store; a changed permanent base retains facts only when it contains every old base clause. Restart rechecks archived fragments. Complete standalone certificates remain archived, so certificate construction, serialization and restart are still charged.
+
+\texttt{ProofFragments.lean} proves that an accepted RUP fragment follows from its checked premises, that adding premises preserves entailment, and that closing the current root assumption implies unsatisfiability through Proposition~\ref{prop:incremental-proof}. Session bookkeeping and the complete compiled service still require a refinement proof. This extends our implementation of established incremental certification \citep{fazekas2024incremental}. More recent work already supports real-time checking for distributed incremental SAT and clause sharing across differing contexts \citep{schreiber2026realtime}. Our single-process experiment does not reproduce those distributed results.
+
+After correcting an eager witness construction and repeated list concatenation in the chain output path, we retain the earlier run and repeat the complete study on the corrected build. The new study repeats the seven frozen streams and adds three streams defined before timing: the first twelve towers05 increments and the complete three-query LIDRUP example from the TACAS 2026 artifact, and a four-bit synchronous counter unrolled to depth twelve. The counter has one correct and one incorrect target state at each depth. Permanent clauses accumulate in the artifact inputs; query assumptions are replaced. These selected examples broaden the evidence but do not represent the publication's full application suite. The seven modes use three sequential repetitions, a five-second query deadline, and the same 8\,MiB logical page cap. Delta modes receive explicit edits; other modes receive complete formulas. This interface difference remains part of the comparison.
+
+Across 210 runs, 2,289 queries produce 2,259 correct answers, including 1,188 UNSAT answers, and 30 archive-cap errors. There are no wrong answers, missing records, or timeouts. Every error occurs on one of the final two towers queries in a full-input mode. Both delta modes complete all twelve increments. They retain shared compressed constraints and expansion evidence. On the first repetition, their closed databases occupy 1,007,616 and 970,752 bytes. The errors remain in the data; an incomplete stream's elapsed total is not its time to solve all inputs.
+
+\begin{table}[tb]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrrr}
+\toprule
+Stream & Checked & Delta & Symbolic & Adaptive & Proof \\
+\midrule
+Local edits & 185.81 & 229.32 & 197.45 & 219.97 & 153.90 \\
+Width shift & 168.38 & 157.63 & 153.62 & 166.38 & 136.71 \\
+Proof reuse & 168.60 & 141.01 & 136.35 & 168.36 & 132.36 \\
+Chain to 128 edges & 183.87 & 267.97 & 231.58 & 189.49 & 172.91 \\
+Distant edits & 273.05 & 533.06 & 382.47 & 332.93 & 241.25 \\
+Public SATLIB & 263.07 & 383.80 & 386.42 & 284.28 & 566.52 \\
+Distribution shift & 235.82 & 278.02 & 279.81 & 230.63 & 346.69 \\
+Towers prefix & 956.18$^*$ & 905.66 & 912.11 & 1020.46$^*$ & 1173.81$^*$ \\
+LIDRUP example & 137.07 & 132.14 & 130.24 & 136.66 & 130.81 \\
+Held-out counter & 425.09 & 422.67 & 424.68 & 465.38 & 427.06 \\
+\bottomrule
+\end{tabular}
+\caption{Median total stream milliseconds after the six implementation changes. Modes follow Table~\ref{tab:scaling-study}. An asterisk marks a stream with two archive-cap errors per repetition; its total includes failed attempts. All seven modes, ranges and individual outcomes are retained in the repository. Cross-study changes combine several optimizations and host variation; they are not isolated ablations.}
+\label{tab:followup-study}
+\end{table}
+
+Live proof reuse helps on several structural streams but loses to checked solving on public SATLIB and the distribution shift. Restart costs remain substantial. Live and restarted proof modes each certify 141 completed negatives with checked RUP fragments and 27 through checked conjunct cores. Across completed queries, live mode checks 2,367 fragments; restarting checks 18,687, including replay. Complete certificates are still constructed and stored. These counts therefore establish reuse of particular checks, not constant verification cost for arbitrary later queries.
+
+The separate chain experiment tests lengths 16, 64, 256 and 1,024 at three replacement positions, with three repetitions and optional witness output. All 144 paired-query answers are correct. The largest replacement performs exactly ten relation compositions and eleven node-write attempts, matching Proposition~\ref{prop:balanced-chain}. Producing and checking its positive witness visits all 1,024 edges. Identical nodes share storage; native replay and database operations remain outside the tree ledger.
+
+In a controlled 64-variable projection, separate conjunction and elimination allocate 8,499 total manager nodes; fused abstraction allocates 8,034. The common construction already uses 8,003, and both outputs retain 32 after collection. Equality of two eight-bit words retains 765 nodes with grouped variables and 24 with interleaved variables. These examples illustrate established operation and ordering effects. They do not bound arbitrary intermediates or show that a good order can always be found cheaply.
+
+The parent process also samples worker and descendant RSS and scratch storage, requesting a 20\,ms interval. The observed maxima are 329.14\,MiB summed RSS, 10.64\,MiB scratch, and 5.55\,MiB WAL plus shared-memory files. Summed RSS may count shared pages repeatedly. The maximum observed interval is 43.07\,ms, and 143 process reads are missed across the run. Short-lived processes and between-sample peaks may be missed; the monitor is excluded. Thus these measurements improve visibility without supplying hard physical limits or an equal-total-memory experiment.
+
+The revised service passes 114 tests, and Lean audits 1,828 declarations, including 941 theorem declarations, without admitted proofs or additional axioms. Revalidation adds 355 current-engine answers and 129 proofs. All 3,195 previous results, 903 proofs, other historical rows, and 63 earlier experiment files remain unchanged. The live archive now holds 3,550 results and 1,032 proofs; all 355 current inputs pass an independent semantic audit. The unrestricted width, intermediate-size, acquisition, whole-service refinement and resource-bound obligations remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 
@@ -1502,7 +1582,7 @@ Their thematic proximity helps us state the missing obligations. We must specify
 We now have explicit conditions for exactness and savings, restricted compact expansion, an operational reference search, and checked service experiments. Establishing the conditions for a practical learned system still requires further algorithms and measurements. The following questions describe these remaining obligations. They do not claim unexplored territory across the wider literature.
 
 \paragraph{Compactness and acquisition.}
-Propositions~\ref{prop:compact-coverage} and~\ref{prop:component-expansion} give restricted constructions. The component and local-elimination results allow growing total variable count. The service now uses a bounded-width heuristic and lazy nonempty-interface relations, but finding a small decomposition and limiting affected dependencies remain restrictions. Which richer families support useful representations with charged acquisition? To answer this, we must fix the SAT instance family, coverage, precision, acquisition interface, and budget. Tractable subclasses or distributional guarantees may support positive results without meeting Proposition~\ref{prop:advice} on all inputs. For unrestricted SAT, polynomial-size exact models remain unestablished here. So do lower bounds excluding them. In particular, our exponential ReLU construction tells us neither that this size is necessary nor that a smaller model can be learned efficiently.
+Propositions~\ref{prop:compact-coverage}, \ref{prop:component-expansion}, and~\ref{prop:balanced-chain} give restricted constructions. The component and local-elimination results allow growing total variable count. The service now uses a bounded-width heuristic and lazy nonempty-interface relations, but finding a small decomposition and limiting affected dependencies remain restrictions. Which richer families support useful representations with charged acquisition? To answer this, we must fix the SAT instance family, coverage, precision, acquisition interface, and budget. Tractable subclasses or distributional guarantees may support positive results without meeting Proposition~\ref{prop:advice} on all inputs. For unrestricted SAT, polynomial-size exact models remain unestablished here. So do lower bounds excluding them. In particular, our exponential ReLU construction tells us neither that this size is necessary nor that a smaller model can be learned efficiently.
 
 \paragraph{Generalization, memory, and changing workloads.}
 The bounded predictor demonstrates checked transfer to new witnesses. When does learning save more work than caching under the same total memory budget? Equation~\eqref{eq:cache-distribution} gives a reference without eviction. Yet, memory limits, eviction, retraining, and distribution shifts change the costs. We cannot apply the fixed-policy threshold in Proposition~\ref{prop:savings} unchanged to adaptation. We must evaluate conditional savings at each history and include updates. Certification still preserves correctness after a workload change within the covered domain. It need not preserve fallback frequency or expected savings.
@@ -1511,9 +1591,9 @@ The bounded predictor demonstrates checked transfer to new witnesses. When does 
 Which certificates can the fast path produce and check within its budget? A short certificate may exist even when we cannot find it cheaply. As positive and negative verification differ, we should report their outcomes separately. A timeout on prediction can hand control to fallback when time remains; a service-wide deadline cannot guarantee that fallback completes. Proposition~\ref{prop:overhead} bounds additional work if we implement its solver and update-budget assumptions. Note that aborting the fallback as well changes the guarantee. The resulting service may return ``unknown'' and is incomplete.
 
 \paragraph{A reproducible comparison.}
-Sections~\ref{sec:cdcl-study}, \ref{sec:expanded-study}, \ref{sec:structural-service}, \ref{sec:incremental-proof-service}, and~\ref{sec:scaling-study} fix encodings, query order, solver versions, and local hardware, and compare solving, exact caching, and certified reuse. The follow-up imposes a common logical archive-page cap; this is not a bound on WAL files, temporary storage, or total RAM. Larger studies should additionally impose comparable total memory budgets and use modern application suites. Test streams should include repeated queries, distinct held-out formulas, and changed workloads. Both satisfiable and unsatisfiable instances are needed. We should distinguish reuse of identical inputs from transfer to new ones. A frozen test stream and chronological records of online learning prevent us from using later answers earlier.
+Sections~\ref{sec:cdcl-study}, \ref{sec:expanded-study}, \ref{sec:structural-service}, \ref{sec:incremental-proof-service}, \ref{sec:scaling-study}, and~\ref{sec:followup-study} fix encodings, query order, solver versions, and local hardware, and compare solving, exact caching, and certified reuse. The follow-up imposes a common logical archive-page cap; this is not a bound on WAL files, temporary storage, or total RAM. Larger studies should additionally impose comparable total memory budgets and use modern application suites. Test streams should include repeated queries, distinct held-out formulas, and changed workloads. Both satisfiable and unsatisfiable instances are needed. We should distinguish reuse of identical inputs from transfer to new ones. A frozen test stream and chronological records of online learning prevent us from using later answers earlier.
 
-For each method, we should report acquisition and label-generation costs, parameter and cache bytes, verification work, certified success, conditional fallback cost, and updates. Total cost must be reported against query count. Latency distributions show how long users wait; aggregate work also charges concurrent hardware. Timeouts and unsolved cases must remain in the comparison. If acquisition cost is unavailable, we can compare online performance but cannot establish end-to-end break-even. Section~\ref{sec:mechanism-study} implements a small synthetic comparison with actual acquisition and service costs. Section~\ref{sec:expanded-study} adds public instances, chronological learning, shift, and measured resources. Larger application suites, simultaneous process-tree memory, and competitive current solvers remain necessary for broader performance conclusions.
+For each method, we should report acquisition and label-generation costs, parameter and cache bytes, verification work, certified success, conditional fallback cost, and updates. Total cost must be reported against query count. Latency distributions show how long users wait; aggregate work also charges concurrent hardware. Timeouts and unsolved cases must remain in the comparison. If acquisition cost is unavailable, we can compare online performance but cannot establish end-to-end break-even. Section~\ref{sec:mechanism-study} implements a small synthetic comparison with actual acquisition and service costs. Section~\ref{sec:expanded-study} adds public instances, chronological learning, shift, and measured resources. Section~\ref{sec:followup-study} adds selected current artifact inputs, a held-out counter, and sampled process-tree memory. Larger application suites, hard comparable resource budgets, and competitive current solvers remain necessary for broader performance conclusions.
 
 \section{Conclusion}
 
@@ -1534,6 +1614,11 @@ Ailon, N., Chazelle, B., Clarkson, K.~L., Liu, D., Mulzer, W., and Seshadhri, C.
 Self-improving algorithms.
 \emph{SIAM Journal on Computing}, 40(2), 350--375.
 \href{https://doi.org/10.1137/090766437}{doi:10.1137/090766437}.
+
+\bibitem[Amarilli et~al.(2021)Amarilli, Jachiet, and Paperman]{amarilli2021dynamic}
+Amarilli, A., Jachiet, L., and Paperman, C. (2021).
+Dynamic membership for regular languages.
+\emph{ICALP 2021}. Full version with proofs: \url{https://arxiv.org/abs/2102.07728}.
 
 \bibitem[Bacchus et~al.(2009)Bacchus, Dalmao, and Pitassi]{bacchus2009backtracking}
 Bacchus, F., Dalmao, S., and Pitassi, T. (2009).
@@ -1668,6 +1753,11 @@ How does machine learning manage complexity?
 Preprint, \emph{arXiv:2604.07233}; also ECCC TR26-053.
 \url{https://arxiv.org/abs/2604.07233}.
 
+\bibitem[Frandsen et~al.(1997)Frandsen, Miltersen, and Skyum]{frandsen1997dynamic}
+Frandsen, G.~S., Miltersen, P.~B., and Skyum, S. (1997).
+Dynamic word problems. \emph{Journal of the ACM}, 44(2):257--271.
+\href{https://doi.org/10.1145/256303.256309}{doi:10.1145/256303.256309}.
+
 \bibitem[Gershman and Goodman(2014)]{gershman2014}
 Gershman, S.~J., and Goodman, N.~D. (2014).
 Amortized inference in probabilistic reasoning.
@@ -1762,6 +1852,12 @@ Certifying algorithms.
 \emph{Computer Science Review}, 5(2), 119--161.
 \href{https://doi.org/10.1016/j.cosrev.2010.09.009}{doi:10.1016/j.cosrev.2010.09.009}.
 
+\bibitem[Mengel(2023)]{mengel2023bdd}
+Mengel, S. (2023).
+Bounds on BDD-based bucket elimination.
+\emph{Proceedings of SAT 2023}, LIPIcs 271, 16:1--16:11.
+\href{https://doi.org/10.4230/LIPIcs.SAT.2023.16}{doi:10.4230/LIPIcs.SAT.2023.16}.
+
 \bibitem[Merrill and Sabharwal(2024)]{merrill2024cot}
 Merrill, W., and Sabharwal, A. (2024).
 The expressive power of transformers with chain of thought.
@@ -1773,12 +1869,6 @@ Michie, D. (1968).
 ``Memo'' functions and machine learning.
 \emph{Nature}, 218, 19--22.
 \href{https://doi.org/10.1038/218019a0}{doi:10.1038/218019a0}.
-
-\bibitem[Mengel(2023)]{mengel2023bdd}
-Mengel, S. (2023).
-Bounds on BDD-based bucket elimination.
-\emph{Proceedings of SAT 2023}, LIPIcs 271, 16:1--16:11.
-\href{https://doi.org/10.4230/LIPIcs.SAT.2023.16}{doi:10.4230/LIPIcs.SAT.2023.16}.
 
 \bibitem[Milli et~al.(2021)Milli, Lieder, and Griffiths]{milli2021rational}
 Milli, S., Lieder, F., and Griffiths, T.~L. (2021).
@@ -1804,7 +1894,6 @@ SAT can ensure polynomial bounds for the verification of circuits with limited c
 In \emph{27th Euromicro Conference on Digital System Design (DSD)}.
 \url{https://agra.informatik.uni-bremen.de/doc/konf/DSD2024_LM.pdf}.
 
-
 \bibitem[M{\"u}ller et~al.(2026)M{\"u}ller, Goll{\"u}cke, and Drechsler]{muller2026polysat}
 M{\"u}ller, L., Goll{\"u}cke, M., and Drechsler, R. (2026).
 PolySAT: A fast Cache-SAT implementation for solving Boolean problems with parameterized complexity.
@@ -1812,13 +1901,11 @@ PolySAT: A fast Cache-SAT implementation for solving Boolean problems with param
 doi:10.1109/LES.2026.3727512. Publication record and abstract checked at
 \url{https://www.dfki.de/en/web/research/projects-and-publications/publication/17741}.
 
-
 \bibitem[Paturi et~al.(2005)Paturi, Pudl{\'a}k, Saks, and Zane]{paturi2005improved}
 Paturi, R., Pudl{\'a}k, P., Saks, M.~E., and Zane, F. (2005).
 An improved exponential-time algorithm for $k$-SAT.
 \emph{Journal of the ACM}, 52(3):337--364.
 \url{https://cseweb.ucsd.edu/~paturi/myPapers/pubs/PaturiPudlakSaksZane_2005_jacm.pdf}.
-
 
 \bibitem[Pollitt et~al.(2026)Pollitt, Fleury, Fazekas, Froleyks, Schidler, Schreiber, and Biere]{pollitt2026cadical}
 Pollitt, F., Fleury, M., Fazekas, K., Froleyks, N., Schidler, A., Schreiber, D., and Biere, A. (2026).
@@ -1831,7 +1918,6 @@ Prasad, M.~R., Chong, P., and Keutzer, K. (2001).
 Why is combinational ATPG efficiently solvable for practical VLSI circuits?
 \emph{Journal of Electronic Testing}, 17:509--527.
 doi:10.1023/A:1012820722053.
-
 
 \bibitem[Riedmiller(2025)]{riedmiller2025dual}
 Riedmiller, C.~Z. (2025).
@@ -1851,11 +1937,24 @@ The perceptron: A probabilistic model for information storage and organization i
 \emph{Psychological Review}, 65(6), 386--408.
 \href{https://doi.org/10.1037/h0042519}{doi:10.1037/h0042519}.
 
+\bibitem[Sang et~al.(2004)Sang, Bacchus, Beame, Kautz, and Pitassi]{sang2004components}
+Sang, T., Bacchus, F., Beame, P., Kautz, H., and Pitassi, T. (2004).
+Combining component caching and clause learning for effective model counting.
+\emph{Seventh International Conference on Theory and Applications of Satisfiability Testing (SAT 2004)}.
+\url{https://www.satisfiability.org/SAT04/accepted/65.html}.
+
 \bibitem[SATLIB(2000)]{satlib}
 SATLIB (2000).
 Benchmark problems and instance descriptions.
 \url{https://www.cs.ubc.ca/~hoos/SATLIB/benchm.html}.
 Accessed 7 November 2026; selected archive and instance hashes are retained in the repository.
+
+\bibitem[Schreiber et~al.(2026)Schreiber, Fleury, Fazekas, and Biere]{schreiber2026realtime}
+Schreiber, D., Fleury, M., Fazekas, K., and Biere, A. (2026).
+Real-time proof checking for distributed incremental SAT solving.
+\emph{TACAS 2026}, LNCS 16505, pp.~333--352.
+\href{https://doi.org/10.1007/978-3-032-22752-2_18}{doi:10.1007/978-3-032-22752-2\_18}.
+Artifact: \url{https://zenodo.org/records/18330441}.
 
 \bibitem[Selsam and Bj\o rner(2019)]{selsam2019core}
 Selsam, D., and Bj\o rner, N. (2019).
@@ -1875,18 +1974,18 @@ On the computational power of neural nets.
 \emph{Journal of Computer and System Sciences}, 50(1), 132--150.
 \href{https://doi.org/10.1006/jcss.1995.1013}{doi:10.1006/jcss.1995.1013}.
 
-\bibitem[Sang et~al.(2004)Sang, Bacchus, Beame, Kautz, and Pitassi]{sang2004components}
-Sang, T., Bacchus, F., Beame, P., Kautz, H., and Pitassi, T. (2004).
-Combining component caching and clause learning for effective model counting.
-\emph{Seventh International Conference on Theory and Applications of Satisfiability Testing (SAT 2004)}.
-\url{https://www.satisfiability.org/SAT04/accepted/65.html}.
-
 \bibitem[Sipser(2020)]{sipser2020theory}
 Sipser, M. (2020).
 Theory of computation, MIT 18.404J, Fall 2020.
 Lectures 18 (PSPACE-completeness) and 22 (provably intractable problems, oracles).
 \emph{MIT OpenCourseWare}, course notes.
 \url{https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/}.
+
+\bibitem[Somenzi(n.d.)]{somenziCudd}
+Somenzi, F. (n.d.). CUDD package API documentation.
+\texttt{Cudd\_bddAndAbstract}: combined conjunction and existential abstraction.
+\url{https://www.cs.rice.edu/~lm30/RSynth/CUDD/cudd/doc/cuddExtAbs.html}.
+Accessed 7 November 2026.
 
 \bibitem[Stuhlm\"uller et~al.(2013)Stuhlm\"uller, Taylor, and Goodman]{stuhlmuller2013}
 Stuhlm\"uller, A., Taylor, J., and Goodman, N.~D. (2013).
@@ -1940,7 +2039,6 @@ Yun, C., Sra, S., and Jadbabaie, A. (2019).
 Small ReLU networks are powerful memorizers: A tight analysis of memorization capacity.
 \emph{Advances in Neural Information Processing Systems}, 32.
 \url{https://arxiv.org/abs/1810.07770}.
-
 
 \end{thebibliography}
 \endgroup

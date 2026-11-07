@@ -1371,3 +1371,50 @@ transport savings and checked incremental negatives. They also show propagation
 under bridge edits, restart costs, and larger total databases despite relation
 sharing. Thus none supplies the missing unrestricted polynomial construction,
 small-interface guarantee, cheap exact learning theorem, or whole-machine bound.
+
+
+## Balanced chains, relational products, and incremental checking
+
+The six-task follow-up prompted another targeted primary-source check on
+7 November 2026. This is not an exhaustive new OpenAlex search or a priority proof.
+
+- Frandsen, Miltersen and Skyum, *Dynamic word problems*, JACM 44(2), 257–271
+  (1997), studies maintaining products in fixed algebraic structures under
+  updates. [Publication record](https://pure.au.dk/portal/en/publications/dynamic-word-problems/),
+  [DOI](https://doi.org/10.1145/256303.256309).
+  Our identification: the sixteen binary Boolean relations form a finite monoid
+  under relational composition, so the chain-summary problem is an instance.
+- Amarilli, Jachiet and Paperman, *Dynamic Membership for Regular Languages*,
+  ICALP 2021, gives general O(log n / log log n) operations on a unit-cost RAM
+  with logarithmic word length, and faster bounds for specified algebraic
+  classes. [Full version with proofs](https://arxiv.org/abs/2102.07728).
+  Our O(log n) persistent tree is neither a new nor an optimal dynamic bound.
+  The restricted Lean invariant and explicit service accounting are its role here.
+- CUDD already exposes conjunction combined with existential abstraction through
+  `Cudd_bddAndAbstract`. [Primary API documentation](https://www.cs.rice.edu/~lm30/RSynth/CUDD/cudd/doc/cuddExtAbs.html).
+  Our fused implementation, safe-point collection and order experiments implement
+  established techniques; final diagram size still does not bound construction.
+- Schreiber, Fleury, Fazekas and Biere, *Real-time Proof Checking for Distributed
+  Incremental SAT Solving*, TACAS 2026, LNCS 16505, 333–352, was published online
+  on 16 April 2026. It extends incremental checking to distributed clause sharing
+  across differing assumptions/increments and includes clause compression.
+  [Publisher](https://doi.org/10.1007/978-3-032-22752-2_18).
+  Individual checked-fragment reuse is therefore established prior work, beyond
+  the 2024 incremental certification already cited. Our service combines a Lean
+  soundness boundary with persistent standalone evidence; it makes no distributed
+  performance claim.
+
+The [TACAS artifact](https://zenodo.org/records/18330441) contains software and
+experimental data. Its v1 description explicitly says reproduction instructions
+for all experiments and plots were not yet included. Our follow-up selects the
+first twelve towers05 increments and the three-query LIDRUP example. It does
+not reproduce the published distributed evaluation. Source/member hashes and
+all failures are recorded in `experiments/results/followup/`.
+
+The new restricted chain proposition now proves exactness and a height+1
+replacement ledger. It excludes whole-service costs. Hinted RUP soundness,
+weakening under permanent-premise extension, and final-root contradiction are
+proved in Lean; complete external session refinement remains an obligation.
+All earlier manuscript proof blocks were preserved. None of these results
+supplies small interfaces, bounded symbolic intermediates, or a uniform
+polynomial constructor for arbitrary SAT.

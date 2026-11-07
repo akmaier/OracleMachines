@@ -256,3 +256,38 @@ proofs and other older rows remain unchanged, along with 44 previous experiment
 files. There are now 2,840 results and 774 proofs, including 355 revalidated
 current-engine inputs independently audited. Validation/source hashes and row
 fingerprints are recorded with the scaling study.
+
+
+## Six-task follow-up: durable reuse and concrete restricted updates
+
+All six implementation tasks have now been addressed. The following table keeps
+the completed work separate from stronger unproved guarantees.
+
+| Task | Implemented and checked | Remaining boundary |
+| --- | --- | --- |
+| 1. Overhead | One durable transaction per interface operation; native batches; persistent AVL bucket maps; write-free width preflight. | Source/order scans, full context checks and SQLite costs remain. No O(delta) whole-query claim. |
+| 2. Balanced expansion | Explicit persistent binary-relation chain API, eager four-entry summaries, checked joins, logarithmic replacement ledger, preserved roots. | Recognition of arbitrary SAT, general graph edits and full witnesses are outside the bound. |
+| 3. Symbolic work | Fused conjunction/abstraction, safe-point GC with root remapping, explicit variable-order metadata and experiments. | No general intermediate-size or efficient-order guarantee; exponential cases remain. |
+| 4. Proof fragments | Native per-fragment hinted RUP checks, permanent-premise dependencies, final current-root check, checked restart replay; Lean soundness. | Full certificates still traversed/serialized; protocol/adapter refinement and unrestricted proof-size bounds remain. |
+| 5. Routing/resources | Structural features, early screening, reserved fallback budgets, process-tree RSS and full scratch sampling. | No universal route gain/regret bound or hard total RAM/WAL cap. |
+| 6. Proof/evidence | 114 tests; 1,828-declaration/941-theorem audit; fixed held-out counter and selected 2026 artifact inputs; manuscript and literature reconciliation. | Small selected suites, no competitive modern-solver benchmark, no full machine-cost proof or unrestricted polynomial SAT result. |
+
+The study records 2,259 correct answers (1,188 UNSAT) and 30 archive-cap errors
+from 2,289 attempts across 210 runs. All errors occur at the last two selected
+towers increments in five full-input modes. Delta modes complete all twelve;
+no wrong answers or timeouts occur. Incomplete stream totals include failures
+and must not be used as full-solution times. Sampled RSS reaches 329.14 MiB,
+with missed reads and finite sampling intervals explicitly retained.
+
+The separate chain study confirms ten compositions and eleven node writes for
+one replacement in a 1,024-edge chain; complete witness checking visits all
+1,024 edges. The construction is an established finite-monoid dynamic word
+problem (Frandsen et al. 1997; Amarilli et al. 2021), not a novel complexity bound.
+The manuscript also cites CUDD relational products and Schreiber et al. 2026
+for distributed incremental proof checking. Standard reuse principles are not
+presented as new results.
+
+The live archive retains all 3,195 previous results, 903 proofs, and other old
+rows. New revalidation/audit adds 355 answers and 129 proofs, for 3,550 total
+results and 1,032 proofs. All 63 historical experiment files are unchanged.
+The reports are in `experiments/results/followup/`; previous studies stay intact.

@@ -368,7 +368,7 @@ theorem for arbitrary previous graphs. Native verified-core state is replayed
 from checked certificates after restart; JSON/state bookkeeping still needs an
 end-to-end refinement theorem. No whole-service bit-machine bound is claimed.
 
-The full build now audits **1,650 declarations / 879 theorem declarations**.
+The scaling milestone audited **1,650 declarations / 879 theorem declarations**.
 
 The balanced-chain follow-up adds `BalancedChain.lean` and `ChainProtocol.lean`:
 exact four-entry Boolean composition, associativity, identity padding, balanced
@@ -381,3 +381,5 @@ The cost theorem is for tree operations, not all Python/SQLite/IPC work. The
 fragment protocol's external session orchestration remains outside a complete
 kernel-verified refinement. The transitive audit still rejects admits and custom
 axioms.
+
+The current full build audits **1,828 declarations / 941 theorem declarations**.

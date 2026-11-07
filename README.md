@@ -245,8 +245,8 @@ The solver now supports affected-bucket updates, direct bounded BDD operations,
 live graph/proof reuse, checked negative-core transfer, logical archive caps and
 measured full-query route selection. All historical results remain persistent.
 The [scaling study](experiments/results/scaling/README.md) records 1,470 correct
-answers, including 672 UNSAT, across 147 runs. **106 tests pass**; the Lean audit
-checks **879 theorem declarations**. The [formal notes](formal/README.md) state
+answers, including 672 UNSAT, across 147 runs. The earlier milestone passed 106 tests and
+audited 879 theorem declarations. The [formal notes](formal/README.md) state
 conditional resource bounds and the remaining refinement obligations.
 
 Reuse reduces selected acquisition/planning costs, but checked solving remains
@@ -254,3 +254,21 @@ faster on several measured streams. Direct symbolic compression does not give a
 polynomial bound on arbitrary intermediate diagrams. Logical database limits do
 not bound whole-process memory; capacity exhaustion preserves history and stops
 acquisition. The unrestricted polynomial SAT argument remains open.
+
+
+## Durable reuse and balanced-chain follow-up
+
+The latest implementation adds durable batches, persistent bucket maps, balanced
+chain summaries, fused symbolic projection, individually checked proof fragments,
+and structural routing with reserved fallback time. **114 tests pass**; Lean
+checks **941 theorem declarations**. The explicit chain API uses ten compositions
+and eleven node writes for a replacement at 1,024 edges. Whole witnesses and
+service costs are accounted separately.
+
+The [new study](experiments/results/followup/README.md) records 2,259 correct
+answers and 30 archive-cap errors across 210 runs, including selected TACAS 2026
+artifact inputs and a held-out counter. It preserves failures, resource samples,
+and every older dataset. The live archive retains all historical rows and now
+contains 3,550 results and 1,032 proofs. The [gap register](research/implementation-gaps.md)
+and revised manuscript distinguish these implementation results from the open
+unrestricted width, representation, acquisition and full-machine obligations.

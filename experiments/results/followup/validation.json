@@ -1,0 +1,54 @@
+{
+  "tests": {
+    "command": "python3 -m unittest discover -s solver -p 'test_*.py' -q",
+    "passed": 114,
+    "log_sha256": "96982231b5e52f414c1a2df09c4b20410f0c48ef2833a5af43361aad66411a15"
+  },
+  "lean": {
+    "command": "lake build OracleMachines oracleSolver",
+    "toolchain": "leanprover/lean4:v4.24.0",
+    "passed": true,
+    "audited_declarations": 1828,
+    "audited_theorem_declarations": 941,
+    "log_sha256": "744ca1fae84fd14d3f0486b1dd90c255dd16ed3cb83dd9ea3261928b0ea2dba9"
+  },
+  "benchmark": {
+    "runs": 210,
+    "attempts": 2289,
+    "correct": 2259,
+    "correct_unsat": 1188,
+    "statuses": {
+      "ok": 2259,
+      "error": 30
+    },
+    "missing_records": 0,
+    "nonzero_worker_exits": 0,
+    "all_61_measured_fingerprints_match": true,
+    "chain_answers": 144,
+    "chain_answers_correct": true
+  },
+  "limits": [
+    "Sampled process-tree RSS is not a hard memory bound.",
+    "Tree operation ledgers do not verify Python/SQLite/IPC costs.",
+    "Fragment soundness does not prove complete external session refinement.",
+    "No unrestricted polynomial SAT guarantee."
+  ],
+  "manuscript": {
+    "pages": 49,
+    "pdflatex_passes": 2,
+    "warnings": 0,
+    "previous_proof_blocks_preserved": 28,
+    "total_proof_blocks": 29,
+    "tex_sha256": "742a222de3fbd43095dfc27f76f823ab53f3813f9ff3cbb51562b727dd5beb62",
+    "pdf_sha256": "2dad08c7d783c0b8e1c81c17f8cac672926e06b3f7943143432226b83665c924",
+    "rendered_pages": 49,
+    "detailed_visual_review_pages": [
+      23,
+      40,
+      41,
+      42,
+      48,
+      49
+    ]
+  }
+}

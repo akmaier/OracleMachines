@@ -416,7 +416,7 @@ python3 solver/persistent.py --adaptive --max-archive-bytes 8388608 serve
 ```
 
 `--adaptive` applies to full-input solve requests. It samples checked/interface
-routes by input-length bucket, uses prior measured mean query durations, and
+routes by a feature bucket (described below), uses prior measured mean query durations, and
 periodically explores. Only the chosen route runs. Selection and observation
 persistence have separate elapsed phases; the learning target includes solving,
 checking and answer persistence but excludes the observation's own write and
@@ -430,7 +430,7 @@ A matching archived incremental refutation is checked once after restart, then
 reused only after checking its conjunct relation to each new formula. Native
 facts are not restored from an unchecked flag. The standalone `conjunct`
 certificate contains the base formula and original proof; it remains auditable.
-Generic per-clause verification reuse is still open.
+The later fragment implementation below additionally reuses individual clause checks.
 
 `--max-archive-bytes` sets SQLite's logical main-database page limit. At capacity,
 acquisition returns a resource error and retains all committed history. It never

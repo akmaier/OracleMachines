@@ -309,3 +309,14 @@ transport often shrink while total interface overhead remains visible. All
 negative proof-mode queries use accepted incremental LRAT. The complete archive
 can still be larger than checked solving. Run `experiments/run_interfaces.py`
 with a new output directory; do not overwrite any historical study.
+
+
+## Durable reuse, balanced chains, and checked fragments
+
+The [six-task follow-up](results/followup/README.md) contains 210 runs, all 2,289
+query attempts, 2,259 correct answers, and 30 retained archive-cap errors. It
+adds selected current artifact inputs, a held-out synchronous counter,
+process-tree/scratch samples, chain-update counters and symbolic microstudies.
+The report explains partial stream times, API differences, source hashes,
+reproduction commands and the limits of sampled memory. No earlier study is
+replaced. All previous live archive rows and 63 historical files are preserved.

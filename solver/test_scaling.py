@@ -4,12 +4,14 @@ import random
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from solver.persistent import PersistentSolver
 from solver.resources import Deadline, BudgetExceeded
 from solver.symbolic import BDD
 from solver.test_fast import cnf_bits
 from solver.test_interfaces import var, neg, disj, xor, chain
+from solver.test_fast import HARD_UNSAT, MIXED, conj
 
 
 class SymbolicTests(unittest.TestCase):
@@ -128,6 +130,53 @@ class ScalingTests(unittest.TestCase):
             result = s.expand(add={'c':disj(var(0),var(1))})
             self.assertTrue(result['answer'])
             self.assertGreater(result['interfaces']['symbolic_fallbacks'],0)
+
+    def test_verified_core_reuses_live_state_and_revalidates_after_restart(self):
+        with PersistentSolver(self.path, backend='cadical', incremental_proofs=True) as s:
+            first = s.solve(HARD_UNSAT, learn=False)
+            self.assertEqual(first['incremental']['history_recompiled'], 0)
+            with patch.object(s.incremental, 'propose', side_effect=AssertionError('Fresh proposal')):
+                second = s.solve(conj(HARD_UNSAT, MIXED), learn=False)
+            self.assertFalse(second['answer'])
+            self.assertEqual(second['backend'], 'incremental_core')
+            self.assertFalse(second['incremental']['core_revalidated'])
+        with PersistentSolver(self.path, backend='cadical', incremental_proofs=True) as s:
+            with patch.object(s.incremental, 'propose', side_effect=AssertionError('Fresh proposal')):
+                third = s.solve(conj(HARD_UNSAT, var(8)), learn=False)
+            self.assertFalse(third['answer'])
+            self.assertTrue(third['incremental']['core_revalidated'])
+            self.assertTrue(s.solve(MIXED, learn=False)['answer'])
+            self.assertEqual(s.audit()['checked'], 4)
+
+    def test_adaptive_routing_persists_measurements_and_charges_overhead(self):
+        with PersistentSolver(self.path, adaptive=True, reuse_exact=False) as s:
+            routes = []
+            for _ in range(5):
+                result = s.solve(MIXED, learn=False)
+                self.assertTrue(result['answer'])
+                self.assertEqual(sum(result['phase_ns'].values()), result['wall_ns'])
+                self.assertIn('routing_selection', result['phase_ns'])
+                self.assertIn('routing_observation', result['phase_ns'])
+                routes.append(result['routing']['route'])
+            self.assertEqual(routes[:2], ['checked', 'interfaces'])
+        with PersistentSolver(self.path, adaptive=True, reuse_exact=False) as s:
+            result = s.solve(MIXED, learn=False)
+            self.assertEqual(result['routing']['observations'], 5)
+            self.assertEqual(s.db.execute('SELECT count(*) FROM route_observations').fetchone()[0],6)
+
+    def test_archive_cap_preserves_history_and_never_means_unsat(self):
+        with PersistentSolver(self.path) as s:
+            s.solve(MIXED, learn=False)
+            before = [tuple(r) for r in s.db.execute('SELECT * FROM results')]
+            cap = s.archive_usage()['logical_database_bytes'] + 4096
+        with PersistentSolver(self.path, max_archive_bytes=cap) as s:
+            with self.assertRaises(BudgetExceeded):s.solve(var(12000), learn=False)
+            self.assertEqual([tuple(r) for r in s.db.execute('SELECT * FROM results')], before)
+            self.assertTrue(s.solve(MIXED, learn=False)['answer'])
+            self.assertLessEqual(s.archive_usage()['logical_database_bytes'], cap)
+            self.assertFalse(s.archive_usage()['physical_storage_hard_bound'])
+        with self.assertRaises(ValueError):PersistentSolver(self.path, max_archive_bytes=4096)
+        with PersistentSolver(self.path) as s:self.assertEqual(s.audit()['checked'],1)
 
 
 if __name__ == '__main__':unittest.main()

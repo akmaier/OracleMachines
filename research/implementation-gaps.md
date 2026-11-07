@@ -204,3 +204,25 @@ small-scope row-cache capacity and worst-case diagram growth are still charged.
 Twenty-eight interface/scaling tests pass at this milestone, including exhaustive
 small-formula comparisons, random edits, archived branching, poisoned symbolic
 proposals, caps and an 80-variable parity diagram built without table rows.
+
+The next milestone adds live incremental-LRAT checking against the existing
+native graph, plus session-verified negative cores. A selected archived core is
+rechecked once after restart; subsequent conjunct extensions reuse the checked
+native fact. Removing a required conjunct fails the transfer check. General
+per-clause verification reuse and zero-cost restart are not established.
+
+`--max-archive-bytes` limits logical SQLite pages and refuses further acquisition
+at capacity, preserving all committed history. WAL/temporary files and total
+process memory are separately reported, not claimed bounded by that option.
+`--adaptive` selects between checked and interface solving from prior measured
+complete-query durations, persists observations, and charges selection/update
+work. This is an empirical policy, not a universal speedup guarantee.
+
+`Scaling.lean` checks symbolic restriction/conjunction/projection semantics on a
+reference tree, conjunct-refutation transfer, a depth/fanout affected-node
+envelope, conditional polynomial update costs, cumulative work/archive bounds,
+and the fixed-capacity obstruction for positive archive increments. The common
+polynomial bounds on affected work, representation capacity, per-row work and
+all overhead remain explicit hypotheses. The full audit now checks 1,650
+declarations / 879 theorem declarations. The ROBDD optimizer and native protocol
+state are still outside an end-to-end kernel theorem.

@@ -94,6 +94,14 @@ def incrementalPrepare (graph : Std.Sat.AIG Nat) (request : Json) :
     ("width", toJson f.width), ("nodes", toJson entry.aig.decls.size)])
 
 def certificateValid (f : Formula) (certificate : Json) : Except String Bool := do
+  if (certificate.getObjValAs? String "format").toOption == some "conjunct" then
+    let base ← certificate.getObjValAs? String "bits" >>= parseFormulaBits
+    if !formulaIsConjunct f base then return false
+    let proof ← certificate.getObjVal? "proof"
+    -- One wrapper only. The stored proof remains independently replayable.
+    if (proof.getObjValAs? String "format").toOption == some "incremental_lrat" then
+      return ← incrementalCertificateValid base proof
+    else return ← baseCertificateValid base proof
   if (certificate.getObjValAs? String "format").toOption == some "incremental_lrat" then
     return ← incrementalCertificateValid f certificate
   if (certificate.getObjValAs? String "format").toOption == some "factor_dag" then
@@ -114,6 +122,18 @@ def certificateValid (f : Formula) (certificate : Json) : Except String Bool := 
   let proof ← certificate.getObjVal? "proof"
   -- Only a base certificate is allowed: wrappers cannot recursively expand.
   return ← baseCertificateValid base proof
+
+/-- A live graph is already reconstructed by incremental_prepare. Soundness of
+checkIncrementalLRAT holds for every previous graph; no history string is trusted.
+Only accepted refutations enter the native session's reusable negative store. -/
+def verifyLiveIncremental (graph : Std.Sat.AIG Nat) (request : Json) : Except String (Formula × Json) := do
+  let bits ← request.getObjValAs? String "bits" >>= parseBits
+  let parsed := decodeRun bits
+  let some f := parsed.1 | throw "Invalid formula encoding"
+  let text ← request.getObjValAs? String "text"
+  let proof ← Std.Tactic.BVDecide.LRAT.parseLRATProof text.toUTF8
+  return (f, Json.mkObj [("valid", toJson (checkIncrementalLRAT f graph proof)),
+    ("parse_work", toJson parsed.2), ("history_recompiled", toJson (0 : Nat))])
 
 /-- Modern preprocessing and LRAT checking have no complete abstract cost ledger. -/
 def fastRespond (f : Formula) (parseWork : Nat) (request : Json) : Except String Json := do
@@ -219,6 +239,7 @@ def main : IO Unit := do
   let mut bindings : FactorBindings := {}
   let mut rows : FactorRowStore := {}
   let mut graph : Std.Sat.AIG Nat := Std.Sat.AIG.empty
+  let mut negatives : Std.HashMap String Formula := {}
   repeat
     let line ← stdin.getLine
     if line.isEmpty then break
@@ -227,7 +248,41 @@ def main : IO Unit := do
       | .error e => pure (.error e)
       | .ok request =>
         let mode := (request.getObjValAs? String "mode").toOption.getD ""
-        if mode == "incremental_prepare" then
+        if mode == "negative_reuse" then
+          pure do
+            let name ← request.getObjValAs? String "id"
+            let bits ← request.getObjValAs? String "bits" >>= parseBits
+            let parsed := decodeRun bits
+            let some f := parsed.1 | throw "Invalid formula encoding"
+            let valid := (negatives[name]?).any (formulaIsConjunct f)
+            return Json.mkObj [("valid", toJson valid), ("known", toJson (negatives.contains name)),
+              ("parse_work", toJson parsed.2)]
+        else if mode == "negative_register" then
+          let checked := do
+            let name ← request.getObjValAs? String "id"
+            let f ← request.getObjValAs? String "bits" >>= parseFormulaBits
+            let certificate ← request.getObjVal? "certificate"
+            if let some old := negatives[name]? then
+              if old != f then throw "Negative identity reused with different formula"
+              return (name, f, true)
+            return (name, f, ← certificateValid f certificate)
+          match checked with
+          | .error e => pure (.error e)
+          | .ok (name, f, valid) =>
+            if valid then
+              if negatives.size ≥ 64 then negatives := {}
+              negatives := negatives.insert name f
+            pure (.ok (Json.mkObj [("valid", toJson valid)]))
+        else if mode == "incremental_verify" then
+          match verifyLiveIncremental graph request with
+          | .error e => pure (.error e)
+          | .ok (f, response) =>
+            if (response.getObjValAs? Bool "valid").toOption == some true then
+              if let some name := (request.getObjValAs? String "id").toOption then
+                if negatives.size ≥ 64 then negatives := {}
+                negatives := negatives.insert name f
+            pure (.ok response)
+        else if mode == "incremental_prepare" then
           match incrementalPrepare graph request with
           | .error e => pure (.error e)
           | .ok (state, response) => graph := state; pure (.ok response)

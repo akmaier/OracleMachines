@@ -5,6 +5,7 @@ restarts; a negative certificate contains its entire reachable proof, plus the
 formulas needed to reconstruct the shared graph. Unsupported trace events cause
 a checked fallback. Archived clauses are never accepted as axioms by the checker.
 """
+import hashlib
 import json
 import subprocess
 
@@ -44,6 +45,46 @@ class ProofIncremental:
         stop_process(self.process);self.process=None;self.worker=None;self.loaded=False
         self.restored_nodes=self.restored_clauses=0
         self.history=[];self.steps=[];self.local={};self.sent=set();self.by_clause={}
+
+    def core_id(self,bits):
+        return hashlib.sha256(bits.encode()).hexdigest()
+
+    def reuse_checked(self,bits):
+        """Native-session refutations survive query changes, never assumptions.
+
+        After restart a selected archived proof is checked once before reuse.
+        The bounded syntactic filter is only a proposal; the native checker
+        establishes that the refuted formula is a conjunct of the new query.
+        """
+        rows=self.service.db.execute("SELECT * FROM proofs WHERE engine=? ORDER BY rowid DESC LIMIT 8",
+            (self.service.engine_id,)).fetchall()
+        parse_work=0
+        for row in rows:
+            self.service._check_deadline()
+            if row['bits'] not in bits:continue
+            certificate=self.service._validate_proof(row)
+            if not isinstance(certificate,dict) or certificate.get('format')!='incremental_lrat':continue
+            token=self.core_id(row['bits'])
+            request=dict(mode='negative_reuse',id=token,bits=bits)
+            checked=self.service._request(request);parse_work+=checked['parse_work']
+            replayed=False
+            if not checked['known']:
+                registered=self.service._request(dict(mode='negative_register',id=token,
+                    bits=row['bits'],certificate=certificate))
+                if not registered['valid']:raise ValueError('Archived negative core rejected')
+                checked=self.service._request(request);parse_work+=checked['parse_work'];replayed=True
+            if checked['valid']:
+                return dict(answer=False,witness=None,certificate=dict(format='conjunct',bits=row['bits'],proof=certificate),
+                    fast=True,reuse_kind='refutation',backend='incremental_core',nodes=None,core_work=None,
+                    parse_work=parse_work,counted_work=None,counted_complete=False,
+                    incremental=dict(checked_core_reuse=True,core_revalidated=replayed))
+        return None
+
+    def verify_live(self,bits,certificate):
+        # A reset/dead worker requires full standalone replay instead.
+        if self.worker is not self.service.process or self.worker is None or self.worker.poll() is not None:
+            return self.service._request(dict(mode='verify_certificate',bits=bits,certificate=certificate))
+        return self.service._request(dict(mode='incremental_verify',bits=bits,text=certificate['text'],id=self.core_id(bits)))
 
     def load(self,deadline):
         if self.loaded and self.worker is self.service.process and self.worker is not None and self.worker.poll() is None:return

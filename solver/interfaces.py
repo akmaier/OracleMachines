@@ -99,6 +99,7 @@ class InterfaceSolver:
             with self.service._phase('interface_storage'),self.db:
                 obj=self.store.put('symbolic_relation',self.bdd.dump(root))[0]
                 self.db.execute('INSERT OR IGNORE INTO interface_symbolic VALUES (?,?,?)',(self.engine,token,obj))
+        if len(self.symbolic_roots)>=self.active_nodes:self.symbolic_roots.clear()
         self.symbolic_roots[token]=root
         return root
 

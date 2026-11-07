@@ -32,6 +32,7 @@ from solver.learning import Predictor, features
 from solver.knowledge_store import KnowledgeStore
 from solver.components import ComponentSolver
 from solver.interfaces import InterfaceSolver
+from solver.routing import Router
 DEFAULT_ENGINE = ROOT / "formal/.lake/build/bin/oracleSolver"
 DEFAULT_CACHE = ROOT / "solver/.cache/results.sqlite3"
 PORTFOLIO_SIZE = 4
@@ -78,7 +79,8 @@ class PersistentSolver:
                  query_timeout: float = 30, verify_cache: bool = False,
                  incremental: bool = False, incremental_proofs: bool = False, learned: bool = False, reuse_exact: bool = True,
                  components: bool = False, interfaces: bool = False, max_interface: int = 3,
-                 symbolic: bool = False,
+                 symbolic: bool = False, adaptive: bool = False,
+                 max_archive_bytes: int | None = None,
                  max_input_bytes: int = 8 * 1024**2, max_message_bytes: int = 64 * 1024**2,
                  max_proof_bytes: int = 16 * 1024**2):
         start = time.perf_counter_ns()
@@ -95,6 +97,8 @@ class PersistentSolver:
         self.query_timeout, self.verify_cache = query_timeout, verify_cache
         self.max_input_bytes, self.max_message_bytes, self.max_proof_bytes = max_input_bytes, max_message_bytes, max_proof_bytes
         self._deadline = self._ledger = None
+        self._route_decision = None
+        self.max_archive_bytes = max_archive_bytes
         self.last_metrics = {}
         self.use_learning = learned
         self.reuse_exact = reuse_exact
@@ -112,6 +116,13 @@ class PersistentSolver:
         self.db.row_factory = sqlite3.Row
         self.db.execute("PRAGMA journal_mode=WAL")
         self.db.execute("PRAGMA synchronous=FULL")
+        if max_archive_bytes is not None:
+            page_size = self.db.execute("PRAGMA page_size").fetchone()[0]
+            page_count = self.db.execute("PRAGMA page_count").fetchone()[0]
+            if type(max_archive_bytes) is not int or max_archive_bytes < page_size * max(1, page_count):
+                self.db.close()
+                raise ValueError("Archive cap is smaller than the existing database; history was retained")
+            self.db.execute("PRAGMA max_page_count=" + str(max_archive_bytes // page_size))
         try:
             with self.db:
                 # Serialize migrations as well as ordinary writes.
@@ -154,12 +165,16 @@ class PersistentSolver:
                             ON p.engine=r.engine AND p.bits=r.bits WHERE r.answer=0""").fetchall():
                         self._index_candidate(row["engine"], "proof", row["bits"], row["certificate"], row["created_ns"])
                 KnowledgeStore.create(self.db)
+                Router.create(self.db)
                 self.db.execute("PRAGMA user_version=8")
         except Exception:
             self.db.close()
             raise
         self.process: subprocess.Popen | None = None
-        self.interfaces = InterfaceSolver(self, max_interface, symbolic=symbolic) if interfaces or symbolic else None
+        self.interfaces = InterfaceSolver(self, max_interface, symbolic=symbolic) if interfaces or symbolic or adaptive else None
+        routing_namespace = self.engine_id + ":routes-v1:" + json.dumps(
+            [backend, symbolic, max_interface, components, incremental, incremental_proofs], separators=(",", ":"))
+        self.router = Router(self.db, routing_namespace) if adaptive and backend != "lean" else None
         self.components = ComponentSolver(self.db, self.engine_id) if components else None
         if self.incremental:
             bridge = hashlib.sha256(DEFAULT_INCREMENTAL.read_bytes()).hexdigest()
@@ -312,7 +327,7 @@ class PersistentSolver:
     def _fast_live(self, bits: str, candidates=None, proofs=None, *, allow_components=True,
                    allow_incremental=True, allow_interfaces=True) -> dict:
         interface_fallback = None
-        if self.interfaces is not None and allow_interfaces:
+        if self.interfaces is not None and allow_interfaces and (self._route_decision is None or self._route_decision["route"] == "interfaces"):
             result, reason, metrics = self.interfaces.solve(bits)
             if result is not None:
                 return result
@@ -334,6 +349,12 @@ class PersistentSolver:
             return r
         incremental_metrics = None
         if self.incremental is not None and allow_incremental:
+            if isinstance(self.incremental, ProofIncremental):
+                with self._phase("incremental_core_reuse"):
+                    reused=self.incremental.reuse_checked(bits)
+                if reused is not None:
+                    reused["parse_work"]+=r["parse_work"]
+                    return reused
             with self._phase("incremental_solver"):
                 proposal = self.incremental.propose(bits, self._deadline or Deadline(self.query_timeout))
             incremental_metrics = {k: v for k, v in proposal.items() if k not in ("witness", "values", "certificate", "proof_events")}
@@ -350,8 +371,9 @@ class PersistentSolver:
                 certificate=proposal["certificate"]
                 if len(json.dumps(certificate).encode())<=self.max_proof_bytes:
                     with self._phase("incremental_proof_verification"):
-                        checked=self._request(dict(bits=bits,mode="verify_certificate",certificate=certificate))
+                        checked=self.incremental.verify_live(bits,certificate) if isinstance(self.incremental, ProofIncremental) else self._request(dict(bits=bits,mode="verify_certificate",certificate=certificate))
                     incremental_metrics["proof_accepted"]=checked["valid"]
+                    incremental_metrics["history_recompiled"]=checked.get("history_recompiled")
                     if checked["valid"]:
                         return dict(answer=False,witness=None,certificate=certificate,fast=False,
                             reuse_kind="none",backend="incremental_lrat",nodes=None,core_work=None,
@@ -426,19 +448,46 @@ class PersistentSolver:
         if self._ledger is not None:
             raise RuntimeError("Concurrent requests need separate PersistentSolver instances")
         self._ledger, self._deadline = Ledger(), Deadline(self.query_timeout)
+        self._route_decision = None
         try:
             self._database_budget()
             self.db.set_progress_handler(lambda: int(time.monotonic() >= self._deadline.end), 1000)
             result = self._solve_impl(bits, learn=learn)
+            if self._route_decision is not None:
+                elapsed = time.perf_counter_ns() - self._ledger.start
+                with self._phase("routing_observation"):
+                    self.router.observe(self._route_decision, elapsed, True)
+                result["routing"] = dict(self._route_decision, observed_ns=elapsed)
+            with self._phase("storage_accounting"):
+                result["storage"] = self.archive_usage()
             self.last_metrics = self._ledger.finish()
             result.update(self.last_metrics)
             return result
-        except BaseException:
+        except BaseException as error:
+            if self._route_decision is not None:
+                try:
+                    with self._phase("routing_observation"):
+                        self.router.observe(self._route_decision, time.perf_counter_ns()-self._ledger.start, False)
+                except (sqlite3.Error, BudgetExceeded):
+                    pass
             self.last_metrics = self._ledger.finish()
+            if isinstance(error, sqlite3.Error) and getattr(error,"sqlite_errorcode",None)==sqlite3.SQLITE_FULL:
+                raise BudgetExceeded("Archive page cap reached; committed history retained; no new verdict returned") from error
             raise
         finally:
             self.db.set_progress_handler(None, 0)
             self._deadline = self._ledger = None
+            self._route_decision = None
+
+    def archive_usage(self):
+        pages=self.db.execute("PRAGMA page_count").fetchone()[0]
+        size=self.db.execute("PRAGMA page_size").fetchone()[0]
+        free=self.db.execute("PRAGMA freelist_count").fetchone()[0]
+        wal=Path(str(self.cache)+"-wal")
+        return dict(database_pages=pages,page_bytes=size,logical_database_bytes=pages*size,
+            free_pages=free,configured_page_cap_bytes=None if self.max_archive_bytes is None else self.max_archive_bytes//size*size,
+            database_file_bytes=self.cache.stat().st_size,wal_bytes=wal.stat().st_size if wal.exists() else 0,
+            physical_storage_hard_bound=False,whole_process_memory_bound=False)
 
     def _database_budget(self):
         self.db.execute("PRAGMA busy_timeout=" + str(max(1, int(self._remaining() * 1000))))
@@ -501,6 +550,9 @@ class PersistentSolver:
                     predicted = predictor.predict(observed)
                     candidates = [predicted] + [c for c in candidates if c != predicted][:PORTFOLIO_SIZE - 1]
         self._check_deadline()
+        if self.router is not None:
+            with self._phase("routing_selection"):
+                self._route_decision = self.router.choose(bits)
         if self.backend == "lean":
             result = self._live(bits, candidates=candidates, proofs=[p for p in proofs if not isinstance(p, dict)],
                                 mode="hybrid" if learn else "baseline")
@@ -573,11 +625,15 @@ class PersistentSolver:
             self._database_budget()
             self.db.set_progress_handler(lambda: int(time.monotonic() >= self._deadline.end), 1000)
             result = self.interfaces.expand(base, {} if add is None else add, [] if remove is None else remove)
+            with self._phase("storage_accounting"):
+                result["storage"] = self.archive_usage()
             self.last_metrics = self._ledger.finish()
             result.update(self.last_metrics)
             return result
-        except BaseException:
+        except BaseException as error:
             self.last_metrics = self._ledger.finish()
+            if isinstance(error, sqlite3.Error) and getattr(error,"sqlite_errorcode",None)==sqlite3.SQLITE_FULL:
+                raise BudgetExceeded("Archive page cap reached; committed history retained; no new verdict returned") from error
             raise
         finally:
             self.db.set_progress_handler(None, 0)
@@ -646,6 +702,8 @@ def main() -> int:
     parser.add_argument("--components", action="store_true", help="Reuse renamed disjoint components and checked conjunct refutations")
     parser.add_argument("--interfaces", action="store_true", help="Use checked local-interface elimination and delta expansion")
     parser.add_argument("--max-interface", type=int, default=3)
+    parser.add_argument("--adaptive", action="store_true", help="Select checked or interface solving from measured complete-query times")
+    parser.add_argument("--max-archive-bytes", type=int, help="Bound logical SQLite pages; stop acquisition at capacity and preserve all history")
     parser.add_argument("--symbolic", action="store_true", help="Build bounded BDD proposals directly from syntax and projections; implies interfaces")
     sub = parser.add_subparsers(dest="command", required=True)
     solve = sub.add_parser("solve")
@@ -660,7 +718,7 @@ def main() -> int:
         with PersistentSolver(args.cache, args.engine, backend=args.backend, cadical=args.cadical,
                               timeout=args.timeout, query_timeout=args.query_timeout,
                               verify_cache=args.verify_cache, max_proof_bytes=args.max_proof_bytes,
-                              incremental=args.incremental, incremental_proofs=args.incremental_proofs, learned=args.learned, components=args.components, interfaces=args.interfaces, max_interface=args.max_interface, symbolic=args.symbolic) as solver:
+                              incremental=args.incremental, incremental_proofs=args.incremental_proofs, learned=args.learned, components=args.components, interfaces=args.interfaces, max_interface=args.max_interface, symbolic=args.symbolic, adaptive=args.adaptive, max_archive_bytes=args.max_archive_bytes) as solver:
             if args.command == "serve":
                 for line in sys.stdin:
                     try:

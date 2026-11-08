@@ -1132,3 +1132,20 @@ integer encoding, archive protocol and resource costs remain outside these Lean
 semantic proofs. See the
 [affected-repair comparison](../experiments/results/cnf-affected-history/README.md)
 for gains, index overhead and cases still requiring fallback.
+
+## Checked simultaneous model repair
+
+`joint_repair_preserves` and `joint_repair_extension` in `Residuals.lean` allow
+an arbitrary set of variables to change together. The updated assignment must
+agree with the parent outside that set, satisfy every old clause touching it,
+and satisfy the added clause. The proof retains an old satisfying literal for
+unaffected clauses. Intermediate scalar assignments need not be models.
+
+The audit now passes **4,083 declarations / 1,943 theorem declarations**, and all
+255 Python tests pass. The separate Python implementation aggregates exact
+count differences over affected postings before checking positivity, proposing
+changes from complementary binary pairs in the base. The generic protection
+theorems do not verify that discovery, the count formula's implementation,
+persistent indexes, parsing, SQL or runtime bounds. The
+[joint-repair comparison](../experiments/results/cnf-equivalence-history/README.md)
+retains signed/coupled controls, old versions, failed discovery and budget limits.

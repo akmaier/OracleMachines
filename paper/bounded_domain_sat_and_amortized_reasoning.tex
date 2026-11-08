@@ -2387,6 +2387,41 @@ The matched experiment retains 35 source histories, 7,230 correct acquisition/up
 
 The retained costs restrict the conclusion. In the size-16 case, index preparation grows from 28.06 to 46.85 ms and cold final query from 14.29 to 38.94 ms. For already-compatible updates, peak traced allocation grows from 249,217 to 473,849 bytes. A single change occurring in 4,096 old clauses avoids a new acquisition but raises total operation time from 109.99 to 125.48 ms because preparation dominates. For sparse identifiers near $2^{1024}$, peak traced allocation grows from 2,570,688 to 4,948,888 bytes; cold replay also increases. A budgeted control and a coordinated-flip example still require ordinary solving. Thus avoiding solver calls is not by itself a sufficient cost objective. Selective index construction and cheaper affected-state maintenance are the next opportunities. All 439 preceding benchmark archives replay without new expansion or changed rows; the initial concurrent screening run is preserved separately from the timing comparison.
 
+\subsection{Simultaneous repairs from equivalence blocks}
+\label{sec:joint-repair}
+
+The preceding failure under $x\leftrightarrow y$ identifies a limitation of the move, rather than of witness reuse. Let us change several variables together and check their final effect. The essential distinction is that an intermediate assignment may violate an old clause even when the final assignment satisfies it.
+
+\begin{proposition}[A simultaneous repair checked by clause counts]
+\label{prop:joint-repair}
+Let $a$ satisfy a CNF $F$, let $Q$ be a finite set of distinct variables, and obtain $a'$ by complementing exactly the variables in $Q$. For each $x\in Q$, let $\ell_x$ be the literal on $x$ that $a'$ makes true. If $s_C$ counts the distinct signed literals true under $a$ in an old clause $C$, then
+\[
+s'_C=s_C+\sum_{x\in Q}\left(
+\mathbf{1}_{\{\ell_x\in C\}}-\mathbf{1}_{\{\neg\ell_x\in C\}}\right)
+\]
+counts those true under $a'$. Consequently, $a'$ satisfies $F\land D$ exactly when every old clause has $s'_C>0$ and $a'$ satisfies the added clause $D$. Clauses containing no variable of $Q$ keep their old counts.
+\end{proposition}
+
+\begin{proof}
+For each changed variable, its previously false literal becomes true and its opposite becomes false. Distinct variables affect disjoint signed literals, so their contributions add. Unchanged variables contribute zero. Testing the sum therefore tests the final assignment directly; positivity of intermediate sums is unnecessary. A clause holds exactly when at least one distinct literal is true. Applying this fact to every old clause and separately to $D$ gives the equivalence.
+\end{proof}
+
+The new research implementation proposes such changes from explicit binary relations in the base. A pair $(p\lor q)\land(\neg p\lor\neg q)$ forces the truth values of literals $p$ and $q$ to differ. Complementing both underlying variables preserves that relation. Thus, complementing all variables in a connected block of these pairs preserves every defining pair, including signed equalities and inequalities. This observation does not preserve arbitrary surrounding constraints. The independent checker still aggregates changes for every affected clause, including earlier additions and external couplings, before accepting the repair.
+
+Recognition is lazy. After a failed scalar repair, the implementation scans the exact base, finds complementary binary pairs, groups their variables and caches the resulting blocks. Conjunctive additions preserve these base relations, but may prevent a block from changing. Equivalences introduced only by additions and longer implication cycles without explicit pairs are not recognized. A record supplies the exact added clause and a sorted list of distinct changed variables. It supplies no trusted block identity, count or affected-clause list. Cold replay reconstructs the full parent indexes and checks the final move independently of discovery. Lean proves the corresponding semantic preservation and extension rules: changed assignments agree outside the chosen set, and all clauses touching it satisfy the final assignment. The count formula, Python indexes, recognizer and SQL remain outside that refinement boundary.
+
+Write $q=|Q|$, let $R$ be the sum of the changed variables' occurrence-list lengths, and let $A$ count distinct affected clauses. The checker visits $R$ postings and aggregates them in an $O(A)$ temporary map. With an addition of $d$ literal occurrences, identifiers of at most $b$ bits and $m$ old clauses, accepted checking and index maintenance use
+\[
+O\bigl((d+q)b+(A+1)\log(m+2)+R\bigr)
+\]
+trie-node and literal operations, apart from hash-map work, arithmetic, allocation, serialization and SQL. New retained paths are bounded by $O((d+q)b+(A+1)\log(m+2))$, with at most $d$ new postings and a constant number of roots. Candidate discovery is additional: the default budget counts 4,096 variable/posting visits after scalar attempts. Base recognition, integer bit operations and trie paths are separate charges. Recognition scans the base once per cached index and sorts its blocks; after a restart it runs again when needed. The durable move list still stores $q$ identifiers. There is no one-bit group assignment or constant-cost block update. Defining equivalence clauses have zero net count change, so they require no count-map writes, but their postings are still visited.
+
+The matched comparison retains 23 histories and 46 archives. It removes all 120 unsigned-chain fallback acquisitions and another 32 signed-chain fallbacks. On 32 blocks of 32 variables, summed acquisition and update time falls from 2.46892 to 0.06676 seconds. Logical payload falls from 3,792,631 to 98,663 bytes, SQLite size from 6,668,288 to 204,800 bytes, and retained bases from 33 to one. Separate tracing measures peak Python allocations of 45,575,163 versus 1,925,402 bytes, excluding native SQLite and process RSS. The last update changes 32 variables, visits 124 postings during discovery and again during independent checking, allocates 342 trie nodes and invokes no solver. Initial preparation remains comparable, at 47.42 versus 45.55 ms. These are single synthetic measurements, not a competitive general SAT benchmark.
+
+The costs and failures remain visible. Cold final query increases from 40.88 to 44.42 ms. Repeating the last known update from its parent after a restart takes 88.32 versus 45.98 ms, including resumed recognition; both archives already contain that result. Compatible additions and successful scalar repairs do not construct the new block index. A 1,024-variable block exceeds the default proposal budget and still falls back. Newly introduced equalities, nonpaired implication cycles, parity moves and matching swaps also remain unsupported by discovery. In the 32-block, four-choice matching control, both methods retain 33 bases and 2,267,324 logical bytes; the new path takes 1.002 seconds versus 0.934 seconds because recognition can add work without finding a useful move. This motivates a matching-specific proposal procedure through the same joint checker. It does not supply that procedure or a uniformly polynomial method for arbitrary CNF.
+
+All 1,144 historical versions and 869 residuals in the new archives replay with unchanged database bytes, as do 82 earlier archives. The initial comparison is retained separately because its signed additions already satisfied the chosen base model; the corrected control explicitly forces signed repairs. Repeated changes, external couplings, contradictions, exact count reconstruction and forged records are covered by the tests. The result is a larger checked reuse region, with discovery, retained state and cold costs still explicit.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

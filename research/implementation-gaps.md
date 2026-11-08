@@ -2521,3 +2521,64 @@ expansion or changed database bytes. Solver code and manuscript claims are
 unchanged; the existing full test/audit results were not rerun for this analysis.
 The established heterogeneous-backdoor and component-depth literature remains
 the basis for the proposed mixed-class search direction, not a novelty claim.
+
+## 2026-11-08: checked simultaneous equivalence repair
+
+Implemented `EquivalenceRepairHistory`, with lazy per-base discovery of connected
+variables in complementary binary clause pairs. The existing single-variable
+rule runs first. A generic joint record stores the exact addition and changed
+variables. Its independent checker aggregates all affected count changes before
+checking the final assignment, including external clauses and earlier additions.
+Old assignment/count roots remain immutable, and cold replay reconstructs all
+indexes without trusting discovery or stored derived counts. New equivalences in
+deltas and nonpaired implication SCCs are intentionally not discovered.
+
+The [matched study](../experiments/results/cnf-equivalence-history/README.md)
+removes all 120 unsigned-chain misses plus 32 signed-chain misses. At 32 blocks
+of width 32, summed acquisition/update time falls from 2.46892 to 0.06676 s,
+logical storage from 3,792,631 to 98,663 bytes, SQLite from 6,668,288 to 204,800
+bytes, and peak separately traced Python allocations from 45,575,163 to 1,925,402
+bytes. Bases fall from 33 to one. These are synthetic samples; tracing excludes
+native SQLite and process RSS. Cold final query grows from 40.88 to 44.42 ms;
+repeating the last known update after restart takes 88.32 versus 45.98 ms,
+including reconstruction and fresh proposal recognition.
+
+All 23 histories retain 46 archives, 1,144 historical versions and 869 residuals,
+checked without byte changes or fresh expansion. Another 82 prior archives
+(7,342 versions / 1,782 residuals) replay unchanged. The 255-test Python suite
+passes, including randomized branches, exact count/posting recomputation,
+couplings, signed/repeated changes, contradictory and budgeted cases, and forged
+records. Lean adds `joint_repair_preserves` and `joint_repair_extension`; the full
+build and axiom audit pass (4,083 declarations / 1,943 theorem declarations).
+These are semantic protection lemmas, not a refinement of Python or SQL.
+The verified implementation/evidence checkpoint is `12ae27a`, pushed to main.
+
+The initial comparison is preserved separately: complementing the unsigned input
+recipe produced signed additions already true under the solver's chosen model.
+The corrected control explicitly forces 32 signed repairs. Its run also measures
+cold resumption separately from querying the final version. No timing samples
+from the two runs are pooled.
+
+Remaining costs are explicit. A 1,024-variable block exceeds the default
+4,096-visit discovery budget and still falls back. Every block variable and
+internal posting is visited; zero-net counts avoid writes, not discovery/check
+visits. Move lists are repeated in durable records, and assignments are not
+represented by one group bit. Compatible and scalar-only histories never build
+the new block index, although their older affected-clause indexes remain eager.
+The resource-bounds document records recognition, checking, retained paths,
+temporary aggregation, serialization and cold costs separately.
+
+**Next target:** matching-state reuse and discovered alternating moves through
+the joint checker. The 32-block, 4-choice control still requires 32 fallbacks,
+retains 33 bases / 2,267,324 logical bytes, and takes 1.002 s on the new path
+versus 0.934 s on the scalar baseline. Parity remains another missed adapter.
+Both need prior-addition/external-constraint checks and explicit budgets; the
+generic checker alone provides no procedure for finding a valid move. Shared
+source/component state across genuine fallback remains open. No unrestricted
+polynomial expansion or acquisition claim follows.
+
+The manuscript now contains Section 12.41 and Proposition 12.33, with the joint
+count identity, proof, discovery restrictions, operation/storage bounds and
+matched gains and losses. All 44 earlier proof blocks are preserved, with one
+new proof and 161 unique labels. `latexmk` builds the 85-page PDF without final
+warnings or overfull/underfull boxes; pages 76--79 were rendered and inspected.

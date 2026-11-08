@@ -1,20 +1,21 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-08 after the diagnostic of coordinated structural changes. This is the working
+Updated 2026-11-08 after checked simultaneous equivalence repair. This is the working
 record for the hourly investigation. Start here; consult
 [implementation history](implementation-gaps.md) and
 [resource bounds](resource-bounds.md) for details. The ranking below is provisional:
 we have useful matched synthetic controls, but no representative mixture of SAT
 workloads from which to infer a single globally dominant cost.
 
-**Next research experiment:** checked simultaneous repair for literal-equivalence
-blocks. The new diagnostic finds 240 single-variable repair misses across 12
-equivalence, parity and matching histories, although a supplied coordinated
-change works in every case. Start with the equivalence case, charge recognition,
-joint checking and state maintenance, and compare against current fallback.
-Selective activation of the stronger index remains the smaller engineering task:
-eager indexing roughly doubles allocations on compatible and sparse-ID streams.
-Neither improvement has a measured replacement implementation yet.
+**Next research experiment:** discover and retain matching structure, then propose
+alternating changes through the new independent joint checker. Equivalence repair
+now removes all 120 unsigned-chain misses and 32 additional signed-chain misses.
+The largest remaining multi-update loss is the 32-block, 4-choice matching case:
+32 fallbacks, 1.002 s and 2.27 MB logical payload on the new path. Its supplied
+four-indicator swaps are still not automatically discovered. Charge graph
+recognition, proposal search, earlier constraints, checking and maintenance;
+compare against the current implementation before claiming savings. Parity moves
+and shared source across genuine fallback remain subsequent targets.
 
 ## Current cost map
 
@@ -24,7 +25,8 @@ their capabilities are not already integrated into one verified general solver.
 
 | Workload regime | Current costly work and evidence | Most promising investigation |
 | --- | --- | --- |
-| A local change needs several variables to move together | All 240 updates in 12 constructed tractable histories still acquire a fresh base; none exhausts the repair budget. At 32 equivalence blocks of 32 variables, 32 units retain 33 bases / 3.79 MB logical payload. | Checked block changes, parity-preserving directions and matching swaps; share unchanged component source and state. |
+| A local change needs several variables to move together | Explicit equivalence blocks now repair successfully: the largest chain falls from 2.469 s / 3.79 MB / 33 bases to 0.06676 s / 0.099 MB / one base. All 120 parity/matching misses in the original diagnostic remain. | Matching swaps through the joint checker, then parity directions; share unchanged source/state across true fallback. |
+| Recognized equivalence repairs succeed | On the largest chain, 45.55 ms of the 66.76 ms total is initial preparation. Every block member and internal posting is still visited; a 1,024-variable block exceeds the default discovery budget and falls back. | Shared group assignments/certificates and affected interfaces, with cold reconstruction and count invariants maintained. |
 | A small update defeats pure model reuse | New affected-clause repair removes all 32 original-control fallbacks. On matching size 16 / 128 protected flips it reduces operation time from 3.478 s to 0.147 s and logical payload from 12.46 MB to 0.158 MB. | Keep these gains while avoiding unnecessary index preparation; shared source/dependencies remain needed on genuine fallback. |
 | A general residual escapes tractable recognizers | Branching creates distinct residuals; each is normalized, checked and persisted. There is no polynomial bound on their number. Existing matching recognition reduced one restricted example from 5,191 residuals to one. | Expose tractable components and small interfaces before branching; preserve useful state when a component changes class. |
 | Reuse succeeds and the logical update is cheap | In the new 128-addition UNSAT diagnostic, SQLite execution and transaction-context exit account for about 87% of exclusive profiled time. | Reduce redundant archive work while preserving durability and version identities. |
@@ -35,6 +37,7 @@ their capabilities are not already integrated into one verified general solver.
 
 Evidence: [matched repair comparison](../experiments/results/cnf-repair-history/README.md),
 [affected-clause comparison](../experiments/results/cnf-affected-history/README.md),
+[joint equivalence comparison](../experiments/results/cnf-equivalence-history/README.md),
 [coordinated-change diagnostic](../experiments/results/structured-repair-gaps/README.md),
 [new diagnostic profiles](evidence/2026-11-08/reuse-cost-profile/README.md),
 [general-CNF investigation](arbitrary-sat-expansion.md). Times are individual
@@ -70,24 +73,35 @@ experiment above, run it. Reorder the priorities when measurements justify it.
 
 ### 1. Reuse coordinated structural changes
 
-The current one-variable repair is too narrow even on easy subclasses. The new
+The preceding one-variable repair was too narrow even on easy subclasses. The
 [diagnostic](../experiments/results/structured-repair-gaps/README.md) supplies and
 independently validates a coordinated change at every rejected step:
 
 | Structure | Preserved internal invariant | Appropriate change |
 | --- | --- | --- |
-| Literal-equivalence block | All equalities, including signed variants | Change the block's independent representative and its dependent variables. |
+| Literal-equivalence block | All equalities, including signed variants | Implemented for complementary binary pairs in a base; change all dependent variables and independently check the final state. |
 | Affine equations A x = b over GF(2) | A(x + z) = b when A z = 0 | Apply a nullspace direction, potentially changing many variables. |
 | Matching component | Choice coverage and resource exclusivity | Apply a valid alternating cycle/path, respecting earlier forced edges. |
 | Horn component | Consequences of the retained facts/rules | Propagate a changed requirement with retained reasons; check negative constraints and couplings. |
 
-The first three rows have concrete missed-reuse controls; the Horn maintenance
-row is a proposed investigation. None is a general implementation claim.
-Equivalence histories with 32 blocks of 32 variables currently spend 2.697 s and
-retain 3,792,631 logical bytes for 32 unit updates, always acquiring a new base.
-Matching with 32 independent 4-by-4 blocks spends 0.946 s and retains 2,267,324
-bytes. These are current-path diagnostic costs, not predicted speedups. The
-generator supplies the structure; automatic discovery has not been timed.
+The first row now has a measured implementation; parity, matching and Horn
+maintenance remain proposals. The joint comparison automatically discovers the
+equivalence blocks, charges their recognition and preserves all old constraints.
+On 32 blocks of 32 variables it reduces operation time from 2.4689 to 0.06676 s,
+logical storage from 3,792,631 to 98,663 bytes, and peak traced Python allocations
+from 45,575,163 to 1,925,402 bytes. Cold final query grows from 40.88 to 44.42 ms.
+Repeating the last known update from its parent after restart takes 88.32 versus
+45.98 ms; these archives already contain that result. The matching control still
+retains 33 bases / 2,267,324 bytes and takes 1.002 s on the new path, compared
+with 0.934 s on the scalar baseline. Recognition can add work without useful reuse.
+
+The generic joint record contains a changed-variable list, not trusted structural
+claims. This checker can support later adapters, but no matching/nullspace
+discovery follows from its existence. Initial binary-pair discovery is cached
+per base and invoked only after scalar failure; additions do not enlarge the
+discovered blocks. Nonpaired implication cycles, new equalities and over-budget
+blocks are retained failures. A corrected signed benchmark forces 32 actual
+repairs; the initial already-compatible signed control remains archived.
 
 **Implementation obligations:** aggregate all true-literal count changes before
 checking the final assignment. Intermediate one-variable states may violate
@@ -104,11 +118,18 @@ assignment representations can avoid rewriting every dependent variable, while
 full witness export remains output-sized. Bounds must charge moved variables,
 affected interfaces, discovery and maintenance, not only the number of groups.
 
-**Acceptance criteria:** remove the known equivalence-block fallbacks; preserve
-old versions and cold checking; include coupled blocks, signed equalities,
-contradictions, repeated changes within one block and large blocks with small
-interfaces. Keep parity and matching cases as the next adapters. Do not generalize
-the supplied moves into a uniformly cheap repair procedure for arbitrary CNF.
+**Completed acceptance checks:** 23 matched cases, 46 new archives, 255 Python
+tests and the Lean axiom audit pass. The new archives' 1,144 versions and 869
+residuals cold-check without changed bytes; 82 prior archives also replay
+unchanged. Couplings, signed equalities, contradictions, repeated changes,
+exact count recomputation and forged records are checked. Lean proves the
+semantic final-state protection rule, not the Python count/index implementation.
+
+**Next acceptance criteria:** remove matching misses with automatically found
+alternating changes; preserve earlier forced edges, external constraints and old
+versions; charge search, graph maintenance and joint checking. Include failed
+paths, genuine contradictions and edits that leave the matching class. Do not
+generalize supplied moves into a uniformly cheap arbitrary-CNF repair procedure.
 
 ### Completed baseline: single-variable affected-clause repair
 
@@ -146,7 +167,7 @@ find a bounded repair supplies no UNSAT verdict.
 
 **Completed checks:** 35 matched cases include growing protected histories,
 occurrence degree, contradictions, duplicate literals, tautologies, compatible
-updates, sparse IDs and coordinated changes. All 249 tests pass; old versions
+updates, sparse IDs and coordinated changes. That checkpoint passed 249 tests; old versions
 and cold verification are preserved. Lean proves the semantic protection rule,
 not the count-map implementation. The 512-flip control falls from 5.059 s to
 0.327 s and 8,921,728 to 83,082 logical bytes. The size-16 matching control reduces
@@ -280,6 +301,11 @@ paths, with per-step path bound O(d_t*b_t + (r_t+1) log(m_t+2)), where r_t is th
 affected clause count and m_t the parent clause count. Retained histories can
 therefore still accumulate substantial state even when every update is accepted.
 These node counts exclude integer/pointer/SQL byte overhead and cold rebuilding.
+Joint repair adds the q_t moved variables: accepted retained paths are bounded by
+O((d_t+q_t)b_t + (A_t+1) log(m_t+2)), with A_t distinct affected clauses, plus
+posting entries and roots. It still scans the sum of moved variables' occurrence
+lists. Discovery, cached block maps and repeated encoded move lists are additional;
+see [the expanded accounting](resource-bounds.md#9-simultaneous-repair-in-the-experimental-cnf-history).
 
 The next evaluation gap is a common workload matrix spanning categories and
 their transitions, with growing easy and hard interactions, repeated and novel

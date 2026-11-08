@@ -65,8 +65,15 @@ admits safe changes when both signs occur, using versioned clause counts and
 occurrence lists. On the measured size-16 matching history it avoids 128 new
 acquisitions, reducing operation time from 3.478 to 0.147 seconds and logical
 storage from 12.46 MB to 0.158 MB. Eager indexing can increase memory and cold
-replay costs. The [cost map](research/structural-reuse-priorities.md) now prioritizes
-selective activation of the stronger index; coordinated repairs remain open.
+replay costs.
+
+The [joint-repair study](experiments/results/cnf-equivalence-history/README.md)
+recognizes explicit signed-equivalence blocks and checks simultaneous changes
+against all affected clauses, including earlier additions. On 32 blocks of 32
+variables, acquisition/update time falls from 2.469 to 0.0668 seconds and logical
+storage from 3.79 MB to 0.099 MB. Cold final replay is slightly slower. The
+[cost map](research/structural-reuse-priorities.md) now prioritizes matching swaps;
+parity moves, newly introduced equivalences and shared fallback state remain open.
 
 The current draft is **Bounded-Domain SAT, Compiled Knowledge, and Amortized
 Reasoning: A perspective on resource accounting for learned reasoning**.

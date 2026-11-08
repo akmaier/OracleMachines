@@ -520,6 +520,60 @@ The present gaps are now localized enough for a subsequent cost study:
 | Archive | No default growth cap; keys, telemetry and namespaces dominate current file | Incremental bytes by table/index/object kind, without deleting old evidence |
 | Formal resource refinement | Byte transport, Python/SQLite, allocation and compiled-runtime costs | Explicit machine models or bounded implementation contracts for targeted operations |
 
+## 9. Simultaneous repair in the experimental CNF history
+
+`EquivalenceRepairHistory` adds a proposal rule and an independent joint checker
+to the affected-clause prototype. It does not change the native solver path.
+The proposal rule groups variables connected by complementary binary clause
+pairs in a SAT base. Signed equalities and inequalities both allow complementing
+every variable of a connected block. Recognition is lazy and cached per base;
+new equalities introduced only by subsequent additions are not recognized.
+Conjunctive additions preserve the old equalities, but may prevent their block
+from changing. Every affected old clause, including every earlier addition,
+therefore participates in the independent final-state check.
+
+Let Q be the proposed changed variables, q = |Q|, R the sum of their posting-list
+lengths, A the number of distinct affected clauses, and d the added clause's
+literal count. The checker aggregates signed true-literal count differences
+across Q before testing positivity. It visits R postings, uses an O(A) temporary
+map, changes q assignment entries, and updates at most A nonzero count entries.
+It does not apply a sequence of independently accepted scalar changes. Internal
+equivalence clauses have zero net difference and need no count-map writes, but
+the implementation still visits their postings. No one-bit group assignment or
+boundary-only update bound is implemented.
+
+With identifiers of at most b bits and m parent clauses, accepted checking and
+index maintenance use O((d+q)b + (A+1) log(m+2) + R) trie-node/literal operations,
+apart from hash-map work, integer arithmetic, allocation, serialization and SQL.
+New retained paths are O((d+q)b + (A+1) log(m+2)), plus at most d new posting nodes
+and a constant number of roots. Discovery additionally charges every attempted
+variable and posting, including failed scalar and joint candidates. Its default
+4,096-visit budget counts joint variables plus their postings; it does not bound
+base recognition, integer bit operations or persistent-trie path lengths.
+
+Recognition scans the exact base's L literal occurrences, retains at most B
+distinct binary pairs while building a union-find structure on n recognized
+variables, then sorts and caches the blocks. Under unit-cost integer operations
+and expected constant-time dictionaries, O(L + B log(n+2) + n log(n+2)) is a
+conservative bound; hash collisions and large identifiers require further bit
+accounting. Temporary space is O(B+n+maximum clause length), and the retained
+block tuples and variable-to-block references are O(n). These costs recur per
+newly recognized base and after a restart's first failed scalar repair.
+
+The durable delta stores the exact added clause and q variable identifiers.
+Older versions retain their sources, assignments and count roots. For a fixed
+base, additional logical payload is proportional to encoded additions, move
+lists and version references, not the full source per update. This is still
+linear in the total encoded move lists: repeated use of the same block has no
+shared durable block certificate yet. Cold replay reconstructs indexes and
+checks all required moves. It does not run the block recognizer until another
+proposal is needed; the matched study reports cold queries and resumed updates
+separately. General fallback may still copy the whole source, retain another
+base and require exponential search.
+
+Measurements and retained failures are in the
+[matched study](../experiments/results/cnf-equivalence-history/README.md).
+
 The first priority can differ by workload: normalization helped changing
 multiplicities, source handling dominates much of already-reused work, novel
 batches still pay elimination, and database telemetry/indexes dominate much of

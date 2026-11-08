@@ -291,6 +291,12 @@ Let us now consider a fixed language $A\subseteq\bits^*$. We write $\Pclass^A$ a
 \Pclass^A=\NPclass^A,\qquad
 \Pclass^B\neq\NPclass^B.
 \end{equation}
+For a concrete equality case, take a $\mathsf{PSPACE}$-complete oracle $A$. Then
+\begin{equation}
+\Pclass^A=\NPclass^A=\mathsf{PSPACE}.
+\end{equation}
+Completeness gives $\mathsf{PSPACE}\subseteq\Pclass^A$. Conversely, a polynomial-time nondeterministic oracle computation makes only polynomial-length queries. We can answer each in polynomial space, reusing the workspace, so $\NPclass^A\subseteq\mathsf{NPSPACE}=\mathsf{PSPACE}$. This is the argument behind Theorem~2 of \citet{baker1975}. The equality charges access to the oracle, not the time needed to compute its answers on an ordinary machine.
+
 These statements concern inputs of unbounded length. Yet, our table covers only a fixed finite domain. In order to see the difference, let us first eliminate an oracle that we can already compute efficiently.
 
 \begin{lemma}[Elimination of a polynomial-time oracle]
@@ -765,6 +771,16 @@ Once a table is available, Lemma~\ref{lem:table} gives inexpensive decision quer
 A learned representation may replace the table, but it must preserve the invariant: old answers remain correct and every newly covered input receives an exact answer. Successful training on a sample does not establish this step. Certified fallback can obtain the missing answers; its cost belongs in $a_j$. Nor does a cache populated only on demand necessarily cover all of $D_N$. Its guaranteed coverage is the set of inputs actually solved and retained.
 
 \subsection{The additional invariant needed for polynomial time}
+
+Before imposing a uniform bound, let us separate preparation from expansion. Suppose a prepared state $H^{\mathrm{prep}}_n$ supports a specified workload at size bound $n$. Write $C_{\mathrm{prep}}(n)$ for its acquisition cost, $U(H,\delta)$ for an update, and $Q(H,x)$ for a query. For $m$ updates and $q$ queries at states indexed by $t_j$, the charged work is
+\begin{equation}
+C_{\mathrm{prep}}(n)+\sum_{i=1}^{m}U(H_{i-1},\delta_i)
+  +\sum_{j=1}^{q}Q(H_{t_j},x_j),\qquad H_0=H^{\mathrm{prep}}_n.
+\label{eq:prepared-expansion-cost}
+\end{equation}
+Each term includes its validation, data access, and maintenance costs in the chosen model; retained and working space must be reported separately. Cheap updates and queries conditional on an already acquired $H^{\mathrm{prep}}_n$ do not bound $C_{\mathrm{prep}}(n)$. They therefore need not imply $\Pclass=\NPclass$. This remains true even when the supported workload includes arbitrary SAT inputs up to the prepared size. Coverage beyond that size requires a further construction argument. A size-dependent family of supplied states is also different from one fixed oracle language in Section~\ref{sec:oracles}.
+
+Our expansion objective is to minimize the additional work after acquiring useful state, while recording acquisition and storage separately. The following corollary asks the stronger question of whether the entire process is polynomial. Its fixed finite seed cannot hide preparation that grows with the requested input length. Even a very expensive fixed seed contributes only a constant to an asymptotic bound; size-dependent preparation can contribute much more.
 
 \begin{corollary}[Uniformly bounded expansion]
 \label{cor:polynomial-expansion}

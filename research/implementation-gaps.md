@@ -2027,3 +2027,36 @@ on all SAT inputs, and finding the structure is charged separately. A universal
 polynomial acquisition/expansion/query result would prove P=NP; this logical
 implication does not establish that such a result is impossible. Current runtime,
 Lean theorems and manuscript are unchanged by this research checkpoint.
+
+
+## 2026-11-08: distinguish prepared expansion from an ordinary SAT algorithm
+
+The user's clarification changes how the previous implication should be read:
+cheap expansion and queries after expensive size-dependent preparation do not
+establish ordinary P=NP. The analysis and manuscript now explicitly separate
+acquisition C_prep(n), incremental work U(H, delta), queries Q(H, x), and storage.
+The uniform-expansion corollary retains its stronger hypotheses: one fixed finite
+seed, uniformly polynomial total work, and coverage of all lengths. A very large
+fixed seed is an asymptotic constant; a supplied family of states growing with n
+can hide nonpolynomial acquisition and must be accounted for separately.
+
+The oracle section now includes Baker-Gill-Solovay's PSPACE-complete example:
+P^A=NP^A=PSPACE, with the polynomial-space simulation argument. This genuine
+oracle model leaves internal answer computation uncharged. It neither supplies
+a finite constructed archive nor proves that our acquired state has the same
+power. No ordinary or relativized class collapse is claimed for our solver.
+
+**Working objective:** minimize additional work given acquired state, record its
+acquisition and memory cost, and prove precisely which future changes its stored
+summaries support. The heterogeneous decomposition priorities remain; their
+future bounds should expose the prepared-state invariant and new residual work.
+No general polynomial expansion guarantee has been demonstrated. This checkpoint
+changes exposition only; executable code, Lean proofs and stored solver results
+remain unchanged.
+
+Validation: checked the oracle argument against the original 1975 paper's
+Theorem 2; all 38 existing manuscript proof blocks are byte-for-byte unchanged
+and all 147 labels are unique. Two LaTeX passes produce a 76-page PDF with no
+warnings or overfull/underfull boxes. Revised pages 6/18 and adjoining pages 7/19
+were rendered and visually inspected. `git diff --check` passes. No solver or
+Lean tests were rerun for this exposition-only change.

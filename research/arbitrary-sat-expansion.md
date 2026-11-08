@@ -155,18 +155,70 @@ remain charged even when mathematical subresults are reusable.
 
 ## Limits on "minimum cost"
 
-A universally polynomial construction and query bound, starting from a uniformly
-constructible initial state and covering arbitrary SAT inputs in polynomially
-many steps, would establish P=NP. This is a precise implication, not a proof that
-the goal is impossible. Our practical objective can be a broad adaptive solver
-whose exponential parameter is the remaining interaction, with measured gains
-on inputs where that parameter or the number of novel residuals is small.
+A universally polynomial acquisition, expansion and query bound, starting from a
+uniformly polynomial-time constructible initial state and covering arbitrary SAT
+inputs in polynomially many steps, would establish P=NP. The bound must be in the
+full input length, with common constants across sizes and all ordinary work
+charged. Cheap expansion conditional on expensive size-dependent preparation
+does not satisfy these hypotheses. This is a precise implication, not a proof
+that the goal is impossible. Our practical objective can be a broad adaptive
+solver whose exponential parameter is the remaining interaction, with measured
+gains on inputs where that parameter or the number of novel residuals is small.
 
 Compact exact representations also have representation-specific limits. Bova et
 al. give CNF families whose DNNF representations require exponential size. This
 is an unconditional obstruction for that representation, not for every possible
 SAT algorithm or summary language.
 [A Strongly Exponential Separation of DNNFs from CNF Formulas](https://arxiv.org/abs/1411.1995).
+
+## Preparation, expansion and oracle access
+
+The distinction requested by the user is essential to the research target. Let
+K_n be a prepared initial state for a specified size bound and workload. Charge
+C_prep(n) for building it, U(H, delta) for an update, Q(H, x) for answering a
+query, and S for retained state plus a separate working-space bound. The total
+ordinary work for a stream is
+
+    C_prep(n) + sum_i U(H_(i-1), delta_i) + sum_j Q(H_(t_j), x_j), H_0 = K_n.
+
+Recognition, validation, lookup, transport, serialization and persistence belong
+in these terms. A conditional update guarantee must state which prepared states
+and updates it supports, how the invariant is maintained, and whether it covers
+only already prepared sizes or can construct the next size's state. A bound
+polynomial in an exponentially large state is not polynomial in input length.
+
+- **Expensive size-dependent preparation.** Polynomial update/query bounds can
+  coexist with exponential acquisition and storage. Tabulating every input up
+  to n is a simple example of cheap later queries under the paper's explicit
+  direct-access model. This does not establish ordinary P=NP, nor cheap expansion
+  to a larger n. A supplied family K_n is an offline resource; only with
+  polynomial-size states and the appropriate polynomial evaluator does the
+  familiar P/poly advice conclusion apply.
+- **One fixed finite seed.** If this same seed, independent of requested size,
+  supports a uniform polynomial number of polynomial-cost expansions reaching
+  every input and a polynomial evaluator, SAT is in P. A huge one-time seed cost
+  remains a constant. The manuscript's uniform-expansion corollary has exactly
+  this stronger form. Exponential stage counts or bounds in state size alone do
+  not meet it.
+- **A genuine language oracle.** Baker, Gill and Solovay establish fixed oracles
+  A and B with P^A=NP^A and P^B!=NP^B. In particular, for any PSPACE-complete A,
+  PSPACE is contained in P^A, and NP^A is contained in NPSPACE=PSPACE by simulating
+  each polynomial-length oracle query in reusable polynomial space. Thus
+  P^A=NP^A=PSPACE. The oracle's answer computation is uncharged; query writing and
+  ordinary control are charged. This is not a construction-time or storage bound
+  for our finite solver archive. A SAT oracle makes ordinary SAT easy but does
+  not by itself establish the stronger equality P^SAT=NP^SAT.
+
+The oracle claims and PSPACE argument are classical, not new results of our
+solver. [Baker, Gill and Solovay (1975), especially Theorem 2](https://doi.org/10.1137/0204037).
+
+Accordingly, evaluate **additional work given acquired state** alongside the
+state's acquisition and memory cost. A useful theorem may bound incremental work
+by newly affected components, unresolved interaction and genuinely new residuals
+without bounding acquisition polynomially. It must still handle arbitrary inputs
+through the checked fallback; no uniformly cheap update guarantee for arbitrary
+SAT is established here. Preparation may encode the expensive interaction, but
+we must exhibit the representation and show which future edits it supports.
 
 ## Revised implementation priorities
 

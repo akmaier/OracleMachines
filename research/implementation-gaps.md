@@ -1943,3 +1943,48 @@ reply in the width-32 sample. Pursue checked batch handles and compact definitio
 replies, then measure byte admission and repair/canonicalization opportunities.
 The backward replay plan remains O(T), persistent storage remains unbounded by
 default, and unrestricted SAT receives no affine closure guarantee.
+
+
+## 2026-11-08: cheap expansion as a maintained structural invariant
+
+The user requested conditions that make the favorable case available for every
+allowed expansion. [The precondition analysis](expansion-preconditions.md)
+specifies sufficient boundary information, closure, cheap recognition, bounded
+affected structure, checked construction, initialized/resident state and full
+accounting. This supplies a meaningful restricted-family target; caching or
+precomputing all cases cannot establish it without construction/space bounds.
+
+The preserved affine benchmarks expose an immediate opportunity: all 192 regular
+updates across six width-16/32/64 repeated and novel streams have point successor
+boundaries. The initialization fixes the fresh block and each following batch
+defines the next variables from old ones. The two final branches per stream are
+contradictory and unconstrained. A substitution prototype covers **all 204**
+updates. It matches complete frontiers on **5,010 accepted cases** among 11,862
+small tests and declines 6,852 for general solving. This reveals an evaluation
+restriction as well as an optimization opportunity: "novel batch" does not mean
+"general correlated affine boundary."
+
+`StructuralExpansion.lean` adds five checked semantic theorems: empty propagation,
+total-relation nonemptiness, functional singleton closure, bijective transport,
+and a singleton append tied to the original affine history and batch semantics.
+The complete Lean audit passes **4,049 declarations / 1,916 theorems** without
+admits or new axioms. These are conditional semantics; executable recognition,
+native dispatch, source-origin integration and the specialized resource ledger
+remain open. The native binary has not changed. The manuscript now states both
+the structural result and the limitation discovered in the existing workloads.
+
+For a known point and a recognized functional affine update, direct evaluation
+targets O(b*c+b^2) dense coefficient work, including recognition and explicit
+point-summary construction, instead of generic O(b^3+b^2*c') elimination. For an
+arbitrary affine boundary and a signed-permutation update, column transport and
+RHS adjustment target O(r*b) after O(b*c) recognition. These are derived targets,
+not measured native speedups or optimality theorems. Original source/archive
+growth and transport still have to be charged.
+
+**Revised next priority:** certify a point-boundary capability and functional-row
+recognizer, construct successors directly, and preserve native chronological
+history and accounting. Add correlated/partial frontiers and unsupported updates
+to matched evaluation before drawing general conclusions. Then implement the
+signed-permutation case, checked batch handles and compact replies. KD-trees can
+later shortlist candidates for a checked repair; they do not replace these
+preconditions. Retain the generic path and every previous source/result.

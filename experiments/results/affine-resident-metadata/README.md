@@ -84,3 +84,21 @@ Reproduce without overwriting evidence:
 ```sh
 python3 experiments/compare_affine_metadata.py --output experiments/results/affine-metadata-new --repetitions 5
 ```
+
+## Follow-on structural diagnosis
+
+After the metadata checkpoint, `structural-closure.json` checks the user's
+stronger target of making cheap expansion available for every admitted update.
+All 204 distinct benchmark updates fit a cube-substitution prototype, with point
+boundaries on all 192 regular successors. The prototype passes complete-frontier
+checks on 5,010 accepted cases among 11,862 small cases; 6,852 are declined for
+general solving. This is an evaluation limitation and a new optimization target,
+not a measured or deployed native speedup.
+
+[The precondition analysis](../../../research/expansion-preconditions.md) gives
+the conditions, derived costs and revised priorities. Five conditional semantic
+lemmas now pass Lean's audit (4,049 declarations / 1,916 theorems); the native
+binary remains unchanged. The manuscript adds the result and benchmark caveat,
+preserving all 37 prior proof blocks and adding one. Thus the earlier preservation
+report's unchanged manuscript/binary statement refers to the metadata checkpoint;
+`structural-check.json` records the subsequent proof and document changes.

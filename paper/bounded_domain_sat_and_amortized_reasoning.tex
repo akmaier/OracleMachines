@@ -1288,6 +1288,37 @@ with version links and other metadata retained for all $T$ versions. Compression
 
 The native preparation cache shares normalized coefficient arrays, but retains original typed inputs to check future hits. Resident nodes still keep their own request JSON, and every append still pays transport and decoding. With $V$ resident versions, $K$ transition slots and $P$ preparation slots, bounded width $b$ and row count $c$, retained coefficient/request payload is $O((V+K+P)(b^2+bc))$ before metadata and temporary allocations. Adding preparation can increase live memory even while reducing calculation. This is neither a physical-memory bound nor a measured reduction in process RSS. Native batch handles, byte-based cache budgets, broader row-space equivalence and checked durable kernels remain separate opportunities. Python/SQLite correspondence and complete persistence refinement also remain open.
 
+\subsection{Making cheap expansion invariant under updates}
+\label{sec:closed-expansion}
+
+Cache hits give a conditional saving. A stronger target is to make every allowed update cheap, including its first occurrence. This requires a representation that preserves all information needed by future queries, an admissible update family closed over that representation, and an executable construction with a uniform cost bound. Recognition, initialization, verification, output and persistence belong in that bound. A small interface alone does not guarantee cheap construction, and an expensive recognition procedure can consume the intended saving. Restrictions must therefore be checked or maintained before dispatching to the specialized constructor.
+
+Let $S$ be the exact set of possible boundary assignments and let $R(u,v)$ describe an update. Its successor is
+\[
+R[S]=\{v:\exists u\in S,\ R(u,v)\}.
+\]
+This formulation separates properties of the update from accidental equality to a cached input.
+
+\begin{proposition}[Structural conditions for direct expansion]
+\label{prop:structural-expansion}
+If $R$ is total on old assignments, then $R[S]$ is nonempty exactly when $S$ is nonempty. If $R(u,v)$ is the graph of a total function $f$ and $S=\{a\}$, then $R[S]=\{f(a)\}$. If $f$ is a bijection, then for arbitrary $S$, membership in $R[S]$ is equivalent to membership of $f^{-1}(v)$ in $S$. These are semantic statements; they do not by themselves bound recognition, representation or evaluation costs.
+\end{proposition}
+\begin{proof}
+A member of $R[S]$ has a predecessor in $S$. Conversely, totality supplies a successor for any member of $S$. For a singleton predecessor and a functional relation, the only possible successor is $f(a)$, and that successor exists. For a bijection, $v=f(u)$ has the unique solution $u=f^{-1}(v)$; substitution gives the membership equivalence.
+\end{proof}
+
+\texttt{StructuralExpansion.lean} checks these statements and a source-linked affine specialization. The latter assumes proofs that the complete old history has the singleton boundary and that the submitted rows encode the stated function. The implementation must establish those premises. The theorem is not an executable batch recognizer or a native resource refinement.
+
+For affine updates $v=Au+t$ over $\mathbb F_2$, a singleton boundary $u=a$ gives $v=Aa+t$. Even a new, noninvertible matrix preserves singleton shape. With an already certified point representation, dense matrix-vector evaluation costs $O(b^2)$; checking $c$ dense source rows costs $O(bc)$. Materializing the point as $b$ unit equations costs $O(b^2)$ cells, whereas a point vector itself uses $O(b)$ cells. Thus an appropriate checked constructor can use $O(bc+b^2)$ coefficient work instead of the general $O(b^3+b^2c')$ elimination bound. This is a derived algorithmic opportunity, not a measured native speedup. Original source storage, transport and the proof linking the vector to the history remain additional obligations. Totality alone preserves a SAT answer but need not give a cheap complete boundary for later constraints.
+
+There is another closed case for arbitrary affine boundaries. If $v=Pu+t$, where $P$ is a permutation matrix, a predecessor $Cu=d$ transforms to
+\[
+CP^{-1}v=d+CP^{-1}t.
+\]
+Column permutation and right-hand-side updates cost $O(rb)$ for $r\leq b+1$ summary rows after the update is recognized. No matrix inversion or elimination is needed. General invertible matrices do not inherit this bound: constructing or applying a dense inverse has its own cost. Dense source recognition remains $O(bc)$ even for a permutation. Input/output costs also prevent describing these operations as universally constant-time.
+
+These examples identify a route to uniform cheap expansion within a stated family: preserve a compact sufficient state and close every admitted update over a cheap constructor. They do not establish the smallest possible cost among all algorithms. Nor do they cover arbitrary affine batches, general CNF, or the expansion of the entire finite SAT domain. Precomputing all exceptional cases would move work and storage into initialization rather than remove them.
+
 \subsection{Amortization while the domain grows}
 
 Costly expansion may still be repaid by later queries. Let us state the workload condition rather than interchange the fixed-domain and growing-domain limits.
@@ -2165,6 +2196,16 @@ Width-16 repeated batches fail the admission threshold and stay inline. Novel st
 
 All 207 regression tests pass, including 26 affine-growth and six archive-sharing tests. New cases exercise complete boundary frontiers, different duplicate multiplicities, shared-history restart, corrupted and recursive references, and rollback after batch admission. Lean audits 4,043 declarations, including 1,911 theorem declarations, without admits or added axioms. Revalidation checks all 355 earlier generic inputs, five source versions and 268 distinct affine versions. Every old row in 22 tables and all 583 preceding experiment files remain unchanged. The main archive contains 10,295 generic results, 3,483 refutations, 85 source-state rows and 1,340 affine-state rows across engine namespaces; the latter still represent 268 distinct histories. Earlier inline source objects are retained, so the new encoding does not retrospectively shrink the old archive. Inputs, raw measurements, checks and remaining limits are recorded in \texttt{experiments/results/affine-batch-reuse/}.
 
+
+\subsection{Resident metadata and a structural limitation of the workloads}
+
+A subsequent Python update retains the width confirmed by each successful native definition. Its lifetime is the resident node's lifetime, including eviction, reset and failed-transaction invalidation. Forward replay can then check the child's width without decoding the entire parent batch again. Requested source records are still validated. A representative inline warm append falls from four to three object reads; a shared append falls from nine to seven. This adds one bounded integer per resident entry and does not change native coefficient work.
+
+Five rotated repetitions at widths 16, 32 and 64 compare the old read path with metadata reuse on repeated and novel batches. The 60 runs include 2,160 decisions and two fresh-service cold reconstructions per run. For width-32 repeated batches, 28 interior warm appends fall from 84.39 to 78.22\,ms; whole-stream time including setup and shutdown falls from 238.00 to 232.72\,ms. At width 64 the corresponding warm values are 280.72 and 260.76\,ms. Two width-32 cold reconstructions use 384 versus 258 object reads and take 214.46 versus 201.90\,ms. The width-32 novel whole-stream median instead rises slightly, from 388.70 to 393.50\,ms. These local descriptive medians establish no universal speedup. Source/result object contents, native transport and elimination counters agree across modes. All 210 service tests pass. The main archive and preceding experiments remain unchanged.
+
+Inspection of those inputs reveals a more consequential restriction. Every regular step in both the repeated and novel streams has a singleton boundary: the first batch fixes every fresh variable, and subsequent batches define each new variable from known old values. The final branches are contradictory and unconstrained. An independent substitution prototype accepts all 204 updates across the six distinct streams without general elimination. It also passes complete-frontier checks on 5,010 accepted cases among 11,862 exhaustive or seeded small tests; the other 6,852 cases are declined for a richer representation, not classified by this prototype. These checks and the conditional Lean results motivate the specialized constructors in Section~\ref{sec:closed-expansion}. The native worker does not yet execute them, and no runtime speedup for them is claimed.
+
+Consequently, previously unseen batches in these streams do not test general affine frontiers with many correlated assignments. Benchmarks for the next constructor must include such frontiers, free old coordinates, coupled new coordinates, unsupported updates and the costs of falling back. The same distinction limits nearest-neighbor indexing: retrieving a similar old state can propose a repair, but proximity neither proves boundary equivalence nor supplies the required constructor. The measurements, structural diagnostic and remaining implementation obligations are retained in \texttt{experiments/results/affine-resident-metadata/}. Lean now audits 4,049 declarations, including 1,916 theorem declarations, without admits or added axioms; the native solver binary is unchanged by these additional semantic lemmas.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}

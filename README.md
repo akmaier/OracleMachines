@@ -696,3 +696,10 @@ removes a redundant parent decode: shared warm appends use seven instead of nine
 object reads. All 210 tests pass; the native proof code and earlier archive remain
 unchanged. The [KD-tree assessment](research/indexed-reuse.md) distinguishes exact
 lookup from candidate search for a future checked repair path.
+
+[Uniformly cheap expansion](research/expansion-preconditions.md) makes the next
+target explicit: maintain a closed structural invariant that enables cheap
+construction even for unseen updates. A diagnostic finds point boundaries in
+all regular steps of the existing repeated/novel affine streams. Conditional
+semantic lemmas are Lean-checked; specialized native recognition and construction
+remain to be implemented and measured against richer boundary families.

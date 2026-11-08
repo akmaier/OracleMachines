@@ -18,6 +18,7 @@ import OracleMachines.Canonical
 import OracleMachines.Knowledge
 import OracleMachines.BoundedSearch
 import OracleMachines.CompactExpansion
+import OracleMachines.StructuralExpansion
 import OracleMachines.SearchMachine
 import OracleMachines.InterfaceProtocol
 import Lean.Util.CollectAxioms

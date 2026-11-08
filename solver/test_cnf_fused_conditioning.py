@@ -21,7 +21,7 @@ def check_fused_tree(h, key, seen=None):
     seen.add(key); node = h._load(key)
     edges = (node['edges'] if node['kind']=='and' else
              [e for a in node['alternatives'] for e in a['edges']] if node['kind']=='or' else
-             [node['edge']] if node['kind'] in ('project','simplify') else [])
+             [node['edge']] if node['kind'] in ('project','simplify','probe') else [])
     if node['kind'] != 'or':
         # The older helper has pointwise OR semantics, so do not recurse into
         # fused descendants with it. Check the current unchanged node only.
@@ -39,7 +39,7 @@ def check_fused_tree(h, key, seen=None):
                         lifted = h.lift_conditioned(key,ai,value,model)
                         assert holds(node['cnf'],lifted) and lifted[attempt['variable']]==value
                         assert all(lifted[v]==model[i] for i,v in enumerate(edge['names'],1))
-    elif node['kind'] in ('project','simplify'):
+    elif node['kind'] in ('project','simplify','probe'):
         edge = node['edge']
         feasible = {tuple(model[v] for v in edge['names']) for model in assignments(node['cnf']) if holds(node['cnf'],model)}
         for model in assignments(h._load(edge['key'])['cnf']):

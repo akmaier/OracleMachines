@@ -119,6 +119,19 @@ binary-rich conditioned residuals, deriving forced values only from checked
 refutations of the opposite assumption. Keep probe work, failed probes and
 unresolved cases explicit; a fixed discovery budget need not cover arbitrary SAT.
 
+**Checked failed literals implemented:** the [1,025-input study](../experiments/results/cnf-failed-literal/README.md)
+preserves the 949 old sources and adds 64 fresh random formulas plus 12 controls.
+The optional four-variable probe policy raises non-tiny closure 358/513 ->
+484/513, and fresh random closure 19/64 -> 51/64. SAT and UNSAT gains are both
+present. Reasons independently justify each forced value; inconclusive probes
+are retained, and units/components/recognized families keep their priority.
+Total time and storage fall, but 29 inputs remain open and some become slower.
+Full binary-variable probing on these misses closes only two more at higher
+cost. Existing inconclusive traces already contain common consequences under
+both assumptions in 245 archived nodes (179 unresolved). Using these consequences
+is the next exact-discovery experiment; it has not yet added root coverage.
+Keep arbitrary split depth separate from per-residual probes and forced chains.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

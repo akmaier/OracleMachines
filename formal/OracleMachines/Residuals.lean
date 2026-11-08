@@ -68,6 +68,30 @@ theorem unsatisfiable_split (f : Formula) (index : Nat)
   intro h
   exact ((satisfiable_split f index).mp h).elim low high
 
+/-- A checked refutation under one assumption forces its opposite in every
+model. The hypothesis must be proved; an inconclusive probe does not supply it.
+This semantic rule does not verify Python unit traces or bound probe cost. -/
+theorem failed_condition_forces (f : Formula) (index : Nat) (value : Bool)
+    (refuted : ¬ Satisfiable (f.condition index value))
+    (v : Nat → Bool) (model : f.eval v = true) : v index = !value := by
+  have different : v index ≠ value := by
+    intro same
+    exact refuted ((satisfiable_condition f index value).mpr ⟨v, same, model⟩)
+  cases actual : v index <;> cases value <;> simp_all
+
+/-- Refuting a branch permits exact SAT reduction to the other branch without
+using another arbitrary split. Acquiring the refutation still has a cost. -/
+theorem satisfiable_failed_condition (f : Formula) (index : Nat) (value : Bool)
+    (refuted : ¬ Satisfiable (f.condition index value)) :
+    Satisfiable f ↔ Satisfiable (f.condition index (!value)) := by
+  constructor
+  · rintro ⟨v, model⟩
+    exact (satisfiable_condition f index (!value)).mpr
+      ⟨v, failed_condition_forces f index value refuted v model, model⟩
+  · intro remaining
+    obtain ⟨v, _, model⟩ := (satisfiable_condition f index (!value)).mp remaining
+    exact ⟨v, model⟩
+
 /-- Instantiate Left with selected choice groups and Right with their possible
 resources. This is the cardinality obstruction behind a Hall certificate, not
 a proof of the Python CNF recognizer or matching algorithm. -/

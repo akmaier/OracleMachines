@@ -12,14 +12,29 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-**Next research experiment:** use bounded, checked probing to identify forced
-values in conditioned residuals with binary clauses. A unit-conflict certificate
-under one assumption can justify its opposite; it must not be inferred from a
-failed search or an unresolved child. Reuse the compact closure representation,
-retain unsuccessful probes and charge every scan/check. Compare against the same
-depth/candidate policies before increasing budgets. Pure 3-CNF roots have no
-immediate unit cascade after just one assignment; target the binary interaction
-exposed by conditioning. There is no proved uniformly small probe budget.
+**Next research experiment:** reuse common consequences of both inconclusive
+assumption traces. The new checked failed-literal study already contains such
+facts in 245 archived clear-probe nodes, including 179 unresolved nodes. Boolean
+case splitting proves a literal forced if both assumptions propagate it. These
+are opportunities, not achieved new coverage; unselected alternatives are
+included. Implement checked composition and model transport, preserve every
+failed probe, and measure whether using these stored consequences exposes useful
+families without additional propagation. A bounded miss remains inconclusive.
+
+The [failed-literal comparison](../experiments/results/cnf-failed-literal/README.md)
+implements the preceding target. On 1,025 matched inputs, closure rises from
+358/513 to 484/513 non-tiny cases and from 19/64 to 51/64 fresh random cases.
+Time falls 27.111 -> 18.878 s, SQLite 93.143 -> 65.057 MB, and cold checking
+10.079 -> 6.412 s. Twenty-nine cases remain open. Probing every binary variable
+on these misses closes only two more, while inventory time rises 6.817 ->
+11.495 s. Do not respond by raising the global cap unconditionally.
+
+Probe nodes now dominate logical payload: 12.545 of 22.743 MB. The largest
+remaining discovery case spends most profiled own time in restriction scans,
+unit propagation/checks, normalization and their literal helpers. Reusing
+existing implications is the primary discovery target; sharing forced chains
+and avoiding repeated scans are supporting cost targets. No complete efficient
+arbitrary-CNF partition or bounded total acquisition follows.
 
 The [fused-edge comparison](../experiments/results/cnf-fused-conditioning/README.md)
 implements the previous intermediate-state target. All 3,999 archived OR plans

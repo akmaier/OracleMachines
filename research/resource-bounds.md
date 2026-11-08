@@ -966,3 +966,44 @@ alternatives: 12,124,411 and 11,510,391 bytes respectively. Bounded probing that
 proves additional forced values is the next discovery opportunity. Its work and
 certificates must be included even if it avoids spending a branching-depth level.
 No efficient complete arbitrary-CNF classification has been established.
+
+## 18. Bounded checked failed literals
+
+The optional policy probes at most k binary-incidence variables, two assumptions
+each, at a unit fixed point after earlier reduction gates. The first checked
+conflict forces the opposite value; its checked unit closure reaches the child
+without another full intermediate record. Inconclusive traces remain archived.
+Each successful rewrite strictly reduces support but retains arbitrary-branch
+depth. Thus k is a per-residual limit, not a total-work limit. Every new reduced
+or conditioned residual can restart probing.
+
+With v variables and L literal occurrences, the current scan-based propagation
+uses at most v+1 passes per assumption. A conservative probe-phase bound is
+O(k(v+1)L + v log v) word operations, including reason replay up to constant
+factors, apart from existing classification, normalization, full keys and
+persistence. Per-residual trace bits are O(kv log(v+m+2)) for m clauses. A chain
+can contain up to v forced rewrites; distinct branches, components, alternative
+plans and source retention must also be charged. No global polynomial-size
+closure or uniformly efficient arbitrary-SAT expansion follows.
+
+The [1,025-input comparison](../experiments/results/cnf-failed-literal/README.md)
+raises non-tiny closure 358/513 -> 484/513, while total time falls 27.11056 ->
+18.87839 s, SQLite 93,143,040 -> 65,056,768 bytes, nodes 8,761 -> 5,271 and cold
+checking 10.07933 -> 6.41165 s. These costs include the same ordinary solver,
+with 5,379 retained residuals in every mode; solver-only time is 7.62782 s.
+Four-variable probing retains 17,352 attempts and 2,958 forced rewrites, while
+arbitrary conditioning candidates fall 5,552 -> 1,241. Inconclusive attempts
+alone cost 1,603,667 JSON bytes; policy metadata adds 199,875 source bytes.
+
+The targeted six-case Python peak falls 3,776,338 -> 1,968,117 bytes, excluding
+native memory and full-corpus peak. Warm time slightly rises. Probe nodes now
+dominate logical state, 12,544,663 of 22,743,434 bytes. On the 29 remaining
+misses, probing every binary variable closes only two more and increases
+inventory-only time 6.81731 -> 11.49531 s and SQLite 20,533,248 -> 24,760,320
+bytes. This diagnostic argues against unconditional cap escalation.
+
+Both assumptions already propagate a common literal in 245 clear-probe archived
+nodes, including 179 unresolved nodes. Those unit reasons can support a new
+forced consequence by case splitting without another propagation search. This
+is an identified opportunity, not an implemented saving or new root closure.
+Shared trace storage, checking and invalidation still need explicit accounting.

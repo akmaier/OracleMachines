@@ -76,6 +76,16 @@ time falls from 21.17 to 17.64 s and SQLite from 96.91 to 65.57 MB. Targeted Pyt
 allocation also falls; regressions and measurement limits are retained. This
 reduces acquisition overhead while leaving the discovery gap unchanged.
 
+The [checked probing experiment](experiments/results/cnf-failed-literal/README.md)
+now uses unit-conflict proofs under an assumption to force its opposite. On
+1,025 matched inputs, four-candidate probing raises non-tiny structural closure
+from 358/513 to 484/513, including 19/64 -> 51/64 on fresh random formulas.
+Total time falls from 27.11 to 18.88 s and SQLite from 93.14 to 65.06 MB.
+This is standard failed-literal reasoning in the separate discovery layer;
+29 cases remain unresolved. Probing every binary variable closes only two more
+and costs more. The next target is common consequences already present in both
+inconclusive assumption traces, with their reuse and checking charged.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

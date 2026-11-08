@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/probe_failed_literal_limits.py", line 71, in <module>
+    out.write_text(json.dumps(run(directory),indent=2)+'\n')
+                              ~~~^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/probe_failed_literal_limits.py", line 43, in run
+    cold=audit(Path(tmp)/'cold.sqlite3',raw,dict(max_depth=2,probe_limit=cap),FailedLiteralInventory)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_pattern_inventory.py", line 114, in audit
+    assert path.read_bytes() == raw
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

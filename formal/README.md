@@ -1228,3 +1228,14 @@ refinement of the new edge format. All 312 Python tests and the unchanged Lean
 build/audit pass. The [matched representation study](../experiments/results/cnf-fused-conditioning/README.md)
 preserves all old plans and unresolved cases while reducing retained intermediate
 state; it adds no theorem about uniformly polynomial arbitrary-SAT acquisition.
+
+The checked failed-literal follow-up adds `failed_condition_forces` and
+`satisfiable_failed_condition` to `Residuals.lean`. A supplied refutation of
+`f.condition index value` forces the opposite Boolean value in every model and
+reduces satisfiability exactly to that remaining branch. The supplied refutation
+is an explicit hypothesis; unsuccessful look-ahead does not satisfy it. These
+lemmas do not verify Python propagation traces, persistence or cost bounds.
+All 319 Python tests pass. The Lean build/audit now covers 4,089 declarations /
+1,948 theorem declarations. The [matched study](../experiments/results/cnf-failed-literal/README.md)
+reports new structural closures and retains inconclusive probes, remaining
+misses and the unfavorable full-probing budget diagnostic.

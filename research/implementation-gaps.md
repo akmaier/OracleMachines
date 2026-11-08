@@ -3066,3 +3066,49 @@ unique labels). The 96-page PDF builds without warnings or box errors; pages
 87--89 were visually inspected. The next run should start with the bounded
 unit-conflict probing opportunity above, retaining the fused and unfused archives
 as baselines rather than repeating the completed contraction experiment.
+
+## Bounded checked failed-literal discovery (9 November)
+
+`cnf_failed_literal.py` implements the next discovery step. After existing
+family, component, simplification and projection priorities, it probes binary
+variables in incidence order with an optional per-residual cap. A checked unit
+conflict forces the opposite value; that assumption and unit closure reach the
+child directly. Forced rewrites preserve arbitrary-branch depth but strictly
+reduce support. All inconclusive probes, reasons, exact children and model lifts
+are checked and retained. The ordinary SAT decision solver is unchanged.
+
+The [1,025-input study](../experiments/results/cnf-failed-literal/README.md)
+retains all 949 previous inputs and adds 64 random holdout formulas and 12
+constructed/transfer/invalidation controls. At depth two and four conditioning
+candidates, four-variable probing raises closure 358/513 -> 484/513 non-tiny
+inputs and 19/64 -> 51/64 fresh random inputs. Its 126 gains include 88 SAT and
+38 UNSAT inputs; no baseline closure is lost on this corpus. Total time falls
+27.11056 -> 18.87839 s, SQLite 93,143,040 -> 65,056,768 bytes and full cold audit
+10.07933 -> 6.41165 s. The one-variable policy reaches 465/513 in 18.93343 s.
+All modes retain the same 5,379 ordinary solver residuals. Six-case traced Python
+peaks fall; native/full-corpus peaks are unmeasured and warm time slightly grows.
+
+Twenty-nine misses remain. Probing every binary variable on these sources closes
+only cases 968 and 1024, at higher inventory time (6.81731 -> 11.49531 s), storage
+and cold cost. The initial diagnostic omitted ordinary-solver tables, causing
+the shared auditor to create tables and fail byte preservation. Its archive and
+failure log are retained; final diagnostic archives initialize empty tables and
+both replay byte-identically. No certificate correctness failure occurred.
+
+Probe nodes now occupy 12.545 of 22.743 MB logical state. Profiling the largest
+discovery miss, case 894, points to repeated restriction, unit propagation/checks
+and normalization. More promising for discovery than raising the cap: 245
+archived inconclusive-probe nodes already have a common literal propagated by
+both assumptions, including 179 unresolved nodes. By Boolean case splitting
+that consequence is forced. These counts include unselected alternatives; using
+the facts is not implemented and does not yet add coverage. Next implement
+checked common-consequence reuse from existing traces, retaining failed probes,
+transport and dependency checks, then compare total cost and remaining cases.
+Probe-chain sharing and occurrence-driven scans are supporting cost targets.
+
+All 319 Python tests pass (27.38 s), including exhaustive fibers, random mixtures,
+renamings/edits, corrupt reasons/assumptions/transports and cold coexistence.
+Four new and seven prior complete archives replay unchanged. The two new Lean
+lemmas `failed_condition_forces` and `satisfiable_failed_condition` prove the
+semantic rule from a supplied refutation; they do not refine Python or SQLite.
+The full Lean build/audit passes at 4,089 declarations / 1,948 theorem declarations.

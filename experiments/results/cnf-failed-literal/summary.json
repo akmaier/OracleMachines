@@ -1,0 +1,878 @@
+[
+  {
+    "mode": "solver_only",
+    "total_seconds": 7.627823294373229,
+    "old_seconds": 5.515552674187347,
+    "archive": {
+      "mode": "solver_only",
+      "path": "archive-solver_only.sqlite3.gz",
+      "database_bytes": 21856256,
+      "compressed_bytes": 1734979,
+      "database_sha256": "c06126b1ca163836cd6de72ab1ba85ae45c88da2c8eec1565344c2e62988ae68",
+      "initialization_seconds": 0.0007418328896164894,
+      "warm_inventory_seconds": 0,
+      "storage": {},
+      "audit": {
+        "nodes": 0,
+        "sources": 0,
+        "residuals": 5379,
+        "seconds": 1.3740111249499023,
+        "bytes_unchanged": true
+      }
+    }
+  },
+  {
+    "mode": "baseline",
+    "total_seconds": 27.11055522155948,
+    "old_seconds": 18.971866846084595,
+    "archive": {
+      "mode": "baseline",
+      "path": "archive-baseline.sqlite3.gz",
+      "database_bytes": 93143040,
+      "compressed_bytes": 6501025,
+      "database_sha256": "f6fd9141687163067fdf0c84612d4777b684084c2116b767f3bd1530efff5733",
+      "initialization_seconds": 0.013625374995172024,
+      "warm_inventory_seconds": 0.12491741613484919,
+      "storage": {
+        "nodes": 8761,
+        "nodes_bytes": 38003109,
+        "sources": 1025,
+        "sources_bytes": 2592454
+      },
+      "audit": {
+        "nodes": 8761,
+        "sources": 1025,
+        "residuals": 5379,
+        "seconds": 10.079331540968269,
+        "bytes_unchanged": true
+      }
+    },
+    "discovery_seconds": 20.078803272219375,
+    "groups": {
+      "affine_mixture": {
+        "inputs": 32,
+        "closed": 32,
+        "unresolved_literals": 0
+      },
+      "edit": {
+        "inputs": 5,
+        "closed": 5,
+        "unresolved_literals": 0
+      },
+      "edit_variant": {
+        "inputs": 5,
+        "closed": 5,
+        "unresolved_literals": 0
+      },
+      "edited_random3": {
+        "inputs": 12,
+        "closed": 8,
+        "unresolved_literals": 497
+      },
+      "exhaustive2": {
+        "inputs": 512,
+        "closed": 512,
+        "unresolved_literals": 0
+      },
+      "growing": {
+        "inputs": 11,
+        "closed": 11,
+        "unresolved_literals": 0
+      },
+      "growing_simplification": {
+        "inputs": 6,
+        "closed": 6,
+        "unresolved_literals": 0
+      },
+      "holdout3": {
+        "inputs": 48,
+        "closed": 8,
+        "unresolved_literals": 16003
+      },
+      "holdout_mixed": {
+        "inputs": 24,
+        "closed": 14,
+        "unresolved_literals": 796
+      },
+      "large_coupled": {
+        "inputs": 2,
+        "closed": 2,
+        "unresolved_literals": 0
+      },
+      "new_random": {
+        "inputs": 48,
+        "closed": 48,
+        "unresolved_literals": 0
+      },
+      "probe_control": {
+        "inputs": 4,
+        "closed": 4,
+        "unresolved_literals": 0
+      },
+      "probe_holdout3": {
+        "inputs": 32,
+        "closed": 1,
+        "unresolved_literals": 15439
+      },
+      "probe_holdout_mixed": {
+        "inputs": 32,
+        "closed": 18,
+        "unresolved_literals": 741
+      },
+      "probe_invalidation": {
+        "inputs": 4,
+        "closed": 1,
+        "unresolved_literals": 655
+      },
+      "probe_transfer": {
+        "inputs": 4,
+        "closed": 4,
+        "unresolved_literals": 0
+      },
+      "projection_control": {
+        "inputs": 4,
+        "closed": 4,
+        "unresolved_literals": 0
+      },
+      "projection_variant": {
+        "inputs": 4,
+        "closed": 3,
+        "unresolved_literals": 283
+      },
+      "random": {
+        "inputs": 120,
+        "closed": 119,
+        "unresolved_literals": 14
+      },
+      "random3": {
+        "inputs": 48,
+        "closed": 13,
+        "unresolved_literals": 5908
+      },
+      "renamed_random3": {
+        "inputs": 12,
+        "closed": 4,
+        "unresolved_literals": 1655
+      },
+      "signed_random3": {
+        "inputs": 12,
+        "closed": 4,
+        "unresolved_literals": 1628
+      },
+      "simplification_control": {
+        "inputs": 6,
+        "closed": 6,
+        "unresolved_literals": 0
+      },
+      "simplification_variant": {
+        "inputs": 6,
+        "closed": 6,
+        "unresolved_literals": 0
+      },
+      "structured": {
+        "inputs": 16,
+        "closed": 16,
+        "unresolved_literals": 0
+      },
+      "variant": {
+        "inputs": 16,
+        "closed": 16,
+        "unresolved_literals": 0
+      }
+    },
+    "metrics": {
+      "key_serialized_bytes": 35099804,
+      "node_database_lookups": 16394,
+      "classification_calls": 32788,
+      "affine_verified_certificates": 32788,
+      "verified_pattern_nodes": 8761,
+      "inserted_nodes": 8761,
+      "serialized_bytes": 38003109,
+      "source_serialized_bytes": 2592454,
+      "inserted_sources": 1025,
+      "node_memory_hits": 42353,
+      "normalization_literal_visits": 7685002,
+      "classification_literal_payload": 5989658,
+      "matching_recognition_literal_visits": 107796,
+      "matching_conflict_edge_visits": 568,
+      "affine_grouping_literals": 5989658,
+      "affine_leftover_clauses": 2036652,
+      "decomposition_literal_visits": 5989658,
+      "affine_extracted_equations": 31050,
+      "affine_verification_literals": 222908,
+      "partition_verification_literals": 7163,
+      "affine_elimination_xors": 1368,
+      "affine_verification_xors": 1368,
+      "propagation_literal_visits": 11320108,
+      "simplification_reconstruction_literals": 7353272,
+      "verified_simplifications": 38420,
+      "conditioning_rank_literal_visits": 684252,
+      "conditioning_rank_variables": 61654,
+      "conditioning_candidates": 5552,
+      "restriction_literal_visits": 4812808,
+      "simplification_unit_check_literals": 300110,
+      "verified_projections": 208,
+      "fused_conditioning_edges": 7633,
+      "projection_rewrites": 30,
+      "verified_fused_conditioning_edges": 7633,
+      "projection_encoded_literals": 1102,
+      "projection_encoding_check_literals": 1102,
+      "simplification_rewrites": 28,
+      "projection_xors": 28,
+      "projection_verification_xors": 28
+    },
+    "gains": [],
+    "losses": []
+  },
+  {
+    "mode": "probe1",
+    "total_seconds": 18.933428197866306,
+    "old_seconds": 11.94434712221846,
+    "archive": {
+      "mode": "probe1",
+      "path": "archive-probe1.sqlite3.gz",
+      "database_bytes": 69357568,
+      "compressed_bytes": 4931963,
+      "database_sha256": "a1e4d1dd5e1d276b47dba80704bd6dd50aed00cdafbe7d18f525d257f4dc6ba9",
+      "initialization_seconds": 0.04312004102393985,
+      "warm_inventory_seconds": 0.12240624986588955,
+      "storage": {
+        "nodes": 5555,
+        "nodes_bytes": 24669288,
+        "sources": 1025,
+        "sources_bytes": 2792329
+      },
+      "audit": {
+        "nodes": 5555,
+        "sources": 1025,
+        "residuals": 5379,
+        "seconds": 7.091693209018558,
+        "bytes_unchanged": true
+      }
+    },
+    "discovery_seconds": 12.540529712103307,
+    "groups": {
+      "affine_mixture": {
+        "inputs": 32,
+        "closed": 32,
+        "unresolved_literals": 0
+      },
+      "edit": {
+        "inputs": 5,
+        "closed": 5,
+        "unresolved_literals": 0
+      },
+      "edit_variant": {
+        "inputs": 5,
+        "closed": 5,
+        "unresolved_literals": 0
+      },
+      "edited_random3": {
+        "inputs": 12,
+        "closed": 12,
+        "unresolved_literals": 0
+      },
+      "exhaustive2": {
+        "inputs": 512,
+        "closed": 512,
+        "unresolved_literals": 0
+      },
+      "growing": {
+        "inputs": 11,
+        "closed": 11,
+        "unresolved_literals": 0
+      },
+      "growing_simplification": {
+        "inputs": 6,
+        "closed": 6,
+        "unresolved_literals": 0
+      },
+      "holdout3": {
+        "inputs": 48,
+        "closed": 38,
+        "unresolved_literals": 2413
+      },
+      "holdout_mixed": {
+        "inputs": 24,
+        "closed": 16,
+        "unresolved_literals": 444
+      },
+      "large_coupled": {
+        "inputs": 2,
+        "closed": 2,
+        "unresolved_literals": 0
+      },
+      "new_random": {
+        "inputs": 48,
+        "closed": 48,
+        "unresolved_literals": 0
+      },
+      "probe_control": {
+        "inputs": 4,
+        "closed": 4,
+        "unresolved_literals": 0
+      },
+      "probe_holdout3": {
+        "inputs": 32,
+        "closed": 18,
+        "unresolved_literals": 3329
+      },
+      "probe_holdout_mixed": {
+        "inputs": 32,
+        "closed": 25,
+        "unresolved_literals": 383
+      },
+      "probe_invalidation": {
+        "inputs": 4,
+        "closed": 2,
+        "unresolved_literals": 334
+      },
+      "probe_transfer": {
+        "inputs": 4,
+        "closed": 4,
+        "unresolved_literals": 0
+      },
+      "projection_control": {
+        "inputs": 4,
+        "closed": 4,
+        "unresolved_literals": 0
+      },
+      "projection_variant": {
+        "inputs": 4,
+        "closed": 3,
+        "unresolved_literals": 283
+      },
+      "random": {
+        "inputs": 120,
+        "closed": 120,
+        "unresolved_literals": 0
+      },
+      "random3": {
+        "inputs": 48,
+        "closed": 45,
+        "unresolved_literals": 141
+      },
+      "renamed_random3": {
+        "inputs": 12,
+        "closed": 11,
+        "unresolved_literals": 89
+      },
+      "signed_random3": {
+        "inputs": 12,
+        "closed": 10,
+        "unresolved_literals": 78
+      },
+      "simplification_control": {
+        "inputs": 6,
+        "closed": 6,
+        "unresolved_literals": 0
+      },
+      "simplification_variant": {
+        "inputs": 6,
+        "closed": 6,
+        "unresolved_literals": 0
+      },
+      "structured": {
+        "inputs": 16,
+        "closed": 16,
+        "unresolved_literals": 0
+      },
+      "variant": {
+        "inputs": 16,
+        "closed": 16,
+        "unresolved_literals": 0
+      }
+    },
+    "metrics": {
+      "key_serialized_bytes": 20013948,
+      "node_database_lookups": 7958,
+      "classification_calls": 15916,
+      "affine_verified_certificates": 15916,
+      "verified_pattern_nodes": 5555,
+      "inserted_nodes": 5555,
+      "serialized_bytes": 24669288,
+      "source_serialized_bytes": 2792329,
+      "inserted_sources": 1025,
+      "node_memory_hits": 23951,
+      "normalization_literal_visits": 3714451,
+      "classification_literal_payload": 2801464,
+      "matching_recognition_literal_visits": 54324,
+      "matching_conflict_edge_visits": 600,
+      "affine_grouping_literals": 2801464,
+      "affine_leftover_clauses": 922032,
+      "decomposition_literal_visits": 4653238,
+      "affine_extracted_equations": 12204,
+      "affine_verification_literals": 195836,
+      "partition_verification_literals": 5225,
+      "affine_elimination_xors": 810,
+      "affine_verification_xors": 810,
+      "propagation_literal_visits": 8907817,
+      "simplification_reconstruction_literals": 5361084,
+      "verified_simplifications": 30688,
+      "probe_ranking_literal_visits": 2553588,
+      "restriction_literal_visits": 7277536,
+      "probe_attempts": 7349,
+      "conditioning_rank_literal_visits": 324106,
+      "conditioning_rank_variables": 29656,
+      "conditioning_candidates": 1886,
+      "simplification_unit_check_literals": 332957,
+      "verified_projections": 224,
+      "verified_probe_attempts": 14035,
+      "fused_conditioning_edges": 2403,
+      "projection_rewrites": 31,
+      "verified_fused_conditioning_edges": 2403,
+      "probe_forced_values": 2451,
+      "probe_rewrites": 2451,
+      "projection_encoded_literals": 1084,
+      "projection_encoding_check_literals": 1084,
+      "simplification_rewrites": 29,
+      "projection_xors": 32,
+      "projection_verification_xors": 32
+    },
+    "gains": [
+      631,
+      778,
+      779,
+      782,
+      784,
+      786,
+      787,
+      788,
+      789,
+      792,
+      793,
+      794,
+      795,
+      798,
+      800,
+      801,
+      802,
+      803,
+      804,
+      805,
+      806,
+      807,
+      808,
+      809,
+      810,
+      811,
+      813,
+      814,
+      815,
+      817,
+      820,
+      821,
+      822,
+      841,
+      843,
+      845,
+      848,
+      849,
+      853,
+      854,
+      855,
+      865,
+      866,
+      867,
+      868,
+      869,
+      870,
+      871,
+      872,
+      873,
+      874,
+      876,
+      877,
+      878,
+      880,
+      886,
+      889,
+      891,
+      893,
+      895,
+      897,
+      898,
+      900,
+      902,
+      905,
+      916,
+      918,
+      922,
+      924,
+      928,
+      930,
+      932,
+      934,
+      935,
+      936,
+      937,
+      938,
+      940,
+      942,
+      943,
+      944,
+      945,
+      950,
+      951,
+      952,
+      953,
+      954,
+      957,
+      958,
+      959,
+      960,
+      961,
+      963,
+      964,
+      967,
+      969,
+      972,
+      974,
+      980,
+      987,
+      990,
+      994,
+      996,
+      998,
+      1000,
+      1004,
+      1018
+    ],
+    "losses": []
+  },
+  {
+    "mode": "probe4",
+    "total_seconds": 18.878391747595742,
+    "old_seconds": 11.46593512617983,
+    "archive": {
+      "mode": "probe4",
+      "path": "archive-probe4.sqlite3.gz",
+      "database_bytes": 65056768,
+      "compressed_bytes": 4711441,
+      "database_sha256": "9c021d20043fa6611b70b7dbba8cd4a9dafcc042aed5b741f22cbd4ff55703f4",
+      "initialization_seconds": 0.03712895791977644,
+      "warm_inventory_seconds": 0.12835045787505805,
+      "storage": {
+        "nodes": 5271,
+        "nodes_bytes": 22743434,
+        "sources": 1025,
+        "sources_bytes": 2792329
+      },
+      "audit": {
+        "nodes": 5271,
+        "sources": 1025,
+        "residuals": 5379,
+        "seconds": 6.411649415967986,
+        "bytes_unchanged": true
+      }
+    },
+    "discovery_seconds": 12.394646469969302,
+    "groups": {
+      "affine_mixture": {
+        "inputs": 32,
+        "closed": 32,
+        "unresolved_literals": 0
+      },
+      "edit": {
+        "inputs": 5,
+        "closed": 5,
+        "unresolved_literals": 0
+      },
+      "edit_variant": {
+        "inputs": 5,
+        "closed": 5,
+        "unresolved_literals": 0
+      },
+      "edited_random3": {
+        "inputs": 12,
+        "closed": 12,
+        "unresolved_literals": 0
+      },
+      "exhaustive2": {
+        "inputs": 512,
+        "closed": 512,
+        "unresolved_literals": 0
+      },
+      "growing": {
+        "inputs": 11,
+        "closed": 11,
+        "unresolved_literals": 0
+      },
+      "growing_simplification": {
+        "inputs": 6,
+        "closed": 6,
+        "unresolved_literals": 0
+      },
+      "holdout3": {
+        "inputs": 48,
+        "closed": 44,
+        "unresolved_literals": 703
+      },
+      "holdout_mixed": {
+        "inputs": 24,
+        "closed": 18,
+        "unresolved_literals": 304
+      },
+      "large_coupled": {
+        "inputs": 2,
+        "closed": 2,
+        "unresolved_literals": 0
+      },
+      "new_random": {
+        "inputs": 48,
+        "closed": 48,
+        "unresolved_literals": 0
+      },
+      "probe_control": {
+        "inputs": 4,
+        "closed": 4,
+        "unresolved_literals": 0
+      },
+      "probe_holdout3": {
+        "inputs": 32,
+        "closed": 23,
+        "unresolved_literals": 1619
+      },
+      "probe_holdout_mixed": {
+        "inputs": 32,
+        "closed": 28,
+        "unresolved_literals": 303
+      },
+      "probe_invalidation": {
+        "inputs": 4,
+        "closed": 2,
+        "unresolved_literals": 293
+      },
+      "probe_transfer": {
+        "inputs": 4,
+        "closed": 4,
+        "unresolved_literals": 0
+      },
+      "projection_control": {
+        "inputs": 4,
+        "closed": 4,
+        "unresolved_literals": 0
+      },
+      "projection_variant": {
+        "inputs": 4,
+        "closed": 3,
+        "unresolved_literals": 283
+      },
+      "random": {
+        "inputs": 120,
+        "closed": 120,
+        "unresolved_literals": 0
+      },
+      "random3": {
+        "inputs": 48,
+        "closed": 47,
+        "unresolved_literals": 26
+      },
+      "renamed_random3": {
+        "inputs": 12,
+        "closed": 11,
+        "unresolved_literals": 26
+      },
+      "signed_random3": {
+        "inputs": 12,
+        "closed": 11,
+        "unresolved_literals": 26
+      },
+      "simplification_control": {
+        "inputs": 6,
+        "closed": 6,
+        "unresolved_literals": 0
+      },
+      "simplification_variant": {
+        "inputs": 6,
+        "closed": 6,
+        "unresolved_literals": 0
+      },
+      "structured": {
+        "inputs": 16,
+        "closed": 16,
+        "unresolved_literals": 0
+      },
+      "variant": {
+        "inputs": 16,
+        "closed": 16,
+        "unresolved_literals": 0
+      }
+    },
+    "metrics": {
+      "key_serialized_bytes": 16234726,
+      "node_database_lookups": 6744,
+      "classification_calls": 13488,
+      "affine_verified_certificates": 13488,
+      "verified_pattern_nodes": 5271,
+      "inserted_nodes": 5271,
+      "serialized_bytes": 22743434,
+      "source_serialized_bytes": 2792329,
+      "inserted_sources": 1025,
+      "node_memory_hits": 20698,
+      "normalization_literal_visits": 2777310,
+      "classification_literal_payload": 2053118,
+      "matching_recognition_literal_visits": 45882,
+      "matching_conflict_edge_visits": 600,
+      "affine_grouping_literals": 2053118,
+      "affine_leftover_clauses": 663846,
+      "decomposition_literal_visits": 3315243,
+      "affine_extracted_equations": 9108,
+      "affine_verification_literals": 191788,
+      "partition_verification_literals": 4985,
+      "affine_elimination_xors": 762,
+      "affine_verification_xors": 762,
+      "propagation_literal_visits": 10145779,
+      "simplification_reconstruction_literals": 6735962,
+      "verified_simplifications": 46851,
+      "probe_ranking_literal_visits": 2314294,
+      "restriction_literal_visits": 10641636,
+      "probe_attempts": 17352,
+      "conditioning_rank_literal_visits": 213634,
+      "conditioning_rank_variables": 20048,
+      "conditioning_candidates": 1241,
+      "simplification_unit_check_literals": 418457,
+      "verified_projections": 228,
+      "verified_probe_attempts": 33356,
+      "fused_conditioning_edges": 1473,
+      "projection_rewrites": 32,
+      "verified_fused_conditioning_edges": 1473,
+      "probe_forced_values": 2958,
+      "probe_rewrites": 2958,
+      "projection_encoded_literals": 1062,
+      "projection_encoding_check_literals": 1062,
+      "simplification_rewrites": 23,
+      "projection_xors": 34,
+      "projection_verification_xors": 34
+    },
+    "gains": [
+      631,
+      778,
+      779,
+      782,
+      784,
+      786,
+      787,
+      788,
+      789,
+      792,
+      793,
+      794,
+      795,
+      796,
+      798,
+      800,
+      801,
+      802,
+      803,
+      804,
+      805,
+      806,
+      807,
+      808,
+      809,
+      810,
+      811,
+      813,
+      814,
+      815,
+      817,
+      818,
+      820,
+      821,
+      822,
+      841,
+      843,
+      845,
+      848,
+      849,
+      853,
+      854,
+      855,
+      865,
+      866,
+      867,
+      868,
+      869,
+      870,
+      871,
+      872,
+      873,
+      874,
+      876,
+      877,
+      878,
+      880,
+      886,
+      887,
+      889,
+      891,
+      892,
+      893,
+      895,
+      896,
+      897,
+      898,
+      899,
+      900,
+      901,
+      902,
+      903,
+      904,
+      905,
+      909,
+      916,
+      918,
+      922,
+      924,
+      928,
+      930,
+      932,
+      934,
+      935,
+      936,
+      937,
+      938,
+      939,
+      940,
+      942,
+      943,
+      944,
+      945,
+      950,
+      951,
+      952,
+      953,
+      954,
+      957,
+      958,
+      959,
+      960,
+      961,
+      963,
+      964,
+      965,
+      967,
+      969,
+      972,
+      973,
+      974,
+      975,
+      976,
+      979,
+      980,
+      981,
+      987,
+      988,
+      990,
+      994,
+      996,
+      998,
+      1000,
+      1003,
+      1004,
+      1018
+    ],
+    "losses": []
+  }
+]

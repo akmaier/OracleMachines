@@ -22,6 +22,7 @@ import OracleMachines.StructuralExpansion
 import OracleMachines.Residuals
 import OracleMachines.SearchMachine
 import OracleMachines.InterfaceProtocol
+import OracleMachines.AffineCoupling
 import Lean.Util.CollectAxioms
 
 /-!

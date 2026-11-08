@@ -148,8 +148,11 @@ class PatternInventory:
 
     def _discover(self, cnf, depth):
         profile = self._profile(cnf)
-        node = dict(cnf=[list(c) for c in cnf], depth=depth, profile=profile)
         groups = components(cnf, self.counts) if self.config['decompose'] else [cnf]
+        return self._discover_profile(cnf, depth, profile, groups)
+
+    def _discover_profile(self, cnf, depth, profile, groups):
+        node = dict(cnf=[list(c) for c in cnf], depth=depth, profile=profile)
         if len(groups) > 1:
             edges = [self._edge(group, depth) for group in groups]
             node.update(kind='and', edges=edges, summary=self._summary(edges))
@@ -195,9 +198,14 @@ class PatternInventory:
         # JSON-normalize tuple evidence before comparing cold-loaded records.
         if encode(node['profile']) != encode(profile):
             raise ValueError('Invalid pattern certificate')
+        groups = components(cnf, self.counts) if self.config['decompose'] else [cnf]
+        self._check_profile(key, node, cnf, profile, groups)
+        self.counts['verified_pattern_nodes'] += 1
+
+    def _check_profile(self, key, node, cnf, profile, groups):
+        depth = node['depth']
         base_fields = {'cnf', 'depth', 'profile', 'kind', 'summary'}
         kind = node.get('kind')
-        groups = components(cnf, self.counts) if self.config['decompose'] else [cnf]
         if kind == 'and':
             if set(node) != base_fields | {'edges'} or len(groups) <= 1 or len(node['edges']) != len(groups):
                 raise ValueError('Invalid independent partition')
@@ -267,7 +275,6 @@ class PatternInventory:
             raise ValueError('Unexpected conditioning of recognized family')
         if encode(node['summary']) != encode(summary):
             raise ValueError('Incorrect coverage summary')
-        self.counts['verified_pattern_nodes'] += 1
 
     def inspect(self, source):
         self.counts = Counter()

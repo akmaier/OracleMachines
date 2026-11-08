@@ -71,6 +71,18 @@ controls unresolved. Their two-variable interfaces are the next target for
 exact projection and composition, with checked witness lifting. General hidden
 affine recognition and efficient arbitrary-CNF decomposition remain open.
 
+**Exact projection implemented:** the [775-input study](../experiments/results/cnf-affine-projection/README.md)
+eliminates only affine variables absent from leftovers, checks the resulting
+boundary relation, and lifts reduced models. Direct boundary CNF encoding is
+budgeted before enumeration; a miss preserves the original planner. All six
+growing coupled controls now close without conditioning, but the original 36
+open sources remain open at depth two. The matching/parity remainder still mixes
+an easy matching component with one bridge clause. Its positive-only bridge
+variable identifies the next discovery target: checked leftover simplification
+and interface-aware conditioning, tested against constrained and random cases.
+Lean now proves composition with an arbitrary leftover predicate invariant on
+eliminated variables; the Python pipeline remains outside that refinement.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

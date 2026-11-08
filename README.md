@@ -47,6 +47,12 @@ couplings. It closes 14 of those 50 cases; the remaining 36 and observed cost
 regressions are preserved. Exact composition across small shared interfaces is
 the next discovery target. The ordinary SAT solver is unchanged.
 
+The [projection extension](experiments/results/cnf-affine-projection/README.md)
+now implements exact interface reduction and checked model lifting. Six growing
+coupled affine controls close without branching; the original 36 open sources
+still expose gaps in mixed leftovers. Lean composition lemmas, cost regressions
+and encoding-budget failures are preserved alongside the gains.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

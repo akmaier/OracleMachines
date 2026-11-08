@@ -1183,3 +1183,17 @@ The full suite now passes 284 Python tests. See the
 [matched study](../experiments/results/cnf-affine-patterns/README.md); its random
 coverage gains concern unit/binary contradictions after conditioning, and mixed
 consistent systems still require exact interface composition.
+
+`AffineCoupling.lean` now extends the existing executable affine projection
+theorem to arbitrary leftover predicates invariant under changes to eliminated
+variables. `project_with_remainder_exact` gives the exact existential fiber and
+witness existence; `project_with_remainder_sat` and `_unsat` transfer decisions.
+The invariance condition is essential: a variable occurring in the remainder
+cannot simply be removed. These lemmas are included in the axiom audit.
+
+The corresponding Python discovery prototype checks internal-first row traces,
+budgeted direct encoding, projected child identities and model lifting against
+the full parent CNF. These are executable checks, not a refinement of Python or
+SQLite by the Lean lemmas. All 292 Python tests pass. The
+[projection study](../experiments/results/cnf-affine-projection/README.md)
+retains missed mixed families, budget failures and memory/time regressions.

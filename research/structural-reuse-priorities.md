@@ -12,14 +12,29 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-**Next research experiment:** project extracted affine systems onto the variables
-shared with leftover clauses, and compare exact interface composition or
-interface-first conditioning with the current occurrence-order policy. In the
-new coupled controls, 32 equations involve 66 variables but share only two with
-one leftover binary clause. They remain unresolved at depth two. Preserve exact
-existential semantics and checked witness lifting, charge projection and replay,
-and test the matching/parity mixture and unresolved random inputs as controls.
-Do not discard couplings or infer that arbitrary leftover CNF is tractable.
+**Next research experiment:** expose tractable structure in the mixed leftover
+after projection. The matching/parity case now shrinks from 13 variables/61
+literals to 10/29, but still misses the strict matching recognizer. Its bridge
+has a positive-only variable: setting it true removes the bridge and exposes
+matching. Compare checked pure-literal/unit simplification with interface-aware
+conditioning, including both-polarity couplings and every remaining random miss.
+Keep existential witness lifting and exact source dependencies explicit.
+
+The [projection study](../experiments/results/cnf-affine-projection/README.md)
+implements exact affine projection with a bounded CNF encoding and checked model
+lifting. It closes all six growing coupled controls at depth zero, including
+128 equations/258 variables projecting to two variables and one clause. On 775
+inputs, depth-two analysis plus solving falls from 4.471 to 3.750 s and SQLite
+from 22.913 to 19.030 MB. There are no new depth-two closures on the original
+664 inputs; 36 remain open. The small memory diagnostic grows, and mixed-case
+overhead and encoding-budget failures are retained. Three new Lean theorems
+establish semantic composition with invariant leftovers, not Python refinement.
+
+The largest remaining measured cost on the 258-variable coupled control is now
+ordinary solving of the original source: 565 of 579 ms, versus 13 ms discovery.
+Using checked projected decisions could avoid this duplication; it is supporting
+integration work alongside the primary discovery target. Native affine boundary
+rows would avoid exponential CNF re-encoding. Neither improvement is implemented.
 
 The [affine extraction study](../experiments/results/cnf-affine-patterns/README.md)
 implements the previous support/sign-pattern target. Exact extraction plus checked

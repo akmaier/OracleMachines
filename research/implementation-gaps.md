@@ -2868,3 +2868,49 @@ All 45 earlier proof blocks remain intact (46 total; 166 unique labels). The
 90-page PDF builds without warnings or box errors; changed pages 82--83 were
 visually inspected. The existing Lean build and axiom audit pass unchanged
 (4,083 declarations / 1,943 theorem declarations). No new Lean theorem is claimed.
+
+## 2026-11-08: checked affine projection and existential composition
+
+Implemented `experiments/cnf_affine_projection.py` and a versioned optional
+inventory policy. Internal-first elimination projects extracted equations onto
+the variables retained by leftover clauses. Independent checks verify row
+dependencies, exact boundary constraints, budgeted direct CNF encoding, child
+identity/bindings and strict variable decrease. Models lift by back substitution
+and are checked against the full parent CNF. Projection has existential semantics;
+it is not pointwise equivalence on eliminated variables. A budget miss retains
+the original planner. Exact originals and old archive rows remain unchanged.
+
+The [775-source comparison](../experiments/results/cnf-affine-projection/README.md)
+includes all previous 733 sources, growing 64/128-equation coupled cases, exact
+boundary/budget controls with variants and 32 fresh affine mixtures. Six growing
+coupled cases gain closure even at depth zero. Depth-two closure beyond the 512
+tiny cases rises from 209/263 to 215/263. The original 664-source result stays
+at 116/152 non-tiny inputs: 34 seeded CNFs and the matching/parity pair remain
+open. Initial test expectations that projection alone would close matching/parity
+were disproved and corrected to retain the miss. Its source shrinks from 13/61
+variables/literals to 10/29; selected unresolved literals shrink from 22 to 18.
+
+Total depth-two analysis plus original solving and root lifting falls from
+4.47144 to 3.75039 seconds, SQLite from 22,913,024 to 19,030,016 bytes, and full
+cold audit from 1.40055 to 0.98692 seconds. Depth-zero operation time/storage and
+the six-case peak Python diagnostic increase. All regressions remain recorded.
+The selected unresolved-literal aggregate falls from 31,924 to 1,579, dominated
+by growing controls rather than new random coverage. At 258 variables, discovery
+is 13.13 ms but original-source solving still takes 564.84 ms, identifying an
+integration cost rather than further projection cost.
+
+All 292 Python tests pass, including exhaustive two-variable affine systems and
+boundaries, existential fibers, lifting, forged dependencies, encoding-budget
+checks before enumeration and cold corruption/coexistence. All five new and five
+previous affine-study archives replay without byte changes or new solving. New
+Lean lemmas in `AffineCoupling.lean` compose the existing executable projection
+theorem with a leftover predicate invariant on eliminated variables, proving
+fiber/SAT/UNSAT equivalence. They do not refine the Python pipeline.
+
+**Next target:** checked simplification and interface-aware conditioning of mixed
+leftovers. The remaining matching/parity bridge has a positive-only variable;
+setting it true exposes matching. Test this against both-polarity couplings and
+all unresolved random cases. Native affine boundary rows would avoid the observed
+direct-encoding cap; integrating projected decisions could avoid expensive
+original-source solving. Keep these supporting opportunities distinct from the
+primary unresolved discovery obligation and arbitrary-SAT resource bounds.

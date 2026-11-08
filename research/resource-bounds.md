@@ -790,3 +790,53 @@ has 66 variables. Exact existential projection onto that interface is the next
 target. Recognition, row projection, compatibility, witness lifting, invalidation
 and cold checking must be charged. Arbitrary leftover constraints can still
 encode general SAT, even if the affine projection itself is cheap.
+
+## 14. Exact affine projection with bounded boundary materialization
+
+`ProjectionPatternInventory` now rewrites F = A AND R by eliminating only
+variables H of A absent from R. Checked internal-first row operations give
+boundary equations B with (exists H, F) equivalent to B AND R. Nonpivot internal
+variables are free; back substitution through internal pivots lifts every
+feasible boundary assignment. The checker validates all dependencies, complete
+boundary rows, generated sign halves, exact child identities and strict support
+decrease. Projection consumes no conditioning depth. A successful rewrite removes
+at least one variable, preserving termination with existing components/branches.
+
+For e equations on n variables and h internal variables, each equation performs
+at most min(e,h) eliminations. Discovery and checking therefore each use at most
+e min(e,h) XOR operations on n-bit masks, plus row construction/scans and the
+earlier extraction costs. Stored row masks use O(en) bits and dependencies use
+O(e min(e,h)) index entries, in addition to source references and bindings.
+The current compiler materializes each projected width-w equation using
+w*2^(w-1) literal occurrences. It checks the aggregate default budget B=4,096
+before enumeration and counts an empty contradiction clause as one budget unit.
+An encoding miss retains the original formula and planner; it never means UNSAT.
+Native affine output would avoid this exponential materialization, but is not
+yet integrated into mixed residual analysis.
+
+Lifting visits reduced rows, reconstructs pivot values, checks original affine
+equations and checks the entire parent CNF. It uses O(en+S+L) coefficient/literal
+visits in a conservative dense accounting, with integer bit-operation costs
+additional. Exact originals, certificate rows, full keys and source metadata
+remain stored. No generic minimal-space or incremental-update bound follows.
+The Lean composition lemmas extend the existing executable projection theorem
+under an explicit remainder-invariance hypothesis. They do not refine this
+Python extraction, sparse elimination, encoding, lifting or persistence code.
+
+On [775 matched inputs](../experiments/results/cnf-affine-projection/README.md),
+depth-two pattern nodes fall from 3,389 to 3,221; logical node payload falls from
+9,983,460 to 6,669,670 bytes, while source payload grows from 1,305,669 to
+1,369,994 bytes. SQLite including the unchanged solver falls from 22,913,024 to
+19,030,016 bytes. Total analysis plus solving/lifting falls from 4.47144 to
+3.75039 seconds, and full cold audit from 1.40055 to 0.98692 seconds. At depth
+zero, total time instead rises from 2.17737 to 2.26272 seconds and SQLite grows
+by 262,144 bytes. Six-case traced Python peaks rise at both depths; at depth two,
+147,595 becomes 153,395 bytes. This excludes native SQLite/RSS.
+
+The six new depth-two closures are growing affine systems with one binary
+coupling clause. All project to two variables and close already at depth zero.
+At 128 equations/258 variables, discovery falls from 390.46 to 13.13 ms, but
+the original-source solver still takes 564.84 ms and lifting adds 0.52 ms.
+Avoiding this duplicated solving is an integration opportunity. No additional
+depth-two closure occurs among the original 664 sources. Arbitrary leftovers,
+missed mixed structure and wide projected equations remain explicit gaps.

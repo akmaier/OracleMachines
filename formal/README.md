@@ -65,6 +65,13 @@ module `OracleMachines.lean` imports the complete development and its audit.
 
 ## Conventions and boundary of the formalization
 
+`Residuals.lean` adds exact single-variable conditioning and SAT/UNSAT branch
+recomposition for arbitrary formulas. Its four main lemmas are `condition_eval`,
+`satisfiable_condition`, `satisfiable_split`, and `unsatisfiable_split`. They
+support the semantics of the research CNF residual candidate, but do not verify
+its Python implementation or prove a polynomial bound on its residual count.
+The checkpoint audit includes 4,061 declarations / 1,924 theorem declarations.
+
 The follow-up adds two independently scoped modules. `CompactExpansion.lean`
 stores a unary coverage cap of `n` cells, constructs it in `n` allocation steps,
 preserves answers at each extension, and eventually covers every valid

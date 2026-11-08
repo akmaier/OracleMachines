@@ -2060,3 +2060,29 @@ and all 147 labels are unique. Two LaTeX passes produce a 76-page PDF with no
 warnings or overfull/underfull boxes. Revised pages 6/18 and adjoining pages 7/19
 were rendered and visually inspected. `git diff --check` passes. No solver or
 Lean tests were rerun for this exposition-only change.
+
+
+## 2026-11-08: executable arbitrary-CNF residual candidate
+
+The user asks to pursue a uniform polynomial solution for every CNF, charging
+all acquisition. [The candidate analysis](residual-candidate.md) records a new
+research implementation with explicit Horn/dual-Horn/2-CNF leaves, independent
+components, variable branching, and persistent exact residual reuse. Full CNF
+keys avoid a collision-free-hash assumption. SAT models and UNSAT dependency
+certificates are checked in Python on acquisition and cold replay; this is not
+yet part of the production solver's Lean trust boundary.
+
+All 217 Python tests pass. Lean proves conditioning and branch recomposition;
+the audit passes 4,061 declarations / 1,924 theorems without additional axioms.
+The first experiment retains 156 matched decisions over 26 inputs, including
+warm and cold replay, plus all 104 result archives. Thirty-two repeated
+components need 6 expansions versus 161 without search reuse. Seven pigeons
+into six holes need 416 versus 1,235. Cold replay creates no new nodes but checks
+all 416 negative-certificate nodes. All prior solver results remain untouched.
+
+The residual count still lacks a uniform polynomial bound. The immediate
+structural opportunity is matching: the pigeonhole family should be recognized
+and solved with a matching/Hall certificate rather than residual branching.
+This is established tractable-class reasoning, with a direct CMP-SAT precedent
+in Lenchner's 2019 preprint, and does not cover every CNF. Initial evidence,
+including cases where decomposition adds work, is preserved for comparison.

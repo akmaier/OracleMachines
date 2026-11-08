@@ -701,15 +701,53 @@ runtime work. The existing reference-count loops are shared by the generic and
 source stores, with their previous underflow/reference checks. Their arithmetic
 is not covered by the new map invariant.
 
-Named child references, equality between serialized masks and stored summaries,
-dependency lifetime under eviction, exact requested-patch semantics and complete
-serialized replay remain separate obligations. So do Python/SQLite refinement,
-general factor row/equivalence caches, acceptance completeness and complete
-resource costs. The guarantee is for the supplied adjacent-block representation;
-it gives no unrestricted-SAT structural or coverage bound.
+The next checkpoint below adds serialized-summary correspondence and proves
+named child lookups at registration. Dependency lifetime, exact requested-patch
+semantics, complete serialized replay, Python/SQLite refinement, general factor
+row/equivalence caches, acceptance completeness and complete resource costs
+remain separate obligations. The guarantee is for the supplied adjacent-block
+representation; it gives no unrestricted-SAT structural or coverage bound.
 
 At this checkpoint, **162 tests pass**, including 23 source-update tests. Lean
 audits **2,858 declarations / 1,367 theorem declarations** without admits or added
 axioms. New regressions cover atomic deletion failure, reference checks after
 rollback, shared descendants, safe name reuse, distinct original clauses with
 equal relations, and missing-field rollback.
+
+## Named child registration and serialized summaries
+
+[`SourceLinks.lean`](OracleMachines/SourceLinks.lean) defines `JoinLinks` against
+the exact model-map snapshot used at registration. `readJoin` returns a node
+with equations for its decoded left/right names, their successful lookups and
+the checked consecutive join of those two retrieved models. The native source
+registration path now executes this constructor. Its subtype proof erases;
+it does not retain the registration map or copy/scan a store.
+
+`JoinLinks.original_clauses` attributes every original clause occurrence to the
+retrieved children. `decision_exact` requires one valuation satisfying **both**
+child sources. It does not conjoin independently chosen SAT answers.
+`distinct_children` follows from consecutive starts and positive subtree span;
+this fact is specific to indexed source nodes, not the generic relation DAG.
+
+`insert_fresh` preserves a join's links under a fresh-key model insertion.
+`erase_unreferenced` preserves them when the removed key is neither decoded child.
+These are conditional map-transition theorems. The runtime zero-incoming-count
+test has not yet been proved to imply the erasure premise. Nor is `JoinLinks`
+yet a field of a complete global store invariant across every request. The join
+constructor proves the registration snapshot; the missing lifetime theorem must
+connect that snapshot to later lookups.
+
+`BodyMatches.summary` now also retains the decoded mask and its exact relation
+equality to the model's cached summary. This field is part of the existing paired
+store invariant and survives paired insertion/erasure. Leaves and padding use
+their checked relation directly; branches retain the successful comparison proof.
+The decoder still enforces the bounded mask range. This adds no relation scan
+beyond the existing comparison, and no new runtime counter or speedup claim.
+Parsing wrappers, comparisons, allocation, transport and archive access remain
+outside a complete native cost theorem.
+
+All **165 tests pass**, including 26 source-update tests. Lean audits **2,874
+declarations / 1,380 theorem declarations** without admits or added axioms.
+New cases cover equal relations with distinct named sources, malformed/missing
+children, live-identity rebinding, wrong masks with unchanged SAT answers, and
+12 parents deleted in shuffled order while preserving their shared children.

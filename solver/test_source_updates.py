@@ -17,6 +17,65 @@ def sat(clauses,n):
 
 
 class SourceUpdateTests(unittest.TestCase):
+    def test_named_join_uses_exact_sources_even_with_equal_relations(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            s._request(dict(mode='source_init',id='links',width=1,layers=[[1],[2],[3]]))
+            leaf=dict(id='empty',layout='links',width=1,start=0,height=0,mask=15,clauses=[])
+            tautologies=[[1,-1],[1,-1]]
+            other=dict(leaf,id='other',clauses=tautologies)
+            right=dict(leaf,id='right',start=1)
+            root=dict(id='root',layout='links',width=1,start=0,height=1,left='other',right='right',mask=15)
+            s._request(dict(mode='source_define',nodes=[leaf,other,right,root]))
+            # Both candidate left children have identical relations, but the
+            # chosen name determines the exact original clause occurrences.
+            with self.assertRaisesRegex(ValueError,'Original source clauses differ'):
+                s._request(dict(mode='source_bind',root='root',width=1,layers=[[1],[2],[3]],clauses=[],witness=False))
+            bound=s._request(dict(mode='source_bind',root='root',width=1,layers=[[1],[2],[3]],clauses=tautologies,witness=True))
+            self.assertTrue(bound['verdict']['answer'])
+            for changes in (dict(left='missing'),dict(right='missing'),dict(left=5),dict(right=None)):
+                with self.assertRaises(ValueError):
+                    s._request(dict(mode='source_define',nodes=[dict(root,id='bad',**changes)]))
+            with self.assertRaisesRegex(ValueError,'identity changed'):
+                s._request(dict(mode='source_define',nodes=[dict(other,clauses=[])]))
+            self.assertTrue(s._request(dict(mode='source_query',root='root',witness=False))['answer'])
+
+    def test_serialized_masks_must_match_even_when_sat_answer_matches(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            s._request(dict(mode='source_init',id='masks',width=1,layers=[[1],[2],[3]]))
+            left=dict(id='left',layout='masks',width=1,start=0,height=0,mask=12,clauses=[[1]])
+            right=dict(left,id='right',start=1,mask=15,clauses=[])
+            pad=dict(right,id='pad',start=2,mask=9)
+            root=dict(id='root',layout='masks',width=1,start=0,height=1,left='left',right='right',mask=12)
+            for body in (left,pad):
+                with self.assertRaises(ValueError):
+                    s._request(dict(mode='source_define',nodes=[dict(body,mask=15)]))
+            s._request(dict(mode='source_define',nodes=[left,right,pad]))
+            for mask in (15,0,-1,'12',None):
+                with self.assertRaises(ValueError):
+                    s._request(dict(mode='source_define',nodes=[dict(root,mask=mask)]))
+            missing=dict(root);del missing['mask']
+            with self.assertRaises(ValueError):s._request(dict(mode='source_define',nodes=[missing]))
+            s._request(dict(mode='source_define',nodes=[root]))
+            result=s._request(dict(mode='source_query',root='root',witness=True))
+            self.assertTrue(result['answer']);self.assertEqual(result['witness'][0],1)
+
+    def test_named_children_survive_until_last_registered_parent_is_removed(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            s._request(dict(mode='source_init',id='lifetime',width=1,layers=[[1],[2],[3]]))
+            left=dict(id='left',layout='lifetime',width=1,start=0,height=0,mask=15,clauses=[])
+            right=dict(left,id='right',start=1)
+            root=dict(id='root-0',layout='lifetime',width=1,start=0,height=1,left='left',right='right',mask=15)
+            roots=[dict(root,id=f'root-{i}') for i in range(12)]
+            s._request(dict(mode='source_define',nodes=[left,right]+roots))
+            order=list(range(12));random.Random(1902).shuffle(order)
+            for i in order:
+                for child in ('left','right'):
+                    with self.assertRaisesRegex(ValueError,'referenced'):
+                        s._request(dict(mode='source_drop',ids=[child]))
+                self.assertTrue(s._request(dict(mode='source_query',root=f'root-{i}',witness=False))['answer'])
+                s._request(dict(mode='source_drop',ids=[f'root-{i}']))
+            self.assertEqual(s._request(dict(mode='source_drop',ids=['left','right']))['evicted'],2)
+
     def test_native_paired_store_failed_eviction_batches_are_atomic(self):
         with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
             s._request(dict(mode='source_init',id='paired',width=1,layers=[[1],[2],[3]]))

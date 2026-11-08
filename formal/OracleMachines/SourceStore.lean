@@ -1,9 +1,9 @@
 import OracleMachines.SourceNodes
 import Std.Data.HashMap.Lemmas
 
-/-! Named source metadata and pointwise agreement of the two native maps.
+/-! Named source metadata, serialized summaries and agreement of the two maps.
 The runtime preserves this invariant by paired insertions and erasures. It does
-not scan the store to reconstruct the proof. Named child dependencies, reference
+not scan the store to reconstruct the proof. Child dependency lifetime, reference
 counts, requested patches and persistence remain separate obligations. -/
 namespace OracleMachines.SourceStore
 open Lean OracleMachines.Layered OracleMachines.SourceNodes
@@ -49,17 +49,21 @@ structure BodyMatches {layers : Array (Array Nat)} {width : Nat}
   dimension : body.getObjValAs? Nat "width" = .ok width
   location : body.getObjValAs? Nat "start" = .ok model.start
   level : body.getObjValAs? Nat "height" = .ok model.height
+  summary : ∃ mask, body.getObjValAs? Nat "mask" = .ok mask ∧
+    maskRelation width mask = model.tree.summary
   payload : ∀ clauses, model.source.rootClauses = some clauses →
     body.getObjValAs? (Array (Array Int)) "clauses" = .ok clauses
 
 def bindHeader {layers : Array (Array Nat)} {width : Nat} {layoutId id : String} {body : Json}
     (header : Header layoutId id width body) (model : CheckedNode layers width)
     (location : model.start = header.start) (level : model.height = header.height)
+    (summary : ∃ mask, body.getObjValAs? Nat "mask" = .ok mask ∧
+      maskRelation width mask = model.tree.summary)
     (payload : ∀ clauses, model.source.rootClauses = some clauses →
       body.getObjValAs? (Array (Array Int)) "clauses" = .ok clauses) :
     {node : CheckedNode layers width // BodyMatches layoutId id body node} :=
   ⟨model,⟨header.name,header.layout,header.dimension,
-    by rw [location]; exact header.location,by rw [level]; exact header.level,payload⟩⟩
+    by rw [location]; exact header.location,by rw [level]; exact header.level,summary,payload⟩⟩
 
 def Corresponds {layers : Array (Array Nat)} {width : Nat} (layoutId : String)
     (nodes : Std.HashMap String (Json × CheckedTree)) (models : Std.HashMap String (CheckedNode layers width)) : Prop :=

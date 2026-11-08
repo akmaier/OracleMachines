@@ -590,11 +590,16 @@ stored in that node. Warm decisions do not flatten or rescan those clauses.
 Replay uses the same checked constructors. `SourceStore.lean` now couples the
 relation and model maps with a pointwise proof: both contain the same identities,
 and each relation tree is exactly its model's checked tree. The decoded identity,
-layout, width, start, height and original leaf clauses agree with that model.
+layout, width, start, height, summary mask and original leaf clauses agree with that model.
 Paired insertion and erasure preserve this proof without scanning the store.
-This does not yet prove that named child references select the typed children,
-that reference counts preserve their lifetime, or that a patch is the requested
-successor. Serialized replay and the Python/SQLite paths remain separate.
+`SourceLinks.readJoin` also carries equations linking the decoded child names to
+the exact models retrieved when the join is registered. Its original-clause and
+decision theorems concern those children and one shared valuation. Preservation
+under fresh insertion and deletion avoiding both children is proved separately.
+These conditions have not yet been connected to the full refcount/store state:
+the registration proof is not a theorem that named children survive all later
+requests. Dependency lifetime, exact requested-patch semantics, serialized replay
+and the Python/SQLite paths remain separate obligations.
 
 Field parsing retains equality proofs and uses temporary header wrappers at
 registration. Proof fields erase; runtime parsing, comparisons and allocation

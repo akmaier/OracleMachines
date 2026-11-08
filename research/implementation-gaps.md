@@ -997,3 +997,57 @@ now contains 6,745 generic results, 2,193 refutations and 35 source-state rows
 across checker namespaces. The historical timing study remains unchanged.
 Resume with named child links/dependency lifetime and requested-patch refinement;
 do not treat this pointwise root invariant as complete serialized-graph refinement.
+
+## Named child registration and summary binding (8 November, sixth hourly follow-up)
+
+`SourceLinks.lean` proves the registration-time portion of named child refinement.
+The executed `readJoin` constructor returns a node with `JoinLinks` indexed by the
+actual model map used in that call. It retains equations for decoded left/right
+names, successful lookup of the exact child models, and equality to their checked
+consecutive join. The original-clause theorem attributes every occurrence to
+those children, even when distinct sources have equal relations. The decision
+theorem requires one valuation satisfying both child sources; independent local
+SAT answers do not suffice.
+
+Fresh-key insertion preserves existing `JoinLinks`. Erasing a key preserves a
+join when the key is neither decoded child. These are conditional transition
+lemmas, not an established lifetime invariant for the full runtime. The latter
+still needs to show that zero incoming references implies the erasure premise,
+and that every live branch has links valid in the current map. The registration
+proof is erased; it does not retain its model-map snapshot or perform a store scan.
+
+`BodyMatches.summary` also binds the decoded mask to the model's actual cached
+summary. Unlike the registration-snapshot predicate, this field is already part
+of the paired native-store invariant and survives all its constructors. Leaf,
+padding and branch registration retain proofs from their existing checks. No new
+relation scan is added. Getter wrappers, comparisons and allocation still cost
+work; there is no new machine/byte bound or measured speedup claim.
+
+The join helper checks its child shape before the header start/height checks.
+Malformed requests with several defects may therefore report a different first
+error. Accepted request semantics and all resource caps are unchanged. Tests
+exercise original-clause provenance under equal relations, missing/ill-typed
+child names, live-identity rebinding rejection, incorrect but satisfiable masks,
+and 12 parents removed in shuffled order while retaining their shared children.
+
+Next priorities:
+
+1. **Global named-link lifetime and requested-patch refinement.** Promote
+   registration links to an invariant of every live branch. Prove fresh identity
+   insertion and immutable duplicate handling; connect zero incoming references
+   to the `erase_unreferenced` premise. Then prove that `checkPatch` selects
+   exactly the requested successor and preserves unedited original buckets.
+2. **Native/Python reference counts and eviction**, including shared children,
+   failures, historical branches and replay. Tests are not an arithmetic proof.
+3. **General factor row/equivalence-store refinement** and complete serialized
+   replay/Python/SQLite correspondence.
+4. **Complete restricted costs and acceptance specification**, including runtime
+   parsing, allocation, payload retention, transport, archive access and bit costs.
+5. **Compact general input, matched application evaluation and cost-sensitive
+   selection.** No unrestricted-SAT coverage or total-resource bound follows.
+
+Validation: all **165 tests pass**, including **26 source-update tests**, without
+resource warnings. Lean audits **2,874 declarations / 1,380 theorem declarations**
+without admits or added axioms. The previous manuscript proof blocks remain
+unchanged. Archive revalidation and manuscript reconciliation follow this runtime
+checkpoint; earlier timing evidence remains tied to its original runtime.

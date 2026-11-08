@@ -1,4 +1,4 @@
-import OracleMachines.SourceStore
+import OracleMachines.SourceLinks
 
 /-! Source-bearing nodes: provenance and relations use the same balanced tree.
 The partition is fixed within a version family. Local edits replace the clauses
@@ -6,11 +6,13 @@ of one or more adjacent-block edges; an empty list deletes that edge's clauses.
 Every cached decision carries a proof of its original-source meaning. Layout,
 start and height index source nodes; joining preserves consecutive intervals.
 Flat-source grouping, complete binding and named-map/metadata correspondence
-carry proofs. Named child links, requested patches and persistence are separate. -/
+carry proofs, as do serialized summaries and registration-time child lookups.
+Dependency lifetime, requested patches and persistence are separate. -/
 namespace OracleMachines.SourceUpdates
 open Lean OracleMachines.Layered
 open OracleMachines.SourceNodes
 open OracleMachines.SourceStore
+open OracleMachines.SourceLinks
 
 structure Context where
   id : String
@@ -83,7 +85,8 @@ def defineNodes (store : Store) (request : Json) : Except String (Store × Json)
       let start := header.start
       let height := header.height
       if height > 16 || start ≥ 65536 then throw "Source node range exceeds capacity"
-      let mask ← body.getObjValAs? Nat "mask"
+      let parsedMask ← readParsed Nat body "mask"
+      let mask := parsedMask.value
       if mask ≥ 2^((2^layout.width)^2) then throw "Source mask exceeds width"
       let checked ← if zero : height = 0 then do
         let original ← readParsed (Array (Array Int)) body "clauses"
@@ -98,7 +101,7 @@ def defineNodes (store : Store) (request : Json) : Except String (Store × Json)
           if same : relationEqual (maskRelation layout.width mask) (compileLocal layout.width localCNF) then
             let model := checkedLeaf start clauses inside translated (maskRelation layout.width mask)
               ((relationEqual_exact _ _).mp same)
-            pure (bindHeader header model rfl zero.symm (by
+            pure (bindHeader header model rfl zero.symm ⟨mask,parsedMask.exact,rfl⟩ (by
               intro payload root
               have equal : clauses = payload := by simpa [model,checkedLeaf,OriginalTree.rootClauses] using root
               exact original.exact.trans (congrArg Except.ok equal)))
@@ -108,27 +111,23 @@ def defineNodes (store : Store) (request : Json) : Except String (Store × Json)
           if same : relationEqual (maskRelation layout.width mask) identity then
             let model := checkedPad (layers := layout.layers) start (by omega) (maskRelation layout.width mask)
               ((relationEqual_exact _ _).mp same)
-            pure (bindHeader header model rfl zero.symm (by
+            pure (bindHeader header model rfl zero.symm ⟨mask,parsedMask.exact,rfl⟩ (by
               intro payload root
               have equal : (#[] : Array (Array Int)) = payload := by simpa [model,checkedPad,OriginalTree.rootClauses] using root
               exact original.exact.trans (congrArg Except.ok (empty.down.trans equal))))
           else throw "Source padding must be identity"
       else do
-        let left ← body.getObjValAs? String "left"
-        let right ← body.getObjValAs? String "right"
-        let some ca := out.models[left]? | throw "Missing left source invariant"
-        let some cb := out.models[right]? | throw "Missing right source invariant"
-        let location ← expectEqual ca.start start "Source children do not cover consecutive edges"
-        if h : cb.height = ca.height then
-          if consecutive : cb.start = ca.start+2^ca.height then
-            let joined := checkedJoin ca cb h consecutive
-            let level ← expectEqual height joined.height "Unbalanced source node"
-            if !relationEqual (maskRelation layout.width mask) joined.tree.summary then throw "Incorrect source summary"
-            pure (bindHeader header joined location.down level.down.symm (by
+        let linked ← readJoin out.models body
+        let joined := linked.val
+        let location ← expectEqual joined.start start "Source children do not cover consecutive edges"
+        let level ← expectEqual height joined.height "Unbalanced source node"
+        if same : relationEqual (maskRelation layout.width mask) joined.tree.summary then
+          pure (bindHeader header joined location.down level.down.symm
+            ⟨mask,parsedMask.exact,(relationEqual_exact _ _).mp same⟩ (by
               intro payload root
-              simp [joined,checkedJoin,OriginalTree.rootClauses] at root))
-          else throw "Source children do not cover consecutive edges"
-        else throw "Unbalanced source children"
+              rw [linked.property.rootClauses_none] at root
+              cases root))
+        else throw "Incorrect source summary"
       out ← out.insert id body checked.val checked.property
       sourceNodes := sourceNodes+1
   return (⟨some {context with checked := out}⟩,Json.mkObj [("valid",toJson true),

@@ -255,6 +255,56 @@ class AffineGrowthTests(unittest.TestCase):
                        for aux in itertools.product((False,True),repeat=n-6))
             self.assertEqual(actual,expected)
 
+    def test_native_history_retry_keeps_original_parent_after_name_reuse(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            initial=dict(mode='affine_init',id='a',width=1)
+            s._request(initial)
+            parent=dict(mode='affine_append',id='p',base='a',equations=[equation(1,(1,),True)])
+            s._request(parent)
+            child=dict(mode='affine_append',id='c',base='p',equations=[equation(1,(0,),True)])
+            old=s._request(child)
+            self.assertTrue(old['answer']);self.assertEqual(old['steps'],2)
+            s._request(dict(mode='affine_drop',ids=['p','p','missing']))
+            # An exact retry keeps the original child even without a live parent.
+            self.assertEqual(s._request(child),old)
+            changed=dict(parent,equations=[equation(1,(),True)])
+            self.assertFalse(s._request(changed)['answer'])
+            self.assertEqual(s._request(child),old)
+            # A fresh name binds the current parent and is therefore negative.
+            self.assertFalse(s._request(dict(child,id='fresh'))['answer'])
+            self.assertTrue(s._request(dict(mode='affine_query',root='c',summary=False))['answer'])
+            s._request(dict(mode='affine_drop',ids=['c']))
+            self.assertFalse(s._request(child)['answer'])
+            self.assertTrue(old['answer'])
+            s._request(dict(mode='affine_reset'))
+            self.assertEqual(s._request(dict(mode='affine_stats'))['resident_versions'],0)
+            with self.assertRaisesRegex(ValueError,'Unknown affine root'):
+                s._request(dict(mode='affine_query',root='c',summary=False))
+            self.assertTrue(s._request(initial)['answer'])
+
+    def test_native_row_decoding_failure_is_atomic(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            s._request(dict(mode='affine_init',id='a',width=2))
+            rows=[equation(2,(0,3),True),equation(2,(2,),False)]
+            request=dict(mode='affine_append',id='b',base='a',equations=rows+rows)
+            expected=flattened_sat(2,[rows+rows])
+            original=s._request(request)
+            self.assertEqual(original['answer'],expected)
+            self.assertEqual(s._request(request),original)
+            before=s._request(dict(mode='affine_stats'))
+            bad_rows=[dict(coefficients=[False,True],rhs=False),
+                      dict(coefficients=[False]*4,rhs=0),
+                      dict(coefficients=[False,False,False,1],rhs=True),
+                      dict(coefficients=[False]*4)]
+            for row in bad_rows:
+                with self.assertRaises(ValueError):
+                    s._request(dict(request,id='bad',equations=rows+[row]))
+                self.assertEqual(s._request(dict(mode='affine_stats')),before)
+                self.assertEqual(s._request(request),original)
+            with self.assertRaises(ValueError):s._request(dict(mode='affine_drop',ids=['a',7]))
+            self.assertEqual(s._request(dict(mode='affine_stats')),before)
+            self.assertTrue(s._request(dict(mode='affine_query',root='a',summary=False))['answer'])
+
     def test_invalid_resident_caps_rejected(self):
         with tempfile.TemporaryDirectory() as d:
             for cap in (True,0,1,4097):

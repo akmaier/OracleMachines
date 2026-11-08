@@ -1,6 +1,6 @@
 import OracleMachines.LayeredSource
 import OracleMachines.SourceHistory
-import OracleMachines.AffineProtocol
+import OracleMachines.AffineHistory
 import OracleMachines.SourceInvariant
 import OracleMachines.LayeredCosts
 import OracleMachines.FragmentProtocol

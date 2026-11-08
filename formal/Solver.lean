@@ -2,7 +2,7 @@ import OracleMachines.FragmentProtocol
 import OracleMachines.ChainProtocol
 import OracleMachines.LayeredSource
 import OracleMachines.SourceHistory
-import OracleMachines.AffineProtocol
+import OracleMachines.AffineHistory
 import OracleMachines.Cache
 import OracleMachines.Parsing
 import OracleMachines.BoundedSearch
@@ -261,20 +261,11 @@ def main : IO Unit := do
       | .error e => pure (.error e)
       | .ok request =>
         let mode := (request.getObjValAs? String "mode").toOption.getD ""
-        if mode == "affine_init" || mode == "affine_append" then
-          match OracleMachines.Affine.define affineStates request with
-          | .error e => pure (.error e)
-          | .ok (state,response) => affineStates := state; pure (.ok response)
-        else if mode == "affine_query" then
-          pure (OracleMachines.Affine.query affineStates request)
-        else if mode == "affine_drop" then
-          match OracleMachines.Affine.drop affineStates request with
-          | .error e => pure (.error e)
-          | .ok (state,response) => affineStates := state; pure (.ok response)
-        else if mode == "affine_stats" then
-          pure (.ok (OracleMachines.Affine.stats affineStates))
-        else if mode == "affine_reset" then
-          affineStates := {}; pure (.ok (Json.mkObj [("valid",toJson true)]))
+        if mode == "affine_init" || mode == "affine_append" || mode == "affine_query" ||
+            mode == "affine_drop" || mode == "affine_stats" || mode == "affine_reset" then
+          let result := OracleMachines.AffineHistory.handle affineStates request
+          affineStates := result.1
+          pure result.2
         else if mode == "source_init" || mode == "source_compile" || mode == "source_define" ||
             mode == "source_drop" || mode == "source_query" || mode == "source_patch" || mode == "source_bind" then
           let result := OracleMachines.SourceHistory.handle sourceLayers request

@@ -1882,3 +1882,64 @@ primary indexes occupy about 64% of the current main DB. Which cost dominates
 therefore depends on whether the workload has hits, novel rows, cold replay,
 growing width, or many preserved result namespaces. Future changes should be
 chosen against this inventory and measured independently.
+
+
+## 2026-11-08: reuse checked resident widths; assess KD-tree search
+
+`AffineGrowth.verified` now retains the width returned by a successful native
+definition, after checking it against the validated original source. Forward
+replay can compare a child's width with that resident parent metadata instead
+of decompressing and decoding the parent's full batch again. The value exists
+only with the resident node: eviction, worker replacement, reset and failed
+transactions remove it. A mismatching native width fails before publication.
+Every public base read still validates original archived content. Cold replay
+still reads and checks every missing source and recreates native definitions.
+
+This is a bounded Python orchestration improvement, not a new Lean theorem.
+The native binary, its original-history theorem, all manuscript proofs and the
+main archive are unchanged. Retained metadata adds O(V) bounded integers;
+one transient parent decode disappears, but whole-process memory is unmeasured.
+`affine_reuse_metadata=False` provides the matched previous read path.
+
+The [matched evidence](../experiments/results/affine-resident-metadata/README.md)
+contains five rotated repetitions of widths 16/32/64 and repeated/novel streams:
+**60 runs / 2,160 decisions**, including two fresh-service cold reconstructions
+per run. Independent full-history elimination verifies the inputs; original
+source rows and identities are recovered in every run. Elimination counters and
+kernel hits are identical across modes.
+
+- Inline warm append: **4 -> 3** object reads. Shared warm append: **9 -> 7**;
+  the width-32 sample reads **2,904 -> 2,291 packed bytes**. Wire bytes and
+  inserted source/result payload are unchanged.
+- Width-32 repeated stream: 28 warm appends **84.39 -> 78.22 ms**; whole stream
+  including setup/shutdown **238.00 -> 232.72 ms**. Two cold reconstructions
+  **214.46 -> 201.90 ms**, with **384 -> 258** object reads.
+- Width-64 repeated: warm appends **280.72 -> 260.76 ms**; whole stream
+  **534.69 -> 509.73 ms**. Cold reconstructions **640.65 -> 599.29 ms**.
+- Novel streams still need the same elimination. Width-32 whole-stream median
+  **388.70 -> 393.50 ms** is slightly worse despite fewer reads. Local timing
+  differences are descriptive; no universal speedup or complexity-class change
+  follows. Source payload and matched database sizes remain equal.
+
+**210 tests pass**, including the existing long-history, source-corruption,
+forged-width, branching-frontier and restart tests plus direct checks of the
+metadata lifetime and read reduction. The initial additional test expected the
+wrong exception for damaged compressed bytes; that failed test log is preserved.
+Its fixture now selects raw encoding to test an explicit size-integrity rejection.
+All **743** preceding experiment files and all rows of the main archive's **22**
+tables are preserved; no new engine namespace was needed.
+
+The user proposed KD-trees. [The indexed-reuse assessment](indexed-reuse.md)
+records the literature, a one-bit SAT/UNSAT counterexample, source/interface and
+invalidation requirements, full costs and a matched future experiment. Existing
+native exact lookup examines one hash-selected candidate, not every stored state.
+A KD-tree could shortlist candidates for low-rank or other checked repairs;
+that repair path is currently missing. It cannot turn proximity into a valid
+answer or replace exact checks. No KD-tree speedup has been measured.
+
+**Next bottleneck:** seven reads remain on a shared warm append, together with
+full request decoding, repeated source serialization and an 8,175-byte native
+reply in the width-32 sample. Pursue checked batch handles and compact definition
+replies, then measure byte admission and repair/canonicalization opportunities.
+The backward replay plan remains O(T), persistent storage remains unbounded by
+default, and unrestricted SAT receives no affine closure guarantee.

@@ -5,6 +5,9 @@ reuse implementation: **`e0cb8d3`**. This is an inventory of the current system,
 not a new unrestricted-SAT theorem. The accompanying
 [read-only snapshot](../experiments/results/resource-audit-2026-11-08/snapshot.json)
 records source fingerprints, database pages and the underlying measured counters.
+The resident-width metadata update below is measured separately in
+[the follow-up experiment](../experiments/results/affine-resident-metadata/README.md);
+the original snapshot remains unchanged.
 
 The strongest expansion result is **polynomial coefficient work and a quadratic
 boundary summary for affine constraints**. The general SAT paths retain
@@ -295,13 +298,16 @@ structural equality is checked. They can destroy useful cache entries. A hit
 rate is not guaranteed, and normalized keys still distinguish first-occurrence
 order and predecessor basis representation.
 
-Current source handling has a further parent dependency: `run` reads the base
-record, and `ensure` reads a new source in its backward plan and forward replay,
-then reads the parent again to check its width. Thus even a warm append can
-process the **parent's original batch** as well as the new one. A new unshared
-append in the retained example makes four object reads. A shared one makes nine,
-including referenced-batch validation and admission checking. This is avoidable
-implementation overhead, outside the coefficient bound.
+Source handling still has a parent dependency: `run` reads the base record,
+and `ensure` reads a new source in its backward plan and forward replay. The
+resident-width update removes the former additional parent read in forward
+replay: the process-local residency map now retains the width confirmed by the
+native definition. A new unshared append in the retained example drops from
+four to **three** object reads; a shared append drops from nine to **seven**,
+including referenced-batch validation and admission checking. The requested
+base is still read and validated, so its original batch is still processed once.
+The option `affine_reuse_metadata=False` reproduces the extra parent read for
+matched comparisons. This changes source overhead, not the coefficient bound.
 
 ### Dependence on width and history
 
@@ -346,6 +352,10 @@ independently. At the largest accepted b,c and with c'=c, the conservative
 logical envelope is 477,987,200 cells, illustrating how weak a slot cap is as a
 memory policy. This is neither measured allocation nor bytes. Actual sharing
 reduces some terms; runtime objects and temporary copies add other costs.
+The resident-width update adds one bounded integer per existing residency entry,
+O(V) logical metadata, sharing that entry's eviction/reset lifetime. It avoids
+one transient parent-batch decode per replayed append; no RSS reduction has been
+measured or proved.
 
 Original histories are erased from native proof states, so retaining a child
 no longer keeps every ancestor state alive. However, original request JSON

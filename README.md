@@ -690,3 +690,9 @@ The [current resource-bounds audit](research/resource-bounds.md) separates gener
 SAT, finite coverage, factor/layered expansion, affine hits/misses, cold replay,
 live memory and archive growth. It records exact formal bounds, derived payload
 accounts, configured refusals, measured phase costs and the remaining proof gaps.
+
+The [resident-width follow-up](experiments/results/affine-resident-metadata/README.md)
+removes a redundant parent decode: shared warm appends use seven instead of nine
+object reads. All 210 tests pass; the native proof code and earlier archive remain
+unchanged. The [KD-tree assessment](research/indexed-reuse.md) distinguishes exact
+lookup from candidate search for a future checked repair path.

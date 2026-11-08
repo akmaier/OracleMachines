@@ -1200,3 +1200,74 @@ The manuscript and [patch verification record](../experiments/results/source-pat
 record the result. Earlier timings and all 32 previous manuscript proof blocks
 remain unchanged. Resume with full source-API composition and persistent replay;
 the native requested bucket transition no longer needs to be assumed.
+
+
+## 2026-11-08 09:06 UTC — complete successor formula and returned decision
+
+`SourceFormula.lean` supplies the missing bucket-to-original-CNF step.
+`flatten_source` proves that ordered flattening of the complete indexed interval
+is exactly the node's original clause list, including order and multiplicity.
+`bucket_present` characterizes its exact interval; `bucket_padding` proves that
+padding contributes the empty clause array. `replaceBuckets` gives the requested
+replacement function. `patched_buckets` and `patched_formula` connect an accepted
+patch to that function and its complete flattened CNF. `patched_decide` and
+`patched_unsat` give both SAT and UNSAT equivalences for this successor formula.
+These flattening operations are specifications, not work on the native warm path.
+
+`SourceVerdict.lean` certifies the native root checks: origin zero, enough leaves
+for every logical edge, and the existing minimal padded height. Coverage proves
+that every logical edge has a bucket and transfers to the predecessor through
+the patch's start/height equalities. The query constructor records the actual
+request root getter, current model lookup, coverage and returned Boolean getter.
+The decision-only JSON getter equation holds definitionally. Witness-mode queries
+reuse the existing returned-answer comparison; the proof does not yet certify
+the serialized witness contents.
+
+`compose_patch` identifies the queried node with the exact successor named in
+the decoded patch request. It combines request decoding and bounds, both live
+model lookups, coverage of both roots, the exact flattened successor formula and
+both truth-value equivalences. `patchQuery` certifies the nested `verdict` getter
+of the actual JSON result. `SourceUpdates.query_success` and
+`patchQuery_success` transfer these certificates to the exposed JSON-returning
+functions on every successful call. Native query and patch requests now execute
+these constructors. Existing unknown-root diagnostics are preserved.
+
+No flattening, full-source scan or relation-summary recomposition is introduced
+on a warm decision/patch path. Direct lookups, root checks, decoding, comparisons,
+filtering, wrappers, cached endpoint tests and requested witness work remain
+costs. JSON getter proofs concern native JSON values; byte serialization and
+outer transport are not thereby proved. There is no new timing, memory or
+unrestricted-SAT guarantee.
+
+New tests reject incomplete, shifted and nonminimal padded roots in both query
+and empty-patch modes, with and without witnesses. Independent exhaustive
+truth-table checks compare nested patch verdicts and direct queries against the
+flattened original successor over 54 transitions, including historical branches,
+1/3/5 logical edges, padding, deletion, repeated clauses and empty clauses. Both
+SAT and UNSAT outcomes occur, and returned positive witnesses are checked
+independently. These tests supplement, rather than replace, the proof.
+
+Remaining priorities:
+
+1. **Initial raw-CNF anchor and history composition.** Query/root coverage,
+   complete successor formulas and the actual returned decision field are now
+   proved. Connect the complete initial JSON CNF and original-bucket traversal
+   to the live root under one native success theorem, then compose a history
+   of accepted operations. Existing compiled-source and relation-binding theorems
+   alone do not certify that entire initial source-provenance path.
+2. **Serialized witnesses, Python retention and persistent replay.** Prove the
+   truncated witness values and their original-variable interpretation, byte
+   transport, active-root policy and complete replay/SQLite correspondence.
+   Native live-child and incoming-count preservation remain established.
+3. **Generic relation/factor stores.** Their retention loops and row/equivalence
+   caches remain outside the adjacent-block source-store invariant.
+4. **Acceptance completeness and complete costs.** Include source bounds, caps,
+   decoding, array comparisons, map/bit operations, allocation, archive access,
+   transport and restart. Logical path/event counts are not total machine costs.
+5. **Compact general input, matched evaluation and cost-sensitive selection.**
+   No unrestricted coverage or total-resource guarantee follows.
+
+Verification: all **171 tests pass**, including **32 source-update tests**.
+Lean audits **3,107 declarations / 1,506 theorem declarations**, with no admits
+or added axioms. Archive preservation and manuscript evidence follow this
+runtime checkpoint. Earlier timing evidence remains unchanged.

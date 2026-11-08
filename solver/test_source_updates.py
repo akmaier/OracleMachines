@@ -17,6 +17,64 @@ def sat(clauses,n):
 
 
 class SourceUpdateTests(unittest.TestCase):
+    def test_source_verdict_requires_complete_minimal_root(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            s._request(dict(mode='source_init',id='coverage',width=1,layers=[[1],[2],[3],[4]]))
+            nodes=[];levels={}
+            for height in range(4):
+                for start in range(0,8,1<<height):
+                    name=f'cover-{start}-{height}'
+                    body=dict(id=name,layout='coverage',width=1,start=start,height=height,
+                              mask=15 if start<3 else 9)
+                    if height==0:body['clauses']=[]
+                    else:body.update(left=levels[start,height-1],right=levels[start+(1<<(height-1)),height-1])
+                    nodes.append(body);levels[start,height]=name
+            s._request(dict(mode='source_define',nodes=nodes))
+            for witness in (False,True):
+                for bad in (levels[0,0],levels[0,1],levels[2,1],levels[3,0],levels[0,3]):
+                    with self.assertRaisesRegex(ValueError,'cover the full partition'):
+                        s._request(dict(mode='source_query',root=bad,witness=witness))
+                    with self.assertRaisesRegex(ValueError,'cover the full partition'):
+                        s._request(dict(mode='source_patch',base=bad,root=bad,edits=[],witness=witness))
+                valid=s._request(dict(mode='source_query',root=levels[0,2],witness=witness))
+                self.assertIs(valid['answer'],True)
+                if witness:self.assertEqual(len(valid['witness']),4)
+                else:self.assertIsNone(valid['witness'])
+            with self.assertRaises(ValueError):
+                s._request(dict(mode='source_query',root=levels[0,2],witness='invalid'))
+
+    def test_returned_patch_verdict_matches_independent_flat_cnf(self):
+        rng=random.Random(1904);answers=set()
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            for edges in (1,3,5):
+                initial=s.source_cnf(1,[],[[i] for i in range(1,edges+2)])
+                versions=[(initial,[[] for _ in range(edges)])]
+                for step in range(18):
+                    base,original=rng.choice(versions);buckets=list(original)
+                    changes={}
+                    for edge in rng.sample(range(edges),rng.randrange(1,edges+1)):
+                        choices=([],[[]],[[edge+1]],[[edge+1,-edge-1],[edge+1,-edge-1]],
+                                 [[edge+1],[-edge-2]],[[edge+1,edge+2]])
+                        changes[edge]=choices[(step+edge)%len(choices)]
+                        buckets[edge]=changes[edge]
+                    updated=s.source_cnf(base=base['state'],replace=changes)
+                    flat=[clause for bucket in buckets for clause in bucket]
+                    expected=sat(flat,edges+1);answers.add(expected)
+                    request=[dict(edge=i,clauses=c) for i,c in changes.items()];rng.shuffle(request)
+                    for witness in (False,True):
+                        result=s._request(dict(mode='source_patch',base=base['root'],root=updated['root'],
+                                               edits=request,witness=witness))['verdict']
+                        self.assertIs(result['answer'],expected)
+                        direct=s._request(dict(mode='source_query',root=updated['root'],witness=witness))
+                        self.assertIs(direct['answer'],expected)
+                        if witness and expected:
+                            self.assertEqual(len(result['witness']),edges+1)
+                            values=[bool(word&1) for word in result['witness']]
+                            self.assertTrue(all(any(values[abs(lit)-1]==(lit>0) for lit in clause) for clause in flat))
+                        else:self.assertIsNone(result['witness'])
+                    versions.append((updated,buckets))
+        self.assertEqual(answers,{False,True})
+
     def test_patch_decoder_handles_full_batch_and_rejects_over_capacity(self):
         with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
             s._request(dict(mode='source_init',id='patch-cap',width=1,layers=[[i] for i in range(1,4098)]))

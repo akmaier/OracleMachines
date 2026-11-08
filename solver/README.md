@@ -668,3 +668,20 @@ source scan or relation-summary recomposition is introduced. Visit counts are
 not total time or physical-memory bounds. Complete API composition, Python
 retention, serialized replay/SQLite refinement and general factor-store proofs
 remain separate; earlier timing evidence is unchanged.
+
+
+The native source query now certifies root origin, complete logical-edge coverage,
+minimal padding height and the returned JSON answer field (`SourceVerdict.lean`).
+The patch path also proves that its nested verdict decides the complete original
+CNF obtained by applying the decoded replacements to the named predecessor
+(`SourceFormula.lean`). It proves both SAT and UNSAT equivalences; repeated and
+empty original clauses remain represented exactly. The exposed query/patch
+functions have explicit success theorems, and existing unknown-root errors are
+preserved.
+
+Flattening and proof composition occur only in specifications. Warm calls keep
+cached decisions and changed-path checking. Witness-mode answer equality is
+certified, but witness array contents, byte transport, the full initial raw-CNF
+anchor, Python retention and complete persistent replay remain separate proofs.
+Root checks, lookups, decoding, comparisons, filters, wrappers and witness work
+still cost resources. Previous timing artifacts are unchanged.

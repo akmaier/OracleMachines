@@ -1,4 +1,4 @@
-import OracleMachines.SourcePatch
+import OracleMachines.SourceVerdict
 
 /-! Source-bearing nodes: provenance and relations use the same balanced tree.
 The partition is fixed within a version family. Local edits replace the clauses
@@ -7,8 +7,9 @@ Every cached decision carries a proof of its original-source meaning. Layout,
 start and height index source nodes; joining preserves consecutive intervals.
 Flat-source grouping, complete binding and named-map/metadata correspondence
 carry proofs, as do serialized summaries, live child links and incoming counts.
-Requested patches carry exact bucket-transition proofs. Persistent replay and
-the complete query/initial-binding contract remain separate. -/
+Requested patches carry exact original-formula and returned-decision proofs.
+Initial raw-CNF binding, serialized witness contents and persistence remain
+separate integration obligations. -/
 namespace OracleMachines.SourceUpdates
 open Lean OracleMachines.Layered
 open OracleMachines.SourceNodes
@@ -151,33 +152,47 @@ def dropNodes (store : Store) (request : Json) : Except String (Store × Json) :
   return (⟨some {context with checked := out}⟩,
     Json.mkObj [("valid",toJson true),("evicted",toJson ids.size)])
 
+/-- Root coverage and the returned answer field are certified against the
+current named source model. Warm decisions do not flatten original clauses. -/
 def query (store : Store) (request : Json) : Except String Json := do
   let some context := store.context | throw "Source layout not initialized"
-  let layout := context.layout
-  let root ← request.getObjValAs? String "root"
-  let some _ := context.nodes.nodes[root]? | throw "Unknown source root"
-  let some model := context.models[root]? | throw "Missing source invariant"
-  if model.start != 0 || 2^model.height < layout.buckets.size ||
-      (model.height > 0 && 2^(model.height-1) ≥ layout.buckets.size) then
-    throw "Source root does not cover the full partition"
-  -- model.decide_exact layout.mapping proves the original-CNF meaning of this
-  -- decision. Original clauses are retained, but not walked by a warm query.
-  let answer := model.decide
-  let want ← request.getObjValAs? Bool "witness"
-  if !want then return Json.mkObj [("answer",toJson answer),("witness",Json.null),("height",toJson model.height)]
-  let verdict ← OracleMachines.Layered.query context.nodes (Json.mkObj [("root",toJson root),
-    ("size",toJson layout.buckets.size),("witness",toJson true),
-    ("left",toJson (2^(2^layout.width)-1)),("right",toJson (2^(2^layout.width)-1))])
-  if (← verdict.getObjValAs? Bool "answer") != answer then throw "Source witness decision disagrees"
-  return verdict
+  let checked ← OracleMachines.SourceVerdict.query context.layout context.checked request
+  return checked.val
 
-/-- The executed checker certifies the decoded request against the same live
-store queried below. Its proof erases; the reported counter counts path visits. -/
+/-- The nested returned verdict is certified for the complete original formula
+obtained by applying the decoded request to the live predecessor. -/
 def patchQuery (store : Store) (request : Json) : Except String Json := do
   let some context := store.context | throw "Source layout not initialized"
-  let checked ← OracleMachines.SourcePatch.checkRequest context.checked context.layout.buckets.size request
-  let verdict ← query store request
-  return Json.mkObj [("verdict",verdict),("patch_visits",toJson checked.val)]
+  let checked ← OracleMachines.SourceVerdict.patchQuery context.layout context.checked request
+  return checked.val
+
+/-- The exposed JSON-returning function inherits the certificate carried by
+the constructor it actually executes. -/
+theorem query_success (store : Store) (request result : Json)
+    (accepted : query store request = .ok result) :
+    ∃ context, store.context = some context ∧
+      OracleMachines.SourceVerdict.Response context.checked request result := by
+  cases present : store.context with
+  | none => simp [query,present] at accepted
+  | some context =>
+    cases checked : OracleMachines.SourceVerdict.query context.layout context.checked request with
+    | error message => simp [query,present,checked] at accepted
+    | ok certified =>
+      have same : certified.val = result := by simpa [query,present,checked] using accepted
+      exact ⟨context,rfl,same ▸ certified.property⟩
+
+theorem patchQuery_success (store : Store) (request result : Json)
+    (accepted : patchQuery store request = .ok result) :
+    ∃ context, store.context = some context ∧
+      OracleMachines.SourceVerdict.PatchResponse context.checked context.layout.buckets.size request result := by
+  cases present : store.context with
+  | none => simp [patchQuery,present] at accepted
+  | some context =>
+    cases checked : OracleMachines.SourceVerdict.patchQuery context.layout context.checked request with
+    | error message => simp [patchQuery,present,checked] at accepted
+    | ok certified =>
+      have same : certified.val = result := by simpa [patchQuery,present,checked] using accepted
+      exact ⟨context,rfl,same ▸ certified.property⟩
 
 /-- Initial flat CNF binding is intentionally linear. Later requests carry only
 local clauses and use the checked patch traversal; restart replays the source-bearing nodes. -/

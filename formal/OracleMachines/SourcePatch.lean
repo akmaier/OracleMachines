@@ -101,10 +101,11 @@ structure LiveNode {layoutId : String} {layers : Array (Array Nat)} {width : Nat
   binding : BodyMatches layoutId id body model
 
 def readNode {layoutId : String} {layers : Array (Array Nat)} {width : Nat}
-    (store : OracleMachines.SourceLifetime.Store layoutId layers width) (id : String) :
+    (store : OracleMachines.SourceLifetime.Store layoutId layers width) (id : String)
+    (unknown : String := "Unknown source patch node") :
     Except String (LiveNode store id) := do
   match found : store.relations.nodes[id]? with
-  | none => throw "Unknown source patch node"
+  | none => throw unknown
   | some (body,tree) =>
     match mapped : store.models[id]? with
     | none => throw "Missing source invariant"

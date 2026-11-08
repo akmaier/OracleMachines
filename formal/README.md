@@ -835,3 +835,38 @@ declarations / 1,461 theorem declarations** with no admits or added axioms. New
 checks include split-path edits with padding, exact arrays under equal relations,
 request order, unedited aliases, invalid roots/partitions, malformed and duplicate
 entries, and the decoder's full 4,096-entry limit plus over-cap rejection.
+
+
+### Complete successor formula and returned decision (2026-11-08)
+
+[`SourceFormula.lean`](OracleMachines/SourceFormula.lean) proves that flattening
+an indexed source's complete interval gives exactly its original clause list.
+Bucket presence is equivalent to interval membership, and padding has an empty
+array. An accepted `Patched` certificate yields equality with the predecessor's
+bucket function after the requested replacements, then equality with its entire
+flattened successor CNF. `patched_decide` and `patched_unsat` give both Boolean
+outcomes for that formula. All flattening is specification work.
+
+[`SourceVerdict.lean`](OracleMachines/SourceVerdict.lean) certifies the executed
+root-origin, coverage and minimal-height checks and the actual returned answer
+getter. It proves every logical edge is represented. `compose_patch` connects
+the actual request fields, live root identities, both roots' coverage, exact
+successor formula and returned SAT/UNSAT decision. The nested `verdict` getter
+is certified too. `SourceUpdates.query_success` and `patchQuery_success` transfer
+the certificates to the exposed JSON-returning functions. Warm calls do not
+flatten clauses or recompute relation summaries; proofs erase.
+
+The decision-only response getter proof is definitional. Witness-mode calls use
+the existing decoded-answer equality check. Serialized witness contents remain
+outside this new theorem, as do byte transport, complete initial raw-CNF binding,
+history composition, Python retention and replay/SQLite refinement. Source
+lookups, root checks, parsing, array comparisons, filters and temporary wrappers
+remain runtime costs; no timing or unrestricted-SAT claim follows.
+
+All **171 tests pass**, including **32 source-update tests**. Lean audits **3,107
+declarations / 1,506 theorem declarations**, with no admits or added axioms.
+New tests reject incomplete, shifted and oversized roots in query and patch modes,
+then compare actual nested/direct verdicts against exhaustive truth tables for
+54 transitions across 1, 3 and 5 logical edges, including padding, historical
+branches, empty clauses, deletion and repeated clauses. Positive witnesses are
+checked independently. Existing unknown-root diagnostics remain unchanged.

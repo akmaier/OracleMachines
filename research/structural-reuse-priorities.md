@@ -1,18 +1,20 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-08 after the checked affected-clause repair experiment. This is the working
+Updated 2026-11-08 after the diagnostic of coordinated structural changes. This is the working
 record for the hourly investigation. Start here; consult
 [implementation history](implementation-gaps.md) and
 [resource bounds](resource-bounds.md) for details. The ranking below is provisional:
 we have useful matched synthetic controls, but no representative mixture of SAT
 workloads from which to infer a single globally dominant cost.
 
-**Next experiment:** select or lazily activate the affected-clause index while
-retaining the cheap pure-repair path. The new rule eliminates the 32 known
-unnecessary acquisitions and scales to 512 protected flips, but eager indexing
-roughly doubles allocations on compatible and sparse-ID streams and can make a
-single high-degree change slower. Charge activation and cold reconstruction;
-compare against both current interfaces. General coordinated repair remains open.
+**Next research experiment:** checked simultaneous repair for literal-equivalence
+blocks. The new diagnostic finds 240 single-variable repair misses across 12
+equivalence, parity and matching histories, although a supplied coordinated
+change works in every case. Start with the equivalence case, charge recognition,
+joint checking and state maintenance, and compare against current fallback.
+Selective activation of the stronger index remains the smaller engineering task:
+eager indexing roughly doubles allocations on compatible and sparse-ID streams.
+Neither improvement has a measured replacement implementation yet.
 
 ## Current cost map
 
@@ -22,6 +24,7 @@ their capabilities are not already integrated into one verified general solver.
 
 | Workload regime | Current costly work and evidence | Most promising investigation |
 | --- | --- | --- |
+| A local change needs several variables to move together | All 240 updates in 12 constructed tractable histories still acquire a fresh base; none exhausts the repair budget. At 32 equivalence blocks of 32 variables, 32 units retain 33 bases / 3.79 MB logical payload. | Checked block changes, parity-preserving directions and matching swaps; share unchanged component source and state. |
 | A small update defeats pure model reuse | New affected-clause repair removes all 32 original-control fallbacks. On matching size 16 / 128 protected flips it reduces operation time from 3.478 s to 0.147 s and logical payload from 12.46 MB to 0.158 MB. | Keep these gains while avoiding unnecessary index preparation; shared source/dependencies remain needed on genuine fallback. |
 | A general residual escapes tractable recognizers | Branching creates distinct residuals; each is normalized, checked and persisted. There is no polynomial bound on their number. Existing matching recognition reduced one restricted example from 5,191 residuals to one. | Expose tractable components and small interfaces before branching; preserve useful state when a component changes class. |
 | Reuse succeeds and the logical update is cheap | In the new 128-addition UNSAT diagnostic, SQLite execution and transaction-context exit account for about 87% of exclusive profiled time. | Reduce redundant archive work while preserving durability and version identities. |
@@ -32,6 +35,7 @@ their capabilities are not already integrated into one verified general solver.
 
 Evidence: [matched repair comparison](../experiments/results/cnf-repair-history/README.md),
 [affected-clause comparison](../experiments/results/cnf-affected-history/README.md),
+[coordinated-change diagnostic](../experiments/results/structured-repair-gaps/README.md),
 [new diagnostic profiles](evidence/2026-11-08/reuse-cost-profile/README.md),
 [general-CNF investigation](arbitrary-sat-expansion.md). Times are individual
 samples, not significance estimates. Profile percentages describe instrumented
@@ -64,7 +68,49 @@ experiment above, run it. Reorder the priorities when measurements justify it.
 
 ## Ranked gaps across SAT categories
 
-### 1. Avoid fresh acquisition after a small model change
+### 1. Reuse coordinated structural changes
+
+The current one-variable repair is too narrow even on easy subclasses. The new
+[diagnostic](../experiments/results/structured-repair-gaps/README.md) supplies and
+independently validates a coordinated change at every rejected step:
+
+| Structure | Preserved internal invariant | Appropriate change |
+| --- | --- | --- |
+| Literal-equivalence block | All equalities, including signed variants | Change the block's independent representative and its dependent variables. |
+| Affine equations A x = b over GF(2) | A(x + z) = b when A z = 0 | Apply a nullspace direction, potentially changing many variables. |
+| Matching component | Choice coverage and resource exclusivity | Apply a valid alternating cycle/path, respecting earlier forced edges. |
+| Horn component | Consequences of the retained facts/rules | Propagate a changed requirement with retained reasons; check negative constraints and couplings. |
+
+The first three rows have concrete missed-reuse controls; the Horn maintenance
+row is a proposed investigation. None is a general implementation claim.
+Equivalence histories with 32 blocks of 32 variables currently spend 2.697 s and
+retain 3,792,631 logical bytes for 32 unit updates, always acquiring a new base.
+Matching with 32 independent 4-by-4 blocks spends 0.946 s and retains 2,267,324
+bytes. These are current-path diagnostic costs, not predicted speedups. The
+generator supplies the structure; automatic discovery has not been timed.
+
+**Implementation obligations:** aggregate all true-literal count changes before
+checking the final assignment. Intermediate one-variable states may violate
+clauses, so repeated calls to the existing operation cannot implement a joint
+repair. For a certified internal component E and remaining constraints G, a move
+that preserves E still needs to preserve affected clauses of G and satisfy the
+new addition. Earlier deltas belong to this check. A derived equivalence alone
+does not certify preservation of every source clause using those variables.
+
+Skipping internal clause checks also does not maintain their existing count-map
+entries. Update them, or retain a typed component state with explicit invalidation
+and charged reconstruction when a different engine needs those counts. Group
+assignment representations can avoid rewriting every dependent variable, while
+full witness export remains output-sized. Bounds must charge moved variables,
+affected interfaces, discovery and maintenance, not only the number of groups.
+
+**Acceptance criteria:** remove the known equivalence-block fallbacks; preserve
+old versions and cold checking; include coupled blocks, signed equalities,
+contradictions, repeated changes within one block and large blocks with small
+interfaces. Keep parity and matching cases as the next adapters. Do not generalize
+the supplied moves into a uniformly cheap repair procedure for arbitrary CNF.
+
+### Completed baseline: single-variable affected-clause repair
 
 This is the broadest concrete implemented improvement: assignment validity is independent
 of whether the model came from Horn solving, 2-SAT, matching, affine elimination
@@ -115,6 +161,20 @@ and its full cost, not novelty of flipping a Boolean variable.
 The residual prototype caches exact normalized residual results, but rebuilds
 many intermediate structures. A failed fast path can therefore discard useful
 work even when most of the source is unchanged.
+
+In particular, `_visit` stores a successful residual as its CNF and a flat model;
+it does not retain the matching, implication graph or other producer state.
+`PositiveHistory.prepare` stores the full source on a new base. These two choices
+explain why solver-result caching does not yet provide persistent component-state
+reuse. A component witness forest and immutable source references would also
+avoid repeatedly flattening/copying unaffected models, with reconstruction and
+variable mappings charged when a full witness is requested.
+
+SAT categories overlap. An equivalence chain is simultaneously Horn, dual-Horn,
+2-CNF and affine. Retain several checked views of one shared source component
+instead of making its identity depend on a single class label. Common objects
+should expose source/dependency references, assumptions, interface variables,
+verdict/witness or refutation, and an explicitly exact or one-sided summary.
 
 | Category | State worth retaining | Recognition, maintenance and limitation |
 | --- | --- | --- |
@@ -213,8 +273,12 @@ When rejected updates repeatedly acquire copied prefixes of sizes L_t, source
 storage alone can grow with their sum. Constant-size additions and a fresh copy
 at every step can give quadratic cumulative source storage. Accepted repair on a
 fixed base instead stores that base plus deltas and version references. Its
-current resident binary trie retains base nodes plus O(sum_t (d_t+1)b_t) copied
+pure-repair assignment/support trie retains base nodes plus O(sum_t (d_t+1)b_t) copied
 nodes and O(T) roots, with d_t addition length and b_t identifier bit length.
+The stronger affected-clause index adds occurrence entries and persistent count
+paths, with per-step path bound O(d_t*b_t + (r_t+1) log(m_t+2)), where r_t is the
+affected clause count and m_t the parent clause count. Retained histories can
+therefore still accumulate substantial state even when every update is accepted.
 These node counts exclude integer/pointer/SQL byte overhead and cold rebuilding.
 
 The next evaluation gap is a common workload matrix spanning categories and

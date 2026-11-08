@@ -2480,3 +2480,44 @@ independently replayed: 140 archives, 14,180 historical versions and 2,568 resid
 records, with zero new expansions and unchanged database bytes.
 The implementation, proofs, tests and preserved experiment checkpoint was
 committed and pushed as `15e9c9e`; this manuscript and priority update follows.
+
+## 2026-11-08: structural reuse across SAT categories, after single-variable repair
+
+The [new diagnostic](../experiments/results/structured-repair-gaps/README.md)
+finds 240 single-variable repair misses across 12 equivalence, parity and matching
+histories. Every new unit has an independently checked coordinated repair; no
+rejection exhausts the discovery budget. Equivalence needs a whole block flip,
+parity needs two flips, and the matching control needs a four-indicator swap.
+These supplied transformations are not yet a discovered/certified repair API.
+The generator knows the structure, and full-source checking of supplied moves
+is diagnostic validation rather than a measured optimized path.
+
+For 32 equivalence blocks of 32 variables, the current implementation retains
+33 bases and 3,792,631 logical bytes, taking 2.697 s for base preparation and the
+32 rejected-update/fallback operations. The matching control with 32 independent
+4-by-4 blocks retains 33 bases / 2,267,324 bytes and takes 0.946 s. Single samples
+show repeated acquisition on these constructed easy families; they do not measure
+the speed of a replacement or characterize typical SAT workloads.
+
+The cost map now promotes checked simultaneous equivalence-block repair as the
+next research experiment. Shared component source, witnesses and typed states
+are the enabling architecture. Current positive residual records flatten models
+and discard the solver's matching/implication state; new bases still copy their
+source. Several class views can describe the same component, so class labels
+should not define storage identity. Mixed-component boundary summaries and
+structure-aware branching remain the larger search-growth opportunity.
+
+Simultaneous repair must accumulate clause-count changes before checking: an
+intermediate assignment may be invalid while the final assignment is valid.
+Internal preservation does not keep old per-clause count indexes current for
+free. Maintain them or explicitly invalidate/reconstruct them, and check every
+affected external constraint and earlier addition. Selective index activation
+remains a smaller engineering fix for the already measured allocation losses.
+
+The diagnostic retains 12 new archives, exact sources, model-dependent additions,
+proposed moves and source fingerprints. Independent decompression/replay checks
+all historical versions, candidate moves and residual records without new
+expansion or changed database bytes. Solver code and manuscript claims are
+unchanged; the existing full test/audit results were not rerun for this analysis.
+The established heterogeneous-backdoor and component-depth literature remains
+the basis for the proposed mixed-class search direction, not a novelty claim.

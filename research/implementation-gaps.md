@@ -763,3 +763,53 @@ versions are checked under the new engine and after restart. Every old row in
 all 21 tables and all 142 prior experiment files is preserved. The archive now
 contains 5,325 generic results and 1,677 refutations. Historical timing results
 remain tied to their original runtime; this checkpoint has no new timing study.
+
+## Complete source grouping and path semantics (next checkpoint)
+
+`SourceGrouping.lean` closes the global flat-CNF grouping part of the preceding
+priority. `GroupedCNF` contains both original and translated buckets, fixed edge
+counts, a permutation proof preserving every original clause occurrence, and
+the per-edge evaluation equalities. The actual grouping loop uses the proved
+append operation and checks its accumulated input against the supplied CNF.
+Repeated clauses and empty clauses cannot disappear from the proved partition.
+
+The whole original CNF is satisfiable exactly when **one consistent sequence**
+of bounded block states satisfies every compiled relation. Local nonemptiness
+alone is insufficient. New path/sequence lemmas connect that sequence to the
+composed relation. `CompiledSource.bound_tree_exact` and `bound_tree_unsat` then
+connect the original CNF to a valid tree summary **assuming** exact ordered leaf
+binding and identity padding. That assumption is explicit and is not discharged
+by calling a theorem about the reference tree alone.
+
+The native compiler now returns the grouped proof indexed by the supplied CNF.
+This proves correctness of successful typed compilation, not completeness of
+acceptance for every promised input and not refinement of JSON decoding. Warm
+edits retain the existing local compiler; no full-source regrouping is added to
+that path. Initial grouping adds a temporary array of clause references and a
+final equality check, outside the relation-evaluation ledger. Proofs are erased;
+runtime comparisons, allocation and arbitrary-size IDs still cost work.
+
+The next highest-priority obligations are now:
+
+1. **Native source-tree binding and identity preservation.** Carry original-source
+   meaning, layout, start and span through stored nodes and joins. Prove that
+   initial binding, patches and replay supply the leaf-binding premise above.
+   The current runtime checks these facts, but has no complete state theorem.
+2. **Reference-count/eviction invariants** across shared children, failures,
+   historical branches and replay, in both native and Python stores.
+3. **General row/equivalence-store refinement**, including source/context binding;
+   the adjacent-block result does not establish general factor-DAG invariants.
+4. **Complete restricted accounting**, including grouping/equality passes,
+   retention, transport and archive access, with bit costs distinguished from
+   entry counts. Acceptance completeness and cap behavior also need specification.
+5. **Compact general input and matched application evidence**, followed by
+   cost-sensitive selection. Hard total-resource and unrestricted-coverage
+   guarantees remain open. This proof checkpoint makes no timing claim.
+
+Validation: all 152 tests pass without resource warnings; Lean audits 2,562
+declarations and 1,233 theorem declarations without admits or added axioms.
+The new checks cover all 11,680 complete assignments of 60 generated global CNFs,
+exact bucket contents and occurrence counts, and service decisions/witnesses.
+They include individually nonempty relations with no common path, repeated empty
+clauses, final-block units, the 65,537-block cap and 12,000 repeated clauses.
+Archive revalidation and manuscript evidence are recorded in the next checkpoint.

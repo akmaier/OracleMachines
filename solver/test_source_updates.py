@@ -3,6 +3,7 @@ import itertools
 import random
 import tempfile
 import unittest
+from collections import Counter
 from pathlib import Path
 
 from solver.persistent import PersistentSolver
@@ -15,6 +16,71 @@ def sat(clauses,n):
 
 
 class SourceUpdateTests(unittest.TestCase):
+    def test_global_grouping_matches_every_complete_assignment(self):
+        rng=random.Random(1901)
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            for width in (1,2,3):
+                names=[(1<<80)+113*k for k in range(1,3*width+1)]
+                rng.shuffle(names)
+                layers=[names[i*width:(i+1)*width] for i in range(3)]
+                positions={v:i for i,block in enumerate(layers) for v in block}
+                for _ in range(20):
+                    clauses=[]
+                    for _ in range(rng.randrange(9)):
+                        edge=rng.randrange(2);scope=layers[edge]+layers[edge+1]
+                        clause=[rng.choice(scope)*rng.choice((-1,1)) for _ in range(rng.randrange(5))]
+                        clauses.append(clause)
+                        if rng.randrange(4)==0:clauses.append(list(clause))
+                    rng.shuffle(clauses)
+                    expected=[[],[]]
+                    for clause in clauses:
+                        edge=min(min((positions[abs(lit)] for lit in clause),default=0),1)
+                        expected[edge].append(clause)
+                    compiled=s._request(dict(mode='layered_compile',width=width,layers=layers,clauses=clauses))
+                    self.assertEqual(compiled['buckets'],expected)
+                    self.assertEqual(Counter(map(tuple,clauses)),Counter(tuple(c) for b in compiled['buckets'] for c in b))
+                    satisfiable=False;states=1<<width
+                    for bits in itertools.product((False,True),repeat=len(names)):
+                        values=dict(zip(names,bits))
+                        words=[sum(int(values[v])<<j for j,v in enumerate(block)) for block in layers]
+                        original=all(any(values[abs(lit)]==(lit>0) for lit in c) for c in clauses)
+                        grouped=all(bool(mask&(1<<(words[i]*states+words[i+1]))) for i,mask in enumerate(compiled['masks']))
+                        self.assertEqual(grouped,original)
+                        satisfiable |= original
+                    result=s.source_cnf(width,clauses,layers,witness=True)
+                    self.assertEqual(result['answer'],satisfiable)
+                    if result['answer']:
+                        values={v:bool(result['witness'][i]&(1<<j)) for i,block in enumerate(layers) for j,v in enumerate(block)}
+                        self.assertTrue(all(any(values[abs(lit)]==(lit>0) for lit in c) for c in clauses))
+
+    def test_nonempty_local_relations_can_have_no_consistent_global_path(self):
+        layers=[[10],[20],[30]];clauses=[[10],[-10,20],[-20],[30]]
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            compiled=s._request(dict(mode='layered_compile',width=1,layers=layers,clauses=clauses))
+            self.assertTrue(all(compiled['masks']))
+            self.assertFalse(s.source_cnf(1,clauses,layers)['answer'])
+
+    def test_grouping_preserves_repeated_empty_clauses_and_last_block_units(self):
+        clauses=[[77],[],[9],[77],[],[9],[-77]]
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            compiled=s._request(dict(mode='layered_compile',width=2,layers=[[9],[],[77]],clauses=clauses))
+            self.assertEqual(compiled['buckets'],[[[],[9],[],[9]],[[77],[77],[-77]]])
+            self.assertEqual(compiled['masks'],[0,0])
+
+    def test_grouping_large_partition_and_repeated_input_are_stack_safe(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            layers=[[] for _ in range(65536)]+[[77]]
+            compiled=s._request(dict(mode='layered_compile',width=1,layers=layers,clauses=[[77],[77]]))
+            self.assertEqual(compiled['edges'],65536)
+            self.assertEqual(compiled['buckets'][:-1],[[]]*65535)
+            self.assertEqual(compiled['buckets'][-1],[[77],[77]])
+            self.assertEqual(compiled['masks'][:-1],[15]*65535)
+            self.assertEqual(compiled['masks'][-1],10)
+            clauses=[[10]]*12000
+            repeated=s._request(dict(mode='layered_compile',width=1,layers=[[10],[20]],clauses=clauses))
+            self.assertEqual(repeated['buckets'],[clauses])
+            self.assertEqual(repeated['masks'],[12])
+
     def test_native_translation_matches_every_boundary_assignment(self):
         # Sparse IDs and permuted slots prevent accidental index-based agreement.
         rng=random.Random(1897)

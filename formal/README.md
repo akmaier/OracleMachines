@@ -433,8 +433,8 @@ missing/repeated variables and nonadjacent clauses. It recomputes compilation
 and compares every source edge and padding leaf against the checked tree before
 binding its answer to the source. Local clause semantics, sequence composition,
 and the mathematical source-binding implication are proved. The follow-up below
-also proves the original-variable mapping and local CNF translation. Discovery of
-the partition, global clause grouping, JSON orchestration, and a complete
+also proves the original-variable mapping, local CNF translation and global clause
+grouping. Discovery of the partition, native tree binding, JSON orchestration, and a complete
 source-API refinement theorem remain open. This is a restricted tractable family,
 not a compiler for unrestricted CNF with guaranteed bounded width.
 
@@ -474,8 +474,8 @@ and check their output. Python keeps both roots until patch checking succeeds,
 then native reference-count checks permit dependency-safe eviction.
 
 The invariant concerns local CNF meaning. Original global IDs now have the local
-translation proof below. Composing that proof with global grouping, JSON, the
-native source tree, Python/SQLite, hashes and replay is still open. The reference
+translation and grouping proofs below. Composing these with JSON, the native
+source-tree store, Python/SQLite, hashes and replay is still open. The reference
 event bound is not a compiled bit-machine bound.
 Neither native incoming-count maintenance nor Python live-reference tracking
 has a complete state-invariant theorem here. Their pressure, branching, shared
@@ -518,9 +518,9 @@ Initial compilation uses `translateClause`; the local-update compiler returns
 iterative builders check that accumulated original arrays equal their supplied
 inputs before returning. Thus their proofs are tied to the requested local
 source, rather than an unrelated accumulated array. Zero, missing and nonlocal
-literals are rejected. The unchanged global grouping loop still needs its own
-refinement proof, as does the connection through native node identities to the
-whole source tree. Local exactness alone does not prove these obligations.
+literals are rejected. The next section proves global grouping; connecting the
+result through native node identities to the whole source tree remains open.
+Local exactness alone does not prove either obligation.
 
 The layout validation adds one lookup per variable entry, plus block traversal.
 Translation accumulates original arrays and checks their equality, adding linear
@@ -530,10 +530,55 @@ IDs, allocation and runtime instructions are separate costs. None of these is
 included in the existing `q²(1+c+L)` relation-evaluation bound. Layout construction
 is paid again on replay; warm edits translate their supplied buckets only.
 
-The full build audits **2,477 declarations / 1,188 theorem declarations**, with
-no admits or added axioms. **148 integration tests pass**. New checks compare
+At this milestone the build audited **2,477 declarations / 1,188 theorem declarations**,
+with no admits or added axioms, and **148 integration tests passed**. Those checks compare
 both compiler paths with 9,520 exhaustive boundary assignments across 112 CNFs,
 including permuted slots and IDs larger than 64 bits. They also cover invalid
 mappings, short/empty blocks, unused variables, restart, a 30,001-literal clause
 and a 12,000-clause bucket. These are correctness checks, not a timing study or a
 claim about efficient decomposition of unrestricted SAT.
+
+## Complete CNF grouping and consistent paths
+
+[`SourceGrouping.lean`](OracleMachines/SourceGrouping.lean) now carries the
+grouping invariant in the executable compiler. `GroupedCNF` is indexed by the
+entire supplied CNF. Its original buckets flatten to a permutation of that CNF,
+preserving duplicate occurrences and empty clauses. Its local buckets carry the
+evaluation equality for their corresponding original buckets at the given edge.
+The arrays have the proved logical edge count. `GroupedCNF.push` preserves all
+these properties when the native loop appends a checked clause at an in-range
+edge. The final builder compares its accumulated flat input with the requested
+CNF before returning a value indexed by that request.
+
+| Result | What it establishes |
+| --- | --- |
+| `flatMap_modify_push`, `GroupedCNF.push` | Inserting at one bucket preserves the clause multiset and per-edge semantics. |
+| `GroupedCNF.clause_occurrences` | Each original clause occurs equally often before and after grouping. |
+| `GroupedCNF.original_exact` | The complete original CNF holds exactly when all original buckets hold. |
+| `GroupedCNF.satisfiable_exact`, `unsatisfiable_exact` | The original CNF is satisfiable exactly when one shared sequence of bounded states satisfies every translated bucket. |
+| `relationPath_iff`, `sequence_path`, `sequence_nonempty` | A sequence of relation compositions represents precisely consistent boundary paths. |
+| `GroupedCNF.sequence_exact` | The complete original CNF agrees with nonemptiness of the composed relation. |
+| `CompiledSource.bound_tree_exact`, `bound_tree_unsat` | The tree summary agrees with the original CNF, conditional on exact ordered leaf binding and identity padding. |
+
+`compileSource` uses `groupClauses` and retains this proved grouping. It no longer
+returns unrelated original and translated arrays. This establishes correctness
+of successful typed compilation. A theorem that every valid promised input is
+accepted is still separate. In particular, the final tree theorems **require**
+the binding premise; the mutable JSON/node protocol has not been shown to supply
+that premise in Lean. Existing runtime binding checks and adversarial tests are
+not replaced by the conditional theorem.
+
+The flat builder adds an array of clause references and a final equality check.
+Its additional entry visits are linear in clause/literal count, excluding the
+cost of arbitrary-size integers, allocation and compiled execution. Proof terms
+are erased. No whole-machine bound or timing improvement is claimed. Warm local
+edits still use the existing checked bucket compiler and do not regroup the full
+CNF; initial compilation, full binding and replay retain their separate costs.
+
+The current build audits **2,562 declarations / 1,233 theorem declarations**
+without admits or added axioms. **152 tests pass**, including 60 generated global
+CNFs checked on all 11,680 complete assignments, exact bucket/multiplicity checks,
+and service verdict/witness checks. A regression has nonempty local relations
+but no consistent global path. Boundary tests compile 65,537 supplied blocks and
+12,000 repeated clauses without stack failure. These complement the existing
+local-translation, restart, patch, retention and persistence tests.

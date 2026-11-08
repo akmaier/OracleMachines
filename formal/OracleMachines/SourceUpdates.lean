@@ -5,7 +5,8 @@ The partition is fixed within a version family. Local edits replace the clauses
 of one or more adjacent-block edges; an empty list deletes that edge's clauses.
 Every cached decision carries a proof of its current local-source meaning.
 Variable positions and local CNF translation also carry original-source proofs.
-JSON/global grouping and persistence refinement obligations remain separate. -/
+Flat-source grouping is proved separately. Native tree binding, JSON and
+persistence refinement obligations remain separate. -/
 namespace OracleMachines.SourceUpdates
 open Lean OracleMachines.Layered
 open OracleMachines.SourceInvariant

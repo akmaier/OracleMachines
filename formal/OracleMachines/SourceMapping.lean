@@ -6,8 +6,8 @@ import Init.Data.BitVec.Lemmas
 original array lookup proof, not only an unchecked pair of natural numbers.
 The translation builders below carry evaluation equalities for the supplied
 source. Array accumulation is bound back to that source by an equality check.
-JSON parsing, global bucket grouping, and persistent-store refinement remain
-separate obligations. -/
+Global bucket grouping is treated in SourceGrouping. JSON parsing and
+persistent-store refinement remain separate obligations. -/
 namespace OracleMachines.Layered
 
 structure LocalLiteral where

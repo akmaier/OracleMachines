@@ -64,7 +64,8 @@ def counters():
         symbolic_operations=0,symbolic_nodes=0,symbolic_hits=0,symbolic_replays=0,
         symbolic_rows=0,symbolic_fallbacks=0,symbolic_collected_nodes=0,
         preflight_rejected=0,preflight_buckets=0,native_definition_batches=0,
-        evaluation_stack_peak=0,semantic_stops=0,provenance_rebinds=0,equality_rows=0)
+        evaluation_stack_peak=0,semantic_stops=0,provenance_rebinds=0,equality_rows=0,
+        context_index_entries=0,context_membership_probes=0)
 
 
 def evaluate(nodes,assignment):
@@ -489,6 +490,8 @@ class InterfaceSolver:
             checked=self.service._request(dict(mode='factor_query_bound' if constraints is not None else 'factor_query',
                 active=list(active),constraints=constraints,answer=answer,witness=witness,root=root))
         if not checked['valid']:raise ValueError('Checked interface answer rejected')
+        self.metrics['context_index_entries']+=checked['context_index_entries']
+        self.metrics['context_membership_probes']+=checked['context_membership_probes']
         certificate=None if answer else self.certificate(root)
         return dict(answer=answer,witness=witness,root=root,order=[] if isinstance(order,Order) else order,certificate=certificate)
 

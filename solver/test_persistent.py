@@ -1,4 +1,5 @@
 """Integration tests against the actual compiled Lean engine."""
+from contextlib import closing
 
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -113,7 +114,7 @@ class PersistenceTests(unittest.TestCase):
 
     def test_v1_migration_retains_answers_and_marks_unknown_cost(self):
         # Real legacy schema, not a mock of the migration implementation.
-        with sqlite3.connect(self.path) as db:
+        with closing(sqlite3.connect(self.path)) as db, db:
             db.execute("""CREATE TABLE results (
                 engine TEXT NOT NULL, bits TEXT NOT NULL, answer INTEGER NOT NULL,
                 witness TEXT, acquisition_core_work INTEGER NOT NULL,

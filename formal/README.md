@@ -446,7 +446,7 @@ than replace, that missing theorem.
 
 ## Source-bearing incremental decisions
 
-The current build audits **2,279 declarations / 1,106 theorem declarations**.
+At this milestone the build audited **2,279 declarations / 1,106 theorem declarations**.
 [`SourceInvariant.lean`](OracleMachines/SourceInvariant.lean) represents local
 CNF buckets and identity padding in a source tree. Its important connections are:
 
@@ -479,3 +479,16 @@ Neither native incoming-count maintenance nor Python live-reference tracking
 has a complete state-invariant theorem here. Their pressure, branching, shared
 children, failure and restart cases are covered by integration tests. General
 factor equivalence/row-cache refinement is a separate remaining problem.
+
+## Indexed negative-proof context
+
+`InterfaceProtocol.lean` now uses `contextSubsetRun` in eager and lazy negative
+checks. `contextSubsetRun_exact` proves it accepts exactly the previous condition
+that every proof leaf occurs in the active list. `contextProbe_value` connects
+the costed short-circuit loop to list `all`; `contextProbe_bound` bounds membership
+probes by the number of proof leaves. `contextSubsetRun_budget` adds one index
+insertion request per active entry. Hashing, equality, allocation and the full
+evidence traversal are separate costs; this is no worst-case constant-time
+hash-table assumption. Native responses and Python ledgers expose the two counts.
+
+The current audit passes **2,290 declarations / 1,113 theorem declarations**.

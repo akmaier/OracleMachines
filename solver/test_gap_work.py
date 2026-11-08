@@ -1,4 +1,5 @@
 """Regression tests for completion-aware routing and immutable delta indexes."""
+from contextlib import closing
 import sqlite3
 import tempfile
 import unittest
@@ -9,7 +10,7 @@ from solver.test_interfaces import var,neg,chain
 
 class GapWorkTests(unittest.TestCase):
     def test_route_failures_are_not_fast_successes_and_recent_shift_matters(self):
-        with sqlite3.connect(':memory:') as db:
+        with closing(sqlite3.connect(':memory:')) as db, db:
             Router.create(db);r=Router(db,'test')
             r.profile=lambda *args:dict(reject=False,variables=8,density_bucket=2,reusable_sample=0)
             d=r.choose('010')

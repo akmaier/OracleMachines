@@ -137,6 +137,33 @@ class ResourceTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 PersistentSolver(self.path, query_timeout=value)
 
+    def test_constructor_failures_close_database_and_preserve_history(self):
+        import sqlite3
+        with PersistentSolver(self.path) as s:s.solve(MIXED)
+        connect=sqlite3.connect
+        for point in ('pragma','interface','late_setup'):
+            handles=[]
+            class Connection(sqlite3.Connection):
+                def execute(self,sql,*args,**kwargs):
+                    if point=='pragma' and sql=='PRAGMA synchronous=FULL':
+                        raise sqlite3.OperationalError('Injected configuration failure')
+                    return super().execute(sql,*args,**kwargs)
+            def capture(*args,**kwargs):
+                connection=connect(*args,**kwargs,factory=Connection)
+                handles.append(connection);return connection
+            with patch('solver.persistent.sqlite3.connect',side_effect=capture):
+                if point=='late_setup':
+                    with patch('solver.persistent.ChainSolver',side_effect=RuntimeError('Injected setup failure')):
+                        with self.assertRaises(RuntimeError):PersistentSolver(self.path)
+                else:
+                    with self.assertRaises((ValueError,sqlite3.OperationalError)):
+                        PersistentSolver(self.path,interfaces=True,max_interface=11)
+            self.assertEqual(len(handles),1)
+            with self.assertRaises(sqlite3.ProgrammingError):handles[0].execute('SELECT 1')
+            with PersistentSolver(self.path) as s:
+                self.assertEqual(s.stats()['entries'],1)
+                self.assertTrue(s.solve(MIXED)['answer'])
+
     def test_restricted_coverage_is_explicit(self):
         with PersistentSolver(self.path) as s:
             self.assertTrue(s._request({"bits": "010", "mode": "restricted"})["answer"])

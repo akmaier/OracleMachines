@@ -134,6 +134,24 @@ class InterfaceTests(unittest.TestCase):
             checked=s._request(dict(mode='factor_query',active=[],answer=False,root=evidence['root']))
             self.assertFalse(checked['valid'])
 
+    def test_indexed_negative_context_preserves_duplicates_and_rejects_deleted_assumptions(self):
+        with PersistentSolver(self.path,interfaces=True) as s:
+            result=s.expand(add={'chain':chain(32),'start':var(0),'end':neg(var(32))})
+            self.assertFalse(result['answer'])
+            row=s.db.execute('SELECT evidence FROM expansion_states WHERE id=?',(result['state'],)).fetchone()
+            evidence=s.interfaces.store.get(row[0],'expansion_result')
+            leaves=[d['id'] for d in evidence['certificate']['definitions'] if d['definition']['kind']=='leaf']
+            rng=random.Random(1831)
+            for deleted in (None,*leaves[::max(1,len(leaves)//8)]):
+                active=[x for x in leaves if x!=deleted]*3;rng.shuffle(active)
+                checked=s._request(dict(mode='factor_query',active=active,answer=False,root=evidence['root']))
+                self.assertEqual(checked['valid'],deleted is None)
+                self.assertEqual(checked['context_index_entries'],len(active))
+                self.assertLessEqual(checked['context_membership_probes'],len(leaves))
+                if deleted is None:self.assertEqual(checked['context_membership_probes'],len(leaves))
+            self.assertGreater(result['interfaces']['context_membership_probes'],0)
+            self.assertTrue(s.expand(result['state'],remove=['end'])['answer'])
+
     def test_all_relation_encodings_roundtrip_and_reject_bad_diagrams(self):
         from solver.relations import dense_pack
         rng=random.Random(41)

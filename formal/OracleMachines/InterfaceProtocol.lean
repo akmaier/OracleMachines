@@ -1,5 +1,6 @@
 import OracleMachines.Interfaces
 import Lean.Data.Json
+import Std.Data.HashSet.Lemmas
 
 open Lean
 namespace OracleMachines.SAT
@@ -101,11 +102,48 @@ def factorLeaves (db : FactorStore) (root : String) : Except String (List String
   -- Each identity is scheduled at most once.
   if pending.isEmpty then return leaves else throw "Factor traversal budget exhausted"
 
+/-- Short-circuit membership requests. Hashing, equality and allocation have
+their own costs; this count is not a worst-case hash-table runtime theorem. -/
+def contextProbe (index : Std.HashSet String) : List String → Bool × Nat
+  | [] => (true, 0)
+  | name :: rest =>
+    if index.contains name then
+      let next := contextProbe index rest
+      (next.1, next.2 + 1)
+    else (false, 1)
+
+theorem contextProbe_value (index : Std.HashSet String) (leaves : List String) :
+    (contextProbe index leaves).1 = leaves.all (index.contains ·) := by
+  induction leaves with
+  | nil => rfl
+  | cons name rest ih => simp [contextProbe, List.all_cons, ih]; split <;> simp_all
+
+theorem contextProbe_bound (index : Std.HashSet String) (leaves : List String) :
+    (contextProbe index leaves).2 ≤ leaves.length := by
+  induction leaves with
+  | nil => simp [contextProbe]
+  | cons name rest ih =>
+    simp only [contextProbe, List.length_cons]
+    split <;> simp_all
+
+def contextSubsetRun (leaves active : List String) : Bool × Nat :=
+  contextProbe (Std.HashSet.ofList active) leaves
+
+/-- The indexed check accepts exactly the old list-membership condition,
+including duplicate identities and arbitrary ordering. -/
+theorem contextSubsetRun_exact (leaves active : List String) :
+    (contextSubsetRun leaves active).1 = leaves.all (active.contains ·) := by
+  simp [contextSubsetRun, contextProbe_value]
+
+theorem contextSubsetRun_budget (leaves active : List String) :
+    active.length + (contextSubsetRun leaves active).2 ≤ active.length + leaves.length := by
+  exact Nat.add_le_add_left (contextProbe_bound _ _) _
+
 def factorNegative (db : FactorStore) (root : String) (active : List String) : Except String Bool := do
   let some node := db[root]? | throw "Unknown factor root"
   if node.lazy || !node.factor.allowed.isEmpty then return false
   let leaves ← factorLeaves db root
-  return leaves.all (active.contains ·)
+  return (contextSubsetRun leaves active).1
 
 def factorPositive (db : FactorStore) (active : List String) (witness : Word) : Except String Bool := do
   for name in active do
@@ -265,16 +303,17 @@ def factorEquate (db : FactorStore) (memo : FactorRowStore) (classes : FactorCla
   return (cache, out, Json.mkObj [("valid", toJson true)])
 
 def factorNegativeLazy (db : FactorStore) (memo : FactorRowStore)
-    (root : String) (active : List String) : Except String (FactorRowStore × Bool) := do
+    (root : String) (active : List String) : Except String (FactorRowStore × Bool × Nat × Nat) := do
   let some node := db[root]? | throw "Unknown negative root"
   let leaves ← factorLeaves db root
-  if !leaves.all (active.contains ·) then return (memo, false)
+  let context := contextSubsetRun leaves active
+  if !context.1 then return (memo, false, active.length, context.2)
   let mut cache := memo
   for row in words node.factor.scope.length do
     let (next, possible, _) ← factorRow (db.size + 1) db cache root row
     cache := next
-    if possible then return (cache, false)
-  return (cache, true)
+    if possible then return (cache, false, active.length, context.2)
+  return (cache, true, active.length, context.2)
 
 def factorQueryLazy (db : FactorStore) (bindings : FactorBindings) (memo : FactorRowStore)
     (parseBits : String → Except String Word) (request : Json) :
@@ -291,12 +330,13 @@ def factorQueryLazy (db : FactorStore) (bindings : FactorBindings) (memo : Facto
     let some node := db[name]? | throw "Unknown active leaf"
     if node.source.isNone then throw "Active factor is not an original constraint"
   let answer ← request.getObjValAs? Bool "answer"
-  let (cache, valid) ← if answer then do
+  let (cache, valid, indexed, probes) ← if answer then do
       let witness ← request.getObjValAs? String "witness" >>= parseBits
-      pure (memo, ← factorPositive db active witness)
+      pure (memo, ← factorPositive db active witness, 0, 0)
     else do
       let root ← request.getObjValAs? String "root"
       factorNegativeLazy db memo root active
-  return (cache, Json.mkObj [("valid", toJson valid), ("checked_factors", toJson db.size)])
+  return (cache, Json.mkObj [("valid", toJson valid), ("checked_factors", toJson db.size),
+    ("context_index_entries", toJson indexed), ("context_membership_probes", toJson probes)])
 
 end OracleMachines.SAT

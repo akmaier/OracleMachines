@@ -123,17 +123,16 @@ class PersistentSolver:
         self.cache = Path(cache)
         self.cache.parent.mkdir(parents=True, exist_ok=True)
         self.db = sqlite3.connect(self.cache, timeout=30)
-        self.db.row_factory = sqlite3.Row
-        self.db.execute("PRAGMA journal_mode=WAL")
-        self.db.execute("PRAGMA synchronous=FULL")
-        if max_archive_bytes is not None:
-            page_size = self.db.execute("PRAGMA page_size").fetchone()[0]
-            page_count = self.db.execute("PRAGMA page_count").fetchone()[0]
-            if type(max_archive_bytes) is not int or max_archive_bytes < page_size * max(1, page_count):
-                self.db.close()
-                raise ValueError("Archive cap is smaller than the existing database; history was retained")
-            self.db.execute("PRAGMA max_page_count=" + str(max_archive_bytes // page_size))
         try:
+            self.db.row_factory = sqlite3.Row
+            self.db.execute("PRAGMA journal_mode=WAL")
+            self.db.execute("PRAGMA synchronous=FULL")
+            if max_archive_bytes is not None:
+                page_size = self.db.execute("PRAGMA page_size").fetchone()[0]
+                page_count = self.db.execute("PRAGMA page_count").fetchone()[0]
+                if type(max_archive_bytes) is not int or max_archive_bytes < page_size * max(1, page_count):
+                    raise ValueError("Archive cap is smaller than the existing database; history was retained")
+                self.db.execute("PRAGMA max_page_count=" + str(max_archive_bytes // page_size))
             with self.db:
                 # Serialize migrations as well as ordinary writes.
                 self.db.execute("BEGIN IMMEDIATE")
@@ -180,22 +179,26 @@ class PersistentSolver:
                 LayeredSolver.create(self.db)
                 SourceSolver.create(self.db)
                 self.db.execute("PRAGMA user_version=8")
-        except Exception:
-            self.db.close()
+            self.process: subprocess.Popen | None = None
+            self.chains = ChainSolver(self)
+            self.layers = None
+            self.source_layers = None
+            self.interfaces = InterfaceSolver(self, max_interface, symbolic=symbolic) if interfaces or symbolic or adaptive else None
+            routing_namespace = self.engine_id + ":routes-v3:" + json.dumps(
+                [backend, symbolic, max_interface, components, incremental, incremental_proofs], separators=(",", ":"))
+            self.router = Router(self.db, routing_namespace, self.engine_id) if adaptive and backend != "lean" else None
+            self.components = ComponentSolver(self.db, self.engine_id) if components else None
+            if self.incremental:
+                bridge = hashlib.sha256(DEFAULT_INCREMENTAL.read_bytes()).hexdigest()
+                self.incremental.store = KnowledgeStore(self.db, self.engine_id + ":" + bridge + (":proof-dag-v1" if incremental_proofs else ":dag-v1"))
+            self.setup_ns = time.perf_counter_ns() - start
+        except BaseException:
+            try:
+                if self.incremental:
+                    self.incremental.close()
+            finally:
+                self.db.close()
             raise
-        self.process: subprocess.Popen | None = None
-        self.chains = ChainSolver(self)
-        self.layers = None
-        self.source_layers = None
-        self.interfaces = InterfaceSolver(self, max_interface, symbolic=symbolic) if interfaces or symbolic or adaptive else None
-        routing_namespace = self.engine_id + ":routes-v3:" + json.dumps(
-            [backend, symbolic, max_interface, components, incremental, incremental_proofs], separators=(",", ":"))
-        self.router = Router(self.db, routing_namespace, self.engine_id) if adaptive and backend != "lean" else None
-        self.components = ComponentSolver(self.db, self.engine_id) if components else None
-        if self.incremental:
-            bridge = hashlib.sha256(DEFAULT_INCREMENTAL.read_bytes()).hexdigest()
-            self.incremental.store = KnowledgeStore(self.db, self.engine_id + ":" + bridge + (":proof-dag-v1" if incremental_proofs else ":dag-v1"))
-        self.setup_ns = time.perf_counter_ns() - start
 
     def __enter__(self):
         return self
@@ -752,6 +755,7 @@ class PersistentSolver:
                 # Cached source nodes must not retain caller-owned mutable lists.
                 width,clauses,layers,base,replace,witness=deepcopy((width,clauses,layers,base,replace,witness))
                 store=KnowledgeStore(self.db,self.engine_id)
+                revalidated_source=False
                 if base is None:
                     if type(width) is not int or not 1<=width<=4:raise ValueError('Source width must be 1 to 4')
                     if not isinstance(clauses,list) or not isinstance(layers,list) or len(layers)<2:
@@ -761,8 +765,15 @@ class PersistentSolver:
                 else:
                     if width is not None or clauses is not None or layers is not None:
                         raise ValueError('Source edits keep the saved partition; supply only base and replacements')
-                    if self.db.execute('SELECT 1 FROM source_states WHERE engine=? AND id=?',(self.engine_id,base)).fetchone() is None:
-                        raise ValueError('Unknown source version in this checker namespace')
+                    previous=self.db.execute('SELECT engine FROM source_states WHERE engine=? AND id=?',
+                        (self.engine_id,base)).fetchone()
+                    if previous is None:
+                        previous=self.db.execute('SELECT engine FROM source_states WHERE id=? LIMIT 1',(base,)).fetchone()
+                    if previous is None:raise ValueError('Unknown source version')
+                    # Old records supply source clauses, never trusted answers.
+                    # SourceSolver.ensure registers their checked source nodes
+                    # with this engine before any decision or edit is accepted.
+                    revalidated_source=previous['engine']!=self.engine_id
                     layout_id=store.get(base,'source_version')['layout']
                     if self.source_layers is not None and self.source_layers.layout_id==layout_id:
                         layout=self.source_layers.layout
@@ -770,6 +781,7 @@ class PersistentSolver:
                 if self.source_layers is None or self.source_layers.layout_id!=layout_id:
                     self.source_layers=SourceSolver(self,layout_id,layout)
             result=self.source_layers.run(base,clauses,{} if replace is None else replace,witness)
+            result['revalidated_source']=revalidated_source
             result['source_updates']['input_bytes']=input_bytes
             result['source_updates']['input_store']={field:getattr(store,field) for field in SourceSolver.storage_fields}
             with self._phase('storage_accounting'):result['storage']=self.archive_usage()

@@ -74,7 +74,7 @@ def factorCertificateValid (f : Formula) (certificate : Json) : Except String Bo
     let some node := state[name]? | throw "Missing certificate leaf"
     let some leaf := node.source | throw "Expected original leaf"
     if !formulaIsConjunct f leaf then return false
-  return (← factorNegativeLazy state {} root leaves).2
+  return (← factorNegativeLazy state {} root leaves).2.1
 
 def incrementalCertificateValid (f : Formula) (certificate : Json) : Except String Bool := do
   let history ← certificate.getObjValAs? (Array String) "history"

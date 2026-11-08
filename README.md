@@ -337,7 +337,10 @@ with PersistentSolver() as solver:
 Use `op: "source_cnf"` with the same fields in the JSON-lines service. Queries
 are decision-only by default; `witness=True` requests the complete block-state
 path and adds its output/checking cost. Versions remain in the SQLite archive
-and are replayed and checked after restart in the same checker namespace. A
+and are replayed and checked after restart. After a checker upgrade, the saved
+clauses and summaries are checked by the new engine before a current result is
+stored; old answer bits are ignored and every old row remains intact. The result
+reports `revalidated_source=True` on first use from an older namespace. A
 different partition starts a new source family and pays initial compilation.
 
 The native decision carries a Lean proof connecting its cached summary to the
@@ -351,7 +354,15 @@ payloads and process memory have separate costs.
 The reference update bound is proved; JSON/global variable mapping, hash maps,
 Python/SQLite and native machine costs still have refinement obligations.
 General factor-DAG provenance, adaptive gating and unrestricted structural
-coverage are unchanged. **141 tests pass**, and the current Lean audit covers
+coverage are unchanged. At this milestone **141 tests passed**, and Lean audited
 **2,279 declarations / 1,106 theorem declarations**. See the
 [source-update study](experiments/results/source-updates/README.md) for matched
 full-source rebuilding, lifecycle costs, replay, stored bytes and sampled RSS.
+
+The follow-up uses an indexed assumption check for general-factor negative
+proofs. Lean proves equality with the previous membership condition, including
+duplicates; counters report index entries and membership probes. It avoids
+repeated list scans while retaining the full evidence traversal. Initialization
+failures now close their database handles, and the two test-owned connection
+leaks are fixed. **144 tests pass without resource warnings**; the current Lean
+audit covers **2,290 declarations / 1,113 theorem declarations**.

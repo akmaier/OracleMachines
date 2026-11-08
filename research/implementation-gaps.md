@@ -682,3 +682,30 @@ its mutable row/equivalence invariants. Complete JSON/global-mapping/storage
 refinement, machine costs, archive-growth policy, cost-sensitive gating and
 unrestricted coverage remain open. The new benchmark measures a restricted
 structural mechanism, not a learning-specific or general SAT speedup.
+
+## Indexed context and upgrade preservation follow-up
+
+The next review closes three implementation gaps:
+
+- General negative-proof context checks index the active identities once.
+  Lean proves exact agreement with the old list-membership condition, including
+  duplicates and arbitrary order. Membership probes are bounded by the proof's
+  leaf count. The native response and Python ledger expose index-entry and probe
+  counts. The graph traversal and context construction remain global, and hashing
+  costs are not assumed constant in a worst-case machine bound.
+- Source versions from earlier checker namespaces are now replayed under the
+  current checker. Their stored verdicts are not trusted. Current-engine rows
+  are added only after checked replay; previous rows and objects remain intact.
+  A source-ID index supports the older-namespace lookup. Engine upgrades can
+  still require full native replay and do not have a warm-update guarantee.
+- Database cleanup covers configuration, migration, and later initialization
+  failures. Two independent test-owned connection leaks are also fixed. The
+  full suite passes 144 tests without resource warnings. Lean audits 2,290
+  declarations and 1,113 theorem declarations without admits or added axioms.
+
+The next highest-value obligations are the source compiler's global-ID mapping
+proof, reference-count/eviction invariants, and the general factor row/equivalence
+store invariant. After those, measure alternative representations for the global
+provenance path and remove the unary-input expansion in application experiments.
+These tasks can make the stated restricted guarantee more complete. They do not
+establish efficient decompositions or compressed exact models for arbitrary SAT.

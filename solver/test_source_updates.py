@@ -124,5 +124,25 @@ class SourceUpdateTests(unittest.TestCase):
             self.assertFalse(s.source_cnf(base=b['state'])['answer'])
             self.assertTrue(s.source_cnf(base=a['state'])['answer'])
 
+    def test_old_engine_source_replays_clauses_instead_of_importing_answer(self):
+        with tempfile.TemporaryDirectory() as d:
+            path=Path(d)/'s.db'
+            with PersistentSolver(path) as s:
+                a=s.source_cnf(1,[],[[1],[2],[3]])
+                b=s.source_cnf(base=a['state'],replace={1:[[]]})
+                with s.db:
+                    s.db.execute("UPDATE source_states SET engine='older-engine',answer=1-answer")
+                before=[tuple(r) for r in s.db.execute('SELECT * FROM source_states ORDER BY id')]
+            with PersistentSolver(path) as s:
+                for prior,expected in ((a,True),(b,False)):
+                    r=s.source_cnf(base=prior['state'])
+                    self.assertEqual(r['answer'],expected)
+                    self.assertTrue(r['revalidated_source'])
+                    self.assertGreater(r['source_updates']['native_definitions'],0)
+                    self.assertFalse(s.source_cnf(base=prior['state'])['revalidated_source'])
+                self.assertEqual([tuple(r) for r in s.db.execute("SELECT * FROM source_states WHERE engine='older-engine' ORDER BY id")],before)
+                self.assertEqual(s.db.execute('SELECT count(*) FROM source_states').fetchone()[0],4)
+                self.assertTrue(s.source_cnf(base=b['state'],replace={1:[]})['answer'])
+
 
 if __name__=='__main__':unittest.main()

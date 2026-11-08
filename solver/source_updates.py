@@ -25,6 +25,7 @@ class SourceSolver(LayeredSolver):
         db.execute('''CREATE TABLE IF NOT EXISTS source_states (
             engine TEXT NOT NULL,id TEXT NOT NULL,evidence TEXT NOT NULL,
             answer INTEGER NOT NULL,created_ns INTEGER NOT NULL,PRIMARY KEY(engine,id))''')
+        db.execute('CREATE INDEX IF NOT EXISTS source_version_identity ON source_states(id)')
 
     def reset_native(self):
         self.service._request(dict(mode='source_init',id=self.layout_id,**self.layout))

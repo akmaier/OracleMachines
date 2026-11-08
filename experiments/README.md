@@ -1,5 +1,18 @@
 # Executed reuse and persistence study
 
+## Arbitrary-CNF residuals and recognized matching
+
+The [residual candidate](results/cnf-residual-dag/README.md) preserves 156
+decisions and 104 result/certificate archives for heterogeneous class leaves,
+component splitting and exact reuse. Its separate Python checker is not part
+of the production solver's Lean acceptance path.
+
+The [matching extension](results/cnf-matching/README.md) adds 153 decisions over
+39 inputs. A recognized nine-pigeon/eight-hole instance drops from 5,191 acquired
+residuals to one Hall-certified residual. All earlier archives still reload
+without changes. Positive-clause overlap remains an unrestricted-SAT obstacle;
+these experiments establish no uniform polynomial solution for every CNF.
+
 ## Expanded public and chronological study
 
 The [new study](results/expanded/README.md) covers 28 public SATLIB instances

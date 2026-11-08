@@ -68,9 +68,11 @@ module `OracleMachines.lean` imports the complete development and its audit.
 `Residuals.lean` adds exact single-variable conditioning and SAT/UNSAT branch
 recomposition for arbitrary formulas. Its four main lemmas are `condition_eval`,
 `satisfiable_condition`, `satisfiable_split`, and `unsatisfiable_split`. They
-support the semantics of the research CNF residual candidate, but do not verify
-its Python implementation or prove a polynomial bound on its residual count.
-The checkpoint audit includes 4,061 declarations / 1,924 theorem declarations.
+support the semantics of the research CNF residual candidate. The later
+`no_injective_choice_of_card_lt` gives the finite-cardinality obstruction behind
+a Hall certificate. These lemmas do not verify the Python recognizer, matching
+algorithm, persistence or checker, or bound the residual count polynomially.
+The latest audit includes 4,062 declarations / 1,925 theorem declarations.
 
 The follow-up adds two independently scoped modules. `CompactExpansion.lean`
 stores a unary coverage cap of `n` cells, constructs it in `n` allocation steps,

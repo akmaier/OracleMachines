@@ -2223,6 +2223,32 @@ Inspection of those inputs reveals a more consequential restriction. Every regul
 
 Consequently, previously unseen batches in these streams do not test general affine frontiers with many correlated assignments. Benchmarks for the next constructor must include such frontiers, free old coordinates, coupled new coordinates, unsupported updates and the costs of falling back. The same distinction limits nearest-neighbor indexing: retrieving a similar old state can propose a repair, but proximity neither proves boundary equivalence nor supplies the required constructor. The measurements, structural diagnostic and remaining implementation obligations are retained in \texttt{experiments/results/affine-resident-metadata/}. Lean now audits 4,049 declarations, including 1,916 theorem declarations, without admits or added axioms; the native solver binary is unchanged by these additional semantic lemmas.
 
+\subsection{Arbitrary CNF residuals and recognized matching}
+\label{sec:cnf-residual-candidate}
+
+Let us now return to arbitrary CNF. A research candidate combines unit propagation, Horn, dual-Horn and 2-CNF leaves, independent components, and variable branching. It stores normalized residual formulas and their certificates. Sorting and variable compaction recognize identical residuals up to order-preserving renaming; they do not decide arbitrary semantic equivalence. The general variable split remains available when no specialized leaf applies. An execution budget may stop the prototype without a verdict. This candidate is separate from the production solver's Lean-checked acceptance path.
+
+The first experiment exposes a useful missing structure. Seven pigeons assigned to six holes require 416 expanded residuals with reuse, compared with 1,235 without it. Yet, these formulas encode a polynomial matching problem. The difficulty is therefore partly caused by the representation and available leaves. Matching-based reasoning about \texttt{alldifferent} constraints is established \citep{regin1994}. \citet{lenchner2019} explicitly studies the corresponding CMP-SAT class and its recognition. We use a restricted explicit form below; we do not claim a new tractable class.
+
+\begin{proposition}[Matching leaf for disjoint choices]
+\label{prop:matching-leaf}
+Let the variable set $V$ be partitioned into resource groups $R_1,\ldots,R_h$. Let $C_1,\ldots,C_p$ be nonempty, pairwise disjoint subsets of $V$. Suppose the entire CNF consists of the positive clauses $\bigvee_{x\in C_i}x$ and all negative pairs $\neg x\lor\neg y$ for distinct $x,y$ in each $R_j$. Construct a bipartite graph with an edge $(i,j)$ exactly when $C_i\cap R_j\neq\varnothing$. Then the CNF is satisfiable if and only if the graph has a matching covering all $p$ choice groups. A set $S$ of choice groups with $|N(S)|<|S|$ certifies unsatisfiability.
+\end{proposition}
+
+\begin{proof}
+From a satisfying assignment, select a true variable from each $C_i$. Disjointness makes these selected variables distinct. Two cannot belong to the same $R_j$, because their negative pair would be false. Their resource groups therefore give a matching covering all choices. Conversely, for every matched pair $(i,j)$ select one variable from $C_i\cap R_j$, set the selected variables true, and set all others false. Every positive clause holds, and at most one variable in each resource group is true, so every negative clause holds. Finally, a matching covering $S$ would inject $S$ into $N(S)$, which is impossible when $|N(S)|<|S|$.
+\end{proof}
+
+The recognizer checks that positive clauses have disjoint supports and that every other clause is a negative pair. It then requires each connected component of the negative conflict graph to be a clique. Isolated variables are singleton resource groups. These checks matter: overlapping positive clauses can share one true variable, while endpoints of a non-clique conflict component can both be true. Treating either case as a matching instance could produce a false contradiction. Unsupported inputs continue through the general residual search.
+
+Removing the positive disjointness condition already covers arbitrary SAT, even when every resource group has size two. To see this, replace each variable $x$ by indicators $p_x,n_x$, translate its positive and negative occurrences to those indicators, and add $p_x\lor n_x$ and $\neg p_x\lor\neg n_x$. The added pair forces complementary values, so the transformed positive clauses encode exactly the original CNF. The negative conflict graph consists of disjoint edges, but the positive clauses can overlap. A uniform polynomial method for that interaction would therefore solve arbitrary SAT. This reduction identifies a concrete remaining target; it does not prove that such a method is impossible.
+
+After recognition and adjacency preparation, repeated augmenting paths use $O(pe)$ graph traversals, where $e$ is the number of choice-resource edges. A failed augmentation supplies a deficient Hall set. The checker reconstructs the resource groups and counts its neighbors; it need not repeat the search tree. Normalization, sorting, bit costs, source verification, serialization and storage remain charged separately. This gives polynomial acquisition and verification for the recognized family, including its explicit pairwise CNF input. It does not establish a polynomial bound for an arbitrary CNF's number of residuals.
+
+The prototype retains full source witnesses for SAT and independently checked Python certificates for UNSAT. Cold reuse checks the needed negative dependency graph. \texttt{Residuals.lean} proves the semantics of conditioning, the two-way variable split, and the finite-cardinality obstruction underlying a Hall certificate. It does not yet connect the Python recognizer, graph algorithm, certificate checker or database to those theorems. Thus the mathematical matching reduction, finite testing, and Lean-checked semantic lemmas have distinct scopes.
+
+The follow-up evaluates 39 inputs, with matched acquisition against the preceding portfolio on 36 and matching-only scaling on three larger inputs. Warm and cold replays give 153 decisions in total. At nine pigeons and eight holes, recognition reduces acquisition from 5,191 residuals to one Hall-certified residual and logical archive payload from 17,290,081 to 6,208 bytes. The latter includes the full formula and exact key, not only the Hall witness. Cold checking visits one certificate node instead of 5,191. Matching-only runs reach 49 pigeons and 48 holes with one residual, but the explicit input still grows and retained payload reaches 1,496,174 bytes. These counts demonstrate the family-specific improvement; they do not imply constant time or memory. All 104 earlier experimental archives remain readable and unchanged. The comparison is an ablation of this research candidate, not a competitive CDCL study, and physical peak memory has not been measured.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 
@@ -2536,6 +2562,12 @@ Software, pinned version used in the accompanying formalization.
 \url{https://github.com/leanprover/lean4/tree/v4.24.0/src/Std/Sat}.
 \url{https://github.com/leanprover/lean4/tree/v4.24.0/src/Std/Tactic/BVDecide/LRAT}.
 
+\bibitem[Lenchner(2019)]{lenchner2019}
+Lenchner, J. (2019).
+From Hall's marriage theorem to Boolean satisfiability and back.
+\emph{arXiv preprint arXiv:1904.07218}, version 4.
+\url{https://arxiv.org/abs/1904.07218v4}.
+
 \bibitem[Lin et~al.(2021)Lin, Jaech, Li, Gormley, and Eisner]{lin2021limitations}
 Lin, C.-C., Jaech, A., Li, X., Gormley, M.~R., and Eisner, J. (2021).
 Limitations of autoregressive models and their alternatives.
@@ -2621,6 +2653,11 @@ Prasad, M.~R., Chong, P., and Keutzer, K. (2001).
 Why is combinational ATPG efficiently solvable for practical VLSI circuits?
 \emph{Journal of Electronic Testing}, 17:509--527.
 doi:10.1023/A:1012820722053.
+
+\bibitem[R\'egin(1994)]{regin1994}
+R\'egin, J.-C. (1994).
+A filtering algorithm for constraints of difference in CSPs.
+In \emph{Proceedings of AAAI}, pages 362--367.
 
 \bibitem[Riedmiller(2025)]{riedmiller2025dual}
 Riedmiller, C.~Z. (2025).

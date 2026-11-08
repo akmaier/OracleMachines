@@ -1,4 +1,5 @@
 import OracleMachines.SAT
+import Mathlib.Data.Fintype.Card
 
 /-!
 # Exact conditioning and branching for residual reuse
@@ -66,5 +67,15 @@ theorem unsatisfiable_split (f : Formula) (index : Nat)
     (high : ¬ Satisfiable (f.condition index true)) : ¬ Satisfiable f := by
   intro h
   exact ((satisfiable_split f index).mp h).elim low high
+
+/-- Instantiate Left with selected choice groups and Right with their possible
+resources. This is the cardinality obstruction behind a Hall certificate, not
+a proof of the Python CNF recognizer or matching algorithm. -/
+theorem no_injective_choice_of_card_lt (Left Right : Type)
+    [Fintype Left] [Fintype Right]
+    (deficient : Fintype.card Right < Fintype.card Left) :
+    ¬ ∃ f : Left → Right, Function.Injective f := by
+  rintro ⟨f, hf⟩
+  exact (not_lt_of_ge (Fintype.card_le_of_injective f hf)) deficient
 
 end OracleMachines.SAT

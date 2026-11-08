@@ -1,12 +1,13 @@
 """Research-candidate checks; no access to the production result archive."""
 import itertools
 import json
+from collections import Counter
 from pathlib import Path
 import random
 import tempfile
 import unittest
 
-from experiments.cnf_residual_dag import ResidualSolver, holds
+from experiments.cnf_residual_dag import ResidualSolver, holds, matching_structure, normalize, solve_matching
 
 
 def brute(cnf):
@@ -127,6 +128,69 @@ class ResidualTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     solver.solve(cnf)
         finally:
+            solver.close()
+
+    def test_every_three_by_three_matching_domain(self):
+        for mask in range(1 << 9):
+            domains = [[3 * p + h + 1 for h in range(3) if mask >> (3 * p + h) & 1]
+                       for p in range(3)]
+            cnf = list(domains)
+            for h in range(3):
+                members = [3 * p + h + 1 for p in range(3) if mask >> (3 * p + h) & 1]
+                cnf += [(-a, -b) for a, b in itertools.combinations(members, 2)]
+            canonical, _ = normalize(cnf)
+            structure = matching_structure(canonical, Counter())
+            if () in canonical:
+                self.assertIsNone(structure)
+                continue
+            self.assertIsNotNone(structure)
+            model, proof = solve_matching(structure, Counter())
+            self.assertEqual(model is not None, brute(canonical))
+            if model is not None:
+                self.assertTrue(holds(canonical, model))
+            else:
+                selected = proof["groups"]
+                neighbors = {r for p in selected for r in structure[p]}
+                self.assertLess(len(neighbors), len(selected))
+
+    def test_matching_recognizer_rejects_unsound_near_misses(self):
+        # Shared positive literal can serve two clauses: treating these as two
+        # exclusive choice groups would give a false Hall contradiction.
+        overlap = [(1, 2), (2, 3), (-1, -2), (-1, -3), (-2, -3)]
+        # A path is not an exclusion clique: endpoints may both be selected.
+        missing_edge = [(1,), (3,), (-1, -2), (-2, -3)]
+        for cnf in (overlap, missing_edge):
+            canonical, _ = normalize(cnf)
+            self.assertIsNone(matching_structure(canonical, Counter()))
+            solver = ResidualSolver()
+            try:
+                self.assertTrue(solver.solve(cnf)["answer"])
+            finally:
+                solver.close()
+
+    def test_hall_certificate_cold_replay_and_tampering(self):
+        from experiments.compare_cnf_residuals import pigeonhole
+        cnf = pigeonhole(4)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "research.sqlite3"
+            solver = ResidualSolver(path)
+            result = solver.solve(cnf)
+            self.assertFalse(result["answer"])
+            self.assertEqual(result["metrics"].get("expanded_nodes"), 1)
+            self.assertEqual(result["metrics"].get("matching_leaves"), 1)
+            solver.close()
+            solver = ResidualSolver(path)
+            cold = solver.solve(cnf)
+            self.assertEqual(cold["metrics"].get("verified_nodes"), 1)
+            node = solver.checked[result["root"]]
+            node["proof"]["groups"] = node["proof"]["groups"][:1]
+            with solver.db:
+                solver.db.execute("UPDATE cnf_residual_v1 SET payload=? WHERE id=?",
+                                  (json.dumps(node), result["root"]))
+            solver.close()
+            solver = ResidualSolver(path)
+            with self.assertRaisesRegex(ValueError, "not deficient"):
+                solver.solve(cnf)
             solver.close()
 
 

@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
+combines tractable leaves, residual reuse, and recognized matching constraints.
+The [matching experiment](experiments/results/cnf-matching/README.md) reduces a
+nine-pigeon/eight-hole case from 5,191 acquired residuals to one checked Hall
+certificate. This is a restricted-family improvement in a separate Python
+prototype; no uniformly polynomial solution for every CNF has been established.
+
 The current draft is **Bounded-Domain SAT, Compiled Knowledge, and Amortized
 Reasoning: A perspective on resource accounting for learned reasoning**.
 

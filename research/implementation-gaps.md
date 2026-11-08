@@ -2086,3 +2086,46 @@ and solved with a matching/Hall certificate rather than residual branching.
 This is established tractable-class reasoning, with a direct CMP-SAT precedent
 in Lenchner's 2019 preprint, and does not cover every CNF. Initial evidence,
 including cases where decomposition adds work, is preserved for comparison.
+
+
+## 2026-11-08: matching structure replaces a growing search family
+
+Implemented the next structural leaf in the experimental CNF candidate. It
+recognizes disjoint positive choices and complete negative exclusion cliques,
+solves the resulting bipartite matching problem, and independently checks a
+source witness or Hall deficiency certificate. Missing clique edges and
+overlapping choices are rejected; satisfiable counterexamples to these two
+unsound relaxations are retained. This is established matching/CMP-SAT reasoning,
+not a claimed novel class or a uniform solution of all CNFs.
+
+[Matched evidence](../experiments/results/cnf-matching/README.md) contains 153
+decisions over 39 inputs. Nine pigeons / eight holes drop from 5,191 acquired
+residuals and 17,290,081 logical bytes to one residual and 6,208 bytes. Cold
+checking drops to one source/Hall node. Matching-only scaling reaches 48 holes,
+still with one node but 1,496,174 retained logical bytes, illustrating that the
+source cost grows. Four near-miss cases and all previous difficult cases remain.
+All 104 earlier archives reload with unchanged row digests and no new expansions.
+Every new result/certificate is retained in 75 additional compressed snapshots.
+
+All 220 Python tests pass. Lean checks conditioning, branch recomposition and the
+cardinality obstruction, with an audit of 4,062 declarations / 1,925 theorems.
+The manuscript adds the full mathematical matching reduction and proof. The
+Python recognizer/checker is still outside the production Lean trust boundary;
+production code and its result archive are not targeted by these experiments.
+
+**Next mathematical priority:** positive-clause overlap. Replacing each SAT
+variable by complementary indicators embeds arbitrary CNF into overlapping
+positive clauses with disjoint negative pairs. Thus the resource graph can be
+simple while shared satisfaction carries the full problem. Investigate removal
+of redundant/laminar choices, overlap backdoors, and exact summaries of shared
+satisfaction. A k-variable overlap backdoor can still require 2^k branches;
+neither a universally small k nor a polynomial number of residuals is proved.
+Keep acquisition, recognition, intermediate representation and cold checking in
+the bound. Native source-linked certification is a separate implementation gap.
+
+Final validation: all 38 previous manuscript proof blocks are unchanged and one
+matching proof is added. The 78-page PDF builds without warnings and revised
+pages 70/71, adjoining page 72, and bibliography pages 76/77 were rendered and
+visually checked. The prior experiment's artifacts are unchanged; current
+candidate/driver fingerprints match their report. The separate cold-baseline
+audit confirms 5,191 checked nodes at eight holes, with zero new expansions.

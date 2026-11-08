@@ -175,6 +175,90 @@ def two_cnf(cnf, counts):
     return {v: scc[v] > scc[-v] for v in variables}, None
 
 
+def matching_structure(cnf, counts):
+    """Recognize disjoint positive choices and disjoint exclusion cliques.
+
+    Optional variables with no positive occurrence may be set false. Missing
+    clique edges or overlapping positive clauses invalidate this recognition.
+    The input is already normalized, so clauses/literals/edges are distinct.
+    """
+    positive, owned, graph = {}, set(), {}
+    for cid, clause in enumerate(cnf):
+        counts["matching_recognition_literal_visits"] += len(clause)
+        if not clause:
+            return None
+        for lit in clause:
+            graph.setdefault(abs(lit), set())
+        if all(lit > 0 for lit in clause):
+            if owned.intersection(clause):
+                return None
+            owned.update(clause)
+            positive[cid] = clause
+        elif len(clause) == 2 and all(lit < 0 for lit in clause):
+            a, b = map(abs, clause)
+            graph[a].add(b)
+            graph[b].add(a)
+        else:
+            return None
+    component = {}
+    for root in sorted(graph):
+        if root in component:
+            continue
+        group, stack = [], [root]
+        component[root] = root
+        while stack:
+            vertex = stack.pop()
+            group.append(vertex)
+            counts["matching_conflict_edge_visits"] += len(graph[vertex])
+            for other in sorted(graph[vertex]):
+                if other not in component:
+                    component[other] = root
+                    stack.append(other)
+        if any(len(graph[v]) != len(group) - 1 for v in group):
+            return None
+    domains = {}
+    for cid, clause in positive.items():
+        domains[cid] = {}
+        for variable in clause:
+            domains[cid].setdefault(component[variable], variable)
+    return domains
+
+
+def solve_matching(domains, counts):
+    """O(p*e) graph traversals after adjacency sorting; failed BFS gives a Hall set."""
+    adjacency = {left: sorted(domain) for left, domain in domains.items()}
+    left_to_right, right_to_left = {}, {}
+    for root in domains:
+        queue, seen_left, prev = deque([root]), {root}, {}
+        free = None
+        while queue and free is None:
+            left = queue.popleft()
+            for right in adjacency[left]:
+                counts["matching_domain_edge_visits"] += 1
+                if right in prev:
+                    continue
+                prev[right] = left
+                if right not in right_to_left:
+                    free = right
+                    break
+                owner = right_to_left[right]
+                if owner not in seen_left:
+                    seen_left.add(owner)
+                    queue.append(owner)
+        if free is None:
+            return None, {"kind": "hall-v1", "groups": sorted(seen_left)}
+        right = free
+        while True:
+            left = prev[right]
+            old_right = left_to_right.get(left)
+            left_to_right[left] = right
+            right_to_left[right] = left
+            if old_right is None:
+                break
+            right = old_right
+    return {domains[left][right]: True for left, right in left_to_right.items()}, None
+
+
 class ResidualSolver:
     """Complete mathematical search; node budget raises, never guesses UNSAT.
 
@@ -182,12 +266,13 @@ class ResidualSolver:
     preserves completed residuals. No native/Lean solver dispatch is changed.
     """
     def __init__(self, archive=":memory:", *, reuse=True, leaves=True,
-                 decompose=True, node_limit=100000):
+                 decompose=True, matching=True, node_limit=100000):
         self.db = sqlite3.connect(archive)
         self.db.execute("""CREATE TABLE IF NOT EXISTS cnf_residual_v1 (
             id TEXT PRIMARY KEY, payload TEXT NOT NULL)""")
         self.db.commit()
         self.reuse, self.leaves, self.decompose = reuse, leaves, decompose
+        self.matching = matching
         self.node_limit = node_limit
         self.checked = {}
         self.counts = Counter()
@@ -296,6 +381,17 @@ class ResidualSolver:
                     self.counts["verified_implication_edges"] += 1
                 if current != target:
                     raise ValueError("Implication path has wrong endpoint")
+        elif kind == "hall-v1":
+            domains = matching_structure(cnf, self.counts)
+            selected = proof["groups"]
+            if (domains is None or type(selected) is not list or not selected
+                    or any(type(i) is not int or i not in domains for i in selected)
+                    or len(set(selected)) != len(selected)):
+                raise ValueError("Invalid Hall group selection")
+            neighbors = {right for left in selected for right in domains[left]}
+            self.counts["verified_hall_edges"] += sum(len(domains[left]) for left in selected)
+            if len(neighbors) >= len(selected):
+                raise ValueError("Hall set is not deficient")
         elif kind == "component":
             ids = proof["clauses"]
             if not ids or any(type(i) is not int or not 0 <= i < len(cnf) for i in ids):
@@ -374,6 +470,11 @@ class ResidualSolver:
             if all(len(c) <= 2 for c in cnf):
                 self.counts["two_cnf_leaves"] += 1
                 return two_cnf(cnf, self.counts)
+            if self.matching:
+                domains = matching_structure(cnf, self.counts)
+                if domains is not None:
+                    self.counts["matching_leaves"] += 1
+                    return solve_matching(domains, self.counts)
         if self.decompose:
             groups = components(cnf, self.counts)
             if len(groups) > 1:

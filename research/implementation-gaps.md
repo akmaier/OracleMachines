@@ -1279,3 +1279,76 @@ record the result. Earlier timing evidence and all 32 previous manuscript proof
 blocks remain unchanged. Resume with the full initial raw-CNF anchor; complete
 successor-formula equality, root coverage and returned native decision fields
 no longer need to be assumed.
+
+
+## 2026-11-08 10:15 UTC — initial raw-CNF binding and returned verdict
+
+`SourceInitial.lean` closes the initial source-provenance path. The theorem
+`compileSource_fields` derives actual width/layers/clauses getter equations from
+success of the existing compiler. `readCompilation` carries these equations with
+the compilation result, without a second parser or compilation implementation.
+
+The executed `checkBinding` follows current live child names and models through
+`readParts`; their join equalities come from the established live-store invariant.
+Each leaf's original array must equal the compiled original bucket, including
+literal order, duplicate clauses and empty clauses. Padding must match an empty
+array. `matches_complete` proves equality with the full ordered concatenation of
+these buckets. `matched_partition` composes this equality with the grouping
+permutation. Thus the live root retains every raw input clause occurrence, but
+global input order is not claimed to equal grouped tree order. `partition_eval`
+proves equal evaluation for every original-variable valuation.
+
+`InitialResponse` includes actual input and root getters, live model identity,
+layout agreement, complete/minimal root coverage, exact bucket agreement, clause
+permutation, nested returned verdict and SAT/UNSAT equivalences for the actual
+input. `SourceUpdates.bindSource_success` transfers it to the exposed native
+JSON-returning function. That function now executes the certified constructor.
+The original relation-binding scan and decoded-answer comparison remain executed;
+the checked verdict is returned unchanged instead of rewriting its equal answer.
+
+The original-bucket traversal also certifies the actual `binding_visits` getter,
+`visits + 1 = 2^(height + 1)` and `height < fuel`. The API uses fuel 17, covering
+permitted heights through 16. The count covers logical node visits with padding.
+It excludes parsing, map access, original-array comparisons, allocation, the
+separate relation scan and witness work. Full initial binding remains charged;
+warm query and patch paths are unchanged. Flattening is specification work.
+
+New tests accept global clause permutations that preserve compiled bucket arrays,
+then reject dropped/added duplicate clauses and changed literal order despite
+equal SAT answers. They distinguish one empty clause from two, exercise both
+response modes, and check exact padded scan counts for 1/2/3/5/17/33 logical edges.
+Malformed input, wrong layouts, partial/shifted or missing roots and invalid
+witness-mode fields are rejected while the original live root remains usable.
+These finite tests do not establish cap-wide acceptance completeness.
+
+Remaining priorities:
+
+1. **Operation-history composition.** Initial, query and patch native APIs now
+   have individual success theorems. Define a history with store states and
+   retained source identities, then compose initial anchoring, successful node
+   definitions/deletions and requested patches. Keep the original CNF permutation
+   at initialization distinct from the exact ordered bucket replacements later.
+2. **Serialized witnesses, Python retention and persistent replay.** Certify
+   truncated witness values and original-variable interpretation, byte transport,
+   active-root retention and complete replay/SQLite correspondence. Native current
+   child identities and incoming counts remain proved.
+3. **Generic relation/factor stores.** Their retention loops and row/equivalence
+   caches remain outside the adjacent-block source-store invariant.
+4. **Acceptance completeness and total costs.** Include source bounds, caps,
+   error paths, decoding, array comparisons, map/bit operations, allocation,
+   archive access, transport and restart. Successful logical visit counts are
+   not total machine-cost bounds.
+5. **Compact general input, matched evaluation and cost-sensitive selection.**
+   No unrestricted coverage or total-resource guarantee follows from this result.
+
+Verification: all **174 tests pass**, including **35 source-update tests**.
+Lean audits **3,154 declarations / 1,539 theorem declarations**, without admits
+or added axioms. Runtime checkpoint `92a1ddd` is committed and pushed. All 355
+older generic inputs pass revalidation and semantic audit. All five saved source
+versions pass checked adoption and restart. Every old row in 21 tables and all
+214 earlier experiment files remains intact. The archive holds 8,520 results,
+2,838 refutations and 60 source-state rows. The manuscript and
+[initial-binding record](../experiments/results/source-initial/README.md) retain
+the evidence. Earlier timings and all 32 previous manuscript proof blocks remain
+unchanged. Resume with native operation-history composition; the complete initial
+raw-CNF-to-live-root-to-returned-decision path no longer needs to be assumed.

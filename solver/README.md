@@ -681,7 +681,24 @@ preserved.
 
 Flattening and proof composition occur only in specifications. Warm calls keep
 cached decisions and changed-path checking. Witness-mode answer equality is
-certified, but witness array contents, byte transport, the full initial raw-CNF
-anchor, Python retention and complete persistent replay remain separate proofs.
+certified, but witness array contents, byte transport, Python retention and
+complete persistent replay remain separate proofs. The initial raw-CNF anchor
+is covered by the following checkpoint.
 Root checks, lookups, decoding, comparisons, filters, wrappers and witness work
 still cost resources. Previous timing artifacts are unchanged.
+
+
+Initial `source_bind` now executes the certified constructor in `SourceInitial.lean`.
+It retains the actual decoded width, layout and raw clauses, compares every live
+original leaf with the compiled original bucket, checks complete root coverage,
+and certifies the returned nested verdict for the input CNF. Grouping can reorder
+clauses globally, but exact bucket arrays and all clause occurrences are preserved.
+Padding is compared with the empty array. The existing relation scan and decision
+comparison remain executed.
+
+The returned `binding_visits` is proved to satisfy `visits + 1 = 2^(height + 1)`
+with height below 17. Initial full scanning and relation evaluation remain costs;
+this count omits map operations, decoding, array comparisons and allocation.
+Warm queries and patches do not run this initial scan. No new timing claim follows.
+The native initial, query and patch APIs now have individual success theorems.
+Composition across a complete operation history and persistent replay remains open.

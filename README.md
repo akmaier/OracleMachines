@@ -555,7 +555,7 @@ filtering and array comparisons. Earlier timings are unchanged; no speedup or
 unrestricted-SAT guarantee follows.
 
 
-The latest checkpoint proves **complete successor formulas and returned native
+The preceding checkpoint proves **complete successor formulas and returned native
 decisions**. `SourceFormula.lean` connects ordered bucket flattening to the exact
 original clause list, characterizes interval coverage and empty padding, and
 proves that an accepted patch gives the complete requested successor CNF.
@@ -580,3 +580,27 @@ retention and complete replay/SQLite refinement also remain open. Flattening is
 specification work; warm decisions add no full-source scan or summary rebuild.
 Total physical/resource costs and unrestricted coverage are not established.
 Earlier timing evidence remains unchanged.
+
+
+The latest checkpoint closes the **initial raw-CNF binding** gap.
+`SourceInitial.lean` connects the actual request getters to the live root's exact
+original buckets, complete coverage, clause permutation and returned verdict.
+Grouping may reorder clauses globally; duplicate and empty clause occurrences
+remain intact. `SourceUpdates.bindSource_success` covers the native JSON-returning
+function. The executed original-bucket scan proves `visits + 1 = 2^(height + 1)`
+and `height < 17`; this counts logical visits, not total machine work. Initial
+compilation and both complete binding scans remain charged. Warm paths are unchanged.
+
+**174 tests pass**, including **35 source-update tests**. Lean audits **3,154
+declarations / 1,539 theorem declarations**, without admits or added axioms.
+Runtime checkpoint `92a1ddd` is committed and pushed. The
+[initial-binding verification record](experiments/results/source-initial/README.md)
+records all 355 generic inputs revalidated, five source versions adopted and
+restarted, every old row in 21 tables preserved, and all 214 earlier experiment
+files unchanged. The archive holds **8,520 results / 2,838 refutations / 60
+source-state rows**.
+
+Next is composition over accepted operation histories. Serialized witness values,
+byte transport, Python active-root retention, replay/SQLite refinement, generic
+stores, acceptance completeness and complete resource bounds remain open. Earlier
+timings are unchanged; no new unrestricted-SAT guarantee follows.

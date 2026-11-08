@@ -870,3 +870,43 @@ then compare actual nested/direct verdicts against exhaustive truth tables for
 54 transitions across 1, 3 and 5 logical edges, including padding, historical
 branches, empty clauses, deletion and repeated clauses. Positive witnesses are
 checked independently. Existing unknown-root diagnostics remain unchanged.
+
+
+### Initial raw-CNF binding and returned verdict (2026-11-08)
+
+[`SourceInitial.lean`](OracleMachines/SourceInitial.lean) closes the initial
+source-provenance gap. `compileSource_fields` extracts the actual request getter
+equations from success of the existing compiler. `readCompilation` carries them
+without duplicate compilation or reparsing.
+
+`checkBinding` follows actual live children using the proved named-child invariant.
+Each original leaf array must equal its compiled original bucket, including
+literal order and repeated/empty clauses; padding must have an empty array.
+`matches_complete` connects all compared buckets to the whole live clause list.
+`matched_partition` uses the grouping theorem to prove a permutation of the raw
+input clauses, with multiplicities. Global input order need not equal tree order.
+`partition_eval` then proves equal evaluation under every original valuation.
+
+`InitialResponse` combines actual width/layers/clauses/root getters, live identity,
+coverage, exact original buckets, the clause permutation and returned SAT/UNSAT
+semantics. The nested `verdict` and `binding_visits` getters hold definitionally.
+`SourceUpdates.bindSource_success` transfers the certificate to every successful
+native `source_bind` call. The existing relation-binding scan and decision
+comparison remain executed; the already checked verdict is returned unchanged.
+
+The scan proves `visits + 1 = 2^(height + 1)` and `height < fuel`; the API supplies
+fuel 17. This covers logical node visits, including padding, at permitted heights
+through 16. It does not cover parsing, map operations, array comparisons, allocation,
+the separate relation scan or witness work. Full initial binding remains distinct
+from warm paths. Flattening and proof composition erase.
+
+All **174 tests pass**, including **35 source-update tests**. Lean audits **3,154
+declarations / 1,539 theorem declarations** without admits or added axioms. New
+checks cover grouping permutations, multiplicity/literal-order forgeries with equal
+answers, repeated empty clauses, both response modes, complete padded scan counts,
+malformed input and root failures with continued live-root usability.
+
+Operation-history composition is next. Serialized witnesses, byte transport,
+Python retention, persistent replay/SQLite refinement, generic stores, acceptance
+completeness and total costs remain separate. These are successful-call guarantees
+for the supplied adjacent-block family, with no new timing or unrestricted claim.

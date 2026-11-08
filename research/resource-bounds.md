@@ -693,3 +693,52 @@ The existing scan engine has an O((v+1)*L) literal-visit envelope, where v is
 the number of variables and L the CNF literal payload. It can revisit essentially
 the whole source after each newly forced value. An occurrence-driven propagation
 queue is the next proposed improvement; it has not yet replaced that engine.
+
+## 12. Bounded pattern discovery and its reporting partition
+
+`PatternInventory` is a separate analysis layer over the residual helpers. The
+normal solver is unchanged. Seven recognition outcomes classify each normalized
+formula; original source records retain exact syntax and name bindings. A fixed
+policy yields a deterministic outcome vector for every valid finite input.
+Its cells cover the input space, including unresolved cases. This says nothing
+about polynomial solution of every cell or a useful compact universal oracle.
+
+The direct single-parity recognizer scans the source and checks a half-cube clause
+count and common forbidden parity, within a default eight-variable width cap.
+It never enumerates a truth table to find hidden affine structure. General
+overlapping equations and arbitrary CNF equivalence to an affine relation remain
+outside that recognizer. Other tested properties are Horn/dual-Horn/2-CNF syntax,
+uniform witnesses and the existing explicit matching representation.
+
+Independent components split without increasing conditioning depth. Each child
+has strictly fewer variables, and the checker reconstructs the complete parent
+clause list with disjoint child supports. Variable conditioning decreases the
+remaining depth and retains both exact residuals. These decreases establish
+termination of the bounded planner on finite inputs. At most four candidates
+per unresolved node and depth one are the defaults; configuration permits up
+to 64 candidates and depth three. A cap refuses further discovery, not SAT.
+
+Every attempted alternative is retained. Increasing depth can grow the number
+of attempted branch paths exponentially before residual sharing. Classification,
+sorting, normalization, key serialization and checking revisit input payloads;
+the count of selected nodes does not include all this work. Keys contain full
+residual identities, so source/edge copies and metadata also occupy space.
+The inventory itself emits no verdict; the comparison separately runs the
+unchanged potentially exponential solver on every input, including unresolved ones.
+The Python code and these ledgers are outside Lean's implementation refinement.
+
+On 664 inputs, two-level analysis adds 1.702 s, bringing analysis plus solving
+to 2.021 s versus 0.301 s for solving alone. It stores 2,801 pattern nodes with
+3,688,352 logical bytes and 664 source records with 452,011 bytes. SQLite including
+the ordinary solver grows from 385,024 to 6,459,392 bytes. Cold full-archive
+verification grows from 20.49 to 362.41 ms. A separate six-case memory diagnostic
+increases peak traced Python allocations from 60,634 to 205,298 bytes; this
+excludes native SQLite/RSS and is not the full corpus memory peak.
+
+Coverage rises from 39/152 to 102/152 among non-exhaustive inputs. The reported
+unresolved-literal aggregate counts distinct selected normalized leaves per
+input, not globally unique archive data or tree multiplicity. It falls from
+16,779 to 1,970, partly because one large explicit parity example becomes closed
+after conditioning. These are coverage measurements, not a general search-cost
+bound. See the [inventory study](../experiments/results/cnf-pattern-inventory/README.md)
+for the unresolved cells, initial comparison, exact archives and limitations.

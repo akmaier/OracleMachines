@@ -2750,3 +2750,60 @@ its hourly cadence, active state and existing chat. It still requires preserved
 results, tests, verified commits/pushes and quiet operation without material
 progress. This checkpoint changes plans and scheduling, not solver behavior or
 mathematical results; no manuscript change or new solver tests are needed.
+
+## 2026-11-08: first persistent SAT pattern inventory
+
+Implemented `PatternInventory` as a separate analysis layer using existing
+residual helpers. It records seven overlapping syntax/witness outcomes, a
+complete direct single-parity encoding certificate within a width cap, exact
+source/name bindings, independent component partitions and bounded variable
+conditioning. Failed recognition and all attempted alternative residuals remain
+explicit and persistent. The SAT engine and its answer/certificate protocol are
+unchanged; closed analysis means recognized-family coverage, not satisfiability.
+
+The checker recomputes profiles, validates exact branch restrictions, and directly
+reconstructs component source clauses with disjoint supports independently of
+the component discoverer. A test injects a faulty overlapping discoverer and
+confirms rejection. The parity argument uses distinct full-width clauses to
+exclude exactly one half of the Boolean cube; hidden affine equivalence is not
+recognized. Above the default eight-variable cap the outcome is unresolved.
+
+The [664-input comparison](../experiments/results/cnf-pattern-inventory/README.md)
+contains all 512 subsets of the nine non-tautological two-variable clauses,
+120 seeded larger CNFs, 16 structural controls and 16 variants. The tiny sources
+normalize to 257 distinct residuals, with exact originals preserved. There are
+24 observed root signature cells. Of the other 152 inputs, whole-formula tests
+explain 39, independent components 45, one conditioning level 57, and two levels
+102. Pointwise checks cover both candidate restrictions and component assignment
+recomposition on small inputs, including alternatives not selected for the final
+coverage summary. Generator labels are never passed to discovery.
+
+The costs are explicit: analysis plus unchanged solving takes 2.02127 s at two
+levels versus 0.30139 s without analysis; analysis alone costs 1.70180 s. SQLite
+increases from 385,024 to 6,459,392 bytes. All modes retain the same 699 ordinary
+solver residuals. Two-level analysis adds 2,801 pattern nodes (3,688,352 logical
+bytes) and 664 sources (452,011 bytes). Cold full audit increases from 20.49 to
+362.41 ms. Separate tracing on six mixed/guarded cases measures 60,634 versus
+205,298 peak Python bytes, excluding native SQLite/RSS. No solver acceleration
+or representative-distribution claim is made.
+
+All 276 Python tests pass. The five final archives contain 4,740 pattern nodes
+and 2,656 sources in total, with 699 solver residuals per archive; they replay
+without byte changes or new solving. The initial five-policy run and source
+snapshots are preserved separately because its component checker only rederived
+the discovered groups. All those valid initial archives also pass the stronger
+final direct-partition checker unchanged. Recorded source fingerprints match.
+The existing Lean conditioning identity is relevant, but no new refinement of
+this Python inventory, parity recognizer or SQLite is claimed.
+
+**Next discovery target:** 50 inputs remain unresolved after two levels: 42
+seeded CNFs and four structural cases with variants. Forty-eight occupy the
+all-excluded pattern cell; two exceed the parity cap while failing other tests.
+The controlled misses are five/six-variable complete exclusion cubes, coupled
+matching/parity and an activated guarded formula. Refine these connected cells
+by exact clause support and sign patterns: complete parity halves, explicit
+contradictions and collections of parity equations, preserving leftover couplings.
+Evaluate the same recognizer on all unresolved inputs and variants, and retain
+zero or negative results on random CNFs. Raising conditioning depth alone is
+not the chosen next step. General efficient discovery, compact closure and
+polynomial arbitrary-CNF acquisition remain open.

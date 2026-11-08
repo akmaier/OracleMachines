@@ -50,6 +50,17 @@ primary sources before extending their results; retain their hypotheses.
 
 ## First milestone: an audited pattern inventory
 
+**Implemented checkpoint:** the [664-input study](../experiments/results/cnf-pattern-inventory/README.md)
+now records seven overlapping pattern outcomes, source bindings, independently
+checked component partitions and bounded conditioning alternatives. It recognizes
+the full direct encoding of one parity equation within a width cap. Two levels
+explain 102/152 non-exhaustive inputs; 50 remain unresolved. Analysis adds time
+and space and is not enabled as a solver optimization. The 24 observed root cells
+are not a complete enumeration of all possible signatures. The next experiment
+refines connected unresolved cells by exact clause support/sign patterns.
+
+The original acceptance criteria and remaining integration scope follow.
+
 Build an analysis mode over the current residual solver. It should discover
 patterns from CNF input without generator labels and preserve source identities.
 The solver already has propagation, Horn/dual-Horn/2-CNF leaves, matching

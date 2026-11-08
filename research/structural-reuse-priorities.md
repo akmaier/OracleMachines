@@ -12,13 +12,21 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-**Next research experiment:** build an audited pattern inventory over the existing
-residual solver. Record all recognition outcomes, source-linked certificates,
-components, interfaces, conditioning and unresolved residual structure. Test
-unlabelled inputs, exhaustive small CNFs, renamings and class-changing mixtures.
-Use the unresolved cells to select the next discovery improvement. Measure
-coverage and remaining interaction as well as full runtime and memory costs.
-Do not treat "known families plus fallback" alone as the achieved partition.
+**Next research experiment:** refine the connected unresolved cells by clause
+support and sign patterns. Test complete parity halves, complete exclusion cubes
+and collections of explicit parity equations, preserving arbitrary leftover
+couplings. Apply the recognizer to all 50 unresolved inputs and matched variants
+without labels; measure discovery cost and report failures on random CNFs.
+Do not simply raise conditioning depth or discard clauses outside a pattern.
+
+The [first inventory](../experiments/results/cnf-pattern-inventory/README.md)
+is implemented: seven recognition outcomes retain overlaps in 24 observed root
+cells. Beyond 512 exhaustive tiny sources, whole-formula tests explain 39/152
+inputs, components 45/152, one conditioning level 57/152 and two levels 102/152.
+The last mode leaves 42 seeded CNFs plus four structural cases and their variants
+unresolved. Full analysis plus solving takes 2.021 s versus 0.301 s for solving
+alone, and SQLite grows from 0.385 to 6.459 MB. It is an analysis tool, not a
+speedup. The persistent result includes all failed alternatives and cold checks.
 
 The propagation profile remains useful evidence: a pinned 2,048-variable chain
 spends 2.67 s in preparation, with about 98% of instrumented time in repeated
@@ -106,12 +114,15 @@ recomposition, compactness and efficient discovery as separate obligations.
 
 ### 1. Discover categories and characterize unresolved interaction
 
-The first priority is the [audited pattern inventory](sat-pattern-discovery.md).
-Retain overlapping class certificates and make the recognition-outcome partition
-exhaustive. Then refine unresolved cells through component-local recognition and
-conditioning, with costs and counterexamples attached. The existing residual
-solver already performs several tractable-leaf and decomposition operations;
-the next work makes their coverage inspectable and extends what they discover.
+The initial [audited pattern inventory](sat-pattern-discovery.md) is complete
+for the stated bounded policy. Next, split its unresolved cells with useful
+structural invariants. Forty-eight remaining inputs exclude every tested pattern;
+two exceed the parity cap while failing the other tests. None of those outcomes
+proves hardness or excludes semantic equivalence to a broader tractable class.
+The current controlled misses include complete exclusion cubes, coupled matching
+and parity, and an activated guarded CNF. Exact support/sign-pattern discovery
+is the next concrete probe; random-CNF coverage must be reported alongside the
+structured controls. Preserve separate construction and composition obligations.
 
 ### Supporting optimization: avoid repeated propagation scans
 

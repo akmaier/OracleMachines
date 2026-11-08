@@ -34,6 +34,13 @@ checked decomposition across interacting classes. Known-family optimization
 continues as supporting work. Coverage and efficient solution of every class
 remain separate obligations.
 
+The [first pattern inventory](experiments/results/cnf-pattern-inventory/README.md)
+records overlapping classes, explicit parity encodings and exact component/branch
+decompositions. On 152 inputs beyond the exhaustive tiny cases, whole-formula
+tests explain 39 and two conditioning levels explain 102. The remaining 50 cases
+and all failed alternatives are retained. Analysis currently adds runtime and
+memory; it identifies discovery gaps rather than accelerating the SAT engine.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

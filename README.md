@@ -529,7 +529,7 @@ costs remain separate obligations. No new timing or unrestricted-SAT guarantee
 is claimed.
 
 
-The latest checkpoint proves **exact native source-patch semantics**.
+The preceding checkpoint proves **exact native source-patch semantics**.
 `SourcePatch.lean` connects decoded request fields and current live root/child
 lookups to the original arrays: every requested bucket gets its supplied clauses,
 and every unedited bucket stays unchanged. Equal relations cannot substitute for
@@ -553,3 +553,30 @@ generic relation/factor stores, acceptance completeness and total resource costs
 remain open. The updated checker pays for direct lookups, decoding, edit-list
 filtering and array comparisons. Earlier timings are unchanged; no speedup or
 unrestricted-SAT guarantee follows.
+
+
+The latest checkpoint proves **complete successor formulas and returned native
+decisions**. `SourceFormula.lean` connects ordered bucket flattening to the exact
+original clause list, characterizes interval coverage and empty padding, and
+proves that an accepted patch gives the complete requested successor CNF.
+`SourceVerdict.lean` certifies root coverage and the actual returned answer field.
+The exposed query/patch functions have success theorems, including the nested
+patch verdict, with both SAT and UNSAT equivalences for the original formula.
+
+**171 tests pass**, including **32 source-update tests**. Lean audits **3,107
+declarations / 1,506 theorem declarations**, with no admits or added axioms.
+New tests reject incomplete, shifted and oversized roots and check actual verdicts
+against exhaustive truth tables over 54 transitions with 1, 3 and 5 logical edges.
+They include padding, old branches, deletion, repeated and empty clauses, and both
+answer modes. Runtime checkpoint `9673dee` is committed and pushed. The
+[verdict verification record](experiments/results/source-verdicts/README.md)
+includes revalidation of 355 generic inputs and five saved source versions.
+Every old row in 21 tables and all 206 earlier experiment files remains intact.
+The archive holds **8,165 results / 2,709 refutations / 55 source-state rows**.
+
+Next is the complete initial raw-CNF anchor and composition over accepted
+operation histories. Serialized witness contents, byte transport, Python
+retention and complete replay/SQLite refinement also remain open. Flattening is
+specification work; warm decisions add no full-source scan or summary rebuild.
+Total physical/resource costs and unrestricted coverage are not established.
+Earlier timing evidence remains unchanged.

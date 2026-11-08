@@ -1269,5 +1269,13 @@ Remaining priorities:
 
 Verification: all **171 tests pass**, including **32 source-update tests**.
 Lean audits **3,107 declarations / 1,506 theorem declarations**, with no admits
-or added axioms. Archive preservation and manuscript evidence follow this
-runtime checkpoint. Earlier timing evidence remains unchanged.
+or added axioms. Runtime checkpoint `9673dee` is committed and pushed.
+All 355 older generic inputs pass revalidation and semantic audit, and all five
+saved source versions pass checked adoption and restart. Every old row in 21
+tables and all 206 earlier experiment files remains intact. The archive holds
+8,165 results, 2,709 refutations and 55 source-state rows. The manuscript and
+[verdict verification record](../experiments/results/source-verdicts/README.md)
+record the result. Earlier timing evidence and all 32 previous manuscript proof
+blocks remain unchanged. Resume with the full initial raw-CNF anchor; complete
+successor-formula equality, root coverage and returned native decision fields
+no longer need to be assumed.

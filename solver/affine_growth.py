@@ -22,10 +22,15 @@ class AffineGrowth:
         self.service=service
         self.store=AffineArchive(service.db,service.engine_id,service.affine_share_batches)
         self.worker=None
+        # A width is published only after the native definition succeeds and
+        # agrees with the validated source. It shares that node's residency,
+        # process identity, eviction and rollback lifetime; never persist it.
         self.verified=OrderedDict()
         self.dirty=False
         self.evicted_versions=0
         self.native_resets=0
+        self.parent_metadata_hits=0
+        self.parent_archive_reads=0
         self.cache_worker=None
         self.cache_slots=None
         self.cache_deduplicate=None
@@ -77,9 +82,14 @@ class AffineGrowth:
             if node['base'] is None:
                 request=dict(mode='affine_init',id=name,width=node['width'])
             else:
-                parent=self.store.get(node['base'],'affine_version')
-                if parent['width']!=node['width']:raise ValueError('Affine history width changed')
                 if node['base'] not in self.verified:raise ValueError('Affine replay parent is not resident')
+                if self.service.affine_reuse_metadata:
+                    parent_width=self.verified[node['base']]
+                    self.parent_metadata_hits+=1
+                else:
+                    parent_width=self.store.get(node['base'],'affine_version')['width']
+                    self.parent_archive_reads+=1
+                if parent_width!=node['width']:raise ValueError('Affine history width changed')
                 self.verified.move_to_end(node['base'])
                 request=dict(mode='affine_append',id=name,base=node['base'],equations=node['equations'])
             if len(self.verified)>=self.service.native_affine_versions:
@@ -88,6 +98,8 @@ class AffineGrowth:
                 self.service._request(dict(mode='affine_drop',ids=[oldest]))
                 del self.verified[oldest];self.evicted_versions+=1
             result=self.service._request(request)
+            if type(result['width']) is not int or result['width']!=node['width']:
+                raise ValueError('Native affine width differs from source')
             if node['base'] is not None:
                 self.kernel_totals['kernel_hits']+=int(result['kernel_cache_hit'])
                 self.kernel_totals['kernel_misses']+=int(not result['kernel_cache_hit'])
@@ -100,7 +112,7 @@ class AffineGrowth:
                               'preparation_compare_cell_bound','normalization_input_cells'):
                     self.kernel_totals[field]+=result['batch_preparation'][field]
                 self.kernel_totals['batch_preparation_hits']+=int(result['batch_preparation']['batch_preparation_hit'])
-            self.verified[name]=None
+            self.verified[name]=result['width']
             self.worker=self.service.process
         self.verified.move_to_end(token)
         return len(pending)
@@ -132,6 +144,7 @@ class AffineGrowth:
         if type(summary) is not bool:raise ValueError('Summary option must be Boolean')
         replayed=registered=0
         old_evictions,old_resets=self.evicted_versions,self.native_resets
+        old_metadata,old_parent_reads=self.parent_metadata_hits,self.parent_archive_reads
         old_kernel=dict(self.kernel_totals)
         before={field:getattr(self.store,field) for field in
                 ('inserted_objects','serialized_bytes','inserted_raw_bytes','inserted_packed_bytes','object_reads','read_packed_bytes',
@@ -164,6 +177,8 @@ class AffineGrowth:
                         affine_updates=dict(replayed_versions=replayed,registered_versions=registered,
                             evicted_versions=self.evicted_versions-old_evictions,
                             native_resets=self.native_resets-old_resets,
+                            parent_metadata_hits=self.parent_metadata_hits-old_metadata,
+                            parent_archive_reads=self.parent_archive_reads-old_parent_reads,
                             resident_versions=len(self.verified),resident_version_cap=self.service.native_affine_versions,**metrics))
         except BaseException:
             self.invalidate()

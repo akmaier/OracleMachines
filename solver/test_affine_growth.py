@@ -26,6 +26,66 @@ def solutions(width,summary):
 
 
 class AffineGrowthTests(unittest.TestCase):
+    def test_resident_metadata_removes_only_the_redundant_parent_read(self):
+        with tempfile.TemporaryDirectory() as d:
+            for share in (False,True):
+                with PersistentSolver(Path(d)/f'old-{share}.db',affine_reuse_metadata=False,
+                                      affine_share_batches=share) as old, \
+                     PersistentSolver(Path(d)/f'new-{share}.db',affine_share_batches=share) as new:
+                    width=32;rows=[equation(width,(i,width+i)) for i in range(width)]*2
+                    a=old.affine_grow(width);b=new.affine_grow(width)
+                    for _ in range(6):
+                        a=old.affine_grow(base=a['state'],equations=rows,summary=True)
+                        b=new.affine_grow(base=b['state'],equations=rows,summary=True)
+                        for field in ('state','answer','summary','steps','reference_cell_charge'):
+                            self.assertEqual(a[field],b[field])
+                        self.assertEqual(b['affine_updates']['parent_metadata_hits'],1)
+                        self.assertEqual(b['affine_updates']['parent_archive_reads'],0)
+                        self.assertEqual(old.affine_growth.verified[a['state']],width)
+                        self.assertEqual(new.affine_growth.verified[b['state']],width)
+                    self.assertEqual(a['affine_updates']['object_reads'],9 if share else 4)
+                    self.assertEqual(b['affine_updates']['object_reads'],7 if share else 3)
+                    self.assertEqual(a['affine_updates']['parent_archive_reads'],1)
+                    # Both modes still read and validate the requested source.
+                    for service,state in ((old,a),(new,b)):
+                        with service.db:
+                            service.db.execute("UPDATE knowledge_objects SET payload=?,codec='raw' WHERE id=?",
+                                               (b'corrupt',state['state']))
+                        with self.assertRaises(ValueError):service.affine_grow(base=state['state'])
+                        self.assertEqual(len(service.affine_growth.verified),0)
+
+    def test_metadata_lifetime_follows_worker_reset_and_eviction(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db',native_affine_versions=2) as s:
+            first=s.affine_grow(1)
+            second=s.affine_grow(2)
+            third=s.affine_grow(base=second['state'],equations=[])
+            self.assertNotIn(first['state'],s.affine_growth.verified)
+            self.assertEqual(set(s.affine_growth.verified.values()),{2})
+            stop_process(s.process);s.process=None
+            loaded=s.affine_grow(base=first['state'])
+            self.assertTrue(loaded['answer'])
+            self.assertEqual(dict(s.affine_growth.verified),{first['state']:1})
+            loaded=s.affine_grow(base=third['state'])
+            self.assertEqual(loaded['affine_updates']['parent_metadata_hits'],1)
+            self.assertEqual(set(s.affine_growth.verified.values()),{2})
+            self.assertEqual(len(s.affine_growth.verified),2)
+
+    def test_bad_native_width_never_becomes_resident_metadata(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            first=s.affine_grow(2)
+            request=s._request
+            def wrong_width(value):
+                result=request(value)
+                return dict(result,width=1) if value['mode']=='affine_append' else result
+            with patch.object(s,'_request',side_effect=wrong_width):
+                with self.assertRaisesRegex(ValueError,'Native affine width'):
+                    s.affine_grow(base=first['state'],equations=[])
+            self.assertEqual(len(s.affine_growth.verified),0)
+            self.assertEqual(s.db.execute('SELECT count(*) FROM affine_states').fetchone()[0],1)
+            recovered=s.affine_grow(base=first['state'],equations=[])
+            self.assertEqual(recovered['affine_updates']['native_resets'],1)
+            self.assertEqual(set(s.affine_growth.verified.values()),{2})
+
     def check_report(self,result):
         self.assertLessEqual(result['summary_rows'],result['width']+1)
         self.assertEqual(result['summary_cells'],result['summary_rows']*(result['width']+1))
@@ -458,7 +518,8 @@ class AffineGrowthTests(unittest.TestCase):
     def test_duplicate_removal_matches_uncompressed_full_frontiers(self):
         rng=random.Random(2411)
         with tempfile.TemporaryDirectory() as d:
-            with PersistentSolver(Path(d)/'raw.db',affine_deduplicate=False,affine_share_batches=False) as raw,PersistentSolver(Path(d)/'new.db') as new:
+            with PersistentSolver(Path(d)/'raw.db',affine_deduplicate=False,affine_share_batches=False,
+                                  affine_reuse_metadata=False) as raw,PersistentSolver(Path(d)/'new.db') as new:
                 parents=[s.affine_grow(3) for s in (raw,new)]
                 versions=[(parents,set(itertools.product((False,True),repeat=3)))]
                 for _ in range(60):

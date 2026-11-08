@@ -94,7 +94,7 @@ class AffineArchiveTests(unittest.TestCase):
 
     def test_affine_options_require_booleans(self):
         with tempfile.TemporaryDirectory() as d:
-            for option in ('affine_share_batches','affine_deduplicate'):
+            for option in ('affine_share_batches','affine_deduplicate','affine_reuse_metadata'):
                 for value in (0,1,None,'true'):
                     with self.assertRaises(ValueError):PersistentSolver(Path(d)/'bad.db',**{option:value})
 

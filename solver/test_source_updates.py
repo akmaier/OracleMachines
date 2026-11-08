@@ -8,6 +8,7 @@ from pathlib import Path
 
 from solver.persistent import PersistentSolver
 from solver.resources import BudgetExceeded
+from solver.layered import compose
 
 
 def sat(clauses,n):
@@ -16,6 +17,78 @@ def sat(clauses,n):
 
 
 class SourceUpdateTests(unittest.TestCase):
+    def test_indexed_native_joins_require_consecutive_intervals(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            s._request(dict(mode='source_init',id='indexed',width=1,layers=[[101],[202],[303],[404]]))
+            buckets=[[[202]],[[-202]],[]]
+            masks=s._request(dict(mode='source_compile',edits=[dict(edge=i,clauses=b) for i,b in enumerate(buckets)]))['masks']
+            leaves=[dict(id=f'leaf-{i}',layout='indexed',width=1,start=i,height=0,mask=mask,clauses=bucket)
+                    for i,(mask,bucket) in enumerate(zip(masks+[9],buckets+[[]]))]
+            defined=s._request(dict(mode='source_define',nodes=leaves))
+            self.assertEqual([defined[k] for k in ('original_source_nodes','original_clause_entries','original_literal_entries')],[4,2,2])
+            joined=dict(id='left',layout='indexed',width=1,start=0,height=1,
+                        left='leaf-0',right='leaf-1',mask=compose(masks[0],masks[1],2))
+            for changes,error in ((dict(right='leaf-0'),'consecutive'),(dict(start=1),'consecutive'),
+                                  (dict(left='leaf-1',right='leaf-0'),'consecutive'),(dict(height=2),'Unbalanced'),
+                                  (dict(width=2),'width'),(dict(layout='other'),'layout')):
+                with self.assertRaisesRegex(ValueError,error):
+                    s._request(dict(mode='source_define',nodes=[dict(joined,**changes)]))
+            right=dict(id='right',layout='indexed',width=1,start=2,height=1,left='leaf-2',right='leaf-3',mask=masks[2])
+            root=dict(id='root',layout='indexed',width=1,start=0,height=2,left='left',right='right',mask=0)
+            s._request(dict(mode='source_define',nodes=[joined,right,root]))
+            self.assertFalse(s._request(dict(mode='source_query',root='root',witness=True))['answer'])
+            # Both local positive/negative units admit boundary pairs; the original
+            # variable 202 cannot satisfy their conjunction on the shared block.
+            self.assertNotEqual(masks[0],0);self.assertNotEqual(masks[1],0)
+            duplicate=s._request(dict(mode='source_define',nodes=leaves+[joined,right,root]))
+            self.assertEqual([duplicate[k] for k in ('original_source_nodes','original_clause_entries','original_literal_entries')],[0,0,0])
+
+    def test_indexed_context_reset_and_failed_batch_leave_no_stale_nodes(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            layout=dict(mode='source_init',id='old',width=1,layers=[[1],[2]])
+            s._request(layout)
+            leaf=dict(id='root',layout='old',width=1,start=0,height=0,mask=15,clauses=[])
+            s._request(dict(mode='source_define',nodes=[leaf]))
+            with self.assertRaisesRegex(ValueError,'identity changed'):
+                s._request(dict(layout,layers=[[3],[4]]))
+            self.assertTrue(s._request(dict(mode='source_query',root='root',witness=False))['answer'])
+            s._request(dict(mode='source_init',id='new',width=2,layers=[[3,4],[5]]))
+            with self.assertRaisesRegex(ValueError,'Unknown source root'):
+                s._request(dict(mode='source_query',root='root',witness=False))
+            with self.assertRaisesRegex(ValueError,'layout mismatch'):
+                s._request(dict(mode='source_define',nodes=[leaf]))
+            first=dict(id='root',layout='new',width=2,start=0,height=0,mask=65535,clauses=[])
+            bad=dict(first,id='bad',mask=0)
+            with self.assertRaisesRegex(ValueError,'mask'):
+                s._request(dict(mode='source_define',nodes=[first,bad]))
+            with self.assertRaisesRegex(ValueError,'Unknown source root'):
+                s._request(dict(mode='source_query',root='root',witness=False))
+            checked=s._request(dict(mode='source_define',nodes=[first]))
+            self.assertEqual(checked['original_source_nodes'],1)
+            self.assertTrue(s._request(dict(mode='source_query',root='root',witness=False))['answer'])
+
+    def test_original_payload_counts_sparse_layout_edits_and_restart(self):
+        with tempfile.TemporaryDirectory() as d:
+            path=Path(d)/'s.db';large=2**90
+            layers=[[],[large+2,large+1],[],[large+3]]
+            with PersistentSolver(path) as s:
+                first=s.source_cnf(2,[[large+1]],layers)
+                counts=first['source_updates']
+                self.assertEqual([counts[k] for k in ('original_source_nodes','original_clause_entries','original_literal_entries')],[7,1,1])
+                # Move the unit to edge zero, then contradict it across edge one.
+                moved=s.source_cnf(base=first['state'],replace={0:[[large+1]],1:[]})
+                negative=s.source_cnf(base=moved['state'],replace={1:[[-large-1]]})
+                self.assertFalse(negative['answer'])
+                counts=negative['source_updates']
+                self.assertEqual([counts[k] for k in ('original_source_nodes','original_clause_entries','original_literal_entries')],[3,1,1])
+                deleted=s.source_cnf(base=negative['state'],replace={0:[]})
+                self.assertTrue(deleted['answer'])
+                unchanged=s.source_cnf(base=negative['state'])
+                self.assertEqual([unchanged['source_updates'][k] for k in ('original_source_nodes','original_clause_entries','original_literal_entries')],[0,0,0])
+            with PersistentSolver(path) as s:
+                for state,answer in ((negative,False),(first,True),(deleted,True),(moved,True)):
+                    self.assertEqual(s.source_cnf(base=state['state'],witness=True)['answer'],answer)
+
     def test_initial_binding_has_checked_counts_and_warm_edits_do_not_rescan(self):
         with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
             for width in (1,2,4):

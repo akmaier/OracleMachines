@@ -466,8 +466,9 @@ combined reference count is at most `q²(1+c+L) + h*q³ + 2(h+1)`. The source tr
 alone has h+1 copied-node events. This starts from an aligned cached predecessor;
 it does not include initial compilation or native transport/storage instructions.
 
-[`SourceUpdates.lean`](OracleMachines/SourceUpdates.lean) actually constructs
-these checked native values. It validates partition-local clauses, proposed
+[`SourceUpdates.lean`](OracleMachines/SourceUpdates.lean) initially constructed
+these checked native values. The original-source nodes below now strengthen
+their meaning. Registration validates partition-local clauses, proposed
 masks, consecutive child ranges and unchanged subtree identities. Initial flat
 CNF binding is linear. Later patches visit changed paths only. Decision-only
 queries use `CheckedSource.decide`; full witness requests additionally traverse
@@ -622,9 +623,60 @@ SAT/UNSAT answer agrees, and reject nonidentity padding whose composition is
 identity. They check width/capacity mismatches, valid witness output, counts at
 widths 1, 2 and 4, and 65,536 logical leaves represented by 17 shared native nodes.
 
-This closes initial complete-source binding, not preservation of original-source
-identity through joins, local patches or restart. The next proof should carry
-layout, start and span with original-source nodes and show that native transitions
-preserve them. Reference-count/eviction invariants, general row/equivalence-store
-refinement, JSON/Python/SQLite refinement, acceptance completeness and full
-resource costs remain open. No unrestricted-SAT guarantee follows.
+This closes initial complete-source binding. The following checkpoint retains
+original-source meaning through typed node construction and consecutive joins.
+Mutable identity lookup and requested-patch preservation are still separate.
+
+## Original-source nodes with indexed intervals
+
+[`SourceNodes.lean`](OracleMachines/SourceNodes.lean) retains the original clauses
+and their `CheckedCNF` translation in each logical leaf. `OriginalTree` is indexed
+by the exact layout array, width, start and height. A logical leaf has a proved
+in-range edge; an identity-padding leaf has a proved out-of-range edge. A branch
+requires children at starts s and s+2^h with the same height h.
+
+`CheckedNode` couples that original tree to the actual cached relation tree by
+an alignment proof. Checked leaf, padding and join constructors preserve it.
+`checkedJoin_clauses` and `checkedJoin_occurrences` prove that a join concatenates
+the original clause lists and preserves every occurrence, including duplicates
+and empty clauses. The clauses are retained even when their relation is unchanged.
+
+The decision theorem now concerns those **original clauses**, not just the local
+bit representation. `OriginalTree.path_exact` connects relation paths to states
+at the indexed global edges. A satisfying valuation gives agreeing block states;
+the final block state repeats through identity padding. Conversely, any accepting
+path yields a global valuation using the complete layout map. Thus
+`CheckedNode.decide_exact` and `unsat_exact` prove exact SAT/UNSAT semantics for
+the original clauses stored in the node. Flattening is a specification operation;
+the executed decision reads only the cached summary.
+
+The native `Context` contains a model map whose value type depends on its layout.
+This fixes width and layout for every node without comparing the whole layout at
+each join. Registration uses the new constructors, checks consecutive **typed**
+starts, and stores their cached trees in the existing relation store. Warm queries
+use `CheckedNode.decide`; restart reconstructs nodes using the same constructors.
+Changing context resets both maps. Failed definition batches return no new state.
+
+Original integer-clause arrays now remain reachable from native source leaves in
+addition to JSON evidence and local translations. New metrics
+`original_source_nodes`, `original_clause_entries` and `original_literal_entries`
+count newly registered source nodes and their logical original payload entries.
+They include replay, exclude duplicate registrations, and are zero on warm
+unchanged queries. These counters are runtime diagnostics, not a new formal
+allocation/byte bound. Joins retain child references and do not flatten the source;
+reference management, actual object sizes and allocator/bit costs remain separate.
+No new speedup, smaller memory footprint or total-resource bound is claimed.
+
+All **159 tests pass**, including 20 source-update tests. Lean audits **2,751
+declarations / 1,320 theorem declarations** without admits or added axioms. New
+regressions exercise rejected intervals, layout changes, definition-batch rollback,
+duplicate registration, incompatible shared boundaries, payload counters, sparse
+IDs above 64 bits, empty/short blocks, local edits, old branches and restart.
+
+The next theorem must connect named JSON nodes and map lookups with these typed
+objects, then prove that `checkPatch` accepts exactly the requested original-clause
+replacement while preserving unedited buckets. Typed node semantics alone does
+not prove that a requested transition selects the right node. Reference counts,
+eviction, general factor row/equivalence caches, serialized replay, acceptance
+completeness and complete resource costs remain open. The new theorem applies
+to the supplied adjacent-block family and gives no unrestricted-SAT guarantee.

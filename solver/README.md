@@ -583,6 +583,20 @@ Initial source-version binding pays an additional source-relation scan; warm
 edits/current-source queries report zero for these four fields. Their mutable
 identity/patch/replay invariants still need a complete Lean state theorem.
 
+Source-version nodes now retain original clauses and their translation proofs in
+a tree indexed by layout, width, start and height. Consecutive joins preserve this
+alignment; the executed decision has SAT/UNSAT theorems for the original clauses
+stored in that node. Warm decisions do not flatten or rescan those clauses.
+Replay uses the same checked constructors. Formal agreement between named JSON
+nodes, map entries and the requested patch is still a separate obligation.
+
+`source_updates.original_source_nodes`, `original_clause_entries` and
+`original_literal_entries` report newly registered original-source nodes and
+logical payload entries, including replay. Duplicate native definitions add zero,
+as do warm unchanged queries. The parsed original arrays remain reachable from
+native leaves alongside existing JSON evidence and local translations. These are
+diagnostic entry counts, not bytes, RSS or a proved total-memory bound.
+
 `--native-layer-cells` defaults to 1,048,576 retained relation cells. Under
 pressure, the worker retains the complete dependency closure of the requested
 root and evicts only other native entries. A working set larger than this cap is

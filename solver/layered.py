@@ -190,6 +190,8 @@ class LayeredSolver:
             self.metrics['native_definitions']+=len(batch)
             self.metrics['native_source_cells']=self.metrics.get('native_source_cells',0)+result.get('source_cells',0)
             self.metrics['native_literal_test_bound']=self.metrics.get('native_literal_test_bound',0)+result.get('literal_test_bound',0)
+            for field in ('original_source_nodes','original_clause_entries','original_literal_entries'):
+                if field in result:self.metrics[field]=self.metrics.get(field,0)+result[field]
         self.metrics['peak_native_cells']=max(self.metrics.get('peak_native_cells',0),len(self.verified)*self.states**2)
 
     def run(self,base,replace,append,left,right,witness):

@@ -872,3 +872,59 @@ contains 6,035 generic results and 1,935 refutations. Historical timing evidence
 remains unchanged and tied to its original runtime. The next run should start
 with the node/layout/start/span invariant above, without treating this initial
 full scan as a proof of later local transitions.
+
+## Original-source nodes and consecutive joins (8 November, fourth hourly follow-up)
+
+`SourceNodes.lean` retains the original clause arrays and their `CheckedCNF`
+translations in a tree indexed by layout, width, start and height. Logical leaves
+prove their edge is in range; padding leaves prove their edge is outside the
+logical source and compile to identity. A join requires equal child heights and
+the exact consecutive start. `CheckedNode` aligns this original tree with the
+actual cached relation tree. The constructors carry the proof through registration
+and joins. Join theorems preserve the complete original clause list and every
+occurrence, including duplicate and empty clauses.
+
+The executed node decision now has exact positive/negative theorems for the
+original clauses stored in that node. Consistent paths use the indexed global
+edge positions. Satisfying valuations extend through identity padding by repeating
+the final block state; accepting paths yield agreeing global valuations via the
+complete layout map. Clause flattening belongs to the specification and is not
+executed by warm decisions or joins.
+
+The native context's model map is typed by its exact layout and width. Registration
+uses typed starts and the new constructors; replay rebuilds the same kind of
+checked nodes. A context change resets both native maps, and failed batches expose
+no partial state. These runtime paths have regression coverage. A formal theorem
+relating the two named maps and JSON bodies is still missing.
+
+Resource accounting records newly registered original-source nodes, clause entries
+and literal entries. These diagnostics include replay and exclude duplicate
+registrations. Original integer arrays now remain reachable from leaves alongside
+JSON evidence and local translations. Joins retain child references; they do not
+flatten the original source. The extra retention is not free, and entry counts
+are not a byte/RSS or whole-runtime cost theorem. Warm unchanged queries report
+zero new original-source nodes. No new timing claim is made.
+
+All 159 tests pass without resource warnings, including 20 source-update tests.
+Lean audits 2,751 declarations and 1,320 theorem declarations without admits or
+added axioms. New cases cover nonconsecutive/reversed children, invalid dimensions
+and layouts, failed-batch rollback, duplicate registration, shared-variable
+conflicts, source-payload counts, sparse IDs above 64 bits, empty/short blocks,
+branching, deletion and restart.
+
+Next priorities:
+
+1. **Named-store and requested-patch refinement.** The typed constructors now
+   preserve layout, interval and original-source semantics. Prove correspondence
+   between JSON identities, child references, relation-store entries and typed
+   model entries. Then prove that `checkPatch` accepts the requested clause
+   replacement and preserves every unedited original bucket. Correct semantics
+   of the returned node does not alone prove it is the requested successor.
+2. **Native/Python reference counts and eviction**, including shared children,
+   failures, historical branches and replay.
+3. **General factor row/equivalence-store refinement.** The new original-source
+   proof remains specific to the supplied adjacent-block representation.
+4. **Complete restricted costs and acceptance specification**, including original
+   payload retention, mapping, transport, archive access and bit operations.
+5. **Compact general input, matched application evaluation and cost-sensitive
+   selection.** Hard total-resource and unrestricted-coverage guarantees remain open.

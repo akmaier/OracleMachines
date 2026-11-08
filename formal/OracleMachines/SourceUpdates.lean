@@ -1,29 +1,34 @@
-import OracleMachines.SourceBinding
+import OracleMachines.SourceNodes
 
 /-! Source-bearing nodes: provenance and relations use the same balanced tree.
 The partition is fixed within a version family. Local edits replace the clauses
 of one or more adjacent-block edges; an empty list deletes that edge's clauses.
-Every cached decision carries a proof of its current local-source meaning.
-Variable positions and local CNF translation also carry original-source proofs.
-Flat-source grouping and complete initial binding carry proofs. Mutable node
-identity, patch, JSON and persistence refinement remain separate obligations. -/
+Every cached decision carries a proof of its original-source meaning. Layout,
+start and height index source nodes; joining preserves consecutive intervals.
+Flat-source grouping and complete initial binding carry proofs. Mutable identity
+lookup, requested-patch, JSON and persistence refinement remain separate. -/
 namespace OracleMachines.SourceUpdates
 open Lean OracleMachines.Layered
-open OracleMachines.SourceInvariant
+open OracleMachines.SourceNodes
+
+structure Context where
+  id : String
+  signature : Json
+  layout : CompiledSource
+  nodes : OracleMachines.Layered.Store := {}
+  models : Std.HashMap String (CheckedNode layout.layers layout.width) := {}
 
 structure Store where
-  layout : Option (String × Json × CompiledSource) := none
-  nodes : OracleMachines.Layered.Store := {}
-  models : Std.HashMap String CheckedSource := {}
+  context : Option Context := none
 
 def initializeLayout (store : Store) (request : Json) : Except String (Store × Json) := do
   let id ← request.getObjValAs? String "id"
   let body := Json.mkObj [("width",← request.getObjVal? "width"),
     ("layers",← request.getObjVal? "layers"),("clauses",toJson (#[] : Array (Array Int)))]
-  if let some (old, signature, _) := store.layout then
-    if old == id && signature != body then throw "Source layout identity changed"
+  if let some old := store.context then
+    if old.id == id && old.signature != body then throw "Source layout identity changed"
   let layout ← compileSource body
-  return (⟨some (id,body,layout),{},{}⟩,Json.mkObj [("valid",toJson true)])
+  return (⟨some ⟨id,body,layout,{},{}⟩⟩,Json.mkObj [("valid",toJson true)])
 
 def compileEdge (layout : CompiledSource) (edge : Nat) (clauses : Array (Array Int)) :
     Except String (CheckedCNF layout.layers layout.width edge clauses) := do
@@ -36,7 +41,8 @@ def compileEdge (layout : CompiledSource) (edge : Nat) (clauses : Array (Array I
   translateCNF layout.positions edge clauses
 
 def compileEdges (store : Store) (request : Json) : Except String Json := do
-  let some (_,_,layout) := store.layout | throw "Source layout not initialized"
+  let some context := store.context | throw "Source layout not initialized"
+  let layout := context.layout
   let edits ← request.getObjValAs? (Array Json) "edits"
   if edits.size > 4096 then throw "Source edit batch exceeds capacity"
   let mut masks : Array Nat := #[]
@@ -51,20 +57,24 @@ def compileEdges (store : Store) (request : Json) : Except String Json := do
     ("literal_test_bound",toJson (tests*(2^layout.width)^2))]
 
 def defineNodes (store : Store) (request : Json) : Except String (Store × Json) := do
-  let some (layoutId,_,layout) := store.layout | throw "Source layout not initialized"
+  let some context := store.context | throw "Source layout not initialized"
+  let layout := context.layout
   let nodes ← request.getObjValAs? (Array Json) "nodes"
   if nodes.size > 128 then throw "Source definition batch exceeds capacity"
-  let mut out := store.nodes
-  let mut models := store.models
+  let mut out := context.nodes
+  let mut models := context.models
   let mut cells := 0
   let mut tests := 0
+  let mut sourceNodes := 0
+  let mut originalClauses := 0
+  let mut originalLiterals := 0
   for body in nodes do
     let id ← body.getObjValAs? String "id"
     if let some old := out.nodes[id]? then
       if old.1 != body then throw "Source node identity changed"
     else
       if out.nodes.size ≥ 200000 then throw "Native source store capacity exceeded"
-      if (← body.getObjValAs? String "layout") != layoutId then throw "Source layout mismatch"
+      if (← body.getObjValAs? String "layout") != context.id then throw "Source layout mismatch"
       if (← body.getObjValAs? Nat "width") != layout.width then throw "Source width mismatch"
       let start ← body.getObjValAs? Nat "start"
       let height ← body.getObjValAs? Nat "height"
@@ -73,64 +83,67 @@ def defineNodes (store : Store) (request : Json) : Except String (Store × Json)
       if mask ≥ 2^((2^layout.width)^2) then throw "Source mask exceeds width"
       let checked ← if height == 0 then do
         let clauses ← body.getObjValAs? (Array (Array Int)) "clauses"
-        if start < layout.buckets.size then
+        if inside : start < layout.layers.size-1 then
           let translated ← compileEdge layout start clauses
           let localCNF := translated.localCNF
           cells := cells + (2^layout.width)^2
           tests := tests + (1 + clauses.size + (clauses.toList.map Array.size).sum)*(2^layout.width)^2
+          originalClauses := originalClauses + clauses.size
+          originalLiterals := originalLiterals + (clauses.toList.map Array.size).sum
           if same : relationEqual (maskRelation layout.width mask) (compileLocal layout.width localCNF) then
-            pure (checkedLeaf layout.width (some localCNF) (maskRelation layout.width mask)
+            pure (checkedLeaf start clauses inside translated (maskRelation layout.width mask)
               ((relationEqual_exact _ _).mp same))
           else throw "Source leaf mask does not match clauses"
         else
           if !clauses.isEmpty then throw "Source padding must be empty"
           if same : relationEqual (maskRelation layout.width mask) identity then
-            pure (checkedLeaf layout.width none (maskRelation layout.width mask)
+            pure (checkedPad start (by omega) (maskRelation layout.width mask)
               ((relationEqual_exact _ _).mp same))
           else throw "Source padding must be identity"
       else do
         let left ← body.getObjValAs? String "left"
         let right ← body.getObjValAs? String "right"
-        let some (a,_) := out.nodes[left]? | throw "Missing source left child"
-        let some (b,_) := out.nodes[right]? | throw "Missing source right child"
-        if (← a.getObjValAs? Nat "start") != start ||
-            (← b.getObjValAs? Nat "start") != start+2^(height-1) then
-          throw "Source children do not cover consecutive edges"
         let some ca := models[left]? | throw "Missing left source invariant"
         let some cb := models[right]? | throw "Missing right source invariant"
-        if w : ca.width = cb.width then
-          if h : ca.height = cb.height then
-            let joined := checkedJoin ca cb w h
-            if height != joined.height || joined.width != layout.width then throw "Unbalanced source node"
-            if !relationEqual (maskRelation joined.width mask) joined.tree.summary then throw "Incorrect source summary"
+        if ca.start != start then throw "Source children do not cover consecutive edges"
+        if h : cb.height = ca.height then
+          if consecutive : cb.start = ca.start+2^ca.height then
+            let joined := checkedJoin ca cb h consecutive
+            if height != joined.height then throw "Unbalanced source node"
+            if !relationEqual (maskRelation layout.width mask) joined.tree.summary then throw "Incorrect source summary"
             pure joined
-          else throw "Unbalanced source children"
-        else throw "Source child width mismatch"
+          else throw "Source children do not cover consecutive edges"
+        else throw "Unbalanced source children"
       out ← out.insert id (body,checked.checkedTree)
       models := models.insert id checked
-  return ({store with nodes := out, models := models},Json.mkObj [("valid",toJson true),
-    ("source_cells",toJson cells),("literal_test_bound",toJson tests)])
+      sourceNodes := sourceNodes+1
+  return (⟨some {context with nodes := out,models := models}⟩,Json.mkObj [("valid",toJson true),
+    ("source_cells",toJson cells),("literal_test_bound",toJson tests),
+    ("original_source_nodes",toJson sourceNodes),("original_clause_entries",toJson originalClauses),
+    ("original_literal_entries",toJson originalLiterals)])
 
 def dropNodes (store : Store) (request : Json) : Except String (Store × Json) := do
-  let (nodes,response) ← OracleMachines.Layered.dropNodes store.nodes request
+  let some context := store.context | throw "Source layout not initialized"
+  let (nodes,response) ← OracleMachines.Layered.dropNodes context.nodes request
   let ids ← request.getObjValAs? (Array String) "ids"
-  let models := ids.foldl (fun acc id => acc.erase id) store.models
-  return ({store with nodes := nodes,models := models},response)
+  let models := ids.foldl (fun acc id => acc.erase id) context.models
+  return (⟨some {context with nodes := nodes,models := models}⟩,response)
 
 def query (store : Store) (request : Json) : Except String Json := do
-  let some (_,_,layout) := store.layout | throw "Source layout not initialized"
+  let some context := store.context | throw "Source layout not initialized"
+  let layout := context.layout
   let root ← request.getObjValAs? String "root"
-  let some (body,checked) := store.nodes.nodes[root]? | throw "Unknown source root"
-  let some model := store.models[root]? | throw "Missing source invariant"
-  if (← body.getObjValAs? Nat "start") != 0 || 2^checked.height < layout.buckets.size ||
-      (checked.height > 0 && 2^(checked.height-1) ≥ layout.buckets.size) then
+  let some _ := context.nodes.nodes[root]? | throw "Unknown source root"
+  let some model := context.models[root]? | throw "Missing source invariant"
+  if model.start != 0 || 2^model.height < layout.buckets.size ||
+      (model.height > 0 && 2^(model.height-1) ≥ layout.buckets.size) then
     throw "Source root does not cover the full partition"
-  -- checked_decide_exact applies to this executable decision. Every padding
-  -- leaf was checked at registration; decision-only queries need no source walk.
+  -- model.decide_exact layout.mapping proves the original-CNF meaning of this
+  -- decision. Original clauses are retained, but not walked by a warm query.
   let answer := model.decide
   let want ← request.getObjValAs? Bool "witness"
   if !want then return Json.mkObj [("answer",toJson answer),("witness",Json.null),("height",toJson model.height)]
-  let verdict ← OracleMachines.Layered.query store.nodes (Json.mkObj [("root",toJson root),
+  let verdict ← OracleMachines.Layered.query context.nodes (Json.mkObj [("root",toJson root),
     ("size",toJson layout.buckets.size),("witness",toJson true),
     ("left",toJson (2^(2^layout.width)-1)),("right",toJson (2^(2^layout.width)-1))])
   if (← verdict.getObjValAs? Bool "answer") != answer then throw "Source witness decision disagrees"
@@ -160,7 +173,8 @@ def checkPatch : Nat → OracleMachines.Layered.Store → String → String → 
     return left+right+1
 
 def patchQuery (store : Store) (request : Json) : Except String Json := do
-  let some (_,_,layout) := store.layout | throw "Source layout not initialized"
+  let some context := store.context | throw "Source layout not initialized"
+  let layout := context.layout
   let base ← request.getObjValAs? String "base"
   let root ← request.getObjValAs? String "root"
   let edits ← request.getObjValAs? (Array Json) "edits"
@@ -172,14 +186,15 @@ def patchQuery (store : Store) (request : Json) : Except String Json := do
     if edge ≥ layout.buckets.size || seen.contains edge then throw "Invalid or duplicate source edit"
     seen := seen.insert edge
     changes := (edge,← edit.getObjVal? "clauses") :: changes
-  let visits ← checkPatch 18 store.nodes base root changes
+  let visits ← checkPatch 18 context.nodes base root changes
   let verdict ← query store request
   return Json.mkObj [("verdict",verdict),("patch_visits",toJson visits)]
 
 /-- Initial flat CNF binding is intentionally linear. Later requests carry only
 local clauses and use checkPatch; restart replays the source-bearing nodes. -/
 def bindSource (store : Store) (request : Json) : Except String Json := do
-  let some (_,_,layout) := store.layout | throw "Source layout not initialized"
+  let some context := store.context | throw "Source layout not initialized"
+  let layout := context.layout
   let compiled ← compileSource request
   if compiled.width != layout.width || compiled.layers != layout.layers then throw "Source partition differs"
   let root ← request.getObjValAs? String "root"
@@ -191,7 +206,7 @@ def bindSource (store : Store) (request : Json) : Except String Json := do
     | name::rest =>
       pending := rest
       visited := visited+1
-      let some (body,t) := store.nodes.nodes[name]? | throw "Missing source binding node"
+      let some (body,t) := context.nodes.nodes[name]? | throw "Missing source binding node"
       if t.height == 0 then
         let edge ← body.getObjValAs? Nat "start"
         if edge < compiled.original.size then
@@ -200,7 +215,7 @@ def bindSource (store : Store) (request : Json) : Except String Json := do
       else
         pending := (← body.getObjValAs? String "left") :: (← body.getObjValAs? String "right") :: pending
   if !pending.isEmpty then throw "Source binding traversal cap exceeded"
-  let some (_,checked) := store.nodes.nodes[root]? | throw "Unknown source root"
+  let some (_,checked) := context.nodes.nodes[root]? | throw "Unknown source root"
   let bound ← bindCompilation compiled checked
   let answer := bound.decide
   let verdict ← query store request

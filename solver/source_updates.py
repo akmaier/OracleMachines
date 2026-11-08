@@ -65,6 +65,7 @@ class SourceSolver(LayeredSolver):
             layout_replays=0,patch_visits=0,binding_visits=0,compiled_cells=0,
             binding_leaves=0,binding_relation_comparisons=0,binding_cell_bound=0,binding_source_test_bound=0,
             compiled_literal_test_bound=0,native_source_cells=0,native_literal_test_bound=0,
+            original_source_nodes=0,original_clause_entries=0,original_literal_entries=0,
             peak_native_cells=len(self.verified)*self.states**2)
         before={field:getattr(self.store,field) for field in self.storage_fields}
         try:

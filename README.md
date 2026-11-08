@@ -646,6 +646,20 @@ histories to the original-equation invariant. **192 tests** and the Lean audit
 of **3,794 declarations / 1,836 theorem declarations** pass. Expansion work is now
 prioritized around compression and reuse: the repeated affine streams contain
 14 identical algebraic calls among 18 distinct history expansions. This motivates
-an exact transition cache; none is installed yet. See the
+an exact transition cache, implemented in the next checkpoint below. See the
 [current gap record](research/implementation-gaps.md) and
 [pattern evidence](experiments/results/affine-history/README.md).
+
+Checkpoint `f80f678` implements exact certified transition reuse. A cache hit
+checks the full boundary summary and equation batch, reuses the algebraic result,
+and attaches it to the new version's own history. Hash collisions cannot authorize
+reuse. The cache is configurable, bounded by slots, and disabled with
+`affine_kernel_slots=0`.
+
+In five matched repetitions, repeated width-16 streams fall from **167.57 to
+144.21 ms** and repeated width-32 streams from **496.37 to 215.54 ms** (2.30x).
+Novel streams have no hits and roughly unchanged timings with slight median
+overhead. These are synthetic affine results, without a general SAT speed claim.
+All **197 tests** and the Lean audit of **3,938 declarations / 1,875 theorem
+declarations** pass; all 405 older experiment files and old archive rows remain.
+See the [cache experiment and limits](experiments/results/affine-kernel-cache/README.md).

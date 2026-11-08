@@ -1236,6 +1236,29 @@ For an empty store the source-origin invariant is vacuous. An accepted initializ
 
 \texttt{AffineHistory.lean} formalizes the chronological relation as \texttt{Origin}; \texttt{empty\_execute\_sourced} and \texttt{executed\_query\_semantics} prove the result. The worker executes its \texttt{handle} function. The mathematical trace and source-origin proofs add no stored runtime history. The retry checker compares decoded modes, widths or parent names, and typed equation lists in addition to the existing JSON identity comparison. Sound source agreement therefore does not require a theorem about Lean's general partial JSON equality function. This check adds parsing and comparison work on retries. A deleted name may later denote another history; the earlier event keeps its earlier meaning. Byte parsing and transport, cross-process content-hash lineage, Python/SQLite correspondence and serialized witness contents remain separate obligations. This proof does not change the coefficient-work bound or establish a new speedup.
 
+\paragraph{Reusing an exact transition across different histories.}
+The preceding invariant lets us separate a boundary calculation from the history to which we apply it. For an ordered predecessor summary $S$ and ordered local equation batch $E$, define a kernel result to contain the exact summary $\operatorname{extend}(S,E)$, its decision, and its uncached coefficient charge $C(S,E)$. Its certificate concerns these inputs, rather than one source-version identity.
+
+\begin{proposition}[Exact affine kernel reuse]
+\label{prop:affine-kernel-reuse}
+Suppose the current parent has an exact compact summary $S$ of width $b$. A certified kernel for precisely $(b,S,E)$ can supply the successor summary and decision while the successor's original history is formed by appending $E$ to this current parent's history. The resulting history satisfies the same exactness and compactness invariant as fresh elimination. For $c=|E|$, the coefficient payload of the key obeys
+\[
+H(S,E)=|S|(b+1)+c(2b+1)\leq (b+1)^2+c(2b+1).
+\]
+In the implementation described below, a hit executes no elimination or decision calculation. Over $N$ expansions its executed elimination/decision ledger is $\sum_{i\notin A} C(S_i,E_i)$, where $A$ is the set of actual cache hits. Hashing and candidate comparison are charged separately; each enabled lookup hashes $H(S_i,E_i)$ coefficient cells and compares at most that many candidate coefficient pairs.
+\end{proposition}
+\begin{proof}
+The kernel certificate identifies its result with the exact append calculation for $S$ and $E$. Substituting this equality into the append invariant yields the boundary solutions of the current parent's history extended by $E$. Attaching this history therefore preserves original-input meaning even when the kernel was first computed for another parent. Its summary is the same compact result as fresh calculation. The input-size inequality follows from $|S|\leq b+1$.
+
+The cache selects one candidate by hashing, then checks width and both complete typed input lists. Equality transports the candidate certificate to the present inputs; a collision without equality cannot supply a hit. The hit branch returns the certified summary and decision without running elimination. Only misses execute the calculation, which gives the stated ledger sum. Hashing visits the full coefficient payload. The single structural comparison either stops early or compares that payload, with list-shape and dimension checks accounted for separately.
+\end{proof}
+
+\texttt{AffineKernel.lean} formalizes the certified kernel, history attachment, coefficient budget and key-size bound. The executed protocol and chronological history theorem use this construction. Cache configuration preserves all existing source nodes, so adding configuration requests also preserves the origin invariant. Inspection of the generated C confirms that the hit branch returns an existing kernel and that history attachment introduces no runtime ancestor chain. This is exact memoization of an established affine calculation; we make no novelty claim for memoization or Gaussian elimination.
+
+The native cache has 64 direct-mapped slots by default, configurable from zero to 4,096; zero bypasses hashing and lookup. Version eviction leaves the kernel cache available. Reset and worker restart clear it; the durable archive still retains every original batch and completed result. One entry retains $O(b^2+bc)$ coefficient cells for its input and result, independent of preceding history length. A slot count is not a byte-memory bound. Collisions may remove useful entries. We do not recognize equivalent bases, reordered batches, variable renaming or small-rank changes.
+
+The hit's key payload is $O(b^2+bc)$, compared with the miss's $O(b^3+b^2c)$ elimination budget. These are partial coefficient accounts. Hash arithmetic, list and dimension checks, map operations, allocation, decoding, transport and archive writes remain additional costs. Every distinct source version still incurs its provenance and persistence work. In particular, a zero elimination charge does not mean free expansion. Query responses retain construction metadata; per-request counters distinguish new expansion work from querying an existing resident version. With no hits, the cache adds work. The workload and the cost of recognizing reuse determine whether elapsed time improves.
+
 \subsection{Amortization while the domain grows}
 
 Costly expansion may still be repaid by later queries. Let us state the workload condition rather than interchange the fixed-domain and growing-domain limits.
@@ -2049,7 +2072,36 @@ We retain the full record in \texttt{experiments/results/history-retention/}. An
 \paragraph{Affine source provenance and recurring expansion work.}
 The following checkpoint adds Proposition~\ref{prop:affine-history} and tests the distinction between a retained child and a reused parent name. A retry returns the original child both after parent eviction and after parent-name reuse; a fresh child binds the new parent. Deleting the old child permits a later definition under its name to acquire the new meaning. Malformed late rows and eviction fields are rejected without a partial store mutation. All 192 tests pass, including 17 affine tests. Lean audits 3,794 declarations, including 1,836 theorem declarations, without admits or added axioms. These checks strengthen the source contract; the earlier timing table still belongs to its recorded executable.
 
-We also replay the six frozen affine streams to identify repeated inputs to the elimination kernel. The diagnostic compares the actual ordered predecessor summary and the new equation batch, while retaining a distinct original history for every expansion. In each repeated stream, 14 of 18 expansion calls have an identical earlier kernel input, although all 18 source versions are distinct. At width 16 those calls account for 643,566 of 719,509 recorded coefficient-work units, approximately 89\%. There are also 240 duplicate input rows across that stream. The novel streams have no exact repeated kernel inputs. Removing duplicate rows and ignoring batch order identifies no additional repeated calls in these six cases. This diagnostic is retained in \texttt{experiments/results/affine-history/}. It installs no kernel cache and measures no resulting speedup. A future cache must attach a reusable boundary result to each new original history and charge input comparison, lookup, validation, retention and source persistence. Canonical row-space equivalence, renaming and small-rank changes may expose further patterns, but this diagnostic does not test them.
+We also replay the six frozen affine streams to identify repeated inputs to the elimination kernel. The diagnostic compares the actual ordered predecessor summary and the new equation batch, while retaining a distinct original history for every expansion. In each repeated stream, 14 of 18 expansion calls have an identical earlier kernel input, although all 18 source versions are distinct. At width 16 those calls account for 643,566 of 719,509 recorded coefficient-work units, approximately 89\%. There are also 240 duplicate input rows across that stream. The novel streams have no exact repeated kernel inputs. Removing duplicate rows and ignoring batch order identifies no additional repeated calls in these six cases. This diagnostic is retained in \texttt{experiments/results/affine-history/}. It installs no kernel cache and measures no resulting speedup. The following cache experiment attaches a reusable boundary result to each new original history and charges input comparison, lookup, validation, retention and source persistence. Canonical row-space equivalence, renaming and small-rank changes may expose further patterns, but this diagnostic does not test them.
+
+\paragraph{Measured exact-kernel reuse.}
+We implement Proposition~\ref{prop:affine-kernel-reuse} and compare the same executable with 64 cache slots and with caching disabled. The disabled path bypasses hashing and lookup. We preserve the six preceding input streams, then add width-32 repeated and novel streams with 32 appends and the same two final branches. Five sequential repetitions rotate mode order. Each run uses a fresh process and database with four resident versions. Service setup, native configuration, decoding, comparison, elimination, transport, persistence and shutdown contribute to the totals. Independent full-system elimination runs before timing; final archive inspection is excluded and reported separately. The worker's Python import time is not part of these service totals.
+
+\begin{table}[ht]
+\centering
+\caption{Exact affine transition cache: median service time in milliseconds over five repetitions. Widths 2, 8 and 16 use 18 expansions; width 32 uses 34. Each mode retains every original source version and completed decision.}
+\label{tab:affine-kernel-cache}
+\begin{tabular}{llrrr}
+\toprule
+Width & Stream & Cache disabled & Cache enabled & Kernel hits\\
+\midrule
+2 & repeated & 134.81 & 132.38 & 14/18\\
+2 & novel & 133.09 & 133.22 & 0/18\\
+8 & repeated & 140.52 & 135.68 & 14/18\\
+8 & novel & 136.96 & 137.28 & 0/18\\
+16 & repeated & 167.57 & 144.21 & 14/18\\
+16 & novel & 155.24 & 156.03 & 0/18\\
+32 & repeated & 496.37 & 215.54 & 30/34\\
+32 & novel & 386.10 & 387.00 & 0/34\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At width 16, exact hits reduce the executed elimination/decision ledger from 719,509 to 75,943 cells, a reduction of 89.4\%. The enabled cache additionally hashes 21,025 coefficient cells and has a candidate-comparison bound of 18,864 cells. These separate ledgers do not count all machine operations. Median service time falls by 13.9\%. At width 32, the ledger falls from 10,987,813 to 565,063 cells, while median service time falls by 56.6\%, a factor of 2.30. All five width-32 repeated runs take 492.85--513.17\,ms with caching disabled and 213.97--218.24\,ms with caching enabled. The wider case has both a larger boundary and a longer stream, so this table does not isolate width scaling alone.
+
+Novel streams have no hits and median overhead of approximately 0.1--0.5\%. Small timing differences, including the width-2 result, should not be read as statistical evidence of a benefit or a precise overhead bound. The results are descriptive measurements on synthetic affine families. They establish a concrete saving when exact transition inputs recur, rather than a general acceleration claim. The cache retains full ordered keys; the 240 duplicate source rows in the width-16 repeated stream are not removed.
+
+All 1,760 decisions in the 80 measured runs match independent full-system elimination, and all completed decisions remain in their run databases. All 197 regression tests pass, including 22 affine tests. New cases cover forced one-slot collisions, different satisfiable boundary relations, exact source-history rebinding, disabled/enabled exhaustive frontiers, eviction, restart, rejected configuration and transaction rollback. Lean audits 3,938 declarations, including 1,875 theorem declarations, without admits or added axioms. The live archive retains 9,940 generic results, 3,354 refutations, 80 source-state rows and 1,072 affine-state rows across engine versions. Every old row in 22 tables and all 405 preceding experiment files remain unchanged. The records are in \texttt{experiments/results/affine-kernel-cache/}. An earlier pilot that overlapped archive adoption is retained separately and excluded from the table; the reported run begins after adoption finishes and uses identical inputs and binary. Canonical keys, duplicate compression, incremental elimination, durable kernel certificates and complete machine-resource accounting remain open.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}

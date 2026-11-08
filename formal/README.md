@@ -1030,3 +1030,8 @@ inputs. The generated C hit branch returns the existing kernel without calling
 `extendRun` or `decideRun`; history attachment retains only its summary at runtime.
 Kernel slots are distinct from the resident-version cap. Entries carry no
 source ancestors; source batches remain durable in the Python archive.
+
+This checkpoint passes **197 tests**, including 22 affine tests, and audits
+**3,938 declarations / 1,875 theorem declarations** without admits or added axioms.
+The cache's executable slot policy is checked with forced collisions and bounded
+residency; no new whole-process memory or Python persistence theorem is claimed.

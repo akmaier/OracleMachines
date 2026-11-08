@@ -1620,3 +1620,85 @@ variable symmetries. Earlier timing artifacts remain tied to their old binary.
 The scheduled task remains hourly in this chat, with these expansion priorities.
 The next concrete target is an exact transition cache that separates a reusable
 boundary calculation from each append's immutable original history.
+
+
+## 2026-11-08: exact transition reuse implemented and measured
+
+Runtime **`f80f678`** completes the first expansion priority above. The reusable
+`Kernel previous equations` certifies its exact summary, verdict and nominal
+coefficient charge. A hit checks width and both complete typed input lists after
+hash selection, then attaches the result to the current parent's erased original
+history. The native chronological origin theorem still applies, including the new
+cache-configuration operation. Cache entries contain no source ancestor states.
+
+The service defaults to 64 direct-mapped slots, configurable from 0 to 4,096.
+Zero bypasses hashing/lookup. Version eviction leaves kernels available; reset
+and restart clear them. Each entry retains O(b^2+b*c) coefficient cells; this is
+not a byte/RSS bound. Hash collisions can evict useful entries but cannot cause a
+false hit. Query reports retain creation metadata; per-request `affine_updates`
+separates actually executed construction work, hits/misses, key scans and
+candidate-comparison bounds. Completed source versions/results remain durable.
+
+### Costs and evidence
+
+- A miss retains the **O(b^3+b^2*c)** elimination bound and adds cache overhead.
+- A hit skips elimination and decision. Its hashed coefficient payload is at most
+  **(b+1)^2+c*(2*b+1)**, with at most one structural candidate comparison. List,
+  dimension and map checks, hash arithmetic, allocation, decoding, transport and
+  archive work remain additional costs. A hit is not a zero-cost expansion.
+- Over actual hits A, the elimination/decision ledger is the sum of nominal
+  charges for non-hits. Capacity, collisions and input variation determine A;
+  no positive hit rate is guaranteed.
+- Five sequential, rotated, same-binary repetitions compare 64 slots with zero.
+  The six old input streams are unchanged. Two width-32 streams add longer
+  histories. **80 runs / 1,760 independently checked decisions** retain all
+  completed versions and results, under four resident versions.
+- Width-16 repeated: **14/18 hits**, coefficient ledger **719,509 -> 75,943**
+  (89.4% reduction); hashing **21,025** cells, candidate comparison at most
+  **18,864**. Median elapsed service time **167.57 -> 144.21 ms** (13.9% less).
+- Width-32 repeated: **30/34 hits**, ledger **10,987,813 -> 565,063**;
+  median **496.37 -> 215.54 ms** (56.6% less, **2.30x**). Width and stream length
+  both increase, so this does not isolate scaling with width alone.
+- Novel streams: **zero hits**, median overhead approximately **0.1--0.5%**.
+  Small differences are descriptive, not a significance test or overhead bound.
+  An overlapping-adoption pilot is retained separately and excluded. The final
+  run starts only after adoption finishes; both use identical input bytes/binary.
+
+**197 tests** pass, including **22 affine / 36 source-update** tests. Lean audits
+**3,938 declarations / 1,875 theorem declarations**, without admits or added
+axioms. New regressions force single-slot collisions, distinguish SAT boundary
+relations, compare complete frontiers with the cache off/on, and exercise source
+rebinding, eviction, restart, configuration rejection and rollback. Generated C
+inspection confirms no elimination call on hits and no runtime history ancestors.
+
+All **355** earlier generic inputs, **five** source versions and **268** distinct
+affine versions pass revalidation. Every old row in **22 tables**, all **405**
+preceding experiment files and all **35** prior manuscript proof blocks remain.
+The live archive now has **9,940 results / 3,354 refutations / 80 source-state
+rows / 1,072 affine-state rows**. The disabled-cache pattern diagnostic reproduces
+its previous counts and charges. The manuscript adds an exact-kernel proposition
+and the measured comparison. See [the evidence](../experiments/results/affine-kernel-cache/README.md).
+
+### Next concrete expansion work
+
+1. **Remove redundant rows before elimination.** Start with exact duplicate rows,
+   prove preservation of every boundary solution, retain original multiplicity in
+   source records, and measure normalization versus saved construction on misses.
+   The width-16 repeated stream still contains 240 duplicate rows. Exact kernel
+   hits already avoid their elimination; compression must justify its own work.
+2. **Expose equivalence beyond exact ordered keys.** Test canonical row-space
+   forms and variable permutations with full certificates. Measure discovery and
+   normalization before claiming a wider useful reuse class. The earlier batch
+   sorting/dedup diagnostic found no additional hits in the six frozen streams.
+3. **Share work across small changes.** Reuse elimination steps for low-rank
+   equation updates or unchanged separator components; prove when changes preserve
+   the retained interface and when reconstruction is required.
+4. **Improve cache admission and collision behavior only with evidence.** Stress
+   interleaved hot kernels, adversarial collisions, growing widths, cold replay
+   and variable batch sizes. Compare slot policy, retained bytes and per-phase
+   costs. No all-workload speedup is possible for blind exact caching.
+5. **Retain the remaining proof boundary.** Durable kernel certificates, serialized
+   witnesses, Python/SQLite correspondence, complete machine/space costs and
+   general-CNF compact closure are still open. Current kernels are process-local;
+   restart reconstructs from original source batches. This result says nothing
+   new about unrestricted SAT or P versus NP.

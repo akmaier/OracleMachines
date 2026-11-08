@@ -40,7 +40,7 @@ def main():
     for name,events in cases.items():
         width=int(name.split('-')[0]);cache=cache_dir/(name+'.sqlite3')
         states=[];records=[];exact_seen={};normalized_seen={}
-        with PersistentSolver(cache,native_affine_versions=4) as service:
+        with PersistentSolver(cache,native_affine_versions=4,affine_kernel_slots=0) as service:
             initial=service.affine_grow(width,summary=True)
             for index,event in enumerate(events):
                 parent=initial if event['parent']<0 else states[event['parent']]
@@ -72,7 +72,7 @@ def main():
         fingerprints={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in
             [Path(__file__).resolve(),ROOT/'experiments/affine_reference.py',ROOT/'solver/affine_growth.py',DEFAULT_ENGINE]},
         cases=results,limitations=[
-            'Observation only: no semantic-kernel cache is installed and no net speedup is measured',
+            'Observation only: the kernel cache is disabled and no net speedup is measured',
             'Keys use exact ordered parent summaries; only batch duplicates/order are normalized in the second key',
             'Canonical row-space equivalence, renaming and low-rank changes are not detected',
             'A cache must rebind the cached relation to each new original history and preserve all source versions',

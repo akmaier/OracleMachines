@@ -1857,3 +1857,28 @@ See [the complete evidence](../experiments/results/affine-batch-reuse/README.md)
 6. **Remaining refinement boundary.** Python/SQLite, serialized witnesses and
    complete machine/space costs remain open. None of this gives compact closure
    for general CNF or changes the status of unrestricted SAT or P versus NP.
+
+
+## 2026-11-08: complete resource audit before the next optimization
+
+[Current computation, memory and expansion bounds](resource-bounds.md) now
+collects the formal results and implementation limits across every active solver
+family. The [read-only snapshot](../experiments/results/resource-audit-2026-11-08/snapshot.json)
+records the source revision, page/object inventory and recomputed phase medians.
+No solver behavior or previous results changed in this audit.
+
+Two concrete affine-hit costs are now identified in code and preserved records:
+`AffineGrowth.run/ensure` reread the original source and parent, and native
+`defineChecked` always returns the full summary. A measured width-32 shared hit
+has zero elimination work but nine object reads and 8,175 response bytes. Checked
+batch handles, lightweight parent metadata and compact append replies can target
+these costs; the current proof must be maintained when changing the protocol.
+
+Memory claims also need a better measurement boundary: service RSS is cumulative
+Python-process RSS, and reaped-child statistics omit the simultaneous live native
+process tree. Slot limits and compressed disk payload are not RAM bounds. The
+archive inventory additionally shows that the measurement/result tables and their
+primary indexes occupy about 64% of the current main DB. Which cost dominates
+therefore depends on whether the workload has hits, novel rows, cold replay,
+growing width, or many preserved result namespaces. Future changes should be
+chosen against this inventory and measured independently.

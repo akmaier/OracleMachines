@@ -684,3 +684,9 @@ All **207 tests** pass; Lean audits **4,043 declarations / 1,911 theorem
 declarations**. Every old archive row and all 583 earlier experiment files remain.
 See the [four-mode evidence and remaining limits](experiments/results/affine-batch-reuse/README.md)
 and [current expansion priorities](research/implementation-gaps.md).
+
+
+The [current resource-bounds audit](research/resource-bounds.md) separates general
+SAT, finite coverage, factor/layered expansion, affine hits/misses, cold replay,
+live memory and archive growth. It records exact formal bounds, derived payload
+accounts, configured refusals, measured phase costs and the remaining proof gaps.

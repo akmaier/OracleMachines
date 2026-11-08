@@ -1,0 +1,715 @@
+{
+  "as_of_commit": "fe7d7676004398a7ea24e6d500f847a26c16fb43",
+  "date": "2026-11-08",
+  "database_bytes": 19738624,
+  "sqlite_pages": {
+    "page_count": 4819,
+    "page_size": 4096,
+    "freelist_count": 0
+  },
+  "rows": {
+    "results": 10295,
+    "proofs": 3483,
+    "measurements": 9230,
+    "knowledge_objects": 3568,
+    "source_states": 85,
+    "affine_states": 1340,
+    "distinct_affine_versions": 268,
+    "affine_engine_namespaces": 5
+  },
+  "page_breakdown": [
+    {
+      "name": "measurements",
+      "bytes": 4792320
+    },
+    {
+      "name": "results",
+      "bytes": 3207168
+    },
+    {
+      "name": "sqlite_autoindex_results_1",
+      "bytes": 2441216
+    },
+    {
+      "name": "sqlite_autoindex_measurements_1",
+      "bytes": 2179072
+    },
+    {
+      "name": "proofs",
+      "bytes": 1421312
+    },
+    {
+      "name": "result_candidates",
+      "bytes": 1306624
+    },
+    {
+      "name": "knowledge_objects",
+      "bytes": 1097728
+    },
+    {
+      "name": "sqlite_autoindex_proofs_1",
+      "bytes": 831488
+    },
+    {
+      "name": "sqlite_autoindex_interface_rows_1",
+      "bytes": 471040
+    },
+    {
+      "name": "interface_rows",
+      "bytes": 417792
+    },
+    {
+      "name": "affine_states",
+      "bytes": 311296
+    },
+    {
+      "name": "sqlite_autoindex_knowledge_objects_1",
+      "bytes": 303104
+    },
+    {
+      "name": "sqlite_autoindex_affine_states_1",
+      "bytes": 233472
+    },
+    {
+      "name": "interface_nodes",
+      "bytes": 229376
+    },
+    {
+      "name": "sqlite_autoindex_interface_nodes_1",
+      "bytes": 139264
+    },
+    {
+      "name": "portfolio",
+      "bytes": 90112
+    },
+    {
+      "name": "sqlite_autoindex_portfolio_1",
+      "bytes": 49152
+    },
+    {
+      "name": "portfolio_recent",
+      "bytes": 36864
+    },
+    {
+      "name": "source_states",
+      "bytes": 24576
+    },
+    {
+      "name": "sqlite_autoindex_source_states_1",
+      "bytes": 16384
+    },
+    {
+      "name": "sqlite_schema",
+      "bytes": 12288
+    },
+    {
+      "name": "source_version_identity",
+      "bytes": 12288
+    },
+    {
+      "name": "sqlite_autoindex_route_totals_1",
+      "bytes": 4096
+    },
+    {
+      "name": "sqlite_autoindex_models_1",
+      "bytes": 4096
+    },
+    {
+      "name": "sqlite_autoindex_layered_states_1",
+      "bytes": 4096
+    },
+    {
+      "name": "sqlite_autoindex_interface_symbolic_1",
+      "bytes": 4096
+    },
+    {
+      "name": "sqlite_autoindex_incremental_sessions_1",
+      "bytes": 4096
+    },
+    {
+      "name": "sqlite_autoindex_incremental_deltas_1",
+      "bytes": 4096
+    },
+    {
+      "name": "sqlite_autoindex_expansion_states_1",
+      "bytes": 4096
+    },
+    {
+      "name": "sqlite_autoindex_component_roots_1",
+      "bytes": 4096
+    },
+    {
+      "name": "sqlite_autoindex_component_negatives_1",
+      "bytes": 4096
+    },
+    {
+      "name": "sqlite_autoindex_component_entries_1",
+      "bytes": 4096
+    },
+    {
+      "name": "sqlite_autoindex_chain_states_1",
+      "bytes": 4096
+    },
+    {
+      "name": "sqlite_autoindex_active_witness_1",
+      "bytes": 4096
+    },
+    {
+      "name": "route_totals",
+      "bytes": 4096
+    },
+    {
+      "name": "route_observations",
+      "bytes": 4096
+    },
+    {
+      "name": "route_by_bucket",
+      "bytes": 4096
+    },
+    {
+      "name": "models",
+      "bytes": 4096
+    },
+    {
+      "name": "layered_states",
+      "bytes": 4096
+    },
+    {
+      "name": "interface_symbolic",
+      "bytes": 4096
+    },
+    {
+      "name": "incremental_sessions",
+      "bytes": 4096
+    },
+    {
+      "name": "incremental_recent",
+      "bytes": 4096
+    },
+    {
+      "name": "incremental_deltas",
+      "bytes": 4096
+    },
+    {
+      "name": "expansion_states",
+      "bytes": 4096
+    },
+    {
+      "name": "component_roots",
+      "bytes": 4096
+    },
+    {
+      "name": "component_negatives",
+      "bytes": 4096
+    },
+    {
+      "name": "component_negative_recent",
+      "bytes": 4096
+    },
+    {
+      "name": "component_entries",
+      "bytes": 4096
+    },
+    {
+      "name": "chain_states",
+      "bytes": 4096
+    },
+    {
+      "name": "active_witness",
+      "bytes": 4096
+    }
+  ],
+  "knowledge_objects": [
+    {
+      "kind": "affine_result",
+      "count": 806,
+      "logical_raw_bytes": 348938,
+      "packed_bytes": 197945
+    },
+    {
+      "kind": "affine_version",
+      "count": 268,
+      "logical_raw_bytes": 4205628,
+      "packed_bytes": 139444
+    },
+    {
+      "kind": "elimination_bucket",
+      "count": 68,
+      "logical_raw_bytes": 18781,
+      "packed_bytes": 13124
+    },
+    {
+      "kind": "elimination_plan",
+      "count": 4,
+      "logical_raw_bytes": 1872,
+      "packed_bytes": 1165
+    },
+    {
+      "kind": "expansion_constraint",
+      "count": 373,
+      "logical_raw_bytes": 85445,
+      "packed_bytes": 43717
+    },
+    {
+      "kind": "expansion_map",
+      "count": 689,
+      "logical_raw_bytes": 110692,
+      "packed_bytes": 80002
+    },
+    {
+      "kind": "expansion_result",
+      "count": 5,
+      "logical_raw_bytes": 11783,
+      "packed_bytes": 3561
+    },
+    {
+      "kind": "interface_evidence",
+      "count": 1279,
+      "logical_raw_bytes": 252187,
+      "packed_bytes": 188741
+    },
+    {
+      "kind": "interface_relation",
+      "count": 20,
+      "logical_raw_bytes": 823,
+      "packed_bytes": 823
+    },
+    {
+      "kind": "layered_node",
+      "count": 6,
+      "logical_raw_bytes": 503,
+      "packed_bytes": 423
+    },
+    {
+      "kind": "layered_result",
+      "count": 2,
+      "logical_raw_bytes": 289,
+      "packed_bytes": 240
+    },
+    {
+      "kind": "layered_source",
+      "count": 2,
+      "logical_raw_bytes": 472,
+      "packed_bytes": 361
+    },
+    {
+      "kind": "source_layout",
+      "count": 1,
+      "logical_raw_bytes": 58,
+      "packed_bytes": 55
+    },
+    {
+      "kind": "source_node",
+      "count": 31,
+      "logical_raw_bytes": 6740,
+      "packed_bytes": 5177
+    },
+    {
+      "kind": "source_result",
+      "count": 9,
+      "logical_raw_bytes": 1006,
+      "packed_bytes": 906
+    },
+    {
+      "kind": "source_version",
+      "count": 5,
+      "logical_raw_bytes": 800,
+      "packed_bytes": 641
+    }
+  ],
+  "local_cache_allocated_kib": 1085068,
+  "affine_budget_examples": [
+    {
+      "width": 16,
+      "unique_rows": 16,
+      "summary_cell_bound": 289,
+      "append_coefficient_budget": 33624
+    },
+    {
+      "width": 32,
+      "unique_rows": 32,
+      "summary_cell_bound": 1089,
+      "append_coefficient_budget": 248488
+    },
+    {
+      "width": 64,
+      "unique_rows": 64,
+      "summary_cell_bound": 4225,
+      "append_coefficient_budget": 1910088
+    },
+    {
+      "width": 128,
+      "unique_rows": 128,
+      "summary_cell_bound": 16641,
+      "append_coefficient_budget": 14977672
+    }
+  ],
+  "max_affine_append_budget": 212564232,
+  "conservative_default_max_coefficient_payload": 477987200,
+  "benchmark": "experiments/results/affine-batch-reuse/matched/comparison.json",
+  "benchmark_sha256": "b0d04ac1a3ade8f261269dd5000bfa2eadedcdb8c5bdbdc14a5c89e69d7c66af",
+  "phase_medians": [
+    {
+      "width": 32,
+      "pattern": "repeated",
+      "mode": "baseline",
+      "median_setup_ns": 99223375,
+      "median_total_ns": 236747915,
+      "median_stream_phase_ns": {
+        "affine_input": 7122418,
+        "affine_update": 36931366,
+        "control": 362664,
+        "native_affine_append": 47929370,
+        "native_affine_cache_config": 32029792,
+        "native_affine_drop": 1462835,
+        "native_affine_init": 109625,
+        "native_affine_query": 1018543,
+        "serialization": 3685620,
+        "storage_accounting": 1619670
+      }
+    },
+    {
+      "width": 32,
+      "pattern": "repeated",
+      "mode": "normalize",
+      "median_setup_ns": 99790666,
+      "median_total_ns": 234896665,
+      "median_stream_phase_ns": {
+        "affine_input": 7218290,
+        "affine_update": 37217786,
+        "control": 367627,
+        "native_affine_append": 46706497,
+        "native_affine_cache_config": 31973208,
+        "native_affine_drop": 1482710,
+        "native_affine_init": 91167,
+        "native_affine_query": 1053958,
+        "serialization": 3758175,
+        "storage_accounting": 1820167
+      }
+    },
+    {
+      "width": 32,
+      "pattern": "repeated",
+      "mode": "share",
+      "median_setup_ns": 102998792,
+      "median_total_ns": 260443084,
+      "median_stream_phase_ns": {
+        "affine_input": 7124831,
+        "affine_update": 58271415,
+        "control": 366294,
+        "native_affine_append": 48786796,
+        "native_affine_cache_config": 31831292,
+        "native_affine_drop": 1584540,
+        "native_affine_init": 96833,
+        "native_affine_query": 1060624,
+        "serialization": 3724494,
+        "storage_accounting": 1750499
+      }
+    },
+    {
+      "width": 32,
+      "pattern": "repeated",
+      "mode": "combined",
+      "median_setup_ns": 100099167,
+      "median_total_ns": 252468332,
+      "median_stream_phase_ns": {
+        "affine_input": 7088040,
+        "affine_update": 55821326,
+        "control": 358884,
+        "native_affine_append": 46002414,
+        "native_affine_cache_config": 31534750,
+        "native_affine_drop": 1530791,
+        "native_affine_init": 92750,
+        "native_affine_query": 1008165,
+        "serialization": 3692875,
+        "storage_accounting": 1618078
+      }
+    },
+    {
+      "width": 32,
+      "pattern": "novel",
+      "mode": "baseline",
+      "median_setup_ns": 99076458,
+      "median_total_ns": 413654040,
+      "median_stream_phase_ns": {
+        "affine_input": 5523750,
+        "affine_update": 28727859,
+        "control": 392298,
+        "native_affine_append": 235489916,
+        "native_affine_cache_config": 31551042,
+        "native_affine_drop": 1401252,
+        "native_affine_init": 92333,
+        "native_affine_query": 1316497,
+        "serialization": 2683089,
+        "storage_accounting": 2211789
+      }
+    },
+    {
+      "width": 32,
+      "pattern": "novel",
+      "mode": "normalize",
+      "median_setup_ns": 99696709,
+      "median_total_ns": 411779959,
+      "median_stream_phase_ns": {
+        "affine_input": 5561999,
+        "affine_update": 28658496,
+        "control": 398919,
+        "native_affine_append": 235906462,
+        "native_affine_cache_config": 31170959,
+        "native_affine_drop": 1291124,
+        "native_affine_init": 98333,
+        "native_affine_query": 1315044,
+        "serialization": 2675375,
+        "storage_accounting": 2015458
+      }
+    },
+    {
+      "width": 32,
+      "pattern": "novel",
+      "mode": "share",
+      "median_setup_ns": 98897459,
+      "median_total_ns": 410410583,
+      "median_stream_phase_ns": {
+        "affine_input": 5576625,
+        "affine_update": 28886242,
+        "control": 384788,
+        "native_affine_append": 235060164,
+        "native_affine_cache_config": 31334625,
+        "native_affine_drop": 1329165,
+        "native_affine_init": 75083,
+        "native_affine_query": 1239379,
+        "serialization": 2628882,
+        "storage_accounting": 2049290
+      }
+    },
+    {
+      "width": 32,
+      "pattern": "novel",
+      "mode": "combined",
+      "median_setup_ns": 98772375,
+      "median_total_ns": 412886625,
+      "median_stream_phase_ns": {
+        "affine_input": 5630626,
+        "affine_update": 28610834,
+        "control": 400545,
+        "native_affine_append": 235795541,
+        "native_affine_cache_config": 31376000,
+        "native_affine_drop": 1379790,
+        "native_affine_init": 81666,
+        "native_affine_query": 1326915,
+        "serialization": 2662341,
+        "storage_accounting": 2007997
+      }
+    },
+    {
+      "width": 32,
+      "pattern": "multiplicity",
+      "mode": "baseline",
+      "median_setup_ns": 99718250,
+      "median_total_ns": 1246553542,
+      "median_stream_phase_ns": {
+        "affine_input": 12215416,
+        "affine_update": 107609627,
+        "control": 278158,
+        "native_affine_append": 974957457,
+        "native_affine_cache_config": 32066959,
+        "native_affine_drop": 3223417,
+        "native_affine_init": 162917,
+        "native_affine_query": 1086789,
+        "serialization": 9749756,
+        "storage_accounting": 1636831
+      }
+    },
+    {
+      "width": 32,
+      "pattern": "multiplicity",
+      "mode": "normalize",
+      "median_setup_ns": 99242500,
+      "median_total_ns": 417578003,
+      "median_stream_phase_ns": {
+        "affine_input": 12059500,
+        "affine_update": 106236325,
+        "control": 268792,
+        "native_affine_append": 146482375,
+        "native_affine_cache_config": 31384625,
+        "native_affine_drop": 2651875,
+        "native_affine_init": 110250,
+        "native_affine_query": 732752,
+        "serialization": 9590921,
+        "storage_accounting": 1398875
+      }
+    },
+    {
+      "width": 32,
+      "pattern": "multiplicity",
+      "mode": "share",
+      "median_setup_ns": 100358625,
+      "median_total_ns": 1254484749,
+      "median_stream_phase_ns": {
+        "affine_input": 12172626,
+        "affine_update": 111678791,
+        "control": 313911,
+        "native_affine_append": 970861207,
+        "native_affine_cache_config": 31648083,
+        "native_affine_drop": 3457668,
+        "native_affine_init": 103375,
+        "native_affine_query": 1105166,
+        "serialization": 9778998,
+        "storage_accounting": 1706252
+      }
+    },
+    {
+      "width": 32,
+      "pattern": "multiplicity",
+      "mode": "combined",
+      "median_setup_ns": 100738625,
+      "median_total_ns": 430519959,
+      "median_stream_phase_ns": {
+        "affine_input": 12298290,
+        "affine_update": 113918669,
+        "control": 289502,
+        "native_affine_append": 148468333,
+        "native_affine_cache_config": 31568583,
+        "native_affine_drop": 2658916,
+        "native_affine_init": 103792,
+        "native_affine_query": 804461,
+        "serialization": 9764038,
+        "storage_accounting": 1451956
+      }
+    }
+  ],
+  "repeated_hit_examples": {
+    "baseline": {
+      "record_index": 5,
+      "updates": {
+        "replayed_versions": 0,
+        "registered_versions": 1,
+        "evicted_versions": 1,
+        "native_resets": 0,
+        "resident_versions": 4,
+        "resident_version_cap": 4,
+        "inserted_objects": 2,
+        "serialized_bytes": 27118,
+        "inserted_raw_bytes": 27118,
+        "inserted_packed_bytes": 822,
+        "object_reads": 4,
+        "read_packed_bytes": 2060,
+        "batch_admissions": 0,
+        "batch_references": 0,
+        "inline_versions": 0,
+        "kernel_hits": 1,
+        "kernel_misses": 0,
+        "kernel_evictions": 0,
+        "kernel_key_cells": 5216,
+        "kernel_compare_cell_bound": 5216,
+        "executed_reference_cells": 0,
+        "uncached_reference_cells": 347425,
+        "input_rows": 64,
+        "normalized_rows": 64,
+        "batch_preparation_hits": 0,
+        "preparation_key_cells": 0,
+        "preparation_compare_cell_bound": 0,
+        "normalization_input_cells": 0,
+        "input_bytes": 30844
+      },
+      "events": {
+        "native_requests": 3,
+        "native_request_bytes": 31131,
+        "native_response_bytes": 8165
+      },
+      "native_final": {
+        "deduplicate": false,
+        "kernel_cache_entries": 3,
+        "kernel_cache_slots": 64,
+        "prepared_batch_entries": 0,
+        "resident_versions": 4
+      }
+    },
+    "combined": {
+      "record_index": 5,
+      "updates": {
+        "replayed_versions": 0,
+        "registered_versions": 1,
+        "evicted_versions": 1,
+        "native_resets": 0,
+        "resident_versions": 4,
+        "resident_version_cap": 4,
+        "inserted_objects": 2,
+        "serialized_bytes": 27123,
+        "inserted_raw_bytes": 27123,
+        "inserted_packed_bytes": 471,
+        "object_reads": 9,
+        "read_packed_bytes": 2904,
+        "batch_admissions": 0,
+        "batch_references": 1,
+        "inline_versions": 0,
+        "kernel_hits": 1,
+        "kernel_misses": 0,
+        "kernel_evictions": 0,
+        "kernel_key_cells": 3136,
+        "kernel_compare_cell_bound": 3136,
+        "executed_reference_cells": 0,
+        "uncached_reference_cells": 243937,
+        "input_rows": 64,
+        "normalized_rows": 32,
+        "batch_preparation_hits": 1,
+        "preparation_key_cells": 4160,
+        "preparation_compare_cell_bound": 4160,
+        "normalization_input_cells": 0,
+        "input_bytes": 30844
+      },
+      "events": {
+        "native_requests": 3,
+        "native_request_bytes": 31131,
+        "native_response_bytes": 8175
+      },
+      "native_final": {
+        "deduplicate": true,
+        "kernel_cache_entries": 3,
+        "kernel_cache_slots": 64,
+        "prepared_batch_entries": 2,
+        "resident_versions": 4
+      }
+    }
+  },
+  "fingerprints": {
+    "formal/OracleMachines/Expansion.lean": "39d464f3b7106abe825287f0267f1f595e8b8fbd0601adaf1bb9404b771e39c5",
+    "formal/OracleMachines/CompactExpansion.lean": "f9132df917e5336c6d5ab8daf427e3f2c0423fb526fdd33829258539b64968ea",
+    "formal/OracleMachines/CostedSAT.lean": "ba6a44db1381c288e6bd739e90cf5f6755814e3454dbb12e09887d8877d9c2b6",
+    "formal/OracleMachines/Parsing.lean": "cc9923c9f42ea33b96cfa346e5c8bc923bf03c60672b07b6bc7c29bcc1b8c8a0",
+    "formal/OracleMachines/Restricted.lean": "a09df7a5da5ffa7fda23bd87e94fa7da422e1d59196ab7a4bb847e903127d79f",
+    "formal/OracleMachines/Search.lean": "60ea289149729b12b5ba06739e58f35154f3abdea5fa16fbff5b7e7413b9d89c",
+    "formal/OracleMachines/SearchMachine.lean": "f45ed3a8f8e71df490d7a805712ca9cd70bd71601fd0f0bf80a935a0215ca9ab",
+    "formal/OracleMachines/Scaling.lean": "58cac3c6e62faabc859723097add549b0463803e366e35bbf094ce716599dfeb",
+    "formal/OracleMachines/InterfaceCosts.lean": "8629095018276280d33920a9a3e87184a7c2c79e0376f32ede7afd7e0b6717c3",
+    "formal/OracleMachines/Layered.lean": "1a2f1bf4d27558d1dc9c68875884736710e50f95270b16265be2fcb715972251",
+    "formal/OracleMachines/LayeredCosts.lean": "2deb332d9555527dd3bcf86d108469e295b7f066fbfd7bc8dac60e2bb9ae6d75",
+    "formal/OracleMachines/LayeredProtocol.lean": "c82ab28b066ebddfd9f7af44ddb8a3bd11fb13ca6aded492db20a12bed18de13",
+    "formal/OracleMachines/SourceUpdates.lean": "510abb7cf61ed92ed11870679a6a99ccc7246ed2ef848671f528df78ecd063cb",
+    "formal/OracleMachines/SourcePatch.lean": "062b640ad6f7cf270436c0069f00a62e7c895f4c443b2823f5a7c39af6636e74",
+    "formal/OracleMachines/AffineGrowth.lean": "5475032905a83df6bd3151f35422045c08711155c2846676d68160ed3f714a7c",
+    "formal/OracleMachines/AffineCosts.lean": "fdf4d861d8b12425d812b7a1122f3366ec820de2867d5c5e7cf8fb74116e46c0",
+    "formal/OracleMachines/AffineKernel.lean": "6907a42c823ef5253bb4f9f9da4da789841160508f16aed1ac1b8555f8716aaf",
+    "formal/OracleMachines/AffineNormalize.lean": "08997d85048600b838cdcd3306d8d8b96842fbb5489bae57767c6068cd54f47f",
+    "formal/OracleMachines/AffineProtocol.lean": "3490d9225eedc0ab6ba33caa3c6304b1fae4690fce01ec443def62a6f671bd97",
+    "solver/persistent.py": "b24d9da1e0caceba4d975590bd5f25cbce9eff639b3d4f449b5dfedf7877b753",
+    "solver/affine_growth.py": "c4d8e128abd16d53e952c3b63261694427fb322f3a0170db03035e69bf9e3907",
+    "solver/affine_archive.py": "6a35758117800453f59766ade01e80f1758edb2dd03b98878ff0db602b12c942",
+    "solver/knowledge_store.py": "7d13c9ebf5c2052dc3e4b85bcc5708bc313191b613a334bec4703d1be29d82de",
+    "solver/source_updates.py": "19b5d6955f41192a1d3264dda15f2855e448920af7252d177e9f32d73aba212b",
+    "solver/layered.py": "84a4e2aa86822f37702d1ae8fd7edbdfb7e5b37e00c8a729682da20adc261a15",
+    "solver/planning.py": "ef5263fb38a7159944d7c5ec4743607fa44091031971148a6f1511eb87810107",
+    "solver/resources.py": "e53a9e6b55daf3c903b2acc6e11cf435f9fdd147cf648f9c4d631fb0a24cb03e",
+    "solver/active_cache.py": "415da919f55aaf829f6f60385c7bbd7201090d5c1bd0f22ce924ddc485d3b5b7",
+    "solver/symbolic.py": "dc66fdf643a8ce26e4e7a4d027418c59bb8857b28e0eee77531735640a9124ee",
+    "solver/learning.py": "6d7bbbec3867ad6aff3f813c30a7290ed5f7eeadb669cc7ec638a6df12182790",
+    "solver/incremental.py": "d851641ff97fcd4e9b294932265c0d7a63ddb29bede722394f3e5cc6d8eea5d8",
+    "solver/incremental_proof.py": "ac749adfe1dc57a6aaf28fb57c4774224a7c39c33a215e391c42951f02b1bd2e"
+  },
+  "limitations": [
+    "Read-only snapshot; no new timing experiment",
+    "Medians of individual phases need not sum to median total",
+    "Coefficient payload envelope overcounts shared references and excludes metadata/temporary allocations; not bytes or RSS",
+    "Cache disk includes all retained runs/backups, not active RAM"
+  ]
+}

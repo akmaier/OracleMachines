@@ -1,0 +1,85 @@
+{
+  "source_sha256": "25bb9cf3bd80e11acf04e5cceb3c08285490afecf99aeb1d1fa2c74a4a140a02",
+  "report_sha256": "0ac25abcb787efb640136d16d72f3797d22a18ef50ec3af172d0777df01615ef",
+  "case_indices": [
+    777,
+    790,
+    819,
+    850,
+    885,
+    889
+  ],
+  "results": [
+    {
+      "mode": "frequency",
+      "current_traced_bytes": 5873112,
+      "peak_traced_bytes": 6058671,
+      "storage": {
+        "nodes": 334,
+        "nodes_bytes": 1324525,
+        "sources": 6,
+        "sources_bytes": 18480
+      }
+    },
+    {
+      "mode": "fused_frequency",
+      "current_traced_bytes": 4432111,
+      "peak_traced_bytes": 4614558,
+      "storage": {
+        "nodes": 215,
+        "nodes_bytes": 950741,
+        "sources": 6,
+        "sources_bytes": 19260
+      }
+    },
+    {
+      "mode": "shortest",
+      "current_traced_bytes": 5502714,
+      "peak_traced_bytes": 5682777,
+      "storage": {
+        "nodes": 250,
+        "nodes_bytes": 1188289,
+        "sources": 6,
+        "sources_bytes": 19314
+      }
+    },
+    {
+      "mode": "fused_shortest",
+      "current_traced_bytes": 3576357,
+      "peak_traced_bytes": 3756516,
+      "storage": {
+        "nodes": 136,
+        "nodes_bytes": 682785,
+        "sources": 6,
+        "sources_bytes": 20094
+      }
+    },
+    {
+      "mode": "combined",
+      "current_traced_bytes": 5245485,
+      "peak_traced_bytes": 5428612,
+      "storage": {
+        "nodes": 275,
+        "nodes_bytes": 1153873,
+        "sources": 6,
+        "sources_bytes": 18462
+      }
+    },
+    {
+      "mode": "fused_combined",
+      "current_traced_bytes": 4051770,
+      "peak_traced_bytes": 4234777,
+      "storage": {
+        "nodes": 183,
+        "nodes_bytes": 841375,
+        "sources": 6,
+        "sources_bytes": 19242
+      }
+    }
+  ],
+  "limitations": [
+    "Separate six-case reruns chosen to exercise fused branches, not full-corpus peak memory",
+    "Traced Python allocations exclude native SQLite memory and RSS",
+    "No timings from this instrumented diagnostic enter benchmark operation times"
+  ]
+}

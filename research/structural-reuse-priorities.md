@@ -1,6 +1,6 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-08 after the user's shift toward pattern discovery and a valid
+Updated 2026-11-09 after the user's shift toward pattern discovery and a valid
 partition of the entire SAT problem. This is the working record for the hourly
 investigation. Start with the [discovery plan](sat-pattern-discovery.md), then
 consult [implementation history](implementation-gaps.md),
@@ -12,13 +12,30 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-**Next research experiment:** reduce the repeated intermediate acquisition
-exposed by the [949-source conditioning study](../experiments/results/cnf-conditioning/README.md).
-Test one checked edge combining conditioning and forced-unit closure, retaining
-the parent source, assumption, reason trace and exact child binding. Measure
-whether avoiding separate full intermediate residuals/profiles makes deeper
-structural investigation affordable. Preserve comparable terminal-family and
-recognition behavior, all historical records and complete cold checks.
+**Next research experiment:** use bounded, checked probing to identify forced
+values in conditioned residuals with binary clauses. A unit-conflict certificate
+under one assumption can justify its opposite; it must not be inferred from a
+failed search or an unresolved child. Reuse the compact closure representation,
+retain unsuccessful probes and charge every scan/check. Compare against the same
+depth/candidate policies before increasing budgets. Pure 3-CNF roots have no
+immediate unit cascade after just one assignment; target the binary interaction
+exposed by conditioning. There is no proved uniformly small probe budget.
+
+The [fused-edge comparison](../experiments/results/cnf-fused-conditioning/README.md)
+implements the previous intermediate-state target. All 3,999 archived OR plans
+across three policy pairs retain their choices and final child relations. On
+shortest-clause ordering, nodes fall from 11,224 to 6,281, SQLite from 96.911 to
+65.573 MB and total time from 21.170 to 17.638 s, with unchanged 330/437 coverage.
+Frequency and combined unit/pure processing also improve. Targeted six-case
+traced Python peaks fall, while the earlier easy-case diagnostic slightly grows;
+all scope limits and the in-memory pilot runtime regression are retained.
+
+The remaining shortest-clause node payload is mainly unresolved CNFs (12.124 MB)
+and OR nodes (11.510 MB), rather than discarded simplification intermediates.
+All 107 non-tiny misses remain, including the fresh 20/32-variable 3-CNFs. This
+now favors stronger checked discovery over another unconditional representation
+change. Repeated recognition still increases with fused incoming edges and is
+supporting work if it dominates the next probe profile.
 
 The optional balanced-short-clause policy improves cap-four unit-only coverage
 from 322/437 to 330/437 but raises total time from 17.203 to 20.246 s and SQLite

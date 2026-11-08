@@ -129,14 +129,23 @@ class PatternInventory:
         normalized, names, key = self._canonical(cnf, depth)
         if self._load(key) is None:
             node = self._discover(normalized, depth)
-            self._check(key, node)
-            payload = encode(node)
-            with self.db:
-                self.db.execute('INSERT INTO cnf_patterns_v1 VALUES (?,?)', (key, payload))
-            self.counts['inserted_nodes'] += 1
-            self.counts['serialized_bytes'] += len(key.encode()) + len(payload.encode())
-            self.checked[key] = node
+            self._record_node(key, node)
         return dict(key=key, names=names)
+
+    def _record_node(self, key, node):
+        self._check(key, node)
+        payload = encode(node)
+        with self.db:
+            self.db.execute('INSERT INTO cnf_patterns_v1 VALUES (?,?)', (key, payload))
+        self.counts['inserted_nodes'] += 1
+        self.counts['serialized_bytes'] += len(key.encode()) + len(payload.encode())
+        self.checked[key] = node
+
+    def _conditioning_edge(self, cnf, variable, value, depth):
+        return self._edge(restrict(cnf, {variable: value}, self.counts), depth)
+
+    def _check_conditioning_edge(self, edge, cnf, variable, value, depth):
+        self._check_edge(edge, restrict(cnf, {variable: value}, self.counts), depth)
 
     def _summary(self, edges):
         children = [self._load(edge['key']) for edge in edges]
@@ -167,7 +176,7 @@ class PatternInventory:
             alternatives = []
             for variable in choices:
                 self.counts['conditioning_candidates'] += 1
-                edges = [self._edge(restrict(cnf, {variable: value}, self.counts), depth-1)
+                edges = [self._conditioning_edge(cnf, variable, value, depth-1)
                          for value in (False, True)]
                 summary = self._summary(edges)
                 alternatives.append(dict(variable=variable, edges=edges, summary=summary))
@@ -245,7 +254,7 @@ class PatternInventory:
                         type(attempt['variable']) is not int or attempt['variable'] != variable or len(attempt['edges']) != 2):
                     raise ValueError('Invalid conditioning candidate')
                 for edge, value in zip(attempt['edges'], (False, True)):
-                    self._check_edge(edge, restrict(cnf, {variable: value}, self.counts), depth-1)
+                    self._check_conditioning_edge(edge, cnf, variable, value, depth-1)
                 if encode(attempt['summary']) != encode(self._summary(attempt['edges'])):
                     raise ValueError('Invalid candidate coverage summary')
             # Require the exact deterministic search policy, not just a sound

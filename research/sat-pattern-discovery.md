@@ -108,6 +108,17 @@ edge that avoids duplicated intermediate acquisition while retaining source
 dependencies, failed alternatives and cold verification. This supports further
 discovery; it does not resolve the remaining interaction or depth obligation.
 
+**Checked edge fusion implemented:** the [same 949-source corpus](../experiments/results/cnf-fused-conditioning/README.md)
+now contracts conditioning followed by simplification into one source-bound edge.
+All choices, terminal/component behavior and coverage results are unchanged;
+full comparison checks all 3,999 archived OR plans across three policy pairs.
+Shortest-clause SQLite falls from 96.911 to 65.573 MB and total time from 21.170
+to 17.638 s. No new closure follows. The remaining payload is dominated by
+unresolved CNFs and OR alternatives. Next test bounded unit-conflict probing on
+binary-rich conditioned residuals, deriving forced values only from checked
+refutations of the opposite assumption. Keep probe work, failed probes and
+unresolved cases explicit; a fixed discovery budget need not cover arbitrary SAT.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

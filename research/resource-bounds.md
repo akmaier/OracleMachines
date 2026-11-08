@@ -922,3 +922,47 @@ the same 4,034 ordinary solver residuals. A cap-eight frequency baseline reaches
 short-clause ordering reaches 330/437 and combined unit/pure reaches 329/437.
 These are non-dominating synthetic results. There is no general optimal-policy,
 compact-decomposition or unrestricted polynomial acquisition bound.
+
+## 17. Fused conditioning and checked closure
+
+`FusedConditioningInventory` omits a separate conditioned node only when the
+existing planner would immediately simplify it. The edge retains unit/pure
+reasons and composes the child binding into parent IDs. Its OR context supplies
+the assumption. Checking reconstructs the normalized restriction, verifies the
+old family/component gates and exact closure, and validates the final child.
+Recognized families, component splits, root/source records and older archives
+retain their behavior. For each branch b, the child represents exactly
+`exists h, F(x=b,y,h)` on its remaining variables y. A model lifts through the
+assumption and saved assignments and is checked against F.
+
+Let A count incoming fused edges and U their distinct old intermediate nodes.
+The old representation stores U full CNFs, keys, profiles and traces, plus
+incoming references. Fusion stores A traces and final-child bindings/references;
+the intermediate restriction is reconstructible from the parent and assumption.
+It can duplicate traces formerly shared by a node. Full recognition and checks
+are still performed per uncached context, so A much larger than U can erase a
+time/space advantage. No uniform reduction follows, and original-source
+retention remains proportional to its recorded encodings.
+
+On the [matched comparison](../experiments/results/cnf-fused-conditioning/README.md),
+shortest-clause processing omits 4,943 distinct intermediates using 5,428 fused
+edges. The traces cost 430,620 JSON bytes. Logical node bytes fall from 44,967,792
+to 25,908,912, and SQLite from 96,911,360 to 65,572,864. Source payload grows by
+123,370 bytes for policy metadata. Total time falls from 21.16978 to 17.63829 s
+and full cold audit from 7.89184 to 6.93005 s. Frequency and combined policies
+also improve, while an in-memory 48-case pilot regresses slightly in runtime.
+All 3,999 OR plans preserve their choices and final CNF/depth/bindings; semantic
+coverage and all 4,034 ordinary solver residuals are unchanged.
+
+Repeated classification increases (shortest-clause calls 22,448 -> 23,418), while
+normalization payload and full-node persistence decrease. A targeted six-case
+traced Python peak falls from 5,682,777 to 3,756,516 bytes; the older easy-case
+diagnostic instead grows slightly. Neither includes native memory or full-corpus
+peak. Warm replay also has small regressions in two policies. Preserved counters
+and timings distinguish removed storage from avoided computation.
+
+Remaining shortest-clause logical payload is mostly unresolved nodes and OR
+alternatives: 12,124,411 and 11,510,391 bytes respectively. Bounded probing that
+proves additional forced values is the next discovery opportunity. Its work and
+certificates must be included even if it avoids spending a branching-depth level.
+No efficient complete arbitrary-CNF classification has been established.

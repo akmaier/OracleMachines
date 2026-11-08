@@ -1,0 +1,31 @@
+{
+  "source_commit": "37bb547",
+  "source_report": "experiments/results/cnf-conditioning/report.json",
+  "group": "random3",
+  "inputs": 48,
+  "depth": 2,
+  "simplify_pure": false,
+  "storage": "in-memory SQLite",
+  "baseline": {
+    "seconds": 2.174628916895017,
+    "nodes": 2491,
+    "node_bytes": 9474708,
+    "source_bytes": 139035
+  },
+  "fused": {
+    "seconds": 2.245209916960448,
+    "nodes": 1646,
+    "node_bytes": 6679503,
+    "source_bytes": 145275,
+    "edges": 1181
+  },
+  "checks": "Every paired root profile and coverage summary identical",
+  "limitations": [
+    "No solver, root lifting or cold replay in this diagnostic",
+    "Single sequential samples; full comparison is separate"
+  ],
+  "fingerprints": {
+    "experiments/cnf_fused_conditioning.py": "77f4709035fcb2974b553df1e5a62b18dc51aafb61cbc76461e7af4866a79895",
+    "experiments/cnf_pattern_inventory.py": "299aa87cfd04f3e16e49fb3b019621b804c1eb39a9d9b939401e1ddc827520df"
+  }
+}

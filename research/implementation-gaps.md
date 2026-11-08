@@ -3018,3 +3018,42 @@ proof blocks remain intact, with 171 unique labels. The 94-page PDF builds
 without warnings or box errors; changed pages 86--88 and bibliography pages
 93--94 were visually inspected. The policy stays optional and all prior results
 and counterexamples remain available for subsequent runs.
+
+## Checked conditioning/closure edges (9 November)
+
+`cnf_fused_conditioning.py` implements the proposed contraction. It fuses only
+conditioned children whose old next step was simplification. Recognized leaves
+and independent components keep their priority. The edge stores the existing
+unit/pure certificate and final child binding in parent IDs; checking rebuilds
+the intermediate restriction, validates gates/reasons and checks the exact
+target. SAT models lift through the branch assumption and are checked against
+the full parent. Root/source and pre-existing intermediate records are retained.
+
+The [949-source comparison](../experiments/results/cnf-fused-conditioning/README.md)
+checks three policy pairs. Every root profile, coverage summary and acquired
+candidate count is identical. The full archive analyzer checks all 3,999 OR plans
+for identical choices, selected alternatives and final child CNF/depth/bindings
+after contraction. All non-simplification CNF/depth pairs remain. This is corpus
+evidence and executable checking, not a new Lean implementation refinement.
+
+For shortest-clause ordering, nodes fall from 11,224 to 6,281, SQLite from
+96,911,360 to 65,572,864 bytes, and total time from 21.16978 to 17.63829 s.
+Frequency falls 17.33216 -> 15.97544 s and combined unit/pure falls 18.49975 ->
+17.14480 s. Shortest-clause cold audit falls 7.89184 -> 6.93005 s. A separate
+branch-heavy six-case traced Python peak falls 5,682,777 -> 3,756,516 bytes.
+The old easy-case diagnostic grows slightly; warm replay and the in-memory pilot
+retain runtime regressions. Native memory and full-corpus peak are unmeasured.
+
+All 312 Python tests pass (25.12 s), including exhaustive branch fibers, model
+lifting, terminal/component priority, invalid/missing reasons and transport,
+cold corruption and coexistence. Seven new and five prior archives replay
+unchanged; every mode retains the same 4,034 solver residuals. The Lean build and
+audit remain at 4,087 declarations / 1,946 theorem declarations.
+
+No new cases close. The shortest-clause policy still has 107 non-tiny misses,
+and all measured policies miss the 32 fresh 20/32-variable 3-CNFs. Its remaining
+payload is chiefly unresolved CNFs and OR alternatives. Next investigate bounded
+unit-conflict probing on binary-rich conditioned residuals, using checked
+refutations to justify forced values. Charge probes even when they consume no
+branching depth, retain failures, and compare against the existing policies.
+Repeated recognition is a supporting cost, not a reason to omit validation.

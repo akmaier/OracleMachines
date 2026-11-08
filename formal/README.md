@@ -1218,3 +1218,13 @@ the existing Lean build/audit pass. The [comparison](../experiments/results/cnf-
 records coverage gains alongside larger state, lower graph reuse and cases lost
 relative to combined unit/pure processing. Neither a better branch score nor
 fewer attempted branches proves a smaller exact decomposition for every CNF.
+
+The fused conditioning/closure edge composes the existing exact Boolean split
+with the existential simplification argument. Its Python checker reconstructs
+the intermediate restriction, verifies forced reasons and any global pure
+rounds, composes variable transport and checks lifted parent models. These
+executable checks and exhaustive branch-fiber tests do not constitute a Lean
+refinement of the new edge format. All 312 Python tests and the unchanged Lean
+build/audit pass. The [matched representation study](../experiments/results/cnf-fused-conditioning/README.md)
+preserves all old plans and unresolved cases while reducing retained intermediate
+state; it adds no theorem about uniformly polynomial arbitrary-SAT acquisition.

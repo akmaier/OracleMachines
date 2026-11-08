@@ -69,6 +69,13 @@ optional. The next target is duplicated intermediate state: conditioning and
 forced-unit closure currently acquire separate full residuals. All fresh
 20/32-variable 3-CNFs remain unresolved in this bounded discovery experiment.
 
+The [fused-edge implementation](experiments/results/cnf-fused-conditioning/README.md)
+now stores conditioning and its checked simplification together, preserving every
+branching plan and coverage result. On the shortest-clause policy, total measured
+time falls from 21.17 to 17.64 s and SQLite from 96.91 to 65.57 MB. Targeted Python
+allocation also falls; regressions and measurement limits are retained. This
+reduces acquisition overhead while leaving the discovery gap unchanged.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

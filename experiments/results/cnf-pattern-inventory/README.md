@@ -137,8 +137,8 @@ overlapping supports is independently rejected. The five final archives contain
 per archive. All replay with unchanged bytes and no new solving. All five
 preserved initial archives also pass the stronger final checker.
 
-No new Lean theorem is asserted. `Residuals.satisfiable_split` supplies the
-existing semantic conditioning identity; this Python planner, its recognition,
+No new Lean theorem is asserted. `satisfiable_split` in `Residuals.lean` supplies
+the existing semantic conditioning identity; this Python planner, its recognition,
 source bindings and SQL are outside that refinement. Finite semantic coverage,
 bounded discovery and cheap prepared-state reuse remain distinct from uniform
 polynomial acquisition and compact closure for arbitrary SAT.

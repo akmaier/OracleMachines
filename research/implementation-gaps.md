@@ -2807,3 +2807,12 @@ Evaluate the same recognizer on all unresolved inputs and variants, and retain
 zero or negative results on random CNFs. Raising conditioning depth alone is
 not the chosen next step. General efficient discovery, compact closure and
 polynomial arbitrary-CNF acquisition remain open.
+
+Implementation and evidence checkpoint `c1f39a0` is pushed. The manuscript's
+Section 12.44 now records the classifier, elementary direct-parity argument,
+exact recomposition checks, coverage gains, overhead and retained unresolved
+cases. The Lean build passes unchanged (4,083 declarations / 1,943 theorem
+declarations); no new implementation-refinement claim is made. All 45 prior
+proof blocks are preserved, with 164 unique labels. The 89-page PDF compiles
+without final warnings or box errors, and changed pages 81--82 were visually
+inspected. The next discovery target is persisted in both research priority files.

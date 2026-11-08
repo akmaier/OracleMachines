@@ -1165,3 +1165,11 @@ branching histories and bounded retries that reject conflicting older clauses.
 The [three-policy comparison](../experiments/results/cnf-budgeted-history/README.md)
 preserves losses as well as gains; the Lean audit remains 4,083 declarations /
 1,943 theorem declarations.
+
+The pattern inventory uses the existing conditioning identity in
+`Residuals.lean` to motivate its exact branch semantics. Its parity-encoding
+test, overlapping class profiles, component/source binding checker and persistent
+bounded planner are Python research code, not new Lean-refined operations.
+All 276 Python tests pass, including exhaustive tiny-source coverage and
+pointwise component/branch checks. The inventory adds no theorem that every
+reported category admits a compact or polynomial-time arbitrary-SAT solution.

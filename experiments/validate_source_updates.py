@@ -5,6 +5,7 @@ import gzip
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 import sys
 
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
@@ -16,11 +17,21 @@ def digest(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('directory',type=Path)
-    path=parser.parse_args().directory
+    parser.add_argument('--source-ref',help='Verify historical tracked sources from this git revision; report current binary separately')
+    args=parser.parse_args();path=args.directory
     metadata=json.loads((path/'metadata.json').read_text())
     assert digest(path/'inputs.json')==metadata['inputs_sha256']
+    binary='formal/.lake/build/bin/oracleSolver'
+    binary_matches=(ROOT/binary).is_file() and digest(ROOT/binary)==metadata['fingerprints'][binary]
     for name,expected in metadata['fingerprints'].items():
-        assert digest(ROOT/name)==expected,('Fingerprint differs',name)
+        if args.source_ref:
+            if name==binary:continue
+            raw=subprocess.check_output(['git','show',args.source_ref+':'+name],cwd=ROOT)
+            actual=hashlib.sha256(raw).hexdigest()
+        else:actual=digest(ROOT/name)
+        assert actual==expected,('Fingerprint differs',name)
+    # The imported summarizer must still be the one used by the frozen study.
+    assert digest(ROOT/'experiments/run_source_updates.py')==metadata['fingerprints']['experiments/run_source_updates.py']
     cases=json.loads((path/'inputs.json').read_text())
     local_checks=0
     for case in cases:
@@ -62,10 +73,17 @@ def main():
     assert digest(pilot/'inputs.json')==digest(path/'inputs.json')
     pilot_meta=json.loads((pilot/'metadata.json').read_text())
     assert digest(pilot/'run_source_updates.py')==pilot_meta['fingerprints']['experiments/run_source_updates.py']
-    print(json.dumps(dict(runs=len(runs),queries=summary['planned'],correct=summary['completed'],
+    result=dict(runs=len(runs),queries=summary['planned'],correct=summary['completed'],
         local_bijection_checks=local_checks,unsat=sum(not q['result']['answer'] for r in runs for q in r['records']),
-        fingerprints=len(metadata['fingerprints']),valid_rss_samples=summary['valid_rss_samples'],
-        rss_misses=summary['rss_misses'],pilot_inputs_identical=True,source_update_bounds_passed=True),indent=2))
+        fingerprints=len(metadata['fingerprints'])-int(bool(args.source_ref)),valid_rss_samples=summary['valid_rss_samples'],
+        rss_misses=summary['rss_misses'],pilot_inputs_identical=True,source_update_bounds_passed=True)
+    if args.source_ref:
+        result.update(historical_source_ref=args.source_ref,
+            historical_source_fingerprints_verified=len(metadata['fingerprints'])-1,
+            current_binary_matches_artifact=binary_matches,
+            historical_binary_verified=False,
+            note='Historical source and recorded-data validation; no historical executable rerun.')
+    print(json.dumps(result,indent=2))
 
 
 if __name__=='__main__':main()

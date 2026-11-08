@@ -320,7 +320,8 @@ branches and source bindings checked again after restart.
 `source_cnf` preserves the actual clauses in a balanced tree alongside their
 checked relations. A local edit replaces an edge's entire clause bucket; an
 empty bucket deletes its clauses. The supplied disjoint ordered variable
-partition stays fixed, with one to four variables per block. Every clause must
+partition stays fixed, with a supplied width from one to four and at most that
+many variables per block. Every clause must
 fit in one block or two neighboring blocks. There is no decomposition discovery
 or unrestricted-SAT width guarantee.
 
@@ -366,3 +367,15 @@ repeated list scans while retaining the full evidence traversal. Initialization
 failures now close their database handles, and the two test-owned connection
 leaks are fixed. **144 tests pass without resource warnings**; the current Lean
 audit covers **2,290 declarations / 1,113 theorem declarations**.
+
+The latest live archive holds **4,970 results / 1,548 refutations**, with all older
+rows preserved. The [context and upgrade report](experiments/results/context-index/README.md)
+records the diagnostics and checked source adoption. To revalidate the earlier
+source-study records after updating the solver, use:
+
+```sh
+python3 experiments/validate_source_updates.py experiments/results/source-updates --source-ref f29aef0
+```
+
+This checks historical source fingerprints and recorded evidence; it reports the
+current binary separately and does not claim to rerun the historical executable.

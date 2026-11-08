@@ -37,6 +37,14 @@ def main():
         report['before']=service.stats()
         report['revalidation']=service.revalidate()
         report['audit']=service.audit()
+        previous_sources=[r[0] for r in service.db.execute(
+            'SELECT DISTINCT id FROM source_states WHERE engine!=? ORDER BY id',(service.engine_id,))]
+        report['previous_source_versions']=[]
+        for state in previous_sources:
+            checked=service.source_cnf(base=state)
+            report['previous_source_versions'].append(dict(state=state,answer=checked['answer'],
+                revalidated_source=checked['revalidated_source'],
+                native_definitions=checked['source_updates']['native_definitions']))
         first=service.source_cnf(1,clauses,layers)
         versions.append(dict(kind='initial',state=first['state'],expected=True))
         edit=service.source_cnf(base=first['state'],replace={3:[[4],[-5]]})

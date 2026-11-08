@@ -2,6 +2,7 @@ import OracleMachines.FragmentProtocol
 import OracleMachines.ChainProtocol
 import OracleMachines.LayeredSource
 import OracleMachines.SourceUpdates
+import OracleMachines.AffineProtocol
 import OracleMachines.Cache
 import OracleMachines.Parsing
 import OracleMachines.BoundedSearch
@@ -250,6 +251,7 @@ def main : IO Unit := do
   let mut chains : OracleMachines.Chain.Store := {}
   let mut layers : OracleMachines.Layered.Store := {}
   let mut sourceLayers : OracleMachines.SourceUpdates.Store := {}
+  let mut affineStates : OracleMachines.Affine.Store := {}
   let mut negatives : Std.HashMap String Formula := {}
   repeat
     let line ← stdin.getLine
@@ -259,7 +261,15 @@ def main : IO Unit := do
       | .error e => pure (.error e)
       | .ok request =>
         let mode := (request.getObjValAs? String "mode").toOption.getD ""
-        if mode == "source_init" then
+        if mode == "affine_init" || mode == "affine_append" then
+          match OracleMachines.Affine.define affineStates request with
+          | .error e => pure (.error e)
+          | .ok (state,response) => affineStates := state; pure (.ok response)
+        else if mode == "affine_query" then
+          pure (OracleMachines.Affine.query affineStates request)
+        else if mode == "affine_reset" then
+          affineStates := {}; pure (.ok (Json.mkObj [("valid",toJson true)]))
+        else if mode == "source_init" then
           match OracleMachines.SourceUpdates.initializeLayout sourceLayers request with
           | .error e => pure (.error e)
           | .ok (state, response) => sourceLayers := state; pure (.ok response)

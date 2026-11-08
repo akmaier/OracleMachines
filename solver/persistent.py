@@ -35,6 +35,7 @@ from solver.interfaces import InterfaceSolver
 from solver.chain import ChainSolver
 from solver.layered import LayeredSolver
 from solver.source_updates import SourceSolver
+from solver.affine_growth import AffineGrowth
 from copy import deepcopy
 from solver.routing import Router
 DEFAULT_ENGINE = ROOT / "formal/.lake/build/bin/oracleSolver"
@@ -178,6 +179,7 @@ class PersistentSolver:
                 ChainSolver.create(self.db)
                 LayeredSolver.create(self.db)
                 SourceSolver.create(self.db)
+                AffineGrowth.create(self.db)
                 self.db.execute("PRAGMA user_version=8")
             self.process: subprocess.Popen | None = None
             self.chains = ChainSolver(self)
@@ -731,6 +733,41 @@ class PersistentSolver:
             self.last_metrics=self._ledger.finish()
             if isinstance(error,sqlite3.Error) and getattr(error,"sqlite_errorcode",None)==sqlite3.SQLITE_FULL:
                 raise BudgetExceeded("Chain archive cap reached; previous versions retained") from error
+            raise
+        finally:
+            self.db.set_progress_handler(None,0)
+            self._ledger=self._deadline=None
+
+    def affine_grow(self,width=None,equations=None,*,base=None,summary=False):
+        """Append a fresh affine block, or query a saved version.
+
+        Each equation has 2*width Boolean coefficients (old then fresh block)
+        and a Boolean rhs. None queries; [] appends an unconstrained block.
+        Original equation batches and all old versions remain persistent.
+        """
+        if self._ledger is not None:raise RuntimeError('Concurrent query')
+        self._ledger,self._deadline=Ledger(),Deadline(self.query_timeout)
+        try:
+            self._database_budget()
+            self.db.set_progress_handler(lambda:int(time.monotonic()>=self._deadline.end),1000)
+            with self._phase('affine_input'):
+                payload=dict(width=width,equations=equations,base=base,summary=summary)
+                input_bytes=len(json.dumps(payload).encode())
+                if input_bytes>self.max_input_bytes:raise BudgetExceeded('Affine request exceeds input cap')
+                equations=deepcopy(equations)
+                if not hasattr(self,'affine_growth'):self.affine_growth=AffineGrowth(self)
+            with self._phase('affine_update'):
+                result=self.affine_growth.run(width,equations,base,summary)
+            result['affine_updates']['input_bytes']=input_bytes
+            with self._phase('storage_accounting'):result['storage']=self.archive_usage()
+            self.last_metrics=self._ledger.finish();result.update(self.last_metrics)
+            return result
+        except BaseException as error:
+            self.last_metrics=self._ledger.finish()
+            if hasattr(self,'affine_growth'):
+                self.affine_growth.verified.clear();self.affine_growth.worker=None
+            if isinstance(error,sqlite3.Error) and getattr(error,'sqlite_errorcode',None)==sqlite3.SQLITE_FULL:
+                raise BudgetExceeded('Affine archive cap reached; previous versions retained') from error
             raise
         finally:
             self.db.set_progress_handler(None,0)

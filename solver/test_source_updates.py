@@ -17,6 +17,62 @@ def sat(clauses,n):
 
 
 class SourceUpdateTests(unittest.TestCase):
+    def test_native_paired_store_failed_eviction_batches_are_atomic(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            s._request(dict(mode='source_init',id='paired',width=1,layers=[[1],[2],[3]]))
+            leaves=[dict(id=f'leaf-{i}',layout='paired',width=1,start=i,height=0,mask=15,clauses=[])
+                    for i in range(2)]
+            root=dict(id='root',layout='paired',width=1,start=0,height=1,left='leaf-0',right='leaf-1',mask=15)
+            s._request(dict(mode='source_define',nodes=leaves+[root]))
+            for ids,error in ((['root','missing'],'Unknown evicted'),(['root','root'],'Unknown evicted'),
+                              (['leaf-0'],'referenced')):
+                with self.assertRaisesRegex(ValueError,error):
+                    s._request(dict(mode='source_drop',ids=ids))
+                self.assertTrue(s._request(dict(mode='source_query',root='root',witness=True))['answer'])
+                # A failed parent-first batch must restore incoming counts as
+                # well as both maps; otherwise this child could be removed.
+                with self.assertRaisesRegex(ValueError,'referenced'):
+                    s._request(dict(mode='source_drop',ids=['leaf-1']))
+            self.assertEqual(s._request(dict(mode='source_drop',ids=['root','leaf-0','leaf-1']))['evicted'],3)
+            with self.assertRaisesRegex(ValueError,'Unknown source root'):
+                s._request(dict(mode='source_query',root='root',witness=False))
+
+    def test_native_paired_store_reused_names_bind_new_original_clauses(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            s._request(dict(mode='source_init',id='reuse',width=1,layers=[[1],[2],[3]]))
+            first=dict(id='leaf',layout='reuse',width=1,start=0,height=0,mask=15,clauses=[])
+            other=dict(first,id='other-leaf',clauses=[[1,-1],[1,-1]])
+            last=dict(first,id='last',start=1)
+            root=dict(id='root',layout='reuse',width=1,start=0,height=1,left='leaf',right='last',mask=15)
+            other_root=dict(root,id='other-root',left='other-leaf')
+            s._request(dict(mode='source_define',nodes=[first,other,last,root,other_root]))
+            s._request(dict(mode='source_drop',ids=['root','leaf']))
+            with self.assertRaisesRegex(ValueError,'referenced'):
+                s._request(dict(mode='source_drop',ids=['last']))
+            self.assertTrue(s._request(dict(mode='source_query',root='other-root',witness=True))['answer'])
+            replacement=dict(first,clauses=[[],[]],mask=0)
+            defined=s._request(dict(mode='source_define',nodes=[replacement,dict(root,mask=0)]))
+            self.assertEqual(defined['original_clause_entries'],2)
+            self.assertFalse(s._request(dict(mode='source_query',root='root',witness=True))['answer'])
+            # Equal relation masks do not identify original clause arrays.
+            with self.assertRaisesRegex(ValueError,'Original source clauses differ'):
+                s._request(dict(mode='source_bind',root='other-root',width=1,layers=[[1],[2],[3]],clauses=[],witness=False))
+            bound=s._request(dict(mode='source_bind',root='root',width=1,layers=[[1],[2],[3]],clauses=[[],[]],witness=False))
+            self.assertFalse(bound['verdict']['answer'])
+
+    def test_native_metadata_decode_failure_rolls_back_paired_insertion(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            s._request(dict(mode='source_init',id='metadata',width=1,layers=[[1],[2]]))
+            first=dict(id='root',layout='metadata',width=1,start=0,height=0,mask=15,clauses=[])
+            for field in ('id','layout','width','start','height','clauses'):
+                bad=dict(first,id='bad');del bad[field]
+                with self.assertRaises(ValueError):
+                    s._request(dict(mode='source_define',nodes=[first,bad]))
+                with self.assertRaisesRegex(ValueError,'Unknown source root'):
+                    s._request(dict(mode='source_query',root='root',witness=False))
+            s._request(dict(mode='source_define',nodes=[first]))
+            self.assertTrue(s._request(dict(mode='source_query',root='root',witness=False))['answer'])
+
     def test_indexed_native_joins_require_consecutive_intervals(self):
         with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
             s._request(dict(mode='source_init',id='indexed',width=1,layers=[[101],[202],[303],[404]]))

@@ -18,10 +18,22 @@ def children (body : Json) : Except String (List String) := do
   if (← body.getObjValAs? Nat "height") == 0 then return []
   return [← body.getObjValAs? String "left", ← body.getObjValAs? String "right"]
 
-def Store.insert (store : Store) (id : String) (node : Json × CheckedTree) : Except String Store := do
-  let mut incoming := store.incoming
-  for child in ← children node.1 do
+def addReferences (counts : Std.HashMap String Nat) (body : Json) : Except String (Std.HashMap String Nat) := do
+  let mut incoming := counts
+  for child in ← children body do
     incoming := incoming.insert child (incoming[child]?.getD 0 + 1)
+  return incoming
+
+def removeReferences (counts : Std.HashMap String Nat) (body : Json) : Except String (Std.HashMap String Nat) := do
+  let mut incoming := counts
+  for child in ← children body do
+    let count := incoming[child]?.getD 0
+    if count == 0 then throw "Invalid native reference count"
+    incoming := incoming.insert child (count-1)
+  return incoming
+
+def Store.insert (store : Store) (id : String) (node : Json × CheckedTree) : Except String Store := do
+  let incoming ← addReferences store.incoming node.1
   return { nodes := store.nodes.insert id node, incoming := incoming }
 
 /-- Delete only unreferenced identities, in parent-before-child order. A surviving
@@ -33,11 +45,8 @@ def dropNodes (store : Store) (request : Json) : Except String (Store × Json) :
   for id in ids do
     let some node := out.nodes[id]? | throw "Unknown evicted node"
     if out.incoming[id]?.getD 0 != 0 then throw "Cannot evict a referenced node"
-    for child in ← children node.1 do
-      let count := out.incoming[child]?.getD 0
-      if count == 0 then throw "Invalid native reference count"
-      out := { out with incoming := out.incoming.insert child (count-1) }
-    out := { out with nodes := out.nodes.erase id, incoming := out.incoming.erase id }
+    let incoming ← removeReferences out.incoming node.1
+    out := { out with nodes := out.nodes.erase id, incoming := incoming.erase id }
   return (out, Json.mkObj [("valid",toJson true),("evicted",toJson ids.size)])
 
 /-- Retention changes availability, never the checked meaning of an identity.

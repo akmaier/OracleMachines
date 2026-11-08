@@ -33,6 +33,13 @@ def OriginalTree.clauses {layers : Array (Array Nat)} {width : Nat} :
   | _, _, .pad _ _ => []
   | _, _, .branch l r => l.clauses ++ r.clauses
 
+/-- Inspect only the root constructor; joins do not flatten their sources. -/
+def OriginalTree.rootClauses {layers : Array (Array Nat)} {width : Nat} :
+    {start h : Nat} → OriginalTree layers width start h → Option (Array (Array Int))
+  | _, _, .leaf _ clauses _ _ => some clauses
+  | _, _, .pad _ _ => some #[]
+  | _, _, .branch _ _ => none
+
 def OriginalTree.eval {layers : Array (Array Nat)} {width : Nat} :
     {start h : Nat} → OriginalTree layers width start h → (Nat → Bool) → Bool
   | _, _, .leaf _ clauses _ _, valuation => sourceCNFEval clauses valuation

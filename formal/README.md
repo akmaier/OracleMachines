@@ -673,10 +673,43 @@ regressions exercise rejected intervals, layout changes, definition-batch rollba
 duplicate registration, incompatible shared boundaries, payload counters, sparse
 IDs above 64 bits, empty/short blocks, local edits, old branches and restart.
 
-The next theorem must connect named JSON nodes and map lookups with these typed
-objects, then prove that `checkPatch` accepts exactly the requested original-clause
-replacement while preserving unedited buckets. Typed node semantics alone does
-not prove that a requested transition selects the right node. Reference counts,
-eviction, general factor row/equivalence caches, serialized replay, acceptance
-completeness and complete resource costs remain open. The new theorem applies
-to the supplied adjacent-block family and gives no unrestricted-SAT guarantee.
+The named-map part is extended by the following checkpoint. The theorem that a
+patch selects the requested successor remains open; typed node semantics alone
+does not establish it.
+
+## Paired native maps and decoded source metadata
+
+[`SourceStore.lean`](OracleMachines/SourceStore.lean) makes pointwise agreement a
+field of the native store. Both maps have the same keys, and the relation tree
+stored at each key is exactly the associated model's checked tree. `BodyMatches`
+also binds successful JSON getters for identity, layout, width, start and height
+to that model. At a logical or padding leaf it retains exact original clauses,
+including their order and repeated or empty entries. Branch payloads are not
+flattened or reparsed.
+
+| Declaration | Guarantee |
+| --- | --- |
+| `corresponds_empty`, `corresponds_insert`, `corresponds_erase` | Pointwise agreement survives initialization and paired updates. |
+| `Store.lookup_exact`, `Store.missing_exact` | A named relation lookup retrieves its matching original-source model; absence agrees. |
+| `Store.lookup_semantics` | A retrieved tree's decision is equivalent to satisfiability of its model's original clauses; a negative decision is equivalent to unsatisfiability. |
+
+Native registration retains equations from the actual field getters and uses
+these paired constructors. Source deletion erases both entries together. These
+proofs do not require a full-store scan. Parsed/header wrappers may allocate
+temporary values; proof fields erase, while decoding and comparisons remain
+runtime work. The existing reference-count loops are shared by the generic and
+source stores, with their previous underflow/reference checks. Their arithmetic
+is not covered by the new map invariant.
+
+Named child references, equality between serialized masks and stored summaries,
+dependency lifetime under eviction, exact requested-patch semantics and complete
+serialized replay remain separate obligations. So do Python/SQLite refinement,
+general factor row/equivalence caches, acceptance completeness and complete
+resource costs. The guarantee is for the supplied adjacent-block representation;
+it gives no unrestricted-SAT structural or coverage bound.
+
+At this checkpoint, **162 tests pass**, including 23 source-update tests. Lean
+audits **2,858 declarations / 1,367 theorem declarations** without admits or added
+axioms. New regressions cover atomic deletion failure, reference checks after
+rollback, shared descendants, safe name reuse, distinct original clauses with
+equal relations, and missing-field rollback.

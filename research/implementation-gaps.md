@@ -937,3 +937,55 @@ all 21 tables and all 166 earlier experiment files remains intact. The archive
 now contains 6,390 generic results and 2,064 refutations. Historical timing data
 remains tied to its original runtime. Resume with named-store correspondence and
 requested-patch refinement; do not repeat or weaken the now-typed interval proof.
+
+## Paired native maps and source metadata (8 November, fifth hourly follow-up)
+
+`SourceStore.lean` closes the pointwise named-map part of priority 1. The native
+context now contains one store carrying a proof that its relation and original
+model maps have the same keys. At each key the stored relation tree is exactly
+the model's checked tree. `BodyMatches` retains equations from the actual JSON
+getters for identity, layout, width, start and height. Logical and padding leaves
+also retain exact original-clause arrays, including order and duplicate/empty
+entries. This is root metadata and leaf payload correspondence, not a complete
+serialized graph theorem.
+
+Initialization, paired insertion and paired erasure construct the invariant.
+`lookup_exact` and `missing_exact` recover correspondence or matching absence at
+any key. `lookup_semantics` connects a retrieved tree's positive and negative
+decisions to satisfiability and unsatisfiability of its model's original clauses.
+Native registration and deletion now use these operations. The proof needs no
+store scan; parsed/header wrappers retain getter equations as erased proofs.
+Temporary runtime wrappers, parsing, comparisons and reference-map operations
+still cost work. No new timing, byte/RSS or complete machine-cost bound is claimed.
+
+The generic and source stores share the same increment/decrement loops, including
+underflow and referenced-node rejection. Refcount correctness is not assumed by
+the map proof, and remains a separate theorem. Failed functional batches expose
+no partial new state. New regressions check unknown/duplicate deletion midway
+through a batch, child-reference rejection after rollback, parent-before-child
+deletion, shared descendants, safe name reuse with different original clauses,
+equal relations with distinct provenance, and missing-field rollback.
+
+Remaining priorities:
+
+1. **Named child links and requested-patch refinement.** Relate decoded left/right
+   names and serialized masks to the actual typed children and summaries. Prove
+   dependency lifetime/identity stability under permitted store changes. Then
+   prove that `checkPatch` selects exactly the requested original-clause successor
+   and preserves unedited buckets. Root metadata and map agreement alone do not
+   prove this. `Store.insert` preserves correspondence even for replacement; the
+   current protocol separately rejects changed bodies under a live identity.
+2. **Native/Python reference counts and eviction**, including shared children,
+   failed batches, historical branches and replay. The new erase proof covers
+   paired map correspondence, not safety of dependency reclamation.
+3. **General factor row/equivalence-store refinement.** The adjacent-block proof
+   does not establish general factor-DAG or Python/SQLite invariants.
+4. **Complete restricted costs and acceptance specification**, including decoding,
+   header allocation, original payload retention, transport, archive and bit costs.
+5. **Compact general input, matched application evaluation and cost-sensitive
+   selection.** Hard total-resource and unrestricted-coverage guarantees remain open.
+
+Validation: all **162 tests pass**, including **23 source-update tests**, without
+resource warnings. Lean audits **2,858 declarations / 1,367 theorem declarations**
+without admits or added axioms. Archive revalidation and manuscript reconciliation
+follow this runtime checkpoint; the historical timing study remains unchanged.

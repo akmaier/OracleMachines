@@ -1,22 +1,27 @@
-import OracleMachines.SourceNodes
+import OracleMachines.SourceStore
 
 /-! Source-bearing nodes: provenance and relations use the same balanced tree.
 The partition is fixed within a version family. Local edits replace the clauses
 of one or more adjacent-block edges; an empty list deletes that edge's clauses.
 Every cached decision carries a proof of its original-source meaning. Layout,
 start and height index source nodes; joining preserves consecutive intervals.
-Flat-source grouping and complete initial binding carry proofs. Mutable identity
-lookup, requested-patch, JSON and persistence refinement remain separate. -/
+Flat-source grouping, complete binding and named-map/metadata correspondence
+carry proofs. Named child links, requested patches and persistence are separate. -/
 namespace OracleMachines.SourceUpdates
 open Lean OracleMachines.Layered
 open OracleMachines.SourceNodes
+open OracleMachines.SourceStore
 
 structure Context where
   id : String
   signature : Json
   layout : CompiledSource
-  nodes : OracleMachines.Layered.Store := {}
-  models : Std.HashMap String (CheckedNode layout.layers layout.width) := {}
+  checked : OracleMachines.SourceStore.Store id layout.layers layout.width := .empty id layout.layers layout.width
+
+def Context.nodes (context : Context) : OracleMachines.Layered.Store := context.checked.relations
+
+def Context.models (context : Context) : Std.HashMap String (CheckedNode context.layout.layers context.layout.width) :=
+  context.checked.models
 
 structure Store where
   context : Option Context := none
@@ -28,7 +33,7 @@ def initializeLayout (store : Store) (request : Json) : Except String (Store × 
   if let some old := store.context then
     if old.id == id && old.signature != body then throw "Source layout identity changed"
   let layout ← compileSource body
-  return (⟨some ⟨id,body,layout,{},{}⟩⟩,Json.mkObj [("valid",toJson true)])
+  return (⟨some ⟨id,body,layout,.empty id layout.layers layout.width⟩⟩,Json.mkObj [("valid",toJson true)])
 
 def compileEdge (layout : CompiledSource) (edge : Nat) (clauses : Array (Array Int)) :
     Except String (CheckedCNF layout.layers layout.width edge clauses) := do
@@ -61,28 +66,28 @@ def defineNodes (store : Store) (request : Json) : Except String (Store × Json)
   let layout := context.layout
   let nodes ← request.getObjValAs? (Array Json) "nodes"
   if nodes.size > 128 then throw "Source definition batch exceeds capacity"
-  let mut out := context.nodes
-  let mut models := context.models
+  let mut out := context.checked
   let mut cells := 0
   let mut tests := 0
   let mut sourceNodes := 0
   let mut originalClauses := 0
   let mut originalLiterals := 0
   for body in nodes do
-    let id ← body.getObjValAs? String "id"
-    if let some old := out.nodes[id]? then
+    let name ← readParsed String body "id"
+    let id := name.value
+    if let some old := out.relations.nodes[id]? then
       if old.1 != body then throw "Source node identity changed"
     else
-      if out.nodes.size ≥ 200000 then throw "Native source store capacity exceeded"
-      if (← body.getObjValAs? String "layout") != context.id then throw "Source layout mismatch"
-      if (← body.getObjValAs? Nat "width") != layout.width then throw "Source width mismatch"
-      let start ← body.getObjValAs? Nat "start"
-      let height ← body.getObjValAs? Nat "height"
+      if out.relations.nodes.size ≥ 200000 then throw "Native source store capacity exceeded"
+      let header ← readHeader context.id layout.width body name
+      let start := header.start
+      let height := header.height
       if height > 16 || start ≥ 65536 then throw "Source node range exceeds capacity"
       let mask ← body.getObjValAs? Nat "mask"
       if mask ≥ 2^((2^layout.width)^2) then throw "Source mask exceeds width"
-      let checked ← if height == 0 then do
-        let clauses ← body.getObjValAs? (Array (Array Int)) "clauses"
+      let checked ← if zero : height = 0 then do
+        let original ← readParsed (Array (Array Int)) body "clauses"
+        let clauses := original.value
         if inside : start < layout.layers.size-1 then
           let translated ← compileEdge layout start clauses
           let localCNF := translated.localCNF
@@ -91,43 +96,54 @@ def defineNodes (store : Store) (request : Json) : Except String (Store × Json)
           originalClauses := originalClauses + clauses.size
           originalLiterals := originalLiterals + (clauses.toList.map Array.size).sum
           if same : relationEqual (maskRelation layout.width mask) (compileLocal layout.width localCNF) then
-            pure (checkedLeaf start clauses inside translated (maskRelation layout.width mask)
-              ((relationEqual_exact _ _).mp same))
+            let model := checkedLeaf start clauses inside translated (maskRelation layout.width mask)
+              ((relationEqual_exact _ _).mp same)
+            pure (bindHeader header model rfl zero.symm (by
+              intro payload root
+              have equal : clauses = payload := by simpa [model,checkedLeaf,OriginalTree.rootClauses] using root
+              exact original.exact.trans (congrArg Except.ok equal)))
           else throw "Source leaf mask does not match clauses"
         else
-          if !clauses.isEmpty then throw "Source padding must be empty"
+          let empty ← expectEqual clauses #[] "Source padding must be empty"
           if same : relationEqual (maskRelation layout.width mask) identity then
-            pure (checkedPad start (by omega) (maskRelation layout.width mask)
-              ((relationEqual_exact _ _).mp same))
+            let model := checkedPad (layers := layout.layers) start (by omega) (maskRelation layout.width mask)
+              ((relationEqual_exact _ _).mp same)
+            pure (bindHeader header model rfl zero.symm (by
+              intro payload root
+              have equal : (#[] : Array (Array Int)) = payload := by simpa [model,checkedPad,OriginalTree.rootClauses] using root
+              exact original.exact.trans (congrArg Except.ok (empty.down.trans equal))))
           else throw "Source padding must be identity"
       else do
         let left ← body.getObjValAs? String "left"
         let right ← body.getObjValAs? String "right"
-        let some ca := models[left]? | throw "Missing left source invariant"
-        let some cb := models[right]? | throw "Missing right source invariant"
-        if ca.start != start then throw "Source children do not cover consecutive edges"
+        let some ca := out.models[left]? | throw "Missing left source invariant"
+        let some cb := out.models[right]? | throw "Missing right source invariant"
+        let location ← expectEqual ca.start start "Source children do not cover consecutive edges"
         if h : cb.height = ca.height then
           if consecutive : cb.start = ca.start+2^ca.height then
             let joined := checkedJoin ca cb h consecutive
-            if height != joined.height then throw "Unbalanced source node"
+            let level ← expectEqual height joined.height "Unbalanced source node"
             if !relationEqual (maskRelation layout.width mask) joined.tree.summary then throw "Incorrect source summary"
-            pure joined
+            pure (bindHeader header joined location.down level.down.symm (by
+              intro payload root
+              simp [joined,checkedJoin,OriginalTree.rootClauses] at root))
           else throw "Source children do not cover consecutive edges"
         else throw "Unbalanced source children"
-      out ← out.insert id (body,checked.checkedTree)
-      models := models.insert id checked
+      out ← out.insert id body checked.val checked.property
       sourceNodes := sourceNodes+1
-  return (⟨some {context with nodes := out,models := models}⟩,Json.mkObj [("valid",toJson true),
+  return (⟨some {context with checked := out}⟩,Json.mkObj [("valid",toJson true),
     ("source_cells",toJson cells),("literal_test_bound",toJson tests),
     ("original_source_nodes",toJson sourceNodes),("original_clause_entries",toJson originalClauses),
     ("original_literal_entries",toJson originalLiterals)])
 
 def dropNodes (store : Store) (request : Json) : Except String (Store × Json) := do
   let some context := store.context | throw "Source layout not initialized"
-  let (nodes,response) ← OracleMachines.Layered.dropNodes context.nodes request
   let ids ← request.getObjValAs? (Array String) "ids"
-  let models := ids.foldl (fun acc id => acc.erase id) context.models
-  return (⟨some {context with nodes := nodes,models := models}⟩,response)
+  if ids.size > 4096 then throw "Eviction batch exceeds capacity"
+  let mut out := context.checked
+  for id in ids do out ← out.erase id
+  return (⟨some {context with checked := out}⟩,
+    Json.mkObj [("valid",toJson true),("evicted",toJson ids.size)])
 
 def query (store : Store) (request : Json) : Except String Json := do
   let some context := store.context | throw "Source layout not initialized"

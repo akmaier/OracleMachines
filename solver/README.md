@@ -587,8 +587,19 @@ Source-version nodes now retain original clauses and their translation proofs in
 a tree indexed by layout, width, start and height. Consecutive joins preserve this
 alignment; the executed decision has SAT/UNSAT theorems for the original clauses
 stored in that node. Warm decisions do not flatten or rescan those clauses.
-Replay uses the same checked constructors. Formal agreement between named JSON
-nodes, map entries and the requested patch is still a separate obligation.
+Replay uses the same checked constructors. `SourceStore.lean` now couples the
+relation and model maps with a pointwise proof: both contain the same identities,
+and each relation tree is exactly its model's checked tree. The decoded identity,
+layout, width, start, height and original leaf clauses agree with that model.
+Paired insertion and erasure preserve this proof without scanning the store.
+This does not yet prove that named child references select the typed children,
+that reference counts preserve their lifetime, or that a patch is the requested
+successor. Serialized replay and the Python/SQLite paths remain separate.
+
+Field parsing retains equality proofs and uses temporary header wrappers at
+registration. Proof fields erase; runtime parsing, comparisons and allocation
+still cost work. No whole-store validation pass is added to joins or queries,
+and no new speedup or complete native cost bound is claimed.
 
 `source_updates.original_source_nodes`, `original_clause_entries` and
 `original_literal_entries` report newly registered original-source nodes and

@@ -1156,3 +1156,12 @@ The full Python suite now passes 261 tests, including retained matching endpoint
 unit-guided alternating paths, non-unit rejection, invalid matching views and
 older-reader compatibility. The graph recognition, search and mutable Python
 cache surrounding persistent trie roots remain outside the formal refinement.
+
+The optional bounded equivalence retry changes discovery budgets only. Its
+records and independent checker are unchanged, so it reuses the same joint
+semantic lemmas without adding a theorem about policy optimality or runtime.
+All 268 Python tests pass, including cold checking with discovery disabled,
+branching histories and bounded retries that reject conflicting older clauses.
+The [three-policy comparison](../experiments/results/cnf-budgeted-history/README.md)
+preserves losses as well as gains; the Lean audit remains 4,083 declarations /
+1,943 theorem declarations.

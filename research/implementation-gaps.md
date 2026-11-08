@@ -2654,3 +2654,54 @@ successful larger matching stream (206.58 of 253.08 ms), so profile it before
 optimizing its cheap path search. Component extraction and coupling-guided path
 search have credible cross-category potential but need scaled evidence. General
 SAT acquisition, closure size and uniform polynomial expansion remain open.
+
+## 2026-11-08: bounded retry and the next measured bottleneck
+
+Implemented optional `BudgetedRepairHistory` over the unchanged matching engine.
+After ordinary failure it may retry only the first exhausted recognized base
+block, with min(32,768, 8*q) variable/posting visits, at most 8,192 variables and
+64-bit identifiers by default. It retains a reference to the existing tuple,
+charges all failed work and uses the unchanged independent joint checker and
+archive format. Discovery exhaustion never implies UNSAT. Completed rejections,
+matching paths and unrecognized structures do not receive this retry.
+
+The preserved [screening](../experiments/results/cnf-budget-screening/README.md)
+motivated a [27-case, three-policy comparison](../experiments/results/cnf-budgeted-history/README.md).
+At 1,024 variables, total operation time falls from 0.78490 to 0.05932 s,
+expansion from 739.17 to 13.29 ms, logical payload from 189,168 to 99,129 bytes,
+SQLite from 356,352 to 196,608 bytes and peak traced Python allocations from
+3,071,073 to 1,741,448 bytes. Bases fall from two to one. At 4,096 variables,
+total time falls from 11.88170 to 0.27261 s and expansion from 11.67323 to
+0.05553 s. These are single synthetic timings, with allocation tracing separate.
+The report charges preparation, failed discovery, checking, maintenance,
+serialization, persistence and fallback; input assembly and audits are separate.
+
+The simple alternative is important: globally raising the budget to 32,768
+is slightly faster on the successful chains and also solves dense controls that
+the targeted cap rejects. On 1,024 variables with 8,192 tautologies, the targeted
+policy still takes 0.89334 s with fallback, versus 0.11656 s for the raised
+policy. No expected-cost superiority or optimal budget claim is supported.
+The pinned 2,048-variable conflict pays 40.36 rather than 31.01 ms expansion
+because the extra check correctly rejects it. Cold final replay on the plain
+1,024-variable chain increases from 43.48 to 45.25 ms. The global/targeted
+tradeoff, caps and failures are retained, not hidden by the successful examples.
+
+All 268 Python tests pass, including 120 random branching additions, old-version
+count reconstruction, limits, disabled discovery, conflicts, rejected-operation
+immutability and older-reader replay. All 81 new archives (582 versions / 357
+residuals) and 74 preceding matching archives (1,414 versions / 608 residuals)
+validate through the previous matching reader with unchanged bytes and zero
+new expansions. The proposal policy adds no formal theorem: the existing Lean
+joint semantic rules remain the boundary; Python indexes and resource accounting
+are not refined by them. Source fingerprints match the recorded experiment.
+
+**Next target:** repeated-scan unit propagation. The new pinned 2,048-variable
+control spends 2.67 s in preparation. A separate in-memory cProfile run attributes
+8.778 of 8.939 instrumented seconds (about 98%) to `propagate` and its callees,
+with 16,779,261 charged literal visits for 8,189 source occurrences. Implement
+an occurrence-driven queue with independently checked reasons, charging setup,
+queue memory, conflicting/easy controls, fallback and cold replay. Preserve old
+certificates; no speedup is yet claimed for this unimplemented change. Thereafter
+address inert/dense postings and cost estimation, parity-preserving repair,
+mixed-component extraction and coupling-guided alternative paths. General SAT
+branching/closure and compact arbitrary-CNF representations remain open.

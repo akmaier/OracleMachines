@@ -82,6 +82,14 @@ to 0.424 MB. Over-budget recognized repairs, parity moves, mixed-base discovery
 and non-unit coupling conflicts remain explicit gaps. These restricted gains do
 not give a uniformly polynomial algorithm for arbitrary CNF.
 
+The [budget comparison](experiments/results/cnf-budgeted-history/README.md)
+adds an optional bounded retry for recognized equivalence moves. At 1,024
+variables it reduces acquisition/update time from 0.785 to 0.059 seconds and
+logical storage from 189,168 to 99,129 bytes. Simply raising the global budget
+is slightly faster on these chains and handles dense controls that the targeted
+cap misses; neither policy is established as optimal. Profiling identifies
+repeated full-source unit propagation as the next large preparation cost.
+
 The current draft is **Bounded-Domain SAT, Compiled Knowledge, and Amortized
 Reasoning: A perspective on resource accounting for learned reasoning**.
 

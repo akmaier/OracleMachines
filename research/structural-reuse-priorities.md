@@ -1,21 +1,30 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-08 after retained matching-state repair. This is the working
+Updated 2026-11-08 after bounded equivalence retry and preparation profiling. This is the working
 record for the hourly investigation. Start here; consult
 [implementation history](implementation-gaps.md) and
 [resource bounds](resource-bounds.md) for details. The ranking below is provisional:
 we have useful matched synthetic controls, but no representative mixture of SAT
 workloads from which to infer a single globally dominant cost.
 
-**Next research experiment:** measure cost-aware budget escalation for recognized
-large repairs. The 1,024-variable equivalence block is now the largest remaining
-avoidable single-case cost: 0.786 s, with about 0.741 s after preparation, because
-the default proposal budget rejects its known block move. Compare a separately
-charged larger budget or structural certificate against current fallback; keep
-limits on unstructured search and retain adverse high-degree cases. Do not infer
-that raising every budget improves total cost. Parity is the next measured
-multi-update reuse gap (32 fallbacks / 0.170 s / 326 KB). On successful matching
-streams, preparation now dominates: profile it before another optimization.
+**Next research experiment:** replace repeated full-CNF unit-propagation scans
+with an occurrence-driven queue and independently checked reasons. The new
+pinned 2,048-variable chain spends 2.67 s in preparation; a separate profile
+attributes about 98% of instrumented preparation to `propagate` and its callees.
+It charges 16,779,261 literal visits for 8,189 source occurrences. Compare cold
+acquisition and fallback across implications, mixed CNFs, contradictions and
+already easy cases; preserve old certificates and reason checking. The profile
+identifies the cost but does not establish a speedup for this proposed change.
+
+Bounded equivalence retry is implemented as an optional layer. At 1,024
+variables, total time falls from 0.78490 to 0.05932 s; at 4,096, from 11.88170
+to 0.27261 s. The matched raised-global-budget comparator is slightly faster
+on these chains and also solves dense controls that the targeted policy rejects.
+There is no evidence that targeted escalation has lower expected total cost.
+After propagation, investigate inert-posting compression/cost estimation on
+the dense 1,024-variable miss (0.893 s versus 0.117 s with a larger global
+budget). Parity remains the next repeated structural miss (32 fallbacks /
+0.175 s / 326 KB). Successful matching preparation remains another profile target.
 
 Matching repair is implemented. It removes all 80 old matching misses and keeps
 the equivalence gains. The larger 32-block, 8-choice case falls from 8.303 s /
@@ -32,8 +41,9 @@ their capabilities are not already integrated into one verified general solver.
 | Workload regime | Current costly work and evidence | Most promising investigation |
 | --- | --- | --- |
 | A local change needs several variables to move together | Equivalence blocks and matching paths now repair successfully. The 32-block, 8-choice matching case falls from 8.303 s / 20.33 MB / 33 bases to 0.253 s / 0.424 MB / one base. The original 40 parity misses remain. | Parity-preserving directions; component-local discovery and proposal search guided by coupling conflicts. |
-| Recognized equivalence repairs succeed | On the largest chain, 45.55 ms of the 66.76 ms total is initial preparation. Every block member and internal posting is still visited; a 1,024-variable block exceeds the default discovery budget and falls back. | Shared group assignments/certificates and affected interfaces, with cold reconstruction and count invariants maintained. |
-| A recognized move exceeds the fixed budget | The 1,024-variable chain takes 0.786 s, including 0.741 s after preparation, and retains another base. The failed budgeted proposal supplies no verdict. | Measure bounded escalation based on known structure and estimated checking cost; compare against fallback and retain losses. |
+| Unit implications activate in an unfavorable scan order | The pinned 2,048-variable chain takes 2.67 s to prepare. About 98% of a separate instrumented preparation is in propagation; 16.78 million charged literal visits for 8,189 source occurrences. | First priority: queue newly forced values and update affected occurrences; preserve independently checked reason traces. |
+| Recognized equivalence repairs succeed | Optional bounded retry reduces the 4,096-variable chain from 11.882 to 0.273 s, including 0.217 s preparation. Every moved member/posting is still visited. | Shared group assignments/certificates and affected interfaces, with cold reconstruction and count invariants maintained. |
+| A recognized move exceeds the fixed budget | Retry removes the ordinary-chain miss. Dense 1,024-variable control still takes 0.893 s with fallback, versus 0.117 s at global budget 32,768. A contradictory block incurs 40.36 rather than 31.01 ms expansion. | Compress inert postings and improve cost estimates; retain both extra-work losses and missed savings. No optimal budget policy established. |
 | Matching moves succeed | At 32 blocks of 8 choices, initial preparation is 206.58 of 253.08 ms. A warm move changes four indicators, visits 32 postings per pass and allocates 439 trie nodes. Cold final replay is slightly slower. | Profile base preparation and cold checking; do not optimize two-edge path search while initialization dominates. |
 | A small update defeats pure model reuse | New affected-clause repair removes all 32 original-control fallbacks. On matching size 16 / 128 protected flips it reduces operation time from 3.478 s to 0.147 s and logical payload from 12.46 MB to 0.158 MB. | Keep these gains while avoiding unnecessary index preparation; shared source/dependencies remain needed on genuine fallback. |
 | A general residual escapes tractable recognizers | Branching creates distinct residuals; each is normalized, checked and persisted. There is no polynomial bound on their number. Existing matching recognition reduced one restricted example from 5,191 residuals to one. | Expose tractable components and small interfaces before branching; preserve useful state when a component changes class. |
@@ -47,6 +57,7 @@ Evidence: [matched repair comparison](../experiments/results/cnf-repair-history/
 [affected-clause comparison](../experiments/results/cnf-affected-history/README.md),
 [joint equivalence comparison](../experiments/results/cnf-equivalence-history/README.md),
 [retained matching comparison](../experiments/results/cnf-matching-history/README.md),
+[bounded budget comparison and preparation profile](../experiments/results/cnf-budgeted-history/README.md),
 [coordinated-change diagnostic](../experiments/results/structured-repair-gaps/README.md),
 [new diagnostic profiles](evidence/2026-11-08/reuse-cost-profile/README.md),
 [general-CNF investigation](arbitrary-sat-expansion.md). Times are individual
@@ -80,6 +91,19 @@ experiment above, run it. Reorder the priorities when measurements justify it.
 
 ## Ranked gaps across SAT categories
 
+### 0. Avoid repeated scans when acquiring a model
+
+The newest profile moves this concrete implementation cost ahead of further
+structural discovery. A pinned equivalence chain of 2,048 variables takes about
+2.67 s to acquire; propagation accounts for about 98% of a separate profiled
+run. Retain forced assignments, queue newly assigned literals and visit their
+affected occurrences instead of rescanning the whole CNF. This applies before
+the tractable-family recognizers and on genuine fallback across categories.
+Maintain a reason trace accepted by the existing independent verifier; compare
+final decisions and witnesses rather than assuming the old propagation order.
+Charge occurrence construction, queue storage, contradictions and cold replay.
+Do not infer that removing repeated scans removes general SAT branching.
+
 ### 1. Reuse coordinated structural changes
 
 The preceding one-variable repair was too narrow even on easy subclasses. The
@@ -108,8 +132,8 @@ The generic joint record contains a changed-variable list, not trusted structura
 claims. The matching adapter now supplies automatically discovered moves to it;
 nullspace discovery remains open. Initial binary-pair discovery is cached
 per base and invoked only after scalar failure; additions do not enlarge the
-discovered blocks. Nonpaired implication cycles, new equalities and over-budget
-blocks are retained failures. A corrected signed benchmark forces 32 actual
+discovered blocks. Nonpaired implication cycles, new equalities and blocks beyond
+the optional retry's size/density/identifier limits remain failures. A corrected signed benchmark forces 32 actual
 repairs; the initial already-compatible signed control remains archived.
 
 **Implementation obligations:** aggregate all true-literal count changes before

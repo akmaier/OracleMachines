@@ -640,3 +640,56 @@ multiplicities, source handling dominates much of already-reused work, novel
 batches still pay elimination, and database telemetry/indexes dominate much of
 the current retained file. We should keep these separate when selecting the
 next optimization rather than assigning one universal bottleneck.
+
+## 11. Bounded retry of recognized equivalence repairs
+
+The optional `BudgetedRepairHistory` runs the preceding pipeline first. After
+failure, it retries at most the first exhausted proposal that is exactly a cached
+base-equivalence block. Completed rejections and matching proposals do not qualify.
+For block size q, the extra proposal allowance is
+
+    B = min(escalation_budget, 8*q),
+
+with defaults escalation_budget=32,768, q<=8,192 and variable-ID length b<=64.
+The sorted block's final ID gives its maximum bit length. Size/identifier refusal
+does not inspect postings. A zero ordinary or escalation budget disables retry.
+The multiplier is a heuristic, not an estimated optimum or a guarantee of saving.
+The globally raised-budget comparator is faster on several retained cases.
+
+Let q' variables and R' postings actually be visited in the retry, with A'
+distinct affected clauses aggregated. Discovery satisfies q'+R'<=B, and uses
+O(q'*b + R' + A'*log(m+2)) trie-node/posting work, apart from dictionary work,
+integer arithmetic and allocation. The A' term accounts for checking completed
+count differences; an incomplete aggregation is discarded. The temporary map
+has O(A') entries. Prior failed work is additional and remains charged. The policy
+retains one reference to an existing block tuple, not another full assignment.
+It does not reuse the partial aggregate of the earlier exhausted attempt.
+
+Success still requires the full independent check and index maintenance from
+Section 9, including q assignment updates and a q-identifier durable move list.
+No record format or persistent base/index structure is added by the budget policy.
+The changed historical paths remain retained as before. The visit budget does
+not cap recognition, cold parent reconstruction, checking, integer-bit operations,
+serialization, SQL, or failed materialize-and-solve fallback. It is not a hard
+time or byte bound on the full request.
+
+For a plain q-variable equivalence chain, R=4q-4, so the complete proposal needs
+5q-4 visits. At q=1,024 this is 5,116: the retry succeeds after the original
+4,096 visits were already spent. Discovery and checking both visit internal
+clauses, although their net count changes are zero. Additional clauses can make
+R much larger or block the move. The dense 1,024-variable control exhausts its
+8,192-visit retry and still falls back; a global budget of 32,768 succeeds.
+
+Measured total time at 1,024 variables falls from 0.78490 to 0.05932 s, logical
+payload from 189,168 to 99,129 bytes, and peak traced Python memory from 3,071,073
+to 1,741,448 bytes. Cold final replay increases from 43.48 to 45.25 ms. A pinned
+2,048-variable contradiction instead pays 40.36 rather than 31.01 ms expansion.
+These single samples and all comparison policies are preserved in the
+[budget study](../experiments/results/cnf-budgeted-history/README.md).
+
+The same study identifies a separate preparation cost: repeated-scan propagation
+takes 16,779,261 charged literal visits on an 8,189-occurrence pinned chain.
+The existing scan engine has an O((v+1)*L) literal-visit envelope, where v is
+the number of variables and L the CNF literal payload. It can revisit essentially
+the whole source after each newly forced value. An occurrence-driven propagation
+queue is the next proposed improvement; it has not yet replaced that engine.

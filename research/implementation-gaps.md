@@ -764,7 +764,7 @@ all 21 tables and all 142 prior experiment files is preserved. The archive now
 contains 5,325 generic results and 1,677 refutations. Historical timing results
 remain tied to their original runtime; this checkpoint has no new timing study.
 
-## Complete source grouping and path semantics (next checkpoint)
+## Complete source grouping and path semantics (8 November)
 
 `SourceGrouping.lean` closes the global flat-CNF grouping part of the preceding
 priority. `GroupedCNF` contains both original and translated buckets, fixed edge
@@ -812,4 +812,10 @@ The new checks cover all 11,680 complete assignments of 60 generated global CNFs
 exact bucket contents and occurrence counts, and service decisions/witnesses.
 They include individually nonempty relations with no common path, repeated empty
 clauses, final-block units, the 65,537-block cap and 12,000 repeated clauses.
-Archive revalidation and manuscript evidence are recorded in the next checkpoint.
+Runtime checkpoint `75483cd` is committed and pushed. The manuscript and the
+[grouping verification record](../experiments/results/source-grouping/README.md)
+include archive revalidation: all 355 distinct generic inputs pass semantic audit;
+all five old source versions pass current-engine adoption and restart. Every old
+row in all 21 tables and all 150 earlier experiment files is preserved. There
+are now 5,680 generic results and 1,806 refutations. Historical timing evidence
+remains unchanged and tied to its original runtime.

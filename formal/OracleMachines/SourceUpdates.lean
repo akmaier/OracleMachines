@@ -4,7 +4,8 @@ import OracleMachines.SourceInvariant
 The partition is fixed within a version family. Local edits replace the clauses
 of one or more adjacent-block edges; an empty list deletes that edge's clauses.
 Every cached decision carries a proof of its current local-source meaning.
-The JSON/partition and persistence refinement obligations remain separate. -/
+Variable positions and local CNF translation also carry original-source proofs.
+JSON/global grouping and persistence refinement obligations remain separate. -/
 namespace OracleMachines.SourceUpdates
 open Lean OracleMachines.Layered
 open OracleMachines.SourceInvariant
@@ -24,22 +25,14 @@ def initializeLayout (store : Store) (request : Json) : Except String (Store × 
   return (⟨some (id,body,layout),{},{}⟩,Json.mkObj [("valid",toJson true)])
 
 def compileEdge (layout : CompiledSource) (edge : Nat) (clauses : Array (Array Int)) :
-    Except String LocalCNF := do
+    Except String (CheckedCNF layout.layers layout.width edge clauses) := do
   if edge ≥ layout.buckets.size then throw "Source edit outside logical edges"
   if clauses.size > 200000 then throw "Local source clause cap exceeded"
-  let mut out : LocalCNF := #[]
   let mut literals := 0
   for clause in clauses do
     literals := literals + clause.size
     if literals > 2000000 then throw "Local source literal cap exceeded"
-    let mut localClause := #[]
-    for lit in clause do
-      if lit == 0 then throw "Zero is not a literal"
-      let some (layer,slot) := layout.positions[lit.natAbs]? | throw "Source variable missing from blocks"
-      if layer != edge && layer != edge+1 then throw "Clause lies outside edited edge"
-      localClause := localClause.push (LocalLiteral.mk (decide (layer = edge+1)) slot (decide (lit > 0)))
-    out := out.push localClause
-  return out
+  translateCNF layout.positions edge clauses
 
 def compileEdges (store : Store) (request : Json) : Except String Json := do
   let some (_,_,layout) := store.layout | throw "Source layout not initialized"
@@ -50,8 +43,8 @@ def compileEdges (store : Store) (request : Json) : Except String Json := do
   for edit in edits do
     let edge ← edit.getObjValAs? Nat "edge"
     let clauses ← edit.getObjValAs? (Array (Array Int)) "clauses"
-    let localCNF ← compileEdge layout edge clauses
-    masks := masks.push (relationMask (compileLocal layout.width localCNF))
+    let checked ← compileEdge layout edge clauses
+    masks := masks.push (relationMask (compileLocal layout.width checked.localCNF))
     tests := tests + 1 + clauses.size + (clauses.toList.map Array.size).sum
   return Json.mkObj [("masks",toJson masks),("source_cells",toJson (edits.size*(2^layout.width)^2)),
     ("literal_test_bound",toJson (tests*(2^layout.width)^2))]
@@ -80,7 +73,8 @@ def defineNodes (store : Store) (request : Json) : Except String (Store × Json)
       let checked ← if height == 0 then do
         let clauses ← body.getObjValAs? (Array (Array Int)) "clauses"
         if start < layout.buckets.size then
-          let localCNF ← compileEdge layout start clauses
+          let translated ← compileEdge layout start clauses
+          let localCNF := translated.localCNF
           cells := cells + (2^layout.width)^2
           tests := tests + (1 + clauses.size + (clauses.toList.map Array.size).sum)*(2^layout.width)^2
           if same : relationEqual (maskRelation layout.width mask) (compileLocal layout.width localCNF) then

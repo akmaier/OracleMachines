@@ -432,8 +432,9 @@ blocks; each block has at most four variables. The native checker rejects
 missing/repeated variables and nonadjacent clauses. It recomputes compilation
 and compares every source edge and padding leaf against the checked tree before
 binding its answer to the source. Local clause semantics, sequence composition,
-and the mathematical source-binding implication are proved. Discovery of the
-partition, correctness of all JSON/array/hash-map orchestration, and a complete
+and the mathematical source-binding implication are proved. The follow-up below
+also proves the original-variable mapping and local CNF translation. Discovery of
+the partition, global clause grouping, JSON orchestration, and a complete
 source-API refinement theorem remain open. This is a restricted tractable family,
 not a compiler for unrestricted CNF with guaranteed bounded width.
 
@@ -472,9 +473,10 @@ queries use `CheckedSource.decide`; full witness requests additionally traverse
 and check their output. Python keeps both roots until patch checking succeeds,
 then native reference-count checks permit dependency-safe eviction.
 
-The invariant concerns local CNF meaning. A complete refinement from original
-global IDs and JSON, through the mutable maps, Python/SQLite, hashes and replay
-is still open. The reference event bound is not a compiled bit-machine bound.
+The invariant concerns local CNF meaning. Original global IDs now have the local
+translation proof below. Composing that proof with global grouping, JSON, the
+native source tree, Python/SQLite, hashes and replay is still open. The reference
+event bound is not a compiled bit-machine bound.
 Neither native incoming-count maintenance nor Python live-reference tracking
 has a complete state-invariant theorem here. Their pressure, branching, shared
 children, failure and restart cases are covered by integration tests. General
@@ -491,4 +493,47 @@ insertion request per active entry. Hashing, equality, allocation and the full
 evidence traversal are separate costs; this is no worst-case constant-time
 hash-table assumption. Native responses and Python ledgers expose the two counts.
 
-The current audit passes **2,290 declarations / 1,113 theorem declarations**.
+At this milestone the audit passed **2,290 declarations / 1,113 theorem declarations**.
+
+## Original-variable mapping and local translation
+
+[`SourceMapping.lean`](OracleMachines/SourceMapping.lean) strengthens the actual
+source compiler. A dependent hash-map entry contains a `SourcePosition` proving
+that its block/slot refers to its original variable ID and lies below the width.
+An executable alignment pass gives `CheckedLayout.complete`: every coordinate
+in the supplied block arrays maps back to itself. It includes unused variables,
+short blocks, and empty blocks. The builder rejects zero IDs and duplicates.
+
+| Result | What it establishes |
+| --- | --- |
+| `SourcePosition.agrees` | A mapped bit is the value of its original variable under array-based agreement. |
+| `CheckedLayout.locate`, `blockWidth` | Every supplied coordinate is indexed correctly and each block fits the width. |
+| `sourceWords_agree`, `CheckedLayout.sourceWords_bound` | Every global valuation yields agreeing states below `2^width`. |
+| `CheckedLayout.sourceValuation_agrees` | Arbitrary block words define a consistent valuation of the original IDs. |
+| `CheckedLiteral`, `CheckedClause`, `CheckedCNF` | Successful translations carry evaluation equality for the literal, clause, or bucket supplied as a type parameter. |
+| `CheckedCNF.satisfiable_exact`, `unsatisfiable_exact` | A checked local bucket is satisfiable exactly when its compiled boundary relation has an accepting pair. |
+
+Initial compilation uses `translateClause`; the local-update compiler returns
+`CheckedCNF` from `translateCNF`. Both call the proved literal translator. The
+iterative builders check that accumulated original arrays equal their supplied
+inputs before returning. Thus their proofs are tied to the requested local
+source, rather than an unrelated accumulated array. Zero, missing and nonlocal
+literals are rejected. The unchanged global grouping loop still needs its own
+refinement proof, as does the connection through native node identities to the
+whole source tree. Local exactness alone does not prove these obligations.
+
+The layout validation adds one lookup per variable entry, plus block traversal.
+Translation accumulates original arrays and checks their equality, adding linear
+entry visits and temporary storage in clause/literal count. Initial grouping also
+looks up literals before translation. Hashing and comparison of arbitrary-size
+IDs, allocation and runtime instructions are separate costs. None of these is
+included in the existing `q²(1+c+L)` relation-evaluation bound. Layout construction
+is paid again on replay; warm edits translate their supplied buckets only.
+
+The full build audits **2,477 declarations / 1,188 theorem declarations**, with
+no admits or added axioms. **148 integration tests pass**. New checks compare
+both compiler paths with 9,520 exhaustive boundary assignments across 112 CNFs,
+including permuted slots and IDs larger than 64 bits. They also cover invalid
+mappings, short/empty blocks, unused variables, restart, a 30,001-literal clause
+and a 12,000-clause bucket. These are correctness checks, not a timing study or a
+claim about efficient decomposition of unrestricted SAT.

@@ -1,53 +1,29 @@
-import OracleMachines.LayeredProtocol
+import OracleMachines.SourceMapping
 
 /-! Checked compilation for a supplied ordered partition of CNF variables.
 Every clause must lie in one block or two adjacent blocks of width at most four.
-The JSON parser/partition checker is executable; the local semantic model and
-its relation conversion are proved below. This is not a general SAT compiler. -/
+Variable positions and each local clause translation carry semantic proofs.
+JSON parsing and the global grouping loop remain executable checks rather than
+a proved whole-compiler refinement. This is not a general SAT compiler. -/
 namespace OracleMachines.Layered
 open Lean
 
-structure LocalLiteral where
-  right : Bool
-  slot : Nat
-  positive : Bool
-
-def LocalLiteral.eval (lit : LocalLiteral) (x y : Nat) : Bool :=
-  (if lit.right then y else x).testBit lit.slot == lit.positive
-
-abbrev LocalCNF := Array (Array LocalLiteral)
-
-def localEval (cnf : LocalCNF) (x y : Nat) : Bool :=
-  cnf.toList.all fun clause => clause.toList.any fun lit => lit.eval x y
-
-def compileLocal (width : Nat) (cnf : LocalCNF) : Relation (2^width) :=
-  fun x y => localEval cnf x.val y.val
-
-theorem compileLocal_exact (width : Nat) (cnf : LocalCNF) (x y : Fin (2^width)) :
-    compileLocal width cnf x y = true ↔
-      ∀ clause ∈ cnf.toList, ∃ lit ∈ clause.toList, lit.eval x.val y.val = true := by
-  simp only [compileLocal,localEval,List.all_eq_true,List.any_eq_true]
-
 structure CompiledSource where
   width : Nat
-  buckets : Array LocalCNF
   layers : Array (Array Nat)
-  positions : Std.HashMap Nat (Nat × Nat)
+  mapping : CheckedLayout layers width
+  buckets : Array LocalCNF
   original : Array (Array (Array Int))
+
+def CompiledSource.positions (source : CompiledSource) : SourcePositions source.layers source.width :=
+  source.mapping.positions
 
 def compileSource (request : Json) : Except String CompiledSource := do
   let width ← request.getObjValAs? Nat "width"
   if width == 0 || width > 4 then throw "Source width must be 1 to 4"
   let layers ← request.getObjValAs? (Array (Array Nat)) "layers"
   if layers.size < 2 || layers.size > 65537 then throw "Supply 2 to 65537 variable blocks"
-  let mut positions : Std.HashMap Nat (Nat × Nat) := {}
-  for i in [:layers.size] do
-    let block := layers[i]!
-    if block.size > width then throw "Variable block exceeds supplied width"
-    for j in [:block.size] do
-      let varId := block[j]!
-      if varId == 0 || positions.contains varId then throw "Variable blocks must be disjoint positive IDs"
-      positions := positions.insert varId (i,j)
+  let mapping ← buildSourcePositions layers width
   let clauses ← request.getObjValAs? (Array (Array Int)) "clauses"
   if clauses.size > 200000 then throw "Source clause cap exceeded"
   let mut buckets : Array LocalCNF := Array.replicate (layers.size-1) #[]
@@ -58,20 +34,17 @@ def compileSource (request : Json) : Except String CompiledSource := do
     if literals > 2000000 then throw "Source literal cap exceeded"
     let mut lo := layers.size
     let mut hi := 0
-    let mut located : Array (Nat × Nat × Bool) := #[]
     for lit in clause do
       if lit == 0 then throw "Zero is not a literal"
-      let some (layer,slot) := positions[lit.natAbs]? | throw "Source variable missing from blocks"
-      lo := min lo layer
-      hi := max hi layer
-      located := located.push (layer,slot,decide (lit > 0))
+      let some position := mapping.positions.get? lit.natAbs | throw "Source variable missing from blocks"
+      lo := min lo position.layer.val
+      hi := max hi position.layer.val
     if !clause.isEmpty && hi > lo+1 then throw "Clause crosses nonadjacent blocks"
     let edge := if clause.isEmpty then 0 else min lo (layers.size-2)
-    let localClause := located.map fun (layer,slot,positive) =>
-      LocalLiteral.mk (decide (layer = edge+1)) slot positive
-    buckets := buckets.modify edge (·.push localClause)
+    let checked ← translateClause mapping.positions edge clause
+    buckets := buckets.modify edge (·.push checked.localClause)
     original := original.modify edge (·.push clause)
-  return ⟨width,buckets,layers,positions,original⟩
+  return ⟨width,layers,mapping,buckets,original⟩
 
 def compileRequest (request : Json) : Except String Json := do
   let source ← compileSource request

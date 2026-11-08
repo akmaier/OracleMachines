@@ -15,6 +15,70 @@ def sat(clauses,n):
 
 
 class SourceUpdateTests(unittest.TestCase):
+    def test_native_translation_matches_every_boundary_assignment(self):
+        # Sparse IDs and permuted slots prevent accidental index-based agreement.
+        rng=random.Random(1897)
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            for width in (1,2,3,4):
+                names=[(1<<80)+101*k for k in range(1,2*width+1)]
+                rng.shuffle(names)
+                layers=[names[:width],names[width:]]
+                s._request(dict(mode='source_init',id=f'mapping-{width}',width=width,layers=layers))
+                cases=[[],[[]],[[names[0]],[-names[0]]],[[names[-1]]]]
+                cases += [[[rng.choice(names)*rng.choice((-1,1)) for _ in range(rng.randrange(5))]
+                           for _ in range(rng.randrange(6))] for _ in range(24)]
+                for clauses in cases:
+                    expected=0;states=1<<width
+                    for x,y in itertools.product(range(states),repeat=2):
+                        values={v:bool(word&(1<<j)) for word,block in zip((x,y),layers)
+                                for j,v in enumerate(block)}
+                        if all(any(values[abs(lit)]==(lit>0) for lit in c) for c in clauses):
+                            expected |= 1<<(x*states+y)
+                    initial=s._request(dict(mode='layered_compile',width=width,layers=layers,clauses=clauses))
+                    edited=s._request(dict(mode='source_compile',edits=[dict(edge=0,clauses=clauses)]))
+                    self.assertEqual(initial['masks'],[expected])
+                    self.assertEqual(edited['masks'],[expected])
+
+    def test_short_empty_blocks_unused_variables_and_restart(self):
+        layers=[[900,7],[],[51],[3000,2]]
+        clauses=[[900],[-7],[51,2],[-3000]]
+        with tempfile.TemporaryDirectory() as d:
+            path=Path(d)/'s.db'
+            with PersistentSolver(path) as s:
+                first=s.source_cnf(4,clauses,layers,witness=True)
+                self.assertTrue(first['answer'])
+                values={v:bool(first['witness'][i]&(1<<j)) for i,block in enumerate(layers) for j,v in enumerate(block)}
+                self.assertTrue(all(any(values[abs(lit)]==(lit>0) for lit in c) for c in clauses))
+                negative=s.source_cnf(base=first['state'],replace={1:[[51],[-51]]})
+                self.assertFalse(negative['answer'])
+                restored=s.source_cnf(base=negative['state'],replace={1:[]})
+                self.assertTrue(restored['answer'])
+            with PersistentSolver(path) as s:
+                for version in (first,negative,restored):
+                    self.assertEqual(s.source_cnf(base=version['state'])['answer'],version['answer'])
+                self.assertTrue(s.source_cnf(4,[],[[],[]])['answer'])
+                self.assertFalse(s.source_cnf(4,[[]],[[],[]])['answer'])
+
+    def test_native_mapping_rejects_invalid_names_and_nonlocal_literals(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            for layers in ([[1,1],[]],[[1],[1]],[[0],[3]],[[1,2,3],[4]]):
+                with self.assertRaises(ValueError):
+                    s._request(dict(mode='source_init',id='bad-map',width=2,layers=layers))
+            s._request(dict(mode='source_init',id='valid-map',width=2,layers=[[9],[],[77]]))
+            for clauses in ([[0]],[[88]],[[77]],[[9,77]]):
+                with self.assertRaises(ValueError):
+                    s._request(dict(mode='source_compile',edits=[dict(edge=0,clauses=clauses)]))
+            with self.assertRaises(ValueError):
+                s._request(dict(mode='layered_compile',width=2,layers=[[9],[],[77]],clauses=[[9,77]]))
+            self.assertEqual(s._request(dict(mode='source_compile',edits=[dict(edge=0,clauses=[])]))['masks'],[65535])
+
+    def test_translation_accumulation_handles_large_clause_and_bucket(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            s._request(dict(mode='source_init',id='large-map',width=1,layers=[[10],[20]]))
+            for clauses in ([[10]*30000+[-10]],[[10]]*12000):
+                result=s._request(dict(mode='source_compile',edits=[dict(edge=0,clauses=clauses)]))
+                self.assertEqual(result['masks'],[15 if len(clauses)==1 else 12])
+
     def test_random_edits_deletions_branches_and_restart_match_exhaustive_cnf(self):
         rng=random.Random(1820)
         for width in (1,2):

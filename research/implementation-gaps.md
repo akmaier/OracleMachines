@@ -709,3 +709,52 @@ store invariant. After those, measure alternative representations for the global
 provenance path and remove the unary-input expansion in application experiments.
 These tasks can make the stated restricted guarantee more complete. They do not
 establish efficient decompositions or compressed exact models for arbitrary SAT.
+
+## Original-variable mapping proof follow-up (8 November)
+
+The next checkpoint closes the local mapping obligation identified above.
+`SourceMapping.lean` replaces unchecked position pairs with dependent entries
+that prove the original block lookup and width bound. An executable alignment
+check proves completeness for every supplied array coordinate. Global valuations
+encode into bounded block states, and arbitrary block states yield agreeing
+global valuations. These conversions include empty/short blocks and unused IDs.
+
+The native initial compiler now uses proof-carrying clause translation. Its
+local-edit compiler returns a `CheckedCNF` indexed by the requested original
+clauses. Lean proves evaluation equality and SAT/UNSAT equivalence for each
+translated bucket. Iterative accumulation is tied back to the request by array
+equality checks. This is actual runtime construction of the proved values.
+
+All 148 tests pass without resource warnings. Lean audits 2,477 declarations and
+1,188 theorem declarations without admits or added axioms. Both compiler paths
+agree with 9,520 exhaustive boundary assignments across 112 local CNFs. Additional
+tests cover sparse IDs above 64 bits, slot permutations, missing/duplicate/zero
+IDs, locality violations, empty clauses versus empty buckets, short and empty
+blocks, old versions after restart, and long iterative translation inputs.
+
+Resource limits remain explicit: the layout check makes an extra pass over
+blocks and variables. Builders accumulate original arrays and compare them with
+the input. Initial grouping scans literal positions before translation. These
+linear entry visits, temporary arrays, ID hashing/comparison and allocation are
+outside the existing relation-evaluation counter. We claim no speedup from this
+proof change and preserve the earlier timing study as historical evidence.
+
+Highest-priority remaining work:
+
+1. Compose local translation with the **global grouping loop and source-tree
+   binding**. Every original clause must reach exactly its intended edge; native
+   node/layout identities must retain the proved meaning through requests and
+   edits. The current local theorem does not prove that end-to-end property.
+2. Prove the **native incoming-reference and Python live-reference invariants**
+   through shared children, replacement, failure, eviction and replay. Current
+   pressure/branch/restart tests remain evidence rather than a state theorem.
+3. Prove the general factor **row/equivalence-store invariant**. The restricted
+   adjacent-block compiler does not settle the general factor-DAG obligations.
+4. Add mapping, checking, retention, serialization and archive access to an
+   explicit restricted ledger; distinguish entry visits from bit-machine costs.
+5. Replace unary general input encoding before broader application evaluation;
+   retain failures and compare matched certified boundaries. Cost-sensitive
+   routing, hard total-memory bounds and unrestricted coverage remain open.
+
+The manuscript and artifact record for this checkpoint are updated separately
+after archive revalidation. Earlier results and experiment files are preserved.

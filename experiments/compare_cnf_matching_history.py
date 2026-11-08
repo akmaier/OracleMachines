@@ -1,0 +1,244 @@
+#!/usr/bin/env python3
+"""Matched equivalence-only versus retained matching-state repair, all costs charged."""
+import argparse
+import gc
+import gzip
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import time
+import tracemalloc
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from experiments.cnf_matching_history import MatchingRepairHistory
+from experiments.cnf_equivalence_history import EquivalenceRepairHistory
+from experiments.cnf_positive_history import UnsupportedExpansion
+from experiments.cnf_residual_dag import holds
+from experiments.compare_cnf_affected_history import digest_rows, scenarios as affected_scenarios
+from experiments.probe_structured_repair_gaps import source_for, supplied_move
+from experiments.compare_cnf_matching import domain_cnf
+
+RESULTS = Path(__file__).parent / 'results'
+MODES = dict(equivalence=EquivalenceRepairHistory, matching=MatchingRepairHistory)
+
+
+def scenarios():
+    old = json.loads((RESULTS/'cnf-equivalence-history/report.json').read_text())
+    cases = old['cases']
+    for width, blocks in ((8, 8), (8, 32), (16, 4)):
+        source = source_for('matching', width, blocks)
+        h = EquivalenceRepairHistory()
+        version = h.prepare(source)['version']
+        model = h.witness(version)['model']
+        additions = [supplied_move('matching', width, block, model)[0] for block in range(blocks)]
+        h.close()
+        cases.append(dict(family='matching_growth', width=width, blocks=blocks, base=source,
+                          additions=additions, expected=[True]*(blocks+1)))
+    for width in (4, 16, 64):
+        source = domain_cnf([[i, (i+1) % width] for i in range(width)])
+        h = EquivalenceRepairHistory()
+        version = h.prepare(source)['version']
+        model = h.witness(version)['model']
+        lit = next(v for v in (1, 2) if not model.get(v, False))
+        h.close()
+        cases.append(dict(family='alternating_cycle', width=width, base=source,
+                          additions=[(lit,)], expected=[True, True]))
+    source = source_for('matching', 4, 32)
+    h = EquivalenceRepairHistory()
+    version = h.prepare(source)['version']
+    model = h.witness(version)['model']
+    selected = [next(v for v in range(b*16+1, b*16+5) if model.get(v, False)) for b in range(32)]
+    h.close()
+    cases.append(dict(family='forbidden_edges', base=source, additions=[(-v,) for v in selected], expected=[True]*33))
+    cases.append(dict(family='compatible_matching', base=source, additions=[(v,) for v in selected], expected=[True]*33))
+    base = domain_cnf([range(3)]*3)
+    for family, additions, expected in [
+            ('pinned_detour', [(-4, -4), (2,)], [True]*3),
+            ('coupled_missed_path', [(-2, -4), (2,)], [True]*3),
+            ('matching_contradiction', [(2,), (5,)], [True, True, False])]:
+        cases.append(dict(family=family, base=base, additions=additions, expected=expected))
+    cases.append(dict(family='matching_small_budget', repair_budget=2, base=base,
+                      additions=[(2,)], expected=[True, True]))
+    cases.append(dict(family='mixed_base', base=base+[(-100, 101), (100, -101)],
+                      additions=[(2,)], expected=[True, True]))
+    cases.append(dict(family='extra_true_choice', base=domain_cnf([[0, 1], [1, 2]]),
+                      additions=[(1,), (3,)], expected=[True]*3))
+    return cases
+
+
+def engine(path, mode, case):
+    return MODES[mode](path, repair_budget=case.get('repair_budget', 4096))
+
+
+def step(h, version, clause, base):
+    fallback = None
+    if version is None:
+        result = h.prepare(base)
+    else:
+        try:
+            result = h.append_repair(version, clause)
+        except UnsupportedExpansion as error:
+            fallback = dict(reason=str(error), rejected_metrics=dict(h.counts),
+                            rejected_solver_metrics=dict(h.solver.counts))
+            materialization = h.materialize(version)
+            expanded = materialization.pop('cnf') + (tuple(clause),)
+            fallback['materialization'] = materialization
+            result = h.prepare(expanded)
+    return result, fallback
+
+
+def memory_profile(case, mode):
+    gc.collect()
+    with tempfile.TemporaryDirectory() as tmp:
+        tracemalloc.start()
+        h = engine(Path(tmp)/'memory.sqlite3', mode, case)
+        version = None
+        for i, clause in enumerate([None]+case['additions']):
+            result, _ = step(h, version, clause, case['base'])
+            assert result['answer'] == case['expected'][i]
+            version = result['version']
+        gc.collect()
+        current, peak = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
+        h.close()
+    return dict(current_traced_bytes=current, peak_traced_bytes=peak)
+
+
+def audit_archive(path, raw, expected_hash):
+    assert hashlib.sha256(raw).hexdigest() == expected_hash
+    path.write_bytes(raw)
+    h = MatchingRepairHistory(path, repair_budget=0)
+    versions = [v for v, in h.db.execute('SELECT id FROM cnf_positive_versions_v1')]
+    for version in versions:
+        result = h.query(version)
+        assert result['solver_metrics'].get('expanded_nodes', 0) == 0
+        source = h.materialize(version)['cnf']
+        model = h.witness(version)['model']
+        assert model is None or holds(source, model)
+    residuals = list(h.db.execute('SELECT id FROM cnf_residual_v1'))
+    for key, in residuals:
+        assert h.solver._read(key, purpose='matching_audit') is not None
+    assert h.solver.counts.get('expanded_nodes', 0) == 0
+    assert h.db.execute('PRAGMA integrity_check').fetchone()[0] == 'ok'
+    h.close()
+    assert path.read_bytes() == raw
+    return dict(versions=len(versions), residuals=len(residuals), bytes_unchanged=True, new_expansions=0)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, required=True)
+    out = parser.parse_args().output
+    out.mkdir(parents=True, exist_ok=False)
+    cases, records, archives = scenarios(), [], []
+    for case_id, case in enumerate(cases):
+        for mode in MODES:
+            with tempfile.TemporaryDirectory() as tmp:
+                path = Path(tmp)/'history.sqlite3'
+                start = time.perf_counter()
+                h = engine(path, mode, case)
+                initialization = time.perf_counter()-start
+                source, versions, version = tuple(map(tuple, case['base'])), [], None
+                for i, clause in enumerate([None]+case['additions']):
+                    if clause is not None:
+                        source += (tuple(clause),)
+                        if case['family'] == 'signed_equivalence':
+                            assert not holds([clause], h.witness(version)['model'])
+                    start = time.perf_counter()
+                    result, fallback = step(h, version, clause, case['base'])
+                    elapsed = time.perf_counter()-start
+                    assert result['answer'] == case['expected'][i]
+                    version = result.pop('version')
+                    versions.append(version)
+                    records.append(dict(case=case_id, mode=mode, phase='acquisition', step=i,
+                                        operation_seconds=elapsed, fallback=fallback,
+                                        initialization_seconds=initialization if i == 0 else 0, **result))
+                    assert h.materialize(version)['cnf'] == source
+                    assert not result['answer'] or holds(source, h.witness(version)['model'])
+                start = time.perf_counter()
+                storage, digest = h.storage(), digest_rows(h)
+                export = h.witness(version)
+                export.pop('model')
+                inspection = time.perf_counter()-start
+                for phase in ('warm', 'cold'):
+                    restart = 0
+                    if phase == 'cold':
+                        h.close()
+                        start = time.perf_counter()
+                        h = engine(path, mode, case)
+                        restart = time.perf_counter()-start
+                    result = h.query(version)
+                    assert result['answer'] == case['expected'][-1]
+                    assert result['solver_metrics'].get('expanded_nodes', 0) == 0
+                    assert digest_rows(h) == digest
+                    result.pop('version')
+                    records.append(dict(case=case_id, mode=mode, phase=phase,
+                                        initialization_seconds=restart, **result))
+                h.close()
+                # Resume a known last update from its parent in a fresh process
+                # state. This charges cold recognition, not just final query.
+                start = time.perf_counter()
+                h = engine(path, mode, case)
+                restart = time.perf_counter()-start
+                start = time.perf_counter()
+                result, fallback = step(h, versions[-2], case['additions'][-1], case['base'])
+                elapsed = time.perf_counter()-start
+                assert result.pop('version') == version
+                assert result['solver_metrics'].get('expanded_nodes', 0) == 0
+                assert digest_rows(h) == digest
+                records.append(dict(case=case_id, mode=mode, phase='cold_resume', operation_seconds=elapsed,
+                                    initialization_seconds=restart, fallback=fallback, **result))
+                h.close()
+                raw = path.read_bytes()
+                sha = hashlib.sha256(raw).hexdigest()
+                name = f'archive-{case_id:02d}-{mode}.sqlite3.gz'
+                (out/name).write_bytes(gzip.compress(raw, mtime=0))
+                audit = audit_archive(Path(tmp)/'audit.sqlite3', raw, sha)
+                archives.append(dict(case=case_id, mode=mode, path=name, final_version=version, versions=versions,
+                                     database_bytes=len(raw), compressed_bytes=(out/name).stat().st_size,
+                                     database_sha256=sha, row_digest=digest, storage=storage,
+                                     final_witness=export, storage_digest_export_seconds=inspection, audit=audit))
+        print(case_id, case['family'], 'checked', flush=True)
+    profiles = [dict(case=i, mode=mode, **memory_profile(cases[i], mode))
+                for i in (11, 22, 30) for mode in MODES]
+    old_checks = []
+    for directory in ('structured-repair-gaps', 'cnf-equivalence-history'):
+        report = json.loads((RESULTS/directory/'report.json').read_text())
+        entries = report['cases'] if directory == 'structured-repair-gaps' else report['archives']
+        for entry in entries:
+            name = entry.get('archive', entry.get('path'))
+            raw = gzip.decompress((RESULTS/directory/name).read_bytes())
+            with tempfile.TemporaryDirectory() as tmp:
+                audit = audit_archive(Path(tmp)/'old.sqlite3', raw, entry['database_sha256'])
+            old_checks.append(dict(archive=directory+'/'+name, **audit))
+    files = [Path(__file__), Path('experiments/cnf_matching_history.py'), Path('experiments/cnf_equivalence_history.py'), Path('experiments/cnf_affected_history.py'),
+             Path('experiments/cnf_repair_history.py'), Path('experiments/cnf_positive_history.py'),
+             Path('experiments/cnf_residual_dag.py'), Path('experiments/probe_structured_repair_gaps.py'),
+             Path('experiments/compare_cnf_affected_history.py')]
+    report = dict(source_commit=subprocess.check_output(['git','rev-parse','HEAD'], text=True).strip(),
+                  fingerprints={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in files},
+                  cases=cases, records=records, archives=archives, allocation_profiles=profiles,
+                  prior_archive_checks=old_checks, limitations=[
+                      'Single sequential timings; no representative SAT workload distribution or significance claim',
+                      'Timed acquisition includes lazy recognition, candidate checking, state maintenance, serialization, persistence and rejected fallback',
+                      'DB initialization, witness export/storage scans, warm/cold queries and cold resumption are separately reported',
+                      'Cold resumption repeats the last recorded update from its parent; the archive already contains its result',
+                      'Input assembly, validation between operations, offline compression and archive audits excluded from acquisition timing',
+                      'Tracemalloc is a separate rerun; excludes native SQLite allocations and process RSS',
+                      'Matching discovery is lazy after failed scalar and equivalence proposals; only whole strict matching bases are recognized',
+                      'Matching views require exactly one true edge per choice; scalar changes can invalidate this view without invalidating SAT',
+                      'Earlier units constrain the path search; only one path per literal is tested against arbitrary non-unit couplings',
+                      'Warm matching states share choice, resource and unit-pin tries; cold queries use the inherited joint checker without graph recognition',
+                      'Joint proposal budget charges prior candidates, search edges, moved variables and postings; recognition, state reconstruction, arithmetic and trie paths are additional work',
+                      'No compact assignment groups: every moved variable is still updated; internal affected clauses are still visited',
+                      'Python, SQLite, matching discovery/state and count indexes are outside Lean; the existing joint semantic protection rule is reused',
+                      'Unsupported proposals give no verdict; unrestricted fallback remains potentially exponential'])
+    (out/'report.json').write_text(json.dumps(report, indent=2)+'\n')
+    print(json.dumps(dict(cases=len(cases), archives=len(archives), prior_archives=len(old_checks))), flush=True)
+
+
+if __name__ == '__main__':
+    main()

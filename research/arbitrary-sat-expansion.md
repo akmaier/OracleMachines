@@ -244,3 +244,35 @@ is not such a class portfolio.
 5. Investigate improved backdoor/width discovery and structural equivalences
    based on those measurements. Report achieved bounds for each restricted
    parameter regime, plus honest worst cases for arbitrary SAT.
+
+## Current arbitrary-CNF gap after checked structural repairs
+
+The exact fallback covers arbitrary CNF algorithmically. What remains unproved
+is uniformly efficient acquisition and reuse across every CNF, not mere finite
+coverage. Equivalence and matching repairs enlarge the successful reuse region;
+changing proposal budgets does not establish coverage beyond that region.
+
+A useful stress case is a single class-changing unit. For arbitrary
+F = AND_i C_i, introduce fresh z and set G = AND_i (z OR C_i). The old formula
+has the immediate witness z=true. Yet G AND (NOT z) is satisfiable exactly when
+F is. Thus one unit can expose all the unresolved interaction of an arbitrary
+CNF. If the required reusable state for every such G were uniformly polynomial
+to acquire and its update/decision polynomial, this construction would decide
+SAT in polynomial time. It does not rule out cheap updates after expensive
+size-dependent preparation, nor show that building a rich oracle for G is as
+cheap as writing its trivial witness.
+
+The outstanding obligations are efficient recognition/construction; exact
+composition across unrestricted interfaces; compact closure under class-changing
+updates; polynomial bounds on distinct residuals, search and certificate work;
+and full preprocessing, persistence, reconstruction and query accounting in the
+original input length. A bound polynomial in an exponentially large prepared
+state is insufficient for a uniform polynomial SAT result. UNSAT decisions
+also require a complete route: failure to find a repair is never a refutation.
+Python implementation refinement remains separate from these resource bounds.
+
+The next engineering priority is occurrence-driven unit propagation, followed
+by parity-preserving repair and component/coupling reuse. These may reduce
+cost and widen the measured reuse region, without resolving the universal
+construction and size bounds. See the current structural-reuse priority record
+and the preserved three-policy budget comparison for evidence and failures.

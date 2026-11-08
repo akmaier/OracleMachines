@@ -2705,3 +2705,18 @@ certificates; no speedup is yet claimed for this unimplemented change. Thereafte
 address inert/dense postings and cost estimation, parity-preserving repair,
 mixed-component extraction and coupling-guided alternative paths. General SAT
 branching/closure and compact arbitrary-CNF representations remain open.
+
+The manuscript's Section 12.43 now reports the budget comparison, regressions,
+resource limits and next propagation target. It also makes the arbitrary-SAT
+obligation concrete: G = AND_i(z OR C_i) has an immediate witness z=true, but
+adding the single unit NOT z makes satisfiability equivalent to arbitrary
+F = AND_i C_i. Cheap old witnesses therefore do not guarantee cheap expansion;
+expensive preparation may have absorbed the unresolved work. This argument does
+not rule out such preprocessing. The arbitrary-SAT research record now separates
+complete fallback coverage from missing uniform recognition, composition,
+representation, acquisition and update bounds.
+
+Implementation/evidence checkpoint `df41bee` is pushed. The Lean build and audit
+pass unchanged at 4,083 declarations / 1,943 theorem declarations. All 45 previous
+proof blocks are unchanged, with 163 unique labels. The final PDF compiles without
+warnings or box errors; changed pages 80--81 were visually inspected.

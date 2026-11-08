@@ -1,4 +1,4 @@
-import OracleMachines.AffineResident
+import OracleMachines.AffineKernel
 import Lean.Data.Json
 
 /-! Native affine growth. The executed algebra carries exact history semantics.
@@ -19,8 +19,17 @@ structure Node where
   budget : Nat
   charge : Nat
   charge_bound : charge ≤ budget
+  uncachedCharge : Nat := 0
+  cacheHit : Bool := false
+  keyCells : Nat := 0
+  comparisonCells : Nat := 0
+  kernelEvicted : Bool := false
 
-abbrev Store := Std.HashMap String Node
+structure Store where
+  nodes : Std.HashMap String Node := {}
+  kernels : KernelCache := {}
+
+def reset (store : Store) : Store := { kernels := {slots := store.kernels.slots} }
 
 def parseRow (n : Nat) (body : Json) : Except String (Row n) := do
   let coefficients ← body.getObjValAs? (Array Bool) "coefficients"
@@ -117,12 +126,17 @@ def report (node : Node) (includeSummary : Bool) : Json := Json.mkObj
    ("summary_cells",toJson (node.state.summary.length*(node.width+1))),
    ("summary_cell_bound",toJson ((node.width+1)^2)),
    ("reference_cell_budget",toJson node.budget),("reference_cell_charge",toJson node.charge),("counted_complete",toJson false),
+   ("uncached_reference_cell_charge",toJson node.uncachedCharge),
+   ("kernel_cache_hit",toJson node.cacheHit),("kernel_key_cells",toJson node.keyCells),
+   ("kernel_compare_cell_bound",toJson node.comparisonCells),("kernel_evicted",toJson node.kernelEvicted),
    ("summary",if includeSummary then toJson (node.state.summary.map rowJson) else Json.null)]
 
+set_option maxHeartbeats 800000 in
 theorem report_answer (node : Node) (includeSummary : Bool) :
     (report node includeSummary).getObjValAs? Bool "answer" = .ok node.answer := by
   cases answer : node.answer <;> simp only [report,answer] <;> rfl
 
+set_option maxHeartbeats 800000 in
 theorem report_charge (node : Node) (includeSummary : Bool) :
     (report node includeSummary).getObjValAs? Nat "reference_cell_charge" = .ok node.charge := by
   rfl
@@ -141,24 +155,24 @@ theorem report_semantics (node : Node) (includeSummary : Bool) :
 def initialNode (width : Nat) (request : Json) : Node :=
   let state := residentInitial width
   Node.mk width state 0 (by rw [residentInitial_history]; rfl)
-    state.answer rfl request 0 0 (by omega)
+    state.answer rfl request 0 0 (by omega) 0 false 0 0 false
 
 def appendNode (previous : Node) (rows : List (Row (previous.width+previous.width)))
-    (request : Json) : Node :=
-  let result := previous.state.appendRun rows
-  let state := result.1
-  let decision := decideRun state.summary
+    (request : Json) (used : KernelUse previous.state.summary rows) : Node :=
+  let state := used.kernel.attach previous.state
   Node.mk previous.width state (previous.steps+1)
-    (by rw [Resident.appendRun_history]; change previous.steps+1 = previous.state.history.steps+1; rw [previous.steps_exact])
-    decision.1 (decideRun_value _) request (appendBudget previous.width rows.length)
-    (result.2+decision.2) (previous.state.appendRun_bound rows)
+    (by rw [Kernel.attach_history]; change previous.steps+1 = previous.state.history.steps+1; rw [previous.steps_exact])
+    used.kernel.answer used.kernel.answer_exact request (appendBudget previous.width rows.length)
+    used.executedCharge (used.executed_bound previous.state.compact)
+    used.kernel.charge used.hit used.keyCells used.comparisonCells used.evicted
 
 theorem initialNode_history (width : Nat) (request : Json) :
     (initialNode width request).state.history = .empty := residentInitial_history width
 
 theorem appendNode_history (previous : Node) (rows : List (Row (previous.width+previous.width)))
-    (request : Json) : (appendNode previous rows request).state.history = .append previous.state.history rows :=
-  previous.state.appendRun_history rows
+    (request : Json) (used : KernelUse previous.state.summary rows) :
+    (appendNode previous rows request used).state.history = .append previous.state.history rows :=
+  used.kernel.attach_history previous.state
 
 /-- A fresh definition is linked to the actual decoded fields and predecessor
 lookup. A retry is specified separately because that parent name may now differ. -/
@@ -167,25 +181,27 @@ def Created (store : Store) (request : Json) (node : Node) : Prop :=
     request.getObjValAs? Nat "width" = .ok width ∧ 1 ≤ width ∧ width ≤ 128 ∧
     node = initialNode width request) ∨
   (∃ base previous rows, request.getObjValAs? String "mode" = .ok "affine_append" ∧
-    request.getObjValAs? String "base" = .ok base ∧ store[base]? = some previous ∧
-    DecodedRows (previous.width+previous.width) request rows ∧ node = appendNode previous rows request)
+    request.getObjValAs? String "base" = .ok base ∧ store.nodes[base]? = some previous ∧
+    DecodedRows (previous.width+previous.width) request rows ∧
+    ∃ used : KernelUse previous.state.summary rows, node = appendNode previous rows request used)
 
-def buildNode (store : Store) (request : Json) : Except String {node : Node // Created store request node} := do
+def buildNode (store : Store) (request : Json) : Except String {result : Node × KernelCache // Created store request result.1} := do
   let mode ← readField String request "mode"
   if init : mode.value = "affine_init" then
     let width ← readField Nat request "width"
     if valid : 1 ≤ width.value ∧ width.value ≤ 128 then
-      return ⟨initialNode width.value request,Or.inl ⟨width.value,by simpa [init] using mode.exact,
+      return ⟨(initialNode width.value request,store.kernels),Or.inl ⟨width.value,by simpa [init] using mode.exact,
         width.exact,valid.1,valid.2,rfl⟩⟩
     else throw "Affine width must be 1 to 128"
   else if append : mode.value = "affine_append" then
     let base ← readField String request "base"
-    match found : store[base.value]? with
+    match found : store.nodes[base.value]? with
     | none => throw "Unknown affine base"
     | some previous =>
       let rows ← readRows (previous.width+previous.width) request
-      return ⟨appendNode previous rows.val request,Or.inr ⟨base.value,previous,rows.val,
-        by simpa [append] using mode.exact,base.exact,found,rows.property,rfl⟩⟩
+      let used := store.kernels.obtain previous.state.summary rows.val
+      return ⟨(appendNode previous rows.val request used,used.cache),Or.inr ⟨base.value,previous,rows.val,
+        by simpa [append] using mode.exact,base.exact,found,rows.property,used,rfl⟩⟩
   else throw "Unknown affine definition mode"
 
 /-- Compare the parsed source fields as well as the existing JSON identity
@@ -227,17 +243,17 @@ def checkSameInput (node : Node) (request : Json) : Except String (PLift (SameIn
   else throw "Affine identity changed"
 
 def DefinitionResponse (store next : Store) (request reply : Json) : Prop :=
-  ∃ id node, request.getObjValAs? String "id" = .ok id ∧ next[id]? = some node ∧
+  ∃ id node, request.getObjValAs? String "id" = .ok id ∧ next.nodes[id]? = some node ∧
     reply = report node true ∧
-    ((next = store ∧ store[id]? = some node ∧ SameInput node.width node.body request) ∨
-     (store[id]? = none ∧ Created store request node ∧ next = store.insert id node))
+    ((next = store ∧ store.nodes[id]? = some node ∧ SameInput node.width node.body request) ∨
+     (store.nodes[id]? = none ∧ Created store request node ∧ next.nodes = store.nodes.insert id node))
 
 /-- Only a completed definition updates the map. Repeating a live identity
 returns its existing history, rather than reinterpreting a reused parent name. -/
 def defineChecked (store : Store) (request : Json) :
     Except String {result : Store × Json // DefinitionResponse store result.1 request result.2} := do
   let id ← readField String request "id"
-  match found : store[id.value]? with
+  match found : store.nodes[id.value]? with
   | some previous =>
     if previous.body == request then
       let same ← checkSameInput previous request
@@ -245,10 +261,11 @@ def defineChecked (store : Store) (request : Json) :
         Or.inl ⟨rfl,found,same.down⟩⟩
     else throw "Affine identity changed"
   | none =>
-    if store.size ≥ 4096 then throw "Affine native version capacity exceeded"
+    if store.nodes.size ≥ 4096 then throw "Affine native version capacity exceeded"
     let node ← buildNode store request
-    return ⟨(store.insert id.value node.val,report node.val true),id.value,node.val,id.exact,
-      by simp only [Std.HashMap.getElem?_insert_self],rfl,Or.inr ⟨found,node.property,rfl⟩⟩
+    let next := {store with nodes := store.nodes.insert id.value node.val.1,kernels := node.val.2}
+    return ⟨(next,report node.val.1 true),id.value,node.val.1,id.exact,
+      by simp only [next,Std.HashMap.getElem?_insert_self],rfl,Or.inr ⟨found,node.property,rfl⟩⟩
 
 def define (store : Store) (request : Json) : Except String (Store × Json) :=
   (defineChecked store request).map Subtype.val
@@ -263,12 +280,12 @@ theorem define_success (store next : Store) (request reply : Json)
 
 def QueryResponse (store : Store) (request reply : Json) : Prop :=
   ∃ root node includeSummary, request.getObjValAs? String "root" = .ok root ∧
-    store[root]? = some node ∧ request.getObjValAs? Bool "summary" = .ok includeSummary ∧
+    store.nodes[root]? = some node ∧ request.getObjValAs? Bool "summary" = .ok includeSummary ∧
     reply = report node includeSummary
 
 def queryChecked (store : Store) (request : Json) : Except String {reply : Json // QueryResponse store request reply} := do
   let root ← readField String request "root"
-  match found : store[root.value]? with
+  match found : store.nodes[root.value]? with
   | none => throw "Unknown affine root"
   | some node =>
     let includeSummary ← readField Bool request "summary"
@@ -289,10 +306,10 @@ Its exact original history is erased proof data; eviction cannot change that
 child's summary, answer or semantic history. -/
 def dropNames (store : Store) : List String → Store
   | [] => store
-  | name::rest => dropNames (store.erase name) rest
+  | name::rest => dropNames {store with nodes := store.nodes.erase name} rest
 
 theorem dropNames_preserves (store : Store) (names : List String) (name : String)
-    (retained : name ∉ names) : (dropNames store names)[name]? = store[name]? := by
+    (retained : name ∉ names) : (dropNames store names).nodes[name]? = store.nodes[name]? := by
   induction names generalizing store with
   | nil => rfl
   | cons head rest ih =>
@@ -301,11 +318,11 @@ theorem dropNames_preserves (store : Store) (names : List String) (name : String
     simp [Std.HashMap.getElem?_erase,Ne.symm retained.1]
 
 theorem dropNames_submap (store : Store) (names : List String) (name : String) (node : Node)
-    (found : (dropNames store names)[name]? = some node) : store[name]? = some node := by
+    (found : (dropNames store names).nodes[name]? = some node) : store.nodes[name]? = some node := by
   induction names generalizing store with
   | nil => exact found
   | cons head rest ih =>
-    have present := ih (store.erase head) found
+    have present := ih ({store with nodes := store.nodes.erase head}) found
     by_cases same : head = name
     · simp [same] at present
     · simpa [Std.HashMap.getElem?_erase,same] using present
@@ -313,14 +330,14 @@ theorem dropNames_submap (store : Store) (names : List String) (name : String) (
 def DropResponse (store next : Store) (request reply : Json) : Prop :=
   ∃ names : Array String, request.getObjValAs? (Array String) "ids" = .ok names ∧
     names.size ≤ 4096 ∧ next = dropNames store names.toList ∧
-    reply = Json.mkObj [("valid",toJson true),("resident_versions",toJson next.size)]
+    reply = Json.mkObj [("valid",toJson true),("resident_versions",toJson next.nodes.size)]
 
 def dropChecked (store : Store) (request : Json) :
     Except String {result : Store × Json // DropResponse store result.1 request result.2} := do
   let names ← readField (Array String) request "ids"
   if capacity : names.value.size ≤ 4096 then
     let next := dropNames store names.value.toList
-    return ⟨(next,Json.mkObj [("valid",toJson true),("resident_versions",toJson next.size)]),
+    return ⟨(next,Json.mkObj [("valid",toJson true),("resident_versions",toJson next.nodes.size)]),
       names.value,names.exact,capacity,rfl,rfl⟩
   else throw "Affine eviction batch exceeds capacity"
 
@@ -335,6 +352,30 @@ theorem drop_success (store next : Store) (request reply : Json)
     have same : certified.val = (next,reply) := by simpa [drop,checked,Except.map] using accepted
     simpa only [same] using certified.property
 
-def stats (store : Store) : Json := Json.mkObj [("resident_versions",toJson store.size)]
+def stats (store : Store) : Json := Json.mkObj [("resident_versions",toJson store.nodes.size),
+  ("kernel_cache_entries",toJson store.kernels.entries.size),("kernel_cache_slots",toJson store.kernels.slots)]
+
+def ConfigResponse (store next : Store) (request : Json) : Prop :=
+  ∃ slots, request.getObjValAs? Nat "slots" = .ok slots ∧ slots ≤ 4096 ∧
+    next.nodes = store.nodes ∧ next.kernels = {slots := slots}
+
+def configureChecked (store : Store) (request : Json) :
+    Except String {result : Store × Json // ConfigResponse store result.1 request} := do
+  let slots ← readField Nat request "slots"
+  if capacity : slots.value ≤ 4096 then
+    let next := {store with kernels := {slots := slots.value}}
+    return ⟨(next,stats next),slots.value,slots.exact,capacity,rfl,rfl⟩
+  else throw "Affine kernel cache exceeds capacity"
+
+def configure (store : Store) (request : Json) : Except String (Store × Json) :=
+  (configureChecked store request).map Subtype.val
+
+theorem configure_success (store next : Store) (request reply : Json)
+    (accepted : configure store request = .ok (next,reply)) : ConfigResponse store next request := by
+  cases checked : configureChecked store request with
+  | error message => simp [configure,checked,Except.map] at accepted
+  | ok certified =>
+    have same : certified.val = (next,reply) := by simpa [configure,checked,Except.map] using accepted
+    simpa only [same] using certified.property
 
 end OracleMachines.Affine

@@ -7,7 +7,7 @@ namespace OracleMachines.AffineHistory
 open Lean OracleMachines.Affine
 
 inductive Kind where
-  | define | query | drop | stats | reset
+  | define | query | drop | stats | reset | config
   deriving DecidableEq
 
 def kind (request : Json) : Except String Kind := do
@@ -17,6 +17,7 @@ def kind (request : Json) : Except String Kind := do
   else if mode == "affine_drop" then return .drop
   else if mode == "affine_stats" then return .stats
   else if mode == "affine_reset" then return .reset
+  else if mode == "affine_cache_config" then return .config
   else throw "Unknown affine operation"
 
 def run (store : Store) (request : Json) : Kind → Except String (Store × Json)
@@ -24,7 +25,8 @@ def run (store : Store) (request : Json) : Kind → Except String (Store × Json
   | .query => (OracleMachines.Affine.query store request).map (fun reply => (store,reply))
   | .drop => OracleMachines.Affine.drop store request
   | .stats => .ok (store,OracleMachines.Affine.stats store)
-  | .reset => .ok ({},Json.mkObj [("valid",toJson true)])
+  | .config => OracleMachines.Affine.configure store request
+  | .reset => .ok (OracleMachines.Affine.reset store,Json.mkObj [("valid",toJson true)])
 
 def Meaning (store next : Store) (request : Json) (operation : Kind) (reply : Json) : Prop :=
   match operation with
@@ -32,12 +34,14 @@ def Meaning (store next : Store) (request : Json) (operation : Kind) (reply : Js
   | .query => next = store ∧ QueryResponse store request reply
   | .drop => DropResponse store next request reply
   | .stats => next = store ∧ reply = OracleMachines.Affine.stats store
-  | .reset => next = ({} : Store) ∧ reply = Json.mkObj [("valid",toJson true)]
+  | .config => ConfigResponse store next request
+  | .reset => next = OracleMachines.Affine.reset store ∧ reply = Json.mkObj [("valid",toJson true)]
 
 theorem run_meaning (store next : Store) (request reply : Json) (operation : Kind)
     (accepted : run store request operation = .ok (next,reply)) : Meaning store next request operation reply := by
   cases operation with
   | define => exact define_success store next request reply accepted
+  | config => exact configure_success store next request reply accepted
   | drop => exact drop_success store next request reply accepted
   | stats => simpa [run,Meaning,eq_comm] using accepted
   | reset => simpa [run,Meaning,eq_comm] using accepted
@@ -135,7 +139,7 @@ inductive Origin (width : Nat) : List Json → History width → Prop where
       (previous : Origin width past history) : Origin width (past++[request]) history
 
 def Sourced (requests : List Json) (store : Store) : Prop :=
-  ∀ (name : String) (node : Node), store[name]? = some node → Origin node.width requests node.state.history
+  ∀ (name : String) (node : Node), store.nodes[name]? = some node → Origin node.width requests node.state.history
 
 theorem empty_sourced (requests : List Json) : Sourced requests {} := by
   intro name node found
@@ -152,7 +156,7 @@ theorem created_origin (past : List Json) (store : Store) (request : Json) (node
   · obtain ⟨width,mode,dimension,positive,capacity,rfl⟩ := initial
     rw [initialNode_history]
     exact .initial mode dimension positive capacity
-  · obtain ⟨base,previous,rows,mode,field,found,decoded,rfl⟩ := appended
+  · obtain ⟨base,previous,rows,mode,field,found,decoded,used,rfl⟩ := appended
     rw [appendNode_history]
     exact .append (sourced base previous found) rows mode decoded
 
@@ -161,8 +165,9 @@ theorem definition_sourced (past : List Json) (store next : Store) (request repl
     Sourced (past++[request]) next := by
   obtain ⟨id,created,field,mapped,reported,retry|fresh⟩ := response
   · rw [retry.1]; exact sourced_keep past request store sourced
-  · obtain ⟨absent,creation,rfl⟩ := fresh
+  · obtain ⟨absent,creation,changed⟩ := fresh
     intro name node found
+    rw [changed] at found
     by_cases same : name = id
     · subst name
       have equal : node = created := by simpa only [Std.HashMap.getElem?_insert_self,Option.some.injEq] using found.symm
@@ -178,7 +183,14 @@ theorem meaning_sourced (past : List Json) (store next : Store) (request reply :
   | define => exact definition_sourced past store next request reply sourced meaning
   | query => rw [meaning.1]; exact sourced_keep past request store sourced
   | stats => rw [meaning.1]; exact sourced_keep past request store sourced
-  | reset => rw [meaning.1]; exact empty_sourced _
+  | reset =>
+    intro name node found
+    rw [meaning.1] at found
+    simp [OracleMachines.Affine.reset] at found
+  | config =>
+    obtain ⟨slots,field,capacity,unchanged,cleared⟩ := meaning
+    intro name node found
+    exact .keep (sourced name node (unchanged ▸ found))
   | drop =>
     obtain ⟨names,field,capacity,rfl,reported⟩ := meaning
     intro name node found
@@ -215,7 +227,7 @@ and historical input origin are both part of the contract. -/
 theorem executed_query_semantics (requests : List Json) (request reply : Json)
     (accepted : OracleMachines.Affine.query (execute {} requests).1 request = .ok reply) :
     ∃ name node answer, request.getObjValAs? String "root" = .ok name ∧
-      (execute {} requests).1[name]? = some node ∧
+      (execute {} requests).1.nodes[name]? = some node ∧
       Origin node.width requests node.state.history ∧
       reply.getObjValAs? Bool "answer" = .ok answer ∧
       (answer = true ↔ ∃ v, node.state.history.Holds v) ∧

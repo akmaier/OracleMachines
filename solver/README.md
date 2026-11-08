@@ -784,7 +784,36 @@ Retries perform an additional typed source comparison. These checks are not
 included in the coefficient-work charge. Byte transport, Python content-addressed
 lineage and SQLite correspondence remain outside the native theorem.
 
-A reuse diagnostic finds repeated algebraic inputs across distinct history
-versions; it currently installs no cache. See the
+A reuse diagnostic found repeated algebraic inputs across distinct history
+versions. See the
 [expansion priorities](../research/implementation-gaps.md) and
 [provenance and pattern evidence](../experiments/results/affine-history/README.md).
+
+The native solver now caches exact algebraic transitions across these versions.
+`affine_kernel_slots` configures 0..4,096 direct-mapped slots (default 64); zero
+disables hashing and cache lookup. A hit requires equality of the width, full
+ordered parent summary and full ordered equation batch. Hash collisions only
+replace entries. Each hit attaches the certified result to the current parent's
+history. Entries contain coefficients/results, without source-history ancestors.
+Version eviction leaves the kernel cache available; reset and worker restart
+clear it. Original source versions and completed results remain in SQLite.
+
+`reference_cell_charge` is now the elimination/decision ledger at construction:
+zero for a kernel hit. `uncached_reference_cell_charge` reports the corresponding
+uncached calculation. These node fields remain creation metadata on queries.
+Use per-request `affine_updates` for actual work: `kernel_hits`, `kernel_misses`,
+`kernel_evictions`, `executed_reference_cells`, `uncached_reference_cells`,
+`kernel_key_cells` and `kernel_compare_cell_bound`. The last two count hashed
+coefficient payload and bound the candidate coefficient comparison, respectively;
+they exclude list/dimension checks, allocation, map operations and bookkeeping.
+They must not be interpreted as total machine work. Querying a resident version
+does not add a cache hit or repeat its construction charge.
+
+With compact parent summaries the key payload is at most
+`(b+1)^2 + c*(2*b+1)` cells. A hit avoids elimination but still pays input handling,
+comparison and durable source/result recording. A miss adds cache work to the
+earlier polynomial calculation. Entries retain `O(b^2+b*c)` coefficient cells;
+the slot cap is not a byte/RSS bound. The cache is exact and process-local: row
+reordering, equivalent bases, variable renaming and cold durable certificates
+are not recognized. Run `experiments/compare_affine_kernels.py --output NEW_DIR`
+for a same-binary disabled/enabled comparison with preserved run databases.

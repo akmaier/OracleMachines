@@ -177,7 +177,7 @@ class AffineGrowthTests(unittest.TestCase):
                 self.assertEqual(state['steps'],step+2)
                 self.assertEqual(state['affine_updates']['replayed_versions'],0)
                 self.assertEqual(state['affine_updates']['registered_versions'],1)
-                charges.add(state['reference_cell_charge']);self.check_report(state)
+                charges.add(state['uncached_reference_cell_charge']);self.check_report(state)
             self.assertEqual(len(charges),1)
 
     def test_bounded_residency_grows_past_old_history_cap_and_replays(self):
@@ -309,6 +309,115 @@ class AffineGrowthTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             for cap in (True,0,1,4097):
                 with self.assertRaises(ValueError):PersistentSolver(Path(d)/'s.db',native_affine_versions=cap)
+
+    def test_kernel_hit_rebinds_history_after_parent_eviction(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db',native_affine_versions=2) as s:
+            state=s.affine_grow(2,[equation(2,(2,),True),equation(2,(3,),False)])
+            rows=[equation(2,(i,2+i),False) for i in range(2)]
+            versions=[]
+            for step in range(30):
+                state=s.affine_grow(base=state['state'],equations=rows,summary=True)
+                versions.append(state['state'])
+                self.assertEqual(state['steps'],step+2)
+                self.assertEqual(solutions(2,state['summary']),{(True,False)})
+                self.assertEqual(state['affine_updates']['kernel_hits'],int(step>0))
+                self.assertEqual(state['kernel_cache_hit'],step>0)
+                self.assertGreater(state['uncached_reference_cell_charge'],0)
+                if step>0:self.assertEqual(state['reference_cell_charge'],0)
+            self.assertEqual(len(set(versions)),30)
+            self.assertEqual(s.db.execute('SELECT count(*) FROM affine_states').fetchone()[0],31)
+            query=s.affine_grow(base=versions[-1])
+            for metric in ('kernel_hits','kernel_misses','kernel_key_cells','executed_reference_cells'):
+                self.assertEqual(query['affine_updates'][metric],0)
+            # The source archive survives both native eviction and process loss.
+            stop_process(s.process);s.process=None
+            replay=s.affine_grow(base=versions[-1],summary=True)
+            self.assertEqual(replay['steps'],31)
+            self.assertEqual(solutions(2,replay['summary']),{(True,False)})
+            self.assertEqual(replay['affine_updates']['kernel_hits'],29)
+            self.assertEqual(s._request(dict(mode='affine_stats'))['resident_versions'],2)
+
+    def test_kernel_collision_checks_boundary_batch_and_width(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            s._request(dict(mode='affine_cache_config',slots=1))
+            s._request(dict(mode='affine_init',id='a',width=1))
+            for name,value in (('p',True),('q',False)):
+                s._request(dict(mode='affine_append',id=name,base='a',equations=[equation(1,(1,),value)]))
+            def append(name,parent,rows):
+                return s._request(dict(mode='affine_append',id=name,base=parent,equations=rows))
+            rows=[equation(1,(0,),True)]
+            first=append('one','p',rows)
+            different=append('two','q',rows)
+            self.assertTrue(first['answer']);self.assertFalse(different['answer'])
+            self.assertFalse(first['kernel_cache_hit']);self.assertFalse(different['kernel_cache_hit'])
+            self.assertTrue(different['kernel_evicted'])
+            again=append('three','q',rows)
+            self.assertTrue(again['kernel_cache_hit']);self.assertFalse(again['answer'])
+            self.assertEqual(again['reference_cell_charge'],0)
+            changed=append('four','q',[equation(1,(0,),False)])
+            self.assertFalse(changed['kernel_cache_hit']);self.assertTrue(changed['answer'])
+            s._request(dict(mode='affine_init',id='wide',width=2))
+            self.assertFalse(append('wide-child','wide',[equation(2,(0,),False)])['kernel_cache_hit'])
+            self.assertEqual(s._request(dict(mode='affine_stats'))['kernel_cache_entries'],1)
+
+    def test_kernel_disabled_and_enabled_match_full_frontiers(self):
+        rng=random.Random(2410)
+        with tempfile.TemporaryDirectory() as d:
+            with PersistentSolver(Path(d)/'off.db',affine_kernel_slots=0) as off,PersistentSolver(Path(d)/'on.db',affine_kernel_slots=1) as on:
+                roots=[service.affine_grow(3) for service in (off,on)]
+                versions=[(roots,set(itertools.product((False,True),repeat=3)))]
+                for _ in range(50):
+                    parents,old=rng.choice(versions)
+                    rows=[equation(3,[i for i in range(6) if rng.getrandbits(1)],bool(rng.getrandbits(1)))
+                          for _ in range(rng.randrange(5))]
+                    results=[service.affine_grow(base=parent['state'],equations=rows,summary=True)
+                             for service,parent in zip((off,on),parents)]
+                    expected=frontier(3,old,rows)
+                    for result in results:
+                        self.assertEqual(solutions(3,result['summary']),expected)
+                        self.assertEqual(result['answer'],bool(expected))
+                    self.assertEqual(results[0]['summary'],results[1]['summary'])
+                    self.assertFalse(results[0]['kernel_cache_hit'])
+                    self.assertEqual(results[0]['kernel_key_cells'],0)
+                    versions.append((results,expected))
+                self.assertEqual(off._request(dict(mode='affine_stats'))['kernel_cache_entries'],0)
+                self.assertLessEqual(on._request(dict(mode='affine_stats'))['kernel_cache_entries'],1)
+
+    def test_kernel_configuration_atomic_and_reset_retains_cap(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            s._request(dict(mode='affine_init',id='a',width=1))
+            s._request(dict(mode='affine_cache_config',slots=1))
+            request=dict(mode='affine_append',id='b',base='a',equations=[])
+            s._request(request)
+            before=s._request(dict(mode='affine_stats'))
+            for slots in (True,-1,4097,'1'):
+                with self.assertRaises(ValueError):s._request(dict(mode='affine_cache_config',slots=slots))
+                self.assertEqual(s._request(dict(mode='affine_stats')),before)
+            s._request(dict(mode='affine_cache_config',slots=0))
+            self.assertTrue(s._request(dict(mode='affine_query',root='b',summary=False))['answer'])
+            self.assertFalse(s._request(dict(request,id='c'))['kernel_cache_hit'])
+            s._request(dict(mode='affine_reset'))
+            self.assertEqual(s._request(dict(mode='affine_stats')),
+                             dict(resident_versions=0,kernel_cache_entries=0,kernel_cache_slots=0))
+            for cap in (True,-1,4097,'1'):
+                with self.assertRaises(ValueError):PersistentSolver(Path(d)/'bad.db',affine_kernel_slots=cap)
+
+    def test_kernel_rollback_clears_stale_entries_and_keeps_configuration(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db',affine_kernel_slots=1) as s:
+            first=s.affine_grow(1,[equation(1,(1,),True)])
+            original=s.affine_growth.store.put
+            def fail(kind,value):
+                if kind=='affine_result':raise RuntimeError('injected archive failure')
+                return original(kind,value)
+            with patch.object(s.affine_growth.store,'put',side_effect=fail):
+                with self.assertRaises(RuntimeError):
+                    s.affine_grow(base=first['state'],equations=[])
+            recovered=s.affine_grow(base=first['state'],equations=[])
+            self.assertEqual(recovered['affine_updates']['native_resets'],1)
+            self.assertFalse(recovered['kernel_cache_hit'])
+            self.assertTrue(recovered['answer'])
+            self.assertEqual(s._request(dict(mode='affine_stats'))['kernel_cache_slots'],1)
+            self.assertEqual(s.db.execute('SELECT count(*) FROM affine_states').fetchone()[0],2)
 
     def test_native_version_capacity_is_refusal_not_false(self):
         with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:

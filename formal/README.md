@@ -1006,3 +1006,27 @@ binds the current parent. These trace proofs introduce no runtime history list.
 The current audit covers **3,794 declarations / 1,836 theorem declarations**,
 without admits or added axioms; **192 tests** pass. Byte transport, Python/SQLite,
 serialized witnesses and total resource costs remain separate obligations.
+
+## Exact affine transition reuse
+
+`AffineKernel.lean` separates a certified algebraic `Kernel previous equations`
+from the source history to which it is applied. It certifies the exact output
+summary, decision and uncached coefficient charge. `Kernel.attach` constructs the
+new erased original history from the current parent; `Kernel.attach_history`
+and `Kernel.bound` preserve provenance and the earlier polynomial ledger.
+
+`KernelCache.obtain` hashes into a configured slot, then checks the width and
+both complete typed input lists with decidable equality. Dependent proof
+transport supplies a result only for those exact inputs. Misses compute and
+replace the selected entry. Zero slots bypass cache work. `kernelInputCells_bound`
+bounds hashed coefficient payload by `(b+1)^2+c*(2*b+1)`. This is not a theorem
+about map time, allocation, byte memory or a complete instruction count.
+
+The executed affine protocol now carries separate node and kernel maps.
+Configuration preserves existing nodes, reset preserves the configured slot
+count, and both clear the kernel map. `AffineHistory` covers configuration too;
+`executed_query_semantics` still proves verdicts against chronological original
+inputs. The generated C hit branch returns the existing kernel without calling
+`extendRun` or `decideRun`; history attachment retains only its summary at runtime.
+Kernel slots are distinct from the resident-version cap. Entries carry no
+source ancestors; source batches remain durable in the Python archive.

@@ -87,7 +87,7 @@ class PersistentSolver:
                  symbolic: bool = False, adaptive: bool = False,
                  max_archive_bytes: int | None = None, active_cache_bytes: int = 2*1024**2,
                  symbolic_node_limit: int = 50000, wal_checkpoint_bytes: int = 4*1024**2,
-                 native_layer_cells: int = 1024**2, native_affine_versions: int = 256,
+                 native_layer_cells: int = 1024**2, native_affine_versions: int = 256, affine_kernel_slots: int = 64,
                  max_input_bytes: int = 8 * 1024**2, max_message_bytes: int = 64 * 1024**2,
                  max_proof_bytes: int = 16 * 1024**2):
         start = time.perf_counter_ns()
@@ -107,6 +107,9 @@ class PersistentSolver:
         if type(native_affine_versions) is not int or not 2<=native_affine_versions<=4096:
             raise ValueError('Affine resident version cap must be 2 to 4096')
         self.native_affine_versions=native_affine_versions
+        if type(affine_kernel_slots) is not int or not 0<=affine_kernel_slots<=4096:
+            raise ValueError('Affine kernel cache slots must be 0 to 4096')
+        self.affine_kernel_slots=affine_kernel_slots
         self.backend, self.timeout = backend, timeout
         self.query_timeout, self.verify_cache = query_timeout, verify_cache
         self.max_input_bytes, self.max_message_bytes, self.max_proof_bytes = max_input_bytes, max_message_bytes, max_proof_bytes
@@ -567,6 +570,7 @@ class PersistentSolver:
             active_caches=caches,symbolic_node_limit=self.symbolic_node_limit,
             native_layer_cells_cap=self.native_layer_cells,
             native_affine_versions_cap=self.native_affine_versions,
+            affine_kernel_slots=self.affine_kernel_slots,
             native_affine_versions=len(self.affine_growth.verified) if hasattr(self,"affine_growth") else 0,
             native_layer_cells=0 if self.layers is None else len(self.layers.verified)*self.layers.states**2,
             native_source_cells=0 if self.source_layers is None else len(self.source_layers.verified)*self.source_layers.states**2,

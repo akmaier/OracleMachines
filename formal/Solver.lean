@@ -262,7 +262,7 @@ def main : IO Unit := do
       | .ok request =>
         let mode := (request.getObjValAs? String "mode").toOption.getD ""
         if mode == "affine_init" || mode == "affine_append" || mode == "affine_query" ||
-            mode == "affine_drop" || mode == "affine_stats" || mode == "affine_reset" then
+            mode == "affine_drop" || mode == "affine_stats" || mode == "affine_reset" || mode == "affine_cache_config" then
           let result := OracleMachines.AffineHistory.handle affineStates request
           affineStates := result.1
           pure result.2

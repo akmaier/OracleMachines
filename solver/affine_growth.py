@@ -26,6 +26,11 @@ class AffineGrowth:
         self.dirty=False
         self.evicted_versions=0
         self.native_resets=0
+        self.cache_worker=None
+        self.cache_slots=None
+        self.kernel_totals=dict(kernel_hits=0,kernel_misses=0,kernel_evictions=0,
+            kernel_key_cells=0,kernel_compare_cell_bound=0,
+            executed_reference_cells=0,uncached_reference_cells=0)
 
     def invalidate(self):
         # A failed transaction may leave newly checked native nodes. Reset on
@@ -37,6 +42,11 @@ class AffineGrowth:
     def ensure(self,token):
         if self.worker is not self.service.process:
             self.verified.clear();self.worker=self.service.process;self.dirty=False
+        if self.service.process is None or self.cache_worker is not self.service.process or self.cache_slots!=self.service.affine_kernel_slots:
+            self.service._request(dict(mode='affine_cache_config',slots=self.service.affine_kernel_slots))
+            self.cache_worker=self.service.process
+            self.cache_slots=self.service.affine_kernel_slots
+            self.worker=self.service.process
         if self.dirty:
             if self.service.process is not None:
                 self.service._request(dict(mode='affine_reset'))
@@ -71,7 +81,15 @@ class AffineGrowth:
                 if oldest==node['base']:raise RuntimeError('Affine retention would evict the required parent')
                 self.service._request(dict(mode='affine_drop',ids=[oldest]))
                 del self.verified[oldest];self.evicted_versions+=1
-            self.service._request(request)
+            result=self.service._request(request)
+            if node['base'] is not None:
+                self.kernel_totals['kernel_hits']+=int(result['kernel_cache_hit'])
+                self.kernel_totals['kernel_misses']+=int(not result['kernel_cache_hit'])
+                self.kernel_totals['kernel_evictions']+=int(result['kernel_evicted'])
+                for field in ('kernel_key_cells','kernel_compare_cell_bound'):
+                    self.kernel_totals[field]+=result[field]
+                self.kernel_totals['executed_reference_cells']+=result['reference_cell_charge']
+                self.kernel_totals['uncached_reference_cells']+=result['uncached_reference_cell_charge']
             self.verified[name]=None
             self.worker=self.service.process
         self.verified.move_to_end(token)
@@ -104,6 +122,7 @@ class AffineGrowth:
         if type(summary) is not bool:raise ValueError('Summary option must be Boolean')
         replayed=registered=0
         old_evictions,old_resets=self.evicted_versions,self.native_resets
+        old_kernel=dict(self.kernel_totals)
         before={field:getattr(self.store,field) for field in
                 ('inserted_objects','serialized_bytes','inserted_raw_bytes','inserted_packed_bytes','object_reads','read_packed_bytes')}
         try:
@@ -128,6 +147,7 @@ class AffineGrowth:
                 self.service.db.execute('INSERT OR IGNORE INTO affine_states VALUES (?,?,?,?,?,?)',
                     (self.service.engine_id,state,evidence,int(result['answer']),result['steps'],time.time_ns()))
             metrics={field:getattr(self.store,field)-value for field,value in before.items()}
+            metrics.update({field:value-old_kernel[field] for field,value in self.kernel_totals.items()})
             return dict(result,state=state,source='affine_growth',
                         affine_updates=dict(replayed_versions=replayed,registered_versions=registered,
                             evicted_versions=self.evicted_versions-old_evictions,

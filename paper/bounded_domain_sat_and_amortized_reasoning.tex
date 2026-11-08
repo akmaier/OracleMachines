@@ -2643,6 +2643,35 @@ All 319 Python tests and four new complete archive replays pass; seven preceding
 
 An unused structural opportunity remains inside the saved inconclusive traces. In 245 archived clear-probe nodes, including 179 unresolved nodes, both assumptions already propagate a common literal. Boolean case splitting proves that consequence forced. The inventory does not yet apply these facts; the counts include unselected alternatives and do not establish additional root coverage. Reusing the checked traces could expose structure without repeating propagation, but composition, maintenance and total costs need a matched implementation study. The present results support checked look-ahead on this corpus, not a uniformly small probe budget, complete tractable partition or polynomial arbitrary-SAT expansion.
 
+\subsection{Reusing common consequences of probe assumptions}
+\label{sec:common-probe-consequences}
+
+The next experiment implements the identified common-consequence rule and finds a narrow coverage gain with higher total cost. This is established necessary-assignment reasoning: the \texttt{march\_hi} solver description explicitly applies a literal implied under both values of another variable \citep{heule2009marchhi}. Our optional policy preserves the existing failed-literal phase, including every candidate and attempt. If no conflict occurs, it selects the first false/true probe pair with a nonempty intersection of propagated literals and applies all literals in that intersection. It retains all remaining pairs and the earlier family, component, simplification and projection priorities.
+
+\begin{proposition}[Common consequences preserve exact reduction]
+\label{prop:common-probe-consequences}
+Let $C$ be a partial assignment such that, for each $b\in\{0,1\}$, every model of $F$ with $x=b$ extends $C$. Then every model of $F$ extends $C$. If checked unit simplification of $F\vert_C$ produces $G$ on remaining variables $Y$, then
+\[
+G(y)\quad\Longleftrightarrow\quad\exists h\,F(C,y,h),
+\]
+where $h$ assigns the other variables. Hence $G$ is the existential projection of $F$ onto $Y$, and every child model lifts to a parent model.
+\end{proposition}
+\begin{proof}
+Every model assigns either false or true to $x$. In either case the corresponding hypothesis forces $C$. Restricting to $C$ therefore loses no parent model. Checked unit simplification preserves the exact existential relation and supplies the eliminated forced values by Proposition~\ref{prop:simplification-fibers}. Composing these facts proves the displayed equivalence and lifting.
+\end{proof}
+
+The Lean lemmas \texttt{common\_condition\_forces} and \texttt{satisfiable\_common\_condition} prove the single-literal implication and SAT restriction from explicit hypotheses for both assumptions. The Python checker separately reconstructs and verifies both complete unit traces, the selected pair and literal intersection, retained closure, strict support reduction and exact child binding. Lifted assignments are checked against the full parent. An inconclusive trace alone proves no common assignment. These lemmas do not refine Python or SQLite. Source edits need a new checked dependency context; deleting a reason clause can invalidate a formerly forced literal.
+
+The comparison retains all 1,025 previous inputs and adds 64 fresh random formulae and 12 growing-component, signed-renaming and edit controls. The random set includes pure 3-CNFs through 48 variables. At depth two, four conditioning candidates and four probe candidates, non-tiny closure rises only from 536/589 to 537/589. The sole gain is old case 968, already closed by the earlier full-probing diagnostic; no baseline closure is lost on this corpus. Fresh random closure remains 40/64. Total operation time rises from 32.12172 to 32.75928 seconds, SQLite from 104,435,712 to 107,757,568 bytes and full cold checking from 12.03279 to 12.56291 seconds. The policy therefore remains optional.
+
+There are 477 common rewrites assigning 663 literals. All 355 common nodes with a matching baseline CNF/depth pair retain identical probe-attempt lists. Intersecting those lists needs no new probing at that node, but the retained closure and its descendants require work. Across the complete run, probes rise from 29,280 to 31,745 and checked attempts from 54,016 to 63,755. Arbitrary conditioning candidates fall from 2,036 to 1,957, and selected unresolved literal payload from 9,728 to 8,101. Nevertheless, logical node bytes grow from 38,929,223 to 40,749,002. Common witnesses and closures occupy only 34,415 JSON bytes, while probe-node payload grows by 2,410,587 bytes. The changed residual collection, rather than the small local witness alone, determines the cost.
+
+With $k$ probe variables and at most $v$ unit assignments per trace, intersection visits at most $2kv$ unit entries. Python sets give expected $O(kv)$ set work, followed by $O(v\log v)$ sorting of the selected intersection. The pair/literal witness requires $O(v\log(v+k+2))$ bits. Scan-based closure still costs $O((v+1)L)$ for $L$ literal occurrences, in addition to reconstruction, recognition and persistence. Strict support reduction bounds one rewrite chain, not the number of acquired alternatives. The experiment demonstrates that reducing selected residual size can coexist with higher total acquisition and replay cost.
+
+All modes retain the same 7,393 ordinary solver residuals; solving alone takes 9.22197 seconds. Operation times include recognition, discovery, checking, persistence, original-source solving and successful root lifts. The six-case traced Python peak slightly increases, from 1,968,173 to 1,970,626 bytes, as does warm replay. Neither native memory nor full-corpus peak is measured. All 326 Python tests, three new complete archive replays and four preceding archive replays pass. The two new Lean lemmas bring the audit to 4,091 declarations and 1,950 theorem declarations. Single sequential synthetic measurements do not establish a general speedup.
+
+Fifty-two non-tiny inputs remain unresolved. The next structural candidate is signed variable equivalence derived from opposite implications in the paired traces. Although 269 archived unresolved nodes have such a relation beyond a direct complementary binary pair, selected-path analysis finds only 16 relevant nodes on 16 of the 52 missed source paths, covering 799 of 8,101 selected unresolved literals. These are opportunities, not additional closures. Full-CNF substitution, signed model transport, checking and cost still require an implementation. The larger 3-CNF misses remain a separate gap; neither common consequences nor the identified equivalences establish a complete efficient partition of arbitrary SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 
@@ -2918,6 +2947,12 @@ Heule, M.~J.~H., and van Maaren, H. (2006).
 March\_dl: Adding adaptive heuristics and a new branching strategy.
 \emph{Journal on Satisfiability, Boolean Modeling and Computation}, 2, 47--59.
 \url{https://www.cs.cmu.edu/~mheule/publications/JSAT2_3_Heule.pdf}.
+
+\bibitem[Heule and van Maaren(2009)]{heule2009marchhi}
+Heule, M., and van Maaren, H. (2009).
+March\_hi.
+In \emph{SAT 2009 competitive events booklet}, pp. 27--28.
+\url{https://www.cril.fr/SAT09/solvers/booklet.pdf}.
 
 \bibitem[Immerman(2010)]{immerman2010objections}
 Immerman, N. (2010).

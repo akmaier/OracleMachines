@@ -3168,3 +3168,12 @@ replay byte-identically. Two new Lean lemmas prove the common-consequence rule
 and exact SAT restriction from explicit implication hypotheses. The full build
 and axiom audit pass at 4,091 declarations / 1,950 theorem declarations; Python,
 SQLite and resource bounds remain outside the refinement.
+
+Implementation/evidence checkpoint `79e1404` is pushed. Manuscript Section 12.51
+adds the common-consequence proposition and proof, the verified necessary-
+assignment citation, measured cost regression and selected-path limits on the
+next equivalence opportunity. All 50 earlier proof blocks remain intact (51
+total; 177 unique labels). The 99-page PDF builds without warnings or box errors;
+pages 90--92 and bibliography page 96 were visually inspected. Resume with the
+16 selected unresolved equivalence candidates, preserving this optional policy
+and its negative cost evidence rather than enabling it unconditionally.

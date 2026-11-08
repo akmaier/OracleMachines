@@ -3121,3 +3121,50 @@ All 49 earlier proof blocks remain intact (50 total; 175 unique labels). The
 page 95 were visually inspected. Resume with checked common-consequence reuse
 from the stored probe traces; retain the 29-case cap diagnostic and avoid
 repeating unconditional probe-budget escalation.
+
+## Checked common consequences and their downstream cost (9 November)
+
+`cnf_common_consequence.py` implements the standard necessary-assignment rule.
+It preserves all failed-literal attempts, then applies all common literals from
+the first complete inconclusive pair with a nonempty intersection. Both unit
+traces, pair selection, retained closure, exact target and model transport are
+checked. Support strictly decreases. Earlier recognition/component/reduction
+priorities and old-policy archives remain valid. Small hooks in the previous
+inventory share checking/lifting without changing its record format or policy.
+
+The [1,101-input comparison](../experiments/results/cnf-common-consequence/README.md)
+preserves all 1,025 old inputs and adds 64 fresh random formulas (through 48
+variables) and 12 growing/signed/edit controls. Coverage rises 536/589 -> 537/589
+non-tiny cases, solely old case 968; no baseline closure is lost, and fresh
+coverage remains 40/64. Total time rises 32.12172 -> 32.75928 s, SQLite
+104,435,712 -> 107,757,568 bytes and cold audit 12.03279 -> 12.56291 s. The
+post-selected 29-miss pilot also gains one closure at higher cost and is retained.
+This policy stays optional; there is no measured general speedup.
+
+There are 477 common rewrites assigning 663 literals. All 355 common nodes with
+a matching baseline CNF/depth retain identical probe lists. Despite fewer
+arbitrary candidates (2,036 -> 1,957) and selected unresolved literals
+(9,728 -> 8,101), total probes rise 29,280 -> 31,745 and logical node bytes
+38,929,223 -> 40,749,002. New residuals cause repeated acquisition. Witness and
+closure JSON is only 34,415 bytes, while probe-node payload grows by 2,410,587.
+The targeted six-case peak and warm replay also slightly regress. All modes
+retain 7,393 ordinary solver residuals; the decision solver is unchanged.
+
+Fifty-two non-tiny cases remain open. A fresh 48-variable miss is now the largest
+discovery cost; profiling still points to restriction, unit checks/propagation,
+normalization and literal helpers. Saved paired implications contain a more
+structural next opportunity: signed variable equivalences not already expressed
+by a direct binary pair. There are 269 such archived unresolved nodes, but only
+16 on selected paths, affecting 16/52 missed sources and 799/8,101 selected
+unresolved literals. Implement and check full-CNF substitution and signed model
+transport on those selected residuals first. Measure whether a recognizable
+family/component emerges before applying the rewrite to all alternatives.
+These counts imply neither new coverage nor a resolution of the larger misses.
+
+All 326 Python tests pass (27.50 s), including exhaustive fibers, multiple
+common literals, saved-trace reuse, mixtures/edits, invalid/omitted witnesses,
+transport and cold corruption. Three new and four preceding complete archives
+replay byte-identically. Two new Lean lemmas prove the common-consequence rule
+and exact SAT restriction from explicit implication hypotheses. The full build
+and axiom audit pass at 4,091 declarations / 1,950 theorem declarations; Python,
+SQLite and resource bounds remain outside the refinement.

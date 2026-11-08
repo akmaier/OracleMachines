@@ -1239,3 +1239,15 @@ All 319 Python tests pass. The Lean build/audit now covers 4,089 declarations /
 1,948 theorem declarations. The [matched study](../experiments/results/cnf-failed-literal/README.md)
 reports new structural closures and retains inconclusive probes, remaining
 misses and the unfavorable full-probing budget diagnostic.
+
+The common-consequence follow-up adds `common_condition_forces` and
+`satisfiable_common_condition` in `Residuals.lean`. If both assumptions on one
+variable imply the same value of a target variable in every parent model, that
+target value is forced and conditioning on it preserves satisfiability. Both
+implications are explicit hypotheses; inconclusive propagation alone does not
+supply them. Python independently checks their unit reasons, pair selection,
+all common literals, closure and lifted models. The lemmas do not refine that
+implementation or its persistence/costs. All 326 Python tests and the Lean
+build/audit pass (4,091 declarations / 1,950 theorem declarations). The
+[comparison](../experiments/results/cnf-common-consequence/README.md) retains one
+new closure alongside increased runtime/storage and no fresh-random gain.

@@ -86,6 +86,15 @@ This is standard failed-literal reasoning in the separate discovery layer;
 and costs more. The next target is common consequences already present in both
 inconclusive assumption traces, with their reuse and checking charged.
 
+The [common-consequence study](experiments/results/cnf-common-consequence/README.md)
+implements that reuse as an optional necessary-assignment policy. On 1,101
+inputs it adds one structural closure (536/589 -> 537/589), with no fresh-random
+gain, while time rises 32.12 -> 32.76 s and SQLite 104.44 -> 107.76 MB. The
+policy stays optional and the regression is preserved. Smaller selected
+residuals trigger additional probing and retained state. The next focused
+discovery target is checked signed-equivalence substitution on the selected
+unresolved paths where existing probe traces already imply such relations.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

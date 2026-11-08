@@ -1007,3 +1007,39 @@ nodes, including 179 unresolved nodes. Those unit reasons can support a new
 forced consequence by case splitting without another propagation search. This
 is an identified opportunity, not an implemented saving or new root closure.
 Shared trace storage, checking and invalidation still need explicit accounting.
+
+## 19. Common consequences: smaller residuals can cost more
+
+`CommonConsequenceInventory` preserves the old failed-literal probe sequence. If
+it ends without a conflict, the policy intersects each pair's checked unit
+assignments, chooses the first nonempty intersection and applies every common
+literal of that pair. The parent entails these assignments by Boolean case
+splitting. Their restricted CNF and checked unit closure preserve exact
+existential fibers; support strictly decreases and arbitrary-branch depth stays
+unchanged. Both implications, all inconclusive attempts and exact source/model
+bindings remain checked and stored. No probe search is repeated to form the
+intersection, but closure and later residual acquisition still cost work.
+
+At most 2kv unit entries are scanned for k variables and v-unit traces. Expected
+hash-set work is O(kv), with O(v log v) sorting of the retained intersection.
+The added pair/literal witness needs O(v log(v+k+2)) bits. Scan-based closure
+costs O((v+1)L) for L literal occurrences, with its reason trace additional.
+All full CNFs, keys, profiles, child acquisition and replay costs remain charged.
+This local bound does not control the global number of rewritten residuals.
+
+On the [1,101-input study](../experiments/results/cnf-common-consequence/README.md),
+closure rises only 536/589 -> 537/589, with no fresh-random gain (40/64 both).
+Total time grows 32.12172 -> 32.75928 s, SQLite 104,435,712 -> 107,757,568 bytes,
+and cold audit 12.03279 -> 12.56291 s. Selected unresolved literal payload falls
+9,728 -> 8,101, but probes grow 29,280 -> 31,745 and logical node bytes grow
+38,929,223 -> 40,749,002. The 477 common rewrites assign 663 literals; 355 share
+the exact original probe lists with matched baseline CNF/depth nodes. Witnesses
+and closures use only 34,415 JSON bytes, while probe-node payload grows by
+2,410,587 bytes. The change in acquired residuals outweighs compact local evidence.
+
+The policy remains optional. The six-case Python peak and warm time slightly
+increase; full-corpus peak and native memory are unmeasured. All modes keep the
+same 7,393 ordinary solver residuals, and solving alone takes 9.22197 s. The
+next discovery opportunity is signed equivalence from opposite implications in
+the paired traces. Selected-path counts restrict that opportunity to 16 nodes
+on 16 of the 52 missed source paths; its substitution and costs are unimplemented.

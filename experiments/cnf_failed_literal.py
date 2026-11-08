@@ -89,10 +89,20 @@ class FailedLiteralInventory(FusedShortestClauseInventory):
                 not self._uses_simplification(profile, groups) and
                 not self._uses_projection(profile, groups))
 
+    def _discover_probes(self, cnf):
+        return discover_probes(cnf, self.config['probe_limit'], self.counts)
+
+    def _check_probes(self, cnf, result):
+        return check_probes(cnf, result, self.config['probe_limit'], self.counts)
+
+    @staticmethod
+    def _uses_probe(profile):
+        return profile['probing']['status'] == 'forced'
+
     def _profile(self, cnf):
         profile = super()._profile(cnf)
         groups = components(cnf, self.counts) if self.config['decompose'] else [cnf]
-        profile['probing'] = (discover_probes(cnf, self.config['probe_limit'], self.counts)
+        profile['probing'] = (self._discover_probes(cnf)
                               if self._probe_enabled(profile, groups) else dict(status='skipped'))
         return profile
 
@@ -109,7 +119,7 @@ class FailedLiteralInventory(FusedShortestClauseInventory):
         groups = components(cnf, self.counts) if self.config['decompose'] else [cnf]
         saved = node['profile'].get('probing', {})
         if self._probe_enabled(profile, groups):
-            check_probes(cnf, saved, self.config['probe_limit'], self.counts)
+            self._check_probes(cnf, saved)
         elif saved != dict(status='skipped'):
             raise ValueError('Probing overrides an earlier recognition/reduction')
         profile['probing'] = saved
@@ -119,20 +129,20 @@ class FailedLiteralInventory(FusedShortestClauseInventory):
         self.counts['verified_pattern_nodes'] += 1
 
     def _discover_profile(self, cnf, depth, profile, groups):
-        if profile['probing']['status'] != 'forced':
+        if not self._uses_probe(profile):
             return super()._discover_profile(cnf, depth, profile, groups)
-        target, _ = check_probes(cnf, profile['probing'], self.config['probe_limit'], self.counts)
+        target, _ = self._check_probes(cnf, profile['probing'])
         edge = self._edge(target, depth)
         self.counts['probe_rewrites'] += 1
         return dict(cnf=[list(c) for c in cnf], depth=depth, profile=profile,
                     kind='probe', edge=edge, summary=self._summary([edge]))
 
     def _check_profile(self, key, node, cnf, profile, groups):
-        if profile['probing']['status'] != 'forced':
+        if not self._uses_probe(profile):
             return super()._check_profile(key, node, cnf, profile, groups)
         if set(node) != {'cnf', 'depth', 'profile', 'kind', 'edge', 'summary'} or node['kind'] != 'probe':
             raise ValueError('Missing checked probe rewrite')
-        target, _ = check_probes(cnf, profile['probing'], self.config['probe_limit'], self.counts)
+        target, _ = self._check_probes(cnf, profile['probing'])
         self._check_edge(node['edge'], target, node['depth'])
         if encode(node['summary']) != encode(self._summary([node['edge']])):
             raise ValueError('Invalid probe coverage summary')
@@ -145,7 +155,7 @@ class FailedLiteralInventory(FusedShortestClauseInventory):
         if (any(i not in child_model or type(child_model[i]) is not bool for i in range(1, len(edge['names'])+1))
                 or not holds(child['cnf'], child_model)):
             raise ValueError('Invalid probed child model')
-        _, fixed = check_probes(node['cnf'], node['profile']['probing'], self.config['probe_limit'], self.counts)
+        _, fixed = self._check_probes(node['cnf'], node['profile']['probing'])
         model = {abs(lit): False for c in node['cnf'] for lit in c}
         model.update(fixed)
         model.update((v, child_model[i]) for i, v in enumerate(edge['names'], 1))

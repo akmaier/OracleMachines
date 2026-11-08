@@ -92,6 +92,31 @@ theorem satisfiable_failed_condition (f : Formula) (index : Nat) (value : Bool)
     obtain ⟨v, _, model⟩ := (satisfiable_condition f index (!value)).mp remaining
     exact ⟨v, model⟩
 
+/-- An implication proved under both Boolean assumptions holds in every parent
+model. Each implication is an explicit hypothesis, not a claim that an
+inconclusive probe automatically proves a common consequence. -/
+theorem common_condition_forces (f : Formula) (index target : Nat) (value : Bool)
+    (low : ∀ v, v index = false → f.eval v = true → v target = value)
+    (high : ∀ v, v index = true → f.eval v = true → v target = value)
+    (v : Nat → Bool) (model : f.eval v = true) : v target = value := by
+  cases assumption : v index with
+  | false => exact low v assumption model
+  | true => exact high v assumption model
+
+/-- Conditioning on a common consequence preserves satisfiability exactly.
+The acquisition/checking of the two implications is outside this semantic rule. -/
+theorem satisfiable_common_condition (f : Formula) (index target : Nat) (value : Bool)
+    (low : ∀ v, v index = false → f.eval v = true → v target = value)
+    (high : ∀ v, v index = true → f.eval v = true → v target = value) :
+    Satisfiable f ↔ Satisfiable (f.condition target value) := by
+  constructor
+  · rintro ⟨v, model⟩
+    exact (satisfiable_condition f target value).mpr
+      ⟨v, common_condition_forces f index target value low high v model, model⟩
+  · intro remaining
+    obtain ⟨v, _, model⟩ := (satisfiable_condition f target value).mp remaining
+    exact ⟨v, model⟩
+
 /-- Instantiate Left with selected choice groups and Right with their possible
 resources. This is the cardinality obstruction behind a Hall certificate, not
 a proof of the Python CNF recognizer or matching algorithm. -/

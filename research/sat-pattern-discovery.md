@@ -132,6 +132,18 @@ both assumptions in 245 archived nodes (179 unresolved). Using these consequence
 is the next exact-discovery experiment; it has not yet added root coverage.
 Keep arbitrary split depth separate from per-residual probes and forced chains.
 
+**Checked common consequences implemented:** the [1,101-input comparison](../experiments/results/cnf-common-consequence/README.md)
+applies the necessary assignments from the first complete probe pair with a
+nonempty unit intersection, after the unchanged failed-literal phase. It proves
+and checks exact reduction and lifting, with all attempts retained. One old case
+gains closure (536/589 -> 537/589); the 64 fresh random cases have no gain.
+Time, storage and cold replay all increase, so the policy remains optional.
+Smaller selected residuals trigger more subsequent probing. Next test checked
+signed-equivalence substitution from the saved paired traces on selected
+unresolved nodes: 16 selected nodes affect 16 of the 52 missed source paths.
+Complete recognition, full-CNF substitution, transport and matched costs remain
+implementation obligations; these opportunities are not achieved new coverage.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

@@ -12,14 +12,32 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-**Next research experiment:** reuse common consequences of both inconclusive
-assumption traces. The new checked failed-literal study already contains such
-facts in 245 archived clear-probe nodes, including 179 unresolved nodes. Boolean
-case splitting proves a literal forced if both assumptions propagate it. These
-are opportunities, not achieved new coverage; unselected alternatives are
-included. Implement checked composition and model transport, preserve every
-failed probe, and measure whether using these stored consequences exposes useful
-families without additional propagation. A bounded miss remains inconclusive.
+**Next research experiment:** discover signed equivalences from the two checked
+probe traces, then test exact variable substitution on selected unresolved
+residuals. The common-policy archive has 269 unresolved nodes with implications
+not already represented by a direct complementary binary pair. Only 16 lie on
+selected paths, affecting 16 of 52 remaining source misses and 799 of 8,101
+selected unresolved literals. Begin with these cases: check the full CNF
+substitution and signed model transport, retain source dependencies, and measure
+whether a family or component becomes visible before expanding the policy.
+These counts are opportunities, not additional coverage or a universal bound.
+
+The [common-consequence comparison](../experiments/results/cnf-common-consequence/README.md)
+implements the previous target, with a narrow gain and a total-cost regression.
+On 1,101 inputs it closes 537/589 non-tiny cases versus 536/589; fresh random
+closure remains 40/64. Time rises 32.122 -> 32.759 s, SQLite 104.436 -> 107.758 MB
+and cold checking 12.033 -> 12.563 s. Keep it optional. Although arbitrary
+conditioning candidates and selected unresolved literals fall, probes rise
+29,280 -> 31,745. Common facts require no new probe at the same node, but their
+reduced children trigger new work. Do not equate smaller residuals with lower
+total acquisition or promote all archived opportunities to claimed root gains.
+
+Probe nodes now dominate logical storage (23.647 of 40.749 MB), and the largest
+remaining 48-variable discovery case again spends most profiled own time in
+restriction, unit checks/propagation, normalization and literal-processing
+helpers. Occurrence-driven scans and shared rewrite chains remain supporting
+cost work. The selected equivalence opportunity will not explain all larger
+3-CNF misses; preserve those cases as a separate unresolved group.
 
 The [failed-literal comparison](../experiments/results/cnf-failed-literal/README.md)
 implements the preceding target. On 1,025 matched inputs, closure rises from

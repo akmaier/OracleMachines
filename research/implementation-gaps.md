@@ -2860,3 +2860,11 @@ refutation semantics, with projection and persistence cost charged. Test the
 matching/parity control and all unresolved random cases too. No new Lean
 implementation refinement, efficient universal partition, compact universal
 oracle or unrestricted polynomial SAT algorithm is established here.
+
+Implementation/evidence checkpoint `e1e7608` is committed and pushed. Manuscript
+Section 12.45 adds the exact extraction proposition and proof, checked elimination
+scope, matched coverage/costs, retained regressions and next interface target.
+All 45 earlier proof blocks remain intact (46 total; 166 unique labels). The
+90-page PDF builds without warnings or box errors; changed pages 82--83 were
+visually inspected. The existing Lean build and axiom audit pass unchanged
+(4,083 declarations / 1,943 theorem declarations). No new Lean theorem is claimed.

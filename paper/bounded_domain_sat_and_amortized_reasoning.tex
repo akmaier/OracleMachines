@@ -2308,6 +2308,31 @@ The comparison retains 24 histories, 4,848 decisions and 48 archives. At 16 hole
 
 The same comparison retains cases where this representation loses. Appending the same clause 128 times occupies 11,742 logical bytes, compared with 1,410 for the old cache after canonical clause deduplication. Repeating the same parent and clause operation instead reuses a version, but retains fixed table overhead. Thirty-two novel unit clauses force fresh bases and use 57,756 bytes instead of 30,657. The mixed history also loses slightly. Timings include acquisition and rejected fast attempts; optional size scans and full exports are recorded separately. SAT timings compare interfaces with different witness-output behavior: the older solver constructs its model on each call, while the history interface exports it on request. These are restricted source-representation results, not an optimal expansion policy or a polynomial bound for arbitrary SAT. Repeated-event compression, sharing across fresh bases and cold validation remain concrete costs to investigate.
 
+\subsection{Reusing a refutation or a surviving assignment}
+\label{sec:decision-history}
+
+The preceding rule preserves every base model. A decision query needs less: one surviving assignment proves SAT, while a refuted conjunct proves UNSAT. Let us apply these elementary rules directly to the stored history. The negative case specializes Proposition~\ref{prop:component-refutation}; the positive case reuses a checked witness. Neither rule requires a new tractable-class claim.
+
+\begin{proposition}[Decision-preserving clause history]
+\label{prop:decision-history}
+Let $F_t=F_0\land D_1\land\cdots\land D_t$, where each $D_i$ is any well-formed clause, including a signed or empty clause.
+If $F_0$ is unsatisfiable, every $F_t$ is unsatisfiable.
+Alternatively, fix one total assignment $a$ satisfying $F_0$. If $a$ satisfies each added clause, then it satisfies every $F_t$.
+The second condition preserves a witness and the SAT answer, but need not preserve all models of $F_0$. Failure of $a$ on an addition implies neither SAT nor UNSAT for the expanded formula.
+\end{proposition}
+
+\begin{proof}
+Any model of $F_t$ would satisfy its conjunct $F_0$, contradicting a refutation of the base. For the positive case, $a$ satisfies every conjunct by assumption. Equivalently, induction appends one clause satisfied by the same assignment. Other base models may fail the added clause: $x\lor y$ and its extension $(x\lor y)\land x$ illustrate this difference. Conversely, the model $x=1,y=0$ fails the addition $\neg x$, although $(x\lor y)\land\neg x$ remains satisfiable. An empty added clause instead makes any SAT base unsatisfiable. Thus a failed stored assignment alone supplies no decision.
+\end{proof}
+
+The new research operation stores either an UNSAT-extension record or a checked-model record, each with the exact clause and parent/base references. It validates all literal syntax before accepting a record. For SAT, omitted variables in the sparse base assignment are consistently false, including in later clauses. Cold replay checks the base certificate and each required ancestor against the same base. Old positive-subset records remain valid in mixed histories because the base assignment satisfies them. Unsupported changes require a newly acquired base; no deletion or replacement is represented as an append.
+
+For a checked warm parent, neither rule scans the preceding source or searches positive-clause postings. UNSAT needs syntax validation and persistence only. SAT additionally uses at most $2d$ model-literal probes for an added clause of $d$ literal occurrences, across admission and independent record checking. These counts exclude integer, dictionary and SQL implementation costs. Exact serialization still charges the added clause's bit length. The fixed-base logical payload bound of Proposition~\ref{prop:positive-history} applies without a witness index. Base acquisition, its currently eager positive-clause index, cold proof checking and full-source export remain charged. Lean proves \texttt{unsatisfiable\_history} and \texttt{fixed\_model\_history}, together with their single-step and satisfiability consequences. These are semantic results, not a refinement proof for Python or SQL.
+
+The matched comparison retains 22 histories, 3,894 correct decisions and 66 archives. Both history modes use the same optional witness-export interface. With a size-16 SAT matching base and 128 compatible signed additions, the preceding positive-only history acquires 129 bases and retains 15,195,873 logical bytes. The decision history retains one base and 99,170 bytes. SQLite size falls from 26,513,408 to 200,704 bytes; summed acquisition and update time falls from 3.611 to 0.04691 seconds. The full-source comparator retains 9,235,556 logical bytes and takes 2.781 seconds. The last two-literal decision update performs two model-literal probes and no residual solve. These are single synthetic measurements of the specified interfaces, not peak-RAM measurements or competitive SAT results. All 313 preceding archives replay unchanged.
+
+The controls retain the costs that these rules do not remove. Repeating one signed clause 128 times occupies 8,926 logical bytes, versus 1,396 after full-source deduplication. Thirty-two fresh positive units fail the default-false assignment and still require 32 new bases, occupying 58,812 bytes versus 30,657 in the full-source cache. At size-16 UNSAT, cold decision replay takes 10.13 ms, compared with 5.94 ms for the preceding history's isolated final base and 1.57 ms for the full-source cache. This stream includes an empty clause, which makes its normalized residual immediately negative. Hence, avoiding warm expansion work need not accelerate cold checking. A control where one failed model remains SAT and another where SAT becomes UNSAT each require one fresh acquisition, followed by 31 reused additions. Small checked model repairs, shared source structure across fresh bases, repeated-event compression and cheaper cold checking remain the next opportunities. No bound on general acquisition or successful model reuse follows from these cases.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

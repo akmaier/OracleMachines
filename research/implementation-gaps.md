@@ -2302,3 +2302,11 @@ does not prove freshness: previous deltas may constrain it. An occurrence or
 other explicit invalidation invariant is required. General irreducible positive
 overlap and unrestricted polynomial construction remain open. The new cases
 reuse already acquired answers; they do not bound acquiring every CNF.
+
+Manuscript validation: Section 12.38 and Proposition 12.30 now state both rules,
+prove their distinct invariants, and report the comparison and losses. All 41
+previous proof blocks remain unchanged; the paper now has 42 proofs and 155
+unique labels. Two LaTeX passes produce an 81-page PDF without warnings or
+box overflows/underflows. Pages 73/74 and adjoining page 75 were rendered and
+visually inspected. The implementation, proof and experiment checkpoint was
+committed and pushed as `8ad5f8e`; this manuscript update follows separately.

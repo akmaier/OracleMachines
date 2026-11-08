@@ -487,7 +487,7 @@ versions pass current-engine revalidation. Every old row in 21 tables and all
 174 earlier experiment files remain intact. The archive holds **6,745 results /
 2,193 refutations**.
 
-The latest checkpoint proves **named child registration and serialized-summary
+The preceding checkpoint proves **named child registration and serialized-summary
 binding**. `SourceLinks.readJoin` connects decoded child names to the exact models
 retrieved at registration, then proves original-clause composition and the need
 for one valuation satisfying both sources. Conditional lemmas preserve links
@@ -504,7 +504,26 @@ inputs and five saved source versions pass revalidation. Every old row in 21
 tables and all 182 earlier experiment files remain intact. The archive holds
 **7,100 results / 2,322 refutations**.
 
-Registration links are not yet a global invariant across every live-store
-transition. Proving that zero incoming references permits safe deletion is next,
-followed by exact requested-patch semantics. Complete persistence/refcount/resource
-invariants remain open. No new timing or unrestricted-SAT guarantee is claimed.
+The latest checkpoint proves **native source dependency lifetime**.
+`ReferenceCounts.lean` relates incoming counts to the exact number of decoded
+child occurrences across live parents. `SourceLifetime.lean` uses count zero to
+prove safe deletion and preserves each surviving branch's exact named children.
+The executed source context carries these invariants through fresh insertion and
+deletion; duplicate definitions change no state. The aggregate sum and finite
+parent-domain witness exist only in proofs. Updates still touch at most two
+direct child counts, without scanning the store.
+
+**166 tests pass**, including 27 source-update tests. Lean audits **2,944
+declarations / 1,416 theorem declarations** without admits or added axioms.
+An independent full-graph recount checks eviction decisions for 44 nodes with
+16 roots, shared descendants, duplicate registrations and randomized deletion,
+followed by complete reclamation and reuse of the same names. The
+[lifetime verification record](experiments/results/source-lifetime/README.md)
+includes revalidation of 355 generic inputs and five saved source versions.
+Every previous row in 21 tables and all 190 earlier experiment files remain
+intact. The archive holds **7,455 results / 2,451 refutations**.
+
+Next is exact requested-patch semantics. Python retention, the generic relation
+store, complete persistence refinement, acceptance completeness and full resource
+costs remain separate obligations. No new timing or unrestricted-SAT guarantee
+is claimed.

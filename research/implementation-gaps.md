@@ -1116,5 +1116,13 @@ Next priorities:
 
 Validation at the lifetime checkpoint: all **166 tests pass**, including **27
 source-update tests**, without resource warnings. Lean audits **2,944 declarations /
-1,416 theorem declarations** without admits or added axioms. Archive revalidation
-and manuscript reconciliation follow the verified runtime checkpoint.
+1,416 theorem declarations** without admits or added axioms. Runtime checkpoint
+`3382876` is committed and pushed. The manuscript and
+[lifetime verification record](../experiments/results/source-lifetime/README.md)
+include revalidation and semantic audit of all 355 older generic inputs and
+checked adoption/restart of five saved source versions. Every previous row in
+all 21 tables and all 190 earlier experiment files remains intact. The archive
+now holds 7,455 results, 2,451 refutations and 45 source-state rows across checker
+namespaces. Previous timing evidence remains unchanged. Resume with the typed
+requested-patch argument using current child links; native source count/lifetime
+preservation no longer needs to be assumed.

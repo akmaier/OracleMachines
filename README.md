@@ -447,7 +447,7 @@ all 355 distinct generic inputs and five old source versions pass revalidation.
 Native identity/patch/replay invariants and complete resource bounds remain open.
 The historical timing study is unchanged; this proof adds no new speed claim.
 
-The latest checkpoint retains **original-source meaning through native joins**.
+The preceding checkpoint retains **original-source meaning through native joins**.
 `SourceNodes.lean` indexes source nodes by their exact layout, width, start and
 height. Logical leaves keep original clauses and translation proofs; joins require
 consecutive intervals and preserve all clause occurrences. The cached decision
@@ -467,5 +467,27 @@ blocks, payload counters and restart. The
 [source-node verification record](experiments/results/source-nodes/README.md)
 preserves the evidence. Every old row in 21 tables and all 166 earlier experiment
 files remain intact. The archive now holds **6,390 results / 2,064 refutations**.
-Named-store correspondence and the theorem that a patch returns the requested
-successor remain open, as do reference-count and full resource invariants.
+Its named-store obligation is partly closed by the following checkpoint.
+
+The latest checkpoint proves **paired native-map and decoded-metadata
+correspondence**. `SourceStore.lean` couples each named relation tree to its exact
+original-source model and retains matching identity, layout, width, start, height
+and original leaf clauses. Initialization, insertion and erasure preserve the
+invariant without a store scan. Lookup theorems connect the retrieved tree's
+decision to its original clauses. Runtime parsing, comparisons and temporary
+headers remain costs; proof fields erase.
+
+**162 tests pass**, including 23 source-update tests. Lean audits **2,858
+declarations / 1,367 theorem declarations** without admits or added axioms.
+New regressions cover deletion-batch rollback, shared descendants, safe identifier
+reuse, distinct provenance with equal relations and missing-field rollback.
+The [source-store verification record](experiments/results/source-store/README.md)
+preserves the evidence. All 355 older generic inputs and five saved source
+versions pass current-engine revalidation. Every old row in 21 tables and all
+174 earlier experiment files remain intact. The archive holds **6,745 results /
+2,193 refutations**.
+
+Named child links and serialized masks, dependency lifetime, exact requested-patch
+semantics, reference counts and full resource invariants remain open. The map
+proof concerns the supplied adjacent-block representation. No new timing or
+unrestricted-SAT guarantee is claimed.

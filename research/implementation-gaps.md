@@ -987,5 +987,13 @@ Remaining priorities:
 
 Validation: all **162 tests pass**, including **23 source-update tests**, without
 resource warnings. Lean audits **2,858 declarations / 1,367 theorem declarations**
-without admits or added axioms. Archive revalidation and manuscript reconciliation
-follow this runtime checkpoint; the historical timing study remains unchanged.
+without admits or added axioms. Runtime checkpoint `9cf68a4` is committed and
+pushed. The manuscript and the
+[source-store verification record](../experiments/results/source-store/README.md)
+include successful revalidation and semantic audit of all 355 generic inputs and
+checked adoption/restart of five older source versions. Every previous row in
+all 21 tables and all 174 earlier experiment files remains intact. The archive
+now contains 6,745 generic results, 2,193 refutations and 35 source-state rows
+across checker namespaces. The historical timing study remains unchanged.
+Resume with named child links/dependency lifetime and requested-patch refinement;
+do not treat this pointwise root invariant as complete serialized-graph refinement.

@@ -345,7 +345,7 @@ reports `revalidated_source=True` on first use from an older namespace. A
 different partition starts a new source family and pays initial compilation.
 
 The native decision carries a Lean proof connecting its cached summary to the
-current local-source tree. Local patch checks reject changes to unedited
+original clauses retained in its indexed source tree. Local patch checks reject changes to unedited
 subtrees. Incremental reference tracking removes the former full-closure scan
 under layered cache pressure. At a tight cap, a single height-h source edit
 temporarily reserves up to h+1 additional relation nodes until its transition
@@ -424,7 +424,7 @@ remained intact. That archive held **5,680 results / 1,806 refutations** after
 checked revalidation. Added grouping/equality work is explicitly outside the
 relation-evaluation ledger. No new timing or unrestricted-SAT claim is made.
 
-The latest checkpoint proves **executable complete-source binding** against the
+The binding checkpoint proves **executable complete-source binding** against the
 actual stored tree. `SourceBinding.lean` checks every ordered leaf and individual
 identity-padding relation, then returns a proof that its decision agrees with
 the original CNF. Both native full-source queries and initial source-version
@@ -436,13 +436,36 @@ nodes still incur work for each logical occurrence. Initial source-version bindi
 adds a source-evaluation pass; warm queries and local edits do not repeat it.
 Allocation, bit costs, transport and storage still need separate accounting.
 
-**156 tests pass** and Lean audits **2,615 declarations / 1,259 theorem declarations**
+At that milestone **156 tests passed** and Lean audited **2,615 declarations / 1,259 theorem declarations**
 without admits or added axioms. New tests cover incorrect binding despite a
 matching final answer, nonidentity padding that composes to identity, dimensions,
 counts and 65,536 logical leaves sharing 17 native nodes. The
 [binding verification record](experiments/results/source-binding/README.md)
 preserves the evidence. All old rows in 21 tables and all 158 earlier experiment
-files remain intact. The archive now holds **6,035 results / 1,935 refutations**;
+files remained intact. That archive held **6,035 results / 1,935 refutations**;
 all 355 distinct generic inputs and five old source versions pass revalidation.
 Native identity/patch/replay invariants and complete resource bounds remain open.
 The historical timing study is unchanged; this proof adds no new speed claim.
+
+The latest checkpoint retains **original-source meaning through native joins**.
+`SourceNodes.lean` indexes source nodes by their exact layout, width, start and
+height. Logical leaves keep original clauses and translation proofs; joins require
+consecutive intervals and preserve all clause occurrences. The cached decision
+now has SAT/UNSAT equivalence theorems for those original clauses. Native
+registration and replay use these constructors; warm decisions read the summary
+without flattening or traversing the source.
+
+New metrics count registered original-source nodes, clause entries and literal
+entries, including replay. The retained original integer arrays have additional
+storage cost alongside JSON evidence and local translations. These counters are
+diagnostic entries, not bytes or RSS. No new timing or memory-reduction claim is made.
+
+**159 tests pass**, and Lean audits **2,751 declarations / 1,320 theorem declarations**
+without admits or added axioms. Regressions cover invalid joins/layouts, failed
+batches, duplicate registration, shared-variable conflicts, sparse IDs, empty
+blocks, payload counters and restart. The
+[source-node verification record](experiments/results/source-nodes/README.md)
+preserves the evidence. Every old row in 21 tables and all 166 earlier experiment
+files remain intact. The archive now holds **6,390 results / 2,064 refutations**.
+Named-store correspondence and the theorem that a patch returns the requested
+successor remain open, as do reference-count and full resource invariants.

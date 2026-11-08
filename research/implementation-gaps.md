@@ -928,3 +928,12 @@ Next priorities:
    payload retention, mapping, transport, archive access and bit operations.
 5. **Compact general input, matched application evaluation and cost-sensitive
    selection.** Hard total-resource and unrestricted-coverage guarantees remain open.
+
+Runtime checkpoint `b7dfcf4` is committed and pushed. The manuscript and the
+[source-node verification record](../experiments/results/source-nodes/README.md)
+include successful revalidation and semantic audit of 355 generic inputs and
+checked adoption/restart of five saved source versions. Every previous row in
+all 21 tables and all 166 earlier experiment files remains intact. The archive
+now contains 6,390 generic results and 2,064 refutations. Historical timing data
+remains tied to its original runtime. Resume with named-store correspondence and
+requested-patch refinement; do not repeat or weaken the now-typed interval proof.

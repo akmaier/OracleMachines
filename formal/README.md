@@ -471,7 +471,7 @@ these checked native values. The original-source nodes below now strengthen
 their meaning. Registration validates partition-local clauses, proposed
 masks, consecutive child ranges and unchanged subtree identities. Initial flat
 CNF binding is linear. Later patches visit changed paths only. Decision-only
-queries use `CheckedSource.decide`; full witness requests additionally traverse
+queries used `CheckedSource.decide` at this milestone; full witness requests additionally traverse
 and check their output. Python keeps both roots until patch checking succeeds,
 then native reference-count checks permit dependency-safe eviction.
 
@@ -617,7 +617,7 @@ this scan. Full-source layered queries already performed an unproved comparison
 pass. Warm local edits and current-source queries do not run the new full scan;
 their four binding counters are zero. No new timing or memory reduction is claimed.
 
-All **156 tests pass**. Lean audits **2,615 declarations / 1,259 theorem declarations**
+At this milestone **156 tests passed**. Lean audited **2,615 declarations / 1,259 theorem declarations**
 without admits or added axioms. Regressions reject wrong leaf order even when the
 SAT/UNSAT answer agrees, and reject nonidentity padding whose composition is
 identity. They check width/capacity mismatches, valid witness output, counts at

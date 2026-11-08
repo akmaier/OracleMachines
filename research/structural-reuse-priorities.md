@@ -1,17 +1,18 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-08 against solver checkpoint `fc52bfe`. This is the working
+Updated 2026-11-08 after the checked affected-clause repair experiment. This is the working
 record for the hourly investigation. Start here; consult
 [implementation history](implementation-gaps.md) and
 [resource bounds](resource-bounds.md) for details. The ranking below is provisional:
 we have useful matched synthetic controls, but no representative mixture of SAT
 workloads from which to infer a single globally dominant cost.
 
-**Next experiment:** extend pure-literal repair to a checked single-variable
-change using affected-clause satisfaction counts. The retained blocked-but-SAT
-control requires 32 fresh acquisitions even though each change has a simple
-safe repair. Compare against the current implementation before extending the
-method. This is a hypothesis to test, not a measured improvement yet.
+**Next experiment:** select or lazily activate the affected-clause index while
+retaining the cheap pure-repair path. The new rule eliminates the 32 known
+unnecessary acquisitions and scales to 512 protected flips, but eager indexing
+roughly doubles allocations on compatible and sparse-ID streams and can make a
+single high-degree change slower. Charge activation and cold reconstruction;
+compare against both current interfaces. General coordinated repair remains open.
 
 ## Current cost map
 
@@ -21,14 +22,16 @@ their capabilities are not already integrated into one verified general solver.
 
 | Workload regime | Current costly work and evidence | Most promising investigation |
 | --- | --- | --- |
-| A small update defeats model reuse | Reconstruct source, acquire a new base and retain copied state. The blocked-but-SAT control still performs 32 fallbacks; repair takes 46.97 ms versus 39.53 ms for fixed-model history. | Checked repairs over affected clauses; share source and proof dependencies across fallback bases. |
+| A small update defeats pure model reuse | New affected-clause repair removes all 32 original-control fallbacks. On matching size 16 / 128 protected flips it reduces operation time from 3.478 s to 0.147 s and logical payload from 12.46 MB to 0.158 MB. | Keep these gains while avoiding unnecessary index preparation; shared source/dependencies remain needed on genuine fallback. |
 | A general residual escapes tractable recognizers | Branching creates distinct residuals; each is normalized, checked and persisted. There is no polynomial bound on their number. Existing matching recognition reduced one restricted example from 5,191 residuals to one. | Expose tractable components and small interfaces before branching; preserve useful state when a component changes class. |
 | Reuse succeeds and the logical update is cheap | In the new 128-addition UNSAT diagnostic, SQLite execution and transaction-context exit account for about 87% of exclusive profiled time. | Reduce redundant archive work while preserving durability and version identities. |
 | Sparse, very long variable identifiers | Near 2^1024, 32 updates retain 32,801 trie nodes. `map_get`/`map_set` account for about 62% of exclusive time in the new diagnostic. | Compress unary paths; compare exact-key representation and cold reconstruction costs. |
-| The old assignment already satisfies every addition | Eager repair support raises peak traced Python allocations from 108,869 to 249,217 bytes on the retained compatible stream. | Lazy or workload-selected index preparation, with activation cost charged. |
+| The old assignment already satisfies every addition | Affected-clause indexing raises peak traced Python allocations from 249,217 to 473,849 bytes versus pure repair on the matched compatible stream. | Lazy or workload-selected index preparation, with activation cost charged. |
+| One change affects many clauses | At 4,096 affected clauses, avoiding a new base still increases operation time from 109.99 to 125.48 ms; index preparation takes 103.32 ms. | Budget index activation and maintenance by anticipated reuse, not merely by avoided solver calls. |
 | Restart, export or repeated events dominate | Cold repair replay can cost more than an isolated final base. Repeating a unit 128 times retains 10,719 logical bytes versus 1,393 for full-source semantic deduplication. | Separate shared semantic state from exact event provenance; measure cold validation and output costs explicitly. |
 
 Evidence: [matched repair comparison](../experiments/results/cnf-repair-history/README.md),
+[affected-clause comparison](../experiments/results/cnf-affected-history/README.md),
 [new diagnostic profiles](evidence/2026-11-08/reuse-cost-profile/README.md),
 [general-CNF investigation](arbitrary-sat-expansion.md). Times are individual
 samples, not significance estimates. Profile percentages describe instrumented
@@ -63,14 +66,17 @@ experiment above, run it. Reorder the priorities when measurements justify it.
 
 ### 1. Avoid fresh acquisition after a small model change
 
-This is the broadest concrete next opportunity: assignment validity is independent
+This is the broadest concrete implemented improvement: assignment validity is independent
 of whether the model came from Horn solving, 2-SAT, matching, affine elimination
-or general search. Current repair only accepts a changed literal whose opposite
-is absent from the whole parent source. This is sufficient but conservative.
+or general search. The preceding pure-repair interface only accepts a changed
+literal whose opposite is absent from the whole parent source. The new
+`AffectedRepairHistory` checks affected-clause counts and retains the older path
+as a comparator; it is not automatically selected by the production solver.
 
 For example, with `F = (y) AND (NOT x OR y)`, assignment `x=false, y=true`
-satisfies F. Appending `(x)` can safely flip x; the current purity test rejects
-it because `NOT x` occurs in F. The retained control repeats this pattern 32 times.
+satisfies F. Appending `(x)` can safely flip x; purity rejects it because `NOT x`
+occurs in F. The retained control repeats this pattern 32 times. The new
+interface now accepts all of these changes without new acquisition.
 
 A stronger sufficient condition is to maintain each old clause's number of true
 **distinct signed literals**. If a currently false literal l is set true, then
@@ -92,10 +98,15 @@ must be budgeted. Independently safe flips cannot be composed using stale counts
 joint repairs require joint changes to the counts and a new check. Failure to
 find a bounded repair supplies no UNSAT verdict.
 
-**Acceptance criteria:** eliminate the 32 known unnecessary fallbacks; preserve
-older versions and cold verification; measure growing occurrence degree, true
-contradictions, duplicate literals, tautologies and compatible-update overhead.
-Record retained bytes and allocations, not only solver calls. Single-variable
+**Completed checks:** 35 matched cases include growing protected histories,
+occurrence degree, contradictions, duplicate literals, tautologies, compatible
+updates, sparse IDs and coordinated changes. All 249 tests pass; old versions
+and cold verification are preserved. Lean proves the semantic protection rule,
+not the count-map implementation. The 512-flip control falls from 5.059 s to
+0.327 s and 8,921,728 to 83,082 logical bytes. The size-16 matching control reduces
+peak traced Python allocation from 86,261,287 to 2,837,728 bytes. Cold replay and
+index preparation become more expensive; see the retained losses above.
+Single-variable
 local search is classical; the research question here is checked persistent reuse
 and its full cost, not novelty of flipping a Boolean variable.
 

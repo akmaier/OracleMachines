@@ -2423,3 +2423,60 @@ with no new expansions or database-byte changes. New local documentation links
 resolve; the diagnostic runner refuses an existing output directory. No solver
 code changed, so the prior full solver test/audit results are not claimed as
 newly rerun checks.
+
+## 2026-11-08: checked affected-clause repairs avoid copied fresh bases
+
+Implemented the top cost-map experiment in `experiments/cnf_affected_history.py`.
+The new interface keeps exact distinct-true-literal counts and variable-to-clause
+occurrence lists in immutable versioned tries. It accepts a single-variable
+change only when all affected old counts remain positive. Tautologies have zero
+net count change; duplicate literals do not create false protection. Candidate
+occurrence visits are budgeted. Rejection supplies no verdict and retains
+ordinary solving as fallback. Cold checking rebuilds all derived indexes from
+exact checked history, with no trusted persisted count or affected-clause list.
+
+The [matched experiment](../experiments/results/cnf-affected-history/README.md)
+retains 35 cases, 7,230 correct acquisition/update/replay decisions and 70 archives.
+The original 32-fallback control now has zero fallbacks. On matching SAT size 16
+with 128 protected flips, bases fall from 129 to one, operation time from 3.47813
+to 0.14730 s and logical archive payload from 12,460,337 to 158,332 bytes. Separate
+tracing reports peak Python allocations of 86,261,287 versus 2,837,728 bytes,
+excluding native SQLite and process RSS. The last update checks one old clause
+in discovery and again in verification; it performs 202 trie-node visits and
+allocates 66 trie nodes without residual solving. At 512 protected flips the
+operation sum falls from 5.05929 to 0.32684 s. These are single synthetic samples.
+
+Losses are retained: compatible streams roughly double traced index allocations;
+sparse-ID paths also nearly double peak allocations; cold replay is more costly.
+A single flip affecting 4,096 old clauses avoids fallback but takes 125.48 ms
+versus 109.99 ms because index preparation dominates. Budget exhaustion and a
+coordinated-flip example still require fresh acquisition. A separate first
+screening run overlapped with tests/builds and is retained without being used
+for primary timing claims.
+
+All 249 Python tests pass, including exact index reconstruction, 294 base/clause
+combinations, 400 seeded branching proposals, forged records and old/new format
+checks. Lean proves `affected_repair_preserves` and `affected_repair_extension`;
+the axiom audit passes 4,081 declarations / 1,941 theorem declarations. These
+semantic proofs do not verify the Python count maps or SQL. All 439 preceding
+benchmark archives replay without new expansion or changed rows. Independent
+decompression/replay checks every version and residual in the new primary and
+screening archives, with exact source/witness checks and unchanged database bytes.
+
+**Next target:** selectively activate the stronger index, keeping the pure path
+for streams that need no nonpure repair. Account for first activation, all later
+constraint maintenance and cold reconstruction. The current node-operation
+bound is O((d+1)b + (k+r+1) log(m+2)), for d new literals, b-bit variable IDs,
+m parent clauses, k discovery occurrence visits and r affected old clauses.
+r can equal m. Coordinated repairs, general small affected sets, shared fresh
+base sources and unrestricted polynomial acquisition remain open.
+
+Manuscript Section 12.40 / Proposition 12.32 states the distinct-literal count
+identity and its proof, the versioned index accounting, measurements and losses.
+All 43 previous proof blocks remain unchanged; there are now 44 proofs and 159
+unique labels. The 84-page PDF builds without LaTeX warnings or box diagnostics;
+pages 75--78 were rendered and visually reviewed. Both new experiment runs were
+independently replayed: 140 archives, 14,180 historical versions and 2,568 residual
+records, with zero new expansions and unchanged database bytes.
+The implementation, proofs, tests and preserved experiment checkpoint was
+committed and pushed as `15e9c9e`; this manuscript and priority update follows.

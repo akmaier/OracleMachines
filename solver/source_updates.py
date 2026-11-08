@@ -63,6 +63,7 @@ class SourceSolver(LayeredSolver):
         self.metrics=dict(node_reads=0,node_writes=0,compositions=0,native_definitions=0,
             witness_checks=0,retention_visits=0,native_evictions=0,reachability_updates=0,
             layout_replays=0,patch_visits=0,binding_visits=0,compiled_cells=0,
+            binding_leaves=0,binding_relation_comparisons=0,binding_cell_bound=0,binding_source_test_bound=0,
             compiled_literal_test_bound=0,native_source_cells=0,native_literal_test_bound=0,
             peak_native_cells=len(self.verified)*self.states**2)
         before={field:getattr(self.store,field) for field in self.storage_fields}
@@ -78,6 +79,8 @@ class SourceSolver(LayeredSolver):
                     self.ensure(root)
                     checked=self.service._request(dict(mode='source_bind',root=root,witness=witness,**original))
                     self.metrics['binding_visits']=checked['binding_visits']
+                    for field in ('binding_leaves','binding_relation_comparisons','binding_cell_bound','binding_source_test_bound'):
+                        self.metrics[field]=checked[field]
                     checked=checked['verdict']
                 else:
                     previous=self.store.get(base,'source_version')

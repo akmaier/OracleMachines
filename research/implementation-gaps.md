@@ -819,3 +819,46 @@ all five old source versions pass current-engine adoption and restart. Every old
 row in all 21 tables and all 150 earlier experiment files is preserved. There
 are now 5,680 generic results and 1,806 refutations. Historical timing evidence
 remains unchanged and tied to its original runtime.
+
+## Executable complete-source binding (8 November, third hourly follow-up)
+
+`SourceBinding.lean` closes the initial complete-source part of priority 1.
+Its executable constructor checks the actual stored tree's width and ordered
+leaves, including each identity-padding leaf. On success it returns a
+`BoundCompilation` carrying the binding premise, tree validity and exact
+comparison-call count. Its positive and negative decision theorems concern the
+complete original CNF. Both native full-source queries and initial source-version
+binding use this result. Original-clause/provenance checks remain in place.
+
+The accumulator traversal is proved to preserve leaf order; it visits logical
+tree occurrences even when native nodes are shared. The tail-recursive scan is
+proved to accept exactly equal leaf lists and to make one relation-comparison
+call per logical leaf on success. Both Python APIs expose this count, together
+with diagnostic row and source-evaluation reference bounds. Initial source-version
+binding adds a source-relation evaluation pass. Allocation, original-source
+indexing, bit/mask costs, endpoint queries, transport and storage are separate.
+No speedup, RSS bound or complete native cost theorem is claimed. Warm edits and
+current-source queries do not repeat the full scan.
+
+All 156 tests pass without resource warnings; Lean audits 2,615 declarations and
+1,259 theorem declarations without admits or added axioms. The new regressions
+cover wrong ordered leaves despite a matching final answer, nonidentity padding
+that composes to identity, dimensions, valid witnesses, counters at widths 1, 2
+and 4, and 65,536 logical leaves sharing just 17 native nodes.
+
+Remaining priorities:
+
+1. **Preserve original-source identity through native joins, patches and replay.**
+   Initial full binding now supplies its premise. Carry layout, start and span
+   with original-source nodes and prove that mutable store transitions preserve
+   them. The existing local-source invariant and transition tests do not yet
+   establish that complete state theorem.
+2. **Reference-count/eviction invariants** in native and Python stores, including
+   shared children, failure, historical branches and replay.
+3. **General factor row/equivalence-store refinement.** The adjacent-block
+   proof does not discharge general source/context binding obligations.
+4. **Complete restricted accounting:** the new scan counts comparison calls,
+   not all relation evaluation, allocation, retention, serialization or bit costs.
+   Acceptance completeness and cap behavior also need specification.
+5. **Compact general input and matched application evidence**, then cost-sensitive
+   selection. Hard total-resource and unrestricted-coverage guarantees remain open.

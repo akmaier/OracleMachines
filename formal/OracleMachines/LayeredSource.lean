@@ -3,8 +3,8 @@ import OracleMachines.SourceGrouping
 /-! Checked compilation for a supplied ordered partition of CNF variables.
 Every clause must lie in one block or two adjacent blocks of width at most four.
 Variable positions, local translations and global clause grouping carry proofs.
-JSON parsing and native tree/store binding remain separate refinement
-obligations. This is not a general SAT compiler. -/
+SourceBinding checks complete-tree binding. JSON parsing and mutable node/patch
+invariants remain separate obligations. This is not a general SAT compiler. -/
 namespace OracleMachines.Layered
 open Lean
 
@@ -144,8 +144,8 @@ theorem GroupedCNF.sequence_exact {layers : Array (Array Nat)} {width edges : Na
   exact exists_congr (fun states => grouped.accepts_path states)
 
 /-- The whole original CNF theorem once native tree binding is supplied.
-The grouping premise is carried by compilation; the binding premise is still
-a separate obligation for the mutable source protocol. -/
+The grouping premise is carried by compilation. SourceBinding supplies the
+binding premise for complete-source checks; patch preservation is separate. -/
 theorem CompiledSource.bound_tree_exact (source : CompiledSource) {h : Nat}
     (tree : Tree (2^source.width) h) (valid : tree.Valid) (padding : Nat)
     (binding : tree.leaves = source.buckets.toList.map (compileLocal source.width) ++
@@ -163,25 +163,4 @@ theorem CompiledSource.bound_tree_unsat (source : CompiledSource) {h : Nat}
       ¬ ∃ valuation, sourceCNFEval source.clauses valuation = true :=
   not_congr (source.bound_tree_exact tree valid padding binding).symm
 
-/-- Recompute compilation and bind every source edge to the checked root;
-identity padding and the logical length are checked before exposing a verdict.
-This intentionally charges a linear source-binding pass. -/
-def sourceQuery (store : Store) (request : Json) : Except String Json := do
-  let source ← compileSource request
-  let root ← request.getObjValAs? String "root"
-  let some (_, checked) := store.nodes[root]? | throw "Unknown source root"
-  if w : source.width = checked.width then
-    let expected : List (Relation (2^checked.width)) := source.buckets.toList.map fun bucket =>
-      w ▸ compileLocal source.width bucket
-    let actual := checked.tree.leaves
-    if expected.length > actual.length then throw "Source exceeds checked root"
-    for (a,b) in actual.take expected.length |>.zip expected do
-      if !relationEqual a b then throw "Source relation differs from checked root"
-    for a in actual.drop expected.length do
-      if !relationEqual a identity then throw "Source padding is not identity"
-    let want ← request.getObjValAs? Bool "witness"
-    query store (Json.mkObj [("root",toJson root),("size",toJson expected.length),
-      ("left",toJson (2^(2^checked.width)-1)),("right",toJson (2^(2^checked.width)-1)),
-      ("witness",toJson want)])
-  else throw "Source/root width mismatch"
 end OracleMachines.Layered

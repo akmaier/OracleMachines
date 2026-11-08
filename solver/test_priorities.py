@@ -78,6 +78,49 @@ class PriorityTests(unittest.TestCase):
                 s._request(dict(mode='layered_source_query',root=result['root'],width=1,
                     clauses=[],layers=[[1],[2],[3]],witness=False))
 
+    def test_binding_checks_ordered_leaves_even_when_root_answer_matches(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            for masks,clauses,answer in (([10,15,15],[],True),([15,0],[[]],False)):
+                result=s.layered(1,append=masks)
+                self.assertEqual(result['answer'],answer)
+                with self.assertRaisesRegex(ValueError,'differs'):
+                    s._request(dict(mode='layered_source_query',root=result['root'],width=1,
+                        clauses=clauses,layers=[[i+1] for i in range(len(masks)+1)],witness=False))
+
+    def test_binding_requires_individual_identity_padding_and_matching_dimensions(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            # Two negations compose to identity; neither padding leaf is identity.
+            bad=s.layered(1,append=[15,15,6,6])
+            self.assertTrue(s._request(dict(mode='layered_query',root=bad['root'],size=2,left=3,right=3,witness=False))['answer'])
+            with self.assertRaisesRegex(ValueError,'padding differs'):
+                s._request(dict(mode='layered_source_query',root=bad['root'],width=1,
+                    clauses=[],layers=[[1],[2],[3]],witness=False))
+            good=s.layered(1,append=[15,15,9,9])
+            bound=s._request(dict(mode='layered_source_query',root=good['root'],width=1,
+                clauses=[],layers=[[1],[2],[3]],witness=True))
+            self.assertTrue(bound['answer']);self.assertEqual(len(bound['witness']),3)
+            self.assertEqual(bound['binding_relation_comparisons'],4)
+            self.assertEqual(bound['binding_cell_bound'],16)
+            for width,layers,error in ((2,[[1],[2],[3]],'width mismatch'),(1,[[i] for i in range(1,7)],'exceeds')):
+                with self.assertRaisesRegex(ValueError,error):
+                    s._request(dict(mode='layered_source_query',root=good['root'],width=width,
+                        clauses=[],layers=layers,witness=False))
+
+    def test_complete_binding_scan_handles_maximum_leaf_count_with_shared_nodes(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            nodes=[dict(id='binding-0',width=1,height=0,mask=15)]
+            for h in range(1,17):
+                nodes.append(dict(id=f'binding-{h}',width=1,height=h,mask=15,
+                    left=f'binding-{h-1}',right=f'binding-{h-1}'))
+            s._request(dict(mode='layered_define',nodes=nodes))
+            result=s._request(dict(mode='layered_source_query',root='binding-16',width=1,
+                clauses=[],layers=[[] for _ in range(65537)],witness=False))
+            self.assertTrue(result['answer']);self.assertIsNone(result['witness'])
+            self.assertEqual(result['binding_leaves'],65536)
+            self.assertEqual(result['binding_relation_comparisons'],65536)
+            self.assertEqual(result['binding_cell_bound'],262144)
+            self.assertEqual(result['binding_source_test_bound'],262144)
+
     def test_semantic_rebinding_keeps_current_provenance_across_restart(self):
         with tempfile.TemporaryDirectory() as d:
             path=Path(d)/'s.db'

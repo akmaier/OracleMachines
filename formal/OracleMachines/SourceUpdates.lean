@@ -1,12 +1,12 @@
-import OracleMachines.SourceInvariant
+import OracleMachines.SourceBinding
 
 /-! Source-bearing nodes: provenance and relations use the same balanced tree.
 The partition is fixed within a version family. Local edits replace the clauses
 of one or more adjacent-block edges; an empty list deletes that edge's clauses.
 Every cached decision carries a proof of its current local-source meaning.
 Variable positions and local CNF translation also carry original-source proofs.
-Flat-source grouping is proved separately. Native tree binding, JSON and
-persistence refinement obligations remain separate. -/
+Flat-source grouping and complete initial binding carry proofs. Mutable node
+identity, patch, JSON and persistence refinement remain separate obligations. -/
 namespace OracleMachines.SourceUpdates
 open Lean OracleMachines.Layered
 open OracleMachines.SourceInvariant
@@ -200,7 +200,12 @@ def bindSource (store : Store) (request : Json) : Except String Json := do
       else
         pending := (← body.getObjValAs? String "left") :: (← body.getObjValAs? String "right") :: pending
   if !pending.isEmpty then throw "Source binding traversal cap exceeded"
+  let some (_,checked) := store.nodes.nodes[root]? | throw "Unknown source root"
+  let bound ← bindCompilation compiled checked
+  let answer := bound.decide
   let verdict ← query store request
-  return Json.mkObj [("verdict",verdict),("binding_visits",toJson visited)]
+  if (← verdict.getObjValAs? Bool "answer") != answer then throw "Source decision disagrees with binding proof"
+  return (Json.mkObj [("verdict",verdict.setObjVal! "answer" (toJson answer)),
+    ("binding_visits",toJson visited)]).mergeObj bound.metrics
 
 end OracleMachines.SourceUpdates

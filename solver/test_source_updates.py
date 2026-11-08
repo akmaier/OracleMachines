@@ -16,6 +16,26 @@ def sat(clauses,n):
 
 
 class SourceUpdateTests(unittest.TestCase):
+    def test_initial_binding_has_checked_counts_and_warm_edits_do_not_rescan(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            for width in (1,2,4):
+                clauses=[[10],[-30,40]];layers=[[10],[20],[30],[40]]
+                q=1<<width
+                first=s.source_cnf(width,clauses,layers,witness=True)
+                metrics=first['source_updates']
+                self.assertTrue(first['answer'])
+                self.assertEqual(metrics['binding_visits'],7)
+                self.assertEqual(metrics['binding_leaves'],4)
+                self.assertEqual(metrics['binding_relation_comparisons'],4)
+                self.assertEqual(metrics['binding_cell_bound'],4*q*q)
+                self.assertEqual(metrics['binding_source_test_bound'],(4+2+3)*q*q)
+                for result in (s.source_cnf(base=first['state']),s.source_cnf(base=first['state'],replace={0:[[]]})):
+                    for field in ('binding_leaves','binding_relation_comparisons','binding_cell_bound','binding_source_test_bound'):
+                        self.assertEqual(result['source_updates'][field],0)
+                full=s.layered_cnf(width,clauses,layers)
+                for field in ('binding_leaves','binding_relation_comparisons','binding_cell_bound','binding_source_test_bound'):
+                    self.assertEqual(full['compilation'][field],metrics[field])
+
     def test_global_grouping_matches_every_complete_assignment(self):
         rng=random.Random(1901)
         with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:

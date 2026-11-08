@@ -563,12 +563,25 @@ The JSON-lines operation is `{"op":"layered_cnf","width":1,"clauses":[[1,2],[-1,
 There must be at least two blocks; an empty block can supply an unused boundary.
 Empty clauses correctly produce UNSAT. The native checker compiles the source,
 checks the proposed tree, and independently binds every source edge and identity
-padding leaf to that tree. Both compilation passes, full binding and storage are
-charged. `source_binding` identifies the archived source evidence; `state` is the
+padding leaf to that tree. The native `BoundCompilation` now carries the checked
+ordered-leaf equality and proves its decision agrees with the original CNF.
+Both compilation passes, full binding and storage are charged. `source_binding`
+identifies the archived source evidence; `state` is the
 ordinary relation-tree version. Subsequent `layered` edits describe relations,
 not automatically an edited version of the original CNF. Re-submit the complete
 source to obtain a new source binding. Unsupported decompositions are errors,
 never UNSAT. Finding a useful partition remains the caller's responsibility.
+
+Full-source queries report `binding_leaves`, `binding_relation_comparisons`,
+`binding_cell_bound` and `binding_source_test_bound` under `compilation`.
+Initial source-version requests expose the same fields under `source_updates`.
+The comparison count is proved equal to the padded logical leaf count N.
+The last two fields are reference bounds N*q² and (N+c+L)*q², for q=2^width,
+c clauses and L literals; they are not measured instructions or physical memory.
+Mask reads, parsing, source indexing, allocation, output and storage cost extra.
+Initial source-version binding pays an additional source-relation scan; warm
+edits/current-source queries report zero for these four fields. Their mutable
+identity/patch/replay invariants still need a complete Lean state theorem.
 
 `--native-layer-cells` defaults to 1,048,576 retained relation cells. Under
 pressure, the worker retains the complete dependency closure of the requested

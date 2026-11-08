@@ -836,7 +836,9 @@ class PersistentSolver:
                         root=result['root'],answer=result['answer']))[0]
                 result.update(source='compiled_adjacent_cnf',source_binding=binding,
                     compilation=dict(input_bytes=source_bytes,relation_cells=compiled['relation_cells'],
-                                     passes=2,source_edges=len(append)))
+                                     passes=2,source_edges=len(append),
+                                     **{field:checked[field] for field in ('binding_leaves','binding_relation_comparisons',
+                                         'binding_cell_bound','binding_source_test_bound')}))
             with self._phase('storage_accounting'):result['storage']=self.archive_usage()
             self.last_metrics=self._ledger.finish();result.update(self.last_metrics)
             return result

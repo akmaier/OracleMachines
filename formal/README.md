@@ -434,8 +434,9 @@ and compares every source edge and padding leaf against the checked tree before
 binding its answer to the source. Local clause semantics, sequence composition,
 and the mathematical source-binding implication are proved. The follow-up below
 also proves the original-variable mapping, local CNF translation and global clause
-grouping. Discovery of the partition, native tree binding, JSON orchestration, and a complete
-source-API refinement theorem remain open. This is a restricted tractable family,
+grouping. `SourceBinding.lean` now supplies complete-tree binding as described
+below. Discovery of the partition, mutable node/patch invariants, JSON orchestration,
+and a complete source-API refinement theorem remain open. This is a restricted tractable family,
 not a compiler for unrestricted CNF with guaranteed bounded width.
 
 For general factors, `factors_equal_matching` and `project_equal_conjunctions`
@@ -563,10 +564,9 @@ CNF before returning a value indexed by that request.
 `compileSource` uses `groupClauses` and retains this proved grouping. It no longer
 returns unrelated original and translated arrays. This establishes correctness
 of successful typed compilation. A theorem that every valid promised input is
-accepted is still separate. In particular, the final tree theorems **require**
-the binding premise; the mutable JSON/node protocol has not been shown to supply
-that premise in Lean. Existing runtime binding checks and adversarial tests are
-not replaced by the conditional theorem.
+accepted is still separate. The final tree theorems **require** the binding
+premise. The following checkpoint supplies it for complete-source checks;
+preservation through the mutable node/patch protocol still needs a state theorem.
 
 The flat builder adds an array of clause references and a final equality check.
 Its additional entry visits are linear in clause/literal count, excluding the
@@ -575,10 +575,56 @@ are erased. No whole-machine bound or timing improvement is claimed. Warm local
 edits still use the existing checked bucket compiler and do not regroup the full
 CNF; initial compilation, full binding and replay retain their separate costs.
 
-The current build audits **2,562 declarations / 1,233 theorem declarations**
-without admits or added axioms. **152 tests pass**, including 60 generated global
+At this milestone the build audited **2,562 declarations / 1,233 theorem declarations**
+without admits or added axioms. **152 tests passed**, including 60 generated global
 CNFs checked on all 11,680 complete assignments, exact bucket/multiplicity checks,
 and service verdict/witness checks. A regression has nonempty local relations
 but no consistent global path. Boundary tests compile 65,537 supplied blocks and
 12,000 repeated clauses without stack failure. These complement the existing
 local-translation, restart, patch, retention and persistence tests.
+
+## Executable complete-source binding
+
+[`SourceBinding.lean`](OracleMachines/SourceBinding.lean) discharges the ordered
+leaf-binding premise for the actual stored `CheckedTree`. `bindCompilation`
+checks its width, compares every logical leaf with the corresponding compiled
+bucket or individual identity padding, and returns a `BoundCompilation` carrying
+that equality and the tree's validity proof. `BoundCompilation.decide_exact`
+and `unsat_exact` connect its executed Boolean decision to the original CNF.
+Both `layered_source_query` and initial `source_bind` use this constructor and
+decision. The latter retains its original-clause/provenance checks as well.
+
+`Tree.leavesInto_exact` proves the accumulator traversal preserves leaf order.
+It visits expanded tree occurrences, not just distinct shared native nodes.
+`bindingScan_exact` proves acceptance exactly when the leaf lists agree;
+`bindingScan_bound` bounds relation-comparison calls, and
+`bindingScan_complete` proves one comparison per logical leaf on success.
+The scan is tail recursive and the tree traversal uses a list accumulator.
+
+For N padded leaves and q=2^width, both Python interfaces expose
+`binding_leaves` and the proved `binding_relation_comparisons=N` count.
+`binding_cell_bound=N*q²` and
+`binding_source_test_bound=(N+c+L)*q²` are diagnostic reference bounds, with
+c source clauses and L literal occurrences. Only the comparison-call count has
+a new executable counting theorem. The other fields apply the existing
+row/clause/literal ledger and do not establish a total native cost theorem.
+Actual-mask reads, bit operations, indexing, list/array allocation, endpoint
+queries, witness output, JSON and storage remain separate costs.
+
+Initial source-version binding now evaluates the source relations again during
+this scan. Full-source layered queries already performed an unproved comparison
+pass. Warm local edits and current-source queries do not run the new full scan;
+their four binding counters are zero. No new timing or memory reduction is claimed.
+
+All **156 tests pass**. Lean audits **2,615 declarations / 1,259 theorem declarations**
+without admits or added axioms. Regressions reject wrong leaf order even when the
+SAT/UNSAT answer agrees, and reject nonidentity padding whose composition is
+identity. They check width/capacity mismatches, valid witness output, counts at
+widths 1, 2 and 4, and 65,536 logical leaves represented by 17 shared native nodes.
+
+This closes initial complete-source binding, not preservation of original-source
+identity through joins, local patches or restart. The next proof should carry
+layout, start and span with original-source nodes and show that native transitions
+preserve them. Reference-count/eviction invariants, general row/equivalence-store
+refinement, JSON/Python/SQLite refinement, acceptance completeness and full
+resource costs remain open. No unrestricted-SAT guarantee follows.

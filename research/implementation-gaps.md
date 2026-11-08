@@ -2235,3 +2235,14 @@ positive-subset protocol does not exploit that negative-only shortcut. The
 earlier subsumption policy regressions, cold-validation cost and arbitrary
 irreducible positive overlap remain open. None of these measurements proves
 minimum expansion work for every case or polynomial acquisition for all SAT.
+
+Final validation: Proposition 12.29 states the history invariant and retained-bit
+bound. All 40 previous manuscript proof blocks are unchanged; there are now
+41 proofs and 153 unique labels. The 80-page PDF builds without warnings or
+overfull/underfull boxes; pages 72/73 and adjoining page 74 were rendered and
+visually inspected. All 48 new snapshots decompress to their recorded hashes,
+and source fingerprints match the report. An independent gzip replay records
+the final handles for all 24 history snapshots and checks their exact source
+recipes, answers and unchanged row digests in `history-replay.json`. Code,
+formalization and comparison evidence were committed and pushed in `fa7feb6`;
+the manuscript and final validation follow in the next checkpoint.

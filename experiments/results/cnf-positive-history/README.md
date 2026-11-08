@@ -69,6 +69,12 @@ version. It performs no solver work or base-index reconstruction. The 128th
 16-hole append similarly performs 16 containment probes and serializes 118
 payload bytes. Pointer bit lengths and SQL index costs still grow with the archive.
 
+On that same 512th four-hole addition, the full-source path scans 2,660 discovery
+literal occurrences, makes 2,048 containment probes, and checks 4,608 containment
+witness literal occurrences. It serializes 17,738 key bytes and 13,902 certificate
+bytes. The reduction in this structural work is independent of the full-source
+API's additional archive-size telemetry scan.
+
 ## Cold replay, exports and accounting
 
 Cold delta query checks the base proof and every required ancestor delta. At
@@ -142,3 +148,8 @@ python3 experiments/compare_cnf_positive_history.py --output /tmp/oracle-positiv
 
 Use a new output directory. The report records the preceding commit and exact
 candidate/driver fingerprints. All earlier experiment files are left unchanged.
+
+`history-replay.json` records the final archive-local version handle and exact
+source hash for each of the 24 history snapshots. These were independently
+reloaded from gzip, matched against their full input recipes, checked against
+their source witnesses where SAT, and verified to retain identical row digests.

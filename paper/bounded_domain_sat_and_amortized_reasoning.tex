@@ -2277,6 +2277,37 @@ This representation still stores each distinct source in full. For a fixed reuse
 
 The matched comparison retains 39 static inputs and four nine-query histories, giving 450 decisions across acquisition, warm and cold phases. For a laminar nine-pigeon/eight-hole input, acquisition drops from 23 nodes and 201,735 logical bytes to two nodes and 17,538 bytes. In a history that adds eight redundant clauses with fresh variables to that matching core, total acquisition drops from 23,046 nodes to nine, and retained logical payload from 84,546,940 to 82,514 bytes. Every added source reuses the core without new matching search. The final cold negative replay checks two nodes instead of 5,359. All 179 earlier candidate archives reload unchanged. Yet, one seeded 12-variable case grows from 12 to 20 nodes and from 12,029 to 18,637 bytes: extra reduction records need not repay their costs. The full comparison retains these regressions. It establishes a useful restricted reuse pattern, with source copying and reduction policy as further costs to address.
 
+\subsection{Persistent deltas for witnessed additions}
+\label{sec:positive-history}
+
+The full-source interface above copies information that the next version already inherits. Let us instead store a solved base once and represent each expansion by a parent reference and its added clause. This requires an explicit update interface: a checked version identifies its stored source, but cannot stand for an unrelated full CNF supplied by a caller.
+
+\begin{proposition}[Witnessed append history]
+\label{prop:positive-history}
+Fix a CNF $F_0$ and positive clauses $C_1,\ldots,C_p$ occurring in it. Suppose each added positive clause $D_t$ contains some $C_{i_t}$. Then every version
+\[
+F_t=F_0\land D_1\land\cdots\land D_t
+\]
+has exactly the models of $F_0$, evaluating both over the union of their variables. Let $B_0$ be the base source length in bits, $K_0$ the residual records retained by its acquisition, and $m_0$ its clause count. Let $N$ bound the preceding archive's record counts and integer identifiers. Storing the base once and each addition with parent, base and witness indices requires additional logical payload
+\[
+O\!\left(B_0+K_0+\sum_{t=1}^{T}|D_t|
++T\log(N+T+m_0+1)\right)
+\]
+bits, where $K_0$ and $|D_t|$ are measured in bits. This bound concerns the specified representation; acquiring $F_0$ and checking its proof remain charged.
+\end{proposition}
+
+\begin{proof}
+Every model of $F_0$ satisfies $C_{i_t}$ and hence $D_t$, for each $t$. Conversely, every model of $F_t$ satisfies its conjunct $F_0$. Thus appending a witnessed clause preserves the same models at each step. For storage, retain the base and its acquired residual records once. Store each clause once with a constant number of indices and fixed record framing. Parent and base indices require logarithmic space in the archive record count, and a witness index requires logarithmic space in $m_0+1$. Summing these records gives the stated bound. Full prefixes are reconstructed only when requested.
+\end{proof}
+
+The research implementation builds a base-clause index once. A clause is indexed by one of its least frequent base literals; a proposed superset probes postings for its literals and checks each candidate's full containment. For a delta with $d$ literal occurrences and $c_D$ inspected candidates, discovery uses at most $c_Dw$ containment probes, where $w$ is the maximum base positive width and $c_D\leq p$. Preparing the delta set, sorting its distinct literals, checking the selected witness, serialization, SQL lookup and insertion, and reference bit costs remain additional. A checked warm append performs no full-source normalization, index reconstruction or residual solving. The base's acquisition can still be expensive. Lean's \texttt{positive\_history\_models} proves the positive-conjunction invariant, without verifying the Python or SQL implementation.
+
+Cold query checks the base proof and every required ancestor delta. Warm query uses checked metadata. Materializing a source traverses the history, while serializing or independently checking that output incurs its full size. A SAT model can be exported as the base assignment, with omitted variables false. The archive identifiers are local record references, not portable semantic identities or authenticated hashes. Unsupported additions supply no fast verdict. The comparison driver explicitly reconstructs the source and solves a fresh base for uncovered positive clauses. Deletions or changed constraints likewise require a new base; previous versions remain intact.
+
+The comparison retains 24 histories, 4,848 decisions and 48 archives. At 16 holes and 128 redundant additions, logical payload drops from 10,957,771 to 118,668 bytes, and SQLite size from 15,130,624 to 237,568 bytes. At four holes and 512 additions, logical payload drops from 6,034,220 to 45,043 bytes. The last append in that history uses four containment probes and no residual-solver work. Yet, cold replay checks 513 history records and the base, rather than two larger residual records. All 265 earlier candidate archives replay with unchanged residual rows.
+
+The same comparison retains cases where this representation loses. Appending the same clause 128 times occupies 11,742 logical bytes, compared with 1,410 for the old cache after canonical clause deduplication. Repeating the same parent and clause operation instead reuses a version, but retains fixed table overhead. Thirty-two novel unit clauses force fresh bases and use 57,756 bytes instead of 30,657. The mixed history also loses slightly. Timings include acquisition and rejected fast attempts; optional size scans and full exports are recorded separately. SAT timings compare interfaces with different witness-output behavior: the older solver constructs its model on each call, while the history interface exports it on request. These are restricted source-representation results, not an optimal expansion policy or a polynomial bound for arbitrary SAT. Repeated-event compression, sharing across fresh bases and cold validation remain concrete costs to investigate.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

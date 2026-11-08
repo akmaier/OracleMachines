@@ -1191,5 +1191,12 @@ Remaining priorities:
 Validation: **169 tests pass**, including **30 source-update tests**. The decoder
 also accepts all 4,096 entries up to root lookup, rejects 4,097 entries at the cap,
 and leaves the worker usable. Lean audits **3,043 declarations / 1,461 theorem
-declarations**, with no admits or added axioms. Archive preservation and the
-manuscript record follow this runtime checkpoint. Earlier timings remain frozen.
+declarations**, with no admits or added axioms. Runtime checkpoint `32b4748`
+is committed and pushed. All 355 older generic inputs pass revalidation and
+semantic audit, and all five source versions pass checked adoption and restart.
+Every old row in 21 tables and all 198 earlier experiment files remains intact.
+The archive now holds 7,810 results, 2,580 refutations and 50 source-state rows.
+The manuscript and [patch verification record](../experiments/results/source-patches/README.md)
+record the result. Earlier timings and all 32 previous manuscript proof blocks
+remain unchanged. Resume with full source-API composition and persistent replay;
+the native requested bucket transition no longer needs to be assumed.

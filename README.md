@@ -504,7 +504,7 @@ inputs and five saved source versions pass revalidation. Every old row in 21
 tables and all 182 earlier experiment files remain intact. The archive holds
 **7,100 results / 2,322 refutations**.
 
-The latest checkpoint proves **native source dependency lifetime**.
+The preceding checkpoint proves **native source dependency lifetime**.
 `ReferenceCounts.lean` relates incoming counts to the exact number of decoded
 child occurrences across live parents. `SourceLifetime.lean` uses count zero to
 prove safe deletion and preserves each surviving branch's exact named children.
@@ -527,3 +527,29 @@ Next is exact requested-patch semantics. Python retention, the generic relation
 store, complete persistence refinement, acceptance completeness and full resource
 costs remain separate obligations. No new timing or unrestricted-SAT guarantee
 is claimed.
+
+
+The latest checkpoint proves **exact native source-patch semantics**.
+`SourcePatch.lean` connects decoded request fields and current live root/child
+lookups to the original arrays: every requested bucket gets its supplied clauses,
+and every unedited bucket stays unchanged. Equal relations cannot substitute for
+exact original arrays. The executed checker carries this certificate and keeps
+its path-visit counter; the proofs add no full-source scan or relation join.
+
+**169 tests pass**, including **30 source-update tests**. Lean audits **3,043
+declarations / 1,461 theorem declarations**, with no admits or added axioms.
+New checks cover split-path edits with padding, order and duplicate original
+clauses under equal relations, invalid requests/roots/partitions, unchanged
+aliases, and the complete 4,096-entry decoding cap. Runtime checkpoint `32b4748`
+is committed and pushed. The [patch verification record](experiments/results/source-patches/README.md)
+includes revalidation of 355 generic inputs and five saved source versions.
+Every old row in 21 tables and all 198 earlier experiment files remains intact.
+The archive now holds **7,810 results / 2,580 refutations / 50 source-state rows**.
+
+Next is composing initial raw-CNF binding, complete root coverage, the
+bucket-to-flattened-CNF transition and the returned verdict/witness into one
+successful-request theorem. Python retention, complete replay/SQLite refinement,
+generic relation/factor stores, acceptance completeness and total resource costs
+remain open. The updated checker pays for direct lookups, decoding, edit-list
+filtering and array comparisons. Earlier timings are unchanged; no speedup or
+unrestricted-SAT guarantee follows.

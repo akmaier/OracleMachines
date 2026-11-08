@@ -1352,3 +1352,86 @@ versions pass checked adoption and restart. Every old row in 21 tables and all
 the evidence. Earlier timings and all 32 previous manuscript proof blocks remain
 unchanged. Resume with native operation-history composition; the complete initial
 raw-CNF-to-live-root-to-returned-decision path no longer needs to be assumed.
+
+## 2026-11-08 — certified affine growth instead of assignment-table expansion
+
+User direction: attack the expansion bottleneck through genuine fresh-variable
+growth, closed compact summaries, structural reuse and cumulative accounting.
+Runtime checkpoint **3b953b8**, pushed. This is a separate restricted affine path;
+it does not silently replace or weaken the existing CNF source-store contracts.
+
+Implemented four Lean modules and `PersistentSolver.affine_grow`. Each append
+introduces a fresh width-`b` block and equations on the old and fresh boundaries.
+The exact summary is the existential projection of the full original history.
+Elimination and basis compression operate directly on GF(2) coefficient vectors,
+with at most `b+1` summary rows and `(b+1)^2` logical cells. Contradiction is explicit;
+old version answers remain valid even when an added batch makes a successor UNSAT.
+The native path executes the certified charged loops and returns proved decision
+and charge fields for typed states. Both SAT and UNSAT refer to the specified
+constraint history, not to different input-size conventions.
+
+The charge bound is `O(b^3+b^2*c)` per resident append with `c` new equations.
+`replayRun_bound` sums the same charges over typed original histories. Full-list
+pivot scans, produced coefficients/rhs and terminal checks are charged; primitive
+machine instructions, allocation, parsing, map work, transport and archive access
+are not. This improves on a purely declared arithmetic ledger: value equivalence
+and per-loop charges are now part of the executed coefficient implementation.
+It still does not provide an end-to-end machine-cost theorem.
+
+Immutable source batches and results persist in the new `affine_states` and
+content-addressed object records. Replay reconstructs from original equations,
+never saved summaries or answers. Corrupt source objects and malformed histories
+are rejected. Failed transactions preserve old database rows; extra immutable
+native nodes can remain until restart. The current summary is bounded; retained
+history grows. No full-history witness is output. Caps (width 128, batch 4,096,
+native versions 4,096) cause refusal, not a negative verdict. Native version
+capacity includes initialization, so a single resident chain has at most 4,095
+appends. The mathematical result has no such fixed cap.
+
+Validation: **184 tests**, including **10 affine tests**; Lean audit **3,485
+declarations / 1,708 theorem declarations**, with no admits or added axioms.
+Exhaustive frontier sets cover 135 branching updates at widths 1..3. Independent
+full-system elimination covers width 128. Archived evaluation checks **284**
+decisions/restarts and retains **268** affine versions at widths 2/8/32/64.
+An 80-step fixed-width regression has constant per-step charge and summary size.
+All 355 earlier generic inputs and five source versions pass revalidation/restart.
+All old rows in 21 tables and all 222 earlier experiment files remain intact,
+including after the affine experiment. Archive counts: **8,875 generic results /
+2,967 refutations / 65 source-state rows / 268 affine-state rows**. See the
+[affine evidence](../experiments/results/affine-growth/README.md).
+The manuscript adds the exact-growth proposition, cost model and limitations,
+attributes affine tractability to Schaefer and Gaussian elimination, and preserves
+all 32 earlier proof blocks. There is no matched speed comparison in this study.
+
+Remaining priorities, with distinct scopes:
+
+1. **Compose native operation histories.** For the general source-CNF API,
+   compose existing initialization/query/patch success theorems with named-store
+   definitions/deletions and retained source identities. For affine, typed history
+   exactness is proved, but raw JSON/named-store history correspondence is still
+   an integration boundary. Do not report the former as solved by the latter.
+2. **Persistence and witness refinement.** Prove Python retention/replay/SQLite
+   correspondence and serialized general-source witnesses. An affine witness API
+   would require saved elimination information/back-substitution and output costs.
+3. **Broader growth and mixed structure.** Add supplied tree decompositions with
+   certified separators or extend the affine frontier contract. Recognition and
+   maintenance costs must be charged. Arbitrary older-block edits are unsupported.
+   A mixed CNF/XOR route could use supplied small backdoors; finding such backdoors
+   and the worst-case `2^k` branching remain explicit restrictions.
+4. **Complete costs and lifetime policy.** Refine coefficient charges to actual
+   field/index/list operations and include native maps, decoding, allocation,
+   archive growth, errors and restarts. Add bounded active affine retention without
+   deleting durable versions; current native capacity refuses when full.
+5. **Matched evaluation and dispatch.** Compare this path with a full Gaussian
+   solver and checked CDCL on identical XOR workloads, include fixed/growing width,
+   repeated/novel equations and restarts. Automatic recognition or selection needs
+   conversion/verification costs. Current evidence establishes no competitive
+   speedup, general-CNF coverage or unrestricted polynomial expansion.
+6. **Generic relation/factor stores.** Their retention and equivalence caches
+   remain outside the adjacent-block source-store invariant. Compact affine
+   summaries do not establish polynomial closure for those general representations.
+
+Resume with the general native history theorem or a matched affine cost study.
+Retain `experiments/results/affine-growth/` and all earlier evidence; do not overwrite
+older timing artifacts. The polynomial restricted step is now concrete and checked;
+unrestricted SAT still lacks the required compact-closure/construction invariant.

@@ -702,3 +702,63 @@ this count omits map operations, decoding, array comparisons and allocation.
 Warm queries and patches do not run this initial scan. No new timing claim follows.
 The native initial, query and patch APIs now have individual success theorems.
 Composition across a complete operation history and persistent replay remains open.
+
+## Affine growth
+
+`PersistentSolver.affine_grow` supports genuine append-only growth of parity
+constraints, with persistent branching from old versions. Each equation is over
+GF(2). Its Boolean coefficients address the previous boundary followed by the
+fresh boundary, both of width `b`.
+
+```python
+from solver.persistent import PersistentSolver
+
+with PersistentSolver() as solver:
+    first = solver.affine_grow(1, equations=[
+        {"coefficients": [False, True], "rhs": True}  # fresh x = 1
+    ])
+    second = solver.affine_grow(base=first["state"], equations=[
+        {"coefficients": [True, False], "rhs": False}  # old x = 0
+    ])
+    assert first["answer"] is True
+    assert second["answer"] is False
+    assert solver.affine_grow(base=first["state"])["answer"] is True
+```
+
+Initialize with `width` and optional equations. A saved `base` determines width;
+passing both is rejected. `equations=None` queries a version; `equations=[]`
+appends a fresh unconstrained block. `summary=True` returns the boundary equations
+as well as the decision. This does not return assignments to the full history.
+There is no implicit conversion of arbitrary CNF into affine equations, and an
+append cannot mention forgotten interior variables. Saved branches remain usable.
+
+The native algebra and typed-history invariant are Lean-checked. Each append
+lifts the preceding basis, conjoins the new batch, projects away the old boundary,
+then compresses the surviving basis. `summary_rows <= b+1` and
+`summary_cells <= (b+1)^2`. `reference_cell_charge` and `reference_cell_budget`
+describe the saved version's append and decision, **not the cost of the current
+warm query**. Initialization assigns zero coefficient charge. The polynomial
+budget is `O(b^3+b^2*c)` for `c` new equations. `counted_complete` remains false:
+this ledger excludes parsing, map access, allocation, transport, storage and
+physical memory. Per-request wall time, phases, transport and object I/O are
+reported separately.
+
+Original equation batches live in content-addressed `affine_version` objects;
+`affine_states` records completed engine-specific results. All earlier tables and
+versions remain. Restart or a new engine replays original equations, never saved
+answers or summaries. Warm reuse of a resident parent avoids replay. The
+`affine_updates` fields count replayed/registered versions, object reads and
+serialized/inserted bytes. Failed transactions retain earlier database rows;
+checks may leave extra immutable nodes in the bounded native store until restart.
+The database, hashing, transport and Python replay remain tested trust boundaries.
+
+Engineering caps are widths 1..128, 4,096 equations per append and 4,096 resident
+versions including initialization. Oversized requests return errors. Native
+versions are not evicted automatically; restart clears the resident store and
+reconstructs the requested ancestry from the durable archive, subject to the same
+cap. Archive and request budgets also apply. The latest summary is bounded;
+retaining all historical summaries, source batches and results is not constant
+space. Whole-history restart may cost the sum of prior append charges.
+
+Validation: `python3 -m unittest solver.test_affine_growth`.
+Recorded study: [affine growth evidence](../experiments/results/affine-growth/README.md).

@@ -910,3 +910,42 @@ Operation-history composition is next. Serialized witnesses, byte transport,
 Python retention, persistent replay/SQLite refinement, generic stores, acceptance
 completeness and total costs remain separate. These are successful-call guarantees
 for the supplied adjacent-block family, with no new timing or unrestricted claim.
+
+## Affine growth
+
+Four modules certify a separate growing parity-constraint interface:
+
+- `Affine.lean`: `eliminate_exact`, `project_exact`, `basis_exact`, `basis_size`,
+  `project_left_exact` and `extend_exact` operate on `Vector (ZMod 2) n` rows.
+  They prove full valuation equivalence and existential projection, including
+  inconsistent systems, without assignment tables.
+- `AffineGrowth.lean`: `State` stores the original `History`, an exact boundary
+  summary and its `b+1` row bound. Appends add a fresh width-`b` block; equations
+  mention only the old and fresh boundaries. `answer_exact`, `answer_false`,
+  `summary_cells`, `replay_exact` and `history_source_bound` distinguish exact
+  decisions, bounded current summary and growing source history.
+- `AffineCosts.lean`: `basisRun` and `projectRun` execute coefficient elimination
+  with reference charges. Their value theorems connect them to the semantic
+  operations. `extendRun_bound` bounds actual append/decision charges by
+  `appendBudget b c`; `replayRun_bound` composes them across original histories.
+  Full-list pivot scans, produced coefficient/rhs cells and constant checks are
+  upper charges. They are not primitive instructions, allocation or byte counts.
+- `AffineProtocol.lean`: the native append executes `State.appendRun` and
+  `decideRun`. `report_semantics` proves actual returned Boolean semantics for a
+  typed node; `report_charge_bound` connects its returned charge to the bound.
+  Immutable native identities and malformed JSON are tested. Raw decoding,
+  named-store operation histories, Python and SQLite refinement are not proved
+  by these typed-node theorems.
+
+For `b>=1` and `c` new equations, the charge is `O(b^3+b^2*c)`, independent of
+history length when the parent is resident. The current summary has at most
+`(b+1)^2` logical cells. Keeping all summaries and original batches grows with
+history; replay repeats the cumulative charge. There is no full-history witness
+output, automatic general-CNF conversion or arbitrary older-block update.
+The general source-CNF operation-history proof remains a different obligation.
+
+The current complete build audits **3,485 declarations / 1,708 theorem
+declarations**, without admits or added axioms. **184 tests pass**, including
+10 affine-growth tests. The mathematical histories have no fixed cap; the native
+interface currently limits width to 128, equations per batch to 4,096 and resident
+versions to 4,096. Exceeding a cap is an error, never an UNSAT result.

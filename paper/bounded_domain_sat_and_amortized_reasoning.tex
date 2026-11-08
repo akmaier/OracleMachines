@@ -85,7 +85,7 @@
 \vspace{-0.7cm}
 
 \begin{abstract}
-Whether $\Pclass=\NPclass$ does not by itself determine whether a System 1/System 2 architecture saves computation. Learning allows us to spend computation once and reuse the result. Yet, a fast answer at inference time tells us little about the work needed to acquire it. Here, we use Boolean satisfiability to examine this trade. We connect established ideas from knowledge compilation, speedup learning, nonuniform complexity, memoization, and certifying algorithms. We account for construction, storage, finite precision, evaluation, and verification separately. Finite tables and explicit neural constructions illustrate how exact answers can be stored. Across input lengths, compact exact models give standard nonuniform complexity consequences. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. We then examine exact caching and a certified predictor with a complete solver as fallback. Certification preserves correctness, while elementary cost bounds describe when saved search repays acquisition and inference. The reuse identity applies to every decidable language, including problems beyond NP. Its validity requires neither $\Pclass=\NPclass$ nor $\Pclass\neq\NPclass$; actual savings require the stated cost inequalities. Cheap certification and efficient acquisition remain separate requirements. Explicit budgets also limit additional work when prediction fails. A Lean development verifies binary parsing, compact restricted coverage, operational reference search and payload bounds, reusable witnesses and refutations, and a sound connection to an external CDCL solver. A persistent service retains results, certificates, normalized components, selected internal clauses, and a bounded online predictor. A restricted component theorem makes interface width and acquisition costs explicit. Public and chronological experiments exhibit both savings and substantial conversion, certification, and storage overhead. Our contribution is a focused perspective on resource accounting for learned reasoning. Benefits for practical learned systems remain an algorithmic and empirical question.
+Whether $\Pclass=\NPclass$ does not by itself determine whether a System 1/System 2 architecture saves computation. Learning allows us to spend computation once and reuse the result. Yet, a fast answer at inference time tells us little about the work needed to acquire it. Here, we use Boolean satisfiability to examine this trade. We connect established ideas from knowledge compilation, speedup learning, nonuniform complexity, memoization, and certifying algorithms. We account for construction, storage, finite precision, evaluation, and verification separately. Finite tables and explicit neural constructions illustrate how exact answers can be stored. Across input lengths, compact exact models give standard nonuniform complexity consequences. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. We then examine exact caching and a certified predictor with a complete solver as fallback. Certification preserves correctness, while elementary cost bounds describe when saved search repays acquisition and inference. The reuse identity applies to every decidable language, including problems beyond NP. Its validity requires neither $\Pclass=\NPclass$ nor $\Pclass\neq\NPclass$; actual savings require the stated cost inequalities. Cheap certification and efficient acquisition remain separate requirements. Explicit budgets also limit additional work when prediction fails. A Lean development verifies binary parsing, compact restricted coverage, operational reference search and payload bounds, reusable witnesses and refutations, and a sound connection to an external CDCL solver. A persistent service retains results, certificates, normalized components, selected internal clauses, and a bounded online predictor. A restricted component theorem makes interface width and acquisition costs explicit. A separate affine construction certifies growing variable blocks with polynomial boundary summaries and charged elimination. Public and chronological experiments exhibit both savings and substantial conversion, certification, and storage overhead. Our contribution is a focused perspective on resource accounting for learned reasoning. Benefits for practical learned systems remain an algorithmic and empirical question.
 \end{abstract}
 
 \section{Introduction}
@@ -1165,6 +1165,45 @@ The transition keeps its predecessor until checking succeeds. If the resident tr
 
 For a warm single-edge decision request, the service records new source nodes, literal-test bounds, transition visits, reference updates, evictions, request/response bytes, and serialized versus newly stored object bytes. At most $h+3$ knowledge objects are added for the source path, version and result, before content sharing. SQL rows, indexes and page allocation are additional storage. A complete cost comparison must still charge parsing, hashing, native allocation, database access, transport and control. Access costs can depend on the growing archive. We measure their elapsed phases rather than infer a bit-machine theorem from the reference counts. This restricted source interface does not remove global provenance costs from the general factor-DAG solver.
 
+\subsection{Affine summaries under genuine growth}
+\label{sec:affine-growth}
+
+Let us now change the representation as well as the update. A Boolean relation may require a large table, while a system of parity equations has a compact algebraic description. Satisfiability of affine constraints is an established tractable case of Schaefer's classification \citep{schaefer1978}. Gaussian elimination gives its polynomial-time algorithm; \citet[Section~4]{chen2006rendezvous} describes the elimination directly. We use this known structure to implement a certified expansion that adds fresh variables. The new contribution here is the checked implementation and its explicit resource boundary, not a new tractability result.
+
+\begin{proposition}[Exact affine append and compact boundary]
+\label{prop:affine-growth}
+Fix $b\geq1$. Let $X_0,X_1,\ldots$ be disjoint blocks of $b$ Boolean variables. At step $t$, append a batch $E_t(X_{t-1},X_t)$ of $c_t$ affine equations over $\mathbb F_2$. The initial block is unconstrained. There is an exact boundary summary $R_t(X_t)$ such that
+\begin{equation}
+R_0=\top,\qquad
+R_t(v)\ \Longleftrightarrow\ \exists u\colon R_{t-1}(u)\land E_t(u,v).
+\label{eq:affine-growth}
+\end{equation}
+For every $v$, $R_t(v)$ holds exactly when $v$ extends to a solution of all $t$ original batches. Each summary contains at most $b$ pivot equations and one constant contradiction equation. Thus its coefficient/right-hand-side payload has at most $(b+1)^2$ Boolean cells.
+
+For the reference coefficient-cell charge defined below, put
+\begin{align}
+G(n,k,m)&=(k(n+2)+1)m+n+1,\\
+B(b,c)&=(b+1)(2b+1)+G(2b,b,m)+m(b+1)\notag\\
+&\quad+G(b,b,m)+G(b,b,b+1),\qquad m=b+1+c.
+\label{eq:affine-budget}
+\end{align}
+One append and its decision have charge at most $B(b,c_t)=O(b^3+b^2c_t)$. If $c_t\leq c$ throughout a history of $T$ appends, its cumulative charge is at most $T B(b,c)$. This charge is independent of history length for one append with its parent summary already resident.
+\end{proposition}
+
+\begin{proof}
+Lift the preceding summary to the old half of $X_{t-1}\cup X_t$, then concatenate the new equations. Eliminate each old coordinate using a nonzero pivot when one exists. Subtracting its suitable multiple from every row sets that coordinate to zero. For any assignment to the other coordinates, the resulting equations hold if and only if some value of the removed coordinate satisfies the preceding system. When no pivot exists, that coordinate is absent from every equation. Repeating the argument and dropping the zero old columns proves \eqref{eq:affine-growth}. Induction on $t$ gives the stated original-history semantics.
+
+Next, perform elimination on the remaining $b$ columns while retaining each selected pivot equation. There is at most one retained pivot per column. The final constant equations either all hold or contain a contradiction, which we represent by one row $0=1$. This preserves every boundary solution and gives the storage bound. Eliminating all remaining coordinates also gives an exact satisfiability decision.
+
+There are at most $m=b+1+c_t$ input rows. In our reference charge, a pivot search is charged the entire row list, even if it stops early. A reduction is charged $n+1$ produced coefficient/right-hand-side cells per row of dimension $n$. Hence each elimination stage costs at most $m(n+2)$. Constant checks and a possible contradiction vector contribute at most $m+n+1$. This gives $G$. The five terms of $B$ charge lifting, old-coordinate elimination, dropping old columns, basis compression, and decision. Row elimination does not increase the number of rows. The preceding and resulting summaries both have at most $b+1$ rows. These facts give the displayed bound. Summing the step charges and using $c_t\leq c$ proves the cumulative bound.
+\end{proof}
+
+This construction exposes a useful induction invariant: exactness, closure under conjunction and projection, bounded summary size, and bounded construction work all survive each append. Total variables grow to $(T+1)b$. We do not enumerate their assignments, or the $2^b$ boundary assignments. The conclusion depends on affine constraints and the stated interface. General CNF clauses do not preserve this representation. An append cannot refer directly to a forgotten block or replace an older batch. Such operations require a different retained interface, branching from an earlier version, or reconstruction.
+
+\texttt{Affine.lean} proves one-coordinate elimination, projection, basis equivalence and the append invariant. \texttt{AffineGrowth.lean} retains the original equation history and proves exact decisions and the summary bound. \texttt{AffineCosts.lean} attaches charges to the executed loops, proves that their values equal the semantic operations, and bounds both individual appends and replay. \texttt{AffineProtocol.lean} uses these constructors and proves the returned Boolean and charge fields for each typed state. JSON decoding, named-store histories, Python, SQLite and their complete correspondence remain tested integration boundaries. This separate affine history proof does not discharge the remaining operation-history theorem for the general source-CNF interface.
+
+The interface returns a decision and optionally the current boundary summary. It does not return a full-history assignment; producing such an assignment would itself require output proportional to its length. The charge counts coefficient-cell work. It is neither a primitive instruction count nor a physical memory bound. Parsing, allocation, map operations, serialization, archive access and process management remain additional costs. Retaining $T+1$ boundary summaries may require $(T+1)(b+1)^2$ such cells, and the original batches contribute $\sum_t c_t(2b+1)$ source cells. Persistent replay reconstructs summaries from those original batches; it does not trust saved answers. Thus restart can repeat the cumulative construction charge. The native interface currently permits widths 1 through 128, at most 4,096 equations per batch, and 4,096 resident versions including initialization. Exceeding a cap returns an error. The mathematical result has no such fixed history cap, but it supplies no unrestricted-SAT guarantee.
+
 \subsection{Amortization while the domain grows}
 
 Costly expansion may still be repaid by later queries. Let us state the workload condition rather than interchange the fixed-domain and growing-domain limits.
@@ -1938,6 +1977,14 @@ The next checkpoint establishes the initial-source success theorem above. New te
 
 All 174 tests pass, including 35 source-update tests. Lean audits 3,154 declarations, including 1,539 theorem declarations, without admits or added axioms. All 355 older generic inputs pass revalidation and semantic audit; all five saved source versions pass checked adoption and restart. Every old row in 21 tables and all 214 earlier experiment files remains intact. The archive holds 8,520 generic results and 2,838 refutations. Evidence is retained in \texttt{experiments/results/source-initial/}. Operation-history composition, serialized witnesses, transport, Python retention, persistence refinement, acceptance completeness and full costs remain open. Earlier timings remain unchanged; this checkpoint establishes no new speedup or unrestricted-SAT guarantee.
 
+\subsection{Validation of affine growth and persistent replay}
+
+The affine interface in Section~\ref{sec:affine-growth} is evaluated separately from the earlier source-CNF timings. Ten regression tests check complete boundary solution sets at widths one through three across 135 branching updates, then compare wider systems through width 128 with independent integer-bitset elimination of the full original equations. They test redundant and zero equations, contradictory constraints on the preceding boundary, unconstrained fresh blocks, immutable parents, restart, poisoned archived answers, corrupt source objects, malformed requests, rollback and capacity refusals. An 80-append width-four stream retains four summary rows and a constant reference charge after each append. These tests do not prove unrestricted acceptance completeness.
+
+A separate archived run uses widths 2, 8, 32 and 64. Each stream fixes its first fresh block, then appends 63 batches of permuted parity links. It also creates a contradictory successor and an unconstrained successor from the same retained parent. Independent elimination checks 272 decisions and 12 restart decisions against all original equations. All 284 agree. The run preserves 268 immutable versions. At 64 appends, the respective summaries use 6, 72, 1,056 and 4,160 Boolean coefficient/right-hand-side cells, while the corresponding histories contain 130, 520, 2,080 and 4,160 variables. The last equality is coincidental: summary payload grows quadratically in width and the number of history variables grows linearly in the number of appends. Original inputs, versions and resource records are retained in \texttt{experiments/results/affine-growth/}. This is a correctness and accounting study; it has no matched solver baseline and supports no comparative speed claim.
+
+All 184 regression tests pass. Lean audits 3,485 declarations, including 1,708 theorem declarations, without admits or added axioms. All 355 older generic inputs pass revalidation and semantic audit, and five saved source versions pass checked adoption and restart. Every old row in 21 tables and all 222 prior experiment files remains intact. The archive retains 8,875 generic results, 2,967 refutations, 65 source-state rows and the 268 affine versions. Earlier timing evidence is unchanged. General source-store history composition, complete persistence refinement, full machine costs, broader decompositions and compact treatment of unrestricted SAT remain separate obligations.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 
@@ -1987,7 +2034,7 @@ Their thematic proximity helps us state the missing obligations. We must specify
 We now have explicit conditions for exactness and savings, restricted compact expansion, an operational reference search, and checked service experiments. Establishing the conditions for a practical learned system still requires further algorithms and measurements. The following questions describe these remaining obligations. They do not claim unexplored territory across the wider literature.
 
 \paragraph{Compactness and acquisition.}
-Propositions~\ref{prop:compact-coverage}, \ref{prop:component-expansion}, \ref{prop:balanced-chain}, \ref{prop:layered}, and~\ref{prop:source-update} give restricted constructions. The component and local-elimination results allow growing total variable count. The service now uses a bounded-width heuristic and lazy nonempty-interface relations, but finding a small decomposition and limiting affected dependencies remain restrictions. Which richer families support useful representations with charged acquisition? To answer this, we must fix the SAT instance family, coverage, precision, acquisition interface, and budget. Tractable subclasses or distributional guarantees may support positive results without meeting Proposition~\ref{prop:advice} on all inputs. For unrestricted SAT, polynomial-size exact models remain unestablished here. So do lower bounds excluding them. In particular, our exponential ReLU construction tells us neither that this size is necessary nor that a smaller model can be learned efficiently.
+Propositions~\ref{prop:compact-coverage}, \ref{prop:component-expansion}, \ref{prop:balanced-chain}, \ref{prop:layered}, \ref{prop:source-update}, and~\ref{prop:affine-growth} give restricted constructions. The component and local-elimination results allow growing total variable count. The service now uses a bounded-width heuristic and lazy nonempty-interface relations, but finding a small decomposition and limiting affected dependencies remain restrictions. Which richer families support useful representations with charged acquisition? To answer this, we must fix the SAT instance family, coverage, precision, acquisition interface, and budget. Tractable subclasses or distributional guarantees may support positive results without meeting Proposition~\ref{prop:advice} on all inputs. For unrestricted SAT, polynomial-size exact models remain unestablished here. So do lower bounds excluding them. In particular, our exponential ReLU construction tells us neither that this size is necessary nor that a smaller model can be learned efficiently.
 
 \paragraph{Generalization, memory, and changing workloads.}
 The bounded predictor demonstrates checked transfer to new witnesses. When does learning save more work than caching under the same total memory budget? Equation~\eqref{eq:cache-distribution} gives a reference without eviction. Yet, memory limits, eviction, retraining, and distribution shifts change the costs. We cannot apply the fixed-policy threshold in Proposition~\ref{prop:savings} unchanged to adaptation. We must evaluate conditional savings at each history and include updates. Certification still preserves correctness after a workload change within the covered domain. It need not preserve fallback frequency or expected savings.
@@ -2079,6 +2126,12 @@ Cadoli, M., Donini, F.~M., Liberatore, P., and Schaerf, M. (2002).
 Preprocessing of intractable problems.
 \emph{Information and Computation}, 176(2), 89--120.
 \href{https://doi.org/10.1006/inco.2001.3043}{doi:10.1006/inco.2001.3043}.
+
+\bibitem[Chen(2006)]{chen2006rendezvous}
+Chen, H. (2006).
+A rendezvous of logic, complexity, and algebra.
+\emph{ACM SIGACT News}, 37(4), 85--114.
+\href{https://arxiv.org/abs/cs/0611018}{arXiv:cs/0611018}.
 
 \bibitem[Conitzer(2008)]{conitzer2008metareasoning}
 Conitzer, V. (2008).
@@ -2361,6 +2414,12 @@ Benchmark problems and instance descriptions.
 \url{https://www.cs.ubc.ca/~hoos/SATLIB/benchm.html}.
 Accessed 7 November 2026; selected archive and instance hashes are retained in the repository.
 
+\bibitem[Schaefer(1978)]{schaefer1978}
+Schaefer, T.~J. (1978).
+The complexity of satisfiability problems.
+In \emph{Proceedings of the Tenth Annual ACM Symposium on Theory of Computing}, pp.~216--226.
+\href{https://doi.org/10.1145/800133.804350}{doi:10.1145/800133.804350}.
+
 \bibitem[Schreiber et~al.(2026)Schreiber, Fleury, Fazekas, and Biere]{schreiber2026realtime}
 Schreiber, D., Fleury, M., Fazekas, K., and Biere, A. (2026).
 Real-time proof checking for distributed incremental SAT solving.
@@ -2451,6 +2510,7 @@ Yun, C., Sra, S., and Jadbabaie, A. (2019).
 Small ReLU networks are powerful memorizers: A tight analysis of memorization capacity.
 \emph{Advances in Neural Information Processing Systems}, 32.
 \url{https://arxiv.org/abs/1810.07770}.
+
 
 \end{thebibliography}
 \endgroup

@@ -604,3 +604,26 @@ Next is composition over accepted operation histories. Serialized witness values
 byte transport, Python active-root retention, replay/SQLite refinement, generic
 stores, acceptance completeness and complete resource bounds remain open. Earlier
 timings are unchanged; no new unrestricted-SAT guarantee follows.
+
+## Certified affine growth
+
+The affine path adds fresh variable blocks while retaining an exact summary of
+all preceding parity equations. Its summary has at most `b+1` equations over a
+width-`b` boundary, or `(b+1)^2` coefficient/right-hand-side cells. One resident
+append with `c` new equations has reference charge `O(b^3 + b^2*c)`. The native
+solver executes the Lean-certified coefficient operations; it does not enumerate
+boundary assignments. This is a restricted affine result using established
+Gaussian elimination, with explicit construction and replay costs.
+
+Original batches, immutable versions and results persist in SQLite. Restart
+replays original equations, and adding a contradictory batch never changes a
+saved parent's answer. The interface is decision-only, with an optional boundary
+summary; it does not return a full-history witness. Width, batch and resident
+version caps are explicit refusals. General CNF, arbitrary older-variable edits,
+complete persistence refinement and total machine-cost bounds remain open.
+
+See the [API and limits](solver/README.md#affine-growth),
+[formal contracts](formal/README.md#affine-growth), and
+[archived validation](experiments/results/affine-growth/README.md).
+The checkpoint passes **184 tests** and the Lean audit of **3,485 declarations /
+1,708 theorem declarations**. It retains all prior results and 268 affine versions.

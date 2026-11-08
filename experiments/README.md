@@ -345,3 +345,22 @@ failures. Three-second query deadlines, a 64 MiB logical archive cap, and sample
 process-tree/scratch watchdogs are declared separately. They are not a hard
 total-memory or physical-storage guarantee. The direct CNF reference does not
 use the service's certificate/archive boundary.
+
+## Affine append and replay
+
+`evaluate_affine_growth.py` records a separate correctness/accounting study of
+certified coefficient summaries. Widths 2, 8, 32 and 64 each receive 64 fresh
+blocks, then a contradiction and an unconstrained branch from a retained parent.
+An independent integer-bitset solver checks the complete original systems.
+The record contains 272 decisions, 12 restart decisions, 268 durable versions,
+original source objects, phase ledgers and source/binary fingerprints. All agree.
+This is not a comparative performance experiment.
+
+```sh
+python3 experiments/evaluate_affine_growth.py --cache /tmp/affine-study.sqlite3 --output /tmp/affine-study
+```
+
+The output directory must not contain an earlier `growth.json`. Results from the
+live preserved archive are in [results/affine-growth](results/affine-growth/README.md).
+The current summary bound excludes retained histories; restart explicitly
+replays their original batches. All previous experiment files remain unchanged.

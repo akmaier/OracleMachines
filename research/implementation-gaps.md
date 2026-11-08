@@ -2381,3 +2381,11 @@ independently reloaded and matched to its exact source and row hash.
    losing historical versions. Repair rejection still triggers copied bases.
 General irreducible overlap, arbitrary model repair and uniformly polynomial
 construction for every CNF remain open.
+
+Manuscript validation: Section 12.39 and Proposition 12.31 now give the repair
+rule, proof, shared-index accounting, allocation measurements and counterexamples.
+All 42 earlier proof blocks remain unchanged; the draft has 43 proof blocks and
+157 unique labels. The 82-page PDF builds without warnings or box overflows or
+underflows; pages 74/75 and adjoining page 76 were rendered and visually checked.
+Code, proofs, all measurements and earlier-archive verification were committed
+and pushed as `5c9f5ea`; the manuscript checkpoint follows separately.

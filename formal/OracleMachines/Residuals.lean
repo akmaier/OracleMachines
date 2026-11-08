@@ -220,4 +220,41 @@ theorem pure_repair_extension (source : List (List (Nat × Bool)))
     subst c
     exact ⟨(index, polarity), repairs, by simp⟩
 
+/-- A clause affected by a flip is protected by the new literal or by an
+unchanged true literal. This permits nonpure repairs and tautologies. -/
+theorem affected_repair_preserves (source : List (List (Nat × Bool)))
+    (v : Nat → Bool) (index : Nat) (polarity : Bool)
+    (model : ∀ c ∈ source, SignedClauseHolds c v)
+    (protection : ∀ c ∈ source, (index, !polarity) ∈ c →
+      (index, polarity) ∈ c ∨ ∃ lit ∈ c, lit.1 ≠ index ∧ v lit.1 = lit.2) :
+    ∀ c ∈ source, SignedClauseHolds c
+      (fun i => if i = index then polarity else v i) := by
+  intro c hc
+  obtain ⟨⟨i, b⟩, member, satisfied⟩ := model c hc
+  by_cases same : i = index
+  · by_cases sign : b = polarity
+    · exact ⟨(i, b), member, by simp [same, sign]⟩
+    · have opposite : b = !polarity := by
+        cases b <;> cases polarity <;> simp_all
+      have occurs : (index, !polarity) ∈ c := by simpa [same, opposite] using member
+      rcases protection c hc occurs with positive | ⟨lit, hl, different, true_lit⟩
+      · exact ⟨(index, polarity), positive, by simp⟩
+      · exact ⟨lit, hl, by simpa [different] using true_lit⟩
+  · exact ⟨(i, b), member, by simpa [same] using satisfied⟩
+
+theorem affected_repair_extension (source : List (List (Nat × Bool)))
+    (added : List (Nat × Bool)) (v : Nat → Bool) (index : Nat) (polarity : Bool)
+    (model : ∀ c ∈ source, SignedClauseHolds c v)
+    (protection : ∀ c ∈ source, (index, !polarity) ∈ c →
+      (index, polarity) ∈ c ∨ ∃ lit ∈ c, lit.1 ≠ index ∧ v lit.1 = lit.2)
+    (repairs : (index, polarity) ∈ added) :
+    ∀ c ∈ source ++ [added], SignedClauseHolds c
+      (fun i => if i = index then polarity else v i) := by
+  intro c hc
+  rcases List.mem_append.mp hc with old | new
+  · exact affected_repair_preserves source v index polarity model protection c old
+  · have same : c = added := List.mem_singleton.mp new
+    subst c
+    exact ⟨(index, polarity), repairs, by simp⟩
+
 end OracleMachines.SAT

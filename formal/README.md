@@ -1115,3 +1115,20 @@ protocol remain outside these semantic proofs.
 The current audit passes **4,079 declarations / 1,939 theorem declarations**.
 All 242 Python tests pass. The resource measurements and preserved limitations
 are in the [repair-history study](../experiments/results/cnf-repair-history/README.md).
+
+## Checked affected-clause model repair
+
+`affected_repair_preserves` and `affected_repair_extension` in `Residuals.lean`
+weaken purity: an old clause containing the opposite literal may contain the
+new literal or an unchanged true literal that protects it. Changing the variable
+then preserves all old clauses and satisfies a new clause containing the repair
+literal. The rule handles nonpure variables and tautologies. It does not find
+repairs or bound the size of the affected set.
+
+The audit passes **4,081 declarations / 1,941 theorem declarations**. All 249
+Python tests pass. The new Python experiment uses persistent occurrence and
+true-literal-count indexes, reconstructed during cold checking. The count maps,
+integer encoding, archive protocol and resource costs remain outside these Lean
+semantic proofs. See the
+[affected-repair comparison](../experiments/results/cnf-affected-history/README.md)
+for gains, index overhead and cases still requiring fallback.

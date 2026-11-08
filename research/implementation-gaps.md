@@ -1988,3 +1988,42 @@ to matched evaluation before drawing general conclusions. Then implement the
 signed-permutation case, checked batch handles and compact replies. KD-trees can
 later shortlist candidates for a checked repair; they do not replace these
 preconditions. Retain the generic path and every previous source/result.
+
+
+## 2026-11-08: refocus on arbitrary SAT and interacting tractable classes
+
+The user now prioritizes minimum-cost expansion for arbitrary SAT. The next
+milestone therefore moves from an affine-only fast path to a general residual
+decomposition with tractable leaves. [The analysis](arbitrary-sat-expansion.md)
+distinguishes whole-input classification from splitting a formula into parts,
+reviews Schaefer's language classification, heterogeneous/scattered backdoors,
+component-backdoor depth and representation-specific compilation lower bounds.
+Class recognition, discovery, recombination and persistent maintenance are part
+of the cost. No uniformly cheap complete cover of arbitrary SAT is established.
+
+An explicit linear-size indicator construction transforms any CNF into a
+conjunction of positive dual-Horn and negative Horn/2-CNF parts. Their interaction
+still encodes the original SAT problem. The retained diagnostic checks complete
+assignment correspondence on **460 formulas** (224 SAT / 236 UNSAT), including
+all 256 two-variable formulas formed from nonempty nontautological clauses. It
+also reproduces Gaspers et al.'s published heterogeneous-backdoor example: one
+variable yields Horn or 2-CNF residuals, while homogeneous searches through size
+two can fail. The search counts and failures remain in
+`experiments/results/sat-class-decomposition/diagnostic.json`; the enumerator is
+a small diagnostic, not an efficient backdoor detector or native solver path.
+
+**Next priority:** checked Horn/dual-Horn/2-CNF leaves and a bounded recursive
+planner alternating variable splits with independent component splits, with
+exact residual reuse and the existing complete checked fallback. Then add
+source-linked dependency/invalidation and OR/AND recomposition proofs, matched
+hard connected workloads, structural-change edits and cold replay. Optimize
+total new work, not only the number of backdoor variables. Affine constructors
+remain potential leaves; preserve their proofs and all earlier evidence.
+
+For a supplied strong backdoor of size k the branch bound is 2^k times polynomial
+leaf work; for a suitable supplied component-backdoor tree, depth d can replace
+global size in published evaluation bounds. Neither k nor d is uniformly small
+on all SAT inputs, and finding the structure is charged separately. A universal
+polynomial acquisition/expansion/query result would prove P=NP; this logical
+implication does not establish that such a result is impossible. Current runtime,
+Lean theorems and manuscript are unchanged by this research checkpoint.

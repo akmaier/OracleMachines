@@ -1,0 +1,302 @@
+{
+  "source_commit": "8e89d53cebeb80817f94a3b9c78fa8a828c434cd",
+  "script_sha256": "8e95b453823373ffb93dbc72b1780c6186f7d025d27ee86d03ab9e26cb093b58",
+  "seed": 20261108,
+  "reduction_checks": {
+    "formulas": 460,
+    "satisfiable": 224,
+    "unsatisfiable": 236,
+    "complete_two_variable_nonempty_clause_formulas": 256,
+    "pointwise_model_bijection_checked": true
+  },
+  "heterogeneous_examples": [
+    {
+      "n": 3,
+      "cnf": [
+        [
+          1,
+          -2,
+          -3,
+          -4
+        ],
+        [
+          -1,
+          5,
+          8
+        ],
+        [
+          -1,
+          6,
+          9
+        ],
+        [
+          -1,
+          7,
+          10
+        ]
+      ],
+      "backdoor_search": {
+        "Horn": {
+          "found": false,
+          "searched_through_size": 2,
+          "candidates": 56,
+          "branches": 75,
+          "source_literal_visits": 975
+        },
+        "2-CNF": {
+          "found": true,
+          "variables": [
+            1,
+            2
+          ],
+          "size": 2,
+          "leaves": [
+            {
+              "assignment": {
+                "1": false,
+                "2": false
+              },
+              "classes": [
+                "2-CNF"
+              ],
+              "residual": []
+            },
+            {
+              "assignment": {
+                "1": false,
+                "2": true
+              },
+              "classes": [
+                "2-CNF"
+              ],
+              "residual": [
+                [
+                  -3,
+                  -4
+                ]
+              ]
+            },
+            {
+              "assignment": {
+                "1": true,
+                "2": false
+              },
+              "classes": [
+                "2-CNF"
+              ],
+              "residual": [
+                [
+                  5,
+                  8
+                ],
+                [
+                  6,
+                  9
+                ],
+                [
+                  7,
+                  10
+                ]
+              ]
+            },
+            {
+              "assignment": {
+                "1": true,
+                "2": true
+              },
+              "classes": [
+                "2-CNF"
+              ],
+              "residual": [
+                [
+                  5,
+                  8
+                ],
+                [
+                  6,
+                  9
+                ],
+                [
+                  7,
+                  10
+                ]
+              ]
+            }
+          ],
+          "candidates": 12,
+          "branches": 15,
+          "source_literal_visits": 195
+        },
+        "heterogeneous": {
+          "found": true,
+          "variables": [
+            1
+          ],
+          "size": 1,
+          "leaves": [
+            {
+              "assignment": {
+                "1": false
+              },
+              "classes": [
+                "Horn"
+              ],
+              "residual": [
+                [
+                  -2,
+                  -3,
+                  -4
+                ]
+              ]
+            },
+            {
+              "assignment": {
+                "1": true
+              },
+              "classes": [
+                "2-CNF"
+              ],
+              "residual": [
+                [
+                  5,
+                  8
+                ],
+                [
+                  6,
+                  9
+                ],
+                [
+                  7,
+                  10
+                ]
+              ]
+            }
+          ],
+          "candidates": 2,
+          "branches": 3,
+          "source_literal_visits": 39
+        }
+      },
+      "answer": true,
+      "leaf_answers": [
+        true,
+        true
+      ]
+    },
+    {
+      "n": 4,
+      "cnf": [
+        [
+          1,
+          -2,
+          -3,
+          -4,
+          -5
+        ],
+        [
+          -1,
+          6,
+          10
+        ],
+        [
+          -1,
+          7,
+          11
+        ],
+        [
+          -1,
+          8,
+          12
+        ],
+        [
+          -1,
+          9,
+          13
+        ]
+      ],
+      "backdoor_search": {
+        "Horn": {
+          "found": false,
+          "searched_through_size": 2,
+          "candidates": 92,
+          "branches": 117,
+          "source_literal_visits": 1989
+        },
+        "2-CNF": {
+          "found": false,
+          "searched_through_size": 2,
+          "candidates": 92,
+          "branches": 96,
+          "source_literal_visits": 1632
+        },
+        "heterogeneous": {
+          "found": true,
+          "variables": [
+            1
+          ],
+          "size": 1,
+          "leaves": [
+            {
+              "assignment": {
+                "1": false
+              },
+              "classes": [
+                "Horn"
+              ],
+              "residual": [
+                [
+                  -2,
+                  -3,
+                  -4,
+                  -5
+                ]
+              ]
+            },
+            {
+              "assignment": {
+                "1": true
+              },
+              "classes": [
+                "2-CNF"
+              ],
+              "residual": [
+                [
+                  6,
+                  10
+                ],
+                [
+                  7,
+                  11
+                ],
+                [
+                  8,
+                  12
+                ],
+                [
+                  9,
+                  13
+                ]
+              ]
+            }
+          ],
+          "candidates": 2,
+          "branches": 3,
+          "source_literal_visits": 51
+        }
+      },
+      "answer": true,
+      "leaf_answers": [
+        true,
+        true
+      ]
+    }
+  ],
+  "example_source": "https://www.cs.ox.ac.uk/standa.zivny/publications/gmosz14aaai-preprint.pdf",
+  "limitations": [
+    "Small diagnostic, not Lean verification, a new reduction claim or a production SAT path",
+    "Bounded subset enumeration may take sum_i binomial(n,i)*2^i times polynomial scanning work",
+    "Failure through size 2 is not a claim that no larger backdoor exists",
+    "Class recognition does not remove shared-variable compatibility or the exponential branch count",
+    "No measured runtime speedup or minimum-cost expansion guarantee"
+  ]
+}

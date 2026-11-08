@@ -703,3 +703,9 @@ construction even for unseen updates. A diagnostic finds point boundaries in
 all regular steps of the existing repeated/novel affine streams. Conditional
 semantic lemmas are Lean-checked; specialized native recognition and construction
 remain to be implemented and measured against richer boundary families.
+
+The [arbitrary-SAT expansion analysis](research/arbitrary-sat-expansion.md)
+refocuses the next milestone on interacting tractable classes: checked class
+leaves, heterogeneous backdoors, recursive component splitting and persistent
+residual reuse. It records the literature, an explicit obstruction to independent
+class solving, and the discovery/recombination costs that remain unresolved.

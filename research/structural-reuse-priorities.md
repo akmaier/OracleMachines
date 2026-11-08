@@ -1,28 +1,37 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-08 after bounded equivalence retry and preparation profiling. This is the working
-record for the hourly investigation. Start here; consult
-[implementation history](implementation-gaps.md) and
-[resource bounds](resource-bounds.md) for details. The ranking below is provisional:
-we have useful matched synthetic controls, but no representative mixture of SAT
-workloads from which to infer a single globally dominant cost.
+Updated 2026-11-08 after the user's shift toward pattern discovery and a valid
+partition of the entire SAT problem. This is the working record for the hourly
+investigation. Start with the [discovery plan](sat-pattern-discovery.md), then
+consult [implementation history](implementation-gaps.md),
+[resource bounds](resource-bounds.md) and the measurements below.
 
-**Next research experiment:** replace repeated full-CNF unit-propagation scans
-with an occurrence-driven queue and independently checked reasons. The new
-pinned 2,048-variable chain spends 2.67 s in preparation; a separate profile
-attributes about 98% of instrumented preparation to `propagate` and its callees.
-It charges 16,779,261 literal visits for 8,189 source occurrences. Compare cold
-acquisition and fallback across implications, mixed CNFs, contradictions and
-already easy cases; preserve old certificates and reason checking. The profile
-identifies the cost but does not establish a speedup for this proposed change.
+**Primary objective:** discover useful SAT categories and exact decompositions
+from arbitrary CNF input, retaining explicit coverage of unresolved cases.
+Recognized-family optimization continues as supporting work. A complete
+classification and efficient solution of every resulting cell are separate
+obligations; retain overlaps, checked recognition and composition costs.
+
+**Next research experiment:** build an audited pattern inventory over the existing
+residual solver. Record all recognition outcomes, source-linked certificates,
+components, interfaces, conditioning and unresolved residual structure. Test
+unlabelled inputs, exhaustive small CNFs, renamings and class-changing mixtures.
+Use the unresolved cells to select the next discovery improvement. Measure
+coverage and remaining interaction as well as full runtime and memory costs.
+Do not treat "known families plus fallback" alone as the achieved partition.
+
+The propagation profile remains useful evidence: a pinned 2,048-variable chain
+spends 2.67 s in preparation, with about 98% of instrumented time in repeated
+propagation scans. The queue improvement is now supporting work, prioritized
+when it enables discovery experiments or exposes new structural reuse.
 
 Bounded equivalence retry is implemented as an optional layer. At 1,024
 variables, total time falls from 0.78490 to 0.05932 s; at 4,096, from 11.88170
 to 0.27261 s. The matched raised-global-budget comparator is slightly faster
 on these chains and also solves dense controls that the targeted policy rejects.
 There is no evidence that targeted escalation has lower expected total cost.
-After propagation, investigate inert-posting compression/cost estimation on
-the dense 1,024-variable miss (0.893 s versus 0.117 s with a larger global
+For supporting optimization work, investigate inert-posting compression/cost
+estimation on the dense 1,024-variable miss (0.893 s versus 0.117 s with a larger global
 budget). Parity remains the next repeated structural miss (32 fallbacks /
 0.175 s / 326 KB). Successful matching preparation remains another profile target.
 
@@ -34,6 +43,10 @@ current controls are small; scale/profile them before ranking their total saving
 
 ## Current cost map
 
+These matched synthetic measurements do not establish a globally dominant cost
+across a representative SAT workload distribution. They inform the discovery
+priorities without replacing the coverage objective.
+
 The arbitrary-CNF history/residual code is an experimental Python path. The
 production restricted-family engines and Lean semantic results are separate;
 their capabilities are not already integrated into one verified general solver.
@@ -41,7 +54,7 @@ their capabilities are not already integrated into one verified general solver.
 | Workload regime | Current costly work and evidence | Most promising investigation |
 | --- | --- | --- |
 | A local change needs several variables to move together | Equivalence blocks and matching paths now repair successfully. The 32-block, 8-choice matching case falls from 8.303 s / 20.33 MB / 33 bases to 0.253 s / 0.424 MB / one base. The original 40 parity misses remain. | Parity-preserving directions; component-local discovery and proposal search guided by coupling conflicts. |
-| Unit implications activate in an unfavorable scan order | The pinned 2,048-variable chain takes 2.67 s to prepare. About 98% of a separate instrumented preparation is in propagation; 16.78 million charged literal visits for 8,189 source occurrences. | First priority: queue newly forced values and update affected occurrences; preserve independently checked reason traces. |
+| Unit implications activate in an unfavorable scan order | The pinned 2,048-variable chain takes 2.67 s to prepare. About 98% of a separate instrumented preparation is in propagation; 16.78 million charged literal visits for 8,189 source occurrences. | Supporting optimization: queue newly forced values and update affected occurrences; preserve independently checked reason traces. |
 | Recognized equivalence repairs succeed | Optional bounded retry reduces the 4,096-variable chain from 11.882 to 0.273 s, including 0.217 s preparation. Every moved member/posting is still visited. | Shared group assignments/certificates and affected interfaces, with cold reconstruction and count invariants maintained. |
 | A recognized move exceeds the fixed budget | Retry removes the ordinary-chain miss. Dense 1,024-variable control still takes 0.893 s with fallback, versus 0.117 s at global budget 32,768. A contradictory block incurs 40.36 rather than 31.01 ms expansion. | Compress inert postings and improve cost estimates; retain both extra-work losses and missed savings. No optimal budget policy established. |
 | Matching moves succeed | At 32 blocks of 8 choices, initial preparation is 206.58 of 253.08 ms. A warm move changes four indicators, visits 32 postings per pass and allocates 439 trie nodes. Cold final replay is slightly slower. | Profile base preparation and cold checking; do not optimize two-edge path search while initialization dominates. |
@@ -73,38 +86,43 @@ evidence that the next optimization will produce the same gain.
 
 ## How each hourly run chooses work
 
-1. Identify the largest remaining **absolute** runtime or memory cost in the
-   target workload, including acquisition, discovery, recognition, checking,
-   serialization, persistence and restart. Profile a bounded representative
-   sample if the dominant cost is unknown.
-2. Choose one gap by credible recoverable cost, frequency across workloads and
-   experiment cost. A large percentage gain on a tiny path is not enough.
-   State the applicable structure and invalidation rule before implementing.
-3. Compare old and new paths on matched growing cases: repeated and novel
-   structure, class-preserving and class-breaking updates, cold and warm use.
-   Preserve regressions and failed ideas. Charge index construction and updates.
-4. Replace the affected cost-map entry with measured evidence; record the next
-   bottleneck. Commit verified work. Report only meaningful changes or blockers.
+1. Read the discovery plan and select one gap that can expand certified pattern
+   coverage or explain a substantial unresolved cell. Use current cost evidence
+   to judge whether the discovery is useful, not as the sole selection criterion.
+2. Make the classifier, overlap policy, recognition certificate and exact
+   decomposition/recomposition rule explicit. A failed recognizer is not proof
+   of nonmembership or UNSAT. Track unresolved cases rather than dropping them.
+3. Compare on matched unlabelled inputs, exhaustive small cases and adversarial
+   mixtures/edits. Charge discovery, verification, state size, persistence and
+   cold replay. Preserve failures and counterexamples.
+4. Implement or prove one concrete improvement, persist its scope and costs,
+   update the unresolved-cell priorities and commit/push verified checkpoints.
+   Known-family optimization is secondary unless it enables this experiment.
 
-Do not turn this into a repeated full review. If the evidence supports the next
-experiment above, run it. Reorder the priorities when measurements justify it.
+Do not turn this into repeated status analysis. Keep complete coverage, exact
+recomposition, compactness and efficient discovery as separate obligations.
 
 ## Ranked gaps across SAT categories
 
-### 0. Avoid repeated scans when acquiring a model
+### 1. Discover categories and characterize unresolved interaction
 
-The newest profile moves this concrete implementation cost ahead of further
-structural discovery. A pinned equivalence chain of 2,048 variables takes about
-2.67 s to acquire; propagation accounts for about 98% of a separate profiled
-run. Retain forced assignments, queue newly assigned literals and visit their
-affected occurrences instead of rescanning the whole CNF. This applies before
-the tractable-family recognizers and on genuine fallback across categories.
-Maintain a reason trace accepted by the existing independent verifier; compare
-final decisions and witnesses rather than assuming the old propagation order.
-Charge occurrence construction, queue storage, contradictions and cold replay.
-Do not infer that removing repeated scans removes general SAT branching.
+The first priority is the [audited pattern inventory](sat-pattern-discovery.md).
+Retain overlapping class certificates and make the recognition-outcome partition
+exhaustive. Then refine unresolved cells through component-local recognition and
+conditioning, with costs and counterexamples attached. The existing residual
+solver already performs several tractable-leaf and decomposition operations;
+the next work makes their coverage inspectable and extends what they discover.
 
-### 1. Reuse coordinated structural changes
+### Supporting optimization: avoid repeated propagation scans
+
+Occurrence-driven propagation remains a measured opportunity: 2.67 s preparation
+on the pinned 2,048-variable chain, with about 98% of a separate profiled run in
+propagation. Queue newly forced values and update affected occurrences, retaining
+independently checked reason traces. Charge construction, queue memory and cold
+replay. Schedule this when it supports discovery, rather than automatically
+placing it ahead of the user's research objective.
+
+### 2. Reuse coordinated structural changes
 
 The preceding one-variable repair was too narrow even on easy subclasses. The
 [diagnostic](../experiments/results/structured-repair-gaps/README.md) supplies and
@@ -228,7 +246,7 @@ Single-variable
 local search is classical; the research question here is checked persistent reuse
 and its full cost, not novelty of flipping a Boolean variable.
 
-### 2. Retain propagation and class-specific intermediate state
+### 3. Retain propagation and class-specific intermediate state
 
 The residual prototype caches exact normalized residual results, but rebuilds
 many intermediate structures. A failed fast path can therefore discard useful
@@ -263,7 +281,7 @@ and connected components are still reconstructed for new uncached residuals.
 The matching history adapter avoids that acquisition only when its proposal works. These are
 concrete maintenance gaps, not yet evidence of an end-to-end speedup.
 
-### 3. Reduce hard interaction between otherwise easy components
+### 4. Reduce hard interaction between otherwise easy components
 
 This has the largest potential effect on search growth, but less immediate
 measurement support than the repair control. Two components that are individually
@@ -295,7 +313,7 @@ discovery or a small parameter for every CNF. Our irreducible positive-overlap
 encoding already shows why merely combining individually easy clause groups
 does not give an unrestricted polynomial solver.
 
-### 4. Share source, certificates and summaries across class transitions
+### 5. Share source, certificates and summaries across class transitions
 
 Use durable clause identities, source deltas, assumptions and checked dependency
 references as the common interface. A component changing class should not force
@@ -315,7 +333,7 @@ shared, but its successes and normalization costs belong to a restricted input
 representation. Integration with the general CNF history needs a checked source
 interface and measurements of recognition, conversion and proof reuse.
 
-### 5. Remove representation costs where solving has already disappeared
+### 6. Remove representation costs where solving has already disappeared
 
 Compress unary trie paths for long sparse identifiers and consider lazy support
 index preparation for streams already satisfied by the current model. Activation

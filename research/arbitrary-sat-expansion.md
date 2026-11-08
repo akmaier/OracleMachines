@@ -6,6 +6,14 @@ they no longer define the whole next milestone. The research target is to make
 the difficult interaction between tractable parts as small and reusable as
 possible, while accepting arbitrary input through a complete checked fallback.
 
+**Current iteration priority (8 November 2026):** discovery and an exact,
+inspectable classification covering all valid CNFs now lead the work. The
+[pattern-discovery plan](sat-pattern-discovery.md) specifies the next inventory,
+overlap handling, unresolved cases and acceptance checks. Known-family speedups
+continue as supporting work. The implementation-priority list below records an
+earlier proposal; current execution order is in that plan and the structural-reuse
+priority record.
+
 ## What class decomposition can establish
 
 Two different decompositions must be separated.

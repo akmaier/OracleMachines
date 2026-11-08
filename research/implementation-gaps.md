@@ -2720,3 +2720,33 @@ Implementation/evidence checkpoint `df41bee` is pushed. The Lean build and audit
 pass unchanged at 4,083 declarations / 1,943 theorem declarations. All 45 previous
 proof blocks are unchanged, with 163 unique labels. The final PDF compiles without
 warnings or box errors; changed pages 80--81 were visually inspected.
+
+## 2026-11-08: prioritize pattern discovery and exact coverage
+
+The user redirected the next iterations toward discovering SAT patterns and a
+valid partition of the entire SAT problem. Known-family optimization remains
+useful supporting work. The previous propagation-first execution order is
+superseded by this research priority; its profile and all earlier results remain.
+
+The new `research/sat-pattern-discovery.md` defines the first milestone: an
+audited pattern inventory over existing residual-solver capabilities, tested on
+unlabelled CNFs, exhaustive small cases and adversarial mixtures/edits. Record
+all recognition outcomes and positive certificates, including overlaps; describe
+unresolved cells and their interactions rather than only counting successful
+specialized routes. A failed bounded recognizer is not a semantic exclusion.
+Deterministic, versioned outcome vectors provide an exhaustive disjoint reporting
+partition, but do not by themselves constitute an efficient structural solution.
+
+The plan distinguishes whole-input classification from exact conditioning and
+component decomposition within a formula. Shared-variable compatibility remains
+explicit. Discovery, recomposition, compactness, acquisition and update costs
+are separate obligations. The next discovery is selected by coverage and insight
+into unresolved interaction, with total cost measured. Existing Horn/dual-Horn,
+2-CNF, matching, component and variable-split paths are starting capabilities,
+not missing features to reimplement.
+
+The hourly heartbeat prompt now follows this discovery-first direction, keeping
+its hourly cadence, active state and existing chat. It still requires preserved
+results, tests, verified commits/pushes and quiet operation without material
+progress. This checkpoint changes plans and scheduling, not solver behavior or
+mathematical results; no manuscript change or new solver tests are needed.

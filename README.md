@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+The next iterations prioritize [SAT pattern discovery](research/sat-pattern-discovery.md):
+an exact classification covering all valid CNFs, explicit unresolved cases and
+checked decomposition across interacting classes. Known-family optimization
+continues as supporting work. Coverage and efficient solution of every class
+remain separate obligations.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

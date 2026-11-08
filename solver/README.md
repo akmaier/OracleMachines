@@ -773,3 +773,18 @@ retains O(T) identifiers/cycle-check entries and rereads one batch at a time.
 `resident_versions` and `resident_version_cap`; `storage` reports tracked affine
 residency separately from its configured cap. Query/transport deadlines still
 apply. Native-cap and tracked-version counts are not byte or RSS limits.
+
+Native affine definitions now carry decoded-input certificates, and
+`AffineHistory.handle` composes the actual named-store operations. Queries after
+any trace from an empty native store answer a history of that trace's original
+Boolean equations. Source row order and multiplicity are preserved in the
+contract. Retrying a retained definition keeps its old history even if its parent
+name has since been evicted or reused; a fresh definition binds the current parent.
+Retries perform an additional typed source comparison. These checks are not
+included in the coefficient-work charge. Byte transport, Python content-addressed
+lineage and SQLite correspondence remain outside the native theorem.
+
+A reuse diagnostic finds repeated algebraic inputs across distinct history
+versions; it currently installs no cache. See the
+[expansion priorities](../research/implementation-gaps.md) and
+[provenance and pattern evidence](../experiments/results/affine-history/README.md).

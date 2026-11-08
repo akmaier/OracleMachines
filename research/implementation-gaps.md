@@ -1529,3 +1529,94 @@ Resume with affine protocol/history refinement or checked witness reconstruction
 Keep the matched and pilot evidence separate. There is still no compact-closure
 or efficient-acquisition invariant for unrestricted SAT; no conclusion about
 P versus NP follows from these restricted results.
+
+## 2026-11-08: affine input provenance and expansion-focused priorities
+
+Runtime checkpoint **`1037595`** closes the native affine decoded-input/history
+connection. The user has redirected the existing hourly task toward **reducing
+expansion work through compression and reuse patterns**. Proof, persistence and
+evaluation work should support concrete expansion improvements rather than
+continue as an independent general-hardening queue.
+
+`AffineProtocol` now certifies exact Boolean row fields, dimensions, row order
+and multiplicity, initial width, the actual parent lookup, returned node and
+query lookup. `AffineHistory.handle` is the executed worker dispatcher. Its
+chronological `Origin` invariant proves that every resident history after a trace
+from the empty store comes from actual decoded requests in that trace. Successful
+queries decide that original history. Rejections preserve the predecessor;
+eviction retains only old nodes; reset empties the store. Mathematical trace and
+origin evidence are erased from runtime states.
+
+An important reuse distinction is now explicit and tested. Retrying a retained
+child returns its existing history even if its parent name was deleted and
+redefined. A fresh child binds the current parent. Deleting the old child and
+reusing its name can therefore yield a different answer. The retry path also
+checks decoded modes, widths or parent names, and typed equation lists; its
+source-agreement proof does not assume correctness of Lean's partial general
+JSON equality function. This adds parsing/comparison work on explicit retries.
+Byte transport, cross-process content-hash lineage, Python/SQLite refinement and
+serialized witnesses remain separate. There is no new performance claim for
+this protocol checkpoint.
+
+All **192 tests** pass, including **17 affine / 36 source-update** tests. Lean
+audits **3,794 declarations / 1,836 theorem declarations**, without admits or
+added axioms. All 355 old generic inputs, five source versions and 268 distinct
+old affine versions pass revalidation; both affine verdicts pass restart under a
+two-version cap. Every old row in 22 tables and all 394 prior experiment files
+remain. The live archive has **9,585 results / 3,225 refutations / 75 source-state
+rows / 804 affine-state rows**. All 34 prior manuscript proof blocks remain;
+one affine-history proof is added. See
+[the evidence](../experiments/results/affine-history/README.md).
+
+### Current expansion costs and a concrete reuse pattern
+
+For boundary width b and c new equations, a resident affine append has reference
+coefficient-work bound **O(b^3 + b^2 c)** and summary payload **O(b^2)**. These do
+not depend on the number T of earlier appends. Cold replay sums prior append
+costs and retains O(T) identifiers in its plan. Parsing, comparison, maps,
+hashing, serialization, allocation and archive work are additional costs. A
+complete machine-time bound has not been proved. General CNF still lacks the
+compact-closure guarantee needed for polynomial expansion.
+
+`experiments/analyze_affine_reuse.py` replays the six frozen comparison streams,
+retaining all source versions and checking 108 decisions independently. Each
+repeated stream has **14 identical kernel inputs among 18 expansions**, despite
+18 distinct version identities. Here a kernel input means the exact ordered
+parent summary and the exact local equation batch, including its order. At
+width 16, repeated calls account for **643,566 / 719,509 coefficient-work units
+(89.4%)**; 240 duplicate rows also occur across the stream. All three novel
+streams have zero such repeats. Sorting/deduplicating batches reveals no extra
+repeated calls in these cases. The diagnostic installs no kernel cache and
+establishes no realized speedup. It does not detect row-space equivalence or
+variable symmetries. Earlier timing artifacts remain tied to their old binary.
+
+### Next expansion priorities
+
+1. **Reuse exact algebraic transitions across distinct histories.** Cache the
+   boundary transformation for identical width, parent summary and equation
+   batch. Construct a fresh source-history certificate for every append; do not
+   return another version's history or confuse equal SAT answers with equivalent
+   boundary relations. Check full keys rather than trusting hash equality.
+   Charge comparison, lookup, insertion, eviction and durable version records.
+   Compare against the current path on repeated and novel streams.
+2. **Compress equation batches and boundary keys.** Prove and measure duplicate
+   elimination first. Then test canonical row-space forms and variable renaming
+   only when their discovery/normalization cost can repay the saved elimination.
+   Preserve original row order and multiplicity in the source archive even when
+   the computational representation removes redundancies.
+3. **Update only changed structure.** Investigate small-rank equation changes,
+   reusable elimination steps and shared separator components. State exactly
+   which edits preserve the summary invariant and when reconstruction is needed.
+   Expand supplied decomposition families with recognition/maintenance costs.
+4. **Measure all acquisition and reuse costs.** Broaden repeated/novel workloads
+   to growing widths, adversarial misses and cold reconstruction. Track stored
+   components, compression ratios, reference work and elapsed phase costs.
+   Retain unsuccessful trials and counterexamples; avoid repeating dead ends.
+5. **Supporting obligations.** Complete Python/SQLite and witness refinement,
+   general-store invariants and machine/resource accounting when they are needed
+   to justify a specific expansion optimization. These are still open; the native
+   source-CNF and native affine event-history scopes are now proved.
+
+The scheduled task remains hourly in this chat, with these expansion priorities.
+The next concrete target is an exact transition cache that separates a reusable
+boundary calculation from each append's immutable original history.

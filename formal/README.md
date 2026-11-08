@@ -986,3 +986,23 @@ affine tests and 36 source-update tests. A 4,101-append history and its restart
 fit a two-version native policy; all original equations remain durable. The native
 4,096-version cap bounds simultaneous residency, not history length. This is not
 a physical-memory or Python-policy refinement theorem.
+
+## Affine decoded inputs and chronological origin
+
+`AffineProtocol` now supplies `DecodedRow`, `DecodedRows`, `Created`,
+`DefinitionResponse`, `QueryResponse` and `DropResponse`. Successful row parsing
+preserves exact Boolean fields, dimensions, order and multiplicity. Fresh appends
+use the actual predecessor-store parent. Existing-definition retries preserve
+the prior node and check typed source agreement in addition to JSON equality;
+the proof does not assume a theorem about the partial JSON equality routine.
+
+`AffineHistory.handle` is executed by the worker. `Origin` tracks chronological
+original inputs, `empty_execute_sourced` proves every resident node has such an
+origin after any finite trace from the empty store, and
+`executed_query_semantics` connects the actual query verdict to that full history.
+Errors are atomic. A retained child survives parent deletion/reuse; a fresh child
+binds the current parent. These trace proofs introduce no runtime history list.
+
+The current audit covers **3,794 declarations / 1,836 theorem declarations**,
+without admits or added axioms; **192 tests** pass. Byte transport, Python/SQLite,
+serialized witnesses and total resource costs remain separate obligations.

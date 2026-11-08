@@ -640,3 +640,12 @@ and restarts with only two resident versions. All **190 tests pass**; Lean audit
 **3,625 declarations / 1,766 theorem declarations**. Complete Python/SQLite
 refinement, broader decompositions and total machine costs remain open.
 See the [history and retention record](experiments/results/history-retention/README.md).
+
+Checkpoint `1037595` connects affine decoded Boolean inputs and named-store
+histories to the original-equation invariant. **192 tests** and the Lean audit
+of **3,794 declarations / 1,836 theorem declarations** pass. Expansion work is now
+prioritized around compression and reuse: the repeated affine streams contain
+14 identical algebraic calls among 18 distinct history expansions. This motivates
+an exact transition cache; none is installed yet. See the
+[current gap record](research/implementation-gaps.md) and
+[pattern evidence](experiments/results/affine-history/README.md).

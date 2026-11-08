@@ -386,3 +386,20 @@ excluded from the reported timings. Per-run databases remain under `solver/.cach
 at the paths recorded in the results. Old result files are unchanged. Adoption
 revalidates all 268 old affine versions with only four resident versions; regression
 coverage also includes 4,101 appends and restart with only two resident versions.
+
+## Expansion-input repetition diagnostic
+
+```sh
+python3 experiments/analyze_affine_reuse.py --output /tmp/affine-patterns.json
+```
+
+The diagnostic uses frozen matched-study inputs, native checked summaries and
+independent original-system decisions. It observes exact ordered parent-summary
+and equation-batch repetition separately from a batch sorting/deduplication key.
+Every source version remains distinct and durable. Each repeated stream has 14
+repeated kernel inputs among 18 expansions; the novel streams have zero. At width
+16, those calls account for 89.4% of recorded coefficient work, but no kernel cache
+is installed and no speedup is measured. Full-key equality is checked separately
+in the archived validation; hashes are diagnostic labels. Canonical row-space
+and renaming equivalence are not tested. Evidence:
+[affine-history](results/affine-history/README.md).

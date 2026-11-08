@@ -1762,3 +1762,98 @@ cache budgets and phase/RSS measurements are further concrete targets. Broader
 canonicalization, low-rank updates, checked restart checkpoints and complete
 Python/SQLite/resource refinement remain open. No compact-closure result for
 general CNF follows from the current affine representation.
+
+
+## 2026-11-08: shared batches and certified duplicate removal
+
+Runtime **`e0cb8d3`** implements the two concrete targets from the storage audit.
+`AffineNormalize.lean` proves exact row membership, no duplicates, length reduction
+and preservation of every boundary assignment. `Kernel.restoreOriginal` attaches
+a normalized calculation to the actual original batch and current parent history.
+The native chronological origin proof remains valid. Prepared typed batches and
+normalized transitions have separately occupied bounded maps (64 slots each by
+default); each hit checks full equality after hash selection.
+
+The archive now supports an `affine_batch_ref_v1` encoding under the same legacy
+logical version hash. Reads validate the shared batch and reconstructed original
+source. Every old inline object stays unchanged. Only repeated batches with at
+least 128 compressed-payload bytes saved per reference are admitted; the discovery
+index retains at most 256 hashes. Small and unique batches stay inline. The policy
+can still add CPU work and first-admission overhead; it has no universal space or
+time guarantee. Both new options are independently configurable and default on.
+
+### Measured gains and remaining costs
+
+The matched study compares baseline, normalization, sharing, and both options;
+all modes keep the prior exact kernel cache. Five sequential rotated repetitions
+cover 120 runs and **2,800 decisions**, independently checked against complete
+original systems. Archive adoption finishes before the final run. The pilot is
+retained separately and excluded; input and runtime fingerprints agree.
+
+- Width-32 changing multiplicity: **0 -> 14/18 hits**, executed coefficient work
+  **30,266,133 -> 461,575**, median time **1,246.55 -> 430.52 ms** with both options
+  (65.5% less). Raw rows total 8,673, normalized rows 513. Normalization alone takes
+  417.58 ms. Original batches remain distinct in storage.
+- Width-16 changing multiplicity: **367.70 -> 223.19 ms** (39.3% less).
+- Width-32 exact repeated batches: source payload **16,656 -> 6,499 bytes**
+  (61.0% less); database **274,432 -> 262,144 bytes** (12 KiB less). One shared
+  batch supports 30 references while all 35 versions remain. Median time with
+  both options **236.75 -> 252.47 ms** (6.6% more). Extra reconstruction and
+  validation remain a concrete cost to reduce.
+- Width-16 repeated batches fail the savings threshold and stay inline. Novel
+  streams gain no hits or shared objects and retain identical source payload.
+  Small median timing changes (+0.8%, -0.2% with both) establish no broad benefit.
+
+**Memory is not fully shared yet.** Prepared normalized lists are shared with
+transition keys, but preparation entries retain the original typed input for
+checking, and each resident version still stores its request JSON. Additional
+cache entries may increase RAM. With width/row bounds b,c, retained coefficient
+and request payload is O((V+K+P)*(b^2+b*c)), before metadata and temporary work,
+where P is preparation slots. Slot counts are not byte/RSS bounds. No measured
+process-memory reduction is claimed. Hash-set probes/resizing/collisions and
+allocation remain outside the normalization input-cell counter.
+
+**Storage now follows a hybrid model.** Inline versions keep their batch payload;
+shared batches retain their coefficient payload once plus links for each version.
+Thus source coefficient payload is O(sum_inline b*c_t + sum_shared_batches b*|B|),
+before compression, metadata, results and indexes. Fully novel input still gives
+O(sum_t b*c_t), and the archive has no default size cap. Existing inline records
+are not rewritten, so old archive size does not automatically shrink. The main DB
+is now **19,738,624 bytes**; it includes a new engine namespace and contains
+**10,295 results / 3,483 refutations / 85 source rows / 1,340 affine rows**. The
+latter remain **268 distinct histories**, now across five engine namespaces.
+Retained experiments and backups consume additional disk space.
+
+### Verification and preserved evidence
+
+**207 tests** pass (26 affine growth / six affine archive / 36 source updates).
+Lean audits **4,043 declarations / 1,911 theorem declarations** without admits or
+added axioms. Tests cover complete frontier equivalence, changing multiplicities,
+collisions, corrupt references, restart with sharing disabled, and rollback after
+shared admission. Generated C skips deduplication on preparation hits and performs
+no second elimination when transporting back to original-source meaning.
+All 355 older generic inputs, five source versions and 268 affine versions pass
+revalidation. Every old row in 22 tables and all **583** preceding experiment
+files remain intact. The old unnormalized diagnostic reproduces its counts and
+charges. All **36** preceding manuscript proofs are unchanged; one is added.
+See [the complete evidence](../experiments/results/affine-batch-reuse/README.md).
+
+### Next priorities for expansion effort
+
+1. **Checked native batch handles.** Register original batches once and reuse
+   typed/normalized data across requests. Eliminate repeated JSON decoding and
+   per-version request copies where possible, with a revised source-origin proof.
+   This targets the measured repeated-stream overhead as well as memory.
+2. **Byte budgets and admission.** Profile live allocations and compressed reads;
+   compare saved payload with added checking/reconstruction. Bound cache bytes,
+   not just slots. Keep rejection atomic and all durable results intact.
+3. **Broader certified equivalence.** First-occurrence normalization does not
+   identify row permutations, equal row spaces or variable renaming. Charge
+   discovery and transport before claiming extra useful hits.
+4. **Low-rank changes.** Reuse elimination structure for small equation edits;
+   identify exact interface conditions and reconstruction requirements.
+5. **Checked restart checkpoints.** Native caches remain process-local; cold
+   replay still walks source histories and keeps an O(T) identifier plan.
+6. **Remaining refinement boundary.** Python/SQLite, serialized witnesses and
+   complete machine/space costs remain open. None of this gives compact closure
+   for general CNF or changes the status of unrestricted SAT or P versus NP.

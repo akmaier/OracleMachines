@@ -1060,3 +1060,9 @@ payload counters are partial ledgers; hash-set collision/resize costs and actual
 allocation are not yet given a complete machine bound. Native request JSON remains
 resident per version. The Python archive codec and admission policy remain tested
 boundaries, not new Lean persistence theorems.
+
+This checkpoint passes **207 tests** (26 affine growth, six affine archive, 36
+source updates). The axiom audit checks **4,043 declarations / 1,911 theorem
+declarations** without admits or added axioms. The matched four-mode experiment
+and generated-code inspection are retained in
+[the batch reuse record](../experiments/results/affine-batch-reuse/README.md).

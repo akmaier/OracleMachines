@@ -403,3 +403,21 @@ is installed and no speedup is measured. Full-key equality is checked separately
 in the archived validation; hashes are diagnostic labels. Canonical row-space
 and renaming equivalence are not tested. Evidence:
 [affine-history](results/affine-history/README.md).
+
+
+## Certified affine batch reuse
+
+[The four-mode study](results/affine-batch-reuse/README.md) separates duplicate
+normalization from adaptive original-batch sharing, retaining the existing kernel
+cache in every mode. Five repetitions cover repeated, novel and changing-duplicate
+streams at widths 16 and 32: 120 runs and 2,800 independently checked decisions.
+It records saved work and bytes alongside sharing overhead. Original version IDs,
+source rows and prior artifacts remain unchanged.
+
+```sh
+python3 experiments/compare_affine_batches.py --output experiments/results/affine-batches-new --repetitions 5
+```
+
+Use a new output directory. Stop builds, tests and archive adoption before timing.
+Source payload bytes and complete database bytes are separate metrics; cumulative
+service RSS is not an isolated measurement of cache memory savings.

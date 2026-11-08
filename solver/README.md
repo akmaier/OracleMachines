@@ -791,8 +791,9 @@ versions. See the
 
 The native solver now caches exact algebraic transitions across these versions.
 `affine_kernel_slots` configures 0..4,096 direct-mapped slots (default 64); zero
-disables hashing and cache lookup. A hit requires equality of the width, full
-ordered parent summary and full ordered equation batch. Hash collisions only
+disables cache-key hashing and cache lookup. With normalization disabled, a hit
+requires equality of the width, full ordered parent summary and full ordered
+equation batch. Hash collisions only
 replace entries. Each hit attaches the certified result to the current parent's
 history. Entries contain coefficients/results, without source-history ancestors.
 Version eviction leaves the kernel cache available; reset and worker restart

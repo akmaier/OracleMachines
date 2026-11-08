@@ -663,3 +663,24 @@ overhead. These are synthetic affine results, without a general SAT speed claim.
 All **197 tests** and the Lean audit of **3,938 declarations / 1,875 theorem
 declarations** pass; all 405 older experiment files and old archive rows remain.
 See the [cache experiment and limits](experiments/results/affine-kernel-cache/README.md).
+
+
+## Shared affine batches and certified preparation
+
+Checkpoint `e0cb8d3` adds duplicate-free computation and adaptive original-batch
+sharing. Prepared typed rows and normalized transitions can be reused across
+histories with different duplicate counts. The source archive retains exact row
+order/multiplicity and legacy version identities; existing rows are unchanged.
+
+In five matched repetitions, width-32 changing-multiplicity streams fall from
+**1,246.55 to 430.52 ms** with both options. Repeated width-32 source payload falls
+**16,656 -> 6,499 bytes**, and database size falls by **12 KiB**. That storage gain
+costs **6.6%** more elapsed time on the exact repeated stream. Novel streams gain
+no reuse. Native request JSON is still per version, so these measurements do not
+establish a reduction in process memory. Each cache has its own slot occupancy;
+byte budgets and batch handles remain open.
+
+All **207 tests** pass; Lean audits **4,043 declarations / 1,911 theorem
+declarations**. Every old archive row and all 583 earlier experiment files remain.
+See the [four-mode evidence and remaining limits](experiments/results/affine-batch-reuse/README.md)
+and [current expansion priorities](research/implementation-gaps.md).

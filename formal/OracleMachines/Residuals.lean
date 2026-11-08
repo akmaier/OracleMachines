@@ -257,4 +257,31 @@ theorem affected_repair_extension (source : List (List (Nat × Bool)))
     subst c
     exact ⟨(index, polarity), repairs, by simp⟩
 
+/-- Simultaneous changes are checked at their final values. Every clause
+touching the changed set is protected; other clauses retain an old witness.
+This does not assume that any intermediate single-variable update is valid. -/
+theorem joint_repair_preserves (source : List (List (Nat × Bool)))
+    (v updated : Nat → Bool) (changed : Nat → Prop)
+    (model : ∀ c ∈ source, SignedClauseHolds c v)
+    (unchanged : ∀ i, ¬ changed i → updated i = v i)
+    (checked : ∀ c ∈ source, (∃ lit ∈ c, changed lit.1) → SignedClauseHolds c updated) :
+    ∀ c ∈ source, SignedClauseHolds c updated := by
+  intro c hc
+  obtain ⟨lit, member, satisfied⟩ := model c hc
+  by_cases affected : changed lit.1
+  · exact checked c hc ⟨lit, member, affected⟩
+  · exact ⟨lit, member, (unchanged lit.1 affected).trans satisfied⟩
+
+theorem joint_repair_extension (source : List (List (Nat × Bool)))
+    (added : List (Nat × Bool)) (v updated : Nat → Bool) (changed : Nat → Prop)
+    (model : ∀ c ∈ source, SignedClauseHolds c v)
+    (unchanged : ∀ i, ¬ changed i → updated i = v i)
+    (checked : ∀ c ∈ source, (∃ lit ∈ c, changed lit.1) → SignedClauseHolds c updated)
+    (repairs : SignedClauseHolds added updated) :
+    ∀ c ∈ source ++ [added], SignedClauseHolds c updated := by
+  intro c hc
+  rcases List.mem_append.mp hc with old | new
+  · exact joint_repair_preserves source v updated changed model unchanged checked c old
+  · simpa [List.mem_singleton.mp new] using repairs
+
 end OracleMachines.SAT

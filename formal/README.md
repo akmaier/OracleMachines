@@ -406,7 +406,7 @@ and finite-monoid ideas, with a checked implementation and explicit accounting.
 
 ## Priority follow-up: executable counts and source binding
 
-The current build audits **2,090 declarations / 1,047 theorem declarations**.
+At that milestone the build audited **2,090 declarations / 1,047 theorem declarations**.
 `LayeredCosts.lean` implements short-circuit `anyRun`, a materialized table of
 values and test counts, `joinRun`, and `replaceRun`. Lean proves that their values
 agree with the existing composition/join/replacement functions, that a join
@@ -443,3 +443,39 @@ can transfer row values while new nodes retain current parent/source identities.
 The equivalence-class cache and row-cache implementation still lack a complete
 state-invariant refinement proof. Deletion and restart tests complement, rather
 than replace, that missing theorem.
+
+## Source-bearing incremental decisions
+
+The current build audits **2,279 declarations / 1,106 theorem declarations**.
+[`SourceInvariant.lean`](OracleMachines/SourceInvariant.lean) represents local
+CNF buckets and identity padding in a source tree. Its important connections are:
+
+| Result | What it establishes |
+| --- | --- |
+| `compile_exact`, `decision_exact` | Cached composition represents satisfying paths through the local source. |
+| `edit_at`, `edit_other` | A source edit changes its selected leaf and preserves every other leaf. |
+| `edit_compile`, `checkedEditRun_correct` | Updating cached relations agrees with compiling the updated source. |
+| `sourceTable_tests`, `checkedEditRun_budget` | Executable reference counts local clause/literal evaluation, joins and source nodes. |
+| `CheckedSource`, `checkedLeaf`, `checkedJoin` | Constructors carry an alignment proof with the actual cached tree. |
+| `checked_decide_exact`, `checked_unsat_exact` | The native decision's positive and negative answers have the current local-source meaning. |
+
+For q=2^width, height h, and a replacement with c clauses and L literals, the
+combined reference count is at most `q²(1+c+L) + h*q³ + 2(h+1)`. The source tree
+alone has h+1 copied-node events. This starts from an aligned cached predecessor;
+it does not include initial compilation or native transport/storage instructions.
+
+[`SourceUpdates.lean`](OracleMachines/SourceUpdates.lean) actually constructs
+these checked native values. It validates partition-local clauses, proposed
+masks, consecutive child ranges and unchanged subtree identities. Initial flat
+CNF binding is linear. Later patches visit changed paths only. Decision-only
+queries use `CheckedSource.decide`; full witness requests additionally traverse
+and check their output. Python keeps both roots until patch checking succeeds,
+then native reference-count checks permit dependency-safe eviction.
+
+The invariant concerns local CNF meaning. A complete refinement from original
+global IDs and JSON, through the mutable maps, Python/SQLite, hashes and replay
+is still open. The reference event bound is not a compiled bit-machine bound.
+Neither native incoming-count maintenance nor Python live-reference tracking
+has a complete state-invariant theorem here. Their pressure, branching, shared
+children, failure and restart cases are covered by integration tests. General
+factor equivalence/row-cache refinement is a separate remaining problem.

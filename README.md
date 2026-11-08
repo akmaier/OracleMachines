@@ -314,3 +314,44 @@ matched live/restarted proof modes and distinct-relation pressure. Its
 Every previous database row and all 93 historical experiment files remain intact.
 The live solver contains **4,260 results / 1,290 proofs**, plus saved expansion
 branches and source bindings checked again after restart.
+
+## Incremental CNF source versions
+
+`source_cnf` preserves the actual clauses in a balanced tree alongside their
+checked relations. A local edit replaces an edge's entire clause bucket; an
+empty bucket deletes its clauses. The supplied disjoint ordered variable
+partition stays fixed, with one to four variables per block. Every clause must
+fit in one block or two neighboring blocks. There is no decomposition discovery
+or unrestricted-SAT width guarantee.
+
+```python
+from solver.persistent import PersistentSolver
+
+with PersistentSolver() as solver:
+    first = solver.source_cnf(1, [[1, 2], [-1, -2]], [[1], [2], [3]])
+    contradiction = solver.source_cnf(base=first['state'], replace={0: [[1], [-1]]})
+    deleted = solver.source_cnf(base=contradiction['state'], replace={0: []})
+    assert first['answer'] and not contradiction['answer'] and deleted['answer']
+```
+
+Use `op: "source_cnf"` with the same fields in the JSON-lines service. Queries
+are decision-only by default; `witness=True` requests the complete block-state
+path and adds its output/checking cost. Versions remain in the SQLite archive
+and are replayed and checked after restart in the same checker namespace. A
+different partition starts a new source family and pays initial compilation.
+
+The native decision carries a Lean proof connecting its cached summary to the
+current local-source tree. Local patch checks reject changes to unedited
+subtrees. Incremental reference tracking removes the former full-closure scan
+under layered cache pressure. At a tight cap, a single height-h source edit
+temporarily reserves up to h+1 additional relation nodes until its transition
+is checked, then evicts obsolete nodes. Archive history, metadata, source
+payloads and process memory have separate costs.
+
+The reference update bound is proved; JSON/global variable mapping, hash maps,
+Python/SQLite and native machine costs still have refinement obligations.
+General factor-DAG provenance, adaptive gating and unrestricted structural
+coverage are unchanged. **141 tests pass**, and the current Lean audit covers
+**2,279 declarations / 1,106 theorem declarations**. See the
+[source-update study](experiments/results/source-updates/README.md) for matched
+full-source rebuilding, lifecycle costs, replay, stored bytes and sampled RSS.

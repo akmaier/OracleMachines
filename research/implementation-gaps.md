@@ -649,3 +649,36 @@ validity, include retention and evidence in the full-update bound, and give
 explicit additional terms for restart, history selection and full output. This
 would strengthen the resource-accounting contribution without assuming a solution
 to P versus NP.
+
+## Source-update implementation after the audit
+
+Commits `57a6d23` and `07354c8` address the concrete restricted target. The
+general seven-item audit above remains the record of the starting point.
+
+- **Retention:** live references and native incoming-reference counts now
+  support incremental eviction. In the 256-edge tight-cap regression, 128
+  consecutive edits each need nine evictions and at most 34 live-reference
+  updates, without a 511-node closure scan. Old versions remain archived.
+- **Provenance and source binding:** `source_cnf` stores current clauses in the
+  same balanced tree as their relations. Warm bucket replacements change only
+  the source path; the native checker verifies the requested edit and unchanged
+  subtree identities. Empty replacement buckets delete clauses. Partition changes
+  still require initial compilation of a new family.
+- **Formal connection:** native `CheckedSource` nodes contain proofs aligning
+  cached trees with the current local CNF. The executed decision has exact
+  positive/negative theorems. Source edits preserve all unselected leaves, and
+  the counted executable reference has the bound stated in `SourceInvariant.lean`.
+- **Accounting:** source metrics distinguish transport bytes, serialization,
+  newly inserted raw/packed payloads, node reads, patch/binding visits, reference
+  work, final logical cells and transient reservation. Complete elapsed phases
+  are measured. Archive and actual-memory costs are not inferred from cell counts.
+- **Evidence:** all 141 tests pass; Lean audits 2,279 declarations and 1,106
+  theorem declarations. The [matched source study](../experiments/results/source-updates/README.md)
+  compares local updates with full rebuilding under the same source checker.
+
+This addresses gaps 1/3/4 on the supplied adjacent-block family and strengthens
+gaps 2/5. It does not optimize the general factor-DAG provenance suffix or prove
+its mutable row/equivalence invariants. Complete JSON/global-mapping/storage
+refinement, machine costs, archive-growth policy, cost-sensitive gating and
+unrestricted coverage remain open. The new benchmark measures a restricted
+structural mechanism, not a learning-specific or general SAT speedup.

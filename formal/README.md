@@ -731,11 +731,9 @@ this fact is specific to indexed source nodes, not the generic relation DAG.
 
 `insert_fresh` preserves a join's links under a fresh-key model insertion.
 `erase_unreferenced` preserves them when the removed key is neither decoded child.
-These are conditional map-transition theorems. The runtime zero-incoming-count
-test has not yet been proved to imply the erasure premise. Nor is `JoinLinks`
-yet a field of a complete global store invariant across every request. The join
-constructor proves the registration snapshot; the missing lifetime theorem must
-connect that snapshot to later lookups.
+These are conditional map-transition theorems. The next checkpoint discharges
+their lifetime premise for the native source store and connects registration
+snapshots to current lookups.
 
 `BodyMatches.summary` now also retains the decoded mask and its exact relation
 equality to the model's cached summary. This field is part of the existing paired
@@ -751,3 +749,50 @@ declarations / 1,380 theorem declarations** without admits or added axioms.
 New cases cover equal relations with distinct named sources, malformed/missing
 children, live-identity rebinding, wrong masks with unchanged SAT answers, and
 12 parents deleted in shuffled order while preserving their shared children.
+
+## Exact incoming counts and live source dependencies
+
+[`ReferenceCounts.lean`](OracleMachines/ReferenceCounts.lean) defines exact incoming
+counts as the sum of decoded child-reference multiplicities across every live
+parent. A finite parent set witnesses the map domain **inside a proposition**;
+neither that set nor the aggregate sum is constructed or scanned at runtime.
+The specification counts occurrences, including a repeated child in a reference
+list. Native source branches separately prove their two child names are distinct.
+
+`increment_exact` proves the fold's pointwise addition law. Successful `decrement`
+returns its subtraction equation, retaining underflow rejection. `exact_insert`
+and `exact_erase` prove the aggregate invariant for fresh insertion and zero-count
+deletion. `Exact.zero_no_child` proves that a zero count excludes the deleted key
+from every live parent's decoded child list.
+
+[`SourceLifetime.lean`](OracleMachines/SourceLifetime.lean) wraps the paired store
+with this count invariant and `Linked`, which requires every live branch to name
+its exact current child models. `linked_insert` uses fresh-key preservation.
+`linked_erase` combines metadata, decoded children and zero-count exclusion to
+discharge the earlier deletion premise. `Store.lookup_branch` recovers these
+current child links from a named relation-tree lookup.
+
+The executed source context now uses this wrapper. Initialization creates the
+empty invariants. Fresh registration supplies its actual missing-key equation
+and either a leaf proof or the checked join links. Duplicate registration changes
+no state. Source deletion uses the counted decrement and constructs both updated
+invariants; a failed functional batch returns no replacement state. Thus surviving
+parents retain their exact named dependencies after successful source operations.
+Deleting a parent may make children eligible for a later parent-before-child
+deletion. An unreferenced name can be reused without rebinding a live parent.
+
+Each inserted/deleted body decodes at most two children and updates those counts.
+Proofs and the parent-domain witness erase. The runtime still pays for hashing,
+map updates, wrappers, integer operations, source retention and transport; this
+is not a bit-machine, allocation or RSS theorem. The generic relation-store loops
+and Python active-reference policy remain outside this new wrapper's state proof.
+Exact requested-patch semantics, complete serialized replay, acceptance
+completeness, general factor caches and full resource costs remain open. No
+unrestricted-SAT coverage or speedup claim follows.
+
+All **166 tests pass**, including 27 source-update tests. Lean audits **2,944
+declarations / 1,416 theorem declarations** without admits or added axioms.
+The new regression compares native eviction against a separate full recount of
+a 44-node graph with 16 roots, shared descendants, randomized deletions and
+duplicate definitions, then rebuilds and reclaims all names. Existing tests
+cover rollback, reuse, tight caps, historical branches and restart.

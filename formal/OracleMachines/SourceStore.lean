@@ -3,8 +3,8 @@ import Std.Data.HashMap.Lemmas
 
 /-! Named source metadata, serialized summaries and agreement of the two maps.
 The runtime preserves this invariant by paired insertions and erasures. It does
-not scan the store to reconstruct the proof. Child dependency lifetime, reference
-counts, requested patches and persistence remain separate obligations. -/
+not scan the store to reconstruct the proof. SourceLifetime adds child dependency
+lifetime and reference counts; requested patches and persistence remain separate. -/
 namespace OracleMachines.SourceStore
 open Lean OracleMachines.Layered OracleMachines.SourceNodes
 

@@ -596,10 +596,15 @@ Paired insertion and erasure preserve this proof without scanning the store.
 the exact models retrieved when the join is registered. Its original-clause and
 decision theorems concern those children and one shared valuation. Preservation
 under fresh insertion and deletion avoiding both children is proved separately.
-These conditions have not yet been connected to the full refcount/store state:
-the registration proof is not a theorem that named children survive all later
-requests. Dependency lifetime, exact requested-patch semantics, serialized replay
-and the Python/SQLite paths remain separate obligations.
+`SourceLifetime.lean` now connects these conditions to the native source store.
+The context carries exact incoming counts and a global invariant tying every
+live branch to its current named child models. A zero incoming count proves that
+no live parent names the removed key; fresh insertion and deletion preserve the
+invariants. Duplicate registration changes no state. The source path executes
+the proved increment/decrement operations without scanning the full graph.
+The proof-only finite parent domain and aggregate sum erase. Generic relation
+retention, Python reference counts, exact requested-patch semantics and complete
+serialized replay/SQLite correspondence remain separate obligations.
 
 Field parsing retains equality proofs and uses temporary header wrappers at
 registration. Proof fields erase; runtime parsing, comparisons and allocation

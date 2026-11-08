@@ -3,7 +3,7 @@ import OracleMachines.SourceStore
 /-! A native join records the child names it decoded and the exact models found
 in its registration snapshot. Preservation under later updates is conditional:
 fresh insertions preserve links, and erasure must avoid both named children.
-The runtime reference-count policy still needs to discharge that condition. -/
+SourceLifetime discharges that condition for its native source-store wrapper. -/
 namespace OracleMachines.SourceLinks
 open Lean OracleMachines.Layered OracleMachines.SourceNodes OracleMachines.SourceStore
 

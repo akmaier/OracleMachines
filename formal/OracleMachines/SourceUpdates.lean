@@ -1,4 +1,4 @@
-import OracleMachines.SourceLinks
+import OracleMachines.SourceLifetime
 
 /-! Source-bearing nodes: provenance and relations use the same balanced tree.
 The partition is fixed within a version family. Local edits replace the clauses
@@ -6,8 +6,8 @@ of one or more adjacent-block edges; an empty list deletes that edge's clauses.
 Every cached decision carries a proof of its original-source meaning. Layout,
 start and height index source nodes; joining preserves consecutive intervals.
 Flat-source grouping, complete binding and named-map/metadata correspondence
-carry proofs, as do serialized summaries and registration-time child lookups.
-Dependency lifetime, requested patches and persistence are separate. -/
+carry proofs, as do serialized summaries, live child links and incoming counts.
+Requested patches and persistent-store refinement remain separate. -/
 namespace OracleMachines.SourceUpdates
 open Lean OracleMachines.Layered
 open OracleMachines.SourceNodes
@@ -18,7 +18,7 @@ structure Context where
   id : String
   signature : Json
   layout : CompiledSource
-  checked : OracleMachines.SourceStore.Store id layout.layers layout.width := .empty id layout.layers layout.width
+  checked : OracleMachines.SourceLifetime.Store id layout.layers layout.width := .empty id layout.layers layout.width
 
 def Context.nodes (context : Context) : OracleMachines.Layered.Store := context.checked.relations
 
@@ -77,10 +77,12 @@ def defineNodes (store : Store) (request : Json) : Except String (Store × Json)
   for body in nodes do
     let name ← readParsed String body "id"
     let id := name.value
-    if let some old := out.relations.nodes[id]? then
+    let before := out
+    match present : before.relations.nodes[id]? with
+    | some old =>
       if old.1 != body then throw "Source node identity changed"
-    else
-      if out.relations.nodes.size ≥ 200000 then throw "Native source store capacity exceeded"
+    | none =>
+      if before.relations.nodes.size ≥ 200000 then throw "Native source store capacity exceeded"
       let header ← readHeader context.id layout.width body name
       let start := header.start
       let height := header.height
@@ -88,7 +90,8 @@ def defineNodes (store : Store) (request : Json) : Except String (Store × Json)
       let parsedMask ← readParsed Nat body "mask"
       let mask := parsedMask.value
       if mask ≥ 2^((2^layout.width)^2) then throw "Source mask exceeds width"
-      let checked ← if zero : height = 0 then do
+      let checked : {node : CheckedNode layout.layers layout.width //
+          BodyMatches context.id id body node ∧ (node.height = 0 ∨ JoinLinks before.models body node)} ← if zero : height = 0 then do
         let original ← readParsed (Array (Array Int)) body "clauses"
         let clauses := original.value
         if inside : start < layout.layers.size-1 then
@@ -101,34 +104,37 @@ def defineNodes (store : Store) (request : Json) : Except String (Store × Json)
           if same : relationEqual (maskRelation layout.width mask) (compileLocal layout.width localCNF) then
             let model := checkedLeaf start clauses inside translated (maskRelation layout.width mask)
               ((relationEqual_exact _ _).mp same)
-            pure (bindHeader header model rfl zero.symm ⟨mask,parsedMask.exact,rfl⟩ (by
+            let bound := bindHeader header model rfl zero.symm ⟨mask,parsedMask.exact,rfl⟩ (by
               intro payload root
               have equal : clauses = payload := by simpa [model,checkedLeaf,OriginalTree.rootClauses] using root
-              exact original.exact.trans (congrArg Except.ok equal)))
+              exact original.exact.trans (congrArg Except.ok equal))
+            pure (OracleMachines.SourceLifetime.registration (models := before.models) bound (Or.inl rfl))
           else throw "Source leaf mask does not match clauses"
         else
           let empty ← expectEqual clauses #[] "Source padding must be empty"
           if same : relationEqual (maskRelation layout.width mask) identity then
             let model := checkedPad (layers := layout.layers) start (by omega) (maskRelation layout.width mask)
               ((relationEqual_exact _ _).mp same)
-            pure (bindHeader header model rfl zero.symm ⟨mask,parsedMask.exact,rfl⟩ (by
+            let bound := bindHeader header model rfl zero.symm ⟨mask,parsedMask.exact,rfl⟩ (by
               intro payload root
               have equal : (#[] : Array (Array Int)) = payload := by simpa [model,checkedPad,OriginalTree.rootClauses] using root
-              exact original.exact.trans (congrArg Except.ok (empty.down.trans equal))))
+              exact original.exact.trans (congrArg Except.ok (empty.down.trans equal)))
+            pure (OracleMachines.SourceLifetime.registration (models := before.models) bound (Or.inl rfl))
           else throw "Source padding must be identity"
       else do
-        let linked ← readJoin out.models body
+        let linked ← readJoin before.models body
         let joined := linked.val
         let location ← expectEqual joined.start start "Source children do not cover consecutive edges"
         let level ← expectEqual height joined.height "Unbalanced source node"
         if same : relationEqual (maskRelation layout.width mask) joined.tree.summary then
-          pure (bindHeader header joined location.down level.down.symm
+          let bound := bindHeader header joined location.down level.down.symm
             ⟨mask,parsedMask.exact,(relationEqual_exact _ _).mp same⟩ (by
               intro payload root
               rw [linked.property.rootClauses_none] at root
-              cases root))
+              cases root)
+          pure (OracleMachines.SourceLifetime.registration bound (Or.inr linked.property))
         else throw "Incorrect source summary"
-      out ← out.insert id body checked.val checked.property
+      out ← before.insert id body checked.val checked.property.1 checked.property.2 present
       sourceNodes := sourceNodes+1
   return (⟨some {context with checked := out}⟩,Json.mkObj [("valid",toJson true),
     ("source_cells",toJson cells),("literal_test_bound",toJson tests),

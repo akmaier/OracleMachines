@@ -17,6 +17,58 @@ def sat(clauses,n):
 
 
 class SourceUpdateTests(unittest.TestCase):
+    def test_native_lifetime_matches_independent_live_graph_recount(self):
+        rng=random.Random(1903)
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            s._request(dict(mode='source_init',id='graph',width=1,layers=[[i] for i in range(1,10)]))
+            definitions=[];levels={}
+            for height in range(4):
+                for start in range(0,8,1<<height):
+                    names=[]
+                    for variant in range(16 if height==3 else 2):
+                        name=f'n-{height}-{start}-{variant}'
+                        body=dict(id=name,layout='graph',width=1,start=start,height=height,mask=15)
+                        if height==0:body['clauses']=[] if variant==0 else [[start+1,-start-1]]
+                        else:
+                            body['left']=levels[height-1,start][variant%2]
+                            body['right']=levels[height-1,start+(1<<(height-1))][(variant//2)%2]
+                        definitions.append(body);names.append(name)
+                    levels[height,start]=names
+            self.assertEqual(len(definitions),44)
+            s._request(dict(mode='source_define',nodes=definitions))
+            live={body['id']:body for body in definitions}
+            rejected=removed=duplicates=0
+            for _ in range(180):
+                if not live:break
+                # Recompute the full graph independently of the incremental
+                # implementation, then compare its zero-count deletion frontier.
+                incoming=Counter(child for body in live.values() if body['height']
+                                 for child in (body['left'],body['right']))
+                name=rng.choice(list(live));body=live[name]
+                if rng.randrange(4)==0:
+                    result=s._request(dict(mode='source_define',nodes=[body,body]))
+                    self.assertEqual(result['original_source_nodes'],0);duplicates+=1
+                elif incoming[name]:
+                    with self.assertRaisesRegex(ValueError,'referenced'):
+                        s._request(dict(mode='source_drop',ids=[name]))
+                    rejected+=1
+                else:
+                    self.assertEqual(s._request(dict(mode='source_drop',ids=[name]))['evicted'],1)
+                    del live[name];removed+=1
+                roots=[key for key,value in live.items() if value['height']==3]
+                if roots:
+                    self.assertTrue(s._request(dict(mode='source_query',root=rng.choice(roots),witness=True))['answer'])
+            self.assertGreater(rejected,0);self.assertGreater(removed,0);self.assertGreater(duplicates,0)
+            remaining=sorted(live,key=lambda key:live[key]['height'],reverse=True)
+            self.assertEqual(s._request(dict(mode='source_drop',ids=remaining))['evicted'],len(remaining))
+            # Rebuild the same names after complete deletion. Stale or inflated
+            # reference counts would obstruct this second complete reclamation.
+            s._request(dict(mode='source_define',nodes=definitions))
+            for root in levels[3,0]:
+                self.assertTrue(s._request(dict(mode='source_query',root=root,witness=False))['answer'])
+            order=[body['id'] for body in sorted(definitions,key=lambda body:body['height'],reverse=True)]
+            self.assertEqual(s._request(dict(mode='source_drop',ids=order))['evicted'],44)
+
     def test_named_join_uses_exact_sources_even_with_equal_relations(self):
         with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
             s._request(dict(mode='source_init',id='links',width=1,layers=[[1],[2],[3]]))

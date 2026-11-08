@@ -1058,3 +1058,63 @@ tables and all 182 earlier experiment files remains intact. The archive now hold
 Earlier timing evidence remains tied to its original runtime. Resume with a
 global live-branch link invariant and the reference-count erasure premise; do not
 treat registration correctness as completed lifetime or requested-patch refinement.
+
+## Exact incoming counts and live dependency preservation (8 November, seventh hourly follow-up)
+
+`ReferenceCounts.lean` defines each incoming count as the sum of decoded child
+occurrences across all live native parents. The finite parent-domain witness and
+sum occur only in a proposition and erase. The executed increment fold has an
+exact addition theorem; successful decrement returns an exact subtraction
+equation and retains underflow rejection. Fresh insertion and zero-count erasure
+preserve the aggregate invariant. `Exact.zero_no_child` proves that count zero
+excludes the key from every live parent's decoded child list.
+
+`SourceLifetime.lean` wraps the paired store with exact counts and a global
+`Linked` invariant: every live branch names its exact current child models.
+Insertion uses fresh-key preservation; deletion combines the decoded metadata
+with zero-count exclusion to discharge the conditional deletion premise from
+`SourceLinks`. `lookup_branch` recovers current child links from a named relation
+lookup. The native source context now uses this wrapper. Its registration path
+supplies the actual missing-key equation and a leaf-or-checked-join proof.
+Duplicate definitions change no state. Source deletion executes the proved
+decrement and returns both preserved invariants. A failed batch exposes no new
+state. Unreferenced identities can be reused without rebinding a live parent.
+
+The new source operations decode at most two direct children per node. They do
+not compute the proof's finite domain or global sum, scan the store, or retain
+registration snapshots. Runtime hashing, maps, wrappers, integer/bit operations,
+source payloads, transport and archive access remain costs. No new timing,
+allocation/RSS or complete machine-cost bound is claimed. The generic relation
+store still uses its earlier loops; the Python active-root/reference policy is
+also outside this new native-source invariant.
+
+A new regression independently recounts the complete live reference graph of
+44 source nodes with 16 roots and shared internal descendants. It compares
+deletion acceptance/rejection after randomized operations and duplicate
+definitions, queries surviving roots, removes all remaining nodes in dependency
+order, rebuilds the same names and reclaims them again. Earlier rollback,
+parent-sharing, identity-reuse, branching and restart checks remain in place.
+
+Next priorities:
+
+1. **Exact requested-patch semantics.** Use current `lookup_branch` links to prove
+   that successful `checkPatch` compares the actual typed children. Connect leaf
+   clause equality to the requested replacement, and identical unedited names
+   to unchanged original buckets. The current node's correct SAT semantics does
+   not alone prove it is the requested successor. Root coverage, edit validation
+   and complete initial binding remain part of this integration obligation.
+2. **Python retention and complete serialized replay/SQLite refinement.** Native
+   source dependency safety is now proved; this does not prove Python policy,
+   archive integrity, outer transport, or the generic relation-store loops.
+3. **General factor row/equivalence-store refinement.** Adjacent-block source
+   invariants do not establish general factor-DAG guarantees.
+4. **Complete restricted costs and acceptance specification**, including complete
+   decrement/operation acceptance, caps, parsing, maps, allocation, payloads,
+   transport, archive access and bit costs.
+5. **Compact general input, matched application evaluation and cost-sensitive
+   selection.** No unrestricted-SAT coverage or total-resource bound follows.
+
+Validation at the lifetime checkpoint: all **166 tests pass**, including **27
+source-update tests**, without resource warnings. Lean audits **2,944 declarations /
+1,416 theorem declarations** without admits or added axioms. Archive revalidation
+and manuscript reconciliation follow the verified runtime checkpoint.

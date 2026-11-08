@@ -756,5 +756,10 @@ Highest-priority remaining work:
    retain failures and compare matched certified boundaries. Cost-sensitive
    routing, hard total-memory bounds and unrestricted coverage remain open.
 
-The manuscript and artifact record for this checkpoint are updated separately
-after archive revalidation. Earlier results and experiment files are preserved.
+Runtime checkpoint `dd0c44c` is committed and pushed. The manuscript and the
+[verification record](../experiments/results/source-mapping/README.md) include
+archive revalidation: all 355 distinct generic inputs pass; five older source
+versions are checked under the new engine and after restart. Every old row in
+all 21 tables and all 142 prior experiment files is preserved. The archive now
+contains 5,325 generic results and 1,677 refutations. Historical timing results
+remain tied to their original runtime; this checkpoint has no new timing study.

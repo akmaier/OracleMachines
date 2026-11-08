@@ -352,8 +352,9 @@ temporarily reserves up to h+1 additional relation nodes until its transition
 is checked, then evicts obsolete nodes. Archive history, metadata, source
 payloads and process memory have separate costs.
 
-The reference update bound is proved; JSON/global variable mapping, hash maps,
-Python/SQLite and native machine costs still have refinement obligations.
+The reference update bound is proved. Original-variable translation now has the
+local proof described below; global grouping, JSON, persistent maps, Python/SQLite
+and native machine costs still have refinement obligations.
 General factor-DAG provenance, adaptive gating and unrestricted structural
 coverage are unchanged. At this milestone **141 tests passed**, and Lean audited
 **2,279 declarations / 1,106 theorem declarations**. See the
@@ -365,10 +366,10 @@ proofs. Lean proves equality with the previous membership condition, including
 duplicates; counters report index entries and membership probes. It avoids
 repeated list scans while retaining the full evidence traversal. Initialization
 failures now close their database handles, and the two test-owned connection
-leaks are fixed. **144 tests pass without resource warnings**; the current Lean
-audit covers **2,290 declarations / 1,113 theorem declarations**.
+leaks are fixed. At that checkpoint **144 tests passed without resource warnings**,
+and Lean audited **2,290 declarations / 1,113 theorem declarations**.
 
-The latest live archive holds **4,970 results / 1,548 refutations**, with all older
+That checkpoint's live archive held **4,970 results / 1,548 refutations**, with all older
 rows preserved. The [context and upgrade report](experiments/results/context-index/README.md)
 records the diagnostics and checked source adoption. To revalidate the earlier
 source-study records after updating the solver, use:
@@ -379,3 +380,25 @@ python3 experiments/validate_source_updates.py experiments/results/source-update
 
 This checks historical source fingerprints and recorded evidence; it reports the
 current binary separately and does not claim to rerun the historical executable.
+
+The latest checkpoint proves the mapping from original variable IDs to bounded
+block states. Native positions carry array-lookup and width proofs; an alignment
+pass establishes completeness. Both compilation paths now use checked local
+translations. Lean proves that each translated CNF bucket is satisfiable exactly
+when its boundary relation has an accepting pair. The proof includes short and
+empty blocks and unused variables. Global clause grouping and the connection
+through node identities to the whole source tree remain separate obligations.
+
+**148 tests pass**, including exhaustive checks of 9,520 boundary assignments
+across 112 local CNFs through both native compiler paths. The current Lean audit
+covers **2,477 declarations / 1,188 theorem declarations**. Alignment and source
+equality checks add passes and temporary arrays; these costs are outside the
+existing relation-evaluation counter. This checkpoint makes no new speed claim.
+
+The [mapping verification record](experiments/results/source-mapping/README.md)
+preserves build/test logs, fingerprints and archive revalidation. The live archive
+now holds **5,325 results / 1,677 refutations**. Every old row in all 21 tables and
+all 142 earlier experiment files remains intact. The five saved source versions
+are rechecked under the new engine and after restart. The
+[persistent gap analysis](research/implementation-gaps.md) records the next proof,
+accounting and evaluation obligations.

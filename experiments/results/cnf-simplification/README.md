@@ -25,6 +25,9 @@ Forced conflicts produce an empty clause only with a checked false reason.
 Successful rewrites strictly reduce support and consume no conditioning depth.
 All earlier family outcomes, source records and solver results remain available.
 Versioned policies isolate the old records and the two ablations.
+An edit has a new exact source identity. In particular, adding an opposite-sign
+coupling invalidates an earlier purity argument; the new node must be checked
+again. This implementation has no incremental purity-dependency maintenance.
 
 The matching/parity example now follows `project -> simplify -> matching`:
 13 variables/61 literals become 10/29, then 9/27 after setting the pure bridge
@@ -88,8 +91,8 @@ original decision. Checked decision integration remains supporting work. Native
 affine boundaries could avoid the retained direct-encoding cap. Neither is
 implemented by this study.
 
-Propagation and pure fixed points still scan repeatedly. On the 512-variable
-unit-chain control, discovery takes 180.67 ms and counts 1,081,456 propagation
+Propagation and pure fixed points still scan repeatedly. On the control with a
+512-variable unit chain, discovery takes 180.67 ms and counts 1,081,456 propagation
 literal visits. The pure-chain control takes 144.71 ms and counts 276,026 pure
 discovery visits. That generator contains a disjoint signed chain plus matching
 with a pure bridge; its parent profile performs work even before decomposition.

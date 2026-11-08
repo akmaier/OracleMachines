@@ -2964,3 +2964,11 @@ reuse, not arbitrary semantic canonicalization. The pure-chain control's signed
 chain is disconnected from its matching-plus-bridge component; its unused parent
 profile work and repeated scans are explicitly preserved as costs, not concealed
 as a connected-interface result.
+
+Verified implementation checkpoint `d264f5e` is pushed. Manuscript Section 12.47
+now includes the exact existential simplification proposition and proof, the
+policy ablations, reuse counts, resource bounds and remaining misses. All 47
+earlier proof blocks remain intact (48 total; 170 unique labels). The 93-page
+PDF builds without warnings or box errors; pages 85--87 were visually inspected.
+The persistent next target is the expensive unresolved random 3-CNF group, with
+structure-aware conditioning compared against the cheaper unit-only policy.

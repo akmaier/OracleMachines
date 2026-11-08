@@ -1126,3 +1126,70 @@ now holds 7,455 results, 2,451 refutations and 45 source-state rows across check
 namespaces. Previous timing evidence remains unchanged. Resume with the typed
 requested-patch argument using current child links; native source count/lifetime
 preservation no longer needs to be assumed.
+
+
+## 2026-11-08 08:08 UTC — exact native source-patch semantics
+
+`SourcePatch.lean` defines the original clause bucket at each global edge of an
+indexed source tree. `Patched old new edits` preserves start/height, makes every
+requested edge equal its supplied original array, and preserves every edge
+absent from the request. The leaf lemma retains clause order, duplicates and
+empty clauses. The join lemma composes the two filtered edit lists at the typed
+partition boundary; it does not infer source equality from relation equality.
+
+`readNode` ties each executed relation/model lookup to the paired-store proof.
+`readParts` decodes current child names, reads their current models, and uses the
+live dependency invariant to identify the parent as their exact consecutive
+join. That join equality is proof-only: checking a patch does not recompute a
+relation join. `checkNodes` returns the visit count with a `Patched` certificate.
+It accepts an unedited subtree only under identical names, handles a replacement
+leaf with an exact original-array comparison, and combines the child proofs.
+`check` attaches the two live root names to the transition.
+
+The executed `checkRequest` also carries equations for the actual base, root and
+edit-array JSON getters. `readEdits` proves entry-by-entry decoding of edge IDs
+and clause arrays and the logical-edge bounds; the batch-size bound is recorded.
+Duplicate rejection remains executed, and the transition proof does not assume
+that the supplied edit list is unique. `SourceUpdates.patchQuery` now invokes
+this checker before querying the same unchanged store and request.
+
+The checker compares decoded original arrays, rather than raw JSON values.
+Malformed payloads fail decoding. The specification's bucket functions and all
+transition proofs erase. Runtime work includes typed node/body lookups, direct
+child getters, edit-list filtering and original-array comparison, plus temporary
+wrappers. Empty subtrees stop after identity and direct-root checks. There is no
+flat-source traversal or summary recomposition. The visit counter keeps its prior
+meaning; it is not a total native-instruction, allocation or bit-cost measure.
+No timing improvement is claimed.
+
+New regressions cover two edits across the root split with padding, request-order
+independence, duplicate original clauses, literal order, equal-relation forged
+payloads, omitted edits, duplicate/out-of-range/malformed requests, same-root
+checks, different unedited aliases, missing roots and partition mismatch. The
+alias rejection is deliberately conservative: source or relation equivalence
+alone does not authorize changing an unedited identity.
+
+Remaining priorities:
+
+1. **Compose the full source API contract.** The native requested bucket
+   transition is proved. Connect initial raw-CNF binding, root coverage and the
+   serialized returned verdict/witness to a single successful-request theorem.
+   Prove accepted source bucket equality gives the intended flattened original
+   CNF, including padding and complete logical-edge coverage. Existing typed
+   node decision semantics does not itself establish this whole API theorem.
+2. **Python retention and complete serialized replay/SQLite refinement.** Native
+   counts, live dependencies and patch semantics are proved; Python active-root
+   policy, archive integrity, outer transport and generic relation loops are not.
+3. **General factor row/equivalence-store refinement.** Adjacent-block guarantees
+   do not establish general factor-DAG guarantees.
+4. **Acceptance completeness and complete restricted costs.** Include caps,
+   decrement acceptance, parsing, maps, integer/bit operations, array comparison,
+   filter/lookup work, allocation, source payloads, transport and archive access.
+5. **Compact general input, matched application evaluation and cost-sensitive
+   selection.** No unrestricted-SAT coverage or total-resource bound follows.
+
+Validation: **169 tests pass**, including **30 source-update tests**. The decoder
+also accepts all 4,096 entries up to root lookup, rejects 4,097 entries at the cap,
+and leaves the worker usable. Lean audits **3,043 declarations / 1,461 theorem
+declarations**, with no admits or added axioms. Archive preservation and the
+manuscript record follow this runtime checkpoint. Earlier timings remain frozen.

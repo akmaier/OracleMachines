@@ -17,6 +17,67 @@ def sat(clauses,n):
 
 
 class SourceUpdateTests(unittest.TestCase):
+    def test_patch_decoder_handles_full_batch_and_rejects_over_capacity(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            s._request(dict(mode='source_init',id='patch-cap',width=1,layers=[[i] for i in range(1,4098)]))
+            edits=[dict(edge=i,clauses=[]) for i in range(4096)]
+            # The unknown root is reached only after decoding the entire legal
+            # batch. This exercises the recursive decoder at its actual cap.
+            with self.assertRaisesRegex(ValueError,'Unknown'):
+                s._request(dict(mode='source_patch',base='missing',root='missing',edits=edits,witness=False))
+            with self.assertRaisesRegex(ValueError,'batch exceeds capacity'):
+                s._request(dict(mode='source_patch',base='missing',root='missing',edits=edits+[edits[0]],witness=False))
+            self.assertTrue(s._request(dict(mode='source_init',id='after-cap',width=1,layers=[[1],[2]]))['valid'])
+
+    def test_patch_checks_exact_requested_buckets_across_split_and_padding(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            base=s.source_cnf(1,[],[[i] for i in range(1,7)])
+            changes={0:[[1,-1],[1,-1]],4:[[5,-5]]}
+            new=s.source_cnf(base=base['state'],replace=changes)
+            self.assertTrue(new['answer'])
+            self.assertEqual(new['source_updates']['patch_visits'],11)
+            def patch(edits,old=base['root'],root=new['root']):
+                return s._request(dict(mode='source_patch',base=old,root=root,edits=edits,witness=False))
+            requested=[dict(edge=i,clauses=c) for i,c in changes.items()]
+            for edits in (requested,list(reversed(requested))):
+                result=patch(edits)
+                self.assertTrue(result['verdict']['answer'])
+                self.assertEqual(result['patch_visits'],11)
+            # Every forged payload has the same universal relation. Counts,
+            # literal order and the exact original clauses must still match.
+            for clauses in ([],[[1,-1]],[[-1,1],[1,-1]]):
+                with self.assertRaisesRegex(ValueError,'clauses differ'):
+                    patch([dict(edge=0,clauses=clauses),requested[1]])
+            for edits in ([],requested[:1],requested[1:]):
+                with self.assertRaisesRegex(ValueError,'unedited'):
+                    patch(edits)
+            for edits in (requested+[requested[0]],requested+[dict(edge=5,clauses=[])],
+                          [dict(edge=-1,clauses=[])],[dict(edge=0,clauses='invalid')]):
+                with self.assertRaises(ValueError):patch(edits)
+            self.assertEqual(patch([],old=new['root'])['patch_visits'],1)
+            self.assertTrue(patch(requested,old=new['root'])['verdict']['answer'])
+            self.assertTrue(s.source_cnf(base=base['state'])['answer'])
+
+    def test_patch_rejects_equivalent_unedited_alias_and_wrong_partition(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            s._request(dict(mode='source_init',id='patch-alias',width=1,layers=[[1],[2],[3]]))
+            def leaf(name,start,clauses):
+                return dict(id=name,layout='patch-alias',width=1,start=start,height=0,mask=15,clauses=clauses)
+            def root(name,left,right):
+                return dict(id=name,layout='patch-alias',width=1,start=0,height=1,mask=15,left=left,right=right)
+            s._request(dict(mode='source_define',nodes=[leaf('a',0,[]),leaf('b',0,[[1,-1]]),
+                leaf('r',1,[]),leaf('alias',1,[]),root('old','a','r'),root('new','b','r'),
+                root('alias-root','b','alias')]))
+            def patch(base,root,edits):
+                return s._request(dict(mode='source_patch',base=base,root=root,edits=edits,witness=False))
+            edit=[dict(edge=0,clauses=[[1,-1]])]
+            self.assertTrue(patch('old','new',edit)['verdict']['answer'])
+            with self.assertRaisesRegex(ValueError,'unedited'):patch('old','alias-root',edit)
+            with self.assertRaisesRegex(ValueError,'partition'):patch('a','new',edit)
+            with self.assertRaisesRegex(ValueError,'Unknown'):patch('missing','new',edit)
+            with self.assertRaisesRegex(ValueError,'Unknown'):patch('missing','missing',[])
+            self.assertTrue(patch('old','new',edit)['verdict']['answer'])
+
     def test_native_lifetime_matches_independent_live_graph_recount(self):
         rng=random.Random(1903)
         with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:

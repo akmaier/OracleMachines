@@ -1,4 +1,4 @@
-import OracleMachines.SourceLifetime
+import OracleMachines.SourcePatch
 
 /-! Source-bearing nodes: provenance and relations use the same balanced tree.
 The partition is fixed within a version family. Local edits replace the clauses
@@ -7,7 +7,8 @@ Every cached decision carries a proof of its original-source meaning. Layout,
 start and height index source nodes; joining preserves consecutive intervals.
 Flat-source grouping, complete binding and named-map/metadata correspondence
 carry proofs, as do serialized summaries, live child links and incoming counts.
-Requested patches and persistent-store refinement remain separate. -/
+Requested patches carry exact bucket-transition proofs. Persistent replay and
+the complete query/initial-binding contract remain separate. -/
 namespace OracleMachines.SourceUpdates
 open Lean OracleMachines.Layered
 open OracleMachines.SourceNodes
@@ -170,49 +171,16 @@ def query (store : Store) (request : Json) : Except String Json := do
   if (← verdict.getObjValAs? Bool "answer") != answer then throw "Source witness decision disagrees"
   return verdict
 
-def checkPatch : Nat → OracleMachines.Layered.Store → String → String → List (Nat × Json) → Except String Nat
-  | 0, _, _, _, _ => .error "Source patch depth exhausted"
-  | fuel+1, store, old, new, edits => do
-    if edits.isEmpty then
-      if old != new then throw "Source patch changed an unedited subtree"
-      return 1
-    let some (a,ta) := store.nodes[old]? | throw "Unknown source base node"
-    let some (b,tb) := store.nodes[new]? | throw "Unknown source replacement node"
-    let start ← a.getObjValAs? Nat "start"
-    if ta.height != tb.height || start != (← b.getObjValAs? Nat "start") then
-      throw "Source patch changed the partition"
-    if ta.height == 0 then
-      if edits.length != 1 then throw "Duplicate source edge edit"
-      let some (edge,clauses) := edits.head? | throw "Missing source edit"
-      if edge != start || (← b.getObjVal? "clauses") != clauses then throw "Source patch clauses differ"
-      return 1
-    let middle := start + 2^(ta.height-1)
-    let left ← checkPatch fuel store (← a.getObjValAs? String "left") (← b.getObjValAs? String "left")
-      (edits.filter (fun e => e.1 < middle))
-    let right ← checkPatch fuel store (← a.getObjValAs? String "right") (← b.getObjValAs? String "right")
-      (edits.filter (fun e => e.1 ≥ middle))
-    return left+right+1
-
+/-- The executed checker certifies the decoded request against the same live
+store queried below. Its proof erases; the reported counter counts path visits. -/
 def patchQuery (store : Store) (request : Json) : Except String Json := do
   let some context := store.context | throw "Source layout not initialized"
-  let layout := context.layout
-  let base ← request.getObjValAs? String "base"
-  let root ← request.getObjValAs? String "root"
-  let edits ← request.getObjValAs? (Array Json) "edits"
-  if edits.size > 4096 then throw "Source edit batch exceeds capacity"
-  let mut seen : Std.HashSet Nat := {}
-  let mut changes := []
-  for edit in edits do
-    let edge ← edit.getObjValAs? Nat "edge"
-    if edge ≥ layout.buckets.size || seen.contains edge then throw "Invalid or duplicate source edit"
-    seen := seen.insert edge
-    changes := (edge,← edit.getObjVal? "clauses") :: changes
-  let visits ← checkPatch 18 context.nodes base root changes
+  let checked ← OracleMachines.SourcePatch.checkRequest context.checked context.layout.buckets.size request
   let verdict ← query store request
-  return Json.mkObj [("verdict",verdict),("patch_visits",toJson visits)]
+  return Json.mkObj [("verdict",verdict),("patch_visits",toJson checked.val)]
 
 /-- Initial flat CNF binding is intentionally linear. Later requests carry only
-local clauses and use checkPatch; restart replays the source-bearing nodes. -/
+local clauses and use the checked patch traversal; restart replays the source-bearing nodes. -/
 def bindSource (store : Store) (request : Json) : Except String Json := do
   let some context := store.context | throw "Source layout not initialized"
   let layout := context.layout

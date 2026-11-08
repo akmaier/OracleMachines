@@ -796,3 +796,42 @@ The new regression compares native eviction against a separate full recount of
 a 44-node graph with 16 roots, shared descendants, randomized deletions and
 duplicate definitions, then rebuilds and reclaims all names. Existing tests
 cover rollback, reuse, tight caps, historical branches and restart.
+
+
+### Executed source-patch certificate (2026-11-08)
+
+[`SourcePatch.lean`](OracleMachines/SourcePatch.lean) proves the requested bucket
+transition for the checker now used by `SourceUpdates.patchQuery`. `Patched`
+records equal start/height, exact replacement arrays at every requested edge,
+and equality of all unedited buckets. Its leaf and join lemmas preserve original
+clause order and repeated/empty entries, independently of relation equivalence.
+
+`LiveNode` connects actual native map lookups to the indexed source model.
+`readParts` recovers the current decoded child names and models using the global
+live-link invariant. Its checked-join equality erases; it does not recompute a
+summary. `checkNodes` returns a visit count with the transition proof. Empty edit
+lists require identical names, leaves compare original arrays, and branches
+combine the two filtered requests. `check` connects this proof to live root names.
+
+`checkRequest` records the actual JSON base/root/edits getters, batch-size bound,
+entry-by-entry decoding and logical-edge bounds. The duplicate guard remains
+executed; soundness does not assume uniqueness. The source service calls this
+checker before querying the same store/request. The new comparison uses decoded
+clause arrays; malformed clauses fail decoding.
+
+Bucket specifications and proofs erase. The implementation still performs map
+lookups, child-name decoding, list filtering, array comparison and temporary
+wrapper allocation along the visited paths. It neither flattens original clauses
+nor rebuilds relation summaries. The visit count is not a complete cost theorem.
+A changed unedited identity is rejected even if its source is equivalent.
+
+Full initial-binding/root-coverage/verdict composition, flattened-CNF transition
+correspondence, Python retention, complete replay/SQLite refinement, generic
+relation/factor stores, acceptance completeness and full resource costs remain
+open. This establishes a restricted native transition, not unrestricted coverage.
+
+All **169 tests pass**, including **30 source-update tests**. Lean audits **3,043
+declarations / 1,461 theorem declarations** with no admits or added axioms. New
+checks include split-path edits with padding, exact arrays under equal relations,
+request order, unedited aliases, invalid roots/partitions, malformed and duplicate
+entries, and the decoder's full 4,096-entry limit plus over-cap rejection.

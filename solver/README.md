@@ -650,3 +650,21 @@ Telemetry-write failures do not invalidate an already completed checked response
 they are returned as `routing.observation_error`. Logging is best effort and may
 be absent under storage/deadline failure. A correctly committed answer can remain
 in the archive even if a later service step fails.
+
+
+The native source-patch checker now returns a Lean certificate for its exact
+requested bucket transition (`SourcePatch.lean`). Every requested edge contains
+the supplied decoded original array; every unedited edge preserves its previous
+array. This uses current live child links and exact arrays, including repeated
+clauses and literal order. Equal SAT relations do not identify source payloads.
+The certificate also records the actual request getters and entry decoding,
+logical-edge bounds and batch cap. Duplicate edits remain rejected.
+
+The service uses this checker before querying the same store. An unedited
+subtree still requires identical names. Checking now compares decoded clause
+arrays; malformed arrays fail parsing. Map lookups, child getters, filtering,
+array comparisons and wrappers remain costs along the visited paths. No full
+source scan or relation-summary recomposition is introduced. Visit counts are
+not total time or physical-memory bounds. Complete API composition, Python
+retention, serialized replay/SQLite refinement and general factor-store proofs
+remain separate; earlier timing evidence is unchanged.

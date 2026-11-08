@@ -2389,3 +2389,37 @@ All 42 earlier proof blocks remain unchanged; the draft has 43 proof blocks and
 underflows; pages 74/75 and adjoining page 76 were rendered and visually checked.
 Code, proofs, all measurements and earlier-archive verification were committed
 and pushed as `5c9f5ea`; the manuscript checkpoint follows separately.
+
+## 2026-11-08: cost-directed priorities across SAT categories
+
+The hourly investigation now starts from the compact
+[structural-reuse cost map](structural-reuse-priorities.md). Its prompt was
+shortened to identify the dominant remaining runtime or memory cost, choose one
+gap with the highest credible total saving, compare on matched workloads and
+update the ranking. The hourly schedule, target chat and notification intent
+are unchanged.
+
+[Five new diagnostic profiles](evidence/2026-11-08/reuse-cost-profile/README.md)
+retain fresh archives without changing any preceding results. They distinguish
+reacquisition after failed repair, residual search, sparse-identifier index cost
+and persistence on already-cheap updates. In their respective instrumented
+controls, trie lookup/update accounts for about 62% of exclusive time and SQLite
+execution/transaction-context exit for about 87%. These are separate workloads,
+not a global phase breakdown or uninstrumented speed claim.
+
+The immediate next experiment is checked nonpure single-variable repair with
+versioned affected-clause counts. The existing blocked-but-SAT control still
+acquires 32 new bases unnecessarily. Broader opportunities are retained
+propagation/class state, mixed-class boundary summaries, and shared source/proof
+dependencies across class transitions. The cost map gives their recognition and
+invalidation conditions, resource limitations and a workload-driven ranking.
+
+This checkpoint adds analysis and profiling evidence only. General repair,
+small interfaces for every CNF, compact closure and uniformly polynomial
+acquisition remain open. The Python prototype is still outside the Lean
+implementation trust boundary; no manuscript theorem was strengthened here.
+Cold validation checks all 356 versions and 58 residuals in the five new archives
+with no new expansions or database-byte changes. New local documentation links
+resolve; the diagnostic runner refuses an existing output directory. No solver
+code changed, so the prior full solver test/audit results are not claimed as
+newly rerun checks.

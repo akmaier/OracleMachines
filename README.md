@@ -469,7 +469,7 @@ preserves the evidence. Every old row in 21 tables and all 166 earlier experimen
 files remain intact. The archive now holds **6,390 results / 2,064 refutations**.
 Its named-store obligation is partly closed by the following checkpoint.
 
-The latest checkpoint proves **paired native-map and decoded-metadata
+The preceding checkpoint proves **paired native-map and decoded-metadata
 correspondence**. `SourceStore.lean` couples each named relation tree to its exact
 original-source model and retains matching identity, layout, width, start, height
 and original leaf clauses. Initialization, insertion and erasure preserve the
@@ -487,7 +487,24 @@ versions pass current-engine revalidation. Every old row in 21 tables and all
 174 earlier experiment files remain intact. The archive holds **6,745 results /
 2,193 refutations**.
 
-Named child links and serialized masks, dependency lifetime, exact requested-patch
-semantics, reference counts and full resource invariants remain open. The map
-proof concerns the supplied adjacent-block representation. No new timing or
-unrestricted-SAT guarantee is claimed.
+The latest checkpoint proves **named child registration and serialized-summary
+binding**. `SourceLinks.readJoin` connects decoded child names to the exact models
+retrieved at registration, then proves original-clause composition and the need
+for one valuation satisfying both sources. Conditional lemmas preserve links
+under fresh insertion and deletion avoiding both children. The paired native
+store also retains exact equality between each decoded mask's relation and its
+model's cached summary.
+
+**165 tests pass**, including 26 source-update tests. Lean audits **2,874
+declarations / 1,380 theorem declarations** without admits or added axioms.
+The [source-link verification record](experiments/results/source-links/README.md)
+records malformed child/mask checks, distinct provenance under equal relations,
+and shared-child retention across shuffled parent deletions. All 355 generic
+inputs and five saved source versions pass revalidation. Every old row in 21
+tables and all 182 earlier experiment files remain intact. The archive holds
+**7,100 results / 2,322 refutations**.
+
+Registration links are not yet a global invariant across every live-store
+transition. Proving that zero incoming references permits safe deletion is next,
+followed by exact requested-patch semantics. Complete persistence/refcount/resource
+invariants remain open. No new timing or unrestricted-SAT guarantee is claimed.

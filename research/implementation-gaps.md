@@ -1049,5 +1049,12 @@ Next priorities:
 Validation: all **165 tests pass**, including **26 source-update tests**, without
 resource warnings. Lean audits **2,874 declarations / 1,380 theorem declarations**
 without admits or added axioms. The previous manuscript proof blocks remain
-unchanged. Archive revalidation and manuscript reconciliation follow this runtime
-checkpoint; earlier timing evidence remains tied to its original runtime.
+unchanged. Runtime checkpoint `6a73372` is committed and pushed. The manuscript
+and [source-link verification record](../experiments/results/source-links/README.md)
+include revalidation and semantic audit of all 355 older generic inputs and
+checked adoption/restart of five source versions. Every previous row in all 21
+tables and all 182 earlier experiment files remains intact. The archive now holds
+7,100 results, 2,322 refutations and 40 source-state rows across checker namespaces.
+Earlier timing evidence remains tied to its original runtime. Resume with a
+global live-branch link invariant and the reference-count erasure premise; do not
+treat registration correctness as completed lifetime or requested-patch refinement.

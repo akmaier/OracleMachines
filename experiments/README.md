@@ -31,6 +31,12 @@ decisions over 22 histories and 66 archives, comparing full-source, positive-onl
 and decision-history interfaces. All 313 preceding archives replay unchanged.
 New positive units, duplicate events and cold replay retain explicit losses.
 
+The [repair-history comparison](results/cnf-repair-history/README.md) adds a
+persistent signed-occurrence index and checked pure-literal repairs. It retains
+3,924 decisions, 60 archives and separate Python allocation profiles. All 379
+preceding archives replay unchanged. Conservative repair rejection, repeated
+clauses and long sparse identifier paths remain explicit controls.
+
 ## Expanded public and chronological study
 
 The [new study](results/expanded/README.md) covers 28 public SATLIB instances

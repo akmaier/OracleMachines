@@ -172,24 +172,28 @@ class PositiveHistory:
             current = parent
         for current, base_id, parent, payload in reversed(pending):
             base = self._base(base_id)
-            if parent is None:
-                if payload != {"kind": "base"}:
-                    raise ValueError("Invalid history root record")
-            else:
-                if parent not in self.checked or self.checked[parent][0] != base_id:
-                    raise ValueError("History parent changes the fixed base")
-                if type(payload) is not dict:
-                    raise ValueError("Invalid history delta record")
-                if set(payload) == {"kind", "clause", "witness"} and payload["kind"] == "append-positive":
-                    self._witness(base, payload["clause"], payload["witness"])
-                elif set(payload) == {"kind", "clause"}:
-                    self._decision_delta(base, payload)
-                else:
-                    raise ValueError("Invalid history delta record")
+            if parent is not None and (parent not in self.checked or self.checked[parent][0] != base_id):
+                raise ValueError("History parent changes the fixed base")
+            self._check_version(current, base_id, base, parent, payload)
+            if parent is not None:
                 payload["clause"] = tuple(payload["clause"])
             self.checked[current] = (base_id, parent, payload)
             self.counts["verified_versions"] += 1
         return self.checked[version]
+
+    def _check_version(self, version, base_id, base, parent, payload):
+        """Certificate hook; derived indexes must be reconstructed by a checker."""
+        if parent is None:
+            if payload != {"kind": "base"}:
+                raise ValueError("Invalid history root record")
+        elif type(payload) is not dict:
+            raise ValueError("Invalid history delta record")
+        elif set(payload) == {"kind", "clause", "witness"} and payload["kind"] == "append-positive":
+            self._witness(base, payload["clause"], payload["witness"])
+        elif set(payload) == {"kind", "clause"}:
+            self._decision_delta(base, payload)
+        else:
+            raise ValueError("Invalid history delta record")
 
     def _put_version(self, base_id, parent, payload):
         encoded = self._json(payload)

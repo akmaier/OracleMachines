@@ -167,4 +167,57 @@ theorem unsatisfiable_history (base : Formula) (additions : List Formula)
   | cons f rest ih =>
     exact ih (.conj base f) (unsatisfiable_conj_extension base f refuted)
 
+/-- Signed literals are variable/polarity pairs here, not Python integers. -/
+def SignedClauseHolds (clause : List (Nat × Bool)) (v : Nat → Bool) : Prop :=
+  ∃ lit ∈ clause, v lit.1 = lit.2
+
+def SignedOccurs (source : List (List (Nat × Bool))) (lit : Nat × Bool) : Prop :=
+  ∃ clause ∈ source, lit ∈ clause
+
+theorem signed_occurs_append (source : List (List (Nat × Bool)))
+    (added : List (Nat × Bool)) (lit : Nat × Bool) :
+    SignedOccurs (source ++ [added]) lit ↔ SignedOccurs source lit ∨ lit ∈ added := by
+  simp only [SignedOccurs, List.mem_append, List.mem_singleton]
+  constructor
+  · rintro ⟨clause, hc | hc, hl⟩
+    · exact Or.inl ⟨clause, hc, hl⟩
+    · subst clause; exact Or.inr hl
+  · rintro (⟨clause, hc, hl⟩ | hl)
+    · exact ⟨clause, Or.inl hc, hl⟩
+    · exact ⟨added, Or.inr rfl, hl⟩
+
+/-- Assigning a pure literal true cannot invalidate a previous clause. Absence
+is required in the whole parent source, including all earlier additions. -/
+theorem pure_repair_preserves (source : List (List (Nat × Bool)))
+    (v : Nat → Bool) (index : Nat) (polarity : Bool)
+    (model : ∀ c ∈ source, SignedClauseHolds c v)
+    (absent : ¬ SignedOccurs source (index, !polarity)) :
+    ∀ c ∈ source, SignedClauseHolds c
+      (fun i => if i = index then polarity else v i) := by
+  intro c hc
+  obtain ⟨⟨i, b⟩, member, satisfied⟩ := model c hc
+  refine ⟨(i, b), member, ?_⟩
+  by_cases same : i = index
+  · have sign : b = polarity := by
+      by_contra different
+      have opposite : b = !polarity := by
+        cases b <;> cases polarity <;> simp_all
+      exact absent ⟨c, hc, by simpa [same, opposite] using member⟩
+    simp [same, sign]
+  · simpa [same] using satisfied
+
+theorem pure_repair_extension (source : List (List (Nat × Bool)))
+    (added : List (Nat × Bool)) (v : Nat → Bool) (index : Nat) (polarity : Bool)
+    (model : ∀ c ∈ source, SignedClauseHolds c v)
+    (absent : ¬ SignedOccurs source (index, !polarity))
+    (repairs : (index, polarity) ∈ added) :
+    ∀ c ∈ source ++ [added], SignedClauseHolds c
+      (fun i => if i = index then polarity else v i) := by
+  intro c hc
+  rcases List.mem_append.mp hc with old | new
+  · exact pure_repair_preserves source v index polarity model absent c old
+  · have same : c = added := List.mem_singleton.mp new
+    subst c
+    exact ⟨(index, polarity), repairs, by simp⟩
+
 end OracleMachines.SAT

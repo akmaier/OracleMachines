@@ -1099,3 +1099,19 @@ they do not verify its signed parser, database, implementation or resource costs
 The current audit passes **4,071 declarations / 1,933 theorem declarations**.
 The matched comparison and limitations are retained in the
 [decision-history record](../experiments/results/cnf-decision-history/README.md).
+
+
+## Checked pure-literal model repair
+
+`Residuals.lean` defines signed clauses using variable/polarity pairs.
+`signed_occurs_append` gives the exact support update law.
+`pure_repair_preserves` proves that setting a literal true preserves every old
+clause when its opposite is absent from the full parent source;
+`pure_repair_extension` includes the new clause containing that literal. This
+covers fresh variables and existing pure variables, not arbitrary repairs when
+both signs occur. The Python integer encoding, immutable trie and archive
+protocol remain outside these semantic proofs.
+
+The current audit passes **4,079 declarations / 1,939 theorem declarations**.
+All 242 Python tests pass. The resource measurements and preserved limitations
+are in the [repair-history study](../experiments/results/cnf-repair-history/README.md).

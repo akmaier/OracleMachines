@@ -54,6 +54,12 @@ when it still satisfies the new clause. Accepted updates avoid subset discovery
 and fresh solving. The comparison retains failed-model fallback, repeated-event
 losses and cold-replay costs; the rules do not bound general SAT acquisition.
 
+The [repair-history study](experiments/results/cnf-repair-history/README.md)
+adds checked single-variable repairs using persistent occurrence and assignment
+indexes. A variable can change only when its opposite literal is absent from
+the entire parent source. This avoids 128 fresh-base acquisitions on the measured
+fresh-unit stream; blocked repairs, index memory and sparse-name costs remain.
+
 The current draft is **Bounded-Domain SAT, Compiled Knowledge, and Amortized
 Reasoning: A perspective on resource accounting for learned reasoning**.
 

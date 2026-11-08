@@ -344,3 +344,45 @@ variable can be assigned without breaking old clauses, but a variable absent
 from the base model may already occur in earlier deltas. Repeated-event
 compression and cold checking also remain. The general irreducible-overlap and
 unrestricted polynomial-construction obligations are unchanged.
+
+
+### Checked single-variable repairs with shared support
+
+`experiments/cnf_repair_history.py` implements the first model-repair case.
+A failed assignment can set a literal in the new clause true if the opposite
+literal occurs nowhere in the parent source. This sufficient condition protects
+all old clauses and includes genuinely fresh variables. A shared immutable
+binary trie stores positive/negative occurrence flags and the current truth
+value per variable, including every earlier delta and original tautology. Each
+version retains a root; changed paths are copied, not the full source or model.
+Cold replay rebuilds and checks these derived indexes from the exact history.
+
+At most O((d+1)b) trie node operations suffice for an accepted warm d-literal
+addition with identifiers of at most b bits, plus syntax, serialization and SQL
+work. Integer shifts/comparisons and allocation require separate bit accounting.
+Preparation scans the base, cold checks traverse required ancestors, and witness
+export traverses the current trie. Retained map nodes grow with copied paths;
+long sparse identifiers expose extra memory even though durable storage retains
+only base/clauses/repair deltas. These are tested representation bounds, not a
+verified machine-cost theorem. The pure-literal rule itself is elementary.
+
+[The matched repair study](../experiments/results/cnf-repair-history/README.md)
+preserves 20 histories, 3,924 decisions and 60 archives. For size-16 SAT with
+128 fresh positive units, decision history needs 129 bases, 12,020,154 logical
+bytes and 2.61853 seconds. Repair keeps one base, 100,706 bytes and takes
+0.07326 seconds. Separate tracing reports peak Python allocations of 77,265,863
+versus 1,740,168 bytes; this excludes native SQLite and process RSS. All 379 prior
+archives still check without changes. Python/SQL remain outside the Lean boundary.
+
+Counterexamples remain: a parent clause (-x or 1) with a unit (1) makes flipping
+x safe, but purity still rejects the addition (x); both modes fall back 32 times
+on this stream and repair adds index overhead. Already-compatible additions need
+no repair but raise peak traced memory from 108,869 to 249,217 bytes. Thirty-two
+variables near 2^1024 retain 32,801 trie nodes and take 38.73 ms versus 33.18 ms
+for fixed-model fallback. Repeated events still lose to canonical deduplication.
+
+Next investigate affected-clause satisfaction counts to admit safe flips despite
+opposite occurrences; compress unary trie paths for sparse names; and build the
+repair index only when it is useful. These require precise source/branch binding
+and invalidation. Arbitrary model repair, polynomial acquisition for all CNFs,
+whole-archive compression and constant-cost cold replay remain unestablished.

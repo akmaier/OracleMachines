@@ -2310,3 +2310,74 @@ unique labels. Two LaTeX passes produce an 81-page PDF without warnings or
 box overflows/underflows. Pages 73/74 and adjoining page 75 were rendered and
 visually inspected. The implementation, proof and experiment checkpoint was
 committed and pushed as `8ad5f8e`; this manuscript update follows separately.
+
+
+## 2026-11-08: checked pure-literal model repair without fresh base copies
+
+Implemented the next recorded case in `experiments/cnf_repair_history.py`.
+If the current assignment fails a new clause, it may change one literal to true
+only when its opposite occurs nowhere in the complete parent source. This
+protects all old clauses, handles both fresh and existing pure variables, and
+retains fallback when the sufficient condition fails. A persistent binary trie
+shares positive/negative occurrence flags and assignment values across versions.
+It indexes exact original clauses and every delta, including tautologies and
+prior non-repair additions. Older branches and models remain unchanged.
+
+Cold verification reconstructs the derived index from checked source records and
+validates each repair. The new reader accepts older history formats; old readers
+reject new repair records. The preceding base class gained a certificate hook
+with unchanged legacy behavior. Production code and its result archive remain
+untouched. The Python trie/SQL checker is outside the Lean trust boundary.
+
+[The comparison](../experiments/results/cnf-repair-history/README.md) preserves
+20 histories, 3,924 correct decisions and 60 archives. At size-16 SAT with 128
+fresh positive units, the preceding decision history acquires 129 bases and
+retains 12,020,154 logical bytes. Repair keeps one base and 100,706 bytes; summed
+acquisition/update time falls from 2.61853 to 0.07326 seconds. SQLite size falls
+from 21,618,688 to 208,896 bytes. The last append uses 88 trie-node visits,
+allocates 28 nodes across its assignment/support updates, and performs no solver
+work. The final version set shares 2,048 distinct trie nodes. Separate tracing
+reports peak Python allocations of 77,265,863 versus 1,740,168 bytes; it excludes
+native SQLite allocations and total process RSS. Timings are single samples.
+
+The accepted warm operation uses O((d+1)b) trie-node work for d literals and
+b-bit identifiers, plus syntax, bit serialization, integer, dictionary and SQL
+costs. Whole-parent scans/model copies are absent. Preparation and cold history
+checking remain charged; size-16 cold query takes 13.20 ms versus 7.58 ms for
+the preceding final fresh base. Exact source export and sparse witness output
+are optional and explicitly measured. No unrestricted acquisition bound follows.
+
+Preserved losses identify further structure. A parent containing (1) and
+(-x or 1) permits changing x, but the pure-literal test rejects it. Both histories
+fall back 32 times in this control, and repair adds overhead. Repeated units
+retain 10,719 bytes versus 1,393 with full-source deduplication. Already-compatible
+additions raise peak traced allocations from 108,869 to 249,217 bytes. Thirty-two
+variables near 2^1024 create 32,801 trie nodes and take 38.73 ms versus 33.18 ms
+for decision fallback; cold replay takes 25.29 ms versus 0.22 ms. These are
+retained counterexamples to universal speedup, not omitted failures.
+
+All 242 Python tests pass. They include 168 enumerated base/clause combinations,
+300 seeded branching proposals, sparse 1,201-bit index keys, 128-repair cold
+replay, exact source/witness checks, old API compatibility and forged-record
+rejection. A base tautology preserving the normalized solver key still changes
+support and correctly invalidates a claimed repair. Lean proves the signed
+occurrence update and pure-repair preservation/extension rules; the axiom audit
+passes 4,079 declarations / 1,939 theorem declarations. It does not verify the
+integer parser, trie, persistence or machine costs. All 379 preceding archives
+replay without row changes or new expansions. Every new compressed archive was
+independently reloaded and matched to its exact source and row hash.
+
+**Next bottlenecks and recognition requirements:**
+1. Check affected opposite-sign clauses (or retain true-literal counts) to allow
+   safe flips that purity rejects. Every affected prior occurrence must be found;
+   a small affected set is an explicit condition, not an arbitrary-SAT guarantee.
+2. Compress long unary trie paths for sparse identifiers. Exact identifiers and
+   source serialization still cost their bit length. The current map uses one
+   node per bit on an updated path.
+3. Prepare the repair index lazily or select it by measured reuse. Compatible
+   streams should not always pay eager support maintenance; activation/restart
+   must still reconstruct and charge all earlier constraints.
+4. Share fresh-base source structure and compress repeated provenance without
+   losing historical versions. Repair rejection still triggers copied bases.
+General irreducible overlap, arbitrary model repair and uniformly polynomial
+construction for every CNF remain open.

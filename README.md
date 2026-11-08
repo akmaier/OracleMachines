@@ -61,6 +61,14 @@ rises from 217/329 to 290/329 beyond tiny exhaustive cases. Units alone reach
 case are retained. Tests, complete archives and cost regressions accompany the
 results; this analysis is still separate from the ordinary decision solver.
 
+The [conditioning comparison](experiments/results/cnf-conditioning/README.md)
+finds eight additional closures over unit-only frequency ordering at the same
+depth and candidate cap. Its shortest-clause policy costs more time and storage,
+and loses five cases relative to combined unit/pure processing, so it remains
+optional. The next target is duplicated intermediate state: conditioning and
+forced-unit closure currently acquire separate full residuals. All fresh
+20/32-variable 3-CNFs remain unresolved in this bounded discovery experiment.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

@@ -12,13 +12,29 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-**Next research experiment:** explain the 38 remaining random 3-CNF misses after
-checked simplification. This group takes 3.26 of 4.62 seconds of discovery in the
-[841-source study](../experiments/results/cnf-simplification/README.md). Profile
-its retained conditioning alternatives, then compare structure-aware choice with
-frequency-first choice at matched work budgets. Measure exposed tractable parts,
-shared boundaries and residual reuse, including preparation and failed lookahead.
-Do not substitute increased depth for an explanation of structural coverage.
+**Next research experiment:** reduce the repeated intermediate acquisition
+exposed by the [949-source conditioning study](../experiments/results/cnf-conditioning/README.md).
+Test one checked edge combining conditioning and forced-unit closure, retaining
+the parent source, assumption, reason trace and exact child binding. Measure
+whether avoiding separate full intermediate residuals/profiles makes deeper
+structural investigation affordable. Preserve comparable terminal-family and
+recognition behavior, all historical records and complete cold checks.
+
+The optional balanced-short-clause policy improves cap-four unit-only coverage
+from 322/437 to 330/437 but raises total time from 17.203 to 20.246 s and SQLite
+from 79.118 to 96.911 MB. It tries fewer candidates yet acquires more nodes:
+9,162 -> 11,224, with repeated child references falling from 3,344 to 2,469.
+Simplification nodes account for about 91% of increased logical node payload.
+This identifies a representation/reuse gap, not a reason to enable the heuristic
+by default. Relative to combined unit/pure processing it gains six cases and
+loses five. Keep both comparators. The rule is an established-heuristic variant,
+not a new family certificate or an efficient unrestricted classification.
+
+The frozen-policy holdout gain is only two of 72 fresh formulae. All 32 new
+3-CNFs on 20/32 variables remain open under every measured policy, including
+eight frequency candidates. A cheaper checked closure could support budgeted
+lookahead that investigates these interactions. More candidates alone raises
+total time to 42.110 s for 332/437 closure; this is not the preferred next step.
 
 Checked unit/pure simplification now closes all 36 old misses and exposes the
 matching/parity core without conditioning. At depth two, total non-tiny coverage
@@ -39,8 +55,8 @@ implements exact affine projection with a bounded CNF encoding and checked model
 lifting. It closes all six growing coupled controls at depth zero, including
 128 equations/258 variables projecting to two variables and one clause. On 775
 inputs, depth-two analysis plus solving falls from 4.471 to 3.750 s and SQLite
-from 22.913 to 19.030 MB. There are no new depth-two closures on the original
-664 inputs; 36 remain open. The small memory diagnostic grows, and mixed-case
+from 22.913 to 19.030 MB. That checkpoint adds no depth-two closures on the original
+664 inputs; its 36 misses were later addressed by simplification. The small memory diagnostic grows, and mixed-case
 overhead and encoding-budget failures are retained. Three new Lean theorems
 establish semantic composition with invariant leftovers, not Python refinement.
 

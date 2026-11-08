@@ -886,3 +886,39 @@ scans and unused pre-decomposition parent profiles remain measurable costs.
 Most discovery time now lies in the new random 3-CNF group (3.26227 of 4.62418 s),
 where 38/48 inputs remain open. Both discovery policy and decision integration
 remain unproved opportunities, not unrestricted polynomial-time guarantees.
+
+## 16. Conditioning policy and intermediate-state acquisition
+
+`ShortestClauseInventory` ranks variables by positive/negative shortest-clause
+occurrence product, then shortest-clause sum, then total occurrences, with IDs
+as the deterministic final tie-break. Its policy is versioned; old frequency
+records are unchanged. Ranking takes O(L + v log v) comparison/word operations
+and O(v) count entries, with O(log m)-bit products up to constants for m clauses.
+Cold checking independently recomputes the order. The exact OR partition and
+support-reducing simplification are unchanged. Input edits require fresh source
+identities and ranking; arbitrary-isomorphism invariance is not claimed.
+
+Equal candidate caps and depth do not mean equal realized work. On the
+[949-source study](../experiments/results/cnf-conditioning/README.md), cap-four
+unit-only candidate attempts fall from 4,300 to 3,956, yet nodes grow from 9,162
+to 11,224. Repeated child references fall from 3,344 of 11,839 to 2,469 of
+13,026. Total time rises from 17.20315 to 20.24553 s and SQLite from 79,118,336
+to 96,911,360 bytes. The selected unresolved-literal sum improves from 33,281
+to 26,784; it is therefore not a sufficient total-cost objective.
+
+Logical node payload rises from 35,730,036 to 44,967,792 bytes. Simplification
+nodes account for 8,405,501 of that 9,237,756-byte increase. Their explicit
+unsimplified sources, profiles, traces and children are a concrete acquisition
+target. Combining the conditioning assumption and unit reasons in an exact edge
+to the final residual might avoid some copies and repeated recognition. This is
+not implemented; reconstructing and checking the intermediate restriction still
+costs work, and not all simplification bytes would disappear.
+
+The separate six-case traced Python peak is 152,392 versus 153,174 bytes and
+does not measure full-corpus peak or native memory. Cold audit rises from 6.26480
+to 7.64375 s. Warm inventory time is 107.98 versus 103.65 ms. All five modes retain
+the same 4,034 ordinary solver residuals. A cap-eight frequency baseline reaches
+332/437 closure but costs 42.11042 s and 194,686,976 SQLite bytes; cap-four
+short-clause ordering reaches 330/437 and combined unit/pure reaches 329/437.
+These are non-dominating synthetic results. There is no general optimal-policy,
+compact-decomposition or unrestricted polynomial acquisition bound.

@@ -2972,3 +2972,41 @@ earlier proof blocks remain intact (48 total; 170 unique labels). The 93-page
 PDF builds without warnings or box errors; pages 85--87 were visually inspected.
 The persistent next target is the expensive unresolved random 3-CNF group, with
 structure-aware conditioning compared against the cheaper unit-only policy.
+
+## Conditioning choices and the cost of intermediate residuals (8 November)
+
+The current run profiles the prior 48 random 3-CNFs and tests a fixed
+MOMS-inspired shortest-clause ordering. `cnf_conditioning.py` supplies an optional
+versioned policy; the original frequency ordering and archive identities are
+unchanged. Both Boolean branches and all attempted alternatives are checked.
+Counting and sorting cost O(L + v log v) word/comparison operations plus encoding
+costs; there is no new recognition class or optimality theorem. The primary
+literature link and exact variant are recorded in the evidence README.
+
+The [949-source comparison](../experiments/results/cnf-conditioning/README.md)
+keeps all 841 old sources and adds 72 fresh formulae plus 36 transfer controls.
+At depth two/cap four, coverage beyond tiny exhaustive inputs rises from 322/437
+to 330/437 against the unit-only baseline, but total time rises from 17.20315 to
+20.24553 s and SQLite from 79,118,336 to 96,911,360 bytes. Only two of the eight
+gains are fresh inputs. Relative to combined unit/pure processing there are six
+gains and five losses, including old case 631. Keep the policy optional. Even
+cap-eight frequency conditioning closes none of the 32 fresh 3-CNFs at 20/32
+variables. Bounded misses are not lower bounds on every decomposition.
+
+Fewer attempted candidates (4,300 -> 3,956) produce more distinct nodes
+(9,162 -> 11,224). Logical simplification-node payload increases by 8,405,501
+bytes, about 91% of the total increase. Repeated child references also fall.
+The next concrete target is one checked edge combining a conditioning assumption
+and its forced-unit closure. Retain reason references, parent identity, exact
+reconstruction and model transport; compare with the current full intermediate
+node representation before spending more work on lookahead. Preserve terminal
+recognition behavior and charge cold replay. This optimization is not implemented
+and cannot be counted as an achieved saving.
+
+The development profile, all pilot losses, exact gain/loss sources, node-kind
+byte totals, paths and five new archives are persisted. Five new and seven old
+archives replay unchanged, and every mode retains the same 4,034 ordinary solver
+residuals. All 306 Python tests pass (22.90 s), covering branch semantics,
+exhaustive tiny cases, random mixtures, renamings/edits, candidate-order corruption
+and policy coexistence. The Lean build/audit still passes at 4,087 declarations /
+1,946 theorem declarations; no new formalization is claimed.

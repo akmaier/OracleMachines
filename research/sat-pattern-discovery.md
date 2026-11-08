@@ -95,6 +95,19 @@ wide-boundary case. These are the next discovery targets. The random group costs
 test structure-aware conditioning under matched work budgets before adding more
 families or depth. Preserve the unit-only comparator and all regressions.
 
+**Conditioning investigation completed:** the [949-source comparison](../experiments/results/cnf-conditioning/README.md)
+tests a frozen MOMS-inspired ordering at the same depth and candidate cap. It
+improves unit-only coverage from 322/437 to 330/437, with two gains on 72 fresh
+formulae. On gains with an OR root, the winning root variable was already tried
+by the old policy; subsequent short-clause choices expose the new closure.
+The policy creates more distinct intermediate residuals despite trying fewer
+candidates, increasing time and storage. Combined unit/pure processing retains
+five closures it misses. All new 20/32-variable 3-CNFs remain unresolved under
+every measured policy. The next experiment is a checked conditioning-plus-unit
+edge that avoids duplicated intermediate acquisition while retaining source
+dependencies, failed alternatives and cold verification. This supports further
+discovery; it does not resolve the remaining interaction or depth obligation.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

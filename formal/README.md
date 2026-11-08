@@ -1208,3 +1208,13 @@ refinement of Python, the fixed-point algorithm or SQLite. All 301 Python tests
 pass and the existing Lean build/audit remains unchanged at 4,087 declarations /
 1,946 theorem declarations. The [simplification study](../experiments/results/cnf-simplification/README.md)
 retains all 39 new discovery misses and the unit-only/pure-only ablations.
+
+The shortest-clause conditioning follow-up changes only deterministic candidate
+selection. Existing exact Boolean conditioning, component and simplification
+semantics still apply. The Python checker recomputes the new order and verifies
+both child restrictions; the policy has a separate persistent identity. No new
+Lean theorem or implementation refinement is claimed. All 306 Python tests and
+the existing Lean build/audit pass. The [comparison](../experiments/results/cnf-conditioning/README.md)
+records coverage gains alongside larger state, lower graph reuse and cases lost
+relative to combined unit/pure processing. Neither a better branch score nor
+fewer attempted branches proves a smaller exact decomposition for every CNF.

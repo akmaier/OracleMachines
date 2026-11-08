@@ -151,6 +151,10 @@ class PatternInventory:
         groups = components(cnf, self.counts) if self.config['decompose'] else [cnf]
         return self._discover_profile(cnf, depth, profile, groups)
 
+    def _choices(self, cnf):
+        frequencies = Counter(abs(lit) for c in cnf for lit in c)
+        return sorted(frequencies, key=lambda v: (-frequencies[v], v))[:self.config['candidate_limit']]
+
     def _discover_profile(self, cnf, depth, profile, groups):
         node = dict(cnf=[list(c) for c in cnf], depth=depth, profile=profile)
         if len(groups) > 1:
@@ -159,8 +163,7 @@ class PatternInventory:
         elif any(v == 'recognized' for v in profile['outcomes'].values()):
             node.update(kind='family', summary=dict(closed=True, unresolved_leaves=0, unresolved_literals=0))
         elif depth > 0 and self.config['candidate_limit']:
-            frequencies = Counter(abs(lit) for c in cnf for lit in c)
-            choices = sorted(frequencies, key=lambda v: (-frequencies[v], v))[:self.config['candidate_limit']]
+            choices = self._choices(cnf)
             alternatives = []
             for variable in choices:
                 self.counts['conditioning_candidates'] += 1
@@ -234,8 +237,7 @@ class PatternInventory:
                     or type(node['selected']) is not int or not node['alternatives']
                     or not 0 <= node['selected'] < len(node['alternatives'])):
                 raise ValueError('Invalid variable partition')
-            frequencies = Counter(abs(lit) for c in cnf for lit in c)
-            choices = sorted(frequencies, key=lambda v: (-frequencies[v], v))[:self.config['candidate_limit']]
+            choices = self._choices(cnf)
             if len(node['alternatives']) > len(choices):
                 raise ValueError('Exceeded candidate budget')
             for attempt, variable in zip(node['alternatives'], choices):

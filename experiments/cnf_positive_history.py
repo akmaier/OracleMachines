@@ -1,4 +1,4 @@
-"""Research-only persistent histories of witnessed positive-clause additions.
+"""Research-only persistent histories of checked clause additions.
 
 Version IDs are local to one append-only SQLite archive, not portable content
 hashes or authenticated external identities. A version denotes its stored base
@@ -16,7 +16,7 @@ BASE_FORMAT = "positive-history-base-v1"
 
 
 class UnsupportedExpansion(ValueError):
-    """No retained positive subset; this path supplies no verdict for the edit."""
+    """The requested reuse rule supplies no verdict for the edit."""
 
 
 class PositiveHistory:
@@ -115,6 +115,36 @@ class PositiveHistory:
         if not kept or any(lit <= 0 or lit not in members for lit in kept):
             raise ValueError("History delta lacks its claimed positive subset")
 
+    def _clause(self, clause):
+        """Validate the whole signed clause, including tails after a true literal."""
+        if not isinstance(clause, (tuple, list)):
+            raise ValueError("A history delta must be a clause list or tuple")
+        self.counts["delta_literal_visits"] += len(clause)
+        if any(type(lit) is not int or lit == 0 for lit in clause):
+            raise ValueError("A history delta must contain nonzero integer literals")
+
+    def _model_holds(self, base, clause):
+        # The same total assignment is used throughout this fixed-base history:
+        # every variable absent from the stored sparse model is false.
+        for lit in clause:
+            self.counts["model_literal_probes"] += 1
+            if base["model"].get(abs(lit), False) == (lit > 0):
+                return True
+        return False
+
+    def _decision_delta(self, base, payload):
+        self._clause(payload["clause"])
+        if payload["kind"] == "append-unsat":
+            if base["answer"]:
+                raise ValueError("UNSAT extension requires a checked UNSAT base")
+            self.counts["unsat_extension_checks"] += 1
+        elif payload["kind"] == "append-model":
+            if not base["answer"] or not self._model_holds(base, payload["clause"]):
+                raise ValueError("Stored base model does not satisfy the added clause")
+            self.counts["model_extension_checks"] += 1
+        else:
+            raise ValueError("Unsupported history operation")
+
     def _load(self, version):
         """Iterative cold replay; cache compact records, never full version CNFs."""
         self._id(version)
@@ -148,11 +178,14 @@ class PositiveHistory:
             else:
                 if parent not in self.checked or self.checked[parent][0] != base_id:
                     raise ValueError("History parent changes the fixed base")
-                if type(payload) is not dict or set(payload) != {"kind", "clause", "witness"}:
+                if type(payload) is not dict:
                     raise ValueError("Invalid history delta record")
-                if payload["kind"] != "append-positive":
-                    raise ValueError("Unsupported history operation")
-                self._witness(base, payload["clause"], payload["witness"])
+                if set(payload) == {"kind", "clause", "witness"} and payload["kind"] == "append-positive":
+                    self._witness(base, payload["clause"], payload["witness"])
+                elif set(payload) == {"kind", "clause"}:
+                    self._decision_delta(base, payload)
+                else:
+                    raise ValueError("Invalid history delta record")
                 payload["clause"] = tuple(payload["clause"])
             self.checked[current] = (base_id, parent, payload)
             self.counts["verified_versions"] += 1
@@ -228,6 +261,24 @@ class PositiveHistory:
     def query(self, version):
         started = self._begin()
         self._load(version)
+        return self._result(version, started)
+
+    def append_decision(self, parent, clause):
+        """Reuse an UNSAT base, or its checked SAT model if it survives the edit.
+
+        Unlike append(), this need not preserve all base models. A rejected
+        model gives no UNSAT verdict and causes no persistent mutation. Signed
+        and empty clauses are valid inputs; an empty clause needs an UNSAT base
+        to use this fast path. Removing/replacing clauses is not supported.
+        """
+        started = self._begin()
+        base_id, _, _ = self._load(parent)
+        base = self.bases[base_id]
+        self._clause(clause)
+        if base["answer"] and not self._model_holds(base, clause):
+            raise UnsupportedExpansion("Stored model fails; acquire a new base for this edit")
+        kind = "append-model" if base["answer"] else "append-unsat"
+        version = self._put_version(base_id, parent, dict(kind=kind, clause=list(clause)))
         return self._result(version, started)
 
     def materialize(self, version):

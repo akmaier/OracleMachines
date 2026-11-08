@@ -48,6 +48,12 @@ storage falls from 10,957,771 to 118,668 bytes. Warm append avoids full-source
 rediscovery; cold replay, novel constraints and repeated-event losses remain
 explicit in the comparison.
 
+The [decision-history extension](experiments/results/cnf-decision-history/README.md)
+now reuses an UNSAT base for arbitrary clause additions, or a stored SAT model
+when it still satisfies the new clause. Accepted updates avoid subset discovery
+and fresh solving. The comparison retains failed-model fallback, repeated-event
+losses and cold-replay costs; the rules do not bound general SAT acquisition.
+
 The current draft is **Bounded-Domain SAT, Compiled Knowledge, and Amortized
 Reasoning: A perspective on resource accounting for learned reasoning**.
 

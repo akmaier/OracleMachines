@@ -130,4 +130,41 @@ theorem positive_history_models (base additions : List (List Nat)) (v : Nat → 
     · exact ⟨c, h, fun _ hi => hi⟩
     · exact covered c h
 
+/-- A refuted base remains refuted after arbitrary conjunctive additions.
+The constructor/proof cost of the base is not bounded by this semantic rule. -/
+theorem unsatisfiable_conj_extension (base added : Formula)
+    (refuted : ¬ Satisfiable base) : ¬ Satisfiable (.conj base added) := by
+  rintro ⟨v, hv⟩
+  have both : base.eval v = true ∧ added.eval v = true := by
+    simpa [Formula.eval] using hv
+  exact refuted ⟨v, both.1⟩
+
+/-- One fixed checked assignment suffices for a whole compatible history.
+This preserves a model, not the set of all base models. -/
+theorem fixed_model_history (base : Formula) (additions : List Formula)
+    (v : Nat → Bool) (base_holds : base.eval v = true)
+    (compatible : ∀ f ∈ additions, f.eval v = true) :
+    (additions.foldl Formula.conj base).eval v = true := by
+  induction additions generalizing base with
+  | nil => exact base_holds
+  | cons f rest ih =>
+    apply ih (.conj base f)
+    · simp [Formula.eval, base_holds, compatible f (by simp)]
+    · intro g hg
+      exact compatible g (by simp [hg])
+
+theorem satisfiable_fixed_model_history (base : Formula) (additions : List Formula)
+    (v : Nat → Bool) (base_holds : base.eval v = true)
+    (compatible : ∀ f ∈ additions, f.eval v = true) :
+    Satisfiable (additions.foldl Formula.conj base) := by
+  exact ⟨v, fixed_model_history base additions v base_holds compatible⟩
+
+theorem unsatisfiable_history (base : Formula) (additions : List Formula)
+    (refuted : ¬ Satisfiable base) :
+    ¬ Satisfiable (additions.foldl Formula.conj base) := by
+  induction additions generalizing base with
+  | nil => exact refuted
+  | cons f rest ih =>
+    exact ih (.conj base f) (unsatisfiable_conj_extension base f refuted)
+
 end OracleMachines.SAT

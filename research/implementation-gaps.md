@@ -2246,3 +2246,59 @@ the final handles for all 24 history snapshots and checks their exact source
 recipes, answers and unchanged row digests in `history-replay.json`. Code,
 formalization and comparison evidence were committed and pushed in `fa7feb6`;
 the manuscript and final validation follow in the next checkpoint.
+
+
+## 2026-11-08: arbitrary UNSAT additions and surviving SAT assignments
+
+Implemented two further reuse cases in the separate CNF history prototype.
+`append_decision` accepts any well-formed signed clause, including an empty one,
+over a checked UNSAT base. For a SAT base it accepts exactly when the fixed
+stored assignment satisfies the new clause, treating missing variables as false.
+The latter preserves a witness and verdict, not every base model. A failed model
+supplies no UNSAT conclusion and writes no version. Fresh solving remains the
+fallback. The old positive-subset API and its persisted records remain supported.
+
+Both new record kinds retain exact clauses and parent/base references. Cold
+replay checks every required ancestor and its rule against the checked base.
+Warm accepted additions avoid subset discovery and residual solving. Syntax,
+model probes where applicable, serialization, SQL indexing, preparation, source
+export and cold replay remain charged. Deletion/replacement and externally
+mutating already checked cached rows are outside the append-only interface.
+
+[The matched comparison](../experiments/results/cnf-decision-history/README.md)
+retains 22 histories, 3,894 correct decisions and 66 compressed archives. For
+size-16 SAT and 128 compatible signed additions, the preceding history interface
+acquires 129 bases and retains 15,195,873 logical bytes; the new interface keeps
+one base and 99,170 bytes. Summed base-plus-update time falls from 3.611 to
+0.04691 seconds in single samples. The full-source comparator uses 9,235,556
+bytes and 2.781 seconds. Size-16 UNSAT arbitrary additions fall from 3,670,847
+to 109,468 bytes and 0.71682 to 0.05710 seconds versus positive-only history.
+Actual SQLite sizes are recorded separately; these are not peak-RSS results.
+
+Preserved counterexamples matter: repeated signed clauses use 8,926 bytes versus
+1,396 with full-source deduplication; 32 fresh positive units still force 32
+fallback acquisitions and 58,812 bytes versus 30,657. A failed model that remains
+SAT and a true SAT-to-UNSAT transition both need one fresh base, then reuse it
+for 31 additions. Size-16 UNSAT cold replay takes 10.13 ms versus 5.94 ms for the
+preceding history's isolated final base and 1.57 ms for the full-source cache,
+whose input now contains an empty clause. No universal runtime gain follows.
+
+All 235 Python tests pass, including 320 enumerated base/clause combinations,
+model-set shrinkage, sparse assignments, failed-model non-refutation, mixed
+legacy/new records, malformed and forged deltas, and 1,200-step UNSAT replay.
+Lean adds four semantic lemmas for fixed-model and refuted histories; its audit
+passes 4,071 declarations / 1,933 theorem declarations with standard axioms only.
+These proofs do not verify Python, SQL or machine costs. All 313 earlier
+archives replay unchanged with no new expansions. Every new compressed archive
+was separately reloaded and checked against its exact source recipe and row
+hash. The production solver and result archive were not targeted.
+
+**Next expansion priorities:** (1) allow small checked model repairs and share
+source structure across new bases; (2) compress repeated event provenance while
+preserving old version identities; (3) reduce cold history validation and avoid
+unused eager positive-index preparation. In particular, a positive unit on a
+genuinely fresh variable can extend a model, but absence from the base model
+does not prove freshness: previous deltas may constrain it. An occurrence or
+other explicit invalidation invariant is required. General irreducible positive
+overlap and unrestricted polynomial construction remain open. The new cases
+reuse already acquired answers; they do not bound acquiring every CNF.

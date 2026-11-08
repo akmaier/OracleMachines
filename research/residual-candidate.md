@@ -298,8 +298,49 @@ constraints force fresh bases, retain more setup metadata, and lose the fixed-ba
 storage guarantee. A favorable redundant stream therefore establishes neither
 minimum work on every input nor a uniformly polynomial arbitrary-SAT solver.
 
-The current path uses the same positive-subset protocol for SAT and UNSAT bases.
-A checked UNSAT base also permits arbitrary well-formed conjunctive additions by
-monotonicity, without a positive subset witness. That simpler negative-only
-extension is not enabled here; it is a further opportunity to avoid unnecessary
-recognition, with its distinct certificate rule and source-binding conditions.
+The original positive-subset path remains available. The following extension
+now implements the previously identified monotone UNSAT shortcut and checked
+reuse of one surviving SAT model.
+
+### Refutation and fixed-model additions
+
+`append_decision` accepts any signed integer clause (including an empty clause)
+when the fixed base is checked UNSAT. Otherwise it checks whether the fixed base
+model satisfies the added clause, with every omitted variable false. If so, the
+same model still satisfies every previous addition. This preserves SAT status
+but can remove other base models. A failed model supplies no answer and changes
+no rows; it can require a different SAT model or a refutation from fresh solving.
+Deletion and replacement remain unsupported.
+
+The new record kinds retain the clause and exact parent/base references. Cold
+replay checks the rule against the checked base and every ancestor, including
+mixed old positive-subset records. Warm additions validate the whole clause;
+SAT requires at most two probes per literal across admission and record checks,
+while UNSAT requires none. There is no containment-candidate factor, base scan
+or residual solve on an accepted warm append. Bit serialization, integer/hash
+lookup, SQL operations, preparation and cold proof replay remain charged. The
+same fixed-base payload bound applies without the subset witness index. This
+is a representation-level bound, not a verified machine-cost theorem.
+
+[Matched evidence](../experiments/results/cnf-decision-history/README.md) retains
+22 histories, 3,894 correct decisions and 66 archives. For size-16 SAT and 128
+compatible signed additions, positive history needs 129 acquired bases and
+15,195,873 logical bytes; decision history needs one base and 99,170 bytes.
+Summed operation time is 3.611 versus 0.04691 seconds in single samples. The
+full-source comparison uses 9,235,556 bytes and 2.781 seconds. All 313 preceding
+archives replay unchanged. These are synthetic interface comparisons, not peak
+RAM or competitive-CDCL results.
+
+Repeated identical clauses still lose to canonical deduplication. Thirty-two
+fresh positive units still force 32 fallback acquisitions; the fixed model sets
+new variables false. Cold replay can also lose: at size-16 UNSAT it takes
+10.13 ms versus 5.94 ms for positive history's isolated final base and 1.57 ms
+for the full-source cache after an explicit empty clause. No universal speedup
+or all-input polynomial acquisition follows.
+
+Next work should share source structure across new bases and allow small checked
+model repairs, with explicit occurrence/invalidation conditions. A truly fresh
+variable can be assigned without breaking old clauses, but a variable absent
+from the base model may already occur in earlier deltas. Repeated-event
+compression and cold checking also remain. The general irreducible-overlap and
+unrestricted polynomial-construction obligations are unchanged.

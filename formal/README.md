@@ -1083,3 +1083,19 @@ source updates). The axiom audit checks **4,043 declarations / 1,911 theorem
 declarations** without admits or added axioms. The matched four-mode experiment
 and generated-code inspection are retained in
 [the batch reuse record](../experiments/results/affine-batch-reuse/README.md).
+
+
+## Refutation and fixed-model clause histories
+
+`Residuals.lean` now proves `unsatisfiable_conj_extension` and
+`unsatisfiable_history`: a refuted base remains refuted after arbitrary
+conjunctive additions. `fixed_model_history` and
+`satisfiable_fixed_model_history` show that a single assignment satisfying the
+base and every addition satisfies the entire folded conjunction. This preserves
+one witness, not the complete model set. Failed model checks prove no negative
+answer. These semantic results support the separate Python history experiment;
+they do not verify its signed parser, database, implementation or resource costs.
+
+The current audit passes **4,071 declarations / 1,933 theorem declarations**.
+The matched comparison and limitations are retained in the
+[decision-history record](../experiments/results/cnf-decision-history/README.md).

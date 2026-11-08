@@ -25,6 +25,12 @@ checked source deltas. It measures smaller retained prefixes, cold replay and
 full reconstruction, alongside losses on repeated events and new constraints.
 All 265 earlier candidate archives replay with unchanged residual rows.
 
+The [decision-history comparison](results/cnf-decision-history/README.md) adds
+UNSAT monotonicity and reuse of one surviving SAT assignment. It retains 3,894
+decisions over 22 histories and 66 archives, comparing full-source, positive-only
+and decision-history interfaces. All 313 preceding archives replay unchanged.
+New positive units, duplicate events and cold replay retain explicit losses.
+
 ## Expanded public and chronological study
 
 The [new study](results/expanded/README.md) covers 28 public SATLIB instances

@@ -148,6 +148,7 @@ class PositiveHistoryTests(unittest.TestCase):
                 self.assertEqual(result["metrics"]["verified_versions"], 1)
                 self.assertEqual(result["solver_metrics"], {})
             history.close()
+
             history = PositiveHistory(path)
             result = history.query(version)
             self.assertTrue(result["answer"])
@@ -155,6 +156,132 @@ class PositiveHistoryTests(unittest.TestCase):
             self.assertEqual(result["metrics"]["verified_bases"], 1)
             warm = history.query(version)
             self.assertEqual(warm["metrics"], {"version_memory_hits": 1})
+            history.close()
+
+    def test_decision_rules_exhaustive_small_clauses(self):
+        literals = (1, -1, 2, -2, 3, -3)
+        clauses = [c for n in range(7) for c in itertools.combinations(literals, n)]
+        for base in ([], [(1, 2)], [(1, 2), (-1, -2)], [(1,), (-1,)], [()]):
+            history = PositiveHistory()
+            initial = history.prepare(base)
+            root, answer = initial["version"], initial["answer"]
+            model = history.witness(root)["model"]
+            for clause in clauses:
+                before = list(history.db.iterdump())
+                if answer and not holds([clause], model):
+                    with self.assertRaises(UnsupportedExpansion):
+                        history.append_decision(root, clause)
+                    self.assertEqual(before, list(history.db.iterdump()))
+                    continue
+                result = history.append_decision(root, clause)
+                source = history.materialize(result["version"])["cnf"]
+                self.assertEqual(source, tuple(map(tuple, base)) + (clause,))
+                actual = any(holds(source, dict(zip((1, 2, 3), values)))
+                             for values in itertools.product((False, True), repeat=3))
+                self.assertEqual(result["answer"], actual)
+                self.assertEqual(result["solver_metrics"], {})
+                self.assertEqual(result["metrics"].get("containment_probes", 0), 0)
+                if answer:
+                    self.assertTrue(holds(source, model))
+            history.close()
+
+    def test_model_failure_is_not_unsat_and_models_can_shrink(self):
+        history = PositiveHistory()
+        root = history.prepare([(1, 2)])["version"]
+        model = history.witness(root)["model"]
+        true_var = next(v for v in (1, 2) if model[v])
+        accepted = history.append_decision(root, [true_var])["version"]
+        # This removes a different base model: decision reuse is not equivalence.
+        alternative = {1: True, 2: True, true_var: False}
+        self.assertTrue(holds([(1, 2)], alternative))
+        self.assertFalse(holds(history.materialize(accepted)["cnf"], alternative))
+        with self.assertRaises(UnsupportedExpansion):
+            history.append_decision(root, [-true_var])
+        self.assertTrue(history.prepare([(1, 2), (-true_var,)])["answer"])
+        # Fresh variables are false in the total extension, even with sparse IDs.
+        good = history.append_decision(root, [-10**20])["version"]
+        self.assertTrue(holds(history.materialize(good)["cnf"], history.witness(good)["model"]))
+        with self.assertRaises(UnsupportedExpansion):
+            history.append_decision(good, [10**20])
+        with self.assertRaises(UnsupportedExpansion):
+            history.append_decision(root, [])
+        history.close()
+
+    def test_decision_mixed_protocols_replay_and_invalid_tail(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "history.sqlite3"
+            history = PositiveHistory(path)
+            root = history.prepare([(1, 2), (-1, -2)])["version"]
+            legacy = history.append(root, [2, 1, 3])["version"]
+            first = history.append_decision(legacy, [-900, -900])["version"]
+            last = history.append(first, [1, 2, 4])["version"]
+            self.assertEqual(history.append_decision(legacy, [-900, -900])["version"], first)
+            for invalid in ([-900, 0], [-900, True], [-900, 1.0], "12", None):
+                before = list(history.db.iterdump())
+                with self.assertRaises(ValueError):
+                    history.append_decision(last, invalid)
+                self.assertEqual(before, list(history.db.iterdump()))
+            source = history.materialize(last)["cnf"]
+            before = list(history.db.iterdump())
+            history.close()
+            history = PositiveHistory(path)
+            self.assertTrue(history.query(last)["answer"])
+            self.assertEqual(history.materialize(last)["cnf"], source)
+            self.assertTrue(holds(source, history.witness(last)["model"]))
+            self.assertEqual(before, list(history.db.iterdump()))
+            history.close()
+
+    def test_decision_cold_forgery_rejected(self):
+        for mutation in ("false_model", "unsat_on_sat", "model_on_unsat", "invalid_tail", "cross_base"):
+            with tempfile.TemporaryDirectory() as temporary:
+                path = Path(temporary) / "history.sqlite3"
+                history = PositiveHistory(path)
+                sat = history.prepare([(1,)])["version"]
+                unsat = history.prepare([(2,), (-2,)])["version"]
+                root = unsat if mutation == "model_on_unsat" else sat
+                version = history.append_decision(root, [-900])["version"]
+                payload = json.loads(history.db.execute(
+                    "SELECT payload FROM cnf_positive_versions_v1 WHERE id=?", (version,)).fetchone()[0])
+                if mutation == "false_model":
+                    payload["clause"] = [-1]
+                elif mutation == "unsat_on_sat":
+                    payload["kind"] = "append-unsat"
+                elif mutation == "model_on_unsat":
+                    payload["kind"] = "append-model"
+                elif mutation == "invalid_tail":
+                    payload["clause"] = [-900, 0]
+                with history.db:
+                    history.db.execute("UPDATE cnf_positive_versions_v1 SET payload=? WHERE id=?",
+                                       (json.dumps(payload), version))
+                    if mutation == "cross_base":
+                        history.db.execute("UPDATE cnf_positive_versions_v1 SET parent=? WHERE id=?", (unsat, version))
+                history.close()
+                history = PositiveHistory(path)
+                with self.assertRaises(ValueError, msg=mutation):
+                    history.query(version)
+                history.close()
+
+    def test_long_unsat_decision_history(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "history.sqlite3"
+            history = PositiveHistory(path)
+            version = history.prepare([(1,), (-1,)])["version"]
+            for step in range(1200):
+                clause = ([], [-step - 2], [step + 2], [step + 2, -step - 2])[step % 4]
+                result = history.append_decision(version, clause)
+                self.assertFalse(result["answer"])
+                self.assertEqual(result["solver_metrics"], {})
+                self.assertEqual(result["metrics"].get("model_literal_probes", 0), 0)
+                self.assertEqual(result["metrics"].get("containment_probes", 0), 0)
+                version = result["version"]
+            before = list(history.db.iterdump())
+            history.close()
+            history = PositiveHistory(path)
+            result = history.query(version)
+            self.assertFalse(result["answer"])
+            self.assertEqual(result["metrics"]["verified_versions"], 1201)
+            self.assertEqual(result["metrics"]["unsat_extension_checks"], 1200)
+            self.assertEqual(before, list(history.db.iterdump()))
             history.close()
 
 

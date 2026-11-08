@@ -353,8 +353,9 @@ is checked, then evicts obsolete nodes. Archive history, metadata, source
 payloads and process memory have separate costs.
 
 The reference update bound is proved. Original-variable translation and complete
-CNF grouping now have the proofs described below; native tree binding, JSON,
-persistent maps, Python/SQLite and machine costs still have refinement obligations.
+CNF grouping and complete initial binding now have the proofs described below;
+mutable node/patch identities, JSON, persistent maps, Python/SQLite and machine
+costs still have refinement obligations.
 General factor-DAG provenance, adaptive gating and unrestricted structural
 coverage are unchanged. At this milestone **141 tests passed**, and Lean audited
 **2,279 declarations / 1,106 theorem declarations**. See the
@@ -403,21 +404,45 @@ were rechecked under the new engine and after restart. The
 [persistent gap analysis](research/implementation-gaps.md) records the next proof,
 accounting and evaluation obligations.
 
-The latest checkpoint connects the **complete original CNF** to its grouped
+The grouping checkpoint connects the **complete original CNF** to its grouped
 relations. The compiler carries a permutation proof preserving every clause
 occurrence, including duplicates and empty clauses, together with the local
 semantic equalities. Lean proves SAT/UNSAT equivalence with a consistent path
 through all buckets. Individually nonempty relations need not share such a path.
 A tree-summary theorem follows when exact leaf binding and identity padding are
-supplied. Proving that the native mutable protocol supplies those premises is
-still open, as are reference-count and general row/equivalence-store invariants.
+supplied. The following checkpoint supplies this premise for complete-source
+checks; preservation through native patches and replay is still open, as are
+reference-count and general row/equivalence-store invariants.
 
-**152 tests pass**, and Lean audits **2,562 declarations / 1,233 theorem declarations**
+At that milestone **152 tests passed**, and Lean audited **2,562 declarations / 1,233 theorem declarations**
 without admits or added axioms. The new global checks cover 11,680 complete
 assignments across 60 CNFs, exact clause multiplicities, service witnesses,
 incompatible shared boundaries, 65,537 blocks and 12,000 repeated clauses. The
 [grouping verification record](experiments/results/source-grouping/README.md)
 preserves the evidence. All historical rows and all 150 prior experiment files
-remain intact. The archive now holds **5,680 results / 1,806 refutations** after
+remained intact. That archive held **5,680 results / 1,806 refutations** after
 checked revalidation. Added grouping/equality work is explicitly outside the
 relation-evaluation ledger. No new timing or unrestricted-SAT claim is made.
+
+The latest checkpoint proves **executable complete-source binding** against the
+actual stored tree. `SourceBinding.lean` checks every ordered leaf and individual
+identity-padding relation, then returns a proof that its decision agrees with
+the original CNF. Both native full-source queries and initial source-version
+binding use this result. Original-clause/provenance checks remain in place.
+
+The scan has a proved count of one relation comparison per logical leaf. New
+metrics expose that count and diagnostic cell/source-evaluation bounds. Shared
+nodes still incur work for each logical occurrence. Initial source-version binding
+adds a source-evaluation pass; warm queries and local edits do not repeat it.
+Allocation, bit costs, transport and storage still need separate accounting.
+
+**156 tests pass** and Lean audits **2,615 declarations / 1,259 theorem declarations**
+without admits or added axioms. New tests cover incorrect binding despite a
+matching final answer, nonidentity padding that composes to identity, dimensions,
+counts and 65,536 logical leaves sharing 17 native nodes. The
+[binding verification record](experiments/results/source-binding/README.md)
+preserves the evidence. All old rows in 21 tables and all 158 earlier experiment
+files remain intact. The archive now holds **6,035 results / 1,935 refutations**;
+all 355 distinct generic inputs and five old source versions pass revalidation.
+Native identity/patch/replay invariants and complete resource bounds remain open.
+The historical timing study is unchanged; this proof adds no new speed claim.

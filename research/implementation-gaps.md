@@ -862,3 +862,13 @@ Remaining priorities:
    Acceptance completeness and cap behavior also need specification.
 5. **Compact general input and matched application evidence**, then cost-sensitive
    selection. Hard total-resource and unrestricted-coverage guarantees remain open.
+
+Runtime checkpoint `bc977eb` is committed and pushed. The manuscript and the
+[binding verification record](../experiments/results/source-binding/README.md)
+include successful revalidation/semantic audit of all 355 generic inputs and
+checked adoption/restart of all five older source versions. Every old row in all
+21 tables and all 158 earlier experiment files is preserved. The archive now
+contains 6,035 generic results and 1,935 refutations. Historical timing evidence
+remains unchanged and tied to its original runtime. The next run should start
+with the node/layout/start/span invariant above, without treating this initial
+full scan as a proof of later local transitions.

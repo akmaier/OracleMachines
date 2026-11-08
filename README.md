@@ -35,6 +35,12 @@ nine-pigeon/eight-hole case from 5,191 acquired residuals to one checked Hall
 certificate. This is a restricted-family improvement in a separate Python
 prototype; no uniformly polynomial solution for every CNF has been established.
 
+The [positive-core follow-up](experiments/results/cnf-subsumption/README.md)
+removes checked redundant positive supersets and reuses the same stored core
+across growing sources. Laminar choices reduce to disjoint minimal choices;
+irreducible overlap remains open. The source copies and recognition work are
+still charged, even when no new core search is needed.
+
 The current draft is **Bounded-Domain SAT, Compiled Knowledge, and Amortized
 Reasoning: A perspective on resource accounting for learned reasoning**.
 

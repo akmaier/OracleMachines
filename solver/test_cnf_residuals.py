@@ -7,7 +7,8 @@ import random
 import tempfile
 import unittest
 
-from experiments.cnf_residual_dag import ResidualSolver, holds, matching_structure, normalize, solve_matching
+from experiments.cnf_residual_dag import (ResidualSolver, check_positive_core, holds,
+                                          matching_structure, normalize, positive_core, solve_matching)
 
 
 def brute(cnf):
@@ -192,6 +193,98 @@ class ResidualTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "not deficient"):
                 solver.solve(cnf)
             solver.close()
+
+    def test_positive_core_preserves_all_models_on_small_families(self):
+        clauses = [c for size in (2, 3, 4)
+                   for c in itertools.combinations(range(1, 5), size)]
+        assignments = [dict(zip(range(1, 5), bits))
+                       for bits in itertools.product((False, True), repeat=4)]
+        for mask in range(1 << len(clauses)):
+            cnf = tuple(c for i, c in enumerate(clauses) if mask >> i & 1)
+            core, removed = positive_core(cnf, Counter())
+            self.assertEqual(core, positive_core(core, Counter())[0])
+            if removed:
+                self.assertEqual(core, check_positive_core(cnf, removed, Counter()))
+            for assignment in assignments:
+                self.assertEqual(holds(cnf, assignment), holds(core, assignment), cnf)
+            # Every retained positive clause is minimal, and input order does
+            # not change the resulting set (source certificate IDs may differ).
+            self.assertFalse(any(set(c) < set(d) for c in core for d in core))
+            self.assertEqual(set(core), set(positive_core(tuple(reversed(cnf)), Counter())[0]))
+
+    def test_subsumption_reuses_prepared_core_and_preserves_old_rows(self):
+        from experiments.compare_cnf_residuals import pigeonhole
+        from experiments.compare_cnf_matching import domain_cnf
+        for core, expected in ((pigeonhole(4), False),
+                               (domain_cnf([range(4)] * 4), True)):
+            with tempfile.TemporaryDirectory() as directory:
+                path = Path(directory) / "research.sqlite3"
+                solver = ResidualSolver(path)
+                first = solver.solve(core)
+                old_rows = solver.db.execute("SELECT * FROM cnf_residual_v1").fetchall()
+                # New variables occur only in redundant clauses. They vanish
+                # from the core and must be reconstructed safely in SAT models.
+                variants = [core + [tuple(core[0]) + tuple(range(100, 101 + i))]
+                            for i in range(3)]
+                for cnf in variants:
+                    result = solver.solve(cnf)
+                    self.assertEqual(result["answer"], expected)
+                    self.assertEqual(result["metrics"].get("expanded_nodes"), 1)
+                    self.assertEqual(result["metrics"].get("matching_leaves", 0), 0)
+                    self.assertEqual(result["metrics"].get("search_memory_hits"), 1)
+                    if expected:
+                        self.assertTrue(holds(cnf, result["model"]))
+                    else:
+                        self.assertEqual(solver.checked[result["root"]]["proof"]["child"], first["root"])
+                for key, payload in old_rows:
+                    self.assertEqual(payload, solver.db.execute(
+                        "SELECT payload FROM cnf_residual_v1 WHERE id=?", (key,)).fetchone()[0])
+                solver.close()
+                solver = ResidualSolver(path)
+                cold = solver.solve(variants[-1])
+                self.assertEqual(cold["answer"], expected)
+                self.assertEqual(cold["metrics"].get("expanded_nodes", 0), 0)
+                self.assertEqual(cold["metrics"]["verified_nodes"], 1 if expected else 2)
+                solver.close()
+
+    def test_subsumption_witness_tampering_and_dependency_changes(self):
+        from experiments.compare_cnf_residuals import pigeonhole
+        cnf = pigeonhole(3)
+        cnf += [tuple(cnf[0]) + (4,)]
+        solver = ResidualSolver()
+        result = solver.solve(cnf)
+        original = solver.checked[result["root"]]
+        self.assertEqual(original["proof"]["kind"], "positive-subsumption-v1")
+        cid, kept = original["proof"]["removed"][0]
+        mutations = [dict(removed=[]), dict(removed=[[cid, cid]]),
+                     dict(removed=[[cid, kept], [cid, kept]]),
+                     dict(removed=[[cid, kept], [kept, cid]]),
+                     dict(removed=[[cid, 0]]), dict(removed=[[cid, True]]),
+                     dict(child="not the core")]
+        for mutation in mutations:
+            node = json.loads(json.dumps(original))
+            node["proof"].update(mutation)
+            with self.assertRaises(ValueError):
+                solver._verify(result["root"], node)
+        solver.close()
+        # Removing the stronger choice invalidates the old equivalence. The
+        # weakened formula is SAT: the fourth pigeon can share a true variable.
+        weakened = cnf[1:]
+        solver = ResidualSolver()
+        self.assertFalse(solver.solve(cnf)["answer"])
+        self.assertTrue(solver.solve(weakened)["answer"])
+        solver.close()
+
+    def test_minimal_overlap_is_not_erased(self):
+        choices = [(1, 2, 3), (3, 4, 5)]
+        cnf = choices + [(-a, -b) for a, b in itertools.combinations(range(1, 6), 2)]
+        canonical, _ = normalize(cnf)
+        core, removed = positive_core(canonical, Counter())
+        self.assertEqual(removed, [])
+        self.assertIsNone(matching_structure(core, Counter()))
+        solver = ResidualSolver()
+        self.assertTrue(solver.solve(cnf)["answer"])
+        solver.close()
 
 
 if __name__ == "__main__":

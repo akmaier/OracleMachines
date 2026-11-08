@@ -78,4 +78,41 @@ theorem no_injective_choice_of_card_lt (Left Right : Type)
   rintro ⟨f, hf⟩
   exact (not_lt_of_ge (Fintype.card_le_of_injective f hf)) deficient
 
+/-- Satisfaction of an unsigned (positive) clause. Kept separate from the
+Python signed-literal encoding; no parser refinement is asserted here. -/
+def PositiveClauseHolds (clause : List Nat) (v : Nat → Bool) : Prop :=
+  ∃ i ∈ clause, v i = true
+
+theorem positive_clause_subsumption (small large : List Nat) (v : Nat → Bool)
+    (included : small ⊆ large) (satisfied : PositiveClauseHolds small v) :
+    PositiveClauseHolds large v := by
+  obtain ⟨i, hi, hv⟩ := satisfied
+  exact ⟨i, included hi, hv⟩
+
+/-- Every source clause has a retained subset, and every retained clause comes
+from the source. These hypotheses preserve all models, not only SAT status. -/
+theorem positive_core_models (source core : List (List Nat)) (v : Nat → Bool)
+    (retained : core ⊆ source)
+    (covered : ∀ c ∈ source, ∃ d ∈ core, d ⊆ c) :
+    (∀ c ∈ source, PositiveClauseHolds c v) ↔
+      (∀ c ∈ core, PositiveClauseHolds c v) := by
+  constructor
+  · intro h c hc
+    exact h c (retained hc)
+  · intro h c hc
+    obtain ⟨d, hd, included⟩ := covered c hc
+    exact positive_clause_subsumption d c v included (h d hd)
+
+/-- The same retained core covers an added clause only with a fresh subset
+witness. Deleting or weakening its witness does not satisfy this hypothesis. -/
+theorem positive_core_extension (source core : List (List Nat)) (added : List Nat)
+    (covered : ∀ c ∈ source, ∃ d ∈ core, d ⊆ c)
+    (witness : ∃ d ∈ core, d ⊆ added) :
+    ∀ c ∈ added :: source, ∃ d ∈ core, d ⊆ c := by
+  intro c hc
+  rcases List.mem_cons.mp hc with h | h
+  · subst c
+    exact witness
+  · exact covered c h
+
 end OracleMachines.SAT

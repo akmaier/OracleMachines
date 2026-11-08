@@ -2129,3 +2129,50 @@ pages 70/71, adjoining page 72, and bibliography pages 76/77 were rendered and
 visually checked. The prior experiment's artifacts are unchanged; current
 candidate/driver fingerprints match their report. The separate cold-baseline
 audit confirms 5,191 checked nodes at eight holes, with zero new expansions.
+
+
+## 2026-11-08: redundant positive expansion reuses a checked minimal core
+
+Implemented the next recorded opportunity: positive-clause subsumption exposes
+matching leaves hidden by redundant overlap and makes equivalent source versions
+reuse one exact normalized core. Every deletion has a retained subset witness.
+Negative source wrappers check those witnesses and the exact negative child;
+positive sources retain full checked models. Laminar positive families have
+disjoint minimal members, so complete negative exclusion cliques retain a
+polynomial matching construction after this charged preprocessing. Arbitrary
+irreducible overlap remains outside that guarantee.
+
+[The matched experiment](../experiments/results/cnf-subsumption/README.md) retains
+39 static inputs and four nine-query histories: 450 correct decisions and 86
+compressed archives. A laminar eight-hole input drops from 23 nodes / 201,735
+logical bytes to two nodes / 17,538 bytes. More substantially, eight redundant
+extensions of an acquired eight-hole core drop from 23,046 total new nodes and
+84,546,940 retained logical bytes to nine nodes and 82,514 bytes. After the first
+query, each addition creates one source record and performs no new core search.
+Final cold negative replay checks two nodes instead of 5,359. All 179 previously
+preserved candidate archives still check with unchanged row digests and no new
+expansions; the production result archive was not targeted.
+
+All 224 Python tests pass. Added tests exhaustively preserve all models of 2,048
+small positive families, check warm/cold SAT and UNSAT core reuse, and reject
+invalid/circular containment witnesses and changed dependencies. Lean adds three
+semantic lemmas for containment, covered-core models and witnessed extension;
+the audit passes 4,066 declarations / 1,928 theorems. This does not bring the
+Python checker or its database inside the native Lean trust boundary.
+
+**Retained limitation and next expansion priorities:** the new pass still scans
+and normalizes each full source, rebuilds the containment index, and copies the
+source and core key into its new record. An unchanged core can therefore coexist
+with quadratic cumulative source-copy payload over linearly growing histories.
+Investigate an incremental retained-clause index and persistent source deltas,
+with explicit invalidation when witnesses or conflicts change. Also evaluate a
+cost policy: seeded case 20 increases from 12 to 20 nodes and 12,029 to 18,637
+bytes because reduction wrappers do not repay their cost. Three other controls
+also grow, and these unsuccessful comparisons are preserved. A useful next gate
+would require an exposed tractable leaf or a cached core before paying for an
+additional reduction node; that policy is not implemented or proved optimal.
+
+Subsumption is published preprocessing (Een and Biere, SAT 2005), not a new
+general SAT algorithm. Worst-case discovery still has O(p^2 w) containment probes
+plus source scanning, sorting, index and bit costs. No universal minimum-expansion
+or polynomial arbitrary-SAT bound follows from the successful restricted stream.

@@ -13,6 +13,12 @@ residuals to one Hall-certified residual. All earlier archives still reload
 without changes. Positive-clause overlap remains an unrestricted-SAT obstacle;
 these experiments establish no uniform polynomial solution for every CNF.
 
+The [positive-core experiment](results/cnf-subsumption/README.md) compares checked
+subsumption with the preceding matching portfolio on static inputs and growing
+histories. It retains repeated, novel, laminar and irreducibly overlapping cases,
+including preprocessing overhead, source-copy costs and cold verification.
+Every previously retained candidate archive is checked without changing its rows.
+
 ## Expanded public and chronological study
 
 The [new study](results/expanded/README.md) covers 28 public SATLIB instances

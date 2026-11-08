@@ -72,7 +72,12 @@ support the semantics of the research CNF residual candidate. The later
 `no_injective_choice_of_card_lt` gives the finite-cardinality obstruction behind
 a Hall certificate. These lemmas do not verify the Python recognizer, matching
 algorithm, persistence or checker, or bound the residual count polynomially.
-The latest audit includes 4,062 declarations / 1,925 theorem declarations.
+The positive-clause follow-up adds `positive_clause_subsumption`,
+`positive_core_models`, and `positive_core_extension`: a retained subset implies
+its positive superset, a covered retained core preserves every model, and a fresh
+subset witness preserves coverage under an added clause. These use unsigned
+clauses; they do not assert a refinement of the Python signed-literal encoding.
+The latest audit includes 4,066 declarations / 1,928 theorem declarations.
 
 The follow-up adds two independently scoped modules. `CompactExpansion.lean`
 stores a unary coverage cap of `n` cells, constructs it in `n` allocation steps,

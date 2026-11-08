@@ -259,6 +259,78 @@ def solve_matching(domains, counts):
     return {domains[left][right]: True for left, right in left_to_right.items()}, None
 
 
+def positive_core(cnf, counts):
+    """Delete positive supersets, retaining direct source-clause witnesses.
+
+    Increasing length ensures a retained clause is inclusion-minimal. Index it
+    at its least frequent literal: every superset must visit that posting. The
+    index is a candidate filter only; literal containment is always checked.
+    Worst case remains quadratic in positive clause count times clause width.
+    """
+    positive, frequencies = [], Counter()
+    for cid, clause in enumerate(cnf):
+        counts["subsumption_recognition_literal_payload"] += len(clause)
+        if clause and all(lit > 0 for lit in clause):
+            positive.append(cid)
+            frequencies.update(clause)
+    positive.sort(key=lambda cid: (len(cnf[cid]), cnf[cid]))
+    postings, removed = {}, []
+    for cid in positive:
+        clause = cnf[cid]
+        members = set(clause)
+        witness = None
+        for lit in clause:
+            counts["subsumption_posting_lookups"] += 1
+            for kept in postings.get(lit, ()):
+                counts["subsumption_candidate_tests"] += 1
+                contained = True
+                for other in cnf[kept]:
+                    counts["subsumption_membership_tests"] += 1
+                    if other not in members:
+                        contained = False
+                        break
+                if contained:
+                    witness = kept
+                    break
+            if witness is not None:
+                break
+        if witness is None:
+            anchor = min(clause, key=lambda lit: (frequencies[lit], lit))
+            postings.setdefault(anchor, []).append(cid)
+        else:
+            removed.append([cid, witness])
+    counts["subsumed_positive_clauses"] += len(removed)
+    deleted = {cid for cid, _ in removed}
+    return tuple(c for cid, c in enumerate(cnf) if cid not in deleted), removed
+
+
+def check_positive_core(cnf, removed, counts):
+    """Validate a reduction without rerunning the subsumption search.
+
+    Every deleted clause must contain a retained positive clause. Requiring
+    direct retained witnesses rules out circular justifications and makes the
+    model-preserving invariant explicit, even though UNSAT alone needs only a
+    contradictory subset. This does not certify discovery/runtime bounds.
+    """
+    if type(removed) is not list or not removed:
+        raise ValueError("Empty or invalid positive subsumption certificate")
+    deleted = set()
+    for pair in removed:
+        if (type(pair) is not list or len(pair) != 2
+                or any(type(i) is not int or not 0 <= i < len(cnf) for i in pair)
+                or pair[0] in deleted):
+            raise ValueError("Invalid subsumption clause index")
+        deleted.add(pair[0])
+    for cid, kept in removed:
+        clause, witness = cnf[cid], cnf[kept]
+        counts["verified_subsumption_literal_payload"] += len(clause) + len(witness)
+        if (kept in deleted or not witness
+                or any(lit <= 0 for lit in clause + witness)
+                or not set(witness).issubset(clause)):
+            raise ValueError("Invalid retained subsumption witness")
+    return tuple(c for cid, c in enumerate(cnf) if cid not in deleted)
+
+
 class ResidualSolver:
     """Complete mathematical search; node budget raises, never guesses UNSAT.
 
@@ -266,13 +338,14 @@ class ResidualSolver:
     preserves completed residuals. No native/Lean solver dispatch is changed.
     """
     def __init__(self, archive=":memory:", *, reuse=True, leaves=True,
-                 decompose=True, matching=True, node_limit=100000):
+                 decompose=True, matching=True, positive_subsumption=True, node_limit=100000):
         self.db = sqlite3.connect(archive)
         self.db.execute("""CREATE TABLE IF NOT EXISTS cnf_residual_v1 (
             id TEXT PRIMARY KEY, payload TEXT NOT NULL)""")
         self.db.commit()
         self.reuse, self.leaves, self.decompose = reuse, leaves, decompose
         self.matching = matching
+        self.positive_subsumption = positive_subsumption
         self.node_limit = node_limit
         self.checked = {}
         self.counts = Counter()
@@ -392,6 +465,9 @@ class ResidualSolver:
             self.counts["verified_hall_edges"] += sum(len(domains[left]) for left in selected)
             if len(neighbors) >= len(selected):
                 raise ValueError("Hall set is not deficient")
+        elif kind == "positive-subsumption-v1":
+            core = check_positive_core(cnf, proof["removed"], self.counts)
+            self._negative_child(proof["child"], core)
         elif kind == "component":
             ids = proof["clauses"]
             if not ids or any(type(i) is not int or not 0 <= i < len(cnf) for i in ids):
@@ -470,6 +546,18 @@ class ResidualSolver:
             if all(len(c) <= 2 for c in cnf):
                 self.counts["two_cnf_leaves"] += 1
                 return two_cnf(cnf, self.counts)
+        if self.positive_subsumption:
+            core, removed = positive_core(cnf, self.counts)
+            if removed:
+                self.counts["subsumption_nodes"] += 1
+                model, child = self._visit(core)
+                if model is not None:
+                    # Missing variables can be false: each deleted clause has
+                    # a retained subset. The full source witness is checked.
+                    return model, None
+                return None, {"kind": "positive-subsumption-v1",
+                              "removed": removed, "child": child}
+        if self.leaves:
             if self.matching:
                 domains = matching_structure(cnf, self.counts)
                 if domains is not None:

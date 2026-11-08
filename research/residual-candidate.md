@@ -113,8 +113,8 @@ The five-variable near miss in the experiment exhibits that failure directly.
 There are useful intermediate questions, without a universal conclusion:
 
 1. Remove redundant positive supersets, then check whether the remaining minimal
-   choices are disjoint. Laminar choice families have disjoint minimal members;
-   this extends recognition at an explicitly charged subsumption cost.
+   choices are disjoint. This is now implemented below. The next expansion cost
+   is repeated source scanning and copying despite reuse of the unchanged core.
 2. Identify a small set of variables responsible for positive overlap. Fixing
    them leaves disjoint choices; with the clique-exclusion syntax, propagation
    then exposes a matching leaf. Enumerating k such variables costs up to 2^k
@@ -126,3 +126,85 @@ There are useful intermediate questions, without a universal conclusion:
    checker before enabling this experimental route in the production service.
 
 This is the current point at which a universal polynomial proof remains open.
+
+## Checked positive cores and redundant expansion
+
+The next revision removes inclusion-nonminimal positive clauses before matching,
+decomposition or branching, after unit propagation and the cheaper class leaves.
+If a retained positive clause C is contained in D, requiring C already requires
+D. Removing D preserves every model, with the negative and mixed clauses left
+unchanged. Every deletion records a direct retained source-clause witness; no
+chain or circular justification is accepted. The normalized reduced core is
+looked up in the same persistent residual archive. A new negative source node
+contains the deletion witnesses and exact core key; the checker validates the
+containments and the negative child. Positive source nodes retain full checked
+models. Old certificate kinds and keys keep their previous interpretation.
+
+This is established **syntactic subsumption**, described explicitly in Section 3
+of [Een and Biere, SAT 2005](https://www.cs.toronto.edu/~fbacchus/csc2512/Readings/EenBiere-SAT05.pdf).
+The improvement here is its measured integration with this candidate's matching
+leaf and persistent core reuse, not a new general SAT result.
+
+For a finite family of nonempty positive clauses, each member contains a minimal
+member. If the family is laminar (any two members are nested or disjoint), distinct
+minimal members must be disjoint: nesting would contradict minimality. Thus a
+laminar positive family with disjoint negative exclusion cliques reduces to the
+proved matching class. Laminarity is sufficient, not necessary: crossing redundant
+supersets also disappear if their minimal members are disjoint. Irreducible overlap
+does not disappear; the arbitrary-SAT indicator construction remains a barrier to
+claiming a universal bound from matching alone.
+
+### Discovery, checking and retained space
+
+Let L be literal occurrences, p positive clauses and w maximum positive width.
+Process positives in increasing length, with deterministic tie order. Store each
+retained clause under its least frequent literal in the current positive family.
+For an incoming clause D, inspect postings of literals in D and verify full
+containment for each candidate C. Every genuine C subset D must be reached because
+its indexed literal lies in D. The anchor is a filter, not a proof or semantic
+equivalence oracle. Previously retained clauses cannot be superseded by a shorter
+one later in this order. No quadratic all-pairs scan is needed on disjoint choices,
+but worst-case candidate count is still O(p^2), with O(p^2 w) membership probes.
+The pass also scans L, builds sets/frequencies, and sorts the positives; those
+costs, and variable-ID bit costs, are additional. The index and witnesses use
+O(L+p) words conservatively. These are algorithmic bounds, not a Lean runtime
+refinement or an assertion of constant-time Python hashing.
+
+For deletion pairs (D,C), checking scans O(sum(|D|+|C|)) witness payload, plus
+source canonicalization and core reconstruction. Cold UNSAT replay checks the
+source wrapper and the core's dependency DAG; it does not rerun discovery or
+matching search. If the core itself is a matching leaf, that is two checked
+nodes. SAT replay checks the full source model without loading the core.
+
+Once a core is acquired, each fresh source reducing to it needs one new source
+node and no new core search. This does **not** make expansion constant cost:
+normalization, full-source reduction, source verification, exact key lookup,
+serialization and SQL costs remain. Current retained logical space is
+O(B_core + sum_t (B_source_t + B_core_key + r_t log m_t)) for UNSAT wrappers,
+where r_t is deletion count and m_t source clause count; SAT wrappers store a
+source model instead of a core reference. Full keys, full source copies, SQL
+index/page overhead and the checked in-memory node dictionary remain. In a
+history whose source grows linearly, those per-version copies can yield quadratic
+cumulative source payload even though the logical core never changes. The final
+archive-size query also scans all stored rows. No delta-size update or total-RSS
+bound is claimed.
+
+The reuse condition is an exact normalized core, not merely the same answer.
+Adding a superset preserves that core when it has a retained subset witness and
+the other clauses stay unchanged. Deleting or weakening the supporting clause,
+altering conflicts, or adding an uncovered clause requires reconstruction and a
+new exact key. It may still happen to yield an old core, but that must be checked.
+The pass is rebuilt on every new source; it maintains no incremental index yet.
+
+`Residuals.lean` now proves positive-clause containment, preservation of all
+models by a covered retained core, and coverage under a witnessed extension.
+These statements do not verify the Python encoding, index, certificate checker
+or database. The source-level mathematical proof and the implementation's tests
+remain separate evidence.
+
+Matched static and growing-history results are preserved in the
+[positive-core experiment](../experiments/results/cnf-subsumption/README.md).
+The next practical target is to retain the containment index and source deltas,
+with source-linked witness invalidation, so unchanged structure is neither
+rediscovered nor copied in every version. This addresses the remaining cost on
+redundant expansions. It does not settle the separate arbitrary-overlap problem.

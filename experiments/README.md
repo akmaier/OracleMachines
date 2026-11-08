@@ -364,3 +364,25 @@ The output directory must not contain an earlier `growth.json`. Results from the
 live preserved archive are in [results/affine-growth](results/affine-growth/README.md).
 The current summary bound excludes retained histories; restart explicitly
 replays their original batches. All previous experiment files remain unchanged.
+
+## Source histories, affine retention and matched reconstruction
+
+The [history-retention record](results/history-retention/README.md) verifies the
+native source request-history theorem and the erased affine state, then compares
+resident expansion, full parent replay, per-request service restart and checked
+CDCL. The primary residency control uses the same deltas, archive and native
+coefficient solver. The CDCL comparison includes CNF conversion, unary encoding
+and certification, so it is not an isolated solver-algorithm comparison.
+
+```sh
+python3 experiments/compare_affine_growth.py --output /tmp/affine-comparison --repetitions 3
+python3 experiments/revalidate_affine_results.py --output /tmp/affine-adoption.json
+```
+
+All **72 runs / 1,296 decisions** complete correctly over six synthetic streams.
+At width 16 the resident stream is 2.30–2.85 times faster than full parent replay;
+the smallest repeated stream shows no gain. A scheduling pilot is retained but
+excluded from the reported timings. Per-run databases remain under `solver/.cache/`
+at the paths recorded in the results. Old result files are unchanged. Adoption
+revalidates all 268 old affine versions with only four resident versions; regression
+coverage also includes 4,101 appends and restart with only two resident versions.

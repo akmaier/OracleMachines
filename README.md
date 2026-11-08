@@ -627,3 +627,16 @@ See the [API and limits](solver/README.md#affine-growth),
 [archived validation](experiments/results/affine-growth/README.md).
 The checkpoint passes **184 tests** and the Lean audit of **3,485 declarations /
 1,708 theorem declarations**. It retains all prior results and 268 affine versions.
+
+The next checkpoint (`88f26a8`) composes the native source-CNF response contracts
+across arbitrary finite request histories, including rejected batches and layout
+resets. Earlier observations keep their event-specific source meaning; reused
+names are not assumed to denote the same formula after deletion/reset.
+
+Affine native histories now use erased proof data, so resident children do not
+keep runtime ancestor states reachable. The service bounds resident versions independently
+of archive length and replays old branches with eviction. A 4,101-append test grows
+and restarts with only two resident versions. All **190 tests pass**; Lean audits
+**3,625 declarations / 1,766 theorem declarations**. Complete Python/SQLite
+refinement, broader decompositions and total machine costs remain open.
+See the [history and retention record](experiments/results/history-retention/README.md).

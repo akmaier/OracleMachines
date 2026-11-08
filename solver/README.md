@@ -701,7 +701,7 @@ with height below 17. Initial full scanning and relation evaluation remain costs
 this count omits map operations, decoding, array comparisons and allocation.
 Warm queries and patches do not run this initial scan. No new timing claim follows.
 The native initial, query and patch APIs now have individual success theorems.
-Composition across a complete operation history and persistent replay remains open.
+Native request-history composition is now proved in `SourceHistory.lean`; complete Python/SQLite replay refinement remains open.
 
 ## Affine growth
 
@@ -748,17 +748,28 @@ Original equation batches live in content-addressed `affine_version` objects;
 versions remain. Restart or a new engine replays original equations, never saved
 answers or summaries. Warm reuse of a resident parent avoids replay. The
 `affine_updates` fields count replayed/registered versions, object reads and
-serialized/inserted bytes. Failed transactions retain earlier database rows;
-checks may leave extra immutable nodes in the bounded native store until restart.
+serialized/inserted bytes. Failed transactions retain earlier database rows. They mark residency uncertain;
+the next request resets only the affine native store and reconstructs checked state.
 The database, hashing, transport and Python replay remain tested trust boundaries.
 
-Engineering caps are widths 1..128, 4,096 equations per append and 4,096 resident
-versions including initialization. Oversized requests return errors. Native
-versions are not evicted automatically; restart clears the resident store and
-reconstructs the requested ancestry from the durable archive, subject to the same
-cap. Archive and request budgets also apply. The latest summary is bounded;
+Engineering caps are widths 1..128 and 4,096 equations per append. Oversized
+requests return errors. `native_affine_versions` configures simultaneous residency
+from 2 to 4,096 (default 256). The service evicts older resident versions before
+registering a new one, protecting its required parent. It can therefore replay
+histories longer than the resident cap. A 4,101-append history is tested with a
+two-version cap, including restart and historical branch queries. Archive and request budgets also apply. The latest summary is bounded;
 retaining all historical summaries, source batches and results is not constant
 space. Whole-history restart may cost the sum of prior append charges.
 
 Validation: `python3 -m unittest solver.test_affine_growth`.
 Recorded study: [affine growth evidence](../experiments/results/affine-growth/README.md).
+
+The native `Resident` stores original-history meaning as erased proof data, so
+its parent history does not remain reachable as runtime ancestor objects. Each
+native node still retains its current request and metadata as well as its summary.
+The archive stores all original batches. During cold replay, the Python planner
+retains O(T) identifiers/cycle-check entries and rereads one batch at a time.
+`affine_updates` now includes `evicted_versions`, `native_resets`,
+`resident_versions` and `resident_version_cap`; `storage` reports tracked affine
+residency separately from its configured cap. Query/transport deadlines still
+apply. Native-cap and tracked-version counts are not byte or RSS limits.

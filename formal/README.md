@@ -949,3 +949,40 @@ declarations**, without admits or added axioms. **184 tests pass**, including
 10 affine-growth tests. The mathematical histories have no fixed cap; the native
 interface currently limits width to 128, equations per batch to 4,096 and resident
 versions to 4,096. Exceeding a cap is an error, never an UNSAT result.
+
+## Native source histories and erased affine provenance
+
+`SourceHistory.lean` centralizes the source dispatcher actually executed by the
+JSON-lines worker. `handle_valid` proves exact dispatch and rollback on errors.
+`execute_valid` composes these contracts over arbitrary finite interleavings of
+initialization, compilation, definitions, deletion, initial binding, queries and
+patches. `trace_meaning` retains the entire `InitialResponse`/`PatchResponse`
+contract; `trace_query_semantics` connects query verdicts to the complete original
+CNF in the actual predecessor store. `earlier_event_retained` proves that adding
+requests preserves earlier observations and their certificates. Administrative
+functions return the existing invariant-carrying store types. No accepted-operation
+assumption is silently applied to failures.
+
+This closes native eventwise protocol composition. The worker uses `handle`,
+not the mathematical `execute` trace list, so it does not store past snapshots for
+proofs. A name reused after eviction or layout reset can have a different meaning;
+its event snapshot determines its interpretation. Cross-process content-addressed
+lineage, raw byte transport, serialized witnesses, Python and SQLite remain outside
+this theorem. It does not prove a journal of database operations.
+
+`AffineResident.lean` replaces the literal-history native `State` with `Resident`.
+Its exact history uses Mathlib `Erased`, retaining the original semantic witness
+in proofs while the compiled resident value contains only the coefficient summary.
+`Resident.appendRun_history`, `answer_exact`, `answer_false`, `appendRun_bound`
+and `summary_cells` preserve the earlier algebra and reference charges. Generated
+C inspection confirms the single runtime field and absence of ancestor-history
+construction. The ordinary reference `State` remains available unchanged.
+`AffineProtocol.dropNames_preserves` proves exact lookup preservation for names
+not removed. An already computed child needs no live ancestor name.
+
+The current complete build audits **3,625 declarations / 1,766 theorem
+declarations**, without admits or added axioms. **190 tests pass**, including 15
+affine tests and 36 source-update tests. A 4,101-append history and its restart
+fit a two-version native policy; all original equations remain durable. The native
+4,096-version cap bounds simultaneous residency, not history length. This is not
+a physical-memory or Python-policy refinement theorem.

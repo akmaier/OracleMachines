@@ -1435,3 +1435,97 @@ Resume with the general native history theorem or a matched affine cost study.
 Retain `experiments/results/affine-growth/` and all earlier evidence; do not overwrite
 older timing artifacts. The polynomial restricted step is now concrete and checked;
 unrestricted SAT still lacks the required compact-closure/construction invariant.
+
+## 2026-11-08: native histories, erased affine provenance and matched reuse
+
+Runtime checkpoint **`88f26a8`** addresses native source-history composition,
+bounded active affine retention, and the missing matched reuse comparison.
+Evidence: [history-retention](../experiments/results/history-retention/README.md).
+All older results and timing artifacts remain available.
+
+**Native source-CNF histories.** The worker now executes `SourceHistory.handle`.
+Its success contract retains the complete initial raw-CNF, current-root or exact
+patch response certificate, as appropriate. Errors leave the predecessor store
+unchanged, including failures after partial local construction. The finite-trace
+induction composes arbitrary definition, deletion, reset, compilation, binding,
+query and patch interleavings. Every successful query decides the complete
+original CNF of its root in that event's store. Earlier observations remain valid
+under continuation. This is eventwise semantics: a name deleted and reused can
+refer to a different formula. It does not prove immutable Python content-hash
+lineage across process generations, byte transport, serialized witness contents
+or SQLite behavior. The worker does not accumulate the mathematical trace.
+
+**Affine residency.** Inspection found that the earlier native `State` carried
+its entire original history as runtime data. Deleting ancestor map entries alone
+would not release those ancestors. `AffineResident` now retains original-history
+semantics through Mathlib `Erased`; generated C has only the summary as the
+resident state field. Current request JSON and node metadata remain additional
+runtime data. The summary and coefficient-charge proofs still hold.
+`dropNames_preserves` proves other native lookups unchanged after eviction.
+Python protects the required parent and evicts older resident nodes, with a
+configurable cap of 2..4,096 versions (default 256). It reconstructs evicted
+versions from original archived equations, reading one batch at a time. Failed
+transactions mark residency uncertain and trigger an affine-store reset before
+the next checked replay. The simultaneous native cap no longer caps history
+length: a regression appends 4,101 times, queries an evicted historical version,
+and restarts with only two residents. The replay plan/cycle check still uses
+O(T) identifiers; the durable history grows. A resident count is neither a byte
+bound nor a formal proof of the Python policy.
+
+**Validation and preservation.** All **190 tests** pass, including **15 affine /
+36 source-update** tests. Lean audits **3,625 declarations / 1,766 theorem
+declarations**, without admits or added axioms. All **355** earlier generic inputs
+pass revalidation/audit; five source versions pass adoption/restart. All **268**
+old affine versions pass source replay under a four-version cap, with positive
+and negative restart checks under a two-version cap. Every old row in **22 tables**
+and all **233** earlier experiment files remain intact. The live archive contains
+**9,230 results / 3,096 refutations / 70 source-state rows / 536 affine-state rows**.
+All 33 earlier manuscript proof blocks remain verbatim; one native-history proof
+is added.
+
+**Matched study.** Six fixed-width streams (2/8/16, repeated/novel equations), four
+modes and three sequential repetitions give **72 runs / 1,296 correct decisions**,
+including 72 negative decisions and no failed runs. Each mode receives the same
+original parity systems and retains its results. Resident and full-parent-replay
+modes share the delta input, archive and native algebra; restart and checked-CDCL
+modes charge their lifecycle/conversion costs. At width 16, the median full-replay
+times are **2.85 / 2.30** times the resident times. The smallest repeated stream
+shows no gain. Three repetitions do not establish significance for small
+differences or general workload performance. The CDCL pipeline uses a different
+representation and certification path, so its timings do not isolate solver
+algorithm speed. Independent full Gaussian elimination checks original-system
+answers; it is not a certified timed baseline. A pilot overlapping archive
+adoption is retained separately and excluded from the reported comparison.
+
+Remaining priorities, with the newly closed scopes distinguished:
+
+1. **Protocol and persistence refinement.** Connect affine raw JSON and native
+   named-store histories to the typed history theorem. Prove Python content-hash
+   lineage, retention/replay and SQLite correspondence, including failures and
+   process-generation changes. The general native source-CNF eventwise history
+   theorem is now available; it does not discharge these separate obligations.
+2. **Witnesses.** Prove serialized general-source witness contents. Add an affine
+   full-history witness route with retained elimination information and checked
+   back-substitution; charge the necessarily growing output and archive work.
+3. **Broader structure.** Extend supplied decompositions to certified separators
+   on trees or mixed CNF/XOR with supplied small backdoors. Charge recognition,
+   maintenance and conversion. Arbitrary older-block edits and worst-case `2^k`
+   backdoor branching remain outside the current affine append guarantee.
+4. **Complete costs.** Refine coefficient charges to actual field/index/list,
+   decoding, native-map and allocation costs. Include archive growth, failure,
+   replay planning, restarts and physical storage. The new eviction policy and
+   erased provenance remove a concrete lifetime problem; total resource bounds
+   and formal Python-policy correctness remain open.
+5. **Evaluation and selection.** Extend the matched study to growing widths,
+   adversarial mixes, realistic inputs and a timed complete Gaussian baseline.
+   Add cost-sensitive dispatch only with charged recognition/conversion and
+   comparable correctness obligations. Six synthetic streams do not show a
+   uniform benefit, broad CNF coverage or significance for small differences.
+6. **General relation/factor stores.** Prove their retention and equivalence-cache
+   invariants separately. The adjacent-block source invariant and compact affine
+   summaries do not establish compact closure for general representations.
+
+Resume with affine protocol/history refinement or checked witness reconstruction.
+Keep the matched and pilot evidence separate. There is still no compact-closure
+or efficient-acquisition invariant for unrestricted SAT; no conclusion about
+P versus NP follows from these restricted results.

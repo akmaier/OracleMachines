@@ -142,3 +142,7 @@ The output directory must not exist. `report.json` records the preceding commit
 and exact candidate/driver SHA-256 values. `tests.log` and `lean.log` retain the
 completed check outputs. Old compressed archives and production results were
 not rewritten.
+
+The manuscript adds Proposition 12.28 and the measured benefits and regressions.
+All 39 older proof blocks are preserved. Its 79-page PDF builds without warnings;
+the revised pages and bibliography were rendered and visually checked.

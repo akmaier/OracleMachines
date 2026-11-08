@@ -2249,6 +2249,34 @@ The prototype retains full source witnesses for SAT and independently checked Py
 
 The follow-up evaluates 39 inputs, with matched acquisition against the preceding portfolio on 36 and matching-only scaling on three larger inputs. Warm and cold replays give 153 decisions in total. At nine pigeons and eight holes, recognition reduces acquisition from 5,191 residuals to one Hall-certified residual and logical archive payload from 17,290,081 to 6,208 bytes. The latter includes the full formula and exact key, not only the Hall witness. Cold checking visits one certificate node instead of 5,191. Matching-only runs reach 49 pigeons and 48 holes with one residual, but the explicit input still grows and retained payload reaches 1,496,174 bytes. These counts demonstrate the family-specific improvement; they do not imply constant time or memory. All 104 earlier experimental archives remain readable and unchanged. The comparison is an ablation of this research candidate, not a competitive CDCL study, and physical peak memory has not been measured.
 
+\subsection{Redundant choices and reuse of an unchanged core}
+\label{sec:positive-core}
+
+Some positive overlaps can be removed before search. If a required positive clause $C$ is contained in $D$, satisfying $C$ already satisfies $D$. Deleting $D$ is the established subsumption rule \citep{eenbiere2005}. Let us apply it to the matching representation and then examine what remains to be paid for an expansion.
+
+\begin{proposition}[Minimal positive core]
+\label{prop:positive-core}
+Let $\mathcal C$ be a finite family of nonempty positive clauses, let $\mathcal M$ be its inclusion-minimal members, and let $G$ be any unchanged CNF. Then
+\[
+G\land\bigwedge_{C\in\mathcal C}\bigvee_{x\in C}x
+\quad\equiv\quad
+G\land\bigwedge_{C\in\mathcal M}\bigvee_{x\in C}x.
+\]
+If the members of $\mathcal M$ are pairwise disjoint and $G$ consists of complete negative exclusion cliques, Proposition~\ref{prop:matching-leaf} applies to this core. In particular, disjointness holds when $\mathcal C$ is laminar: any two members are nested or disjoint. Adding positive clauses that each contain a member of $\mathcal M$ leaves the minimal core unchanged.
+\end{proposition}
+
+\begin{proof}
+Every member of the finite family contains an inclusion-minimal member. Hence, an assignment satisfying all members of $\mathcal M$ also satisfies every member of $\mathcal C$. The reverse implication follows from $\mathcal M\subseteq\mathcal C$, and $G$ is unchanged. In a laminar family, two distinct minimal members cannot be nested, since the larger would not be minimal. They are therefore disjoint, giving the matching hypothesis when the negative constraints have the required form. Finally, every added clause contains an existing minimal member and cannot remove it from the family or make it nonminimal. Such an addition preserves the same minimal members and their models.
+\end{proof}
+
+The implementation processes positive clauses by increasing length. Each retained clause is indexed by one of its least frequent literals. A candidate superset must contain that literal, but the index alone does not justify deletion: the code checks full containment and records a retained source-clause witness. The resulting core receives its own exact normalized key. A negative source record refers to that core and the deletion witnesses. The checker verifies the witnesses and the negative child without repeating the containment search. Positive records instead carry a full source model. Existing certificates retain their original interpretation. The three additional Lean lemmas prove positive-clause implication, preservation of all models by a covered core, and coverage under a witnessed extension; they do not verify the Python program.
+
+Let $p$ denote the number of positive clauses, $w$ their maximum width, and $L$ the source's literal count. The discovery pass scans the source, prepares occurrence counts, and sorts the clauses. Its worst-case candidate count is $O(p^2)$, with $O(p^2w)$ containment probes, in addition to sorting, index and bit costs. Direct witness checking scans the sum of the deleted and supporting clause widths, together with source and core reconstruction. If the core has already been acquired, a fresh source reducing to it needs one new source record and no new core search. Cold negative replay checks that record and the core's dependency graph. Recognition, canonicalization, full-key lookup, verification, serialization and database work remain charged.
+
+This representation still stores each distinct source in full. For a fixed reused core, negative records also repeat its exact key and retain their deletion witnesses. Thus a history whose sources grow linearly can still accumulate quadratic source-copy payload. No update bound depending only on the added clause has been established for this implementation. Deleting or weakening a supporting clause, changing the negative constraints, or adding an uncovered clause requires fresh reduction and identity checking. Irreducible overlap remains subject to the arbitrary-SAT construction above; subsumption alone does not supply its missing polynomial bound.
+
+The matched comparison retains 39 static inputs and four nine-query histories, giving 450 decisions across acquisition, warm and cold phases. For a laminar nine-pigeon/eight-hole input, acquisition drops from 23 nodes and 201,735 logical bytes to two nodes and 17,538 bytes. In a history that adds eight redundant clauses with fresh variables to that matching core, total acquisition drops from 23,046 nodes to nine, and retained logical payload from 84,546,940 to 82,514 bytes. Every added source reuses the core without new matching search. The final cold negative replay checks two nodes instead of 5,359. All 179 earlier candidate archives reload unchanged. Yet, one seeded 12-variable case grows from 12 to 20 nodes and from 12,029 to 18,637 bytes: extra reduction records need not repay their costs. The full comparison retains these regressions. It establishes a useful restricted reuse pattern, with source copying and reduction policy as further costs to address.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 
@@ -2444,6 +2472,12 @@ Driscoll, J.~R., Sarnak, N., Sleator, D.~D., and Tarjan, R.~E. (1989).
 Making data structures persistent.
 \emph{Journal of Computer and System Sciences}, 38(1), 86--124.
 \href{https://doi.org/10.1016/0022-0000(89)90034-2}{doi:10.1016/0022-0000(89)90034-2}.
+
+\bibitem[E\'en and Biere(2005)]{eenbiere2005}
+E\'en, N. and Biere, A. (2005).
+Effective preprocessing in SAT through variable and clause elimination.
+\emph{SAT 2005}, LNCS 3569, 61--75.
+\url{https://www.cs.toronto.edu/~fbacchus/csc2512/Readings/EenBiere-SAT05.pdf}.
 
 \bibitem[E\'en and S\"orensson(2003)]{een2003extensible}
 E\'en, N., and S\"orensson, N. (2003).

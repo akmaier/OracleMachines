@@ -2176,3 +2176,13 @@ Subsumption is published preprocessing (Een and Biere, SAT 2005), not a new
 general SAT algorithm. Worst-case discovery still has O(p^2 w) containment probes
 plus source scanning, sorting, index and bit costs. No universal minimum-expansion
 or polynomial arbitrary-SAT bound follows from the successful restricted stream.
+
+Manuscript checkpoint: Proposition 12.28 gives the model-preserving minimal-core
+reduction, the laminar matching corollary and the witnessed-extension invariant.
+All 39 preceding proof blocks are unchanged; there are now 40 proof blocks and
+151 unique labels. The 79-page PDF builds without warnings or overfull/underfull
+boxes. Revised pages 71/72, adjoining page 73 and bibliography page 76 were
+rendered and visually inspected. All 86 new compressed snapshots decompress to
+their recorded hashes, and candidate/driver fingerprints match the report.
+Code, Lean, data and research documentation were committed and pushed in
+`1d3b2eb`; the manuscript and this final validation follow in a separate checkpoint.

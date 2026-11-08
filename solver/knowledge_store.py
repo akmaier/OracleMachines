@@ -64,11 +64,17 @@ class KnowledgeStore:
 
     def put(self, kind, value):
         raw = json.dumps(value, separators=(",", ":"), sort_keys=True).encode()
+        return self.put_raw(kind,raw)
+
+    def put_raw(self, kind, raw, *, packed=None, codec=None):
+        """Store canonical content under its original identity with an optional
+        lossless encoding. Alternative encoders must validate on every read."""
         if len(raw) > MAX_OBJECT:
             raise ValueError("Knowledge object exceeds the configured decoding limit")
         token = hashlib.sha256(kind.encode() + b"\0" + raw).hexdigest()
-        compressed = zlib.compress(raw, 1)
-        packed, codec = (compressed, 'zlib') if len(compressed) < len(raw) else (raw, 'raw')
+        if packed is None:
+            compressed = zlib.compress(raw, 1)
+            packed, codec = (compressed, 'zlib') if len(compressed) < len(raw) else (raw, 'raw')
         cursor = self.db.execute("INSERT OR IGNORE INTO knowledge_objects (id,kind,raw_bytes,payload,codec) VALUES (?,?,?,?,?)",
                                  (token, kind, len(raw), packed, codec))
         self.inserted_objects += cursor.rowcount
@@ -78,6 +84,9 @@ class KnowledgeStore:
         return token, len(raw), len(packed)
 
     def get(self, token, kind):
+        return json.loads(self.get_raw(token,kind))
+
+    def get_raw(self, token, kind):
         row = self.db.execute("SELECT kind,raw_bytes,payload,codec FROM knowledge_objects WHERE id=?", (token,)).fetchone()
         self.object_reads += 1
         if row is not None:self.read_packed_bytes += len(row[2])
@@ -92,11 +101,24 @@ class KnowledgeStore:
             raw = decoder.decompress(row[2], row[1] + 1)
             if len(raw) != row[1] or not decoder.eof or decoder.unused_data or decoder.unconsumed_tail:
                 raise ValueError("Invalid compressed knowledge object size")
+        elif row[3] == 'affine_batch_ref_v1' and kind == 'affine_version':
+            # The reference wrapper is deliberately small and uncompressed.
+            # Only raw/zlib batch objects are accepted; no recursive references.
+            if len(row[2])>1024:raise ValueError('Affine batch reference is too large')
+            link=json.loads(row[2])
+            if not isinstance(link,dict) or set(link)!={'width','base','batch'} or not isinstance(link['batch'],str):
+                raise ValueError('Invalid affine batch reference')
+            batch=json.loads(self.get_raw(link['batch'],'affine_batch'))
+            if not isinstance(batch,dict) or set(batch)!={'width','equations'} or batch['width']!=link['width']:
+                raise ValueError('Affine batch reference width differs')
+            raw=json.dumps(dict(width=link['width'],base=link['base'],equations=batch['equations']),
+                           separators=(',',':'),sort_keys=True).encode()
+            if len(raw)!=row[1]:raise ValueError('Affine batch reconstruction size differs')
         else:
             raise ValueError("Unknown knowledge object codec")
         if hashlib.sha256(kind.encode() + b"\0" + raw).hexdigest() != token:
             raise ValueError("Knowledge object integrity check failed")
-        return json.loads(raw)
+        return raw
 
     def restore(self, deadline):
         """Read one stable session snapshot; previous sessions remain archived."""

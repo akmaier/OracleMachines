@@ -398,7 +398,7 @@ class AffineGrowthTests(unittest.TestCase):
             self.assertFalse(s._request(dict(request,id='c'))['kernel_cache_hit'])
             s._request(dict(mode='affine_reset'))
             self.assertEqual(s._request(dict(mode='affine_stats')),
-                             dict(resident_versions=0,kernel_cache_entries=0,kernel_cache_slots=0))
+                             dict(resident_versions=0,kernel_cache_entries=0,kernel_cache_slots=0,prepared_batch_entries=0,deduplicate=True))
             for cap in (True,-1,4097,'1'):
                 with self.assertRaises(ValueError):PersistentSolver(Path(d)/'bad.db',affine_kernel_slots=cap)
 
@@ -425,3 +425,61 @@ class AffineGrowthTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'capacity'):s._request(dict(mode='affine_init',id='overflow',width=1))
             self.assertTrue(s._request(dict(mode='affine_query',root='0',summary=False))['answer'])
             self.assertTrue(s._request(dict(mode='affine_init',id='0',width=1))['answer'])
+
+    def test_normalized_kernels_reuse_across_multiplicities_without_changing_source(self):
+        rows=[equation(2,(2,),True),equation(2,(3,),False)]
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            root=s.affine_grow(2)
+            repeated=s.affine_grow(base=root['state'],equations=rows*40,summary=True)
+            compact=s.affine_grow(base=root['state'],equations=rows,summary=True)
+            self.assertNotEqual(repeated['state'],compact['state'])
+            self.assertEqual(repeated['input_rows'],80)
+            self.assertEqual(repeated['normalized_rows'],2)
+            self.assertTrue(compact['kernel_cache_hit'])
+            self.assertFalse(compact['batch_preparation_hit'])
+            for result,original in ((repeated,rows*40),(compact,rows)):
+                self.assertEqual(solutions(2,result['summary']),{(True,False)})
+                self.assertEqual(s.affine_growth.store.get(result['state'],'affine_version')['equations'],original)
+
+    def test_preparation_reuses_batch_when_boundary_changes_and_kernel_misses(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            root=s.affine_grow(1)
+            positive=s.affine_grow(base=root['state'],equations=[equation(1,(1,),True)])
+            negative=s.affine_grow(base=root['state'],equations=[equation(1,(1,),False)])
+            rows=[equation(1,(0,),True)]*40
+            a=s.affine_grow(base=positive['state'],equations=rows)
+            b=s.affine_grow(base=negative['state'],equations=rows)
+            self.assertTrue(a['answer']);self.assertFalse(b['answer'])
+            self.assertFalse(a['kernel_cache_hit']);self.assertFalse(b['kernel_cache_hit'])
+            self.assertTrue(b['batch_preparation_hit'])
+            self.assertEqual(b['normalization_input_cells'],0)
+            self.assertEqual(b['normalized_rows'],1)
+
+    def test_duplicate_removal_matches_uncompressed_full_frontiers(self):
+        rng=random.Random(2411)
+        with tempfile.TemporaryDirectory() as d:
+            with PersistentSolver(Path(d)/'raw.db',affine_deduplicate=False,affine_share_batches=False) as raw,PersistentSolver(Path(d)/'new.db') as new:
+                parents=[s.affine_grow(3) for s in (raw,new)]
+                versions=[(parents,set(itertools.product((False,True),repeat=3)))]
+                for _ in range(60):
+                    parents,old=rng.choice(versions)
+                    base=[equation(3,[i for i in range(6) if rng.getrandbits(1)],bool(rng.getrandbits(1)))
+                          for _ in range(rng.randrange(6))]
+                    rows=base*5;rng.shuffle(rows)
+                    expected=frontier(3,old,rows)
+                    results=[s.affine_grow(base=p['state'],equations=rows,summary=True) for s,p in zip((raw,new),parents)]
+                    self.assertEqual(results[0]['state'],results[1]['state'])
+                    for result in results:
+                        self.assertEqual(solutions(3,result['summary']),expected)
+                        self.assertEqual(result['answer'],bool(expected))
+                    self.assertEqual(results[0]['normalized_rows'],len(rows))
+                    self.assertLessEqual(results[1]['normalized_rows'],len(base))
+                    versions.append((results,expected))
+
+    def test_bad_normalization_configuration_is_atomic(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            s._request(dict(mode='affine_cache_config',slots=2,deduplicate=False))
+            before=s._request(dict(mode='affine_stats'))
+            for value in (0,1,'true',None):
+                with self.assertRaises(ValueError):s._request(dict(mode='affine_cache_config',slots=2,deduplicate=value))
+                self.assertEqual(s._request(dict(mode='affine_stats')),before)

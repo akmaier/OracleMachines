@@ -40,7 +40,7 @@ def main():
     for name,events in cases.items():
         width=int(name.split('-')[0]);cache=cache_dir/(name+'.sqlite3')
         states=[];records=[];exact_seen={};normalized_seen={}
-        with PersistentSolver(cache,native_affine_versions=4,affine_kernel_slots=0) as service:
+        with PersistentSolver(cache,native_affine_versions=4,affine_kernel_slots=0,affine_deduplicate=False,affine_share_batches=False) as service:
             initial=service.affine_grow(width,summary=True)
             for index,event in enumerate(events):
                 parent=initial if event['parent']<0 else states[event['parent']]

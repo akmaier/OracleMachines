@@ -1035,3 +1035,28 @@ This checkpoint passes **197 tests**, including 22 affine tests, and audits
 **3,938 declarations / 1,875 theorem declarations** without admits or added axioms.
 The cache's executable slot policy is checked with forced collisions and bounded
 residency; no new whole-process memory or Python persistence theorem is claimed.
+
+## Certified duplicate-free affine calculations
+
+`AffineNormalize.lean` uses a hash set with lawful structural row equality.
+`uniqueRowsAux_mem`, `uniqueRowsAux_length`, `uniqueRowsAux_nodup` and
+`uniqueRows_exact` prove that the executable procedure removes duplicate
+occurrences without losing or adding any boundary solution. `PreparedRows`
+retains this semantic equivalence and the original-row count bound.
+
+`Kernel` now carries semantic exactness and compactness. `compileKernel_summary`
+and `compileKernel_charge` still identify the unnormalized constructor's exact
+executed values. `Kernel.restoreOriginal` transports a normalized kernel back to
+the original batch's semantics and budget; `restoreOriginal_charge` confirms that
+this introduces no second coefficient calculation. `Kernel.attach_history`
+therefore still appends the actual original rows, with their order and multiplicity.
+
+The preparation cache checks complete typed original batches and reuses their
+certified normalized lists independently of parent summaries. The transition
+cache checks the parent summary and reduced batch. Configuration preserves source
+nodes, clears both caches and selects normalization; the chronological source
+proof continues through the executed handler. Preparation and normalization
+payload counters are partial ledgers; hash-set collision/resize costs and actual
+allocation are not yet given a complete machine bound. Native request JSON remains
+resident per version. The Python archive codec and admission policy remain tested
+boundaries, not new Lean persistence theorems.

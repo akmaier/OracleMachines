@@ -817,3 +817,57 @@ the slot cap is not a byte/RSS bound. The cache is exact and process-local: row
 reordering, equivalent bases, variable renaming and cold durable certificates
 are not recognized. Run `experiments/compare_affine_kernels.py --output NEW_DIR`
 for a same-binary disabled/enabled comparison with preserved run databases.
+
+## Shared affine batches and duplicate removal
+
+`affine_deduplicate=True` (default) removes exact duplicate typed rows before
+elimination. Lean proves preservation of every boundary assignment and the row
+count bound. The original history retains all rows in their original order.
+The kernel key uses the reduced ordered batch, so histories differing only in
+redundant occurrences can share a calculation when the first-occurrence order
+agrees. This is not full row-space or permutation canonicalization.
+
+A separate native preparation cache shares the original typed batch and its
+certified reduced list across parent summaries. Each of the two native caches
+has `affine_kernel_slots` direct-mapped slots; zero disables both caches. Hashes
+select candidates; width and complete typed rows are checked on hits. Prepared
+lists are shared with kernel entries, but resident request JSON and source history
+records remain separate. Reset, configuration and process restart clear both
+native caches. `affine_deduplicate=False` selects the earlier exact-input path.
+
+Per-request `affine_updates` adds `input_rows`, `normalized_rows`,
+`batch_preparation_hits`, `preparation_key_cells`,
+`preparation_compare_cell_bound` and `normalization_input_cells`. The final field
+counts coefficient payload submitted to duplicate removal, **not hash operations
+or instructions**. Hash-set probes, insertions, resizing and collision work are
+additional. `uncached_reference_cell_charge` now describes the uncached
+calculation on the selected reduced batch; the uncompressed counterfactual is
+measured with normalization disabled. We never run a second elimination merely
+to populate that counter. The earlier original-row budget still bounds the result.
+Native reports group preparation fields under `batch_preparation`; the Python API
+exposes them alongside the other construction metadata.
+
+`affine_share_batches=True` (default) enables adaptive archive sharing. After a
+batch recurs under another version identity, it is eligible when replacing its
+embedded payload with a reference saves at least 128 compressed payload bytes.
+Candidates are bounded to 256 digests; small and one-off batches stay inline.
+This admission heuristic does not guarantee database-page or elapsed-time savings.
+The first shared occurrence also pays for storing the batch object. Once stored,
+a batch can be found after restart. Original ordered batch objects are reusable
+across engine namespaces; accepted verdicts still require native checking.
+
+The `affine_batch_ref_v1` codec is lossless: a version wrapper contains its parent,
+width and a reference to an immutable `affine_batch`. Reading reconstructs the
+original canonical version JSON and checks its length and original content hash.
+Version IDs therefore agree with the inline representation. Recursive references,
+width mismatches, corruption and missing objects are rejected. Existing rows are
+never rewritten; retries do not create unnecessary shared objects. All inserts
+participate in the enclosing archive transaction. Older clients reject this new
+codec if asked to read a shared version; all pre-existing rows retain their old
+encoding. Sharing can be disabled for new writes while reading shared versions.
+
+`batch_admissions`, `batch_references` and `inline_versions` count archive-policy
+work when sharing is enabled, excluding initial empty histories and already
+stored versions. They are separate from actual inserted-object/byte counters.
+`experiments/compare_affine_batches.py --output NEW_DIR` compares baseline,
+normalization only, sharing only and their combination on identical histories.

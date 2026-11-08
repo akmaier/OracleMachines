@@ -35,7 +35,8 @@ def worker(config,path):
     for event in events:assert flattened_sat(width,event['batches'])==event['expected']
     began=time.perf_counter_ns()
     service=PersistentSolver(cache,reuse_exact=False,native_affine_versions=4,
-                             affine_kernel_slots=64 if config['mode']=='cached' else 0,query_timeout=60)
+                             affine_kernel_slots=64 if config['mode']=='cached' else 0,query_timeout=60,
+                             affine_deduplicate=False,affine_share_batches=False)
     setup=time.perf_counter_ns()-began
     states=[];records=[];totals=dict.fromkeys(METRICS,0)
     try:

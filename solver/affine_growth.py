@@ -7,7 +7,7 @@ replay certificate: restart replays original equation batches from the archive.
 from copy import deepcopy
 from collections import OrderedDict
 import time
-from solver.knowledge_store import KnowledgeStore
+from solver.affine_archive import AffineArchive
 
 
 class AffineGrowth:
@@ -20,7 +20,7 @@ class AffineGrowth:
 
     def __init__(self,service):
         self.service=service
-        self.store=KnowledgeStore(service.db,service.engine_id)
+        self.store=AffineArchive(service.db,service.engine_id,service.affine_share_batches)
         self.worker=None
         self.verified=OrderedDict()
         self.dirty=False
@@ -28,9 +28,12 @@ class AffineGrowth:
         self.native_resets=0
         self.cache_worker=None
         self.cache_slots=None
+        self.cache_deduplicate=None
         self.kernel_totals=dict(kernel_hits=0,kernel_misses=0,kernel_evictions=0,
             kernel_key_cells=0,kernel_compare_cell_bound=0,
-            executed_reference_cells=0,uncached_reference_cells=0)
+            executed_reference_cells=0,uncached_reference_cells=0,
+            input_rows=0,normalized_rows=0,batch_preparation_hits=0,
+            preparation_key_cells=0,preparation_compare_cell_bound=0,normalization_input_cells=0)
 
     def invalidate(self):
         # A failed transaction may leave newly checked native nodes. Reset on
@@ -38,14 +41,17 @@ class AffineGrowth:
         self.verified.clear()
         self.dirty=True
         self.worker=self.service.process
+        self.store.reset_candidates()
 
     def ensure(self,token):
         if self.worker is not self.service.process:
             self.verified.clear();self.worker=self.service.process;self.dirty=False
-        if self.service.process is None or self.cache_worker is not self.service.process or self.cache_slots!=self.service.affine_kernel_slots:
-            self.service._request(dict(mode='affine_cache_config',slots=self.service.affine_kernel_slots))
+        if self.service.process is None or self.cache_worker is not self.service.process or self.cache_slots!=self.service.affine_kernel_slots or self.cache_deduplicate!=self.service.affine_deduplicate:
+            self.service._request(dict(mode='affine_cache_config',slots=self.service.affine_kernel_slots,
+                                       deduplicate=self.service.affine_deduplicate))
             self.cache_worker=self.service.process
             self.cache_slots=self.service.affine_kernel_slots
+            self.cache_deduplicate=self.service.affine_deduplicate
             self.worker=self.service.process
         if self.dirty:
             if self.service.process is not None:
@@ -90,6 +96,10 @@ class AffineGrowth:
                     self.kernel_totals[field]+=result[field]
                 self.kernel_totals['executed_reference_cells']+=result['reference_cell_charge']
                 self.kernel_totals['uncached_reference_cells']+=result['uncached_reference_cell_charge']
+                for field in ('input_rows','normalized_rows','preparation_key_cells',
+                              'preparation_compare_cell_bound','normalization_input_cells'):
+                    self.kernel_totals[field]+=result['batch_preparation'][field]
+                self.kernel_totals['batch_preparation_hits']+=int(result['batch_preparation']['batch_preparation_hit'])
             self.verified[name]=None
             self.worker=self.service.process
         self.verified.move_to_end(token)
@@ -124,7 +134,8 @@ class AffineGrowth:
         old_evictions,old_resets=self.evicted_versions,self.native_resets
         old_kernel=dict(self.kernel_totals)
         before={field:getattr(self.store,field) for field in
-                ('inserted_objects','serialized_bytes','inserted_raw_bytes','inserted_packed_bytes','object_reads','read_packed_bytes')}
+                ('inserted_objects','serialized_bytes','inserted_raw_bytes','inserted_packed_bytes','object_reads','read_packed_bytes',
+                 'batch_admissions','batch_references','inline_versions')}
         try:
             with self.service.db:
                 if base is None:
@@ -143,6 +154,7 @@ class AffineGrowth:
                     state=self.store.put('affine_version',dict(width=width,base=base,equations=deepcopy(equations)))[0]
                     registered=self.ensure(state)
                 result=self.service._request(dict(mode='affine_query',root=state,summary=summary))
+                result.update(result.pop('batch_preparation'))
                 evidence=self.store.put('affine_result',dict(state=state,result=result))[0]
                 self.service.db.execute('INSERT OR IGNORE INTO affine_states VALUES (?,?,?,?,?,?)',
                     (self.service.engine_id,state,evidence,int(result['answer']),result['steps'],time.time_ns()))

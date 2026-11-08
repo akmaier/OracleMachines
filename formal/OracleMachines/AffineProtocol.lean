@@ -24,12 +24,18 @@ structure Node where
   keyCells : Nat := 0
   comparisonCells : Nat := 0
   kernelEvicted : Bool := false
+  inputRows : Nat := 0
+  normalizedRows : Nat := 0
+  preparationHit : Bool := false
+  preparationCells : Nat := 0
+  preparationCompareCells : Nat := 0
+  normalizationCells : Nat := 0
 
 structure Store where
   nodes : Std.HashMap String Node := {}
   kernels : KernelCache := {}
 
-def reset (store : Store) : Store := { kernels := {slots := store.kernels.slots} }
+def reset (store : Store) : Store := { kernels := {slots := store.kernels.slots,deduplicate := store.kernels.deduplicate} }
 
 def parseRow (n : Nat) (body : Json) : Except String (Row n) := do
   let coefficients ← body.getObjValAs? (Array Bool) "coefficients"
@@ -129,14 +135,18 @@ def report (node : Node) (includeSummary : Bool) : Json := Json.mkObj
    ("uncached_reference_cell_charge",toJson node.uncachedCharge),
    ("kernel_cache_hit",toJson node.cacheHit),("kernel_key_cells",toJson node.keyCells),
    ("kernel_compare_cell_bound",toJson node.comparisonCells),("kernel_evicted",toJson node.kernelEvicted),
+   ("batch_preparation",Json.mkObj [("input_rows",toJson node.inputRows),("normalized_rows",toJson node.normalizedRows),
+   ("batch_preparation_hit",toJson node.preparationHit),
+   ("preparation_key_cells",toJson node.preparationCells),("preparation_compare_cell_bound",toJson node.preparationCompareCells),
+   ("normalization_input_cells",toJson node.normalizationCells)]),
    ("summary",if includeSummary then toJson (node.state.summary.map rowJson) else Json.null)]
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 1600000 in
 theorem report_answer (node : Node) (includeSummary : Bool) :
     (report node includeSummary).getObjValAs? Bool "answer" = .ok node.answer := by
   cases answer : node.answer <;> simp only [report,answer] <;> rfl
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 1600000 in
 theorem report_charge (node : Node) (includeSummary : Bool) :
     (report node includeSummary).getObjValAs? Nat "reference_cell_charge" = .ok node.charge := by
   rfl
@@ -155,7 +165,7 @@ theorem report_semantics (node : Node) (includeSummary : Bool) :
 def initialNode (width : Nat) (request : Json) : Node :=
   let state := residentInitial width
   Node.mk width state 0 (by rw [residentInitial_history]; rfl)
-    state.answer rfl request 0 0 (by omega) 0 false 0 0 false
+    state.answer rfl request 0 0 (by omega) 0 false 0 0 false 0 0 false 0 0 0
 
 def appendNode (previous : Node) (rows : List (Row (previous.width+previous.width)))
     (request : Json) (used : KernelUse previous.state.summary rows) : Node :=
@@ -165,6 +175,7 @@ def appendNode (previous : Node) (rows : List (Row (previous.width+previous.widt
     used.kernel.answer used.kernel.answer_exact request (appendBudget previous.width rows.length)
     used.executedCharge (used.executed_bound previous.state.compact)
     used.kernel.charge used.hit used.keyCells used.comparisonCells used.evicted
+    used.inputRows used.normalizedRows used.preparationHit used.preparationCells used.preparationCompareCells used.normalizationCells
 
 theorem initialNode_history (width : Nat) (request : Json) :
     (initialNode width request).state.history = .empty := residentInitial_history width
@@ -353,18 +364,22 @@ theorem drop_success (store next : Store) (request reply : Json)
     simpa only [same] using certified.property
 
 def stats (store : Store) : Json := Json.mkObj [("resident_versions",toJson store.nodes.size),
-  ("kernel_cache_entries",toJson store.kernels.entries.size),("kernel_cache_slots",toJson store.kernels.slots)]
+  ("kernel_cache_entries",toJson store.kernels.entries.size),("kernel_cache_slots",toJson store.kernels.slots),
+  ("prepared_batch_entries",toJson store.kernels.prepared.size),("deduplicate",toJson store.kernels.deduplicate)]
 
 def ConfigResponse (store next : Store) (request : Json) : Prop :=
-  ∃ slots, request.getObjValAs? Nat "slots" = .ok slots ∧ slots ≤ 4096 ∧
-    next.nodes = store.nodes ∧ next.kernels = {slots := slots}
+  ∃ slots deduplicate, request.getObjValAs? Nat "slots" = .ok slots ∧ slots ≤ 4096 ∧
+    next.nodes = store.nodes ∧ next.kernels = {slots := slots,deduplicate := deduplicate}
 
 def configureChecked (store : Store) (request : Json) :
     Except String {result : Store × Json // ConfigResponse store result.1 request} := do
   let slots ← readField Nat request "slots"
+  let deduplicate ← match request.getObjVal? "deduplicate" with
+    | .error _ => pure true
+    | .ok value => (fromJson? value : Except String Bool)
   if capacity : slots.value ≤ 4096 then
-    let next := {store with kernels := {slots := slots.value}}
-    return ⟨(next,stats next),slots.value,slots.exact,capacity,rfl,rfl⟩
+    let next := {store with kernels := {slots := slots.value,deduplicate := deduplicate}}
+    return ⟨(next,stats next),slots.value,deduplicate,slots.exact,capacity,rfl,rfl⟩
   else throw "Affine kernel cache exceeds capacity"
 
 def configure (store : Store) (request : Json) : Except String (Store × Json) :=

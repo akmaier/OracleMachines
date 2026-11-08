@@ -188,7 +188,7 @@ theorem meaning_sourced (past : List Json) (store next : Store) (request reply :
     rw [meaning.1] at found
     simp [OracleMachines.Affine.reset] at found
   | config =>
-    obtain ⟨slots,field,capacity,unchanged,cleared⟩ := meaning
+    obtain ⟨slots,deduplicate,field,capacity,unchanged,cleared⟩ := meaning
     intro name node found
     exact .keep (sourced name node (unchanged ▸ found))
   | drop =>

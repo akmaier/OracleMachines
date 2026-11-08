@@ -208,3 +208,98 @@ The next practical target is to retain the containment index and source deltas,
 with source-linked witness invalidation, so unchanged structure is neither
 rediscovered nor copied in every version. This addresses the remaining cost on
 redundant expansions. It does not settle the separate arbitrary-overlap problem.
+
+## Delta histories avoid repeating the unchanged source
+
+`experiments/cnf_positive_history.py` adds an explicit prepared-state interface.
+It solves a base CNF once, checks its source-to-residual binding, and builds an
+index over its positive clauses. A version names that base and an immutable
+parent/delta sequence. `append(parent, D)` accepts a nonempty positive clause
+only after finding and checking a base clause C contained in D. It stores D,
+the source-clause witness index, and integer parent/base references. Each version
+denotes the original base followed by exactly its stored additions, including
+duplicates and input literal order. Full source and full residual keys are not
+copied into every version. The old residual table and certificate meanings are
+unchanged; all new records use separate versioned tables.
+
+The invariant is equality of models with the fixed base, not merely equality
+of SAT answers. Every positive addition follows from a base clause, and all
+other clauses are unchanged. A SAT base model satisfies every addition; variables
+absent from the base can remain false. An UNSAT base remains UNSAT. The Lean
+theorem `positive_history_models` proves the corresponding positive conjunction
+invariant for an entire list of covered additions; unchanged background clauses
+can be conjoined on both sides. This does not verify Python, SQL, or runtime.
+
+### Recognition and invalidation
+
+The index uses one least-frequent base literal per positive base clause. A
+proposed D probes postings for its literals and checks full containment. The
+independent checker verifies the recorded witness against the fixed base. A
+successful warm append neither rescans the source nor rebuilds the index. The
+parent must already belong to a valid history; an arbitrary supplied full CNF
+cannot acquire this guarantee from a version number alone.
+
+Uncovered positive additions raise `UnsupportedExpansion`, supplying no verdict
+for that edit. The comparison driver explicitly materializes the parent source,
+appends the new clause and acquires a fresh base by ordinary solving. Negative
+additions, deletions, changed clauses or variable reinterpretation also require a
+new base; this append API cannot express them. Older roots, branches and proofs
+remain unchanged. Repeating the same parent and clause reuses its existing
+version; appending an identical clause to a later parent records a new event.
+
+IDs are local to one append-only archive and name checked records, not globally
+canonical formulas. They are neither portable hashes nor authenticated external
+identities. The prototype assumes the archive is not mutated outside its API
+after a record has entered the checked memory cache. Cold validation rejects
+cycles, cross-base parents, missing rows, unsupported operations and invalid
+source/certificate bindings. This is a single-writer research interface, not a
+new production trust or concurrency guarantee.
+
+### Expansion, cold checking and storage bounds
+
+Let the acquired base have p positive clauses, maximum positive width w, source
+bit length B0, and K0 bits of residual records retained by base acquisition.
+For a delta of d literal
+occurrences, let c_D be the number of indexed candidates inspected (at most p).
+Discovery builds the delta membership set, sorts its distinct literals, and
+performs at most c_D w containment probes. The checker additionally reads the
+delta and its selected witness. Serialization is proportional to the delta's
+encoded length plus metadata. SQL index lookup/insertion and integer reference
+bit costs depend on archive size; no constant-time database or Python hashing
+assumption is part of a formal bound. With a checked parent and cached base,
+there is no term for scanning all previous source clauses or re-solving the
+base. Base preparation and index construction remain fully charged once per base.
+
+For T additions over a fixed base, additional retained payload beyond a
+preexisting archive is O(B0 + K0 + sum_t B_delta_t + T log(N+T+m0+1)) bits
+conservatively, where m0 is the base clause count, N bounds preexisting record
+counts and integer identifiers,
+and metadata includes parent/base/witness IDs and record
+framing. Fixed format strings contribute O(T). The resident history cache and
+index retain the same records without materialized prefixes; Python object and
+SQLite page/index overhead still matter. This avoids sum_t B_source_t full
+prefix copies for this restricted update language, not for arbitrary edits.
+The exact old residual-key representation is still used inside the base proof.
+
+Cold query validates the needed base proof, constructs its index, and checks
+every ancestor delta on that version's path. Its work grows with that path's
+total payload and SQL lookups. Warm queries use checked version metadata. No
+constant-cost restart is claimed. Explicit `materialize` assembles one full
+source using immutable clause references and traverses the path; serializing or
+independently checking that output still incurs its full payload cost. Exporting
+a SAT witness copies the base assignment, with omitted variables false. Optional
+archive-size statistics scan stored rows and are reported separately from append.
+
+Two limits are deliberately tested in the
+[history comparison](../experiments/results/cnf-positive-history/README.md).
+Repeated identical clauses can be cheaper for the old canonical full-source
+cache, while this exact event history retains each occurrence. Frequently novel
+constraints force fresh bases, retain more setup metadata, and lose the fixed-base
+storage guarantee. A favorable redundant stream therefore establishes neither
+minimum work on every input nor a uniformly polynomial arbitrary-SAT solver.
+
+The current path uses the same positive-subset protocol for SAT and UNSAT bases.
+A checked UNSAT base also permits arbitrary well-formed conjunctive additions by
+monotonicity, without a positive subset witness. That simpler negative-only
+extension is not enabled here; it is a further opportunity to avoid unnecessary
+recognition, with its distinct certificate rule and source-binding conditions.

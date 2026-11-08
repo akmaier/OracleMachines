@@ -19,6 +19,12 @@ histories. It retains repeated, novel, laminar and irreducibly overlapping cases
 including preprocessing overhead, source-copy costs and cold verification.
 Every previously retained candidate archive is checked without changing its rows.
 
+The [delta-history comparison](results/cnf-positive-history/README.md) retains
+4,848 decisions over 24 histories, with fixed-base positive additions stored as
+checked source deltas. It measures smaller retained prefixes, cold replay and
+full reconstruction, alongside losses on repeated events and new constraints.
+All 265 earlier candidate archives replay with unchanged residual rows.
+
 ## Expanded public and chronological study
 
 The [new study](results/expanded/README.md) covers 28 public SATLIB instances

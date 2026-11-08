@@ -41,6 +41,13 @@ across growing sources. Laminar choices reduce to disjoint minimal choices;
 irreducible overlap remains open. The source copies and recognition work are
 still charged, even when no new core search is needed.
 
+The [delta-history comparison](experiments/results/cnf-positive-history/README.md)
+now stores a fixed base once and keeps witnessed positive additions as parent
+references and clause deltas. At 16 holes and 128 redundant additions, logical
+storage falls from 10,957,771 to 118,668 bytes. Warm append avoids full-source
+rediscovery; cold replay, novel constraints and repeated-event losses remain
+explicit in the comparison.
+
 The current draft is **Bounded-Domain SAT, Compiled Knowledge, and Amortized
 Reasoning: A perspective on resource accounting for learned reasoning**.
 

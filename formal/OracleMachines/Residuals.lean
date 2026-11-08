@@ -115,4 +115,19 @@ theorem positive_core_extension (source core : List (List Nat)) (added : List Na
     exact witness
   · exact covered c h
 
+/-- A whole append-only history of covered positive clauses preserves every
+base model. An unchanged background constraint can be conjoined on both sides.
+This is a semantic invariant, not a proof of the SQLite history implementation. -/
+theorem positive_history_models (base additions : List (List Nat)) (v : Nat → Bool)
+    (covered : ∀ c ∈ additions, ∃ d ∈ base, d ⊆ c) :
+    (∀ c ∈ base ++ additions, PositiveClauseHolds c v) ↔
+      (∀ c ∈ base, PositiveClauseHolds c v) := by
+  apply positive_core_models (base ++ additions) base v
+  · intro c hc
+    exact List.mem_append_left additions hc
+  · intro c hc
+    rcases List.mem_append.mp hc with h | h
+    · exact ⟨c, h, fun _ hi => hi⟩
+    · exact covered c h
+
 end OracleMachines.SAT

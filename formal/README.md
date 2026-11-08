@@ -77,7 +77,10 @@ The positive-clause follow-up adds `positive_clause_subsumption`,
 its positive superset, a covered retained core preserves every model, and a fresh
 subset witness preserves coverage under an added clause. These use unsigned
 clauses; they do not assert a refinement of the Python signed-literal encoding.
-The latest audit includes 4,066 declarations / 1,928 theorem declarations.
+`positive_history_models` extends this invariant to a whole list of covered
+additions to a fixed base. It supports the semantics of the separate Python
+delta-history prototype without verifying its SQL representation or runtime.
+The latest audit includes 4,067 declarations / 1,929 theorem declarations.
 
 The follow-up adds two independently scoped modules. `CompactExpansion.lean`
 stores a unary coverage cap of `n` cells, constructs it in `n` allocation steps,

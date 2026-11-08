@@ -2186,3 +2186,52 @@ rendered and visually inspected. All 86 new compressed snapshots decompress to
 their recorded hashes, and candidate/driver fingerprints match the report.
 Code, Lean, data and research documentation were committed and pushed in
 `1d3b2eb`; the manuscript and this final validation follow in a separate checkpoint.
+
+
+## 2026-11-08: persistent witnessed deltas remove repeated source copies
+
+Implemented `experiments/cnf_positive_history.py`, a separate prepared-state
+interface that stores a solved base once, retains its positive-clause index,
+and appends clause deltas with checked subset witnesses and integer parent/base
+references. The exact base-plus-delta source can be reconstructed on demand.
+Warm append avoids full-source normalization, index reconstruction, full core-key
+copying and solver expansion. Parent versions are archive-local checked handles;
+they do not identify arbitrary externally supplied full CNFs. Unsupported edits
+require a newly acquired base, while older versions and results remain immutable.
+
+[The matched comparison](../experiments/results/cnf-positive-history/README.md)
+preserves 24 histories / 4,848 decisions / 48 compressed archives. At 16 holes
+and 128 redundant additions, retained logical payload drops from 10,957,771 to
+118,668 bytes and SQLite size from 15,130,624 to 237,568 bytes. At four holes and
+512 additions, logical payload drops from 6,034,220 to 45,043 bytes. The last
+append reads its new clause, performs four containment probes, writes one small
+delta and invokes no residual-solver operation. All 265 preceding candidate
+archives replay with unchanged row digests and no new expansions.
+
+All 230 Python tests pass, including exact reconstructed sources, SAT/UNSAT
+witness behavior, sparse variable names, forks, duplicate operations, changed
+constraints, cold corruption checks and a 1,200-step iterative cold replay.
+Lean proves `positive_history_models`; its audit passes 4,067 declarations /
+1,929 theorem declarations. This semantic proof does not verify the Python
+implementation, its SQL identity protocol or its machine costs. The new API is
+separate from the production solver, whose result archive was not targeted.
+
+**Remaining costs and preserved failures:** cold query validates the base and
+all required ancestor deltas; the 512-addition history checks 513 records. Full
+source export remains charged, and novel constraints materialize and solve a
+fresh base. Thirty-two new units grow logical storage from the old interface's
+30,657 bytes to 57,756. Repeating one identical clause on successive parents uses
+11,742 bytes versus 1,410 after old CNF normalization; repeating the identical
+parent/operation reuses a version but still pays table overhead. The mixed
+history also loses slightly. These cases remain in the archived comparison.
+SAT timings expose the different witness-output interfaces; the old solver
+returns a model on every call, while the history API exports it separately.
+
+**Next concrete reuse patterns:** compress repeated event runs or separate
+semantic no-op versions from exact event provenance; share unchanged source
+structure when a new base is required; and consider the simpler monotone rule
+for adding clauses to an already checked UNSAT base. The current uniform
+positive-subset protocol does not exploit that negative-only shortcut. The
+earlier subsumption policy regressions, cold-validation cost and arbitrary
+irreducible positive overlap remain open. None of these measurements proves
+minimum expansion work for every case or polynomial acquisition for all SAT.

@@ -3057,3 +3057,12 @@ unit-conflict probing on binary-rich conditioned residuals, using checked
 refutations to justify forced values. Charge probes even when they consume no
 branching depth, retain failures, and compare against the existing policies.
 Repeated recognition is a supporting cost, not a reason to omit validation.
+
+Implementation/evidence checkpoint `041303e` is pushed. Manuscript Section 12.49
+states and proves the exact existential relation for a fused branch, records the
+matched savings and regressions, and separates representation savings from new
+structural coverage. All 48 earlier proof blocks remain intact (49 total; 173
+unique labels). The 96-page PDF builds without warnings or box errors; pages
+87--89 were visually inspected. The next run should start with the bounded
+unit-conflict probing opportunity above, retaining the fused and unfused archives
+as baselines rather than repeating the completed contraction experiment.

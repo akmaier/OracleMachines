@@ -2567,6 +2567,25 @@ For a normalized nonconstant node with $v$ variables and $L$ literal occurrences
 
 The next discovery target is now better isolated. The new random 3-CNF group accounts for 3.26227 of 4.62418 seconds of combined discovery while retaining 38 misses. Profiling its failed conditioning alternatives and comparing structure-aware choices under matched work budgets is more informative than only increasing depth. Checked decision integration remains a separate opportunity: the ordinary solver still solves the original source after discovery. Native affine boundaries and avoiding repeated scans remain supporting gaps. None of these observations supplies a uniformly efficient partition of every CNF.
 
+\subsection{Conditioning can improve coverage while reducing structural reuse}
+\label{sec:conditioning-reuse-tradeoff}
+
+The next experiment tests that conditioning opportunity. A profile of the 48 retained random 3-CNFs, using unit simplification and in-memory SQLite, attributes 1.70 seconds cumulatively to normalization, 2.83 seconds to whole profiles and 0.57 seconds to unit propagation. Checking includes several of these operations, so the cumulative times must not be added. The diagnostic points to repeated residual acquisition and validation as the main cost. Its instrumented timings are separate from the subsequent comparison.
+
+We test an optional branching policy based on occurrences in short clauses. Such ideas are established in MOMS and unit-propagation heuristics; see \citet{li1997up}. Our variant counts positive and negative occurrences $p_v,n_v$ in clauses of minimum current width, together with total occurrences $f_v$. Variables are ordered by descending lexicographic score $(p_vn_v,p_v+n_v,f_v)$, then ascending identifier. The intent is to expose useful consequences in both branches. The rule does not perform speculative propagation or claim to reproduce Satz. Counting and sorting take $O(L+v\log v)$ comparison and word operations and $O(v)$ count entries per ranking. Count products and identifiers carry additional bit costs. The checker recomputes the ranking, and a versioned policy identity separates its records from earlier frequency traces.
+
+Only the candidate order changes. Both Boolean restrictions, exact source bindings, independent components and all failed alternatives remain checked. The existing conditioning identity therefore still gives exact semantic coverage, with explicit unresolved leaves. No new tractable family or Lean refinement follows. Equal depth and candidate limits also do not imply equal realized work: early stopping and residual sharing depend on the choices.
+
+The rule was frozen after the 48-case development pilot. The full comparison retains all 841 earlier sources and adds 72 fresh formulae plus 36 renaming, sign-flip and unit-edit controls. Fresh formulae include 48 random 3-CNFs, 16 each on 12, 20 and 32 variables, and 24 mixed-width CNFs. The 36 transfer controls are not independent holdout data. No generator label enters the policy. Beyond the 512 exhaustive tiny sources, cap-four unit-only coverage rises from 322/437 with frequency ordering to 330/437 with the new rule. Three gains occur on the old random set, two on fresh inputs and three on transfer controls. On all seven gains with an OR root, the winning root variable had already been tried by frequency ordering; subsequent conditioned choices expose the closure. The eighth gain begins with unit simplification.
+
+The coverage improvement has a cost. Total analysis, unchanged original-source solving, root lifting and persistence increase from 17.20315 to 20.24553 seconds; SQLite grows from 79,118,336 to 96,911,360 bytes and full cold checking from 6.26480 to 7.64375 seconds. The previous combined unit/pure policy closes 329/437 in 17.94629 seconds and retains five cases that the new rule misses, while the new rule gains six others. Increasing the frequency candidate cap to eight closes 332/437 but costs 42.11042 seconds and 194,686,976 SQLite bytes. Solving alone takes 4.63270 seconds. These single sequential synthetic measurements do not establish a general improvement, and the new policy remains optional.
+
+The cost increase persists despite fewer conditioning attempts, 3,956 rather than 4,300, and a smaller selected unresolved-literal sum, 26,784 rather than 33,281. Acquired nodes instead rise from 9,162 to 11,224. Repeated child references fall from 3,344 of 11,839 to 2,469 of 13,026, indicating less sharing in the stored graphs; these counts are not cache-time estimates. Logical node payload grows from 35,730,036 to 44,967,792 bytes. Simplification nodes alone account for 8,405,501 bytes, about 91\% of that increase. The current representation retains full unsimplified residuals, their profiles, unit traces and simplified children. Exact source payload also increases because the new policy metadata forms part of each identity. All modes retain the same 4,034 ordinary solver residuals.
+
+This identifies the next concrete experiment: one checked edge combining a conditioning assumption and its forced-unit closure, with exact parent identity, reason references and child-variable transport. Cold checking must reconstruct and verify the intermediate restriction, and comparisons must preserve terminal recognition behavior. Such an edge could avoid some duplicated intermediate acquisition and storage; it is not yet implemented, and the full simplification payload cannot be counted as a prospective saving. More compact checked closure could support further lookahead without concealing its preparation cost.
+
+The larger discovery gap remains. None of the 32 fresh 3-CNFs on 20 or 32 variables closes under any tested policy, even with eight frequency candidates. This is a bounded-planner failure, not a lower bound on every possible decomposition. All 306 Python tests and the unchanged Lean build and axiom audit pass. Five new and seven earlier archives replay without changes or fresh solver expansion. The six-case traced Python peak is 153,174 versus 152,392 bytes for the two cap-four unit policies, excluding native memory and full-corpus peak allocation. All regressions, exact missed sources and attempted alternatives remain archived. Better coverage, fewer branches and smaller selected residuals are each insufficient alone to establish lower total acquisition cost.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 
@@ -2891,6 +2910,12 @@ Lenchner, J. (2019).
 From Hall's marriage theorem to Boolean satisfiability and back.
 \emph{arXiv preprint arXiv:1904.07218}, version 4.
 \url{https://arxiv.org/abs/1904.07218v4}.
+
+\bibitem[Li and Anbulagan(1997)]{li1997up}
+Li, C.~M., and Anbulagan (1997).
+Heuristics based on unit propagation for satisfiability problems.
+In \emph{Proceedings of the Fifteenth International Joint Conference on Artificial Intelligence}, pp.~366--370.
+\url{https://ijcai.org/proceedings/1997/54}.
 
 \bibitem[Lin et~al.(2021)Lin, Jaech, Li, Gormley, and Eisner]{lin2021limitations}
 Lin, C.-C., Jaech, A., Li, X., Gormley, M.~R., and Eisner, J. (2021).

@@ -3010,3 +3010,11 @@ residuals. All 306 Python tests pass (22.90 s), covering branch semantics,
 exhaustive tiny cases, random mixtures, renamings/edits, candidate-order corruption
 and policy coexistence. The Lean build/audit still passes at 4,087 declarations /
 1,946 theorem declarations; no new formalization is claimed.
+
+Implementation/evidence checkpoint `42cb199` is pushed. Manuscript Section 12.48
+records the conditioning rule, verified prior-work citation, fresh-input limits,
+coverage/cost tradeoff and the next checked-edge opportunity. All 48 earlier
+proof blocks remain intact, with 171 unique labels. The 94-page PDF builds
+without warnings or box errors; changed pages 86--88 and bibliography pages
+93--94 were visually inspected. The policy stays optional and all prior results
+and counterexamples remain available for subsequent runs.

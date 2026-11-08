@@ -1702,3 +1702,63 @@ and the measured comparison. See [the evidence](../experiments/results/affine-ke
    general-CNF compact closure are still open. Current kernels are process-local;
    restart reconstructs from original source batches. This result says nothing
    new about unrestricted SAT or P versus NP.
+
+## 2026-11-08: storage growth and an additional expansion opportunity
+
+Read-only audit at `9773ede`: the main database is **18,907,136 bytes (18.03 MiB)**.
+Its **1,072 affine result rows represent 268 distinct versions across four engine
+namespaces**, not 1,072 distinct histories. The 268 `affine_version` objects occupy
+**4,205,628 raw JSON bytes / 139,444 compressed payload bytes**; 537 result objects
+occupy **117,090 compressed payload bytes**. Database pages/indexes and other
+solver paths are additional. The much larger local `.cache` tree includes all
+retained experiment databases and backups; it is not one solver's active state.
+
+For width b, at most c equations per append, T archived versions, V resident
+versions and K kernel slots:
+
+- The current summary has at most `(b+1)^2` coefficient cells.
+- Retained native version summaries **and request bodies** plus kernel keys and
+  results have coefficient/request payload O((V+K)*(b^2+b*c)), before metadata
+  and transient allocations. Defaults are V=256 and K=64. Neither cap bounds RSS.
+- Original history records store a parent link plus the new batch, avoiding a
+  complete-history copy on every append. Raw source coefficient payload grows
+  as O(sum_t b*c_t), or O(T*b*c) with fixed upper bounds. Logical version/answer
+  records also grow with T. Step counters, indexes, engine namespaces and their
+  byte encodings are additional; this is not a strict constant-byte-per-step theorem.
+- By default archived affine results contain no boundary summary (`summary=False`).
+  Requesting and retaining summaries can add O(T*b^2) coefficient payload. Exact
+  duplicate whole objects share one row, but report/engine variants can add records.
+- Cold replay still keeps O(T) identifiers in its backward plan/cycle check and
+  reconstructs from original batches. There is no durable checked-kernel shortcut.
+- The archive has no default size cap. An optional page cap refuses new work when
+  full; it neither discards old results nor establishes a hard physical-disk bound.
+
+**New concrete target: share exact equation batches across version records.**
+The source-object hash includes the parent, so an identical local batch inside a
+new history is currently serialized/compressed again. `KnowledgeStore` deduplicates
+whole objects and compresses each object independently; it does not intern the
+embedded batch. Separate immutable batch objects could preserve exact order and
+multiplicity while version records retain parent/batch links. For U distinct
+batches, their coefficient payload would scale with U instead of T; version
+metadata would still grow with T. A later native batch-registration interface could
+also avoid decoding and hashing a known batch on every reuse, but needs a new
+source-origin proof and explicit checking of registrations.
+
+`experiments/results/affine-kernel-cache/storage-audit.json` records a serialization
+model using the existing zlib setting. In the width-32 repeated stream, 35 source
+versions contain only four distinct batches. Their compressed source payload is
+**16,656 bytes**; the modeled batch objects plus links occupy **5,593 bytes**
+(66.4% less). Width-16 repeated payload falls **4,265 -> 3,009 bytes** in this model.
+The same split **increases** modeled novel-stream payload: **6,226 -> 7,616 bytes**
+at width 16 and **22,000 -> 24,344 bytes** at width 32. These estimates exclude
+additional SQLite/index costs and are not measured database savings. Existing
+parent hashes are placeholders; migration, runtime and checking costs remain
+unmeasured. Old rows are preserved; new formats would first apply to new versions.
+
+Prioritize a measured sharing/admission policy alongside duplicate-row removal.
+Preserve exact source batches; use semantic normalization only in a separately
+certified computational representation. Bit-packed Boolean storage, byte-based
+cache budgets and phase/RSS measurements are further concrete targets. Broader
+canonicalization, low-rank updates, checked restart checkpoints and complete
+Python/SQLite/resource refinement remain open. No compact-closure result for
+general CNF follows from the current affine representation.

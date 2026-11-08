@@ -72,8 +72,15 @@ recognizes explicit signed-equivalence blocks and checks simultaneous changes
 against all affected clauses, including earlier additions. On 32 blocks of 32
 variables, acquisition/update time falls from 2.469 to 0.0668 seconds and logical
 storage from 3.79 MB to 0.099 MB. Cold final replay is slightly slower. The
-[cost map](research/structural-reuse-priorities.md) now prioritizes matching swaps;
-parity moves, newly introduced equivalences and shared fallback state remain open.
+[cost map](research/structural-reuse-priorities.md) tracks the next measured gaps.
+
+The [matching-history study](experiments/results/cnf-matching-history/README.md)
+now retains matching endpoints and unit constraints, finds alternating changes,
+and validates them with the same joint checker. On 32 blocks of eight choices,
+operation time falls from 8.303 to 0.253 seconds and logical payload from 20.33 MB
+to 0.424 MB. Over-budget recognized repairs, parity moves, mixed-base discovery
+and non-unit coupling conflicts remain explicit gaps. These restricted gains do
+not give a uniformly polynomial algorithm for arbitrary CNF.
 
 The current draft is **Bounded-Domain SAT, Compiled Knowledge, and Amortized
 Reasoning: A perspective on resource accounting for learned reasoning**.

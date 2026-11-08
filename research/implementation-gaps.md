@@ -2582,3 +2582,75 @@ count identity, proof, discovery restrictions, operation/storage bounds and
 matched gains and losses. All 44 earlier proof blocks are preserved, with one
 new proof and 161 unique labels. `latexmk` builds the 85-page PDF without final
 warnings or overfull/underfull boxes; pages 76--79 were rendered and inspected.
+
+## 2026-11-08: retained matching state and alternating proposals
+
+Implemented `MatchingRepairHistory` as an optional layer over the existing joint
+checker. After scalar/equivalence failure, it recognizes a strict whole matching
+base, retains selected choice/resource endpoints and earlier unit pins in shared
+tries, and searches for an alternating path to satisfy the requested literal.
+Accepted moves use the existing `append-joint` format and independently check
+every affected original or added clause. Warm updates maintain only changed
+endpoints; old versions remain immutable. Cold final checking requires no graph
+state, and the previous equivalence reader accepts matching-generated records.
+
+The [matched study](../experiments/results/cnf-matching-history/README.md) removes
+all 80 matching misses from the prior diagnostic and avoids 161 acquisitions
+across the enlarged 37-case matrix. At 32 four-choice blocks, operation time
+falls from 0.92416 to 0.04882 s, logical payload from 2,267,324 to 50,257 bytes,
+SQLite from 3,973,120 to 110,592 bytes, and separately traced peak Python
+allocations from 24,840,875 to 1,192,534 bytes. Bases fall from 33 to one.
+At 32 eight-choice blocks, time falls from 8.30345 to 0.25308 s and logical
+payload from 20,331,832 to 424,089 bytes. Input sizes, graph recognition, failed
+proposals, state maintenance, checking, serialization and persistence are charged;
+tracing excludes native SQLite and RSS, and timings are single synthetic samples.
+
+Cold final replay for four-choice blocks increases from 17.93 to 20.25 ms.
+Repeating the last known update after restart takes 40.03 versus 23.46 ms,
+including graph/view reconstruction; both archives already contain its result.
+The last warm move scans two graph edges, changes four indicators, visits 16
+postings in discovery and again in checking, updates four matching endpoints
+and allocates 182 trie nodes. It performs no base scan or new residual solve.
+A 64-choice cycle changes 128 indicators and visits 256 postings per pass, so a
+unit addition can still affect the whole component.
+
+All 261 Python tests pass. New tests include 400 branching unit histories
+checked against all permutation models of a three-choice square instance, exact
+count/endpoint/pin reconstruction, long cycles, free resources, old versions,
+budget failure and cold/older-reader compatibility. All 74 new archives (1,414
+versions / 608 residuals) and 58 prior archives (1,396 versions / 1,367 residuals)
+replay with unchanged bytes and zero new expansion. The verified implementation
+and evidence are committed/pushed as `5181faf`. The Lean build reuses the
+existing joint semantic lemmas; its audit passes unchanged at 4,083 declarations
+and 1,943 theorem declarations. No new graph/index/runtime refinement is claimed.
+
+Retained failures are informative. Search tries one path per literal. A non-unit
+coupling can defeat it while a longer valid cycle exists; a unit prohibition
+guides search around the corresponding edge successfully. A disjoint unrelated
+equivalence component prevents whole-base matching recognition. Parallel
+indicators, unused negative-only indicators and new graph structure are also
+outside recognition. With spare resources, a valid model can select extra
+indicators in one choice; that invalidates the optional matching view, and
+discarding an extra indicator may violate an earlier unit. All such misses
+remain satisfiable controls or explicitly checked contradictions, not inferred
+UNSAT verdicts from proposal failure.
+
+The literature check confirms this is established matching machinery:
+[Régin (1994), pp. 364–366](https://cdn.aaai.org/AAAI/1994/AAAI94-055.pdf) uses
+alternating paths/cycles and retains a known matching while propagating edge
+deletions. The manuscript's Section 12.42 cites it and distinguishes our
+persistent, full-source-checked integration from that prior algorithm and its
+complete filtering. All 45 previous proof blocks are preserved, with 162 unique
+labels. The 87-page PDF builds without final warnings or box errors; changed
+pages 78--80 and the added reference link on page 86 were visually inspected.
+
+**Next measured target:** the 1,024-variable equivalence-block budget rejection
+still takes 0.786 s, including about 0.741 s after preparation. Evaluate a charged,
+structure-aware budget escalation or smaller checking representation against
+fallback, retaining adverse high-degree controls. Do not raise all search budgets
+without a total-cost comparison. Parity remains the largest measured repeated
+miss stream (32 fallbacks / 0.170 s / 326,256 bytes). Preparation dominates the
+successful larger matching stream (206.58 of 253.08 ms), so profile it before
+optimizing its cheap path search. Component extraction and coupling-guided path
+search have credible cross-category potential but need scaled evidence. General
+SAT acquisition, closure size and uniform polynomial expansion remain open.

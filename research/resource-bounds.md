@@ -574,6 +574,67 @@ base and require exponential search.
 Measurements and retained failures are in the
 [matched study](../experiments/results/cnf-equivalence-history/README.md).
 
+## 10. Retained matching state in the experimental CNF history
+
+The matching adapter runs after scalar/equivalence attempts fail. It recognizes
+strict whole matching bases, preserving original variable identities: disjoint
+positive choices, complete resource exclusion cliques, no parallel indicators
+for one choice/resource pair and no unassigned negative-only indicators. The
+normalization and graph recognition scan the base, construct sets, sort clauses
+and adjacency and check the clique structure. These costs are paid once per
+recognized base in a warm session, not per successful warm move. The original
+CNF, including its explicit quadratic clique encodings, is still retained.
+
+With e indicators, the cached graph/variable binding occupies O(e) entries.
+Lazy view construction scans all e indicator values, validates exactly one
+selected edge per choice and at most one per resource, then replays required
+history deltas. It therefore charges O(e*b) assignment-trie node visits plus
+endpoint construction and the earlier changed-variable/unit history work.
+The view maps choices to selected indicators, resources to owners, and
+unit-constrained indicators to pins. It uses three persistent tries, shared
+across versions. Mixed-class bases, newly introduced graph structure and models
+with extra selected choice indicators are not silently coerced to this view.
+
+Let s count graph edges visited by a candidate BFS, q the changed indicators,
+R their total posting occurrences, A the distinct affected clauses, d the added
+clause length, b the variable-ID bit length and m the parent clause count.
+Graph search, move sorting, joint checking and matching-view maintenance together
+use a conservative bound
+
+    O((s+d+q+1)*b + (A+q+1)*log(m+2) + R + q*log(q+2) + d)
+
+on trie-node/literal/comparison work for one accepted matching candidate, apart
+from dictionary/set operations, arithmetic, allocation, serialization and SQL.
+Earlier scalar/equivalence attempts, other candidates, recognition and lazy
+reconstruction are additional. Choice IDs are positive clause positions, while
+resource IDs and pins use original variable identifiers. The proposal budget
+charges earlier candidate visits, BFS edges, moved variables and postings; it
+does not bound all those additional costs. The BFS and final check can touch the
+whole component/source even for one unit addition.
+
+Matching-view maintenance adds O(q*(b+log(m+2))+b) retained path nodes per accepted
+update with an active view; a unit can add a pin. This is in addition to the
+assignment/count/posting bound in Section 9. Temporary path/queue and aggregation
+state scales with visited vertices/edges and affected clauses. The graph view is
+not serialized: durable records reuse the existing joint move list. No extra
+matching certificate is required for soundness, since the independent checker
+validates the final assignment against all affected source clauses.
+
+Cold final queries reconstruct/check only the base, occurrence indexes and
+required joint history. A resumed failed scalar/equivalence request additionally
+rebuilds the graph and matching view. Tests compare those operations separately.
+Full witness output is still output-sized; historical roots retain all versions;
+failed proposals may still copy and solve a whole new base.
+
+At 32 blocks of eight choices, preparation is 206.58 ms of 253.08 ms total, so
+further optimization of the two-edge warm search cannot remove the dominant
+initial cost. The last move changes four indicators, visits 32 postings during
+discovery and again during checking, updates four matching endpoints, and
+allocates 439 total trie nodes. The larger 64-choice cycle changes 128 indicators
+and visits 256 postings per pass. See the
+[matched study](../experiments/results/cnf-matching-history/README.md) for retained
+failures, cold costs and separate Python allocation measurements.
+
 The first priority can differ by workload: normalization helped changing
 multiplicities, source handling dominates much of already-reused work, novel
 batches still pay elimination, and database telemetry/indexes dominate much of

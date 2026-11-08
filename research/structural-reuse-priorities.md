@@ -1,21 +1,27 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-08 after checked simultaneous equivalence repair. This is the working
+Updated 2026-11-08 after retained matching-state repair. This is the working
 record for the hourly investigation. Start here; consult
 [implementation history](implementation-gaps.md) and
 [resource bounds](resource-bounds.md) for details. The ranking below is provisional:
 we have useful matched synthetic controls, but no representative mixture of SAT
 workloads from which to infer a single globally dominant cost.
 
-**Next research experiment:** discover and retain matching structure, then propose
-alternating changes through the new independent joint checker. Equivalence repair
-now removes all 120 unsigned-chain misses and 32 additional signed-chain misses.
-The largest remaining multi-update loss is the 32-block, 4-choice matching case:
-32 fallbacks, 1.002 s and 2.27 MB logical payload on the new path. Its supplied
-four-indicator swaps are still not automatically discovered. Charge graph
-recognition, proposal search, earlier constraints, checking and maintenance;
-compare against the current implementation before claiming savings. Parity moves
-and shared source across genuine fallback remain subsequent targets.
+**Next research experiment:** measure cost-aware budget escalation for recognized
+large repairs. The 1,024-variable equivalence block is now the largest remaining
+avoidable single-case cost: 0.786 s, with about 0.741 s after preparation, because
+the default proposal budget rejects its known block move. Compare a separately
+charged larger budget or structural certificate against current fallback; keep
+limits on unstructured search and retain adverse high-degree cases. Do not infer
+that raising every budget improves total cost. Parity is the next measured
+multi-update reuse gap (32 fallbacks / 0.170 s / 326 KB). On successful matching
+streams, preparation now dominates: profile it before another optimization.
+
+Matching repair is implemented. It removes all 80 old matching misses and keeps
+the equivalence gains. The larger 32-block, 8-choice case falls from 8.303 s /
+20.33 MB to 0.253 s / 0.424 MB. Mixed-base extraction and searching around
+non-unit coupling conflicts remain important cross-category gaps, but their
+current controls are small; scale/profile them before ranking their total saving.
 
 ## Current cost map
 
@@ -25,8 +31,10 @@ their capabilities are not already integrated into one verified general solver.
 
 | Workload regime | Current costly work and evidence | Most promising investigation |
 | --- | --- | --- |
-| A local change needs several variables to move together | Explicit equivalence blocks now repair successfully: the largest chain falls from 2.469 s / 3.79 MB / 33 bases to 0.06676 s / 0.099 MB / one base. All 120 parity/matching misses in the original diagnostic remain. | Matching swaps through the joint checker, then parity directions; share unchanged source/state across true fallback. |
+| A local change needs several variables to move together | Equivalence blocks and matching paths now repair successfully. The 32-block, 8-choice matching case falls from 8.303 s / 20.33 MB / 33 bases to 0.253 s / 0.424 MB / one base. The original 40 parity misses remain. | Parity-preserving directions; component-local discovery and proposal search guided by coupling conflicts. |
 | Recognized equivalence repairs succeed | On the largest chain, 45.55 ms of the 66.76 ms total is initial preparation. Every block member and internal posting is still visited; a 1,024-variable block exceeds the default discovery budget and falls back. | Shared group assignments/certificates and affected interfaces, with cold reconstruction and count invariants maintained. |
+| A recognized move exceeds the fixed budget | The 1,024-variable chain takes 0.786 s, including 0.741 s after preparation, and retains another base. The failed budgeted proposal supplies no verdict. | Measure bounded escalation based on known structure and estimated checking cost; compare against fallback and retain losses. |
+| Matching moves succeed | At 32 blocks of 8 choices, initial preparation is 206.58 of 253.08 ms. A warm move changes four indicators, visits 32 postings per pass and allocates 439 trie nodes. Cold final replay is slightly slower. | Profile base preparation and cold checking; do not optimize two-edge path search while initialization dominates. |
 | A small update defeats pure model reuse | New affected-clause repair removes all 32 original-control fallbacks. On matching size 16 / 128 protected flips it reduces operation time from 3.478 s to 0.147 s and logical payload from 12.46 MB to 0.158 MB. | Keep these gains while avoiding unnecessary index preparation; shared source/dependencies remain needed on genuine fallback. |
 | A general residual escapes tractable recognizers | Branching creates distinct residuals; each is normalized, checked and persisted. There is no polynomial bound on their number. Existing matching recognition reduced one restricted example from 5,191 residuals to one. | Expose tractable components and small interfaces before branching; preserve useful state when a component changes class. |
 | Reuse succeeds and the logical update is cheap | In the new 128-addition UNSAT diagnostic, SQLite execution and transaction-context exit account for about 87% of exclusive profiled time. | Reduce redundant archive work while preserving durability and version identities. |
@@ -38,6 +46,7 @@ their capabilities are not already integrated into one verified general solver.
 Evidence: [matched repair comparison](../experiments/results/cnf-repair-history/README.md),
 [affected-clause comparison](../experiments/results/cnf-affected-history/README.md),
 [joint equivalence comparison](../experiments/results/cnf-equivalence-history/README.md),
+[retained matching comparison](../experiments/results/cnf-matching-history/README.md),
 [coordinated-change diagnostic](../experiments/results/structured-repair-gaps/README.md),
 [new diagnostic profiles](evidence/2026-11-08/reuse-cost-profile/README.md),
 [general-CNF investigation](arbitrary-sat-expansion.md). Times are individual
@@ -81,23 +90,23 @@ independently validates a coordinated change at every rejected step:
 | --- | --- | --- |
 | Literal-equivalence block | All equalities, including signed variants | Implemented for complementary binary pairs in a base; change all dependent variables and independently check the final state. |
 | Affine equations A x = b over GF(2) | A(x + z) = b when A z = 0 | Apply a nullspace direction, potentially changing many variables. |
-| Matching component | Choice coverage and resource exclusivity | Apply a valid alternating cycle/path, respecting earlier forced edges. |
+| Matching component | Choice coverage and resource exclusivity | Implemented for strict whole matching bases; retain endpoints and unit pins, search an alternating path, then check all affected clauses. |
 | Horn component | Consequences of the retained facts/rules | Propagate a changed requirement with retained reasons; check negative constraints and couplings. |
 
-The first row now has a measured implementation; parity, matching and Horn
+Equivalence and matching now have measured implementations; parity and Horn
 maintenance remain proposals. The joint comparison automatically discovers the
 equivalence blocks, charges their recognition and preserves all old constraints.
 On 32 blocks of 32 variables it reduces operation time from 2.4689 to 0.06676 s,
 logical storage from 3,792,631 to 98,663 bytes, and peak traced Python allocations
 from 45,575,163 to 1,925,402 bytes. Cold final query grows from 40.88 to 44.42 ms.
 Repeating the last known update from its parent after restart takes 88.32 versus
-45.98 ms; these archives already contain that result. The matching control still
-retains 33 bases / 2,267,324 bytes and takes 1.002 s on the new path, compared
-with 0.934 s on the scalar baseline. Recognition can add work without useful reuse.
+45.98 ms; these archives already contain that result. That checkpoint's matching
+control still retained 33 bases / 2,267,324 bytes; the following matching-state
+implementation removes those fallbacks.
 
 The generic joint record contains a changed-variable list, not trusted structural
-claims. This checker can support later adapters, but no matching/nullspace
-discovery follows from its existence. Initial binary-pair discovery is cached
+claims. The matching adapter now supplies automatically discovered moves to it;
+nullspace discovery remains open. Initial binary-pair discovery is cached
 per base and invoked only after scalar failure; additions do not enlarge the
 discovered blocks. Nonpaired implication cycles, new equalities and over-budget
 blocks are retained failures. A corrected signed benchmark forces 32 actual
@@ -125,11 +134,29 @@ unchanged. Couplings, signed equalities, contradictions, repeated changes,
 exact count recomputation and forged records are checked. Lean proves the
 semantic final-state protection rule, not the Python count/index implementation.
 
-**Next acceptance criteria:** remove matching misses with automatically found
-alternating changes; preserve earlier forced edges, external constraints and old
-versions; charge search, graph maintenance and joint checking. Include failed
-paths, genuine contradictions and edits that leave the matching class. Do not
-generalize supplied moves into a uniformly cheap arbitrary-CNF repair procedure.
+**Completed matching checkpoint:** 37 matched cases retain 74 new archives,
+1,414 versions and 608 residuals, all cold-checked without byte changes; 58 prior
+archives also replay unchanged. All 261 tests pass. At 32 four-choice blocks,
+operation time falls from 0.92416 to 0.04882 s, logical storage from 2,267,324 to
+50,257 bytes, and peak traced Python allocation from 24,840,875 to 1,192,534 bytes.
+The code retains choice/resource/unit-pin tries and updates only changed paths.
+Cold final replay increases from 17.93 to 20.25 ms. No new Lean graph refinement
+is claimed: matching moves use the existing joint semantic protection theorem.
+
+**Remaining matching gaps:** one chosen path per literal can fail a non-unit
+coupling although a longer valid path exists. Whole-base recognition misses a
+matching component beside an unrelated equivalence component. Spare resources
+permit valid models with extra true choice indicators, outside the retained
+exact matching view. These controls all remain SAT but need fallback. Unit
+constraints guide search, whereas arbitrary coupling clauses only enter final
+checking. Recognizing subcomponents and using failed checks to guide a bounded
+alternative-path search are promising, with their own discovery/maintenance cost.
+Old versions and sources must remain available through every class transition.
+
+Retaining a known matching and using alternating paths under edge deletions is
+established in [Régin (1994), pp. 364–366](https://cdn.aaai.org/AAAI/1994/AAAI94-055.pdf).
+The implemented contribution is a checked persistent integration with explicit
+full-source accounting, not a new matching algorithm or a general CNF guarantee.
 
 ### Completed baseline: single-variable affected-clause repair
 
@@ -201,14 +228,15 @@ verdict/witness or refutation, and an explicitly exact or one-sided summary.
 | --- | --- | --- |
 | Horn / dual-Horn | Derived literals, dependency reasons and a propagation queue. | Replace repeated full propagation scans with affected work. Distinguish proved consequences from arbitrary choices in a model. Additions preserve old consequences; deletion requires dependency retraction. A new implication can still force a global cascade. |
 | 2-CNF | Implication edges, SCC/condensation information and contradiction paths. | Check that new clauses remain binary or isolate the nonbinary interaction. An edge can merge many SCCs; arbitrary constant update time does not follow. |
-| Matching / reducible positive cores | Matching, choice/resource graph, reduction witnesses and Hall certificates. | Maintain disjoint groups, complete exclusion structure and justified redundant-clause reductions. Repair a matching locally when possible; overlapping choices can leave the class. |
+| Matching / reducible positive cores | Matching, choice/resource graph, reduction witnesses and Hall certificates. | The new adapter retains the graph and selected endpoints for strict whole bases. Core reductions, component-local extraction, extra selected indicators and arbitrary coupling-guided search remain open. |
 | Explicit affine/XOR | Row basis, rank changes and projected boundary equations. | Reuse the existing restricted engine through checked extraction/source bindings. Recognizing hidden XOR structure in arbitrary CNF is additional work. New independent equations can change every relevant boundary. |
 | Disjoint or bounded-interface components | Component identities, dependency graph and exact boundary summaries. | Update affected components and stop propagation when their summary is unchanged. Coupling components or increasing width may invalidate the cheap decomposition. |
 
 Prioritize the category where a profile shows repeated construction to be costly.
 Do not implement five dynamic data structures merely because all are available.
 The current propagation loop repeatedly scans clauses; implication SCCs, matching
-and connected components are reconstructed for new uncached residuals. These are
+and connected components are still reconstructed for new uncached residuals.
+The matching history adapter avoids that acquisition only when its proposal works. These are
 concrete maintenance gaps, not yet evidence of an end-to-end speedup.
 
 ### 3. Reduce hard interaction between otherwise easy components

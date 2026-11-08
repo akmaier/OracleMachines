@@ -1149,3 +1149,10 @@ theorems do not verify that discovery, the count formula's implementation,
 persistent indexes, parsing, SQL or runtime bounds. The
 [joint-repair comparison](../experiments/results/cnf-equivalence-history/README.md)
 retains signed/coupled controls, old versions, failed discovery and budget limits.
+
+The matching-history adapter also emits the same joint records and reuses these
+semantic lemmas. It adds no trusted graph certificate or new Lean theorem.
+The full Python suite now passes 261 tests, including retained matching endpoints,
+unit-guided alternating paths, non-unit rejection, invalid matching views and
+older-reader compatibility. The graph recognition, search and mutable Python
+cache surrounding persistent trie roots remain outside the formal refinement.

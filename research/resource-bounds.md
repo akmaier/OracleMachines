@@ -840,3 +840,49 @@ the original-source solver still takes 564.84 ms and lifting adds 0.52 ms.
 Avoiding this duplicated solving is an integration opportunity. No additional
 depth-two closure occurs among the original 664 sources. Arbitrary leftovers,
 missed mixed structure and wide projected equations remain explicit gaps.
+
+## 15. Checked simplification before structural discovery
+
+`SimplifyingPatternInventory` reuses existing unit propagation, then optionally
+reaches a whole-residual pure-literal fixed point. Unit traces retain a signed
+literal and source-clause reason; pure traces retain the chosen signed literals
+in each round. Independent replay reconstructs the reduced child and checks
+global opposite-sign absence, including couplings. A full child model extends
+through the saved assignments and is checked against the original parent CNF.
+The relation is exact existential projection onto remaining variables; model
+counts and all assignments on eliminated variables are not preserved.
+
+Let v be the initial number of variables and L the literal count of a normalized
+nonconstant node. Discovery's unit scans take O((v+1)L) literal visits in the
+worst case, as do the complete sequence of pure scans. The checker independently
+sorts polarity maps; a conservative comparison/word-operation envelope for the
+whole simplification and its checker is
+O((v+1)(L + v log(v+1))). It is not a bit-machine bound: identifiers, clause
+references, integer operations and JSON encoding must also be charged. The
+current checker is invoked several times during a cold construction/lift.
+Family recognition, affine preparation, normalization and persistence are
+additional. The stored trace has O(v) literal/reason entries and the temporary
+working clause representation has O(L+v) words. These bounds exclude recursive
+inventory children and SQLite/native allocation.
+
+Every successful rewrite strictly decreases variable support, so a path has at
+most v such rewrites before intervening branch choices. This termination fact
+does not bound the number or total size of distinct residuals. Full source
+identities, parent CNFs, repeated profile evidence and all tried alternatives
+remain stored; semantic reduction does not delete provenance. On the
+[841-source comparison](../experiments/results/cnf-simplification/README.md),
+depth-two nodes fall from 6,358 to 3,526 and SQLite from 39,727,104 to 31,731,712
+bytes, but logical source payload grows from 1,570,077 to 1,686,976 bytes. The
+1,162 simplification edges share 550 children within the policy/depth identity.
+All modes still acquire the same 2,146 ordinary solver residuals.
+
+Total depth-two analysis plus original solving/lifting falls from 8.09694 to
+7.15375 s; cold checking from 2.72370 to 2.43583 s. Units-only is faster at
+6.60422 s, with 289 rather than 290 closed non-tiny sources. Pure-only and
+depth-zero combined processing regress in time. The six-case traced Python
+peak falls only from 153,371 to 152,490 bytes at depth two and increases at
+depth zero; it excludes native memory and is not a full-corpus peak. Repeated
+scans and unused pre-decomposition parent profiles remain measurable costs.
+Most discovery time now lies in the new random 3-CNF group (3.26227 of 4.62418 s),
+where 38/48 inputs remain open. Both discovery policy and decision integration
+remain unproved opportunities, not unrestricted polynomial-time guarantees.

@@ -1197,3 +1197,14 @@ the full parent CNF. These are executable checks, not a refinement of Python or
 SQLite by the Lean lemmas. All 292 Python tests pass. The
 [projection study](../experiments/results/cnf-affine-projection/README.md)
 retains missed mixed families, budget failures and memory/time regressions.
+
+The checked simplification follow-up reuses `Residuals.lean`'s conditioning
+semantics and `pure_repair_preserves`: global absence of the opposite polarity
+allows a satisfying assignment to be repaired without changing retained
+variables. Repeated pure elimination preserves existential fibers, not model
+counts. The Python inventory now checks full-residual purity, forced-unit
+reasons, exact children and model lifts. These checks are not a new Lean
+refinement of Python, the fixed-point algorithm or SQLite. All 301 Python tests
+pass and the existing Lean build/audit remains unchanged at 4,087 declarations /
+1,946 theorem declarations. The [simplification study](../experiments/results/cnf-simplification/README.md)
+retains all 39 new discovery misses and the unit-only/pure-only ablations.

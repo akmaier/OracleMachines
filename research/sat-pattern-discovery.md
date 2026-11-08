@@ -83,6 +83,18 @@ and interface-aware conditioning, tested against constrained and random cases.
 Lean now proves composition with an arbitrary leftover predicate invariant on
 eliminated variables; the Python pipeline remains outside that refinement.
 
+**Checked simplification implemented:** the [841-source study](../experiments/results/cnf-simplification/README.md)
+reuses unit propagation and checks whole-residual pure elimination, exact child
+bindings and model lifts. The matching/parity remainder now exposes matching
+without conditioning. Combined depth-two coverage rises from 217/329 to 290/329
+beyond the exhaustive tiny sources, closing all 36 old misses. Units alone reach
+289/329 and are faster; most gains are standard propagation, not new families.
+Harder controls retain 38 of 48 new random 3-CNFs unresolved, plus one renamed
+wide-boundary case. These are the next discovery targets. The random group costs
+3.26 of 4.62 seconds of combined discovery. Profile its failed alternatives and
+test structure-aware conditioning under matched work budgets before adding more
+families or depth. Preserve the unit-only comparator and all regressions.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

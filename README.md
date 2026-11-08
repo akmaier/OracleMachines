@@ -53,6 +53,14 @@ coupled affine controls close without branching; the original 36 open sources
 still expose gaps in mixed leftovers. Lean composition lemmas, cost regressions
 and encoding-budget failures are preserved alongside the gains.
 
+The [checked simplification study](experiments/results/cnf-simplification/README.md)
+now exposes structure through unit propagation and whole-residual pure literals.
+It closes all 36 old discovery misses; on the expanded corpus, depth-two coverage
+rises from 217/329 to 290/329 beyond tiny exhaustive cases. Units alone reach
+289/329 at lower runtime. The remaining 38 random 3-CNFs and one boundary-cap
+case are retained. Tests, complete archives and cost regressions accompany the
+results; this analysis is still separate from the ordinary decision solver.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

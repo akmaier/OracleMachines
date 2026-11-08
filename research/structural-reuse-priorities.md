@@ -12,13 +12,27 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-**Next research experiment:** expose tractable structure in the mixed leftover
-after projection. The matching/parity case now shrinks from 13 variables/61
-literals to 10/29, but still misses the strict matching recognizer. Its bridge
-has a positive-only variable: setting it true removes the bridge and exposes
-matching. Compare checked pure-literal/unit simplification with interface-aware
-conditioning, including both-polarity couplings and every remaining random miss.
-Keep existential witness lifting and exact source dependencies explicit.
+**Next research experiment:** explain the 38 remaining random 3-CNF misses after
+checked simplification. This group takes 3.26 of 4.62 seconds of discovery in the
+[841-source study](../experiments/results/cnf-simplification/README.md). Profile
+its retained conditioning alternatives, then compare structure-aware choice with
+frequency-first choice at matched work budgets. Measure exposed tractable parts,
+shared boundaries and residual reuse, including preparation and failed lookahead.
+Do not substitute increased depth for an explanation of structural coverage.
+
+Checked unit/pure simplification now closes all 36 old misses and exposes the
+matching/parity core without conditioning. At depth two, total non-tiny coverage
+rises from 217/329 to 290/329; total analysis plus solving falls from 8.097 to
+7.154 s and SQLite from 39.727 to 31.732 MB. Units alone reach 289/329 in 6.604 s:
+keep that faster comparator rather than enabling both reductions unconditionally.
+Pure-only and depth-zero regressions are retained. These are standard reductions
+in an analysis layer; the separate decision solver already has unit propagation.
+
+Supporting opportunities remain checked decision integration (the largest single
+operation still solves an original affine source), native affine boundary rows
+(one renamed cap miss), and avoiding repeated scans/unused parent profiles on
+long unit/pure chains. Prioritize these when they enable discovery; arbitrary
+SAT still has no proved small decomposition or uniformly polynomial acquisition.
 
 The [projection study](../experiments/results/cnf-affine-projection/README.md)
 implements exact affine projection with a bounded CNF encoding and checked model

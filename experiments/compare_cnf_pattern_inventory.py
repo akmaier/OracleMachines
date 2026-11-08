@@ -79,7 +79,7 @@ def node_summary(h, root):
             stack.extend(e['key'] for e in node['edges'])
         elif node['kind'] == 'or':
             stack.extend(e['key'] for e in node['alternatives'][node['selected']]['edges'])
-        elif node['kind'] == 'project':
+        elif node['kind'] in ('project', 'simplify'):
             stack.append(node['edge']['key'])
         elif node['kind'] == 'unresolved':
             leaves.append(node['profile']['shape'])

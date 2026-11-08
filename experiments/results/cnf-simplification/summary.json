@@ -1,0 +1,930 @@
+[
+  {
+    "mode": "solver_only",
+    "total_seconds": 2.4611261358950287,
+    "original_seconds": 1.5601743857841939,
+    "archive": {
+      "mode": "solver_only",
+      "path": "archive-solver_only.sqlite3.gz",
+      "database_bytes": 9433088,
+      "compressed_bytes": 660583,
+      "database_sha256": "1415c2cbbd44eca37989b7fbfe8251697ef38dfedef821457344c8512d360c9b",
+      "initialization_seconds": 0.0007778750732541084,
+      "warm_inventory_seconds": 0,
+      "storage": {},
+      "audit": {
+        "nodes": 0,
+        "sources": 0,
+        "residuals": 2146,
+        "seconds": 0.4643521250691265,
+        "bytes_unchanged": true
+      }
+    }
+  },
+  {
+    "mode": "projection0",
+    "total_seconds": 3.129637344973162,
+    "original_seconds": 2.14792196941562,
+    "archive": {
+      "mode": "projection0",
+      "path": "archive-projection0.sqlite3.gz",
+      "database_bytes": 14372864,
+      "compressed_bytes": 1059709,
+      "database_sha256": "e27911422fdd5f7596bb2a5cab265bbadf54058afc9e5bdf9d944d06c0b0a1c3",
+      "initialization_seconds": 0.0066350409761071205,
+      "warm_inventory_seconds": 0.07526804087683558,
+      "storage": {
+        "nodes": 586,
+        "nodes_bytes": 1556972,
+        "sources": 841,
+        "sources_bytes": 1570077
+      },
+      "audit": {
+        "nodes": 586,
+        "sources": 841,
+        "residuals": 2146,
+        "seconds": 0.6770075829699636,
+        "bytes_unchanged": true
+      }
+    },
+    "discovery_seconds": 0.7362764601130038,
+    "groups": {
+      "affine_mixture": {
+        "inputs": 32,
+        "closed": 21,
+        "unresolved_literals": 403
+      },
+      "edit": {
+        "inputs": 5,
+        "closed": 3,
+        "unresolved_literals": 73
+      },
+      "edit_variant": {
+        "inputs": 5,
+        "closed": 3,
+        "unresolved_literals": 73
+      },
+      "exhaustive2": {
+        "inputs": 512,
+        "closed": 512,
+        "unresolved_literals": 0
+      },
+      "growing": {
+        "inputs": 11,
+        "closed": 11,
+        "unresolved_literals": 0
+      },
+      "growing_simplification": {
+        "inputs": 6,
+        "closed": 0,
+        "unresolved_literals": 1515
+      },
+      "large_coupled": {
+        "inputs": 2,
+        "closed": 2,
+        "unresolved_literals": 0
+      },
+      "new_random": {
+        "inputs": 48,
+        "closed": 18,
+        "unresolved_literals": 1431
+      },
+      "projection_control": {
+        "inputs": 4,
+        "closed": 3,
+        "unresolved_literals": 908
+      },
+      "projection_variant": {
+        "inputs": 4,
+        "closed": 3,
+        "unresolved_literals": 908
+      },
+      "random": {
+        "inputs": 120,
+        "closed": 31,
+        "unresolved_literals": 4405
+      },
+      "random3": {
+        "inputs": 48,
+        "closed": 0,
+        "unresolved_literals": 9729
+      },
+      "simplification_control": {
+        "inputs": 6,
+        "closed": 0,
+        "unresolved_literals": 336
+      },
+      "simplification_variant": {
+        "inputs": 6,
+        "closed": 0,
+        "unresolved_literals": 336
+      },
+      "structured": {
+        "inputs": 16,
+        "closed": 14,
+        "unresolved_literals": 110
+      },
+      "variant": {
+        "inputs": 16,
+        "closed": 14,
+        "unresolved_literals": 110
+      }
+    },
+    "cells": {
+      "RRRRRRERE": 1,
+      "RERREREEE": 1,
+      "RRRREERRE": 2,
+      "RERREEEEE": 15,
+      "RRRRREEEE": 2,
+      "RRRREEEEE": 6,
+      "RRRREEERE": 4,
+      "RRREEEERR": 272,
+      "RRRERRRRE": 2,
+      "REREEREEE": 3,
+      "RRREEEERE": 2,
+      "REREEEEEE": 15,
+      "RRREREEEE": 6,
+      "RRREEEEEE": 4,
+      "REREEEEER": 30,
+      "RRREEEEER": 14,
+      "RRRRRERRE": 1,
+      "RRREREERE": 3,
+      "RRRERRERE": 1,
+      "ERRERREEE": 1,
+      "EEREERRRE": 1,
+      "ERREEEEEE": 18,
+      "EEREEEERE": 6,
+      "ERREREEEE": 15,
+      "EEREEEEEE": 14,
+      "EEREEEERR": 25,
+      "EEREEEEER": 18,
+      "ERREEEEER": 30,
+      "EEEEEEEEE": 151,
+      "EEEREEEEE": 26,
+      "EEEEREEEE": 36,
+      "EEERREEEE": 3,
+      "EEEEEERRE": 6,
+      "EEEEEEURE": 6,
+      "EEEEEEERR": 9,
+      "EEEEEEERE": 6,
+      "EEEEEEUEE": 78,
+      "EEEEEEURR": 2,
+      "EEEEEEEER": 6
+    }
+  },
+  {
+    "mode": "simplified0",
+    "total_seconds": 3.5249019358307123,
+    "original_seconds": 2.1703541055321693,
+    "archive": {
+      "mode": "simplified0",
+      "path": "archive-simplified0.sqlite3.gz",
+      "database_bytes": 14831616,
+      "compressed_bytes": 1080518,
+      "database_sha256": "34e49f037d0c22cfbecaca1bc5f062567c924aa023c23903ba4b2166442e48d8",
+      "initialization_seconds": 0.007539374986663461,
+      "warm_inventory_seconds": 0.0799320419318974,
+      "storage": {
+        "nodes": 613,
+        "nodes_bytes": 1728624,
+        "sources": 841,
+        "sources_bytes": 1686976
+      },
+      "audit": {
+        "nodes": 613,
+        "sources": 841,
+        "residuals": 2146,
+        "seconds": 0.8849157500080764,
+        "bytes_unchanged": true
+      }
+    },
+    "discovery_seconds": 1.1364276446402073,
+    "groups": {
+      "affine_mixture": {
+        "inputs": 32,
+        "closed": 25,
+        "unresolved_literals": 273
+      },
+      "edit": {
+        "inputs": 5,
+        "closed": 4,
+        "unresolved_literals": 36
+      },
+      "edit_variant": {
+        "inputs": 5,
+        "closed": 4,
+        "unresolved_literals": 36
+      },
+      "exhaustive2": {
+        "inputs": 512,
+        "closed": 512,
+        "unresolved_literals": 0
+      },
+      "growing": {
+        "inputs": 11,
+        "closed": 11,
+        "unresolved_literals": 0
+      },
+      "growing_simplification": {
+        "inputs": 6,
+        "closed": 6,
+        "unresolved_literals": 0
+      },
+      "large_coupled": {
+        "inputs": 2,
+        "closed": 2,
+        "unresolved_literals": 0
+      },
+      "new_random": {
+        "inputs": 48,
+        "closed": 20,
+        "unresolved_literals": 1331
+      },
+      "projection_control": {
+        "inputs": 4,
+        "closed": 3,
+        "unresolved_literals": 908
+      },
+      "projection_variant": {
+        "inputs": 4,
+        "closed": 3,
+        "unresolved_literals": 908
+      },
+      "random": {
+        "inputs": 120,
+        "closed": 48,
+        "unresolved_literals": 3858
+      },
+      "random3": {
+        "inputs": 48,
+        "closed": 0,
+        "unresolved_literals": 9705
+      },
+      "simplification_control": {
+        "inputs": 6,
+        "closed": 2,
+        "unresolved_literals": 225
+      },
+      "simplification_variant": {
+        "inputs": 6,
+        "closed": 2,
+        "unresolved_literals": 225
+      },
+      "structured": {
+        "inputs": 16,
+        "closed": 16,
+        "unresolved_literals": 0
+      },
+      "variant": {
+        "inputs": 16,
+        "closed": 16,
+        "unresolved_literals": 0
+      }
+    },
+    "cells": {
+      "RRRRRRERE": 1,
+      "RERREREEE": 1,
+      "RRRREERRE": 2,
+      "RERREEEEE": 15,
+      "RRRRREEEE": 2,
+      "RRRREEEEE": 6,
+      "RRRREEERE": 4,
+      "RRREEEERR": 272,
+      "RRRERRRRE": 2,
+      "REREEREEE": 3,
+      "RRREEEERE": 2,
+      "REREEEEEE": 15,
+      "RRREREEEE": 6,
+      "RRREEEEEE": 4,
+      "REREEEEER": 30,
+      "RRREEEEER": 14,
+      "RRRRRERRE": 1,
+      "RRREREERE": 3,
+      "RRRERRERE": 1,
+      "ERRERREEE": 1,
+      "EEREERRRE": 1,
+      "ERREEEEEE": 18,
+      "EEREEEERE": 6,
+      "ERREREEEE": 15,
+      "EEREEEEEE": 14,
+      "EEREEEERR": 25,
+      "EEREEEEER": 18,
+      "ERREEEEER": 30,
+      "EEEEEEEEE": 151,
+      "EEEREEEEE": 26,
+      "EEEEREEEE": 36,
+      "EEERREEEE": 3,
+      "EEEEEERRE": 6,
+      "EEEEEEURE": 6,
+      "EEEEEEERR": 9,
+      "EEEEEEERE": 6,
+      "EEEEEEUEE": 78,
+      "EEEEEEURR": 2,
+      "EEEEEEEER": 6
+    }
+  },
+  {
+    "mode": "projection2",
+    "total_seconds": 8.096942260162905,
+    "original_seconds": 3.642660093260929,
+    "archive": {
+      "mode": "projection2",
+      "path": "archive-projection2.sqlite3.gz",
+      "database_bytes": 39727104,
+      "compressed_bytes": 2429895,
+      "database_sha256": "bfe22676feaa9447164f2283d540436fb8d302e31ac1f7f6b6686d04606bdd3e",
+      "initialization_seconds": 0.008119749836623669,
+      "warm_inventory_seconds": 0.08279304206371307,
+      "storage": {
+        "nodes": 6358,
+        "nodes_bytes": 18308525,
+        "sources": 841,
+        "sources_bytes": 1570077
+      },
+      "audit": {
+        "nodes": 6358,
+        "sources": 841,
+        "residuals": 2146,
+        "seconds": 2.723696750123054,
+        "bytes_unchanged": true
+      }
+    },
+    "discovery_seconds": 5.664571930421516,
+    "groups": {
+      "affine_mixture": {
+        "inputs": 32,
+        "closed": 31,
+        "unresolved_literals": 9
+      },
+      "edit": {
+        "inputs": 5,
+        "closed": 5,
+        "unresolved_literals": 0
+      },
+      "edit_variant": {
+        "inputs": 5,
+        "closed": 5,
+        "unresolved_literals": 0
+      },
+      "exhaustive2": {
+        "inputs": 512,
+        "closed": 512,
+        "unresolved_literals": 0
+      },
+      "growing": {
+        "inputs": 11,
+        "closed": 11,
+        "unresolved_literals": 0
+      },
+      "growing_simplification": {
+        "inputs": 6,
+        "closed": 0,
+        "unresolved_literals": 108
+      },
+      "large_coupled": {
+        "inputs": 2,
+        "closed": 2,
+        "unresolved_literals": 0
+      },
+      "new_random": {
+        "inputs": 48,
+        "closed": 38,
+        "unresolved_literals": 148
+      },
+      "projection_control": {
+        "inputs": 4,
+        "closed": 4,
+        "unresolved_literals": 0
+      },
+      "projection_variant": {
+        "inputs": 4,
+        "closed": 3,
+        "unresolved_literals": 283
+      },
+      "random": {
+        "inputs": 120,
+        "closed": 86,
+        "unresolved_literals": 1103
+      },
+      "random3": {
+        "inputs": 48,
+        "closed": 0,
+        "unresolved_literals": 23915
+      },
+      "simplification_control": {
+        "inputs": 6,
+        "closed": 1,
+        "unresolved_literals": 342
+      },
+      "simplification_variant": {
+        "inputs": 6,
+        "closed": 1,
+        "unresolved_literals": 342
+      },
+      "structured": {
+        "inputs": 16,
+        "closed": 15,
+        "unresolved_literals": 18
+      },
+      "variant": {
+        "inputs": 16,
+        "closed": 15,
+        "unresolved_literals": 18
+      }
+    },
+    "cells": {
+      "RRRRRRERE": 1,
+      "RERREREEE": 1,
+      "RRRREERRE": 2,
+      "RERREEEEE": 15,
+      "RRRRREEEE": 2,
+      "RRRREEEEE": 6,
+      "RRRREEERE": 4,
+      "RRREEEERR": 272,
+      "RRRERRRRE": 2,
+      "REREEREEE": 3,
+      "RRREEEERE": 2,
+      "REREEEEEE": 15,
+      "RRREREEEE": 6,
+      "RRREEEEEE": 4,
+      "REREEEEER": 30,
+      "RRREEEEER": 14,
+      "RRRRRERRE": 1,
+      "RRREREERE": 3,
+      "RRRERRERE": 1,
+      "ERRERREEE": 1,
+      "EEREERRRE": 1,
+      "ERREEEEEE": 18,
+      "EEREEEERE": 6,
+      "ERREREEEE": 15,
+      "EEREEEEEE": 14,
+      "EEREEEERR": 25,
+      "EEREEEEER": 18,
+      "ERREEEEER": 30,
+      "EEEEEEEEE": 151,
+      "EEEREEEEE": 26,
+      "EEEEREEEE": 36,
+      "EEERREEEE": 3,
+      "EEEEEERRE": 6,
+      "EEEEEEURE": 6,
+      "EEEEEEERR": 9,
+      "EEEEEEERE": 6,
+      "EEEEEEUEE": 78,
+      "EEEEEEURR": 2,
+      "EEEEEEEER": 6
+    }
+  },
+  {
+    "mode": "units2",
+    "total_seconds": 6.604216790292412,
+    "original_seconds": 2.4782497042324394,
+    "archive": {
+      "mode": "units2",
+      "path": "archive-units2.sqlite3.gz",
+      "database_bytes": 32190464,
+      "compressed_bytes": 2119398,
+      "database_sha256": "c01793d773508a690755523e36f2276f6953102f1e89fb67b3ac49ed092ed20f",
+      "initialization_seconds": 0.020061708986759186,
+      "warm_inventory_seconds": 0.11947016697376966,
+      "storage": {
+        "nodes": 3727,
+        "nodes_bytes": 12508539,
+        "sources": 841,
+        "sources_bytes": 1689499
+      },
+      "audit": {
+        "nodes": 3727,
+        "sources": 841,
+        "residuals": 2146,
+        "seconds": 2.2418546660337597,
+        "bytes_unchanged": true
+      }
+    },
+    "discovery_seconds": 4.208836461184546,
+    "groups": {
+      "affine_mixture": {
+        "inputs": 32,
+        "closed": 32,
+        "unresolved_literals": 0
+      },
+      "edit": {
+        "inputs": 5,
+        "closed": 5,
+        "unresolved_literals": 0
+      },
+      "edit_variant": {
+        "inputs": 5,
+        "closed": 5,
+        "unresolved_literals": 0
+      },
+      "exhaustive2": {
+        "inputs": 512,
+        "closed": 512,
+        "unresolved_literals": 0
+      },
+      "growing": {
+        "inputs": 11,
+        "closed": 11,
+        "unresolved_literals": 0
+      },
+      "growing_simplification": {
+        "inputs": 6,
+        "closed": 6,
+        "unresolved_literals": 0
+      },
+      "large_coupled": {
+        "inputs": 2,
+        "closed": 2,
+        "unresolved_literals": 0
+      },
+      "new_random": {
+        "inputs": 48,
+        "closed": 48,
+        "unresolved_literals": 0
+      },
+      "projection_control": {
+        "inputs": 4,
+        "closed": 4,
+        "unresolved_literals": 0
+      },
+      "projection_variant": {
+        "inputs": 4,
+        "closed": 3,
+        "unresolved_literals": 283
+      },
+      "random": {
+        "inputs": 120,
+        "closed": 119,
+        "unresolved_literals": 14
+      },
+      "random3": {
+        "inputs": 48,
+        "closed": 10,
+        "unresolved_literals": 7825
+      },
+      "simplification_control": {
+        "inputs": 6,
+        "closed": 6,
+        "unresolved_literals": 0
+      },
+      "simplification_variant": {
+        "inputs": 6,
+        "closed": 6,
+        "unresolved_literals": 0
+      },
+      "structured": {
+        "inputs": 16,
+        "closed": 16,
+        "unresolved_literals": 0
+      },
+      "variant": {
+        "inputs": 16,
+        "closed": 16,
+        "unresolved_literals": 0
+      }
+    },
+    "cells": {
+      "RRRRRRERE": 1,
+      "RERREREEE": 1,
+      "RRRREERRE": 2,
+      "RERREEEEE": 15,
+      "RRRRREEEE": 2,
+      "RRRREEEEE": 6,
+      "RRRREEERE": 4,
+      "RRREEEERR": 272,
+      "RRRERRRRE": 2,
+      "REREEREEE": 3,
+      "RRREEEERE": 2,
+      "REREEEEEE": 15,
+      "RRREREEEE": 6,
+      "RRREEEEEE": 4,
+      "REREEEEER": 30,
+      "RRREEEEER": 14,
+      "RRRRRERRE": 1,
+      "RRREREERE": 3,
+      "RRRERRERE": 1,
+      "ERRERREEE": 1,
+      "EEREERRRE": 1,
+      "ERREEEEEE": 18,
+      "EEREEEERE": 6,
+      "ERREREEEE": 15,
+      "EEREEEEEE": 14,
+      "EEREEEERR": 25,
+      "EEREEEEER": 18,
+      "ERREEEEER": 30,
+      "EEEEEEEEE": 151,
+      "EEEREEEEE": 26,
+      "EEEEREEEE": 36,
+      "EEERREEEE": 3,
+      "EEEEEERRE": 6,
+      "EEEEEEURE": 6,
+      "EEEEEEERR": 9,
+      "EEEEEEERE": 6,
+      "EEEEEEUEE": 78,
+      "EEEEEEURR": 2,
+      "EEEEEEEER": 6
+    }
+  },
+  {
+    "mode": "pure2",
+    "total_seconds": 8.50841745804064,
+    "original_seconds": 3.290234665153548,
+    "archive": {
+      "mode": "pure2",
+      "path": "archive-pure2.sqlite3.gz",
+      "database_bytes": 38719488,
+      "compressed_bytes": 2389033,
+      "database_sha256": "f7c72e62fb8ba42fdc8a7dc0067e2e2248e4f89bec1ad574f61e71da05a88bf1",
+      "initialization_seconds": 0.01589137502014637,
+      "warm_inventory_seconds": 0.08586079208180308,
+      "storage": {
+        "nodes": 5387,
+        "nodes_bytes": 16754341,
+        "sources": 841,
+        "sources_bytes": 1689499
+      },
+      "audit": {
+        "nodes": 5387,
+        "sources": 841,
+        "residuals": 2146,
+        "seconds": 2.8849669999908656,
+        "bytes_unchanged": true
+      }
+    },
+    "discovery_seconds": 6.016041712136939,
+    "groups": {
+      "affine_mixture": {
+        "inputs": 32,
+        "closed": 32,
+        "unresolved_literals": 0
+      },
+      "edit": {
+        "inputs": 5,
+        "closed": 5,
+        "unresolved_literals": 0
+      },
+      "edit_variant": {
+        "inputs": 5,
+        "closed": 5,
+        "unresolved_literals": 0
+      },
+      "exhaustive2": {
+        "inputs": 512,
+        "closed": 512,
+        "unresolved_literals": 0
+      },
+      "growing": {
+        "inputs": 11,
+        "closed": 11,
+        "unresolved_literals": 0
+      },
+      "growing_simplification": {
+        "inputs": 6,
+        "closed": 6,
+        "unresolved_literals": 0
+      },
+      "large_coupled": {
+        "inputs": 2,
+        "closed": 2,
+        "unresolved_literals": 0
+      },
+      "new_random": {
+        "inputs": 48,
+        "closed": 44,
+        "unresolved_literals": 56
+      },
+      "projection_control": {
+        "inputs": 4,
+        "closed": 4,
+        "unresolved_literals": 0
+      },
+      "projection_variant": {
+        "inputs": 4,
+        "closed": 3,
+        "unresolved_literals": 283
+      },
+      "random": {
+        "inputs": 120,
+        "closed": 99,
+        "unresolved_literals": 657
+      },
+      "random3": {
+        "inputs": 48,
+        "closed": 0,
+        "unresolved_literals": 23481
+      },
+      "simplification_control": {
+        "inputs": 6,
+        "closed": 3,
+        "unresolved_literals": 250
+      },
+      "simplification_variant": {
+        "inputs": 6,
+        "closed": 3,
+        "unresolved_literals": 250
+      },
+      "structured": {
+        "inputs": 16,
+        "closed": 16,
+        "unresolved_literals": 0
+      },
+      "variant": {
+        "inputs": 16,
+        "closed": 16,
+        "unresolved_literals": 0
+      }
+    },
+    "cells": {
+      "RRRRRRERE": 1,
+      "RERREREEE": 1,
+      "RRRREERRE": 2,
+      "RERREEEEE": 15,
+      "RRRRREEEE": 2,
+      "RRRREEEEE": 6,
+      "RRRREEERE": 4,
+      "RRREEEERR": 272,
+      "RRRERRRRE": 2,
+      "REREEREEE": 3,
+      "RRREEEERE": 2,
+      "REREEEEEE": 15,
+      "RRREREEEE": 6,
+      "RRREEEEEE": 4,
+      "REREEEEER": 30,
+      "RRREEEEER": 14,
+      "RRRRRERRE": 1,
+      "RRREREERE": 3,
+      "RRRERRERE": 1,
+      "ERRERREEE": 1,
+      "EEREERRRE": 1,
+      "ERREEEEEE": 18,
+      "EEREEEERE": 6,
+      "ERREREEEE": 15,
+      "EEREEEEEE": 14,
+      "EEREEEERR": 25,
+      "EEREEEEER": 18,
+      "ERREEEEER": 30,
+      "EEEEEEEEE": 151,
+      "EEEREEEEE": 26,
+      "EEEEREEEE": 36,
+      "EEERREEEE": 3,
+      "EEEEEERRE": 6,
+      "EEEEEEURE": 6,
+      "EEEEEEERR": 9,
+      "EEEEEEERE": 6,
+      "EEEEEEUEE": 78,
+      "EEEEEEURR": 2,
+      "EEEEEEEER": 6
+    }
+  },
+  {
+    "mode": "simplified2",
+    "total_seconds": 7.153754996601492,
+    "original_seconds": 2.6028405777178705,
+    "archive": {
+      "mode": "simplified2",
+      "path": "archive-simplified2.sqlite3.gz",
+      "database_bytes": 31731712,
+      "compressed_bytes": 2099863,
+      "database_sha256": "6d62c316d04c7a8700c1be2392146576bd6e8f53cc8629cd149a5cd8f9248715",
+      "initialization_seconds": 0.022509124828502536,
+      "warm_inventory_seconds": 0.08264666702598333,
+      "storage": {
+        "nodes": 3526,
+        "nodes_bytes": 12141649,
+        "sources": 841,
+        "sources_bytes": 1686976
+      },
+      "audit": {
+        "nodes": 3526,
+        "sources": 841,
+        "residuals": 2146,
+        "seconds": 2.4357528751716018,
+        "bytes_unchanged": true
+      }
+    },
+    "discovery_seconds": 4.62418309180066,
+    "groups": {
+      "affine_mixture": {
+        "inputs": 32,
+        "closed": 32,
+        "unresolved_literals": 0
+      },
+      "edit": {
+        "inputs": 5,
+        "closed": 5,
+        "unresolved_literals": 0
+      },
+      "edit_variant": {
+        "inputs": 5,
+        "closed": 5,
+        "unresolved_literals": 0
+      },
+      "exhaustive2": {
+        "inputs": 512,
+        "closed": 512,
+        "unresolved_literals": 0
+      },
+      "growing": {
+        "inputs": 11,
+        "closed": 11,
+        "unresolved_literals": 0
+      },
+      "growing_simplification": {
+        "inputs": 6,
+        "closed": 6,
+        "unresolved_literals": 0
+      },
+      "large_coupled": {
+        "inputs": 2,
+        "closed": 2,
+        "unresolved_literals": 0
+      },
+      "new_random": {
+        "inputs": 48,
+        "closed": 48,
+        "unresolved_literals": 0
+      },
+      "projection_control": {
+        "inputs": 4,
+        "closed": 4,
+        "unresolved_literals": 0
+      },
+      "projection_variant": {
+        "inputs": 4,
+        "closed": 3,
+        "unresolved_literals": 283
+      },
+      "random": {
+        "inputs": 120,
+        "closed": 120,
+        "unresolved_literals": 0
+      },
+      "random3": {
+        "inputs": 48,
+        "closed": 10,
+        "unresolved_literals": 7624
+      },
+      "simplification_control": {
+        "inputs": 6,
+        "closed": 6,
+        "unresolved_literals": 0
+      },
+      "simplification_variant": {
+        "inputs": 6,
+        "closed": 6,
+        "unresolved_literals": 0
+      },
+      "structured": {
+        "inputs": 16,
+        "closed": 16,
+        "unresolved_literals": 0
+      },
+      "variant": {
+        "inputs": 16,
+        "closed": 16,
+        "unresolved_literals": 0
+      }
+    },
+    "cells": {
+      "RRRRRRERE": 1,
+      "RERREREEE": 1,
+      "RRRREERRE": 2,
+      "RERREEEEE": 15,
+      "RRRRREEEE": 2,
+      "RRRREEEEE": 6,
+      "RRRREEERE": 4,
+      "RRREEEERR": 272,
+      "RRRERRRRE": 2,
+      "REREEREEE": 3,
+      "RRREEEERE": 2,
+      "REREEEEEE": 15,
+      "RRREREEEE": 6,
+      "RRREEEEEE": 4,
+      "REREEEEER": 30,
+      "RRREEEEER": 14,
+      "RRRRRERRE": 1,
+      "RRREREERE": 3,
+      "RRRERRERE": 1,
+      "ERRERREEE": 1,
+      "EEREERRRE": 1,
+      "ERREEEEEE": 18,
+      "EEREEEERE": 6,
+      "ERREREEEE": 15,
+      "EEREEEEEE": 14,
+      "EEREEEERR": 25,
+      "EEREEEEER": 18,
+      "ERREEEEER": 30,
+      "EEEEEEEEE": 151,
+      "EEEREEEEE": 26,
+      "EEEEREEEE": 36,
+      "EEERREEEE": 3,
+      "EEEEEERRE": 6,
+      "EEEEEEURE": 6,
+      "EEEEEEERR": 9,
+      "EEEEEEERE": 6,
+      "EEEEEEUEE": 78,
+      "EEEEEEURR": 2,
+      "EEEEEEEER": 6
+    }
+  }
+]

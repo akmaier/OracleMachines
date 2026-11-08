@@ -2925,3 +2925,42 @@ labels). The 92-page PDF builds without warnings or box errors; changed pages
 declarations / 1,946 theorem declarations, including the three new composition
 lemmas. The next discovery and integration targets are persisted in both priority
 files and the evidence README.
+
+## Checked simplification in the structural inventory (8 November, 22:19 run)
+
+The mixed-leftover target is implemented in `cnf_simplification.py`. Unit
+propagation reuses the existing solver routine. Independent replay checks forced
+clause reasons, conflicts and whole-residual pure rounds; exact source bindings
+and assignments support checked model lifting. A new `simplify` node strictly
+reduces support without consuming conditioning depth. Policies have distinct
+identities and coexist with all older records. The decision solver is unchanged.
+
+The [841-source comparison](../experiments/results/cnf-simplification/README.md)
+contains all prior 775 sources, 48 harder random 3-CNFs, adversarial bridges and
+variants, and growing unit/pure controls. Depth-two non-tiny closure rises from
+217/329 to 290/329; all 36 original misses close. Most gains use standard unit
+propagation: units-only closes 289/329 in 6.60422 s versus 7.15375 s combined.
+Projection takes 8.09694 s; pure-only regresses to 8.50842 s. The combined archive
+shrinks from 39,727,104 to 31,731,712 bytes; exact source payload increases.
+Six-case traced Python allocation is nearly unchanged and excludes native memory.
+
+The matching/parity source follows projection, pure bridge removal, then matching
+at depth zero. Both-polarity bridges are retained unless valid propagation or
+conditioning resolves them. All 32 affine mixtures close at depth two. However,
+38 of 48 new random 3-CNFs and the renamed wide-boundary cap case remain open.
+The random group costs 3.26227 of 4.62418 s of discovery and is the next target:
+profile its alternatives and test structure-aware conditioning at matched work
+budgets. The unit-only policy remains an essential cheaper comparator. Actual
+projected decision integration and native affine boundaries are supporting gaps.
+
+All 301 Python tests pass (22.72 s), including exhaustive small existential
+fibers, lifting, arbitrary renamings, false purity, malformed reasons and cold
+corruption/coexistence. All seven new and five previous archives replay unchanged;
+every mode retains the same 2,146 ordinary solver residuals. The Lean build passes
+without a new formal claim: existing condition/pure-repair semantics support the
+argument, while Python and persistence remain outside refinement. The 1,162 new
+simplification edges reference 550 distinct children; this is within-policy
+reuse, not arbitrary semantic canonicalization. The pure-chain control's signed
+chain is disconnected from its matching-plus-bridge component; its unused parent
+profile work and repeated scans are explicitly preserved as costs, not concealed
+as a connected-interface result.

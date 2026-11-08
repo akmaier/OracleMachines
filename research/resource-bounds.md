@@ -742,3 +742,51 @@ input, not globally unique archive data or tree multiplicity. It falls from
 after conditioning. These are coverage measurements, not a general search-cost
 bound. See the [inventory study](../experiments/results/cnf-pattern-inventory/README.md)
 for the unresolved cells, initial comparison, exact archives and limitations.
+
+## 13. Explicit affine extraction and coupling interfaces
+
+The optional `explicit-affine-v1` inventory policy adds extraction of all complete
+sign halves grouped by clause support. It retains a pointwise-equivalent mixed
+representation F(x) = (A x = b) AND R(x). R contains every clause not assigned to
+a complete direct equation. No independent composition across shared variables
+is assumed. A separately checked triangular row-operation trace preserves the
+equation solution set. An inconsistent extracted subsystem refutes F regardless
+of R. A consistent subsystem with R nonempty does not establish tractability.
+
+Let normalized input have L literal occurrences, m clauses, n densely numbered
+variables, and let extraction return e equations with S variable occurrences.
+Grouping scans L and sorts supports and group keys. Conservative comparison
+work is O(L log(L+1) + m log(m+1)); hashing and integer bit costs also apply.
+Completeness is checked from the present group cardinality without constructing
+2^q entries. A direct width-q parity source already contains q*2^(q-1) literal
+occurrences. Reading it remains exponential in q and polynomial in its explicit
+input size. Hidden affine equivalence is outside this recognizer.
+
+Elimination and its independent checker each perform at most e min(e,n) XORs
+on n-bit masks. Forming masks from S support occurrences also takes bit work
+(a conservative O(S*n) bit envelope for the current integer construction).
+The certificate holds O(m) clause-reference entries, O(S) variable entries,
+O(en) mask bits, and O(e min(e,n)) dependency-index entries. IDs and JSON have
+encoding costs. A representation of the equations alone can be much smaller
+than the direct CNF, but full source clauses, keys and provenance remain in the
+archive. There is no claim that the measured persistent state reaches the
+equation-only size. Nor do these per-profile bounds limit the general planner's
+number of residuals or the unchanged complete solver's search.
+
+The [733-source study](../experiments/results/cnf-affine-patterns/README.md)
+compares this policy to the same planner and solver. At depth two, pattern nodes
+fall from 3,790 to 3,126, total analysis plus solving from 3.30542 to 2.90083 s,
+SQLite from 14,323,712 to 13,385,728 bytes, and cold full audit from 0.87050 to
+0.74019 s. On the original 664 sources, total time is nearly unchanged at
+1.84691 versus 1.84100 s. At depth zero, SQLite increases from 5,152,768 to
+5,644,288 bytes. Separate six-case peak Python tracing falls from 205,370 to
+147,579 bytes at depth two but increases from 116,883 to 133,517 at depth zero.
+The timing samples and limited allocation diagnostic do not establish general
+speedup or full-process memory bounds.
+
+Four growing coupled controls remain open: a binary clause connects just two
+variables of an otherwise explicit affine system. At 32 equations, the source
+has 66 variables. Exact existential projection onto that interface is the next
+target. Recognition, row projection, compatibility, witness lifting, invalidation
+and cold checking must be charged. Arbitrary leftover constraints can still
+encode general SAT, even if the affine projection itself is cheap.

@@ -12,14 +12,27 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-**Next research experiment:** refine the connected unresolved cells by clause
-support and sign patterns. Test complete parity halves, complete exclusion cubes
-and collections of explicit parity equations, preserving arbitrary leftover
-couplings. Apply the recognizer to all 50 unresolved inputs and matched variants
-without labels; measure discovery cost and report failures on random CNFs.
-Do not simply raise conditioning depth or discard clauses outside a pattern.
+**Next research experiment:** project extracted affine systems onto the variables
+shared with leftover clauses, and compare exact interface composition or
+interface-first conditioning with the current occurrence-order policy. In the
+new coupled controls, 32 equations involve 66 variables but share only two with
+one leftover binary clause. They remain unresolved at depth two. Preserve exact
+existential semantics and checked witness lifting, charge projection and replay,
+and test the matching/parity mixture and unresolved random inputs as controls.
+Do not discard couplings or infer that arbitrary leftover CNF is tractable.
 
-The [first inventory](../experiments/results/cnf-pattern-inventory/README.md)
+The [affine extraction study](../experiments/results/cnf-affine-patterns/README.md)
+implements the previous support/sign-pattern target. Exact extraction plus checked
+elimination closes 14 of the previous 50 unresolved inputs, leaving 34 seeded
+CNFs and the coupled matching/parity pair. The eight seeded gains use small
+unit/binary contradictions after conditioning, not large hidden XORs. On 733
+sources, depth-two analysis plus solving falls from 3.305 to 2.901 s and SQLite
+from 14.324 to 13.386 MB; on the original 664, time is almost unchanged (1.847
+versus 1.841 s). Pure affine controls improve, while coupled controls retain
+extra recognition cost without closure. Depth-zero storage increases. This is
+still an additive analysis layer, not a faster general SAT solver.
+
+The preserved [first inventory](../experiments/results/cnf-pattern-inventory/README.md)
 is implemented: seven recognition outcomes retain overlaps in 24 observed root
 cells. Beyond 512 exhaustive tiny sources, whole-formula tests explain 39/152
 inputs, components 45/152, one conditioning level 57/152 and two levels 102/152.

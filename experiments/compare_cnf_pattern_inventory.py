@@ -86,10 +86,10 @@ def node_summary(h, root):
                 unresolved_shapes=leaves)
 
 
-def audit(path, raw, options):
+def audit(path, raw, options, inventory_type=PatternInventory):
     path.write_bytes(raw)
     started = time.perf_counter()
-    h = PatternInventory(path, **options) if options is not None else None
+    h = inventory_type(path, **options) if options is not None else None
     sources = nodes = 0
     if h:
         for key, in h.db.execute('SELECT id FROM cnf_patterns_v1'):
@@ -114,13 +114,13 @@ def audit(path, raw, options):
                 seconds=time.perf_counter()-started, bytes_unchanged=True)
 
 
-def memory_profile(cases, options):
+def memory_profile(cases, options, inventory_type=PatternInventory):
     gc.collect()
     with tempfile.TemporaryDirectory() as tmp:
         path = Path(tmp)/'memory.sqlite3'
         tracemalloc.start()
         solver = ResidualSolver(path)
-        h = PatternInventory(path, **options) if options is not None else None
+        h = inventory_type(path, **options) if options is not None else None
         for case in cases:
             if h:
                 h.inspect(case['source'])

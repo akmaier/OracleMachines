@@ -41,6 +41,12 @@ tests explain 39 and two conditioning levels explain 102. The remaining 50 cases
 and all failed alternatives are retained. Analysis currently adds runtime and
 memory; it identifies discovery gaps rather than accelerating the SAT engine.
 
+The [affine discovery extension](experiments/results/cnf-affine-patterns/README.md)
+extracts complete parity encodings, checks their equations and keeps all leftover
+couplings. It closes 14 of those 50 cases; the remaining 36 and observed cost
+regressions are preserved. Exact composition across small shared interfaces is
+the next discovery target. The ordinary SAT solver is unchanged.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

@@ -48,6 +48,14 @@ def check_pointwise(h, key, seen=None):
         if node['profile']['outcomes']['single_parity'] == 'recognized':
             certificate = node['profile']['evidence']['single_parity']
             assert holds(cnf, model) == (sum(model[v] for v in certificate['variables']) % 2 == certificate['rhs'])
+        if 'explicit_affine' in node['profile']['evidence']:
+            certificate = node['profile']['evidence']['explicit_affine']
+            equations_hold = all(sum(model[v] for v in e['variables']) % 2 == e['rhs']
+                                 for e in certificate['equations'])
+            assert holds(cnf, model) == (equations_hold and holds([cnf[i] for i in certificate['leftovers']], model))
+            rows_hold = all(sum(model[v] for v in model if row['mask'] >> (v-1) & 1) % 2 == row['rhs']
+                            for row in certificate['reductions'])
+            assert equations_hold == rows_hold
 
 
 class PatternInventoryTests(unittest.TestCase):

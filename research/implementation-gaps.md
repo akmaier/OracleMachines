@@ -2816,3 +2816,47 @@ declarations); no new implementation-refinement claim is made. All 45 prior
 proof blocks are preserved, with 164 unique labels. The 89-page PDF compiles
 without final warnings or box errors, and changed pages 81--82 were visually
 inspected. The next discovery target is persisted in both research priority files.
+
+## 2026-11-08: support/sign extraction with exact affine couplings
+
+Implemented the planned connected-cell refinement in
+`experiments/cnf_affine_patterns.py`. Complete parity halves on each support
+become equations; every other clause remains in an exact leftover list. The
+independent checker verifies source partition, supports, distinct signs, counts
+and triangular elimination dependencies. Pure systems and contradictory affine
+subsystems add separate outcome fields. Mixed consistent systems remain open.
+The policy version is in every identity, and old inventory rows/decisions are
+unchanged. This is an optional analysis layer, not solver/history integration.
+
+The [preserved 733-source comparison](../experiments/results/cnf-affine-patterns/README.md)
+includes all earlier sources plus growing systems, couplings, fresh random CNFs
+and adversarial edits/variants. At depth two it closes 14 of the prior 50 open
+inputs, leaving 34 seeded CNFs and coupled matching/parity with its variant.
+The eight seeded gains use contradictory width-one/two equation subsystems
+after conditioning. They are not evidence of discovering large hidden parity.
+Five of 48 fresh seeded cases also gain closure, with the same limitation.
+Whole-input random closure does not improve. The exact mechanisms and remaining
+interfaces are persisted in `mechanisms.json` with an analysis script.
+
+Across all 733 inputs, depth-two analysis plus solving falls from 3.30542 to
+2.90083 seconds and SQLite from 14,323,712 to 13,385,728 bytes. Pattern nodes
+fall from 3,790 to 3,126. On the original 664 sources total time stays almost
+unchanged (1.84691 versus 1.84100 seconds). Depth-zero storage increases by
+491,520 bytes. Coupled controls retain recognition overhead: the 16-equation
+case increases from 0.05067 to 0.07849 seconds without closure. These are single
+sequential samples. Separate six-case Python memory, warm reuse and cold audit
+are included; the report distinguishes them from acquisition and process RSS.
+
+All 284 Python tests pass, including exhaustive pointwise checks, random mixtures,
+renamings, corrupt certificates, faulty discovery, and coexistence/cold replay
+of old and new versions. All five new archives and all five prior final archives
+replay without changes or new solving. Previous evidence is preserved.
+
+**Next target:** exact projection and composition at affine/coupling interfaces.
+The 32-equation coupled source has 66 variables but only two shared with its
+one leftover binary clause. Current frequency-first conditioning misses this
+opportunity. Retain arbitrary leftover clauses, checked witness lifting and
+refutation semantics, with projection and persistence cost charged. Test the
+matching/parity control and all unresolved random cases too. No new Lean
+implementation refinement, efficient universal partition, compact universal
+oracle or unrestricted polynomial SAT algorithm is established here.

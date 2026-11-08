@@ -1173,3 +1173,13 @@ bounded planner are Python research code, not new Lean-refined operations.
 All 276 Python tests pass, including exhaustive tiny-source coverage and
 pointwise component/branch checks. The inventory adds no theorem that every
 reported category admits a compact or polynomial-time arbitrary-SAT solution.
+
+The subsequent explicit affine extractor retains a clause partition into direct
+XOR encodings and unchanged coupling clauses. Its independent Python checker
+validates complete sign halves and triangular elimination dependencies. This
+provides executable certificate checking and exhaustive small-case evidence,
+not a new Lean refinement of CNF extraction, Gaussian elimination or SQLite.
+The full suite now passes 284 Python tests. See the
+[matched study](../experiments/results/cnf-affine-patterns/README.md); its random
+coverage gains concern unit/binary contradictions after conditioning, and mixed
+consistent systems still require exact interface composition.

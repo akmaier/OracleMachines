@@ -96,6 +96,9 @@ class PatternInventory:
     def close(self):
         self.db.close()
 
+    def _profile(self, cnf):
+        return classify(cnf, self.config['parity_width'], self.counts)
+
     def _canonical(self, cnf, depth):
         normalized, names = normalize(cnf, self.counts)
         key = encode([FORMAT, self.config, depth, normalized])
@@ -144,7 +147,7 @@ class PatternInventory:
                     unresolved_literals=sum(c['summary']['unresolved_literals'] for c in children))
 
     def _discover(self, cnf, depth):
-        profile = classify(cnf, self.config['parity_width'], self.counts)
+        profile = self._profile(cnf)
         node = dict(cnf=[list(c) for c in cnf], depth=depth, profile=profile)
         groups = components(cnf, self.counts) if self.config['decompose'] else [cnf]
         if len(groups) > 1:
@@ -188,7 +191,7 @@ class PatternInventory:
         cnf, _, actual = self._canonical(node['cnf'], depth)
         if actual != key or node['cnf'] != [list(c) for c in cnf]:
             raise ValueError('Invalid canonical identity')
-        profile = classify(cnf, self.config['parity_width'], self.counts)
+        profile = self._profile(cnf)
         # JSON-normalize tuple evidence before comparing cold-loaded records.
         if encode(node['profile']) != encode(profile):
             raise ValueError('Invalid pattern certificate')

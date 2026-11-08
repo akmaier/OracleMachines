@@ -59,6 +59,18 @@ and space and is not enabled as a solver optimization. The 24 observed root cell
 are not a complete enumeration of all possible signatures. The next experiment
 refines connected unresolved cells by exact clause support/sign patterns.
 
+**Follow-up implemented:** [explicit affine extraction](../experiments/results/cnf-affine-patterns/README.md)
+groups complete parity halves by support, retains every leftover clause, and
+checks triangular GF(2) row operations. It recognizes direct overlapping affine
+systems and inconsistent affine subsystems with couplings. New outcomes have
+versioned identities; the previous inventory and archives remain valid. At depth
+two, original non-tiny closure rises from 102/152 to 116/152. All eight seeded
+gains come from unit/binary contradictions exposed by conditioning. Pure growing
+affine cases close, but adding one binary coupling clause keeps four growing
+controls unresolved. Their two-variable interfaces are the next target for
+exact projection and composition, with checked witness lifting. General hidden
+affine recognition and efficient arbitrary-CNF decomposition remain open.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

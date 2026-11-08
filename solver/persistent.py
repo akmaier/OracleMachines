@@ -87,7 +87,7 @@ class PersistentSolver:
                  symbolic: bool = False, adaptive: bool = False,
                  max_archive_bytes: int | None = None, active_cache_bytes: int = 2*1024**2,
                  symbolic_node_limit: int = 50000, wal_checkpoint_bytes: int = 4*1024**2,
-                 native_layer_cells: int = 1024**2,
+                 native_layer_cells: int = 1024**2, native_affine_versions: int = 256,
                  max_input_bytes: int = 8 * 1024**2, max_message_bytes: int = 64 * 1024**2,
                  max_proof_bytes: int = 16 * 1024**2):
         start = time.perf_counter_ns()
@@ -104,6 +104,9 @@ class PersistentSolver:
             raise ValueError('Active payload, symbolic node and WAL thresholds must be positive integers')
         self.active_cache_bytes,self.symbolic_node_limit,self.wal_checkpoint_bytes=active_cache_bytes,symbolic_node_limit,wal_checkpoint_bytes
         self.native_layer_cells=native_layer_cells
+        if type(native_affine_versions) is not int or not 2<=native_affine_versions<=4096:
+            raise ValueError('Affine resident version cap must be 2 to 4096')
+        self.native_affine_versions=native_affine_versions
         self.backend, self.timeout = backend, timeout
         self.query_timeout, self.verify_cache = query_timeout, verify_cache
         self.max_input_bytes, self.max_message_bytes, self.max_proof_bytes = max_input_bytes, max_message_bytes, max_proof_bytes
@@ -563,6 +566,8 @@ class PersistentSolver:
             physical_storage_hard_bound=False,whole_process_memory_bound=False,
             active_caches=caches,symbolic_node_limit=self.symbolic_node_limit,
             native_layer_cells_cap=self.native_layer_cells,
+            native_affine_versions_cap=self.native_affine_versions,
+            native_affine_versions=len(self.affine_growth.verified) if hasattr(self,"affine_growth") else 0,
             native_layer_cells=0 if self.layers is None else len(self.layers.verified)*self.layers.states**2,
             native_source_cells=0 if self.source_layers is None else len(self.source_layers.verified)*self.source_layers.states**2,
             wal_checkpoint_threshold=self.wal_checkpoint_bytes,checkpoint_result=checkpoint)
@@ -765,7 +770,7 @@ class PersistentSolver:
         except BaseException as error:
             self.last_metrics=self._ledger.finish()
             if hasattr(self,'affine_growth'):
-                self.affine_growth.verified.clear();self.affine_growth.worker=None
+                self.affine_growth.invalidate()
             if isinstance(error,sqlite3.Error) and getattr(error,'sqlite_errorcode',None)==sqlite3.SQLITE_FULL:
                 raise BudgetExceeded('Affine archive cap reached; previous versions retained') from error
             raise

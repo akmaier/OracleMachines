@@ -180,6 +180,86 @@ class AffineGrowthTests(unittest.TestCase):
                 charges.add(state['reference_cell_charge']);self.check_report(state)
             self.assertEqual(len(charges),1)
 
+    def test_bounded_residency_grows_past_old_history_cap_and_replays(self):
+        with tempfile.TemporaryDirectory() as d:
+            path=Path(d)/'s.db'
+            with PersistentSolver(path,native_affine_versions=2,query_timeout=60) as s:
+                state=s.affine_grow(1,[equation(1,(1,),True)])
+                first=state['state']
+                for _ in range(4100):
+                    state=s.affine_grow(base=state['state'],equations=[equation(1,(0,1),False)])
+                    self.assertTrue(state['answer'])
+                    self.assertLessEqual(state['affine_updates']['resident_versions'],2)
+                last=state['state']
+                self.assertEqual(state['steps'],4101)
+                self.assertEqual(s._request(dict(mode='affine_stats'))['resident_versions'],2)
+                self.assertTrue(s.affine_grow(base=first)['answer'])
+                self.assertTrue(s.affine_grow(base=last)['answer'])
+                self.assertEqual(s.db.execute('SELECT count(*) FROM affine_states').fetchone()[0],4101)
+            with PersistentSolver(path,native_affine_versions=2,query_timeout=60) as s:
+                loaded=s.affine_grow(base=last)
+                self.assertTrue(loaded['answer'])
+                self.assertEqual(loaded['affine_updates']['replayed_versions'],4102)
+                self.assertEqual(loaded['affine_updates']['evicted_versions'],4100)
+                self.assertEqual(s._request(dict(mode='affine_stats'))['resident_versions'],2)
+
+    def test_evicted_parents_do_not_change_resident_children(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db',native_affine_versions=3) as s:
+            parent=s.affine_grow(1,[equation(1,(1,),True)])
+            child=s.affine_grow(base=parent['state'],equations=[equation(1,(0,),False)])
+            tail=s.affine_grow(base=child['state'],equations=[])
+            self.assertFalse(tail['answer'])
+            self.assertLessEqual(s._request(dict(mode='affine_stats'))['resident_versions'],3)
+            # Native child decisions depend on their certified summaries, not
+            # continued residency of ancestor names.
+            s._request(dict(mode='affine_drop',ids=[parent['state']]))
+            self.assertFalse(s._request(dict(mode='affine_query',root=child['state'],summary=False))['answer'])
+            with self.assertRaises(ValueError):s._request(dict(mode='affine_query',root=parent['state'],summary=False))
+
+    def test_failed_retention_transaction_recovers_with_bounded_store(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db',native_affine_versions=2) as s:
+            first=s.affine_grow(1,[equation(1,(1,),True)])
+            original=s.affine_growth.store.put
+            def fail(kind,value):
+                if kind=='affine_result':raise RuntimeError('injected archive failure')
+                return original(kind,value)
+            with patch.object(s.affine_growth.store,'put',side_effect=fail):
+                with self.assertRaises(RuntimeError):s.affine_grow(base=first['state'],equations=[])
+            restored=s.affine_grow(base=first['state'])
+            self.assertTrue(restored['answer'])
+            self.assertEqual(restored['affine_updates']['native_resets'],1)
+            self.assertEqual(s._request(dict(mode='affine_stats'))['resident_versions'],2)
+            self.assertEqual(s.db.execute('SELECT count(*) FROM affine_states').fetchone()[0],1)
+
+    def test_comparison_cnf_encoding_preserves_every_source_assignment(self):
+        from experiments.compare_affine_growth import source_cnf
+        width=2
+        for coefficients in itertools.product((False,True),repeat=4):
+            for rhs in (False,True):
+                row=dict(coefficients=list(coefficients),rhs=rhs)
+                clauses,n=source_cnf(width,[[row]])
+                for original in itertools.product((False,True),repeat=4):
+                    exists=False
+                    for auxiliary in itertools.product((False,True),repeat=n-4):
+                        values=original+auxiliary
+                        if all(any(values[abs(lit)-1]==(lit>0) for lit in clause) for clause in clauses):
+                            exists=True;break
+                    self.assertEqual(exists,holds([row],original))
+        # Auxiliary names must follow the entire original history, rather than
+        # colliding with a later fresh block.
+        batches=[[equation(2,(0,1,2),True)],[equation(2,(0,1,3),False)]]
+        clauses,n=source_cnf(2,batches)
+        for original in itertools.product((False,True),repeat=6):
+            expected=holds(batches[0],original[:4]) and holds(batches[1],original[2:6])
+            actual=any(all(any((original+aux)[abs(lit)-1]==(lit>0) for lit in clause) for clause in clauses)
+                       for aux in itertools.product((False,True),repeat=n-6))
+            self.assertEqual(actual,expected)
+
+    def test_invalid_resident_caps_rejected(self):
+        with tempfile.TemporaryDirectory() as d:
+            for cap in (True,0,1,4097):
+                with self.assertRaises(ValueError):PersistentSolver(Path(d)/'s.db',native_affine_versions=cap)
+
     def test_native_version_capacity_is_refusal_not_false(self):
         with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
             for i in range(4096):s._request(dict(mode='affine_init',id=str(i),width=1))

@@ -5,6 +5,7 @@ boundary followed by that fresh block. A saved boundary is never accepted as a
 replay certificate: restart replays original equation batches from the archive.
 """
 from copy import deepcopy
+from collections import OrderedDict
 import time
 from solver.knowledge_store import KnowledgeStore
 
@@ -21,32 +22,59 @@ class AffineGrowth:
         self.service=service
         self.store=KnowledgeStore(service.db,service.engine_id)
         self.worker=None
-        self.verified=set()
+        self.verified=OrderedDict()
+        self.dirty=False
+        self.evicted_versions=0
+        self.native_resets=0
+
+    def invalidate(self):
+        # A failed transaction may leave newly checked native nodes. Reset on
+        # the next request, under its own deadline, before trusting residency.
+        self.verified.clear()
+        self.dirty=True
+        self.worker=self.service.process
 
     def ensure(self,token):
         if self.worker is not self.service.process:
-            self.verified.clear();self.worker=self.service.process
+            self.verified.clear();self.worker=self.service.process;self.dirty=False
+        if self.dirty:
+            if self.service.process is not None:
+                self.service._request(dict(mode='affine_reset'))
+                self.native_resets+=1
+            self.verified.clear();self.dirty=False
         pending=[];seen=set();current=token
+        # Only names are retained while walking backwards. Equation batches are
+        # reread one at a time in forward order. The replay plan still uses O(T)
+        # identifiers; this is not a whole-process constant-memory claim.
         while current not in self.verified:
             self.service._check_deadline()
             if current in seen:raise ValueError('Cyclic affine history')
-            if len(pending)>=4096:raise ValueError('Affine replay exceeds native version capacity')
             seen.add(current)
             node=self.store.get(current,'affine_version')
             self.validate_node(node)
-            pending.append((current,node))
+            pending.append(current)
             if node['base'] is None:break
             current=node['base']
-        for name,node in reversed(pending):
+        for name in reversed(pending):
+            self.service._check_deadline()
+            node=self.store.get(name,'affine_version')
             if node['base'] is None:
                 request=dict(mode='affine_init',id=name,width=node['width'])
             else:
                 parent=self.store.get(node['base'],'affine_version')
                 if parent['width']!=node['width']:raise ValueError('Affine history width changed')
+                if node['base'] not in self.verified:raise ValueError('Affine replay parent is not resident')
+                self.verified.move_to_end(node['base'])
                 request=dict(mode='affine_append',id=name,base=node['base'],equations=node['equations'])
+            if len(self.verified)>=self.service.native_affine_versions:
+                oldest=next(iter(self.verified))
+                if oldest==node['base']:raise RuntimeError('Affine retention would evict the required parent')
+                self.service._request(dict(mode='affine_drop',ids=[oldest]))
+                del self.verified[oldest];self.evicted_versions+=1
             self.service._request(request)
-            self.verified.add(name)
+            self.verified[name]=None
             self.worker=self.service.process
+        self.verified.move_to_end(token)
         return len(pending)
 
     @classmethod
@@ -75,6 +103,7 @@ class AffineGrowth:
     def run(self,width,equations,base,summary):
         if type(summary) is not bool:raise ValueError('Summary option must be Boolean')
         replayed=registered=0
+        old_evictions,old_resets=self.evicted_versions,self.native_resets
         before={field:getattr(self.store,field) for field in
                 ('inserted_objects','serialized_bytes','inserted_raw_bytes','inserted_packed_bytes','object_reads','read_packed_bytes')}
         try:
@@ -100,7 +129,10 @@ class AffineGrowth:
                     (self.service.engine_id,state,evidence,int(result['answer']),result['steps'],time.time_ns()))
             metrics={field:getattr(self.store,field)-value for field,value in before.items()}
             return dict(result,state=state,source='affine_growth',
-                        affine_updates=dict(replayed_versions=replayed,registered_versions=registered,**metrics))
+                        affine_updates=dict(replayed_versions=replayed,registered_versions=registered,
+                            evicted_versions=self.evicted_versions-old_evictions,
+                            native_resets=self.native_resets-old_resets,
+                            resident_versions=len(self.verified),resident_version_cap=self.service.native_affine_versions,**metrics))
         except BaseException:
-            self.verified.clear();self.worker=None
+            self.invalidate()
             raise

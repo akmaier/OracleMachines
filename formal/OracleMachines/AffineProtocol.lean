@@ -1,4 +1,4 @@
-import OracleMachines.AffineCosts
+import OracleMachines.AffineResident
 import Lean.Data.Json
 
 /-! Native affine growth. The executed algebra carries exact history semantics.
@@ -9,7 +9,7 @@ open Lean
 
 structure Node where
   width : Nat
-  state : State width
+  state : Resident width
   steps : Nat
   steps_exact : steps = state.history.steps
   answer : Bool
@@ -77,8 +77,8 @@ def define (store : Store) (request : Json) : Except String (Store × Json) := d
   let node ← if mode == "affine_init" then do
       let width ← request.getObjValAs? Nat "width"
       if width == 0 || width > 128 then throw "Affine width must be 1 to 128"
-      let state := initial width
-      pure (Node.mk width state 0 rfl state.answer rfl request 0 0 (by omega))
+      let state := residentInitial width
+      pure (Node.mk width state 0 (by change 0 = (residentInitial width).history.steps; rw [residentInitial_history]; rfl) state.answer rfl request 0 0 (by omega))
     else if mode == "affine_append" then do
       let base ← request.getObjValAs? String "base"
       let some previous := store[base]? | throw "Unknown affine base"
@@ -87,7 +87,7 @@ def define (store : Store) (request : Json) : Except String (Store × Json) := d
       let state := result.1
       let decision := decideRun state.summary
       pure (Node.mk previous.width state (previous.steps+1)
-        (by change previous.steps+1 = previous.state.history.steps+1; rw [previous.steps_exact])
+        (by rw [Resident.appendRun_history]; change previous.steps+1 = previous.state.history.steps+1; rw [previous.steps_exact])
         decision.1 (decideRun_value _) request (appendBudget previous.width equations.length)
         (result.2+decision.2) (previous.state.appendRun_bound equations))
     else throw "Unknown affine definition mode"
@@ -98,5 +98,29 @@ def query (store : Store) (request : Json) : Except String Json := do
   let some node := store[root]? | throw "Unknown affine root"
   let includeSummary ← request.getObjValAs? Bool "summary"
   return report node includeSummary
+
+/-- A computed affine child contains no live reference to its parent's map name.
+Its exact original history is erased proof data; eviction cannot change that
+child's summary, answer or semantic history. -/
+def dropNames (store : Store) : List String → Store
+  | [] => store
+  | name::rest => dropNames (store.erase name) rest
+
+theorem dropNames_preserves (store : Store) (names : List String) (name : String)
+    (retained : name ∉ names) : (dropNames store names)[name]? = store[name]? := by
+  induction names generalizing store with
+  | nil => rfl
+  | cons head rest ih =>
+    simp only [List.mem_cons,not_or] at retained
+    simp only [dropNames,ih _ retained.2]
+    simp [Std.HashMap.getElem?_erase,Ne.symm retained.1]
+
+def drop (store : Store) (request : Json) : Except String (Store × Json) := do
+  let names ← request.getObjValAs? (Array String) "ids"
+  if names.size > 4096 then throw "Affine eviction batch exceeds capacity"
+  let next := dropNames store names.toList
+  return (next,Json.mkObj [("valid",toJson true),("resident_versions",toJson next.size)])
+
+def stats (store : Store) : Json := Json.mkObj [("resident_versions",toJson store.size)]
 
 end OracleMachines.Affine

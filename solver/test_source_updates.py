@@ -17,6 +17,36 @@ def sat(clauses,n):
 
 
 class SourceUpdateTests(unittest.TestCase):
+    def test_native_history_errors_reset_and_name_reuse(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            init=dict(mode='source_init',id='history-layout',width=1,layers=[[1],[2]])
+            self.assertTrue(s._request(init)['valid'])
+            def leaf(name,clauses,mask):
+                return dict(id=name,layout='history-layout',width=1,start=0,height=0,mask=mask,clauses=clauses)
+            def define(*nodes):return s._request(dict(mode='source_define',nodes=list(nodes)))
+            def query(name):return s._request(dict(mode='source_query',root=name,witness=False))
+            define(leaf('root',[[1]],12))
+            first=s._request(dict(mode='source_bind',root='root',width=1,layers=[[1],[2]],clauses=[[1]],witness=False))
+            self.assertTrue(first['verdict']['answer'])
+            # Earlier members of a rejected local batch must not leak into the store.
+            with self.assertRaises(ValueError):define(leaf('temporary',[],15),leaf('bad',[[]],15))
+            with self.assertRaises(ValueError):query('temporary')
+            self.assertTrue(query('root')['answer'])
+            with self.assertRaises(ValueError):s._request(dict(mode='source_drop',ids=['root','missing']))
+            self.assertTrue(query('root')['answer'])
+            define(leaf('negative',[[]],0))
+            patch=s._request(dict(mode='source_patch',base='root',root='negative',edits=[dict(edge=0,clauses=[[]])],witness=False))
+            self.assertFalse(patch['verdict']['answer'])
+            self.assertTrue(query('root')['answer'])
+            s._request(dict(mode='source_drop',ids=['root']))
+            define(leaf('root',[[]],0))
+            self.assertFalse(query('root')['answer'])
+            self.assertTrue(first['verdict']['answer'])
+            self.assertTrue(s._request(init)['valid'])
+            with self.assertRaises(ValueError):query('root')
+            define(leaf('root',[],15))
+            self.assertTrue(query('root')['answer'])
+
     def test_initial_binding_preserves_occurrences_through_grouping(self):
         with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
             layers=[[1],[2],[3],[4]]

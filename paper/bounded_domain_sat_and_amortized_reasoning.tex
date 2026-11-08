@@ -2616,6 +2616,33 @@ A separate six-case diagnostic chosen to exercise branching gives a shortest-cla
 
 All 312 Python tests pass, including exhaustive small branch fibers, model lifting, terminal/component priority, corrupted reasons and transport, and cold coexistence. Seven new and five previous archives replay unchanged, and the existing Lean build and axiom audit pass. No additional CNF gains structural closure. Shortest-clause processing still leaves 107 non-tiny inputs unresolved, including the fresh 20/32-variable 3-CNFs. Its remaining logical payload is mainly unresolved nodes, 12,124,411 bytes, and OR alternatives, 11,510,391 bytes. The next discovery experiment is bounded probing on conditioned residuals containing binary clauses: a checked unit conflict under one assumption can justify the opposite forced value. Probe work must be charged even when the resulting consequence avoids an arbitrary branching choice. No uniformly small probe budget, compact closure or efficient complete partition of arbitrary SAT follows from edge fusion.
 
+\subsection{Checked failed literals expand structural coverage}
+\label{sec:checked-failed-literals}
+
+The next discovery step uses a standard look-ahead rule. If assigning a literal exposes a unit-propagation conflict, that literal must be false in every model. Failed-literal detection and bounded candidate preselection are established SAT techniques \citep{heule2006march}. Here the question is whether their checked integration exposes enough additional structure to repay discovery, evidence and persistence costs. We retain the existing family, component, simplification and projection priorities. On each remaining residual, the optional policy ranks variables by binary-clause incidence, breaks ties by identifier and probes both values of up to one or four variables. It stops at the first checked conflict. The opposite assumption and its unit closure lead directly to the next child, at unchanged arbitrary-branching depth.
+
+\begin{proposition}[A refuted assumption forces the opposite value]
+\label{prop:failed-literal-reduction}
+Suppose $F\vert_{x=b}$ is unsatisfiable. Every model of $F$ assigns $x=1-b$, and $F$ is satisfiable if and only if $F\vert_{x=1-b}$ is satisfiable. If checked simplification of the latter branch produces $G$ on variables $Y$, then $G(y)\Longleftrightarrow\exists h\,F(x=1-b,y,h)$, where $h$ assigns the other variables. Every model of $G$ lifts to a model of $F$.
+\end{proposition}
+\begin{proof}
+A model assigning $x=b$ would satisfy the refuted restriction, a contradiction. Every model therefore lies in the opposite branch. Conversely, a model of that restriction extends to $F$ by assigning $x=1-b$. The existential relation and lifting follow from Proposition~\ref{prop:fused-conditioning-closure}.
+\end{proof}
+
+The Lean lemmas \texttt{failed\_condition\_forces} and \texttt{satisfiable\_failed\_condition} establish the first two conclusions from a supplied branch refutation. The Python checker separately verifies each unit reason and conflict, every inconclusive fixed point, candidate order, retained closure and exact child binding. It checks lifted models against the parent. These semantic lemmas do not refine the Python checker or SQLite. An inconclusive probe supplies no refutation and no satisfiability certificate. Every unsuccessful attempt remains archived.
+
+The binary-clause gate has a direct justification. In a normalized, nonterminal residual at a unit fixed point, assigning a variable outside all binary clauses leaves every unsatisfied clause with at least two literals. Propagation cannot begin and cannot produce a conflict. Thus this gate omits no single-assumption unit-conflict opportunity in that setting. The candidate cap can still omit useful binary variables; larger look-ahead is a different operation.
+
+The matched experiment retains all 949 earlier inputs and adds 64 fresh seeded random formulae and 12 constructed, renaming and invalidation controls. All modes use depth two and four arbitrary conditioning candidates. Beyond the 512 exhaustive tiny inputs, structural closure rises from 358/513 for the fused shortest-clause baseline to 465/513 with one probe variable and 484/513 with four. On the fresh random inputs alone, closure rises from 19/64 to 43/64 and 51/64; the four-variable policy closes 23/32 pure 3-CNFs and 28/32 mixed-width inputs. On the old non-tiny inputs it reaches 423/437 rather than 330/437. Its 126 gains include 88 SAT and 38 UNSAT formulae, with no lost closures against this baseline on the measured corpus. Structural closure and the SAT answer remain distinct.
+
+Total operation time falls from 27.11056 to 18.93343 and 18.87839 seconds, and SQLite from 93,143,040 to 69,357,568 and 65,056,768 bytes. The four-variable policy retains 5,271 pattern nodes rather than 8,761; full cold checking falls from 10.07933 to 6.41165 seconds. These times charge recognition, propagation, checking, persistence, original-source solving and successful root lifts. The unchanged ordinary solver retains 5,379 residuals in every mode; solving alone takes 7.62782 seconds. The analysis layer therefore still costs more than ordinary solving alone. A separate six-case traced Python peak falls from 3,776,338 to 1,968,117 bytes, excluding native SQLite memory, RSS and full-corpus peak. Warm replay slightly regresses, from 0.12492 to 0.12835 seconds. Single sequential synthetic measurements do not establish general speedups or statistical significance.
+
+The four-variable policy stores 17,352 attempts, of which 14,394 are inconclusive, and performs 2,958 forced rewrites. Arbitrary conditioning candidates fall from 5,552 to 1,241, but the forced rewrites still require work: 1,799 occur at depth zero. Budgets restart on each eligible residual. With $v$ variables and $L$ literal occurrences, at most $2k$ probes and one retained closure cost $O(k(v+1)L+v\log v)$ word operations with the current scan propagation, in addition to existing recognition, normalization and archive costs. Probe traces require $O(kv\log(v+m+2))$ bits for $m$ clauses, apart from full source, profile and key storage. Neither bound limits the total number of acquired residuals. Fixed arbitrary-branch depth is not a bound on all reasoning effort.
+
+All 319 Python tests and four new complete archive replays pass; seven preceding archives replay unchanged. The Lean build and audit pass at 4,089 declarations and 1,948 theorem declarations. Twenty-nine non-tiny cases remain unresolved, and several misses become slower. Probe nodes now account for 12,544,663 of 22,743,434 logical node bytes. On these misses, a separate diagnostic probing every binary-clause variable closes only two more cases; inventory-only time rises from 6.81731 to 11.49531 seconds and SQLite from 20,533,248 to 24,760,320 bytes. Raising the cap unconditionally is therefore not supported by this diagnostic.
+
+An unused structural opportunity remains inside the saved inconclusive traces. In 245 archived clear-probe nodes, including 179 unresolved nodes, both assumptions already propagate a common literal. Boolean case splitting proves that consequence forced. The inventory does not yet apply these facts; the counts include unselected alternatives and do not establish additional root coverage. Reusing the checked traces could expose structure without repeating propagation, but composition, maintenance and total costs need a matched implementation study. The present results support checked look-ahead on this corpus, not a uniformly small probe budget, complete tractable partition or polynomial arbitrary-SAT expansion.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 
@@ -2885,6 +2912,12 @@ Provably good solutions to the knapsack problem via neural networks of bounded s
 \emph{INFORMS Journal on Computing}, 35(5), 1079--1097.
 Earlier conference version at AAAI 2021.
 \href{https://doi.org/10.1287/ijoc.2021.0225}{doi:10.1287/ijoc.2021.0225}.
+
+\bibitem[Heule and van Maaren(2006)]{heule2006march}
+Heule, M.~J.~H., and van Maaren, H. (2006).
+March\_dl: Adding adaptive heuristics and a new branching strategy.
+\emph{Journal on Satisfiability, Boolean Modeling and Computation}, 2, 47--59.
+\url{https://www.cs.cmu.edu/~mheule/publications/JSAT2_3_Heule.pdf}.
 
 \bibitem[Immerman(2010)]{immerman2010objections}
 Immerman, N. (2010).

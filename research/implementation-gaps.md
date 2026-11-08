@@ -3112,3 +3112,12 @@ Four new and seven prior complete archives replay unchanged. The two new Lean
 lemmas `failed_condition_forces` and `satisfiable_failed_condition` prove the
 semantic rule from a supplied refutation; they do not refine Python or SQLite.
 The full Lean build/audit passes at 4,089 declarations / 1,948 theorem declarations.
+
+Implementation/evidence checkpoint `7d4f068` is pushed. Manuscript Section 12.50
+adds the failed-assumption proposition and proof, the binary-incidence gate
+argument, verified prior-work attribution, matched results and cap limitations.
+All 49 earlier proof blocks remain intact (50 total; 175 unique labels). The
+97-page PDF builds without warnings or box errors; pages 89--90 and bibliography
+page 95 were visually inspected. Resume with checked common-consequence reuse
+from the stored probe traces; retain the 29-case cap diagnostic and avoid
+repeating unconditional probe-budget escalation.

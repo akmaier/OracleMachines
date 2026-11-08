@@ -42,7 +42,8 @@ def analyze(directory):
         if node['kind'] == 'project':
             child = nodes[node['edge']['key']]
             item.update(projected_shape=child['profile']['shape'], target_kind=child['kind'],
-                        target_cnf=child['cnf'], parent_binding=node['edge']['names'])
+                        target_cnf=child['cnf'], parent_binding=node['edge']['names'],
+                        target_hash=hashlib.sha256(node['edge']['key'].encode()).hexdigest())
         roots.append(item)
     return dict(report_sha256=hashlib.sha256((directory/'report.json').read_bytes()).hexdigest(),
                 source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),

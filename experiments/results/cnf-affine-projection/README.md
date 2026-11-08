@@ -63,7 +63,10 @@ representative unrestricted-SAT workload distribution.
 
 The six new depth-two closures are precisely the coupled 4/8/16/32/64/128-equation
 controls. All also close at depth zero. Each projects to two variables and one
-binary clause. At 32 equations, operation time falls from 136.38 to 44.52 ms;
+binary clause. All six root rewrites reuse the same archived projected child;
+their exact parent sources and name bindings remain separate. The child identity
+hashes are recorded in `mechanisms.json` and agree across all six sizes.
+At 32 equations, operation time falls from 136.38 to 44.52 ms;
 at 128 equations/258 variables, from 870.78 to 578.51 ms. In the latter case,
 discovery falls from 390.46 to 13.13 ms, while the ordinary solver still spends
 564.84 ms on the original source and model lifting adds 0.52 ms. Integration

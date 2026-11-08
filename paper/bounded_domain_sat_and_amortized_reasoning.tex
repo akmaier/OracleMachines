@@ -2506,6 +2506,35 @@ The smaller equation description must also be separated from the retained archiv
 
 The remaining coupled controls point to the next useful experiment. A system with 32 equations and 66 variables stays unresolved after adding one binary clause, although only two variables connect the clause to the affine part. Frequency-first conditioning does not exploit that interface. Exact existential projection of the affine constraints onto shared variables, followed by checked composition and witness lifting, is therefore the next target. The arbitrary leftover CNF, projection cost, source dependencies and cold verification must remain in the account. Small observed interfaces do not establish a uniformly small interface for every CNF.
 
+\subsection{Exact projection onto the variables shared with leftover clauses}
+\label{sec:affine-coupling-projection}
+
+The next extension implements that interface reduction. After extracting the affine equations $A$, we retain every leftover clause in $R$. Let $H$ contain the variables of $A$ absent from $R$. Elimination pivots on $H$ first, and the remaining equations define a relation $B$ on the retained variables. This changes the relevant equivalence: extraction preserved every full assignment, whereas projection preserves exactly the assignments that have an extension on $H$.
+
+\begin{proposition}[Projection with shared constraints]
+\label{prop:affine-coupling-projection}
+Suppose $F(x_H,y)=A(x_H,y)\land R(y)$, where $A$ is a finite system of affine equations over $\mathbb F_2$. Eliminate the variables in $H$ and let $B(y)$ be the remaining constraints. Then
+\[
+ \exists x_H\ F(x_H,y)\quad\Longleftrightarrow\quad B(y)\land R(y).
+\]
+\end{proposition}
+
+\begin{proof}
+Each row operation preserves the affine solution set. After elimination, rows without an internal pivot constrain only $y$. A solution of $A$ must satisfy these rows. Conversely, suppose $y$ satisfies them. Choose values for the nonpivot internal variables, then assign internal pivot variables in decreasing pivot order. Each pivot equation uniquely determines its pivot value from variables already assigned. This constructs an extension satisfying all transformed rows and hence $A$. The value of $R$ is unchanged because no variable in $H$ occurs in it. Combining these statements proves the equivalence and the two decision transfers.
+\end{proof}
+
+The independent Python checker verifies every row dependency and result, then requires the complete set of boundary constraints, up to exact duplicates and zero equalities. A projected child retains its source binding. Its variable support must be a strict subset of the parent's, so projection needs no conditioning depth and preserves termination of the bounded planner. Satisfying child assignments are lifted by back substitution and checked against the full parent CNF. The Lean development now proves composition of the existing executable affine projection with an arbitrary leftover predicate invariant under changes to eliminated variables. Three lemmas establish the exact existential relation, SAT equivalence and UNSAT transfer. These semantic results do not refine the Python extractor, row-trace checker, encoder, lifting routine or SQLite.
+
+The current planner still accepts CNF children. It therefore materializes a direct encoding of the projected equations, charging $w2^{w-1}$ literal occurrences for a width-$w$ equation. A deterministic budget, 4,096 occurrences by default, is checked before enumeration; an empty contradiction clause costs one budget unit. If materialization exceeds the budget, the original formula and bounded planner remain available. This failure is recorded as an encoding limit, not a refutation. Native affine boundary rows could avoid this exponential conversion, but have not yet been integrated into mixed residual analysis.
+
+The matched study extends the earlier 733 sources to 775 by adding coupled 64- and 128-equation systems, four boundary controls with variants, and 32 seeded affine mixtures. At depth two, closure beyond the 512 tiny sources rises from 209/263 to 215/263. The six gains are exactly the growing coupled systems with 4 through 128 equations. All six already close at depth zero: each projects to two variables and one binary clause. On the original 664 inputs, however, closure remains 116/152 beyond the tiny sources. The 34 seeded CNFs and the matching/parity pair remain unresolved. On the new mixtures, depth-zero closure rises from 14 to 21, but depth-two closure remains 31 of 32.
+
+Total analysis, unchanged original-source solving and successful root-model lifting take 3.75039 seconds rather than 4.47144 seconds at depth two. Pattern nodes fall from 3,389 to 3,221, SQLite from 22,913,024 to 19,030,016 bytes, and cold full checking from 1.40055 to 0.98692 seconds. At depth zero, operation time instead rises from 2.17737 to 2.26272 seconds and SQLite grows by 262,144 bytes. The separate six-case memory diagnostic also increases: peak traced Python allocation is 153,395 rather than 147,595 bytes at depth two, excluding native SQLite and process RSS. These single sequential samples establish neither general runtime improvement nor uniform memory reduction. All 292 Python tests pass, all new and previous comparison archives replay unchanged, and the Lean axiom audit passes with 4,087 declarations and 1,946 theorem declarations.
+
+The cost shift is visible on the 128-equation, 258-variable control. Discovery falls from 390.46 to 13.13 ms, but the separate ordinary solver still spends 564.84 ms on the original source. Lifting adds 0.52 ms. Using the checked projected instance for actual decisions could avoid this duplicated solving; that integration is still open. With $e$ equations, $n$ variables and $h$ eliminated variables, projection and its checker each use at most $e\min(e,h)$ XOR operations on $n$-bit masks, in addition to extraction, mask construction and row scans. Sources, masks, dependencies and bindings remain stored. These per-rewrite bounds do not bound the completed decomposition of every arbitrary CNF.
+
+The retained misses identify the next discovery gap. The matching/parity source shrinks from 13 variables and 61 literals to 10 variables and 29 literals, but the remaining bridge prevents strict matching recognition. Its positive-only bridge variable could be set true, exposing the matching component. Checked simplification of leftovers and conditioning on informative interface variables therefore deserve comparison on all current misses, including couplings that constrain both polarities. Another control exceeds the boundary-encoding budget; subsequent frequency-based conditioning closes one ordering but misses a renamed version. The reporting policy is deterministic, but is not invariant under every renaming. These limitations remain explicit rather than being counted as arbitrary-SAT coverage.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -2914,3 +2914,14 @@ all unresolved random cases. Native affine boundary rows would avoid the observe
 direct-encoding cap; integrating projected decisions could avoid expensive
 original-source solving. Keep these supporting opportunities distinct from the
 primary unresolved discovery obligation and arbitrary-SAT resource bounds.
+
+Implementation checkpoint `b98dbe2` is committed and pushed. The six growing
+coupled systems all share exactly one archived projected child, confirmed by
+the retained identity hashes; original sources and bindings remain distinct.
+Manuscript Section 12.46 adds the projection proposition/proof, cost account and
+negative results. All 46 prior proof blocks remain intact (47 total; 168 unique
+labels). The 92-page PDF builds without warnings or box errors; changed pages
+83--85 were visually inspected. The Lean build and axiom audit pass with 4,087
+declarations / 1,946 theorem declarations, including the three new composition
+lemmas. The next discovery and integration targets are persisted in both priority
+files and the evidence README.

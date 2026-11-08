@@ -17,6 +17,65 @@ def sat(clauses,n):
 
 
 class SourceUpdateTests(unittest.TestCase):
+    def test_initial_binding_preserves_occurrences_through_grouping(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            layers=[[1],[2],[3],[4]]
+            raw=[[3,-4],[1,-2],[3,-4],[2,-3],[1,-2]]
+            initial=s.source_cnf(1,raw,layers)
+            grouped=[[1,-2],[1,-2],[2,-3],[3,-4],[3,-4]]
+            def bind(clauses,witness=False):
+                return s._request(dict(mode='source_bind',root=initial['root'],width=1,
+                                       layers=layers,clauses=clauses,witness=witness))
+            for clauses in (raw,grouped):
+                for witness in (False,True):
+                    result=bind(clauses,witness)
+                    self.assertIs(result['verdict']['answer'],sat(raw,4))
+                    self.assertEqual(result['binding_visits'],7)
+                    self.assertEqual(result['binding_leaves'],4)
+                    if witness:
+                        values=[bool(word&1) for word in result['verdict']['witness']]
+                        self.assertTrue(all(any(values[abs(lit)-1]==(lit>0) for lit in c) for c in raw))
+            for forged in (grouped[1:],[[-2,1]]+grouped[1:],grouped+[grouped[-1]]):
+                self.assertEqual(sat(forged,4),sat(raw,4))
+                with self.assertRaisesRegex(ValueError,'Original source clauses differ'):bind(forged)
+                self.assertTrue(s.source_cnf(base=initial['state'])['answer'])
+            false=s.source_cnf(1,[[],[]],layers)
+            for witness in (False,True):
+                result=s._request(dict(mode='source_bind',root=false['root'],width=1,
+                                       layers=layers,clauses=[[],[]],witness=witness))
+                self.assertIs(result['verdict']['answer'],False)
+                with self.assertRaisesRegex(ValueError,'Original source clauses differ'):
+                    s._request(dict(mode='source_bind',root=false['root'],width=1,
+                                    layers=layers,clauses=[[]],witness=witness))
+            self.assertFalse(s.source_cnf(base=false['state'])['answer'])
+
+    def test_initial_binding_counts_complete_padded_scan(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            for edges in (1,2,3,5,17,33):
+                layers=[[i] for i in range(1,edges+2)]
+                initial=s.source_cnf(1,[],layers)
+                leaves=1<<(edges-1).bit_length()
+                for witness in (False,True):
+                    result=s._request(dict(mode='source_bind',root=initial['root'],width=1,
+                                           layers=layers,clauses=[],witness=witness))
+                    self.assertEqual(result['binding_visits'],2*leaves-1)
+                    self.assertEqual(result['binding_leaves'],leaves)
+                    self.assertEqual(result['binding_relation_comparisons'],leaves)
+                    self.assertIs(result['verdict']['answer'],True)
+
+    def test_initial_binding_rejects_wrong_raw_fields_and_keeps_live_root(self):
+        with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
+            initial=s.source_cnf(1,[],[[1],[2],[3],[4]])
+            request=dict(mode='source_bind',root=initial['root'],width=1,
+                         layers=[[1],[2],[3],[4]],clauses=[],witness=False)
+            node=s.source_layers.read(initial['root'])
+            for changes in (dict(width=2),dict(layers=[[4],[3],[2],[1]]),dict(clauses='invalid'),
+                            dict(width=0),dict(layers=[]),dict(root=node['left']),dict(root=node['right']),
+                            dict(root='missing'),dict(witness='invalid')):
+                with self.assertRaises(ValueError):s._request(dict(request,**changes))
+                self.assertTrue(s._request(dict(mode='source_query',root=initial['root'],witness=False))['answer'])
+            self.assertTrue(s._request(request)['verdict']['answer'])
+
     def test_source_verdict_requires_complete_minimal_root(self):
         with tempfile.TemporaryDirectory() as d,PersistentSolver(Path(d)/'s.db') as s:
             s._request(dict(mode='source_init',id='coverage',width=1,layers=[[1],[2],[3],[4]]))

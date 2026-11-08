@@ -1,4 +1,4 @@
-import OracleMachines.SourceVerdict
+import OracleMachines.SourceInitial
 
 /-! Source-bearing nodes: provenance and relations use the same balanced tree.
 The partition is fixed within a version family. Local edits replace the clauses
@@ -194,37 +194,24 @@ theorem patchQuery_success (store : Store) (request result : Json)
       have same : certified.val = result := by simpa [patchQuery,present,checked] using accepted
       exact ⟨context,rfl,same ▸ certified.property⟩
 
-/-- Initial flat CNF binding is intentionally linear. Later requests carry only
-local clauses and use the checked patch traversal; restart replays the source-bearing nodes. -/
+/-- Initial binding certifies the parsed CNF, exact live original buckets,
+complete root coverage and the returned decision. Its full scan is charged. -/
 def bindSource (store : Store) (request : Json) : Except String Json := do
   let some context := store.context | throw "Source layout not initialized"
-  let layout := context.layout
-  let compiled ← compileSource request
-  if compiled.width != layout.width || compiled.layers != layout.layers then throw "Source partition differs"
-  let root ← request.getObjValAs? String "root"
-  let mut pending := [root]
-  let mut visited := 0
-  for _ in [:131072] do
-    match pending with
-    | [] => break
-    | name::rest =>
-      pending := rest
-      visited := visited+1
-      let some (body,t) := context.nodes.nodes[name]? | throw "Missing source binding node"
-      if t.height == 0 then
-        let edge ← body.getObjValAs? Nat "start"
-        if edge < compiled.original.size then
-          if (← body.getObjValAs? (Array (Array Int)) "clauses") != compiled.original[edge]! then
-            throw "Original source clauses differ from checked leaves"
-      else
-        pending := (← body.getObjValAs? String "left") :: (← body.getObjValAs? String "right") :: pending
-  if !pending.isEmpty then throw "Source binding traversal cap exceeded"
-  let some (_,checked) := context.nodes.nodes[root]? | throw "Unknown source root"
-  let bound ← bindCompilation compiled checked
-  let answer := bound.decide
-  let verdict ← query store request
-  if (← verdict.getObjValAs? Bool "answer") != answer then throw "Source decision disagrees with binding proof"
-  return (Json.mkObj [("verdict",verdict.setObjVal! "answer" (toJson answer)),
-    ("binding_visits",toJson visited)]).mergeObj bound.metrics
+  let checked ← OracleMachines.SourceInitial.bindSource context.layout context.checked request
+  return checked.val
+
+theorem bindSource_success (store : Store) (request result : Json)
+    (accepted : bindSource store request = .ok result) :
+    ∃ context, store.context = some context ∧
+      OracleMachines.SourceInitial.InitialResponse context.layout context.checked request result := by
+  cases present : store.context with
+  | none => simp [bindSource,present] at accepted
+  | some context =>
+    cases checked : OracleMachines.SourceInitial.bindSource context.layout context.checked request with
+    | error message => simp [bindSource,present,checked] at accepted
+    | ok certified =>
+      have same : certified.val = result := by simpa [bindSource,present,checked] using accepted
+      exact ⟨context,rfl,same ▸ certified.property⟩
 
 end OracleMachines.SourceUpdates

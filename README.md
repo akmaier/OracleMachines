@@ -103,6 +103,15 @@ gain on 24 fresh random sources. Total time rises 38.29 -> 39.73 s and SQLite
 local learning from checked one-way implications beyond existing binary paths,
 present on selected unresolved paths of 37 remaining source misses.
 
+The [bounded-learning study](experiments/results/cnf-probe-learning/README.md)
+now turns saved one-way implications into checked binary clauses for one extra
+probe pass. It adds three closures (604/661 -> 607/661), including one fresh
+48-variable source, but total time rises 48.18 -> 52.70 s and SQLite 163.53 ->
+168.27 MB. The policy stays optional. Changed variable choices explain part of
+the gains; added propagation matters for the fresh gain. The next supporting
+target is reusing the 10,018 continuation certificates that exactly repeat earlier
+ones, while keeping new implications, dependencies and unresolved cases explicit.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

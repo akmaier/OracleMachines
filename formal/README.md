@@ -1265,3 +1265,16 @@ SQLite or cost bounds. All 333 Python tests pass, and the full Lean build/axiom
 audit covers 4,101 declarations / 1,957 theorem declarations (including generated
 ones). The [matched experiment](../experiments/results/cnf-probe-equivalence/README.md)
 preserves seven new closures alongside a full-corpus time/storage regression.
+
+The bounded-learning follow-up adds `probe_implication_entails_clause` and
+`entailed_signed_batch_models` in `Residuals.lean`. A supplied implication under
+one Boolean assumption yields the corresponding signed binary clause. A batch
+entailed by the original source preserves all models when conjoined with it.
+The hypotheses explicitly exclude circular justification by the new additions.
+Python separately validates both probe phases, the bounded batch, graph filtering,
+strict support decrease, child identities and lifted models. The semantic lemmas
+do not refine this implementation, SQLite or resource bounds. All 341 Python
+tests pass; the full Lean build/axiom audit covers 4,103 declarations / 1,959
+theorem declarations. The [comparison](../experiments/results/cnf-probe-learning/README.md)
+retains three additional closures, increased cost and a diagnostic separating
+changed probe choices from increased propagation strength.

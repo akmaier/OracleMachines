@@ -159,6 +159,22 @@ learning on these paths, preserving the implication dependencies and charging
 extra clause/propagation/archive work. No-path evidence is not semantic
 nonredundancy, and no added closure or total-cost benefit is yet established.
 
+**Bounded implication learning implemented:** the
+[1,173-source study](../experiments/results/cnf-probe-learning/README.md)
+checks each learned binary clause on the original source, then permits one
+bounded continuation pass. A child requires strict support reduction; unsuccessful
+learning stays recorded without clause-only recursion. Non-tiny closure rises
+604/661 -> 607/661, including one fresh 48-variable source, with higher runtime,
+space and cold cost. Counterfactual continuation choices without additions still
+reduce the selected nodes on both old gains, while the fresh gain's node needs
+the additional propagation in this pass. Do not conflate changed ranking with
+stronger inference. The next supporting target is reuse of checked closures:
+10,018 continuation certificates are identical to earlier ones. Test the added
+clauses under the old closure before recomputing it, with exact dependencies and
+shared proof checking. This could support further investigation of the 48 selected
+leaves where learning remains inconclusive; no new benefit is yet measured.
+The policy remains optional and all 54 remaining source misses are explicit.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

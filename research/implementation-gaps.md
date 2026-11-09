@@ -3250,3 +3250,91 @@ All 51 earlier proof blocks remain intact (52 total; 179 unique labels). The
 100-page PDF builds with no final-pass warnings or box errors; pages 92--94 and
 bibliography pages 98--99 were visually inspected. Resume from the bounded-learning
 target above, preserving the full-corpus regression and the remaining 51 misses.
+
+## Bounded local learning and gain attribution (9 November)
+
+`cnf_probe_learning.py` adds one bounded continuation round after the previous
+probe rules are inconclusive. Saved original-source implications license at most
+four binary clauses; duplicates and binary-path consequences are skipped, including
+paths through earlier accepted batch clauses. The checker verifies original
+reasons before trusting additions, preventing circular justification. A second
+bounded probe pass receives the augmented source. Only strict support reduction
+can acquire a child; a failed round remains in the profile and continues ordinary
+planning on the original CNF. Exact children and forced/signed lifts are checked.
+Old recognition overlaps, priorities and archives remain intact.
+
+The [37-source pilot](../experiments/results/cnf-probe-learning-pilot/README.md)
+closes only old source 1057, with time 16.98242 -> 19.27531 s and SQLite
+53,002,240 -> 56,647,680 bytes. The
+[full study](../experiments/results/cnf-probe-learning/README.md) retains all
+1,137 previous inputs and adds 24 fresh random 3-CNFs through 48 variables plus
+twelve growing, signed and edited controls. Non-tiny structural closure rises
+604/661 -> 607/661, with no lost baseline closure on this corpus. Gains are
+956 (old, 20 variables, SAT), 1057 (old, 48 variables, UNSAT) and 1155 (fresh,
+48 variables, UNSAT). Fresh closure rises 18/24 -> 19/24. Fifty-four cases remain
+structurally unresolved: 49 old and five fresh. The independent source solver
+still decides all inputs and retains the same 9,760 residuals in all modes.
+
+The policy stays optional. Total time rises 48.17697 -> 52.69690 s, discovery
+35.64804 -> 39.96872 s, SQLite 163,532,800 -> 168,267,776 bytes and full cold
+checking 20.78528 -> 22.01280 s. The six-case traced Python peak rises
+18,466,093 -> 20,377,761 bytes; native memory, RSS and full-corpus peak are not
+measured. These are single sequential synthetic measurements. Learning adds a
+second probe pass, so the modes do not have equal total probe budgets. All extra
+work is charged; the targeted pilot's minor test overlap is disclosed separately.
+
+There are 1,938 learning attempts and 4,909 proposed clauses. Of these attempts,
+1,709 are inconclusive; 229 yield support reductions (150 forced, 53 equivalence,
+26 common). Only seven immediately reach a recognized family, while 68 still
+lead to an unresolved child. All 1,780 shared exact parent CNF/depth pairs retain
+their original attempt lists. Total probes rise 47,286 -> 62,784. Pattern nodes
+fall 11,410 -> 11,406, yet logical bytes rise 63,465,538 -> 66,573,092. Batch and
+continuation JSON occupies 1,945,661 bytes. Selected unresolved literals fall
+12,686 -> 11,106. Eighty selected distinct unresolved nodes remain, with 48
+inconclusive learning rounds and 32 clear profiles. Neither fewer nodes nor
+smaller remaining interactions guarantees lower acquisition cost.
+
+`learning-mechanisms.json` preserves an attribution diagnostic: use the same
+continuation variables on the source without additions. Forty-nine of 229
+successful nodes still reduce (39 forced, five common, five equivalence). This
+includes the selected learning nodes on both old gains. The selected node on
+fresh gain 1155 stays inconclusive without additions. Stronger propagation and
+changed choices both contribute; neither semantic necessity nor counterfactual
+whole-source closure follows. Obtaining the changed choices is not free. The
+old 77 selected leaves are also replayed: thirty have no batch, 41 remain
+inconclusive, five force assignments and one yields equivalence. All traces,
+including failures, are retained. The published constraint-resolvent example's
+unmodified all-true recognition and its signed learning variant remain tests.
+
+**Next target:** reuse the checked original closure when the added batch has
+no unit or conflict under that closure and its assumption; otherwise resume
+propagation or retain the full fallback. Of 15,052 continuation probes, 13,194
+repeat an original assumption and **10,018 repeat the complete certificate**.
+This is a concrete opportunity to reduce scans and share proof records without
+dropping stronger propagation. Preserve source/batch identities, clause-index
+transport and all fresh candidate probes. Measure exact plans/coverage, fibers,
+checking, total cost and cold replay before enabling it. This supports further
+discovery on the 48 selected leaves where learning remains inconclusive; no
+runtime saving or new closure from reuse is yet measured. The largest discovery
+case is now 1063 (1.20829 s, separately profiled 4.07290 s). Restriction scans,
+unit checking/propagation and literal helpers dominate; probe nodes account for
+41,131,705 / 66,573,092 logical node bytes. Do not raise the global probe cap yet.
+
+All **341 Python tests** pass (28.55 s), including all 512 two-variable sources
+and 3,304 subsets with at most three three-variable clauses at caps 0/1/4,
+pointwise learned-source equivalence, reduced fibers, signed mixtures, corrupted
+or circular proofs, invalid lifts, source edits, cold corruption and policy
+coexistence. Three new full archives, three pilot archives and three preceding
+full archives replay byte-identically. All 31 code/test fingerprints in each
+new benchmark report match. Two new Lean lemmas prove assumption-to-clause
+entailment and batch model preservation under explicit original-source hypotheses.
+The full build/axiom audit passes at **4,103 declarations / 1,959 theorem
+declarations**. Python, SQLite and resource bounds remain outside refinement.
+
+Implementation/evidence checkpoint **eb412fe** is pushed. Manuscript Section 12.53
+adds Proposition 12.41, its proof, the established local-learning citation,
+coverage/cost results, the changed-choice diagnostic and the next closure-reuse
+condition. All 52 earlier proof blocks remain intact (53 total; 181 unique labels).
+The 102-page PDF builds with no final-pass warnings or box errors; pages 93--96
+were visually inspected. Resume from checked continuation reuse, preserving the
+full cost regression and all 54 structurally unresolved sources.

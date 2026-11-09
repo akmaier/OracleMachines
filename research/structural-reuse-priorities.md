@@ -12,17 +12,43 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-**Next research experiment:** bounded local learning from the checked one-way
-implications that survive signed-equivalence substitution. Start with selected
-unresolved nodes whose implications are not already reachable in the binary
-implication graph: **219 node/clause pairs on 47 nodes, affecting 37 of 51 missed
-source paths**. The preserved `implication-boundaries.json` lists those source
-IDs and exact reasons; case 1061 remains the largest discovery cost. Check every
-assumption/reason dependency, duplicates and binary redundancy before insertion;
-charge the larger propagation state, checks, persistence and cold replay. Absence
-of a binary path does not certify semantic nonredundancy. No benefit is measured
-yet; retain a strict clause budget and compare selected-path coverage and total
-cost before enabling learning globally.
+**Next research experiment:** checked reuse of the original probe closure during
+bounded local learning. The latest run finds **13,194 repeated assumptions** among
+15,052 continuation probes; **10,018 complete certificates are identical**.
+Under a previously checked closure and assumption, inspect only the added batch.
+If it has no unit or conflicting clause, the old closure remains a fixed point;
+otherwise resume propagation or use the full pass. Keep new candidate probes,
+source/batch dependencies and clause-index transport explicit. Test shared proof
+references as well as fewer scans, preserving exact coverage, model fibers,
+failed attempts and cold checks. This is supporting work for deeper discovery:
+48 of 80 selected unresolved leaves still defeat this learning round. Do not
+raise global budgets until the current repeated work is measured and reduced.
+
+The [bounded-learning study](../experiments/results/cnf-probe-learning/README.md)
+implements the preceding implication target. On 1,173 inputs, non-tiny closure
+rises 604/661 -> 607/661, including a fresh 48-variable UNSAT source (18/24 ->
+19/24 fresh closure). There are no observed lost closures. However, total time
+rises 48.177 -> 52.697 s, SQLite 163.533 -> 168.268 MB, cold checking 20.785 ->
+22.013 s and the targeted Python peak 18.466 -> 20.378 MB. Keep it optional.
+The extra pass is charged; total probe budgets are not equal.
+
+The attribution diagnostic matters: fixed continuation choices without added
+clauses still reduce 49 of 229 successful learning nodes, including both old
+source gains (956/1057). The selected node at fresh gain 1155 stays inconclusive
+without additions. Thus stronger propagation and changed choices both matter;
+local counterfactuals do not prove whole-source coverage or free recognition.
+All 1,709 failed learning attempts remain archived. Logical node bytes grow
+63.466 -> 66.573 MB despite four fewer nodes; batch/continuation JSON alone is
+1.946 MB. Selected unresolved literals fall 12,686 -> 11,106. Support reduction
+or fewer nodes alone is insufficient for low total acquisition cost.
+
+The largest remaining discovery case is now **1063**, at 1.208 s main discovery.
+Restriction, unit checks/propagation and literal helpers dominate a separate
+profile. Probe nodes occupy **41.132 / 66.573 MB** logical payload. Reusing checked
+closures and sharing their proof records targets these measured costs while
+retaining the useful learned propagation. Any new coverage or runtime benefit
+from that reuse remains unmeasured. Fifty-four source cases remain structurally
+unresolved; efficient arbitrary-CNF construction and compact coverage are open.
 
 The [signed-equivalence study](../experiments/results/cnf-probe-equivalence/README.md)
 implements the preceding target. Seven of sixteen selected source misses close

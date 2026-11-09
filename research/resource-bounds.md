@@ -1066,3 +1066,26 @@ falls 14.564 -> 11.586 MB, excluding native SQLite, RSS and full-corpus peak.
 Reduced local support, live allocation on selected cases and durable whole-graph
 storage are different quantities. The policy remains optional; no new uniform
 arbitrary-SAT time or memory bound follows.
+
+## Follow-up: bounded local learning (9 November)
+
+The optional [local-learning experiment](../experiments/results/cnf-probe-learning/README.md)
+adds at most q proved binary clauses for one further k-candidate probe pass.
+With d variables, m2 binary clauses and ell literal occurrences at a node, at
+most 2kd saved unit entries provide candidates. Binary-path filtering currently
+costs expected O(ell + kd(d+m2+q)); a batch adds at most 2q occurrences before
+reduction. Repeated-scan continuation propagation costs O(k(d+1)(ell+q) + d log d),
+in addition to checking, normalization, recognition and persistence. Both original
+and continuation traces remain in the archive, including unsuccessful attempts.
+Only a strict support reduction acquires a child, so clause-only learning cannot
+recurse. There are at most d successful learning edges along a support-decreasing
+path; this is not a polynomial bound on the acquired graph or lifetime storage.
+
+On 1,173 sources, closure improves 604/661 -> 607/661 non-tiny, while time rises
+48.177 -> 52.697 s, SQLite 163.533 -> 168.268 MB, cold replay 20.785 -> 22.013 s
+and targeted Python peak 18.466 -> 20.378 MB. Peak excludes native SQLite/RSS and
+full-corpus memory. Four fewer pattern nodes still require 3.108 MB more logical
+node storage. The additional probe pass is charged, not an equal-total-budget
+comparison. Of 15,052 continuation probes, 10,018 reproduce an original certificate
+exactly; incremental fixed-point checks and shared proofs are the next opportunity,
+not a measured saving. No uniformly efficient arbitrary-SAT bound follows.

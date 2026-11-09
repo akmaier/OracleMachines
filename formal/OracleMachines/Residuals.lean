@@ -271,6 +271,35 @@ theorem unsatisfiable_history (base : Formula) (additions : List Formula)
 def SignedClauseHolds (clause : List (Nat × Bool)) (v : Nat → Bool) : Prop :=
   ∃ lit ∈ clause, v lit.1 = lit.2
 
+/-- A proved consequence under one assumption licenses a binary clause in the
+original source. The implication hypothesis must come from a checked proof. -/
+theorem probe_implication_entails_clause (source : List (List (Nat × Bool)))
+    (index target : Nat) (assumption consequence : Bool)
+    (implied : ∀ v, (∀ c ∈ source, SignedClauseHolds c v) →
+      v index = assumption → v target = consequence)
+    (v : Nat → Bool) (model : ∀ c ∈ source, SignedClauseHolds c v) :
+    SignedClauseHolds [(index, !assumption), (target, consequence)] v := by
+  by_cases same : v index = assumption
+  · exact ⟨(target, consequence), by simp, implied v model same⟩
+  · refine ⟨(index, !assumption), by simp, ?_⟩
+    cases actual : v index <;> cases assumption <;> simp_all
+
+/-- A batch whose clauses are all justified on the original source preserves
+every model. This excludes circular justification by the newly added batch. -/
+theorem entailed_signed_batch_models (source additions : List (List (Nat × Bool)))
+    (entailed : ∀ a ∈ additions, ∀ v,
+      (∀ c ∈ source, SignedClauseHolds c v) → SignedClauseHolds a v)
+    (v : Nat → Bool) :
+    (∀ c ∈ source ++ additions, SignedClauseHolds c v) ↔
+      (∀ c ∈ source, SignedClauseHolds c v) := by
+  constructor
+  · intro model c hc
+    exact model c (List.mem_append_left additions hc)
+  · intro model c hc
+    rcases List.mem_append.mp hc with original | added
+    · exact model c original
+    · exact entailed c added v model
+
 def SignedOccurs (source : List (List (Nat × Bool))) (lit : Nat × Bool) : Prop :=
   ∃ clause ∈ source, lit ∈ clause
 

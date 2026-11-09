@@ -1371,3 +1371,13 @@ do not verify the Python index certificate, normalization, persistence or costs.
 The complete build and axiom audit pass at **4,129 declarations / 1,971 theorem
 declarations**. All **395 Python tests** pass, including exhaustive small model
 equivalence, forged witnesses, signed edits, missing variables and cold replay.
+
+The implication-subset extension adds `signed_core_of_entailed_batch_models`:
+append any batch entailed by the original source, then retain source/added clauses
+covering the augmented formula by signed inclusion. The resulting core preserves
+every original model. This composes the existing entailment and subsumption
+lemmas, without treating a clause derived from the original formula as an
+independent oracle assumption. Its proof does not depend on a heuristic candidate
+order. Origin extraction, length indexing, Python checking and resource bounds
+remain separate implementation obligations. All **403 Python tests** pass; the
+complete Lean build audits **4,130 declarations / 1,972 theorem declarations**.

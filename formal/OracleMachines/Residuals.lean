@@ -335,6 +335,20 @@ theorem entailed_signed_batch_models (source additions : List (List (Nat × Bool
     · exact model c original
     · exact entailed c added v model
 
+/-- An originally entailed batch can expose a smaller signed core without
+changing source models. Consequence acquisition and subset recognition costs
+remain separate obligations; this is not a refinement of the Python checker. -/
+theorem signed_core_of_entailed_batch_models
+    (source additions core : List (List (Nat × Bool))) (v : Nat → Bool)
+    (entailed : ∀ a ∈ additions, ∀ w,
+      (∀ c ∈ source, SignedClauseHolds c w) → SignedClauseHolds a w)
+    (retained : core ⊆ source ++ additions)
+    (covered : ∀ c ∈ source ++ additions, ∃ d ∈ core, d ⊆ c) :
+    (∀ c ∈ source, SignedClauseHolds c v) ↔
+      (∀ c ∈ core, SignedClauseHolds c v) := by
+  exact (entailed_signed_batch_models source additions entailed v).symm.trans
+    (signed_core_models (source ++ additions) core v retained covered)
+
 /-- Ranking may choose any subset of a proved candidate pool. Correctness
 depends on original-source entailment, not on the score, order, or usefulness
 of that selection. No optimality or resource guarantee follows. -/

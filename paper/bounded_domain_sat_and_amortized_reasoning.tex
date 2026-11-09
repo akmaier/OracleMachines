@@ -3034,6 +3034,53 @@ If these exact reductions are integrated with checked recomposition, the current
 
 All 388 Python tests and the unchanged Lean build and axiom audit pass, at 4,126 declarations and 1,968 theorem declarations. Three full, three pilot and three prior archives replay byte-identically; warm reuse inserts nothing. Both new reports have 53 matching code, test and Lean fingerprints, with separate hashes for diagnostics and repeated timings. Operation timings retain the preceding inclusions and exclusions, and initialization is measured separately. The local preservation argument does not formally refine the Python selector, and none of these results supplies an efficient unrestricted-SAT classification or a lifetime storage bound.
 
+\subsection{Exposing tractable cores by checked signed subsumption}
+\label{sec:signed-subsumption}
+
+The preceding diagnostic identifies clauses that conceal an already supported family. We now integrate signed subsumption at exhausted unresolved leaves. Existing recognition, component splitting, projection, simplification, probing and conditioning retain priority. We sort clauses by length and source index, retain inclusion-minimal clauses, and record a retained signed-subset witness for every removal. The reduced core receives the existing basic family tests. We follow it only if one succeeds; otherwise the original unresolved leaf and the unsuccessful search remain archived. No further probe pass or recursive discovery budget is added.
+
+\begin{proposition}[Models of a covered signed core]
+\label{prop:signed-core-models}
+Let $F$ be a CNF and $K\subseteq F$ a retained collection of clauses. If every $D\in F$ contains a clause $C\in K$, with literal signs preserved, then $F$ and $K$ have the same models on the original variable universe. Every model of $K$ extends to a model of $F$ with arbitrary values for variables absent from $K$.
+\end{proposition}
+\begin{proof}
+A model of $F$ satisfies every retained clause. Conversely, a model of $K$ satisfies the retained witness $C\subseteq D$ for each $D\in F$, hence also $D$. The literal satisfying that witness belongs to the support of $K$, so changing values outside that support cannot invalidate any source clause.
+\end{proof}
+
+The Lean lemmas \texttt{signed\_clause\_subsumption}, \texttt{signed\_core\_models} and \texttt{signed\_core\_lift} establish these semantic statements for variable/polarity pairs. The Python checker independently verifies complete source-index coverage, retained witnesses and signed inclusion, then replays the deterministic subset policy and checks the normalized core, family evidence and child binding. Lifting fills disappeared variables arbitrarily and checks the original CNF. Removing a witness, changing its polarity or adding an uncovered clause requires a new certificate; a previous source's indices do not license the edited source. The Lean statements do not refine Python integers, normalization, persistence or its runtime.
+
+For a terminal CNF with $m$ clauses, $L$ literal occurrences and maximum width $w$, this implementation uses expected $O(L+m\log(m+1)+m^2w)$ unit-cost work and $O(L+m)$ temporary space for each subset search. Set operations and literal identifiers are charged in that model; this is not a bit-machine bound. Witness checking also replays the search, so it retains the quadratic worst-case term. Witness indices need $O(m\log(m+1))$ bits, in addition to core classification, complete node identities, source bindings and any acquired child. The new search runs at every eligible explored leaf, including unsuccessful alternatives. Restricting it to seven promising saved examples would omit most acquisition cost.
+
+This terminal-only placement also preserves any previously closed source under the fixed baseline policy. Existing successful leaves and deterministic earlier reductions remain available. Component closure requires all children, and a conditioning alternative closes only when both branches close. Replacing an exhausted leaf by a closed core therefore cannot destroy a previous closure; stopping on an earlier newly closed alternative still leaves the parent closed. This structural argument depends on the unchanged earlier rules and exact child transports. It gives neither a bound on the number of explored states nor minimum discovery cost, and is not a Lean refinement of the planner.
+
+The integrated comparison retains all 1,425 previous queries and adds 24 fresh random 3-CNFs and twelve growing, signed or edited controls. All 512 exhaustive tiny cases remain closed. Non-tiny closure rises from 833/949 to 837/949, with gains on sources 977, 1044, 1053 and 1365 and no losses. The old subset improves from 806/913 to 810/913; both policies close 27/36 new queries, including 15/24 fresh random inputs. All original decisions agree with the unchanged independent solver, which retains 20,544 residuals per mode. The four gains realize the previous diagnostic; eight further local opportunities discussed below are not counted as source closures.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{lrrrr}
+\hline
+Policy & Closed / 949 & Total (s) & SQLite (MB) & Cold (s) \\
+\hline
+Ordinary solver & --- & 34.55580 & 127.558 & 7.26244 \\
+Activity baseline & 833 & 145.71977 & 404.410 & 61.80056 \\
+Signed subsumption & 837 & 156.17943 & 408.302 & 66.82085 \\
+\hline
+\end{tabular}
+\caption{Terminal family exposure on 1,461 synthetic queries. The four coverage gains coexist with higher broad-sample runtime and storage costs. Closure is a structural property, not a SAT answer.}
+\label{tab:signed-subsumption}
+\end{table}
+
+The full single sample becomes slower and larger. Discovery time grows from 105.46141 to 117.30413 seconds, while unchanged-solver time varies from 40.18383 to 38.79213 seconds. Twelve-query ABBA BAAB controls instead average 7.28617 versus 6.98024 seconds total and 7.00234 versus 6.69509 seconds discovery. Those controls include all four gained sources and do not estimate repeated full-corpus performance. Within each policy, counters, storage and database hashes repeat exactly; four trials do not establish significance. The policy remains optional. Pattern nodes fall from 24,367 to 24,122, but logical node bytes rise from 161.206 to 166.021 MB and the six-case Python peak from 19.997 to 20.390 MB. Source-binding bytes grow from 5.618 to 5.838 MB over 1,429 records. Warm lookup is 0.25731 versus 0.24904 seconds; initialization is separately measured at 0.05716 versus 0.33504 seconds. Traced subset memory excludes native SQLite, RSS and the full-corpus peak. Preserving both policy namespaces retains both histories.
+
+There are 3,753 terminal subset searches, including unsuccessful alternatives. Thirty-one expose a local family; 3,722 remain unresolved. Discovery performs 33,367,619 subset comparisons, and checking repeats them. Saved search and classification fields add 3.706 MB. Although conditioning candidates fall from 4,631 to 4,575 and logical probes from 112,276 to 110,980, that avoided work does not repay the new broad-sample acquisition cost. A diagnostic reconstructing each tested prefix finds that 27,083,138 comparisons, or 81.17\%, concern distinct normalized clauses of equal width. Such clauses cannot strictly subsume one another. Length-based filtering could avoid these tests while preserving the witnesses, but this checkpoint does not implement or time that optimization. Shorter-clause search, proof replay, normalization and persistence would remain charged.
+
+The remaining frontier has 112 open sources and 149 distinct selected leaves, containing 32,043 literals. Source 1194 remains the largest unresolved discovery case at 1.60328 seconds. Its separate profile records 5,763 restrictions, 4,657 simplification checks and 2,221 propagations. These remain broader runtime costs than subset search alone. The next structural diagnostic uses all binary consequences of the original checked probe traces, including clauses excluded by the current learning filter because they are already binary-transitive. Such a consequence may add nothing to propagation while still supplying a subset witness that removes a longer clause. Appending entailed clauses preserves models; applying Proposition~\ref{prop:signed-core-models} to the augmented formula therefore preserves them again. This uses existing proof evidence, but enumerating, indexing and checking that evidence still costs work.
+
+The offline control exposes eight additional 2-CNF leaves. Current selected plans for sources 1185, 1289 and 1368 could become closed, while five other affected sources retain an unresolved leaf. These are prospective completions, not part of the measured 837/949. Integration still requires source-bound implication reasons, checked subset witnesses, exact child transport and full acquisition, storage and cold-replay measurements. Most unresolved interactions survive both diagnostics. Neither a smaller syntactic core nor an explicit unresolved classification supplies an efficient solution for arbitrary CNF.
+
+All 395 Python tests pass, and the complete Lean build audits 4,129 declarations and 1,971 theorem declarations. Three full, three pilot and three previous archives replay byte-identically; warm reuse inserts nothing. Both new reports have 56 matching code, test and Lean fingerprints, with separate diagnostic and timing hashes. Operation timings include recognition, checking, serialization, persistence, solving and successful root lifts. Generation, truth tables, summary walks, compression, allocation diagnostics and cold replay are outside those timings. Tests, timing modes, allocation diagnostics and profiles run sequentially. The semantic lemmas and measured coverage gain leave Python refinement, unrestricted acquisition bounds and lifetime storage bounds open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

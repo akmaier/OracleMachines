@@ -4013,3 +4013,75 @@ The **114-page PDF** builds with no final-pass warnings or box errors. Pages
 **105--108** were visually inspected; all **54 earlier proof blocks** are unchanged
 and **196 labels** are unique. Uniform arbitrary-CNF discovery, compact closure
 and lifetime acquisition/storage bounds remain open.
+
+## Checkpoint: terminal signed subsumption and its acquisition cost (9 November 2026)
+
+The user's request to identify and work on the largest gaps led to integration
+of the seven saved signed-subset opportunities. `SignedSubsumptionInventory`
+extends the activity policy only at exhausted unresolved leaves. Every removal
+has a retained signed source clause; complete index coverage, deterministic
+search, normalization, family evidence and model lifting are checked. Failed
+searches persist, with no new probe phase or hidden recursive budget. Earlier
+policies, results and proofs remain available. Implementation/proofs and the
+selected nine-source pilot are committed and pushed in **9924740**.
+
+The [full study](../experiments/results/cnf-signed-subsumption/README.md) retains
+all 1,425 old queries and adds 36 controls/holdouts. Non-tiny closure rises **833
+-> 837 / 949**, with gains **977, 1044, 1053, 1365** and no losses. The old subset
+rises 806 -> 810 / 913; both modes close 27/36 new queries. The ordinary solver
+is unchanged and agrees in every mode, with 20,544 residuals per full archive.
+Closure refers to recognized structural leaves, not satisfiability.
+
+The gain has a broad-sample cost regression. Total operation time grows
+**145.71977 -> 156.17943 s**, discovery **105.46141 -> 117.30413 s**, SQLite
+**404.410 -> 408.302 MB**, cold replay **61.80056 -> 66.82085 s**, and six-case
+Python peak **19.997 -> 20.390 MB**. Pattern nodes fall 24,367 -> 24,122, but
+logical node bytes grow 161.206 -> 166.021 MB. Balanced twelve-query trials
+instead average 7.28617 -> 6.98024 seconds; these include all four gains and
+are not a full-corpus estimate or significance result. Keep the policy optional.
+
+Three concrete next gaps are now saved with evidence:
+
+1. **Futile subset comparisons.** The 3,753 searches expose 31 local families and
+   retain 3,722 failures. Discovery and checking each perform 33,367,619 tests.
+   `pair-costs.json` identifies **27,083,138 (81.17%)** equal-width comparisons
+   that cannot succeed for distinct normalized clauses. Add length filtering,
+   preserve duplicate/non-normalized helper semantics or enforce its precondition,
+   and check that all saved witnesses/coverage remain identical. This saving is
+   prospective until measured; do not replace the preserved naive result.
+2. **Reuse proved implications for representation changes.** `mechanisms.json`
+   independently replays original probe traces and uses all their binary
+   consequences, including binary-transitive ones discarded by current learning
+   selection, as subset witnesses. Eight remaining leaves expose 2-CNF. Current
+   plans for **1185/1289/1368** could close; five other sources retain another
+   open leaf. Integrate after existing priorities and charge enumeration,
+   witness/proof checks, normalization, persistence and cold replay. These are
+   not counted as executed source gains.
+3. **Repeated restriction/checking and retained state.** Source 1194 still takes
+   1.60328 s discovery; its separate profile records 5,763 restrictions, 4,657
+   simplification checks and 2,221 propagations. Search evidence alone adds
+   3.706 MB, and cold replay remains expensive. Share exact prepared state and
+   certificates only with explicit dependency/invalidation rules and total-cost
+   measurement. There is no lifetime archive or full-process memory bound.
+
+The remaining frontier contains **112 sources / 149 distinct leaves / 32,043
+literal occurrences**. Efficient discovery and recomposition for their general
+interactions remain open. The subset routine has expected O(L + m log(m+1) + m²w)
+work and O(L+m) temporary space per eligible CNF, with equally charged replay;
+this is not an unrestricted-SAT efficiency claim or bit-machine refinement.
+
+All **395 tests** pass. Three new Lean lemmas establish signed subsumption,
+model equivalence and arbitrary extension on disappearing variables; the full
+axiom audit passes **4,129 declarations / 1,971 theorem declarations**. All three
+full, three pilot and three previous archives replay byte-identically; warm
+reuse inserts nothing. Both reports have **56 matching fingerprints**, and the
+mechanism, timing and pair-cost diagnostics have verified input/script hashes.
+
+Manuscript Section **12.61**, Proposition **12.43** and Table **22** distinguish
+the proved reduction, four measured gains, broad cost regression and unintegrated
+implication opportunities. All **54 previous proof blocks** remain; there are
+55 proofs and **199 unique labels**. The **116-page PDF** builds with no final-pass
+warnings or box errors; pages **107--110** were rendered and visually inspected.
+The ranked priority, discovery and resource records and README are updated for
+the next run. No Python refinement, universal compact closure or P-versus-NP
+conclusion is asserted.

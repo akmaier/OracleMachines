@@ -182,6 +182,16 @@ four current source plans after integration. That is the next discovery target;
 those closures are not yet counted. All **388 tests**, the Lean audit and new/
 previous cold replay checks pass; failed timing claims and witnesses are preserved.
 
+The [signed-subsumption integration](experiments/results/cnf-signed-subsumption/README.md)
+now closes those four sources: **833 -> 837 / 949** non-tiny queries in the expanded
+study, with no losses. The broad sample becomes slower and larger; the optional
+policy is a coverage improvement, not a demonstrated general speedup. All **395
+tests** and three new Lean lemmas pass. The [current priorities](research/structural-reuse-priorities.md)
+target futile equal-width comparisons (81% of subset tests), reuse of already
+proved implications, repeated propagation/checking and retained state. Eight
+further residuals expose 2-CNF in a saved diagnostic; three potential source
+closures still require integration. **112 sources** remain structurally unresolved.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

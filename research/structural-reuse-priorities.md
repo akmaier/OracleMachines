@@ -12,7 +12,70 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current checkpoint: preserve useful probes, expose hidden 2-CNF
+## Current checkpoint: four closures, costly failed subset searches
+
+The [signed-subsumption study](../experiments/results/cnf-signed-subsumption/README.md)
+integrates the previous frontier witnesses. Only exhausted unresolved leaves
+are searched; a reduced core is followed only when an existing basic family
+recognizer succeeds. Exact retained signed witnesses, source-index coverage,
+normalization and model lifts are checked; failed searches persist. Earlier
+reductions and budgets stay fixed. All previous solver results remain available.
+
+On **1,461 queries**, non-tiny closure rises **833 -> 837 / 949**, with gains on
+**977, 1044, 1053 and 1365** and no losses. The old subset improves **806 -> 810 /
+913**; new-query closure stays 27/36. This is a coverage gain, not a SAT speedup.
+The full single sample grows **145.71977 -> 156.17943 s**, discovery **105.46141 ->
+117.30413 s**, SQLite **404.410 -> 408.302 MB**, cold replay **61.80056 -> 66.82085 s**
+and six-case Python peak **19.997 -> 20.390 MB**. Twelve-query balanced controls
+instead average **7.28617 -> 6.98024 s**, but include all four gained sources;
+they do not establish a full-corpus speedup. Keep the policy optional.
+
+The ranked gaps now have direct evidence:
+
+1. **Avoid unsuccessful recognition work while extending proof reuse.** The
+   3,753 terminal searches expose only 31 local families. Discovery and checking
+   each perform 33,367,619 subset comparisons. Of these, **27,083,138 (81.17%)**
+   compare distinct normalized clauses of equal width and cannot succeed.
+   Length buckets should skip those comparisons with identical certificates;
+   preserve a fallback/check for nonnormalized inputs if the helper admits them.
+   This is the immediate acquisition-cost fix, not a measured saving yet.
+2. **Use already proved implications to expose more families.** Eight of the
+   remaining selected leaves become 2-CNF in an offline checked control when
+   all original-probe binary consequences are made explicit. This includes
+   consequences filtered as binary-transitive: redundant propagation clauses
+   can still be useful subset witnesses. Sources **1185, 1289 and 1368** could
+   complete their present plans; five other affected sources retain an open leaf.
+   Integrate after earlier priorities, retain original proof dependencies, and
+   charge enumeration, indexing, witness checking and cold replay. These are
+   prospective gains, not part of 837/949.
+3. **Reuse restriction and proof-checking state.** The largest unresolved source,
+   1194, costs **1.60328 s** discovery. Its separate profile has 5,763 restrictions,
+   4,657 simplification checks and 2,221 propagations. This remains a broader
+   runtime target than subset comparisons alone. A reuse design must bind each
+   fixed point to its exact clauses and assumptions; changed clauses invalidate
+   unproved reuse. Fewer logical probes alone do not establish less total work.
+4. **Control retained state and cold replay.** The new policy has fewer nodes
+   (24,367 -> 24,122) but more logical node bytes (161.206 -> 166.021 MB). Search
+   certificates/profiles alone add 3.706 MB; source bindings also grow. Indexed
+   or shared evidence needs exact dependencies and byte-level measurements.
+   Six-case traced Python memory is not RSS or a global memory bound; preserving
+   multiple policy archives retains all their state.
+5. **Cover the irreducible interactions.** There remain **112 open sources / 149
+   selected leaves**, with 32,043 literal occurrences. Most subset reductions
+   do not expose a basic family. The next methods must recognize interactions
+   beyond this bounded search, with exact recomposition and charged discovery.
+   An explicit unresolved category completes a partition, not an efficient
+   solution for every member. No unrestricted-SAT polynomial bound follows.
+
+All **395 tests**, three full/pilot/previous cold checks per group and **56 report
+fingerprints** pass. The Lean build audits **4,129 / 1,971 declarations/theorems**,
+including three signed-core semantic lemmas. Python refinement and global
+acquisition/storage guarantees remain open. Next run: remove the provably futile
+subset comparisons, verify identical coverage/certificates on the saved archives,
+then integrate the saved implication-subset controls under a matched total-cost
+comparison. Retain the naive policy and its regression as the control.
+
+## Previous checkpoint: preserve useful probes, expose hidden 2-CNF
 
 The [activity experiment](../experiments/results/cnf-activity/README.md) retains
 old informative continuation candidates, omits checked unchanged pairs, and

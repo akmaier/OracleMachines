@@ -529,6 +529,48 @@ matching fingerprints, and diagnostic/timing hashes are retained. The existing
 UP, model-lifting and semantic arguments remain distinct from an unproved global
 acquisition, closure-size or unrestricted-SAT efficiency guarantee.
 
+## Signed subset witnesses expose four sources (9 November 2026)
+
+The [integrated terminal policy](../experiments/results/cnf-signed-subsumption/README.md)
+now closes **977, 1044, 1053 and 1365**. No closure is lost. Across 1,461 inputs,
+coverage rises **833 -> 837 / 949 non-tiny**; the old subset rises 806 -> 810 / 913.
+Every removed clause has a retained signed subset. Exact source indices, core
+normalization and model lifts are independently checked. Values on disappearing
+variables are arbitrary, as established by three new Lean semantic lemmas.
+Earlier discovery priorities remain; failed searches stay archived. Terminal-only
+exposure preserves baseline boolean closure under unchanged earlier rules and
+exact transports, without a formal Python refinement or resource guarantee.
+
+The cost regression is retained: full single-sample total time **145.71977 ->
+156.17943 s**, discovery **105.46141 -> 117.30413 s**, SQLite **404.410 -> 408.302 MB**
+and cold replay **61.80056 -> 66.82085 s**. Twelve-query ABBA BAAB trials average
+7.28617 -> 6.98024 seconds, but include all four gained sources; no general speedup
+follows. New-query closure remains 27/36. The policy stays optional.
+
+There are 3,753 terminal searches, 31 exposures and 3,722 unexposed cores. Each
+of discovery/checking performs 33,367,619 subset comparisons. **81.17%** compare
+equal-width distinct normalized clauses, which cannot contain one another.
+Length filtering is the immediate cost target; no filtered implementation is
+measured here. Saved search/evidence fields occupy 3.706 MB. Smaller node count
+alone does not mean less memory or cheaper cold replay.
+
+The remaining **112 sources / 149 distinct selected leaves** expose the next
+structural gap. An offline control replays original probe proofs and uses all
+their binary consequences as subset witnesses, including transitively redundant
+clauses excluded by the current learning filter. It exposes **eight 2-CNF leaves**.
+The current plans of **1185, 1289 and 1368** could close; five other affected sources
+retain an unresolved leaf. These are prospective, not measured closures. The next
+integration must charge implication enumeration, subset indexing, original-proof
+checking, exact child mapping and cold replay without fresh probing or hidden
+inherited context. All source witnesses and failed controls are saved.
+
+Repeated restriction/propagation and proof checking remain the broader runtime
+cost: source 1194 takes 1.60328 s discovery, with 5,763 restrictions, 4,657 unit
+checks and 2,221 propagations in its separate profile. Efficient treatment of
+irreducible interactions and a lifetime storage bound remain open. All **395 tests**,
+the **4,129 / 1,971** Lean audit, three full/pilot/previous cold archives per group,
+and 56 fingerprints in both new reports pass.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

@@ -1428,3 +1428,82 @@ model lifting, storage and cold replay still need charging. No deployment runtim
 or memory reduction follows from the selected-frontier count alone. General signed
 subsumption is established simplification; efficiently covering arbitrary CNF
 families remains open.
+
+## Follow-up: terminal signed-subsumption exposure (9 November)
+
+`SignedSubsumptionInventory` adds an optional reduction to the activity policy.
+It searches only where earlier recognition, reductions and the configured
+conditioning budget have exhausted discovery. It keeps inclusion-minimal signed
+clauses and follows the core only if the existing basic classifier recognizes a
+family. Failed searches persist alongside the original unresolved leaf. This is
+exact syntactic simplification, not general semantic minimization or a new SAT
+class. The ordinary decision solver remains unchanged.
+
+For m source clauses, L literal occurrences and maximum width w, each subset
+search costs expected **O(L + m log(m+1) + m²w)** unit-cost work and **O(L+m)**
+temporary space. Literal identifiers and hash operations use that cost model;
+this is not a bit-machine refinement. The checker independently verifies complete
+index coverage and retained signed witnesses, then replays the deterministic
+policy. Thus checking retains the same quadratic worst-case term, in addition
+to profile reconstruction, child normalization and archive costs. Saved witness
+indices use **O(m log(m+1)) bits**; complete node keys, evidence, bindings and any
+new child remain separate retained costs. Every unsuccessful explored leaf counts.
+
+Every removed clause contains a retained clause with identical literal signs.
+The retained core therefore has exactly the same models over the original
+universe. Any assignment to variables absent from the core is valid when lifting
+a core model. The three new Lean lemmas prove signed inclusion, model equivalence
+and this extension property; Python checks the integer/index/normalization
+bindings separately. Editing a witness or adding an uncovered clause requires a
+new certificate. Old source records and policy namespaces are preserved.
+
+Keeping this transformation at previously unresolved terminal leaves preserves
+baseline boolean closure: earlier successful leaves and fixed reductions remain,
+AND composition is monotone, and OR search only stops early after a closed
+alternative. This argument is scoped to unchanged earlier rules and exact
+transports. It is not a Lean refinement of the planner or a runtime/space bound
+for arbitrary SAT. Storing both policy versions in one lifetime archive still
+retains both namespaces; isolated-mode size comparisons do not erase old results.
+
+The quadratic subset search itself admits a narrower recognition opportunity:
+distinct normalized clauses with equal width cannot strictly contain one another.
+Length buckets can skip such pairs while preserving the witnesses. That filtering
+is not implemented in this checkpoint; its total-cost value must be compared
+against the larger propagation and proof-replay costs.
+
+The complete 1,461-query comparison gains four closures (**833 -> 837 / 949
+non-tiny**) and loses none. The old subset improves 806 -> 810 / 913; both modes
+close 27/36 new queries. Full single-sample operation time grows **145.71977 ->
+156.17943 s**, discovery **105.46141 -> 117.30413 s**, while the unchanged solver
+varies **40.18383 -> 38.79213 s**. Twelve-query ABBA BAAB controls instead average
+**7.28617 -> 6.98024 s** total; these include all four gains and do not estimate
+repeated full-corpus performance or establish significance. The candidate remains
+optional and makes no general solver speedup claim.
+
+SQLite grows **404,410,368 -> 408,301,568 bytes**, logical pattern-node state
+**161,206,197 -> 166,021,306 bytes**, and source bindings **5,617,826 -> 5,837,892
+bytes** over 1,429 records. Pattern nodes fall **24,367 -> 24,122**, while saved
+subset searches/profiles add 3,706,023 bytes. Cold replay grows **61.80056 ->
+66.82085 s**, warm replay is **0.25731 -> 0.24904 s**, and initialization separately
+costs **0.05716 -> 0.33504 s**. The same six-case Python peak grows **19,996,938 ->
+20,390,270 bytes**, excluding native SQLite, RSS and full-corpus peak. Each mode
+retains 20,544 independent solver residuals. All three full, three pilot and three
+previous archives replay byte-identically, including every alternative and source.
+
+There are **3,753** terminal searches, **31** local exposures and **3,722** failures.
+Discovery and checking each perform **33,367,619** subset comparisons. Exact
+saved-prefix analysis identifies **27,083,138 (81.17%)** equal-width comparisons
+that cannot succeed; 6,284,481 compare shorter clauses. This is avoidable search
+work, not a measured optimized runtime. Logical probes fall 112,276 -> 110,980,
+verified probes 242,280 -> 239,308 and conditioning candidates 4,631 -> 4,575.
+Those reductions do not establish lower total cost.
+
+There remain **112 open sources / 149 distinct selected leaves**, containing
+32,043 literals. The largest unresolved discovery case, 1194, costs 1.60328 s;
+its separate profile retains 5,763 restrictions, 4,657 simplification checks and
+2,221 propagations. A saved offline control reuses all original proved binary
+implications to expose eight more 2-CNF leaves; sources 1185/1289/1368 could
+complete their selected plans after integration. These prospective gains are not
+counted in 837/949, and their enumeration, proof/transport, persistence and replay
+costs remain to be integrated. All **395 tests**, the **4,129 / 1,971** Lean audit,
+56 report fingerprints and independently hashed diagnostics pass.

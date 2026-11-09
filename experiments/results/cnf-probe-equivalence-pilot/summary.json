@@ -1,0 +1,267 @@
+[
+  {
+    "mode": "solver_only",
+    "total_seconds": 0.3315489168744534,
+    "old_seconds": 0.3315489168744534,
+    "archive": {
+      "mode": "solver_only",
+      "path": "archive-solver_only.sqlite3.gz",
+      "database_bytes": 1679360,
+      "compressed_bytes": 133641,
+      "database_sha256": "5968241863772be5af02989dabf4fbec3b04e9c11c68ab8d0206c7e5d37007f1",
+      "initialization_seconds": 0.0006494999397546053,
+      "warm_inventory_seconds": 0,
+      "storage": {},
+      "audit": {
+        "nodes": 0,
+        "sources": 0,
+        "residuals": 392,
+        "seconds": 0.0778908331412822,
+        "bytes_unchanged": true
+      }
+    }
+  },
+  {
+    "mode": "baseline",
+    "total_seconds": 4.924370916327462,
+    "old_seconds": 4.924370916327462,
+    "archive": {
+      "mode": "baseline",
+      "path": "archive-baseline.sqlite3.gz",
+      "database_bytes": 16863232,
+      "compressed_bytes": 1135145,
+      "database_sha256": "813a62df57915b6fb24dfb57757b1bb83ac71eb89ef6a1c3df64f57b3e3174e6",
+      "initialization_seconds": 0.002351375063881278,
+      "warm_inventory_seconds": 0.004037749953567982,
+      "storage": {
+        "nodes": 1698,
+        "nodes_bytes": 8754887,
+        "sources": 16,
+        "sources_bytes": 83554
+      },
+      "audit": {
+        "nodes": 1698,
+        "sources": 16,
+        "residuals": 392,
+        "seconds": 2.161218374967575,
+        "bytes_unchanged": true
+      }
+    },
+    "discovery_seconds": 4.633655584184453,
+    "groups": {
+      "common_holdout3": {
+        "inputs": 4,
+        "closed": 0,
+        "unresolved_literals": 434
+      },
+      "holdout3": {
+        "inputs": 2,
+        "closed": 0,
+        "unresolved_literals": 26
+      },
+      "probe_holdout3": {
+        "inputs": 6,
+        "closed": 0,
+        "unresolved_literals": 649
+      },
+      "probe_invalidation": {
+        "inputs": 1,
+        "closed": 0,
+        "unresolved_literals": 21
+      },
+      "random3": {
+        "inputs": 1,
+        "closed": 0,
+        "unresolved_literals": 26
+      },
+      "renamed_random3": {
+        "inputs": 1,
+        "closed": 0,
+        "unresolved_literals": 26
+      },
+      "signed_random3": {
+        "inputs": 1,
+        "closed": 0,
+        "unresolved_literals": 26
+      }
+    },
+    "metrics": {
+      "normalization_literal_visits": 1106755,
+      "key_serialized_bytes": 6324780,
+      "node_database_lookups": 2127,
+      "classification_calls": 4254,
+      "classification_literal_payload": 784192,
+      "matching_recognition_literal_visits": 13518,
+      "affine_grouping_literals": 784192,
+      "affine_extracted_equations": 1976,
+      "affine_leftover_clauses": 280292,
+      "affine_verified_certificates": 4254,
+      "propagation_literal_visits": 4566351,
+      "simplification_reconstruction_literals": 3652057,
+      "verified_simplifications": 22337,
+      "decomposition_literal_visits": 1266839,
+      "probe_ranking_literal_visits": 1048664,
+      "conditioning_rank_literal_visits": 51860,
+      "conditioning_rank_variables": 4710,
+      "conditioning_candidates": 354,
+      "restriction_literal_visits": 5618176,
+      "probe_attempts": 7625,
+      "common_intersection_unit_visits": 33374,
+      "common_rewrites_discovered": 164,
+      "common_literals_discovered": 259,
+      "simplification_unit_check_literals": 220992,
+      "verified_probe_attempts": 17159,
+      "verified_common_rewrites": 492,
+      "probe_forced_values": 1073,
+      "verified_pattern_nodes": 1698,
+      "inserted_nodes": 1698,
+      "serialized_bytes": 8754887,
+      "probe_rewrites": 1237,
+      "node_memory_hits": 6481,
+      "affine_verification_literals": 4054,
+      "fused_conditioning_edges": 429,
+      "verified_fused_conditioning_edges": 429,
+      "source_serialized_bytes": 83554,
+      "inserted_sources": 16,
+      "affine_elimination_xors": 18,
+      "affine_verification_xors": 18,
+      "matching_conflict_edge_visits": 16,
+      "partition_verification_literals": 798,
+      "verified_projections": 14,
+      "projection_rewrites": 1,
+      "projection_encoded_literals": 4,
+      "projection_encoding_check_literals": 4,
+      "simplification_rewrites": 1
+    },
+    "gains": [],
+    "losses": []
+  },
+  {
+    "mode": "equivalence",
+    "total_seconds": 4.865842875791714,
+    "old_seconds": 4.865842875791714,
+    "archive": {
+      "mode": "equivalence",
+      "path": "archive-equivalence.sqlite3.gz",
+      "database_bytes": 16326656,
+      "compressed_bytes": 1060363,
+      "database_sha256": "2fa093e8a7a7fb792445fa2d318cc8fdba086c09ee4704d47f6b1ae199d6e7b8",
+      "initialization_seconds": 0.008534874999895692,
+      "warm_inventory_seconds": 0.0040922078769654036,
+      "storage": {
+        "nodes": 1585,
+        "nodes_bytes": 8385727,
+        "sources": 16,
+        "sources_bytes": 86546
+      },
+      "audit": {
+        "nodes": 1585,
+        "sources": 16,
+        "residuals": 392,
+        "seconds": 2.069858666975051,
+        "bytes_unchanged": true
+      }
+    },
+    "discovery_seconds": 4.560591835994273,
+    "groups": {
+      "common_holdout3": {
+        "inputs": 4,
+        "closed": 1,
+        "unresolved_literals": 287
+      },
+      "holdout3": {
+        "inputs": 2,
+        "closed": 1,
+        "unresolved_literals": 30
+      },
+      "probe_holdout3": {
+        "inputs": 6,
+        "closed": 1,
+        "unresolved_literals": 530
+      },
+      "probe_invalidation": {
+        "inputs": 1,
+        "closed": 1,
+        "unresolved_literals": 0
+      },
+      "random3": {
+        "inputs": 1,
+        "closed": 1,
+        "unresolved_literals": 0
+      },
+      "renamed_random3": {
+        "inputs": 1,
+        "closed": 1,
+        "unresolved_literals": 0
+      },
+      "signed_random3": {
+        "inputs": 1,
+        "closed": 1,
+        "unresolved_literals": 0
+      }
+    },
+    "metrics": {
+      "normalization_literal_visits": 1009130,
+      "key_serialized_bytes": 6063447,
+      "node_database_lookups": 1907,
+      "classification_calls": 3814,
+      "classification_literal_payload": 715488,
+      "matching_recognition_literal_visits": 12058,
+      "affine_grouping_literals": 715488,
+      "affine_extracted_equations": 1514,
+      "affine_leftover_clauses": 256610,
+      "affine_verified_certificates": 3814,
+      "propagation_literal_visits": 4431560,
+      "simplification_reconstruction_literals": 3697751,
+      "verified_simplifications": 22910,
+      "decomposition_literal_visits": 1148296,
+      "probe_ranking_literal_visits": 995040,
+      "conditioning_rank_literal_visits": 45350,
+      "conditioning_rank_variables": 4082,
+      "conditioning_candidates": 264,
+      "restriction_literal_visits": 5594408,
+      "probe_attempts": 7725,
+      "common_intersection_unit_visits": 49252,
+      "common_rewrites_discovered": 149,
+      "common_literals_discovered": 235,
+      "simplification_unit_check_literals": 217848,
+      "verified_probe_attempts": 18363,
+      "verified_common_rewrites": 447,
+      "probe_forced_values": 887,
+      "verified_pattern_nodes": 1585,
+      "inserted_nodes": 1585,
+      "serialized_bytes": 8385727,
+      "probe_rewrites": 1187,
+      "node_memory_hits": 5575,
+      "affine_verification_literals": 3178,
+      "equivalence_intersection_unit_visits": 25164,
+      "equivalence_rewrites_discovered": 151,
+      "equivalence_variables_merged": 300,
+      "equivalence_substitution_literal_visits": 52632,
+      "verified_equivalence_rewrites": 453,
+      "fused_conditioning_edges": 322,
+      "verified_fused_conditioning_edges": 322,
+      "source_serialized_bytes": 86546,
+      "inserted_sources": 16,
+      "affine_elimination_xors": 10,
+      "affine_verification_xors": 10,
+      "matching_conflict_edge_visits": 24,
+      "verified_projections": 10,
+      "projection_rewrites": 2,
+      "partition_verification_literals": 324,
+      "projection_encoded_literals": 4,
+      "projection_encoding_check_literals": 4,
+      "simplification_rewrites": 1
+    },
+    "gains": [
+      0,
+      2,
+      3,
+      4,
+      6,
+      11,
+      13
+    ],
+    "losses": []
+  }
+]

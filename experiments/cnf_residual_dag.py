@@ -7,6 +7,8 @@ append-only and separate from the production solver's database. All comparison,
 normalization, checking and persistence work remains part of measured runtime.
 """
 from collections import Counter, deque
+from contextlib import contextmanager
+from contextvars import ContextVar
 import json
 import sqlite3
 import time
@@ -39,7 +41,26 @@ def normalize(cnf, counts=None):
     return result, names
 
 
+_restriction_engine = ContextVar('cnf_restriction_engine', default=None)
+
+
+@contextmanager
+def restriction_engine(engine):
+    """Execution-local optional restriction; the default decider stays unchanged."""
+    token = _restriction_engine.set(engine)
+    try:
+        yield
+    finally:
+        _restriction_engine.reset(token)
+
+
 def restrict(cnf, assignment, counts=None):
+    engine = _restriction_engine.get()
+    return (restrict_scan(cnf, assignment, counts) if engine is None
+            else engine(cnf, assignment, counts))
+
+
+def restrict_scan(cnf, assignment, counts=None):
     result = []
     for clause in cnf:
         if counts is not None:

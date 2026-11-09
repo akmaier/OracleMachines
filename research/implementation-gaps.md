@@ -3338,3 +3338,77 @@ condition. All 52 earlier proof blocks remain intact (53 total; 181 unique label
 The 102-page PDF builds with no final-pass warnings or box errors; pages 93--96
 were visually inspected. Resume from checked continuation reuse, preserving the
 full cost regression and all 54 structurally unresolved sources.
+
+## 9 November: checked closure reuse and bounded-batch selection frontier
+
+The preceding target is implemented and verified in checkpoint **f275a49**,
+already pushed. `ProbeClosureReuseInventory` references an old same-assumption
+unit proof only after checking its original reasons, complete fixed point and
+learned batch, then testing every added clause. An active addition or fresh
+assumption uses the full pass. Restriction preserves the old clause prefix and
+reason indices; wrong-source, edited, circular or corrupt references are rejected.
+The final child and model lift remain fully checked. The independent solver is
+unchanged and no unsuccessful attempt is discarded.
+
+The [matched study](../experiments/results/cnf-probe-closure-compact/README.md)
+retains all 1,173 old sources and adds 36 controls/holdouts. All **1,209 source
+plans** and **13,066 semantic nodes** match, including alternatives and selected
+paths. Closure stays **634/697** non-tiny and **15/24** fresh random inputs.
+All policies retain 10,856 ordinary solver residuals. The continuation has
+17,548 probes: **14,705** reused closures, **672** active repeated assumptions,
+**2,171** fresh assumptions. Original passes account for 55,553 logical probes.
+
+The first namespace stores an extra field in every full key. It compresses
+807,098 local proof bytes but increases SQLite from 197,103,616 to 200,323,072
+bytes. This failed representation and its complete archives remain preserved.
+`CompactProbeClosureInventory` replaces the local-learning version tag instead,
+keeping a distinct namespace and identical profile proofs. Its sample changes
+total time **62.75908 -> 61.68668 s**, discovery **48.01501 -> 46.53708 s**, SQLite
+**197,103,616 -> 196,096,000 bytes**, cold replay **26.78483 -> 25.09448 s**, and
+six-case traced Python peak **20,377,769 -> 20,021,725 bytes**. These are modest
+single-sample effects; checkpoint staging/commit overlapped compact acquisition.
+No tests/builds/profiles overlapped primary timing. The compact report explicitly
+inherits the three frozen reference modes and newly measures only its own mode.
+
+All **348 Python tests** pass (30.12 s), including exhaustive small fibers,
+independent full replay of expanded references, active deltas, new assumptions,
+corrupted original reasons, wrong references, signed edits, invalid lifts, cold
+coexistence and byte-identical replay. An eight-variable seeded example was added
+because the older learning fixtures did not exercise active repeated assumptions;
+it now verifies that merely matching an assumption cannot license reuse.
+Three first-study archives, three preceding archives and the compact archive
+all replay byte-identically. Fingerprints and inherited archive hashes are checked.
+
+Lean formalizes signed unit reasons/derivations and the syntactic fixed-point
+criterion. It proves append-only preservation of the whole old derivation and
+that the added-clause check is necessary and sufficient once the original closure
+is checked. `checked_unit_closure_append` combines these. Full build and axiom
+audit pass at **4,121 declarations / 1,964 theorem declarations**. These lemmas
+do not refine Python, clause-index serialization, SQLite or complexity bounds.
+
+The manuscript adds Section **12.54**, Proposition **12.42**, its proof and
+Table **15**, including both storage outcomes and the exact cost restrictions.
+All 53 preceding proof blocks remain intact (54 total; 184 unique labels).
+The 104-page PDF builds without final-pass warnings or box errors; changed
+pages and the transition into discussion are visually checked.
+
+**Next discovery experiment:** choose a better four-clause batch from already
+proved implications, preserving current clause and probe caps. The selected
+remainder contains 94 unresolved nodes, sixty learning-clear and 34 clear.
+Twenty batches reach cap four; enumeration up to sixteen exposes **61 further
+eligible clauses on sixteen leaves affecting thirteen source misses**. Thirty-eight
+existing batches draw their clauses from one assumption. The complete
+[frontier record](../experiments/results/cnf-probe-closure-compact/learning-frontier.json)
+retains every candidate, dependency and no-opportunity leaf. It costs 1,805
+candidate visits, 14,871 source literal visits, 6,203 graph vertices and 5,971
+graph edges; its separately timed generation is 0.00378 s excluding archive
+load/traversal. One leaf reaches the diagnostic cap; this is not exhaustive.
+
+Rank candidates by activation of checked closures and diversity of assumptions,
+charge selection, and use a fixed-choice control to distinguish stronger
+propagation from altered continuation ranking. Start with the thirteen affected
+sources then run all old and fresh unlabelled inputs. No alternate batch was
+executed here; these are opportunities, not new closures. Source **1194** remains
+the largest discovery cost, dominated by restriction and unit checking/propagation.
+Sixty-three source cases remain structurally unresolved. Keep exact classification
+and efficient arbitrary-SAT construction/compactness as separate obligations.

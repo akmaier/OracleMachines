@@ -82,9 +82,9 @@ most unresolved leaves still defeat the bounded learning round.
 ## Bounds and validation
 
 For a saved closure with u unit assignments and q binary additions, the delta
-costs expected O(u+q) time and O(u) temporary assignment space with dictionaries,
+costs expected O(1+u+q) time and O(1+u) temporary assignment space with dictionaries,
 after charging the original check. It avoids a fresh source restriction, repeated
-propagation and full fixed-point scan. A stored reference costs O(log k) bits for
+propagation and full fixed-point scan. A stored reference costs O(1+log k) bits for
 probe cap k, excluding JSON framing and the original retained proof. With r
 reused probes among at most 2k continuations, the probe portion is bounded by
 O(L + v log v + r(v+q) + (2k-r)(v+1)(L+q)) for this scan implementation, before

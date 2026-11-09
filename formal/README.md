@@ -1278,3 +1278,20 @@ tests pass; the full Lean build/axiom audit covers 4,103 declarations / 1,959
 theorem declarations. The [comparison](../experiments/results/cnf-probe-learning/README.md)
 retains three additional closures, increased cost and a diagnostic separating
 changed probe choices from increased propagation strength.
+
+
+The closure-reuse follow-up adds `SignedUnitReason`, `SignedUnitDerivation` and
+`SignedUnitFixedPoint` in `Residuals.lean`. Source-local unit reasons and every
+step of a valid unit derivation survive appending clauses. Once the original
+fixed point is checked, the augmented source is at that same nonconflicting
+fixed point exactly when each added clause is satisfied or has at least two
+unassigned literal occurrences. `checked_unit_closure_append` composes these
+results. The local-learning entailment lemma separately preserves source models;
+a unit fixed point does not establish SAT. The Python checker independently
+validates same-assumption references, original-source reasons, appended clause
+indices, active deltas and cold persistence. This is not a refinement of Python,
+its serialization or its complexity bounds. The full build/axiom audit passes
+at **4,121 declarations / 1,964 theorem declarations**, with all **348 Python
+tests** passing. The [matched study](../experiments/results/cnf-probe-closure-compact/README.md)
+preserves every semantic plan, and retains both modest compact savings and the
+verbose-identity storage regression.

@@ -1089,3 +1089,38 @@ node storage. The additional probe pass is charged, not an equal-total-budget
 comparison. Of 15,052 continuation probes, 10,018 reproduce an original certificate
 exactly; incremental fixed-point checks and shared proofs are the next opportunity,
 not a measured saving. No uniformly efficient arbitrary-SAT bound follows.
+
+## Follow-up: checked unit-closure references (9 November)
+
+A checked closure with u assigned units and q binary additions can be reused
+under the same assumption if every addition is satisfied or retains at least
+two unassigned literals. Constructing its assignment map and testing additions
+cost expected O(1+u+q) time and O(1+u) temporary space. The complete original
+proof is still acquired, stored and checked; the saving is the repeated source
+restriction/propagation/fixed-point scan. For probe cap k >= 1, a reference takes
+O(1+log k) bits before framing, while the original proof remains retained. The
+expanded checker uses aliases rather than copying referenced unit lists.
+
+With r reusable continuations out of at most 2k, d variables and ell original
+literal occurrences, the probe portion costs at most
+O(ell + d log d + r(d+q) + (2k-r)(d+1)(ell+q)) with the current scan engine.
+The retained opposite/common closures, original checks, batch discovery,
+normalization, complete plan, persistence and cold replay remain charged.
+No favorable bound applies if every addition activates the old closure or if
+all choices are fresh. The unrestricted number of distinct nodes remains open.
+
+The [1,209-source study](../experiments/results/cnf-probe-closure-compact/README.md)
+preserves all semantic plans and 634/697 non-tiny closures. It reuses 14,705
+continuations; 672 active repeated and 2,171 fresh assumptions still propagate.
+The compact sample changes total time 62.759 -> 61.687 s, SQLite 197.104 ->
+196.096 MB, cold replay 26.785 -> 25.094 s and the same six-case Python peak
+20.378 -> 20.022 MB. The allocation bound excludes native SQLite/RSS and the
+full corpus. Timings are single samples, with checkpoint overlap disclosed.
+
+Local proof bytes fall by 807,098, but the first version grows SQLite to
+200.323 MB because full keys repeat a new policy field. That failed version is
+retained. A distinct replacement tag avoids the extra field and gives the
+compact totals above. Therefore proof compression, namespace overhead, decoded
+live memory and physical SQLite allocation must remain separate accounts.
+No universal runtime or storage improvement, competitive SAT speedup or
+polynomial arbitrary-SAT construction follows from this supporting optimization.

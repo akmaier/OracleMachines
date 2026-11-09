@@ -12,17 +12,48 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-**Next research experiment:** checked reuse of the original probe closure during
-bounded local learning. The latest run finds **13,194 repeated assumptions** among
-15,052 continuation probes; **10,018 complete certificates are identical**.
-Under a previously checked closure and assumption, inspect only the added batch.
-If it has no unit or conflicting clause, the old closure remains a fixed point;
-otherwise resume propagation or use the full pass. Keep new candidate probes,
-source/batch dependencies and clause-index transport explicit. Test shared proof
-references as well as fewer scans, preserving exact coverage, model fibers,
-failed attempts and cold checks. This is supporting work for deeper discovery:
-48 of 80 selected unresolved leaves still defeat this learning round. Do not
-raise global budgets until the current repeated work is measured and reduced.
+**Next research experiment:** choose a better bounded learned batch from the
+existing implication proofs. The closure-reuse follow-up preserves all plans
+while avoiding 14,705 continuation propagations. Its compact policy has modest
+measured savings; the next iteration should return to expanding discovery.
+Of 94 selected unresolved leaves, sixty have an inconclusive learned batch and
+34 have none. Twenty batches reach the four-clause cap. Candidate enumeration
+up to sixteen finds **61 additional clauses on sixteen leaves affecting thirteen
+source misses**; 38 existing batches use only one assumption. The
+[frontier record](../experiments/results/cnf-probe-closure-compact/learning-frontier.json)
+preserves candidates, original reasons, source paths, failures and limits.
+
+Keep four retained clauses and the same probe budget. Compare the current first
+four with selection by activation of already checked closures and diversity of
+assumptions; measure recognition/ranking and use a fixed-choice control to
+separate stronger propagation from changed continuation choices. Start with
+the thirteen affected sources, then include all prior inputs and fresh unlabelled
+samples. These candidates have not been executed as alternate batches and are
+not claimed gains. Do not globally raise budgets or replace unresolved cases
+with a tractability claim. Of the 73,101 logical attempts, 55,553 are original
+probes; the remaining 672 active continuation restarts are a smaller supporting
+target than the unchanged discovery gap.
+
+The [closure-reuse comparison](../experiments/results/cnf-probe-closure-compact/README.md)
+retains all 1,209 sources and all 13,066 semantic nodes, including alternatives.
+Coverage stays **634/697 non-tiny inputs**, **15/24 fresh random inputs**; 63
+sources remain unresolved. Checked references avoid 14,705 of 17,548 continuation
+propagations; 672 active repeated assumptions and 2,171 fresh ones still propagate.
+The compact sample changes total time **62.759 -> 61.687 s**, SQLite **197.104 ->
+196.096 MB**, cold replay **26.785 -> 25.094 s**, and the same six-case Python peak
+**20.378 -> 20.022 MB**. These are small single-sample effects; a checkpoint commit
+overlapped part of compact acquisition, so retain the timing limitation.
+
+The [first representation](../experiments/results/cnf-probe-closure-reuse/README.md)
+saves 807,098 local proof bytes but grows SQLite to 200.323 MB because an added
+policy field is repeated in full keys. It remains preserved. Replacing the
+local-learning version tag keeps a distinct namespace and removes that overhead.
+The current compact logical node total is 78.533 MB; probe nodes still occupy
+49.281 MB. Source 1194 is the largest remaining discovery case, with restriction,
+unit checking/propagation and literal helpers dominating the separate profile.
+The fixed-point/derivation lemmas pass Lean's full audit (4,121 declarations /
+1,964 theorem declarations); all 348 Python tests and complete new/old archive
+checks pass. No Python/SQLite refinement or unrestricted resource bound follows.
 
 The [bounded-learning study](../experiments/results/cnf-probe-learning/README.md)
 implements the preceding implication target. On 1,173 inputs, non-tiny closure
@@ -46,8 +77,7 @@ The largest remaining discovery case is now **1063**, at 1.208 s main discovery.
 Restriction, unit checks/propagation and literal helpers dominate a separate
 profile. Probe nodes occupy **41.132 / 66.573 MB** logical payload. Reusing checked
 closures and sharing their proof records targets these measured costs while
-retaining the useful learned propagation. Any new coverage or runtime benefit
-from that reuse remains unmeasured. Fifty-four source cases remain structurally
+retaining the useful learned propagation. The follow-up above measures that opportunity without adding coverage. Fifty-four source cases remain structurally
 unresolved; efficient arbitrary-CNF construction and compact coverage are open.
 
 The [signed-equivalence study](../experiments/results/cnf-probe-equivalence/README.md)

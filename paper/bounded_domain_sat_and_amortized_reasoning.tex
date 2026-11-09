@@ -2745,6 +2745,57 @@ All 341 Python tests, three full new archives, three pilot archives and three pr
 
 The largest remaining discovery cost is source 1063. Separate profiling again points to restriction scans, unit propagation/checking and literal helpers. Among 15,052 continuation probes, 13,194 repeat an original assumption and 10,018 reproduce its complete certificate unchanged. This identifies the next reuse target. Under the old checked closure, test the added clauses: if none becomes unit or conflicting, the old closure remains valid; otherwise resume propagation or use the full fallback. Clause indices and source dependencies must remain explicit, and changed choices still need fresh probes. Sharing these proofs could reduce acquisition and retained trace duplication while preserving the useful new propagation, but no such saving is measured here. Neither bounded learning nor its measured coverage removes the unrestricted-SAT construction and size obligations.
 
+\subsection{Reusing a checked unit closure after local learning}
+\label{sec:probe-closure-reuse}
+
+The preceding experiment repeats many probe closures after adding a small batch of learned clauses. We now test those additions under the old closure before running propagation again. This supports structural discovery at the same probe budget. It adds no recognized family or inference rule. Sharing implications across look-ahead literals has established precedents: Section~8 of \citet{heule2005marcheq} describes tree-based look-ahead and reports both gains and regressions. Here, we reuse a closure for the same assumption after an append-only update, retaining its proof dependencies.
+
+\begin{proposition}[Exact criterion for reusing a unit fixed point]
+\label{prop:probe-closure-reuse}
+Let $F$ be an ordered normalized CNF, $a$ a probe assumption, and $\pi$ a checked, nonconflicting unit trace for $F$ under $a$. Let $\alpha$ consist of $a$ and the assignments in $\pi$, and suppose $F$ has no unit or conflicting clause under $\alpha$. For an ordered added batch $B$ of normalized clauses, the same trace remains a valid unit derivation under $a$ in $F\mathbin{+\!+}B$. Moreover, $\alpha$ is a nonconflicting unit fixed point of that augmented CNF if and only if every clause of $B$ is satisfied by $\alpha$ or contains at least two unassigned literals.
+\end{proposition}
+\begin{proof}
+Each reason used by $\pi$ belongs to $F$ and remains present after appending $B$. Following the same assignments therefore leaves each reason valid when its unit step is taken. Restriction by $a$ preserves concatenation, so the surviving original clauses remain a prefix and retain their reason indices. Under the final assignment, every original clause is already satisfied or has at least two unassigned literals. Hence only an added clause can be unit or conflicting. Excluding those two cases for every added clause is both necessary and sufficient for the claimed fixed point.
+\end{proof}
+
+The checker first validates the original traces and their fixed points, then checks every learned clause against that original source. Only then does it accept an integer reference to a trace with the same assumption and test the added clauses. A new assumption or an active addition uses the full existing propagation pass. Opposite-assumption and common-consequence reduction closures also remain fully checked. Changed or deleted original clauses require a new dependency context. A unit fixed point need not satisfy the remaining formula. The separately checked entailment of the learned batch, established in Proposition~\ref{prop:probe-learning}, preserves the models needed for exact recomposition.
+
+Lean formalizes signed unit reasons, their derivations, and the append-only fixed-point criterion. It proves that the old derivation remains valid and that only added clauses need the incremental fixed-point test. These are semantic and structural lemmas; they do not verify the Python reference format, clause-index encoding, SQLite persistence or resource bounds. The executable checker tests those obligations separately.
+
+Given a saved trace of $u$ unit assignments and $q$ binary additions, reconstruction of its assignment and checking the delta cost expected $O(1+u+q)$ time and $O(1+u)$ temporary space with dictionaries. The original proof must still be acquired, stored and checked. For $k\geq1$ probe variables, a trace reference uses $O(1+\log k)$ bits before encoding overhead. If $r$ of at most $2k$ continuation probes can be reused, their discovery work under the scan-based implementation is bounded by
+\[
+O\!\left(L+v\log v+r(v+q)+(2k-r)(v+1)(L+q)\right),
+\]
+where $L$ is the original literal count and $v$ the variable count. Retained reduction closures, earlier checks, normalization, all other planning and persistence remain additional costs. Fresh assumptions and active additions can eliminate the saving, and this local bound does not bound the number of acquired nodes for unrestricted SAT.
+
+The matched study retains all 1,173 preceding inputs and adds 24 fresh random 3-CNFs and twelve growing, signed and edited controls. Both policies use the same depth and probe budgets. All 1,209 selected source plans and all 13,066 acquired CNF/depth nodes agree in their semantic content, including alternatives, witnesses, unit sets and reductions. Valid unit orders and reason choices can differ. Non-tiny structural closure remains 634/697, including 15/24 fresh random sources. The independent solver retains the same 10,856 residuals. Sixty-three sources remain structurally unresolved; reuse adds no coverage claim.
+
+Of 17,548 continuation probes, 14,705 reuse an original fixed point, 672 repeat an assumption whose added clauses become active, and 2,171 use a fresh assumption. Restriction visits fall from 61,754,468 to 52,954,154 literal occurrences, propagation from 52,410,734 to 44,540,235, and fixed-point reconstruction from 39,317,548 to 34,969,051. Delta checks add 140,961 literal visits and reconstruct 122,155 assignment entries. These counts include checking and repeated use in acquisition; they are not predictions of a proportional runtime reduction.
+
+The first representation uses an extra policy field in every exact key. Although proof references replace 968,853 bytes of certificates with 161,755 bytes, total SQLite grows from 197,103,616 to 200,323,072 bytes. We preserve this regression. A distinct replacement version tag gives the same proofs and plans without the repeated extra field. Table~\ref{tab:probe-closure-reuse} records both versions. The compact version reduces logical node bytes from 79,561,439 to 78,532,589 and exact-source bytes from 4,282,300 to 4,253,476. Local proof compression alone was insufficient to predict total storage.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{lrrrr}
+\hline
+Policy & Total (s) & SQLite (MB) & Cold (s) & Python peak (MB) \\
+\hline
+Full second pass & 62.75908 & 197.104 & 26.78483 & 20.378 \\
+References, extra field & 61.35989 & 200.323 & 26.49960 & 20.080 \\
+References, replacement tag & 61.68668 & 196.096 & 25.09448 & 20.022 \\
+\hline
+\end{tabular}
+\caption{Matched closure reuse on 1,209 synthetic inputs. MB denotes decimal bytes. The compact row is a later single sample; the other rows are inherited from the frozen reference run. Python peak uses the same six-source subset and excludes native SQLite, RSS and full-corpus peak.}
+\label{tab:probe-closure-reuse}
+\end{table}
+
+The compact sample lowers total time by 1.71\%, SQLite by 0.51\% and cold replay by 6.31\% against the full second pass. Discovery falls from 48.01501 to 46.53708 seconds; warm replay is 0.18508 versus 0.17067 seconds. These small single-sample differences remain exploratory. A checkpoint commit overlapped part of compact acquisition; no tests, Lean builds or profiles overlapped the measured runs. Both reference formats are optional, and neither improves the structural closure count. Operation times charge checking, persistence, original-source solving and successful lifting; generation, truth tables, summary walks, initialization, compression and profiles are separate.
+
+All 348 Python tests and the complete new and preceding archive replays pass. Tests include exhaustive small fibers, full replay of expanded references, active additions, fresh assumptions, signed edits, invalid references and cold corruption. The Lean build and axiom audit pass at 4,121 declarations and 1,964 theorem declarations. Every older proof and experimental archive remains available.
+
+The remaining discovery target is batch selection. Of 94 distinct unresolved nodes on selected paths, sixty retain an inconclusive learned batch and 34 have no eligible batch. Extending candidate enumeration alone to sixteen finds 61 further eligible clauses on sixteen leaves affecting thirteen missed source paths. Thirty-eight existing nonempty batches draw every clause from one assumption. A next experiment can retain the same four-clause cap while selecting clauses that activate checked closures or cover different assumptions, and separate this from changed continuation-variable choices. No alternative batch is executed in this diagnostic, so these counts establish opportunity rather than a coverage gain. Source 1194 still has the largest remaining discovery cost; separate profiling again identifies restriction and unit checking/propagation. The original passes account for 55,553 of 73,101 logical probe attempts. Discovery, compact coverage and uniformly bounded acquisition for arbitrary SAT remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

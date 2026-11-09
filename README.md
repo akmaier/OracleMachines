@@ -112,6 +112,17 @@ the gains; added propagation matters for the fresh gain. The next supporting
 target is reusing the 10,018 continuation certificates that exactly repeat earlier
 ones, while keeping new implications, dependencies and unresolved cases explicit.
 
+The [closure-reuse follow-up](experiments/results/cnf-probe-closure-compact/README.md)
+now avoids 14,705 repeated propagations by checking added clauses under saved
+unit closures. All 1,209 source plans and 13,066 semantic nodes are preserved.
+Coverage stays 634/697 non-tiny inputs. A compact policy tag removes the first
+trial's storage regression: total time is 62.76 -> 61.69 s, SQLite 197.10 ->
+196.10 MB and cold replay 26.78 -> 25.09 s in single samples. The failed trial
+and timing limitations remain recorded. All 348 Python tests and the full Lean
+audit pass. Next: choose a more useful four-clause batch from the 61 additional
+checked candidates found on sixteen unresolved leaves, with selection and
+changed probe choices charged. These candidates are not yet coverage gains.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

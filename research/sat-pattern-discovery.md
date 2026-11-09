@@ -175,6 +175,45 @@ shared proof checking. This could support further investigation of the 48 select
 leaves where learning remains inconclusive; no new benefit is yet measured.
 The policy remains optional and all 54 remaining source misses are explicit.
 
+## Checked closure reuse and the next selection gap (9 November 2026)
+
+The [closure-reuse study](../experiments/results/cnf-probe-closure-compact/README.md)
+implements the preceding supporting target. After checking all original probe
+reasons and the learned batch, test additions under the same saved assumption
+and unit closure. Reuse its proof only when every added clause is satisfied or
+has at least two unassigned literals; otherwise perform full propagation.
+Restriction preserves the original clause prefix and reason indices. Fresh
+assumptions, edits and active additions cannot silently inherit the closure.
+The old trace remains a valid derivation under extension, but a fixed point is
+not a SAT answer. Lean proves the derivation and exact added-clause criterion;
+Python separately checks references, source bindings, transport and model fibers.
+
+The 1,209-input study preserves all 13,066 semantic nodes and every source plan,
+with 634/697 non-tiny and 15/24 fresh random closures. Of 17,548 continuations,
+14,705 reuse checked closures; 672 active repeated assumptions and 2,171 fresh
+assumptions remain full probes. The compact sample gives modest total savings
+(time 62.759 -> 61.687 s, SQLite 197.104 -> 196.096 MB, cold replay 26.785 ->
+25.094 s). The failed verbose identity instead grows storage to 200.323 MB and
+is preserved. Single-sample timings and checkpoint overlap are disclosed; the
+ordinary solver is unchanged and no new family coverage is claimed.
+
+Sixty-three source misses remain. Their selected remainder has 94 distinct
+unresolved leaves: sixty learning-clear and 34 clear. Twenty batches reach cap
+four; candidate enumeration up to sixteen exposes 61 further eligible clauses
+on sixteen leaves across thirteen missed source paths. Thirty-eight existing
+batches draw all clauses from a single assumption. The
+[frontier](../experiments/results/cnf-probe-closure-compact/learning-frontier.json)
+retains each candidate and its checked source reason, including no-opportunity
+leaves. It does not execute a new batch or establish extra closure.
+
+**Next experiment:** preserve the four-clause and probe caps, and compare batch
+selection by activation of saved closures and diversity of assumptions with the
+current first-four order. Check exact entailment/composition, charge candidate
+recognition and ranking, retain all failures, and include a fixed-variable-choice
+control. This returns the priority to splitting unresolved discovery cells;
+active-continuation resumption is a smaller supporting optimization. General
+compact coverage and polynomial arbitrary-SAT acquisition remain unproved.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

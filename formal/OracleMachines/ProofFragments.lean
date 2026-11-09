@@ -74,6 +74,15 @@ theorem extend_sound (base hints : List Clause) (target : Clause)
   intro v hv
   exact check_sound target hints v (fun c hc => valid c hc v hv) accepted
 
+/-- A portable fragment checked using clauses of the exact residual core needs
+no parent proof or inherited heuristic context. Translation of Python indices
+into these premise clauses remains an external refinement obligation. -/
+theorem core_fragment_sound (core reasons : List Clause) (target : Clause)
+    (fromCore : ∀ c ∈ reasons, c ∈ core)
+    (accepted : check target reasons = true) : Entails core target := by
+  intro v model
+  exact check_sound target reasons v (fun c member => model c (fromCore c member)) accepted
+
 theorem weaken (old new : List Clause) (c : Clause)
     (included : ∀ b ∈ old, b ∈ new) (valid : Entails old c) : Entails new c := by
   intro v hv

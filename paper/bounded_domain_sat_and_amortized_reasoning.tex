@@ -3233,6 +3233,63 @@ Source 1194 remains the largest baseline discovery miss. Its separate instrument
 
 All 417 Python tests pass, including 9,724 ordered small formulas with repeated literals and tautologies, 3,000 seeded random edits, the 148 saved frontier probe discoveries, scoped-engine restoration, independent reason checks and byte-identical archives. The full and pilot reports each have 66 fingerprints, with separate hashes for profiles, timing controls and adversarial controls. Lean sources are unchanged from the preceding audit and were not rebuilt for this change. Primary runs, allocation, repeated timings and profiles run sequentially. The result lowers the measured cost of existing discovery while preserving all previous proofs; it establishes neither broader structural coverage nor a uniformly polynomial expansion for arbitrary SAT.
 
+\subsection{Sharing immutable source indexes across restrictions}
+\label{sec:indexed-restriction}
+
+Restriction now dominates the expensive source's own-time profile. A twelve-source diagnostic finds substantial locality. Source 1194 performs 3,399 restrictions over 1,187,922 input literal occurrences, while only 109,956 literals belong to affected clauses. There are 3,044 repeated source-object calls, 277 distinct source values and 355 distinct source objects. All observed restriction sources have immutable tuple containers. The observer retains objects to distinguish identities safely; its timings and memory are therefore not performance evidence. We use these counts to motivate sharing prepared occurrence indexes across assumptions.
+
+The optional implementation validates a new source as an exact tuple of exact tuples of exact nonzero integer objects, excluding subclasses and Booleans. It records signed occurrence lists with clause IDs and multiplicities. An entry strongly retains its source. A hit requires that same validated immutable object; its integer object ID is only a lookup aid, followed by an identity check. The strong reference prevents ID recycling during the entry's lifetime, and immutability preserves the occurrence lists. Mutable or unusual inputs use the original scan path. Changed sources and separately allocated equal CNFs prepare independently. Eviction removes the index, and restart begins empty. No assignment, restricted answer or proof verdict is cached.
+
+For an assignment, the index identifies clauses containing a true occurrence and clauses containing a false occurrence. The first set is removed. Clauses in the second set but not the first are rebuilt by deleting assigned literals. All other clauses reuse their original immutable tuples. The outer result is assembled in original clause order. This is an implementation of existing restriction semantics using occurrence locality, not a new inference rule or tractable SAT class.
+
+\begin{proposition}[Exact restriction through a retained occurrence index]
+\label{prop:indexed-restriction}
+Suppose an eligible source is validated and indexed as above, and each cached hit refers to that same strongly retained immutable source. For every assignment from positive integer variable IDs to Boolean values, indexed restriction returns the same ordered tuple of clauses as the scan-based restriction routine, including repeated literals, tautologies and empty clauses.
+\end{proposition}
+\begin{proof}
+Preparation records exactly the source's signed occurrences, and immutability preserves that invariant. Consider a clause. If it contains a true occurrence, both procedures remove it. Otherwise, if it contains any assigned occurrence, that occurrence is false; the clause is in the affected set and both procedures retain precisely its unassigned occurrences in their original order. A clause outside both sets has no assigned variable and is unchanged. Reassembly preserves clause order, so the complete results agree. Retaining the validated source prevents a recycled object ID from referring to another formula; the explicit identity check excludes a different source. Eviction affects future preparation only, and cannot change an already returned immutable residual.
+\end{proof}
+
+Let $m$ and $L$ be source clause and literal-occurrence counts, $A$ the number of assignment entries, $P$ the number of retrieved posting entries, and $R$ the total literal count of unsatisfied affected clauses. Assuming constant-time map/set access and word arithmetic, a miss prepares in $O(1+m+L)$ work, followed by query work. A hit costs $O(1+A+P+R+m)$. The $m$ term remains because we materialize the complete ordered outer tuple, even when few clauses change. Query scratch and output require $O(1+A+m+R)$ words; unchanged clauses share storage. Preparation is not free, and dense or one-time updates can fail to repay it.
+
+The cache charges $1+m+L$ units per source and retains at most 32,768 units. This bounds source, clause and occurrence slots up to constant representation factors under the word model. It is not a byte or RSS cap: integer bit lengths, Python object overhead, original graphs and the archive remain separate. One incoming index can be built before eviction, so temporary preparation adds to retained state. Oversized sources are validated and scanned without admission. Dictionary/set collisions and long integer labels retain their bit-cost obligations.
+
+The simplification checker still reconstructs its input branch directly and independently of this helper. However, constructing that branch from the original source now uses the indexed restriction when enabled. The checker does not verify the index implementation itself. The proposition and differential tests support this trusted Python component; no Lean refinement of its identity, lifetime or memory mechanism is claimed. The ordinary SAT decider retains its default scan path.
+
+On the same 1,497 inputs, both modes reproduce all previous answers, structural profiles, root identities and database bytes. Coverage stays 869 of 985 non-tiny sources, with the same 116 unresolved sources and 148 selected leaves. The first full comparison is mixed: discovery improves 3.41\% and cold replay 7.92\%, but total operation time regresses 1.57\% (Table~\ref{tab:indexed-restriction}). The ordinary solver phase uses the same scan path but takes 13.70\% longer. A single sequential comparison cannot separate run variation from cache-induced process or memory effects. We retain this regression and conduct a second full comparison in reverse mode order.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Measurement, first full sample & Ordered baseline & Indexed restriction \\
+\midrule
+Full operation time (s) & 132.36551 & 134.44214 \\
+Discovery time (s) & 93.85938 & 90.65563 \\
+Ordinary solver time (s) & 38.45513 & 43.72392 \\
+Cold replay (s) & 60.86819 & 56.04772 \\
+SQLite size (MB) & 437.621 & 437.621 \\
+Six-case Python peak (MB) & 22.475 & 24.073 \\
+Repeated subset mean total (s) & 4.81769 & 4.35747 \\
+\bottomrule
+\end{tabular}
+\caption{Prepared restriction indexes preserve all evidence but have a mixed first full total-cost result. Both modes use ordered propagation and the same proof-check cache. The repeated subset uses twelve fixed queries and four trials per mode. Python memory excludes native SQLite, RSS and the full-corpus peak.}
+\label{tab:indexed-restriction}
+\end{table}
+
+The reverse-order full run takes 142.37374 seconds for the baseline and 128.27877 for indexed restriction, with discovery at 100.72151 versus 87.66682 seconds. Across the combined baseline/indexed/indexed/baseline order, two-sample means are 137.36963 versus 131.36045 seconds total, 97.29044 versus 89.16122 seconds discovery and 61.16937 versus 56.70501 seconds cold replay. These are reductions of 4.37\%, 8.36\% and 7.30\%, respectively. The ordinary solver phase instead averages 40.02449 versus 42.13410 seconds. Within-mode operation counters, storage and archive hashes repeat exactly. Reverse-order allocation repeats the roughly 1.60 MB Python peak increase. These limited synthetic samples balance order, but the first regression and sample spread remain; they establish neither significance nor pointwise or industrial performance guarantees.
+
+Twelve-query ABBA BAAB controls average 4.81769 versus 4.35747 seconds total and 4.52899 versus 4.06290 seconds discovery. All four indexed totals lie below the four baseline totals; the unchanged solver phase averages 0.28761 versus 0.29334 seconds. These selected controls support locality-dependent savings, but do not resolve full-corpus total cost or establish significance. In the first full sample, warm replay is 0.25887 versus 0.28366 seconds and initialization is separately 0.00156 versus 0.22247 seconds. Six-case traced Python peak grows by 1,598,364 bytes, and retained traced memory by 1,285,252 bytes. The logical cache cap is not a physical-memory cap.
+
+Full operations make 275,865 indexed-helper calls, with 241,198 hits, 34,599 admissions, 34,511 evictions and 68 fallback scans. The baseline scans 82,210,169 restriction literals. The candidate instead charges 10,412,650 validation literal checks, the same number of preparation entries, 2,986,814 posting visits, 4,038,253 rebuilt-clause literal visits, 28,938,355 output clause positions and 4,473 fallback literal visits. Assignment and clause-validation checks are counted separately. These are different operations, not interchangeable speedup units. Every non-restriction operation counter agrees. Independent simplification reconstruction still visits 51,574,914 literals, and complete output assembly remains substantial.
+
+Thirty-two controls test 32-query streams at 16, 64, 256 and 1,024 clauses, starting each trial with an empty index. At 1,024 clauses, sparse assignments on one reused source improve 17.81227 to 1.95817 milliseconds, with 31 hits after one admission. Equal formulas allocated afresh each time instead regress 17.91109 to 23.80568 milliseconds, and novel append streams regress 17.75385 to 23.29391 milliseconds. Both have no hits. Dense affected-clause updates improve 17.90560 to 12.30488 milliseconds, while an oversized-source control at a 32-unit cap regresses 17.49730 to 27.90861 milliseconds. The index therefore requires useful locality to repay preparation. Sparse reuse grows Python peak from 173,608 to 817,816 bytes; equal reallocations grow it to 3,239,360 bytes. These helper allocations exclude preconstructed source inputs. Mutable-input, absent-variable and empty-assignment controls are also retained.
+
+Source 1194's separate instrumented acquisition falls from 3.53284 to 2.91629 seconds. Its same 3,399 restriction calls fall from 0.82784 to 0.21269 seconds cumulative, including dispatch, with 3,044 hits and 355 admissions. Simplification checking is now the largest named own-time cost: 2,303 calls, 0.27952 seconds own time and 0.55562 seconds cumulative. Propagation and normalization follow. These instrumented figures are diagnostic and nested cumulative costs must not be added. The next cost question is exact reuse of checker reconstruction state while preserving independent validation. Shared output structure, equal-source preparation and genuinely novel edits remain separate gaps. Further structural coverage still needs new certified relations or exact interaction decompositions.
+
+All 425 Python tests pass, including 87,516 exhaustive ordered-formula/partial-assignment pairs checked against all compatible complete assignments, 4,000 seeded random or edited restrictions, mutable and type-alias cases, cap/eviction behavior, scope restoration, the 148 saved frontier probes and byte-identical archives. Both full modes check all retained nodes, alternatives, source bindings and ordinary solver certificates cold, leaving the existing archive unchanged. No duplicate full archive is retained. Full and pilot reports each have 70 fingerprints, with separately hashed profiles, timing and locality controls. All 57 preceding manuscript proof blocks remain intact. Lean sources are unchanged and were not rebuilt; the stronger implementation-refinement and unrestricted acquisition obligations remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

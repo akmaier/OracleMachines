@@ -218,6 +218,15 @@ conflicts can regress because index preparation is wasted. All 417 tests pass.
 Coverage stays 869/985 non-tiny: broader discovery remains open, while repeated
 restriction and residual reconstruction are now the leading measured cost gaps.
 
+The [immutable source-index study](experiments/results/cnf-indexed-restriction/README.md)
+then reuses occurrence lists across restrictions and shares unchanged clause
+tuples. Two full runs per mode average **8.36% less discovery time, 4.37% less
+total time and 7.30% less cold replay**, with identical proofs and archive bytes.
+Six-case Python peak grows **1.60 MB**. The first total-time regression and poor
+reuse on newly allocated/edited sources are preserved. All **425 tests** pass;
+independent simplification reconstruction is now the leading measured cost gap,
+and structural coverage remains unchanged.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

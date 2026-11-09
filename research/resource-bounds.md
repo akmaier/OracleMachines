@@ -1698,3 +1698,54 @@ coverage remains 869/985 non-tiny, with 116 sources unresolved. Cheaper closure
 computation leaves the broader category/decomposition and unrestricted complexity
 gaps unchanged. Complete evidence, controls and limitations are in the
 [matched study](../experiments/results/cnf-ordered-propagation/README.md).
+
+## Immutable-source restriction indexes: locality, output cost and memory
+
+The [indexed restriction account](indexed-restriction.md) validates an immutable
+source and reuses signed occurrence postings only while that exact source is
+strongly retained. Changed, mutable and separately allocated equal sources cannot
+inherit the identity shortcut. There is no result/proof cache in this index.
+For m clauses, L occurrences, A assignments, P retrieved postings and R affected
+unsatisfied-clause literals, a hit costs O(1+A+P+R+m) under constant map/set access
+and word arithmetic. A miss adds O(1+m+L) validation/preparation. Complete output
+assembly is still O(m), though unchanged clause tuples share storage.
+
+Retained units sum 1+m+L per admitted source, capped at 32,768. This is O(B) words
+up to representation constants; long integers, Python objects and original graphs
+prevent a byte/RSS interpretation. One incoming index can be built before eviction.
+Oversized inputs pay validation and then scanning. There is no unconditional bound
+on dictionary/set performance, total SAT work or lifetime archive growth.
+
+The first full sample's discovery is 93.85938 -> 90.65563 s and cold replay
+60.86819 -> 56.04772 s, but total regresses 132.36551 -> 134.44214 s. The ordinary
+solver phase varies by 13.70%; the single sample does not isolate variation from
+process/memory effects. The selected repeated subset improves 4.81769 -> 4.35747 s
+mean total. A full reverse-order comparison is retained separately. Six-case Python
+peak rises 22,474,578 -> 24,072,942 bytes; retained allocation rises 22,162,053 ->
+23,447,305 bytes. SQLite stays byte-identical at 437,620,736 bytes. Allocation
+excludes native SQLite/RSS and full-corpus peak; no total-memory saving is claimed.
+
+Full operations have 275,865 helper calls, 241,198 hits, 34,599 admissions,
+34,511 evictions and 68 fallbacks. Against 82,210,169 baseline restriction visits,
+the candidate pays 10,412,650 validation literals, the same preparation count,
+2,986,814 posting visits, 4,038,253 rebuilt literals, 28,938,355 output clause
+positions and 4,473 fallback literals. These different operations cannot be treated
+as a single speedup ratio. All non-restriction counters agree, including 51,574,914
+independent reconstruction visits. The next named own-time cost is simplification
+checking, not source restriction.
+
+At 1,024 clauses, a 32-query sparse stream on one source improves 17.81227 ->
+1.95817 ms, but equal reallocation regresses 17.91109 -> 23.80568 ms and novel
+appends regress 17.75385 -> 23.29391 ms. Their indexes receive no reuse. Equal
+reallocation peak grows 173,608 -> 3,239,360 bytes; even favorable sparse reuse
+peaks at 817,816 bytes. Oversized fallback also regresses. These retained controls
+separate warm locality from arbitrary new sources. Structural coverage remains
+869/985 non-tiny and supplies no unrestricted efficient-expansion construction.
+
+The full reverse-order control is complete. Across two samples per mode, means
+are 137.36963 -> 131.36045 s total, 97.29044 -> 89.16122 s discovery and 61.16937 ->
+56.70501 s cold replay (4.37%, 8.36% and 7.30% reductions). All within-mode operation
+counters and archive hashes repeat. The reverse allocation repeats the roughly
+1.60 MB Python peak increase. These limited synthetic samples balance order but
+do not erase the initial regression, establish significance or justify universal
+speed claims. Both complete reports and the order-control hashes are preserved.

@@ -1,0 +1,88 @@
+{
+  "script_sha256": "56e2cefb45f013c8387db21bea130ab118711f0fd6c999aceb4035e5b2d3e3f4",
+  "comparison_script_sha256": "06f2405398aca3e5aecc72d015ddaa5b6a85d0efaeb1ec82c6965654d95cff42",
+  "reports": [
+    {
+      "path": "experiments/results/cnf-indexed-restriction/report.json",
+      "sha256": "6ca5b73b4288c41b3073d6ed60fd74b5f0e7dd3c5253dd398d40e886ce796765"
+    },
+    {
+      "path": "experiments/results/cnf-indexed-restriction-reverse/report.json",
+      "sha256": "243c4e3af98a8db13f0b288dbde94117a80205f42d7eedbbac26fac3e116c6bc"
+    }
+  ],
+  "order": [
+    "baseline",
+    "indexed",
+    "indexed",
+    "baseline"
+  ],
+  "summary": {
+    "baseline": {
+      "total_seconds": {
+        "samples": [
+          132.36551456083544,
+          142.37374031590298
+        ],
+        "mean": 137.3696274383692
+      },
+      "discovery_seconds": {
+        "samples": [
+          93.85937609360553,
+          100.72151220403612
+        ],
+        "mean": 97.29044414882082
+      },
+      "solver_seconds": {
+        "samples": [
+          38.45512586669065,
+          41.593853181926534
+        ],
+        "mean": 40.02448952430859
+      },
+      "cold_seconds": {
+        "samples": [
+          60.86819258402102,
+          61.470543834147975
+        ],
+        "mean": 61.169368209084496
+      }
+    },
+    "indexed": {
+      "total_seconds": {
+        "samples": [
+          134.4421353742946,
+          128.27876825304702
+        ],
+        "mean": 131.3604518136708
+      },
+      "discovery_seconds": {
+        "samples": [
+          90.65563100716099,
+          87.66681536193937
+        ],
+        "mean": 89.16122318455018
+      },
+      "solver_seconds": {
+        "samples": [
+          43.723917111055925,
+          40.5442872508429
+        ],
+        "mean": 42.13410218094941
+      },
+      "cold_seconds": {
+        "samples": [
+          56.04772158409469,
+          57.36230812501162
+        ],
+        "mean": 56.705014854553156
+      }
+    }
+  },
+  "limitations": [
+    "Two full samples per mode balance order, but do not establish significance or industrial performance",
+    "First-run regression is retained; resource variation or cache-induced process effects are not excluded",
+    "Within-mode operation counters and archive hashes must repeat exactly across both full runs",
+    "Each run retains separate initialization, warm/cold replay and allocation diagnostics"
+  ]
+}

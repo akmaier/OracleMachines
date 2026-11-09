@@ -1,0 +1,1921 @@
+{
+  "rows": [
+    {
+      "n": 16,
+      "family": "warm_sparse",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "d39cadfbdd202a656ec28ab8cd15cb1b76062bab457124675ca44746823d8483",
+      "seconds": {
+        "baseline": [
+          0.00026816711761057377,
+          0.00025916704908013344,
+          0.00025616702623665333,
+          0.000257750041782856
+        ],
+        "indexed": [
+          9.016599506139755e-05,
+          8.64171888679266e-05,
+          9.237509220838547e-05,
+          8.749985136091709e-05
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.00026031280867755413,
+        "indexed": 8.911453187465668e-05
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 1536
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 16,
+          "indexed_restriction_validation_literals": 48,
+          "indexed_restriction_preparation_literals": 48,
+          "indexed_restriction_admissions": 1,
+          "indexed_restriction_posting_visits": 32,
+          "indexed_restriction_rebuilt_literals": 48,
+          "indexed_restriction_affected_clauses": 32,
+          "indexed_restriction_assembly_clauses": 512,
+          "indexed_restriction_hits": 31
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 1,
+          "units": 65,
+          "peak_units": 65,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 3560,
+          "peak_bytes": 4152
+        },
+        "indexed": {
+          "current_bytes": 12448,
+          "peak_bytes": 14952
+        }
+      }
+    },
+    {
+      "n": 16,
+      "family": "equal_new_objects",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "d39cadfbdd202a656ec28ab8cd15cb1b76062bab457124675ca44746823d8483",
+      "seconds": {
+        "baseline": [
+          0.00026604090817272663,
+          0.0002539590932428837,
+          0.0002645000349730253,
+          0.00027050008065998554
+        ],
+        "indexed": [
+          0.0003777090460062027,
+          0.0003992910496890545,
+          0.00040637492202222347,
+          0.0003772089257836342
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.0002637500292621553,
+        "indexed": 0.0003901459858752787
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 1536
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 512,
+          "indexed_restriction_validation_literals": 1536,
+          "indexed_restriction_preparation_literals": 1536,
+          "indexed_restriction_admissions": 32,
+          "indexed_restriction_posting_visits": 32,
+          "indexed_restriction_rebuilt_literals": 48,
+          "indexed_restriction_affected_clauses": 32,
+          "indexed_restriction_assembly_clauses": 512
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 32,
+          "units": 2080,
+          "peak_units": 2080,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 3560,
+          "peak_bytes": 4152
+        },
+        "indexed": {
+          "current_bytes": 169960,
+          "peak_bytes": 175024
+        }
+      }
+    },
+    {
+      "n": 16,
+      "family": "novel_append",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "1e3061c6d413fe26644a14c556d22aee9b86548ade87c92190af9fe29848b7e2",
+      "seconds": {
+        "baseline": [
+          0.00027904193848371506,
+          0.000258374959230423,
+          0.0002806249540299177,
+          0.0002800840884447098
+        ],
+        "indexed": [
+          0.00040962500497698784,
+          0.00040808296762406826,
+          0.000421290984377265,
+          0.00040683289989829063
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.0002745314850471914,
+        "indexed": 0.00041145796421915293
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 1568
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 544,
+          "indexed_restriction_validation_literals": 1568,
+          "indexed_restriction_preparation_literals": 1568,
+          "indexed_restriction_admissions": 32,
+          "indexed_restriction_posting_visits": 32,
+          "indexed_restriction_rebuilt_literals": 48,
+          "indexed_restriction_affected_clauses": 32,
+          "indexed_restriction_assembly_clauses": 544
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 32,
+          "units": 2144,
+          "peak_units": 2144,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 3632,
+          "peak_bytes": 4224
+        },
+        "indexed": {
+          "current_bytes": 171768,
+          "peak_bytes": 176864
+        }
+      }
+    },
+    {
+      "n": 16,
+      "family": "dense_updates",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "85977fd5d168307aa3a6f852bb4efdfcbaa8096449f87d3e5a381da50606aa1d",
+      "seconds": {
+        "baseline": [
+          0.00028004194609820843,
+          0.0002602499444037676,
+          0.00027954205870628357,
+          0.0002810000441968441
+        ],
+        "indexed": [
+          0.0002562918234616518,
+          0.0002548331394791603,
+          0.00024908408522605896,
+          0.000248459167778492
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.0002752084983512759,
+        "indexed": 0.00025216705398634076
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 1536
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 16,
+          "indexed_restriction_validation_literals": 48,
+          "indexed_restriction_preparation_literals": 48,
+          "indexed_restriction_admissions": 1,
+          "indexed_restriction_posting_visits": 512,
+          "indexed_restriction_rebuilt_literals": 1536,
+          "indexed_restriction_affected_clauses": 512,
+          "indexed_restriction_assembly_clauses": 512,
+          "indexed_restriction_hits": 31
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 1,
+          "units": 65,
+          "peak_units": 65,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 3328,
+          "peak_bytes": 3920
+        },
+        "indexed": {
+          "current_bytes": 11488,
+          "peak_bytes": 14880
+        }
+      }
+    },
+    {
+      "n": 16,
+      "family": "mutable_fallback",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "d39cadfbdd202a656ec28ab8cd15cb1b76062bab457124675ca44746823d8483",
+      "seconds": {
+        "baseline": [
+          0.00024991692043840885,
+          0.00026920787058770657,
+          0.0002663747873157263,
+          0.00026695779524743557
+        ],
+        "indexed": [
+          0.0002882080152630806,
+          0.0003016670234501362,
+          0.0002785001415759325,
+          0.00028924993239343166
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.0002631143433973193,
+        "indexed": 0.00028940627817064524
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 1536
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_fallbacks": 32,
+          "restriction_literal_visits": 1536
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 0,
+          "units": 0,
+          "peak_units": 0,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 3440,
+          "peak_bytes": 4032
+        },
+        "indexed": {
+          "current_bytes": 3712,
+          "peak_bytes": 4456
+        }
+      }
+    },
+    {
+      "n": 16,
+      "family": "oversize_fallback",
+      "queries": 32,
+      "limit_units": 32,
+      "input_sha256": "d39cadfbdd202a656ec28ab8cd15cb1b76062bab457124675ca44746823d8483",
+      "seconds": {
+        "baseline": [
+          0.0002670001704245806,
+          0.000251667108386755,
+          0.0002661249600350857,
+          0.00026483391411602497
+        ],
+        "indexed": [
+          0.0004331660456955433,
+          0.0004572498146444559,
+          0.0004604170098900795,
+          0.00043229199945926666
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.00026240653824061155,
+        "indexed": 0.00044578121742233634
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 1536
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 512,
+          "indexed_restriction_validation_literals": 1536,
+          "indexed_restriction_oversize": 32,
+          "restriction_literal_visits": 1536
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 0,
+          "units": 0,
+          "peak_units": 0,
+          "limit_units": 32
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 3560,
+          "peak_bytes": 4152
+        },
+        "indexed": {
+          "current_bytes": 3984,
+          "peak_bytes": 4728
+        }
+      }
+    },
+    {
+      "n": 16,
+      "family": "absent_variable",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "54257091d7d53e4006b588ba37da09a57219557f60127029400be479795c2f21",
+      "seconds": {
+        "baseline": [
+          0.00027050008065998554,
+          0.0002693748101592064,
+          0.00026883394457399845,
+          0.00025591696612536907
+        ],
+        "indexed": [
+          8.17091204226017e-05,
+          7.458310574293137e-05,
+          8.008279837667942e-05,
+          7.424992509186268e-05
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.00026615645037963986,
+        "indexed": 7.765623740851879e-05
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 1536
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 16,
+          "indexed_restriction_validation_literals": 48,
+          "indexed_restriction_preparation_literals": 48,
+          "indexed_restriction_admissions": 1,
+          "indexed_restriction_posting_visits": 0,
+          "indexed_restriction_affected_clauses": 0,
+          "indexed_restriction_assembly_clauses": 512,
+          "indexed_restriction_hits": 31
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 1,
+          "units": 65,
+          "peak_units": 65,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 3576,
+          "peak_bytes": 4168
+        },
+        "indexed": {
+          "current_bytes": 11736,
+          "peak_bytes": 14432
+        }
+      }
+    },
+    {
+      "n": 16,
+      "family": "empty_assignment",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "652a8e23f1add042fc73093e736d99b7baf873a6ef037be66fde76dca379fe56",
+      "seconds": {
+        "baseline": [
+          0.0002545418683439493,
+          0.0002637919969856739,
+          0.00026391702704131603,
+          0.00026400014758110046
+        ],
+        "indexed": [
+          0.0001888331025838852,
+          0.00017458293586969376,
+          0.00018370803445577621,
+          0.0001778341829776764
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.00026156275998800993,
+        "indexed": 0.0001812395639717579
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 1536
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 0,
+          "indexed_restriction_validation_clauses": 512,
+          "indexed_restriction_validation_literals": 1536,
+          "indexed_restriction_empty_assignments": 32
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 0,
+          "units": 0,
+          "peak_units": 0,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 3456,
+          "peak_bytes": 4048
+        },
+        "indexed": {
+          "current_bytes": 1064,
+          "peak_bytes": 1648
+        }
+      }
+    },
+    {
+      "n": 64,
+      "family": "warm_sparse",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "beb4d525b9d9f687d9d210388d3fea32148f60368586820245dfb80777a15862",
+      "seconds": {
+        "baseline": [
+          0.0010567500721663237,
+          0.0010264590382575989,
+          0.0010581249371170998,
+          0.0010486249811947346
+        ],
+        "indexed": [
+          0.00017945794388651848,
+          0.0001760418526828289,
+          0.00017554103396832943,
+          0.0001756658311933279
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.0010474897571839392,
+        "indexed": 0.00017667666543275118
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 6144
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 64,
+          "indexed_restriction_validation_literals": 192,
+          "indexed_restriction_preparation_literals": 192,
+          "indexed_restriction_admissions": 1,
+          "indexed_restriction_posting_visits": 32,
+          "indexed_restriction_rebuilt_literals": 48,
+          "indexed_restriction_affected_clauses": 32,
+          "indexed_restriction_assembly_clauses": 2048,
+          "indexed_restriction_hits": 31
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 1,
+          "units": 257,
+          "peak_units": 257,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 10608,
+          "peak_bytes": 11720
+        },
+        "indexed": {
+          "current_bytes": 29184,
+          "peak_bytes": 50744
+        }
+      }
+    },
+    {
+      "n": 64,
+      "family": "equal_new_objects",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "beb4d525b9d9f687d9d210388d3fea32148f60368586820245dfb80777a15862",
+      "seconds": {
+        "baseline": [
+          0.0010525828693062067,
+          0.0010526669211685658,
+          0.0010506659746170044,
+          0.0010591249447315931
+        ],
+        "indexed": [
+          0.0013616250362247229,
+          0.0013524999376386404,
+          0.0013576250057667494,
+          0.0013531669974327087
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.0010537601774558425,
+        "indexed": 0.0013562292442657053
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 6144
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 2048,
+          "indexed_restriction_validation_literals": 6144,
+          "indexed_restriction_preparation_literals": 6144,
+          "indexed_restriction_admissions": 32,
+          "indexed_restriction_posting_visits": 32,
+          "indexed_restriction_rebuilt_literals": 48,
+          "indexed_restriction_affected_clauses": 32,
+          "indexed_restriction_assembly_clauses": 2048
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 32,
+          "units": 8224,
+          "peak_units": 8224,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 10608,
+          "peak_bytes": 11720
+        },
+        "indexed": {
+          "current_bytes": 656096,
+          "peak_bytes": 681208
+        }
+      }
+    },
+    {
+      "n": 64,
+      "family": "novel_append",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "9c73ec07f92586e979ad02fc05926292caaf53e7f230e531c39e544bdd8c57e3",
+      "seconds": {
+        "baseline": [
+          0.0010812499094754457,
+          0.0011070000473409891,
+          0.0010709580965340137,
+          0.0010777909774333239
+        ],
+        "indexed": [
+          0.0013834999408572912,
+          0.001391999889165163,
+          0.0013813329860568047,
+          0.0013698339462280273
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.0010842497576959431,
+        "indexed": 0.0013816666905768216
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 6176
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 2080,
+          "indexed_restriction_validation_literals": 6176,
+          "indexed_restriction_preparation_literals": 6176,
+          "indexed_restriction_admissions": 32,
+          "indexed_restriction_posting_visits": 32,
+          "indexed_restriction_rebuilt_literals": 48,
+          "indexed_restriction_affected_clauses": 32,
+          "indexed_restriction_assembly_clauses": 2080
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 32,
+          "units": 8288,
+          "peak_units": 8288,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 10744,
+          "peak_bytes": 11960
+        },
+        "indexed": {
+          "current_bytes": 657896,
+          "peak_bytes": 683040
+        }
+      }
+    },
+    {
+      "n": 64,
+      "family": "dense_updates",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "868aad34b1b63fa441db61887ba1ae06180e9be95a04a570a47a525af657e5a1",
+      "seconds": {
+        "baseline": [
+          0.001109750010073185,
+          0.0010966670233756304,
+          0.0011131661012768745,
+          0.0011131248902529478
+        ],
+        "indexed": [
+          0.0007675830274820328,
+          0.0007942088413983583,
+          0.000785500044003129,
+          0.0007941669318825006
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.0011081770062446594,
+        "indexed": 0.0007853647111915052
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 6144
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 64,
+          "indexed_restriction_validation_literals": 192,
+          "indexed_restriction_preparation_literals": 192,
+          "indexed_restriction_admissions": 1,
+          "indexed_restriction_posting_visits": 2048,
+          "indexed_restriction_rebuilt_literals": 6144,
+          "indexed_restriction_affected_clauses": 2048,
+          "indexed_restriction_assembly_clauses": 2048,
+          "indexed_restriction_hits": 31
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 1,
+          "units": 257,
+          "peak_units": 257,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 9680,
+          "peak_bytes": 10792
+        },
+        "indexed": {
+          "current_bytes": 29744,
+          "peak_bytes": 44256
+        }
+      }
+    },
+    {
+      "n": 64,
+      "family": "mutable_fallback",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "beb4d525b9d9f687d9d210388d3fea32148f60368586820245dfb80777a15862",
+      "seconds": {
+        "baseline": [
+          0.0010597079526633024,
+          0.001068208133801818,
+          0.0010659999679774046,
+          0.0010681250132620335
+        ],
+        "indexed": [
+          0.0010929170530289412,
+          0.0010897079482674599,
+          0.0011013748589903116,
+          0.0010899160988628864
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.0010655102669261396,
+        "indexed": 0.0010934789897873998
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 6144
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_fallbacks": 32,
+          "restriction_literal_visits": 6144
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 0,
+          "units": 0,
+          "peak_units": 0,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 10488,
+          "peak_bytes": 11600
+        },
+        "indexed": {
+          "current_bytes": 10760,
+          "peak_bytes": 12024
+        }
+      }
+    },
+    {
+      "n": 64,
+      "family": "oversize_fallback",
+      "queries": 32,
+      "limit_units": 32,
+      "input_sha256": "beb4d525b9d9f687d9d210388d3fea32148f60368586820245dfb80777a15862",
+      "seconds": {
+        "baseline": [
+          0.0010541249066591263,
+          0.0010720840655267239,
+          0.0010655419901013374,
+          0.0010718749836087227
+        ],
+        "indexed": [
+          0.0017502079717814922,
+          0.001743834000080824,
+          0.001741291955113411,
+          0.0017568340990692377
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.0010659064864739776,
+        "indexed": 0.0017480420065112412
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 6144
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 2048,
+          "indexed_restriction_validation_literals": 6144,
+          "indexed_restriction_oversize": 32,
+          "restriction_literal_visits": 6144
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 0,
+          "units": 0,
+          "peak_units": 0,
+          "limit_units": 32
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 10608,
+          "peak_bytes": 11720
+        },
+        "indexed": {
+          "current_bytes": 11064,
+          "peak_bytes": 12328
+        }
+      }
+    },
+    {
+      "n": 64,
+      "family": "absent_variable",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "20efacd6a6376752b8f7de7c1a788c8394626217d1a474c9b67c8f299c87658b",
+      "seconds": {
+        "baseline": [
+          0.001084167044609785,
+          0.0010703750886023045,
+          0.0010272909421473742,
+          0.0010682079009711742
+        ],
+        "indexed": [
+          0.0001649591140449047,
+          0.00016195815987884998,
+          0.00016200006939470768,
+          0.00016158283688127995
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.0010625102440826595,
+        "indexed": 0.00016262504504993558
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 6144
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 64,
+          "indexed_restriction_validation_literals": 192,
+          "indexed_restriction_preparation_literals": 192,
+          "indexed_restriction_admissions": 1,
+          "indexed_restriction_posting_visits": 0,
+          "indexed_restriction_affected_clauses": 0,
+          "indexed_restriction_assembly_clauses": 2048,
+          "indexed_restriction_hits": 31
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 1,
+          "units": 257,
+          "peak_units": 257,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 10696,
+          "peak_bytes": 11808
+        },
+        "indexed": {
+          "current_bytes": 28848,
+          "peak_bytes": 50744
+        }
+      }
+    },
+    {
+      "n": 64,
+      "family": "empty_assignment",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "f038a9a40399fb1776013a67b8b391c9e7c1ccd90868b866eb3c08412eb87615",
+      "seconds": {
+        "baseline": [
+          0.0010435839649289846,
+          0.0010704591404646635,
+          0.001041291980072856,
+          0.0010370828676968813
+        ],
+        "indexed": [
+          0.0006624588277190924,
+          0.0006596250459551811,
+          0.0006682078819721937,
+          0.0006603749934583902
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.0010481044882908463,
+        "indexed": 0.0006626666872762144
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 6144
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 0,
+          "indexed_restriction_validation_clauses": 2048,
+          "indexed_restriction_validation_literals": 6144,
+          "indexed_restriction_empty_assignments": 32
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 0,
+          "units": 0,
+          "peak_units": 0,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 10576,
+          "peak_bytes": 11688
+        },
+        "indexed": {
+          "current_bytes": 1064,
+          "peak_bytes": 1648
+        }
+      }
+    },
+    {
+      "n": 256,
+      "family": "warm_sparse",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "775253aa12fa0fb525a2546251858361356bcaf59587795006a3d52b24957c5f",
+      "seconds": {
+        "baseline": [
+          0.004386707907542586,
+          0.004373291973024607,
+          0.004398291930556297,
+          0.0044200841803103685
+        ],
+        "indexed": [
+          0.0005121659487485886,
+          0.0005232919938862324,
+          0.0005414159968495369,
+          0.0005108749028295279
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.004394593997858465,
+        "indexed": 0.0005219372105784714
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 24576
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 256,
+          "indexed_restriction_validation_literals": 768,
+          "indexed_restriction_preparation_literals": 768,
+          "indexed_restriction_admissions": 1,
+          "indexed_restriction_posting_visits": 32,
+          "indexed_restriction_rebuilt_literals": 48,
+          "indexed_restriction_affected_clauses": 32,
+          "indexed_restriction_assembly_clauses": 8192,
+          "indexed_restriction_hits": 31
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 1,
+          "units": 1025,
+          "peak_units": 1025,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 39792,
+          "peak_bytes": 44072
+        },
+        "indexed": {
+          "current_bytes": 90688,
+          "peak_bytes": 199320
+        }
+      }
+    },
+    {
+      "n": 256,
+      "family": "equal_new_objects",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "775253aa12fa0fb525a2546251858361356bcaf59587795006a3d52b24957c5f",
+      "seconds": {
+        "baseline": [
+          0.004438541829586029,
+          0.004359415965154767,
+          0.004363999934867024,
+          0.004330459050834179
+        ],
+        "indexed": [
+          0.0055790001060813665,
+          0.005584958009421825,
+          0.005583917023614049,
+          0.005499708000570536
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.0043731041951105,
+        "indexed": 0.005561895784921944
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 24576
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 8192,
+          "indexed_restriction_validation_literals": 24576,
+          "indexed_restriction_preparation_literals": 24576,
+          "indexed_restriction_admissions": 32,
+          "indexed_restriction_posting_visits": 32,
+          "indexed_restriction_rebuilt_literals": 48,
+          "indexed_restriction_affected_clauses": 32,
+          "indexed_restriction_assembly_clauses": 8192,
+          "indexed_restriction_evictions": 1
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 31,
+          "units": 31775,
+          "peak_units": 31775,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 39792,
+          "peak_bytes": 44072
+        },
+        "indexed": {
+          "current_bytes": 2537768,
+          "peak_bytes": 2688280
+        }
+      }
+    },
+    {
+      "n": 256,
+      "family": "novel_append",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "ad93cd65e6363233ce289c76e90d2b7c61028c47ce95cdfcb4d64c588de503d6",
+      "seconds": {
+        "baseline": [
+          0.004442458041012287,
+          0.004427250009030104,
+          0.0044701669830828905,
+          0.004466209094971418
+        ],
+        "indexed": [
+          0.00564991682767868,
+          0.005561332916840911,
+          0.005608749808743596,
+          0.0056769580114632845
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.004451521032024175,
+        "indexed": 0.005624239391181618
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 24608
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 8224,
+          "indexed_restriction_validation_literals": 24608,
+          "indexed_restriction_preparation_literals": 24608,
+          "indexed_restriction_admissions": 32,
+          "indexed_restriction_posting_visits": 32,
+          "indexed_restriction_rebuilt_literals": 48,
+          "indexed_restriction_affected_clauses": 32,
+          "indexed_restriction_assembly_clauses": 8224,
+          "indexed_restriction_evictions": 1
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 31,
+          "units": 31837,
+          "peak_units": 31837,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 39928,
+          "peak_bytes": 44216
+        },
+        "indexed": {
+          "current_bytes": 2539600,
+          "peak_bytes": 2690144
+        }
+      }
+    },
+    {
+      "n": 256,
+      "family": "dense_updates",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "9729c3f7a7ee495fbf4e8d76a112dcc320dfaa145078d541a65657bb264870db",
+      "seconds": {
+        "baseline": [
+          0.004467332968488336,
+          0.004423458129167557,
+          0.004359208047389984,
+          0.004341416992247105
+        ],
+        "indexed": [
+          0.0030680422205477953,
+          0.0030557499267160892,
+          0.003071665996685624,
+          0.0029755840077996254
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.004397854034323245,
+        "indexed": 0.0030427605379372835
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 24576
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 256,
+          "indexed_restriction_validation_literals": 768,
+          "indexed_restriction_preparation_literals": 768,
+          "indexed_restriction_admissions": 1,
+          "indexed_restriction_posting_visits": 8192,
+          "indexed_restriction_rebuilt_literals": 24576,
+          "indexed_restriction_affected_clauses": 8192,
+          "indexed_restriction_assembly_clauses": 8192,
+          "indexed_restriction_hits": 31
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 1,
+          "units": 1025,
+          "peak_units": 1025,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 35792,
+          "peak_bytes": 40072
+        },
+        "indexed": {
+          "current_bytes": 92784,
+          "peak_bytes": 168288
+        }
+      }
+    },
+    {
+      "n": 256,
+      "family": "mutable_fallback",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "775253aa12fa0fb525a2546251858361356bcaf59587795006a3d52b24957c5f",
+      "seconds": {
+        "baseline": [
+          0.004675999982282519,
+          0.004488249775022268,
+          0.004544499795883894,
+          0.004447124898433685
+        ],
+        "indexed": [
+          0.004834707826375961,
+          0.004569832934066653,
+          0.004568875068798661,
+          0.004676291951909661
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.004538968612905592,
+        "indexed": 0.004662426945287734
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 24576
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_fallbacks": 32,
+          "restriction_literal_visits": 24576
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 0,
+          "units": 0,
+          "peak_units": 0,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 39672,
+          "peak_bytes": 43952
+        },
+        "indexed": {
+          "current_bytes": 39944,
+          "peak_bytes": 44376
+        }
+      }
+    },
+    {
+      "n": 256,
+      "family": "oversize_fallback",
+      "queries": 32,
+      "limit_units": 32,
+      "input_sha256": "775253aa12fa0fb525a2546251858361356bcaf59587795006a3d52b24957c5f",
+      "seconds": {
+        "baseline": [
+          0.00459437514655292,
+          0.004679874982684851,
+          0.00456500006839633,
+          0.004642250016331673
+        ],
+        "indexed": [
+          0.007273416966199875,
+          0.007304334081709385,
+          0.007453458150848746,
+          0.007544458145275712
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.004620375053491443,
+        "indexed": 0.0073939168360084295
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 24576
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 8192,
+          "indexed_restriction_validation_literals": 24576,
+          "indexed_restriction_oversize": 32,
+          "restriction_literal_visits": 24576
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 0,
+          "units": 0,
+          "peak_units": 0,
+          "limit_units": 32
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 39792,
+          "peak_bytes": 44072
+        },
+        "indexed": {
+          "current_bytes": 40280,
+          "peak_bytes": 44712
+        }
+      }
+    },
+    {
+      "n": 256,
+      "family": "absent_variable",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "d33d2ef7e3d563de7c2cf82ace878228f5a0ac53bd652a2aac2abf221554ed23",
+      "seconds": {
+        "baseline": [
+          0.004571707919239998,
+          0.0046173331793397665,
+          0.004448374966159463,
+          0.004573459038510919
+        ],
+        "indexed": [
+          0.000495250103995204,
+          0.0005256249569356441,
+          0.0004943329840898514,
+          0.0004905411042273045
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.0045527187758125365,
+        "indexed": 0.000501437287312001
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 24576
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 256,
+          "indexed_restriction_validation_literals": 768,
+          "indexed_restriction_preparation_literals": 768,
+          "indexed_restriction_admissions": 1,
+          "indexed_restriction_posting_visits": 0,
+          "indexed_restriction_affected_clauses": 0,
+          "indexed_restriction_assembly_clauses": 8192,
+          "indexed_restriction_hits": 31
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 1,
+          "units": 1025,
+          "peak_units": 1025,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 39880,
+          "peak_bytes": 44160
+        },
+        "indexed": {
+          "current_bytes": 90352,
+          "peak_bytes": 199320
+        }
+      }
+    },
+    {
+      "n": 256,
+      "family": "empty_assignment",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "cf1b46c52a0a74e21e61120bc48843987bd4bd3ef91f4dba933c8bc9e259c749",
+      "seconds": {
+        "baseline": [
+          0.004588000010699034,
+          0.004589291987940669,
+          0.004514208994805813,
+          0.004605083027854562
+        ],
+        "indexed": [
+          0.0026517920196056366,
+          0.002709207823500037,
+          0.0027873751241713762,
+          0.0026328330859541893
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.004574146005325019,
+        "indexed": 0.00269530201330781
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 24576
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 0,
+          "indexed_restriction_validation_clauses": 8192,
+          "indexed_restriction_validation_literals": 24576,
+          "indexed_restriction_empty_assignments": 32
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 0,
+          "units": 0,
+          "peak_units": 0,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 39760,
+          "peak_bytes": 44040
+        },
+        "indexed": {
+          "current_bytes": 1096,
+          "peak_bytes": 1680
+        }
+      }
+    },
+    {
+      "n": 1024,
+      "family": "warm_sparse",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "18baa1abd1a2e0ec04516d18bd97641ca20819b00e68d700b3d433bb968be6d1",
+      "seconds": {
+        "baseline": [
+          0.017970165936276317,
+          0.017882375046610832,
+          0.017745708115398884,
+          0.017650832887738943
+        ],
+        "indexed": [
+          0.0019924999214708805,
+          0.001961624948307872,
+          0.001970625016838312,
+          0.001907916972413659
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.017812270496506244,
+        "indexed": 0.001958166714757681
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 98304
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 1024,
+          "indexed_restriction_validation_literals": 3072,
+          "indexed_restriction_preparation_literals": 3072,
+          "indexed_restriction_admissions": 1,
+          "indexed_restriction_posting_visits": 32,
+          "indexed_restriction_rebuilt_literals": 48,
+          "indexed_restriction_affected_clauses": 32,
+          "indexed_restriction_assembly_clauses": 32768,
+          "indexed_restriction_hits": 31
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 1,
+          "units": 4097,
+          "peak_units": 4097,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 156528,
+          "peak_bytes": 173608
+        },
+        "indexed": {
+          "current_bytes": 361056,
+          "peak_bytes": 817816
+        }
+      }
+    },
+    {
+      "n": 1024,
+      "family": "equal_new_objects",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "18baa1abd1a2e0ec04516d18bd97641ca20819b00e68d700b3d433bb968be6d1",
+      "seconds": {
+        "baseline": [
+          0.01764716603793204,
+          0.01788958301767707,
+          0.018266583792865276,
+          0.017841042019426823
+        ],
+        "indexed": [
+          0.023069874849170446,
+          0.022987833945080638,
+          0.024153583915904164,
+          0.025011416990309954
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.0179110937169753,
+        "indexed": 0.0238056774251163
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 98304
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 32768,
+          "indexed_restriction_validation_literals": 98304,
+          "indexed_restriction_preparation_literals": 98304,
+          "indexed_restriction_admissions": 32,
+          "indexed_restriction_posting_visits": 32,
+          "indexed_restriction_rebuilt_literals": 48,
+          "indexed_restriction_affected_clauses": 32,
+          "indexed_restriction_assembly_clauses": 32768,
+          "indexed_restriction_evictions": 25
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 7,
+          "units": 28679,
+          "peak_units": 28679,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 156528,
+          "peak_bytes": 173608
+        },
+        "indexed": {
+          "current_bytes": 2542256,
+          "peak_bytes": 3239360
+        }
+      }
+    },
+    {
+      "n": 1024,
+      "family": "novel_append",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "3708ca0815f8870413b0c303fdb613a9bc729533ffe522a4c10e4220fb0e92f0",
+      "seconds": {
+        "baseline": [
+          0.01755174994468689,
+          0.017928124871104956,
+          0.017690750071778893,
+          0.017844791989773512
+        ],
+        "indexed": [
+          0.02330337488092482,
+          0.02330775000154972,
+          0.023295791121199727,
+          0.02326870895922184
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.017753854219336063,
+        "indexed": 0.023293906240724027
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 98336
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 32800,
+          "indexed_restriction_validation_literals": 98336,
+          "indexed_restriction_preparation_literals": 98336,
+          "indexed_restriction_admissions": 32,
+          "indexed_restriction_posting_visits": 32,
+          "indexed_restriction_rebuilt_literals": 48,
+          "indexed_restriction_affected_clauses": 32,
+          "indexed_restriction_assembly_clauses": 32800,
+          "indexed_restriction_evictions": 25
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 7,
+          "units": 28693,
+          "peak_units": 28693,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 156664,
+          "peak_bytes": 173752
+        },
+        "indexed": {
+          "current_bytes": 2542880,
+          "peak_bytes": 3240104
+        }
+      }
+    },
+    {
+      "n": 1024,
+      "family": "dense_updates",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "37764d2ef6d6d5a458eb8c06d385a68ee8c82f40b4b51c2dbddcc48f336f2ea4",
+      "seconds": {
+        "baseline": [
+          0.017801082925871015,
+          0.017745207995176315,
+          0.017705958103761077,
+          0.018370167119428515
+        ],
+        "indexed": [
+          0.01218737498857081,
+          0.012220332864671946,
+          0.012236959068104625,
+          0.012574833119288087
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.01790560403605923,
+        "indexed": 0.012304875010158867
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 98304
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 1024,
+          "indexed_restriction_validation_literals": 3072,
+          "indexed_restriction_preparation_literals": 3072,
+          "indexed_restriction_admissions": 1,
+          "indexed_restriction_posting_visits": 32768,
+          "indexed_restriction_rebuilt_literals": 98304,
+          "indexed_restriction_affected_clauses": 32768,
+          "indexed_restriction_assembly_clauses": 32768,
+          "indexed_restriction_hits": 31
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 1,
+          "units": 4097,
+          "peak_units": 4097,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 140240,
+          "peak_bytes": 157320
+        },
+        "indexed": {
+          "current_bytes": 369328,
+          "peak_bytes": 688000
+        }
+      }
+    },
+    {
+      "n": 1024,
+      "family": "mutable_fallback",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "18baa1abd1a2e0ec04516d18bd97641ca20819b00e68d700b3d433bb968be6d1",
+      "seconds": {
+        "baseline": [
+          0.01766954199410975,
+          0.017610959010198712,
+          0.017723832977935672,
+          0.017630625050514936
+        ],
+        "indexed": [
+          0.017748457845300436,
+          0.017780625028535724,
+          0.017784292111173272,
+          0.017695833928883076
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.017658739758189768,
+        "indexed": 0.017752302228473127
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 98304
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_fallbacks": 32,
+          "restriction_literal_visits": 98304
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 0,
+          "units": 0,
+          "peak_units": 0,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 156408,
+          "peak_bytes": 173488
+        },
+        "indexed": {
+          "current_bytes": 156680,
+          "peak_bytes": 173912
+        }
+      }
+    },
+    {
+      "n": 1024,
+      "family": "oversize_fallback",
+      "queries": 32,
+      "limit_units": 32,
+      "input_sha256": "18baa1abd1a2e0ec04516d18bd97641ca20819b00e68d700b3d433bb968be6d1",
+      "seconds": {
+        "baseline": [
+          0.01760987495072186,
+          0.017429708037525415,
+          0.01748766703531146,
+          0.0174619578756392
+        ],
+        "indexed": [
+          0.0282855830155313,
+          0.02786004194058478,
+          0.027758250012993813,
+          0.027730582980439067
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.017497301974799484,
+        "indexed": 0.02790861448738724
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 98304
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 32768,
+          "indexed_restriction_validation_literals": 98304,
+          "indexed_restriction_oversize": 32,
+          "restriction_literal_visits": 98304
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 0,
+          "units": 0,
+          "peak_units": 0,
+          "limit_units": 32
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 156528,
+          "peak_bytes": 173608
+        },
+        "indexed": {
+          "current_bytes": 157016,
+          "peak_bytes": 174248
+        }
+      }
+    },
+    {
+      "n": 1024,
+      "family": "absent_variable",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "e375739e2444f7ad8df7c266c3fba10dcf4b5d4fc3b73e4ee358f5620caf9eaa",
+      "seconds": {
+        "baseline": [
+          0.017556000035256147,
+          0.01792624988593161,
+          0.017564750043675303,
+          0.017708042170852423
+        ],
+        "indexed": [
+          0.0019015839789062738,
+          0.0018784578423947096,
+          0.0018773339688777924,
+          0.0018664579838514328
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.01768876053392887,
+        "indexed": 0.0018809584435075521
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 98304
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 32,
+          "indexed_restriction_validation_clauses": 1024,
+          "indexed_restriction_validation_literals": 3072,
+          "indexed_restriction_preparation_literals": 3072,
+          "indexed_restriction_admissions": 1,
+          "indexed_restriction_posting_visits": 0,
+          "indexed_restriction_affected_clauses": 0,
+          "indexed_restriction_assembly_clauses": 32768,
+          "indexed_restriction_hits": 31
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 1,
+          "units": 4097,
+          "peak_units": 4097,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 156616,
+          "peak_bytes": 173696
+        },
+        "indexed": {
+          "current_bytes": 360752,
+          "peak_bytes": 817816
+        }
+      }
+    },
+    {
+      "n": 1024,
+      "family": "empty_assignment",
+      "queries": 32,
+      "limit_units": 32768,
+      "input_sha256": "0f422d682d5fbfc174bb6902d4f948517769e0fb9def626bb88aeb36873dee4c",
+      "seconds": {
+        "baseline": [
+          0.017187791876494884,
+          0.016996500082314014,
+          0.01711099990643561,
+          0.017048124922439456
+        ],
+        "indexed": [
+          0.010101916966959834,
+          0.009963874937966466,
+          0.010010166093707085,
+          0.009990165941417217
+        ]
+      },
+      "mean_seconds": {
+        "baseline": 0.01708585419692099,
+        "indexed": 0.01001653098501265
+      },
+      "metrics": {
+        "baseline": {
+          "restriction_literal_visits": 98304
+        },
+        "indexed": {
+          "indexed_restriction_calls": 32,
+          "indexed_restriction_assignment_entries": 0,
+          "indexed_restriction_validation_clauses": 32768,
+          "indexed_restriction_validation_literals": 98304,
+          "indexed_restriction_empty_assignments": 32
+        }
+      },
+      "cache": {
+        "baseline": null,
+        "indexed": {
+          "entries": 0,
+          "units": 0,
+          "peak_units": 0,
+          "limit_units": 32768
+        }
+      },
+      "allocation": {
+        "baseline": {
+          "current_bytes": 156496,
+          "peak_bytes": 173576
+        },
+        "indexed": {
+          "current_bytes": 1096,
+          "peak_bytes": 1680
+        }
+      }
+    }
+  ],
+  "script_sha256": "f4223363700c096bb47a8638b339b77379e858e384621d7fd6bbb4d56c1b02f0",
+  "fingerprints": {
+    "experiments/cnf_indexed_restriction.py": "bfd4af0e7db69e364d767d6cd9a3fb16dd03e6a8dfbca3d99f5a8ff8b7ee8563",
+    "experiments/cnf_residual_dag.py": "4322ae4963dc1b584eba39bd2af717dc0bb50cc2dd0ebbaccc8bd6083bb11fed"
+  },
+  "limitations": [
+    "32-query streams; each trial starts with an empty index; four alternating trials per mode",
+    "All outputs validated separately; timed stream retains only its last result and checks it after stopping the clock",
+    "Source/assignment construction and expected outputs are outside timing/allocation; cache construction is included",
+    "Allocator controls retain the index and last output, exclude original source storage and are not RSS bounds",
+    "Identity locality, mutable and oversized fallbacks, dense edits and equal reallocation are deliberately separated",
+    "This is restriction helper work, not full expansion, checking or SAT runtime"
+  ]
+}

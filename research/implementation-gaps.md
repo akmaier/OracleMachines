@@ -4299,3 +4299,47 @@ reconstruction, accounting for construction, invalidation and first-use costs.
 Per-call occurrence indexes are still rebuilt; short conflicts expose wasted
 preparation. Broader certified coverage and unrestricted SAT obligations remain
 open. See [the current ranked record](structural-reuse-priorities.md).
+
+## 2026-11-09: immutable-source occurrence reuse for restriction
+
+Implemented `IndexedRestrictionInventory` above ordered propagation. A bounded
+cache retains only sources validated as exact immutable tuple/tuple/nonzero-int
+objects and their signed occurrence lists. Hits require the same strongly held
+source; mutable/unusual/oversized inputs use the old scan, edits or separate equal
+objects prepare afresh, and eviction/restart lose index reuse. Unaffected immutable
+clause tuples are shared in the returned ordered residual. No proof verdict or
+assignment result is cached, and the independent simplification checker is unchanged.
+Indexed branch construction remains a trusted Python step, not a new Lean refinement.
+
+The [full study](../experiments/results/cnf-indexed-restriction/README.md) preserves
+all 1,497 answers/profiles and prior archive bytes. The first sample improves
+discovery 93.85938 -> 90.65563 s and cold replay 60.86819 -> 56.04772 s, but total
+regresses 132.36551 -> 134.44214 s as the ordinary solver phase also varies.
+Selected ABBA BAAB mean total is 4.81769 -> 4.35747 s; a reversed-order full
+comparison is retained separately to assess the mixed full result. Six-case
+Python peak grows 1,598,364 bytes, and retained memory grows 1,285,252 bytes.
+SQLite is still exactly 437,620,736 bytes, referenced rather than duplicated.
+
+All 425 tests pass, covering 87,516 exhaustive formula/partial-assignment pairs,
+4,000 random/edited restrictions, types/mutation, source lifetime, fallback/caps,
+sharing and old archive replay. Both modes check all evidence cold unchanged.
+Full/pilot reports each have 70 fingerprints; separate profiles, timing and
+32 locality controls preserve favorable reuse and equal/new-source regressions.
+The manuscript adds an algorithm-level correctness argument and preserves all
+57 previous proof blocks; Lean sources are unchanged and were not rebuilt.
+
+The cost target has shifted: restriction on source 1194 falls 0.82784 -> 0.21269 s
+cumulative; simplification checking remains the largest named own-time cost, with
+2,303 calls and 0.55562 s cumulative. Full reconstruction still visits 51,574,914
+literals. Broader coverage remains 869/985 non-tiny, with 116 unresolved sources;
+new certified relations or exact interaction decompositions are still required.
+Retained-space reduction, independent checker reuse and exact new-source/append
+preparation are recorded in the current ranked gap analysis.
+
+The full reverse-order control is complete. Across two samples per mode, means
+are 137.36963 -> 131.36045 s total, 97.29044 -> 89.16122 s discovery and 61.16937 ->
+56.70501 s cold replay (4.37%, 8.36% and 7.30% reductions). All within-mode operation
+counters and archive hashes repeat. The reverse allocation repeats the roughly
+1.60 MB Python peak increase. These limited synthetic samples balance order but
+do not erase the initial regression, establish significance or justify universal
+speed claims. Both complete reports and the order-control hashes are preserved.

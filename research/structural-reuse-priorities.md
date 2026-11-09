@@ -12,7 +12,67 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current checkpoint: propagation savings expose source reconstruction
+## Current checkpoint: source-index reuse exposes checker reconstruction
+
+The [indexed-restriction study](../experiments/results/cnf-indexed-restriction/README.md)
+reuses validated immutable source indexes across assumptions, rebuilding affected
+clauses and sharing unchanged tuples. All **1,497 answers, profiles and archive
+bytes agree**; coverage remains **869/985 non-tiny**, with **116 sources / 148 leaves /
+33,651 literals** unresolved. The independent checker still reconstructs its input
+branch directly; indexed branch construction remains trusted Python.
+
+The first full comparison is mixed: discovery **93.85938 -> 90.65563 s**, cold
+replay **60.86819 -> 56.04772 s**, but total **132.36551 -> 134.44214 s** regresses.
+The unchanged solver path takes 13.70% longer; one sequential sample cannot
+separate variation from cache-induced process/memory effects. Twelve-query ABBA
+BAAB mean total **4.81769 -> 4.35747 s** supports locality-dependent savings,
+not a general full-corpus result. A reversed-order full comparison is retained
+separately in the linked study. Six-case Python peak grows **1,598,364 bytes**;
+SQLite stays **437,620,736 bytes**. The 32,768-unit index cap is not a byte cap.
+
+The reversed full run balances order across two samples per mode. Paired means
+are **137.36963 -> 131.36045 s total (4.37%)**, **97.29044 -> 89.16122 s discovery
+(8.36%)**, and **61.16937 -> 56.70501 s cold replay (7.30%)**. Counters and archive
+hashes repeat exactly. These limited synthetic controls support an optional
+tradeoff; the first regression and roughly 1.60 MB peak increase remain relevant.
+
+The next ranked gaps are:
+
+1. **Independent simplification reconstruction is now the largest named cost.**
+   Source 1194's restriction cumulative time falls **0.82784 -> 0.21269 s** for
+   the same 3,399 calls. Its **2,303 simplification checks** remain at **0.27952 s
+   own / 0.55562 s cumulative**; full reconstruction stays **51,574,914 literal
+   visits**. Measure repeated semantic inputs before choosing exact checked-result
+   reuse or independent prepared-state reconstruction. Do not treat unverified
+   discovery state, mutable proof identity or incomplete source bindings as checks.
+2. **Broader SAT pattern coverage remains a primary research obligation.** These
+   resource optimizations add no category. Select a concrete source-entailed
+   relation or exact interaction decomposition in the 116 unresolved sources;
+   measure removed unresolved leaves and recognition cost. Faster unchanged
+   classifications alone do not resolve the discovery gap.
+3. **New/equal-source preparation and materialized output remain expensive.**
+   Full operations have 241,198 hits / 275,865 calls, but still validate and prepare
+   **10,412,650 literals each**, then assemble **28,938,355 clause positions**.
+   Equal reallocation and fresh-append controls have no hits and regress. Sharing
+   exact source descriptions or append-prefix postings needs explicit binding and
+   invalidation. Reusing exact source/assignment results could avoid repeated outer
+   assembly, but adds retained state and must preserve immutability.
+4. **Reduce memory and check broader workloads before wider adoption.**
+   The index's logical cap does not make its 1.60 MB Python peak increase free.
+   Sparse reuse is favorable, while equal reallocations peak at 3.24 MB in a helper
+   control. Capacity sweeps, admission policies and total-process measurements
+   remain open. Retain the baseline and all regressions; do not infer universal
+   wins from a warm helper stream or selected timing subset.
+
+All **425 tests** pass; full and pilot archives replay cold byte-identically.
+Tests cover 87,516 small formula/partial-assignment pairs, 4,000 random/edited
+restrictions and the 148 saved frontier probes. The
+[correctness and resource account](indexed-restriction.md) explains validated
+immutability, strong references, fallback behavior, output sharing and conditional
+word costs. The implementation checkpoint is **2809c48**. This is not a Lean
+refinement or unrestricted expansion bound; earlier proofs and results remain.
+
+## Previous checkpoint: propagation savings expose source reconstruction
 
 The [ordered propagation study](../experiments/results/cnf-ordered-propagation/README.md)
 uses affected-clause updates while preserving the exact original unit/reason and

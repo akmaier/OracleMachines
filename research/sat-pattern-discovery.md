@@ -694,6 +694,25 @@ opportunity. Broader coverage still needs a concrete certified relation or exact
 interaction decomposition in the unresolved frontier; faster repeated checks
 are supporting work, not a substitute for that discovery obligation.
 
+## 2026-11-09: source-index sharing preserves coverage but exposes a cost tradeoff
+
+The [restriction-index study](../experiments/results/cnf-indexed-restriction/README.md)
+shares prepared immutable source state across assumptions and preserves all previous
+answers, profiles and archive bytes. Coverage remains 869/985 non-tiny, with the
+same 116 sources unresolved. First-sample discovery and cold replay improve, but
+full total initially regresses and six-case memory grows; selected controls favor
+reuse, while new/equal-source controls regress. The reversed full run gives paired mean savings of
+4.37% total, 8.36% discovery and 7.30% cold replay, with the initial regression
+and memory increase retained. Two samples per mode establish no universal win.
+The stronger structural discovery obligation is
+unchanged. The next named compute bottleneck is independent simplification checking.
+
+The [source/index invariant](indexed-restriction.md) makes immutability, object
+lifetime, edited sources, fallback and output assembly explicit. It supports an
+exact implementation of restriction, not a new SAT category. Further coverage
+needs source-entailed relations or exact interaction decompositions; savings in
+existing acquisition should support those experiments rather than replace them.
+
 ## Following iterations
 
 First split the largest informative unresolved cells. Favor discoveries that

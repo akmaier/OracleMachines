@@ -25,6 +25,8 @@ def sources(n):
                 sparse_cascade=[(1,), (-1, 2)]+tail,
                 early_conflict=[(1,), (-1,)]+tail,
                 early_empty=[()]+tail,
+                hash_collisions=[tuple(lit*sys.hash_info.modulus for lit in c)
+                                 for c in [(1,)]+chain],
                 long_identifiers=[tuple((1 if lit > 0 else -1)*(abs(lit)+(1 << 1024))
                                         for lit in c) for c in list(reversed(chain))+[(1,)]])
 

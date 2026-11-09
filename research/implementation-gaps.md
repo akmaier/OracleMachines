@@ -4265,3 +4265,37 @@ propagation/coverage gaps. All **56 previous proof blocks** remain; there are
 box errors, and pages **111--114** were rendered and visually inspected. README,
 ranked priorities, discovery and resource records are updated. No new tractable
 family, compact closure or unrestricted-SAT worst-case improvement is asserted.
+
+## 2026-11-09: affected-clause propagation with identical proof order
+
+Implemented `OrderedPropagationInventory` over the existing 1 MiB check-cache
+inventory. Simplification discovery uses an occurrence index and events ordered
+by scan round and clause ID; the independent checker and ordinary SAT solver
+stay unchanged. Exact order matters because different unit/conflict traces can
+change later learning choices. Context-scoped selection restores the prior engine
+on nesting and exceptions. The reference engine and all earlier results remain.
+
+The [full study](../experiments/results/cnf-ordered-propagation/README.md) preserves
+all 1,497 answers/profiles and the complete prior database bytes. Coverage stays
+869/985 non-tiny, with 116 unresolved sources. Discovery falls 111.13169 ->
+97.76173 s; balanced subset means are 5.08503 -> 4.55072 s. Total full time
+154.63114 -> 137.59078 s includes variation in the unchanged solver. Cold replay
+barely improves (63.40473 -> 62.61754 s); six-case Python peak rises by 216,400
+bytes. SQLite stays 437,620,736 bytes. No new duplicate full archive is retained.
+
+All 417 tests pass, including 9,724 exhaustive ordered small formulas, 3,000
+random edits, all 148 saved frontier probe discoveries, archive identity and
+independent reason checks. Both modes fully replay cold unchanged. The manuscript
+adds an algorithm-level trace proof, preserving all 56 previous proof blocks;
+Lean files remain unchanged and were not rebuilt. The full/pilot reports each
+have 66 fingerprints. Thirty-two controls preserve strong reverse-chain gains
+and early-conflict, forward-chain and hash-collision regressions. They prevent a
+pointwise speed or unconditional word-cost claim.
+
+Next: restriction is now the largest named own-time cost on source 1194, with
+3,399 calls and 0.82048 s cumulative; simplification checking has 2,303 calls and
+0.54588 s cumulative. Share exactly bound source/assumption state and residual
+reconstruction, accounting for construction, invalidation and first-use costs.
+Per-call occurrence indexes are still rebuilt; short conflicts expose wasted
+preparation. Broader certified coverage and unrestricted SAT obligations remain
+open. See [the current ranked record](structural-reuse-priorities.md).

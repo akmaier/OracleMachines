@@ -210,6 +210,14 @@ the cache is capped at 1 MiB of serialized strings, with other memory charged
 separately. All **410 tests** pass. First-time propagation now dominates the
 profiled remaining work; structural coverage stays **869/985** non-tiny inputs.
 
+The [ordered propagation study](experiments/results/cnf-ordered-propagation/README.md)
+reduces discovery from 111.13 to 97.76 seconds while preserving the exact old
+proof traces and all archive bytes. Repeated selected-query controls support
+about a 10% total-time reduction. Six-case Python peak rises by 216 KB; early
+conflicts can regress because index preparation is wasted. All 417 tests pass.
+Coverage stays 869/985 non-tiny: broader discovery remains open, while repeated
+restriction and residual reconstruction are now the leading measured cost gaps.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

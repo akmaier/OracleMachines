@@ -677,6 +677,23 @@ Acceptance criteria:
 5. Save counterexamples that expose missing patterns or invalid combinations.
    Repeated restarts should reuse these results rather than rediscover them.
 
+## 2026-11-09: cheaper acquisition with identical structural coverage
+
+The [ordered occurrence experiment](../experiments/results/cnf-ordered-propagation/README.md)
+preserves all 1,497 profiles and database bytes while reducing discovery time
+111.13169 -> 97.76173 s. Balanced selected-query controls support the saving;
+short-conflict and forward-chain regressions remain visible. Coverage is still
+869/985 non-tiny, with the same 116 open sources and 148 selected unresolved leaves.
+The proof-order argument and per-call resource bounds are recorded in
+[ordered propagation](ordered-propagation.md). No new recognized class or
+unrestricted acquisition bound follows.
+
+Restriction and residual reconstruction now outrank propagation in the expensive
+source's profile. Sharing exact source/assumption state is the next acquisition
+opportunity. Broader coverage still needs a concrete certified relation or exact
+interaction decomposition in the unresolved frontier; faster repeated checks
+are supporting work, not a substitute for that discovery obligation.
+
 ## Following iterations
 
 First split the largest informative unresolved cells. Favor discoveries that

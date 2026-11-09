@@ -1656,3 +1656,45 @@ All 410 tests pass; full and guarded pilot cold checks are byte-identical. The
 62 report fingerprints and diagnostic hashes are verified, with snapshots for
 superseded pilot code. No Lean source changes or formal Python refinement are
 claimed. Broader coverage remains a separate discovery gap.
+
+## Ordered occurrence propagation: per-call savings and remaining preparation
+
+The [trace-preserving engine](ordered-propagation.md) maintains unsatisfied-clause
+counts/sums, signed occurrence lists and a queue ordered by (scan round, clause
+ID). With m clauses, L occurrences and v variables, each call builds at most L
+index entries, visits at most L occurrences during assignments, and inserts/pops
+at most m events. Assuming constant map access and word arithmetic this is
+O(1+L+m log(m+1)) work and O(1+L+m+v) temporary words. A no-unit call only checks
+clause lengths. This is an algorithm-level account, not a Python/Lean refinement:
+adversarial integer hash collisions and large-integer arithmetic remain costs.
+Neither the number of propagation calls nor SAT branching is bounded by it.
+
+The full run replaces 105,860,805 repeated-scan literal visits with 18,691,048
+clause checks, 32,071,047 index entries, 5,356,250 occurrence updates and 645,555
+event pops in 187,133 calls. There are 70,889 no-unit calls. These counters describe
+different work; all preparation is timed. Maximum per-call occurrences/queue size
+are 1,052/33. Summed per-query peak counters are not run-wide peaks.
+
+Full discovery falls 111.13169 -> 97.76173 s; balanced subset discovery means are
+5.08503 -> 4.55072 s. Total 154.63114 -> 137.59078 s includes an 8.44% variation
+in the unchanged ordinary solver. Cold replay is 63.40473 -> 62.61754 s and warm
+replay 0.26392 -> 0.29322 s. Six-case Python peak grows 22,258,170 -> 22,474,570
+bytes; retained traced memory also grows 216,400 bytes. Native SQLite, RSS and
+full-corpus/lifetime memory remain outside that allocation measurement. Archive
+bytes remain exactly 437,620,736, shared with the earlier implication experiment.
+
+At size 1,024 the reverse-chain control improves 337.58295 -> 0.84911 ms, while
+a forward chain slightly regresses 0.76777 -> 0.84533 ms. Opposing initial units
+with many unrelated clauses regress 0.00248 -> 0.41982 ms: building the full index
+is wasted, and peak allocation grows 1,752 -> 528,448 bytes. Colliding hashes and
+long identifiers are recorded separately. This engine does not dominate the
+scan reference on every input. Reusing an immutable source index across related
+assumptions, or avoiding its construction for a cheap prefix conflict, remains open.
+
+All non-propagation operation counters remain identical. Source 1194's next
+named own-time bottleneck is restriction, followed by simplification checking;
+full restriction/reconstruction visits remain 82,210,169 / 51,574,914. Structural
+coverage remains 869/985 non-tiny, with 116 sources unresolved. Cheaper closure
+computation leaves the broader category/decomposition and unrestricted complexity
+gaps unchanged. Complete evidence, controls and limitations are in the
+[matched study](../experiments/results/cnf-ordered-propagation/README.md).

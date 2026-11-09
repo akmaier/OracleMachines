@@ -12,7 +12,55 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current checkpoint: exact proof reuse reduces acquisition cost
+## Current checkpoint: propagation savings expose source reconstruction
+
+The [ordered propagation study](../experiments/results/cnf-ordered-propagation/README.md)
+uses affected-clause updates while preserving the exact original unit/reason and
+first-conflict order. All **1,497 answers, profiles and database bytes agree**;
+coverage stays **869/985 non-tiny**, leaving **116 sources / 148 leaves / 33,651
+literals** open. The ordinary SAT solver and independent proof checker are unchanged.
+
+Full discovery falls **111.13169 -> 97.76173 s (12.03%)**; total **154.63114 ->
+137.59078 s** also includes variation in the unchanged solver. Twelve-query ABBA
+BAAB means support **5.38111 -> 4.83970 s total** and **5.08503 -> 4.55072 s discovery**.
+Cold replay barely changes (**63.40473 -> 62.61754 s**). Six-case Python peak grows
+**22,258,170 -> 22,474,570 bytes**; SQLite stays **437,620,736 bytes**. Results are
+synthetic, with no universal speedup or full-process memory bound.
+
+The next ranked gaps are:
+
+1. **Share source restriction and residual reconstruction across assumptions.**
+   Source 1194 still performs **3,399 restrictions** and **2,303 simplification
+   checks**. After propagation cumulative time falls **0.79372 -> 0.31541 s**,
+   restriction is the largest named own-time cost (**0.40355 s own / 0.82048 s
+   cumulative**); checking has **0.27656 / 0.54588 s**. Full restriction and
+   reconstruction visits remain **82,210,169 / 51,574,914**. Prepare immutable
+   source indexes and update exact affected state, with source/assumption bindings
+   and independent reconstruction checks. Charge lookup, construction and invalidation.
+2. **Discover new structure in unresolved interactions.** The same 116 sources
+   still need certified relations or exact decompositions. This optimization
+   makes experiments cheaper but adds no category. Investigate the most informative
+   remaining interactions rather than increasing blind budgets or only tuning caches.
+3. **Amortize or avoid wasted occurrence-index preparation.** Every closure still
+   builds fresh state: **32,071,047 index entries** versus **5,356,250 affected
+   occurrence visits** in the full run. A reverse chain benefits greatly, but a
+   two-clause prefix conflict with 1,024 unrelated clauses regresses **0.00248 ->
+   0.41982 ms**, and its Python peak grows **1,752 -> 528,448 bytes**. Test shared
+   preparation or a cheap prefix/lazy-index rule before calling this pointwise
+   better. Forward-chain and colliding-integer-hash regressions are also preserved.
+4. **Evidence/cache space remains secondary.** The 1 MiB proof-check cache,
+   duplicated evidence and unintegrated implication relevance filter retain their
+   previous opportunities. They do not remove first discovery or source scanning.
+
+All **417 tests** pass. Full and pilot cold archives replay byte-identically;
+32 adversarial controls and balanced timing runs preserve exact traces. The
+[algorithm-level trace proof](ordered-propagation.md) gives a conditional
+O(1+L+m log(m+1)) word-operation account per closure, with map and bit-cost caveats.
+It is not a Lean refinement or unrestricted SAT bound. The implementation checkpoint
+is **bbd2607**; the scan baseline remains available. Next runs should start from
+these new measurements, not repeat the now-completed propagation experiment.
+
+## Previous checkpoint: exact proof reuse reduces acquisition cost
 
 The [bounded check-cache study](../experiments/results/cnf-checked-probe-reuse/README.md)
 preserves every previous structural result and the complete archive byte for byte.

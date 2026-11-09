@@ -3180,6 +3180,59 @@ The largest uncached discovery miss is again source 1194. In separate profiles, 
 
 All 410 Python tests pass, including old-archive replay, corrupted cold evidence, edits, cache eviction, returned-value mutation and the tuple/list counterexample. Lean sources remain unchanged from the preceding 4,130-declaration and 1,972-theorem audit; we do not claim a new formal refinement. The full report has 62 fingerprints, with separate diagnostic hashes and preserved snapshots for superseded pilots. Operation timing charges full-key lookup, decoding, checking, persistence, solving and root lifts. Extra pointwise checks are kept outside the timed query stream so they cannot warm the cache; tests and the identical previously checked archive retain that validation. Modes, allocations, repeated controls and profiles run sequentially. The measured saving concerns repeated exact checking, not broader family coverage, a compact closure result or an unrestricted-SAT worst-case improvement.
 
+\subsection{Preserving proof order while updating affected clauses}
+\label{sec:ordered-propagation}
+
+The preceding profile identifies first-time unit propagation as a remaining acquisition cost. Updating clause counters through literal occurrences is established practice: Section~2 of \citet{moskewicz2001chaff} describes that approach before introducing watched literals. Our experiment preserves the prototype's existing proof order while replacing repeated whole-formula scans with affected-clause updates. It is an engineering and resource-accounting experiment, not a new propagation inference or tractable SAT class. The ordinary decision solver and independent reason checker remain unchanged.
+
+For each unsatisfied clause, we maintain the number and signed sum of unassigned literal occurrences. A signed occurrence index lists the affected clause IDs. Assigning literal $\ell$ first marks clauses containing $\ell$ satisfied, then removes occurrences of $-\ell$ from the other clauses' counts and sums. A remaining count of one identifies its literal through the sum; zero is a conflict. Multiplicities are retained, and satisfaction is updated first, so repeated literals and tautologies preserve the reference routine's behavior.
+
+A generic propagation queue can change the selected reason clauses and first conflict. Those changes can affect later learning choices even if the final satisfiability result agrees. We instead order events by the pair (scan round, clause ID). Initial units and empty clauses enter round zero. If an assignment at $(r,i)$ first makes clause $j$ unit or empty, its event is $(r,j)$ when $j>i$ and $(r+1,j)$ otherwise. A scheduled unit that becomes empty keeps its event; a satisfied event is discarded. Each clause enters the queue at most once. If no initial unit or empty clause exists, the routine returns after inspecting clause lengths, without building an index.
+
+\begin{proposition}[Agreement with the original propagation trace]
+\label{prop:ordered-propagation}
+For every finite ordered CNF with nonzero integer literals, the event procedure returns the same partial assignment, ordered literal/reason trace and first conflict index as the prototype's repeated increasing-clause-ID scans.
+\end{proposition}
+\begin{proof}
+Induct on the common trace prefix. Initially, the assignments agree and the counts and sums describe every unassigned occurrence. Assigning the same literal preserves this invariant for unsatisfied clauses by removing exactly its false occurrences after marking its satisfied clauses. A clause can first become actionable only initially or following an assignment. The event rule places it at the next scan position at which the reference could act on it. Unassigned counts cannot increase and satisfaction cannot be undone. Before the least unsatisfied event, the reference therefore encounters no actionable clause. At that event both procedures identify the same unit literal and reason or the same empty clause. Skipping satisfied events preserves the argument. If no events remain, there is no unsatisfied unit or empty clause, so any final scan adds no trace entry. The induction gives the stated outputs, including the first conflict. An empty clause preceding the first initial unit may equivalently be returned immediately with an empty trace.
+\end{proof}
+
+Let $m$ be the number of clauses, $L$ the number of literal occurrences and $v$ the number of variables. Index construction processes $L$ occurrences. Each variable is assigned at most once, so assignment updates visit at most $L$ occurrences in total. There are at most $m$ event insertions and removals. Under constant-time map access and word-size arithmetic, one call therefore uses $O(1+L+m\log(m+1))$ work and $O(1+L+m+v)$ temporary words, compared with up to $O((v+1)L)$ literal visits for repeated scanning. These assumptions do not erase adversarial dictionary collisions or bit costs for long integer labels and signed sums. The bound concerns a single closure computation, not an expansion containing many closures or unrestricted SAT search.
+
+Every call still builds its own occurrence index. Arbitrary source edits and assumptions therefore receive fresh state, but related probes do not yet share index preparation. A conflict near the start of the reference scan can make full-index construction wasted work. We retain that control rather than claiming pointwise speed dominance. The algorithm-level proof above is not a Lean refinement of Python; independently checked reasons and differential tests remain part of validation.
+
+The full comparison uses the same 1,497 inputs and the same 1 MiB successful-check cache in both modes. Every answer, profile, root and database byte agrees with the preceding archive. Coverage stays 869 of 985 non-tiny sources, with 116 open sources, 148 selected leaves and 33,651 unresolved literals. Both modes replay every node, alternative, source binding and ordinary solver certificate cold without changing bytes. Warm replay inserts nothing, and the existing complete archive is referenced rather than duplicated.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Measurement & Repeated scans & Ordered updates \\
+\midrule
+Full operation time (s) & 154.63114 & 137.59078 \\
+Discovery time (s) & 111.13169 & 97.76173 \\
+Unchanged ordinary solver time (s) & 43.44073 & 39.77480 \\
+Cold replay (s) & 63.40473 & 62.61754 \\
+SQLite size (MB) & 437.621 & 437.621 \\
+Six-case Python peak (MB) & 22.258 & 22.475 \\
+Repeated-control mean total (s) & 5.38111 & 4.83970 \\
+\bottomrule
+\end{tabular}
+\caption{Affected-clause discovery propagation with identical proof order and persistent evidence. Full operation and replay timings are single samples; the repeated control uses twelve fixed queries and four trials per mode. Memory excludes native SQLite, RSS and the full-corpus peak.}
+\label{tab:ordered-propagation}
+\end{table}
+
+Table~\ref{tab:ordered-propagation} shows a 12.03\% discovery reduction. The full total falls 11.02\%, but the unchanged ordinary solver varies by 8.44\%, so we cannot assign the entire difference to propagation. Twelve-query ABBA BAAB controls give mean discovery 5.08503 versus 4.55072 seconds and mean total 5.38111 versus 4.83970 seconds. All four ordered totals lie below the four scan totals, while the unchanged solver averages 0.29492 versus 0.28783 seconds. Four selected synthetic trials do not establish significance, industrial performance or a repeated full-corpus estimate. Cold replay improves only 1.24\%, and warm replay is 0.26392 versus 0.29322 seconds. Initialization is measured separately at 0.00141 versus 0.23095 seconds. Six-case Python peak and retained traced memory both increase by 216,400 bytes.
+
+The baseline records 105,860,805 propagation literal visits. The candidate's 187,133 calls instead perform 18,691,048 clause-length inspections, build 32,071,047 index entries, visit 5,356,250 affected occurrences and pop 645,555 events. There are 70,889 calls with no initial unit or empty clause, requiring no index. These are distinct operations, not interchangeable costs; the timing charges them all. The largest per-call index has 1,052 occurrences and the largest live queue 33 events. Every non-propagation operation counter is identical between modes. Index preparation remains substantially larger than affected-occurrence work and is not shared across assumptions.
+
+Thirty-two standalone controls cover sizes 16, 64, 256 and 1,024, with alternating timings and separately measured allocation. At size 1,024, a reverse implication chain improves from 337.58295 to 0.84911 milliseconds: 2,098,175 scanned literal visits become 2,047 index entries, 2,047 occurrence updates and 1,024 events. A forward chain instead regresses from 0.76777 to 0.84533 milliseconds. Opposing initial units followed by unrelated clauses regress from 0.00248 to 0.41982 milliseconds, with Python peak growing from 1,752 to 528,448 bytes. The original scan stops after two clauses, whereas the candidate prepares the whole index. Colliding integer hashes and long-identifier controls also retain the map and bit-cost caveats. These controls establish no pointwise speed dominance.
+
+Source 1194 remains the largest baseline discovery miss. Its separate instrumented total falls from 4.01314 to 3.51471 seconds; the same 2,221 propagation calls fall from 0.79372 to 0.31541 seconds cumulative. Restriction is now the largest named own-time cost, with 3,399 calls, 0.40355 seconds own time and 0.82048 seconds cumulative. Simplification checking remains at 2,303 calls and 0.54588 seconds cumulative. These are diagnostic timings, not the uninstrumented operation results, and nested cumulative costs must not be added. The next cost target is exact source/assumption restriction and residual reconstruction, with dependencies and invalidation explicit. A cheap prefix or lazy-index rule could also address the immediate-conflict regression. New structural coverage still requires certified relations or exact decompositions of the unresolved interactions.
+
+All 417 Python tests pass, including 9,724 ordered small formulas with repeated literals and tautologies, 3,000 seeded random edits, the 148 saved frontier probe discoveries, scoped-engine restoration, independent reason checks and byte-identical archives. The full and pilot reports each have 66 fingerprints, with separate hashes for profiles, timing controls and adversarial controls. Lean sources are unchanged from the preceding audit and were not rebuilt for this change. Primary runs, allocation, repeated timings and profiles run sequentially. The result lowers the measured cost of existing discovery while preserving all previous proofs; it establishes neither broader structural coverage nor a uniformly polynomial expansion for arbitrary SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 
@@ -3589,6 +3642,12 @@ Moses, Y., and Tennenholtz, M. (1996).
 Off-line reasoning for on-line efficiency: Knowledge bases.
 \emph{Artificial Intelligence}, 83(2), 229--239.
 \href{https://doi.org/10.1016/0004-3702(95)00015-1}{doi:10.1016/0004-3702(95)00015-1}.
+
+\bibitem[Moskewicz et~al.(2001)Moskewicz, Madigan, Zhao, Zhang, and Malik]{moskewicz2001chaff}
+Moskewicz, M.~W., Madigan, C.~F., Zhao, Y., Zhang, L., and Malik, S. (2001).
+Chaff: Engineering an efficient SAT solver.
+\emph{Proceedings of the 38th Design Automation Conference}, 530--535.
+\url{https://www.princeton.edu/~chaff/publication/DAC2001v56.pdf}.
 
 \bibitem[M{\"u}ller and Drechsler(2024)]{muller2024cutwidth}
 M{\"u}ller, L. and Drechsler, R. (2024).

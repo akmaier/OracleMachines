@@ -1381,3 +1381,16 @@ independent oracle assumption. Its proof does not depend on a heuristic candidat
 order. Origin extraction, length indexing, Python checking and resource bounds
 remain separate implementation obligations. All **403 Python tests** pass; the
 complete Lean build audits **4,130 declarations / 1,972 theorem declarations**.
+
+
+The terminal Horn-renaming extension adds `flipValuation_involutive`,
+`polarity_rename_eval`, `satisfiable_polarity_rename` and
+`unsatisfiable_polarity_rename` to `Residuals.lean`. Complementing a fixed set of
+valuation coordinates is an involution; evaluating the sign-renamed formula is
+exactly evaluating the source under that involution. This proves SAT and UNSAT
+preservation without the model-compatibility premise needed for variable merging.
+The [implementation account](../research/polarity-horn.md) separately explains
+pair-constraint recognition, independent source-linked certificates and child
+normalization. Lean does not verify those Python operations or resource bounds.
+The full build/axiom audit passes at **4,136 declarations / 1,977 theorem
+declarations**; all **441 Python tests** pass.

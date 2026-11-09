@@ -136,6 +136,37 @@ theorem signed_substitute_eval (f : Formula) (rep : Nat → Nat) (flip : Nat →
   | neg g ih => simp [Formula.signedSubstitute, Formula.eval, ih]
   | conj g h ihg ihh => simp [Formula.signedSubstitute, Formula.eval, ihg, ihh]
 
+/-- Consistent polarity changes are an involution on assignments. This needs
+no source implication, unlike identifying two distinct variables. -/
+def flipValuation (flip : Nat → Bool) (v : Nat → Bool) : Nat → Bool :=
+  fun i => if flip i then !(v i) else v i
+
+theorem flipValuation_involutive (flip : Nat → Bool) (v : Nat → Bool) :
+    flipValuation flip (flipValuation flip v) = v := by
+  funext i
+  cases h : flip i <;> simp [flipValuation, h]
+
+theorem polarity_rename_eval (f : Formula) (flip : Nat → Bool) (v : Nat → Bool) :
+    (f.signedSubstitute id flip).eval v = f.eval (flipValuation flip v) := by
+  simpa [flipValuation] using signed_substitute_eval f id flip v
+
+/-- A polarity rename gives a bijection of all models, whether or not it is
+Horn. Recognizing Horn structure, pair construction and Python checking are
+separate implementation obligations; no resource bound is asserted here. -/
+theorem satisfiable_polarity_rename (f : Formula) (flip : Nat → Bool) :
+    Satisfiable f ↔ Satisfiable (f.signedSubstitute id flip) := by
+  constructor
+  · rintro ⟨v, model⟩
+    refine ⟨flipValuation flip v, ?_⟩
+    rw [polarity_rename_eval, flipValuation_involutive]
+    exact model
+  · rintro ⟨v, model⟩
+    exact ⟨flipValuation flip v, (polarity_rename_eval f flip v).symm.trans model⟩
+
+theorem unsatisfiable_polarity_rename (f : Formula) (flip : Nat → Bool) :
+    (¬ Satisfiable f) ↔ ¬ Satisfiable (f.signedSubstitute id flip) :=
+  not_congr (satisfiable_polarity_rename f flip)
+
 /-- Opposite consequences of both assumptions give a signed equality. Each
 implication is a hypothesis, not a conclusion from mere lack of conflict. -/
 theorem opposite_conditions_force_equivalence (f : Formula) (index target : Nat)

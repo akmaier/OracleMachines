@@ -1,0 +1,287 @@
+[
+  {
+    "mode": "solver_only",
+    "total_seconds": 1.2264585841912776,
+    "old_seconds": 1.2264585841912776,
+    "archive": {
+      "mode": "solver_only",
+      "path": "archive-solver_only.sqlite3.gz",
+      "database_bytes": 7254016,
+      "compressed_bytes": 519974,
+      "database_sha256": "2b86fee363e4098a4c57905ae7a24ccc8738a4e6d9816b1cdd643e837c689e1c",
+      "initialization_seconds": 0.0007433339487761259,
+      "warm_inventory_seconds": 0,
+      "storage": {},
+      "audit": {
+        "nodes": 0,
+        "sources": 0,
+        "residuals": 1170,
+        "seconds": 0.37379854219034314,
+        "bytes_unchanged": true
+      }
+    }
+  },
+  {
+    "mode": "baseline",
+    "total_seconds": 16.982422581641003,
+    "old_seconds": 16.982422581641003,
+    "archive": {
+      "mode": "baseline",
+      "path": "archive-baseline.sqlite3.gz",
+      "database_bytes": 53002240,
+      "compressed_bytes": 3621623,
+      "database_sha256": "88fe4501ce5f21eff2951cfe9e8620a6768a44c456f253f2f68b579b1f6a351f",
+      "initialization_seconds": 0.004187833983451128,
+      "warm_inventory_seconds": 0.0104993327986449,
+      "storage": {
+        "nodes": 4560,
+        "nodes_bytes": 27423700,
+        "sources": 37,
+        "sources_bytes": 221546
+      },
+      "audit": {
+        "nodes": 4560,
+        "sources": 37,
+        "residuals": 1170,
+        "seconds": 7.8847081661224365,
+        "bytes_unchanged": true
+      }
+    },
+    "discovery_seconds": 15.864141083089635,
+    "groups": {
+      "common_holdout3": {
+        "inputs": 9,
+        "closed": 0,
+        "unresolved_literals": 3329
+      },
+      "common_holdout_mixed": {
+        "inputs": 7,
+        "closed": 0,
+        "unresolved_literals": 797
+      },
+      "equivalence_holdout3": {
+        "inputs": 4,
+        "closed": 0,
+        "unresolved_literals": 2055
+      },
+      "holdout3": {
+        "inputs": 3,
+        "closed": 0,
+        "unresolved_literals": 681
+      },
+      "holdout_mixed": {
+        "inputs": 5,
+        "closed": 0,
+        "unresolved_literals": 225
+      },
+      "probe_holdout3": {
+        "inputs": 6,
+        "closed": 0,
+        "unresolved_literals": 931
+      },
+      "probe_holdout_mixed": {
+        "inputs": 2,
+        "closed": 0,
+        "unresolved_literals": 194
+      },
+      "probe_invalidation": {
+        "inputs": 1,
+        "closed": 0,
+        "unresolved_literals": 272
+      }
+    },
+    "metrics": {
+      "normalization_literal_visits": 3914787,
+      "key_serialized_bytes": 21379961,
+      "node_database_lookups": 6088,
+      "classification_calls": 12176,
+      "classification_literal_payload": 2816260,
+      "matching_recognition_literal_visits": 41524,
+      "affine_grouping_literals": 2816260,
+      "affine_extracted_equations": 5914,
+      "affine_leftover_clauses": 994274,
+      "affine_verified_certificates": 12176,
+      "propagation_literal_visits": 16715230,
+      "simplification_reconstruction_literals": 13018467,
+      "verified_simplifications": 62501,
+      "decomposition_literal_visits": 4605608,
+      "probe_ranking_literal_visits": 3378820,
+      "restriction_literal_visits": 19380136,
+      "probe_attempts": 23226,
+      "probe_forced_values": 2239,
+      "simplification_unit_check_literals": 564796,
+      "verified_probe_attempts": 47462,
+      "common_intersection_unit_visits": 129440,
+      "equivalence_intersection_unit_visits": 77564,
+      "conditioning_rank_literal_visits": 184896,
+      "conditioning_rank_variables": 17406,
+      "conditioning_candidates": 1085,
+      "affine_verification_literals": 9978,
+      "verified_pattern_nodes": 4560,
+      "inserted_nodes": 4560,
+      "serialized_bytes": 27423700,
+      "fused_conditioning_edges": 1528,
+      "node_memory_hits": 16775,
+      "probe_rewrites": 2879,
+      "verified_fused_conditioning_edges": 1528,
+      "matching_conflict_edge_visits": 56,
+      "source_serialized_bytes": 221546,
+      "inserted_sources": 37,
+      "common_rewrites_discovered": 314,
+      "common_literals_discovered": 462,
+      "verified_common_rewrites": 942,
+      "equivalence_rewrites_discovered": 326,
+      "equivalence_variables_merged": 630,
+      "equivalence_substitution_literal_visits": 135408,
+      "verified_equivalence_rewrites": 978,
+      "verified_projections": 58,
+      "affine_elimination_xors": 24,
+      "affine_verification_xors": 24,
+      "partition_verification_literals": 1639,
+      "projection_rewrites": 8,
+      "projection_encoded_literals": 26,
+      "projection_encoding_check_literals": 26,
+      "simplification_rewrites": 4
+    },
+    "gains": [],
+    "losses": []
+  },
+  {
+    "mode": "learning",
+    "total_seconds": 19.27530503948219,
+    "old_seconds": 19.27530503948219,
+    "archive": {
+      "mode": "learning",
+      "path": "archive-learning.sqlite3.gz",
+      "database_bytes": 56647680,
+      "compressed_bytes": 3783914,
+      "database_sha256": "46a5490c5123eb5c9b3fbbe4bdc61f13297bb8f6e2829df61e31d00395803c84",
+      "initialization_seconds": 0.023855416802689433,
+      "warm_inventory_seconds": 0.011159917106851935,
+      "storage": {
+        "nodes": 4737,
+        "nodes_bytes": 30052178,
+        "sources": 37,
+        "sources_bytes": 229205
+      },
+      "audit": {
+        "nodes": 4737,
+        "sources": 37,
+        "residuals": 1170,
+        "seconds": 9.16930870898068,
+        "bytes_unchanged": true
+      }
+    },
+    "discovery_seconds": 18.16896821348928,
+    "groups": {
+      "common_holdout3": {
+        "inputs": 9,
+        "closed": 1,
+        "unresolved_literals": 2849
+      },
+      "common_holdout_mixed": {
+        "inputs": 7,
+        "closed": 0,
+        "unresolved_literals": 796
+      },
+      "equivalence_holdout3": {
+        "inputs": 4,
+        "closed": 0,
+        "unresolved_literals": 1808
+      },
+      "holdout3": {
+        "inputs": 3,
+        "closed": 0,
+        "unresolved_literals": 681
+      },
+      "holdout_mixed": {
+        "inputs": 5,
+        "closed": 0,
+        "unresolved_literals": 225
+      },
+      "probe_holdout3": {
+        "inputs": 6,
+        "closed": 0,
+        "unresolved_literals": 604
+      },
+      "probe_holdout_mixed": {
+        "inputs": 2,
+        "closed": 0,
+        "unresolved_literals": 194
+      },
+      "probe_invalidation": {
+        "inputs": 1,
+        "closed": 0,
+        "unresolved_literals": 272
+      }
+    },
+    "metrics": {
+      "normalization_literal_visits": 3923410,
+      "key_serialized_bytes": 22803101,
+      "node_database_lookups": 6235,
+      "classification_calls": 12470,
+      "classification_literal_payload": 2813586,
+      "matching_recognition_literal_visits": 42462,
+      "affine_grouping_literals": 2813586,
+      "affine_extracted_equations": 5966,
+      "affine_leftover_clauses": 995482,
+      "affine_verified_certificates": 12470,
+      "propagation_literal_visits": 21357218,
+      "simplification_reconstruction_literals": 16069752,
+      "verified_simplifications": 77514,
+      "decomposition_literal_visits": 4584047,
+      "probe_ranking_literal_visits": 4116022,
+      "restriction_literal_visits": 25110452,
+      "probe_attempts": 33309,
+      "probe_forced_values": 2346,
+      "simplification_unit_check_literals": 655726,
+      "verified_probe_attempts": 62127,
+      "common_intersection_unit_visits": 200460,
+      "equivalence_intersection_unit_visits": 140968,
+      "learning_graph_literal_visits": 777986,
+      "learning_candidate_visits": 52640,
+      "learning_explicit_duplicates": 29536,
+      "learning_reachability_vertices": 156578,
+      "learning_reachability_edges": 144282,
+      "learning_binary_redundant": 16464,
+      "learning_continuation_probe_attempts": 8841,
+      "learning_inconclusive": 1011,
+      "learning_clauses_proposed": 2934,
+      "conditioning_rank_literal_visits": 175474,
+      "conditioning_rank_variables": 16632,
+      "conditioning_candidates": 1060,
+      "affine_verification_literals": 10192,
+      "verified_pattern_nodes": 4737,
+      "inserted_nodes": 4737,
+      "serialized_bytes": 30052178,
+      "fused_conditioning_edges": 1498,
+      "node_memory_hits": 17194,
+      "verified_learning_attempts": 1374,
+      "probe_rewrites": 3078,
+      "verified_fused_conditioning_edges": 1498,
+      "matching_conflict_edge_visits": 56,
+      "source_serialized_bytes": 229205,
+      "inserted_sources": 37,
+      "common_rewrites_discovered": 349,
+      "common_literals_discovered": 496,
+      "verified_common_rewrites": 1047,
+      "equivalence_rewrites_discovered": 383,
+      "equivalence_variables_merged": 733,
+      "equivalence_substitution_literal_visits": 158031,
+      "verified_equivalence_rewrites": 1149,
+      "verified_projections": 60,
+      "learning_successes": 121,
+      "affine_elimination_xors": 32,
+      "affine_verification_xors": 32,
+      "partition_verification_literals": 1662,
+      "projection_rewrites": 8,
+      "projection_encoded_literals": 32,
+      "projection_encoding_check_literals": 32,
+      "simplification_rewrites": 4
+    },
+    "gains": [
+      21
+    ],
+    "losses": []
+  }
+]

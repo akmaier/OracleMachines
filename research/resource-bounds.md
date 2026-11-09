@@ -1310,3 +1310,57 @@ variable (19) replaces the baseline continuation's fourth variable (11). A
 separate diagnostic finds 1,456 inactive and 102 active hint deltas across 196
 original-probe cores. Checked closure reuse can later avoid repeats in an existing
 pass; these counts do not establish saved probes or justify omitting hint context.
+
+
+## Follow-up: reuse of checked core ranking (9 November)
+
+The [core-order experiment](../experiments/results/cnf-core-order/README.md)
+extracts the p original variables from a fully checked, complete clear probe
+trace in O(p) time and temporary reference space. The original discovery/checker
+still reconstructs source ranking and validates every reason. Clause selection,
+active-batch propagation, normalization, exact child checking and persistence
+remain charged. This replaces the old auxiliary batch reconstruction and ranking;
+it does not bound total graph size or complete arbitrary-CNF acquisition.
+
+Same local caps do not mean equal global work. On 1,389 matched queries, operation
+time is **120.81853 -> 116.67493 s**, discovery **88.69202 -> 85.68326 s**, and
+SQLite **347,566,080 -> 346,976,256 bytes**. Old-input closure drops 719 -> 718 / 805;
+full non-tiny closure drops 776 -> 775 / 877, with only source 956 lost. Both
+combined modes retain 18,104 ordinary solver residuals; the solver's 1.13 s runtime
+variation is not attributable to this heuristic. New unresolved literal occurrences
+rise 26,137 -> 26,734. The policy stays optional.
+
+Pattern nodes fall **21,122 -> 21,005**, logical node bytes **137,740,084 ->
+137,076,682**, while source bytes rise **5,225,670 -> 5,250,240** across the same
+1,365 distinct source records. Cold replay costs **50.51029 -> 47.82982 s**, warm
+lookup **0.25672 -> 0.22710 s**, and separately timed initialization **0.06160 ->
+0.22272 s**. Three full, three pilot and four previous archives replay unchanged.
+Six-case Python peak is **20,265,108 -> 19,623,309 bytes**, excluding native SQLite,
+RSS, preparation outside that diagnostic and full-corpus peak. Single sequential
+samples are not a significance estimate or industrial comparison.
+
+The old 8,772 ranking reconstructions disappear; new extraction performs 8,106
+calls / 32,326 candidate copies across discovery/checking. Learning graph literal
+visits fall 6,433,538 -> 3,516,760 and candidate visits 336,186 -> 185,626. Reused
+continuation probes rise 24,672 -> 27,611, active original probes 1,492 -> 1,700,
+and novel probes fall 3,527 -> zero. These counts include different descendants
+and repeated checks, so they are not paired per-state work differences. Logical
+probe attempts are 119,412 -> 118,152. Eliminating novel probes also eliminates
+useful reductions: 239 shared states lose a learned reduction, while sixteen gain.
+
+All 255 gained/lost shared CNF/depth states have at most four variables in the
+union of active core candidates and novel old-ranking candidates. Seven other
+changed shared states have five. This supports a next bounded selection experiment,
+not a uniform candidate-size theorem or a new recovered-source result. Choosing
+only reusable state is insufficient; accounting must include discovery beyond it.
+The first-cap learned batch is a prefix of the already acquired sixteen-clause
+pool for caps at most sixteen, allowing a separate future optimization that retains
+old choices. Both proposals must charge preparation and checking.
+
+The new unresolved frontier has 102 sources / 142 distinct leaves. Source 1194
+costs 1.45407 s discovery; its instrumented profile records 5,307 restrictions,
+4,311 simplification checks and 2,069 propagation calls. Probe-kind nodes occupy
+87,079,296 bytes of logical state, including full identities and other fields;
+probing fields alone occupy 15,272,772 bytes. Propagation/state reuse remains a
+broader target than cheap choice extraction. Global efficient classification and
+lifetime memory bounds are still open.

@@ -158,10 +158,20 @@ translates all **1,005 eligible hint occurrences** into proofs checked directly
 against child cores. An extra hint pass gains one local closure among 494 edges,
 but increases time and memory. The gain occurs outside selected source paths and
 comes from probe choices: the child's existing clauses also suffice with those
-choices. Next: rank the existing continuation on its core without adding another
-pass. Whole-source coverage remains **719/805**. All **374 tests**, the Lean audit
+choices. This motivated ranking the existing continuation on its core without
+adding another pass, tested below. Whole-source coverage in that study remains **719/805**. All **374 tests**, the Lean audit
 and new cold archive checks pass; parent-independent proofs and failed cost
 experiments remain persistent.
+
+The [core-order trial](experiments/results/cnf-core-order/README.md) tests that
+ranking change with the existing batch and probe budget. Across 1,389 queries,
+non-tiny closure falls **776 -> 775 / 877**, with no gains and a loss on source
+956. Time falls **120.82 -> 116.67 s**, but this single sample and coverage loss
+do not justify replacing the existing policy. All **380 tests**, the unchanged
+Lean audit and new/previous cold archive checks pass. The next discovery target
+combines active core candidates with newly ranked variables: this union fits the
+four-variable cap in all 255 gained/lost local states, but can exceed it elsewhere.
+The failed ranking rule and its counterexamples remain preserved.
 
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.

@@ -427,6 +427,56 @@ requires proof validation and delta checks, and is not yet a measured saving.
 Efficient arbitrary-CNF discovery, total closure size and global resource bounds
 remain open.
 
+## Core-order trial: reduced work, lost coverage (9 November 2026)
+
+The [matched continuation-order study](../experiments/results/cnf-core-order/README.md)
+keeps the selected learned batch, core child, priorities and caps. Choices come
+from a complete original trace only after independent validation. Extraction is
+O(p), avoiding a second learned view solely for ranking; earlier acquisition and
+proof checking remain charged. No additional pass or inherited hint context is
+introduced, and distinct policy identity preserves prior plans.
+
+On 1,389 input queries (512 exhaustive tiny, 877 non-tiny), closure falls
+**776 -> 775 / 877**, with no gains and a loss on source **956**. Both close
+30/36 prior hint-study queries and 27/36 new queries. The local case 97 closes,
+but source 977 remains open. Whole-source decisions all agree with the independent
+solver. Operation time falls **120.81853 -> 116.67493 s**, discovery **88.69202 ->
+85.68326 s**, SQLite **347.566 -> 346.976 MB**, cold replay **50.51029 -> 47.82982 s**,
+and six-case Python peak **20.265 -> 19.623 MB**. The 1.13 s solver-time variation,
+limited memory sample and single sequential run prevent a general speed claim.
+This optional policy does not dominate the existing one.
+
+At the saved 18-variable, 62-clause parent of 956, the selected batch is unchanged.
+The old choices `(17,9,14,16)` refute `14=true`. The core choices `(9,17,18,2)`
+are all inactive under the batch and stay clear. This separates useful old-trace
+reuse from discovery of a newly informative variable. The resulting source has
+one unresolved leaf with sixteen literals. The saved full paths retain this
+ranking failure separately from the earlier redundant-child representation loss.
+
+Among shared CNF/depth states, **239** learned reductions become clear, and
+**16** clear states gain a reduction. In 189 of the losses, no original pair is
+active. In all 255 gained/lost local states, active core variables plus novel
+old-ranking variables have union size at most four; seven other changed states
+already require five. This suggests a bounded continuation using these two
+kinds of evidence, with original certificates retained and delta checks charged.
+Inactive unchanged pairs cannot acquire a new outcome in the present forced/
+common/equivalence procedure. This is not an executed combined policy, proof of
+source-level recovery, or universal bound on the necessary candidate set.
+
+The next run should test that combined selection on the saved controls, then
+full old/fresh queries; preserve first-conflict and descendant regressions. The
+frontier has **102 sources / 142 distinct leaves**, 99 learning-clear and 43 clear.
+Source 1194 remains a useful cost control at 1.45407 s discovery; restriction,
+unit checking and propagation dominate its separate profile. Sharing the already
+checked sixteen-clause candidate pool can separately preserve old choices while
+avoiding reconstruction, but cannot by itself expand structural coverage.
+
+All **380 tests**, the unchanged Lean audit (**4,126 / 1,968 declarations/theorems**),
+three full, three pilot and four previous cold archive checks pass. Fifty report
+fingerprints and analyzer/report hashes match. The new choice policy's Python
+implementation and lifetime resource bounds are not formally refined. No new
+tractable category covering every CNF has been established.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

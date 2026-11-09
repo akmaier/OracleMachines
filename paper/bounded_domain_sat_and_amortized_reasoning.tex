@@ -2958,6 +2958,39 @@ The next controlled experiment should rank continuation variables on the origina
 
 For parent literal count $L$, at most $q$ retained hints and translated reason-literal volume $R$, the transport code adds expected $O(qL+R)$ map and prefix work beyond parent validation, plus core normalization and repeated independent proof checks. The checker currently normalizes the core for each hint. Full-core keys and records add $O(qL+R)$ payload before context plans and descendants. These costs, variable-label bit lengths and the unbounded number of discovered cores remain separate obligations. All 374 Python tests and the full Lean build and axiom audit pass, at 4,126 declarations and 1,968 theorem declarations. Four new archives replay byte-identically, with 51 matching code, test and Lean fingerprints. Object/database initialization is excluded from operation timings and was not separately timed. Serial synthetic measurements do not establish an industrial speedup, complete structural discovery or efficient unrestricted-SAT acquisition.
 
+\subsection{Reusing core probe choices: a cost saving with lost coverage}
+\label{sec:core-probe-order}
+
+We now test the ranking explanation without adding a probe pass. The learned batch, original-clause child, earlier recognition priorities and local caps remain unchanged. The new continuation takes its variables from the complete original core probe trace. The checker first validates every original reason and the deterministic order of both assumptions. Only then does it extract the variable from each pair. This takes $O(p)$ time and temporary reference storage for a cap of $p$ variables. Original ranking and proof checking remain charged. The change avoids reconstructing a second learned view solely to rank its variables; it does not make propagation, acquisition or the number of residuals constant.
+
+The local counterexample from the preceding section closes with the same selected batch. The full-source pilot, however, loses source 956, retains 1024 and leaves 977 and 1189 unresolved. On the shared 18-variable, 62-clause depth-one parent of 956, the old continuation chooses $(17,9,14,16)$ and refutes $x_{14}=\mathrm{true}$. The new order is $(9,17,18,2)$. All four original paired closures are inactive under the selected batch, so repeating them obtains no reduction. Dropping the newly ranked variables 14 and 16 leaves one unresolved source leaf with sixteen literal occurrences. This is a ranking-induced loss, distinct from the earlier loss caused by retaining redundant child clauses.
+
+We compare both policies on all 1,317 previous inputs, the 36 additional source queries from the hint study, and 36 new controls: 24 random 3-CNFs and twelve growing, signed or edited queries, including deliberate repeats. Discovery receives only the CNF. Both policies close all 512 exhaustive tiny inputs. Among the remaining 877 queries, closure falls from 776 to 775, with no gained source and the single loss above. Both close 30/36 prior hint-study queries and 27/36 new queries, including 15/24 new random sources. Every original decision agrees with the unchanged independent solver; each mode retains 18,104 solver residuals. Structural closure and a SAT/UNSAT decision remain separate measurements.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{lrrrr}
+\hline
+Policy & Closed / 877 & Total (s) & SQLite (MB) & Cold (s) \\
+\hline
+Ordinary solver & --- & 30.67714 & 110.891 & 6.48177 \\
+Existing core policy & 776 & 120.81853 & 347.566 & 50.51029 \\
+Core-ranked continuation & 775 & 116.67493 & 346.976 & 47.82982 \\
+\hline
+\end{tabular}
+\caption{Matched continuation-order comparison on 1,389 synthetic queries. The same local probe cap does not fix subsequent acquisition work. A modest measured cost saving comes with lower structural coverage.}
+\label{tab:core-probe-order}
+\end{table}
+
+Operation time falls 3.43\% in this single sample, while discovery falls from 88.69202 to 85.68326 seconds. The unchanged solver's time varies by 1.13 seconds between the combined modes, so the full difference cannot be attributed to ranking. Pattern nodes fall from 21,122 to 21,005 and logical node payload from 137.740 to 137.077 MB. The same six-case Python peak falls from 20.265 to 19.623 MB, excluding native SQLite, RSS and the full-corpus peak. Selected unresolved literal occurrences increase from 26,137 to 26,734. The old 8,772 ranking reconstructions disappear, and new choice extraction copies 32,326 candidate entries across 8,106 calls. Reused continuation probes rise from 24,672 to 27,611; newly chosen continuation probes fall from 3,527 to zero. These counts cover different residual populations and repeated checks, not paired per-state savings. The optional policy therefore does not dominate the existing one.
+
+The shared states suggest a more informative next experiment. At equal normalized CNF and depth, 239 previously learned reductions become clear, while sixteen previously clear states gain a learned reduction. The learned batches are identical in every changed shared state. Of the 239 local losses, 189 have no active original pair. In all 255 gained or lost local states, the union of active core variables and newly ranked old-policy variables contains at most four variables. We can therefore test spending the current continuation budget on this union, while retaining the original checked traces. An inactive pair whose two closures are unchanged cannot acquire a new forced, common or equivalence outcome in the current procedure. Seven changed shared states elsewhere already have a union of five variables, so selection remains necessary beyond the 255 gained/lost controls. Earlier conflicts and changed descendants can still affect whole-source coverage. These diagnostics do not establish recovery of the lost source or an efficient choice rule for arbitrary CNFs.
+
+A supporting reuse opportunity preserves the old choices: for a cap at most sixteen, the deterministic first-cap learned batch is a prefix of the sixteen-clause pool already acquired for selection. Sharing that checked pool could avoid its reconstruction without changing ranking. This remains unimplemented here. The new frontier contains 102 unresolved sources and 142 distinct selected leaves, of which 99 are learning-clear and 43 clear. Source 1194 is the largest unresolved discovery case at 1.45407 seconds. Its separate profile still identifies restriction, unit-proof checking and propagation as major costs. Probe-kind nodes occupy 87.079 MB, including their CNFs, keys, edges and certificates; the probing field alone occupies 15.273 MB. Broad propagation-state reuse remains a larger supporting target than choice extraction alone.
+
+All 380 Python tests and the unchanged Lean build and axiom audit pass, at 4,126 declarations and 1,968 theorem declarations. Three full, three pilot and four previous archives replay byte-identically; warm reuse inserts nothing. Both new reports have fifty matching code, test and Lean fingerprints. Operation timings include discovery, recognition, checking, serialization, persistence, solving and successful root lifts. Initialization is separately measured; generation, truth tables, summary walks, compression, allocation diagnostics and cold replay are outside those timings. These sequential synthetic controls establish neither statistical significance nor new unrestricted-SAT resource bounds. We retain the unsuccessful source cases and leave the default policy unchanged.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -107,7 +107,8 @@ traces, identify pairs whose closure changes under the selected batch, and spend
 the existing continuation budget on active core candidates plus newly ranked
 variables. Inactive paired closures cannot gain a forced/common/equivalence
 outcome when both traces and unit sets are unchanged; they remain reusable
-references. If the union exceeds the cap, selection remains a real limitation.
+references. Seven other changed shared states already have a union of five variables, so
+the cap remains a real limitation.
 Different first conflicts can also change later source coverage. Test the saved
 255 controls, source 956 and the local 97/977 distinction before whole workloads.
 No new combined policy or recovery result is implemented in this checkpoint.
@@ -133,7 +134,8 @@ invalid original traces and continuations, signed mixtures/edits, disabled learn
 wrong child bindings and byte-identical cold coexistence. Three full, three pilot
 and four preceding archives replay byte-identically. Both reports' **50** code,
 test and Lean fingerprints and the analyzer/report hashes match. The unchanged
-Lean build/axiom audit is checked separately; no Python refinement or new
+Lean build/axiom audit passes at 4,126 declarations / 1,968 theorem declarations;
+no Python refinement or new
 unrestricted-SAT resource bound is claimed.
 
 Reproduce without overwriting any existing results:

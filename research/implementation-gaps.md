@@ -3784,3 +3784,109 @@ pages 102--105, including Table 19 and the discussion transition, were visually
 inspected. All **54 previous proof blocks** remain unchanged and **192 labels**
 are unique. Object/database initialization was outside local operation timings
 and not separately timed; this limitation is retained with the measured costs.
+
+
+## 9 November 2026, 07:38 UTC heartbeat: core-order counterexample and next selection gap
+
+Implemented optional `CoreOrderLearningInventory` in
+[cnf_learning_core_order.py](../experiments/cnf_learning_core_order.py). It retains
+the selected batch, existing two probe phases, exact core child and earlier
+priorities. The continuation extracts choices from the complete original clear
+trace only after original discovery or full independent checking. Extraction is
+O(p), with O(p) temporary references; original ranking and all source/reason checks
+remain charged. Separate policy identity preserves prior nodes and results.
+
+Six new tests cover 512 exhaustive two-variable inputs and 3,304 three-variable
+subsets with up to three clauses across multiple caps, exact model fibers,
+forced/common/equivalence lifts, the saved local case 97, malformed original
+traces/order/batches/continuations, signed mixtures and edits, disabled learning,
+wrong-child rejection and byte-identical cold coexistence. All **380 tests** pass
+in **33.602 s**. The unchanged full Lean build/axiom audit passes at **4,126
+declarations / 1,968 theorem declarations**. There is no new Python refinement or
+unrestricted acquisition bound.
+
+The four-source pilot retains 956/977/1024/1189. The full
+[matched study](../experiments/results/cnf-core-order/README.md) keeps all 1,317
+previous inputs, all 36 original source queries from the hint study, and adds
+36 controls at seed **20261109073810**: 24 fresh random 3-CNFs and twelve growing,
+signed or edited queries, including repeats. Routing sees only CNF input. All
+512 exhaustive tiny cases close. Non-tiny coverage falls **776 -> 775 / 877**,
+with **no gains and only source 956 lost**. Old-input coverage is 719 -> 718 / 805;
+both modes close 30/36 hint-study queries and 27/36 new queries. The unchanged
+independent solver agrees on every answer and retains 18,104 residuals per mode.
+
+Baseline/new operation times are **120.81853 / 116.67493 s**, discovery
+**88.69202 / 85.68326 s**, SQLite **347,566,080 / 346,976,256 bytes**, cold replay
+**50.51029 / 47.82982 s**, warm lookup **0.25672 / 0.22710 s**, and six-case Python
+peak **20,265,108 / 19,623,309 bytes**. Initialization is separately measured at
+0.06160 / 0.22272 s. Main timings include recognition, discovery, checking,
+serialization, persistence, solving and successful root lifts, excluding generation,
+truth tables, summary walks, compression, allocation diagnostics and cold replay.
+Memory excludes native SQLite, RSS and full-corpus peak. Modes, memory diagnostics,
+profiles, tests and builds run sequentially. The unchanged solver varies by 1.13 s
+between combined modes, so the 3.43% total-time drop is not wholly a ranking saving
+or a statistical result. Keep the policy optional with its coverage regression.
+
+Pattern nodes fall **21,122 -> 21,005**, logical node bytes **137,740,084 ->
+137,076,682**, and the same 1,365 source records occupy **5,225,670 -> 5,250,240
+bytes**. Probe attempts fall 119,412 -> 118,152. Reused continuation probes rise
+24,672 -> 27,611; active original probes rise 1,492 -> 1,700; newly chosen probes
+fall 3,527 -> zero. The old 8,772 auxiliary ranking reconstructions disappear;
+new extraction calls number 8,106 and copy 32,326 candidate entries. These are
+counts over different residual populations and repeated checks. Selected unresolved
+literal occurrences increase **26,137 -> 26,734**.
+
+The loss has a concrete cause. At the common 18-variable, 62-clause depth-one
+parent of source 956, both policies select exactly the same batch. Old choices
+`(17,9,14,16)` refute `14=true`. New choices `(9,17,18,2)` are all inactive under
+the batch, and stay clear. The new source path has one unresolved leaf containing
+sixteen literals. The preceding local case 97 still closes with the same batch,
+forcing `19=false,13=false`, but it remains outside the selected source-977 path.
+Do not count it as an original-source gain. This new 956 ranking loss is separate
+from the older redundant-child representation loss.
+
+The [mechanism ledger](../experiments/results/cnf-core-order/mechanisms.json)
+retains source paths, all changed shared CNF/depth states, both probe records,
+old/core choices, validated batch activity, novel variables, the frontier and a
+separate profile. There are **239 learned -> clear** and **16 clear -> learned**
+shared-state transitions. In 189 of the local losses, no original core pair is
+active. Every one of these 255 gained/lost local states has at most four variables
+in the union of active core candidates and novel old-ranking candidates. Loss
+union sizes are `{1:166,2:51,3:17,4:5}`; gain sizes are `{2:7,3:6,4:3}`. All 3,001
+changed shared states retain identical learned batches; across that larger set,
+seven unions already have five candidates. This is not a uniform width bound.
+
+**Next discovery experiment:** use the checked original traces and batch-activity
+masks to select active core plus novel candidates within the existing continuation
+budget. Inactive unchanged paired closures cannot acquire new forced/common/
+equivalence outcomes in the current procedure; retain their valid references.
+Test all 255 local transition controls, then original 956 and local 97/original
+977, before full source workloads. The union may exceed the cap, and differing
+first conflicts or descendants can still change coverage. No combined rule or
+recovered closure is implemented in this checkpoint. Supporting exact reuse can
+share the deterministic sixteen-clause pool: for caps at most sixteen, its prefix
+is the old first-cap batch. This could avoid reconstruction while preserving old
+choices, but has not been measured.
+
+The new frontier has **102 unresolved sources / 142 distinct selected leaves**,
+99 learning-clear and 43 clear. Source **1194** costs **1.45407 s** discovery with
+426 unresolved literal occurrences. Its separate profile records 5,307 restrictions,
+4,311 unit-simplification checks and 2,069 propagations; those remain primary
+costs. Probe-kind nodes hold 87,079,296 logical bytes, including CNFs, identities,
+edges and other fields. Probing fields alone total 15,272,772 bytes. Do not confuse
+whole-node storage with certificate payload.
+
+Three full, three pilot and four prior archives replay byte-identically; warm
+reuse inserts no records. Both new reports have **50 matching code/test/Lean
+fingerprints**. Archive, analyzer and input-report hashes match. Implementation,
+tests, measurements and counterexamples are committed and pushed as **544054d**.
+Existing policies, previous solver results, proofs and archives are preserved.
+
+Manuscript Section **12.59**, Table **20**, and the README/discovery/resource/
+priority records now retain the cost/coverage trade-off and the proposed combined
+selection. The **112-page PDF** builds with no final-pass warnings or box errors;
+pages **104--106** were visually inspected. All **54 prior proof blocks** remain
+unchanged, and **194 labels** are unique. One initial build placed outputs in the
+repository root; its six generated files were removed and the final build used
+the paper directory. Efficient arbitrary-CNF discovery, total closure size and
+lifetime acquisition/storage bounds remain open.

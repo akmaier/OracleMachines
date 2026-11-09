@@ -12,7 +12,64 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-**Next research experiment:** rank continuation variables on the original core,
+## Current checkpoint: choosing informative continuation variables
+
+The [core-order experiment](../experiments/results/cnf-core-order/README.md)
+changes only the continuation ranking, using the existing learned batch and
+probe budget. On **1,389 inputs**, non-tiny closure falls **776 -> 775 / 877**:
+no source gains, and source **956** is lost. The local hint-study case 97 closes,
+but original source 977 remains open. Do not promote the new policy.
+
+Total time falls **120.81853 -> 116.67493 s** (3.43%), discovery **88.69202 ->
+85.68326 s**, SQLite **347.566 -> 346.976 MB**, cold replay **50.51029 -> 47.82982 s**,
+and six-case Python peak **20.265 -> 19.623 MB**. These are single sequential
+samples; the unchanged solver's time varies by 1.13 s between combined modes.
+Selected unresolved literal occurrences worsen **26,137 -> 26,734**. No source
+coverage improvement or general speedup follows from removing 8,772 ranking
+reconstructions. All earlier policies and results remain available.
+
+**Highest-priority discovery target:** use checked delta activity to combine
+active original-core candidates with newly ranked candidates, under the existing
+continuation budget. At equal CNF/depth, **239** old learned reductions become
+clear and **16** old clear states gain a reduction. In **189/239** local losses,
+all original core pairs are inactive under the learned batch. At source 956,
+core choices `(9,17,18,2)` are all inactive; the old newly ranked variable 14
+supplies the useful conflict. Reusing only original choices misses it.
+
+Across all **255 gained/lost local states**, active core variables plus novel
+old-ranking variables fit within four choices. Seven other changed shared states
+already need five, so this is an observed opportunity, not a uniform bound.
+Original clear traces must be checked before delta tests; inactive pairs retain
+valid references. Unchanged unit sets cannot produce a new common/equivalence
+witness in this procedure. Compare the proposed combined choices first on these
+controls, 956 and local 97/original 977, then on full sources. Changed first
+conflicts and descendants can still lose coverage. No combined policy or recovery
+result has yet been implemented.
+
+Supporting priorities:
+
+1. **Preserve old choices while sharing preparation.** The first-cap batch is
+   the prefix of the deterministic sixteen-clause pool for caps at most sixteen.
+   Reuse the checked pool and ranking inputs rather than reconstructing them.
+   This can isolate savings without changing coverage; no saving is measured yet.
+2. **Reuse propagation state where it dominates.** The new frontier has 102 open
+   sources and 142 distinct selected leaves (99 learning-clear, 43 clear).
+   Source 1194 costs 1.45407 s discovery; restriction, unit checking and propagation
+   dominate its separate profile. Probe-kind nodes account for 87.079 MB, but the
+   probing field alone is 15.273 MB: whole-node payload is not proof-only storage.
+3. **Integrate portable hints only within a justified continuation.** Keep exact
+   source/context bindings and delta validation; the earlier extra pass still
+   has unfavorable costs. Avoid adding another pass to repair a ranking miss.
+
+All **380 Python tests**, the unchanged Lean build/axiom audit (**4,126 / 1,968**
+declarations/theorems), three full, three pilot and four previous cold archive
+checks pass. Both new reports have 50 matching fingerprints. The implementation
+and preserved measurements are pushed in **544054d**. Global efficient arbitrary-
+CNF discovery, compact closure and acquisition/storage bounds remain open.
+
+## Previous checkpoint: portable proofs and the ranking hypothesis
+
+**Previous proposed experiment (now tested above):** rank continuation variables on the original core,
 using the existing learned batch and existing number of passes. The
 [portable-hint control](../experiments/results/cnf-hint-transport/README.md)
 isolates a local miss caused by ranking: both the transported and rediscovered
@@ -45,7 +102,7 @@ logical probes rise **14,468 -> 16,136**. The favorable reason-prefix scan count
 Fresh proof search is conditional on supplied candidate clauses; all parent
 checking, preparation, storage and replay remain charged.
 
-Current priorities:
+Prior priorities before the core-order test:
 
 1. **Core-ranked continuation under the existing budget.** Isolate the measured
    variable-choice cause, avoiding reconstruction of a redundant learned view

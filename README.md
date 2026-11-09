@@ -202,6 +202,14 @@ remains the main profiled cost; an offline relevance filter removes 75% of saved
 implication candidates while retaining the observed exposures, but adds no new
 frontier coverage and has not yet been integrated or timed end to end.
 
+The [bounded proof-check cache](experiments/results/cnf-checked-probe-reuse/README.md)
+then preserves every result and database byte while reducing full-sample time
+**168.31 -> 150.39 seconds** and cold replay **71.60 -> 62.59 seconds**. Repeated
+selected controls also improve. The six-case Python peak rises by **1.10 MB**;
+the cache is capped at 1 MiB of serialized strings, with other memory charged
+separately. All **410 tests** pass. First-time propagation now dominates the
+profiled remaining work; structural coverage stays **869/985** non-tiny inputs.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

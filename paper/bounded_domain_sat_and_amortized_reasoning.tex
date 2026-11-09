@@ -3138,6 +3138,48 @@ The remaining frontier contains 116 open sources and 148 distinct selected leave
 
 All 403 Python tests pass, and the full Lean build audits 4,130 declarations and 1,972 theorem declarations. Three full, three pilot and three previous archives replay byte-identically, including every alternative and source; each full mode retains 21,838 ordinary solver residuals. Warm reuse inserts nothing. Both new reports have 59 matching fingerprints, with separate diagnostic and timing hashes. Operation timings charge recognition, checking, serialization, persistence, solving and successful root lifts; generation, truth tables, summary walks, compression, initialization and cold replay are excluded or measured separately. Benchmark modes, allocations, profiles and repeated timing controls run sequentially after verification completes. The semantic composition and these finite experiments leave Python refinement, unrestricted acquisition bounds, compact closure and lifetime storage bounds open.
 
+\subsection{Reusing an exact successful proof check}
+\label{sec:checked-probe-reuse}
+
+Proof replay itself is part of acquisition cost. The preceding prototype checks the same probe evidence during discovery, node validation and model lifting. This is memoization of proof checking \citep{michie1968}. We test a bounded in-memory cache around the existing complete probe checker. Its key contains the complete source, evidence and policy configuration. Only a successful check admits a result, and a hit compares the full key and decodes a fresh result. The cache begins empty after restart. Eviction forces later rechecking; an edited source, proof or policy cannot inherit an entry under a partial signature. Discovery order, stored proofs, source identities and persistent policy remain unchanged.
+
+The invariant is that each retained entry records a successful check of its exact semantic input under the fixed checker. Admission establishes the invariant, eviction preserves it, and an exact hit reuses the established result. This requires the key representation to respect the checker's input distinctions. A preliminary version failed this obligation for malformed direct inputs: JSON gives a tuple and a list the same encoding, while the checker specifically requires a list of original attempts. The final version delegates a non-list attempts container to the old checker before lookup. A regression test warms the cache with a valid list and then requires rejection of the colliding tuple. The earlier pilot and counterexample are preserved. This is a checked implementation invariant and test result, not a Lean refinement of Python.
+
+The cache pays full serialization, hashing/equality and result decoding on hits. With encoded input size $K$, result size $R$, old check cost $V$ and retained-string budget $B$, a hit avoids $V$ but still processes its key and result. A miss adds key/result serialization and eviction work to the old check. Expected map operations do not erase worst-case collisions or encoding costs. Retained ASCII key/result strings total at most $B$ bytes; Python object overhead and temporary construction of $K+R$ bytes remain separate. Oversized entries are checked without retention. The original acquired graph, persistent sources and ordinary solver memory are not bounded by this cache cap.
+
+On the same 1,497 inputs, the cached and uncached modes reproduce every previous answer, structural profile, source identity and database byte. Coverage remains 869 of 985 non-tiny sources, with 116 open sources, 148 selected leaves and 33,651 unresolved literals. The complete archive retains 25,047 pattern nodes, 1,465 source bindings and 21,838 ordinary solver residuals. We reference the previous archive rather than storing another identical copy. Both cold audits start with an empty cache, check every alternative, source binding and solver certificate, and leave the bytes unchanged. Warm replay inserts nothing.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Measurement & Existing checker & Exact-check cache \\
+\midrule
+Full operation time (s) & 168.30879 & 150.39216 \\
+Discovery time (s) & 125.59834 & 108.60557 \\
+Ordinary solver time (s) & 42.63160 & 41.72166 \\
+Cold replay (s) & 71.60183 & 62.58623 \\
+SQLite size (MB) & 437.621 & 437.621 \\
+Logical node payload (MB) & 179.396 & 179.396 \\
+Six-case Python peak (MB) & 21.161 & 22.258 \\
+Replayed probe attempts & 248,307 & 113,301 \\
+Restriction literal visits (millions) & 126.082 & 82.210 \\
+Propagation literal visits (millions) & 105.861 & 105.861 \\
+\bottomrule
+\end{tabular}
+\caption{Exact successful-check reuse at a 1 MiB retained-string cap. Both modes have identical persistent evidence and coverage. The single full sample trades additional transient memory for lower acquisition and replay cost. MB are decimal; traced Python memory excludes native SQLite, RSS and the full-corpus peak.}
+\label{tab:checked-probe-reuse}
+\end{table}
+
+Table~\ref{tab:checked-probe-reuse} shows a 10.65\% reduction in total operation time, 13.53\% in discovery and 12.59\% in cold replay. The six-case Python peak grows by 1,097,076 bytes. Warm inventory replay is 0.27219 versus 0.26053 seconds; initialization is separate, at 0.00168 versus 0.24030 seconds. Twelve-query ABBA BAAB controls average 6.17550 versus 5.33388 seconds total, and 5.88231 versus 5.04230 seconds discovery. All four cached totals lie below the four uncached totals in this selected control. Four trials do not establish significance or industrial performance, and the subset is not a repeated full-corpus estimate. Every trial matches the full-run answers and summaries; within-mode counters, storage and database hashes repeat.
+
+Full operations make 57,798 lookups with 34,971 hits, 22,827 admissions and 22,571 evictions. They serialize 135.221 MB of keys and 22.274 MB of results, and decode 29.376 MB on hits. Total admitted string volume is 78.031 MB despite the 1 MiB retained cap. The saved work must repay this preparation and churn. Cold replay has 17,266 hits in 40,357 lookups and reduces verified probe attempts from 181,314 to 115,029. A guarded eight-source capacity pilot gets 1,385 hits at 256 KiB and 1,387 at 1 MiB; that suggests a smaller-capacity comparison, but establishes no optimal global budget.
+
+The largest uncached discovery miss is again source 1194. In separate profiles, restriction calls fall from 5,763 to 3,399 and simplification checks from 4,657 to 2,303. Propagation stays at 2,221 calls and becomes the largest named-function own-time cost, narrowly ahead of restriction. Instrumented totals are 4.99171 versus 3.99936 seconds; these are not primary operation timings. First-time propagation and remaining source preparation are the next runtime target. Reusable occurrence indexes or affected-clause updates would need explicit dependencies and invalidation. They must preserve or version proof order, since different traces can change later learning choices. New structural coverage still requires new certified relations or exact decompositions of the unresolved interactions.
+
+All 410 Python tests pass, including old-archive replay, corrupted cold evidence, edits, cache eviction, returned-value mutation and the tuple/list counterexample. Lean sources remain unchanged from the preceding 4,130-declaration and 1,972-theorem audit; we do not claim a new formal refinement. The full report has 62 fingerprints, with separate diagnostic hashes and preserved snapshots for superseded pilots. Operation timing charges full-key lookup, decoding, checking, persistence, solving and root lifts. Extra pointwise checks are kept outside the timed query stream so they cannot warm the cache; tests and the identical previously checked archive retain that validation. Modes, allocations, repeated controls and profiles run sequentially. The measured saving concerns repeated exact checking, not broader family coverage, a compact closure result or an unrestricted-SAT worst-case improvement.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

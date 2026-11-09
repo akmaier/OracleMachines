@@ -4175,3 +4175,93 @@ unique labels**. The **118-page PDF** builds without final-pass warnings or box
 errors; pages **109--112** were rendered and visually inspected. README, ranked
 priorities, discovery and resource records are updated. No unrestricted efficient
 partition, universal compact closure or P-versus-NP conclusion is asserted.
+
+## 2026-11-09: bounded reuse of exact successful probe checks
+
+The profiled restriction/checking bottleneck led to a narrow exact-reuse change.
+`CheckedProbeReuseInventory` wraps the existing complete probe checker in an
+optional ephemeral LRU cache. Keys serialize the full source, proof and config;
+only successful checks admit results, and hits return fresh decoded values.
+Edits miss, eviction requires rechecking, and cold replay begins empty. There is
+no object-identity shortcut, partial signature, unchecked hint or persistent
+policy change. Implementation, seven new tests and pilot/counterexample records
+are committed and pushed as **9aba9df**. The hourly automation prompt is unchanged.
+
+Two failures are preserved. The first full harness compared live tuple-containing
+profiles with JSON-loaded lists; comparison now uses the exact canonical JSON
+encoding. Subsequent review found that the preliminary cache could identify a
+malformed tuple of original attempts with a valid list and bypass the old checker
+on a warm hit. Non-list attempts now go to the original checker before cache
+lookup. A regression test warms the cache then requires rejection. That full run
+was intentionally interrupted before any completed full report. Preliminary code,
+tests, pilot and logs remain; the final guarded pilot has fresh measurements.
+The full runner also keeps extra pointwise checks out of the timed query stream
+so they cannot supply uncharged cache warmup. Tests and the identical prior
+archive retain that independent small-fiber validation.
+
+The [full matched study](../experiments/results/cnf-checked-probe-reuse/README.md)
+uses all **1,497** previous inputs. Both modes reproduce every answer, structural
+profile, root identity and database byte. Coverage stays **869/985 non-tiny**,
+with **116 sources / 148 distinct selected leaves / 33,651 literals** open. This
+is cheaper repeated checking, not new structural coverage or a change to the
+independent SAT decision solver. The archive is referenced once rather than
+copied: **437,620,736 bytes**, 25,047 pattern nodes, 1,465 source bindings and
+21,838 ordinary solver residuals. Both full and all five guarded pilot modes
+replay cold byte-identically, including every alternative/source/solver proof;
+warm replay inserts nothing.
+
+Full single-sample total time falls **168.30879 -> 150.39216 s (10.65%)**, discovery
+**125.59834 -> 108.60557 s (13.53%)**, and cold replay **71.60183 -> 62.58623 s (12.59%)**.
+The six-case Python peak grows **21,161,086 -> 22,258,162 bytes**, a 1,097,076-byte
+increase. Logical node storage is unchanged at 179,395,726 bytes. The 1 MiB cap
+bounds retained serialized cache strings only, excluding allocator/LRU overhead,
+transient construction, native SQLite/RSS and the original acquired state.
+
+Twelve-query ABBA BAAB controls average **6.17550 -> 5.33388 s** total and
+**5.88231 -> 5.04230 s** discovery. Four cached totals (5.27161--5.38252 s) are below
+four baseline totals (6.11412--6.22190 s); unchanged solver means are 0.29174 ->
+0.29045 s. Answers/summaries match the full study; within-mode counters, storage
+and database hashes repeat. These selected synthetic measurements do not establish
+significance, industrial performance or repeated full-corpus estimates. Benchmark
+modes, allocation diagnostics, repeated controls and profiles ran sequentially.
+
+Full operations make **57,798 lookups / 34,971 hits / 22,827 misses/admissions /
+22,571 evictions**. They serialize 135,220,528 key bytes and 22,273,703 result
+bytes, decode 29,375,582 bytes on hits, and admit 78,031,066 total string bytes
+while retaining at most 1,048,576. Probe replays fall **248,307 -> 113,301**;
+restriction visits **126,081,638 -> 82,210,169**; simplification reconstruction
+visits **82,973,454 -> 51,574,914**. Propagation visits stay **105,860,805**.
+Cold replay starts empty and has 17,266 hits / 40,357 lookups, reducing verified
+probe attempts **181,314 -> 115,029** without skipping any first check.
+
+The next priorities follow the saved profile and unchanged frontier:
+
+1. **First-time propagation and remaining scans.** The largest baseline miss,
+   source 1194, reduces restrictions **5,763 -> 3,399** and simplification checks
+   **4,657 -> 2,303**. Propagation stays **2,221 calls** and becomes the largest
+   named own-time cost. Test occurrence-index preparation and affected-clause
+   propagation across assumptions. Bind indexes to the exact source; preserve
+   or explicitly version proof order because traces affect later learning choices.
+2. **Broader structural discovery.** The 116 open sources still need new
+   source-entailed relations or exact decompositions. Neither this cache nor the
+   saved implication relevance filter adds frontier coverage. Charge recognition,
+   recomposition and unresolved interaction; a complete partition is not an
+   efficient solution of every class.
+3. **Smaller retained overhead.** The guarded eight-source pilot gets 1,385 hits
+   at 256 KiB versus 1,387 at 1 MiB. Compare full-corpus costs before choosing a
+   smaller capacity. The unintegrated 29,897 -> 7,505 implication-pool filter is
+   another evidence-size opportunity, with its relevance comparisons charged.
+
+All **410 tests** pass. Lean sources are unchanged from the preceding audit of
+**4,130 declarations / 1,972 theorem declarations**; no new formal Python
+refinement is claimed. The final full report has **62 verified fingerprints**;
+both pilot reports resolve all 62 through current files or preserved snapshots.
+Timing/profile hashes and the actual referenced gzip archive hash are verified.
+
+Manuscript Section **12.63** and Table **24** record the cache invariant, its found
+counterexample, charged recognition/storage costs, measurements and remaining
+propagation/coverage gaps. All **56 previous proof blocks** remain; there are
+**204 unique labels**. The **120-page PDF** builds without final-pass warnings or
+box errors, and pages **111--114** were rendered and visually inspected. README,
+ranked priorities, discovery and resource records are updated. No new tractable
+family, compact closure or unrestricted-SAT worst-case improvement is asserted.

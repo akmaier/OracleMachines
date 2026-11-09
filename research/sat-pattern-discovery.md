@@ -615,6 +615,31 @@ Python or establish polynomial acquisition, compact closure, lifetime storage or
 an efficient partition for unrestricted SAT. Detailed controls and saved failed
 pools are in the study; earlier results are preserved.
 
+## Exact-check reuse preserves the discovery partition (9 November 2026)
+
+The [bounded cache experiment](../experiments/results/cnf-checked-probe-reuse/README.md)
+changes the cost of repeated proof replay while preserving every source profile,
+selected plan, proof and database byte on all 1,497 saved inputs. Coverage remains
+**869/985 non-tiny**, with **116 sources / 148 leaves / 33,651 literals** open.
+A full source/proof/policy key binds each previously successful check; no first
+check, newly edited input or unverified implication can enter through a hit.
+Cold replay starts empty, and the persistent evidence remains unchanged.
+
+Full-sample time falls **168.30879 -> 150.39216 s**, discovery **125.59834 ->
+108.60557 s**, and cold replay **71.60183 -> 62.58623 s**. Twelve-query repeated
+means are **6.17550 -> 5.33388 s**. SQLite is unchanged; six-case Python peak grows
+**21.161 -> 22.258 MB**. These results are scoped to synthetic workloads. The
+1 MiB retained-string cap is not a process-memory bound. All 410 tests pass;
+the preliminary tuple/list key-alias counterexample and fix are retained.
+
+The largest baseline miss, source 1194, now has **3,399 restrictions / 2,303
+simplification checks**, down from 5,763 / 4,657; propagation stays at **2,221**.
+First-time propagation and reusable source preparation are the next runtime
+hypothesis. New coverage still needs new certified relations or exact decomposition
+of unresolved interactions. This cache has no new family recognition, proof of
+compact closure or unrestricted-SAT efficiency consequence. Prior Lean sources
+are unchanged; the Python cache invariant is not formally refined.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

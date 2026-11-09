@@ -12,7 +12,57 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current checkpoint: five more closures; proof replay remains dominant
+## Current checkpoint: exact proof reuse reduces acquisition cost
+
+The [bounded check-cache study](../experiments/results/cnf-checked-probe-reuse/README.md)
+preserves every previous structural result and the complete archive byte for byte.
+On the same **1,497 inputs**, coverage stays **869/985 non-tiny**, with **116 open
+sources / 148 leaves / 33,651 literals**. A successful complete probe check may be
+reused only under the same full source/proof/policy key. The cache is ephemeral,
+starts empty on cold replay, returns fresh decoded results and retains at most
+**1 MiB of serialized strings**. Edits and evictions cause rechecking. The old
+checker remains available; persistent proofs and identities do not change.
+
+Full single-sample total time falls **168.30879 -> 150.39216 s (10.65%)**, discovery
+**125.59834 -> 108.60557 s**, and cold replay **71.60183 -> 62.58623 s**. Twelve-query
+ABBA BAAB means are **6.17550 -> 5.33388 s** total. These are synthetic measurements,
+not a general SAT speed guarantee or significance result. SQLite stays exactly
+**437,620,736 bytes**; six-case Python peak grows **21,161,086 -> 22,258,162 bytes**.
+The cap excludes allocator/LRU overhead, transient construction and original state.
+All full modes share the existing archive rather than retaining another copy.
+
+The next ranked gaps are now:
+
+1. **First-time propagation and remaining clause scans.** Source 1194's separate
+   profile reduces restrictions **5,763 -> 3,399** and simplification checks
+   **4,657 -> 2,303**, but propagation stays **2,221 calls** and becomes the largest
+   named own-time cost. The full workload still visits **105,860,805 propagation
+   literals**. Test reusable occurrence indexes or affected-clause propagation
+   across assumptions, charging preparation and invalidation. Preserve or
+   explicitly version proof order: changed traces can alter learning selection.
+2. **New structure in unresolved interactions.** This cache preserves coverage;
+   it does not discover new relations. The 116 open sources need certified
+   relations or exact decomposition hypotheses, measured against their remaining
+   interactions. Neither larger blind budgets nor cache hits solve this gap.
+3. **Lower cache/evidence overhead without losing useful reuse.** Full operations
+   have 34,971 hits / 57,798 lookups, but serialize **135.221 MB** of key data and
+   decode **29.376 MB**. A 256 KiB pilot gets 1,385 versus 1,387 hits at 1 MiB;
+   compare full-corpus memory and time before choosing a smaller cap. The earlier
+   relevance filter (29,897 -> 7,505 implication candidates, no coverage gain)
+   remains a separate possible evidence reduction. First-check and discovery
+   costs cannot be replaced by unverified context.
+
+All **410 tests** pass. A found tuple/list serialization alias is fixed by checking
+the old original-attempts container requirement before lookup; its counterexample,
+preliminary pilot and aborted runs are preserved. Both final full modes and all
+five guarded pilot modes replay cold byte-identically, including alternatives,
+source bindings and solver certificates. Reports have **62 fingerprints**, with
+explicit snapshots for superseded pilot scripts. Lean source and its preceding
+4,130/1,972 audit remain unchanged; this cache has no formal Python refinement.
+The implementation checkpoint is **9aba9df**. No unrestricted efficiency or new
+tractable class follows from exact repeated-check reuse.
+
+## Previous checkpoint: five more closures; proof replay remains dominant
 
 The [implication-subset study](../experiments/results/cnf-implied-subsumption/README.md)
 reuses binary consequences of original checked probes as signed-subset witnesses.

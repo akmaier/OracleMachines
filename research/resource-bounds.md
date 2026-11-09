@@ -1582,3 +1582,77 @@ propagations. These dominate own-time costs after indexing and motivate exact
 prepared-state/proof reuse. Additional coverage requires new relations or exact
 decompositions. All 403 tests, the 4,130/1,972 Lean audit, cold checks and 59 report
 fingerprints pass; no unrestricted acquisition or compact-closure bound follows.
+
+## Exact checked-probe replay cache (9 November)
+
+`CheckedProbeReuseInventory` adds an ephemeral bounded LRU cache around the
+existing complete probe checker. The persistent policy/configuration, source
+identities, proof contents and discovery order do not change. A key contains the
+complete source, probe evidence and policy configuration. An entry is admitted
+only after the old checker succeeds. Full key equality, not a digest match,
+licenses reuse; returned values are decoded afresh, so caller mutation cannot
+change stored results. Restart starts empty, eviction requires later rechecking,
+and source/proof/policy changes miss rather than inherit a result.
+
+The invariant is narrow: each retained entry records a successful check of that
+exact semantic input under this fixed checker implementation. It does not certify
+new inputs, skip the first proof check or replace persistent proof evidence.
+JSON distinguishes integer/bool fields, but identifies tuple/list containers.
+The old checker requires original attempts to be a list, so non-list attempts
+bypass caching and are handled by that checker before any lookup. This guard is
+required: the preliminary implementation admitted a warm-cache type alias in a
+malformed direct input. Its code, pilot and counterexample remain available;
+the guarded implementation has a regression test. Other CNF/unit-trace iterable
+containers have the same semantics under the existing checker. No formal Python
+refinement is claimed.
+
+Let K be encoded source/proof/config bytes, R the encoded result size, V the
+uncached check cost and B the cache's retained-string budget. Each lookup pays
+full serialization and key hashing/equality; a hit also decodes R bytes. Thus
+reuse retains serialization work rather than making checking constant-time.
+A miss pays the old V as well as key/result serialization and eviction work.
+Expected map operations are constant-time after hashing; worst-case collisions
+and encoder/sorting costs are not erased. Across the run each admitted entry can
+be evicted only once before re-admission. Stored ASCII key/result strings total
+at most B bytes; their Python objects and LRU entries add overhead. Transient
+key/result construction can add O(K+R) space beyond retained cache state, and
+original acquired graphs, source bindings and solver memory remain separate.
+Oversized entries are checked without being retained. These bounds do not reduce
+worst-case SAT search or establish an optimal cache budget.
+
+The final full comparison uses the same **1,497 inputs** and preserves all answers,
+profiles, source identities and database bytes. Coverage stays **869/985 non-tiny**.
+Full single-sample time falls **168.30879 -> 150.39216 s**, discovery **125.59834 ->
+108.60557 s** and cold replay **71.60183 -> 62.58623 s**. Twelve-query ABBA BAAB means
+are **6.17550 -> 5.33388 s** total and **5.88231 -> 5.04230 s** discovery; four trials
+per mode on a selected subset do not establish significance or general speedup.
+
+The archive remains **437,620,736 bytes**, with **179,395,726 logical node bytes**,
+25,047 nodes, 1,465 source bindings and 21,838 ordinary solver residuals. Both
+modes reproduce the previous archive byte for byte, so it is referenced rather
+than duplicated. Warm replay is **0.27219 -> 0.26053 s**; initialization separately
+**0.00168 -> 0.24030 s**. Six-case Python peak grows **21,161,086 -> 22,258,162 bytes**.
+The maximum retained cache-string state is exactly **1,048,576 bytes**; these
+figures exclude native SQLite/RSS and do not bound full-corpus or lifetime memory.
+
+Full operations have **57,798 lookups / 34,971 hits / 22,827 misses/admissions /
+22,571 evictions**. Keys serialize **135,220,528 bytes**, results serialize
+**22,273,703 bytes**, and hits decode **29,375,582 bytes**. Total admitted string
+volume is **78,031,066 bytes**. Replayed probe attempts fall **248,307 -> 113,301**,
+restriction literal visits **126,081,638 -> 82,210,169**, and simplification
+reconstruction visits **82,973,454 -> 51,574,914**. Propagation visits remain
+**105,860,805**. These operation metrics include successful root lifts.
+
+Cold checking uses **40,357 lookups / 17,266 hits** with an initially empty cache;
+verified probes fall **181,314 -> 115,029**, and all alternatives/source/solver
+certificates are still covered. The separate source-1194 profile reduces
+restrictions **5,763 -> 3,399** and simplification checks **4,657 -> 2,303**, with
+propagation unchanged at **2,221 calls** and now the largest named own-time cost.
+Its instrumented totals 4.99171 -> 3.99936 s are not primary operation timings.
+Prepared source indexes or affected-clause updates are the next cost target;
+proof order, dependencies and invalidation must remain explicit.
+
+All 410 tests pass; full and guarded pilot cold checks are byte-identical. The
+62 report fingerprints and diagnostic hashes are verified, with snapshots for
+superseded pilot code. No Lean source changes or formal Python refinement are
+claimed. Broader coverage remains a separate discovery gap.

@@ -3407,6 +3407,36 @@ A separate frozen set of 96 fresh random, signed, edited and disconnected-mixtur
 
 This result narrows the next discovery gap. On a normalized CNF whose clauses all contain at least three distinct variables, assigning one variable removes at most one literal from a surviving clause. No unit clause is created, so unit propagation alone cannot begin. Counting saved unit consequences therefore cannot expose all useful interactions in such states. The next candidate should examine a bounded multi-variable interface or the structure of the resulting binary clauses, with exact composition and explicit acquisition cost. Reordering remains optional and is not promoted: it gives no new original-source coverage, and the retained 898/985 baseline is unchanged. The experiment, all earlier results and both execution orders remain available in the repository.
 
+
+\subsection{Retained binary paths expose redundant wide clauses}
+\label{sec:binary-paths}
+
+The next experiment uses the binary relations themselves. All 106 original unresolved leaves have acyclic binary implication graphs. Conditioning exposes some cycles, but earlier reductions handle most of them. A separate complete reachability probe finds 334 removable wide clauses across 92 leaves. Binary implication graphs already support established clause and literal elimination techniques, including hidden tautology elimination and Unhiding \citep{heule2010elimination,heule2011unhiding}. We implement a restricted clause-deletion rule with source-linked certificates and measure its coverage and total cost. The inference is not new.
+
+\begin{proposition}[Simultaneous deletion justified by retained binary paths]
+\label{prop:retained-binary-paths}
+Let $B$ be the set of binary clauses of a normalized CNF $F$. Let $D\subseteq F$ contain only clauses of width at least three. For every $C\in D$, suppose $a,b\in C$ and the implication graph of $B$ contains a path $\neg a\leadsto b$. Then $F$ and $F\setminus D$ have exactly the same models on the original variables.
+\end{proposition}
+\begin{proof}
+Every model of $F$ satisfies the retained clauses. Conversely, let a valuation satisfy $F\setminus D$. All clauses of $B$ remain. For each removed $C$, either $a$ is true, or $\neg a$ is true and the binary path forces $b$. Hence $C$ is satisfied. Every deleted clause is justified by the same retained binary core, so simultaneous deletion has no circular dependency. Variables occurring only in deleted clauses can receive arbitrary values when extending a model of the retained formula.
+\end{proof}
+
+The optional pass runs after the earlier recognized-family and reduction priorities, before arbitrary conditioning. It builds at most 64 reachability trees per residual, with no additional unit probes. A certificate stores shared path prefixes; each step names a retained original binary clause and an earlier proof node. Each removed clause names an endpoint. The independent checker verifies all reasons, endpoint membership and exact child normalization without repeating reachability search. An empty proposal is inconclusive: it does not certify that no redundancy exists. Four Lean lemmas establish edge and path soundness, clause entailment and batch model equivalence. They do not verify the Python graph search, serialized indices or scheduler.
+
+For $m$ clauses, $L$ literal occurrences, $v$ variables, $m_2$ binary clauses, $q\leq\min(64,2v)$ searched roots and $p$ retained proof nodes, discovery has the conditional word-cost bound
+\[
+ O\!\left(m+L+q(v+m_2)+\sum_{|C|>2}|C|^2+p+|D|\right).
+\]
+The reachability tables use $O(qv)$ entries. Checking costs $O(m+L+p+\sum_{C\in D}|C|)$, including reconstruction. These bounds assume ordinary hash-table and bounded-integer costs. Serialization and the number of acquired residuals remain separate obligations; polynomial preprocessing does not make unrestricted expansion polynomial.
+
+On the original 1,497 inputs, non-tiny structural coverage rises from 898/985 to 901/985: sources 1007, 1065, 1072 and 1363 gain closure, while source 1471 loses its bounded closure. All five are satisfiable, and every ordinary solver answer remains unchanged. The archived plans jointly cover 902/985 inputs, but an efficient combined policy is not implemented. In the lost case, one exact reduction changes a successful local candidate sequence from 21,26,1 to 21,26,13,16, dropping the old winning variable 1. The child-to-parent variable map is the identity there. Semantic equivalence therefore does not preserve this heuristic's bounded coverage.
+
+Full discovery increases from 81.47602 to 97.00720 seconds (19.06\%), total time from 122.46371 to 139.46329 seconds (13.88\%), and cold replay from 52.18170 to 59.56008 seconds. SQLite grows from 417,370,112 to 475,529,216 bytes, with 22,071 versus 25,578 pattern nodes. Six-case peak traced Python allocation grows from 20,286,044 to 22,804,740 bytes; it excludes native SQLite, process memory and full-corpus peak. The policy remains optional. Earlier archives and every gain and regression are preserved.
+
+The matched frontier diagnostic closes 63/106 instead of 60/106; an early direct-subsumption control remains at 60/106. Thus the three frontier gains require more than moving direct binary subsumption earlier. The separate 96 fresh controls close 75 under both policies, with discovery increasing from 1.78640 to 2.26810 seconds. These are single synthetic comparisons, with a second reversed-order frontier acquisition of the transitive policy; they establish no general speedup.
+
+Sharing proof nodes also needs measurement. Across the full acquired graph, 9,870 wide-clause deletions include 3,797 without a direct binary subset witness. Shared paths use 21,894 proof nodes instead of 25,359 independent root-and-path nodes. Yet the implemented JSON representation takes 334,245 bytes for positive certificates, versus 230,535 bytes for an explicit independent-path encoding. Fewer nodes therefore do not imply fewer bytes. This proof-only difference is small compared with growth of the complete archive. The separate profile of source 1445 still places reconstruction, propagation and normalization ahead of reachability. The next cost target is repeated preparation and retained intermediate state; further coverage should reuse proven plans across equivalent states and test literal elimination with explicit source transport, rather than assume that clause deletion preserves the old heuristic choices.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 
@@ -3694,6 +3724,19 @@ Heule, M., and van Maaren, H. (2009).
 March\_hi.
 In \emph{SAT 2009 competitive events booklet}, pp. 27--28.
 \url{https://www.cril.fr/SAT09/solvers/booklet.pdf}.
+
+
+\bibitem[Heule et~al.(2010)]{heule2010elimination}
+Heule, M., J\"arvisalo, M., and Biere, A. (2010).
+Clause elimination procedures for CNF formulas.
+In \emph{Logic for Programming, Artificial Intelligence, and Reasoning}.
+\url{https://www.cs.helsinki.fi/u/mjarvisa/papers/heule-jarvisalo-biere.lpar10.pdf}.
+
+\bibitem[Heule et~al.(2011)]{heule2011unhiding}
+Heule, M., J\"arvisalo, M., and Biere, A. (2011).
+Efficient CNF simplification based on binary implication graphs.
+In \emph{Theory and Applications of Satisfiability Testing}.
+\url{https://www.cs.helsinki.fi/u/mjarvisa/papers/heule-jarvisalo-biere.sat11.pdf}.
 
 \bibitem[Immerman(2010)]{immerman2010objections}
 Immerman, N. (2010).

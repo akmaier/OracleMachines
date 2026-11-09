@@ -12,7 +12,51 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: saved unit counts do not predict cheaper closure
+## Current investigation: binary paths broaden coverage but add acquisition state
+
+The [binary-path experiment](binary-paths.md) deletes wide clauses entailed by
+paths in retained original binary clauses. Checked transitive reasoning raises
+full non-tiny coverage **898/985 -> 901/985**: four gains, one bounded-search loss.
+All ordinary SAT answers agree. Extra-depth frontier closure rises **60/106 ->
+63/106**, including against an early direct-subsumption control. A fresh 96-case
+sample stays at 75 closures. This established simplification is optional; the
+retained default remains **898/985**.
+
+The full matched run charges discovery **81.47602 -> 97.00720 s (+19.06%)**, total
+**122.46371 -> 139.46329 s (+13.88%)**, archive **417,370,112 -> 475,529,216 bytes
+(+13.93%)**, and cold replay **52.18170 -> 59.56008 s**. A separate slow-source
+profile still leads with reconstruction, propagation and normalization. Shared
+proofs reduce node count but increase JSON bytes versus independent paths;
+even all 456,745 proposal bytes are small beside the 58,159,104-byte archive
+increase. Prioritize avoiding intermediate acquisition, not proof encoding alone.
+
+The next ranked gaps are:
+
+1. **Carry successful plans through equivalent-state changes.** Source 1471
+   isolates a concrete loss: the old successful split at variable 1 drops out of
+   a four-candidate child list after sound deletion. The earlier certificate is
+   retained; the two complete archives cover 902/985 inputs in union. Build a
+   source-bound, independently checked reuse path before acquiring another full
+   policy graph. That observed union is not an efficient combined algorithm.
+2. **Share preparation and avoid duplicate intermediate states.** The pass makes
+   3,555 positive reductions but acquires 3,507 additional pattern nodes overall.
+   Test whether retained-binary indexes and checked reduction plans can survive
+   normalization with explicit clause/name transport. Preserve verification,
+   invalidation and cold replay costs; no such shared layer exists yet.
+3. **Use the same relations to expose more structure.** Certified hidden-literal
+   elimination could shorten clauses that cannot be deleted. Test binary-free
+   states after conditioning and adversarial edits, with exact model semantics.
+   This is established preprocessing, not a new tractability claim; its useful
+   scheduling and full acquisition cost remain open here.
+
+All **461 Python tests** pass, and the Lean build/axiom audit passes at **4,148
+declarations / 1,988 theorem declarations**. Four new semantic lemmas prove edge,
+path, clause and batch soundness; Python refinement and uniform resource bounds
+remain separate. The [full evidence](../experiments/results/cnf-binary-paths-full/README.md)
+preserves every gain/loss, cold-checked archive, allocation diagnostic and profile.
+All 62 earlier manuscript proofs survive alongside the new proposition.
+
+## Previous investigation: saved unit counts do not predict cheaper closure
 
 The [checked probe-ranking experiment](probe-rank.md) preserves the entire old
 candidate set and changes only order. Two reversed-order frontier runs keep

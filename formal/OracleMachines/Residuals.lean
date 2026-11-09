@@ -1,5 +1,6 @@
 import OracleMachines.SAT
 import Mathlib.Data.Fintype.Card
+import Mathlib.Logic.Relation
 
 /-!
 # Exact conditioning and branching for residual reuse
@@ -638,5 +639,63 @@ theorem conditioning_pool_closure_invariant (before after : List Nat)
     have oldMember := (sameCandidates v).mpr member
     exact ⟨v, oldMember, (sameBranches v oldMember false).mpr low,
       (sameBranches v oldMember true).mpr high⟩
+
+
+/-- A directed implication justified by an actual retained binary clause.
+Unlike auxiliary Horn-renaming pairs, these clauses belong to the source. -/
+def SignedBinaryEdge (source : List (List (Nat × Bool))) (a b : Nat × Bool) : Prop :=
+  [(a.1, !a.2), b] ∈ source ∨ [b, (a.1, !a.2)] ∈ source
+
+theorem signed_binary_edge_sound (source : List (List (Nat × Bool)))
+    (a b : Nat × Bool) (v : Nat → Bool) (edge : SignedBinaryEdge source a b)
+    (model : ∀ c ∈ source, SignedClauseHolds c v) (start : v a.1 = a.2) :
+    v b.1 = b.2 := by
+  have normal : SignedClauseHolds [(a.1, !a.2), b] v := by
+    rcases edge with forward | backward
+    · exact model _ forward
+    · obtain ⟨lit, member, truth⟩ := model _ backward
+      refine ⟨lit, ?_, truth⟩
+      simpa [or_comm] using member
+  obtain ⟨lit, member, truth⟩ := normal
+  simp only [List.mem_cons, List.not_mem_nil, or_false] at member
+  rcases member with rfl | rfl
+  · have impossible : a.2 = !a.2 := start.symm.trans truth
+    exact False.elim ((Bool.eq_not_self a.2).mp impossible)
+  · exact truth
+
+theorem signed_binary_path_sound (source : List (List (Nat × Bool)))
+    (a b : Nat × Bool) (v : Nat → Bool)
+    (path : Relation.ReflTransGen (SignedBinaryEdge source) a b)
+    (model : ∀ c ∈ source, SignedClauseHolds c v) (start : v a.1 = a.2) :
+    v b.1 = b.2 := by
+  induction path with
+  | refl => exact start
+  | tail _ edge ih => exact signed_binary_edge_sound source _ _ v edge model ih
+
+/-- A retained-core path a -> b entails every clause containing not-a and b. -/
+theorem signed_binary_path_subsumes (core : List (List (Nat × Bool)))
+    (a b : Nat × Bool) (clause : List (Nat × Bool)) (v : Nat → Bool)
+    (path : Relation.ReflTransGen (SignedBinaryEdge core) a b)
+    (ends : (a.1, !a.2) ∈ clause ∧ b ∈ clause)
+    (model : ∀ c ∈ core, SignedClauseHolds c v) : SignedClauseHolds clause v := by
+  by_cases start : v a.1 = a.2
+  · exact ⟨b, ends.2, signed_binary_path_sound core a b v path model start⟩
+  · have opposite : v a.1 = !a.2 := by
+      exact Bool.eq_not_of_ne start
+    exact ⟨(a.1, !a.2), ends.1, opposite⟩
+
+/-- All removed clauses are justified on the retained core, so batch deletion
+has no circular dependency. Python clause IDs, DAG serialization and budgets are
+outside this semantic theorem. -/
+theorem signed_binary_path_batch_models (core removed : List (List (Nat × Bool)))
+    (witness : ∀ c ∈ removed, ∃ a b,
+      Relation.ReflTransGen (SignedBinaryEdge core) a b ∧
+        (a.1, !a.2) ∈ c ∧ b ∈ c) (v : Nat → Bool) :
+    (∀ c ∈ core ++ removed, SignedClauseHolds c v) ↔
+      (∀ c ∈ core, SignedClauseHolds c v) := by
+  apply entailed_signed_batch_models core removed
+  intro c member valuation model
+  obtain ⟨a, b, path, first, last⟩ := witness c member
+  exact signed_binary_path_subsumes core a b c valuation path ⟨first, last⟩ model
 
 end OracleMachines.SAT

@@ -266,6 +266,14 @@ portable successful plans are the next targets. Two Lean lemmas capture the
 local coverage condition; all **453 Python tests** pass. Original-source coverage
 remains **898/985**.
 
+The [binary-path extension](research/binary-paths.md) removes wide clauses entailed
+by retained binary reasons. Full structural coverage becomes **901/985** (four
+gains, one bounded-search loss), but discovery rises **19.06%** and fresh archive
+size **13.93%**. It remains optional. The lost case exposes the next reuse gap:
+a sound reduction displaces an earlier successful split from a capped candidate
+list. Both proof archives remain intact. All **461 Python tests** and the Lean
+build/axiom audit pass; four new semantic lemmas justify the deletion rule.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

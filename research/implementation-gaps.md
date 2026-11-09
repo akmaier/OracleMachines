@@ -4469,3 +4469,39 @@ orders, independently cold-checked, and preserved under warm replay. No policy
 promotion or original-source coverage gain follows. Next investigate bounded
 multi-variable interfaces or exposed binary relations, and portable successful
 plans/direct proof transport instead of another scalar ordering proxy.
+
+
+## 2026-11-09: retained binary paths, new closures and a scheduling counterexample
+
+Added optional `BinaryPathInventory` and an independent source-linked checker.
+Binary implication paths entail wider clauses; only those wide clauses are
+removed, preserving all reasons for simultaneous deletion. Reachability searches
+at most 64 roots per residual and stores shared proof prefixes. Cold checking
+validates edges, endpoints, normalized children and exact summaries without
+reachability rediscovery. The default `PolarityHornInventory` stays unchanged.
+
+The [full comparison](../experiments/results/cnf-binary-paths-full/README.md)
+raises structural coverage 898/985 -> 901/985, with four gains and one loss. All
+ordinary answers agree. Discovery rises 81.47602 -> 97.00720 s; total 122.46371 ->
+139.46329 s; SQLite 417,370,112 -> 475,529,216 bytes. The frontier gains three
+closures beyond the direct-only control, while 96 fresh cases gain none. Every
+archive, failed alternative, source and previous experiment remains preserved.
+
+`loss-alternatives.json` isolates source 1471: after equivalent deletion, an old
+successful variable-1 split disappears from a child's four-candidate list. The
+old closure-invariance theorem requires unchanged membership and therefore does
+not cover this change. Reusing the existing checked plan, instead of acquiring
+both policy graphs, is the next concrete gap. The archive union 902/985 is an
+observation, not an implemented efficient portfolio.
+
+The full graph stores fewer proof-prefix nodes than separate paths (21,894 vs
+25,359), but more positive JSON bytes (334,245 vs 230,535). Full-state acquisition
+and preparation dominate the remaining cost. Shared preparation needs explicit
+clause/name transport; hidden-literal elimination is another unimplemented
+coverage experiment. See [proof, costs and limitations](binary-paths.md).
+
+All 461 Python tests pass. Four new Lean lemmas prove retained binary edge/path
+soundness, clause entailment and batch equivalence. Full build/axiom audit passes
+at 4,148 declarations / 1,988 theorem declarations. All 62 previous manuscript
+proof blocks survive, with one added proposition. No unrestricted-SAT bound is
+claimed, and this higher-cost optional policy is not promoted.

@@ -1881,3 +1881,31 @@ bytes. Small traced allocations exclude native SQLite/RSS/full-corpus peak.
 Historical archives are retained; no storage is freed. Closure preservation
 under an unchanged candidate pool is not a runtime bound or a least-cost policy.
 The two new Lean lemmas capture the local logical premise, not machine costs.
+
+
+## 2026-11-09: retained binary reachability and repeated-state costs
+
+For m clauses, L literal occurrences, v variables, m2 binary clauses, q searched
+roots and p emitted proof nodes, the [binary-path pass](binary-paths.md) requires
+O(m+L+q(v+m2)+sum(width(C)^2)+p+|D|) word operations under ordinary hashing.
+The measured policy limits q to min(64,2v); transient predecessor tables retain
+O(qv) entries. Source-bound checking costs O(m+L+p+L_D), with L_D the literal
+count in deleted clauses. Binary reasons stay in the retained formula, making
+simultaneous deletions model-equivalent. Integer widths, normalization, all
+recursive acquisitions and serialization remain charged separately. The cap is
+local and proves no polynomial global acquisition bound.
+
+Full-corpus measured discovery rises 81.47602 -> 97.00720 seconds, total with
+ordinary solving 122.46371 -> 139.46329, cold replay 52.18170 -> 59.56008, and
+SQLite 417,370,112 -> 475,529,216 bytes. The six-case traced Python peak rises
+20,286,044 -> 22,804,740 bytes; native SQLite, RSS and whole-corpus peak are
+excluded. Coverage becomes 901/985 with one lost old closure, so the policy stays
+optional. A single matched run does not establish a stable speed ratio.
+
+Sharing 21,894 proof nodes instead of 25,359 independent path nodes increases
+positive JSON bytes from 230,535 to 334,245 in the documented encodings. All
+proposal payload is 456,745 bytes, much smaller than the 58,159,104-byte archive
+increase. The graph expands 22,071 -> 25,578 nodes. A separate source profile
+still leads with reconstruction, propagation and normalization; cumulative times
+overlap. The next cost target is reused preparation/checked plans and avoided
+intermediate states. Historical archives remain preserved, so no storage is freed.

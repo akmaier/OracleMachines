@@ -841,3 +841,27 @@ Two Lean lemmas prove membership preservation and local closure invariance under
 explicit child correspondence. All 453 Python tests pass, including old-row/cold
 preservation and exhaustive small model checks. The optional heuristic is not
 promoted; both complete execution orders and every earlier result are retained.
+
+
+## 2026-11-09: binary paths expose redundant wide clauses
+
+The [retained-binary experiment](binary-paths.md) turns original implication
+paths into checked wide-clause deletions, without deleting their binary reasons.
+It expands original non-tiny closure 898/985 -> 901/985, with gains at sources
+1007,1065,1072,1363 and one loss at 1471. The loss concerns bounded structural
+search, not SAT correctness: a sound deletion removes variable 1 from a local
+candidate pool even though its old plan closed. Both archives remain retained.
+Their union covers 902/985 known inputs, without an efficient combined policy.
+
+The extra-depth frontier closes 63/106 rather than 60/106, also against a direct
+binary-subsumption control; transitive reasoning contributes three gains. A new
+96-case sample stays at 75 closures. Discovery costs rise 19.06% and fresh archive
+bytes 13.93% on the full corpus, so this extension is not the default. Acyclic
+binary graphs dominate the unresolved states, limiting an SCC-only next step.
+
+Next transport successful plans through equivalent reductions, reuse preparation
+across those reductions, and test certified literal elimination using the same
+relations. Explicit source/name transport and invalidation are necessary. The
+rule is established SAT preprocessing; neither complete cheap classification nor
+uniform polynomial acquisition follows. All 461 Python tests and the Lean build
+and axiom audit pass. Four new lemmas prove the retained-path semantic rule.

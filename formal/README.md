@@ -1404,3 +1404,19 @@ acquisition costs or optimal order. See the [implementation and limits](../resea
 
 The complete Lean build and axiom audit pass: **4,140 namespace declarations /
 1,981 theorem declarations**, allowing only the existing standard Lean axioms.
+
+
+The retained-binary extension adds `signed_binary_edge_sound`,
+`signed_binary_path_sound`, `signed_binary_path_subsumes` and
+`signed_binary_path_batch_models` in `Residuals.lean`. The edge relation requires
+an actual retained binary clause in either order. A path from the complement of
+one clause literal to another entails that clause; a retained binary core can
+therefore justify simultaneous deletion of every such wider clause. The resulting
+formula has identical models on the original variables.
+
+These semantic lemmas do not verify Python source indices, shared-prefix encoding,
+normalization, persistence, candidate scheduling or resource bounds. The full
+build and axiom audit pass at **4,148 namespace declarations / 1,988 theorem
+declarations**. All **461 Python tests** pass. The [implementation account](../research/binary-paths.md)
+retains the extra coverage, higher acquisition/storage costs and a bounded-search
+counterexample to assuming logical simplification preserves heuristic coverage.

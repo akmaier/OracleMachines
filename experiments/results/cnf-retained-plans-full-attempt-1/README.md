@@ -1,0 +1,1 @@
+The first full comparison stopped at the historical profile assertion. In-memory tuples and JSON-loaded lists were compared with Python equality. The repaired comparison uses canonical JSON encoding, as earlier full-corpus runners do. No result from this failed run is used. The original runner and failure log are retained. Runtime and certificate code were unchanged.

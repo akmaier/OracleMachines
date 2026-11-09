@@ -300,6 +300,70 @@ theorem entailed_signed_batch_models (source additions : List (List (Nat × Bool
     · exact model c original
     · exact entailed c added v model
 
+/-- A local unit reason under a partial assignment. Its source clause is
+explicit; extending the source never removes that reason. -/
+def SignedUnitReason (source : List (List (Nat × Bool)))
+    (assigned : Nat → Option Bool) (lit : Nat × Bool) : Prop :=
+  assigned lit.1 = none ∧ ∃ clause ∈ source, lit ∈ clause ∧
+    ∀ other ∈ clause, other ≠ lit → assigned other.1 = some (!other.2)
+
+/-- A sequence of valid unit steps, including the empty sequence. -/
+inductive SignedUnitDerivation (source : List (List (Nat × Bool))) :
+    (Nat → Option Bool) → (Nat → Option Bool) → Prop where
+  | refl (assigned) : SignedUnitDerivation source assigned assigned
+  | step (assigned final) (lit : Nat × Bool) :
+      SignedUnitReason source assigned lit →
+      SignedUnitDerivation source (Function.update assigned lit.1 (some lit.2)) final →
+      SignedUnitDerivation source assigned final
+
+/-- Syntactic unit fixed point: each clause is satisfied or has at least two
+unassigned literal occurrences. Normalized CNFs have no repeated variables
+within a non-tautological clause. This property alone does not establish SAT. -/
+def SignedUnitFixedPoint (source : List (List (Nat × Bool)))
+    (assigned : Nat → Option Bool) : Prop :=
+  ∀ clause ∈ source,
+    (∃ lit ∈ clause, assigned lit.1 = some lit.2) ∨
+    2 ≤ (clause.filter (fun lit => (assigned lit.1).isNone)).length
+
+theorem signed_unit_reason_append (source additions : List (List (Nat × Bool)))
+    (assigned : Nat → Option Bool) (lit : Nat × Bool)
+    (reason : SignedUnitReason source assigned lit) :
+    SignedUnitReason (source ++ additions) assigned lit := by
+  obtain ⟨unset, clause, member, occurs, forced⟩ := reason
+  exact ⟨unset, clause, List.mem_append_left additions member, occurs, forced⟩
+
+theorem signed_unit_derivation_append (source additions : List (List (Nat × Bool)))
+    (initial final : Nat → Option Bool)
+    (derivation : SignedUnitDerivation source initial final) :
+    SignedUnitDerivation (source ++ additions) initial final := by
+  induction derivation with
+  | refl assigned => exact .refl assigned
+  | step assigned final lit reason _ ih =>
+    exact .step assigned final lit (signed_unit_reason_append source additions assigned lit reason) ih
+
+/-- Once the original fixed point is checked, only added clauses can invalidate
+it. Both directions hold; an active addition rules out this exact reuse. -/
+theorem signed_unit_fixed_point_append (source additions : List (List (Nat × Bool)))
+    (assigned : Nat → Option Bool) (closed : SignedUnitFixedPoint source assigned) :
+    SignedUnitFixedPoint (source ++ additions) assigned ↔ SignedUnitFixedPoint additions assigned := by
+  constructor
+  · intro combined clause member
+    exact combined clause (List.mem_append_right source member)
+  · intro delta clause member
+    rcases List.mem_append.mp member with old | added
+    · exact closed clause old
+    · exact delta clause added
+
+theorem checked_unit_closure_append (source additions : List (List (Nat × Bool)))
+    (initial final : Nat → Option Bool)
+    (derivation : SignedUnitDerivation source initial final)
+    (closed : SignedUnitFixedPoint source final)
+    (delta : SignedUnitFixedPoint additions final) :
+    SignedUnitDerivation (source ++ additions) initial final ∧
+      SignedUnitFixedPoint (source ++ additions) final := by
+  exact ⟨signed_unit_derivation_append source additions initial final derivation,
+    (signed_unit_fixed_point_append source additions final closed).mpr delta⟩
+
 def SignedOccurs (source : List (List (Nat × Bool))) (lit : Nat × Bool) : Prop :=
   ∃ clause ∈ source, lit ∈ clause
 

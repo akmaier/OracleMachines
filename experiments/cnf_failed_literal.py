@@ -18,12 +18,15 @@ def probe_choices(cnf, limit, counts):
     return sorted(frequencies, key=lambda v: (-frequencies[v], v))[:limit]
 
 
-def discover_probes(cnf, limit, counts):
+def discover_probes(cnf, limit, counts, *, _discover_attempt=None):
     attempts = []
     for variable in probe_choices(cnf, limit, counts):
         for value in (False, True):
-            branch = restrict(cnf, {variable: value}, counts)
-            certificate = discover_simplification(branch, counts, pure=False)
+            if _discover_attempt is None:
+                branch = restrict(cnf, {variable: value}, counts)
+                certificate = discover_simplification(branch, counts, pure=False)
+            else:
+                certificate = _discover_attempt(variable, value)
             attempts.append(dict(variable=variable, value=value, certificate=certificate))
             counts['probe_attempts'] += 1
             if certificate['conflict'] is not None:
@@ -36,11 +39,13 @@ def discover_probes(cnf, limit, counts):
     return dict(status='clear', attempts=attempts)
 
 
-def check_probes(cnf, result, limit, counts):
+def check_probes(cnf, result, limit, counts, *, _check_attempt=None):
     """Check deterministic attempt order and reasons without rerunning search.
 
 The reason sequence need not be the unique sequence emitted by propagation;
 each reason and every claimed no-conflict fixed point is independently checked.
+    The internal callback must establish the same obligation against this CNF;
+    it is never supplied by a persisted certificate.
 """
     forced = result.get('status') == 'forced'
     if (result.get('status') not in ('clear', 'forced') or
@@ -55,9 +60,12 @@ each reason and every claimed no-conflict fixed point is independently checked.
                 type(attempt['variable']) is not int or attempt['variable'] != variable or
                 type(attempt['value']) is not bool or attempt['value'] != value):
             raise ValueError('Invalid probe order or assumption')
-        branch = restrict(cnf, {variable: value}, counts)
         certificate = attempt['certificate']
-        check_simplification(branch, certificate, counts, pure=False)
+        if _check_attempt is None:
+            branch = restrict(cnf, {variable: value}, counts)
+            check_simplification(branch, certificate, counts, pure=False)
+        else:
+            _check_attempt(variable, value, certificate)
         conflict = certificate['conflict'] is not None
         if conflict != (forced and i == len(attempts)-1):
             raise ValueError('Invalid probe stop or forced-value claim')

@@ -3890,3 +3890,126 @@ unchanged, and **194 labels** are unique. One initial build placed outputs in th
 repository root; its six generated files were removed and the final build used
 the paper directory. Efficient arbitrary-CNF discovery, total closure size and
 lifetime acquisition/storage bounds remain open.
+
+
+## 9 November 2026, 08:39 UTC heartbeat: preserve local progress and expose signed cores
+
+Implemented optional `ActivityLearningInventory` in
+[cnf_learning_activity.py](../experiments/cnf_learning_activity.py). After complete
+original probing or full independent replay, it checks both original closures
+against the selected learned batch. It keeps old-ranked candidates unless both
+closures are inactive, then fills freed positions with active core variables in
+original order. Only additions may be truncated. The selected batch is shared
+within one checked invocation; no persistent activity mask, unchecked candidate
+list or cross-source cache is trusted. Original reasons, two phases, caps, earlier
+priorities and exact original-core child binding remain intact. Empty continuations
+are explicit checked clear results.
+
+A fixed source/batch retains any old local reduction: omitted unchanged pairs
+cannot supply a new forced/common/equivalence outcome; every informative old
+candidate fits the cap and keeps its order. Added probes can cause earlier-priority
+reductions, but still give local progress. This is not monotone whole-source
+coverage, a Python refinement proof, or an unrestricted-SAT bound. Selection costs
+expected O(U + p*q + p^2) beyond old-ranking reconstruction, with O(p + u_max)
+temporary state beyond the existing traces/batch. All other acquisition, checking,
+propagation, normalization and persistence remain charged.
+
+Eight new tests cover exhaustive small model fibers, forced/common/equivalence
+lifts, the local case 97, all **255** saved local transition controls, **seven**
+overflow controls, empty continuations, malformed traces/orders/children, signed
+edits, disabled learning and cold coexistence. All **388 tests pass in 39.515 s**.
+The unchanged Lean build/axiom audit passes at **4,126 declarations / 1,968
+theorem declarations**. Existing code, previous proofs and archives are preserved.
+
+The [full study](../experiments/results/cnf-activity/README.md) retains all 1,389
+prior queries and adds 36 at seed **20261109083909**: 24 fresh random 3-CNFs plus
+twelve growing/signed/edited queries, including repeats. Both policies close all
+512 tiny inputs and **806/913 non-tiny inputs**, with **no gains or losses**.
+They close 30/36 fresh queries, including 18/24 new random inputs. All original
+answers agree with the unchanged independent solver; all modes retain 19,557
+solver residuals. The four-source pilot restores 956 relative to core-only ranking,
+keeps 1024 closed, and leaves 977/1189 open. Source 977 now selects the formerly
+unselected local case-97 core; its open part shrinks **two leaves / 138 literals ->
+one leaf / 22 literals**. The whole source remains unresolved.
+
+Continuation attempts fall **31,741 -> 7,184 (77.37%)**, logical probes
+**127,741 -> 103,413**, and verified attempts **250,703 -> 223,315**. Reused
+continuation probes fall 26,407 -> 1,615; active probes rise 1,588 -> 1,810 and
+novel probes 3,746 -> 3,759. Active/new propagation therefore increases
+**5,334 -> 5,569**. Most avoided work concerns unchanged pairs, not fresh solving.
+Across discovery/checking there are 9,460 choice calls, 32,620 inactive / 5,100
+active original pairs, 28,424 omitted inactive positions, 9,402 retained old
+positions, 682 added positions, 3,088 empty continuations and 36 truncations.
+These are repeated-operation counts over different descendants.
+
+Single full-run baseline/activity time is **161.35645 / 134.22746 s**, discovery
+**116.82649 / 99.01207 s**, but the unchanged solver varies **44.42359 / 35.13847 s**.
+A new [balanced timing control](../experiments/results/cnf-activity/timing-control.json)
+uses ABBA BAAB order, four fresh-database trials per policy on sources
+858/875/907/970/1042/1061/956/977. Mean total time is **3.85140 / 3.88671 s** and
+mean discovery **3.64992 / 3.68110 s**: activity is slightly slower on the subset.
+All answers, summaries, counters, storage and database hashes repeat within each
+mode. This does not establish statistical significance or a full-corpus estimate,
+but prevents a speedup claim from the single full sample. Keep the policy optional
+and preserve the unsuccessful timing result.
+
+SQLite bytes are **376,205,312 / 375,824,384**, pattern nodes **22,549 / 22,581**,
+logical node bytes **148,631,944 / 147,670,431**, probing-field bytes
+**16,760,009 / 15,465,288**, and source bytes **5,405,961 / 5,422,677** across 1,393
+records. Cold replay grows **55.11608 / 57.63553 s**, warm lookup **0.27624 /
+0.34976 s**, and initialization **0.06187 / 0.28580 s**. Six-case Python peak is
+**20,265,108 / 19,996,930 bytes**, excluding native SQLite, RSS and the full-corpus
+peak. Operation timings include recognition, discovery, checking, serialization,
+persistence, independent solving and successful lifts; generation, truth tables,
+summary walks, initialization, compression, allocations and cold replay are outside.
+Primary runs, allocation diagnostics, profiling, balanced trials, tests and builds
+run sequentially. Exact preparation remains charged; no global cost guarantee follows.
+
+The [mechanism ledger](../experiments/results/cnf-activity/mechanisms.json) replays
+all **3,001** previously changed shared CNF/depth states: **421 learned -> learned**,
+**16 clear -> learned**, and 2,564 remain clear. All 255 prior gained/lost local
+controls reduce, and all informative old candidates survive the seven overflows.
+In the new full archives, shared states have eighteen clear-to-learned and no
+learned-to-clear transitions. These local reductions are not extra source closures.
+
+The new frontier has **107 open sources / 147 distinct leaves**: 61 inconclusive
+continuations (12,984 literals), 39 empty continuations (10,639), 46 clear passes
+without a batch (4,264), and one without initial binary candidates (283). Source
+**1194** costs **1.47590 s** discovery with 424 unresolved literal occurrences.
+Its separate profile records 5,763 restrictions, 4,657 unit checks and 2,221
+propagations. Probe-kind nodes occupy 96.289 MB including CNFs/keys/edges; probing
+fields alone occupy 15.465 MB. Simply widening initial candidate selection when
+binary ranking is empty addresses only one selected leaf here.
+
+**Next discovery target: checked signed-clause subsumption exposing tractable
+cores.** The [offline diagnostic](../experiments/results/cnf-activity/frontier-subsumption.json)
+changes 105 frontier leaves, removing 217 clauses / 666 literals through 672,003
+subset comparisons. Seven resulting cores are recognized as 2-CNF. Retained
+signed-subset witnesses, complete source-index coverage, normalization maps and
+classifier evidence are stored for every leaf. Removing a clause subsumed by a
+retained clause preserves all models; values of disappearing variables are free.
+For source 977, `(-7,3)` subsumes `(-7,-1,3)`, and `(-3,9)` subsumes `(-3,7,9)`.
+The remaining clauses are binary.
+
+Integrating these exact reductions could complete current selected plans for
+**977, 1044, 1053 and 1365**. Sources 907, 1179 and 1363 retain another unresolved
+leaf. These are **prospective completions**, not part of the measured 806/913.
+The existing ordinary solver has positive-clause subsumption; the inventory lacks
+this signed step. Subsumption is established simplification, not a novel arbitrary-
+SAT solution. Next implement the source-bound transformation, checked exact child
+binding and model lift, preserve earlier family priorities, and compare all relevant
+states, failed recognition, storage and cold replay. The selected-frontier comparison
+count is not a full-pipeline resource result. Add adversarial sign/order edits,
+invalid retained dependencies and small exhaustive model-equivalence checks.
+
+Three full, three pilot and three previous archives replay byte-identically, and
+warm replay inserts nothing. Both reports have **53 matching fingerprints**;
+archive and diagnostic/timing input/script hashes match. Verified implementation,
+measurements, negative timing controls and prospective witnesses are pushed in
+**e264fc3**. Manuscript Section **12.60**, Table **21**, README and persistent
+priority/discovery/resource records now distinguish local progress, unchanged
+source coverage, negative timing evidence and the next signed-core opportunity.
+The **114-page PDF** builds with no final-pass warnings or box errors. Pages
+**105--108** were visually inspected; all **54 earlier proof blocks** are unchanged
+and **196 labels** are unique. Uniform arbitrary-CNF discovery, compact closure
+and lifetime acquisition/storage bounds remain open.

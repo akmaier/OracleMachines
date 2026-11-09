@@ -12,7 +12,65 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current checkpoint: choosing informative continuation variables
+## Current checkpoint: preserve useful probes, expose hidden 2-CNF
+
+The [activity experiment](../experiments/results/cnf-activity/README.md) retains
+old informative continuation candidates, omits checked unchanged pairs, and
+fills freed positions with active original-core variables. It uses the same
+batch, two phases and four-variable cap. On **1,425 queries**, closure remains
+**806/913 non-tiny**, with no source gains or losses. Source 956 is recovered from
+the preceding core-order regression. Source 977's unresolved part shrinks
+**two leaves / 138 literals -> one leaf / 22 literals**, but remains open.
+
+Continuation attempts fall **31,741 -> 7,184 (77.37%)**. This mainly avoids
+unchanged pairs; active-plus-novel probes grow **5,334 -> 5,569**. All 421 old
+local reductions in 3,001 saved states survive; sixteen clear states gain one.
+All 255 earlier transition controls have a reduction. Local progress preservation
+is justified, but different reductions/descendants still prevent a global
+coverage monotonicity claim.
+
+**Do not claim a runtime speedup.** The single full-run times are **161.35645 ->
+134.22746 s**, but the unchanged solver varies **44.42359 -> 35.13847 s**. Balanced
+ABBA BAAB trials on eight queries give mean totals **3.85140 -> 3.88671 s**, slightly
+slower for activity. Cold replay also grows **55.11608 -> 57.63553 s**, and warm
+lookup **0.27624 -> 0.34976 s**. SQLite shrinks **376.205 -> 375.824 MB**, logical
+node payload **148.632 -> 147.670 MB**, and six-case Python peak **20.265 ->
+19.997 MB**. Keep all single-sample and memory-scope limitations; the policy stays
+optional.
+
+**Highest-priority discovery target: checked signed-clause subsumption exposing
+tractable cores.** The saved [frontier witnesses](../experiments/results/cnf-activity/frontier-subsumption.json)
+remove 217 redundant clauses / 666 literals from 105 of 147 selected open leaves,
+using 672,003 subset comparisons. Seven resulting cores are recognized as 2-CNF.
+For source 977, binary clauses `(-7,3)` and `(-3,9)` subsume its two remaining
+ternary clauses. The pattern crosses previous workload groups, and exposes an
+existing tractable family rather than adding another bounded probe rule.
+
+Integrating these exact reductions could complete the current selected plans of
+**977, 1044, 1053 and 1365**; sources 907, 1179 and 1363 would still have another
+open leaf. These are prospective completions, not executed source gains. Keep
+signed subset witnesses tied to retained source clauses and reconstruct exact
+child normalization/model lifts, including variables that disappear. Preserve
+earlier recognized-family priorities. Compare recognition/checking/acquisition,
+all unsuccessful searches, storage and cold replay on all relevant states, not
+only the 147 selected frontier leaves. Reuse the existing positive-subsumption
+ideas where appropriate, but its restricted solver path is not this signed
+inventory reduction. Subsumption itself is established, not a general SAT advance.
+
+Supporting targets follow the measured frontier: 61 inconclusive continuations
+(12,984 literals), 39 empty continuations (10,639), 46 clear passes without a batch
+(4,264), and one without initial binary candidates (283). Source 1194 costs
+1.47590 s discovery; restriction, unit checking and propagation dominate its
+separate profile. A larger initial-variable pool alone misses most of this gap.
+Share preparation or propagation only when matched total costs justify it.
+
+All **388 tests**, the unchanged Lean audit (**4,126 / 1,968 declarations/theorems**),
+three full, three pilot and three prior cold archive checks pass. Both new reports
+have 53 matching fingerprints; diagnostics and repeated timing trials retain
+input/script hashes. Efficient arbitrary-CNF discovery and global resource bounds
+remain open.
+
+## Previous checkpoint: core-only probe choices
 
 The [core-order experiment](../experiments/results/cnf-core-order/README.md)
 changes only the continuation ranking, using the existing learned batch and

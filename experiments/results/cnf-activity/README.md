@@ -153,7 +153,7 @@ selected plans of **977, 1044, 1053 and 1365** could become closed. Sources 907,
 1179 and 1363 would still have another unresolved selected leaf. These are
 **prospective** completions, not part of the measured 806/913 coverage. The new
 `frontier-subsumption.json` saves all 147 source bindings, witnesses, normalized
-cores, classifier outcomes and selected-plan links. The production decision
+cores, classifier outcomes and selected-plan links. The ordinary decision
 prototype already has a positive-clause subsumption path; the pattern inventory
 lacks this signed reduction. Subsumption is an established simplification, not a
 new general SAT algorithm. Full recognition, checking, acquisition, persistence

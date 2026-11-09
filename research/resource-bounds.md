@@ -1364,3 +1364,67 @@ costs 1.45407 s discovery; its instrumented profile records 5,307 restrictions,
 probing fields alone occupy 15,272,772 bytes. Propagation/state reuse remains a
 broader target than cheap choice extraction. Global efficient classification and
 lifetime memory bounds are still open.
+
+
+## Follow-up: activity-based continuation and measured limits (9 November)
+
+The [activity policy](../experiments/results/cnf-activity/README.md) retains old
+informative candidates, omits only pairs with two checked unchanged closures,
+and fills freed positions with active original-core variables. Original traces
+persist, and selected-batch/activity decisions are reconstructed after full source
+checking. A fixed source/batch retains any old local reduction; higher-priority
+new reductions and changed descendants prevent a whole-planner monotonicity claim.
+
+Beyond the still-present auxiliary ranking reconstruction, selection adds expected
+**O(U + p*q + p^2)** unit-cost work for total original unit-trace length U, probe
+cap p and binary batch size q. The quadratic term charges list membership while
+appending candidates. Temporary state is O(p + u_max), beyond existing traces and
+batch, for the largest unit trail u_max. Original acquisition, verification,
+normalization, active/new propagation and full-key persistence remain costs.
+This is not a bit-machine runtime refinement or unrestricted-SAT acquisition bound.
+
+On 1,425 queries, non-tiny closure stays **806/913** with no losses or gains.
+Continuation attempts fall **31,741 -> 7,184**, total logical probes **127,741 ->
+103,413**, and verified probes **250,703 -> 223,315**. Reused continuation probes
+fall **26,407 -> 1,615**, but active/new propagations rise **5,334 -> 5,569**. Thus
+most omitted work is repeated handling of unchanged closures, not avoided fresh
+solving. Across discovery/checking, 9,460 choice calls record 3,088 empty
+continuations, 28,424 omitted inactive positions, 682 added positions and 36
+truncations. These are repeated-operation counts over different descendants.
+
+Single full-run operation time falls **161.35645 -> 134.22746 s**, discovery
+**116.82649 -> 99.01207 s**, while the unchanged solver varies **44.42359 ->
+35.13847 s** between combined modes. Balanced ABBA BAAB trials on eight sources
+instead average **3.85140 -> 3.88671 s** total and **3.64992 -> 3.68110 s** discovery.
+Their answers, summaries, counters, storage and database hashes repeat exactly
+within each policy. These limited controls do not establish significance or a
+full-corpus estimate, and do not support a runtime speedup claim. Preserve the
+negative timing result with the deterministic work reduction.
+
+SQLite bytes are **376,205,312 -> 375,824,384**, pattern nodes **22,549 -> 22,581**,
+logical node bytes **148,631,944 -> 147,670,431**, probing fields **16,760,009 ->
+15,465,288**, and source bytes **5,405,961 -> 5,422,677** over 1,393 records. Cold
+replay grows **55.11608 -> 57.63553 s**, warm lookup **0.27624 -> 0.34976 s**, and
+separately measured initialization **0.06187 -> 0.28580 s**. Six-case traced Python
+peak falls **20,265,108 -> 19,996,930 bytes**, excluding native SQLite, RSS and
+full-corpus peak. Both modes retain 19,557 independent solver residuals; three
+full, three pilot and three prior archives replay byte-identically. Earlier
+results and proofs remain available.
+
+The selected unresolved literal occurrences fall **28,314 -> 28,170**. Source
+977 now uses the formerly unselected local case-97 core, leaving one leaf with
+22 literals rather than two leaves with 138. The frontier has 107 open sources
+and 147 distinct leaves: 61 inconclusive continuations (12,984 literals), 39 empty
+ones (10,639), 46 clear passes without a batch (4,264), and one without initial
+binary candidates (283). Source 1194 costs 1.47590 s discovery; its separate
+profile records 5,763 restrictions, 4,657 unit checks and 2,221 propagations.
+
+The next signed-subsumption diagnostic performs 672,003 subset comparisons on
+these 147 leaves. Retained-clause witnesses remove 217 clauses / 666 literals
+from 105 cores and expose seven 2-CNF cores. The existing selected plans of
+977/1044/1053/1365 could become closed after integration; these are prospective,
+not measured coverage. Recognition over all planner states, exact core mapping,
+model lifting, storage and cold replay still need charging. No deployment runtime
+or memory reduction follows from the selected-frontier count alone. General signed
+subsumption is established simplification; efficiently covering arbitrary CNF
+families remains open.

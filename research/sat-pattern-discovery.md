@@ -477,6 +477,58 @@ fingerprints and analyzer/report hashes match. The new choice policy's Python
 implementation and lifetime resource bounds are not formally refined. No new
 tractable category covering every CNF has been established.
 
+## Activity-guided continuation and a signed-core gap (9 November 2026)
+
+The [new policy](../experiments/results/cnf-activity/README.md) keeps old
+continuation candidates unless both original closures remain inactive under the
+checked selected batch. It fills freed positions with active core variables,
+truncating only additions. All original proofs and earlier priorities remain.
+A fixed source/batch cannot lose an old local reduction: omitted unchanged pairs
+cannot supply a new outcome; all informative old candidates fit the cap and remain
+ordered. An additional higher-priority reduction still gives local progress.
+This argument does not give monotone whole-source coverage or formally refine
+Python's implementation.
+
+The full 1,425-query run preserves **806/913 non-tiny closures** with no gains or
+losses. Source 956 is recovered relative to core-only ranking. Source 977 now
+selects the old local case-97 core; its open part falls 138 -> 22 literals and two
+leaves -> one. It remains unresolved. All 421 old learned reductions among 3,001
+saved states survive; sixteen clear states gain one. All 255 prior gained/lost
+local controls now reduce. The seven five-candidate controls truncate additions
+while retaining every informative old choice.
+
+Logical continuation attempts fall **31,741 -> 7,184**, but active/new propagation
+increases **5,334 -> 5,569**. Single full-run time falls **161.35645 -> 134.22746 s**,
+with substantial unchanged-solver timing variation. Balanced repeated eight-query
+trials instead average **3.85140 -> 3.88671 s**. No runtime speedup is established;
+the policy remains optional. Cold replay also grows, despite slightly lower stored
+bytes and traced memory. All costs, unchanged/failed paths and trials are retained.
+
+The next frontier is more informative than another ranking variation. It contains
+107 sources and 147 distinct leaves: 61 inconclusive continuations, 39 empty ones,
+46 clear passes without a learned batch and one without binary-ranked candidates.
+An offline signed-subsumption diagnostic changes 105 leaves, removes 217 clauses /
+666 literals, and exposes **seven 2-CNF cores**. Each removed clause has a retained
+signed subset; exact source indices, complete coverage, normalized cores and
+variable maps are saved. Original and reduced formulas have the same models on
+the original variable universe, with disappearing variables unconstrained.
+
+These witnesses could complete the current selected plans of **977, 1044, 1053
+and 1365**, while 907, 1179 and 1363 retain another open leaf. This is a conditional
+integration target, not four new measured source closures. The existing decision
+solver's positive-clause subsumption does not provide this general signed step
+in the pattern inventory. Next implement exact family exposure with source-bound
+witnesses, checked lifting/recomposition and persistence, retaining earlier family
+recognition. Charge discovery over all relevant states and cold replay; the
+672,003 subset comparisons on the selected frontier are not full-workload cost.
+Test signed/reordered/edited inputs and invalid retained-clause dependencies.
+
+All **388 tests**, the unchanged Lean audit (**4,126 / 1,968 declarations/theorems**),
+three full, three pilot and three previous cold checks pass. Both reports have 53
+matching fingerprints, and diagnostic/timing hashes are retained. The existing
+UP, model-lifting and semantic arguments remain distinct from an unproved global
+acquisition, closure-size or unrestricted-SAT efficiency guarantee.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

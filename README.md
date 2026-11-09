@@ -173,6 +173,15 @@ combines active core candidates with newly ranked variables: this union fits the
 four-variable cap in all 255 gained/lost local states, but can exceed it elsewhere.
 The failed ranking rule and its counterexamples remain preserved.
 
+The [activity-guided follow-up](experiments/results/cnf-activity/README.md)
+preserves **806/913** non-tiny closures and reduces continuation attempts
+**31,741 -> 7,184**. Balanced repeated timing controls do **not** establish a
+speedup. Source 977's open residual shrinks to 22 literals. Checked signed
+subsumption then exposes seven prospective 2-CNF leaves, which could complete
+four current source plans after integration. That is the next discovery target;
+those closures are not yet counted. All **388 tests**, the Lean audit and new/
+previous cold replay checks pass; failed timing claims and witnesses are preserved.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

@@ -713,6 +713,30 @@ exact implementation of restriction, not a new SAT category. Further coverage
 needs source-entailed relations or exact interaction decompositions; savings in
 existing acquisition should support those experiments rather than replace them.
 
+## 2026-11-09: cheaper independent checking and a concrete missing class
+
+The [one-pass reconstruction study](../experiments/results/cnf-single-pass-check/README.md)
+keeps all current recognition outcomes and archive bytes, with 6.60% less full
+discovery time and 5.62% less total time. Cold replay slightly regresses and
+six-case peak memory is unchanged. The support-cache alternative regresses and
+is preserved; no additional cache is selected. Tests and the prefix invariant
+support the independent direct checker without a Python/Lean refinement claim.
+
+The next-gap probe finds **35 of the 148 selected unresolved leaves** admit a
+consistent variable polarity change making every clause Horn. Positive flips are
+directly checked; negative implication paths refute only the auxiliary pair
+constraints. All 512 two-variable formulas agree with exhaustive flip enumeration.
+The 35 positives contain 852 literals, versus 33,651 across the frontier, so most
+remaining interaction is still unexplained. This is a known recognition reduction,
+not a newly discovered tractable class; the full study links its primary source.
+
+This gives the next concrete integration task: a source-bound, versioned polarity
+certificate and exact model transport, followed by ancestor recomposition and
+matched full acquisition/cold replay. No new root closure is claimed yet, and
+the existing inventory remains at 869/985 non-tiny closure with 116 source misses.
+Retain overlaps, negative class certificates and unresolved cases; do not interpret
+failure to rename as an UNSAT certificate for the original CNF.
+
 ## Following iterations
 
 First split the largest informative unresolved cells. Favor discoveries that

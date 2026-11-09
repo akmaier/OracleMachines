@@ -227,6 +227,15 @@ reuse on newly allocated/edited sources are preserved. All **425 tests** pass;
 independent simplification reconstruction is now the leading measured cost gap,
 and structural coverage remains unchanged.
 
+The [one-pass checking follow-up](experiments/results/cnf-single-pass-check/README.md)
+shares untouched clause tuples while independently reconstructing residuals in
+one pass. Full discovery improves **6.60%**, total **5.62%**; cold replay regresses
+**1.07%**, and measured peak memory is essentially unchanged. All **433 tests**
+pass, with identical archive bytes. The rejected clause-support caches and wide
+clause regressions are preserved. A separate checked probe identifies **35 of
+148 unresolved leaves** that become Horn after variable polarity changes; integrating
+these certificates and measuring root coverage is the next discovery priority.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

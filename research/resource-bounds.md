@@ -1749,3 +1749,46 @@ counters and archive hashes repeat. The reverse allocation repeats the roughly
 1.60 MB Python peak increase. These limited synthetic samples balance order but
 do not erase the initial regression, establish significance or justify universal
 speed claims. Both complete reports and the order-control hashes are preserved.
+
+## One-pass checker reconstruction: less copying without another cache
+
+The [independent reconstruction account](single-pass-checking.md) uses a prefix
+invariant to scan each clause once. It shares untouched immutable tuples and
+allocates a buffer only after the first false assigned occurrence. For A assignment
+entries, m clauses, V visited literals and K logical copied entries, the conditional
+word time is O(1+A+m+V+K), hence O(1+A+m+L) in the worst case. The asymptotic scan
+bound is unchanged. Prefix slicing/list construction and final tuple conversion
+add constant multiples of copied lengths, and partial buffers discarded after
+late satisfaction are charged. Big integer and dictionary costs remain explicit.
+
+Additional storage comprises O(m) output references, copied residual literals and
+at most one clause-width pending buffer. No new cross-call cache is retained.
+Mutable clauses copy; untouched exact tuples share existing storage. This is not
+a bound on the retained source, proof graph, existing caches or archive growth.
+
+Full discovery falls 93.90373 -> 87.70857 s and total 137.78680 -> 130.04664 s,
+but cold replay increases 57.32273 -> 57.93447 s. Six-case Python peak is essentially
+unchanged at 24,072,934 -> 24,073,162 bytes. Twelve-query balanced means improve
+4.60% total / 5.23% discovery; all regressions and timing spread remain. SQLite
+stays byte-identical at 437,620,736 bytes. This is no total-memory reduction claim.
+
+The candidate visits 50,055,987 literals, shares 15,777,372 clauses containing
+44,643,882 literal occurrences, and copies 1,609,390 logical buffer/output entries.
+The baseline charges 51,574,914 input literals without separating its generator
+passes; these counters are not interchangeable CPU work units. All counters outside
+reconstruction agree. There are 840 reference-scan literal charges outside the
+candidate's scope. Every unit reason, conflict and pure-round check remains.
+
+Forty-eight controls retain five one-pass regressions. Width-32, 256-clause dense
+removals increase time 21.06652 -> 22.12113 ms and peak 157,160 -> 162,504 bytes;
+sparse reuse reduces peak 160,936 -> 7,296 bytes. Thus local copying savings do not
+imply a global or pointwise improvement. The rejected support cache grows both
+pilot discovery times despite repeated clause objects; its state/preparation cost
+outweighs its savings there. It remains preserved, not selected.
+
+An independent next-gap probe identifies 35 renamable-Horn leaves among the 148
+selected unresolved leaves, covering only 852 of 33,651 literals. Pair-constraint
+construction costs O(m+L+sum_C binomial(|C|,2)). Positive
+polarity certificates and negative auxiliary refutations are checked, but this
+probe has no integrated root, persistence or acquisition bound. It supplies a
+concrete next discovery target without changing the current coverage claim.

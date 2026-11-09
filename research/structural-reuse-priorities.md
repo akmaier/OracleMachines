@@ -12,7 +12,59 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current checkpoint: source-index reuse exposes checker reconstruction
+## Current checkpoint: one-pass checking; 35 polarity-renaming opportunities
+
+The [one-pass checker study](../experiments/results/cnf-single-pass-check/README.md)
+reduces full discovery **93.90373 -> 87.70857 s (6.60%)** and total **137.78680 ->
+130.04664 s (5.62%)**, with identical 1,497 answers, profiles and archive bytes.
+It shares 44,643,882 untouched literal occurrences without another retained cache.
+The initial clause-support cache regressed in both pilots and remains unselected.
+Cold replay regresses **57.32273 -> 57.93447 s**; six-case Python peak is essentially
+unchanged (**24,072,934 -> 24,073,162 bytes**). Twelve-query ABBA BAAB means support
+4.60% total / 5.23% discovery savings, with overlapping samples. Forty-eight
+controls retain five regressions, especially wide clauses with many removals.
+
+Integrated coverage remains **869/985 non-tiny**, with **116 sources / 148 leaves /
+33,651 literals** unresolved. A separate checked, read-only frontier probe now
+identifies **35 leaves (852 literals)** that become Horn after consistent variable
+flips. It checks positive renamings directly and negative auxiliary implication
+paths, with 32,018 pair constraints. This established class is absent from the
+current inventory. These are leaf opportunities, not achieved source closures.
+
+The next ranked gaps are:
+
+1. **Integrate checked polarity renaming before further cache tuning.** The 35
+   frontier certificates provide concrete broader-coverage evidence. Use a
+   versioned recognizer/terminal certificate, explicit model transport and exact
+   recomposition; test unlabelled signed variants, edits, exhaustive small formulas
+   and fresh mixtures. Compare full acquisition and cold replay. Auxiliary
+   pair-formula UNSAT excludes renamability, not SAT of the original formula.
+   The method is established: [Mannila and Mehlhorn (1985)](https://people.mpi-inf.mpg.de/~mehlhorn/ftp/RenamingHorn.pdf)
+   describes the pair-constraint characterization. Most unresolved literal work
+   lies outside these small positives; do not infer complete class coverage.
+2. **Normalization and residual reconstruction remain substantial.** The current
+   run's slowest unresolved source is 1446. In its separate profile, 1,063
+   reconstructions fall 0.37732 -> 0.29957 s cumulative, while normalization has
+   678 calls / 0.40226 s cumulative. The new helper remains largest named own time
+   at 0.20778 s. Measure identical normalization inputs and exact transport costs
+   before proposing reuse; do not skip canonical identities or checker bindings.
+3. **Keep the measured copying limits visible.** Wide affected clauses regress
+   in all three helper-control sizes. Mutable inputs still copy; partial buffers
+   may be discarded after late satisfaction. No new cache helps the selected
+   method, but the source/proof graph and 437,620,736-byte archive remain. The
+   conditional worst-case reconstruction bound stays O(1+A+m+L).
+4. **Remaining interactions and acquisition are still open.** The 35 positive
+   renamings account for only 852 of 33,651 frontier literals. Keep the other 113
+   selected leaves explicit and investigate exact decompositions/relations there
+   after integrating and measuring the recognized class. Closed leaves do not
+   by themselves establish closed roots or uniform polynomial expansion.
+
+All **433 tests** pass; full cold replay is byte-identical. All 58 earlier proof
+blocks survive, with one new reconstruction invariant; Lean is unchanged. The
+implementation checkpoint is **d0b8917**. The result, failed cache attempts,
+diagnostic, bounds and concrete next frontier certificates are all preserved.
+
+## Previous checkpoint: source-index reuse exposes checker reconstruction
 
 The [indexed-restriction study](../experiments/results/cnf-indexed-restriction/README.md)
 reuses validated immutable source indexes across assumptions, rebuilding affected

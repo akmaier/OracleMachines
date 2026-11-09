@@ -4343,3 +4343,49 @@ counters and archive hashes repeat. The reverse allocation repeats the roughly
 1.60 MB Python peak increase. These limited synthetic samples balance order but
 do not erase the initial regression, establish significance or justify universal
 speed claims. Both complete reports and the order-control hashes are preserved.
+
+
+## 2026-11-09: one-pass independent reconstruction and the next coverage target
+
+The [matched study](../experiments/results/cnf-single-pass-check/README.md) replaces
+repeated checker scans with a direct prefix-invariant reconstruction. It lazily
+copies affected clauses and shares untouched tuples without another retained cache.
+Unit reasons, conflict and fixed-point checks, pure rounds and source bindings
+remain independent of discovery. Default scan behavior and all previous evidence
+are preserved. The proposed clause-support cache regressed in both pilots; its
+code, exact snapshots and unsuccessful experiments remain available but unselected.
+
+On 1,497 inputs, discovery falls 93.90373 -> 87.70857 s (6.60%) and total
+137.78680 -> 130.04664 s (5.62%). Cold replay regresses 57.32273 -> 57.93447 s;
+warm replay also increases. Six-case Python peak is essentially unchanged at
+24,072,934 -> 24,073,162 bytes. All answers, profiles, identities and persistent
+bytes agree. ABBA BAAB subset means support 4.60% total / 5.23% discovery savings,
+with overlapping trials. Five of 48 helper controls regress, including wide
+clauses where every clause changes. No pointwise speed or total-memory win follows.
+
+All 433 tests pass. New tests cover 175,032 exhaustive reconstruction-policy
+combinations per candidate, full-checker policies, random edits, unusual inputs,
+forged certificates, independence from discovery, all saved frontier proofs and
+cold corruption rejection. Full cold audits replay 25,047 pattern nodes, 1,465
+source bindings and 21,838 solver residuals, preserving the existing 437,620,736-byte
+archive. The full report has 75 fingerprints; separate timing, profile, control
+and frontier diagnostics bind their scripts and inputs. Implementation checkpoint:
+`d0b8917`. All 58 preceding manuscript proof blocks remain, with one new invariant;
+Lean sources are unchanged and were not rebuilt.
+
+The current profile selects source 1446: reconstruction cumulative time falls
+0.37732 -> 0.29957 s, while normalization remains 0.40226 s cumulative. The
+reconstruction helper still has the largest named own time. Further implementation
+reuse must preserve checked input identities and charge preparation; the rejected
+cache shows why a high hit count alone is insufficient.
+
+A separate read-only discovery probe identifies 35 of 148 selected unresolved
+leaves as Horn after consistent polarity changes (852 of 33,651 literals). It
+checks every positive flip and negative auxiliary implication refutation, and
+matches exhaustive flip enumeration on 512 tiny formulas. This is an established
+renamable-Horn test, not a novel class. Negative auxiliary results do not imply
+UNSAT of the original CNF. Current integrated coverage stays 869/985 non-tiny,
+with 116 source misses. The next priority is versioned recognition, checked
+polarity/model transport and exact ancestor recomposition, followed by matched
+acquisition, storage and cold replay. Most remaining literals lie outside these
+small positive leaves, so broader interaction discovery remains necessary.

@@ -1,0 +1,399 @@
+{
+  "report_sha256": "9b74fdcd353ceb5afc862e7315436d18ccfbbe8ef113059c58802ca3b1d31186",
+  "changes_sha256": "64b4e8383bbd25823c89783d883e4ad7ad05a6d530ea7c9130866ea72fbf06bd",
+  "script_sha256": "3849014ea88c8f0c281bd3d38303afff4e83ad508f995409a4b6adef35056fe8",
+  "diagnostic_seconds": 0.0032850001007318497,
+  "counts": {
+    "polarity_source_literal_visits": 3112,
+    "polarity_check_calls": 9,
+    "polarity_verified_path_edges": 53,
+    "polarity_verified_exclusions": 9,
+    "restriction_literal_visits": 2010,
+    "simplification_unit_check_literals": 17,
+    "simplification_reconstruction_literals": 1899,
+    "verified_simplifications": 6
+  },
+  "rows": [
+    {
+      "case": 4,
+      "change": "loss",
+      "variable": 6,
+      "outside_obstruction_support": true,
+      "branches": [
+        {
+          "value": false,
+          "outcome": "checked_original_trace",
+          "certificate": {
+            "conflict": null,
+            "pure_rounds": [],
+            "units": [
+              [
+                -10,
+                13
+              ],
+              [
+                5,
+                23
+              ]
+            ]
+          },
+          "fixed": [
+            [
+              5,
+              true
+            ],
+            [
+              6,
+              false
+            ],
+            [
+              10,
+              false
+            ]
+          ],
+          "directly_damaged_edges": [],
+          "closure_damaged_edges": [
+            [
+              "forward",
+              0
+            ],
+            [
+              "backward",
+              0
+            ],
+            [
+              "backward",
+              1
+            ]
+          ],
+          "fixed_obstruction_variables": [
+            5,
+            10
+          ]
+        },
+        {
+          "value": true,
+          "outcome": "checked_original_trace",
+          "certificate": {
+            "conflict": null,
+            "pure_rounds": [],
+            "units": [
+              [
+                -7,
+                15
+              ],
+              [
+                1,
+                16
+              ],
+              [
+                8,
+                21
+              ]
+            ]
+          },
+          "fixed": [
+            [
+              1,
+              true
+            ],
+            [
+              6,
+              true
+            ],
+            [
+              7,
+              false
+            ],
+            [
+              8,
+              true
+            ]
+          ],
+          "directly_damaged_edges": [],
+          "closure_damaged_edges": [
+            [
+              "forward",
+              0
+            ],
+            [
+              "forward",
+              1
+            ],
+            [
+              "backward",
+              0
+            ],
+            [
+              "backward",
+              1
+            ]
+          ],
+          "fixed_obstruction_variables": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "case": 12,
+      "change": "gain",
+      "variable": 7,
+      "outside_obstruction_support": false,
+      "branches": [
+        {
+          "value": false,
+          "outcome": "not_preprobed"
+        },
+        {
+          "value": true,
+          "outcome": "not_preprobed"
+        }
+      ]
+    },
+    {
+      "case": 17,
+      "change": "loss",
+      "variable": 33,
+      "outside_obstruction_support": true,
+      "branches": [
+        {
+          "value": false,
+          "outcome": "checked_original_trace",
+          "certificate": {
+            "conflict": null,
+            "pure_rounds": [],
+            "units": [
+              [
+                -31,
+                48
+              ],
+              [
+                -34,
+                37
+              ]
+            ]
+          },
+          "fixed": [
+            [
+              31,
+              false
+            ],
+            [
+              33,
+              false
+            ],
+            [
+              34,
+              false
+            ]
+          ],
+          "directly_damaged_edges": [],
+          "closure_damaged_edges": [],
+          "fixed_obstruction_variables": []
+        },
+        {
+          "value": true,
+          "outcome": "checked_original_trace",
+          "certificate": {
+            "conflict": null,
+            "pure_rounds": [],
+            "units": [
+              [
+                -22,
+                38
+              ],
+              [
+                13,
+                42
+              ]
+            ]
+          },
+          "fixed": [
+            [
+              13,
+              true
+            ],
+            [
+              22,
+              false
+            ],
+            [
+              33,
+              true
+            ]
+          ],
+          "directly_damaged_edges": [],
+          "closure_damaged_edges": [],
+          "fixed_obstruction_variables": []
+        }
+      ]
+    },
+    {
+      "case": 22,
+      "change": "gain",
+      "variable": 1,
+      "outside_obstruction_support": false,
+      "branches": [
+        {
+          "value": false,
+          "outcome": "not_preprobed"
+        },
+        {
+          "value": true,
+          "outcome": "not_preprobed"
+        }
+      ]
+    },
+    {
+      "case": 26,
+      "change": "loss",
+      "variable": 15,
+      "outside_obstruction_support": false,
+      "branches": [
+        {
+          "value": false,
+          "outcome": "not_preprobed"
+        },
+        {
+          "value": true,
+          "outcome": "not_preprobed"
+        }
+      ]
+    },
+    {
+      "case": 50,
+      "change": "loss",
+      "variable": 22,
+      "outside_obstruction_support": true,
+      "branches": [
+        {
+          "value": false,
+          "outcome": "checked_original_trace",
+          "certificate": {
+            "conflict": null,
+            "pure_rounds": [],
+            "units": [
+              [
+                -35,
+                41
+              ],
+              [
+                28,
+                158
+              ]
+            ]
+          },
+          "fixed": [
+            [
+              22,
+              false
+            ],
+            [
+              28,
+              true
+            ],
+            [
+              35,
+              false
+            ]
+          ],
+          "directly_damaged_edges": [],
+          "closure_damaged_edges": [],
+          "fixed_obstruction_variables": []
+        },
+        {
+          "value": true,
+          "outcome": "checked_original_trace",
+          "certificate": {
+            "conflict": null,
+            "pure_rounds": [],
+            "units": [
+              [
+                -7,
+                87
+              ],
+              [
+                -45,
+                3
+              ]
+            ]
+          },
+          "fixed": [
+            [
+              7,
+              false
+            ],
+            [
+              22,
+              true
+            ],
+            [
+              45,
+              false
+            ]
+          ],
+          "directly_damaged_edges": [],
+          "closure_damaged_edges": [],
+          "fixed_obstruction_variables": []
+        }
+      ]
+    },
+    {
+      "case": 72,
+      "change": "gain",
+      "variable": 35,
+      "outside_obstruction_support": false,
+      "branches": [
+        {
+          "value": false,
+          "outcome": "not_preprobed"
+        },
+        {
+          "value": true,
+          "outcome": "not_preprobed"
+        }
+      ]
+    },
+    {
+      "case": 75,
+      "change": "loss",
+      "variable": 23,
+      "outside_obstruction_support": true,
+      "branches": [
+        {
+          "value": false,
+          "outcome": "not_preprobed"
+        },
+        {
+          "value": true,
+          "outcome": "not_preprobed"
+        }
+      ]
+    },
+    {
+      "case": 100,
+      "change": "loss",
+      "variable": 32,
+      "outside_obstruction_support": true,
+      "branches": [
+        {
+          "value": false,
+          "outcome": "not_preprobed"
+        },
+        {
+          "value": true,
+          "outcome": "not_preprobed"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Only already-persisted original-pass probes are reused; no new propagation/search/discovery",
+    "Every reused unit certificate is independently checked against its restricted original source, retaining parent variable names",
+    "Missing traces are unmeasured, not evidence of no influence; learned-continuation traces are not substituted silently",
+    "Damaging this saved path does not establish renamability or structural closure; other obstructions may survive",
+    "This diagnostic changes no conditioning choices and establishes no coverage or runtime improvement",
+    "Timing excludes loading/decompression/database indexing and result serialization"
+  ]
+}

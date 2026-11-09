@@ -616,9 +616,13 @@ class ResidualSolver:
         if model is not None and not holds(cnf, model):
             raise ValueError("Reconstructed source model failed")
         self.counts["source_witness_literal_payload"] += sum(map(len, cnf)) if model is not None else 0
-        rows, payload = self.db.execute(
-            "SELECT count(*), coalesce(sum(length(payload)+length(id)),0) FROM cnf_residual_v1").fetchone()
+        rows, payload = self.archive_storage()
         elapsed = time.perf_counter() - started
         return {"answer": model is not None, "model": model, "root": key,
                 "metrics": dict(self.counts), "seconds": elapsed,
                 "archive_nodes": rows, "archive_payload_bytes": payload}
+
+    def archive_storage(self):
+        """Historical SQL length units; generated JSON and keys are ASCII."""
+        return self.db.execute(
+            "SELECT count(*), coalesce(sum(length(payload)+length(id)),0) FROM cnf_residual_v1").fetchone()

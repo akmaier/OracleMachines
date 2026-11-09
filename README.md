@@ -274,6 +274,14 @@ a sound reduction displaces an earlier successful split from a capped candidate
 list. Both proof archives remain intact. All **461 Python tests** and the Lean
 build/axiom audit pass; four new semantic lemmas justify the deletion rule.
 
+The [retained-plan follow-up](research/retained-plans.md) references old closed
+graphs before new acquisition. With the same prepared archive, coverage reaches
+**902/985** without lost closures, discovery falls **16.65%**, and added storage
+falls **37.36%**. Six-case peak Python allocation rises **19.68%**; fresh-input
+coverage is unchanged and slightly slower, so the method remains optional.
+All **469 tests** and the unchanged Lean audit pass. The next measured cost is a
+full residual-storage census repeated after every solver query, including hits.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

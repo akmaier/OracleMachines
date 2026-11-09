@@ -57,7 +57,11 @@ def check_old_rows(seed,path):
 
 def audit(path,cls,options):
     before=sha(path);start=time.perf_counter();h=cls(path,**options)
-    old=h.prepared if isinstance(h,RetainedPlanInventory) else PolarityHornInventory(path,**options)
+    if isinstance(h,RetainedPlanInventory):old=h.prepared
+    else:
+        # One connection avoids a read cursor blocking the other view's
+        # no-op source INSERT OR IGNORE during byte-preserving replay.
+        old=PolarityHornInventory(**options);old.db.close();old.db=h.db
     configs={encode(h.config):h,encode(old.config):old};nodes=sources=0
     for key, in h.db.execute('SELECT id FROM cnf_patterns_v1'):
         configs[encode(json.loads(key)[1])]._load(key);nodes+=1
@@ -132,9 +136,12 @@ def main():
                 r=h.inspect(case['source']);assert not r['metrics'].get('inserted_nodes',0) and not r['metrics']['inserted_sources']
             warm=time.perf_counter()-start;assert storage==h.storage();h.close();solver.close()
             preserved=check_old_rows(seed,path);raw_hash=sha(path);dbbytes=path.stat().st_size
-            checked=audit(path,cls,options);dest=out/f'archive-{mode}.sqlite3.gz'
+            dest=out/f'archive-{mode}.sqlite3.gz'
             with path.open('rb') as src,dest.open('wb') as raw:
                 with gzip.GzipFile(fileobj=raw,mode='wb',mtime=0) as dst:shutil.copyfileobj(src,dst)
+            (out/f'acquisition-{mode}.json').write_text(json.dumps(dict(mode=mode,options=options,records=[r for r in records if r['mode']==mode],database_sha256=raw_hash,old_rows_preserved=preserved),separators=(',',':'))+'\n')
+            print(mode,'acquired; cold audit starts',flush=True)
+            checked=audit(path,cls,options)
             archive=dict(mode=mode,path=str(dest),database_bytes=dbbytes,database_sha256=raw_hash,
                 seed_bytes=seed_bytes,added_database_bytes=dbbytes-seed_bytes,storage=storage,
                 added_storage={k:storage[k]-initial[k] for k in storage},initial_storage=initial,
@@ -148,7 +155,7 @@ def main():
             print(mode,'audited',flush=True)
     paired={(r['mode'],r['case']):r for r in records};summary=[]
     for i in range(len(cases)):
-        a,b=(paired[m,i] for m in MODES);assert a['answer']==b['answer'] and a['discovery']['profile']==b['discovery']['profile']
+        a,b=(paired[m,i] for m in MODES);assert a['answer']==b['answer'] and encode(a['discovery']['profile'])==encode(b['discovery']['profile'])
         if args.suite=='empty':assert a['discovery']['summary']==b['discovery']['summary']
     for mode in modes:
         rows=[r for r in records if r['mode']==mode]
@@ -177,7 +184,8 @@ def main():
          'Single synthetic comparison per suite, not a significance estimate or uniform SAT bound'])
     (out/'report.json').write_text(json.dumps(report,separators=(',',':'))+'\n')
     (out/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
-    for mode in modes:(out/f'checkpoint-{mode}.json').unlink()
+    for mode in modes:
+        (out/f'checkpoint-{mode}.json').unlink();(out/f'acquisition-{mode}.json').unlink()
     print(json.dumps([{k:s[k] for k in ('mode','closed','non_tiny_closed','discovery_seconds','total_seconds','gains','losses')} for s in summary]),flush=True)
 
 

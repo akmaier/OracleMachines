@@ -865,3 +865,27 @@ relations. Explicit source/name transport and invalidation are necessary. The
 rule is established SAT preprocessing; neither complete cheap classification nor
 uniform polynomial acquisition follows. All 461 Python tests and the Lean build
 and axiom audit pass. Four new lemmas prove the retained-path semantic rule.
+
+
+## 2026-11-09: preserve a closure independently of the new scheduler
+
+The [exact-plan reference](retained-plans.md) turns the previous archive union
+into an integrated prepared-history policy. The earlier closed plan is verified
+under its own configuration and referenced at the same normalized CNF and depth.
+The new scheduler need not rediscover its successful variable choices. Full
+closure rises 901/985 -> 902/985, recovering source 1471 without losses against
+either earlier policy. Preparation remains an explicit prerequisite.
+
+This expands available certified coverage, not the list of recognized SAT
+families. The 96 fresh depth-two inputs still close 88; their 20 internal
+references are all family leaves and give no acquisition-node saving. Discovery
+regresses 3.46% there. Full prepared-history discovery improves 16.65% and added
+storage 37.36%, while sampled Python peak grows 19.68%. General equivalent-core
+transport and upgrades after later preparation remain open. The optional run
+leaves 83 original sources, 99 selected leaves and 31,203 literals uncovered.
+
+Next distinguish references that avoid nontrivial descendant acquisition from
+cheap family matches, and investigate checked literal elimination or interfaces
+on genuinely new cores. The newly identified repeated storage census is a large
+metadata cost to remove, but does not itself broaden structural coverage. All
+469 tests pass; the existing Lean audit passes, with no new Python refinement.

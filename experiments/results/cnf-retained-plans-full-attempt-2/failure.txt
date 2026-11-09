@@ -1,0 +1,27 @@
+reacquire case 0
+reacquire case 200
+reacquire case 400
+reacquire case 600
+reacquire case 800
+reacquire case 1000
+reacquire case 1200
+reacquire case 1400
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_retained_plans.py", line 184, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_retained_plans.py", line 135, in main
+    checked=audit(path,cls,options);dest=out/f'archive-{mode}.sqlite3.gz'
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_retained_plans.py", line 66, in audit
+    saved=json.loads(payload);reader=configs[encode(saved['config'])];r=reader.inspect(saved['source'])
+                                                                        ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_single_pass_inventory.py", line 10, in inspect
+    return super().inspect(source)
+           ~~~~~~~~~~~~~~~^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_indexed_restriction_inventory.py", line 17, in inspect
+    return super().inspect(source)
+           ~~~~~~~~~~~~~~~^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_pattern_inventory.py", line 302, in inspect
+    with self.db:
+         ^^^^^^^
+sqlite3.OperationalError: database is locked

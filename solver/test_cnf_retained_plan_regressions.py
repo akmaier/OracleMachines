@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 import random
+import tempfile
 import unittest
 from unittest.mock import patch
 
@@ -11,6 +12,19 @@ from solver.test_cnf_pattern_inventory import assignments
 
 
 class RetainedPlanRegressionTests(unittest.TestCase):
+    def test_mixed_policy_cold_audit_uses_one_connection(self):
+        from experiments.compare_cnf_retained_plans import audit
+        from experiments.cnf_polarity_horn import PolarityHornInventory
+        from experiments.cnf_residual_dag import ResidualSolver
+        for cls in (BinaryPathInventory,RetainedPlanInventory):
+            with tempfile.TemporaryDirectory() as tmp:
+                path=Path(tmp)/'history.db';old=PolarityHornInventory(path,max_depth=1)
+                old.inspect([(-1,2)]);old.close();h=cls(path,max_depth=1)
+                h.inspect([(-1,2)]);h.inspect([(1,2)]);h.close()
+                solver=ResidualSolver(path);solver.solve([(-1,2)]);solver.close()
+                result=audit(path,cls,dict(max_depth=1))
+                self.assertTrue(result['bytes_unchanged']);self.assertEqual(result['sources'],3)
+
     def test_lost_variable_one_plan_is_reused_without_new_choices(self):
         data=json.loads(Path('experiments/results/cnf-binary-paths-full/loss-alternatives.json').read_text())
         fixture=next(r for r in data['shared_reductions']

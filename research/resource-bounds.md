@@ -1909,3 +1909,35 @@ increase. The graph expands 22,071 -> 25,578 nodes. A separate source profile
 still leads with reconstruction, propagation and normalization; cumulative times
 overlap. The next cost target is reused preparation/checked plans and avoided
 intermediate states. Historical archives remain preserved, so no storage is freed.
+
+
+## 2026-11-09: graph references save archive growth, not all resident memory
+
+The [retained-plan rule](retained-plans.md) looks up an exact normalized CNF,
+remaining depth and fixed old policy. Charge full source/key construction and
+comparison, SQLite lookup, hint decoding and first-use checking of every newly
+loaded old dependency. The original certificate checker includes failed
+alternatives. Cached checks can be reused thereafter, but wrappers still copy
+source/profile/reference data. Old preparation and storage remain part of the
+lifetime cost; a small reference does not bound its dependency graph's check cost.
+
+On the common 417,370,112-byte prefix, discovery falls 98.33619 -> 81.96656 s and
+combined archive 755,658,752 -> 629,276,672 bytes. Added state falls 25,578 ->
+13,560 nodes and 338,288,640 -> 211,906,560 bytes. First-use reuse still checks
+13,315 old nodes in a separate cache. Six-case peak Python allocation increases
+20,124,942 -> 24,084,738 bytes. The 2,127 wrappers occupy 14,169,766 logical
+key-plus-payload bytes, including 3,698,166 reference-key bytes. Cold/warm replay
+and native-memory exclusions remain explicit in the report.
+
+A separate 12-repeat diagnostic measures the exact full-storage aggregate that
+`ResidualSolver.solve` executes after every query. Its mean is 0.0571391 seconds
+for 21,838 rows / 65,665,771 payload units. At 1,497 queries, the product is about
+85.54 seconds, only an estimate of magnitude rather than exact attribution.
+This metadata scan adds history-size work even to a cached decision. Incremental
+statistics or reporting outside the query path could remove it; initial census,
+updates, invalidation and audit cost must still be charged and checked.
+
+The fresh control has 20 old-family references but saves no pattern nodes; both
+add 1,988 and close 88/96. Lookup/storage overhead therefore worsens costs there.
+References are a conditional reuse mechanism, not a general efficient expansion
+or a guarantee for arbitrary SAT. No old archive is deleted to obtain a saving.

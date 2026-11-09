@@ -12,7 +12,60 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: binary paths broaden coverage but add acquisition state
+## Current investigation: reuse closed plans; expose metadata and cache costs
+
+The [retained-plan reference](retained-plans.md) reuses an independently checked
+old graph before acquiring another graph for the exact same CNF and depth. On a
+common 417,370,112-byte prepared prefix, non-tiny closure improves **901/985 ->
+902/985**, recovering source 1471 with no losses. Discovery drops **98.33619 ->
+81.96656 s (16.65%)**, total **190.63432 -> 177.05292 s (7.12%)**, added archive
+**338,288,640 -> 211,906,560 bytes (37.36%)**, and combined archive
+**755,658,752 -> 629,276,672 bytes (16.72%)**. Preparation remains charged as
+earlier history; this is not a from-scratch portfolio. The default stays unchanged.
+
+The tradeoffs are retained. Six-case Python peak rises **20,124,942 -> 24,084,738
+bytes (19.68%)**, and warm replay **0.27327 -> 0.41059 s**. The 96 fresh inputs
+at depth two keep 88 closures, with discovery **6.57530 -> 6.80303 s**. All 20
+fresh internal references point to family nodes; both modes add 1,988 nodes.
+The empty-history control also gains nothing and costs 4.76% more discovery.
+
+The next ranked targets are now:
+
+1. **Stop rescanning the complete residual archive for metadata on every query.**
+   `ResidualSolver.solve` runs a full `count/sum(length(...))` census even on a
+   cached decision. A separate 12-repeat diagnostic on 21,838 rows / 65,665,771
+   payload units averages **57.14 ms** per scan. Multiplying by 1,497 queries
+   suggests about 85.54 seconds of bookkeeping, not an exact attribution of the
+   92.18/94.98-second solver portions. Maintain exact statistics or collect them
+   outside the per-query decision path, with initial reconstruction, updates and
+   invalidation tested. This is the largest concrete avoidable runtime cost in
+   the current measured total; it is not SAT search or a complexity breakthrough.
+2. **Share verification work without retaining two large decoded graphs.** The
+   new run checks 13,315 old nodes and adds 13,560 new nodes. Old-policy validation
+   still checks every failed alternative, even when only a selected closed proof
+   is needed. Develop a source-bound soundness checker for reusable selected
+   proofs, keeping the full historical trace archived separately. No selective
+   checker, bounded shared cache or general proof transport is implemented yet.
+3. **Prefer references that avoid real descendant acquisition.** The full run
+   has 2,127 references, including 463 old OR and 1,116 probe nodes; the fresh
+   control's 20 references are all family leaves and avoid no node acquisition.
+   Measure an admission rule against these retained losses. An exact match alone
+   does not imply a cheaper expansion.
+4. **Expand beyond exact prepared sources.** There remain 83 uncovered original
+   inputs / 99 selected unresolved leaves / 31,203 literals in this optional
+   prepared run. Checked binary literal elimination and transport to genuinely
+   different equivalent cores remain candidates. Cached misses also need explicit
+   append-only upgrades when useful preparation arrives later. None follows from
+   the exact-reference rule, and fresh-input coverage has not improved.
+
+All **469 Python tests** and the unchanged Lean build/axiom audit pass (**4,148
+declarations / 1,988 theorems**). No new Lean refinement is claimed. All 63 earlier
+manuscript proof blocks are unchanged. The [full evidence](../experiments/results/cnf-retained-plans-full/README.md)
+preserves both complete archives, reference-kind counts, cold checks, allocation
+regressions and profile. Benchmark-only failures and frozen runner versions remain
+retained; completed acquisitions were recovered from verified checkpoints.
+
+## Previous investigation: binary paths broaden coverage but add acquisition state
 
 The [binary-path experiment](binary-paths.md) deletes wide clauses entailed by
 paths in retained original binary clauses. Checked transitive reasoning raises

@@ -4505,3 +4505,36 @@ soundness, clause entailment and batch equivalence. Full build/axiom audit passe
 at 4,148 declarations / 1,988 theorem declarations. All 62 previous manuscript
 proof blocks survive, with one added proposition. No unrestricted-SAT bound is
 claimed, and this higher-cost optional policy is not promoted.
+
+
+## 2026-11-09: exact references preserve the old plan and reduce reacquisition
+
+`RetainedPlanInventory` checks a positive old closure with the original verifier
+and records an exact source/depth/policy reference before new binary-path
+acquisition. It keeps the old graph and all failed alternatives unchanged. A
+reference does not require the new scheduler to choose the old winning variable.
+Corrupt source/policy/depth/profile bindings, false positive hints and missing
+proof dependencies reject reuse. An absent or non-closed hint only skips reuse.
+
+The [full prepared-history comparison](../experiments/results/cnf-retained-plans-full/README.md)
+recovers source 1471: 901/985 -> 902/985, with no losses. Discovery falls 98.33619
+-> 81.96656 s, total 190.63432 -> 177.05292, added SQLite 338,288,640 -> 211,906,560
+bytes, and combined SQLite 755,658,752 -> 629,276,672. Original acquisition and
+417,370,112 seed bytes remain liabilities. Cold replay falls 95.64397 -> 82.52345 s;
+warm replay regresses 0.27327 -> 0.41059. Six-case Python peak grows 19.68%.
+The fresh and empty-history controls keep 88/96 closures and regress in discovery.
+
+Benchmark-only tuple/list assertions and a mixed-connection audit lock were
+retained and fixed. Completed full acquisition and cold audits were recovered
+from preserved checkpoints after finalization failed; the original runner is
+frozen, all profiles/answers/hashes rechecked, and no acquisition timer estimated.
+Both full archives and every seed row remain preserved. Eight new tests cover
+proof reuse, the actual lost split, edits/corruption, small models and cold replay;
+all 469 tests pass. Lean sources are unchanged; the full build/axiom audit passes.
+
+The next large cost is a full metadata census in `ResidualSolver.solve` on every
+query: a separate scan averages 57.14 ms over 21,838 rows. Avoid or maintain that
+aggregate without changing decisions. Then reduce duplicated verifier state and
+checking of historical failed alternatives, reject unprofitable trivial references,
+and develop exact transport/upgrades beyond a fixed prepared prefix. The default
+policy is unchanged. See [mechanism and limits](retained-plans.md).

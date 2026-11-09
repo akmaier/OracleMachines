@@ -5,10 +5,40 @@ the entire current residual, including all couplings. Independent replay checks
 reasons, polarities and the exact child; erased assignments are retained for
 model lifting. These are standard SAT reductions, not new tractability results.
 """
+from contextlib import contextmanager
+from contextvars import ContextVar
+
 from experiments.cnf_affine_projection import ProjectionPatternInventory
 from experiments.cnf_pattern_inventory import encode
 from experiments.cnf_residual_dag import holds, restrict
 from experiments.cnf_ordered_propagation import propagate_for_discovery
+
+
+_reconstruction_engine = ContextVar('simplification_reconstruction_engine', default=None)
+
+
+@contextmanager
+def simplification_reconstruction(engine):
+    """Scope an independent reconstruction implementation, never discovery state."""
+    token = _reconstruction_engine.set(engine)
+    try:
+        yield
+    finally:
+        _reconstruction_engine.reset(token)
+
+
+def reconstruct_simplification_scan(cnf, assigned, counts, *, units):
+    """Reference direct reconstruction and unit-fixed-point check."""
+    current = []
+    for clause in cnf:
+        counts['simplification_reconstruction_literals'] += len(clause)
+        if any(abs(lit) in assigned and assigned[abs(lit)] == (lit > 0) for lit in clause):
+            continue
+        residual = tuple(lit for lit in clause if abs(lit) not in assigned)
+        if units and len(residual) <= 1:
+            raise ValueError('Incomplete unit fixed point')
+        current.append(residual)
+    return current
 
 
 def discover_simplification(cnf, counts, *, units=True, pure=True):
@@ -55,16 +85,9 @@ The final residual is reconstructed directly, without trusting restrict().
             raise ValueError('Invalid unit conflict')
         counts['simplification_unit_check_literals'] += len(cnf[conflict])
         return ((),), assigned
-    # A direct scan reconstructs restriction and checks discovery's fixed point.
-    current = []
-    for clause in cnf:
-        counts['simplification_reconstruction_literals'] += len(clause)
-        if any(abs(lit) in assigned and assigned[abs(lit)] == (lit > 0) for lit in clause):
-            continue
-        residual = tuple(lit for lit in clause if abs(lit) not in assigned)
-        if units and len(residual) <= 1:
-            raise ValueError('Incomplete unit fixed point')
-        current.append(residual)
+    # Reconstruct independently of restrict() and discovery's prepared state.
+    engine = _reconstruction_engine.get() or reconstruct_simplification_scan
+    current = engine(cnf, assigned, counts, units=units)
     for chosen in certificate['pure_rounds']:
         if not pure or not chosen or any(type(lit) is not int or not lit for lit in chosen):
             raise ValueError('Invalid pure round')

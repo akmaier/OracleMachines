@@ -1,0 +1,36 @@
+{
+  "script": "experiments.compare_cnf_indexed_restriction.main",
+  "mode_override": {
+    "baseline": "IndexedRestrictionInventory",
+    "candidate": "SharedClauseCheckInventory"
+  },
+  "options": {
+    "max_depth": 2,
+    "probe_limit": 4,
+    "learn_limit": 4
+  },
+  "argv": [
+    "--pilot",
+    "--output",
+    "experiments/results/cnf-shared-clause-pilot"
+  ],
+  "snapshots": {
+    "experiments/cnf_shared_clause_check.py": {
+      "snapshot": "experiments/results/cnf-shared-clause-pilot/cnf_shared_clause_check.py.snapshot",
+      "sha256": "454ece328c82e7049314b4ee62a49ff6e4bdd24880ea3557bfea158afe0b8b9f"
+    },
+    "experiments/cnf_shared_clause_inventory.py": {
+      "snapshot": "experiments/results/cnf-shared-clause-pilot/cnf_shared_clause_inventory.py.snapshot",
+      "sha256": "e05b98d3b1ad230e41f04fddca84f5f0355e87368badd034a6bf7990cfb976cc"
+    },
+    "experiments/cnf_simplification.py": {
+      "snapshot": "experiments/results/cnf-shared-clause-pilot/cnf_simplification.py.snapshot",
+      "sha256": "33aec96019ee429859867b581afa7732ea3094437a2900e4ba9dd482a1e6ea6c"
+    },
+    "experiments/compare_cnf_indexed_restriction.py": {
+      "snapshot": "experiments/results/cnf-shared-clause-pilot/compare_cnf_indexed_restriction.py.snapshot",
+      "sha256": "06f2405398aca3e5aecc72d015ddaa5b6a85d0efaeb1ec82c6965654d95cff42"
+    }
+  },
+  "limitation": "Exploratory mode override; original report fingerprints omit new candidate modules, which are snapshotted here"
+}

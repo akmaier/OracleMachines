@@ -1,0 +1,36 @@
+{
+  "script": "experiments.compare_cnf_indexed_restriction.main",
+  "mode_override": {
+    "baseline": "IndexedRestrictionInventory",
+    "candidate": "SinglePassCheckInventory"
+  },
+  "options": {
+    "max_depth": 2,
+    "probe_limit": 4,
+    "learn_limit": 4
+  },
+  "argv": [
+    "--pilot",
+    "--output",
+    "experiments/results/cnf-single-pass-preliminary"
+  ],
+  "snapshots": {
+    "experiments/cnf_single_pass_check.py": {
+      "snapshot": "experiments/results/cnf-single-pass-preliminary/cnf_single_pass_check.py.snapshot",
+      "sha256": "f959d9d6f4b75f1fa982c46512e86921c70d3cf88a424f5b59307def1fe7acd3"
+    },
+    "experiments/cnf_single_pass_inventory.py": {
+      "snapshot": "experiments/results/cnf-single-pass-preliminary/cnf_single_pass_inventory.py.snapshot",
+      "sha256": "a0dd7cecc81e24d9eb33ab2322ceefbac405b81c4500a0d0247d22ff4bd0496c"
+    },
+    "experiments/cnf_simplification.py": {
+      "snapshot": "experiments/results/cnf-single-pass-preliminary/cnf_simplification.py.snapshot",
+      "sha256": "33aec96019ee429859867b581afa7732ea3094437a2900e4ba9dd482a1e6ea6c"
+    },
+    "experiments/compare_cnf_indexed_restriction.py": {
+      "snapshot": "experiments/results/cnf-single-pass-preliminary/compare_cnf_indexed_restriction.py.snapshot",
+      "sha256": "06f2405398aca3e5aecc72d015ddaa5b6a85d0efaeb1ec82c6965654d95cff42"
+    }
+  },
+  "limitation": "Exploratory mode override; original report fingerprints omit new candidate modules, which are snapshotted here"
+}

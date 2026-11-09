@@ -117,4 +117,8 @@ The matched comparison is `experiments/compare_cnf_polarity_horn.py`. It preserv
 all 1,497 prior inputs and ordinary answers, computes selected ancestor coverage,
 checks every acquired polarity edge against independently solved endpoints,
 retains the complete new archive, and measures warm and cold reconstruction.
-Timing and source-level results are recorded separately after the run completes.
+The [completed full study](../experiments/results/cnf-polarity-horn/README.md)
+closes 29 additional sources (869/985 -> 898/985), with 87 sources and 106 selected
+leaves remaining. All 106 have checked negative class certificates. Single-run
+discovery falls 4.95%, fresh archive size 4.63%, while warm replay regresses. The
+full report preserves every counter, root gain, archive and limitation.

@@ -234,7 +234,18 @@ one pass. Full discovery improves **6.60%**, total **5.62%**; cold replay regres
 pass, with identical archive bytes. The rejected clause-support caches and wide
 clause regressions are preserved. A separate checked probe identifies **35 of
 148 unresolved leaves** that become Horn after variable polarity changes; integrating
-these certificates and measuring root coverage is the next discovery priority.
+these certificates and measuring root coverage was the next discovery priority.
+
+The [checked Horn-renaming integration](experiments/results/cnf-polarity-horn/README.md)
+now closes all 35 saved leaves and **29 additional complete inputs**: non-tiny
+structural coverage rises **869/985 -> 898/985**, with no lost closures. None of
+the new gains admits a whole-source renaming; exposed residuals compose through
+the existing decomposition. Single-run discovery falls **4.95%**, fresh SQLite
+**4.63%** and six-case Python peak **15.73%**; warm replay regresses. Earlier
+archives remain retained, so this is not a historical-storage reduction. All
+**441 tests** and the Lean axiom audit pass. The **87 remaining sources / 106
+leaves** now have checked renaming exclusions. Their auxiliary conflict paths
+provide the next concrete target for interface and conditioning discovery.
 
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.

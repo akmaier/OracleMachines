@@ -1792,3 +1792,45 @@ construction costs O(m+L+sum_C binomial(|C|,2)). Positive
 polarity certificates and negative auxiliary refutations are checked, but this
 probe has no integrated root, persistence or acquisition bound. It supplies a
 concrete next discovery target without changing the current coverage claim.
+
+## Terminal Horn renaming: coverage has acquisition and policy costs
+
+The [checked integration](polarity-horn.md) attempts a renaming only after earlier
+reductions and bounded conditioning fail. For a normalized residual with m clauses,
+L occurrences, v variables and Q=sum_C binomial(|C|,2), explicit pair discovery
+uses expected O(m+L+Q+v log(v+1)) word/comparison work and O(m+L+Q+v) temporary
+words. The 65,536-pair cap is checked before enumeration. Failure at the cap is
+unresolved; an auxiliary contradiction excludes renamability, not original SAT.
+Long integers, hashing/bit costs and the previous acquisition stack are additional.
+
+Positive certificates hold O(v) variable identifiers; discovery's negative
+certificates hold O(v) source-coordinate tuples, not the full pair formula.
+Positive replay costs O(m+L+v log(v+1)), before normalization/child recognition;
+negative replay costs O(m+L+p) for actual supplied path length p. Generated paths
+are simple, but the checker charges arbitrary submitted path lengths. These are
+per-attempt bounds, not a polynomial bound on the complete decomposition.
+
+Model transport complements a fixed coordinate set, an involution proved in Lean.
+The original source, prior failed attempts, transformed child and canonical keys
+remain stored. Policy version and cap are part of each key: old archives are
+preserved and new policy rows use separate identities. Reusing previous answers
+in the unchanged decision solver does not mean the new discovery archive is free.
+Full historical-plus-new retention differs from comparing two fresh policy
+archives; small mixed-policy coexistence tests do not measure full migration size.
+
+The [completed matched run](../experiments/results/cnf-polarity-horn/README.md)
+charges 3,233 terminal attempts and 1,183,603 pair constraints: 188 recognized,
+3,045 excluded, no cap stops. Positive flip certificates total 10,517 JSON bytes;
+negative paths 424,918 bytes. Full pattern nodes fall 25,047 -> 22,071, fresh
+SQLite 437,620,736 -> 417,370,112 bytes and six-case Python peak 24,073,154 ->
+20,286,004 bytes. Retaining both snapshots uses 854,990,848 raw bytes; the full
+mixed-policy migration archive has not been measured. Logical source-binding
+bytes actually increase 6,032,748 -> 6,375,558 due to new policy identities.
+
+Single-run discovery falls 84.99193 -> 80.78495 s, total 126.02211 -> 122.78419 s
+and cold replay 54.89246 -> 51.32492 s. Warm replay increases 0.26877 -> 0.29138 s.
+Ordinary solver time also increases 40.95733 -> 41.92352 s on its unchanged path.
+These synthetic observations do not establish significance or a universal win.
+The 87 remaining unresolved sources consume 57.02871 s (70.6%) of discovery.
+All 106 selected remaining leaves have class exclusions; raising the pair cap
+would not change those outcomes.

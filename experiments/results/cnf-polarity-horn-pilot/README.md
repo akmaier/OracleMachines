@@ -17,3 +17,8 @@ Reproduce from repository root:
 ```sh
 python3 experiments/compare_cnf_polarity_horn.py --pilot --output /tmp/polarity-pilot
 ```
+
+The exact comparison script used by the pilot is retained as
+`comparison-source.py.txt`, matching its recorded fingerprint. The implementation
+checkpoint adds deletion of redundant successful-run checkpoint JSON files;
+interrupted-run checkpoints remain. This changes no measured algorithm.

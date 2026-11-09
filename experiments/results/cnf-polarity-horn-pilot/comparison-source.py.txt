@@ -1,0 +1,172 @@
+#!/usr/bin/env python3
+"""Matched terminal Horn-renaming study; preserve the previous policy and archive."""
+import argparse
+from collections import Counter
+import gc
+import gzip
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import time
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from experiments.cnf_pattern_inventory import encode
+from experiments.cnf_polarity_horn import PolarityHornInventory
+from experiments.cnf_single_pass_inventory import SinglePassCheckInventory
+from experiments.cnf_residual_dag import ResidualSolver, holds
+from experiments.compare_cnf_implied_subsumption import root_lift as old_root_lift
+from experiments.compare_cnf_indexed_restriction import OPTIONS, cold_audit, cache_state, restriction_state
+from experiments.compare_cnf_pattern_inventory import memory_profile
+
+MODES = dict(baseline=SinglePassCheckInventory, polarity=PolarityHornInventory)
+UNARY = ('project', 'simplify', 'probe', 'subsumption', 'polarity')
+
+
+def digest(raw):return hashlib.sha256(raw).hexdigest()
+
+
+def selected_nodes(h, root):
+    seen = set(); stack = [root]
+    while stack:
+        key = stack.pop()
+        if key in seen:continue
+        seen.add(key); node = h._load(key)
+        yield key, node
+        if node['kind'] == 'and':stack.extend(e['key'] for e in node['edges'])
+        elif node['kind'] == 'or':stack.extend(e['key'] for e in node['alternatives'][node['selected']]['edges'])
+        elif node['kind'] in UNARY:stack.append(node['edge']['key'])
+
+
+def node_summary(h, root):
+    nodes = list(selected_nodes(h, root)); shapes = [n['profile']['shape'] for _, n in nodes if n['kind'] == 'unresolved']
+    return dict(selected_distinct_nodes=len(nodes), unresolved_distinct_leaves=len(shapes),
+                unresolved_distinct_literals=sum(s['literals'] for s in shapes), unresolved_shapes=shapes)
+
+
+def root_lift(h, discovery, model):
+    root = h._load(discovery['root']['key'])
+    if root['kind'] != 'polarity':return old_root_lift(h, discovery, model)
+    names = discovery['root']['names']; flips = set(root['polarity']['flipped'])
+    child = {i: (not model[names[v-1]]) if v in flips else model[names[v-1]]
+             for i, v in enumerate(root['edge']['names'], 1)}
+    assert holds(root['cnf'], h.lift(discovery['root']['key'], child))
+
+
+def polarity_lifts(h):
+    """Separate diagnostic: independently solve both ends of every new edge."""
+    started = time.perf_counter(); solver = ResidualSolver(); counts = Counter()
+    for key, payload in h.db.execute('SELECT id,payload FROM cnf_patterns_v1'):
+        node = json.loads(payload)
+        if node['kind'] != 'polarity':continue
+        node = h._load(key); child = h._load(node['edge']['key'])
+        a = solver.solve(node['cnf']); b = solver.solve(child['cnf'])
+        assert a['answer'] == b['answer']
+        counts['edges'] += 1; counts['sat' if b['answer'] else 'unsat'] += 1
+        if b['answer']:assert holds(node['cnf'], h.lift(key, b['model']))
+    solver.close()
+    return dict(seconds=time.perf_counter()-started, **counts)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, required=True); parser.add_argument('--pilot', action='store_true')
+    args = parser.parse_args(); out = args.output; out.mkdir(parents=True, exist_ok=False)
+    input_path = Path('experiments/results/cnf-single-pass-check/report.json'); prior = json.loads(input_path.read_text())
+    expected = {r['case']: r for r in prior['records'] if r['mode'] == 'single'}
+    indices = [858,875,907,970,1042,1194,1185,1467] if args.pilot else list(range(len(prior['cases'])))
+    cases = [dict(prior['cases'][i], original_case=i) for i in indices]
+    prior_archive = next(a for a in prior['archives'] if a['mode'] == 'single')
+    records = []; archives = []; frontiers = {}; edge_checks = []
+    for mode, cls in MODES.items():
+        gc.collect()
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp)/'history.db'; started = time.perf_counter(); solver = ResidualSolver(path); h = cls(path, **OPTIONS)
+            initialization = time.perf_counter()-started; selected = {}
+            for j, (i, case) in enumerate(zip(indices, cases)):
+                if j % 200 == 0:print(mode, 'case', j, flush=True)
+                started = time.perf_counter(); discovery = h.inspect(case['source']); solved = solver.solve(case['source'])
+                if solved['answer']:root_lift(h, discovery, solved['model'])
+                elapsed = time.perf_counter()-started; metrics = dict(h.counts)
+                assert solved['answer'] == expected[i]['answer']
+                assert encode(discovery['profile']) == encode(expected[i]['discovery']['profile'])
+                if solved['answer']:assert holds(case['source'], solved['model'])
+                if mode == 'baseline':assert discovery['summary'] == expected[i]['discovery']['summary']
+                elif expected[i]['discovery']['summary']['closed']:assert discovery['summary']['closed']
+                discovery['dag'] = node_summary(h, discovery['root']['key'])
+                for key, node in selected_nodes(h, discovery['root']['key']):
+                    if node['kind'] == 'unresolved':selected[key] = node
+                discovery['root_hash'] = digest(discovery['root']['key'].encode())
+                del discovery['root'], discovery['source_id']
+                records.append(dict(mode=mode, case=j, original_case=i, total_seconds=elapsed, discovery=discovery,
+                    answer=solved['answer'], solver_seconds=solved['seconds'], operation_metrics=metrics,
+                    cache=cache_state(h), restriction=restriction_state(h)))
+            frontiers[mode] = [dict(key_sha256=digest(k.encode()), cnf=n['cnf'], profile=n['profile'],
+                                   polarity=n.get('polarity')) for k, n in selected.items()]
+            edge_checks.append(dict(mode=mode, **polarity_lifts(h)))
+            node_kinds = Counter(); terminal = Counter(); proof_bytes = Counter()
+            for payload, in h.db.execute('SELECT payload FROM cnf_patterns_v1'):
+                node = json.loads(payload); node_kinds[node['kind']] += 1
+                if 'polarity' in node:
+                    outcome = node['polarity']['outcome']; terminal[outcome] += 1
+                    proof_bytes[outcome] += len(encode(node['polarity']).encode())
+            storage = h.storage(); started = time.perf_counter()
+            for case in cases:
+                r = h.inspect(case['source']); assert r['metrics'].get('inserted_nodes',0) == 0 and r['metrics']['inserted_sources'] == 0
+            warm = time.perf_counter()-started; assert storage == h.storage(); h.close(); solver.close()
+            raw = path.read_bytes(); sha = digest(raw)
+            if mode == 'baseline' and not args.pilot:
+                assert sha == prior_archive['database_sha256']; archive_path = prior_archive['path']
+            else:
+                archive_path = str(out/f'archive-{mode}.sqlite3.gz'); Path(archive_path).write_bytes(gzip.compress(raw,mtime=0))
+            checked = cold_audit(Path(tmp)/'cold.db', raw, cls, OPTIONS)
+            archives.append(dict(mode=mode, path=archive_path, database_sha256=sha, database_bytes=len(raw),
+                compressed_bytes=Path(archive_path).stat().st_size, initialization_seconds=initialization,
+                warm_inventory_seconds=warm, storage=storage, node_kinds=dict(node_kinds),
+                terminal_outcomes=dict(terminal), terminal_certificate_bytes=dict(proof_bytes), audit=checked))
+        print(mode, 'checked', flush=True)
+        (out/f'checkpoint-{mode}.json').write_text(json.dumps(dict(records=[r for r in records if r['mode']==mode],archive=archives[-1]),separators=(',',':'))+'\n')
+    allocation_indices = [] if args.pilot else [858,875,907,970,1042,1061]
+    profiles = [dict(mode=mode, **memory_profile([prior['cases'][i] for i in allocation_indices], OPTIONS, cls))
+                for mode, cls in MODES.items()] if allocation_indices else []
+    files = list(dict.fromkeys([str(Path(__file__)), 'experiments/cnf_polarity_horn.py', 'solver/test_cnf_polarity_horn.py',
+                               'formal/OracleMachines/Residuals.lean']+list(prior['fingerprints'])))
+    report = dict(source_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+        input_report_sha256=digest(input_path.read_bytes()), fingerprints={p:digest(Path(p).read_bytes()) for p in files},
+        cases=cases, records=records, archives=archives, frontiers=frontiers, polarity_edge_checks=edge_checks,
+        allocation_case_indices=allocation_indices, allocation_profiles=profiles, pilot=args.pilot,
+        modes={m:dict(inventory=c.__name__, options=OPTIONS) for m,c in MODES.items()},
+        limitations=[
+            'Same 1497 synthetic inputs; one sequential run, no industrial or universal runtime claim',
+            'Terminal fallback only; earlier recognizers/reductions/conditioning keep priority; not a full overlap-profile coordinate',
+            'Versioned policy changes node/source keys; old archive is preserved and new archive is separate',
+            'Auxiliary pair UNSAT excludes renamable-Horn membership, never original SAT',
+            'Pair cap is 65536 per attempted leaf and recorded as unresolved, not exclusion',
+            'Ordinary decision solver unchanged; structural closure does not itself establish a faster decision pipeline',
+            'Total times include discovery, checking, persistence, ordinary solving and successful root lifts',
+            'Summary walks, hashing, compression, initialization, every-edge model diagnostics and cold audit are separate',
+            'Warm replay inserts nothing; cold audit starts empty caches and verifies every alternative, source and solver certificate',
+            'Six-case Python allocation excludes native SQLite, RSS and full-corpus peak',
+            'Mixed-policy coexistence tested on a small archive; full combined archive growth is not measured',
+            'Discovery plus explicit pair construction is quadratic in clause width; this is not the faster implicit algorithm'])
+    (out/'report.json').write_text(json.dumps(report,separators=(',',':'))+'\n')
+    summary=[]; paired={(r['mode'],r['case']):r for r in records}
+    for mode in MODES:
+        rows=[r for r in records if r['mode']==mode]; frontier=frontiers[mode]
+        summary.append(dict(mode=mode,total_seconds=sum(r['total_seconds'] for r in rows),
+            discovery_seconds=sum(r['discovery']['seconds'] for r in rows), solver_seconds=sum(r['solver_seconds'] for r in rows),
+            closed=sum(r['discovery']['summary']['closed'] for r in rows),
+            non_tiny_closed=sum(r['discovery']['summary']['closed'] for r in rows if r['original_case']>=512),
+            source_misses=sum(not r['discovery']['summary']['closed'] for r in rows),
+            frontier_leaves=len(frontier),frontier_literals=sum(sum(map(len,n['cnf'])) for n in frontier),
+            gains=[r['original_case'] for r in rows if r['discovery']['summary']['closed'] and not paired['baseline',r['case']]['discovery']['summary']['closed']],
+            losses=[r['original_case'] for r in rows if not r['discovery']['summary']['closed'] and paired['baseline',r['case']]['discovery']['summary']['closed']],
+            operation_metrics=dict(sum((Counter(r['operation_metrics']) for r in rows),Counter())),
+            archive=next(a for a in archives if a['mode']==mode)))
+    (out/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
+    print(json.dumps([{k:r[k] for k in ('mode','total_seconds','discovery_seconds','non_tiny_closed','source_misses','frontier_leaves','frontier_literals','gains')} for r in summary]),flush=True)
+
+
+if __name__=='__main__':main()

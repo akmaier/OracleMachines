@@ -4389,3 +4389,35 @@ with 116 source misses. The next priority is versioned recognition, checked
 polarity/model transport and exact ancestor recomposition, followed by matched
 acquisition, storage and cold replay. Most remaining literals lie outside these
 small positive leaves, so broader interaction discovery remains necessary.
+
+
+## 2026-11-09: the 35 polarity opportunities are integrated
+
+Checkpoint **86d603b** adds a versioned terminal Horn-renaming edge, direct
+positive Horn checking, source-linked negative auxiliary paths and a pre-enumeration
+pair cap. Models lift through normalized names and a fixed polarity involution;
+Lean proves evaluation and SAT/UNSAT preservation. The old policy and archives
+remain available. Negative auxiliary proofs exclude a class, not original SAT.
+
+The [1,497-source comparison](../experiments/results/cnf-polarity-horn/README.md)
+closes 29 additional whole sources, with no losses (**869/985 -> 898/985 non-tiny**).
+All 35 saved positive leaves close independently; 188 acquired edges pass endpoint
+and model checks. The 87 remaining sources have 106 selected unresolved leaves
+and 32,404 literals, each with a checked renaming exclusion. Every new whole-source
+gain is itself excluded from renaming, demonstrating residual composition across
+source categories. Earlier decomposition priorities and budgets remain intact.
+
+Single-run discovery is 80.78495 versus 84.99193 s; total 122.78419 versus
+126.02211 s; cold replay 51.32492 versus 54.89246 s. Warm replay regresses. Fresh
+SQLite is 417,370,112 versus 437,620,736 bytes; six-case traced peak is 20,286,004
+versus 24,073,154 bytes. Historical archives still consume retained space. All
+441 Python tests and the full Lean audit pass (4,136 declarations / 1,977 theorem
+declarations). All 59 earlier manuscript proof blocks survive.
+
+Next: exploit the saved non-renaming obstruction paths to find shared-variable
+interfaces or conditioning choices that expose different tractable residuals,
+with matched budgets and exact recomposition. Repeated recognition alone cannot
+undo those exclusions. The remaining sources take 70.6% of discovery time;
+normalization/reconstruction and indexed subset certificates are supporting cost
+gaps. Repeated/industrial evaluation, full-process memory, policy-independent
+storage sharing and unrestricted efficient coverage remain open.

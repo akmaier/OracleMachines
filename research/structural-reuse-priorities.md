@@ -12,7 +12,63 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current checkpoint: one-pass checking; 35 polarity-renaming opportunities
+## Current checkpoint: 35 renamed leaves yield 29 source closures
+
+The [terminal Horn-renaming study](../experiments/results/cnf-polarity-horn/README.md)
+closes all 35 saved positive leaves and **29 additional whole inputs**, with no
+lost closures: **869/985 -> 898/985 non-tiny**. Full acquisition adds 188 checked
+renaming edges; the ordinary SAT solver is unchanged. Most remaining work remains:
+**87 sources / 106 selected leaves / 32,404 literals** unresolved, consuming
+**70.6% of discovery time**. Every remaining leaf has a checked renaming exclusion;
+none is merely capped. Auxiliary UNSAT is not original UNSAT.
+
+Single-run discovery falls **84.99193 -> 80.78495 s (4.95%)**, total **126.02211 ->
+122.78419 s**, cold replay **54.89246 -> 51.32492 s** and fresh SQLite **437,620,736
+-> 417,370,112 bytes**. Warm replay regresses **0.26877 -> 0.29138 s**. Six-case
+Python peak falls **24,073,154 -> 20,286,004 bytes**; this excludes native SQLite,
+RSS and full-corpus peak. Old and new snapshots remain retained (854,990,848 raw
+bytes together). Do not describe fresh-policy comparison as freed historical space.
+
+The next ranked gaps are:
+
+1. **Explain the checked renaming obstructions through interactions.** Of the 106
+   remaining leaves, 92 have maximum width three, 13 width four and one width
+   eleven. Source-linked negative auxiliary paths identify a concrete obstruction
+   to this class. Investigate shared variables across those paths and small
+   interfaces whose exact conditioning exposes different recognized families in
+   different branches. Compare coverage and total discovery under matched budgets;
+   a conflict path alone gives no small separator/backdoor guarantee. Do not rerun
+   the same recognition as though the exclusion were a budget miss.
+2. **Reduce repeated acquisition while preserving these proofs.** Source 1448 is
+   the current slowest unresolved discovery query. Its separate instrumented
+   profile has 909 reconstructions (0.16950 s own / 0.24526 s cumulative), 566
+   normalizations (0.12614 / 0.32228 s) and 118 indexed subset-certificate calls
+   (0.11573 / 0.15694 s). Polarity discovery is only 31 calls / 0.04967 s cumulative.
+   Exact normalization/source-state reuse is supporting work; its lookup, memory
+   and invalidation costs must beat rebuilding. Nested cumulative costs are not
+   additive.
+3. **Test earlier renaming only as an acquisition optimization.** The separate
+   0.57908 s original-root probe recognizes 555 normalized inputs, all already
+   closed by the baseline; none of the 29 gains admits a whole-source renaming.
+   The gains therefore need residual exposure and composition. Earlier cheap
+   admission might avoid known-family preprocessing but alone will not cover the
+   remaining sources. Keep its recognition budget and overlap policy explicit.
+4. **Broaden evidence and avoid policy-state duplication.** This is one sequential
+   synthetic-corpus comparison. Full mixed-policy migration space, industrial
+   transfer, total-process memory and repeated balanced timing remain unmeasured.
+   Versioned keys preserve old rows but duplicate unchanged structures between
+   policies. A policy-independent structural layer needs exact evidence bindings;
+   never drop the prior verified archives merely to report smaller storage.
+
+All **441 Python tests** and the full Lean build/axiom audit pass (**4,136
+namespace declarations / 1,977 theorem declarations**). Both cold archives are
+byte-preserving, all 188 new edges have independently agreeing endpoints and
+checked model lifts, and warm replay inserts nothing. All 59 earlier manuscript
+proof blocks survive; a new polarity proposition is added. Implementation
+checkpoint **86d603b**. The exact 35-leaf target is complete; unrestricted efficient
+coverage and the interaction obligations above remain open.
+
+## Previous checkpoint: one-pass checking; 35 polarity-renaming opportunities
 
 The [one-pass checker study](../experiments/results/cnf-single-pass-check/README.md)
 reduces full discovery **93.90373 -> 87.70857 s (6.60%)** and total **137.78680 ->

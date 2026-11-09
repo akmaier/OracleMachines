@@ -737,6 +737,39 @@ the existing inventory remains at 869/985 non-tiny closure with 116 source misse
 Retain overlaps, negative class certificates and unresolved cases; do not interpret
 failure to rename as an UNSAT certificate for the original CNF.
 
+## 2026-11-09: checked renaming closes residuals across source classes
+
+The [full integration](../experiments/results/cnf-polarity-horn/README.md) closes
+all 35 saved positive leaves and recomposes **29 additional complete sources**.
+Non-tiny structural coverage rises **869/985 -> 898/985** with no losses. The
+current remainder is **87 sources / 106 selected leaves / 32,404 literals**. All
+106 leaves have independently checked exclusions from renamable Horn; there are
+no pair-budget misses on this selected frontier. Most are width-three CNFs.
+
+A separate normalized-original-source probe records negative renaming
+certificates for **all 29 gains**. Their whole source does not admit this renaming;
+existing conditioning and reductions expose residuals that do. This supports
+composition across classes, rather than merely adding a whole-source category.
+The new recognizer is a terminal fallback, not a globally evaluated overlap
+coordinate. A cap remains unresolved; auxiliary UNSAT never certifies original
+UNSAT. Lean proves the polarity involution and SAT/UNSAT transport. Python
+pair recognition, normalization, persistence and costs remain separate obligations.
+
+Single-run discovery falls 4.95%, fresh SQLite 4.63% and six-case Python peak
+15.73%; warm replay regresses. Old archives remain preserved and consume space.
+All 441 tests, complete cold audits and the Lean axiom audit pass. Detailed
+resource and provenance limits accompany the saved results.
+
+The next investigation should use the saved auxiliary conflict paths as exact
+obstructions to this recognition class. Search for shared obstruction variables
+or interfaces whose conditioning exposes useful families in both branches,
+measuring coverage and acquisition under matched budgets. The paths do not prove
+a small interface exists, and a full Boolean partition alone is not an efficient
+solution. The unresolved sources still consume 70.6% of discovery time; source
+1448's profile puts reconstruction, normalization and indexed subset checking
+ahead of polarity recognition. Reuse those computations where exact bindings
+make it economical, without replacing the broader discovery objective.
+
 ## Following iterations
 
 First split the largest informative unresolved cells. Favor discoveries that

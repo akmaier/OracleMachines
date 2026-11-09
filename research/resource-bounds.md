@@ -1211,3 +1211,49 @@ keeping propagation hints separately. Construction, hint checking, context-aware
 discovery state, invalidation, canonicalization and persistence must all be
 charged. No cost or coverage improvement from this next representation is yet
 measured; arbitrary semantic equivalence recognition is not assumed available.
+
+## Follow-up: parent-scoped hints and original-clause cores (9 November)
+
+`CoreLearningInventory` first checks the same fixed-order learned continuation
+in full. On a successful nonterminal reduction, it restricts or substitutes
+only the original parent CNF to obtain the child. Checked terminal conflicts
+remain false. Hints and their source proofs stay at the parent; descendants
+acquire their own hints. This first version does not implement inherited hint
+transport or context-sensitive reuse of descendant plans.
+
+After the already charged augmented reduction, core construction adds expected
+O(ell+q+d) time and O(ell+d) temporary space, with source literal count ell,
+q learned binary clauses and d variables. Restriction/substitution, support
+checks and omitted-occurrence counters all contribute. The checker still builds
+the augmented target first. Acquisition, proof checking, parent hint storage,
+child normalization, full keys, serialization and cold replay remain costs.
+Equal normalized cores at equal depth/policy can share child nodes because
+no parent hint context is inherited. This only recognizes explicit source-based
+equivalence; it does not supply general semantic canonicalization or a bound
+on the lifetime number of cores.
+
+The [1,317-input comparison](../experiments/results/cnf-learning-core/README.md)
+closes **719/805** non-tiny sources versus **718/805** for baseline/fixed order,
+without losing any closure. Baseline/fixed/core total time is **94.870 / 97.402 /
+97.835 s**, SQLite **284.111 / 284.299 / 284.094 MB**, cold replay **40.281 / 41.160 /
+40.384 s**, and the same six-case Python peak **20.022 / 20.127 / 20.265 MB**.
+These single sequential samples exclude native memory/RSS and full-corpus peak.
+The selected pilot savings do not generalize; core is 3.13% slower than baseline.
+
+Core retains **17,833** pattern nodes and **113,536,866** logical node bytes, of
+which **72,386,084** (63.76%) are probe records. There are 1,347 core checks and
+3,156 omitted clause / 6,312 omitted literal occurrences across repeated checks.
+None of its 449 learned parents shares a child core with another learned parent
+in this run. Thus the changed coverage demonstrates altered discovery, not broad
+measured core merging. Distinct policy tags, logical payloads, physical SQLite
+pages and traced live allocations must remain separate accounts.
+
+Diagnostics find 907 eligible transported hint occurrences absent from the
+immediate cores; 319 are learned again across 165 children. These are occurrences,
+not distinct reusable facts or saved seconds. Transporting this evidence is the
+next controlled discovery experiment. It must charge source/reduction/variable
+checks and keep hint-dependent propagation context separate from shared core
+identity. The largest unresolved source 1297 has only one successful learned
+parent; restriction and unit checking/propagation dominate its separate profile.
+Avoiding repeated scans remains a broader supporting target. Uniform efficient
+arbitrary-SAT acquisition and lifetime storage bounds remain unproved.

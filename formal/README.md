@@ -1325,3 +1325,26 @@ entailed clauses and have different bounded discovery outcomes. Applying the
 existing batch equivalence to valuations extending that assignment proves the
 children have the same model relation. An executable shared-core/hint policy and
 its cost/coverage effects remain a next experiment, not a new formal refinement.
+
+The parent-scoped core experiment adds `CompletePartial`,
+`entailed_signed_batch_partial_models` and `entailed_signed_views_common_core`
+in `Residuals.lean`. Under any common partial assignment, adding originally
+entailed hints preserves the model relation; two independently justified hint
+batches therefore describe the same restricted source. Both relations use total
+extensions over the same variable universe. The hypotheses do not assume that
+the partial assignment is compatible, and incompatible cases may have no models.
+These are semantic restriction lemmas, not a verification of Python filtering,
+signed integers, model transports or SQLite keys. The existing substitution and
+checked-refutation arguments cover signed rewrites and terminal false residuals.
+
+The implementation keeps hints and their proofs at the parent for local
+propagation/checking, then acquires only the original-clause core. Descendants
+rediscover hints; there is no implicit inherited context to justify. The full
+Lean build/axiom audit passes at **4,125 declarations / 1,967 theorem declarations**.
+All **366 Python tests** pass, including exact small fibers, independently expanded
+references, signed edits, preserved learned conflicts, wrong-child rejection and
+cold coexistence. The [full comparison](../experiments/results/cnf-learning-core/README.md)
+recovers one lost source closure and keeps the previous gain, but does not reduce
+full-run time or traced memory. Same-core reuse is checked in the controlled
+fixture; broad within-run core merging is not observed. Inherited hint transport
+and its explicit propagation-context obligations remain the next experiment.

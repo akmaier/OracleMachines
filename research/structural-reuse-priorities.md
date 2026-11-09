@@ -12,15 +12,62 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-**Next research experiment:** separate a restricted original CNF core from its
-checked learned hints. Use the core for structural identity/recognition while
-retaining scoped proof hints for propagation. Start with archived sources **956,
-1024 and 1189** and the [saved frontier](../experiments/results/cnf-learning-fixed-order/mechanisms.json),
-then compare all prior and fresh inputs. Charge core reconstruction, hint checking,
-canonicalization and persistence; keep current caps. Discovery plans must retain
-their hint/policy context even when semantic cores share storage. Changed source,
-assignment or dependencies require revalidation. This is an unmeasured candidate;
-dropping useful hints could lose coverage. Do not promote either selection policy.
+**Next research experiment:** reuse checked implication evidence across core
+edges while retaining core-based recognition. The [parent-scoped core study](../experiments/results/cnf-learning-core/README.md)
+recovers 956 without losing 1024, but descendants currently rediscover their hints.
+The diagnostic finds **319 repeated clause occurrences across 165 immediate
+parent/child edges**. Start with these edges and saved sources **956/1024/1189**.
+Check source entailment, the exact assignment/substitution and variable transport;
+bind hint-dependent propagation to its context. Do not silently share a plan
+under a different hint set. Compare newly exposed structure, fresh probe work
+and total cost at unchanged caps; inherited hints can still change rankings or
+lose bounded coverage. This next transport policy is not implemented.
+
+The full **1,317-input** core experiment gives **719/805** non-tiny closures
+versus **718/805** for baseline and fixed order, with no losses against either.
+All close **14/24** fresh random cases; **86** core sources remain unresolved.
+Total time is **94.870 / 97.402 / 97.835 s**, SQLite **284.111 / 284.299 / 284.094 MB**,
+and cold replay **40.281 / 41.160 / 40.384 s** for baseline/fixed/core. Core is
+3.13% slower than baseline in this single sample. Six-case Python peak rises
+**20.022 / 20.127 / 20.265 MB**, excluding native memory/RSS and full-corpus peak.
+The selected pilot's savings do not generalize; keep this policy optional.
+
+At the saved 956 parent, all policies force only `14=false`. Removing the
+redundant additions yields its **54-clause original restriction**, which closes.
+This controlled core is shared exactly in a regression test. Within the full
+core archive, however, **no two learned parents share a child core**. The measured
+gain comes from altered descendant discovery, not demonstrated large core merging.
+There are 449 successful learned edges, 385 with changed normalized child syntax.
+All parent hints and proofs remain persistent; children receive no inherited hints.
+The 907 absent eligible transported hint occurrences include the 319 immediately
+reacquired clauses above, not 319 distinct implications or measured saved seconds.
+
+Ranked remaining targets:
+
+1. **Transport checked hints without changing core recognition.** Test the measured
+   reacquisition opportunities and coverage controls before full old/fresh inputs.
+   Charge proof/context storage, transport, checking and cold replay. Larger
+   learning batches alone are not the experiment. Cached implication proofs do
+   not automatically remove probes required by the current ranking policy.
+2. **Reuse checked propagation state to expose additional structure.** The new
+   largest unresolved source is **1297**, a fresh 48-variable CNF: **1.47150 s**
+   discovery and 456 unresolved literals. Restriction, unit checking/propagation
+   and literal helpers dominate its separate profile. Only one successful learned
+   parent occurs there, so hint transport alone will not remove its main cost.
+3. **Share proof payloads where the measurements justify it.** Probe records are
+   **72.386 MB / 63.76%** of core logical node bytes. Source bindings, checking and
+   cold replay must survive any compression. Neither physical database pages nor
+   a successful selected pilot measures broad semantic-core compression.
+
+The selected frontier contains **124** unresolved leaves, 86 learning-clear and
+38 clear. All **366 Python tests**, the full Lean build/axiom audit (**4,125
+declarations / 1,967 theorem declarations**) and four full, four pilot and four
+preceding archive replays pass. Both reports' 47 fingerprints match. Primary and
+diagnostic timings ran sequentially without concurrent tests, builds or commits.
+Core construction adds work; no efficient arbitrary-SAT coverage or uniform
+storage bound has been obtained.
+
+The preceding fixed-order investigation follows with its own corpus and timings.
 
 The [fixed-order experiment](../experiments/results/cnf-learning-fixed-order/README.md)
 implements the previous target and explains why it is insufficient. All 1,281

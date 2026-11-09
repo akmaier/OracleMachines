@@ -120,7 +120,9 @@ computed under one hint set cannot be keyed solely by its core unless its behavi
 is made context-independent. Test whether useful transported hints reduce fresh
 probe work or expose new certified structure; charge transport/checking/storage
 and retain losses. Do not assume that omitting syntax or inheriting every hint
-improves bounded discovery.
+improves bounded discovery. Reusing an implication proof alone does not remove
+the original probes that the current ranking/reduction policy still requires;
+avoiding those probes needs a separately checked policy change.
 
 The selected frontier has **124 distinct unresolved leaves**, 86 learning-clear
 and 38 clear. Source **1297**, a fresh 48-variable CNF, has the largest unresolved
@@ -145,7 +147,7 @@ declarations**. This does not certify the Python implementation.
 
 The forced/common/equivalence fixtures are samples 15/391/58 at the stated seed
 (8 variables, 20 clauses, widths chosen from 2/3/3/3). A failed search for a
-learned terminal-conflict fixture tested 25,000 sources at seed20261109064123
+learned terminal-conflict fixture tested 25,000 sources at seed 20261109064123
 (8 variables, 30 clauses, widths 2/3/3/3/3) without finding one. The retained
 constructive fixture instead joins two copies of `learning_source()` that force
 opposite values of shared output 7, with other variables disjoint. Preserve this

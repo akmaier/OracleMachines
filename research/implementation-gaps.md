@@ -3572,3 +3572,105 @@ restricted-model equality. All **54 earlier proof blocks** remain unchanged, wit
 box errors; changed pages 99--102, including the table, equality and discussion
 transition, were visually inspected. Project/formal READMEs, resource bounds, discovery plan and ranked
 priorities now point to the shared-core/hint experiment.
+
+## 9 November 2026: checked parent hints with original-clause child cores
+
+Implemented the next representation experiment in `CoreLearningInventory`.
+It fully checks the fixed-order learned continuation, retains its hints/proofs
+at the parent, and builds a successful child only from the restricted or
+substituted original parent clauses. Checked terminal conflicts remain false.
+Children receive no inherited hint context and discover their own hints. Equal
+normalized cores at equal depth/policy can therefore share plans safely; source
+edits, changed reductions and proof dependencies still need full validation.
+Earlier priorities, overlaps, exact decomposition and per-node caps are unchanged.
+This optional inventory does not alter the complete decision solver.
+
+The [pilot](../experiments/results/cnf-learning-core-pilot/README.md) recovers 956
+and retains 1024, leaving 1189 open. Its lower time/storage are selected-case
+results. The [full comparison](../experiments/results/cnf-learning-core/README.md)
+preserves all 1,281 preceding inputs, adds 24 fresh random 3-CNFs and twelve
+growing/signed/edited controls, and closes **719/805** non-tiny inputs versus
+**718/805** under baseline/fixed order. There are no lost closures against either.
+All close 14/24 fresh random sources; **86** core sources remain structurally
+unresolved. All original SAT/UNSAT decisions agree, and the independent solver
+retains **15,069 residuals** per mode.
+
+Baseline/fixed/core total time is **94.86962 / 97.40244 / 97.83486 s**, discovery
+**70.87369 / 72.76849 / 73.16855 s**, SQLite **284,110,848 / 284,299,264 /
+284,094,464 bytes**, cold replay **40.28060 / 41.15963 / 40.38357 s**, and same-six
+case Python peak **20,021,661 / 20,127,082 / 20,265,076 bytes**. Core is 3.13%
+slower than baseline; the pilot savings do not generalize. These are single
+sequential samples. Peak excludes native SQLite, RSS and the full corpus.
+Timings, allocation diagnostics, prior archive audits and separate profiling ran
+without concurrent tests, Lean builds or commits. Warm/cold replay are separate;
+operation time excludes generation, truth tables, summary walks, initialization,
+compression and post-run analysis, as specified in the retained report.
+
+Core stores **17,833 nodes / 113,536,866 logical node bytes**, with **72,386,084
+bytes (63.76%)** in probe nodes. Its 449 learned edges comprise 311 forced,
+42 common and 96 signed-equivalence reductions; 385 change normalized child
+syntax and none changes variable transport. There are 380 exact parent/depth
+controls in fixed order with identical parent proof records. Reconstruction adds
+expected O(L+q+v) time and O(L+v) temporary space after the augmented reduction
+is already checked. Across 1,347 repeated reconstruction/checking calls, child
+syntax omits 3,156 clause / 6,312 literal occurrences. Parent proofs remain stored.
+These occurrence counts do not establish unique redundancy or bytes saved.
+
+The saved 956 parent forces only `14=false` under all policies. Its original
+54-clause restriction closes, while fixed order's 58-clause augmented child
+stays open. A regression test obtains the same core from both independently
+checked batches and confirms exact reuse. **No two learned parents share a child
+core in the full run.** The coverage gain is therefore altered descendant
+discovery, not evidence of broad within-run core merging or semantic canonicalization.
+
+The [mechanism record](../experiments/results/cnf-learning-core/mechanisms.json)
+preserves both parent controls, selected paths for 956/1024/1189 and actual gains,
+all 124 selected unresolved leaves (86 learning-clear / 38 clear), every learned
+core edge and a separate profile. Transporting proved clauses diagnostically
+through exact assignments/substitutions and variable maps yields **992 eligible
+hint occurrences**, 85 already in core and **907 absent**. Of these, **319 are
+learned again in the immediate child's batch across 165 edges**, including 127
+learning-clear and 38 learned children. None in this sample mentions variables
+outside the core; that invalid transport possibility is recorded explicitly.
+Counts are occurrences, not unique facts, avoided probes or saved seconds.
+
+**Next experiment:** reuse checked hint evidence across these edges while keeping
+structural recognition on the core. Preserve source entailment, exact reduction,
+variable map and hint-dependent propagation context. Compare those 165 edges,
+956/1024/1189, the frontier and full old/fresh inputs at unchanged caps, including
+all checking/storage/replay costs and any losses. Cached implication proofs do
+not automatically remove the original probes required by current ranking or
+earlier reductions; skipping them needs a checked policy change. This inherited
+hint policy is not yet implemented. The largest unresolved case is now fresh
+48-variable source 1297 at **1.47150 s**, with 456 selected unresolved literals.
+Its separate 3.36725 s profile is dominated by restriction, simplification checking,
+propagation and literal helpers, and has only one successful learned parent.
+Reusing checked propagation state remains the broader supporting cost target.
+
+All **366 Python tests** pass (32.601 s). New tests include all 512 two-variable
+CNFs and 3,304 three-variable subsets of at most three clauses at caps 0/1/4,
+exact fibers and independently expanded references, forced/common/equivalence
+fixtures, signed mixtures, edits, disabled mode, forged dependencies, wrong child
+bindings, preserved learned conflicts and cold coexistence. A failed 25,000-input
+random search for the conflict fixture is recorded; a constructive pair forcing
+opposite shared outputs supplies the retained counterexample. Four full, four
+pilot and four preceding archives cold-replay byte-identically; warm reuse inserts
+nothing. Both reports' **47 code/test/Lean fingerprints** and all archive hashes match.
+
+Lean adds `CompletePartial`, `entailed_signed_batch_partial_models` and
+`entailed_signed_views_common_core`. Originally entailed batches preserve models
+under any common partial assignment, including incompatible assignments with
+no models. These semantic lemmas do not refine Python filtering, encoding, model
+transport, SQLite or costs. The full build/axiom audit passes at **4,125 declarations
+/ 1,967 theorem declarations**. Implementation, proofs and artifacts are pushed
+in **599f921**. The manuscript records the method, complete tradeoff and next gap
+in Section **12.57**, Table **18**. Prior proof blocks remain unchanged; efficient
+arbitrary-SAT discovery, compact global closure and uniform acquisition bounds
+remain open.
+
+
+The rebuilt **109-page** PDF has no final-pass warnings or box errors. Changed
+pages 100--103, including Table 18 and the discussion transition, were visually
+inspected. All **54 prior proof blocks** remain unchanged and **190 labels** are
+unique. Project/formal READMEs, resource bounds, discovery and ranked priorities
+record both the modest coverage gain and the full-run time/memory regressions.

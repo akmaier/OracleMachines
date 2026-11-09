@@ -2882,6 +2882,48 @@ The next representation experiment will separate this restricted original core f
 
 All 358 Python tests pass, including exhaustive small fibers, independently expanded references, changed-order fixtures, signed mixtures and edits, invalid orders and reasons, disabled mode and cold coexistence. Four full, four pilot and three preceding archives replay byte-identically. Both new reports' 43 source and test fingerprints match the measured code. The unchanged Lean build and axiom audit pass at 4,122 declarations and 1,965 theorem declarations. The heuristic and its resource bounds remain outside a Python refinement proof.
 
+\subsection{Keeping learned hints local to a shared residual core}
+\label{sec:learning-core}
+
+We now apply the common-core identity from the preceding section. Learned clauses support the current continuation, and their original-source proofs remain in the parent record. After a successful learned reduction, we construct the child from the original parent clauses alone. For forced or common assignments, we restrict those clauses by the complete checked assignment. For a signed equivalence, we apply the checked substitution to those clauses. A checked terminal conflict remains the false residual. Earlier recognition priorities, bounded candidate selection, fixed continuation choices and strict support decrease remain unchanged.
+
+This first policy gives hints a local scope. The parent keeps and checks them, but they are not inherited by child recognition, ranking or identity. Descendants acquire their own hints. Consequently, an identical normalized core under the same policy and depth can share a child plan without an unrecorded inherited context. This does not yet implement a history of transported hints. Source edits and changed reductions still require their own checked parent dependencies, even when they eventually reach an existing child.
+
+Source entailment justifies omitting the learned clauses from the child relation. The existing assignment and signed-substitution arguments provide model lifting; the checker reconstructs the exact core and rejects an augmented child substituted into its edge. Lean now makes the partial-assignment identity and equality of two independently justified hint views explicit. The model relations use the same remaining variable universe. These semantic lemmas do not refine Python's signed-integer encoding, clause filtering, persistent keys or complexity. In particular, the implementation still checks and constructs the augmented reduction before deriving its core.
+
+Given that checked reduction, projecting the original clauses and counting the omitted occurrences add expected $O(L+q+v)$ time and $O(L+v)$ temporary space, for $L$ original literal occurrences, $q$ learned binary clauses and $v$ variables. Original implication discovery, continuation propagation, full proof checking, child canonicalization and persistence remain charged. Hints stay in the parent proof, so their local acquisition and storage are not erased. Omitting them from descendants can remove useful future propagation as well as redundant syntax; a whole-source comparison is necessary.
+
+The three-source pilot recovers 956 while retaining 1024; 1189 remains unresolved. On the saved 956 parent, all three policies force only $x_{14}=\mathrm{false}$. The 54-clause original restriction closes, while fixed order's 58-clause augmented child stays open. A regression test obtains this same core from both independently checked batches and reuses its existing child. The pilot also uses less time and memory, but these selected-case savings do not carry over to the full study.
+
+The full comparison preserves all 1,281 preceding inputs and adds 24 fresh random 3-CNFs, eight each at 20, 32 and 48 variables, plus twelve growing, signed and edited controls. Core closes 719/805 non-tiny inputs versus 718/805 for baseline and fixed order, with no lost source closures against either. On the preceding non-tiny inputs, this is 693/769 versus 692/769. All policies close 14/24 fresh random sources and all twelve new controls. Eighty-six core sources remain structurally unresolved. Every original decision agrees with the independent solver, which retains 15,069 residuals per mode. Table~\ref{tab:learning-core} reports the full costs.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{lrrrr}
+\hline
+Policy & Closed / 805 & Total (s) & SQLite (MB) & Cold (s) \\
+\hline
+Ordinary solver & --- & 23.36801 & 88.039 & 5.13926 \\
+First four clauses & 718 & 94.86962 & 284.111 & 40.28060 \\
+Selected clauses, old choices & 718 & 97.40244 & 284.299 & 41.15963 \\
+Parent-scoped hints, core child & 719 & 97.83486 & 284.094 & 40.38357 \\
+\hline
+\end{tabular}
+\caption{Original-clause core comparison on 1,317 synthetic inputs, including 512 exhaustive tiny cases. MB denotes decimal bytes. Removing inherited learned syntax recovers the lost closure while retaining the previous gain, but does not reduce total runtime.}
+\label{tab:learning-core}
+\end{table}
+
+Core total time is 3.13\% above baseline and 0.44\% above fixed order in these single sequential samples. Baseline/fixed/core discovery takes 70.87369/72.76849/73.16855 seconds. The same six-case Python peak is 20.022/20.127/20.265 MB, excluding native SQLite, RSS and full-corpus peak. Logical node counts are 17,778/17,858/17,833, with 113.403/113.635/113.537 MB of node payload. Physical pages, policy-tag lengths, logical bytes and live allocation are distinct accounts. There is no general speed or memory improvement here, and the policy remains optional.
+
+Core records 449 successful learned parents: 311 forced, 42 common and 96 signed-equivalence reductions. Of these, 385 change normalized child syntax and none changes the compact variable-name map. There are 380 identical parent-CNF/depth controls in the fixed archive with identical probe proofs. Across acquisition and checking, 1,347 core reconstructions omit 3,156 clause occurrences and 6,312 literal occurrences from child representations; these are repeated-operation counts, not unique clauses or bytes saved. No two learned parents in the full core run share a child core. Thus the observed coverage gain concerns descendant discovery; broad within-run core merging is not demonstrated by the controlled reuse test.
+
+The next reuse opportunity is explicit. A separate diagnostic transports each proved batch through its checked reduction and variable map. It finds 992 eligible hint occurrences, of which 85 already appear in the core and 907 are absent. Of the latter, 319 are learned again in the immediate child's selected batch, across 165 edges. These counts describe occurrences rather than distinct implications or saved seconds. Transporting their evidence separately could avoid fresh discovery while preserving core-based recognition. Each hint still needs its source entailment, exact reduction and variable binding. Propagation or a heuristic plan that depends on inherited hints must retain that context; a core key alone does not justify its reuse. Reusing an implication proof alone does not remove original probes still required by the current ranking policy. The diagnostic does not implement this next policy or establish a coverage gain from it.
+
+The selected frontier has 124 distinct unresolved leaves, 86 learning-clear and 38 clear. Fresh 48-variable source 1297 is the largest unresolved discovery case at 1.47150 seconds, with 456 selected unresolved literal occurrences. Its separate profile again identifies restriction, simplification checking, propagation and literal helpers as the main costs. Only one successful learned parent occurs there, so inherited hints alone are unlikely to remove its dominant work. Reusing checked propagation state remains a supporting target. Probe records occupy 72.386 MB, or 63.76\% of logical core node bytes. Neither a uniformly efficient arbitrary-SAT decomposition nor a global storage bound follows.
+
+All 366 Python tests pass, including exhaustive small fibers, independently expanded references, forced/common/equivalence cores, signed mixtures and edits, preserved terminal conflicts, wrong-child rejection and cold coexistence. The full Lean build and axiom audit pass at 4,125 declarations and 1,967 theorem declarations. Four full, four pilot and four preceding archives replay byte-identically; warm reuse inserts nothing. Both reports' 47 code, test and Lean fingerprints match. Primary measurements, allocation diagnostics and separate profiling ran sequentially without concurrent tests, builds or commits. Operation timings include recognition, checking, acquisition, serialization, persistence, solving and successful root lifts; generation, truth tables, summary walks, initialization, compression and post-run diagnostics are excluded. Cold replay and warm lookup are separate measurements. The new semantic lemmas do not close the Python refinement or unrestricted resource-bound gaps.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

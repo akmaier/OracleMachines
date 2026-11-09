@@ -328,6 +328,61 @@ unchanged Lean build/axiom audit passes at **4,122 declarations / 1,965 theorem
 declarations**. Complete efficient classification, compact arbitrary-CNF coverage
 and uniform acquisition bounds remain open.
 
+## Parent-scoped hints recover the lost core (9 November 2026)
+
+The [core comparison](../experiments/results/cnf-learning-core/README.md) implements
+a deliberately scoped version of the previous proposal. The parent checks and
+uses its learned hints, then restricts/substitutes only its original clauses into
+the child. Terminal conflicts remain false. Descendants rediscover their own
+hints; this is not yet inherited hint transport. Identical normalized cores at
+the same policy/depth can therefore share plans without hidden context. Earlier
+recognition overlaps, priorities, exact recomposition and unresolved cases remain.
+
+The full 1,317-input study closes **719/805** non-tiny sources, versus **718/805**
+for baseline and fixed order. It recovers 956 relative to fixed order and retains
+1024, with no lost closures against either. All close **14/24** fresh random
+inputs; **86 core sources** remain structurally unresolved. The independent
+solver checks every original decision and retains 15,069 residuals per mode.
+The saved 956 parent has the same forced `14=false` assignment and 54-clause
+original core under both checked batches; that core closes while the fixed-order
+58-clause augmented child stays open. The common-core test reuses the exact child.
+
+This discovery gain has a cost. Baseline/fixed/core totals are **94.870 / 97.402 /
+97.835 s**, SQLite **284.111 / 284.299 / 284.094 MB**, cold replay **40.281 / 41.160 /
+40.384 s**, and six-case traced Python peaks **20.022 / 20.127 / 20.265 MB**.
+These are single sequential samples; peak excludes native memory/RSS and full
+corpus. The selected pilot's favorable time/memory results do not carry over.
+The implementation still constructs the checked augmented target before its core.
+This adds expected O(L+q+v) time and O(L+v) space; parent proofs remain stored.
+
+The archive has 449 successful learned edges, 385 with changed normalized child
+syntax, but **no two learned parents share a child core**. Its measured gain is
+therefore a discovery effect, not large observed within-run core compression.
+The frontier retains 124 distinct unresolved leaves (86 learning-clear, 38 clear).
+Fresh 48-variable source 1297 is the largest unresolved discovery case at 1.47150 s;
+its profile again identifies restriction, unit checking and propagation. Only
+one successful learned parent appears there, limiting the reach of hint transport.
+
+The next experiment transports checked implication evidence separately from core
+recognition. Diagnostics find **907** eligible clause occurrences absent from the
+immediate child core; **319** are learned again in that child's batch across
+**165 edges**. Bind each transported hint to its source proof, exact reduction,
+variable map and propagation context. Test those edges, 956/1024/1189, the saved
+frontier and all old/fresh inputs, charging recognition, checking, storage and
+cold replay. Repeated occurrences do not establish unique implications, saved
+seconds or additional closure. Useful hints may expose structure, while context
+changes can still alter bounded search. Supporting work should reuse checked
+propagation state on the remaining dominant scans.
+
+All **366 Python tests** pass, including exhaustive small fibers, independently
+expanded reference checks, signed/adversarial edits, preserved terminal conflicts,
+wrong-child rejection and cold coexistence. Two new Lean semantic restriction
+lemmas pass the full build/audit at **4,125 declarations / 1,967 theorem
+declarations**; Python and resource refinement remain open. Four full, four pilot
+and four preceding archives replay byte-identically, warm reuse inserts nothing,
+and both reports' 47 fingerprints match. There is still no uniformly efficient
+construction of all arbitrary-CNF classes or compact global closure.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

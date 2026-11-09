@@ -142,6 +142,17 @@ it remains optional. Next: separate shared residual cores from checked propagati
 hints while retaining each plan's hint context. All **358 tests**, the Lean audit
 and cold archive checks pass. This does not establish efficient arbitrary-SAT coverage.
 
+The [parent-scoped core experiment](experiments/results/cnf-learning-core/README.md)
+now recovers that loss while retaining the earlier gain: **719/805** non-tiny
+inputs close, versus **718/805**, with no lost closures. It uses checked hints
+at the parent and gives the child only the original-clause core. The full run
+costs **97.83 s versus 94.87 s** for baseline; the pilot's savings do not generalize.
+It finds **319 clause occurrences** rediscovered in immediate children across
+165 edges, making checked hint transport the next reuse target. No new shared
+learned-child cores occur within the full run; broad compression is not measured.
+All **366 tests**, the expanded Lean audit and new/previous archive checks pass.
+Eighty-six sources remain structurally unresolved; arbitrary-SAT bounds stay open.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

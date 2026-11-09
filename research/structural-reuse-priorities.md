@@ -12,7 +12,64 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current checkpoint: four closures, costly failed subset searches
+## Current checkpoint: five more closures; proof replay remains dominant
+
+The [implication-subset study](../experiments/results/cnf-implied-subsumption/README.md)
+reuses binary consequences of original checked probes as signed-subset witnesses.
+It adds no propagation phase. Earlier subset exposures retain priority, and failed
+pools/searches persist. A separate indexing-only mode preserves old certificates
+and archive identities while skipping impossible equal-width comparisons.
+
+Across **1,497 queries**, closure rises **864 -> 869 / 985 non-tiny**, with gains
+**857, 1185, 1289, 1368 and 1467** and no losses. The old subset rises **837 -> 841 /
+949**, and new-query closure **27 -> 28 / 36**. This is structural coverage, not a
+change to the independent SAT decision solver. All answers agree.
+
+Full single-sample operation time is essentially unchanged: **169.84716 ->
+169.80609 s**. Discovery is **127.44196 -> 126.71711 s**, SQLite **438.288 ->
+437.621 MB**, and cold replay **71.70525 -> 69.97623 s**. Logical node payload
+instead grows **178.289 -> 179.396 MB**, and six-case Python peak **20.390 ->
+21.161 MB**. Fewer nodes (25,752 -> 25,047) do not establish lower retained state.
+The optional candidate is a coverage improvement, not a general speedup.
+
+The next gaps are ranked by the evidence:
+
+1. **Reuse exact restriction and proof-checking state.** The largest unresolved
+   source remains 1194, at **1.67226 s** discovery. Its separate profile again
+   has **5,763 restrictions, 4,657 simplification checks and 2,221 propagations**.
+   These costs dominate its own-time profile even after indexing. Share prepared
+   clause/assumption state or checked evidence with explicit dependencies and
+   invalidation; measure acquisition and replay, not just fewer logical probes.
+2. **Discover structure in the remaining interactions.** There are **116 open
+   sources / 148 distinct selected leaves / 33,651 literals** in the expanded
+   corpus. Filtering the existing implication pools exposes **no additional
+   selected leaf**. Broader coverage needs new source-entailed relations or a
+   different exact decomposition, with charged discovery and recomposition.
+   Do not increase probe budgets blindly or confuse an unresolved classification
+   with an efficient solver for that category.
+3. **Keep only useful implication witnesses, while charging recognition.** An
+   offline control retains proved binaries only when they fit a long clause of
+   the original minimal core. It reduces the pool **29,897 -> 7,505 (74.90%)**
+   across all 3,684 nonempty pools and preserves all **82** encountered implication
+   exposures. It uses **2,278,253 relevance comparisons**; augmented subset tests
+   fall **8,990,250 -> 7,138,675** per search/check. This is an unintegrated storage
+   and recognition opportunity, not a measured total-cost saving or a theorem
+   preserving every syntactic family. Keep exact origin proofs and old results.
+4. **Reduce duplicated state and cold replay.** Search fields grow **3.963 ->
+   9.030 MB**, including **5.087 MB** of implication data. Many failed pools remain
+   useful evidence of limits but need not duplicate all underlying proof state.
+   Exact references or shared immutable evidence require source binding and
+   cold reconstruction. There is no full-process or lifetime archive space bound.
+
+All **403 tests** and the **4,130 / 1,972** Lean declaration/theorem audit pass.
+The new semantic lemma composes entailment and signed-core equivalence; Python
+refinement and unrestricted resource bounds remain open. Full, pilot and previous
+archives replay byte-identically, and both new reports have **59 fingerprints**.
+See the study for balanced timing and complete old-archive indexing controls.
+The next run should use the profiled restriction/checking bottleneck or a concrete
+coverage hypothesis; the smaller implication pool alone does not improve coverage.
+
+## Previous checkpoint: four closures, costly failed subset searches
 
 The [signed-subsumption study](../experiments/results/cnf-signed-subsumption/README.md)
 integrates the previous frontier witnesses. Only exhausted unresolved leaves

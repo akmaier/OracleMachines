@@ -4085,3 +4085,93 @@ warnings or box errors; pages **107--110** were rendered and visually inspected.
 The ranked priority, discovery and resource records and README are updated for
 the next run. No Python refinement, universal compact closure or P-versus-NP
 conclusion is asserted.
+
+## 2026-11-09: indexed witnesses and original implication exposure
+
+The implementation/proof checkpoint **f978ad4** is committed and pushed. The
+user's hourly-prompt correction was applied separately: the active hourly schedule
+now has one concise paragraph pointing to the repository's gap analysis, with
+flexibility to choose the next useful step and notifications only for meaningful
+progress or blockers. Detailed procedures stay in this record and study files.
+
+`ImpliedSubsumptionInventory` skips futile equal-width subset comparisons while
+preserving the old first-retained witness; exact duplicates use a lookup and
+repeated literals use the old fallback. Indexing-only mode keeps old archive
+identities. A separate optional implication policy first preserves old exposures,
+then uses every distinct absent binary from original probe traces as a potential
+subset witness, including binary-transitive clauses filtered from learning. No
+fresh propagation pass is added. Original reasons precede origin reconstruction,
+subset checking, recognition and model lifting. Failed pools/searches persist.
+The four-clause learned batch cap is unchanged; the additional subset-witness pool
+has separate charged size b<=U, where U is original unit-trace length.
+
+The [full study](../experiments/results/cnf-implied-subsumption/README.md) retains
+1,461 old inputs and adds 36 controls/holdouts. Non-tiny closure rises **864 ->
+869 / 985**, with gains **857, 1185, 1289, 1368 and 1467**, no losses, and every
+independent solver answer unchanged. Old-subset coverage rises **837 -> 841 / 949**;
+new-query coverage **27 -> 28 / 36**, including 15 -> 16 / 24 new random 3-CNFs.
+This is checked structural coverage, not satisfiability or a faster SAT decision
+procedure. The deliberately selected twelve-source pilot and old results remain.
+
+Full single-sample total time is **169.84716 -> 169.80609 s**, discovery **127.44196
+-> 126.71711 s**, SQLite **438.288 -> 437.621 MB**, and cold replay **71.70525 ->
+69.97623 s**. Logical node bytes instead grow **178.289 -> 179.396 MB** despite
+nodes falling **25,752 -> 25,047**. Six-case Python peak grows **20.390 -> 21.161 MB**.
+Twelve-query ABBA BAAB means are **6.99619 -> 6.17832 s** total; these include three
+gained sources and are not repeated full-corpus estimates or significance evidence.
+Keep the candidate optional. All benchmark modes, allocations, profiles and
+repeated timing controls ran sequentially after verification completed.
+
+The separate indexing-only audit replays **24,122 old nodes / 1,429 sources** with
+identical bytes and no inserts. Its 3,753 terminal checks reduce subset comparisons
+**33,367,619 -> 6,284,481**, removing **81.17%** of pairs with identical certificates.
+Its standalone node replay is 51.15654 s, excluding file preparation and source
+binding replay; do not compare it directly with a full cold audit including
+ordinary solver certificates. Expected indexed search is O(L+m log(m+1)+P w),
+temporary space O(L+m), with P=O(m²) still possible. This does not improve an
+unrestricted-SAT worst-case bound.
+
+The new policy has 3,916 terminal searches, 110 local exposures (28 original,
+82 implied), 3,684 nonempty pools and 29,897 binary clauses. Search evidence grows
+**3.963 -> 9.030 MB**, including **5.087 MB** of implication data. The saved offline
+relevance control retains only proved binaries fitting a long clause of the
+original minimal core: **29,897 -> 7,505 (74.90%)**, all 82 observed exposures
+preserved, **zero new frontier leaves**. It costs 2,278,253 relevance comparisons;
+augmented subset tests fall 8,990,250 -> 7,138,675 per search/check. Integration,
+end-to-end timing/storage and general syntactic family preservation remain open.
+Do not count this as new executed coverage or a total-cost saving.
+
+The next priorities have concrete evidence:
+
+1. **Repeated restriction and proof checking.** Source 1194 remains the largest
+   unresolved discovery case at 1.67226 s. Its separate profile again has 5,763
+   restrictions, 4,657 simplification checks and 2,221 propagations, dominating
+   own time. Share exact prepared clause/assumption or proof state with explicit
+   source binding and invalidation; compare acquisition, persistence and cold replay.
+2. **Unresolved structural interactions.** The enlarged frontier contains **116
+   sources / 148 leaves / 33,651 literals**. Existing-pool relevance filtering
+   adds no coverage. Test new source-entailed relations or exact decompositions,
+   charging discovery and recomposition. A larger blind budget is not a structural
+   explanation, and an unresolved category is not an efficient solver.
+3. **Useful pools and shared evidence.** Integrate relevance filtering only with
+   checked origins, preserved old results and all recognition costs; recorded local
+   preservation is not a universal family-preservation theorem. Source references
+   may reduce duplicated failed evidence, but lifetime archive and full-process
+   memory bounds remain open.
+
+All **403 Python tests** pass. The Lean lemma
+`signed_core_of_entailed_batch_models` composes entailed augmentation and signed-core
+model equivalence; the full build audits **4,130 declarations / 1,972 theorems**.
+It does not refine Python's encodings, checker, persistence or costs. All three
+full, three pilot and three previous archives replay byte-identically, including
+all alternatives and sources; full modes retain **21,838 solver residuals**. Warm
+reuse inserts nothing. Both new reports have **59 matching fingerprints**; all
+mechanism, timing and index-control script/input hashes were verified.
+
+Manuscript Section **12.62**, Corollary **12.44** and Table **23** record the semantic
+composition, five measured gains, mixed resource effects and unintegrated pool
+opportunity. All **55 previous proof blocks** remain, with 56 proofs and **202
+unique labels**. The **118-page PDF** builds without final-pass warnings or box
+errors; pages **109--112** were rendered and visually inspected. README, ranked
+priorities, discovery and resource records are updated. No unrestricted efficient
+partition, universal compact closure or P-versus-NP conclusion is asserted.

@@ -192,6 +192,16 @@ proved implications, repeated propagation/checking and retained state. Eight
 further residuals expose 2-CNF in a saved diagnostic; three potential source
 closures still require integration. **112 sources** remain structurally unresolved.
 
+The [original-implication follow-up](experiments/results/cnf-implied-subsumption/README.md)
+closes five additional sources: **864 -> 869 / 985** non-tiny queries, with no losses.
+It reuses existing proofs as subset witnesses and skips futile equal-width tests.
+Full-sample time stays near **170 seconds**; logical state and the six-case Python
+peak grow. All **403 tests** and the Lean audit pass. The current frontier has
+**116 open sources** in the enlarged corpus. Repeated restriction/proof checking
+remains the main profiled cost; an offline relevance filter removes 75% of saved
+implication candidates while retaining the observed exposures, but adds no new
+frontier coverage and has not yet been integrated or timed end to end.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

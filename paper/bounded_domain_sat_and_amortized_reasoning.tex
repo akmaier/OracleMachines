@@ -3081,6 +3081,63 @@ The offline control exposes eight additional 2-CNF leaves. Current selected plan
 
 All 395 Python tests pass, and the complete Lean build audits 4,129 declarations and 1,971 theorem declarations. Three full, three pilot and three previous archives replay byte-identically; warm reuse inserts nothing. Both new reports have 56 matching code, test and Lean fingerprints, with separate diagnostic and timing hashes. Operation timings include recognition, checking, serialization, persistence, solving and successful root lifts. Generation, truth tables, summary walks, compression, allocation diagnostics and cold replay are outside those timings. Tests, timing modes, allocation diagnostics and profiles run sequentially. The semantic lemmas and measured coverage gain leave Python refinement, unrestricted acquisition bounds and lifetime storage bounds open.
 
+\subsection{Using proved implications as subset witnesses}
+\label{sec:implied-subsumption}
+
+The next experiment uses original probe proofs for a different purpose. A binary implication can be redundant for propagation yet help remove a longer clause from a representation. After original signed-subset exposure fails, we enumerate all distinct absent binary consequences in the already acquired original unit traces, including those excluded by the learning filter as binary-transitive. We append that proved pool and look again for a recognized retained core. We make no fresh probe pass, and earlier successful reductions retain priority. Failed pools and searches remain available for replay.
+
+\begin{corollary}[A core exposed by entailed clauses]
+\label{cor:entailed-signed-core}
+Let $B$ be a collection of clauses entailed by a CNF $F$. If $K\subseteq F\cup B$ and each clause of $F\cup B$ contains a retained signed clause of $K$, then $F$ and $K$ have exactly the same models.
+\end{corollary}
+\begin{proof}
+Entailment gives $\operatorname{Models}(F)=\operatorname{Models}(F\cup B)$. Proposition~\ref{prop:signed-core-models} gives $\operatorname{Models}(F\cup B)=\operatorname{Models}(K)$. Composing the equalities proves the claim.
+\end{proof}
+
+The Lean lemma \texttt{signed\_core\_of\_entailed\_batch\_models} checks this composition. The implementation first replays the original source's probe traces, then reconstructs each appended clause from its assumption and unit coordinates. Only after those checks does it validate the augmented subset certificate, core recognition and child transport. A consequence may use an original clause that is subsequently removed; its proof is still checked against the complete original source, before augmentation. No implication is justified by a new clause in the same pool. Stored origins, literal signs and source bindings cannot be transferred to an edited source without checking again. The semantic corollary does not verify these Python mechanisms or bound their cost.
+
+We also remove the provably futile comparisons identified in the preceding experiment. For clauses with distinct literals, the retained candidates are ordered by cardinality. We test only strictly shorter candidates and use a retained-set lookup for an exact duplicate; once the scan reaches equal width, no different clause can be a subset. Inputs with repeated literals within a clause use the old algorithm because list length then differs from set cardinality. Thus the optimization preserves the old first-retained-witness policy, including duplicate clauses and empty clauses. The indexing-only mode keeps the old archive identity; implication exposure uses its own policy identity.
+
+If $P$ shorter-clause pairs are actually tested, indexed subset search costs expected $O(L+m\log(m+1)+Pw)$ work and $O(L+m)$ temporary space for $m$ clauses, $L$ literal occurrences and maximum width $w$. It still has $P=O(m^2)$ in the worst case. Enumerating the implication pool costs expected $O(L+U)$ work for total original unit-trace length $U$ and produces $b\leq U$ distinct absent binary clauses. The augmented search uses $m+b$ clauses and $L+2b$ occurrences; storing origins, checking the original proofs, classifying the core and persisting full identities remain separate costs. Verification reconstructs both the pool and the subset policy. Avoiding a fresh propagation pass does not make this acquisition free.
+
+The matched study retains the preceding 1,461 inputs and adds 36 growing, signed, edited and fresh random queries. Across 1,497 inputs, including 512 exhaustive tiny CNFs, structural closure rises from 864 to 869 of 985 non-tiny queries. Sources 857, 1185, 1289, 1368 and 1467 gain closure; none loses it. The old subset improves from 837 to 841 of 949, while new-query closure rises from 27 to 28 of 36, including 15 to 16 of 24 random 3-CNFs. Every independent SAT answer agrees. The three predicted source gains occur, but acquisition across alternative plans also finds two others. Closure means a checked plan whose selected leaves have recognized families; it is not a new SAT decision procedure.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Measurement & Signed baseline & Implication subsets \\
+\midrule
+Non-tiny closed sources & 864/985 & 869/985 \\
+Total operation time (s) & 169.84716 & 169.80609 \\
+Discovery time (s) & 127.44196 & 126.71711 \\
+Unchanged solver time (s) & 42.32325 & 43.00260 \\
+SQLite size (MB) & 438.288 & 437.621 \\
+Pattern nodes & 25,752 & 25,047 \\
+Logical node payload (MB) & 178.289 & 179.396 \\
+Cold replay (s) & 71.70525 & 69.97623 \\
+Warm inventory replay (s) & 0.29428 & 0.28194 \\
+Six-case Python peak (MB) & 20.390 & 21.161 \\
+Selected unresolved literals & 33,911 & 33,651 \\
+\bottomrule
+\end{tabular}
+\caption{Original implication proofs as subset witnesses. Full single samples show more coverage at essentially unchanged runtime. Logical state and the diagnostic Python peak grow despite fewer nodes and slightly smaller SQLite. MB are decimal. The six-case peak excludes native SQLite memory, RSS and full-corpus peak.}
+\label{tab:implied-subsumption}
+\end{table}
+
+Table~\ref{tab:implied-subsumption} does not establish a general speedup. Twelve-query ABBA BAAB controls average 6.99619 versus 6.17832 seconds total, and 6.69275 versus 5.88519 seconds discovery. They deliberately include three gained sources and are not repeated full-corpus trials. Four observations per mode do not establish significance. Their answers and summaries match the full study; counters, storage and database hashes repeat within each mode. Initialization is separate, at 0.07203 versus 0.32459 seconds in the full samples. Source bindings occupy 6.028 versus 6.033 MB across 1,465 records. We retain the candidate as an optional coverage policy.
+
+A separate indexing-only control keeps the old policy identity and certificate format. It replays all 24,122 pattern nodes and 1,429 source bindings from the preceding archive without inserts or byte changes. Across its 3,753 terminal checks, subset comparisons fall from 33,367,619 to 6,284,481, removing exactly the 27,083,138 futile equal-width comparisons identified earlier. This establishes identical evidence with less pair work on that archive. It does not isolate an end-to-end speedup. The implication policy uses a separate namespace because its descendants can differ; old results remain available.
+
+In the new policy, 3,916 terminal searches expose 110 local families: 28 through original subsets and 82 through implications. Of 3,888 original failures, 3,684 have a nonempty implication pool. These pools contain 29,897 binary clauses. Original searches perform 6,744,712 subset comparisons and augmented searches another 8,990,250; checking repeats both. The matched baseline performs 35,880,691 comparisons in each phase. Logical probes fall from 118,511 to 115,074, verified probes from 255,701 to 247,554, and conditioning candidates from 4,883 to 4,722. Different acquired alternatives prevent assigning all cost differences to indexing. The additional subset-witness pool is charged separately from the four-clause learning cap; it is not itself capped at four.
+
+Search fields grow from 3.963 to 9.030 MB, including 5.087 MB of implication data. We therefore test a narrower pool offline: retain a proved binary only if it is a signed subset of a long clause in the original minimal core. Across every nonempty encountered pool, including failed alternatives, this reduces 29,897 candidates to 7,505, or 74.90\%, while preserving all 82 observed implication exposures. It exposes no additional selected frontier leaf. The relevance scan costs 2,278,253 comparisons, and augmented subset tests fall from 8,990,250 to 7,138,675 per search/check. These are saved diagnostic results, not an integrated policy, a total-cost saving, or a theorem preserving every syntactic family.
+
+The remaining frontier contains 116 open sources and 148 distinct selected leaves, with 33,651 literals. The enlarged corpus changes the denominator, so these counts should not be compared directly with the preceding study's source count. Source 1194 remains the largest unresolved discovery case at 1.67226 seconds. Its separate profile again records 5,763 restrictions, 4,657 simplification checks and 2,221 propagations; these dominate its own-time costs after indexing. Reuse of exact prepared clause/assumption and proof-checking state is therefore the next broad runtime target. Further structural coverage needs new certified relations or exact decompositions, since filtering the current implication pool adds none. Shared evidence must retain source dependencies and invalidation checks.
+
+All 403 Python tests pass, and the full Lean build audits 4,130 declarations and 1,972 theorem declarations. Three full, three pilot and three previous archives replay byte-identically, including every alternative and source; each full mode retains 21,838 ordinary solver residuals. Warm reuse inserts nothing. Both new reports have 59 matching fingerprints, with separate diagnostic and timing hashes. Operation timings charge recognition, checking, serialization, persistence, solving and successful root lifts; generation, truth tables, summary walks, compression, initialization and cold replay are excluded or measured separately. Benchmark modes, allocations, profiles and repeated timing controls run sequentially after verification completes. The semantic composition and these finite experiments leave Python refinement, unrestricted acquisition bounds, compact closure and lifetime storage bounds open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

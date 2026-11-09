@@ -571,6 +571,50 @@ irreducible interactions and a lifetime storage bound remain open. All **395 tes
 the **4,129 / 1,971** Lean audit, three full/pilot/previous cold archives per group,
 and 56 fingerprints in both new reports pass.
 
+## Original implication proofs expose five more sources (9 November 2026)
+
+The [integrated follow-up](../experiments/results/cnf-implied-subsumption/README.md)
+uses all distinct absent binary implications from the original probe traces,
+including binary-transitive consequences excluded by learning selection. A proved
+binary can remove a longer clause even when it adds nothing to propagation.
+Original subset exposures retain priority; only their failures try the augmented
+core. Recognition still uses existing families and no generator labels. A new
+Lean lemma proves model equivalence by composing entailment with signed-subset
+coverage. Original proofs are checked before their origin coordinates, augmented
+witnesses, normalization and lifts. Edited sources must be checked anew.
+
+On **1,497 inputs**, closure rises **864 -> 869 / 985 non-tiny**, with gains on
+**857, 1185, 1289, 1368 and 1467** and no losses. The old subset improves **837 ->
+841 / 949**; fresh-query closure **27 -> 28 / 36**, including **15 -> 16 / 24** new
+random 3-CNFs. All independent SAT answers agree. There are **82 implication
+exposures** across encountered alternatives, not 82 additional source closures.
+The remaining frontier has **116 sources / 148 leaves / 33,651 literals**.
+
+Full-sample operation time is **169.84716 -> 169.80609 s**, discovery **127.44196 ->
+126.71711 s**, SQLite **438.288 -> 437.621 MB**, cold replay **71.70525 -> 69.97623 s**,
+but logical node state **178.289 -> 179.396 MB** and six-case Python peak **20.390 ->
+21.161 MB**. No general speed or memory improvement follows. Pool enumeration,
+proof replay, unsuccessful searches and persistence remain charged. Indexing skips
+equal-width distinct clauses while preserving the old deterministic witnesses;
+repeated literals use the old fallback. The new implication policy has its own
+namespace; prior archives remain available.
+
+An offline control filters every nonempty pool to proved binaries contained in a
+long clause of the original minimal core. The pool shrinks **29,897 -> 7,505**,
+with all **82** encountered exposures preserved. However, **no additional selected
+leaf** becomes recognized, and the relevance scan costs **2,278,253 comparisons**.
+This is a possible storage/acquisition improvement, not an integrated result or
+universal family-preservation theorem. Further coverage needs new certified
+relations or exact decompositions of unresolved interactions. Source 1194 remains
+the largest unresolved discovery case at **1.67226 s**, with **5,763 restrictions,
+4,657 simplification checks and 2,221 propagations** in its separate profile.
+
+All **403 tests**, the **4,130 / 1,972** Lean audit, full/pilot/prior cold checks
+and **59 report fingerprints** pass. Semantic composition does not formally refine
+Python or establish polynomial acquisition, compact closure, lifetime storage or
+an efficient partition for unrestricted SAT. Detailed controls and saved failed
+pools are in the study; earlier results are preserved.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

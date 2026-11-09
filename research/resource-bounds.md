@@ -1507,3 +1507,78 @@ complete their selected plans after integration. These prospective gains are not
 counted in 837/949, and their enumeration, proof/transport, persistence and replay
 costs remain to be integrated. All **395 tests**, the **4,129 / 1,971** Lean audit,
 56 report fingerprints and independently hashed diagnostics pass.
+
+## Follow-up: indexed subsets and original implication reuse (9 November)
+
+`ImpliedSubsumptionInventory` first keeps the original signed-subset exposures.
+Only after their failure does it enumerate distinct absent binary consequences
+from the already acquired original probe traces and search the augmented CNF
+for a recognized core. No fresh probe pass is added. All original reasons are
+replayed before reconstructing clause origins, signed subset witnesses and child
+bindings. An implication may use a subsequently removed original clause because
+its proof is checked against the complete original source, before augmentation.
+Failed pools remain persistent. The new Lean composition lemma establishes
+model equivalence; it does not refine Python or its costs.
+
+Length filtering preserves the old first-retained-witness policy: check strictly
+shorter retained clauses, stop at equal width, and use an exact retained-set
+lookup for duplicates. Repeated literals within a clause trigger the old fallback
+because list length then differs from cardinality. With P tested shorter pairs,
+this costs expected **O(L + m log(m+1) + P w)** work and **O(L+m)** temporary space.
+The worst case still has P=O(m²). Original implication enumeration costs expected
+**O(L+U)** for unit-trace length U and produces b<=U binary clauses. Augmented
+search then has m+b clauses and L+2b literal occurrences. Original proof checking,
+origin storage, profile reconstruction, normalization and archive identities remain
+charged; validation reconstructs both the pool and the subset policy.
+
+The indexing-only mode retains the previous policy identity and certificate
+format, enabling complete old-archive replay without rekeying. The implication
+policy has a separate namespace because it can produce different descendants.
+The twelve-source pilot closes 1185/1289/1368 and preserves the four prior gains,
+with no lost closures. Pilot time falls 9.03940 -> 7.40206 seconds and SQLite
+22,654,976 -> 19,824,640 bytes; deliberately selected single samples do not justify
+a general speed claim. The full matched results and all failed attempts follow
+in the study record.
+
+The full **1,497-query** study closes **864 -> 869 / 985 non-tiny** sources, with
+five gains and no losses. Full single-sample total time is essentially unchanged
+(**169.84716 -> 169.80609 s**), discovery **127.44196 -> 126.71711 s**, and unchanged
+solver **42.32325 -> 43.00260 s**. Twelve-query ABBA BAAB controls average **6.99619
+-> 6.17832 s** total and **6.69275 -> 5.88519 s** discovery; they include three gained
+sources and do not estimate repeated full-corpus performance or significance.
+
+SQLite falls **438,288,384 -> 437,620,736 bytes**, but logical node payload grows
+**178,289,290 -> 179,395,726 bytes** despite fewer nodes (**25,752 -> 25,047**).
+Source bindings occupy **6,028,353 -> 6,032,748 bytes** across 1,465 records. Cold
+replay is **71.70525 -> 69.97623 s**, warm reuse **0.29428 -> 0.28194 s**, initialization
+separately **0.07203 -> 0.32459 s**. Six-case Python peak grows **20,390,278 ->
+21,161,046 bytes**, excluding native SQLite, RSS and full-corpus peak. Each mode
+retains 21,838 ordinary solver residuals. These are finite measurements, not
+bounds on lifetime state or general SAT memory requirements.
+
+The complete old-archive indexing control checks all **24,122 nodes / 1,429 source
+bindings**, with identical database bytes and no inserts. Its 3,753 terminal checks
+reduce subset comparisons **33,367,619 -> 6,284,481**, avoiding exactly **27,083,138
+(81.17%)** futile equal-width pairs. This isolates exact-work/certificate
+compatibility, not an end-to-end timing gain. The expanded implication policy
+instead has 3,916 terminal searches, 110 exposures (28 original, 82 implied) and
+3,684 nonempty pools containing 29,897 binary clauses. Each discovery/check phase
+performs 6,744,712 original and 8,990,250 augmented subset tests. The matched naive
+baseline performs 35,880,691 tests per phase. Pool construction and width/exact
+lookups remain additional work; changed alternatives prevent direct attribution.
+
+Search data grows **3,962,842 -> 9,029,905 bytes**, including **5,086,738 bytes** of
+implication evidence. The offline relevance control reduces the pool **29,897 ->
+7,505**, retaining all 82 observed exposures and exposing no further frontier leaf.
+It costs **2,278,253 relevance comparisons** and reduces augmented subset tests to
+7,138,675 per search/check. No integrated storage/runtime or universal syntactic
+family-preservation guarantee follows. Filtering and source-bound proof replay
+must be included in any follow-up comparison.
+
+The remaining frontier has **116 sources / 148 distinct leaves / 33,651 literals**.
+The largest unresolved discovery case is again 1194 (**1.67226 s**). Its separate
+profile contains 5,763 restrictions, 4,657 simplification checks and 2,221
+propagations. These dominate own-time costs after indexing and motivate exact
+prepared-state/proof reuse. Additional coverage requires new relations or exact
+decompositions. All 403 tests, the 4,130/1,972 Lean audit, cold checks and 59 report
+fingerprints pass; no unrestricted acquisition or compact-closure bound follows.

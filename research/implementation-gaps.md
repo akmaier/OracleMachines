@@ -4449,3 +4449,23 @@ propagation influence across families and portable reuse of successful plans,
 with baseline diversity, explicit missing traces, matched budgets and fresh data.
 Do not repeat this static-overlap heuristic or promote its favorable small memory
 subset as a general result.
+
+## 2026-11-09: reuse unit traces to reorder, preserve coverage, reject slowdown
+
+Added optional `ProbeRankInventory`, reusing only original source-bound traces
+and promoting one existing candidate while retaining the rest. No new probe or
+auxiliary discovery is requested; checking reconstructs the order after validating
+the original proofs. All 453 Python tests pass. New Lean lemmas establish set
+membership and the local closure implication, without a Python refinement.
+
+The [two-run frontier comparison](../experiments/results/cnf-probe-rank-frontier/README.md)
+keeps 60/106 closures but discovery increases 5.19854 -> 5.44908 seconds; total
+8.22342 -> 8.63390. Attempts stay at 268. Nodes fall 1,540 -> 1,524 while SQLite
+grows 35,840,000 -> 35,979,264 bytes. The [fresh controls](../experiments/results/cnf-probe-rank-fresh/README.md)
+keep 71/96 closures, with no changed candidate orders and effectively flat mean
+time. Thirty-six of 39 branching states lack binary clauses; only 9/156 candidate
+positions have paired traces. Archive bytes are reproducible across execution
+orders, independently cold-checked, and preserved under warm replay. No policy
+promotion or original-source coverage gain follows. Next investigate bounded
+multi-variable interfaces or exposed binary relations, and portable successful
+plans/direct proof transport instead of another scalar ordering proxy.

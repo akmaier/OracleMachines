@@ -12,7 +12,55 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: static obstruction ranking regresses
+## Current investigation: saved unit counts do not predict cheaper closure
+
+The [checked probe-ranking experiment](probe-rank.md) preserves the entire old
+candidate set and changes only order. Two reversed-order frontier runs keep
+**60/106** closed but regress in mean discovery **5.19854 -> 5.44908 s (4.82%)**
+and total **8.22342 -> 8.63390 s (4.99%)**. Both attempt 268 candidates, despite
+26 changed orders. Fewer nodes (1,540 -> 1,524) coexist with more SQLite bytes
+(35,840,000 -> 35,979,264). The policy stays optional; do not promote it.
+
+The frozen fresh controls keep **71/96** closed and change no order. Of 39 OR
+states, **36 have no binary clauses**; just **9/156** candidate positions have
+paired original traces. For a normalized CNF of minimum width three, one assignment
+cannot create a unit, so these missing single-variable effects cannot be repaired
+by another unit-count score. Both execution orders, archives and regressions remain
+retained. Original-source coverage stays **898/985**.
+
+The next ranked gaps are:
+
+1. **Expose interactions invisible to a single-assumption probe.** Investigate a
+   bounded two-variable interface or the binary relation exposed after one split
+   on the unresolved binary-free states. Require exact recomposition and charge
+   candidate discovery and all branches. There is no small-interface guarantee
+   for arbitrary SAT. Do not replace missing evidence with a zero-effect score.
+2. **Reuse a successful plan independently of the ranking that found it.** The
+   prior obstruction/baseline union remains 63/106; running both costs extra.
+   Source/child-bound, independently checked plans could avoid reacquisition and
+   repeated policy-key state. No such portable plan layer is implemented yet.
+3. **Reuse proof work directly before tuning another proxy.** Conditioning still
+   constructs and normalizes residuals, then prepares/checks their closures.
+   Reusing original probe reasons there requires clause-index and variable-name
+   transport; ranking by the number of reasons performs none of that transport.
+   Whole-source reconstruction/normalization remains the measured dominant cost.
+4. **Keep coverage preservation distinct from efficiency.** Two new Lean lemmas
+   prove candidate membership and local closure invariance given corresponding
+   child closures. Global finite-expansion induction also requires unchanged
+   reductions/budgets and no history-dependent timeout. There is no Python
+   refinement, optimality result, or new unrestricted-SAT tractability claim.
+
+Implementation/evidence checkpoint **7b5fa22**. The full Lean build and axiom
+audit pass (**4,140 declarations / 1,981 theorem declarations**). All 61 previous
+manuscript proof blocks survive, with one new local-closure proposition.
+
+All **453 Python tests** pass. Cold replay checks every saved proof/source and
+preserves bytes; warm replay adds nothing. Fresh-key overhead is measured rather
+than ignored. Four-case allocation diagnostics do not bound total process memory.
+See the [frontier evidence](../experiments/results/cnf-probe-rank-frontier/README.md)
+and [fresh evidence](../experiments/results/cnf-probe-rank-fresh/README.md).
+
+## Previous investigation: static obstruction ranking regresses
 
 The [matched frontier experiment](../experiments/results/cnf-obstruction-frontier/README.md)
 gives the 106 previously exhausted leaves one extra conditioning level in both

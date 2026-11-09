@@ -256,6 +256,16 @@ variables lie outside the recorded obstruction. Saved probe proofs expose an
 indirect propagation effect in one case, giving a concrete next reuse target.
 All **448 tests** pass. Original-source coverage remains **898/985**.
 
+The [saved-probe ordering test](experiments/results/cnf-probe-rank-frontier/README.md)
+keeps every baseline candidate and reuses original proofs to change only order.
+Coverage is preserved, but two reversed-order runs regress in mean discovery
+**4.82%**; the policy is not promoted. The [96 fresh controls](experiments/results/cnf-probe-rank-fresh/README.md)
+change no order: **36/39 branching states have no binary clauses**, leaving most
+candidates without unit-probe evidence. Bounded multi-variable interactions and
+portable successful plans are the next targets. Two Lean lemmas capture the
+local coverage condition; all **453 Python tests** pass. Original-source coverage
+remains **898/985**.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

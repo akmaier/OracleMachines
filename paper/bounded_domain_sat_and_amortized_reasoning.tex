@@ -3381,6 +3381,32 @@ The explanation is incomplete by design. Cases 17 and 50 have saved original pro
 
 All 448 Python tests pass, including guarded supports, persistence under raw restriction, exhaustive tiny model/recomposition checks, random edits, caps, cold certificate reuse with discovery disabled, corruption rejection and old-row preservation. Both cold archives and warm replay preserve all rows. All 60 preceding manuscript proof blocks remain intact. Existing Lean conditioning semantics cover the unchanged branching rule; Lean sources are unchanged and no new Python refinement is asserted.
 
+
+\subsection{Reordering existing candidates from saved probe proofs}
+\label{sec:probe-rank}
+
+A smaller intervention retains the existing conditioning candidates and uses already-checked unit traces only to change their order. For each candidate with original probes under both assumptions, let $u_0,u_1$ count the propagated variables. If both counts are positive, rank the candidate by $(\min(u_0,u_1),u_0+u_1)$; ties retain the old order. Move the best eligible candidate to the front and keep every other candidate in its previous relative position. Missing traces remain unknown. Learned continuations are excluded because their reason indices refer to an augmented source. This policy adds no propagation or auxiliary recognition and stores no duplicate unit proof.
+
+\begin{proposition}[Closure under an unchanged candidate pool]
+\label{prop:conditioning-pool-closure}
+Suppose two terminating discovery policies have the same recognizers, reductions, child budgets and candidate sets at corresponding states. They differ only in candidate order, stopping at the first split whose two branches close or after exhausting the candidate set. If corresponding child states have the same closure outcomes, the parent has the same closure outcome under both policies.
+\end{proposition}
+\begin{proof}
+Writing $C_b(v)$ for closure of the branch under $v=b$, parent closure is
+\[
+  \bigvee_{v\in V}\bigl(C_0(v)\land C_1(v)\bigr).
+\]
+Changing the order of the finite set $V$ leaves this expression unchanged. Early stopping at a true term preserves the expression; if no term is true, both policies exhaust $V$. The child-outcome premise extends inductively through a finite expansion when the corresponding reductions and component compositions also preserve closure. No bound on the cost of those operations follows.
+\end{proof}
+
+The premise excludes timeouts, a shared work budget that can expire in a different place, and history-dependent changes to the candidate set. It preserves a Boolean coverage outcome, not the selected proof graph, acquisition cost or least-cost split. Two lemmas in \texttt{Residuals.lean} check membership preservation and the local closure implication. They do not refine the Python scheduler or discharge its recursive correspondence obligations.
+
+The frozen implementation is tested twice per suite, with execution order reversed. On the 106 saved frontier inputs, both policies close 60. Mean discovery increases from 5.19854 to 5.44908 seconds (4.82\%); mean total time from 8.22342 to 8.63390 seconds (4.99\%). Twenty-six distinct branching states change order, but both runs attempt 268 candidates. Pattern nodes fall from 1,540 to 1,524, while SQLite grows from 35,840,000 to 35,979,264 bytes. Repeated policy configuration in keys can outweigh a smaller graph. Mean cold replay increases from 3.49969 to 3.58164 seconds. These two samples are not a significance estimate.
+
+A separate frozen set of 96 fresh random, signed, edited and disconnected-mixture inputs closes 71 under each policy. Mean discovery is 1.78113 versus 1.79121 seconds and total time 3.07464 versus 3.07502 seconds. No candidate order changes. Of 39 acquired branching states, 36 have no binary clauses; only 9 of 156 candidate positions have paired original traces. The other 147 are unmeasured. Both modes retain 684 nodes, but SQLite grows from 15,417,344 to 15,585,280 bytes. Four-case Python allocation measurements exclude native SQLite, process memory and the full-corpus peak. Every answer and root profile agrees, cold replay checks all retained evidence without changing database bytes, and warm replay adds no rows.
+
+This result narrows the next discovery gap. On a normalized CNF whose clauses all contain at least three distinct variables, assigning one variable removes at most one literal from a surviving clause. No unit clause is created, so unit propagation alone cannot begin. Counting saved unit consequences therefore cannot expose all useful interactions in such states. The next candidate should examine a bounded multi-variable interface or the structure of the resulting binary clauses, with exact composition and explicit acquisition cost. Reordering remains optional and is not promoted: it gives no new original-source coverage, and the retained 898/985 baseline is unchanged. The experiment, all earlier results and both execution orders remain available in the repository.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

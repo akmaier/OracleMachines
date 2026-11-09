@@ -1862,3 +1862,22 @@ restriction are charged in a separate diagnostic; loading/indexing are excluded
 from that diagnostic's timer. Some candidates lack those traces, and cases 17
 and 50 close later despite no original damage to the saved obstruction. Reuse
 of such evidence across families is a next experiment, not an achieved saving.
+
+## 2026-11-09: cheap ranking can still increase total cost
+
+The [probe-ranking account](probe-rank.md) adds O(p+c) table/selection work and
+transient entries for p original attempts and c existing candidates; lengths of
+saved unit lists are read without rescanning units. Conservatively include O(L)
+for exact source-context comparison. Ordinary hashing and bounded integer costs
+are assumptions; the old O(L+v log(v+1)) ranking and all recursive acquisition
+remain. There is no new unit certificate or retained cache, but versioned policy
+configuration repeats in keys, references and source bindings.
+
+Reversed-order frontier means: discovery 5.19854 -> 5.44908 s, total 8.22342 ->
+8.63390, cold 3.49969 -> 3.58164, SQLite 35,840,000 -> 35,979,264 bytes despite
+1,540 -> 1,524 nodes. Both try 268 candidates. Fresh means are nearly unchanged;
+684 nodes persist under both modes, while SQLite grows 15,417,344 -> 15,585,280
+bytes. Small traced allocations exclude native SQLite/RSS/full-corpus peak.
+Historical archives are retained; no storage is freed. Closure preservation
+under an unchanged candidate pool is not a runtime bound or a least-cost policy.
+The two new Lean lemmas capture the local logical premise, not machine costs.

@@ -823,3 +823,21 @@ The remaining universal question is whether all inputs admit useful states and
 updates with uniform construction, size and evaluation bounds. An exhaustive
 partition, small-case coverage or inexpensive updates after unbounded preparation
 does not settle it. Keep the cost of the prepared oracle explicit.
+
+## 2026-11-09: the information gap in single-assumption probe ranking
+
+The [probe-reuse test](probe-rank.md) keeps every baseline conditioning candidate.
+Original checked unit counts only reorder them. Frontier closure stays 60/106,
+but mean discovery regresses 4.82% across reversed execution orders. The fresh
+96-case comparison keeps 71 closed and changes no order: 36/39 OR states lack
+binary clauses, and 147/156 candidate positions have no paired original traces.
+A normalized minimum-width-three CNF cannot yield a unit after assigning just
+one variable. This identifies a concrete discovery gap: multi-variable interactions
+or the newly exposed binary relation, rather than more tuning of unit counts.
+Keep exact composition and recognition costs explicit; no uniformly small
+interface is established. The old policy stays at 898/985 original-source coverage.
+
+Two Lean lemmas prove membership preservation and local closure invariance under
+explicit child correspondence. All 453 Python tests pass, including old-row/cold
+preservation and exhaustive small model checks. The optional heuristic is not
+promoted; both complete execution orders and every earlier result are retained.

@@ -1394,3 +1394,13 @@ pair-constraint recognition, independent source-linked certificates and child
 normalization. Lean does not verify those Python operations or resource bounds.
 The full build/axiom audit passes at **4,136 declarations / 1,977 theorem
 declarations**; all **441 Python tests** pass.
+
+The probe-ranking experiment adds `promote_existing_candidate_membership` and
+`conditioning_pool_closure_invariant` to `Residuals.lean`. Promoting a member keeps
+the candidate set; the existence of a two-branch closed split is invariant when
+candidate membership and corresponding child closure are invariant. The recursive
+child premise is explicit. These lemmas do not prove a Python refinement, equal
+acquisition costs or optimal order. See the [implementation and limits](../research/probe-rank.md).
+
+The complete Lean build and axiom audit pass: **4,140 namespace declarations /
+1,981 theorem declarations**, allowing only the existing standard Lean axioms.

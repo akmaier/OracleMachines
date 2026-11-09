@@ -17,6 +17,8 @@ These two runs reverse execution order while keeping the policy and budgets fixe
 | Mean cold seconds | 3.499693 | 3.581641 |
 | Mean warm seconds | 0.027193 | 0.027932 |
 
+Four-case peak traced Python allocation in the first run: 2,902,681 -> 2,910,797 bytes. This is not full-process or full-corpus memory.
+
 No coverage gains or losses occur. All SAT answers and root profiles agree. Cold checks leave each database byte-identical; warm replay inserts nothing. Each policy produces the same archive bytes in both execution orders. Previous results are preserved.
 
 The ranking only promotes an existing candidate with positive original unit counts in both branches. It adds no probe or SCC discovery and no duplicate unit proof. Missing effects stay unknown; continuations over augmented sources are excluded. The checker validates source-bound traces before reconstructing the order.

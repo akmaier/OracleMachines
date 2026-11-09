@@ -1,0 +1,51 @@
+baseline case 0
+baseline case 200
+baseline case 400
+baseline case 600
+baseline case 800
+baseline case 1000
+baseline case 1200
+baseline case 1400
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_checked_probe_reuse.py", line 148, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_checked_probe_reuse.py", line 111, in main
+    checked=cold_audit(Path(tmp)/'cold.db',raw,cls,options)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_checked_probe_reuse.py", line 42, in cold_audit
+    h._load(key);nodes+=1
+    ~~~~~~~^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_pattern_inventory.py", line 122, in _load
+    self._check(key, node)
+    ~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_failed_literal.py", line 139, in _check
+    self._check_profile(key, node, cnf, profile, groups)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_implied_subsumption.py", line 168, in _check_profile
+    return ActivityLearningInventory._check_profile(self, key, node, cnf, profile, groups)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_failed_literal.py", line 156, in _check_profile
+    target, _ = self._check_probes(cnf, profile['probing'])
+                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_learning_activity.py", line 87, in _check_probes
+    return check_activity_probes(cnf, result, self.config['probe_limit'], self.config['learn_limit'], self.counts)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_learning_activity.py", line 73, in check_activity_probes
+    target, fixed = check_reuse_probes(cnf, result, probe_limit, learn_limit, counts,
+                    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        _select_batch=select, _continuation_choices=choices)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_closure_reuse.py", line 104, in check_reuse_probes
+    target, fixed = check_equivalence_probes(cnf, result, probe_limit, counts)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_equivalence.py", line 61, in check_equivalence_probes
+    target, fixed = check_common_probes(cnf, result, limit, counts, _check_attempt=_check_attempt, _choices=_choices)
+                    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_common_consequence.py", line 43, in check_common_probes
+    target, fixed = check_probes(cnf, result, limit, counts, _check_attempt=_check_attempt, _choices=_choices)
+                    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_failed_literal.py", line 68, in check_probes
+    branch = restrict(cnf, {variable: value}, counts)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py", line 50, in restrict
+    result.append(tuple(lit for lit in clause if abs(lit) not in assignment))
+                  ^^^^^
+KeyboardInterrupt

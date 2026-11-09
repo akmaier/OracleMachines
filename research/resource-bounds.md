@@ -1167,3 +1167,47 @@ the old batch while applying the new clauses, charging both batch/ranking work.
 Its total cost and coverage are not yet measured. Local controls establish that
 the choice order can change the first forced variable and subsequent acquisition;
 a successful local reduction alone predicts neither source closure nor savings.
+
+## Follow-up: selected clauses with baseline continuation choices (9 November)
+
+`FixedOrderLearningInventory` reconstructs the old first-four batch from the
+checked original probe traces, ranks variables on that augmented formula, then
+propagates the selected batch using the reconstructed variable list/order. The
+same procedure runs during independent checking; a persisted choice hint is
+never trusted. The original phase, strict support reduction, recognition
+priorities and per-node caps remain unchanged. A distinct replacement policy tag
+keeps all preceding archives valid and separate.
+
+For each eligible continuation, reconstruction adds expected
+O(ell+kd(d+m2+q)) work for the old bounded implication filter, plus
+O(ell+q+d log d) for binary-frequency ranking. Here ell is the source literal
+count, d its variable count, m2 its binary clauses, k probe variables and q the
+retained-clause cap. Temporary graph/maps, the augmented clause sequence and
+repeated checks are also charged. No second propagation pass is introduced at
+that same continuation, but later acquisition can still change. Fixed choices
+at one exact parent do not freeze its child formula, later ranks or first
+conflicts under different learned clauses.
+
+The [1,281-input comparison](../experiments/results/cnf-learning-fixed-order/README.md)
+has identical **692/769** non-tiny and **18/24** fresh closure under baseline,
+selected and fixed-order policies. Fixed order retains the same gain/loss pair
+as selection. Total time is **77.916 / 82.421 / 80.720 s**, SQLite **252.244 /
+252.498 / 252.391 MB**, and cold replay **33.506 / 33.585 / 34.309 s**. The same
+six-case Python peak is **20.022 / 20.121 / 20.127 MB**; native memory/RSS and
+full-corpus peak are excluded. These are single sequential samples, without
+concurrent tests, builds or commits during measurements.
+
+Fixed order charges 6,418 reconstructions and 25,662 ranked candidate positions
+across acquisition/checking; learned candidate visits grow 152,026 -> 254,742
+versus selection. Its logical node bytes grow despite slightly lower SQLite
+bytes; the shorter policy tag also affects keys/source records. Relative to
+baseline, nodes rise 16,052 -> 16,126 and probes 89,782 -> 90,713, while selected
+unresolved literals fall 18,362 -> 17,971 without greater source coverage.
+
+The saved 956 control has identical forced assignments and the same 54-clause
+restricted original core, yet three versus four retained redundant additions
+change descendant closure. This motivates sharing a checked semantic core and
+keeping propagation hints separately. Construction, hint checking, context-aware
+discovery state, invalidation, canonicalization and persistence must all be
+charged. No cost or coverage improvement from this next representation is yet
+measured; arbitrary semantic equivalence recognition is not assumed available.

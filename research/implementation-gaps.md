@@ -3490,3 +3490,85 @@ without final-pass warnings or box errors; pages 96--100, including the changed
 section, table and discussion transition, were visually inspected. The discovery plan, ranked priorities,
 resource bounds and project/formal READMEs record this completed experiment and
 the controlled next target.
+
+## 9 November: fixed continuation choices and a shared-core counterexample
+
+Implementation/evidence checkpoint **bdc6dc7** is pushed. The optional
+`FixedOrderLearningInventory` reconstructs the old first-four batch and its
+binary-frequency ranking at each exact parent, then propagates the selected
+batch under that variable list/order. Both reconstruction and checking are
+charged. The checker validates original proofs before reconstructing choices;
+no persisted ranking hint is trusted. The original phase, earlier recognition
+and decomposition priorities, local caps, strict support decrease and exact
+child/model-lift obligations remain unchanged. A separate policy tag preserves
+all old archives. The independent decision solver is unchanged.
+
+The [three-source pilot](../experiments/results/cnf-learning-fixed-order-pilot/README.md)
+tests 956/1024/1189. Fixed order keeps the earlier gain 1024 but neither recovers
+956 nor closes 1189. The [full comparison](../experiments/results/cnf-learning-fixed-order/README.md)
+retains all 1,245 previous inputs and adds 24 random 3-CNFs at 20/32/48 variables
+plus twelve growing/signed/edited controls. All three policies close **692/769**
+non-tiny and **18/24** fresh random inputs. Both selected modes gain 1024 and lose
+956 against baseline, with no closure changes between selection and fixed order.
+**77 sources** remain structurally unresolved; all original decisions agree and
+the ordinary solver retains **13,641 residuals** per mode.
+
+Baseline/selection/fixed total time is **77.91555 / 82.42121 / 80.71966 s**, SQLite
+**252,243,968 / 252,497,920 / 252,391,424 bytes**, cold replay **33.50593 / 33.58541 /
+34.30859 s**, and same-six-case Python peak **20,021,661 / 20,121,465 / 20,127,074
+bytes**. Fixed order is 3.60% slower than baseline. Its 2.06% lower sample time
+than selection is not a general speed claim. Peak excludes native SQLite/RSS
+and the full corpus. Primary modes, memory diagnostics and separate profiling
+ran sequentially without concurrent tests, Lean builds or commits.
+
+Nodes are **16,052 / 16,106 / 16,126**, logical probes **89,782 / 90,513 / 90,713**,
+and logical node bytes **100,112,588 / 100,290,071 / 100,315,272**. Physical storage
+and logical payload move differently; the shorter fixed-policy tag also changes
+keys/source records. Fixed order incurs **6,418 reconstructions**, **25,662 ranked
+candidate positions**, and 254,742 learned candidate visits versus selection's
+152,026. Selected unresolved literals fall 18,362 -> 17,971 versus baseline
+without greater coverage. The frontier retains 111 distinct leaves, 71
+learning-clear and forty clear. Source **1194** remains the largest discovery
+case at 1.41725 s; its separate 4.58346 s profile again identifies restriction,
+unit checking/propagation and literal helpers.
+
+The preserved `mechanisms.json` contains all three selected source paths, every
+current unresolved leaf and controlled parent/child acquisitions. On 956's saved
+18-variable parent, baseline and fixed order both first refute `14=true`, fix
+only `14=false`, and leave **the identical 54-clause original restriction**.
+Baseline retains three extra clauses `[1,17]`, `[9,13]`, `[16,17]`; its 17-variable,
+57-clause child closes. Fixed retains four `[-18,16]`, `[9,13]`, `[13,18]`, `[16,17]`;
+its 17-variable, 58-clause child stays open with eighteen unresolved literals.
+All additions are originally entailed, so the two restricted model relations
+agree. Immediate order was only part of the earlier loss; representation changes
+still affect descendant discovery. At 1024, both selected policies force `3=true`
+and close the 27-variable child. Do not promote fixed order as a coverage fix.
+
+**Next experiment:** separate the restricted original core from checked learned
+hints. Use the core for structural identity/recognition and retain scoped hints
+for propagation. Test 956/1024/1189 and the saved frontier before old/fresh full
+inputs. Charge core reconstruction, hint checks, transport, canonicalization,
+serialization and cold replay. Keep hint/policy context on discovery plans even
+when core decisions/certificates share storage. Edits, changed assignments and
+dependencies require revalidation. Removing useful hints can lose coverage; no
+improvement from this next representation is measured yet. The rule uses known
+entailment and shared provenance, not unrestricted semantic equivalence testing.
+
+All **358 Python tests** pass (30.30 s), including all 512 two-variable inputs and
+3,304 three-variable subsets of at most three clauses at caps 0/1/4, exact fibers,
+independently expanded references, a seeded changed-order fixture, signed
+mixtures/edits, wrong orders, corrupt reasons, omitted/forged batches, disabled
+mode and cold coexistence. Four full, four pilot and three preceding archives
+replay byte-identically; warm reuse inserts nothing. Both reports' **43 code/test
+fingerprints** match. The unchanged Lean build/axiom audit passes at **4,122
+declarations / 1,965 theorem declarations**. Existing semantic lemmas justify the
+choice-independent reductions; no new Python or complexity refinement is claimed.
+
+Manuscript Section **12.56** and Table **17** record the policy, bounds, complete
+negative coverage result and the same-core counterexample. Applying the existing
+batch equivalence to valuations extending a partial assignment proves the stated
+restricted-model equality. All **54 earlier proof blocks** remain unchanged, with
+**188 unique labels**. The **107-page** PDF builds without final-pass warnings or
+box errors; changed pages 99--102, including the table, equality and discussion
+transition, were visually inspected. Project/formal READMEs, resource bounds, discovery plan and ranked
+priorities now point to the shared-core/hint experiment.

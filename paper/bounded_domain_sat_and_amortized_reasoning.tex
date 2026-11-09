@@ -2837,6 +2837,51 @@ The next controlled experiment will apply the selected batch while freezing cont
 
 All 353 Python tests pass, including exhaustive small fibers, signed mixtures and edits, deterministic selection, expanded-reference replay, invalid batches, corrupted original reasons, disabled mode and cold coexistence. Three full, three pilot and four preceding archives replay byte-identically. Both new reports' forty source and test fingerprints match the measured code. The full Lean build and axiom audit pass at 4,122 declarations and 1,965 theorem declarations. The subset lemma concerns semantic preservation; Python, persistence and resource refinement remain separate obligations.
 
+\subsection{Holding continuation choices fixed}
+\label{sec:learning-fixed-order}
+
+The preceding experiment leaves two effects entangled: selected clauses change propagation and the ranking of continuation variables. We now keep the selected clauses but reconstruct the variable list and order induced by the old first-four batch at each exact parent. Both batches come from the same original-source proofs. The original probe phase and the four-clause and four-variable caps remain unchanged. The checker recomputes the old batch and ranking after checking those proofs; a stored order is not trusted. This construction fixes the immediate continuation choices. It does not fix a descendant formula, a later ranking or the first conflict produced by different clauses.
+
+The selected clauses remain entailed by the original source. Failed-literal, common-consequence and equivalence reductions therefore retain their existing correctness arguments under any such deterministic choice order. Earlier recognition and decomposition priorities, strict support decrease, child checking and model lifting remain unchanged. The policy has a separate persistence identity, and an inconclusive result remains an unresolved case. No additional semantic theorem about SAT is required by the ordering change, and the existing Lean results do not refine the Python policy.
+
+For each eligible continuation, reconstruction adds the cost of the old bounded implication filter and its ranking. With $L$ literal occurrences, $v$ variables, $m_2$ binary clauses, $k$ probe variables and retained cap $q$, the existing filter has expected bound $O(L+kv(v+m_2+q))$. Ranking the augmented formula adds $O(L+q+v\log v)$ work, with its temporary maps, graph and clause sequence also charged. This work is repeated when checking the policy. Fixed local caps do not equalize the descendant graph or total acquisition cost.
+
+The pilot uses the previous gain 1024, loss 956 and locally improved but still unresolved 1189. Fixed order keeps 1024 closed, but neither recovers 956 nor closes 1189. The full comparison retains all 1,245 preceding inputs and adds 24 fresh random 3-CNFs, eight each at 20, 32 and 48 variables, plus twelve growing, signed and edited controls. All three policies close 692/769 non-tiny inputs and 18/24 fresh random inputs. Both selected policies gain 1024 and lose 956 versus baseline; no source changes closure between selected and fixed order. Seventy-seven sources remain structurally unresolved. The independent solver checks every original input and retains 13,641 residuals per mode. Table~\ref{tab:learning-fixed-order} gives the costs.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{lrrrr}
+\hline
+Policy & Closed / 769 & Total (s) & SQLite (MB) & Cold (s) \\
+\hline
+Ordinary solver & --- & 19.41276 & 78.266 & 4.35795 \\
+First four clauses & 692 & 77.91555 & 252.244 & 33.50593 \\
+Selected clauses & 692 & 82.42121 & 252.498 & 33.58541 \\
+Selected clauses, old choices & 692 & 80.71966 & 252.391 & 34.30859 \\
+\hline
+\end{tabular}
+\caption{Continuation-choice control on 1,281 synthetic inputs, including 512 exhaustive tiny cases. MB denotes decimal bytes. Holding the old choices does not recover the earlier lost structural closure. These are new matched samples on the enlarged corpus.}
+\label{tab:learning-fixed-order}
+\end{table}
+
+Fixed order costs 3.60\% more total time than baseline and 2.06\% less than selection in this single sample; the latter is not a general speed claim. Against baseline, discovery rises from 58.15101 to 60.48437 seconds, nodes from 16,052 to 16,126, and logical probes from 89,782 to 90,713. Logical node bytes grow from 100.113 to 100.315 MB. The same six-source Python peak rises from 20.022 to 20.127 MB, excluding native SQLite, RSS and full-corpus peak. Fixed order has slightly fewer physical database bytes than selection despite more logical node bytes; its shorter policy tag also affects keys and source records. These accounts must remain separate.
+
+The policy incurs 6,418 ranking reconstructions and 25,662 candidate positions across discovery and checking. Learned candidate visits rise from 152,026 under selection to 254,742. Selected unresolved literal occurrences fall from 18,362 under baseline to 17,971 under fixed order without greater source coverage. The fixed frontier contains 111 distinct leaves, 71 learning-clear and forty clear. Source 1194 remains the largest discovery case at 1.41725 seconds; a separate profile again identifies restriction, unit checking/propagation and literal helpers. Primary modes, memory diagnostics and profiling ran sequentially without concurrent tests, builds or commits. The same operation-time inclusions and exclusions as the preceding study apply. Warm replay inserts nothing; cold replay checks every saved alternative, source and solver certificate.
+
+The saved control on source 956 explains why fixing the immediate order is insufficient. At the same 18-variable parent, baseline and fixed order both first refute $x_{14}=\mathrm{true}$ and fix only $x_{14}=\mathrm{false}$. Restricting the original CNF gives the identical 54-clause core. Baseline retains three additional learned clauses; its 17-variable, 57-clause child closes. Fixed order retains four; its 17-variable, 58-clause child stays open with eighteen unresolved literal occurrences. All those additions were proved on the original source. Thus the difference is not a different forced assignment or model relation, but a different representation seen by subsequent recognition and search. At source 1024, both selected policies still force $x_3=\mathrm{true}$ and close the resulting 27-variable child.
+
+Indeed, if $F$ entails each clause of a batch $B$, then for any partial assignment $\rho$,
+\[
+\operatorname{Mod}\bigl((F\land B)\restr\rho\bigr)
+=\operatorname{Mod}\bigl(F\restr\rho\bigr),
+\]
+with both model sets interpreted on the same remaining variable universe. Apply the source-model equivalence to each total valuation extending $\rho$. This directly gives the displayed equality, without recognizing general semantic equivalence. In the control above, $\rho$ is also forced by $F$. Different retained additions therefore describe the same residual relation while changing heuristic choices and persistent keys.
+
+The next representation experiment will separate this restricted original core from its checked propagation hints. The core can supply structural identity and recognition; hints may still supply useful propagation. Discovery plans must retain their hint and policy context even when core decisions or certificates share storage. Changed source clauses, assignments or proof dependencies require fresh checks. We will compare this construction on the saved counterexamples and frontier, then on old and fresh inputs, charging reconstruction, verification, canonicalization, persistence and cold replay. Dropping useful hints may lose coverage; no improvement is claimed before that comparison. The proposed sharing rule relies on explicit entailment and common provenance, and does not provide a complete semantic canonical form for arbitrary SAT.
+
+All 358 Python tests pass, including exhaustive small fibers, independently expanded references, changed-order fixtures, signed mixtures and edits, invalid orders and reasons, disabled mode and cold coexistence. Four full, four pilot and three preceding archives replay byte-identically. Both new reports' 43 source and test fingerprints match the measured code. The unchanged Lean build and axiom audit pass at 4,122 declarations and 1,965 theorem declarations. The heuristic and its resource bounds remain outside a Python refinement proof.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

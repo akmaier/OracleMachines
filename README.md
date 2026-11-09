@@ -132,6 +132,16 @@ both local probes succeed. The next experiment freezes continuation choices to
 separate this effect from clause strength. All **353 tests**, the full Lean audit
 and new/previous archive replays pass; all failed attempts remain preserved.
 
+The [fixed-order control](experiments/results/cnf-learning-fixed-order/README.md)
+now shows why retaining the old probe choices is insufficient. Coverage remains
+**692/769** on the enlarged corpus, with the same gained and lost source. In the
+lost case both policies force the same assignment and leave the same 54-clause
+original core, but different redundant learned additions lead to different
+subsequent discovery. Fixed order costs **80.72 s versus 77.92 s** for baseline;
+it remains optional. Next: separate shared residual cores from checked propagation
+hints while retaining each plan's hint context. All **358 tests**, the Lean audit
+and cold archive checks pass. This does not establish efficient arbitrary-SAT coverage.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

@@ -128,7 +128,8 @@ disabled learning, old-policy coexistence and byte-identical cold reuse.
 Four full, four pilot and three preceding archives replay byte-identically.
 Both reports' **43 fingerprints** match measured code. No original archive is replaced.
 Existing Lean semantic lemmas are unchanged; no Python or complexity refinement
-is asserted by this heuristic change.
+is asserted by this heuristic change. The unchanged full Lean build and axiom
+audit pass at **4,122 declarations / 1,965 theorem declarations**.
 
 ```sh
 python3 experiments/compare_cnf_learning_fixed_order.py --pilot --output /tmp/new-fixed-pilot

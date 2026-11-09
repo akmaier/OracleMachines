@@ -1306,3 +1306,22 @@ at **4,122 declarations / 1,965 theorem declarations**, with all **353 Python
 tests** passing. The [selection comparison](../experiments/results/cnf-learning-selection/README.md)
 preserves one gained and one lost source closure, unchanged aggregate coverage,
 increased cost and independently checked local controls on both paths.
+
+The fixed-continuation-order experiment reuses these semantic lemmas unchanged.
+It reconstructs the old bounded batch and variable ranking but propagates the
+selected entailed batch. Failed-literal, common-consequence and signed-equivalence
+arguments do not depend on a particular heuristic order; the Python checker
+separately enforces this policy's reconstructed order, original proofs and child
+transport. No new Lean theorem or Python refinement is claimed by changing that
+heuristic. Fixed choices at one parent do not imply identical descendants or
+preservation of bounded structural coverage.
+
+The unchanged full Lean build/axiom audit passes at **4,122 declarations / 1,965
+theorem declarations**; all **358 Python tests** pass. The
+[matched control](../experiments/results/cnf-learning-fixed-order/README.md)
+has unchanged coverage and preserves a same-assignment counterexample: two
+children share an identical restricted original core but retain different
+entailed clauses and have different bounded discovery outcomes. Applying the
+existing batch equivalence to valuations extending that assignment proves the
+children have the same model relation. An executable shared-core/hint policy and
+its cost/coverage effects remain a next experiment, not a new formal refinement.

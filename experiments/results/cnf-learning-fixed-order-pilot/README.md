@@ -19,6 +19,11 @@ choices does **not** recover the earlier lost closure. The locally improved
 1189 still remains structurally unresolved. All original decisions agree with
 the independent solver, which retains 86 residuals in each mode.
 
+The separate three-case Python peak is 9,571,051 / 9,552,743 / 9,563,736 bytes
+for baseline/selection/fixed; native SQLite, RSS and full-corpus peak are excluded.
+Logical node bytes are 2,177,394 / 2,162,710 / 2,165,706. These small selected-case
+differences do not predict the full comparison.
+
 All four archives cold-replay byte-identically, and warm reuse inserts nothing.
 The separate policy tag prevents stale cross-policy reuse. Original implication
 proofs and inactive-delta checks still justify every added clause and reference;

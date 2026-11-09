@@ -12,14 +12,54 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-**Next research experiment:** separate useful learned clauses from disruptive
-continuation ordering. Freeze continuation variable choices to those computed
-from the old first-four batch, while applying the new selected batch. Keep the
-four-clause/probe caps and charge construction of the old batch and its ranking.
-Start with archived sources **956, 1024 and 1189**, then compare all prior inputs
-and fresh unlabelled samples. This is an unmeasured whole-source policy; fixed
-choices alone do not guarantee preservation of old closures. Do not globally
-raise budgets or promote the current selector.
+**Next research experiment:** separate a restricted original CNF core from its
+checked learned hints. Use the core for structural identity/recognition while
+retaining scoped proof hints for propagation. Start with archived sources **956,
+1024 and 1189** and the [saved frontier](../experiments/results/cnf-learning-fixed-order/mechanisms.json),
+then compare all prior and fresh inputs. Charge core reconstruction, hint checking,
+canonicalization and persistence; keep current caps. Discovery plans must retain
+their hint/policy context even when semantic cores share storage. Changed source,
+assignment or dependencies require revalidation. This is an unmeasured candidate;
+dropping useful hints could lose coverage. Do not promote either selection policy.
+
+The [fixed-order experiment](../experiments/results/cnf-learning-fixed-order/README.md)
+implements the previous target and explains why it is insufficient. All 1,281
+inputs give the same **692/769** non-tiny and **18/24** fresh random closures under
+baseline, selection and fixed order. Both selected modes gain 1024 and lose 956;
+fixed order changes no source closure relative to selection. Seventy-seven
+sources remain unresolved. Total time is **77.916 / 82.421 / 80.720 s** and SQLite
+**252.244 / 252.498 / 252.391 MB** for baseline/selection/fixed. Fixed remains
+3.60% slower than baseline in this single sample; no general timing advantage
+over selection follows from its 2.06% lower sample time.
+
+At source **956**'s saved 18-variable parent, baseline and fixed order both force
+only `14=false`. Their restricted original CNF is **the identical 54-clause core**.
+Baseline retains three extra learned clauses and its 17-variable, 57-clause child
+closes. Fixed retains four and its 17-variable, 58-clause child stays open with
+eighteen unresolved literals. All additions are entailed, so the two child
+relations agree. Recognition, ranking and full persistent keys nevertheless see
+different representations. The [checked controls](../experiments/results/cnf-learning-fixed-order/mechanisms.json)
+retain the exact clauses and acquired child paths. This is a concrete opportunity
+for certificate-backed core sharing, not cheap general semantic canonicalization.
+
+Fixed order adds **6,418 ranking reconstructions** across acquisition/checking.
+Nodes rise **16,052 -> 16,126**, logical probes **89,782 -> 90,713**, logical node
+bytes **100.113 -> 100.315 MB**, cold replay **33.506 -> 34.309 s** and the same
+six-case Python peak **20.022 -> 20.127 MB** versus baseline. Selected unresolved
+literals fall **18,362 -> 17,971** without greater source coverage. The current
+frontier has **111** distinct leaves, 71 learning-clear and forty clear. Source
+**1194** remains the largest discovery case (1.417 s), dominated by restriction
+and unit checking/propagation. Sharing proof records and avoiding repeated scans
+remain supporting targets, after the representation-sensitive discovery experiment.
+
+All **358 Python tests**, the unchanged Lean build/axiom audit (**4,122 declarations /
+1,965 theorem declarations**) and four full, four pilot and three preceding archive
+replays pass. Both reports' 43 fingerprints match. Measurements ran sequentially
+without concurrent tests, builds or commits. Restricted exactness, incomplete
+structural coverage and the open arbitrary-SAT construction bound remain distinct.
+
+The preceding selection investigation follows; its smaller corpus has its own
+denominators and timing samples.
 
 The [bounded-selection experiment](../experiments/results/cnf-learning-selection/README.md)
 implements the previous target: choose four clauses from at most sixteen proved

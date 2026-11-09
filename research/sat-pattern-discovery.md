@@ -270,6 +270,64 @@ archives replay byte-identically; warm reuse inserts nothing. Lean's build/axiom
 audit passes at **4,122 declarations / 1,965 theorem declarations**. No Python
 refinement, efficient complete classification or unrestricted SAT bound follows.
 
+## Fixed choices reveal a residual-representation gap (9 November 2026)
+
+The [fixed-order comparison](../experiments/results/cnf-learning-fixed-order/README.md)
+executes the preceding controlled policy. At each exact parent, it reconstructs
+the old first-four batch and variable ranking, then propagates the selected batch
+under those choices. The checker recomputes the ranking after validating original
+proofs. Earlier recognition/decomposition, exact reductions, strict support
+decrease, model lifting and all local caps remain unchanged. The rule stays
+optional and has a separate persistent identity.
+
+The three-source pilot and full comparison both keep the previous gain 1024 and
+loss 956; 1189 remains open. On all 1,245 old inputs plus 24 fresh random 3-CNFs and
+twelve growing/signed/edited controls, non-tiny closure is **692/769** and fresh
+closure **18/24** under all three policies. Fixed order changes no source closure
+relative to selection. **77 sources** remain unresolved; the unchanged decision
+solver checks every original source and retains **13,641 residuals** per mode.
+All twelve new controls close. This is an exact but incomplete discovery layer.
+
+Total time is **77.916 / 82.421 / 80.720 s** for baseline/selection/fixed, with
+SQLite **252.244 / 252.498 / 252.391 MB** and cold replay **33.506 / 33.585 /
+34.309 s**. Fixed order is 3.60% slower than baseline; the lower sample time than
+selection is not a general speed claim. Selected unresolved literals fall
+18,362 -> 17,971 while nodes and probes rise. The current frontier preserves
+111 distinct unresolved leaves, including recognition outcomes, full probe
+traces and unused implications. All timing samples are sequential and exclude
+concurrent tests, builds and commits; targeted Python peak excludes native/RSS
+and full-corpus allocations.
+
+The [saved parent controls](../experiments/results/cnf-learning-fixed-order/mechanisms.json)
+identify the missing structure. At source 956's 18-variable parent, baseline and
+fixed order both force only `14=false`, leaving the **same 54-clause original
+restriction**. Their learned views then retain three versus four extra clauses.
+The baseline 17-variable/57-clause child closes; the fixed 17-variable/58-clause
+child stays open with eighteen unresolved literals. Both batches are entailed
+by the original source, so their restrictions have identical model relations.
+Fixing immediate choices has not made recognition or descendant search invariant
+to redundant representation. On 1024, the selected clauses still close the
+27-variable child under the same forced `3=true` assignment.
+
+**Next experiment:** represent the restricted original core separately from
+checked propagation hints. Compare core-based identity/recognition with current
+learned views on 956/1024/1189, the saved frontier and full old/fresh inputs. Keep
+hint/policy context on discovery plans, even if a semantic core can share stored
+decisions or certificates. Charge reconstruction, implication checks, transport,
+lookup, serialization and cold replay. Changed source clauses, assignments or
+dependencies invalidate stale hints. Retain failures and useful hints rather
+than assuming all redundancy should be deleted. The proposed change is not yet
+implemented or a measured gain. It uses explicit certified entailment and a shared
+original source, not unrestricted semantic canonicalization.
+
+All **358 Python tests** pass, including exhaustive small fibers, independent
+full trace checks, changed-order fixtures, adversarial edits, invalid orders,
+corrupt reasons and cold coexistence. Four full, four pilot and three preceding
+archives replay byte-identically; both reports' 43 fingerprints match. The
+unchanged Lean build/axiom audit passes at **4,122 declarations / 1,965 theorem
+declarations**. Complete efficient classification, compact arbitrary-CNF coverage
+and uniform acquisition bounds remain open.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

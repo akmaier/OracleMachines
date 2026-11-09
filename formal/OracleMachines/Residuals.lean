@@ -604,4 +604,39 @@ theorem joint_repair_extension (source : List (List (Nat × Bool)))
   · exact joint_repair_preserves source v updated changed model unchanged checked c old
   · simpa [List.mem_singleton.mp new] using repairs
 
+/-- Moving an existing candidate to the front preserves membership. The Python
+ranking starts from distinct candidates; this set statement needs no distinctness
+assumption and does not assert a bound on acquisition cost. -/
+theorem promote_existing_candidate_membership (choices : List Nat) (chosen : Nat)
+    (member : chosen ∈ choices) (v : Nat) :
+    v ∈ chosen :: choices.filter (fun w => decide (w ≠ chosen)) ↔ v ∈ choices := by
+  simp only [List.mem_cons, List.mem_filter, decide_eq_true_eq]
+  constructor
+  · rintro (rfl | ⟨present, _⟩)
+    · exact member
+    · exact present
+  · intro present
+    by_cases same : v = chosen
+    · exact Or.inl same
+    · exact Or.inr ⟨present, same⟩
+
+/-- Structural closure by some two-branch split is unchanged when the candidate
+pool is unchanged and corresponding branches retain closure. For recursive use,
+the branch hypothesis is an induction obligation. This is not a Python refinement,
+a SAT decision theorem, or a claim that both orders have the same runtime. -/
+theorem conditioning_pool_closure_invariant (before after : List Nat)
+    (oldClosed newClosed : Nat → Bool → Prop)
+    (sameCandidates : ∀ v, v ∈ before ↔ v ∈ after)
+    (sameBranches : ∀ v ∈ before, ∀ b, oldClosed v b ↔ newClosed v b) :
+    (∃ v ∈ before, oldClosed v false ∧ oldClosed v true) ↔
+      (∃ v ∈ after, newClosed v false ∧ newClosed v true) := by
+  constructor
+  · rintro ⟨v, member, low, high⟩
+    exact ⟨v, (sameCandidates v).mp member,
+      (sameBranches v member false).mp low, (sameBranches v member true).mp high⟩
+  · rintro ⟨v, member, low, high⟩
+    have oldMember := (sameCandidates v).mpr member
+    exact ⟨v, oldMember, (sameBranches v oldMember false).mpr low,
+      (sameBranches v oldMember true).mpr high⟩
+
 end OracleMachines.SAT

@@ -315,6 +315,38 @@ theorem selected_signed_batch_models
   intro c member valuation model
   exact entailed c (fromPool c member) valuation model
 
+/-- Complete a partial assignment using a valuation on the remaining variables.
+This supplies the common variable universe for residual model comparisons. -/
+def CompletePartial (assigned : Nat → Option Bool) (v : Nat → Bool) : Nat → Bool :=
+  fun i => (assigned i).getD (v i)
+
+/-- Originally entailed hints can be omitted from the residual model relation
+under any partial assignment, including one incompatible with the source.
+This is semantic restriction, not a refinement of Python clause filtering. -/
+theorem entailed_signed_batch_partial_models
+    (source hints : List (List (Nat × Bool)))
+    (entailed : ∀ c ∈ hints, ∀ v,
+      (∀ d ∈ source, SignedClauseHolds d v) → SignedClauseHolds c v)
+    (assigned : Nat → Option Bool) (v : Nat → Bool) :
+    (∀ c ∈ source ++ hints, SignedClauseHolds c (CompletePartial assigned v)) ↔
+      (∀ c ∈ source, SignedClauseHolds c (CompletePartial assigned v)) := by
+  exact entailed_signed_batch_models source hints entailed (CompletePartial assigned v)
+
+/-- Two independently justified hint views of the same source have the same
+residual models under the same assignment. This licenses semantic core sharing,
+not reuse of a heuristic plan with a different hint or policy context. -/
+theorem entailed_signed_views_common_core
+    (source first second : List (List (Nat × Bool)))
+    (first_valid : ∀ c ∈ first, ∀ v,
+      (∀ d ∈ source, SignedClauseHolds d v) → SignedClauseHolds c v)
+    (second_valid : ∀ c ∈ second, ∀ v,
+      (∀ d ∈ source, SignedClauseHolds d v) → SignedClauseHolds c v)
+    (assigned : Nat → Option Bool) (v : Nat → Bool) :
+    (∀ c ∈ source ++ first, SignedClauseHolds c (CompletePartial assigned v)) ↔
+      (∀ c ∈ source ++ second, SignedClauseHolds c (CompletePartial assigned v)) := by
+  exact (entailed_signed_batch_partial_models source first first_valid assigned v).trans
+    (entailed_signed_batch_partial_models source second second_valid assigned v).symm
+
 /-- A local unit reason under a partial assignment. Its source clause is
 explicit; extending the source never removes that reason. -/
 def SignedUnitReason (source : List (List (Nat × Bool)))

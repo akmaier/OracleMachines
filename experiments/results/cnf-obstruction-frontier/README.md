@@ -1,5 +1,7 @@
 # A checked obstruction is not enough to choose the best split
 
+Implementation/evidence checkpoint **d25a2e5**.
+
 **Decision: retain this optional heuristic, do not promote it.** The 106 saved
 unresolved leaves each receive one additional conditioning level in both modes,
 with four conditioning candidates, four probe candidates and four learned-clause

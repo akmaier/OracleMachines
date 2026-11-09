@@ -1834,3 +1834,31 @@ These synthetic observations do not establish significance or a universal win.
 The 87 remaining unresolved sources consume 57.02871 s (70.6%) of discovery.
 All 106 selected remaining leaves have class exclusions; raising the pair cap
 would not change those outcomes.
+
+
+## Obstruction-guided conditioning: recognition evidence can increase cost
+
+The [optional conditioning policy](obstruction-conditioning.md) adds one auxiliary
+certificate at each actual OR node. After pair discovery, ranking and replay cost
+O(m+L+p+c log(c+1)+v log(v+1)) conditional word/comparison work for p supplied path
+edges and c distinct source clauses. It retains generated O(v)-entry certificates,
+checks them without SCC rediscovery and keeps the existing four-candidate cap.
+Source-support influence is only a heuristic; later propagation and other-family
+recognition may favor a variable outside that support.
+
+In the [106-leaf diagnostic](../experiments/results/cnf-obstruction-frontier/README.md),
+with one extra split for both modes, closure falls 60 -> 57. Discovery rises
+4.96403 -> 5.21714 s, SQLite 35,840,000 -> 37,498,880 bytes and cold replay
+3.49873 -> 3.53507 s. Total stays nearly flat as the unchanged solver varies in
+the opposite direction. Four-case Python peak falls 2,902,681 -> 2,823,818 bytes;
+this is not full-process memory. New ranking certificates themselves total only
+15,629 JSON bytes, but different choices acquire more graph state. The policy is
+not promoted. Both archives remain retained, and no original-source coverage
+improvement is inferred from an extra-depth frontier study.
+
+Saved original-probe traces identify an indirect influence missed by direct
+support scoring in case 4, without new propagation. Their checking and source
+restriction are charged in a separate diagnostic; loading/indexing are excluded
+from that diagnostic's timer. Some candidates lack those traces, and cases 17
+and 50 close later despite no original damage to the saved obstruction. Reuse
+of such evidence across families is a next experiment, not an achieved saving.

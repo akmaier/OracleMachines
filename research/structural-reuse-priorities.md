@@ -12,7 +12,58 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current checkpoint: 35 renamed leaves yield 29 source closures
+## Current investigation: static obstruction ranking regresses
+
+The [matched frontier experiment](../experiments/results/cnf-obstruction-frontier/README.md)
+gives the 106 previously exhausted leaves one extra conditioning level in both
+modes at the same four-candidate/probe/learning limits. A new checked ranking
+based on auxiliary-path source clauses closes **57/106**, versus **60/106** for
+the existing ranking: three gains, six losses. Discovery **4.96403 -> 5.21714 s**
+regresses 5.10%, fresh SQLite **35,840,000 -> 37,498,880 bytes**, and cold replay
+**3.49873 -> 3.53507 s**. The ordinary solver varies in the opposite direction,
+leaving total almost unchanged. This is a negative result; **do not promote** the
+optional `ObstructionChoicesInventory` or treat it as new whole-source coverage.
+The retained original policy stays **898/985**, with 87 source misses.
+
+The next ranked gaps are:
+
+1. **Reuse checked propagation influence instead of relying on direct overlap.**
+   All six losses discard the old winning variable; five such variables lie
+   outside the saved obstruction's source support. In case 4, original checked
+   traces under variable 6 reach the obstruction indirectly and damage three/four
+   of its four auxiliary edges. No fresh propagation was needed to recover this
+   information. Test those already-proved consequences in a class-aware bounded
+   choice policy that retains baseline diversity. Cases 17 and 50 are mandatory
+   counterexamples: their original probes damage no saved edge but later discovery
+   closes the branches. Missing traces for other candidates are unknown, not zero
+   influence. Breaking one recorded path proves neither renamability nor closure.
+2. **Separate successful structural evidence from the ranking that found it.**
+   The two frontier policies' union is 63/106. Merely running both has extra cost;
+   an efficient combined policy is not implemented. The saved proofs can inform
+   a future portable-plan layer with exact source/child bindings and cold checks,
+   avoiding policy-key duplication and repeated acquisition. Preserve every old
+   result and measure recognition/check/serialization costs before claiming reuse.
+3. **Keep the whole-source bottleneck in view.** This extra-depth frontier study
+   does not replace the earlier whole-corpus profile: the retained 87 source misses
+   still account for 70.6% of discovery, with reconstruction, normalization and
+   indexed subset checks leading on source 1448. Broader coverage needs interactions
+   across classes, not another unguided increase in search depth or pair budget.
+4. **Use fresh evidence before promoting a revised heuristic.** The 106 leaves
+   are development data. New seeds, signed edits and adversarial mixtures must
+   accompany any follow-up comparison; keep the same budget and retain losses.
+   A single selected certificate is not an isomorphism-invariant structural model,
+   and small traced memory diagnostics do not bound total process memory.
+
+All **448 tests** pass, including independent cold replay without auxiliary
+rediscovery. Both complete archives, all nine changed cases, guarded-support
+counterexamples and original-probe influence traces are retained. The
+[proof/resource account](obstruction-conditioning.md) distinguishes raw restriction
+from propagation and other-family closure. All 60 earlier manuscript proof blocks
+remain, with one new obstruction-preservation proposition. Lean sources are
+unchanged; no new Python refinement or unrestricted tractability result follows.
+Implementation/evidence checkpoint **d25a2e5**.
+
+## Retained baseline: 35 renamed leaves yield 29 source closures
 
 The [terminal Horn-renaming study](../experiments/results/cnf-polarity-horn/README.md)
 closes all 35 saved positive leaves and **29 additional whole inputs**, with no

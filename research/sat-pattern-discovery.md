@@ -770,6 +770,37 @@ solution. The unresolved sources still consume 70.6% of discovery time; source
 ahead of polarity recognition. Reuse those computations where exact bindings
 make it economical, without replacing the broader discovery objective.
 
+## 2026-11-09: direct obstruction overlap misses indirect interactions
+
+The [obstruction-conditioning experiment](../experiments/results/cnf-obstruction-frontier/README.md)
+preserves checked source-linked negative evidence and tests a fixed alternative
+ranking at the same budgets. Giving both policies one extra split at each saved
+frontier leaf closes 60/106 under the existing ranking but only 57/106 under the
+new rule. Three gains and six losses, slower discovery and larger SQLite are
+preserved. The optional rule is not promoted. Original-source coverage remains
+898/985; the frontier experiment must not be added to that denominator.
+
+Five of the six displaced old winning variables lie outside the recorded
+obstruction's source support. The raw-restriction invariant is still correct:
+without assigning a source-support variable, those exact path clauses survive.
+It does not imply that later propagation or a different recognized family cannot
+close a branch. A guarded fixture also proves that pair endpoints alone omit
+relevant whole-clause deletion variables.
+
+Original checked probes already explain case 4's indirect interaction. Variable
+6 lies outside the obstruction, but its two closures force variables inside it
+and damage the saved paths without new propagation. This does not explain cases
+17 and 50, whose original traces leave the paths intact; subsequent checked
+acquisition closes their branches. Missing original probes for other candidates
+remain explicit. The next task is reuse of these existing consequences across
+classes and candidate diversity, not treating the first auxiliary refutation as
+a complete model of structural opportunity. The union 63/106 is only a coverage
+observation; a cheap combined policy remains to be constructed and measured.
+
+All 448 tests pass; cold and warm replay preserve all results. The proof and
+conditional resource account are in [obstruction conditioning](obstruction-conditioning.md).
+Lean's existing exact branch semantics apply, but its sources are unchanged.
+
 ## Following iterations
 
 First split the largest informative unresolved cells. Favor discoveries that

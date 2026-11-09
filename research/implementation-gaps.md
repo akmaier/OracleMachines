@@ -4421,3 +4421,31 @@ undo those exclusions. The remaining sources take 70.6% of discovery time;
 normalization/reconstruction and indexed subset certificates are supporting cost
 gaps. Repeated/industrial evaluation, full-process memory, policy-independent
 storage sharing and unrestricted efficient coverage remain open.
+
+
+## 2026-11-09: obstruction-only conditioning is not promoted
+
+The [106-leaf experiment](../experiments/results/cnf-obstruction-frontier/README.md)
+adds checked source-path ranking as an optional policy, with persistent certificates,
+independent checker replay and unchanged candidate/branch/probe limits. Giving
+both modes one additional conditioning level closes 60/106 under the retained
+policy and 57/106 under the candidate. Its three gains and six losses are preserved;
+discovery rises 5.10% and SQLite from 35,840,000 to 37,498,880 bytes. This negative
+result does not change original-source coverage (898/985).
+
+Checkpoint **d25a2e5** preserves both full archives, exact changed source/choice
+records, a guarded-support counterexample and separately checked original-probe
+influence. Five lost old winning variables lie outside the recorded obstruction's
+support. In case 4, already-acquired unit traces show indirect propagation into
+that support, without fresh solving. Cases 17 and 50 remain counterexamples to
+using that effect alone: their original closures leave the saved edges intact,
+but later discovery still closes the branches.
+
+All 448 tests pass, including source context restoration, cold checking without
+SCC rediscovery, corrupted evidence and old-row preservation. All 60 previous
+manuscript proof blocks remain; the new proposition only concerns untouched
+obstructions under raw restriction. Lean sources are unchanged. Next test checked
+propagation influence across families and portable reuse of successful plans,
+with baseline diversity, explicit missing traces, matched budgets and fresh data.
+Do not repeat this static-overlap heuristic or promote its favorable small memory
+subset as a general result.

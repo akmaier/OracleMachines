@@ -247,6 +247,15 @@ archives remain retained, so this is not a historical-storage reduction. All
 leaves** now have checked renaming exclusions. Their auxiliary conflict paths
 provide the next concrete target for interface and conditioning discovery.
 
+The [obstruction-guided conditioning test](experiments/results/cnf-obstruction-frontier/README.md)
+then checks whether those exclusions improve split selection. At the same budgets,
+one extra level closes **60/106 frontier leaves** with the current ranking and
+**57/106** with the new rule. Its three gains, six losses, higher discovery time
+and larger archive are retained; the rule stays optional. Five lost winning
+variables lie outside the recorded obstruction. Saved probe proofs expose an
+indirect propagation effect in one case, giving a concrete next reuse target.
+All **448 tests** pass. Original-source coverage remains **898/985**.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

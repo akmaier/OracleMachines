@@ -300,6 +300,21 @@ theorem entailed_signed_batch_models (source additions : List (List (Nat × Bool
     · exact model c original
     · exact entailed c added v model
 
+/-- Ranking may choose any subset of a proved candidate pool. Correctness
+depends on original-source entailment, not on the score, order, or usefulness
+of that selection. No optimality or resource guarantee follows. -/
+theorem selected_signed_batch_models
+    (source pool selected : List (List (Nat × Bool)))
+    (fromPool : ∀ c ∈ selected, c ∈ pool)
+    (entailed : ∀ c ∈ pool, ∀ v,
+      (∀ d ∈ source, SignedClauseHolds d v) → SignedClauseHolds c v)
+    (v : Nat → Bool) :
+    (∀ c ∈ source ++ selected, SignedClauseHolds c v) ↔
+      (∀ c ∈ source, SignedClauseHolds c v) := by
+  apply entailed_signed_batch_models source selected
+  intro c member valuation model
+  exact entailed c (fromPool c member) valuation model
+
 /-- A local unit reason under a partial assignment. Its source clause is
 explicit; extending the source never removes that reason. -/
 def SignedUnitReason (source : List (List (Nat × Bool)))

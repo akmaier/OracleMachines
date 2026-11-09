@@ -1,0 +1,295 @@
+[
+  {
+    "mode": "solver_only",
+    "total_seconds": 0.4937329567037523,
+    "old_seconds": 0.4937329567037523,
+    "archive": {
+      "mode": "solver_only",
+      "path": "archive-solver_only.sqlite3.gz",
+      "database_bytes": 2928640,
+      "compressed_bytes": 211234,
+      "database_sha256": "c75a2451d2e6815ca23919656fa0c5427bdfcacfcbefe9544804e19c8d86934e",
+      "initialization_seconds": 0.0006365000735968351,
+      "warm_inventory_seconds": 0,
+      "storage": {},
+      "audit": {
+        "nodes": 0,
+        "sources": 0,
+        "residuals": 474,
+        "seconds": 0.13192054186947644,
+        "bytes_unchanged": true
+      }
+    }
+  },
+  {
+    "mode": "baseline",
+    "total_seconds": 7.746508122887462,
+    "old_seconds": 7.746508122887462,
+    "archive": {
+      "mode": "baseline",
+      "path": "archive-baseline.sqlite3.gz",
+      "database_bytes": 22786048,
+      "compressed_bytes": 1576658,
+      "database_sha256": "038d6621a942679c141c5a3b2355c81c48394b7963c7e8887ca276cf49162741",
+      "initialization_seconds": 0.0029167919419705868,
+      "warm_inventory_seconds": 0.004137667128816247,
+      "storage": {
+        "nodes": 1684,
+        "nodes_bytes": 12113212,
+        "sources": 13,
+        "sources_bytes": 89695
+      },
+      "audit": {
+        "nodes": 1684,
+        "sources": 13,
+        "residuals": 474,
+        "seconds": 3.5155952079221606,
+        "bytes_unchanged": true
+      }
+    },
+    "discovery_seconds": 7.296440416947007,
+    "groups": {
+      "common_holdout3": {
+        "inputs": 2,
+        "closed": 0,
+        "unresolved_literals": 596
+      },
+      "common_holdout_mixed": {
+        "inputs": 4,
+        "closed": 0,
+        "unresolved_literals": 496
+      },
+      "learning_holdout3": {
+        "inputs": 1,
+        "closed": 0,
+        "unresolved_literals": 885
+      },
+      "probe_holdout3": {
+        "inputs": 2,
+        "closed": 0,
+        "unresolved_literals": 257
+      },
+      "probe_invalidation": {
+        "inputs": 1,
+        "closed": 0,
+        "unresolved_literals": 272
+      },
+      "reuse_holdout3": {
+        "inputs": 3,
+        "closed": 0,
+        "unresolved_literals": 1793
+      }
+    },
+    "metrics": {
+      "normalization_literal_visits": 1815920,
+      "key_serialized_bytes": 9603773,
+      "node_database_lookups": 2214,
+      "classification_calls": 4428,
+      "classification_literal_payload": 1302832,
+      "matching_recognition_literal_visits": 14560,
+      "affine_grouping_literals": 1302832,
+      "affine_extracted_equations": 1972,
+      "affine_leftover_clauses": 456790,
+      "affine_verified_certificates": 4428,
+      "propagation_literal_visits": 8323949,
+      "simplification_reconstruction_literals": 6592177,
+      "verified_simplifications": 23756,
+      "decomposition_literal_visits": 2117781,
+      "probe_ranking_literal_visits": 1900488,
+      "learning_graph_literal_visits": 391218,
+      "conditioning_rank_literal_visits": 76056,
+      "conditioning_rank_variables": 6906,
+      "conditioning_candidates": 391,
+      "restriction_literal_visits": 9846110,
+      "affine_verification_literals": 3360,
+      "probe_attempts": 12108,
+      "probe_forced_values": 847,
+      "simplification_unit_check_literals": 216996,
+      "verified_probe_attempts": 21568,
+      "common_intersection_unit_visits": 66454,
+      "equivalence_intersection_unit_visits": 48482,
+      "learning_candidate_visits": 18740,
+      "learning_explicit_duplicates": 10660,
+      "learning_reachability_vertices": 54966,
+      "learning_reachability_edges": 49516,
+      "learning_binary_redundant": 5550,
+      "reuse_assignment_entries": 23986,
+      "reuse_delta_literal_visits": 27695,
+      "reused_continuation_probes": 2900,
+      "reuse_active_batches": 122,
+      "active_continuation_probes": 122,
+      "learning_continuation_probe_attempts": 3414,
+      "learning_inconclusive": 400,
+      "learning_clauses_proposed": 1145,
+      "verified_pattern_nodes": 1684,
+      "inserted_nodes": 1684,
+      "serialized_bytes": 12113212,
+      "probe_rewrites": 1059,
+      "node_memory_hits": 6074,
+      "fused_conditioning_edges": 530,
+      "verified_reused_probes": 3198,
+      "verified_learning_attempts": 511,
+      "verified_fused_conditioning_edges": 530,
+      "fresh_continuation_probes": 392,
+      "common_rewrites_discovered": 116,
+      "common_literals_discovered": 155,
+      "verified_common_rewrites": 348,
+      "partition_verification_literals": 1206,
+      "equivalence_rewrites_discovered": 96,
+      "equivalence_variables_merged": 149,
+      "equivalence_substitution_literal_visits": 58920,
+      "verified_equivalence_rewrites": 288,
+      "learning_successes": 37,
+      "source_serialized_bytes": 89695,
+      "inserted_sources": 13,
+      "matching_conflict_edge_visits": 12,
+      "verified_projections": 24,
+      "projection_rewrites": 3,
+      "affine_elimination_xors": 10,
+      "affine_verification_xors": 10,
+      "simplification_rewrites": 1
+    },
+    "gains": [],
+    "losses": []
+  },
+  {
+    "mode": "selection",
+    "total_seconds": 7.888382247649133,
+    "old_seconds": 7.888382247649133,
+    "archive": {
+      "mode": "selection",
+      "path": "archive-selection.sqlite3.gz",
+      "database_bytes": 22851584,
+      "compressed_bytes": 1585261,
+      "database_sha256": "bba2fb7b079d61e853764ad17358905d1cc60c45162f93ee12258a58bcb32aa3",
+      "initialization_seconds": 0.012718458194285631,
+      "warm_inventory_seconds": 0.004153333138674498,
+      "storage": {
+        "nodes": 1696,
+        "nodes_bytes": 12154642,
+        "sources": 13,
+        "sources_bytes": 89617
+      },
+      "audit": {
+        "nodes": 1696,
+        "sources": 13,
+        "residuals": 474,
+        "seconds": 3.584435374941677,
+        "bytes_unchanged": true
+      }
+    },
+    "discovery_seconds": 7.454291001195088,
+    "groups": {
+      "common_holdout3": {
+        "inputs": 2,
+        "closed": 0,
+        "unresolved_literals": 596
+      },
+      "common_holdout_mixed": {
+        "inputs": 4,
+        "closed": 0,
+        "unresolved_literals": 496
+      },
+      "learning_holdout3": {
+        "inputs": 1,
+        "closed": 0,
+        "unresolved_literals": 885
+      },
+      "probe_holdout3": {
+        "inputs": 2,
+        "closed": 0,
+        "unresolved_literals": 202
+      },
+      "probe_invalidation": {
+        "inputs": 1,
+        "closed": 1,
+        "unresolved_literals": 0
+      },
+      "reuse_holdout3": {
+        "inputs": 3,
+        "closed": 0,
+        "unresolved_literals": 1769
+      }
+    },
+    "metrics": {
+      "normalization_literal_visits": 1806708,
+      "key_serialized_bytes": 9581296,
+      "node_database_lookups": 2220,
+      "classification_calls": 4440,
+      "classification_literal_payload": 1297242,
+      "matching_recognition_literal_visits": 14568,
+      "affine_grouping_literals": 1297242,
+      "affine_extracted_equations": 1978,
+      "affine_leftover_clauses": 456634,
+      "affine_verified_certificates": 4440,
+      "propagation_literal_visits": 8419982,
+      "simplification_reconstruction_literals": 6719592,
+      "verified_simplifications": 24374,
+      "decomposition_literal_visits": 2106749,
+      "probe_ranking_literal_visits": 1919758,
+      "learning_graph_literal_visits": 384966,
+      "selection_pool_clauses": 3900,
+      "conditioning_rank_literal_visits": 73164,
+      "conditioning_rank_variables": 6708,
+      "conditioning_candidates": 378,
+      "restriction_literal_visits": 10003660,
+      "affine_verification_literals": 3438,
+      "probe_attempts": 12181,
+      "probe_forced_values": 866,
+      "simplification_unit_check_literals": 228104,
+      "verified_probe_attempts": 22115,
+      "common_intersection_unit_visits": 68978,
+      "equivalence_intersection_unit_visits": 49078,
+      "learning_candidate_visits": 23786,
+      "learning_explicit_duplicates": 12398,
+      "learning_reachability_vertices": 93242,
+      "learning_reachability_edges": 87608,
+      "learning_binary_redundant": 7488,
+      "selection_assignment_entries": 12454,
+      "selection_delta_literal_visits": 36250,
+      "selection_candidate_scores": 8492,
+      "selection_changed_batches": 264,
+      "selection_covered_closures": 242,
+      "selection_distinct_origins": 718,
+      "reuse_assignment_entries": 23893,
+      "reuse_delta_literal_visits": 27322,
+      "reused_continuation_probes": 2842,
+      "reuse_active_batches": 147,
+      "active_continuation_probes": 147,
+      "learning_continuation_probe_attempts": 3343,
+      "learning_inconclusive": 389,
+      "learning_clauses_proposed": 1136,
+      "verified_pattern_nodes": 1696,
+      "inserted_nodes": 1696,
+      "serialized_bytes": 12154642,
+      "probe_rewrites": 1092,
+      "node_memory_hits": 6050,
+      "fused_conditioning_edges": 524,
+      "verified_reused_probes": 3164,
+      "verified_learning_attempts": 515,
+      "verified_fused_conditioning_edges": 524,
+      "fresh_continuation_probes": 354,
+      "common_rewrites_discovered": 126,
+      "common_literals_discovered": 168,
+      "verified_common_rewrites": 378,
+      "partition_verification_literals": 516,
+      "equivalence_rewrites_discovered": 100,
+      "equivalence_variables_merged": 155,
+      "equivalence_substitution_literal_visits": 60474,
+      "verified_equivalence_rewrites": 300,
+      "learning_successes": 42,
+      "source_serialized_bytes": 89617,
+      "inserted_sources": 13,
+      "matching_conflict_edge_visits": 12,
+      "verified_projections": 20,
+      "projection_rewrites": 3,
+      "affine_elimination_xors": 10,
+      "affine_verification_xors": 10,
+      "simplification_rewrites": 1
+    },
+    "gains": [
+      2
+    ],
+    "losses": []
+  }
+]

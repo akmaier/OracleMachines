@@ -62,11 +62,11 @@ def expand_references(continuation, attempts):
     return expanded
 
 
-def discover_reuse_probes(cnf, probe_limit, learn_limit, counts):
+def discover_reuse_probes(cnf, probe_limit, learn_limit, counts, *, _select_batch=learning_batch):
     original = discover_equivalence_probes(cnf, probe_limit, counts)
     if original['status'] != 'clear':
         return original
-    batch = learning_batch(cnf, original['attempts'], learn_limit, counts)
+    batch = _select_batch(cnf, original['attempts'], learn_limit, counts)
     if not batch:
         return original
     augmented = augment(cnf, batch)
@@ -95,17 +95,18 @@ def discover_reuse_probes(cnf, probe_limit, learn_limit, counts):
                 batch=batch, continuation=continuation)
 
 
-def check_reuse_probes(cnf, result, probe_limit, learn_limit, counts):
+def check_reuse_probes(cnf, result, probe_limit, learn_limit, counts, *, _select_batch=learning_batch):
     if result.get('status') not in ('learned', 'learning_clear'):
         target, fixed = check_equivalence_probes(cnf, result, probe_limit, counts)
-        if result['status'] == 'clear' and learning_batch(cnf, result['attempts'], learn_limit, counts):
+        if result['status'] == 'clear' and _select_batch(cnf, result['attempts'], learn_limit, counts):
             raise ValueError('Omitted local-learning attempt')
         return target, fixed
     if set(result) != {'status', 'attempts', 'batch', 'continuation'}:
         raise ValueError('Invalid local-learning fields')
-    # All original reasons and fixed points are checked before consulting a ref.
+    # All original reasons and fixed points are checked before selecting a batch
+    # or consulting a reference. The selector is code, never certificate input.
     check_equivalence_probes(cnf, dict(status='clear', attempts=result['attempts']), probe_limit, counts)
-    expected = learning_batch(cnf, result['attempts'], learn_limit, counts)
+    expected = _select_batch(cnf, result['attempts'], learn_limit, counts)
     if not expected or encode(result['batch']) != encode(expected):
         raise ValueError('Invalid learning batch or source reason')
     augmented = augment(cnf, expected)

@@ -7,11 +7,12 @@ model lifting. These are standard SAT reductions, not new tractability results.
 """
 from experiments.cnf_affine_projection import ProjectionPatternInventory
 from experiments.cnf_pattern_inventory import encode
-from experiments.cnf_residual_dag import holds, propagate, restrict
+from experiments.cnf_residual_dag import holds, restrict
+from experiments.cnf_ordered_propagation import propagate_for_discovery
 
 
 def discover_simplification(cnf, counts, *, units=True, pure=True):
-    assigned, trace, conflict = propagate(cnf, counts) if units else ({}, [], None)
+    assigned, trace, conflict = propagate_for_discovery(cnf, counts) if units else ({}, [], None)
     rounds = []
     if conflict is None and pure:
         current = restrict(cnf, assigned, counts)

@@ -2924,6 +2924,40 @@ The selected frontier has 124 distinct unresolved leaves, 86 learning-clear and 
 
 All 366 Python tests pass, including exhaustive small fibers, independently expanded references, forced/common/equivalence cores, signed mixtures and edits, preserved terminal conflicts, wrong-child rejection and cold coexistence. The full Lean build and axiom audit pass at 4,125 declarations and 1,967 theorem declarations. Four full, four pilot and four preceding archives replay byte-identically; warm reuse inserts nothing. Both reports' 47 code, test and Lean fingerprints match. Primary measurements, allocation diagnostics and separate profiling ran sequentially without concurrent tests, builds or commits. Operation timings include recognition, checking, acquisition, serialization, persistence, solving and successful root lifts; generation, truth tables, summary walks, initialization, compression and post-run diagnostics are excluded. Cold replay and warm lookup are separate measurements. The new semantic lemmas do not close the Python refinement or unrestricted resource-bound gaps.
 
+\subsection{Portable hint proofs and the cost of an extra discovery pass}
+\label{sec:hint-transport}
+
+The previous experiment leaves a concrete proof-transport question. A learned clause is justified at its parent, but its child has different clauses, variable names and reason indices. We now translate the original implication's unit-reason prefix through the checked assignment or signed substitution and into the normalized child core. Satisfied or tautological reasons disappear. An independent checker then negates the proposed child clause and checks the translated unit steps until a core clause is false. A failed translation remains a recorded miss; it does not silently invoke fresh search. An accepted proof depends only on the exact child core. Parent provenance guides its construction but is no longer a premise of its replay.
+
+This uses established hinted reverse-unit-propagation reasoning, not a new certification principle; efficient clausal proof checking already supplies explicit reason hints \citep{cruzfilipe2017lrat}. The added Lean corollary, \texttt{core\_fragment\_sound}, specializes the existing fragment soundness theorem to premises drawn from an exact core. It does not verify Python's index translation, integer encoding or persistence. Original source proofs remain preserved. Full core-and-clause identities bind the new persistent certificates; changed clauses or variable maps cannot silently reuse an old record.
+
+We test all 449 learned-parent edges from the preceding archive and 45 new distinct parents exposed by 36 fresh inputs: 24 random 3-CNFs and twelve growing, signed or edited controls. The ordinary planner closes 30 of those 36 original inputs. The 494-edge sample includes alternatives outside selected source plans, and is not a sample of arbitrary formulas. All 1,005 eligible hint occurrences translate successfully without fresh proof search, including the earlier 907. They occupy 984 distinct core-clause records. The reason-prefix walk visits 11,510 literal occurrences, compared with 287,160 in a fresh scan-based proof-search control given the same candidate clauses. This is not a comparable end-to-end speed ratio: transport preparation, including full parent checking and index reconstruction, costs 0.95129 seconds. The fresh proof control, including checking and persistence, costs 0.93100 seconds conditional on already prepared candidates. Both costs remain explicit.
+
+The application control uses an explicit plan keyed by the core, ordered hint set, depth and policy. Recognition runs on the core and retains earlier reduction priorities. When eligible, a new bounded pass propagates the checked hints using variables ranked on the core. Its resulting child again contains only original-core clauses after the checked reduction. An inconclusive pass returns to the unchanged core planner, and ordinary descendants do not automatically inherit hints. This adds a pass; it does not hold whole-plan work equal to baseline. The stored context and exact child binding are independently checked, including after restart.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{lrrrr}
+\hline
+Local child policy & Closed / 494 & Total (s) & SQLite (MB) & Cold (s) \\
+\hline
+Existing core planner & 223 & 14.41354 & 55.120 & 4.70738 \\
+Portable hints, extra pass & 224 & 16.82765 & 63.885 & 7.72522 \\
+\hline
+\end{tabular}
+\caption{Immediate-child controls on learned-parent edges. Total time includes local discovery, checking, persistence, independent solving and successful lifts; hint transport preparation is an additional 0.95129 seconds. These are local closures, not original-source coverage.}
+\label{tab:hint-transport}
+\end{table}
+
+Table~\ref{tab:hint-transport} retains the unfavorable total-cost result. The extra pass gains one local closure and loses none, but costs 16.75\% more operation time, or 23.35\% more with transport preparation included. Selected unresolved literal occurrences fall from 57,827 to 57,595. Ordinary pattern nodes fall from 2,167 to 1,999 and their payload from 11.158 to 9.943 MB, but hint records add 2.181 MB and 494 context plans add 3.097 MB. Logical probes rise from 14,468 to 16,136. Warm lookup takes 0.06691 versus 1.31088 seconds; the hint path rechecks its explicit context and proofs. The same six-core Python peak rises from 7.372 to 7.431 MB, excluding preparation, native SQLite, RSS and full-corpus peak. Successful proof transport therefore does not yet give a runtime or memory saving.
+
+The gained local case explains the discovery effect. It is a 25-variable, 81-clause core at remaining depth zero, reached through an unselected alternative of source 977. Its saved selected source plan remains unresolved. A two-by-two control varies the transported versus rediscovered batch and core versus baseline-continuation variable choices. Both batches close the child with core choices $(4,5,7,19)$, which refute $x_{19}=\mathrm{true}$ and force $x_{19}=x_{13}=\mathrm{false}$. Both stay open with continuation choices $(4,5,7,11)$. Thus this gain is explained by the variable-choice policy; stronger inherited clauses are not required. No whole-source coverage gain is established by this local experiment.
+
+The next controlled experiment should rank continuation variables on the original core using the existing learned batch and the existing number of passes. That isolates the observed cause and can avoid reconstructing a second learned representation solely for ranking. Transported evidence can then enter a separately tested continuation policy. A diagnostic finds 1,456 inactive versus 102 active hint deltas across the saved original probe closures of 196 eligible cores. Reusing a closure requires its original proof and a checked delta; these counts are opportunities, not measured saved probes. Adding a fresh pass to every eligible child repeats work and should remain optional.
+
+For parent literal count $L$, at most $q$ retained hints and translated reason-literal volume $R$, the transport code adds expected $O(qL+R)$ map and prefix work beyond parent validation, plus core normalization and repeated independent proof checks. The checker currently normalizes the core for each hint. Full-core keys and records add $O(qL+R)$ payload before context plans and descendants. These costs, variable-label bit lengths and the unbounded number of discovered cores remain separate obligations. All 374 Python tests and the full Lean build and axiom audit pass, at 4,126 declarations and 1,968 theorem declarations. Four new archives replay byte-identically, with 51 matching code, test and Lean fingerprints. Object/database initialization is excluded from operation timings and was not separately timed. Serial synthetic measurements do not establish an industrial speedup, complete structural discovery or efficient unrestricted-SAT acquisition.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

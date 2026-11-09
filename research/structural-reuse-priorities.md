@@ -12,16 +12,59 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-**Next research experiment:** reuse checked implication evidence across core
-edges while retaining core-based recognition. The [parent-scoped core study](../experiments/results/cnf-learning-core/README.md)
-recovers 956 without losing 1024, but descendants currently rediscover their hints.
-The diagnostic finds **319 repeated clause occurrences across 165 immediate
-parent/child edges**. Start with these edges and saved sources **956/1024/1189**.
-Check source entailment, the exact assignment/substitution and variable transport;
-bind hint-dependent propagation to its context. Do not silently share a plan
-under a different hint set. Compare newly exposed structure, fresh probe work
-and total cost at unchanged caps; inherited hints can still change rankings or
-lose bounded coverage. This next transport policy is not implemented.
+**Next research experiment:** rank continuation variables on the original core,
+using the existing learned batch and existing number of passes. The
+[portable-hint control](../experiments/results/cnf-hint-transport/README.md)
+isolates a local miss caused by ranking: both the transported and rediscovered
+batches close local case **97** with core choices `(4,5,7,19)`, and both stay open
+with baseline-continuation choices `(4,5,7,11)`. Test this case and original source
+**977**, then the old **956/1024/1189** controls and full old/fresh source workloads.
+Derive choices from the exact core or checked complete original traces, never an
+unchecked stored list. Charge ranking, later graph changes and any losses. Do
+not add another probe pass or promote the optional hint overlay.
+
+The transport primitive now works on **1,005 eligible hint occurrences** from
+**494 learned-parent edges** (449 prior and 45 fresh): every translated reason
+prefix yields an independently checked child-core proof without fresh search.
+There are **984** distinct core/clause records. Replay needs no parent graph;
+the exact core and hint context still bind proof use and heuristic plans. This
+implements portable evidence, not complete cross-generation planner integration.
+
+The local hint overlay closes **224/494** children versus **223/494**, with no
+losses. Its one gain is an **unselected alternative of source 977**, and is absent
+from every saved selected source path. Do not add it to the previous **719/805**
+original-source coverage. The controlled two-by-two comparison shows that the
+gain needs different probe choices, not a stronger inherited batch.
+
+The extra-pass policy costs **16.82765 versus 14.41354 s**, plus **0.95129 s** for
+transport preparation. SQLite grows **55.120 -> 63.885 MB**, cold replay
+**4.70738 -> 7.72522 s**, and six-core Python peak **7.372 -> 7.431 MB**. Ordinary
+nodes fall 2,167 -> 1,999, but proof and context payloads add **2.181 + 3.097 MB**;
+logical probes rise **14,468 -> 16,136**. The favorable reason-prefix scan count
+(11,510 versus 287,160 fresh-search literal visits) is not an end-to-end speedup.
+Fresh proof search is conditional on supplied candidate clauses; all parent
+checking, preparation, storage and replay remain charged.
+
+Current priorities:
+
+1. **Core-ranked continuation under the existing budget.** Isolate the measured
+   variable-choice cause, avoiding reconstruction of a redundant learned view
+   solely for ranking. Whole-source coverage and cost decide whether to adopt it.
+2. **Integrate portable evidence into an existing pass.** The saved diagnostic
+   finds 1,456 inactive and 102 active hint deltas at 196 original-probe cores.
+   Reuse only after original closure validation and an inactive-delta check;
+   these are opportunities, not saved probes. Avoid repeating a fresh pass that
+   then falls back to another full discovery pass.
+3. **Reduce proof/context duplication if integration earns its cost.** Full-core
+   hint keys, per-hint normalization and separately replayed plan contexts now
+   outweigh ordinary-node savings. Context omission is not a valid compression.
+
+All **374 Python tests**, the full Lean build/axiom audit (**4,126 declarations /
+1,968 theorem declarations**) and four new cold archive replays pass. All 51
+fingerprints match; previous archives are preserved. These are sequential
+synthetic local controls, not unrestricted-SAT bounds or an industrial speedup.
+
+The preceding parent-scoped core study follows with its whole-source denominators.
 
 The full **1,317-input** core experiment gives **719/805** non-tiny closures
 versus **718/805** for baseline and fixed order, with no losses against either.
@@ -42,7 +85,7 @@ All parent hints and proofs remain persistent; children receive no inherited hin
 The 907 absent eligible transported hint occurrences include the 319 immediately
 reacquired clauses above, not 319 distinct implications or measured saved seconds.
 
-Ranked remaining targets:
+Prior targets, now partly tested by the portable-hint experiment:
 
 1. **Transport checked hints without changing core recognition.** Test the measured
    reacquisition opportunities and coverage controls before full old/fresh inputs.

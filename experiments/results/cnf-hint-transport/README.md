@@ -100,7 +100,7 @@ the ordinary pattern/solver audit (**4.34585 s**) and a fresh hint/plan reader
 `mechanisms.json` retains a controlled two-by-two test on local case **97**:
 a 25-variable, 81-clause core at depth zero, derived by a checked common reduction.
 It appears only in an **unselected alternative of original source 977**. No saved
-selected whole-source path includes it; source977's saved plan remains unresolved
+selected whole-source path includes it; source 977's saved plan remains unresolved
 with two selected leaves and 138 literal occurrences. The local baseline itself
 has one unresolved leaf with 223 literals. Do not add this local gain to the
 previous 719/805 original-source coverage count.
@@ -157,8 +157,9 @@ declarations**. Four new archives replay byte-identically; all 51 measured code,
 test and Lean fingerprints match. Older archives are untouched. Primary runs,
 allocation diagnostics, Lean builds, tests and post-run controls were sequential,
 without overlaps affecting primary timings. Generation, decoding/compression,
-truth tables and post-run diagnostics are excluded from operation timings;
-preparation, fresh-source generation and cold/warm replay are separately reported.
+truth tables and post-run diagnostics are excluded from operation timings.
+Object/database initialization is also excluded and was not separately timed.
+Preparation, fresh-source generation and cold/warm replay are separately reported.
 These are single synthetic samples, with no significance or industrial-speed claim.
 
 ```sh

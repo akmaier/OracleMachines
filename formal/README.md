@@ -1348,3 +1348,15 @@ recovers one lost source closure and keeps the previous gain, but does not reduc
 full-run time or traced memory. Same-core reuse is checked in the controlled
 fixture; broad within-run core merging is not observed. Inherited hint transport
 and its explicit propagation-context obligations remain the next experiment.
+
+The portable-hint follow-up adds `Fragments.core_fragment_sound` in
+`ProofFragments.lean`: an accepted fragment whose reason clauses all belong to
+an exact residual core entails its target on that core. This is a specialization
+of the existing RUP fragment theorem, with no parent-state or heuristic hypothesis.
+It does not prove the Python translation, clause-index mapping, serialization
+or resource bounds. All 1,005 sampled transported hint occurrences pass independent
+Python core-only checks. The complete Lean build/axiom audit passes at **4,126
+declarations / 1,968 theorem declarations**, and all **374 Python tests** pass.
+The [local comparison](../experiments/results/cnf-hint-transport/README.md)
+preserves increased total costs and a ranking-dependent local gain outside the
+selected source plans. Whole-source coverage is not improved by that count.

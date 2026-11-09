@@ -153,6 +153,16 @@ learned-child cores occur within the full run; broad compression is not measured
 All **366 tests**, the expanded Lean audit and new/previous archive checks pass.
 Eighty-six sources remain structurally unresolved; arbitrary-SAT bounds stay open.
 
+The [portable-hint follow-up](experiments/results/cnf-hint-transport/README.md)
+translates all **1,005 eligible hint occurrences** into proofs checked directly
+against child cores. An extra hint pass gains one local closure among 494 edges,
+but increases time and memory. The gain occurs outside selected source paths and
+comes from probe choices: the child's existing clauses also suffice with those
+choices. Next: rank the existing continuation on its core without adding another
+pass. Whole-source coverage remains **719/805**. All **374 tests**, the Lean audit
+and new cold archive checks pass; parent-independent proofs and failed cost
+experiments remain persistent.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

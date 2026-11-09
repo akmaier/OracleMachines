@@ -383,6 +383,50 @@ and four preceding archives replay byte-identically, warm reuse inserts nothing,
 and both reports' 47 fingerprints match. There is still no uniformly efficient
 construction of all arbitrary-CNF classes or compact global closure.
 
+## Portable evidence isolates a ranking miss (9 November 2026)
+
+The [hint-transport study](../experiments/results/cnf-hint-transport/README.md)
+translates parent implication prefixes into independently checked unit-refutation
+proofs against the exact normalized child. All **1,005 eligible occurrences**
+across 494 learned-parent edges succeed without fresh proof search. The 449 prior
+parents are extended by 45 distinct parents from 36 fresh sources. There are 984
+distinct core/clause records. Source proof, assignment/substitution and variable
+mapping are checked during preparation; portable replay needs only the exact core.
+These are established proof-checking ideas applied to this representation gap,
+not a new SAT class or a universal transport-completeness theorem.
+
+An explicit context-keyed local plan recognizes the core, preserves earlier
+overlaps/priorities, then optionally tries one bounded pass with transported
+hints and core-ranked variables. An inconclusive pass falls back to the original
+planner; ordinary descendants receive no implicit inherited context. The complete
+ordered hint set is part of plan identity. Checked reductions and model lifts
+preserve the exact child relation, but this extra pass is additional work.
+
+Local closure is **223 -> 224 / 494**, with no losses. The one gain is local case
+**97**, a 25-variable, 81-clause depth-zero core in an **unselected alternative of
+source 977**. No saved selected source path includes it. In a controlled crossing,
+both transported and child-rediscovered batches close with choices `(4,5,7,19)`;
+both remain open with baseline-continuation choices `(4,5,7,11)`. Both successful
+controls refute `19=true` and force `19=false,13=false`. Thus the observed cause
+is ranking, not stronger transported clauses. Original-source coverage remains
+the preceding study's **719/805**; this local result must not increment that count.
+
+Runtime rises **14.41354 -> 16.82765 s**, plus **0.95129 s** preparation, SQLite
+**55.120 -> 63.885 MB**, cold replay **4.70738 -> 7.72522 s**, and six-core Python
+peak **7.372 -> 7.431 MB**. Ordinary nodes shrink but hint/context state outweighs
+that saving. All **374 Python tests**, the Lean audit (**4,126 / 1,968 declarations /
+theorems**) and four new byte-identical cold replays pass, with 51 matching
+fingerprints. These local synthetic controls do not show a global speedup.
+
+**Next:** use core-ranked continuation choices with the existing learned batch
+and number of passes, beginning with 97/977 and 956/1024/1189 before full source
+workloads. Keep all prior policies and any losses. Integrate portable hints into
+an existing continuation only as a separate experiment. Original probe closures
+show 1,456 inactive versus 102 active hint deltas across 196 cores; their reuse
+requires proof validation and delta checks, and is not yet a measured saving.
+Efficient arbitrary-CNF discovery, total closure size and global resource bounds
+remain open.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

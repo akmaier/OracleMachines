@@ -1257,3 +1257,56 @@ identity. The largest unresolved source 1297 has only one successful learned
 parent; restriction and unit checking/propagation dominate its separate profile.
 Avoiding repeated scans remains a broader supporting target. Uniform efficient
 arbitrary-SAT acquisition and lifetime storage bounds remain unproved.
+
+## Follow-up: portable core-hint certificates and explicit local plans (9 November)
+
+The new transport primitive fully checks its parent, translates unit-reason
+prefixes through the exact assignment/substitution and normalized variable map,
+then independently checks a unit refutation of each negated candidate clause
+on the child core. No parent proof is needed for portable replay. Exact core and
+clause payloads bind the record; all earlier proofs/archives remain preserved.
+All 1,005 eligible occurrences in the [494-edge study](../experiments/results/cnf-hint-transport/README.md)
+translate without fresh proof search, yielding 984 distinct core-clause records.
+This is a measured scope, not a universal completeness result.
+
+Let L be parent literal volume, q the bounded retained-hint count, and R the
+literal volume of examined mapped reason clauses. Beyond full parent validation,
+the implementation uses expected O(qL+R) map/prefix work, plus core normalization
+and independent proof checking. It currently normalizes the core for every hint.
+Each proof lookup validates the complete core/clause binding and every cited
+unit/conflict reason; full-key comparison and serialization are not constant-time.
+Storing full cores in keys/payloads adds O(qL+R) logical payload before context
+plans and descendants. Variable-label bit costs and the lifetime number of cores
+remain separate. This does not bound unrestricted SAT proof discovery.
+
+The prefix walk visits **11,510 literals** versus **287,160** for fresh proof
+search on the same supplied candidates. Transport preparation costs **0.95129 s**,
+including full parent replay and index reconstruction. Conditional fresh proof
+search/checking/persistence costs **0.93100 s**; these different scopes do not
+support a wall-clock speedup claim. Fresh-source generation/solving costs another
+**8.87824 s**, separately recorded. Previous parent acquisition is preserved and
+is not erased by converting its proof.
+
+The explicit hint plan keys core, ordered hint set, depth and policy, and adds one
+bounded pass before the unchanged core planner. Earlier recognition priorities
+are checked on the core. Local closure rises **223 -> 224 / 494**, with no losses,
+but no whole-source gain: the one gained child is outside all saved selected
+source paths and is explained by changed probe choices. Operation time rises
+**14.41354 -> 16.82765 s**, or **17.77895 s** including transport preparation.
+SQLite grows **55.120 -> 63.885 MB**, cold replay **4.70738 -> 7.72522 s**, warm
+lookup **0.06691 -> 1.31088 s**, and six-core Python peak **7.372 -> 7.431 MB**.
+Peak excludes preparation, native memory/RSS and the full corpus. These are
+single sequential samples, not an industrial comparison or significance estimate.
+
+Ordinary node payload falls **11.158 -> 9.943 MB** across **2,167 -> 1,999 nodes**,
+but portable proofs add **2.181 MB** and 494 explicit context plans add **3.097 MB**.
+Logical probes rise **14,468 -> 16,136**. Inconclusive extra passes repeat work
+before falling back; 180 are clear and 83 skip because of eligibility/priorities.
+Four new archives replay byte-identically and warm reuse inserts nothing.
+
+Next isolate core-based continuation ranking with existing batches and passes.
+The changed local case closes under either batch only when the core's fourth
+variable (19) replaces the baseline continuation's fourth variable (11). A
+separate diagnostic finds 1,456 inactive and 102 active hint deltas across 196
+original-probe cores. Checked closure reuse can later avoid repeats in an existing
+pass; these counts do not establish saved probes or justify omitting hint context.

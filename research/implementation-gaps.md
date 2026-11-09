@@ -3674,3 +3674,113 @@ pages 100--103, including Table 18 and the discussion transition, were visually
 inspected. All **54 prior proof blocks** remain unchanged and **190 labels** are
 unique. Project/formal READMEs, resource bounds, discovery and ranked priorities
 record both the modest coverage gain and the full-run time/memory regressions.
+
+## 9 November 2026: portable core proofs, extra-pass regression, ranking control
+
+Implemented `cnf_hint_transport.py`: map a checked parent's original implication
+reason prefix through its exact forced/common assignment or signed equivalence
+and normalized child transport. Parent probe reasons index the restricted parent,
+so the translator reconstructs original clause indices before mapping to child
+indices. Satisfied/tautological reasons disappear; missing refutations remain
+explicit misses rather than invoking hidden fresh search. An independent RUP
+checker accepts only a unit-conflict derivation against the exact child core.
+The resulting record is portable without the parent graph, with complete
+core/clause identity and independently checked reasons. Parent evidence and
+earlier archives remain preserved.
+
+`HintAssistedInventory.inspect_hints` supplies an explicit, context-keyed local
+control. Recognition and earlier priorities stay on the core. Eligible children
+receive one extra bounded pass using proved hints and core-ranked choices;
+successful rewrites construct original-clause cores with exact lifting, and
+inconclusive passes fall back to the unchanged ordinary planner. All hints and
+their order, depth and policy are part of the persistent plan identity. Ordinary
+descendants do not inherit hints implicitly. This is an optional local control,
+not a replacement of the original whole-source planner at the same total budget.
+
+The [preserved study](../experiments/results/cnf-hint-transport/README.md) covers
+all **449** previous learned-parent edges and **45** distinct new parents from
+36 fresh sources at seed **20261109064108**. The ordinary planner closes 30/36
+fresh originals; their full graphs, answers and solver certificates are archived.
+All **1,005** eligible hint occurrences (907 prior, 98 new) translate without
+fresh search, into **984** distinct core-clause records. Omissions are 448 satisfied,
+64 tautological, 99 explicit and four duplicate occurrences; no outside-variable
+or failed-prefix miss occurs in this sample. Universal transport completeness
+and Python refinement are not established.
+
+The mapped-prefix walk visits **11,510 reason literals**, versus **287,160** for
+fresh scan-based proof search given the same candidates. This is not an overall
+speed ratio: transport preparation **0.95129 s** includes full parent checking,
+core projection, normalization, index mapping and proof checks; fresh proof
+search/checking/persistence costs **0.93100 s** conditional on supplied candidates.
+The separately recorded fresh-source acquisition/solving costs **8.87824 s**.
+
+Local baseline/hint closure is **223/494 -> 224/494**, with no losses. Prior-edge
+closure is 198/449 -> 199/449; fresh-edge closure stays 25/45. The independent
+solver verifies every child core, agrees in both modes and retains **6,051
+residuals**. Operation time is **14.41354 / 16.82765 s** before hint preparation
+(+16.75%, or +23.35% including preparation), discovery **6.06309 / 7.87721 s**,
+SQLite **55,119,872 / 63,885,312 bytes**, cold replay **4.70738 / 7.72522 s**, warm
+lookup **0.06691 / 1.31088 s**, and matched-six-core Python peak **7,372,293 /
+7,430,827 bytes**. Peak excludes preparation, native SQLite, RSS and full corpus.
+Hint cold time includes ordinary graph/solver and separate fresh hint-plan audits;
+their repeated checking remains charged. Primary runs, memory diagnostics, builds,
+tests and later controls ran sequentially without overlaps affecting primary timing.
+
+Ordinary nodes fall **2,167 -> 1,999**, payload **11,157,841 -> 9,943,442 bytes**,
+but portable hint records add **2,181,006 bytes** and 494 context plans add
+**3,096,507 bytes**. Probes rise **14,468 -> 16,136**; selected unresolved literal
+occurrences fall **57,827 -> 57,595**. The overlay is clear on 180 cases, skipped
+on 83, forced on 169, common on 27 and equivalence-reducing on 35. Reductions do
+not by themselves count as new closures. The extra-pass policy remains optional.
+
+The local gain is **case 97**, a 25-variable, 81-clause core at depth zero, reached
+through a common reduction in an **unselected alternative of original source 977**.
+It is absent from every saved selected whole-source path. The source's selected
+plan remains open with two leaves and 138 literals; the local baseline has one
+open leaf with 223 literals. Do not increment the preceding **719/805** source
+coverage using this local result.
+
+The [mechanism record](../experiments/results/cnf-hint-transport/mechanisms.json)
+crosses transported/rediscovered batches with core/baseline-continuation choices.
+Both batches close using `(4,5,7,19)`, refuting `19=true` and forcing
+`19=false,13=false`; both stay clear/open using `(4,5,7,11)`. This isolates the
+variable-choice policy as sufficient to explain the gain. Stronger inherited
+clauses are unnecessary for this control. A further diagnostic records **1,456
+inactive / 102 active deltas** across original probe closures on **196 cores**.
+Original proofs must be checked first; this is an opportunity count, not executed
+reuse or avoided probes.
+
+**Next experiment:** core-ranked continuation choices with the existing learned
+batch, existing pass count and local caps. Derive choices from the checked original
+traces or exact core, test 97/977 and 956/1024/1189 first, then complete old/fresh
+source workloads. Record any losses and avoid rebuilding an old augmented batch
+solely to rank. Portable hints can later enter a separately checked existing-pass
+policy; do not assume an additional pass is efficient. Recognition, coverage,
+total cost and full-source effects remain separate metrics.
+
+All **374 Python tests** pass (32.796 s). Eight new tests cover exhaustive small
+RUP soundness, forced/common/equivalence translations, signed renamings and edits,
+wrong parent dependencies, corrupted core reasons, exact-source bindings,
+empty/nonentailed clauses, model fibers, explicit contexts, wrong children and
+cold replay without parent access. A first negative test mistakenly expected a
+valid proof to fail after removing an unused clause; it was corrected to test
+the store's exact-source binding separately from proof validity. The full Lean
+build/axiom audit passes at **4,126 declarations / 1,968 theorem declarations**.
+New `Fragments.core_fragment_sound` derives exact-core entailment from the existing
+fragment checker and core-premise membership. It does not verify Python translation
+or persistence. The manuscript attributes the underlying proof method to existing
+hinted clausal checking rather than claiming novelty.
+
+Four new archives replay byte-identically; warm reuse inserts nothing. All **51
+code/test/Lean fingerprints**, four archive hashes and analyzer hashes match.
+Implementation, proof and experiment checkpoint **a0f57c9** is pushed. Manuscript
+Section **12.58**, Table **19**, and the discovery/resource/priority records retain
+the successful portability result, unfavorable costs and ranking-dependent gain.
+Efficient arbitrary-SAT classification, compact closure and global acquisition
+bounds remain open.
+
+The **111-page** PDF builds without final-pass warnings or box errors. Changed
+pages 102--105, including Table 19 and the discussion transition, were visually
+inspected. All **54 previous proof blocks** remain unchanged and **192 labels**
+are unique. Object/database initialization was outside local operation timings
+and not separately timed; this limitation is retained with the measured costs.

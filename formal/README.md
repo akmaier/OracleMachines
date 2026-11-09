@@ -1251,3 +1251,17 @@ implementation or its persistence/costs. All 326 Python tests and the Lean
 build/audit pass (4,091 declarations / 1,950 theorem declarations). The
 [comparison](../experiments/results/cnf-common-consequence/README.md) retains one
 new closure alongside increased runtime/storage and no fresh-random gain.
+
+The signed-equivalence follow-up adds `Formula.signedSubstitute`,
+`signed_substitute_eval`, `opposite_conditions_force_equivalence` and
+`satisfiable_signed_substitute` in `Residuals.lean`. Opposite consequences under
+both Boolean assumptions justify a signed equality. Substitution through the
+whole formula evaluates exactly under the transported valuation and preserves
+SAT when all parent models satisfy the signed relations. Those relations are
+explicit hypotheses; unsuccessful probing is insufficient. The Python checker
+separately validates paired unit traces, first-block selection, full substitution,
+child transport and lifted models. These semantic lemmas do not refine Python,
+SQLite or cost bounds. All 333 Python tests pass, and the full Lean build/axiom
+audit covers 4,101 declarations / 1,957 theorem declarations (including generated
+ones). The [matched experiment](../experiments/results/cnf-probe-equivalence/README.md)
+preserves seven new closures alongside a full-corpus time/storage regression.

@@ -117,6 +117,57 @@ theorem satisfiable_common_condition (f : Formula) (index target : Nat) (value :
     obtain ⟨v, _, model⟩ := (satisfiable_condition f target value).mp remaining
     exact ⟨v, model⟩
 
+/-- Replace every variable by a signed representative, throughout the formula.
+This syntax operation does not discover or certify the required equivalences. -/
+def Formula.signedSubstitute (f : Formula) (rep : Nat → Nat) (flip : Nat → Bool) : Formula :=
+  match f with
+  | .falsum => .falsum
+  | .var i => if flip i then .neg (.var (rep i)) else .var (rep i)
+  | .neg g => .neg (g.signedSubstitute rep flip)
+  | .conj g h => .conj (g.signedSubstitute rep flip) (h.signedSubstitute rep flip)
+
+theorem signed_substitute_eval (f : Formula) (rep : Nat → Nat) (flip : Nat → Bool)
+    (v : Nat → Bool) :
+    (f.signedSubstitute rep flip).eval v =
+      f.eval (fun i => if flip i then !(v (rep i)) else v (rep i)) := by
+  induction f with
+  | falsum => rfl
+  | var i => cases h : flip i <;> simp [Formula.signedSubstitute, Formula.eval, h]
+  | neg g ih => simp [Formula.signedSubstitute, Formula.eval, ih]
+  | conj g h ihg ihh => simp [Formula.signedSubstitute, Formula.eval, ihg, ihh]
+
+/-- Opposite consequences of both assumptions give a signed equality. Each
+implication is a hypothesis, not a conclusion from mere lack of conflict. -/
+theorem opposite_conditions_force_equivalence (f : Formula) (index target : Nat)
+    (flip : Bool)
+    (low : ∀ v, v index = false → f.eval v = true → v target = flip)
+    (high : ∀ v, v index = true → f.eval v = true → v target = !flip)
+    (v : Nat → Bool) (model : f.eval v = true) :
+    v target = if flip then !(v index) else v index := by
+  cases assumption : v index with
+  | false => have h := low v assumption model; cases flip <;> simpa using h
+  | true => have h := high v assumption model; cases flip <;> simpa using h
+
+/-- Any globally justified signed substitution preserves satisfiability. The
+reverse direction supplies a model lift even without the justification; the
+forward direction needs all equivalences in every parent model. No resource
+bound or refinement of the Python trace checker is asserted. -/
+theorem satisfiable_signed_substitute (f : Formula) (rep : Nat → Nat) (flip : Nat → Bool)
+    (compatible : ∀ v, f.eval v = true → ∀ i,
+      v i = if flip i then !(v (rep i)) else v (rep i)) :
+    Satisfiable f ↔ Satisfiable (f.signedSubstitute rep flip) := by
+  constructor
+  · rintro ⟨v, model⟩
+    refine ⟨v, ?_⟩
+    rw [signed_substitute_eval]
+    have agree : (fun i => if flip i then !(v (rep i)) else v (rep i)) = v := by
+      funext i
+      exact (compatible v model i).symm
+    simpa [agree] using model
+  · rintro ⟨v, model⟩
+    exact ⟨fun i => if flip i then !(v (rep i)) else v (rep i),
+      (signed_substitute_eval f rep flip v).symm.trans model⟩
+
 /-- Instantiate Left with selected choice groups and Right with their possible
 resources. This is the cardinality obstruction behind a Hall certificate, not
 a proof of the Python CNF recognizer or matching algorithm. -/

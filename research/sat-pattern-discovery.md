@@ -144,6 +144,21 @@ unresolved nodes: 16 selected nodes affect 16 of the 52 missed source paths.
 Complete recognition, full-CNF substitution, transport and matched costs remain
 implementation obligations; these opportunities are not achieved new coverage.
 
+**Checked signed substitution implemented:** the
+[1,137-source study](../experiments/results/cnf-probe-equivalence/README.md)
+substitutes a signed block certified by the first eligible opposite probe pair
+through the full CNF. Exact child binding and model lifting preserve shared-variable
+interactions; old recognition priorities and archives remain valid. Seven old
+sources gain closure (567/625 -> 574/625 non-tiny), but 24 fresh random formulas
+show no gain. The targeted pilot slightly reduces time/storage; the full run
+increases both, so the policy remains optional. The 51 remaining source misses
+contain 77 selected unresolved nodes. Their saved reasons imply 552 absent binary
+clauses, of which 333 are already reachable through binary paths. The remaining
+219 node/clause pairs affect 37 missed sources. Next test bounded checked local
+learning on these paths, preserving the implication dependencies and charging
+extra clause/propagation/archive work. No-path evidence is not semantic
+nonredundancy, and no added closure or total-cost benefit is yet established.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

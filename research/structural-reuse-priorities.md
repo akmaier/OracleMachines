@@ -12,15 +12,41 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-**Next research experiment:** discover signed equivalences from the two checked
-probe traces, then test exact variable substitution on selected unresolved
-residuals. The common-policy archive has 269 unresolved nodes with implications
-not already represented by a direct complementary binary pair. Only 16 lie on
-selected paths, affecting 16 of 52 remaining source misses and 799 of 8,101
-selected unresolved literals. Begin with these cases: check the full CNF
-substitution and signed model transport, retain source dependencies, and measure
-whether a family or component becomes visible before expanding the policy.
-These counts are opportunities, not additional coverage or a universal bound.
+**Next research experiment:** bounded local learning from the checked one-way
+implications that survive signed-equivalence substitution. Start with selected
+unresolved nodes whose implications are not already reachable in the binary
+implication graph: **219 node/clause pairs on 47 nodes, affecting 37 of 51 missed
+source paths**. The preserved `implication-boundaries.json` lists those source
+IDs and exact reasons; case 1061 remains the largest discovery cost. Check every
+assumption/reason dependency, duplicates and binary redundancy before insertion;
+charge the larger propagation state, checks, persistence and cold replay. Absence
+of a binary path does not certify semantic nonredundancy. No benefit is measured
+yet; retain a strict clause budget and compare selected-path coverage and total
+cost before enabling learning globally.
+
+The [signed-equivalence study](../experiments/results/cnf-probe-equivalence/README.md)
+implements the preceding target. Seven of sixteen selected source misses close
+in the pilot, with slightly lower time and storage. On the full 1,137-input
+comparison, closure rises 567/625 -> 574/625 non-tiny sources, but fresh random
+closure stays 18/24. Time rises 38.293 -> 39.731 s, SQLite 130.597 -> 135.569 MB,
+and cold checking 15.208 -> 15.856 s. Keep the policy optional. All seven gains
+are old cases and three are variants of one input. The prior common policy and
+all unsuccessful traces remain preserved.
+
+The full run acquires 624 equivalence rewrites merging 1,145 variables across
+nodes; 431 shared exact parents retain identical probe lists. Still, probes rise
+37,049 -> 41,039, pattern nodes 9,584 -> 9,952 and logical bytes 50.062 -> 52.575
+MB. Selected unresolved literals fall 10,300 -> 9,674. The six-case traced Python
+peak falls 14.564 -> 11.586 MB, but this excludes native memory and full-corpus
+peak. Local compactness, targeted live allocation and total durable storage must
+remain separate accounts.
+
+Probe nodes occupy **32.136 / 52.575 MB** logical payload. The remaining 48-variable
+case 1061 again spends most profiled own time in restriction, unit checks/propagation,
+normalization and literal helpers. Occurrence-driven scans and shared checked
+rewrite chains remain supporting work. The new implication opportunity extends
+beyond equivalence blocks, but neither its counts nor the successful reductions
+provide efficient closure of arbitrary SAT.
 
 The [common-consequence comparison](../experiments/results/cnf-common-consequence/README.md)
 implements the previous target, with a narrow gain and a total-cost regression.

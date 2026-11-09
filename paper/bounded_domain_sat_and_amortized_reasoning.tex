@@ -2672,6 +2672,44 @@ All modes retain the same 7,393 ordinary solver residuals; solving alone takes 9
 
 Fifty-two non-tiny inputs remain unresolved. The next structural candidate is signed variable equivalence derived from opposite implications in the paired traces. Although 269 archived unresolved nodes have such a relation beyond a direct complementary binary pair, selected-path analysis finds only 16 relevant nodes on 16 of the 52 missed source paths, covering 799 of 8,101 selected unresolved literals. These are opportunities, not additional closures. Full-CNF substitution, signed model transport, checking and cost still require an implementation. The larger 3-CNF misses remain a separate gap; neither common consequences nor the identified equivalences establish a complete efficient partition of arbitrary SAT.
 
+\subsection{Signed equivalence from paired probe traces}
+\label{sec:probe-equivalence}
+
+The next experiment implements the preceding signed-equivalence opportunity. Equivalent-literal propagation and simplification are established SAT techniques \citep{li2003equivalent}; look-ahead solvers also integrate equivalence reasoning with explicit attention to its additional costs \citep{heule2005marcheq}. Our contribution here is a source-bound implementation and a matched accounting experiment. We keep failed-literal and common-consequence priority. If neither applies, the first probe pair with opposite propagated literals defines one equivalence block. Its smallest variable becomes the representative, with a recorded sign for every member. We substitute throughout the CNF, including every interacting leftover clause, and keep the exact reduced child at the same arbitrary-conditioning depth.
+
+\begin{proposition}[Exact signed substitution]
+\label{prop:probe-equivalence}
+Suppose checked implications under $x=0$ and $x=1$ force each variable in a block $B$ to equal $x$ or $\neg x$, with opposite values in the two branches. Choose $r\in B$ and signs $s_z$ so that every parent model satisfies $z=r\oplus s_z$ for $z\in B$, with $s_r=0$. Let $\sigma$ replace each such $z$ by its signed representative and fix all other variables. Let $G$ result from applying $\sigma$ to every clause of $F$, deleting tautologies and duplicate literals/clauses. For the variables $Y$ still occurring in $G$,
+\[
+G(y)\quad\Longleftrightarrow\quad\exists h\,F(y,h).
+\]
+Every model of $G$ lifts by assigning absent representatives arbitrarily and applying the recorded signs.
+\end{proposition}
+\begin{proof}
+Every model of $F$ satisfies the block relations by Boolean case splitting on $x$. Substitution therefore preserves its truth values in every clause, so its restriction to $Y$ satisfies $G$. Conversely, extend a model of $G$ arbitrarily to representative variables absent from $Y$. Tautology and duplicate removal preserve truth under every such extension. Assign each block member from its representative and sign, leaving other retained variables unchanged. Evaluation of each original literal equals evaluation of its substituted literal. Hence all clauses of $F$ hold. This proves both directions and the model lift.
+\end{proof}
+
+The Python checker replays all saved probe reasons against the exact source, checks the first eligible pair and complete signed map, reconstructs the whole substituted CNF, and checks the canonical child edge. The representative maps to itself positively. Every rewrite strictly reduces support; models are transported back through the child renaming and then through the signed map, and checked against the full parent. Deleting a reason clause invalidates the old dependency context. Lean separately proves evaluation under signed substitution, the opposite-branch implication rule and SAT preservation under explicit model-compatibility hypotheses. These semantic lemmas do not verify the Python checker, its discovery policy or SQLite.
+
+For example, the previously unresolved CNF
+\[
+(\neg d\vee\neg b\vee\neg a)\wedge(\neg c\vee a)
+\wedge(\neg b\vee d)\wedge(b\vee c)
+\]
+implies $b=\neg a$ and $c=a$. Substitution leaves only $(a\vee d)$ after normalization. The original nine literal occurrences therefore reduce to two, exposing a recognized family without another arbitrary split. The paired proof, full source and transport remain in the archive; reduced clause count alone does not measure total retained space.
+
+With $k$ probe candidates and $v$ variables, finding the first opposite intersection costs expected $O(kv)$ set work plus $O(v\log v)$ sorting. Full substitution visits all $L$ literal occurrences and retains at most $L$ occurrences before normalization. The signed map occupies $O(v\log(v+k+2))$ bits. These are additional costs after probe discovery and checking; they exclude normalization, renewed recognition and persistence. A single rewrite chain has at most $v-1$ successful merges, but no polynomial bound on the number of acquired alternatives follows. Signed renaming also changes variable-order heuristics, so exact semantics alone does not guarantee equal bounded-policy coverage or lower acquisition cost.
+
+The targeted pilot closes seven of the sixteen selected source misses, with total time 4.92437 versus 4.86584 seconds and SQLite 16,863,232 versus 16,326,656 bytes. Broader testing changes the cost conclusion. The full study retains all 1,101 previous sources and adds 24 fresh random 3-CNFs (eight each at 20, 32 and 48 variables) plus twelve growing, signed and edited controls. At unchanged depth two and candidate caps four, non-tiny structural closure rises from 567/625 to 574/625. The gains are the same seven old cases; three are the original, renamed and signed versions of one source. No baseline closure is lost on this corpus. Fresh random closure remains 18/24, and all twelve new controls already close under the baseline. Fifty-one inputs remain unresolved.
+
+Total operation time rises from 38.29300 to 39.73059 seconds, discovery time from 27.77853 to 29.08758 seconds, SQLite from 130,596,864 to 135,569,408 bytes, and complete cold replay from 15.20846 to 15.85644 seconds. Warm inventory replay is 0.14485 versus 0.29462 seconds. The policy therefore remains optional. All modes retain the same 8,430 ordinary solver residuals; solving alone takes 10.65714 seconds. These are single sequential synthetic measurements, including recognition, checking, persistence, original-source solving and successful root lifts, with no significance claim.
+
+There are 624 equivalence rewrites merging 1,145 variable occurrences across acquired nodes. All 431 rewrites whose exact CNF/depth also occurs in the baseline retain identical probe-attempt lists. Yet total probes rise from 37,049 to 41,039, and pattern nodes from 9,584 to 9,952. Arbitrary conditioning candidates fall from 2,232 to 2,063 and selected unresolved literal payload from 10,300 to 9,674. Signed witnesses occupy 25,670 JSON bytes; total logical node storage grows from 50,062,370 to 52,575,330 bytes. Ninety-three equivalence children immediately expose a recognized family, whereas 261 remain unresolved. These counts include unselected alternatives and are not additional source closures. The six-case Python allocation diagnostic improves from 14,564,269 to 11,586,228 peak bytes, but excludes native SQLite memory, RSS and full-corpus peak.
+
+All 333 Python tests pass, including exhaustive two-variable fibers, transitive signed blocks, representatives removed by normalization, mixtures, source edits, invalid witnesses and cold corruption. Three new complete archives and three preceding archives replay byte-identically. The Lean build and axiom audit pass at 4,101 declarations and 1,957 theorem declarations. The proof obligations for the executable checker and unrestricted resource bounds remain separate.
+
+Probe nodes account for 32,136,270 of 52,575,330 logical node bytes. The largest remaining discovery case is again the 48-variable source 1061; separate profiling attributes most own time to restriction, unit checking/propagation, normalization and literal helpers. Seventy of 77 selected unresolved nodes have checked one-way implications absent as explicit binary clauses: 552 node/clause pairs, of which 176 have a reason of width at least three in the parent. A separate graph diagnostic finds 333 of the 552 already reachable through binary implications. The other 219 occur on 47 selected nodes affecting 37 missed source paths; absence of a binary path is not a semantic nonredundancy certificate. Their effect on closure and cost is unmeasured. The next experiment should test bounded, source-bound local learning from those saved reasons, accounting for redundant implications, longer propagation and retained proofs before adding it globally. This is a candidate for further structural discovery, not a claim that the remaining interaction becomes tractable.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 
@@ -2942,6 +2980,12 @@ Provably good solutions to the knapsack problem via neural networks of bounded s
 Earlier conference version at AAAI 2021.
 \href{https://doi.org/10.1287/ijoc.2021.0225}{doi:10.1287/ijoc.2021.0225}.
 
+\bibitem[Heule et~al.(2005)]{heule2005marcheq}
+Heule, M., Dufour, M., van Zwieten, J., and van Maaren, H. (2005).
+March\_eq: Implementing additional reasoning into an efficient look-ahead SAT solver.
+In \emph{Theory and Applications of Satisfiability Testing}, LNCS 3542, pp. 345--359.
+\url{https://www.cs.cmu.edu/~mheule/publications/35420345.pdf}.
+
 \bibitem[Heule and van Maaren(2006)]{heule2006march}
 Heule, M.~J.~H., and van Maaren, H. (2006).
 March\_dl: Adding adaptive heuristics and a new branching strategy.
@@ -3014,6 +3058,12 @@ Li, C.~M., and Anbulagan (1997).
 Heuristics based on unit propagation for satisfiability problems.
 In \emph{Proceedings of the Fifteenth International Joint Conference on Artificial Intelligence}, pp.~366--370.
 \url{https://ijcai.org/proceedings/1997/54}.
+
+\bibitem[Li(2003)]{li2003equivalent}
+Li, C.-M. (2003).
+Equivalent literal propagation in the DLL procedure.
+\emph{Discrete Applied Mathematics}, 130(2), 251--276.
+\href{https://doi.org/10.1016/S0166-218X(02)00407-9}{doi:10.1016/S0166-218X(02)00407-9}.
 
 \bibitem[Lin et~al.(2021)Lin, Jaech, Li, Gormley, and Eisner]{lin2021limitations}
 Lin, C.-C., Jaech, A., Li, X., Gormley, M.~R., and Eisner, J. (2021).

@@ -3177,3 +3177,76 @@ total; 177 unique labels). The 99-page PDF builds without warnings or box errors
 pages 90--92 and bibliography page 96 were visually inspected. Resume with the
 16 selected unresolved equivalence candidates, preserving this optional policy
 and its negative cost evidence rather than enabling it unconditionally.
+
+## Checked signed equivalence and its acquisition cost (9 November)
+
+`cnf_probe_equivalence.py` implements exact full-CNF substitution using the first
+eligible opposite-consequence probe pair. It preserves failed-literal/common
+priority and all attempted probes. One star-shaped block receives the smallest
+variable as representative, with explicit signs. The checker validates source
+reasons, first-pair selection, complete map, strict support decrease and exact
+child binding. Model lifting composes compact names and signed representatives,
+including representatives that vanish after tautology removal, then checks the
+full parent. Old policies/archives coexist unchanged. Recognition overlaps and
+all remaining interactions are retained; this is not a new universal SAT class.
+
+The [selected pilot](../experiments/results/cnf-probe-equivalence-pilot/README.md)
+closes seven of sixteen old source misses. Total time slightly falls 4.92437 ->
+4.86584 s, SQLite 16,863,232 -> 16,326,656 bytes and nodes 1,698 -> 1,585.
+The [full comparison](../experiments/results/cnf-probe-equivalence/README.md)
+retains all 1,101 previous sources and adds 24 fresh random 3-CNFs through 48
+variables plus twelve growing, signed and edited controls. Non-tiny closure rises
+567/625 -> 574/625; the same seven old cases gain and none lose on this corpus.
+Three gains are variants of one source. Fresh random closure remains 18/24.
+Fifty-one source misses remain. The independent decision solver is unchanged.
+
+The full cost conclusion reverses the pilot: total time rises 38.29300 ->
+39.73059 s, discovery 27.77853 -> 29.08758 s, SQLite 130,596,864 -> 135,569,408
+bytes and cold audit 15.20846 -> 15.85644 s. Warm replay rises 0.14485 -> 0.29462
+s. Keep this policy optional. These are single sequential synthetic measurements;
+no significance or industrial-performance claim follows.
+
+There are 624 equivalence rewrites merging 1,145 variables across acquired nodes.
+All 431 shared exact parent CNF/depth pairs retain identical probe lists. Yet
+attempts rise 37,049 -> 41,039 and pattern nodes 9,584 -> 9,952. Conditioning
+candidates fall 2,232 -> 2,063 and selected unresolved literals 10,300 -> 9,674.
+Logical bytes rise 50,062,370 -> 52,575,330; probe nodes alone occupy 32,136,270.
+The signed witnesses use only 25,670 JSON bytes. Full keys/profiles, the added
+policy identity and changed descendants remain charged. The six-case traced
+Python peak falls 14,564,269 -> 11,586,228 bytes, but excludes native SQLite,
+RSS and full-corpus peak. Reduced support, targeted live memory and total durable
+storage must not be conflated. The 261 immediately unresolved equivalence children
+also show that merging known relations need not expose a recognized family.
+
+Next investigate **bounded local learning from saved one-way implications**.
+Seventy of 77 selected unresolved nodes have 552 implied binary clauses absent
+explicitly in their parent (node/clause pairs). Binary-graph analysis shows 333
+already have implication paths; **219 lack such a path**, on **47 selected nodes
+affecting 37 missed sources**. `implication-boundaries.json` preserves exact
+assumption/reason dependencies and affected source IDs. No-path evidence is not
+semantic nonredundancy; other reasoning may entail the clause. Case 1061 remains
+the largest discovery cost (0.96542 s, separately instrumented 2.96676 s), with
+restriction, unit checking/propagation, normalization and helpers dominant.
+Start bounded learning on these selected misses, charge redundancy recognition,
+extra propagation/clauses, checking and archive growth, and measure before enabling
+it globally. Supporting scan/sharing optimizations remain relevant. None of these
+opportunities establishes compact exact coverage of arbitrary SAT.
+
+All 333 Python tests pass (27.90 s), including exhaustive small fibers, signed
+and transitive blocks, disappeared representatives, mixtures, source edits,
+invalid/omitted witnesses, lifts and cold corruption. Three new full archives,
+three pilot archives and three preceding full archives replay byte-identically;
+all 28 code/test fingerprints in each new benchmark report still match. Three
+named Lean lemmas prove substitution evaluation, the opposite-assumption rule
+and SAT preservation from explicit compatibility hypotheses. The full build and
+axiom audit pass at 4,101 declarations / 1,957 theorem declarations (including
+generated declarations). Python, SQLite and resource accounting are not refined
+by those semantic lemmas.
+
+Implementation/evidence checkpoint **4373610** is pushed. Manuscript Section 12.52
+adds Proposition 12.40 with proof, the checked signed lift, verified prior-work
+references, measured gains/regressions and the remaining implication opportunity.
+All 51 earlier proof blocks remain intact (52 total; 179 unique labels). The
+100-page PDF builds with no final-pass warnings or box errors; pages 92--94 and
+bibliography pages 98--99 were visually inspected. Resume from the bounded-learning
+target above, preserving the full-corpus regression and the remaining 51 misses.

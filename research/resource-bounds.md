@@ -1043,3 +1043,26 @@ same 7,393 ordinary solver residuals, and solving alone takes 9.22197 s. The
 next discovery opportunity is signed equivalence from opposite implications in
 the paired traces. Selected-path counts restrict that opportunity to 16 nodes
 on 16 of the 52 missed source paths; its substitution and costs are unimplemented.
+
+## Follow-up: checked signed substitution (9 November)
+
+The optional [paired-probe equivalence experiment](../experiments/results/cnf-probe-equivalence/README.md)
+reuses checked implication traces and substitutes all clauses, preserving exact
+existential fibers with signed model lifts. For k candidate variables, d occurring
+variables and ell literal occurrences in this experimental CNF representation,
+intersection costs expected O(k d) set work plus O(d log d) sorting; substitution
+visits ell occurrences and emits at most ell before normalization. The witness
+uses O(d log(d+k+2)) bits. These additions do not include existing probe acquisition
+and checking, normalization, child recognition, persistence or the number of
+acquired descendants. One merge chain has at most d-1 rewrites; this does not
+bound the whole graph by a polynomial. In particular, the analysis does not
+turn the unchanged independent general SAT solver into a polynomial algorithm.
+
+On 1,137 matched sources, non-tiny closure improves 567/625 -> 574/625 while time
+rises 38.293 -> 39.731 s, database 130.597 -> 135.569 MB and cold replay 15.208 ->
+15.856 s. Logical node bytes rise 50.062 -> 52.575 MB; selected unresolved
+literal occurrences fall 10,300 -> 9,674. A targeted six-case traced Python peak
+falls 14.564 -> 11.586 MB, excluding native SQLite, RSS and full-corpus peak.
+Reduced local support, live allocation on selected cases and durable whole-graph
+storage are different quantities. The policy remains optional; no new uniform
+arbitrary-SAT time or memory bound follows.

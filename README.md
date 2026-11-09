@@ -95,6 +95,14 @@ residuals trigger additional probing and retained state. The next focused
 discovery target is checked signed-equivalence substitution on the selected
 unresolved paths where existing probe traces already imply such relations.
 
+The [signed-equivalence study](experiments/results/cnf-probe-equivalence/README.md)
+now applies those relations throughout the source and checks signed model lifts.
+On 1,137 inputs it adds seven old closures (567/625 -> 574/625 non-tiny), with no
+gain on 24 fresh random sources. Total time rises 38.29 -> 39.73 s and SQLite
+130.60 -> 135.57 MB, so the policy stays optional. The next target is bounded
+local learning from checked one-way implications beyond existing binary paths,
+present on selected unresolved paths of 37 remaining source misses.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

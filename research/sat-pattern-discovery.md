@@ -214,6 +214,62 @@ control. This returns the priority to splitting unresolved discovery cells;
 active-continuation resumption is a smaller supporting optimization. General
 compact coverage and polynomial arbitrary-SAT acquisition remain unproved.
 
+## Bounded clause selection: one gain and one loss (9 November 2026)
+
+The [selection experiment](../experiments/results/cnf-learning-selection/README.md)
+implements the preceding target. It selects at most four clauses from sixteen
+eligible original-source implications, preferring activation of uncovered saved
+closures, a new origin assumption, total activation and original candidate order.
+The checker first validates the source proofs, then reconstructs the exact
+selection and checks the continuation, strict support reduction, child and lift.
+Earlier family recognition/decomposition priorities remain unchanged. Any subset
+of originally entailed clauses preserves all source models; Lean now records
+that corollary. Neither its correctness nor a high score guarantees useful discovery.
+
+The thirteen-source pilot gains one previous miss. The full comparison retains
+all 1,209 previous inputs and adds 24 random 3-CNFs at 20/32/48 variables plus
+twelve growing, signed and edited controls. It gains **1024** (SAT guarded input)
+but loses **956** (SAT random 20-variable input): **662/733** non-tiny closures and
+**16/24** fresh random closures under either policy. All twelve new controls
+remain closed. The independent solver checks every original source and keeps
+12,516 residuals per mode; a structural miss is not an incorrect SAT answer.
+Seventy-one sources and 103 distinct selected leaves remain unresolved.
+
+Total time rises **71.417 -> 73.194 s**, SQLite **227.385 -> 227.832 MB**, cold
+replay **29.815 -> 30.359 s** and targeted Python peak **20.022 -> 20.121 MB**.
+The peak excludes native memory/RSS and full-corpus peak. These are single
+sequential samples without concurrent tests, builds or commits. Selected
+unresolved literals fall 17,687 -> 17,327 while acquired nodes and logical probes
+rise. Preserve this failed aggregate improvement; do not enable it by default.
+
+Four independently checked local controls at each of 606 changed parents cross
+old/new batches with old/new continuation choices. They distinguish a changed
+clause set from changed choices but do not recompute whole-source coverage.
+The [explicit path fixtures](../experiments/results/cnf-learning-selection/selection-paths.json)
+show that source 1024 gains a forced reduction under identical choices and equal
+scalar activation counts. At source 956 both batches activate zero saved
+closures, and all four controls still force a variable. Old choices first
+refute `14=true`; new choices first refute `16=false`, under either batch.
+The actual new source plan then stays open. A local `forced` label, activation
+count and origin diversity fail to capture this relevant structural difference.
+Source 1189 has a locally improved common reduction but still does not close.
+
+**Next experiment:** apply the selected batch while freezing continuation
+variable choices/order to those computed from the old first-four batch. Charge
+that baseline batch/ranking work; retain the clause/probe caps. Test 956, 1024
+and 1189, then all old and fresh inputs. This policy is not yet implemented or
+measured, and fixed choices do not guarantee old coverage. Track interacting
+learned clauses, the first conflict and the child structure to refine discovery
+features. Keep the existing pool-filter incompleteness explicit: it can use
+edges from candidates later omitted, although every retained clause is sound.
+
+All **353 Python tests** pass, including exhaustive small model fibers, signed
+mixtures/edits, independent full replay, forged selections, corrupt reasons,
+disabled mode and cold coexistence. All three full, three pilot and four preceding
+archives replay byte-identically; warm reuse inserts nothing. Lean's build/axiom
+audit passes at **4,122 declarations / 1,965 theorem declarations**. No Python
+refinement, efficient complete classification or unrestricted SAT bound follows.
+
 The original acceptance criteria and remaining integration scope follow.
 
 Build an analysis mode over the current residual solver. It should discover

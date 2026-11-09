@@ -1295,3 +1295,14 @@ at **4,121 declarations / 1,964 theorem declarations**, with all **348 Python
 tests** passing. The [matched study](../experiments/results/cnf-probe-closure-compact/README.md)
 preserves every semantic plan, and retains both modest compact savings and the
 verbose-identity storage regression.
+
+The bounded-selection follow-up adds `selected_signed_batch_models` in
+`Residuals.lean`: every subset of clauses entailed by the original source can be
+appended without changing its models. No ranking or optimality assumption is
+needed. This corollary separates semantic soundness from the empirical quality
+of a selected batch; the Python selector, candidate filter, persistence and
+resource bounds remain outside refinement. The full build/axiom audit passes
+at **4,122 declarations / 1,965 theorem declarations**, with all **353 Python
+tests** passing. The [selection comparison](../experiments/results/cnf-learning-selection/README.md)
+preserves one gained and one lost source closure, unchanged aggregate coverage,
+increased cost and independently checked local controls on both paths.

@@ -12,27 +12,55 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-**Next research experiment:** choose a better bounded learned batch from the
-existing implication proofs. The closure-reuse follow-up preserves all plans
-while avoiding 14,705 continuation propagations. Its compact policy has modest
-measured savings; the next iteration should return to expanding discovery.
-Of 94 selected unresolved leaves, sixty have an inconclusive learned batch and
-34 have none. Twenty batches reach the four-clause cap. Candidate enumeration
-up to sixteen finds **61 additional clauses on sixteen leaves affecting thirteen
-source misses**; 38 existing batches use only one assumption. The
-[frontier record](../experiments/results/cnf-probe-closure-compact/learning-frontier.json)
-preserves candidates, original reasons, source paths, failures and limits.
+**Next research experiment:** separate useful learned clauses from disruptive
+continuation ordering. Freeze continuation variable choices to those computed
+from the old first-four batch, while applying the new selected batch. Keep the
+four-clause/probe caps and charge construction of the old batch and its ranking.
+Start with archived sources **956, 1024 and 1189**, then compare all prior inputs
+and fresh unlabelled samples. This is an unmeasured whole-source policy; fixed
+choices alone do not guarantee preservation of old closures. Do not globally
+raise budgets or promote the current selector.
 
-Keep four retained clauses and the same probe budget. Compare the current first
-four with selection by activation of already checked closures and diversity of
-assumptions; measure recognition/ranking and use a fixed-choice control to
-separate stronger propagation from changed continuation choices. Start with
-the thirteen affected sources, then include all prior inputs and fresh unlabelled
-samples. These candidates have not been executed as alternate batches and are
-not claimed gains. Do not globally raise budgets or replace unresolved cases
-with a tractability claim. Of the 73,101 logical attempts, 55,553 are original
-probes; the remaining 672 active continuation restarts are a smaller supporting
-target than the unchanged discovery gap.
+The [bounded-selection experiment](../experiments/results/cnf-learning-selection/README.md)
+implements the previous target: choose four clauses from at most sixteen proved
+candidates by saved-closure activation and origin diversity. The thirteen-source
+pilot gains source 1024; the complete 1,245-input comparison also loses source
+956. Non-tiny closure stays **662/733**, fresh random closure **16/24**, with **71
+source misses**. Total time rises **71.417 -> 73.194 s (+2.49%)**, SQLite
+**227.385 -> 227.832 MB**, cold replay **29.815 -> 30.359 s**, and the same six-case
+Python peak **20.022 -> 20.121 MB**. These are single sequential samples, without
+concurrent tests, builds or commits during measurements. Keep the policy optional.
+
+The saved [path controls](../experiments/results/cnf-learning-selection/selection-paths.json)
+explain the key gap. At 1024, both batches use the same four choices and activate
+the same single saved closure; only the new clauses refute its assumption. At
+956, neither batch activates any original closure. The old choices first force
+variable 14, the new choices variable 16, under either batch. All four local
+controls report a reduction, but the actual new source plan later stays open.
+Therefore activation counts, origin diversity and a coarse reduction label
+miss consequential interactions. Track the first conflict and the resulting
+child structure. The locally improved common reduction on 1189 still does not
+close that source; preserve it as a negative control.
+
+The [complete diagnostic](../experiments/results/cnf-learning-selection/mechanisms.json)
+retains all 606 changed selection parents, including 126 reorder-only cases,
+their four checked local controls, and the previous 94 selected unresolved leaves.
+Local counterfactuals are not whole-source coverage. Selected unresolved literals
+fall **17,687 -> 17,327**, yet nodes rise **14,592 -> 14,653** and logical probes
+**82,036 -> 82,782**. Of the current 103 selected leaves, 66 remain learning-clear
+and 37 clear. The largest discovery case remains **1194** (1.464 s); restriction,
+unit checking/propagation and literal helpers dominate its separate profile.
+Avoiding repeated scans and sharing probe records remain supporting cost targets.
+
+All **353 Python tests**, the full Lean build/axiom audit (**4,122 declarations /
+1,965 theorem declarations**), and three full, three pilot and four preceding
+archive replays pass. The subset theorem preserves source models independently
+of selection quality. The capped candidate filter can miss useful alternatives;
+there is no complete efficient arbitrary-SAT construction or compactness result.
+
+The preceding studies follow in reverse order. Their denominators and timings
+belong to their own matched corpora and must not be compared as a single fixed
+workload.
 
 The [closure-reuse comparison](../experiments/results/cnf-probe-closure-compact/README.md)
 retains all 1,209 sources and all 13,066 semantic nodes, including alternatives.

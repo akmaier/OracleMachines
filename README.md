@@ -119,9 +119,18 @@ Coverage stays 634/697 non-tiny inputs. A compact policy tag removes the first
 trial's storage regression: total time is 62.76 -> 61.69 s, SQLite 197.10 ->
 196.10 MB and cold replay 26.78 -> 25.09 s in single samples. The failed trial
 and timing limitations remain recorded. All 348 Python tests and the full Lean
-audit pass. Next: choose a more useful four-clause batch from the 61 additional
-checked candidates found on sixteen unresolved leaves, with selection and
-changed probe choices charged. These candidates are not yet coverage gains.
+audit pass. The unused implication candidates motivate the following selection
+experiment, with selection and changed probe choices charged.
+
+The [bounded-selection study](experiments/results/cnf-learning-selection/README.md)
+tests four clauses chosen from up to sixteen proved candidates. It gains one
+source closure and loses another: coverage stays **662/733** non-tiny inputs and
+**16/24** fresh random inputs. Total time rises **71.42 -> 73.19 s (+2.49%)** and
+SQLite **227.39 -> 227.83 MB**, so the policy remains experimental. Saved controls
+show that a changed first forced variable can redirect later discovery even when
+both local probes succeed. The next experiment freezes continuation choices to
+separate this effect from clause strength. All **353 tests**, the full Lean audit
+and new/previous archive replays pass; all failed attempts remain preserved.
 
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.

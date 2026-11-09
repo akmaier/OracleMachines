@@ -1124,3 +1124,46 @@ compact totals above. Therefore proof compression, namespace overhead, decoded
 live memory and physical SQLite allocation must remain separate accounts.
 No universal runtime or storage improvement, competitive SAT speedup or
 polynomial arbitrary-SAT construction follows from this supporting optimization.
+
+## Follow-up: bounded selection among proved clauses (9 November)
+
+`SelectedLearningInventory` considers at most p=16 eligible clauses from saved
+original-source implications, retaining at most q clauses under the unchanged
+per-node cap. It prefers newly activated saved closures, a new origin assumption,
+total activated closures, then original pool order. A closure activates when the
+candidate is unsatisfied and has fewer than two unassigned literals. The checker
+reconstructs this selection only after validating every original implication.
+Any selected subset preserves source models independently of ranking quality.
+
+With k probe variables and d source variables, assignment maps for at most 2k
+closures require expected O(kd) time/space; p binary candidates cost O(pk) delta
+visits. Greedy choice examines at most pq scores. The implemented k <= 64 bound
+keeps each activation mask within a bounded number of words; if k is treated as
+unbounded, bitwise operations and population counts must charge its bit length.
+Pool graph filtering still costs up to expected O(ell+kd(d+m2+p)) under the
+current selector, in addition to these scores, continuation propagation,
+verification, descendant acquisition and persistence. Actual chosen size is
+min(q,p). Equal per-node caps do not bound or equalize whole-graph work.
+
+Filtering can use edges from earlier pool candidates that ranking later omits.
+Their individual implications remain proved on the original source, so omission
+cannot make a selected clause unsound; it can make the candidate pool less useful.
+Neither the fixed pool cap nor the activation score provides complete discovery,
+optimal selection, a universal speedup or a compact arbitrary-SAT representation.
+
+The [1,245-input comparison](../experiments/results/cnf-learning-selection/README.md)
+has unchanged 662/733 non-tiny coverage: one gained and one lost source closure.
+Total time rises 71.417 -> 73.194 s, SQLite 227.385 -> 227.832 MB, cold replay
+29.815 -> 30.359 s and six-case traced Python peak 20.022 -> 20.121 MB. Peak
+excludes native allocations, RSS and the full corpus. Runs are single sequential
+samples without concurrent tests, builds or commits. Logical probes rise
+82,036 -> 82,782 and nodes 14,592 -> 14,653 despite fewer conditioning candidates
+and unresolved literals. Selection charges 203,218 delta literal visits and
+47,472 score evaluations across acquisition/checking. Warm reuse inserts nothing;
+all new and preceding archives replay byte-identically.
+
+The next controlled policy will freeze continuation choices to those induced by
+the old batch while applying the new clauses, charging both batch/ranking work.
+Its total cost and coverage are not yet measured. Local controls establish that
+the choice order can change the first forced variable and subsequent acquisition;
+a successful local reduction alone predicts neither source closure nor savings.

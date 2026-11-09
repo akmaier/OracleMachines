@@ -3412,3 +3412,81 @@ executed here; these are opportunities, not new closures. Source **1194** remain
 the largest discovery cost, dominated by restriction and unit checking/propagation.
 Sixty-three source cases remain structurally unresolved. Keep exact classification
 and efficient arbitrary-SAT construction/compactness as separate obligations.
+
+## 9 November: bounded clause selection exposes a continuation-order gap
+
+Implementation/evidence checkpoint **69d7780** is pushed. The optional
+`SelectedLearningInventory` chooses at most four clauses from sixteen eligible
+original-source implications, preferring activation of uncovered saved closures,
+origin diversity, total activation and pool order. Its distinct policy namespace
+coexists with every old archive. The checker validates original traces first,
+reconstructs the selection, then checks references, continuation, strict support
+decrease, child and lift. Original defaults and the independent decision solver
+are unchanged. The candidate filter can use earlier pool clauses later omitted;
+this preserves entailment but can exclude useful alternatives.
+
+The [thirteen-source pilot](../experiments/results/cnf-learning-selection-pilot/README.md)
+gains source 1024, with slightly higher total cost. The
+[full comparison](../experiments/results/cnf-learning-selection/README.md)
+retains all 1,209 prior inputs and adds 24 random 3-CNFs at 20/32/48 variables and
+twelve growing, signed and edited controls. It gains **1024**, a satisfiable
+guarded source, but loses **956**, a satisfiable random 20-variable source. Thus
+closure stays **662/733** non-tiny and **16/24** fresh random inputs, with **71
+source misses**. All new controls close under either policy; the unchanged solver
+decides every original source and keeps 12,516 residuals. A structural miss does
+not change a SAT answer. Preserve this negative aggregate result.
+
+Total time rises **71.41739 -> 73.19404 s (+2.49%)**, discovery **53.49192 ->
+54.70319 s**, SQLite **227,385,344 -> 227,831,808 bytes**, cold replay **29.81471 ->
+30.35939 s** and the same six-case Python peak **20,021,677 -> 20,121,481 bytes**.
+Peak excludes native SQLite, RSS and full-corpus peak. All timing samples are
+single sequential runs; primary modes, memory diagnostics and separate profiles
+ran without concurrent tests, builds or commits. Nodes rise **14,592 -> 14,653**,
+logical node bytes **89,963,443 -> 90,219,745** and logical probes **82,036 ->
+82,782**. Fewer conditioning candidates (2,850 -> 2,835) and selected unresolved
+literals (17,687 -> 17,327) do not establish lower total cost or greater coverage.
+The largest discovery case remains 1194 (1.46397 s); restriction and unit
+checking/propagation dominate its separate profile. Keep selection optional.
+
+`mechanisms.json` retains every changed parent and four checked local controls
+crossing old/new batches with old/new continuation choices. There are 606 changed
+nodes, including 126 reorder-only cases and 562 exact common parents with identical
+original proofs. `selection-paths.json` preserves explicit normalized CNFs,
+clauses, choices, first conflicts and dependencies for the gained/lost sources.
+At 1024, identical choices and equal scalar activation counts still allow only
+the selected batch to refute `3=false`. At 956, no original closure activates;
+all four controls force a variable, but old choices first refute `14=true` and
+new choices `16=false`, under either batch. The actual selected source plan then
+remains unresolved. This identifies an effect hidden by local reduction counts.
+Replaying all 94 prior selected leaves also improves one local common reduction
+on 1189 without closing that source. These are local controls, not counterfactual
+whole-source coverage. Failed batches and regressions remain available.
+
+**Next experiment:** hold continuation variable list/order fixed to the ranking
+computed from the old first-four batch while applying the selected batch. Charge
+old-batch/ranking construction and keep clause/probe caps. Start with 956, 1024
+and 1189, then all old and fresh inputs. No whole-source benefit is yet measured;
+fixed choices do not guarantee preservation of coverage. Track learned-clause
+interactions, first conflict and resulting child structure; activation/diversity
+scores alone cannot distinguish the observed outcomes. Do not repeat the same
+greedy trial or globally raise caps as a substitute for this control.
+
+All **353 Python tests** pass (32.08 s): exhaustive 512 two-variable inputs and
+3,304 three-variable subsets of at most three clauses at learning caps 0/1/4,
+exact model fibers, independently expanded proof references, masks against the
+delta predicate, signed mixtures/edits, invalid selections/reasons, disabled mode,
+cold corruption and policy coexistence. Three full, three pilot and four preceding
+archives replay byte-identically; warm reuse inserts nothing. Both reports' forty
+code/test fingerprints match. `selected_signed_batch_models` adds the semantic
+subset corollary without a ranking hypothesis. The full Lean build and axiom
+audit pass at **4,122 declarations / 1,965 theorem declarations**. No Python,
+SQLite or resource refinement, compact arbitrary-SAT representation, or uniform
+polynomial construction follows.
+
+Manuscript Section **12.55** and Table **16** record the rule, subset argument,
+costs, gain/loss, four-way controls and next experiment. All **54 earlier proof
+blocks** remain intact, with **186 unique labels**. The **106-page** PDF builds
+without final-pass warnings or box errors; pages 96--100, including the changed
+section, table and discussion transition, were visually inspected. The discovery plan, ranked priorities,
+resource bounds and project/formal READMEs record this completed experiment and
+the controlled next target.

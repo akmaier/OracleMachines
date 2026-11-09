@@ -271,6 +271,41 @@ theorem unsatisfiable_history (base : Formula) (additions : List Formula)
 def SignedClauseHolds (clause : List (Nat × Bool)) (v : Nat → Bool) : Prop :=
   ∃ lit ∈ clause, v lit.1 = lit.2
 
+/-- A retained signed clause implies every superset with identical polarities. -/
+theorem signed_clause_subsumption (small large : List (Nat × Bool)) (v : Nat → Bool)
+    (included : small ⊆ large) (satisfied : SignedClauseHolds small v) :
+    SignedClauseHolds large v := by
+  obtain ⟨lit, hi, hv⟩ := satisfied
+  exact ⟨lit, included hi, hv⟩
+
+/-- Exact model equivalence for a retained signed core covering every source
+clause. The premise is a subset witness, not just equal variable support. -/
+theorem signed_core_models (source core : List (List (Nat × Bool))) (v : Nat → Bool)
+    (retained : core ⊆ source)
+    (covered : ∀ c ∈ source, ∃ d ∈ core, d ⊆ c) :
+    (∀ c ∈ source, SignedClauseHolds c v) ↔
+      (∀ c ∈ core, SignedClauseHolds c v) := by
+  constructor
+  · intro h c hc
+    exact h c (retained hc)
+  · intro h c hc
+    obtain ⟨d, hd, included⟩ := covered c hc
+    exact signed_clause_subsumption d c v included (h d hd)
+
+/-- Any extension agreeing on the retained support lifts to a source model.
+Values of variables appearing only in removed clauses are unrestricted. This
+does not formalize the Python integer encoding or normalization implementation. -/
+theorem signed_core_lift (source core : List (List (Nat × Bool)))
+    (v extended : Nat → Bool)
+    (covered : ∀ c ∈ source, ∃ d ∈ core, d ⊆ c)
+    (model : ∀ c ∈ core, SignedClauseHolds c v)
+    (agrees : ∀ c ∈ core, ∀ lit ∈ c, extended lit.1 = v lit.1) :
+    ∀ c ∈ source, SignedClauseHolds c extended := by
+  intro c hc
+  obtain ⟨d, hd, included⟩ := covered c hc
+  obtain ⟨lit, hl, hv⟩ := model d hd
+  exact ⟨lit, included hl, (agrees d hd lit hl).trans hv⟩
+
 /-- A proved consequence under one assumption licenses a binary clause in the
 original source. The implication hypothesis must come from a checked proof. -/
 theorem probe_implication_entails_clause (source : List (List (Nat × Bool)))

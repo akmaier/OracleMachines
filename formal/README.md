@@ -1360,3 +1360,14 @@ declarations / 1,968 theorem declarations**, and all **374 Python tests** pass.
 The [local comparison](../experiments/results/cnf-hint-transport/README.md)
 preserves increased total costs and a ranking-dependent local gain outside the
 selected source plans. Whole-source coverage is not improved by that count.
+
+The signed-subsumption follow-up adds `signed_clause_subsumption`,
+`signed_core_models` and `signed_core_lift` in `Residuals.lean`. Retained signed
+clauses that cover every original clause by inclusion preserve every model.
+Any valuation agreeing on the retained support lifts, so variables appearing
+only in removed clauses may receive arbitrary values. Polarity is part of each
+literal; sharing only unsigned support is insufficient. These semantic lemmas
+do not verify the Python index certificate, normalization, persistence or costs.
+The complete build and axiom audit pass at **4,129 declarations / 1,971 theorem
+declarations**. All **395 Python tests** pass, including exhaustive small model
+equivalence, forged witnesses, signed edits, missing variables and cold replay.

@@ -24,8 +24,8 @@ def first_common_pair(attempts, counts):
     return None
 
 
-def discover_common_probes(cnf, limit, counts, *, _discover_attempt=None):
-    result = discover_probes(cnf, limit, counts, _discover_attempt=_discover_attempt)
+def discover_common_probes(cnf, limit, counts, *, _discover_attempt=None, _choices=None):
+    result = discover_probes(cnf, limit, counts, _discover_attempt=_discover_attempt, _choices=_choices)
     if result['status'] != 'clear':
         return result
     witness = first_common_pair(result['attempts'], counts)
@@ -38,9 +38,9 @@ def discover_common_probes(cnf, limit, counts, *, _discover_attempt=None):
     return dict(status='common', attempts=result['attempts'], witness=witness, closure=closure)
 
 
-def check_common_probes(cnf, result, limit, counts, *, _check_attempt=None):
+def check_common_probes(cnf, result, limit, counts, *, _check_attempt=None, _choices=None):
     if result.get('status') != 'common':
-        target, fixed = check_probes(cnf, result, limit, counts, _check_attempt=_check_attempt)
+        target, fixed = check_probes(cnf, result, limit, counts, _check_attempt=_check_attempt, _choices=_choices)
         if result['status'] == 'clear' and first_common_pair(result['attempts'], counts) is not None:
             raise ValueError('Omitted common-consequence rewrite')
         return target, fixed
@@ -49,7 +49,7 @@ def check_common_probes(cnf, result, limit, counts, *, _check_attempt=None):
     # Reconstruct assumptions from the parent and check both traces in full;
     # matching unit literals alone is not a certificate of either implication.
     check_probes(cnf, dict(status='clear', attempts=result['attempts']), limit, counts,
-                         _check_attempt=_check_attempt)
+                         _check_attempt=_check_attempt, _choices=_choices)
     expected = first_common_pair(result['attempts'], counts)
     if expected is None or encode(result['witness']) != encode(expected):
         raise ValueError('Invalid common pair or literal intersection')

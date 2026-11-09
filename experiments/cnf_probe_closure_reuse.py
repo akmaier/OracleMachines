@@ -62,7 +62,8 @@ def expand_references(continuation, attempts):
     return expanded
 
 
-def discover_reuse_probes(cnf, probe_limit, learn_limit, counts, *, _select_batch=learning_batch):
+def discover_reuse_probes(cnf, probe_limit, learn_limit, counts, *, _select_batch=learning_batch,
+                          _continuation_choices=None):
     original = discover_equivalence_probes(cnf, probe_limit, counts)
     if original['status'] != 'clear':
         return original
@@ -80,9 +81,11 @@ def discover_reuse_probes(cnf, probe_limit, learn_limit, counts, *, _select_batc
         counts['fresh_continuation_probes' if previous is None else 'active_continuation_probes'] += 1
         return discover_simplification(restrict(augmented, {variable: value}, counts), counts, pure=False)
 
+    choices = (_continuation_choices(cnf, original['attempts'], learn_limit, probe_limit, counts)
+               if _continuation_choices is not None else None)
     before = counts['probe_attempts']
     continuation = discover_equivalence_probes(augmented, probe_limit, counts,
-                                               _discover_attempt=discover_attempt)
+                                               _discover_attempt=discover_attempt, _choices=choices)
     counts['learning_continuation_probe_attempts'] += counts['probe_attempts'] - before
     for attempt in continuation['attempts']:
         previous = saved.get((attempt['variable'], attempt['value']))
@@ -95,7 +98,8 @@ def discover_reuse_probes(cnf, probe_limit, learn_limit, counts, *, _select_batc
                 batch=batch, continuation=continuation)
 
 
-def check_reuse_probes(cnf, result, probe_limit, learn_limit, counts, *, _select_batch=learning_batch):
+def check_reuse_probes(cnf, result, probe_limit, learn_limit, counts, *, _select_batch=learning_batch,
+                          _continuation_choices=None):
     if result.get('status') not in ('learned', 'learning_clear'):
         target, fixed = check_equivalence_probes(cnf, result, probe_limit, counts)
         if result['status'] == 'clear' and _select_batch(cnf, result['attempts'], learn_limit, counts):
@@ -122,8 +126,10 @@ def check_reuse_probes(cnf, result, probe_limit, learn_limit, counts, *, _select
         else:
             check_simplification(restrict(augmented, {variable: value}, counts), certificate, counts, pure=False)
 
+    choices = (_continuation_choices(cnf, result['attempts'], learn_limit, probe_limit, counts)
+               if _continuation_choices is not None else None)
     target, fixed = check_equivalence_probes(augmented, expanded, probe_limit, counts,
-                                             _check_attempt=check_attempt)
+                                             _check_attempt=check_attempt, _choices=choices)
     success = expanded['status'] != 'clear'
     if (result['status'] == 'learned') != success:
         raise ValueError('Invalid learning outcome')

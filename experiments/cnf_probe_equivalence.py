@@ -44,8 +44,8 @@ def substitute_block(cnf, witness, counts):
                        for lit in clause) for clause in cnf)
 
 
-def discover_equivalence_probes(cnf, limit, counts, *, _discover_attempt=None):
-    result = discover_common_probes(cnf, limit, counts, _discover_attempt=_discover_attempt)
+def discover_equivalence_probes(cnf, limit, counts, *, _discover_attempt=None, _choices=None):
+    result = discover_common_probes(cnf, limit, counts, _discover_attempt=_discover_attempt, _choices=_choices)
     if result['status'] != 'clear':
         return result
     witness = first_equivalence_pair(result['attempts'], counts)
@@ -56,9 +56,9 @@ def discover_equivalence_probes(cnf, limit, counts, *, _discover_attempt=None):
     return dict(status='equivalence', attempts=result['attempts'], witness=witness)
 
 
-def check_equivalence_probes(cnf, result, limit, counts, *, _check_attempt=None):
+def check_equivalence_probes(cnf, result, limit, counts, *, _check_attempt=None, _choices=None):
     if result.get('status') != 'equivalence':
-        target, fixed = check_common_probes(cnf, result, limit, counts, _check_attempt=_check_attempt)
+        target, fixed = check_common_probes(cnf, result, limit, counts, _check_attempt=_check_attempt, _choices=_choices)
         if result['status'] == 'clear' and first_equivalence_pair(result['attempts'], counts) is not None:
             raise ValueError('Omitted equivalence rewrite')
         return target, fixed
@@ -66,7 +66,7 @@ def check_equivalence_probes(cnf, result, limit, counts, *, _check_attempt=None)
         raise ValueError('Invalid equivalence fields')
     # Replay every reason against this exact source and enforce earlier rules.
     check_common_probes(cnf, dict(status='clear', attempts=result['attempts']), limit, counts,
-                         _check_attempt=_check_attempt)
+                         _check_attempt=_check_attempt, _choices=_choices)
     expected = first_equivalence_pair(result['attempts'], counts)
     if expected is None or encode(result['witness']) != encode(expected):
         raise ValueError('Invalid equivalence pair or signed transport')

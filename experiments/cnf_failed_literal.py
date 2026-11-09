@@ -18,9 +18,11 @@ def probe_choices(cnf, limit, counts):
     return sorted(frequencies, key=lambda v: (-frequencies[v], v))[:limit]
 
 
-def discover_probes(cnf, limit, counts, *, _discover_attempt=None):
+def discover_probes(cnf, limit, counts, *, _discover_attempt=None, _choices=None):
     attempts = []
-    for variable in probe_choices(cnf, limit, counts):
+    # Internal policy choices are reconstructed by the caller, never read from a certificate.
+    choices = probe_choices(cnf, limit, counts) if _choices is None else _choices
+    for variable in choices:
         for value in (False, True):
             if _discover_attempt is None:
                 branch = restrict(cnf, {variable: value}, counts)
@@ -39,7 +41,7 @@ def discover_probes(cnf, limit, counts, *, _discover_attempt=None):
     return dict(status='clear', attempts=attempts)
 
 
-def check_probes(cnf, result, limit, counts, *, _check_attempt=None):
+def check_probes(cnf, result, limit, counts, *, _check_attempt=None, _choices=None):
     """Check deterministic attempt order and reasons without rerunning search.
 
 The reason sequence need not be the unique sequence emitted by propagation;
@@ -51,7 +53,8 @@ each reason and every claimed no-conflict fixed point is independently checked.
     if (result.get('status') not in ('clear', 'forced') or
             set(result) != ({'status', 'attempts', 'closure'} if forced else {'status', 'attempts'})):
         raise ValueError('Invalid probe fields')
-    expected = [(v, b) for v in probe_choices(cnf, limit, counts) for b in (False, True)]
+    choices = probe_choices(cnf, limit, counts) if _choices is None else _choices
+    expected = [(v, b) for v in choices for b in (False, True)]
     attempts = result['attempts']
     if not isinstance(attempts, list) or len(attempts) > len(expected) or (forced and not attempts):
         raise ValueError('Invalid probe count')

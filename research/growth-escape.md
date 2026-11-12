@@ -93,6 +93,29 @@ lookup and verification costs are additional; V and E can themselves be large.
 This is a finite-history composition argument, not an unrestricted SAT bound or
 a Lean refinement of the Python implementation.
 
+The [composition run](../experiments/results/cnf-growth-routes/README.md), frozen
+at `835f1cb`, raises selected-original coverage **31/83 -> 32/83**. The gained
+source is case 33, `reuse_holdout3` / `n48` (original case 1193). This is a reused
+development source; its old group name does not establish independent evaluation.
+The plan has 47 steps: 34 checked old bases, nine unary rules, two complete
+conditioning choices, one saved coupled route and the growth-three escape.
+
+Composition scans 12,595 nodes and 13,176 premises in **0.05919 seconds**;
+47-step resident verification takes **0.0004235 seconds**. The serialized witness
+is **239,725 bytes / 41,065 compressed bytes**. Preparing original roots and all
+routes costs **62.91922 seconds**; cold route and witness checking with fresh
+caches takes **12.16892 seconds**. No recognition state or history row changes in
+this composition run. A separate complete solver confirms UNSAT for the core,
+projection target and gained original, retaining 212 proof nodes in a separate
+1,896,448-byte database. Reference solving and its cold replay cost 0.57340 and
+0.10216 seconds respectively. None of these timings is a comparison against a
+competitive SAT solver or a general complexity result.
+
+All 540 tests pass. The separate route audit also compares against the exact same
+history with the growth edge withheld, rechecks the finite witness, and records
+the necessary route steps for each gained original. This distinguishes a gain
+from the new escape from a gain caused only by enabling old-route composition.
+
 ## Limits
 
 An escape that merely removes a variable can leave a denser unresolved formula.

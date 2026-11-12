@@ -28,7 +28,16 @@ classes.
 
 ## Paper
 
-The latest [coupled-pivot investigation](research/coupled-pivots.md) reuses the
+The latest [growth-escape investigation](research/growth-escape.md) closes the
+saved core with one explicitly budgeted three-clause growth step and four new
+probing states. A finite checked witness propagates the result through a saved
+coupled route, raising selected-original coverage **31/83 -> 32/83**. Removing
+the growth edge from the same graph removes the gain. A separate solver confirms
+UNSAT for the gained 48-variable original. All **540 Python tests** and cold
+artifact checks pass; costs and previous results remain preserved. This is one
+development case, not a general SAT speedup or a new full-corpus measurement.
+
+The preceding [coupled-pivot investigation](research/coupled-pivots.md) reuses the
 saved divergent routes and adds a cap covering every new recognition state,
 including descendants. Its 25 original-input trials add 32 proof nodes but leave
 coverage at 31/83. Only one unresolved core is new to the history; all 662 allowed

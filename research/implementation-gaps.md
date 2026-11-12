@@ -4953,3 +4953,34 @@ Next gaps are a controlled minimum-growth-three escape with ordinary simplificat
 and checked composition through saved open alternative routes. Existing composition
 handles individually closed replacements; it does not recursively join all open
 trial records. No new formal theorem or manuscript claim was introduced.
+
+## 13 November: growth escape and finite alternative-route composition
+
+Implemented and preserved the [growth-three escape](growth-escape.md). The sole
+minimum-growth-three pivot (15) of the saved 35-variable core enables four new
+failed-literal probing states under the unchanged recognizer. It closes the core
+in 0.02275 resident seconds; the growth-two control admits no pivot. A warm retry
+reuses its checked record without acquiring states. The sixth-table delta retains
+four pattern nodes and one explicit-growth trial while preserving all old rows.
+
+Implemented least-fixed-point composition over checked old rules and saved
+projection alternatives. The retained finite witness requires every component
+and both conditioning branches, orders premises before conclusions and rejects
+circular support. It improves selected-original coverage 31/83 -> 32/83, gaining
+case 33 (`reuse_holdout3`, n48, original case 1193). Independent reference solving
+confirms UNSAT and preserves all 212 endpoint proof nodes. The historical group
+name does not make this repeatedly investigated source a fresh evaluation.
+
+All 540 tests pass, including real serialized escape checking, cycle rejection,
+incomplete-branch rejection, repeated canonical premises, budget interruption,
+restart and six-table persistence. The suite still reports 20 existing SQLite
+ResourceWarnings; the full logs remain available. Formal sources and paper are
+unchanged. Current original history: 41,335 pattern nodes, 563 pivot trials,
+25 coupled trials, one growth trial, 1,548 source bindings and 21,838 older solver
+proof rows. Follow the six-table resume recipe in the linked study.
+
+The next discovery gap is predicting which small projections unlock propagation
+on other open cores. Avoid assuming that every minimum-growth move does so.
+The next reuse gap is maintaining finite-route closure incrementally rather than
+rescanning all reachable alternatives. Full-history cold verification remains a
+larger measured cost than the local expansion or graph composition.

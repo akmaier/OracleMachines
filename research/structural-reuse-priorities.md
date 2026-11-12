@@ -1,6 +1,6 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-12 after the user's shift toward pattern discovery and a valid
+Updated 2026-11-13 after the user's shift toward pattern discovery and a valid
 partition of the entire SAT problem. This is the working record for the hourly
 investigation. Start with the [discovery plan](sat-pattern-discovery.md), then
 consult [implementation history](implementation-gaps.md),
@@ -12,7 +12,54 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: state-capped coupled routes expose an admission barrier
+## Current investigation: one growth exception closes a saved alternative route
+
+The [growth-three escape](growth-escape.md) closes the preserved 35-variable core.
+Only its first projection receives allowance three; all descendants retain the
+old recognizer and allowance two. Pivot 15 produces four new probing states and
+no unresolved leaf, in **0.02275 resident seconds**. The growth-two control admits
+no pivot. Warm search reuses the trial with zero new states in **0.00321 seconds**.
+The delta is **122,880 SQLite / 7,870 compressed bytes**; working storage increases
+69,632 bytes over the seed with an empty sixth table. Peak RAM was not measured.
+
+Finite checked composition now follows open saved alternatives as well as old
+plans. It requires every component/conditioning premise and rejects circular
+support. This raises the selected-original coverage **31/83 -> 32/83**: case 33,
+the 48-variable `reuse_holdout3` source (original case 1193). A separate complete
+solver confirms UNSAT for the core, its target and the gained original. This is
+one reused development case, despite its historical group name, not a fresh
+holdout or a new tractable SAT family.
+
+Composition visits 12,595 nodes / 13,176 premises in **0.05919 seconds** and retains
+a **47-step, 41,065-byte compressed witness**. Its resident replay takes 0.00042
+seconds; preparation costs **62.92 seconds** and fresh-cache route/witness replay
+**12.17 seconds**. The escape run separately pays 65.69 seconds for preparation,
+114.37 for complete cold audit and 67.68 for trial replay. These overlapping
+verification phases are charged, not hidden in subsecond expansion timings.
+
+1. **Identify when a small projection unlocks propagation.** Compare source and
+   projected probe traces, binary clauses and forced values to explain why the
+   unique growth-three move works here. Then test a frozen predictor on other
+   preserved open cores with matched admission budgets and controls. Minimum raw
+   clause growth alone is not a guarantee of useful simplification.
+2. **Extend only where evidence supports the growth cost.** Check whether the
+   same pattern covers other unresolved cells without repeated broad searches or
+   unconditional budget increases. The earlier raw-pair lower-growth diagnostic
+   remains valid; subsequent probing, rather than a net-four raw pair, closes this
+   case. Keep unrecognized cases and negative trials in the history.
+3. **Maintain route evidence incrementally.** The first finite composition scans
+   the reachable graph. Its reverse-premise index could support updates only to
+   ancestors of new closures, provided rule identity, invalidation and persistence
+   are checked. Cold history verification still dominates end-to-end time.
+
+All **540 tests** pass. Preserve the six-table history with **41,335 pattern nodes,
+563 one-pivot trials, 25 coupled trials and one growth trial**, plus every earlier
+source binding and solver proof. The source-coverage witness and its separate
+212-node reference solver archive are additional artifacts. Formal sources and
+manuscript are unchanged. The earlier full prepared result remains **902/985**;
+there is no new full-corpus result or unrestricted SAT complexity claim.
+
+## Previous investigation: state-capped coupled routes expose an admission barrier
 
 The [coupled-pivot study](coupled-pivots.md) resumes every earlier history and
 tries an interacting second pivot on retained divergent first routes. Both steps

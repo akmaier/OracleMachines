@@ -1151,3 +1151,32 @@ not SAT complexity or semantic membership in every tractable family. The CNF and
 all pairs persist for a controlled growth-three escape plus ordinary simplification.
 Any subsequent leaf closure must be checked through the saved open alternative
 routes before claiming an original-source gain.
+
+## 13 November: bounded growth exposes a complete alternative plan
+
+The [controlled escape](growth-escape.md) admits the unique minimum-growth-three
+pivot in that saved core. Its raw projection grows from 150 to 153 clauses, but
+the unchanged recognizer then closes it through four newly acquired probing
+states. The target retains the old configuration and remaining depth, allowing
+exact reuse of earlier descendants. Growth two admits no pivot on the same core;
+a 32-state cap permits this four-state acquisition without being reached.
+
+New finite route witnesses compose the result through saved open coupled/pivot
+alternatives, requiring complete component and conditioning premises. A least
+fixed point permits only finitely justified closure; replay rejects cycles,
+missing premises and incorrect route bindings. Selected-original coverage rises
+31/83 -> 32/83. The gained 48-variable original, core and target are independently
+refuted by the complete reference solver, whose 212 proof nodes are preserved.
+
+The pattern to investigate is an exact projection that enables effective bounded
+probing, even when it initially enlarges the CNF. Minimum raw growth, support
+reduction and a new residual do not individually promise such progress. Compare
+the changed implication/probe structure before applying the same bounded policy
+to other preserved cells. The earlier raw-pair admission obstruction is unchanged:
+this success uses ordinary simplification after the first exception.
+
+All 540 tests pass. The new source witness has 47 steps, including one coupled
+route and one growth exception. These results concern one selected development
+source, not an efficient covering partition, an independent holdout or a new
+full-corpus measurement. Acquisition, paid-history verification, finite-plan
+composition, serialization and cold replay are recorded separately.

@@ -1470,3 +1470,18 @@ its Python refinement remains separate. The axiom audit passes at **4,195
 declarations / 2,018 theorem declarations**, and all **511 Python tests** pass.
 The optional [integration and experiment](../research/clause-bound-elimination.md)
 retains the older policy before trying clause-count-only admission.
+
+## Fixed additive clause growth (12 November)
+
+[`AdditiveElimination.lean`](OracleMachines/AdditiveElimination.lean) defines
+`GrowthReach` for abstract support-decreasing steps with clause allowance d.
+`support_and_steps` proves n+k <= n0 and `prefix_clause_bound` proves m <= m0+d*k.
+`global_clause_bound` and `state_literal_bound` give m0+d*n0 clauses and
+n0*(m0+d*n0) literal slots. `additive_chain_payload` bounds all formula states
+by (n0+1)*n0*(m0+d*n0), assuming normalization and the stated list-size premise.
+
+These are conditional chain bounds, not pivot availability, Python refinement
+or a bound on the branching discovery graph. The earlier exact projection theorem
+supplies semantics independently of admission. All **516 Python tests** pass;
+the full Lean build audits **4,216 declarations / 2,028 theorem declarations**.
+See the [optional policy and measured limits](../research/additive-elimination.md).

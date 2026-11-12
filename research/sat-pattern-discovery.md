@@ -1044,3 +1044,25 @@ The fixed B=64 opposing-pair cap would also bound a chain permitting clause
 growth by m0+B*n0 clauses. Such a policy remains unimplemented. Local closure
 opportunities, their transfer and their total acquisition cost must be measured
 before inferring anything about efficient coverage of all CNFs.
+
+## 12 November: extra low-growth steps do not imply useful endpoint coverage
+
+The checked [additive budgets](additive-elimination.md) allow one or two extra
+clauses after the preceding elimination rules fail. Fifty of the prior 57 leaves
+had an eligible initial pivot at allowance two. Nevertheless, both new policies
+close zero saved leaves and retain exactly the baseline's 31/83 original-source
+closures. The extra 1,021 / 2,530 edges all pass independent endpoint checks and
+SAT restoration. They expose no additional recognized original endpoint under
+the selected orders. Selected residual literals and persistent acquisition bytes
+increase. The controls therefore separate local availability, exact projection,
+bounded formula size and successful structural classification.
+
+Lean bounds one accepted normalized chain by n0 steps, m0+d*n0 clauses per state
+and (n0+1)*n0*(m0+d*n0) formula slots. It does not prove pivot availability, an
+efficient useful order or a small whole planner. The next discovery question is
+which pivot choices expose units, implications, separators or a recognized
+family, and whether that signal can be found and reused at lower total cost.
+Small-budget alternative orders and explicit failed lookahead records are more
+informative than assuming larger clause-growth budgets will improve coverage.
+The current optional policies are not promoted. The full-corpus baseline remains
+902/985; these selected old failures do not update that measurement.

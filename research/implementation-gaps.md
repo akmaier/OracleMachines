@@ -4811,3 +4811,27 @@ an accepted elimination-only chain within m0+B*n0 clauses if clause growth were
 allowed; this looser policy remains unimplemented. Recognition, alternatives,
 persistence and the final fallback remain separate from that formula bound.
 See [the full mechanism and limitations](clause-bound-elimination.md).
+
+## 12 November: checked additive growth, with a negative coverage result
+
+`AdditiveEliminationInventory` and `AdditiveElimination.lean` implement and bound
+fixed per-step allowances of one and two clauses after earlier non-growth rules
+fail. Every projection has complete opposing-pair checking, strict support
+decrease, exact target binding and checked model restoration. Prior rows and all
+failed alternatives are preserved. All **516 tests** and the **4,216-declaration /
+2,028-theorem** Lean audit pass. The chain bounds remain conditional and do not
+establish an efficient arbitrary-SAT construction.
+
+The [matched evidence](additive-elimination.md) is negative for the intended
+coverage gain: zero new closures on 57 final leaves or 83 original prior misses.
+All original modes close the same 31. Query time rises from 121.61751 to 142.26465
+and 163.21184 seconds; acquisition bytes rise from 674,234,368 to 700,178,432 and
+734,814,208. The added rules acquire 1,021 and 2,530 independently checked edges.
+Reference endpoint proofs, models and answers now persist in separate archives;
+the largest reference database occupies 1,236,189,184 bytes before compression.
+It is charged separately from acquisition. No old solver evidence is replaced.
+
+The current gap is useful order/endpoint discovery and avoiding unsuccessful
+repeated recognition. Valid steps and a small formula bound are insufficient
+progress criteria. The ranked [priority record](structural-reuse-priorities.md)
+retains the controls, limits and next target. Default policy remains unchanged.

@@ -12,7 +12,74 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: small additive clause growth is the next coverage test
+## Current investigation: useful endpoints, not just more admissible steps
+
+The [fixed additive experiment](additive-elimination.md) implements independently
+checked allowances of one and two clauses after earlier rules fail. Lean now
+proves at most n0 steps, m0+d*n0 clauses per state and
+(n0+1)*n0*(m0+d*n0) retained formula slots for one normalized accepted chain.
+All **516 tests** and the **4,216-declaration / 2,028-theorem** Lean audit pass.
+The theorem guarantees neither a useful pivot nor a small full discovery graph.
+
+The candidate opportunity does **not** produce additional closures. On the 57
+saved leaves, all three policies close zero; selected open literals increase
+25,488 -> 25,838 -> 26,604. On the 83 original prior misses, all three close the
+same **31**, with no gains or losses. Query time is
+**121.61751 / 142.26465 / 163.21184 seconds** for baseline / allowance one / two;
+acquisition databases are **674,234,368 / 700,178,432 / 734,814,208 bytes**.
+Above the shared paid prefix, allowance two adds 23.6% more space and costs 34.2%
+more query time. These are single ordered controls, not universal ratios.
+
+The new rules acquire **1,021 / 2,530** additive edges across the originals.
+Allowance two tests 155,645 candidates and rejects 151,131 for growth. All three
+leave 52 original sources unresolved and 57 selected leaves. Cheap admission and
+strict support decrease alone are therefore poor proxies for useful endpoint
+progress. Both policies remain optional. Larger growth budgets should not be
+the automatic next experiment.
+
+The repeated 96-input control also retains exactly **88 closures** in all modes,
+with query times **10.45184 / 12.74294 / 14.87718 seconds** and larger databases.
+All nine acquisition archives and nine separate reference archives pass the
+stated cold checks. The largest reference database adds **1,236,189,184 bytes**
+before compression, beyond acquisition; its endpoint answers and models persist.
+
+A separate profile of case 73 (48 variables / 204 clauses) identifies repeated
+subset search as a concrete cost target: `indexed_certificate` runs **1,694**
+times, with **1.67039 own / 2.21385 cumulative seconds** in **13.30082** instrumented
+discovery seconds. `_find_core` has 3.48529 cumulative seconds; these nested times
+must not be added. Direct additive discovery/checking total **0.24555 seconds**.
+The profile is one source from the paid prefix, not the preceding ordered cache
+history or a causal ablation. Count repeated exact source/augmented-CNF calls
+before assuming a cache can remove all this work. Keep proposal and independently
+checked-result caches distinct; ordered clauses and implication reasons matter.
+
+The two-clause final frontier now contains **43 leaves needing three extra
+clauses, eleven needing four, two needing five**, and one without a pair-bounded
+candidate. These local margins have moved without gaining closures. Retained
+subsumption permits a current-budget step in 22 leaves but is not an integrated
+coverage result. Preserve these cases rather than automatically raising limits.
+
+1. **Investigate which alternative orders expose useful endpoints.** Compare a
+   small explicitly budgeted set of alternative pivots on retained stalled cores.
+   Record whether they create units, binary implications, component separators,
+   affine structure or a recognized family, then check whole-source composition.
+   Keep candidate count and all failed lookahead work charged; a failed greedy
+   order does not exclude another successful order. Avoid treating local growth
+   margins as coverage gains.
+2. **Reduce repeated recognition when it dominates acquisition.** Use the saved
+   profile to measure repeated exact original/augmented subset queries before
+   choosing a cache or admission rewrite. Reuse must bind actual source content,
+   parent clauses, retained-resolvent membership, budgets and relevant recognition
+   dependencies. Unchanged pivot occurrences alone are insufficient. Shared
+   occurrence scans across growth thresholds are an opportunity, not yet a
+   measured saving or the assumed dominant cost.
+3. **Validate transfer and retain the full cost.** Preserve reference proofs and
+   models as well as the acquisition databases; they consume additional space.
+   Reused controls and selected prior failures do not replace an untouched
+   holdout. The earlier full prepared result remains **902/985**; this subset
+   experiment does not update it or establish efficient arbitrary-SAT coverage.
+
+## Previous investigation: small additive clause growth was the next coverage test
 
 The [clause-count fallback](clause-bound-elimination.md) is implemented, checked
 and remains optional. It closes **31/83** original prior misses versus **29/83**,

@@ -206,3 +206,11 @@ the separate pair-cap exception and subsumption opportunities as controls. Do
 not promote from candidate counts or optimize the diagnostic census as though
 it were the main discovery cost. The current implementation and Lean theorem
 remain the clause-count-non-growing version.
+
+## Subsequent additive-budget test
+
+The [additive follow-up](additive-elimination.md) now implements and formalizes
+allowances one and two. Neither adds a closure on the saved leaves or original
+sources, despite many additional valid steps and higher acquisition cost. The
+prior candidate counts above remain opportunities, not successful endpoint
+chains. See the updated priority record for useful order discovery and reuse.

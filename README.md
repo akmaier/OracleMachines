@@ -344,6 +344,17 @@ control. The next measured opportunity is a fixed allowance of one or two extra
 clauses: 32/57 remaining leaves need one, and 50/57 at most two. These candidate
 counts do not establish new closures or an efficient complete elimination order.
 
+The [additive-growth follow-up](research/additive-elimination.md) implements
+checked allowances of one and two extra clauses. All **516 tests** and the
+**4,216-declaration / 2,028-theorem** Lean audit pass. Lean bounds one normalized
+accepted chain by n steps, m+d*n clauses per state and (n+1)*n*(m+d*n) formula
+slots, without guaranteeing a useful next pivot or a small full planner. Neither
+budget adds a closure on the 57 saved leaves or the 83 original prior misses:
+all original modes close the same **31**, while query time and storage increase.
+The new endpoint proofs and models are retained, with their additional storage
+charged. These policies remain optional. The next focus is useful endpoint
+selection and reuse of failed recognition, not larger growth budgets by default.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

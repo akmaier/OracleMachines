@@ -2138,3 +2138,31 @@ This bound uses the fixed pair cap throughout; it does not allow it to grow
 unchecked with intermediate formula size. It neither guarantees an eligible
 pivot nor bounds the full branching history. This additive-growth extension
 has not been implemented or included in the current Lean counting theorems.
+
+## Fixed additive elimination bounds (12 November)
+
+The optional [additive policy](additive-elimination.md) accepts at most d extra
+clauses after the prior non-growth rules fail. For an accepted elimination-only
+chain starting with m0 clauses and n0 support variables, Lean proves
+`n_k + k <= n0`, `m_k <= m0 + d*k`, at most n0 steps, and at most
+`n0*(m0+d*n0)` literal slots per normalized formula. Keeping every formula state
+uses at most `(n0+1)*n0*(m0+d*n0)` slots under the explicit sequence-size premise.
+These bounds exclude all other planner branches, profiles, keys, separate inputs
+and identifier bit lengths. They guarantee no useful pivot or endpoint and do
+not refine the runtime.
+
+The new module and full audit pass at 4,216 declarations / 2,028 theorem
+declarations; all 516 Python tests pass. Each attempt still pays earlier failed
+recognition, validation, occurrence indexing, sorting and bounded opposing-pair
+construction. Every new target reruns the structural pipeline. Formula size on
+one chain and retained discovery history are separate accounts.
+
+The 57 saved leaves make that distinction concrete: zero closures for baseline,
+allowance one and allowance two; acquisition databases grow from 17,551,360 to
+18,509,824 and 19,894,272 bytes. Selected open literals rise from 25,488 to 25,838
+and 26,604. Extra exact steps do not necessarily produce a smaller final core or
+a useful endpoint. The two-clause endpoint diagnostic additionally retains a
+39,776,256-byte reference database. Diagnostic proof storage is separate from
+query-acquisition storage; neither number measures full-process peak memory.
+Matched original-source and repeated-control measurements are recorded in the
+linked study, with all phase costs and limitations.

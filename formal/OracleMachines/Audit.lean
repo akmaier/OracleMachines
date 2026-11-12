@@ -23,6 +23,7 @@ import OracleMachines.Residuals
 import OracleMachines.SearchMachine
 import OracleMachines.InterfaceProtocol
 import OracleMachines.AffineCoupling
+import OracleMachines.VariableElimination
 import Lean.Util.CollectAxioms
 
 /-!

@@ -1,0 +1,10 @@
+{
+  "script_sha256": "97b756869ece90a77dfaa653875655211f146972159a574c518642efdb67a091",
+  "report_sha256": "4f619f8ac4f2e889c812a43fb7d80f56bc28966f6f79f6f97f3c0bbb2b2cdd5b",
+  "invocation": "PYTHONPATH=. python3 /tmp/inspect_bve_frontier.py",
+  "limitations": [
+    "Read-only extraction of selected leaves from the earlier fully checked archive; this observer did not independently recheck that entire archive",
+    "Original diagnostic includes restored archive and opportunity construction time, not a solver performance comparison",
+    "Reproduce in an isolated checkout or change output destination: initial script has a fixed pilot destination"
+  ]
+}

@@ -1,6 +1,6 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-09 after the user's shift toward pattern discovery and a valid
+Updated 2026-11-12 after the user's shift toward pattern discovery and a valid
 partition of the entire SAT problem. This is the working record for the hourly
 investigation. Start with the [discovery plan](sat-pattern-discovery.md), then
 consult [implementation history](implementation-gaps.md),
@@ -12,7 +12,59 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse closed plans; expose metadata and cache costs
+## Current investigation: remove archive scans; return to discovery costs
+
+The optional [transactional accounting](residual-accounting.md) removes the
+per-query residual census without changing search or discovery. On the same
+prepared prefix and 1,497 queries, total query cost falls **171.12270 -> 87.88366 s
+(48.64%)**. The ordinary solver portion falls **90.03441 -> 6.40760 s**;
+discovery stays **80.99467 -> 81.41598 s**, now about **92.6%** of the accounted
+query total. This is a bookkeeping saving on prepared history, not faster fresh
+SAT search or new structural coverage. Coverage remains **902/985** in both modes.
+
+All per-query archive totals and all three stored evidence-table digests agree.
+Every seed row remains unchanged. One opening census is charged; no further
+census occurs during acquisition or warm reuse. Initialization grows
+**0.00098 -> 0.12228 s**. Added archive overhead is **4,096 bytes**. Warm combined
+discovery-and-solver replay falls **84.36440 -> 0.61496 s**; this is not the old
+discovery-only warm metric. Full cold proof audits still cost **84.49631 / 79.18184
+s**, and six-case Python peaks remain **24,159,525 / 24,164,413 bytes**. The
+empty-history control has no clear acquisition gain (**7.70202 -> 7.73052 s**).
+The 96 fresh-input controls with prepared history improve **15.20412 -> 8.38678
+s**, keeping 88 closures and identical acquired evidence. Their saved scan work
+does not imply faster underlying SAT search.
+The original scan-based solver remains the control; use the optional accounted
+mode in future prepared-archive experiments to expose reasoning costs clearly.
+
+The next ranked targets are:
+
+1. **Reuse a selected sound proof without rechecking all failed acquisition
+   alternatives or retaining two large decoded graphs.** Discovery is now the
+   dominant measured query cost. The existing profile points to reconstruction,
+   propagation and normalization; the retained-plan run checks 13,315 old nodes
+   and acquires 13,560 new ones. Develop a source-bound selected-proof checker,
+   preserving the full historical trace separately. Compare its cold checking,
+   admission and cache costs against the current full-policy checker. A smaller
+   proof representation alone does not establish cheaper first use.
+2. **Transfer useful structure beyond exact prepared sources.** The 83 unresolved
+   original inputs / 99 selected leaves / 31,203 literals are unchanged. Checked
+   binary literal elimination and transport of successful plans into different
+   equivalent cores are the next coverage candidates. Preserve shared-variable
+   compatibility, model lifting and remaining branch obligations explicitly.
+3. **Avoid references that save no substantive acquisition.** The previous fresh
+   control's 20 references are all family leaves and save no nodes. A cheap
+   admission rule needs matched total-cost evidence, including its own lookup.
+4. **Upgrade cached unsuccessful plans when later preparation becomes useful.**
+   This needs append-only successor identities and explicit dependency rules;
+   the exact-reference implementation only benefits first acquisition.
+
+All **476 Python tests** and the unchanged Lean build/axiom audit pass (**4,148
+declarations / 1,988 theorems**). The default classification policy is unchanged
+(898/985); the 902/985 result uses the optional prepared policy. The accounting
+change supplies no new Lean refinement, SAT family or unrestricted polynomial
+bound. See the [full matched evidence](../experiments/results/cnf-accounting-full/README.md).
+
+## Previous investigation: reuse closed plans; expose metadata and cache costs
 
 The [retained-plan reference](retained-plans.md) reuses an independently checked
 old graph before acquiring another graph for the exact same CNF and depth. On a

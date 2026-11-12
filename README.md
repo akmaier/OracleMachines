@@ -279,8 +279,16 @@ graphs before new acquisition. With the same prepared archive, coverage reaches
 **902/985** without lost closures, discovery falls **16.65%**, and added storage
 falls **37.36%**. Six-case peak Python allocation rises **19.68%**; fresh-input
 coverage is unchanged and slightly slower, so the method remains optional.
-All **469 tests** and the unchanged Lean audit pass. The next measured cost is a
+All **469 tests** and the unchanged Lean audit pass. At that checkpoint, the next measured cost was a
 full residual-storage census repeated after every solver query, including hits.
+
+The optional [archive-accounting follow-up](research/residual-accounting.md)
+maintains exact totals transactionally. On the same prepared 1,497 inputs, query
+time falls **171.12 -> 87.88 seconds (48.64%)**, with identical search, coverage
+and stored evidence. Initialization includes one full census; retained overhead
+is **4 KiB**. Empty-history acquisition shows no clear improvement. All **476
+tests** and the unchanged Lean audit pass. Discovery now accounts for about **92.6%** of query time; selected
+proof reuse and transport beyond exact prepared sources are the next targets.
 
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.

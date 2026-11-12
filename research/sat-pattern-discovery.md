@@ -889,3 +889,26 @@ cheap family matches, and investigate checked literal elimination or interfaces
 on genuinely new cores. The newly identified repeated storage census is a large
 metadata cost to remove, but does not itself broaden structural coverage. All
 469 tests pass; the existing Lean audit passes, with no new Python refinement.
+
+
+## 2026-11-12: archive accounting exposes the remaining discovery work
+
+The optional [accounted residual solver](residual-accounting.md) eliminates a
+full archive census after every ordinary query. The same 1,497 prepared sources
+retain exactly the same profiles, plans and 902/985 non-tiny closures. All source,
+pattern and residual evidence digests agree. Query cost drops 171.12270 ->
+87.88366 seconds; discovery stays near 81 seconds and now accounts for about
+92.6% of the remaining total. The 83 unresolved sources, 99 selected leaves and
+31,203 literals are unchanged. This is not a discovery gain.
+
+Prepared-history fresh controls keep 88/96 closures while query cost falls
+15.20412 -> 8.38678 seconds; an empty-history control shows no clear acquisition
+saving (7.70202 -> 7.73052). Opening and conflicts can still require a full scan.
+One counter row and five triggers add 4 KiB; prior evidence is preserved.
+
+The next discovery-supporting step is a source-bound checker for selected sound
+proof dependencies, retaining the complete failed acquisition trace separately.
+Then test transport into different equivalent cores and checked binary variable
+elimination to broaden the unresolved cells. Accounting neither shrinks these
+cells nor bounds their search. Keep the default 898/985 policy and optional
+prepared 902/985 result distinct.

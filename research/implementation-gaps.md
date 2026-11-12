@@ -4538,3 +4538,35 @@ aggregate without changing decisions. Then reduce duplicated verifier state and
 checking of historical failed alternatives, reject unprofitable trivial references,
 and develop exact transport/upgrades beyond a fixed prepared prefix. The default
 policy is unchanged. See [mechanism and limits](retained-plans.md).
+
+
+## 2026-11-12: transactional residual accounting, measured and preserved
+
+Implementation checkpoint `e32b33f` introduces optional `AccountedResidualSolver`;
+the historical `ResidualSolver` remains the full-census control. Opening rebuilds
+one counter row; triggers maintain it transactionally for normal residual writes.
+Possible key/rowid conflicts invalidate it for locked reconstruction. Rollback,
+legacy writers, Unicode/NUL SQL length semantics, cold reconstruction and partial
+budget failures are tested. Direct alteration of private accounting state during
+a live connection is outside the contract. No proof/search method is replaced.
+
+All 476 Python tests pass. Full, fresh and empty matched comparisons preserve all
+prior rows, match every per-query total, and produce identical evidence-table
+digests. Query cost is 171.12270 -> 87.88366 seconds on prepared original inputs,
+15.20412 -> 8.38678 on the fresh prepared controls, and 7.70202 -> 7.73052 without
+history. All acquired results and six complete compressed archives are retained.
+Added SQLite overhead is 4,096 bytes. Ordinary counters perform one opening census
+and no per-query rebuild in these runs; independent validation scans are separate.
+
+No coverage or underlying search gain is claimed. Discovery and duplicated
+verifier state now dominate the measured prepared workload. Next: selected sound
+proof reuse, shared/bounded checking state, useful-reference admission and plan
+transport beyond exact prepared sources. See [mechanism and limits](residual-accounting.md)
+and the updated [priority record](structural-reuse-priorities.md).
+
+The unchanged Lean build/axiom audit passes at 4,148 declarations / 1,988 theorems.
+Its first rerun exposed 16 missing sidecar files in the temporary toolchain;
+only those files were restored from the digest-verified official release. The
+failure and repair record are preserved with the full benchmark. The manuscript
+adds the accounting invariant, measured costs and controls; all 63 previous
+proof blocks remain unchanged. No Lean refinement of SQLite is claimed.

@@ -1941,3 +1941,26 @@ The fresh control has 20 old-family references but saves no pattern nodes; both
 add 1,988 and close 88/96. Lookup/storage overhead therefore worsens costs there.
 References are a conditional reuse mechanism, not a general efficient expansion
 or a guarantee for arbitrary SAT. No old archive is deleted to obtain a saving.
+
+
+## 2026-11-12: charge archive metadata independently of search
+
+The optional [accounting implementation](residual-accounting.md) replaces the
+ordinary query's complete residual census with a maintained singleton. For Q
+queries and residual payload B_t / row count R_t at query t, the old bookkeeping
+cost scans sum_t (B_t+R_t). The new path charges an opening scan, Q one-row reads,
+indexed conflict checks and lengths of changed records, metadata updates in each
+write transaction, and another full scan whenever a dirty counter is read.
+Counter values take a fixed number of SQLite integer words (logarithmic bit
+length in an abstract unbounded model). Five fixed triggers add no key copies.
+There is no claim that conflicts, opening, source parsing, proof checks or search
+are constant-time. All earlier acquisition and retained knowledge remain charged.
+
+On the 1,497 prepared queries, accounting adds 4 KiB and initialization changes
+0.00098 -> 0.12228 seconds, while query cost falls 171.12270 -> 87.88366. Warm
+combined replay falls 84.36440 -> 0.61496 seconds. Six-case Python peak is
+24,159,525 / 24,164,413 bytes, excluding native SQLite, RSS and full-history peak;
+there is no meaningful resident-memory improvement. Ordinary SAT search counters
+and every stored evidence table are identical. The 96 empty-history controls
+show no clear acquisition benefit. This is avoided bookkeeping, not a change to
+SAT's worst-case complexity or the remaining 83 structural misses.

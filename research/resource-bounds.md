@@ -2240,3 +2240,34 @@ costs 110.13683 / 107.31572 seconds, plus separate trial replay of 62.42473 /
 to expansion. Fewer admitted candidates and new trials explain some of the cost
 difference; coverage is unchanged. Neither a minimum-cost expansion guarantee,
 a same-work SAT speedup nor a full-history process-memory bound follows.
+
+## Guarding every new recognition state (coupled search, 12 November)
+
+The [coupled study](coupled-pivots.md) adds an admission set A for each open input.
+Before discovering a missing canonical state x, the wrapper requires |A| < K
+when x is new to A, then inserts x. A starts empty and no admission is removed
+within the input. Induction on admissions gives |A| <= K. Every new pattern record
+in this experiment follows a guarded discovery, including recursive descendants;
+the prepared-history view is read-only. Hence new persisted pattern nodes per
+input are at most |A| <= K, even when unfinished parent discovery is interrupted.
+The runner also records and validates every new node against admitted identities.
+
+With U open inputs, K=32 states and T=8 completed new coupled trials per input,
+the run inserts at most U*K pattern nodes and U*T coupled records. This is a
+node/record bound, not a byte or machine-time bound. Completed children survive a
+stop; unfinished work may repeat on resumption. Existing proofs, key creation,
+candidate preparation, reference solving, serialization and checking are charged
+outside these counts. Candidate construction can hold up to four times 64 second
+targets; the first-route frontier memo can retain old leaf multisets for many
+seed nodes. Its size is not bounded by K. A bound on state count does not establish
+a bound on individual profiles, CNF bytes or the already retained history.
+
+The original experiment has 52 open inputs and admits only 32 new states in total,
+with maximum 11 for one input; the repeated control admits 17, maximum six.
+Neither reaches K. Original resident search costs 0.62200 seconds after 69.09120
+seconds of seed checking. The 760,606,720-byte seed grows to 761,499,648 bytes;
+32 new nodes and 25 trials occupy a 937,984-byte SQLite delta / 54,883 compressed
+bytes. Full cold audit costs 114.39522 seconds, with separate old/coupled trial
+replay taking another 69.81471. Coverage remains unchanged. The admission guard
+therefore supplies an enforceable accounting boundary but did not cause this
+run's costs or lack of coverage. It supplies no polynomial arbitrary-SAT result.

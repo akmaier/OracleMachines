@@ -1,0 +1,91 @@
+{
+  "script_sha256": "bf238efd555824c1078775ed882821cd7292ed3cd2b29d75c9d5afbdfa2cdeb9",
+  "evidence": [
+    {
+      "suite": "originals",
+      "report_sha256": "9a52278e69828568af564254d4028220462b82f428cc472ffaddb991ad153529",
+      "closed": 31,
+      "new_trials": 25,
+      "admitted_states": 32,
+      "distinct_admitted_states": 32,
+      "new_nodes": 32,
+      "budget_stops": 0,
+      "delta_sha256": "b4c7f15bb01ddd4f502d0d22db489bde230221eca048449a223079c9e193425e",
+      "reconstructed_table_digests": {
+        "cnf_coupled_trials_v1": {
+          "rows": 25,
+          "sha256": "cbda8bed04338a7791defd10e7741afe420c04bd99280968620b501fa03cfbc5"
+        },
+        "cnf_pattern_sources_v1": {
+          "rows": 1548,
+          "sha256": "17e47903910af67166eda68cf6ceca1b01d5e45fb6a1da1ee79a9361f8241566"
+        },
+        "cnf_patterns_v1": {
+          "rows": 41331,
+          "sha256": "83808a734b3e30abcfb40150d4f05e3a08922983a1a8e0933f7d58ddced69129"
+        },
+        "cnf_pivot_trials_v1": {
+          "rows": 563,
+          "sha256": "7b76df27b7b6a27d925bb6453e90c0eb77503e34861a490b204a355d4c2e2660"
+        },
+        "cnf_residual_v1": {
+          "rows": 21838,
+          "sha256": "fa9f00d0fd3036022ed0c51cef48a28e2ede054071eaeb19c29f07fb19fa8ef1"
+        }
+      }
+    },
+    {
+      "suite": "fresh",
+      "report_sha256": "172b349fb9f53eda9908f574962e6a1ac5776f65398108344bf24fcb581f77ad",
+      "closed": 88,
+      "new_trials": 15,
+      "admitted_states": 17,
+      "distinct_admitted_states": 17,
+      "new_nodes": 17,
+      "budget_stops": 0,
+      "delta_sha256": "004a174e97d9eed091b10df4646c91db9aec0877d38d10f19e562b8b11d4db18",
+      "reconstructed_table_digests": {
+        "cnf_coupled_trials_v1": {
+          "rows": 15,
+          "sha256": "f6471392708326321dc7d0c044eaff3861beea0539446edb70455865f23176b6"
+        },
+        "cnf_pattern_sources_v1": {
+          "rows": 1561,
+          "sha256": "786b582c363f2d33269139477bd4595cc8a9b3e3a1e6adaa37a1184fc93c70ad"
+        },
+        "cnf_patterns_v1": {
+          "rows": 24999,
+          "sha256": "8f1c2c49cceef3fd875f65b744e9897096d71fbe250fa9bdbb2c50acfdf23373"
+        },
+        "cnf_pivot_trials_v1": {
+          "rows": 65,
+          "sha256": "33be1ecf98d6faad59193989e20b763cfcf6c370af1a1d83449e000083e622b2"
+        },
+        "cnf_residual_v1": {
+          "rows": 23116,
+          "sha256": "67691ae7f8c1c3f0168c9a16d636424385f13b404c1c1f00a947ce5329159b55"
+        }
+      }
+    }
+  ],
+  "analyses": [
+    {
+      "suite": "originals",
+      "path": "experiments/results/cnf-coupled-pivots-originals/continuation-analysis.json",
+      "sha256": "0a5aac9498199b124dac12edbfbbfeac0cbd59e057aa9679d88240e5b88b2cfa"
+    },
+    {
+      "suite": "originals",
+      "path": "experiments/results/cnf-coupled-pivots-originals/core-admission-audit.json",
+      "sha256": "a96ee14548fc2f8a73b3e259267bc542fad0246ef7a715af021a09c201b31bd6"
+    },
+    {
+      "suite": "fresh",
+      "path": "experiments/results/cnf-coupled-pivots-fresh/continuation-analysis.json",
+      "sha256": "125f30342e9c206315d4ef05ff94d924d830680b1243e80821bd2d3519162108"
+    }
+  ],
+  "python_tests": 535,
+  "test_log_resource_warning_count": 20,
+  "unchanged_paper_and_formal_since": "fc16148"
+}

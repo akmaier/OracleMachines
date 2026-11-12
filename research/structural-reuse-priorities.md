@@ -12,7 +12,53 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: later ancestors reduce acquisition, not unresolved coverage
+## Current investigation: state-capped coupled routes expose an admission barrier
+
+The [coupled-pivot study](coupled-pivots.md) resumes every earlier history and
+tries an interacting second pivot on retained divergent first routes. Both steps
+keep the old pair/growth caps. It closes the entry-budget accounting gap by
+guarding **every newly entered recognition state**, including descendants and
+unfinished parents, at **32 per open input**. Completed certificates survive a
+stop; cached states remain reusable. Preparation, checking, per-state work and
+bytes are additional, so this is not a total runtime or RAM bound.
+
+The original run acquires **25 trials / 32 nodes** in **0.62200 resident seconds**,
+with no coverage gain: **31/83** remains. The repeated control adds **15 / 17** in
+**0.21175 seconds**, retaining **88/96**. Neither run hits the state cap (maximum
+11 and 6 states on an input). Original seed verification costs **69.09 seconds**,
+full cold audit **114.40**, and separate trial replay **69.81**. These exceed the
+new search cost and remain charged. The new delta is **937,984 SQLite / 54,883
+compressed bytes**; no ordinary-solver speedup is claimed.
+
+Only 18 still-open originals have retained divergent routes. The selected routes
+admit just 25 interacting second pivots. Of their results, **17/25** return to the
+first route's frontier and **24/25** use only seed leaves. Exactly one new unresolved
+core appears. It has 35 variables / 150 clauses. An exhaustive candidate diagnostic
+within the 64-pair cap finds minimum first-step growth **3**, minimum two-step net
+growth **7**, and minimum interacting-pair growth **15**. All 662 admitted ordered
+pairs fail a net-growth-four allowance, even with temporary intermediate growth.
+This is a restricted move-rule obstruction, not a general SAT lower bound.
+
+1. **Test the least-cost escape with ordinary simplification.** Start from the
+   preserved new core and its minimum-growth-three first pivot; charge the extra
+   clause allowance explicitly and keep the admission budget. A net-four coupled
+   relaxation alone is already ruled out on this core under the current pair cap.
+2. **Compose success through saved alternative routes.** A future closed leaf
+   may be reachable only through an earlier open pivot/coupled trial. The present
+   composition accepts individually closed replacements and does not recursively
+   compose every open trial. Add checked finite route justification before counting
+   any resulting whole-original gain. No gains are currently hidden or claimed.
+3. **Keep move availability separate from exploration limits.** The state budget
+   did not bind this experiment; increasing it without new admissible moves is not
+   supported. Other moves, broader interactions and larger growth are hypotheses
+   requiring matched checks, preserved failures and complete cost accounting.
+
+All **535 tests** and artifact checks pass. Resume from **41,331 pattern nodes,
+563 one-pivot trials and 25 coupled trials**, plus all earlier solver proofs and
+source bindings, using the study's fifth-table reconstruction recipe. The earlier
+full prepared measurement remains **902/985**; there is no new full-corpus result.
+
+## Previous investigation: later ancestors reduce acquisition, not unresolved coverage
 
 The [matched ancestor study](frontier-pivots.md) starts from the exact union of
 both prior pivot histories, including their 345 original-suite trials. It compares

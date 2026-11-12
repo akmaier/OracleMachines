@@ -1125,3 +1125,29 @@ in 7/10 trials, but all seven increase unresolved literal count; coverage remain
 signals in these tests. This is evidence to narrow the next search toward coupled
 changes at retained divergent states, with an explicit descendant-state budget.
 It neither exhausts later ancestors nor supplies a tractable partition of all CNFs.
+
+## 12 November: two-step continuations and a concrete growth obstruction
+
+The [coupled continuation study](coupled-pivots.md) tests an interacting second
+pivot on up to four previously retained divergent first routes. Both steps retain
+the same pair/growth limits. An admission guard counts all newly entered recognizer
+states and descendants, with a per-input limit of 32; it never turns a budget stop
+into closure or a negative SAT result. All completed child proofs persist.
+
+The selected originals gain 25 pair records and 32 nodes without changing 31/83
+coverage. Repeated controls gain 15 / 17, retaining 88/96. No admission cap binds.
+Relative to retained first routes, 17/25 original and 11/15 repeated trials have
+the same unresolved frontier. All but one original trial use only seed leaves;
+the repeated run introduces no new unresolved leaf. This separates new paths from
+new structural coverage and from globally unseen residual states.
+
+The sole new core (35 variables, 150 clauses) provides a reproducible local
+obstruction. Within the 64-pair cap, its 30 admissible first pivots grow by at
+least three clauses, and all 662 admitted ordered pairs grow by at least seven.
+Interacting pairs grow by at least fifteen. The candidate cap truncates none of
+these variables. A temporary relaxation with final growth at most four therefore
+cannot unlock this core. The result concerns this representation and move rule,
+not SAT complexity or semantic membership in every tractable family. The CNF and
+all pairs persist for a controlled growth-three escape plus ordinary simplification.
+Any subsequent leaf closure must be checked through the saved open alternative
+routes before claiming an original-source gain.

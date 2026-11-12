@@ -141,3 +141,7 @@ recipe applies separately to the repeated-input suite. Thus future work can reus
 all earlier failed and successful acquisitions. Each constituent history passed
 complete cold replay; union validation checks exact payload compatibility and
 SQLite integrity, without claiming an additional full merged cold audit.
+
+The subsequent [coupled-pivot study](coupled-pivots.md) resumes this complete union
+and adds state-capped two-step trials. Use its updated five-table resume recipe
+to retain those additional proofs, failures and the newly exposed unresolved core.

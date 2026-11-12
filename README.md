@@ -28,15 +28,15 @@ classes.
 
 ## Paper
 
-The latest [ancestor-selection investigation](research/frontier-pivots.md) reuses
-both saved pivot histories and compares early ancestors with ancestors near the
-unresolved leaves. Near-frontier search acquires fewer new nodes (90 versus 266
-on the selected originals), but neither schedule improves the 31/83 coverage.
-It still reconverges in 82/102 new trials. All checked results persist as deltas;
-the next gap is useful coupled continuations under a distinct-new-state budget.
-All **531 Python tests** pass.
-The [preceding pivot study](research/pivot-alternatives.md) preserves the original
-reconvergence evidence and interaction-priority control.
+The latest [coupled-pivot investigation](research/coupled-pivots.md) reuses the
+saved divergent routes and adds a cap covering every new recognition state,
+including descendants. Its 25 original-input trials add 32 proof nodes but leave
+coverage at 31/83. Only one unresolved core is new to the history; all 662 allowed
+ordered pivot pairs there grow by at least seven clauses. This identifies a
+concrete admission barrier for the next experiment. All **535 Python tests** pass,
+and all earlier results and new trials persist. The preceding
+[ancestor-selection study](research/frontier-pivots.md) retains the matched early
+versus later-node controls.
 
 The preceding [subset-search investigation](research/anchored-subsets.md) preserves
 the exact recognition certificates while filtering impossible subsumers by a

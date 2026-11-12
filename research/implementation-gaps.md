@@ -4922,3 +4922,34 @@ adds 299 unique pattern nodes / 218 trials; the complete original history now
 retains 41,299 pattern nodes and 563 trials. The repeated-control union adds
 25 nodes / 20 trials, reaching 24,982 nodes and 65 trials. The study's latest
 resume recipe and validation digests preserve this work for the next iteration.
+
+## 12 November: budget descendant acquisition and check coupled deviations
+
+Implemented a separate coupled-trial table and exact two-projection checker/model
+lift over retained divergent first routes. A new admission wrapper reserves each
+missing recognizer state before discovery, including descendants and unfinished
+ancestors. Completed children persist when the limit is reached. A zero-budget
+restart can still reuse already stored results. Counts and new-node identities
+are validated against each input's admission set. Candidate preparation, old
+checking, per-state bytes and endpoint solving remain separately charged.
+
+The frozen 32-state / eight-trial policy admits 25 coupled trials and 32 nodes on
+original inputs, with no new closure; the repeated control admits 15 / 17, also
+without gain. Neither hits its state limit. Detailed continuation analysis finds
+only one genuinely new unresolved leaf across the original history; every other
+new path ends in seed leaves. The 35-variable core's minimum permitted first-step
+growth is three; its 662 permitted two-step orders all grow by at least seven.
+The full source and pair audit are preserved. Thus a net-four temporary-growth
+escape is ruled out there under the existing pair cap.
+
+All **535 tests**, full cold replay, independent delta reconstruction, idempotence,
+old-row preservation and exact old/coupled trial replay pass. The original history
+now retains 41,331 pattern nodes, 563 one-pivot trials and 25 coupled trials; all
+1,548 source bindings and 21,838 solver proof rows are unchanged. The repeated
+history has 24,999 pattern nodes, 65 old trials and 15 coupled trials. The
+[study](coupled-pivots.md) supplies the updated five-table resume recipe.
+
+Next gaps are a controlled minimum-growth-three escape with ordinary simplification
+and checked composition through saved open alternative routes. Existing composition
+handles individually closed replacements; it does not recursively join all open
+trial records. No new formal theorem or manuscript claim was introduced.

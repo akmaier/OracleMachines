@@ -44,12 +44,16 @@ class RetainedPlanInventory(BinaryPathInventory):
         # original checker, including source, depth and all attempted branches.
         if hint.get('summary', {}).get('closed') is not True:
             self.counts['retained_plan_unclosed'] += 1
+            self._unclosed_hint(cnf, depth, hint)
             return None
         plan = self.prepared._load(key)
         if plan is None or plan['summary']['closed'] is not True:
             raise ValueError('Invalid prepared closed-plan hint')
         self.counts['retained_plan_hits'] += 1
         return key, plan
+
+    def _unclosed_hint(self, cnf, depth, hint):
+        """Optional acquisition hint; the base policy makes no use of it."""
 
     def _discover(self, cnf, depth):
         found = self._find_closed(cnf, depth)

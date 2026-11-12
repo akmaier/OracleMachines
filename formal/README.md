@@ -1420,3 +1420,22 @@ build and axiom audit pass at **4,148 namespace declarations / 1,988 theorem
 declarations**. All **461 Python tests** pass. The [implementation account](../research/binary-paths.md)
 retains the extra coverage, higher acquisition/storage costs and a bounded-search
 counterexample to assuming logical simplification preserves heuristic coverage.
+
+
+The bounded-elimination extension adds
+[`VariableElimination.lean`](OracleMachines/VariableElimination.lean).
+`projection_exact` proves that the complete set of opposing-pair resolvents,
+together with untouched clauses, holds exactly when a Boolean extension at the
+eliminated variable satisfies the source. The retained clauses and positive and
+negative tails must omit that variable. `holds_update`, `source_models` and
+`projected_models` establish the valuation and explicit-CNF decompositions used
+by the proof. Choosing false when every positive tail holds, and true otherwise,
+gives the model-extension argument. Pure polarity and empty tail lists are covered.
+
+This is existential projection, not equality of the full original model sets.
+Python source partitioning, deduplication, tautology deletion, candidate budgets,
+normalization, archive bindings, model-lift code and cost counters are not refined
+by these lemmas. The independent Python checker and tests remain necessary.
+The full build/axiom audit passes at **4,168 namespace declarations / 2,004 theorem
+declarations**, allowing only the existing standard Lean axioms. All **501 Python
+tests** pass. See the [implementation and resource account](../research/variable-elimination.md).

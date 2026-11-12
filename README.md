@@ -316,6 +316,14 @@ Evidence and storage match exactly. All **496 tests** pass; the prototype stays
 optional and disabled. The next priority is checked variable elimination and
 equivalent-core discovery on the unresolved frontier.
 
+The [checked variable-elimination extension](research/variable-elimination.md)
+now closes **29 of the 83 previously unresolved original inputs**, compared with
+11 for pure-only elimination. It broadens coverage at higher total cost:
+**64.77 -> 80.10 seconds**, with a larger retained archive. The candidate remains
+optional. All **501 tests** pass, and Lean proves the exact existential projection
+identity, with implementation refinement still separate. This subset study does
+not rerun the full corpus or establish a polynomial arbitrary-SAT solution.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

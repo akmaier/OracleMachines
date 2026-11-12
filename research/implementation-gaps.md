@@ -4677,3 +4677,48 @@ manuscript proof blocks remain unchanged. Section 12.74 records the follow-up,
 the PDF builds warning-free and pages 127--129 pass visual review. See
 [mechanism and limits](clause-mask-reuse.md) and
 [preserved evidence](../experiments/results/cnf-clause-mask-pilot/README.md).
+
+## 2026-11-12: checked elimination closes 29 earlier misses at extra cost
+
+Checkpoint `e7a806b` adds optional bounded Davis--Putnam elimination at unresolved
+terminal nodes. A certificate identifies a pivot; the independent checker rebuilds
+all opposing-pair resolvents and checks exact binding, pair and growth limits.
+SAT models lift back to the source. A null proposal proves neither impossibility
+nor UNSAT. Lean proves the existential projection identity under explicit pivot
+absence conditions; Python normalization, persistence and costs remain outside
+that formal result. All 501 Python tests and the 4,168-declaration / 2,004-theorem
+Lean audit pass.
+
+The matched 99-leaf comparison closes 0 / 14 / 37 leaves for baseline / pure-only /
+bounded elimination. A separate run queries all 83 original prior misses from the
+same paid prefix: 0 / 11 / 29 close, retaining every pure-only closure. The bounded
+candidate leaves 54 original sources, 59 selected open leaves and 26,205 literals.
+It does not rerun the full 1,497-input corpus. Query time rises 64.76503 -> 80.09857
+seconds and database bytes 605,675,520 -> 621,146,112. No default policy changes.
+Every old row survives, all six complete archives cold-replay without changes,
+and independent endpoint/model checks cover all 1,728 pure-only and 2,822 bounded
+original-input elimination edges. The latter diagnostic costs 688.09686 seconds
+in addition to query and cold-audit time; it is retained as validation cost.
+
+The next bottleneck is concrete: 167,129 candidate tests, 156,757 growth rejections
+and 1,457,523 discovery pairs. Accepted mixed steps mostly have one occurrence on
+one side (1,588, versus 111 with multiple occurrences on both sides). A single
+binary occurrence gives a cheap sufficient non-growth rule, whose frequency and
+ordering effects remain unmeasured. Exact target sharing is limited: 2,822 edges
+reach 2,821 target keys. The remaining frontier has 58/59 leaves with pair-bounded
+candidates but no non-growing step under the current rule. Ten admit a candidate
+if retained-clause subsumption removes redundant new resolvents. This opportunity
+is not yet integrated or an additional closure. Profile failed candidate work,
+then test cheap admission and checked redundancy before increasing caps.
+
+The [mechanism and resource account](variable-elimination.md),
+[frontier comparison](../experiments/results/cnf-variable-elimination-frontier/README.md),
+[original-source comparison](../experiments/results/cnf-variable-elimination-originals/README.md)
+and [analysis/provenance](../experiments/results/cnf-variable-elimination-probe/README.md)
+preserve the evidence and limitations. Section 12.75 records the result while
+keeping every earlier manuscript proof block. The PDF builds without warnings;
+pages 128--130 pass visual review. The aggregate validator confirms report and
+runtime hashes, all six archive integrity checks, identical ordinary-solver
+residual tables, all 63 unchanged proof blocks and 225 unique labels. No
+unrestricted polynomial SAT bound or complete efficient structural partition is
+established.

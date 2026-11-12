@@ -12,7 +12,63 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: clause overlap is real, but scalar caching loses
+## Current investigation: checked elimination broadens coverage at extra cost
+
+The [bounded-elimination extension](variable-elimination.md) introduces complete
+opposing-pair projection at previously unresolved terminal nodes, with independent
+checking and model restoration. A separate pure-only control uses pair limit zero.
+On the **99 saved unresolved leaves**, baseline / pure-only / bounded close
+**0 / 14 / 37**. On the **83 original unresolved sources**, starting from the same
+paid 417,370,112-byte prefix, they close **0 / 11 / 29**. The bounded candidate
+retains every pure-only closure and leaves **54 originals / 59 selected leaves /
+26,205 literals** unresolved. This is a measured whole-input gain on prior misses,
+not a rerun of all 1,497 cases or a new default policy.
+
+Coverage is more expensive here. Original-source total query time is
+**64.76503 / 71.86221 / 80.09857 s**, and database bytes are
+**605,675,520 / 627,138,560 / 621,146,112**. The ordinary solver still searches the
+original CNFs with identical counters. All old rows are retained. Exact source
+and child bindings, growth caps and all opposing pairs remain checked. Lean
+proves the semantic projection identity; it does not refine Python or its costs.
+All **501 Python tests** and the expanded **4,168-declaration / 2,004-theorem**
+Lean audit pass. See the [frontier](../experiments/results/cnf-variable-elimination-frontier/README.md)
+and [whole-input](../experiments/results/cnf-variable-elimination-originals/README.md)
+records for separate cold, memory and model checks.
+
+The new measured cost is failed candidate analysis: **167,129 candidates tested,
+156,757 growth rejections, 1,457,523 opposing pairs visited**, versus **2,822**
+accepted elimination nodes. Raising the pair cap alone does not address that
+dominant rejection category. The next ranked investigations are:
+
+1. **Profile and avoid repeated failed elimination analyses.** Test exact reuse
+   of unchanged occurrence neighborhoods or inexpensive rejection bounds before
+   building all resolvents. Source updates can change retained-clause duplicate
+   membership even if pivot occurrences are unchanged; include that dependency
+   in recognition, invalidation and checking. Do not assume counters equal time.
+   The accepted mixed steps include 1,588 with a single occurrence on one side,
+   versus 111 with multiple occurrences on both sides. Test a cheap sufficient
+   rule for a single binary occurrence before exhaustive ranking, charging any
+   changed order/coverage. Exact target sharing is sparse: 2,822 elimination edges
+   reach 2,821 distinct targets, with only one repeated incoming reference.
+2. **Remove provably redundant resolvents before judging growth.** A retained
+   subclause may already imply a new resolvent. Measure this opportunity on the
+   remaining frontier before changing the policy; preserve complete opposing-pair
+   coverage, exact recomposition and model lifting. A smaller target is not by
+   itself a cheaper expansion.
+   The read-only follow-up identifies this opportunity in **10/59** current open
+   leaves. **58/59** still have pair-bounded candidates but no currently non-growing
+   step; simply increasing the pair cap is therefore not the main next test.
+3. **Measure transfer and ordering effects.** The new study deliberately targets
+   previous failures. A separate fresh/adversarial policy comparison, alternative
+   elimination order and a full-corpus rerun remain open before promotion. Pure
+   elimination is a control, not a novel method or an omitted baseline.
+
+The prior full prepared result remains **902/985**. Twenty-nine of its saved
+misses now have additional checked closures under the new policy. Keep this
+source-level evidence separate from a new full-corpus timing/coverage claim.
+No uniform polynomial solution for arbitrary SAT has been established.
+
+## Previous investigation: clause overlap is real, but scalar caching loses
 
 The [clause-mask follow-up](clause-mask-reuse.md) tests the smaller shared structure
 suggested by the preceding source-index failure. Two costly prepared sources reuse

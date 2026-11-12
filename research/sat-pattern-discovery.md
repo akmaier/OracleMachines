@@ -969,3 +969,28 @@ checking and output work. Sharing unchanged clauses is already substantial;
 merely adding scalar summaries does not remove their per-clause processing.
 Coarser block or delta representations remain open but unimplemented. Complete
 bookkeeping coverage still does not establish efficient closure of every cell.
+
+
+## 2026-11-12: exact elimination exposes 29 additional original-source closures
+
+The [bounded-elimination policy](variable-elimination.md) projects an unresolved
+CNF by completely resolving a selected variable's opposing clauses. The checker
+reconstructs every pair, rejects growth of clauses or literal occurrences, binds
+the exact child and restores models. Its null witness means unresolved, not
+nonmembership. Lean proves existential projection with explicit tail-independence
+premises; Python refinement and cost verification remain open.
+
+The 99-leaf study closes 37 leaves, compared with 14 for pure-only elimination and
+zero for the preceding policy. A separate whole-input run on the 83 saved misses
+closes 29 originals, versus 11 pure-only and zero baseline. The bounded result
+retains every pure-only closure. It leaves 54 originals, 59 selected leaves and
+26,205 literals unresolved. These are gains on the saved failures, not evidence
+that every CNF admits a non-growing elimination or an efficient family endpoint.
+
+All acquisition and retained state remain charged. Original-source query time
+increases 64.76503 -> 80.09857 seconds and the archive increases
+605,675,520 -> 621,146,112 bytes. The ordinary solver's counters do not change.
+The next questions are the structure of the growth barrier and exact reuse of
+failed occurrence-neighborhood analyses. Retained-clause subsumption of resolvents
+is an explicit candidate. Recognition, source edits, witness checking and model
+compatibility must be included; the added closures do not erase those costs.

@@ -1,0 +1,66 @@
+{
+  "script_sha256": "4e7ca595314b07027a830a0f37570c25cf3f4b89a224107b1472d79c5dea8cc2",
+  "reports": {
+    "frontier": "48cd59accb130ae0f36e96a68dd5461a0c5038e83864f1f405c7232c95bfc9ed",
+    "originals": "6101decf99cdabddc04913d85289d3e9cfe646498da16596e69b89c4493a8bfc"
+  },
+  "archives": [
+    {
+      "path": "experiments/results/cnf-variable-elimination-frontier/archive-baseline.sqlite3.gz",
+      "database_sha256": "a20246fcf466ce54a9b1d82b29664d51816424116ff04b2a641c6943fe503833",
+      "bytes": 20000768
+    },
+    {
+      "path": "experiments/results/cnf-variable-elimination-frontier/archive-pure.sqlite3.gz",
+      "database_sha256": "82e69cf66f79134f0e183534e95556d4713ae4838036e9bce083a5028a5069b5",
+      "bytes": 22454272
+    },
+    {
+      "path": "experiments/results/cnf-variable-elimination-frontier/archive-bounded.sqlite3.gz",
+      "database_sha256": "5f324705c693456f1030f880915d85ff654531ba518c791f8b0dae3d140401e4",
+      "bytes": 26185728
+    },
+    {
+      "path": "experiments/results/cnf-variable-elimination-originals/archive-baseline.sqlite3.gz",
+      "database_sha256": "23a6c2f51688338bc45b39478010fe67bf54427ff42d3a5c4c0a01de822d7d0d",
+      "bytes": 605675520
+    },
+    {
+      "path": "experiments/results/cnf-variable-elimination-originals/archive-pure.sqlite3.gz",
+      "database_sha256": "59b20b2e7619d6a76e967175e007f68fbbdb6a6867a0ae4ddffc56d4b7f57e30",
+      "bytes": 627138560
+    },
+    {
+      "path": "experiments/results/cnf-variable-elimination-originals/archive-bounded.sqlite3.gz",
+      "database_sha256": "18bb13efdd2690f988a3a33ce3569bf654ee29144ae1ef2b0f6e64f12536f473",
+      "bytes": 621146112
+    }
+  ],
+  "closures": {
+    "frontier": {
+      "baseline": 0,
+      "pure": 14,
+      "bounded": 37
+    },
+    "originals": {
+      "baseline": 0,
+      "pure": 11,
+      "bounded": 29
+    }
+  },
+  "python_tests": 501,
+  "lean_declarations": 4168,
+  "lean_theorems": 2004,
+  "old_proof_blocks_preserved": 63,
+  "unique_labels": 225,
+  "matched_residual_evidence": true,
+  "runtime_fingerprints_match": true,
+  "analysis_sha256": "602c6a4a0fb186efe618f949fa296614fd4cc50518e6399d6ecddc9d7d64510e",
+  "manuscript_sha256": "347899f67700a8bf7e466a9b257e2bcfa04b460d5da9f72e10d6cfbd81190500",
+  "pdf_sha256": "3d08534ed63f59b264952178940fc2ffa9ba36249669a6d1b76ef3dc31e1910c",
+  "lean_source_sha256": "cf682fbcef5c7ec9cceadd34bed5887509a43fe1355c0d184b0799f21d127e8c",
+  "limitations": [
+    "The full 1497-source corpus was not rerun; whole-input gains refer to its 83 prior unresolved inputs",
+    "Lean establishes the semantic projection identity, not a refinement of the Python implementation"
+  ]
+}

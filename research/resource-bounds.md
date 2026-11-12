@@ -2045,3 +2045,35 @@ keeping the candidate disabled, not a universal timing claim. They demonstrate
 why a lower operation count must include the changed operation mix. Full prepared
 coverage and storage are not remeasured by these controls. Further scalar cache
 tuning is lower priority than checked transformations of unresolved cores.
+
+
+## 2026-11-12: non-growing elimination can still grow the proof history
+
+The [bounded-elimination extension](variable-elimination.md) validates and indexes
+L source literal occurrences, sorts n candidates by opposing occurrence counts,
+then tries at most K=64 variables with at most B=64 opposing pairs each. Discovery
+charges source and removed-clause accounting plus O(K B w) expected set work for
+width w. The independent checker rescans the source, enumerates the chosen pairs
+and sorts the complete target. Integer bit costs, hashing/comparison and sorting
+are additional; this is not a bit-cost or constant-time-hash guarantee.
+
+Every accepted step reduces variable count without increasing clauses or literal
+occurrences. An elimination chain has at most the original n such steps. Nothing
+ensures another acceptable step exists or bounds the hardness of its final core.
+Other discovery, branching and ordinary fallback costs remain. Per active step,
+indices and candidate resolvents use O(L+B w) logical slots, plus output/sorting
+containers; suspended recursion and decoded proof graphs are separate liabilities.
+
+The certificate names one variable, but its node retains the source, profile,
+child key and all previous obligations. On 99 saved leaves, pattern nodes grow
+99 -> 587 and complete database bytes 20,000,768 -> 26,185,728. Four-case peak
+Python allocation grows 718,814 -> 1,923,674 bytes. The new path closes 37 leaves
+but costs more overall. On the original 83 misses with paid preparation, it closes
+29 sources while total query time grows 64.76503 -> 80.09857 seconds and complete
+archive bytes grow 605,675,520 -> 621,146,112. Ordinary solver search is unchanged.
+
+Growth rejection accounts for 156,757 of 167,129 candidate tests in that original
+subset. This motivates measuring reuse or cheaper rejection, not assuming higher
+caps solve the bottleneck. Cold verification, model reconstruction, serialization
+and retained graph memory remain explicit. There is no unrestricted SAT resource
+bound or smaller-history guarantee from per-step formula shrinkage.

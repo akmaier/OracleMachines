@@ -1,5 +1,25 @@
 # Executed reuse and persistence study
 
+## Checked bounded variable elimination
+
+The [99-leaf comparison](results/cnf-variable-elimination-frontier/README.md)
+separates baseline, pure-only elimination and complete bounded resolution. They
+close 0/14/37 saved unresolved leaves. The
+[83-original comparison](results/cnf-variable-elimination-originals/README.md)
+uses matched paid preparation and closes 0/11/29 original sources, with higher
+query time and retained storage. Every new elimination edge is independently
+checked and both endpoints are solved for a separate model-lift diagnostic.
+The ordinary decision solver still runs on the original CNFs.
+
+```sh
+python3 experiments/compare_cnf_variable_elimination.py --suite frontier --output /tmp/bve-frontier-new
+python3 experiments/compare_cnf_variable_elimination.py --suite originals --output /tmp/bve-originals-new
+```
+
+Use new directories and keep tests, builds and analysis out of timed runs. These
+are selected prior failures, not a fresh holdout or full-corpus rerun. See
+[the exact projection and costs](../research/variable-elimination.md).
+
 ## Clause sharing and a failed mask cache
 
 The [overlap and pilot](results/cnf-clause-mask-pilot/README.md) measure smaller

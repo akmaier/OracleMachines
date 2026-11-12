@@ -12,7 +12,53 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: bounded pivot changes mostly reconverge
+## Current investigation: later ancestors reduce acquisition, not unresolved coverage
+
+The [matched ancestor study](frontier-pivots.md) starts from the exact union of
+both prior pivot histories, including their 345 original-suite trials. It compares
+the first four open elimination ancestors with four ancestors nearest selected
+unresolved terminals, keeping the same interaction-first candidate order and
+pair/growth caps. Prior trials are checked and reused; each open input can acquire
+at most eight **new** trials. That cap still does not bound descendant discovery.
+
+On the 83 originals, early search acquires **145 trials / 266 new nodes** in
+**3.76670 resident expansion seconds**. Near-frontier search acquires **102 trials /
+90 nodes** in **1.75051 seconds**. Both retain **31/83** closures, with no closed
+replacement. Near-frontier search reconverges in **82/102** trials; 20 trials
+reach novel selected leaves, but none closes. The growth limit rejects 6,388 of
+6,640 constructed candidates there. This is a narrower, cheaper exploration on
+these inputs, not a same-work SAT speedup or a coverage improvement.
+
+The seed costs **752,304,128 bytes** and **64--68 seconds** to verify before
+resident search. Full cold checking is another **107--110 seconds**, and separate
+trial replay costs **62 seconds**, with overlapping dependencies charged. The
+frontier delta is **3,018,752 SQLite / 165,286 compressed bytes**, versus
+**6,807,552 / 382,806** for early search. Repeated controls retain **88/96** in both
+modes, adding 10 versus 12 new trials. All previous rows and failed acquisitions
+are preserved. The earlier full prepared measurement remains **902/985**.
+
+All **531 tests** pass. The new original deltas share 57 pattern rows / 29 trial
+rows and add **299 unique nodes / 218 trials** together. The latest reusable
+union now holds **41,299 pattern nodes / 563 trials**, plus every earlier source
+binding and ordinary solver proof. Use the linked study's updated resume recipe.
+
+1. **Test coupled deviations at retained divergent states with a new-state cap.**
+   A later ancestor alone does not supply coverage at the tested limits. Keep
+   source/configuration/depth identities and exact recomposition, and account for
+   every newly acquired descendant rather than only entry targets. Distinguish
+   this from relaxing the intermediate growth allowance.
+2. **Explain the admission barrier before another broad sweep.** About 96% of
+   near-frontier constructed candidates violate the current growth cap. Investigate
+   a concrete interacting-variable structure that could permit a useful coupled
+   continuation, including its intermediate clauses and recognition cost. Fewer
+   literals or a novel residual are not successful-closure criteria.
+3. **Reuse the compatible histories and retain the negative controls.** Candidate
+   preparation still runs on cache hits; seed checking and cold replay dominate
+   the measured elapsed work. Peak process memory, an independent holdout and a
+   competitive incremental solver comparison remain separate gaps. Other ancestor
+   choices and unselected branches are not exhausted by this experiment.
+
+## Previous investigation: bounded pivot changes mostly reconverge
 
 The [bounded-pivot study](pivot-alternatives.md) tests at most four earlier open
 elimination ancestors and eight full alternative target recognitions per open

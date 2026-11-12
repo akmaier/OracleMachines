@@ -4896,3 +4896,29 @@ hashes are in the study and validation record; later runs should reuse this unio
 rather than discard the unsuccessful acquisitions. Every constituent graph has
 passed full cold checking. The final PDF preserves 63 existing proofs, has 230
 unique labels, builds without warnings and passes visual review on pages 135--137.
+
+## 12 November: reuse failed trials and test later elimination ancestors
+
+Implemented a near-frontier ancestor schedule and a matched early-ancestor
+control, both starting from the exact union of the two prior pivot histories.
+Prior source/pivot/configuration trials are independently checked and reused;
+only new trials spend the eight-entry budget. All old rows, including trial
+records, are protected against modification. New deltas are relative to that
+merged seed, with exact reconstruction, idempotence and cold/trial checks.
+
+On selected originals, early search acquires 145 trials / 266 nodes and frontier
+search 102 / 90; coverage remains 31/83. Frontier acquisition costs 1.75051 seconds
+versus 3.76670, with fewer trials and separate 64--68-second seed verification.
+Its new SQLite delta occupies 3,018,752 bytes versus 6,807,552. Repeated controls
+add 10 / 12 trials and retain 88/96. These are negative coverage results, not a
+solver speedup. The [study](frontier-pivots.md) records the preparation, graph
+traversal, cold replay, storage and discovery limitations. Next: bounded coupled
+continuations at retained divergent states, rather than an unmotivated larger
+one-pivot sweep. No formal or manuscript theorem was changed.
+
+All **531 tests** and the artifact validation pass. The two new original deltas
+combine without conflicts, sharing 57 pattern rows / 29 trial rows. Their union
+adds 299 unique pattern nodes / 218 trials; the complete original history now
+retains 41,299 pattern nodes and 563 trials. The repeated-control union adds
+25 nodes / 20 trials, reaching 24,982 nodes and 65 trials. The study's latest
+resume recipe and validation digests preserve this work for the next iteration.

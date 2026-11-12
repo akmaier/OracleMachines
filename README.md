@@ -28,13 +28,15 @@ classes.
 
 ## Paper
 
-The latest [pivot-order investigation](research/pivot-alternatives.md) retains
-bounded alternative projections over the existing proof graph. Most tested
-orders reconverge: 295/316 first-schedule trials reach the same selected unresolved
-cores. Prioritizing interacting pivots adds no original-source coverage either;
-these negative results and all acquired proofs persist as base-bound deltas.
-All **527 tests** pass. The next gap is discovering useful divergent continuations,
-with an explicit cap on newly explored states.
+The latest [ancestor-selection investigation](research/frontier-pivots.md) reuses
+both saved pivot histories and compares early ancestors with ancestors near the
+unresolved leaves. Near-frontier search acquires fewer new nodes (90 versus 266
+on the selected originals), but neither schedule improves the 31/83 coverage.
+It still reconverges in 82/102 new trials. All checked results persist as deltas;
+the next gap is useful coupled continuations under a distinct-new-state budget.
+All **531 Python tests** pass.
+The [preceding pivot study](research/pivot-alternatives.md) preserves the original
+reconvergence evidence and interaction-priority control.
 
 The preceding [subset-search investigation](research/anchored-subsets.md) preserves
 the exact recognition certificates while filtering impossible subsumers by a

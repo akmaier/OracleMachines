@@ -2219,3 +2219,24 @@ can be shared across schedules only when its payload agrees exactly; applying
 a delta rejects conflicting existing values. Peak process/RSS and native memory
 remain unmeasured. The existing Lean projection theorem and conditional chain
 bounds are unchanged; they do not bound this full exploratory history.
+
+## Near-frontier ancestors and reuse of prior trials (12 November)
+
+The [matched ancestor study](frontier-pivots.md) adds a complete selected-open-DAG
+traversal and longest-path heights. With V nodes, E edges and M elimination
+ancestors, selection costs O(V+E+M log M) graph/container work and O(V+E) scratch,
+before source loading/checking and integer encoding costs. Candidate construction
+and its retained target lists have the preceding bounds. Exact prior trials are
+checked and skipped, but their candidates are still generated and ranked. An
+eight-new-trial cap bounds neither inherited recognizer descendants nor peak RAM.
+
+The original-suite merged seed occupies 752,304,128 bytes. Early / frontier
+search adds 266 / 90 nodes and 145 / 102 trials, taking 3.76670 / 1.75051 seconds
+of resident expansion after 67.85165 / 64.16580 seconds of seed checking. Their
+working databases reach 759,062,528 / 755,269,632 bytes; new-row deltas occupy
+6,807,552 / 3,018,752 SQLite bytes (382,806 / 165,286 compressed). Full cold audit
+costs 110.13683 / 107.31572 seconds, plus separate trial replay of 62.42473 /
+61.62448 seconds. These passes overlap in checked dependencies and are additional
+to expansion. Fewer admitted candidates and new trials explain some of the cost
+difference; coverage is unchanged. Neither a minimum-cost expansion guarantee,
+a same-work SAT speedup nor a full-history process-memory bound follows.

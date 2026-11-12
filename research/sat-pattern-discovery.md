@@ -1106,3 +1106,22 @@ useful divergent continuation, with exact-state reuse and a cap on newly explore
 states. Later ancestors and coupled deviations remain untested. Compatible new
 proof rows are retained as base-bound deltas, keeping every failed exploration
 available for future reuse. All 527 tests pass; formal semantics are unchanged.
+
+## 12 November: moving deviations toward unresolved terminals
+
+The [ancestor-selection study](frontier-pivots.md) tests the previous later-node
+gap explicitly. Both schedules reuse the union of all prior pivot proof graphs
+and failed trials. Nearest-terminal selection ranks elimination nodes by longest
+selected open path to a terminal and tries four, versus the early four-node
+control. Both receive eight new trials per open input, with exact prior trials
+checked and skipped rather than reacquired.
+
+The frontier schedule adds 102 trials / 90 recognition nodes on the originals,
+versus 145 / 266 for the control. Neither improves 31/83 coverage. Twenty trials
+in each expose new selected leaves, and the frontier schedule still reconverges
+in 82/102 trials. On the repeated control, frontier search exposes changed leaves
+in 7/10 trials, but all seven increase unresolved literal count; coverage remains
+88/96. Novelty, smaller local size and a later ancestor are insufficient endpoint
+signals in these tests. This is evidence to narrow the next search toward coupled
+changes at retained divergent states, with an explicit descendant-state budget.
+It neither exhausts later ancestors nor supplies a tractable partition of all CNFs.

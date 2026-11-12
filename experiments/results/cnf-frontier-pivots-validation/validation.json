@@ -1,0 +1,95 @@
+{
+  "script_sha256": "cb07d378420683de5cd5c60e7676d5a57f52b39c8a5e1faad28ad1497321729e",
+  "evidence": [
+    {
+      "suite": "originals",
+      "policy": "early",
+      "report_sha256": "6ff5ccb1dcd79b7ee192a2cc6a399f272b42d3a875189e83371bde8c3cdcaa5b",
+      "closed": 31,
+      "new_trials": 145,
+      "delta_sha256": "66f08013679550c6cec256529af40a515bb1a102728de93d8eda2a28bbbd5f92"
+    },
+    {
+      "suite": "originals",
+      "policy": "frontier",
+      "report_sha256": "16fa630e0c88df3b6ff7a326f04a6d9842dc05d31f920d28dd0047b8ec46a11c",
+      "closed": 31,
+      "new_trials": 102,
+      "delta_sha256": "1d473898b7583a1539a9ea3973f501ede13ff398af9cf18af14182b7092b56dd"
+    },
+    {
+      "suite": "fresh",
+      "policy": "frontier",
+      "report_sha256": "da469fc9fcfa1fd7fcebe3a1112e3c6f6a47501ede5d94763b68c7928c033689",
+      "closed": 88,
+      "new_trials": 10,
+      "delta_sha256": "645d47ac4aa3f829b0be7499d68c99037e9adec813be30bb4d5f708af4e1e63b"
+    },
+    {
+      "suite": "fresh",
+      "policy": "early",
+      "report_sha256": "f5334d8a9bd93cbb16b59e2a37c39805160d93599d46c06724ecf7e4c99883a4",
+      "closed": 88,
+      "new_trials": 12,
+      "delta_sha256": "cc0a2d3cde61af96360642b47a045addf49788d60371e5993cf30cfb2c2b0c63"
+    }
+  ],
+  "compatible_unions": [
+    {
+      "suite": "originals",
+      "report_sha256": "ff448607a5b523dd7710292356bf2e6c01e81df9b6d82325739ae861206a6d35",
+      "identical_overlap_rows": {
+        "cnf_patterns_v1": 57,
+        "cnf_pivot_trials_v1": 29
+      },
+      "merged_table_digests": {
+        "cnf_patterns_v1": {
+          "rows": 41299,
+          "sha256": "796223e93e95a758342b892d45ecb2f5a2ffe92db9284ccb6e537d52048e4a16"
+        },
+        "cnf_pattern_sources_v1": {
+          "rows": 1548,
+          "sha256": "17e47903910af67166eda68cf6ceca1b01d5e45fb6a1da1ee79a9361f8241566"
+        },
+        "cnf_residual_v1": {
+          "rows": 21838,
+          "sha256": "fa9f00d0fd3036022ed0c51cef48a28e2ede054071eaeb19c29f07fb19fa8ef1"
+        },
+        "cnf_pivot_trials_v1": {
+          "rows": 563,
+          "sha256": "7b76df27b7b6a27d925bb6453e90c0eb77503e34861a490b204a355d4c2e2660"
+        }
+      },
+      "limitation": "Each constituent passed full cold and trial checking; union checks immutable payload agreement, logical row counts and SQLite integrity, not an extra full merged cold replay."
+    },
+    {
+      "suite": "fresh",
+      "report_sha256": "81bcba6a4d247d0ad4dc12d3948c524115faede9e7f9617ef8ec4d1ac5ef243c",
+      "identical_overlap_rows": {
+        "cnf_patterns_v1": 6,
+        "cnf_pivot_trials_v1": 2
+      },
+      "merged_table_digests": {
+        "cnf_patterns_v1": {
+          "rows": 24982,
+          "sha256": "e247233e61cf3c7a0b5c95f9a1468357b533ff8a7046681a7954c35ded151dd4"
+        },
+        "cnf_pattern_sources_v1": {
+          "rows": 1561,
+          "sha256": "786b582c363f2d33269139477bd4595cc8a9b3e3a1e6adaa37a1184fc93c70ad"
+        },
+        "cnf_residual_v1": {
+          "rows": 23116,
+          "sha256": "67691ae7f8c1c3f0168c9a16d636424385f13b404c1c1f00a947ce5329159b55"
+        },
+        "cnf_pivot_trials_v1": {
+          "rows": 65,
+          "sha256": "33be1ecf98d6faad59193989e20b763cfcf6c370af1a1d83449e000083e622b2"
+        }
+      },
+      "limitation": "Each constituent passed full cold and trial checking; union checks immutable payload agreement, logical row counts and SQLite integrity, not an extra full merged cold replay."
+    }
+  ],
+  "python_tests": 531,
+  "unchanged_paper_and_formal_since": "16fdf79"
+}

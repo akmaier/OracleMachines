@@ -192,3 +192,7 @@ no extra full merged cold audit is claimed.
 All 527 tests pass. Formal sources are unchanged from the previous audited
 checkpoint. The updated manuscript preserves 63 existing proof blocks and builds
 without warnings; its new subsection and discussion transition pass visual review.
+
+The subsequent [ancestor-selection study](frontier-pivots.md) restores this union
+and adds checked early/frontier search deltas. Use its latest resume recipe and
+union digests for subsequent work so those additional failed trials are retained.

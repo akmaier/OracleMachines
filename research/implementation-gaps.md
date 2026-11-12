@@ -4609,3 +4609,37 @@ against claiming a general benefit. All six compressed archives and every paired
 record are validated. The unchanged Lean audit passes (4,148 declarations /
 1,988 theorems); the manuscript keeps all 63 proof blocks, adds section 12.73,
 builds without warnings and passes visual review of the changed pages.
+
+
+## 2026-11-12: source-identity indexing fails to amortize preparation
+
+Profiled the costly unresolved source 1194 from the old prepared archive. Independent
+reconstruction is the largest individual Python own-time entry. Checkpoint `f6fb244`
+adds an optional checker-owned occurrence index, with exact immutable source binding,
+separate discovery/checker state and a shared 32,768-slot checker budget. All original
+proof reasons and fixed points remain checked. It passed 487 tests before timing.
+
+The 96-input empty-history control retains 88 closures and byte-identical databases,
+but discovery regresses 6.36510 -> 6.63704 seconds and total 7.54255 -> 7.89263. Only
+658/15,071 reconstruction calls hit. Preparing nearly every source adds enough work
+to erase the avoided untouched-clause scans. Sampled Python peak increases. Both
+complete archives and failed timing evidence are retained, not promoted.
+
+A 32-fold capacity increase on source 1194 leaves 80/2,617 hits across both views.
+An extra exact source/assignment restriction memo also fails in a three-way pilot:
+1.12695 seconds current, 1.17052 indexed, 1.19950 combined. It gets 498 restriction
+hits but only 141 checker-index hits. Three additional tests verify its reuse, type
+fallbacks, budget behavior and byte-preserving replay; the full 490-test suite passes.
+
+A no-eviction observer proves the measured identity limit is not eviction: 2,537
+retained source identities contain only 2,167 exact CNF values, with 370 duplicate
+admissions. Exact whole-source interning has limited headroom here. Next measure
+reuse of unchanged clause blocks and checked deltas across related but unequal
+residuals; avoid repeating the earlier per-clause cache regression. No full new
+prepared-corpus benchmark was justified after these negative controls. Historical
+optional coverage stays 902/985; no new coverage or unrestricted bound is claimed.
+
+The unchanged Lean audit passes (4,148 declarations / 1,988 theorems). The manuscript
+keeps all 63 proof blocks, adds section 12.74, builds warning-free and passes visual
+review. [Mechanism and limits](indexed-check.md), [preserved diagnostics](../experiments/results/cnf-indexed-check-profile/README.md)
+and the priority record retain the next target and the unsuccessful alternatives.

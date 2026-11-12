@@ -300,6 +300,14 @@ no traces, and the fresh control runs slower. All **481 tests** pass. The
 83 unresolved sources, which consume about 83% of discovery time.
 
 
+The [independent reconstruction investigation](research/indexed-check.md) found a
+limit to source-identity caching: the 96-input control regressed, and a 32-fold
+larger cache left hard-case hits unchanged. A no-eviction audit found 2,167 distinct
+CNFs among 2,537 source objects, so exact whole-formula sharing has limited headroom
+there. Both unsuccessful candidates and their evidence remain optional; the next
+target is checked reuse across related residuals. All **490 tests** and the unchanged
+Lean audit pass. No new structural coverage is claimed.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

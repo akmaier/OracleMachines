@@ -12,7 +12,56 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reusable evidence from unsuccessful expansion
+## Current investigation: exact object identity misses reusable structure
+
+A cold-cache profile of source 1194 identifies independent reconstruction as the
+largest individual Python own-time cost: **2,617 calls / 0.33136 own seconds** in
+a 3.08000-second instrumented query. The optional [checker source index](indexed-check.md)
+was implemented and tested, but its first matched control failed to improve cost.
+On 96 inputs with empty history, discovery changes **6.36510 -> 6.63704 s**,
+total **7.54255 -> 7.89263 s**, and sampled Python peak **615,971 -> 738,163 bytes**.
+All answers, evidence and 88 closures agree; storage is unchanged. No default changes.
+
+The key result is the failed reuse mechanism. Only **658 / 15,071** checks hit the
+source-identity index. Preparation examines **4,054,848** literals, followed by
+**471,454** affected-clause literal visits; the old scan examines **4,173,407**.
+Avoiding unaffected scans did not avoid rebuilding nearly all indexes. On source
+1194, raising the budget **32-fold** leaves both views together at exactly
+**80 / 2,617 hits**, with **2,537 admissions** and **858,647 preparation literals**.
+Capacity alone does not fix this measured case.
+
+An additional bounded source-identity/assignment memo for restricted results was
+also preserved. In the same isolated source it gets **498 / 3,231** restriction
+hits, but checker hits only rise to **141 / 2,617**. Timings are **1.12695 s** for
+the existing implementation, **1.17052 s** for indexing alone and **1.19950 s** for
+the combined candidate. These are single ordered diagnostics, not general ratios.
+The negative control and pilot did not justify a full 1,497-input expansion run.
+The candidates remain separate, experimental and unpromoted.
+
+A no-eviction audit bounds the exact-whole-source opportunity: **2,537 distinct
+source objects represent 2,167 distinct CNFs**, leaving **370 duplicate admissions**
+(14.58% of object admissions). There are still only 80 identity hits. Holding all
+sources costs 2,215,640 logical index slots in this diagnostic. Exact tuple interning
+could at most eliminate those 370 duplicate admissions here, before its own hashing,
+equality and retention costs. It cannot combine the 2,167 different CNFs.
+
+Next investigate **checked reuse across related but unequal residuals**, especially
+unchanged clause blocks and small assignment deltas. First measure their overlap
+and how much preparation can be updated locally while preserving source binding,
+clause order and unit-reason positions. The older clause-support cache already
+regressed, so reuse its negative evidence rather than repeating a dictionary lookup
+per clause without an amortization argument. Exact whole-CNF interning is a smaller
+bounded opportunity in this case, not the main expected win. Charge discovery,
+local verification, invalidation, output assembly and retained space; a shared
+representation does not by itself justify cheaper independent checking.
+
+Broader equivalent-core transport, checked binary variable elimination, selected
+closed-proof checking and later append-only upgrades remain open. The latest full
+prepared result is still the earlier **902/985**, with 83 unresolved sources; these
+new controls establish no coverage gain. See [profile and failed pilots](../experiments/results/cnf-indexed-check-profile/README.md)
+and [matched empty-history evidence](../experiments/results/cnf-indexed-check-empty/README.md).
+
+## Previous investigation: reusable evidence from unsuccessful expansion
 
 Cost attribution changes the immediate priority: the **83 unresolved inputs use
 67.35991 / 81.41598 discovery seconds (82.74%)** in the accounted run. Directly

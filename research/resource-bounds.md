@@ -1992,3 +1992,29 @@ Python peak is 24,164,349 -> 24,199,805 bytes; native SQLite, RSS and full-histo
 peak are excluded. There is no storage or demonstrated memory saving. Empty
 history supplies no traces. These single timing comparisons do not establish a
 stable small speedup, broader coverage or a better worst-case SAT bound.
+
+
+## 2026-11-12: the preparation cost defeats source-identity reconstruction indexes
+
+A source index can reduce later reconstruction from scanning L literal occurrences
+to O(a+o+m+L_T) expected dictionary/set work for a assignment entries, o visited
+postings, m ordered output positions and L_T affected literals. Admission still
+costs O(m+L), with integer bit costs and container overhead additional. The new
+[checker-owned index](indexed-check.md) keeps 32,768 logical slots, independent of
+the discovery index, and preserves every proof obligation. No fixed-byte/RSS or
+first-use speedup follows.
+
+On the 96-input empty-history control, only 658/15,071 calls reuse an index. New
+preparation plus affected reconstruction visits 4,526,302 literals versus 4,173,407
+for the old scan. Discovery and sampled memory regress. Raising capacity 32-fold
+in the isolated hard-source diagnostic leaves hits unchanged. Holding all sources
+without eviction uses 2,215,640 index slots; an observer identifies only 370 duplicate
+whole-CNF admissions among 2,537 objects. Its analysis sets are additional memory,
+not a production bound or optimization. A separate 32,768-slot restriction-result
+memo also fails to demonstrate a saving. The unchanged 33,460,224-byte control
+archives preserve all evidence; no historical state is freed.
+
+The next proposed representation must reuse smaller shared structure across unequal
+residuals and charge checking, stable reason positions, hashing/equality if used,
+maintenance, output assembly and invalidation. These failed candidates supply no
+new asymptotic SAT bound or full prepared-corpus result.

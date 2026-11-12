@@ -932,3 +932,20 @@ attention from closed-proof references to their still-expensive intermediate
 checks and transformations. Exact transport into shared cores and checked binary
 variable elimination remain coverage candidates. Default coverage stays 898/985;
 prepared optional coverage stays 902/985. No polynomial bound is established.
+
+
+## 2026-11-12: distinguish equal CNFs from shared structure across different CNFs
+
+The [reconstruction investigation](indexed-check.md) finds little amortization from
+source-object indexing. A no-eviction audit of source 1194 observes 2,537 source
+objects but 2,167 distinct exact CNFs. Only 370 admissions could be removed by exact
+whole-CNF interning before charging recognition. The 96-input control and isolated
+restriction-memo pilot regress; neither candidate is promoted. No new family closes.
+
+The next discovery-supporting question is whether different branch residuals share
+clause blocks or small checked edits that permit cheaper recognition and independent
+checking. Preserve source bindings, clause order and reason positions. The previous
+clause-support cache already regressed, so overlap alone is insufficient: a useful
+pattern must avoid more work than recognizing and maintaining it adds. The earlier
+83 unresolved original inputs remain the coverage target; these local diagnostics
+are not a new full-corpus or unrestricted-SAT result.

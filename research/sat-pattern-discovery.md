@@ -1066,3 +1066,20 @@ Small-budget alternative orders and explicit failed lookahead records are more
 informative than assuming larger clause-growth budgets will improve coverage.
 The current optional policies are not promoted. The full-corpus baseline remains
 902/985; these selected old failures do not update that measurement.
+
+## 12 November: reuse a necessary condition inside subset recognition
+
+The [subset follow-up](anchored-subsets.md) finds no repeated ordered CNF within
+independent proposal or checking roles on the costly retained trace. Whole-input
+caching has zero hits there. A required-literal posting index instead skips
+impossible retained subsumers, preserving exact first-witness certificates and
+all source-level classifications. Independent checking rebuilds its own index.
+Lean proves the abstract filtering and witness-order lemmas; all 521 tests pass.
+
+This is supporting cost work, not broader coverage. Matched histories must be
+byte-identical, so failed alternatives and prior proofs remain available. The
+shared-literal regression and extra temporary index allocation are retained.
+The next discovery question remains whether a small, charged set of alternative
+pivot orders exposes a useful endpoint on the stalled cores. Local variable
+reduction, a larger allowance and a conditional small-chain bound have already
+failed to supply such progress in the preceding additive experiment.

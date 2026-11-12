@@ -12,7 +12,59 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: useful endpoints, not just more admissible steps
+## Current investigation: exact subset filtering; useful orders remain the coverage gap
+
+The [required-literal index](anchored-subsets.md) addresses the preceding profile's
+largest own-time function while preserving every recognition outcome. The costly
+source's 1,694 calls have **zero exact-input cache hits within either independent
+role** (843 proposals / 851 checks). A whole-input LRU is therefore not the useful
+reuse mechanism on this trace. A per-call anchor index filters impossible subset
+candidates instead, retaining the old first-witness order and separate checking.
+
+Five alternating-order kernel replays reduce the selected trace median from
+**1.116163 to 0.556901 seconds**. Actual subset tests fall from **4,904,264 to
+150,503**. Shared-literal controls can regress, and traced kernel peak rises from
+84,047 to 88,045 Python bytes. These are kernel results, not a general SAT ratio.
+All **521 tests** and the **4,219-declaration / 2,031-theorem** Lean audit pass.
+The formal lemmas establish the necessary condition and first-match preservation;
+Python refinement and total machine-cost proofs remain open.
+
+The saved 57-leaf complete comparison falls from **4.54924 to 4.06818 seconds**
+query and **1.73407 to 1.53721 seconds** cold checking, with the exact same
+19,894,272-byte database and zero closures. Stored graphs and results are unchanged.
+The optional index does not promote the previous negative additive-growth policy.
+
+On the 83 original prior misses, matched query time falls **155.78451 ->
+139.68494 seconds (10.33%)**, discovery **153.95887 -> 137.57819**, and complete
+cold checking **111.46828 -> 102.79093 (7.78%)**. Both close exactly **31/83** and
+reproduce the same **734,814,208-byte** archive, preserving all prior rows.
+Four-source peak Python allocation is effectively unchanged at 17.35 MB; this
+sample excludes native memory and full-history peak. No faster ordinary solver,
+smaller history or new closure is claimed.
+
+The repeated 96-input control retains **88 closures** and identical bytes. Query
+time falls **14.44058 -> 13.76681 seconds (4.67%)**; cold replay is essentially
+unchanged at **50.73523 / 50.49557**. A shared prefix and other pipeline costs
+limit the kernel gain's effect on full acquisition. These are single matched
+runs, with adverse controls retained and no untouched holdout.
+
+1. **Find useful alternative orders under an explicit total discovery budget.**
+   Test whether a small set of pivot choices exposes units, binary implications,
+   separators, affine structure or another recognized endpoint. Validate success
+   back to the original source. Charge unsuccessful lookahead and all index work.
+   Do not automatically raise growth limits: the previous extra 2,530 valid edges
+   gained zero source closures.
+2. **Target remaining repeated work with evidence.** The zero-hit trace rules out
+   whole-input proposal/check caching as the next shortcut on this source. Exact
+   structural reuse across neighboring inputs needs changed-clause, implication
+   origin and witness-order dependencies; those are not supplied by this ephemeral
+   index. Reprofile after a coverage change before choosing further micro-optimization.
+3. **Measure transfer and account for retained evidence.** Current inputs are
+   selected failures and reused controls. Untouched holdouts, a common incremental
+   CDCL comparison and full-history peak memory remain open. This index changes
+   neither archived bytes nor the earlier full prepared result **902/985**.
+
+## Previous investigation: useful endpoints, not just more admissible steps
 
 The [fixed additive experiment](additive-elimination.md) implements independently
 checked allowances of one and two clauses after earlier rules fail. Lean now

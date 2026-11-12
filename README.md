@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+The latest [subset-search investigation](research/anchored-subsets.md) preserves
+the exact recognition certificates while filtering impossible subsumers by a
+required literal. Whole-input caching has zero hits within independent proposal
+and checking roles on the retained costly trace. The optional index instead
+reduces candidate work within each call; it changes no structural coverage or
+stored results. All **521 tests** and the Lean audit of **4,219 declarations /
+2,031 theorems** pass. Matched costs and adverse controls are retained in the study.
+
 The next iterations prioritize [SAT pattern discovery](research/sat-pattern-discovery.md):
 an exact classification covering all valid CNFs, explicit unresolved cases and
 checked decomposition across interacting classes. Known-family optimization

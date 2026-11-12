@@ -2166,3 +2166,25 @@ a useful endpoint. The two-clause endpoint diagnostic additionally retains a
 query-acquisition storage; neither number measures full-process peak memory.
 Matched original-source and repeated-control measurements are recorded in the
 linked study, with all phase costs and limitations.
+
+## Required-literal subset index (12 November)
+
+The [subset-index follow-up](anchored-subsets.md) stores one posting per retained
+nonempty clause and rebuilds it separately for discovery and checking. On its
+indexed, distinct-literal path, with m
+clauses and L literal occurrences, its sets, frequencies, postings and candidate
+array use O(L+m) temporary logical space. Setup costs O(L+m log m) expected
+container work. Target j then visits Q_j posting entries, sorts q_j eligible
+ranks, and performs r_j subset tests at width at most w_j, giving the account
+O(L+m log m+sum_j(Q_j+q_j log(q_j+1)+r_j*w_j)). This excludes integer encoding,
+hashing/comparison bit costs and allocator overhead. Q_j can approach m;
+quadratic candidate work and sorting overhead remain possible.
+
+The full ordered-CNF cache simulation has zero hits within either independent
+role on the selected 1,694-call trace. No cross-source cache is added. Filtering
+preserves exact first witnesses and therefore leaves the retained graph and
+database bytes unchanged. Kernel allocation rises from 84,047 to 88,045 traced
+Python bytes; this is not RSS or full-workload peak. Uniform-width inputs use
+the old duplicate lookup; shared-literal inputs can still regress. The Lean
+lemmas prove necessary-condition and order preservation, not these cost bounds
+or runtime refinement. No polynomial arbitrary-SAT bound follows.

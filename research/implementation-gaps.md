@@ -4835,3 +4835,32 @@ The current gap is useful order/endpoint discovery and avoiding unsuccessful
 repeated recognition. Valid steps and a small formula bound are insufficient
 progress criteria. The ranked [priority record](structural-reuse-priorities.md)
 retains the controls, limits and next target. Default policy remains unchanged.
+
+## 12 November: required-literal filtering preserves exact subset certificates
+
+Added optional anchored subset inventories, leaving the earlier runtime classes
+and archives intact. A retained nonempty clause is stored under one required
+literal; candidate ranks preserve the earlier first-witness order. Empty clauses
+and equal-width duplicates are explicit, with fallback for uniform-width and
+repeated-literal inputs. Independent checking validates every witness and builds
+its own index from the actual source. Original implication origins remain bound
+to checked source traces. No cross-source answer cache or invalidation rule is
+assumed.
+
+The [retained study](anchored-subsets.md) records a negative whole-input cache
+result, exact kernel comparisons and complete acquisition/cold comparisons.
+All 521 Python tests and the Lean audit of 4,219 declarations / 2,031 theorems
+pass. The three new abstract lemmas prove necessary-literal completeness and
+first-match preservation, not Python refinement or machine costs. Coverage and
+stored results are unchanged by design; new endpoint-producing discovery and
+full-history memory bounds remain open.
+
+The verified originals comparison reduces query time **155.78451 -> 139.68494
+seconds (10.33%)** and cold checking **111.46828 -> 102.79093 (7.78%)**, with the
+same 31/83 closures and 734,814,208-byte archive. The repeated control improves
+query time by 4.67%, with unchanged 88/96 coverage and bytes; cold time and sampled
+allocation are essentially unchanged. Reversed leaf order also favors the index.
+All eight cold runs and three unique acquisition archive integrity checks pass.
+The source/report validator preserves all 63 earlier proof blocks and checks 229
+unique labels. The 142-page PDF builds without warnings; pages 133--135 pass
+visual review. Evidence and failed cache/control ideas persist in the linked study.

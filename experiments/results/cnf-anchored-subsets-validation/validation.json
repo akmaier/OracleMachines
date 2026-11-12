@@ -1,0 +1,94 @@
+{
+  "script_sha256": "033d86a67605787bec4adb0347dc3b115c03271df610e7a354a4a4bb6bf8478a",
+  "reports": {
+    "remaining": "15356a0b6e93de9b9048d7d0fa7d32024048d8e2ebf1eb06d43f7de7719529f7",
+    "remaining-reverse": "c5b5ae6dda637160017e38a98771b192e9dcbcd4ba1e8582f24860ddaebae644",
+    "originals": "b8f64ef3990a34d73d51e39abef940fd4389a7289c8d108401fc2f1f70c34418",
+    "fresh": "bfd5ea399726454f53037f9f02404427d3ac0f788d8b3a65339a7e389cbe2ea1"
+  },
+  "archives": [
+    {
+      "suite": "remaining",
+      "mode": "baseline",
+      "closed": 0,
+      "database_sha256": "889d78d8aa0d9b6d6e70c0858fd326b61cf8d47d84c7319993a07e22c22177a8",
+      "archive_path": "experiments/results/cnf-additive-elimination-remaining/archive-add_two.sqlite3.gz",
+      "cold_bytes_unchanged": true
+    },
+    {
+      "suite": "remaining",
+      "mode": "anchored",
+      "closed": 0,
+      "database_sha256": "889d78d8aa0d9b6d6e70c0858fd326b61cf8d47d84c7319993a07e22c22177a8",
+      "archive_path": "experiments/results/cnf-additive-elimination-remaining/archive-add_two.sqlite3.gz",
+      "cold_bytes_unchanged": true
+    },
+    {
+      "suite": "remaining-reverse",
+      "mode": "anchored",
+      "closed": 0,
+      "database_sha256": "889d78d8aa0d9b6d6e70c0858fd326b61cf8d47d84c7319993a07e22c22177a8",
+      "archive_path": "experiments/results/cnf-additive-elimination-remaining/archive-add_two.sqlite3.gz",
+      "cold_bytes_unchanged": true
+    },
+    {
+      "suite": "remaining-reverse",
+      "mode": "baseline",
+      "closed": 0,
+      "database_sha256": "889d78d8aa0d9b6d6e70c0858fd326b61cf8d47d84c7319993a07e22c22177a8",
+      "archive_path": "experiments/results/cnf-additive-elimination-remaining/archive-add_two.sqlite3.gz",
+      "cold_bytes_unchanged": true
+    },
+    {
+      "suite": "originals",
+      "mode": "baseline",
+      "closed": 31,
+      "database_sha256": "60950694bba9bba0f33294b2214b28de5415d4d9aad218804da3aa8adf66a5bc",
+      "archive_path": "experiments/results/cnf-additive-elimination-originals/archive-add_two.sqlite3.gz",
+      "cold_bytes_unchanged": true
+    },
+    {
+      "suite": "originals",
+      "mode": "anchored",
+      "closed": 31,
+      "database_sha256": "60950694bba9bba0f33294b2214b28de5415d4d9aad218804da3aa8adf66a5bc",
+      "archive_path": "experiments/results/cnf-additive-elimination-originals/archive-add_two.sqlite3.gz",
+      "cold_bytes_unchanged": true
+    },
+    {
+      "suite": "fresh",
+      "mode": "baseline",
+      "closed": 88,
+      "database_sha256": "7a6c79ac8efd556b43c75994d1c9b75ff19722d04d1015e49eab195f747ea215",
+      "archive_path": "experiments/results/cnf-additive-elimination-fresh/archive-add_two.sqlite3.gz",
+      "cold_bytes_unchanged": true
+    },
+    {
+      "suite": "fresh",
+      "mode": "anchored",
+      "closed": 88,
+      "database_sha256": "7a6c79ac8efd556b43c75994d1c9b75ff19722d04d1015e49eab195f747ea215",
+      "archive_path": "experiments/results/cnf-additive-elimination-fresh/archive-add_two.sqlite3.gz",
+      "cold_bytes_unchanged": true
+    }
+  ],
+  "unique_archives": 3,
+  "trace_report_sha256": "3a3bfb399a130e43951de8cbd9b0546681f87d3531437e1cd21edd04845fca14",
+  "kernel_report_sha256": "13e7759a07e0afc15a6b3fd0477f1fc3eda98a4762185117fda37204b77de526",
+  "python_tests": 521,
+  "lean_declarations": 4219,
+  "lean_theorems": 2031,
+  "old_proof_blocks_preserved": 63,
+  "unique_labels": 229,
+  "manuscript_sha256": "b94effd2183c0ed3c07109289f149f0a0223fa2b33999316b7ba56a8222af85b",
+  "pdf_sha256": "aaff387bfe8af0d0b709d7cad41afdd20334518650ea4305b5fcb2e033499746",
+  "formal_sources": {
+    "formal/OracleMachines/SubsetAnchor.lean": "25ab9c843f4b9610421e423d14b06aeacd6c1e9072df00ee9a8b21d62cc9444f",
+    "formal/OracleMachines/Audit.lean": "a03fff52c3d80a8453740128f36c643b80f3c4d73f1ab9e10401489c1cbdabab"
+  },
+  "limitations": [
+    "Eight full cold runs and three unique byte-identical prior acquisition archives; endpoint evidence is reused by exact archive identity.",
+    "Selected and repeated workloads, not an untouched holdout or full-corpus rerun. No new recognition coverage.",
+    "Lean abstracts the necessary-condition filter and witness order, not Python refinement or machine-cost bounds."
+  ]
+}

@@ -1485,3 +1485,17 @@ or a bound on the branching discovery graph. The earlier exact projection theore
 supplies semantics independently of admission. All **516 Python tests** pass;
 the full Lean build audits **4,216 declarations / 2,028 theorem declarations**.
 See the [optional policy and measured limits](../research/additive-elimination.md).
+
+## Required-literal filtering (12 November)
+
+[`SubsetAnchor.lean`](OracleMachines/SubsetAnchor.lean) proves `anchor_required`,
+`candidate_complete` and `first_match_preserved`. A member of a subsuming clause
+must occur in its target; empty clauses are unconditional candidates. Filtering
+an ordered list with a necessary condition preserves its first successful match.
+The implementation sorts retained candidate ranks to preserve this order and
+rebuilds the index independently during checking.
+
+These are abstract list lemmas, not a refinement of Python postings, sorting,
+equal-width duplicate handling, persistence or cost. All **521 Python tests**
+pass; the full Lean build audits **4,219 declarations / 2,031 theorems**. See
+[the trace, implementation and cost experiment](../research/anchored-subsets.md).

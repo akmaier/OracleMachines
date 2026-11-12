@@ -95,7 +95,11 @@ def main(out):
             assert r['audit'][field] == r['logical_table_digests'][t]['rows']
         assert r['audit']['bytes_unchanged'] and r['trial_replay']['bytes_unchanged']
         for metric, t in [('verified_trials','cnf_pivot_trials_v1'), ('verified_coupled_trials','cnf_coupled_trials_v1'), ('verified_growth_trials',TABLE)]:
-            assert r['trial_replay']['counts'][metric] == r['logical_table_digests'][t]['rows']
+            expected = r['logical_table_digests'][t]['rows']
+            # Each coupled record independently rechecks its retained first
+            # pivot in addition to the full one-pivot-table replay.
+            if metric == 'verified_trials': expected += r['logical_table_digests']['cnf_coupled_trials_v1']['rows']
+            assert r['trial_replay']['counts'][metric] == expected
     tests = Path('/tmp/oraclemachines-growth-tests.log').read_text()
     assert re.search(r'Ran 538 tests in [0-9.]+s\s+OK', tests)
     (out / 'full-validation.txt').write_text(tests)

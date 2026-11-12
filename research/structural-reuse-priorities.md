@@ -12,7 +12,62 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: remove archive scans; return to discovery costs
+## Current investigation: reusable evidence from unsuccessful expansion
+
+Cost attribution changes the immediate priority: the **83 unresolved inputs use
+67.35991 / 81.41598 discovery seconds (82.74%)** in the accounted run. Directly
+retained closed roots use only 13.74019 seconds. A selected closed-proof checker
+therefore has a smaller measured ceiling than reuse that also addresses open
+expansions. The per-case attribution is preserved with the new full experiment.
+
+The optional [prepared-probe extension](prepared-probes.md) reuses source-bound
+probe traces from old **unclosed** plans, after independent checking. In the
+matched 1,497-query run, 2,437 traces avoid fresh acquisition: probe attempts
+fall **77,804 -> 60,972 (21.63%)**, while checked attempts stay **77,498**.
+Discovery changes **79.80360 -> 78.51427 s (1.62%)** and total query time
+**85.97296 -> 84.07622 s**. This is a modest single-run timing difference; some
+of the total change occurs in the unchanged ordinary solver and is not a search
+saving. Both modes include transactional accounting. No new family closes.
+
+All evidence tables and the final database bytes match. Storage stays
+**629,280,768 bytes**, six-case Python peak is **24,164,349 / 24,199,805 bytes**,
+and full cold audit costs **77.21884 / 76.58480 s**. The new hint has one-call
+lifetime and uses the existing bounded verification cache; it does not remove
+old evidence or reduce the two graph caches. The empty-history control reuses
+zero traces, so its timing variation cannot support this mechanism. Fresh inputs
+also reuse no traces and regress **7.70214 -> 8.61204 s** in total query time.
+See the
+[full evidence](../experiments/results/cnf-prepared-probes-full/README.md) and
+fresh/empty controls there. All 481 Python tests pass.
+
+The next ranked targets are:
+
+1. **Avoid repeated checking and construction inside unresolved expansion.**
+   The full run still performs 110,811 simplification checks over 41,141,207
+   literal visits, and new probe checking barely changes. These are operation
+   counts, not a time attribution. Profile a costly unresolved source to separate
+   residual reconstruction, normalization, recognizers and evidence admission,
+   then test sharing an exact checked intermediate state across transformations.
+   Preserve source, assignment and policy bindings, bounded cache costs and
+   invalidation. Another acquisition-only cache has a limited demonstrated gain.
+2. **Broaden reuse beyond an exact CNF/depth match.** There are still 83 open
+   originals / 99 selected leaves / 31,203 literals. Checked binary variable
+   elimination or transport into an equivalent core may expose a shared solved
+   structure. Measure actual source gains and all interface/model-lift costs;
+   neither a local rewrite nor a complete partition guarantees efficient closure.
+3. **Check selected sound dependencies of closed plans with shared state.**
+   Keep failed alternatives archived, but avoid checking them when an independent
+   selected proof suffices. This remains worthwhile, with the smaller cost ceiling
+   above; it was not implemented in this run.
+4. **Admission and later upgrades.** Reject references whose recognition/checking
+   costs exceed avoided acquisition, and allow append-only upgrades after useful
+   later preparation. The original fresh control's family-only references still
+   save no descendant acquisition. Neither mechanism is implemented here.
+
+Default coverage remains 898/985; optional prepared coverage stays 902/985.
+No uniform arbitrary-SAT resource bound or new Lean refinement follows.
+
+## Previous investigation: remove archive scans; return to discovery costs
 
 The optional [transactional accounting](residual-accounting.md) removes the
 per-query residual census without changing search or discovery. On the same

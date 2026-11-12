@@ -4570,3 +4570,42 @@ only those files were restored from the digest-verified official release. The
 failure and repair record are preserved with the full benchmark. The manuscript
 adds the accounting invariant, measured costs and controls; all 63 previous
 proof blocks remain unchanged. No Lean refinement of SQLite is claimed.
+
+
+## 2026-11-12: reuse checked traces from old unresolved plans
+
+Cost attribution of the accounted run shows the 83 unresolved inputs consume
+67.35991 / 81.41598 discovery seconds. This changed the immediate target from
+selected closed-proof validation to useful intermediate evidence from failed
+expansion. Implementation checkpoint `836fb96` adds optional
+`PreparedProbeInventory` and a no-op extension hook to the retained-plan reader.
+Saved probe traces from an exact old open plan undergo the ordinary independent
+source-bound check before replacing acquisition. No old closure, classification
+or child graph is trusted. Pending hints are scoped and cleared on failures;
+source/settings edits, corrupted evidence and empty history are tested.
+
+All 481 Python tests pass, including 512 exhaustive tiny CNFs, seeded larger
+inputs and preserved cold replay. The full matched run reuses 2,437 traces,
+reducing fresh probe attempts 77,804 -> 60,972, but verification attempts remain
+77,498. Discovery falls 79.80360 -> 78.51427 seconds (1.62%); total query time
+85.97296 -> 84.07622. The unchanged solver accounts for part of that timing
+variation, so it is not all avoided acquisition. All three evidence tables and full
+database bytes match, every old row survives and both cold audits pass. Storage
+stays 629,280,768 bytes; sampled Python peak slightly increases. No new coverage
+is claimed: the optional prepared result stays 902/985, default 898/985.
+
+See [full evidence](../experiments/results/cnf-prepared-probes-full/README.md)
+and [mechanism and limits](prepared-probes.md). This acquisition optimization
+has limited measured headroom while intermediate verification and other discovery
+work remain. Next profile the expensive open expansions, then share exact checked
+intermediate states or expose equivalent cores. Selected closed-proof checking
+is still open, with a smaller measured cost ceiling than the unresolved inputs.
+
+
+The fresh and empty controls each reuse zero traces and keep 88/96 closures.
+Fresh total time regresses 7.70214 -> 8.61204 seconds; empty changes
+7.59890 -> 7.43109. Identical operation counts make these controls evidence
+against claiming a general benefit. All six compressed archives and every paired
+record are validated. The unchanged Lean audit passes (4,148 declarations /
+1,988 theorems); the manuscript keeps all 63 proof blocks, adds section 12.73,
+builds without warnings and passes visual review of the changed pages.

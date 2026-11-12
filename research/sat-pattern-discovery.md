@@ -912,3 +912,23 @@ Then test transport into different equivalent cores and checked binary variable
 elimination to broaden the unresolved cells. Accounting neither shrinks these
 cells nor bounds their search. Keep the default 898/985 policy and optional
 prepared 902/985 result distinct.
+
+
+## 2026-11-12: reuse partial evidence without inventing closure
+
+The [prepared-probe extension](prepared-probes.md) independently checks saved
+probe traces from exact old unclosed plans. Other recognition and planning still
+run. A failed overall expansion can thus supply valid intermediate analysis,
+but the hint proves neither an old closure nor UNSAT. Source and settings changes
+must prevent reuse; no old classification or descendant graph is trusted.
+
+The 1,497-input comparison keeps every root, profile, summary, answer and stored
+evidence byte unchanged. It reuses 2,437 traces and reduces fresh probe attempts
+21.63%, while discovery time falls only 1.62% in this ordered run. Verified probe
+attempts are unchanged, and no new structural coverage follows. The same 83
+sources / 99 selected leaves / 31,203 literals remain open. The new cost attribution
+puts 82.74% of previous discovery time in the 83 open sources, shifting immediate
+attention from closed-proof references to their still-expensive intermediate
+checks and transformations. Exact transport into shared cores and checked binary
+variable elimination remain coverage candidates. Default coverage stays 898/985;
+prepared optional coverage stays 902/985. No polynomial bound is established.

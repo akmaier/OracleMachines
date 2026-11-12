@@ -1964,3 +1964,31 @@ there is no meaningful resident-memory improvement. Ordinary SAT search counters
 and every stored evidence table are identical. The 96 empty-history controls
 show no clear acquisition benefit. This is avoided bookkeeping, not a change to
 SAT's worst-case complexity or the remaining 83 structural misses.
+
+
+## 2026-11-12: partial-evidence reuse has a checking cost
+
+The [prepared-probe path](prepared-probes.md) uses an old trace already decoded by
+exact source/depth lookup, checks it against the current CNF and compatible policy,
+and then uses the existing bounded verification cache for subsequent local checks.
+It adds one transient hint per active discovery call, not a persistent cache or
+new certificate representation. Suspended recursive discovery frames can each
+retain their own pending reference; there is no claim of globally constant memory.
+The ordinary decoded graphs and retained historical evidence still consume space.
+
+The acquisition comparison is P+C versus V+C': fresh probe acquisition and later
+checking versus admission and later checking under the resulting cache state.
+There is no general bound V<=P. Exact lookup, source equality, trace decoding,
+checker-key serialization and cache eviction remain charged. The full run reuses
+2,437 traces with 838,095 source literal positions charged for binding; fresh
+probe attempts fall 77,804 -> 60,972 but verified attempts stay 77,498. Checker
+lookups grow 22,492 -> 24,929 and checked-key bytes 69,146,160 -> 76,712,050.
+Probe-cache misses increase 11,339 -> 11,340; cache-hit reuse saves later checking,
+not all checking. New and old graph sizes remain unchanged.
+
+Discovery is 79.80360 -> 78.51427 seconds; full cold audit 77.21884 -> 76.58480.
+Both final databases are byte-identical at 629,280,768 bytes. Six-case traced
+Python peak is 24,164,349 -> 24,199,805 bytes; native SQLite, RSS and full-history
+peak are excluded. There is no storage or demonstrated memory saving. Empty
+history supplies no traces. These single timing comparisons do not establish a
+stable small speedup, broader coverage or a better worst-case SAT bound.

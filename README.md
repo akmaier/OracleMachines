@@ -290,6 +290,16 @@ is **4 KiB**. Empty-history acquisition shows no clear improvement. All **476
 tests** and the unchanged Lean audit pass. Discovery now accounts for about **92.6%** of query time; selected
 proof reuse and transport beyond exact prepared sources are the next targets.
 
+The optional [prepared-probe follow-up](research/prepared-probes.md) reuses
+independently checked traces from old unresolved plans. It avoids 21.63% of fresh
+probe attempts on the prepared original corpus, but discovery time changes only
+**79.80360 -> 78.51427 s** in one ordered comparison. Evidence and storage remain
+identical; coverage stays **902/985**. Fresh-input and empty-history controls reuse
+no traces, and the fresh control runs slower. All **481 tests** pass. The
+[updated priorities](research/structural-reuse-priorities.md) concentrate on the
+83 unresolved sources, which consume about 83% of discovery time.
+
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

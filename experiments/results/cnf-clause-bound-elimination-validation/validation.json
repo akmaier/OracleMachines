@@ -1,0 +1,103 @@
+{
+  "script_sha256": "258620a4a7100dd9a689d0f2cb9720cb999aba38c1f36e6281b52bc97042a167",
+  "reports": {
+    "remaining": "a26ba9f5512e586ba0187fc2d4ca1c89e60769282b3ee5728001138d6ef2da9e",
+    "originals": "46f359e82df32bec5a5b6d77327d09e67e400264189eea885524af88819e9616",
+    "remaining-reverse": "43fda385d5813a21b051b900ce49287f16ae2c3b85b31df915c21a8bd66dbb5d",
+    "fresh": "0f996f6e9c993803b696b82f480995164dba7a28b72356bf7223b008d9df7689"
+  },
+  "archives": [
+    {
+      "suite": "remaining",
+      "mode": "baseline",
+      "database_sha256": "d8d13c776a7013a464c94330bf72a51c7cfec86bea4c7d3f43c0501704ac1f09",
+      "archive": "experiments/results/cnf-clause-bound-elimination-remaining/archive-baseline.sqlite3.gz",
+      "new_edges": 0,
+      "literal_growing_edges": 0,
+      "closed": 0
+    },
+    {
+      "suite": "remaining",
+      "mode": "clause_bound",
+      "database_sha256": "d3577fade22cbe17d4e4f93f594ac5105d0a1333095faaf8563cb278f9c81295",
+      "archive": "experiments/results/cnf-clause-bound-elimination-remaining/archive-clause_bound.sqlite3.gz",
+      "new_edges": 95,
+      "literal_growing_edges": 95,
+      "closed": 1
+    },
+    {
+      "suite": "originals",
+      "mode": "baseline",
+      "database_sha256": "18bb13efdd2690f988a3a33ce3569bf654ee29144ae1ef2b0f6e64f12536f473",
+      "archive": "experiments/results/cnf-clause-bound-elimination-originals/archive-baseline.sqlite3.gz",
+      "new_edges": 0,
+      "literal_growing_edges": 0,
+      "closed": 29
+    },
+    {
+      "suite": "originals",
+      "mode": "clause_bound",
+      "database_sha256": "55ec204bc9397fcce953c3a8e165c2ce06f3dad70fcdcc2c531203102933eac2",
+      "archive": "experiments/results/cnf-clause-bound-elimination-originals/archive-clause_bound.sqlite3.gz",
+      "new_edges": 2504,
+      "literal_growing_edges": 2504,
+      "closed": 31
+    },
+    {
+      "suite": "remaining-reverse",
+      "mode": "clause_bound",
+      "database_sha256": "d3577fade22cbe17d4e4f93f594ac5105d0a1333095faaf8563cb278f9c81295",
+      "archive": "experiments/results/cnf-clause-bound-elimination-remaining-reverse/archive-clause_bound.sqlite3.gz",
+      "new_edges": 95,
+      "literal_growing_edges": 95,
+      "closed": 1
+    },
+    {
+      "suite": "remaining-reverse",
+      "mode": "baseline",
+      "database_sha256": "d8d13c776a7013a464c94330bf72a51c7cfec86bea4c7d3f43c0501704ac1f09",
+      "archive": "experiments/results/cnf-clause-bound-elimination-remaining-reverse/archive-baseline.sqlite3.gz",
+      "new_edges": 0,
+      "literal_growing_edges": 0,
+      "closed": 0
+    },
+    {
+      "suite": "fresh",
+      "mode": "baseline",
+      "database_sha256": "781504f9cb6e7d6bbf8b36e4402ef6951027a1ecf3ebee7ffc3bc5f0e51fc8ad",
+      "archive": "experiments/results/cnf-clause-bound-elimination-fresh/archive-baseline.sqlite3.gz",
+      "new_edges": 0,
+      "literal_growing_edges": 0,
+      "closed": 88
+    },
+    {
+      "suite": "fresh",
+      "mode": "clause_bound",
+      "database_sha256": "2fdc0fc237565eb71d304ff27a354ded7fd65e2aea61748379795bad4944ab7a",
+      "archive": "experiments/results/cnf-clause-bound-elimination-fresh/archive-clause_bound.sqlite3.gz",
+      "new_edges": 130,
+      "literal_growing_edges": 130,
+      "closed": 88
+    }
+  ],
+  "python_tests": 511,
+  "lean_declarations": 4195,
+  "lean_theorems": 2018,
+  "old_proof_blocks_preserved": 63,
+  "unique_labels": 227,
+  "formal_sources": {
+    "formal/OracleMachines/ClauseBoundElimination.lean": "a2c8ffc79732a45dbafe6b679c106a2624a77cd0e48fdc951149c00402fb8434",
+    "formal/OracleMachines/VariableElimination.lean": "cf682fbcef5c7ec9cceadd34bed5887509a43fe1355c0d184b0799f21d127e8c",
+    "formal/OracleMachines/Audit.lean": "fbfdbb49e9740bfc16cb94f46d38bc82c63194d169c376ee185b2563a4fd3e1e"
+  },
+  "original_baseline_matches_prior_bounded_archive": true,
+  "matched_residual_evidence": true,
+  "frontier_diagnostic_sha256": "524d6f888e1c21f7cb650cde32094559adff2fb6de2713e4a107371b53a64dfb",
+  "manuscript_sha256": "290d9b228a4bfe883120ee96a4912923503b6b4fe283c41e992fc7e4fe22bf33",
+  "pdf_sha256": "b173567c45881bac45c00302b347212c77ec87be98898610fa453f59e134a321",
+  "limitations": [
+    "New edges have independent endpoint/model diagnostics; all archive nodes pass full cold proof checking.",
+    "Selected prior failures and reused controls are not an untouched holdout or full-corpus rerun.",
+    "Lean proves conditional chain size bounds, not Python refinement, pivot availability or a bound on the whole planner."
+  ]
+}

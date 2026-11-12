@@ -332,6 +332,18 @@ optional. The next measured opportunity is less restrictive growth admission:
 most eight extra literals, even without subsumption. Candidate availability is
 not a new closure or a general SAT bound.
 
+The [clause-count admission experiment](research/clause-bound-elimination.md)
+relaxes the per-step literal limit while retaining complete resolvent checking.
+All **511 Python tests** and the **4,195-declaration / 2,018-theorem** Lean audit
+pass. Lean bounds one accepted elimination chain: at most n steps, mn literals
+per formula and (n+1)mn retained formula slots under explicit normalization
+and clause-count premises. It does not guarantee an admissible next step or
+bound the full discovery graph. The optional policy closes **31/83** original prior misses versus **29/83**,
+at higher time and storage cost, and adds no closures on the repeated 96-input
+control. The next measured opportunity is a fixed allowance of one or two extra
+clauses: 32/57 remaining leaves need one, and 50/57 at most two. These candidate
+counts do not establish new closures or an efficient complete elimination order.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

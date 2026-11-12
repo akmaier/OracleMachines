@@ -4774,3 +4774,40 @@ opposite-order per-mode archive equality, all six SQLite integrity checks,
 runtime/report fingerprints and 226 unique manuscript labels. The PDF builds
 without warnings; pages 129--131 pass visual inspection with final file hashes
 recorded alongside the proof and test logs.
+
+## 12 November: permit literal growth while bounding an elimination chain
+
+Implemented `ClauseBoundEliminationInventory`, preserving the earlier joint
+non-growth choices and trying a clause-count-only fallback at unresolved
+terminals. Complete opposing-pair reconstruction, strict support decrease,
+exact child binding and SAT model lifting remain independently checked. All
+**511 Python tests** pass, including exhaustive small projection, random edits,
+large signed identifiers, explicit growing-literal examples, clause-growth
+rejection, history preservation and corruption checks. Lean's audit passes
+**4,195 declarations / 2,018 theorems**; `ClauseBoundElimination.lean` proves
+conditional per-formula, chain-length and formula-state payload bounds.
+
+The 59 post-subsumption leaves yield one closure versus zero, at higher time and
+storage. Whole-source recomposition on the 83 prior misses yields **31 versus
+29 closures**, with no losses; the two gains are distinct 48-variable sources.
+There remain 52 original misses and 57 selected leaves / 25,488 literals. Query
+time grows **78.06321 -> 113.63899 seconds**, complete archive bytes
+**621,146,112 -> 674,234,368**, and newly added bytes above the common prefix
+**203,776,000 -> 256,864,256**. Every old row survives. The baseline reproduces
+the earlier bounded archive exactly. Complete cold checking preserves bytes;
+all 2,504 new edges pass independent endpoint solving and SAT model lifting.
+
+The new endpoints cost **961.43125 seconds** to diagnose. The diagnostic still
+uses `ResidualSolver` and its per-solve SQL census; ordinary queries use the
+already optimized `AccountedResidualSolver`. Census versus solving time is not
+profiled here. Do not hide the diagnostic phase or attribute all of it to the
+new discovery policy. Four-case Python allocation is only a sample, not a
+full-history or native-memory bound.
+
+There is still no admissible-pivot availability theorem or efficient complete
+elimination-order search. The rule tests 166,437 additional candidates and
+rejects 162,187 for clause growth. A fixed opposing-pair cap B would also keep
+an accepted elimination-only chain within m0+B*n0 clauses if clause growth were
+allowed; this looser policy remains unimplemented. Recognition, alternatives,
+persistence and the final fallback remain separate from that formula bound.
+See [the full mechanism and limitations](clause-bound-elimination.md).

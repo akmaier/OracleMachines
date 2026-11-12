@@ -2108,3 +2108,33 @@ separate source queries or the final fallback solver. Forty-eight of the 59
 current leaves admit a plain candidate under non-growing clause count and up to
 eight extra literals. That read-only opportunity is not yet an implemented
 policy, structural closure gain or total-cost measurement.
+
+## 2026-11-12: clause-count admission and formal chain bounds
+
+The [clause-count fallback](clause-bound-elimination.md) permits increasing literal
+count after the earlier joint non-growth rule fails. Each independently checked
+step still decreases variable support and does not increase clause count. Lean
+now proves, under explicit normalization premises, at most n0 steps, m0*n0
+literal occurrences per formula, and (n0+1)*m0*n0 literal slots across the
+retained formula states of such a chain. These are not byte, whole-planner,
+Python-refinement or arbitrary-SAT bounds. Full source checks, structural
+recognition, failed alternatives and ordinary fallback remain charged.
+
+On the 59 final leaves from the previous subsumption run, the optional policy
+closes one versus zero. Query time grows 2.84076 -> 4.09001 seconds; database bytes
+17,518,592 -> 19,488,768. Cold replay grows 1.06376 -> 1.61667 seconds and sampled
+four-case Python peak 1,919,676 -> 2,719,945 bytes. All 95 new edges increase literal
+count, but their target width reaches only six. Consecutive elimination chains
+reach seven steps. A bounded formula payload does not imply cheaper discovery
+or a smaller proof history.
+
+A further arithmetic bound motivates the next experiment, without asserting its
+success: if each elimination constructs at most B opposing-pair resolvents,
+then at most B clauses can be added at each step. Even without per-step clause
+non-growth, support decrease gives at most n0 steps and hence at most m0+B*n0
+clauses and n0*(m0+B*n0) literal occurrences per intermediate normalized CNF.
+The formula states of one chain occupy at most (n0+1)*n0*(m0+B*n0) literal slots.
+This bound uses the fixed pair cap throughout; it does not allow it to grow
+unchecked with intermediate formula size. It neither guarantees an eligible
+pivot nor bounds the full branching history. This additive-growth extension
+has not been implemented or included in the current Lean counting theorems.

@@ -1451,3 +1451,22 @@ checking, scheduling, persistence or costs. The full axiom audit passes at
 **4,173 declarations / 2,009 theorem declarations**, and all **506 Python tests**
 pass. The [measured fallback](../research/subsumed-elimination.md) adds valid local
 steps but no additional source closures in the matched controls.
+
+## Clause-count admission and conditional chain size (12 November)
+
+`OracleMachines/ClauseBoundElimination.lean` makes the normalization premise
+explicit: a clause mentions each support variable at most once. It proves
+`clause_width_bound`, `literal_count_le`, and `bounded_cnf_size`, followed by
+`chain_length_bound` for a strictly support-decreasing abstract chain and
+`chain_payload_bound` for all its retained formula states. With initial m clauses
+and n variables, the respective bounds are mn literal occurrences per formula,
+n steps, and (n+1)mn literal slots across the chain.
+
+These conditional statements allow individual literal counts to increase.
+They do not prove pivot availability, normalize arbitrary runtime inputs,
+refine Python or bound alternatives, profiles, keys and other branches. The
+existing `VariableElimination` projection theorem supplies the semantic identity;
+its Python refinement remains separate. The axiom audit passes at **4,195
+declarations / 2,018 theorem declarations**, and all **511 Python tests** pass.
+The optional [integration and experiment](../research/clause-bound-elimination.md)
+retains the older policy before trying clause-count-only admission.

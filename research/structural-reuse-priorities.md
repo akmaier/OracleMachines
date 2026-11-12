@@ -12,7 +12,61 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: literal-growth admission is the larger remaining gap
+## Current investigation: small additive clause growth is the next coverage test
+
+The [clause-count fallback](clause-bound-elimination.md) is implemented, checked
+and remains optional. It closes **31/83** original prior misses versus **29/83**,
+with no losses and two distinct 48-variable gains. Query time grows
+**78.06321 -> 113.63899 seconds (+45.57%)** and complete database bytes
+**621,146,112 -> 674,234,368**. Added bytes above the paid prefix grow **26.05%**.
+The separate 96-input repeated control retains the same **88 closures**, while
+time grows **8.90872 -> 10.48245 seconds**. Opposite-order leaf runs reproduce
+the same databases and one new leaf closure at higher cost. No default promotion
+or fresh full-corpus result follows.
+
+All **511 tests** and the **4,195-declaration / 2,018-theorem** Lean audit pass.
+Lean proves conditional size bounds for one accepted chain, not pivot availability
+or full discovery costs. All eight archives cold-check unchanged, prior rows
+survive, and every new edge receives independent endpoint/model validation.
+Original-input endpoint diagnostics cost **961.43125 seconds**, separately from
+query time; their older reference solver still performs a per-solve SQL census.
+No profile isolates that cost from solving. Production queries already use the
+incremental accounting implementation.
+
+The [exact frontier diagnostic](../experiments/results/cnf-clause-bound-elimination-originals/growth-barriers.json)
+finds **57 selected leaves / 25,488 literals** remaining across **52 unresolved
+originals**. Of these leaves, **32** have a pivot needing only one additional
+clause, **50** need at most two, and **56** need at most four under current pair
+and candidate caps. Removing the pair cap alone helps just one other leaf,
+whose cheapest admissible pivots require 72 pairs. Retained-clause subsumption
+would admit a non-growing pivot in 12 leaves. These counts describe candidate
+opportunities, not successful chains or added closures.
+
+1. **Test fixed additive clause budgets of one and two.** Preserve earlier
+   accepted choices and exact complete-pair checks. A fixed allowance d keeps
+   any elimination-only chain within m0+d*n0 clauses; alternatively the fixed
+   pair cap B gives m0+B*n0. This bounds formula payload, not an efficient order
+   search or all branches. Compare whole-source outcomes and total costs before
+   promotion. The additive policy and its Lean resource theorem remain open.
+2. **Measure and reduce repeated failed recognition.** The current extension
+   tests 166,437 candidates, rejects 162,187 for clause growth and acquires
+   2,504 new nodes for two extra original closures. Each new target reruns the
+   structural pipeline. Profile a representative costly source before choosing
+   between cheaper candidate admission, reusable unchanged occurrence analyses
+   and more selective acquisition. Retained-clause duplicate membership can
+   change even when pivot occurrences do not; include that invalidation dependency.
+3. **Separate useful order discovery from checking one chain.** An unsuccessful
+   greedy order does not exclude another useful order. Preserve alternatives,
+   negative cases and the pair-cap exception. The repeated 96-input control gives
+   no coverage transfer, so an untouched holdout and broader rerun remain open.
+   Census optimization in the diagnostic is supporting work; it does not address
+   the measured 111.89 seconds of original-source structural discovery.
+
+The earlier full prepared measurement remains **902/985**. This optional subset
+policy explains 31 of its saved 83 misses, without proving efficient arbitrary
+SAT coverage or a uniformly polynomial construction.
+
+## Previous investigation: literal-growth admission is the larger remaining gap
 
 The [retained-clause subsumption fallback](subsumed-elimination.md) is implemented,
 independently checked and proved at the semantic level in Lean. It permits ten

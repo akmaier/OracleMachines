@@ -1013,3 +1013,34 @@ additional literals are permitted. Fifteen plain candidates need only one. The
 next experiment is plain clause-count-based admission with exact checking and
 explicit intermediate width. These counts do not establish additional closures,
 universal elimination availability or efficient classification of arbitrary SAT.
+
+## 12 November: clause-count admission gives two more original closures
+
+The [clause-count-only fallback](clause-bound-elimination.md) permits a checked
+increase in literal count after the earlier joint non-growth proposal is null.
+Full opposing-pair projection, exact source/target bindings and model restoration
+remain checked. On the 59 final leaves from the previous subsumption run it
+closes one; on the 83 original prior misses, with the same paid preparation, it
+closes **31 versus 29**, losing none. Both added originals have 48 variables.
+They are selected earlier failures, not untouched holdouts. There remain
+**52 original sources / 57 selected leaves / 25,488 literal occurrences** open.
+
+The gain costs more: original-source query time **78.06321 -> 113.63899 seconds**
+and archive bytes **621,146,112 -> 674,234,368**. All 2,504 new elimination edges
+pass independent endpoint solving and SAT model restoration; complete cold
+replay preserves prior rows and bytes. The ordinary solver's answers and search
+counters match. This is broader certified structural coverage, not reduced SAT
+search or a fresh full-corpus measurement. The optional rule is not promoted.
+
+Lean proves the conditional counting invariant: normalized formulas with at most
+m0 clauses over decreasing support from n0 variables occupy at most m0*n0 literal
+slots per formula, with at most n0 steps and (n0+1)*m0*n0 total formula slots on
+one chain. It does not prove a next pivot exists, that a useful order can be found
+efficiently, or that the whole discovery graph is small. A failed greedy chain
+also does not exclude a successful order from its original formula. This keeps
+recognition outcomes distinct from membership in a stronger semantic class.
+
+The fixed B=64 opposing-pair cap would also bound a chain permitting clause
+growth by m0+B*n0 clauses. Such a policy remains unimplemented. Local closure
+opportunities, their transfer and their total acquisition cost must be measured
+before inferring anything about efficient coverage of all CNFs.

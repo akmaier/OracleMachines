@@ -1,0 +1,89 @@
+{
+  "input_report_sha256": "2a01e78194e91125f57d029f6d3874e5e9ed347c8dec9ad018dc773fb2f36a79",
+  "script_sha256": "c769d5562cc2bf4d03797a5cd1566f85d873ba23f211a6fa8e7eab92a5fac2a3",
+  "rows": [
+    {
+      "case": 1194,
+      "group": "reuse_holdout3",
+      "counts": {
+        "calls": 2617,
+        "empty_assignments": 964,
+        "clause_positions": 324855,
+        "literal_positions": 899739,
+        "fifo_clause_admissions": 96423,
+        "fifo_preparation_literals": 258332,
+        "affected_clauses": 55202,
+        "affected_literal_positions": 146831,
+        "mask_false_positive_clauses": 0,
+        "block_4_positions": 82206,
+        "block_4_hits": 32652,
+        "block_4_unaffected": 56002,
+        "block_8_positions": 41765,
+        "block_8_hits": 10731,
+        "block_8_unaffected": 24291,
+        "block_16_positions": 21517,
+        "block_16_hits": 3476,
+        "block_16_unaffected": 10597,
+        "fifo_clause_hits": 228432,
+        "fifo_evictions": 90746
+      },
+      "unique_clause_identities": 96423,
+      "unique_clause_values": 13374,
+      "clause_width_positions": {
+        "3": 253429,
+        "2": 68026,
+        "1": 3400
+      },
+      "fifo_retained_units": 32767,
+      "summary": {
+        "closed": false,
+        "unresolved_leaves": 2,
+        "unresolved_literals": 309
+      }
+    },
+    {
+      "case": 1441,
+      "group": "subsumption_holdout3",
+      "counts": {
+        "calls": 1718,
+        "empty_assignments": 598,
+        "clause_positions": 245241,
+        "literal_positions": 690829,
+        "fifo_clause_admissions": 72278,
+        "fifo_preparation_literals": 197660,
+        "affected_clauses": 33855,
+        "affected_literal_positions": 92696,
+        "mask_false_positive_clauses": 0,
+        "block_4_positions": 61976,
+        "block_4_hits": 25642,
+        "block_4_unaffected": 43772,
+        "block_8_positions": 31415,
+        "block_8_hits": 8571,
+        "block_8_unaffected": 18599,
+        "block_16_positions": 16132,
+        "block_16_hits": 2760,
+        "block_16_unaffected": 7907,
+        "fifo_clause_hits": 172963,
+        "fifo_evictions": 66632
+      },
+      "unique_clause_identities": 72278,
+      "unique_clause_values": 9754,
+      "clause_width_positions": {
+        "3": 202248,
+        "2": 41092,
+        "1": 1901
+      },
+      "fifo_retained_units": 32764,
+      "summary": {
+        "closed": false,
+        "unresolved_leaves": 1,
+        "unresolved_literals": 489
+      }
+    }
+  ],
+  "limitations": [
+    "Observers retain unbounded identity/value sets and instrument every check; no runtime or memory benefit is inferred",
+    "Fixed-position blocks have unrestricted observer histories; FIFO clause simulation alone has a 32768 logical-slot cap",
+    "Two isolated sources, not the sequential full corpus or a new SAT coverage result"
+  ]
+}

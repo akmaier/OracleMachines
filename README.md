@@ -308,6 +308,14 @@ there. Both unsuccessful candidates and their evidence remain optional; the next
 target is checked reuse across related residuals. All **490 tests** and the unchanged
 Lean audit pass. No new structural coverage is claimed.
 
+The [clause-sharing follow-up](research/clause-mask-reuse.md) finds about 70%
+clause reuse in two costly sources, but a bounded checker mask fails to turn it
+into a total-cost benefit. Two 96-input controls cut literal work 55.10% while
+total time rises 2.58% and 3.58%, and sampled Python peak rises about 41%.
+Evidence and storage match exactly. All **496 tests** pass; the prototype stays
+optional and disabled. The next priority is checked variable elimination and
+equivalent-core discovery on the unresolved frontier.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

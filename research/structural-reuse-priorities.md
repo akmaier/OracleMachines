@@ -12,7 +12,55 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: exact object identity misses reusable structure
+## Current investigation: clause overlap is real, but scalar caching loses
+
+The [clause-mask follow-up](clause-mask-reuse.md) tests the smaller shared structure
+suggested by the preceding source-index failure. Two costly prepared sources reuse
+immutable clauses at **70.32% / 70.53%** of clause visits. A checker-owned 64-bit
+mask can skip a clause only when assignment overlap is impossible; collisions
+trigger ordinary scanning. The bounded FIFO stores validated representation facts,
+with every source reason and fixed point still checked. All **496 tests** pass.
+
+Two matched 96-input empty-history controls, in opposite execution orders, reject
+promotion. Literal work including preparation falls **4,173,407 -> 1,873,711
+(55.10%)**, but total query time rises **7.37185 -> 7.56226 s** and
+**7.31352 -> 7.57542 s**. Sampled four-case Python peak rises about **41%**;
+first-order values are **615,971 -> 871,147 bytes**. All four databases are identical
+at **33,460,224 bytes**, answers and proof records agree, and cold replay passes.
+Both modes retain **88/96** closures. The three-source prepared pilot is nearly
+flat in runtime. The optional cache stays disabled; no full prepared-corpus run
+is justified by these controls. This is not evidence of a universal slowdown,
+but it defeats an inference from a high hit rate or lower literal counts alone.
+
+The older full-run attribution still puts about **83% of discovery time in 83
+unresolved sources**. Reconstruction is its largest profiled individual own-time
+entry on source 1194; a short per-clause scan is not necessarily worth caching.
+No new family closes, and the historical prepared frontier remains **83 sources /
+99 selected leaves / 31,203 literals**. The next ranked targets are now:
+
+1. **Bounded, independently checked variable elimination on the unresolved
+   frontier.** First measure which inputs admit small transformations, including
+   recognition and possible growth. Retain exact recomposition and model lifting.
+   Prefer eliminating future residual acquisition or exposing a known family to
+   another attempt at scalar cache tuning. This is an investigation, not an
+   established efficient solution for each unresolved category.
+2. **Transport into equivalent cores and coarse shared transformations.** A
+   useful representation must avoid whole recognition/checking or substantial
+   output work across different CNFs. Fixed-position block overlap was measured
+   only by unbounded observer sets, not implemented as a production cache. Require
+   stable order and proof-reason positions plus explicit invalidation and cost.
+3. **Selected proof dependencies and append-only upgrades.** Preserve failed
+   acquisition traces while checking only sound required dependencies. Keep this
+   lower priority than unresolved-source discovery; exact closed-plan reuse has
+   a smaller measured cost ceiling.
+
+Do not repeat source-capacity increases or per-clause dictionary caches without
+a new mechanism that avoids their measured overhead. Both negative comparisons,
+their complete archives and the diagnostic counters are retained. The default
+policy remains **898/985** and optional prepared coverage **902/985**; those are
+historical full-corpus results, not new measurements of this checker candidate.
+
+## Previous investigation: exact object identity misses reusable structure
 
 A cold-cache profile of source 1194 identifies independent reconstruction as the
 largest individual Python own-time cost: **2,617 calls / 0.33136 own seconds** in

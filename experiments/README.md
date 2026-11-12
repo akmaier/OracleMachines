@@ -1,5 +1,24 @@
 # Executed reuse and persistence study
 
+## Clause sharing and a failed mask cache
+
+The [overlap and pilot](results/cnf-clause-mask-pilot/README.md) measure smaller
+shared clauses across unequal residuals. [Forward](results/cnf-clause-mask-empty/README.md)
+and [reverse](results/cnf-clause-mask-empty-reverse/README.md) 96-input controls
+retain byte-identical evidence and 88 closures, but total time and sampled Python
+memory rise despite 55.10% fewer preparation-plus-scan literal visits. The
+optional checker remains disabled; the full prepared corpus was not rerun.
+
+```sh
+python3 experiments/compare_cnf_clause_mask.py --suite empty --output /tmp/clause-mask-forward
+python3 experiments/compare_cnf_clause_mask.py --suite empty --reverse --output /tmp/clause-mask-reverse
+```
+
+Use new output directories and run timed comparisons without tests or profiling
+in parallel. The mask slot cap is not a byte/RSS bound. See the
+[mechanism and costs](../research/clause-mask-reuse.md) before interpreting hits
+or operation counts as runtime savings.
+
 ## Arbitrary-CNF residuals and recognized matching
 
 The [residual candidate](results/cnf-residual-dag/README.md) preserves 156

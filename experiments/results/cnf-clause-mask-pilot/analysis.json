@@ -1,0 +1,80 @@
+{
+  "comparisons": [
+    {
+      "name": "cnf-clause-mask-empty",
+      "execution_order": [
+        "scan",
+        "masked"
+      ],
+      "total_seconds": {
+        "scan": 7.371848873794079,
+        "masked": 7.562257623532787
+      },
+      "discovery_seconds": {
+        "scan": 6.215941079193726,
+        "masked": 6.387431377079338
+      },
+      "total_change_percent": 2.5829171622818503,
+      "cold_seconds": {
+        "scan": 3.526315625058487,
+        "masked": 3.547291165916249
+      },
+      "warm_seconds": {
+        "scan": 0.04675008403137326,
+        "masked": 0.04791304096579552
+      },
+      "peak_python_bytes": {
+        "scan": 615971,
+        "masked": 871147
+      },
+      "closed": {
+        "scan": 88,
+        "masked": 88
+      },
+      "previous_literal_visits": 4173407,
+      "preparation_plus_scans": 1873711,
+      "literal_work_reduction_percent": 55.103564066480935
+    },
+    {
+      "name": "cnf-clause-mask-empty-reverse",
+      "execution_order": [
+        "masked",
+        "scan"
+      ],
+      "total_seconds": {
+        "masked": 7.57541766972281,
+        "scan": 7.313519836869091
+      },
+      "discovery_seconds": {
+        "masked": 6.381151704583317,
+        "scan": 6.179502579616383
+      },
+      "total_change_percent": 3.5810094003359882,
+      "cold_seconds": {
+        "masked": 3.544916332932189,
+        "scan": 3.5047229579649866
+      },
+      "warm_seconds": {
+        "masked": 0.049532166915014386,
+        "scan": 0.047569792019203305
+      },
+      "peak_python_bytes": {
+        "masked": 871299,
+        "scan": 615819
+      },
+      "closed": {
+        "masked": 88,
+        "scan": 88
+      },
+      "previous_literal_visits": 4173407,
+      "preparation_plus_scans": 1873711,
+      "literal_work_reduction_percent": 55.103564066480935
+    }
+  ],
+  "decision": "Keep optional and disabled; prioritize checked variable elimination on unresolved cores",
+  "limitations": [
+    "Two opposite-order controls use the same published 96 synthetic inputs; not an independent holdout",
+    "Python allocation samples four inputs, not native SQLite, RSS or full-history peak",
+    "No new full prepared-corpus run, structural coverage claim or Lean refinement"
+  ]
+}

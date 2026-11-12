@@ -4643,3 +4643,37 @@ The unchanged Lean audit passes (4,148 declarations / 1,988 theorems). The manus
 keeps all 63 proof blocks, adds section 12.74, builds warning-free and passes visual
 review. [Mechanism and limits](indexed-check.md), [preserved diagnostics](../experiments/results/cnf-indexed-check-profile/README.md)
 and the priority record retain the next target and the unsuccessful alternatives.
+
+
+## 2026-11-12: shared-clause masks reduce scans but fail total-cost controls
+
+Checkpoint `c7914b5` adds an optional independent clause-mask reconstruction
+engine and observer. Two hard prepared sources share exact immutable clauses at
+70.32% and 70.53% of visits. Only independently validated representation facts
+are retained. A zero mask intersection proves no assignment overlap; collisions
+require scanning. Every unit reason, conflict and fixed-point obligation remains
+checked. Both checker views share a 32,768-slot FIFO, with no new persistent state.
+
+All 496 Python tests pass, including exhaustive tiny reconstruction, arbitrary
+large/colliding identifiers, mutations, malformed types, forged evidence and
+byte-preserving cold replay. The three-source pilot is almost flat in runtime.
+Two matched 96-input empty-history comparisons, in opposite execution orders,
+reduce literal work including preparation 4,173,407 -> 1,873,711 (55.10%). Yet total
+query time rises 7.37185 -> 7.56226 and 7.31352 -> 7.57542 seconds. Four-case peak
+traced Python allocation rises about 41%. Counters outside reconstruction are
+identical. Both modes close 88/96; all four 33,460,224-byte databases match exactly
+and all cold audits pass without changing bytes. Every archive is preserved.
+
+The candidate remains optional and disabled. No full prepared-corpus run was
+justified. Historical default/optional coverage remains 898/985 and 902/985;
+the new controls do not remeasure that corpus. Overlap alone is not a gain when
+lookup, preparation, FIFO maintenance and output assembly consume the avoided
+short scans. A coarser representation still needs stable proof-reason positions
+and a concrete cost advantage. The revised priority is bounded checked variable
+elimination on the unresolved frontier, followed by transport into shared cores.
+
+The existing Lean audit passes (4,148 declarations / 1,988 theorems); all 63
+manuscript proof blocks remain unchanged. Section 12.74 records the follow-up,
+the PDF builds warning-free and pages 127--129 pass visual review. See
+[mechanism and limits](clause-mask-reuse.md) and
+[preserved evidence](../experiments/results/cnf-clause-mask-pilot/README.md).

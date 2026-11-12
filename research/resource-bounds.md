@@ -2018,3 +2018,30 @@ The next proposed representation must reuse smaller shared structure across uneq
 residuals and charge checking, stable reason positions, hashing/equality if used,
 maintenance, output assembly and invalidation. These failed candidates supply no
 new asymptotic SAT bound or full prepared-corpus result.
+
+
+## 2026-11-12: smaller shared units still have recognition and maintenance costs
+
+The optional [clause-mask checker](clause-mask-reuse.md) reuses independently
+validated immutable clauses across unequal residuals. Expected container work
+per call is O(a + m + L_miss + L_scan + e): assignment entries, clause positions,
+preparation literals, actual possible-overlap scans and evictions. Evictions
+amortize against admissions, but every output position is still visited. A fixed
+64-bit mask cannot give false negatives for overlap; collisions require scanning.
+Identifier bit costs and Python container costs remain additional. This bound
+does not promise a cheaper first use or a general improvement over scanning.
+
+The two checker views share 32,768 logical slots, charging three slots plus the
+literal slots of each retained clause. Python object overhead, integer bit sizes,
+inputs and outputs remain outside that cap. Closing releases the cache and cold
+replay reconstructs it. Persistent evidence is unchanged. There is no RSS bound
+or history-space reduction.
+
+Both orders of a matched 96-input empty-history control reduce preparation plus
+scan visits 4,173,407 -> 1,873,711. Total time nonetheless rises 2.58% and 3.58%,
+while four-case Python peak rises about 41%. Both modes retain 88 closures and
+identical 33,460,224-byte databases. These small ordered comparisons justify
+keeping the candidate disabled, not a universal timing claim. They demonstrate
+why a lower operation count must include the changed operation mix. Full prepared
+coverage and storage are not remeasured by these controls. Further scalar cache
+tuning is lower priority than checked transformations of unresolved cores.

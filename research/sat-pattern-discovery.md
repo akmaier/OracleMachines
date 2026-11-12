@@ -949,3 +949,23 @@ clause-support cache already regressed, so overlap alone is insufficient: a usef
 pattern must avoid more work than recognizing and maintaining it adds. The earlier
 83 unresolved original inputs remain the coverage target; these local diagnostics
 are not a new full-corpus or unrestricted-SAT result.
+
+
+## 2026-11-12: shared clauses do not yet make discovery cheaper
+
+The [clause-mask investigation](clause-mask-reuse.md) confirms about 70% clause
+identity reuse across different residuals in two costly sources. A bounded,
+independently validated mask reduces literal work 55.10% in the 96-input control,
+including preparation. However, both execution orders take more total time and
+about 41% more sampled Python peak memory. All answers, evidence and 88 closures
+agree; every cold replay preserves its archive. The candidate remains optional,
+with no default change and no new full-corpus or structural-coverage result.
+
+This narrows the next discovery question. Prefer bounded checked variable
+elimination and transport into shared equivalent cores on the 83 unresolved
+original sources. Measure eligibility and transformation growth before designing
+another cache, retain source binding and model lifting, and count recognition,
+checking and output work. Sharing unchanged clauses is already substantial;
+merely adding scalar summaries does not remove their per-clause processing.
+Coarser block or delta representations remain open but unimplemented. Complete
+bookkeeping coverage still does not establish efficient closure of every cell.

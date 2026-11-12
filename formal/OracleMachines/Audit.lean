@@ -27,6 +27,7 @@ import OracleMachines.VariableElimination
 import OracleMachines.SubsumedElimination
 import OracleMachines.ClauseBoundElimination
 import OracleMachines.AdditiveElimination
+import OracleMachines.SubsetAnchor
 import Lean.Util.CollectAxioms
 
 /-!

@@ -1,0 +1,63 @@
+{
+  "script_sha256": "315cad79201780bbb78e93b2cfcdb3024b4d1ffc1a1d8b2822fd46b75b8d57ed",
+  "report_sha256": "af3985edfc186bf76a3f61749fe4852c9403415817b4dab0d8ba33a412858be5",
+  "case": 73,
+  "original_case": 1444,
+  "options": {
+    "max_depth": 2,
+    "probe_limit": 4,
+    "learn_limit": 4,
+    "clause_growth_limit": 2
+  },
+  "summary": {
+    "closed": false,
+    "unresolved_leaves": 1,
+    "unresolved_literals": 285
+  },
+  "instrumented_discovery_seconds": 5.151631582994014,
+  "observed_kernel_seconds": 1.199347086250782,
+  "total_seconds": 5.725371583132073,
+  "source_count": 851,
+  "call_count": 1694,
+  "phase_counts": {
+    "discovery": 431,
+    "implied_discovery": 412,
+    "check": 435,
+    "implied_check": 416
+  },
+  "lru_simulations": [
+    {
+      "slots_per_role": 0,
+      "proposal_calls": 843,
+      "check_calls": 851
+    },
+    {
+      "slots_per_role": 64,
+      "proposal_calls": 843,
+      "check_calls": 851,
+      "proposal_evictions": 779,
+      "check_evictions": 787
+    },
+    {
+      "slots_per_role": 256,
+      "proposal_calls": 843,
+      "check_calls": 851,
+      "proposal_evictions": 587,
+      "check_evictions": 595
+    },
+    {
+      "slots_per_role": 1024,
+      "proposal_calls": 843,
+      "check_calls": 851
+    }
+  ],
+  "preserved_archive": "experiments/results/cnf-additive-elimination-originals/profile-add_two.sqlite3.gz",
+  "database_sha256": "c63a2569ed5734680d2fb92c4ee8c2ef8ef9e2920fb749be95a0da8002125753",
+  "profile_report_sha256": "dfb03db7e76f1719bf8085013fdab195876032c2341f65962c4712564f892c76",
+  "limitations": [
+    "Single previously costly source, observed with additional trace overhead; no performance claim.",
+    "Proposal and checking caches are simulated separately; no unchecked proposal is reused for independent checking.",
+    "Ordered clauses and literal encodings are part of exact identity; no cross-edit inference."
+  ],
+  "trace_sha256": "de76bd67055eafe58c0f0abc8083927674d7ba8a35ad9dba3ae8c7653b4b5ae0"
+}

@@ -1,0 +1,116 @@
+{
+  "script_sha256": "dc23fb931e04d2200f106edf0be86b13ccc242f89576c7ecd77619056d24cb34",
+  "evidence": [
+    {
+      "suite": "originals",
+      "policy": "pivot-alternatives",
+      "report_sha256": "78b4d7df3a5b3fe8e83080158d0c3a9744559f4f7a45a9bf17d878b9372850bd",
+      "analysis_sha256": "8d9e19454d9ec5e34ea27f8697f78d1daf98b9fe321cdf2c21a2a4580331a61a",
+      "closed": 31,
+      "trials": 316,
+      "unique_trials": 316,
+      "delta_sha256": "eac11dae2529ae2c276b3db8a3151d39933cb83ece7d02440a3ef1c6654d1e0a",
+      "cold_bytes_unchanged": true
+    },
+    {
+      "suite": "originals",
+      "policy": "interacting-pivots",
+      "report_sha256": "38a07d5a95710984c100d968b03244e03c7193de746c262bb7ba7bd3cecabf96",
+      "analysis_sha256": "3a6e963213d807123d10701930ed97fd05be2597c6133814d765979c87a5ee5f",
+      "closed": 31,
+      "trials": 316,
+      "unique_trials": 316,
+      "delta_sha256": "52e46df3f079996e70602cb999b82d3b4cd24f48d579f0c9666c34915c95e0ac",
+      "cold_bytes_unchanged": true
+    },
+    {
+      "suite": "fresh",
+      "policy": "pivot-alternatives",
+      "report_sha256": "fb36fbce3dd0aed86e9a040d2fa23048d6398cab91e1ba2a9c8bcdb5701491d2",
+      "analysis_sha256": "ef1d6a2df780a7f6f7126a4f80abf01403c185d63aafbcb30403865e938b9032",
+      "closed": 88,
+      "trials": 56,
+      "unique_trials": 40,
+      "delta_sha256": "bea8e0d76133d51635f1a16e7f76e1d454ab086643819b22b4c03bef25ec43d4",
+      "cold_bytes_unchanged": true
+    },
+    {
+      "suite": "fresh",
+      "policy": "interacting-pivots",
+      "report_sha256": "d4ac2c1183ce6eb00824563c5231e33981eafed6fac0cf2aea751a2edabb86b9",
+      "analysis_sha256": "439d32bca2b82fba87f2b51d5db54db2a7f09981cbd872a06446440c681060f3",
+      "closed": 88,
+      "trials": 56,
+      "unique_trials": 40,
+      "delta_sha256": "1c4eebb1fe4dc1dd90f0d405c2a38acd241aa41a3aa6542209994b241315eb2e",
+      "cold_bytes_unchanged": true
+    }
+  ],
+  "compatible_unions": [
+    {
+      "suite": "originals",
+      "identical_overlap_rows": {
+        "cnf_patterns_v1": 554,
+        "cnf_pattern_sources_v1": 0,
+        "cnf_residual_v1": 0,
+        "cnf_pivot_trials_v1": 287
+      },
+      "merged_table_digests": {
+        "cnf_patterns_v1": {
+          "rows": 41000,
+          "sha256": "defe125af092ea3d9ecc30f339a56cc3742ce0e28fc5eb4d5f87c7cd0dfe65e3"
+        },
+        "cnf_pattern_sources_v1": {
+          "rows": 1548,
+          "sha256": "17e47903910af67166eda68cf6ceca1b01d5e45fb6a1da1ee79a9361f8241566"
+        },
+        "cnf_residual_v1": {
+          "rows": 21838,
+          "sha256": "fa9f00d0fd3036022ed0c51cef48a28e2ede054071eaeb19c29f07fb19fa8ef1"
+        },
+        "cnf_pivot_trials_v1": {
+          "rows": 345,
+          "sha256": "bc21c6d8108fb06b98caa1c42362569724e256cb99115e4e212522025695b5be"
+        }
+      },
+      "limitation": "Union has no changed payloads; each constituent graph already passed cold verification. No extra full merged cold replay or timing claim."
+    },
+    {
+      "suite": "fresh",
+      "identical_overlap_rows": {
+        "cnf_patterns_v1": 101,
+        "cnf_pattern_sources_v1": 0,
+        "cnf_residual_v1": 0,
+        "cnf_pivot_trials_v1": 35
+      },
+      "merged_table_digests": {
+        "cnf_patterns_v1": {
+          "rows": 24957,
+          "sha256": "72f55a0b17ae712db6a093bc1c4ddc3aaf0b258a88923c88f2554719d1afe66c"
+        },
+        "cnf_pattern_sources_v1": {
+          "rows": 1561,
+          "sha256": "786b582c363f2d33269139477bd4595cc8a9b3e3a1e6adaa37a1184fc93c70ad"
+        },
+        "cnf_residual_v1": {
+          "rows": 23116,
+          "sha256": "67691ae7f8c1c3f0168c9a16d636424385f13b404c1c1f00a947ce5329159b55"
+        },
+        "cnf_pivot_trials_v1": {
+          "rows": 45,
+          "sha256": "89710a56e363ff697728b4a5a9084bfdbfc9cba23ea5bdc28f162b54be905717"
+        }
+      },
+      "limitation": "Union has no changed payloads; each constituent graph already passed cold verification. No extra full merged cold replay or timing claim."
+    }
+  ],
+  "python_tests": 527,
+  "old_proof_blocks_preserved": 63,
+  "unique_labels": 230,
+  "unchanged_formal_sources_since": "21a90ac",
+  "prior_lean_audit": "experiments/results/cnf-anchored-subsets-validation/lean-validation.txt",
+  "prior_lean_audit_sha256": "1aa806714a38a51a99f7953f2623d14cd52dd95c60f5710fb2ce2e36e20d03a8",
+  "manuscript_sha256": "2bd83a893ec444be4e5c365bab7ddb08f222a4b65d843d35f9b3779335c96482",
+  "pdf_sha256": "2900c736b513dfe566b331008b1a6d48d972a05e1456a070d1aee032ba158db0",
+  "final_manuscript_refresh": "Wording-only edit after archive validation; proof preservation, unique labels, unchanged formal sources, warning-free PDF build and affected page rendering rechecked."
+}

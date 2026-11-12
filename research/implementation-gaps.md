@@ -4864,3 +4864,35 @@ All eight cold runs and three unique acquisition archive integrity checks pass.
 The source/report validator preserves all 63 earlier proof blocks and checks 229
 unique labels. The 142-page PDF builds without warnings; pages 133--135 pass
 visual review. Evidence and failed cache/control ideas persist in the linked study.
+
+## 12 November: bounded pivot deviations and exact descendant reuse
+
+Implemented optional search over four earlier open elimination ancestors and
+at most eight fully recognized target projections per open source. Complete
+projection checking, exact target/name binding and independent trial replay
+protect every alternative. Old nodes remain immutable, while original-source
+recomposition checks component conjunction and both conditioning branches.
+The search persists all acquired target histories and unique trial records as
+an exact-base-bound delta. No default recognizer, ordinary solver or formal
+source is changed. All **527 Python tests** pass.
+
+The first original-source experiment makes **316 trials**, adds **602 pattern
+nodes**, and retains **31/83** closures with no gains. **295/316** trials reach
+the exact same selected frontier; 271 pivot pairs share no source clause, with
+260 exact reconvergences. The interaction-priority follow-up raises interacting
+trials **45 -> 74**, adds 660 nodes, but also gains no closure. Resident expansion
+costs **6.45902 / 7.11551 seconds**, with initial and cold verification charged
+separately. New delta SQLite bytes are **15,208,448 / 16,248,832** over the same
+734,814,208-byte paid base. Repeated controls remain 88/96 in both schedules.
+The [full study](pivot-alternatives.md) retains phase costs, failed attempts and
+limitations. Coupled continuations, later ancestor selection and an explicit
+new-state budget remain the next discovery gaps.
+
+Both schedules' proof deltas also combine without conflicting payloads. The
+original-suite union retains 708 distinct new pattern nodes / 345 trials, sharing
+554 node rows and 287 trial rows between schedules. Repeated-control union counts
+are 121 new nodes / 45 trials. The persistent resume recipe and logical table
+hashes are in the study and validation record; later runs should reuse this union
+rather than discard the unsuccessful acquisitions. Every constituent graph has
+passed full cold checking. The final PDF preserves 63 existing proofs, has 230
+unique labels, builds without warnings and passes visual review on pages 135--137.

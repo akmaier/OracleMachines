@@ -140,3 +140,55 @@ sources are development inputs. It is evaluated from the same paid base archive,
 not from the first policy's expanded state. Unchanged target/configuration keys
 allow the two sets of acquired proofs to be combined later without overwriting
 conflicting values.
+
+The follow-up also fails to add coverage. On the originals it performs the same
+316 trials, now including **74** interacting choices rather than 45, and adds
+**660** pattern nodes. Resident expansion is **7.11551 seconds**; the delta grows
+to **16,248,832 bytes / 911,581 compressed bytes**. Coverage stays **31/83**.
+Of the new trial frontiers, **290/316 (91.77%)** exactly match their source plans;
+26 trials reach novel leaves, with seventeen distinct new leaves. Six reduce
+selected open literal count, nineteen increase it, and one has a different
+frontier at equal literal count. No local closure results. These single ordered
+timings do not establish a general runtime ratio.
+
+On repeated controls, the follow-up again makes **56 attempts / 40 unique
+trials**, adds **117** pattern nodes, and retains **88/96** closures. Expansion
+is **0.91811 seconds**; the delta is **2,437,120 bytes / 112,449 compressed bytes**.
+The same 32/40 unique trials reconverge, while eight trials reach five novel
+leaves. Both follow-up histories pass complete cold and separate trial replay.
+Their detailed phase costs, including paid-base verification, remain in the
+[result directories](../experiments/results/cnf-interacting-pivots-originals/README.md).
+
+These results weaken single-pivot ranking as the next source of broad coverage
+under this ancestor policy. They do not exclude a different ancestor choice or
+coupled continuation. The next targeted test should use where paths actually
+diverge, retain exact residual/configuration/budget states, and cap new discovery
+states rather than only entry targets. The first-four breadth-first ancestor
+choice itself remains a limitation. Increasing growth or trial limits without
+such a structural hypothesis is not supported by the present evidence.
+
+## Resume from every retained result
+
+The two original-input deltas share **554 identical pattern rows and 287 trial
+rows**. Their checked union therefore contains **708 unique new pattern nodes /
+345 trials**, rather than the sum of 1,262 nodes / 632 trials. The repeated-control
+union contains **121 new pattern nodes / 45 trials**, sharing 101 and 35 rows
+respectively. The base archive is retained once; it is not included in these new
+row counts. This is exact immutable-row sharing, not semantic CNF compression or
+a measured full-process memory reduction.
+
+For the next original-source run, restore the base named by
+`experiments/results/cnf-pivot-alternatives-originals/report.json`, verify its
+hash, decompress the two original-suite `proof-delta.sqlite3.gz` files, verify
+their hashes, and apply both with `apply_delta` from the experiment driver.
+Use the same report options with `AnchoredAdditiveInventory`; `replay` verifies
+persisted trial bindings without candidate rediscovery. The
+[validation record](../experiments/results/cnf-pivot-alternatives-validation/README.md)
+contains the combined table digests. Existing source and target proofs, including
+all unsuccessful explorations, are then available to subsequent work. Each
+constituent graph passed cold replay and the union rejects conflicting payloads;
+no extra full merged cold audit is claimed.
+
+All 527 tests pass. Formal sources are unchanged from the previous audited
+checkpoint. The updated manuscript preserves 63 existing proof blocks and builds
+without warnings; its new subsection and discussion transition pass visual review.

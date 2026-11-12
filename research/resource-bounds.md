@@ -2188,3 +2188,34 @@ Python bytes; this is not RSS or full-workload peak. Uniform-width inputs use
 the old duplicate lookup; shared-literal inputs can still regress. The Lean
 lemmas prove necessary-condition and order preservation, not these cost bounds
 or runtime refinement. No polynomial arbitrary-SAT bound follows.
+
+## Bounded pivot deviations and proof deltas (12 November)
+
+The [order study](pivot-alternatives.md) examines at most A=4 earlier open
+elimination ancestors and fully recognizes at most T=8 targets per open original.
+Each source still prepares up to K=64 pair-admissible candidates, with B=64
+opposing pairs and d=2 clause growth. Source indexing, projection and ranking
+can cost O(A*(L+n log n+K*(L+B*w))) expected container work; candidate ordering,
+encoded integer operations and exact checking add their own charges. Keeping
+all candidate targets uses up to O(A*K*L') scratch space. T limits calls into
+the inherited recognizer, not its total work or retained graph. Recomposition
+can additionally traverse the old unresolved graph after each attempt.
+
+On the 83 original inputs, the first schedule adds 602 nodes / 316 trial rows
+and 15,208,448 delta SQLite bytes in 6.45902 resident expansion seconds, without
+new closure. Its 734,814,208-byte paid base and 63.19332-second requested-source
+verification are separate. Full cold audit costs 115.84382 seconds; a separate
+trial/recomposition audit costs another 75.59982 and revisits old dependencies.
+The interaction-first schedule adds 660 nodes / 316 trials and 16,248,832 delta
+bytes in 7.11551 expansion seconds, also without new closure. No cold-start
+6-second claim follows from the resident measurements.
+
+Compressed deltas occupy 857,460 and 911,581 bytes, respectively. They omit the
+already preserved base, rather than reducing that base's memory or disk cost.
+The full working images are 750,022,656 and 751,038,464 bytes. The experiment
+reconstructs identical logical rows from each delta plus its exact base and
+cold-checks them. Physical page layout need not be identical. A proof identity
+can be shared across schedules only when its payload agrees exactly; applying
+a delta rejects conflicting existing values. Peak process/RSS and native memory
+remain unmeasured. The existing Lean projection theorem and conditional chain
+bounds are unchanged; they do not bound this full exploratory history.

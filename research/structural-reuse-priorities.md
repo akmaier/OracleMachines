@@ -12,7 +12,62 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: exact subset filtering; useful orders remain the coverage gap
+## Current investigation: bounded pivot changes mostly reconverge
+
+The [bounded-pivot study](pivot-alternatives.md) tests at most four earlier open
+elimination ancestors and eight full alternative target recognitions per open
+original. It preserves the same pair/growth caps and the entire paid proof graph.
+**316 trials** add **602 pattern nodes**, but no closed alternative: original
+coverage remains **31/83**. Resident expansion costs **6.45902 seconds**, after
+**63.19332 seconds** of requested-source verification. The new rows are retained
+as a **15,208,448-byte SQLite / 857,460-byte compressed delta** over the existing
+734,814,208-byte base. Full cold and separate trial audits are additional costs.
+
+The useful pattern is reconvergence: **295/316 (93.35%)** trials reach the exact
+same multiset of selected unresolved canonical leaf keys as their source plans.
+All immediate target roots are new, so reuse happens in their descendants.
+Only 21 trials reach novel selected leaves (13 distinct); four reduce selected
+open literals and seventeen increase them. None produces a recognized endpoint.
+Also, **271/316** alternate pivots share no source clause with the selected one;
+260 of those reconverge. Independence is not a safe universal pruning rule:
+eleven such trials have different selected frontiers.
+
+An interaction-first follow-up keeps the same four/eight budgets and pays an
+extra source scan. It increases interacting trials **45 -> 74**, yet retains
+**31/83** closures with no successful replacement. Expansion is **7.11551 seconds**
+and acquires **660** pattern nodes, versus 602. This is another negative coverage
+control. The first repeated-input control also remains **88/96**, with 56 attempts
+and 40 unique persisted trials. These are selected/reused development inputs,
+not untouched evaluations or a new full-corpus result.
+
+The interaction-first follow-up still reconverges in **290/316 (91.77%)** trials,
+with seventeen distinct novel leaves and no closed replacement. Both schedules
+also retain **88/96** on repeated controls. All **527 tests** pass; the formal
+sources and earlier projection theorem are unchanged. The original-suite deltas
+share **554 pattern rows / 287 trial rows** and combine into **708 unique new
+nodes / 345 trials**. Use the study's resume recipe to retain all of this work.
+
+1. **Investigate where the paths first diverge, with a distinct-state budget.**
+   Use the retained novel frontiers and ancestor-to-source links to test a small
+   coupled continuation before returning to the greedy recognizer. Reuse exact
+   residual/configuration/budget states and charge every new state, rather than
+   assuming an eight-entry cap bounds the descendant discovery graph. Validate
+   any endpoint all the way to its original source.
+2. **Audit ancestor selection before raising trial or growth limits.** The current
+   policy visits only the first four open elimination ancestors in breadth-first
+   order. It does not exhaust later bottlenecks or all open branches. Compare a
+   targeted later-ancestor schedule at the same cap before inferring that useful
+   single-pivot alternatives do not exist. The tested growth and interaction
+   changes are not sufficient success predictors.
+3. **Preserve and reuse failed exploration at its actual scope.** Trials bind
+   source, pivot, exact target and recognizer configuration. Compatible deltas
+   can share immutable rows; the paid base and cold verification remain charged.
+   An open result under this policy excludes neither a different continuation
+   nor a tractable semantic class. Full-history peak memory, independent holdouts
+   and a competitive incremental solver comparison remain open. The earlier full
+   prepared measurement is still **902/985**.
+
+## Previous investigation: exact subset filtering; useful orders remain the coverage gap
 
 The [required-literal index](anchored-subsets.md) addresses the preceding profile's
 largest own-time function while preserving every recognition outcome. The costly

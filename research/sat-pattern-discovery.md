@@ -1083,3 +1083,26 @@ The next discovery question remains whether a small, charged set of alternative
 pivot orders exposes a useful endpoint on the stalled cores. Local variable
 reduction, a larger allowance and a conditional small-chain bound have already
 failed to supply such progress in the preceding additive experiment.
+
+## 12 November: different pivots mostly recover already known open cores
+
+The [bounded alternative-pivot study](pivot-alternatives.md) retains up to eight
+fully recognized alternative targets from four earlier elimination ancestors
+per open original. It preserves exact projection, source/target bindings and
+old plans. Any gained local endpoint must compose through the original AND,
+conditioning and unary proof structure before counting as source coverage.
+
+The first schedule tries 316 alternatives on the 83 originals and gains no
+closure; 295/316 reach exactly the same selected unresolved canonical frontier.
+A follow-up prioritizes pivots sharing a clause with the selected pivot, raising
+interacting trials from 45 to 74 but still gaining no closure. It finds seventeen
+novel selected leaves, compared with thirteen before. Both retain 31/83 original
+and 88/96 repeated-control closures. These are negative development results,
+not evidence that other orders or semantic classes have been excluded.
+
+This exposes an important distinction: new immediate CNFs can lead to exactly
+the same already stored unresolved problem. The next discovery target is a
+useful divergent continuation, with exact-state reuse and a cap on newly explored
+states. Later ancestors and coupled deviations remain untested. Compatible new
+proof rows are retained as base-bound deltas, keeping every failed exploration
+available for future reuse. All 527 tests pass; formal semantics are unchanged.

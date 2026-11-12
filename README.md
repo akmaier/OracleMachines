@@ -28,7 +28,15 @@ classes.
 
 ## Paper
 
-The latest [subset-search investigation](research/anchored-subsets.md) preserves
+The latest [pivot-order investigation](research/pivot-alternatives.md) retains
+bounded alternative projections over the existing proof graph. Most tested
+orders reconverge: 295/316 first-schedule trials reach the same selected unresolved
+cores. Prioritizing interacting pivots adds no original-source coverage either;
+these negative results and all acquired proofs persist as base-bound deltas.
+All **527 tests** pass. The next gap is discovering useful divergent continuations,
+with an explicit cap on newly explored states.
+
+The preceding [subset-search investigation](research/anchored-subsets.md) preserves
 the exact recognition certificates while filtering impossible subsumers by a
 required literal. Whole-input caching has zero hits within independent proposal
 and checking roles on the retained costly trace. The optional index instead

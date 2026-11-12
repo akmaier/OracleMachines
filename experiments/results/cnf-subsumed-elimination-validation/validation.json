@@ -1,0 +1,80 @@
+{
+  "script_sha256": "d035c4e8d0fe687293f8e5312a211db82796351acd2ababe09b705e705ce9d17",
+  "reports": {
+    "remaining": "e36a44918ce97d0ad23d19fbf119fb2bdb75791c93f9d11406ea289a0bce3250",
+    "originals": "b93894ddd9266e0905257b0610b1628e9214f02cb4867f95cf98505c4d7bc226",
+    "remaining-reverse": "5499dfe39b78a28812cbc49675085ed6618021dc92be3375e8d11ba0cd6cfbbc"
+  },
+  "archives": [
+    {
+      "suite": "remaining",
+      "mode": "baseline",
+      "archive": "experiments/results/cnf-subsumed-elimination-remaining/archive-baseline.sqlite3.gz",
+      "database_sha256": "6389ec295751f3a8a241ec30b2269bfa220a97c4cf450af7919a15db5be64263",
+      "new_edges": 0,
+      "omission_references": 0,
+      "closed": 0
+    },
+    {
+      "suite": "remaining",
+      "mode": "subsumed",
+      "archive": "experiments/results/cnf-subsumed-elimination-remaining/archive-subsumed.sqlite3.gz",
+      "database_sha256": "9abe61337b7fe4fb227bb405fb5da77add945ef3d66cd5f4da4fb34304b8427c",
+      "new_edges": 10,
+      "omission_references": 12,
+      "closed": 0
+    },
+    {
+      "suite": "originals",
+      "mode": "baseline",
+      "archive": "experiments/results/cnf-subsumed-elimination-originals/archive-baseline.sqlite3.gz",
+      "database_sha256": "18bb13efdd2690f988a3a33ce3569bf654ee29144ae1ef2b0f6e64f12536f473",
+      "new_edges": 0,
+      "omission_references": 0,
+      "closed": 29
+    },
+    {
+      "suite": "originals",
+      "mode": "subsumed",
+      "archive": "experiments/results/cnf-subsumed-elimination-originals/archive-subsumed.sqlite3.gz",
+      "database_sha256": "89cd1b2bc680e30574e29467145781373d659fbda1814e55201721d2d09bf829",
+      "new_edges": 324,
+      "omission_references": 404,
+      "closed": 29
+    },
+    {
+      "suite": "remaining-reverse",
+      "mode": "subsumed",
+      "archive": "experiments/results/cnf-subsumed-elimination-remaining-reverse/archive-subsumed.sqlite3.gz",
+      "database_sha256": "9abe61337b7fe4fb227bb405fb5da77add945ef3d66cd5f4da4fb34304b8427c",
+      "new_edges": 10,
+      "omission_references": 12,
+      "closed": 0
+    },
+    {
+      "suite": "remaining-reverse",
+      "mode": "baseline",
+      "archive": "experiments/results/cnf-subsumed-elimination-remaining-reverse/archive-baseline.sqlite3.gz",
+      "database_sha256": "6389ec295751f3a8a241ec30b2269bfa220a97c4cf450af7919a15db5be64263",
+      "new_edges": 0,
+      "omission_references": 0,
+      "closed": 0
+    }
+  ],
+  "python_tests": 506,
+  "lean_declarations": 4173,
+  "lean_theorems": 2009,
+  "old_proof_blocks_preserved": 63,
+  "unique_labels": 226,
+  "original_baseline_matches_prior_bounded_archive": true,
+  "matched_residual_evidence": true,
+  "opposite_order_archives_identical": true,
+  "growth_diagnostic_sha256": "2f9bced5797615897de3de32b998c7df67a3e3e92e237baf3821d8387c5f9e4e",
+  "manuscript_sha256": "347097decaee75b8b8247417772cf25aec60789cffffb9b328a5ad90e06a9103",
+  "pdf_sha256": "3ea8f75ca64fe4a1e4235d4a3119cd82eef36736d8de4a11a270598794b944a1",
+  "limitations": [
+    "Only new subsumed edges have additional endpoint/model diagnostics in these runs; all retained edges pass cold proof checking.",
+    "Prior failure subsets and repeated controls are not an untouched holdout or full-corpus rerun.",
+    "Lean proves semantic clause/projection lemmas, not Python refinement or resource bounds."
+  ]
+}

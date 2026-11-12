@@ -2077,3 +2077,34 @@ subset. This motivates measuring reuse or cheaper rejection, not assuming higher
 caps solve the bottleneck. Cold verification, model reconstruction, serialization
 and retained graph memory remain explicit. There is no unrestricted SAT resource
 bound or smaller-history guarantee from per-step formula shrinkage.
+
+## 2026-11-12: redundant-resolvent checks and separate growth restrictions
+
+The optional [subsumption fallback](subsumed-elimination.md) prepares a source
+anchor index and tries up to K=64 pivots / B=64 opposing pairs each. In the worst
+case, finding retained subclauses still takes O(K B m w) expected subset work.
+Each omission stores two parent positions and one retained-clause position,
+with at most B triples per accepted step. Independent checking avoids discovery's
+index search but pays source scans, O(B m) current list-membership validation,
+O(B w) pair/reason work and complete target sorting. Identifier bit sizes and
+container overhead remain additional. The old failed elimination work is also
+paid before the fallback; no cross-source analysis cache is implemented.
+
+On the 83 prior misses, 324 new subsumed edges yield no new source closures.
+The same 29 inputs close, while query time rises 79.65962 -> 88.16727 seconds and
+archive size 621,146,112 -> 628,133,888 bytes. All new edge endpoints/models are
+checked separately in 33.47933 seconds. Cold checking rises 79.17392 -> 81.08654
+seconds. Sampled four-source Python peak falls, but neither that sample nor the
+24-literal final-frontier reduction bounds total history memory.
+
+The non-growing literal count restriction is not necessary to bound an individual
+CNF on a clause-count-bounded elimination chain. Each normalized non-tautological
+clause has at most n literals; m clauses therefore have at most mn literals.
+If clause count never grows above m0 and variable count decreases from n0, each
+intermediate formula has at most m0*n0 literals and there are at most n0 steps.
+This is a bound for an accepted elimination-only chain, not a guarantee of a next
+pivot or a bound on all branches, stored alternatives, identifier bit lengths,
+separate source queries or the final fallback solver. Forty-eight of the 59
+current leaves admit a plain candidate under non-growing clause count and up to
+eight extra literals. That read-only opportunity is not yet an implemented
+policy, structural closure gain or total-cost measurement.

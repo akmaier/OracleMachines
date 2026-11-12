@@ -12,7 +12,51 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: checked elimination broadens coverage at extra cost
+## Current investigation: literal-growth admission is the larger remaining gap
+
+The [retained-clause subsumption fallback](subsumed-elimination.md) is implemented,
+independently checked and proved at the semantic level in Lean. It permits ten
+extra steps on the 59 remaining leaves, but closes none and removes only 24 more
+literal occurrences. On the 83 original misses, both policies close **the same
+29**. Total query time rises **79.65962 -> 88.16727 seconds** and database bytes
+**621,146,112 -> 628,133,888**. Two opposite-order leaf comparisons also regress.
+All **506 tests** and the **4,173-declaration / 2,009-theorem** Lean audit pass;
+all six archives cold-check unchanged and every prior row survives. The fallback
+stays optional, with the failed evidence preserved rather than promoted.
+
+The more informative [diagnostic](../experiments/results/cnf-subsumed-elimination-originals/growth-opportunity.json)
+separates clause growth from literal growth. **48/59** remaining leaves admit a
+candidate with non-growing clause count without subsumption, or **49/59** with it,
+under the existing pair/candidate caps. All need at most eight extra literals;
+15 plain candidates need only one. None admits the current joint non-growth rule.
+These are measured candidate opportunities, not new closures or runtime results.
+
+The next ranked steps are:
+
+1. **Test clause-count-based admission before further subsumption tuning.**
+   Keep the plain baseline and explicit width/candidate/pair accounting. For an
+   elimination-only chain with at most m0 clauses and decreasing variable count
+   from n0, each normalized CNF has at most m0*n0 literal occurrences. The current
+   per-step literal cap is stronger than needed for that local size bound. The
+   argument guarantees neither a next pivot nor a bound on the entire branching
+   history. Measure accepted-chain length, intermediate width, exact checks,
+   cold replay and original-source closures, preserving any ordering losses.
+2. **Reduce the dominant failed candidate work.** The added fallback tests 86,305
+   pivots, rejects 85,902 for growth and performs 8,639,284 subset tests for no new
+   original closure. Prefer a cheap plain clause-count policy to retaining this
+   overhead by default. The earlier single-binary-occurrence sufficient rule and
+   exact invalidation-aware reuse remain cost candidates; their timing benefit
+   is still unmeasured. Operation counts alone do not establish a time breakdown.
+3. **Test transfer only after a credible gain.** The two leaf orders and matched
+   original misses are negative, so no fresh holdout or full-corpus promotion was
+   attempted. Any stronger admission rule needs independent/adversarial controls
+   and whole-source recomposition, not extrapolation from available pivots.
+
+The optional bounded policy still closes 29 of the saved 83 misses; 54 originals
+remain unresolved. The earlier full-corpus 902/985 measurement is not replaced by
+these subset experiments. No efficient partition covering arbitrary SAT follows.
+
+## Previous investigation: checked elimination broadens coverage at extra cost
 
 The [bounded-elimination extension](variable-elimination.md) introduces complete
 opposing-pair projection at previously unresolved terminal nodes, with independent

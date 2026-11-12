@@ -1439,3 +1439,15 @@ by these lemmas. The independent Python checker and tests remain necessary.
 The full build/axiom audit passes at **4,168 namespace declarations / 2,004 theorem
 declarations**, allowing only the existing standard Lean axioms. All **501 Python
 tests** pass. See the [implementation and resource account](../research/variable-elimination.md).
+
+The follow-up [`SubsumedElimination.lean`](OracleMachines/SubsumedElimination.lean)
+proves `holds_of_subclause`, `redundant_clauses` and
+`subsumed_projection_exact`. Every omitted opposing-pair resolvent must have a
+subclause among the unaffected, retained source clauses. Together with the prior
+projection theorem, this preserves exactly the Boolean extensions at the removed
+variable. Deleted pivot clauses cannot serve as the retained reasons. These are
+semantic list lemmas, not a refinement of Python witness indices, normalization,
+checking, scheduling, persistence or costs. The full axiom audit passes at
+**4,173 declarations / 2,009 theorem declarations**, and all **506 Python tests**
+pass. The [measured fallback](../research/subsumed-elimination.md) adds valid local
+steps but no additional source closures in the matched controls.

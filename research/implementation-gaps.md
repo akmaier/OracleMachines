@@ -4722,3 +4722,55 @@ runtime hashes, all six archive integrity checks, identical ordinary-solver
 residual tables, all 63 unchanged proof blocks and 225 unique labels. No
 unrestricted polynomial SAT bound or complete efficient structural partition is
 established.
+
+## 2026-11-12: subsumption fallback is correct but does not close more inputs
+
+Checkpoint `14ae642` adds an optional retained-clause subsumption fallback after
+ordinary bounded elimination fails. Every omitted resolvent names its two
+parents and a source subclause that survives pivot elimination. The independent
+checker visits all pairs, verifies those reasons, checks non-growth and binds
+the complete child. Source/model lifting and all earlier obligations remain.
+Lean proves subclause implication, redundant-clause removal and the corresponding
+existential projection. All 506 tests and the 4,173-declaration / 2,009-theorem
+axiom audit pass; Python refinement and costs remain separate obligations.
+
+The matched 59-leaf comparison permits ten new subsumed elimination edges and
+one following ordinary elimination, but closes none. Selected open literals
+fall only 26,205 -> 26,181. Query time rises 2.88938 -> 3.12938 seconds, and
+2.96506 -> 3.30563 in reversed order; per-mode archives match exactly. The
+83-original comparison preserves exactly the same 29 closures, with time
+79.65962 -> 88.16727 seconds and storage 621,146,112 -> 628,133,888 bytes. The
+baseline archive reproduces the previous bounded run. The candidate acquires
+324 subsumed edges across all retained alternatives, with 86,305 candidate tests,
+85,902 growth rejections and 8,639,284 subset tests. All new edges have independent
+endpoint/model diagnostics; the original-input diagnostic costs 33.47933 seconds
+outside acquisition. All six archives cold-check unchanged and all old rows
+survive. Existing-rule edges receive complete cold proof checks without repeating
+their extra endpoint diagnostic in these runs. The fallback is not promoted.
+
+A read-only ablation finds the larger opportunity: 48/59 remaining leaves admit
+a candidate without increasing clause count if up to eight extra literals are
+allowed, or 49/59 with subsumption. Fifteen plain candidates need only one extra
+literal. None satisfies the present joint non-growth rule. For a normalized CNF
+with m clauses and n variables, L <= mn; an elimination-only chain with at most
+m0 clauses and decreasing variables from n0 therefore has at most m0*n0 literals
+per intermediate CNF and at most n0 steps. This does not guarantee a next pivot,
+a tractable endpoint or a bound on all retained branching history. The next
+controlled test is plain clause-count-based admission, with exact checks and
+explicit intermediate-width costs. No such policy or extra closure is claimed
+by the diagnostic.
+
+The [mechanism and limitations](subsumed-elimination.md),
+[remaining-leaf controls](../experiments/results/cnf-subsumed-elimination-remaining/README.md),
+[original-source comparison](../experiments/results/cnf-subsumed-elimination-originals/README.md)
+and [aggregate validation](../experiments/results/cnf-subsumed-elimination-validation/README.md)
+retain the failed experiment, complete archives and next target. The manuscript
+adds section 12.76 while preserving all 63 previous proof blocks. Fresh holdouts
+and a new full-corpus run were not justified by the negative controls; there is
+no new unrestricted SAT complexity claim.
+
+The aggregate validator also confirms identical ordinary-solver residual tables,
+opposite-order per-mode archive equality, all six SQLite integrity checks,
+runtime/report fingerprints and 226 unique manuscript labels. The PDF builds
+without warnings; pages 129--131 pass visual inspection with final file hashes
+recorded alongside the proof and test logs.

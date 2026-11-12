@@ -324,6 +324,14 @@ optional. All **501 tests** pass, and Lean proves the exact existential projecti
 identity, with implementation refinement still separate. This subset study does
 not rerun the full corpus or establish a polynomial arbitrary-SAT solution.
 
+A [checked subsumption follow-up](research/subsumed-elimination.md) passes all
+**506 tests** and adds a Lean omission/projection proof, but yields **no further
+closures**: the same 29/83 close, with higher time and storage. It remains
+optional. The next measured opportunity is less restrictive growth admission:
+**48/59** remaining leaves have a candidate with non-growing clause count and at
+most eight extra literals, even without subsumption. Candidate availability is
+not a new closure or a general SAT bound.
+
 The latest [arbitrary-CNF research candidate](research/residual-candidate.md)
 combines tractable leaves, residual reuse, and recognized matching constraints.
 The [matching experiment](experiments/results/cnf-matching/README.md) reduces a

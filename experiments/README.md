@@ -1,5 +1,27 @@
 # Executed reuse and persistence study
 
+## Retained-clause subsumption: negative controls and the next growth gap
+
+The [59-leaf comparison](results/cnf-subsumed-elimination-remaining/README.md),
+[reversed order](results/cnf-subsumed-elimination-remaining-reverse/README.md) and
+[83-original comparison](results/cnf-subsumed-elimination-originals/README.md)
+retain no additional closures, higher total query time and larger archives.
+Every prior row survives and every new omission edge has independent checking
+and endpoint/model diagnostics. The original baseline exactly reproduces the
+previous bounded-elimination database. The policy remains optional.
+
+```sh
+python3 experiments/compare_cnf_subsumed_elimination.py --suite remaining --output /tmp/subsumed-remaining-new
+python3 experiments/compare_cnf_subsumed_elimination.py --suite remaining --reverse --output /tmp/subsumed-reverse-new
+python3 experiments/compare_cnf_subsumed_elimination.py --suite originals --output /tmp/subsumed-originals-new
+python3 experiments/analyze_cnf_elimination_growth.py /tmp/elimination-growth-new.json
+```
+
+Use new output destinations. The growth diagnostic identifies 48/59 plain
+clause-count-bounded candidates if modest literal growth is allowed; it is
+not a new implemented policy or closure measurement. See
+[the mechanism and limits](../research/subsumed-elimination.md).
+
 ## Checked bounded variable elimination
 
 The [99-leaf comparison](results/cnf-variable-elimination-frontier/README.md)

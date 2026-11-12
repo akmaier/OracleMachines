@@ -994,3 +994,22 @@ The next questions are the structure of the growth barrier and exact reuse of
 failed occurrence-neighborhood analyses. Retained-clause subsumption of resolvents
 is an explicit candidate. Recognition, source edits, witness checking and model
 compatibility must be included; the added closures do not erase those costs.
+
+## 2026-11-12: redundant resolvents do not explain the remaining closure gap
+
+The checked [subsumption fallback](subsumed-elimination.md) permits ten new
+elimination steps on the 59 remaining leaves, but closes none. On all 83 original
+misses it preserves exactly 29 closures, with higher query time and storage.
+The same 59 selected leaves retain 26,181 rather than 26,205 literals. This
+separates the existence of a valid simplifying step from reaching a recognized
+family. Every new edge is checked independently; source and child decisions
+agree in separate diagnostics. The negative control remains optional.
+
+A stronger discovery opportunity is the current literal non-growth restriction.
+With non-growing clause count, normalized intermediate CNFs still have at most
+m0*n0 literals along an elimination-only chain. The final diagnostic finds a
+candidate in 48/59 leaves without subsumption, or 49/59 with it, if up to eight
+additional literals are permitted. Fifteen plain candidates need only one. The
+next experiment is plain clause-count-based admission with exact checking and
+explicit intermediate width. These counts do not establish additional closures,
+universal elimination availability or efficient classification of arbitrary SAT.

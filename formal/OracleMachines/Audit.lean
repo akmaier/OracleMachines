@@ -24,6 +24,7 @@ import OracleMachines.SearchMachine
 import OracleMachines.InterfaceProtocol
 import OracleMachines.AffineCoupling
 import OracleMachines.VariableElimination
+import OracleMachines.SubsumedElimination
 import Lean.Util.CollectAxioms
 
 /-!

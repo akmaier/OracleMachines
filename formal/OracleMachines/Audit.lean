@@ -25,6 +25,7 @@ import OracleMachines.InterfaceProtocol
 import OracleMachines.AffineCoupling
 import OracleMachines.VariableElimination
 import OracleMachines.SubsumedElimination
+import OracleMachines.ClauseBoundElimination
 import Lean.Util.CollectAxioms
 
 /-!

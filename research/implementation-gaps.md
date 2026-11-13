@@ -5614,3 +5614,42 @@ window before replaying the original selection, then checks the complete child
 checkpoint without fresh discovery;
 its results and next-source mapping are retained in this checkpoint. Complete-plan
 verification from actual dependencies remains the largest measured runtime gap.
+
+## 2026-11-13: compare bounded lookahead before expanding another original
+
+[The frontier-option comparison](frontier-option-comparison.md) retains a clear
+ordinary continuation on case 30's 29-variable residual and exhausts its existing
+augmented base with one further clear block. These results do not decide SAT or
+exclude stronger inference. All twenty saved pairs are ranked before acquiring
+children. Variable 24 was already preferred among the original sixteen pairs:
+its false branch is the shared empty terminal; three new states reduce the true
+branch from 28 variables / 114 clauses to **27 / 111**, via elimination and
+binary-path deletion. Coverage remains **58/83**, including the growth ablation.
+The empty branch witnesses SAT for the residual, separately from complete-plan
+coverage. Literal count briefly grows during elimination.
+
+Resume `experiments/results/cnf-frontier-comparison/report.json` with
+`continue_cnf_frontier_comparison.restore_checkpoint` and `routes_for`, keeping
+all five lists: 1 rewrite, 42 bases, **156 augmented blocks**, **10 splits**, 1
+affine family, plus earlier sidecars. All prior rows and 1,940 reference nodes
+survive (1,949 now). Forty-one targeted tests and the full audit pass; the cold
+validator separately checks ranking using only staged clear evidence, then
+checks the acquired delta, composition and reference models without discovery.
+Independent cold replay passes in **176.26154 s**; its result is retained in
+`validation.json`.
+
+Acquisition takes **0.02748 s**; the pipeline takes **270.71536 s** and preflights
+add **82.05829 s**. Independent validation is extra. SQLite grows **57,344 bytes**
+to **770,179,072 bytes / 41,752 nodes**, with a **5,746-byte compressed delta**,
+a 307-byte compressed learned block and other sidecars/reference data. Full
+history preparation/checking dominates. The single matched trace sample is not
+a robust or whole-solver runtime comparison; no peak-RAM or arbitrary-SAT bound
+is established.
+
+Next compare the new leaf's saved pairs **11, 5, 8, 15** with ordinary candidates
+**19, 24, 9, 13**. Use the acquired split descendant, not the older source; its
+exact key is in `frontier-profiles.json.gz`. It has 19 remaining ordinary
+candidates and zero directly extracted affine rows. The wider queue now has
+**17 ready learned bases / 88 candidates**. Do not repeat the exhausted older
+learned base. Dependency-local complete-plan verification remains the principal
+measured runtime gap.

@@ -12,7 +12,41 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: saved cofactors complete the non-affine original
+## Current investigation: compare lookahead with retained conditioning
+
+[The original-frontier comparison](frontier-option-comparison.md) reduces case
+30's obligation **29 variables / 120 clauses -> 27 variables / 111 clauses**,
+with **three new recognition states**. Coverage stays **58/83**. One ordinary
+block and the last block on its retained learned base are clear; both are saved.
+Ranking all twenty pairs still chooses variable 24. Its false branch reuses the
+empty-CNF terminal; elimination and binary-path deletion leave the true branch open.
+
+1. **Compare saved pairs with probing on the new 27-variable leaf.** Its saved
+   pairs are **11, 5, 8, 15**; the next ordinary block is **19, 24, 9, 13**.
+   Nineteen ordinary candidates remain, and no affine equation is directly
+   recognized. Use the external split frontier, not the older original parent.
+   The older learned base is exhausted; the other **17 bases / 88 candidates**
+   remain available. Probe exhaustion is not required before a justified split.
+2. **Check complete plans from their actual dependencies.** Local acquisition
+   costs **0.02748 s**, but the pipeline costs **270.71536 s**, plus **82.05829 s**
+   of preflight work. Preparation, full audit and cold routes dominate. The empty
+   branch already witnesses SAT; completing the other branch addresses structural
+   coverage. The local two-trace control is not a full-solver speedup measurement.
+3. **Retain the limits and all evidence.** SQLite adds **57,344 bytes** to
+   **770,179,072 bytes / 41,752 nodes**; delta **5,746 compressed bytes**, with
+   learned evidence, diagnostics and reference snapshots additional. Reduced
+   support briefly increases literal count. No new original closes and these
+   are reused development cases. A state allowance does not bound total cost.
+
+Resume `experiments/results/cnf-frontier-comparison/report.json` with
+`continue_cnf_frontier_comparison.restore_checkpoint` and `routes_for`.
+Keep **five lists**: 1 rewrite, 42 learned bases, **156 augmented blocks**,
+**10 splits**, 1 affine family, and all earlier lemma sidecars. The targeted
+41-test suite, full audit and **176.26154 s** independent cold replay pass; see
+`validation.json`. All 1,940 reference nodes survive within 1,949. The open source
+and its exact candidates are retained in `frontier-profiles.json.gz`.
+
+## Previous investigation: saved cofactors complete the non-affine original
 
 [The completed probe pool and split](exhausted-probe-split.md) raise structural
 coverage **57/83 -> 58/83**. The last ordinary probe is clear. Ranking all five

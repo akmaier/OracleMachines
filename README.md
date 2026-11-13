@@ -28,12 +28,12 @@ classes.
 
 ## Paper
 
-The latest [probe continuation](research/original-frontier-probe.md) reduces the
-open residual from 13 variables / 62 clauses to **10 variables / 44 clauses**.
-A checked forced literal unlocks two eliminations and binary-path deletion,
-using four new recognition states. Coverage stays **57/83**; the smaller leaf
-still needs a structural solution. All older results, including the saved split
-and affine family proof, remain retained. One ordinary probe remains untried.
+The latest [probe-and-split continuation](research/exhausted-probe-split.md)
+raises structural coverage **57/83 -> 58/83**. The last ordinary probe is clear;
+ranking its retained cofactor pairs then completes the ten-variable residual.
+One branch reuses the empty-CNF terminal, while seven new recognition states
+reduce the other to Horn form. Both checked plans close the original 48-variable,
+204-clause development case. All earlier evidence remains retained.
 
 The preceding [affine/one-clause investigation](research/affine-one-clause.md)
 raises structural coverage **56/83 -> 57/83** on the reused development set.

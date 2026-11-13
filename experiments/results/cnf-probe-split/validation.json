@@ -1,0 +1,71 @@
+{
+  "affine_family_records": 1,
+  "all_saved_pairs_ranked": true,
+  "augmented_blocks": 155,
+  "cold_new_discovery": false,
+  "coverage": 58,
+  "exhaustion": {
+    "binary": [
+      3,
+      5,
+      6,
+      7,
+      10
+    ],
+    "checked_attempts": 10,
+    "clauses": 44,
+    "cnf_sha256": "e77f5197fe69ef279e9e02d506d58b7f607ba3b78da79873edbc171793fa4f38",
+    "conclusion": "No single-variable assignment yields a unit-propagation refutation.",
+    "outside": [
+      1,
+      2,
+      4,
+      8,
+      9
+    ],
+    "variables": 10
+  },
+  "frontier_profiles": {
+    "bytes": 3,
+    "compressed_bytes": 23,
+    "path": "experiments/results/cnf-probe-split/frontier-profiles.json.gz",
+    "sha256": "abc129be8d26e8d4afe9ce45f9d5a73c8ed9aa62810ca24ee789fe4581dc4a80"
+  },
+  "gains": [
+    73
+  ],
+  "history_bytes_unchanged": true,
+  "learning_bases": 42,
+  "new_pattern_nodes": 7,
+  "open_originals": {
+    "bytes": 329424,
+    "compressed_bytes": 48564,
+    "path": "experiments/results/cnf-probe-split/open-originals.json.gz",
+    "sha256": "b5d26ee78830283fa8406c3f18998a28d7d408a09ba720d6b15d1ae954586594"
+  },
+  "pending": 0,
+  "preserved_reference_nodes": 1906,
+  "reference_nodes": 1940,
+  "remaining_leaves": [],
+  "report_sha256": "55f4d2449d1b9abd5780363a6fcccce029f76d8b8c9ea38e84f87e72f0004d3d",
+  "script_sha256": "9c3163c26cf1a5656c2cbcd13ac6c84d266b2586bdb22fb72c0296904b348c2c",
+  "seconds": 167.82585916714743,
+  "selection_mode": "split_descendant",
+  "splits": 9,
+  "staged_clear_window_only": true,
+  "test_command": "python3 -m unittest solver.test_cnf_original_splits solver.test_cnf_trace_split solver.test_cnf_split_batch solver.test_cnf_split_frontier solver.test_cnf_route_composition solver.test_cnf_affine_clause solver.test_cnf_exhaustion_certificate solver.test_cnf_probe_window solver.test_cnf_target_probe",
+  "test_log_sha256": "c0077ac070ab7df82f468901acc5e5648700803fb4889f6552ceb93da5757213",
+  "test_source_sha256": {
+    "solver/test_cnf_affine_clause.py": "84df3d2cbca018072d84505cc7cef52042ccf9b8040e6f0aaa61c49b8fbb8296",
+    "solver/test_cnf_exhaustion_certificate.py": "0e450826157ac6aa4a924e0c337946e8e7c9e19a50b627954ba3fb8fb88ecdb5",
+    "solver/test_cnf_original_splits.py": "8bf1ddf6f0d3f9e7861ad03cf27360fb7f0fbd7580aed9ba265184895c8fee48",
+    "solver/test_cnf_probe_window.py": "f466dc3269f83104cfbbb44b840b6edf5f121d5cd509fddf4c6d86c23b53eab5",
+    "solver/test_cnf_route_composition.py": "5763f68a00ab9162adff9a449c7fcc053336eff5d9596821e7c74b5f0f7cd208",
+    "solver/test_cnf_split_batch.py": "1e49bc1cce63111718e433dd68d4045e67460e789b6b58811e003496512bf6fd",
+    "solver/test_cnf_split_frontier.py": "eea40c2ecec8c9b36f3b923385ca05972d089c9c18cad38c580f8f5c94469ec2",
+    "solver/test_cnf_target_probe.py": "25902e16a66ab0559076046a2ad90f82cffdafa220e7fa3447b1d17cfe88a902",
+    "solver/test_cnf_trace_split.py": "d3bfaab995868f7ca3392e6f7c0f0efff0c60e3198504de4c9678c88beb5c916"
+  },
+  "tests": 38,
+  "without_growth": 58
+}

@@ -12,7 +12,42 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: a forced literal exposes a ten-variable obligation
+## Current investigation: saved cofactors complete the non-affine original
+
+[The completed probe pool and split](exhausted-probe-split.md) raise structural
+coverage **57/83 -> 58/83**. The last ordinary probe is clear. Ranking all five
+saved pairs selects variable 10: its true branch is the shared empty-CNF terminal;
+seven new states reduce the false branch to Horn form. Both plans close case 73,
+and all nine saved split sources are now closed with no pending child.
+
+1. **Return to the original-input frontier.** There are **27 selected leaves
+   across 25 open originals**. The smallest is **case 30: 29 variables / 120 clauses
+   / 362 literals**. Compare its saved pair ranks with the next ordinary block
+   **7, 10, 16, 18** (five more follow) and the separate learned-clause route.
+   Probe exhaustion is not a prerequisite for a justified split; this run
+   selected a pair that was already available before the new probe. The alternative queue retains **18 bases / 92 candidates**,
+   including four previously untried augmented candidates on case 30. The saved
+   split frontier is empty, so repeating the last runner unchanged is inapplicable.
+2. **Reduce complete-plan verification to its actual dependencies.** The new
+   window costs **0.00181 s**, pair acquisition **0.01667 s**; total pipeline cost
+   is **270.70538 s**. Preparation (66.55717 s), full audit (108.42947 s) and cold
+   routes (64.45513 s) dominate. Saved two-trace replay is slower in the tiny local
+   control (0.000430 versus 0.000349 s fresh); no reliable timing advantage follows.
+   An empty cofactor already witnesses SAT: distinguish early decision from
+   acquiring both branches for complete structural coverage.
+3. **Control retained space and establish generality.** SQLite adds **90,112
+   bytes** to **770,121,728 bytes / 41,749 nodes**. The delta is **5,411 compressed
+   bytes**, plus sidecars. This is another reused development case, not a holdout
+   or arbitrary-SAT guarantee. A 32-state allowance does not bound total work.
+
+Resume `experiments/results/cnf-probe-split/report.json` with
+`continue_cnf_probe_split.restore_checkpoint` and `routes_for`. Preserve all five
+evidence lists, now including nine splits, and earlier lemma sidecars. Thirty-eight
+targeted tests, the full audit and **167.82586 s** independent cold replay pass.
+Reference proofs retain all 1,906 old nodes within 1,940. The independent cold validator replays selection before adding
+new child states; see `validation.json` and `open-originals.json.gz`.
+
+## Previous investigation: a forced literal exposes a ten-variable obligation
 
 [Probe continuation below the saved split](original-frontier-probe.md) reduces
 case 73's open leaf **13 variables / 62 clauses -> 10 variables / 44 clauses**.

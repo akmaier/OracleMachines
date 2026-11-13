@@ -5570,3 +5570,47 @@ Twenty-nine targeted tests, the full inventory audit and **164.19006 s**
 independent cold replay pass, with zero new discovery and unchanged reconstructed
 bytes. Details are recorded in this checkpoint's `validation.json`.
 The preliminary probe and corrected validator import failure are both retained.
+
+## 2026-11-13: a completed probe pool and saved split close case 73
+
+The [probe-and-split continuation](exhausted-probe-split.md) raises coverage
+**57/83 -> 58/83**, also without growth-exception routes. The last ordinary
+variable 7 is clear in both polarities. Ten saved traces cover all five binary
+variables; the other five cannot start unit propagation. The source-bound
+exhaustion certificate is not a SAT verdict. Ranking all five pairs selects
+variable 10, with score **[1, 1, 9, 96, 10]**: its true branch reuses the empty-CNF
+terminal, and seven new states close its nine-variable false branch through
+probing, two eliminations, two binary-path reductions and a polarity change to
+Horn form. Both plans complete the 48-variable / 204-clause original case 73.
+
+All **nine saved splits** now have closed sources, with no open descendant or
+pending child. The selected original queue retains **27 leaves across 25
+originals**. Its smallest is **case 30, 29 variables / 120 clauses / 362 literals**,
+with ordinary candidates **7, 10, 16, 18, 20, 21, 23, 28, 29** still available.
+Compare the first four with the saved pair ranks and learned-clause route.
+The selected pair in this run was already available before the new probe;
+exhaustion is not a prerequisite for a split. The empty branch already witnesses
+SAT, whereas acquiring both branches serves complete structural coverage. The alternative queue retains 18 bases / 92 candidates, including the
+previous four augmented candidates on case 30. Use the original-input frontier
+now; the current experiment intentionally requires an open split descendant.
+
+Ordinary acquisition costs **0.00181 s**, exhaustion checking **0.00620 s**, pair
+selection **0.04998 s** and cofactor acquisition **0.01667 s**. The full pipeline
+costs **270.70538 s**, including 66.55717 s preparation, 108.42947 s full audit
+and 64.45513 s cold routes. Saved two-trace replay is slower in the tiny matched
+sample (0.000430 versus 0.000349 s fresh); no robust runtime comparison follows.
+SQLite grows **90,112 bytes** to **770,121,728 bytes / 41,749 nodes**. The delta
+is **5,411 compressed bytes**, plus sidecars. All prior rows and 1,906 reference
+nodes survive (1,940 reference nodes now). Reference proofs independently establish
+SAT and check model lifts. No new general tractability or minimum-cost claim is made.
+
+Resume `experiments/results/cnf-probe-split/report.json` through
+`continue_cnf_probe_split.restore_checkpoint` and `routes_for`, retaining all
+five evidence lists: one rewrite, 42 learned bases, 155 augmented blocks,
+**nine splits and one affine family record**, plus earlier lemma sidecars.
+Thirty-eight targeted tests, the full inventory audit and **167.82586 s**
+independent cold validation pass. Cold validation stages only the checked clear
+window before replaying the original selection, then checks the complete child
+checkpoint without fresh discovery;
+its results and next-source mapping are retained in this checkpoint. Complete-plan
+verification from actual dependencies remains the largest measured runtime gap.

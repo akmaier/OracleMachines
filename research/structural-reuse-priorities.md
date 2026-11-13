@@ -12,7 +12,37 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: saved conditioning exposes a smaller non-affine leaf
+## Current investigation: a forced literal exposes a ten-variable obligation
+
+[Probe continuation below the saved split](original-frontier-probe.md) reduces
+case 73's open leaf **13 variables / 62 clauses -> 10 variables / 44 clauses**.
+One failed literal unlocks two eliminations and binary-path deletion, with four
+new recognition states. Coverage stays **57/83**; all previous evidence survives.
+
+1. **Test the one remaining ordinary variable, 7, on the ten-variable leaf.**
+   Saved pairs cover 10, 3, 5 and 6. If the new pair is clear, preserve it and
+   rank exact cofactor splits. The leaf has no directly extracted affine equation.
+   Use the retained split frontier, not the selected original view of its older
+   parent. The 18-base / 92-variable alternative learning queue remains available.
+2. **Check complete positive plans from their actual dependencies.** Acquisition
+   costs **0.02000 s**; preparation **69.25253 s**, full audit **115.65564 s**, cold
+   routes **65.40336 s**, total **282.11723 s**. Local support reduction does not
+   establish a whole-solver runtime improvement. Compact local replay alone is
+   insufficient to justify a complete positive coverage plan.
+3. **Bound retained space and test generality.** SQLite adds **57,344 bytes** to
+   **770,031,616 bytes / 41,742 nodes**. The new delta is **6,225 compressed bytes**;
+   sidecars are additional. No original gain or independent holdout gain occurs,
+   and the 32-state admission cap is not a polynomial-time or peak-RAM bound.
+
+Resume `experiments/results/cnf-original-probe/report.json` with
+`continue_cnf_original_probes.restore_checkpoint` and `routes_for`. Keep all five
+evidence lists, including eight splits and the affine family certificate, plus
+earlier lemma sidecars. The full audit, 29 targeted tests and **164.19006 s**
+independent cold replay pass. Reference proofs preserve all 1,898 old nodes within
+1,906. See `validation.json` for the
+independent cold replay and `frontier-profiles.json.gz` for the exact next source.
+
+## Previous investigation: saved conditioning exposes a smaller non-affine leaf
 
 [The original-frontier split](original-frontier-split.md) chooses case 73's
 20-variable / 80-clause leaf without using its label, ranks all fourteen retained

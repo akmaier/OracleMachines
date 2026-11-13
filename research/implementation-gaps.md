@@ -5535,3 +5535,38 @@ separate and intact. `frontier-profiles.json.gz` records the precise smaller
 source and next variables; `open-originals.json.gz` retains the original/queue
 mapping. Dependency-local verification of complete positive plans remains the
 largest measured runtime opportunity alongside discovery of smaller residuals.
+
+## 2026-11-13: forced continuation reduces the open split leaf to ten variables
+
+The [probe continuation](original-frontier-probe.md) follows case 73's saved
+split and tests the next four-variable candidate block on its 13-variable leaf.
+The first attempt refutes variable 1 = false. Restricting the forced opposite
+literal, two eliminations and binary-path deletion leave **10 variables /
+44 clauses / 151 literals**, down from 13 / 62 / 219. Four new recognition states
+suffice. Coverage stays **57/83**, also without growth exceptions; one acquired
+structural leaf remains open and no child is pending.
+
+That leaf has zero directly extracted parity equations and saved ordinary pairs
+for **10, 3, 5 and 6**. The next ordinary candidate is **7**. Test it before another
+split; if clear, retain the result and rank the saved cofactor pairs. Variables
+are local to each normalized residual. Do not repeat the obsolete source's
+remaining probes or use the original-frontier view to restart its larger parent.
+The 18-base / 92-variable alternative learning queue remains retained.
+
+Local acquisition costs **0.02000 s**, but the pipeline costs **282.11723 s**:
+preparation 69.25253 s, full audit 115.65564 s and cold routes 65.40336 s dominate.
+SQLite grows **57,344 bytes** to **770,031,616 bytes / 41,742 pattern nodes**;
+the delta is **6,225 compressed bytes** plus sidecars. All old rows and 1,898
+reference nodes remain preserved (1,906 reference nodes now). No global runtime
+speedup, peak-RAM reduction, holdout gain or arbitrary-SAT bound is established.
+Dependency-local verification of complete positive plans remains the largest
+measured runtime opportunity.
+
+Resume `experiments/results/cnf-original-probe/report.json` through
+`continue_cnf_original_probes.restore_checkpoint` and `routes_for`, keeping all
+**five evidence lists**: one rewrite, 42 learned bases, 155 augmented blocks,
+eight splits and one affine family record, plus earlier lemma sidecars.
+Twenty-nine targeted tests, the full inventory audit and **164.19006 s**
+independent cold replay pass, with zero new discovery and unchanged reconstructed
+bytes. Details are recorded in this checkpoint's `validation.json`.
+The preliminary probe and corrected validator import failure are both retained.

@@ -12,7 +12,53 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: deeper probes close six cases and expose a certified limit
+## Current investigation: saved pairs expose one equivalence, but no coverage gain
+
+The [saved-trace study](saved-trace-reuse.md) checks **1,240 saved attempts across
+41 exposed clear sources** in **0.52728 s**. There are no common-value pairs and
+one signed-equivalence block: **x27=x5** on case 58 (`fresh3`, n48, original 1340).
+Exact substitution reduces its source from **37 to 36 variables**. Subsequent
+recognition admits five nodes and performs 42 new probes in **0.04364 s**, but
+the target stays open. Coverage remains **45/83**, also without growth-exception
+routes. A separate 49-node reference archive confirms this residual is UNSAT;
+that fallback answer is not counted as structural coverage.
+
+The bounded binary-learning scan retains **284 candidate clauses on 39 sources**,
+including **161 justified by later-window traces on 37 sources**. Other candidates
+come from initial profiles and may have been considered by earlier learning.
+Four sources reach the cap of 16 clauses, so this is not an exhaustive candidate
+inventory. All 40 sources without a direct paired rewrite remain recorded.
+
+1. **Combine the saved implications before acquiring new assumptions.** Build a
+   checked binary implication graph, including contrapositives, and look for
+   forced literals, contradictory components and additional equivalences. Retain
+   source-linked path witnesses. If graph conclusions are insufficient, test
+   propagation on the augmented CNF under an explicit clause/probe budget.
+   Among the five certified single-assumption obstructions, cases 2, 73 and 27
+   supply 10, 10 and three candidate clauses; cases 0 and 51 supply none.
+2. **Target the remaining obstruction by structure.** Case 51 is a width-two
+   stalled source without new nonredundant implications in the saved traces;
+   bounded nested conditioning is a more direct next candidate. Case 0 still
+   has minimum width five, excluding plain unit triggers after at most three
+   assignments. Preserve the exact scope of that obstruction.
+3. **Treat cold replay as the dominant runtime cost.** This run pays **65.75 s**
+   preparation, **109.08 s** full cold inventory and **62.85 s** cold routes;
+   acquisition/validation takes **257.50 s** before the separate validator.
+   A warm chosen-pair microbenchmark improves from 0.11823 to 0.06768 s per 100
+   repetitions (five-run medians), but it excludes selection, persistence and
+   target acquisition. There is no whole-solver speedup or RAM claim.
+
+All **561 tests** and independent cold reconstruction pass. Working SQLite grows
+**86,016 bytes**, with a **5,818-byte compressed node delta** and **1,957-byte
+rewrite artifact**. The opportunity log adds 73,273 compressed bytes (4,090,411
+uncompressed); full textual reference keys are not constant-size pointers.
+Resume **41,540 pattern nodes** through `restore_checkpoint` in
+`experiments/compare_cnf_trace_reuse.py`, passing the returned records to
+`TraceRoutes`; using only the old probe runner omits this additional route.
+All prior eight-table rows, 75 windows and 97 continuation blocks are preserved.
+The old 902/985 full-corpus result, manuscript and Lean sources are unchanged.
+
+## Previous investigation: deeper probes close six cases and expose a certified limit
 
 The [resumed-probe study](probe-resumption.md) retains the same four-source and
 32-state limits and raises coverage **39/83 -> 45/83**. Independent reference

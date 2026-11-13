@@ -1287,3 +1287,20 @@ traces and excludes the nested ones. Its successful run costs 5.35440 seconds
 including restoration, with 0.02974 seconds for the required source checks; the
 aborted preliminary replay times were not retained. Manuscript and Lean sources
 are unchanged, and the earlier full prepared result remains 902/985.
+
+## Saved-pair reuse checkpoint, 13 November 2026
+
+[Saved trace reuse](saved-trace-reuse.md) checks all 1,240 retained assumptions on
+41 exposed clear sources. One equivalence, x27=x5, reduces a 37-variable source
+to 36 variables; no common-value pair appears. Five acquired target nodes and
+42 new target-recognition probes still leave the residual open, so coverage
+remains 45/83. The independent residual UNSAT proof is retained separately and
+is not a structural family certificate. All 40 negative pair scans are saved.
+
+The larger opportunity is composition of checked implications: the capped scan
+retains 284 candidate binary clauses on 39 sources, including 161 from later
+traces on 37 sources. Test graph paths/components and then bounded augmented-CNF
+propagation. Four sources reach the 16-clause cap, and initial-profile candidates
+may repeat earlier learning. The width-five obstruction and a width-two stalled
+source with no such candidates need different treatment. This refines the open
+frontier; it does not partition arbitrary SAT into efficiently decidable cells.

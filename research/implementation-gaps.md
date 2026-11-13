@@ -5096,3 +5096,20 @@ traces and excludes the nested ones. Its successful run costs 5.35440 seconds
 including restoration, with 0.02974 seconds for the required source checks; the
 aborted preliminary replay times were not retained. Manuscript and Lean sources
 are unchanged, and the earlier full prepared result remains 902/985.
+
+## Saved source traces reused as exact rewrites, 13 November 2026
+
+`cnf_trace_reuse.py` adds checked common/equivalence rewrites referencing existing
+source-bound traces. Both polarities are replayed, augmented-source continuations
+are excluded, every clause is substituted, exact child bindings and model lift
+are checked, and absent targets cannot close plans. The full frontier scan finds
+one equivalence and no common values among 1,240 attempts on 41 sources.
+Coverage stays 45/83 after five additional pattern nodes; 42 new probes belong to
+target recognition, not derivation of the saved-pair equivalence. All 561 tests,
+byte-preserving reconstruction and independent reference checks pass.
+
+The complete study, negative results, cost ledger and next implication-graph
+experiment are in [saved-trace-reuse.md](saved-trace-reuse.md). Restore the new
+checkpoint with `compare_cnf_trace_reuse.restore_checkpoint` and retain its
+external records in `TraceRoutes`; the parent runner alone omits this route.
+The eight-table history now has 41,540 pattern nodes; no earlier rows are changed.

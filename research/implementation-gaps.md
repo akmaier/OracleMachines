@@ -5297,3 +5297,43 @@ splits, selected internal plans and ordinary forced routes; it is not a minimal
 or exhaustive analysis of every alternative proof plan. Manuscript and Lean
 remain unchanged; unrestricted efficient construction and compact closure remain
 open.
+
+## Learning versus saved conditioning, 13 November 2026
+
+[The matched learning/split trial](learning-versus-saved-split.md) starts from
+the exhausted 22-variable / 90-clause source. A new 16-clause batch has a clear
+initial block and five clear later blocks, then exhausts the augmented candidate
+pool without a reduction. The complete graph of saved source implications also
+provides no forced value, equivalence or contradiction. These are retained
+negative results for this precise inference, not barriers to arbitrary methods.
+
+One split ranked from eight saved pairs needs four new recognition states and
+reuses its already closed sibling. The selected remaining leaf becomes
+**19 variables / 84 clauses**, but original coverage remains **55/83**, including
+the ablation. Both cofactors are acquired. Local acquisition is 0.03825 s for
+learning and 0.03446 s for splitting, with another 0.02471 s for pair ranking.
+The 32-state allowances do not equalize CPU work. Cold preparation, full audit
+and preservation scans dominate the 434.32-second pipeline.
+
+The union adds 57,344 working SQLite bytes to 769,617,920 bytes, with 41,710
+pattern nodes; all inherited rows remain unchanged. The reference archive
+preserves all 1,750 old nodes within 1,775 checked nodes. Source, augmented formula
+and both cofactors are independently SAT; reference answers are separate from
+structural coverage. The failed first export and all completed proof archives
+are preserved. Peak RAM and unrestricted compact closure remain unproved.
+
+Resume `experiments/results/cnf-learning-split/report.json` through
+`compare_cnf_learning_split.restore_checkpoint` and
+`compare_cnf_split_batch.routes_for`, retaining all **six splits, 42 learned
+bases and 155 augmented blocks**. `diagnostics.json.gz` -> `frontier` identifies
+the 19-variable leaf and its ten untried ordinary candidates. The 18-base /
+92-variable learned queue remains an alternative. Do not repeat the exhausted
+source/batch. Dependency-local verification and delta export are high-cost
+implementation gaps. Manuscript and Lean are unchanged.
+
+Validation: all **589 tests** pass (88.787 s); full inventory audit and independent
+cold replay pass. Cold replay takes 297.82 s with discovery disabled and history
+bytes unchanged. On the 106-clause augmented formula, 42 saved clear traces cover
+both values of 21 binary variables; variable 12 cannot trigger an initial unit.
+This certifies failure of every single-variable unit-refutation attempt after
+the new batch, without deciding a broader complexity question.

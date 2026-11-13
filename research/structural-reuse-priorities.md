@@ -12,7 +12,49 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse reaches a 22-variable inference boundary
+## Current investigation: conditioning passes the exhausted learned batch
+
+[The learned-clause/saved-split comparison](learning-versus-saved-split.md)
+starts both arms from the same 22-variable / 90-clause residual with a 32-state
+recognition allowance. The new 16-clause batch exhausts its augmented probes
+without a reduction. The saved split needs **four new recognition states** and
+leaves a **19-variable / 84-clause** obligation, with its other branch closed.
+Original coverage remains **55/83**. This is local structural progress; it does
+not establish an original-level gain or a general timing advantage.
+
+1. **Continue the acquired 19-variable leaf.** Its original profile is
+   `learning_clear`, but ten ranked ordinary candidates remain untried. Reuse
+   all parent splits and closed siblings. Compare another bounded continuation
+   with the alternative queue before repeating work on exhausted sources.
+2. **Keep the 18-base / 92-variable learning queue.** The new base joins the
+   exhausted group; do not rerun this exact 16-clause batch. The full saved
+   source implication graph also provides no forced value, equivalence or
+   contradiction. This does not exclude larger batches or stronger inference.
+3. **Reduce cold validation cost when expanding the scope.** Local acquisition
+   is only about 0.038 s for learning and 0.034 s for splitting, before ranking
+   and repeated cold preparation. The 434.32-second pipeline includes a 117.76 s
+   inventory audit and roughly 5.6 s per delta export, even for an empty delta.
+   Dependency-local checking and export are concrete high-cost gaps.
+   Recognition-state caps still do not bound total checking work, memory or
+   retained bytes.
+
+Resume `experiments/results/cnf-learning-split/report.json` through
+`compare_cnf_learning_split.restore_checkpoint` and
+`compare_cnf_split_batch.routes_for`. Retain **six external splits**, **42 learned
+bases** and **155 augmented blocks**. The selected frontier is under
+`diagnostics.json.gz` -> `frontier`; separate learned-target diagnostics keep
+successful external routes visible. There are no pending cofactor children in
+this run. The prior export failure and all completed proofs are preserved too.
+Working SQLite adds **57,344 bytes** to **769,617,920 bytes** and retains **41,710
+pattern nodes**. All 1,750 earlier reference nodes remain within 1,775 checked
+nodes. Reference solving proves the source, augmented formula and both cofactors
+SAT; structural closure of the selected remaining leaf is a separate obligation.
+All **589 tests**, full inventory audit and independent cold replay pass. The
+latter certifies the augmented obstruction: 42 clear traces cover 21 binary
+variables, and variable 12 cannot start unit propagation. No single-variable
+unit refutation succeeds after this precise batch. Cold replay costs **297.82 s**.
+
+## Previous investigation: reuse reaches a 22-variable inference boundary
 
 [Continuation through retained splits](retained-split-frontier.md) follows the
 saved open cofactor instead of restarting its 33-variable parent. A forced

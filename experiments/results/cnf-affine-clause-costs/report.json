@@ -1,0 +1,982 @@
+{
+  "certificates": {
+    "bytes": 51711,
+    "compressed_bytes": 14877,
+    "path": "experiments/results/cnf-affine-clause-costs/certificates.json.gz",
+    "sha256": "dcb93f479a767c3e58acfc868a3fc700d75dc04ebaa6355f78eda009fe2a961e"
+  },
+  "clause_edit": {
+    "counts": {
+      "affine_clause_decisions_checked": 1,
+      "affine_clause_model_literals": 60,
+      "affine_clause_reused_spaces": 1,
+      "affine_extracted_equations": 4,
+      "affine_grouping_literals": 60,
+      "affine_leftover_clauses": 1,
+      "affine_space_kernel_equation_checks": 64,
+      "affine_space_particular_equation_checks": 8,
+      "affine_space_vectors_checked": 18,
+      "affine_verification_literals": 96,
+      "affine_verified_certificates": 2,
+      "elimination_validation_literals": 120
+    },
+    "sat": true,
+    "seconds": 0.00016845902428030968
+  },
+  "fingerprints": {
+    "experiments/benchmark_cnf_affine_clause.py": "cd41246f52a2128f0941bc6a4b3bb7657f022eb704445dace6650f08d7ebc1d3",
+    "experiments/cnf_affine_clause.py": "d04deac3dc59eee92d086c4de396d8185dbdf75a41b1fce8d87da35a93417fc2"
+  },
+  "format": "affine-one-clause-matched-cost-v1",
+  "limitations": [
+    "Generated restricted-family cases, not a representative arbitrary-SAT benchmark.",
+    "Warm exact-source reuse presupposes paid seed acquisition; changing the CNF requires a fresh bound extraction certificate.",
+    "The edit arm reuses only the checked solution space and pays extraction/checking of its new source.",
+    "Python traced allocation peaks are local calls, not process RSS or whole-history peak RAM.",
+    "The affine row and nullspace representations are polynomial, while CNF parity inputs can already be exponentially large.",
+    "Matched local timing includes normalization and proof construction/checking but excludes filesystem/history reconstruction; storage and cold replay are separate."
+  ],
+  "rows": [
+    {
+      "arms": {
+        "fresh": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_direction_queries": 1,
+            "affine_clause_model_literals": 60,
+            "affine_extracted_equations": 4,
+            "affine_grouping_literals": 60,
+            "affine_leftover_clauses": 1,
+            "affine_space_backsub_rows": 36,
+            "affine_space_kernel_equation_checks": 64,
+            "affine_space_particular_equation_checks": 8,
+            "affine_space_vectors_checked": 18,
+            "affine_space_vectors_constructed": 9,
+            "affine_verification_literals": 96,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 120,
+            "normalization_literal_visits": 60
+          },
+          "median_seconds": 0.00020354101434350014,
+          "python_peak_traced_bytes": 11056,
+          "seconds": [
+            0.00021399976685643196,
+            0.00020108278840780258,
+            0.00021204212680459023,
+            0.0002120831049978733,
+            0.00020354101434350014,
+            0.00021691713482141495,
+            0.00019741617143154144,
+            0.00019387481734156609,
+            0.00019912514835596085
+          ]
+        },
+        "reuse": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_direction_queries": 1,
+            "affine_clause_model_literals": 60,
+            "affine_clause_reused_extractions": 1,
+            "affine_clause_reused_spaces": 1,
+            "affine_space_kernel_equation_checks": 64,
+            "affine_space_particular_equation_checks": 8,
+            "affine_space_vectors_checked": 18,
+            "affine_verification_literals": 96,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 120,
+            "normalization_literal_visits": 60
+          },
+          "median_seconds": 0.00016525015234947205,
+          "python_peak_traced_bytes": 9424,
+          "seconds": [
+            0.00017004180699586868,
+            0.0001650420017540455,
+            0.00016725016757845879,
+            0.00016858289018273354,
+            0.00016525015234947205,
+            0.0001627081073820591,
+            0.00016475003212690353,
+            0.00016512535512447357,
+            0.00016566691920161247
+          ]
+        }
+      },
+      "compression_seconds": 5.174987018108368e-05,
+      "kind": "repair",
+      "proof_bytes": 760,
+      "proof_gzip_bytes": 365,
+      "rank": 4,
+      "second_clause_control": {
+        "leftovers": 2,
+        "seconds": 8.512521162629128e-05
+      },
+      "seed_seconds": 0.00031524989753961563,
+      "size": 12,
+      "variables": 12,
+      "vector_bit_lengths": 66,
+      "vectors": 9
+    },
+    {
+      "arms": {
+        "fresh": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_model_literals": 60,
+            "affine_extracted_equations": 4,
+            "affine_grouping_literals": 60,
+            "affine_leftover_clauses": 1,
+            "affine_space_backsub_rows": 36,
+            "affine_space_kernel_equation_checks": 64,
+            "affine_space_particular_equation_checks": 8,
+            "affine_space_vectors_checked": 18,
+            "affine_space_vectors_constructed": 9,
+            "affine_verification_literals": 96,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 120,
+            "normalization_literal_visits": 60
+          },
+          "median_seconds": 0.0001888750120997429,
+          "python_peak_traced_bytes": 10896,
+          "seconds": [
+            0.0001909579150378704,
+            0.0001920829527080059,
+            0.00018983380869030952,
+            0.00018949992954730988,
+            0.000187666155397892,
+            0.00018833298236131668,
+            0.00018625007942318916,
+            0.0001882081851363182,
+            0.0001888750120997429
+          ]
+        },
+        "reuse": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_model_literals": 60,
+            "affine_clause_reused_extractions": 1,
+            "affine_clause_reused_spaces": 1,
+            "affine_space_kernel_equation_checks": 64,
+            "affine_space_particular_equation_checks": 8,
+            "affine_space_vectors_checked": 18,
+            "affine_verification_literals": 96,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 120,
+            "normalization_literal_visits": 60
+          },
+          "median_seconds": 0.00016858428716659546,
+          "python_peak_traced_bytes": 9352,
+          "seconds": [
+            0.00017166603356599808,
+            0.00016224989667534828,
+            0.00016320915892720222,
+            0.00017587514594197273,
+            0.0001688748598098755,
+            0.000170957762748003,
+            0.00016341591253876686,
+            0.00016258331015706062,
+            0.00016858428716659546
+          ]
+        }
+      },
+      "compression_seconds": 3.295810893177986e-05,
+      "kind": "particular",
+      "proof_bytes": 776,
+      "proof_gzip_bytes": 372,
+      "rank": 4,
+      "second_clause_control": {
+        "leftovers": 2,
+        "seconds": 9.029218927025795e-05
+      },
+      "seed_seconds": 0.00020674988627433777,
+      "size": 12,
+      "variables": 12,
+      "vector_bit_lengths": 68,
+      "vectors": 9
+    },
+    {
+      "arms": {
+        "fresh": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_direction_queries": 12,
+            "affine_clause_fixed_literal_checks": 2,
+            "affine_extracted_equations": 5,
+            "affine_grouping_literals": 40,
+            "affine_leftover_clauses": 1,
+            "affine_space_backsub_rows": 35,
+            "affine_space_kernel_equation_checks": 60,
+            "affine_space_particular_equation_checks": 10,
+            "affine_space_vectors_checked": 14,
+            "affine_space_vectors_constructed": 7,
+            "affine_verification_literals": 76,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 80,
+            "normalization_literal_visits": 40
+          },
+          "median_seconds": 0.0001737913116812706,
+          "python_peak_traced_bytes": 10760,
+          "seconds": [
+            0.0001778341829776764,
+            0.00018124980852007866,
+            0.00017474964261054993,
+            0.0001737913116812706,
+            0.00017358316108584404,
+            0.00017458340153098106,
+            0.00017316732555627823,
+            0.00017133401706814766,
+            0.00017291586846113205
+          ]
+        },
+        "reuse": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_direction_queries": 12,
+            "affine_clause_fixed_literal_checks": 2,
+            "affine_clause_reused_extractions": 1,
+            "affine_clause_reused_spaces": 1,
+            "affine_space_kernel_equation_checks": 60,
+            "affine_space_particular_equation_checks": 10,
+            "affine_space_vectors_checked": 14,
+            "affine_verification_literals": 76,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 80,
+            "normalization_literal_visits": 40
+          },
+          "median_seconds": 0.0001571672037243843,
+          "python_peak_traced_bytes": 8880,
+          "seconds": [
+            0.00015691621229052544,
+            0.0001709996722638607,
+            0.00015954207628965378,
+            0.00017420807853341103,
+            0.0001571672037243843,
+            0.00014833314344286919,
+            0.00015641702339053154,
+            0.00016908301040530205,
+            0.00015445798635482788
+          ]
+        }
+      },
+      "compression_seconds": 2.9041897505521774e-05,
+      "kind": "unsat",
+      "proof_bytes": 759,
+      "proof_gzip_bytes": 345,
+      "rank": 5,
+      "second_clause_control": {
+        "leftovers": 2,
+        "seconds": 8.341576904058456e-05
+      },
+      "seed_seconds": 0.00019354186952114105,
+      "size": 12,
+      "variables": 11,
+      "vector_bit_lengths": 48,
+      "vectors": 7
+    },
+    {
+      "arms": {
+        "fresh": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_direction_queries": 7,
+            "affine_clause_model_literals": 120,
+            "affine_extracted_equations": 8,
+            "affine_grouping_literals": 120,
+            "affine_leftover_clauses": 1,
+            "affine_space_backsub_rows": 136,
+            "affine_space_kernel_equation_checks": 256,
+            "affine_space_particular_equation_checks": 16,
+            "affine_space_vectors_checked": 34,
+            "affine_space_vectors_constructed": 17,
+            "affine_verification_literals": 192,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 240,
+            "normalization_literal_visits": 120
+          },
+          "median_seconds": 0.0003609168343245983,
+          "python_peak_traced_bytes": 20016,
+          "seconds": [
+            0.0003609168343245983,
+            0.0003666253760457039,
+            0.0003627920523285866,
+            0.0003525838255882263,
+            0.0003697499632835388,
+            0.00036004185676574707,
+            0.0003615831956267357,
+            0.00035733310505747795,
+            0.00035012513399124146
+          ]
+        },
+        "reuse": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_direction_queries": 7,
+            "affine_clause_model_literals": 120,
+            "affine_clause_reused_extractions": 1,
+            "affine_clause_reused_spaces": 1,
+            "affine_space_kernel_equation_checks": 256,
+            "affine_space_particular_equation_checks": 16,
+            "affine_space_vectors_checked": 34,
+            "affine_verification_literals": 192,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 240,
+            "normalization_literal_visits": 120
+          },
+          "median_seconds": 0.00030904216691851616,
+          "python_peak_traced_bytes": 16936,
+          "seconds": [
+            0.00032129092141985893,
+            0.0003137080930173397,
+            0.00030966708436608315,
+            0.0003088749945163727,
+            0.00030579231679439545,
+            0.00030841678380966187,
+            0.00031070876866579056,
+            0.00030904216691851616,
+            0.0003064582124352455
+          ]
+        }
+      },
+      "compression_seconds": 4.0333718061447144e-05,
+      "kind": "repair",
+      "proof_bytes": 1442,
+      "proof_gzip_bytes": 582,
+      "rank": 8,
+      "second_clause_control": {
+        "leftovers": 2,
+        "seconds": 0.00015808315947651863
+      },
+      "seed_seconds": 0.0004000002518296242,
+      "size": 24,
+      "variables": 24,
+      "vector_bit_lengths": 253,
+      "vectors": 17
+    },
+    {
+      "arms": {
+        "fresh": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_model_literals": 120,
+            "affine_extracted_equations": 8,
+            "affine_grouping_literals": 120,
+            "affine_leftover_clauses": 1,
+            "affine_space_backsub_rows": 136,
+            "affine_space_kernel_equation_checks": 256,
+            "affine_space_particular_equation_checks": 16,
+            "affine_space_vectors_checked": 34,
+            "affine_space_vectors_constructed": 17,
+            "affine_verification_literals": 192,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 240,
+            "normalization_literal_visits": 120
+          },
+          "median_seconds": 0.0003561251796782017,
+          "python_peak_traced_bytes": 20400,
+          "seconds": [
+            0.0003686249256134033,
+            0.0005952082574367523,
+            0.0003581247292459011,
+            0.00035341689363121986,
+            0.0003554578870534897,
+            0.0003561251796782017,
+            0.00035908306017518044,
+            0.00035574985668063164,
+            0.0003525828942656517
+          ]
+        },
+        "reuse": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_model_literals": 120,
+            "affine_clause_reused_extractions": 1,
+            "affine_clause_reused_spaces": 1,
+            "affine_space_kernel_equation_checks": 256,
+            "affine_space_particular_equation_checks": 16,
+            "affine_space_vectors_checked": 34,
+            "affine_verification_literals": 192,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 240,
+            "normalization_literal_visits": 120
+          },
+          "median_seconds": 0.00031404197216033936,
+          "python_peak_traced_bytes": 16936,
+          "seconds": [
+            0.0003503328189253807,
+            0.0003092917613685131,
+            0.0003077499568462372,
+            0.00030354224145412445,
+            0.00030062487348914146,
+            0.0003154161386191845,
+            0.00031695887446403503,
+            0.00031404197216033936,
+            0.000314291100949049
+          ]
+        }
+      },
+      "compression_seconds": 3.5665929317474365e-05,
+      "kind": "particular",
+      "proof_bytes": 1461,
+      "proof_gzip_bytes": 586,
+      "rank": 8,
+      "second_clause_control": {
+        "leftovers": 2,
+        "seconds": 0.00014979206025600433
+      },
+      "seed_seconds": 0.000385332852602005,
+      "size": 24,
+      "variables": 24,
+      "vector_bit_lengths": 240,
+      "vectors": 17
+    },
+    {
+      "arms": {
+        "fresh": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_direction_queries": 28,
+            "affine_clause_fixed_literal_checks": 2,
+            "affine_extracted_equations": 9,
+            "affine_grouping_literals": 88,
+            "affine_leftover_clauses": 1,
+            "affine_space_backsub_rows": 135,
+            "affine_space_kernel_equation_checks": 252,
+            "affine_space_particular_equation_checks": 18,
+            "affine_space_vectors_checked": 30,
+            "affine_space_vectors_constructed": 15,
+            "affine_verification_literals": 172,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 176,
+            "normalization_literal_visits": 88
+          },
+          "median_seconds": 0.000330084003508091,
+          "python_peak_traced_bytes": 20272,
+          "seconds": [
+            0.0003361250273883343,
+            0.00034025032073259354,
+            0.00034391600638628006,
+            0.00033945823088288307,
+            0.00032283272594213486,
+            0.0003210841678082943,
+            0.0003272080793976784,
+            0.000330084003508091,
+            0.00032616592943668365
+          ]
+        },
+        "reuse": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_direction_queries": 28,
+            "affine_clause_fixed_literal_checks": 2,
+            "affine_clause_reused_extractions": 1,
+            "affine_clause_reused_spaces": 1,
+            "affine_space_kernel_equation_checks": 252,
+            "affine_space_particular_equation_checks": 18,
+            "affine_space_vectors_checked": 30,
+            "affine_verification_literals": 172,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 176,
+            "normalization_literal_visits": 88
+          },
+          "median_seconds": 0.00028458377346396446,
+          "python_peak_traced_bytes": 16984,
+          "seconds": [
+            0.00029125018045306206,
+            0.000300833024084568,
+            0.00029854103922843933,
+            0.00028458377346396446,
+            0.0002882499247789383,
+            0.0002804999239742756,
+            0.000283834058791399,
+            0.0002794172614812851,
+            0.0002781245857477188
+          ]
+        }
+      },
+      "compression_seconds": 2.6875175535678864e-05,
+      "kind": "unsat",
+      "proof_bytes": 1397,
+      "proof_gzip_bytes": 536,
+      "rank": 9,
+      "second_clause_control": {
+        "leftovers": 2,
+        "seconds": 0.00014362484216690063
+      },
+      "seed_seconds": 0.0003464161418378353,
+      "size": 24,
+      "variables": 23,
+      "vector_bit_lengths": 216,
+      "vectors": 15
+    },
+    {
+      "arms": {
+        "fresh": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_direction_queries": 2,
+            "affine_clause_model_literals": 240,
+            "affine_extracted_equations": 16,
+            "affine_grouping_literals": 240,
+            "affine_leftover_clauses": 1,
+            "affine_space_backsub_rows": 528,
+            "affine_space_kernel_equation_checks": 1024,
+            "affine_space_particular_equation_checks": 32,
+            "affine_space_vectors_checked": 66,
+            "affine_space_vectors_constructed": 33,
+            "affine_verification_literals": 384,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 480,
+            "normalization_literal_visits": 240
+          },
+          "median_seconds": 0.000759459100663662,
+          "python_peak_traced_bytes": 38640,
+          "seconds": [
+            0.0007686251774430275,
+            0.000759459100663662,
+            0.000786416232585907,
+            0.0007541668601334095,
+            0.0007539582438766956,
+            0.0007634158246219158,
+            0.0007551251910626888,
+            0.0007764589972794056,
+            0.0007517500780522823
+          ]
+        },
+        "reuse": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_direction_queries": 2,
+            "affine_clause_model_literals": 240,
+            "affine_clause_reused_extractions": 1,
+            "affine_clause_reused_spaces": 1,
+            "affine_space_kernel_equation_checks": 1024,
+            "affine_space_particular_equation_checks": 32,
+            "affine_space_vectors_checked": 66,
+            "affine_verification_literals": 384,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 480,
+            "normalization_literal_visits": 240
+          },
+          "median_seconds": 0.000640250276774168,
+          "python_peak_traced_bytes": 31368,
+          "seconds": [
+            0.000640250276774168,
+            0.0006900830194354057,
+            0.0006813332438468933,
+            0.0006452091038227081,
+            0.0006476659327745438,
+            0.0006352080963551998,
+            0.0006301659159362316,
+            0.0006322921253740788,
+            0.0006336248479783535
+          ]
+        }
+      },
+      "compression_seconds": 5.041668191552162e-05,
+      "kind": "repair",
+      "proof_bytes": 2979,
+      "proof_gzip_bytes": 1109,
+      "rank": 16,
+      "second_clause_control": {
+        "leftovers": 2,
+        "seconds": 0.0003022081218659878
+      },
+      "seed_seconds": 0.0008040419779717922,
+      "size": 48,
+      "variables": 48,
+      "vector_bit_lengths": 973,
+      "vectors": 33
+    },
+    {
+      "arms": {
+        "fresh": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_model_literals": 240,
+            "affine_extracted_equations": 16,
+            "affine_grouping_literals": 240,
+            "affine_leftover_clauses": 1,
+            "affine_space_backsub_rows": 528,
+            "affine_space_kernel_equation_checks": 1024,
+            "affine_space_particular_equation_checks": 32,
+            "affine_space_vectors_checked": 66,
+            "affine_space_vectors_constructed": 33,
+            "affine_verification_literals": 384,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 480,
+            "normalization_literal_visits": 240
+          },
+          "median_seconds": 0.0007539168000221252,
+          "python_peak_traced_bytes": 40112,
+          "seconds": [
+            0.0007635001093149185,
+            0.0007632090710103512,
+            0.000754666980355978,
+            0.0007487917318940163,
+            0.0007503749802708626,
+            0.0007490841671824455,
+            0.0007502078078687191,
+            0.0007539168000221252,
+            0.0007726671174168587
+          ]
+        },
+        "reuse": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_model_literals": 240,
+            "affine_clause_reused_extractions": 1,
+            "affine_clause_reused_spaces": 1,
+            "affine_space_kernel_equation_checks": 1024,
+            "affine_space_particular_equation_checks": 32,
+            "affine_space_vectors_checked": 66,
+            "affine_verification_literals": 384,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 480,
+            "normalization_literal_visits": 240
+          },
+          "median_seconds": 0.000635082833468914,
+          "python_peak_traced_bytes": 32808,
+          "seconds": [
+            0.0006690421141684055,
+            0.0006347917951643467,
+            0.000635082833468914,
+            0.0006304997950792313,
+            0.0006323750130832195,
+            0.0006417077966034412,
+            0.0006372909992933273,
+            0.0006419592536985874,
+            0.0006268746219575405
+          ]
+        }
+      },
+      "compression_seconds": 4.866672679781914e-05,
+      "kind": "particular",
+      "proof_bytes": 3030,
+      "proof_gzip_bytes": 1136,
+      "rank": 16,
+      "second_clause_control": {
+        "leftovers": 2,
+        "seconds": 0.0002855421043932438
+      },
+      "seed_seconds": 0.0008190828375518322,
+      "size": 48,
+      "variables": 48,
+      "vector_bit_lengths": 999,
+      "vectors": 33
+    },
+    {
+      "arms": {
+        "fresh": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_direction_queries": 60,
+            "affine_clause_fixed_literal_checks": 2,
+            "affine_extracted_equations": 17,
+            "affine_grouping_literals": 184,
+            "affine_leftover_clauses": 1,
+            "affine_space_backsub_rows": 527,
+            "affine_space_kernel_equation_checks": 1020,
+            "affine_space_particular_equation_checks": 34,
+            "affine_space_vectors_checked": 62,
+            "affine_space_vectors_constructed": 31,
+            "affine_verification_literals": 364,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 368,
+            "normalization_literal_visits": 184
+          },
+          "median_seconds": 0.000724374782294035,
+          "python_peak_traced_bytes": 37460,
+          "seconds": [
+            0.000734708271920681,
+            0.0007448331452906132,
+            0.0007325829938054085,
+            0.0007143341936171055,
+            0.000724374782294035,
+            0.0007196669466793537,
+            0.0007130410522222519,
+            0.0007236669771373272,
+            0.0007491251453757286
+          ]
+        },
+        "reuse": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_direction_queries": 60,
+            "affine_clause_fixed_literal_checks": 2,
+            "affine_clause_reused_extractions": 1,
+            "affine_clause_reused_spaces": 1,
+            "affine_space_kernel_equation_checks": 1020,
+            "affine_space_particular_equation_checks": 34,
+            "affine_space_vectors_checked": 62,
+            "affine_verification_literals": 364,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 368,
+            "normalization_literal_visits": 184
+          },
+          "median_seconds": 0.000596208032220602,
+          "python_peak_traced_bytes": 28860,
+          "seconds": [
+            0.0005999170243740082,
+            0.0005976250395178795,
+            0.0005963332951068878,
+            0.000596208032220602,
+            0.0005930829793214798,
+            0.0005950839258730412,
+            0.0005928752943873405,
+            0.0005948753096163273,
+            0.0005969996564090252
+          ]
+        }
+      },
+      "compression_seconds": 4.475004971027374e-05,
+      "kind": "unsat",
+      "proof_bytes": 2851,
+      "proof_gzip_bytes": 1020,
+      "rank": 17,
+      "second_clause_control": {
+        "leftovers": 2,
+        "seconds": 0.00027841702103614807
+      },
+      "seed_seconds": 0.000743416603654623,
+      "size": 48,
+      "variables": 47,
+      "vector_bit_lengths": 891,
+      "vectors": 31
+    },
+    {
+      "arms": {
+        "fresh": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_direction_queries": 13,
+            "affine_clause_model_literals": 480,
+            "affine_extracted_equations": 32,
+            "affine_grouping_literals": 480,
+            "affine_leftover_clauses": 1,
+            "affine_space_backsub_rows": 2080,
+            "affine_space_kernel_equation_checks": 4096,
+            "affine_space_particular_equation_checks": 64,
+            "affine_space_vectors_checked": 130,
+            "affine_space_vectors_constructed": 65,
+            "affine_verification_literals": 768,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 960,
+            "normalization_literal_visits": 480
+          },
+          "median_seconds": 0.0018284167163074017,
+          "python_peak_traced_bytes": 86300,
+          "seconds": [
+            0.001969500444829464,
+            0.001838957890868187,
+            0.0018284167163074017,
+            0.0018063751049339771,
+            0.0019225003197789192,
+            0.001813374925404787,
+            0.0018382500857114792,
+            0.001808833796530962,
+            0.0018114158883690834
+          ]
+        },
+        "reuse": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_direction_queries": 13,
+            "affine_clause_model_literals": 480,
+            "affine_clause_reused_extractions": 1,
+            "affine_clause_reused_spaces": 1,
+            "affine_space_kernel_equation_checks": 4096,
+            "affine_space_particular_equation_checks": 64,
+            "affine_space_vectors_checked": 130,
+            "affine_verification_literals": 768,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 960,
+            "normalization_literal_visits": 480
+          },
+          "median_seconds": 0.001477458979934454,
+          "python_peak_traced_bytes": 71176,
+          "seconds": [
+            0.0014670002274215221,
+            0.0014904998242855072,
+            0.001477458979934454,
+            0.0014743749052286148,
+            0.0014887908473610878,
+            0.0014822501689195633,
+            0.0014677499420940876,
+            0.00148041732609272,
+            0.0014651669189333916
+          ]
+        }
+      },
+      "compression_seconds": 0.00011283298954367638,
+      "kind": "repair",
+      "proof_bytes": 6772,
+      "proof_gzip_bytes": 2527,
+      "rank": 32,
+      "second_clause_control": {
+        "leftovers": 2,
+        "seconds": 0.0005609169602394104
+      },
+      "seed_seconds": 0.0019414997659623623,
+      "size": 96,
+      "variables": 96,
+      "vector_bit_lengths": 3888,
+      "vectors": 65
+    },
+    {
+      "arms": {
+        "fresh": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_model_literals": 480,
+            "affine_extracted_equations": 32,
+            "affine_grouping_literals": 480,
+            "affine_leftover_clauses": 1,
+            "affine_space_backsub_rows": 2080,
+            "affine_space_kernel_equation_checks": 4096,
+            "affine_space_particular_equation_checks": 64,
+            "affine_space_vectors_checked": 130,
+            "affine_space_vectors_constructed": 65,
+            "affine_verification_literals": 768,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 960,
+            "normalization_literal_visits": 480
+          },
+          "median_seconds": 0.001819124910980463,
+          "python_peak_traced_bytes": 89076,
+          "seconds": [
+            0.00182291679084301,
+            0.0018388330936431885,
+            0.0018209591507911682,
+            0.0018008751794695854,
+            0.0018064589239656925,
+            0.001819124910980463,
+            0.0018220418132841587,
+            0.0018053329549729824,
+            0.0018069162033498287
+          ]
+        },
+        "reuse": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_model_literals": 480,
+            "affine_clause_reused_extractions": 1,
+            "affine_clause_reused_spaces": 1,
+            "affine_space_kernel_equation_checks": 4096,
+            "affine_space_particular_equation_checks": 64,
+            "affine_space_vectors_checked": 130,
+            "affine_verification_literals": 768,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 960,
+            "normalization_literal_visits": 480
+          },
+          "median_seconds": 0.0014888332225382328,
+          "python_peak_traced_bytes": 74040,
+          "seconds": [
+            0.0015004589222371578,
+            0.0015031248331069946,
+            0.0014915000647306442,
+            0.0014827093109488487,
+            0.001479125116020441,
+            0.001500499900430441,
+            0.0014888332225382328,
+            0.0014745001681149006,
+            0.0014837500639259815
+          ]
+        }
+      },
+      "compression_seconds": 0.00011412473395466805,
+      "kind": "particular",
+      "proof_bytes": 6893,
+      "proof_gzip_bytes": 2632,
+      "rank": 32,
+      "second_clause_control": {
+        "leftovers": 2,
+        "seconds": 0.000569458119571209
+      },
+      "seed_seconds": 0.0018554995767772198,
+      "size": 96,
+      "variables": 96,
+      "vector_bit_lengths": 3968,
+      "vectors": 65
+    },
+    {
+      "arms": {
+        "fresh": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_direction_queries": 124,
+            "affine_clause_fixed_literal_checks": 2,
+            "affine_extracted_equations": 33,
+            "affine_grouping_literals": 376,
+            "affine_leftover_clauses": 1,
+            "affine_space_backsub_rows": 2079,
+            "affine_space_kernel_equation_checks": 4092,
+            "affine_space_particular_equation_checks": 66,
+            "affine_space_vectors_checked": 126,
+            "affine_space_vectors_constructed": 63,
+            "affine_verification_literals": 748,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 752,
+            "normalization_literal_visits": 376
+          },
+          "median_seconds": 0.0017554578371345997,
+          "python_peak_traced_bytes": 84440,
+          "seconds": [
+            0.0017761662602424622,
+            0.0018011247739195824,
+            0.0017709587700664997,
+            0.0017852499149739742,
+            0.0017524161376059055,
+            0.0017494172789156437,
+            0.0017410828731954098,
+            0.0017475001513957977,
+            0.0017554578371345997
+          ]
+        },
+        "reuse": {
+          "counts": {
+            "affine_clause_decisions_checked": 1,
+            "affine_clause_direction_queries": 124,
+            "affine_clause_fixed_literal_checks": 2,
+            "affine_clause_reused_extractions": 1,
+            "affine_clause_reused_spaces": 1,
+            "affine_space_kernel_equation_checks": 4092,
+            "affine_space_particular_equation_checks": 66,
+            "affine_space_vectors_checked": 126,
+            "affine_verification_literals": 748,
+            "affine_verified_certificates": 2,
+            "elimination_validation_literals": 752,
+            "normalization_literal_visits": 376
+          },
+          "median_seconds": 0.0014290409162640572,
+          "python_peak_traced_bytes": 60396,
+          "seconds": [
+            0.0014266669750213623,
+            0.001435707788914442,
+            0.001437624916434288,
+            0.001411875244230032,
+            0.001465790905058384,
+            0.0014115413650870323,
+            0.0014940840192139149,
+            0.0014190422371029854,
+            0.0014290409162640572
+          ]
+        }
+      },
+      "compression_seconds": 0.00010720780119299889,
+      "kind": "unsat",
+      "proof_bytes": 6476,
+      "proof_gzip_bytes": 2383,
+      "rank": 33,
+      "second_clause_control": {
+        "leftovers": 2,
+        "seconds": 0.0005487082526087761
+      },
+      "seed_seconds": 0.0017849160358309746,
+      "size": 96,
+      "variables": 95,
+      "vector_bit_lengths": 3773,
+      "vectors": 63
+    }
+  ],
+  "seconds": 0.28565691597759724
+}

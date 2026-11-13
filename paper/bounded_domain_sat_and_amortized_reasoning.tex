@@ -3641,6 +3641,31 @@ This closes the retained decomposition of one original formula with 48 variables
 
 Local acquisition takes 0.05914 seconds after 0.04395 seconds of navigation and ranking. The working database adds 200,704 bytes and reaches 769,847,296 bytes; the immutable delta occupies 9,471 compressed bytes. The full pipeline takes 271.74133 seconds, including 67.69189 seconds of preparation, a 110.35857-second inventory audit and 64.20861 seconds of cold route reconstruction. All earlier reference nodes remain retained. Thus, conditioning makes structural progress where these particular augmentation passes did not, while preparation and verification dominate the measured total cost. Neither the selected split nor its recognition-state allowance establishes minimum-cost or polynomial expansion in general.
 
+\subsection{An affine core with one remaining clause}
+\label{sec:affine-one-clause}
+
+The smallest remaining selected residual has eleven variables and 49 clauses. Its checked extraction contains two consistent parity equations and one eleven-literal clause. Earlier shallow probes do not expose a reduction, and direct CNF encoding can obscure the compact affine representation. Here we can decide the remaining interaction directly.
+
+\begin{proposition}[One clause over an affine solution space]
+\label{prop:affine-one-clause}
+Let $A x=b$ be a consistent system over $\mathbb F_2$, let $a$ be a particular solution, and let $v_1,\ldots,v_d$ be a basis of its nullspace. For a clause $C$, the formula $(Ax=b)\land C$ is satisfiable if and only if $C$ contains a literal $x_i=\epsilon$ such that
+\[
+ a_i=\epsilon \quad\text{or}\quad (v_j)_i=1\text{ for some }j.
+\]
+When the first condition holds, $a$ is a model. Otherwise $a+v_j$ is a model for any indicated direction. If neither condition holds for any literal, the formula is unsatisfiable. An inconsistent affine system is unsatisfiable independently of the clause.
+\end{proposition}
+\begin{proof}
+Every affine solution has the form $a+\sum_j\lambda_jv_j$. If all basis vectors vanish at coordinate $i$, every solution has value $a_i$ there. Otherwise adding a basis vector with value one changes that coordinate while preserving every equation. Thus the displayed condition is exactly the possibility of satisfying the indicated literal. A single disjunction needs only one such literal. If none is possible, every affine solution falsifies the entire clause. This also covers the empty clause, for which there is no compatible literal.
+\end{proof}
+
+The implementation reuses the previously checked triangular rows. Back substitution constructs a particular solution and one homogeneous direction per free variable. The independent checker verifies every vector against the original extracted equations and requires identity coordinates on the free variables. For rank $r$, these $n-r$ independent vectors form a complete nullspace basis. Completeness matters for the UNSAT case: checking a convenient subset of directions could miss a satisfying assignment. The checker also verifies the complete partition of the source clauses, the row operations and the final model against the original CNF. A second leftover clause is outside this rule. Different clauses may require incompatible affine solutions, so separate literal-compatibility tests would not justify their conjunction.
+
+With $e$ extracted equations on $n$ variables and $d=n-r$, constructing the space visits $r(d+1)$ triangular rows. Checking it uses $e(d+1)$ equation-vector parity checks. The current representation retains $(d+1)$ masks of at most $n$ bits and can therefore require quadratic space. Literal compatibility takes at most $|C|d$ direction tests. These counts operate on up to $n$-bit integers; they are not constant-cost bit-operation bounds. Extraction, sorting, source verification, elimination dependencies, model checking and serialization remain additional costs. Reusing the same checked space avoids its construction, but still requires binding it to the current equations. A changed source needs its own checked extraction. This is a standard consequence of linear algebra, not a new tractability claim for arbitrary CNF, and the new Python path has no additional Lean refinement.
+
+Applying the rule to all 29 selected open leaves accepts exactly this residual. Its retained decomposition then closes the original 14-variable, 132-clause development instance. Coverage rises from 56/83 to 57/83, also without growth-exception routes. Independent reference proofs confirm SAT. The other 28 selected leaves contain no equations recognized by the explicit parity extractor, so extending only the one-clause affine rule would not address their current representations. Absence of a direct parity encoding does not exclude hidden affine structure.
+
+The complete selected-leaf pass takes 0.00599 seconds using resident checked extraction records. Its positive proof occupies 1,056 compressed bytes, while the 769,847,296-byte inventory remains unchanged. The pipeline takes 82.32152 seconds, including 14.80944 seconds of restoration and 64.60772 seconds of preparation. Cold replay checks the selected sources, coverage dependencies and reference proofs; the unchanged unrelated inventory retains its preceding full audit. This validation scope differs from the preceding experiment, so their total times are not a matched speedup comparison. In twelve generated affine/one-clause cases with 11--96 variables, exact-source reuse of the extraction and solution space is 1.11--1.24 times faster than fresh construction in median local timings over nine repetitions. Both arms pay normalization and checking. Seed acquisition, archive storage and cold replay remain separate costs. These measurements establish broader restricted coverage and modest local reuse savings, without bounding expansion for unrestricted SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

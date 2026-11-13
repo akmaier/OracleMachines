@@ -12,7 +12,41 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: a saved split completes one original decomposition
+## Current investigation: affine plus one clause closes the encoding-cap case
+
+[The affine/one-clause extension](affine-one-clause.md) raises coverage
+**56/83 -> 57/83**, also without growth exceptions. It scans all 29 selected
+leaves, reuses saved checked affine rows, and accepts one. The source-bound
+certificate is **1,056 compressed bytes**; the **769,847,296-byte** inventory
+remains unchanged. Twenty-one targeted tests and independent cold replay check
+the complete basis, source binding, coverage and reference proofs.
+
+1. **Change structure on the remaining non-affine leaves.** All **28 selected
+   open leaves across 26 originals have zero directly recognized parity equations**.
+   Repeating this affine scan or expanding its one-clause handler will not address
+   these representations. Target case 73's **20-variable / 80-clause** exhausted
+   leaf with a retained cofactor decomposition; compare case 30's four untried
+   augmented candidates on its **29-variable / 120-clause** leaf. Keep the parent
+   18-base / 92-variable ready queue. Hidden or conditioned affine structure is
+   possible, but its discovery needs evidence rather than a label assumption.
+2. **Check complete positive plans from their actual dependencies.** The new local
+   pass costs **0.00599 s**, while restoration/preparation costs **14.80944 / 64.60772 s**.
+   Pipeline time is **82.32152 s**, with an unchanged inventory and a narrower
+   audit scope than the parent; this is not a matched whole-solver speedup.
+3. **Retain the cost limits.** A complete nullspace basis can require quadratic
+   bits, even though this rule avoids exponential direct parity re-encoding.
+   Matched generated cases show only **1.11--1.24x** local reuse savings after
+   checks. The new proof and diagnostic artifacts add storage; no global peak-RAM
+   reduction, minimum-cost expansion or arbitrary-SAT bound is established.
+
+Resume `experiments/results/cnf-affine-clause/report.json` with
+`continue_cnf_affine_clause.restore_checkpoint` **and its `routes_for`**. Preserve
+all **five evidence lists**, including the new family proofs as well as seven
+splits, 42 learned bases and 155 augmented blocks. The reference archive preserves
+all 1,869 old nodes within 1,883 nodes. Earlier lemma sidecars, Lean and the older
+902/985 full-corpus result remain unchanged.
+
+## Previous investigation: a saved split completes one original decomposition
 
 [The saved-cofactor experiment](saved-cofactor-closure.md) raises structural
 coverage **55/83 -> 56/83**, also without growth-exception routes. Ranking all

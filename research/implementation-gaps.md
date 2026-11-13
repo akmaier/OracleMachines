@@ -5449,3 +5449,45 @@ that all its literals are forced false, without expanding the affine boundary to
 CNF. Implement this recognized family with independent checks and resource
 accounting next; it is not integrated or counted in this checkpoint. Arbitrarily
 many leftover clauses remain outside this restricted linear-algebra argument.
+
+
+## 2026-11-13: affine/one-clause family and the remaining non-affine frontier
+
+The [checked affine/one-clause rule](affine-one-clause.md) raises structural
+coverage **56/83 -> 57/83**, also without growth exceptions. It reuses triangular
+rows to construct a particular solution and complete nullspace basis, checks the
+full source partition and every vector, and either supplies a full CNF model or
+proves that the sole remaining clause is forced false. More than one leftover
+clause is outside this rule, not an UNSAT result. No new Lean refinement or
+unrestricted-SAT bound is claimed.
+
+All 29 selected open leaves were checked. The sole gain is case 0's encoding-cap
+residual (11 variables / 49 clauses), closing its 14-variable / 132-clause original.
+All **28 remaining selected leaves have zero directly extracted parity equations**.
+This excludes a direct opportunity for the same rule on their current encodings,
+not hidden affine structure. The next discovery target is the 20-variable /
+80-clause exhausted leaf of case 73, compared with the four unfinished learned
+candidates on case 30's 29-variable / 120-clause leaf. Do not repeat the unchanged
+affine scan or the completed earlier split scheduler.
+
+The selected-leaf pass costs 0.00599 s; the full pipeline costs 82.32152 s,
+including 14.80944 s restoration and 64.60772 s preparation. The new family proof
+is 1,056 compressed bytes; historical SQLite stays byte-identical at 769,847,296
+bytes / 41,728 pattern nodes. All 1,869 reference nodes are preserved within 1,883.
+Matched generated cases show 1.11--1.24x local exact-source reuse speedups, with
+normalization and checks charged; a full nullspace representation can still use
+quadratic bits. Complete positive-plan checking from actual dependencies remains
+the largest measured runtime opportunity.
+
+Twenty-one targeted tests and independent cold selection/coverage/reference
+replay validate this step. The new cold check covers reachable inventory
+obligations, not a new full scan of unrelated unchanged rows; the parent audit is
+retained. Two diagnostic JSON key-comparison failures and their correction are
+preserved. The old full-suite and 902/985 corpus results are unchanged.
+
+Resume `experiments/results/cnf-affine-clause/report.json` through
+`continue_cnf_affine_clause.restore_checkpoint` **and its `routes_for`**, preserving
+all **five evidence lists**: rewrites, 42 learned bases, 155 augmented blocks,
+seven splits and the new affine family record. Earlier lemma sidecars remain
+separate and preserved. Using an older four-list route loader would lose the
+newly checked closure.

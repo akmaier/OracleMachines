@@ -28,7 +28,16 @@ classes.
 
 ## Paper
 
-The latest [saved-cofactor investigation](research/saved-trace-splitting.md)
+The latest [affine/one-clause investigation](research/affine-one-clause.md)
+raises structural coverage **56/83 -> 57/83** on the reused development set.
+Checked linear algebra closes a case missed by shallow probes, without expanding
+the affine relation into CNF or changing the historical inventory. The positive
+proof is 1,056 compressed bytes; 21 targeted tests and cold replay validate it.
+All 28 remaining selected leaves lack directly recognized parity equations.
+The [priority record](research/structural-reuse-priorities.md) identifies the next
+discovery and verification gaps. No unrestricted-SAT complexity claim follows.
+
+The earlier [saved-cofactor investigation](research/saved-trace-splitting.md)
 raises structural coverage **52/83 -> 53/83** and independently proves the new
 32-variable original SAT. A checked split reuses two clear assumption traces,
 requires both cofactor plans and adds five pattern nodes. All **581 tests** pass.

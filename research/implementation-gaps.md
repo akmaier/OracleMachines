@@ -5131,3 +5131,30 @@ lists in `LearnedTraceRoutes`. The read-only target inspector persists exact
 keys and candidate counts; start with the 27-variable leaf. Full measurements,
 negative results, memory limits and remaining obligations are in
 [saved-implication-learning.md](saved-implication-learning.md).
+
+## Bounded continuation below learned targets, 13 November 2026
+
+`cnf_target_probe.py` advances through saved clear prefixes and forced targets
+under one shared admission budget per selected learned target. Three regression
+tests cover step/source limits, budget reset scope and pending-target restart
+without repeated discovery. The resumable driver preserves both external proof
+layers and additive eight-table lineage; the standalone validator binds every
+new block and independently checks all forced pairs and gained originals.
+
+All 569 tests and cold checks pass. Coverage increases **45/83 -> 46/83**, with
+case 58 independently proved UNSAT. Ten new states and 15 probe blocks reduce
+case 32's remaining leaf to 23 variables; that leaf and the unchanged 39-variable
+leaf exhaust their ranked probes. No target is pending. Resume from
+`experiments/results/cnf-target-probe/report.json` with
+`compare_cnf_target_probe.restore_checkpoint`, retaining both returned lists in
+`LearnedTraceRoutes`. There are 41,565 pattern nodes, 79 windows and 108 continuation
+blocks, with every old row unchanged.
+
+The next useful expansion is stronger trace reuse or bounded conditioning on
+the 23-variable source, not another unchanged ordinary-probe pass. Local work
+costs 0.11697 seconds, but cold preparation/checking dominates the 256.68-second
+pipeline; standalone validation adds 71.33 seconds. SQLite grows 327,680 bytes,
+and peak RAM remains unmeasured. Complete costs, retained negative outcomes,
+scheduling limits and the next priorities are in
+[learned-target-continuation.md](learned-target-continuation.md). Manuscript and
+Lean sources are unchanged; no unrestricted polynomial bound is established.

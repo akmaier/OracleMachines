@@ -1320,3 +1320,20 @@ The 27-variable leaf is the most concrete next target and has 17 untried ranked
 variables. The 36 clear augmented trials are also retained for a bounded
 continuation with explicit learned-clause dependencies. This improves exact
 reductions on two examples without establishing a broader tractable SAT class.
+
+## Learned-target continuation checkpoint, 13 November 2026
+
+[Bounded continuation below the learned targets](learned-target-continuation.md)
+raises the same development-original coverage from 45/83 to **46/83**. Case 58
+is independently proved UNSAT, and all 46 remain covered without growth-exception
+routes. Case 32's leaf shrinks from 27 to **23 variables / 97 clauses**, while
+case 31 stays at 39 variables / 160 clauses. Both remaining leaves now exhaust
+their ranked ordinary probes. The step-cap flag on case 32 occurs after its final
+partial clear block; it does not identify unused candidates.
+
+The next discovery opportunity is stronger reuse of the later traces on the
+23-variable leaf, followed by a controlled comparison with bounded conditioning.
+The other exhausted leaf and the 36 earlier clear augmented formulas remain
+secondary targets. The gain demonstrates another exact composed route, not a
+new tractable category or a controlled estimate of the marginal value of learned
+clauses over equal extra probing. All unsuccessful blocks remain stored.

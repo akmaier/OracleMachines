@@ -12,7 +12,52 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: learned clauses strengthen two sources; coverage stays 45/83
+## Current investigation: learned-target continuation closes one more original
+
+[The bounded target continuation](learned-target-continuation.md) raises coverage
+**45/83 -> 46/83**, including the growth-exception ablation. Case **58** (`fresh3`,
+n48, original 1340) closes and is independently proved **UNSAT**. Case 32's
+selected leaf shrinks **27 -> 23 variables** (97 clauses), but remains open.
+The other selected leaf stays at 39 variables / 160 clauses.
+
+**Both remaining leaves have exhausted their ranked probes.** Case 32 reaches
+the eight-step cap exactly after its final partial clear block, so its recorded
+`step_limit` is not evidence of untried candidates. Another unchanged pass would
+only replay the saved forced route and record exhaustion. No admission cap binds
+and no target is pending. Clear probes remain inconclusive about SAT.
+
+1. **Reuse the later traces on the 23-variable leaf.** Its initial bounded
+   learning did not consume these subsequent windows. Check paired consequences,
+   equivalences and additional implications on this exact source before acquiring
+   new assumptions. If that fails, compare bounded two-variable conditioning
+   with an equal-budget augmented-source continuation. Preserve exact formula
+   dependencies and keep nested augmented traces out of source reason indices.
+2. **Keep the 39-variable exhausted leaf and the 36 earlier clear augmented
+   trials as secondary targets.** Repeating ordinary probes at the two exhausted
+   leaves adds no assumptions. The current gain is an additive coverage result,
+   not an isolated estimate of learning's benefit over the same extra probing
+   budget on an unaugmented target.
+3. **Cold validation remains the largest runtime cost.** Three local passes cost
+   **0.11697 s**, but route preparation costs **65.97 s**, full cold inventory
+   **107.76 s** and cold route replay **63.30 s**. Dependency-local verification
+   remains an opportunity; excluding these costs would hide the dominant work.
+
+The run retains **15 blocks (13 clear / two forced), 105 direct attempts, 87
+recognition attempts and 10 new nodes**. All **569 tests** and independent cold
+replay pass. Working SQLite grows **327,680 bytes** to **767,340,544 bytes**;
+the delta compresses to 18,000 bytes, with diagnostics, coverage and independent
+reference proofs stored separately. Peak RAM is unmeasured. The pipeline costs
+**256.68 s**, plus **71.33 s** standalone validation. No whole-solver speedup or
+unrestricted-SAT bound follows.
+
+Resume **41,565 pattern nodes, 79 windows and 108 continuation blocks** with
+`restore_checkpoint` in `experiments/compare_cnf_target_probe.py`, supplying
+`experiments/results/cnf-target-probe/report.json`. Pass both returned external
+record lists to `LearnedTraceRoutes`. The diagnostic archive retains exact
+remaining leaf keys and every successful/unsuccessful block. Older rows, the
+902/985 prepared study, manuscript and Lean sources remain unchanged.
+
+## Previous investigation: learned clauses strengthen two sources; coverage stays 45/83
 
 The [retained-implication study](saved-implication-learning.md) checks complete
 binary reachability on the same 41 sources. It finds **no forced values or

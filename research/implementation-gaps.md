@@ -5406,3 +5406,46 @@ Do not repeat the two preserved batches or interpret their failure as complete
 clause saturation. Full dependency-local coverage checking remains distinct from
 the positive-fact replay implemented here. Resume the inventory with
 `continue_cnf_reuse_frontier.restore_checkpoint`, retaining all older evidence.
+
+## 2026-11-13: saved cofactor closure, 56/83 coverage, and a new scheduling boundary
+
+`continue_cnf_saved_splits.py` ranks all fourteen available pairs on the exhausted
+19-variable leaf and acquires the variable-15 cofactors with one shared 32-state
+allowance. Eighteen new states close both branches and development case 71
+(48 variables / 204 clauses). Coverage increases **55/83 -> 56/83**, also without
+growth exceptions. All seven saved split sources and eleven acquired learned
+targets are closed. No original-level result is inferred merely from smaller
+support: the coverage plan and independent reference/model lifts are checked.
+
+[The retained report](saved-cofactor-closure.md) charges 0.04395 s ranking,
+0.05914 s acquisition and 271.74 s for the full pipeline, including the 110.36 s
+inventory audit. SQLite adds 200,704 bytes to 769,847,296 bytes and 41,728 pattern
+nodes; the immutable compressed delta is 9,471 bytes. All old solver rows and all
+1,775 reference nodes are preserved (1,869 reference nodes now). Fourteen core
+tests and 163.74 s independent cold reconstruction pass, including exact ranking,
+both branch obligations, baseline monotonicity, growth ablation and no new discovery.
+No new full-suite run or Lean refinement is claimed.
+
+The scheduler must now leave the completed split frontier. The saved
+`open-originals.json.gz` contains 27 open originals and 29 distinct selected leaves,
+each in one original. The eighteen ready bases retain 92 candidates. Prioritize
+the 20-variable / 80-clause exhausted leaf of case 73 for saved conditioning, with
+the four remaining augmented candidates of case 30's 29-variable / 120-clause
+leaf as an alternative. The 11-variable encoding-cap example needs a different
+structural treatment or deeper conditioning; its width-five shallow obstruction
+was already recorded. These mappings concern selected routes, not all alternatives.
+Resume `experiments/results/cnf-saved-splits/report.json` through
+`continue_cnf_saved_splits.restore_checkpoint`, retaining all seven splits,
+42 learned bases, 155 augmented blocks and the parent-lemma sidecars. Dependency-
+local verification of a complete positive plan remains distinct from compact
+fact replay and is still the largest measured runtime gap.
+
+A final read-only affine extraction check identifies a promising next family:
+case 0's encoding-cap residual consists of two consistent parity equations and
+one wide coupling clause. `encoding-cap-affine.json` preserves the exact source,
+extraction and checked summary. A particular solution/nullspace basis can check
+literal compatibility and construct a model for the single clause, or establish
+that all its literals are forced false, without expanding the affine boundary to
+CNF. Implement this recognized family with independent checks and resource
+accounting next; it is not integrated or counted in this checkpoint. Arbitrarily
+many leftover clauses remain outside this restricted linear-algebra argument.

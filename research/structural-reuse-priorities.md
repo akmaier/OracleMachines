@@ -12,7 +12,59 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: transport parent lemmas, then change the inference
+## Current investigation: a saved split completes one original decomposition
+
+[The saved-cofactor experiment](saved-cofactor-closure.md) raises structural
+coverage **55/83 -> 56/83**, also without growth-exception routes. Ranking all
+fourteen saved pairs selects variable 15 of the 19-variable / 84-clause leaf.
+Both cofactors close with **18 new recognition states** under one shared 32-state
+allowance, completing development case 71 (48 variables / 204 clauses). Independent
+reference proofs and model lifts pass. All seven saved split sources and eleven
+acquired learned targets are now closed; the old split frontier has no pending
+or open child.
+
+1. **Test an affine core with one remaining clause as a recognized family.**
+   The checked `encoding-cap-affine.json` diagnostic finds exactly two consistent
+   parity equations and one eleven-literal coupling clause in case 0's 11-variable
+   leaf. For a consistent affine system, a single clause is satisfiable precisely
+   when one of its literals is compatible with that system. A particular solution
+   and nullspace basis can determine this without expanding the affine relation
+   into CNF. Implement and check both model construction and the all-literals-
+   impossible certificate, with charged extraction and linear algebra. This is a
+   standard linear-algebra consequence and an implementation opportunity, not a
+   new tractability claim for arbitrary CNF. The existing minimum-width-five
+   obstruction explains why repeating shallow probes misses this structure.
+2. **Move the general scheduler to an uncovered original.**
+   `open-originals.json.gz` records 27 open originals and 29 distinct selected
+   leaves, with no exact leaf shared across originals. The **20-variable / 80-clause
+   leaf of case 73** has exhausted ordinary and current augmented probes and is a
+   concrete next saved-cofactor target. Compare it with the four remaining learned
+   candidates on the **29-variable / 120-clause leaf of case 30**. The full ready
+   queue still has **18 bases / 92 variables**, each currently tied to one selected
+   original; case 14 has two ready leaves. The 11-variable encoding-cap example
+   already has a width-five no-trigger obstruction and no saved probe pairs: use
+   structural/affine treatment or explicitly charged deeper conditioning there,
+   not another unchanged shallow pass.
+3. **Extend dependency-local checking to complete positive coverage plans.**
+   Resident acquisition takes **0.05914 s** and ranking **0.04395 s**, but the full
+   pipeline costs **271.74 s**, including **110.36 s** for the inventory audit.
+   Compact fact checking from the previous run does not replace these obligations.
+4. **Keep costs and persistence explicit.** The working database adds **200,704
+   bytes** to **769,847,296 bytes** / **41,728 pattern nodes**. The compressed delta
+   is **9,471 bytes**. All 1,775 old reference nodes survive within 1,869 nodes.
+   Fourteen relevant tests, the full audit, and **163.74 s** independent cold
+   selection/coverage/reference replay pass with no new discovery. Peak RAM and
+   general minimum-cost or polynomial expansion remain unproved.
+
+Resume `experiments/results/cnf-saved-splits/report.json` with
+`continue_cnf_saved_splits.restore_checkpoint`, preserving **seven splits, 42
+learned bases and 155 augmented blocks**, plus the earlier lemma sidecars. Its
+runner intentionally requires an open saved-split leaf; the next run must select
+from the newly recorded original frontiers or the ready learning queue instead.
+These are reused development cases; the older 902/985 study and Lean sources are
+unchanged.
+
+## Previous investigation: transport parent lemmas, then change the inference
 
 [Checked parent-lemma transport](parent-lemma-transport.md) preserves eight of
 sixteen parent lemmas across the saved branch and both eliminations; one is

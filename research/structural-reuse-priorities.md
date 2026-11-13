@@ -12,7 +12,58 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: checked prefixes let discovery advance without rediscovery
+## Current investigation: deeper probes close six cases and expose a certified limit
+
+The [resumed-probe study](probe-resumption.md) retains the same four-source and
+32-state limits and raises coverage **39/83 -> 45/83**. Independent reference
+proofs confirm four SAT and two UNSAT gains, all with 48 variables. Removing
+growth-exception routes keeps all 45 covered. The parent-report runner resumes
+complete checked lineages, so subsequent passes can advance the latest history.
+
+The run adds **46 continuation blocks (39 clear / seven forced), 327 assumption
+attempts and 74 nodes**, with 758 saved-prefix attempt references and no new initial
+windows. Case 46 closes after using all 32 state admissions; no input is interrupted
+and no target is pending. Resident search/check/persist/compose costs **0.53596 s**;
+preparation **65.21 s**, full cold inventory **108.60 s**, separate route replay
+**63.07 s**, and acquisition/validation **257.28 s**. Storage grows **1,581,056
+bytes**, with an **86,923-byte compressed delta**. Peak RAM is unmeasured; this is
+additional coverage rather than a whole-solver speedup.
+
+The 38 open originals expose **41 clear streams** on selected paths after saved
+forced rewrites. **36 have 1--16 ranked candidates left; five are exhausted.**
+A separate exact diagnostic certifies that all five exhausted sources have no
+single-assumption unit refutation: 104 checked attempts cover both values of
+52 binary variables; 79 other variable instances cannot create an initial unit.
+The 11-variable encoding-cap source has minimum width five, so at most three
+assigned variables cannot trigger propagation. The other four sources have
+minimum width two. These are limits of this inference rule, not SAT decisions.
+
+1. **Reuse the complete saved trace pairs for stronger consequences.** Later
+   windows only searched for failed literals; the initial recognizer's bounded
+   common-consequence, equivalence and binary-learning policy did not consume all
+   these later traces. Check those relationships before acquiring new assumptions.
+   Keep original-source evidence separate from augmented learning continuations.
+2. **Use the certified obstruction to target stronger reasoning.** If paired-trace
+   reuse is insufficient, try bounded nested assumptions on the four width-two
+   sources. The width-five encoding-cap source needs different structural treatment
+   or enough explicitly charged conditioning to reach a unit trigger. No shallow
+   plain-probing guarantee applies there.
+3. **Advance the 36 unfinished streams as a coverage control; profile cold replay
+   for runtime savings.** Resume this report with the existing runner and same
+   limits. The exhaustion diagnostic verifies only its required source facts in
+   0.02974 s after 4.73048 s restoration (5.35440 s overall). Its smaller proof
+   obligation does not justify skipping dependencies in a full coverage audit.
+
+All **557 tests** pass; the acquisition checkpoint separately preserves its
+552-test log and independent eight-table/cold/reference validation. Two preliminary
+diagnostic failures exposed the `learning_clear` wrapper; their logs and untimed
+replay limitation are retained. The final checker directly verifies each original
+assumption trace, excluding nested augmented-source traces. Resume from **41,535
+pattern nodes, 75 windows and 97 continuation blocks**, alongside every older
+trial/source/proof row. The new reference archive adds 1,238 solver nodes. Earlier
+full prepared coverage remains 902/985; manuscript and Lean sources are unchanged.
+
+## Previous investigation: checked prefixes let discovery advance without rediscovery
 
 The [prefix-continuation study](probe-continuation.md) advances saved clear probe
 windows while retaining their checked traces by reference. A continuation binds

@@ -1243,3 +1243,47 @@ remain open after finite composition. Continue these saved streams before raisin
 caps, inspect the unresolved targets, and profile cold proof replay for the largest
 runtime opportunity. Candidate availability and complete cursor bookkeeping do
 not establish efficient coverage of arbitrary CNF.
+
+
+## 13 November: resumed prefixes close six originals and certify a probing limit
+
+The [resumption study](probe-resumption.md) restores the complete verified
+checkpoint lineage and keeps the four-source/32-state policy. Coverage increases
+39/83 -> 45/83: four SAT and two UNSAT gains, independently checked on six reused
+48-variable development sources. All 45 remain covered without growth-exception
+routes. Forty-six new blocks (39 clear / seven forced), 327 attempts and 74 nodes
+persist; 758 saved-prefix attempt references avoid repeating prior discovery.
+Case 46 closes after using all 32 admissions. No input is interrupted.
+
+Resident search/check/persist/compose costs 0.53596 seconds, preparation 65.21,
+full cold inventory 108.60 and separate route replay 63.07. Storage grows
+1,581,056 bytes. These are additional discovery costs, not a whole-solver speedup.
+The current history has 41,535 pattern nodes, 75 windows and 97 continuation
+blocks, with all previous trials, source bindings and solver proofs retained.
+The separate reference archive adds 1,238 checked proof nodes.
+
+The open selected paths expose 41 clear streams across 38 originals. Thirty-six
+streams retain 1--16 candidates; five exhaust the binary ranking. A separate
+source-bound diagnostic proves that these five have no single-assumption unit
+refutation: 104 checked attempts cover all 52 binary-variable instances, and
+79 remaining instances cannot create an initial unit under either value. This
+excludes that inference rule, not satisfiability or stronger structural reasoning.
+The 11-variable encoding-cap source has minimum width five: at most three assigned
+variables leave clause width at least two. The other four sources have width two.
+
+The useful next reuse gap is extracting common consequences, equivalences and
+binary implications from all saved trace pairs. The old bounded initial profile
+did not consume the later window traces. If those facts are insufficient, target
+bounded nested reasoning on the width-two sources and a different structural or
+adequately deep approach on the width-five source. Continue the remaining streams
+as a coverage control, with cold dependency checking still the largest runtime
+cost and peak RAM/independent evaluation still open.
+
+All 557 tests pass. The acquisition artifact separately preserves 552-test and
+cold-reconstruction/reference evidence. Two diagnostic status-assumption failures
+are retained: learning_clear separates original-source attempts from a nested
+augmented-source continuation. The final diagnostic directly checks the original
+traces and excludes the nested ones. Its successful run costs 5.35440 seconds
+including restoration, with 0.02974 seconds for the required source checks; the
+aborted preliminary replay times were not retained. Manuscript and Lean sources
+are unchanged, and the earlier full prepared result remains 902/985.

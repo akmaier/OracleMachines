@@ -1,0 +1,9 @@
+{
+  "script_sha256": "8f60c7db076cec22cd443ade8b362799aa401807cfcc539e037cb24bbef472c7",
+  "log": "Traceback (most recent call last):\n  File \"/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_exhaustion.py\", line 89, in <module>\n    args = parser.parse_args(); diagnose(args.report,args.output)\n                                ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_exhaustion.py\", line 58, in diagnose\n    original = node['profile']['probing']; assert original['status'] == 'clear'\n                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "failed_assumption": "Every unresolved node has an original probing status of clear.",
+  "correction": "Accept an independently verified skipped original phase as contributing zero attempts; require all binary variables to be covered by actual clear traces, and structurally exclude only the remaining nonbinary variables.",
+  "actual_cause": "The 18- and 38-variable sources have learning_clear profiles. Their top-level traces concern the source; nested continuation traces concern an augmented formula.",
+  "final_fix": "Independently check every top-level attempt against the exact source and require no conflict; do not use nested learning continuations for source exhaustion.",
+  "timing": "Aborted after full cold route verification; elapsed time was not retained."
+}

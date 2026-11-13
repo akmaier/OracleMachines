@@ -28,7 +28,15 @@ classes.
 
 ## Paper
 
-The latest [prefix-continuation investigation](research/probe-continuation.md)
+The latest [resumed-probe investigation](research/probe-resumption.md) raises
+coverage **39/83 -> 45/83**, with four SAT and two UNSAT gains on reused
+48-variable development cases. It also certifies that five remaining sources
+have **no single-assumption unit refutation**; more plain single-variable probes
+cannot close those sources. Their saved paired traces may still support stronger
+common consequences, equivalences or learned implications. All **557 tests** pass,
+with previous results preserved. Cold verification remains the dominant cost.
+
+The preceding [prefix-continuation investigation](research/probe-continuation.md)
 shares checked probe prefixes and advances bounded discovery. Coverage rises
 **36/83 -> 39/83**, with one SAT and two UNSAT gains on reused 48-variable
 development cases. The matched warm probe substep is **2.09x faster** than

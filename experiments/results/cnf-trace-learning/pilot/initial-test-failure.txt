@@ -1,0 +1,17 @@
+.E./Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py:418: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x10a6cd990>
+  if key != actual_key or node["cnf"] != [list(c) for c in cnf]:
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+..
+======================================================================
+ERROR: test_forged_reasons_clauses_bounds_and_edges_rejected (solver.test_cnf_trace_learning.TraceLearningTests.test_forged_reasons_clauses_bounds_and_edges_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_trace_learning.py", line 131, in test_forged_reasons_clauses_bounds_and_edges_rejected
+    bad=copy.deepcopy(record);bad['probing']['attempts'][0]['certificate']['units'][0][1]=99999;bads.append(bad)
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.397s
+
+FAILED (errors=1)

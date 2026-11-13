@@ -12,7 +12,62 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: saved pairs expose one equivalence, but no coverage gain
+## Current investigation: learned clauses strengthen two sources; coverage stays 45/83
+
+The [retained-implication study](saved-implication-learning.md) checks complete
+binary reachability on the same 41 sources. It finds **no forced values or
+contradictions**, and only the previously retained equivalence. These negative
+results have exact path/closure certificates. Graph composition alone is not
+the next coverage opportunity on this fixed evidence.
+
+Using **284 checked clauses in 39 bounded batches** with the full CNF produces
+36 clear trials, two equivalences and one forced value. Controls use the same
+augmented ranking on the unaugmented source: 38 remain clear and one gives the
+old equivalence. Thus cases **31 and 32 have stronger propagation**, independently
+of ranking changes. All three targets remain structurally open; **45/83 stays
+45/83**, also without growth-exception routes. Reference proofs confirm both
+newly strengthened residuals SAT and the old-equivalence residual UNSAT; these
+are residual answers, not new original-level structural coverage.
+
+| Original case | Source -> direct target -> remaining selected leaf | Untried ranked variables at leaf |
+| --- | --- | --- |
+| 32 (`reuse_holdout3`, original 1191) | 34 -> 33 -> **27** variables | **17** |
+| 31 (`reuse_holdout3`, original 1190) | 40 -> 39 -> **39** variables | **21** |
+| 58 (`fresh3`, original 1340) | 37 -> 36 -> **35** variables | **23** |
+
+1. **Follow the smaller acquired targets, starting with case 32.** Its single
+   27-variable, width-two leaf already includes the checked learning and further
+   reductions. Reuse that state and its initial attempts; acquire a bounded next
+   window before revisiting the larger source. Keep all parent learning routes
+   in global recomposition. No current admission cap binds and no target is pending.
+2. **Continue the 36 clear augmented trials under an explicit budget.** Their
+   clauses and first four probe variables are now saved. Later attempts must be
+   checked against the exact augmented formula, not treated as original-source
+   evidence. Compare an additional window with stronger conditioning, retaining
+   same-variable controls and all unsuccessful results. Do not repeat the
+   unchanged graph search or assume the 16-clause batch is exhaustive.
+3. **Retain the structural obstructions and the full cost account.** The
+   width-five source and the width-two stalled source without useful learned
+   clauses still need different treatment. Cold checking remains dominant:
+   **64.75 s** preparation, **106.92 s** inventory, **63.50 s** routes. The graph
+   scan costs **0.74307 s**, learning **0.23493 s**, controls **0.14577 s** and target
+   recognition **0.14217 s**. There is no whole-solver speedup claim.
+
+All **566 tests** and independent cold replay pass. The run acquires **15 nodes**,
+311 augmented probe attempts, 312 control attempts and 138 target-recognition
+attempts. It preserves 126 interned source references for the 284 clauses.
+SQLite grows **249,856 bytes**; compressed delta/learning/diagnostic artifacts
+add 15,053 / 36,867 / 16,664 bytes, plus reference proofs. The measured pipeline
+takes **255.75 s**; standalone validation costs another **70.96 s**. Peak RAM is
+unmeasured. The next-target diagnostic is read-only and retains exact leaf keys.
+
+Resume **41,555 pattern nodes** with `restore_checkpoint` in
+`experiments/compare_cnf_trace_learning.py`; pass both returned record lists to
+`LearnedTraceRoutes`. All earlier eight-table rows, external pair rewrites,
+75 windows and 97 continuation blocks remain preserved. The older 902/985
+full-corpus result, manuscript and Lean sources are unchanged.
+
+## Previous investigation: saved pairs expose one equivalence, but no coverage gain
 
 The [saved-trace study](saved-trace-reuse.md) checks **1,240 saved attempts across
 41 exposed clear sources** in **0.52728 s**. There are no common-value pairs and

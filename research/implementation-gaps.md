@@ -5113,3 +5113,21 @@ experiment are in [saved-trace-reuse.md](saved-trace-reuse.md). Restore the new
 checkpoint with `compare_cnf_trace_reuse.restore_checkpoint` and retain its
 external records in `TraceRoutes`; the parent runner alone omits this route.
 The eight-table history now has 41,540 pattern nodes; no earlier rows are changed.
+
+## Checked composition of saved implications, 13 November 2026
+
+`cnf_trace_learning.py` now combines source-bound conditional units into an
+independently checked graph and bounded augmented-CNF lookahead. Exact graph
+closures find no new forced values or equivalences beyond the prior pair rule.
+The full CNF with retained implications exposes two stronger reductions, confirmed
+by same-variable no-clause controls. All 39 learning trials, including 36 clear
+ones, and their source dependencies remain persistent. Fifteen new nodes leave
+three open selected leaves (27, 39 and 35 variables); coverage remains 45/83.
+
+All 566 tests and independent graph/clause/control/coverage/reference replay pass.
+The history contains 41,555 pattern nodes with all older rows unchanged. Resume
+with `compare_cnf_trace_learning.restore_checkpoint` and both external record
+lists in `LearnedTraceRoutes`. The read-only target inspector persists exact
+keys and candidate counts; start with the 27-variable leaf. Full measurements,
+negative results, memory limits and remaining obligations are in
+[saved-implication-learning.md](saved-implication-learning.md).

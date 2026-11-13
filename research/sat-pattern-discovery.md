@@ -1304,3 +1304,19 @@ propagation. Four sources reach the 16-clause cap, and initial-profile candidate
 may repeat earlier learning. The width-five obstruction and a width-two stalled
 source with no such candidates need different treatment. This refines the open
 frontier; it does not partition arbitrary SAT into efficiently decidable cells.
+
+## Retained implications with full-CNF lookahead, 13 November 2026
+
+[The retained-implication study](saved-implication-learning.md) rules out a further
+pure binary-graph gain on the saved evidence: complete checked reachability finds
+only the old equivalence, with no forced literals or contradiction on 41 sources.
+Using 284 checked clauses in 39 capped full-CNF follow-ups does strengthen two
+sources: a new equivalence on case 32 and a forced value on case 31. Same-variable
+controls on the original source remain clear, separating this from ranking changes.
+
+Fifteen acquired nodes leave selected residuals with 27, 39 and 35 variables.
+All remain open, so coverage stays 45/83; reference answers are kept separate.
+The 27-variable leaf is the most concrete next target and has 17 untried ranked
+variables. The 36 clear augmented trials are also retained for a bounded
+continuation with explicit learned-clause dependencies. This improves exact
+reductions on two examples without establishing a broader tractable SAT class.

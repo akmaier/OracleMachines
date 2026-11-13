@@ -12,7 +12,48 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: forced propagation reduces the retained obligation
+## Current investigation: bounded batches preserve evidence and avoid preparation
+
+[The matched batch experiment](frontier-batching.md) tests all **17** remaining
+ordinary candidates on case 30's **25-variable / 99-clause** leaf in one bounded
+pass. Five clear blocks and one exhausted advance preserve **21 saved pairs**;
+no state is admitted and coverage stays **58/83**. All six prefixes and final
+logical tables match the sequential preparation control under the same shared
+allowance. Instrumented search takes **0.31960 s versus 5.46878 s**; **5.14561 s**
+is repeated route preparation avoided by batching.
+
+1. **Acquire the retained variable-7 split, or compare another inference.**
+   Its true branch is the shared empty-CNF terminal; only the false branch
+   (**24 variables / 94 clauses / 287 literals**) is missing. It ranks first
+   among 21 saved pairs and was already available in the first new window.
+   Check cofactor opportunities between blocks instead of requiring exhaustion.
+   No common-value/equivalence rewrite is found. Variables **2, 4, 12, 21** are
+   outside the binary pool; their unit-free restrictions cannot start unit
+   propagation, so extra single-assumption tests add no deduction. The other
+   **17 learned bases / 88 candidates** remain available.
+2. **Address cold verification of complete positive plans.** Initial preparation
+   is **65.62419 / 70.54924 s** in the two arms, full audit **111.99494 s**, cold
+   routes **66.03018 s**. The control keeps its inventory cache warm; its five
+   route rebuilds are much cheaper than five cold restarts. Profile and implement
+   dependency-local verification with exact source/configuration binding. The
+   retained positive witness has **593 explicit steps for 58 roots**; its full
+   checking dependency closure still needs measurement. Batching
+   does not remove global initial preparation or audit.
+3. **Keep the measurement's scope explicit.** Preparation plus instrumented search
+   is **65.94379 / 76.01801 s**, but initial-preparation variation is not an
+   established batching effect. The **358.12190 s** experimental pipeline includes
+   both arms. SQLite adds **53,248 bytes** to **770,289,664 bytes / 41,755 nodes**;
+   compressed delta **2,990 bytes**, other archives additional. No new family,
+   original coverage gain, peak-RAM reduction or unrestricted bound is established.
+
+Resume `experiments/results/cnf-frontier-batch/report.json` with
+`continue_cnf_frontier_batch.restore_checkpoint` and `routes_for`, preserving
+five evidence lists **(1, 42, 156, 10, 1)** and all earlier sidecars. The targeted
+**37-test** suite, full audit and **169.35837 s** independent cold replay pass.
+Use `frontier-profiles.json.gz` and `next-options.json.gz` for source-bound next
+steps. Repeating this batch on the now-exhausted source cannot expand coverage.
+
+## Previous investigation: forced propagation reduces the retained obligation
 
 [The forced-frontier continuation](frontier-forcing.md) reduces case 30's open
 leaf **27 variables / 111 clauses -> 25 variables / 99 clauses** with **three

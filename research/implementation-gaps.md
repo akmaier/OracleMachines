@@ -5686,3 +5686,46 @@ batch bounded local continuation under one shared state allowance and compare
 its evidence with the corresponding sequential prefix; a full reconstruction
 and audit per window dominates local discovery. Dependency-local complete-plan
 checking, measured batch savings and unrestricted resource guarantees remain open.
+
+
+## 2026-11-13: batch ordinary continuation with a matched preparation control
+
+[The bounded batch](frontier-batching.md) retains five clear probe blocks across
+17 remaining ordinary candidates of case 30's 25-variable / 99-clause leaf.
+A sixth advance detects exhaustion; no recognition state is admitted. All six
+prefixes, final logical tables and coverage agree with a control that rebuilds
+checked routes between advances while preserving the inventory cache, search
+queue and common 32-state allowance. Coverage remains **58/83** and 21 saved
+pairs can now support subsequent conditioning or common-consequence reuse.
+
+Instrumented search is **0.31960 s** versus **5.46878 s**, including six snapshots
+in each arm. Five avoidable route preparations cost **5.14561 s**. Initial
+preparation is **65.62419 / 70.54924 s**; its single-run variation is not a batching
+benefit. The pipeline, including both arms, takes **358.12190 s**. Full audit
+(**111.99494 s**) and cold routes (**66.03018 s**) remain dominant. This is a
+measured preparation saving on reused development data, not a general SAT-solver
+speedup or an efficient complete partition.
+
+SQLite grows **53,248 bytes** to **770,289,664 bytes** without adding pattern nodes
+(41,755 total); one window and four continuation rows yield a **2,990-byte**
+compressed delta. All previous results and the 1,977-node reference snapshot
+survive. The targeted 37-test suite, full audit and independent replay validate
+this checkpoint; detailed results and limitations are in the linked note.
+
+Resume `experiments/results/cnf-frontier-batch/report.json` using
+`continue_cnf_frontier_batch.restore_checkpoint` and `routes_for`; all five lists
+(**1, 42, 156, 10, 1**) and earlier sidecars remain required. Use the retained
+pair/rewrite diagnostics for the next expansion, rather than rerunning this
+exhausted ordinary pool. The alternative learning queue has 17 bases / 88
+candidates. Dependency-local complete-plan verification remains the major cost
+gap, while finding a smaller certified decomposition remains the coverage gap.
+
+The checked next-option ranking selects **variable 7**: its true cofactor is the
+shared empty terminal, and its false cofactor (**24 variables / 94 clauses /
+287 literals**) needs acquisition. This pair was available in the first new
+window; requiring pool exhaustion would do avoidable discovery. No common-value
+or equivalence rewrite is found among the 21 pairs. The four nonbinary variables
+(2, 4, 12, 21) have unit-free restrictions, so single-assumption unit propagation
+cannot start on them. Independent replay passes in **169.35837 s**. The retained
+positive witness has **593 explicit steps**; measure its full dependency closure
+before claiming a selective verification bound.

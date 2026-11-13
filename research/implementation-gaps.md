@@ -5158,3 +5158,29 @@ and peak RAM remains unmeasured. Complete costs, retained negative outcomes,
 scheduling limits and the next priorities are in
 [learned-target-continuation.md](learned-target-continuation.md). Manuscript and
 Lean sources are unchanged; no unrestricted polynomial bound is established.
+
+## Exact augmented-formula continuations, 13 November 2026
+
+`cnf_learning_continuation.py` checks later four-variable blocks against a
+source-justified learning base. Complete base digests share evidence without
+copying it into each block; missing or changed bases, incomplete prefixes,
+forged reasons and incorrect target bindings are rejected. Pending targets stay
+uncovered. Reopened records reuse checked prefixes without new discovery, and
+successful child models lift to the complete source. Four new regression tests
+cover these obligations; all **573 tests** pass.
+
+The measured study raises coverage **46/83 -> 47/83**, independently proves
+case 32 SAT and retains the growth-exception ablation. It adds 17 pattern nodes,
+two learning bases and nine augmented blocks. The 39-variable source remains
+open with an exact augmented single-assumption obstruction; the most promising
+next expansion is continuation of the 36 earlier clear learning bases.
+
+Restore `experiments/results/cnf-frontier-learning/report.json` using
+`compare_cnf_frontier_learning.restore_checkpoint`, then pass all three evidence
+lists to `ContinuedLearningRoutes`. Older loaders omit the new route layer.
+The history has **41,582 pattern nodes**, with all prior eight-table rows unchanged.
+Cold verification, controls, finite composition and independent proofs pass;
+no replay discovery or database-byte changes occur. Full costs, corrected test
+fixture failure, limitations and next priorities are retained in
+[frontier-learning-continuation.md](frontier-learning-continuation.md). Manuscript
+and Lean sources are unchanged.

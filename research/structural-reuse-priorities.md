@@ -12,7 +12,63 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: learned-target continuation closes one more original
+## Current investigation: later augmented probes close case 32; coverage reaches 47/83
+
+[Learned-formula continuation](frontier-learning-continuation.md) raises coverage
+**46/83 -> 47/83**, including the growth-exception ablation. Case **32**
+(`reuse_holdout3`, n48, original 1191) now has a complete structural plan and an
+independent **SAT** proof for the original. Its 23-variable residual closes after
+a later forced block and 17 target-state admissions. No admission cap binds.
+
+The source-pair and complete implication-graph scans find no reduction on either
+starting leaf. Checked learned batches contain 16 and six clauses. The smaller
+source's augmented probes are clear initially and at offset 4, then forced at
+offset 8. Every same-variable original-source control remains clear, supporting
+a propagation benefit beyond a ranking change. Target recognition still performs
+additional work; the original-level gain uses the composed proof route.
+
+The 39-variable leaf stays open. Its six-clause augmented formula exhausts all
+29 binary-variable probes; ten other variables cannot trigger unit propagation.
+This is an exact **single-assumption unit-refutation obstruction**, not an
+arbitrary-algorithm limit. Raising the same clause-selection cap alone will not
+change its six-clause batch, which already processes all saved source candidates.
+
+1. **Continue the 36 earlier clear learned formulas.** Their source evidence,
+   learned clauses and first augmented blocks are already retained. Filter
+   sources already covered by another route, rank the rest by exposed size, and
+   use the new continuation manager under an explicit shared budget. Preserve
+   controls and all unsuccessful blocks. Do not repeat the unchanged source
+   graph scan or clause acquisition just to reach their later variables.
+2. **Use the exhausted 39-variable source as a secondary structural test.**
+   Its new augmented traces may justify another bounded learning layer with
+   explicit proof dependencies. Compare this reuse with two-variable conditioning;
+   neither repeating the exhausted ranking nor treating augmented reasons as
+   original-source reasons is valid progress.
+3. **Retain the full cost account.** Source checks/scans cost **0.04568 s**,
+   initial learning **0.01057 s**, later augmented probing/checking **0.03867 s**,
+   controls **0.02608 s** and target recognition **0.05576 s**. Full preparation
+   costs **65.25 s**, cold inventory **106.56 s** and cold routes **63.18 s**.
+   Dependency-local validation remains the largest runtime opportunity.
+
+All **573 tests** and standalone cold checks pass. There are **16 initial and
+61 later augmented attempts, 135 recognition attempts and 82 control attempts**.
+Two learning bases share eight source references across 22 clauses; nine later
+blocks contain eight clear outcomes and one forced result. Original-source
+exhaustion is also certified on both starting leaves. SQLite grows **212,992
+bytes** to **767,553,536 bytes**; the node delta compresses to 11,813 bytes,
+with external proof records and diagnostics stored separately. Peak RAM is
+unmeasured. The full pipeline costs **256.47 s**, plus **71.67 s** standalone
+validation; there is no whole-solver speedup or unrestricted-SAT bound.
+
+Resume **41,582 pattern nodes** with `restore_checkpoint` in
+`experiments/compare_cnf_frontier_learning.py`, supplying
+`experiments/results/cnf-frontier-learning/report.json`. Pass all returned paired
+rewrites, learning bases and augmented blocks to `ContinuedLearningRoutes`.
+The 79 ordinary windows and 108 ordinary continuations are unchanged; the nine
+augmented blocks form a separate evidence layer. All older results, the 902/985
+prepared study, manuscript and Lean sources remain unchanged.
+
+## Previous investigation: learned-target continuation closes one more original
 
 [The bounded target continuation](learned-target-continuation.md) raises coverage
 **45/83 -> 46/83**, including the growth-exception ablation. Case **58** (`fresh3`,

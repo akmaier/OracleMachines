@@ -1337,3 +1337,26 @@ The other exhausted leaf and the 36 earlier clear augmented formulas remain
 secondary targets. The gain demonstrates another exact composed route, not a
 new tractable category or a controlled estimate of the marginal value of learned
 clauses over equal extra probing. All unsuccessful blocks remain stored.
+
+## Later augmented lookahead checkpoint, 13 November 2026
+
+[Continuing exact learned formulas](frontier-learning-continuation.md) raises
+coverage **46/83 -> 47/83**. Case 32's original is independently proved SAT;
+its 23-variable residual closes after a later forced block and 17 target states.
+All same-variable original-source controls remain clear, separating stronger
+propagation from ranking changes. The complete original route also includes
+further target recognition. All 47 remain covered without growth exceptions.
+
+Saved pairs and complete binary graphs alone did not reduce either starting
+source. The 39-variable source stays open even after its six-clause augmented
+formula exhausts single-assumption unit refutation. Raising that same batch cap
+alone adds nothing. Retained augmented traces may support another learning layer
+with explicit dependencies, or serve as a control for bounded conditioning.
+The highest immediate coverage opportunity is applying the new continuation
+mechanism to the 36 earlier clear learning records, filtering already-covered
+sources. This reuses their existing clauses and initial augmented probes.
+
+Nine later blocks, eight inconclusive, remain persistent with both original-source
+exhaustion certificates and the augmented exhaustion certificate. These findings
+refine the remaining inference gap without establishing polynomial coverage of
+arbitrary CNFs or an independent-workload performance result.

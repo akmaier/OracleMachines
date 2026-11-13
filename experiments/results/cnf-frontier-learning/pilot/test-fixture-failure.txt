@@ -1,0 +1,24 @@
+.EF.
+======================================================================
+ERROR: test_missing_prefix_foreign_base_forgery_and_target_rejected (solver.test_cnf_learning_continuation.LearningContinuationTests.test_missing_prefix_foreign_base_forgery_and_target_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_learning_continuation.py", line 73, in test_missing_prefix_foreign_base_forgery_and_target_rejected
+    bad=copy.deepcopy(record);bad['edge']['names'].reverse()
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'tuple' object has no attribute 'reverse'
+
+======================================================================
+FAIL: test_pending_replay_reuses_prefix_and_immutable_base (solver.test_cnf_learning_continuation.LearningContinuationTests.test_pending_replay_reuses_prefix_and_immutable_base)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_learning_continuation.py", line 61, in test_pending_replay_reuses_prefix_and_immutable_base
+    self.assertEqual(again,record);self.assertEqual(encode(raw),encode(target));self.assertEqual(counts.get('probe_attempts',0),0)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: {'bas[75 chars]a', 'edge': {'key': '[0,[[-22,-14,3],[-22,15],[1822 chars]': 4} != {'bas[75 chars]a', 'width': 4, 'offset': 8, 'probing': {'stat[1822 chars]23)}}
+Diff is 4337 characters long. Set self.maxDiff to None to see it.
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.057s
+
+FAILED (failures=1, errors=1)

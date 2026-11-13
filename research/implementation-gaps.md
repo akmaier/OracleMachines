@@ -5377,3 +5377,32 @@ cannot simply be reused on a child. The 18-base / 92-variable queue remains an
 alternative. Dependency-local positive-plan validation is the larger cost gap.
 The manuscript now explains compact negative-fact replay and its limitations;
 Lean sources and unrestricted-SAT claims are unchanged.
+
+## 2026-11-13: checked parent-lemma transport and retained negative comparison
+
+The new `cnf_lemma_transport.py` checks source-bound positive consequences through
+conditioning, complete elimination, binary-path deletion and renaming. It rejects
+unsupported equisatisfiable rewrites and never drops just an eliminated literal
+from a clause. [The experiment](parent-lemma-transport.md) transports eight parent
+lemmas to the 19-variable leaf, seven not explicit there. All seven are also
+derivable from saved leaf traces, whose local batch provides eleven clauses.
+Neither exact augmentation reduces support; both have newly checked all-binary-
+variable exhaustion evidence. Original coverage stays 55/83.
+
+No working-history or reference bytes change. Six splits, 42 learned bases and
+155 blocks remain in the 769,646,592-byte archive. The new positive and negative
+facts are persistent sidecars under `experiments/results/cnf-lemma-transport/`,
+not successful routes or a replacement inventory checkpoint. Positive transport
+occupies 2,362 compressed bytes; the already acquired local alternative needs
+749. Export costs 14.05 s. Compact fact replay is 0.111--0.162 s, while replay plus
+inventory reconstruction/ancestry is 13.85--14.43 s. Their ancestry obligations
+differ; neither timing is an unrestricted solver claim. Thirty-seven relevant
+tests and two independent read-only cold ancestry checks pass; no new full-suite
+or Lean-refinement result is claimed.
+
+Next, use the saved 19-variable cofactor pairs to change the remaining structure,
+or compare a separately budgeted second learning round on the augmented traces.
+Do not repeat the two preserved batches or interpret their failure as complete
+clause saturation. Full dependency-local coverage checking remains distinct from
+the positive-fact replay implemented here. Resume the inventory with
+`continue_cnf_reuse_frontier.restore_checkpoint`, retaining all older evidence.

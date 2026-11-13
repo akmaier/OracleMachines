@@ -1540,3 +1540,31 @@ cannot simply be reused on a child. The 18-base / 92-variable queue remains an
 alternative. Dependency-local positive-plan validation is the larger cost gap.
 The manuscript now explains compact negative-fact replay and its limitations;
 Lean sources and unrestricted-SAT claims are unchanged.
+
+## 2026-11-13: parent lemmas survive, but do not bypass the current obstruction
+
+[Parent-lemma transport](parent-lemma-transport.md) now has a portable checker for
+source-proved consequences across conditioning, complete elimination, binary
+path deletion and exact renaming. On the retained 22-to-19-variable path, eight
+of sixteen lemmas survive; seven are absent from the final formula. The leaf's
+saved traces already prove those seven plus four more. Both checked augmentations
+remain clear under every binary-variable pair; new exhaustion certificates are
+bound separately to their 91- and 95-clause formulas. No new structural closure
+or recognition state is claimed, and the 55/83 coverage and 769,646,592-byte
+history remain unchanged.
+
+The positive transport proof is 2,362 compressed bytes. Compact replay of the
+augmentation and obstruction facts takes 0.111--0.162 s; adding reconstruction
+and ancestry checking takes 13.85--14.43 s. Export costs 14.05 s and earlier
+acquisition remains charged. All 37 relevant tests and two read-only cold ancestry
+checks pass. These are narrow fact checks, not a complete coverage-plan audit;
+Python is not newly refined by Lean. The manuscript states the transport argument
+and the negative coverage result.
+
+The next structural candidate is another saved cofactor of the 19-variable leaf.
+A second learning round from the new augmented traces is a distinct untested
+alternative; do not infer full clause saturation from this one batch. Preserve
+`experiments/results/cnf-lemma-transport/` as sidecar evidence while resuming the
+unchanged inventory from `cnf-reuse-frontier/report.json` with all six splits,
+42 learned bases and 155 augmented blocks. The other 18-base / 92-variable queue
+and full dependency-local coverage verification remain open.

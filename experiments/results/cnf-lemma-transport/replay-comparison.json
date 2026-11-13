@@ -1,0 +1,465 @@
+{
+  "limitations": [
+    "Same checked augmentation and obstruction facts; history mode additionally verifies their inventory ancestry.",
+    "Compact mode verifies explicit mathematical premises, not full inventory ancestry or structural coverage.",
+    "Process startup/imports/teardown included; OS caches not flushed; only two samples per mode.",
+    "Export and past acquisition remain charged separately; disk size is not peak RAM."
+  ],
+  "pipeline_seconds": 28.55691120866686,
+  "report_sha256": "53e225cc1252f53fcc11b681cba94e9dd789c603b85c627a383eb496ba561e52",
+  "samples": [
+    {
+      "counts": {
+        "additive_elimination_check_source_literals": 661,
+        "additive_elimination_checked_mixed_steps": 2,
+        "additive_elimination_checked_pair_literals": 247,
+        "additive_elimination_checked_pairs": 48,
+        "additive_elimination_checked_steps": 2,
+        "additive_elimination_positive_clause_growth": 3,
+        "additive_elimination_positive_literal_growth": 36,
+        "binary_path_checked_clause_literals": 17,
+        "binary_path_checked_proof_nodes": 11,
+        "binary_path_checks": 1,
+        "binary_path_source_literals": 349,
+        "common_intersection_unit_visits": 152,
+        "elimination_validation_literals": 2713,
+        "equivalence_intersection_unit_visits": 152,
+        "exhaustion_checked_attempts": 77,
+        "exhaustion_source_literal_visits": 1464,
+        "normalization_literal_visits": 1358,
+        "probe_ranking_literal_visits": 732,
+        "restriction_literal_visits": 52492,
+        "simplification_reconstruction_literals": 44446,
+        "simplification_unit_check_literals": 599,
+        "structurally_excluded_probe_variables": 5,
+        "transport_checked_steps": 4,
+        "transport_clause_literals": 80,
+        "transport_source_lemmas": 27,
+        "verified_probe_attempts": 66,
+        "verified_simplifications": 144
+      },
+      "history": {
+        "blocks": 155,
+        "history_bytes": 769646592,
+        "learning": 42,
+        "splits": 6,
+        "unchanged": true
+      },
+      "mode": "history",
+      "new_discovery": false,
+      "process_wall_seconds": 14.432312957942486,
+      "repeat": 0,
+      "report_sha256": "53e225cc1252f53fcc11b681cba94e9dd789c603b85c627a383eb496ba561e52",
+      "results": [
+        {
+          "additions": 7,
+          "arm": "transport",
+          "exhaustion": {
+            "binary": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "checked_attempts": 32,
+            "clauses": 91,
+            "cnf_sha256": "e2196d54e1c9f1802c719e9f114f5113010e6773cd389de7e15d71fa397dfb8d",
+            "conclusion": "No single-variable assignment yields a unit-propagation refutation.",
+            "outside": [
+              1,
+              10,
+              11
+            ],
+            "variables": 19
+          },
+          "status": "clear"
+        },
+        {
+          "additions": 11,
+          "arm": "local",
+          "exhaustion": {
+            "binary": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "checked_attempts": 34,
+            "clauses": 95,
+            "cnf_sha256": "a296adf3aca1e5c5a9f3d4e8dd6283784ea5bf16426912325012bcac54495497",
+            "conclusion": "No single-variable assignment yields a unit-propagation refutation.",
+            "outside": [
+              1,
+              10
+            ],
+            "variables": 19
+          },
+          "status": "clear"
+        }
+      ],
+      "seconds": 14.329681667033583
+    },
+    {
+      "counts": {
+        "additive_elimination_check_source_literals": 661,
+        "additive_elimination_checked_mixed_steps": 2,
+        "additive_elimination_checked_pair_literals": 247,
+        "additive_elimination_checked_pairs": 48,
+        "additive_elimination_checked_steps": 2,
+        "additive_elimination_positive_clause_growth": 3,
+        "additive_elimination_positive_literal_growth": 36,
+        "binary_path_checked_clause_literals": 17,
+        "binary_path_checked_proof_nodes": 11,
+        "binary_path_checks": 1,
+        "binary_path_source_literals": 349,
+        "common_intersection_unit_visits": 152,
+        "elimination_validation_literals": 2713,
+        "equivalence_intersection_unit_visits": 152,
+        "exhaustion_checked_attempts": 77,
+        "exhaustion_source_literal_visits": 1464,
+        "normalization_literal_visits": 1358,
+        "probe_ranking_literal_visits": 732,
+        "restriction_literal_visits": 52492,
+        "simplification_reconstruction_literals": 44446,
+        "simplification_unit_check_literals": 599,
+        "structurally_excluded_probe_variables": 5,
+        "transport_checked_steps": 4,
+        "transport_clause_literals": 80,
+        "transport_source_lemmas": 27,
+        "verified_probe_attempts": 66,
+        "verified_simplifications": 144
+      },
+      "history": null,
+      "mode": "compact",
+      "new_discovery": false,
+      "process_wall_seconds": 0.1615828750655055,
+      "repeat": 0,
+      "report_sha256": "53e225cc1252f53fcc11b681cba94e9dd789c603b85c627a383eb496ba561e52",
+      "results": [
+        {
+          "additions": 7,
+          "arm": "transport",
+          "exhaustion": {
+            "binary": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "checked_attempts": 32,
+            "clauses": 91,
+            "cnf_sha256": "e2196d54e1c9f1802c719e9f114f5113010e6773cd389de7e15d71fa397dfb8d",
+            "conclusion": "No single-variable assignment yields a unit-propagation refutation.",
+            "outside": [
+              1,
+              10,
+              11
+            ],
+            "variables": 19
+          },
+          "status": "clear"
+        },
+        {
+          "additions": 11,
+          "arm": "local",
+          "exhaustion": {
+            "binary": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "checked_attempts": 34,
+            "clauses": 95,
+            "cnf_sha256": "a296adf3aca1e5c5a9f3d4e8dd6283784ea5bf16426912325012bcac54495497",
+            "conclusion": "No single-variable assignment yields a unit-propagation refutation.",
+            "outside": [
+              1,
+              10
+            ],
+            "variables": 19
+          },
+          "status": "clear"
+        }
+      ],
+      "seconds": 0.025086665991693735
+    },
+    {
+      "counts": {
+        "additive_elimination_check_source_literals": 661,
+        "additive_elimination_checked_mixed_steps": 2,
+        "additive_elimination_checked_pair_literals": 247,
+        "additive_elimination_checked_pairs": 48,
+        "additive_elimination_checked_steps": 2,
+        "additive_elimination_positive_clause_growth": 3,
+        "additive_elimination_positive_literal_growth": 36,
+        "binary_path_checked_clause_literals": 17,
+        "binary_path_checked_proof_nodes": 11,
+        "binary_path_checks": 1,
+        "binary_path_source_literals": 349,
+        "common_intersection_unit_visits": 152,
+        "elimination_validation_literals": 2713,
+        "equivalence_intersection_unit_visits": 152,
+        "exhaustion_checked_attempts": 77,
+        "exhaustion_source_literal_visits": 1464,
+        "normalization_literal_visits": 1358,
+        "probe_ranking_literal_visits": 732,
+        "restriction_literal_visits": 52492,
+        "simplification_reconstruction_literals": 44446,
+        "simplification_unit_check_literals": 599,
+        "structurally_excluded_probe_variables": 5,
+        "transport_checked_steps": 4,
+        "transport_clause_literals": 80,
+        "transport_source_lemmas": 27,
+        "verified_probe_attempts": 66,
+        "verified_simplifications": 144
+      },
+      "history": null,
+      "mode": "compact",
+      "new_discovery": false,
+      "process_wall_seconds": 0.11072629224509001,
+      "repeat": 1,
+      "report_sha256": "53e225cc1252f53fcc11b681cba94e9dd789c603b85c627a383eb496ba561e52",
+      "results": [
+        {
+          "additions": 7,
+          "arm": "transport",
+          "exhaustion": {
+            "binary": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "checked_attempts": 32,
+            "clauses": 91,
+            "cnf_sha256": "e2196d54e1c9f1802c719e9f114f5113010e6773cd389de7e15d71fa397dfb8d",
+            "conclusion": "No single-variable assignment yields a unit-propagation refutation.",
+            "outside": [
+              1,
+              10,
+              11
+            ],
+            "variables": 19
+          },
+          "status": "clear"
+        },
+        {
+          "additions": 11,
+          "arm": "local",
+          "exhaustion": {
+            "binary": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "checked_attempts": 34,
+            "clauses": 95,
+            "cnf_sha256": "a296adf3aca1e5c5a9f3d4e8dd6283784ea5bf16426912325012bcac54495497",
+            "conclusion": "No single-variable assignment yields a unit-propagation refutation.",
+            "outside": [
+              1,
+              10
+            ],
+            "variables": 19
+          },
+          "status": "clear"
+        }
+      ],
+      "seconds": 0.023019541054964066
+    },
+    {
+      "counts": {
+        "additive_elimination_check_source_literals": 661,
+        "additive_elimination_checked_mixed_steps": 2,
+        "additive_elimination_checked_pair_literals": 247,
+        "additive_elimination_checked_pairs": 48,
+        "additive_elimination_checked_steps": 2,
+        "additive_elimination_positive_clause_growth": 3,
+        "additive_elimination_positive_literal_growth": 36,
+        "binary_path_checked_clause_literals": 17,
+        "binary_path_checked_proof_nodes": 11,
+        "binary_path_checks": 1,
+        "binary_path_source_literals": 349,
+        "common_intersection_unit_visits": 152,
+        "elimination_validation_literals": 2713,
+        "equivalence_intersection_unit_visits": 152,
+        "exhaustion_checked_attempts": 77,
+        "exhaustion_source_literal_visits": 1464,
+        "normalization_literal_visits": 1358,
+        "probe_ranking_literal_visits": 732,
+        "restriction_literal_visits": 52492,
+        "simplification_reconstruction_literals": 44446,
+        "simplification_unit_check_literals": 599,
+        "structurally_excluded_probe_variables": 5,
+        "transport_checked_steps": 4,
+        "transport_clause_literals": 80,
+        "transport_source_lemmas": 27,
+        "verified_probe_attempts": 66,
+        "verified_simplifications": 144
+      },
+      "history": {
+        "blocks": 155,
+        "history_bytes": 769646592,
+        "learning": 42,
+        "splits": 6,
+        "unchanged": true
+      },
+      "mode": "history",
+      "new_discovery": false,
+      "process_wall_seconds": 13.8512048330158,
+      "repeat": 1,
+      "report_sha256": "53e225cc1252f53fcc11b681cba94e9dd789c603b85c627a383eb496ba561e52",
+      "results": [
+        {
+          "additions": 7,
+          "arm": "transport",
+          "exhaustion": {
+            "binary": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "checked_attempts": 32,
+            "clauses": 91,
+            "cnf_sha256": "e2196d54e1c9f1802c719e9f114f5113010e6773cd389de7e15d71fa397dfb8d",
+            "conclusion": "No single-variable assignment yields a unit-propagation refutation.",
+            "outside": [
+              1,
+              10,
+              11
+            ],
+            "variables": 19
+          },
+          "status": "clear"
+        },
+        {
+          "additions": 11,
+          "arm": "local",
+          "exhaustion": {
+            "binary": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "checked_attempts": 34,
+            "clauses": 95,
+            "cnf_sha256": "a296adf3aca1e5c5a9f3d4e8dd6283784ea5bf16426912325012bcac54495497",
+            "conclusion": "No single-variable assignment yields a unit-propagation refutation.",
+            "outside": [
+              1,
+              10
+            ],
+            "variables": 19
+          },
+          "status": "clear"
+        }
+      ],
+      "seconds": 13.760549082886428
+    }
+  ],
+  "script_sha256": "dc789d79b0995c3006062b94d7917337f47da0eb7c7ed331b299551a6012a413"
+}

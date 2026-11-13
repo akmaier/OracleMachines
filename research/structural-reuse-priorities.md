@@ -12,7 +12,39 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: retain the probing limit without restoring the inventory
+## Current investigation: transport parent lemmas, then change the inference
+
+[Checked parent-lemma transport](parent-lemma-transport.md) preserves eight of
+sixteen parent lemmas across the saved branch and both eliminations; one is
+already explicit and **seven can be added** to the 19-variable / 84-clause leaf.
+All seven also follow from the leaf's saved traces. That local route adds eleven
+clauses, but **neither augmentation reduces support**. All binary-variable pairs
+remain clear (32 and 34 traces respectively); separate exact-source exhaustion
+certificates retain this result. Structural coverage stays **55/83**.
+
+1. **Try another saved cofactor of the 19-variable leaf**, preserving both branch
+   obligations and closed siblings. Repeating the two recorded augmentations is
+   unproductive. A further round using their new traces is a distinct, untested
+   alternative; the result is not a proof of complete clause saturation.
+2. **Reuse positive facts with their actual dependencies.** A source-bound
+   transport certificate now checks conditioning, complete projection, binary
+   path deletion and variable maps without loading the whole inventory. It is
+   **2,362 compressed bytes**. Compact replay of both augmentations and their
+   obstructions costs **0.111--0.162 s**; additional inventory reconstruction and
+   ancestry checking costs **13.85--14.43 s**. Export itself costs **14.05 s**.
+   These modes have different ancestry obligations and are not whole-solver
+   speedup measurements. On this leaf, the already acquired local proof is smaller.
+3. **Keep the remaining discovery and accounting obligations explicit.** The
+   18-base / 92-variable alternative queue and dependency-local coverage checking
+   remain open. No structural state was added. The **769,646,592-byte** history,
+   six splits, 42 learned bases, 155 blocks and reference results are unchanged.
+   Thirty-seven relevant tests and two read-only cold ancestry checks pass.
+
+Resume the inventory from `experiments/results/cnf-reuse-frontier/report.json`;
+also retain the new proofs in `experiments/results/cnf-lemma-transport/`. The latter
+is a sidecar experiment, not a replacement coverage checkpoint or a new Lean proof.
+
+## Previous investigation: retain the probing limit without restoring the inventory
 
 [Continuation and compact exhaustion replay](retained-split-frontier.md) exhaust
 the ten remaining candidates on the **19-variable / 84-clause** leaf. Three clear

@@ -12,7 +12,48 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: conditioning passes the exhausted learned batch
+## Current investigation: retain the probing limit without restoring the inventory
+
+[Continuation and compact exhaustion replay](retained-split-frontier.md) exhaust
+the ten remaining candidates on the **19-variable / 84-clause** leaf. Three clear
+blocks add no recognition states; original structural coverage stays **55/83**.
+Twenty-eight clear traces cover fourteen binary variables. The other five cannot
+start unit propagation. No retained pair yields a common/equivalence rewrite.
+Repeating ordinary probes on this exact source has no discovery value.
+
+The new source-bound certificate keeps only the formula and required traces:
+**1,347 compressed bytes**. Two fresh-process replays take **0.082--0.125 s**,
+versus **14.10--14.20 s** reconstructing the identical proof from history. Packing
+costs 0.00288 s after the traces are available; prior acquisition and the exporting
+diagnostic's 14.03 s restoration remain charged. This verifies one unit-refutation
+obstruction, not SAT/UNSAT, full coverage, ancestry or the whole inventory.
+
+1. **Change inference on the 19-variable leaf.** Compare source-proved clause
+   augmentation with a split from its fourteen saved pairs. Explore transport of
+   retained parent lemmas only with checked variable bindings and elimination
+   conditions. The old negative certificate cannot be inherited by a changed
+   formula. Retain the alternative **18-base / 92-variable** learned queue.
+2. **Extend checking with explicit dependency boundaries.** Compact replay avoids
+   inventory restoration for this one fact. Positive routes and complete coverage
+   plans still need their relevant dependencies checked; the full audit costs
+   **113.33 s**. Do not substitute a compact fact for a whole-plan audit.
+3. **Keep cost and coverage separate.** Local acquisition costs 0.00870 s, but the
+   continuation pipeline costs **271.54 s** and delta export alone 5.40 s. The
+   28,672-byte working-database growth stores negative evidence, not wider closure.
+
+Resume `experiments/results/cnf-reuse-frontier/report.json` using
+`continue_cnf_reuse_frontier.restore_checkpoint` and `routes_for`. Keep all six
+splits, 42 learned bases and 155 augmented blocks. Working SQLite is
+**769,646,592 bytes**, with 41,710 pattern nodes, 87 windows and 128 ordinary
+continuations. All 1,775 reference nodes survive byte for byte. All **17 relevant
+tests**, the full inventory audit and **154.19 s** standalone cold replay pass.
+The 589-test full-suite result remains in the parent; it was not rerun here.
+`obstruction.certificates.json.gz`, `obstruction.json` and
+`replay-comparison.json` bind the compact evidence and measurements. The manuscript
+now explains this narrow reuse result; Lean sources and unrestricted claims are
+unchanged.
+
+## Previous investigation: conditioning passes the exhausted learned batch
 
 [The learned-clause/saved-split comparison](learning-versus-saved-split.md)
 starts both arms from the same 22-variable / 90-clause residual with a 32-state

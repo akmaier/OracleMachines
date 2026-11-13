@@ -5337,3 +5337,43 @@ bytes unchanged. On the 106-clause augmented formula, 42 saved clear traces cove
 both values of 21 binary variables; variable 12 cannot trigger an initial unit.
 This certifies failure of every single-variable unit-refutation attempt after
 the new batch, without deciding a broader complexity question.
+
+## Portable probing obstruction, 13 November 2026
+
+[Continuation from the merged checkpoint](retained-split-frontier.md) tests all
+ten remaining ordinary candidates on the 19-variable / 84-clause leaf. Three
+clear blocks, then exhaustion, add no recognition states and no original closure:
+coverage remains **55/83**, including the ablation. Twenty-eight saved clear
+traces cover both values of all fourteen binary variables; the other five cannot
+start unit propagation. No retained pair supplies the implemented common-value
+or equivalence rewrite. This is a checked inference boundary, not SAT/UNSAT or a
+lower bound for arbitrary methods.
+
+A new self-contained certificate retains only the exact formula and the required
+clear traces. It occupies **6,562 JSON bytes / 1,347 compressed bytes**. Two fresh
+processes per mode, with reversed order, check identical proofs in **0.08218 /
+0.12492 s** from the compact certificate versus **14.10469 / 14.20055 s** from
+history reconstruction. Startup and teardown are included; OS caches are not
+flushed. Packing/checking costs 0.00288 s once traces are available; the exporting
+diagnostic also pays 14.03 s to restore history. These costs and all old evidence
+remain charged. Compact replay verifies only this source's unit-refutation
+obstruction, not whole-inventory correctness, ancestry or structural coverage.
+
+The continuation itself costs 0.00870 s; its pipeline totals 271.54 s, including
+a 113.33 s inventory audit and 64.40 s cold route reconstruction. The working
+database grows 28,672 bytes to **769,646,592 bytes** with 41,710 pattern nodes,
+87 windows and 128 ordinary continuations. The reference archive's 1,775 nodes
+and bytes are unchanged. All 17 relevant tests, full inventory audit and
+154.19 s independent cold replay pass. The parent's 589-test suite remains
+preserved; no new full-suite run is claimed. Peak RAM is unmeasured.
+
+Resume `experiments/results/cnf-reuse-frontier/report.json` through
+`continue_cnf_reuse_frontier.restore_checkpoint` and `routes_for`, including six
+splits, 42 learned bases and 155 augmented blocks. Stop unchanged ordinary probes
+on this leaf. Compare source-proved augmentation, verified parent-lemma transport
+and another split from its fourteen saved pairs. Elimination and binary-path
+steps require explicit transport conditions; a parent's negative certificate
+cannot simply be reused on a child. The 18-base / 92-variable queue remains an
+alternative. Dependency-local positive-plan validation is the larger cost gap.
+The manuscript now explains compact negative-fact replay and its limitations;
+Lean sources and unrestricted-SAT claims are unchanged.

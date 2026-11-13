@@ -1,0 +1,253 @@
+{
+  "certificate": {
+    "bytes": 6562,
+    "compressed_bytes": 1347,
+    "path": "experiments/results/cnf-reuse-frontier/obstruction.certificates.json.gz",
+    "sha256": "86735b1b3fc92da362776b1f53291b26d2a59a9944e7ff669198f7714c087223"
+  },
+  "fingerprints": {
+    "experiments/cnf_exhaustion_certificate.py": "d8fedba3f6f87e5c8b0047aee0a31a81e9592f33e77a62f57edbe1f266c79025",
+    "experiments/compare_cnf_exhaustion_replay.py": "c3befe2726c0c137bf727ca405d74e015e171b4947fb823ea7eaa6cfcfa07311",
+    "solver/test_cnf_exhaustion_certificate.py": "0e450826157ac6aa4a924e0c337946e8e7c9e19a50b627954ba3fb8fb88ecdb5"
+  },
+  "format": "source-exhaustion-replay-comparison-v1",
+  "limitations": [
+    "One reused development residual; two fresh processes per mode, balanced order, OS caches not flushed.",
+    "Process wall timers include Python startup, imports and teardown. In-process timers are also recorded.",
+    "Compact mode verifies only the stated unit-refutation obstruction on the explicit source formula, not inventory coverage, ancestry, paired rewrites or SAT/UNSAT.",
+    "History mode restores and validates inherited data, then reconstructs the identical retained proof. Compact replay requires the previously exported source-bound proof; export is charged separately.",
+    "The full history is preserved. Reconstructed database size is disk space, not peak RAM; peak RAM and general runtime bounds are unmeasured."
+  ],
+  "obstruction_sha256": "1ee68553b07f77b558ed1a9d0ce7fa2698f5d3ff4e76427882082870d5c231f4",
+  "packing_seconds": 0.0028848331421613693,
+  "pipeline_seconds": 28.514135125093162,
+  "report_sha256": "9fe95d5f3436cffe8d2fad924e3b9f8713e8f2f3ffd591a695365aab7ed5ebd1",
+  "samples": [
+    {
+      "certificate_bytes": 6562,
+      "certificate_compressed_bytes": 1347,
+      "checking_seconds": 0.019850374665111303,
+      "counts": {
+        "exhaustion_checked_attempts": 56,
+        "exhaustion_source_literal_visits": 696,
+        "restriction_literal_visits": 19488,
+        "simplification_reconstruction_literals": 16246,
+        "simplification_unit_check_literals": 200,
+        "structurally_excluded_probe_variables": 5,
+        "trace_index_records_scanned": 215,
+        "trace_reference_payload_bytes": 115988,
+        "trace_references_loaded": 28,
+        "verified_simplifications": 56
+      },
+      "history_database_bytes": 769646592,
+      "loading_seconds": 0.0014302502386271954,
+      "mode": "history",
+      "new_discovery": false,
+      "process_wall_seconds": 14.200554709415883,
+      "repeat": 0,
+      "restore_seconds": 13.270515457727015,
+      "rows": [
+        {
+          "binary": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            12,
+            13,
+            14,
+            15,
+            17,
+            18,
+            19
+          ],
+          "checked_attempts": 28,
+          "clauses": 84,
+          "cnf_sha256": "23a3b6ca3079b66e044f9f1622ce9ded6aecff3f5b7cde05dbd719bf375e6b04",
+          "conclusion": "No single-variable assignment yields a unit-propagation refutation.",
+          "outside": [
+            1,
+            2,
+            10,
+            11,
+            16
+          ],
+          "source_sha256": "36b17bb5fbc68fec862775b4e3c3916f1ce78e053416b5e75260f55a69aa8fa6",
+          "variables": 19
+        }
+      ],
+      "seconds": 14.09825479099527
+    },
+    {
+      "certificate_bytes": 6562,
+      "certificate_compressed_bytes": 1347,
+      "checking_seconds": 0.0028193751350045204,
+      "counts": {
+        "exhaustion_checked_attempts": 28,
+        "exhaustion_source_literal_visits": 696,
+        "restriction_literal_visits": 9744,
+        "simplification_reconstruction_literals": 8123,
+        "simplification_unit_check_literals": 100,
+        "structurally_excluded_probe_variables": 5,
+        "verified_simplifications": 28
+      },
+      "history_database_bytes": 0,
+      "loading_seconds": 0.0008344999514520168,
+      "mode": "compact",
+      "new_discovery": false,
+      "process_wall_seconds": 0.12491725012660027,
+      "repeat": 0,
+      "restore_seconds": 0.0,
+      "rows": [
+        {
+          "binary": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            12,
+            13,
+            14,
+            15,
+            17,
+            18,
+            19
+          ],
+          "checked_attempts": 28,
+          "clauses": 84,
+          "cnf_sha256": "23a3b6ca3079b66e044f9f1622ce9ded6aecff3f5b7cde05dbd719bf375e6b04",
+          "conclusion": "No single-variable assignment yields a unit-propagation refutation.",
+          "outside": [
+            1,
+            2,
+            10,
+            11,
+            16
+          ],
+          "source_sha256": "36b17bb5fbc68fec862775b4e3c3916f1ce78e053416b5e75260f55a69aa8fa6",
+          "variables": 19
+        }
+      ],
+      "seconds": 0.003657374996691942
+    },
+    {
+      "certificate_bytes": 6562,
+      "certificate_compressed_bytes": 1347,
+      "checking_seconds": 0.002773874904960394,
+      "counts": {
+        "exhaustion_checked_attempts": 28,
+        "exhaustion_source_literal_visits": 696,
+        "restriction_literal_visits": 9744,
+        "simplification_reconstruction_literals": 8123,
+        "simplification_unit_check_literals": 100,
+        "structurally_excluded_probe_variables": 5,
+        "verified_simplifications": 28
+      },
+      "history_database_bytes": 0,
+      "loading_seconds": 0.0003759590908885002,
+      "mode": "compact",
+      "new_discovery": false,
+      "process_wall_seconds": 0.082180917263031,
+      "repeat": 1,
+      "restore_seconds": 0.0,
+      "rows": [
+        {
+          "binary": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            12,
+            13,
+            14,
+            15,
+            17,
+            18,
+            19
+          ],
+          "checked_attempts": 28,
+          "clauses": 84,
+          "cnf_sha256": "23a3b6ca3079b66e044f9f1622ce9ded6aecff3f5b7cde05dbd719bf375e6b04",
+          "conclusion": "No single-variable assignment yields a unit-propagation refutation.",
+          "outside": [
+            1,
+            2,
+            10,
+            11,
+            16
+          ],
+          "source_sha256": "36b17bb5fbc68fec862775b4e3c3916f1ce78e053416b5e75260f55a69aa8fa6",
+          "variables": 19
+        }
+      ],
+      "seconds": 0.0031529590487480164
+    },
+    {
+      "certificate_bytes": 6562,
+      "certificate_compressed_bytes": 1347,
+      "checking_seconds": 0.02027337532490492,
+      "counts": {
+        "exhaustion_checked_attempts": 56,
+        "exhaustion_source_literal_visits": 696,
+        "restriction_literal_visits": 19488,
+        "simplification_reconstruction_literals": 16246,
+        "simplification_unit_check_literals": 200,
+        "structurally_excluded_probe_variables": 5,
+        "trace_index_records_scanned": 215,
+        "trace_reference_payload_bytes": 115988,
+        "trace_references_loaded": 28,
+        "verified_simplifications": 56
+      },
+      "history_database_bytes": 769646592,
+      "loading_seconds": 0.0004008328542113304,
+      "mode": "history",
+      "new_discovery": false,
+      "process_wall_seconds": 14.104690582957119,
+      "repeat": 1,
+      "restore_seconds": 13.190534957684577,
+      "rows": [
+        {
+          "binary": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            12,
+            13,
+            14,
+            15,
+            17,
+            18,
+            19
+          ],
+          "checked_attempts": 28,
+          "clauses": 84,
+          "cnf_sha256": "23a3b6ca3079b66e044f9f1622ce9ded6aecff3f5b7cde05dbd719bf375e6b04",
+          "conclusion": "No single-variable assignment yields a unit-propagation refutation.",
+          "outside": [
+            1,
+            2,
+            10,
+            11,
+            16
+          ],
+          "source_sha256": "36b17bb5fbc68fec862775b4e3c3916f1ce78e053416b5e75260f55a69aa8fa6",
+          "variables": 19
+        }
+      ],
+      "seconds": 14.009181999601424
+    }
+  ]
+}

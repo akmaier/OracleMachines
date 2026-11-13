@@ -1,0 +1,75 @@
+{
+  "certificates": {
+    "bytes": 6562,
+    "compressed_bytes": 1347,
+    "path": "experiments/results/cnf-reuse-frontier/obstruction.certificates.json.gz",
+    "sha256": "86735b1b3fc92da362776b1f53291b26d2a59a9944e7ff669198f7714c087223"
+  },
+  "checking_seconds": 0.01567508326843381,
+  "counts": {
+    "common_intersection_unit_visits": 59,
+    "equivalence_intersection_unit_visits": 59,
+    "exhaustion_checked_attempts": 56,
+    "exhaustion_source_literal_visits": 348,
+    "restriction_literal_visits": 19488,
+    "simplification_reconstruction_literals": 16246,
+    "simplification_unit_check_literals": 200,
+    "structurally_excluded_probe_variables": 5,
+    "trace_index_records_scanned": 215,
+    "trace_reference_payload_bytes": 115988,
+    "trace_references_loaded": 28,
+    "verified_simplifications": 56
+  },
+  "history_bytes_unchanged": true,
+  "new_assumption_probes": false,
+  "new_recognition_states": 0,
+  "packing_seconds": 0.0028848331421613693,
+  "pipeline_seconds": 14.642085124738514,
+  "portable_checker_sha256": "d8fedba3f6f87e5c8b0047aee0a31a81e9592f33e77a62f57edbe1f266c79025",
+  "portable_tests_sha256": "0e450826157ac6aa4a924e0c337946e8e7c9e19a50b627954ba3fb8fb88ecdb5",
+  "report_sha256": "9fe95d5f3436cffe8d2fad924e3b9f8713e8f2f3ffd591a695365aab7ed5ebd1",
+  "restore_seconds": 14.02726741693914,
+  "rewrites": {
+    "bytes": 3,
+    "compressed_bytes": 23,
+    "path": "experiments/results/cnf-reuse-frontier/obstruction.rewrites.json.gz",
+    "sha256": "abc129be8d26e8d4afe9ce45f9d5a73c8ed9aa62810ca24ee789fe4581dc4a80"
+  },
+  "rows": [
+    {
+      "binary": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        12,
+        13,
+        14,
+        15,
+        17,
+        18,
+        19
+      ],
+      "checked_attempts": 28,
+      "clauses": 84,
+      "distinct_probe_variables": 14,
+      "exhausted": true,
+      "outside": [
+        1,
+        2,
+        10,
+        11,
+        16
+      ],
+      "pair_reductions": [],
+      "source": "[\"cnf-pattern-v1\",{\"binary_path_root_limit\":64,\"binary_paths\":\"retained-binary-shared-prefix-v1\",\"candidate_limit\":4,\"clause_growth_limit\":2,\"common_consequences\":\"first-complete-pair-v1\",\"conditioning_edges\":\"checked-closure-v1\",\"conditioning_policy\":\"shortest-balanced-v1\",\"decompose\":true,\"elimination_candidate_limit\":64,\"elimination_pair_limit\":64,\"learn_limit\":4,\"max_depth\":2,\"parity_width\":8,\"pattern_extension\":\"unit-pure-discovery-v1\",\"polarity_pair_limit\":65536,\"probe_equivalences\":\"first-pair-smallest-representative-v1\",\"probe_learning\":\"closure-activity16-v1\",\"probe_limit\":4,\"probing\":\"binary-frequency-failed-literal-v1\",\"projection_budget\":4096,\"retained_plans\":\"exact-closed-polarity-reference-v1\",\"simplify_pure\":false,\"simplify_units\":true,\"terminal_additive_elimination\":\"complete-pairs-additive-clause-fallback-v1\",\"terminal_clause_elimination\":\"complete-pairs-clause-count-fallback-v1\",\"terminal_elimination\":\"complete-opposing-pairs-nongrowing-v1\",\"terminal_polarity\":\"horn-pair-certificates-v1\",\"terminal_subsumption\":\"implied-minimal-family-v1\"},0,[[-19,-18,-15,-5,-1,3,6,7,12],[-19,-15,-14,-8,-5,3,6,7,10],[-19,-15,-12,-5,6,7],[-19,-15,-10,-5,3,6,7],[-19,-15,-8,-5,6,7,10],[-19,-15,-5,-1,6,7,12,17],[-19,-15,-5,2,3,6,7],[-19,-15,-5,3,6,7,17],[-19,-15,-5,6,7,13,17],[-19,-5,-1,6,7,13],[-19,13,15],[-18,-8,-1,10,12],[-18,-3,-1,10,12],[-17,12],[-17,16,18],[-16,-15,-5,-3,6,7],[-16,-14,-8,-6,10],[-16,-14,-8,7,10],[-16,-8,-6,2],[-16,-8,-5,6,7],[-16,-8,2,7],[-16,-6,-3,5,19],[-16,-4,10],[-16,-3,5,7,19],[-16,-1,12],[-16,4,13],[-16,9,13],[-15,-14,-8,5,10,13],[-15,-14,-5,-3,6,7],[-15,-5,-3,6,7,11],[-15,-5,6,7],[-15,-3,7],[-15,8],[-14,-11,-8,10,13],[-14,-10,-5,6,7],[-14,-9,-8,-3,10],[-14,-8,-3,6,10],[-14,-8,-1,10,12],[-14,-8,1,10],[-14,-8,9,10,13,17],[-14,-8,10,11],[-14,-8,10,18],[-14,-5,3,6,7],[-14,-3,5,19],[-14,-1,12,15,16],[-13,-9],[-13,-5],[-12,-2,13],[-11,-8,6,7,10],[-9,1,12],[-9,5,19],[-9,7,8],[-8,-7,1,10],[-8,-7,15],[-8,-5,-2,10,18],[-8,2,10],[-8,2,11],[-7,-4],[-6,2,14],[-6,12],[-5,-4],[-5,-3,4,6,7],[-5,-1,6,7,12],[-5,6,7,9,11,17],[-5,6,7,11,18],[-5,11,18],[-4,8],[-3,2,10],[-3,5,11,19],[-3,8,11],[-3,10,17],[-3,11,18],[-2,9,16],[-1,12,15],[2,5,14],[3,18],[4,5,15,19],[4,14],[4,17,18],[5,8,19],[6,8],[6,15,18],[9,15],[9,19]]]",
+      "source_sha256": "36b17bb5fbc68fec862775b4e3c3916f1ce78e053416b5e75260f55a69aa8fa6",
+      "variables": 19
+    }
+  ],
+  "scope": "Checked single-assumption unit-refutation obstruction and paired common/equivalence tests on saved traces. No SAT/UNSAT answer or lower bound for arbitrary algorithms.",
+  "script_sha256": "5c2741cff19cbcb61e5cc2eb0f037bd511963d2d318dcafb362149d01972617e"
+}

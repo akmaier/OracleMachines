@@ -12,7 +12,51 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: later augmented probes close case 32; coverage reaches 47/83
+## Current investigation: retained learning raises coverage to 52/83
+
+[The shared-budget continuation](retained-learning-batch.md) reuses the 36 earlier
+clear learning bases and raises coverage **47/83 -> 52/83**, including the
+growth-exception ablation. Cases **24, 40, 50, 66 and 81** are independently
+proved **SAT**. The run adds 141 augmented blocks (131 clear, nine forced, one
+equivalence) and 77 pattern nodes. No target admission cap binds; no successful
+child remains pending. All 577 Python tests pass.
+
+**Attribution is mixed:** six successful augmented blocks have clear matched
+original-source controls, while four controls also force a value. The gain is
+broader checked coverage, not a measured whole-solver speedup or evidence that
+all reductions require learning. All cases remain reused development inputs.
+
+1. **Probe the smallest acquired open target first.** Its selected leaf has
+   **10 variables / 51 clauses**, with one ordinary ranked variable still unused.
+   Four other selected leaves have 33, 33, 36 and 38 variables. The checkpoint
+   retains exact target and leaf identities; do not restart from original CNFs.
+2. **Continue the 18 ready learned formulas.** They have **92 untried ranked
+   variables** and need no repeated clause selection or initial probes. The raw
+   queue has 23 entries, but five have consumed their final clear block. Use the
+   persisted selection filter. Across all 41 bases, the final statuses are 18
+   ready, nine exhausted, six covered, five acquired open targets and three
+   initially successful bases.
+3. **Keep exhausted inference and cold validation as explicit gaps.** Another
+   learning layer must bind augmented reasons to their actual dependencies;
+   bounded conditioning is an alternative. For runtime, preparation **66.28 s**,
+   full inventory audit **107.69 s** and cold routes **63.57 s** still dominate
+   the **263.21 s** pipeline. Later probes/checks cost **0.62674 s**, controls
+   **0.39536 s**, target recognition **0.32568 s**. Dependency-local validation
+   remains an unimplemented opportunity.
+
+Working SQLite grows **1,044,480 bytes** to **768,598,016 bytes** and holds
+**41,659 pattern nodes**. External block/control, diagnostic, coverage and
+reference archives are separate. All 164 earlier reference proof nodes survive
+unchanged in the 1,156-node extended archive. Peak RAM remains unmeasured.
+
+Resume `experiments/results/cnf-learning-batch/report.json` with
+`continue_cnf_learning.restore_checkpoint`; pass all returned rewrites, bases and
+augmented blocks to `ContinuedLearningRoutes`. There are now 150 augmented blocks;
+the 41 learning bases, 79 ordinary windows and 108 ordinary continuations are
+unchanged. A subsequent pass uses a new output directory and `--parent` with this
+report. Older experiments, manuscript, Lean and the 902/985 study remain intact.
+
+## Previous investigation: later augmented probes close case 32; coverage reaches 47/83
 
 [Learned-formula continuation](frontier-learning-continuation.md) raises coverage
 **46/83 -> 47/83**, including the growth-exception ablation. Case **32**

@@ -1360,3 +1360,25 @@ Nine later blocks, eight inconclusive, remain persistent with both original-sour
 exhaustion certificates and the augmented exhaustion certificate. These findings
 refine the remaining inference gap without establishing polynomial coverage of
 arbitrary CNFs or an independent-workload performance result.
+
+## Retained-learning batch checkpoint, 13 November 2026
+
+[Continuation across the saved bases](retained-learning-batch.md) raises
+structural coverage **47/83 -> 52/83**, independently proves all five newly
+covered originals SAT, and retains all 52 closures without growth exceptions.
+The pass acquires 141 later blocks and 77 recognition states under one shared
+admission budget. It neither reacquires source clauses nor repeats initial probes.
+Six of ten reduced targets arise with clear same-variable original controls;
+four controls also force a value. The experiment therefore separates stronger
+propagation from extra lookahead rather than attributing every gain to learning.
+
+The remaining cells now distinguish 18 ready bases, nine exhausted bases, six
+covered sources, five acquired open targets and three initially successful bases.
+The smallest selected target leaf has ten variables, 51 clauses and one untried
+ordinary probe; this is the next coverage target. The 18 ready augmented bases
+retain 92 unused ranked variables. Five additional raw queue entries are already
+exhausted, so queue size alone overstates remaining discovery opportunities.
+
+All earlier proof rows and reference answers persist. This is a refinement of
+the same development cases and of the scheduler's discovery outcomes, not a new
+tractable CNF category, independent holdout result or unrestricted-SAT bound.

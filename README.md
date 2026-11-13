@@ -28,7 +28,16 @@ classes.
 
 ## Paper
 
-The latest [resumed-probe investigation](research/probe-resumption.md) raises
+The latest [retained-learning investigation](research/retained-learning-batch.md)
+raises structural coverage **47/83 -> 52/83** on the reused development originals;
+all five gains are independently SAT. It reuses saved clauses and prefixes,
+adds 141 later blocks and 77 pattern nodes, and preserves all older evidence.
+Six successful augmented blocks have clear matched controls; four controls also
+find forced values. All **577 tests** pass. Cold validation
+still dominates runtime. The next targets are a ten-variable residual with one
+untried probe and 18 learned formulas with unused later variables.
+
+The earlier [resumed-probe investigation](research/probe-resumption.md) raises
 coverage **39/83 -> 45/83**, with four SAT and two UNSAT gains on reused
 48-variable development cases. It also certifies that five remaining sources
 have **no single-assumption unit refutation**; more plain single-variable probes

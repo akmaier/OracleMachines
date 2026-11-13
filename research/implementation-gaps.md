@@ -5184,3 +5184,31 @@ no replay discovery or database-byte changes occur. Full costs, corrected test
 fixture failure, limitations and next priorities are retained in
 [frontier-learning-continuation.md](frontier-learning-continuation.md). Manuscript
 and Lean sources are unchanged.
+
+## Shared-budget continuation of retained learning, 13 November 2026
+
+`cnf_learning_batch.py` filters retained bases and advances later blocks in
+round-robin order. One shared set counts all newly entered recognition states;
+a temporary per-target cap preserves completed and partially entered work.
+The new generic runner resumes immutable checkpoint chains, persists each block
+before target acquisition, keeps matched original controls and extends the
+previous independent reference archive. Four regression tests cover shared caps,
+partial acquisition, cached reuse, filtering, ordering and persistence-before-use;
+all **577 tests** pass.
+
+The [retained-learning batch](retained-learning-batch.md) raises coverage
+**47/83 -> 52/83** with five independent SAT witnesses. It adds 141 blocks and
+77 pattern nodes, preserving every old eight-table row and all 164 reference
+proof rows. Six reduced targets have clear matched controls, while four controls
+also force a value. There is no uniform learning-benefit or total-speedup claim.
+
+Restore `experiments/results/cnf-learning-batch/report.json` with
+`continue_cnf_learning.restore_checkpoint` and use `ContinuedLearningRoutes`.
+The state contains 41,659 pattern nodes and 150 augmented blocks, alongside
+unchanged ordinary windows, continuations and 41 learning bases. The next
+smallest unresolved target is a ten-variable / 51-clause leaf with one remaining
+ordinary probe; 18 augmented formulas retain 92 unused ranked variables. Cold
+validation dominates the 263.21-second pipeline. Working SQLite adds 1,044,480
+bytes, and separate artifacts retain successful and unsuccessful evidence.
+Manuscript and Lean remain unchanged; this adds empirical coverage, not a theorem
+covering arbitrary CNF efficiently.

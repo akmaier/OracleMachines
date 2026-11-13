@@ -91,7 +91,8 @@ def learning_references(h,routes,bases,blocks,tmp):
 def run(out):
     pipeline=time.perf_counter();out.mkdir(exist_ok=False)
     with tempfile.TemporaryDirectory() as td:
-        tmp=Path(td);seed=tmp/'seed';started=time.perf_counter();parent,*evidence=restore_parent(PARENT,seed,tmp)
+        tmp=Path(td);seed=tmp/'seed';parent_tmp=tmp/'parent';parent_tmp.mkdir()
+        started=time.perf_counter();parent,*evidence=restore_parent(PARENT,seed,parent_tmp)
         r=dict(format=FORMAT,parent=dict(path=str(PARENT),sha256=sha(PARENT)),source_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
             fingerprints={p:sha(p) for p in ('experiments/compare_cnf_learning_split.py',)},options=parent['options'],cases=parent['cases'],policy=POLICY,
             baseline_closed=parent['final_closed'],seed_table_digests=digests(seed),seed_database_bytes=seed.stat().st_size,restore_seconds=time.perf_counter()-started,arms={},

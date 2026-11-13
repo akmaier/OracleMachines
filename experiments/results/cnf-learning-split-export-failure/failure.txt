@@ -1,0 +1,15 @@
+{"variables": 22, "split_rank": [1, 1, 21, 329, 4], "graph_conclusions": {"forced_literals": [], "equivalences": [], "contradictory_variables": []}}
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_learning_split.py", line 177, in <module>
+    if __name__=='__main__':run(Path(sys.argv[1]))
+                            ~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_learning_split.py", line 153, in run
+    a['delta']=save_delta(seed,path,tmp/f'{arm}-delta',out/f'{arm}-delta.sqlite3.gz');a['logical_table_digests']=digests(path);r['arms'][arm]=a
+               ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_split_batch.py", line 57, in save_delta
+    started=time.perf_counter();preserved,added=export_delta(seed,path,delta);compressed(delta,archive)
+                                                ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_probe_continuation.py", line 60, in export_delta
+    out.execute(f'CREATE TABLE {t} (id TEXT PRIMARY KEY,payload TEXT NOT NULL)')
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: table cnf_patterns_v1 already exists

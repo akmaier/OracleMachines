@@ -1,0 +1,8 @@
+{
+  "source_commit": "d6dc168",
+  "stage": "learning-arm delta export",
+  "cause": "Inherited restore created tmp/learning-delta before the arm exporter tried CREATE TABLE on that same file.",
+  "preservation": "All completed external proof and diagnosis archives retained. No completed comparison report or arm delta; the temporary inventory was cleaned up on exception.",
+  "resolution": "Isolate the inherited reconstruction in its own temporary directory; rerun from the same immutable parent.",
+  "verified_checkpoint": false
+}

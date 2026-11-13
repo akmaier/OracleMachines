@@ -27,6 +27,7 @@ from experiments.continue_cnf_learning import target_state,preserved_reference
 from experiments.cnf_learning_batch import selection
 from experiments.cnf_trace_reuse import source_attempts,pair_witness,verify_rewrite,record_key
 from experiments.cnf_probe_exhaustion import certify_exhaustion
+from experiments.cnf_exhaustion_certificate import check_certificate
 from experiments.cnf_pattern_inventory import encode
 
 
@@ -74,6 +75,25 @@ def validate(out,test_log):
             obstruction_rows.append(dict(source=source,source_sha256=sha_key(source),variables=leaf['variables'],clauses=leaf['clauses'],exhausted=True,
                 binary=binary,outside=outside,checked_attempts=len(attempts),distinct_probe_variables=len({a['variable'] for a in attempts}),pair_reductions=witnesses))
         assert obstruction_rows==obstruction['rows'] and used==set(rewrites)
+        assert obstruction['portable_checker_sha256']==sha('experiments/cnf_exhaustion_certificate.py')
+        assert obstruction['portable_tests_sha256']==sha('solver/test_cnf_exhaustion_certificate.py')
+        certificates=read_archive(obstruction['certificates'])
+        exhausted={row['source']:row for row in obstruction_rows if row['exhausted']}
+        assert len(certificates)==len(exhausted) and {row['source'] for row in certificates}==set(exhausted)
+        portable=[]
+        for item in certificates:
+            source=item['source'];summary=check_certificate(item['certificate'],expected_cnf=h._load(source)['cnf'])
+            row=exhausted[source]
+            assert all(summary[k]==row[k] for k in ('variables','clauses','binary','outside'))
+            portable.append(dict(source_sha256=sha_key(source),**summary))
+        comparison=json.loads((out/'replay-comparison.json').read_text())
+        assert comparison['report_sha256']==sha(out/'report.json') and comparison['obstruction_sha256']==sha(out/'obstruction.json')
+        for filename,digest in comparison['fingerprints'].items():assert sha(filename)==digest
+        assert comparison['certificate']==obstruction['certificates']
+        assert Counter(sample['mode'] for sample in comparison['samples'])==dict(history=2,compact=2)
+        for sample in comparison['samples']:
+            assert sample['rows']==portable and not sample['new_discovery']
+            assert sample['history_database_bytes']==(r['expanded_database_bytes'] if sample['mode']=='history' else 0)
         result=d['result'];visits=result['visits'];assert len(visits)<=POLICY['step_limit']
         assert len({v['source'] for v in visits})==result['distinct_sources']<=POLICY['source_limit']
         if visits:assert visits[0]['source']==saved['leaf']['source']
@@ -110,12 +130,13 @@ def validate(out,test_log):
         for row in ep['originals']:answer(r['cases'][row['case']]['source'],row['result'])
         assert not solver.counts.get('expanded_nodes',0);solver.close();assert sha(ref)==refbefore
         assert not h.admitted and h.db.execute('PRAGMA integrity_check').fetchone()[0]=='ok';h.close();assert sha(path)==before_bytes
-    log=test_log.read_text();match=re.search(r'Ran (\d+) tests in [0-9.]+s\s+OK',log);assert match and int(match[1])>=7
+    log=test_log.read_text();match=re.search(r'Ran (\d+) tests in [0-9.]+s\s+OK',log);assert match and int(match[1])>=17
     (out/'targeted-validation.txt').write_text(log)
     result=dict(report_sha256=sha(out/'report.json'),script_sha256=sha(Path(__file__)),python_tests=int(match[1]),test_log_sha256=sha(out/'targeted-validation.txt'),
-        test_command='python3 -m unittest solver.test_cnf_split_frontier solver.test_cnf_target_probe',
-        obstruction_sha256=sha(out/'obstruction.json'),coverage=sum(r['final_closed']),gains=r['gains'],without_growth=sum(r['without_growth_closed']),reference_nodes=ep['verified_nodes'],
-        preserved_reference_nodes=ep['preserved_nodes'],history_bytes_unchanged=True,cold_new_discovery=False,seconds=time.perf_counter()-started,
+        test_command='python3 -m unittest solver.test_cnf_exhaustion_certificate solver.test_cnf_probe_exhaustion solver.test_cnf_split_frontier solver.test_cnf_target_probe',
+        obstruction_sha256=sha(out/'obstruction.json'),replay_comparison_sha256=sha(out/'replay-comparison.json'),
+        coverage=sum(r['final_closed']),gains=r['gains'],without_growth=sum(r['without_growth_closed']),reference_nodes=ep['verified_nodes'],
+        preserved_reference_nodes=ep['preserved_nodes'],portable_certificates=portable,history_bytes_unchanged=True,cold_new_discovery=False,seconds=time.perf_counter()-started,
         original_answers={str(row['case']):row['result']['answer'] for row in ep['originals']})
     (out/'validation.json').write_text(json.dumps(result,sort_keys=True,indent=2)+'\n');print(json.dumps(result),flush=True)
 

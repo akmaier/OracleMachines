@@ -28,7 +28,14 @@ classes.
 
 ## Paper
 
-The latest [affine/one-clause investigation](research/affine-one-clause.md)
+The latest [original-frontier split](research/original-frontier-split.md) reduces
+an exhausted 20-variable residual to one open 13-variable obligation, closing its
+other branch with ten new recognition states. Coverage stays **57/83**. All older
+results, including the affine family proof, are retained. Four untried ordinary
+probes on the smaller leaf are the next discovery target; preparation and checking
+still dominate measured runtime.
+
+The preceding [affine/one-clause investigation](research/affine-one-clause.md)
 raises structural coverage **56/83 -> 57/83** on the reused development set.
 Checked linear algebra closes a case missed by shallow probes, without expanding
 the affine relation into CNF or changing the historical inventory. The positive

@@ -5491,3 +5491,47 @@ all **five evidence lists**: rewrites, 42 learned bases, 155 augmented blocks,
 seven splits and the new affine family record. Earlier lemma sidecars remain
 separate and preserved. Using an older four-list route loader would lose the
 newly checked closure.
+
+
+## 2026-11-13: resume an original through its retained cofactor pair
+
+The [original-frontier split](original-frontier-split.md) selects case 73's
+20-variable / 80-clause / 285-literal leaf using support/literal order, ranks all
+fourteen saved pairs and chooses variable 18. Ten new recognition states close
+the true branch and reduce the false branch to **13 variables / 62 clauses /
+219 literals** through binary-path deletion and five eliminations. Independent
+reference proofs establish SAT of the source and both cofactors and verify
+model lifting. Structural coverage stays **57/83**, also without growth exceptions;
+the remaining leaf still needs a recognized decomposition.
+
+That leaf has no directly extracted parity equation. Its already saved probes
+cover variables **6, 9, 12 and 13**, while ordinary candidates **1, 4, 7 and 8**
+remain untried. Test this single four-variable block before another conditioning
+layer. Preserve a clear outcome if obtained, then compare newly available pairs
+or source-proved augmentation. The older 18-base / 92-variable learned queue
+remains available. Use the external split frontier to avoid restarting the
+exhausted 20-variable parent; selected original routes expose a different view.
+
+Local acquisition costs 0.04525 s, but the full pipeline costs 267.75550 s,
+including 65.86672 s preparation, 107.92519 s full audit and 63.93178 s cold routes.
+The two-trace matched control is one tiny resident sample and establishes no
+robust timing advantage. SQLite adds 126,976 bytes to **769,974,272 bytes /
+41,738 pattern nodes**. The immutable delta is 8,671 compressed bytes; sidecars
+are additional. All earlier rows and 1,883 reference nodes remain preserved
+(1,898 reference nodes now). A smaller live residual does not shrink the archive
+or establish a polynomial expansion bound.
+
+Twenty-seven targeted tests, full inventory audit and **164.80960 s** independent
+cold replay pass, including source selection, both branch obligations, all five
+evidence lists, baseline monotonicity, growth ablation, model lifting, immutable
+preservation and no new discovery. The old full-suite and Lean results are
+unchanged. The manuscript records this local structural progress and its costs.
+
+Resume `experiments/results/cnf-original-split/report.json` through
+`continue_cnf_original_splits.restore_checkpoint` and `routes_for`, keeping all
+**five evidence lists**: rewrites, 42 learned bases, 155 augmented blocks,
+**eight splits and one affine family record**. Earlier lemma sidecars remain
+separate and intact. `frontier-profiles.json.gz` records the precise smaller
+source and next variables; `open-originals.json.gz` retains the original/queue
+mapping. Dependency-local verification of complete positive plans remains the
+largest measured runtime opportunity alongside discovery of smaller residuals.

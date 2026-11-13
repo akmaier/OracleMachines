@@ -12,7 +12,40 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: affine plus one clause closes the encoding-cap case
+## Current investigation: saved conditioning exposes a smaller non-affine leaf
+
+[The original-frontier split](original-frontier-split.md) chooses case 73's
+20-variable / 80-clause leaf without using its label, ranks all fourteen retained
+pairs, and splits on variable 18. **Ten new recognition states** close the true
+branch and reduce the false branch to **13 variables / 62 clauses / 219 literals**.
+Coverage stays **57/83**; both cofactors are independently SAT, but one structural
+obligation remains open. The affine closure and all older evidence survive.
+
+1. **Finish the four untried probes on the new 13-variable leaf.** Its saved
+   attempts cover variables 6, 9, 12 and 13; ordinary candidates **1, 4, 7 and 8**
+   remain. Pay for that single block before another conditioning layer. If it is
+   clear, retain the evidence and compare a newly saved split or proved clause
+   augmentation. The leaf still has zero directly extracted parity equations.
+   Use the external split frontier; selected original routes still expose its
+   older parent. The 18-base / 92-variable alternative learning queue remains.
+2. **Reduce complete-plan checking cost from actual dependencies.** Acquisition
+   costs **0.04525 s**; preparation **65.86672 s**, full audit **107.92519 s**, cold
+   routes **63.93178 s**, total **267.75550 s**. The matched two-trace control is
+   one tiny sample and establishes no robust speedup. Preserve the distinction
+   between a compact local fact and a fully justified positive coverage plan.
+3. **Keep retained-space and generality limits explicit.** SQLite adds **126,976
+   bytes** to **769,974,272 bytes / 41,738 nodes**. The delta is **8,671 compressed
+   bytes**, plus sidecars. Smaller support does not shrink history. A 32-state
+   admission allowance does not establish polynomial expansion or bounded RAM.
+
+Resume `experiments/results/cnf-original-split/report.json` using
+`continue_cnf_original_splits.restore_checkpoint` and `routes_for`. Preserve
+**five evidence lists**, now including **eight splits**, 42 learned bases, 155
+augmented blocks and the affine family record, plus earlier lemma sidecars.
+Twenty-seven targeted tests, full inventory audit and independent cold replay
+validate the checkpoint. All 1,883 previous reference nodes survive within 1,898.
+
+## Previous investigation: affine plus one clause closes the encoding-cap case
 
 [The affine/one-clause extension](affine-one-clause.md) raises coverage
 **56/83 -> 57/83**, also without growth exceptions. It scans all 29 selected

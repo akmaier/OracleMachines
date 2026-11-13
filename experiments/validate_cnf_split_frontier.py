@@ -25,6 +25,9 @@ from experiments.cnf_route_composition import compose
 from experiments.cnf_residual_dag import ResidualSolver,holds
 from experiments.continue_cnf_learning import target_state,preserved_reference
 from experiments.cnf_learning_batch import selection
+from experiments.cnf_trace_reuse import source_attempts,pair_witness,verify_rewrite,record_key
+from experiments.cnf_probe_exhaustion import certify_exhaustion
+from experiments.cnf_pattern_inventory import encode
 
 
 def validate(out,test_log):
@@ -52,6 +55,25 @@ def validate(out,test_log):
         assert frontier(h,routes,evidence[-1],Counter())==d['after']
         assert children(h,routes,evidence[-1])==d['children'] and target_state(h,routes)==d['targets']
         assert selection(h,routes,Counter())==d['learning']
+        obstruction=json.loads((out/'obstruction.json').read_text())
+        assert obstruction['report_sha256']==sha(out/'report.json')
+        assert obstruction['script_sha256']==sha('experiments/diagnose_cnf_split_frontier.py')
+        rewrites={record_key(rec):rec for rec in read_archive(obstruction['rewrites'])};used=set();obstruction_rows=[]
+        for leaf in d['after']['leaves']:
+            source=leaf['source'];node=h._load(source);attempts,refs=source_attempts(h,source,Counter())
+            if leaf['remaining_ranked_variables']:
+                obstruction_rows.append(dict(source=source,exhausted=False));continue
+            binary,outside=certify_exhaustion(node['cnf'],attempts,Counter());witnesses=[]
+            for i in range(0,len(attempts),2):
+                kind,_=pair_witness(attempts[i:i+2],Counter())
+                if kind is None:continue
+                identity=encode([source,refs[i:i+2]]);record=rewrites[identity];used.add(identity)
+                target,_=verify_rewrite(h,record,Counter())
+                witnesses.append(dict(kind=kind,variable=attempts[i]['variable'],target=record['edge']['key'],
+                    target_variables=len({abs(l) for c in target for l in c}),target_clauses=len(target)))
+            obstruction_rows.append(dict(source=source,source_sha256=sha_key(source),variables=leaf['variables'],clauses=leaf['clauses'],exhausted=True,
+                binary=binary,outside=outside,checked_attempts=len(attempts),distinct_probe_variables=len({a['variable'] for a in attempts}),pair_reductions=witnesses))
+        assert obstruction_rows==obstruction['rows'] and used==set(rewrites)
         result=d['result'];visits=result['visits'];assert len(visits)<=POLICY['step_limit']
         assert len({v['source'] for v in visits})==result['distinct_sources']<=POLICY['source_limit']
         if visits:assert visits[0]['source']==saved['leaf']['source']
@@ -90,7 +112,7 @@ def validate(out,test_log):
     log=test_log.read_text();match=re.search(r'Ran (\d+) tests in [0-9.]+s\s+OK',log);assert match and int(match[1])>=589
     (out/'full-validation.txt').write_text(log)
     result=dict(report_sha256=sha(out/'report.json'),script_sha256=sha(Path(__file__)),python_tests=int(match[1]),test_log_sha256=sha(out/'full-validation.txt'),
-        coverage=sum(r['final_closed']),gains=r['gains'],without_growth=sum(r['without_growth_closed']),reference_nodes=ep['verified_nodes'],
+        obstruction_sha256=sha(out/'obstruction.json'),coverage=sum(r['final_closed']),gains=r['gains'],without_growth=sum(r['without_growth_closed']),reference_nodes=ep['verified_nodes'],
         preserved_reference_nodes=ep['preserved_nodes'],history_bytes_unchanged=True,cold_new_discovery=False,seconds=time.perf_counter()-started,
         original_answers={str(row['case']):row['result']['answer'] for row in ep['originals']})
     (out/'validation.json').write_text(json.dumps(result,sort_keys=True,indent=2)+'\n');print(json.dumps(result),flush=True)

@@ -5269,3 +5269,31 @@ through `compare_cnf_split_batch.restore_checkpoint` and `routes_for`, retaining
 all five split records. The earlier loader alone loses this progress. Manuscript
 and Lean are unchanged: finite checked coverage does not establish efficient
 closure or polynomial construction for unrestricted SAT.
+
+## Continuation below saved splits, 13 November 2026
+
+[The split-frontier continuation](retained-split-frontier.md) replaces the old
+33-variable scheduling view with its exact acquired 27-variable descendant,
+then reduces that leaf to **22 variables / 90 clauses**. It adds six recognition
+states, two windows and five continuations; **six blocks are clear, one forced**.
+Coverage remains **55/83**, including the ablation. Navigation costs 0.00688 s and
+bounded continuation 0.06866 s; working SQLite grows 176,128 bytes. All 589 tests
+pass. The full inventory audit and cold replay preserve prior evidence; all 1,721
+earlier reference nodes remain within the 1,750-node extended archive.
+
+The remaining formula has a checked single-assumption unit-refutation obstruction:
+38 saved clear traces cover both values of all 19 binary-clause variables; the
+other three cannot create an initial unit. No retained pair yields the implemented
+common-value/equivalence rewrite. These facts do not decide SAT/UNSAT or rule out
+stronger inference. Next compare another source-proved learned batch against
+nested cofactor splits, with the 18 ready bases / 92-variable queue as an
+alternative. Do not restart ordinary probes on the unchanged exhausted source.
+
+Resume `experiments/results/cnf-split-frontier/report.json` through
+`continue_cnf_split_frontier.restore_checkpoint` and `routes_for`, including all
+five splits. `diagnostics.json.gz` and `obstruction.json` preserve the exact
+22-variable source and its remaining obligations. The frontier follows saved
+splits, selected internal plans and ordinary forced routes; it is not a minimal
+or exhaustive analysis of every alternative proof plan. Manuscript and Lean
+remain unchanged; unrestricted efficient construction and compact closure remain
+open.

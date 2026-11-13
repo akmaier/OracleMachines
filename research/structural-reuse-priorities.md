@@ -12,7 +12,43 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: matched cofactor acquisition reaches 55/83
+## Current investigation: reuse reaches a 22-variable inference boundary
+
+[Continuation through retained splits](retained-split-frontier.md) follows the
+saved open cofactor instead of restarting its 33-variable parent. A forced
+reduction shrinks the selected leaf **27/101 -> 22/90** (variables/clauses), using
+**six recognition states in 0.06866 s**. Original coverage stays **55/83**, including
+the growth-exception ablation. Six clear blocks and one forced block are retained;
+no admission cap binds. All **589 tests** pass.
+
+1. **Change the inference on the 22-variable source.** Its 38 saved clear traces
+   cover both values of all 19 binary-clause variables. The other three cannot
+   initiate unit propagation. This certifies failure of single-assumption unit
+   refutation on the unchanged source. All retained pairs also fail the current
+   common-value/equivalence test. Inspect unused entailed binary consequences for
+   a new learned batch, compared with nested cofactor acquisition from those saved
+   pairs. Repeating the exhausted ordinary stream has no discovery value.
+2. **Retain the alternative 18-base / 92-variable learning queue.** Compare total
+   acquisition/checking/storage work and useful structural coverage; the smaller
+   leaf is not itself a new original-level closure. No SAT/UNSAT conclusion follows
+   from the unit-refutation obstruction.
+3. **Keep cold verification costs explicit.** Preparation costs 64.68 s, full
+   inventory audit 104.39 s and cold route reconstruction 63.60 s in the 256.65-second
+   pipeline. Navigation costs 0.00688 s. Dependency-local validation remains an
+   opportunity; state caps do not bound retained bytes or total CPU work.
+
+Resume `experiments/results/cnf-split-frontier/report.json` with
+`continue_cnf_split_frontier.restore_checkpoint` and
+`compare_cnf_split_batch.routes_for`. The new frontier view follows nested saved
+splits and reports missing children explicitly; it does not enumerate every
+alternative learned route or compute a cheapest decomposition. Keep all five
+external splits. Working SQLite adds **176,128 bytes** to **769,560,576 bytes**,
+with **41,706 pattern nodes**, **86 windows** and **126 ordinary continuations**.
+The 41 learning bases and 150 augmented blocks remain. All 1,721 prior reference
+nodes survive in the 1,750-node archive. `obstruction.json` preserves the checked
+inference limit; the unchanged older checkpoint would repeat this work.
+
+## Previous investigation: matched cofactor acquisition reaches 55/83
 
 [The isolated cofactor/probe comparison](saved-cofactor-batch.md) starts both
 arms from the same 53/83 parent. Splitting reaches **55/83** with 30 new states;

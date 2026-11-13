@@ -12,7 +12,49 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: retained learning raises coverage to 52/83
+## Current investigation: saved cofactor traces raise coverage to 53/83
+
+[Saved-trace splitting](saved-trace-splitting.md) closes the ten-variable leaf
+and raises coverage **52/83 -> 53/83**, including the growth-exception ablation.
+Case **2** (`holdout3`, n32, original 894) is independently **SAT**. The new route
+references both clear source traces for variable 5 and requires plans for both
+cofactors. It adds **five pattern nodes**, one ordinary clear window and one
+external split. All **581 tests** pass; older proof rows remain unchanged.
+
+The last ordinary probe is clear. Ten checked attempts plus the no-trigger lemma
+exclude single-assumption unit refutation on the ten-variable source. Its clear
+traces remain useful as exact cofactor descriptions. All five ranked pairs have
+two absent children; the chosen pair minimizes the bounded ranking's support/
+literal terms, not total solving cost. No state admission cap binds.
+
+1. **Try retained pairs on the four remaining acquired open targets.** Their
+   selected leaves have **33, 33, 36 and 38 variables**. Rank available exact
+   cofactors and acquire them under a shared cap; compare against later probing.
+   Splitting requires one checked pair, not exhaustion of all other variables.
+2. **Recheck the 18 previously ready learned formulas when the predicted split
+   cost is worse.** Their 92 unused ranked variables remain available; reapply
+   the coverage filter before scheduling. Include the new
+   split layer in every comparison; the preceding loader alone omits case 2's
+   coverage route. Keep all failed cofactor acquisitions and clear probe blocks.
+3. **Do not equate avoided propagation with faster replay.** The selected warm
+   control costs **0.50192 ms** with reuse versus **0.46004 ms** fresh: no speedup
+   is demonstrated. Reuse avoids two fresh assumption traces but reads 10,454
+   source-payload bytes. Source decoding/checking is a local improvement target;
+   preparation **66.52 s**, full cold inventory **107.45 s** and cold routes
+   **63.69 s** remain the dominant costs of the **263.26 s** pipeline.
+
+Working SQLite grows **65,536 bytes** to **768,663,552 bytes**. Resume
+**41,664 pattern nodes, 80 ordinary windows, 108 ordinary continuations, 41 learning
+bases, 150 augmented blocks and one external split** using
+`compare_cnf_trace_split.restore_checkpoint` with
+`experiments/results/cnf-trace-split/report.json`. Construct
+`ContinuedLearningRoutes`, then attach every returned split with
+`cnf_trace_split.attach`. All 1,156 earlier reference nodes survive in the
+1,175-node extended archive. External artifacts are separate from SQLite size;
+peak RAM remains unmeasured. This adds a charged conditioning step beyond the
+old recognizer depth, not a new tractability theorem or an unrestricted bound.
+
+## Previous investigation: retained learning raises coverage to 52/83
 
 [The shared-budget continuation](retained-learning-batch.md) reuses the 36 earlier
 clear learning bases and raises coverage **47/83 -> 52/83**, including the

@@ -5212,3 +5212,32 @@ validation dominates the 263.21-second pipeline. Working SQLite adds 1,044,480
 bytes, and separate artifacts retain successful and unsuccessful evidence.
 Manuscript and Lean remain unchanged; this adds empirical coverage, not a theorem
 covering arbitrary CNF efficiently.
+
+## Exact splits from clear saved traces, 13 November 2026
+
+`cnf_trace_split.py` reconstructs the two cofactors of one variable from clear
+top-level source traces. References retain the source binding and unit reasons;
+the checker rejects omitted polarities, forged transports and foreign sources.
+Coverage requires both acquired cofactor plans, including multiplicity when both
+branches share a canonical key. Model lifting restores the selected assumption
+and units, then checks the whole source. Four new tests include all 1,024 source
+assignments, all satisfying child models, partial acquisition and cold reuse;
+all **581 tests** pass.
+
+The [saved-cofactor study](saved-trace-splitting.md) raises coverage
+**52/83 -> 53/83** with five new pattern nodes, one clear ordinary window and one
+external split. Case 2 is independently SAT. The source's ordinary probe pool is
+certified exhausted; its saved clear traces still enable an exact conditioning
+plan. The local saved-trace timing is slightly slower than fresh propagation in
+the single control, so no runtime speedup is claimed. Cold verification dominates
+the 263.26-second pipeline. Working SQLite grows 65,536 bytes.
+
+Restore `experiments/results/cnf-trace-split/report.json` with
+`compare_cnf_trace_split.restore_checkpoint`; pass the inherited lists to
+`ContinuedLearningRoutes`, then attach the returned split records. There are
+41,664 pattern nodes, 80 windows, 108 ordinary continuations and 150 augmented
+blocks. All 1,156 inherited reference proof rows survive in the 1,175-node archive.
+The next structural test is capped cofactor acquisition on four remaining targets
+(33, 33, 36 and 38 variables), compared with the 18 previously ready learned bases
+after reapplying the coverage filter.
+No new Lean theorem or unrestricted-SAT complexity bound is claimed.

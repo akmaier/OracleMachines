@@ -1382,3 +1382,25 @@ exhausted, so queue size alone overstates remaining discovery opportunities.
 All earlier proof rows and reference answers persist. This is a refinement of
 the same development cases and of the scheduler's discovery outcomes, not a new
 tractable CNF category, independent holdout result or unrestricted-SAT bound.
+
+## Saved-cofactor checkpoint, 13 November 2026
+
+[Splitting from retained unit traces](saved-trace-splitting.md) raises coverage
+**52/83 -> 53/83**, independently proves case 2 (`holdout3`, n32, original 894)
+SAT, and retains the growth-exception ablation. The ten-variable source has no
+single-assumption unit refutation: both polarities of every binary variable are
+checked clear, and the other five variables cannot start unit propagation.
+Nevertheless, two of those saved clear traces supply exact cofactors whose plans
+close after five new recognition states. Both branch premises remain mandatory.
+
+This refines an unresolved inference cell: failed-literal exhaustion does not
+make the retained cofactors useless. The split is standard exact conditioning,
+with an additional explicit expansion step beyond the old depth policy. Its
+source references, unit assignments and both canonical child transports are
+checked; missing children cannot supply coverage. The method does not establish
+a new polynomial SAT category. Four acquired open targets and the 18 previously ready
+learned formulas remain for comparison of cofactor reuse with further lookahead.
+
+Avoided search operations also do not imply lower runtime. The one warm matched
+cofactor control is 0.50192 ms with saved traces versus 0.46004 ms fresh. The
+negative timing result and the unsuccessful pilot checks remain persistent.

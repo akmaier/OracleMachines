@@ -28,7 +28,15 @@ classes.
 
 ## Paper
 
-The latest [retained-learning investigation](research/retained-learning-batch.md)
+The latest [saved-cofactor investigation](research/saved-trace-splitting.md)
+raises structural coverage **52/83 -> 53/83** and independently proves the new
+32-variable original SAT. A checked split reuses two clear assumption traces,
+requires both cofactor plans and adds five pattern nodes. All **581 tests** pass.
+The local timing control shows no replay speedup; cold checking still dominates.
+Four acquired open targets remain for bounded cofactor reuse and comparison
+against further probing.
+
+The preceding [retained-learning investigation](research/retained-learning-batch.md)
 raises structural coverage **47/83 -> 52/83** on the reused development originals;
 all five gains are independently SAT. It reuses saved clauses and prefixes,
 adds 141 later blocks and 77 pattern nodes, and preserves all older evidence.

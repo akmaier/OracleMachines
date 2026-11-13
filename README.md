@@ -28,7 +28,16 @@ classes.
 
 ## Paper
 
-The latest [probe-window investigation](research/probe-window.md) finds that the
+The latest [prefix-continuation investigation](research/probe-continuation.md)
+shares checked probe prefixes and advances bounded discovery. Coverage rises
+**36/83 -> 39/83**, with one SAT and two UNSAT gains on reused 48-variable
+development cases. The matched warm probe substep is **2.09x faster** than
+rediscovering the same prefix; full cold verification still dominates runtime.
+All **547 tests** and cold artifact/reference checks pass. The eight-table history
+retains all earlier results, 51 new continuation blocks and 45 new proof nodes.
+This extends coverage and avoids repeated probing; it is not a whole-SAT speedup.
+
+The preceding [probe-window investigation](research/probe-window.md) finds that the
 growth escape first succeeds by promoting an already refutable assumption into
 the bounded probe window. Continued probes preserve the original recognizer and
 raise selected-original coverage **32/83 -> 36/83**: three SAT gains and one UNSAT

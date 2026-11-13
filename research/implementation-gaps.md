@@ -5018,3 +5018,37 @@ source/width key reuses a result but does not advance automatically. A new
 continuation identity and prefix-reuse rule are needed before the next bounded
 block can be acquired efficiently. Combining compatible forced consequences
 before repeated recognition is another hypothesis to test on the open residuals.
+
+
+## 13 November: shared checked prefixes advance the discovery cursor
+
+The [prefix-continuation study](probe-continuation.md) adds source-bound blocks
+whose offsets require complete checked clear predecessors. Negative attempts are
+referenced without rediscovery; forced blocks resume exact residuals. Missing or
+foreign prefixes, skipped candidates and unsupported exhaustion are rejected.
+All previous recognizer identities, failed trials and solver results persist.
+
+Coverage rises **36/83 -> 39/83**: one SAT and two UNSAT 48-variable development
+originals, independently checked. All 39 remain covered without growth-exception
+routes. The run retains 51 continuation blocks (43 clear / eight forced), five
+initial windows and 45 nodes. It performs 409 new assumption attempts while
+reusing 408 previous ones. No budget binds: at most 13 new states / three sources.
+
+Matched warm ranking/discovery/checking uses 373 versus 781 attempts and median
+0.13230 versus 0.27631 seconds (2.09x substep speedup). This excludes already-paid
+prefix verification, persistence and target recognition in both modes. Resident
+expansion costs 0.56578 seconds, whereas preparation, full cold audit and separate
+route replay cost 64.41, 110.39 and 63.13 seconds. Working storage grows 1,359,872
+bytes. There is no end-to-end solver speedup, peak-RAM or new full-corpus claim.
+
+All 547 tests and eight-table cold reconstruction/reference checks pass. The
+saved suite log retains 20 existing SQLite warnings. The complete history now
+has 41,461 pattern nodes, 75 windows and 51 continuation blocks, plus all previous
+trial/source/proof tables. The separate reference archive retains 513 nodes.
+Formal sources and manuscript are unchanged; earlier full coverage stays 902/985.
+
+Next: 42 clear streams retain 2--20 eligible candidates, and four forced targets
+remain open after finite composition. Continue these saved streams before raising
+caps, inspect the unresolved targets, and profile cold proof replay for the largest
+runtime opportunity. Candidate availability and complete cursor bookkeeping do
+not establish efficient coverage of arbitrary CNF.

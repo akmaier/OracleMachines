@@ -12,7 +12,53 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: retained probe windows broaden coverage without the exception
+## Current investigation: checked prefixes let discovery advance without rediscovery
+
+The [prefix-continuation study](probe-continuation.md) advances saved clear probe
+windows while retaining their checked traces by reference. A continuation binds
+the exact source/configuration/depth, width and offset, and requires its complete
+clear predecessor. Missing, foreign or forced prefixes cannot authorize a cursor.
+Pending forced residuals survive restart and become routes only after acquisition.
+
+Coverage improves **36/83 -> 39/83**: one SAT and two UNSAT 48-variable development
+cases, independently confirmed. All 39 remain covered without the growth-exception
+routes. The run adds **51 continuation blocks (43 clear / eight forced), five
+initial windows and 45 nodes**. It makes 409 new attempts and references 408 saved
+attempts without rediscovery. No cap binds (maximum 13 new states / three sources).
+
+The matched warm probe substep uses **373 versus 781 attempts**, with five-run
+median **0.13230 versus 0.27631 seconds**: **2.09x** faster for ranking, discovery
+and checking after prefix validation. Both microbenchmarks exclude persistence
+and target recognition. Resident search/check/persist/compose costs **0.56578 s**;
+preparation **64.41 s**, full cold inventory **110.39 s**, separate route replay
+**63.13 s**, and the whole acquisition/validation pipeline **257.43 s**. Cold
+checking remains the dominant measured cost. No end-to-end solver speedup or
+peak-RAM reduction is claimed. Working storage grows **1,359,872 bytes**; the
+delta is **1,429,504 SQLite / 82,368 compressed bytes**.
+
+1. **Advance the remaining 42 clear streams with the existing mechanism.** They
+   retain 2--20 eligible candidates each; one other clear stream is exhausted.
+   Resume the full eight-table history and measure additional coverage per new
+   attempt under the same bounds before expanding the policy or admission caps.
+2. **Investigate four forced-but-open targets.** Three of eight forced targets
+   close locally and one more through composed routes. The remaining four retain
+   unresolved interactions. All five locally open targets have one selected
+   unresolved leaf, giving concrete residuals for further structural diagnosis.
+3. **Profile cold proof replay for the largest runtime win.** Distinguish required
+   reachable dependencies from repeated reconstruction and unrelated history;
+   preserve exact checking and invalidation requirements. Warm prefix savings
+   do not remove the preparation cost. Peak RAM and independent evaluation remain
+   separate obligations.
+
+All **547 tests**, eight-table reconstruction, cold prefix/finite-plan replay,
+growth ablation and independent reference checks pass. Resume from **41,461
+pattern nodes, 75 initial windows, 51 continuation blocks, 563 pivot trials,
+25 coupled trials and one growth trial**, retaining all 1,548 source bindings and
+21,838 earlier solver rows. The new 513-node reference archive is additional
+evidence. Earlier full prepared coverage remains 902/985. Manuscript and formal
+sources are unchanged; these are reused development sources, not a new SAT class.
+
+## Previous investigation: retained probe windows broaden coverage without the exception
 
 The [probe-window investigation](probe-window.md) identifies the initial trigger
 of the growth success: deleting two binary pivot clauses moves an already failed

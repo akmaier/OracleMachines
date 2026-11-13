@@ -11,7 +11,8 @@ import sys
 import tempfile
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from experiments.cnf_coupled_pivots import BudgetedInventory
+from experiments.cnf_coupled_pivots import BudgetedInventory, FrontierIndex
+from experiments.cnf_probe_window import choices
 from experiments.cnf_probe_continuation import TABLE, ContinuationRoutes
 from experiments.cnf_route_composition import compose, verify_plan
 from experiments.cnf_residual_dag import ResidualSolver, holds
@@ -67,6 +68,31 @@ def main(out):
         assert dict(statuses) == r['continuation_kinds']
         pending = sum(rec['edge'] is not None and h._load(rec['edge']['key']) is None for rec in routes.continuations.values())
         assert pending == r['pending_continuations'] and not h.admitted
+        latest = {}
+        for record in routes.continuations.values():
+            source = record['source']
+            if source not in latest or record['offset'] > latest[source]['offset']:
+                latest[source] = record
+        clear = []; forced = []; frontier = FrontierIndex(h)
+        for source,record in sorted(latest.items()):
+            node, ranked = choices(h,source,64,Counter())
+            row = dict(source_sha256=sha_key(source),offset=record['offset'],depth=node['depth'],
+                variables=len({abs(l) for c in node['cnf'] for l in c}),clauses=len(node['cnf']))
+            if record['probing']['status'] == 'clear':
+                used = record['offset'] + len(record['probing']['attempts'])//2
+                row['remaining_ranked_candidates'] = len(ranked)-used
+                clear.append(row)
+            else:
+                child = h._load(record['edge']['key'])
+                row.update(pending=child is None,
+                    locally_closed=False if child is None else child['summary']['closed'],
+                    composed_closed=False if child is None else compose(h,[record['edge']['key']],routes,Counter())[0][0],
+                    selected_open_leaves=None if child is None else len(frontier.frontier(record['edge']['key'])))
+                forced.append(row)
+        opportunity = dict(clear=clear,forced=forced,
+            clear_with_remaining=sum(row['remaining_ranked_candidates']>0 for row in clear),
+            clear_exhausted=sum(row['remaining_ranked_candidates']==0 for row in clear),
+            scope='Latest new continuation block per source; ranking and checked route replay only, no extra probe discovery. Forced-target leaves use the old selected plan, not every alternative.')
         assert h.db.execute('PRAGMA integrity_check').fetchone()[0] == 'ok'
         h.close(); assert sha(history) == before
         ep = r['reference']; assert sha(ep['path']) == ep['sha256']; path = tmp/'endpoints'
@@ -83,11 +109,13 @@ def main(out):
     log = Path('/tmp/oraclemachines-continuation-tests.log').read_text()
     assert re.search(r'Ran 547 tests in [0-9.]+s\s+OK',log)
     (out/'full-validation.txt').write_text(log)
+    (out/'continuation-opportunity.json').write_text(json.dumps(opportunity,sort_keys=True,indent=2)+'\n')
     evidence = dict(script_sha256=sha(Path(__file__)),report_sha256=sha(out/'report.json'),
         coverage=sum(final),gains=r['gains'],without_growth=sum(ablated),
         continuation_kinds=dict(statuses),pending_continuations=pending,
         original_answers={str(row['case']):row['result']['answer'] for row in ep['originals']},
         reference_nodes=ep['verified_nodes'],python_tests=547,test_log_sha256=sha(out/'full-validation.txt'),
+        opportunity_sha256=sha(out/'continuation-opportunity.json'),
         logical_table_digests=r['logical_table_digests'],cold_probe_discovery_disabled=True)
     (out/'validation.json').write_text(json.dumps(evidence,sort_keys=True,indent=2)+'\n')
     print(json.dumps(dict(closed=sum(final),gains=r['gains'],without_growth=sum(ablated))),flush=True)

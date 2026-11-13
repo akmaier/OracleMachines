@@ -1180,3 +1180,32 @@ route and one growth exception. These results concern one selected development
 source, not an efficient covering partition, an independent holdout or a new
 full-corpus measurement. Acquisition, paid-history verification, finite-plan
 composition, serialization and cold replay are recorded separately.
+
+## 13 November: the apparent growth barrier also hides a probe-selection gap
+
+The [probe-window diagnostic](probe-window.md) finds that the successful projection
+does not create its first useful failed assumption. Source variable 14=true was
+already refutable; removing two binary clauses promotes it into the bounded probe
+window. Complete checked single-assumption traces distinguish this ranking effect
+from a new propagation refutation. They do not establish a universal relationship
+between elimination and propagation strength.
+
+A source-bound continuation now reuses the original recognizer configuration,
+tries the next four untried binary-frequency variables, and persists both clear
+and forced windows. At most four unresolved sources and 32 new recognition states
+are visited per input. Checked transformations survive interrupted target
+acquisition, but only actual checked targets become coverage premises.
+
+Selected-original coverage rises 32/83 -> 36/83, with three SAT and one UNSAT
+gain among the 48-variable development sources. All 36 stay covered when the
+earlier growth-exception route is removed. The experiment adds 70 window records
+and 81 nodes; paid-history verification remains much costlier than resident search.
+All 543 tests and cold artifact/reference checks pass. No independent holdout,
+full-corpus result or efficient arbitrary-SAT partition is asserted.
+
+The largest observed discovery gap is continuation after a clear window: 51 of
+52 still have 3--24 later ranked binary candidates available. Current reuse of a
+source/width record avoids repeating a test but does not advance its position.
+The next change should bind an explicit continuation position and reuse the
+already checked prefix. Forced-but-open residuals remain a separate group; a
+forced value alone does not guarantee complete structural coverage.

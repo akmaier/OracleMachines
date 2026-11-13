@@ -28,7 +28,15 @@ classes.
 
 ## Paper
 
-The latest [growth-escape investigation](research/growth-escape.md) closes the
+The latest [probe-window investigation](research/probe-window.md) finds that the
+growth escape first succeeds by promoting an already refutable assumption into
+the bounded probe window. Continued probes preserve the original recognizer and
+raise selected-original coverage **32/83 -> 36/83**: three SAT gains and one UNSAT
+gain, all with 48 variables. Removing the growth-exception route retains all 36
+closures. All **543 tests** and cold checks pass. The new 70 window records and
+81 proof nodes add work and storage; this is broader coverage, not a speedup claim.
+
+The preceding [growth-escape investigation](research/growth-escape.md) closes the
 saved core with one explicitly budgeted three-clause growth step and four new
 probing states. A finite checked witness propagates the result through a saved
 coupled route, raising selected-original coverage **31/83 -> 32/83**. Removing

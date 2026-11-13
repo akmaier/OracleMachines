@@ -12,7 +12,55 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: one growth exception closes a saved alternative route
+## Current investigation: retained probe windows broaden coverage without the exception
+
+The [probe-window investigation](probe-window.md) identifies the initial trigger
+of the growth success: deleting two binary pivot clauses moves an already failed
+assumption into the first four ranked probes. Complete source-coordinate traces
+show no new remaining-variable single-assumption refutation after projection.
+This is a selection-window effect on that core, not a general statement that
+elimination cannot strengthen propagation.
+
+Continuing with four previously untried binary-frequency candidates, at most four
+unresolved sources and 32 new states per original improves coverage
+**32/83 -> 36/83**. The four new 48-variable originals are independently confirmed
+as **three SAT and one UNSAT**. Removing the earlier growth-exception route still
+leaves all 36 covered. The positive-control core needs two continued windows;
+the first forced value alone leaves an open residual.
+
+The run preserves **70 windows** (52 clear, 18 forced), 475 assumption attempts
+and **81 new recognition nodes**. Resident search/check/persist/compose costs
+**0.84607 seconds**, including the positive control. Working storage increases
+**2,142,208 bytes**; the delta is **2,220,032 SQLite / 129,619 compressed bytes**.
+Preparation costs **65.30 seconds**, complete cold audit **106.60**, and separate
+route replay **63.02**. Full pipeline time is **252.05 seconds**. This is additional
+work for coverage, not a demonstrated runtime or RAM saving. Peak RAM is unmeasured.
+
+Neither admission nor source-visit caps bind. The next evidence-backed gaps are:
+
+1. **Advance a window while reusing its checked prefix.** Of 52 fully clear
+   windows, **51 still have ranked binary candidates available** (3--24 each).
+   Repeating the current source/width key correctly reuses its result but does
+   not advance. Add an explicit continuation position and reuse the existing
+   original and window traces before testing the next bounded block. This is
+   further discovery, not a claim that those variables will close the source.
+2. **Explain forced-but-open continuations.** Only five immediate window targets
+   close; other forced values require more composition or leave open interfaces.
+   Check whether combining compatible checked consequences can avoid repeated
+   recognition, while preserving full source/name bindings and exact costs.
+3. **Maintain finite-route coverage incrementally.** Repeated composition still
+   scans reachable plans; cold verification remains the dominant measured time.
+   A persisted reverse-premise index needs explicit update and invalidation rules.
+
+All **543 tests**, seven-table reconstruction, cold finite-plan replay, growth
+ablation and independent endpoint checks pass. Resume from **41,416 pattern nodes,
+563 pivot trials, 25 coupled trials, one growth trial and 70 probe windows**;
+all 1,548 source bindings and 21,838 older solver proof rows remain intact. The
+409-node reference archive is additional evidence. These are reused development
+sources; the earlier full prepared result remains **902/985**. Formal sources and
+manuscript are unchanged, with no unrestricted SAT complexity claim.
+
+## Previous investigation: one growth exception closes a saved alternative route
 
 The [growth-three escape](growth-escape.md) closes the preserved 35-variable core.
 Only its first projection receives allowance three; all descendants retain the

@@ -4984,3 +4984,37 @@ on other open cores. Avoid assuming that every minimum-growth move does so.
 The next reuse gap is maintaining finite-route closure incrementally rather than
 rescanning all reachable alternatives. Full-history cold verification remains a
 larger measured cost than the local expansion or graph composition.
+
+## 13 November: persistent continued probes replace the special growth route
+
+The [probe-window study](probe-window.md) explains the earlier successful
+projection's first effect: it promotes an already failed assumption into the
+four-variable probe window by removing two binary clauses. Source and projected
+single-assumption traces are complete and independently checked. This narrows
+the cause on that core without claiming elimination never strengthens propagation.
+
+Implemented source-bound continued probe windows with exact residual bindings,
+inconclusive-result persistence and pending-target restart. The unchanged
+recognizer supplies target plans, preserving all earlier identities. Finite
+composition accepts only present, verified targets. Four-source and 32-state
+budgets bound each input's admission scope; neither binds in the measured run.
+
+Coverage improves 32/83 -> 36/83 (three SAT gains, one UNSAT, all 48 variables).
+The same 36 remain covered with the earlier growth-exception route removed.
+Seventy windows (52 clear / 18 forced), 475 assumption attempts and 81 nodes are
+preserved. Resident search/check/persist/compose is 0.84607 seconds, while the
+complete preparation/acquisition/validation pipeline costs 252.05 seconds and
+working storage grows 2,142,208 bytes. No speedup or peak-RAM reduction is claimed.
+
+All 543 tests and independent seven-table/cold/reference checks pass. The suite
+retains 20 existing SQLite resource warnings. Old histories and failures remain
+unchanged; the latest graph has 41,416 pattern nodes and 70 window records in
+addition to all previous trial tables. The separate reference archive adds
+409 checked solver nodes. Formal sources and paper remain unchanged.
+
+The next concrete gap is advancing a window without repeating its known prefix:
+51 of 52 clear windows still have later ranked binary candidates. The current
+source/width key reuses a result but does not advance automatically. A new
+continuation identity and prefix-reuse rule are needed before the next bounded
+block can be acquired efficiently. Combining compatible forced consequences
+before repeated recognition is another hypothesis to test on the open residuals.

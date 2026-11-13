@@ -12,7 +12,46 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: saved cofactor traces raise coverage to 53/83
+## Current investigation: matched cofactor acquisition reaches 55/83
+
+[The isolated cofactor/probe comparison](saved-cofactor-batch.md) starts both
+arms from the same 53/83 parent. Splitting reaches **55/83** with 30 new states;
+ordinary continuation reaches **54/83** with seven. Case **37 is UNSAT** and
+case **77 is SAT** by independent reference proofs. Splitting alone adds case 77
+in this comparison. Its acquisition costs **0.14475 s** plus **0.05791 s** ranking,
+versus **0.09725 s** for ordinary continuation. This is additional coverage at
+higher local cost, not a general speedup. Both arms and their negative results
+remain available in the merged checkpoint. All **585 tests** pass.
+
+1. **Continue the acquired 27-variable / 101-clause cofactor leaf.** Three of four
+   selected target fragments close; the remaining split has one closed branch
+   and this open leaf on its true branch. There are 18 ranked ordinary variables.
+   Use `diagnostics.json.gz` → `children` for the exact key: the old target view
+   alone still follows the 33-variable parent and omits open external split edges.
+   Reuse the saved parent split and closed sibling instead of restarting either.
+2. **Keep the 18 ready learned bases as the alternative queue.** The merged
+   coverage filter still leaves 92 ranked variables there. Ten bases are covered,
+   nine exhausted, three initially successful and one has an acquired open target.
+   Prefer measured progress per total acquisition/checking/storage cost; the new
+   control shows ordinary continuation can reproduce part of a split gain.
+3. **Cold proof verification remains the dominant runtime cost.** Fresh arm
+   preparation costs 65.37/67.69 s and full inventory checking 107.02 s, compared
+   with subsecond local acquisition. The 405.18-second comparison includes several
+   independent preparations; it is not one warm expansion's runtime. Exact
+   dependency-local validation remains a separate unimplemented opportunity.
+
+Resume `experiments/results/cnf-split-batch/report.json` with
+`compare_cnf_split_batch.restore_checkpoint` and `routes_for`, including **all
+five external splits**. The union adds 36 distinct pattern nodes, four windows
+and thirteen continuations; one new node is shared by the isolated arms.
+Working SQLite grows **720,896 bytes** to **769,384,448 bytes** and contains
+**41,700 pattern nodes**, **84 windows**, **121 ordinary continuations**, 41
+learning bases and 150 augmented blocks. All old proof rows survive; the extended
+reference archive retains all 1,175 old nodes within 1,721 checked nodes. Separate
+artifacts add storage, peak RAM is unmeasured, and repeated splitting can still
+be exponential. This result concerns 83 reused development cases.
+
+## Previous investigation: saved cofactor traces raise coverage to 53/83
 
 [Saved-trace splitting](saved-trace-splitting.md) closes the ten-variable leaf
 and raises coverage **52/83 -> 53/83**, including the growth-exception ablation.

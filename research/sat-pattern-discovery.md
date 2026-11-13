@@ -1404,3 +1404,31 @@ learned formulas remain for comparison of cofactor reuse with further lookahead.
 Avoided search operations also do not imply lower runtime. The one warm matched
 cofactor control is 0.50192 ms with saved traces versus 0.46004 ms fresh. The
 negative timing result and the unsuccessful pilot checks remain persistent.
+
+## Matched saved-cofactor acquisition, 13 November 2026
+
+The [isolated split/probe comparison](saved-cofactor-batch.md) freezes four open
+leaves and their saved-pair rankings on the same 53/83 parent. With at most 32
+state admissions per source, splitting reaches **55/83**, ordinary probing
+**54/83**. Case 37 is independently UNSAT; case 77 is SAT. The split arm closes
+three of four selected fragments with 30 states in 0.14475 s, plus 0.05791 s
+ranking. The control uses seven states in 0.09725 s and reproduces case 37's
+closure. Both arms' partial/inconclusive work is retained. This supports selective
+conditioning, not a claim that it is always cheaper.
+
+Their immutable union adds 36 distinct pattern nodes, four ordinary windows,
+thirteen continuations and four external splits; working SQLite grows 720,896
+bytes. No state cap binds. All 585 tests and the full inventory audit pass;
+independent cold arm/union replay disables discovery. All 1,175 earlier reference
+proof nodes survive in the 1,721-node archive. The comparison pipeline takes
+405.18 s, dominated by repeated cold preparation and verification.
+
+The next selected frontier is **27 variables / 101 clauses**, below the true
+cofactor of the remaining 33-variable parent. Its sibling is closed. Inspect
+`diagnostics.json.gz` → `children`; the old target view does not follow open
+external splits. Eighteen ready learned bases retain 92 ranked variables as an
+alternative queue. Restore `experiments/results/cnf-split-batch/report.json`
+through `compare_cnf_split_batch.restore_checkpoint` and `routes_for`, retaining
+all five split records. The earlier loader alone loses this progress. Manuscript
+and Lean are unchanged: finite checked coverage does not establish efficient
+closure or polynomial construction for unrestricted SAT.

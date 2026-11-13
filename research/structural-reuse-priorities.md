@@ -12,7 +12,44 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: bounded batches preserve evidence and avoid preparation
+## Current investigation: reuse one cofactor and retain the smaller obligation
+
+[The reused-branch expansion](reused-branch-expansion.md) acquires variable 7's
+missing false cofactor while sharing its checked empty true cofactor. Three new
+recognition states reduce case 30's open leaf **25 variables / 99 clauses ->
+23 variables / 93 clauses**. Coverage stays **58/83**, with no pending children.
+The independent solver confirms both cofactors SAT; structural coverage remains
+a separate objective.
+
+1. **Compare bounded probing with the saved pairs on the 23-variable leaf.**
+   Pairs **5, 6, 11, 13** each need two missing children; the best current rank
+   is **[2, 2, 20, 376, 5]**. No common-value/equivalence rewrite or directly
+   extracted affine equation is found. The next ordinary block is **7, 9, 16,
+   17** (17 candidates remain); the wider learned queue has **17 bases / 88
+   candidates**. Preserve the new normalization and both branch obligations.
+   Check for useful reusable cofactors between blocks instead of requiring probe exhaustion, and share a single admission
+   allowance across bounded local work. Use `frontier-profiles.json.gz` and
+   `next-options.json.gz`; do not revisit the exhausted 25-variable parent.
+2. **Reduce global verification overhead.** Acquisition takes **0.02474 s** but
+   the pipeline **271.17740 s**: preparation **65.75065 s**, full audit
+   **106.37684 s**, cold routes **63.97337 s**. Measure the dependency closure of
+   the retained **593-step positive witness** before implementing selective
+   verification. Source/configuration bindings and inherited premises must still
+   be checked; explicit witness length alone is not the checking cost.
+3. **Account for growth and incomplete reuse.** Elimination reduces support but
+   grows 92 clauses / 281 literals to **93 / 288**. New recognition still performs
+   36 probe attempts; sharing the chosen source pair does not make all child
+   inference reusable. SQLite adds **49,152 bytes** to **770,338,816 bytes /
+   41,758 nodes**, compressed delta **4,841 bytes**, sidecars additional. No new
+   tractable family, peak-RAM reduction or unrestricted resource bound is proved.
+
+Resume `experiments/results/cnf-reused-branch/report.json` through
+`continue_cnf_reused_branch.restore_checkpoint` and `routes_for`. Preserve five
+lists **(1 rewrite, 42 bases, 156 augmented blocks, 11 splits, 1 affine family)**
+and earlier sidecars. The 37-test suite, full audit and **171.36780 s** independent
+cold replay pass; all 1,977 reference nodes survive within 1,998.
+
+## Previous investigation: bounded batches preserve evidence and avoid preparation
 
 [The matched batch experiment](frontier-batching.md) tests all **17** remaining
 ordinary candidates on case 30's **25-variable / 99-clause** leaf in one bounded

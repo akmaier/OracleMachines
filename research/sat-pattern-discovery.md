@@ -1892,3 +1892,41 @@ or equivalence rewrite is found among the 21 pairs. The four nonbinary variables
 cannot start on them. Independent replay passes in **169.35837 s**. The retained
 positive witness has **593 explicit steps**; measure its full dependency closure
 before claiming a selective verification bound.
+
+
+## 2026-11-13: acquire the missing branch of a retained pair
+
+[The reused variable-7 split](reused-branch-expansion.md) shares the existing
+empty true cofactor and acquires the false cofactor with three new recognition
+states. Binary-path deletion and elimination reduce case 30's open leaf from
+**25 variables / 99 clauses / 304 literals** to **23 / 93 / 288**. The intermediate
+24-variable formula has 92 clauses and 281 literals, so elimination's support
+reduction increases both other measures. Coverage remains **58/83**, also without
+growth exceptions; no child is pending. Both cofactors are independently SAT,
+with checked model transport. The unclosed structural plan is not an unknown
+SAT verdict or a new tractability theorem.
+
+Acquisition takes **0.02474 s** in a **271.17740 s** pipeline. Preparation costs
+65.75065 s, full audit 106.37684 s and cold routes 63.97337 s. Reusing the chosen
+pair avoids reacquiring its two propagation traces, but new child recognition
+still reports 36 probe attempts. SQLite adds **49,152 bytes** to **770,338,816
+bytes / 41,758 nodes**; immutable delta **4,841 compressed bytes**, with split and
+other sidecars additional. All previous rows and 1,977 reference nodes survive;
+the reference now has 1,998 nodes. The 37-test suite, full audit and independent
+cold replay validate preservation and correctness.
+
+Resume `experiments/results/cnf-reused-branch/report.json` with
+`continue_cnf_reused_branch.restore_checkpoint` and `routes_for`, keeping all five
+lists **(1, 42, 156, 11, 1)** and earlier sidecars. Compare the new leaf's saved
+pairs with ordinary candidates **7, 9, 16, 17** before choosing the next bounded
+step. Follow retained external splits; do not restart the exhausted parent.
+Dependency-local checking of complete positive plans remains the dominant cost
+opportunity; the retained 593-step witness still has unmeasured inherited
+checking dependencies.
+
+Cold replay passes in **171.36780 s**. The new leaf has saved pairs **5, 6, 11,
+13**, each requiring two missing children; the best rank is **[2, 2, 20, 376, 5]**.
+There is no common-value/equivalence rewrite among them and no directly extracted
+affine equation. The wider queue retains **17 learned bases / 88 candidates**.
+The exact source SHA-256 is
+`a38c8326bbc493edae23be08aa73a85b288d74cf5a80dde578d126891e21ae92`.

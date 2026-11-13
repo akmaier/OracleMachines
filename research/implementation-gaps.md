@@ -5653,3 +5653,36 @@ candidates and zero directly extracted affine rows. The wider queue now has
 **17 ready learned bases / 88 candidates**. Do not repeat the exhausted older
 learned base. Dependency-local complete-plan verification remains the principal
 measured runtime gap.
+
+## 2026-11-13: a failed literal avoids acquiring two new cofactor plans
+
+[Forced continuation on case 30](frontier-forcing.md) reduces the open leaf from
+**27 variables / 111 clauses / 342 literals** to **25 / 99 / 304**. The four saved
+pairs all require two missing children. In the next ordinary block, variable 19
+is clear and assuming normalized variable 24 false gives 21 unit reasons and a
+contradiction. Its true restriction is acquired; binary-path deletion and one
+elimination add three inventory states including the new unresolved terminal.
+The proposed block stops before testing variables 9 or 13. Elimination increases
+clauses and literals relative to its immediate input. Coverage stays **58/83**;
+no new original or tractable family is closed, and a global minimum-cost claim
+is not supported by comparing pair ranks alone.
+
+The pipeline takes **277.21655 s**, including **0.02582 s** acquisition, 67.09237 s
+preparation, 108.74312 s full audit and 67.28829 s cold routes. The direct preview
+adds 0.00116 s of kernel work. SQLite grows **57,344 bytes** to **770,236,416 bytes /
+41,755 nodes**; the compressed delta is **6,081 bytes**, with other artifacts
+additional. All previous rows and 1,949 reference nodes survive (1,977 now).
+The targeted 33-test suite, full audit and **174.55350 s** independent cold replay
+validate the checkpoint; `validation.json` retains the separate replay checks.
+
+Resume `experiments/results/cnf-frontier-forcing/report.json` through
+`continue_cnf_frontier_forcing.restore_checkpoint` and `routes_for`, retaining
+all five evidence lists (**1, 42, 156, 10, 1**) and earlier lemma sidecars. Use the
+new split-frontier leaf, not its successful forced parent. Compare saved pairs
+**5, 6, 8, 11** with the next ordinary block **13, 15, 7, 9**. There are 17 ordinary
+candidates left at the new source, zero directly extracted affine equations,
+and 17 ready learned bases / 88 candidates elsewhere. The next experiment should
+batch bounded local continuation under one shared state allowance and compare
+its evidence with the corresponding sequential prefix; a full reconstruction
+and audit per window dominates local discovery. Dependency-local complete-plan
+checking, measured batch savings and unrestricted resource guarantees remain open.

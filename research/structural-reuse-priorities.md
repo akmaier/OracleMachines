@@ -12,7 +12,42 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: compare lookahead with retained conditioning
+## Current investigation: forced propagation reduces the retained obligation
+
+[The forced-frontier continuation](frontier-forcing.md) reduces case 30's open
+leaf **27 variables / 111 clauses -> 25 variables / 99 clauses** with **three
+new recognition states**. Variable 19 is clear; assuming normalized variable 24
+false produces a checked contradiction, so only its true restriction is acquired.
+Binary-path deletion and elimination expose the new unresolved leaf. Structural
+coverage remains **58/83** and all previous results survive.
+
+1. **Continue discovery in a bounded batch.** The new leaf's saved pairs are
+   **5, 6, 8, 11**; compare them with ordinary candidates **13, 15, 7, 9**.
+   Seventeen ordinary candidates remain and no affine equation is directly
+   extracted. Use the saved split frontier. Test several steps/sources in one
+   bounded search with a shared admission allowance, preserving every record and
+   comparing with its sequential prefix. Avoid another full restore/audit for
+   each individual block. The separate **17 learned bases / 88 candidates** remain.
+2. **Reduce complete-plan verification to its dependencies.** Acquisition costs
+   **0.02582 s**, whereas the pipeline takes **277.21655 s**. Preparation, audit
+   and cold routes dominate. Batching's saving still needs measurement, and
+   dependency-local checking remains open. All four competing saved pairs need
+   two missing children, but their acquisition costs were not measured; the
+   forced route is not proved globally cheapest.
+3. **Keep resource and coverage limits explicit.** SQLite adds **57,344 bytes**
+   to **770,236,416 bytes / 41,755 nodes**; compressed delta **6,081 bytes**, with
+   sidecars and reference snapshots additional. Elimination briefly increases
+   clauses/literals. No original gain, peak-RAM reduction, new family or general
+   polynomial expansion bound is established.
+
+Resume `experiments/results/cnf-frontier-forcing/report.json` through
+`continue_cnf_frontier_forcing.restore_checkpoint` and `routes_for`. Keep five
+lists: **1 rewrite, 42 bases, 156 augmented blocks, 10 splits, 1 affine family**,
+plus earlier sidecars. The targeted 33-test suite, full audit and **174.55350 s**
+independent cold replay pass and are recorded in this checkpoint. All 1,949 old reference nodes survive
+within 1,977. Exact next-source coordinates are in `frontier-profiles.json.gz`.
+
+## Previous investigation: compare lookahead with retained conditioning
 
 [The original-frontier comparison](frontier-option-comparison.md) reduces case
 30's obligation **29 variables / 120 clauses -> 27 variables / 111 clauses**,

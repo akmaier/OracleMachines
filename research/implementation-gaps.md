@@ -5767,3 +5767,33 @@ There is no common-value/equivalence rewrite among them and no directly extracte
 affine equation. The wider queue retains **17 learned bases / 88 candidates**.
 The exact source SHA-256 is
 `a38c8326bbc493edae23be08aa73a85b288d74cf5a80dde578d126891e21ae92`.
+
+
+## 2026-11-14: replay only the external dependencies of a positive proof
+
+[Selected-route verification](selected-route-verification.md) replays the same
+593-step certificate for 58/83 roots with the existing validators, loading only
+selected external records and their required prefixes. In two cold repetitions
+with reversed order, mean replay falls **35.72304 -> 30.35446 seconds (15.03%)**.
+Both arms start with fresh verifier caches and check the same positive claim.
+The comparator reconstructs all external routes; it is not a full archive audit
+or the previous complete expansion pipeline.
+
+The actual checking closure falls **11,514 -> 10,258 pattern nodes**, and node
+JSON payload falls **100,554,675 -> 88,614,890 bytes**. Neither is a peak-RAM
+measurement. Crucially, the selected replay still needs **9,665 nodes beyond
+its 593 explicit steps**. Internal profiles, stored alternatives and summaries
+remain recursively checked. Measure their successful semantic dependencies
+before attempting a standalone positive checker; a short outer witness does
+not establish cheap or compact complete checking.
+
+All archive bytes and prior results remain unchanged; coverage remains 58/83.
+This positive-only subset is not a complete discovery catalog, and omitted
+routes prove no exclusion or UNSAT claim. The new six-test module checks lazy
+prefix dependencies and tampering; matched cold replay disables fresh discovery.
+The older expansion runners remain unchanged, so no full-pipeline reduction is
+claimed. Resume the **23-variable / 93-clause** frontier from
+`cnf-reused-branch/report.json`, preserving all five evidence lists **(1, 42,
+156, 11, 1)**. Saved pairs **5, 6, 11, 13** and ordinary candidates **7, 9, 16,
+17** remain the next discovery options. Detailed scope and reproduction commands
+are in the linked note and `cnf-selected-routes/report.json`.

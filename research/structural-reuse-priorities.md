@@ -1,6 +1,6 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-13 after the user's shift toward pattern discovery and a valid
+Updated 2026-11-14 after the user's shift toward pattern discovery and a valid
 partition of the entire SAT problem. This is the working record for the hourly
 investigation. Start with the [discovery plan](sat-pattern-discovery.md), then
 consult [implementation history](implementation-gaps.md),
@@ -12,7 +12,42 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse one cofactor and retain the smaller obligation
+## Current investigation: selected positive replay and its real dependency cost
+
+[Selected-route verification](selected-route-verification.md) preserves the
+593-step positive proof for 58/83 roots while checking only its external route
+dependencies. Mean cold replay falls **35.72304 -> 30.35446 seconds (15.03%)**
+over two repetitions with reversed order. Checked nodes fall **11,514 -> 10,258**;
+node JSON payload falls **100,554,675 -> 88,614,890 bytes**. Archive bytes and
+coverage are unchanged. This measures positive replay, not complete expansion.
+
+1. **Expand the successful proof's internal dependencies before pruning them.**
+   The 593 explicit steps still require **9,665 additional inventory nodes**.
+   Internal profiles, all stored alternatives, summaries and retained-plan
+   premises remain checked. Determine which support the successful semantic plan
+   and which only reconstruct historical policy. Do not assume all additional
+   nodes are dispensable, or that a base step is a constant-cost axiom.
+2. **Continue bounded discovery on the unchanged 23-variable leaf.** Saved pairs
+   **5, 6, 11, 13** need two missing children each; compare the next ordinary block
+   **7, 9, 16, 17** before conditioning. Follow the saved split descendant with
+   one admission allowance. The wider learned queue remains 17 bases / 88
+   candidates; no new family or root was added by this verification study.
+3. **Integrate positive replay without losing discovery or audit coverage.**
+   `verify_selected_plan` returns a positive-only subset. Its missing routes
+   cannot justify exclusion, exhaustion or UNSAT. Old expansion runners still
+   reconstruct the full catalog and perform full audits. A next integration must
+   combine positive reuse with the actual open-frontier dependencies and measure
+   all preparation, reconstruction, persistence and checking costs.
+
+The comparison is retained in `experiments/results/cnf-selected-routes/`; its
+report is a study, not a new reconstructible discovery checkpoint. Resume
+`experiments/results/cnf-reused-branch/report.json` through
+`continue_cnf_reused_branch.restore_checkpoint` and preserve five lists
+**(1 rewrite, 42 bases, 156 augmented blocks, 11 splits, 1 affine family)** and
+all earlier sidecars. The inventory remains **770,338,816 bytes / 41,758 nodes**.
+Peak RAM and a full-pipeline speedup remain unmeasured.
+
+## Previous investigation: reuse one cofactor and retain the smaller obligation
 
 [The reused-branch expansion](reused-branch-expansion.md) acquires variable 7's
 missing false cofactor while sharing its checked empty true cofactor. Three new

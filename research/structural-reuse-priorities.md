@@ -12,7 +12,70 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: conditional Horn closure and activation after acquisition
+## Current investigation: selective activation removes the dominant warm cost
+
+[Pattern activation](pattern-activation.md) retains a complete checked catalog
+and revisits routes waiting on newly acquired roots. It accepts only guarded
+pattern appends and the reported checked split, preserving both branch
+obligations and builder order. Other writes or sidecars use the previous
+maintenance path; external writers require reopening checked state.
+
+With identical scheduling and persistent results, mean historical route updates
+fall **2.18377 -> 0.02296 s**, expansion **2.41356 -> 0.23051 s**, and complete
+worker time **15.08509 -> 12.86353 s (14.73%)**. On current partial expansion the
+corresponding costs are **3.33336 -> 0.03679 s**, **3.75094 -> 0.44504 s**, and
+**16.85095 -> 13.40605 s (20.44%)**. Preparation/export variation contributes to
+whole-worker differences and is not an activation improvement. Both workloads
+use two reversed-order repetitions. The current original remains open; no
+completed-original speedup is claimed for it.
+
+1. **Resume the exact pending variable-5 pair of original 1062.** Three advances
+   store all **32 admitted states**, with no entered-but-unstored key. The
+   **34/143/440** source has an acquired false child leading to **31/122/370**,
+   and an absent true **32/136/405** target. Resume that target before reranking.
+   A separate existing **36/144/434** plan also remains unresolved. These three
+   obligations must all be accounted for; closing the pending target alone
+   need not close the original. Coverage remains **66/83**.
+2. **Exploit the newly exposed reduction patterns in the remaining cofactors.**
+   A variable-8 split of **35/149/466** takes twenty-one states on its true
+   branch to reach a **7/9/19** Horn, zero-valid terminal. Its other child stays
+   open. The first variable-25 split reuses an old unresolved 36-variable plan
+   after two new reductions, which saves intermediate recognition but is not
+   reuse of a completed proof. Current selective expansion spends about
+   **0.26735 s acquiring** and **0.13948 s selecting**, versus **0.03679 s** on
+   maintenance. Investigate exact reusable subpaths and better prediction of
+   useful conditional families. The alternative first variable-17 split is
+   still untested; this run held search choices fixed.
+3. **Reduce setup and persistence costs without losing checked authority.**
+   Current worker preparation/export average **7.83564 / 4.97464 s** after the
+   optimization. Parent restoration is **80.22699 s** and final global checking
+   **68.84394 s**, both outside the warm worker. The live index ends with
+   **697 route entries / one missing-target link** and adds memory. There is no
+   persistent-space saving or measured peak-RAM reduction. Broader activation
+   mixtures, cold-start costs and indexed authority access remain open.
+
+Resume **`experiments/results/cnf-pattern-activation/report.json`** through
+**`compare_cnf_pattern_activation.restore_checkpoint`**, SHA-256
+`7af092282dfda5070c4dbf1006daa8cff22a218487af28e40b59e8dc51894c7c`.
+Keep evidence lists **(1, 42, 156, 44, 1)** and **two bridges**, with the complete
+bridge-aware builder and positive verifier. The union adds **32 patterns /
+3 splits / no external probe rows**, growing history to **775,811,072 bytes /
+42,101 patterns**. Its delta is **23,539 compressed bytes**. Reference evidence
+preserves all 3,575 previous nodes and contains **3,734**; the positive
+certificate remains **3,360 steps**. The frontier has **3 open split records /
+2 acquired leaves / 1 pending target**. Independent cold reconstruction passes
+in **498.30431 s**, including all eight workers, four stepwise prefix comparisons
+and all **3,734 reference nodes**. All **222 tests** pass and the **160-page**
+manuscript builds, preserving its **64 proof blocks**. All **22 prior manifests /
+1,009 artifacts** and all previous reference payloads are unchanged. The new
+manifest binds **98 artifacts**; full validation is recorded beside the report.
+
+Pending source:
+`26f134186dbdd90745599fa2d41308823b8c08b752f19d5f53124ffd4ecd73f1`.
+Missing true target:
+`72697c710335660e1dc9c934e995f7c37577a9226c546fd7233d4e3685cb3615`.
+
+## Previous investigation: conditional Horn closure and activation after acquisition
 
 [Exact pending-pair resumption](pending-pair-resumption.md) closes original
 **1154 / index 27**, raising coverage **65/83 -> 66/83**, also without growth

@@ -6700,3 +6700,73 @@ references. The new manifest binds **40 artifacts (4,005,929 bytes)**,
 including operations, deltas, reference evidence, cost and structural findings,
 validation metadata and logs. No new Lean theorem or general SAT tractability
 claim is made.
+
+
+## 2026-11-14: selective activation after real pattern acquisition
+
+[The activation helper](pattern-activation.md) closes the dominant warm
+maintenance gap for guarded pattern-only appends. It indexes missing premises
+of all conditional route types, activates affected routes when their targets
+arrive, and preserves the full builder's order. Both split branches remain
+required. Other writes or sidecar changes use existing checked maintenance;
+external writers require reopening the inventory. Initial and cold checking
+remain complete. The index is additional live state, not a persisted trust
+cache or a storage reduction.
+
+Two reversed-order repetitions compare identical scheduling and independent
+seeds. Historical complete-worker time falls **15.08509 -> 12.86353 s (14.73%)**;
+current bounded-worker time falls **16.85095 -> 13.40605 s (20.44%)**. Route-update
+costs fall **2.18377 -> 0.02296 s** and **3.33336 -> 0.03679 s**, respectively.
+Current acquisition/selection now cost **0.26735 / 0.13948 s**, compared with
+**0.03679 s** maintenance. Preparation and export remain **7.83564 / 4.97464 s**,
+and their variation is not an activation improvement. The historical case
+closes the same thirty states; current partial expansion stores thirty-two
+states but leaves identical unfinished obligations in both modes.
+
+The current **39/161/495** source of original **1062 / index 14** splits on
+local variable 25. Its false branch reaches an existing **36/144/434** unresolved
+plan after two reductions; the true branch exposes **35/149/466**. A variable-8
+split of that leaf takes **2 / 21** states, with the true branch reaching a new
+**7/9/19** Horn, zero-valid terminal after checked reductions and polarity
+change. The remaining **34/143/440** leaf splits at variable **5**. Its false
+branch takes the last three states to reach **31/122/370**; its true
+**32/136/405** target is absent and was never admitted. No entered state is
+unstored. Every current split source and raw cofactor is SAT in the separate
+reference check; complete structural coverage still requires both children.
+
+Coverage stays **66/83**, with **3 open split records / 2 acquired leaves /
+1 pending target**. The union preserves **32 patterns / 3 split records / no
+external probe rows**, growing history **434,176 bytes** to **775,811,072 bytes /
+42,101 patterns**. The delta is **516,096 SQLite bytes / 23,539 compressed bytes**,
+identical across current modes. The index ends with **697 route entries** and
+one missing-target link. The positive certificate has **3,360 steps**; reference
+evidence preserves all **3,575** prior nodes and contains **3,734**.
+The complete producer costs **369.75582 s**, including current restoration
+**80.22699 s**, historical restoration **76.75811 s**, and final route preparation
+and global coverage **68.84394 s**. Peak RAM and unrestricted-SAT bounds are not
+measured or established.
+
+Resume `experiments/results/cnf-pattern-activation/report.json` using
+`compare_cnf_pattern_activation.restore_checkpoint`, SHA-256
+`7af092282dfda5070c4dbf1006daa8cff22a218487af28e40b59e8dc51894c7c`.
+Retain evidence lists **(1, 42, 156, 44, 1)** and **two bridges**, with complete
+bridge-aware `routes_for` and `cnf_projection_bridge.verify_positive`.
+Resume the exact variable-5 pair; retain the acquired false child and both
+other open leaves. Pending source:
+`26f134186dbdd90745599fa2d41308823b8c08b752f19d5f53124ffd4ecd73f1`.
+Missing true target:
+`72697c710335660e1dc9c934e995f7c37577a9226c546fd7233d4e3685cb3615`.
+After the maintenance saving, structural discovery and reuse in these remaining
+cofactors, plus cold setup/export costs, are the priorities. The alternative
+first variable-17 split remains untested.
+
+Validation: independent cold reconstruction passes in **498.30431 s**, checking
+all eight matched workers and **3,734 reference nodes** without fresh discovery
+or reference solving. Four first-repeat prefixes match complete rebuilt
+catalogs, order, closure, next selection and activation counts. All **222 tests**
+pass; existing SQLite resource warnings remain in the log. The manuscript
+builds to **160 pages**, with no overfull boxes or undefined references and all
+**64 previous proof blocks** unchanged. All **22 prior manifests / 1,009
+artifacts** and all **3,575 previous reference payloads** remain unchanged.
+The new manifest binds **98 artifacts / 4,355,064 bytes**; commands, source
+fingerprints and checks are in the checkpoint's `validation.json`.

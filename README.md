@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Updating only affected routes after acquisition](research/pattern-activation.md)
+reduces observed complete-worker time **14.7%** on the completed historical case
+and **20.4%** on the next bounded expansion, with identical search choices and
+persistent results. The latter stores **32 new patterns** and exposes another
+conditional Horn route, while coverage remains **66/83**. Preparation and export
+now dominate the measured worker; the new index does not reduce stored bytes.
+
 [Resuming the exact pending pair](research/pending-pair-resumption.md) closes
 case 1154 and raises structural coverage to **66/83**. Thirty new states expose
 two conditional routes to Horn formulas; all thirteen previously interrupted

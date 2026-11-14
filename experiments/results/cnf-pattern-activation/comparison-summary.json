@@ -1,0 +1,156 @@
+{
+  "arms": [
+    {
+      "activated_routes": 0,
+      "admitted": 30,
+      "affected_routes": 0,
+      "closed": true,
+      "completed": 30,
+      "compressed_delta_bytes": 17007,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.14303787471726537,
+        "coverage_seconds": 0.0021048334892839193,
+        "route_refresh_seconds": 2.1837713960558176,
+        "selection_seconds": 0.08464329200796783
+      },
+      "delta_database_bytes": 446464,
+      "delta_export_mean_seconds": 4.539373021107167,
+      "expansion_mean_seconds": 2.4135573962703347,
+      "external_assumption_attempts": 0,
+      "final_activation_index": null,
+      "history_bytes": 775376896,
+      "initial_activation_index": null,
+      "maintenance_modes": {
+        "full_rebuild": 2
+      },
+      "mode": "pending",
+      "preparation_mean_seconds": 8.064262562431395,
+      "scenario": "historical",
+      "sidecar_snapshot_bytes": 1320322,
+      "steps": 2,
+      "unfinished": 0,
+      "worker_mean_seconds": 15.085091187851503
+    },
+    {
+      "activated_routes": 2,
+      "admitted": 30,
+      "affected_routes": 1,
+      "closed": true,
+      "completed": 30,
+      "compressed_delta_bytes": 17007,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.12024816661141813,
+        "coverage_seconds": 0.00222387514077127,
+        "route_refresh_seconds": 0.022956499829888344,
+        "selection_seconds": 0.08508302038535476
+      },
+      "delta_database_bytes": 446464,
+      "delta_export_mean_seconds": 4.699808208271861,
+      "expansion_mean_seconds": 0.2305115619674325,
+      "external_assumption_attempts": 0,
+      "final_activation_index": {
+        "indexed_routes": 694,
+        "pending_routes": 0,
+        "waiting_links": 0,
+        "waiting_targets": 0
+      },
+      "history_bytes": 775376896,
+      "initial_activation_index": {
+        "indexed_routes": 693,
+        "pending_routes": 1,
+        "waiting_links": 1,
+        "waiting_targets": 1
+      },
+      "maintenance_modes": {
+        "pattern_activation": 2
+      },
+      "mode": "activation",
+      "preparation_mean_seconds": 7.866822791984305,
+      "scenario": "historical",
+      "sidecar_snapshot_bytes": 1320322,
+      "steps": 2,
+      "unfinished": 0,
+      "worker_mean_seconds": 12.863529708702117
+    },
+    {
+      "activated_routes": 0,
+      "admitted": 32,
+      "affected_routes": 0,
+      "closed": false,
+      "completed": 32,
+      "compressed_delta_bytes": 23539,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.2831838754937053,
+        "coverage_seconds": 0.0008164995815604925,
+        "route_refresh_seconds": 3.3333648743573576,
+        "selection_seconds": 0.13357864529825747
+      },
+      "delta_database_bytes": 516096,
+      "delta_export_mean_seconds": 4.690578249981627,
+      "expansion_mean_seconds": 3.750943894730881,
+      "external_assumption_attempts": 0,
+      "final_activation_index": null,
+      "history_bytes": 775811072,
+      "initial_activation_index": null,
+      "maintenance_modes": {
+        "full_rebuild": 3
+      },
+      "mode": "pending",
+      "preparation_mean_seconds": 8.278045542072505,
+      "scenario": "current",
+      "sidecar_snapshot_bytes": 1365258,
+      "steps": 3,
+      "unfinished": 0,
+      "worker_mean_seconds": 16.85095347976312
+    },
+    {
+      "activated_routes": 2,
+      "admitted": 32,
+      "affected_routes": 0,
+      "closed": false,
+      "completed": 32,
+      "compressed_delta_bytes": 23539,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.2673471253365278,
+        "coverage_seconds": 0.001420875545591116,
+        "route_refresh_seconds": 0.0367918754927814,
+        "selection_seconds": 0.13947572838515043
+      },
+      "delta_database_bytes": 516096,
+      "delta_export_mean_seconds": 4.97464400017634,
+      "expansion_mean_seconds": 0.4450356047600508,
+      "external_assumption_attempts": 0,
+      "final_activation_index": {
+        "indexed_routes": 697,
+        "pending_routes": 1,
+        "waiting_links": 1,
+        "waiting_targets": 1
+      },
+      "history_bytes": 775811072,
+      "initial_activation_index": {
+        "indexed_routes": 694,
+        "pending_routes": 0,
+        "waiting_links": 0,
+        "waiting_targets": 0
+      },
+      "maintenance_modes": {
+        "pattern_activation": 3
+      },
+      "mode": "activation",
+      "preparation_mean_seconds": 7.835642270278186,
+      "scenario": "current",
+      "sidecar_snapshot_bytes": 1365258,
+      "steps": 3,
+      "unfinished": 0,
+      "worker_mean_seconds": 13.4060526243411
+    }
+  ],
+  "limitations": [
+    "Matched pending-split versus selective pattern activation with identical EarlySavedExpansion scheduling. Current original 1062 and historical original 1154 are separate workloads.",
+    "Two reversed repetitions per workload, independent seed copies, twelve advances and one shared 32-state allowance per worker.",
+    "Fast updates permit only admitted pattern appends and the reported split sidecar. A reverse index activates old pending dependencies and preserves complete builder order. Other writes or sidecars use existing maintenance; external writers require reopening.",
+    "Full worker time charges preparation, acquisition, checking and export. Historical/current restoration and union/global costs are separate.",
+    "Both polarities remain structural obligations, independently of SAT answers. All previous history and unfinished admissions are retained explicitly.",
+    "Shared process/OS caches and development cases, no confidence intervals or holdout. Stored bytes are not peak RAM; no globally minimal expansion or unrestricted SAT bound."
+  ]
+}

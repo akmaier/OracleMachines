@@ -1,0 +1,3852 @@
+{
+  "arms": [
+    {
+      "admitted": 30,
+      "closed": true,
+      "cold_selection_matches": true,
+      "completed": 30,
+      "idempotent": true,
+      "mode": "pending",
+      "prefix_replay": {
+        "replay_seconds": 12.187758708372712,
+        "steps": [
+          {
+            "admitted": 16,
+            "closed": false,
+            "complete_catalog_equal": true,
+            "inserted_rows": 16,
+            "mode": "full_rebuild",
+            "next_selection_equal": true,
+            "step": 0,
+            "stored_new_patterns": 16
+          },
+          {
+            "admitted": 30,
+            "closed": true,
+            "complete_catalog_equal": true,
+            "inserted_rows": 14,
+            "mode": "full_rebuild",
+            "next_selection_equal": true,
+            "step": 1,
+            "stored_new_patterns": 30
+          }
+        ]
+      },
+      "repeat": 0,
+      "scenario": "historical",
+      "splits": [
+        {
+          "branches": [
+            {
+              "closed": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "recognized",
+                  "dual_horn": "recognized",
+                  "explicit_affine": "recognized",
+                  "horn": "recognized",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "excluded",
+                  "two_cnf": "recognized",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "1cffaaf2fa1df284599216bec7db1c2c53b095df758da40ffe00935634c83fcf",
+                    "kind": "probe",
+                    "shape": [
+                      29,
+                      96,
+                      275
+                    ]
+                  },
+                  {
+                    "key_sha256": "501bf33a4a62297e85b21866811b1e717a79e11013d6a97aeddb4dafb461dcac",
+                    "kind": "probe",
+                    "shape": [
+                      21,
+                      59,
+                      153
+                    ]
+                  },
+                  {
+                    "key_sha256": "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a",
+                    "kind": "retained_plan",
+                    "shape": [
+                      0,
+                      1,
+                      0
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": false,
+              "target_sha256": "1cffaaf2fa1df284599216bec7db1c2c53b095df758da40ffe00935634c83fcf",
+              "target_shape": [
+                29,
+                96,
+                275
+              ],
+              "value": false
+            },
+            {
+              "closed": true,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "5124e2d5f451e42b274ed6886d29676c94f89e27bb3054f77b530f2f3091a3a4",
+                    "kind": "probe",
+                    "shape": [
+                      30,
+                      111,
+                      330
+                    ]
+                  },
+                  {
+                    "key_sha256": "fac51890e6a6ed2e88cdaa86a16a1ac315d7845cb81a08c16ddfd9786d3cfb03",
+                    "kind": "probe",
+                    "shape": [
+                      29,
+                      105,
+                      309
+                    ]
+                  },
+                  {
+                    "key_sha256": "96df805594d0771d354238d610790a284d08b5c9791ee4300a082aaca3a8e015",
+                    "kind": "probe",
+                    "shape": [
+                      28,
+                      98,
+                      289
+                    ]
+                  },
+                  {
+                    "key_sha256": "850f19fef85b1179c8c2e04dc4a2202e4812a502d123010ea7555e4bd0c4248d",
+                    "kind": "probe",
+                    "shape": [
+                      27,
+                      91,
+                      267
+                    ]
+                  },
+                  {
+                    "key_sha256": "a9d45cdf02f579c21fd26cc379fbb39526d4fc966ad09bfebe4438196feac2de",
+                    "kind": "probe",
+                    "shape": [
+                      26,
+                      87,
+                      256
+                    ]
+                  },
+                  {
+                    "key_sha256": "0ec19a8178e30f57162aef76245e2963bf57a16bfb7ee876dfbf842e31cc594c",
+                    "kind": "probe",
+                    "shape": [
+                      25,
+                      79,
+                      231
+                    ]
+                  },
+                  {
+                    "key_sha256": "b47920ab009a7ed4b6b0e09395b2fc69f8469aed3596bf295aa54385f730fcaf",
+                    "kind": "binary_paths",
+                    "shape": [
+                      24,
+                      77,
+                      227
+                    ]
+                  },
+                  {
+                    "key_sha256": "8fed972e4d01efa1df34ed3b447d3971020a94c03abda1484b0e0eedac77c48d",
+                    "kind": "eliminate",
+                    "shape": [
+                      24,
+                      73,
+                      214
+                    ]
+                  },
+                  {
+                    "key_sha256": "9dc9dc78530efeed39ca4a4874d2a13415a459cf261308b5b84cd7daec53c1f2",
+                    "kind": "binary_paths",
+                    "shape": [
+                      23,
+                      69,
+                      208
+                    ]
+                  },
+                  {
+                    "key_sha256": "4e15646ec297cb4aa49418f60681c69a15556b5d06d198485148c26edaed9552",
+                    "kind": "eliminate",
+                    "shape": [
+                      23,
+                      68,
+                      203
+                    ]
+                  },
+                  {
+                    "key_sha256": "3fcbdd6519a9c0288a09d49de36d900b3d6ed17c0a378cb7c48c31e7e7972f3e",
+                    "kind": "eliminate",
+                    "shape": [
+                      22,
+                      67,
+                      201
+                    ]
+                  },
+                  {
+                    "key_sha256": "86e25cbc28b1f36b46cb3ae9608e76c3d7569ca2450415109ddc3158edb3c4bc",
+                    "kind": "binary_paths",
+                    "shape": [
+                      21,
+                      67,
+                      205
+                    ]
+                  },
+                  {
+                    "key_sha256": "e39eae855fb6760e599f507d16c31f40f26433d4c10ad7e4a2080718056a9a51",
+                    "kind": "eliminate",
+                    "shape": [
+                      21,
+                      66,
+                      202
+                    ]
+                  },
+                  {
+                    "key_sha256": "724e29557e867f3aa9954f3c1f3d7b22a134ba0751d3a2e5cba4bd5ce58491a6",
+                    "kind": "eliminate",
+                    "shape": [
+                      20,
+                      66,
+                      209
+                    ]
+                  },
+                  {
+                    "key_sha256": "82fb660a1c1f6c06afdbb84439fb4ce412a1f3cf82bc7b2603a7a9be46c243d0",
+                    "kind": "binary_paths",
+                    "shape": [
+                      19,
+                      67,
+                      218
+                    ]
+                  },
+                  {
+                    "key_sha256": "a72d82997294ecebc86e20f1c9eab91abf79012f0fe8e4392f1e4df289226231",
+                    "kind": "unresolved",
+                    "shape": [
+                      19,
+                      66,
+                      214
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "5124e2d5f451e42b274ed6886d29676c94f89e27bb3054f77b530f2f3091a3a4",
+              "target_shape": [
+                30,
+                111,
+                330
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "1fab57607093cb833cc8fa0f21d88c2e7e9eb094dac7cdd416e8a786e3fcf056",
+          "source_shape": [
+            33,
+            130,
+            400
+          ],
+          "variable": 18
+        },
+        {
+          "branches": [
+            {
+              "closed": true,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "recognized",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "excluded",
+                  "two_cnf": "excluded",
+                  "zero_valid": "recognized"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "f942c887340c180fff010f2c9597248ab5c91b9341f8bc7f14bb4b7e6f6fa79c",
+                    "kind": "probe",
+                    "shape": [
+                      17,
+                      57,
+                      179
+                    ]
+                  },
+                  {
+                    "key_sha256": "4299e5a5e9789e8a86108509e1e0bb3da372eebedac667c42b06c5d4fc29b9a9",
+                    "kind": "probe",
+                    "shape": [
+                      16,
+                      49,
+                      153
+                    ]
+                  },
+                  {
+                    "key_sha256": "81994e193395e6b8ae0352172a3b9a3286311b66cf93fd9dac252355b990f5f4",
+                    "kind": "binary_paths",
+                    "shape": [
+                      11,
+                      20,
+                      56
+                    ]
+                  },
+                  {
+                    "key_sha256": "dfe324986a0e32e145141cb3003bf0b36ed6bb540e54ebbf18a0c214466bb77a",
+                    "kind": "eliminate",
+                    "shape": [
+                      11,
+                      16,
+                      44
+                    ]
+                  },
+                  {
+                    "key_sha256": "e0d04c5cf2f1b9a9aab951ef351c31a8b90a219161bfc556bfd1efefe6ff10ec",
+                    "kind": "eliminate",
+                    "shape": [
+                      10,
+                      12,
+                      32
+                    ]
+                  },
+                  {
+                    "key_sha256": "d847a64ed4421e7b9b02b56cdedca0342ed86ce8246ab4f7ab3c171031805e1c",
+                    "kind": "eliminate",
+                    "shape": [
+                      9,
+                      9,
+                      22
+                    ]
+                  },
+                  {
+                    "key_sha256": "53cc80275c5de2b07e5783c8640435928e7c944c90eb3e5106b16765593f7939",
+                    "kind": "polarity",
+                    "shape": [
+                      7,
+                      7,
+                      16
+                    ]
+                  },
+                  {
+                    "key_sha256": "f9f0fd96401f870532a90128b0769333c266b15a2713414f95e090abbef76a9c",
+                    "kind": "family",
+                    "shape": [
+                      7,
+                      7,
+                      16
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "f942c887340c180fff010f2c9597248ab5c91b9341f8bc7f14bb4b7e6f6fa79c",
+              "target_shape": [
+                17,
+                57,
+                179
+              ],
+              "value": false
+            },
+            {
+              "closed": true,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "recognized",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "recognized"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "f71d8615c2461ce942c8cec78363a00e137482790d8594cd3449482e8b81b1c7",
+                    "kind": "probe",
+                    "shape": [
+                      13,
+                      31,
+                      89
+                    ]
+                  },
+                  {
+                    "key_sha256": "859385b8b90622e9a1845676ca26029c274637fca56e4cc89e05305b75226a7e",
+                    "kind": "probe",
+                    "shape": [
+                      11,
+                      23,
+                      63
+                    ]
+                  },
+                  {
+                    "key_sha256": "936cfde4a1952c285d86d5e4d9f90d1f32842d9627c367889b86fe944b4883b4",
+                    "kind": "probe",
+                    "shape": [
+                      10,
+                      20,
+                      56
+                    ]
+                  },
+                  {
+                    "key_sha256": "f920af5684ca66c29fd378ab14891faa58a7326ed8eb73fc56c7f1ca7a1078e5",
+                    "kind": "binary_paths",
+                    "shape": [
+                      9,
+                      17,
+                      43
+                    ]
+                  },
+                  {
+                    "key_sha256": "993274727414d55108e7e438392a476179541ea093c7d318af4703c603d5a9cb",
+                    "kind": "polarity",
+                    "shape": [
+                      9,
+                      15,
+                      37
+                    ]
+                  },
+                  {
+                    "key_sha256": "7214202a57535a4d341bd33fd349ba57164efd25f9ce3fe58118bf558a62e596",
+                    "kind": "family",
+                    "shape": [
+                      9,
+                      15,
+                      37
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "f71d8615c2461ce942c8cec78363a00e137482790d8594cd3449482e8b81b1c7",
+              "target_shape": [
+                13,
+                31,
+                89
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "a72d82997294ecebc86e20f1c9eab91abf79012f0fe8e4392f1e4df289226231",
+          "source_shape": [
+            19,
+            66,
+            214
+          ],
+          "variable": 3
+        }
+      ],
+      "unfinished": 0
+    },
+    {
+      "admitted": 30,
+      "closed": true,
+      "cold_selection_matches": true,
+      "completed": 30,
+      "idempotent": true,
+      "mode": "activation",
+      "prefix_replay": {
+        "replay_seconds": 10.027707874774933,
+        "steps": [
+          {
+            "admitted": 16,
+            "closed": false,
+            "complete_catalog_equal": true,
+            "inserted_rows": 16,
+            "mode": "pattern_activation",
+            "next_selection_equal": true,
+            "step": 0,
+            "stored_new_patterns": 16
+          },
+          {
+            "admitted": 30,
+            "closed": true,
+            "complete_catalog_equal": true,
+            "inserted_rows": 14,
+            "mode": "pattern_activation",
+            "next_selection_equal": true,
+            "step": 1,
+            "stored_new_patterns": 30
+          }
+        ]
+      },
+      "repeat": 0,
+      "scenario": "historical",
+      "splits": [
+        {
+          "branches": [
+            {
+              "closed": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "recognized",
+                  "dual_horn": "recognized",
+                  "explicit_affine": "recognized",
+                  "horn": "recognized",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "excluded",
+                  "two_cnf": "recognized",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "1cffaaf2fa1df284599216bec7db1c2c53b095df758da40ffe00935634c83fcf",
+                    "kind": "probe",
+                    "shape": [
+                      29,
+                      96,
+                      275
+                    ]
+                  },
+                  {
+                    "key_sha256": "501bf33a4a62297e85b21866811b1e717a79e11013d6a97aeddb4dafb461dcac",
+                    "kind": "probe",
+                    "shape": [
+                      21,
+                      59,
+                      153
+                    ]
+                  },
+                  {
+                    "key_sha256": "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a",
+                    "kind": "retained_plan",
+                    "shape": [
+                      0,
+                      1,
+                      0
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": false,
+              "target_sha256": "1cffaaf2fa1df284599216bec7db1c2c53b095df758da40ffe00935634c83fcf",
+              "target_shape": [
+                29,
+                96,
+                275
+              ],
+              "value": false
+            },
+            {
+              "closed": true,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "5124e2d5f451e42b274ed6886d29676c94f89e27bb3054f77b530f2f3091a3a4",
+                    "kind": "probe",
+                    "shape": [
+                      30,
+                      111,
+                      330
+                    ]
+                  },
+                  {
+                    "key_sha256": "fac51890e6a6ed2e88cdaa86a16a1ac315d7845cb81a08c16ddfd9786d3cfb03",
+                    "kind": "probe",
+                    "shape": [
+                      29,
+                      105,
+                      309
+                    ]
+                  },
+                  {
+                    "key_sha256": "96df805594d0771d354238d610790a284d08b5c9791ee4300a082aaca3a8e015",
+                    "kind": "probe",
+                    "shape": [
+                      28,
+                      98,
+                      289
+                    ]
+                  },
+                  {
+                    "key_sha256": "850f19fef85b1179c8c2e04dc4a2202e4812a502d123010ea7555e4bd0c4248d",
+                    "kind": "probe",
+                    "shape": [
+                      27,
+                      91,
+                      267
+                    ]
+                  },
+                  {
+                    "key_sha256": "a9d45cdf02f579c21fd26cc379fbb39526d4fc966ad09bfebe4438196feac2de",
+                    "kind": "probe",
+                    "shape": [
+                      26,
+                      87,
+                      256
+                    ]
+                  },
+                  {
+                    "key_sha256": "0ec19a8178e30f57162aef76245e2963bf57a16bfb7ee876dfbf842e31cc594c",
+                    "kind": "probe",
+                    "shape": [
+                      25,
+                      79,
+                      231
+                    ]
+                  },
+                  {
+                    "key_sha256": "b47920ab009a7ed4b6b0e09395b2fc69f8469aed3596bf295aa54385f730fcaf",
+                    "kind": "binary_paths",
+                    "shape": [
+                      24,
+                      77,
+                      227
+                    ]
+                  },
+                  {
+                    "key_sha256": "8fed972e4d01efa1df34ed3b447d3971020a94c03abda1484b0e0eedac77c48d",
+                    "kind": "eliminate",
+                    "shape": [
+                      24,
+                      73,
+                      214
+                    ]
+                  },
+                  {
+                    "key_sha256": "9dc9dc78530efeed39ca4a4874d2a13415a459cf261308b5b84cd7daec53c1f2",
+                    "kind": "binary_paths",
+                    "shape": [
+                      23,
+                      69,
+                      208
+                    ]
+                  },
+                  {
+                    "key_sha256": "4e15646ec297cb4aa49418f60681c69a15556b5d06d198485148c26edaed9552",
+                    "kind": "eliminate",
+                    "shape": [
+                      23,
+                      68,
+                      203
+                    ]
+                  },
+                  {
+                    "key_sha256": "3fcbdd6519a9c0288a09d49de36d900b3d6ed17c0a378cb7c48c31e7e7972f3e",
+                    "kind": "eliminate",
+                    "shape": [
+                      22,
+                      67,
+                      201
+                    ]
+                  },
+                  {
+                    "key_sha256": "86e25cbc28b1f36b46cb3ae9608e76c3d7569ca2450415109ddc3158edb3c4bc",
+                    "kind": "binary_paths",
+                    "shape": [
+                      21,
+                      67,
+                      205
+                    ]
+                  },
+                  {
+                    "key_sha256": "e39eae855fb6760e599f507d16c31f40f26433d4c10ad7e4a2080718056a9a51",
+                    "kind": "eliminate",
+                    "shape": [
+                      21,
+                      66,
+                      202
+                    ]
+                  },
+                  {
+                    "key_sha256": "724e29557e867f3aa9954f3c1f3d7b22a134ba0751d3a2e5cba4bd5ce58491a6",
+                    "kind": "eliminate",
+                    "shape": [
+                      20,
+                      66,
+                      209
+                    ]
+                  },
+                  {
+                    "key_sha256": "82fb660a1c1f6c06afdbb84439fb4ce412a1f3cf82bc7b2603a7a9be46c243d0",
+                    "kind": "binary_paths",
+                    "shape": [
+                      19,
+                      67,
+                      218
+                    ]
+                  },
+                  {
+                    "key_sha256": "a72d82997294ecebc86e20f1c9eab91abf79012f0fe8e4392f1e4df289226231",
+                    "kind": "unresolved",
+                    "shape": [
+                      19,
+                      66,
+                      214
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "5124e2d5f451e42b274ed6886d29676c94f89e27bb3054f77b530f2f3091a3a4",
+              "target_shape": [
+                30,
+                111,
+                330
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "1fab57607093cb833cc8fa0f21d88c2e7e9eb094dac7cdd416e8a786e3fcf056",
+          "source_shape": [
+            33,
+            130,
+            400
+          ],
+          "variable": 18
+        },
+        {
+          "branches": [
+            {
+              "closed": true,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "recognized",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "excluded",
+                  "two_cnf": "excluded",
+                  "zero_valid": "recognized"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "f942c887340c180fff010f2c9597248ab5c91b9341f8bc7f14bb4b7e6f6fa79c",
+                    "kind": "probe",
+                    "shape": [
+                      17,
+                      57,
+                      179
+                    ]
+                  },
+                  {
+                    "key_sha256": "4299e5a5e9789e8a86108509e1e0bb3da372eebedac667c42b06c5d4fc29b9a9",
+                    "kind": "probe",
+                    "shape": [
+                      16,
+                      49,
+                      153
+                    ]
+                  },
+                  {
+                    "key_sha256": "81994e193395e6b8ae0352172a3b9a3286311b66cf93fd9dac252355b990f5f4",
+                    "kind": "binary_paths",
+                    "shape": [
+                      11,
+                      20,
+                      56
+                    ]
+                  },
+                  {
+                    "key_sha256": "dfe324986a0e32e145141cb3003bf0b36ed6bb540e54ebbf18a0c214466bb77a",
+                    "kind": "eliminate",
+                    "shape": [
+                      11,
+                      16,
+                      44
+                    ]
+                  },
+                  {
+                    "key_sha256": "e0d04c5cf2f1b9a9aab951ef351c31a8b90a219161bfc556bfd1efefe6ff10ec",
+                    "kind": "eliminate",
+                    "shape": [
+                      10,
+                      12,
+                      32
+                    ]
+                  },
+                  {
+                    "key_sha256": "d847a64ed4421e7b9b02b56cdedca0342ed86ce8246ab4f7ab3c171031805e1c",
+                    "kind": "eliminate",
+                    "shape": [
+                      9,
+                      9,
+                      22
+                    ]
+                  },
+                  {
+                    "key_sha256": "53cc80275c5de2b07e5783c8640435928e7c944c90eb3e5106b16765593f7939",
+                    "kind": "polarity",
+                    "shape": [
+                      7,
+                      7,
+                      16
+                    ]
+                  },
+                  {
+                    "key_sha256": "f9f0fd96401f870532a90128b0769333c266b15a2713414f95e090abbef76a9c",
+                    "kind": "family",
+                    "shape": [
+                      7,
+                      7,
+                      16
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "f942c887340c180fff010f2c9597248ab5c91b9341f8bc7f14bb4b7e6f6fa79c",
+              "target_shape": [
+                17,
+                57,
+                179
+              ],
+              "value": false
+            },
+            {
+              "closed": true,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "recognized",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "recognized"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "f71d8615c2461ce942c8cec78363a00e137482790d8594cd3449482e8b81b1c7",
+                    "kind": "probe",
+                    "shape": [
+                      13,
+                      31,
+                      89
+                    ]
+                  },
+                  {
+                    "key_sha256": "859385b8b90622e9a1845676ca26029c274637fca56e4cc89e05305b75226a7e",
+                    "kind": "probe",
+                    "shape": [
+                      11,
+                      23,
+                      63
+                    ]
+                  },
+                  {
+                    "key_sha256": "936cfde4a1952c285d86d5e4d9f90d1f32842d9627c367889b86fe944b4883b4",
+                    "kind": "probe",
+                    "shape": [
+                      10,
+                      20,
+                      56
+                    ]
+                  },
+                  {
+                    "key_sha256": "f920af5684ca66c29fd378ab14891faa58a7326ed8eb73fc56c7f1ca7a1078e5",
+                    "kind": "binary_paths",
+                    "shape": [
+                      9,
+                      17,
+                      43
+                    ]
+                  },
+                  {
+                    "key_sha256": "993274727414d55108e7e438392a476179541ea093c7d318af4703c603d5a9cb",
+                    "kind": "polarity",
+                    "shape": [
+                      9,
+                      15,
+                      37
+                    ]
+                  },
+                  {
+                    "key_sha256": "7214202a57535a4d341bd33fd349ba57164efd25f9ce3fe58118bf558a62e596",
+                    "kind": "family",
+                    "shape": [
+                      9,
+                      15,
+                      37
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "f71d8615c2461ce942c8cec78363a00e137482790d8594cd3449482e8b81b1c7",
+              "target_shape": [
+                13,
+                31,
+                89
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "a72d82997294ecebc86e20f1c9eab91abf79012f0fe8e4392f1e4df289226231",
+          "source_shape": [
+            19,
+            66,
+            214
+          ],
+          "variable": 3
+        }
+      ],
+      "unfinished": 0
+    },
+    {
+      "admitted": 30,
+      "closed": true,
+      "cold_selection_matches": true,
+      "completed": 30,
+      "idempotent": true,
+      "mode": "activation",
+      "repeat": 1,
+      "scenario": "historical",
+      "splits": [
+        {
+          "branches": [
+            {
+              "closed": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "recognized",
+                  "dual_horn": "recognized",
+                  "explicit_affine": "recognized",
+                  "horn": "recognized",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "excluded",
+                  "two_cnf": "recognized",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "1cffaaf2fa1df284599216bec7db1c2c53b095df758da40ffe00935634c83fcf",
+                    "kind": "probe",
+                    "shape": [
+                      29,
+                      96,
+                      275
+                    ]
+                  },
+                  {
+                    "key_sha256": "501bf33a4a62297e85b21866811b1e717a79e11013d6a97aeddb4dafb461dcac",
+                    "kind": "probe",
+                    "shape": [
+                      21,
+                      59,
+                      153
+                    ]
+                  },
+                  {
+                    "key_sha256": "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a",
+                    "kind": "retained_plan",
+                    "shape": [
+                      0,
+                      1,
+                      0
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": false,
+              "target_sha256": "1cffaaf2fa1df284599216bec7db1c2c53b095df758da40ffe00935634c83fcf",
+              "target_shape": [
+                29,
+                96,
+                275
+              ],
+              "value": false
+            },
+            {
+              "closed": true,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "5124e2d5f451e42b274ed6886d29676c94f89e27bb3054f77b530f2f3091a3a4",
+                    "kind": "probe",
+                    "shape": [
+                      30,
+                      111,
+                      330
+                    ]
+                  },
+                  {
+                    "key_sha256": "fac51890e6a6ed2e88cdaa86a16a1ac315d7845cb81a08c16ddfd9786d3cfb03",
+                    "kind": "probe",
+                    "shape": [
+                      29,
+                      105,
+                      309
+                    ]
+                  },
+                  {
+                    "key_sha256": "96df805594d0771d354238d610790a284d08b5c9791ee4300a082aaca3a8e015",
+                    "kind": "probe",
+                    "shape": [
+                      28,
+                      98,
+                      289
+                    ]
+                  },
+                  {
+                    "key_sha256": "850f19fef85b1179c8c2e04dc4a2202e4812a502d123010ea7555e4bd0c4248d",
+                    "kind": "probe",
+                    "shape": [
+                      27,
+                      91,
+                      267
+                    ]
+                  },
+                  {
+                    "key_sha256": "a9d45cdf02f579c21fd26cc379fbb39526d4fc966ad09bfebe4438196feac2de",
+                    "kind": "probe",
+                    "shape": [
+                      26,
+                      87,
+                      256
+                    ]
+                  },
+                  {
+                    "key_sha256": "0ec19a8178e30f57162aef76245e2963bf57a16bfb7ee876dfbf842e31cc594c",
+                    "kind": "probe",
+                    "shape": [
+                      25,
+                      79,
+                      231
+                    ]
+                  },
+                  {
+                    "key_sha256": "b47920ab009a7ed4b6b0e09395b2fc69f8469aed3596bf295aa54385f730fcaf",
+                    "kind": "binary_paths",
+                    "shape": [
+                      24,
+                      77,
+                      227
+                    ]
+                  },
+                  {
+                    "key_sha256": "8fed972e4d01efa1df34ed3b447d3971020a94c03abda1484b0e0eedac77c48d",
+                    "kind": "eliminate",
+                    "shape": [
+                      24,
+                      73,
+                      214
+                    ]
+                  },
+                  {
+                    "key_sha256": "9dc9dc78530efeed39ca4a4874d2a13415a459cf261308b5b84cd7daec53c1f2",
+                    "kind": "binary_paths",
+                    "shape": [
+                      23,
+                      69,
+                      208
+                    ]
+                  },
+                  {
+                    "key_sha256": "4e15646ec297cb4aa49418f60681c69a15556b5d06d198485148c26edaed9552",
+                    "kind": "eliminate",
+                    "shape": [
+                      23,
+                      68,
+                      203
+                    ]
+                  },
+                  {
+                    "key_sha256": "3fcbdd6519a9c0288a09d49de36d900b3d6ed17c0a378cb7c48c31e7e7972f3e",
+                    "kind": "eliminate",
+                    "shape": [
+                      22,
+                      67,
+                      201
+                    ]
+                  },
+                  {
+                    "key_sha256": "86e25cbc28b1f36b46cb3ae9608e76c3d7569ca2450415109ddc3158edb3c4bc",
+                    "kind": "binary_paths",
+                    "shape": [
+                      21,
+                      67,
+                      205
+                    ]
+                  },
+                  {
+                    "key_sha256": "e39eae855fb6760e599f507d16c31f40f26433d4c10ad7e4a2080718056a9a51",
+                    "kind": "eliminate",
+                    "shape": [
+                      21,
+                      66,
+                      202
+                    ]
+                  },
+                  {
+                    "key_sha256": "724e29557e867f3aa9954f3c1f3d7b22a134ba0751d3a2e5cba4bd5ce58491a6",
+                    "kind": "eliminate",
+                    "shape": [
+                      20,
+                      66,
+                      209
+                    ]
+                  },
+                  {
+                    "key_sha256": "82fb660a1c1f6c06afdbb84439fb4ce412a1f3cf82bc7b2603a7a9be46c243d0",
+                    "kind": "binary_paths",
+                    "shape": [
+                      19,
+                      67,
+                      218
+                    ]
+                  },
+                  {
+                    "key_sha256": "a72d82997294ecebc86e20f1c9eab91abf79012f0fe8e4392f1e4df289226231",
+                    "kind": "unresolved",
+                    "shape": [
+                      19,
+                      66,
+                      214
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "5124e2d5f451e42b274ed6886d29676c94f89e27bb3054f77b530f2f3091a3a4",
+              "target_shape": [
+                30,
+                111,
+                330
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "1fab57607093cb833cc8fa0f21d88c2e7e9eb094dac7cdd416e8a786e3fcf056",
+          "source_shape": [
+            33,
+            130,
+            400
+          ],
+          "variable": 18
+        },
+        {
+          "branches": [
+            {
+              "closed": true,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "recognized",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "excluded",
+                  "two_cnf": "excluded",
+                  "zero_valid": "recognized"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "f942c887340c180fff010f2c9597248ab5c91b9341f8bc7f14bb4b7e6f6fa79c",
+                    "kind": "probe",
+                    "shape": [
+                      17,
+                      57,
+                      179
+                    ]
+                  },
+                  {
+                    "key_sha256": "4299e5a5e9789e8a86108509e1e0bb3da372eebedac667c42b06c5d4fc29b9a9",
+                    "kind": "probe",
+                    "shape": [
+                      16,
+                      49,
+                      153
+                    ]
+                  },
+                  {
+                    "key_sha256": "81994e193395e6b8ae0352172a3b9a3286311b66cf93fd9dac252355b990f5f4",
+                    "kind": "binary_paths",
+                    "shape": [
+                      11,
+                      20,
+                      56
+                    ]
+                  },
+                  {
+                    "key_sha256": "dfe324986a0e32e145141cb3003bf0b36ed6bb540e54ebbf18a0c214466bb77a",
+                    "kind": "eliminate",
+                    "shape": [
+                      11,
+                      16,
+                      44
+                    ]
+                  },
+                  {
+                    "key_sha256": "e0d04c5cf2f1b9a9aab951ef351c31a8b90a219161bfc556bfd1efefe6ff10ec",
+                    "kind": "eliminate",
+                    "shape": [
+                      10,
+                      12,
+                      32
+                    ]
+                  },
+                  {
+                    "key_sha256": "d847a64ed4421e7b9b02b56cdedca0342ed86ce8246ab4f7ab3c171031805e1c",
+                    "kind": "eliminate",
+                    "shape": [
+                      9,
+                      9,
+                      22
+                    ]
+                  },
+                  {
+                    "key_sha256": "53cc80275c5de2b07e5783c8640435928e7c944c90eb3e5106b16765593f7939",
+                    "kind": "polarity",
+                    "shape": [
+                      7,
+                      7,
+                      16
+                    ]
+                  },
+                  {
+                    "key_sha256": "f9f0fd96401f870532a90128b0769333c266b15a2713414f95e090abbef76a9c",
+                    "kind": "family",
+                    "shape": [
+                      7,
+                      7,
+                      16
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "f942c887340c180fff010f2c9597248ab5c91b9341f8bc7f14bb4b7e6f6fa79c",
+              "target_shape": [
+                17,
+                57,
+                179
+              ],
+              "value": false
+            },
+            {
+              "closed": true,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "recognized",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "recognized"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "f71d8615c2461ce942c8cec78363a00e137482790d8594cd3449482e8b81b1c7",
+                    "kind": "probe",
+                    "shape": [
+                      13,
+                      31,
+                      89
+                    ]
+                  },
+                  {
+                    "key_sha256": "859385b8b90622e9a1845676ca26029c274637fca56e4cc89e05305b75226a7e",
+                    "kind": "probe",
+                    "shape": [
+                      11,
+                      23,
+                      63
+                    ]
+                  },
+                  {
+                    "key_sha256": "936cfde4a1952c285d86d5e4d9f90d1f32842d9627c367889b86fe944b4883b4",
+                    "kind": "probe",
+                    "shape": [
+                      10,
+                      20,
+                      56
+                    ]
+                  },
+                  {
+                    "key_sha256": "f920af5684ca66c29fd378ab14891faa58a7326ed8eb73fc56c7f1ca7a1078e5",
+                    "kind": "binary_paths",
+                    "shape": [
+                      9,
+                      17,
+                      43
+                    ]
+                  },
+                  {
+                    "key_sha256": "993274727414d55108e7e438392a476179541ea093c7d318af4703c603d5a9cb",
+                    "kind": "polarity",
+                    "shape": [
+                      9,
+                      15,
+                      37
+                    ]
+                  },
+                  {
+                    "key_sha256": "7214202a57535a4d341bd33fd349ba57164efd25f9ce3fe58118bf558a62e596",
+                    "kind": "family",
+                    "shape": [
+                      9,
+                      15,
+                      37
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "f71d8615c2461ce942c8cec78363a00e137482790d8594cd3449482e8b81b1c7",
+              "target_shape": [
+                13,
+                31,
+                89
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "a72d82997294ecebc86e20f1c9eab91abf79012f0fe8e4392f1e4df289226231",
+          "source_shape": [
+            19,
+            66,
+            214
+          ],
+          "variable": 3
+        }
+      ],
+      "unfinished": 0
+    },
+    {
+      "admitted": 30,
+      "closed": true,
+      "cold_selection_matches": true,
+      "completed": 30,
+      "idempotent": true,
+      "mode": "pending",
+      "repeat": 1,
+      "scenario": "historical",
+      "splits": [
+        {
+          "branches": [
+            {
+              "closed": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "recognized",
+                  "dual_horn": "recognized",
+                  "explicit_affine": "recognized",
+                  "horn": "recognized",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "excluded",
+                  "two_cnf": "recognized",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "1cffaaf2fa1df284599216bec7db1c2c53b095df758da40ffe00935634c83fcf",
+                    "kind": "probe",
+                    "shape": [
+                      29,
+                      96,
+                      275
+                    ]
+                  },
+                  {
+                    "key_sha256": "501bf33a4a62297e85b21866811b1e717a79e11013d6a97aeddb4dafb461dcac",
+                    "kind": "probe",
+                    "shape": [
+                      21,
+                      59,
+                      153
+                    ]
+                  },
+                  {
+                    "key_sha256": "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a",
+                    "kind": "retained_plan",
+                    "shape": [
+                      0,
+                      1,
+                      0
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": false,
+              "target_sha256": "1cffaaf2fa1df284599216bec7db1c2c53b095df758da40ffe00935634c83fcf",
+              "target_shape": [
+                29,
+                96,
+                275
+              ],
+              "value": false
+            },
+            {
+              "closed": true,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "5124e2d5f451e42b274ed6886d29676c94f89e27bb3054f77b530f2f3091a3a4",
+                    "kind": "probe",
+                    "shape": [
+                      30,
+                      111,
+                      330
+                    ]
+                  },
+                  {
+                    "key_sha256": "fac51890e6a6ed2e88cdaa86a16a1ac315d7845cb81a08c16ddfd9786d3cfb03",
+                    "kind": "probe",
+                    "shape": [
+                      29,
+                      105,
+                      309
+                    ]
+                  },
+                  {
+                    "key_sha256": "96df805594d0771d354238d610790a284d08b5c9791ee4300a082aaca3a8e015",
+                    "kind": "probe",
+                    "shape": [
+                      28,
+                      98,
+                      289
+                    ]
+                  },
+                  {
+                    "key_sha256": "850f19fef85b1179c8c2e04dc4a2202e4812a502d123010ea7555e4bd0c4248d",
+                    "kind": "probe",
+                    "shape": [
+                      27,
+                      91,
+                      267
+                    ]
+                  },
+                  {
+                    "key_sha256": "a9d45cdf02f579c21fd26cc379fbb39526d4fc966ad09bfebe4438196feac2de",
+                    "kind": "probe",
+                    "shape": [
+                      26,
+                      87,
+                      256
+                    ]
+                  },
+                  {
+                    "key_sha256": "0ec19a8178e30f57162aef76245e2963bf57a16bfb7ee876dfbf842e31cc594c",
+                    "kind": "probe",
+                    "shape": [
+                      25,
+                      79,
+                      231
+                    ]
+                  },
+                  {
+                    "key_sha256": "b47920ab009a7ed4b6b0e09395b2fc69f8469aed3596bf295aa54385f730fcaf",
+                    "kind": "binary_paths",
+                    "shape": [
+                      24,
+                      77,
+                      227
+                    ]
+                  },
+                  {
+                    "key_sha256": "8fed972e4d01efa1df34ed3b447d3971020a94c03abda1484b0e0eedac77c48d",
+                    "kind": "eliminate",
+                    "shape": [
+                      24,
+                      73,
+                      214
+                    ]
+                  },
+                  {
+                    "key_sha256": "9dc9dc78530efeed39ca4a4874d2a13415a459cf261308b5b84cd7daec53c1f2",
+                    "kind": "binary_paths",
+                    "shape": [
+                      23,
+                      69,
+                      208
+                    ]
+                  },
+                  {
+                    "key_sha256": "4e15646ec297cb4aa49418f60681c69a15556b5d06d198485148c26edaed9552",
+                    "kind": "eliminate",
+                    "shape": [
+                      23,
+                      68,
+                      203
+                    ]
+                  },
+                  {
+                    "key_sha256": "3fcbdd6519a9c0288a09d49de36d900b3d6ed17c0a378cb7c48c31e7e7972f3e",
+                    "kind": "eliminate",
+                    "shape": [
+                      22,
+                      67,
+                      201
+                    ]
+                  },
+                  {
+                    "key_sha256": "86e25cbc28b1f36b46cb3ae9608e76c3d7569ca2450415109ddc3158edb3c4bc",
+                    "kind": "binary_paths",
+                    "shape": [
+                      21,
+                      67,
+                      205
+                    ]
+                  },
+                  {
+                    "key_sha256": "e39eae855fb6760e599f507d16c31f40f26433d4c10ad7e4a2080718056a9a51",
+                    "kind": "eliminate",
+                    "shape": [
+                      21,
+                      66,
+                      202
+                    ]
+                  },
+                  {
+                    "key_sha256": "724e29557e867f3aa9954f3c1f3d7b22a134ba0751d3a2e5cba4bd5ce58491a6",
+                    "kind": "eliminate",
+                    "shape": [
+                      20,
+                      66,
+                      209
+                    ]
+                  },
+                  {
+                    "key_sha256": "82fb660a1c1f6c06afdbb84439fb4ce412a1f3cf82bc7b2603a7a9be46c243d0",
+                    "kind": "binary_paths",
+                    "shape": [
+                      19,
+                      67,
+                      218
+                    ]
+                  },
+                  {
+                    "key_sha256": "a72d82997294ecebc86e20f1c9eab91abf79012f0fe8e4392f1e4df289226231",
+                    "kind": "unresolved",
+                    "shape": [
+                      19,
+                      66,
+                      214
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "5124e2d5f451e42b274ed6886d29676c94f89e27bb3054f77b530f2f3091a3a4",
+              "target_shape": [
+                30,
+                111,
+                330
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "1fab57607093cb833cc8fa0f21d88c2e7e9eb094dac7cdd416e8a786e3fcf056",
+          "source_shape": [
+            33,
+            130,
+            400
+          ],
+          "variable": 18
+        },
+        {
+          "branches": [
+            {
+              "closed": true,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "recognized",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "excluded",
+                  "two_cnf": "excluded",
+                  "zero_valid": "recognized"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "f942c887340c180fff010f2c9597248ab5c91b9341f8bc7f14bb4b7e6f6fa79c",
+                    "kind": "probe",
+                    "shape": [
+                      17,
+                      57,
+                      179
+                    ]
+                  },
+                  {
+                    "key_sha256": "4299e5a5e9789e8a86108509e1e0bb3da372eebedac667c42b06c5d4fc29b9a9",
+                    "kind": "probe",
+                    "shape": [
+                      16,
+                      49,
+                      153
+                    ]
+                  },
+                  {
+                    "key_sha256": "81994e193395e6b8ae0352172a3b9a3286311b66cf93fd9dac252355b990f5f4",
+                    "kind": "binary_paths",
+                    "shape": [
+                      11,
+                      20,
+                      56
+                    ]
+                  },
+                  {
+                    "key_sha256": "dfe324986a0e32e145141cb3003bf0b36ed6bb540e54ebbf18a0c214466bb77a",
+                    "kind": "eliminate",
+                    "shape": [
+                      11,
+                      16,
+                      44
+                    ]
+                  },
+                  {
+                    "key_sha256": "e0d04c5cf2f1b9a9aab951ef351c31a8b90a219161bfc556bfd1efefe6ff10ec",
+                    "kind": "eliminate",
+                    "shape": [
+                      10,
+                      12,
+                      32
+                    ]
+                  },
+                  {
+                    "key_sha256": "d847a64ed4421e7b9b02b56cdedca0342ed86ce8246ab4f7ab3c171031805e1c",
+                    "kind": "eliminate",
+                    "shape": [
+                      9,
+                      9,
+                      22
+                    ]
+                  },
+                  {
+                    "key_sha256": "53cc80275c5de2b07e5783c8640435928e7c944c90eb3e5106b16765593f7939",
+                    "kind": "polarity",
+                    "shape": [
+                      7,
+                      7,
+                      16
+                    ]
+                  },
+                  {
+                    "key_sha256": "f9f0fd96401f870532a90128b0769333c266b15a2713414f95e090abbef76a9c",
+                    "kind": "family",
+                    "shape": [
+                      7,
+                      7,
+                      16
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "f942c887340c180fff010f2c9597248ab5c91b9341f8bc7f14bb4b7e6f6fa79c",
+              "target_shape": [
+                17,
+                57,
+                179
+              ],
+              "value": false
+            },
+            {
+              "closed": true,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "recognized",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "recognized"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "f71d8615c2461ce942c8cec78363a00e137482790d8594cd3449482e8b81b1c7",
+                    "kind": "probe",
+                    "shape": [
+                      13,
+                      31,
+                      89
+                    ]
+                  },
+                  {
+                    "key_sha256": "859385b8b90622e9a1845676ca26029c274637fca56e4cc89e05305b75226a7e",
+                    "kind": "probe",
+                    "shape": [
+                      11,
+                      23,
+                      63
+                    ]
+                  },
+                  {
+                    "key_sha256": "936cfde4a1952c285d86d5e4d9f90d1f32842d9627c367889b86fe944b4883b4",
+                    "kind": "probe",
+                    "shape": [
+                      10,
+                      20,
+                      56
+                    ]
+                  },
+                  {
+                    "key_sha256": "f920af5684ca66c29fd378ab14891faa58a7326ed8eb73fc56c7f1ca7a1078e5",
+                    "kind": "binary_paths",
+                    "shape": [
+                      9,
+                      17,
+                      43
+                    ]
+                  },
+                  {
+                    "key_sha256": "993274727414d55108e7e438392a476179541ea093c7d318af4703c603d5a9cb",
+                    "kind": "polarity",
+                    "shape": [
+                      9,
+                      15,
+                      37
+                    ]
+                  },
+                  {
+                    "key_sha256": "7214202a57535a4d341bd33fd349ba57164efd25f9ce3fe58118bf558a62e596",
+                    "kind": "family",
+                    "shape": [
+                      9,
+                      15,
+                      37
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "f71d8615c2461ce942c8cec78363a00e137482790d8594cd3449482e8b81b1c7",
+              "target_shape": [
+                13,
+                31,
+                89
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "a72d82997294ecebc86e20f1c9eab91abf79012f0fe8e4392f1e4df289226231",
+          "source_shape": [
+            19,
+            66,
+            214
+          ],
+          "variable": 3
+        }
+      ],
+      "unfinished": 0
+    },
+    {
+      "admitted": 32,
+      "closed": false,
+      "cold_selection_matches": true,
+      "completed": 32,
+      "idempotent": true,
+      "mode": "pending",
+      "prefix_replay": {
+        "replay_seconds": 14.965613584034145,
+        "steps": [
+          {
+            "admitted": 6,
+            "closed": false,
+            "complete_catalog_equal": true,
+            "inserted_rows": 6,
+            "mode": "full_rebuild",
+            "next_selection_equal": true,
+            "step": 0,
+            "stored_new_patterns": 6
+          },
+          {
+            "admitted": 29,
+            "closed": false,
+            "complete_catalog_equal": true,
+            "inserted_rows": 23,
+            "mode": "full_rebuild",
+            "next_selection_equal": true,
+            "step": 1,
+            "stored_new_patterns": 29
+          },
+          {
+            "admitted": 32,
+            "closed": false,
+            "complete_catalog_equal": true,
+            "inserted_rows": 3,
+            "mode": "full_rebuild",
+            "next_selection_equal": true,
+            "step": 2,
+            "stored_new_patterns": 32
+          }
+        ]
+      },
+      "repeat": 0,
+      "scenario": "current",
+      "splits": [
+        {
+          "branches": [
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "21f394b04cae2118e1192ead659d4b6678657297364a47c052ea3218bc424b22",
+                    "kind": "probe",
+                    "shape": [
+                      37,
+                      150,
+                      450
+                    ]
+                  },
+                  {
+                    "key_sha256": "cc0b770341ff7531ccdeb1be0fa6494749eb6edec84c8fcf8c7ba7a70d670e1f",
+                    "kind": "binary_paths",
+                    "shape": [
+                      36,
+                      147,
+                      443
+                    ]
+                  },
+                  {
+                    "key_sha256": "e1cbca2079165713c5e3f147e52019e180bc476521cddf2e0383ed46130b153a",
+                    "kind": "unresolved",
+                    "shape": [
+                      36,
+                      144,
+                      434
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "21f394b04cae2118e1192ead659d4b6678657297364a47c052ea3218bc424b22",
+              "target_shape": [
+                37,
+                150,
+                450
+              ],
+              "value": false
+            },
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "60524317913aef324972c6f865460c61bc1ca310367bb52ea99a71f96deabba1",
+                    "kind": "binary_paths",
+                    "shape": [
+                      37,
+                      147,
+                      446
+                    ]
+                  },
+                  {
+                    "key_sha256": "3953d80608b810ee77f60e933a4ae2dff66418ed22ff0f8fda93e3e12f0fbb75",
+                    "kind": "eliminate",
+                    "shape": [
+                      37,
+                      146,
+                      443
+                    ]
+                  },
+                  {
+                    "key_sha256": "ff8095bb31c2febd659e01bf6f08a7d576c72c8837c8fe89e2742edca3172678",
+                    "kind": "eliminate",
+                    "shape": [
+                      36,
+                      147,
+                      453
+                    ]
+                  },
+                  {
+                    "key_sha256": "a9822c8e4a509ee89f27c70c84eeebe979ded84bab451e69f0c1b521a47c7bcd",
+                    "kind": "unresolved",
+                    "shape": [
+                      35,
+                      149,
+                      466
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "60524317913aef324972c6f865460c61bc1ca310367bb52ea99a71f96deabba1",
+              "target_shape": [
+                37,
+                147,
+                446
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "29551a29a8a1c50832e68510339ee6866b7079d536eb016cf977a9a0e547c818",
+          "source_shape": [
+            39,
+            161,
+            495
+          ],
+          "variable": 25
+        },
+        {
+          "branches": [
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "7bcd9ddd8574ca62720362ddec4a032236762f74cfd64036006ac8535dcef5f0",
+                    "kind": "binary_paths",
+                    "shape": [
+                      34,
+                      145,
+                      446
+                    ]
+                  },
+                  {
+                    "key_sha256": "26f134186dbdd90745599fa2d41308823b8c08b752f19d5f53124ffd4ecd73f1",
+                    "kind": "unresolved",
+                    "shape": [
+                      34,
+                      143,
+                      440
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "7bcd9ddd8574ca62720362ddec4a032236762f74cfd64036006ac8535dcef5f0",
+              "target_shape": [
+                34,
+                145,
+                446
+              ],
+              "value": false
+            },
+            {
+              "closed": true,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "recognized",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "excluded",
+                  "two_cnf": "excluded",
+                  "zero_valid": "recognized"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "3603586607b9c339445312128822edc79667262526a3395400134ba6e093c1ef",
+                    "kind": "probe",
+                    "shape": [
+                      32,
+                      120,
+                      354
+                    ]
+                  },
+                  {
+                    "key_sha256": "276ebf318e976a10df3949ca96e3e8358923d3624b546c7ddae2cffd7dd371dc",
+                    "kind": "probe",
+                    "shape": [
+                      31,
+                      113,
+                      334
+                    ]
+                  },
+                  {
+                    "key_sha256": "0cbbb0a9c48a3cdbebf9ea2b784ee5d1aea4241071e5302a149765bd449e57a0",
+                    "kind": "probe",
+                    "shape": [
+                      30,
+                      104,
+                      301
+                    ]
+                  },
+                  {
+                    "key_sha256": "f7f17b5eeef1bee5320967a8977265c8d50d2be00c30398603df124d68e75a40",
+                    "kind": "probe",
+                    "shape": [
+                      28,
+                      86,
+                      245
+                    ]
+                  },
+                  {
+                    "key_sha256": "039aea3fcd3fc694e59e3771b8b9f7e1d1aec7a95adfd73d988da23a51a0483a",
+                    "kind": "probe",
+                    "shape": [
+                      26,
+                      79,
+                      225
+                    ]
+                  },
+                  {
+                    "key_sha256": "3ca85f58b396672e422fd9f8620b406b83f0cd8db6a504d98dd49a63136e2711",
+                    "kind": "probe",
+                    "shape": [
+                      25,
+                      73,
+                      205
+                    ]
+                  },
+                  {
+                    "key_sha256": "af09dc603809bd181e52e31a61b038abc973e5b6bf5eecd7cff5378cf18dec9f",
+                    "kind": "probe",
+                    "shape": [
+                      24,
+                      68,
+                      191
+                    ]
+                  },
+                  {
+                    "key_sha256": "cac8ea97aeae873ac7e494c6fb6f414800cf9d3fe3ec69ab3b40963838105976",
+                    "kind": "binary_paths",
+                    "shape": [
+                      23,
+                      56,
+                      148
+                    ]
+                  },
+                  {
+                    "key_sha256": "d5bc82abdda5635d73f2f5da21cf0cfd3803bb2f0de04d8044debeef3be3db83",
+                    "kind": "eliminate",
+                    "shape": [
+                      23,
+                      53,
+                      139
+                    ]
+                  },
+                  {
+                    "key_sha256": "03b32c56c65726744bdf8e11b7098bc20805f990af088a341705b9eaf0445135",
+                    "kind": "eliminate",
+                    "shape": [
+                      22,
+                      49,
+                      128
+                    ]
+                  },
+                  {
+                    "key_sha256": "0d2348e8ad5fdf858267d5533a1fcea7ea3d255b1d9fbd2895f3ad094e7bdcb1",
+                    "kind": "eliminate",
+                    "shape": [
+                      21,
+                      46,
+                      121
+                    ]
+                  },
+                  {
+                    "key_sha256": "779549489872a935b16e69d19f9fc8e37f1fb3d2a864da154eefc68245dcca4b",
+                    "kind": "eliminate",
+                    "shape": [
+                      20,
+                      44,
+                      116
+                    ]
+                  },
+                  {
+                    "key_sha256": "f114967b474d0ad1c430c9b14686113f74e60b71e4cf78c996844f80818d92c8",
+                    "kind": "eliminate",
+                    "shape": [
+                      19,
+                      43,
+                      114
+                    ]
+                  },
+                  {
+                    "key_sha256": "7117617b2d39d605eddee228696c7e045bb4ca6b670176c2097a4f627d66d9d8",
+                    "kind": "eliminate",
+                    "shape": [
+                      18,
+                      42,
+                      112
+                    ]
+                  },
+                  {
+                    "key_sha256": "a6f19f4f98c400a8765b4647522aee885ebc6c012a6cc1834e85a3af5bcea04a",
+                    "kind": "probe",
+                    "shape": [
+                      17,
+                      41,
+                      110
+                    ]
+                  },
+                  {
+                    "key_sha256": "eaed2c393e6f008ae427b07a0114c883f63745324dad233fd8c0591111229410",
+                    "kind": "probe",
+                    "shape": [
+                      16,
+                      36,
+                      93
+                    ]
+                  },
+                  {
+                    "key_sha256": "a63f7100560bb234c53aca3f28348626e53460ed355fd3b3852bd22b691ce4f1",
+                    "kind": "probe",
+                    "shape": [
+                      14,
+                      28,
+                      69
+                    ]
+                  },
+                  {
+                    "key_sha256": "5a6c72700de2cd2e72e1c7d339f997bbbde4dfe9b5497aab0a12988fd64f939a",
+                    "kind": "probe",
+                    "shape": [
+                      10,
+                      15,
+                      33
+                    ]
+                  },
+                  {
+                    "key_sha256": "676cbe3f317cab6070cc26854f170246806390a601df6b40fe22819622744b7b",
+                    "kind": "probe",
+                    "shape": [
+                      9,
+                      12,
+                      25
+                    ]
+                  },
+                  {
+                    "key_sha256": "386bfb26f14c444bb4e3426740babcad91bc4c8074cb482758a0f116e854be0f",
+                    "kind": "polarity",
+                    "shape": [
+                      7,
+                      9,
+                      19
+                    ]
+                  },
+                  {
+                    "key_sha256": "d326df45274f8f1f785897d0b10747e6a26b950902233dfc82cc08edc978e5ed",
+                    "kind": "family",
+                    "shape": [
+                      7,
+                      9,
+                      19
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "3603586607b9c339445312128822edc79667262526a3395400134ba6e093c1ef",
+              "target_shape": [
+                32,
+                120,
+                354
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "a9822c8e4a509ee89f27c70c84eeebe979ded84bab451e69f0c1b521a47c7bcd",
+          "source_shape": [
+            35,
+            149,
+            466
+          ],
+          "variable": 8
+        },
+        {
+          "branches": [
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "88d5cc84211a78098a60602582048188726044e0c4848bc54921489c70991320",
+                    "kind": "binary_paths",
+                    "shape": [
+                      32,
+                      124,
+                      375
+                    ]
+                  },
+                  {
+                    "key_sha256": "1adbc45e054b40459d4aaeb8cf64d7f06527ae803508cc7656ad86f85c859075",
+                    "kind": "eliminate",
+                    "shape": [
+                      32,
+                      123,
+                      372
+                    ]
+                  },
+                  {
+                    "key_sha256": "09831bee0e0295f91c4d21b79ffe25508d3dad8b48e5052b4bfde74367574914",
+                    "kind": "unresolved",
+                    "shape": [
+                      31,
+                      122,
+                      370
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "88d5cc84211a78098a60602582048188726044e0c4848bc54921489c70991320",
+              "target_shape": [
+                32,
+                124,
+                375
+              ],
+              "value": false
+            },
+            {
+              "closed": false,
+              "prefix": {
+                "missing_sha256": "72697c710335660e1dc9c934e995f7c37577a9226c546fd7233d4e3685cb3615",
+                "nodes": []
+              },
+              "reference_answer": true,
+              "target_sha256": "72697c710335660e1dc9c934e995f7c37577a9226c546fd7233d4e3685cb3615",
+              "target_shape": [
+                32,
+                136,
+                405
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "26f134186dbdd90745599fa2d41308823b8c08b752f19d5f53124ffd4ecd73f1",
+          "source_shape": [
+            34,
+            143,
+            440
+          ],
+          "variable": 5
+        }
+      ],
+      "unfinished": 0
+    },
+    {
+      "admitted": 32,
+      "closed": false,
+      "cold_selection_matches": true,
+      "completed": 32,
+      "idempotent": true,
+      "mode": "activation",
+      "prefix_replay": {
+        "replay_seconds": 11.491766165941954,
+        "steps": [
+          {
+            "admitted": 6,
+            "closed": false,
+            "complete_catalog_equal": true,
+            "inserted_rows": 6,
+            "mode": "pattern_activation",
+            "next_selection_equal": true,
+            "step": 0,
+            "stored_new_patterns": 6
+          },
+          {
+            "admitted": 29,
+            "closed": false,
+            "complete_catalog_equal": true,
+            "inserted_rows": 23,
+            "mode": "pattern_activation",
+            "next_selection_equal": true,
+            "step": 1,
+            "stored_new_patterns": 29
+          },
+          {
+            "admitted": 32,
+            "closed": false,
+            "complete_catalog_equal": true,
+            "inserted_rows": 3,
+            "mode": "pattern_activation",
+            "next_selection_equal": true,
+            "step": 2,
+            "stored_new_patterns": 32
+          }
+        ]
+      },
+      "repeat": 0,
+      "scenario": "current",
+      "splits": [
+        {
+          "branches": [
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "21f394b04cae2118e1192ead659d4b6678657297364a47c052ea3218bc424b22",
+                    "kind": "probe",
+                    "shape": [
+                      37,
+                      150,
+                      450
+                    ]
+                  },
+                  {
+                    "key_sha256": "cc0b770341ff7531ccdeb1be0fa6494749eb6edec84c8fcf8c7ba7a70d670e1f",
+                    "kind": "binary_paths",
+                    "shape": [
+                      36,
+                      147,
+                      443
+                    ]
+                  },
+                  {
+                    "key_sha256": "e1cbca2079165713c5e3f147e52019e180bc476521cddf2e0383ed46130b153a",
+                    "kind": "unresolved",
+                    "shape": [
+                      36,
+                      144,
+                      434
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "21f394b04cae2118e1192ead659d4b6678657297364a47c052ea3218bc424b22",
+              "target_shape": [
+                37,
+                150,
+                450
+              ],
+              "value": false
+            },
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "60524317913aef324972c6f865460c61bc1ca310367bb52ea99a71f96deabba1",
+                    "kind": "binary_paths",
+                    "shape": [
+                      37,
+                      147,
+                      446
+                    ]
+                  },
+                  {
+                    "key_sha256": "3953d80608b810ee77f60e933a4ae2dff66418ed22ff0f8fda93e3e12f0fbb75",
+                    "kind": "eliminate",
+                    "shape": [
+                      37,
+                      146,
+                      443
+                    ]
+                  },
+                  {
+                    "key_sha256": "ff8095bb31c2febd659e01bf6f08a7d576c72c8837c8fe89e2742edca3172678",
+                    "kind": "eliminate",
+                    "shape": [
+                      36,
+                      147,
+                      453
+                    ]
+                  },
+                  {
+                    "key_sha256": "a9822c8e4a509ee89f27c70c84eeebe979ded84bab451e69f0c1b521a47c7bcd",
+                    "kind": "unresolved",
+                    "shape": [
+                      35,
+                      149,
+                      466
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "60524317913aef324972c6f865460c61bc1ca310367bb52ea99a71f96deabba1",
+              "target_shape": [
+                37,
+                147,
+                446
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "29551a29a8a1c50832e68510339ee6866b7079d536eb016cf977a9a0e547c818",
+          "source_shape": [
+            39,
+            161,
+            495
+          ],
+          "variable": 25
+        },
+        {
+          "branches": [
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "7bcd9ddd8574ca62720362ddec4a032236762f74cfd64036006ac8535dcef5f0",
+                    "kind": "binary_paths",
+                    "shape": [
+                      34,
+                      145,
+                      446
+                    ]
+                  },
+                  {
+                    "key_sha256": "26f134186dbdd90745599fa2d41308823b8c08b752f19d5f53124ffd4ecd73f1",
+                    "kind": "unresolved",
+                    "shape": [
+                      34,
+                      143,
+                      440
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "7bcd9ddd8574ca62720362ddec4a032236762f74cfd64036006ac8535dcef5f0",
+              "target_shape": [
+                34,
+                145,
+                446
+              ],
+              "value": false
+            },
+            {
+              "closed": true,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "recognized",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "excluded",
+                  "two_cnf": "excluded",
+                  "zero_valid": "recognized"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "3603586607b9c339445312128822edc79667262526a3395400134ba6e093c1ef",
+                    "kind": "probe",
+                    "shape": [
+                      32,
+                      120,
+                      354
+                    ]
+                  },
+                  {
+                    "key_sha256": "276ebf318e976a10df3949ca96e3e8358923d3624b546c7ddae2cffd7dd371dc",
+                    "kind": "probe",
+                    "shape": [
+                      31,
+                      113,
+                      334
+                    ]
+                  },
+                  {
+                    "key_sha256": "0cbbb0a9c48a3cdbebf9ea2b784ee5d1aea4241071e5302a149765bd449e57a0",
+                    "kind": "probe",
+                    "shape": [
+                      30,
+                      104,
+                      301
+                    ]
+                  },
+                  {
+                    "key_sha256": "f7f17b5eeef1bee5320967a8977265c8d50d2be00c30398603df124d68e75a40",
+                    "kind": "probe",
+                    "shape": [
+                      28,
+                      86,
+                      245
+                    ]
+                  },
+                  {
+                    "key_sha256": "039aea3fcd3fc694e59e3771b8b9f7e1d1aec7a95adfd73d988da23a51a0483a",
+                    "kind": "probe",
+                    "shape": [
+                      26,
+                      79,
+                      225
+                    ]
+                  },
+                  {
+                    "key_sha256": "3ca85f58b396672e422fd9f8620b406b83f0cd8db6a504d98dd49a63136e2711",
+                    "kind": "probe",
+                    "shape": [
+                      25,
+                      73,
+                      205
+                    ]
+                  },
+                  {
+                    "key_sha256": "af09dc603809bd181e52e31a61b038abc973e5b6bf5eecd7cff5378cf18dec9f",
+                    "kind": "probe",
+                    "shape": [
+                      24,
+                      68,
+                      191
+                    ]
+                  },
+                  {
+                    "key_sha256": "cac8ea97aeae873ac7e494c6fb6f414800cf9d3fe3ec69ab3b40963838105976",
+                    "kind": "binary_paths",
+                    "shape": [
+                      23,
+                      56,
+                      148
+                    ]
+                  },
+                  {
+                    "key_sha256": "d5bc82abdda5635d73f2f5da21cf0cfd3803bb2f0de04d8044debeef3be3db83",
+                    "kind": "eliminate",
+                    "shape": [
+                      23,
+                      53,
+                      139
+                    ]
+                  },
+                  {
+                    "key_sha256": "03b32c56c65726744bdf8e11b7098bc20805f990af088a341705b9eaf0445135",
+                    "kind": "eliminate",
+                    "shape": [
+                      22,
+                      49,
+                      128
+                    ]
+                  },
+                  {
+                    "key_sha256": "0d2348e8ad5fdf858267d5533a1fcea7ea3d255b1d9fbd2895f3ad094e7bdcb1",
+                    "kind": "eliminate",
+                    "shape": [
+                      21,
+                      46,
+                      121
+                    ]
+                  },
+                  {
+                    "key_sha256": "779549489872a935b16e69d19f9fc8e37f1fb3d2a864da154eefc68245dcca4b",
+                    "kind": "eliminate",
+                    "shape": [
+                      20,
+                      44,
+                      116
+                    ]
+                  },
+                  {
+                    "key_sha256": "f114967b474d0ad1c430c9b14686113f74e60b71e4cf78c996844f80818d92c8",
+                    "kind": "eliminate",
+                    "shape": [
+                      19,
+                      43,
+                      114
+                    ]
+                  },
+                  {
+                    "key_sha256": "7117617b2d39d605eddee228696c7e045bb4ca6b670176c2097a4f627d66d9d8",
+                    "kind": "eliminate",
+                    "shape": [
+                      18,
+                      42,
+                      112
+                    ]
+                  },
+                  {
+                    "key_sha256": "a6f19f4f98c400a8765b4647522aee885ebc6c012a6cc1834e85a3af5bcea04a",
+                    "kind": "probe",
+                    "shape": [
+                      17,
+                      41,
+                      110
+                    ]
+                  },
+                  {
+                    "key_sha256": "eaed2c393e6f008ae427b07a0114c883f63745324dad233fd8c0591111229410",
+                    "kind": "probe",
+                    "shape": [
+                      16,
+                      36,
+                      93
+                    ]
+                  },
+                  {
+                    "key_sha256": "a63f7100560bb234c53aca3f28348626e53460ed355fd3b3852bd22b691ce4f1",
+                    "kind": "probe",
+                    "shape": [
+                      14,
+                      28,
+                      69
+                    ]
+                  },
+                  {
+                    "key_sha256": "5a6c72700de2cd2e72e1c7d339f997bbbde4dfe9b5497aab0a12988fd64f939a",
+                    "kind": "probe",
+                    "shape": [
+                      10,
+                      15,
+                      33
+                    ]
+                  },
+                  {
+                    "key_sha256": "676cbe3f317cab6070cc26854f170246806390a601df6b40fe22819622744b7b",
+                    "kind": "probe",
+                    "shape": [
+                      9,
+                      12,
+                      25
+                    ]
+                  },
+                  {
+                    "key_sha256": "386bfb26f14c444bb4e3426740babcad91bc4c8074cb482758a0f116e854be0f",
+                    "kind": "polarity",
+                    "shape": [
+                      7,
+                      9,
+                      19
+                    ]
+                  },
+                  {
+                    "key_sha256": "d326df45274f8f1f785897d0b10747e6a26b950902233dfc82cc08edc978e5ed",
+                    "kind": "family",
+                    "shape": [
+                      7,
+                      9,
+                      19
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "3603586607b9c339445312128822edc79667262526a3395400134ba6e093c1ef",
+              "target_shape": [
+                32,
+                120,
+                354
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "a9822c8e4a509ee89f27c70c84eeebe979ded84bab451e69f0c1b521a47c7bcd",
+          "source_shape": [
+            35,
+            149,
+            466
+          ],
+          "variable": 8
+        },
+        {
+          "branches": [
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "88d5cc84211a78098a60602582048188726044e0c4848bc54921489c70991320",
+                    "kind": "binary_paths",
+                    "shape": [
+                      32,
+                      124,
+                      375
+                    ]
+                  },
+                  {
+                    "key_sha256": "1adbc45e054b40459d4aaeb8cf64d7f06527ae803508cc7656ad86f85c859075",
+                    "kind": "eliminate",
+                    "shape": [
+                      32,
+                      123,
+                      372
+                    ]
+                  },
+                  {
+                    "key_sha256": "09831bee0e0295f91c4d21b79ffe25508d3dad8b48e5052b4bfde74367574914",
+                    "kind": "unresolved",
+                    "shape": [
+                      31,
+                      122,
+                      370
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "88d5cc84211a78098a60602582048188726044e0c4848bc54921489c70991320",
+              "target_shape": [
+                32,
+                124,
+                375
+              ],
+              "value": false
+            },
+            {
+              "closed": false,
+              "prefix": {
+                "missing_sha256": "72697c710335660e1dc9c934e995f7c37577a9226c546fd7233d4e3685cb3615",
+                "nodes": []
+              },
+              "reference_answer": true,
+              "target_sha256": "72697c710335660e1dc9c934e995f7c37577a9226c546fd7233d4e3685cb3615",
+              "target_shape": [
+                32,
+                136,
+                405
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "26f134186dbdd90745599fa2d41308823b8c08b752f19d5f53124ffd4ecd73f1",
+          "source_shape": [
+            34,
+            143,
+            440
+          ],
+          "variable": 5
+        }
+      ],
+      "unfinished": 0
+    },
+    {
+      "admitted": 32,
+      "closed": false,
+      "cold_selection_matches": true,
+      "completed": 32,
+      "idempotent": true,
+      "mode": "activation",
+      "repeat": 1,
+      "scenario": "current",
+      "splits": [
+        {
+          "branches": [
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "21f394b04cae2118e1192ead659d4b6678657297364a47c052ea3218bc424b22",
+                    "kind": "probe",
+                    "shape": [
+                      37,
+                      150,
+                      450
+                    ]
+                  },
+                  {
+                    "key_sha256": "cc0b770341ff7531ccdeb1be0fa6494749eb6edec84c8fcf8c7ba7a70d670e1f",
+                    "kind": "binary_paths",
+                    "shape": [
+                      36,
+                      147,
+                      443
+                    ]
+                  },
+                  {
+                    "key_sha256": "e1cbca2079165713c5e3f147e52019e180bc476521cddf2e0383ed46130b153a",
+                    "kind": "unresolved",
+                    "shape": [
+                      36,
+                      144,
+                      434
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "21f394b04cae2118e1192ead659d4b6678657297364a47c052ea3218bc424b22",
+              "target_shape": [
+                37,
+                150,
+                450
+              ],
+              "value": false
+            },
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "60524317913aef324972c6f865460c61bc1ca310367bb52ea99a71f96deabba1",
+                    "kind": "binary_paths",
+                    "shape": [
+                      37,
+                      147,
+                      446
+                    ]
+                  },
+                  {
+                    "key_sha256": "3953d80608b810ee77f60e933a4ae2dff66418ed22ff0f8fda93e3e12f0fbb75",
+                    "kind": "eliminate",
+                    "shape": [
+                      37,
+                      146,
+                      443
+                    ]
+                  },
+                  {
+                    "key_sha256": "ff8095bb31c2febd659e01bf6f08a7d576c72c8837c8fe89e2742edca3172678",
+                    "kind": "eliminate",
+                    "shape": [
+                      36,
+                      147,
+                      453
+                    ]
+                  },
+                  {
+                    "key_sha256": "a9822c8e4a509ee89f27c70c84eeebe979ded84bab451e69f0c1b521a47c7bcd",
+                    "kind": "unresolved",
+                    "shape": [
+                      35,
+                      149,
+                      466
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "60524317913aef324972c6f865460c61bc1ca310367bb52ea99a71f96deabba1",
+              "target_shape": [
+                37,
+                147,
+                446
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "29551a29a8a1c50832e68510339ee6866b7079d536eb016cf977a9a0e547c818",
+          "source_shape": [
+            39,
+            161,
+            495
+          ],
+          "variable": 25
+        },
+        {
+          "branches": [
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "7bcd9ddd8574ca62720362ddec4a032236762f74cfd64036006ac8535dcef5f0",
+                    "kind": "binary_paths",
+                    "shape": [
+                      34,
+                      145,
+                      446
+                    ]
+                  },
+                  {
+                    "key_sha256": "26f134186dbdd90745599fa2d41308823b8c08b752f19d5f53124ffd4ecd73f1",
+                    "kind": "unresolved",
+                    "shape": [
+                      34,
+                      143,
+                      440
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "7bcd9ddd8574ca62720362ddec4a032236762f74cfd64036006ac8535dcef5f0",
+              "target_shape": [
+                34,
+                145,
+                446
+              ],
+              "value": false
+            },
+            {
+              "closed": true,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "recognized",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "excluded",
+                  "two_cnf": "excluded",
+                  "zero_valid": "recognized"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "3603586607b9c339445312128822edc79667262526a3395400134ba6e093c1ef",
+                    "kind": "probe",
+                    "shape": [
+                      32,
+                      120,
+                      354
+                    ]
+                  },
+                  {
+                    "key_sha256": "276ebf318e976a10df3949ca96e3e8358923d3624b546c7ddae2cffd7dd371dc",
+                    "kind": "probe",
+                    "shape": [
+                      31,
+                      113,
+                      334
+                    ]
+                  },
+                  {
+                    "key_sha256": "0cbbb0a9c48a3cdbebf9ea2b784ee5d1aea4241071e5302a149765bd449e57a0",
+                    "kind": "probe",
+                    "shape": [
+                      30,
+                      104,
+                      301
+                    ]
+                  },
+                  {
+                    "key_sha256": "f7f17b5eeef1bee5320967a8977265c8d50d2be00c30398603df124d68e75a40",
+                    "kind": "probe",
+                    "shape": [
+                      28,
+                      86,
+                      245
+                    ]
+                  },
+                  {
+                    "key_sha256": "039aea3fcd3fc694e59e3771b8b9f7e1d1aec7a95adfd73d988da23a51a0483a",
+                    "kind": "probe",
+                    "shape": [
+                      26,
+                      79,
+                      225
+                    ]
+                  },
+                  {
+                    "key_sha256": "3ca85f58b396672e422fd9f8620b406b83f0cd8db6a504d98dd49a63136e2711",
+                    "kind": "probe",
+                    "shape": [
+                      25,
+                      73,
+                      205
+                    ]
+                  },
+                  {
+                    "key_sha256": "af09dc603809bd181e52e31a61b038abc973e5b6bf5eecd7cff5378cf18dec9f",
+                    "kind": "probe",
+                    "shape": [
+                      24,
+                      68,
+                      191
+                    ]
+                  },
+                  {
+                    "key_sha256": "cac8ea97aeae873ac7e494c6fb6f414800cf9d3fe3ec69ab3b40963838105976",
+                    "kind": "binary_paths",
+                    "shape": [
+                      23,
+                      56,
+                      148
+                    ]
+                  },
+                  {
+                    "key_sha256": "d5bc82abdda5635d73f2f5da21cf0cfd3803bb2f0de04d8044debeef3be3db83",
+                    "kind": "eliminate",
+                    "shape": [
+                      23,
+                      53,
+                      139
+                    ]
+                  },
+                  {
+                    "key_sha256": "03b32c56c65726744bdf8e11b7098bc20805f990af088a341705b9eaf0445135",
+                    "kind": "eliminate",
+                    "shape": [
+                      22,
+                      49,
+                      128
+                    ]
+                  },
+                  {
+                    "key_sha256": "0d2348e8ad5fdf858267d5533a1fcea7ea3d255b1d9fbd2895f3ad094e7bdcb1",
+                    "kind": "eliminate",
+                    "shape": [
+                      21,
+                      46,
+                      121
+                    ]
+                  },
+                  {
+                    "key_sha256": "779549489872a935b16e69d19f9fc8e37f1fb3d2a864da154eefc68245dcca4b",
+                    "kind": "eliminate",
+                    "shape": [
+                      20,
+                      44,
+                      116
+                    ]
+                  },
+                  {
+                    "key_sha256": "f114967b474d0ad1c430c9b14686113f74e60b71e4cf78c996844f80818d92c8",
+                    "kind": "eliminate",
+                    "shape": [
+                      19,
+                      43,
+                      114
+                    ]
+                  },
+                  {
+                    "key_sha256": "7117617b2d39d605eddee228696c7e045bb4ca6b670176c2097a4f627d66d9d8",
+                    "kind": "eliminate",
+                    "shape": [
+                      18,
+                      42,
+                      112
+                    ]
+                  },
+                  {
+                    "key_sha256": "a6f19f4f98c400a8765b4647522aee885ebc6c012a6cc1834e85a3af5bcea04a",
+                    "kind": "probe",
+                    "shape": [
+                      17,
+                      41,
+                      110
+                    ]
+                  },
+                  {
+                    "key_sha256": "eaed2c393e6f008ae427b07a0114c883f63745324dad233fd8c0591111229410",
+                    "kind": "probe",
+                    "shape": [
+                      16,
+                      36,
+                      93
+                    ]
+                  },
+                  {
+                    "key_sha256": "a63f7100560bb234c53aca3f28348626e53460ed355fd3b3852bd22b691ce4f1",
+                    "kind": "probe",
+                    "shape": [
+                      14,
+                      28,
+                      69
+                    ]
+                  },
+                  {
+                    "key_sha256": "5a6c72700de2cd2e72e1c7d339f997bbbde4dfe9b5497aab0a12988fd64f939a",
+                    "kind": "probe",
+                    "shape": [
+                      10,
+                      15,
+                      33
+                    ]
+                  },
+                  {
+                    "key_sha256": "676cbe3f317cab6070cc26854f170246806390a601df6b40fe22819622744b7b",
+                    "kind": "probe",
+                    "shape": [
+                      9,
+                      12,
+                      25
+                    ]
+                  },
+                  {
+                    "key_sha256": "386bfb26f14c444bb4e3426740babcad91bc4c8074cb482758a0f116e854be0f",
+                    "kind": "polarity",
+                    "shape": [
+                      7,
+                      9,
+                      19
+                    ]
+                  },
+                  {
+                    "key_sha256": "d326df45274f8f1f785897d0b10747e6a26b950902233dfc82cc08edc978e5ed",
+                    "kind": "family",
+                    "shape": [
+                      7,
+                      9,
+                      19
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "3603586607b9c339445312128822edc79667262526a3395400134ba6e093c1ef",
+              "target_shape": [
+                32,
+                120,
+                354
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "a9822c8e4a509ee89f27c70c84eeebe979ded84bab451e69f0c1b521a47c7bcd",
+          "source_shape": [
+            35,
+            149,
+            466
+          ],
+          "variable": 8
+        },
+        {
+          "branches": [
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "88d5cc84211a78098a60602582048188726044e0c4848bc54921489c70991320",
+                    "kind": "binary_paths",
+                    "shape": [
+                      32,
+                      124,
+                      375
+                    ]
+                  },
+                  {
+                    "key_sha256": "1adbc45e054b40459d4aaeb8cf64d7f06527ae803508cc7656ad86f85c859075",
+                    "kind": "eliminate",
+                    "shape": [
+                      32,
+                      123,
+                      372
+                    ]
+                  },
+                  {
+                    "key_sha256": "09831bee0e0295f91c4d21b79ffe25508d3dad8b48e5052b4bfde74367574914",
+                    "kind": "unresolved",
+                    "shape": [
+                      31,
+                      122,
+                      370
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "88d5cc84211a78098a60602582048188726044e0c4848bc54921489c70991320",
+              "target_shape": [
+                32,
+                124,
+                375
+              ],
+              "value": false
+            },
+            {
+              "closed": false,
+              "prefix": {
+                "missing_sha256": "72697c710335660e1dc9c934e995f7c37577a9226c546fd7233d4e3685cb3615",
+                "nodes": []
+              },
+              "reference_answer": true,
+              "target_sha256": "72697c710335660e1dc9c934e995f7c37577a9226c546fd7233d4e3685cb3615",
+              "target_shape": [
+                32,
+                136,
+                405
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "26f134186dbdd90745599fa2d41308823b8c08b752f19d5f53124ffd4ecd73f1",
+          "source_shape": [
+            34,
+            143,
+            440
+          ],
+          "variable": 5
+        }
+      ],
+      "unfinished": 0
+    },
+    {
+      "admitted": 32,
+      "closed": false,
+      "cold_selection_matches": true,
+      "completed": 32,
+      "idempotent": true,
+      "mode": "pending",
+      "repeat": 1,
+      "scenario": "current",
+      "splits": [
+        {
+          "branches": [
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "21f394b04cae2118e1192ead659d4b6678657297364a47c052ea3218bc424b22",
+                    "kind": "probe",
+                    "shape": [
+                      37,
+                      150,
+                      450
+                    ]
+                  },
+                  {
+                    "key_sha256": "cc0b770341ff7531ccdeb1be0fa6494749eb6edec84c8fcf8c7ba7a70d670e1f",
+                    "kind": "binary_paths",
+                    "shape": [
+                      36,
+                      147,
+                      443
+                    ]
+                  },
+                  {
+                    "key_sha256": "e1cbca2079165713c5e3f147e52019e180bc476521cddf2e0383ed46130b153a",
+                    "kind": "unresolved",
+                    "shape": [
+                      36,
+                      144,
+                      434
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "21f394b04cae2118e1192ead659d4b6678657297364a47c052ea3218bc424b22",
+              "target_shape": [
+                37,
+                150,
+                450
+              ],
+              "value": false
+            },
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "60524317913aef324972c6f865460c61bc1ca310367bb52ea99a71f96deabba1",
+                    "kind": "binary_paths",
+                    "shape": [
+                      37,
+                      147,
+                      446
+                    ]
+                  },
+                  {
+                    "key_sha256": "3953d80608b810ee77f60e933a4ae2dff66418ed22ff0f8fda93e3e12f0fbb75",
+                    "kind": "eliminate",
+                    "shape": [
+                      37,
+                      146,
+                      443
+                    ]
+                  },
+                  {
+                    "key_sha256": "ff8095bb31c2febd659e01bf6f08a7d576c72c8837c8fe89e2742edca3172678",
+                    "kind": "eliminate",
+                    "shape": [
+                      36,
+                      147,
+                      453
+                    ]
+                  },
+                  {
+                    "key_sha256": "a9822c8e4a509ee89f27c70c84eeebe979ded84bab451e69f0c1b521a47c7bcd",
+                    "kind": "unresolved",
+                    "shape": [
+                      35,
+                      149,
+                      466
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "60524317913aef324972c6f865460c61bc1ca310367bb52ea99a71f96deabba1",
+              "target_shape": [
+                37,
+                147,
+                446
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "29551a29a8a1c50832e68510339ee6866b7079d536eb016cf977a9a0e547c818",
+          "source_shape": [
+            39,
+            161,
+            495
+          ],
+          "variable": 25
+        },
+        {
+          "branches": [
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "7bcd9ddd8574ca62720362ddec4a032236762f74cfd64036006ac8535dcef5f0",
+                    "kind": "binary_paths",
+                    "shape": [
+                      34,
+                      145,
+                      446
+                    ]
+                  },
+                  {
+                    "key_sha256": "26f134186dbdd90745599fa2d41308823b8c08b752f19d5f53124ffd4ecd73f1",
+                    "kind": "unresolved",
+                    "shape": [
+                      34,
+                      143,
+                      440
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "7bcd9ddd8574ca62720362ddec4a032236762f74cfd64036006ac8535dcef5f0",
+              "target_shape": [
+                34,
+                145,
+                446
+              ],
+              "value": false
+            },
+            {
+              "closed": true,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "recognized",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "excluded",
+                  "two_cnf": "excluded",
+                  "zero_valid": "recognized"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "3603586607b9c339445312128822edc79667262526a3395400134ba6e093c1ef",
+                    "kind": "probe",
+                    "shape": [
+                      32,
+                      120,
+                      354
+                    ]
+                  },
+                  {
+                    "key_sha256": "276ebf318e976a10df3949ca96e3e8358923d3624b546c7ddae2cffd7dd371dc",
+                    "kind": "probe",
+                    "shape": [
+                      31,
+                      113,
+                      334
+                    ]
+                  },
+                  {
+                    "key_sha256": "0cbbb0a9c48a3cdbebf9ea2b784ee5d1aea4241071e5302a149765bd449e57a0",
+                    "kind": "probe",
+                    "shape": [
+                      30,
+                      104,
+                      301
+                    ]
+                  },
+                  {
+                    "key_sha256": "f7f17b5eeef1bee5320967a8977265c8d50d2be00c30398603df124d68e75a40",
+                    "kind": "probe",
+                    "shape": [
+                      28,
+                      86,
+                      245
+                    ]
+                  },
+                  {
+                    "key_sha256": "039aea3fcd3fc694e59e3771b8b9f7e1d1aec7a95adfd73d988da23a51a0483a",
+                    "kind": "probe",
+                    "shape": [
+                      26,
+                      79,
+                      225
+                    ]
+                  },
+                  {
+                    "key_sha256": "3ca85f58b396672e422fd9f8620b406b83f0cd8db6a504d98dd49a63136e2711",
+                    "kind": "probe",
+                    "shape": [
+                      25,
+                      73,
+                      205
+                    ]
+                  },
+                  {
+                    "key_sha256": "af09dc603809bd181e52e31a61b038abc973e5b6bf5eecd7cff5378cf18dec9f",
+                    "kind": "probe",
+                    "shape": [
+                      24,
+                      68,
+                      191
+                    ]
+                  },
+                  {
+                    "key_sha256": "cac8ea97aeae873ac7e494c6fb6f414800cf9d3fe3ec69ab3b40963838105976",
+                    "kind": "binary_paths",
+                    "shape": [
+                      23,
+                      56,
+                      148
+                    ]
+                  },
+                  {
+                    "key_sha256": "d5bc82abdda5635d73f2f5da21cf0cfd3803bb2f0de04d8044debeef3be3db83",
+                    "kind": "eliminate",
+                    "shape": [
+                      23,
+                      53,
+                      139
+                    ]
+                  },
+                  {
+                    "key_sha256": "03b32c56c65726744bdf8e11b7098bc20805f990af088a341705b9eaf0445135",
+                    "kind": "eliminate",
+                    "shape": [
+                      22,
+                      49,
+                      128
+                    ]
+                  },
+                  {
+                    "key_sha256": "0d2348e8ad5fdf858267d5533a1fcea7ea3d255b1d9fbd2895f3ad094e7bdcb1",
+                    "kind": "eliminate",
+                    "shape": [
+                      21,
+                      46,
+                      121
+                    ]
+                  },
+                  {
+                    "key_sha256": "779549489872a935b16e69d19f9fc8e37f1fb3d2a864da154eefc68245dcca4b",
+                    "kind": "eliminate",
+                    "shape": [
+                      20,
+                      44,
+                      116
+                    ]
+                  },
+                  {
+                    "key_sha256": "f114967b474d0ad1c430c9b14686113f74e60b71e4cf78c996844f80818d92c8",
+                    "kind": "eliminate",
+                    "shape": [
+                      19,
+                      43,
+                      114
+                    ]
+                  },
+                  {
+                    "key_sha256": "7117617b2d39d605eddee228696c7e045bb4ca6b670176c2097a4f627d66d9d8",
+                    "kind": "eliminate",
+                    "shape": [
+                      18,
+                      42,
+                      112
+                    ]
+                  },
+                  {
+                    "key_sha256": "a6f19f4f98c400a8765b4647522aee885ebc6c012a6cc1834e85a3af5bcea04a",
+                    "kind": "probe",
+                    "shape": [
+                      17,
+                      41,
+                      110
+                    ]
+                  },
+                  {
+                    "key_sha256": "eaed2c393e6f008ae427b07a0114c883f63745324dad233fd8c0591111229410",
+                    "kind": "probe",
+                    "shape": [
+                      16,
+                      36,
+                      93
+                    ]
+                  },
+                  {
+                    "key_sha256": "a63f7100560bb234c53aca3f28348626e53460ed355fd3b3852bd22b691ce4f1",
+                    "kind": "probe",
+                    "shape": [
+                      14,
+                      28,
+                      69
+                    ]
+                  },
+                  {
+                    "key_sha256": "5a6c72700de2cd2e72e1c7d339f997bbbde4dfe9b5497aab0a12988fd64f939a",
+                    "kind": "probe",
+                    "shape": [
+                      10,
+                      15,
+                      33
+                    ]
+                  },
+                  {
+                    "key_sha256": "676cbe3f317cab6070cc26854f170246806390a601df6b40fe22819622744b7b",
+                    "kind": "probe",
+                    "shape": [
+                      9,
+                      12,
+                      25
+                    ]
+                  },
+                  {
+                    "key_sha256": "386bfb26f14c444bb4e3426740babcad91bc4c8074cb482758a0f116e854be0f",
+                    "kind": "polarity",
+                    "shape": [
+                      7,
+                      9,
+                      19
+                    ]
+                  },
+                  {
+                    "key_sha256": "d326df45274f8f1f785897d0b10747e6a26b950902233dfc82cc08edc978e5ed",
+                    "kind": "family",
+                    "shape": [
+                      7,
+                      9,
+                      19
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "3603586607b9c339445312128822edc79667262526a3395400134ba6e093c1ef",
+              "target_shape": [
+                32,
+                120,
+                354
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "a9822c8e4a509ee89f27c70c84eeebe979ded84bab451e69f0c1b521a47c7bcd",
+          "source_shape": [
+            35,
+            149,
+            466
+          ],
+          "variable": 8
+        },
+        {
+          "branches": [
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "key_sha256": "88d5cc84211a78098a60602582048188726044e0c4848bc54921489c70991320",
+                    "kind": "binary_paths",
+                    "shape": [
+                      32,
+                      124,
+                      375
+                    ]
+                  },
+                  {
+                    "key_sha256": "1adbc45e054b40459d4aaeb8cf64d7f06527ae803508cc7656ad86f85c859075",
+                    "kind": "eliminate",
+                    "shape": [
+                      32,
+                      123,
+                      372
+                    ]
+                  },
+                  {
+                    "key_sha256": "09831bee0e0295f91c4d21b79ffe25508d3dad8b48e5052b4bfde74367574914",
+                    "kind": "unresolved",
+                    "shape": [
+                      31,
+                      122,
+                      370
+                    ]
+                  }
+                ]
+              },
+              "reference_answer": true,
+              "target_sha256": "88d5cc84211a78098a60602582048188726044e0c4848bc54921489c70991320",
+              "target_shape": [
+                32,
+                124,
+                375
+              ],
+              "value": false
+            },
+            {
+              "closed": false,
+              "prefix": {
+                "missing_sha256": "72697c710335660e1dc9c934e995f7c37577a9226c546fd7233d4e3685cb3615",
+                "nodes": []
+              },
+              "reference_answer": true,
+              "target_sha256": "72697c710335660e1dc9c934e995f7c37577a9226c546fd7233d4e3685cb3615",
+              "target_shape": [
+                32,
+                136,
+                405
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "26f134186dbdd90745599fa2d41308823b8c08b752f19d5f53124ffd4ecd73f1",
+          "source_shape": [
+            34,
+            143,
+            440
+          ],
+          "variable": 5
+        }
+      ],
+      "unfinished": 0
+    }
+  ]
+}

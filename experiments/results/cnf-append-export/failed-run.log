@@ -1,0 +1,14 @@
+{"arm": "resume-0-full", "step": 0, "shape": [31, 122, 370], "mode": "resume_split", "admitted": 21, "closed": false, "pending": false}
+{"arm": "resume-0-full", "step": 1, "shape": [24, 88, 274], "mode": "early_saved_split", "admitted": 32, "closed": false, "pending": true}
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_append_export.py", line 230, in <module>
+    run(Path(sys.argv[1]))
+    ~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_append_export.py", line 169, in run
+    arm = worker(out/name, tmp/name, seed, parent, base_evidence, bridges, root, 'activation', 'resume', export_mode)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_append_export.py", line 75, in worker
+    tick=time.perf_counter();boundary=AppendDelta(h.db) if export_mode=='append' else None
+                                      ~~~~~~~~~~~^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_append_delta.py", line 23, in __init__
+    raise ValueError('Unsupported export tables')
+ValueError: Unsupported export tables

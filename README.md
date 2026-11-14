@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Exporting only appended evidence](research/append-delta-export.md) reduces
+mean complete-worker time **24.34%**, from **13.11 to 9.92 seconds**, with
+identical search and delta bytes on the matched bounded expansion. It adds
+**21 patterns** and reaches a conditional all-true terminal outside Horn,
+dual-Horn and 2-CNF. Coverage stays **66/83**; both targets of the next split
+remain pending. Checked startup now dominates warm cost; storage is unchanged
+between export methods.
+
 [Continuing the conditional frontier](research/conditional-frontier-resumption.md)
 reaches another checked Horn branch and retains **19 new patterns**. Coverage
 remains **66/83**. Thirteen interrupted states expose a persistence gap: bounded

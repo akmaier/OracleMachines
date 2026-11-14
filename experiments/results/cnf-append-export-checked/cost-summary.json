@@ -1,0 +1,81 @@
+{
+  "arms": [
+    {
+      "admitted": 32,
+      "boundary_mean_seconds": 3.5390257835388184e-07,
+      "completed": 21,
+      "compressed_delta_bytes": 12754,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.10705358325503767,
+        "coverage_seconds": 0.0009983123745769262,
+        "route_refresh_seconds": 0.024005603743717074,
+        "selection_seconds": 0.0999335628002882
+      },
+      "delta_database_bytes": 327680,
+      "expansion_mean_seconds": 0.23199106217361987,
+      "export_mean_seconds": 4.87738418742083,
+      "export_mode": "full",
+      "final_activation_index": {
+        "indexed_routes": 699,
+        "pending_routes": 1,
+        "waiting_links": 2,
+        "waiting_targets": 2
+      },
+      "history_bytes": 776331264,
+      "initial_activation_index": {
+        "indexed_routes": 698,
+        "pending_routes": 1,
+        "waiting_links": 1,
+        "waiting_targets": 1
+      },
+      "preparation_mean_seconds": 7.910303687676787,
+      "steps": 2,
+      "target_closed": false,
+      "unfinished": 11,
+      "worker_mean_seconds": 13.112413854338229
+    },
+    {
+      "admitted": 32,
+      "boundary_mean_seconds": 0.6633411454968154,
+      "completed": 21,
+      "compressed_delta_bytes": 12754,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.10199764650315046,
+        "coverage_seconds": 0.000998999923467636,
+        "route_refresh_seconds": 0.023619041545316577,
+        "selection_seconds": 0.09821143746376038
+      },
+      "delta_database_bytes": 327680,
+      "expansion_mean_seconds": 0.22482712543569505,
+      "export_mean_seconds": 0.7612202500458807,
+      "export_mode": "append",
+      "final_activation_index": {
+        "indexed_routes": 699,
+        "pending_routes": 1,
+        "waiting_links": 2,
+        "waiting_targets": 2
+      },
+      "history_bytes": 776331264,
+      "initial_activation_index": {
+        "indexed_routes": 698,
+        "pending_routes": 1,
+        "waiting_links": 1,
+        "waiting_targets": 1
+      },
+      "preparation_mean_seconds": 8.843306187074631,
+      "steps": 2,
+      "target_closed": false,
+      "unfinished": 11,
+      "worker_mean_seconds": 9.920930333668366
+    }
+  ],
+  "limitations": [
+    "Full-history delta comparison versus guarded append export: two reversed-order repetitions on independent seeds with identical expansion.",
+    "Resume the exact retained pair before selecting new work. Both polarities remain obligations regardless of a SAT witness.",
+    "Each worker has twelve advances and one fresh shared 32-state allowance. Existing rows are reused; any entered-but-unstored states remain separately accounted.",
+    "Both exporters use the same selective route maintenance and scheduler. Append-boundary setup, row counts, guard checks and serialization are charged.",
+    "Preparation, acquisition, route updates, coverage, persistence, reconstruction and reference checks are separate costs.",
+    "Development cases, shared OS caches, no holdout or confidence intervals. Stored bytes are not peak RAM.",
+    "No globally minimal expansion, polynomial unrestricted-SAT algorithm or P-versus-NP conclusion."
+  ]
+}

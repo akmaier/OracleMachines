@@ -1,6 +1,6 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-14 after the user's shift toward pattern discovery and a valid
+Updated 2026-11-15 after the user's shift toward pattern discovery and a valid
 partition of the entire SAT problem. This is the working record for the hourly
 investigation. Start with the [discovery plan](sat-pattern-discovery.md), then
 consult [implementation history](implementation-gaps.md),
@@ -12,7 +12,56 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: conditional Horn closure and the cost of interruption
+## Current investigation: guarded delta export and a conditional one-valid branch
+
+[Append-only export](append-delta-export.md) cuts mean complete-worker time
+**13.11241 -> 9.92093 s (24.34%)** with identical search and delta bytes in
+two reversed-order repetitions. Export falls **4.87738 -> 0.76122 s**, charging
+**0.66334 s** boundary setup to preparation. Row counts still scan historical
+index pages; there is no delta-only asymptotic bound or persistent-space gain.
+The rejected first guard and its baseline are preserved separately.
+
+1. **Resume the two exact pending cofactors for broader structural coverage.**
+   The previously interrupted 29-variable branch now closes through **21 new
+   states** to a **9/16/43 one-valid terminal**, outside Horn, dual-Horn and
+   2-CNF. Its sibling leads to **24/88/274**, whose new split has missing
+   **20/68/198 false** and **21/71/208 true** targets. Reentry of all thirteen
+   previously unstored states is charged; eleven new unfinished inputs remain.
+   Both targets and the separate unresolved 36-variable leaf are obligations.
+2. **Profile checked startup before optimizing its dominant cost.** Preparation
+   now averages **8.84331 s** of the **9.92093 s** worker, including boundary
+   setup. Cloning, repeated historical digests and catalog loading need separate
+   measurements. Historical reconstruction adds **90.58347 s** outside the
+   worker. A retained verified snapshot may avoid repeated work, but authority,
+   invalidation and cold reconstruction must remain explicit.
+3. **Retain the interruption-safe continuation gap.** Only **21 of 32 entered
+   states** are stored. Pending local certificates could preserve unfinished
+   recognition, but would need independently checked source/target bindings
+   and branch obligations. The current exporter changes no acquisition order.
+
+Resume **`experiments/results/cnf-append-export-checked/report.json`** through
+**`compare_cnf_append_export.restore_checkpoint`**, SHA-256
+`81e1c7c0b887277cefa62df011738e73c809a9fef16897ba5238e84bf45732d4`.
+Keep evidence **(1, 42, 156, 46, 1)** and **two bridges**. The method note binds
+the pending source and both target hashes. Coverage is **66/83**, with
+**five open splits / one acquired leaf / two pending targets**. History grows
+to **776,331,264 bytes / 42,141 patterns**; the unchanged-format delta is
+**12,754 compressed bytes**. There are **3,803 reference nodes**, a **3,360-step**
+positive certificate and **699 live indexed routes / two missing-target links**.
+Neither peak-RAM savings nor efficient arbitrary-CNF decomposition is proved.
+
+
+Independent cold replay passes in **365.45167 s**, checks all four workers and
+all four intermediate catalogs, and verifies **3,803 reference nodes** without
+fresh discovery or reference search. All **229 tests** pass. The manuscript
+builds to **161 pages**, with no overfull boxes or undefined references; all
+**64 previous proof blocks** are unchanged. All **1,147 artifacts across 24
+prior manifests** and all **3,781 prior reference payloads** are preserved.
+The new manifest binds **73 artifacts / 3,954,783 bytes**, including the rejected
+attempt. Exact commands, source fingerprints, concurrency notes and checks
+are in `experiments/results/cnf-append-export-checked/validation.json`.
+
+## Previous investigation: conditional Horn closure and the cost of interruption
 
 [The new continuation](conditional-frontier-resumption.md) closes the missing
 32-variable cofactor through eleven new states to a **17/26/62 Horn and

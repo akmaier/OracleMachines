@@ -3002,3 +3002,64 @@ reference payloads** are unchanged. The new manifest binds **40 artifacts /
 structural findings, cost summary, validation metadata and test/build logs.
 See `experiments/results/cnf-conditional-frontier/validation.json` for exact
 commands and source fingerprints.
+
+## 2026-11-15: export the appended evidence and retain the next conditional family
+
+[The guarded exporter](append-delta-export.md) avoids comparing old payloads
+when an exclusively owned, verified history has only appended rows. It checks
+schema/data versions, suffix counts, total cardinality and connection-wide
+write counts. Counting still touches historical index pages. Independent
+certificate checks and full cold reconstruction remain required; the helper
+is optional and does not change the frozen discovery implementation.
+
+Two reversed-order repetitions use the same pending pair and shared 32-state
+allowance. They produce identical operations and delta bytes. Mean export
+falls **4.87738 -> 0.76122 s**, with **0.66334 s** boundary setup charged to
+preparation. Complete worker time falls **13.11241 -> 9.92093 s (24.34%)**.
+Preparation now costs **8.84331 s** and dominates. The complete comparison
+producer costs **228.86791 s**, including **90.58347 s** historical restoration
+and **68.23153 s** final route preparation plus global coverage. This is a
+matched bounded-expansion result on reused development inputs, not a cold
+end-to-end speedup or an arbitrary-SAT complexity bound.
+
+The resumed true 29-variable cofactor closes through **21 new states** to a
+**9/16/43 one-valid terminal**, neither Horn, dual-Horn nor 2-CNF. Its chain
+contains nine elimination, eight probe and three binary-path nodes. All
+thirteen previously unstored inputs are reentered, charged and now stored.
+The sibling remains open at **24/88/274**. Its new split leaves both targets
+missing: **20/68/198 false** and **21/71/208 true**. Eleven entered inputs
+remain unstored. Coverage stays **66/83**, with **five open splits / one
+acquired leaf / two pending targets**, including the separate unresolved
+36-variable leaf. A SAT model on one branch does not discharge the other
+structural obligation.
+
+The union stores **21 patterns / one split / no external probe rows**. History
+is **776,331,264 bytes / 42,141 patterns**, growing by **266,240 bytes**. Both
+methods retain **327,680 SQLite bytes / 12,754 compressed bytes**. Reference
+nodes grow **3,781 -> 3,803**; the positive certificate remains **3,360 steps**.
+The activation index has **699 routes / two missing-target links**. There is
+no persistent-space saving or measured peak-RAM reduction.
+
+Resume `experiments/results/cnf-append-export-checked/report.json` through
+`compare_cnf_append_export.restore_checkpoint`, SHA-256
+`81e1c7c0b887277cefa62df011738e73c809a9fef16897ba5238e84bf45732d4`.
+Keep evidence **(1, 42, 156, 46, 1)** and **two bridges**. The method note records
+both pending target hashes. Priorities are checked startup profiling, resuming
+both pending cofactors, and preserving unfinished recognition through checked
+local continuations. No new Lean theorem or efficient unrestricted partition
+is claimed.
+
+The first attempted comparison rejected immutable legacy tables before
+acquisition. Its baseline, rejected implementation and log are preserved under
+`experiments/results/cnf-append-export/`; they support no matched speedup.
+The corrected helper permits unchanged legacy tables and rejects their writes.
+
+Independent cold replay passes in **365.45167 s**, checks all four workers and
+all four intermediate catalogs, and verifies **3,803 reference nodes** without
+fresh discovery or reference search. All **229 tests** pass. The manuscript
+builds to **161 pages**, with no overfull boxes or undefined references; all
+**64 previous proof blocks** are unchanged. All **1,147 artifacts across 24
+prior manifests** and all **3,781 prior reference payloads** are preserved.
+The new manifest binds **73 artifacts / 3,954,783 bytes**, including the rejected
+attempt. Exact commands, source fingerprints, concurrency notes and checks
+are in `experiments/results/cnf-append-export-checked/validation.json`.

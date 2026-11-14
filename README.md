@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Resuming the exact pending pair](research/pending-pair-resumption.md) closes
+case 1154 and raises structural coverage to **66/83**. Thirty new states expose
+two conditional routes to Horn formulas; all thirteen previously interrupted
+states are now stored. Acquisition takes **0.123 s**, while rebuilding the reuse
+catalog takes **2.177 s**, identifying the next substantial runtime target.
+Seventeen originals remain structurally uncovered.
+
 [Keeping routes across inactive pending splits](research/pending-split-maintenance.md)
 reduces mean bounded-worker time **8.0%** on the interruption control, with
 identical operations and stored results. Resuming the saved frontier adds

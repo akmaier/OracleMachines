@@ -2802,3 +2802,64 @@ with no overfull boxes or undefined references. All **865 prior artifacts in
 reference results and logs. SQLite ResourceWarnings in the passing suite and
 the initial external-write fixture correction are recorded in validation
 metadata. No completed result or earlier experiment was removed.
+
+
+## 2026-11-14: exact pending-pair resumption closes case 1154
+
+[The retained-pair experiment](pending-pair-resumption.md) raises structural
+coverage **65/83 -> 66/83**, also without growth exceptions. Both independent
+repetitions resume the exact local-variable-18 split. Its already acquired
+false branch takes no new admissions; sixteen states on the true **30/111/330**
+cofactor expose a **19/66/214** residual. A saved variable-3 split takes eight
+and six further states. The two branches reach different seven- and
+nine-variable Horn, zero-valid terminals after checked reductions and polarity
+changes; neither is 2-CNF. These are overlapping family recognitions and
+similar reduction patterns, not a shared terminal proof. Both raw branches are
+SAT in the independent reference check. Full structural closure still checks
+both branch obligations.
+
+All **30 admissions** are stored, including all thirteen ancestor keys that
+were entered but unstored in the previous run; their reentry is charged.
+No retained split obligation remains open. **Seventeen original formulas** are
+still uncovered, and the next selected residual belongs to **1062 / index 14**,
+with **39 variables / 161 clauses / 495 literal occurrences**.
+
+Mean expansion costs **2.38750 s**: acquisition **0.12262 s**, complete route
+updates **2.17729 s (91.2%)**, selection **0.08558 s**, and coverage **0.00201 s**.
+Preparation and export cost **8.01578 s** and **4.76630 s**; whole worker time is
+**15.23836 s**. These are two identical-policy repetitions, not a comparative
+speedup. Both updates change patterns and correctly rebuild. Arrival of the
+last missing target activates an old split; the following split attaches with
+both targets acquired. These transitions are concrete fixtures for a future
+complete dependency-based maintenance implementation.
+
+The union adds **30 patterns / 1 split / no external probe records**. Internal
+probe certificates are stored with pattern nodes. The delta is **446,464
+SQLite bytes / 17,007 compressed bytes**, and full history grows **372,736 bytes**
+to **775,376,896 bytes / 42,069 patterns**. The positive certificate has
+**3,360 steps**; reference evidence preserves all **3,467** prior nodes and
+contains **3,575**. Parent restoration costs **76.28286 s**, final preparation
+and global coverage **68.16053 s**, and the complete producer **196.65984 s**.
+Persistent byte counts do not measure peak RAM or establish arbitrary-SAT bounds.
+
+Resume `experiments/results/cnf-pending-pair/report.json` through
+`continue_cnf_pending_pair.restore_checkpoint`, SHA-256
+`0e310e043cc74e29d102115663db88c513acf8bf865fac7412fea1e0eb4f5760`.
+Keep evidence lists **(1, 42, 156, 41, 1)** and **two bridges**, using bridge-aware
+`routes_for` and `cnf_projection_bridge.verify_positive`. The report's `source`
+is the now closed 38-variable ancestor. **Select the next work from
+`next_selection`**, not that completed focus. Broader conditional-family
+discovery and complete incremental route activation remain the priorities.
+
+
+Independent cold reconstruction passes in **289.93906 s**, checking all
+**3,575 reference nodes** without fresh recognition or reference search.
+Both repeat prefixes reconstruct only then-available rows and reproduce the
+complete maintained/fresh catalogs, closure and next selections. All **3,467
+previous reference payloads** and **969 earlier artifacts in 21 manifests**
+remain unchanged. **215 tests pass**; the manuscript builds to **159 pages**
+with all **64 proof blocks unchanged**, no overfull boxes and no undefined
+references. The new manifest binds **40 artifacts (4,005,929 bytes)**,
+including operations, deltas, reference evidence, cost and structural findings,
+validation metadata and logs. No new Lean theorem or general SAT tractability
+claim is made.

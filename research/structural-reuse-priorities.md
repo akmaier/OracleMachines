@@ -12,7 +12,64 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: skip inactive split updates, resume the remaining cofactor
+## Current investigation: conditional Horn closure and activation after acquisition
+
+[Exact pending-pair resumption](pending-pair-resumption.md) closes original
+**1154 / index 27**, raising coverage **65/83 -> 66/83**, also without growth
+exceptions. Reusing the acquired false cofactor takes no new admissions. The
+missing true **30/111/330** cofactor needs sixteen states to expose a
+**19/66/214** residual. Its saved variable-3 split takes another fourteen states
+and reaches two different Horn, zero-valid terminals after checked polarity
+changes. All **30 admitted states are stored**; all thirteen previously
+interrupted keys are reentered and stored. The recurrence is in the reduction
+pattern, not an identical terminal or a transported proof between the branches.
+
+Two independent repeats reproduce the same operations and logical results.
+Mean acquisition is **0.12262 s**, compared with **2.17729 s** for two full route
+updates: **91.2% of the 2.38750 s expansion**. Preparation is **8.01578 s**,
+export **4.76630 s**, and the complete worker **15.23836 s**. This is a coverage
+checkpoint, not a new comparative speedup. Both steps change the database, so
+the inactive-split optimization correctly skips neither rebuild.
+
+1. **Broaden structural discovery on original 1062 / index 14.** The next
+   unlabelled residual is **39/161/495**. All sixteen saved candidates have
+   absent cofactor roots. The current rank prefers variable 25, with two
+   37-variable children and 896 total literals; variable 17 instead gives
+   38- and 32-variable children with 765 total literals. Compare these choices
+   on matched budgets and completed obligations; four ordinary candidates
+   (28, 29, 30, 33) remain available. Determine which choices expose checked
+   transformations toward a recognized family. Keep
+   overlaps and unresolved cases explicit; the two Horn endpoints above do
+   not establish a Horn backdoor in the original coordinates or a uniformly
+   cheap recognition strategy. No retained split is pending now; seventeen
+   original formulas remain structurally uncovered.
+2. **Maintain affected routes after real acquisition.** The two completed
+   advances provide concrete validation cases: arrival of the last missing
+   root activates an old split; acquisition of both targets permits a new
+   split to attach immediately. Maintain all route types, projection bridges
+   and newly available premises, and compare complete catalogs against cold
+   reconstruction. Acquisition costs only about 0.12 s; optimize the measured
+   2.18 s refresh cost before interrupted-recognition bookkeeping.
+3. **Reduce history reconstruction only with complete accounting.** Parent
+   restoration costs **76.28286 s**, and final preparation/global coverage
+   **68.16053 s**. A warm maintenance improvement does not eliminate these
+   costs. Persistent growth and verification remain separate obligations.
+
+Resume **`experiments/results/cnf-pending-pair/report.json`** through
+**`continue_cnf_pending_pair.restore_checkpoint`**, SHA-256
+`0e310e043cc74e29d102115663db88c513acf8bf865fac7412fea1e0eb4f5760`.
+Retain evidence lists **(1, 42, 156, 41, 1)** and **two bridges**, using the
+bridge-aware catalog and positive verifier. The old `source` focus is now
+closed; resume from **`next_selection`**. The union adds **30 patterns / 1 split /
+no external probe records** and grows history to **775,376,896 bytes / 42,069
+patterns**. The new compressed delta is **17,007 bytes**. The reference archive
+preserves all 3,467 prior nodes and contains **3,575**; the positive certificate
+has **3,360 steps**. Independent cold replay passes in **289.93906 s**; all
+**215 tests** pass and the **159-page** manuscript preserves **64 proof blocks**.
+All **969 earlier artifacts** and **3,467 prior reference payloads** are unchanged.
+Validation details are in the checkpoint's `validation.json`.
+
+## Previous investigation: skip inactive split updates, resume the remaining cofactor
 
 [Pending-split maintenance](pending-split-maintenance.md) avoids a complete route
 rebuild when a checked split is the only sidecar change, the database is

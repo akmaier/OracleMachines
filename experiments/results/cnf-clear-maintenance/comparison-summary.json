@@ -1,0 +1,144 @@
+{
+  "arms": [
+    {
+      "admitted": 11,
+      "case": 1263,
+      "closed": true,
+      "completed": 11,
+      "compressed_delta_bytes": 12933,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.3090007302816957,
+        "coverage_seconds": 0.001246896805241704,
+        "route_refresh_seconds": 4.25464131264016,
+        "selection_seconds": 0.003965124953538179
+      },
+      "delta_database_bytes": 241664,
+      "delta_export_mean_seconds": 4.870555728906766,
+      "expansion_mean_seconds": 4.568854064680636,
+      "external_assumption_attempts": 16,
+      "history_bytes": 774000640,
+      "maintenance_modes": {
+        "full_rebuild": 4
+      },
+      "mode": "full",
+      "preparation_mean_seconds": 7.751014875015244,
+      "sidecar_snapshot_bytes": 0,
+      "steps": 4,
+      "unfinished": 0,
+      "worker_mean_seconds": 17.23792983358726
+    },
+    {
+      "admitted": 11,
+      "case": 1263,
+      "closed": true,
+      "completed": 11,
+      "compressed_delta_bytes": 12933,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.2973632502835244,
+        "coverage_seconds": 0.0013277081307023764,
+        "route_refresh_seconds": 2.167026166804135,
+        "selection_seconds": 0.003843937534838915
+      },
+      "delta_database_bytes": 241664,
+      "delta_export_mean_seconds": 4.670245646033436,
+      "expansion_mean_seconds": 2.4695610627532005,
+      "external_assumption_attempts": 16,
+      "history_bytes": 774000640,
+      "maintenance_modes": {
+        "clear_append": 2,
+        "full_rebuild": 2
+      },
+      "mode": "maintained",
+      "preparation_mean_seconds": 7.690305062336847,
+      "sidecar_snapshot_bytes": 1220757,
+      "steps": 4,
+      "unfinished": 0,
+      "worker_mean_seconds": 14.87207654141821
+    },
+    {
+      "admitted": 21,
+      "case": 1189,
+      "closed": true,
+      "completed": 21,
+      "compressed_delta_bytes": 15484,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.27034920803271234,
+        "coverage_seconds": 0.0021652511786669493,
+        "route_refresh_seconds": 7.8340622070245445,
+        "selection_seconds": 0.00179606257006526
+      },
+      "delta_database_bytes": 397312,
+      "delta_export_mean_seconds": 4.676342749968171,
+      "expansion_mean_seconds": 8.108372728805989,
+      "external_assumption_attempts": 51,
+      "history_bytes": 770707456,
+      "maintenance_modes": {
+        "full_rebuild": 8
+      },
+      "mode": "full",
+      "preparation_mean_seconds": 7.299741895403713,
+      "sidecar_snapshot_bytes": 0,
+      "steps": 8,
+      "unfinished": 0,
+      "worker_mean_seconds": 20.134266312466934
+    },
+    {
+      "admitted": 21,
+      "case": 1189,
+      "closed": true,
+      "completed": 21,
+      "compressed_delta_bytes": 15484,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.26014916552230716,
+        "coverage_seconds": 0.002080832375213504,
+        "route_refresh_seconds": 1.9810748749878258,
+        "selection_seconds": 0.0016544372774660587
+      },
+      "delta_database_bytes": 397312,
+      "delta_export_mean_seconds": 4.620973750017583,
+      "expansion_mean_seconds": 2.2449593101628125,
+      "external_assumption_attempts": 51,
+      "history_bytes": 770707456,
+      "maintenance_modes": {
+        "clear_append": 6,
+        "full_rebuild": 2
+      },
+      "mode": "maintained",
+      "preparation_mean_seconds": 7.265806999988854,
+      "sidecar_snapshot_bytes": 941068,
+      "steps": 8,
+      "unfinished": 0,
+      "worker_mean_seconds": 14.180417062481865
+    }
+  ],
+  "limitations": [
+    "Two development sources: the latest selected residual and an earlier forcing control. No independent holdout or global optimality claim.",
+    "Two repetitions per mode and case reverse arm order. Every worker copies the same case-specific seed and gets twelve advances and one 32-state allowance.",
+    "Both arms use identical EarlyClosedExpansion scheduling. Only a checked clear probe with unchanged nodes, sidecars and semantic routes can avoid a complete catalog rebuild.",
+    "Complete worker time includes preparation, acquisition, checking and delta export. Authority reconstruction and union checks are charged separately.",
+    "Both split branches remain structural obligations, independently of SAT answers. Unfinished admissions are explicit; all alternatives and old history are retained in the union.",
+    "Shared process and OS caches, two repetitions, no confidence intervals; disk bytes are not peak RAM. No minimum expansion bound or unrestricted SAT result."
+  ],
+  "paired": [
+    {
+      "both_closed": true,
+      "case": 1263,
+      "full_only_patterns": 0,
+      "identical_logical_tables": true,
+      "identical_new_pattern_keys": true,
+      "identical_operations": true,
+      "maintained_only_patterns": 0,
+      "shared_new_patterns": 11
+    },
+    {
+      "both_closed": true,
+      "case": 1189,
+      "full_only_patterns": 0,
+      "identical_logical_tables": true,
+      "identical_new_pattern_keys": true,
+      "identical_operations": true,
+      "maintained_only_patterns": 0,
+      "shared_new_patterns": 21
+    }
+  ]
+}

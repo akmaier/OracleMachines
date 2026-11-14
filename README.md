@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Retaining checked routes after clear probes](research/clear-probe-maintenance.md)
+closes case 1263, raising structural coverage to **65/83**. With search choices
+and stored results unchanged, complete worker time falls **13.7%** on this case
+and **29.6%** on the forcing control. Only clear probe appends can skip a rebuild;
+forcing, acquisition and new evidence still refresh the full catalog. This
+optional optimization adds a resident snapshot and does not reduce stored state.
+
 [Selecting saved split pairs earlier](research/early-saved-expansion.md) closes
 case 1160 and raises structural coverage to **64/83**. On that case, the same
 sixteen new patterns take **2 instead of 12 advances**, reducing complete worker

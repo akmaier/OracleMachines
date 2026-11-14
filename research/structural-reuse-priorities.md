@@ -12,7 +12,53 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: early saved splits avoid repeated probe work
+## Current investigation: clear probes preserve the semantic route graph
+
+[Checked clear-probe maintenance](clear-probe-maintenance.md) closes original
+**1263 / index 42**, raising coverage **64/83 -> 65/83**. Both maintenance modes
+use the same ordinary scheduler and acquire the same eleven patterns in four
+advances. Keeping the unchanged complete route catalog across two clear appends
+reduces mean worker time **17.23793 -> 14.87208 s (13.72%)**. On the historical
+forcing control, six skipped rebuilds reduce **20.13427 -> 14.18042 s (29.57%)**
+with the same eight advances and twenty-one states. The helper still rebuilds
+for forcing, new nodes or changed sidecars. No persistent state saving is claimed.
+
+1. **Broaden decomposition at the next uncovered original.** Original **1154 /
+   index 27** has a selected **38 / 158 / 500** leaf. Its ordinary probe pool is
+   exhausted; all eleven saved pairs have unacquired child roots. The best rank
+   is **[2, 2, 36, 906, 30]**. Acquire and inspect this exact pair, looking for
+   shared family certificates and unresolved interfaces in its descendants.
+   Compare early-saved versus ordinary scheduling only on descendants with
+   remaining probes, where a real choice exists. Use the optional maintenance
+   helper where eligible; its savings cannot simply be added to prior scheduling
+   gains without a matched combined experiment.
+2. **Reduce preparation and activation cost without dropping route alternatives.**
+   Optimized worker preparation is still **7.69031 / 7.26581 s**, versus expansion
+   **2.46956 / 2.24496 s**. Two full rebuilds remain in each case. The complete
+   study charges **62.36289 s** for current restoration and **67.55856 s** for
+   global route preparation/coverage. Incremental activation after acquisition
+   or a checked prepared state has more remaining cost to address than clear
+   probe arithmetic. Guard new target availability, sidecars and invalidation;
+   charge construction, cold reconstruction and memory. Current guards still
+   serialize all sidecars and retain **1,220,757 / 941,068 bytes** of payload.
+3. **Discover cross-path reuse beyond exact normalized keys.** The previous
+   early-saved forcing path still differs from the ordinary path. The new helper
+   changes neither path nor storage. Seek exact transport or reusable interfaces
+   between intermediate states, with recognition and proof costs included.
+
+Resume **`experiments/results/cnf-clear-maintenance/report.json`** using
+**`compare_cnf_clear_maintenance.restore_checkpoint`**; SHA-256
+`b4aa304049758bff8e80b2118437321a9edf7128657b3a9303a4985ae57daa78`.
+Keep five evidence lists **(1, 42, 156, 33, 1)** and **two bridges**; use the
+bridge-aware `routes_for` and `cnf_projection_bridge.verify_positive`. The union
+adds eleven patterns, one window, one continuation and two split records. Full
+history is **774,000,640 bytes / 41,973 patterns**, with all 33 split sources and
+both bridge targets closed. All **209 tests** and independent cold replay pass;
+the replay checks identical histories across modes and all **3,259 reference
+nodes**. Eighteen originals remain uncovered. Next source:
+`f33c327595b24645a6f64e8a072295c51fb2a414872d0de0f84da49192f0085d`.
+
+## Previous investigation: early saved splits avoid repeated probe work
 
 [Selecting saved pairs before further probing](early-saved-expansion.md) closes
 original **1160 / index 29**, raising structural coverage **63/83 -> 64/83**. The

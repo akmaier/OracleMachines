@@ -2613,3 +2613,61 @@ no acquired child root; best rank **[2, 2, 35, 817, 6]**. Broaden the comparison
 while seeking forcing regressions, and test incremental route maintenance with
 explicit activation and invalidation conditions. General efficient SAT coverage
 and minimum-cost expansion remain unproved.
+
+## 2026-11-14: clear probe metadata reuses the complete route catalog
+
+[The checked maintenance comparison](clear-probe-maintenance.md) closes original
+**1263 / index 42**, lifting coverage **64/83 -> 65/83** in both views. The new
+helper retains a complete checked route catalog only after a verified clear
+probe with no acquired state, no semantic edge and unchanged sidecars. Exact
+SQLite accounting and row binding constrain the change; forcing, acquisition
+and new evidence rebuild fully. External or schema changes require reopening
+checked inventory state. Saved candidates remain available.
+
+Identical ordinary scheduling on matched seeds yields the same operations,
+patterns and final logical tables. Case 1263 uses **4 advances / 11 states**;
+two skipped rebuilds reduce mean expansion **4.56885 -> 2.46956 s** and worker
+**17.23793 -> 14.87208 s (13.72%)**. Historical forcing control 1189 uses **8
+advances / 21 states**; six skipped rebuilds reduce expansion **8.10837 ->
+2.24496 s** and worker **20.13427 -> 14.18042 s (29.57%)**. Both modes still
+perform **16 / 51** external assumption attempts and retain both branch proofs.
+The later forcing result is preserved and activated by a full rebuild.
+
+Persistent deltas are identical: **12,933 / 15,484 compressed bytes** and
+**241,664 / 397,312 SQLite bytes**, current case/control. Extra serialized
+sidecar snapshots occupy **1,220,757 / 941,068 bytes**, excluding transient
+serialization and Python overhead. This is computation reuse, not a storage
+reduction or a peak-RAM estimate. Current authority reconstruction costs
+**62.36289 s**, final preparation/global coverage **67.55856 s**, and the full
+producer **316.04814 s**. Preparation and export remain major worker costs.
+Two development cases and two reversed repetitions give no holdout or general
+SAT guarantee; do not add these gains to early-saved scheduling gains untested.
+
+The first split is source-local variable 6, then variable 9 of the remaining
+31/125/377 leaf. Probe, binary-path and elimination reductions reach retained
+Horn/dual-Horn 2-CNF and matching 2-CNF endpoints, plus an empty-clause UNSAT
+endpoint. All SAT lifts and both split obligations are checked. Independent
+cold replay passes in **313.36574 s** with new recognition/reference expansion
+forbidden, including all **3,259 reference nodes**, repeated logical results,
+exact selection and idempotent merges. All **209 relevant tests** pass.
+
+Resume **`experiments/results/cnf-clear-maintenance/report.json`** through
+**`compare_cnf_clear_maintenance.restore_checkpoint`**, SHA-256
+`b4aa304049758bff8e80b2118437321a9edf7128657b3a9303a4985ae57daa78`.
+Retain five evidence lists **(1, 42, 156, 33, 1)** and the separate two-bridge
+archive; use bridge-aware `routes_for` and `cnf_projection_bridge.verify_positive`.
+The union adds **11 patterns, 1 window, 1 continuation and 2 splits**. History
+is **774,000,640 bytes / 41,973 patterns**, **172,032 bytes** larger. All 33
+split sources and both bridge targets close. Eighteen originals remain open.
+Next: original **1154 / index 27**, **38 / 158 / 500**, source SHA-256
+`f33c327595b24645a6f64e8a072295c51fb2a414872d0de0f84da49192f0085d`.
+Its ordinary pool is exhausted. Eleven saved pairs have no acquired child;
+best rank **[2, 2, 36, 906, 30]**. Test that pair, then investigate shared family
+structure and scheduling choices in its descendants. Prepared checked state and
+incremental activation after acquisition remain the next large maintenance gaps.
+
+The manuscript builds to **158 pages** with all **64 proof blocks** unchanged,
+no overfull boxes and no undefined references. All **660 earlier artifacts /
+18 manifests** remain hash-identical. The new study preserves **124 manifested
+artifacts** plus its manifest, including producer, cold-replay, test and build
+logs, exact deltas, reference results and source fingerprints.

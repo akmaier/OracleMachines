@@ -1,0 +1,121 @@
+{
+  "arms": [
+    {
+      "admitted": 32,
+      "closed": false,
+      "completed": 27,
+      "compressed_delta_bytes": 20877,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.334726000437513,
+        "coverage_seconds": 0.0012830623891204596,
+        "route_refresh_seconds": 4.373172376770526,
+        "selection_seconds": 0.010122813284397125
+      },
+      "delta_database_bytes": 462848,
+      "delta_export_mean_seconds": 4.856087229214609,
+      "expansion_mean_seconds": 4.719304252881557,
+      "external_assumption_attempts": 0,
+      "history_bytes": 774397952,
+      "maintenance_modes": {
+        "full_rebuild": 4
+      },
+      "mode": "clear",
+      "preparation_mean_seconds": 7.899276209063828,
+      "scenario": "interruption",
+      "sidecar_snapshot_bytes": 1276209,
+      "steps": 4,
+      "unfinished": 5,
+      "worker_mean_seconds": 17.557532395934686
+    },
+    {
+      "admitted": 32,
+      "closed": false,
+      "completed": 27,
+      "compressed_delta_bytes": 20877,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.34758343757130206,
+        "coverage_seconds": 0.0011881871614605188,
+        "route_refresh_seconds": 3.240506999893114,
+        "selection_seconds": 0.009954124689102173
+      },
+      "delta_database_bytes": 462848,
+      "delta_export_mean_seconds": 4.6581035209819674,
+      "expansion_mean_seconds": 3.5992327493149787,
+      "external_assumption_attempts": 0,
+      "history_bytes": 774397952,
+      "maintenance_modes": {
+        "full_rebuild": 3,
+        "pending_split_append": 1
+      },
+      "mode": "pending",
+      "preparation_mean_seconds": 7.814357895869762,
+      "scenario": "interruption",
+      "sidecar_snapshot_bytes": 1276209,
+      "steps": 4,
+      "unfinished": 5,
+      "worker_mean_seconds": 16.151778541505337
+    },
+    {
+      "admitted": 32,
+      "closed": false,
+      "completed": 19,
+      "compressed_delta_bytes": 12874,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.145917666843161,
+        "coverage_seconds": 0.0013580620288848877,
+        "route_refresh_seconds": 3.273945812601596,
+        "selection_seconds": 0.123691875487566
+      },
+      "delta_database_bytes": 307200,
+      "delta_export_mean_seconds": 4.7097617709077895,
+      "expansion_mean_seconds": 3.544913416961208,
+      "external_assumption_attempts": 0,
+      "history_bytes": 775004160,
+      "maintenance_modes": {
+        "full_rebuild": 3
+      },
+      "mode": "clear",
+      "preparation_mean_seconds": 8.211236813105643,
+      "scenario": "resume",
+      "sidecar_snapshot_bytes": 1310948,
+      "steps": 3,
+      "unfinished": 13,
+      "worker_mean_seconds": 16.547821917105466
+    },
+    {
+      "admitted": 32,
+      "closed": false,
+      "completed": 19,
+      "compressed_delta_bytes": 12874,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.16265064594335854,
+        "coverage_seconds": 0.0013695829547941685,
+        "route_refresh_seconds": 3.2598904164042324,
+        "selection_seconds": 0.12186633283272386
+      },
+      "delta_database_bytes": 307200,
+      "delta_export_mean_seconds": 4.679584249621257,
+      "expansion_mean_seconds": 3.545776978135109,
+      "external_assumption_attempts": 0,
+      "history_bytes": 775004160,
+      "maintenance_modes": {
+        "full_rebuild": 3
+      },
+      "mode": "pending",
+      "preparation_mean_seconds": 8.067026582779363,
+      "scenario": "resume",
+      "sidecar_snapshot_bytes": 1310948,
+      "steps": 3,
+      "unfinished": 13,
+      "worker_mean_seconds": 16.37384270806797
+    }
+  ],
+  "limitations": [
+    "Matched clear-only versus pending-split route maintenance with the same EarlySavedExpansion scheduling. Current resumption and the previous interruption control are separate workloads.",
+    "Two reversed repetitions per workload, independent seed copies, twelve advances and one shared 32-state allowance per worker.",
+    "No-write pending splits retain checked routes only after exact sidecar and missing-target checks. Subsequent writes rebuild all routes; external writers require reopening.",
+    "Full worker time charges preparation, acquisition, checking and export. Historical/current restoration and union/global costs are separate.",
+    "Both polarities remain structural obligations, independently of SAT answers. All previous history and unfinished admissions are retained explicitly.",
+    "Shared process/OS caches and development cases, no confidence intervals or holdout. Stored bytes are not peak RAM; no globally minimal expansion or unrestricted SAT bound."
+  ]
+}

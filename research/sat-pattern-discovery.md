@@ -2733,3 +2733,72 @@ manifests**. The new manifest binds **81 artifacts** (4,377,743 bytes), includin
 producer/cold logs, both policy histories, stepwise findings, progress summaries
 and validation metadata. One existing SQLite ResourceWarning appears in the
 passing regression log; no solver or test module changed.
+
+## 2026-11-14: inactive pending splits preserve routes; one cofactor remains
+
+[The pending-split maintenance study](pending-split-maintenance.md) implements
+an optional guard for zero-write interrupted splits. It checks the exact sidecar
+change, both polarity bindings, missing targets and entered-state accounting.
+A split with an absent child adds no active edge; any write or other sidecar
+change rebuilds routes, including later activation. The guard is independent of
+CNF category, with linear sidecar serialization plus split-checking costs.
+
+Two reversed-order repetitions compare clear-only maintenance with this guard.
+The historical interruption preserves identical operations and stored results
+while the final route update falls **1.08509 -> 0.01138 s**. Mean expansion falls
+**4.71930 -> 3.59923 s** and worker time **17.55753 -> 16.15178 s (8.01%)**.
+The current resumption writes nodes in every advance, so all three updates
+rebuild and expansion remains **3.54491 / 3.54578 s**. No persistent-memory
+saving or completed-original speedup follows from the interruption comparison.
+
+Resumption acquires the old variable-26 pair with nine states and closes its
+23-variable leaf via a variable-13 split with eight more. The two new splits'
+false branches reuse the same UNSAT empty-clause terminal; a true branch reaches
+a **10/10/21** polarity-transformed Horn, zero-valid residual. The separate
+**33/130/400** source splits at variable **18**, acquiring its false **29/96/275**
+cofactor with two states but entering thirteen ancestors of the true
+**30/111/330** cofactor without storing them. All **32 admissions** are charged;
+**19 new patterns** are completed. The true cofactor is independently SAT; the
+missing obligation is reusable structural decomposition. Coverage stays
+**65/83**, with one pending target and no acquired open leaf in the frontier.
+
+The union preserves old history and adds **19 patterns / 2 split records / no
+external probe rows**, reaching **775,004,160 bytes / 42,039 patterns**. The delta
+is **307,200 SQLite bytes / 12,874 compressed bytes**. The independent reference
+archive preserves **3,422** prior nodes and has **3,467** total. The positive
+certificate still has **3,239 steps**. Producer time is **368.96634 s**, including
+**72.00904 s** current restoration, **67.51801 s** historical restoration and
+**68.15113 s** final route preparation/global coverage.
+
+Resume `experiments/results/cnf-pending-maintenance/report.json` using
+`compare_cnf_pending_maintenance.restore_checkpoint`, report SHA-256
+`9a48fc85512e52c566dd60f0396a4bacf842b48267ee47606394d271d221f8d0`.
+Keep five evidence lists **(1, 42, 156, 40, 1)** and two separate bridges, using
+bridge-aware `routes_for` and `cnf_projection_bridge.verify_positive`.
+The pending source SHA-256 is
+`1fab57607093cb833cc8fa0f21d88c2e7e9eb094dac7cdd416e8a786e3fcf056`;
+its missing true target is
+`5124e2d5f451e42b274ed6886d29676c94f89e27bb3054f77b530f2f3091a3a4`.
+Resume this exact pair, retain its acquired false child and charge reentry of
+the thirteen unstored keys. The next maintenance opportunity is complete
+activation of affected routes after actual acquisition. A reverse dependency
+index must cover all route types and newly satisfied old pending obligations.
+Current final acquisition costs about **0.06 s**, versus **1.08 s** for rebuild;
+continuation-checkpoint work should be judged against that measured difference.
+
+Independent cold replay passes in **487.75798 s**, with all **3,467 reference
+nodes** checked and no fresh recognition or reference search. All eight workers
+have identical operations and logical results within each workload. Four
+stepwise prefix replays compare complete maintained and fresh catalogs,
+coverage and next selections using only then-available rows. All five previously
+interrupted states are reentered and now stored; thirteen new unstored states
+remain explicit.
+
+Verification: **215 tests pass** (209 prior plus six new regressions). The
+manuscript builds to **159 pages**, preserving all **64 proof blocks** exactly,
+with no overfull boxes or undefined references. All **865 prior artifacts in
+20 manifests** remain hash-identical. The new manifest binds **104 artifacts**
+(3,977,775 bytes), including matched operations, deltas, independent findings,
+reference results and logs. SQLite ResourceWarnings in the passing suite and
+the initial external-write fixture correction are recorded in validation
+metadata. No completed result or earlier experiment was removed.

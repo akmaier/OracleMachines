@@ -12,7 +12,74 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: a cheaper completed cofactor, an unfinished original
+## Current investigation: skip inactive split updates, resume the remaining cofactor
+
+[Pending-split maintenance](pending-split-maintenance.md) avoids a complete route
+rebuild when a checked split is the only sidecar change, the database is
+unchanged, and at least one target root is absent. It keeps both branch
+obligations and checks exact admission accounting. Later writes rebuild routes,
+so newly available targets can activate old splits. External writers require
+reopening checked state. The condition is independent of the CNF family.
+
+On the historical interruption, mean final-update time falls **1.08509 ->
+0.01138 s**. Expansion falls **4.71930 -> 3.59923 s**, and complete worker time
+**17.55753 -> 16.15178 s (8.01%)**, with identical operations and persistent
+results. On current resumption every advance writes patterns, so all three
+updates rebuild and expansion is unchanged (**3.54491 / 3.54578 s**). This
+negative control bounds applicability; preparation/export variation is not a
+maintenance improvement. There is no persistent memory saving.
+
+Current resumption stores **19 patterns** under one **32-state allowance**.
+It acquires the old variable-26 pair with nine states and resolves a 23-variable
+leaf with eight more. The separate **33/130/400** leaf splits at local variable
+**18**: the false **29/96/275** cofactor takes two states, while the true
+**30/111/330** cofactor consumes thirteen admissions without storing those
+ancestor plans. Original structural coverage remains **65/83**. One pending
+target remains and there are no acquired open leaves in the retained frontier.
+
+1. **Resume the exact variable-18 pair and inspect the remaining cofactor.**
+   Reuse the acquired false child, charge reentry of thirteen unstored keys, and
+   follow the true 30/111/330 target. The preceding reductions exposed a
+   ten-variable polarity-to-Horn transition; inspect whether conditioning the
+   remaining target exposes shared terminals or another checked family route.
+   Preserve both branch bindings and verify closure of the original separately.
+2. **Maintain affected routes after actual acquisition.** All three current
+   updates cost about **1.08--1.11 s** apiece. Acquisition totals about **0.15 s**
+   for the baseline worker. A dependency index must include every route kind and
+   activate old pending edges when their last target arrives; cold comparison
+   must cover both family/probe reductions and split/projection sidecars.
+   Current preparation is about **8.1 s**, export **4.7 s**, and current authority
+   reconstruction **72.00904 s**. Avoid presenting a warm update saving as a
+   reduction of these separate costs.
+3. **Measure the value of interrupted-recognition continuations.** Thirteen
+   ancestors remain unstored, but the final acquisition costs only about
+   **0.06 s**, against **1.08 s** for rebuilding. The admission loss is material
+   to this bounded run; it is not the dominant runtime. A checkpoint must bind
+   exact CNFs/configuration, children and incomplete obligations without making
+   incomplete plans into coverage or dropping reference evidence.
+
+Resume **`experiments/results/cnf-pending-maintenance/report.json`** through
+**`compare_cnf_pending_maintenance.restore_checkpoint`**, SHA-256
+`9a48fc85512e52c566dd60f0396a4bacf842b48267ee47606394d271d221f8d0`.
+Keep five evidence lists **(1, 42, 156, 40, 1)** and **two bridges**, with the
+bridge-aware `routes_for` and `cnf_projection_bridge.verify_positive`. The union
+adds **19 patterns / 2 splits / no external probe records**, growing history to
+**775,004,160 bytes / 42,039 patterns**. The new delta is **12,874 compressed
+bytes**. Reference evidence preserves all **3,422** prior nodes and has **3,467**
+in total. The existing positive certificate still has **3,239 steps**.
+
+Pending source SHA-256:
+`1fab57607093cb833cc8fa0f21d88c2e7e9eb094dac7cdd416e8a786e3fcf056`.
+Missing true target SHA-256:
+`5124e2d5f451e42b274ed6886d29676c94f89e27bb3054f77b530f2f3091a3a4`.
+
+Cold replay passes in **487.75798 s**, with complete catalog comparisons and
+all **3,467 reference nodes** verified. All five old interrupted keys are now
+stored. **215 tests pass**; the paper builds to **159 pages** with all **64 proof
+blocks unchanged**. All **865 prior manifested artifacts** are preserved; the
+new manifest binds **104 artifacts**.
+
+## Previous investigation: a cheaper completed cofactor, an unfinished original
 
 [Combining the saved-pair and maintenance policies](combined-expansion.md) tests
 original **1154 / index 27**. Both modes begin with the same exhausted-source

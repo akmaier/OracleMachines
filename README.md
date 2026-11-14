@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Keeping routes across inactive pending splits](research/pending-split-maintenance.md)
+reduces mean bounded-worker time **8.0%** on the interruption control, with
+identical operations and stored results. Resuming the saved frontier adds
+**19 patterns** and leaves one pending cofactor; coverage remains **65/83**.
+The new guard gives no expansion saving when acquisition actually changes the
+database.
+
 [Combining the two reuse policies](research/combined-expansion.md) completes the
 same cofactor with **9 instead of 20 additional states**, reusing the empty-CNF
 terminal on both early branches. The complete original remains structurally

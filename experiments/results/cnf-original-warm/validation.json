@@ -1,0 +1,78 @@
+{
+  "covered_after": 59,
+  "covered_before": 59,
+  "evidence_counts": [
+    1,
+    42,
+    156,
+    14,
+    1
+  ],
+  "gains": [],
+  "idempotent_merge": true,
+  "independent_reconstruction": {
+    "evidence_counts": [
+      1,
+      42,
+      156,
+      14,
+      1
+    ],
+    "preserved_closed": 59,
+    "reconstruction_passed": true,
+    "report_sha256": "1af9073c8902a2740fd596987f29544ff4ef90ebe7200169cf30361b6ea30df7",
+    "seconds": 33.09457320906222
+  },
+  "parent_manifests": {
+    "experiments/results/cnf-expanded-coverage/manifest.json": {
+      "artifacts_checked": 8,
+      "sha256": "1eb6be76f66b8f483486a7985eddc31d29f2f7384c6e60d3873214e98335187c"
+    },
+    "experiments/results/cnf-incremental-coverage/manifest.json": {
+      "artifacts_checked": 8,
+      "sha256": "1af918ca0ad3bd81c6cca802cff9012335f0a218316afbe4d269b55d3aae896a"
+    },
+    "experiments/results/cnf-local-forcing/manifest.json": {
+      "artifacts_checked": 16,
+      "sha256": "592d7b463bfdd255a4ae374e7cf477e8c3ca5f5ee76058d94a0ea6963e450386"
+    },
+    "experiments/results/cnf-positive-bundle/manifest.json": {
+      "artifacts_checked": 9,
+      "sha256": "1852ca037a358474440760c8eaec92a081d55436864e82670cc5db74895756d6"
+    },
+    "experiments/results/cnf-positive-primitives/manifest.json": {
+      "artifacts_checked": 9,
+      "sha256": "412e36cf16f6bf99eb08b815d039de607fb953e94bd51e98cc3e8f435beaf400"
+    },
+    "experiments/results/cnf-reused-branch/manifest.json": {
+      "artifacts_checked": 17,
+      "sha256": "0b865efe9c443d2e2391fe421195aa3286326e360a9381a9842d005b37a258b0"
+    },
+    "experiments/results/cnf-selected-routes/manifest.json": {
+      "artifacts_checked": 8,
+      "sha256": "794927c4004a17acc36861c8ec9d1be79bfe616313bde407d8ee0e668e53cc88"
+    },
+    "experiments/results/cnf-source-local-checked/manifest.json": {
+      "artifacts_checked": 16,
+      "sha256": "15a405063c7da4944e2f70a6d2026156c07774b31c4de3bb97eac911fc8a72c9"
+    },
+    "experiments/results/cnf-warm-batch/manifest.json": {
+      "artifacts_checked": 24,
+      "sha256": "406f53d13b1a6294fe60d6f1f9fa0e6512433a68f00f5271b51c538dc0950e7c"
+    }
+  },
+  "parent_unchanged": true,
+  "report_sha256": "1af9073c8902a2740fd596987f29544ff4ef90ebe7200169cf30361b6ea30df7",
+  "scope": "One original-frontier development batch; complete warm controls, independent positive/new-row replay and checked split models. No new original coverage, full cold negative-catalog audit, peak RAM or Lean refinement claimed.",
+  "source_fingerprints": {
+    "experiments/cnf_incremental_coverage.py": "5bef8cb699796b28dbd597509e71e8797ccacea4a384aa1bbe697e869b5827bd",
+    "experiments/cnf_original_frontier.py": "c85f2a932b24b85796c1a3290b53a42fca02f6acb3ebf6e78e5f60e9c1fa9ca9",
+    "experiments/cnf_warm_expansion.py": "19f8fc0887b322fcd8a12e0241c2ff6221dafc43d32563077952863e8af40b21",
+    "experiments/continue_cnf_original_warm.py": "3e90b28949b2bfdf5f88c9beef089f4f193d91f1c1273e1be28f2cb9eb2d4213",
+    "experiments/validate_cnf_original_warm.py": "5cd50c8f5b7aa09266e0d10570569be841aa6d57101483db81dbfa06b5126b43",
+    "solver/test_cnf_original_frontier.py": "b9dd0b0f09d8d990beb9f8edee5b540b827569e18c3df33bd5cb6c602060b0b3"
+  },
+  "test_command": "python3 -m unittest solver.test_cnf_positive_bundle solver.test_cnf_positive_primitives solver.test_cnf_expanded_coverage solver.test_cnf_selected_routes solver.test_cnf_route_composition solver.test_cnf_trace_split solver.test_cnf_probe_window solver.test_cnf_probe_continuation solver.test_cnf_learning_continuation solver.test_cnf_trace_learning solver.test_cnf_trace_reuse solver.test_cnf_coupled_pivots solver.test_cnf_affine_clause solver.test_cnf_retained_plans solver.test_cnf_variable_elimination solver.test_cnf_clause_bound_elimination solver.test_cnf_additive_elimination solver.test_cnf_binary_paths solver.test_cnf_polarity_horn solver.test_cnf_simplification solver.test_cnf_fused_conditioning solver.test_cnf_affine_projection solver.test_cnf_affine_patterns solver.test_cnf_probe_equivalence solver.test_cnf_source_local solver.test_cnf_local_forcing solver.test_cnf_incremental_coverage solver.test_cnf_warm_expansion solver.test_cnf_original_frontier solver.test_cnf_original_splits solver.test_cnf_split_batch solver.test_cnf_split_frontier",
+  "test_log_sha256": "3dc88e646f0f8073f1f5d604e6688888ff59ead0b0dc33d24ca78f0aa080493f",
+  "tests": 176
+}

@@ -12,7 +12,46 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: a warm batch closes another original
+## Current investigation: reuse a closed cofactor before exhausting probes
+
+[The next original-frontier batch](original-warm-expansion.md) reaches case **1445**,
+whose smallest selected residual has **33 variables / 121 clauses / 359 literals**.
+Two saved splits reuse one existing empty-CNF terminal, and binary-path deletion
+plus elimination leave a single open **29 / 103 / 307** residual. The batch uses
+**7/32 admissions**; structural coverage remains **59/83**. This is partial transfer
+of the previous transformation sequence, not another original-level closure.
+
+The largest repeated warm cost is still full route maintenance: **11.55914 s**
+versus **0.20427 s** for acquisition. Initial complete preparation costs **94.52082 s**.
+The selected split traces were already present in their source nodes, yet seven
+clear ordinary blocks preceded their use, incurring **6.73336 s** of route refresh.
+
+1. **Test early reuse of an already closed cofactor.** On the current leaf, saved
+   local variable **12** yields one checked closed child and one missing cofactor
+   of **28 variables / 281 literals**. Compare taking that pair now against the
+   six remaining ordinary candidates **18, 20, 23, 24, 28, 29**, starting at offset
+   12. Charge recognition/ranking and preserve both structural obligations. Keep
+   case 1189 as a contrasting control where probing found a useful forced value.
+   Early splitting can lose that opportunity; no counterfactual saving is yet measured.
+2. **Avoid repeated global maintenance for clear-only blocks.** Ten of twelve
+   advances add clear probe records without new states or forced edges. An exact
+   append path could update probe-prefix maps without refreshing unchanged coverage
+   rules, but must preserve catalog completeness and pending-target activation.
+   Work on this alongside discovery rather than replacing the discovery objective.
+3. **Expand beyond this selected path.** Twenty-four originals remain uncovered.
+   The new original selector prevents an empty retained frontier from ending all
+   work, but its smallest-support ranking is a heuristic. Arbitrary CNFs need not
+   have a closed cofactor or a short chain of such reductions.
+
+All **176 relevant tests** and independent checkpoint reconstruction pass. The
+**14,150-byte compressed delta** adds seven patterns and ten probe blocks, with two
+separate split records. Full history is **770,924,544 bytes / 41,787 patterns**;
+all old rows remain. Resume **`experiments/results/cnf-original-warm/report.json`**
+through `continue_cnf_original_warm.restore_checkpoint`, retaining evidence counts
+**(1, 42, 156, 14, 1)**. The active leaf SHA-256 is
+`ef925b9a7d10a3bab64accecd2ce12015dfa400b13bc949f39781e28c55069f8`.
+
+## Previous investigation: a warm batch closes another original
 
 [Eight retained-session advances](warm-expansion-batch.md) raise structural
 coverage **58/83 -> 59/83**, closing original case **1189** (48 variables / 204

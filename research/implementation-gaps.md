@@ -6067,3 +6067,43 @@ and identity `1ad496f104725f62b5d8f754633a96c47aac13064bc6bf977b2f79001dfbde24`.
 Test transfer of the restriction/implication/elimination/split pattern while
 preserving one admission allowance. Complete-route maintenance remains the
 largest repeated warm cost; cold auditing and persistence are still substantial.
+
+
+## 2026-11-14: another original exposes a closed-cofactor scheduling gap
+
+[The original-frontier batch](original-warm-expansion.md) selects case **1445**,
+following its **33-variable / 121-clause / 359-literal** residual. Two saved splits,
+three binary-path reductions and two eliminations leave one open **29 / 103 / 307**
+residual with **7/32 admissions**. Both splits reuse the same earlier empty-CNF
+terminal. Coverage remains **59/83**: part of the transformation sequence transfers,
+but this batch does not close another original. All 74 new external probes are clear.
+
+The selected split traces already existed in the immutable source nodes. Ordinary
+exhaustion nevertheless consumed seven clear blocks before those two splits;
+their full route refreshes cost **6.73336 s**. Compare earlier selection of a
+known closed-cofactor pair against continued probing, including the possibility
+of a cheaper forced reduction. This is an identified opportunity, not a measured
+counterfactual speedup or a guarantee of such a pair for every CNF.
+
+Discovery/acquisition totals **0.20427 s**, while twelve complete route refreshes
+cost **11.55914 s**. Full/incremental warm composition and checking cost
+**1.38586 / 0.47716 s**; with shared selection, acquisition and refresh, the indicated
+saving is **6.80%**. Initial reconstruction and complete preparation remain
+**94.52082 s**; the whole study costs **129.39795 s**. The **14,150-byte compressed
+delta** preserves seven patterns and ten probe blocks; two split sidecars are
+added. Full history is **770,924,544 bytes / 41,787 patterns**, growing by 217,088
+bytes. Previous rows and all 2,041 reference nodes survive; 2,075 reference nodes
+and the unchanged 2,828-step positive proof check. All **176 relevant tests** and
+independent reconstruction with new recognition disabled pass.
+
+Resume **`experiments/results/cnf-original-warm/report.json`** through
+`continue_cnf_original_warm.restore_checkpoint`, with evidence counts
+**(1, 42, 156, 14, 1)**. The new selector resumes retained obligations first, then
+selects uncovered originals if that frontier is empty. It follows selected paths,
+not all possible decompositions. The active leaf SHA-256 is
+`ef925b9a7d10a3bab64accecd2ce12015dfa400b13bc949f39781e28c55069f8`.
+Six ordinary candidates remain at offset 12: **18, 20, 23, 24, 28, 29**. The best
+saved split is **local variable 12**, with one closed child and one missing
+28-variable / 281-literal cofactor. Test that reuse opportunity next, retaining
+case 1189 as a contrasting forced-reduction control. No unrestricted construction,
+peak-RAM or new Lean guarantee is established.

@@ -28,7 +28,15 @@ classes.
 
 ## Paper
 
-[The latest discovery batch](research/warm-expansion-batch.md) raises structural
+[The latest original-frontier batch](research/original-warm-expansion.md) reduces
+another open residual from **33 to 29 variables**, using **7/32 admissions**.
+Two splits reuse the same earlier empty-CNF terminal; overall coverage stays
+**59/83**. The next opportunity is to use these known closed cofactors earlier:
+seven clear probe blocks preceded the selected splits, costing **6.73 seconds**
+in route refresh alone. Acquisition took **0.204 seconds**, while full initial
+preparation still cost **94.52 seconds**. All **176 relevant tests** pass.
+
+[The preceding discovery batch](research/warm-expansion-batch.md) raises structural
 coverage **58/83 -> 59/83**. A forced restriction exposes binary-implication
 deletions and variable elimination; a saved split of the remaining 15-variable
 source reaches two 2-CNF terminals. The batch uses **21/32 admissions** and retains

@@ -1,0 +1,76 @@
+{
+  "covered_after": 59,
+  "covered_before": 58,
+  "evidence_counts": [
+    1,
+    42,
+    156,
+    12,
+    1
+  ],
+  "gains": [
+    30
+  ],
+  "idempotent_merge": true,
+  "independent_reconstruction": {
+    "evidence_counts": [
+      1,
+      42,
+      156,
+      12,
+      1
+    ],
+    "preserved_closed": 59,
+    "reconstruction_passed": true,
+    "report_sha256": "259b1d1ba3e687be5ea6cd96bfc2650c60b00414a8002e4a2bec72ba96c1e2eb",
+    "seconds": 28.74594120774418
+  },
+  "matched_full_incremental_coverage": true,
+  "new_database_rows": {
+    "cnf_coupled_trials_v1": 0,
+    "cnf_growth_trials_v1": 0,
+    "cnf_pattern_sources_v1": 0,
+    "cnf_patterns_v1": 21,
+    "cnf_pivot_trials_v1": 0,
+    "cnf_probe_continuations_v1": 5,
+    "cnf_probe_windows_v1": 2,
+    "cnf_residual_v1": 0
+  },
+  "new_tests": 4,
+  "old_rows_preserved": {
+    "cnf_coupled_trials_v1": 25,
+    "cnf_growth_trials_v1": 1,
+    "cnf_pattern_sources_v1": 1548,
+    "cnf_patterns_v1": 41759,
+    "cnf_pivot_trials_v1": 563,
+    "cnf_probe_continuations_v1": 134,
+    "cnf_probe_windows_v1": 92,
+    "cnf_residual_v1": 21838
+  },
+  "parent_artifact_counts": {
+    "cnf-expanded-coverage": 8,
+    "cnf-incremental-coverage": 8,
+    "cnf-local-forcing": 16,
+    "cnf-positive-bundle": 9,
+    "cnf-positive-primitives": 9,
+    "cnf-reused-branch": 17,
+    "cnf-selected-routes": 8,
+    "cnf-source-local-checked": 16
+  },
+  "parent_artifacts_unchanged": true,
+  "parent_unchanged": true,
+  "positive_steps": 2828,
+  "reference_preserved_nodes": 2012,
+  "reference_verified_nodes": 2041,
+  "report_sha256": "259b1d1ba3e687be5ea6cd96bfc2650c60b00414a8002e4a2bec72ba96c1e2eb",
+  "scope": "One bounded warm discovery batch on reused development inputs. New records and positive proof cold-checked; full historical or cold negative-catalog audit and peak RAM not claimed. No new Lean refinement.",
+  "source_fingerprints": {
+    "experiments/cnf_incremental_coverage.py": "5bef8cb699796b28dbd597509e71e8797ccacea4a384aa1bbe697e869b5827bd",
+    "experiments/cnf_warm_expansion.py": "19f8fc0887b322fcd8a12e0241c2ff6221dafc43d32563077952863e8af40b21",
+    "experiments/continue_cnf_warm_batch.py": "adc985c7f0a7ae0f58d7df7300744dec5d3faae889a1a035f01b5c4367b6ef44",
+    "solver/test_cnf_warm_expansion.py": "4b7a47cdf96a5502bbfa5a2efafb81e1747447ae2d95e09437fc13010fa7bbcb"
+  },
+  "test_command": "python3 -m unittest solver.test_cnf_positive_bundle solver.test_cnf_positive_primitives solver.test_cnf_expanded_coverage solver.test_cnf_selected_routes solver.test_cnf_route_composition solver.test_cnf_trace_split solver.test_cnf_probe_window solver.test_cnf_probe_continuation solver.test_cnf_learning_continuation solver.test_cnf_trace_learning solver.test_cnf_trace_reuse solver.test_cnf_coupled_pivots solver.test_cnf_affine_clause solver.test_cnf_retained_plans solver.test_cnf_variable_elimination solver.test_cnf_clause_bound_elimination solver.test_cnf_additive_elimination solver.test_cnf_binary_paths solver.test_cnf_polarity_horn solver.test_cnf_simplification solver.test_cnf_fused_conditioning solver.test_cnf_affine_projection solver.test_cnf_affine_patterns solver.test_cnf_probe_equivalence solver.test_cnf_source_local solver.test_cnf_local_forcing solver.test_cnf_incremental_coverage solver.test_cnf_warm_expansion",
+  "test_log_sha256": "65c4bf96de57eaec7cef4452bc3f92353e7dc4a744b4d21af33b2e05ccb88b38",
+  "tests": 160
+}

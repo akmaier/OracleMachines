@@ -28,13 +28,22 @@ classes.
 
 ## Paper
 
+[The latest discovery batch](research/warm-expansion-batch.md) raises structural
+coverage **58/83 -> 59/83**. A forced restriction exposes binary-implication
+deletions and variable elimination; a saved split of the remaining 15-variable
+source reaches two 2-CNF terminals. The batch uses **21/32 admissions** and retains
+all earlier results. Actual discovery takes **0.119 seconds**, with **7.59 seconds**
+of route refresh and **91.13 seconds** of initial preparation charged separately.
+All **160 relevant tests** pass. The next target is another uncovered original:
+the retained split frontier is closed, but 24 original inputs remain uncovered.
+
 [Incremental coverage maintenance](research/incremental-coverage.md) now reuses
 the acquired rule graph. Warm composition and checking average **0.261 to 0.039
 seconds**, or an indicated **18.47%** saving after including complete route
 refresh. Cold replay remains expensive and is slightly slower with the index
 (**64.41 versus 62.63 seconds**); the new snapshot also adds storage. All **156
-relevant tests** pass. The next priority is useful discovery across a bounded
-warm session, preserving the initial construction cost in the account.
+relevant tests** passed at that checkpoint. This motivated the bounded warm
+discovery session above, preserving the initial construction cost in the account.
 
 [The latest forced reduction](research/source-local-forcing.md) proves one
 frontier variable true and shrinks the open source from **23 variables / 93

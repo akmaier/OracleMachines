@@ -2188,3 +2188,45 @@ split pairs **13, 5, 6, 11** in a bounded warm session with one admission allowa
 Complete route refresh, cold catalog revalidation and full-snapshot persistence
 remain costs. Use the reusable graph for actual discovery before another isolated
 verification optimization; no unrestricted construction claim follows.
+
+
+## 2026-11-14: warm discovery batch reaches another original through 2-CNF
+
+[The eight-step discovery batch](warm-expansion-batch.md) raises structural
+coverage **58/83 -> 59/83**, closing original case **1189**, a 48-variable /
+204-clause development input. A forced value on the 22-variable source exposes
+five binary-implication path deletions and six eliminations, reaching a
+15-variable / 55-clause leaf. Its remaining ordinary probes are clear; a saved
+split on local variable 4 closes both cofactors through 2-CNF terminals. Both
+branches independently check SAT. Closure propagates through 65 sources per
+coverage graph, reusing retained ancestors. This is one observed interaction of
+existing transformations, not a new unrestricted tractability guarantee.
+
+The session consumes **21/32 state admissions** without resetting between eight
+steps or between the two split branches. It retains **21 new pattern records,
+two windows, five continuations and one split sidecar**. The database delta is
+**15,484 compressed bytes**; full history grows by **335,872 bytes** to
+**770,707,456 bytes / 41,780 pattern nodes**. All previous rows remain, and merge
+is idempotent. The reference archive preserves all 2,012 old nodes and checks
+2,041; the expanded positive proof now has 2,828 steps. All **160 relevant tests**
+and fresh checkpoint reconstruction pass.
+
+Actual acquisition costs **0.11884 s**, eight full route refreshes **7.59057 s**,
+and warm composition/checking **1.30709 s full / 0.30604 s incremental**. Including
+selection, acquisition and refresh gives an indicated **11.00%** saving, with
+substantial first-control timing variation. Initial reconstruction, preparation
+and complete catalog audit cost **91.13181 s**; the whole study costs 122.01047 s.
+Saved split-trace replay is slower on this one pair (0.000719 versus 0.000452 s).
+These costs and the absence of a peak-RAM bound remain explicit.
+
+Resume **`experiments/results/cnf-warm-batch/report.json`** through
+`continue_cnf_warm_batch.restore_checkpoint`, preserving all five evidence lists
+**(1, 42, 156, 12, 1)**. The retained split frontier is now empty, but **24 original
+inputs remain structurally uncovered**. Do not rerun only that empty selector.
+Use `continue_cnf_original_splits.select` / `selected_frontiers` for another
+original, or compare the **17 ready learned bases / 88 candidates**. The smallest
+ready base has 33 variables / 359 literals, eight candidates left at offset 24,
+and identity `1ad496f104725f62b5d8f754633a96c47aac13064bc6bf977b2f79001dfbde24`.
+Test transfer of the restriction/implication/elimination/split pattern while
+preserving one admission allowance. Complete-route maintenance remains the
+largest repeated warm cost; cold auditing and persistence are still substantial.

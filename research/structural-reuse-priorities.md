@@ -12,7 +12,49 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: incremental coverage and the cold-cost boundary
+## Current investigation: a warm batch closes another original
+
+[Eight retained-session advances](warm-expansion-batch.md) raise structural
+coverage **58/83 -> 59/83**, closing original case **1189** (48 variables / 204
+clauses). A forced value on the 22-variable source exposes five binary-path
+deletions and six eliminations, leaving a 15-variable residual. After its ordinary
+probes are exhausted, a retained split reaches two checked 2-CNF terminals.
+Both branches close; the reference solver confirms both SAT. The session uses
+**21/32 admissions** and propagates closure through 65 sources per coverage graph.
+
+Actual discovery takes **0.11884 s** across eight steps; complete external-route
+refresh takes **7.59057 s**. Warm composition/checking totals **1.30709 s full /
+0.30604 s incremental**, giving an indicated **11.00%** saving after selection,
+acquisition and refresh. Initial reconstruction/preparation/auditing still costs
+**91.13181 s**. Saved split-trace replay is slightly slower than fresh propagation
+on this one pair; the regression is retained. No unrestricted bound follows.
+
+1. **Select another uncovered original or a learned base.** The retained split
+   frontier is now empty, while **24/83 original inputs remain uncovered**. Use
+   `continue_cnf_original_splits.select` / `selected_frontiers` to seed a new
+   original; merely rerunning the retained-frontier batch would find no work.
+   The learned queue still has **17 ready bases / 88 candidates**. Its smallest
+   ready source has 33 variables / 359 literals and eight remaining candidates
+   at offset 24; its exact identity is in the new discovery note.
+2. **Transfer the observed transformation sequence.** Search for forced
+   restrictions that expose redundant wide clauses through binary implications,
+   permit bounded elimination, and leave small splits into recognized families.
+   Compare saved evidence and residual ranks across the remaining originals;
+   do not infer that every CNF has a short such sequence.
+3. **Reduce complete-route maintenance while doing useful discovery.** Eight
+   refreshes cost much more than acquisition. A future delta catalog must track
+   all pending-target dependencies and preserve exact completeness. Keep the
+   initial cold semantic audit and archive/persistence cost explicit.
+
+All **160 relevant tests** and fresh checkpoint reconstruction pass. The
+**15,484-byte compressed delta** adds 21 patterns and seven probe blocks;
+one split sidecar is added. History is **770,707,456 bytes / 41,780 pattern nodes**,
+with every old row preserved. The positive proof now has **2,828 steps**.
+Resume from **`experiments/results/cnf-warm-batch/report.json`** through
+`continue_cnf_warm_batch.restore_checkpoint`, preserving evidence counts
+**(1, 42, 156, 12, 1)**. No new full graph snapshot was written.
+
+## Previous investigation: incremental coverage and the cold-cost boundary
 
 [Incremental coverage](incremental-coverage.md) retains the complete finite rule
 graph and updates affected obligations after the saved forced expansion. In the

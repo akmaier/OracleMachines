@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Automatic target discovery](research/projection-lookup.md) now recovers the
+previous projection bridge without being given its target. It finds **no new
+match on the 23 unresolved frontier sources**. Indexed discovery is faster than
+scanning a prepared catalog, but construction costs **14.4 s / 28.1 MB**. The next
+test is a newly exposed **36-variable / 153-clause** projection; it is not yet an
+acquired or solved target. Coverage remains **62/83**.
+
 [Exact projection now connects the two expansion paths](research/projection-bridge.md).
 A checked elimination and subsumption step lets both leaves reuse one proof:
 **13 instead of 25 new states**, **15.1% less warm expansion time** and **7.0% less

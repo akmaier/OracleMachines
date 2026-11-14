@@ -12,7 +12,40 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: exact projection shares the completed proof
+## Current investigation: target discovery works, frontier matches remain absent
+
+[Automatic projection lookup](projection-lookup.md) finds the previous bridge
+without a supplied target, but finds **no new bridge on 23 unresolved frontier
+sources**. Coverage remains **62/83**. The complete current-policy catalog holds
+**19,841 formulas / 17,801 minimal-clause signatures**. Indexed query batches take
+**0.87112 s vs 1.55276 s** for scanning the same prepared catalog, while building
+it costs **14.42661 s** and adds **28,110,848 bytes**. Do not interpret a faster
+lookup as a demonstrated total expansion saving or enable the catalog by default.
+
+1. **Acquire and classify the newly exposed bounded projection.** On the selected
+   **37 / 151 / 455** residual of case 1298, variable **13** produces 154 clauses;
+   checked subsumption leaves **36 variables / 153 clauses / 470 literals**, within
+   final clause growth two but with fifteen more literal occurrences. Its target is not acquired. Compare bounded acquisition with ordinary
+   continuation from the same seed. Exact target key is in the new study's
+   `selected-diagnostics.json.gz`, SHA-256
+   `2689db3a9f1f850442aacef39eb4e6acd62bc431404592a129dc81b9695d94cf`.
+2. **Broaden useful structure before accelerating more matching.** Of 967 tested
+   variables, 95 exceed the pair cap and 845 exceed final clause growth after
+   subsumption. Only 27 projections reach lookup. Investigate which intermediate
+   projections expose a family or later reusable target, charging failed work.
+3. **Keep catalog preparation conditional on likely reuse.** The warm saving is
+   **0.68164 s per batch**; one known match does not justify global preparation.
+   Try demand-driven scope and factoring shared policy bytes if indexing becomes
+   useful. Full route refresh remains a separate measured expansion bottleneck.
+
+The solver authority and all earlier results are unchanged. Resume
+`experiments/results/cnf-projection-bridge/report.json` using its restorer and
+bridge archive as documented below. The new lookup study preserves the optional
+catalog and negative findings at `experiments/results/cnf-projection-lookup/`.
+All **194 tests pass**. Independent cold replay validates the complete index,
+all matched result sets and unchanged global coverage without new recognition.
+
+## Previous investigation: exact projection shares the completed proof
 
 [A checked projection connects the two selected leaves](projection-bridge.md).
 Eliminating variable **16** from **29 / 108 / 337**, then deleting one clause

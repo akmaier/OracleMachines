@@ -1,0 +1,72 @@
+{
+  "covered": 62,
+  "index_build": {
+    "bytes": 28110848,
+    "counts": {
+      "anchor_candidate_ranks": 1489702,
+      "anchor_discovery_calls": 19719,
+      "anchor_discovery_subset_tests": 1478465,
+      "anchor_exact_lookups": 2836037,
+      "anchor_posting_entries": 5225398,
+      "anchor_posting_lookups": 8313511,
+      "anchor_preparation_literals": 8313511,
+      "anchor_retained_postings": 2836037,
+      "anchor_uniform_width_fallbacks": 122,
+      "authority_keys_scanned": 41912,
+      "index_added_keys": 19841,
+      "index_compressed_key_bytes": 21355437,
+      "index_kernel_clauses": 2850573,
+      "index_key_bytes": 54475248,
+      "index_policy_skips": 22071,
+      "normalization_literal_visits": 8357141,
+      "signature_bytes": 33017249,
+      "subset_index_exact_lookups": 14536,
+      "subset_index_preparation_literals": 43630,
+      "subset_index_width_checks": 14415,
+      "subsumption_discovery_calls": 122,
+      "subsumption_discovery_literal_visits": 43630
+    },
+    "entries": 19841,
+    "seconds": 14.426612459123135,
+    "signatures": 17801
+  },
+  "limitations": [
+    "Twenty-three adaptively selected unresolved development frontier sources plus one previously successful control; not a fresh holdout.",
+    "Index and scan use the same prepared minimal-clause signatures, exact bridge checker and current-policy authority. Only target lookup differs.",
+    "Three serial reversed-order repetitions share OS caches. Preparation, persisted index and cold replay are reported separately from warm search.",
+    "Search tries at most 64 variables, 64 opposing pairs per variable and 64 target proposals; arbitrary signed renaming and stronger semantic implication are outside its scope.",
+    "The index is a proposal cache. Missing, stale or capped candidates are inconclusive; only full checked endpoints and projection/subsumption justify a bridge.",
+    "No new solving or pattern acquisition is permitted. Disk bytes are not peak RAM, and indexed lookup savings are not whole-solver speedups."
+  ],
+  "modes": [
+    {
+      "candidates": 1,
+      "control_bridges": 1,
+      "frontier_sources_with_bridge": 0,
+      "growth_misses": 845,
+      "max_seconds": 1.598921291064471,
+      "mean_seconds": 1.5527616529725492,
+      "min_seconds": 1.5229550837539136,
+      "mode": "scan",
+      "pair_misses": 95,
+      "scanned_entries": 535707,
+      "signature_lookups": 27,
+      "variables": 967
+    },
+    {
+      "candidates": 1,
+      "control_bridges": 1,
+      "frontier_sources_with_bridge": 0,
+      "growth_misses": 845,
+      "max_seconds": 0.8733243341557682,
+      "mean_seconds": 0.8711195420473814,
+      "min_seconds": 0.8693090830929577,
+      "mode": "indexed",
+      "pair_misses": 95,
+      "scanned_entries": 0,
+      "signature_lookups": 27,
+      "variables": 967
+    }
+  ],
+  "novel_bridges": 0
+}

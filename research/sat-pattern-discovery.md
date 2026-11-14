@@ -2473,3 +2473,30 @@ The next original is **1298 / index 47**, leaf **37 / 151 / 455**, source SHA-25
 Next: recognize converging projections against retained structure before separate
 acquisition, including final subsumption in the growth decision. Indexing,
 failed proposals, arbitrary renaming and complete route refresh remain open costs.
+
+## 2026-11-14: automatic projection target discovery and a bounded miss
+
+[The new proposal catalog](projection-lookup.md) indexes **19,841 current-policy
+formulas** by **17,801 minimal-clause signatures**. It recovers the previous
+bridge without a supplied target, including the target's two redundant clauses.
+Every hit still needs the original exact projection/subsumption checker and a
+justified target proof. All **23 unresolved frontier sources** miss this bounded
+search; coverage stays **62/83**, and the solver authority is unchanged.
+
+Three alternating repetitions query 24 sources, including the known control.
+Indexed discovery takes **0.87112 s**, versus **1.55276 s** scanning the same
+prepared signatures. Construction costs **14.42661 s**, with **28,110,848 bytes**
+of extra SQLite storage (**23,149,996 compressed bytes**). These are lookup
+measurements, not demonstrated total expansion savings. Of 967 variable
+proposals, 95 exceed the opposing-pair cap and 845 exceed final growth even after
+subsumption; just 27 reach lookup. Only the known control has an acquired match.
+
+Next: acquire the selected 37-variable residual's **variable-13** projection
+within a bounded, matched comparison. Subsumption reduces its raw **154 clauses**
+to **153 on 36 variables**, satisfying final growth two, but no acquired matching
+target exists. Preserve the next ordinary probes **15, 18, 19, 20**. The exact
+candidate is archived in the new study's `selected-diagnostics.json.gz`. Keep the
+global index optional until broader reuse justifies its preparation and space.
+Resume the unchanged `cnf-projection-bridge/report.json` authority with all five
+evidence lists and its separate bridge archive. New catalog and negative results
+are preserved in `experiments/results/cnf-projection-lookup/`.

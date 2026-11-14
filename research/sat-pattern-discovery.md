@@ -1942,9 +1942,11 @@ Both arms start with fresh verifier caches and check the same positive claim.
 The comparator reconstructs all external routes; it is not a full archive audit
 or the previous complete expansion pipeline.
 
-The actual checking closure falls **11,514 -> 10,258 pattern nodes**, and node
-JSON payload falls **100,554,675 -> 88,614,890 bytes**. Neither is a peak-RAM
-measurement. Crucially, the selected replay still needs **9,665 nodes beyond
+Corrected to include the retained-policy verifier cache, the checking closure
+falls **13,211 -> 11,955 pattern nodes**, and node JSON payload falls
+**109,165,321 -> 97,225,536 bytes**. The original report counted only the current
+view; timing samples already included both. Neither payload is a peak-RAM
+measurement. Crucially, the selected replay still checks **11,362 nodes beyond
 its 593 explicit steps**. Internal profiles, stored alternatives and summaries
 remain recursively checked. Measure their successful semantic dependencies
 before attempting a standalone positive checker; a short outer witness does
@@ -1960,3 +1962,34 @@ claimed. Resume the **23-variable / 93-clause** frontier from
 156, 11, 1)**. Saved pairs **5, 6, 11, 13** and ordinary candidates **7, 9, 16,
 17** remain the next discovery options. Detailed scope and reproduction commands
 are in the linked note and `cnf-selected-routes/report.json`.
+
+
+## 2026-11-14: expose retained proof steps and correct dependency totals
+
+[Expanded positive coverage](expanded-coverage-dependencies.md) replaces the old
+proof's implicit bases with explicit internal plans and exact retained-policy
+references. The same 58 roots now have **2,748 ordered steps**, exposing **2,155**
+hidden steps. Both conditioning branches, shared component occurrences and all
+selected external rules survive. Independent cold replay passes with fresh
+discovery disabled; the 57-test suite covers missing or forged dependencies.
+
+The accounting audit found a separate prepared-policy cache omitted from the
+previous dependency summary. Selected replay actually checks **11,955 nodes /
+97,225,536 node JSON bytes**, including **1,697 prepared nodes / 8,610,646 bytes**.
+Full-route replay checks **13,211 nodes / 109,165,321 bytes**. Timing samples had
+included this work, so the prior 15.03% mean replay saving remains unchanged.
+Historical reports are preserved; the new report records their corrected totals.
+
+**9,207 checked nodes / 78,657,022 node JSON bytes** are outside the expanded
+positive graph. They include primitive/external dependencies as well as history
+and losing alternatives; they are not all proved removable. The next checker
+must establish sufficient primitive premises before pruning them. Expansion
+costs **0.26315 s** after checking; the graph is **777,176 compressed bytes** and
+still depends on the full history. Cold expanded replay costs **34.50104 s**
+versus **30.51477 s** for the old selected witness in this run, so this step makes
+proof obligations explicit without an achieved runtime reduction.
+
+Coverage, SQLite, every previous result and the 23-variable / 93-clause discovery
+frontier are unchanged. Resume `cnf-reused-branch/report.json`, retaining all five
+evidence lists **(1, 42, 156, 11, 1)**. The new report is a verification study,
+not a new reconstructible discovery checkpoint or an unrestricted-SAT result.

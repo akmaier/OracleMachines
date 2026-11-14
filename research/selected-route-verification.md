@@ -33,6 +33,16 @@ be ignored by positive replay while a full catalog check rejects it; the tests
 exercise that distinction. Archive preservation and complete-history audits
 remain separate obligations.
 
+## Accounting correction (14 November 2026)
+
+The first dependency report counted `h.checked` but omitted the separate
+`h.prepared.checked` cache used to verify retained plans. Both arms also checked
+**1,697 prepared-policy nodes / 8,610,646 node JSON bytes**. The original timing
+samples already included that work and are unchanged. The corrected totals below
+include both caches; their policy-bound key sets are disjoint. The historical
+fingerprinted reports remain intact, with a correction and explicit expanded
+proof in [the dependency study](expanded-coverage-dependencies.md).
+
 ## Matched cold comparison
 
 Both arms replay the same certificate and the same 58 roots from the same
@@ -46,9 +56,9 @@ caches are not flushed, and two repetitions do not provide a confidence interval
 | First cold replay, seconds | 36.01545 | 29.68143 |
 | Second cold replay, seconds | 35.43063 | 31.02749 |
 | Mean, seconds | 35.72304 | 30.35446 |
-| Recursively checked pattern nodes | 11,514 | 10,258 |
-| Node JSON payload, bytes | 100,554,675 | 88,614,890 |
-| Pattern key payload, bytes | 30,735,716 | 27,263,272 |
+| Recursively checked pattern nodes, both policies | 13,211 | 11,955 |
+| Node JSON payload, bytes, both policies | 109,165,321 | 97,225,536 |
+| Current-policy key payload, bytes | 30,735,716 | 27,263,272 |
 | Exposed external routes | 657 | 56 |
 | Checked ordinary continuation blocks | 133 | 25 |
 | Checked learned continuation blocks | 156 | 26 |
@@ -57,9 +67,9 @@ caches are not flushed, and two repetitions do not provide a confidence interval
 Mean cold replay falls **15.03%** in these measurements. The selected path avoids
 1,256 checked pattern nodes and 11,939,785 bytes of node JSON payload. These are
 logical retained payload counts, not Python heap, RSS or peak RAM. The 593-step
-proof actually requires **10,258 nodes**, including **9,665** beyond its explicit
-steps. It still checks 76,208 saved probe attempts and performs 86,328
-simplification checks. These counters describe different operations and must
+proof actually checks **11,955 nodes**, including **11,362** beyond its explicit
+steps. The current-policy view alone checks 76,208 saved probe attempts and performs
+86,328 simplification checks; the prepared-policy view adds work. These counters describe different operations and must
 not be added as disjoint costs.
 
 Selected route lookup reads 64 indexed SQL records totaling 333,267 payload bytes;
@@ -86,7 +96,7 @@ of the full comparator's set and is identical across repetitions.
 
 The main remaining cost is inherited internal checking. Loading one inventory
 node verifies its profile, stored alternatives, summaries and recursive children;
-a `base` step can hide a whole checked plan. The additional 9,665 nodes therefore
+a `base` step can hide a whole checked plan. The additional 11,362 nodes therefore
 cannot simply be discarded or labelled redundant. Measure which are required by
 an expanded successful semantic proof and which support only historical policy
 or losing alternatives. A standalone positive checker would need exact source

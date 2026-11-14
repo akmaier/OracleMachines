@@ -12,17 +12,51 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: selected positive replay and its real dependency cost
+## Current investigation: explicit proof obligations across both verifier policies
+
+[The expanded proof](expanded-coverage-dependencies.md) turns 593 outer steps
+into **2,748 explicit steps**, including 115 retained-plan references. It verifies
+the same 58 roots and exposes 2,155 hidden steps. The accounting audit also
+corrects the earlier omission of the prepared-policy cache: selected replay
+checks **11,955 nodes / 97,225,536 node JSON bytes**, not just the 10,258 nodes in
+the current-policy view. The earlier timing measurements already included both.
+
+1. **Build a sufficient primitive checker for the expanded positive graph.**
+   **9,207 checked nodes / 78,657,022 node JSON bytes** lie outside its explicit
+   structural steps. They include external evidence dependencies; do not assume
+   all are removable. Start by separating the selected transformation's logical
+   premises from prior failed recognizers, candidate ranking and losing plans.
+   Preserve exact bindings, retained references and both conditioning branches.
+   The graph is not yet self-contained, and cold expanded replay remains slower
+   in the one measured run (**34.50104 versus 30.51477 seconds**).
+2. **Continue bounded discovery on the unchanged open leaf.** The **23-variable /
+   93-clause** source retains pairs **5, 6, 11, 13**. Compare ordinary candidates
+   **7, 9, 16, 17** with those splits under one shared admission allowance. The
+   wider learned queue remains 17 bases / 88 candidates. This study adds no root
+   coverage or new tractable family.
+3. **Integrate only after defining what is still checked.** A positive proof
+   subset is not a complete discovery catalog or an archive audit. Charge both
+   verifier views, source/sidecar preparation, reconstruction and persistence;
+   do not infer total memory from the outer proof length or JSON payload alone.
+
+Reproduction and correction records are in `experiments/results/cnf-expanded-coverage/`.
+Resume discovery from `experiments/results/cnf-reused-branch/report.json` through
+`continue_cnf_reused_branch.restore_checkpoint`, retaining all five lists
+**(1, 42, 156, 11, 1)** and earlier sidecars. SQLite remains **770,338,816 bytes /
+41,758 nodes**. The 57-test suite and fresh expanded-proof replay pass.
+
+## Previous investigation: selected positive replay and its real dependency cost
 
 [Selected-route verification](selected-route-verification.md) preserves the
 593-step positive proof for 58/83 roots while checking only its external route
 dependencies. Mean cold replay falls **35.72304 -> 30.35446 seconds (15.03%)**
-over two repetitions with reversed order. Checked nodes fall **11,514 -> 10,258**;
-node JSON payload falls **100,554,675 -> 88,614,890 bytes**. Archive bytes and
+over two repetitions with reversed order. Corrected counts across both verifier policies fall **13,211 -> 11,955**;
+node JSON payload falls **109,165,321 -> 97,225,536 bytes**. The original count
+omitted 1,697 prepared-policy nodes; the timing samples are unchanged. Archive bytes and
 coverage are unchanged. This measures positive replay, not complete expansion.
 
 1. **Expand the successful proof's internal dependencies before pruning them.**
-   The 593 explicit steps still require **9,665 additional inventory nodes**.
+   The 593 explicit steps still require **11,362 additional inventory nodes**.
    Internal profiles, all stored alternatives, summaries and retained-plan
    premises remain checked. Determine which support the successful semantic plan
    and which only reconstruct historical policy. Do not assume all additional

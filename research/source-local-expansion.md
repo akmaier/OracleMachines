@@ -13,6 +13,10 @@ from the complete, read-only authoritative archive. The old source and prefix
 validators run before reuse. Newly acquired records are appended locally and
 exported as a delta. The positive-only bundle is not used as a discovery store.
 
+The following [forced-reduction checkpoint](source-local-forcing.md) advances
+this window and retains a smaller 22-variable residual. The measurements below
+describe the preceding clear-block experiment.
+
 ## Membership, scope and validation contracts
 
 `experiments/cnf_source_local.py` implements two separate mechanisms:

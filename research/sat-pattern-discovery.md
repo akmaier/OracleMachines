@@ -2108,3 +2108,44 @@ are **18, 21, 22, 23**, compared with saved split pairs **5, 6, 11, 13** under o
 allowance. The learned queue remains 17 bases / 88 candidates. Source-local split
 and learned dependencies, global selection and amortizing restoration remain
 open; the ordinary-stream API does not provide their completeness contracts.
+
+
+## 2026-11-14: source-local forced reduction and global recomposition gap
+
+[Forced source-local expansion](source-local-forcing.md) advances the saved clear
+prefix and proves **source variable 22=true**. The block checks both assumptions
+for 18 and 21, then derives a conflict under 22=false. Fourteen unit reasons and
+the conflict are checked. The exact target shrinks **23 variables / 93 clauses /
+288 literals -> 22 / 88 / 272**, with one admitted unresolved node and no pending
+acquisition. Coverage remains **58/83**, and the 2,748-step positive proof replays.
+Reference solving confirms source and target SAT, with a checked lifted model;
+all 1,998 former reference nodes survive among 2,012 verified nodes.
+
+Eager and source-local workers produce identical records, ordinary probe counts,
+admitted identities and byte-identical deltas. Two reversed fresh-process trials
+reduce mean one-block process time **10.03384 -> 0.13717 s (98.63%)**, including
+preparation and export with an available authority. Actual advance/recognition
+is slightly slower. Local SQLite is **126,976 bytes**, but still depends on full
+history. Initial reconstruction costs **21.99791 s**; global preparation costs
+**6.47823 s**, and global composition/checking costs **55.48722 s**. The full
+four-worker study takes **115.19078 s**, excluding the unmeasured exploratory
+propagation used for adaptive selection. This is no complete SAT-solver or
+peak-RAM claim. Global checking caches hold 22,603 nodes / 191,717,696 node-JSON
+bytes, exposing the next maintenance cost.
+
+The **4,447-byte compressed delta** adds one continuation and one pattern node.
+Full history grows by **24,576 bytes** to **770,371,584 bytes / 41,759 nodes**;
+parent records are unchanged and merge is idempotent. All **148 relevant tests**
+pass. A fresh full checkpoint reconstruction checks the new records, table digests
+and positive proof. No new Lean refinement, tractable category or unrestricted
+construction bound is claimed.
+
+Resume via `continue_cnf_local_forcing.restore_checkpoint` from
+`experiments/results/cnf-local-forcing/report.json`, retaining all five lists
+**(1, 42, 156, 11, 1)**. The new leaf has SHA-256
+`545c51d457452dc1fd3dec970e5eadc1f85ba4012c889be2164277966968bf29`.
+Next ordinary candidates are **16, 18, 21, 22**, in new canonical coordinates
+(new 22 is old 23); saved split pairs rank **13, 5, 6, 11**. The learned queue
+remains 17 ready bases / 88 candidates. Next investigate those discoveries and
+exact incremental coverage maintenance with a complete reverse-dependency index;
+partial catalogs or stale negative caches must not substitute for that contract.

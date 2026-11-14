@@ -1,0 +1,44 @@
+{
+  "history_bytes_unchanged": true,
+  "idempotent_merge": true,
+  "independent_reconstruction": {
+    "evidence_counts": [
+      1,
+      42,
+      156,
+      11,
+      1
+    ],
+    "preserved_closed": 58,
+    "reconstruction_passed": true,
+    "report_sha256": "520f003f6cd17e4f4b3120d78d3d87ea5bffadf6e9026d1021dd151b4cace4b9",
+    "seconds": 25.39409558288753
+  },
+  "matched_delta_sha256": "3dd568d5da7dec998194fb90f3afdd9492f3b4aef3ffc34b3aaf560a4ed175bb",
+  "new_integration_tests": 2,
+  "novel_continuations": 1,
+  "novel_pattern_nodes": 1,
+  "parent_artifact_counts": {
+    "cnf-expanded-coverage": 8,
+    "cnf-positive-bundle": 9,
+    "cnf-positive-primitives": 9,
+    "cnf-reused-branch": 17,
+    "cnf-selected-routes": 8,
+    "cnf-source-local-checked": 16
+  },
+  "parent_artifacts_unchanged": true,
+  "positive_proof_unchanged": true,
+  "positive_steps": 2748,
+  "preserved_positive_roots": 58,
+  "report_sha256": "520f003f6cd17e4f4b3120d78d3d87ea5bffadf6e9026d1021dd151b4cace4b9",
+  "scope": "One forced ordinary advance on a reused source with an available authoritative archive. Global composition and restoration remain charged; no new closure, full archive audit, peak RAM bound or Lean refinement.",
+  "source_fingerprints": {
+    "experiments/cnf_source_local.py": "cdc62b0d68da61d277205923eb39ba0ef5a53c02efaca62673ec7492bf8d7f3a",
+    "experiments/continue_cnf_local_forcing.py": "0a85832cf1bc746a30a7d15ad9899f47c4b058057935f98242c5b0b31ff2409f",
+    "experiments/continue_cnf_source_local.py": "e73afca2879625a33dfcb3fba3c075534b3b27ee9ddad28bc093ab0968a65756",
+    "solver/test_cnf_local_forcing.py": "78b5da7b46543c11936bb45b7e47d2592798553c8eb6000fa1fa67212f4c2a01"
+  },
+  "test_command": "python3 -m unittest solver.test_cnf_positive_bundle solver.test_cnf_positive_primitives solver.test_cnf_expanded_coverage solver.test_cnf_selected_routes solver.test_cnf_route_composition solver.test_cnf_trace_split solver.test_cnf_probe_window solver.test_cnf_probe_continuation solver.test_cnf_learning_continuation solver.test_cnf_trace_learning solver.test_cnf_trace_reuse solver.test_cnf_coupled_pivots solver.test_cnf_affine_clause solver.test_cnf_retained_plans solver.test_cnf_variable_elimination solver.test_cnf_clause_bound_elimination solver.test_cnf_additive_elimination solver.test_cnf_binary_paths solver.test_cnf_polarity_horn solver.test_cnf_simplification solver.test_cnf_fused_conditioning solver.test_cnf_affine_projection solver.test_cnf_affine_patterns solver.test_cnf_probe_equivalence solver.test_cnf_source_local solver.test_cnf_local_forcing",
+  "test_log_sha256": "023c720920f64c217997933faefbc237e20e8a9065266ab6a4221f47ac8cda13",
+  "tests": 148
+}

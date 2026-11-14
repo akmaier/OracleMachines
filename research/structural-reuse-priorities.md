@@ -12,7 +12,46 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: source-local ordinary expansion with exact membership
+## Current investigation: forced reduction and the global-composition cost
+
+[Source-local forced expansion](source-local-forcing.md) proves source variable
+**22=true** and shrinks the open leaf **23 variables / 93 clauses / 288 literals
+-> 22 / 88 / 272**, admitting one unresolved state. The continuation and target
+are persistent and cold-checked. Coverage stays **58/83**; the target remains open.
+
+The local worker takes **0.13717 s** versus **10.03384 s** for eager preparation,
+acquisition and export, with authority already reconstructed. Its working SQLite
+is **126,976 bytes**, while the full authority is still required. Actual advance
+and target recognition are slightly slower. The larger measured costs are now
+**55.48722 s global composition/checking**, **21.99791 s initial reconstruction**
+and **6.47823 s global route preparation**. Global validation retains 22,603 nodes
+and 191,717,696 node-JSON bytes; this is not measured peak RAM.
+
+1. **Continue discovery on the smaller leaf.** Next ordinary candidates are
+   **16, 18, 21, 22**; saved split pairs rank **13, 5, 6, 11**. Compare useful work
+   under one allowance. These identifiers are local to the new normalized source:
+   new variable 22 denotes old variable 23, not the forced variable removed.
+   The broader learned queue still has 17 ready bases / 88 candidates.
+2. **Update only affected coverage obligations.** Global recomposition is now
+   the largest measured cost. Persist a complete rule/reverse-dependency index,
+   check new edges, retain both split obligations and invalidate pending/negative
+   results when their premises change. Establish that contract before replacing
+   complete composition; a partial positive catalog cannot certify noncoverage.
+3. **Amortize restoration across useful advances.** Preserve the full authority
+   and all five evidence lists, charge its first reconstruction, and use bounded
+   batches. Extend source-local access to split and learned dependencies only as
+   needed by the next discovery step. A small local working store is not a bound
+   on all dependencies or on arbitrary SAT expansion.
+
+All **148 relevant tests** pass; independent reconstruction and positive replay
+succeed. The **4,447-byte compressed delta** adds one continuation and one node;
+full history is now **770,371,584 bytes / 41,759 pattern nodes**. Resume through
+`continue_cnf_local_forcing.restore_checkpoint` using
+**`experiments/results/cnf-local-forcing/report.json`**, with evidence counts
+**(1, 42, 156, 11, 1)**. The active leaf SHA-256 is
+`545c51d457452dc1fd3dec970e5eadc1f85ba4012c889be2164277966968bf29`.
+
+## Previous investigation: source-local ordinary expansion with exact membership
 
 [Source-local expansion](source-local-expansion.md) saves the checked clear
 window for **7, 9, 16, 17** on the 23-variable / 93-clause leaf. An empty working

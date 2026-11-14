@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[The latest forced reduction](research/source-local-forcing.md) proves one
+frontier variable true and shrinks the open source from **23 variables / 93
+clauses to 22 / 88**, using one new recognition state. Coverage remains **58/83**.
+The matched local expansion worker takes **0.137 seconds** with history available;
+**55.49 seconds of global recomposition** is now the largest measured cost.
+All **148 relevant tests** pass, and the new checkpoint preserves earlier results.
+
 [Source-local expansion](research/source-local-expansion.md) now preserves the
 next four ordinary probes while loading only their needed historical premises.
 With full authoritative history already available, the matched one-block worker

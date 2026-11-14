@@ -5,6 +5,11 @@ hidden behind the existing positive proof explicit and corrects the count of
 checked inventory nodes. It preserves the same 58 covered roots among 83 reused
 development inputs, the same discovery frontier and every old archive.
 
+The subsequent [hybrid primitive checker](positive-primitive-replay.md) validates
+the selected semantic steps directly and retains full historical checking only
+where still needed. The measurements below describe this earlier exporter and
+its original replay; their frozen artifacts remain unchanged.
+
 ## The missing verifier cache
 
 `RetainedPlanInventory` checks saved plans under a second configuration, using

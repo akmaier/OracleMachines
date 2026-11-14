@@ -12,7 +12,42 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: explicit proof obligations across both verifier policies
+## Current investigation: sufficient positive checks without historical search replay
+
+[Hybrid primitive replay](positive-primitive-replay.md) checks the same 2,748-step
+graph and 58 roots. Mean cold replay falls **30.15238 -> 2.71821 seconds (90.99%)**
+over two repetitions in reversed order. Direct checks handle 2,687 internal
+steps; five subsumption steps and 56 external rules retain their original
+validators. Full historical checking falls **11,955 -> 471 nodes**, while the
+total distinct inventory rows read falls **11,955 -> 2,797**. The difference
+matters: selected steps still require real semantic checks and row reads.
+
+1. **Reduce preparation through a sufficient selected-proof bundle and explicit
+   frontier dependencies.** Restoration now costs **20.91624 s**, versus
+   **2.71821 s** for positive replay. The checker still reads the old full rows
+   and sidecars; 49 historical dependencies remain outside the graph. Export and
+   validate the actually required records before attempting partial reconstruction.
+   Discovery also needs its open frontier; missing records cannot certify a
+   complete catalog, exclusion or exhaustion. The old full-audit path remains.
+2. **Resume bounded discovery on the 23-variable / 93-clause leaf.** Coverage is
+   unchanged. Compare ordinary candidates **7, 9, 16, 17** with saved pairs
+   **5, 6, 11, 13** under one shared admission allowance. The wider learned queue
+   retains 17 bases / 88 candidates. This replay improvement is supporting work,
+   not an added tractable SAT family or an arbitrary-input resource bound.
+3. **Keep the warm-cache tradeoff explicit.** Mean warm replay regresses
+   **0.25349 -> 1.88878 s** because direct steps are rechecked. A separate positive
+   cache would need exact source/proof/configuration/data bindings. Never insert
+   weaker positive results into historical validation caches or replace their
+   stronger audit contract. No peak-RAM saving has been measured.
+
+All **132 relevant tests** pass. Historical checked-node JSON drops from
+97,225,536 to 3,096,763 bytes, but direct graph reads add 18,568,514 bytes and the
+graph, keys, sidecars and other caches still occupy memory. SQLite remains
+**770,338,816 bytes / 41,758 nodes**. Results are preserved under
+`experiments/results/cnf-positive-primitives/`; this is not a discovery checkpoint.
+Resume `cnf-reused-branch/report.json` with evidence counts **(1, 42, 156, 11, 1)**.
+
+## Previous investigation: explicit proof obligations across both verifier policies
 
 [The expanded proof](expanded-coverage-dependencies.md) turns 593 outer steps
 into **2,748 explicit steps**, including 115 retained-plan references. It verifies

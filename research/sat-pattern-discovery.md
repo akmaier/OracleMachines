@@ -1993,3 +1993,44 @@ Coverage, SQLite, every previous result and the 23-variable / 93-clause discover
 frontier are unchanged. Resume `cnf-reused-branch/report.json`, retaining all five
 evidence lists **(1, 42, 156, 11, 1)**. The new report is a verification study,
 not a new reconstructible discovery checkpoint or an unrestricted-SAT result.
+
+
+## 2026-11-14: validate selected semantic steps without historical search replay
+
+[Hybrid primitive replay](positive-primitive-replay.md) validates the unchanged
+2,748-step graph for the same 58/83 roots. It handles 2,687 internal steps directly;
+five subsumption steps and 56 external routes retain the original validators.
+Exact CNF/configuration/depth bindings, complete resolvents, source-bound probe
+reasons, retained references, component multiplicity and both conditioning
+children remain required. Positive results never enter historical validation
+caches: they do not certify search ranking, failed recognizers or losing plans.
+
+Two matched cold repetitions in reversed order reduce mean replay from
+**30.15238 to 2.71821 seconds (90.99%)**. Full historical checking falls
+**11,955 -> 471 nodes**, including both policy views; distinct inventory rows
+read fall **11,955 -> 2,797**. The old caches retain 97,225,536 node JSON bytes;
+the hybrid's historical caches retain 3,096,763 bytes, with a further 18,568,514
+bytes read directly for graph steps. These are logical payloads, not peak RAM.
+The 56 external routes and their 25 ordinary/26 learned prefixes remain checked.
+
+The warm regression is preserved: **0.25349 -> 1.88878 seconds** on average,
+because direct transformations are revalidated rather than cached. Restoring
+history and sidecars takes **20.91624 seconds**, now the larger preparation cost.
+A sufficient selected-proof bundle plus explicit open-frontier dependencies is
+the next integration target; a partial catalog cannot prove exhaustion. Older
+expansion runners and complete archive audits are unchanged.
+
+All **132 relevant tests** pass, including 512 two-variable clause subsets and
+504 applicable normalized eliminations checked against exhaustive semantics,
+changed bindings/reasons, missing resolvents and branches, retained references,
+fused closures, projections and external evidence. The matched run disables
+fresh recognition/discovery and confirms byte-identical SQLite and logical table
+digests. The archive remains **770,338,816 bytes / 41,758 nodes**, all previous
+results survive, and no new SAT family, Lean refinement or general polynomial
+bound is asserted.
+
+Resume discovery from `cnf-reused-branch/report.json` with all five lists
+**(1, 42, 156, 11, 1)**. The 23-variable / 93-clause leaf, saved pairs **5, 6, 11,
+13**, next ordinary candidates **7, 9, 16, 17**, and 17 learned bases / 88
+candidates are unchanged. The new `cnf-positive-primitives/report.json` is a
+verification study, not a discovery checkpoint.

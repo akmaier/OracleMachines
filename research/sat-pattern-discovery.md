@@ -2034,3 +2034,39 @@ Resume discovery from `cnf-reused-branch/report.json` with all five lists
 13**, next ordinary candidates **7, 9, 16, 17**, and 17 learned bases / 88
 candidates are unchanged. The new `cnf-positive-primitives/report.json` is a
 verification study, not a discovery checkpoint.
+
+
+## 2026-11-14: standalone data for positive proof replay
+
+[The positive data bundle](positive-proof-bundle.md) captures exact SQL reads
+from fresh checking caches, retains all five evidence lists, and binds the
+ordered proof to separately supplied source/configuration claims. It includes
+**2,797 pattern rows and 82 external-record rows**. Consumers build a new
+read-only temporary database and rerun semantic checking; missing premises,
+unused SQL rows, duplicate identities, changed claims and invalid scope fail.
+No file digest or saved closure flag replaces the proof checks.
+
+Independent processes outside the repository's working directory replay the
+same **58/83 roots / 2,748 steps**, with lineage restoration disabled. Two
+matched repetitions in reversed order reduce mean complete cold process time
+**23.95282 -> 3.03614 seconds (87.32%)**. Semantic replay remains about 2.7 s;
+the gain comes from preparation. The artifact is **3,169,051 compressed bytes**
+and rebuilds **40,538,112 bytes** of temporary SQLite instead of 770,338,816.
+The original archive is unchanged, so this adds persistent storage while reducing
+cold working data. No peak-RAM reduction is claimed.
+
+Production still pays **20.82422 s restoration, 2.78123 s capture, and 1.53465 s
+serialization/compression**, plus integrity and diagnostic work. The complete
+study, including producer and four consumers/controls, takes **80.64054 s**.
+All **139 relevant tests** pass and the preceding artifacts remain unchanged.
+The earlier warm-replay regression is not addressed by this data packaging.
+
+This is positive-only data, not a discovery checkpoint or complete catalog.
+Next establish source-local frontier dependencies and explicit completeness and
+admission contracts: a row absent from the bundle is not necessarily a new state
+or evidence of exhaustion. Keep full history authoritative and preserve all new
+deltas. Resume discovery from `cnf-reused-branch/report.json`, retaining evidence
+counts **(1, 42, 156, 11, 1)**. The 23-variable / 93-clause source, saved pairs
+**5, 6, 11, 13**, next ordinary candidates **7, 9, 16, 17**, and wider 17-base /
+88-candidate queue are unchanged. No new family, SAT verdict, Lean refinement or
+unrestricted polynomial bound is established.

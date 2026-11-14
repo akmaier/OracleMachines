@@ -12,7 +12,41 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: sufficient positive checks without historical search replay
+## Current investigation: standalone positive data without lineage reconstruction
+
+[The positive data bundle](positive-proof-bundle.md) preserves the same 58 roots
+and 2,748 proof steps using **2,797 pattern rows + 82 external-record rows** and
+all five sidecar lists. Independent processes replay outside the repository's
+working directory with lineage restoration disabled. Mean complete cold process
+time falls **23.95282 -> 3.03614 s (87.32%)**; semantic replay remains about 2.7 s.
+The artifact is **3,169,051 compressed bytes** and reconstructs **40,538,112 bytes**
+of temporary SQLite, versus 770,338,816 bytes for full history. Original storage
+is preserved; this adds a reusable artifact rather than shrinking the archive.
+
+1. **Connect positive reuse to a source-local open-frontier working state.** The
+   bundle now removes full restoration for positive replay, but discovery still
+   uses the old full preparation/audit path. Establish the exact frontier records
+   and completeness/admission contracts before partial resumption. A missing row
+   in this bundle proves neither novelty nor probe exhaustion. Preserve all
+   existing results, check any new delta against authoritative history, and charge
+   that work. Avoid repeatedly optimizing the now-small positive replay alone.
+2. **Advance the unchanged 23-variable / 93-clause leaf.** Compare ordinary
+   candidates **7, 9, 16, 17** with saved pairs **5, 6, 11, 13** under one shared
+   admission allowance. The wider learned queue remains 17 bases / 88 candidates.
+   The bundle provides no added coverage or efficient classification of all CNFs.
+3. **Retain production and warm costs.** First-bundle production still pays
+   **20.82422 s restoration + 2.78123 s capture + 1.53465 s serialization/compression**,
+   plus integrity/diagnostic work. The previous warm regression remains; no new
+   validation cache was introduced. Unused sidecar records and historical fields
+   remain packaged. Shrinking them is secondary to making expansion reuse work.
+
+All **139 relevant tests** pass; consumer checks match the same 471 historical
+nodes across both policies. Results and a separately reviewable claim file are
+in `experiments/results/cnf-positive-bundle/`. This is positive-proof data, not a
+discovery checkpoint or complete catalog. Continue discovery from
+`cnf-reused-branch/report.json` with full evidence counts **(1, 42, 156, 11, 1)**.
+
+## Previous investigation: sufficient positive checks without historical search replay
 
 [Hybrid primitive replay](positive-primitive-replay.md) checks the same 2,748-step
 graph and 58 roots. Mean cold replay falls **30.15238 -> 2.71821 seconds (90.99%)**

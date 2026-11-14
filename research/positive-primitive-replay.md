@@ -6,6 +6,10 @@ from **30.15238 to 2.71821 seconds (90.99%)** in two matched repetitions with
 reversed order. This is a reduction in positive proof replay, not a new SAT
 decision, broader structural coverage or a complete expansion benchmark.
 
+The subsequent [positive data bundle](positive-proof-bundle.md) removes lineage
+reconstruction from later cold proof replays. The measurements and limitations
+below describe the preceding checker study and remain preserved in its artifacts.
+
 ## What is sufficient for the positive claim
 
 `experiments/cnf_positive_primitives.py` reads a row without admitting it to the

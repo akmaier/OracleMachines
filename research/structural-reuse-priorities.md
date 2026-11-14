@@ -12,7 +12,46 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: conditional early-reuse gain and a pending Horn route
+## Current investigation: the pending split closes; 23 originals remain
+
+[Exact pending-cofactor continuation](pending-warm-expansion.md) closes case
+**1445**, raising structural coverage **59/83 -> 60/83** in both full and
+without-growth views. One advance uses **20/32 admissions**. Four are previously
+unfinished states reconstructed and charged again; all twenty now have completed
+records. The false branch is reused with zero admissions. The true branch reaches
+a **7-variable Horn, zero-valid terminal, not 2-CNF**, after four probes, four
+binary-path deletions, ten eliminations and a polarity transformation. The false
+branch had already reached six-variable Horn structure.
+
+1. **Transfer this transformation sequence to the next uncovered original.**
+   The retained split frontier is empty, but 23 originals remain uncovered.
+   The next selected leaf is case **1304 / index 52**, **34 variables / 148 clauses /
+   490 literals**. Check saved cofactor candidates and its final ordinary candidate,
+   local variable **34** at offset 12. Keep exact recognition, both branch
+   obligations and unsuccessful alternatives; no short chain is guaranteed.
+2. **Amortize cold preparation while doing that discovery.** This run spends
+   **103.25725 s** on reconstruction, routes and the first index audit, versus
+   **0.05998 s** acquiring the branch and **0.98680 s** refreshing routes. Useful
+   bounded sequences in a retained checked session offer a larger immediate
+   total-cost opportunity than shaving this acquisition alone. Invalidate
+   candidate results when traces, targets or closure change.
+3. **Preserve unfinished reductions without claiming completed proofs.** Four
+   admitted identities had to be recomputed because their recursive descendants
+   were unfinished. A separate checked pending-reduction representation could
+   preserve more of that work. Test budget cuts and restart progress explicitly;
+   repeated fixed-budget retries need not progress on every reduction chain.
+
+The **11,805-byte compressed delta** adds twenty patterns, with no new external
+probe blocks or split records. Full history is **771,592,192 bytes / 41,835
+patterns**; all earlier rows remain. The positive proof has **2,948 steps**.
+All **181 relevant tests** and independent cold reconstruction of the complete
+original coverage flags and next selection pass. The exact resume authority is
+**`experiments/results/cnf-pending-warm/report.json`**,
+using `continue_cnf_pending_warm.restore_checkpoint`, with evidence counts
+**(1, 42, 156, 16, 1)**. Next source SHA-256:
+`bef0f0de793f31155199f7c6a8dba7819495f90e23de8817a9967edc55880f35`.
+
+## Previous investigation: conditional early-reuse gain and a pending Horn route
 
 [The paired comparison](early-closed-expansion.md) shows an actual scheduling gain
 on case **1445**: early closed-cofactor reuse skips two clear blocks, taking

@@ -6157,3 +6157,34 @@ split source SHA-256:
 Resume the pending true branch before another ranking search. Then investigate
 incremental candidate checks with explicit invalidation for new traces, admitted
 targets and changed coverage. Do not rerun all four comparison arms to continue.
+
+## 2026-11-14: resume the pending cofactor and complete another original
+
+[The exact saved split resumes](pending-warm-expansion.md) without reranking its
+27-variable parent. Its closed false cofactor uses zero admissions. The true
+23-variable cofactor uses twenty, ending at a seven-variable Horn and zero-valid
+terminal after four probes, four binary-path deletions, ten eliminations and a
+polarity transformation. It is not 2-CNF. Both branches now close, raising
+structural coverage **59/83 -> 60/83**; the reference result for original case
+1445 is SAT. All sixteen retained splits close, but 23 originals remain uncovered.
+
+Four of the twenty entered states were unfinished at the previous cap and are
+recomputed. All twenty now have completed rows. No previously completed identity
+is admitted again. This measures a remaining persistence gap: local reduction
+work on unfinished recursive ancestors is not checkpointed. A future pending
+representation must preserve checked obligations without asserting their closure.
+
+Acquisition takes **0.05998 s**, complete route refresh **0.98680 s**, and initial
+reconstruction/preparation **103.25725 s**. The full producer takes **127.60236 s**.
+The **11,805-byte compressed delta** adds twenty patterns and no external probe
+blocks. Full SQLite grows **249,856 bytes** to **771,592,192 bytes / 41,835 patterns**.
+The positive proof has **2,948 steps**, and all **2,115** earlier reference nodes
+remain among **2,135**. All prior rows and experimental comparisons are preserved.
+
+Resume `experiments/results/cnf-pending-warm/report.json` through
+`continue_cnf_pending_warm.restore_checkpoint` with evidence counts
+**(1, 42, 156, 16, 1)**. The next selected original is case **1304 / index 52**,
+with a **34-variable / 148-clause / 490-literal** leaf; local variable **34** is
+its last ordinary candidate at offset 12. Test transfer of the reduction chain
+while amortizing complete preparation across useful steps. Neither this new
+coverage nor an empty retained frontier establishes efficient arbitrary SAT.

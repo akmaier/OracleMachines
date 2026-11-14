@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Resuming the pending split](research/pending-warm-expansion.md) raises structural
+coverage **59/83 -> 60/83**. The true branch reaches a seven-variable Horn
+terminal using **20 admissions**, while its closed sibling is reused. Four
+unfinished states from the previous run are recomputed and charged again.
+Acquisition takes **0.060 seconds**; initial reconstruction and checking still
+cost **103.26 seconds**. The delta adds **11,805 compressed bytes** and preserves
+all earlier results. All **181 relevant tests** and independent cold replay pass.
+The next selected residual has **34 variables / 148 clauses**.
+
 [Early closed-cofactor reuse](research/early-closed-expansion.md) now has a matched
 comparison: **22.31% less expansion time** on case 1445, but a **1.64% regression**
 on forcing control 1189. Both policies preserve the same pattern records and

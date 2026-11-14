@@ -12,7 +12,57 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: selective activation removes the dominant warm cost
+## Current investigation: conditional Horn closure and the cost of interruption
+
+[The new continuation](conditional-frontier-resumption.md) closes the missing
+32-variable cofactor through eleven new states to a **17/26/62 Horn and
+zero-valid terminal**. Its sibling remains open. A new variable-2 split of
+**31/122/370** reaches **24/88/274** on one side and interrupts its true
+**29/115/343** target. Both repeats enter **32 states**, store **19**, and leave
+**13 entered but unstored**. Coverage remains **66/83**, with **4 open splits /
+2 acquired leaves / 1 pending target**. These are source-bound reductions; the
+new Horn endpoint is not identical to a previously stored terminal.
+
+1. **Continue certified discovery from the saved variable-2 pair.** Resume its
+   true 29-variable target while reusing the acquired false child. Charge the
+   thirteen unstored keys again. Afterward, inspect the remaining 24- and
+   36-variable interactions. Keep both branch obligations and distinguish
+   reuse of completed certificates from recurrence of a reduction pattern.
+2. **Target checked startup/export reuse for total runtime.** Mean worker
+   preparation/export are **8.06032 / 4.85783 s**, roughly **97%** of the
+   **13.25993 s** worker. Expansion is **0.25005 s**, including acquisition
+   **0.13225**, selection **0.09339**, maintenance **0.02355** and coverage
+   **0.00086 s**. Full historical restoration costs **92.09233 s** outside the
+   worker. The run changes no scheduling policy and establishes no speedup.
+3. **Evaluate interruption-safe local continuation records.** The thirteen
+   unstored states repeat a known persistence gap. A deterministic unary chain
+   longer than every fresh budget can make no persistent progress on any
+   retry under the present recursive storage order. The linked analysis gives
+   the conditional argument and required source, target and branch bindings.
+   Pending local certificates must remain separate from closed patterns.
+   Compare avoided recognition against added checking, serialization and cold
+   replay; it is not yet the largest measured runtime cost.
+
+Resume **`experiments/results/cnf-conditional-frontier/report.json`** through
+**`continue_cnf_conditional_frontier.restore_checkpoint`**, SHA-256
+`f55bdcefe556222a5b6043f03591e38f10ad8c76bc3c3c73a8eb45aed73c0ef8`.
+Keep evidence lists **(1, 42, 156, 45, 1)** and **two bridges**, with the complete
+bridge-aware builder and positive verifier. The union adds **19 patterns /
+1 split**, growing history to **776,065,024 bytes / 42,120 patterns**; its delta
+is **14,220 compressed bytes**. Reference evidence contains **3,781 nodes**,
+and the expanded positive certificate remains **3,360 steps**. The live index
+has **698 routes / one pending link** and adds memory.
+
+Pending source: `09831bee0e0295f91c4d21b79ffe25508d3dad8b48e5052b4bfde74367574914`.
+Missing true target: `944e1c80b727c779838a814ab6d1509ae46b22afbde7e978523bb96c8f0ce859`.
+
+Independent cold replay passes in **305.33218 s** with all **3,781 reference
+nodes** checked and both prefix catalogs matching full construction. All
+**222 tests** and the **161-page** manuscript build pass; all **64 proof blocks**
+are unchanged. All **1,107 artifacts in 23 prior manifests** and previous
+reference payloads remain unchanged. The new manifest binds **40 artifacts**.
+
+## Previous investigation: selective activation removes the dominant warm cost
 
 [Pattern activation](pattern-activation.md) retains a complete checked catalog
 and revisits routes waiting on newly acquired roots. It accepts only guarded

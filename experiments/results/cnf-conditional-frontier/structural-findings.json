@@ -1,0 +1,1453 @@
+{
+  "arms": [
+    {
+      "admitted": 32,
+      "closed": false,
+      "cold_selection_matches": true,
+      "completed": 19,
+      "idempotent": true,
+      "interrupted_inputs": [
+        {
+          "key_sha256": "03cd9f449648a31071a2e99edfec2a17fd00426b63a5d98d0b79f5bfd43db52a",
+          "shape": [
+            16,
+            51,
+            149
+          ]
+        },
+        {
+          "key_sha256": "252f875669fd2855596407a283fe10739f16921c8758d93e4cffcabf38f0ded3",
+          "shape": [
+            16,
+            52,
+            153
+          ]
+        },
+        {
+          "key_sha256": "3560251d1c1b80dc62996e41196f3e44cdd738e6df3101b38530a8ea05d8e504",
+          "shape": [
+            18,
+            54,
+            153
+          ]
+        },
+        {
+          "key_sha256": "5d9fc65bc319c7088054197dbd97301e92d889c2f494e09e58647a366c713143",
+          "shape": [
+            22,
+            68,
+            190
+          ]
+        },
+        {
+          "key_sha256": "606f587f8e6f2a61858dc49b254e7b7d7848c1a1b029baba59596bbf4d9a15d2",
+          "shape": [
+            19,
+            55,
+            153
+          ]
+        },
+        {
+          "key_sha256": "944e1c80b727c779838a814ab6d1509ae46b22afbde7e978523bb96c8f0ce859",
+          "shape": [
+            29,
+            115,
+            343
+          ]
+        },
+        {
+          "key_sha256": "9a5a2e2ebaf88dec409d9ecb908f21c07f0c4e87748f627fd8c9f51082427718",
+          "shape": [
+            21,
+            58,
+            161
+          ]
+        },
+        {
+          "key_sha256": "9bf597520b50d2576fbeaed395a539270e6ea0ec83e94701067aa2555e534dde",
+          "shape": [
+            20,
+            56,
+            156
+          ]
+        },
+        {
+          "key_sha256": "ac9a3a9f3248f9943904ebf195dadfefa2c090c28fa3f79db264ea6e4ef9bf61",
+          "shape": [
+            25,
+            85,
+            240
+          ]
+        },
+        {
+          "key_sha256": "b2cfe2a4ff6febeec9acda16be7f36400f178251ed4562b6dbd7aa85fc8c856c",
+          "shape": [
+            24,
+            78,
+            220
+          ]
+        },
+        {
+          "key_sha256": "c1d08ceab2d20158af56a2fe2e148b9d0859e4c8efa281defa744fdb7abcf651",
+          "shape": [
+            26,
+            92,
+            265
+          ]
+        },
+        {
+          "key_sha256": "e7587e5549451e25c6fe23b8bf607fc0ce7a5bfe3dfe7196ea45854c02f10270",
+          "shape": [
+            22,
+            61,
+            168
+          ]
+        },
+        {
+          "key_sha256": "f05405ffc82c6dab169100f1b82a7e9cde2462f0b4c2b9da2dd07c915dd48824",
+          "shape": [
+            17,
+            53,
+            153
+          ]
+        }
+      ],
+      "prefix_replay": {
+        "replay_seconds": 10.533231791108847,
+        "steps": [
+          {
+            "admitted": 11,
+            "closed": false,
+            "complete_catalog_equal": true,
+            "inserted_rows": 11,
+            "mode": "pattern_activation",
+            "next_selection_equal": true,
+            "step": 0,
+            "stored_new_patterns": 11
+          },
+          {
+            "admitted": 32,
+            "closed": false,
+            "complete_catalog_equal": true,
+            "inserted_rows": 8,
+            "mode": "pattern_activation",
+            "next_selection_equal": true,
+            "step": 1,
+            "stored_new_patterns": 19
+          }
+        ]
+      },
+      "previous_interrupted_now_stored": [],
+      "previous_interrupted_reentered": [],
+      "repeat": 0,
+      "splits": [
+        {
+          "branches": [
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "new_prefix_nodes": 0,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "acquisition": "inherited",
+                    "key_sha256": "88d5cc84211a78098a60602582048188726044e0c4848bc54921489c70991320",
+                    "kind": "binary_paths",
+                    "shape": [
+                      32,
+                      124,
+                      375
+                    ]
+                  },
+                  {
+                    "acquisition": "inherited",
+                    "key_sha256": "1adbc45e054b40459d4aaeb8cf64d7f06527ae803508cc7656ad86f85c859075",
+                    "kind": "eliminate",
+                    "shape": [
+                      32,
+                      123,
+                      372
+                    ]
+                  },
+                  {
+                    "acquisition": "inherited",
+                    "key_sha256": "09831bee0e0295f91c4d21b79ffe25508d3dad8b48e5052b4bfde74367574914",
+                    "kind": "unresolved",
+                    "shape": [
+                      31,
+                      122,
+                      370
+                    ]
+                  }
+                ]
+              },
+              "reduction_kinds": [
+                "binary_paths",
+                "eliminate",
+                "unresolved"
+              ],
+              "reference_answer": true,
+              "reused_prefix_nodes": 3,
+              "target_sha256": "88d5cc84211a78098a60602582048188726044e0c4848bc54921489c70991320",
+              "target_shape": [
+                32,
+                124,
+                375
+              ],
+              "value": false
+            },
+            {
+              "closed": true,
+              "lifted_source_model_checked": true,
+              "new_prefix_nodes": 11,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "recognized",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "recognized"
+                },
+                "nodes": [
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "72697c710335660e1dc9c934e995f7c37577a9226c546fd7233d4e3685cb3615",
+                    "kind": "probe",
+                    "shape": [
+                      32,
+                      136,
+                      405
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "a4dbcf688ea1cbcf22ac89c3f148d6653ba67d4f4639bbd18d5ad864e112f461",
+                    "kind": "probe",
+                    "shape": [
+                      31,
+                      122,
+                      363
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "2f5fe74c1c3ed8b5d671b7e18a35e1dc721c5c8b63284d948706cc56664540e2",
+                    "kind": "probe",
+                    "shape": [
+                      26,
+                      86,
+                      240
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "a02ba0cfb7aa2657a9797178a5bff35bf3482e0ae561af497cb264f887a12f4b",
+                    "kind": "probe",
+                    "shape": [
+                      25,
+                      77,
+                      212
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "6f9de76d2a992be7a4e79efe6f5804a1de0d13936e35c5663cd9078f3f7c3a1c",
+                    "kind": "probe",
+                    "shape": [
+                      23,
+                      67,
+                      182
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "196187f579e4ff3bdbb1ccb86f6df90d228a4cf87a5e0fd8384d17fe52eb301a",
+                    "kind": "probe",
+                    "shape": [
+                      22,
+                      59,
+                      160
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "66b454e996e93f2b425b69b02e57576e4588b61609cf6a08db026925d0774b3e",
+                    "kind": "probe",
+                    "shape": [
+                      20,
+                      50,
+                      133
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "f0f1e709d2c7542256d0f627f7dd55812c908183564da2bcb25027b280359e24",
+                    "kind": "probe",
+                    "shape": [
+                      18,
+                      38,
+                      100
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "85a3757aa79014117d47d2f3103d11e3ceab29d44c7a5daf4c1f52a3e5fb0b70",
+                    "kind": "binary_paths",
+                    "shape": [
+                      17,
+                      28,
+                      68
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "448c0adfa61f48b7a84da95e0b9ef4cb3ba734e0cc3038cc2c16c9b8dc70693f",
+                    "kind": "polarity",
+                    "shape": [
+                      17,
+                      26,
+                      62
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "1be0d4a61e42d2254482504a7d59adf665bedaad29aaae68a2176fae1911ab2f",
+                    "kind": "family",
+                    "shape": [
+                      17,
+                      26,
+                      62
+                    ]
+                  }
+                ]
+              },
+              "reduction_kinds": [
+                "probe",
+                "probe",
+                "probe",
+                "probe",
+                "probe",
+                "probe",
+                "probe",
+                "probe",
+                "binary_paths",
+                "polarity",
+                "family"
+              ],
+              "reference_answer": true,
+              "reused_prefix_nodes": 0,
+              "target_sha256": "72697c710335660e1dc9c934e995f7c37577a9226c546fd7233d4e3685cb3615",
+              "target_shape": [
+                32,
+                136,
+                405
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "26f134186dbdd90745599fa2d41308823b8c08b752f19d5f53124ffd4ecd73f1",
+          "source_shape": [
+            34,
+            143,
+            440
+          ],
+          "variable": 5
+        },
+        {
+          "branches": [
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "new_prefix_nodes": 8,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "5c8f5fe4966715868484d578a4ee9c8946b5bc74814dcd90fd973a0a7175a1cb",
+                    "kind": "probe",
+                    "shape": [
+                      29,
+                      110,
+                      329
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "dca60bd1e63ddd61c4a3262e827908a8eb18eb5410948e2a7ca72b3c0ba694b7",
+                    "kind": "probe",
+                    "shape": [
+                      28,
+                      102,
+                      305
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "7b81759a3a31c4c1128fa6fa96deff84c27a0c92e87ff9d4bf897350903c7d57",
+                    "kind": "binary_paths",
+                    "shape": [
+                      27,
+                      94,
+                      281
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "ee297fe932738c7b7fe6162edb17a0b627e36f77e893dd2ea7ac4931bca6c049",
+                    "kind": "eliminate",
+                    "shape": [
+                      27,
+                      91,
+                      272
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "81075ff20271b34c9cb4bfe403925edba346299dc12f32e32017f8b733cb02b4",
+                    "kind": "binary_paths",
+                    "shape": [
+                      26,
+                      88,
+                      266
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "2f56253f6652b700198d5cb83227d2eeb38638fea9b572b0c4532f29e997182c",
+                    "kind": "eliminate",
+                    "shape": [
+                      26,
+                      87,
+                      262
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "28a03f94d7b6537a7184cc414ba4d5614ba5482d0beefd45892be75b4ccbe18e",
+                    "kind": "eliminate",
+                    "shape": [
+                      25,
+                      86,
+                      264
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "4de3e4b743fbf475c9b0d663653f2d523578a50ece61b6a8a6d5fee2dab93add",
+                    "kind": "unresolved",
+                    "shape": [
+                      24,
+                      88,
+                      274
+                    ]
+                  }
+                ]
+              },
+              "reduction_kinds": [
+                "probe",
+                "probe",
+                "binary_paths",
+                "eliminate",
+                "binary_paths",
+                "eliminate",
+                "eliminate",
+                "unresolved"
+              ],
+              "reference_answer": true,
+              "reused_prefix_nodes": 0,
+              "target_sha256": "5c8f5fe4966715868484d578a4ee9c8946b5bc74814dcd90fd973a0a7175a1cb",
+              "target_shape": [
+                29,
+                110,
+                329
+              ],
+              "value": false
+            },
+            {
+              "closed": false,
+              "new_prefix_nodes": 0,
+              "prefix": {
+                "missing_sha256": "944e1c80b727c779838a814ab6d1509ae46b22afbde7e978523bb96c8f0ce859",
+                "nodes": []
+              },
+              "reduction_kinds": [],
+              "reference_answer": true,
+              "reused_prefix_nodes": 0,
+              "target_sha256": "944e1c80b727c779838a814ab6d1509ae46b22afbde7e978523bb96c8f0ce859",
+              "target_shape": [
+                29,
+                115,
+                343
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "09831bee0e0295f91c4d21b79ffe25508d3dad8b48e5052b4bfde74367574914",
+          "source_shape": [
+            31,
+            122,
+            370
+          ],
+          "variable": 2
+        }
+      ],
+      "unfinished": 13
+    },
+    {
+      "admitted": 32,
+      "closed": false,
+      "cold_selection_matches": true,
+      "completed": 19,
+      "idempotent": true,
+      "interrupted_inputs": [
+        {
+          "key_sha256": "03cd9f449648a31071a2e99edfec2a17fd00426b63a5d98d0b79f5bfd43db52a",
+          "shape": [
+            16,
+            51,
+            149
+          ]
+        },
+        {
+          "key_sha256": "252f875669fd2855596407a283fe10739f16921c8758d93e4cffcabf38f0ded3",
+          "shape": [
+            16,
+            52,
+            153
+          ]
+        },
+        {
+          "key_sha256": "3560251d1c1b80dc62996e41196f3e44cdd738e6df3101b38530a8ea05d8e504",
+          "shape": [
+            18,
+            54,
+            153
+          ]
+        },
+        {
+          "key_sha256": "5d9fc65bc319c7088054197dbd97301e92d889c2f494e09e58647a366c713143",
+          "shape": [
+            22,
+            68,
+            190
+          ]
+        },
+        {
+          "key_sha256": "606f587f8e6f2a61858dc49b254e7b7d7848c1a1b029baba59596bbf4d9a15d2",
+          "shape": [
+            19,
+            55,
+            153
+          ]
+        },
+        {
+          "key_sha256": "944e1c80b727c779838a814ab6d1509ae46b22afbde7e978523bb96c8f0ce859",
+          "shape": [
+            29,
+            115,
+            343
+          ]
+        },
+        {
+          "key_sha256": "9a5a2e2ebaf88dec409d9ecb908f21c07f0c4e87748f627fd8c9f51082427718",
+          "shape": [
+            21,
+            58,
+            161
+          ]
+        },
+        {
+          "key_sha256": "9bf597520b50d2576fbeaed395a539270e6ea0ec83e94701067aa2555e534dde",
+          "shape": [
+            20,
+            56,
+            156
+          ]
+        },
+        {
+          "key_sha256": "ac9a3a9f3248f9943904ebf195dadfefa2c090c28fa3f79db264ea6e4ef9bf61",
+          "shape": [
+            25,
+            85,
+            240
+          ]
+        },
+        {
+          "key_sha256": "b2cfe2a4ff6febeec9acda16be7f36400f178251ed4562b6dbd7aa85fc8c856c",
+          "shape": [
+            24,
+            78,
+            220
+          ]
+        },
+        {
+          "key_sha256": "c1d08ceab2d20158af56a2fe2e148b9d0859e4c8efa281defa744fdb7abcf651",
+          "shape": [
+            26,
+            92,
+            265
+          ]
+        },
+        {
+          "key_sha256": "e7587e5549451e25c6fe23b8bf607fc0ce7a5bfe3dfe7196ea45854c02f10270",
+          "shape": [
+            22,
+            61,
+            168
+          ]
+        },
+        {
+          "key_sha256": "f05405ffc82c6dab169100f1b82a7e9cde2462f0b4c2b9da2dd07c915dd48824",
+          "shape": [
+            17,
+            53,
+            153
+          ]
+        }
+      ],
+      "prefix_replay": {
+        "replay_seconds": 10.208188749849796,
+        "steps": [
+          {
+            "admitted": 11,
+            "closed": false,
+            "complete_catalog_equal": true,
+            "inserted_rows": 11,
+            "mode": "pattern_activation",
+            "next_selection_equal": true,
+            "step": 0,
+            "stored_new_patterns": 11
+          },
+          {
+            "admitted": 32,
+            "closed": false,
+            "complete_catalog_equal": true,
+            "inserted_rows": 8,
+            "mode": "pattern_activation",
+            "next_selection_equal": true,
+            "step": 1,
+            "stored_new_patterns": 19
+          }
+        ]
+      },
+      "previous_interrupted_now_stored": [],
+      "previous_interrupted_reentered": [],
+      "repeat": 1,
+      "splits": [
+        {
+          "branches": [
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "new_prefix_nodes": 0,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "acquisition": "inherited",
+                    "key_sha256": "88d5cc84211a78098a60602582048188726044e0c4848bc54921489c70991320",
+                    "kind": "binary_paths",
+                    "shape": [
+                      32,
+                      124,
+                      375
+                    ]
+                  },
+                  {
+                    "acquisition": "inherited",
+                    "key_sha256": "1adbc45e054b40459d4aaeb8cf64d7f06527ae803508cc7656ad86f85c859075",
+                    "kind": "eliminate",
+                    "shape": [
+                      32,
+                      123,
+                      372
+                    ]
+                  },
+                  {
+                    "acquisition": "inherited",
+                    "key_sha256": "09831bee0e0295f91c4d21b79ffe25508d3dad8b48e5052b4bfde74367574914",
+                    "kind": "unresolved",
+                    "shape": [
+                      31,
+                      122,
+                      370
+                    ]
+                  }
+                ]
+              },
+              "reduction_kinds": [
+                "binary_paths",
+                "eliminate",
+                "unresolved"
+              ],
+              "reference_answer": true,
+              "reused_prefix_nodes": 3,
+              "target_sha256": "88d5cc84211a78098a60602582048188726044e0c4848bc54921489c70991320",
+              "target_shape": [
+                32,
+                124,
+                375
+              ],
+              "value": false
+            },
+            {
+              "closed": true,
+              "lifted_source_model_checked": true,
+              "new_prefix_nodes": 11,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "recognized",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "recognized"
+                },
+                "nodes": [
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "72697c710335660e1dc9c934e995f7c37577a9226c546fd7233d4e3685cb3615",
+                    "kind": "probe",
+                    "shape": [
+                      32,
+                      136,
+                      405
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "a4dbcf688ea1cbcf22ac89c3f148d6653ba67d4f4639bbd18d5ad864e112f461",
+                    "kind": "probe",
+                    "shape": [
+                      31,
+                      122,
+                      363
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "2f5fe74c1c3ed8b5d671b7e18a35e1dc721c5c8b63284d948706cc56664540e2",
+                    "kind": "probe",
+                    "shape": [
+                      26,
+                      86,
+                      240
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "a02ba0cfb7aa2657a9797178a5bff35bf3482e0ae561af497cb264f887a12f4b",
+                    "kind": "probe",
+                    "shape": [
+                      25,
+                      77,
+                      212
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "6f9de76d2a992be7a4e79efe6f5804a1de0d13936e35c5663cd9078f3f7c3a1c",
+                    "kind": "probe",
+                    "shape": [
+                      23,
+                      67,
+                      182
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "196187f579e4ff3bdbb1ccb86f6df90d228a4cf87a5e0fd8384d17fe52eb301a",
+                    "kind": "probe",
+                    "shape": [
+                      22,
+                      59,
+                      160
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "66b454e996e93f2b425b69b02e57576e4588b61609cf6a08db026925d0774b3e",
+                    "kind": "probe",
+                    "shape": [
+                      20,
+                      50,
+                      133
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "f0f1e709d2c7542256d0f627f7dd55812c908183564da2bcb25027b280359e24",
+                    "kind": "probe",
+                    "shape": [
+                      18,
+                      38,
+                      100
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "85a3757aa79014117d47d2f3103d11e3ceab29d44c7a5daf4c1f52a3e5fb0b70",
+                    "kind": "binary_paths",
+                    "shape": [
+                      17,
+                      28,
+                      68
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "448c0adfa61f48b7a84da95e0b9ef4cb3ba734e0cc3038cc2c16c9b8dc70693f",
+                    "kind": "polarity",
+                    "shape": [
+                      17,
+                      26,
+                      62
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "1be0d4a61e42d2254482504a7d59adf665bedaad29aaae68a2176fae1911ab2f",
+                    "kind": "family",
+                    "shape": [
+                      17,
+                      26,
+                      62
+                    ]
+                  }
+                ]
+              },
+              "reduction_kinds": [
+                "probe",
+                "probe",
+                "probe",
+                "probe",
+                "probe",
+                "probe",
+                "probe",
+                "probe",
+                "binary_paths",
+                "polarity",
+                "family"
+              ],
+              "reference_answer": true,
+              "reused_prefix_nodes": 0,
+              "target_sha256": "72697c710335660e1dc9c934e995f7c37577a9226c546fd7233d4e3685cb3615",
+              "target_shape": [
+                32,
+                136,
+                405
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "26f134186dbdd90745599fa2d41308823b8c08b752f19d5f53124ffd4ecd73f1",
+          "source_shape": [
+            34,
+            143,
+            440
+          ],
+          "variable": 5
+        },
+        {
+          "branches": [
+            {
+              "closed": false,
+              "lifted_source_model_checked": true,
+              "new_prefix_nodes": 8,
+              "prefix": {
+                "end_outcomes": {
+                  "affine_conflict": "excluded",
+                  "dual_horn": "excluded",
+                  "explicit_affine": "excluded",
+                  "horn": "excluded",
+                  "matching": "excluded",
+                  "one_valid": "excluded",
+                  "single_parity": "unresolved",
+                  "two_cnf": "excluded",
+                  "zero_valid": "excluded"
+                },
+                "nodes": [
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "5c8f5fe4966715868484d578a4ee9c8946b5bc74814dcd90fd973a0a7175a1cb",
+                    "kind": "probe",
+                    "shape": [
+                      29,
+                      110,
+                      329
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "dca60bd1e63ddd61c4a3262e827908a8eb18eb5410948e2a7ca72b3c0ba694b7",
+                    "kind": "probe",
+                    "shape": [
+                      28,
+                      102,
+                      305
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "7b81759a3a31c4c1128fa6fa96deff84c27a0c92e87ff9d4bf897350903c7d57",
+                    "kind": "binary_paths",
+                    "shape": [
+                      27,
+                      94,
+                      281
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "ee297fe932738c7b7fe6162edb17a0b627e36f77e893dd2ea7ac4931bca6c049",
+                    "kind": "eliminate",
+                    "shape": [
+                      27,
+                      91,
+                      272
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "81075ff20271b34c9cb4bfe403925edba346299dc12f32e32017f8b733cb02b4",
+                    "kind": "binary_paths",
+                    "shape": [
+                      26,
+                      88,
+                      266
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "2f56253f6652b700198d5cb83227d2eeb38638fea9b572b0c4532f29e997182c",
+                    "kind": "eliminate",
+                    "shape": [
+                      26,
+                      87,
+                      262
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "28a03f94d7b6537a7184cc414ba4d5614ba5482d0beefd45892be75b4ccbe18e",
+                    "kind": "eliminate",
+                    "shape": [
+                      25,
+                      86,
+                      264
+                    ]
+                  },
+                  {
+                    "acquisition": "new",
+                    "key_sha256": "4de3e4b743fbf475c9b0d663653f2d523578a50ece61b6a8a6d5fee2dab93add",
+                    "kind": "unresolved",
+                    "shape": [
+                      24,
+                      88,
+                      274
+                    ]
+                  }
+                ]
+              },
+              "reduction_kinds": [
+                "probe",
+                "probe",
+                "binary_paths",
+                "eliminate",
+                "binary_paths",
+                "eliminate",
+                "eliminate",
+                "unresolved"
+              ],
+              "reference_answer": true,
+              "reused_prefix_nodes": 0,
+              "target_sha256": "5c8f5fe4966715868484d578a4ee9c8946b5bc74814dcd90fd973a0a7175a1cb",
+              "target_shape": [
+                29,
+                110,
+                329
+              ],
+              "value": false
+            },
+            {
+              "closed": false,
+              "new_prefix_nodes": 0,
+              "prefix": {
+                "missing_sha256": "944e1c80b727c779838a814ab6d1509ae46b22afbde7e978523bb96c8f0ce859",
+                "nodes": []
+              },
+              "reduction_kinds": [],
+              "reference_answer": true,
+              "reused_prefix_nodes": 0,
+              "target_sha256": "944e1c80b727c779838a814ab6d1509ae46b22afbde7e978523bb96c8f0ce859",
+              "target_shape": [
+                29,
+                115,
+                343
+              ],
+              "value": true
+            }
+          ],
+          "source_sha256": "09831bee0e0295f91c4d21b79ffe25508d3dad8b48e5052b4bfde74367574914",
+          "source_shape": [
+            31,
+            122,
+            370
+          ],
+          "variable": 2
+        }
+      ],
+      "unfinished": 13
+    }
+  ],
+  "gained_originals": [],
+  "initial_pending_source_sha256": "26f134186dbdd90745599fa2d41308823b8c08b752f19d5f53124ffd4ecd73f1",
+  "new_nodes": [
+    {
+      "edge_sha256": null,
+      "key_sha256": "1be0d4a61e42d2254482504a7d59adf665bedaad29aaae68a2176fae1911ab2f",
+      "kind": "family",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "recognized",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "recognized"
+      },
+      "shape": [
+        17,
+        26,
+        62
+      ]
+    },
+    {
+      "edge_sha256": "1be0d4a61e42d2254482504a7d59adf665bedaad29aaae68a2176fae1911ab2f",
+      "key_sha256": "448c0adfa61f48b7a84da95e0b9ef4cb3ba734e0cc3038cc2c16c9b8dc70693f",
+      "kind": "polarity",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "shape": [
+        17,
+        26,
+        62
+      ]
+    },
+    {
+      "edge_sha256": "448c0adfa61f48b7a84da95e0b9ef4cb3ba734e0cc3038cc2c16c9b8dc70693f",
+      "key_sha256": "85a3757aa79014117d47d2f3103d11e3ceab29d44c7a5daf4c1f52a3e5fb0b70",
+      "kind": "binary_paths",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "shape": [
+        17,
+        28,
+        68
+      ]
+    },
+    {
+      "edge_sha256": "85a3757aa79014117d47d2f3103d11e3ceab29d44c7a5daf4c1f52a3e5fb0b70",
+      "key_sha256": "f0f1e709d2c7542256d0f627f7dd55812c908183564da2bcb25027b280359e24",
+      "kind": "probe",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "shape": [
+        18,
+        38,
+        100
+      ]
+    },
+    {
+      "edge_sha256": "f0f1e709d2c7542256d0f627f7dd55812c908183564da2bcb25027b280359e24",
+      "key_sha256": "66b454e996e93f2b425b69b02e57576e4588b61609cf6a08db026925d0774b3e",
+      "kind": "probe",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "shape": [
+        20,
+        50,
+        133
+      ]
+    },
+    {
+      "edge_sha256": "66b454e996e93f2b425b69b02e57576e4588b61609cf6a08db026925d0774b3e",
+      "key_sha256": "196187f579e4ff3bdbb1ccb86f6df90d228a4cf87a5e0fd8384d17fe52eb301a",
+      "kind": "probe",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "shape": [
+        22,
+        59,
+        160
+      ]
+    },
+    {
+      "edge_sha256": "196187f579e4ff3bdbb1ccb86f6df90d228a4cf87a5e0fd8384d17fe52eb301a",
+      "key_sha256": "6f9de76d2a992be7a4e79efe6f5804a1de0d13936e35c5663cd9078f3f7c3a1c",
+      "kind": "probe",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "shape": [
+        23,
+        67,
+        182
+      ]
+    },
+    {
+      "edge_sha256": "6f9de76d2a992be7a4e79efe6f5804a1de0d13936e35c5663cd9078f3f7c3a1c",
+      "key_sha256": "a02ba0cfb7aa2657a9797178a5bff35bf3482e0ae561af497cb264f887a12f4b",
+      "kind": "probe",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "shape": [
+        25,
+        77,
+        212
+      ]
+    },
+    {
+      "edge_sha256": "a02ba0cfb7aa2657a9797178a5bff35bf3482e0ae561af497cb264f887a12f4b",
+      "key_sha256": "2f5fe74c1c3ed8b5d671b7e18a35e1dc721c5c8b63284d948706cc56664540e2",
+      "kind": "probe",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "shape": [
+        26,
+        86,
+        240
+      ]
+    },
+    {
+      "edge_sha256": "2f5fe74c1c3ed8b5d671b7e18a35e1dc721c5c8b63284d948706cc56664540e2",
+      "key_sha256": "a4dbcf688ea1cbcf22ac89c3f148d6653ba67d4f4639bbd18d5ad864e112f461",
+      "kind": "probe",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "shape": [
+        31,
+        122,
+        363
+      ]
+    },
+    {
+      "edge_sha256": "a4dbcf688ea1cbcf22ac89c3f148d6653ba67d4f4639bbd18d5ad864e112f461",
+      "key_sha256": "72697c710335660e1dc9c934e995f7c37577a9226c546fd7233d4e3685cb3615",
+      "kind": "probe",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "shape": [
+        32,
+        136,
+        405
+      ]
+    },
+    {
+      "edge_sha256": null,
+      "key_sha256": "4de3e4b743fbf475c9b0d663653f2d523578a50ece61b6a8a6d5fee2dab93add",
+      "kind": "unresolved",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "shape": [
+        24,
+        88,
+        274
+      ]
+    },
+    {
+      "edge_sha256": "4de3e4b743fbf475c9b0d663653f2d523578a50ece61b6a8a6d5fee2dab93add",
+      "key_sha256": "28a03f94d7b6537a7184cc414ba4d5614ba5482d0beefd45892be75b4ccbe18e",
+      "kind": "eliminate",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "shape": [
+        25,
+        86,
+        264
+      ]
+    },
+    {
+      "edge_sha256": "28a03f94d7b6537a7184cc414ba4d5614ba5482d0beefd45892be75b4ccbe18e",
+      "key_sha256": "2f56253f6652b700198d5cb83227d2eeb38638fea9b572b0c4532f29e997182c",
+      "kind": "eliminate",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "shape": [
+        26,
+        87,
+        262
+      ]
+    },
+    {
+      "edge_sha256": "2f56253f6652b700198d5cb83227d2eeb38638fea9b572b0c4532f29e997182c",
+      "key_sha256": "81075ff20271b34c9cb4bfe403925edba346299dc12f32e32017f8b733cb02b4",
+      "kind": "binary_paths",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "shape": [
+        26,
+        88,
+        266
+      ]
+    },
+    {
+      "edge_sha256": "81075ff20271b34c9cb4bfe403925edba346299dc12f32e32017f8b733cb02b4",
+      "key_sha256": "ee297fe932738c7b7fe6162edb17a0b627e36f77e893dd2ea7ac4931bca6c049",
+      "kind": "eliminate",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "shape": [
+        27,
+        91,
+        272
+      ]
+    },
+    {
+      "edge_sha256": "ee297fe932738c7b7fe6162edb17a0b627e36f77e893dd2ea7ac4931bca6c049",
+      "key_sha256": "7b81759a3a31c4c1128fa6fa96deff84c27a0c92e87ff9d4bf897350903c7d57",
+      "kind": "binary_paths",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "shape": [
+        27,
+        94,
+        281
+      ]
+    },
+    {
+      "edge_sha256": "7b81759a3a31c4c1128fa6fa96deff84c27a0c92e87ff9d4bf897350903c7d57",
+      "key_sha256": "dca60bd1e63ddd61c4a3262e827908a8eb18eb5410948e2a7ca72b3c0ba694b7",
+      "kind": "probe",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "shape": [
+        28,
+        102,
+        305
+      ]
+    },
+    {
+      "edge_sha256": "dca60bd1e63ddd61c4a3262e827908a8eb18eb5410948e2a7ca72b3c0ba694b7",
+      "key_sha256": "5c8f5fe4966715868484d578a4ee9c8946b5bc74814dcd90fd973a0a7175a1cb",
+      "kind": "probe",
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "shape": [
+        29,
+        110,
+        329
+      ]
+    }
+  ],
+  "next_original_indices": [],
+  "next_shape": [
+    31,
+    122,
+    370
+  ],
+  "next_source_sha256": "09831bee0e0295f91c4d21b79ffe25508d3dad8b48e5052b4bfde74367574914",
+  "previously_unstored_sha256": []
+}

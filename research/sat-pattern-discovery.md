@@ -2933,3 +2933,72 @@ builds to **160 pages**, with no overfull boxes or undefined references and all
 artifacts** and all **3,575 previous reference payloads** remain unchanged.
 The new manifest binds **98 artifacts / 4,355,064 bytes**; commands, source
 fingerprints and checks are in the checkpoint's `validation.json`.
+
+## 2026-11-14: another conditional Horn branch and interrupted acquisition
+
+[Conditional-frontier resumption](conditional-frontier-resumption.md) finishes
+the missing true **32/136/405** branch of the retained variable-5 split in
+**11 new states**, reaching a **17/26/62** Horn, zero-valid formula through
+probes, binary-path reduction and a polarity change. Its acquired sibling
+needs no new admissions but still leads to **31/122/370**. Both structural
+obligations remain required; recognizing one branch does not close the source.
+
+The next split uses local variable **2** on that 31-variable residual. Its false
+**29/110/329** cofactor takes eight states to reach unresolved **24/88/274**.
+Its true **29/115/343** cofactor enters thirteen states before exhausting the
+shared allowance. Those thirteen have no stored pattern certificates. Each
+repeat therefore enters **32 states / stores 19 / leaves 13 unstored**. Their
+exact inputs remain in the operation logs; their shapes are not certified edges.
+Two independent repeats reproduce the same operations and persistent results.
+Coverage stays **66/83**; there are **4 open splits / 2 acquired leaves /
+1 pending target**, including the earlier unresolved **36/144/434** plan.
+
+Mean expansion is **0.25005 s**: selection **0.09339**, acquisition **0.13225**,
+maintenance **0.02355** and focus coverage **0.00086 s**. Preparation/export are
+**8.06032 / 4.85783 s** and the complete worker costs **13.25993 s**. This is
+an identical-policy continuation, not a comparative speedup. Preparation and
+export account for roughly 97% of worker time. The full producer costs
+**209.79814 s**, including **92.09233 s** restoration and **67.60414 s** final
+route preparation plus global coverage. The index ends with **698 routes /
+one pending link**; no peak-RAM reduction is claimed.
+
+The union adds **19 patterns / 1 split / no external probe rows**. History grows
+**253,952 bytes** to **776,065,024 bytes / 42,120 patterns**. Its delta occupies
+**319,488 SQLite bytes / 14,220 compressed bytes**. The positive certificate
+remains **3,360 steps**; reference nodes grow **3,734 -> 3,781**.
+
+The code stores a pattern only after its recursive acquisition returns. Thus,
+for an unchanged history with a deterministic unary chain of L unrecorded
+states and no intervening completed branches, a repeated allowance B < L can
+fail before any row is stored on every retry. The linked analysis gives the
+induction over retries and the requirements for checked local continuations.
+This is a restart-policy limitation, not a SAT lower bound. The current
+interruption does not show that its full path exceeds a fresh allowance of 32.
+
+Resume `experiments/results/cnf-conditional-frontier/report.json` through
+`continue_cnf_conditional_frontier.restore_checkpoint`, SHA-256
+`f55bdcefe556222a5b6043f03591e38f10ad8c76bc3c3c73a8eb45aed73c0ef8`.
+Keep evidence **(1, 42, 156, 45, 1)** and **two bridges**. Resume the variable-2
+pair of source `09831bee0e0295f91c4d21b79ffe25508d3dad8b48e5052b4bfde74367574914`;
+its missing true target is
+`944e1c80b727c779838a814ab6d1509ae46b22afbde7e978523bb96c8f0ce859`.
+Charge reentry of all unstored inputs, preserve the acquired false branch and
+both open leaves, and distinguish pattern recurrence from identical-formula
+reuse. Startup/export reuse promises the larger measured runtime saving;
+interruption-safe continuations address progress and avoid repeated discovery.
+
+Independent cold reconstruction passes in **305.33218 s**, verifies all
+**3,781 reference nodes**, and reproduces global coverage and the next
+selection without fresh discovery or reference search. Both stepwise prefixes
+match full catalogs, ordering and activation counts. All **222 tests** pass;
+existing SQLite resource warnings remain visible in the log. The **161-page**
+manuscript builds with no overfull boxes or undefined references, and all
+**64 previous proof blocks** remain unchanged. The restart-policy argument is
+textual; no new Lean theorem is claimed.
+
+All **23 previous manifests / 1,107 artifacts** and all **3,734 previous
+reference payloads** are unchanged. The new manifest binds **40 artifacts /
+3,720,830 bytes**, including operation logs, deltas, reference evidence,
+structural findings, cost summary, validation metadata and test/build logs.
+See `experiments/results/cnf-conditional-frontier/validation.json` for exact
+commands and source fingerprints.

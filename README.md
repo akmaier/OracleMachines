@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Continuing the conditional frontier](research/conditional-frontier-resumption.md)
+reaches another checked Horn branch and retains **19 new patterns**. Coverage
+remains **66/83**. Thirteen interrupted states expose a persistence gap: bounded
+retries need not progress when a recursive chain cannot finish within the
+allowance. Preparation and export still dominate the measured worker cost.
+
 [Updating only affected routes after acquisition](research/pattern-activation.md)
 reduces observed complete-worker time **14.7%** on the completed historical case
 and **20.4%** on the next bounded expansion, with identical search choices and

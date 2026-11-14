@@ -1,0 +1,46 @@
+{
+  "activated_routes": 1,
+  "admitted": 32,
+  "affected_routes": 1,
+  "completed": 19,
+  "compressed_delta_bytes": 14220,
+  "costs_mean_seconds": {
+    "acquisition_seconds": 0.1322463748510927,
+    "coverage_seconds": 0.0008571662474423647,
+    "route_refresh_seconds": 0.023552874103188515,
+    "selection_seconds": 0.09339418797753751
+  },
+  "delta_database_bytes": 319488,
+  "expansion_mean_seconds": 0.2500506031792611,
+  "export_mean_seconds": 4.857832167064771,
+  "final_activation_index": {
+    "indexed_routes": 698,
+    "pending_routes": 1,
+    "waiting_links": 1,
+    "waiting_targets": 1
+  },
+  "history_bytes": 776065024,
+  "initial_activation_index": {
+    "indexed_routes": 697,
+    "pending_routes": 1,
+    "waiting_links": 1,
+    "waiting_targets": 1
+  },
+  "limitations": [
+    "Two independent seed copies with identical scheduling; reproducibility, not a comparative speedup.",
+    "Resume the exact retained pair before selecting new work. Both polarities remain obligations regardless of a SAT witness.",
+    "Each worker has twelve advances and one fresh shared 32-state allowance. Existing rows are reused; any entered-but-unstored states remain separately accounted.",
+    "Selective pattern activation retains checked route order; both repeated workers use the same scheduler and maintenance, not a speed comparison.",
+    "Preparation, acquisition, route updates, coverage, persistence, reconstruction and reference checks are separate costs.",
+    "Development cases, shared OS caches, no holdout or confidence intervals. Stored bytes are not peak RAM.",
+    "No globally minimal expansion, polynomial unrestricted-SAT algorithm or P-versus-NP conclusion."
+  ],
+  "maintenance_modes": {
+    "pattern_activation": 2
+  },
+  "preparation_mean_seconds": 8.060321145458147,
+  "steps": 2,
+  "target_closed": false,
+  "unfinished": 13,
+  "worker_mean_seconds": 13.259929166408256
+}

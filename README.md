@@ -28,7 +28,16 @@ classes.
 
 ## Paper
 
-[The latest original-frontier batch](research/original-warm-expansion.md) reduces
+[Early closed-cofactor reuse](research/early-closed-expansion.md) now has a matched
+comparison: **22.31% less expansion time** on case 1445, but a **1.64% regression**
+on forcing control 1189. Both policies preserve the same pattern records and
+proof outcomes. One new branch closes through a six-variable Horn terminal;
+the other remains pending at 23 variables under the 32-state allowance. Coverage
+stays **59/83**. All **181 relevant tests** and cold replay of all four arms pass.
+The [priority record](research/structural-reuse-priorities.md) identifies the exact
+pending target and the cost of repeated unsuccessful candidate searches.
+
+[The preceding original-frontier batch](research/original-warm-expansion.md) reduces
 another open residual from **33 to 29 variables**, using **7/32 admissions**.
 Two splits reuse the same earlier empty-CNF terminal; overall coverage stays
 **59/83**. The next opportunity is to use these known closed cofactors earlier:

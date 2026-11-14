@@ -6107,3 +6107,53 @@ saved split is **local variable 12**, with one closed child and one missing
 28-variable / 281-literal cofactor. Test that reuse opportunity next, retaining
 case 1189 as a contrasting forced-reduction control. No unrestricted construction,
 peak-RAM or new Lean guarantee is established.
+
+
+## 2026-11-14: early closed-cofactor reuse helps one case and costs another
+
+[The matched policy comparison](early-closed-expansion.md) tests using an already
+checked closed cofactor before fresh ordinary probes. On case **1445**, early reuse
+reaches the same state-budget boundary in **6 rather than 8 advances**, avoiding
+12 assumption attempts. Expansion time falls **8.08296 -> 6.27974 s (22.31%)**;
+complete worker time falls **20.70618 -> 17.90584 s (13.52%)**. Both arms enter the
+same 32 state identities, store identical pattern payloads and choose identical
+split records. Acquisition itself is slower because of extra candidate checks.
+
+On the earlier forcing case **1189**, both policies preserve the same successful
+8-step / 21-state proof, but early search takes **8.00118 versus 7.87241 s** for
+expansion: a **1.64% regression**. It ranks 94 pairs versus 15, with eight misses.
+These are single paired development runs, not independent holdout estimates or
+a universal speedup. Saved forcing and unfinished pairs retain priority; both
+children remain mandatory for structural coverage.
+
+The current case reaches a **27-variable / 93-clause / 287-literal** source.
+Its split on local variable **4** closes the false **22 / 72 / 211** cofactor
+through 24 states, ending in a polarity transformation to a **6-variable Horn
+terminal that is not 2-CNF**. The true **23 / 70 / 196** cofactor remains pending:
+four more states were entered before the 32-state allowance ended, without
+completed rows for those four states. Thus 32 admissions yield 28 new stored
+patterns. Resume that exact target; the limit is not evidence of intrinsic hardness.
+
+Both policies' results, including the regression, are preserved and merged into
+current history. Each comparison arm has its own allowance; the union is not a
+single 32-state experiment. Coverage remains **59/83**. The combined **19,191-byte
+compressed delta** adds 28 patterns and six probe blocks, with two new split
+sidecars. Full history is **771,342,336 bytes / 41,815 patterns**, growing by
+417,792 bytes. All previous rows and all 2,075 reference nodes survive; 2,115
+reference nodes and the unchanged 2,828-step positive proof check.
+
+All **181 relevant tests** and independent reconstruction of all four arms pass.
+Current/control reconstruction costs **32.97981 / 25.34922 s**; final complete
+route preparation and all-original coverage checking cost **7.44994 / 60.00692 s**.
+The full study costs **227.90943 s**. No peak-RAM, new Lean refinement or unrestricted
+construction bound is supplied.
+
+Resume **`experiments/results/cnf-early-closed/report.json`** through
+`compare_cnf_early_closed.restore_checkpoint`, preserving evidence counts
+**(1, 42, 156, 16, 1)**. Pending target SHA-256:
+`69d0f3cad2b4d527495373e3fecf905d0c538d98adb833dbd0373598cfb0280e`;
+split source SHA-256:
+`6be85c519f3e56d3096ab3e1ed2ad63597d70459193d435d885457fca290ca39`.
+Resume the pending true branch before another ranking search. Then investigate
+incremental candidate checks with explicit invalidation for new traces, admitted
+targets and changed coverage. Do not rerun all four comparison arms to continue.

@@ -1,0 +1,120 @@
+{
+  "covered_after": 59,
+  "covered_before": 59,
+  "evidence_counts": [
+    1,
+    42,
+    156,
+    16,
+    1
+  ],
+  "gains": [],
+  "idempotent_merge": true,
+  "independent_reconstruction": {
+    "arms": [
+      {
+        "admitted": 32,
+        "case": 1445,
+        "closed": false,
+        "cold_frontier_matches": true,
+        "idempotent": true,
+        "mode": "probe_first"
+      },
+      {
+        "admitted": 32,
+        "case": 1445,
+        "closed": false,
+        "cold_frontier_matches": true,
+        "idempotent": true,
+        "mode": "early_closed"
+      },
+      {
+        "admitted": 21,
+        "case": 1189,
+        "closed": true,
+        "cold_frontier_matches": true,
+        "idempotent": true,
+        "mode": "early_closed"
+      },
+      {
+        "admitted": 21,
+        "case": 1189,
+        "closed": true,
+        "cold_frontier_matches": true,
+        "idempotent": true,
+        "mode": "probe_first"
+      }
+    ],
+    "passed": true,
+    "reconstruction": {
+      "covered": 59,
+      "evidence_counts": [
+        1,
+        42,
+        156,
+        16,
+        1
+      ],
+      "report_sha256": "8a526996c3c739f76c847d4f9f4d5a05d9530d14d7834930a40c5afab6d5245f",
+      "seconds": 36.9424640419893
+    },
+    "report_sha256": "8a526996c3c739f76c847d4f9f4d5a05d9530d14d7834930a40c5afab6d5245f",
+    "seconds": 132.79115704121068
+  },
+  "parent_manifests": {
+    "experiments/results/cnf-expanded-coverage/manifest.json": {
+      "artifacts_checked": 8,
+      "sha256": "1eb6be76f66b8f483486a7985eddc31d29f2f7384c6e60d3873214e98335187c"
+    },
+    "experiments/results/cnf-incremental-coverage/manifest.json": {
+      "artifacts_checked": 8,
+      "sha256": "1af918ca0ad3bd81c6cca802cff9012335f0a218316afbe4d269b55d3aae896a"
+    },
+    "experiments/results/cnf-local-forcing/manifest.json": {
+      "artifacts_checked": 16,
+      "sha256": "592d7b463bfdd255a4ae374e7cf477e8c3ca5f5ee76058d94a0ea6963e450386"
+    },
+    "experiments/results/cnf-original-warm/manifest.json": {
+      "artifacts_checked": 42,
+      "sha256": "4be286b0047d51982ecd83b07672d342ba46268adb1c6276d31c176c522e7e74"
+    },
+    "experiments/results/cnf-positive-bundle/manifest.json": {
+      "artifacts_checked": 9,
+      "sha256": "1852ca037a358474440760c8eaec92a081d55436864e82670cc5db74895756d6"
+    },
+    "experiments/results/cnf-positive-primitives/manifest.json": {
+      "artifacts_checked": 9,
+      "sha256": "412e36cf16f6bf99eb08b815d039de607fb953e94bd51e98cc3e8f435beaf400"
+    },
+    "experiments/results/cnf-reused-branch/manifest.json": {
+      "artifacts_checked": 17,
+      "sha256": "0b865efe9c443d2e2391fe421195aa3286326e360a9381a9842d005b37a258b0"
+    },
+    "experiments/results/cnf-selected-routes/manifest.json": {
+      "artifacts_checked": 8,
+      "sha256": "794927c4004a17acc36861c8ec9d1be79bfe616313bde407d8ee0e668e53cc88"
+    },
+    "experiments/results/cnf-source-local-checked/manifest.json": {
+      "artifacts_checked": 16,
+      "sha256": "15a405063c7da4944e2f70a6d2026156c07774b31c4de3bb97eac911fc8a72c9"
+    },
+    "experiments/results/cnf-warm-batch/manifest.json": {
+      "artifacts_checked": 24,
+      "sha256": "406f53d13b1a6294fe60d6f1f9fa0e6512433a68f00f5271b51c538dc0950e7c"
+    }
+  },
+  "parent_unchanged": true,
+  "report_sha256": "8a526996c3c739f76c847d4f9f4d5a05d9530d14d7834930a40c5afab6d5245f",
+  "scope": "Two paired development cases with independent 32-state arm allowances. All four outcomes and pending frontiers cold-replayed; source new-recognition disabled. Combined history preserves both policies, including regression. No new original closure, peak RAM, new Lean refinement or general speedup claimed.",
+  "source_fingerprints": {
+    "experiments/cnf_early_closed.py": "bea92740a880559771684f326e36ca8d1f09e4bd413d4f310b2c61ce96223252",
+    "experiments/cnf_original_frontier.py": "c85f2a932b24b85796c1a3290b53a42fca02f6acb3ebf6e78e5f60e9c1fa9ca9",
+    "experiments/cnf_warm_expansion.py": "19f8fc0887b322fcd8a12e0241c2ff6221dafc43d32563077952863e8af40b21",
+    "experiments/compare_cnf_early_closed.py": "2968305d534ce88083eb1f2b465207cce4e3b2133ee40d6bb15c709dcb9b84ad",
+    "experiments/validate_cnf_early_closed.py": "2a28fc8919e5dbd92a89b4d9e6c71a87ade3027d3b1c5b0c932cb6056212d1b6",
+    "solver/test_cnf_early_closed.py": "960af9cdc136a26b6761ce05bd04be568c8f5c43cbe453003338a859eee886ee"
+  },
+  "test_command": "python3 -m unittest solver.test_cnf_positive_bundle solver.test_cnf_positive_primitives solver.test_cnf_expanded_coverage solver.test_cnf_selected_routes solver.test_cnf_route_composition solver.test_cnf_trace_split solver.test_cnf_probe_window solver.test_cnf_probe_continuation solver.test_cnf_learning_continuation solver.test_cnf_trace_learning solver.test_cnf_trace_reuse solver.test_cnf_coupled_pivots solver.test_cnf_affine_clause solver.test_cnf_retained_plans solver.test_cnf_variable_elimination solver.test_cnf_clause_bound_elimination solver.test_cnf_additive_elimination solver.test_cnf_binary_paths solver.test_cnf_polarity_horn solver.test_cnf_simplification solver.test_cnf_fused_conditioning solver.test_cnf_affine_projection solver.test_cnf_affine_patterns solver.test_cnf_probe_equivalence solver.test_cnf_source_local solver.test_cnf_local_forcing solver.test_cnf_incremental_coverage solver.test_cnf_warm_expansion solver.test_cnf_original_frontier solver.test_cnf_original_splits solver.test_cnf_split_batch solver.test_cnf_split_frontier solver.test_cnf_early_closed",
+  "test_log_sha256": "bf33fc507e5413669bbd4840eaa0f71c90dd7f327ba985e1aa666f831be00397",
+  "tests": 181
+}

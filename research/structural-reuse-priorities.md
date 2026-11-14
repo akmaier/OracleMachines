@@ -12,7 +12,52 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse a closed cofactor before exhausting probes
+## Current investigation: conditional early-reuse gain and a pending Horn route
+
+[The paired comparison](early-closed-expansion.md) shows an actual scheduling gain
+on case **1445**: early closed-cofactor reuse skips two clear blocks, taking
+**6 rather than 8 advances** and **6.27974 rather than 8.08296 seconds** for expansion
+(22.31%). Both policies reach the same 32-state boundary and identical pattern
+records. Full worker saving is **13.52%**, with preparation and delta persistence.
+On forcing control **1189**, the successful proof is preserved but expansion is
+**1.64% slower** because eight failed early searches add checking. Keep this
+regression: the policy is a candidate with conditional benefits.
+
+The current source splits at **27 variables / 93 clauses / 287 literals**. Its
+false cofactor closes through 24 states and a polarity transformation to a
+**6-variable Horn terminal, not 2-CNF**. The true **23 / 70 / 196** cofactor remains
+pending after four additional unfinished admissions. Overall coverage is still
+**59/83**. The cap accounts for entered states, including unfinished ancestors:
+32 admissions correspond to 28 new completed pattern rows in this run.
+
+1. **Resume the exact pending true cofactor.** It belongs to the saved split on
+   local variable **4**; its false branch is already closed. Reuse every completed
+   descendant and record the cost of reconstructing unfinished work. Pending target
+   SHA-256: `69d0f3cad2b4d527495373e3fecf905d0c538d98adb833dbd0373598cfb0280e`.
+   Do not rerank the parent or interpret the admission cap as a hardness result.
+2. **Reduce repeated unsuccessful candidate checking.** Early search ranks 94
+   pairs on each case, versus 41 and 15 for probe-first; acquisition is slower in
+   both comparisons. Test checking only novel trace pairs, with exact invalidation
+   when targets are admitted or routes/coverage change. Retain the forcing control
+   and charge recognition before claiming an improvement.
+3. **Keep total maintenance costs visible while expanding coverage.** Route
+   refresh still dominates the warm arms. Final whole-corpus checking costs
+   **60.00692 s**, beyond **7.44994 s** of route preparation; current/control
+   reconstruction costs **32.97981 / 25.34922 s**. Broader unlabelled and adversarial
+   cases remain needed; a short closed-cofactor chain need not exist for every CNF.
+
+Both arms' results and all previous evidence are retained. The combined
+**19,191-byte compressed delta** adds 28 patterns and six probe blocks, plus two
+split records; full history is **771,342,336 bytes / 41,815 patterns**. Each arm
+had its own 32-state allowance; the merged checkpoint is not one such experiment.
+All **181 relevant tests** and independent cold replay of all four arms pass.
+Resume **`experiments/results/cnf-early-closed/report.json`** with
+`compare_cnf_early_closed.restore_checkpoint`, preserving evidence counts
+**(1, 42, 156, 16, 1)**. Continue from the merged checkpoint rather than rerunning
+the comparison. The pending split source SHA-256 is
+`6be85c519f3e56d3096ab3e1ed2ad63597d70459193d435d885457fca290ca39`.
+
+## Previous investigation: reuse a closed cofactor before exhausting probes
 
 [The next original-frontier batch](original-warm-expansion.md) reaches case **1445**,
 whose smallest selected residual has **33 variables / 121 clauses / 359 literals**.

@@ -1,0 +1,122 @@
+{
+  "arms": [
+    {
+      "admitted": 16,
+      "case": 1160,
+      "closed": true,
+      "completed": 16,
+      "compressed_delta_bytes": 17693,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 1.0136867922265083,
+        "coverage_seconds": 0.002986687934026122,
+        "route_refresh_seconds": 12.601029770681635,
+        "selection_seconds": 0.012254394823685288
+      },
+      "delta_database_bytes": 397312,
+      "delta_export_mean_seconds": 4.956390166422352,
+      "expansion_mean_seconds": 13.629957645665854,
+      "external_assumption_attempts": 80,
+      "history_bytes": 773586944,
+      "mode": "ordinary",
+      "preparation_mean_seconds": 7.709360896144062,
+      "steps": 12,
+      "unfinished": 0,
+      "worker_mean_seconds": 26.38845122954808
+    },
+    {
+      "admitted": 16,
+      "case": 1160,
+      "closed": true,
+      "completed": 16,
+      "compressed_delta_bytes": 13199,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.13745897891931236,
+        "coverage_seconds": 0.0007016039453446865,
+        "route_refresh_seconds": 2.109850416891277,
+        "selection_seconds": 0.0018508539069443941
+      },
+      "delta_database_bytes": 270336,
+      "delta_export_mean_seconds": 4.678889896022156,
+      "expansion_mean_seconds": 2.2498618536628783,
+      "external_assumption_attempts": 0,
+      "history_bytes": 773459968,
+      "mode": "early_saved",
+      "preparation_mean_seconds": 7.734038207912818,
+      "steps": 2,
+      "unfinished": 0,
+      "worker_mean_seconds": 14.695174790918827
+    },
+    {
+      "admitted": 21,
+      "case": 1189,
+      "closed": true,
+      "completed": 21,
+      "compressed_delta_bytes": 15484,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.2816093130968511,
+        "coverage_seconds": 0.002206500619649887,
+        "route_refresh_seconds": 7.898540312657133,
+        "selection_seconds": 0.0018383953720331192
+      },
+      "delta_database_bytes": 397312,
+      "delta_export_mean_seconds": 4.6993345625232905,
+      "expansion_mean_seconds": 8.184194521745667,
+      "external_assumption_attempts": 51,
+      "history_bytes": 770707456,
+      "mode": "ordinary",
+      "preparation_mean_seconds": 7.518905875273049,
+      "steps": 8,
+      "unfinished": 0,
+      "worker_mean_seconds": 20.450905729318038
+    },
+    {
+      "admitted": 20,
+      "case": 1189,
+      "closed": true,
+      "completed": 20,
+      "compressed_delta_bytes": 12050,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.11860522953793406,
+        "coverage_seconds": 0.0011327704414725304,
+        "route_refresh_seconds": 2.92588356253691,
+        "selection_seconds": 0.0030851035844534636
+      },
+      "delta_database_bytes": 307200,
+      "delta_export_mean_seconds": 4.838121770881116,
+      "expansion_mean_seconds": 3.0487066661007702,
+      "external_assumption_attempts": 0,
+      "history_bytes": 770600960,
+      "mode": "early_saved",
+      "preparation_mean_seconds": 7.454206604277715,
+      "steps": 3,
+      "unfinished": 0,
+      "worker_mean_seconds": 15.373643229249865
+    }
+  ],
+  "limitations": [
+    "Two development sources: the latest selected residual and an earlier forcing control. No independent holdout or global optimality claim.",
+    "Two repetitions per mode and case reverse arm order. Every worker copies the same case-specific seed and gets twelve advances and one 32-state allowance.",
+    "The ordinary policy already prefers saved pairs with closed children. The new policy permits the best saved pair without a closed child, but pending and known forcing still come first.",
+    "Complete worker time includes preparation, acquisition, checking and delta export. Authority reconstruction and union checks are charged separately.",
+    "Both split branches remain structural obligations, independently of SAT answers. Unfinished admissions are explicit; all alternatives and old history are retained in the union.",
+    "Shared process and OS caches, two repetitions, no confidence intervals; disk bytes are not peak RAM. No minimum expansion bound or unrestricted SAT result."
+  ],
+  "paired": [
+    {
+      "both_closed": true,
+      "case": 1160,
+      "early_saved_only_patterns": 0,
+      "identical_new_pattern_keys": true,
+      "ordinary_only_patterns": 0,
+      "shared_new_patterns": 16
+    },
+    {
+      "both_closed": true,
+      "case": 1189,
+      "early_saved_only_patterns": 20,
+      "identical_new_pattern_keys": false,
+      "ordinary_only_patterns": 21,
+      "shared_new_patterns": 0
+    }
+  ]
+}

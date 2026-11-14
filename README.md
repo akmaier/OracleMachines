@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Selecting saved split pairs earlier](research/early-saved-expansion.md) closes
+case 1160 and raises structural coverage to **64/83**. On that case, the same
+sixteen new patterns take **2 instead of 12 advances**, reducing complete worker
+time by **44.3%**. A historical forcing control improves by **24.8%**. Both
+policies' results are preserved; the early policy remains optional pending
+broader evaluation.
+
 [Acquiring the bounded projection](research/projection-acquisition.md) closes
 case 1298, raising structural coverage to **63/83**. The matched ordinary path
 closes it too and costs less: **4.45 vs 8.70 seconds**, **8 vs 9 new states**.

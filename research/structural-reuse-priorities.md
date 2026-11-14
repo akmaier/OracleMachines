@@ -12,7 +12,52 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: acquiring a smaller projection costs more
+## Current investigation: early saved splits avoid repeated probe work
+
+[Selecting saved pairs before further probing](early-saved-expansion.md) closes
+original **1160 / index 29**, raising structural coverage **63/83 -> 64/83**. The
+ordinary and early policies acquire the same sixteen new pattern keys, but take
+**12 vs 2 advances**. Mean expansion is **13.62996 vs 2.24986 s**, and complete
+worker time **26.38845 vs 14.69517 s** (**44.31% lower**). On the earlier forcing
+control 1189, complete worker time falls **24.83%**, with **21 vs 20** new states.
+Both policies finish both cases; early selection remains optional.
+
+1. **Test how broadly saved-pair selection transfers.** Continue at original
+   **1263 / index 42**, selected **37 / 152 / 470** leaf. Its next ordinary
+   variables are **32, 33, 34, 37**. Compare the best currently saved pair with
+   further probing under identical budgets and seeds. Seek cases where new
+   forcing beats immediate splitting; two successful development examples do
+   not identify a reliable universal selector. Preserve both branch obligations.
+2. **Reduce maintenance cost independently of the search choice.** Even the two
+   early runs spend **2.10985 / 2.92588 s** refreshing full routes out of
+   **2.24986 / 3.04871 s** of expansion. The full study spends **57.71801 s**
+   restoring the current authority and **68.76609 s** preparing/checking final
+   global coverage. Incremental activation and prepared checked state remain
+   larger total-cost opportunities than arithmetic micro-optimizations. Charge
+   invalidation, cold replay and storage, including pending children and later
+   forcing; avoid a policy change disguised as a maintenance optimization.
+3. **Transport useful structure across different paths.** The forcing control's
+   21 ordinary and 20 early new keys are disjoint relative to their common older
+   seed. Check common intermediate substructure and exact variable maps before
+   duplicating recognition. Structural closure is distinct from a SAT witness
+   and from a lower bound on future acquisition.
+
+Resume **`experiments/results/cnf-early-saved/report.json`** through
+**`compare_cnf_early_saved.restore_checkpoint`**. Report SHA-256:
+`995476297ac2e99710b26b67d9ecc3e95963ab624e68282e7b5108da077999d3`.
+Retain five evidence lists **(1, 42, 156, 31, 1)** and the separate **two-bridge**
+archive. Use its bridge-aware `routes_for` and
+`cnf_projection_bridge.verify_positive`. Both bridge targets and all 31 retained
+split sources close. The union retains **36 new patterns**, all extra ordinary
+probe work and all earlier results, for **773,828,608 bytes / 41,962 patterns**.
+It is not one 32-state run. Nineteen originals remain uncovered. Next source:
+`746b92609a26b66fe74b529bdeb36a5a46ca58129c1bcca04c5088bd23d02eeb`.
+Its sixteen saved pairs have no acquired child root; best rank is
+**[2, 2, 35, 817, 6]**. All **204 tests** and independent cold replay pass,
+including **3,203 reference nodes**. The manuscript builds with all 64 proof
+blocks unchanged; 533 earlier artifacts remain hash-identical.
+
+## Previous investigation: acquiring a smaller projection costs more
 
 [The bounded acquisition comparison](projection-acquisition.md) completes case
 **1298 / index 47**, raising coverage **62/83 -> 63/83** in both views. Ordinary

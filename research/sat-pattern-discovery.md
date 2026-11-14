@@ -2553,3 +2553,63 @@ similar dimensions, its normalized clause set shares no exact clause with the
 completed leaf. Prioritize existing split evidence and incremental route
 maintenance while continuing broader structural discovery. Neither a minimum-cost
 policy nor an unrestricted SAT resource bound has been established.
+
+## 2026-11-14: early saved-pair selection improves both matched cases
+
+[The new scheduling comparison](early-saved-expansion.md) raises structural
+coverage **63/83 -> 64/83**, closing original **1160 / index 29**. Saved clear
+pairs already carry checked restrictions for both polarities; exhausting the
+ordinary probe pool is not required for their correctness. `EarlySavedExpansion`
+uses the best existing pair immediately, preserving pending/known-forcing
+priority, both child obligations and one shared admission budget. The ordinary
+policy already permits early pairs with closed children. Neither uses reference
+answers or interprets a clear probe as a SAT certificate.
+
+Two reversed repetitions per case use identical independent seeds, twelve
+advances and 32 states. On case 1160, the same sixteen new keys require **2 vs 12
+advances**; expansion falls **13.62996 -> 2.24986 s** and complete worker time
+**26.38845 -> 14.69517 s** (**44.31% lower**). Extra external assumption attempts
+fall **80 -> 0**, while recognizer-internal probing remains charged. Both paths
+split source variable **19**, expose binary implications and elimination on its
+false branch, then split the remaining **34 / 135 / 404** leaf on local variable
+**14**. That split has a refuted branch and a SAT branch ending in **6 / 7 / 14
+2-CNF**, neither Horn nor dual-Horn. The first split's true branch reaches the
+retained empty-CNF terminal. Both first-level branches are independently SAT;
+full structural classification remains distinct from earliest SAT decision.
+
+On historical forcing control **1189**, reconstructed from its older seed,
+complete worker time falls **20.45091 -> 15.37364 s** (**24.83% lower**) and
+new states **21 -> 20**, using three splits instead of further forcing followed
+by one split. Its two new pattern key sets are disjoint. The early policy stays
+optional: two successful development examples do not bound the advantage of a
+future forcing opportunity or establish a universal selection rule.
+
+The combined checkpoint preserves both policies and all earlier results. It adds
+**36 patterns**, nine continuation blocks, one probe window and five split
+records. Full history is **773,828,608 bytes / 41,962 patterns**, with **27,393
+compressed delta bytes** and a **3,190-step** positive proof. All 31 retained
+split sources and both bridge targets close; nineteen originals remain uncovered.
+The union is not one 32-state run. Full route refresh still consumes most warm
+expansion. The complete study costs **334.32398 s**, including current restoration
+**57.71801 s**, historical control restoration **25.38864 s** and final global
+preparation/checking **68.76609 s**. Complete worker means charge preparation,
+checking and persistence separately from the quoted expansion phase totals.
+
+All **204 tests** pass. Independent cold replay checks all eight arms and
+**3,203 reference nodes** with recognition and reference expansion forbidden,
+including repeated results, exact next selection and idempotent merging. The
+157-page paper builds, preserving all 64 proof blocks. All **533 earlier
+artifacts / 17 manifests** remain hash-identical.
+
+Resume `experiments/results/cnf-early-saved/report.json` through
+`compare_cnf_early_saved.restore_checkpoint`, keeping the five evidence lists
+**(1, 42, 156, 31, 1)** and the separate two-bridge archive. Use bridge-aware
+`routes_for` and `cnf_projection_bridge.verify_positive`. Report SHA-256:
+`995476297ac2e99710b26b67d9ecc3e95963ab624e68282e7b5108da077999d3`.
+Next: original **1263 / index 42**, leaf **37 / 152 / 470**, source SHA-256
+`746b92609a26b66fe74b529bdeb36a5a46ca58129c1bcca04c5088bd23d02eeb`.
+Its remaining ordinary variables are **32, 33, 34, 37**. Sixteen saved pairs have
+no acquired child root; best rank **[2, 2, 35, 817, 6]**. Broaden the comparison
+while seeking forcing regressions, and test incremental route maintenance with
+explicit activation and invalidation conditions. General efficient SAT coverage
+and minimum-cost expansion remain unproved.

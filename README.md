@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[A matched split comparison](research/split-cost-1299.md) exposes the current
+tradeoff: one choice stores **13 instead of 29 new patterns**, with **45% fewer
+compressed delta bytes**, but both take about **12.7 seconds** and leave the
+case structurally open. Route refresh consumes **94%** of expansion time; the
+smaller arm's complete worker is slightly slower. Both alternatives are retained,
+leaving **28- and 29-variable** unresolved leaves. Structural coverage remains
+**61/83**. The [priority record](research/structural-reuse-priorities.md) binds the
+new resumable checkpoint and the next discovery and maintenance targets.
+
 [A conditional refutation and a zero-valid component](research/transfer-1304.md)
 close another development input, raising structural coverage **60/83 -> 61/83**.
 A saved split needs **10 new states**: three failed-literal reductions refute one
@@ -35,8 +44,8 @@ branch; six reach a formula satisfied by the all-false assignment in the other.
 Acquisition and ranking cost **0.201 seconds**, with **106.79 seconds** of initial
 reconstruction and checking charged separately. The delta adds **9,914 compressed
 bytes**. All **181 relevant tests** and cold replay pass. The next selected
-residual has **36 variables / 162 clauses**, with a concrete split-ranking
-tradeoff recorded for the next comparison.
+residual has **36 variables / 162 clauses**, supplying the split-ranking
+tradeoff tested above.
 
 [Resuming the pending split](research/pending-warm-expansion.md) raises structural
 coverage **59/83 -> 60/83**. The true branch reaches a seven-variable Horn

@@ -12,7 +12,54 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: conditional refutation transfers; 22 originals remain
+## Current investigation: smaller stored expansion, maintenance still dominates
+
+[Matched first-split choices on case 1299](split-cost-1299.md) retain **13 vs 29
+new patterns** for initial variable **1 vs 17**, with **15,849 vs 28,842 compressed
+delta bytes**. Both twelve-step paths remain structurally open, taking **12.72181
+vs 12.72706 s** on two-repetition means. The difference reverses sign between
+repetitions. Complete worker time is **25.58026 vs 24.82740 s**, so no faster
+policy is established. Both seeds, budgets and continuation policies match;
+repetition order reverses. Complete route refresh costs **11.98 vs 11.96 s**, about
+**94%** of expansion. All alternatives and unsuccessful work are retained.
+
+1. **Continue the 28-variable unresolved leaf and test common structure with
+   the retained 29-variable alternative.** The selected leaf is **28 / 110 / 351**,
+   SHA-256 `dd04e43d15b115ab5d60b5b4aef44d03001fcfe6910263b218b5f35776ed70ab`.
+   Both leaves have exhausted ordinary probes and retain **21** clear pairs,
+   with no presently acquired candidate child root. The selected leaf's current
+   best rank is **[2, 2, 26, 571, 17]**. Similarity of the two leaves is an
+   investigation lead, not an equivalence certificate; check exact transports,
+   implications or shared components before reusing proofs across them.
+2. **Avoid full route refresh after clear blocks.** Measure an incremental or
+   deferred catalog update against the full implementation while continuing
+   useful discovery. A clear block changes saved candidate availability even if
+   it adds no forced route. Account for trace, admission and closure invalidation,
+   and test later forcing and previously inactive routes. This offers a larger
+   warm saving than reducing the **0.71--0.73 s** spent on acquisition/ranking.
+3. **Measure decision progress separately from full structural coverage.** Each
+   initial split acquires a SAT branch, while the other retains unresolved work.
+   SAT witnesses can decide a source without classifying both cofactors. Preserve
+   both metrics and their distinct proof requirements; do not import reference
+   answers into the structural coverage count or infer a forced value from a
+   closure flag.
+
+Coverage remains **61/83** in both views. The union adds **42 unique patterns**,
+**21 probe blocks** and **4 split records**; it is not one 32-state run. Full
+history is **772,599,808 bytes / 41,887 patterns**; its compressed delta is
+**43,317 bytes**. The complete four-arm producer takes **252.67688 s**, including
+**45.38279 s** restoring the parent and **67.42831 s** preparing/checking final
+global coverage. The positive proof stays at **3,043 steps**.
+
+Resume **`experiments/results/cnf-split-cost-1299/report.json`** through
+**`compare_cnf_split_cost.restore_checkpoint`**, evidence counts
+**(1, 42, 156, 21, 1)**. The report hash is
+`76e56eb9db1dd60c2d171c3fa0b349b68f1628c25878e61ddc90c6a2667cd1fd`.
+Do not rerun the comparison to continue. The 29-variable alternative and all
+earlier results remain in this authority. Neither arm establishes a minimum-cost
+completion or a general SAT expansion bound.
+
+## Previous investigation: conditional refutation transfers; 22 originals remain
 
 [The next discovery case](transfer-1304.md) closes original **1304 / index 52**,
 raising structural coverage **60/83 -> 61/83**, also without growth-exception

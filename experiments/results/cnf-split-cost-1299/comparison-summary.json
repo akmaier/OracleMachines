@@ -1,0 +1,57 @@
+{
+  "arms": [
+    {
+      "admitted": 29,
+      "closed": false,
+      "completed": 29,
+      "compressed_delta_bytes": 28842,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.731689625652507,
+        "coverage_seconds": 0.004137043142691255,
+        "route_refresh_seconds": 11.962405311642215,
+        "selection_seconds": 0.028828290989622474
+      },
+      "delta_database_bytes": 626688,
+      "delta_export_mean_seconds": 4.607206041924655,
+      "expansion_mean_seconds": 12.727060271427035,
+      "external_assumption_attempts": 61,
+      "first_split_mean_seconds": 0.23590179160237312,
+      "history_bytes": 772288512,
+      "preparation_mean_seconds": 7.378100666450337,
+      "repetitions": 2,
+      "variable": 17,
+      "worker_mean_seconds": 24.827396749984473
+    },
+    {
+      "admitted": 13,
+      "closed": false,
+      "completed": 13,
+      "compressed_delta_bytes": 15849,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.7105170213617384,
+        "coverage_seconds": 0.00298250000923872,
+        "route_refresh_seconds": 11.982284479541704,
+        "selection_seconds": 0.026021291268989444
+      },
+      "delta_database_bytes": 372736,
+      "delta_export_mean_seconds": 5.069848228711635,
+      "expansion_mean_seconds": 12.72180529218167,
+      "external_assumption_attempts": 70,
+      "first_split_mean_seconds": 0.09079891652800143,
+      "history_bytes": 772030464,
+      "preparation_mean_seconds": 7.713720124680549,
+      "repetitions": 2,
+      "variable": 1,
+      "worker_mean_seconds": 25.580256562447175
+    }
+  ],
+  "limitations": [
+    "One adaptively selected development residual, with two preselected first splits; not a holdout or an optimality proof.",
+    "Two serial repetitions per split with reversed order; shared OS caches and no confidence intervals or general speedup claim.",
+    "Each arm owns a fresh shared 32-state allowance and twelve advances; the persisted union is not one such budget.",
+    "One ordinary block is shared before comparison. If it forces a reduction, preserve it and skip the obsolete split comparison.",
+    "Every arm starts from the same post-probe seed and uses the same early-closed continuation policy after its preselected first pair.",
+    "Both children remain required for structural coverage; smaller cofactor support or fewer literals need not imply lower acquisition cost.",
+    "Completed pattern rows, unfinished admission identities, all arm deltas and reference results are retained. Storage is not peak RAM."
+  ]
+}

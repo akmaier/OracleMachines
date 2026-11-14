@@ -6233,3 +6233,43 @@ The next saved candidates expose a ranking tradeoff: variable **17** gives
 could be useful, but neither candidate has been acquired. Compare them under
 matched allowances after the remaining probes, retaining both branch obligations.
 All **181 relevant tests** pass for this checkpoint.
+
+## 2026-11-14: matched first splits separate storage from completion cost
+
+[Case 1299's matched comparison](split-cost-1299.md) retains thirteen new patterns
+for initial variable 1 versus twenty-nine for variable 17. Each starts from the
+same seed after six clear ordinary attempts, with twelve advances and a shared
+32-state budget. Two repetitions reverse the arm order and yield identical
+logical results. Compressed arm deltas are **15,849 vs 28,842 bytes**, but mean
+expansion is **12.72181 vs 12.72706 s** and neither source closes. The runtime
+comparison changes direction across repetitions; the smaller arm's complete
+worker is **3.03% slower**. Complete route refresh consumes about **94%** of warm
+expansion. The smaller acquired representation is no proof of a faster complete
+solution or a minimum-cost split.
+
+Both paths expose SAT terminals on one first cofactor: **5 / 5 / 10** is Horn,
+2-CNF and zero-valid; **5 / 7 / 16** is Horn and zero-valid, but not 2-CNF. On the
+other side, a later split refutes one cofactor through two probe reductions,
+reusing the same empty-clause terminal. The remaining leaves are **28 / 110 / 351**
+and **29 / 108 / 337**. Both have exhausted ordinary probes, with 21 clear pairs
+and no candidate child presently acquired. Similar open leaves suggest checking
+exact shared structure; they do not yet have a certified equivalence or transport.
+
+Coverage stays **61/83** in both views. The preserved union has 42 unique new
+patterns, 21 probe blocks and four split records; it is not one 32-state run.
+The **43,317-byte compressed delta** grows full history by **884,736 bytes** to
+**772,599,808 bytes / 41,887 patterns**. The positive proof remains 3,043 steps.
+All 2,259 earlier reference nodes remain among 2,605. All **181 regression tests**
+and the independent **214.315 s** audit pass, including exact seed/arm replay,
+original closure flags, next selection and reference checking without fresh
+recognition or reference solving.
+
+Resume `experiments/results/cnf-split-cost-1299/report.json` through
+`compare_cnf_split_cost.restore_checkpoint`, evidence counts **(1, 42, 156, 21, 1)**.
+The next selected 28-variable source is
+`dd04e43d15b115ab5d60b5b4aef44d03001fcfe6910263b218b5f35776ed70ab`;
+its current best rank is **[2, 2, 26, 571, 17]**. Continue that obligation while
+investigating shared structure with the alternative and incremental/deferred
+catalog refresh. Keep decision witnesses, reference answers and structural
+coverage separate. The complete producer costs **252.67688 s**; retained disk
+bytes are not peak RAM, and no arbitrary-SAT efficiency bound follows.

@@ -2351,3 +2351,48 @@ with a **34-variable / 148-clause / 490-literal** leaf; local variable **34** is
 its last ordinary candidate at offset 12. Test transfer of the reduction chain
 while amortizing complete preparation across useful steps. Neither this new
 coverage nor an empty retained frontier establishes efficient arbitrary SAT.
+
+## 2026-11-14: conditioning transfers through refutation and zero-valid structure
+
+[Two warm advances](transfer-1304.md) close case **1304 / index 52**, raising
+structural coverage **60/83 -> 61/83** in both views. On its 34-variable residual,
+the last ordinary candidate is clear. A saved split on local variable **32** then
+uses **10/32 admissions**: three failed-literal reductions refute its false
+cofactor, while six reductions reach a **12-variable / 18-clause / 40-literal
+zero-valid** SAT terminal on the true branch. The latter is neither Horn,
+dual-Horn nor 2-CNF. Both branch answers and the SAT model lift are independently
+checked. All seventeen retained splits close; 22 originals remain uncovered.
+
+This exhibits a further reuse opportunity: the refuted cofactor proves a forced
+value at its parent. The current checkpoint retains the split and branch proofs;
+it does not introduce a new inferred-unit route. Reusing that value would require
+the negative proof and exact source/transport binding, not a structural closure
+bit. The two closed SAT branches in case 1445 show why that distinction matters.
+
+Acquisition plus ranking costs **0.20118 s**, complete route refresh **2.01995 s**,
+and initial reconstruction/preparation **106.78542 s**. The whole producer takes
+**133.16301 s**. The early policy ranks 50 pairs, including seventeen immediately
+rechecked after ordinary exhaustion; this is an avoidable candidate-maintenance
+cost, subordinate to cold preparation. Two external assumption attempts and
+nineteen retained internal assumption traces must be accounted for separately.
+
+The **9,914-byte compressed delta** adds ten patterns and one continuation, plus
+one split sidecar. Full history grows **122,880 bytes** to **771,715,072 bytes /
+41,845 patterns**. All 2,135 earlier reference nodes remain among **2,259**, and
+the expanded positive proof has **3,043 steps**. Cold reconstruction checks all
+original coverage flags, exact next selection and reference proofs without fresh
+recognition, taking **109.00529 s**.
+
+Resume `experiments/results/cnf-transfer-1304/report.json` with
+`continue_cnf_pending_warm.restore_checkpoint`, evidence counts
+**(1, 42, 156, 17, 1)**. Next: case **1299 / index 48**, selected leaf
+**36 / 162 / 517**, ordinary candidates **33, 34, 36** at offset 12. No currently
+saved pair has a present child root; variable **17** has the best size rank.
+These are adaptive development results, without a general expansion bound.
+
+The next saved candidates expose a ranking tradeoff: variable **17** gives
+34- and 32-variable children (927 total literals), while variable **1** gives
+16- and 35-variable children (617 total literals). The latter's smaller branch
+could be useful, but neither candidate has been acquired. Compare them under
+matched allowances after the remaining probes, retaining both branch obligations.
+All **181 relevant tests** pass for this checkpoint.

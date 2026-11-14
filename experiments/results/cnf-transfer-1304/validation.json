@@ -1,0 +1,124 @@
+{
+  "covered_after": 61,
+  "covered_before": 60,
+  "evidence_counts": [
+    1,
+    42,
+    156,
+    17,
+    1
+  ],
+  "gains": [
+    52
+  ],
+  "idempotent_merge": true,
+  "independent_reconstruction": {
+    "cold_next_selection_matches": true,
+    "covered": 61,
+    "evidence_counts": [
+      1,
+      42,
+      156,
+      17,
+      1
+    ],
+    "full_cold_coverage_counts": {
+      "justified_nodes": 4265,
+      "premises": 26837,
+      "reachable_nodes": 25663,
+      "rules": 25874,
+      "witness_steps": 1425
+    },
+    "full_cold_coverage_seconds": 63.183085875120014,
+    "gains": [
+      52
+    ],
+    "passed": true,
+    "report_sha256": "4ccd7e0ddec8c99acce4a6ad400b6098bf9a7eb3d71a37350670037543831ab4",
+    "restore_seconds": 44.751675290986896,
+    "resume_accounting": {
+      "entered_but_unstored_sha256": [],
+      "new_completed_sha256": [
+        "0bfea31b19a2c0a0f644d27252896be2c0bc8d61b03bea344cd902800cebe7dc",
+        "209f2f67ec192c002a3857617498333de3e74db2538f921458922df860ff4f0c",
+        "2cc5775964b412921d8879392d23e092efab7d1a5c31fa27b631f7e12562a126",
+        "4645fc2806f60acbd0529d878209ce18b3f5ae556f9ce7d8a4a550c80936a774",
+        "4c4c6e7c96ffdcd4050c058b18edffce1c4bed82eb67823a2c0bafa572d9e6b7",
+        "4fc839a8e9c2014085c51cf3283139c39b54a2cece2a41091b590c38b9ef86ae",
+        "90eac86534b51f91abf1ad3f2fb74dd57993b8b8c14c3175ddeed270635e7091",
+        "9a790a6588695205315a3a10d51eca2600ac2cdc1298b80e73bdc4b8c428563a",
+        "d8727c0a7ba375746445f55422560da91d06840fb896bfe4e3679d29960e9bb3",
+        "ef5bbdadf4025f19a64a30481705cdef59e52192ea91b8ea39aa36c21c951944"
+      ],
+      "previously_unfinished_now_stored_sha256": [],
+      "prior_completed_preserved": true,
+      "reentered_unfinished_sha256": []
+    },
+    "seconds": 109.00528883282095,
+    "verified_reference_nodes": 2259
+  },
+  "parent_manifests": {
+    "experiments/results/cnf-early-closed/manifest.json": {
+      "artifacts_checked": 72,
+      "sha256": "5139ef697d8a0dd07c1b57b67c14c429ac6c0786a86b04db3c8744be5cbc3b1e"
+    },
+    "experiments/results/cnf-expanded-coverage/manifest.json": {
+      "artifacts_checked": 8,
+      "sha256": "1eb6be76f66b8f483486a7985eddc31d29f2f7384c6e60d3873214e98335187c"
+    },
+    "experiments/results/cnf-incremental-coverage/manifest.json": {
+      "artifacts_checked": 8,
+      "sha256": "1af918ca0ad3bd81c6cca802cff9012335f0a218316afbe4d269b55d3aae896a"
+    },
+    "experiments/results/cnf-local-forcing/manifest.json": {
+      "artifacts_checked": 16,
+      "sha256": "592d7b463bfdd255a4ae374e7cf477e8c3ca5f5ee76058d94a0ea6963e450386"
+    },
+    "experiments/results/cnf-original-warm/manifest.json": {
+      "artifacts_checked": 42,
+      "sha256": "4be286b0047d51982ecd83b07672d342ba46268adb1c6276d31c176c522e7e74"
+    },
+    "experiments/results/cnf-pending-warm/manifest.json": {
+      "artifacts_checked": 20,
+      "sha256": "1f10caa5f2c2937c9deafc7c812bcbc07e8ed85441ab852fc080979ffba78b67"
+    },
+    "experiments/results/cnf-positive-bundle/manifest.json": {
+      "artifacts_checked": 9,
+      "sha256": "1852ca037a358474440760c8eaec92a081d55436864e82670cc5db74895756d6"
+    },
+    "experiments/results/cnf-positive-primitives/manifest.json": {
+      "artifacts_checked": 9,
+      "sha256": "412e36cf16f6bf99eb08b815d039de607fb953e94bd51e98cc3e8f435beaf400"
+    },
+    "experiments/results/cnf-reused-branch/manifest.json": {
+      "artifacts_checked": 17,
+      "sha256": "0b865efe9c443d2e2391fe421195aa3286326e360a9381a9842d005b37a258b0"
+    },
+    "experiments/results/cnf-selected-routes/manifest.json": {
+      "artifacts_checked": 8,
+      "sha256": "794927c4004a17acc36861c8ec9d1be79bfe616313bde407d8ee0e668e53cc88"
+    },
+    "experiments/results/cnf-source-local-checked/manifest.json": {
+      "artifacts_checked": 16,
+      "sha256": "15a405063c7da4944e2f70a6d2026156c07774b31c4de3bb97eac911fc8a72c9"
+    },
+    "experiments/results/cnf-warm-batch/manifest.json": {
+      "artifacts_checked": 24,
+      "sha256": "406f53d13b1a6294fe60d6f1f9fa0e6512433a68f00f5271b51c538dc0950e7c"
+    }
+  },
+  "parent_unchanged": true,
+  "report_sha256": "4ccd7e0ddec8c99acce4a6ad400b6098bf9a7eb3d71a37350670037543831ab4",
+  "scope": "Two advances on one reused development original under one shared 32-state allowance. Ten completed new patterns; no unfinished admissions. Independent cold replay checks complete original coverage and next selection with new recognition disabled. Both split outcomes and SAT lifting checked without reference expansion, and all saved reference nodes checked. No new core recognizer, inferred-unit route, Lean refinement, fresh holdout, peak RAM or unrestricted guarantee. Next candidate tradeoff has not been acquired or timed.",
+  "source_fingerprints": {
+    "experiments/cnf_early_closed.py": "bea92740a880559771684f326e36ca8d1f09e4bd413d4f310b2c61ce96223252",
+    "experiments/cnf_incremental_coverage.py": "5bef8cb699796b28dbd597509e71e8797ccacea4a384aa1bbe697e869b5827bd",
+    "experiments/cnf_original_frontier.py": "c85f2a932b24b85796c1a3290b53a42fca02f6acb3ebf6e78e5f60e9c1fa9ca9",
+    "experiments/cnf_warm_expansion.py": "19f8fc0887b322fcd8a12e0241c2ff6221dafc43d32563077952863e8af40b21",
+    "experiments/continue_cnf_pending_warm.py": "8cabb42897565ebd7e1952ebdeafcf522e060542c2f4e79f63208667c197bdbb",
+    "experiments/validate_cnf_warm_transfer.py": "a7bc92c237612cbfa1a8350ae9cbf83c26cbc2049c38689bca9d6f3b7145df9e"
+  },
+  "test_command": "python3 -m unittest solver.test_cnf_positive_bundle solver.test_cnf_positive_primitives solver.test_cnf_expanded_coverage solver.test_cnf_selected_routes solver.test_cnf_route_composition solver.test_cnf_trace_split solver.test_cnf_probe_window solver.test_cnf_probe_continuation solver.test_cnf_learning_continuation solver.test_cnf_trace_learning solver.test_cnf_trace_reuse solver.test_cnf_coupled_pivots solver.test_cnf_affine_clause solver.test_cnf_retained_plans solver.test_cnf_variable_elimination solver.test_cnf_clause_bound_elimination solver.test_cnf_additive_elimination solver.test_cnf_binary_paths solver.test_cnf_polarity_horn solver.test_cnf_simplification solver.test_cnf_fused_conditioning solver.test_cnf_affine_projection solver.test_cnf_affine_patterns solver.test_cnf_probe_equivalence solver.test_cnf_source_local solver.test_cnf_local_forcing solver.test_cnf_incremental_coverage solver.test_cnf_warm_expansion solver.test_cnf_original_frontier solver.test_cnf_original_splits solver.test_cnf_split_batch solver.test_cnf_split_frontier solver.test_cnf_early_closed",
+  "test_log_sha256": "92f3b6984a9b6951a48540e57c4bd60e1bf421d9072faf660a0bb99f7aef91e0",
+  "tests": 181
+}

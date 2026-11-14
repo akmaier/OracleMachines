@@ -12,7 +12,49 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: the pending split closes; 23 originals remain
+## Current investigation: conditional refutation transfers; 22 originals remain
+
+[The next discovery case](transfer-1304.md) closes original **1304 / index 52**,
+raising structural coverage **60/83 -> 61/83**, also without growth-exception
+routes. After one clear ordinary probe, the saved split on local variable **32**
+uses **10/32 admissions**. Three failed-literal reductions refute its false
+cofactor; six reductions reach a twelve-variable zero-valid SAT terminal in its
+true cofactor. That terminal is neither Horn, dual-Horn nor 2-CNF. All seventeen
+retained split sources now close, but 22 original inputs remain uncovered.
+
+1. **Test conditional refutation on the next uncovered original.** Case
+   **1299 / index 48** has the next selected **36-variable / 162-clause /
+   517-literal** leaf. Ordinary candidates **33, 34 and 36** remain at offset 12.
+   No saved pair currently has a present or closed child root. After the probes,
+   compare variable **17** (34- and 32-variable children, 927 total literals)
+   with variable **1** (16- and 35-variable children, 617 total literals). The
+   current maximum-support rank chooses 17, while 1 exposes a much smaller
+   branch. Use matched snapshots and the same budget; no acquisition saving is
+   measured yet. Keep failed choices and both branch obligations.
+2. **Reuse proved negative cofactors as stronger forcing evidence.** In the
+   completed case, the false-cofactor refutation proves that the parent entails
+   variable **32=true**, despite the clear ordinary probes. The current result
+   stores the split, not a new inferred-unit route. Such reuse must check the
+   actual UNSAT proof, exact source and variable transport. A closure flag is
+   insufficient: case 1445 had two closed SAT branches.
+3. **Reduce maintenance while doing useful discovery.** Initial preparation
+   remains dominant at **106.78542 s**, versus **0.20118 s** for acquisition and
+   ranking and **2.01995 s** for route refresh. Retained checked sessions amortize
+   that preparation. The early policy misses twice and ranks 50 pairs; seventeen
+   are immediately ranked again after ordinary exhaustion. That duplicate scan
+   can be removed only while retaining the exact catalog/target validity contract.
+
+The **9,914-byte compressed delta** adds ten patterns and one continuation, with
+one separate split sidecar. Full history is **771,715,072 bytes / 41,845 patterns**;
+all earlier rows remain, and the positive proof has **3,043 steps**. All **181
+relevant tests** pass; independent cold replay confirms every original flag and
+the next selection. Resume
+**`experiments/results/cnf-transfer-1304/report.json`** through
+`continue_cnf_pending_warm.restore_checkpoint` with evidence counts
+**(1, 42, 156, 17, 1)**. Next source SHA-256:
+`6b9b95c54e6bc4dcab8c537abb5c636401c87ad995a9ae5957fa2c821c19f1b0`.
+
+## Previous investigation: the pending split closes; 23 originals remain
 
 [Exact pending-cofactor continuation](pending-warm-expansion.md) closes case
 **1445**, raising structural coverage **59/83 -> 60/83** in both full and

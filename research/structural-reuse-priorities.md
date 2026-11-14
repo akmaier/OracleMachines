@@ -12,7 +12,52 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: smaller stored expansion, maintenance still dominates
+## Current investigation: exact projection shares the completed proof
+
+[A checked projection connects the two selected leaves](projection-bridge.md).
+Eliminating variable **16** from **29 / 108 / 337**, then deleting one clause
+subsumed by `[-19, 5]`, gives the exact retained **28 / 110 / 351** target.
+The ordinary elimination budget rejected the intermediate three-clause growth;
+final growth after deletion is two. Both paths can now use one completed proof.
+
+Matched completion uses **13 instead of 25 new states**, and **6 instead of 7
+advances**. With discovery charged, mean expansion time is **15.09% lower** and
+complete worker time **6.99% lower** across two reversed repetitions. Both modes
+complete the same two roots. The combined route and pattern/probe delta is
+**13,170 vs 18,956 compressed bytes**. Route refresh still consumes **6.02 s** of
+**6.42 s** of bridge expansion. These are conditional development results.
+
+1. **Discover converging projections on the next original.** Case **1298 / index
+   47** has a **37 / 151 / 455** selected leaf. Try checking final subsumption
+   before rejecting a projected clause budget, and match the resulting structure
+   to retained targets. Current bridge recognition needs a target supplied;
+   cheap candidate indexing and wider structural coverage are still missing.
+2. **Amortize recognition and maintenance.** Discovery here costs **0.00691 s**,
+   but full route refresh dominates warm work, and restoration/final global
+   checking dominate the **219.35 s** study. Charge target filtering, failed
+   projection proposals and canonicalization when broadening the search.
+3. **Preserve exact reuse conditions.** Replay all opposing pairs, every deleted
+   clause's retained subsumer, endpoint identities and variable transport. A
+   missing or unresolved target cannot close its source. Our search covers one
+   eliminated variable and order-preserving renaming, not arbitrary equivalence.
+
+Coverage rises **61/83 -> 62/83**. All 24 saved split records have closed sources, while 21 originals
+remain uncovered. Full history is **772,972,544 bytes / 41,912 patterns**. The
+union preserves the independent arm's extra work and all earlier results.
+All **187 tests pass**; independent cold replay confirms both arms, the complete
+corpus and **2,921 reference nodes** with new recognition and expansion forbidden.
+
+Resume **`experiments/results/cnf-projection-bridge/report.json`** through
+**`compare_cnf_projection_bridge.restore_checkpoint`**, evidence counts
+**(1, 42, 156, 24, 1)**. Load its separate **`bridges`** archive as well, and use
+**`compare_cnf_projection_bridge.routes_for(h, evidence, bridges)`**. The old
+five-list route constructor alone does not install the bridge. Extended positive
+proofs use **`cnf_projection_bridge.verify_positive`**. Report SHA-256:
+`aa68aa76ffac56fd767b0540b3ab9b683650a97ea3c4822dedb1bdd4cf4df809`.
+Next source SHA-256:
+`dd822fabc78af1efd220882ae9ead41593645ea916f4753c13b000b080a162b7`.
+
+## Previous investigation: smaller stored expansion, maintenance still dominates
 
 [Matched first-split choices on case 1299](split-cost-1299.md) retain **13 vs 29
 new patterns** for initial variable **1 vs 17**, with **15,849 vs 28,842 compressed

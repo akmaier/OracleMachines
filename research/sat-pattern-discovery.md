@@ -2436,3 +2436,40 @@ investigating shared structure with the alternative and incremental/deferred
 catalog refresh. Keep decision witnesses, reference answers and structural
 coverage separate. The complete producer costs **252.67688 s**; retained disk
 bytes are not peak RAM, and no arbitrary-SAT efficiency bound follows.
+
+## 2026-11-14: exact projection reuses a completed alternative
+
+[The two leaves are connected by a certified projection](projection-bridge.md).
+Eliminating variable 16 from **29 / 108 / 337** checks ten opposing clause pairs
+and gives **28 / 111 / 356**. Removing one clause subsumed by `[-19, 5]` yields
+the exact retained **28 / 110 / 351** target. The ordinary two-clause growth
+budget rejects the intermediate result; the checked final target satisfies it.
+This establishes existential equivalence with a bound variable transport, not
+similarity or an inferred SAT/UNSAT label.
+
+Both modes complete the same two leaves from independent identical seeds. Two
+reversed repetitions use **25 vs 13 completed new states** and **7 vs 6 advances**
+for independent vs bridge completion. Including **0.00691 s** of bridge discovery,
+mean warm expansion falls **15.09%** and complete worker time **6.99%**. The bridge
+adds **1,468 compressed bytes**; the pattern/probe delta plus that route is
+**13,170 vs 18,956 bytes**. These are local development measurements, with shared
+OS caches and no unrestricted bound or peak-RAM claim.
+
+The retained union closes original **1299 / index 48**, raising structural
+coverage **61/83 -> 62/83** in both views. It stores all 25 new patterns, four
+probe blocks, three split records and the bridge. Full history is **772,972,544
+bytes / 41,912 patterns**; its positive proof has **3,104 steps**. All 2,605 old
+reference nodes remain among 2,921. Every source of the 24 saved split records now closes; 21
+originals remain uncovered. The complete four-arm pipeline takes **219.34858 s**,
+including **49.62108 s** of restoration and **67.16398 s** of final global checking.
+
+Resume `experiments/results/cnf-projection-bridge/report.json` through
+`compare_cnf_projection_bridge.restore_checkpoint`, preserving the five evidence
+lists **(1, 42, 156, 24, 1)** **and** the separate `bridges` archive. Build routes
+with `compare_cnf_projection_bridge.routes_for(h, evidence, bridges)` and check
+extended positive proofs with `cnf_projection_bridge.verify_positive`.
+The next original is **1298 / index 47**, leaf **37 / 151 / 455**, source SHA-256
+`dd822fabc78af1efd220882ae9ead41593645ea916f4753c13b000b080a162b7`.
+Next: recognize converging projections against retained structure before separate
+acquisition, including final subsumption in the growth decision. Indexing,
+failed proposals, arbitrary renaming and complete route refresh remain open costs.

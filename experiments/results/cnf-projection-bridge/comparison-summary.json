@@ -1,0 +1,62 @@
+{
+  "arms": [
+    {
+      "admitted": 25,
+      "closed": [
+        true,
+        true
+      ],
+      "completed": 25,
+      "compressed_delta_bytes": 18956,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.517497978406027,
+        "coverage_seconds": 0.0022991662845015526,
+        "route_refresh_seconds": 7.044770707376301,
+        "selection_seconds": 0.009179083863273263
+      },
+      "delta_database_bytes": 430080,
+      "delta_export_mean_seconds": 4.907935854513198,
+      "expansion_mean_seconds": 7.573746935930103,
+      "external_assumption_attempts": 28,
+      "history_bytes": 772972544,
+      "mode": "independent",
+      "preparation_mean_seconds": 7.554679999826476,
+      "steps": 7,
+      "unfinished": 0,
+      "worker_mean_seconds": 20.12210829136893
+    },
+    {
+      "admitted": 13,
+      "closed": [
+        true,
+        true
+      ],
+      "completed": 13,
+      "compressed_delta_bytes": 11702,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.3947783326730132,
+        "coverage_seconds": 0.001714916666969657,
+        "route_refresh_seconds": 6.020611353684217,
+        "selection_seconds": 0.006798957707360387
+      },
+      "delta_database_bytes": 274432,
+      "delta_export_mean_seconds": 4.743004833813757,
+      "expansion_mean_seconds": 6.42390356073156,
+      "external_assumption_attempts": 28,
+      "history_bytes": 772804608,
+      "mode": "bridge",
+      "preparation_mean_seconds": 7.505482979584485,
+      "steps": 6,
+      "unfinished": 0,
+      "worker_mean_seconds": 18.70834541716613
+    }
+  ],
+  "limitations": [
+    "One pair of adaptively selected development leaves; two serial repetitions per mode with reversed order.",
+    "Both modes must structurally close the same two roots. A checked projection bridge can reuse the smaller root.",
+    "Each worker owns an independent seed, twelve advances and a single 32-state allowance; the union is not one allowance.",
+    "Discovery, exact projection/subsumption checking, preparation, refresh, persistence and cold replay are charged.",
+    "The bridge is order-preserving and one-variable, with at most 64 opposing pairs and two final extra clauses. A miss proves no hardness.",
+    "Reference answers do not supply structural closure. Disk bytes are not peak RAM; no unrestricted expansion bound follows."
+  ]
+}

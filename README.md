@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Exact projection now connects the two expansion paths](research/projection-bridge.md).
+A checked elimination and subsumption step lets both leaves reuse one proof:
+**13 instead of 25 new states**, **15.1% less warm expansion time** and **7.0% less
+complete worker time**, including discovery. Both modes complete the same two
+roots in the matched development comparison. Coverage rises **61/83 -> 62/83**.
+All earlier work is retained; the next original has a **37-variable / 151-clause**
+selected leaf. Broader discovery of these connections is the next priority.
+
 [A matched split comparison](research/split-cost-1299.md) exposes the current
 tradeoff: one choice stores **13 instead of 29 new patterns**, with **45% fewer
 compressed delta bytes**, but both take about **12.7 seconds** and leave the

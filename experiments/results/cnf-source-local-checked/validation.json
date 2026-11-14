@@ -1,0 +1,38 @@
+{
+  "history_bytes_unchanged": true,
+  "idempotent_merge": true,
+  "independent_reconstruction": {
+    "evidence_counts": [
+      1,
+      42,
+      156,
+      11,
+      1
+    ],
+    "preserved_closed": 58,
+    "reconstruction_passed": true,
+    "report_sha256": "37a512f332e35b72e0150316816e9b6a5d5c987abcad32de2076a1e9a1b6531f",
+    "seconds": 21.78724949993193
+  },
+  "matched_delta_sha256": "091fcf933a5396fce19737e656c321bd49cee955c348998c21f79d5372b30ba9",
+  "parent_artifact_counts": {
+    "cnf-expanded-coverage": 8,
+    "cnf-positive-bundle": 9,
+    "cnf-positive-primitives": 9,
+    "cnf-reused-branch": 17,
+    "cnf-selected-routes": 8
+  },
+  "parent_artifacts_unchanged": true,
+  "preserved_positive_roots": 58,
+  "report_sha256": "37a512f332e35b72e0150316816e9b6a5d5c987abcad32de2076a1e9a1b6531f",
+  "scope": "One ordinary probe window over a preselected source and reconstructed authoritative history; no new closure, complete catalog, peak-RAM bound or Lean refinement.",
+  "source_fingerprints": {
+    "experiments/cnf_source_local.py": "cdc62b0d68da61d277205923eb39ba0ef5a53c02efaca62673ec7492bf8d7f3a",
+    "experiments/continue_cnf_source_local.py": "e73afca2879625a33dfcb3fba3c075534b3b27ee9ddad28bc093ab0968a65756",
+    "solver/test_cnf_source_local.py": "2569557ad0dbb95b2e661cbbbb1d7ae6e836cdceaddccb726dcb9552617c6a5a"
+  },
+  "source_local_tests": 7,
+  "test_command": "python3 -m unittest solver.test_cnf_positive_bundle solver.test_cnf_positive_primitives solver.test_cnf_expanded_coverage solver.test_cnf_selected_routes solver.test_cnf_route_composition solver.test_cnf_trace_split solver.test_cnf_probe_window solver.test_cnf_probe_continuation solver.test_cnf_learning_continuation solver.test_cnf_trace_learning solver.test_cnf_trace_reuse solver.test_cnf_coupled_pivots solver.test_cnf_affine_clause solver.test_cnf_retained_plans solver.test_cnf_variable_elimination solver.test_cnf_clause_bound_elimination solver.test_cnf_additive_elimination solver.test_cnf_binary_paths solver.test_cnf_polarity_horn solver.test_cnf_simplification solver.test_cnf_fused_conditioning solver.test_cnf_affine_projection solver.test_cnf_affine_patterns solver.test_cnf_probe_equivalence solver.test_cnf_source_local",
+  "test_log_sha256": "cda868b04b2b00d9e02158048029e17d5f9f9a37f7483402903f61dbc36c0195",
+  "tests": 146
+}

@@ -8,6 +8,10 @@ checker. In two matched repetitions, mean cold process time falls from
 This saving applies when the bundle already exists; its production is accounted
 for separately below. Coverage remains **58/83 reused development inputs**.
 
+The subsequent [source-local expansion](source-local-expansion.md) adds a separate
+ordinary-frontier path backed by full authoritative history. It does not repurpose
+this positive-only bundle as a complete discovery store.
+
 ## Capture dependencies, then check them independently
 
 `cnf_positive_bundle.py` wraps both inventory views' shared connection during a

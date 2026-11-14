@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Source-local expansion](research/source-local-expansion.md) now preserves the
+next four ordinary probes while loading only their needed historical premises.
+With full authoritative history already available, the matched one-block worker
+falls from **11.00 to 0.127 seconds**; initial restoration still costs **20.59
+seconds**. Coverage remains **58/83**. Resume from the checked source-local
+checkpoint named in the [priority record](research/structural-reuse-priorities.md).
+
 The latest [probe-and-split continuation](research/exhausted-probe-split.md)
 raises structural coverage **57/83 -> 58/83**. The last ordinary probe is clear;
 ranking its retained cofactor pairs then completes the ten-variable residual.

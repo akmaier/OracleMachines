@@ -12,7 +12,42 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: standalone positive data without lineage reconstruction
+## Current investigation: source-local ordinary expansion with exact membership
+
+[Source-local expansion](source-local-expansion.md) saves the checked clear
+window for **7, 9, 16, 17** on the 23-variable / 93-clause leaf. An empty working
+store consults full read-only history on every missing identity, validates old
+premises and exports only novel rows. The matched one-block worker falls from
+**10.99932 to 0.12683 s (98.85%)**, including preparation and delta export;
+working SQLite is **94,208 bytes**, with the **770,338,816-byte authority still
+required**. First restoration costs **20.59393 s** separately. Probing itself is
+slightly slower. This is not a full-pipeline or arbitrary-SAT speedup.
+
+1. **Advance the leaf using the next ordinary block versus retained splits.**
+   Ordinary candidates are now **18, 21, 22, 23**; saved split pairs remain
+   **5, 6, 11, 13**. Use a shared admission allowance. The wider learned queue
+   still has 17 bases / 88 candidates. Avoid rediscovering the new saved window.
+2. **Extend exact local access to split traces and learned antecedents.** The
+   ordinary-stream API has checked prefix and authoritative membership semantics,
+   but is not a complete route catalog or global frontier selector. Add only the
+   source-bound dependencies needed by the next operation, and retain explicit
+   sidecar membership and recomposition obligations. No local absence may imply
+   novelty, probe exhaustion or exclusion elsewhere.
+3. **Amortize the now-dominant restoration when doing useful discovery.** Keep a
+   verified authority available across a bounded batch, charging preparation,
+   merge and cold checking. The current local worker avoids full copying, eager
+   route preparation and full-table delta comparison; first construction and
+   archive storage remain. Further positive-only replay tuning is lower priority.
+
+All **146 relevant tests** pass. The new delta is **2,025 compressed bytes**, adds
+one clear window and no pattern nodes, and changes no closure edge. Coverage
+remains **58/83**. Full history grows to **770,347,008 bytes**, with all prior
+records preserved. Resume using `continue_cnf_source_local.restore_checkpoint`
+on **`experiments/results/cnf-source-local-checked/report.json`**, preserving all
+five inherited lists **(1, 42, 156, 11, 1)**. The older `cnf-source-local/` directory
+is a preserved preliminary run with invalid delta metadata, not a checkpoint.
+
+## Previous investigation: standalone positive data without lineage reconstruction
 
 [The positive data bundle](positive-proof-bundle.md) preserves the same 58 roots
 and 2,748 proof steps using **2,797 pattern rows + 82 external-record rows** and

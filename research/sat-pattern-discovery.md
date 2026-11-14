@@ -2070,3 +2070,41 @@ counts **(1, 42, 156, 11, 1)**. The 23-variable / 93-clause source, saved pairs
 **5, 6, 11, 13**, next ordinary candidates **7, 9, 16, 17**, and wider 17-base /
 88-candidate queue are unchanged. No new family, SAT verdict, Lean refinement or
 unrestricted polynomial bound is established.
+
+
+## 2026-11-14: source-local ordinary expansion and exact historical membership
+
+[The source-local path](source-local-expansion.md) now advances the open
+23-variable / 93-clause source without preparing a complete route catalog or
+copying all history. Each local miss consults a pinned, read-only authoritative
+snapshot; old nodes and saved prefixes pass their original validators, and every
+insert checks authoritative membership. New-row metadata separates imported
+premises from novel records. The partial maps cannot enumerate global routes.
+A missing local row therefore never establishes novelty or stream exhaustion.
+
+The matched single-block workers produce identical records, discovery counts
+and byte-identical deltas. Mean complete worker process time falls **10.99932 ->
+0.12683 s (98.85%)**, including preparation and delta export. Working SQLite
+falls from **770,347,008 to 94,208 bytes**, but the separate full authority is still
+required. First restoration costs **20.59393 s**; merge costs **0.10878 s** and
+cold delta checking **0.06109 s**, outside that worker comparison. Probing itself
+is slightly slower. The full four-worker study takes **45.50471 s**. Two reversed
+samples share OS caches; this is no peak-RAM or complete SAT-solver speed claim.
+
+The saved window checks both assumptions for **7, 9, 16, 17** and is clear. It
+adds one record, no pattern nodes and no closure edge; coverage stays **58/83**.
+History becomes **770,347,008 bytes / 41,758 pattern nodes**. Its **2,025-byte
+compressed delta** merges idempotently and cold-checks, with all parent bytes
+preserved. All **146 relevant tests** pass, including omitted-state reuse,
+checked prefix restart, bounded exhaustion, forced pending work, shared admission,
+rollback, changed identities and corrupt deltas. No new Lean refinement or
+unrestricted complexity result is claimed.
+
+Resume through `continue_cnf_source_local.restore_checkpoint` from
+`experiments/results/cnf-source-local-checked/report.json`, retaining the five
+lists **(1, 42, 156, 11, 1)**. The preliminary `cnf-source-local/` run is preserved
+with an invalid-metadata note and is not a checkpoint. Next ordinary candidates
+are **18, 21, 22, 23**, compared with saved split pairs **5, 6, 11, 13** under one
+allowance. The learned queue remains 17 bases / 88 candidates. Source-local split
+and learned dependencies, global selection and amortizing restoration remain
+open; the ordinary-stream API does not provide their completeness contracts.

@@ -2671,3 +2671,65 @@ no overfull boxes and no undefined references. All **660 earlier artifacts /
 18 manifests** remain hash-identical. The new study preserves **124 manifested
 artifacts** plus its manifest, including producer, cold-replay, test and build
 logs, exact deltas, reference results and source fingerprints.
+
+## 2026-11-14: combined reuse improves one cofactor but leaves pending expansion
+
+[The combined-policy comparison](combined-expansion.md) acquires the best saved
+pair of original **1154 / index 27**, **38/158/500**, at local variable 30. Both
+modes use this same initial split and checked clear-probe maintenance, then
+compare ordinary and early-saved descendant scheduling. Two reversed-order
+repetitions preserve one twelve-advance / 32-state allowance per independent
+worker. No production recognition rule or default policy changes.
+
+Stepwise reconstruction proves that the same true cofactor closes after **9
+advances / 30 states** ordinarily, versus **2 / 19** early. Beyond the common
+ten states, this is **20 vs 9 additional states**, with mean expansion
+**3.64836 vs 1.11924 s**. The early variable-23 split of the 31/130/416 leaf sends
+both branches to the retained empty-CNF terminal. Ordinary forcing first reaches
+26/101/329, then variable 5 reaches an empty terminal and an existing Horn 2-CNF
+plan. These are different checked routes to the same completed cofactor.
+
+The full original remains structurally open; coverage stays **65/83**. Ordinary
+spends **12 advances / 30 admitted and stored states**; early spends **4 advances /
+32 admitted / 27 stored / 5 unstored ancestors**, with both final split targets
+pending. Mean worker time is **17.80102 / 17.20828 s** and expansion **4.98209 /
+4.64624 s**. These unfinished obligations differ, so no whole-original speedup
+is established. Both modes still pay about **4.3 s** for four full route refreshes;
+eight extra ordinary clear blocks already avoid rebuilding. Stored delta sizes
+**26,971 / 20,877 compressed bytes** likewise do not compare equal completed work.
+
+The union preserves **47 new patterns** (ten shared, twenty ordinary-only,
+seventeen early-only), **6 continuations / 4 windows / 5 splits**. History grows
+**765,952 bytes** to **774,766,592 bytes / 42,020 patterns**. The union is not one
+32-state run; the five interrupted ancestors are not counted as stored results.
+Producer time is **231.79591 s**, including **67.80502 s** restoration and
+**67.41552 s** global preparation/coverage. Independent cold replay passes in
+**302.33071 s**, forbidding fresh recognition and reference expansion. It checks
+all **3,422 reference nodes**, both polarities, SAT model lifts, interrupted
+accounting, idempotence and exact next selections. First-repeat stepwise replay
+inserts only then-available rows and certifies cofactor-completion times; exact
+operation histories agree within each mode across repetitions. All reference
+split sources and raw children are SAT. Complete structural coverage is a
+stronger objective than producing a SAT witness.
+
+Resume `experiments/results/cnf-combined-expansion/report.json` using
+`compare_cnf_combined_expansion.restore_checkpoint`, report SHA-256
+`33c45cc536dc9ada0acdb4d1ef9a17bd9a71e260704644aa656af42835c349c3`.
+Keep five evidence lists **(1, 42, 156, 38, 1)** and the separate two-bridge archive;
+use bridge-aware `routes_for` and `cnf_projection_bridge.verify_positive`.
+Resume the pending **30/116/363**, local-variable-26 split, source SHA-256
+`f68661ab48e945151f89e250ebbcc35eb2ff8034799d2a83e2ddd88d7306567d`.
+Its targets **29/108/336** and **19/54/140** are absent; a **33/130/400** leaf
+also remains. The last interrupted advance writes no pattern/probe row but pays
+**1.06672 s** refreshing routes against **0.03448 s** acquisition. A guarded
+pending-sidecar update is a more immediate maintenance target than that small
+reentry cost. Preserve both obligations and test activation when targets later
+arrive. General efficient coverage and minimal expansion remain unproved.
+
+Verification: **209 regression tests pass**; the manuscript builds to **158
+pages**, with all **64 proof blocks unchanged** and no undefined references or
+overfull boxes. SHA-256 checks preserve all **784 artifacts in 19 prior
+manifests**. The new manifest binds **81 artifacts** (4,377,743 bytes), including
+producer/cold logs, both policy histories, stepwise findings, progress summaries
+and validation metadata. One existing SQLite ResourceWarning appears in the
+passing regression log; no solver or test module changed.

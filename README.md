@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Combining the two reuse policies](research/combined-expansion.md) completes the
+same cofactor with **9 instead of 20 additional states**, reusing the empty-CNF
+terminal on both early branches. The complete original remains structurally
+open, so coverage stays **65/83**. The comparison also exposes five interrupted,
+unstored recognition states and shows why previous runtime gains cannot simply
+be added together. Both paths and the exact pending split are preserved.
+
 [Retaining checked routes after clear probes](research/clear-probe-maintenance.md)
 closes case 1263, raising structural coverage to **65/83**. With search choices
 and stored results unchanged, complete worker time falls **13.7%** on this case

@@ -12,7 +12,70 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: clear probes preserve the semantic route graph
+## Current investigation: a cheaper completed cofactor, an unfinished original
+
+[Combining the saved-pair and maintenance policies](combined-expansion.md) tests
+original **1154 / index 27**. Both modes begin with the same exhausted-source
+split, local variable 30 of **38/158/500**. Early selection completes the same
+true cofactor with **9 additional states vs 20**, beyond the common ten-state
+acquisition. Mean expansion after that common step is **1.11924 vs 3.64836 s**.
+Both early branches reach the same retained empty-CNF terminal. Stepwise cold
+reconstruction proves completion using only the rows then available.
+
+The original stays structurally open: **65/83** coverage. Ordinary reaches
+**12 advances / 30 stored states**; early reaches **4 advances / 32 admitted /
+27 stored / 5 interrupted states**. Their mean whole-worker times of **17.80102 /
+17.20828 s** concern different unfinished obligations and are not a completed
+original speedup. Both perform four full route refreshes (**4.33169 / 4.29539 s**).
+The extra eight ordinary clear blocks already avoid rebuilding. Earlier
+scheduling and maintenance savings cannot be added.
+
+1. **Resume the exact pending pair, then the remaining acquired leaf.** The
+   selected **30/116/363** source has a saved local-variable-26 split with both
+   target roots absent: **29/108/336** and **19/54/140**. Reuse the union's 47
+   completed new patterns and explicitly measure reentry of the five unstored
+   ancestors. Keep one fresh shared allowance and both polarities; do not rerank
+   pending work. A separate **33/130/400** acquired leaf remains. Closing this
+   pending pair alone does not guarantee closure of the original.
+2. **Avoid semantic-route refresh when a pending split changes no active rule.**
+   The final early advance stores no pattern or probe row; it adds a checked
+   split whose child roots are absent. Its mean full refresh is **1.06672 s**,
+   versus **0.03448 s** acquisition. Investigate a checked metadata update with
+   explicit sidecar and target-availability guards. Activation after later
+   acquisition, scheduling and admission accounting must still agree with cold
+   reconstruction. More broadly, preparation and activation dominate: current
+   reconstruction costs **67.80502 s**, final preparation/coverage **67.41552 s**,
+   and workers spend about **7.7 s** preparing and **4.7--5.1 s** exporting.
+3. **Preserve interrupted recognition only with a measured benefit.** Five
+   entered ancestor keys are recorded, but their discovered certificates were
+   not serialized before the state cap. Test continuation records or a
+   finishing-aware budget against exact cold resumption, without treating
+   incomplete plans as coverage. Their measured acquisition time is currently
+   much smaller than full route refresh, so do not mistake the state counter
+   for the dominant runtime cost. Cross-path transport beyond shared terminals
+   remains open: the two completed cofactor paths have disjoint new keys after
+   the common prefix.
+
+Resume **`experiments/results/cnf-combined-expansion/report.json`** through
+**`compare_cnf_combined_expansion.restore_checkpoint`**, SHA-256
+`33c45cc536dc9ada0acdb4d1ef9a17bd9a71e260704644aa656af42835c349c3`.
+Keep five evidence lists **(1, 42, 156, 38, 1)** and **two bridges**; use the
+bridge-aware `routes_for` and `cnf_projection_bridge.verify_positive`. The union
+adds **47 patterns, 6 continuations, 4 windows and 5 split records**. Full history
+is **774,766,592 bytes / 42,020 patterns**; it is not one 32-state run. The retained
+frontier has **two pending targets / one acquired leaf**, and three retained
+split records remain open. Independent replay passes in **302.33071 s**, checks
+all **3,422 reference nodes**, preserves both branch obligations and verifies
+stepwise progress. All reference-checked split sources/cofactors are SAT; the
+open obligation is full structural decomposition, not finding one SAT witness.
+Next selected source SHA-256:
+`f68661ab48e945151f89e250ebbcc35eb2ff8034799d2a83e2ddd88d7306567d`.
+
+Verification: 209 regression tests pass; the paper builds to 158 pages with all
+64 proof blocks unchanged. All 784 prior manifested artifacts are preserved;
+81 new artifacts bind the comparison and independent replay.
+
+## Previous investigation: clear probes preserve the semantic route graph
 
 [Checked clear-probe maintenance](clear-probe-maintenance.md) closes original
 **1263 / index 42**, raising coverage **64/83 -> 65/83**. Both maintenance modes

@@ -1,0 +1,78 @@
+{
+  "arms": [
+    {
+      "admitted": 30,
+      "case": 1154,
+      "closed": false,
+      "completed": 30,
+      "compressed_delta_bytes": 26971,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.6210182295180857,
+        "coverage_seconds": 0.0038825208321213722,
+        "route_refresh_seconds": 4.331693104468286,
+        "selection_seconds": 0.025495918467640877
+      },
+      "delta_database_bytes": 593920,
+      "delta_export_mean_seconds": 5.051852104486898,
+      "expansion_mean_seconds": 4.982089773286134,
+      "external_assumption_attempts": 61,
+      "history_bytes": 774520832,
+      "maintenance_modes": {
+        "clear_append": 8,
+        "full_rebuild": 4
+      },
+      "mode": "ordinary",
+      "preparation_mean_seconds": 7.676972458371893,
+      "sidecar_snapshot_bytes": 1247571,
+      "steps": 12,
+      "unfinished": 0,
+      "worker_mean_seconds": 17.801022937288508
+    },
+    {
+      "admitted": 32,
+      "case": 1154,
+      "closed": false,
+      "completed": 27,
+      "compressed_delta_bytes": 20877,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.33991343760862947,
+        "coverage_seconds": 0.0012294373009353876,
+        "route_refresh_seconds": 4.295387916499749,
+        "selection_seconds": 0.009712812025099993
+      },
+      "delta_database_bytes": 462848,
+      "delta_export_mean_seconds": 4.651078957831487,
+      "expansion_mean_seconds": 4.646243603434414,
+      "external_assumption_attempts": 0,
+      "history_bytes": 774397952,
+      "maintenance_modes": {
+        "full_rebuild": 4
+      },
+      "mode": "early_saved",
+      "preparation_mean_seconds": 7.830985708395019,
+      "sidecar_snapshot_bytes": 1276209,
+      "steps": 4,
+      "unfinished": 5,
+      "worker_mean_seconds": 17.208284395979717
+    }
+  ],
+  "limitations": [
+    "One adaptively selected development residual: original 1154. The initial exhausted source uses the same saved split in both modes; only descendant scheduling differs. No holdout or global optimality claim.",
+    "Two repetitions reverse mode order. Each independent worker gets twelve advances including the common initial split, and one shared 32-state allowance.",
+    "Both arms use checked clear-probe maintenance. Descendants use EarlyClosedExpansion or EarlySavedExpansion; pending and known-forced work retain priority and both split branches remain obligations.",
+    "Complete worker time includes preparation, acquisition, checking and delta export. Authority reconstruction and union checks are charged separately.",
+    "Both split branches remain structural obligations, independently of SAT answers. Unfinished admissions are explicit; all alternatives and old history are retained in the union.",
+    "Shared process and OS caches, two repetitions, no confidence intervals; disk bytes are not peak RAM. No minimum expansion bound or unrestricted SAT result."
+  ],
+  "paired": [
+    {
+      "both_closed": false,
+      "case": 1154,
+      "early_saved_only_patterns": 17,
+      "identical_initial_split": true,
+      "identical_new_pattern_keys": false,
+      "ordinary_only_patterns": 20,
+      "shared_new_patterns": 10
+    }
+  ]
+}

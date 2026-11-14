@@ -28,12 +28,19 @@ classes.
 
 ## Paper
 
+[Acquiring the bounded projection](research/projection-acquisition.md) closes
+case 1298, raising structural coverage to **63/83**. The matched ordinary path
+closes it too and costs less: **4.45 vs 8.70 seconds**, **8 vs 9 new states**.
+Projection adds probe work and route refresh despite removing a variable. Both
+alternatives are preserved. This regression makes reuse of existing probe
+history and cheaper route maintenance the next priorities.
+
 [Automatic target discovery](research/projection-lookup.md) now recovers the
 previous projection bridge without being given its target. It finds **no new
 match on the 23 unresolved frontier sources**. Indexed discovery is faster than
-scanning a prepared catalog, but construction costs **14.4 s / 28.1 MB**. The next
-test is a newly exposed **36-variable / 153-clause** projection; it is not yet an
-acquired or solved target. Coverage remains **62/83**.
+scanning a prepared catalog, but construction costs **14.4 s / 28.1 MB**. That
+study exposed the **36-variable / 153-clause** projection tested above. Its
+coverage was **62/83** before the acquisition comparison.
 
 [Exact projection now connects the two expansion paths](research/projection-bridge.md).
 A checked elimination and subsumption step lets both leaves reuse one proof:

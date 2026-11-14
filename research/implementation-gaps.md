@@ -6337,3 +6337,56 @@ global index optional until broader reuse justifies its preparation and space.
 Resume the unchanged `cnf-projection-bridge/report.json` authority with all five
 evidence lists and its separate bridge archive. New catalog and negative results
 are preserved in `experiments/results/cnf-projection-lookup/`.
+
+## 2026-11-14: bounded projection acquisition closes a case but loses on cost
+
+[Acquisition of the saved candidate](projection-acquisition.md) now closes
+original **1298 / index 47**, raising structural coverage **62/83 -> 63/83** in
+both views. Source **37 / 151 / 455** projects by local variable **13** to
+**36 / 153 / 470** after one checked subsumption deletion. Pending acquisition
+cannot become a bridge, and the helper preserves one shared admission budget.
+
+Two reversed repetitions compare ordinary continuation with projection from
+independent identical seeds, with **12 advances / 32 states** each. Both close
+the source. Ordinary uses **4 advances / 8 new states / 4.45329 s** expansion;
+projection uses **8 / 9 / 8.70178 s**. Complete worker means are **16.62221 vs
+21.45978 s**. External continuation needs **20 vs 44** assumption attempts.
+Full route refresh costs **4.05191 vs 8.15891 s**, over 90% of expansion.
+The smaller formula is more expensive here; the prior successful bridge reused
+an already acquired target. Candidate discovery is charged in the preceding
+study, not repeated in these conditional means.
+
+Both paths select the same variable under the projection map, source **22** /
+target **21**. The false cofactor is refuted after three failed-literal reductions;
+the true cofactor reaches the same five-variable disjoint-component key after
+two reductions. These paths and independent reference witness lifts are checked.
+Both split pairs already occur in their respective initial pattern records,
+suggesting an earlier saved-pair policy as the next matched test. Transferring
+unit-propagation traces or unsuccessful searches across projection still needs
+additional justification.
+
+The union preserves **14 new patterns**, eight continuation blocks, one probe
+window, two split records and the new bridge. Three new exact keys are shared
+between the arms. Full history is **773,255,168 bytes / 41,926 patterns**; the
+union delta is **16,475 compressed bytes** and the positive proof has **3,145
+steps**. Both bridge targets and all 26 retained split sources close. Twenty
+originals remain uncovered. Independent cold replay takes **221.51064 s**, with
+fresh recognition and reference expansion forbidden; all **3,022 reference
+nodes**, both repetitions, global coverage and resumable selection check.
+All **199 relevant tests pass**.
+
+Resume `experiments/results/cnf-projection-acquisition/report.json` with
+`compare_cnf_projection_acquisition.restore_checkpoint`, preserving five evidence
+lists **(1, 42, 156, 26, 1)** and its separate two-bridge archive. Report SHA-256:
+`d865c287709cccdd0af56c1a23a564618e369be41fd4e971c21c0834b3510b2a`.
+Use the bridge-aware `routes_for` and `cnf_projection_bridge.verify_positive`.
+The new `projection_frontier` sidecar has two closed targets and no leaves.
+
+Next original: **1160 / index 29**, selected **37 / 151 / 456** leaf, SHA-256
+`614772f5cb0f59835870e117b1653b225e008eb44416371335350a725cac6149`.
+Its next ordinary variables are **13, 15, 16, 17**; sixteen saved pairs have no
+acquired candidate child root, with best rank **[2, 2, 35, 794, 19]**. Despite
+similar dimensions, its normalized clause set shares no exact clause with the
+completed leaf. Prioritize existing split evidence and incremental route
+maintenance while continuing broader structural discovery. Neither a minimum-cost
+policy nor an unrestricted SAT resource bound has been established.

@@ -12,7 +12,50 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: target discovery works, frontier matches remain absent
+## Current investigation: acquiring a smaller projection costs more
+
+[The bounded acquisition comparison](projection-acquisition.md) completes case
+**1298 / index 47**, raising coverage **62/83 -> 63/83** in both views. Ordinary
+continuation and projection start from identical independent seeds and complete
+the same source. Ordinary uses **4 advances / 8 states / 4.45329 s** of expansion;
+projection uses **8 / 9 / 8.70178 s**. Complete worker means are **16.62221 vs
+21.45978 s**. Removing a variable does not establish cheaper acquisition.
+
+1. **Reuse existing probe evidence when considering a transformation.** Ordinary
+   continuation performs 20 additional external assumption attempts; the new
+   target needs 44. Both eventual split pairs already exist in their respective
+   initial pattern records. Test selecting a promising saved pair before
+   exhausting all clear probes, with matched forcing controls. If transferring
+   a split across projection, check the variable map and both cofactors. A
+   projection bridge alone does not transport a unit-propagation trace or prove
+   that a failed heuristic search can be skipped. Preserve any contrary cases.
+2. **Avoid complete route refresh after a clear probe block.** Refresh consumes
+   **4.05191 / 8.15891 s**, or **91.0% / 93.8%** of expansion. Keep candidate
+   availability current without rebuilding unchanged semantic routes. Validate
+   activation of newly acquired targets, new forced routes and closure changes;
+   compare complete costs, including cold reconstruction and persistence.
+3. **Continue classification on the next original, without assuming size implies
+   similarity.** Case **1160 / index 29** has a **37 / 151 / 456** selected leaf.
+   Despite almost identical dimensions to the completed leaf, their stored
+   normalized clause sets have no exact clause in common. Broader variable
+   transport or shared substructure requires its own discovery and certificate.
+
+Resume **`experiments/results/cnf-projection-acquisition/report.json`** with
+**`compare_cnf_projection_acquisition.restore_checkpoint`**. Report SHA-256:
+`d865c287709cccdd0af56c1a23a564618e369be41fd4e971c21c0834b3510b2a`.
+Retain five evidence lists **(1, 42, 156, 26, 1)** and its separate **two-bridge**
+archive. Use `compare_cnf_projection_acquisition.routes_for(h, evidence, bridges)`
+and `cnf_projection_bridge.verify_positive`. Both bridge targets and every
+retained split source close. The union keeps **14 new patterns**, including
+both paths' work; full history is **773,255,168 bytes / 41,926 patterns**. The
+ordinary/projection arms share three newly acquired exact keys, so the union
+is not a single nine-state run. Twenty originals remain uncovered. Next source:
+`614772f5cb0f59835870e117b1653b225e008eb44416371335350a725cac6149`.
+All **199 relevant tests pass**. Independent cold replay checks all four arms,
+global coverage and **3,022 reference nodes** with discovery and reference
+expansion disabled. The manuscript builds with all 64 proof blocks unchanged.
+
+## Previous investigation: target discovery works, frontier matches remain absent
 
 [Automatic projection lookup](projection-lookup.md) finds the previous bridge
 without a supplied target, but finds **no new bridge on 23 unresolved frontier

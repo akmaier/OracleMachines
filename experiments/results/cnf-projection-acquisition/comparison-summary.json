@@ -1,0 +1,56 @@
+{
+  "arms": [
+    {
+      "admitted": 8,
+      "closed": true,
+      "completed": 8,
+      "compressed_delta_bytes": 8985,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.3995279173832387,
+        "coverage_seconds": 0.000953917158767581,
+        "route_refresh_seconds": 4.051908062538132,
+        "selection_seconds": 0.0009028760250657797
+      },
+      "delta_database_bytes": 192512,
+      "delta_export_mean_seconds": 4.71941391681321,
+      "expansion_mean_seconds": 4.453292773105204,
+      "external_assumption_attempts": 20,
+      "history_bytes": 773095424,
+      "mode": "ordinary",
+      "preparation_mean_seconds": 7.411146792117506,
+      "steps": 4,
+      "unfinished": 0,
+      "worker_mean_seconds": 16.622210437664762
+    },
+    {
+      "admitted": 9,
+      "closed": true,
+      "completed": 9,
+      "compressed_delta_bytes": 11134,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.5392861026339233,
+        "coverage_seconds": 0.001966790994629264,
+        "route_refresh_seconds": 8.158913644962013,
+        "selection_seconds": 0.0016117093618959188
+      },
+      "delta_database_bytes": 245760,
+      "delta_export_mean_seconds": 5.025716416770592,
+      "expansion_mean_seconds": 8.701778247952461,
+      "external_assumption_attempts": 44,
+      "history_bytes": 773148672,
+      "mode": "projection",
+      "preparation_mean_seconds": 7.683499020989984,
+      "steps": 8,
+      "unfinished": 0,
+      "worker_mean_seconds": 21.459778416436166
+    }
+  ],
+  "limitations": [
+    "One preselected development projection from the preserved discovery experiment; two repetitions per mode in reversed order.",
+    "Both modes start from independent identical seeds and seek closure of the same 37-variable source under twelve advances and one 32-state allowance.",
+    "Projection acquisition and certificate construction consume the first advance and the same shared admission budget. Thereafter the unchanged continuation engine follows the projected target.",
+    "Candidate discovery was paid in the previous experiment; this comparison is conditional on the saved candidate and does not rebuild the optional global lookup index.",
+    "All preparation, acquisition, route refresh, persistence and cold replay are charged. Incomplete paths do not establish a completion-time saving.",
+    "All arm results and old bridges survive in the union. Reference answers do not establish structural coverage; disk size is not peak RAM or an unrestricted SAT bound."
+  ]
+}

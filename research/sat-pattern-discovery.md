@@ -2149,3 +2149,42 @@ Next ordinary candidates are **16, 18, 21, 22**, in new canonical coordinates
 remains 17 ready bases / 88 candidates. Next investigate those discoveries and
 exact incremental coverage maintenance with a complete reverse-dependency index;
 partial catalogs or stale negative caches must not substitute for that contract.
+
+
+## 2026-11-14: incremental finite coverage and the cold-cost boundary
+
+[The complete coverage index](incremental-coverage.md) updates the affected
+reachable rules after the saved forced append. Across full and without-growth
+controls, four source-option checks replace 25,605 source visits. Warm composition
+and original proof checking average **0.26146 -> 0.03949 seconds**; including the
+shared **0.94030-second** complete external-route refresh gives an indicated
+**18.47%** saving. The two full-control times vary substantially. Most of the old
+55-second cold cost is historical semantic validation, already avoided by warm
+verifier caches; do not attribute all of that difference to incremental closure.
+
+The new index preserves both split obligations and duplicate premises, propagates
+changed negative coverage results, and handles existing pending routes that become
+available after target admission. It requires immutable historical pattern rows,
+a fixed policy and a complete checked external catalog. Removed or rebound rules
+require rebuilding. Cold loading recomputes closure and audits every reachable
+option, rather than trusting persisted negative flags.
+
+First index construction costs **55.68532 s**. Cold index replay is **64.41089 s**
+versus **62.62709 s** for full recomposition: a retained regression. Both validate
+22,603 historical nodes. Full snapshot serialization costs **7.96452 s** and adds
+**11,241,021 compressed bytes / 94,113,609 raw JSON bytes** for two graphs, with
+most source keys duplicated. No peak-RAM reduction is established. All **156
+relevant tests** pass, including exhaustive graph/base combinations and real
+pending-target activation; independent cold replay and full composition agree.
+
+No new recognition state or structural coverage is acquired by this maintenance
+study: coverage remains **58/83**, full history **770,371,584 bytes**, and the active
+leaf **22 variables / 88 clauses**. The new index artifact is in
+`experiments/results/cnf-incremental-coverage/`; discovery still resumes from
+`experiments/results/cnf-local-forcing/report.json` through
+`continue_cnf_local_forcing.restore_checkpoint`, preserving all five evidence lists
+**(1, 42, 156, 11, 1)**. Next advance ordinary candidates **16, 18, 21, 22** or saved
+split pairs **13, 5, 6, 11** in a bounded warm session with one admission allowance.
+Complete route refresh, cold catalog revalidation and full-snapshot persistence
+remain costs. Use the reusable graph for actual discovery before another isolated
+verification optimization; no unrestricted construction claim follows.

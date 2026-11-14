@@ -1,0 +1,37 @@
+{
+  "cold_catalog_audit_passed": true,
+  "cold_full_recomposition_agrees": true,
+  "coverage_certificate_byte_identical": true,
+  "coverage_preserved": 58,
+  "evidence_counts": [
+    1,
+    42,
+    156,
+    11,
+    1
+  ],
+  "exhaustive_graph_base_combinations": 4096,
+  "new_discovery_records": 0,
+  "new_tests": 8,
+  "parent_artifact_counts": {
+    "cnf-expanded-coverage": 8,
+    "cnf-local-forcing": 16,
+    "cnf-positive-bundle": 9,
+    "cnf-positive-primitives": 9,
+    "cnf-reused-branch": 17,
+    "cnf-selected-routes": 8,
+    "cnf-source-local-checked": 16
+  },
+  "parent_artifacts_unchanged": true,
+  "report_sha256": "6bb80369aa829ca2fd41caf4d00fec669879e5d7aa7fb24f3d3602e031983a5e",
+  "scope": "Append-only finite graph maintenance on the saved forced update. Warm reuse measured separately; cold replay and full serialization regressions retained. No new SAT category, peak-RAM bound or Lean refinement.",
+  "source_fingerprints": {
+    "experiments/cnf_incremental_coverage.py": "5bef8cb699796b28dbd597509e71e8797ccacea4a384aa1bbe697e869b5827bd",
+    "experiments/cnf_route_composition.py": "d4fa747aff6e55f3287bad3d438b01449dc25c1064d6784d8febfdfb66e078b1",
+    "experiments/compare_cnf_incremental_coverage.py": "4e9a90154fc4e46220007a9f9b2785f4a21004e3b70459f86238807c70661825",
+    "solver/test_cnf_incremental_coverage.py": "1c6e167abd68343ff550769c515c5863893b162984f0b868a13419e8ff457b6d"
+  },
+  "test_command": "python3 -m unittest solver.test_cnf_positive_bundle solver.test_cnf_positive_primitives solver.test_cnf_expanded_coverage solver.test_cnf_selected_routes solver.test_cnf_route_composition solver.test_cnf_trace_split solver.test_cnf_probe_window solver.test_cnf_probe_continuation solver.test_cnf_learning_continuation solver.test_cnf_trace_learning solver.test_cnf_trace_reuse solver.test_cnf_coupled_pivots solver.test_cnf_affine_clause solver.test_cnf_retained_plans solver.test_cnf_variable_elimination solver.test_cnf_clause_bound_elimination solver.test_cnf_additive_elimination solver.test_cnf_binary_paths solver.test_cnf_polarity_horn solver.test_cnf_simplification solver.test_cnf_fused_conditioning solver.test_cnf_affine_projection solver.test_cnf_affine_patterns solver.test_cnf_probe_equivalence solver.test_cnf_source_local solver.test_cnf_local_forcing solver.test_cnf_incremental_coverage",
+  "test_log_sha256": "e45c3f7053dbf0392c99a3e7474a138a40d019d348ea62fb092b5517e08e5aa2",
+  "tests": 156
+}

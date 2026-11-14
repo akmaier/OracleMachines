@@ -12,7 +12,51 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: forced reduction and the global-composition cost
+## Current investigation: incremental coverage and the cold-cost boundary
+
+[Incremental coverage](incremental-coverage.md) retains the complete finite rule
+graph and updates affected obligations after the saved forced expansion. In the
+full and without-growth graphs together, it checks **four option sources** rather
+than visiting **25,605** again. Warm composition plus original proof checking
+averages **0.26146 -> 0.03949 seconds**. The two full-control samples vary
+substantially; including the shared **0.94030-second** complete route refresh
+gives an indicated **18.47%** saving, not 84.90% for the whole update.
+
+The important limit is cold cost: initial index construction costs **55.68532 s**;
+cold replay is **64.41089 s**, versus **62.62709 s** for full recomposition.
+Serializing the complete pair costs **7.96452 s** and adds **11,241,021 compressed
+bytes** (94,113,609 raw JSON bytes). Most of the previous 55-second composition
+cost is historical semantic validation, already avoided by keeping ordinary
+verifier caches warm. It is not all a saving attributable to the new index.
+
+1. **Advance discovery within one bounded warm session.** Reuse the checked
+   inventory and graph across useful advances, charging restoration and first
+   construction once. On the unchanged **22-variable / 88-clause** leaf, ordinary
+   candidates are **16, 18, 21, 22**, and saved split pairs rank **13, 5, 6, 11**.
+   Preserve one admission allowance and every new delta. Avoid another isolated
+   verification-only tuning run before using this support for actual discovery.
+2. **Track complete external-route dependencies.** Global route refresh now costs
+   more than the warm composition update. A future exact delta path must include
+   pending routes activated by newly acquired targets, even without new route
+   records. Current code deliberately still refreshes and compares the entire
+   checked catalog; partial positive maps cannot establish completeness.
+3. **Reduce cold revalidation and persistence cost with explicit evidence.** The
+   full catalog audit still loads 22,603 historical nodes. Two graph snapshots
+   duplicate most keys, and full serialization costs more than a warm update
+   saves. Preserve the measured cold regression; do not deploy this index as an
+   automatic replacement for isolated cold composition.
+
+All **156 relevant tests** pass, including 4,096 exhaustive small graph/base
+combinations, mixed AND/OR update sequences, corruption and real pending-target
+admission. Cold graph replay and full recomposition agree at **58/83**. No new
+SAT category or recognition node is acquired by this study. The reusable index
+is in **`experiments/results/cnf-incremental-coverage/`**; the authoritative
+discovery checkpoint remains **`experiments/results/cnf-local-forcing/report.json`**,
+resumed through `continue_cnf_local_forcing.restore_checkpoint` with all five
+evidence lists **(1, 42, 156, 11, 1)**. Append-only rules, immutable pattern payloads
+and fixed policy are required; deletions/rebindings require a rebuild.
+
+## Previous investigation: forced reduction and the global-composition cost
 
 [Source-local forced expansion](source-local-forcing.md) proves source variable
 **22=true** and shrinks the open leaf **23 variables / 93 clauses / 288 literals

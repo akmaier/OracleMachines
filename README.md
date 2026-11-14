@@ -28,11 +28,19 @@ classes.
 
 ## Paper
 
+[Incremental coverage maintenance](research/incremental-coverage.md) now reuses
+the acquired rule graph. Warm composition and checking average **0.261 to 0.039
+seconds**, or an indicated **18.47%** saving after including complete route
+refresh. Cold replay remains expensive and is slightly slower with the index
+(**64.41 versus 62.63 seconds**); the new snapshot also adds storage. All **156
+relevant tests** pass. The next priority is useful discovery across a bounded
+warm session, preserving the initial construction cost in the account.
+
 [The latest forced reduction](research/source-local-forcing.md) proves one
 frontier variable true and shrinks the open source from **23 variables / 93
 clauses to 22 / 88**, using one new recognition state. Coverage remains **58/83**.
 The matched local expansion worker takes **0.137 seconds** with history available;
-**55.49 seconds of global recomposition** is now the largest measured cost.
+**55.49 seconds of cold global recomposition** was its largest measured cost.
 All **148 relevant tests** pass, and the new checkpoint preserves earlier results.
 
 [Source-local expansion](research/source-local-expansion.md) now preserves the

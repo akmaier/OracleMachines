@@ -7017,3 +7017,42 @@ are byte-identical to the parent. The new manifest binds **40 artifacts /
 negative exact-overlap check on the next 32 candidate targets. Commands, source
 fingerprints and concurrency notes are in
 `experiments/results/cnf-session-frontier/validation.json`.
+
+
+## 2026-11-15: signed-renaming exclusions and case-1120 expansion
+
+The [new investigation](signed-renaming-filter.md) implements and checks a
+necessary invariant for signed variable renaming. All 32 saved candidate
+targets have different profiles: all 496 pairs are excluded, including the
+three pairs with matching size counts. Equality is inconclusive; tests retain
+a nonisomorphic equal-profile counterexample. Exclusion does not decide SAT,
+rule out semantic equivalence, or justify efficient solving of every class.
+The audit takes 0.03586 seconds including writing and changes no scheduler.
+
+Two independent retained sequences each enter 64 states across two allowances,
+store 54 patterns and reach a 5/4/9 Horn, zero-valid terminal. One first-batch
+interruption is reentered and completed; nine final inputs remain unstored.
+Coverage stays 66/83. The pending 25/96/309 split has targets 23/89/277 and
+22/73/215. Resume it from `cnf-original-1120/report.json` using
+`continue_cnf_original_1120.restore_checkpoint`, preserving evidence
+(1, 42, 156, 54, 1) and two bridges. The linked record binds exact source and
+report hashes and separates the pending selection from original case 1120.
+
+Mean summed workers cost 18.01738 seconds, with 16.81073 seconds of preparation
+and 0.91088 seconds of expansion. History grows 749,568 bytes to 777,986,048 bytes
+and 42,268 patterns; the new delta is 38,073 compressed bytes. The reference
+archive grows to 4,114 nodes with all 3,830 prior payloads preserved. The global
+positive certificate remains byte-identical. Next priorities are convergence
+after checked reduction, remaining preparation/cold costs, and checked local
+continuations if repeated unfinished frames become dominant. No new speedup,
+peak-memory saving or arbitrary-SAT complexity bound is asserted.
+
+Independent cold reconstruction passes in **419.43195 seconds**, reproducing
+both sequences and every intermediate catalog without fresh discovery or
+reference search. All **238 tests** pass. All **1,361 prior artifacts / 27
+manifests** and **3,830 previous reference payloads** remain unchanged. Cold
+findings also identify actual reuse after reduction: an inherited two-variable
+plan and the empty-CNF terminal, distinct from the newly recognized Horn
+terminal. The manuscript preserves all 64 proof blocks and builds to 163 pages
+without overfull boxes or undefined references. The checkpoint manifest and
+`validation.json` bind the audit, results, source fingerprints and checks.

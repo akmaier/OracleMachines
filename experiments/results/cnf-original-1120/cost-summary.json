@@ -1,0 +1,95 @@
+{
+  "batches": [
+    {
+      "admitted": 32,
+      "batch": 0,
+      "boundary_mean_seconds": 0.0219948748126626,
+      "completed": 31,
+      "compressed_delta_bytes": 23131,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.2643752694129944,
+        "coverage_seconds": 0.00167360482737422,
+        "route_refresh_seconds": 0.05081374989822507,
+        "selection_seconds": 0.21357029164209962
+      },
+      "delta_database_bytes": 491520,
+      "expansion_mean_seconds": 0.5304329157806933,
+      "export_mean_seconds": 0.01832162542268634,
+      "final_activation_index": {
+        "indexed_routes": 705,
+        "pending_routes": 1,
+        "waiting_links": 2,
+        "waiting_targets": 2
+      },
+      "history_bytes": 777662464,
+      "initial_activation_index": {
+        "indexed_routes": 701,
+        "pending_routes": 0,
+        "waiting_links": 0,
+        "waiting_targets": 0
+      },
+      "preparation_mean_seconds": 12.628384062554687,
+      "session_startup_mean_seconds": 7.4150563748553395,
+      "startup_mode": "retained",
+      "steps": 4,
+      "target_closed": false,
+      "unfinished": 1,
+      "worker_mean_seconds": 13.310407374985516
+    },
+    {
+      "admitted": 32,
+      "batch": 1,
+      "boundary_mean_seconds": 0.00966389593668282,
+      "completed": 23,
+      "compressed_delta_bytes": 17383,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.16943600005470216,
+        "coverage_seconds": 0.0015681041404604912,
+        "route_refresh_seconds": 0.03716620919294655,
+        "selection_seconds": 0.17227210476994514
+      },
+      "delta_database_bytes": 405504,
+      "expansion_mean_seconds": 0.38044241815805435,
+      "export_mean_seconds": 0.015727333491668105,
+      "final_activation_index": {
+        "indexed_routes": 707,
+        "pending_routes": 1,
+        "waiting_links": 2,
+        "waiting_targets": 2
+      },
+      "history_bytes": 777986048,
+      "initial_activation_index": {
+        "indexed_routes": 705,
+        "pending_routes": 1,
+        "waiting_links": 2,
+        "waiting_targets": 2
+      },
+      "preparation_mean_seconds": 4.182344729080796,
+      "session_startup_mean_seconds": 0.0037207293789833784,
+      "startup_mode": "retained",
+      "steps": 3,
+      "target_closed": false,
+      "unfinished": 9,
+      "worker_mean_seconds": 4.706974104512483
+    }
+  ],
+  "limitations": [
+    "Two independent retained sequences, each with up to two consecutive bounded batches; reproducibility and discovery, not a comparative speedup.",
+    "Start from the globally selected original-bound residual, not the completed parent focus. Resume any acquired pending pair before selecting further work.",
+    "Each batch has twelve advances and its own 32-state allowance; up to 64 entries per sequence, including repeated unfinished inputs. Stop once the focus closes.",
+    "Both repeats reuse the unchanged worker and its scheduler. The invariant audit excludes signed-renaming reuse among candidate targets and does not alter scheduling; its cost is charged separately.",
+    "Preparation, acquisition, route updates, coverage, persistence, reconstruction and reference checks are separate costs.",
+    "Development cases, shared OS caches, no holdout or confidence intervals. Stored bytes are not peak RAM.",
+    "No globally minimal expansion, polynomial unrestricted-SAT algorithm or P-versus-NP conclusion."
+  ],
+  "sequences": [
+    {
+      "admitted": 64,
+      "batches": 2,
+      "completed": 54,
+      "sequence_mean_seconds": 18.426841562846676,
+      "startup_mode": "retained",
+      "worker_sum_mean_seconds": 18.017381479498
+    }
+  ]
+}

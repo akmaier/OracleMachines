@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Checking signed-renaming reuse before expansion](research/signed-renaming-filter.md)
+excludes all **496 pairs** among the next 32 candidate targets using clause widths
+and occurrence counts. Matching shapes were insufficient. The unchanged expansion
+then stores **54 patterns** and reaches a five-variable Horn terminal; coverage
+remains **66/83**, with another conditional pair pending. The audit takes **0.036
+seconds** including writing; it establishes no comparative speedup.
+
 [Completing the retained conditional interaction](research/session-frontier-closure.md)
 stores **29 patterns** and reaches a seven-variable all-true terminal while
 reusing the other branch's refutation. All saved split obligations close, but

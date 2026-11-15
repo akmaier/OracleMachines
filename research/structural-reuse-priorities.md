@@ -12,7 +12,59 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: finish the retained interaction and return to originals
+## Current investigation: exclude renaming proposals and continue case 1120
+
+[The signed-renaming audit](signed-renaming-filter.md) distinguishes all **32
+candidate targets** and excludes all **496 pairwise signed variable bijections**.
+Three pairs matched variable, clause and literal counts; stronger width and
+paired-occurrence invariants reject them. The audit costs **0.03586 s**, including
+writing. It establishes a necessary-condition filter, not a positive equivalence
+checker, SAT classification theorem or comparative speedup.
+
+The unchanged worker then stores **54 patterns**, including a **5/4/9 Horn and
+zero-valid terminal**, in two batches per independent run. **Coverage remains
+66/83**. One interrupted state is reentered and completed; nine final inputs
+remain unstored. Both repeats produce identical per-batch evidence.
+
+1. **Resume the saved interaction and seek convergence after reduction.** The
+   next source is **25/96/309**, with pending **23/89/277** and **22/73/215**
+   targets. Preserve the exact pair and charge interrupted work. The initial
+   32 targets cannot reuse one another by signed renaming, but descendants
+   may converge after checked reductions. Test this broader opportunity before
+   expensive isomorphism search on the rejected original pairs.
+2. **Profile remaining preparation and cold reconstruction.** Two-batch workers
+   average **18.01738 s**, of which **16.81073 s** is preparation and **0.91088 s**
+   expansion. Acquisition alone is **0.43381 s**. Restoration costs **105.00548 s**
+   and final route preparation/global coverage **68.70599 s**. Retaining checked
+   sessions already avoids repeated checking between the two batches; further
+   savings require locating the remaining snapshot and authority work.
+3. **Investigate bounded continuation when repeated frames dominate.** Nine
+   interrupted inputs expose incomplete recursive work. Persisting checked
+   local frames could avoid repetition, but needs explicit invariants and a
+   matched measurement. No bound on decomposition depth, number of batches,
+   total stored state or recognition cost for arbitrary CNFs follows.
+
+Resume **`experiments/results/cnf-original-1120/report.json`** through
+**`continue_cnf_original_1120.restore_checkpoint`**, SHA-256
+`d0ffd584ce79e219103ec891f04b7a038aff42cc9b9b86221bbf0c0b41f4fb8e`.
+Keep evidence **(1, 42, 156, 54, 1)** and **two bridges**. Read `next_selection`;
+its pending source hash is
+`7187942ac65244a2700f4c0e912ca876ca046144695d4392d2b006913ac98bd7`.
+The original focus is case **1120**, retained index **22**. History grows
+**749,568 bytes** to **777,986,048 bytes / 42,268 patterns**. The new delta is
+**38,073 compressed bytes**; reference nodes grow **3,830 -> 4,114**, while the
+**3,360-step global positive certificate** remains byte-identical. The live
+index has **707 routes / two missing-target links**. No memory reduction is
+claimed. Validation details and the exact invariant argument are in the linked
+investigation record.
+
+Cold reconstruction passes in **419.43195 s** with fresh discovery and reference
+search disabled. All **238 tests**, **4,114 reference-node checks** and prior
+artifact-preservation checks pass. The manuscript builds to **163 pages** with
+all **64 proof blocks** unchanged. The new findings also confirm actual reuse
+of an inherited two-variable plan and the empty-CNF terminal after reductions.
+
+## Previous investigation: finish the retained interaction and return to originals
 
 [The conditional continuation](session-frontier-closure.md) completes the true
 32-variable cofactor through **29 new patterns** to a **7/21/85 one-valid

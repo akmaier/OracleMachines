@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Mixed-family discovery and the remaining frontier](research/case1121-discovery.md)
+raises structural coverage **73/83 -> 75/83**, closing cases 1121 and 1336 with
+**67 new records**. A small affine projection is checked exhaustively. Four batches
+take **72.02 seconds**, including **1.24 seconds** local expansion.
+Case 1063 retains a pending branch with no new admissions even though every admitted input is stored.
+
 [Completing the pending mixed reductions](research/pending-discovery-closure.md)
 raises structural coverage **72/83 -> 73/83**, completing case 1062 with **68 new
 records**, including three polarity transformations into Horn formulas. All eight

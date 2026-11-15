@@ -4346,6 +4346,44 @@ disabled. All 299 tests pass. The next selected original is case 1121, with
 residual size $41/174/513$. Ten originals remain uncovered; no uniformly
 polynomial acquisition or compact-closure bound for arbitrary SAT follows.
 
+\paragraph{A pending branch survives complete admission storage.}
+Two further four-batch histories complete cases 1121 (SAT) and 1336 (UNSAT),
+raising checked structural coverage to $75/83$, before continuing into case 1063.
+Both store the same 67 records: 31 probes, 23 eliminations, six binary-path
+reductions, three unresolved records, two family terminals, one polarity
+transformation and one affine projection. They charge 81 admissions on 67
+distinct inputs; fourteen admissions repeat interrupted work. Every admitted
+input has a stored record at the end. Nevertheless, a $22/89/309$ split remains
+pending: its first branch admits sixteen inputs and completes, while its second
+branch admits zero new inputs and remains pending. Completion of the admission ledger
+therefore does not imply complete structural coverage. The pending frontier
+must persist independently of interrupted admissions.
+
+The affine projection rewrites $14/16/34$ to $13/14/30$. Two explicit affine
+equations interact with twelve leftover clauses. Eliminating one variable absent
+from those clauses leaves a width-two boundary equation, encoded by two clauses
+and four literals. An additional exhaustive diagnostic compares all 16,384 source
+assignments and 8,192 boundary assignments, confirming exact existential
+projection and lifting every satisfying boundary model. The target still requires
+a probe. General boundary encoding may be exponential in equation width; the
+existing encoding budget remains necessary. This example establishes neither
+shared boundaries across unrelated inputs nor efficient projection for every CNF.
+A polarity transformation separately exposes an $11/10/22$ Horn, zero-valid
+terminal; a $6/15/51$ terminal is one-valid outside Horn and 2-CNF.
+
+Mean complete sequence time is 72.02025 seconds, including
+64.41599 seconds startup and 1.23698 seconds local expansion.
+Parent restoration adds 14.70057 seconds; its wrapper permits the checked
+materialization but does not report whether cache or fallback was used.
+History grows by 913,408 bytes to 783,364,096 bytes and 42,678 patterns.
+The structural delta uses 970,752 SQLite bytes or 47,697 compressed bytes.
+Separate reference evidence adds 671 nodes and 5,423,104 SQLite bytes, reaching
+6,283 nodes. Peak RAM is unmeasured; repetitions establish reproducibility, not
+a matched speedup. Independent replay disables materialization and fresh search,
+checks every acquisition prefix and ten saved global queries, and verifies all
+reference nodes. All 299 tests pass. Eight originals remain structurally
+uncovered, and no uniformly polynomial acquisition bound follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -1,0 +1,138 @@
+{
+  "admitted_entries": 81,
+  "cost_summary_sha256": "fd9f691c518b98763d6ae255659b75991dd1859afd9eb94f6745998eeeaf2916",
+  "cross_original": [
+    {
+      "left": 1063,
+      "right": 1121,
+      "shared_new_prefix_nodes": [],
+      "shared_prefix_nodes": [
+        "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a"
+      ]
+    },
+    {
+      "left": 1063,
+      "right": 1336,
+      "shared_new_prefix_nodes": [],
+      "shared_prefix_nodes": [
+        "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a"
+      ]
+    },
+    {
+      "left": 1121,
+      "right": 1336,
+      "shared_new_prefix_nodes": [],
+      "shared_prefix_nodes": [
+        "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a"
+      ]
+    }
+  ],
+  "distinct_admitted": 67,
+  "distinct_prefix_nodes": 69,
+  "exact_prefix_nodes_shared_with_previous_case": [
+    "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a"
+  ],
+  "families": [
+    {
+      "clauses": 10,
+      "key_sha256": "f0d323abd16df8984babf9f9259a4839bbadf07f05677d23062896d79ace16cb",
+      "literals": 22,
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "recognized",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "recognized"
+      },
+      "variables": 11
+    },
+    {
+      "clauses": 15,
+      "key_sha256": "fdf64adf89447c231a274bcb86c393a2722e177a5ae871a109a46b9d128dd5ec",
+      "literals": 51,
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "recognized",
+        "single_parity": "excluded",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "variables": 6
+    }
+  ],
+  "history_growth_bytes": 913408,
+  "inherited_prefix_nodes": 2,
+  "limitations": [
+    "Prefix counts describe stored single-edge chains of touched split branches, not every route or alternative in the original proof.",
+    "Repeated prefix visits include deliberate pending-split replay; a repeated visit is not a fresh stored record.",
+    "Matching rule names and family outcomes are not equivalent CNFs. Exact key intersections identify already bound pattern records only.",
+    "Source keys and node CNFs repeat serialized data, but these byte counts do not establish realizable net compression savings. SQLite pages, indexes, gzip and reconstruction are separate costs.",
+    "Two repeated development runs establish logical reproducibility, not a baseline speedup or a bound on arbitrary SAT."
+  ],
+  "new_node_kinds": {
+    "binary_paths": 6,
+    "eliminate": 23,
+    "family": 2,
+    "polarity": 1,
+    "probe": 31,
+    "project": 1,
+    "unresolved": 3
+  },
+  "new_prefix_nodes": 67,
+  "original_summaries": [
+    {
+      "batches": [
+        2,
+        3
+      ],
+      "distinct_prefix_nodes": 51,
+      "new_prefix_nodes": 50,
+      "original_case": 1063
+    },
+    {
+      "batches": [
+        0
+      ],
+      "distinct_prefix_nodes": 9,
+      "new_prefix_nodes": 7,
+      "original_case": 1121
+    },
+    {
+      "batches": [
+        1
+      ],
+      "distinct_prefix_nodes": 11,
+      "new_prefix_nodes": 10,
+      "original_case": 1336
+    }
+  ],
+  "pattern_key_bytes": 134443,
+  "pattern_payload_bytes": 409236,
+  "prefix_node_occurrences": 79,
+  "previous_interrupted_now_stored": [],
+  "previous_interrupted_reentered": [],
+  "reconstruction_sha256": "1569d61012e49a3d7b3b309046cff0e8da56c67c2c21ca69156a74f240461aba",
+  "repeated_entries": 14,
+  "repeated_prefix_occurrences": 10,
+  "report_sha256": "0282e3d40a20a20701c24503b7cd7608655806dace6e937e47082b1e30702790",
+  "stored_cnf_literal_slots": 16008,
+  "stored_patterns": 67,
+  "structural_findings_sha256": "433bb32cfd191741edb698f47b00458a822bb4837087965a4b19c8635f9c2509",
+  "timing_means": {
+    "complete_sequence_seconds": 72.02024595858529,
+    "initial_handoff_seconds": 64.41598906251602,
+    "local_expansion_seconds": 1.2369775602128357,
+    "query_serialization_seconds": 1.5836324580013752,
+    "updated_global_query_seconds": 1.0900044578593224,
+    "workers_seconds": 4.414060041075572
+  },
+  "unstored_after_sequence": []
+}

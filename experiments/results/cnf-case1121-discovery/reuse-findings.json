@@ -1,0 +1,186 @@
+{
+  "admission_by_original": [
+    {
+      "batches": [
+        2,
+        3
+      ],
+      "distinct_inputs": 50,
+      "entries": 64,
+      "original_case": 1063,
+      "reentries": 14,
+      "stored": 50,
+      "unstored": []
+    },
+    {
+      "batches": [
+        0
+      ],
+      "distinct_inputs": 7,
+      "entries": 7,
+      "original_case": 1121,
+      "reentries": 0,
+      "stored": 7,
+      "unstored": []
+    },
+    {
+      "batches": [
+        1
+      ],
+      "distinct_inputs": 10,
+      "entries": 10,
+      "original_case": 1336,
+      "reentries": 0,
+      "stored": 10,
+      "unstored": []
+    }
+  ],
+  "current_findings_sha256": "433bb32cfd191741edb698f47b00458a822bb4837087965a4b19c8635f9c2509",
+  "limitations": [
+    "Prefix intersections cover touched branches only, not every global alternative or possible equivalent encoding.",
+    "Matching shapes and method names are not proof transport. No shared representation is inferred without an exact checked identity.",
+    "Absence from the saved positive certificate is not proof that a record has no other closed route.",
+    "Repeated admissions count interrupted re-entry, not its isolated runtime cost."
+  ],
+  "passed": true,
+  "polarity_transitions": [
+    {
+      "flipped_variables": 6,
+      "outcome": "recognized",
+      "shape": [
+        11,
+        10,
+        22
+      ],
+      "source_outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "excluded"
+      },
+      "source_sha256": "e548f5a911033bddc30e64d1e1d4e435694a5a6b17dd3c8d778aa49f840b6b05",
+      "target_newly_stored": true,
+      "target_outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "recognized",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "recognized"
+      },
+      "target_sha256": "f0d323abd16df8984babf9f9259a4839bbadf07f05677d23062896d79ace16cb"
+    }
+  ],
+  "prefix_reuse_by_previous_original": [
+    {
+      "current_original": 1063,
+      "previous_original": 1062,
+      "shared_keys": [
+        "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a"
+      ],
+      "shared_kinds": {
+        "retained_plan": 1
+      },
+      "shared_shapes": [
+        {
+          "key_sha256": "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a",
+          "kind": "retained_plan",
+          "shape": [
+            0,
+            1,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "current_original": 1121,
+      "previous_original": 1062,
+      "shared_keys": [
+        "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a"
+      ],
+      "shared_kinds": {
+        "retained_plan": 1
+      },
+      "shared_shapes": [
+        {
+          "key_sha256": "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a",
+          "kind": "retained_plan",
+          "shape": [
+            0,
+            1,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "current_original": 1336,
+      "previous_original": 1062,
+      "shared_keys": [
+        "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a"
+      ],
+      "shared_kinds": {
+        "retained_plan": 1
+      },
+      "shared_shapes": [
+        {
+          "key_sha256": "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a",
+          "kind": "retained_plan",
+          "shape": [
+            0,
+            1,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "previous_findings_sha256": "07230b34a768b1c1af55e6a8198aa0df1e7ec2d3a489df12f4e168c091ed4acc",
+  "reconstruction_sha256": "1569d61012e49a3d7b3b309046cff0e8da56c67c2c21ca69156a74f240461aba",
+  "report_sha256": "0282e3d40a20a20701c24503b7cd7608655806dace6e937e47082b1e30702790",
+  "source_sha256": "2979658459d3b7545864349cfe787355e737cdc3496d6462b70270dcaa486683",
+  "unresolved_records": [
+    {
+      "external_rule": "trace_split",
+      "in_final_positive_proof": true,
+      "premises": 2,
+      "shape": [
+        39,
+        156,
+        457
+      ],
+      "source_sha256": "08e09de71aa77c0f7d108d85cbdb0f2b5e0b187612cb326e18c2a0b55733fd5f"
+    },
+    {
+      "external_rule": null,
+      "in_final_positive_proof": false,
+      "premises": null,
+      "shape": [
+        39,
+        159,
+        482
+      ],
+      "source_sha256": "c55b6844432274ff37c167a1bc17ce4b5f3ba7e5be5dc496c85fc9f3ce5276d5"
+    },
+    {
+      "external_rule": null,
+      "in_final_positive_proof": false,
+      "premises": null,
+      "shape": [
+        22,
+        89,
+        309
+      ],
+      "source_sha256": "05acbc68b81f675f959d3b93521e80824335c4b52512a3d4e02ffaf7953ee96e"
+    }
+  ]
+}

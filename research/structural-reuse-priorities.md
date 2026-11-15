@@ -12,7 +12,38 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: finish mixed reduction obligations
+## Current investigation: preserve the pending expansion frontier
+
+[Mixed-family discovery](case1121-discovery.md) raises coverage **73/83 -> 75/83**,
+closing **1121 (SAT)** and **1336 (UNSAT)**. Two independent four-batch sequences
+store **67 records** and charge **81 entries / 67 distinct inputs**. A checked
+affine projection reduces **14/16/34 -> 13/14/30**; an exhaustive bounded audit
+confirms its exact boundary models. This is an application of the existing rule.
+
+**Next:** case **1063 / index 15**, pending **22/89/309**. All admitted inputs
+are stored, but the split's second branch has admitted zero inputs and remains
+pending. Preserve that separate frontier. Resume `next_selection` plus pending
+split from `experiments/results/cnf-case1121-discovery/report.json` using
+`experiments.continue_cnf_case1121_discovery.restore_checkpoint`; the initial case
+1121 source is already complete. Empty selector indices stay empty; checked
+dependency ancestry supplies the original scope. Evidence **(1,42,156,78,1)** and
+two bridges remain required.
+
+Mean sequence time is **72.02025 seconds**, including
+**64.41599 seconds** startup and **1.23698 seconds** local
+expansion. History adds **913,408 bytes**; reference evidence adds **5,423,104 bytes**.
+Reuse a checked session; investigate actual shared nonterminal/boundary identities
+across originals. A repeated method or matching shape is not reusable evidence.
+Eight originals remain uncovered; no arbitrary-SAT bound follows.
+
+Report SHA-256: `0282e3d40a20a20701c24503b7cd7608655806dace6e937e47082b1e30702790`.
+The new `validation.json` and `manifest.json` are the preservation anchors. They
+inherit **41 prior manifests / 2,400 prior artifacts / 135 prior source fingerprints**.
+The new validation binds **140 source files**; its manifest adds **126 artifacts**
+(2,526 artifacts across 42 manifests for the next preservation audit).
+All 299 tests and the independent cold reconstruction pass.
+
+## Previous investigation: finish mixed reduction obligations
 
 [Completing the pending mixed reduction chains](pending-discovery-closure.md)
 closes **case 1062**, raising structural coverage **72/83 -> 73/83**. Two independent

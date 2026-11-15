@@ -2359,3 +2359,18 @@ unfinished control frames remains a possible way to avoid re-entry, with runtime
 benefit still unmeasured. Ten originals remain uncovered. Continue discovery in a retained
 session and measure actual shared identities or certified boundary descriptions.
 No compact closure or uniformly polynomial arbitrary-SAT acquisition bound follows.
+
+## 2026-11-15: a pending branch survives a complete admission ledger
+
+[The next mixed-family sequence](case1121-discovery.md) closes cases 1121 and
+1336, raising structural coverage to **75/83**, and stores **67 records**.
+All 67 admitted inputs are eventually stored, yet case 1063 retains a pending
+**22/89/309** split whose second branch has admitted zero inputs. Completed
+serialization is not complete structural expansion. Preserve the pending split
+alongside interrupted input identities. The same run checks a **14/16/34 ->
+13/14/30** affine projection, including exhaustive boundary-model comparison.
+History grows **913,408 bytes**; separate reference evidence grows **5,423,104 bytes**.
+Resume the new `cnf-case1121-discovery` checkpoint's `next_selection` in a retained
+session. Eight originals remain uncovered; neither cross-original boundary sharing
+nor uniformly polynomial acquisition is established. Full costs, replay evidence
+and preservation anchors are in the linked record.

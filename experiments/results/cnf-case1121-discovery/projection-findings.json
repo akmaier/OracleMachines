@@ -1,0 +1,85 @@
+{
+  "diagnostic_seconds": 0.06950008403509855,
+  "limitations": [
+    "Exhaustive diagnostic costs are additional to producer and cold replay; this is not a runtime comparison.",
+    "Projection applies to explicitly recognized affine equations and eliminates only variables absent from leftover clauses.",
+    "Boundary CNF encoding can be exponential in equation width; the existing encoding budget can reject projection.",
+    "No shared boundary identity across unrelated originals or complete arbitrary-SAT classification is established."
+  ],
+  "passed": true,
+  "pending_frontiers": [
+    {
+      "branch_admitted": [
+        16,
+        0
+      ],
+      "branch_pending": [
+        false,
+        true
+      ],
+      "entered_but_unstored": 0,
+      "pending": true,
+      "repeat": 0,
+      "source_shape": [
+        22,
+        89,
+        309
+      ]
+    },
+    {
+      "branch_admitted": [
+        16,
+        0
+      ],
+      "branch_pending": [
+        false,
+        true
+      ],
+      "entered_but_unstored": 0,
+      "pending": true,
+      "repeat": 1,
+      "source_shape": [
+        22,
+        89,
+        309
+      ]
+    }
+  ],
+  "projections": [
+    {
+      "boundary_assignments": 8192,
+      "boundary_widths": [
+        2
+      ],
+      "counts": {
+        "projection_encoding_check_literals": 4,
+        "projection_lifting_variables": 144,
+        "verified_projections": 73
+      },
+      "eliminated_variables": 1,
+      "encoded_clauses": 2,
+      "encoded_literals": 4,
+      "equations": 2,
+      "leftover_clauses": 12,
+      "lifted_models": 72,
+      "satisfying_boundary_assignments": 72,
+      "satisfying_source_assignments": 72,
+      "source_assignments": 16384,
+      "source_sha256": "617c5c2fd5a1c252ddea13d50f67db9d7f8e75a511529b09394520ecf51949bf",
+      "source_shape": [
+        14,
+        16,
+        34
+      ],
+      "target_kind": "probe",
+      "target_shape": [
+        13,
+        14,
+        30
+      ]
+    }
+  ],
+  "reconstruction_sha256": "1569d61012e49a3d7b3b309046cff0e8da56c67c2c21ca69156a74f240461aba",
+  "report_sha256": "0282e3d40a20a20701c24503b7cd7608655806dace6e937e47082b1e30702790",
+  "source_sha256": "e1963aaad3f647d88fdecdaf6770576678c1a9d6b82a8548af23df84e3d7db94"
+}

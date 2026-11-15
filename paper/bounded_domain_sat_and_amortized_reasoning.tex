@@ -4071,6 +4071,63 @@ fresh discovery. All 266 tests pass. Full-history hashing, cold reconstruction,
 unfinished internal work and unresolved interactions remain costs; removing
 a copy supplies no asymptotic improvement or uniform bound for arbitrary SAT.
 
+\paragraph{Reuse canonical order after checking it.}
+A cold profile identifies normalization as $17.10\%$ of instrumented route
+construction and $19.64\%$ of the subsequent complete global query. Instrumented
+times are $22.82681$ and $168.88106$ seconds, respectively; cumulative function
+times overlap and are not uninstrumented comparison times. Unit fixed-point
+reconstruction is the larger individual primitive. We first address a simpler
+source-level repetition: sorting and renaming formulas already in normal form.
+
+The candidate accepts built-in list/tuple inputs only after scanning the source.
+It checks nonzero integer literals, strict signed-literal order, no repeated
+variable within a clause, strict lexicographic clause order, the sole-empty-clause
+rule, and compact variable support. Positive support members with maximum equal
+to their count form exactly $\{1,\ldots,n\}$. Hence renaming is the identity;
+sorting, deduplication and tautology removal also leave an accepted input
+unchanged. Empty conjunctions and sole empty clauses have their usual normal
+forms. Any failed precheck invokes the original normalizer on the complete
+input. Both verifier policies therefore retain the same normalized formulas,
+variable maps, serialized keys and certificate checks. This recognizes a
+representation condition, not a tractable SAT family. The accepted path uses
+linearly many validation visits and set operations; hashing, integer bit costs,
+allocation, serialization and failed prechecks still require accounting.
+
+Two reversed-order repetitions independently construct the checked inventory,
+query all 83 originals, resume the saved split with the unchanged 32-state and
+12-advance limits, and query again. Both retain full batch copies, live digests,
+certificate checking and append export. Mean complete sequence time falls from
+$71.96107$ to $68.45498$ seconds ($4.87\%$); initial construction, global checking
+and serialization fall from $69.51709$ to $65.98742$ seconds ($5.08\%$).
+Sequence samples are $71.23496/72.68719$ seconds with the old normalizer and
+$68.31649/68.59346$ seconds with the candidate. Worker means are $1.29386$ and
+$1.23793$ seconds. Shared restoration costs $134.48837$ seconds, final cold
+coverage costs $71.80313$ seconds, and the full producer costs $523.23332$
+seconds, including separate audits and reference work. These two development-case
+observations establish no held-out performance claim; failed prechecks can
+regress on other inputs.
+
+All runs store the same 25 records: twelve eliminations, seven binary-path
+reductions, four probes, one polarity change and one family terminal. The
+$8/10/27$ terminal is Horn and zero-valid. All twelve previously unfinished
+states now have records, and no new state remains interrupted. These reductions
+complete the structural obligations of case 1190, raising coverage from $68/83$
+to $69/83$. The next selected original is case 1227, with a $40/165/494$ residual
+and no pending split. Coverage remains distinct from the truth value of SAT.
+
+The candidate reuses canonical order in 28,169 of 48,182 calls and falls back
+20,013 times. Old-normalizer input-literal charges decrease by 11,031,610, but
+the precheck adds 16,666,740 literal visits. These counters do not demonstrate
+fewer total inspections: the old charge excludes internal sorting and renaming
+operations. Key-byte and verified-node counts agree. There is no retained
+normalization cache or persistent index. Both methods retain 20,404 current and
+2,916 prepared checked objects; history grows by 319,488 bytes to 780,677,120
+bytes and 42,475 patterns. The delta is 380,928 SQLite bytes or 14,120 compressed
+bytes. Reference nodes grow from 4,750 to 4,802. Peak RAM remains unmeasured.
+All 274 tests pass, and independent cold replay uses the old normalizer with
+discovery disabled. Complete cold checking and unresolved interactions still
+prevent any uniform polynomial bound for arbitrary SAT from following here.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

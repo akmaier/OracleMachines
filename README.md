@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Reusing checked canonical source order](research/checked-canonical-sources.md)
+raises structural coverage to **69/83**, completing case 1190 with **25 new
+records**. Avoiding repeated sorting and renaming after a complete form check
+reduces the measured startup-and-expansion sequence **71.96 -> 68.45 seconds
+(4.87%)**, with identical stored evidence and no added cache. Cold checking
+remains the larger cost; the next selected original is case 1227.
+
 [Testing expansion without batch-seed copies](research/expansion-without-batch-copy.md)
 stores **82 new pattern records**, including Horn/zero-valid and 2-CNF terminals.
 Coverage remains **68/83**, with a pending split at **26 variables**. Avoiding

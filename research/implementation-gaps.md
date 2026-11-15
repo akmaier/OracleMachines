@@ -7311,3 +7311,49 @@ Reference nodes grow **4,481 -> 4,750**. Failure-only archives preserve committe
 rows as explicitly unchecked evidence and cannot become verified checkpoints.
 All **266 tests**, independent acquisition-prefix and twenty-query replay, and
 reference validation pass. No unrestricted-SAT or minimum-expansion bound follows.
+
+## 2026-11-15: checked canonical order and the next original
+
+[Checked canonical-source reuse](checked-canonical-sources.md) closes
+**case 1190**, raising structural coverage **68/83 -> 69/83**, and stores **25
+new records**. Twelve eliminations, seven binary-path reductions, four probes,
+one polarity change and one Horn/zero-valid terminal complete the pending split.
+The terminal has **8 variables / 10 clauses / 27 literals**. All twelve formerly
+unstored states now have records; the batch enters and stores 25 states.
+
+The new representation check avoids sorting and renaming only after scanning
+the source and proving that its order and compact labels already satisfy the
+old normal form. It keeps exact keys, maps, certificate policy and stored bytes;
+other sources fall back to the original normalizer. No retained cache is added.
+Two reversed-order repetitions reduce the **complete startup-and-expansion
+sequence 71.96107 -> 68.45498 seconds (4.87%)**; initial global preparation drops
+**69.51709 -> 65.98742 seconds (5.08%)**. These are development-case measurements,
+not a held-out or unrestricted-SAT guarantee. Both methods keep the batch copy;
+the preceding copy-removal regression remains unchanged.
+
+**Next discovery target:** **40/165/494**, original **case 1227**, retained index
+**38**, no pending split. Resume **`cnf-canonical-source/report.json`** with
+**`compare_cnf_canonical_source.restore_checkpoint`**, report SHA-256
+`50c57ea9172332c0bca659299311680db68097e45343f8ef91d71bce9225ed3f`.
+Use **`next_selection`**, not the completed `source`. Keep evidence
+**(1, 42, 156, 63, 1)** and **two bridges**. The restorer and independent replay
+still use the original normalizer; the new inventory is an optional equivalent
+implementation for subsequent comparisons and discovery.
+
+**Largest remaining costs:** parent restoration **134.48837 seconds** and
+initial global checking still dominate. A cold profile places normalization
+at about **20% of instrumented query time**; unit fixed-point reconstruction
+is the larger individual primitive. Investigate repeated source-bound checking
+and sharing of immutable structure before expanding caches. The existing probe
+cache evicts often, but repeated use of those evicted keys has not been measured.
+Check whether already validated authority can survive restoration into startup.
+A positive certificate does not establish complete negative frontier information.
+
+The candidate accepts **28,169 / 48,182** canonicalization calls and still pays
+**20,013** fallbacks. It replaces 11,031,610 old-normalizer input-literal charges
+but adds 16,666,740 precheck visits; these counts are not a total CPU-work saving.
+History grows **319,488 bytes** to **780,677,120 bytes / 42,475 patterns**. Delta:
+**380,928 bytes / 14,120 compressed**. Both methods retain **20,404 / 2,916**
+checked current/prepared objects; peak RAM is unmeasured. Reference nodes grow
+**4,750 -> 4,802**. All **274 tests**, independent eight-query/prefix replay and
+reference checking pass. No previous proof blocks or experiment sources change.

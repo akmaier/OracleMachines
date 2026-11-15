@@ -4171,6 +4171,44 @@ $40/165/494$ frontier. Later positive checks still cost about $2.6$ seconds
 even with no new inventory-node checks; repeated certificate traversal and
 source binding remain work. No unrestricted-SAT complexity conclusion follows.
 
+\paragraph{Conditional refutation with a shared terminal.}
+The next selected residual of case 1227 has 40 variables, 165 clauses and 494
+literal occurrences. The unchanged scheduler ranks sixteen saved pairs and
+selects local variable 20. Checked restriction yields sources of sizes
+$35/140/400$ and $37/143/415$. The first follows three new probe reductions
+through $33/130/366$ and $30/109/294$ to the empty-clause terminal. The second
+follows two new probe reductions through $34/127/357$ to the same existing
+terminal. Both restrictions are refuted. All five intermediate records have
+new source identities; only the terminal is shared. Equal rule names or shapes
+would not justify transporting these intermediate proofs between sources.
+Complete recomposition closes the original, raising structural coverage from
+$69/83$ to $70/83$. Independent reference evidence reports the original
+$48/204/612$ formula as UNSAT. No new tractable class follows.
+
+Two independent repetitions permit up to four batches, each with a 32-state
+and twelve-advance allowance, and stop when this original closes. Both stop
+after one advance and five stored admissions, with none interrupted. Mean
+local expansion costs $0.15935$ seconds; the worker, including preparation,
+checking and export, costs $1.18892$ seconds. The complete sequence costs
+$68.83255$ seconds, with observations $67.33648/70.32863$. Its initial catalog,
+global query and serialization alone cost $66.68418$ seconds. Shared parent
+restoration costs another $140.08953$ seconds; final cold route and coverage
+checking costs $73.35126$ seconds. These are repeated development-case costs,
+not a comparative speedup. In particular, the original reference search costs
+$0.47185$ seconds under a different history and certification workload; the
+local structural expansion time does not establish a faster complete solver.
+
+History grows by $73{,}728$ bytes to $780{,}750{,}848$ bytes and 42,480 patterns.
+The delta occupies 139,264 SQLite bytes or 6,803 compressed bytes, with one
+additional split sidecar. Both runs retain 20,409 current and 2,916 prepared
+checked objects; peak RAM is unmeasured. Independent reference evidence grows
+from 4,802 to 5,182 nodes and adds 3,702,784 SQLite bytes. This larger validation
+cost remains in the resource account. The next selected frontier belongs to
+case 1406 and has size $40/168/505$. Thirteen originals remain uncovered.
+Cold verification dominates this acquisition, while discovery of compact
+conditional structure on the remaining cases is still required. Neither the
+short local chains nor terminal sharing bound arbitrary-SAT expansion.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

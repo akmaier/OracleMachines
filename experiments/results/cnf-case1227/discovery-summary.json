@@ -1,0 +1,40 @@
+{
+  "admitted_entries": 5,
+  "cost_summary_sha256": "509e766700a11583f3c582d6b3d89ca5846f1aeb73cf213f3e0c67efa735d76f",
+  "distinct_admitted": 5,
+  "distinct_prefix_nodes": 6,
+  "exact_prefix_nodes_shared_with_previous_case": [],
+  "families": [],
+  "history_growth_bytes": 73728,
+  "inherited_prefix_nodes": 1,
+  "limitations": [
+    "Prefix counts describe stored single-edge chains of touched split branches, not every route or alternative in the original proof.",
+    "Repeated prefix visits include deliberate pending-split replay; a repeated visit is not a fresh stored record.",
+    "Matching rule names and family outcomes are not equivalent CNFs. Exact key intersections identify already bound pattern records only.",
+    "Source keys and node CNFs repeat serialized data, but these byte counts do not establish realizable net compression savings. SQLite pages, indexes, gzip and reconstruction are separate costs.",
+    "Two repeated development runs establish logical reproducibility, not a baseline speedup or a bound on arbitrary SAT."
+  ],
+  "new_node_kinds": {
+    "probe": 5
+  },
+  "new_prefix_nodes": 5,
+  "pattern_key_bytes": 12564,
+  "pattern_payload_bytes": 28424,
+  "prefix_node_occurrences": 7,
+  "reconstruction_sha256": "796ac97c8fabeb64d52ca8e2e515901e283431e8c96f18a39ae5972fe68a489b",
+  "repeated_entries": 0,
+  "repeated_prefix_occurrences": 1,
+  "report_sha256": "240f8151528c19ef69cac3b958abfc489710ffa1961944799d957545ff10f722",
+  "stored_cnf_literal_slots": 1832,
+  "stored_patterns": 5,
+  "structural_findings_sha256": "6ff6238a6a4702f49ebafba30cb06e8bfa8bf62422631f324a40822246b59929",
+  "timing_means": {
+    "complete_sequence_seconds": 68.83255358296447,
+    "initial_handoff_seconds": 66.68417583289556,
+    "local_expansion_seconds": 0.15935366647318006,
+    "query_serialization_seconds": 0.3486624371726066,
+    "updated_global_query_seconds": 0.24564879084937274,
+    "workers_seconds": 1.1889241666067392
+  },
+  "unstored_after_sequence": []
+}

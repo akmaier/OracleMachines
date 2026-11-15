@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Conditional refutation with a shared terminal](research/conditional-refutation-reuse.md)
+raises structural coverage to **70/83**, closing case 1227 with **five new probe
+records** and one shared contradiction terminal. Local expansion takes about
+**0.16 seconds**, while cold startup still costs about **66.68 seconds**.
+Structural storage grows **73,728 bytes**; separate reference evidence grows
+by 380 nodes. Case 1406 is the next discovery target.
+
 [Retaining checked evidence through checkpoint replay](research/checked-checkpoint-replay.md)
 reduces the measured five-checkpoint replay and startup **94.29 -> 87.71 seconds
 (6.99%)**, avoiding **4,739 repeated node verifications**. Stored evidence and

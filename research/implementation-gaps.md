@@ -7400,3 +7400,34 @@ contracts. A further specific gap is repeated expanded-certificate traversal and
 semantic rule checking: later positive checks still cost about **2.6 seconds** even when they verify
 zero new inventory nodes. Measure source/evidence binding and decoding before
 adding another cache. Current evidence supplies no unrestricted-SAT bound.
+
+## 2026-11-15: conditional refutation and shared terminals
+
+[Conditional refutation with a shared terminal](conditional-refutation-reuse.md)
+closes **case 1227**, raising structural coverage **69/83 -> 70/83**. A saved
+split exposes two chains of three and two new probe reductions. Both reach the
+same existing contradiction terminal. Two independent runs store the same
+**five new records** in one advance, with no interrupted admissions. This is
+exact terminal reuse and a new covered original, not a new tractable SAT class.
+
+Mean local expansion costs **0.15935 seconds**, the complete worker **1.18892
+seconds**, and the full sequence **68.83255 seconds**. Initial construction,
+global checking and serialization still cost **66.68418 seconds**; the separately
+charged parent restore is **140.08953 seconds**. These repeated development runs
+do not establish a speedup against another solver. Structural history grows
+**73,728 bytes** to **780,750,848 bytes / 42,480 patterns**. Reference evidence
+grows **4,802 -> 5,182 nodes**, adding **3,702,784 SQLite bytes**; that validation
+cost remains separate from the structural delta. Peak RAM is unmeasured.
+
+**Next discovery priority:** **case 1406, index 64**, **40/168/505**, no pending
+split. Resume **`cnf-case1227/report.json`** with
+**`continue_cnf_case1227.restore_checkpoint`**, report SHA-256
+`240f8151528c19ef69cac3b958abfc489710ffa1961944799d957545ff10f722`.
+Use **`next_selection`**, not the completed `source`. Preserve evidence
+**(1, 42, 156, 64, 1)** and **two bridges**. Thirteen originals remain unresolved.
+
+Cold checking remains the dominant measured cost. Continue discovery through
+retained sessions where possible; extend checked replay only with its exact
+source, policy and immutable-dependency guards. Similar reduction chains do not
+supply proof transport between different CNFs, and a short refutation on this
+case supplies no uniform acquisition bound for arbitrary SAT.

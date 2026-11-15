@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Reusing the maintained route catalog in global queries](research/maintained-global-catalog.md)
+reduces the measured warm query **1.526 -> 0.237 seconds (84.46%)**.
+The complete short sequence is slightly slower because startup checking varies;
+no total-cost improvement is established. Fresh expansion stores **27 patterns**,
+closing a residual through contradiction and Horn/zero-valid branches. Original
+coverage remains **68/83**; the next selected focus belongs to case 1190.
+
 [Separating cold global checking from indexed navigation](research/indexed-original-navigation.md)
 reduces the measured two-query sequence **138.45 -> 75.96 seconds**
 by retaining the checked inventory. The optional graph index preserves exact
@@ -39,7 +46,8 @@ closes case 1061 and raises coverage to **68/83** with **six new probe patterns*
 Retaining the session reduces the measured query-and-expansion sequence from
 **18.99 to 11.61 seconds (38.87%)**, including initial construction and binding
 to the next original. Both methods store identical evidence; retention keeps
-more checked objects in memory. Global recomposition remains the next large cost.
+more checked objects in memory. That comparison identified global checking as
+the next large cost.
 
 [Live digest scans and the next completed original](research/guarded-table-digests.md)
 raise structural coverage to **67/83**, storing **32 patterns**. Reading the live

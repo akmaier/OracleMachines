@@ -3378,3 +3378,51 @@ calls and extra argument. All **254 tests** pass; the manuscript builds to
 artifacts / 31 manifests** and **95 historical source files** are preserved.
 The new manifest binds **32 artifacts**. Validation tasks overlapped, so cold
 elapsed time is not a performance comparison.
+
+## 2026-11-15: share maintained routes with global queries
+
+[Maintained global queries](maintained-global-catalog.md) reduce mean updated
+query time **1.52633 -> 0.23719 seconds (84.46%)** while performing the same
+full composition, plan checks and original selection. Both methods retain the
+same inventory and route maintenance; the baseline rebuilds another catalog.
+The **complete short sequence regresses 70.96985 -> 71.79572 seconds (1.16%)**:
+initial checking varies more than the warm-query saving. Preserve that result;
+measure longer retained sessions before claiming a total-cost improvement.
+
+Fresh expansion stores **27 patterns** and closes the selected residual of
+**case 1443**. One cofactor reaches an inherited contradiction after two probes;
+the other uses 25 new nodes, interleaving binary-path reductions, elimination
+and probes before a polarity change exposes a **Horn, zero-valid** terminal.
+Coverage stays **68/83**: other original obligations remain. This shows a
+composable reduction chain, not a new tractable class for every CNF.
+
+**Next discovery target:** **40/163/490**, original **case 1190**, index **31**,
+no pending split. Keep the checked inventory and complete maintained catalog
+alive across several such residuals, measuring startup amortization. Investigate
+repeated reduction chains using exact certified edges, not shape similarity.
+**Largest complete-cost gap:** parent restoration **124.46543 seconds** and
+initial global checking/construction **67--69 seconds**; cold final coverage
+is **71.74615 seconds**. These dominate the remaining **0.23719-second** warm
+query. Positive-only stored proofs cannot certify negative frontier claims.
+Within the first retained worker, preparation costs **1.04254 seconds** versus
+**0.22849 seconds** local expansion; full-table digests alone cost **0.48173
+seconds**, and a complete seed copy remains. Compare removing redundant
+copying under the checked append boundary before further query tuning; retain
+the earlier append-time guarded-digest regression.
+
+Resume **`cnf-session-catalog/report.json`** using
+**`compare_cnf_session_catalog.restore_checkpoint`**, report SHA-256
+`f856409b5a58b402ccf6f545dc8570cae22952a79b2b06460a8f68ab2635e10b`.
+Use `next_selection`, not the completed `source`. Evidence is
+**(1, 42, 156, 57, 1)** with **two bridges**. History is **779,272,192 bytes /
+42,368 patterns**, up **372,736 bytes**; delta **438,272 bytes / 20,280 compressed**.
+Both methods end with **710 routes**, no pending targets, and
+**20,297 / 2,916** checked pattern/prepared objects. Catalog sharing adds no
+persistent index; peak RAM is unmeasured. Reference nodes grow **4,413 -> 4,481**;
+positive coverage stays **3,564 steps**. Guards preserve acquisition ledgers and
+reject stale authority, but rely on immutable caller-owned cached objects.
+
+All **259 tests**, independent replay of **eight global queries**, prefix
+catalog checks and reference validation pass; all **64 previous proof blocks**
+are preserved. The detailed validation record binds previous artifacts and
+sources. No unrestricted-SAT complexity or minimum-expansion bound follows.

@@ -1,0 +1,140 @@
+#!/usr/bin/env python3
+"""Cold validation and union of all acquired conditioning alternatives."""
+from collections import Counter
+from pathlib import Path
+import sys
+import tempfile
+from unittest.mock import patch
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+import experiments.compare_cnf_bootstrap as study
+
+
+def check_checkpoint(report,path):
+    before=study.sha(path)
+    if report.get('format')!='bootstrap-coverage-union-v1' or before!=report['archive']['database_sha256']:
+        raise ValueError('Invalid bootstrap checkpoint')
+    for key in ('protocol','queries','proof','pending'):
+        entry=report[key]
+        if study.sha(entry['path'])!=entry['sha256']:raise ValueError('Changed checkpoint binding')
+    protocol=study.load(report['protocol']['path']);queries=study.load(report['queries']['path']);proof=study.load(report['proof']['path'])
+    if len(queries)!=len(protocol['cases']):raise ValueError('Incomplete original query catalog')
+    h=study.CompleteAdmissionInventory(path,**protocol['options']);h.set_admission_budget(0)
+    try:
+        h.db.execute('PRAGMA query_only=ON')
+        with (study.no_acquisition(),patch.object(h,'_admit',side_effect=AssertionError('Acquisition forbidden')),
+              patch('experiments.cnf_bootstrap_conditioning.discover_simplification',side_effect=AssertionError('Fresh assumptions forbidden'))):
+            for key in study.rows(h):assert study.owner(h,key)._load(key) is not None
+            evidence=[]
+            for key,payload in h.db.execute(f'SELECT id,payload FROM {study.split.TABLE}'):
+                record=study.load_json(payload);assert study.split.record_key(record)==key
+                study.split.verify(h,record,Counter());evidence.append(record)
+            roots=[]
+            for i,(query,case) in enumerate(zip(queries,protocol['cases'],strict=True)):
+                if query['case']!=i or query['source']!=case['source']:
+                    raise ValueError('Foreign original query')
+                for depth,root in enumerate(query['roots']):
+                    assert h._canonical(case['source'],depth)[2]==root
+                if query['selected_depth'] is not None:
+                    assert type(query['selected_depth']) is int and query['selected_depth'] in (0,1)
+                    roots.append(query['roots'][query['selected_depth']])
+            assert roots==report['roots'] and len(roots)==report['coverage']
+            pending=[dict(source=rec['source'],variable=rec['variable'],value=value,target=b['edge']['key'])
+                for rec in evidence for value,b in zip((False,True),rec['branches']) if h._load(b['edge']['key']) is None]
+            assert pending==study.load(report['pending']['path'])
+            checked=study.split.verify_positive(h,proof,roots,evidence,Counter())
+            return dict(no_acquisition=True,patterns=len(study.rows(h)),pairs=len(evidence),original_bindings=len(queries),
+                covered=len(roots),positive_steps=len(checked.justified))
+    finally:h.close();assert study.sha(path)==before
+
+
+def restore_checkpoint(report_path,path):
+    report=study.load(report_path)
+    for p,digest in report['source_fingerprints'].items():
+        if study.sha(p)!=digest:raise ValueError('Changed checkpoint implementation')
+    if study.sha(report['report']['path'])!=report['report']['sha256']:raise ValueError('Changed parent report')
+    study.restore_archive(report['archive'],path)
+    checked=check_checkpoint(report,path)
+    return report,checked
+
+
+def validate(out):
+    report=study.load(out/'report.json');protocol=study.load(out/'protocol.json');seed=study.load(out/'seed.json')
+    assert study.sha(out/'protocol.json')==report['protocol_sha256'] and study.sha(out/'seed.json')==report['seed_sha256']
+    assert study.sha(protocol['parent']['path'])==protocol['parent']['sha256']
+    assert protocol['cases']==study.load(protocol['parent']['path'])['cases']
+    for p,digest in protocol['source_fingerprints'].items():assert study.sha(p)==digest,p
+    samples=list(report['samples']);diagnostic=study.load(out/'diagnostic/report.json')
+    assert diagnostic['same_graph_and_outcomes'] and diagnostic['parent_report_sha256']==study.sha(out/'report.json')
+    samples.append(dict(mode='diagnostic',repeat=0,path=str(out/'diagnostic/enumerate/report.json'),
+        sha256=diagnostic['diagnostic_report_sha256']))
+    audits=[];all_pairs={}
+    with tempfile.TemporaryDirectory() as td:
+        tmp=Path(td);path=tmp/'seed';study.restore_archive(seed['archive'],path);seed_sha=study.sha(path)
+        h=study.CompleteAdmissionInventory(path,**protocol['options']);h.set_admission_budget(0)
+        try:
+            with study.no_acquisition(),patch.object(h,'_admit',side_effect=AssertionError('Acquisition forbidden')):
+                initial=study.rows(h)
+                for key in initial:assert study.owner(h,key)._load(key) is not None
+                for case,row in zip(protocol['cases'],seed['records'],strict=True):
+                    assert h._canonical(case['source'],0)[2]==row['root']
+                    assert row['variables']==study.split.choices(h,row['leaf'],Counter(),4)
+                    assert row['variables'] and not row['closed']
+        finally:h.close();assert study.sha(path)==seed_sha
+        union=dict(initial)
+        for i,sample in enumerate(samples):
+            assert study.sha(sample['path'])==sample['sha256']
+            data=study.load(sample['path']);path=tmp/f'sample-{i}';study.restore_archive(data['archive'],path)
+            cold=study.replay(path,protocol,data['records'],data['evidence'])
+            assert cold['final_closed']==data['cold']['final_closed']
+            audits.append(dict(mode=sample['mode'],repeat=sample['repeat'],**{k:v for k,v in cold.items() if k!='proof'}))
+            h=study.CompleteAdmissionInventory(path,**protocol['options'])
+            try:
+                saved=study.rows(h);assert initial.items()<=saved.items()
+                for key,value in saved.items():assert key not in union or union[key]==value;union[key]=value
+                for key,payload in h.db.execute(f'SELECT id,payload FROM {study.split.TABLE}'):
+                    assert key not in all_pairs or all_pairs[key]==payload;all_pairs[key]=payload
+            finally:h.close()
+            for row in data['records']:
+                assert row['entered']<=40 and len(set(row['admitted_ids']))==row['entered']
+                assert set(row['stored_ids'])<=set(row['admitted_ids'])
+                assert row['candidate_counts'].get('bootstrap_fresh_assumptions',0)<=8
+        path=tmp/'union';study.restore_archive(seed['archive'],path);h=study.CompleteAdmissionInventory(path,**protocol['options']);h.set_admission_budget(0)
+        try:
+            with h.db:
+                h.db.executemany('INSERT INTO cnf_patterns_v1 VALUES (?,?)',[(k,v) for k,v in union.items() if k not in initial])
+                h.db.executemany(f'INSERT INTO {study.split.TABLE} VALUES (?,?)',list(all_pairs.items()))
+            evidence=[study.load_json(p) for p in all_pairs.values()];routes=study.routes_for(h,evidence);queries=[];roots=[]
+            for i,case in enumerate(protocol['cases']):
+                keys=[h._canonical(case['source'],d)[2] for d in (0,1)]
+                closed=[h._load(k) is not None and study.compose(h,[k],routes,Counter())[0][0] for k in keys]
+                chosen=next((d for d in (0,1) if closed[d]),None)
+                if chosen is not None:roots.append(keys[chosen])
+                queries.append(dict(case=i,source=case['source'],roots=keys,closed_by_depth=closed,selected_depth=chosen))
+            _,plan=study.compose(h,roots,routes,Counter());proof=study.expand(h,plan,roots,routes,Counter())
+            study.split.verify_positive(h,proof,roots,evidence,Counter())
+            pending=[dict(source=rec['source'],variable=rec['variable'],value=value,target=b['edge']['key'])
+                for rec in evidence for value,b in zip((False,True),rec['branches']) if h._load(b['edge']['key']) is None]
+            table_bytes=sum(len(k.encode())+len(p.encode()) for k,p in all_pairs.items())
+        finally:h.close()
+        study.write(out/'queries.json',queries);study.write(out/'proof.json',proof);study.write(out/'pending.json',pending)
+        entry=study.archive(path,out)
+        sources=dict(protocol['source_fingerprints'])
+        for p in ('experiments/validate_cnf_bootstrap.py','experiments/profile_cnf_bootstrap.py'):sources[p]=study.sha(p)
+        checkpoint=dict(format='bootstrap-coverage-union-v1',source_fingerprints=sources,archive=entry,roots=roots,
+            report=dict(path=str(out/'report.json'),sha256=study.sha(out/'report.json')),
+            protocol=dict(path=str(out/'protocol.json'),sha256=study.sha(out/'protocol.json')),
+            queries=dict(path=str(out/'queries.json'),sha256=study.sha(out/'queries.json')),
+            proof=dict(path=str(out/'proof.json'),sha256=study.sha(out/'proof.json')),
+            pending=dict(path=str(out/'pending.json'),sha256=study.sha(out/'pending.json')),
+            coverage=len(roots),uncovered_originals=[q['case'] for q in queries if q['selected_depth'] is None],
+            initial_patterns=len(initial),new_patterns=len(union)-len(initial),patterns=len(union),pairs=len(all_pairs))
+        study.write(out/'checkpoint.json',checkpoint);_,check=restore_checkpoint(out/'checkpoint.json',tmp/'cold-union')
+    result=dict(passed=True,report_sha256=study.sha(out/'report.json'),checkpoint_sha256=study.sha(out/'checkpoint.json'),
+        validator_sha256=study.sha(__file__),seed_cold_checked=True,archives=audits,union_check=check,
+        union_pattern_overlap=sum(report['summary'][m]['stored'] for m in study.MODES)-(len(union)-len(initial)),
+        pair_logical_bytes=table_bytes,pending_children=len(pending),uncovered_originals=checkpoint['uncovered_originals'])
+    study.write(out/'reconstruction.json',result)
+    print(study.encode({k:v for k,v in result.items() if k in ('passed','union_check','union_pattern_overlap','pair_logical_bytes','pending_children','uncovered_originals')}))
+
+
+if __name__=='__main__':validate(Path(sys.argv[1]))

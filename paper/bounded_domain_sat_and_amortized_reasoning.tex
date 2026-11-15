@@ -4690,6 +4690,67 @@ may still require exponentially many branches. The seed and eight comparison
 archives, all 24 unknown coverage cases, and 331 passing tests are preserved.
 The bank remains experimental, and the earlier 42-input completion is unchanged.
 
+\paragraph{Acquiring candidates through exact source conditioning.}
+A supplemental comparison reuses the same twenty-four inputs and adds an
+optional external split on any occurring variable. Both source restrictions are
+unit-closed, checked and persisted before their children are acquired. The
+checker binds the source, policy, forced assignments and child-variable
+transports. Both independently justified children are required for coverage;
+a saved pair or missing child is not a verdict. This applies the ordinary
+conditioning identity, with strictly decreasing variable support. It removes
+the binary-clause prerequisite without bounding the size of the recursion tree.
+All twenty-four selected unresolved components now offer candidates.
+
+The common seed is rebuilt under a policy permitting depth one and initially
+queried at remaining depth zero, charging 85 admissions and 168 probes. Each
+subsequent query permits forty distinct recognition admissions. External routes
+add at most four pairs, or eight separately charged source-assumption closures.
+Ordinary conditioning restarts the whole original at depth one; external routes
+preserve its depth-zero ancestors and expand one unresolved component. Thus this
+is a comparison of workflows with explicit preparation, not an equal-total-work
+comparison of variable rankings alone. The reused inputs are adaptive development
+data, not a new holdout.
+
+Ordinary depth one covers four originals, with 737 new patterns and 5,699 probes.
+The first shortest-clause candidate covers two, with 165 patterns and 1,137 probes.
+Selecting the smallest unit-closed cofactors from four candidates also covers two,
+with 173 patterns and 1,181 probes, but its success set differs from first choice.
+Trying up to four candidates under one recognition allowance covers five, with
+558 patterns and 3,946 probes. The external arms acquire respectively 48, 192 and
+172 explicit source assumptions. Ordinary conditioning's internal assumptions
+remain charged in its planner and elapsed time. Seven ordinary queries and one
+enumeration query reach the recognition cap; unknown coverage is not UNSAT.
+
+Mean query times over two reversed arm orders are 6.13657 seconds for ordinary
+depth one, 1.39313 for first choice, 2.51594 for size ranking and 7.41975 for
+enumeration. Each additionally spends approximately 0.26--0.27 seconds checking
+the seed; common preparation costs 0.76235 seconds separately. Enumeration uses
+fewer probes and stored patterns yet takes about 20.9\% longer. Working SQLite
+sizes are respectively 14,835,712, 4,558,848, 6,037,504 and 12,156,928 bytes.
+Peak process memory is not measured. Coverage, time and retained space must be
+reported together; none of these policies is shown to minimize expansion cost.
+
+\paragraph{Repeated verification is an identifiable expansion cost.}
+A separate instrumented enumeration run reproduces the same graph and counts
+3,913 split verifications for 86 distinct records during querying. After every
+new pair, the implementation rebuilds the route catalog and checks all earlier
+pairs. Together with two local checks per pair, the count is exactly
+$\sum_{j=1}^{86}j+2\cdot86=3,913$. This quadratic maintenance cost is avoidable;
+it is not a lower bound for SAT. Profiling overhead excludes that run from the
+reported timing means, and overlapping cumulative timings are not added.
+The next optimization is an incremental registry bound to immutable checked
+records, with explicit pending-child tracking and route activation. Changed
+evidence and cold reconstruction must still be checked.
+
+The preserved union contains 1,154 patterns and 96 split records, with seventeen
+missing child obligations and a checked 68-step positive proof. Union coverage
+remains five of twenty-four originals; nineteen require further discovery.
+It occupies 21,790,720 SQLite bytes, compressed to 1,055,418 bytes. All eleven
+cold archives and 335 tests pass, including exhaustive two-variable checks of
+the conditioning fibers and model lifts. These are finite structural coverage
+results. They supply no new Lean refinement, SAT/UNSAT answer, or uniform
+polynomial bound for arbitrary CNF.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

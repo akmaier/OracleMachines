@@ -1,6 +1,6 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-15 after the user's shift toward pattern discovery and a valid
+Updated 2026-11-16 after the user's shift toward pattern discovery and a valid
 partition of the entire SAT problem. This is the working record for the hourly
 investigation. Start with the [discovery plan](sat-pattern-discovery.md), then
 consult [implementation history](implementation-gaps.md),
@@ -12,7 +12,49 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: acquiring useful candidates before ranking
+## Current investigation: reuse checked conditioning records incrementally
+
+[Broader source conditioning](bootstrap-conditioning.md) removes the previous
+binary-clause prerequisite: all **24/24** selected residuals have candidates.
+Both unit-closed branches are checked and persisted before child acquisition.
+On the same frozen inputs, trying up to four candidates covers **5/24**, versus
+**4/24** for ordinary depth-one conditioning, **2/24** for first selection and
+**2/24** for smaller-cofactor selection. This is an adaptive workflow comparison:
+ordinary restarts the whole original, while external routes reuse depth-zero
+ancestors and expand one component. Forty recognition admissions and up to eight
+separately charged source assumptions are not an equal total-work allowance.
+
+**Highest credible cost saving:** replace repeated complete split-route catalog
+construction with an incremental checked registry. Enumeration uses **3,946 vs
+5,699 probes** and **558 vs 737 new patterns**, yet queries take **7.41975 vs
+6.13657 seconds**. A separate instrumented run reproduces the same graph and
+counts **3,913 split verifications for 86 records** during queries. Rechecking
+all earlier pairs after each insertion explains the count exactly:
+`86*87/2 + 2*86 = 3913`. Bind cached evidence to the exact source, full policy and
+immutable record contents; keep pending child obligations in a reverse index.
+Activate routes only when both children exist, propagate coverage correctly, and
+retain independent cold checking. No speedup is established before measurement.
+
+**Next discovery gap:** nineteen originals remain outside this finite coverage.
+After removing the verification overhead, investigate deeper interactions,
+alternative components and selectors for propagation cascades. Four choices on
+one component are not a uniformly efficient partition of arbitrary SAT.
+
+Restore `experiments/results/cnf-bootstrap-conditioning/checkpoint.json` using
+`experiments.validate_cnf_bootstrap.restore_checkpoint`. The union retains
+**1,154 patterns, 96 source pairs, 17 missing children and a 68-step positive
+proof**, with **5/24** coverage. It occupies **21,790,720 SQLite / 1,055,418 gzip
+bytes**; pooling all alternatives adds no further covered original. The earlier
+42-input and 83-source checkpoints remain complete and unchanged. All **335
+tests** and eleven cold archives pass. The initial validator's seed/union path
+collision was repaired with exact original seed hashes and retained recovery
+evidence; use only the final checkpoint.
+
+Checkpoint SHA-256: `f6754b02a68246dfe2a1bce79920a4e35b68270fe64d678986f93a552dec7ec7`.
+Validation binds **269 source files** and adds **44 manifested artifacts**;
+the next preservation audit inherits **3,067 artifacts / 50 manifests**.
+
+## Previous investigation: acquiring useful candidates before ranking
 
 [The new-input lookahead study](lookahead-bank.md) freezes 24 random 3-CNF and
 binary-mixture inputs. Under **depth-zero preparation, 22/24 selected unresolved

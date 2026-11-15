@@ -3856,3 +3856,29 @@ verification and persistence in the cost account. The new 24 depth-zero unknowns
 are distinct from the completed previous 42-input stream. All 331 tests and the
 seed plus eight comparison archives pass cold checks; all previous proofs and
 results remain intact. This is no unrestricted-SAT or negative SAT verdict.
+
+
+## 2026-11-16: broader candidates and repeated split verification
+
+[Exact source conditioning](bootstrap-conditioning.md) supplies candidates for all
+24 selected residuals, including those without binary clauses. Both unit-closed
+branches are checked and persisted before expansion. Under the supplemental
+workflow comparison, enumeration covers 5/24 versus ordinary depth one's 4/24,
+with 3,946 versus 5,699 probes and 558 versus 737 new patterns. It takes longer:
+7.41975 versus 6.13657 seconds for the query stream. First and size selection each
+cover 2/24. Source assumptions are charged separately from recognition admissions;
+ordinary restarts the original while external routes reuse depth-zero ancestors.
+
+The immediate reuse opportunity is exact incremental split verification: a
+separate diagnostic reproduces the graph and finds 3,913 checks for 86 distinct
+records. Rebuilding all earlier routes after each pair causes the quadratic sum.
+Cache immutable checked evidence with exact policy/source binding, retain pending
+child dependencies, and preserve independent cold replay. Then attack the nineteen
+uncovered originals through deeper interactions and better component/pivot choices.
+
+The union checkpoint retains 1,154 patterns, 96 pairs, 17 missing children and
+5/24 coverage. All 335 tests and eleven cold archive checks pass. The initial
+validator's archive-path collision was repaired with byte-identical original seed
+reconstruction; the failure and recovery are preserved separately. The final
+checkpoint and all earlier results remain usable. No arbitrary-SAT efficiency
+bound, SAT/UNSAT verdict or new Lean refinement is claimed.

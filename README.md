@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Broader conditioning candidates](research/bootstrap-conditioning.md) now cover
+5/24 inputs versus ordinary depth one's 4/24 in a supplemental comparison.
+Enumeration uses fewer probes and stored patterns, but takes longer. Profiling
+identifies repeated split verification as the next reuse target; all **335 tests**
+pass and all alternatives are preserved.
+
 [The new-input lookahead test](research/lookahead-bank.md) preserves a useful
 negative result: checked evidence avoids repeated probes, but this score adds
 work and no coverage. Most depth-zero residuals lack saved pairs altogether.

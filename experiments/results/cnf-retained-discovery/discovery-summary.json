@@ -1,0 +1,126 @@
+{
+  "admitted_entries": 74,
+  "cost_summary_sha256": "407eefcce166bc0243d2a328442cd4eec22edabb4e08b5dd1dbbcacd1a938500",
+  "cross_original": [
+    {
+      "left": 1062,
+      "right": 1195,
+      "shared_new_prefix_nodes": [],
+      "shared_prefix_nodes": [
+        "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a"
+      ]
+    },
+    {
+      "left": 1062,
+      "right": 1406,
+      "shared_new_prefix_nodes": [],
+      "shared_prefix_nodes": [
+        "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a"
+      ]
+    },
+    {
+      "left": 1195,
+      "right": 1406,
+      "shared_new_prefix_nodes": [],
+      "shared_prefix_nodes": [
+        "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a"
+      ]
+    }
+  ],
+  "distinct_admitted": 71,
+  "distinct_prefix_nodes": 64,
+  "exact_prefix_nodes_shared_with_previous_case": [
+    "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a"
+  ],
+  "families": [
+    {
+      "clauses": 5,
+      "key_sha256": "8f44464fc5510ae258c638961ab5ebe96395bfdbd8fa0de81027dbad072074df",
+      "literals": 14,
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "excluded",
+        "matching": "excluded",
+        "one_valid": "recognized",
+        "single_parity": "excluded",
+        "two_cnf": "excluded",
+        "zero_valid": "recognized"
+      },
+      "variables": 4
+    }
+  ],
+  "history_growth_bytes": 856064,
+  "inherited_prefix_nodes": 1,
+  "limitations": [
+    "Prefix counts describe stored single-edge chains of touched split branches, not every route or alternative in the original proof.",
+    "Repeated prefix visits include deliberate pending-split replay; a repeated visit is not a fresh stored record.",
+    "Matching rule names and family outcomes are not equivalent CNFs. Exact key intersections identify already bound pattern records only.",
+    "Source keys and node CNFs repeat serialized data, but these byte counts do not establish realizable net compression savings. SQLite pages, indexes, gzip and reconstruction are separate costs.",
+    "Two repeated development runs establish logical reproducibility, not a baseline speedup or a bound on arbitrary SAT."
+  ],
+  "new_node_kinds": {
+    "binary_paths": 13,
+    "eliminate": 27,
+    "family": 1,
+    "probe": 19,
+    "unresolved": 3
+  },
+  "new_prefix_nodes": 63,
+  "original_summaries": [
+    {
+      "batches": [
+        2,
+        3
+      ],
+      "distinct_prefix_nodes": 54,
+      "new_prefix_nodes": 53,
+      "original_case": 1062
+    },
+    {
+      "batches": [
+        1
+      ],
+      "distinct_prefix_nodes": 4,
+      "new_prefix_nodes": 3,
+      "original_case": 1195
+    },
+    {
+      "batches": [
+        0
+      ],
+      "distinct_prefix_nodes": 8,
+      "new_prefix_nodes": 7,
+      "original_case": 1406
+    }
+  ],
+  "pattern_key_bytes": 130337,
+  "pattern_payload_bytes": 396598,
+  "prefix_node_occurrences": 75,
+  "reconstruction_sha256": "742cdac9ac193bb0f33a8a0dcd50837292455d990a677ebe2b621ba16290cd80",
+  "repeated_entries": 3,
+  "repeated_prefix_occurrences": 11,
+  "report_sha256": "0d59f8bb3018c78b5da947a31d1a0d492103c15968df7d706b7ad1910b038f84",
+  "stored_cnf_literal_slots": 16278,
+  "stored_patterns": 63,
+  "structural_findings_sha256": "4c032c82d5b80dc7eaa2fae0173bc8f2ca74fe09fb0dda22022307c72ede7bfb",
+  "timing_means": {
+    "complete_sequence_seconds": 73.47861185437068,
+    "initial_handoff_seconds": 66.0900271453429,
+    "local_expansion_seconds": 1.0204682718031108,
+    "query_serialization_seconds": 1.4062739796936512,
+    "updated_global_query_seconds": 1.248315979493782,
+    "workers_seconds": 4.175114687765017
+  },
+  "unstored_after_sequence": [
+    "036ec9b7964ecf34c4d4ef458dad68bf6a816d33fab2b27621077c3940f98255",
+    "4910fe0ebec561332b8ceb456025d4ff00efdd03c54fdb16265b1e4ea71b8adc",
+    "6ea155d5975558d1ef0f1f511d44691b8381ce211047f49678852ec91e8161c7",
+    "7613f1d5cbb459298c5bb2a8fc92d0b22a942a1a161af900ba1d8163267a40b6",
+    "7e27de90c1796ef0ed505fa0496f4a17eb798a11588a24f5399e04a4ad2c63a1",
+    "7f737d486d8a94e94cf540538c7db27ebb2b276166e4f066acb0feef6893c891",
+    "801a3c6991aaa8e0bc42ed527f31debc4087170255472f075d8012339a20caf3",
+    "cf03c244335ed979e5d9615a93375313bd969e84805e60ea9f3962aef677ccdb"
+  ]
+}

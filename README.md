@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Discovery across retained original scopes](research/retained-discovery-sequence.md)
+raises structural coverage to **72/83**, covering cases 1406 and 1195 and
+preserving the partial expansion of case 1062. Four batches share one checked
+startup, store **63 records**, and take **73.48 seconds** in total, including
+**1.02 seconds** local expansion. Eight interrupted inputs and a pending
+19-variable split remain explicit; cold checking is still the dominant cost.
+
 [Conditional refutation with a shared terminal](research/conditional-refutation-reuse.md)
 raises structural coverage to **70/83**, closing case 1227 with **five new probe
 records** and one shared contradiction terminal. Local expansion takes about

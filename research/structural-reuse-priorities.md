@@ -12,7 +12,51 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: conditional refutation and shared terminals
+## Current investigation: retained discovery across original scopes
+
+[Discovery across retained original scopes](retained-discovery-sequence.md)
+raises structural coverage **70/83 -> 72/83**, covering **cases 1406 and 1195**
+before continuing into **case 1062**. Two independent four-batch runs store the
+same **63 records**: 19 probe reductions, 27 eliminations, 13 binary-path
+reductions, one family terminal and three unresolved records. They charge **74
+admission entries / 71 distinct inputs**; three entries repeat interrupted work,
+and eight inputs still have no stored record.
+
+The first two selected residuals are UNSAT, while their original formulas are
+SAT. Their checked paths include earlier conditioning, so local refutation does
+not transfer SAT truth to the original. A later **4/5/14** terminal is both
+zero-valid and one-valid, but neither Horn nor 2-CNF. It does not close case 1062's
+remaining branches. Classification coverage and SAT decision remain distinct.
+
+Mean four-batch sequence time is **73.47861 seconds**, including **66.09003
+seconds** initial catalog/global checking, **4.17511 seconds** workers and
+**1.02047 seconds** local expansion within those workers. The shared parent
+restore costs another **145.39246 seconds**. One paid startup now serves all four
+batches; no matched fresh-per-batch comparison or universal speedup is claimed.
+History grows **856,064 bytes** to **781,606,912 bytes / 42,543 patterns**.
+Reference evidence grows **5,182 -> 5,488 nodes**; peak RAM remains unmeasured.
+
+**Next priority:** resume the pending split at **19/77/261**, within **case 1062,
+index 14**. The selector's original-index list is empty for this retained work;
+independent dependency-path checking supplies the scope. Resume
+**`cnf-retained-discovery/report.json`** with
+**`continue_cnf_retained_discovery.restore_checkpoint`**, report SHA-256
+`0d59f8bb3018c78b5da947a31d1a0d492103c15968df7d706b7ad1910b038f84`.
+Use **`next_selection` and its pending split**, not the initial source bound to
+case 1406. Preserve evidence **(1, 42, 156, 69, 1)** and **two bridges**.
+
+The touched prefixes have **75 occurrences / 64 distinct records**. Within
+these prefixes across three original scopes, only the inherited contradiction terminal is shared;
+**none of the 63 new records is shared across scopes**. This limits the current
+cross-input reuse claim. Eleven originals remain uncovered. Continue the mixed reduction chains and
+measure whether any nonterminal identities or exact boundary summaries can be
+shared; matching reduction names alone is not such reuse. Keep unsuccessful
+choices and eight interrupted input identities. Cold reconstruction and checking
+remain the largest costs, and support further guarded reuse or a verified
+materialized checkpoint. No compact closure or polynomial acquisition bound for
+arbitrary SAT follows from these observations.
+
+## Previous investigation: conditional refutation and shared terminals
 
 [Conditional refutation with a shared terminal](conditional-refutation-reuse.md)
 closes **case 1227**, raising structural coverage **69/83 -> 70/83**. A saved

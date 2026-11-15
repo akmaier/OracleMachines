@@ -4209,6 +4209,53 @@ Cold verification dominates this acquisition, while discovery of compact
 conditional structure on the remaining cases is still required. Neither the
 short local chains nor terminal sharing bound arbitrary-SAT expansion.
 
+\paragraph{Continue discovery across original scopes.}
+A retained session can follow the complete global selection after each bounded
+batch, including a new original when the preceding one closes. We test four
+consecutive batches in each of two independently restored histories. Case 1406's
+$40/168/505$ residual closes with seven new probe records; case 1195's
+$40/171/517$ residual closes with three. Each splits into two refuted cofactors
+that reach the existing empty-clause terminal. Yet both original formulas are
+SAT according to independent reference evidence. Their paths include earlier
+conditioning, and refuting one conditional residual does not refute its
+original. Complete structural recomposition raises coverage from $70/83$ to
+$72/83$; it is separate from deciding SAT truth.
+
+The next selected residual belongs to case 1062 and has size $40/174/541$.
+Two further batches reduce the selected pending source first to $26/111/367$
+and then to $19/77/261$, but do not complete this original. The sequence stores
+63 records: 19 probe reductions, 27 eliminations, 13 binary-path reductions,
+one family terminal and three unresolved records. The new terminal has size
+$4/5/14$ and admits both the all-zero and all-one assignments; it is neither
+Horn nor 2-CNF. Its checked local witnesses do not discharge the other structural
+coverage obligations. The four batches charge 74 admission entries on 71 distinct
+inputs. Three entries repeat previously interrupted work; eight inputs still
+lack stored records. Those identities and the pending split remain in the
+checkpoint. Each batch keeps the 32-state and twelve-advance limits.
+
+The complete four-batch sequences take $72.80775/74.14947$ seconds, with mean
+$73.47861$. Initial catalog construction, global querying and serialization
+cost $66.09003$ seconds once per sequence; workers cost $4.17511$ seconds,
+including $1.02047$ seconds of local expansion. Updated global queries cost
+$1.24832$ seconds and their serialization $1.40627$ seconds across four batches.
+Parent restoration adds $145.39246$ seconds, and final cold route/coverage
+checking adds $71.37039$ seconds. These repeated development runs measure one
+startup serving four batches. They do not compare the same work with fresh
+startup at every batch or establish a universal speedup.
+
+History grows by 856,064 bytes to 781,606,912 bytes and 42,543 patterns. Its
+delta occupies 946,176 SQLite bytes or 39,688 compressed bytes, with five new
+split sidecars. Both runs retain 20,472 current and 2,916 prepared checked
+objects. Reference evidence grows from 5,182 to 5,488 nodes and adds 2,134,016
+SQLite bytes; peak RAM is unmeasured. Eleven originals remain uncovered.
+The touched split prefixes contain 75 node occurrences and 64 distinct records:
+all 63 new records and one inherited contradiction terminal. Within these prefixes, only that terminal
+is shared across original scopes; none of the new records is shared between them.
+Repeated reduction methods therefore do not establish reuse of arbitrary
+intermediate CNFs. All 283 tests and independent ten-query replay pass, including
+checks of all 5,488 reference nodes. Discovery of compact structure and its
+acquisition cost remain separate obligations for unrestricted SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

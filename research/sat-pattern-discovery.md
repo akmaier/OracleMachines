@@ -3734,3 +3734,17 @@ Resume the new `cnf-case1121-discovery` checkpoint's `next_selection` in a retai
 session. Eight originals remain uncovered; neither cross-original boundary sharing
 nor uniformly polynomial acquisition is established. Full costs, replay evidence
 and preservation anchors are in the linked record.
+
+## 2026-11-15: retained branches complete three more originals
+
+[The case-1063 continuation](case1063-discovery.md) raises structural coverage
+**75/83 -> 78/83**, completing cases 1063, 1371 and 1158 with **54 new records**.
+Case 1063 needs three additional records after fifty had been stored; all nine
+inputs interrupted later in case 1371 are also completed. Horn/2-CNF overlap and
+a polarity transformation into Horn remain explicit. Case 1158's selected residual
+is UNSAT while its original is SAT, preserving the need for checked conditioning
+ancestry. History adds **733,184 bytes**, separate reference evidence **3,682,304 bytes**.
+The next source is **1196 / index 36**, **43/181/549**, no pending split. Follow the
+new checkpoint's `next_selection`. Five originals remain uncovered; exact prefix
+reuse, full costs and validation are in the linked record. Coverage of this retained
+corpus remains distinct from generalization to new CNFs and an arbitrary-SAT bound.

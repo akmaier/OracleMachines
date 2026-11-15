@@ -4384,6 +4384,49 @@ checks every acquisition prefix and ten saved global queries, and verifies all
 reference nodes. All 299 tests pass. Eight originals remain structurally
 uncovered, and no uniformly polynomial acquisition bound follows.
 
+\paragraph{Complete retained branches across three originals.}
+Two further four-batch histories complete cases 1063, 1371 and 1158, raising
+checked structural coverage to $78/83$. Both store the same 54 records: 31 probes,
+twelve eliminations, six binary-path reductions, two family terminals, two unresolved
+records and one polarity transformation. They charge 63 admissions on 54 distinct
+inputs. Nine inputs interrupted in case 1371 are re-entered and completed. All
+admitted inputs have records at the end; the next selection has no pending split.
+Case 1063's remaining branch needs three new records after fifty had been stored
+in the previous checkpoint. Across both checkpoints, that original charges
+67 entries on 53 distinct inputs. This is preserved work, not a measured runtime
+comparison with fresh solving.
+
+Touched prefixes reuse sixteen exact records from case 1063's previous expansion:
+eleven eliminations, three binary-path reductions, one probe and one family terminal.
+Two inherited unresolved records now participate in the complete original-coverage
+proof through external split rules, with unchanged stored payloads. This compares
+saved positive proofs; earlier absence does not exclude a local derivation.
+Across distinct originals, the measured prefix intersections contain only a
+shared contradiction terminal.
+
+A $5/4/8$ terminal is simultaneously Horn, 2-CNF and zero-valid. A checked polarity
+transformation exposes a $10/12/25$ Horn, zero-valid terminal without changing its
+size triple. These overlapping classifications are applications of existing rules.
+All three originals are independently SAT. However, case 1158's selected
+$43/176/531$ residual and both its cofactors are UNSAT, while the $48/204/612$
+original is SAT. Its ancestry includes conditioning. Refuting that residual closes
+a restricted obligation; it does not refute the original formula. Complete
+structural classification and finding one SAT witness have different stopping
+conditions.
+
+Mean sequence time is 71.68154 seconds, including
+64.51870 seconds startup and 1.01341 seconds local expansion.
+Parent restoration adds 21.22320 seconds. History grows by 733,184 bytes
+to 784,097,280 bytes and 42,732 patterns; the structural delta occupies 802,816
+SQLite bytes or 37,148 compressed bytes. Separate reference evidence adds
+496 nodes and 3,682,304 SQLite bytes, reaching 6,779 nodes. Peak RAM is unmeasured,
+and the repeated histories are not a matched speedup comparison. Independent
+replay disables materialization and fresh search, checks every prefix and ten
+saved global queries, and verifies all reference nodes. All 299 tests pass.
+Five originals remain uncovered. Finishing this retained corpus would still
+require evaluation on new unlabelled inputs and adversarial mixtures; it would
+not establish a uniformly polynomial solution of arbitrary SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

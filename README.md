@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Completing retained branches across three originals](research/case1063-discovery.md)
+raises structural coverage **75/83 -> 78/83** with **54 new records**. Case 1063
+completes with only three additional records after fifty had been stored. Four
+batches take **71.68 seconds**, including **1.01 seconds** local expansion.
+Case 1196 is next; five originals remain uncovered.
+
 [Mixed-family discovery and the remaining frontier](research/case1121-discovery.md)
 raises structural coverage **73/83 -> 75/83**, closing cases 1121 and 1336 with
 **67 new records**. A small affine projection is checked exhaustively. Four batches

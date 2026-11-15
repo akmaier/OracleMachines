@@ -12,7 +12,40 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: preserve the pending expansion frontier
+## Current investigation: finish the five remaining originals
+
+[Resuming the retained branches](case1063-discovery.md) raises structural coverage
+**75/83 -> 78/83**, completing **1063, 1371 and 1158**. All three originals are SAT;
+1158's selected residual is UNSAT, so conditioning ancestry remains essential.
+Two independent four-batch runs store **54 records** on **63 admissions / 54 distinct
+inputs**. Case 1063 completes with three new records after fifty had been stored.
+New terminals include overlapping Horn/2-CNF/zero-valid and Horn/zero-valid cases.
+Sixteen exact prefix records are reused within case 1063; two inherited unresolved
+records now participate in the complete coverage proof without payload changes.
+Across distinct originals, measured prefix overlap reaches only the contradiction terminal.
+
+**Next:** case **1196 / index 36**, **43/181/549**, **no pending split**. Resume
+`next_selection` from `experiments/results/cnf-case1063-discovery/report.json`
+using `experiments.continue_cnf_case1063_discovery.restore_checkpoint`. The initial
+case 1063 source is already complete. Preserve evidence **(1,42,156,82,1)** and
+two bridges; all admitted inputs are stored.
+
+Mean sequence time is **71.68154 seconds**, including
+**64.51870 seconds** startup and **1.01341 seconds** local
+expansion. History adds **733,184 bytes**, separate reference evidence
+**3,682,304 bytes**. Retain one checked session and seek certified sharing beyond
+contradiction terminals. Five development originals remain uncovered; even full
+coverage of this corpus would not establish an efficient arbitrary-SAT partition.
+New unlabelled and adversarial evaluation remains necessary.
+
+Report SHA-256: `cb6211074e9cda532b0bf8323df0931bb2ae3d4d0cbdc91ebab33854ee986be5`.
+The new `validation.json` and `manifest.json` inherit **42 prior manifests /
+2,526 prior artifacts / 140 prior source fingerprints**. All 299 tests and
+independent reconstruction pass.
+The new validation binds **145 source files** and the manifest adds **124 artifacts**:
+inherit **2,650 artifacts across 43 manifests** in the next preservation audit.
+
+## Previous investigation: preserve the pending expansion frontier
 
 [Mixed-family discovery](case1121-discovery.md) raises coverage **73/83 -> 75/83**,
 closing **1121 (SAT)** and **1336 (UNSAT)**. Two independent four-batch sequences

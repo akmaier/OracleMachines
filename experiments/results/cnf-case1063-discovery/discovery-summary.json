@@ -1,0 +1,149 @@
+{
+  "admitted_entries": 63,
+  "cost_summary_sha256": "72f10992c7af0fbe13852b48c2adfbae5b1f2b39a65b06840f55c5398be093e3",
+  "cross_original": [
+    {
+      "left": 1063,
+      "right": 1158,
+      "shared_new_prefix_nodes": [],
+      "shared_prefix_nodes": []
+    },
+    {
+      "left": 1063,
+      "right": 1371,
+      "shared_new_prefix_nodes": [],
+      "shared_prefix_nodes": []
+    },
+    {
+      "left": 1158,
+      "right": 1371,
+      "shared_new_prefix_nodes": [],
+      "shared_prefix_nodes": [
+        "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a"
+      ]
+    }
+  ],
+  "distinct_admitted": 54,
+  "distinct_prefix_nodes": 71,
+  "exact_prefix_nodes_shared_with_previous_case": [
+    "100de69bfeb13c349dccc331c993945dfd0e1ace1650967c48cd289fc5848167",
+    "269311eea0b4182b10f98dccd16a80adab2bdf70fb7323d3ec5af482d88bff14",
+    "4dd9441965e19b1971f98ec9d9fe48f8a3f396b91819addd60539e3f90d828cf",
+    "5a6a922fc58530a45286066991d89374992255b09cc6de87ea8d0ff089c3888a",
+    "5c53b8290255312cc03b2fb0a15a677b92046f6edf1a9d4250fe3d079d901e85",
+    "6369a3bd243e494827bae428fa7c2906808616418cfb690d842777be9bb81e74",
+    "63987f6a378cfe0fa30bcb69c0fc3cf8f844b4018c8888324d425f208b2dc58e",
+    "881c8997f9f09fbd9d420075736dc7da42d5270b908e3ab24bfefba621ec0512",
+    "90ed518cfd5066eeb90261d2833ee7bb366d726f1c270cbf03d5c7f32ca9f978",
+    "99048fcc51b4d6bbcfbee57e74d44dd2c1ff2f46bd4fdf15ee833edf4a3499f7",
+    "c8962f878bf78788bd86e7062b8a351407dc243270e361ae21a3c9711d04f3ac",
+    "cb663ba318ead199cdb35505dc6d1ee292453ed5250f96119565f490df4ed726",
+    "d44de9bcd74e2633a00f5372807027b5e32322d40fc375a15d7c75c00f582ede",
+    "d47a3ce76155d423f90f9a49e89c2f68e5aa11bc307ef2c3d2005fadbaa144a4",
+    "f908ca20d3cadf3a4879e9f8cd99fd77b64fa02c1a08380c4f69d87701cfd7b6",
+    "fdf64adf89447c231a274bcb86c393a2722e177a5ae871a109a46b9d128dd5ec",
+    "ff3c21af599fac2ac75410812b178691e56c61d45323f83cceb3de5be52fbf4a"
+  ],
+  "families": [
+    {
+      "clauses": 4,
+      "key_sha256": "cb1fdbf630f49e3b790c58f471eacf43582be808659d6ddce842e04469a3466d",
+      "literals": 8,
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "recognized",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "excluded",
+        "two_cnf": "recognized",
+        "zero_valid": "recognized"
+      },
+      "variables": 5
+    },
+    {
+      "clauses": 12,
+      "key_sha256": "928e290bdaf809b9050cd2bb09fd0dc2e4123030e9bdff5686df3b7f17d2f71d",
+      "literals": 25,
+      "outcomes": {
+        "affine_conflict": "excluded",
+        "dual_horn": "excluded",
+        "explicit_affine": "excluded",
+        "horn": "recognized",
+        "matching": "excluded",
+        "one_valid": "excluded",
+        "single_parity": "unresolved",
+        "two_cnf": "excluded",
+        "zero_valid": "recognized"
+      },
+      "variables": 10
+    }
+  ],
+  "history_growth_bytes": 733184,
+  "inherited_prefix_nodes": 17,
+  "limitations": [
+    "Prefix counts describe stored single-edge chains of touched split branches, not every route or alternative in the original proof.",
+    "Repeated prefix visits include deliberate pending-split replay; a repeated visit is not a fresh stored record.",
+    "Matching rule names and family outcomes are not equivalent CNFs. Exact key intersections identify already bound pattern records only.",
+    "Source keys and node CNFs repeat serialized data, but these byte counts do not establish realizable net compression savings. SQLite pages, indexes, gzip and reconstruction are separate costs.",
+    "Two repeated development runs establish logical reproducibility, not a baseline speedup or a bound on arbitrary SAT."
+  ],
+  "new_node_kinds": {
+    "binary_paths": 6,
+    "eliminate": 12,
+    "family": 2,
+    "polarity": 1,
+    "probe": 31,
+    "unresolved": 2
+  },
+  "new_prefix_nodes": 54,
+  "original_summaries": [
+    {
+      "batches": [
+        0
+      ],
+      "distinct_prefix_nodes": 19,
+      "new_prefix_nodes": 3,
+      "original_case": 1063
+    },
+    {
+      "batches": [
+        3
+      ],
+      "distinct_prefix_nodes": 15,
+      "new_prefix_nodes": 14,
+      "original_case": 1158
+    },
+    {
+      "batches": [
+        1,
+        2
+      ],
+      "distinct_prefix_nodes": 38,
+      "new_prefix_nodes": 37,
+      "original_case": 1371
+    }
+  ],
+  "pattern_key_bytes": 115797,
+  "pattern_payload_bytes": 328811,
+  "prefix_node_occurrences": 75,
+  "previous_interrupted_now_stored": [],
+  "previous_interrupted_reentered": [],
+  "reconstruction_sha256": "9fd6073ff61f7845c0f1c640980ee890e114b74796993d16bccd14ed34069e85",
+  "repeated_entries": 9,
+  "repeated_prefix_occurrences": 4,
+  "report_sha256": "cb6211074e9cda532b0bf8323df0931bb2ae3d4d0cbdc91ebab33854ee986be5",
+  "stored_cnf_literal_slots": 14802,
+  "stored_patterns": 54,
+  "structural_findings_sha256": "ae590b788efd9182488494ad8df5df8531af43679d74a3a10a9ef390d3788121",
+  "timing_means": {
+    "complete_sequence_seconds": 71.68153662513942,
+    "initial_handoff_seconds": 64.51869860407896,
+    "local_expansion_seconds": 1.0134132499806583,
+    "query_serialization_seconds": 1.6519078339915723,
+    "updated_global_query_seconds": 0.9796293547842652,
+    "workers_seconds": 4.047968999948353
+  },
+  "unstored_after_sequence": []
+}

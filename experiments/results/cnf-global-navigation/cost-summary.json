@@ -1,0 +1,78 @@
+{
+  "indexed_sequence_reduction_vs_warm_full_percent": 1.4896585883307112,
+  "means": {
+    "cold_full": {
+      "final_query_seconds": 65.45308474986814,
+      "sequence_seconds": 138.45320520875975
+    },
+    "indexed": {
+      "final_query_seconds": 1.2818836874794215,
+      "sequence_seconds": 74.82933447952382
+    },
+    "warm_full": {
+      "final_query_seconds": 1.4034476873930544,
+      "sequence_seconds": 75.96089243749157
+    }
+  },
+  "phases": {
+    "cold_full": [
+      {
+        "composition_seconds": 60.57466031238437,
+        "query_seconds": 68.91274475003593,
+        "route_seconds": 8.25609835400246,
+        "selection_seconds": 0.08198202098719776,
+        "serialization_seconds": 0.3243952705524862
+      },
+      {
+        "composition_seconds": 57.38432045816444,
+        "query_seconds": 65.45308474986814,
+        "route_seconds": 7.989035832928494,
+        "selection_seconds": 0.07972383312880993,
+        "serialization_seconds": 0.3383620623499155
+      }
+    ],
+    "indexed": [
+      {
+        "composition_seconds": 60.86502393707633,
+        "query_seconds": 69.30074820807204,
+        "route_seconds": 8.366622062167153,
+        "selection_seconds": 0.069099604152143,
+        "serialization_seconds": 0.3207239580806345
+      },
+      {
+        "composition_seconds": 0.06834943778812885,
+        "query_seconds": 1.2818836874794215,
+        "route_seconds": 1.1422226664144546,
+        "selection_seconds": 0.07130893738940358,
+        "serialization_seconds": 0.33682454167865217
+      }
+    ],
+    "warm_full": [
+      {
+        "composition_seconds": 61.32245743763633,
+        "query_seconds": 69.96493639610708,
+        "route_seconds": 8.552085666451603,
+        "selection_seconds": 0.09039004216901958,
+        "serialization_seconds": 0.3344118953682482
+      },
+      {
+        "composition_seconds": 0.1983510833233595,
+        "query_seconds": 1.4034476873930544,
+        "route_seconds": 1.127768750069663,
+        "selection_seconds": 0.07732493756338954,
+        "serialization_seconds": 0.34137187502346933
+      }
+    ]
+  },
+  "retaining_inventory_sequence_reduction_percent": 45.136053496950304,
+  "scope": [
+    "Replay of the exact archived six-pattern append from 67/83 to 68/83; no newly acquired patterns, original coverage or holdout cases.",
+    "Two reversed-order repetitions of cold_full, warm_full and indexed; all pay initial construction and initial/final original selection.",
+    "cold_full reopens its inventory for the final query; warm_full retains checked nodes but fully recomposes; indexed retains nodes and coverage graphs and uses indexed closure queries in navigation.",
+    "The same conflict-checked, hash-bound append preserves old rows; all methods rebuild the complete external route catalog. Index refresh compares that whole catalog.",
+    "Indexed selection checks root/flag/catalog binding; immutable patterns, fixed policy, checked cache ownership and no concurrent changes remain caller obligations. Out-of-graph queries fall back to full composition.",
+    "Persistent authority and archived results are unchanged. Derived indexes remain in memory and are reconstructed on restart, not serialized as a trusted negative cache.",
+    "Phase timings include routes, composition, original proof checking and selection. Complete sequence also charges copying, delta checks, digests and output serialization.",
+    "Graph/cache counts and logical key bytes are not peak RAM; two observations sharing OS caches do not establish a general speedup or unrestricted SAT bound."
+  ]
+}

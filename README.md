@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Separating cold global checking from indexed navigation](research/indexed-original-navigation.md)
+reduces the measured two-query sequence **138.45 -> 75.96 seconds**
+by retaining the checked inventory. The optional graph index preserves exact
+selection but shows mixed total-cost results. This replays the saved expansion;
+coverage remains **68/83**, with no new acquisition.
+
 [Carrying checked state across original cases](research/original-session-handoff.md)
 closes case 1061 and raises coverage to **68/83** with **six new probe patterns**.
 Retaining the session reduces the measured query-and-expansion sequence from

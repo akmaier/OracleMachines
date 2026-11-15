@@ -12,7 +12,53 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: retain checked state across originals
+## Current investigation: distinguish cold checking from global graph work
+
+[The global navigation comparison](indexed-original-navigation.md) replays the
+saved six-pattern append without new acquisition. Retaining the checked inventory
+reduces the complete measured two-query sequence **138.45321 ->
+75.96089 seconds (45.14%)**, including initial
+construction and both original selections. The final query alone falls
+**65.45308 -> 1.40345 seconds**.
+Most of the old cold global cost is repeated semantic checking.
+
+**Next cost to remove:** complete route rebuilding still costs **1.12777 of
+1.40345 seconds (80.36%)** in the warm full query. Original selection costs only
+**0.07732 seconds**. Reuse the existing complete route-maintenance state during
+fresh bounded expansion and global queries; do not prioritize more selector
+micro-optimization. The index reduces graph visits (26,109 to six option-source
+checks across two graphs), but it adds retained state and changes selection time
+only slightly. All methods end with **20,270 / 2,916** checked pattern/prepared
+objects; indexes additionally retain **13,055 / 13,054-node** graphs.
+
+The new indexed selector preserves exact selections and uses full composition
+for sources outside its original graph. Both indexed updates check only
+**6 option sources**, but complete-sequence results against retained
+full composition are mixed: **74.19371/73.95375 seconds** in the first repetition
+and **75.46496/77.96803 seconds** in the second (indexed/full). Keep the index
+optional. A mean from two variable observations does not establish a stable
+net benefit or reduced peak RAM. Coverage remains **68/83**; this is replay of
+previous work, not a newly completed original.
+
+Resume fresh discovery from **`cnf-original-handoff/report.json`** using
+**`compare_cnf_original_handoff.restore_checkpoint`**. Next is **40/158/467**,
+original **case 1443**, retained index **72**, no pending split. Preserve evidence
+**(1, 42, 156, 56, 1)** and **two bridges**. Keep the inventory and complete
+maintained routes alive through a bounded sequence of new expansions and global
+queries. Cold reconstruction, initial global checking and growth of retained
+state remain open; no unrestricted-SAT efficiency bound follows.
+
+Independent cold validation passes in **259.30996 seconds**, checking all
+**twelve selections and coverage certificates** with the original algorithms on
+fresh inventories and verifying all **4,413 reference nodes**. The copied
+scheduler bodies match their frozen baseline after reversing only the closure
+calls and extra argument. All **254 tests** pass; the manuscript builds to
+**165 pages** with all **64 previous proof blocks** unchanged. All **1,634 prior
+artifacts / 31 manifests** and **95 historical source files** are preserved.
+The new manifest binds **32 artifacts**. Validation tasks overlapped, so cold
+elapsed time is not a performance comparison.
+
+## Previous investigation: retain checked state across originals
 
 [The original-transition comparison](original-session-handoff.md) closes
 **case 1061**, raising coverage **67/83 -> 68/83** with **six probe patterns**.

@@ -3931,6 +3931,39 @@ memory reduction. Avoiding repeated checking may retain more historical objects.
 The result leaves fifteen originals structurally uncovered and supplies no
 uniform bound on fresh acquisition or retained state for arbitrary CNF input.
 
+\paragraph{Separate cold global checking from indexed navigation.}
+A comparison replays the exact archived six-pattern expansion from $67/83$ to
+$68/83$ without new acquisition. Each method constructs initial global coverage,
+selects an original-bound focus, checks the saved append and queries the updated
+coverage and next focus. Two repetitions reverse the order of reopening the
+inventory, retaining only its checked objects, and retaining those objects plus
+the full and without-growth coverage indexes. All twelve original selections
+match the archived full-selector results. Retaining the inventory reduces the
+mean complete sequence from $138.45321$ to $75.96089$ seconds
+($45.14\%$), including initial construction and both queries. Its final
+query falls from $65.45308$ to $1.40345$ seconds. Most of the former
+cold global cost is repeated semantic checking, not fixed-point propagation.
+
+The indexed selector uses existing closure for sources in its complete reachable
+graph and falls back to full composition outside that graph. Root and closure
+binding and the complete external catalog are checked; immutable historical
+patterns, fixed policy and checked-object ownership remain preconditions.
+For an indexed source, a finite derivation lies within its reachable dependency
+subgraph, so its closure equals full composition rooted there. This concerns
+finite structural coverage, not SAT truth. The indexed update checks
+6 option sources across both graphs and its final complete query averages
+$1.28188$ seconds. Complete-sequence results against retaining the inventory alone
+are mixed: $74.19371$ versus $73.95375$ seconds in the first repetition and
+$75.46496$ versus $77.96803$ in the second. Two variable observations do not
+establish a stable total-cost advantage for the extra index. The full graph has
+13,055 nodes and 13,175 rules, with a second control graph retained;
+these counts are not peak RAM. Indexes remain ephemeral and are rebuilt from
+checked authority after restart. Complete route reconstruction still accounts for $1.12777$ of
+$1.40345$ seconds in the warm full query, whereas original selection costs
+$0.07732$ seconds. Reusing the complete maintained routes during fresh expansion
+is therefore the next measured opportunity. Fresh discovery on the remaining
+fifteen originals, cold reconstruction and retained-state growth remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

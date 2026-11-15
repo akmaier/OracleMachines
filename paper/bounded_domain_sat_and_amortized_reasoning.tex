@@ -4256,6 +4256,48 @@ intermediate CNFs. All 283 tests and independent ten-query replay pass, includin
 checks of all 5,488 reference nodes. Discovery of compact structure and its
 acquisition cost remain separate obligations for unrestricted SAT.
 
+\paragraph{Reuse a materialized, checked checkpoint.}
+Historical reconstruction is larger than local acquisition in the preceding
+sequence. We therefore retain an optional compressed snapshot of its final
+history after authoritative reconstruction. A descriptor bound by the experiment
+report identifies the complete SQLite file and consolidated sidecar evidence.
+On reload, full byte identity is checked before opening SQLite, including schema
+bytes, followed by all logical table digests, code and policy bindings, bridges
+and the positive proof. These checks establish equality to a previously checked
+checkpoint; an untrusted hash alone supplies no correctness argument. Each arm
+still constructs a fresh complete catalog and queries every original, since a
+positive proof does not certify the complete unresolved frontier.
+
+Two reversed-order comparisons reduce mean reconstruction from
+$155.45916$ to $9.94660$ seconds. Complete startup,
+including catalog construction, global querying and serialization, changes from
+$64.74772$ to $64.49429$ seconds. The combined sequence
+falls from $220.33037$ to $74.76157$ seconds, a
+$66.07\%$ reduction on this development history. Both independent
+historical controls and both snapshot arms reproduce identical database bytes,
+evidence, coverage and pending selection with fresh discovery disabled.
+All arms use fresh inventories in one Python process; process-global and filesystem
+caches are not cleared. This is neither a held-out solver comparison nor a
+universal speedup claim.
+
+The final resume entry point additionally binds the complete historical source
+ledger and checks 125 implementation fingerprints, including indirect helpers
+absent from the immediate report. This guard costs a separately measured
+$0.01286$ seconds beyond the matched table. All 299 tests pass.
+
+Publication from an already checked history costs $7.88791$ seconds; its
+separately charged authoritative reconstruction costs
+$150.88545$ seconds. The optional database and evidence
+objects add $87{,}337{,}082$ compressed bytes of disk storage, while the working
+history remains 781,606,912 bytes. Missing cache objects trigger authoritative
+reconstruction. All historical archives remain; no persisted Python verification
+cache or new mathematical result is introduced. Byte decoding and hashing scan
+the stored representation; table traversal, semantic checking and global startup
+remain additional costs. Peak RAM and cache eviction across many versions are
+unmeasured. Structural coverage stays at $72/83$, with case 1062's pending
+$19/77/261$ split and eight interrupted inputs unchanged. The saving reduces
+repeated acquisition preparation; it does not bound acquisition for arbitrary SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

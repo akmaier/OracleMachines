@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Materializing a checked checkpoint](research/materialized-checkpoint-reuse.md)
+reduces measured reconstruction plus complete startup **220.33 ->
+74.76 seconds (66.07%)**, with identical databases,
+evidence and pending selection. The optional cache adds **87,337,082 bytes**; its
+construction cost is charged separately. Structural coverage remains **72/83**.
+
 [Discovery across retained original scopes](research/retained-discovery-sequence.md)
 raises structural coverage to **72/83**, covering cases 1406 and 1195 and
 preserving the partial expansion of case 1062. Four batches share one checked

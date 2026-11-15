@@ -1,0 +1,66 @@
+{
+  "cache_bytes": 87337082,
+  "covered": 72,
+  "database_bytes": 781606912,
+  "database_compressed_bytes": 87129428,
+  "evidence_bytes": 1694324,
+  "evidence_compressed_bytes": 207654,
+  "future_reloads_to_repay_build_from_already_checked_history": 1,
+  "future_reloads_to_repay_extra_reconstruction_and_build": 2,
+  "limitations": "Amortization divides separately measured one-time costs by the observed mean complete-sequence saving; it is conditional on this workload and excludes cache eviction and peak RAM. Four full global queries preserve complete frontier checking. No new SAT coverage or general acquisition bound.",
+  "materialization_seconds": 7.8879105830565095,
+  "means": {
+    "legacy": {
+      "identity_audit_seconds": 0.7594364786054939,
+      "restore_seconds": 155.4591632289812,
+      "sequence_seconds": 220.33037233306095,
+      "startup_seconds": 64.74772149999626
+    },
+    "materialized": {
+      "identity_audit_seconds": 0.7574229792226106,
+      "restore_seconds": 9.946599937509745,
+      "sequence_seconds": 74.76157160452567,
+      "startup_seconds": 64.49429020821117
+    }
+  },
+  "new_patterns": 0,
+  "originals": 83,
+  "passed": true,
+  "pipeline_seconds": 752.8979515419342,
+  "preparation_restore_seconds": 150.8854467086494,
+  "report_sha256": "bb0fd50de78cbe6c7a203ba28eb256f68f61dd15ff8236bb1940e623d84b7a93",
+  "retained_checked_nodes": [
+    {
+      "current": 20472,
+      "prepared": 2916
+    },
+    {
+      "current": 20472,
+      "prepared": 2916
+    },
+    {
+      "current": 20472,
+      "prepared": 2916
+    },
+    {
+      "current": 20472,
+      "prepared": 2916
+    }
+  ],
+  "savings_percent": {
+    "restore_seconds": 93.60179243801856,
+    "sequence_seconds": 66.06842224570254,
+    "startup_seconds": 0.39141345195460786
+  },
+  "sequence_samples": {
+    "legacy": [
+      215.19881108310074,
+      225.46193358302116
+    ],
+    "materialized": [
+      75.13042483385652,
+      74.39271837519482
+    ]
+  },
+  "validator_sha256": "d4597aaea5874d29d4384f324aa272f48d145c25efe6199c6702e7fc493418e5"
+}

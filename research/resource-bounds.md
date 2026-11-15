@@ -2271,3 +2271,46 @@ bytes. Full cold audit costs 114.39522 seconds, with separate old/coupled trial
 replay taking another 69.81471. Coverage remains unchanged. The admission guard
 therefore supplies an enforceable accounting boundary but did not cause this
 run's costs or lack of coverage. It supplies no polynomial arbitrary-SAT result.
+
+## 2026-11-15: materialized checkpoint costs
+
+[Materializing a checked checkpoint](materialized-checkpoint-reuse.md) reduces
+measured reconstruction **155.45916 -> 9.94660 seconds**.
+Including a fresh complete catalog and global query, mean startup falls
+**220.33037 -> 74.76157 seconds (66.07%)**.
+Two reversed-order repetitions reconstruct byte-identical databases, retain all
+five evidence groups and two bridges, and select the same pending split.
+This is a checkpoint-reuse result; structural coverage remains **72/83** and no
+new patterns or reference proofs are acquired.
+
+The optional compressed snapshot adds **87,337,082 bytes** of local disk storage.
+Publication from an already checked history costs **7.88791 seconds**; a
+separate authoritative reconstruction costs **150.88545 seconds**.
+Both are charged. The fast path checks the complete database byte identity
+before opening SQLite, all logical table digests, code/policy/parent bindings,
+all sidecar bytes, bridges and the positive coverage proof. Complete catalog and
+negative-frontier checking remain separate, paid startup work. A hash is useful
+only relative to the descriptor bound by the reviewed experiment report.
+
+**Next priority:** use the optional restorer in
+`experiments.cnf_materialized_resume.restore_checkpoint` with
+`experiments/results/cnf-materialized-checkpoint/report.json`, or the unchanged
+`continue_cnf_retained_discovery.restore_checkpoint` with the acquisition report.
+The final entry point additionally checks all **125 historical source fingerprints**;
+this separately measured guard costs **0.01286 seconds**. All **299 tests** pass.
+Both return the same acquisition state. Resume its **`next_selection` plus
+pending split at 19/77/261**, case **1062 / index 14**, whose selector original-index
+list remains empty. Preserve evidence **(1,42,156,69,1)**, **two bridges** and the
+**eight interrupted input identities** in the acquisition artifacts. Eleven
+originals remain structurally uncovered. With reconstruction reduced, complete
+startup checking (64.49429 seconds) remains the largest repeated
+cost; keep one checked session across further discovery batches. Investigate
+shared nonterminal or boundary descriptions in the pending mixed reductions.
+No compact closure or uniformly polynomial acquisition bound is established.
+
+The optional cache adds 87,337,082 bytes; the decoded history remains 781,606,912 bytes.
+Let B be database bytes, S sidecar bytes and C compressed bytes. The loader scans
+O(B+S+C) bytes for decoding and identity checks, plus ordered table traversal,
+positive verification and the complete global catalog/query. It persists no Python
+verifier objects. Peak RAM is unmeasured. Across many retained versions, full
+snapshot space would sum their C values; eviction and shared storage remain open.

@@ -3282,3 +3282,53 @@ Resume `cnf-guarded-digests/report.json` via
 `compare_cnf_guarded_digests.restore_checkpoint`; use `next_selection` because
 `source` is completed. Detailed bounds, preconditions and validation are in the
 linked investigation and checkpoint artifacts.
+
+## 2026-11-15: checked state across original cases closes case 1061
+
+The [original-transition comparison](original-session-handoff.md) replays the
+completed case-1120 query, checks the binding to case 1061 and then compares
+restarting with retaining that checked session. Two reversed-order repetitions
+per method each store the same six probe patterns. Their two conditional chains
+reach an inherited empty-clause contradiction. Coverage rises **67/83 -> 68/83**;
+all admissions are complete. The raw new patterns are neither Horn, dual-Horn nor
+2-CNF and accept neither uniform assignment. This is checked reduction to shared
+contradiction evidence, not a new claim of tractability for their raw class.
+The conditional residual is UNSAT, while original case 1061 has an independently
+checked SAT model. Completing that residual covers one obligation of the original;
+it does not refute the original formula.
+
+Mean complete sequence time falls **18.99400 -> 11.61121 seconds (38.87%)**,
+including the initial construction, stored-original query, original binding and
+expansion. Worker-only time falls **8.56483 -> 0.94843 seconds**; this excludes
+the common initial query. Retention ends with **3,100 / 108** checked pattern and
+prepared objects, versus **2,453 / 11** after restart. Those separate cache counts
+are not peak RAM. Persistent evidence is identical between methods. History
+grows **77,824 bytes** to **778,899,456 bytes / 42,341 patterns**. The union delta
+is **7,095 compressed bytes**; reference nodes increase **4,198 -> 4,413** and
+positive coverage steps **3,518 -> 3,564**.
+
+The next large live cost is global recomposition and navigation: final route
+preparation plus coverage takes **69.64522 seconds**, versus **0.14447 seconds**
+mean retained local expansion. Compare `CoverageIndex` with full composition on
+exact appends, including complete catalog changes, implicit rules and pending
+activation. The current transition consumes an already checked global selection;
+it does not maintain that selector incrementally. Parent replay remains a
+separate **119.01318-second** cold cost. No global minimum-expansion or uniformly
+polynomial arbitrary-CNF guarantee follows.
+
+Resume `cnf-original-handoff/report.json` through
+`compare_cnf_original_handoff.restore_checkpoint`, preserving evidence
+**(1, 42, 156, 56, 1)** and **two bridges**. Follow `next_selection`, since the
+report's `source` is completed: **40/158/467**, original **case 1443**, retained
+index **72**, no pending split. The linked record supplies exact source and
+report hashes, costs, contracts and validation commands.
+
+Independent cold replay passes in **514.17263 seconds**, reproducing all four
+arms without fresh recognition or reference search and checking all **4,413
+reference nodes**. All **4,198 prior reference payloads**, **1,567 artifacts /
+30 prior manifests** and **91 historical source files** are unchanged. All
+**249 tests** pass; the manuscript builds to **164 pages** with **64 previous
+proof blocks** preserved. The new manifest binds **67 artifacts**. Cold validation
+overlaps other checks and is not a speed comparison. The validation record also
+preserves the corrected interpretation: conditional refutations do not imply
+that the original is UNSAT; its SAT model is independently checked.

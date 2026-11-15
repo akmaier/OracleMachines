@@ -12,7 +12,60 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: live scans, original coverage and a retained regression
+## Current investigation: retain checked state across originals
+
+[The original-transition comparison](original-session-handoff.md) closes
+**case 1061**, raising coverage **67/83 -> 68/83** with **six probe patterns**.
+Two reversed-order repetitions per method produce identical operations and
+stored evidence. Retaining the session reduces the complete measured sequence
+**18.99400 -> 11.61121 seconds (38.87%)**, including initial construction,
+replay of completed case 1120, binding to case 1061 and expansion. This replays
+the already stored case-1120 result; it does not acquire that original again.
+The worker-only reduction **8.56483 -> 0.94843 seconds** excludes the common
+initial query. Retention increases live checked-cache counts and saves no
+persistent space. Both new cofactor chains reach an inherited contradiction.
+The selected conditional residual is UNSAT; original case 1061 is SAT, with a
+checked model. Structural coverage of the original is the completed obligation.
+
+1. **Maintain global coverage and original navigation across expansions.**
+   Final route preparation and global coverage still cost **69.64522 seconds**,
+   versus **0.14447 seconds** mean retained local expansion. Compare the existing
+   `CoverageIndex` with full recomposition on matched appends, checking complete
+   catalog updates, implicit rules and activation of formerly missing targets.
+   The current transition consumes an already selected original-bound focus;
+   it does not yet maintain global selection incrementally.
+2. **Use the retained session on the next unresolved interaction.** Next is
+   **40/158/467**, original **case 1443**, retained index **72**, no pending split.
+   Inspect its saved pairs and conditional reductions. The previous transition
+   needed only six probe nodes and the existing contradiction terminal, so
+   acquisition was much cheaper than repeated checking and navigation. That is
+   a finite observation, not a bound for the remaining fifteen originals.
+3. **Separate cold reconstruction and live memory from warm gains.** Parent
+   replay costs **119.01318 seconds**. Retention ends with **3,100 checked pattern
+   objects / 108 prepared checked objects**, versus **2,453 / 11** after restart.
+   These counts are not peak RAM; cache lifetime and eviction remain open.
+   Guarded digest reuse remains experimental after the previous regression.
+
+Resume **`experiments/results/cnf-original-handoff/report.json`** with
+**`compare_cnf_original_handoff.restore_checkpoint`**, SHA-256
+`6944b224d026a09bc6aa1bc6bb118d55b29a94a851ef2f2fcc2054f7c9358175`.
+Evidence is **(1, 42, 156, 56, 1)** with **two bridges**. Use `next_selection`,
+source hash `275abd014656ded13e9b3acab99c976726b7ca9b424f91c71d1a6ea057fd21f6`;
+the report's `source` is completed. History is **778,899,456 bytes / 42,341
+patterns**, up **77,824 bytes**. The delta is **7,095 compressed bytes**;
+reference nodes grow **4,198 -> 4,413** and positive coverage steps **3,518 ->
+3,564**. All **709 activation routes** have available targets. No unrestricted
+SAT efficiency or minimum-expansion guarantee follows.
+
+Independent cold replay passes in **514.17263 seconds**, reproducing all four
+arms and checking **4,413 reference nodes**. All **249 tests** and the
+**164-page** manuscript build pass; **64 previous proof blocks** remain
+unchanged. All **1,567 artifacts / 30 prior manifests**, **91 historical source
+files** and **4,198 prior reference payloads** are preserved. The new manifest
+binds **67 artifacts**. Validation work overlapped; its elapsed time is not a
+performance comparison.
+
+## Previous investigation: live scans, original coverage and a retained regression
 
 [The matched digest investigation](guarded-table-digests.md) closes the saved
 34-variable interaction and original **case 1120**. All six independent runs

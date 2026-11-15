@@ -3894,6 +3894,43 @@ and coverage cost $69.46916$ seconds. These costs remain separate from the
 $0.17183$-second mean local expansion and from parent reconstruction. The result
 closes one retained original and adds no unrestricted-SAT efficiency guarantee.
 
+\paragraph{Retain checked state when changing the original input.}
+Certificate authority depends on the fixed policy, immutable history and checked
+route catalog, not on which original is currently selected. A further comparison
+queries the already completed case 1120, checks that the next focus is an open
+selected leaf of case 1061, and then either discards or retains the session.
+Both methods charge initial construction, the completed query and the new
+original binding. This setup replays stored knowledge; it does not acquire
+case 1120 again. Two repetitions per method in reversed order produce identical
+operations and evidence. Each stores six probe patterns, closes case 1061 and
+raises original coverage from $67/83$ to $68/83$. The saved pair's $37/150/452$
+and $36/148/444$ targets reach the inherited empty-clause contradiction through
+two and four new probe nodes. No new tractable-family terminal is needed.
+These are conditional residuals: the original case 1061 is satisfiable, with an
+independently checked model. Refuting the selected residual completes one part
+of its structural coverage and does not refute the original formula.
+
+Mean complete sequence time falls from $18.99400$ to $11.61121$ seconds
+($38.87\%$). The worker alone falls from $8.56483$ to $0.94843$ seconds, but that
+comparison excludes the common initial query. Its repeated session construction
+of $7.61459$ seconds is replaced by a $0.00374$-second boundary guard. The initial
+construction remains charged, and original binding still costs about 1.2
+seconds. Under exclusive ownership, the session checks versions, policy,
+sidecars and maintained updates before reuse. Cold reconstruction retains its authority
+checks. These observations do not establish a constant-time transition or a
+general speedup: global route preparation and coverage still cost $69.64522$
+seconds, and parent reconstruction costs $119.01318$ seconds. The next target is
+incremental global coverage and original navigation, including implicit rules
+and newly available targets.
+
+Persistent history grows by 77,824 bytes to 778,899,456 bytes and 42,341 patterns;
+both methods store identical evidence. Retention ends with 3,100 checked pattern
+objects and 108 prepared checked objects, versus 2,453 and 11 after restarting.
+These separate entry counts describe retained cache state, not peak RAM or a
+memory reduction. Avoiding repeated checking may retain more historical objects.
+The result leaves fifteen originals structurally uncovered and supplies no
+uniform bound on fresh acquisition or retained state for arbitrary CNF input.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

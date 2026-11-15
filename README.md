@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Carrying checked state across original cases](research/original-session-handoff.md)
+closes case 1061 and raises coverage to **68/83** with **six new probe patterns**.
+Retaining the session reduces the measured query-and-expansion sequence from
+**18.99 to 11.61 seconds (38.87%)**, including initial construction and binding
+to the next original. Both methods store identical evidence; retention keeps
+more checked objects in memory. Global recomposition remains the next large cost.
+
 [Live digest scans and the next completed original](research/guarded-table-digests.md)
 raise structural coverage to **67/83**, storing **32 patterns**. Reading the live
 database reduces observed worker time by **32.6%** against scanning its copy.

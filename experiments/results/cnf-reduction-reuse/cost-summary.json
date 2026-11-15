@@ -1,0 +1,123 @@
+{
+  "batches": [
+    {
+      "admitted": 32,
+      "batch": 0,
+      "completed": 16,
+      "costs_seconds": {
+        "acquisition_seconds": 0.04903650004416704,
+        "coverage_seconds": 0.0006159581243991852,
+        "route_refresh_seconds": 0.012608916033059359,
+        "selection_seconds": 0.058152916841208935
+      },
+      "expansion_seconds": 0.12041429104283452,
+      "export_seconds": 0.01868720818310976,
+      "history_bytes": 778182656,
+      "preparation_seconds": 13.110947417095304,
+      "profiled": false,
+      "repeat": 0,
+      "session_startup_seconds": 7.5396175417117774,
+      "steps": 1,
+      "target_closed": false,
+      "unfinished": 16,
+      "worker_seconds": 13.332022708375007
+    },
+    {
+      "admitted": 32,
+      "batch": 1,
+      "completed": 19,
+      "costs_seconds": {
+        "acquisition_seconds": 0.08083587512373924,
+        "coverage_seconds": 0.001120958011597395,
+        "route_refresh_seconds": 0.024132125079631805,
+        "selection_seconds": 0.11631087493151426
+      },
+      "expansion_seconds": 0.2223998331464827,
+      "export_seconds": 0.013448874931782484,
+      "history_bytes": 778416128,
+      "preparation_seconds": 4.208636625204235,
+      "profiled": false,
+      "repeat": 0,
+      "session_startup_seconds": 0.0038962499238550663,
+      "steps": 2,
+      "target_closed": false,
+      "unfinished": 13,
+      "worker_seconds": 4.532566417008638
+    },
+    {
+      "admitted": 32,
+      "batch": 0,
+      "completed": 16,
+      "costs_seconds": {
+        "acquisition_seconds": 0.13306437525898218,
+        "coverage_seconds": 0.0010921251960098743,
+        "route_refresh_seconds": 0.015742875169962645,
+        "selection_seconds": 0.1713892500847578
+      },
+      "expansion_seconds": 0.3212886257097125,
+      "export_seconds": 0.03718283399939537,
+      "history_bytes": 778182656,
+      "preparation_seconds": 27.171630832832307,
+      "profiled": true,
+      "repeat": 1,
+      "session_startup_seconds": 22.182427249848843,
+      "steps": 1,
+      "target_closed": false,
+      "unfinished": 16,
+      "worker_seconds": 27.755806249566376
+    },
+    {
+      "admitted": 32,
+      "batch": 1,
+      "completed": 19,
+      "costs_seconds": {
+        "acquisition_seconds": 0.21264341659843922,
+        "coverage_seconds": 0.0019737090915441513,
+        "route_refresh_seconds": 0.02919600112363696,
+        "selection_seconds": 0.343452709261328
+      },
+      "expansion_seconds": 0.5872658360749483,
+      "export_seconds": 0.014273792039602995,
+      "history_bytes": 778416128,
+      "preparation_seconds": 3.953711291309446,
+      "profiled": true,
+      "repeat": 1,
+      "session_startup_seconds": 0.003933874890208244,
+      "steps": 2,
+      "target_closed": false,
+      "unfinished": 13,
+      "worker_seconds": 4.788958583027124
+    }
+  ],
+  "limitations": [
+    "Two independent retained sequences, each with up to two consecutive bounded batches; reproducibility and discovery, not a comparative speedup.",
+    "Resume the globally selected pending pair within the still-open original-bound focus. Preserve both polarities.",
+    "Each batch has twelve advances and its own 32-state allowance; up to 64 entries per sequence, including repeated unfinished inputs. Stop once the focus closes.",
+    "Both repeats reuse the unchanged worker and its scheduler. The second repetition is instrumented; its timings diagnose cost and are not comparable speed measurements.",
+    "Preparation, acquisition, route updates, coverage, persistence, reconstruction and reference checks are separate costs.",
+    "Development cases, shared OS caches, no holdout or confidence intervals. Stored bytes are not peak RAM.",
+    "No globally minimal expansion, polynomial unrestricted-SAT algorithm or P-versus-NP conclusion."
+  ],
+  "sequences": [
+    {
+      "admitted": 64,
+      "batches": 2,
+      "completed": 35,
+      "profiled": false,
+      "repeat": 0,
+      "seconds": 18.124639958608896,
+      "startup_mode": "retained",
+      "worker_seconds": 17.864589125383645
+    },
+    {
+      "admitted": 64,
+      "batches": 2,
+      "completed": 35,
+      "profiled": true,
+      "repeat": 1,
+      "seconds": 32.95838683331385,
+      "startup_mode": "retained",
+      "worker_seconds": 32.5447648325935
+    }
+  ]
+}

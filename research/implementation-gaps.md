@@ -7056,3 +7056,41 @@ plan and the empty-CNF terminal, distinct from the newly recognized Horn
 terminal. The manuscript preserves all 64 proof blocks and builds to 163 pages
 without overfull boxes or undefined references. The checkpoint manifest and
 `validation.json` bind the audit, results, source fingerprints and checks.
+
+
+## 2026-11-15: mixed conditional terminals and preparation profile
+
+The [new continuation](reduction-reuse-profile.md) resumes the exact pending
+25-variable split inside case 1120's original-bound focus. It stores 35 patterns
+and reaches a 7/7/19 zero-valid terminal outside Horn, dual-Horn and 2-CNF, plus
+a 6/6/12 2-CNF terminal outside Horn, dual-Horn and both uniform-assignment
+classes. The conditional pair closes; the enclosing focus remains open and
+coverage stays 66/83. The next saved pair is 34/120/355, with pending targets
+31/102/295 and 31/104/295. Sixteen first-batch interruptions are charged again;
+thirteen final inputs remain unstored.
+
+Ordinary workers cost 17.86459 seconds, including 17.31958 seconds preparation
+and 0.34281 seconds expansion. A separate instrumented repetition locates the
+remaining second-batch cost: 3.78143 of 4.78940 seconds recomputes all eight table
+digests. Profiling timings are diagnostic, not a comparative speedup. Investigate
+per-table costs and checked reuse of unchanged digests; changed tables and
+cold authority still require validation. A key-ordered digest cannot generally
+be updated by hashing newly appended rows alone.
+
+History grows by 430,080 bytes to 778,416,128 bytes / 42,303 patterns. The union
+delta occupies 18,876 compressed bytes and adds one split sidecar. All previous
+reference payloads are preserved; reference nodes grow to 4,153. The global
+positive certificate stays byte-identical. Resume `cnf-reduction-reuse/report.json`
+through `continue_cnf_reduction_reuse.restore_checkpoint`, preserving evidence
+(1, 42, 156, 55, 1) and two bridges. The linked record supplies source hashes,
+commands, profile data, limitations and the distinction between focus and pending
+interaction. No efficient arbitrary-CNF guarantee is inferred.
+
+Independent cold replay passes in **417.85190 s**, checking every intermediate
+catalog with fresh discovery and reference search disabled. It verifies all
+**4,153 reference nodes**, preserves all **4,114 prior payloads** and all
+**1,428 artifacts / 28 prior manifests**, and confirms exact reuse of the sixteen
+completed false-cofactor certificates. All **238 tests** pass; the manuscript
+builds to **163 pages** with all **64 previous proof blocks** unchanged. The
+checkpoint manifest binds **65 artifacts**, with commands and limitations in
+`validation.json`.

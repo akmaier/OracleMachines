@@ -12,7 +12,56 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: exclude renaming proposals and continue case 1120
+## Current investigation: mixed terminal classes and repeated table scans
+
+[The conditional continuation and profile](reduction-reuse-profile.md) store
+**35 patterns**, completing the saved 25-variable split through **7/7/19
+zero-valid** and **6/6/12 2-CNF** terminals. Neither terminal is Horn or dual-Horn;
+the second accepts neither uniform assignment. The original-bound focus remains
+open and coverage stays **66/83**. Both repetitions produce identical logical
+work; only the second is instrumented.
+
+1. **Measure and avoid redundant full-table digest scans.** Ordinary workers
+   total **17.86459 s**, with **17.31958 s** preparation and **0.34281 s** expansion.
+   The second instrumented batch spends **3.78143 of 4.78940 s** recomputing all
+   eight table digests, versus **0.13202 s** copying and **0.00393 s** guarding the
+   retained session. Profile per table, then compare checked reuse of unchanged
+   table digests on the same expansion. Changed tables still require correct
+   recomputation or an incremental structure; the existing key-ordered hash is
+   not an append-only transcript. Retain cold authority checks and invalidation.
+2. **Continue the next mixed interaction and inspect exact reuse.** The pending
+   **34/120/355** split has **31/102/295** and **31/104/295** targets, both absent.
+   Preserve the saved pair and the completed conditional evidence. Investigate
+   convergence after checked reduction across different recognized classes,
+   rather than expecting the raw cofactors to have identical syntax.
+3. **Bound repeated unfinished work explicitly.** The two batches charge 64
+   admissions, store 35 patterns and leave 13 final inputs unstored. Sixteen
+   first-batch interruptions are charged again. Checked local continuations
+   remain a possible improvement; no arbitrary-CNF decomposition-size, cache-
+   size or efficient-recognition bound follows from these finite runs.
+
+Resume **`experiments/results/cnf-reduction-reuse/report.json`** through
+**`continue_cnf_reduction_reuse.restore_checkpoint`**, report SHA-256
+`e6610fbbbbd52dcc6986ca8881f4e8aea1a3ba16ef33fb9beee5b42ec978337e`.
+Preserve evidence **(1, 42, 156, 55, 1)** and **two bridges**. Read `next_selection`;
+its pending source hash is
+`1aa4a355993275a5aed0d3f263d5e5d2078b4fd6330ce9f8eb3d864fec88db6a`.
+The focus remains original **case 1120**, retained index **22**. History grows
+**430,080 bytes** to **778,416,128 bytes / 42,303 patterns**; the union delta is
+**18,876 compressed bytes**. Reference nodes grow **4,114 -> 4,153**; the global
+positive certificate remains byte-identical. Instrumented and ordinary timings
+must stay separate. No runtime or memory reduction is established by this run.
+
+Independent cold replay passes in **417.85190 s**, checking every intermediate
+catalog with fresh discovery and reference search disabled. It verifies all
+**4,153 reference nodes**, preserves all **4,114 prior payloads** and all
+**1,428 artifacts / 28 prior manifests**, and confirms exact reuse of the sixteen
+completed false-cofactor certificates. All **238 tests** pass; the manuscript
+builds to **163 pages** with all **64 previous proof blocks** unchanged. The
+checkpoint manifest binds **65 artifacts**, with commands and limitations in
+`validation.json`.
+
+## Previous investigation: exclude renaming proposals and continue case 1120
 
 [The signed-renaming audit](signed-renaming-filter.md) distinguishes all **32
 candidate targets** and excludes all **496 pairwise signed variable bijections**.

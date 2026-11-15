@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Following reductions across different SAT classes](research/reduction-reuse-profile.md)
+stores **35 patterns** and completes a conditional pair through a zero-valid
+terminal and a 2-CNF terminal. Coverage remains **66/83**. Profiling identifies
+full-table digest rescanning as the main remaining second-batch preparation
+cost; this diagnosis establishes no new speedup.
+
 [Checking signed-renaming reuse before expansion](research/signed-renaming-filter.md)
 excludes all **496 pairs** among the next 32 candidate targets using clause widths
 and occurrence counts. Matching shapes were insufficient. The unchanged expansion

@@ -3063,3 +3063,60 @@ prior manifests** and all **3,781 prior reference payloads** are preserved.
 The new manifest binds **73 artifacts / 3,954,783 bytes**, including the rejected
 attempt. Exact commands, source fingerprints, concurrency notes and checks
 are in `experiments/results/cnf-append-export-checked/validation.json`.
+
+## 2026-11-15: reuse checked state across bounded expansion batches
+
+[The retained-session study](retained-expansion-session.md) profiles startup
+before changing it. Checked route construction takes **7.56459 of 8.83102 s**
+in the uninstrumented sample. The helper retains the same verified inventory,
+cache and complete maintained catalog across batches. It resets only the
+admission ledger after checking write/schema versions, maintenance state,
+sidecars and policies. This requires exclusive ownership and immutable old
+rows/cached objects. Cold process restart still reconstructs checked authority.
+
+Two reversed-order repetitions compare two consecutive 32-entry batches under
+each policy. The mean sum of complete workers falls **23.32780 -> 16.18611 s
+(30.61%)**, including initial checking. Both policies enter **64 states**, store
+**44 patterns** and produce identical per-batch deltas. Thirteen unfinished
+first-batch entries are charged again; seven final entries remain unfinished.
+Session retention preserves completed checking, not unfinished recursive work.
+The producer separately charges **95.47416 s** historical restoration and
+**69.18542 s** final route preparation/global coverage. The retained second
+worker still spends **3.69664 s** on preparation; snapshot copying and digests
+need separate measurement before the next optimization.
+
+The acquired nodes include conditional **6/7/18 Horn/one-valid/zero-valid** and
+**4/3/6 Horn/2-CNF/zero-valid** terminals. Coverage stays **66/83**. The frontier
+shrinks to **two open splits / no acquired open leaf / one pending target**.
+The remaining **36/144/434** source has an acquired false **31/120/344** child
+and a pending true **32/110/308** child. Resume that exact split while preserving
+the acquired child. The method note binds source and target hashes.
+
+History grows **540,672 bytes** to **776,871,936 bytes / 42,185 patterns**.
+The union adds **44 patterns / two split sidecars / no external probe rows**,
+retaining **622,592 SQLite bytes / 22,766 compressed bytes**. Reference evidence
+grows **3,803 -> 3,830 nodes**; the positive certificate remains **3,360 steps**.
+The index ends with **701 routes / one missing-target link**. Retention extends
+cache lifetime and gives no persistent-space or measured peak-RAM reduction.
+
+Resume `experiments/results/cnf-expansion-session/report.json` through
+`compare_cnf_expansion_session.restore_checkpoint`, SHA-256
+`a9133c94e01789bb80298de290f17177f71ae428f6d827142bd287722dca9793`.
+Keep evidence **(1, 42, 156, 48, 1)** and **two bridges**. Further priorities are
+the pending conditional branch, separately measured snapshot/cold costs, and
+checked local continuation of unfinished recognition. No new tractability or
+Lean theorem, compact-state bound or efficient arbitrary-SAT partition is claimed.
+
+Independent cold replay passes in **518.83008 s**, reproducing all eight
+workers and their intermediate catalogs without fresh discovery or reference
+search. It verifies **3,830 reference nodes**. All **233 tests** pass. The
+manuscript builds to **162 pages**, with no overfull boxes or undefined
+references; all **64 previous proof blocks** remain unchanged. All **1,220
+artifacts across 25 prior manifests** and all **3,803 previous reference
+payloads** are preserved. The new manifest binds **101 artifacts / 4,289,703
+bytes**, including the startup profile, eight workers, cold replay, structural
+findings and test/build logs. The initial failed external-write test fixture
+is retained and explained; its correction changes stored bytes rather than
+issuing an external no-op update. Exact commands, source fingerprints and
+concurrency notes are in
+`experiments/results/cnf-expansion-session/validation.json`.

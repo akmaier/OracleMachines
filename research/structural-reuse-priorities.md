@@ -12,7 +12,60 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: guarded delta export and a conditional one-valid branch
+## Current investigation: retain checked state across expansion batches
+
+[The startup profile and matched comparison](retained-expansion-session.md)
+identify repeated route checking as the dominant warm preparation cost.
+Keeping the live checked inventory and maintained catalog across two 32-entry
+batches reduces their mean combined worker time **23.32780 -> 16.18611 s
+(30.61%)**, including initial checking. Second-batch startup falls
+**7.40238 -> 0.00404 s**. The boundary rejects unmaintained writes, changed
+policies, sidecars and external versions before resetting the admission ledger.
+It requires exclusive ownership and immutable old rows/caches; cold restart
+still reconstructs and checks authority. Cache lifetime increases; this is not
+a memory reduction.
+
+1. **Resume the remaining conditional interaction.** Both methods store the
+   same **44 patterns**, including **6/7/18** and **4/3/6 Horn terminals**, while
+   coverage remains **66/83**. The new **36/144/434** split has an acquired false
+   **31/120/344** child and a pending true **32/110/308** child. Preserve the false
+   child and resume the exact pair, charging the seven unfinished entries again.
+2. **Separate the remaining preparation and cold costs.** The retained second
+   worker still spends **3.69664 s** in preparation, including copying and table
+   digests. Profile those phases before selecting another shortcut. Historical
+   restoration costs **95.47416 s** and final global checking **69.18542 s** outside
+   the paired workers; neither benefits from live session retention.
+3. **Preserve unfinished recognition safely.** Thirteen first-batch entries
+   must be charged again in the second batch. A live checked cache does not save
+   those unfinished recursive computations. Checked local continuations remain
+   a distinct gap, with source/target bindings and branch obligations required.
+
+Resume **`experiments/results/cnf-expansion-session/report.json`** through
+**`compare_cnf_expansion_session.restore_checkpoint`**, SHA-256
+`a9133c94e01789bb80298de290f17177f71ae428f6d827142bd287722dca9793`.
+Keep evidence **(1, 42, 156, 48, 1)** and **two bridges**. The linked note binds
+the pending targets. The frontier has **two open splits / no acquired open leaf /
+one pending target**. History is **776,871,936 bytes / 42,185 patterns**, growing
+**540,672 bytes**; the union delta is **22,766 compressed bytes**. Reference
+evidence has **3,830 nodes**, the positive certificate **3,360 steps**, and the
+live index **701 routes / one missing-target link**. The current evidence gives
+no efficient arbitrary-CNF decomposition or compact-state guarantee.
+
+Independent cold replay passes in **518.83008 s**, reproducing all eight
+workers and their intermediate catalogs without fresh discovery or reference
+search. It verifies **3,830 reference nodes**. All **233 tests** pass. The
+manuscript builds to **162 pages**, with no overfull boxes or undefined
+references; all **64 previous proof blocks** remain unchanged. All **1,220
+artifacts across 25 prior manifests** and all **3,803 previous reference
+payloads** are preserved. The new manifest binds **101 artifacts / 4,289,703
+bytes**, including the startup profile, eight workers, cold replay, structural
+findings and test/build logs. The initial failed external-write test fixture
+is retained and explained; its correction changes stored bytes rather than
+issuing an external no-op update. Exact commands, source fingerprints and
+concurrency notes are in
+`experiments/results/cnf-expansion-session/validation.json`.
+
+## Previous investigation: guarded delta export and a conditional one-valid branch
 
 [Append-only export](append-delta-export.md) cuts mean complete-worker time
 **13.11241 -> 9.92093 s (24.34%)** with identical search and delta bytes in

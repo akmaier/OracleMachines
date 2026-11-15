@@ -1,0 +1,14 @@
+F...
+======================================================================
+FAIL: test_external_writer_and_schema_change_rejected (solver.test_cnf_expansion_session.ExpansionSessionTests.test_external_writer_and_schema_change_rejected) (schema=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_expansion_session.py", line 72, in test_external_writer_and_schema_change_rejected
+    with self.assertRaisesRegex(ValueError,'reopen'):s.begin(32,ev,[])
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.128s
+
+FAILED (failures=1)

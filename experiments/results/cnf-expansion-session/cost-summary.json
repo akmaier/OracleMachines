@@ -1,0 +1,175 @@
+{
+  "batches": [
+    {
+      "admitted": 32,
+      "batch": 0,
+      "boundary_mean_seconds": 0.01484268787316978,
+      "completed": 19,
+      "compressed_delta_bytes": 10048,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.07070099981501698,
+        "coverage_seconds": 0.00048212497495114803,
+        "route_refresh_seconds": 0.011795250698924065,
+        "selection_seconds": 0.051093999994918704
+      },
+      "delta_database_bytes": 299008,
+      "expansion_mean_seconds": 0.1340723754838109,
+      "export_mean_seconds": 0.01639993698336184,
+      "final_activation_index": {
+        "indexed_routes": 699,
+        "pending_routes": 1,
+        "waiting_links": 1,
+        "waiting_targets": 1
+      },
+      "history_bytes": 776556544,
+      "initial_activation_index": {
+        "indexed_routes": 699,
+        "pending_routes": 1,
+        "waiting_links": 2,
+        "waiting_targets": 2
+      },
+      "preparation_mean_seconds": 11.494212771067396,
+      "session_startup_mean_seconds": 7.365935229696333,
+      "startup_mode": "restart",
+      "steps": 1,
+      "target_closed": false,
+      "unfinished": 13,
+      "worker_mean_seconds": 11.72257800004445
+    },
+    {
+      "admitted": 32,
+      "batch": 1,
+      "boundary_mean_seconds": 0.008881416637450457,
+      "completed": 25,
+      "compressed_delta_bytes": 15141,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.11534524988383055,
+        "coverage_seconds": 0.0017198326531797647,
+        "route_refresh_seconds": 0.034539708169177175,
+        "selection_seconds": 0.15000466583296657
+      },
+      "delta_database_bytes": 393216,
+      "expansion_mean_seconds": 0.30160945653915405,
+      "export_mean_seconds": 0.015631374437361956,
+      "final_activation_index": {
+        "indexed_routes": 701,
+        "pending_routes": 1,
+        "waiting_links": 1,
+        "waiting_targets": 1
+      },
+      "history_bytes": 776871936,
+      "initial_activation_index": {
+        "indexed_routes": 699,
+        "pending_routes": 1,
+        "waiting_links": 1,
+        "waiting_targets": 1
+      },
+      "preparation_mean_seconds": 11.190102082910016,
+      "session_startup_mean_seconds": 7.402379542123526,
+      "startup_mode": "restart",
+      "steps": 3,
+      "target_closed": false,
+      "unfinished": 7,
+      "worker_mean_seconds": 11.60522066638805
+    },
+    {
+      "admitted": 32,
+      "batch": 0,
+      "boundary_mean_seconds": 0.010704624932259321,
+      "completed": 19,
+      "compressed_delta_bytes": 10048,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.0687334998510778,
+        "coverage_seconds": 0.0004831664264202118,
+        "route_refresh_seconds": 0.012443229090422392,
+        "selection_seconds": 0.04976597893983126
+      },
+      "delta_database_bytes": 299008,
+      "expansion_mean_seconds": 0.13142587430775166,
+      "export_mean_seconds": 0.01732547953724861,
+      "final_activation_index": {
+        "indexed_routes": 699,
+        "pending_routes": 1,
+        "waiting_links": 1,
+        "waiting_targets": 1
+      },
+      "history_bytes": 776556544,
+      "initial_activation_index": {
+        "indexed_routes": 699,
+        "pending_routes": 1,
+        "waiting_links": 2,
+        "waiting_targets": 2
+      },
+      "preparation_mean_seconds": 11.835014833603054,
+      "session_startup_mean_seconds": 7.216881270520389,
+      "startup_mode": "retained",
+      "steps": 1,
+      "target_closed": false,
+      "unfinished": 13,
+      "worker_mean_seconds": 12.064255479024723
+    },
+    {
+      "admitted": 32,
+      "batch": 1,
+      "boundary_mean_seconds": 0.0097096455283463,
+      "completed": 25,
+      "compressed_delta_bytes": 15141,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.1186561044305563,
+        "coverage_seconds": 0.001873521599918604,
+        "route_refresh_seconds": 0.03682581288740039,
+        "selection_seconds": 0.15632414538413286
+      },
+      "delta_database_bytes": 393216,
+      "expansion_mean_seconds": 0.31367958430200815,
+      "export_mean_seconds": 0.015070603927597404,
+      "final_activation_index": {
+        "indexed_routes": 701,
+        "pending_routes": 1,
+        "waiting_links": 1,
+        "waiting_targets": 1
+      },
+      "history_bytes": 776871936,
+      "initial_activation_index": {
+        "indexed_routes": 699,
+        "pending_routes": 1,
+        "waiting_links": 1,
+        "waiting_targets": 1
+      },
+      "preparation_mean_seconds": 3.696641374612227,
+      "session_startup_mean_seconds": 0.004038000013679266,
+      "startup_mode": "retained",
+      "steps": 3,
+      "target_closed": false,
+      "unfinished": 7,
+      "worker_mean_seconds": 4.121850812109187
+    }
+  ],
+  "limitations": [
+    "Restarted versus retained checked inventory: two reversed-order repetitions, with up to two consecutive bounded batches on each independent seed.",
+    "Resume the exact retained pair before selecting new work. Both polarities remain obligations regardless of a SAT witness.",
+    "Each batch has twelve advances and its own 32-state allowance; up to 64 entries per sequence, including repeated unfinished inputs. Both methods receive the same budgets.",
+    "Both methods use append export and identical selective maintenance. The retained session keeps live check caches and routes; it still charges its initial complete load, guarded reset, exports and cold replay.",
+    "Preparation, acquisition, route updates, coverage, persistence, reconstruction and reference checks are separate costs.",
+    "Development cases, shared OS caches, no holdout or confidence intervals. Stored bytes are not peak RAM.",
+    "No globally minimal expansion, polynomial unrestricted-SAT algorithm or P-versus-NP conclusion."
+  ],
+  "sequences": [
+    {
+      "admitted": 64,
+      "batches": 2,
+      "completed": 44,
+      "sequence_mean_seconds": 23.701128791552037,
+      "startup_mode": "restart",
+      "worker_sum_mean_seconds": 23.3277986664325
+    },
+    {
+      "admitted": 64,
+      "batches": 2,
+      "completed": 44,
+      "sequence_mean_seconds": 16.60738654155284,
+      "startup_mode": "retained",
+      "worker_sum_mean_seconds": 16.18610629113391
+    }
+  ]
+}

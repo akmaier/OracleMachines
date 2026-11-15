@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Keeping checked state between expansion batches](research/retained-expansion-session.md)
+reduces mean time for two complete workers **30.61%**, from **23.33 to 16.19
+seconds**, including initial checking. Both methods enter the same 64 states
+across two budgets and store **44 patterns**, including two conditional Horn
+terminals. Coverage remains **66/83**. A live session avoids repeated catalog
+verification; cold reconstruction and persistent storage do not shrink.
+
 [Exporting only appended evidence](research/append-delta-export.md) reduces
 mean complete-worker time **24.34%**, from **13.11 to 9.92 seconds**, with
 identical search and delta bytes on the matched bounded expansion. It adds

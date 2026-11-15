@@ -3674,3 +3674,48 @@ startup checking (64.49429 seconds) remains the largest repeated
 cost; keep one checked session across further discovery batches. Investigate
 shared nonterminal or boundary descriptions in the pending mixed reductions.
 No compact closure or uniformly polynomial acquisition bound is established.
+
+## 2026-11-15: complete the pending mixed reductions
+
+[Completing the pending mixed reduction chains](pending-discovery-closure.md)
+closes **case 1062**, raising structural coverage **72/83 -> 73/83**. Two independent
+four-batch runs store the same **68 records**: 23 probes, 22 eliminations, 13 binary-path
+reductions, three polarity transformations, five family terminals and two unresolved
+intermediate records. They charge **84 admission entries / 68 distinct inputs**;
+16 entries repeat interrupted work inside this sequence. All **eight earlier
+interrupted inputs** and all newly interrupted inputs are now stored.
+
+Three polarity transformations expose Horn terminals without reducing variables,
+clauses or literals: **8/10/23**, **14/17/43**, **6/6/16**. A separate **9/18/49**
+terminal is all-zero satisfiable but neither Horn nor 2-CNF. These are applications
+of existing checked rules, not new tractable classes. The first 19-variable branch
+closes before another 36-variable branch is selected; selected size alone is not
+monotone progress. Original coverage requires all outstanding structural premises.
+The original and all four touched split sources are **SAT**; classification coverage
+is separate from SAT decision.
+
+Mean complete sequence time is **70.46120 seconds**, including
+**63.74848 seconds** startup and **0.84877 seconds** local
+expansion. Checked materialized parent restoration adds **8.70349 seconds**.
+History grows **843,776 bytes** to **782,450,688 bytes /
+42,611 patterns**; reference evidence grows **5,488 -> 5,612 nodes**. Peak RAM is
+unmeasured. Repetition establishes reproducibility, not a matched speedup.
+
+**Next priority:** **case 1121 / index 23**, **41/174/513**, no pending split.
+Resume **`experiments/results/cnf-pending-discovery/report.json`** with
+**`experiments.continue_cnf_pending_discovery.restore_checkpoint`**. Use
+**`next_selection`**, not the completed initial 19-variable source. Preserve evidence
+**(1,42,156,72,1)** and **two bridges**. Its default restorer uses the existing checked
+materialization of its parent and then applies the new delta; independent audit
+uses the original reconstruction chain with that cache disabled.
+
+Touched prefixes reuse **two probe records and one contradiction terminal** from
+the preceding case-1062 prefixes. The intersections with earlier cases 1195 and
+1406 contain only that terminal. This supports reuse within a resumed original,
+without establishing shared nonterminal representations between different inputs.
+Across the six case-1062 batches in both checkpoints, **148 entries / 121 distinct
+inputs** expose **27 repeated admissions**. All 121 records are now stored; preserving
+unfinished control frames remains a possible way to avoid re-entry, with runtime
+benefit still unmeasured. Ten originals remain uncovered. Continue discovery in a retained
+session and measure actual shared identities or certified boundary descriptions.
+No compact closure or uniformly polynomial arbitrary-SAT acquisition bound follows.

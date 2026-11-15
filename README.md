@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Completing the pending mixed reductions](research/pending-discovery-closure.md)
+raises structural coverage **72/83 -> 73/83**, completing case 1062 with **68 new
+records**, including three polarity transformations into Horn formulas. All eight
+previously interrupted inputs are completed. Four batches take **70.46 seconds**,
+including **0.85 seconds** local expansion; case 1121 is next.
+
 [Materializing a checked checkpoint](research/materialized-checkpoint-reuse.md)
 reduces measured reconstruction plus complete startup **220.33 ->
 74.76 seconds (66.07%)**, with identical databases,

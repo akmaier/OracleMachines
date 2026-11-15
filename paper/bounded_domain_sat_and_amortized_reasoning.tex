@@ -4298,6 +4298,54 @@ unmeasured. Structural coverage stays at $72/83$, with case 1062's pending
 $19/77/261$ split and eight interrupted inputs unchanged. The saving reduces
 repeated acquisition preparation; it does not bound acquisition for arbitrary SAT.
 
+\paragraph{Complete the pending mixed reductions.}
+We resume case 1062's pending $19/77/261$ split in two independent four-batch
+histories. Both store the same 68 records: 23 probe reductions, 22 eliminations,
+13 binary-path reductions, three polarity transformations, five family terminals
+and two unresolved intermediate records. The sequence charges 84 admission
+entries on 68 distinct inputs. Twelve inputs interrupted in one batch and four
+in the next are re-entered and charged again. All eight inputs interrupted in the
+preceding checkpoint are also completed. No entered input remains unstored.
+Explicit external rules subsequently cover the two unresolved intermediate nodes.
+
+Closing the initial 19-variable residual leaves another 36-variable branch
+outstanding. Subsequent selections have sizes $26/104/335$ and $13/57/220$.
+The last batch completes the original, raising structural coverage from $72/83$
+to $73/83$. The initial increase in selected size is a change of outstanding
+branch, not growth of the same source. Progress in complete original coverage
+therefore cannot be inferred from the size of the currently selected residual.
+
+Three polarity transformations expose Horn targets with unchanged size triples:
+$8/10/23$, $14/17/43$ and $6/6/16$. Their source formulas fail the recorded Horn,
+dual-Horn, 2-CNF and constant-assignment tests. The checked literal flips expose
+Horn and all-zero witnesses. A fourth Horn terminal has size $4/3/7$; the fifth
+terminal, $9/18/49$, admits the all-zero assignment while being neither Horn nor
+2-CNF. These are applications of existing recognizers and checked transformations,
+not new tractable classes. Original 1062 and all four touched split sources are
+SAT. The first pair has cofactor answers UNSAT/SAT; the others have SAT/SAT.
+The result completes a structural description with both conditioning premises;
+it does not measure the minimum work required to find one original SAT witness.
+
+Mean sequence time is 70.46120 seconds, including
+63.74848 seconds initial catalog/query/serialization and
+3.91920 seconds in workers. Local expansion within those workers costs
+0.84877 seconds. Checked parent restoration adds
+8.70349 seconds, using the existing materialization. History grows by
+843,776 bytes to 782,450,688 bytes and 42,611 patterns.
+The structural delta uses 905,216 SQLite bytes or 34,862 compressed bytes;
+reference evidence grows from 5,488 to 5,612 nodes and adds 491,520 SQLite bytes.
+Peak RAM remains unmeasured. The repetitions establish reproducibility rather
+than a matched speedup comparison.
+
+Touched prefixes contain 75 node occurrences and 71 distinct records,
+including 3 inherited records. They reuse 3 exact records from the preceding
+case-1062 prefixes. Such resumption reuse does not establish nonterminal sharing
+between unrelated original CNFs. Independent replay checks all ten saved global
+queries, all acquisition prefixes and all 5,612 reference nodes with fresh search
+disabled. All 299 tests pass. The next selected original is case 1121, with
+residual size $41/174/513$. Ten originals remain uncovered; no uniformly
+polynomial acquisition or compact-closure bound for arbitrary SAT follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -12,7 +12,45 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: predicting useful conditioning cascades
+## Current investigation: acquiring useful candidates before ranking
+
+[The new-input lookahead study](lookahead-bank.md) freezes 24 random 3-CNF and
+binary-mixture inputs. Under **depth-zero preparation, 22/24 selected unresolved
+components have zero binary clauses and no saved source-assumption pairs**. The
+binary-frequency selector therefore offers nothing to rank on those inputs.
+This is a limitation of this prepared-pair expansion experiment, not of ordinary
+positive-depth conditioning or the complete solver. No original is classified
+as UNSAT by a missed pattern or empty candidate pool.
+
+**Highest discovery target:** compare charged ordinary conditioning with broader
+source-pair acquisition to create a useful common candidate pool, then evaluate
+selection. Use the existing shortest-clause ranking as a baseline; retain and
+check both assumptions and charge preparation. More width in the same empty
+binary-only pool cannot help. Keep the frozen depth-zero result as a negative
+control and measure any positive-depth preparation separately.
+
+**Implemented reuse, failed score:** an optional exact source/policy probe bank
+avoids **36 repeated probes (142 -> 106)** on the two eligible connected mixtures.
+The lookahead score picks the same pairs as size ranking, which needs only **72
+probes**. All three selected-pattern graphs are identical, with zero new original
+coverage. Lookahead thus adds 34 probes, 8 bank rows / 36,684 logical bytes, and
+73,728 SQLite bytes over size selection. Mean query times are **0.12251 s size /
+0.15344 s lookahead-reuse**; setup adds about 0.26 s. The bank remains experimental.
+All 331 tests and nine cold archive checks pass. No default inference source is
+changed, and no general efficiency or compact-state claim is justified.
+
+The new seed is `experiments/results/cnf-lookahead-bank/seed.json`, with 85
+patterns and 24 explicit unknown coverage cases. Its sources are distinct from
+the bound historical originals; no residual-wide novelty claim is made. Preserve
+all eight arm archives, including failures. The previous 42-input checkpoint
+`cnf-transfer-split/checkpoint.json` remains complete with null selection, as does
+the older 83-source checkpoint. These are separate corpora and policies.
+
+Report SHA-256: `96665203ed1328cada324b2f56251c57584644049b747d6d3a190b45d937dfb1`.
+Validation binds **175 source files** and adds **27 manifested artifacts**;
+the next preservation audit inherits **3,023 artifacts / 49 manifests**.
+
+## Previous investigation: predicting useful conditioning cascades
 
 [The saved-pair comparison](transfer-split-selection.md) completes **42/42** inputs
 in the new transfer stream. On the connected 38-variable residual, variable 14

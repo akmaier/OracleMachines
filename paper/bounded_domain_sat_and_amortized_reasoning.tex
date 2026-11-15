@@ -4647,6 +4647,49 @@ pass. The next structural question is how to predict useful propagation and
 component exposure with cheaper, reusable lookahead on new inputs. No SAT/UNSAT
 verdict, new Lean theorem or unrestricted polynomial bound is asserted here.
 
+\paragraph{Lookahead reuse does not remove candidate-discovery cost.}
+A subsequent protocol freezes twenty random 3-CNFs at 24, 36, 48 and 60 variables,
+plus four binary-chain mixtures, before acquisition. Their normalized originals
+are distinct from the bound historical cases. Preparation at conditioning depth
+zero stores 85 patterns and charges 168 probes. Twenty-two selected unresolved
+components have no binary clauses and no saved top-level assumption pairs. The
+binary-frequency probe selector therefore supplies no candidates there. This is
+a limitation of the depth-zero prepared-pair experiment, not of ordinary
+conditioning at positive depth or the complete solver.
+
+An optional exact-source, full-policy probe bank retains lookahead certificates.
+Only explicit scouting writes it; ordinary acquisition can replay an entry after
+checking its reasons. Missing scouting states are admitted before their profiles
+are computed. Remaining conditioning depth is not an input to these probe
+certificates. Pattern formats are unchanged, and a ranking score cannot establish
+coverage. All query arms share forty distinct acquisition admissions between
+scouting and expansion, while verification and repeated visits remain charged.
+
+Only the two connected mixtures offer pairs, two each. One-profile lookahead
+ranks both cofactors by unresolved components, support and literals. It chooses
+the same pairs as size-based selection. Reusing its checked evidence reduces
+probes from 142 to 106 compared with recomputing it, but size selection needs only
+72. All three arms produce the same pattern graph and no new original coverage.
+Enumeration of the saved pairs uses 164 probes and also remains open. No query
+reaches its admission cap. Thus, avoided repeated acquisition does not establish
+a total-cost improvement.
+
+Mean query time is 0.12251 seconds for size ranking and 0.15344 seconds for
+lookahead with reuse, plus approximately 0.26 seconds setup in either arm.
+The comparison uses a common optional wrapper, including empty-bank lookups in
+the baseline, and is not a production-solver runtime claim. The eight bank entries
+occupy 36,684 logical bytes; SQLite size increases from 1,740,800 to 1,814,528
+bytes. Preparation costs 0.77105 seconds separately. Two repetitions, restricted
+candidate availability and unmeasured peak RAM limit interpretation.
+
+The next comparison must charge acquisition of useful source pairs, for example
+through ordinary conditioning, before testing their ranking. Merely widening the
+same empty binary-only pool cannot help. This candidate-availability distinction
+is easy to recognize but gives no tractability theorem; successive conditioning
+may still require exponentially many branches. The seed and eight comparison
+archives, all 24 unknown coverage cases, and 331 passing tests are preserved.
+The bank remains experimental, and the earlier 42-input completion is unchanged.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

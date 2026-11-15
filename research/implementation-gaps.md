@@ -7676,3 +7676,20 @@ propagation cascades on newly frozen inputs. Cold history verification dominates
 local expansion, and source-only controls show no fresh-probe reuse benefit for
 the initial pair. All 327 tests and thirteen cold archives pass; no old source,
 proof block, result or incomplete alternative is deleted.
+
+
+## 2026-11-15: lookahead reuse exposes a candidate-availability gap
+
+[The frozen 24-input study](lookahead-bank.md) finds no saved source pairs on
+22 selected residuals at conditioning depth zero: their binary-clause count is
+zero. Only two connected mixtures exercise saved-pair ranking. An optional checked
+probe bank avoids 36 repeated probes, but lookahead still uses 106 probes versus
+72 for size ranking, chooses the same pairs, stores more bytes and adds no original
+coverage. No arm is capped. The bank is not enabled as a default optimization.
+
+Next acquire a common candidate pool through charged ordinary conditioning or
+broader source assumptions before comparing ranking. Keep both polarities,
+verification and persistence in the cost account. The new 24 depth-zero unknowns
+are distinct from the completed previous 42-input stream. All 331 tests and the
+seed plus eight comparison archives pass cold checks; all previous proofs and
+results remain intact. This is no unrestricted-SAT or negative SAT verdict.

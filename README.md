@@ -28,6 +28,11 @@ classes.
 
 ## Paper
 
+[The new-input lookahead test](research/lookahead-bank.md) preserves a useful
+negative result: checked evidence avoids repeated probes, but this score adds
+work and no coverage. Most depth-zero residuals lack saved pairs altogether.
+Candidate acquisition is the next target; all **331 tests** pass.
+
 [A saved conditioning pair completes the 42-input stream](research/transfer-split-selection.md).
 The winning split needs 13 new records and 30 probes, but the current size-based
 ranking misses it. All four alternatives are preserved. The next discovery target

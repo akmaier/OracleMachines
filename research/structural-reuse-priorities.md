@@ -12,7 +12,47 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: transfer of larger shared components
+## Current investigation: unresolved new-input interaction and complete accounting
+
+[The transfer controls](subsumption-transfer-controls.md) expose a confound: the
+shared **18/22/48** node reduces to **16/18/36 2-CNF**. Twelve new variants reuse its
+proof, but a supplemental early-family check handles **33/42 inputs** without a
+prepared template. It reduces fresh probes **1,022 -> 503**, actual new patterns
+**197 -> 107**, and working SQLite bytes **2,510,848 -> 1,466,368**. Mean preparation
+plus queries is **0.49636 -> 0.38107 s** in two repetitions. This is conditional
+family exposure, not evidence for reuse of a reduced core outside known families.
+
+**Next dominant target:** frozen input **41**, **48 variables / 204 clauses / 612
+literals**, remains unknown under every arm and costs 272 probe attempts. The six
+random inputs consume about **0.315 of 0.378 s** in the improved stream. Its source
+is in `experiments/results/cnf-subsumption-transfer/protocol.json`, with normalized
+fingerprint `511dd0f7c367b2af3e9f447f8411ef8ed10e0265dfcde5666b7d35f0b4aa1a22`.
+Inspect that stored frontier and its interactions. Further tuning of the already
+easy motif is unlikely to address the largest cost.
+
+**Resource-accounting correction:** the inherited 32-state cap limits calls
+through `_discover`, while fused conditioning can acquire through `_discover_profile`.
+The independent initial rerun records eighteen additional nodes outside the ledger
+in every arm. Cover all acquisition entrances before asserting a global state cap;
+keep recorded admissions, actual stored patterns and unfinished work separate.
+All completed proofs still check. The old archived studies remain unchanged.
+
+The original and supplemental studies preserve all 42 inputs, misses and archives,
+including the generator preflight failure and the loss of incidental warm reuse.
+All **318 tests** and twelve cold archive replays pass. The family control was
+chosen after inspecting the first result and is labelled accordingly. Next reuse
+tests should use cores outside existing terminal families and compare against
+cheap family recognition. The completed case1196 checkpoint retains its null
+selection; this new stream does not replace it.
+
+Initial report SHA-256:
+`1c921283eb5893e801eb945704a9c7fcb114d2692516790b62e86417fa757c3e`.
+Supplemental report SHA-256:
+`f35001bc53774ba8ba53b719885083ef2238f21245340126b2a047514859496e`.
+Validation binds **162 source files** and adds **55 manifested artifacts**, including
+the preflight failure. The next audit inherits **2,906 artifacts / 46 manifests**.
+
+## Previous investigation: transfer of larger shared components
 
 [Full historical corpus replay](full-corpus-coverage.md) now checks **1,497/1,497
 inputs**, including **985/985 non-tiny cases**, with **zero new acquisitions**.

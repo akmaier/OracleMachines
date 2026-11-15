@@ -2421,3 +2421,23 @@ only twenty tiny family steps. The next experiment should test whether these
 larger edit-family components reduce acquisition on unseen edits and mixtures
 under a frozen policy and budget. This closes the combined historical-replay gap,
 not generalization, globally minimal expansion or unrestricted polynomial SAT.
+
+
+## 2026-11-15: transfer control separates reuse from early family exposure
+
+[The 42-input study](subsumption-transfer-controls.md) finds that the candidate
+shared eighteen-variable source reduces to 2-CNF. Twelve template transfers are
+valid, but an early-family control needs no template and bypasses probing on
+33 inputs. Coverage remains **41/42**; fresh probes fall **1,022 -> 503**, new
+patterns **197 -> 107**, working SQLite **2,510,848 -> 1,466,368 bytes**, and mean
+preparation plus queries **0.49636 -> 0.38107 s**. Two repetitions and a constructed
+sample establish no general speedup or arbitrary-SAT bound. All **318 tests** pass.
+
+The inherited admission counter does not cover fused-conditioning `_discover_profile`
+entries: the initial diagnostic finds eighteen recorded nodes outside it in each
+arm. Historical “32-state” counts refer to that ledger, not a global acquisition
+bound. Preserve this correction and count actual stored and unfinished states.
+The largest remaining cost is new input 41, a **48/204/612** random CNF with 272
+probe attempts and unknown coverage. Inspect its persistent frontier, retaining
+the frozen inputs and all previous results. The original 83-source checkpoint
+remains complete and must not be restarted.

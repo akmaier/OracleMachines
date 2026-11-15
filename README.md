@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[The new-input transfer control](research/subsumption-transfer-controls.md) finds a
+simpler improvement: expose existing families before probing. On a 42-input
+constructed stream, fresh probes fall **1,022 -> 503** and working SQLite size
+**2.51 -> 1.47 MB**, with coverage unchanged at **41/42**. The tested shared core
+reduces to 2-CNF, so these gains do not establish nonterminal proof reuse. A new
+48-variable random case dominates the remaining cost; the analysis also corrects
+the scope of the inherited admission counter.
+
 [The full historical corpus now has checked coverage](research/full-corpus-coverage.md):
 **1,497/1,497 inputs**, including **985/985 non-tiny cases**, with no new acquisition.
 A source-bound policy union replays from an **11.27 MB compressed bundle** in

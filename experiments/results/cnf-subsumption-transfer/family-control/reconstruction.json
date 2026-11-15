@@ -1,0 +1,330 @@
+{
+  "bank_check": {
+    "counts": {
+      "classification_calls": 6,
+      "classification_literal_payload": 42,
+      "decomposition_literal_visits": 60,
+      "matching_conflict_edge_visits": 0,
+      "matching_recognition_literal_visits": 14,
+      "positive_direct_internal_steps": 12,
+      "positive_node_read_bytes": 27127,
+      "positive_sql_lookups": 12,
+      "restriction_literal_visits": 88,
+      "simplification_unit_check_literals": 6,
+      "single_check_assignment_entries": 4,
+      "single_check_calls": 2,
+      "single_check_clause_positions": 14,
+      "single_check_copied_literals": 0,
+      "single_check_dropped_clauses": 9,
+      "single_check_fallback_clauses": 0,
+      "single_check_literal_visits": 22,
+      "single_check_rebuilt_clauses": 0,
+      "single_check_shared_clauses": 5,
+      "single_check_shared_literals": 12,
+      "verified_positive_steps": 12,
+      "verified_simplifications": 2
+    },
+    "database_bytes": 118784,
+    "seconds": 0.004352916963398457,
+    "steps": 12
+  },
+  "cold": [
+    {
+      "capped_outcomes_remain_unknown": true,
+      "mode": "empty",
+      "no_acquisition": true,
+      "nodes": 197,
+      "queries": 42,
+      "repeat": 0,
+      "seconds": 0.17095287470147014
+    },
+    {
+      "capped_outcomes_remain_unknown": true,
+      "mode": "subsumption",
+      "no_acquisition": true,
+      "nodes": 175,
+      "queries": 42,
+      "repeat": 0,
+      "seconds": 0.15509708411991596
+    },
+    {
+      "mode": "family",
+      "no_acquisition": true,
+      "nodes": 107,
+      "queries": 42,
+      "repeat": 0,
+      "seconds": 0.1258686250075698
+    },
+    {
+      "mode": "family",
+      "no_acquisition": true,
+      "nodes": 107,
+      "queries": 42,
+      "repeat": 1,
+      "seconds": 0.12900220789015293
+    },
+    {
+      "capped_outcomes_remain_unknown": true,
+      "mode": "subsumption",
+      "no_acquisition": true,
+      "nodes": 175,
+      "queries": 42,
+      "repeat": 1,
+      "seconds": 0.16057545831426978
+    },
+    {
+      "capped_outcomes_remain_unknown": true,
+      "mode": "empty",
+      "no_acquisition": true,
+      "nodes": 197,
+      "queries": 42,
+      "repeat": 1,
+      "seconds": 0.1734631252475083
+    }
+  ],
+  "costs": {
+    "empty": {
+      "admissions": 190,
+      "covered": 41,
+      "database_bytes": 2510848,
+      "database_growth": 2482176,
+      "fast_hits": 0,
+      "groups": {
+        "connected_mixture": {
+          "cases": 6,
+          "covered": 6,
+          "entered": 19,
+          "mean_operation_seconds": 0.02480639610439539,
+          "probes": 103,
+          "reuse_hits": 0,
+          "stored": 19
+        },
+        "disconnected_mixture": {
+          "cases": 6,
+          "covered": 6,
+          "entered": 17,
+          "mean_operation_seconds": 0.022399249020963907,
+          "probes": 80,
+          "reuse_hits": 0,
+          "stored": 17
+        },
+        "invalidating_edit": {
+          "cases": 6,
+          "covered": 6,
+          "entered": 38,
+          "mean_operation_seconds": 0.044156854040920734,
+          "probes": 136,
+          "reuse_hits": 0,
+          "stored": 46
+        },
+        "novel_random": {
+          "cases": 6,
+          "covered": 5,
+          "entered": 73,
+          "mean_operation_seconds": 0.31373456167057157,
+          "probes": 415,
+          "reuse_hits": 0,
+          "stored": 72
+        },
+        "ordered_rename": {
+          "cases": 6,
+          "covered": 6,
+          "entered": 12,
+          "mean_operation_seconds": 0.025045874761417508,
+          "probes": 96,
+          "reuse_hits": 0,
+          "stored": 12
+        },
+        "permuted_rename": {
+          "cases": 6,
+          "covered": 6,
+          "entered": 18,
+          "mean_operation_seconds": 0.025820916518568993,
+          "probes": 96,
+          "reuse_hits": 0,
+          "stored": 18
+        },
+        "redundant_extension": {
+          "cases": 6,
+          "covered": 6,
+          "entered": 13,
+          "mean_operation_seconds": 0.023113498464226723,
+          "probes": 96,
+          "reuse_hits": 0,
+          "stored": 13
+        }
+      },
+      "mean_archive_bytes": 133172.5,
+      "mean_prepared_query_seconds": 0.4963601245544851,
+      "mean_query_seconds": 0.49482620880007744,
+      "probes": 1022,
+      "remaining": [
+        41
+      ],
+      "stored": 197
+    },
+    "family": {
+      "admissions": 100,
+      "covered": 41,
+      "database_bytes": 1466368,
+      "database_growth": 1437696,
+      "fast_hits": 33,
+      "groups": {
+        "connected_mixture": {
+          "cases": 6,
+          "covered": 6,
+          "entered": 0,
+          "mean_operation_seconds": 0.0037957923486828804,
+          "probes": 0,
+          "reuse_hits": 6,
+          "stored": 0
+        },
+        "disconnected_mixture": {
+          "cases": 6,
+          "covered": 6,
+          "entered": 0,
+          "mean_operation_seconds": 0.0035544801503419876,
+          "probes": 0,
+          "reuse_hits": 6,
+          "stored": 0
+        },
+        "invalidating_edit": {
+          "cases": 6,
+          "covered": 6,
+          "entered": 27,
+          "mean_operation_seconds": 0.032409667037427425,
+          "probes": 88,
+          "reuse_hits": 3,
+          "stored": 35
+        },
+        "novel_random": {
+          "cases": 6,
+          "covered": 5,
+          "entered": 73,
+          "mean_operation_seconds": 0.31459214608184993,
+          "probes": 415,
+          "reuse_hits": 0,
+          "stored": 72
+        },
+        "ordered_rename": {
+          "cases": 6,
+          "covered": 6,
+          "entered": 0,
+          "mean_operation_seconds": 0.004351312993094325,
+          "probes": 0,
+          "reuse_hits": 6,
+          "stored": 0
+        },
+        "permuted_rename": {
+          "cases": 6,
+          "covered": 6,
+          "entered": 0,
+          "mean_operation_seconds": 0.004318916238844395,
+          "probes": 0,
+          "reuse_hits": 6,
+          "stored": 0
+        },
+        "redundant_extension": {
+          "cases": 6,
+          "covered": 6,
+          "entered": 0,
+          "mean_operation_seconds": 0.00446304096840322,
+          "probes": 0,
+          "reuse_hits": 6,
+          "stored": 0
+        }
+      },
+      "mean_archive_bytes": 79484.0,
+      "mean_prepared_query_seconds": 0.3810667709913105,
+      "mean_query_seconds": 0.37817314616404474,
+      "probes": 503,
+      "remaining": [
+        41
+      ],
+      "stored": 107
+    },
+    "subsumption": {
+      "admissions": 168,
+      "covered": 41,
+      "database_bytes": 2244608,
+      "database_growth": 2215936,
+      "fast_hits": 12,
+      "groups": {
+        "connected_mixture": {
+          "cases": 6,
+          "covered": 6,
+          "entered": 19,
+          "mean_operation_seconds": 0.026561104226857424,
+          "probes": 103,
+          "reuse_hits": 0,
+          "stored": 19
+        },
+        "disconnected_mixture": {
+          "cases": 6,
+          "covered": 6,
+          "entered": 20,
+          "mean_operation_seconds": 0.02767095877788961,
+          "probes": 96,
+          "reuse_hits": 0,
+          "stored": 20
+        },
+        "invalidating_edit": {
+          "cases": 6,
+          "covered": 6,
+          "entered": 38,
+          "mean_operation_seconds": 0.04723056312650442,
+          "probes": 136,
+          "reuse_hits": 0,
+          "stored": 46
+        },
+        "novel_random": {
+          "cases": 6,
+          "covered": 5,
+          "entered": 73,
+          "mean_operation_seconds": 0.31538316630758345,
+          "probes": 415,
+          "reuse_hits": 0,
+          "stored": 72
+        },
+        "ordered_rename": {
+          "cases": 6,
+          "covered": 6,
+          "entered": 0,
+          "mean_operation_seconds": 0.005217562196776271,
+          "probes": 0,
+          "reuse_hits": 6,
+          "stored": 0
+        },
+        "permuted_rename": {
+          "cases": 6,
+          "covered": 6,
+          "entered": 18,
+          "mean_operation_seconds": 0.027150229550898075,
+          "probes": 96,
+          "reuse_hits": 0,
+          "stored": 18
+        },
+        "redundant_extension": {
+          "cases": 6,
+          "covered": 6,
+          "entered": 0,
+          "mean_operation_seconds": 0.005219146143645048,
+          "probes": 0,
+          "reuse_hits": 6,
+          "stored": 0
+        }
+      },
+      "mean_archive_bytes": 122761.5,
+      "mean_prepared_query_seconds": 0.4749256873037666,
+      "mean_query_seconds": 0.4687937081325799,
+      "probes": 846,
+      "remaining": [
+        41
+      ],
+      "stored": 175
+    }
+  },
+  "passed": true,
+  "report_sha256": "f35001bc53774ba8ba53b719885083ef2238f21245340126b2a047514859496e",
+  "seconds": 0.9627136248163879
+}

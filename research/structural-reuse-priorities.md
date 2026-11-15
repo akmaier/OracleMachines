@@ -12,7 +12,69 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: retain checked state across expansion batches
+## Current investigation: finish the retained interaction and return to originals
+
+[The conditional continuation](session-frontier-closure.md) completes the true
+32-variable cofactor through **29 new patterns** to a **7/21/85 one-valid
+terminal**, outside Horn, dual-Horn and 2-CNF. Its false branch reuses the stored
+refutation. Two independent runs finish in one 32-entry batch, preserving
+identical evidence. All seven previously interrupted inputs are charged again.
+The enclosing **39/161/495** focus closes and the saved-split frontier empties.
+**Coverage remains 66/83:** seventeen original inputs still have unresolved
+leaves. Empty retained obligations are not complete original-input coverage.
+
+1. **Investigate the next source bound to an uncovered original.** The global
+   navigator selects **39/162/510**, original **case 1120**, retained case index
+   **22**. It has `learning_clear` status and no pending split. Inspect its
+   remaining shared-variable interactions and saved alternatives before fresh
+   acquisition. Preserve the original binding and compare alternative choices
+   on the same source if changing the scheduler. The earlier 1062 original
+   remains open through a different **40/174/541** leaf.
+   The next profile has **16 saved pairs / 32 distinct absent target keys**.
+   Variable-5 and variable-22 true targets share shape **37/138/416** but have
+   different keys. Test a checked renaming before treating matching counts as
+   reusable structure; the negative exact-overlap result is preserved.
+2. **Profile cold reconstruction and snapshot preparation.** Mean expansion
+   is **0.15429 s** within a **12.41063 s** complete worker; preparation costs
+   **12.16111 s**, including **7.38139 s** checked session startup. Restoration
+   adds **99.77114 s**, final route preparation/global coverage **70.02150 s**.
+   These two repetitions are not a speed comparison. Avoid resetting a live
+   checked session when subsequent work can safely reuse it, but retain cold
+   authority checks and measure remaining phases separately.
+3. **Keep general discovery and persistence limits explicit.** This reduction
+   recognizes an existing terminal class on a new conditional chain. No bound
+   on recognition depth, total decomposition size or accumulated storage follows.
+   There are no interrupted states left in this focus; the general checked-local-
+   continuation gap remains for other long chains.
+
+Resume **`experiments/results/cnf-session-frontier/report.json`** through
+**`continue_cnf_session_frontier.restore_checkpoint`**, SHA-256
+`8349c88556f684eaaed5d0ea296e465cddf85086c2d240d30644ecb2e7436625`.
+Keep evidence **(1, 42, 156, 48, 1)** and **two bridges**. Select the next
+source from the bound `next_selection` archive, **not the completed `source`
+field**. Its key hash is
+`4270b94e85e15c2b76fb43fe6a320f98d3908c0020fa3a27e6daf5404c3831f5`.
+History is **777,236,480 bytes / 42,214 patterns**, growing **364,544 bytes**;
+the delta is **15,542 compressed bytes**. No split sidecars or external probe
+rows are added. The **3,830-node reference archive** and **3,360-step global
+positive certificate** retain their sizes. The live index has **701 routes /
+zero missing-target links**. Persistent growth and peak RAM remain separate.
+
+Independent cold replay passes in **346.50085 s**, reproducing both workers
+and every intermediate catalog without fresh discovery or reference search.
+It checks all **3,830 reference nodes**, verifies both cofactor results and
+confirms the seven previously interrupted states are now stored. All **233
+tests** pass. The manuscript builds to **162 pages**, with no overfull boxes
+or undefined references; all **64 previous proof blocks** are unchanged.
+All **1,321 artifacts across 26 prior manifests** and all prior reference
+payloads are preserved. The reference archive and global positive certificate
+are byte-identical to the parent. The new manifest binds **40 artifacts /
+4,103,023 bytes**, including the local/global frontier distinction and the
+negative exact-overlap check on the next 32 candidate targets. Commands, source
+fingerprints and concurrency notes are in
+`experiments/results/cnf-session-frontier/validation.json`.
+
+## Previous investigation: retain checked state across expansion batches
 
 [The startup profile and matched comparison](retained-expansion-session.md)
 identify repeated route checking as the dominant warm preparation cost.

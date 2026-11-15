@@ -3120,3 +3120,63 @@ is retained and explained; its correction changes stored bytes rather than
 issuing an external no-op update. Exact commands, source fingerprints and
 concurrency notes are in
 `experiments/results/cnf-expansion-session/validation.json`.
+
+## 2026-11-15: close the retained split without overstating original coverage
+
+[The session-frontier continuation](session-frontier-closure.md) completes the
+pending true **32/110/308** cofactor through **29 new patterns**: five probe,
+five binary-path, eighteen elimination and one family node. Its **7/21/85**
+terminal is one-valid and outside Horn, dual-Horn and 2-CNF. The completed false
+branch and its empty-clause refutation are reused. Both independent repeats
+stop after one advance in the first 32-entry batch; the second allowance is
+unused. All seven previously unfinished entries are reentered and charged.
+
+The enclosing **39/161/495** retained focus closes, leaving no open saved split,
+leaf or pending target in that frontier. **Original-input coverage stays 66/83.**
+Seventeen originals still have unresolved leaves; case 1062 retains a different
+**40/174/541** leaf. Closing the acquired conditional obligations is not a
+certificate for every original. The global navigator now selects **39/162/510**
+from original **case 1120** (retained index **22**), with `learning_clear`
+status, ordinary-probe offset twelve and no pending split.
+
+Mean complete-worker time is **12.41063 s**, with **12.16111 s** preparation
+(including **7.38139 s** initial checked session setup), **0.15429 s** expansion
+and **0.01920 s** append export. Acquisition alone is **0.08840 s**. The producer
+costs **221.94795 s**, including **99.77114 s** restoration and **70.02150 s**
+final route preparation/global coverage. These are repeated discovery runs,
+not competing implementations or a new speedup measurement. Profiling cold
+restoration and the remaining snapshot preparation costs is still warranted.
+
+The union retains **29 patterns / no new split sidecars / no external probe
+rows**. History grows **364,544 bytes** to **777,236,480 bytes / 42,214 patterns**.
+The delta occupies **438,272 SQLite bytes / 15,542 compressed bytes**. The
+reference archive stays at **3,830 nodes**, the global positive certificate at
+**3,360 steps**, and the live index at **701 routes / zero missing-target links**.
+No memory reduction, compact-state bound or efficient arbitrary-CNF guarantee
+is established. Conditional recognition of the existing all-true family does
+not bound the work of finding comparable reductions for other inputs.
+
+Resume `experiments/results/cnf-session-frontier/report.json` through
+`continue_cnf_session_frontier.restore_checkpoint`, SHA-256
+`8349c88556f684eaaed5d0ea296e465cddf85086c2d240d30644ecb2e7436625`.
+Preserve evidence **(1, 42, 156, 48, 1)** and **two bridges**. Choose the source
+from its bound `next_selection` archive; the report's `source` is the completed
+focus and must not be reused as the next expansion target. The selected key is
+`4270b94e85e15c2b76fb43fe6a320f98d3908c0020fa3a27e6daf5404c3831f5`.
+The next investigation should retain this binding to an uncovered original,
+inspect reusable interactions and saved alternatives, and distinguish local
+closure from an original-input coverage gain.
+
+Independent cold replay passes in **346.50085 s**, reproducing both workers
+and every intermediate catalog without fresh discovery or reference search.
+It checks all **3,830 reference nodes**, verifies both cofactor results and
+confirms the seven previously interrupted states are now stored. All **233
+tests** pass. The manuscript builds to **162 pages**, with no overfull boxes
+or undefined references; all **64 previous proof blocks** are unchanged.
+All **1,321 artifacts across 26 prior manifests** and all prior reference
+payloads are preserved. The reference archive and global positive certificate
+are byte-identical to the parent. The new manifest binds **40 artifacts /
+4,103,023 bytes**, including the local/global frontier distinction and the
+negative exact-overlap check on the next 32 candidate targets. Commands, source
+fingerprints and concurrency notes are in
+`experiments/results/cnf-session-frontier/validation.json`.

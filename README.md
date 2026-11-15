@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Completing the retained conditional interaction](research/session-frontier-closure.md)
+stores **29 patterns** and reaches a seven-variable all-true terminal while
+reusing the other branch's refutation. All saved split obligations close, but
+original-input coverage remains **66/83**. The global navigator moves to case
+1120; completing a local subproblem does not certify its entire original input.
+
 [Keeping checked state between expansion batches](research/retained-expansion-session.md)
 reduces mean time for two complete workers **30.61%**, from **23.33 to 16.19
 seconds**, including initial checking. Both methods enter the same 64 states

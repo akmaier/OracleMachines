@@ -1,0 +1,59 @@
+{
+  "batches": [
+    {
+      "admitted": 29,
+      "batch": 0,
+      "boundary_mean_seconds": 0.014869999838992953,
+      "completed": 29,
+      "compressed_delta_bytes": 15542,
+      "costs_mean_seconds": {
+        "acquisition_seconds": 0.08840079186484218,
+        "coverage_seconds": 0.0014478536322712898,
+        "route_refresh_seconds": 0.012770603876560926,
+        "selection_seconds": 0.05167174991220236
+      },
+      "delta_database_bytes": 438272,
+      "expansion_mean_seconds": 0.15429099928587675,
+      "export_mean_seconds": 0.01920202048495412,
+      "final_activation_index": {
+        "indexed_routes": 701,
+        "pending_routes": 0,
+        "waiting_links": 0,
+        "waiting_targets": 0
+      },
+      "history_bytes": 777236480,
+      "initial_activation_index": {
+        "indexed_routes": 701,
+        "pending_routes": 1,
+        "waiting_links": 1,
+        "waiting_targets": 1
+      },
+      "preparation_mean_seconds": 12.161107062129304,
+      "session_startup_mean_seconds": 7.381391520379111,
+      "startup_mode": "retained",
+      "steps": 1,
+      "target_closed": true,
+      "unfinished": 0,
+      "worker_mean_seconds": 12.410627895966172
+    }
+  ],
+  "limitations": [
+    "Two independent retained sequences, each with up to two consecutive bounded batches; reproducibility and discovery, not a comparative speedup.",
+    "Resume the exact retained pair before selecting new work. Both polarities remain obligations regardless of a SAT witness.",
+    "Each batch has twelve advances and its own 32-state allowance; up to 64 entries per sequence, including repeated unfinished inputs. Stop once the focus closes.",
+    "Both repeats reuse the unchanged append exporter, scheduler and selective maintenance. Live caches remain checked; initial loading, guarded resets, exports and cold replay are charged.",
+    "Preparation, acquisition, route updates, coverage, persistence, reconstruction and reference checks are separate costs.",
+    "Development cases, shared OS caches, no holdout or confidence intervals. Stored bytes are not peak RAM.",
+    "No globally minimal expansion, polynomial unrestricted-SAT algorithm or P-versus-NP conclusion."
+  ],
+  "sequences": [
+    {
+      "admitted": 29,
+      "batches": 1,
+      "completed": 29,
+      "sequence_mean_seconds": 12.693275895435363,
+      "startup_mode": "retained",
+      "worker_sum_mean_seconds": 12.410627895966172
+    }
+  ]
+}

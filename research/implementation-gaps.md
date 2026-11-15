@@ -7357,3 +7357,46 @@ History grows **319,488 bytes** to **780,677,120 bytes / 42,475 patterns**. Delt
 checked current/prepared objects; peak RAM is unmeasured. Reference nodes grow
 **4,750 -> 4,802**. All **274 tests**, independent eight-query/prefix replay and
 reference checking pass. No previous proof blocks or experiment sources change.
+
+## 2026-11-15: retain checked evidence through replay
+
+[Checked checkpoint replay](checked-checkpoint-replay.md) removes repeated node
+verification across the latest five append checkpoints and their startup query.
+Two reversed-order runs reduce **replay plus startup 94.29444 -> 87.70659 seconds
+(6.99%)**. Suffix replay falls **28.92930 -> 24.22978 seconds (16.24%)**; startup
+falls **65.36514 -> 63.47681 seconds (2.89%)**. Node verifications fall
+**28,059 -> 23,320**, avoiding **4,739 repeats (16.89%)**. Both arms keep full
+archive/source identity checks, ten full table-digest scans, all delta/positive
+checks and the complete global query. These are development-history observations.
+
+The live verifier carries exact checked immutable dependencies through guarded,
+conflict-checked appends. Failed appends roll back and invalidate it. External
+changes, unexplained own-connection writes and policy/schema changes reject reuse;
+exclusive file/connection ownership and immutable Python cache objects remain
+requirements. No trust cache is persisted. Positive coverage does not establish
+complete negative frontier information, so startup still builds and queries the
+complete catalog. The fresh control uses the same merge guards and discards
+verifiers between phases; the independent audit uses the frozen old restorers.
+
+There are **no new pattern rows or coverage gains** in this replay experiment.
+History remains **780,677,120 bytes / 42,475 patterns**, structural coverage
+**69/83**, and reference evidence **4,802 nodes**. The candidate carries **1,027**
+checked nodes into startup. Both arms finish with **23,320** checked nodes, also
+their maximum recorded count. This is not a process-RAM measurement; retaining
+objects longer and auxiliary caches still cost memory. All **283 tests** pass.
+
+**Next priority:** resume structural discovery on **case 1227, index 38**, at
+**40 variables / 165 clauses / 494 literals**, with no pending split. The verified
+acquisition checkpoint remains **`cnf-canonical-source/report.json`**, SHA-256
+`50c57ea9172332c0bca659299311680db68097e45343f8ef91d71bce9225ed3f`; use its
+**`next_selection`** and **`compare_cnf_canonical_source.restore_checkpoint`**.
+Keep evidence **(1, 42, 156, 63, 1)** and **two bridges**. This run changes replay
+machinery only, so it does not replace that acquisition checkpoint.
+
+Cold startup still costs about **63.48 seconds**; older parent restoration is
+separate (observed **114.50 seconds**, overlapping tests before measured arms).
+Extend checked reuse into earlier checkpoint schemas only after verifying their
+contracts. A further specific gap is repeated expanded-certificate traversal and direct
+semantic rule checking: later positive checks still cost about **2.6 seconds** even when they verify
+zero new inventory nodes. Measure source/evidence binding and decoding before
+adding another cache. Current evidence supplies no unrestricted-SAT bound.

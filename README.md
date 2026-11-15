@@ -28,6 +28,11 @@ classes.
 
 ## Paper
 
+[Retaining checked evidence through checkpoint replay](research/checked-checkpoint-replay.md)
+reduces the measured five-checkpoint replay and startup **94.29 -> 87.71 seconds
+(6.99%)**, avoiding **4,739 repeated node verifications**. Stored evidence and
+coverage remain unchanged at **69/83**; case 1227 is the next discovery target.
+
 [Reusing checked canonical source order](research/checked-canonical-sources.md)
 raises structural coverage to **69/83**, completing case 1190 with **25 new
 records**. Avoiding repeated sorting and renaming after a complete form check

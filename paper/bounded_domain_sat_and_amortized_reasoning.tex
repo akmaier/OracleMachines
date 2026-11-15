@@ -4128,6 +4128,49 @@ All 274 tests pass, and independent cold replay uses the old normalizer with
 discovery disabled. Complete cold checking and unresolved interactions still
 prevent any uniform polynomial bound for arbitrary SAT from following here.
 
+\paragraph{Carry checked evidence through checkpoint replay.}
+The latest five checkpoint restorers repeat verification of immutable
+historical dependencies: each delta check, positive-coverage check and startup
+opens a fresh inventory. We compare those fresh inventories with a guarded
+live inventory retained across the same phases. A merge accepts an existing
+key only with identical payload, checks every newly appended row and commits
+only after validation. Failed merges roll back and invalidate the live state.
+Policy, schema, external-data and unexplained own-connection changes reject
+reuse. Cached Python objects and the file remain exclusively owned and immutable
+except for checked appends; these guards do not protect against arbitrary memory
+or raw-file modification.
+
+The invariant is local: a previously verified source and its referenced rows
+retain their exact identities and payloads under an append. Their checked
+premises therefore remain valid; newly checked rows extend this invariant.
+No missing-row lookup becomes a negative certificate. All archive and source
+fingerprints, ten full table-digest scans, delta checks, bridge checks and
+expanded positive certificates remain in the measured five-stage sequence.
+Startup still constructs the complete catalog and queries all originals.
+This reuse argument does not bound the number or size of distinct proof nodes.
+
+Two reversed-order observations reduce mean replay plus startup from
+$94.29444$ to $87.70659$ seconds ($6.99\%$). Suffix replay falls from $28.92930$
+to $24.22978$ seconds; startup, full query and serialization fall from
+$65.36514$ to $63.47681$ seconds. Sequence samples are $94.25839/94.33048$
+seconds for fresh verifiers and $87.12909/88.28409$ for retained state.
+The control uses the same merge guards and discards inventories between phases;
+a separate audit uses the frozen legacy restorers and fresh checking. Older
+parent restoration remains separate at an observed $114.50260$ seconds and
+overlaps tests before the measured arms. The comparisons share OS caches and
+provide no held-out or universal speed guarantee.
+
+Node verifications fall from $28{,}059$ to $23{,}320$, removing $4{,}739$
+repeats ($16.89\%$). The candidate carries $1{,}027$ checked nodes into startup;
+both methods finish with $23{,}320$, also their maximum recorded node count.
+This does not measure peak RAM or the cost of retaining objects longer.
+All 283 tests pass. No new SAT patterns are acquired: the 172 replayed rows
+were already recorded, history remains $780{,}677{,}120$ bytes and 42,475
+patterns, and structural coverage stays $69/83$. Case 1227 remains the next
+$40/165/494$ frontier. Later positive checks still cost about $2.6$ seconds
+even with no new inventory-node checks; repeated certificate traversal and
+source binding remain work. No unrestricted-SAT complexity conclusion follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

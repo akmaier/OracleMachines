@@ -28,6 +28,11 @@ classes.
 
 ## Paper
 
+[A saved conditioning pair completes the 42-input stream](research/transfer-split-selection.md).
+The winning split needs 13 new records and 30 probes, but the current size-based
+ranking misses it. All four alternatives are preserved. The next discovery target
+is predicting useful propagation cascades; all **327 tests** pass.
+
 [The complete admission audit](research/complete-admission-frontier.md) avoids
 40 additional probes with the same stored graph. A generous allowance still
 leaves a connected **38-variable residual**, now preserved as the next structural

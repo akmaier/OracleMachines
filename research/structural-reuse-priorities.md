@@ -12,7 +12,48 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: the connected 38-variable interaction
+## Current investigation: predicting useful conditioning cascades
+
+[The saved-pair comparison](transfer-split-selection.md) completes **42/42** inputs
+in the new transfer stream. On the connected 38-variable residual, variable 14
+closes both children with **13 new records / 30 fresh probes**. Seven probe
+reductions on one branch expose two independent 2-CNF components; three on the
+other reach a contradiction. The original root follows through its checked
+ancestors. This is finite adaptive coverage, not an arbitrary-SAT result.
+
+**Largest discovery gap:** the current smaller-cofactor ranking chooses variable
+6, which uses 45 probes and remains open. The winning variable 14 has more raw
+cofactor literals (863 versus 829); variable 27 uses fewer probes but also remains
+open. All four pairs were compared from the same history under a complete
+32-state allowance, in two orders. Discovery of the winner costs **38 admissions
+and 188 probes per four-pair comparison**, not just its 30 probes. Investigate
+cheap indicators or reusable bounded lookahead for propagation cascades and
+component exposure on new frozen inputs. Compare with size ranking and exhaustive
+candidate enumeration; no universal selector or minimum-cost guarantee is known.
+
+**Supporting runtime gap:** full cold checking costs about **1.12 s** before the
+winning **0.032 s** local expansion. On the initial pair, retained history saves
+only one terminal record and no probes over a source-row-only control. Selective
+checked startup and reusable lookahead evidence are better-supported targets than
+assuming the entire history is beneficial to every query.
+
+Restore `experiments/results/cnf-transfer-split/checkpoint.json` with
+`experiments.validate_cnf_transfer_split.restore_checkpoint`. The union preserves
+**443 old + 34 new = 477 patterns**, all four alternatives, 33 early-family
+certificates and a 133-step positive proof for the other nine roots. It occupies
+**7,688,192 SQLite / 412,774 gzip bytes**. **There is no pending original in this
+42-input stream**; `next_selection` is null. Keep the failed variable-6/27/37 trials
+as selection counterexamples, without restarting them as uncovered originals.
+
+All **327 tests** and thirteen cold archive checks pass. Prior artifacts and the
+old 83-source checkpoint remain intact. The 64 manuscript proof blocks are
+unchanged; no new Lean theorem or SAT/UNSAT answer is claimed.
+
+Checkpoint SHA-256: `b59eacad9247879b97b1baa5bc729d3608c72f492896cebc43f4091f06adc5e3`.
+Validation binds **171 source files** and adds **46 manifested artifacts**.
+The next preservation audit inherits **2,996 artifacts / 48 manifests**.
+
+## Previous investigation: the connected 38-variable interaction
 
 [Complete admission accounting](complete-admission-frontier.md) now gates both
 recognition entrances, including transient fused restrictions. At allowance 32,

@@ -4606,6 +4606,47 @@ further reuse, with verification and space still to be charged. All sixteen
 archives and 323 tests pass. No SAT answer, new Lean theorem or polynomial bound
 for unrestricted SAT follows from these finite observations.
 
+\paragraph{A saved split closes the residual but exposes a ranking gap.}
+The remaining 38-variable source already contains four checked pairs of unit
+traces under opposite assumptions. The size-based ranking selects variable 6.
+Acquiring its cofactors takes seven new records and 45 probes. One branch closes;
+the other retains 35 variables and 418 literals. A separately frozen supplemental
+comparison tests all four saved pairs from identical histories, each with one
+complete 32-state allowance. Every trial returns without interruption.
+
+Variable 14 alone closes both children, with thirteen new records and thirty
+probes. Seven probe reductions on its false branch expose two independent 2-CNF
+components, of sizes $2/1/2$ and $5/4/8$ in variables/clauses/literals. Three probe
+reductions on its true branch reach the empty clause. The checked split then
+composes through the old ancestors to cover the original input. Structural
+coverage of this finite stream increases from $41/42$ to $42/42$.
+
+The successful pair has 863 raw cofactor literals, against 829 for the initially
+preferred pair. A third choice uses fewer probes, 29, but remains unresolved;
+the fourth uses 84 probes and leaves two residuals. Neither smaller cofactors nor
+fewer probes alone predicts complete coverage here. Finding the successful choice
+by this comparison costs 38 admissions and 188 probes per repetition. Its thirty
+probes must not be reported as the entire discovery cost. The comparison was
+chosen after observing the first miss and supplies no independent generalization
+claim or globally minimum-cost selection rule.
+
+Mean local expansion for the successful pair is 0.03200 seconds, after 1.12121
+seconds of history restoration and checking. An initial-pair control retaining
+only its source trace row uses eight records and the same 45 probes, versus seven
+records with full history. Thus, retained history saves one terminal record but
+no probes in that control. Cold costs and candidate selection remain material.
+The union keeps all four alternatives and all earlier patterns: 443 old plus
+34 distinct new records, occupying 7,688,192 SQLite bytes. Across the independent
+four-pair trials, four of the 38 acquired records coincide. This finite overlap
+does not establish compact closure or efficient expansion for arbitrary CNFs.
+
+All twelve trial archives and the merged checkpoint replay with acquisition
+disabled. The forty-two original bindings use thirty-three early family
+certificates and a 133-step positive graph for nine ordinary roots. All 327 tests
+pass. The next structural question is how to predict useful propagation and
+component exposure with cheaper, reusable lookahead on new inputs. No SAT/UNSAT
+verdict, new Lean theorem or unrestricted polynomial bound is asserted here.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

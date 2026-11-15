@@ -7656,3 +7656,23 @@ Four preserved 32-state restarts add 79 patterns to the previous 107 but repeat
 profiles and transient restrictions. A complete state ledger does not bound
 verification, repeated visits or total time. All 323 tests and sixteen cold
 archives pass; the old 83-source checkpoint remains complete and unchanged.
+
+
+## 2026-11-15: a saved-pair ranking counterexample and 42/42 coverage
+
+[The equal-budget pair comparison](transfer-split-selection.md) closes the last
+transfer input via residual variable 14, with 13 new records and 30 probes. The
+initial smaller-cofactor choice, variable 6, remains open after 45 probes. Of four
+saved pairs, only variable 14 closes both children: one reduces to two 2-CNF
+components and the other to a contradiction. Testing all four costs 38 admissions
+and 188 probes per repetition. This is adaptive completion, not a holdout or a
+uniform arbitrary-SAT result.
+
+The union checkpoint preserves 477 patterns and all four alternatives; all 42
+originals have checked coverage and `next_selection` is null. Restore
+`cnf-transfer-split/checkpoint.json` through its validator's restoration helper.
+Next investigate indicators or reusable bounded lookahead that predict these
+propagation cascades on newly frozen inputs. Cold history verification dominates
+local expansion, and source-only controls show no fresh-probe reuse benefit for
+the initial pair. All 327 tests and thirteen cold archives pass; no old source,
+proof block, result or incomplete alternative is deleted.

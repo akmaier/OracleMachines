@@ -3763,3 +3763,21 @@ separate reference evidence adds **15,405,056 bytes**. Restore the completed
 then frozen-policy evaluation on new unlabelled inputs. Do not restart an old
 pending source. Certified sharing beyond terminals, paid trace acquisition and
 generalization remain open; no arbitrary-SAT polynomial bound follows.
+
+
+## 2026-11-15: checked union of the full historical corpus
+
+[The explicit policy union](full-corpus-coverage.md) checks **1,497/1,497 historical
+inputs**, including **985/985 non-tiny cases**, without acquiring new states. Every
+source is bound to its own policy configuration and positive proof. Four fresh
+processes pass; all **306 tests** pass. Mean replay is **46.48527 s** with historical
+restoration and **11.22907 s** from an **11,271,594-byte compressed** standalone
+bundle. Historical acquisition remains charged; the bundle adds storage and
+cannot resume expansion. Peak RAM is unmeasured.
+
+The old successful set shares **67 nonterminal steps** up to eighteen variables
+after duplicate roots are collapsed, whereas the old/new policy proofs share
+only twenty tiny family steps. The next experiment should test whether these
+larger edit-family components reduce acquisition on unseen edits and mixtures
+under a frozen policy and budget. This closes the combined historical-replay gap,
+not generalization, globally minimal expansion or unrestricted polynomial SAT.

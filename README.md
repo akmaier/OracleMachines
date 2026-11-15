@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[The full historical corpus now has checked coverage](research/full-corpus-coverage.md):
+**1,497/1,497 inputs**, including **985/985 non-tiny cases**, with no new acquisition.
+A source-bound policy union replays from an **11.27 MB compressed bundle** in
+**11.23 seconds** versus **46.49 seconds** with history restoration. These are
+prepared-proof replay costs on development data. Next: test whether larger shared
+edit-family components reduce acquisition on unseen inputs.
+
 [The retained development subset is complete](research/case1196-completion.md):
 structural coverage reaches **83/83**, with **144 new records** in the final six-batch
 sequence. Both repetitions and independent replay agree. Mean sequence time is

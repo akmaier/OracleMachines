@@ -12,7 +12,42 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: transfer beyond the completed development subset
+## Current investigation: transfer of larger shared components
+
+[Full historical corpus replay](full-corpus-coverage.md) now checks **1,497/1,497
+inputs**, including **985/985 non-tiny cases**, with **zero new acquisitions**.
+The union explicitly binds 1,414 sources to the original retained policy and 83
+to the expanded policy. This is a complete historical regression, not a holdout
+or an efficient classification of arbitrary CNFs.
+
+A self-contained positive bundle reduces mean fresh-process replay from
+**46.48527 s to 11.22907 s** in two reversed-order repetitions. It occupies
+**11,271,594 compressed bytes** and reconstructs **146,747,392 SQLite bytes**.
+Preparation, historical acquisition and producer costs remain charged. The
+bundle adds storage and cannot replace the full discovery history.
+
+**Highest-value next test:** evaluate transfer from larger shared edit-family
+components to unseen inputs under a frozen policy and budget. The old successful
+set has **67 shared nonterminal proof steps** after 301 duplicate canonical roots
+are collapsed. The largest source has **18/22/48** variables/clauses/literals,
+shared by cases **1454, 1457, 1460**. But across the old-success/new-coverage proof
+boundary, exact overlap is still only **20 family steps**, at most three variables.
+Use the larger components as concrete candidates; compare prepared and empty
+history on fresh edits, connected mixtures and invalidating changes, charging
+recognition, forcing evidence, checking and persistence. Graph sharing alone does
+not establish avoided acquisition.
+
+All **306 tests** and four fresh-process replays pass. Continue expansion from the
+unchanged `cnf-case1196-discovery` checkpoint; its next source is null. The new
+`cnf-coverage-union` artifact is positive-proof-only. Preserve the completed
+83-source state and evidence **(1,42,156,98,1)** with two bridges.
+
+Union report SHA-256:
+`d2bbb9591401978393da509cb2309312aa71b0927699cc221a3cec4c5340df30`.
+Its validation binds **155 source files** and adds **14 manifested artifacts**.
+The next preservation audit inherits **2,851 artifacts across 45 manifests**.
+
+## Previous investigation: transfer beyond the completed development subset
 
 [The final six-batch sequence](case1196-completion.md) raises structural coverage
 **78/83 -> 83/83** on the retained development misses, with **144 new records /

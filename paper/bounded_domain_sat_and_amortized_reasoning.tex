@@ -4477,6 +4477,44 @@ with preparation, forcing evidence and cold replay charged. Complete coverage of
 this finite subset supplies neither compact closure nor a uniformly polynomial
 solution covering every CNF.
 
+\paragraph{Checked union of the full historical corpus.}
+A subsequent query binds the original retained-policy successes and the completed
+subset to one explicit finite claim. It checks all 1,497 historical inputs,
+including all 985 outside the two-variable exhaustive block, without new
+recognition or reference-solver acquisition. The original policy supplies 1,414
+roots and 8,159 positive proof steps; the expanded policy supplies 83 roots and
+4,822 steps. An exhaustive disjoint index partition assigns each input to a named
+policy. Each root is recomputed from its source and the policy's exact
+configuration, and all selected premises are replayed. This certifies structural
+coverage rather than a new SAT truth value. It is a historical regression, not
+held-out evidence or a general efficient partition of CNFs.
+
+Only consumed table rows are extracted into a self-contained positive bundle.
+The union stores 13,023 pattern rows and 112 other table rows, deduplicating twenty
+exact row occurrences. It retains the five evidence lists and two bridges, and
+rechecks the proof in a temporary database. Two fresh-process repetitions in
+reversed mode order take a mean of 46.48527 seconds with history restoration and
+11.22907 seconds from the bundle. The latter occupies 11,271,594 compressed bytes
+and reconstructs 146,747,392 SQLite bytes. This observed 75.84\% reduction concerns
+prepared-proof replay; full mode also checks historical restoration. Historical
+acquisition, extraction and serialization remain paid costs, and all original
+archives are retained. The bundle adds persistent data and cannot replace an
+expansion checkpoint. Peak RAM is unmeasured.
+
+The broader proof audit separates duplicate inputs from internal reuse. The
+1,414 earlier successes contain 1,113 distinct canonical roots. After duplicate
+roots are collapsed, 154 proof steps are shared, including 67 nonterminal steps.
+The largest shared source has eighteen variables, 22 clauses and 48 literals,
+used by three distinct roots from related subsumption edits. Between the two
+policy proofs, however, only twenty exact step identities are shared, all family
+steps with at most three variables. Larger reuse within edit families has not
+been shown to transfer to the formerly uncovered set. Owner propagation agrees
+with independent root-by-root traversal. These graph counts are not acquisition
+savings. The next test fixes a policy and budget before measuring prepared versus
+empty history on unseen edits, mixtures and changes that invalidate a retained
+premise. All 306 relevant tests pass; the finite coverage result gives no uniform
+polynomial bound for arbitrary SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

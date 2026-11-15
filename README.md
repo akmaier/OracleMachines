@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Testing expansion without batch-seed copies](research/expansion-without-batch-copy.md)
+stores **82 new pattern records**, including Horn/zero-valid and 2-CNF terminals.
+Coverage remains **68/83**, with a pending split at **26 variables**. Avoiding
+3.12 GB of logical copies makes the measured complete sequence **3.39% slower**;
+the copied-seed default remains. The saved result distinguishes a slow first
+digest from later warm batches and preserves the next discovery checkpoint.
+
 [Reusing the maintained route catalog in global queries](research/maintained-global-catalog.md)
 reduces the measured warm query **1.526 -> 0.237 seconds (84.46%)**.
 The complete short sequence is slightly slower because startup checking varies;

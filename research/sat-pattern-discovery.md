@@ -3426,3 +3426,51 @@ All **259 tests**, independent replay of **eight global queries**, prefix
 catalog checks and reference validation pass; all **64 previous proof blocks**
 are preserved. The detailed validation record binds previous artifacts and
 sources. No unrestricted-SAT complexity or minimum-expansion bound follows.
+
+## 2026-11-15: batch copies and continued conditional discovery
+
+[The batch-copy comparison](expansion-without-batch-copy.md) stores **82 new
+pattern records** across four bounded expansions: 30 eliminations, 27 probes,
+17 binary-path reductions, three family terminals and five unresolved records.
+The terminals include Horn/zero-valid and 2-CNF cases, but overall coverage stays
+**68/83**. The sequence charges **105 admission entries**, including re-entry;
+twelve final entries remain unstored. Recognized endpoints do not imply cheap
+recognition or acquisition of every ancestor.
+
+**Retain the negative result:** omitting all per-batch seed copies avoids
+**3,118,911,488 logical copied bytes**, yet mean four-worker time regresses
+**4.61350 -> 6.28484 seconds (36.23%)** and the complete sequence regresses
+**75.23972 -> 77.78679 seconds (3.39%)**. Both methods still hash all historical
+tables and retain identical evidence. The first digest without a copy takes
+about **3.28 seconds**, versus **0.44--0.50 seconds** after copying; later scans
+are similar. OS/cache causality is unmeasured. Keep the copied-seed default;
+test copying the first batch only during subsequent fresh discovery. That
+combined policy has not been measured and cannot inherit a speedup by adding
+times from separate runs.
+
+**Resume** `cnf-copyless-sequence/report.json` with
+`compare_cnf_copyless_sequence.restore_checkpoint`, report SHA-256
+`0cf43154fba97eae8b971d700b7381fa671d2347aac4f45a41300ad208e1dcfd`.
+Use **`next_selection` with its pending split**, at **26/94/284**, not the initial
+`source`. Preserve evidence **(1, 42, 156, 63, 1)** and **two bridges**. Initial
+binding is original **case 1190, index 31**; retained selections have an empty
+original-index list. Cold validation checks actual dependency ancestry rather
+than inventing a selector binding. Such a path does not transfer SAT truth or
+complete the original's other obligations.
+
+**Largest total-cost gaps:** initial global checking/construction remains
+**67--69 seconds**, parent restoration **129.01658 seconds**, and final cold
+coverage **71.31630 seconds**. Warm query cost is only **0.25 seconds**, plus
+**0.31 seconds** output serialization. Reuse the checked session, then investigate
+complete cold authority and resumable unfinished work. Persisted positive
+coverage alone cannot certify the unresolved frontier. For broader discovery,
+track certified reduction chains and the interaction left after each terminal,
+not just family labels or matching shapes.
+
+History grows **1,085,440 bytes** to **780,357,632 bytes / 42,450 patterns**;
+the union delta is **1,175,552 bytes / 52,938 compressed**. Both methods retain
+**20,379 current / 2,916 prepared checked objects**, with no measured peak RAM.
+Reference nodes grow **4,481 -> 4,750**. Failure-only archives preserve committed
+rows as explicitly unchecked evidence and cannot become verified checkpoints.
+All **266 tests**, independent acquisition-prefix and twenty-query replay, and
+reference validation pass. No unrestricted-SAT or minimum-expansion bound follows.

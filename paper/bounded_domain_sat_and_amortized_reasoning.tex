@@ -4011,6 +4011,66 @@ and full composition, selection and output persistence remain charged. Cold
 checking dominates the complete cost. No uniform acquisition, space or
 minimum-expansion bound for arbitrary SAT follows from this finite comparison.
 
+\paragraph{A smaller preparation footprint need not reduce runtime.}
+The next experiment follows global selection across four consecutive bounded
+expansions, beginning with the $40/163/490$ residual of case 1190. Both methods
+retain the checked inventory and complete route catalog, scan every historical
+table through the live connection, and perform the same acquisition, checking
+and append export. One copies the full history before every batch; the other
+omits these copies while retaining the checked append boundary. Initial arm
+copies and the final full delta comparison remain charged. A syntax-tree test
+checks that the entire successful acquisition, maintenance, checking and export
+body matches the preceding worker. Failed work is archived separately as
+unchecked evidence; a rejected append boundary triggers a full backup for
+inspection, not a verified checkpoint.
+
+Two reversed-order repetitions store identical evidence: 82 new records,
+comprising 30 eliminations, 27 probes, 17 binary-path reductions, three family
+terminals and five unresolved records. The terminals are $5/5/11$, recognized
+as Horn and zero-valid, and $4/3/6$ and $5/4/8$, recognized as 2-CNF. These
+endpoints expose useful conditional structure, but do not bound the cost of
+reaching them. The four batches charge 105 admission entries, including re-entry,
+and store $22,31,9,20$ records respectively. The third selected focus closes;
+global selection then proceeds to another retained obligation. Overall coverage
+remains $68/83$, with a pending split at $26/94/284$ and twelve final entries
+without stored certificates. Independent replay checks dependency paths from
+case 1190 to each selected focus. Retained selections themselves carry no
+original-index binding. Dependency ancestry is distinct from transferring SAT
+truth or completing every obligation of an original input.
+
+Omitting the batch copies avoids $3{,}118{,}911{,}488$ logical copied bytes per
+sequence, but mean four-worker time increases from $4.61350$ to $6.28484$ seconds
+($36.23\%$), and the complete sequence increases from $75.23972$ to $77.78679$
+seconds ($3.39\%$). Complete sequence samples are $74.26957/76.20988$ seconds
+with copies and $77.45284/78.12074$ without. The first full digest costs
+$0.44355/0.50362$ seconds after copying and $3.28374/3.27103$ seconds without
+copying. Subsequent scans take approximately $0.43$--$0.45$ seconds in both
+methods; their workers benefit from omitting copies. Sequential read-ahead or
+cache effects are possible explanations, not measured causes. Copying only
+the first batch is an untested next policy. The copied-seed default remains;
+the experiment establishes no overall runtime improvement.
+
+Initial construction, global checking and serialization still average
+$67.78272$ and $68.43429$ seconds, while updated global queries average
+$0.24608$ and $0.25472$ seconds. Query serialization adds about $0.31$ seconds.
+Complete sequences include arm preparation, workers, global queries and
+serialization, and union merge/check work; separate full-catalog audits follow
+each sequence. Shared restoration costs $129.01658$ seconds, final cold route
+and coverage checking costs $71.31630$ seconds, and the full producer costs
+$540.25637$ seconds. Two repetitions on development cases with shared OS caches
+are descriptive. They provide neither confidence intervals nor held-out results.
+
+Both methods retain the same state: history grows by $1{,}085{,}440$ bytes to
+$780{,}357{,}632$ bytes and from 42,368 to 42,450 patterns. The union delta is
+$1{,}175{,}552$ SQLite bytes or 52,938 compressed bytes. Reference nodes grow
+from 4,481 to 4,750. The live inventory retains 20,379 current and 2,916 prepared
+checked objects. Logical copied bytes and object counts are not physical-write
+or peak-RAM measurements. Cold replay checks all twenty saved global queries,
+acquisition prefixes, identical logical results and reference nodes without
+fresh discovery. All 266 tests pass. Full-history hashing, cold reconstruction,
+unfinished internal work and unresolved interactions remain costs; removing
+a copy supplies no asymptotic improvement or uniform bound for arbitrary SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

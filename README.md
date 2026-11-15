@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[The retained development subset is complete](research/case1196-completion.md):
+structural coverage reaches **83/83**, with **144 new records** in the final six-batch
+sequence. Both repetitions and independent replay agree. Mean sequence time is
+**77.64 seconds**, including **3.20 seconds** local expansion.
+Next: combined-policy full-corpus checking and transfer to new unlabelled inputs.
+This finite result does not establish an efficient solution of arbitrary SAT.
+
 [Completing retained branches across three originals](research/case1063-discovery.md)
 raises structural coverage **75/83 -> 78/83** with **54 new records**. Case 1063
 completes with only three additional records after fifty had been stored. Four

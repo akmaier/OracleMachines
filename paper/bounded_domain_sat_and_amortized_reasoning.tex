@@ -4427,6 +4427,56 @@ Five originals remain uncovered. Finishing this retained corpus would still
 require evaluation on new unlabelled inputs and adversarial mixtures; it would
 not establish a uniformly polynomial solution of arbitrary SAT.
 
+\paragraph{Complete the retained development subset.}
+Two independent six-batch histories complete the remaining five originals,
+raising checked structural coverage from $78/83$ to $83/83$. Three newly covered
+originals are SAT and two are UNSAT. Both histories store 144 records: 98 probes,
+sixteen eliminations, fourteen binary-path reductions, ten unresolved records,
+four family terminals and two polarity transformations. They charge 147 admissions
+on 144 distinct inputs; three interrupted inputs are re-entered and completed.
+The per-batch limits remain 32 states and twelve advances. The allowance is six
+batches rather than four, so the sequence times are not matched comparisons with
+the earlier runs. The final global query selects no source or pending split.
+
+The four terminals have sizes $13/19/42$, $10/11/23$, $6/7/14$ and $5/5/10$.
+The first two are Horn and zero-valid after checked polarity transformations.
+The third is 2-CNF outside Horn, dual-Horn and both constant-assignment classes.
+The fourth overlaps dual-Horn, 2-CNF and one-valid. A separate bounded diagnostic
+checks all 9,312 terminal assignments and the polarity maps on all 9,216 source
+assignments, including the variable-name maps. These are applications of existing
+families, not a new unrestricted classification theorem. External composition
+can cover immutable unresolved records without replacing their stored payloads.
+
+The complete selected proof contains 4,822 steps reachable from 83 roots.
+Fourteen exact steps are shared across different originals: ten family leaves
+and four direct references to family leaves. All shared CNFs have at most two
+variables. Separate per-original traversal visits 4,991 distinct-per-root steps,
+versus 4,822 unique steps overall. The 169 repeated visits measure graph overlap,
+not runtime savings or avoided acquisition. This audit covers the selected proof,
+not alternative plans, reference-SAT proofs or every equivalent representation.
+Reuse of larger cores or boundary descriptions remains the structural gap.
+
+The 83 formulas exactly match the recorded retained-policy misses in the
+historical 1,497-input corpus. They have been adaptively reused for development.
+This identity check does not perform a fresh combined-policy replay of the full
+historical corpus; the earlier $902/985$ non-tiny result remains a separate
+measurement. Historical plan configurations must be bound explicitly in a
+combined query. A new full-corpus runtime or holdout result cannot be inferred
+by adding coverage counts.
+
+Mean six-batch sequence time is 77.64131 seconds, including
+64.54345 seconds startup and 3.20071 seconds local expansion.
+Parent restoration adds 27.63698 seconds. History grows by 2,019,328 bytes
+to 786,116,608 bytes and 42,876 patterns; the structural delta occupies 2,097,152
+SQLite bytes or 108,380 compressed bytes. Separate reference evidence adds
+2,010 nodes and 15,405,056 SQLite bytes, reaching 8,789 nodes. Peak RAM is unmeasured.
+Independent replay disables materialization and fresh search, checks every prefix
+and fourteen saved global queries, and verifies all reference nodes. All 299 tests
+pass. The next test is acquisition on new unlabelled inputs under a frozen policy,
+with preparation, forcing evidence and cold replay charged. Complete coverage of
+this finite subset supplies neither compact closure nor a uniformly polynomial
+solution covering every CNF.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

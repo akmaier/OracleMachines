@@ -1,0 +1,215 @@
+{
+  "corpus": {
+    "complete_historical_corpus_replayed": false,
+    "current_options": {
+      "clause_growth_limit": 2,
+      "learn_limit": 4,
+      "max_depth": 2,
+      "probe_limit": 4
+    },
+    "current_subset_closed": 83,
+    "exactly_matched_source_indices": [
+      742,
+      890,
+      894,
+      907,
+      949,
+      966,
+      971,
+      978,
+      1008,
+      1010,
+      1042,
+      1052,
+      1058,
+      1061,
+      1062,
+      1063,
+      1064,
+      1077,
+      1078,
+      1081,
+      1086,
+      1118,
+      1120,
+      1121,
+      1122,
+      1148,
+      1153,
+      1154,
+      1158,
+      1160,
+      1189,
+      1190,
+      1191,
+      1193,
+      1194,
+      1195,
+      1196,
+      1226,
+      1227,
+      1229,
+      1230,
+      1231,
+      1263,
+      1265,
+      1292,
+      1293,
+      1297,
+      1298,
+      1299,
+      1300,
+      1301,
+      1302,
+      1304,
+      1325,
+      1328,
+      1336,
+      1337,
+      1338,
+      1340,
+      1369,
+      1371,
+      1372,
+      1374,
+      1376,
+      1406,
+      1408,
+      1409,
+      1410,
+      1412,
+      1436,
+      1440,
+      1441,
+      1443,
+      1444,
+      1445,
+      1446,
+      1447,
+      1448,
+      1478,
+      1480,
+      1481,
+      1483,
+      1484
+    ],
+    "legacy_closed": 1414,
+    "legacy_misses": 83,
+    "legacy_options": {
+      "learn_limit": 4,
+      "max_depth": 2,
+      "probe_limit": 4
+    },
+    "legacy_path": "experiments/results/cnf-retained-plans-full/report.json",
+    "legacy_sha256": "6b09f04a02286d4a9ca5ac692ea0bf4d7b481f90b2ce3c2fad9490aab42ddc32",
+    "legacy_sources": 1497,
+    "new_holdout_evaluated": false
+  },
+  "diagnostic_seconds": 0.19349920796230435,
+  "families": [
+    {
+      "assignments": 8192,
+      "checked_classification": {
+        "dual_horn": false,
+        "horn": true,
+        "one_valid": false,
+        "two_cnf": false,
+        "zero_valid": true
+      },
+      "satisfying_assignments": 50,
+      "shape": [
+        13,
+        19,
+        42
+      ],
+      "source_sha256": "1c07781654f7b7ffa2162acc4b98ce303bb564670f3274668b64d43df85c0310"
+    },
+    {
+      "assignments": 1024,
+      "checked_classification": {
+        "dual_horn": false,
+        "horn": true,
+        "one_valid": false,
+        "two_cnf": false,
+        "zero_valid": true
+      },
+      "satisfying_assignments": 60,
+      "shape": [
+        10,
+        11,
+        23
+      ],
+      "source_sha256": "f8d30b73ea2a069503579067d21870e6912833fb8e361d3bb68aa1edfc2dea0c"
+    },
+    {
+      "assignments": 64,
+      "checked_classification": {
+        "dual_horn": false,
+        "horn": false,
+        "one_valid": false,
+        "two_cnf": true,
+        "zero_valid": false
+      },
+      "satisfying_assignments": 13,
+      "shape": [
+        6,
+        7,
+        14
+      ],
+      "source_sha256": "67cf7ffb18e449ad4e5b5e6e849354c2495729cf863b7ae559b1e990d4c6c9d8"
+    },
+    {
+      "assignments": 32,
+      "checked_classification": {
+        "dual_horn": true,
+        "horn": false,
+        "one_valid": true,
+        "two_cnf": true,
+        "zero_valid": false
+      },
+      "satisfying_assignments": 10,
+      "shape": [
+        5,
+        5,
+        10
+      ],
+      "source_sha256": "42ff0650c4f1b784323812f1b728f3e786dadef919870d87e844d913b7834d24"
+    }
+  ],
+  "limitations": [
+    "The 83 formulas are adaptively reused development misses from the historical corpus, not new holdout cases.",
+    "Exact input membership does not perform a fresh combined-policy replay of all 1497 historical sources or establish its resource cost.",
+    "Exhaustive terminal and polarity checks are bounded diagnostics, not an efficient algorithm for arbitrary CNFs.",
+    "These diagnostics do not establish shared nonterminal representations across different original inputs."
+  ],
+  "passed": true,
+  "polarities": [
+    {
+      "assignments_checked": 8192,
+      "flipped_variables": 7,
+      "satisfying_assignments": 50,
+      "shape": [
+        13,
+        19,
+        42
+      ],
+      "source_sha256": "aa40c1e4cb636f952421f316a9e3b8d3007f8132bb12c46f30fe87615cd19be7",
+      "target_sha256": "1c07781654f7b7ffa2162acc4b98ce303bb564670f3274668b64d43df85c0310"
+    },
+    {
+      "assignments_checked": 1024,
+      "flipped_variables": 5,
+      "satisfying_assignments": 60,
+      "shape": [
+        10,
+        11,
+        23
+      ],
+      "source_sha256": "6ade55ee3ce658914bb1fc3b73f9e14d488ab3f9a7ffbe35cdbb20a46e2b2af4",
+      "target_sha256": "f8d30b73ea2a069503579067d21870e6912833fb8e361d3bb68aa1edfc2dea0c"
+    }
+  ],
+  "reconstruction_sha256": "24a6a85d3f668a7c189abd66a4b783e2045911c4be71c554b2d88d5455d0a753",
+  "report_sha256": "f8c8081bb0c345a3ed45c566e55b1641bb9ca436064c30ad7afd5a434cb1bb66",
+  "source_sha256": "95940d52a72e920c0825880460ef9886f168eb12c6d84ed89988ee396a260892"
+}

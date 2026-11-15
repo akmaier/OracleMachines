@@ -12,7 +12,51 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: finish the five remaining originals
+## Current investigation: transfer beyond the completed development subset
+
+[The final six-batch sequence](case1196-completion.md) raises structural coverage
+**78/83 -> 83/83** on the retained development misses, with **144 new records /
+147 admissions**. All five remaining originals are checked: three SAT and two UNSAT.
+The three interrupted inputs are completed. Four terminals expose Horn, 2-CNF and
+dual-Horn overlaps; exhaustive bounded checks validate their classifications and
+both polarity maps. This completes a finite development subset, not arbitrary SAT.
+
+The full selected proof has **4,822 steps**, of which only **14** are shared across
+originals. All shared CNFs have at most **two variables**; the four shared
+nonterminal steps directly reference family leaves. There are **169 repeated
+per-root step visits**, not a measured runtime saving. This locates the remaining
+structural gap more precisely: discover and certify reusable larger cores or
+boundary descriptions, beyond these small resolved ends of the proof.
+
+**There is no pending source.** Restore
+`experiments/results/cnf-case1196-discovery/report.json` using
+`experiments.continue_cnf_case1196_discovery.restore_checkpoint` as the prepared
+state. Its `next_selection.source` is null; the initial case 1196 is complete.
+Preserve evidence **(1,42,156,98,1)** and two bridges.
+
+**Next priority:** test transfer to new unlabelled inputs under a frozen policy and
+budget. As preparation, bind the preserved historical successful plans and the
+new coverage in a combined query and replay the full historical corpus without
+fresh acquisition. The 83 formulas exactly match the old retained-policy misses
+among 1,497 inputs, but no new full-corpus replay or runtime has yet been measured.
+The old **902/985 non-tiny** result remains separate. Then compare prepared versus
+empty history on matched fresh sizes, mixtures and edits, charging forcing-trace
+acquisition as well as local expansion. Seek certified nonterminal or boundary
+sharing; matching family names or finite completion do not establish it.
+
+Mean six-batch sequence time is **77.64131 seconds**, including
+**64.54345 seconds** startup and **3.20071 seconds** local
+expansion. This longer allowance is not a speed comparison with four-batch runs.
+History adds **2,019,328 bytes**; reference evidence adds **15,405,056 bytes**.
+
+Report SHA-256: `f8c8081bb0c345a3ed45c566e55b1641bb9ca436064c30ad7afd5a434cb1bb66`.
+The new `validation.json` and `manifest.json` inherit **43 prior manifests /
+2,650 prior artifacts / 145 prior source fingerprints**. All 299 tests and
+independent reconstruction pass.
+The new validation binds **151 source files** and the manifest adds **187 artifacts**:
+inherit **2,837 artifacts across 44 manifests** in the next preservation audit.
+
+## Previous investigation: finish the five remaining originals
 
 [Resuming the retained branches](case1063-discovery.md) raises structural coverage
 **75/83 -> 78/83**, completing **1063, 1371 and 1158**. All three originals are SAT;

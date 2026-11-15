@@ -3748,3 +3748,18 @@ The next source is **1196 / index 36**, **43/181/549**, no pending split. Follow
 new checkpoint's `next_selection`. Five originals remain uncovered; exact prefix
 reuse, full costs and validation are in the linked record. Coverage of this retained
 corpus remains distinct from generalization to new CNFs and an arbitrary-SAT bound.
+
+## 2026-11-15: the retained 83-source subset is complete
+
+[The case-1196 sequence](case1196-completion.md) raises checked structural coverage
+**78/83 -> 83/83**, using six batches with the existing per-batch limits. Both
+repetitions store **144 records** on **147 admissions**; all interrupted inputs
+are completed and the final source selection is null. Four small terminals and
+two polarity maps pass exhaustive bounded checks. All 83 source formulas exactly
+match the historical retained-policy misses, so this is development-set completion,
+not a fresh holdout or a new full-corpus measurement. History adds **2,019,328 bytes**;
+separate reference evidence adds **15,405,056 bytes**. Restore the completed
+`cnf-case1196-discovery` checkpoint for combined-policy full-corpus checking and
+then frozen-policy evaluation on new unlabelled inputs. Do not restart an old
+pending source. Certified sharing beyond terminals, paid trace acquisition and
+generalization remain open; no arbitrary-SAT polynomial bound follows.

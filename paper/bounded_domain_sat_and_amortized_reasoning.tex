@@ -3857,6 +3857,43 @@ Continuing the saved 25-variable split stores thirty-five patterns across two th
 
 The ordinary two-batch worker cost is 17.86459 seconds, including 17.31958 seconds of preparation and 0.34281 seconds of expansion. A separate cProfile repetition reproduces the same logical work and identifies a remaining preparation cost: in its second batch, recomputing all eight table digests takes 3.78143 of 4.78940 instrumented seconds. Copying takes 0.13202 seconds and the retained-session guard 0.00393 seconds. Profiling adds overhead, and these timings establish no comparative speedup. Reusing unchanged table digests requires a checked snapshot and invalidation on unaccounted writes; changed tables still require recomputation or a suitable incremental structure. The current digest orders rows by key, so newly appended rows cannot generally be treated as a hash suffix. History grows by 430,080 bytes to 778,416,128 bytes and 42,303 patterns. The next opportunity is to avoid redundant historical scans while preserving cold verification, alongside continued discovery of reusable conditional structure.
 
+\paragraph{Separate digest reuse from the location of a full scan.}
+A matched continuation resumes the saved 34-variable interaction and closes
+original case 1120. Six independent runs, comprising two repetitions in reversed
+method order, each store 32 patterns in one bounded batch. Structural coverage
+increases from $66/83$ to $67/83$. One cofactor reaches a $6/11/29$ zero-valid
+terminal; another uses a checked flip of two local variables to reach a $5/7/16$
+Horn and zero-valid terminal. All thirteen previously interrupted inputs are
+stored. Hashing all eight tables on the live inventory
+connection takes $0.46050$ seconds on average, compared with $4.47472$ seconds
+when hashing the batch copy. Mean worker time falls from $12.68940$ to
+$8.55304$ seconds, with the copy still charged in both methods. These two
+observations per method describe this workload and shared cache conditions;
+they do not establish a general speedup. Both methods scan every row, so the
+reduction cannot be attributed to reusing unchanged-table hashes. The focus
+closes before a second expansion batch.
+
+A separate replay of the exact 32-row append tests such reuse. On one exclusively
+owned connection with the supported fixed persistent schema, row-count,
+rowid-suffix and change-counter guards permit reuse of hashes for unchanged
+tables. Changed tables require a full key-ordered rescan: newly inserted keys
+need not follow old keys in that order. Initial hashes are computed rather than
+accepted from saved metadata, and cold reconstruction retains its authority
+checks. With $H_t$ the full scan cost for table $t$, a later snapshot costs
+$G+\sum_{t\in C}H_t$, where $C$ is the changed-table set and $G$ includes the
+index-reading guards. Initial construction costs $\sum_t H_t$ plus guards;
+the retained metadata has one entry per table. This is not a delta-only bound.
+The replay reuses 24,281 rows in seven tables but rescans 42,335 pattern rows.
+Across three repetitions, mean refresh time is $0.42716$ seconds with guards
+and $0.42444$ seconds with full scans; complete measured replay sequences take
+$6.22119$ and $4.71509$ seconds, respectively. We retain this regression and
+favor live full scans. An additional unchanged read benefits from the cache,
+but it is not an expansion step. Checked-session construction still accounts
+for $7.54456$ seconds of the live-full worker, and final global route preparation
+and coverage cost $69.46916$ seconds. These costs remain separate from the
+$0.17183$-second mean local expansion and from parent reconstruction. The result
+closes one retained original and adds no unrestricted-SAT efficiency guarantee.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

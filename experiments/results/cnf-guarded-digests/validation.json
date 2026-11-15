@@ -1,0 +1,296 @@
+{
+  "commands": {
+    "paper": "latexmk -cd -pdf -interaction=nonstopmode -halt-on-error paper/bounded_domain_sat_and_amortized_reasoning.tex",
+    "producer": "python3 -u experiments/compare_cnf_guarded_digests.py experiments/results/cnf-guarded-digests",
+    "refresh": "python3 -u experiments/benchmark_cnf_digest_refresh.py experiments/results/cnf-guarded-digests",
+    "validator": "python3 -u experiments/validate_cnf_guarded_digests.py experiments/results/cnf-guarded-digests"
+  },
+  "cost_summary_sha256": "871d0fb5b7d02f0e2a390ed6fd36d0d3e2935e916112a1700e0db00d4d19cd5c",
+  "digest_refresh_sha256": "c2324c86295b3f50367f5a3c7717355dd65069bdbf3a0c9f9902bcfec548fc53",
+  "global_positive_archive_byte_identical": false,
+  "independent_reconstruction": {
+    "arms": [
+      {
+        "admitted": 32,
+        "batch": 0,
+        "closed": true,
+        "cold_selection_matches": true,
+        "completed": 32,
+        "digest_mode": "copy",
+        "idempotent": true,
+        "repeat": 0,
+        "startup_mode": "retained",
+        "unfinished": 0
+      },
+      {
+        "admitted": 32,
+        "batch": 0,
+        "closed": true,
+        "cold_selection_matches": true,
+        "completed": 32,
+        "digest_mode": "live",
+        "idempotent": true,
+        "repeat": 0,
+        "startup_mode": "retained",
+        "unfinished": 0
+      },
+      {
+        "admitted": 32,
+        "batch": 0,
+        "closed": true,
+        "cold_selection_matches": true,
+        "completed": 32,
+        "digest_mode": "guarded",
+        "idempotent": true,
+        "repeat": 0,
+        "startup_mode": "retained",
+        "unfinished": 0
+      },
+      {
+        "admitted": 32,
+        "batch": 0,
+        "closed": true,
+        "cold_selection_matches": true,
+        "completed": 32,
+        "digest_mode": "guarded",
+        "idempotent": true,
+        "repeat": 1,
+        "startup_mode": "retained",
+        "unfinished": 0
+      },
+      {
+        "admitted": 32,
+        "batch": 0,
+        "closed": true,
+        "cold_selection_matches": true,
+        "completed": 32,
+        "digest_mode": "live",
+        "idempotent": true,
+        "repeat": 1,
+        "startup_mode": "retained",
+        "unfinished": 0
+      },
+      {
+        "admitted": 32,
+        "batch": 0,
+        "closed": true,
+        "cold_selection_matches": true,
+        "completed": 32,
+        "digest_mode": "copy",
+        "idempotent": true,
+        "repeat": 1,
+        "startup_mode": "retained",
+        "unfinished": 0
+      }
+    ],
+    "cold_next_selection_matches": true,
+    "covered": 67,
+    "evidence_counts": [
+      1,
+      42,
+      156,
+      55,
+      1
+    ],
+    "gains": [
+      22
+    ],
+    "global_coverage_counts": {
+      "justified_nodes": 5147,
+      "premises": 27289,
+      "reachable_nodes": 26105,
+      "rules": 26342,
+      "witness_steps": 1847
+    },
+    "global_coverage_seconds": 69.45482208300382,
+    "identical_operations_and_logical_results": true,
+    "passed": true,
+    "report_sha256": "15f28884970be856f78475cdc426604f499998f6f2483ebbaa2760f8e8cc194f",
+    "restore_seconds": 122.33958995901048,
+    "seconds": 545.6997871669009,
+    "seed_unchanged": true,
+    "verified_reference_nodes": 4198
+  },
+  "paper_check": {
+    "build_passed": true,
+    "latex_log_sha256": "c949b5a4266c43810852b1432fad58a6e5bc4814179568a865d66bca51a7ca7d",
+    "new_proof_blocks": 0,
+    "overfull_boxes": 0,
+    "pages": 164,
+    "paper_sha256": "576d438f5a034a4ab5ccc431bb6ceb71a3f97dcf0f921cb32e9384a7eb54fb99",
+    "preserved_proof_blocks": 64,
+    "previous_commit": "be937e9946b246be011ac849503f7aa485e4187c",
+    "undefined_references": false
+  },
+  "parent_manifests": {
+    "experiments/results/cnf-append-export-checked/manifest.json": {
+      "artifacts_checked": 73,
+      "sha256": "7ee60fa7410df9e3dd59cdae92556e3499c5f661838b518e5ee5b532cf16cba5"
+    },
+    "experiments/results/cnf-clear-maintenance/manifest.json": {
+      "artifacts_checked": 124,
+      "sha256": "d85d4a52eef046f6ff71e3d04d3cb4e044dc8c90ace3fc9c826eadb08c9f3481"
+    },
+    "experiments/results/cnf-combined-expansion/manifest.json": {
+      "artifacts_checked": 81,
+      "sha256": "975033efb5c5bc17a1b0882d6763f79e2c454b4c090a32b1170e4ddfac30ea7a"
+    },
+    "experiments/results/cnf-conditional-frontier/manifest.json": {
+      "artifacts_checked": 40,
+      "sha256": "3ea8ebde283332d6a5c0349ee759c7d4713f42e2d7108e89f2549283ecbff2c5"
+    },
+    "experiments/results/cnf-early-closed/manifest.json": {
+      "artifacts_checked": 72,
+      "sha256": "5139ef697d8a0dd07c1b57b67c14c429ac6c0786a86b04db3c8744be5cbc3b1e"
+    },
+    "experiments/results/cnf-early-saved/manifest.json": {
+      "artifacts_checked": 127,
+      "sha256": "ee34fdbecee9e23ba2b99876f9e5e0ca955e6b7f2cc1ada006f8ff33282c0d47"
+    },
+    "experiments/results/cnf-expanded-coverage/manifest.json": {
+      "artifacts_checked": 8,
+      "sha256": "1eb6be76f66b8f483486a7985eddc31d29f2f7384c6e60d3873214e98335187c"
+    },
+    "experiments/results/cnf-expansion-session/manifest.json": {
+      "artifacts_checked": 101,
+      "sha256": "b3fa5a87d864279a7bd2962fe11d1749a3ce6c6bc3223af7b63934cba23e884e"
+    },
+    "experiments/results/cnf-incremental-coverage/manifest.json": {
+      "artifacts_checked": 8,
+      "sha256": "1af918ca0ad3bd81c6cca802cff9012335f0a218316afbe4d269b55d3aae896a"
+    },
+    "experiments/results/cnf-local-forcing/manifest.json": {
+      "artifacts_checked": 16,
+      "sha256": "592d7b463bfdd255a4ae374e7cf477e8c3ca5f5ee76058d94a0ea6963e450386"
+    },
+    "experiments/results/cnf-original-1120/manifest.json": {
+      "artifacts_checked": 67,
+      "sha256": "73fffe3568d0cd708163a9b95f7284514782afd3ef6393358859d84858bec53a"
+    },
+    "experiments/results/cnf-original-warm/manifest.json": {
+      "artifacts_checked": 42,
+      "sha256": "4be286b0047d51982ecd83b07672d342ba46268adb1c6276d31c176c522e7e74"
+    },
+    "experiments/results/cnf-pattern-activation/manifest.json": {
+      "artifacts_checked": 98,
+      "sha256": "8ee5fefd93e877929df9e00577c313203e9d0325e6d500c512dca03385e99122"
+    },
+    "experiments/results/cnf-pending-maintenance/manifest.json": {
+      "artifacts_checked": 104,
+      "sha256": "c7860d8162e5c83125c03df7ec12ac857a8479df1039ac30f339ece321e16842"
+    },
+    "experiments/results/cnf-pending-pair/manifest.json": {
+      "artifacts_checked": 40,
+      "sha256": "c6bd5652fe57a21e4d7a4daa37599534fde41516fc305333daa3b1f4651963bd"
+    },
+    "experiments/results/cnf-pending-warm/manifest.json": {
+      "artifacts_checked": 20,
+      "sha256": "1f10caa5f2c2937c9deafc7c812bcbc07e8ed85441ab852fc080979ffba78b67"
+    },
+    "experiments/results/cnf-positive-bundle/manifest.json": {
+      "artifacts_checked": 9,
+      "sha256": "1852ca037a358474440760c8eaec92a081d55436864e82670cc5db74895756d6"
+    },
+    "experiments/results/cnf-positive-primitives/manifest.json": {
+      "artifacts_checked": 9,
+      "sha256": "412e36cf16f6bf99eb08b815d039de607fb953e94bd51e98cc3e8f435beaf400"
+    },
+    "experiments/results/cnf-projection-acquisition/manifest.json": {
+      "artifacts_checked": 73,
+      "sha256": "1b4f1fda18ec92e2e9796e8b8fe7528846ea5da56445b3f087f7bdae45b46325"
+    },
+    "experiments/results/cnf-projection-bridge/manifest.json": {
+      "artifacts_checked": 71,
+      "sha256": "9d6d7aa392a88c8d7e2e87ab20e0282a09062b65e88a90585d4d357b9c02fd16"
+    },
+    "experiments/results/cnf-projection-lookup/manifest.json": {
+      "artifacts_checked": 21,
+      "sha256": "48bf96d45bce838cce29dc0d03e47bc60759ddafdcc8cc0b6d3d2dcec5c33a08"
+    },
+    "experiments/results/cnf-reduction-reuse/manifest.json": {
+      "artifacts_checked": 65,
+      "sha256": "5a998c62b4aec923e14ec9d93ac5ceafe3c3554a511c1f676d9f16050af764d0"
+    },
+    "experiments/results/cnf-reused-branch/manifest.json": {
+      "artifacts_checked": 17,
+      "sha256": "0b865efe9c443d2e2391fe421195aa3286326e360a9381a9842d005b37a258b0"
+    },
+    "experiments/results/cnf-selected-routes/manifest.json": {
+      "artifacts_checked": 8,
+      "sha256": "794927c4004a17acc36861c8ec9d1be79bfe616313bde407d8ee0e668e53cc88"
+    },
+    "experiments/results/cnf-session-frontier/manifest.json": {
+      "artifacts_checked": 40,
+      "sha256": "c7e412b6124549002666dbf8ed2127af94e8847b94747e19c7212ff369131c28"
+    },
+    "experiments/results/cnf-source-local-checked/manifest.json": {
+      "artifacts_checked": 16,
+      "sha256": "15a405063c7da4944e2f70a6d2026156c07774b31c4de3bb97eac911fc8a72c9"
+    },
+    "experiments/results/cnf-split-cost-1299/manifest.json": {
+      "artifacts_checked": 95,
+      "sha256": "77b1589afe8ac45996c154360a3c81e7d92dbeeb7024f2cd6ec048293dd7ce07"
+    },
+    "experiments/results/cnf-transfer-1304/manifest.json": {
+      "artifacts_checked": 24,
+      "sha256": "f8a8df92b128aa1dfe916dedadf64066d5b39b1f4499f4f354d4ba0b1d262ceb"
+    },
+    "experiments/results/cnf-warm-batch/manifest.json": {
+      "artifacts_checked": 24,
+      "sha256": "406f53d13b1a6294fe60d6f1f9fa0e6512433a68f00f5271b51c538dc0950e7c"
+    }
+  },
+  "reference_preservation": {
+    "all_prior_payloads_unchanged": true,
+    "current_nodes": 4198,
+    "missing_or_changed_prior_rows": 0,
+    "previous_nodes": 4153
+  },
+  "report_sha256": "15f28884970be856f78475cdc426604f499998f6f2483ebbaa2760f8e8cc194f",
+  "scope": "Six independent matched workers close the case-1120 focus in one 32-entry batch and raise original coverage to 67/83. All methods perform initial full hashes; their worker difference cannot be attributed to reusing cached hashes. A separate replay of the exact append reuses seven unchanged tables but retains the slower complete-sequence result and lack of mean refresh improvement. Initial preparation, guards and full rescans of changed tables are charged. Main persistent schema without temporary name shadowing, ordinary writes and exclusive ownership are preconditions; raw-file tampering and cache mutation are outside the live-cache contract. New cold replay disables fresh discovery and reference search and checks every intermediate catalog, including full seed digests from copied files. It verifies all 4198 reference nodes, preserves all 4153 prior payloads and all 1493 prior artifacts in 29 manifests. Producer and refresh timings ran before tests, paper build, independent replay and preservation checks. Those validations overlapped, so cold elapsed time is not a performance comparison. Measurements share OS caches, use two worker repetitions and three refresh repetitions, and establish no holdout result, confidence interval, peak-RAM reduction, persistent-space reduction, globally minimal expansion or unrestricted-SAT efficiency bound.",
+  "source_fingerprints": {
+    "experiments/audit_cnf_renaming_candidates.py": "5b5cb48e32bbb851cb3e299647ccb772fe7e7d68ef62bfc8fde96ab612d6c055",
+    "experiments/benchmark_cnf_digest_refresh.py": "64bb229245ea20fea5c78963ca8ead45a4ac311e50bbdf6f092d74859c764201",
+    "experiments/cnf_append_delta.py": "902afd71d3bc2121204d0cb76bca30caab047c583037562d3f58947b8fb66327",
+    "experiments/cnf_clear_probe_maintenance.py": "b4e740989d1d59c5437ef1501485c3aff9d4bc23e39fb08814c1790cd845b506",
+    "experiments/cnf_digest_worker.py": "990ac02a5e83a51ff1500d13fbc7865b12535c3660ac932e7dbf34d565a403f1",
+    "experiments/cnf_early_closed.py": "bea92740a880559771684f326e36ca8d1f09e4bd413d4f310b2c61ce96223252",
+    "experiments/cnf_early_saved.py": "d387e88ca07b1bf7d79d57b1d61609dee4947136d8bcbd273763869107ab6756",
+    "experiments/cnf_expansion_session.py": "42443db84cbed8631b12125e46ef8a1e03fcfb2137487e2efc63c60581fcd740",
+    "experiments/cnf_guarded_digests.py": "a0285a024e1bdde1cfd46d1c57b2a32ef4fb4be433ce334eba4533c6ab376263",
+    "experiments/cnf_original_frontier.py": "c85f2a932b24b85796c1a3290b53a42fca02f6acb3ebf6e78e5f60e9c1fa9ca9",
+    "experiments/cnf_pattern_activation.py": "665a0fe764d98e3aafc0bd22820bbaa9dd80652d82cd584bf2ff2ec52a359893",
+    "experiments/cnf_pending_split_maintenance.py": "c0d3bb9811c1953c96c5ce53bac6c266d2dccbbc748cd0cfbe4f83fde6f4c452",
+    "experiments/cnf_probe_continuation.py": "c19858deadf5606c2c191bf4d55b627226676e3e0832b13c632d7afb3cafd50b",
+    "experiments/cnf_probe_window.py": "010567c402f38c22f75c8ba6d064c945540e1f588d88d786c9039cfeda6a9070",
+    "experiments/cnf_renaming_invariant.py": "41d4491e22097cbffe90e1d2d97be7501ada61f8e01edb7f02b776d1972c123f",
+    "experiments/cnf_source_local.py": "cdc62b0d68da61d277205923eb39ba0ef5a53c02efaca62673ec7492bf8d7f3a",
+    "experiments/cnf_split_batch.py": "4c463daba5b552f34511041a30b4847c7f42077f2a0938dda60fd36a1696bac2",
+    "experiments/cnf_warm_expansion.py": "19f8fc0887b322fcd8a12e0241c2ff6221dafc43d32563077952863e8af40b21",
+    "experiments/compare_cnf_append_export.py": "10d39289fbd51e8d190cfbc7bcf02afa86ab63004c2896fd6d2aae3ca9872865",
+    "experiments/compare_cnf_expansion_session.py": "9d46a05207fe26deccd92d0e1595bcc3a7a20ff41a39bd6a0563c80ea935ca8e",
+    "experiments/compare_cnf_guarded_digests.py": "9766dcfa96db548d8bccbfdb844ada187a2c1badd5f8194fc8573818fc71dc15",
+    "experiments/compare_cnf_pattern_activation.py": "2b211e60e2282f0e6061a47de7d34b9504bd1b2006945c004409d0a8ed68b649",
+    "experiments/compare_cnf_pending_maintenance.py": "ef7df93bffe43187b5ff390d17812da9777fad6284b9542a106acbe605bfdd08",
+    "experiments/continue_cnf_conditional_frontier.py": "99f860d8684cff770cbec4e05e2c1b279a2dd38175ef665e29e4f8d0aaf2a341",
+    "experiments/continue_cnf_original_1120.py": "8c10a2f4cf1820862233f131b5fdd25267fc1f0ac4d99f3f08f17f50e94a094d",
+    "experiments/continue_cnf_pending_pair.py": "2723d488d8d966d6b1ae832cd718e4807aaa34c7bf70a782dfa59a920a7e06fc",
+    "experiments/continue_cnf_reduction_reuse.py": "35b7d419ee061d3a67fd80884d3182afbdf3694ef420469cf6cda58e64bc57dc",
+    "experiments/continue_cnf_session_frontier.py": "53a471c3ef7956137388dfb3e57dba66f9821671b1de6b22d40b4df33a557893",
+    "experiments/validate_cnf_guarded_digests.py": "6eb69846337d0aecc629fc1bbf7d029a42d1b4b7fd2daefeb3bae7508328c859",
+    "solver/test_cnf_append_delta.py": "8eb7389f139dbdae576e05a382e6e23418ae5f644875825caf6af8f5298a2010",
+    "solver/test_cnf_clear_probe_maintenance.py": "e3e46a0df73bf183c3c144d96e5e6d83b318aa0c311672eea64de7b171a0aeb7",
+    "solver/test_cnf_expansion_session.py": "1993e99e2332ec3673f6c1830fef5eb17de95ab2750f48e8e76976a3abfd6003",
+    "solver/test_cnf_guarded_digests.py": "1a6a57561ea7f13ff90aab4dc07bbc4ad459380f92de123d5a402a6827d4945c",
+    "solver/test_cnf_pattern_activation.py": "d5c64788c2f47e2a5b9b070fe076c63308173489bb071c6e242438bdad781fe0",
+    "solver/test_cnf_pending_split_maintenance.py": "ceb1e028aa5d4282ef0948d306ba7919b5fba0cfc3a7bed2ad4394ab4142dd7c",
+    "solver/test_cnf_renaming_invariant.py": "c3179cb57963b61f03e9b87541d8b8d992210540d7a921065df0e7b692997b85"
+  },
+  "structural_findings_sha256": "4948cf60bd9e4c6d75bc9c4b45f64d8339b7b9bcca553923257b48feaf41d978",
+  "terminal_patterns_sha256": "ae77f783c536c4794cc02d6957e6553ea17c81e323fe5ff8af6a9a40d6ca64ae",
+  "test_command": "python3 -m unittest solver.test_cnf_positive_bundle solver.test_cnf_positive_primitives solver.test_cnf_expanded_coverage solver.test_cnf_selected_routes solver.test_cnf_route_composition solver.test_cnf_trace_split solver.test_cnf_probe_window solver.test_cnf_probe_continuation solver.test_cnf_learning_continuation solver.test_cnf_trace_learning solver.test_cnf_trace_reuse solver.test_cnf_coupled_pivots solver.test_cnf_affine_clause solver.test_cnf_retained_plans solver.test_cnf_variable_elimination solver.test_cnf_clause_bound_elimination solver.test_cnf_additive_elimination solver.test_cnf_binary_paths solver.test_cnf_polarity_horn solver.test_cnf_simplification solver.test_cnf_fused_conditioning solver.test_cnf_affine_projection solver.test_cnf_affine_patterns solver.test_cnf_probe_equivalence solver.test_cnf_source_local solver.test_cnf_local_forcing solver.test_cnf_incremental_coverage solver.test_cnf_warm_expansion solver.test_cnf_original_frontier solver.test_cnf_original_splits solver.test_cnf_split_batch solver.test_cnf_split_frontier solver.test_cnf_early_closed solver.test_cnf_projection_bridge solver.test_cnf_projection_lookup solver.test_cnf_projection_acquisition solver.test_cnf_early_saved solver.test_cnf_clear_probe_maintenance solver.test_cnf_pending_split_maintenance solver.test_cnf_pattern_activation solver.test_cnf_append_delta solver.test_cnf_expansion_session solver.test_cnf_renaming_invariant solver.test_cnf_guarded_digests",
+  "test_log_sha256": "4f1d910194d9c43814ff8174e24a0036b0d1b17bacc10df1f3cdf38cb5a1391c",
+  "test_notes": "All 238 prior tests and seven new guarded-digest tests pass. New tests cover accepted append/reuse, all eight tables, nonmonotone keys, detached results, mutation/rollback/external-writer/schema rejection and fresh reconstruction. The worker expansion, maintenance, persistence and stopping body matches the frozen baseline AST after removing digest-cache retention. No Lean theorem or previous proof block is changed.",
+  "tests": 245,
+  "whitespace_check": "git -c core.whitespace=-blank-at-eof diff --cached --check passes. The only default warning is one trailing blank line in the producer-fingerprinted cnf_digest_worker.py; its measured bytes are preserved."
+}

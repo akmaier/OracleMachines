@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Live digest scans and the next completed original](research/guarded-table-digests.md)
+raise structural coverage to **67/83**, storing **32 patterns**. Reading the live
+database reduces observed worker time by **32.6%** against scanning its copy.
+A separate cache of unchanged table hashes shows no average benefit after an
+append; its regression is retained. Checked-session startup and global coverage
+are now the larger measured costs.
+
 [Following reductions across different SAT classes](research/reduction-reuse-profile.md)
 stores **35 patterns** and completes a conditional pair through a zero-valid
 terminal and a 2-CNF terminal. Coverage remains **66/83**. Profiling identifies

@@ -12,7 +12,58 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: mixed terminal classes and repeated table scans
+## Current investigation: live scans, original coverage and a retained regression
+
+[The matched digest investigation](guarded-table-digests.md) closes the saved
+34-variable interaction and original **case 1120**. All six independent runs
+store **32 patterns** in one batch, with no unfinished admissions; coverage
+increases **66/83 -> 67/83**. Live full scans reduce mean worker time from
+**12.68940 to 8.55304 seconds** (**32.6%** on these measurements). Both scan all
+rows. Guarded hash reuse is **not** the cause: the focus closes before a second
+batch. The separate append replay skips seven tables but has no mean refresh
+speedup and a slower complete sequence. Keep that regression and favor live
+full scans for subsequent work.
+
+1. **Carry checked state across original focuses, while broadening coverage.**
+   The next source is **39/167/519**, original **case 1061**, retained index **13**,
+   with no pending split. Inspect its unresolved interactions and saved pairs.
+   The live-full worker still spends **7.54456 of 8.55304 seconds** constructing
+   the checked session; retaining it across sources is the largest remaining
+   worker opportunity. Preserve exact original binding and charge navigation.
+2. **Avoid rebuilding unaffected global coverage.** Final route preparation and
+   global coverage take **69.46916 seconds**, versus **0.17183 seconds** mean
+   local expansion. Parent reconstruction is **114.01706 seconds**. Investigate
+   integration of the existing `CoverageIndex` and live route maintenance with
+   the original-case navigator. Complete catalog and implicit-rule updates need
+   explicit checks; do not trust persisted closure flags.
+3. **Leave guarded digest reuse experimental.** It reuses **24,281 rows** across
+   seven tables but must rescan **42,335 pattern rows**. Mean refresh is
+   **0.42716 versus 0.42444 seconds**; complete replay sequences are
+   **6.22119 versus 4.71509 seconds**. Initial count scans alone cost about
+   **0.72--0.79 seconds** on copied seeds. Eliminate that redundant first scan
+   before a longer amortization study. Unchanged-read savings do not establish
+   expansion savings, and changing pattern-table growth remains unrestricted.
+
+Resume **`experiments/results/cnf-guarded-digests/report.json`** with
+**`compare_cnf_guarded_digests.restore_checkpoint`**, SHA-256
+`15f28884970be856f78475cdc426604f499998f6f2483ebbaa2760f8e8cc194f`.
+Preserve evidence **(1, 42, 156, 55, 1)** and **two bridges**. The report's `source`
+is now completed; follow `next_selection`, key hash
+`88d90c3204e339d9422e80bd0a4ef8fa3db398874e034334de0ba7995916e92b`.
+History is **778,821,632 bytes / 42,335 patterns**, up **405,504 bytes**; the delta
+is **21,314 compressed bytes**. Reference nodes grow **4,153 -> 4,198** and the
+positive certificate **3,360 -> 3,518 steps**. All **708 activation routes** have
+available targets. Sixteen original cases remain open; no arbitrary-SAT size or
+runtime bound follows.
+
+Independent replay checks all **4,198 reference nodes** and reproduces all six
+arms without fresh recognition or reference search. All **245 tests**, the
+**164-page** manuscript build and preservation of **64 old proof blocks** pass.
+All **1,493 prior artifacts / 29 manifests** are unchanged. Cold validation takes
+**545.69979 seconds** with other validation work overlapping; it is not a speed
+comparison. The checkpoint manifest binds **74 artifacts**.
+
+## Previous investigation: mixed terminal classes and repeated table scans
 
 [The conditional continuation and profile](reduction-reuse-profile.md) store
 **35 patterns**, completing the saved 25-variable split through **7/7/19

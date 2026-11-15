@@ -7094,3 +7094,28 @@ completed false-cofactor certificates. All **238 tests** pass; the manuscript
 builds to **163 pages** with all **64 previous proof blocks** unchanged. The
 checkpoint manifest binds **65 artifacts**, with commands and limitations in
 `validation.json`.
+
+## 2026-11-15: live digest scans and closure of original case 1120
+
+The [matched digest study](guarded-table-digests.md) resumes the 34/120/355 split
+and closes the original-bound focus in one 32-entry batch. Six independent arms
+(two reversed-order repetitions of copied full, live full and guarded live scans)
+store identical patterns: 15 probe, 8 elimination, 6 binary-path, 2 family and
+1 polarity. Coverage rises 66/83 to 67/83; no admitted input remains unstored.
+History grows 405,504 bytes to 778,821,632 bytes / 42,335 patterns. The next open
+original is case 1061, index 13, with source 39/167/519 and no pending split.
+
+Mean copied/live-full worker costs are 12.68940/8.55304 seconds. Both hash every
+row; this measures the effect of reading the owned database, not cached hash
+reuse. The focus closes before any second expansion batch. A separate replay
+of the exact append reuses seven unchanged tables but shows no average refresh
+improvement (0.42716 guarded versus 0.42444 seconds full), with slower complete
+sequences (6.22119 versus 4.71509 seconds). Preserve the regression. Favor live
+full scans and investigate retaining the checked session across originals;
+startup still consumes about 7.54 seconds and global preparation/coverage 69.47
+seconds. Guarded initial count scans remain a smaller, explicitly charged overhead. No polynomial arbitrary-SAT or minimum-expansion result.
+
+Resume `cnf-guarded-digests/report.json` via
+`compare_cnf_guarded_digests.restore_checkpoint`; use `next_selection` because
+`source` is completed. Detailed bounds, preconditions and validation are in the
+linked investigation and checkpoint artifacts.

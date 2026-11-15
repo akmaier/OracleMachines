@@ -7638,3 +7638,21 @@ The largest remaining cost is new input 41, a **48/204/612** random CNF with 272
 probe attempts and unknown coverage. Inspect its persistent frontier, retaining
 the frozen inputs and all previous results. The original 83-source checkpoint
 remains complete and must not be restarted.
+
+
+## 2026-11-15: complete admission exposes the unresolved interaction
+
+[The corrected admission layer](complete-admission-frontier.md) accounts for both
+acquisition entrances before profile computation and keeps all old proof formats.
+At allowance 32 it avoids **40 fresh probes**, producing the **same 107 stored
+patterns and 41/42 coverage**. No storage gain is claimed. At allowance 4096 the
+last query returns normally on 391 admissions and 357 new patterns, but still
+has one connected **38/165/502** selected residual at depth zero. This is the next
+structural target, bound in `cnf-complete-admission/selected-frontier.json` to the
+original 48-variable input; the generous archive is the next restoration source.
+
+Four preserved 32-state restarts add 79 patterns to the previous 107 but repeat
+33 admissions and remain capped. Investigate checked persistence of unfinished
+profiles and transient restrictions. A complete state ledger does not bound
+verification, repeated visits or total time. All 323 tests and sixteen cold
+archives pass; the old 83-source checkpoint remains complete and unchanged.

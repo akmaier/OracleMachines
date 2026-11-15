@@ -1,0 +1,172 @@
+{
+  "archives": [
+    {
+      "label": "legacy32-0",
+      "no_acquisition": true,
+      "nodes": 107,
+      "queries": 42,
+      "seconds": 0.14041929226368666
+    },
+    {
+      "label": "complete32-0",
+      "no_acquisition": true,
+      "nodes": 107,
+      "queries": 42,
+      "seconds": 0.14318579202517867
+    },
+    {
+      "label": "legacy4096-0",
+      "no_acquisition": true,
+      "nodes": 443,
+      "queries": 42,
+      "seconds": 1.1587423752062023
+    },
+    {
+      "label": "complete4096-0",
+      "no_acquisition": true,
+      "nodes": 443,
+      "queries": 42,
+      "seconds": 1.1438282080926
+    },
+    {
+      "label": "complete4096-1",
+      "no_acquisition": true,
+      "nodes": 443,
+      "queries": 42,
+      "seconds": 1.14081195788458
+    },
+    {
+      "label": "legacy4096-1",
+      "no_acquisition": true,
+      "nodes": 443,
+      "queries": 42,
+      "seconds": 1.1459739156998694
+    },
+    {
+      "label": "complete32-1",
+      "no_acquisition": true,
+      "nodes": 107,
+      "queries": 42,
+      "seconds": 0.1345386658795178
+    },
+    {
+      "label": "legacy32-1",
+      "no_acquisition": true,
+      "nodes": 107,
+      "queries": 42,
+      "seconds": 0.1375711248256266
+    },
+    {
+      "label": "empty-0",
+      "no_acquisition": true,
+      "nodes": 21,
+      "queries": 1,
+      "seconds": 0.07015091693028808
+    },
+    {
+      "label": "empty-1",
+      "no_acquisition": true,
+      "nodes": 43,
+      "queries": 1,
+      "seconds": 0.14695008425042033
+    },
+    {
+      "label": "empty-2",
+      "no_acquisition": true,
+      "nodes": 57,
+      "queries": 1,
+      "seconds": 0.2036487921141088
+    },
+    {
+      "label": "empty-3",
+      "no_acquisition": true,
+      "nodes": 78,
+      "queries": 1,
+      "seconds": 0.27668887516483665
+    },
+    {
+      "label": "prepared-0",
+      "no_acquisition": true,
+      "nodes": 129,
+      "queries": 1,
+      "seconds": 0.20394158270210028
+    },
+    {
+      "label": "prepared-1",
+      "no_acquisition": true,
+      "nodes": 143,
+      "queries": 1,
+      "seconds": 0.262338540982455
+    },
+    {
+      "label": "prepared-2",
+      "no_acquisition": true,
+      "nodes": 163,
+      "queries": 1,
+      "seconds": 0.33868279168382287
+    },
+    {
+      "label": "prepared-3",
+      "no_acquisition": true,
+      "nodes": 186,
+      "queries": 1,
+      "seconds": 0.3756113750860095
+    }
+  ],
+  "distinct_unresolved": 1,
+  "frontier_shapes": [
+    {
+      "clauses": 165,
+      "literals": 502,
+      "max_clause_width": 4,
+      "variables": 38
+    }
+  ],
+  "next_target": "Retain unfinished profile work and refine the connected 38-variable depth-zero residual; increasing this policy admission allowance alone did not close it.",
+  "passed": true,
+  "report_sha256": "3445e004fbcf96b44babb2754dc23ee5351db0ac6378f346c72adc3c55dd29b9",
+  "resumptions": {
+    "empty": {
+      "capped": true,
+      "closed": false,
+      "distinct_admitted": 89,
+      "entered": 128,
+      "final_archive": {
+        "compressed_bytes": 76300,
+        "database_bytes": 1441792,
+        "database_sha256": "b34a2b6dd802eca450f75969fbbab8591bfd97eb40fd7a476743ee41330598a1",
+        "path": "experiments/results/cnf-complete-admission/resume-empty/batch-3/history.sqlite3.gz",
+        "seconds": 0.029017250053584576,
+        "sha256": "7e6b86ef830a6a594e37cb37dbddc4872ae60098c569b091cedc193d86e151b6"
+      },
+      "final_patterns": 78,
+      "initial_patterns": 0,
+      "probes": 874,
+      "repeated_admissions": 39,
+      "stored": 78
+    },
+    "prepared": {
+      "capped": true,
+      "closed": false,
+      "distinct_admitted": 95,
+      "entered": 128,
+      "final_archive": {
+        "compressed_bytes": 153542,
+        "database_bytes": 2830336,
+        "database_sha256": "a1dedd7fada216088dbd8f0d1966e77ef2c92b4c49965fb9a80450865baa8c2c",
+        "path": "experiments/results/cnf-complete-admission/resume-prepared/batch-3/history.sqlite3.gz",
+        "seconds": 0.05073983361944556,
+        "sha256": "0fbcb5092db31f3e54a404b8d69df97040a319bed81a57206ff0c77e5d0fe291"
+      },
+      "final_patterns": 186,
+      "initial_patterns": 107,
+      "probes": 842,
+      "repeated_admissions": 33,
+      "stored": 79
+    }
+  },
+  "same_graphs_at_both_allowances": true,
+  "seconds": 8.237889208365232,
+  "selected_frontier_sha256": "b869c92bf0bb94224447e434bb47a2cf968a4308afcafeb8bd5580474c9ef32b",
+  "validator_sha256": "6773664f6b68f77e3b119e73ee98fe3d4ea2e39fce72883fc466532bc61b56eb"
+}

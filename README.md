@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[The complete admission audit](research/complete-admission-frontier.md) avoids
+40 additional probes with the same stored graph. A generous allowance still
+leaves a connected **38-variable residual**, now preserved as the next structural
+target. Interrupted profile work is the next reuse candidate; all **323 tests**
+and sixteen archive checks pass.
+
 [The new-input transfer control](research/subsumption-transfer-controls.md) finds a
 simpler improvement: expose existing families before probing. On a 42-input
 constructed stream, fresh probes fall **1,022 -> 503** and working SQLite size

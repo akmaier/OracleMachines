@@ -12,7 +12,44 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: unresolved new-input interaction and complete accounting
+## Current investigation: the connected 38-variable interaction
+
+[Complete admission accounting](complete-admission-frontier.md) now gates both
+recognition entrances, including transient fused restrictions. At allowance 32,
+the corrected gate avoids **40 probes (503 -> 463)** on the same 42-input stream
+while producing an **identical 107-record graph** and **41/42 coverage**. All
+323 tests and sixteen cold archive checks pass. This is avoided interrupted work;
+there is no observed storage reduction or general runtime guarantee.
+
+**Highest structural target:** a generous 4096-state allowance returns normally
+but leaves case 41 unresolved. Its selected frontier is a **connected 38-variable,
+165-clause, 502-literal residual**, at conditioning depth zero. The original is
+48/204/612. Current simplification, bounded probing and projection do not close
+it. Inspect its exact interaction and conditioning/interface alternatives; merely
+increasing this policy's acquisition allowance has already failed to close it.
+Restore `experiments/results/cnf-complete-admission/complete4096-0/report.json` and
+its archive; bind the residual through `selected-frontier.json`, preserving the
+original source context and all alternatives. The 443-record full-stream history
+contains the completed current-policy search, including unsuccessful alternatives.
+
+**Next reuse target:** four cold-open 32-state resumptions preserve 107 previous
+rows and add 79, but repeat **33 of 128 admissions** and remain capped. Empty-history
+continuation repeats 39. The generous last query also acquires **34 transient
+profiles** that are not stored. Investigate source/policy-bound checked profile
+persistence for interrupted ancestors and transient restrictions, charging cold
+verification and space before claiming savings. Prepared continuation is slightly
+slower in this experiment despite fewer probes; retain that negative result.
+
+Historical artifacts and inference sources remain unchanged. The new cap limits
+distinct acquisition states, not verification, repeated visits, normalization or
+elapsed time. The old 83-source checkpoint remains complete. This is finite
+structural coverage, not a SAT/UNSAT verdict or an arbitrary-SAT efficiency bound.
+
+Report SHA-256: `3445e004fbcf96b44babb2754dc23ee5351db0ac6378f346c72adc3c55dd29b9`.
+The validation binds **166 source files** and adds **44 manifested artifacts**;
+the next preservation audit inherits **2,950 artifacts / 47 manifests**.
+
+## Previous investigation: unresolved new-input interaction and complete accounting
 
 [The transfer controls](subsumption-transfer-controls.md) expose a confound: the
 shared **18/22/48** node reduces to **16/18/36 2-CNF**. Twelve new variants reuse its

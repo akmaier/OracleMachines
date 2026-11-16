@@ -5755,6 +5755,95 @@ These are Python certificate checks, not a new Lean verification. Original
 structural coverage remains 17 of 24, with separate supplemental coverage 24
 of 24. The unknown part of arbitrary SAT remains explicit.
 
+\paragraph{Incremental bookkeeping over persisted proof graphs.}
+The next experiment reuses the existing transactional size ledger and adds a
+cursor for committed insertions. The ledger replaces the solver's full-table
+count and length sum. The cursor replaces the comparison harness's full row
+inventories before and after each query. Both changes leave the search procedure
+and certificate format unchanged. This isolates avoided bookkeeping from
+avoided SAT search.
+
+All modes inherit the same 13,869-key union, 145 persisted cores and 260 known
+single-deletion templates. We exclude every previously answered double deletion,
+including guarded queries without direct full-formula roots, and then exclude
+any cached full root. The same salted order selects the next 64 inputs per
+template. Selection costs 1.46245 seconds separately. Three balanced process
+triples visit all 192 constructed inputs twice. Core extraction is not repeated;
+its initial cost and the acquisition of the inherited graph remain charged in
+the previous experiments. No cumulative break-even result follows.
+
+\begin{center}
+\begin{tabular}{lrrr}
+\hline
+Measured quantity & Scanned & Ledger & Ledger + delta \\
+\hline
+Mean complete seconds & 37.48164 & 30.49257 & 14.81201 \\
+Mean query seconds, two visits & 23.96449 & 16.90468 & 1.37640 \\
+Mean repeated-visit seconds & 11.63897 & 8.13676 & 0.16423 \\
+Mean cold audit seconds & 10.10131 & 10.18020 & 10.06537 \\
+Full row inventories & 772 & 772 & 3 \\
+Fresh expansions & 202 & 202 & 202 \\
+New certificate rows & 339 & 339 & 339 \\
+\hline
+\end{tabular}
+\end{center}
+
+All modes return 96 SAT and 96 UNSAT answers, with 41 core hits, 96 witness
+publications and 55 guarded negative queries. Of these, 44 require fresh search,
+accounting for all 202 expansions. Every stored proof row, answer and search counter agrees.
+Repeated visits add no rows. Complete time falls 60.48\%, query time 94.26\%,
+and repeated-query time 98.59\%. The ledger alone reduces complete time 18.65\%;
+the remaining saving comes from exporting insertion deltas. The worker clock
+includes restoration, bank loading and checking, accounting setup, query work,
+final preservation checks, cold replay, sidecars and compression. Process launch,
+imports, command-line protocol/catalog reads and final report writing are excluded.
+
+The cursor requires an exclusively owned append-only connection. Temporary
+triggers reject updates, deletes, replacements and nonmonotone rowids. The
+largest inserted rowid changes in the same transaction as the row and the
+existing size ledger. Rollback restores all three. Starting from the initial
+maximum rowid, each successful consumption reads the new suffix and checks its
+count, total SQL length and final rowid against maintained state before advancing.
+Consequently, under this ownership contract, committed insertions are exported
+exactly once. This is an accounting invariant, not a proof of the stored SAT
+answers. The existing certificate checker still supplies that obligation.
+
+Committed external writes or schema changes invalidate the cursor and require
+full comparison. It is not a concurrency protocol or protection against hostile
+changes to private schema. Ignored conflicting inserts may force a full census.
+Opening reconstructs the ledger, and a reopened connection needs a new cursor.
+For archive size $B$ and newly inserted payload $\Delta$, the normal path replaces
+repeated scans of the full history with opening and final scans, constant-size
+metadata accesses, indexed insertion checks, and suffix export proportional to
+$\Delta$ plus index seeks. Full cold verification, compression and conflict
+repair keep their own history-dependent costs. SQL TEXT length agrees with
+bytes for our ASCII JSON but not for general Unicode or embedded NUL values.
+
+Memory does not improve. Mean process peak RSS rises from 409,310,549 to
+448,435,541 bytes, or 9.56\%. This high-water mark includes cold verification;
+its increase has not been attributed to a particular allocation phase. The
+ledger adds 4,096 SQLite bytes and 696 gzip bytes. All modes keep the same proof
+rows, so this is no proof-space compression result. Cold audit and compression
+now consume 67.95\% and 17.09\% of the candidate worker time. Their repeated
+work and the memory regression are the next accounting targets; the 55 guarded
+negative cases remain the next source of reusable refutation structure.
+
+A separate cold profile records 384 full size censuses taking 7.21981 seconds
+of a 14.87488-second instrumented audit. Verification of all 14,208 certificate
+nodes takes 6.89997 seconds cumulatively. These timings differ from the
+unprofiled comparison and nested categories must not be added twice. A single
+independent size census on an immutable cold snapshot is the next candidate;
+all proof and query checks must remain. The current audit still performs every
+census and every certificate check.
+
+The durable union retains 14,208 reference keys. The experiment preserves all
+inherited studies and distinguishes full-query certificates from guarded
+cofactor answers. All 418 tests and 3,456 trial query replays pass, with complete
+cold proof checks. Original structural coverage remains 17 of 24, and the
+separate supplemental corpus remains 24 of 24. These accounting changes neither
+expand that closure nor establish a uniformly efficient procedure for arbitrary
+SAT. The new invariant and implementation tests are not a new Lean verification.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Exact insertion deltas avoid repeated archive scans](research/incremental-archive-accounting.md).
+On the next 192 unseen double deletions, complete runtime falls **60.48%** and
+query time **94.26%**, with identical proof rows and search counts. Peak RSS rises
+**9.56%**, so this is a time improvement with a memory regression. All **418 tests**
+and 3,456 cold trial query replays pass. The retained union has 14,208 reference
+keys. Next: remove repeated size scans from immutable cold replay while retaining
+all certificate checks, and inspect shared proofs in the 55 guarded negative
+queries. Current checkpoint: `experiments/results/cnf-incremental-archive/checkpoint.json`.
+
 [Checked UNSAT supports expose an accounting bottleneck](research/unsat-support-reuse.md).
 On 192 unseen double deletions, the full core bank cuts fresh expansions **32.25%**
 but increases complete runtime **40.16%** and peak RSS **28.15%**. This remains an

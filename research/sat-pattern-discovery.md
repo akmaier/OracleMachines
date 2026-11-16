@@ -4615,3 +4615,57 @@ Checkpoint SHA-256: `07e1a04864038caf4ba5a60b388e8c22b1c90116d9b11d819e7b7bd7dd7
 Report SHA-256: `f732924b833023efc8f3a52a33071bdff524d7abc105790eed8f41c8bfb4fdba`.
 The new manifest adds **60 artifacts**; the next audit inherits **3,783 artifacts /
 66 manifests**. The manuscript builds to **191 pages**.
+
+
+## 2026-11-16: exact insertion deltas over persisted proof graphs
+
+[Incremental archive accounting](incremental-archive-accounting.md) removes the
+full-history query scans identified by the previous profile. On the next **192
+unseen double deletions**, complete time falls **37.48164 -> 14.81201 s (60.48%)**,
+and query time **23.96449 -> 1.37640 s (94.26%)**. All modes use the same retained
+145-core bank and 13,869-key seed; initial extraction remains charged separately.
+The existing ledger accounts for an 18.65% complete-time reduction; adding the
+new guarded insertion cursor saves a further 51.42%. Full inventories fall
+**772 -> 3**, with final preservation and cold proof checks retained.
+
+**Regressions and boundaries:** peak RSS rises **9.56%** to 448,435,541 bytes.
+Accounting adds 4 KiB SQLite / 696 gzip bytes; logical proof rows are identical.
+The cursor requires an exclusively owned append-only session, detects external
+commits/schema changes and rejects local rewrites. Opening, conflict repair,
+full cold replay and compression remain charged. No proof-space compression,
+new search algorithm, broader structural closure or amortized break-even is shown.
+
+**Highest next cost target:** the unchanged cold audit is 67.95% of candidate
+worker time, compression another 17.09%. A separate cold profile attributes
+**7.21981 s** to **384 full archive-size censuses** within a **14.87488 s**
+instrumented audit. Test one independently checked census for an immutable
+snapshot while retaining every proof and query check. Also locate the RSS
+regression before claiming a memory improvement. Do not mix instrumented and
+unprofiled timings or add nested profiling categories.
+
+**Next structural target:** all modes return 96 SAT / 96 UNSAT, with 41 core
+hits, 96 witness publications and 55 guarded negative queries. Of these, 44
+use fresh search, accounting for all **202 expansions**, including 56 splits. Cases 66 and 76 each use 16
+expansions, case 41 uses 12. Inspect their shared supports/cofactors for further
+reuse. Case IDs belong to this experiment's catalog. Repeated visits add no rows.
+The antichain of 121 old supports remains an unbenchmarked alternative; it
+preserves recognized supersets but need not reduce these unresolved searches.
+
+Resume `experiments/results/cnf-incremental-archive/checkpoint.json`. Preserve
+all inherited studies and decisions plus `incremental_archive_study`,
+`incremental_archive_decisions` and `reference_union`. The new union retains
+**14,208 keys / 44,781,568 SQLite / 3,563,875 gzip bytes**. Its new catalog has
+**137 direct query certificates / 55 guarded cofactor records**; the latter
+require source, guard and child together. Structural authority is unchanged:
+2,614 patterns / 259 pairs / 17 missing children, original 17/24 / 999 proof
+steps, separate supplemental 24/24 / 208, and original case 7's discovery pointer.
+
+All **418 tests**, nine cold archives / **3,456 trial query replays**, every union
+node, 461 inherited decisions and all new decisions pass. Preserve 336 earlier
+sources, 3,783 artifacts / 66 manifests and all 64 proof blocks. Runtime binds
+341 sources; the attribution and cold-profile tools bring the final ledger to
+343. The manuscript builds to 192 pages without warnings.
+Checkpoint SHA-256: `53cf74216546839373aeb00d7d14321be0617a3b35da4a2cefa086aa1ee6a02d`.
+Report SHA-256: `9feaf6eb279c05a8355c19e1d855eba693946a9be536d8367e24e299acab0c89`.
+The new manifest adds **48 artifacts**; the next preservation audit inherits
+**3,831 artifacts / 67 manifests**.

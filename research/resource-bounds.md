@@ -2441,3 +2441,32 @@ The largest remaining cost is new input 41, a **48/204/612** random CNF with 272
 probe attempts and unknown coverage. Inspect its persistent frontier, retaining
 the frozen inputs and all previous results. The original 83-source checkpoint
 remains complete and must not be restarted.
+
+
+## 2026-11-16: insertion deltas over a persisted residual union
+
+The [incremental archive experiment](incremental-archive-accounting.md) reuses
+the existing size ledger and adds an owned-session rowid cursor. For Q queries,
+archive rows R_t and total key/payload length B_t, full query inventories plus
+size aggregation revisit sum_t O(R_t+B_t) history. In the normal append path,
+charge an initial and final full inventory/census, Q fixed-size metadata reads
+and rowid-index seeks, transactional insertion/conflict checks, and the newly
+exported row/key/payload volume. Rollback advances neither the persisted high
+mark nor totals; the cursor advances its memory snapshot only after validating
+and committing a suffix read. State includes a constant number of machine
+integers, whose bit lengths grow logarithmically in an unbounded model.
+
+The contract requires exclusive append-only ownership. Local rewrites reject;
+committed external/schema changes invalidate; ignored conflicts can trigger a
+full ledger reconstruction. Opening and full independent cold proof checks
+remain history dependent. No change is claimed to the SAT search bound or proof
+DAG size. Old proof rows and alternative results are preserved.
+
+All modes acquire 339 new keys from the same 13,869-key seed. Exported delta
+payload is 645,428 SQL length units; the final archive has 24,298,652 units.
+The active plain union is 44,781,568 SQLite / 3,563,875 gzip bytes. Candidates
+add 4,096 SQLite / 696 gzip bytes for accounting. Peak RSS rises 9.56%, while
+complete time falls 60.48%. Cold replay and compression now dominate; cold
+replay still performs 384 complete size censuses. These are bookkeeping costs,
+not increased structural coverage. Earlier acquisition and support extraction
+must remain in any lifetime cost or amortization claim.

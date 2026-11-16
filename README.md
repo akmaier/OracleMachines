@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Case-10 transfer exposes exact nonterminal joins](research/progress-transfer.md),
+raising structural coverage **16/24 -> 17/24**. The gate costs more than immediate
+commitment, but the different proofs rejoin at **four formulas and share 39 new
+proof nodes**. Their subproof is independently checked; **372 tests** pass.
+Next: test these saved joins on related inputs whose complete answer is not
+already cached, charging recognition and verification.
+
 [A progress gate for exploratory trials](research/progress-pilot.md) closes
 connected case 21, raising structural coverage **15/24 -> 16/24**. It matches
 immediate commitment's proof and storage while using **25% fewer new patterns

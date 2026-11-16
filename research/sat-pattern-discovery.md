@@ -4286,3 +4286,70 @@ depth-zero original root is present. Check the prefix precondition. Look for an
 early literal decrease that masks expensive continuation; a successful local
 step is not a global potential or a minimum-cost certificate. Broader shared
 nonterminal patterns and full-history audit cost remain unresolved.
+
+## 2026-11-16: failed gate transfer reveals four exact nonterminal joins
+
+[The unchanged transfer to case 10](progress-transfer.md) raises coverage
+**16/24 -> 17/24**, but the gate follows always-pilot onto a more expensive route.
+The first trial grows **1042 -> 1468 literals**, from two obligations to three;
+its seven admissions and 64 probes trigger exploration. The second trial uses
+ten admissions and 67 probes, leaving two obligations / 1040 literals. Both
+pilots choose pivot 17. The committed control stays on pivot 22.
+
+Committed versus either pilot: **106/119 new patterns, 653/778 probes,
+eighteen/twenty-four assumptions and nine/twelve splits**. Both pilots have
+identical operations, proofs and archived bytes. Gated local expansion rises
+**17.79%**, peak RSS **0.65%**, SQLite **0.54%** and gzip **0.57%**. Whole-stream
+means are committed/pilot/gated **9.31591 / 9.39216 / 9.41249 s**; two triples
+do not establish a reliable small total-time effect. Complete auditing remains
+78--79% of time. No policy or budget was tuned, and the gate remains optional.
+
+The useful structural finding is four joins between the different final proofs.
+They share **39 new nodes** with identical rules and children: **33 unary
+reductions, four conditional nodes and two 2-CNF terminals**. The four exact
+entry formulas have **27/32/39/4 variables** and disjoint new descendant regions
+of **12/12/13/2 nodes**. Two entries follow elimination and two follow probing
+from distinct parents. Their union includes one inherited contradiction and
+has a **40-step positive subproof**, independently checked without acquisition.
+Full keys, parent hashes, shapes and proof are preserved under
+`experiments/results/cnf-progress-transfer/joins/`.
+
+In particular, two different 40-variable / 151-clause parents with 460 and 457
+literals eliminate to the same 39-variable / 153-clause / 475-literal formula.
+Literal growth can accompany useful convergence. The exact cache can reuse the
+saved result once reached; the open problem is recognizing and reaching that
+boundary cheaply on a new input. Equality of shape or an approximate match
+cannot substitute for the complete policy/depth/CNF key and checked mapping.
+The observed joins concern two routes through one original, not cross-input
+reuse. Direct whole-root reuse already handles repetition of this original.
+
+The committed proof has 116 steps and depth four; pilot has 122 and depth six,
+with six unused exploratory patterns. Depth uses changing local coordinates,
+not a fixed backdoor bound. Their acquisitions share 45 new patterns and five
+splits; their final proofs share 39 new nodes and four splits. Raw shared pattern
+keys/payloads total 283,851 bytes plus 39,431 split bytes, excluding SQLite and
+Python overhead. This is not a measured memory saving. Join analysis takes
+0.18489 seconds outside benchmark timing; full retrospective replay takes
+111.93 seconds, partly concurrent with tests. Preflight takes 0.17075 seconds.
+
+All **372 tests** pass, and independent full replay checks six archives, original
+bindings, query proofs, complete catalogs, prefixes, shared budgets and cold
+state. All earlier 307 sources, 3,500 artifacts and 64 proof blocks are unchanged.
+The post-hoc analyzer is separately source-bound; an initial SQL column-name
+error and its source are preserved, and corrected certificate checking passes.
+No solver, gate, inference default, Lean theorem or SAT/UNSAT output API changes.
+
+Restore `experiments/results/cnf-progress-transfer/checkpoint.json`: **2,443
+patterns / 249 pairs / seventeen inherited missing children**, with a **999-step
+proof for seventeen originals**. Seven remain unknown. The union retains every
+trial: 180 distinct new patterns and sixteen splits, using **44,810,240 SQLite /
+2,271,560 gzip bytes**.
+
+**Highest next reuse target:** test related inputs with previously unseen roots
+that reach the saved elimination/probing joins, with edits that invalidate the
+shared image. Compare matched histories and charge all recognition, boundary
+verification, acquisition, persistence and cold replay. Avoid fitting another
+scalar threshold to these cases. The independent discovery pointer is **case 7**,
+with selected **33 variables / 152 clauses / 470 literals / width four**. All
+saved children exist; pivot 14's true child is covered and seven remain open.
+Only its depth-zero original root exists. No arbitrary-SAT efficiency claim follows.

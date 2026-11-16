@@ -1,0 +1,85 @@
+{
+  "analyzer": {
+    "path": "experiments/analyze_cnf_route_joins.py",
+    "sha256": "391b15f809222f9047800e9a5c338818fa191c58067fa8eb0328fb2bc9a31020"
+  },
+  "anchors": {
+    "path": "experiments/results/cnf-progress-transfer/joins/anchors.json",
+    "sha256": "a625482697d6ef31ffe1e7b195147f385dfde2428c561a24790d5b7fba003565"
+  },
+  "check_counts": {
+    "additive_elimination_check_source_literals": 1249,
+    "additive_elimination_checked_mixed_steps": 5,
+    "additive_elimination_checked_pair_literals": 123,
+    "additive_elimination_checked_pairs": 35,
+    "additive_elimination_checked_steps": 5,
+    "additive_elimination_positive_clause_growth": 7,
+    "additive_elimination_positive_literal_growth": 44,
+    "binary_path_checked_clause_literals": 33,
+    "binary_path_checked_proof_nodes": 22,
+    "binary_path_checks": 3,
+    "binary_path_source_literals": 926,
+    "classification_calls": 3,
+    "classification_literal_payload": 22,
+    "clause_elimination_check_source_literals": 251,
+    "clause_elimination_checked_mixed_steps": 1,
+    "clause_elimination_checked_pair_literals": 16,
+    "clause_elimination_checked_pairs": 4,
+    "clause_elimination_checked_steps": 1,
+    "clause_elimination_positive_literal_growth": 4,
+    "elimination_check_source_literals": 253,
+    "elimination_checked_mixed_steps": 1,
+    "elimination_checked_pair_literals": 23,
+    "elimination_checked_pairs": 7,
+    "elimination_checked_steps": 1,
+    "elimination_validation_literals": 1753,
+    "matching_recognition_literal_visits": 12,
+    "positive_direct_internal_steps": 35,
+    "positive_external_steps": 4,
+    "positive_legacy_internal_steps": 1,
+    "positive_node_read_bytes": 208425,
+    "positive_sql_lookups": 40,
+    "verified_positive_steps": 40
+  },
+  "checkpoint": {
+    "path": "experiments/results/cnf-progress-transfer/checkpoint.json",
+    "sha256": "00339dad38ba2c73524de9610a7dacb83b82eef1c6cf34d938e95867e38d7812"
+  },
+  "disjoint_new_regions": true,
+  "entrances": 4,
+  "exact_policy_depth_and_cnf_keys": true,
+  "identical_shared_steps": true,
+  "inherited_join_steps": 1,
+  "limits": [
+    "Same original under two expansion policies, not different inputs.",
+    "The original is already covered: direct root reuse supersedes re-solving it through these joins.",
+    "Matching requires the full existing policy/depth/canonical-CNF key and checked boundary transformations; no approximate substitution.",
+    "Raw key/payload bytes exclude SQLite pages, indexes, Python overhead and persistence copies; they are not measured memory savings.",
+    "No avoided-work or cross-input speedup measurement. Discovering and checking paths to these boundaries remains charged."
+  ],
+  "modes": [
+    "committed",
+    "pilot"
+  ],
+  "no_acquisition": true,
+  "proof": {
+    "path": "experiments/results/cnf-progress-transfer/joins/proof.json",
+    "sha256": "ee421e18260dab0c4d17eeb4e7f4e768a82d2ecde287090181fd52f65facb0ad"
+  },
+  "raw_shared_pattern_key_payload_bytes": 283851,
+  "raw_shared_split_id_payload_bytes": 39431,
+  "report": {
+    "path": "experiments/results/cnf-progress-transfer/report.json",
+    "sha256": "de158d11eb005a7490c1ebd26c971e4ec28f9bbad754829b7b8fc843da133237"
+  },
+  "seconds": 0.1848904169164598,
+  "shared_new_nonterminal_steps": 37,
+  "shared_new_rule_counts": {
+    "bootstrap_split": 4,
+    "edge": 33,
+    "family": 2
+  },
+  "shared_new_steps": 39,
+  "shared_split_records": 4,
+  "unique_join_proof_steps": 40
+}

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/analyze_cnf_route_joins.py", line 113, in <module>
+    analyze(Path(sys.argv[1]), Path(sys.argv[2]))
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/analyze_cnf_route_joins.py", line 87, in analyze
+    raw_patterns = sum(len(k.encode())+len(h.db.execute('SELECT payload FROM cnf_patterns_v1 WHERE key=?',(k,)).fetchone()[0].encode()) for k in shared)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/analyze_cnf_route_joins.py", line 87, in <genexpr>
+    raw_patterns = sum(len(k.encode())+len(h.db.execute('SELECT payload FROM cnf_patterns_v1 WHERE key=?',(k,)).fetchone()[0].encode()) for k in shared)
+                                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: key

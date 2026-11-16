@@ -5284,6 +5284,64 @@ skipping a trial can forgo a beneficial route. Neither the strict decrease
 nor these finite observations supply a global potential, minimum-cost expansion
 guarantee or efficiency bound for arbitrary SAT.
 
+\paragraph{A failed gate transfer reveals shared nonterminal proofs.}
+On case 10, the unchanged gate makes the same choices as always-pilot. The
+first trial grows the selected frontier from two obligations and 1042 literals
+to three obligations and 1468 literals. The second leaves two obligations and
+1040 literals, causing both pilots to switch from pivot 22 to pivot 17.
+They acquire 119 patterns with 778 probes, versus 106 patterns and 653 probes
+for immediate commitment. All three cover the original, raising structural
+coverage from sixteen to seventeen of twenty-four. Growth of the first frontier
+does not establish the value of another route, and a smaller sampled frontier
+still need not yield cheaper continuation. The gate remains optional.
+
+The original has 48 variables and 181 clauses; the selected residual has
+45 variables, 180 clauses and 557 literals. Committed, always-pilot and gated
+whole-stream means are 9.31591, 9.39216 and 9.41249 seconds in two reversed-order
+triples. Gated local expansion is 17.79\% higher than committed, with 0.65\%
+higher mean peak RSS, 0.54\% more SQLite bytes and 0.57\% more compressed bytes.
+The two pilots have identical operations, proofs and archived bytes. Small
+whole-time differences remain uncertain with this replication; complete
+auditing still consumes 78--79\% of measured time. All prior history and every
+exploratory result remain stored and charged in their respective experiments.
+
+The different proofs nevertheless reveal useful exact convergence. The committed
+proof has 116 distinct steps and conditional depth four; the pilot proof has
+122 steps and depth six, with six acquired patterns unused by its final proof.
+They share 39 newly acquired proof nodes with identical rules and children:
+33 unary reductions, four conditional nodes and two 2-CNF terminals. These
+form four disjoint regions of new nodes below common entry formulas containing
+27, 32, 39 and four variables. The regions contain twelve, twelve, thirteen and
+two new nodes respectively. Together with one inherited contradiction terminal,
+they form a 40-step subproof checked independently without acquisition.
+
+Two joins follow elimination from different parents and two follow probing.
+For the 39-variable join, the parents each have 40 variables and 151 clauses,
+but 460 and 457 literals. Checked elimination maps both to the identical
+153-clause, 475-literal formula. Literal count therefore increases while the
+routes reach a shared boundary. Recognition requires equality of the complete
+policy, depth and canonical-CNF key, together with checked transformations into
+that key. Equal shape or approximate similarity is insufficient. Local variable
+coordinates change, so the observed depths do not establish fixed backdoor bounds.
+
+This is convergence of two routes through one original, not measured reuse
+across different inputs. The original's complete root is already covered;
+direct root reuse supersedes solving it again through these joins. The next
+experiment must use previously unseen related roots, including edits that break
+the shared image, and charge discovery, boundary verification, lookup and replay.
+The existing exact cache can reuse a recognized boundary. Reaching it cheaply
+is the remaining obligation. The raw shared pattern keys and payloads occupy
+283,851 bytes, plus 39,431 bytes for four split identities and payloads; these
+exclude database and runtime overhead and are not measured memory savings.
+
+All 372 tests and six independent archive replays pass. The union preserves
+180 distinct new patterns and sixteen splits, retaining 2,443 patterns,
+249 pairs, seventeen inherited missing children and a 999-step positive proof
+for seventeen originals. It uses 44,810,240 SQLite bytes and 2,271,560 compressed
+bytes. Seven originals remain unknown. The exact subproofs provide a concrete
+reuse target, without implying compact closure or efficient expansion for
+arbitrary SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

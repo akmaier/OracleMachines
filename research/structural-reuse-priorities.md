@@ -12,7 +12,68 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: test the limits of the progress gate
+## Current investigation: transfer exact nonterminal joins to new inputs
+
+[Case-10 transfer](progress-transfer.md) raises structural coverage **16/24 ->
+17/24**, but the unchanged gate makes the same costly choice as always-pilot.
+The first trial grows **1042 -> 1468 literals**, so the gate explores; the second
+route leaves **1040**, and both pilots switch to pivot 17. Committed/pilot counts
+are **106/119 patterns, 653/778 probes, eighteen/twenty-four assumptions and
+nine/twelve splits**. Gated and always-pilot operations, proofs and archives
+match. The gate stays optional; growth of the first frontier does not establish
+the value of another route.
+
+**More promising structural evidence:** the distinct final proofs share **39
+new nodes, including 37 nonterminals**, arranged below four identical formula
+keys. Two joins follow elimination from different parents and two follow
+probing. The joins contain 27, 32, 39 and four variables, with 12, 12, 13 and two
+new descendant nodes respectively. Their disjoint new regions plus one inherited
+contradiction form a **40-step independently verified subproof**, saved under
+`experiments/results/cnf-progress-transfer/joins/`. These are exact policy/depth/
+canonical-CNF matches, with checked boundary transformations.
+
+The 39-variable join is reached from two different 40-variable / 151-clause
+parents with 460 and 457 literals. Elimination produces the same 153-clause /
+475-literal formula in both routes. Increasing literal count can therefore
+reach a reusable boundary. The measured acquisition intersection has 45 rows
+and five splits; the proof intersection has 39 rows and four splits.
+
+**Highest next target:** test whether previously unseen related inputs can
+reach these joins cheaply. Use distinct parents with the same checked
+elimination image and edits that break the image; keep discovery, verification,
+lookup, replay and persistence in the comparison. The exact cache already
+recognizes an encountered key. The missing work is reaching it and establishing
+the boundary relation. The current finding concerns one original under different
+policies, not a cross-input saving. Its whole root is already covered, so
+re-solving that same query through these joins would not be a useful benchmark.
+
+**Costs:** committed/pilot/gated whole means are **9.31591 / 9.39216 / 9.41249 s**.
+Gated local expansion is **17.79% higher**, RSS **0.65% higher**, SQLite **0.54%
+higher** and gzip **0.57% higher** than committed. Mean whole time is 1.04%
+higher, but two triples cannot establish a small timing effect. Full auditing
+remains **78--79%** of time. Join analysis costs 0.18489 s separately; raw shared
+row bytes are not measured memory savings.
+
+Restore `experiments/results/cnf-progress-transfer/checkpoint.json`: **2,443 patterns /
+249 pairs / seventeen inherited missing children / 17 of 24 originals covered**,
+with a **999-step proof**. Seven originals remain unknown. All 180 distinct new
+patterns and sixteen splits survive; storage is **44,810,240 SQLite / 2,271,560
+gzip bytes**. All **372 tests** and six independent archive replays pass. Prior
+307 sources, 3,500 artifacts and 64 manuscript proof blocks are unchanged. The
+measured checkpoint binds 308 sources; the final preservation ledger also binds
+the post-hoc join analyzer, totaling 309 sources.
+The new manifest adds **50 artifacts**; the next audit inherits
+**3,550 artifacts / 61 manifests**.
+Checkpoint SHA-256: `00339dad38ba2c73524de9610a7dacb83b82eef1c6cf34d938e95867e38d7812`.
+Report SHA-256: `de158d11eb005a7490c1ebd26c971e4ec28f9bbad754829b7b8fc843da133237`.
+
+The separate discovery pointer is **case 7**, random 3-CNF with selected
+**33 variables / 152 clauses / 470 literals / width four**. All eight saved
+children exist; pivot 14's true child is covered and seven remain open. Only
+the depth-zero original root exists. Keep it as a broader coverage control while
+testing reuse beyond one original. No default policy or arbitrary-SAT bound changes.
+
+## Previous investigation: test the limits of the progress gate
 
 [The progress-gated trial](progress-pilot.md) closes connected case **21**, raising
 structural coverage **15/24 -> 16/24**. The rule was frozen before acquisition:

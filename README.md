@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Checked SAT witnesses avoid fresh clause-deletion search](research/clause-witness-reuse.md).
+Compared with the UNSAT guard, fresh reference expansions fall **427 -> 59**,
+plus six stored answer certificates; complete time falls **50.39%** on the same
+twelve constructed edits. All **388 tests** and cold replay pass. Earlier results
+remain retained in a 1,169-key reference union. Two additional checked witness
+proposals identify previously unseen deletions for the next discovery experiment.
+
 [A checked UNSAT proof narrows clause-deletion search](research/clause-deletion-guard.md).
 On twelve constructed edits, the optional decision wrapper reduces new reference
 nodes **502 -> 427** and measured complete time **8.11%**. Case 13 does not improve;

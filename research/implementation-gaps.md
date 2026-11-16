@@ -8289,3 +8289,57 @@ Checkpoint SHA-256: `e182f0023fc82ecb8ec674cbdc33c913ca91a104066b0a6d67c72812f8e
 Report SHA-256: `70507d8854ddf5d7110b00c16604f5956e452e9003fb4af2cd011deb71f5b005`.
 The new manifest adds **32 artifacts**; the next audit inherits **3,620 artifacts /
 63 manifests**. The manuscript builds to **187 pages**.
+
+## 2026-11-16: checked SAT witness reuse and new deletion candidates
+
+[Checked SAT witness publication](clause-witness-reuse.md) removes the dominant
+positive-query search on the twelve constructed edits. Relative to the UNSAT
+guard alone, fresh reference expansions fall **427 -> 59**, with **six answer
+publications / 65 new stored rows**. Whole time falls **1.19691 -> 0.59381 s
+(50.39%)**, RSS **18.15%**, and SQLite **40.27%**. Ordinary solving needs 502
+expansions and 1.26932 s. All modes return nine SAT and three UNSAT answers;
+all repeated visits add zero rows. These are conditional decision measurements,
+not structural-coverage gains or an unrestricted-SAT guarantee.
+
+**Highest next discovery target:** previously unseen deletions of the UNSAT
+templates. Existing twelve roots are now cached. A seven-attempt, one-variable
+model-rotation screen finds two valid new-input witnesses from case 9, both for
+**28 variables / 81 clauses / 238 literals**, with absent reference roots.
+Flipping variable 260 leaves only `(-230,120,260)` false; flipping 150 leaves
+only `(-100,150,160)` false. Their complete CNFs and models are preserved in
+`rotation-screen.json`. Publish/check these candidates and test a fixed broader
+set of neighboring deletions against ordinary and guard controls, charging
+all failed proposals and full or indexed clause checking. This uses established
+model-rotation reasoning; no rotation speedup has yet been measured.
+
+**Retained failures:** case 7's three flips leave two or three clauses false;
+both case-13 flips leave three. Case 13 still needs 22 of 59 fresh reference
+expansions. No SAT witness supplies an UNSAT conclusion. A checked negative
+premise still leaves an exceptional cofactor that can contain arbitrary SAT.
+
+**Dominant measured costs now:** complete reference checking and compression,
+about **68%** of the shorter stream. Database gzip plus raw query sidecar is
+**676,971 bytes**, versus 811,502 guarded and 760,874 ordinary. Sidecar size alone
+increases. All modes inherit the same 613-node seed, whose acquisition cost of
+**0.91359 s** remains separate; this run's seed preflight costs **0.18338 s**.
+Three triples balance position, but these remain development examples.
+
+Resume `experiments/results/cnf-clause-witness-reuse/checkpoint.json`. Its new
+`reference_union` retains **1,169 distinct keys**, using **5,931,008 SQLite /
+450,067 gzip bytes**. No reference key is newly discovered relative to the
+combined previous arms; alternate valid SAT certificates remain in the trial
+archives, and the union keeps earlier payloads. Preserve `reference_study`,
+`witness_reuse_study`, `reference_decisions` and the separate rotation proposals.
+The structural authority remains **2,614 patterns / 259 pairs / seventeen
+missing children**, with original **17/24 / 999 proof steps** and supplemental
+**24/24 / 208 proof steps**. Original case 7 remains its discovery pointer.
+
+All **388 tests**, nine new stream reconstructions / **216 query replays**, the
+four prior streams and the reference union pass. The control databases match
+the prior study byte for byte. All prior 320 sources, 3,620 artifacts / 63
+manifests and 64 manuscript proof blocks remain unchanged. Runtime binds 324
+sources; the post-hoc rotation screen raises the final ledger to 325.
+Checkpoint SHA-256: `79c224246b77270980ddb5685ab32464df19057dfe95a7db976a5b18019de63b`.
+Report SHA-256: `3005787a6d6eb257b19ee39a7b4cd33137384f93ec0f3c2547142b31bfd254d2`.
+The new manifest adds **49 artifacts**; the next audit inherits **3,669 artifacts /
+64 manifests**. The manuscript builds to **188 pages**.

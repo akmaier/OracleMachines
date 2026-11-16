@@ -5487,6 +5487,81 @@ guard declines these premises, so this is a validated next implementation target
 not a measured runtime saving. It calls for checked witness reuse before fresh
 search, with lookup, verification and persistence still included.
 
+\paragraph{Publishing retained SAT witnesses for edited queries.}
+The positive counterpart now precedes fresh search. If $F=G\land C$ has a
+checked SAT witness, that witness satisfies $G$. The optional wrapper checks
+the exact single-clause relation, the stronger root and its stored model,
+transports variable coordinates, and checks every query clause. It then writes
+one ordinary SAT query certificate through the existing residual checker.
+This certificate contains the complete query and model; it can be checked
+without the template or a transfer alias, including when deletion removes a
+variable from the query's support. Missing or UNSAT premises cannot justify a
+SAT publication. The existing negative guard and ordinary solver remain unchanged.
+
+This gives an elementary conditional case distinction for a found, checked
+one-clause extension: reuse a positive witness, or apply the negative guard.
+Candidate discovery still requires exact common coordinates, and the experimental
+interface excludes tautological clauses. Missing candidates and the potentially
+hard exceptional cofactors remain unresolved by this distinction. It does not
+provide an efficient classification of arbitrary CNFs or a new complexity result.
+
+Three fresh-process triples compare ordinary solving, the UNSAT guard and
+witness publication followed by that guard. Each mode occupies each position
+once, starts from the same 613-node reference seed, processes the twelve
+constructed edits and repeats them. The original seed acquisition costs
+0.91359 seconds separately; this run's acquisition-free seed preflight costs
+0.18338 seconds. No tests or builds run during measurement.
+
+Fresh reference expansions are 502, 427 and 59 respectively. The witness path
+also publishes six answer certificates, making 65 new stored rows. Decision
+splits fall from 200 ordinary and 174 guarded to 24. Edits 19, 21 and 23 replace
+115, 120 and 129 expansions with zero expansions and one publication each.
+The six negative-template cases retain exactly their earlier guarded counts;
+case 13 still needs 22 of the remaining 59 expansions. All modes return nine
+SAT and three UNSAT answers, and repeated visits add no rows. These counts
+refer to the decision backend, not the structural-pattern inventory.
+
+Mean complete stream times are 1.26932, 1.19691 and 0.59381 seconds. Witness
+publication reduces this measured time by 53.22\% against ordinary solving and
+50.39\% against the negative guard. Against the guard, mean peak RSS falls from
+84,672,512 to 69,304,320 bytes, and SQLite storage from 5,431,296 to 3,244,032
+bytes. Database gzip plus the raw query sidecar falls from 811,502 to 676,971
+bytes in the first repetition, despite a larger sidecar. All three repeated
+comparisons agree in sign, but remain small development experiments conditional
+on retained templates. Historical acquisition remains charged separately.
+
+The complete clock includes restoration, bank construction, candidate and
+premise checking, witness validation and publication, fresh solving, bookkeeping,
+full cold replay, sidecar writing and compression. Imports and final report
+writing are excluded. Cold checking and compression now consume about 68\%
+of the shorter witness stream. Avoiding search leaves these costs visible.
+All 388 tests pass, including exhaustive transfer across single-clause deletions
+of satisfiable two-variable CNFs, support loss, self-contained cold certificates
+and tampered premises. Independent replay checks all 216 new query results,
+the four previous streams and every archived reference node with fresh search
+disabled. Control databases are byte-identical to the prior study.
+
+The durable reference union preserves 1,169 distinct keys, using 5,931,008 SQLite
+bytes and 450,067 gzip bytes. All keys already occur in the earlier ordinary and
+guard histories. One SAT key has a different valid witness in the new trials;
+the union preserves the earlier payload and retains all alternatives in their
+trial archives. Smaller measured arm snapshots therefore do not imply deletion
+of research history. The structural authority remains at 2,614 patterns and
+259 pairs, with original coverage 17 of 24 and separate supplemental coverage
+24 of 24. The new checkpoint binds both kinds of evidence.
+
+A separate seven-attempt screen uses the established one-variable model-rotation
+idea of \citet{belov2011rotation}. Starting with known SAT deletion witnesses,
+it flips a variable in the sole falsified clause and checks the entire stronger
+formula. Two flips from case 9 yield valid models for different clause deletions,
+each with 28 variables, 81 clauses and 238 literals; neither complete query root
+exists in the reference union. Their sources and witnesses are preserved as
+proposals, not published cache rows. The case-7 attempts leave two or three
+clauses false, and both case-13 attempts leave three. This diagnostic costs
+0.03762 seconds separately and establishes no rotation speedup. It identifies
+concrete unseen queries for the next comparison, where all failed proposals,
+clause checking and persistence must again be charged.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

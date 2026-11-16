@@ -1,0 +1,262 @@
+{
+  "archive_unchanged": true,
+  "identical_frontiers": true,
+  "limitation": "Separately instrumented preparation diagnosis, not a benchmark speedup. Nested cumulative times overlap; no concurrent timed workers.",
+  "no_fresh_search": true,
+  "parent": {
+    "path": "experiments/results/cnf-deferred-support/checkpoint.json",
+    "sha256": "711be45dc4a9e5a79c3c94aaac179ee1a44af1013ca364f9633df8fc97af20cc"
+  },
+  "reports": {
+    "incremental": {
+      "extraction_counts": {
+        "guard_input_literals": 28131,
+        "restriction_literal_visits": 87570,
+        "support_dropped_clauses": 20657,
+        "support_kind_implications": 2,
+        "support_kind_positive-subsumption-v1": 31,
+        "support_kind_split": 218,
+        "support_kind_units": 464,
+        "support_memo_hits": 19,
+        "support_nodes": 715,
+        "support_source_literals": 90982
+      },
+      "functions": [
+        {
+          "calls": 39540,
+          "cumulative_seconds": 0.7781815270000001,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "restrict",
+          "line": 57,
+          "self_seconds": 0.013142184000000001
+        },
+        {
+          "calls": 14281,
+          "cumulative_seconds": 2.978045851,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "_canonical",
+          "line": 378,
+          "self_seconds": 0.022928168000000002
+        },
+        {
+          "calls": 7216,
+          "cumulative_seconds": 3.5875370280000003,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "_read",
+          "line": 382,
+          "self_seconds": 0.119686337
+        },
+        {
+          "calls": 1,
+          "cumulative_seconds": 3.0407610000000003,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_incremental_support.py",
+          "function": "check_proposals",
+          "line": 13,
+          "self_seconds": 0.005874328000000001
+        },
+        {
+          "calls": 244,
+          "cumulative_seconds": 2.4483998710000003,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_clause_deletion_guard.py",
+          "function": "check_guard",
+          "line": 53,
+          "self_seconds": 0.0027133210000000003
+        },
+        {
+          "calls": 1,
+          "cumulative_seconds": 1.440902375,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_cofactor_support.py",
+          "function": "prepare",
+          "line": 12,
+          "self_seconds": 0.0032216090000000003
+        },
+        {
+          "calls": 734,
+          "cumulative_seconds": 0.34598425000000005,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_deferred_support.py",
+          "function": "extract",
+          "line": 16,
+          "self_seconds": 0.010564707000000001
+        },
+        {
+          "calls": 635,
+          "cumulative_seconds": 0.260269595,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_unsat_support.py",
+          "function": "_preimage",
+          "line": 40,
+          "self_seconds": 0.022448258000000002
+        },
+        {
+          "calls": 99,
+          "cumulative_seconds": 0.404091833,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_unsat_support.py",
+          "function": "source_core",
+          "line": 116,
+          "self_seconds": 0.0020479350000000003
+        },
+        {
+          "calls": 1,
+          "cumulative_seconds": 0.035774625000000004,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_incremental_support.py",
+          "function": "merge",
+          "line": 46,
+          "self_seconds": 0.0015829090000000002
+        }
+      ],
+      "origins": 244,
+      "profile": {
+        "path": "experiments/results/cnf-incremental-support-profile/incremental.pstats",
+        "sha256": "a6be3053ba657b3533b95a91cb9361924524b96c8aec010bbb79b1d790dccfaa"
+      },
+      "raw_supports": 168,
+      "retained": 151,
+      "seconds": 4.521899125073105
+    },
+    "ready": {
+      "extraction_counts": {},
+      "functions": [
+        {
+          "calls": 4166,
+          "cumulative_seconds": 0.536527697,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "restrict",
+          "line": 57,
+          "self_seconds": 0.0023558240000000003
+        },
+        {
+          "calls": 9979,
+          "cumulative_seconds": 2.079398677,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "_canonical",
+          "line": 378,
+          "self_seconds": 0.016464736
+        },
+        {
+          "calls": 5045,
+          "cumulative_seconds": 2.7623288720000003,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "_read",
+          "line": 382,
+          "self_seconds": 0.071364629
+        },
+        {
+          "calls": 1,
+          "cumulative_seconds": 3.0723342500000004,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_incremental_support.py",
+          "function": "check_proposals",
+          "line": 13,
+          "self_seconds": 0.00555353
+        },
+        {
+          "calls": 145,
+          "cumulative_seconds": 1.8572844190000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_clause_deletion_guard.py",
+          "function": "check_guard",
+          "line": 53,
+          "self_seconds": 0.001574307
+        }
+      ],
+      "origins": 145,
+      "profile": {
+        "path": "experiments/results/cnf-incremental-support-profile/ready.pstats",
+        "sha256": "33df9cd39ff1ac3bc98b99ec3421fbb388a6334804f876895d97b41a505364f0"
+      },
+      "raw_supports": 112,
+      "retained": 104,
+      "seconds": 3.0927836247719824
+    },
+    "rebuild": {
+      "extraction_counts": {
+        "guard_input_literals": 68322,
+        "restriction_literal_visits": 213538,
+        "support_dropped_clauses": 50880,
+        "support_kind_empty": 1,
+        "support_kind_implications": 7,
+        "support_kind_positive-subsumption-v1": 68,
+        "support_kind_split": 516,
+        "support_kind_units": 1105,
+        "support_memo_hits": 55,
+        "support_nodes": 1697,
+        "support_source_literals": 222217
+      },
+      "functions": [
+        {
+          "calls": 87893,
+          "cumulative_seconds": 0.8781603870000001,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "restrict",
+          "line": 57,
+          "self_seconds": 0.02773429
+        },
+        {
+          "calls": 13518,
+          "cumulative_seconds": 3.063845435,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "_canonical",
+          "line": 378,
+          "self_seconds": 0.023530486
+        },
+        {
+          "calls": 6783,
+          "cumulative_seconds": 3.2876368830000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "_read",
+          "line": 382,
+          "self_seconds": 0.090713216
+        },
+        {
+          "calls": 244,
+          "cumulative_seconds": 2.538969663,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_clause_deletion_guard.py",
+          "function": "check_guard",
+          "line": 53,
+          "self_seconds": 0.002366108
+        },
+        {
+          "calls": 1,
+          "cumulative_seconds": 4.742523,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_cofactor_support.py",
+          "function": "prepare",
+          "line": 12,
+          "self_seconds": 0.00921713
+        },
+        {
+          "calls": 1752,
+          "cumulative_seconds": 0.8501488330000001,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_deferred_support.py",
+          "function": "extract",
+          "line": 16,
+          "self_seconds": 0.026452119000000003
+        },
+        {
+          "calls": 1508,
+          "cumulative_seconds": 0.640710018,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_unsat_support.py",
+          "function": "_preimage",
+          "line": 40,
+          "self_seconds": 0.055462170000000005
+        },
+        {
+          "calls": 244,
+          "cumulative_seconds": 0.994463835,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_unsat_support.py",
+          "function": "source_core",
+          "line": 116,
+          "self_seconds": 0.005295089
+        }
+      ],
+      "origins": 244,
+      "profile": {
+        "path": "experiments/results/cnf-incremental-support-profile/rebuild.pstats",
+        "sha256": "b9c55383955545d74148ea2de1e3c1e52ace9702f00df1ff0dd80cd2cd722273"
+      },
+      "raw_supports": 168,
+      "retained": 151,
+      "seconds": 4.744305000174791
+    }
+  },
+  "source": {
+    "path": "/Users/maier/Documents/code/OracleMachines/experiments/profile_cnf_incremental_support.py",
+    "sha256": "d49ae335bc8dda4b9cfa8d169a91a67a2ee0db61d43a7558687b8065dd3cfe42"
+  }
+}

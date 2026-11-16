@@ -6070,6 +6070,81 @@ preserved union grows to 16,760 keys, retaining the already-ready support bank
 and all historical results. Original structural closure stays at 17 of 24;
 the separate supplemental corpus remains 24 of 24. No new Lean theorem is claimed.
 
+\paragraph{Incremental support discovery and repeated evidence checks.}
+The next experiment extends the saved support index using only newly acquired
+negative guarded results. It preserves all old raw supports and origins. Equal
+clause sets retain their first origin; new supports are appended. A new support
+already containing a retained support adds no matches. Otherwise it enters the
+frontier and replaces retained supersets, whose matches it preserves. Sorting
+the final frontier and recomputing dominance witnesses gives exactly the same
+containment-minimal family and first-match order as a complete reconstruction.
+This finite-family invariant does not establish an efficient partition of SAT.
+
+Loading still checks old identities, guards, negative origins, clause containment
+and dominance. Missing derived roots remain proposals. On a match, the unchanged
+materializer must produce and verify the proposed negative core before subset
+publication. Pending proposals survive restart and further extension; they are
+not persisted proof-validity flags. Repeated batch identities reject. Historical
+origins and superseded supports remain stored.
+
+The existing 145 negative sources provide 112 raw supports and 104 retained
+entries. A further 99 negative sources provide 84 distinct supports, of which
+28 duplicate old entries. The combined index has 168 raw supports and 151
+retained entries; three old frontier entries are superseded. Incremental and
+full discovery produce identical frontiers. Both use the already-acquired
+16,760-key union, without repeating its construction. Selection excludes all
+960 earlier sidecar answers and cached complete roots, then takes another 192
+constructed neighbours. Three balanced process triples visit them twice.
+
+Incremental extraction visits 715 proof nodes instead of 1,697, a 57.87\%
+reduction. Yet mean preparation time only falls from 1.82786 to 1.78856 seconds,
+and complete time from 11.69363 to 11.64076 seconds: a 0.45\% difference that
+does not establish a robust practical speedup. The two modes have identical
+logical and physical proof archives. Mean peak RSS rises 1.37\% with incremental
+discovery. The ready-bank control costs 11.17962 seconds, so extending it still
+regresses 4.12\% in total time, with a regression in every matched triple.
+The complete clock includes acquisition for the new proposals, checking, query
+handling, persistence, full cold replay, compression and final digest/report
+generation. Historical acquisition and 1.78046 seconds of selection remain
+separate; imports, command-line reads and the wrapper report rewrite are excluded.
+
+The larger index transfers 18 targets rather than fourteen, reducing fresh
+expansions from 199 to 162. Newly covered cases 53, 121, 163 and 190 account
+for all 37 saved expansions. Three core materializations add 39 proof rows;
+all new rows increase from 362 to 368. Gzip is 1,534 bytes smaller, but gzip
+plus raw sidecars grows from 11,064,817 to 11,617,440 bytes. The candidate has
+104 available retained roots and 47 pending ones, a different frontier from
+the original 104 ready supports. Repeated visits add no proof rows.
+
+All modes return 105 SAT and 87 UNSAT answers. Of 43 guarded queries, 42 are
+negative and one is positive. Eighteen negative queries still need 154
+expansions; guarded SAT case 188 needs eight. All measured transfers share the
+guard clause of their first origin, so broad cross-guard or cross-category
+coverage remains open. Original template 8 contributes 66 remaining expansions,
+template 6 contributes 51 and template 12 contributes 45.
+
+A separate instrumented diagnostic finds 7,216 proof reads and 14,281
+canonicalization calls for incremental discovery, versus 6,783 and 13,518
+for full reconstruction. Checking saved provenance and ready roots offsets
+much of the avoided extraction. This diagnostic overlapped the correctness
+suite, so its elapsed times are not speedup evidence; it did not overlap the
+matched timed workers. The next target is to separate active proof requirements
+from complete lineage audit while retaining both. A checked negative core can
+justify subset reuse independently of the guard that originally discovered it;
+a pending proposal still requires materialization and checking. An owned
+session or demand-driven checks may avoid repeated work on unrelated history,
+but complete cold audit, invalidation and persistence must remain charged.
+The acquired graph and its storage may still be exponential; no unrestricted-SAT
+complexity or minimum-expansion bound is established.
+
+All 451 tests, nine independent archive checks and 3,456 trial query replays,
+every union node and 1,229 inherited decisions pass with fresh validation search
+disabled. The union retains 17,161 keys and all previous payloads; eight alternate
+certificate occurrences remain in trials. The saved extended index keeps 47
+pending roots for future checked materialization. Original structural closure
+remains 17 of 24 and the separate supplemental corpus 24 of 24; there is no
+new Lean theorem.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

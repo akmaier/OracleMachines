@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Incremental support discovery](research/incremental-support.md) extends the saved
+frontier **104 -> 151 entries** and covers four additional targets on a new stream,
+cutting expansions **199 -> 162**. It visits **57.87% fewer extraction nodes** than
+full rediscovery, but complete runtime is almost unchanged and remains **4.12%
+higher than loading the ready bank**. Repeated evidence checking is the next cost
+target. All **451 tests** pass; proposals remain unproved until checked materialization.
+Resume `experiments/results/cnf-incremental-support/checkpoint.json` (17,161 preserved keys).
+
 [Construct support proofs only after a match](research/deferred-support.md).
 On a new 192-input stream, this preserves all 23 transfers while cutting support
 construction **1,310 -> 209 proof rows**. Complete runtime falls **9.96% against

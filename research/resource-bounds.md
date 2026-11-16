@@ -2553,3 +2553,37 @@ and compression still cost 34.94% and 29.71% of deferred worker time. The new
 outer clock includes final digest/report generation that earlier timings
 excluded. No cumulative speedup, general SAT complexity improvement, or new
 original structural closure follows from this policy comparison.
+
+
+## 2026-11-16: incremental support discovery still pays for old evidence
+
+The [incremental discovery experiment](incremental-support.md) processes 99 new
+negative guarded results while retaining the 145 old origins and all raw supports.
+The exact frontier grows from 104 to 151 entries. An insertion either is dominated
+by an existing subset or replaces retained supersets; raw history remains intact.
+Stable first-origin IDs and recomputed dominance witnesses reproduce full
+reconstruction's frontier and first-match order. This is a finite-family invariant.
+
+Extraction visits 715 rather than 1,697 acquired proof nodes, but cold load still
+checks old provenance, guards, negative origins and existing core proofs. It also
+copies old state, rebuilds clause sets and recomputes dominance witnesses. Thus
+its work is not bounded only by new sources. A new source may share an old proof
+subgraph, which the new session can traverse again. Current containment matching
+still scans the support family; acquisition, graph volume and retained space can
+be exponential. Pending roots are proposals, requiring checked materialization
+on a match, and persist across restart without eager proof construction.
+
+On matched current 16,760-key clones, extension reduces expansions 199 -> 162,
+but adds 368 rows versus 362 with the ready bank and increases complete time
+4.12%. Incremental preparation improves only 2.15% over full rediscovery;
+complete time differs by 0.45%, without a demonstrated practical speedup. Mean
+RSS is 1.37% above rebuild and 0.17% above ready. Gzip plus sidecars grows
+11,064,817 -> 11,617,440 bytes against ready, despite a 1,534-byte gzip reduction.
+Historical acquisition and separately measured selection remain charged.
+
+The diagnostic records more proof reads and canonicalizations for incremental
+load than reconstruction, despite fewer extractions. It identifies a distinction
+between verifying the negative core needed by an active match and auditing its
+historical discovery lineage. Future work can separate these responsibilities,
+but must keep ordinary negative-proof checking, complete cold audit and correct
+session invalidation. No new minimum-expansion or unrestricted-SAT bound follows.

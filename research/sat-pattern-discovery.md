@@ -4849,3 +4849,79 @@ Checkpoint SHA-256: `711be45dc4a9e5a79c3c94aaac179ee1a44af1013ca364f9633df8fc97a
 Report SHA-256: `3c762d725a6e0f058e309a098f124334a38feee3f4e8856069a2a41a5974bbb7`.
 The manuscript builds to 195 pages without warnings. The new manifest binds
 56 artifacts; the next audit inherits **3,979 artifacts / 70 manifests**.
+
+
+## 2026-11-16: incremental discovery and old evidence costs
+
+[Incremental support discovery](incremental-support.md) reuses the saved index
+and extracts supports only from newly acquired negative results. Adding **99**
+new sources to **145** old ones gives exactly the same frontier as full
+rediscovery: **168 raw supports / 151 retained entries**, up from 112 / 104.
+Three superseded old entries remain in history. Pending proposals survive
+restart and further extension; they cannot justify UNSAT before materialization
+and ordinary proof checking.
+
+**Coverage gain:** on another 192 unseen constructed neighbours, the expanded
+index transfers **18 rather than 14** targets and reduces expansions
+**199 -> 162 (18.59%)**. Cases 53, 121, 163 and 190 account for all 37 saved
+expansions. Three materializations add 39 proof rows. All modes return
+**105 SAT / 87 UNSAT**, including one guarded SAT result. Every measured transfer
+still shares its first origin's guard clause; broad cross-category discovery
+remains open. Both extension modes have identical logical/physical archives.
+
+**Cost result:** incremental extraction visits **715 rather than 1,697** proof
+nodes (57.87% fewer), but preparation only falls **1.82786 -> 1.78856 seconds**.
+Complete time is **11.69363 -> 11.64076 seconds**, a near-flat **0.45%** difference,
+with no demonstrated practical speedup or memory improvement. Against loading
+the ready bank (**11.17962 seconds**), extension still regresses **4.12%**, in
+every matched triple. Gzip plus raw sidecars grows **11,064,817 -> 11,617,440 bytes**.
+Keep extension optional. This is a current-union comparison, not another
+historical construction replay: all workers begin with **16,760 keys**, and
+selection excludes all **960** prior sidecar answers and cached complete roots.
+
+**Next highest-value gap: repeated checking of saved evidence.** The diagnostic
+records **7,216 proof reads / 14,281 canonicalizations** for incremental discovery,
+versus **6,783 / 13,518** for rebuilding. Old provenance and ready-core checking
+offset avoided extraction. Separate active match requirements from full lineage
+audit, retaining both: a checked negative core justifies subset reuse independently
+of its discovery guard, while a pending proposal needs checked materialization.
+Test demand-driven checks or reuse within an owned append-only session, retaining
+invalidation and a separately charged complete cold audit. Do not persist unchecked
+trust flags. The diagnostic overlapped the correctness suite; use its call counts
+and structure, not its elapsed times. Timed workers ran alone.
+
+**Remaining coverage probes:** 18 negative cases need 154 expansions; guarded
+SAT case 188 needs eight. Template 8 contributes 66 expansions, template 6 adds
+51 and template 12 adds 45. Largest new-catalog negatives are 61 (19), 72 and
+142 (18 each), and 19 (14). Keep these distinct from original structural case IDs.
+Cold audit and compression remain 34.93% and 29.74% of complete incremental time.
+The 151-entry trial frontier has 104 available roots and 47 pending proposals;
+these 104 available roots are a different set from the original 104 ready cores.
+
+Resume `experiments/results/cnf-incremental-support/checkpoint.json`. Preserve
+all inherited fields plus `incremental_support_study`, `incremental_support_decisions`
+and `incremental_support_proposals`. The latter stores the complete extended
+index (including all raw supports, origins and dominance), not just ready cores.
+For the next extension, supply the five old decision catalogs in their existing
+order and only genuinely new batches. Repeated batch identities reject. Use the
+extended index to preserve acquired discovery rather than returning to the old
+104-entry frontier. Match-time proof checks still apply to every pending root.
+
+The union retains **17,161 keys / 52,809,728 SQLite / 4,124,643 gzip bytes**, adding
+401 keys while keeping every earlier payload. Eight alternate certificate
+occurrences remain in trial archives. The new catalog has **149 direct roots /
+43 guarded decisions** (42 negative, one positive). All 104 original ready cores
+remain in history; the extended frontier has 104 available roots and 47 pending
+proposals in the union as well as the candidate trials.
+
+All **451 tests**, nine complete archive checks / **3,456 trial query replays**,
+every union node, **1,229 inherited decisions** and all new decisions pass with
+fresh validation search disabled. Prior **358 sources / 3,979 artifacts /
+70 manifests** remain unchanged. Runtime binds 363 sources; the post-hoc analyzer
+brings the ledger to 364. Structural authority remains 2,614 patterns / 259 pairs /
+17 missing children, original 17/24 / 999 steps, separate supplemental 24/24 /
+208, and original case 7's discovery pointer. No new Lean or unrestricted-SAT claim.
+Checkpoint SHA-256: `6c60e95e1a8f0f0dc12fc2e24dba38178cc35ae5e13a07a28d43b30d0180700c`.
+Report SHA-256: `c5c12f205dd77b370d4120ce0baf06e33ab0ecc1268e2fa7d8ac14fbd4ef5275`.
+The manuscript builds to 196 pages without warnings; all 64 proof blocks are unchanged.
+The new manifest binds 63 artifacts; next audit inherits **4,042 artifacts / 71 manifests**.

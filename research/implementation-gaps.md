@@ -8837,3 +8837,30 @@ Checkpoint SHA-256: `ddab750444c8546722ca5d15acee2abbda32455e9dd2dcc785715ebdcfa
 Report SHA-256: `9b616b087f471249cebe07ea6c29a864980c46d3736425e613b6cfa1de556b70`.
 The manuscript builds to 197 pages without warnings; all 64 proof blocks are unchanged.
 The new manifest binds 55 artifacts; next audit inherits **4,097 artifacts / 72 manifests**.
+
+
+## 2026-11-16: witness signatures separate lookup from discovery
+
+[Bounded witness exploration](witness-signatures.md) reaches two hard historical
+SAT queries through sequences of flips, but adds no transfers on the next 192
+inputs. All 96 SAT inputs already use the old witness route. Total runtime
+regresses 6.04%; all 214 remaining expansions are UNSAT cases. Keep the new
+bank optional. Equal false-clause signatures compress exact lookup but do not
+preserve flip transitions; a two-variable counterexample is tested and recorded.
+The fixed budget, all accepted assignments, failed attempts and seed origins persist.
+
+The next coverage target is shared negative cofactors: template 6 now contributes
+94 expansions, template 8 contributes 69 and template 12 contributes 51. Current
+cases 123/189 share guard [130,140] and cost 17/16 expansions. Compare their
+conditional supports and proof structure, then test transfer across different
+guards and templates. Cold audit and compression remain 40.45%/33.11% of total
+control runtime. Broader pattern coverage and efficient arbitrary-SAT acquisition
+remain open; polynomial signature counts do not imply cheap construction.
+
+Resume `experiments/results/cnf-witness-signatures/checkpoint.json` (17,947 keys).
+All 473 tests, nine complete archive audits, every union node, 1,613 inherited
+and 192 new decisions pass without fresh validation search. Old results and the
+170-entry negative frontier are preserved. Structural authority remains 2,614
+patterns / 259 pairs / 17 missing children, original 17/24 / 999 steps and separate
+supplemental 24/24 / 208. The paper builds to 198 pages with 64 unchanged proof
+blocks. No new Lean or unrestricted polynomial SAT claim.

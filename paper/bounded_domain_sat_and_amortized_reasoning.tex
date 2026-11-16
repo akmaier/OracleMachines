@@ -6211,6 +6211,75 @@ index has 106 available roots and 64 pending proposals. Original structural
 closure remains 17 of 24 and the separate supplemental corpus 24 of 24;
 no new Lean theorem is claimed.
 
+\paragraph{Witness signatures preserve lookup, not discovery transitions.}
+For a fixed template clause set $F$ and a complete assignment $a$, let $B(a)$
+be the clauses of $F$ falsified by $a$. For every deletion query $Q\subseteq F$,
+$a$ satisfies $Q$ exactly when $B(a)\cap Q=\varnothing$, equivalently when
+$B(a)\subseteq F\setminus Q$. Equal signatures therefore have identical lookup
+coverage. One representative per signature suffices for this lookup; each
+returned model is still checked against the complete query before publication.
+A miss or exhausted exploration budget does not establish UNSAT.
+
+The same compression need not preserve discovery. For
+$F=\{(\neg x\lor\neg y),y\}$, assignments $(x,y)=(0,0)$ and $(1,0)$ both
+falsify only $y$. Flipping $y$ satisfies $F$ from the first assignment but
+falsifies $(\neg x\lor\neg y)$ from the second. A bounded exploration engine
+therefore keeps distinct assignments while compressing only the lookup index.
+It flips variables in currently false clauses, retains states with at most two
+false template clauses, and records every rejected or duplicate attempt and
+the queue position. Seeds are fixed before exploration. Restart reconstructs
+the transcript without resetting its per-template budget.
+
+For $m$ clauses, signatures of size at most $d$ number at most
+$\sum_{i=0}^{d}\binom{m}{i}$, which is quadratic for $d=2$. This counts possible
+lookup entries, not the work of finding their representatives. With $S$ seed
+assignments and $b$ attempted flips, the implementation retains at most $S+b$
+assignments and $b$ attempt records. Candidate selection, incident-clause updates,
+bit operations, containment tests, full model checking and cold reconstruction
+remain charged. Small deletion distance alone cannot remove general SAT from
+acquisition: for arbitrary $G$ and fresh $z$, the template
+$G\land z\land\neg z$ is immediately refutable, while deleting $\neg z$ leaves
+$G\land z$, satisfiable exactly when $G$ is. This construction identifies the
+missing obligation without giving an unconditional lower bound.
+
+A historical screen excludes all 192 active-support decisions from its seeds.
+Old witnesses violate as few as one query clause on each of six hard targets,
+including four UNSAT cases, but no single flip repairs any target. Bounded
+exploration reaches historical SAT case 137 at 1,024 attempts per template and
+case 2 at 4,096. The latter cap keeps 3,276 assignments and 947 signatures across
+three templates after 12,288 attempts. These are checked historical transfers,
+not evidence of savings on the next stream.
+
+The subsequent comparison starts from the current 17,532-key union, excludes
+1,344 prior sidecar answers and cached full roots, and selects 192 further
+two-deletion neighbours. All modes actively load the same 170-entry negative
+index and retain complete cold proof, query and lineage audit. Three balanced
+process triples compare the existing pipeline, added lookup of prior SAT models,
+and lookup plus 4,096 flips per template. The last two also pay for serialization
+and complete reconstruction of their model banks. Imports, initial command-line
+reads and the final wrapper rewrite are excluded; historical acquisition and
+selection are separately charged.
+
+All 96 SAT queries already use the existing one-clause witness route. The new
+bank adds no transfers: all modes perform 214 expansions and 68 splits, add 415
+proof rows and produce byte-identical databases. All remaining search is on
+25 UNSAT queries. Mean complete time is 10.68687 seconds for the existing
+pipeline, 10.73314 for added lookup and 11.33255 for exploration. Exploration
+regresses 6.04\% in total time, in every matched triple. Mean peak RSS increases
+9.02\%, with noisy paired signs. Gzip plus raw sidecars grows from 12,158,436
+to 15,671,480 bytes. The current seed batch yields 82 initial states and 3,282
+states after exploration, compressed to 945 lookup signatures. This finite
+compression gives no measured expansion or persistent-space saving here.
+
+Keep exploration optional. Template 6 now contributes 94 remaining expansions,
+template 8 contributes 69 and template 12 contributes 51. Negative cases 123
+and 189 share guard $[130,140]$ and cost 17 and 16 expansions, making shared
+conditional proof structure a better next coverage target. These are new
+catalog identifiers. Complete cold audit and compression cost 40.45\% and
+33.11\% of control time. The recorded failed transfer experiment and the
+non-congruence example prevent treating lookup compression as an efficient
+general construction or a uniform polynomial SAT guarantee.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

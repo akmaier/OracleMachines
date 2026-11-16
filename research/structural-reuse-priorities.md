@@ -12,7 +12,85 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: active support checks with full cold lineage
+## Current investigation: witness signatures and a failed fresh-stream transfer
+
+[Bounded witness exploration](witness-signatures.md) establishes an exact reuse
+pattern for deletion queries: the set of clauses falsified by a stored assignment
+fully describes its lookup coverage. Equal signatures do not preserve useful
+flip transitions, however. A two-variable counterexample shows why exploration
+must retain distinct assignments even when lookup can use one representative.
+
+**Historical discovery:** excluding the previous active-support answers from
+seeds, 1,024 flips per template reaches its hard SAT case 137; 4,096 also reaches
+case 2. No single flip repairs any of the six diagnostic targets. The successful
+cap uses 12,288 attempts, 3,276 assignments and 947 signatures across three
+shared-coordinate templates. Failed smaller budgets and all transcripts persist.
+
+**Fresh comparison:** the next 192 queries give **zero additional transfers**.
+All 96 SAT cases already use the old witness route; all **214 expansions / 68
+splits** belong to 25 UNSAT cases. Existing active loading, added signatures and
+added exploration produce identical proof databases with 415 new rows. Mean
+complete time is **10.68687 / 10.73314 / 11.33255 seconds**. Exploration regresses
+**6.04%**, in every matched triple. Keep it optional. Mean RSS rises 9.02%, with
+mixed paired signs; gzip plus raw sidecars grows 12,158,436 -> 15,671,480 bytes.
+The current-seed bank grows 82 -> 3,282 assignments but compresses lookup to
+945 signatures. This is no measured expansion or persistent-space improvement.
+
+**Next coverage priority:** shared negative cofactors. Current template 6 costs
+**94 expansions**, template 8 costs 69 and template 12 costs 51; the previous
+concentration on template 12 no longer describes this stream. Start with current
+cases **123 and 189** (17 and 16 expansions), both template 6 under guard
+[130,140]. Identify shared residual proof/support structure, then test genuinely
+different guards and templates. Cases 74 and 106 cost 15 each; 42, 157 and 175
+cost 14 each. Keep these current IDs separate from original structural cases.
+
+**Cost priority:** complete cold audit and compression consume **40.45% / 33.11%**
+of active-control runtime. Avoid repeated preparation and duplicated persistent
+state, while preserving complete checking. Do not spend another run blindly
+growing the positive bank: on this stream its misses are all negative. New
+positive exploration needs evidence of uncovered SAT targets or another useful
+category before further acquisition. The negative frontier stays at the acquired
+170 entries and should be loaded rather than rebuilt.
+
+The comparison starts with 17,532 keys, excludes all 1,344 prior sidecar answers
+and cached full roots, and uses three balanced fresh-process triples with two
+visits. All model checks, fixed-budget discovery, serialization, cold state
+reconstruction, negative-lineage audit and compression are charged. Tautological
+clauses are outside this index interface; a miss falls back. The fixed seed batch
+is sealed before exploration, and its persisted budget never resets on reuse.
+A quadratic number of possible two-false-clause signatures does not give cheap
+representative construction: one deletion from G and z and -z already encodes
+arbitrary SAT. No uniform-polynomial or minimal-expansion result follows.
+
+
+The independent audit passes: all **473 tests**, nine complete archive checks /
+**3,456 trial query replays**, every union node, **1,613 inherited decisions** and
+all 192 new decisions. Fresh validation search is disabled. The union preserves
+**17,947 keys / 55,951,360 SQLite / 4,291,520 gzip bytes**, adding 415 keys while
+keeping every old payload. There are no alternate certificate occurrences; new
+decisions have 133 direct roots and 59 guarded negative children. The old negative
+index remains unchanged, including pending proposals requiring checked materialization.
+
+Resume `experiments/results/cnf-witness-signatures/checkpoint.json`. It preserves
+inherited fields and adds `witness_signatures_study`, `witness_signatures_decisions`
+and the optional, sealed `witness_signatures_index`. All prior **369 sources /
+4,097 artifacts / 72 manifests** remain unchanged. Runtime binds 374 sources;
+the analyzer brings the ledger to 375. Structural authority remains **2,614 patterns /
+259 pairs / 17 missing children**, original **17/24 / 999 steps**, separate
+supplemental **24/24 / 208**, and original case 7's discovery pointer. No new Lean claim.
+The manuscript builds to **198 pages** without warnings; its **64 proof blocks**
+are unchanged.
+
+Checkpoint SHA-256: `e70222825ae73661087f5ea61665fcfc08ee7008acda710fc0ec674c89b59b52`.
+Report SHA-256: `5ddf4d0377262e60a4175001a92c0455b01170ebce944bacc1194ad51f003837`.
+
+
+The preserved negative frontier now has **113 available retained roots / 57 pending**;
+pending descriptions still require checked materialization. The new manifest binds
+**77 artifacts**, including the historical probe. The next preservation audit
+inherits **4174 artifacts / 73 manifests**.
+
+## Previous investigation: active support checks with full cold lineage
 
 [Active support checking](active-support.md) avoids checking unrelated old
 lineage before queries while retaining complete cold proof, query and provenance

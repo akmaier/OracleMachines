@@ -28,6 +28,16 @@ classes.
 
 ## Paper
 
+[Explore SAT witnesses without confusing lookup compression with cheap discovery](research/witness-signatures.md).
+Bounded flips reach two hard historical SAT targets, but give **no extra transfers**
+on the next 192 queries and increase complete runtime **6.04%**. Keep exploration
+optional. Equal falsified-clause signatures preserve lookup, but a checked
+counterexample shows that they do not preserve flip transitions. All **473 tests**
+pass. The next coverage target is shared negative cofactors: all **214 remaining
+expansions** in this stream are UNSAT cases, with template 6 contributing 94.
+Resume `experiments/results/cnf-witness-signatures/checkpoint.json` (17,947
+preserved keys); the positive bank remains optional. Complete archive replay passes.
+
 [Check matched proofs while retaining the complete audit](research/active-support.md).
 Demand-driven checks reduce total runtime **10.02% versus eager extension** and
 **6.85% versus the loaded-index control**, with identical search work and a full

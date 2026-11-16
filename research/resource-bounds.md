@@ -2623,3 +2623,36 @@ active-loader-only comparison remains open. Complete cold audit and compression
 now account for 40.03% and 31.81% of active time; further large total-cost claims
 must account for these phases. Remaining search is concentrated on template 12,
 including two guarded SAT queries which must not be treated as negative cases.
+
+## 2026-11-16: lookup signatures and bounded witness exploration
+
+The [witness-signature study](witness-signatures.md) separates two equivalences.
+Assignments falsifying the same template clauses recognize the same deletion
+queries, so one representative suffices for lookup. They need not have equivalent
+flip transitions: F={(-x or -y), y} with (x,y)=(0,0) and (1,0) is a counterexample.
+The engine retains distinct assignments for exploration and compresses only the
+lookup representatives. A maximum of two false clauses gives at most
+1+m+binomial(m,2) signatures, without bounding their construction effort.
+
+With S initial assignments and B attempted flips per template, at most S+B
+assignment states and B attempt records persist. Assignment/signature masks use
+O((S+B)(n+m)) bits, plus the transcript, input, incidence lists, origins and object
+overhead. Candidate-variable scans, incident-clause updates, arbitrary-precision
+operations, containment, lookup, full model validation, publication and complete
+cold reconstruction remain charged. This is a bounded optional search, with
+sealed seeds and a persistent global budget, not a complete cheap constructor.
+
+On the next 192 queries, 12,288 flips retain 3,282 assignments and 945 signatures
+but add zero transfers. All SAT cases already use the existing witness route.
+Complete runtime grows 10.68687 -> 11.33255 seconds (6.04%) and mean peak RSS
+grows 9.02%, with mixed paired memory signs. Gzip plus raw sidecars grows
+12,158,436 -> 15,671,480 bytes. All proof databases are identical. A historical
+held-out screen does reach two previously unavailable SAT witnesses, but its
+coverage gain does not transfer to this fresh stream.
+
+All 214 remaining expansions are UNSAT cases, distributed 94/69/51 across
+templates 6/8/12. Shared negative cofactors are now the coverage priority.
+Complete cold audit and compression consume 40.45% and 33.11% of the control's
+runtime. For arbitrary G, deleting -z from G and z and -z yields G and z;
+thus even one-deletion representative acquisition includes arbitrary SAT. Small
+deletion distance and polynomial signature count do not remove this obligation.

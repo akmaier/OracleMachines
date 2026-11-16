@@ -1,0 +1,754 @@
+{
+  "banks": {
+    "rotate": {
+      "check": {
+        "attempts": 12288,
+        "seconds": 0.4667410827241838,
+        "signatures": 945,
+        "states": 3282,
+        "templates": 3
+      },
+      "counts": {
+        "duplicate_assignments": 5672,
+        "flip_attempts": 12288,
+        "flip_clause_evaluations": 103961,
+        "guard_input_literals": 213406,
+        "new_assignments": 3282,
+        "new_signatures": 945,
+        "observed_model_literal_checks": 183062,
+        "signature_clause_evaluations": 64082,
+        "signature_tests": 37952,
+        "template_containment_checks": 2595
+      },
+      "lookup_calls": 118,
+      "per_template": [
+        {
+          "attempts": 4096,
+          "case": 6,
+          "duplicates": 1657,
+          "rejected": 1406,
+          "seed_states": 26,
+          "signatures": 296,
+          "states": 1059
+        },
+        {
+          "attempts": 4096,
+          "case": 8,
+          "duplicates": 1635,
+          "rejected": 1439,
+          "seed_states": 29,
+          "signatures": 293,
+          "states": 1051
+        },
+        {
+          "attempts": 4096,
+          "case": 12,
+          "duplicates": 1715,
+          "rejected": 1236,
+          "seed_states": 27,
+          "signatures": 356,
+          "states": 1172
+        }
+      ],
+      "raw_bytes": 2955127
+    },
+    "signatures": {
+      "check": {
+        "attempts": 0,
+        "seconds": 0.07913583423942327,
+        "signatures": 82,
+        "states": 82,
+        "templates": 3
+      },
+      "counts": {
+        "duplicate_assignments": 665,
+        "guard_input_literals": 213406,
+        "new_assignments": 82,
+        "new_signatures": 82,
+        "observed_model_literal_checks": 183062,
+        "signature_clause_evaluations": 64082,
+        "signature_tests": 3216,
+        "template_containment_checks": 2595
+      },
+      "lookup_calls": 118,
+      "per_template": [
+        {
+          "attempts": 0,
+          "case": 6,
+          "duplicates": 0,
+          "rejected": 0,
+          "seed_states": 26,
+          "signatures": 26,
+          "states": 26
+        },
+        {
+          "attempts": 0,
+          "case": 8,
+          "duplicates": 0,
+          "rejected": 0,
+          "seed_states": 29,
+          "signatures": 29,
+          "states": 29
+        },
+        {
+          "attempts": 0,
+          "case": 12,
+          "duplicates": 0,
+          "rejected": 0,
+          "seed_states": 27,
+          "signatures": 27,
+          "states": 27
+        }
+      ],
+      "raw_bytes": 36527
+    }
+  },
+  "byte_identical_proof_archives": true,
+  "comparison": {
+    "rotate": {
+      "gzip_plus_raw_sidecars_bytes": 15671479.666666666,
+      "mean_complete_peak_rss_bytes_change_percent": 9.018861770940912,
+      "mean_complete_worker_seconds_change_percent": 6.041800877454961,
+      "mean_query_seconds_change_percent": 4.234343387012385
+    },
+    "signatures": {
+      "gzip_plus_raw_sidecars_bytes": 12752885.333333334,
+      "mean_complete_peak_rss_bytes_change_percent": 14.319726042289505,
+      "mean_complete_worker_seconds_change_percent": 0.432992500462559,
+      "mean_query_seconds_change_percent": 2.6489871116289976
+    }
+  },
+  "control_cold_percent": 40.4545745215518,
+  "control_compression_percent": 33.110535520389384,
+  "control_gzip_plus_raw_sidecars_bytes": 12158436.0,
+  "limitation": "No extra transfers on this fresh stream; all 96 SAT cases already use the old witness route. All remaining expansions are negative. Historical SAT gains do not establish fresh-stream benefit; keep exploration optional.",
+  "paired": {
+    "rotate": [
+      {
+        "complete_change_percent": 5.491940172381549,
+        "peak_rss_change_percent": 14.215609172984367,
+        "repeat": 0
+      },
+      {
+        "complete_change_percent": 7.283372293901369,
+        "peak_rss_change_percent": 16.510404756460105,
+        "repeat": 1
+      },
+      {
+        "complete_change_percent": 5.3699622794302515,
+        "peak_rss_change_percent": -1.634371871134932,
+        "repeat": 2
+      }
+    ],
+    "signatures": [
+      {
+        "complete_change_percent": 0.7535541850407501,
+        "peak_rss_change_percent": 13.199534430148784,
+        "repeat": 0
+      },
+      {
+        "complete_change_percent": 0.7194678980630531,
+        "peak_rss_change_percent": 26.514978275783218,
+        "repeat": 1
+      },
+      {
+        "complete_change_percent": -0.16171518098286874,
+        "peak_rss_change_percent": 5.945579833912484,
+        "repeat": 2
+      }
+    ]
+  },
+  "remaining": [
+    {
+      "answer": false,
+      "case": 123,
+      "expansions": 17,
+      "guard_clause": [
+        130,
+        140
+      ],
+      "removed": [
+        [
+          -190,
+          -90,
+          30
+        ],
+        [
+          130,
+          140
+        ]
+      ],
+      "splits": 6,
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 189,
+      "expansions": 16,
+      "guard_clause": [
+        130,
+        140
+      ],
+      "removed": [
+        [
+          50,
+          160,
+          230
+        ],
+        [
+          130,
+          140
+        ]
+      ],
+      "splits": 6,
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 74,
+      "expansions": 15,
+      "guard_clause": [
+        40,
+        210,
+        290
+      ],
+      "removed": [
+        [
+          -270,
+          -140,
+          200
+        ],
+        [
+          40,
+          210,
+          290
+        ]
+      ],
+      "splits": 5,
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 106,
+      "expansions": 15,
+      "guard_clause": [
+        40,
+        50
+      ],
+      "removed": [
+        [
+          -70,
+          160,
+          210
+        ],
+        [
+          40,
+          50
+        ]
+      ],
+      "splits": 6,
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 42,
+      "expansions": 14,
+      "guard_clause": [
+        190,
+        230
+      ],
+      "removed": [
+        [
+          30,
+          80,
+          100
+        ],
+        [
+          190,
+          230
+        ]
+      ],
+      "splits": 4,
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 157,
+      "expansions": 14,
+      "guard_clause": [
+        190,
+        230
+      ],
+      "removed": [
+        [
+          -210,
+          50,
+          120
+        ],
+        [
+          190,
+          230
+        ]
+      ],
+      "splits": 4,
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 175,
+      "expansions": 14,
+      "guard_clause": [
+        190,
+        230
+      ],
+      "removed": [
+        [
+          -180,
+          -160,
+          -90
+        ],
+        [
+          190,
+          230
+        ]
+      ],
+      "splits": 4,
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 93,
+      "expansions": 13,
+      "guard_clause": [
+        180,
+        250
+      ],
+      "removed": [
+        [
+          40,
+          50
+        ],
+        [
+          180,
+          250
+        ]
+      ],
+      "splits": 4,
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 155,
+      "expansions": 13,
+      "guard_clause": [
+        110,
+        240
+      ],
+      "removed": [
+        [
+          -190,
+          20,
+          110
+        ],
+        [
+          110,
+          240
+        ]
+      ],
+      "splits": 5,
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 159,
+      "expansions": 13,
+      "guard_clause": [
+        10,
+        260
+      ],
+      "removed": [
+        [
+          -170,
+          -110,
+          180
+        ],
+        [
+          10,
+          260
+        ]
+      ],
+      "splits": 5,
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 182,
+      "expansions": 12,
+      "guard_clause": [
+        -170,
+        -90
+      ],
+      "removed": [
+        [
+          -170,
+          -160,
+          140
+        ],
+        [
+          -170,
+          -90
+        ]
+      ],
+      "splits": 4,
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 3,
+      "expansions": 10,
+      "guard_clause": [
+        -210,
+        -140,
+        160
+      ],
+      "removed": [
+        [
+          -220,
+          -140,
+          60
+        ],
+        [
+          -210,
+          -140,
+          160
+        ]
+      ],
+      "splits": 3,
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 94,
+      "expansions": 9,
+      "guard_clause": [
+        -210,
+        -140,
+        160
+      ],
+      "removed": [
+        [
+          -250,
+          -80
+        ],
+        [
+          -210,
+          -140,
+          160
+        ]
+      ],
+      "splits": 3,
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 190,
+      "expansions": 7,
+      "guard_clause": [
+        190,
+        230
+      ],
+      "removed": [
+        [
+          -70,
+          10,
+          140
+        ],
+        [
+          190,
+          230
+        ]
+      ],
+      "splits": 2,
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 126,
+      "expansions": 6,
+      "guard_clause": [
+        60,
+        140,
+        250
+      ],
+      "removed": [
+        [
+          -50,
+          30,
+          110
+        ],
+        [
+          60,
+          140,
+          250
+        ]
+      ],
+      "splits": 2,
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 167,
+      "expansions": 5,
+      "guard_clause": [
+        -190,
+        -110,
+        310
+      ],
+      "removed": [
+        [
+          -250,
+          -60,
+          30
+        ],
+        [
+          -190,
+          -110,
+          310
+        ]
+      ],
+      "splits": 1,
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 19,
+      "expansions": 4,
+      "guard_clause": [
+        -50,
+        30,
+        110
+      ],
+      "removed": [
+        [
+          -220,
+          120,
+          130
+        ],
+        [
+          -50,
+          30,
+          110
+        ]
+      ],
+      "splits": 1,
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 150,
+      "expansions": 4,
+      "guard_clause": [
+        -50,
+        30,
+        110
+      ],
+      "removed": [
+        [
+          -50,
+          10,
+          140
+        ],
+        [
+          -50,
+          30,
+          110
+        ]
+      ],
+      "splits": 1,
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 164,
+      "expansions": 4,
+      "guard_clause": [
+        -40,
+        90,
+        310
+      ],
+      "removed": [
+        [
+          -230,
+          -200,
+          -110
+        ],
+        [
+          -40,
+          90,
+          310
+        ]
+      ],
+      "splits": 1,
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 169,
+      "expansions": 4,
+      "guard_clause": [
+        -20,
+        40,
+        210
+      ],
+      "removed": [
+        [
+          -50,
+          40,
+          140
+        ],
+        [
+          -20,
+          40,
+          210
+        ]
+      ],
+      "splits": 1,
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 20,
+      "expansions": 1,
+      "guard_clause": [
+        -240,
+        -200,
+        -90
+      ],
+      "removed": [
+        [
+          -290,
+          -10
+        ],
+        [
+          -240,
+          -200,
+          -90
+        ]
+      ],
+      "splits": 0,
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 37,
+      "expansions": 1,
+      "guard_clause": [
+        -50,
+        10,
+        140
+      ],
+      "removed": [
+        [
+          -210,
+          10,
+          140
+        ],
+        [
+          -50,
+          10,
+          140
+        ]
+      ],
+      "splits": 0,
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 49,
+      "expansions": 1,
+      "guard_clause": [
+        -70,
+        10,
+        140
+      ],
+      "removed": [
+        [
+          -240,
+          -200,
+          150
+        ],
+        [
+          -70,
+          10,
+          140
+        ]
+      ],
+      "splits": 0,
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 59,
+      "expansions": 1,
+      "guard_clause": [
+        -110,
+        -10,
+        160
+      ],
+      "removed": [
+        [
+          -290,
+          -130,
+          220
+        ],
+        [
+          -110,
+          -10,
+          160
+        ]
+      ],
+      "splits": 0,
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 60,
+      "expansions": 1,
+      "guard_clause": [
+        -80,
+        -30,
+        -20
+      ],
+      "removed": [
+        [
+          -140,
+          -30,
+          250
+        ],
+        [
+          -80,
+          -30,
+          -20
+        ]
+      ],
+      "splits": 0,
+      "template_case": 6
+    }
+  ],
+  "remaining_by_answer": {
+    "False": 214,
+    "True": 0
+  },
+  "remaining_by_template": {
+    "6": 94,
+    "8": 69,
+    "12": 51
+  },
+  "report": {
+    "path": "experiments/results/cnf-witness-signatures/report.json",
+    "sha256": "5ddf4d0377262e60a4175001a92c0455b01170ebce944bacc1194ad51f003837"
+  },
+  "sources": {
+    "/Users/maier/Documents/code/OracleMachines/experiments/analyze_cnf_witness_signatures.py": "66c6c1dac7491738e9c470961b44d82db474dad26a494627cffcc1b0d8f399cc"
+  }
+}

@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Policy transfer with a history control](research/case17-policy-transfer.md)
+closes the next 60-variable residual and raises coverage **6/24 -> 7/24**.
+Both histories acquire the same 89 patterns using 531 probes; none of the
+case-16 additions contributes to the new proof. Complete-history loading and
+checking dominate the measured cost. All **345 tests** pass and every result
+remains preserved. Next: the unresolved case-22 mixture and selective checked
+access to the growing archive.
+
 [Nested conditional refinement](research/nested-conditioning-discovery.md) closes
 the 59-variable frontier and raises current coverage **5/24 -> 6/24**. Trying all
 59 first-level pivots leaves it uncovered under the same recognizer. The successful

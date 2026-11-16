@@ -3934,3 +3934,31 @@ control. Eighteen originals remain unknown. The main discovery gap is predicting
 useful adaptive reduction paths; the 265 unary proof steps are a supporting
 storage/checking target. Neither finite success nor shallow observed depth implies
 uniform polynomial expansion on arbitrary SAT.
+
+
+## 2026-11-16: transfer the policy and measure the value of added history
+
+[The unchanged nested policy](case17-policy-transfer.md) closes case 17 in one
+batch, raising coverage to 7/24. Both the full union and the pre-case-16 control
+produce identical acquisitions, choices and target proofs: 89 new patterns, nine
+pairs, eighteen source assumptions and 531 probes. None of the 547 patterns or
+66 pairs acquired for case 16 contributes to the new proof. Seven older pattern
+steps still contribute. This is policy transfer on development data, not evidence
+of broad cross-input reuse of nonterminal components.
+
+The checked 96-step proof has ten conditional nodes, 84 unary reductions, two
+constant family leaves and maximum conditional depth six. Only the contradiction
+is shared, on ten paths. There is no fixed six-variable backdoor or minimum-depth
+claim. Full-history startup plus cold replay costs 11.50553 seconds, versus
+0.62379 seconds local expansion. Mean full-stream time is 12.86418 versus 8.59953
+seconds for the older-history control; the arms start with different coverage and
+check different amounts of evidence. A checked source-local working view with
+exact global fallback is a supporting opportunity, not an implemented speedup.
+
+The preservation union keeps 1,790 patterns, 171 pairs, seventeen inherited
+missing children and a 446-step proof for seven originals. All 345 tests and
+independent checks of both parents, four trial archives and the union pass.
+Seventeen originals remain unknown. The next bound discovery target is case 22's
+disjoint binary mixture with a 48-variable residual. Test policy transfer and
+separate easy-component reuse from random-core closure. No arbitrary-SAT
+efficiency bound or new Lean refinement follows from this finite experiment.

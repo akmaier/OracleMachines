@@ -4848,6 +4848,55 @@ archive and the union replay without acquisition. The next investigation tests
 transfer to a 60-variable residual. Uniformly small conditional depth, compact
 closure and efficient acquisition for arbitrary CNF remain unproved.
 
+\paragraph{Policy transfer does not imply transfer of the added history.}
+The unchanged nested policy closes the next 60-variable, 255-clause residual in
+one batch. A history ablation compares the complete 1,701-pattern union with the
+1,154-pattern checkpoint before the preceding investigation. Both histories
+already contain the same four source splits for this input. Each arm permits
+four batches of 128 recognition admissions and sixteen pair attempts; two
+repetitions reverse their order, with each stream in a fresh process. This is a
+known unresolved development input, with no policy tuning during the comparison.
+
+Both arms acquire exactly the same 89 patterns and nine pairs, using eighteen
+source assumptions and 531 probes, and close without reaching a limit. Choices,
+record payloads and target proofs match. The full-history arm raises coverage
+from six to seven of twenty-four originals; the older-history control rises from
+five to six. Its lower final total reflects its different initial coverage.
+The target proof uses seven older pattern steps and 89 new ones. None of the
+547 patterns or 66 pairs added by the preceding investigation contributes to it.
+The observed transfer concerns the work policy, without a marginal acquisition
+benefit from those added records on this input.
+
+The checked target proof has 96 distinct steps: ten conditional nodes, 84 unary
+reductions and two constant family leaves. Maximum conditional depth is six,
+interleaved with reductions in changing local coordinates; this does not identify
+a fixed six-variable backdoor or a minimum-depth plan. The contradiction is used
+on ten paths and the empty conjunction on one. Only the contradiction is shared,
+reducing 105 unfolded occurrences to 96 distinct steps. Broad nonterminal reuse
+across categories remains unestablished.
+
+Complete-history startup and cold replay dominate this continuation. Mean times
+are 5.42760 and 6.07793 seconds with the retained history, versus 3.55586 and
+3.94310 with the older history. Local expansion takes 0.62379 versus 0.59661
+seconds. Whole-stream means, including bookkeeping, archives and cold checks,
+are 12.86418 versus 8.59953 seconds; interpreter/import startup and the final
+summary write are outside this timer. Mean peak process RSS is 443,883,520 versus
+318,136,320 bytes on macOS, including imports and all phases. These are two-repeat
+observations, not asymptotic bounds or isolated cache overhead. The larger
+history also preserves and checks an additional covered original. Its cost
+motivates selective checked access to the global archive, while preserving all
+previous results and complete relevant split routes.
+
+The combined checkpoint retains 1,790 patterns, 171 pairs, seventeen inherited
+missing children and a 446-step positive proof for seven originals. It occupies
+33,972,224 SQLite bytes and 1,640,046 compressed bytes. All 345 tests pass, and
+both parents, four trial archives and the union independently replay without
+acquisition. Seventeen originals remain structurally unknown. The next discovery
+target is a disjoint binary mixture with a 48-variable unresolved component;
+reusing its easy component must be distinguished from closing the random core.
+Uniformly efficient construction and compact closure on arbitrary CNF remain
+open obligations.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -12,7 +12,53 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: transfer deeper conditional discovery to case 17
+## Current investigation: transfer across mixtures without scanning all history
+
+[The unchanged nested policy closes case 17](case17-policy-transfer.md) in one
+batch, raising current coverage **6/24 -> 7/24**. A matched history ablation
+produces exactly the same **89 new patterns / 9 pairs / 18 source assumptions /
+531 probes**, choices and target proof when the **547 patterns / 66 pairs**
+acquired for case 16 are absent. None of those case-16 additions is in the new
+proof. This is policy transfer on development data, without measured marginal
+reuse of the case-16 records. Seven older pattern steps still contribute.
+
+The proof has **96 unique steps: 10 conditional / 84 unary / 2 constant family
+leaves**, with conditional depth six. Only the contradiction is shared, on ten
+paths. Do not infer a fixed six-variable backdoor or broad nonterminal sharing.
+
+**Largest measured cost:** full-history startup plus cold checking takes
+**11.50553 s**, versus **0.62379 s** local expansion. Whole-stream means are
+**12.86418 s retained / 8.59953 s before case 16**; mean peak RSS is **443.88 /
+318.14 MB**. These two-repetition, fresh-process observations include complete
+history work and different initial coverage (6/24 versus 5/24). Preserve both
+histories; investigate a source-local checked view with exact global fallback
+and complete relevant split routes, not deletion of earlier results. The old
+read-through helper does not yet handle the new split table/registry scans.
+
+**Next discovery target:** case **22**, a **disjoint binary mixture** with a
+selected **48-variable / 204-clause / 612-literal** residual. All eight children
+of its four saved pairs are present; one is covered, but no full pair is covered.
+Reuse that work. Transfer the unchanged
+policy to it; charge discovery and distinguish easy-component reuse from closure
+of the hard residual. The bound target in `cnf-case17-transfer/next-discovery.json`
+uses historical timing for prioritization, not a new measurement on the union.
+Cases 16 and 17 are complete and must not be restarted as unknown.
+
+Restore `experiments/results/cnf-case17-transfer/checkpoint.json` through the
+existing bootstrap restoration helper. It preserves **1,790 patterns / 171 pairs /
+17 inherited missing children / 7/24 coverage**, with a **446-step positive proof**
+and **17 unknown originals**. The union occupies **33,972,224 SQLite / 1,640,046 gzip
+bytes**. All **345 tests** pass; both parents, all four trial archives and the union
+are independently checked without acquisition. All previous source files,
+artifacts and manuscript proof blocks remain unchanged.
+
+Checkpoint SHA-256: `3d52f04bd98db9f0cc72a4df33afb940953cd75de2e139ee49910d283a61cbcc`.
+Report SHA-256: `8ce007b096aacd0fe9b24a0d15bda17c23c358d7302172b737b8a7bc289da9c0`.
+Validation binds **282 sources** and adds **33 manifested artifacts**, preserving
+all previous 280 sources and 3,171 artifacts. The next audit inherits **3,204
+artifacts / 53 manifests**; include this manifest as well as its parents.
+
+## Previous investigation: transfer deeper conditional discovery to case 17
 
 [Nested conditioning](nested-conditioning-discovery.md) closes case 16 and raises
 the current corpus to **6/24** covered originals. The matched flat control tries

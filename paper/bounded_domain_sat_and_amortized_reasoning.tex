@@ -5067,6 +5067,64 @@ component-decomposition step. All 360 tests pass; independent replay checks all
 eight trial archives with the frozen auditor. The change remains optional and
 establishes no new acquisition or storage bound for arbitrary SAT.
 
+\paragraph{A covered branch does not identify minimum-cost expansion.}
+The next comparison closes case 6, raising structural coverage from twelve to
+thirteen of twenty-four originals. It also exposes a limitation of the selected
+frontier-size heuristic. The 36-variable, 148-clause random 3-CNF has four saved
+source splits. Their remaining-literal scores are 796, 820, 758 and 409 for
+pivots 11, 15, 8 and 13. The existing selector chooses pivot 13 and skips its
+already covered child. An acquisition-free diagnostic of the twelve remaining
+sources finds no changed choice when the score instead counts only distinct,
+currently uncovered obligations. That adjustment supplies no improvement here.
+
+Both comparison arms use the unchanged scoped refinement and complete canonical
+cold auditor. The retained arm starts with all saved evidence. An isolated
+control omits only the four source-split certificates, before opening a live
+verification session, while retaining every pattern row and every other split.
+The authoritative archive remains unchanged. The control reconstructs pivot 11
+and reuses its stored children. This intervention changes both selection
+information and certificate availability; it is not an empty-history solve or
+an isolation of covered-branch verification cost.
+
+Both arms close the input in one batch. The retained route adds 74 patterns and
+uses 547 probes and ten source assumptions; the control adds 63 patterns and
+uses 345 probes and twelve assumptions. Each adds five split identities not in
+the full parent, while the control also reconstructs one omitted identity.
+Thus the preferred 409-literal frontier requires more new patterns and probes
+than the 796-literal alternative. This is a counterexample to minimum acquisition
+cost under those measures, not evidence that pivot 11 is globally optimal or
+that discarding history is generally beneficial.
+
+Two reversed-order paired fresh-process runs give retained/control whole-stream
+means of 8.07061 and 7.82088 seconds, and mean peak RSS of 410,058,752 and
+384,090,112 bytes. Local expansion is slightly faster for the retained route,
+0.24952 versus 0.25645 seconds, despite its higher probe count. The retained
+snapshot has more SQLite bytes, 38,567,936 versus 38,408,192, but fewer compressed
+bytes, 1,927,364 versus 1,928,639. Cost measures therefore disagree. Complete
+auditing still takes about 82\% of either stream. Timings charge restoration,
+control preparation, setup, expansion, persistence and both cold checks, excluding
+interpreter imports and final summary writing; RSS includes all phases. These
+finite timings establish no universal runtime or memory advantage.
+
+The retained/control proofs have 86/76 distinct steps, conditional depths 5/4,
+and one component decomposition each. Their leaves include contradiction,
+2-CNF and Horn/zero-valid residuals; the latter have six and eight variables,
+respectively. The depths use changing coordinates, not fixed backdoor sizes.
+Within the retained proof only contradiction is shared; within the control,
+contradiction and the empty formula are shared. The two continuations have no
+new pattern or split identity in common. Their union therefore preserves all
+137 new patterns and ten new splits, rather than demonstrating new nonterminal
+reuse between alternative routes through this original.
+
+The checked union contains 2,118 patterns, 209 pairs, seventeen inherited missing
+children and a 779-step positive proof for thirteen originals. It occupies
+39,448,576 SQLite bytes and 1,970,166 compressed bytes. All 363 tests pass, and
+independent replay checks both initial variants, four trial archives and the
+union. Eleven originals remain unknown. The next discovery gap is predicting
+downstream simplification and comparing alternatives while charging and retaining
+all exploratory work. Smaller visible frontiers and more stored evidence alone
+do not establish cheap expansion for arbitrary SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

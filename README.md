@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Testing the value of saved splits](research/saved-split-reuse.md) closes case 6,
+raising coverage **12/24 -> 13/24**, and exposes a selection counterexample:
+the preferred saved route needs **74 new patterns / 547 probes**, versus **63 /
+345** when the isolated control reconstructs its source split. Both proofs and
+all exploratory work are retained; **363 tests** pass. A smaller visible frontier
+does not guarantee cheaper expansion. Next: downstream cost prediction on case 11.
+
 [Checked canonical form in complete cold auditing](research/canonical-cold-audit.md)
 closes case 19, raising coverage **11/24 -> 12/24**. Four paired runs reduce the
 full audit **4.23%** and whole-stream time **3.81%**, with identical acquisitions,

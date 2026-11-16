@@ -4079,3 +4079,53 @@ costs rank this target; they do not predict a new runtime bound. Keep broader
 nonterminal reuse and conditional-depth growth as discovery gaps. Audit work
 remains dominant; avoid assuming that more caches or weaker validation will
 improve it. These finite measurements do not establish efficient arbitrary SAT.
+
+## 2026-11-16: saved splits expose a minimum-cost selection counterexample
+
+[Case-6 split-history control](saved-split-reuse.md) raises coverage **12/24 ->
+13/24** and exposes a failure of the current remaining-literal heuristic. The
+complete parent already selects pivot 13 and skips its covered branch. This
+route adds **74 patterns / 547 probes / ten source assumptions**. An isolated
+copy omitting only the four source-split records, while retaining every pattern
+and every other split, reconstructs pivot 11 and adds **63 patterns / 345 probes /
+twelve assumptions**. Both close in one batch. The intervention changes saved
+selection information and certificate reuse together; it is not an empty-history
+solve or a reason to discard history generally.
+
+Visible remaining-literal scores for pivots 11,15,8,13 are 796,820,758,409.
+An acquisition-free diagnostic replacing this by distinct uncovered obligations
+changes no choice at twelve remaining source nodes. Do not implement that
+ineffective fix on this parent. The better next test retains all alternatives
+and charges bounded downstream simplification trials, reusing every admitted
+state before committing further budget. Consult existing lookahead experiments
+and retain regressions. Minimum visible frontier is not minimum future cost.
+
+Two reversed paired runs give whole-stream **8.07061 vs 7.82088 seconds**, and
+mean peak RSS **410,058,752 vs 384,090,112 bytes**, retained versus control.
+The retained route has 17.46% more new patterns and 58.55% more probes, but slightly
+faster local expansion (0.24952 vs 0.25645 seconds). It has more SQLite bytes but
+a 1,275-byte smaller gzip snapshot. Cost dimensions disagree; no general speed,
+memory or compression claim follows. Complete auditing still takes about 82%.
+
+The retained/control proofs have **86/76 steps**, conditional depth **5/4**, one
+component decomposition each, and contradiction, 2-CNF and Horn/zero-valid
+terminals. Neither depth is a fixed backdoor-size claim. Their new pattern and
+split sets are disjoint: the union retains all **137 new patterns / ten new split
+identities**, with no new nonterminal reuse between these two routes. The
+control's first split matches a historical identity but was reconstructed.
+
+All **363 tests** pass. Frozen independent replay checks both initial variants,
+all four trial archives and the union, plus query proofs, original bindings,
+reachable catalogs and immutable per-variant prefixes. Successful validation
+takes 88.50 seconds outside operational means; an earlier next-pointer failure
+and its code are preserved separately. Missing optional roots are now checked
+before composition and remain unknown. All earlier 294 sources, 3,338 artifacts
+and 64 proof blocks remain unchanged.
+
+Restore `experiments/results/cnf-saved-split-reuse/checkpoint.json`: **2,118
+patterns / 209 pairs / 17 inherited missing children / 13 of 24 originals covered**,
+with a **779-step proof** and **39,448,576 SQLite / 1,970,166 gzip bytes**.
+Eleven originals remain unknown. Next is **case 11**, with a selected **45-variable /
+196-clause / 608-literal / width-five** residual. Eight saved children are present
+and uncovered. Its depth-zero original root exists; its optional depth-one root
+does not. No inference default, Lean proof or arbitrary-SAT bound is changed.

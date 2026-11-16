@@ -12,7 +12,53 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse the covered branch and reduce complete audit work
+## Current investigation: predict downstream expansion, not just frontier size
+
+[The case-6 history control](saved-split-reuse.md) closes another original:
+**12/24 -> 13/24 coverage**. It also refutes a minimum-cost interpretation of the
+current selector. Keeping four saved source splits chooses pivot 13, which has
+one covered child and only 409 visible remaining literals. That continuation
+adds **74 patterns / 547 probes**. An isolated control preserving all patterns
+but omitting those four certificates reconstructs pivot 11 and adds **63 patterns /
+345 probes**, despite its 796-literal initial frontier. Both close in one batch.
+This changes selection information and certificate availability together; it is
+not a recommendation to forget history.
+
+**Highest discovery gap:** rank downstream simplification opportunities rather
+than assuming smaller remaining CNFs are cheaper. An acquisition-free audit of
+twelve remaining source nodes finds **no changed choice** when counting only
+distinct uncovered obligations. Retain that null result. Next, compare the
+committed-choice policy with bounded exploration of more than one saved route,
+charging every trial and preserving admitted states; consult earlier lookahead
+results before repeating work. No global optimum or cheap recognition of it is
+established. The two case-6 routes share **none of their newly acquired states**,
+so broader nonterminal reuse remains another gap.
+
+**Costs:** retained/control means are **8.07061/7.82088 s** whole-stream and
+**410.06/384.09 MB** peak RSS. Local expansion is slightly faster on the retained
+route despite more probes. Gzip size ranks the arms opposite to SQLite size.
+The full audit remains about **82%** of time; do not forecast end-to-end savings
+from state counts alone. All four archives and both initial variants independently
+replay. All **363 tests** pass; all old artifacts, sources and 64 proofs survive.
+
+**Next target:** case **11**, random 3-CNF. Its selected residual has **45 variables /
+196 clauses / 608 literals / maximum width five**. The eight saved children of
+pivots 2,32,7,6 are present and uncovered. The depth-zero original root is present;
+the optional depth-one root is absent and must remain unknown unless acquired.
+The new pointer handles this explicitly; the first validator failure is preserved.
+
+Restore `experiments/results/cnf-saved-split-reuse/checkpoint.json`: **2,118 patterns /
+209 pairs / 17 inherited missing children / 13 of 24 originals covered**, with a
+**779-step proof**. Eleven originals remain unknown. The union preserves both
+exploratory routes (137 new patterns and ten new split identities) and occupies
+**39,448,576 SQLite / 1,970,166 gzip bytes**. The checkpoint binds **298 sources**.
+The parent preservation audit covers **3,338 artifacts / 56 manifests / 294 sources**.
+The new manifest adds **40 artifacts**; the next audit inherits
+**3,378 artifacts / 57 manifests**, plus the 298-source ledger.
+Checkpoint SHA-256: `2f9d6443796a369afc18bba67a5bbd6da87ad7d66c1c1a48f1313ef89aa59fff`.
+Report SHA-256: `52f260ff86b9b6d5944dd5785791b4f63adda7e30d1991247bcf61547996167a`.
+
+## Previous investigation: reuse the covered branch and reduce complete audit work
 
 [Checked canonical form in the cold auditor](canonical-cold-audit.md) closes case
 **19**, raising coverage **11/24 -> 12/24** with **35 patterns / five pairs / ten

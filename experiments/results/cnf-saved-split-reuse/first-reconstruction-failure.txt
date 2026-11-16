@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_saved_split_reuse.py", line 198, in <module>
+    if __name__=='__main__': validate(Path(sys.argv[1]))
+                             ~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_saved_split_reuse.py", line 172, in validate
+    assert not any(base.compose(h,[k],routes,Counter())[0][0] for k in new_queries[case]['roots'])
+               ^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_saved_split_reuse.py", line 172, in <genexpr>
+    assert not any(base.compose(h,[k],routes,Counter())[0][0] for k in new_queries[case]['roots'])
+                   ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_route_composition.py", line 68, in compose
+    for rule, children in options(h, source, checked_routes):
+                          ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_route_composition.py", line 40, in options
+    if node is None: raise ValueError('Missing route source')
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Missing route source

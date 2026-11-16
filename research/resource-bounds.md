@@ -2490,3 +2490,29 @@ bytes. Cold checking remains 39.83% of total time and compression 33.07%. All
 logical checks still run. There is no improvement to SAT search complexity,
 proof-space bounds or structural closure. Earlier acquisition remains charged;
 percentages on different input sets cannot be composed into a cumulative saving.
+
+
+## 2026-11-16: checked cofactor supports and eager construction costs
+
+The [cofactor-support experiment](cofactor-support.md) extends exact reuse to a
+new restricted target containing a checked negative clause support. The complete
+query additionally requires its checked stronger UNSAT premise and deletion
+guard. A guard alone is not an UNSAT verdict, as the retained SAT counterexample
+shows. Input reading, restriction, coordinate transport, canonicalization,
+containment lookup, publication and full cold checking remain charged.
+
+Preparation traverses 1,075 negative proof nodes and publishes 791 core nodes
+plus 519 subset wrappers. Its cost depends on the acquired proof graph, not
+only input length; acquisition and retained size can still be exponential.
+The 112 raw supports reduce to 104 by exact containment dominance, preserving
+all superset matches. No arbitrary renaming search or minimality guarantee is
+provided. All 16 matched new targets avoid fresh search; total expansions fall
+234 -> 162, including 151 negative and 11 positive expansions still required.
+
+Eager construction adds 1,310 rows before querying, reducing new query rows only
+380 -> 324. Complete time rises 23.01% and peak RSS 9.23%; gzip plus raw sidecars
+also grows. The full bank needs 1,272 preparation nodes, while the current query
+proofs need 118. Deferring derived proofs until a match is an untested candidate,
+not an established saving. The acquired 104-core bank is already persistent and
+should be loaded directly for warm comparisons. All prior construction costs
+remain in lifetime accounting, and all historical rows/alternatives are retained.

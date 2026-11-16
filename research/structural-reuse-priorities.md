@@ -12,7 +12,65 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: one census per cold proof snapshot
+## Current investigation: checked support transfer between guarded cofactors
+
+[Cofactor support reuse](cofactor-support.md) certifies **16 previously uncached
+restricted subproblems** through checked clause containment. Fresh expansions
+fall **234 -> 162 (30.77%)**, and query time **1.33223 -> 0.87849 s (34.06%)**.
+But constructing the whole bank adds **1,310 proof nodes** and makes complete
+time **7.93324 -> 9.75898 s (23.01% worse)**, peak RSS **9.23% higher**, and SQLite
+**3.23% larger**. Every matched pair regresses in total time. Keep this optional;
+fewer expansions do not establish an end-to-end gain.
+
+**Highest next target: defer new support proofs until a match.** Preparation
+visits 1,075 old negative proof nodes and constructs 112 raw supports; the
+containment antichain has 104 and preserves every superset match. Only 14 of
+those supports are used here. The full retained bank needs 1,272 preparation
+nodes, but the matched supports and query proofs need only **118**. Simple
+pruning saves at most 38 nodes; building only after a checked match is the more
+credible next test. Support proposals alone must never justify UNSAT. Discovery,
+materialization, checking and persistence must all remain charged. The policy
+has not yet been implemented or measured; selecting only the 14 observed cores
+would use future workload information and can lose coverage.
+
+**Preserve and reuse this acquired bank:** its 104 cores are already materialized
+in the latest union. Load `cofactor_support_bank` and its `cores` field for warm
+runs instead of extracting them again. To evaluate a new construction policy,
+use explicitly matched historical seed clones or newly discovered supports, and
+retain an unseen stream; do not present already-paid construction as a saving.
+
+**Coverage limits and remaining cases:** 145 of 148 inherited guarded decisions
+are negative; the three SAT cofactors do not supply negative supports. The new
+stream returns 84 SAT / 108 UNSAT, with 63 old full-query core hits, 83 witness
+publications and 46 guards (45 negative, one positive). Six targets were cached.
+All 72 avoided expansions come from the 16 new cofactor hits. Each measured hit
+shares the guard clause of its first retained origin; cross-guard transfer is
+covered only by a unit test. No broader cross-category coverage is established.
+The candidate still performs 151 negative / 11 positive expansions on 24 cases.
+New-catalog case 7 is SAT; it is distinct from original structural case 7.
+Largest remaining negatives are new cases 191, 82, 112, 184 and 87.
+
+Resume `experiments/results/cnf-cofactor-support/checkpoint.json`. Preserve all
+inherited fields plus `cofactor_support_study`, `cofactor_support_decisions`,
+`cofactor_support_bank` and `reference_union`. The union retains **16,320 keys /
+49,610,752 SQLite / 3,953,721 gzip bytes**. Earlier payloads win overlaps; sixteen
+alternate certificate occurrences remain in trial archives. The new catalog has
+**146 direct roots / 46 guarded records**. Guarded decisions bind source, guard
+and child together; a negative child alone is not the complete-query identity.
+
+All **434 tests**, eight complete archive checks / **3,072 trial query replays**,
+every union node, **845 inherited decisions** and all new decisions pass. All
+348 prior sources, 3,873 artifacts / 68 manifests and 64 proof blocks are
+preserved. Runtime binds 352 sources; the post-hoc analyzer brings the ledger to
+353. The paper builds to 194 pages without warnings. Structural authority stays
+2,614 patterns / 259 pairs / 17 missing children, original 17/24 / 999 steps,
+separate supplemental 24/24 / 208, and original case 7's discovery pointer.
+Checkpoint SHA-256: `c27c247ca9b278ab7ce44fab7db020a933dc5dc1a688c4a3e01e5fc85c3c11f8`.
+Report SHA-256: `6d2f204b3476475735747858344b2caaef52e86921b2e7fecf20672e21226692`.
+The new manifest adds **50 artifacts**; the next preservation audit inherits
+**3,923 artifacts / 69 manifests**.
+
+## Previous investigation: one census per cold proof snapshot
 
 [Snapshot replay](snapshot-replay.md) replaces 384 repeated cold size scans with
 one independent census on a pinned read-only view. It runs the same frozen

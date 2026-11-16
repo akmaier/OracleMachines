@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Checked cofactor supports extend refutation reuse](research/cofactor-support.md).
+On a further 192 unseen constructed inputs, 16 new transfers cut fresh expansions
+**30.77%** and query time **34.06%**, but preparing the whole bank increases total
+runtime **23.01%** and peak RSS **9.23%**. This remains optional. Only 118 of 1,310
+preparation nodes are needed by this stream; constructing proofs only on a match
+is the next test. All **434 tests** and 3,072 independent cold trial replays pass.
+The bank and all outcomes persist in
+`experiments/results/cnf-cofactor-support/checkpoint.json`.
+
 [One census per cold proof snapshot](research/snapshot-replay.md) cuts complete
 runtime **48.19%** and cold replay **70.03%** on a further 192 unseen constructed
 inputs. Every proof check remains, and both modes have identical archives and

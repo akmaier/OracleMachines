@@ -5920,6 +5920,99 @@ the separate supplemental corpus 24 of 24. These are bookkeeping and persistence
 results, not a new Lean theorem, broader structural closure, or a uniformly
 efficient solution of arbitrary SAT.
 
+\paragraph{Transferring refutations between guarded subproblems.}
+A further reuse route applies the checked-support method to restricted
+subproblems. Suppose $G\land C$ has a checked UNSAT proof, and let $\alpha$
+falsify all literals of $C$. Every model of $G$ must agree with $\alpha$.
+If a checked UNSAT support $K$ is a clause subset of $G|_\alpha$, then the
+restricted formula is UNSAT, and therefore so is $G$. We publish the residual
+refutation through the existing contradictory-subset certificate rule and
+retain the source, guard and child together. The child key alone does not
+identify the complete query.
+
+The guard alone does not imply UNSAT: $G=\neg x$ and $C=x$ have an unsatisfiable
+conjunction while $G$ is satisfiable. Of 148 inherited guarded decisions, only
+145 have negative cofactors; the three positive cases supply no negative
+support. Failed recognition still falls back to the ordinary solver. This is
+an application of the earlier guard and core arguments, not a new unrestricted
+SAT result or a claim that UNSAT-core reasoning is novel.
+
+The extractor visits the already checked proof DAG without fresh solving and
+maps support clauses back to the residual's input coordinates. The 145 negative
+sources yield 112 distinct raw supports. Removing supports that contain another
+retained support leaves 104 while preserving every superset match: each removed
+support contains a retained one, and each retained support belonged to the
+original bank. The resulting supports need not be minimal. We do not search
+arbitrary variable renamings.
+
+For the comparison, both modes start from the same 14,630-key union, old
+145-core bank and 260 extension templates. Both use incremental bookkeeping and
+the complete snapshot audit. The candidate pays for discovery, construction
+and storage of the new support bank. The next 64 double deletions per original
+template are selected in the same salted order after excluding all 576 earlier
+answered queries, including guarded ones, and cached complete roots. Selection
+costs 1.45429 seconds separately. Four fresh-process pairs alternate mode order
+and visit all 192 constructed inputs twice, without overlapping tests or builds.
+
+\begin{center}
+\begin{tabular}{lrr}
+\hline
+Measured quantity & Current bank & Added cofactor bank \\
+\hline
+New cofactor support hits & 0 & 16 \\
+Fresh expansions & 234 & 162 \\
+Split nodes & 69 & 49 \\
+Preparation proof nodes & 0 & 1,310 \\
+New query rows & 380 & 324 \\
+Mean preparation seconds & 0 & 1.82086 \\
+Mean query seconds, two visits & 1.33223 & 0.87849 \\
+Mean complete seconds & 7.93324 & 9.75898 \\
+\hline
+\end{tabular}
+\end{center}
+
+Fresh expansions fall 30.77\% and query time 34.06\%, with no per-query search
+regressions. Complete runtime nevertheless rises 23.01\%, mean peak RSS 9.23\%,
+SQLite size 3.23\% and gzip size 5.33\%. Every pair shows a whole-time regression.
+The candidate ends with 1,634 new rows instead of 380. Its archive uses
+49,614,848 SQLite bytes and 3,964,072 gzip bytes; the control uses 48,062,464 and
+3,763,522. This remains an optional experiment, not a demonstrated total-cost
+improvement. The clock includes restoration, all preparation and checking,
+queries, full final preservation, cold replay, sidecars and compression. Process
+launch, imports, command-line protocol/catalog reads, final summary construction
+and report writing are excluded. Earlier acquisition remains charged separately.
+
+Both modes answer 84 SAT and 108 UNSAT queries, with 63 old full-query core
+hits, 83 witness publications and 46 guards. One guarded query is SAT and still
+needs 11 expansions in both modes. The new bank certifies 16 previously
+uncached negative targets through fourteen supports, saving all 72 avoided
+expansions. Each measured hit has the same guard clause as its first retained
+origin; cross-guard transfer is demonstrated only by a unit test. These data
+do not establish broad transfer across SAT categories. Repeated visits add no
+rows. The candidate still uses 151 negative and 11 positive expansions.
+
+Preparation visits 1,075 negative proof nodes and stores 791 derived cores and
+519 subset wrappers. The retained bank needs 1,272 of these 1,310 preparation
+nodes, but the supports matched by the query stream need only 118. The query
+proofs likewise need only 118. Pruning unused nodes from the complete bank
+therefore removes at most 38 nodes. The more promising next experiment is to
+separate support proposals from proof construction, constructing and checking
+an actual refutation only after a residual matches. Unverified proposals must
+never justify an UNSAT answer. That policy has not yet been implemented or
+measured; choosing only the fourteen cores used here would use future workload
+information and could lose coverage. The current complete bank is preserved
+for later warm reuse rather than being extracted again.
+
+The durable union retains 16,320 keys, including both modes' new nodes; sixteen
+alternate certificate occurrences remain in trial archives. The new decision
+catalog has 146 direct roots and 46 guarded records. All 434 tests, 3,072 trial
+query replays, every union node, 845 inherited decisions and all new decisions
+pass independent checks with fresh validation search disabled. Original
+structural closure remains 17 of 24 and the separate supplemental corpus 24
+of 24. Preparation is bounded by the acquired proof graph, whose size and
+construction can be exponential; no uniform polynomial-input-size bound or new
+Lean theorem follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Bounded model rotation extends reuse to unseen deletions](research/model-rotation.md).
+On 257 previously uncached constructed inputs, rotation reduces fresh expansions
+**1,876 -> 1,509**, complete runtime **7.16%**, and peak RSS **3.86%** against the
+guarded control. All **394 tests** and 4,626 cold query replays pass. The durable
+union preserves 9,104 reference keys. UNSAT queries now account for **80.58%** of
+remaining expansions; extracting reusable negative proof supports is next.
+Current checkpoint: `experiments/results/cnf-model-rotation/checkpoint.json`.
+
 [Checked SAT witnesses avoid fresh clause-deletion search](research/clause-witness-reuse.md).
 Compared with the UNSAT guard, fresh reference expansions fall **427 -> 59**,
 plus six stored answer certificates; complete time falls **50.39%** on the same

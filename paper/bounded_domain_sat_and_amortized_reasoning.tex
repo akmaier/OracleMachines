@@ -5562,6 +5562,104 @@ clauses false, and both case-13 attempts leave three. This diagnostic costs
 concrete unseen queries for the next comparison, where all failed proposals,
 clause checking and persistence must again be charged.
 
+\subsection{Bounded model rotation on previously unseen deletions}
+\label{sec:bounded-model-rotation}
+
+We next test the saved rotation candidates on a fixed broader input set.
+The protocol enumerates every single-clause deletion of three retained UNSAT
+templates, interleaving their sorted clause indices. Of 260 candidates, three
+complete query roots already exist in the 1,169-node reference union. The
+remaining 257 form the measured stream. Both candidates from the preceding
+screen are included deliberately. These are constructed development inputs,
+not an independent holdout or a partition of arbitrary CNF.
+
+The reuse rule is established model rotation \citep{belov2011rotation}. If a
+checked UNSAT formula $F$ has a model $a$ for $F\setminus\{C\}$, then $C$ is the
+only clause of $F$ falsified by $a$. We flip one variable occurring in $C$ and
+scan all clauses. If exactly one clause $D$ is false, the new assignment is a
+witness for $F\setminus\{D\}$. We check that complete query model and publish an
+ordinary SAT certificate. Multiple false clauses supply no UNSAT conclusion.
+The implementation keeps one witness per discovered deleted clause, explores
+these witnesses in FIFO order and permits at most 64 flips per template over
+the entire stream. Later checked SAT answers can seed additional rotations;
+the budget does not reset for a new query.
+
+All modes start from the same full reference union. The controls are ordinary
+residual solving and the existing witness/UNSAT guard wrapper. Both bank modes
+check the complete query cache before applying a guard. Runtime recognition uses
+exact clause sets in common coordinates, not the reporting labels. Three fresh
+process triples rotate mode position, and each visits every input twice.
+All modes return 72 SAT and 185 UNSAT answers, with no new rows on the repeat.
+The original structural coverage remains 17 of 24; reference decisions do not
+change the meaning of that separate coverage catalog.
+
+\begin{center}
+\begin{tabular}{lrrr}
+\hline
+Measured quantity & Ordinary & Guarded & Rotation \\
+\hline
+Fresh expansions & 6,126 & 1,876 & 1,509 \\
+New stored rows & 6,126 & 1,876 & 1,566 \\
+Decision splits & 2,240 & 617 & 469 \\
+Mean complete seconds & 27.82621 & 11.28948 & 10.48075 \\
+SQLite bytes & 27,746,304 & 10,850,304 & 10,399,744 \\
+\hline
+\end{tabular}
+\end{center}
+
+Against the guarded control, fresh expansions fall 19.56\%, total new rows
+16.52\%, complete time 7.16\%, mean peak RSS 3.86\% and SQLite size 4.15\%.
+The complete clock includes restoration, preparation, matching, premise checks,
+rotation, search, model checking, bookkeeping, cold replay, sidecar writing and
+compression. Imports and final report writing are excluded. Selection and
+preflight cost 0.35307 seconds separately; previous acquisition costs remain
+in the historical accounts. No test, build or profiler runs alongside the
+measurements. All three paired runtime comparisons improve, but this small
+constructed sample does not establish population-level performance.
+
+There are 189 flips: 99 produce a single false clause and 90 fail. The successful
+flips publish 57 absent keys and reach 42 already stored keys. Three publications
+precede the stream. Only 37 first query encounters use a published direct answer;
+other publications can materialize a root whose guarded cofactor was already
+solved. Thus 57 publications do not mean 57 fresh solves avoided. Failed flips,
+complete witnesses, their origins and consumed budgets remain saved.
+
+For a template with $n$ variables and $L$ literal occurrences, each flip copies
+$n$ model entries and scans $L$ occurrences. A budget $B$ bounds that part by
+$O(B(n+L))$, before canonicalization, certificate checks and persistence.
+Every observed SAT query still requires recognition and validation, whose
+stream-dependent work is not bounded by $B$. With $m$ clauses, retaining one
+model per discovered clause and all failed-clause lists uses at most
+$O(nm+Bm+L)$ words, excluding published query certificates and solver history.
+The first two templates exhaust 64-flip budgets with six queued flips each;
+the third uses 61 flips and exhausts its current queue. One witness per clause
+can miss paths available through alternative witnesses. Queue exhaustion
+therefore supplies no completeness or negative decision guarantee.
+
+Persistence also limits the gain. Gzip database plus raw sidecars uses
+9,921,762 bytes with rotation, versus 10,419,742 guarded and 8,541,670 ordinary.
+Repeated guards duplicate stronger CNFs. Keeping every distinct reference key
+from all arms grows the durable union from 1,169 to 9,104 keys, using 32,595,968
+SQLite bytes and 2,524,507 gzip bytes. Earlier payloads remain unchanged;
+alternative valid certificates survive in their trial archives. Smaller arm
+snapshots do not imply shrinking total research storage.
+
+All 394 tests pass. Independent cold validation checks all nine archives,
+4,626 query replays, rotation origins and flips, every union node and the twelve
+inherited answers with fresh expansion disabled. The 64 existing manuscript
+proof blocks remain unchanged. These are executable certificate checks, not a
+new Lean verification of the Python implementation. Saved rotation state is
+inspectable, but an engine-state import/resume API remains unimplemented.
+
+The remaining work identifies the next target. UNSAT queries consume 1,216 of
+1,509 fresh expansions, or 80.58\%, unchanged by rotation. Positive-query work
+falls from 660 to 293 expansions. A checked UNSAT proof supported by a smaller
+clause subset could transfer to every query containing that subset, provided
+support extraction, containment and proof checking are charged. Whether these
+retained proofs expose useful small supports remains to be tested. Failed
+rotations cannot supply that evidence; nor does separate UNSAT for two single
+deletions justify deleting both clauses together.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

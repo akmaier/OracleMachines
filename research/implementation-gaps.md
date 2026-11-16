@@ -8343,3 +8343,57 @@ Checkpoint SHA-256: `79c224246b77270980ddb5685ab32464df19057dfe95a7db976a5b18019
 Report SHA-256: `3005787a6d6eb257b19ee39a7b4cd33137384f93ec0f3c2547142b31bfd254d2`.
 The new manifest adds **49 artifacts**; the next audit inherits **3,669 artifacts /
 64 manifests**. The manuscript builds to **188 pages**.
+
+## 2026-11-16: bounded model rotation and negative proof-support gap
+
+[Bounded model rotation](model-rotation.md) reduces fresh reference expansions
+**1,876 -> 1,509 (19.56%)** on **257 previously uncached deletions** of three
+checked UNSAT templates. It publishes 57 checked SAT certificates, making 1,566
+new rows. Complete runtime falls **11.28948 -> 10.48075 s (7.16%)**, mean peak RSS
+**3.86%**, and SQLite **4.15%** against the guarded control. Ordinary solving uses
+6,126 expansions and 27.82621 s. All modes agree on **72 SAT / 185 UNSAT**;
+repeated visits add no rows. Three process triples balance mode position.
+
+**Highest next target: reusable negative proof supports.** UNSAT queries consume
+**1,216/1,509 expansions (80.58%)**, unchanged by rotation. Old template 12
+accounts for 612 of these, with new deletion-catalog case 11 alone using 47.
+The exact inputs, removed clauses and target hashes are retained in
+`cost-attribution.json`. Determine whether checked UNSAT certificates expose
+small clause supports or shared negative cofactors that transfer to further
+queries by checked containment. Do not assume that failed rotations identify
+UNSAT, or that two individually safe deletions can be combined safely.
+
+**Retained limits:** 189 flips yield 99 singleton-false outcomes and 90 failures.
+Of these, 57 publish absent keys and 42 reach old ones. Only 37 first query
+encounters use a published direct answer; publication count is not avoided-solve
+count. The first two templates hit 64-flip caps with six queued flips each;
+the third exhausts its chosen-witness queue after 61 flips. Alternative witnesses
+can open different routes. All attempts, origins, models and cursors persist;
+cold certificate replay works, while engine-state import/resume remains open.
+
+**Storage remains a gap:** combined database gzip and raw sidecars is 9,921,762
+bytes, below guarded 10,419,742 but above ordinary 8,541,670. Guard sidecars repeat
+whole stronger CNFs. The durable union preserves all old payloads and adds
+7,935 distinct keys: **9,104 keys / 32,595,968 SQLite / 2,524,507 gzip bytes**.
+Smaller arm memory does not mean smaller total retained history. One-witness
+rotation has a bounded scan budget, not a uniform efficient SAT guarantee.
+
+Resume `experiments/results/cnf-model-rotation/checkpoint.json`. Preserve all
+inherited reference studies/decisions and the new `model_rotation_study`,
+`model_rotation_decisions` and `reference_union`. Structural authority remains
+**2,614 patterns / 259 pairs / seventeen missing children**, original **17/24 /
+999 proof steps**, and separate supplemental **24/24 / 208 proof steps**.
+Original case 7 remains its independent structural discovery pointer.
+
+All **394 tests**, nine cold archive checks / **4,626 query replays**, rotation
+origins and every union node pass. Earlier twelve reference decisions also
+replay unchanged. Selection/preflight costs 0.35307 s separately; earlier
+acquisition costs remain in historical records. These are constructed
+neighboring inputs including known positive candidates, not a blind holdout.
+Runtime binds 329 sources; the post-hoc attribution brings the final ledger
+to 330. All prior 325 sources, 3,669 artifacts / 64 manifests and 64 manuscript
+proof blocks are preserved.
+Checkpoint SHA-256: `1049220a45fe5de68b1d3657ffd86dd0ea8ed0fd7202120324f94472b4304e1a`.
+Report SHA-256: `91b60f9fb1b3403cae305cc5a23df6f76cc0a8aa92d772b084c281de0fd36535`.
+The new manifest adds **54 artifacts**; the next audit inherits **3,723 artifacts /
+65 manifests**. The manuscript builds to **189 pages**.

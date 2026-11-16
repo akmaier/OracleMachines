@@ -1,0 +1,457 @@
+{
+  "analyzer": {
+    "path": "/Users/maier/Documents/code/OracleMachines/experiments/analyze_cnf_model_rotation.py",
+    "sha256": "29158abd287cf61b7c3a2540fa2ca580be732610ddcedbd9e597e99773469e22"
+  },
+  "groups": [
+    {
+      "modes": {
+        "guarded": {
+          "expanded": 559,
+          "queries": 81,
+          "sat": 25,
+          "unsat_expanded": 330
+        },
+        "ordinary": {
+          "expanded": 1342,
+          "queries": 81,
+          "sat": 25,
+          "unsat_expanded": 956
+        },
+        "rotation": {
+          "expanded": 453,
+          "queries": 81,
+          "sat": 25,
+          "unsat_expanded": 330
+        }
+      },
+      "rotation": {
+        "attempts": 64,
+        "false_clause_histogram": {
+          "1": 32,
+          "2": 20,
+          "3": 12
+        },
+        "models": 26,
+        "origins": {
+          "query": 13,
+          "rotation": 12,
+          "seed": 1
+        },
+        "publications": 19,
+        "remaining_queued_flips": 6,
+        "successful_flips": 32
+      },
+      "template_case": 6
+    },
+    {
+      "modes": {
+        "guarded": {
+          "expanded": 427,
+          "queries": 81,
+          "sat": 25,
+          "unsat_expanded": 274
+        },
+        "ordinary": {
+          "expanded": 1169,
+          "queries": 81,
+          "sat": 25,
+          "unsat_expanded": 838
+        },
+        "rotation": {
+          "expanded": 344,
+          "queries": 81,
+          "sat": 25,
+          "unsat_expanded": 274
+        }
+      },
+      "rotation": {
+        "attempts": 64,
+        "false_clause_histogram": {
+          "1": 34,
+          "2": 18,
+          "3": 12
+        },
+        "models": 26,
+        "origins": {
+          "query": 13,
+          "rotation": 12,
+          "seed": 1
+        },
+        "publications": 19,
+        "remaining_queued_flips": 6,
+        "successful_flips": 34
+      },
+      "template_case": 8
+    },
+    {
+      "modes": {
+        "guarded": {
+          "expanded": 890,
+          "queries": 95,
+          "sat": 22,
+          "unsat_expanded": 612
+        },
+        "ordinary": {
+          "expanded": 3615,
+          "queries": 95,
+          "sat": 22,
+          "unsat_expanded": 3072
+        },
+        "rotation": {
+          "expanded": 712,
+          "queries": 95,
+          "sat": 22,
+          "unsat_expanded": 612
+        }
+      },
+      "rotation": {
+        "attempts": 61,
+        "false_clause_histogram": {
+          "1": 33,
+          "2": 16,
+          "3": 10,
+          "4": 2
+        },
+        "models": 23,
+        "origins": {
+          "query": 9,
+          "rotation": 13,
+          "seed": 1
+        },
+        "publications": 19,
+        "remaining_queued_flips": 0,
+        "successful_flips": 33
+      },
+      "template_case": 12
+    }
+  ],
+  "guarded_to_rotation_reductions_percent": {
+    "compressed_bytes": 8.421589057131184,
+    "database_bytes": 4.152510381275953,
+    "expanded_nodes": 19.562899786780385,
+    "mean_peak_rss_bytes": 3.858167713589389,
+    "mean_wall_seconds": 7.163543138484696,
+    "new_nodes": 16.52452025586354
+  },
+  "largest_remaining": [
+    {
+      "answer": false,
+      "case": 11,
+      "expanded": 47,
+      "guarded_expanded": 47,
+      "removed_clause": [
+        -310,
+        100
+      ],
+      "source_root_sha256": "69992468d015cc3c7de7520326db706b42a77dc7de0609e5032d4e970dba1fec",
+      "splits": 17,
+      "target_root_sha256": "4a4d0e558d024f4bcaf91a18f5eaf6661bbf068360b113fea8963e1d349f3494",
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 152,
+      "expanded": 36,
+      "guarded_expanded": 36,
+      "removed_clause": [
+        -180,
+        -100,
+        310
+      ],
+      "source_root_sha256": "d667507dc267f811b5a324605e4a7bb9e1a0eee1f403489c1c629bdedca88c8e",
+      "splits": 13,
+      "target_root_sha256": "c838b8be7a6fe8ee65573b686df8fe5e2c9e7fce1c3cedc0a1621a4da1c558b7",
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 47,
+      "expanded": 25,
+      "guarded_expanded": 25,
+      "removed_clause": [
+        -280,
+        -30,
+        240
+      ],
+      "source_root_sha256": "88c5e446d547a3fa25713f4aff1503218196e3a3b781e1dc44c8e0dd08766953",
+      "splits": 8,
+      "target_root_sha256": "92024edb0ca22b724e2882d1d532d946d1faa3c48ef1de25da82f4c14a3720dc",
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 0,
+      "expanded": 24,
+      "guarded_expanded": 24,
+      "removed_clause": [
+        -270,
+        5
+      ],
+      "source_root_sha256": "ca448f05a093d15414d6bd5737d4cfd7843304d7da98e068d8ab7de25c049b35",
+      "splits": 9,
+      "target_root_sha256": "94b8b05e76c21790af6aefcdbdf16554db11fe3167e1843c0ec07aa618f96bec",
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 164,
+      "expanded": 24,
+      "guarded_expanded": 24,
+      "removed_clause": [
+        -170,
+        -30
+      ],
+      "source_root_sha256": "2387ed52de91c1be573ca00d03c90eeb76e23db4bec5bb6aa8f61c2fa73417cd",
+      "splits": 9,
+      "target_root_sha256": "4d528b0a8aa301d7d346922d8f7463e591940b1ad32be00e7df4422ad79a9a6e",
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 2,
+      "expanded": 23,
+      "guarded_expanded": 23,
+      "removed_clause": [
+        -320,
+        5
+      ],
+      "source_root_sha256": "31753f27f6a632cc7530fb22c61a683597fc64c1f6b36b831ffb966845e1cf36",
+      "splits": 8,
+      "target_root_sha256": "0b111d507ac0fa5264ea27dfedebef75a2469fb40f479fbf334fcb248676a7be",
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 53,
+      "expanded": 22,
+      "guarded_expanded": 22,
+      "removed_clause": [
+        -280,
+        120,
+        130
+      ],
+      "source_root_sha256": "4c9d6b830a39ac980b8c36e74d0c2b9dc73798216b894403e3f430206e1418c4",
+      "splits": 8,
+      "target_root_sha256": "e57340950617d2f0016ca0f7326071e12ba147afd30cd934f4986947cd99d4af",
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 18,
+      "expanded": 21,
+      "guarded_expanded": 21,
+      "removed_clause": [
+        -240,
+        -200,
+        150
+      ],
+      "source_root_sha256": "2841a0dfc3db2e11085a86dd8ed9c7bd7acc807768a6ed8654cdda97c1e0668a",
+      "splits": 8,
+      "target_root_sha256": "d6e38f46492f83fc1d7a791f32971bb69012ed5e6d9e50cceb07023a05e975a9",
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 19,
+      "expanded": 21,
+      "guarded_expanded": 21,
+      "removed_clause": [
+        -240,
+        -200,
+        150
+      ],
+      "source_root_sha256": "d84f9398c2745fbaf71ce95fc2d38104c9e475586bc69212394e1c216fbd034b",
+      "splits": 8,
+      "target_root_sha256": "f191e848bf4d0d0e1b10f3ec7a1d7c9fb1a568b539807f46bfa4cd030b392d3d",
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 74,
+      "expanded": 21,
+      "guarded_expanded": 21,
+      "removed_clause": [
+        -250,
+        -90
+      ],
+      "source_root_sha256": "f556fd4a13268f9eb112a8b9597019593cc6408f97defde48f34a59fcc8253ed",
+      "splits": 8,
+      "target_root_sha256": "0c273ff36a5a0a2425ac6d5b88798ff187985d32efeb5192c0eb8cc49acbe33b",
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 93,
+      "expanded": 21,
+      "guarded_expanded": 21,
+      "removed_clause": [
+        -170,
+        -70,
+        150
+      ],
+      "source_root_sha256": "69dd7124d50045b99c9092780354db360a83aa55952b45ace4ef048feeac5bc6",
+      "splits": 7,
+      "target_root_sha256": "2b1c31a80e7224e74b562534d65fc667d31a52581ac8bfb1dc24a0cd8b90dc0a",
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 224,
+      "expanded": 21,
+      "guarded_expanded": 21,
+      "removed_clause": [
+        -40,
+        10,
+        280
+      ],
+      "source_root_sha256": "6146d11ce279d31154f59c940efc633d75553e465e83e5d225f197a0389e3c05",
+      "splits": 7,
+      "target_root_sha256": "170079658c07c07b31650d1aef6d05e3eb7bc49b5f667c134ca2d05176bd26af",
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 201,
+      "expanded": 20,
+      "guarded_expanded": 20,
+      "removed_clause": [
+        10,
+        260
+      ],
+      "source_root_sha256": "291cbd7d2d2dde3d366d86505f99f9504c25ebde5162c6fd650fa9f8a51c5fdd",
+      "splits": 7,
+      "target_root_sha256": "85022237c965ac753542d17ca7dbbd7f6c5ffe37f38d8a1d0ddd81fae2e5719c",
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 202,
+      "expanded": 20,
+      "guarded_expanded": 20,
+      "removed_clause": [
+        10,
+        260
+      ],
+      "source_root_sha256": "06768779ed6fe4e0e61b33ee4c46a3ec5e7b2b0fe167ff87ad5937ef2764fd29",
+      "splits": 7,
+      "target_root_sha256": "ea3a78ce958f14cf15e4c5101e989b25aad56fe324e570b474114830248ef013",
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 249,
+      "expanded": 20,
+      "guarded_expanded": 20,
+      "removed_clause": [
+        60,
+        90,
+        160
+      ],
+      "source_root_sha256": "fe19a5cdc27e93b9294f465cd2a2caa21968779e384078675b1b8b40f2d2fdf6",
+      "splits": 7,
+      "target_root_sha256": "a39828ffeda51f97abcc5bd82fb3b32f9ed60774ce943026bd81f1cc443a5b39",
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 62,
+      "expanded": 19,
+      "guarded_expanded": 19,
+      "removed_clause": [
+        -270,
+        -130
+      ],
+      "source_root_sha256": "ab82a7c903fcfb5879c076e0d4840c5588384f431842d1a79ffe0a002d6f2f1c",
+      "splits": 7,
+      "target_root_sha256": "8b06208a8f65469f26bd339a5dbfa289a11f4a18bcc66b23a69060cf9fbd32c2",
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 89,
+      "expanded": 19,
+      "guarded_expanded": 19,
+      "removed_clause": [
+        -230,
+        -200,
+        -110
+      ],
+      "source_root_sha256": "35ec6e097a4ad013eca7c812231e29bcd0f0200ae45f1c015173401b6c825a96",
+      "splits": 6,
+      "target_root_sha256": "f54ed5521424e41533efafa8f9cb959bd146991416045bdfdb414368e6ecea21",
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 9,
+      "expanded": 18,
+      "guarded_expanded": 18,
+      "removed_clause": [
+        -250,
+        -240,
+        -190
+      ],
+      "source_root_sha256": "84e5771aec90f28a9d1f4a5bd03b44aca57b5b5cf467b6924193e36f7c6d4d05",
+      "splits": 7,
+      "target_root_sha256": "bf861b25f71d2cae049185a079a0e20c36474d2e754cac12b504480ce4f5358e",
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 254,
+      "expanded": 18,
+      "guarded_expanded": 18,
+      "removed_clause": [
+        110,
+        240
+      ],
+      "source_root_sha256": "08a89d8449945018d695246c606da3240faec1ef05bf973bce7ba9757a38b955",
+      "splits": 7,
+      "target_root_sha256": "1e8c9f2aa07080686dc3bca86e01f56336a376cc3b0e37300c4d4e204df2d0cb",
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 12,
+      "expanded": 17,
+      "guarded_expanded": 17,
+      "removed_clause": [
+        -250,
+        -80
+      ],
+      "source_root_sha256": "8e7b00640862b53c78e175ac7283d8d1799587cd70f050ee352a03e513259034",
+      "splits": 6,
+      "target_root_sha256": "53d0c3d6e056b69d28a0a810cfe78e6079d76f91a58543c9894c67694bf7ae6f",
+      "template_case": 6
+    }
+  ],
+  "limitations": [
+    "Post-hoc attribution, not an independently selected validation corpus.",
+    "Cold engine state and all failures are saved, but no engine-state import/resume API is implemented or claimed.",
+    "One witness per clause and two exhausted per-template flip budgets leave alternative paths unexplored. The third queue is exhausted only for its chosen representatives.",
+    "Query order and cache interaction can redistribute work; per-query regressions are retained.",
+    "Reference SAT decisions do not expand the separate structural-family coverage catalog."
+  ],
+  "next_target": "Extract and independently check reusable UNSAT proof supports or common negative cofactors before further increasing rotation effort. Never treat a failed rotation as UNSAT.",
+  "regression_queries": [],
+  "remaining_by_answer": {
+    "False": {
+      "expanded": 1216,
+      "queries": 185
+    },
+    "True": {
+      "expanded": 293,
+      "queries": 72
+    }
+  },
+  "report": {
+    "path": "experiments/results/cnf-model-rotation/report.json",
+    "sha256": "91b60f9fb1b3403cae305cc5a23df6f76cc0a8aa92d772b084c281de0fd36535"
+  },
+  "total_first_trial_storage_bytes": {
+    "guarded": 10419742,
+    "ordinary": 8541670,
+    "rotation": 9921762
+  }
+}

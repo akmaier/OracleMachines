@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Remove unused propagation dependencies from refutations](research/causal-support.md).
+Causal supports cover nine additional negative targets, cutting fresh expansions
+**48.72% (195 -> 100)** and query time **27.04%**. Rebuilding old supports still
+increases complete runtime **15.87%**, and smaller supports require more proof
+rows. The next cost target is loading the acquired causal frontier without
+re-extraction. All **486 tests** and complete archive replay pass; broad
+cross-guard coverage remains open. Resume
+`experiments/results/cnf-causal-support/checkpoint.json` (18,672 preserved keys).
+
 [Explore SAT witnesses without confusing lookup compression with cheap discovery](research/witness-signatures.md).
 Bounded flips reach two hard historical SAT targets, but give **no extra transfers**
 on the next 192 queries and increase complete runtime **6.04%**. Keep exploration

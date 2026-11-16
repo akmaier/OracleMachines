@@ -5027,3 +5027,35 @@ and 192 new decisions pass without fresh validation search. Old results and the
 patterns / 259 pairs / 17 missing children, original 17/24 / 999 steps and separate
 supplemental 24/24 / 208. The paper builds to 198 pages with 64 unchanged proof
 blocks. No new Lean or unrestricted polynomial SAT claim.
+
+
+## 2026-11-17: causally sliced unit supports
+
+[Causal support extraction](causal-support.md) removes propagated assignments
+unused by the conflict or selected negative child proof, while retaining their
+backwards dependency closure. All derived certificates use the unchanged checker.
+Nine additional cofactor hits reduce expansions **195 -> 100 (48.72%)** on a
+fresh 192-query stream. Extending the previous extraction with the same new
+sources gives no additional hits. All measured causal hits still share the first
+origin's guard, so broad cross-guard transfer remains open.
+
+Complete time increases **15.87%** against active loading despite **27.04% lower
+query time**. Re-extracting all 389 origins costs 2.33282 seconds; 31 materializations
+add 275 proof rows, raising new rows 423 -> 553. The next cost target is active
+loading of the acquired causal frontier, followed by incremental causal discovery
+on novel queries. Repeated exact queries cannot establish that new acquisition
+amortizes. Remaining work is 95 negative expansions plus five on SAT case 42;
+negative cases 187/159/50/60 cost 20/17/16/16 expansions.
+
+Resume `experiments/results/cnf-causal-support/checkpoint.json` (18,672 keys).
+Causal proposals require `CausalCoreBank` and its matching materializer; 34 roots
+are ready and 142 remain pending. Both new frontiers use eight ordered provenance
+catalogs, while the old 170-entry bank retains its six-catalog history. Every old
+checkpoint field and all trial certificates remain preserved.
+
+All 486 tests, nine complete archive audits, all union nodes, 1,805 inherited and
+192 new decisions pass without fresh validation search. All 375 prior sources
+and 4,174 artifacts / 73 manifests are unchanged. Structural authority remains
+2,614 patterns / 259 pairs / 17 missing children, original 17/24 / 999 steps and
+separate supplemental 24/24 / 208. The paper builds to 199 pages with 64 unchanged
+proof blocks. No new Lean, minimum-core or unrestricted polynomial SAT result.

@@ -6280,6 +6280,73 @@ catalog identifiers. Complete cold audit and compression cost 40.45\% and
 non-congruence example prevent treating lookup compression as an efficient
 general construction or a uniform polynomial SAT guarantee.
 
+\paragraph{Causal unit supports widen refutation reuse.}
+The old support extractor retains every propagated unit reason, including
+assignments unused by the contradiction. At a checked unit node, we instead
+begin with variables required by its conflict clause or the selected negative
+child clauses lifted to the parent. A backwards pass retains a unit assignment
+only when its variable is needed, then adds the other variables of its reason.
+They precede it in a valid trace. The retained subsequence remains forced in its
+original order; it still falsifies the conflict or gives exactly the same
+selected residual clauses. Retained reasons are satisfied by their forced
+literals. Consequently, those reasons and selected parent clauses remain UNSAT.
+All derived nodes use the unchanged residual format and ordinary verifier.
+
+This is a dependency argument for the selected child proof, not minimum-core
+extraction. Recursive support choices can change. If no units are necessary,
+the extracted child root already provides the required normalized proof;
+no empty-progress or cyclic unit certificate is published. Index-only discovery
+keeps pending descriptions. A match must materialize the corresponding causal
+proof and check it before subset reuse. The complete source query and its guard
+remain necessary when using a negative cofactor. Fresh SAT search is disabled
+during discovery and materialization.
+
+A historical probe shrinks the supports of the previous cases 123 and 189 from
+49 clauses each to 26 and 34; their cores remain different. Cases 157 and 175
+shrink from 44 to 29 clauses and acquire mutual containment absent from the old
+supports. The extra backwards pass costs the examined trace and retained reason
+literals, in addition to preimage construction, normalization and proof checking.
+Memoization shares proof traversal within an extraction session. The acquired
+proof graph can still be exponential in the original input size.
+
+The fresh comparison starts from 17,947 acquired keys, excludes 1,536 prior
+sidecar answers and cached full roots, and selects another 192 neighbours.
+Three balanced process triples compare active loading of the saved 170-entry
+frontier, its extension using the old extractor on 103 new negative origins,
+and causal re-extraction of all 389 origins. Extension yields 232 raw supports
+and 207 retained entries; causal extraction yields 189 and 176. All preparation,
+checking, persistence, complete cold proof/query and lineage audit, and compression
+remain charged. No new proof rows are constructed until an actual match.
+
+Causal extraction removes 5,585 of 14,613 examined unit steps and reduces retained
+clause occurrences from 7,385 to 4,568 against extension. It transfers 38 cofactors
+rather than 29, reducing expansions from 195 to 100 and splits from 65 to 33.
+Nine additional targets account for all 95 saved expansions, a 48.72\% reduction.
+No query needs more expansions. All modes return 95 SAT and 97 UNSAT answers;
+52 guards include one positive child. Every observed causal hit still shares
+its first origin's guard, so broad cross-guard coverage remains unestablished.
+
+Smaller supports do not yet give a total speedup. Mean complete time is 10.89172
+seconds for active loading, 11.63135 for extension and 12.61998 for causal
+re-extraction. Causal query time improves 27.04\% against active loading, but
+preparation rises from 0.08516 to 2.33282 seconds. Complete runtime regresses
+15.87\% against active and 8.50\% against extension, in every matched triple.
+Its 31 materializations add 275 proof rows, compared with 59 for active loading.
+The causal row total is $100+275+94+46+38=553$: expansions, materialization,
+SAT witness publication, whole-query core publication and cofactor publication.
+The corresponding active total is $195+59+94+46+29=423$.
+
+Mean peak RSS increases 2.36\% against active loading. Gzip plus first-trial raw
+sidecars falls only from 12,164,674 to 12,152,030 bytes; no asymptotic space saving
+follows. The next cost experiment should load the acquired causal frontier
+without rebuilding all old supports, then measure incremental acquisition on
+novel queries. Simply repeating these queries already benefits from exact
+caching. The remaining search comprises 95 negative expansions and five on
+SAT case 42; negative cases 187, 159, 50 and 60 are the largest. These current
+catalog IDs remain distinct from original structural cases. Efficient arbitrary
+SAT acquisition, compact proof construction and minimum expansion are still
+unproved.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -2656,3 +2656,37 @@ Complete cold audit and compression consume 40.45% and 33.11% of the control's
 runtime. For arbitrary G, deleting -z from G and z and -z yields G and z;
 thus even one-deletion representative acquisition includes arbitrary SAT. Small
 deletion distance and polynomial signature count do not remove this obligation.
+
+## 2026-11-17: causal unit supports and the cost of their certificates
+
+[Causal support extraction](causal-support.md) retains only unit assignments
+required by the conflict or selected negative child clauses, closed backwards
+through their reasons. The retained trace is still forced and produces the same
+required residual. Derived certificates use the unchanged ordinary checker;
+pending descriptions require checked materialization. The backwards scan costs
+the examined trace plus retained reason literals, in addition to checked source
+traversal, preimage construction, normalization and publication. These are bounds
+relative to the acquired proof DAG, whose size may be exponential in the CNF.
+
+Across 389 source cofactors, causal extraction visits 2,851 proof nodes and
+removes 5,585 of 14,613 unit steps. Retained clause occurrences fall 7,385 -> 4,568
+against extending the previous rule from the same sources. Nine additional hits
+reduce expansions 195 -> 100. Query time falls 27.04% against active loading,
+but complete time rises 10.89172 -> 12.61998 seconds (15.87%): rebuilding all
+supports costs 2.33282 seconds versus 0.08516 for loading the saved index.
+
+Causal matches require 275 materialization rows versus 59 in the active control.
+The complete new-row totals are 100+275+94+46+38=553 and
+195+59+94+46+29=423: expansions, materialization, SAT witness publications,
+whole-query core publications and cofactor publications. Smaller clause supports
+therefore do not imply smaller proof graphs. Mean peak RSS rises 2.36%; gzip plus
+first-trial raw sidecars falls only 12,164,674 -> 12,152,030 bytes. All historical
+artifacts and the final union remain retained separately.
+
+Use the saved causal frontier before another rebuild. Incremental causal
+acquisition and sharing derived proof structure remain open. Amortization must
+be tested on novel queries, since repeat queries already benefit from exact
+caching. All observed support hits still share their first origin's guard;
+neither broad cross-guard coverage nor a minimum-core or uniform polynomial
+bound follows. The latest residual work is 95 negative expansions and five on
+one SAT query, so it must not be described as entirely negative.

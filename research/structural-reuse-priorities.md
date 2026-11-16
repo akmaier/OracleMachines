@@ -1,6 +1,6 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-16 after the user's shift toward pattern discovery and a valid
+Updated 2026-11-17 after the user's shift toward pattern discovery and a valid
 partition of the entire SAT problem. This is the working record for the hourly
 investigation. Start with the [discovery plan](sat-pattern-discovery.md), then
 consult [implementation history](implementation-gaps.md),
@@ -12,7 +12,88 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: witness signatures and a failed fresh-stream transfer
+## Current investigation: causal unit slicing and acquisition overhead
+
+[Causal support extraction](causal-support.md) removes propagated assignments
+that the contradiction does not use. The dependency-closed subsequence still
+forces every retained unit and gives the same required child clauses or conflict.
+Derived certificates use the unchanged ordinary checker. Pending descriptions
+are materialized only on a match; complete source-query guards and cold lineage
+checks remain required. This is proof-relative support reduction, not minimum cores.
+
+**Coverage gain:** on 192 new queries, causal supports give **38 rather than 29
+cofactor transfers**, cutting expansions **195 -> 100 (48.72%)** and splits
+**65 -> 33**. Nine new target hits account for all savings; no query regresses in
+expansions. Merely extending the old extraction with the same new sources gives
+no extra hits. Causal slicing removes **5,585 / 14,613 unit steps**, and retained
+clause occurrences fall **7,385 -> 4,568** against extension. All observed causal
+hits still share their first origin's guard; cross-guard coverage remains open.
+
+**Cost gap:** complete time grows **10.89172 -> 12.61998 seconds (15.87%)** versus
+active loading, and **8.50%** versus old-rule extension. Every matched triple has
+both regressions. Query time improves **27.04%** versus active, but causal
+preparation re-extracts all 389 origins and costs **2.33282 versus 0.08516 seconds**.
+Its 31 materializations add 275 proof rows instead of 59; total new rows rise
+423 -> 553. Mean peak RSS rises 2.36%. Gzip plus first-trial raw sidecars falls
+only 12,164,674 -> 12,152,030 bytes (0.10%); no asymptotic space claim follows.
+
+**Highest-value cost target:** load the acquired causal frontier without rebuilding
+old supports, then measure incremental acquisition on genuinely novel queries.
+Retain the causal materializer and complete lineage checks. Repeated queries
+already benefit from exact caching, so they cannot establish discovery amortization.
+Further derivation sharing may reduce the 275 materialization rows, but the
+observed preparation cost is the first bottleneck. Keep the old frontier available.
+
+**Next coverage targets:** 95 remaining expansions are negative and five belong
+to SAT case 42. Largest negatives are current cases **187 (20), 159 (17), 50/60
+(16 each)**. Templates 12/6/8 contribute 42/38/20 expansions. Compare their proof
+dependencies and boundary assignments, then test genuinely different guards.
+Do not infer that identical guards are required simply because every measured
+hit shares its first origin's guard. Current catalog IDs differ from original
+structural cases and from the previous stream's IDs.
+
+All workers start from the 17,947-key union, exclude all 1,536 prior sidecar
+answers and cached full roots, and use three balanced process triples with two
+visits. Modes compare the saved 170-entry frontier, extension to 207 entries from
+103 newly acquired negative origins, and causal re-extraction to 176 entries from
+all 389 origins. All query, construction, persistence and complete cold audit
+costs remain charged. The historical probe shrinks cases 123/189 to 26/34 clauses
+but does not merge them; cases 157/175 acquire new mutual support containment.
+Positive exploration remains preserved but disabled after its failed fresh test.
+
+
+Independent validation passes **486 tests**, nine complete archive checks /
+**3,456 trial query replays**, every union node, **1,805 inherited decisions** and
+all 192 new decisions, with fresh validation search disabled. The union retains
+**18,672 keys / 57,823,232 SQLite / 4,419,183 gzip bytes**, adding 725 keys while
+keeping every earlier payload. All **41 alternate certificate occurrences** remain
+in trial archives. New decisions comprise **140 direct roots / 52 guards**,
+including one positive guarded result.
+
+Resume `experiments/results/cnf-causal-support/checkpoint.json`. Preserve
+`causal_support_study`, `causal_support_decisions`, `causal_support_proposals`
+and `extended_support_proposals`, along with every inherited field. The causal
+frontier has **34 ready roots / 142 pending**; the extended frontier has
+**118 / 89**, and the original 170-entry frontier has **119 / 51** in the union.
+All three lineage audits pass. Causal pending entries require the causal
+materializer; the old materializer is not interchangeable. Both new banks use
+eight source catalogs in protocol order; the original bank still uses six.
+
+All prior **375 sources / 4,174 artifacts / 73 manifests** remain unchanged.
+Runtime binds 380 sources; the analyzer brings the ledger to 381. Structural
+authority stays **2,614 patterns / 259 pairs / 17 missing children**, original
+**17/24 / 999 steps**, separate supplemental **24/24 / 208**, and original
+case 7's discovery pointer. The manuscript builds to **199 pages** without
+warnings, preserving all **64 proof blocks**. No new Lean result is claimed.
+
+Checkpoint SHA-256: `47af7ad8959666bab1107e17b63bd37a3ff71c5d28d29758fb49e435de65cb43`.
+Report SHA-256: `260a06be421b7adfd802e50ba7cf948b96abcdf1e1bd4901dda8677313b33a71`.
+
+
+The new manifest binds **56 artifacts**, including the read-only historical
+probe. The next preservation audit inherits **4230 artifacts / 74 manifests**.
+
+## Previous investigation: witness signatures and a failed fresh-stream transfer
 
 [Bounded witness exploration](witness-signatures.md) establishes an exact reuse
 pattern for deletion queries: the set of clauses falsified by a stored assignment

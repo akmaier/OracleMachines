@@ -5125,6 +5125,66 @@ downstream simplification and comparing alternatives while charging and retainin
 all exploratory work. Smaller visible frontiers and more stored evidence alone
 do not establish cheap expansion for arbitrary SAT.
 
+\paragraph{Charge a bounded pilot before committing to a saved route.}
+The case-6 counterexample motivates testing downstream simplification rather
+than only current frontier size. An earlier one-profile lookahead added probes
+without improving coverage; we retain that negative result. The next optional
+policy instead performs one completed nested acquisition on each of the two
+best saved alternatives, then selects by pending-task count, remaining literals,
+frontier-task count and pivot variable. All trial work shares the ordinary
+128-admission and sixteen-operation batch allowance with continuation. It does
+not receive a fresh allowance per candidate. Partial acquisitions stay on their
+current arm until complete, and their phase and decisions survive cold restart.
+Every acquired pattern and split remains stored. The current implementation
+requires an unresolved source below a unary selected root prefix and two saved
+alternatives; it is not a general component scheduler. Scores schedule work;
+the unchanged independent checker certifies closure.
+
+Case 11 has 48 variables and 197 clauses before preprocessing. Its selected
+45-variable residual offers saved pivots 2, 32, 7 and 6, with remaining-literal
+scores 1124, 1118, 1126 and 1106. The committed control selects pivot 6. The pilot
+spends three admissions and 28 probes on a nested split below pivot 6, leaving
+three obligations and 1535 literals. A trial below pivot 32 costs seven admissions
+and 27 probes, leaving one obligation and 559 literals. The pilot selects pivot
+32; one further acquisition closes the original. Both modes start from the
+identical complete parent and use identical acquisition and checking rules.
+
+Including both trials, committed/pilot totals are 44/19 new patterns, 178/77
+probes, eighteen/six source assumptions and nine/three new split records. Both
+close in one batch, raising coverage from thirteen to fourteen of twenty-four
+originals. Two reversed-order paired fresh-process runs give local expansion
+means of 0.27211 and 0.11072 seconds, a 59.31\% reduction. Whole-stream means
+are 8.23501 and 7.85315 seconds, only 4.64\% lower. Mean peak RSS falls from
+388,456,448 to 382,541,824 bytes, or 1.52\%. Total SQLite size falls 1.17\% and
+compressed size 1.43\%. The clock charges all pilot work, restoration, setup,
+bookkeeping, persistence and both cold checks; interpreter imports and final
+summary writing are excluded, while RSS includes all phases. Complete auditing
+still takes 84\% of candidate time. Acquisition savings therefore do not imply
+proportional total-cost savings.
+
+The control proof has 53 distinct steps and conditional depth five; the pilot
+proof has 29 steps and depth two. Their conditional nodes and unary reductions
+expose eleven and four contradiction occurrences respectively, without component
+decomposition. The pilot proof uses thirteen parent steps and sixteen new steps.
+Its three losing-trial patterns remain stored but unused in that proof. The arms
+share those three acquired patterns and one split from their common first
+exploration, but no newly acquired node belongs to both final proofs. This is
+not evidence of broader nonterminal reuse across inputs. Local variable
+coordinates change during reduction, so the depths are not fixed backdoor sizes.
+
+All 367 tests pass, including shared-budget and cold-restart checks. A separate
+eight-admission interruption test allocates three states to the first route and
+only the remaining five to the second, preserving its pending phase. Resumption
+charges an unfinished state again and completes the same 29-step proof. Frozen
+independent replay checks the parent, four trial archives and their union.
+The union preserves sixty distinct new patterns and eleven splits, retaining
+2,178 patterns, 220 pairs, seventeen inherited missing children and an 807-step
+positive proof for fourteen originals. It occupies 40,517,632 SQLite bytes and
+2,037,803 compressed bytes. Ten originals remain unknown. Transfer to another
+input, with both positive and negative prior controls preserved, is required
+before adoption. This one development result supplies no optimality or
+unrestricted-SAT acquisition bound.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

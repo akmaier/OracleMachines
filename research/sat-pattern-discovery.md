@@ -4129,3 +4129,55 @@ Eleven originals remain unknown. Next is **case 11**, with a selected **45-varia
 196-clause / 608-literal / width-five** residual. Eight saved children are present
 and uncovered. Its depth-zero original root exists; its optional depth-one root
 does not. No inference default, Lean proof or arbitrary-SAT bound is changed.
+
+## 2026-11-16: a charged pilot improves downstream route selection
+
+[Testing two saved routes](pilot-refinement.md) closes case 11 and raises coverage
+**13/24 -> 14/24**. The optional pilot completes one nested acquisition on each
+of the two best saved routes before committing. All work shares the ordinary
+128-admission / sixteen-operation batch allowance. Partial trials stay on their
+arm until complete and survive cold restart. The current implementation requires
+an unresolved source below a unary selected root prefix and two saved choices;
+it is not a general component scheduler. Exact closure uses the frozen checker.
+
+Initially pivot 6 has score 1106 and pivot 32 has 1118. The pilot spends **three
+admissions / 28 probes** on the first, leaving three obligations and 1535 literals,
+and **seven admissions / 27 probes** on the second, leaving one obligation and
+559 literals. It selects pivot 32, and one further acquisition closes the original.
+All losing-trial results remain stored. The older failed one-profile lookahead
+and the case-6 counterexample remain preserved.
+
+Committed/pilot totals are **44/19 new patterns, 178/77 probes, eighteen/six source
+assumptions and nine/three new splits**. Both close in one batch. Two reversed
+paired runs give expansion **0.27211 -> 0.11072 s (59.31%)**, whole stream
+**8.23501 -> 7.85315 s (4.64%)**, and mean peak RSS **388,456,448 -> 382,541,824
+bytes (1.52%)**. Total SQLite/gzip size falls 1.17%/1.43%. Full auditing still
+uses 84.0% of candidate time, compression 9.5%, and expansion 1.4%. Do not scale
+acquisition savings into total-cost or unrestricted-SAT claims.
+
+The control proof has **53 steps / depth five**, the pilot **29 steps / depth two**.
+Both use conditional nodes and unary reductions to expose contradiction, with
+no component decomposition. The pilot proof uses sixteen new and thirteen
+parent steps; its three losing-trial patterns are unused but retained. The arms
+share exactly those three exploratory patterns and one split; no new pattern
+is common to both final proofs. This is not broader nonterminal or cross-input
+reuse. Depth uses changing local coordinates, not a fixed backdoor-size bound.
+
+All **367 tests** pass, and independent frozen replay checks the parent, four
+trial archives, query proofs, reachable catalogs, budget accounting, cold pilot
+recovery and the union. Validation takes 75.45 seconds outside operational means,
+partly concurrent with tests. All earlier 298 sources, 3,378 artifacts and
+64 proof blocks remain unchanged. No default solver or Lean theorem changes.
+
+The union keeps **2,178 patterns / 220 pairs / seventeen inherited missing children**,
+with an **807-step positive proof for fourteen originals**; ten remain unknown.
+It occupies **40,517,632 SQLite / 2,037,803 gzip bytes**, retaining sixty distinct
+new patterns and eleven splits from both arms. Restore
+`experiments/results/cnf-pilot-refinement/checkpoint.json`.
+
+**Next test:** transfer the unchanged pilot and committed control to case **13**.
+Its selected residual is **47 variables / 213 clauses / 649 literals / width four**.
+All eight saved children exist; pivot 41's true child is covered, the other seven
+are not. Both original roots exist. Check the unary-prefix precondition and
+charge all trial work. Broader replication is needed before adopting the pilot;
+known negative controls and worst-case acquisition/space gaps remain open.

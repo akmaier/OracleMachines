@@ -1,0 +1,23 @@
+from pathlib import Path
+from collections import Counter
+import tempfile
+from unittest.mock import patch
+from experiments.cnf_pilot_refinement import PilotRefinement,base
+p=Path('experiments/results/cnf-saved-split-reuse');cp=base.load(p/'checkpoint.json');target=base.load(p/'next-discovery.json');root=base.load(cp['queries']['path'])[target['case']]['roots'][0]
+with tempfile.TemporaryDirectory() as td:
+    path=Path(td)/'h';base.restore_archive(cp['archive'],path);h=base.CompleteAdmissionInventory(path,**base.OPTIONS);h.set_admission_budget(0)
+    try:
+        s=PilotRefinement(h,root,target['source']);first=s.batch(state_limit=8,pair_limit=16);rows=base.rows(h)
+        assert first['entered']==8 and first['pilot_state']['completed']==1 and first['reason']=='state_limit'
+        assert [e['entered'] for e in first['pilot_state']['events']]==[3,5]
+        assert first['pilot_state']['events'][-1]['pending'] and not first['closed']
+    finally:h.close()
+    h=base.CompleteAdmissionInventory(path,**base.OPTIONS);h.set_admission_budget(0)
+    try:
+        with base.no_acquisition(),patch.object(base.split,'discover_simplification',side_effect=AssertionError('restart acquired')):
+            s=PilotRefinement(h,root,target['source'],first['pilot_state']);assert s.frontier()==first['frontier']
+        second=s.batch(state_limit=128,pair_limit=16);assert second['closed'];assert rows.items()<=base.rows(h).items()
+        _,plan=base.compose(h,[root],s.registry,Counter());proof=base.expand(h,plan,[root],s.registry,Counter());base.split.verify_positive(h,proof,[root],list(s.records.values()),Counter())
+        result=dict(passed=True,first_entered=first['entered'],first_stored=first['stored'],first_completed=first['pilot_state']['completed'],first_event_admissions=[e['entered'] for e in first['pilot_state']['events']],second_entered=second['entered'],second_stored=second['stored'],second_closed=second['closed'],second_completed=second['pilot_state']['completed'],second_fresh_assumptions=second['selection_counts'].get('bootstrap_fresh_assumptions',0),second_reused_pairs=second['selection_counts'].get('bootstrap_reused_pairs',0),proof_steps=len(proof['steps']),prefix_preserved=True,no_acquisition_on_reopen=True)
+        base.write('experiments/results/cnf-pilot-refinement/budget-interruption-check.json',result);print(base.encode(result))
+    finally:h.close()

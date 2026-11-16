@@ -12,7 +12,51 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: predict downstream expansion, not just frontier size
+## Current investigation: transfer the bounded pilot and test its limits
+
+[The charged pilot](pilot-refinement.md) improves case **11** and raises coverage
+**13/24 -> 14/24**. It completes one nested acquisition on each of two saved
+routes, within the same 128-admission / sixteen-operation batch allowance as
+continuation. Pivot 6 grows to three obligations / 1535 literals; pivot 32 falls
+to one / 559. The pilot selects pivot 32. Both trials and all their states are
+charged and preserved; no default inference policy changes.
+
+Committed/pilot acquisition is **44/19 patterns, 178/77 probes, eighteen/six
+source assumptions and nine/three splits**. Local expansion falls **59.31%**,
+whole stream **4.64%** (8.23501 -> 7.85315 s), peak RSS **1.52%**, total SQLite
+**1.17%**, gzip **1.43%**. Complete audit remains **84.0%** of candidate time.
+The large acquisition reduction is not a corresponding end-to-end or worst-case
+saving. The 29-step winning proof has conditional depth two versus 53 steps /
+depth five for the control. Neither depth is a fixed backdoor-size claim.
+
+The pilot spends ten admissions and 55 probes on its two trials. Three states
+from the losing route remain unused in the final proof but preserved. They are
+also the three new states shared with the control; there is no new shared
+nonterminal in the two final proofs. Broader structural reuse remains open.
+The earlier failed one-profile lookahead and case-6 selection counterexample
+remain active evidence against treating this single success as universal.
+
+**Next target:** case **13**, random 3-CNF, selected **47-variable / 213-clause /
+649-literal / width-four** residual. Eight saved children exist. Pivot **41's
+true child is covered**; the other seven children remain open. Both original
+recognition-depth roots exist. Transfer the unchanged pilot and committed
+control, checking its unary-prefix/two-candidate precondition and charging all
+trial work. Keep interrupted phases resumable. Replicate before considering
+adoption or extending the scheduler to multiple interacting components.
+
+Restore `experiments/results/cnf-pilot-refinement/checkpoint.json`: **2,178 patterns /
+220 pairs / seventeen inherited missing children / 14 of 24 originals covered**,
+with an **807-step proof**. Ten originals remain unknown. The union retains all
+sixty distinct new patterns and eleven splits from both arms and occupies
+**40,517,632 SQLite / 2,037,803 gzip bytes**. All **367 tests** pass, including
+cold restart and shared-budget checks. All four archives independently replay.
+All prior 298 sources, 3,378 artifacts and 64 manuscript proof blocks survive;
+the new checkpoint binds **302 sources** and adds **39 manifested artifacts**.
+The next audit inherits **3,417 artifacts / 58 manifests**.
+Checkpoint SHA-256: `bf2097a76947241f8aa53a3e23438f117e4e9f146f7967b5408cf1ff3a794bf4`.
+Report SHA-256: `d4f7b055b86a052827edf9086aae7b9ea7d4c69e6e1f4a841256b0ebac17c85d`.
+
+## Previous investigation: predict downstream expansion, not just frontier size
 
 [The case-6 history control](saved-split-reuse.md) closes another original:
 **12/24 -> 13/24 coverage**. It also refutes a minimum-cost interpretation of the

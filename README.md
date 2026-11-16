@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[A bounded pilot across saved routes](research/pilot-refinement.md) closes case 11,
+raising coverage **13/24 -> 14/24**. Including both trials, new patterns fall
+**44 -> 19**, probes **178 -> 77**, and local expansion time **59.31%**. Whole-stream
+time falls **4.64%** and peak memory **1.52%**; full verification still dominates.
+All **367 tests** pass. The policy stays optional pending transfer to case 13;
+earlier failed lookahead experiments remain preserved.
+
 [Testing the value of saved splits](research/saved-split-reuse.md) closes case 6,
 raising coverage **12/24 -> 13/24**, and exposes a selection counterexample:
 the preferred saved route needs **74 new patterns / 547 probes**, versus **63 /

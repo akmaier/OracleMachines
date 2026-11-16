@@ -12,7 +12,60 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: exact insertion deltas over persisted proof graphs
+## Current investigation: one census per cold proof snapshot
+
+[Snapshot replay](snapshot-replay.md) replaces 384 repeated cold size scans with
+one independent census on a pinned read-only view. It runs the same frozen
+complete audit and verifier. On the next 192 unseen double deletions, mean
+complete time falls **15.15167 -> 7.84969 s (48.19%)** and cold replay
+**10.43075 -> 3.12634 s (70.03%)**. Four alternating process pairs preserve
+identical expansion work and identical logical/physical proof archives. Peak
+RSS rises **0.39%**; no memory or storage reduction is shown. The earlier delta
+memory regression remains open.
+
+**Current largest costs:** complete cold verification is **39.83%** of candidate
+worker time, compression **33.07%**, query work **16.20%**, setup **9.56%**.
+Further total-cost improvements need evidence about repeated proof normalization,
+allocation or rewriting unchanged persistent evidence. Profile before choosing
+another checker optimization; retain every logical check and all old certificates.
+Snapshot totals are independently computed, not trusted from saved accounting.
+The benchmark uses private closed clones and one owned process per audit; shared
+service concurrency and hostile private-connection changes are outside scope.
+
+**Next primary structural target:** **37 negative queries** still require fresh
+search and account for all **270 expansions / 85 splits**. They belong to 40
+guarded negatives; all modes otherwise use 54 core hits and 98 witness answers,
+returning 98 SAT / 94 UNSAT. Cases 100, 41 and 188 use 21, 19 and 18 expansions;
+original template 12 supplies 129/270. Compare refutation supports and guarded
+cofactors across these cases. A full-query negative certificate requires checked
+composition of the stronger UNSAT premise and the restricted child; treating
+the child as the query is invalid. Charge construction, checking and persistence
+when testing any transfer. The 121-core antichain remains unbenchmarked and
+preserves existing superset coverage rather than expanding it.
+
+Resume `experiments/results/cnf-snapshot-replay/checkpoint.json`. Preserve every
+inherited study/decision field plus `snapshot_replay_study`,
+`snapshot_replay_decisions` and `reference_union`. The union adds 422 keys and
+retains **14,630 keys / 46,530,560 SQLite / 3,674,583 gzip bytes**. The new catalog
+has **152 direct roots / 40 guarded cofactor records**; guarded replay binds the
+source, guard and child together. All 384 earlier double-deletion answers were
+excluded from selection, including those without direct roots. Do not multiply
+speedups across different input sets or ignore earlier acquisition costs.
+
+All **426 tests**, eight complete archive checks / **3,072 trial query replays**,
+every union node, **653 inherited decisions** and all new decisions pass using
+the ordinary solver for independent validation. All 343 prior source bindings,
+3,831 artifacts / 67 manifests and 64 proof blocks are preserved. Runtime binds
+347 sources; the post-hoc analyzer brings the final ledger to 348. The manuscript
+builds to 193 pages without warnings. Structural authority is unchanged:
+2,614 patterns / 259 pairs / 17 missing children, original 17/24 / 999 steps,
+separate supplemental 24/24 / 208, and original case 7's discovery pointer.
+Checkpoint SHA-256: `86ed6d602def81787d3b1b88c9b3151f8ccba1929f223d73a279acd438bd2bfe`.
+Report SHA-256: `0b5be879e1beeda66a27fef48fd42cfa3fa5f7df02cd73bdc6e8202fe0f9fe22`.
+The new manifest adds **42 artifacts**; the next preservation audit inherits
+**3,873 artifacts / 68 manifests**.
+
+## Previous investigation: exact insertion deltas over persisted proof graphs
 
 [Incremental archive accounting](incremental-archive-accounting.md) removes the
 full-history query scans identified by the previous profile. On the next **192

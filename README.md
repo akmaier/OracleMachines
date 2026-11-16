@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[One census per cold proof snapshot](research/snapshot-replay.md) cuts complete
+runtime **48.19%** and cold replay **70.03%** on a further 192 unseen constructed
+inputs. Every proof check remains, and both modes have identical archives and
+search counts. Peak RSS rises **0.39%**. All **426 tests** and 3,072 independent
+cold trial replays pass. The union retains 14,630 keys. Next structural target:
+shared refutations among the 37 negative queries that still need fresh search.
+Current checkpoint: `experiments/results/cnf-snapshot-replay/checkpoint.json`.
+
 [Exact insertion deltas avoid repeated archive scans](research/incremental-archive-accounting.md).
 On the next 192 unseen double deletions, complete runtime falls **60.48%** and
 query time **94.26%**, with identical proof rows and search counts. Peak RSS rises

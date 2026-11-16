@@ -5844,6 +5844,82 @@ separate supplemental corpus remains 24 of 24. These accounting changes neither
 expand that closure nor establish a uniformly efficient procedure for arbitrary
 SAT. The new invariant and implementation tests are not a new Lean verification.
 
+\paragraph{One census for a cold proof snapshot.}
+The cold audit still recomputed archive size after every query. We now open a
+read-only SQLite snapshot, independently evaluate the original count and length
+sum once, and return those totals during replay. The same frozen audit still
+checks every proof node, guard, witness and query through the unchanged verifier.
+It does not trust the persisted size ledger or omit certificate checking.
+
+Both modes use the existing delta expansion worker and the same 14,208-key
+union, 145 cores and 260 extension templates. Selection excludes all 384 earlier
+answered double deletions, including guarded answers without complete roots,
+and then excludes any cached complete root. The same salted order selects the
+next 64 per original template. Four process pairs alternate mode order, and
+each stream visits all 192 constructed inputs twice. Selection costs 1.48599
+seconds separately. Earlier extraction and acquisition remain charged in their
+original accounts; the new experiment does not establish cumulative break-even.
+
+\begin{center}
+\begin{tabular}{lrr}
+\hline
+Measured quantity & Ordinary audit & Snapshot audit \\
+\hline
+Mean complete seconds & 15.15167 & 7.84969 \\
+Mean cold audit seconds & 10.43075 & 3.12634 \\
+Mean two-visit query seconds & 1.28359 & 1.27165 \\
+Mean compression seconds & 2.59580 & 2.59602 \\
+Cold size censuses & 384 & 1 \\
+Cold proof nodes checked & 14,630 & 14,630 \\
+Fresh expansions & 270 & 270 \\
+\hline
+\end{tabular}
+\end{center}
+
+Complete time falls 48.19\% and cold replay 70.03\%. The complete-time reduction
+ranges from 47.84\% to 48.90\% across pairs. Mean peak RSS rises 0.39\%, from
+453,730,304 to 455,503,872 bytes, so there is no memory saving. Logical and
+physical proof archives are identical across all eight runs: 46,530,560 SQLite
+bytes and 3,674,583 gzip bytes. Small query/setup timing differences reflect
+identical code paths rather than changed search. The complete clock retains
+restoration, bank checks, expansion, bookkeeping, final preservation, cold
+replay, sidecars and compression. It excludes process launch, imports,
+command-line protocol/catalog reads and final report writing. Percentages from
+successive experiments must not be multiplied because their inputs and seeds differ.
+
+The first census pins a database view through a read transaction. An authorizer
+rejects writes, schema changes, attachments, transaction-ending statements and
+savepoints. The source is opened read-only, and search and publication reject.
+Thus, under the owned-session contract, the row count and length sum remain
+constant for all requests in that view. The argument concerns exact metadata;
+the unchanged verifier still establishes each certificate's logical meaning.
+For $Q$ queries over $R$ rows of total length $B$, repeated metadata scans cost
+$O(Q(B+R))$; the snapshot uses one $O(B+R)$ census and $Q$ constant-size returns.
+Opening, full proof checking, hashing and serialization retain their own costs.
+
+The measured sources are private closed clones. The scoped substitution owns
+its process; it is not a concurrent multithreaded audit interface. A test with a
+concurrent WAL writer confirms that a direct reader keeps its pinned view and
+a new reader sees later rows. It does not establish that hashing a live database
+file also binds an external WAL. Byte bindings in this experiment are checked
+on the private clones. Shared-service locks, snapshot lifetime and hostile
+changes to private connection state fall outside this measured contract.
+
+All modes return 98 SAT and 94 UNSAT answers, with 54 core hits, 98 witness
+publications and 40 guarded negative queries. Of these, 37 still require fresh
+search and account for all 270 expansions, including 85 splits. The union gains
+422 keys and retains 14,630. Repeated visits add no rows. Cold verification is
+now 39.83\% of worker time, compression 33.07\%, and the query loop 16.20\%.
+The negative cofactors remain the structural target: a complete query refutation
+would require checked composition of the stronger UNSAT premise with its
+restricted child, not substitution of the child key for the query key.
+
+All 426 tests and 3,072 trial query replays pass, with independent cold checking
+by the ordinary solver. The original structural corpus remains 17 of 24 and
+the separate supplemental corpus 24 of 24. These are bookkeeping and persistence
+results, not a new Lean theorem, broader structural closure, or a uniformly
+efficient solution of arbitrary SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

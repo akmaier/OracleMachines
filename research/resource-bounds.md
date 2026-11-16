@@ -2470,3 +2470,23 @@ complete time falls 60.48%. Cold replay and compression now dominate; cold
 replay still performs 384 complete size censuses. These are bookkeeping costs,
 not increased structural coverage. Earlier acquisition and support extraction
 must remain in any lifetime cost or amortization claim.
+
+
+## 2026-11-16: cold metadata on one pinned snapshot
+
+The [snapshot replay experiment](snapshot-replay.md) independently computes count
+and SQL length totals once in a read-only transaction and retains that database
+view for complete proof and query checking. Its normal metadata cost is one
+O(B+R) census plus Q fixed-size returns instead of Q full-history scans, for B
+key/payload length and R rows. It does not trust the persisted accounting row.
+The authorizer rejects writes, schema changes and transaction boundaries; private
+connection manipulation is outside the owned-session contract. Shared-service
+lock and snapshot-lifetime costs are not measured on the private cold clones.
+
+Complete time falls 48.19% on matched further unseen inputs, with unchanged
+search and byte-identical proof archives. Peak RSS rises 0.39%; persistent space
+is unchanged. The union retains 14,630 keys / 46,530,560 SQLite / 3,674,583 gzip
+bytes. Cold checking remains 39.83% of total time and compression 33.07%. All
+logical checks still run. There is no improvement to SAT search complexity,
+proof-space bounds or structural closure. Earlier acquisition remains charged;
+percentages on different input sets cannot be composed into a cumulative saving.

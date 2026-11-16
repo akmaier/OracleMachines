@@ -12,7 +12,63 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: negative proof reuse after bounded model rotation
+## Current investigation: incremental accounting after checked UNSAT reuse
+
+[Checked UNSAT supports](unsat-support-reuse.md) recognize new negative inputs by
+exact containment in a retained refutation core. On **192 unseen double
+clause deletions**, the full bank certifies **40 UNSAT queries** by this route
+and cuts fresh expansions **524 -> 355 (32.25%)**. However, complete runtime
+rises **28.51440 -> 39.96590 s (40.16%)**, mean peak RSS **28.15%**, and SQLite
+**23.74%**. The regression occurs in all three repetitions; this remains an
+optional experiment. All modes return **102 SAT / 90 UNSAT**. The small
+three-core bank saves only five expansions and has no reliable runtime gain.
+
+**Highest next target: exact incremental archive accounting.** A separately
+profiled warm pass spends **5.80760 s** copying full row inventories and
+**3.45805 s** recomputing archive size: **84.55%** of its **10.95876 s** loop.
+Core matching takes only **0.01618 s**. Replace per-query full-history scans
+with checked append-only deltas and maintained size totals, preserving a full
+final audit. Then compare further unseen edits using the **already persisted
+core bank** and identical full initial unions. Charge initial core acquisition
+and retained storage explicitly; no amortized break-even has been shown.
+
+**Structural gain and limit:** all 188 known negative sources yield 145 distinct
+supports. The original templates shrink 82 clauses to 64 and 63, and 96 to 80.
+Derived nodes use the frozen verifier and existing certificate format. A failed
+match never implies SAT or UNSAT. Supports are not minimal, arbitrary renamings
+are not searched, and the acquired proof DAG can still be exponential. The
+full bank leaves **328 negative / 27 positive** fresh expansions.
+
+**Retained compression evidence:** removing dominated supports leaves **121**
+and preserves the recognized family for every superset query. Its required
+preparation graph shrinks **4,092 -> 3,804 nodes**; this candidate has not been
+benchmarked. Only **10/4,102 preparation nodes** are unused by the current full
+bank and query proofs, so simple pruning offers little. No rows were deleted.
+The main cost is real retained proof data plus repeated accounting over it.
+
+Resume `experiments/results/cnf-unsat-support/checkpoint.json`; the bound study
+points to `all-0/cores.json`. Preserve inherited studies and decision catalogs,
+plus `unsat_support_study`, `unsat_support_decisions` and `reference_union`.
+The union retains **13,869 keys / 43,380,736 SQLite / 3,479,528 gzip bytes**.
+The new catalog has **139 direct certificates and 53 explicit guarded cofactor
+records**; never substitute a cofactor key for the complete query identity.
+Structural authority remains **2,614 patterns / 259 pairs / seventeen missing
+children**, original **17/24 / 999 proof steps**, and separate supplemental
+**24/24 / 208 proof steps**. Original case 7 is its separate discovery pointer.
+
+All **403 tests**, nine cold archive checks / **3,456 trial query replays**, the
+support screen, every union node, 269 inherited decisions and all 192 new
+decisions pass. Earlier 330 sources, 3,723 artifacts / 65 manifests and 64 proof
+blocks are preserved. Runtime binds 334 sources; post-hoc attribution and warm
+profiling bring the final ledger to 336. These are constructed development
+inputs, not independent evidence for uniformly efficient arbitrary SAT.
+Checkpoint SHA-256: `07e1a04864038caf4ba5a60b388e8c22b1c90116d9b11d819e7b7bd7dd7d31cf`.
+Report SHA-256: `f732924b833023efc8f3a52a33071bdff524d7abc105790eed8f41c8bfb4fdba`.
+
+The new manifest adds **60 artifacts**; the next audit inherits **3,783 artifacts /
+66 manifests**. The manuscript builds to **191 pages**.
+
+## Previous investigation: negative proof reuse after bounded model rotation
 
 [Bounded model rotation](model-rotation.md) reduces fresh reference expansions
 **1,876 -> 1,509 (19.56%)** on **257 previously uncached deletions** of three

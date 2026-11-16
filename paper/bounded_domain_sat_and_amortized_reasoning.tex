@@ -5660,6 +5660,101 @@ retained proofs expose useful small supports remains to be tested. Failed
 rotations cannot supply that evidence; nor does separate UNSAT for two single
 deletions justify deleting both clauses together.
 
+\subsection{Checked negative supports and the cost of retaining them}
+\label{sec:negative-supports}
+
+A checked unsatisfiable clause subset $K$ certifies every query $G$ with
+$K\subseteq G$ in the same variable coordinates. This gives an exact family of
+negative inputs, including compatible combinations of edits. A failed
+containment test gives no answer. Proof-based core extraction and independent
+refutation checking are established methods: \citet{zhang2003checking} recover
+an unsatisfiable subset from the original clauses used by a proof. Our next
+experiment tests the resource cost of applying that idea to the retained
+residual certificates. It supplies no new complexity collapse or claim that
+the resulting cores are minimal.
+
+The extractor follows unit traces, implication paths, Hall constraints,
+components, subsumption reductions and both children of a split. It maps
+residual clauses back to actual parent clauses, preserving normalization and
+variable coordinates. Every derived core is published in the existing
+certificate format and checked by the frozen verifier. A containing query
+receives an ordinary contradictory-subset certificate with exact clause
+indices. Cold replay therefore checks a self-contained certificate graph;
+it does not trust the extraction procedure. Conservative unit traces can retain
+irrelevant antecedents, so smaller supports may exist.
+
+The preparation screen extracts supports from three original UNSAT templates
+and 185 saved negative single deletions. The original supports shrink 82
+clauses to 64 and 63, and 96 to 80. Across all 188 sources there are 145 distinct
+raw supports. Extraction visits 4,961 negative proof nodes and publishes 4,102
+derived certificate nodes, including 1,918 subset wrappers. This is work bounded
+by the acquired proof graph, whose construction and size can themselves be
+exponential in the input. It is not a polynomial-input-size bound.
+
+For the comparison, we enumerate 11,202 double deletions of the three templates.
+None of these complete query roots is cached. A fixed salted hash order selects
+64 per template without consulting support containment or the new answer. The
+192 inputs remain constructed development examples. All modes inherit the same
+9,104-node reference union and the same 260 known single-deletion templates.
+They share direct lookup, SAT witness transfer and UNSAT guards. Candidate modes
+add either the three original supports or the full support bank. Three fresh
+process triples balance mode position, and each stream visits all inputs twice.
+All return 102 SAT and 90 UNSAT answers; repeated visits add no rows.
+
+\begin{center}
+\begin{tabular}{lrrr}
+\hline
+Measured quantity & Guarded & Three cores & Full bank \\
+\hline
+Core hits & 0 & 7 & 40 \\
+Fresh expansions & 524 & 519 & 355 \\
+Preparation nodes & 0 & 148 & 4,102 \\
+All new rows & 623 & 773 & 4,596 \\
+Mean extraction seconds & 0 & 0.12728 & 4.92563 \\
+Mean complete seconds & 28.51440 & 28.72597 & 39.96590 \\
+\hline
+\end{tabular}
+\end{center}
+
+The full bank reduces fresh expansions by 32.25\%, yet complete runtime rises
+40.16\%, mean peak RSS 28.15\%, and SQLite size 23.74\%. The runtime regression
+occurs in all three repetitions. The small bank saves only five expansions;
+its 0.74\% mean time increase is small and paired signs differ. We retain both
+outcomes rather than treating fewer expansions as sufficient evidence of an
+improvement. The complete clock includes extraction, matching, checking,
+publication, search, bookkeeping, cold replay, sidecar writing and compression.
+Process launch, imports, command-line protocol/catalog reads and final report
+writing are excluded. Selection costs 1.47029 seconds separately, and historical acquisition remains in the previous accounts.
+
+The extra proofs are largely used. Removing supports that contain another
+retained core reduces the bank from 145 to 121 while preserving its recognized
+superset family for every query. The required preparation proof nodes fall
+from 4,092 to 3,804. However, the current full bank and query proofs leave only
+ten preparation nodes unused. This diagnostic does not show a large gain from
+simple removal of unused nodes. No archive rows are deleted, and the antichain
+has not yet been benchmarked as an alternative implementation.
+
+A separately instrumented warm pass identifies a larger cost. Over 192 queries,
+full row snapshots take 5.80760 seconds and archive-size aggregation 3.45805
+seconds. These disjoint call categories consume 84.55\% of the 10.95876-second
+loop. Core matching takes only 0.01618 seconds on 53 misses. The solver's size
+accounting scans the entire archive, and the comparison harness copies its rows
+before and after each query. The immediate target is exact incremental
+accounting, followed by further unseen edits using the persisted core bank.
+The initial extraction and retained proof costs must still be charged when
+assessing amortization. No break-even claim follows from the present runs.
+
+The durable union grows to 13,869 keys, using 43,380,736 SQLite bytes and
+3,479,528 gzip bytes. It preserves earlier payloads and all alternatives in
+trial archives. The new decision catalog contains 139 direct query certificates
+and 53 guarded cofactor records. A cofactor key is not a complete query key:
+source, guard, child certificate and any lifted model remain bound together.
+All 403 tests and 3,456 trial query replays pass, along with the preparation
+screen, every union node, 269 inherited decisions and the new decision catalog.
+These are Python certificate checks, not a new Lean verification. Original
+structural coverage remains 17 of 24, with separate supplemental coverage 24
+of 24. The unknown part of arbitrary SAT remains explicit.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 
@@ -6265,6 +6360,13 @@ Small ReLU networks are powerful memorizers: A tight analysis of memorization ca
 \emph{Advances in Neural Information Processing Systems}, 32.
 \url{https://arxiv.org/abs/1810.07770}.
 
+
+\bibitem[Zhang and Malik(2003)]{zhang2003checking}
+Zhang, L. and Malik, S. (2003).
+\newblock Validating SAT solvers using an independent resolution-based checker:
+practical implementations and other applications.
+\newblock In \emph{Design, Automation and Test in Europe (DATE)}.
+\newblock \url{https://www.princeton.edu/~chaff/publication/DATE2003_validating_sat_solver.pdf}.
 
 \end{thebibliography}
 \endgroup

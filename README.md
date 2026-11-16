@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Checked UNSAT supports expose an accounting bottleneck](research/unsat-support-reuse.md).
+On 192 unseen double deletions, the full core bank cuts fresh expansions **32.25%**
+but increases complete runtime **40.16%** and peak RSS **28.15%**. This remains an
+optional experiment. A warm profile attributes **84.55%** of loop time to full
+archive scans; exact incremental accounting is next. All **403 tests** and
+3,456 cold trial query replays pass. Current checkpoint:
+`experiments/results/cnf-unsat-support/checkpoint.json`.
+
 [Bounded model rotation extends reuse to unseen deletions](research/model-rotation.md).
 On 257 previously uncached constructed inputs, rotation reduces fresh expansions
 **1,876 -> 1,509**, complete runtime **7.16%**, and peak RSS **3.86%** against the

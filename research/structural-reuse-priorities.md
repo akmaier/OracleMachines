@@ -12,7 +12,54 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse after edits change the exact formula
+## Current investigation: reuse SAT witnesses before solving edited inputs
+
+[Checked clause-deletion guards](clause-deletion-guard.md) reduce new reference
+residual nodes **502 -> 427 (14.94%)**, decision splits **200 -> 174**, and complete
+stream time **1.27860 -> 1.17492 seconds (8.11%)** on twelve constructed edits.
+This is a separate SAT decision experiment with the unchanged `ResidualSolver`,
+not a structural-coverage increase or a new production policy. Six retained
+UNSAT proofs justify forcing the removed clause false; six SAT premises decline.
+Both modes return nine SAT and three UNSAT answers, independently replayed.
+
+**Highest next target:** positive witness transfer. Edits **19, 21 and 23** use
+**364/427 remaining reference nodes**, although their undeleted formulas are SAT.
+The analyzer verifies that all six retained SAT-template models satisfy their
+edited inputs. Implement checked witness reuse before fresh search, preserving
+the UNSAT guard and an ordinary control. Charge matching, model checking and
+persistence. The current wrapper does not yet use this positive transfer.
+
+**Limits exposed:** case 13 remains at **22 reference nodes / eleven splits**
+after forcing two variables; this is distinct from its earlier 29 structural
+patterns. Case 7 uses two more splits. Cases 15 and 17 supply 67 of 75 avoided
+nodes, reducing **43/26 -> 1/1**. The general exceptional cofactor can remain
+arbitrary SAT: `F = H AND NOT x AND x` is cheaply UNSAT, while deleting `x` and
+forcing it false leaves arbitrary `H`. The underlying clause-deletion reasoning
+is established in transition-clause/MUS work; no new complexity claim follows.
+
+**Accounting:** preparing the common 613-node reference seed costs **0.91359 s**
+separately. SQLite falls 6.42%, but compressed database plus raw query sidecar
+increases **760,368 -> 810,993 bytes**. Two repetitions establish only this local
+measurement; the small RSS change is not broad memory evidence. Cold archive
+checking remains about 28% of stream time. Tests and retrospective validation
+run outside the timed workers.
+
+Resume `experiments/results/cnf-clause-deletion-guard/checkpoint.json`. It retains
+the unchanged **2,614 structural patterns / 259 pairs / seventeen missing
+children**, original **17/24 coverage / 999-step proof**, and separate **24/24
+supplemental coverage / 208-step proof**. Its `reference_study` binding preserves
+the new decision archives and guard sidecars; keep them on continuation.
+All **382 tests**, all four reference streams and all **96 query-result replays**
+pass. The analyzer also checks the hardness construction on all 512 two-variable
+CNFs. Runtime binds 319 sources; the final ledger binds 320 with the analyzer.
+All prior 315 sources, 3,588 artifacts / 62 manifests and 64 proof blocks remain
+unchanged. Original case 7 remains the separate structural discovery pointer.
+Checkpoint SHA-256: `e182f0023fc82ecb8ec674cbdc33c913ca91a104066b0a6d67c72812f8ea6b05`.
+Report SHA-256: `70507d8854ddf5d7110b00c16604f5956e452e9003fb4af2cd011deb71f5b005`.
+The new manifest adds **32 artifacts**; the next audit inherits **3,620 artifacts /
+63 manifests**. The manuscript builds to **187 pages**.
+
+## Previous investigation: reuse after edits change the exact formula
 
 [Cross-input join transfer](join-transfer.md) avoids **35 acquisitions and 154
 probes** on 24 distinct constructed CNFs. The unchanged solver receives only

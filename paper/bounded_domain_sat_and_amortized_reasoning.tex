@@ -5416,6 +5416,77 @@ catalogs, image rejection controls and the union. This establishes cross-input
 reuse under exact checked boundaries. Structural flags do not supply SAT/UNSAT
 answers or an efficient classification of arbitrary CNFs.
 
+\paragraph{A checked UNSAT premise after clause deletion.}
+The next experiment separates semantic decision evidence from structural
+coverage. Write $F=G\land C$, where $G$ results from deleting exactly one clause
+$C$. If a checked certificate establishes that $F$ is unsatisfiable, every
+model of $G$ falsifies $C$: a model satisfying $C$ would also satisfy $F$.
+Let $a$ assign every literal in $C$ its falsifying value. Then
+\[
+  F\in\mathrm{UNSAT}\quad\Longrightarrow\quad
+  \bigl(G\in\mathrm{SAT}\ \Longleftrightarrow\ G\!\upharpoonright_a\in\mathrm{SAT}\bigr).
+\]
+A model of the restricted formula lifts by adjoining $a$. A checked negative
+result for that formula, together with the old UNSAT premise, proves $G$
+unsatisfiable. A structural coverage flag supplies neither premise. This is
+elementary clause-deletion reasoning, closely related to the transition-clause
+characterization in Proposition~1 of \citet{belov2011rotation}; it is not a new
+complexity result or an implementation of recursive model rotation.
+
+Even a unit deletion and a cheap negative premise can leave arbitrary SAT.
+For any CNF $H$ and fresh $x$, set $G=H\land\neg x$ and $F=G\land x$.
+The stronger formula has a unit contradiction, while deleting $x$ and applying
+the guard leaves exactly $H$. A small edit therefore does not bound the
+remaining interaction. The analyzer checks this construction on all 512 CNFs
+formed from the nine normalized clauses over two variables, including the empty
+clause. The general argument is syntactic; no new Lean formalization is claimed.
+
+The optional wrapper checks the one-clause difference in shared input coordinates,
+the exact stronger root and its stored UNSAT certificate. A clause-count filter
+and exact set containment discover candidates from twelve undeleted templates.
+Missing or satisfiable premises decline the guard. The unchanged reference
+residual solver handles the remaining query, and every lifted SAT model is
+checked against the complete edited input. This decision experiment changes no
+structural-planner policy. It does not search arbitrary variable renamings.
+
+Preparing the twelve undeleted templates acquires 613 reference residual nodes
+and costs 0.91359 seconds, including checking and compression. Both modes start
+from this same seed, process the twelve constructed edits and repeat them.
+Two fresh-process repetitions reverse mode order. The guard applies to six
+inputs; both modes return nine SAT and three UNSAT answers. New reference nodes
+fall from 502 to 427 and decision splits from 200 to 174. Cases 15 and 17 fall
+from 43 and 26 nodes respectively to one each, supplying 67 of the 75 avoided
+nodes. Case 7 uses two more splits under the guard. Case 13 forces two variables
+and shrinks from 33 variables, 95 clauses and 274 literals to 31, 86 and 245,
+but still needs 22 reference nodes and eleven splits. Its earlier 29 structural
+patterns measure a different inventory and are not a comparator for these counts.
+
+Mean query processing and bookkeeping falls from 0.58998 to 0.53240 seconds.
+Whole-stream means fall from 1.27860 to 1.17492 seconds, or 8.11\%, including
+restoration, matching, premise replay, solving, model checking, full cold audit,
+sidecar writing and compression. Imports and final report writing are excluded.
+Both repeated visits add zero nodes. Final SQLite storage falls from 5,804,032
+to 5,431,296 bytes, but compressed database plus the verbose raw query sidecar
+increases from 760,368 to 810,993 bytes in the first repetition. Mean peak RSS
+changes by only 0.193\%. Two repetitions are local development measurements;
+seed acquisition and prior history remain separately charged. There is no
+comparison here with solving edits without first acquiring their templates.
+
+All 382 tests pass. Independent cold reconstruction checks every archived
+reference node and all 96 query results with fresh search disabled, including
+source bindings, old negative premises, lifted models and immutable seed rows.
+The structural authority remains at 2,614 patterns and 259 pairs, with original
+coverage 17 of 24 and separate supplemental coverage 24 of 24. The new decision
+archives and guard sidecars are retained alongside both structural proof catalogs.
+
+The largest next opportunity is positive witness transfer. Edits 19, 21 and 23
+consume 364 of the remaining 427 reference nodes despite their undeleted
+templates already being satisfiable. The analyzer checks that all six retained
+SAT-template witnesses satisfy their corresponding edited inputs. The current
+guard declines these premises, so this is a validated next implementation target,
+not a measured runtime saving. It calls for checked witness reuse before fresh
+search, with lookup, verification and persistence still included.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 
@@ -5527,6 +5598,12 @@ Balc\'azar, J.~L., Gavald\`a, R., and Siegelmann, H.~T. (1997).
 Computational power of neural networks: A characterization in terms of Kolmogorov complexity.
 \emph{IEEE Transactions on Information Theory}, 43(4), 1175--1183.
 \href{https://doi.org/10.1109/18.605580}{doi:10.1109/18.605580}.
+
+\bibitem[Belov and Marques-Silva(2011)]{belov2011rotation}
+Belov, A. and Marques-Silva, J. (2011).
+\newblock Accelerating MUS extraction with recursive model rotation.
+\newblock In \emph{Formal Methods in Computer-Aided Design (FMCAD)}.
+\newblock \url{https://www.cs.utexas.edu/~hunt/fmcad/FMCAD11/papers/74.pdf}.
 
 \bibitem[Bergamaschi Ganapini et~al.(2025)Bergamaschi Ganapini, Campbell, Fabiano, Horesh, Lenchner, Loreggia, Mattei, Rossi, Srivastava, and Venable]{ganapini2025sofai}
 Bergamaschi Ganapini, M., Campbell, M., Fabiano, F., Horesh, L., Lenchner, J., Loreggia, A., Mattei, N., Rossi, F., Srivastava, B., and Venable, K.~B. (2025).

@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[A checked UNSAT proof narrows clause-deletion search](research/clause-deletion-guard.md).
+On twelve constructed edits, the optional decision wrapper reduces new reference
+nodes **502 -> 427** and measured complete time **8.11%**. Case 13 does not improve;
+two other cases supply most gains. All **382 tests** and cold replay pass.
+Structural coverage stays **17/24**. Next: reuse retained SAT witnesses, which
+already satisfy the edited inputs responsible for most remaining search.
+
 [Saved subproofs transfer across new inputs](research/join-transfer.md): on 24
 constructed CNFs, preloading exact joins avoids **35 pattern acquisitions and
 154 probes**, with identical structural proofs. Whole runtime falls only 0.99%

@@ -1,0 +1,116 @@
+{
+  "analyzer": {
+    "path": "/Users/maier/Documents/code/OracleMachines/experiments/analyze_cnf_clause_deletion_guard.py",
+    "sha256": "8309d6ea47c6efe2e24ce81d9b214d376daa033ef5750e101113f8e10cee2704"
+  },
+  "archive_plus_raw_sidecar_bytes": {
+    "guarded": [
+      810993,
+      810996
+    ],
+    "ordinary": [
+      760368,
+      760369
+    ]
+  },
+  "case13_partition": [
+    {
+      "assignment": {
+        "320": false
+      },
+      "cell": 0,
+      "clause_satisfied": true,
+      "present": false,
+      "root": "[\"cnf-pattern-v1\",{\"binary_path_root_limit\":64,\"binary_paths\":\"retained-binary-shared-prefix-v1\",\"candidate_limit\":4,\"clause_growth_limit\":2,\"common_consequences\":\"first-complete-pair-v1\",\"conditioning_edges\":\"checked-closure-v1\",\"conditioning_policy\":\"shortest-balanced-v1\",\"decompose\":true,\"elimination_candidate_limit\":64,\"elimination_pair_limit\":64,\"learn_limit\":4,\"max_depth\":1,\"parity_width\":8,\"pattern_extension\":\"unit-pure-discovery-v1\",\"polarity_pair_limit\":65536,\"probe_equivalences\":\"first-pair-smallest-representative-v1\",\"probe_learning\":\"closure-activity16-v1\",\"probe_limit\":4,\"probing\":\"binary-frequency-failed-literal-v1\",\"projection_budget\":4096,\"retained_plans\":\"exact-closed-polarity-reference-v1\",\"simplify_pure\":false,\"simplify_units\":true,\"terminal_additive_elimination\":\"complete-pairs-additive-clause-fallback-v1\",\"terminal_clause_elimination\":\"complete-pairs-clause-count-fallback-v1\",\"terminal_elimination\":\"complete-opposing-pairs-nongrowing-v1\",\"terminal_polarity\":\"horn-pair-certificates-v1\",\"terminal_subsumption\":\"implied-minimal-family-v1\"},0,[[-29,-7,25],[-29,9],[-28,-22,-18],[-28,-12,21],[-28,-10,-7,11],[-28,-10,-7,21],[-28,-2],[-28,23],[-27,-6,8],[-27,-3,23],[-27,6,17],[-27,11,12],[-26,-22,4],[-26,-13,19],[-26,-12],[-26,11],[-26,15,21],[-25,-23,20],[-24,-8],[-24,2,11],[-23,-19,-8],[-23,-12,-8],[-22,-19,-10],[-22,-10,-7],[-22,-9,29],[-22,8,12,16],[-21,-10,23],[-21,-7,14],[-21,-6],[-21,-5,24],[-21,6,25],[-20,-11,7],[-20,13],[-20,24],[-19,-9,-8],[-19,11,16],[-18,-11],[-18,-10,29],[-18,6,17],[-18,7,26,29],[-18,10],[-17,-14,15],[-17,-9,29],[-16,-15,13],[-16,-8],[-16,-6,5],[-16,-3],[-16,4,19],[-15,-4,-1],[-14,-13],[-12,-9,-3],[-12,-9,18],[-12,-6,14],[-11,18],[-10,-7,2,4],[-10,-2,15],[-10,13,27],[-9,17,25],[-8,-6],[-7,19,26],[-5,28],[-4,2,27],[-4,8,29],[-2,7,15,26],[-2,8],[-2,12,21],[2,13,22],[3,5,11],[3,9],[4,12,13],[4,20,28],[6,13,29],[6,25],[7,13,26,27],[7,28],[8,15],[10,16,28],[10,23],[17,23],[24,25]]]",
+      "shape": [
+        29,
+        80,
+        222
+      ]
+    },
+    {
+      "assignment": {
+        "280": true,
+        "320": true
+      },
+      "cell": 1,
+      "clause_satisfied": true,
+      "present": false,
+      "root": "[\"cnf-pattern-v1\",{\"binary_path_root_limit\":64,\"binary_paths\":\"retained-binary-shared-prefix-v1\",\"candidate_limit\":4,\"clause_growth_limit\":2,\"common_consequences\":\"first-complete-pair-v1\",\"conditioning_edges\":\"checked-closure-v1\",\"conditioning_policy\":\"shortest-balanced-v1\",\"decompose\":true,\"elimination_candidate_limit\":64,\"elimination_pair_limit\":64,\"learn_limit\":4,\"max_depth\":1,\"parity_width\":8,\"pattern_extension\":\"unit-pure-discovery-v1\",\"polarity_pair_limit\":65536,\"probe_equivalences\":\"first-pair-smallest-representative-v1\",\"probe_learning\":\"closure-activity16-v1\",\"probe_limit\":4,\"probing\":\"binary-frequency-failed-literal-v1\",\"projection_budget\":4096,\"retained_plans\":\"exact-closed-polarity-reference-v1\",\"simplify_pure\":false,\"simplify_units\":true,\"terminal_additive_elimination\":\"complete-pairs-additive-clause-fallback-v1\",\"terminal_clause_elimination\":\"complete-pairs-clause-count-fallback-v1\",\"terminal_elimination\":\"complete-opposing-pairs-nongrowing-v1\",\"terminal_polarity\":\"horn-pair-certificates-v1\",\"terminal_subsumption\":\"implied-minimal-family-v1\"},0,[[-30,-29,-25],[-30,-8,26],[-30,10],[-29,-26,15],[-29,-25,-17],[-29,-19],[-28,-23,-19],[-28,-13,22],[-28,-11,-8,12],[-28,-11,-8,22],[-28,-1],[-28,24,29],[-27,-23,4],[-27,-14,20],[-27,-13],[-27,6,12],[-27,16,22],[-26,-24,21],[-25,-9],[-25,-6,3],[-25,1,12],[-24,-20,-9],[-24,-13,-9],[-23,-20,-11],[-23,-11,-8],[-23,-10,30],[-23,-6,10,17],[-23,9,13,17],[-22,-11,24],[-22,-8,15],[-22,-5,25],[-22,7,26],[-21,-12,8],[-21,14],[-21,25],[-20,-10,-9],[-20,12,17],[-19,-12,2],[-19,-11,30],[-19,2,11],[-19,7,18],[-19,8,27,30],[-18,-15,16],[-18,-10,30],[-17,-16,14],[-17,-9],[-17,-7,5],[-17,-3],[-17,4,20],[-16,-13,-2],[-16,-4],[-15,-14],[-13,-10,-3],[-13,-10,19],[-13,-7,15],[-12,2,19],[-11,-8,1,4],[-11,-1,16],[-10,18,26],[-9,-7],[-8,-6,21],[-8,20,27],[-7,9],[-6,3,14],[-6,11],[-5,6,28],[-4,9,30],[-3,24],[-2,3,27],[-2,29],[-1,8,16,27],[-1,9],[-1,13,22],[1,14,23],[2,8,28],[3,5,12],[3,6,10],[4,13,14],[4,21,28],[6,9,16],[7,14,30],[7,18],[7,26],[11,17,28],[11,24],[12,13]]]",
+      "shape": [
+        30,
+        86,
+        244
+      ]
+    },
+    {
+      "assignment": {
+        "280": false,
+        "320": true
+      },
+      "cell": 2,
+      "clause_satisfied": false,
+      "present": false,
+      "root": "[\"cnf-pattern-v1\",{\"binary_path_root_limit\":64,\"binary_paths\":\"retained-binary-shared-prefix-v1\",\"candidate_limit\":4,\"clause_growth_limit\":2,\"common_consequences\":\"first-complete-pair-v1\",\"conditioning_edges\":\"checked-closure-v1\",\"conditioning_policy\":\"shortest-balanced-v1\",\"decompose\":true,\"elimination_candidate_limit\":64,\"elimination_pair_limit\":64,\"learn_limit\":4,\"max_depth\":1,\"parity_width\":8,\"pattern_extension\":\"unit-pure-discovery-v1\",\"polarity_pair_limit\":65536,\"probe_equivalences\":\"first-pair-smallest-representative-v1\",\"probe_learning\":\"closure-activity16-v1\",\"probe_limit\":4,\"probing\":\"binary-frequency-failed-literal-v1\",\"projection_budget\":4096,\"retained_plans\":\"exact-closed-polarity-reference-v1\",\"simplify_pure\":false,\"simplify_units\":true,\"terminal_additive_elimination\":\"complete-pairs-additive-clause-fallback-v1\",\"terminal_clause_elimination\":\"complete-pairs-clause-count-fallback-v1\",\"terminal_elimination\":\"complete-opposing-pairs-nongrowing-v1\",\"terminal_polarity\":\"horn-pair-certificates-v1\",\"terminal_subsumption\":\"implied-minimal-family-v1\"},0,[[-30,-29,-25],[-30,-8,26],[-30,10],[-29,-26,15],[-29,-25,-17],[-29,-19],[-28,-23,-19],[-28,-13,22],[-28,-11,-8,12],[-28,-11,-8,22],[-28,-1],[-28,24,29],[-27,-23,4],[-27,-14,20],[-27,-13],[-27,6,12],[-27,16,22],[-26,-24,21],[-25,-9],[-25,-6,3],[-25,1,12],[-24,-20,-9],[-24,-13,-9],[-23,-20,-11],[-23,-11,-8],[-23,-10,30],[-23,-6,10,17],[-23,9,13,17],[-22,-11,24],[-22,-8,15],[-22,-5,25],[-22,7,26],[-21,-12,8],[-21,14],[-21,25],[-20,-10,-9],[-20,12,17],[-19,-12,2],[-19,-11,30],[-19,2,11],[-19,7,18],[-19,8,27,30],[-18,-15,16],[-18,-10,30],[-17,-16,14],[-17,-9],[-17,-7,5],[-17,-3],[-17,4,20],[-16,-13,-2],[-16,-4],[-15,-14],[-13,-10,-3],[-13,-10,19],[-13,-7,15],[-12,2,19],[-11,-8,1,4],[-11,-1,16],[-11,14],[-10,18,26],[-9,-7],[-8,-6,21],[-8,20,27],[-6,3,14],[-6,11],[-5,6,28],[-4,1],[-4,9,30],[-2,3,27],[-2,29],[-1,8,16,27],[-1,9],[-1,13,22],[1,14,23],[2,8,28],[3,5,12],[3,6,10],[4,13,14],[4,21,28],[6,9,16],[7,14,30],[7,26],[8,14,27],[11,17,28],[11,24]]]",
+      "shape": [
+        30,
+        85,
+        243
+      ]
+    }
+  ],
+  "conditional_hardness_check": {
+    "construction": "For arbitrary G and fresh x: weaker=G AND NOT x, stronger=weaker AND x. Stronger has a unit contradiction; deleting x and applying the guard leaves exactly G.",
+    "examples": 512
+  },
+  "reconstruction": {
+    "path": "experiments/results/cnf-clause-deletion-guard/reconstruction.json",
+    "sha256": "d2cdb160a947be4bd9a2e99dc56bd85ed4173d9020eb89429e0fe54be3e73760"
+  },
+  "reductions_percent": {
+    "compressed_bytes": 6.015977480595301,
+    "database_bytes": 6.422018348623853,
+    "mean_peak_rss_bytes": 0.19329274185754325,
+    "mean_query_seconds": 9.759624049160873,
+    "mean_wall_seconds": 8.109257052756172,
+    "new_nodes": 14.9402390438247,
+    "split_nodes": 13.0
+  },
+  "report": {
+    "path": "experiments/results/cnf-clause-deletion-guard/report.json",
+    "sha256": "70507d8854ddf5d7110b00c16604f5956e452e9003fb4af2cd011deb71f5b005"
+  },
+  "sat_witness_checks": [
+    {
+      "case": 1,
+      "model_satisfies_edited_input": true,
+      "template_case": 0
+    },
+    {
+      "case": 3,
+      "model_satisfies_edited_input": true,
+      "template_case": 2
+    },
+    {
+      "case": 5,
+      "model_satisfies_edited_input": true,
+      "template_case": 4
+    },
+    {
+      "case": 19,
+      "model_satisfies_edited_input": true,
+      "template_case": 18
+    },
+    {
+      "case": 21,
+      "model_satisfies_edited_input": true,
+      "template_case": 20
+    },
+    {
+      "case": 23,
+      "model_satisfies_edited_input": true,
+      "template_case": 22
+    }
+  ],
+  "seconds": 0.1220932500436902
+}

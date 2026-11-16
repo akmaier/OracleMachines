@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Checking only the reachable split graph](research/scoped-refinement.md) closes
+case 22 and raises coverage **7/24 -> 8/24**. Complete measured time falls
+**12.60 -> 6.95 seconds (44.85%)**, with identical acquisitions and proofs and a
+full cold audit in both modes. All **351 tests** pass. Persistent storage is
+unchanged; the optional live view avoids checking unrelated history twice.
+Next: the connected case-23 mixture and amortizing full checkpoint checks.
+
 [Policy transfer with a history control](research/case17-policy-transfer.md)
 closes the next 60-variable residual and raises coverage **6/24 -> 7/24**.
 Both histories acquire the same 89 patterns using 531 probes; none of the

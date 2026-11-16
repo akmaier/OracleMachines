@@ -12,7 +12,51 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: transfer across mixtures without scanning all history
+## Current investigation: connected mixtures and shared checkpoint checking
+
+[Root-complete split checking](scoped-refinement.md) closes case 22 and raises
+coverage **7/24 -> 8/24**, with **9 new patterns / 2 pairs / 4 source assumptions /
+29 probes** in both modes. The optional scoped registry indexes every split but
+checks semantic certificates only for sources reachable from the requested root.
+It preserves all alternatives at those sources, full-database lookups and append
+guards. Independent full cold checks remain mandatory at each archived batch.
+
+Two reversed fresh-process repetitions give **12.59685 -> 6.94722 seconds (44.85%)**
+whole-stream time. Startup falls **5.72447 -> 0.16200 seconds**; mean peak process
+RSS falls **461.45 -> 360.73 MB (21.83%)**. Both histories, all acquisitions,
+choices, proofs and archive bytes match. Persistent storage is unchanged. Live
+startup checks **40 vs 1,790 pattern nodes / 4 vs 171 split certificates**; the
+full audit still checks everything. This is a finite development comparison,
+not a universal speedup or a bound independent of historical storage.
+
+**Largest remaining cost:** full cold checking is **5.96027 seconds**, about **86%**
+of the scoped stream; compression adds about 0.61 seconds. Investigate sharing a
+guarded session and one complete checkpoint audit across several queries, while
+retaining per-query results and checking every positive proof. Query scoping alone
+does not eliminate full row maps, archive reads, identity scans or table guards.
+
+**Next discovery target:** case **23**, a **connected binary mixture** with a
+selected **59-variable / 255-clause / 767-literal / width-four** residual. Its four
+saved pairs have all eight children present and uncovered. Transfer the unchanged
+policy and investigate shared-variable interaction; do not repeat its initial
+acquisition. Case 22's proof explicitly separates an easy 2-CNF component. It uses
+23 old pattern steps and nine new ones; only the contradiction terminal is shared.
+The three conditional levels are not a fixed three-variable backdoor.
+
+Restore `experiments/results/cnf-scoped-refinement/checkpoint.json` through the
+existing bootstrap helper. It preserves **1,799 patterns / 173 pairs / 17 inherited
+missing children / 8/24 coverage**, with a **477-step positive proof** and **16
+unknown originals**. The union occupies **34,148,352 SQLite / 1,652,138 gzip bytes**.
+The new `next-discovery.json` binds case 23 using historical timing for priority.
+Cases 16, 17 and 22 are complete. All **351 tests** and independent checks of the
+parent, four trial archives and union pass. Previous artifacts, sources and all
+64 existing manuscript proof blocks remain unchanged. Validation binds **286
+sources** and adds **34 manifested artifacts**; the next audit inherits **3,238
+artifacts / 54 manifests**. Checkpoint SHA-256:
+`d4d3bbfd93c23199868bf8e28831f840cefb69a8606639f1c59b71d8da4496a2`.
+Report SHA-256: `f11f0e5462ea831c3d3e23258966f75cbf235a57a6a9003d2942046528e4a24c`.
+
+## Previous investigation: transfer across mixtures without scanning all history
 
 [The unchanged nested policy closes case 17](case17-policy-transfer.md) in one
 batch, raising current coverage **6/24 -> 7/24**. A matched history ablation

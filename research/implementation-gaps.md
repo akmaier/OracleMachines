@@ -7799,3 +7799,34 @@ Seventeen originals remain unknown. The next bound discovery target is case 22's
 disjoint binary mixture with a 48-variable residual. Test policy transfer and
 separate easy-component reuse from random-core closure. No arbitrary-SAT
 efficiency bound or new Lean refinement follows from this finite experiment.
+
+
+## 2026-11-16: root-complete checking closes the disjoint mixture
+
+[The optional scoped registry](scoped-refinement.md) preserves all reachable
+ordinary and split routes, while deferring unrelated semantic checks to the full
+cold audit. Both modes use the complete history and unchanged acquisition policy.
+Case 22 closes with nine new patterns, two pairs, four source assumptions and
+29 probes, raising coverage to 8/24. Acquisitions, choices, proofs and archive
+bytes match across two reversed repetitions. Whole-stream time falls 12.59685 ->
+6.94722 seconds (44.85%); mean process RSS falls 21.83%. No persistent bytes are
+saved. Startup still scans global identities and historical row maps.
+
+The original proof has 32 distinct steps: one decomposition, three conditional
+nodes, 26 reductions and two family leaves. Twenty-three steps were retained and
+nine are new. An easy nine-variable 2-CNF component is separate from the random
+core's four contradiction leaves. Only the contradiction is shared; depth three
+is not a fixed backdoor or a minimum-depth guarantee. All 351 tests pass, including
+pending activation, interrupted resume, relevant corruption and writer/policy
+invalidation. The complete parent, four trial archives and union pass independent
+acquisition-free checks. A scoped live query alone does not validate unrelated
+history. All earlier artifacts, sources and 64 proof blocks remain intact.
+
+The full union retains 1,799 patterns, 173 pairs, seventeen missing children and
+a 477-step proof for eight originals; sixteen originals remain unknown. Case 23's
+connected binary mixture is next, with a 59-variable / 255-clause / 767-literal /
+width-four residual and eight present but uncovered saved children. Use the new
+checkpoint and bound successor. Full cold checking now takes about 86% of scoped
+stream time; sharing a guarded session and complete audit across queries is the
+next cost opportunity, requiring a separate matched test. No uniform arbitrary-SAT
+efficiency bound, new Lean refinement or new SAT/UNSAT output API is claimed.

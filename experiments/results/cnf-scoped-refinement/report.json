@@ -1,0 +1,176 @@
+{
+  "protocol_sha256": "a21946ca5c94d34a495956e47f988afd2c7a78da7757c155c1c409317a31296d",
+  "samples": [
+    {
+      "mode": "eager",
+      "path": "experiments/results/cnf-scoped-refinement/eager-0/report.json",
+      "repeat": 0,
+      "sha256": "54f82f3a761be2a5a671e29c2a0a221aa214d4bfa6682a6a65548ff994789be7"
+    },
+    {
+      "mode": "scoped",
+      "path": "experiments/results/cnf-scoped-refinement/scoped-0/report.json",
+      "repeat": 0,
+      "sha256": "a1b3df1223bcbbf526f003252d8e5a577b0791d46f82e94cad522965fcef81cc"
+    },
+    {
+      "mode": "scoped",
+      "path": "experiments/results/cnf-scoped-refinement/scoped-1/report.json",
+      "repeat": 1,
+      "sha256": "da5a75d265a9486129e43cb91cfa294089d882e09c06497b42cd434a67710c2d"
+    },
+    {
+      "mode": "eager",
+      "path": "experiments/results/cnf-scoped-refinement/eager-1/report.json",
+      "repeat": 1,
+      "sha256": "0e4b772dbdf2f8213450372e7b087e0519d1fde9bba310fb0653480a30687c7d"
+    }
+  ],
+  "summary": {
+    "eager": {
+      "added_pairs": 2,
+      "assumptions": 4,
+      "batches": 1,
+      "closed": true,
+      "compressed_bytes": 1651015,
+      "covered": 8,
+      "database_bytes": 34148352,
+      "entered": 9,
+      "final_main_inventory_checked_nodes": 1799,
+      "final_registry": {
+        "active_records": 164,
+        "counts": {
+          "registry_activated_records": 164,
+          "registry_pair_read_bytes": 2498428,
+          "registry_pattern_suffix_rows": 1799,
+          "registry_refreshes": 3,
+          "registry_verified_records": 173,
+          "restriction_literal_visits": 211744,
+          "simplification_reconstruction_literals": 200337,
+          "simplification_unit_check_literals": 133,
+          "verified_bootstrap_splits": 173,
+          "verified_simplifications": 346
+        },
+        "metadata_json_bytes": 4520121,
+        "pending_child_keys": 17,
+        "pending_dependencies": 17,
+        "pending_records": 9,
+        "records": 173
+      },
+      "initial": {
+        "main_inventory_checked_nodes": 1790,
+        "registry": {
+          "active_records": 162,
+          "counts": {
+            "registry_activated_records": 162,
+            "registry_pair_read_bytes": 2472455,
+            "registry_pattern_suffix_rows": 1790,
+            "registry_refreshes": 1,
+            "registry_verified_records": 171,
+            "restriction_literal_visits": 209628,
+            "simplification_reconstruction_literals": 198329,
+            "simplification_unit_check_literals": 124,
+            "verified_bootstrap_splits": 171,
+            "verified_simplifications": 342
+          },
+          "metadata_json_bytes": 4469139,
+          "pending_child_keys": 17,
+          "pending_dependencies": 17,
+          "pending_records": 9,
+          "records": 171
+        }
+      },
+      "mean_bookkeeping_seconds": 0.09732795809395611,
+      "mean_cold_seconds": 6.017170479055494,
+      "mean_compression_seconds": 0.6128478751052171,
+      "mean_operation_seconds": 0.08051587478257716,
+      "mean_peak_rss_raw": 461447168.0,
+      "mean_startup_seconds": 5.724474562332034,
+      "mean_stream_wall_seconds": 12.596849708352238,
+      "pair_digest": "8e017fd5889a9673a3224c9432d215cb9ff961627a9caa8d90d018198ab69548",
+      "pattern_digest": "b9a88765468242c910894ba8fb8e01105dd9aac6c29b68265f4196b8d1cb6819",
+      "probes": 29,
+      "reused_pairs": 0,
+      "stored": 9
+    },
+    "scoped": {
+      "added_pairs": 2,
+      "assumptions": 4,
+      "batches": 1,
+      "closed": true,
+      "compressed_bytes": 1651015,
+      "covered": 8,
+      "database_bytes": 34148352,
+      "entered": 9,
+      "final_main_inventory_checked_nodes": 49,
+      "final_registry": {
+        "active_records": 6,
+        "counts": {
+          "registry_activated_records": 6,
+          "registry_pair_read_bytes": 84536,
+          "registry_pattern_suffix_rows": 1799,
+          "registry_refreshes": 3,
+          "registry_verified_records": 6,
+          "restriction_literal_visits": 7012,
+          "scoped_index_read_bytes": 2498428,
+          "scoped_indexed_records": 173,
+          "scoped_reachable_visits": 89,
+          "simplification_reconstruction_literals": 6616,
+          "simplification_unit_check_literals": 9,
+          "verified_bootstrap_splits": 6,
+          "verified_simplifications": 12
+        },
+        "deferred_records": 167,
+        "index_json_bytes": 800567,
+        "indexed_records": 173,
+        "metadata_json_bytes": 155123,
+        "pending_child_keys": 0,
+        "pending_dependencies": 0,
+        "pending_records": 0,
+        "reachable_sources": 32,
+        "records": 6
+      },
+      "initial": {
+        "main_inventory_checked_nodes": 40,
+        "registry": {
+          "active_records": 4,
+          "counts": {
+            "registry_activated_records": 4,
+            "registry_pair_read_bytes": 58563,
+            "registry_pattern_suffix_rows": 1790,
+            "registry_refreshes": 1,
+            "registry_verified_records": 4,
+            "restriction_literal_visits": 4896,
+            "scoped_index_read_bytes": 2472455,
+            "scoped_indexed_records": 171,
+            "scoped_reachable_visits": 27,
+            "simplification_reconstruction_literals": 4608,
+            "verified_bootstrap_splits": 4,
+            "verified_simplifications": 8
+          },
+          "deferred_records": 167,
+          "index_json_bytes": 787177,
+          "indexed_records": 171,
+          "metadata_json_bytes": 104145,
+          "pending_child_keys": 0,
+          "pending_dependencies": 0,
+          "pending_records": 0,
+          "reachable_sources": 27,
+          "records": 4
+        }
+      },
+      "mean_bookkeeping_seconds": 0.08495014533400536,
+      "mean_cold_seconds": 5.960266604553908,
+      "mean_compression_seconds": 0.6076306460890919,
+      "mean_operation_seconds": 0.07271877094171941,
+      "mean_peak_rss_raw": 360734720.0,
+      "mean_startup_seconds": 0.162000062642619,
+      "mean_stream_wall_seconds": 6.947220417205244,
+      "pair_digest": "8e017fd5889a9673a3224c9432d215cb9ff961627a9caa8d90d018198ab69548",
+      "pattern_digest": "b9a88765468242c910894ba8fb8e01105dd9aac6c29b68265f4196b8d1cb6819",
+      "probes": 29,
+      "reused_pairs": 0,
+      "stored": 9
+    }
+  }
+}

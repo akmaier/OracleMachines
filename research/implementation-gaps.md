@@ -8064,3 +8064,62 @@ the first trial reduces unresolved literal mass is a post-hoc hypothesis only:
 case 11 grew 1106 -> 1535; case 13 shrank 610 -> 539. Freeze the gate before new
 acquisition. The earlier case-6 counterexample rules out trusting covered-child
 presence alone. No default policy or unrestricted-SAT guarantee changes.
+
+## 2026-11-16: a progress gate avoids an unhelpful second route on case 21
+
+[The optional progress gate](progress-pilot.md) closes the connected binary
+mixture **case 21**, raising structural coverage **15/24 -> 16/24**. The rule was
+frozen before acquisition: after one completed trial, skip the second if the
+selected unresolved literal mass strictly decreases, or the query closes.
+Otherwise use the unchanged two-route pilot. The baseline and partial work
+survive restart; all work shares the same 128-admission / sixteen-operation
+batch allowance. This is a scheduling heuristic, not a cost bound.
+
+The first route at pivot 23 falls **1141 -> 1099 literals** after **eight
+admissions / 53 probes**. The gate stops exploration. Always-pilot tries pivot
+17 for **seven admissions / 52 probes**, seeing **1097 literals** and switching.
+Gated and committed totals are **24 patterns / 100 probes / eight assumptions /
+four splits**, versus **32 / 175 / twelve / six** for always-pilot. The gate
+matches committed operations, proof and SQLite/gzip bytes. The two-literal
+advantage did not justify extra exploration on this input.
+
+The committed/gated proof has **42 steps**, five conditional nodes, 36 unary
+reductions and six contradiction occurrences. Eighteen steps and one split
+predate continuation; 24 steps and four splits are new. The pilot proof has
+41 steps and uses 24 new proof nodes, but retains eight unused trial patterns.
+The different final proofs share no new node. Only contradiction is shared
+within each proof; neither decomposes into separate components. Both have
+conditional depth three in changing coordinates, not a fixed backdoor bound.
+A shorter final proof therefore need not be cheaper to acquire.
+
+Against always-pilot, the gate reduces new patterns **25%**, probes **42.86%**,
+local expansion **35.25%**, RSS **0.65%**, SQLite **0.40%** and gzip **0.57%**.
+Whole-stream means are committed/pilot/gated **8.48923 / 8.75818 / 8.62917 s**.
+Pilot/gated pair rankings disagree; the 1.47% lower mean is inconclusive. Gated
+whole time is 1.65% higher than committed despite matching evidence. Full auditing
+still consumes about 82--83% of time. Two triples, with pilot always in the middle
+position, do not establish a robust timing advantage. Parent acquisition remains
+charged in earlier results, and these are history continuations.
+
+All **372 tests** pass, including five new checks of shared budgets, interrupted
+trials, baseline retention, skipped/explored routes and cold restart. An initial
+method-rebinding implementation error was fixed before measured acquisition;
+its source and test failure are retained. Independent full replay checks six
+archives, original bindings, complete catalogs, query proofs, prefixes, budgets
+and scheduling state in 106.11 seconds outside operational timing, partly
+concurrent with tests. Preflight costs 0.20920 seconds separately. All previous
+303 sources, 3,453 artifacts and 64 manuscript proof blocks remain unchanged.
+
+Restore `experiments/results/cnf-progress-pilot/checkpoint.json`: **2,263 patterns /
+233 pairs / seventeen inherited missing children**, with an **884-step proof for
+sixteen originals**. Eight remain unknown. The union retains every losing trial:
+48 distinct new patterns and nine splits, using **42,033,152 SQLite / 2,131,824
+gzip bytes**. No inference default, Lean theorem or SAT/UNSAT output API changes.
+
+**Next:** transfer the unchanged gate and both controls to **case 10**, random
+3-CNF with selected **45 variables / 180 clauses / 557 literals / width five**.
+All eight children of pivots 20,3,17,22 exist and remain uncovered; only the
+depth-zero original root is present. Check the prefix precondition. Look for an
+early literal decrease that masks expensive continuation; a successful local
+step is not a global potential or a minimum-cost certificate. Broader shared
+nonterminal patterns and full-history audit cost remain unresolved.

@@ -5227,6 +5227,63 @@ is a hypothesis for the next connected mixture, not a validated rule. Neither
 finite coverage nor this optional scheduling heuristic establishes efficient
 expansion for arbitrary SAT.
 
+\paragraph{Gate further exploration by observed progress.}
+The next optional policy records the selected first route's unresolved literal
+mass before acquisition. After one completed nested acquisition, it skips the
+second trial if this mass strictly decreases or the whole query is already
+covered. Otherwise it uses the existing second-trial policy. Partial acquisitions
+must finish before the gate fires, and the original baseline survives restart.
+All trial and continuation work shares the same admission and operation budgets.
+The gate adds a selected-frontier traversal at initialization and another after
+the first completed trial; this recognition work is charged. Its saved scores
+control scheduling, while the unchanged full checker establishes coverage.
+
+The rule was proposed from cases 11 and 13, then frozen before acquisition on
+connected case 21. The original has 57 variables and 215 clauses; its selected
+residual has 45 variables, 201 clauses and 616 literals. Its first route, at
+pivot 23, begins with two obligations and 1141 literals. One trial costs eight
+admissions and 53 probes, reducing this to 1099 literals. The gate skips the
+second trial. Always-pilot instead spends seven admissions and 52 probes on
+pivot 17, which leaves 1097 literals and is selected. That two-literal advantage
+does not repay the extra exploration in this experiment.
+
+The gate and committed control perform identical operations and produce the
+same proof and stored bytes: 24 new patterns, 100 probes, eight assumptions and
+four new splits. Always-pilot uses 32 patterns, 175 probes, twelve assumptions
+and six splits. All three raise structural coverage from fifteen to sixteen
+of twenty-four originals. The gate therefore reduces acquisitions by 25\% and
+probes by 42.86\% relative to always-pilot. Two reversed-order fresh-process
+triples give local expansion means of 0.17016, 0.25150 and 0.16285 seconds for
+committed, always-pilot and gated respectively. Gated peak RSS is 0.65\% lower
+than always-pilot, with total SQLite and compressed bytes 0.40\% and 0.57\% lower.
+
+Whole-stream means are 8.48923, 8.75818 and 8.62917 seconds. Gated versus pilot
+pair rankings disagree, so the 1.47\% lower mean does not establish a reliable
+total-time advantage. Gated mean whole time is 1.65\% higher than committed
+despite identical acquisitions. Complete auditing consumes about 82--83\% of
+time. Pilot remains in the middle position in both triples, and two repetitions
+cannot isolate small overheads. The measurements include restoration, selection,
+acquisition, checking and persistence; earlier history construction remains
+recorded separately. This is a continuation experiment on development inputs.
+
+Committed and gated proofs have 42 unique steps: five conditional nodes,
+36 unary reductions and one shared contradiction terminal with six occurrences.
+Eighteen steps predate this continuation and 24 are new. The always-pilot proof
+has 41 steps and 24 new proof nodes, yet its eight first-trial patterns remain
+unused. No newly acquired node belongs to both distinct final proofs. A shorter
+proof is therefore not necessarily cheaper to acquire. Both proofs have depth
+three in changing local coordinates and contain no component decomposition.
+
+All 372 tests pass, including gate, interruption and restart checks. Independent
+full replay checks six trial archives and their union. The union retains every
+trial result: 2,263 patterns, 233 pairs, seventeen inherited missing children
+and an 884-step positive proof for sixteen originals, using 42,033,152 SQLite
+bytes and 2,131,824 compressed bytes. Eight originals remain unknown. The gate
+stays optional: early progress may still hide an expensive continuation, and
+skipping a trial can forgo a beneficial route. Neither the strict decrease
+nor these finite observations supply a global potential, minimum-cost expansion
+guarantee or efficiency bound for arbitrary SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

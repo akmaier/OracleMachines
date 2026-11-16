@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[A progress gate for exploratory trials](research/progress-pilot.md) closes
+connected case 21, raising structural coverage **15/24 -> 16/24**. It matches
+immediate commitment's proof and storage while using **25% fewer new patterns
+and 43% fewer probes** than always trying two routes. Whole-runtime comparisons
+remain inconclusive; the gate stays optional. All **372 tests** pass. Next:
+test whether early progress can conceal an expensive continuation on case 10.
+
 [Transferring the pilot unchanged](research/pilot-transfer.md) closes case 13,
 raising structural coverage **14/24 -> 15/24**, but exposes a regression: the
 pilot adds **37% more patterns and 40% more probes for the same proof**. Local

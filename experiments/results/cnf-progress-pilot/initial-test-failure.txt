@@ -1,0 +1,26 @@
+..E..
+======================================================================
+ERROR: test_increasing_trial_explores_and_cold_resume_matches_uninterrupted (solver.test_cnf_progress_pilot.ProgressPilotTests.test_increasing_trial_explores_and_cold_resume_matches_uninterrupted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_progress_pilot.py", line 71, in test_increasing_trial_explores_and_cold_resume_matches_uninterrupted
+    result = self.finish(h, s)
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_progress_pilot.py", line 26, in finish
+    s.batch(state_limit=128, pair_limit=16)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_progress_pilot.py", line 123, in batch
+    result = super().batch(**kwargs)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_nested_refinement.py", line 127, in batch
+    operation=self.acquire(task['source'],variable);operation['selected_depth']=task['depth']
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_progress_pilot.py", line 119, in acquire
+    self._commit()
+    ~~~~~~~~~~~~^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_pilot_refinement.py", line 64, in _commit
+    tasks=super().frontier()
+          ^^^^^^^^^^^^^^^^
+TypeError: super(type, obj): obj (instance of ProgressPilotRefinement) is not an instance or subtype of type (PilotRefinement).
+
+----------------------------------------------------------------------
+Ran 5 tests in 1.935s
+
+FAILED (errors=1)

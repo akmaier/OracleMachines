@@ -12,7 +12,54 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: decide when another trial is worth acquiring
+## Current investigation: test the limits of the progress gate
+
+[The progress-gated trial](progress-pilot.md) closes connected case **21**, raising
+structural coverage **15/24 -> 16/24**. The rule was frozen before acquisition:
+skip the second trial when the first completed acquisition strictly reduces the
+selected unresolved literal mass, otherwise use the existing two-route pilot.
+Partial work and the original baseline survive cold restart. All trial and
+continuation work shares the unchanged 128-admission / sixteen-operation budget.
+
+The first trial reduces **1141 -> 1099 literals**, so the gate stays on pivot 23.
+Always-pilot tries pivot 17 and sees **1097**, changing routes for a two-literal
+advantage. Gated/committed acquisition is **24 patterns / 100 probes / eight
+assumptions / four splits**, versus **32 / 175 / twelve / six** for always-pilot.
+The gate matches committed operations, proof and stored bytes. The always-pilot
+proof is one step shorter (41 versus 42), but its eight losing-trial patterns
+are unused. The different final proofs share no newly acquired node.
+
+Against always-pilot, local expansion falls **35.25%**, peak RSS **0.65%**, SQLite
+**0.40%** and gzip **0.57%**. Whole-stream means are committed/pilot/gated
+**8.48923 / 8.75818 / 8.62917 s**. Gated versus pilot pair rankings disagree;
+the 1.47% lower mean is not reliable speedup evidence. Gated is 1.65% slower
+than committed in mean whole time despite identical work. Complete auditing
+still takes about **82--83%** of time; two triples cannot isolate small overheads.
+Do not promote the policy or equate acquisition counts with end-to-end savings.
+
+**Next target:** case **10**, random 3-CNF, selected **45-variable / 180-clause /
+557-literal / width-five** residual. All eight children of saved pivots 20, 3,
+17 and 22 exist and remain uncovered. Only the depth-zero original root exists.
+Transfer the unchanged rule and both controls, checking the prefix precondition.
+Look for an early literal decrease that hides an expensive continuation, and
+explain structural differences if policies diverge. The gate is not a potential
+function or a minimum-cost guarantee. Broader nonterminal reuse and efficient
+full-history auditing remain open.
+
+Restore `experiments/results/cnf-progress-pilot/checkpoint.json`: **2,263 patterns /
+233 pairs / seventeen inherited missing children / 16 of 24 originals covered**,
+with an **884-step proof**. Eight originals remain unknown. The union retains all
+48 distinct new patterns and nine splits, using **42,033,152 SQLite / 2,131,824
+gzip bytes**. All **372 tests** pass. Independent full replay checks six archives,
+original bindings, query proofs, complete catalogs, preserved prefixes, shared
+budgets and cold scheduling state. All prior 303 sources, 3,453 artifacts and
+64 proof blocks are unchanged; the new source ledger has 307 entries.
+The new manifest adds **47 artifacts**; the next audit inherits
+**3,500 artifacts / 60 manifests**.
+Checkpoint SHA-256: `2916dc12e35e4339580981da0ae8d36c2b20b0607471811e78f43044731f03e4`.
+Report SHA-256: `e1c00e179d7a1fd0090fe50788c325912cc58216e69e9058df48bf72e42fe633`.
+
+## Previous investigation: decide when another trial is worth acquiring
 
 [The unchanged pilot transfer](pilot-transfer.md) closes case **13**, raising
 structural coverage **14/24 -> 15/24**, but adds work without changing the proof.

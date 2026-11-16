@@ -1,0 +1,28 @@
+{
+  "identical_batch_databases_proofs_and_operations": true,
+  "mode": "nested",
+  "notes": [
+    "One supplemental run per fresh process, not included in the paired local timing means.",
+    "Stream timer includes restoring/checking history, planning, acquisition, graph proofs, row audits, serializing reports, every archive and cold replay.",
+    "Interpreter/import startup and this final resource report are outside the stream timer. Peak RSS includes imports and all phases.",
+    "The residual time contains other bookkeeping and timer boundaries; it is not inferred recognition work.",
+    "This is peak process memory, not isolated live-cache overhead or an asymptotic space bound."
+  ],
+  "other_bookkeeping_seconds": 0.3212376250885427,
+  "parent_report_sha256": "d7408d8982a0aa59a4ba2b5b0138e5e7a4a90d13b4531bf87f58f3ed0e382ab6",
+  "peak_rss_raw": 371310592,
+  "peak_rss_unit": "bytes",
+  "phase_seconds": {
+    "cold_seconds": 12.262085750233382,
+    "compression_seconds": 1.3324821251444519,
+    "operation_seconds": 1.3511379160918295,
+    "startup_seconds": 3.490065125282854
+  },
+  "platform": "darwin",
+  "source_sha256": "fe27d693eab0ebf348c0470df81d00e1e6adadf3db2cfa27beb15101be85b0ff",
+  "stream_report": {
+    "path": "experiments/results/cnf-nested-refinement/lifecycle/nested/run/report.json",
+    "sha256": "e7a45fcd9350b921315256ca549e1efc5ad3fdba590901ca17a2b5f87a47fd8a"
+  },
+  "stream_wall_seconds": 18.75700854184106
+}

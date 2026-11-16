@@ -3906,3 +3906,31 @@ and branch bindings in `cnf-split-registry/next-discovery.json`. The enumeration
 comparison's 643-pattern histories contain fewer alternatives. All previous
 results and 64 proof blocks remain intact; nineteen current originals remain
 unknown. No unrestricted-SAT efficiency claim follows from the runtime saving.
+
+
+## 2026-11-16: nested conditioning closes case 16
+
+[The deeper continuation](nested-conditioning-discovery.md) raises current
+coverage 5/24 -> 6/24. All 59 first-level source pivots leave the original uncovered
+under the fixed recognizer and flat history; nesting eleven new pairs below the
+saved pivot 7 closes it. The original proof has twelve conditional nodes, depth
+five, 265 unary reductions and nine family leaves. This is branch-dependent
+conditional exposure with reductions, not a fixed five-variable backdoor or a
+minimum-depth result. Only the canonical contradiction is shared, on five paths;
+no broad nonterminal reuse is demonstrated.
+
+Nested work uses 2,403 probes, 275 patterns and 22 source assumptions, versus
+2,291, 272 and 110 for the unsuccessful flat control. The successful final
+resumption adds 27 patterns and 215 probes with no fresh source assumption,
+retaining 248 earlier new patterns. All 345 tests pass. Every primary batch archive
+and the union have acquisition-free cold proofs; all old artifacts and 64 proof
+blocks remain unchanged.
+
+Resume from `cnf-nested-refinement/checkpoint.json`: 1,701 patterns, 162 pairs,
+17 inherited missing children and 6/24 coverage. Preserve the flat control's
+unsuccessful records as well. Case 16 is complete; next test the adaptive policy
+on case 17's 60-variable / 255-clause / 765-literal component, with case 22 as a
+control. Eighteen originals remain unknown. The main discovery gap is predicting
+useful adaptive reduction paths; the 265 unary proof steps are a supporting
+storage/checking target. Neither finite success nor shallow observed depth implies
+uniform polynomial expansion on arbitrary SAT.

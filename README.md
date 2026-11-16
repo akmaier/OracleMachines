@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Nested conditional refinement](research/nested-conditioning-discovery.md) closes
+the 59-variable frontier and raises current coverage **5/24 -> 6/24**. Trying all
+59 first-level pivots leaves it uncovered under the same recognizer. The successful
+proof has 12 conditional nodes and depth five, interleaved with 265 checked
+reductions. All **345 tests** pass; both workflows remain preserved.
+
 [Incremental split checking](research/incremental-split-checking.md) reduces mean
 query time **7.413 -> 4.264 seconds** on the same 24-input enumeration stream.
 Database bytes, proofs and **5/24** coverage are unchanged; live cache metadata is

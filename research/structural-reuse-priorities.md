@@ -12,7 +12,53 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: deeper interaction in an uncapped 59-variable residual
+## Current investigation: transfer deeper conditional discovery to case 17
+
+[Nested conditioning](nested-conditioning-discovery.md) closes case 16 and raises
+the current corpus to **6/24** covered originals. The matched flat control tries
+all **55 remaining source pivots**: together with the four saved choices, all
+59 pairs have acquired children but none closes under that flat history and
+recognizer. Nested refinement adds **11 pairs** and reuses interrupted work across
+three bounded batches. This is a finite discovery gain, not a SAT lower bound.
+
+The checked original proof contains **12 conditional nodes / maximum conditional
+depth 5 / 265 unary reductions / 9 distinct family leaves**. The variables are
+branch-dependent and use changing coordinates; do not call this a fixed
+five-variable backdoor. Initially the eight reduced frontier keys are distinct.
+Only the canonical contradiction is shared within the final proof, on five paths;
+there is no observed nonterminal sharing. The old one-level failure was a limit
+of structural exposure, not evidence that no deeper recognized plan exists.
+
+**Next discovery target:** case **17**, the next largest previously measured
+unresolved query, with a **60-variable / 255-clause / 765-literal** selected
+component. Continue from the new union and test transfer of the adaptive policy,
+retaining its failures and charging deeper preparation. Case 22 is another
+uncapped control. Case 16 is complete and must not be restarted as uncovered.
+The exact next source and its four saved pairs are bound in
+`experiments/results/cnf-nested-refinement/next-discovery.json`.
+
+Nested refinement uses **2,403 probes / 275 new patterns / 22 source assumptions**;
+flat acquisition uses **2,291 / 272 / 110**. Thus the success is not a reduction in
+every resource. Mean local expansion is **1.40774 vs 3.54080 s**, with setup, every
+cold archive, compression and supplemental lifecycle measurements reported
+separately. Two nested batches are capped; the final saved-pair resumption adds
+27 patterns and 215 probes with no fresh source assumption. Reducing the 265
+unary proof steps is a supporting storage/checking opportunity, not yet a saving.
+
+Restore `experiments/results/cnf-nested-refinement/checkpoint.json` through
+`experiments.validate_cnf_bootstrap.restore_checkpoint`. It preserves **1,701
+patterns / 162 pairs / 17 inherited missing children**, with a **352-step positive
+proof** and **18 unknown originals**. There is no overlap between the 547 new rows
+of the two workflows, so both the successful and unsuccessful acquisitions are
+retained. The union occupies **32,346,112 SQLite / 1,537,733 gzip bytes**.
+
+All **345 tests** pass, and every primary batch archive and the combined union
+replay without new acquisition. The prior 274 sources, 3,097 artifacts and 64
+manuscript proof blocks remain unchanged. Checkpoint SHA-256: `a362b51025c1c5d386604893de66a8c940902f69b655e484f54fec6115fe4785`.
+Final validation binds **280 sources** and adds **74 manifested artifacts**;
+the next audit inherits **3,171 artifacts / 52 manifests**.
+
+## Previous investigation: deeper interaction in an uncapped 59-variable residual
 
 [Incremental split checking](incremental-split-checking.md) removes the previous
 quadratic route-verification loop. On the same 24-input enumeration stream, mean

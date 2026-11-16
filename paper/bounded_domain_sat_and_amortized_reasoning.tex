@@ -4793,6 +4793,61 @@ choices rather than reacquire the same alternatives. These finite adaptive
 measurements change neither the nineteen remaining unknowns nor the obligations
 for uniformly efficient expansion on arbitrary CNF.
 
+\paragraph{Nested conditional exposure goes beyond the first-level alternatives.}
+The next experiment continues that 59-variable residual from the complete
+1,154-pattern union. Its four saved pivots lead, after stored reductions, to eight
+distinct unresolved keys of 54--58 variables. There is no exact frontier sharing
+among them. A flat control acquires the remaining 55 source pivots, exhausting
+all 59 variables. Every pair has both child records present, but none closes under
+that fixed recognizer and flat history. This is a finite failure of one-level
+structural exposure, not a lower bound on SAT solving.
+
+An optional nested work policy instead follows the saved reductions, commits to
+one split per unresolved source and refines the smallest-support remaining
+obligation. Existing choices survive interrupted batches. The ordinary checked
+route graph determines coverage; scheduling scores never certify it. Both
+workflows allow at most four batches of 128 distinct recognition admissions and
+sixteen pair attempts, with explicit source-assumption closures charged separately.
+Two repetitions reverse workflow order and reproduce the same outcomes.
+
+The nested policy covers the original, raising this corpus from five to six of
+twenty-four covered inputs. It adds eleven pairs, generates 22 source assumptions,
+and stores 126, 122 and 27 patterns across three batches. The first two batches
+reach the recognition limit. The final resumption reuses its saved pair, adds
+215 probes and closes the original without another source assumption. Total
+nested work is 2,403 probes and 275 new patterns, compared with 2,291 probes,
+272 patterns and 110 assumptions for the unsuccessful flat control. Nested
+refinement therefore does not reduce every resource. Mean local expansion is
+1.40774 versus 3.54080 seconds; setup, cold replay, compression and other lifecycle
+bookkeeping remain separate costs. These are equal limits, not equal actual work.
+
+A separate fresh-process control measures the whole stream, including report
+construction and every archive and cold replay: 28.36860 seconds for flat
+acquisition and 18.75701 for nested refinement. Peak process RSS is respectively
+449,069,056 and 371,310,592 bytes on macOS. Batch databases and proofs match the
+primary runs. These are single-run observations; interpreter/import startup is
+outside the stream timer, and peak RSS is not isolated cache overhead or an
+asymptotic space bound.
+
+The successful original has a checked 286-node positive proof: twelve conditional
+nodes, 265 unary reductions and nine distinct family leaves. Conditional depth
+is at most five, interleaved with 130 eliminations, 80 probe rewrites, 52 binary
+path reductions and three polarity changes. Terminal recognition includes Horn,
+2-CNF, zero-valid and one-valid formulas and constant cases, with overlaps retained.
+The branch variables use changing local coordinates after reductions; the depth
+does not identify a fixed set of five original variables or a minimum-depth plan.
+The canonical contradiction is reused on five paths. It is the only shared node:
+290 unfolded step occurrences become 286 distinct nodes. This shows terminal
+reuse, without establishing broad nonterminal sharing across SAT categories.
+
+The preserved workflow union has 1,701 patterns, 162 source pairs and a 352-step
+positive proof for six originals. Its seventeen missing child obligations are
+inherited elsewhere; eighteen originals remain unknown. The two workflows'
+547 new pattern rows have no overlap. All 345 tests pass, and every primary batch
+archive and the union replay without acquisition. The next investigation tests
+transfer to a 60-variable residual. Uniformly small conditional depth, compact
+closure and efficient acquisition for arbitrary CNF remain unproved.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

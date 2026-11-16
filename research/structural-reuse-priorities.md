@@ -12,7 +12,47 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: remaining discovery and the final full audit
+## Current investigation: reuse the covered branch and reduce complete audit work
+
+[Checked canonical form in the cold auditor](canonical-cold-audit.md) closes case
+**19**, raising coverage **11/24 -> 12/24** with **35 patterns / five pairs / ten
+source assumptions / 135 probes**. Its 42-step proof uses six conditional nodes
+at maximum depth three and 35 reductions. Seven steps and one split were already
+stored. Only the contradiction terminal is shared within the proof; larger
+nonterminal reuse remains unestablished. Conditional depth is not a fixed
+backdoor-size claim.
+
+Four alternating-order paired runs give complete audit **6.75146 -> 6.46583 s
+(4.23%)** and whole stream **8.20199 -> 7.88948 s (3.81%)**. Both still perform
+complete independent checking and identical acquisition. The optional canonical
+precheck scans actual sources and falls back to old normalization, trusting no
+parent validity flag. Earlier negative checker-index experiments remain intact.
+Snapshot bytes match. **Mean RSS increases 589,824 bytes (0.153%)**; no memory or
+persistent-storage saving is established. The full audit remains **82.0%** of
+stream time; compression is **9.0%**, local expansion **3.0%**. Further audit
+reuse needs explicit trust/invalidation and a matched complete-check control.
+
+**Next discovery target:** case **6**, random 3-CNF, with a selected **36-variable /
+148-clause / 444-literal / width-three** residual. All eight saved children exist.
+The false child of pivot **13 is already covered**; its true sibling and the
+other six children are not. Start by inspecting that sibling and preserving the
+covered side. Historical enumeration cost ranks this target, not a new cost
+bound. Continue testing whether conditional interactions expose larger shared
+components rather than merely the universal contradiction terminal.
+
+Restore `experiments/results/cnf-canonical-audit/checkpoint.json`: **1,981 patterns /
+199 pairs / 17 inherited missing children / 12 of 24 originals covered**, with a
+**706-step positive proof**. Twelve originals remain structurally unknown.
+The union is **37,580,800 SQLite / 1,883,472 gzip bytes**. All **360 tests** pass;
+all eight trial snapshots, the parent and union independently replay. Earlier
+290 sources, 3,290 artifacts and all 64 manuscript proof blocks are preserved.
+The new checkpoint binds **294 source files** and adds **48 manifested
+artifacts**. The next preservation audit inherits **3,338 artifacts /
+56 manifests**; see its manifest and validation.
+Checkpoint SHA-256: `c18e567e7b3fc7ce177b9e456549e3dc2aebce07703309fabcb22944828e4082`.
+Report SHA-256: `a122327ea37619f87bf15c6f7d4a839ab7f3ada7ba0d6f19526963baeb47aab0`.
+
+## Previous investigation: remaining discovery and the final full audit
 
 [Grouping complete audits](grouped-checkpoints.md) closes cases **23, 18 and 15**,
 raising coverage **8/24 -> 11/24**. Both modes acquire **147 patterns / 21 pairs /

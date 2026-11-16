@@ -5019,6 +5019,54 @@ residual has 58 variables, 276 clauses and maximum width four; its saved childre
 are already present. Uniformly efficient discovery and compact closure for
 arbitrary SAT remain separate, unproved obligations.
 
+\paragraph{Reuse checked canonical form in the complete auditor.}
+Profiling the retained 1,946-pattern archive identifies repeated normalization
+as a substantial part of complete verification. An earlier checked fast path
+already recognizes the normalizer's exact output, but the complete auditor does
+not yet use it. We install it in every current and prepared verifier view of an
+optional cold auditor. It scans the actual clause and literal ordering, checks
+absence of duplicates and opposite literals, and checks dense variable names.
+Accepted inputs already have the required normal form and identity name map;
+other inputs retain the original normalization. This does not recognize arbitrary
+variable isomorphism or logical equivalence. No cached validity flag or parent
+attestation replaces semantic checking. Every stored node, split certificate,
+original binding and positive proof is still checked independently, with
+acquisition forbidden and the database unchanged.
+
+Both modes continue the same random 3-CNF, case 19, from the complete parent
+history. Each closes it in one batch with 35 new patterns, five pairs, ten source
+assumptions and 135 probes, raising coverage from eleven to twelve of twenty-four
+originals. Four paired fresh-process repetitions alternate execution order.
+The mean complete audit falls from 6.75146 to 6.46583 seconds, or 4.23\%, and
+whole-stream time falls from 8.20199 to 7.88948 seconds, or 3.81\%. Whole-stream
+cost includes restoration, expansion, bookkeeping, compression, the independent
+query-proof check and the complete audit; interpreter imports and final summary
+writing are excluded. The separate diagnostic profile and retrospective
+validation are not raw operational timings. Acquisition, proofs and corresponding
+snapshot bytes match. The candidate is faster in all four pairs, but this is
+one existing development input and history, not a universal speedup.
+
+The candidate accepts 3,316 of 6,008 canonicalization calls and falls back on
+2,692. Old-normalizer literal visits fall from 3,682,644 to 2,229,033, while the
+precheck adds 2,207,436 visits. The total counted visits increase; the saving
+comes from avoiding sorting and renaming on accepted sources. Fallback and
+serialization costs remain. Mean peak process RSS rises from 386,387,968 to
+386,977,792 bytes, or 0.153\%. Each snapshot retains 37,580,800 SQLite bytes and
+1,884,969 compressed bytes. There is no persistent-storage or measured memory
+saving. The full audit still takes about 82\% of the candidate stream.
+
+The original case-19 CNF has 60 variables and 276 clauses. Its checked proof has
+42 distinct steps: six conditional nodes, 35 unary reductions and one family
+terminal. The reductions comprise 28 probe steps, four binary-path steps and
+three eliminations. Seven pattern steps and one split were already stored; 35
+pattern steps and five splits are new. Conditional depth three uses changing
+local coordinates and is not a fixed backdoor-size claim. Seven occurrences of
+the contradiction share one terminal, reducing 48 unfolded occurrences to 42
+steps. No larger nonterminal is shared within this proof, and there is no
+component-decomposition step. All 360 tests pass; independent replay checks all
+eight trial archives with the frozen auditor. The change remains optional and
+establishes no new acquisition or storage bound for arbitrary SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

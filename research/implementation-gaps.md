@@ -7866,3 +7866,53 @@ children. One final full audit still takes 59.6% of sequence time; compression
 takes 17.0%. Investigate checked parent reuse plus new-record verification with
 explicit trust and fallback, and profile memory before growing groups. No
 unrestricted-SAT efficiency bound or SAT/UNSAT output claim follows.
+
+## 2026-11-16: case 19 closes; checked canonical form trims the full audit
+
+[Canonical cold auditing](canonical-cold-audit.md) closes case 19 with 35 new
+patterns, five pairs, ten source assumptions and 135 probes in one batch.
+Coverage rises **11/24 -> 12/24**. The 42-step proof has six conditional nodes,
+35 reductions (28 probes, four binary-path steps, three eliminations) and one
+contradiction terminal. It reuses seven retained pattern steps and one split.
+Maximum conditional depth is three, with changing coordinates, not a fixed
+backdoor of size three. Only contradiction is shared within the proof; 48
+unfolded occurrences become 42 steps. Larger reusable components remain open.
+
+A profile of the frozen parent identified repeated normalization as a cost.
+The optional complete auditor now uses the existing checked canonical-source
+fast path in all verifier views. Every actual source is scanned; fallback keeps
+the old normalization. It still independently verifies every node, split,
+original binding and coverage proof. No parent-validity flag or warm cache is
+trusted, and acquisition remains forbidden during checking. Earlier negative
+checker-index experiments are preserved, not repeated without new evidence.
+
+Four alternating-order paired runs give audit time **6.75146 -> 6.46583 seconds
+(4.23%)** and whole-stream time **8.20199 -> 7.88948 seconds (3.81%)**. All
+acquisitions, proofs and corresponding snapshot hashes match. Mean peak RSS
+increases **589,824 bytes (0.153%)**; persistence is unchanged. The fast path
+accepts 3,316 calls and falls back on 2,692. It adds precheck work, so the saving
+is avoided sorting/renaming rather than fewer counted literal visits. The full
+audit still consumes **82.0%** of stream time; compression takes about **9.0%**.
+
+All **360 tests** pass. Independent retrospective replay checks all eight trial
+archives, positive proofs, original bindings, complete reachable catalogs and
+immutable prefixes; parent and union replay also pass. This research validation
+takes 119.72 seconds, outside operational means and partly concurrent with the
+test suite. All previous 290 sources, 3,290 artifacts and 64 manuscript proof
+blocks remain unchanged. There is no inference-default change or new Lean proof.
+
+The new union retains **1,981 patterns / 199 pairs / 17 inherited missing children**
+and a **706-step positive proof for twelve originals**. Twelve remain unknown.
+It occupies **37,580,800 SQLite bytes / 1,883,472 gzip bytes**, growing by 696,320
+and 49,145 bytes respectively relative to the parent. Restore
+`experiments/results/cnf-canonical-audit/checkpoint.json`.
+
+**Next discovery target:** case **6**, random 3-CNF, selected residual
+**36 variables / 148 clauses / 444 literals / width three**. All eight children
+of its four saved pairs exist. The false child of saved pivot **13 is already
+covered**, while its true child is not; the other six children are also uncovered.
+Inspect and reuse that covered side before further acquisition. Historical
+costs rank this target; they do not predict a new runtime bound. Keep broader
+nonterminal reuse and conditional-depth growth as discovery gaps. Audit work
+remains dominant; avoid assuming that more caches or weaker validation will
+improve it. These finite measurements do not establish efficient arbitrary SAT.

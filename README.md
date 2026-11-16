@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Checked canonical form in complete cold auditing](research/canonical-cold-audit.md)
+closes case 19, raising coverage **11/24 -> 12/24**. Four paired runs reduce the
+full audit **4.23%** and whole-stream time **3.81%**, with identical acquisitions,
+proofs and snapshots. Peak RSS rises **0.153%**; storage is unchanged. All **360
+tests** pass. The next discovery target is case 6, where one saved branch is
+already covered and can be reused while investigating its unfinished sibling.
+
 [Sharing full audits across three queries](research/grouped-checkpoints.md)
 raises coverage **8/24 -> 11/24** and reduces measured sequence time
 **24.14 -> 11.65 seconds (51.72%)**. Each positive query proof is checked separately;

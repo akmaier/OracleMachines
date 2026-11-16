@@ -1,0 +1,14 @@
+..F.....
+======================================================================
+FAIL: test_match_materializes_and_repeated_match_reuses (solver.test_cnf_deferred_support.DeferredSupportTests.test_match_materializes_and_repeated_match_reuses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_deferred_support.py", line 55, in test_match_materializes_and_repeated_match_reuses
+    hit=bank.reuse(source);self.assertTrue(hit['inserted']);self.assertFalse(s.solve(source)['answer']);before=rows(s)
+                           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.098s
+
+FAILED (failures=1)

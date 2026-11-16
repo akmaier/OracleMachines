@@ -8619,3 +8619,70 @@ Checkpoint SHA-256: `c27c247ca9b278ab7ce44fab7db020a933dc5dc1a688c4a3e01e5fc85c3
 Report SHA-256: `6d2f204b3476475735747858344b2caaef52e86921b2e7fecf20672e21226692`.
 The new manifest adds **50 artifacts**; the next preservation audit inherits
 **3,923 artifacts / 69 manifests**.
+
+
+## 2026-11-16: support proofs constructed on demand
+
+[Deferred support construction](deferred-support.md) now implements the prior
+highest-priority experiment. On a further 192 unseen constructed inputs, eager
+and deferred policies transfer the same 19 supports to **23 novel targets** and
+reduce fresh expansions **302 -> 177 (41.39%)**. Deferral constructs **209 rather
+than 1,310** support-proof rows, cutting all new rows **1,648 -> 547**. Complete
+time falls **11.43996 -> 10.30105 seconds (9.96%)** against eager construction,
+but remains **9.21% above the old-bank control's 9.43274 seconds**. All three
+matched triples have both effects. Keep the mode optional.
+
+**What is established:** discovery returns the same 104-support antichain without
+publishing derived proofs. A matched proposal must be materialized and checked
+before the frozen subset rule can publish UNSAT. All 209 materialization rows
+are used by this stream's query proof closure; 83 proposed roots remain pending
+in the deferred trial. Eager construction retains 1,101 additional preparation
+rows outside that query closure. This is measured liveness, not a minimum-proof
+guarantee. No prior result is deleted. Guarded answers still require the complete
+source--guard--child evidence.
+
+**Cost limits:** mean query time is 19.22% higher than eager construction because
+needed construction moves to the query, although complete time improves. Mean
+RSS is 3.78% lower than eager, but paired differences change sign; no robust memory
+gain is established. SQLite falls 2.92% and gzip 4.47% against eager. Relative to
+the old bank, mean RSS rises 1.87%, gzip rises 0.17%, and raw sidecars add further
+space. Discovery still costs **1.22612 seconds**, against **0.33067 seconds** of
+query savings over the old bank. Cold replay and compression remain the largest
+phases, at 34.94% and 29.71% of complete deferred time.
+
+**Next acquisition target:** reuse persisted ready supports and source-bound
+proposals, then profile incremental discovery on genuinely new negative sources.
+Do not repeatedly re-extract the existing 104-core bank. Before another global
+recognizer, inspect the **21 unmatched negative queries / 177 expansions** for
+shared conditional supports, particularly template 8 (**90 expansions**). New
+study cases 164 (20), 35/160 (17 each) and 16/136 (16 each) are the largest misses.
+Every measured hit still shares its first origin's guard clause. Cross-guard
+and broad cross-category discovery remain open; constructed neighbouring inputs
+do not demonstrate an efficient partition of arbitrary SAT.
+
+**Comparison scope:** all workers use identical historical **14,630-key**
+pre-acquisition clones. Selection excludes all **768** previous sidecar answers
+and complete roots from the **16,320-key latest authority**, which stays
+preserved with its already-ready bank. This isolates a construction policy,
+not savings from rebuilding an already-paid bank. The new outer timer includes
+final digest and report generation; historical percentages are not composable.
+
+Resume `experiments/results/cnf-deferred-support/checkpoint.json`. Preserve every
+inherited field plus `deferred_support_study`, `deferred_support_decisions`,
+`deferred_support_proposals` and `reference_union`. The union has **16,760 keys /
+51,294,208 SQLite / 4,046,593 gzip bytes**, with 440 new keys and 46 alternate
+certificate occurrences retained in trials. The new catalog has **138 direct
+roots / 54 guarded negatives**. All 104 previously ready cores remain ready in
+the final union; the 83 pending proposals describe only the historical trial.
+
+All **442 tests**, nine full archive checks / **3,456 trial query replays**, every
+union node, **1,037 inherited decisions** and all new decisions pass. Prior
+**353 sources / 3,923 artifacts / 69 manifests** are unchanged. Runtime binds
+357 sources and the analyzer brings the ledger to 358. Structural authority stays
+2,614 patterns / 259 pairs / 17 missing children, original 17/24 / 999 steps,
+separate supplemental 24/24 / 208, and original case 7's discovery pointer.
+All 64 manuscript proof blocks remain unchanged; no new Lean claim.
+Checkpoint SHA-256: `711be45dc4a9e5a79c3c94aaac179ee1a44af1013ca364f9633df8fc97af20cc`.
+Report SHA-256: `3c762d725a6e0f058e309a098f124334a38feee3f4e8856069a2a41a5974bbb7`.
+The manuscript builds to 195 pages without warnings. The new manifest binds
+56 artifacts; the next audit inherits **3,979 artifacts / 70 manifests**.

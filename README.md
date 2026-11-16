@@ -28,6 +28,16 @@ classes.
 
 ## Paper
 
+[Construct support proofs only after a match](research/deferred-support.md).
+On a new 192-input stream, this preserves all 23 transfers while cutting support
+construction **1,310 -> 209 proof rows**. Complete runtime falls **9.96% against
+eager construction**, but remains **9.21% above the old-bank control**. Discovery
+still outweighs the query savings, so the mode remains optional. All **442 tests**
+and 3,456 independent trial replays pass. Resume
+`experiments/results/cnf-deferred-support/checkpoint.json` (16,760 preserved keys).
+The existing ready bank remains available; this measures construction on matched
+historical clones, not rebuilding an already-paid bank.
+
 [Checked cofactor supports extend refutation reuse](research/cofactor-support.md).
 On a further 192 unseen constructed inputs, 16 new transfers cut fresh expansions
 **30.77%** and query time **34.06%**, but preparing the whole bank increases total

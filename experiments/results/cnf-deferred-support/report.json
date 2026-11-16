@@ -1,0 +1,191 @@
+{
+  "cases": {
+    "path": "experiments/results/cnf-deferred-support/cases.json",
+    "sha256": "1373ff7ad7e1b7a20828e519e3b76757c6110a76e206d139442e10c5e454f525"
+  },
+  "protocol": {
+    "path": "experiments/results/cnf-deferred-support/protocol.json",
+    "sha256": "7cdd59d53092cb279542905606293a0f822c032f1c4216d14880be9bd2941141"
+  },
+  "samples": [
+    {
+      "mode": "current",
+      "path": "experiments/results/cnf-deferred-support/current-0/report.json",
+      "repeat": 0,
+      "sha256": "9b6124d94539f9809e0d014dde2f2f6a2f9de7cf4378fdb1e1a02f407fc3fbd9"
+    },
+    {
+      "mode": "eager",
+      "path": "experiments/results/cnf-deferred-support/eager-0/report.json",
+      "repeat": 0,
+      "sha256": "845bdc5710fb70cb9dd55300d3fab61b5354f5b3d96b4daf3a643b7821a2ebad"
+    },
+    {
+      "mode": "deferred",
+      "path": "experiments/results/cnf-deferred-support/deferred-0/report.json",
+      "repeat": 0,
+      "sha256": "1bd904f3165250205feb3157f998ebc9292d23fc0228929aa32cfd5d3859874d"
+    },
+    {
+      "mode": "eager",
+      "path": "experiments/results/cnf-deferred-support/eager-1/report.json",
+      "repeat": 1,
+      "sha256": "2800e0d516a2931e436fa595744729c0eea07953e8bc92f7c14bf90df88bdd70"
+    },
+    {
+      "mode": "deferred",
+      "path": "experiments/results/cnf-deferred-support/deferred-1/report.json",
+      "repeat": 1,
+      "sha256": "6cf514715d575bc3cdc4c5c90b63e2c0dc20241f9f961e519e2a3961b3d02f46"
+    },
+    {
+      "mode": "current",
+      "path": "experiments/results/cnf-deferred-support/current-1/report.json",
+      "repeat": 1,
+      "sha256": "ba2a3165e705e3811bc99b89ede402dcda5770c12d31a4b750e4884a6dd37f2c"
+    },
+    {
+      "mode": "deferred",
+      "path": "experiments/results/cnf-deferred-support/deferred-2/report.json",
+      "repeat": 2,
+      "sha256": "2778f0ac30622bfcd719baa4d9eace6349229fc3a42081261bf4c729eb01e664"
+    },
+    {
+      "mode": "current",
+      "path": "experiments/results/cnf-deferred-support/current-2/report.json",
+      "repeat": 2,
+      "sha256": "a27a09b25b5b2683a494e95a4e6647ff1f383c6f1e074d51e16c054323c6405a"
+    },
+    {
+      "mode": "eager",
+      "path": "experiments/results/cnf-deferred-support/eager-2/report.json",
+      "repeat": 2,
+      "sha256": "f019dd0fa5f72c3c53999535426f752b0a8388cdcfac5c0b9490bffe130dd000"
+    }
+  ],
+  "summary": {
+    "current": {
+      "cofactor_cores": 0,
+      "cofactor_hits": 0,
+      "cofactor_sources": 0,
+      "compressed_bytes": 3784888,
+      "core_hits": 45,
+      "database_bytes": 48214016,
+      "deferred_materialization_nodes": 0,
+      "expanded_nodes": 302,
+      "guard_uses": 54,
+      "mean_bank_seconds": 0.7439305693842471,
+      "mean_cold_seconds": 3.6911697781955204,
+      "mean_complete_peak_rss_bytes": 411566080.0,
+      "mean_complete_worker_seconds": 9.432735417038202,
+      "mean_compression_seconds": 3.0014861246260502,
+      "mean_first_query_seconds": 1.4754496080180008,
+      "mean_peak_rss_bytes": 411566080.0,
+      "mean_preparation_seconds": 6.247622271378835e-07,
+      "mean_query_seconds": 1.6551174965376656,
+      "mean_repeat_query_seconds": 0.17966788851966461,
+      "mean_setup_seconds": 0.8482599582833549,
+      "mean_wall_seconds": 9.337545833395174,
+      "new_nodes": 440,
+      "nodes": 15070,
+      "positive": 93,
+      "preparation_nodes": 0,
+      "queries": 192,
+      "query_new_nodes": 440,
+      "repeat_new_nodes": 0,
+      "retained_cofactor_cores": 0,
+      "row_digest": "daf65ccd90003ab5b96a3dd621bb4afe00629941c6d0e97ef2eeb0eb4a52c8ea",
+      "sidecar_bytes": [
+        5975235,
+        5975210,
+        5975199
+      ],
+      "split_nodes": 93,
+      "target_known": 10,
+      "visits": 2,
+      "witness_publications": 93
+    },
+    "deferred": {
+      "cofactor_cores": 112,
+      "cofactor_hits": 23,
+      "cofactor_sources": 145,
+      "compressed_bytes": 3791179,
+      "core_hits": 45,
+      "database_bytes": 48181248,
+      "deferred_materialization_nodes": 209,
+      "expanded_nodes": 177,
+      "guard_uses": 54,
+      "mean_bank_seconds": 0.7499323470207552,
+      "mean_cold_seconds": 3.598969444166869,
+      "mean_complete_peak_rss_bytes": 419261098.6666667,
+      "mean_complete_worker_seconds": 10.301050527797392,
+      "mean_compression_seconds": 3.0601475552345314,
+      "mean_first_query_seconds": 1.1445867529449363,
+      "mean_peak_rss_bytes": 419261098.6666667,
+      "mean_preparation_seconds": 1.226120541493098,
+      "mean_query_seconds": 1.324445133563131,
+      "mean_repeat_query_seconds": 0.17985838061819473,
+      "mean_setup_seconds": 2.0722712917874255,
+      "mean_wall_seconds": 10.198042180699607,
+      "new_nodes": 547,
+      "nodes": 15177,
+      "positive": 93,
+      "preparation_nodes": 0,
+      "queries": 192,
+      "query_new_nodes": 547,
+      "repeat_new_nodes": 0,
+      "retained_cofactor_cores": 104,
+      "row_digest": "264a379fc1df31683d1b36bb9878edaa96c37b0374816f703e6caa52c8021128",
+      "sidecar_bytes": [
+        6974754,
+        6974752,
+        6974742
+      ],
+      "split_nodes": 56,
+      "target_known": 10,
+      "visits": 2,
+      "witness_publications": 93
+    },
+    "eager": {
+      "cofactor_cores": 112,
+      "cofactor_hits": 23,
+      "cofactor_sources": 145,
+      "compressed_bytes": 3968768,
+      "core_hits": 45,
+      "database_bytes": 49631232,
+      "deferred_materialization_nodes": 0,
+      "expanded_nodes": 177,
+      "guard_uses": 54,
+      "mean_bank_seconds": 0.7496360555912057,
+      "mean_cold_seconds": 3.838538069588443,
+      "mean_complete_peak_rss_bytes": 435737941.3333333,
+      "mean_complete_worker_seconds": 11.4399558751223,
+      "mean_compression_seconds": 3.1554348608478904,
+      "mean_first_query_seconds": 0.9312481361751755,
+      "mean_peak_rss_bytes": 435737941.3333333,
+      "mean_preparation_seconds": 2.2309670974500477,
+      "mean_query_seconds": 1.1109438030980527,
+      "mean_repeat_query_seconds": 0.17969566692287722,
+      "mean_setup_seconds": 3.0789806111715734,
+      "mean_wall_seconds": 11.331831527873874,
+      "new_nodes": 1648,
+      "nodes": 16278,
+      "positive": 93,
+      "preparation_nodes": 1310,
+      "queries": 192,
+      "query_new_nodes": 338,
+      "repeat_new_nodes": 0,
+      "retained_cofactor_cores": 104,
+      "row_digest": "caaf06a100484721fdedd49759ceed8cc0df32491cee27bf42dcf62be73bbe90",
+      "sidecar_bytes": [
+        6956326,
+        6956314,
+        6956304
+      ],
+      "split_nodes": 56,
+      "target_known": 10,
+      "visits": 2,
+      "witness_publications": 93
+    }
+  }
+}

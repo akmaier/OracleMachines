@@ -2516,3 +2516,40 @@ proofs need 118. Deferring derived proofs until a match is an untested candidate
 not an established saving. The acquired 104-core bank is already persistent and
 should be loaded directly for warm comparisons. All prior construction costs
 remain in lifetime accounting, and all historical rows/alternatives are retained.
+
+
+## 2026-11-16: deferred construction and persistent support descriptions
+
+[Deferred support construction](deferred-support.md) separates index discovery
+from derived-proof publication. Discovery still visits 1,075 acquired negative
+proof nodes and performs checked guard restriction, support preimage transport,
+canonicalization and antichain construction. Its cost is a function of the
+acquired proof/literal volume; it is not uniformly polynomial in input size.
+Stored proposals cannot establish UNSAT without a checked core. A match either
+reuses an already checked root or pays for its derivation from a checked origin,
+then pays for the target subset wrapper and guarded recomposition.
+
+The current matcher scans up to 104 raw-coordinate supports per novel target.
+Support state includes selected clauses, bindings, provenance and the discovery
+memo. The frozen extractor shares derived subproofs across matches within the
+owned session, but may construct intermediate results; no minimum-work bound is
+claimed. The full acquired graph and matched derivations can remain exponential.
+Source-bound proposals and proof rows persist independently. The complete
+104-core bank from the preceding authority must be reused directly when available.
+
+On matched historical 14,630-key clones, the same 23 transfers need 209 deferred
+support-proof rows instead of 1,310 eager rows. Total new rows fall 1,648 -> 547;
+complete time falls 9.96% against eager construction but rises 9.21% against the
+old bank. Mean RSS is 3.78% lower than eager, with noisy paired differences, and
+1.87% higher than the old bank. Gzip plus sidecars does not improve against the
+old bank. The latest authority is preserved, not replaced by a historical clone:
+the resulting union has 16,760 keys / 51,294,208 SQLite / 4,046,593 gzip bytes.
+Earlier proof acquisition and every trial alternative remain retained.
+
+Discovery costs 1.22612 seconds here, exceeding 0.33067 seconds of query-time
+savings over the old bank. Persisted discovery reuse and incremental discovery
+on new negative sources are the next acquisition targets. Complete cold audit
+and compression still cost 34.94% and 29.71% of deferred worker time. The new
+outer clock includes final digest/report generation that earlier timings
+excluded. No cumulative speedup, general SAT complexity improvement, or new
+original structural closure follows from this policy comparison.

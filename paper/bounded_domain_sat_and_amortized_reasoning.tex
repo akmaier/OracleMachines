@@ -5998,8 +5998,8 @@ proofs likewise need only 118. Pruning unused nodes from the complete bank
 therefore removes at most 38 nodes. The more promising next experiment is to
 separate support proposals from proof construction, constructing and checking
 an actual refutation only after a residual matches. Unverified proposals must
-never justify an UNSAT answer. That policy has not yet been implemented or
-measured; choosing only the fourteen cores used here would use future workload
+never justify an UNSAT answer. At that checkpoint the policy was not yet implemented or
+measured; choosing only the fourteen cores used there would use future workload
 information and could lose coverage. The current complete bank is preserved
 for later warm reuse rather than being extracted again.
 
@@ -6012,6 +6012,63 @@ structural closure remains 17 of 24 and the separate supplemental corpus 24
 of 24. Preparation is bounded by the acquired proof graph, whose size and
 construction can be exponential; no uniform polynomial-input-size bound or new
 Lean theorem follows.
+
+\paragraph{Support descriptions with deferred proof construction.}
+The follow-up implements that separation. Discovery traverses the checked
+negative proof DAG and records clause indices, canonical roots and source
+bindings without storing derived proofs. A proposal is not a refutation.
+After a target contains the proposed support, the matcher must obtain a checked
+negative core, deriving it from the bound source if necessary. Only then does
+the unchanged subset rule publish a refutation. A guarded result still requires
+its stronger UNSAT premise and checked source--guard--child composition.
+Missing, positive and mismatching sources cannot justify UNSAT. Persisted
+pending proposals can be reopened, but cannot replace their source proofs.
+
+This is a construction-policy ablation on historical 14,630-key clones. The
+latest 16,320-key authority and its already constructed 104-core bank remain
+preserved; ordinary warm reuse should load that bank directly. Selection excludes
+all 768 previous sidecar answers and cached complete roots in the latest
+authority, then takes another 192 neighbouring inputs. Three balanced process
+triples visit each twice. The new outer timer includes final row digest and
+report generation as well as preparation, queries, checking, persistence,
+cold replay and compression. Imports, command-line reads and the wrapper's
+final report rewrite remain excluded. Selection costs 1.70757 seconds separately.
+
+Both support policies transfer the same nineteen cores to 23 novel targets,
+reducing fresh expansions from 302 to 177. Deferred construction stores 209
+support-proof rows instead of 1,310; total new rows fall from 1,648 to 547.
+All 209 are needed by this stream's query proof closure, whereas 1,101 eager
+preparation rows are not. The deferred archive contains 21 proposed roots;
+83 remain pending. This dependency observation is not a general minimum-proof
+guarantee or a selection rule using future queries. Repeated visits add no rows.
+
+Mean complete time is 9.43274 seconds with the old bank, 11.43996 with eager
+construction and 10.30105 with deferred construction. Deferral improves on
+eager construction by 9.96\%, but still costs 9.21\% more than the old bank.
+Every matched triple has both effects. Query time is respectively 1.65512,
+1.11094 and 1.32445 seconds: deferral moves necessary construction into query
+handling while avoiding unused construction. Its mean peak RSS is 3.78\% lower
+than eager construction but 1.87\% higher than the old bank; paired differences
+are noisy and do not establish a reliable memory gain. SQLite size falls
+2.92\% against eager construction, and gzip size falls 4.47\%. Including raw
+sidecars, there is no retained-space reduction against the old-bank control.
+
+All policies return 93 SAT and 99 UNSAT answers, with 54 negative guards. The
+177 remaining expansions occur on 21 negative queries; original template 8
+contributes 90. Each measured transfer shares its first origin's guard clause,
+so broader cross-guard or cross-category coverage remains unestablished.
+Proposal discovery still costs 1.22612 seconds, against 0.33067 seconds of
+query-time savings over the old bank. The mode remains optional. The next
+acquisition target is incremental discovery from genuinely new negative sources,
+reusing the persisted ready bank and source-bound proposals. Discovery,
+materialization and storage remain bounded by the acquired proof graph, whose
+size can be exponential; no uniform polynomial SAT bound follows.
+
+All 442 tests, 3,456 independent trial query replays, every union node and
+1,037 inherited decisions pass with fresh validation search disabled. The
+preserved union grows to 16,760 keys, retaining the already-ready support bank
+and all historical results. Original structural closure stays at 17 of 24;
+the separate supplemental corpus remains 24 of 24. No new Lean theorem is claimed.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}

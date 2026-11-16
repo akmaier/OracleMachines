@@ -1,5 +1,9 @@
 # Checked support reuse between guarded subproblems
 
+Follow-up: [deferred construction](deferred-support.md) implements the next test
+below. It reduces eager construction cost but still regresses against the
+old-bank control. The measurements in this record remain the earlier study.
+
 The new bank reuses a refutation when a previously unseen guarded subproblem
 contains a known UNSAT clause support. It recognizes 16 such inputs in the
 matched stream and saves 72 fresh expansions. Building every support proof in

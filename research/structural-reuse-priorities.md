@@ -12,7 +12,81 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: incremental discovery and old evidence costs
+## Current investigation: active support checks with full cold lineage
+
+[Active support checking](active-support.md) avoids checking unrelated old
+lineage before queries while retaining complete cold proof, query and provenance
+audit. Mean complete time falls **11.52069 -> 10.36579 seconds (10.02%)** versus
+eager checking, and **6.85%** versus the loaded-index control. Every matched
+triple improves. Both extension modes retain identical proof archives and search
+work; no logical check is replaced by an unchecked persisted trust flag.
+
+**Why it is sound:** a match checks the actual core's canonical identity and
+ordinary negative proof before subset publication. Missing roots require checked
+materialization. The current query's guard remains checked online. The cold
+auditor runs the unchanged full proof/query audit, then checks all index origins
+and dominance on the same pinned snapshot before closing it, including on
+failure. Historical lineage is deferred, not removed. All modes pay for the
+complete audit; this timing boundary is broader than earlier benchmarks.
+
+**Measured work:** active preparation normalizes **517,355** literal occurrences
+rather than **1,904,438**, and makes **1,563** database lookups rather than **6,625**.
+Preparation falls **1.78958 -> 0.51719 seconds**. Query time rises **27.91%** as
+checks move to active use, but complete time improves. Mean peak RSS is **7.89%**
+below eager and **5.06%** below loaded; paired eager differences change sign.
+There is no asymptotic memory improvement or persistent-space saving. Gzip plus
+raw sidecars rises **11,657,158 -> 11,894,676 bytes** against loaded.
+
+**Negative discovery result:** 42 new negative sources expand the frontier
+**151 -> 170 entries**, but all modes still make **25 transfers / 187 expansions /
+64 splits**. There are **no additional target hits**. Index growth is not a
+coverage measure. The active method has not been compared with active loading
+without extension, so this run does not establish that growing the bank pays.
+Reuse the acquired 170-entry index rather than rebuilding it for a later claim.
+
+**Next coverage target:** template 12 accounts for **169/187** remaining
+expansions, template 8 for 18 and template 6 for none. Fifteen negative queries
+need 145 expansions; guarded SAT cases **137 and 2** need **26 and 16**. Largest
+negatives are 29 (23), 140 (18), 116 (17) and 149 (15). These are new-catalog IDs.
+Inspect shared conditional structure and retained SAT-witness repair/transfer
+on these residuals, including genuinely different guards. Every measured support
+hit still shares its first origin's guard clause. Broader cross-category coverage
+remains open. For cost work, compare active loading before further acquisition;
+complete cold audit and compression now cost **40.03% / 31.81%** of active time.
+
+All modes return **97 SAT / 95 UNSAT**, with 95 witness publications, 51 old
+full-query core hits and 46 guards (44 negative, two positive). Four targets are
+cached. Extension uses 22 supports for 25 transfers and materializes four roots
+through 13 proof rows. Its frontier has 106 ready roots and 64 pending proposals.
+The comparison uses the latest **17,161-key** union, excludes all **1,152** prior
+sidecar answers and complete cached roots, and visits 192 new constructed
+neighbours twice in three balanced process triples. This is not an arbitrary-SAT
+benchmark, minimum-expansion result or uniform-polynomial guarantee.
+
+Resume `experiments/results/cnf-active-support/checkpoint.json`. Preserve all
+inherited fields plus `active_support_study`, `active_support_decisions` and
+`active_support_proposals`. Load this complete 170-entry index, including pending
+entries and its raw-support/origin history. Its six source catalogs stay in their
+existing order; a subsequent extension must supply only a genuinely new batch.
+The union contains **17,532 keys / 54,337,536 SQLite / 4,206,056 gzip bytes**,
+adding 371 keys while retaining every old payload. Two alternate certificate
+occurrences remain in trial archives. New decisions comprise **146 direct roots /
+46 guards**, including the two SAT cases. The union also has 106 available retained
+roots and 64 pending ones; pending entries cannot justify UNSAT before verification.
+
+All **461 tests**, nine complete archive checks / **3,456 trial query replays**,
+every union node, **1,421 inherited decisions** and all new decisions pass with
+fresh validation search disabled. Prior **364 sources / 4,042 artifacts /
+71 manifests** remain unchanged. Runtime binds 368 sources; the analyzer brings
+the ledger to 369. Structural authority stays 2,614 patterns / 259 pairs / 17
+missing children, original 17/24 / 999 steps, separate supplemental 24/24 / 208,
+and original case 7's discovery pointer. No new Lean claim.
+Checkpoint SHA-256: `ddab750444c8546722ca5d15acee2abbda32455e9dd2dcc785715ebdcfaa62b1`.
+Report SHA-256: `9b616b087f471249cebe07ea6c29a864980c46d3736425e613b6cfa1de556b70`.
+The manuscript builds to 197 pages without warnings; all 64 proof blocks are unchanged.
+The new manifest binds 55 artifacts; next audit inherits **4,097 artifacts / 72 manifests**.
+
+## Previous investigation: incremental discovery and old evidence costs
 
 [Incremental support discovery](incremental-support.md) reuses the saved index
 and extracts supports only from newly acquired negative results. Adding **99**

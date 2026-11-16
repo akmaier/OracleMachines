@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Check matched proofs while retaining the complete audit](research/active-support.md).
+Demand-driven checks reduce total runtime **10.02% versus eager extension** and
+**6.85% versus the loaded-index control**, with identical search work and a full
+cold provenance audit charged in every mode. Growing the index **151 -> 170**
+adds no coverage on this stream. All **461 tests** and 3,456 independent trial
+replays pass. Resume `experiments/results/cnf-active-support/checkpoint.json`
+(17,532 preserved keys). Unresolved template-12 residuals are the next coverage target.
+
 [Incremental support discovery](research/incremental-support.md) extends the saved
 frontier **104 -> 151 entries** and covers four additional targets on a new stream,
 cutting expansions **199 -> 162**. It visits **57.87% fewer extraction nodes** than

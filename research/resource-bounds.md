@@ -2587,3 +2587,39 @@ between verifying the negative core needed by an active match and auditing its
 historical discovery lineage. Future work can separate these responsibilities,
 but must keep ordinary negative-proof checking, complete cold audit and correct
 session invalidation. No new minimum-expansion or unrestricted-SAT bound follows.
+
+
+## 2026-11-16: active premises and complete cold lineage audit
+
+[Active support checking](active-support.md) loads support descriptions as hints,
+constructs their clause sets and checks only actual matching negative cores online.
+Missing cores require checked materialization. New source discovery and current
+query guards remain verified. This removes repeated old-lineage verification
+from online preparation; it does not remove the complete cold lineage audit.
+The latter shares the pinned snapshot and checked proof objects of the frozen
+full proof/query audit, then closes the connection even on failure.
+
+Online costs still include reading/copying the index, old batch identities,
+clause-set construction, containment scans, canonicalization, proof validation
+and any materialization. Cold cost remains dependent on the entire acquired
+proof graph and index lineage. Private append-only live ownership is required;
+there is no persistent unchecked validity cache. Graph size and materialization
+can remain exponential in input size. The improvement is a checking policy,
+not a new unrestricted-SAT or minimum-expansion bound.
+
+Against eager checks, preparation falls 1.78958 -> 0.51719 seconds and total time
+11.52069 -> 10.36579 seconds (10.02%), including full lineage audit. All logical
+and physical proof archives agree. Active query time increases 27.91% because
+some checking moves to use. Mean peak RSS falls 7.89% against eager, with noisy
+paired signs, and 5.06% against loaded. Gzip plus sidecars grows against loaded;
+no persistent-space improvement follows. The preserved union now has 17,532 keys /
+54,337,536 SQLite / 4,206,056 gzip bytes. Prior acquisition and every alternate
+trial remain retained. This broader audit boundary prevents direct composition
+of older timing percentages.
+
+The frontier grows 151 -> 170 but transfers and expansions stay 25 and 187 in
+all modes: the extra acquisition gives no measured coverage gain here. A direct
+active-loader-only comparison remains open. Complete cold audit and compression
+now account for 40.03% and 31.81% of active time; further large total-cost claims
+must account for these phases. Remaining search is concentrated on template 12,
+including two guarded SAT queries which must not be treated as negative cases.

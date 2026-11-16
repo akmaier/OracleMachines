@@ -5342,6 +5342,80 @@ bytes. Seven originals remain unknown. The exact subproofs provide a concrete
 reuse target, without implying compact closure or efficient expansion for
 arbitrary SAT.
 
+\paragraph{Cross-input transfer and the limit exposed by clause edits.}
+A controlled follow-up tests the four saved joins on previously unseen roots.
+For each anchor, replace a clause $A\lor B$ by
+$(A\lor x)\land(B\lor\neg x)$ for fresh $x$. Existential elimination of $x$
+recovers the original clause, with model lifting supplied by the existing rule.
+Three fixed variants per anchor and paired edits deleting a different clause
+give twelve matching preimages and twelve controls. Clauses and literals are
+shuffled, original labels are changed in an order-preserving way, and the fresh
+variable occupies different positions. This is not arbitrary variable-isomorphism
+recognition. Independent checking rejects the original-anchor image for every
+edited control; that rejection neither determines the SAT answer nor excludes
+other reuse.
+
+Both histories start before the case-10 acquisitions, with 2,263 patterns and
+233 split records. One additionally receives exactly the 39 saved proof nodes
+and four split certificates. Every new root is absent from both histories and
+from the later full authority. The unchanged solver receives only the CNF,
+without construction witnesses or anchor labels. Ordinary acquisition has a
+128-admission limit, followed when needed by at most two scoped continuation
+batches of 128 admissions and sixteen operations each. These are separately
+charged stages, bounded by 384 admissions per query visit. Two fresh-process
+repetitions reverse history order. Each processes all 24 inputs and then repeats
+them, checking every query proof and auditing the complete archive at stream end.
+
+Both histories structurally cover all 24 constructed inputs with identical
+proofs. Preloading reduces new patterns from 206 to 171, probes from 1,132 to
+978, and newly acquired splits from fourteen to ten. Three first encounters
+account for all 35 avoided acquisitions: twelve nodes below the 27-variable
+anchor, ten descendants below the 32-variable anchor, and thirteen below the
+39-variable anchor. The 32-variable route bypasses its first two saved nodes;
+the four-variable anchor is unused. Every avoided node is an exact preloaded
+row that the control reconstructs. Later inputs reuse what either history has
+already acquired. Both second visits require zero new patterns, zero splits
+and zero probes, while lookup, proof reconstruction and checking remain charged.
+
+The clause-deletion controls receive no acquisition reduction. They consume
+136 of the treatment's 171 new patterns and 768 of its 978 probes. The largest,
+case 13, has 33 variables, 95 clauses and 274 literals of width at most four;
+it needs 29 patterns and 218 probes. The next structural question is which
+dependencies survive the edit, and whether a checked shared residual or
+transported split can avoid reconstructing the affected region. Dimensions or
+a projection on the unedited input provide no such certificate. Some positive
+preimages also miss their specified anchor under the default reduction order
+despite a valid one-pair projection, leaving a discovery as well as a lookup gap.
+
+Mean solve-and-bookkeeping time falls from 3.26149 to 3.11546 seconds, or 4.48\%.
+Whole-stream means are 14.47562 and 14.33176 seconds, only 0.99\% apart. Both
+paired differences have the same sign, but two repetitions cannot establish a
+reliable small runtime effect. Complete auditing takes about 52\% of total time.
+Peak RSS rises from 463,216,640 to 463,994,880 bytes. Final SQLite storage rises
+from 44,937,216 to 44,978,176 bytes, and gzip storage from 2,265,225 to 2,276,240
+bytes. The treatment ends with the control's complete inventory plus four
+unused preloaded nodes and an identical split catalog. Avoided acquisition
+therefore does not imply lower retained memory.
+
+The clock includes restoration, recognition, solving, experimental bookkeeping,
+query checks, full auditing and archival completion. Residual overhead remains
+charged in the whole-stream measure; imports and final report writing are
+excluded. Preparing both audited seeds and the inputs costs another 16.01400
+seconds, recorded separately without a per-mode allocation. Historical acquisition
+remains in the preceding experiments. These costs prevent claiming a net
+acquisition-plus-use speedup from the local comparison alone.
+
+The final union starts from the latest authority and preserves every trial
+addition. It contains 2,614 patterns and 259 pairs, using 47,181,824 SQLite bytes
+and 2,375,854 compressed bytes. The original corpus remains at 17 of 24 covered,
+with its 999-step proof and seventeen inherited missing children. A separately
+bound 208-step proof covers the 24 constructed inputs; these denominators must
+not be merged into a broader-coverage claim. All 376 tests pass. Independent cold
+validation checks both seeds, all four streams, 192 query-proof replays, complete
+catalogs, image rejection controls and the union. This establishes cross-input
+reuse under exact checked boundaries. Structural flags do not supply SAT/UNSAT
+answers or an efficient classification of arbitrary CNFs.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -8190,3 +8190,55 @@ scalar threshold to these cases. The independent discovery pointer is **case 7**
 with selected **33 variables / 152 clauses / 470 literals / width four**. All
 saved children exist; pivot 14's true child is covered and seven remain open.
 Only its depth-zero original root exists. No arbitrary-SAT efficiency claim follows.
+
+
+## 2026-11-16: cross-input join transfer and clause-edit limits
+
+[Cross-input join transfer](join-transfer.md) avoids **35 acquisitions and 154
+probes** on 24 distinct constructed CNFs. The unchanged solver receives only
+CNFs. Its two matched histories differ by exactly **39 saved proof nodes and
+four splits**. All 24 query proofs match across histories; the second visit
+acquires nothing. Acquisition falls **206 -> 171**, probes **1132 -> 978**.
+Three first encounters account for the entire difference: twelve, ten and
+thirteen saved nodes below the 27-, 32- and 39-variable joins. The small anchor
+and two nodes above the useful 32-variable descendants remain unused.
+
+**Highest next discovery target:** clause-deletion controls receive no
+acquisition saving and account for **136/171 new patterns and 768/978 probes**.
+Inspect constructed **case 13** (33 variables / 95 clauses / 274 literals /
+width four, 29 new patterns / 218 probes) against its matching preimage. Determine
+which clause dependencies block transfer, and seek an exact shared residual or
+checked split transport. An edit invalidating one projection does not exclude
+all reuse. Keep variable maps, boundary checks and proof dependencies explicit.
+Original **case 7** remains a separate broader coverage control, with seven
+open saved children and pivot 14's true child already covered.
+
+**Largest measured whole-stream cost:** full cold auditing, about **52%** of
+14.48/14.33 seconds. Mean solve/bookkeeping falls 4.48%, but whole runtime only
+0.99%; two pairs do not establish a reliable small timing effect. RSS rises
+0.168%, SQLite 0.091% and gzip 0.486%. The treatment ends with all control rows
+plus four unused preloaded nodes. Seed preparation takes **16.014 seconds**
+separately and historical acquisition remains charged. This is a local reuse
+saving, not a demonstrated net acquisition-plus-use or memory improvement.
+
+**Secondary opportunity:** some positive preimages miss their specified anchor
+under the default reduction order despite a checked one-pair projection. Reuse
+the earlier projection infrastructure cautiously; its expensive global-index
+preparation and negative frontier results remain preserved. Do not tune a new
+route heuristic on these 24 constructed cases alone.
+
+Restore `experiments/results/cnf-join-transfer/checkpoint.json`: **2,614 patterns /
+259 pairs / seventeen inherited missing children**, preserving all earlier rows
+and all trial additions. Original structural coverage remains **17/24**, with
+the same **999-step proof**. The separate 24 constructed inputs have a **208-step
+proof**, bound by `supplemental_queries` and `supplemental_proof`. Preserve both
+catalogs in later unions. Storage is **47,181,824 SQLite / 2,375,854 gzip bytes**.
+All **376 tests**, four independent stream reconstructions and 192 query-proof
+replays pass. Prior 309 sources, 3,550 artifacts / 61 manifests and all 64
+manuscript proof blocks remain unchanged. Runtime binds 313 sources; the final
+ledger also binds the post-hoc analyzer and supplemental replay checker (315). Synthetic structural
+coverage does not imply efficient arbitrary SAT or supply SAT/UNSAT answers.
+Checkpoint SHA-256: `5bd57b9b2bf1007a4b447764c40d8c4d920450f6f90699342926218c41b9a652`.
+Report SHA-256: `98eb6b23f6bcb2d80c9dc7714bad65ce5de37c6fb0875cdd8e9ee7c4160cf346`.
+The new manifest adds **38 artifacts**; the next audit inherits **3,588 artifacts /
+62 manifests**. The manuscript builds to **186 pages**.

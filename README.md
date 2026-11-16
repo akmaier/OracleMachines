@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Saved subproofs transfer across new inputs](research/join-transfer.md): on 24
+constructed CNFs, preloading exact joins avoids **35 pattern acquisitions and
+154 probes**, with identical structural proofs. Whole runtime falls only 0.99%
+in two paired runs, while storage rises slightly. Edited controls gain no
+acquisition saving and now dominate the remaining work. **376 tests** and cold
+replay pass; original-corpus coverage remains **17/24**. Current checkpoint:
+`experiments/results/cnf-join-transfer/checkpoint.json`.
+
 [Case-10 transfer exposes exact nonterminal joins](research/progress-transfer.md),
 raising structural coverage **16/24 -> 17/24**. The gate costs more than immediate
 commitment, but the different proofs rejoin at **four formulas and share 39 new

@@ -5185,6 +5185,48 @@ input, with both positive and negative prior controls preserved, is required
 before adoption. This one development result supplies no optimality or
 unrestricted-SAT acquisition bound.
 
+\paragraph{The pilot's acquisition saving does not transfer automatically.}
+We next apply the unchanged scheduler, acquisition rules, checker and budgets
+to case 13, another known development input. Its original has 48 variables and
+211 clauses; the selected residual has 47 variables, 213 clauses and 649 literals.
+Eight saved children exist, and pivot 41 already has one covered child. The two
+leading routes have remaining-literal scores 610 and 1141. The pilot's first
+trial costs six admissions and 32 probes, leaving one obligation and 539 literals.
+Its second costs ten admissions and 51 probes, leaving two obligations and 1084
+literals. It still chooses pivot 41. In both repetitions its operation sequence
+is exactly the committed control's sequence with the second trial inserted
+after the first operation.
+
+Both methods produce the same 38-step proof and raise structural coverage from
+fourteen to fifteen of twenty-four originals. The pilot nevertheless acquires
+37 patterns and four split records, versus 27 and three for the control, and
+performs 179 probes instead of 128. Its ten extra patterns add no coverage in
+this corpus and are unused by the target proof; they remain stored, with future
+reuse unproven. The proof comprises four conditional nodes, 32 unary reductions
+and two family terminals: contradiction and a five-variable residual that is
+both dual-Horn and one-valid. Eleven proof steps predate this continuation.
+Only contradiction is shared within the proof. Conditional depth four uses
+changing local coordinates and supplies no fixed backdoor-size bound.
+
+Two reversed-order pairs give local expansion means of 0.13244 and 0.18168
+seconds, a 37.18\% increase for the pilot. Mean peak RSS rises 0.40\%, total
+SQLite size 0.41\%, and compressed size 0.53\%. Whole-stream means are 8.33858
+and 8.24283 seconds, but the paired comparisons disagree: 8.28561/8.36781 and
+8.39155/8.11785 seconds. The smaller pilot mean coincides with lower measured
+audit time; it does not establish that this extra exploration improves total
+runtime. Complete cold auditing accounts for about 83--84\% of either stream.
+All trial work, restoration, checking and persistence remain charged as before.
+
+Independent replay and all 367 tests pass. The union preserves 2,215 patterns,
+224 pairs, seventeen inherited missing children and an 844-step positive proof
+for fifteen originals, occupying 41,099,264 SQLite bytes and 2,073,167 compressed
+bytes. Nine originals remain unknown. This regression motivates testing when a
+second trial is worth acquiring: the first trial increased unresolved literal
+mass in case 11 but reduced it here. Using that change to gate further exploration
+is a hypothesis for the next connected mixture, not a validated rule. Neither
+finite coverage nor this optional scheduling heuristic establishes efficient
+expansion for arbitrary SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

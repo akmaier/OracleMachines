@@ -8018,3 +8018,49 @@ All eight saved children exist; pivot 41's true child is covered, the other seve
 are not. Both original roots exist. Check the unary-prefix precondition and
 charge all trial work. Broader replication is needed before adopting the pilot;
 known negative controls and worst-case acquisition/space gaps remain open.
+
+## 2026-11-16: pilot transfer exposes the cost of an unnecessary trial
+
+[The unchanged pilot on case 13](pilot-transfer.md) raises structural coverage
+**14/24 -> 15/24**, but gives the same 38-step proof as committing immediately.
+Both choose saved pivot 41. Committed/pilot totals are **27/37 new patterns,
+128/179 probes, six/eight source assumptions and three/four splits**. The pilot
+inserts exactly one alternative trial after the first operation, then performs
+the same continuation. Its ten extra patterns add no measured corpus coverage
+and are unused by this proof. They remain stored; future reuse is unproven.
+
+Local expansion rises **37.18%** (0.13244 -> 0.18168 seconds), peak RSS **0.40%**,
+SQLite **0.41%** and gzip **0.53%**. Whole-stream means are 8.33858/8.24283 seconds,
+but the two paired comparisons disagree on the faster mode. Do not claim the
+small mean difference as a reliable total-time gain. Complete auditing remains
+about **83--84%** of time. Both modes use the same full parent, frozen policy,
+shared budgets and independent checks; this is a known development input.
+
+The proof uses four conditional nodes, 32 unary reductions and two terminals:
+contradiction and a five-variable dual-Horn/one-valid residual. Eleven steps and
+one split predate this continuation; 27 steps and three splits are new. Only
+contradiction is shared within the proof. Depth four uses changing coordinates,
+not a fixed backdoor bound. Identical proofs on the same original do not establish
+new cross-input reuse, and structural coverage is not a SAT/UNSAT output API.
+
+All **367 tests** pass. Frozen independent replay checks the parent, four trial
+archives, union, query proofs, original bindings, reachable catalogs, immutable
+prefixes, cold pilot phases and shared budgets. Validation takes 76.24 seconds
+outside timing, partly concurrent with tests. The acquisition-free preflight
+costs another 0.15935 seconds separately. All 302 prior sources, 3,417 artifacts
+and 64 manuscript proof blocks remain unchanged. Only a transfer driver is added.
+
+Restore `experiments/results/cnf-pilot-transfer/checkpoint.json`: **2,215 patterns /
+224 pairs / seventeen inherited missing children**, with an **844-step proof for
+fifteen originals** and **41,099,264 SQLite / 2,073,167 gzip bytes**. Nine remain
+unknown. Every losing-trial result is retained.
+
+**Next:** decide when a second trial is worth acquiring, tested against committed
+and always-pilot controls on **case 21, a connected binary mixture**. Its selected
+residual has **45 variables / 201 clauses / 616 literals / width four**. All eight
+saved children of pivots 2,1,23,17 are present and uncovered; only the depth-zero
+original root exists. Check the pilot prefix precondition. A gate based on whether
+the first trial reduces unresolved literal mass is a post-hoc hypothesis only:
+case 11 grew 1106 -> 1535; case 13 shrank 610 -> 539. Freeze the gate before new
+acquisition. The earlier case-6 counterexample rules out trusting covered-child
+presence alone. No default policy or unrestricted-SAT guarantee changes.

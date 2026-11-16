@@ -12,7 +12,49 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: transfer the bounded pilot and test its limits
+## Current investigation: decide when another trial is worth acquiring
+
+[The unchanged pilot transfer](pilot-transfer.md) closes case **13**, raising
+structural coverage **14/24 -> 15/24**, but adds work without changing the proof.
+Committed/pilot counts are **27/37 new patterns, 128/179 probes, six/eight source
+assumptions and three/four splits**. Both choose saved pivot 41 and produce the
+same 38-step proof. The pilot inserts exactly one extra trial after the first
+operation; its ten extra patterns add no measured corpus coverage and are unused
+by the proof. All results remain stored; future reuse is unproven.
+
+Local expansion rises **37.18%**, peak RSS **0.40%**, total SQLite **0.41%** and
+gzip **0.53%**. Whole-stream means are **8.33858/8.24283 s**, but the two paired
+runs disagree on which mode is faster. The small mean difference is unresolved,
+not a reliable speedup. Complete cold auditing still uses about **83--84%** of
+time. Broader shared nonterminal structure remains unobserved in these proofs.
+
+**Next target:** case **21**, a connected binary mixture with selected
+**45-variable / 201-clause / 616-literal / width-four** residual. All eight saved
+children of pivots 2, 1, 23 and 17 exist and remain uncovered. The depth-zero
+original root exists; the optional depth-one root does not. Check the pilot's
+prefix precondition. Test a progress-sensitive trial gate against committed and
+always-pilot controls, preserving shared budgets and every acquired state.
+One possible gate tries another route only when the first completed step fails
+to reduce unresolved literal mass: case 11 grew 1106 -> 1535, case 13 shrank
+610 -> 539. This is a **post-hoc hypothesis, not a validated policy**. Freeze it
+before the next acquisition. Covered-child presence alone is insufficient, as
+the earlier case-6 counterexample shows. No minimum-cost or arbitrary-SAT bound
+follows from these development inputs.
+
+Restore `experiments/results/cnf-pilot-transfer/checkpoint.json`: **2,215 patterns /
+224 pairs / seventeen inherited missing children / 15 of 24 originals covered**,
+with an **844-step proof**. Nine originals remain unknown. Union storage is
+**41,099,264 SQLite / 2,073,167 gzip bytes**, retaining 37 new patterns and four
+splits from both arms. All **367 tests** pass. The frozen independent validator
+replays all four archives, positive proofs, original bindings, complete catalogs,
+shared budgets and cold pilot state. Prior 302 sources, 3,417 artifacts and
+64 manuscript proof blocks remain unchanged; the new ledger binds 303 sources.
+The new manifest adds **36 artifacts**; the next audit inherits
+**3,453 artifacts / 59 manifests**.
+Checkpoint SHA-256: `3882197b783780457b4a2719fe8ef02e9abb00e1c5662d866ac38de5cfd25a33`.
+Report SHA-256: `724cf369e17c738d0571de212fd021b9c348e73eca6a3f5bd25b2d7d265c3a49`.
+
+## Previous investigation: transfer the bounded pilot and test its limits
 
 [The charged pilot](pilot-refinement.md) improves case **11** and raises coverage
 **13/24 -> 14/24**. It completes one nested acquisition on each of two saved

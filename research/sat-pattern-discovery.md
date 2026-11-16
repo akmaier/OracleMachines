@@ -3882,3 +3882,27 @@ validator's archive-path collision was repaired with byte-identical original see
 reconstruction; the failure and recovery are preserved separately. The final
 checkpoint and all earlier results remain usable. No arbitrary-SAT efficiency
 bound, SAT/UNSAT verdict or new Lean refinement is claimed.
+
+
+## 2026-11-16: incremental split checking removes repeated route work
+
+[The matched registry comparison](incremental-split-checking.md) reduces mean
+query time 7.41290 -> 4.26395 seconds and split checks 3,913 -> 258, while preserving
+candidate choices, 3,946 probes, 558 new patterns, all archive bytes, positive
+proofs and 5/24 coverage. Live metadata is additional; there is no persistent-space
+or peak-RAM reduction. Cold proof checking is unchanged. All 341 tests and nine
+cold archives pass, including pending-child activation without a new pair,
+invalidations and acquisition-free replay.
+
+The next discovery target is case 16, the largest mean unresolved query after
+optimization: 0.31922 seconds, 205 probes and 27 admissions, below the cap. Its
+59-variable / 245-clause / 743-literal selected component has four saved splits
+with all eight child records present, but none covered under the full retained
+union. Follow existing reductions and investigate deeper interaction; do not
+repeat these acquisitions. Cases 17 and 22 are useful uncapped controls.
+
+Restore the unchanged 1,154-pattern / 96-pair parent union, using the exact source
+and branch bindings in `cnf-split-registry/next-discovery.json`. The enumeration
+comparison's 643-pattern histories contain fewer alternatives. All previous
+results and 64 proof blocks remain intact; nineteen current originals remain
+unknown. No unrestricted-SAT efficiency claim follows from the runtime saving.

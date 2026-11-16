@@ -1,0 +1,14 @@
+..F...
+======================================================================
+FAIL: test_external_writer_policy_schema_and_uncommitted_changes (solver.test_cnf_split_registry.SplitRegistryTests.test_external_writer_policy_schema_and_uncommitted_changes) (operation='external')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_split_registry.py", line 108, in test_external_writer_policy_schema_and_uncommitted_changes
+    with self.assertRaises(ValueError):registry.refresh()
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.120s
+
+FAILED (failures=1)

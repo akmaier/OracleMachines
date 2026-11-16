@@ -12,7 +12,45 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse checked conditioning records incrementally
+## Current investigation: deeper interaction in an uncapped 59-variable residual
+
+[Incremental split checking](incremental-split-checking.md) removes the previous
+quadratic route-verification loop. On the same 24-input enumeration stream, mean
+query time falls **7.41290 -> 4.26395 seconds (42.5%)** over three paired repetitions.
+Split checks fall **3,913 -> 258**, with identical variables, admissions, probes,
+pending flags, archive bytes and positive proofs. Coverage remains **5/24**.
+The live registry adds metadata; no memory or persistent-space reduction is
+claimed. Independent cold proof checking remains unchanged.
+
+**Next discovery target:** case **16** is the largest mean unresolved query at
+**0.31922 s / 205 probes / 27 admissions**. It is **not capped**. Its selected
+component has **59 variables, 245 clauses and 743 literals**. The four saved
+pivots (7, 37, 5 and 51) have all eight child records present; all remain open even
+under the complete 1,154-pattern union. Follow their existing reduction edges and
+investigate deeper conditioning or interaction summaries. Repeating these four
+acquisitions or merely increasing the same uncapped allowance cannot improve this
+fixed policy. Cases 17 and 22 provide adjacent, also-uncapped controls.
+
+The exact source and branches are bound in
+`experiments/results/cnf-split-registry/next-discovery.json`. Restore the unchanged
+parent `cnf-bootstrap-conditioning/checkpoint.json` through its existing helper,
+preserving all **1,154 patterns / 96 pairs / 17 missing children**. The smaller
+enumeration-only histories contain 643 patterns, 86 pairs and one missing child;
+do not substitute them for the richer union when continuing discovery.
+
+**Remaining runtime cost:** fresh cofactor acquisition and recognition/checking
+now dominate the query profile. Route maintenance takes only **0.09428 s** of
+the **4.26395 s** stream. Cold replay still costs about **2.1 s**, and complete
+row audits and table-count guards remain charged. The registry is optional and
+requires exclusive append-only inventory ownership; no general time bound follows.
+
+All **341 tests** and nine cold archives pass; every previously bound source,
+artifact and the 64 manuscript proof blocks remain unchanged. The previous
+42-input and 83-source completions are still complete. Report SHA-256: `1bc0bd946f4b38f9f70144d3dd9f537913c1d93217c625781de4e1c45ae3c5d4`.
+Validation binds **274 source files** and adds **30 manifested artifacts**;
+the next preservation audit inherits **3,097 artifacts / 51 manifests**.
+
+## Previous investigation: reuse checked conditioning records incrementally
 
 [Broader source conditioning](bootstrap-conditioning.md) removes the previous
 binary-clause prerequisite: all **24/24** selected residuals have candidates.

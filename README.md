@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Incremental split checking](research/incremental-split-checking.md) reduces mean
+query time **7.413 -> 4.264 seconds** on the same 24-input enumeration stream.
+Database bytes, proofs and **5/24** coverage are unchanged; live cache metadata is
+additional. All **341 tests** pass. The next discovery target is an uncovered
+59-variable residual whose four saved splits are already fully acquired.
+
 [Broader conditioning candidates](research/bootstrap-conditioning.md) now cover
 5/24 inputs versus ordinary depth one's 4/24 in a supplemental comparison.
 Enumeration uses fewer probes and stored patterns, but takes longer. Profiling

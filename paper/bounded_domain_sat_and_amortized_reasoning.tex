@@ -4959,6 +4959,66 @@ Sixteen originals remain unknown; the next is a connected binary mixture with a
 59-variable residual, where shared-variable interaction replaces the convenient
 disjoint decomposition. No unrestricted-SAT acquisition bound follows.
 
+\paragraph{Share a complete audit across a bounded query group.}
+The next comparison continues the connected mixture and two random 3-CNFs in
+one live inventory, using the same scoped refinement policy and full parent
+history in both modes. Each input permits four batches of 128 recognition
+admissions and sixteen pair attempts. The control completely audits the archive
+after each batch; the grouped mode does so once at group end. Both independently
+check every issued positive coverage proof on its exact snapshot, bind the original
+CNF to its root, forbid fresh acquisition during checking, and retain every
+intermediate archive. Earlier history acquisition remains charged in the parent
+experiments; restoration and access belong to the current sequence.
+
+Grouping changes the time at which unrelated history is certified. The first
+two grouped snapshots are retained but not globally certified during the stream;
+unrelated semantic corruption may remain undetected until the final full audit.
+Only after that audit passes is the globally verified checkpoint published.
+Tests demonstrate this distinction between a valid query proof and a corrupt
+unrelated record. An empty positive proof carries no negative SAT verdict.
+In an additive cost model with matched other work, grouping replaces the sum of
+complete audits at all snapshots by the complete audit of the final snapshot.
+Every query-proof check and snapshot-persistence cost remains.
+
+All three inputs close in one batch, raising coverage from eight to eleven of
+twenty-four originals. Each workflow adds 147 patterns and 21 pairs, using 42
+source assumptions and 707 probes. Two reversed fresh-process repetitions give
+mean whole-sequence times of 24.13644 and 11.65332 seconds, a 51.72\% reduction.
+Complete cold auditing falls from 19.32980 seconds across three audits to 6.94599
+for the final audit. The three individual query-proof checks take 0.67058 versus
+0.69552 seconds, local expansion 1.01401 versus 1.01044, and compression 1.99614
+versus 1.97996. Acquisition, proofs and all corresponding snapshot bytes match.
+The timer includes all operational phases except interpreter imports and the
+final summary write. A separate retrospective validator fully checks all twelve
+intermediate archives; its 165.97 seconds are outside these paired stream means.
+
+There is a measured memory regression: mean peak process RSS rises from
+453,582,848 to 488,505,344 bytes on macOS, or 7.70\%. RSS includes imports, report
+construction and all checking phases. Two repetitions do not establish the
+cause of the increase. Each mode retains 5,342,834 compressed bytes across three
+snapshots, so grouping saves no persistent storage. The final audit still takes
+59.6\% of grouped sequence time, and compression takes 17.0\%.
+
+The connected original has a 73-step proof with eight conditional nodes,
+63 unary reductions and two family leaves, without a decomposition step. It
+exposes eight contradiction occurrences and a five-variable 2-CNF leaf. The two
+random inputs have 45- and 73-step proofs. Their leaves include contradiction,
+a twelve-variable Horn/zero-valid formula, and an eight-variable formula recognized
+as both zero-valid and one-valid. Conditional depths are four, four and five,
+with changing local coordinates; these are not fixed backdoor sizes. Only the
+contradiction is shared within each proof. None of the later query proofs uses
+a pattern newly acquired by an earlier query in this group: the measured gain
+comes from audit reuse, while broad nonterminal reuse remains unestablished.
+
+The union retains 1,946 patterns, 194 pairs, seventeen inherited missing children
+and a 665-step positive proof for eleven originals. Its serialization occupies
+36,884,480 SQLite bytes and 1,834,327 compressed bytes. All 356 tests pass, and
+the parent, all twelve intermediate archives and the union pass independent
+acquisition-free checks. Thirteen originals remain unknown. The next selected
+residual has 58 variables, 276 clauses and maximum width four; its saved children
+are already present. Uniformly efficient discovery and compact closure for
+arbitrary SAT remain separate, unproved obligations.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

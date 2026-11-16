@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Sharing full audits across three queries](research/grouped-checkpoints.md)
+raises coverage **8/24 -> 11/24** and reduces measured sequence time
+**24.14 -> 11.65 seconds (51.72%)**. Each positive query proof is checked separately;
+complete archive validation moves to group end. Acquisitions and snapshots match,
+while mean peak RSS rises **7.70%**. All **356 tests** pass. Cross-query reuse of
+new components remains unobserved; case 19 is the next discovery target.
+
 [Checking only the reachable split graph](research/scoped-refinement.md) closes
 case 22 and raises coverage **7/24 -> 8/24**. Complete measured time falls
 **12.60 -> 6.95 seconds (44.85%)**, with identical acquisitions and proofs and a

@@ -7830,3 +7830,39 @@ checkpoint and bound successor. Full cold checking now takes about 86% of scoped
 stream time; sharing a guarded session and complete audit across queries is the
 next cost opportunity, requiring a separate matched test. No uniform arbitrary-SAT
 efficiency bound, new Lean refinement or new SAT/UNSAT output API is claimed.
+
+
+## 2026-11-16: grouped audits close three originals with a memory tradeoff
+
+[Sharing the complete audit](grouped-checkpoints.md) closes cases 23, 18 and 15,
+raising coverage 8/24 -> 11/24. Both workflows add 147 patterns and 21 pairs with
+42 source assumptions and 707 probes. Each query proof is checked independently
+on its exact snapshot; every intermediate archive remains stored. Full auditing
+moves from every batch to group end, reducing sequence time 24.13644 -> 11.65332
+seconds (51.72%). All acquisitions, proofs and snapshot bytes match. Unrelated
+corruption detection is delayed; the grouped intermediate archives are not
+globally certified during execution. Final publication requires the full audit.
+
+Mean peak RSS rises 7.70%, from 453.58 to 488.51 MB, and persistent bytes are
+unchanged. Preserve this regression. A separate retrospective validator fully
+checks all twelve prefixes, original bindings, immutable history and reachable
+catalogs; its 165.97-second validation cost is outside paired stream timings.
+All 356 tests pass. Earlier artifacts, source files and 64 proof blocks remain
+unchanged; no inference default or new Lean refinement is introduced.
+
+The connected input closes through eight conditional nodes and 63 reductions,
+with no decomposition step. Its leaves expose contradiction and a five-variable
+2-CNF. The random cases add Horn/zero-valid and zero/one-valid family overlaps.
+Depths four, four and five are branch-dependent, not fixed backdoor sizes. Only
+the contradiction is shared within each proof; no later proof uses a newly
+acquired pattern from an earlier query. The saving is audit reuse, with broader
+nonterminal reuse still open.
+
+The union retains 1,946 patterns, 194 pairs, seventeen inherited missing children
+and a 665-step proof for eleven originals; thirteen remain unknown. Resume from
+cnf-grouped-checkpoints/checkpoint.json. Case 19 is next, with a 58-variable /
+276-clause / 841-literal / width-four residual and eight present, uncovered saved
+children. One final full audit still takes 59.6% of sequence time; compression
+takes 17.0%. Investigate checked parent reuse plus new-record verification with
+explicit trust and fallback, and profile memory before growing groups. No
+unrestricted-SAT efficiency bound or SAT/UNSAT output claim follows.

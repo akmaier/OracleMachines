@@ -12,7 +12,55 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: connected mixtures and shared checkpoint checking
+## Current investigation: remaining discovery and the final full audit
+
+[Grouping complete audits](grouped-checkpoints.md) closes cases **23, 18 and 15**,
+raising coverage **8/24 -> 11/24**. Both modes acquire **147 patterns / 21 pairs /
+42 source assumptions / 707 probes**, and every positive query proof is checked
+independently on its exact snapshot. The grouped mode completely audits history
+once at group end; the control does so after every batch. All intermediate
+snapshots are retained, but the first two grouped snapshots are not globally
+certified during the stream. Unrelated corruption detection is delayed until
+the final full audit; publication of a verified checkpoint still requires it.
+
+Two reversed fresh-process repetitions give **24.13644 -> 11.65332 seconds
+(51.72%)** for the three-query sequence. Acquisitions, proofs and all snapshot
+bytes match. **Mean peak RSS rises 453.58 -> 488.51 MB (7.70%)**; preserve this
+regression. The final database size and all three snapshots are unchanged.
+Retrospective validation independently checks all twelve archives and their
+positive proofs, outside the operational timing comparison.
+
+**Discovery finding:** the connected case closes with no decomposition step,
+using eight conditional nodes and 63 reductions to expose contradiction and a
+five-variable 2-CNF leaf. The two random cases add Horn/zero-valid and zero/one-valid
+leaves. Conditional depths are four, four and five, not fixed backdoor sizes.
+None of the later proofs uses a newly acquired pattern from an earlier query in
+the group. Larger shared components remain unobserved; the measured saving comes
+from audit reuse. The canonical contradiction remains the only shared proof node.
+
+**Largest remaining cost:** one full audit takes **6.94599 seconds (59.6%)** of the
+grouped stream; compression adds **1.97996 seconds (17.0%)**. Investigate checked
+reuse of an immutable parent plus verification of new records, with an explicit
+trust boundary and full fallback. Do not trust a serialized validity flag.
+Profile the RSS regression before claiming memory savings from larger groups.
+
+**Next discovery target:** case **19**, a random 3-CNF whose selected residual has
+**58 variables / 276 clauses / 841 literals / maximum width four**. All eight
+children of its four saved pairs are present and uncovered. Continue the unchanged
+policy from the new union; historical timing sets priority, not a new cost bound.
+Cases 15, 16, 17, 18, 22 and 23 are now complete.
+
+Restore `experiments/results/cnf-grouped-checkpoints/checkpoint.json` with the
+existing bootstrap helper. It retains **1,946 patterns / 194 pairs / 17 inherited
+missing children / 11/24 coverage**, with a **665-step positive proof** and **13
+unknown originals**. The union occupies **36,884,480 SQLite / 1,834,327 gzip bytes**.
+All **356 tests** pass. Every previous result, source and existing manuscript
+proof block is preserved. Validation binds **290 sources** and adds **52 manifested
+artifacts**; the next audit inherits **3,290 artifacts / 55 manifests**.
+Checkpoint SHA-256: `7963a1e20851caedcd0d278d3a5f5ab56ea2855fdd5e5c2102a04df9544354e7`.
+Report SHA-256: `f2958d258afd84ee0c1301bef5335851ee6dd1ff07d9ce969618eb22bcc7c034`.
+
+## Previous investigation: connected mixtures and shared checkpoint checking
 
 [Root-complete split checking](scoped-refinement.md) closes case 22 and raises
 coverage **7/24 -> 8/24**, with **9 new patterns / 2 pairs / 4 source assumptions /

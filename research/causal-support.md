@@ -215,3 +215,8 @@ warnings, preserving all **64 proof blocks**. No new Lean result is claimed.
 
 The new manifest binds **56 artifacts**, including the read-only historical
 probe. The next preservation audit inherits **4230 artifacts / 74 manifests**.
+
+The final whitespace check reports one extra blank line at the end of
+`experiments/cnf_causal_support.py`. Its measured, fingerprinted bytes are retained
+for reproducibility. This formatting exception does not affect the passing tests,
+ordinary proof checks or archive audit; no other whitespace issue was reported.

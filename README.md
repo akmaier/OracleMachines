@@ -28,6 +28,16 @@ classes.
 
 ## Paper
 
+[Reuse terminal targets before partition discovery](research/terminal-first-screen.md).
+The saved regression now uses **one proof row instead of three**, with propagation
+visits **5,289 -> 1,110**; nonterminal controls preserve their exact proofs.
+The next gap is matching stored cores after accepted guards: conditioning exposes
+two-clause gaps in cases 43/172, responsible for 19/26 remaining expansions.
+These candidates still need a measured acquisition/recomposition comparison.
+All **1,047 tests** pass. Resume
+`experiments/results/cnf-terminal-first-complete/checkpoint.json` (**21,482 native
+keys**, existing archive reused, all results preserved).
+
 [Screen partition plans and reuse their unit traces](research/partition-screen.md).
 Historical controls reduce new proof rows **41 -> 23**, but fresh case 176 exposes
 a regression: repartitioning a target already refuted by unit propagation adds

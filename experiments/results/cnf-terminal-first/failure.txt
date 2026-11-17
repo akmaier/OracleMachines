@@ -1,0 +1,22 @@
+{"case":6,"cohort":"older","expanded_nodes":0,"mode":"screened","new_nodes":4,"new_payload_units":6122,"terminal":false,"trace_publications":3}
+{"case":6,"cohort":"older","expanded_nodes":0,"mode":"terminal-first","new_nodes":4,"new_payload_units":6122,"terminal":false,"trace_publications":3}
+{"case":68,"cohort":"older","expanded_nodes":8,"mode":"screened","new_nodes":12,"new_payload_units":16605,"terminal":false,"trace_publications":3}
+{"case":68,"cohort":"older","expanded_nodes":8,"mode":"terminal-first","new_nodes":12,"new_payload_units":16605,"terminal":false,"trace_publications":3}
+{"case":135,"cohort":"older","expanded_nodes":3,"mode":"screened","new_nodes":7,"new_payload_units":10036,"terminal":false,"trace_publications":3}
+{"case":135,"cohort":"older","expanded_nodes":3,"mode":"terminal-first","new_nodes":7,"new_payload_units":10036,"terminal":false,"trace_publications":3}
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_terminal_first.py", line 88, in <module>
+    if __name__=='__main__':run(Path(sys.argv[1]))
+                            ~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_terminal_first.py", line 50, in run
+    initial=read(authority['reference_union'],'initial');final=read(trial['archive'],'final');prefixes=previous.partition_study.prefixes(initial,final,records)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_terminal_first.py", line 47, in read
+    path=tmp/name;base.restore_archive(entry,path);s=ResidualSolver(path)
+                  ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/continue_cnf_transfer_split.py", line 42, in restore_archive
+    with Path(path).open('xb') as f:
+         ~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileExistsError: [Errno 17] File exists: '/var/folders/y4/lt19tpt519v6tzv1_40zrvhc0000gn/T/tmp7avvgj2y/initial'

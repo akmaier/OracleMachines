@@ -12,7 +12,44 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: avoid terminal repartitioning, then inspect guarded residuals
+## Current investigation: match conditioned cores after accepted guards
+
+[Terminal-first screening](terminal-first-screen.md) fixes the previous regression.
+On exact pre-query case 176, new rows fall **3 -> 1**, native payload **6,137 ->
+2,229 bytes**, and propagation visits **5,289 -> 1,110**. It skips all 3,585 posting
+visits, two core reads and four plans. Nonterminal cases 6/68/135 keep exactly the
+same plans and proof payloads. Index setup remains paid; single samples establish
+no stable total-time or peak-memory improvement. This is historical validation,
+not new excluded-input coverage.
+
+**Highest-priority gap:** cases **43 and 172** still require 19/26 expansions after
+the extra guard. A read-only probe finds no further single-clause guard and no
+eligible raw-core plan. Restricting checked negative cores under the same guard
+assignments exposes **two-clause gaps in both cases**. Case 172's conditioned
+core 209 is three clauses / four literals and already has a checked native root;
+case 43's nearby restricted roots are absent (e.g. core 214: seven clauses /
+fourteen literals). Price these projections at the saved prefixes, including
+restricted-core certification and all model lifting. Use case 70 as a smaller
+control. Compare against an ordinary clause split: tiny conditioned cores may
+only encode that split, not a substantive reuse saving.
+
+Conditioning the full ready bank costs roughly **32,000 restriction literal
+visits per case** across two diagnostic passes. Cache by checked parent and exact
+assignment; do not assume a bounded plan budget makes discovery cheap. The probe
+publishes no result. This matching gap is more promising than repeating the
+unchanged raw-core screen after another guard.
+
+All **1,047 tests**, eight matched-arm audits, 2,957 ordinary and 414 composed
+records pass. Resume `experiments/results/cnf-terminal-first-complete/checkpoint.json`:
+**21,482 native keys**, no added native payload and eight retained control sidecars.
+The prior compressed archive is referenced directly. All **443 prior sources /
+4,843 artifacts / 84 manifests** pass preservation. Earlier structural authorities
+and all 64 manuscript proof blocks remain unchanged. The incomplete harness run
+and its six completed arms remain preserved. No new Lean or unrestricted-SAT bound.
+
+New manifest: **73 artifacts** across complete and incomplete runs. Next preservation audit: **4916 artifacts / 85 manifests**.
+
+## Previous investigation: avoid terminal repartitioning, then inspect guarded residuals
 
 [Bounded plan screening with retained unit traces](partition-screen.md) now checks
 up to four plans without solving them all. Historical cases 6 and 68 select the

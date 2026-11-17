@@ -6692,6 +6692,30 @@ stage the present screen does not inspect. All 1,042 tests, including exhaustive
 two-variable truth tables, and independent certificate replay pass. These
 implementation results supply no new unrestricted-SAT resource theorem.
 
+\paragraph{Terminal-first reuse and conditioned-core matching.}
+Checking the unsplit target before partition discovery removes the preceding
+regression. At case 176's exact historical prefix, terminal-first reuse needs
+one native proof row instead of three, reduces added payload from 6,137 to
+2,229 bytes, and reduces propagation literal visits from 5,289 to 1,110. It avoids
+3,585 posting visits, two core reads and four plans. Index preparation and native
+proof verification remain charged. Cases 6, 68 and 135 retain byte-identical
+proof deltas and the same nonterminal choices. Single complete-time samples
+establish no global speedup or new structural coverage.
+
+A read-only probe identifies a different mismatch in cases 43 and 172, which
+retain 19 of 26 expansions after an extra guard: the target has been restricted,
+while matching still uses original core clauses. Applying the same assignments
+to checked negative cores exposes two-clause gaps. Case 172 has an already
+checked three-clause cofactor; nearby restricted roots for case 43 are absent.
+An unsatisfiable formula remains unsatisfiable under restriction, but reuse must
+bind the parent, assignment and restricted formula, and supply any required
+native certificate. The probe acquires no new proof and establishes no savings:
+a small cofactor may merely describe an ordinary clause split. Full-bank
+conditioning itself visits roughly 32,000 restriction literals per case across
+two passes. Checked projection caching and measured recomposition remain open.
+All 1,047 tests pass; the existing 21,482-key archive is preserved without
+additional native payload. No new unrestricted-SAT resource bound follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

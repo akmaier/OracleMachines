@@ -2934,3 +2934,28 @@ ordinary decisions and 406 composed records pass. The final union retains all
 fresh checkpoint and failed harness assumption are also retained. Preserve all
 mixed sidecar catalogs separately from ordinary schemas. Structural authorities
 and 64 prior proof blocks remain unchanged; no new Lean or unrestricted-SAT bound.
+
+
+## 2026-11-17: terminal-first reuse and conditioned-core matching
+
+[Terminal-first screening](terminal-first-screen.md) corrects unnecessary
+repartitioning on saved case 176: three proof rows become one, native bytes
+6,137 -> 2,229 and propagation visits 5,289 -> 1,110. No posting search, core read
+or plan construction is needed after its baseline unit conflict. Prepared-index
+setup and native verification remain charged. Nonterminal controls preserve
+exact plans and proof deltas; no fresh coverage or stable total-time gain follows.
+
+Cases 43/172 still hold 19/26 expansions after an extra guard. Their original
+core bank has no eligible plan, but restricting checked negative cores by the
+same guard assignments exposes two-clause gaps. Case 172's three-clause core-209
+cofactor is already native-checked; case 43's nearest restricted roots need
+certification or acquisition. Price these plans against ordinary clause splitting,
+including model lifting and discovery. The read-only full-bank probe visits about
+32,000 restriction literals per case across two passes and publishes nothing.
+Assignment-sensitive projection caching is a candidate, not a measured guarantee.
+
+Resume `experiments/results/cnf-terminal-first-complete/checkpoint.json`: all
+21,482 native keys and the existing compressed archive are retained unchanged;
+eight sidecars preserve both control policies. All 1,047 tests, 2,957 ordinary
+and 414 composed records pass. Earlier sources, artifacts, structural authorities
+and 64 manuscript proof blocks remain preserved. No new Lean or arbitrary-SAT bound.

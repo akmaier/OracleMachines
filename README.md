@@ -28,6 +28,16 @@ classes.
 
 ## Paper
 
+[Recover a target model from a positive child](research/positive-child.md).
+At case 146's exact prefix, checked model recovery reduces six native rows to
+one and native bytes 6,688 -> 1,798. The next 192-query set has no activation:
+190 targets are already known after preparation. Broader evaluation now needs
+new template families and uncached child targets. All 1,102 tests and independent
+replay pass. Resume `experiments/results/cnf-positive-child/checkpoint.json`:
+22,729 native keys and 615 additional composed records, with all earlier results
+preserved.
+
+
 [Reuse unit traces after rejected discovery](research/trace-fallback.md).
 On 192 new queries, three retained prefixes reduce propagation visits
 24,342 -> 22,811 while preserving identical native payloads and storage.

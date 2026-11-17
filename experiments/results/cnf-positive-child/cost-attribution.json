@@ -1,0 +1,1620 @@
+{
+  "affected": [
+    {
+      "arms": {
+        "baseline": {
+          "admission_reason": null,
+          "answer": true,
+          "baseline_forced_variables": 0,
+          "case": 62,
+          "child_expansions": 1,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 969,
+            "database_lookups": 2,
+            "expanded_nodes": 1,
+            "forced_variables": 27,
+            "inserted_bytes": 1742,
+            "inserted_nodes": 1,
+            "key_serialized_bytes": 1582,
+            "normalization_literal_visits": 384,
+            "propagation_literal_visits": 1344,
+            "read_bytes": 62,
+            "restriction_literal_visits": 192,
+            "search_disk_hits": 1,
+            "source_witness_literal_payload": 192,
+            "verification_literal_payload": 192,
+            "verified_nodes": 2,
+            "visits": 2
+          },
+          "child_root": "cnf-residual-v1:[[-28,1],[-28,24],[-27,-26,-21],[-27,-9,22],[-27,11],[-26,-21,-15],[-26,-16],[-26,28],[-25,-20,-16],[-25,-13,19],[-25,-2],[-25,26],[-24,-8,10],[-24,-4],[-24,12,13],[-23,-20,5],[-23,-14,17],[-23,-13],[-23,7,12],[-23,19],[-21,-10],[-21,-7,4],[-21,2,12],[-20,-11,27],[-20,-7,11,15],[-20,10,13,15],[-19,-8,28],[-19,-6,21],[-19,8,22],[-18,-12,9],[-18,14],[-18,21],[-17,-11,-10],[-17,12,15],[-16,-12,3],[-16,3],[-16,9,23,27],[-15,-10],[-15,-8,6],[-15,-4],[-15,5,17],[-14],[-13,-11,-4],[-13,-11,16],[-12,3,16],[-11,27],[-10,-8],[-9,-7,18],[-9,17,23],[-7],[-7,4,14],[-7,28],[-6,7,25],[-5,2,24],[-5,10,27],[-3,4,23],[-3,26],[-2,9,23],[-2,10],[-2,13,19],[2,14,20],[3,9,25],[4,6,12],[4,7,11],[5,13,14],[5,18,25],[7,10],[8,14,27],[8,22],[9,14,23,24],[15,25],[21,22,28]]",
+          "choice_kind": null,
+          "engine_rows": 1,
+          "exposed": null,
+          "fallback_reason": null,
+          "probe_counts": {},
+          "probe_metrics": {},
+          "rows": 1,
+          "seconds": 0.02965741604566574,
+          "summary": {
+            "admission_calls": 0,
+            "admission_reasons": {},
+            "expanded_nodes": 1,
+            "local_calls": 0,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "model_publications": 0,
+            "positive_models": 0,
+            "premise_probes": 0,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 1344,
+            "retained_prefixes": 0,
+            "trace_publications": 0
+          },
+          "template_case": 12
+        },
+        "positive": {
+          "admission_reason": "known-propagated",
+          "answer": true,
+          "baseline_forced_variables": 27,
+          "case": 62,
+          "child_expansions": 0,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 969,
+            "database_lookups": 1,
+            "inserted_bytes": 1742,
+            "inserted_nodes": 1,
+            "key_serialized_bytes": 1564,
+            "normalization_literal_visits": 384,
+            "restriction_literal_visits": 192,
+            "screen_trace_check_literals": 61,
+            "screen_trace_publications": 1,
+            "screen_traces_reused": 1,
+            "screened_result_memory_hits": 1,
+            "search_memory_hits": 1,
+            "source_witness_literal_payload": 192,
+            "verification_literal_payload": 192,
+            "verified_nodes": 1,
+            "visits": 1
+          },
+          "child_root": "cnf-residual-v1:[[-28,1],[-28,24],[-27,-26,-21],[-27,-9,22],[-27,11],[-26,-21,-15],[-26,-16],[-26,28],[-25,-20,-16],[-25,-13,19],[-25,-2],[-25,26],[-24,-8,10],[-24,-4],[-24,12,13],[-23,-20,5],[-23,-14,17],[-23,-13],[-23,7,12],[-23,19],[-21,-10],[-21,-7,4],[-21,2,12],[-20,-11,27],[-20,-7,11,15],[-20,10,13,15],[-19,-8,28],[-19,-6,21],[-19,8,22],[-18,-12,9],[-18,14],[-18,21],[-17,-11,-10],[-17,12,15],[-16,-12,3],[-16,3],[-16,9,23,27],[-15,-10],[-15,-8,6],[-15,-4],[-15,5,17],[-14],[-13,-11,-4],[-13,-11,16],[-12,3,16],[-11,27],[-10,-8],[-9,-7,18],[-9,17,23],[-7],[-7,4,14],[-7,28],[-6,7,25],[-5,2,24],[-5,10,27],[-3,4,23],[-3,26],[-2,9,23],[-2,10],[-2,13,19],[2,14,20],[3,9,25],[4,6,12],[4,7,11],[5,13,14],[5,18,25],[7,10],[8,14,27],[8,22],[9,14,23,24],[15,25],[21,22,28]]",
+          "choice_kind": "propagated",
+          "engine_rows": 1,
+          "exposed": {
+            "answer": true,
+            "family": null,
+            "known": true,
+            "root": "cnf-residual-v1:[]"
+          },
+          "fallback_reason": null,
+          "probe_counts": {
+            "admission_family_clauses": 72,
+            "admission_family_literal_visits": 192,
+            "admission_source_literal_visits": 192,
+            "local_baseline_probes": 1,
+            "propagated_residual_lookups": 1,
+            "propagated_residual_reuses": 1,
+            "propagation_literal_visits": 1344,
+            "restriction_literal_visits": 192
+          },
+          "probe_metrics": {
+            "database_lookups": 2,
+            "key_serialized_bytes": 1582,
+            "normalization_literal_visits": 384,
+            "propagated_residual_disk_hits": 1,
+            "read_bytes": 62,
+            "verification_literal_payload": 0,
+            "verified_nodes": 1
+          },
+          "rows": 1,
+          "seconds": 0.02922254102304578,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "known-propagated": 1
+            },
+            "expanded_nodes": 0,
+            "local_calls": 1,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "model_publications": 0,
+            "positive_models": 0,
+            "premise_probes": 0,
+            "propagated_reuses": 1,
+            "propagation_literal_visits": 1344,
+            "retained_prefixes": 0,
+            "trace_publications": 1
+          },
+          "template_case": 12
+        },
+        "retained": {
+          "admission_reason": "known-propagated",
+          "answer": true,
+          "baseline_forced_variables": 27,
+          "case": 62,
+          "child_expansions": 0,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 969,
+            "database_lookups": 1,
+            "inserted_bytes": 1742,
+            "inserted_nodes": 1,
+            "key_serialized_bytes": 1564,
+            "normalization_literal_visits": 384,
+            "restriction_literal_visits": 192,
+            "screen_trace_check_literals": 61,
+            "screen_trace_publications": 1,
+            "screen_traces_reused": 1,
+            "screened_result_memory_hits": 1,
+            "search_memory_hits": 1,
+            "source_witness_literal_payload": 192,
+            "verification_literal_payload": 192,
+            "verified_nodes": 1,
+            "visits": 1
+          },
+          "child_root": "cnf-residual-v1:[[-28,1],[-28,24],[-27,-26,-21],[-27,-9,22],[-27,11],[-26,-21,-15],[-26,-16],[-26,28],[-25,-20,-16],[-25,-13,19],[-25,-2],[-25,26],[-24,-8,10],[-24,-4],[-24,12,13],[-23,-20,5],[-23,-14,17],[-23,-13],[-23,7,12],[-23,19],[-21,-10],[-21,-7,4],[-21,2,12],[-20,-11,27],[-20,-7,11,15],[-20,10,13,15],[-19,-8,28],[-19,-6,21],[-19,8,22],[-18,-12,9],[-18,14],[-18,21],[-17,-11,-10],[-17,12,15],[-16,-12,3],[-16,3],[-16,9,23,27],[-15,-10],[-15,-8,6],[-15,-4],[-15,5,17],[-14],[-13,-11,-4],[-13,-11,16],[-12,3,16],[-11,27],[-10,-8],[-9,-7,18],[-9,17,23],[-7],[-7,4,14],[-7,28],[-6,7,25],[-5,2,24],[-5,10,27],[-3,4,23],[-3,26],[-2,9,23],[-2,10],[-2,13,19],[2,14,20],[3,9,25],[4,6,12],[4,7,11],[5,13,14],[5,18,25],[7,10],[8,14,27],[8,22],[9,14,23,24],[15,25],[21,22,28]]",
+          "choice_kind": "propagated",
+          "engine_rows": 1,
+          "exposed": {
+            "answer": true,
+            "family": null,
+            "known": true,
+            "root": "cnf-residual-v1:[]"
+          },
+          "fallback_reason": null,
+          "probe_counts": {
+            "admission_family_clauses": 72,
+            "admission_family_literal_visits": 192,
+            "admission_source_literal_visits": 192,
+            "local_baseline_probes": 1,
+            "propagated_residual_lookups": 1,
+            "propagated_residual_reuses": 1,
+            "propagation_literal_visits": 1344,
+            "restriction_literal_visits": 192
+          },
+          "probe_metrics": {
+            "database_lookups": 2,
+            "key_serialized_bytes": 1582,
+            "normalization_literal_visits": 384,
+            "propagated_residual_disk_hits": 1,
+            "read_bytes": 62,
+            "verification_literal_payload": 0,
+            "verified_nodes": 1
+          },
+          "rows": 1,
+          "seconds": 0.030404958873987198,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "known-propagated": 1
+            },
+            "expanded_nodes": 0,
+            "local_calls": 1,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "model_publications": 0,
+            "positive_models": 0,
+            "premise_probes": 0,
+            "propagated_reuses": 1,
+            "propagation_literal_visits": 1344,
+            "retained_prefixes": 0,
+            "trace_publications": 1
+          },
+          "template_case": 12
+        }
+      },
+      "case": 62
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_reason": null,
+          "answer": false,
+          "baseline_forced_variables": 0,
+          "case": 82,
+          "child_expansions": 1,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 774,
+            "database_lookups": 1,
+            "expanded_nodes": 1,
+            "inserted_bytes": 1356,
+            "inserted_nodes": 1,
+            "key_serialized_bytes": 1164,
+            "normalization_literal_visits": 290,
+            "propagation_literal_visits": 487,
+            "source_witness_literal_payload": 0,
+            "unit_conflicts": 1,
+            "verification_literal_payload": 145,
+            "verification_trace_literals": 29,
+            "verified_nodes": 1,
+            "visits": 1
+          },
+          "child_root": "cnf-residual-v1:[[-22,-7,10],[-22,11],[-21,-12],[-21,-8,-6],[-20],[-20,-19,-15],[-20,-6,16],[-19,-16,12],[-19,22],[-18],[-18,-10,13],[-18,9,21],[-18,13,21],[-18,14,19],[-17,-16,-3,14],[-17,-12,-10,-1,5],[-17,-5],[-17,-3,7,14],[-17,5],[-17,9,10],[-16,-14,-9,6],[-16,-14,15],[-15,-4,3],[-13,-8,14],[-13,-6,12],[-13,-5,22],[-13,5,16],[-13,15],[-12],[-11,2,17],[-10,-8,-1],[-10,-5,12],[-10,-1,4],[-10,-1,13],[-9,1],[-9,6,18],[-8,-2,1],[-7,12],[-6,-4,15],[-4,2,8],[-4,22],[-2,-1],[-2,7],[-2,20],[-1,19],[1,6,18],[3,4],[4,9],[4,18],[5,16],[8,14],[8,18],[10,13],[14,20],[15,16,22],[15,18]]",
+          "choice_kind": null,
+          "engine_rows": 1,
+          "exposed": null,
+          "fallback_reason": null,
+          "probe_counts": {},
+          "probe_metrics": {},
+          "rows": 1,
+          "seconds": 0.007262582890689373,
+          "summary": {
+            "admission_calls": 0,
+            "admission_reasons": {},
+            "expanded_nodes": 1,
+            "local_calls": 0,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "model_publications": 0,
+            "positive_models": 0,
+            "premise_probes": 0,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 487,
+            "retained_prefixes": 0,
+            "trace_publications": 0
+          },
+          "template_case": 8
+        },
+        "positive": {
+          "admission_reason": "terminal-target",
+          "answer": false,
+          "baseline_forced_variables": 14,
+          "case": 82,
+          "child_expansions": 0,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 774,
+            "database_lookups": 1,
+            "inserted_bytes": 1356,
+            "inserted_nodes": 1,
+            "key_serialized_bytes": 1164,
+            "normalization_literal_visits": 290,
+            "screen_trace_check_literals": 27,
+            "screen_trace_publications": 1,
+            "screen_traces_reused": 1,
+            "screened_result_memory_hits": 1,
+            "verification_literal_payload": 145,
+            "verification_trace_literals": 29,
+            "verified_nodes": 1
+          },
+          "child_root": "cnf-residual-v1:[[-22,-7,10],[-22,11],[-21,-12],[-21,-8,-6],[-20],[-20,-19,-15],[-20,-6,16],[-19,-16,12],[-19,22],[-18],[-18,-10,13],[-18,9,21],[-18,13,21],[-18,14,19],[-17,-16,-3,14],[-17,-12,-10,-1,5],[-17,-5],[-17,-3,7,14],[-17,5],[-17,9,10],[-16,-14,-9,6],[-16,-14,15],[-15,-4,3],[-13,-8,14],[-13,-6,12],[-13,-5,22],[-13,5,16],[-13,15],[-12],[-11,2,17],[-10,-8,-1],[-10,-5,12],[-10,-1,4],[-10,-1,13],[-9,1],[-9,6,18],[-8,-2,1],[-7,12],[-6,-4,15],[-4,2,8],[-4,22],[-2,-1],[-2,7],[-2,20],[-1,19],[1,6,18],[3,4],[4,9],[4,18],[5,16],[8,14],[8,18],[10,13],[14,20],[15,16,22],[15,18]]",
+          "choice_kind": "terminal",
+          "engine_rows": 1,
+          "exposed": null,
+          "fallback_reason": null,
+          "probe_counts": {
+            "admission_family_clauses": 56,
+            "admission_family_literal_visits": 145,
+            "admission_source_literal_visits": 145,
+            "local_baseline_probes": 1,
+            "local_terminal_targets": 1,
+            "propagation_literal_visits": 487
+          },
+          "probe_metrics": {
+            "database_lookups": 1,
+            "key_serialized_bytes": 1164,
+            "normalization_literal_visits": 290
+          },
+          "rows": 1,
+          "seconds": 0.008920249994844198,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "terminal-target": 1
+            },
+            "expanded_nodes": 0,
+            "local_calls": 1,
+            "local_guards": 0,
+            "local_terminals": 1,
+            "model_publications": 0,
+            "positive_models": 0,
+            "premise_probes": 0,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 487,
+            "retained_prefixes": 0,
+            "trace_publications": 1
+          },
+          "template_case": 8
+        },
+        "retained": {
+          "admission_reason": "terminal-target",
+          "answer": false,
+          "baseline_forced_variables": 14,
+          "case": 82,
+          "child_expansions": 0,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 774,
+            "database_lookups": 1,
+            "inserted_bytes": 1356,
+            "inserted_nodes": 1,
+            "key_serialized_bytes": 1164,
+            "normalization_literal_visits": 290,
+            "screen_trace_check_literals": 27,
+            "screen_trace_publications": 1,
+            "screen_traces_reused": 1,
+            "screened_result_memory_hits": 1,
+            "verification_literal_payload": 145,
+            "verification_trace_literals": 29,
+            "verified_nodes": 1
+          },
+          "child_root": "cnf-residual-v1:[[-22,-7,10],[-22,11],[-21,-12],[-21,-8,-6],[-20],[-20,-19,-15],[-20,-6,16],[-19,-16,12],[-19,22],[-18],[-18,-10,13],[-18,9,21],[-18,13,21],[-18,14,19],[-17,-16,-3,14],[-17,-12,-10,-1,5],[-17,-5],[-17,-3,7,14],[-17,5],[-17,9,10],[-16,-14,-9,6],[-16,-14,15],[-15,-4,3],[-13,-8,14],[-13,-6,12],[-13,-5,22],[-13,5,16],[-13,15],[-12],[-11,2,17],[-10,-8,-1],[-10,-5,12],[-10,-1,4],[-10,-1,13],[-9,1],[-9,6,18],[-8,-2,1],[-7,12],[-6,-4,15],[-4,2,8],[-4,22],[-2,-1],[-2,7],[-2,20],[-1,19],[1,6,18],[3,4],[4,9],[4,18],[5,16],[8,14],[8,18],[10,13],[14,20],[15,16,22],[15,18]]",
+          "choice_kind": "terminal",
+          "engine_rows": 1,
+          "exposed": null,
+          "fallback_reason": null,
+          "probe_counts": {
+            "admission_family_clauses": 56,
+            "admission_family_literal_visits": 145,
+            "admission_source_literal_visits": 145,
+            "local_baseline_probes": 1,
+            "local_terminal_targets": 1,
+            "propagation_literal_visits": 487
+          },
+          "probe_metrics": {
+            "database_lookups": 1,
+            "key_serialized_bytes": 1164,
+            "normalization_literal_visits": 290
+          },
+          "rows": 1,
+          "seconds": 0.007235916331410408,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "terminal-target": 1
+            },
+            "expanded_nodes": 0,
+            "local_calls": 1,
+            "local_guards": 0,
+            "local_terminals": 1,
+            "model_publications": 0,
+            "positive_models": 0,
+            "premise_probes": 0,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 487,
+            "retained_prefixes": 0,
+            "trace_publications": 1
+          },
+          "template_case": 8
+        }
+      },
+      "case": 82
+    }
+  ],
+  "fresh_acquisition_breakdown": {
+    "baseline": {
+      "child_rows": 2,
+      "discovery_eligible": 2,
+      "near_rows": 0,
+      "ordinary_rows": 195,
+      "premise_rows": 0,
+      "queries": 192,
+      "target_known_after_preparation": 190
+    },
+    "positive": {
+      "child_rows": 2,
+      "discovery_eligible": 2,
+      "near_rows": 0,
+      "ordinary_rows": 195,
+      "premise_rows": 0,
+      "queries": 192,
+      "target_known_after_preparation": 190
+    },
+    "retained": {
+      "child_rows": 2,
+      "discovery_eligible": 2,
+      "near_rows": 0,
+      "ordinary_rows": 195,
+      "premise_rows": 0,
+      "queries": 192,
+      "target_known_after_preparation": 190
+    }
+  },
+  "fresh_comparisons": {
+    "baseline": {
+      "expanded_nodes": {
+        "control": 2,
+        "difference": -2,
+        "percent": -100.0,
+        "positive": 0
+      },
+      "mean_complete_worker_seconds": {
+        "control": 21.1255009167362,
+        "difference": -0.42597635416314006,
+        "percent": -2.016408301237818,
+        "positive": 20.69952456257306
+      },
+      "mean_peak_rss_bytes": {
+        "control": 793092096.0,
+        "difference": 90112.0,
+        "percent": 0.011362110460372058,
+        "positive": 793182208.0
+      },
+      "mean_query_seconds": {
+        "control": 0.8282636622898281,
+        "difference": 0.005783800268545747,
+        "percent": 0.6983042395649448,
+        "positive": 0.8340474625583738
+      },
+      "mean_sidecar_bytes": {
+        "control": 5305437.0,
+        "percent": 0.4388988126708507,
+        "positive": 5328722.5
+      },
+      "new_nodes": {
+        "control": 197,
+        "difference": 0,
+        "percent": 0.0,
+        "positive": 197
+      },
+      "new_payload_units": {
+        "control": 441084,
+        "difference": 0,
+        "percent": 0.0,
+        "positive": 441084
+      },
+      "propagation_literal_visits": {
+        "control": 1831,
+        "difference": 0,
+        "percent": 0.0,
+        "positive": 1831
+      }
+    },
+    "retained": {
+      "expanded_nodes": {
+        "control": 0,
+        "difference": 0,
+        "percent": null,
+        "positive": 0
+      },
+      "mean_complete_worker_seconds": {
+        "control": 20.697062874911353,
+        "difference": 0.0024616876617074013,
+        "percent": 0.011893898552588442,
+        "positive": 20.69952456257306
+      },
+      "mean_peak_rss_bytes": {
+        "control": 729047040.0,
+        "difference": 64135168.0,
+        "percent": 8.797123433900781,
+        "positive": 793182208.0
+      },
+      "mean_query_seconds": {
+        "control": 0.7943832669407129,
+        "difference": 0.03966419561766088,
+        "percent": 4.993080452262489,
+        "positive": 0.8340474625583738
+      },
+      "mean_sidecar_bytes": {
+        "control": 5328746.0,
+        "percent": -0.00044100431883974204,
+        "positive": 5328722.5
+      },
+      "new_nodes": {
+        "control": 197,
+        "difference": 0,
+        "percent": 0.0,
+        "positive": 197
+      },
+      "new_payload_units": {
+        "control": 441084,
+        "difference": 0,
+        "percent": 0.0,
+        "positive": 441084
+      },
+      "propagation_literal_visits": {
+        "control": 1831,
+        "difference": 0,
+        "percent": 0.0,
+        "positive": 1831
+      }
+    }
+  },
+  "historical": [
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.040829624980688095,
+          "complete_seconds": 0.23165654204785824,
+          "evaluation_seconds": 0.0045584579929709435,
+          "expanded_nodes": 5,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 3883,
+          "positive_models": 0,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1453,
+          "reason": null,
+          "retained_bytes": 23946,
+          "retained_prefixes": 0,
+          "rows": 5,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "positive": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.04006333323195577,
+          "complete_seconds": 0.23097608285024762,
+          "evaluation_seconds": 0.0058312080800533295,
+          "expanded_nodes": 4,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 3883,
+          "positive_models": 0,
+          "premise_probes": 2,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 4046,
+          "reason": "retained-prefix",
+          "retained_bytes": 23946,
+          "retained_prefixes": 1,
+          "rows": 5,
+          "selection_seconds": 0.001534957904368639,
+          "trace_publications": 1
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.04976704204455018,
+          "complete_seconds": 0.24370570806786418,
+          "evaluation_seconds": 0.0076782917603850365,
+          "expanded_nodes": 4,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 3883,
+          "positive_models": 0,
+          "premise_probes": 2,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 4046,
+          "reason": "retained-prefix",
+          "retained_bytes": 23946,
+          "retained_prefixes": 1,
+          "rows": 5,
+          "selection_seconds": 0.001768709160387516,
+          "trace_publications": 1
+        }
+      },
+      "case": 36,
+      "cohort": "fallback-stream"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.039137333165854216,
+          "complete_seconds": 0.23277750005945563,
+          "evaluation_seconds": 0.006027416791766882,
+          "expanded_nodes": 6,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 11215,
+          "positive_models": 0,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1636,
+          "reason": null,
+          "retained_bytes": 24910,
+          "retained_prefixes": 0,
+          "rows": 6,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "positive": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.03747937502339482,
+          "complete_seconds": 0.23951591597869992,
+          "evaluation_seconds": 0.007367708254605532,
+          "expanded_nodes": 5,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 11215,
+          "positive_models": 0,
+          "premise_probes": 2,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 3234,
+          "reason": "retained-prefix",
+          "retained_bytes": 24910,
+          "retained_prefixes": 1,
+          "rows": 6,
+          "selection_seconds": 0.0014394172467291355,
+          "trace_publications": 1
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.06029312498867512,
+          "complete_seconds": 0.2536689583212137,
+          "evaluation_seconds": 0.007731457706540823,
+          "expanded_nodes": 5,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 11215,
+          "positive_models": 0,
+          "premise_probes": 2,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 3234,
+          "reason": "retained-prefix",
+          "retained_bytes": 24910,
+          "retained_prefixes": 1,
+          "rows": 6,
+          "selection_seconds": 0.001452040858566761,
+          "trace_publications": 1
+        }
+      },
+      "case": 186,
+      "cohort": "fallback-stream"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.036466834135353565,
+          "complete_seconds": 0.20597404101863503,
+          "evaluation_seconds": 0.0049840840511024,
+          "expanded_nodes": 3,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 6331,
+          "positive_models": 0,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1083,
+          "reason": null,
+          "retained_bytes": 19894,
+          "retained_prefixes": 0,
+          "rows": 3,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "positive": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.03994354186579585,
+          "complete_seconds": 0.2181181670166552,
+          "evaluation_seconds": 0.006953333038836718,
+          "expanded_nodes": 2,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 6331,
+          "positive_models": 0,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1689,
+          "reason": "retained-prefix",
+          "retained_bytes": 19894,
+          "retained_prefixes": 1,
+          "rows": 3,
+          "selection_seconds": 0.0011156662367284298,
+          "trace_publications": 1
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.03654387500137091,
+          "complete_seconds": 0.20807754062116146,
+          "evaluation_seconds": 0.006389874964952469,
+          "expanded_nodes": 2,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 6331,
+          "positive_models": 0,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1689,
+          "reason": "retained-prefix",
+          "retained_bytes": 19894,
+          "retained_prefixes": 1,
+          "rows": 3,
+          "selection_seconds": 0.0010383748449385166,
+          "trace_publications": 1
+        }
+      },
+      "case": 144,
+      "cohort": "fresh-baseline"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.05372387496754527,
+          "complete_seconds": 0.2654487923718989,
+          "evaluation_seconds": 0.009575207717716694,
+          "expanded_nodes": 8,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 15325,
+          "positive_models": 0,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2583,
+          "reason": null,
+          "retained_bytes": 37902,
+          "retained_prefixes": 0,
+          "rows": 8,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "positive": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "unit-conflict-child": 1
+          },
+          "cold_seconds": 0.04662158293649554,
+          "complete_seconds": 0.23608470801264048,
+          "evaluation_seconds": 0.005644833203405142,
+          "expanded_nodes": 0,
+          "local_calls": 1,
+          "local_guards": 1,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 3462,
+          "positive_models": 0,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2061,
+          "reason": "unit-conflict-child",
+          "retained_bytes": 31497,
+          "retained_prefixes": 0,
+          "rows": 2,
+          "selection_seconds": 0.0011112079955637455,
+          "trace_publications": 2
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "unit-conflict-child": 1
+          },
+          "cold_seconds": 0.05247825011610985,
+          "complete_seconds": 0.250426541082561,
+          "evaluation_seconds": 0.005668333265930414,
+          "expanded_nodes": 0,
+          "local_calls": 1,
+          "local_guards": 1,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 3462,
+          "positive_models": 0,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2061,
+          "reason": "unit-conflict-child",
+          "retained_bytes": 31497,
+          "retained_prefixes": 0,
+          "rows": 2,
+          "selection_seconds": 0.0010888753458857536,
+          "trace_publications": 2
+        }
+      },
+      "case": 167,
+      "cohort": "fresh-baseline"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.040641665924340487,
+          "complete_seconds": 0.23023120779544115,
+          "evaluation_seconds": 0.004384415689855814,
+          "expanded_nodes": 4,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 6834,
+          "positive_models": 0,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1155,
+          "reason": null,
+          "retained_bytes": 20393,
+          "retained_prefixes": 0,
+          "rows": 4,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "positive": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "unit-conflict-child": 1
+          },
+          "cold_seconds": 0.045474458020180464,
+          "complete_seconds": 0.2825326672755182,
+          "evaluation_seconds": 0.005153459031134844,
+          "expanded_nodes": 0,
+          "local_calls": 1,
+          "local_guards": 1,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 3047,
+          "positive_models": 0,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1155,
+          "reason": "unit-conflict-child",
+          "retained_bytes": 22048,
+          "retained_prefixes": 0,
+          "rows": 2,
+          "selection_seconds": 0.0011134590022265911,
+          "trace_publications": 2
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "unit-conflict-child": 1
+          },
+          "cold_seconds": 0.03960741590708494,
+          "complete_seconds": 0.22783949971199036,
+          "evaluation_seconds": 0.005017292220145464,
+          "expanded_nodes": 0,
+          "local_calls": 1,
+          "local_guards": 1,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 3047,
+          "positive_models": 0,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1155,
+          "reason": "unit-conflict-child",
+          "retained_bytes": 22048,
+          "retained_prefixes": 0,
+          "rows": 2,
+          "selection_seconds": 0.0010885000228881836,
+          "trace_publications": 2
+        }
+      },
+      "case": 190,
+      "cohort": "fresh-baseline"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.03931966703385115,
+          "complete_seconds": 0.23047000030055642,
+          "evaluation_seconds": 0.008261084090918303,
+          "expanded_nodes": 10,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 9798,
+          "positive_models": 0,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1611,
+          "reason": null,
+          "retained_bytes": 29685,
+          "retained_prefixes": 0,
+          "rows": 10,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "positive": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.037964750081300735,
+          "complete_seconds": 0.21377141727134585,
+          "evaluation_seconds": 0.009310208726674318,
+          "expanded_nodes": 9,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 9798,
+          "positive_models": 0,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2686,
+          "reason": "retained-prefix",
+          "retained_bytes": 29685,
+          "retained_prefixes": 1,
+          "rows": 10,
+          "selection_seconds": 0.001110041979700327,
+          "trace_publications": 1
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.038208791986107826,
+          "complete_seconds": 0.23292008321732283,
+          "evaluation_seconds": 0.007983459159731865,
+          "expanded_nodes": 9,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 9798,
+          "positive_models": 0,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2686,
+          "reason": "retained-prefix",
+          "retained_bytes": 29685,
+          "retained_prefixes": 1,
+          "rows": 10,
+          "selection_seconds": 0.0010807919315993786,
+          "trace_publications": 1
+        }
+      },
+      "case": 43,
+      "cohort": "historical"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.035807833075523376,
+          "complete_seconds": 0.20154945831745863,
+          "evaluation_seconds": 0.0044505419209599495,
+          "expanded_nodes": 4,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 5978,
+          "positive_models": 0,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 938,
+          "reason": null,
+          "retained_bytes": 25252,
+          "retained_prefixes": 0,
+          "rows": 4,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "positive": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.037307875230908394,
+          "complete_seconds": 0.2253189580515027,
+          "evaluation_seconds": 0.005876167211681604,
+          "expanded_nodes": 3,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 5978,
+          "positive_models": 0,
+          "premise_probes": 2,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2131,
+          "reason": "retained-prefix",
+          "retained_bytes": 25252,
+          "retained_prefixes": 1,
+          "rows": 4,
+          "selection_seconds": 0.0012589581310749054,
+          "trace_publications": 1
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.04829637473449111,
+          "complete_seconds": 0.2227767496369779,
+          "evaluation_seconds": 0.0056709591299295425,
+          "expanded_nodes": 3,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 5978,
+          "positive_models": 0,
+          "premise_probes": 2,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2131,
+          "reason": "retained-prefix",
+          "retained_bytes": 25252,
+          "retained_prefixes": 1,
+          "rows": 4,
+          "selection_seconds": 0.0012139170430600643,
+          "trace_publications": 1
+        }
+      },
+      "case": 70,
+      "cohort": "historical"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.03927049972116947,
+          "complete_seconds": 0.21656775008887053,
+          "evaluation_seconds": 0.007722874637693167,
+          "expanded_nodes": 9,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 13839,
+          "positive_models": 0,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1952,
+          "reason": null,
+          "retained_bytes": 34023,
+          "retained_prefixes": 0,
+          "rows": 9,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "positive": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "nonterminal-child": 1
+          },
+          "cold_seconds": 0.038318667095154524,
+          "complete_seconds": 0.21193474996834993,
+          "evaluation_seconds": 0.00862395903095603,
+          "expanded_nodes": 9,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 13839,
+          "positive_models": 0,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2939,
+          "reason": "nonterminal-child",
+          "retained_bytes": 34023,
+          "retained_prefixes": 0,
+          "rows": 9,
+          "selection_seconds": 0.0008870838209986687,
+          "trace_publications": 0
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "nonterminal-child": 1
+          },
+          "cold_seconds": 0.04405241599306464,
+          "complete_seconds": 0.22385337529703975,
+          "evaluation_seconds": 0.009083541110157967,
+          "expanded_nodes": 9,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 13839,
+          "positive_models": 0,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2939,
+          "reason": "nonterminal-child",
+          "retained_bytes": 34023,
+          "retained_prefixes": 0,
+          "rows": 9,
+          "selection_seconds": 0.0009481250308454037,
+          "trace_publications": 0
+        }
+      },
+      "case": 172,
+      "cohort": "historical"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.04103716602548957,
+          "complete_seconds": 0.23735745809972286,
+          "evaluation_seconds": 0.014273500069975853,
+          "expanded_nodes": 17,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 23417,
+          "positive_models": 0,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 3315,
+          "reason": null,
+          "retained_bytes": 37580,
+          "retained_prefixes": 0,
+          "rows": 17,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "positive": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "nonterminal-child": 1
+          },
+          "cold_seconds": 0.041569833643734455,
+          "complete_seconds": 0.2405175417661667,
+          "evaluation_seconds": 0.015209916979074478,
+          "expanded_nodes": 17,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 23417,
+          "positive_models": 0,
+          "premise_probes": 3,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 5223,
+          "reason": "nonterminal-child",
+          "retained_bytes": 37580,
+          "retained_prefixes": 0,
+          "rows": 17,
+          "selection_seconds": 0.0013534999452531338,
+          "trace_publications": 0
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "nonterminal-child": 1
+          },
+          "cold_seconds": 0.04074041685089469,
+          "complete_seconds": 0.27144812466576695,
+          "evaluation_seconds": 0.015047040767967701,
+          "expanded_nodes": 17,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 23417,
+          "positive_models": 0,
+          "premise_probes": 3,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 5223,
+          "reason": "nonterminal-child",
+          "retained_bytes": 37580,
+          "retained_prefixes": 0,
+          "rows": 17,
+          "selection_seconds": 0.0014482908882200718,
+          "trace_publications": 0
+        }
+      },
+      "case": 0,
+      "cohort": "positive-stream"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.053330291993916035,
+          "complete_seconds": 0.26689112465828657,
+          "evaluation_seconds": 0.01444120891392231,
+          "expanded_nodes": 15,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 21899,
+          "positive_models": 0,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 3635,
+          "reason": null,
+          "retained_bytes": 45256,
+          "retained_prefixes": 0,
+          "rows": 15,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "positive": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.053646916057914495,
+          "complete_seconds": 0.27940470771864057,
+          "evaluation_seconds": 0.014773332979530096,
+          "expanded_nodes": 14,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 21899,
+          "positive_models": 0,
+          "premise_probes": 2,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 5930,
+          "reason": "retained-prefix",
+          "retained_bytes": 45256,
+          "retained_prefixes": 1,
+          "rows": 15,
+          "selection_seconds": 0.0016061658971011639,
+          "trace_publications": 1
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.05196808325126767,
+          "complete_seconds": 0.26145033398643136,
+          "evaluation_seconds": 0.014888999983668327,
+          "expanded_nodes": 14,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 21899,
+          "positive_models": 0,
+          "premise_probes": 2,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 5930,
+          "reason": "retained-prefix",
+          "retained_bytes": 45256,
+          "retained_prefixes": 1,
+          "rows": 15,
+          "selection_seconds": 0.00159166706725955,
+          "trace_publications": 1
+        }
+      },
+      "case": 131,
+      "cohort": "positive-stream"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.04872004222124815,
+          "complete_seconds": 0.24910270795226097,
+          "evaluation_seconds": 0.006706499960273504,
+          "expanded_nodes": 6,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 6688,
+          "positive_models": 0,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1847,
+          "reason": null,
+          "retained_bytes": 30595,
+          "retained_prefixes": 0,
+          "rows": 6,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "positive": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "positive-child-model": 1
+          },
+          "cold_seconds": 0.04837966663762927,
+          "complete_seconds": 0.24246312538161874,
+          "evaluation_seconds": 0.004767874721437693,
+          "expanded_nodes": 0,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 1,
+          "native_bytes": 1798,
+          "positive_models": 1,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2045,
+          "reason": "positive-child-model",
+          "retained_bytes": 25527,
+          "retained_prefixes": 0,
+          "rows": 1,
+          "selection_seconds": 0.0016783340834081173,
+          "trace_publications": 0
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.052419541869312525,
+          "complete_seconds": 0.26338579086586833,
+          "evaluation_seconds": 0.007754083257168531,
+          "expanded_nodes": 5,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 6688,
+          "positive_models": 0,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 3304,
+          "reason": "retained-prefix",
+          "retained_bytes": 30595,
+          "retained_prefixes": 1,
+          "rows": 6,
+          "selection_seconds": 0.0013430421240627766,
+          "trace_publications": 1
+        }
+      },
+      "case": 146,
+      "cohort": "positive-stream"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.03873045928776264,
+          "complete_seconds": 0.2330403751693666,
+          "evaluation_seconds": 0.008980207610875368,
+          "expanded_nodes": 8,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 7100,
+          "positive_models": 0,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1632,
+          "reason": null,
+          "retained_bytes": 27800,
+          "retained_prefixes": 0,
+          "rows": 8,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "positive": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.03696224978193641,
+          "complete_seconds": 0.22986675007268786,
+          "evaluation_seconds": 0.010173708200454712,
+          "expanded_nodes": 7,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 7100,
+          "positive_models": 0,
+          "premise_probes": 4,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 4095,
+          "reason": "retained-prefix",
+          "retained_bytes": 27800,
+          "retained_prefixes": 1,
+          "rows": 8,
+          "selection_seconds": 0.001778042409569025,
+          "trace_publications": 1
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.03771691722795367,
+          "complete_seconds": 0.23233658401295543,
+          "evaluation_seconds": 0.009714249987155199,
+          "expanded_nodes": 7,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 7100,
+          "positive_models": 0,
+          "premise_probes": 4,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 4095,
+          "reason": "retained-prefix",
+          "retained_bytes": 27800,
+          "retained_prefixes": 1,
+          "rows": 8,
+          "selection_seconds": 0.0017787911929190159,
+          "trace_publications": 1
+        }
+      },
+      "case": 159,
+      "cohort": "positive-stream"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.036437457893043756,
+          "complete_seconds": 0.24236620822921395,
+          "evaluation_seconds": 0.00199208315461874,
+          "expanded_nodes": 1,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 1672,
+          "positive_models": 0,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 955,
+          "reason": null,
+          "retained_bytes": 16254,
+          "retained_prefixes": 0,
+          "rows": 1,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "positive": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "known-propagated": 1
+          },
+          "cold_seconds": 0.04846625030040741,
+          "complete_seconds": 0.2390153338201344,
+          "evaluation_seconds": 0.0024453341029584408,
+          "expanded_nodes": 0,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 1672,
+          "positive_models": 0,
+          "premise_probes": 0,
+          "propagated_reuses": 1,
+          "propagation_literal_visits": 955,
+          "reason": "known-propagated",
+          "retained_bytes": 16254,
+          "retained_prefixes": 0,
+          "rows": 1,
+          "selection_seconds": 0.0005712499842047691,
+          "trace_publications": 1
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "known-propagated": 1
+          },
+          "cold_seconds": 0.035980291198939085,
+          "complete_seconds": 0.21624858397990465,
+          "evaluation_seconds": 0.0026634172536432743,
+          "expanded_nodes": 0,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "model_publications": 0,
+          "native_bytes": 1672,
+          "positive_models": 0,
+          "premise_probes": 0,
+          "propagated_reuses": 1,
+          "propagation_literal_visits": 955,
+          "reason": "known-propagated",
+          "retained_bytes": 16254,
+          "retained_prefixes": 0,
+          "rows": 1,
+          "selection_seconds": 0.0006059170700609684,
+          "trace_publications": 1
+        }
+      },
+      "case": 85,
+      "cohort": "reuse-stream"
+    }
+  ],
+  "historical_totals": {
+    "baseline": {
+      "expanded_nodes": 96,
+      "model_publications": 0,
+      "native_bytes": 133979,
+      "propagation_literal_visits": 23795,
+      "retained_bytes": 373490,
+      "rows": 96,
+      "trace_publications": 0
+    },
+    "positive": {
+      "expanded_nodes": 70,
+      "model_publications": 1,
+      "native_bytes": 113439,
+      "propagation_literal_visits": 38189,
+      "retained_bytes": 363672,
+      "rows": 83,
+      "trace_publications": 12
+    },
+    "retained": {
+      "expanded_nodes": 75,
+      "model_publications": 0,
+      "native_bytes": 118329,
+      "propagation_literal_visits": 39448,
+      "retained_bytes": 368740,
+      "rows": 88,
+      "trace_publications": 13
+    }
+  },
+  "limitations": [
+    "Exact-prefix arms isolate the same native state; fresh-query contributions come from streams whose prefixes can diverge.",
+    "Zero expansion calls can coexist with explicit trace or model publication and retained native rows. Count propagation, checking, source copies and persistence separately.",
+    "Two reversed-order timing pairs and process peak RSS provide no stable general runtime or live-memory bound.",
+    "Fresh queries remain double-deletion neighbours of three existing templates. No new general structural authority or unrestricted-SAT result."
+  ],
+  "native_payloads_equal": true,
+  "paired_complete_times": [
+    {
+      "order": [
+        "baseline",
+        "retained",
+        "positive"
+      ],
+      "positive_minus_baseline": 0.019498666748404503,
+      "positive_minus_retained": 0.39894241699948907,
+      "repeat": 0,
+      "seconds": {
+        "baseline": 20.9501923751086,
+        "positive": 20.969691041857004,
+        "retained": 20.570748624857515
+      }
+    },
+    {
+      "order": [
+        "positive",
+        "retained",
+        "baseline"
+      ],
+      "positive_minus_baseline": -0.8714513750746846,
+      "positive_minus_retained": -0.39401904167607427,
+      "repeat": 1,
+      "seconds": {
+        "baseline": 21.3008094583638,
+        "positive": 20.429358083289117,
+        "retained": 20.82337712496519
+      }
+    }
+  ],
+  "passed": true,
+  "rejected_child_diagnostics": [],
+  "remaining_child_work": [],
+  "report": {
+    "path": "experiments/results/cnf-positive-child/report.json",
+    "sha256": "064c2784dc7f0c44f109b73ef5635fe7111644d3abf58bc4d23a8f5b25da01ea"
+  },
+  "residual_diagnostics": []
+}

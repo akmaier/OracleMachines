@@ -3168,3 +3168,37 @@ records. It is not one policy's working storage. A posthoc positive child model
 in case 146 is checked but its original-target lifting and alternate publication
 are unmeasured; no projected row saving is counted. All 1,094 tests pass and
 all previous evidence is preserved. No unrestricted-SAT resource bound follows.
+
+
+## 2026-11-17: direct model publication after positive child closure
+
+[Positive-child recovery](positive-child.md) adds at most one target row after
+charged discovery/preparation. It validates the child trace, model-coordinate
+transport and every target clause, then uses the existing native SAT verifier.
+It acquires neither the proposed negative premise nor a child node. The bound
+covers this successful path only; finding such a witness and handling other
+residuals remain outside it. One explicit model publication accompanies zero
+expansion calls, so zero calls do not mean zero work or storage.
+
+At case 146's exact prefix, rows fall 6 -> 1, native bytes 6,688 -> 1,798 and
+serialized delta/record bytes 30,595 -> 25,527. Propagation falls 3,304 -> 2,045
+versus the preceding policy, but native baseline uses 1,847. One timing sample
+establishes no stable speedup. Across thirteen controls, previous/new rows are
+88/83, native bytes 118,329/113,439, and propagation 39,448/38,189.
+
+The next 192 queries never activate model recovery: 190 targets are known after
+preparation, while the remaining two use existing paths. All modes add identical
+197 rows / 441,084 native bytes, including 195 ordinary-preparation rows and two
+target rows. Propagation is 1,831 visits. Mean complete times are 21.126/20.697/
+20.700 seconds for baseline/previous/new; opposite pairwise signs establish no
+new gain. Cold replay means are 10.282/10.111/10.107 seconds. Process RSS averages
+793/729/793 MB, not a live-state bound. All trial databases occupy 73,793,536
+bytes and compressed archives 5,266,412 bytes. No time difference in this set
+can be attributed to successful positive-model recovery.
+
+The evidence union adds 197 keys (22,532 -> 22,729), occupies 73,793,536 database
+bytes / 5,266,420 compressed bytes, and retains 615 new composed records plus all
+previous evidence. It is not one policy's working storage. Evaluation must now
+separate raw-query novelty from unfamiliar residual acquisition and broaden
+beyond the three old template families. All 1,102 tests pass. No unrestricted-SAT
+resource bound follows.

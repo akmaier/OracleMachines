@@ -5504,3 +5504,32 @@ conditioning. No bounded conditioning size for arbitrary CNF is established.
 All 1,094 tests and independent replay pass. The 22,532-key evidence union retains
 all previous results and 603 new composed records. Structural and supplemental
 authority are unchanged. No new Lean proof or unrestricted efficiency follows.
+
+
+## 2026-11-17: recover positive witnesses and distinguish query from child novelty
+
+[Positive-child recovery](positive-child.md) now turns case 146's checked unit
+closure into a whole-target SAT witness. It restores the proposed condition and
+checks all target clauses before publishing one native row, avoiding the
+negative premise and child acquisition. At the saved prefix, six rows become
+one and native bytes fall 73.12%; discovery still exceeds native baseline
+propagation. Negative results retain their existing certificates. This is a
+restricted publication improvement, not efficient recognition of every SAT cell.
+
+The next 192 raw query roots are new but 190 targets become known after ordinary
+preparation. The remaining two close through a cached propagated residual or
+unit conflict. No new positive-model recovery activates, and all three policies
+retain identical native additions. This distinguishes source-root exclusion from
+unfamiliar child acquisition. The next study needs different template families,
+pre-query target-familiarity strata, charged generation and matched total costs;
+the old neighbours remain valid warm-reuse controls.
+
+Retain cases 0/131/159 for nonfamily interaction and case 146 for model recovery.
+The older case-36 one-variable two-CNF decomposition remains an unpriced positive
+structural control. Prior single-variable failures concerned immediate syntactic
+two-CNF, leaving propagation-assisted and mixed-family closure open. No bounded
+conditioning size or compact closure for arbitrary CNF is established.
+
+All 1,102 tests and independent replay pass. The 22,729-key union preserves all
+previous results and 615 new composed records. Structural and supplemental
+authority are unchanged; there is no new Lean or unrestricted efficiency result.

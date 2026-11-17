@@ -6943,6 +6943,46 @@ closure after further propagation, and no small-decomposition guarantee for
 arbitrary CNF is established. The new queries remain neighbours of three existing
 templates, and all earlier results and structural authorities remain preserved.
 
+\paragraph{Recovering the whole-target witness.}
+The next optional selector implements this positive-child route. It binds the
+saved child trace to the proposed restriction, checks every unit reason and
+requires the actual residual to be empty. It restores the proposed assignment,
+maps the remaining values to target coordinates and checks every original-target
+clause. Publication checks that model again through the existing native SAT
+verifier. At most one target row is added after earlier preparation; neither
+the proposed negative premise nor child node is acquired. A complete satisfying
+assignment certifies the target directly. Negative results retain their existing
+proof obligations. Discovery, including the failed-literal probe, model transport,
+checking and persistence remain charged.
+
+Thirty-nine exact-prefix arms retain the earlier controls and add the preceding
+stream's cases 0/131/146/159. In case 146, native rows fall from six to one and
+added native bytes from 6,688 to 1,798. Serialized delta/record bytes fall from
+30,595 to 25,527. Propagation drops from 3,304 to 2,045 visits against the previous
+policy, while native baseline uses 1,847. One explicit model publication
+accompanies zero expansion calls. The other twelve controls preserve the prior
+policy's native payloads. The selected arm's lower evaluation time is one sample,
+not a stable general speedup.
+
+A further 192 excluded queries, evaluated in six fresh workers with reversed
+policy order, never activate the new route. After preparation, 190 targets
+already have known native roots; the two remaining calls close through a known
+propagated residual or unit conflict. All policies retain identical additions
+of 197 native rows and 441,084 native bytes, with 195 rows from ordinary
+preparation and two from target acquisition. Each performs 1,831 propagation
+visits and answers 93 SAT and 99 UNSAT queries. Mean complete times are 21.126,
+20.697 and 20.700 seconds for native baseline, preceding policy and positive
+recovery. Pairwise timing differences against the preceding policy have opposite
+signs; no fresh gain from model recovery is established. All 1,102 tests pass.
+
+This result also exposes an evaluation limit. New raw query roots can reduce
+to familiar targets, so root exclusion alone does not test unfamiliar structural
+acquisition. The next evaluation needs different template families and explicit
+target-familiarity counts before optional discovery, alongside the preserved
+nonfamily controls. The current inputs still come from three existing templates;
+the result supplies no efficient arbitrary-CNF decomposition or unrestricted-SAT
+resource bound.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

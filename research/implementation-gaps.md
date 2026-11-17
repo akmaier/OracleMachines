@@ -9351,3 +9351,30 @@ previous payloads, 603 new composed records, 1,827 previous composed records,
 488 sources / 5,329 artifacts / 91 manifests are unchanged. Ready/pending banks
 are 132/38, 141/66, 85/91, 85/118; structural authority and 64 proof blocks are
 preserved. No new Lean or unrestricted-SAT bound.
+
+
+## 2026-11-17: recover full-target models from positive proposed children
+
+[Positive-child recovery](positive-child.md) binds and checks the retained child
+unit trace, restores the proposed assignment and validates every target clause
+before direct SAT publication. It adds at most one target row after preparation,
+without acquiring the negative premise or child node. Other choices and negative
+proof obligations remain unchanged. The discovery work still includes the
+failed-literal probe; no universal cheap-witness claim follows.
+
+Thirty-nine exact-prefix arms reduce case 146 from six rows to one, native bytes
+6,688 -> 1,798, and visits 3,304 -> 2,045 versus the preceding policy. The other
+twelve controls preserve previous payloads. Another 192-query comparison has
+zero activations: 190 targets are already known after preparation, and the two
+remaining calls close through existing paths. All policies add identical 197
+rows / 441,084 native bytes. Timing signs disagree. Broader evaluation now needs
+new template families and explicit target-familiarity counts, retaining the
+previous unresolved 0/131/159 and positive 36/146 controls.
+
+All 1,102 tests, 26 focused tests and independent replay pass. Resume
+`experiments/results/cnf-positive-child/checkpoint.json`: 22,729 keys, every
+22,532 old payload preserved, 615 new composed records, 2,430 earlier composed
+records, 2,957 ordinary decisions and six projections. No alternative payloads.
+Prior 493 sources / 5,455 artifacts / 92 manifests are unchanged. Ready/pending
+banks are 132/38, 141/66, 86/90 and 86/117. Structural authorities and 64 proof
+blocks remain unchanged. No new Lean or unrestricted-SAT theorem.

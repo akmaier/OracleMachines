@@ -12,7 +12,55 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: recover models from positive-terminal proposed children
+## Current investigation: broaden unfamiliar residuals and price nonterminal decompositions
+
+[Positive-child model recovery](positive-child.md) is implemented. At the exact
+case-146 prefix, it lifts 26 child unit deductions to a checked whole-target
+model and publishes **one native row instead of six**. Added native bytes fall
+**6,688 -> 1,798 (73.12%)**, and propagation **3,304 -> 2,045** against the previous
+policy. It acquires neither the proposed negative premise nor child node. Native
+baseline still uses fewer visits (1,847); the single timing sample is not a
+general speedup. The other twelve equal-state controls preserve prior payloads.
+
+**The fresh workload now scarcely exercises new residual acquisition.** On
+another 192 excluded query roots, **190 targets are known after preparation**.
+The two discovery calls use an existing propagated residual or unit conflict;
+the new model-recovery route never activates. All policies add identical
+**197 rows / 441,084 native bytes**: 195 rows from ordinary preparation and two
+from target acquisition. Propagation is 1,831 visits in every mode. Opposite
+timing-pair signs establish no new gain. Raw query novelty is not child novelty.
+
+**Next priority:** extend the evaluation to different template families and
+report pre-query target familiarity as well as root exclusion. Keep these
+well-covered neighbours as warm-reuse controls, charge generation/preparation,
+and compare matched policies on unfamiliar residuals. Do not count this stream
+as broader arbitrary-SAT coverage or keep using more same-template neighbours
+as the sole transfer test.
+
+**Retained structural targets:** prior cases 0/131/159 still have nonfamily
+children after the proposed condition and propagation. Price alternative small
+conditioning sets and cached-dependency reuse at their exact prefixes, retaining
+case 146 as the model-recovery control and older case 36 as the known one-variable
+two-CNF decomposition. The prior failed single-variable test concerned immediate
+syntactic two-CNF; further propagation and mixed-family closure remain open.
+Preserve useful historical 43/172 and regressing 144 controls. No absolute
+residual-size threshold or small-decomposition guarantee is established.
+
+Cold replay remains the largest complete-time component (**10.282/10.111/10.107 s**).
+Shared checking and compact source references remain supporting total-cost targets.
+The new result changes a restricted positive publication path; it adds no new
+general structural authority, Lean theorem or unrestricted-SAT bound.
+
+All **1,102 tests**, 26 focused tests and independent replay pass. Resume
+`experiments/results/cnf-positive-child/checkpoint.json`: **22,729 keys**, all
+22,532 previous payloads, **615 new composed records**, 2,430 earlier composed
+records, 2,957 ordinary decisions and six projections. Prior **493 sources /
+5,455 artifacts / 92 manifests** and structural authorities remain unchanged.
+Ready/pending banks are 132/38, 141/66, 86/90 and 86/117.
+
+New manifest: **162 artifacts**. Next preservation audit: **5617 artifacts / 93 manifests**. Final source ledger: **498**.
+
+## Previous investigation: recover models from positive-terminal proposed children
 
 [Retained-prefix fallback](trace-fallback.md) now reuses baseline unit traces
 when discovery rejects a guard. It keeps the original target and ordinary

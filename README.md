@@ -28,6 +28,17 @@ classes.
 
 ## Paper
 
+[Reuse unit traces after rejected discovery](research/trace-fallback.md).
+On 192 new queries, three retained prefixes reduce propagation visits
+24,342 -> 22,811 while preserving identical native payloads and storage.
+Discovery still exceeds native baseline work, and timing pairs establish no
+stable speedup. A checked positive-terminal child in case 146 exposes the next
+model-reuse opportunity; cases 0/131 remain the largest unresolved residuals.
+All 1,094 tests and independent replay pass. Resume
+`experiments/results/cnf-trace-fallback/checkpoint.json`: 22,532 native keys and
+603 additional composed records, preserving every previous result.
+
+
 [Reuse answers exposed by propagation](research/propagated-reuse.md).
 At case 85's exact prefix, the new optional path cuts propagation visits
 5,750 -> 955 and avoids four premise probes, retaining the same one-row result.

@@ -1,0 +1,4697 @@
+{
+  "affected": [
+    {
+      "arms": {
+        "baseline": {
+          "admission_reason": null,
+          "answer": false,
+          "baseline_forced_variables": 0,
+          "case": 0,
+          "child_expansions": 17,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_disk_hits": 3,
+            "certificate_memory_hits": 17,
+            "certificate_serialized_bytes": 16165,
+            "class_literal_payload": 842,
+            "database_lookups": 21,
+            "decomposition_literal_visits": 692,
+            "expanded_nodes": 17,
+            "forced_variables": 11,
+            "inserted_bytes": 23417,
+            "inserted_nodes": 17,
+            "key_serialized_bytes": 25110,
+            "matching_recognition_literal_visits": 12,
+            "normalization_literal_visits": 6275,
+            "propagation_literal_visits": 3315,
+            "read_bytes": 3668,
+            "restriction_literal_visits": 3978,
+            "search_disk_hits": 1,
+            "source_witness_literal_payload": 0,
+            "split_nodes": 6,
+            "subsumed_positive_clauses": 1,
+            "subsumption_candidate_tests": 32,
+            "subsumption_membership_tests": 63,
+            "subsumption_nodes": 1,
+            "subsumption_posting_lookups": 175,
+            "subsumption_recognition_literal_payload": 842,
+            "unit_conflicts": 6,
+            "verification_literal_payload": 2260,
+            "verification_trace_literals": 168,
+            "verified_nodes": 21,
+            "verified_subsumption_literal_payload": 10,
+            "visits": 18
+          },
+          "child_root": "cnf-residual-v1:[[-25,1],[-25,4,20],[-24,-11],[-23,-22,-17],[-23,-8],[-23,18],[-22,-8,25],[-21,-8,-2],[-21,12,24],[-21,16,22],[-20,-18,-5,16],[-20,-14,7],[-20,-7,9],[-20,-5,10,16],[-20,12,13],[-19,-14,15],[-19,2,14],[-19,6,12],[-18,-16,17],[-17,-9,4],[-17,-6,5],[-17,2,12],[-16,-15,-9],[-16,-13,-9],[-15,-11,2,14],[-15,12],[-14,-4,23],[-13,-11,-3,-2],[-13,-7],[-13,-3,6,9],[-12,3],[-11,-6,8],[-11,-4,3],[-11,14,20],[-11,16],[-10,-1,13],[-10,15],[-9,-7,4],[-8,-4,-3],[-8,-2,9],[-8,7,18],[-7,25],[-6,-4,14],[-6,2,14],[-6,4,11],[-6,5,14],[-6,17],[-6,25],[-5,8,10],[-4,10],[-3,5,19],[-3,22],[2,14],[2,24],[4,8,10],[5,6],[6,15,21],[7,14,23],[7,18],[8,25],[11,16],[11,21],[13,14],[15,17],[15,19],[16,23],[17,18,25],[17,21]]",
+          "choice_kind": null,
+          "engine_rows": 17,
+          "exposed": null,
+          "fallback_reason": null,
+          "probe_counts": {},
+          "probe_metrics": {},
+          "rows": 17,
+          "seconds": 0.02325133327394724,
+          "summary": {
+            "admission_calls": 0,
+            "admission_reasons": {},
+            "expanded_nodes": 17,
+            "local_calls": 0,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 0,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 3315,
+            "retained_prefixes": 0,
+            "trace_publications": 0
+          },
+          "template_case": 6
+        },
+        "propagated": {
+          "admission_reason": "nonterminal-child",
+          "answer": false,
+          "baseline_forced_variables": 0,
+          "case": 0,
+          "child_expansions": 17,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_disk_hits": 3,
+            "certificate_memory_hits": 17,
+            "certificate_serialized_bytes": 16165,
+            "class_literal_payload": 842,
+            "database_lookups": 21,
+            "decomposition_literal_visits": 692,
+            "expanded_nodes": 17,
+            "forced_variables": 11,
+            "inserted_bytes": 23417,
+            "inserted_nodes": 17,
+            "key_serialized_bytes": 25110,
+            "matching_recognition_literal_visits": 12,
+            "normalization_literal_visits": 6275,
+            "propagation_literal_visits": 3315,
+            "read_bytes": 3668,
+            "restriction_literal_visits": 3978,
+            "search_disk_hits": 1,
+            "source_witness_literal_payload": 0,
+            "split_nodes": 6,
+            "subsumed_positive_clauses": 1,
+            "subsumption_candidate_tests": 32,
+            "subsumption_membership_tests": 63,
+            "subsumption_nodes": 1,
+            "subsumption_posting_lookups": 175,
+            "subsumption_recognition_literal_payload": 842,
+            "unit_conflicts": 6,
+            "verification_literal_payload": 2260,
+            "verification_trace_literals": 168,
+            "verified_nodes": 21,
+            "verified_subsumption_literal_payload": 10,
+            "visits": 18
+          },
+          "child_root": "cnf-residual-v1:[[-25,1],[-25,4,20],[-24,-11],[-23,-22,-17],[-23,-8],[-23,18],[-22,-8,25],[-21,-8,-2],[-21,12,24],[-21,16,22],[-20,-18,-5,16],[-20,-14,7],[-20,-7,9],[-20,-5,10,16],[-20,12,13],[-19,-14,15],[-19,2,14],[-19,6,12],[-18,-16,17],[-17,-9,4],[-17,-6,5],[-17,2,12],[-16,-15,-9],[-16,-13,-9],[-15,-11,2,14],[-15,12],[-14,-4,23],[-13,-11,-3,-2],[-13,-7],[-13,-3,6,9],[-12,3],[-11,-6,8],[-11,-4,3],[-11,14,20],[-11,16],[-10,-1,13],[-10,15],[-9,-7,4],[-8,-4,-3],[-8,-2,9],[-8,7,18],[-7,25],[-6,-4,14],[-6,2,14],[-6,4,11],[-6,5,14],[-6,17],[-6,25],[-5,8,10],[-4,10],[-3,5,19],[-3,22],[2,14],[2,24],[4,8,10],[5,6],[6,15,21],[7,14,23],[7,18],[8,25],[11,16],[11,21],[13,14],[15,17],[15,19],[16,23],[17,18,25],[17,21]]",
+          "choice_kind": null,
+          "engine_rows": 17,
+          "exposed": null,
+          "fallback_reason": null,
+          "probe_counts": {
+            "admission_child_lookups": 1,
+            "admission_child_probes": 1,
+            "admission_family_clauses": 68,
+            "admission_family_literal_visits": 183,
+            "admission_source_literal_visits": 183,
+            "local_baseline_probes": 1,
+            "local_guards_found": 1,
+            "local_premise_literals_copied": 552,
+            "local_premise_probes": 3,
+            "local_ranking_clause_visits": 68,
+            "local_ranking_literal_visits": 183,
+            "propagation_literal_visits": 1908,
+            "restriction_literal_visits": 902
+          },
+          "probe_metrics": {
+            "database_lookups": 2,
+            "key_serialized_bytes": 4916,
+            "normalization_literal_visits": 1254
+          },
+          "rows": 17,
+          "seconds": 0.02536158263683319,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "nonterminal-child": 1
+            },
+            "expanded_nodes": 17,
+            "local_calls": 1,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 3,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 5223,
+            "retained_prefixes": 0,
+            "trace_publications": 0
+          },
+          "template_case": 6
+        },
+        "retained": {
+          "admission_reason": "nonterminal-child",
+          "answer": false,
+          "baseline_forced_variables": 0,
+          "case": 0,
+          "child_expansions": 17,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_disk_hits": 3,
+            "certificate_memory_hits": 17,
+            "certificate_serialized_bytes": 16165,
+            "class_literal_payload": 842,
+            "database_lookups": 21,
+            "decomposition_literal_visits": 692,
+            "expanded_nodes": 17,
+            "forced_variables": 11,
+            "inserted_bytes": 23417,
+            "inserted_nodes": 17,
+            "key_serialized_bytes": 25110,
+            "matching_recognition_literal_visits": 12,
+            "normalization_literal_visits": 6275,
+            "propagation_literal_visits": 3315,
+            "read_bytes": 3668,
+            "restriction_literal_visits": 3978,
+            "search_disk_hits": 1,
+            "source_witness_literal_payload": 0,
+            "split_nodes": 6,
+            "subsumed_positive_clauses": 1,
+            "subsumption_candidate_tests": 32,
+            "subsumption_membership_tests": 63,
+            "subsumption_nodes": 1,
+            "subsumption_posting_lookups": 175,
+            "subsumption_recognition_literal_payload": 842,
+            "unit_conflicts": 6,
+            "verification_literal_payload": 2260,
+            "verification_trace_literals": 168,
+            "verified_nodes": 21,
+            "verified_subsumption_literal_payload": 10,
+            "visits": 18
+          },
+          "child_root": "cnf-residual-v1:[[-25,1],[-25,4,20],[-24,-11],[-23,-22,-17],[-23,-8],[-23,18],[-22,-8,25],[-21,-8,-2],[-21,12,24],[-21,16,22],[-20,-18,-5,16],[-20,-14,7],[-20,-7,9],[-20,-5,10,16],[-20,12,13],[-19,-14,15],[-19,2,14],[-19,6,12],[-18,-16,17],[-17,-9,4],[-17,-6,5],[-17,2,12],[-16,-15,-9],[-16,-13,-9],[-15,-11,2,14],[-15,12],[-14,-4,23],[-13,-11,-3,-2],[-13,-7],[-13,-3,6,9],[-12,3],[-11,-6,8],[-11,-4,3],[-11,14,20],[-11,16],[-10,-1,13],[-10,15],[-9,-7,4],[-8,-4,-3],[-8,-2,9],[-8,7,18],[-7,25],[-6,-4,14],[-6,2,14],[-6,4,11],[-6,5,14],[-6,17],[-6,25],[-5,8,10],[-4,10],[-3,5,19],[-3,22],[2,14],[2,24],[4,8,10],[5,6],[6,15,21],[7,14,23],[7,18],[8,25],[11,16],[11,21],[13,14],[15,17],[15,19],[16,23],[17,18,25],[17,21]]",
+          "choice_kind": null,
+          "engine_rows": 17,
+          "exposed": null,
+          "fallback_reason": null,
+          "probe_counts": {
+            "admission_child_lookups": 1,
+            "admission_child_probes": 1,
+            "admission_family_clauses": 68,
+            "admission_family_literal_visits": 183,
+            "admission_source_literal_visits": 183,
+            "local_baseline_probes": 1,
+            "local_guards_found": 1,
+            "local_premise_literals_copied": 552,
+            "local_premise_probes": 3,
+            "local_ranking_clause_visits": 68,
+            "local_ranking_literal_visits": 183,
+            "propagation_literal_visits": 1908,
+            "restriction_literal_visits": 902
+          },
+          "probe_metrics": {
+            "database_lookups": 2,
+            "key_serialized_bytes": 4916,
+            "normalization_literal_visits": 1254
+          },
+          "rows": 17,
+          "seconds": 0.023602208122611046,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "nonterminal-child": 1
+            },
+            "expanded_nodes": 17,
+            "local_calls": 1,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 3,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 5223,
+            "retained_prefixes": 0,
+            "trace_publications": 0
+          },
+          "template_case": 6
+        }
+      },
+      "case": 0
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_reason": null,
+          "answer": false,
+          "baseline_forced_variables": 0,
+          "case": 43,
+          "child_expansions": 1,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_memory_hits": 1,
+            "certificate_serialized_bytes": 1458,
+            "database_lookups": 1,
+            "expanded_nodes": 1,
+            "forced_variables": 3,
+            "inserted_bytes": 2198,
+            "inserted_nodes": 1,
+            "key_serialized_bytes": 2710,
+            "normalization_literal_visits": 694,
+            "propagation_literal_visits": 567,
+            "restriction_literal_visits": 378,
+            "search_memory_hits": 1,
+            "source_witness_literal_payload": 0,
+            "verification_literal_payload": 189,
+            "verification_trace_literals": 5,
+            "verified_nodes": 1,
+            "visits": 2
+          },
+          "child_root": "cnf-residual-v1:[[-25,-9,12],[-25,13],[-24,-15],[-24,-10],[-23,-7,25],[-22,-12,17],[-22,-7,-1],[-22,11,24],[-22,17,24],[-22,18,23],[-21,-15,-12,-2,6],[-21,-14,6],[-21,-6,8],[-21,-4,9,18],[-21,11,12],[-20,-14,16],[-20,-12,-2,17],[-20,1,14],[-20,5,11],[-19,-8,3],[-19,-5,4],[-19,1,11],[-18,-16,-8],[-18,-12,-8],[-17,-10,18],[-17,-6,25],[-17,6],[-17,15],[-17,16,19],[-16,-10,1,14],[-16,11],[-15,-14],[-13,3,21],[-12,-10,-2,-1],[-12,-6,15],[-12,-2,5,8],[-11,2],[-10,-5,7],[-10,-3,2],[-10,14,21],[-9,15,16],[-8,-6,3],[-7],[-7,-3,-2],[-7,-1,8],[-7,6],[-5,-3,14],[-5,1,14],[-5,3,10],[-5,4,14],[-5,19],[-5,25],[-4,7,9],[-3,9],[-2,4,20],[-2,23],[-1,12,17],[1,14],[1,24],[3,7,9],[4,5],[5,16,22],[7,25],[10,18],[10,22],[12,14],[16,20],[19,22],[19,25]]",
+          "choice_kind": null,
+          "engine_rows": 1,
+          "exposed": null,
+          "fallback_reason": null,
+          "probe_counts": {},
+          "probe_metrics": {},
+          "rows": 1,
+          "seconds": 0.005701875314116478,
+          "summary": {
+            "admission_calls": 0,
+            "admission_reasons": {},
+            "expanded_nodes": 1,
+            "local_calls": 0,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 0,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 567,
+            "retained_prefixes": 0,
+            "trace_publications": 0
+          },
+          "template_case": 8
+        },
+        "propagated": {
+          "admission_reason": "known-propagated",
+          "answer": false,
+          "baseline_forced_variables": 3,
+          "case": 43,
+          "child_expansions": 0,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_memory_hits": 1,
+            "certificate_serialized_bytes": 1458,
+            "database_lookups": 1,
+            "inserted_bytes": 2198,
+            "inserted_nodes": 1,
+            "key_serialized_bytes": 2710,
+            "normalization_literal_visits": 694,
+            "restriction_literal_visits": 378,
+            "screen_trace_check_literals": 5,
+            "screen_trace_publications": 1,
+            "screen_traces_reused": 1,
+            "screened_result_memory_hits": 1,
+            "search_memory_hits": 1,
+            "verification_literal_payload": 189,
+            "verification_trace_literals": 5,
+            "verified_nodes": 1,
+            "visits": 1
+          },
+          "child_root": "cnf-residual-v1:[[-25,-9,12],[-25,13],[-24,-15],[-24,-10],[-23,-7,25],[-22,-12,17],[-22,-7,-1],[-22,11,24],[-22,17,24],[-22,18,23],[-21,-15,-12,-2,6],[-21,-14,6],[-21,-6,8],[-21,-4,9,18],[-21,11,12],[-20,-14,16],[-20,-12,-2,17],[-20,1,14],[-20,5,11],[-19,-8,3],[-19,-5,4],[-19,1,11],[-18,-16,-8],[-18,-12,-8],[-17,-10,18],[-17,-6,25],[-17,6],[-17,15],[-17,16,19],[-16,-10,1,14],[-16,11],[-15,-14],[-13,3,21],[-12,-10,-2,-1],[-12,-6,15],[-12,-2,5,8],[-11,2],[-10,-5,7],[-10,-3,2],[-10,14,21],[-9,15,16],[-8,-6,3],[-7],[-7,-3,-2],[-7,-1,8],[-7,6],[-5,-3,14],[-5,1,14],[-5,3,10],[-5,4,14],[-5,19],[-5,25],[-4,7,9],[-3,9],[-2,4,20],[-2,23],[-1,12,17],[1,14],[1,24],[3,7,9],[4,5],[5,16,22],[7,25],[10,18],[10,22],[12,14],[16,20],[19,22],[19,25]]",
+          "choice_kind": "propagated",
+          "engine_rows": 1,
+          "exposed": {
+            "answer": false,
+            "family": null,
+            "known": true,
+            "root": "cnf-residual-v1:[[-22,-13],[-22,-9],[-20,-11,15],[-20,10,22],[-20,15,22],[-20,16,21],[-19,-13,-11,-2,6],[-19,-12,6],[-19,-6,7],[-19,-4,8,16],[-19,10,11],[-18,-12,14],[-18,-11,-2,15],[-18,1,12],[-18,5,10],[-17,-7,3],[-17,-5,4],[-17,1,10],[-16,-14,-7],[-16,-11,-7],[-15,-9,16],[-15,6],[-15,13],[-15,14,17],[-14,-9,1,12],[-14,10],[-13,-12],[-11,-9,-2,-1],[-11,-6,13],[-11,-2,5,7],[-10,2],[-9,-5],[-9,-3,2],[-9,12,19],[-8,11],[-8,13,14],[-7,-6,3],[-5,-3,12],[-5,1,12],[-5,3,9],[-5,4,12],[-5,17],[-4,8],[-3,8],[-2,4,18],[-2,21],[-1,11,15],[1,12],[1,22],[3,8],[3,19],[4,5],[5,14,20],[9,16],[9,20],[11,12],[14,18],[17,20]]"
+          },
+          "fallback_reason": null,
+          "probe_counts": {
+            "admission_family_clauses": 69,
+            "admission_family_literal_visits": 189,
+            "admission_source_literal_visits": 189,
+            "local_baseline_probes": 1,
+            "propagated_residual_lookups": 1,
+            "propagated_residual_reuses": 1,
+            "propagation_literal_visits": 567,
+            "restriction_literal_visits": 189
+          },
+          "probe_metrics": {
+            "database_lookups": 1,
+            "key_serialized_bytes": 2095,
+            "normalization_literal_visits": 536,
+            "propagated_residual_memory_hits": 1
+          },
+          "rows": 1,
+          "seconds": 0.006401457823812962,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "known-propagated": 1
+            },
+            "expanded_nodes": 0,
+            "local_calls": 1,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 0,
+            "propagated_reuses": 1,
+            "propagation_literal_visits": 567,
+            "retained_prefixes": 0,
+            "trace_publications": 1
+          },
+          "template_case": 8
+        },
+        "retained": {
+          "admission_reason": "known-propagated",
+          "answer": false,
+          "baseline_forced_variables": 3,
+          "case": 43,
+          "child_expansions": 0,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_memory_hits": 1,
+            "certificate_serialized_bytes": 1458,
+            "database_lookups": 1,
+            "inserted_bytes": 2198,
+            "inserted_nodes": 1,
+            "key_serialized_bytes": 2710,
+            "normalization_literal_visits": 694,
+            "restriction_literal_visits": 378,
+            "screen_trace_check_literals": 5,
+            "screen_trace_publications": 1,
+            "screen_traces_reused": 1,
+            "screened_result_memory_hits": 1,
+            "search_memory_hits": 1,
+            "verification_literal_payload": 189,
+            "verification_trace_literals": 5,
+            "verified_nodes": 1,
+            "visits": 1
+          },
+          "child_root": "cnf-residual-v1:[[-25,-9,12],[-25,13],[-24,-15],[-24,-10],[-23,-7,25],[-22,-12,17],[-22,-7,-1],[-22,11,24],[-22,17,24],[-22,18,23],[-21,-15,-12,-2,6],[-21,-14,6],[-21,-6,8],[-21,-4,9,18],[-21,11,12],[-20,-14,16],[-20,-12,-2,17],[-20,1,14],[-20,5,11],[-19,-8,3],[-19,-5,4],[-19,1,11],[-18,-16,-8],[-18,-12,-8],[-17,-10,18],[-17,-6,25],[-17,6],[-17,15],[-17,16,19],[-16,-10,1,14],[-16,11],[-15,-14],[-13,3,21],[-12,-10,-2,-1],[-12,-6,15],[-12,-2,5,8],[-11,2],[-10,-5,7],[-10,-3,2],[-10,14,21],[-9,15,16],[-8,-6,3],[-7],[-7,-3,-2],[-7,-1,8],[-7,6],[-5,-3,14],[-5,1,14],[-5,3,10],[-5,4,14],[-5,19],[-5,25],[-4,7,9],[-3,9],[-2,4,20],[-2,23],[-1,12,17],[1,14],[1,24],[3,7,9],[4,5],[5,16,22],[7,25],[10,18],[10,22],[12,14],[16,20],[19,22],[19,25]]",
+          "choice_kind": "propagated",
+          "engine_rows": 1,
+          "exposed": {
+            "answer": false,
+            "family": null,
+            "known": true,
+            "root": "cnf-residual-v1:[[-22,-13],[-22,-9],[-20,-11,15],[-20,10,22],[-20,15,22],[-20,16,21],[-19,-13,-11,-2,6],[-19,-12,6],[-19,-6,7],[-19,-4,8,16],[-19,10,11],[-18,-12,14],[-18,-11,-2,15],[-18,1,12],[-18,5,10],[-17,-7,3],[-17,-5,4],[-17,1,10],[-16,-14,-7],[-16,-11,-7],[-15,-9,16],[-15,6],[-15,13],[-15,14,17],[-14,-9,1,12],[-14,10],[-13,-12],[-11,-9,-2,-1],[-11,-6,13],[-11,-2,5,7],[-10,2],[-9,-5],[-9,-3,2],[-9,12,19],[-8,11],[-8,13,14],[-7,-6,3],[-5,-3,12],[-5,1,12],[-5,3,9],[-5,4,12],[-5,17],[-4,8],[-3,8],[-2,4,18],[-2,21],[-1,11,15],[1,12],[1,22],[3,8],[3,19],[4,5],[5,14,20],[9,16],[9,20],[11,12],[14,18],[17,20]]"
+          },
+          "fallback_reason": null,
+          "probe_counts": {
+            "admission_family_clauses": 69,
+            "admission_family_literal_visits": 189,
+            "admission_source_literal_visits": 189,
+            "local_baseline_probes": 1,
+            "propagated_residual_lookups": 1,
+            "propagated_residual_reuses": 1,
+            "propagation_literal_visits": 567,
+            "restriction_literal_visits": 189
+          },
+          "probe_metrics": {
+            "database_lookups": 1,
+            "key_serialized_bytes": 2095,
+            "normalization_literal_visits": 536,
+            "propagated_residual_memory_hits": 1
+          },
+          "rows": 1,
+          "seconds": 0.006095999851822853,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "known-propagated": 1
+            },
+            "expanded_nodes": 0,
+            "local_calls": 1,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 0,
+            "propagated_reuses": 1,
+            "propagation_literal_visits": 567,
+            "retained_prefixes": 0,
+            "trace_publications": 1
+          },
+          "template_case": 8
+        }
+      },
+      "case": 43
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_reason": null,
+          "answer": false,
+          "baseline_forced_variables": 0,
+          "case": 63,
+          "child_expansions": 1,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 713,
+            "database_lookups": 1,
+            "expanded_nodes": 1,
+            "inserted_bytes": 1272,
+            "inserted_nodes": 1,
+            "key_serialized_bytes": 1118,
+            "normalization_literal_visits": 280,
+            "propagation_literal_visits": 224,
+            "source_witness_literal_payload": 0,
+            "unit_conflicts": 1,
+            "verification_literal_payload": 140,
+            "verification_trace_literals": 18,
+            "verified_nodes": 1,
+            "visits": 1
+          },
+          "child_root": "cnf-residual-v1:[[-23,1],[-23,3,18],[-22,-11],[-22,-9,-7],[-21],[-21,-20,-15],[-21,-7,16],[-20,-16,11],[-20,23],[-19],[-19,10,22],[-19,13,22],[-19,14,20],[-18,-16,-4,14],[-18,-6],[-18,-4,8,14],[-18,10],[-17,5,10],[-16,-14,-10,7],[-16,-14,15],[-15,-5,4],[-13,-9,14],[-13,-7,11],[-13,-6,23],[-13,6,16],[-13,12,15],[-12,10],[-10,2],[-10,7,19],[-9,-3,2],[-9,18],[-8,-1],[-8,11,12],[-7,-5,15],[-7,12,17],[-5,-3],[-5,3,9],[-5,4],[-5,23],[-3,-2],[-3,8],[-2,4,17],[-2,20],[2,7,19],[4,5],[5,12,19],[6,16],[6,21],[7,17,18],[9,14],[9,19],[13],[14,21],[15,16,23],[15,19]]",
+          "choice_kind": null,
+          "engine_rows": 1,
+          "exposed": null,
+          "fallback_reason": null,
+          "probe_counts": {},
+          "probe_metrics": {},
+          "rows": 1,
+          "seconds": 0.011572250165045261,
+          "summary": {
+            "admission_calls": 0,
+            "admission_reasons": {},
+            "expanded_nodes": 1,
+            "local_calls": 0,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 0,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 224,
+            "retained_prefixes": 0,
+            "trace_publications": 0
+          },
+          "template_case": 6
+        },
+        "propagated": {
+          "admission_reason": "terminal-target",
+          "answer": false,
+          "baseline_forced_variables": 9,
+          "case": 63,
+          "child_expansions": 0,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 713,
+            "database_lookups": 1,
+            "inserted_bytes": 1272,
+            "inserted_nodes": 1,
+            "key_serialized_bytes": 1118,
+            "normalization_literal_visits": 280,
+            "screen_trace_check_literals": 16,
+            "screen_trace_publications": 1,
+            "screen_traces_reused": 1,
+            "screened_result_memory_hits": 1,
+            "verification_literal_payload": 140,
+            "verification_trace_literals": 18,
+            "verified_nodes": 1
+          },
+          "child_root": "cnf-residual-v1:[[-23,1],[-23,3,18],[-22,-11],[-22,-9,-7],[-21],[-21,-20,-15],[-21,-7,16],[-20,-16,11],[-20,23],[-19],[-19,10,22],[-19,13,22],[-19,14,20],[-18,-16,-4,14],[-18,-6],[-18,-4,8,14],[-18,10],[-17,5,10],[-16,-14,-10,7],[-16,-14,15],[-15,-5,4],[-13,-9,14],[-13,-7,11],[-13,-6,23],[-13,6,16],[-13,12,15],[-12,10],[-10,2],[-10,7,19],[-9,-3,2],[-9,18],[-8,-1],[-8,11,12],[-7,-5,15],[-7,12,17],[-5,-3],[-5,3,9],[-5,4],[-5,23],[-3,-2],[-3,8],[-2,4,17],[-2,20],[2,7,19],[4,5],[5,12,19],[6,16],[6,21],[7,17,18],[9,14],[9,19],[13],[14,21],[15,16,23],[15,19]]",
+          "choice_kind": "terminal",
+          "engine_rows": 1,
+          "exposed": null,
+          "fallback_reason": null,
+          "probe_counts": {
+            "admission_family_clauses": 55,
+            "admission_family_literal_visits": 140,
+            "admission_source_literal_visits": 140,
+            "local_baseline_probes": 1,
+            "local_terminal_targets": 1,
+            "propagation_literal_visits": 224
+          },
+          "probe_metrics": {
+            "database_lookups": 1,
+            "key_serialized_bytes": 1118,
+            "normalization_literal_visits": 280
+          },
+          "rows": 1,
+          "seconds": 0.011873625218868256,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "terminal-target": 1
+            },
+            "expanded_nodes": 0,
+            "local_calls": 1,
+            "local_guards": 0,
+            "local_terminals": 1,
+            "premise_probes": 0,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 224,
+            "retained_prefixes": 0,
+            "trace_publications": 1
+          },
+          "template_case": 6
+        },
+        "retained": {
+          "admission_reason": "terminal-target",
+          "answer": false,
+          "baseline_forced_variables": 9,
+          "case": 63,
+          "child_expansions": 0,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 713,
+            "database_lookups": 1,
+            "inserted_bytes": 1272,
+            "inserted_nodes": 1,
+            "key_serialized_bytes": 1118,
+            "normalization_literal_visits": 280,
+            "screen_trace_check_literals": 16,
+            "screen_trace_publications": 1,
+            "screen_traces_reused": 1,
+            "screened_result_memory_hits": 1,
+            "verification_literal_payload": 140,
+            "verification_trace_literals": 18,
+            "verified_nodes": 1
+          },
+          "child_root": "cnf-residual-v1:[[-23,1],[-23,3,18],[-22,-11],[-22,-9,-7],[-21],[-21,-20,-15],[-21,-7,16],[-20,-16,11],[-20,23],[-19],[-19,10,22],[-19,13,22],[-19,14,20],[-18,-16,-4,14],[-18,-6],[-18,-4,8,14],[-18,10],[-17,5,10],[-16,-14,-10,7],[-16,-14,15],[-15,-5,4],[-13,-9,14],[-13,-7,11],[-13,-6,23],[-13,6,16],[-13,12,15],[-12,10],[-10,2],[-10,7,19],[-9,-3,2],[-9,18],[-8,-1],[-8,11,12],[-7,-5,15],[-7,12,17],[-5,-3],[-5,3,9],[-5,4],[-5,23],[-3,-2],[-3,8],[-2,4,17],[-2,20],[2,7,19],[4,5],[5,12,19],[6,16],[6,21],[7,17,18],[9,14],[9,19],[13],[14,21],[15,16,23],[15,19]]",
+          "choice_kind": "terminal",
+          "engine_rows": 1,
+          "exposed": null,
+          "fallback_reason": null,
+          "probe_counts": {
+            "admission_family_clauses": 55,
+            "admission_family_literal_visits": 140,
+            "admission_source_literal_visits": 140,
+            "local_baseline_probes": 1,
+            "local_terminal_targets": 1,
+            "propagation_literal_visits": 224
+          },
+          "probe_metrics": {
+            "database_lookups": 1,
+            "key_serialized_bytes": 1118,
+            "normalization_literal_visits": 280
+          },
+          "rows": 1,
+          "seconds": 0.011897999793291092,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "terminal-target": 1
+            },
+            "expanded_nodes": 0,
+            "local_calls": 1,
+            "local_guards": 0,
+            "local_terminals": 1,
+            "premise_probes": 0,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 224,
+            "retained_prefixes": 0,
+            "trace_publications": 1
+          },
+          "template_case": 6
+        }
+      },
+      "case": 63
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_reason": null,
+          "answer": false,
+          "baseline_forced_variables": 0,
+          "case": 125,
+          "child_expansions": 4,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_memory_hits": 3,
+            "certificate_serialized_bytes": 2734,
+            "class_literal_payload": 61,
+            "database_lookups": 4,
+            "decomposition_literal_visits": 61,
+            "expanded_nodes": 4,
+            "forced_variables": 14,
+            "inserted_bytes": 4198,
+            "inserted_nodes": 4,
+            "key_serialized_bytes": 3618,
+            "matching_recognition_literal_visits": 2,
+            "normalization_literal_visits": 868,
+            "propagation_literal_visits": 1448,
+            "restriction_literal_visits": 624,
+            "source_witness_literal_payload": 0,
+            "split_nodes": 1,
+            "subsumed_positive_clauses": 0,
+            "subsumption_posting_lookups": 10,
+            "subsumption_recognition_literal_payload": 61,
+            "unit_conflicts": 2,
+            "verification_literal_payload": 352,
+            "verification_trace_literals": 60,
+            "verified_nodes": 4,
+            "visits": 4
+          },
+          "child_root": "cnf-residual-v1:[[-28,1],[-28,24],[-27,-26,-21],[-27,10],[-27,22],[-26,-22,14],[-26,-21,-16],[-26,-18],[-26,28],[-25,-18],[-25,-2],[-25,11],[-25,26],[-24,-8,9],[-24,-4],[-24,8,17],[-24,11,12],[-23,-13,19],[-23,-12],[-23,5],[-23,7,11],[-21,-9],[-21,-7,4],[-21,2,11],[-20,13],[-20,21],[-19],[-19,-10,-9],[-19,11,16],[-18,-11,3],[-18,8,17],[-18,27],[-17,-14,15],[-17,-10,27],[-16,-15,13],[-16,-9],[-16,-8,6],[-16,-4],[-16,5,19],[-15,-12,-3],[-15,-5,-1],[-14,-13],[-12,-10,-4],[-12,-10,18],[-12,-8,14],[-11,3,18],[-10,17,22],[-10,27],[-9,-8],[-8,28],[-7,4,13],[-7,10,16],[-7,20],[-7,28],[-6,7,25],[-6,21],[-5,2,24],[-5,9,27],[-3,4,23],[-3,26],[-2,9],[-2,15],[2,5],[4,6,11],[4,7,10],[5,12,13],[5,20,25],[7,9,15],[8,13,27],[8,22],[9,12,16],[13,24],[14],[17,28],[19,23],[21,22,28]]",
+          "choice_kind": null,
+          "engine_rows": 4,
+          "exposed": null,
+          "fallback_reason": null,
+          "probe_counts": {},
+          "probe_metrics": {},
+          "rows": 4,
+          "seconds": 0.012514666188508272,
+          "summary": {
+            "admission_calls": 0,
+            "admission_reasons": {},
+            "expanded_nodes": 4,
+            "local_calls": 0,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 0,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 1448,
+            "retained_prefixes": 0,
+            "trace_publications": 0
+          },
+          "template_case": 12
+        },
+        "propagated": {
+          "admission_reason": "unit-conflict-child",
+          "answer": false,
+          "baseline_forced_variables": 14,
+          "case": 125,
+          "child_expansions": 0,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 994,
+            "database_lookups": 1,
+            "inserted_bytes": 1716,
+            "inserted_nodes": 1,
+            "key_serialized_bytes": 1444,
+            "normalization_literal_visits": 356,
+            "screen_trace_check_literals": 50,
+            "screen_trace_publications": 1,
+            "screen_traces_reused": 1,
+            "screened_result_memory_hits": 1,
+            "verification_literal_payload": 177,
+            "verification_trace_literals": 53,
+            "verified_nodes": 1
+          },
+          "child_root": "cnf-residual-v1:[[-27,-26,-21],[-27,10],[-27,22],[-26,-22,14],[-26,-21,-16],[-26,-18],[-25,-18],[-25,-2],[-25,11],[-25,26],[-24,-8,9],[-24,-4],[-24,8,17],[-24,11,12],[-23,-13,19],[-23,-12],[-23,5],[-23,7,11],[-21,-9],[-21,-7,4],[-21,2,11],[-20,13],[-20,21],[-19],[-19,-10,-9],[-19,11,16],[-18,-11,3],[-18,8,17],[-18,27],[-17,-14,15],[-17,-10,27],[-16,-15,13],[-16,-9],[-16,-8,6],[-16,-4],[-16,5,19],[-15,-12,-3],[-15,-5,-1],[-14,-13],[-12,-10,-4],[-12,-10,18],[-12,-8,14],[-11,3,18],[-10,17,22],[-10,27],[-9,-8],[-7,4,13],[-7,10,16],[-7,20],[-6,7,25],[-6,21],[-5,2,24],[-5,9,27],[-3,4,23],[-3,26],[-2,9],[-2,15],[1],[2,5],[4,6,11],[4,7,10],[5,12,13],[5,20,25],[7,9,15],[8,13,27],[8,22],[9,12,16],[13,24],[14],[19,23],[24]]",
+          "choice_kind": "guard",
+          "engine_rows": 2,
+          "exposed": {
+            "answer": null,
+            "family": null,
+            "known": false,
+            "root": "cnf-residual-v1:[[-14,1],[-13,-11],[-13,-11,-8],[-13,-10],[-13,14],[-12,-10],[-12,-2],[-12,13],[-11,-6],[-10,3],[-10,5,9],[-9,7],[-8,-7],[-8,-6],[-8,-5,4],[-7,-1],[-6,-5],[-5,6],[-5,14],[-4,11],[-4,12],[-3,13],[-2,6],[-2,7],[3,10],[5,9],[6,7],[6,8],[9,14]]"
+          },
+          "fallback_reason": null,
+          "probe_counts": {
+            "admission_child_lookups": 1,
+            "admission_child_probes": 1,
+            "admission_family_clauses": 76,
+            "admission_family_literal_visits": 190,
+            "admission_source_literal_visits": 192,
+            "local_baseline_probes": 1,
+            "local_guards_found": 1,
+            "local_premise_literals_copied": 193,
+            "local_premise_probes": 1,
+            "local_ranking_clause_visits": 76,
+            "local_ranking_literal_visits": 190,
+            "propagated_family_clauses": 29,
+            "propagated_family_literal_visits": 61,
+            "propagated_residual_lookups": 1,
+            "propagation_literal_visits": 2010,
+            "restriction_literal_visits": 382
+          },
+          "probe_metrics": {
+            "database_lookups": 3,
+            "key_serialized_bytes": 4028,
+            "normalization_literal_visits": 996
+          },
+          "rows": 2,
+          "seconds": 0.013189292047172785,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "unit-conflict-child": 1
+            },
+            "expanded_nodes": 0,
+            "local_calls": 1,
+            "local_guards": 1,
+            "local_terminals": 0,
+            "premise_probes": 1,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 2010,
+            "retained_prefixes": 0,
+            "trace_publications": 2
+          },
+          "template_case": 12
+        },
+        "retained": {
+          "admission_reason": "unit-conflict-child",
+          "answer": false,
+          "baseline_forced_variables": 14,
+          "case": 125,
+          "child_expansions": 0,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 994,
+            "database_lookups": 1,
+            "inserted_bytes": 1716,
+            "inserted_nodes": 1,
+            "key_serialized_bytes": 1444,
+            "normalization_literal_visits": 356,
+            "screen_trace_check_literals": 50,
+            "screen_trace_publications": 1,
+            "screen_traces_reused": 1,
+            "screened_result_memory_hits": 1,
+            "verification_literal_payload": 177,
+            "verification_trace_literals": 53,
+            "verified_nodes": 1
+          },
+          "child_root": "cnf-residual-v1:[[-27,-26,-21],[-27,10],[-27,22],[-26,-22,14],[-26,-21,-16],[-26,-18],[-25,-18],[-25,-2],[-25,11],[-25,26],[-24,-8,9],[-24,-4],[-24,8,17],[-24,11,12],[-23,-13,19],[-23,-12],[-23,5],[-23,7,11],[-21,-9],[-21,-7,4],[-21,2,11],[-20,13],[-20,21],[-19],[-19,-10,-9],[-19,11,16],[-18,-11,3],[-18,8,17],[-18,27],[-17,-14,15],[-17,-10,27],[-16,-15,13],[-16,-9],[-16,-8,6],[-16,-4],[-16,5,19],[-15,-12,-3],[-15,-5,-1],[-14,-13],[-12,-10,-4],[-12,-10,18],[-12,-8,14],[-11,3,18],[-10,17,22],[-10,27],[-9,-8],[-7,4,13],[-7,10,16],[-7,20],[-6,7,25],[-6,21],[-5,2,24],[-5,9,27],[-3,4,23],[-3,26],[-2,9],[-2,15],[1],[2,5],[4,6,11],[4,7,10],[5,12,13],[5,20,25],[7,9,15],[8,13,27],[8,22],[9,12,16],[13,24],[14],[19,23],[24]]",
+          "choice_kind": "guard",
+          "engine_rows": 2,
+          "exposed": {
+            "answer": null,
+            "family": null,
+            "known": false,
+            "root": "cnf-residual-v1:[[-14,1],[-13,-11],[-13,-11,-8],[-13,-10],[-13,14],[-12,-10],[-12,-2],[-12,13],[-11,-6],[-10,3],[-10,5,9],[-9,7],[-8,-7],[-8,-6],[-8,-5,4],[-7,-1],[-6,-5],[-5,6],[-5,14],[-4,11],[-4,12],[-3,13],[-2,6],[-2,7],[3,10],[5,9],[6,7],[6,8],[9,14]]"
+          },
+          "fallback_reason": null,
+          "probe_counts": {
+            "admission_child_lookups": 1,
+            "admission_child_probes": 1,
+            "admission_family_clauses": 76,
+            "admission_family_literal_visits": 190,
+            "admission_source_literal_visits": 192,
+            "local_baseline_probes": 1,
+            "local_guards_found": 1,
+            "local_premise_literals_copied": 193,
+            "local_premise_probes": 1,
+            "local_ranking_clause_visits": 76,
+            "local_ranking_literal_visits": 190,
+            "propagated_family_clauses": 29,
+            "propagated_family_literal_visits": 61,
+            "propagated_residual_lookups": 1,
+            "propagation_literal_visits": 2010,
+            "restriction_literal_visits": 382
+          },
+          "probe_metrics": {
+            "database_lookups": 3,
+            "key_serialized_bytes": 4028,
+            "normalization_literal_visits": 996
+          },
+          "rows": 2,
+          "seconds": 0.013826207723468542,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "unit-conflict-child": 1
+            },
+            "expanded_nodes": 0,
+            "local_calls": 1,
+            "local_guards": 1,
+            "local_terminals": 0,
+            "premise_probes": 1,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 2010,
+            "retained_prefixes": 0,
+            "trace_publications": 2
+          },
+          "template_case": 12
+        }
+      },
+      "case": 125
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_reason": null,
+          "answer": false,
+          "baseline_forced_variables": 0,
+          "case": 131,
+          "child_expansions": 15,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_memory_hits": 14,
+            "certificate_serialized_bytes": 14963,
+            "class_literal_payload": 588,
+            "database_lookups": 15,
+            "decomposition_literal_visits": 588,
+            "expanded_nodes": 15,
+            "forced_variables": 7,
+            "inserted_bytes": 21899,
+            "inserted_nodes": 15,
+            "key_serialized_bytes": 19999,
+            "matching_recognition_literal_visits": 21,
+            "normalization_literal_visits": 4887,
+            "propagation_literal_visits": 3635,
+            "restriction_literal_visits": 3418,
+            "source_witness_literal_payload": 0,
+            "split_nodes": 5,
+            "subsumed_positive_clauses": 0,
+            "subsumption_candidate_tests": 12,
+            "subsumption_membership_tests": 24,
+            "subsumption_posting_lookups": 91,
+            "subsumption_recognition_literal_payload": 588,
+            "unit_conflicts": 6,
+            "verification_literal_payload": 1693,
+            "verification_trace_literals": 162,
+            "verified_nodes": 15,
+            "visits": 15
+          },
+          "child_root": "cnf-residual-v1:[[-28,1],[-27,-24,14],[-27,-23],[-27,-23,-16],[-27,-17],[-27,28],[-26,-21,-17],[-26,-12,20],[-26,-10,-8,11],[-26,-10,-8,20],[-26,-2],[-26,22,27],[-25,-21,5],[-25,-13,18],[-25,-12],[-25,7,11],[-25,15,20],[-24,-22,19],[-23,-9],[-23,-7,4],[-23,2,11],[-22,-18,-9],[-22,-12,-9],[-21,-18,-10],[-21,-10,-8],[-21,-7,16],[-21,9,12,16],[-20,-10,22],[-20,-8,14],[-20,-6,23],[-20,24],[-19,-11,8],[-19,13],[-19,23],[-18,11,16],[-17],[-17,-11,3],[-17,3,10],[-16,-15,13],[-16,-9],[-16,-4],[-16,5,18],[-15,-12,-3],[-15,-5,-1],[-14,-13],[-11,3,17],[-10,-8,2,5],[-10,-2,15],[-8,-7,19],[-8,18,25],[-8,24],[-7,4,13],[-7,10],[-7,28],[-6,7,26],[-4,22],[-3,4,25],[-3,27],[-2,8,15,25],[-2,9],[-2,12,20],[2,13,21],[3,8,26],[4,6,11],[4,7],[5,12,13],[5,19,26],[7,9,15],[10,16,26],[10,22],[11,12],[22,28],[23,24,28],[24]]",
+          "choice_kind": null,
+          "engine_rows": 15,
+          "exposed": null,
+          "fallback_reason": null,
+          "probe_counts": {},
+          "probe_metrics": {},
+          "rows": 15,
+          "seconds": 0.019079916179180145,
+          "summary": {
+            "admission_calls": 0,
+            "admission_reasons": {},
+            "expanded_nodes": 15,
+            "local_calls": 0,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 0,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 3635,
+            "retained_prefixes": 0,
+            "trace_publications": 0
+          },
+          "template_case": 12
+        },
+        "propagated": {
+          "admission_reason": "nonterminal-child",
+          "answer": false,
+          "baseline_forced_variables": 2,
+          "case": 131,
+          "child_expansions": 15,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_memory_hits": 14,
+            "certificate_serialized_bytes": 14963,
+            "class_literal_payload": 588,
+            "database_lookups": 15,
+            "decomposition_literal_visits": 588,
+            "expanded_nodes": 15,
+            "forced_variables": 7,
+            "inserted_bytes": 21899,
+            "inserted_nodes": 15,
+            "key_serialized_bytes": 19999,
+            "matching_recognition_literal_visits": 21,
+            "normalization_literal_visits": 4887,
+            "propagation_literal_visits": 3635,
+            "restriction_literal_visits": 3418,
+            "source_witness_literal_payload": 0,
+            "split_nodes": 5,
+            "subsumed_positive_clauses": 0,
+            "subsumption_candidate_tests": 12,
+            "subsumption_membership_tests": 24,
+            "subsumption_posting_lookups": 91,
+            "subsumption_recognition_literal_payload": 588,
+            "unit_conflicts": 6,
+            "verification_literal_payload": 1693,
+            "verification_trace_literals": 162,
+            "verified_nodes": 15,
+            "visits": 15
+          },
+          "child_root": "cnf-residual-v1:[[-28,1],[-27,-24,14],[-27,-23],[-27,-23,-16],[-27,-17],[-27,28],[-26,-21,-17],[-26,-12,20],[-26,-10,-8,11],[-26,-10,-8,20],[-26,-2],[-26,22,27],[-25,-21,5],[-25,-13,18],[-25,-12],[-25,7,11],[-25,15,20],[-24,-22,19],[-23,-9],[-23,-7,4],[-23,2,11],[-22,-18,-9],[-22,-12,-9],[-21,-18,-10],[-21,-10,-8],[-21,-7,16],[-21,9,12,16],[-20,-10,22],[-20,-8,14],[-20,-6,23],[-20,24],[-19,-11,8],[-19,13],[-19,23],[-18,11,16],[-17],[-17,-11,3],[-17,3,10],[-16,-15,13],[-16,-9],[-16,-4],[-16,5,18],[-15,-12,-3],[-15,-5,-1],[-14,-13],[-11,3,17],[-10,-8,2,5],[-10,-2,15],[-8,-7,19],[-8,18,25],[-8,24],[-7,4,13],[-7,10],[-7,28],[-6,7,26],[-4,22],[-3,4,25],[-3,27],[-2,8,15,25],[-2,9],[-2,12,20],[2,13,21],[3,8,26],[4,6,11],[4,7],[5,12,13],[5,19,26],[7,9,15],[10,16,26],[10,22],[11,12],[22,28],[23,24,28],[24]]",
+          "choice_kind": null,
+          "engine_rows": 15,
+          "exposed": {
+            "answer": null,
+            "family": null,
+            "known": false,
+            "root": "cnf-residual-v1:[[-26,1],[-25,-22],[-25,-22,-16],[-25,14],[-25,26],[-24,-12,19],[-24,-10,-8,11],[-24,-10,-8,19],[-24,-2],[-24,21,25],[-23,-20,5],[-23,-13,17],[-23,-12],[-23,7,11],[-23,15,19],[-22,-9],[-22,-7,4],[-22,2,11],[-21,-17,-9],[-21,-12,-9],[-21,18],[-20,-17,-10],[-20,-10,-8],[-20,-7,16],[-20,9,12,16],[-19,-10,21],[-19,-8,14],[-19,-6,22],[-18,-11,8],[-18,13],[-18,22],[-17,11,16],[-16,-15,13],[-16,-9],[-16,-4],[-16,5,17],[-15,-12,-3],[-15,-5,-1],[-14,-13],[-11,3],[-10,-8,2,5],[-10,-2,15],[-8,-7,18],[-8,17,23],[-7,4,13],[-7,10],[-7,26],[-6,7,24],[-4,21],[-3,4,23],[-3,25],[-2,8,15,23],[-2,9],[-2,12,19],[2,13,20],[3,8,24],[4,6,11],[4,7],[5,12,13],[5,18,24],[7,9,15],[10,16,24],[10,21],[11,12],[21,26]]"
+          },
+          "fallback_reason": null,
+          "probe_counts": {
+            "admission_child_lookups": 1,
+            "admission_child_probes": 1,
+            "admission_family_clauses": 74,
+            "admission_family_literal_visits": 200,
+            "admission_source_literal_visits": 200,
+            "local_baseline_probes": 1,
+            "local_guards_found": 1,
+            "local_premise_literals_copied": 402,
+            "local_premise_probes": 2,
+            "local_ranking_clause_visits": 74,
+            "local_ranking_literal_visits": 200,
+            "propagated_family_clauses": 65,
+            "propagated_family_literal_visits": 177,
+            "propagated_residual_lookups": 1,
+            "propagation_literal_visits": 2695,
+            "restriction_literal_visits": 787
+          },
+          "probe_metrics": {
+            "database_lookups": 3,
+            "key_serialized_bytes": 5453,
+            "normalization_literal_visits": 1351
+          },
+          "rows": 15,
+          "seconds": 0.02112212497740984,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "nonterminal-child": 1
+            },
+            "expanded_nodes": 15,
+            "local_calls": 1,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 2,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 6330,
+            "retained_prefixes": 0,
+            "trace_publications": 0
+          },
+          "template_case": 12
+        },
+        "retained": {
+          "admission_reason": "retained-prefix",
+          "answer": false,
+          "baseline_forced_variables": 2,
+          "case": 131,
+          "child_expansions": 14,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_memory_hits": 14,
+            "certificate_serialized_bytes": 14963,
+            "class_literal_payload": 588,
+            "database_lookups": 15,
+            "decomposition_literal_visits": 588,
+            "expanded_nodes": 14,
+            "forced_variables": 5,
+            "inserted_bytes": 21899,
+            "inserted_nodes": 15,
+            "key_serialized_bytes": 19999,
+            "matching_recognition_literal_visits": 21,
+            "normalization_literal_visits": 4887,
+            "propagation_literal_visits": 3235,
+            "restriction_literal_visits": 3418,
+            "screen_trace_check_literals": 2,
+            "screen_trace_publications": 1,
+            "screen_traces_reused": 1,
+            "screened_result_memory_hits": 1,
+            "split_nodes": 5,
+            "subsumed_positive_clauses": 0,
+            "subsumption_candidate_tests": 12,
+            "subsumption_membership_tests": 24,
+            "subsumption_posting_lookups": 91,
+            "subsumption_recognition_literal_payload": 588,
+            "unit_conflicts": 6,
+            "verification_literal_payload": 1693,
+            "verification_trace_literals": 162,
+            "verified_nodes": 15,
+            "visits": 14
+          },
+          "child_root": "cnf-residual-v1:[[-28,1],[-27,-24,14],[-27,-23],[-27,-23,-16],[-27,-17],[-27,28],[-26,-21,-17],[-26,-12,20],[-26,-10,-8,11],[-26,-10,-8,20],[-26,-2],[-26,22,27],[-25,-21,5],[-25,-13,18],[-25,-12],[-25,7,11],[-25,15,20],[-24,-22,19],[-23,-9],[-23,-7,4],[-23,2,11],[-22,-18,-9],[-22,-12,-9],[-21,-18,-10],[-21,-10,-8],[-21,-7,16],[-21,9,12,16],[-20,-10,22],[-20,-8,14],[-20,-6,23],[-20,24],[-19,-11,8],[-19,13],[-19,23],[-18,11,16],[-17],[-17,-11,3],[-17,3,10],[-16,-15,13],[-16,-9],[-16,-4],[-16,5,18],[-15,-12,-3],[-15,-5,-1],[-14,-13],[-11,3,17],[-10,-8,2,5],[-10,-2,15],[-8,-7,19],[-8,18,25],[-8,24],[-7,4,13],[-7,10],[-7,28],[-6,7,26],[-4,22],[-3,4,25],[-3,27],[-2,8,15,25],[-2,9],[-2,12,20],[2,13,21],[3,8,26],[4,6,11],[4,7],[5,12,13],[5,19,26],[7,9,15],[10,16,26],[10,22],[11,12],[22,28],[23,24,28],[24]]",
+          "choice_kind": "fallback-trace",
+          "engine_rows": 15,
+          "exposed": {
+            "answer": null,
+            "family": null,
+            "known": false,
+            "root": "cnf-residual-v1:[[-26,1],[-25,-22],[-25,-22,-16],[-25,14],[-25,26],[-24,-12,19],[-24,-10,-8,11],[-24,-10,-8,19],[-24,-2],[-24,21,25],[-23,-20,5],[-23,-13,17],[-23,-12],[-23,7,11],[-23,15,19],[-22,-9],[-22,-7,4],[-22,2,11],[-21,-17,-9],[-21,-12,-9],[-21,18],[-20,-17,-10],[-20,-10,-8],[-20,-7,16],[-20,9,12,16],[-19,-10,21],[-19,-8,14],[-19,-6,22],[-18,-11,8],[-18,13],[-18,22],[-17,11,16],[-16,-15,13],[-16,-9],[-16,-4],[-16,5,17],[-15,-12,-3],[-15,-5,-1],[-14,-13],[-11,3],[-10,-8,2,5],[-10,-2,15],[-8,-7,18],[-8,17,23],[-7,4,13],[-7,10],[-7,26],[-6,7,24],[-4,21],[-3,4,23],[-3,25],[-2,8,15,23],[-2,9],[-2,12,19],[2,13,20],[3,8,24],[4,6,11],[4,7],[5,12,13],[5,18,24],[7,9,15],[10,16,24],[10,21],[11,12],[21,26]]"
+          },
+          "fallback_reason": "nonterminal-child",
+          "probe_counts": {
+            "admission_child_lookups": 1,
+            "admission_child_probes": 1,
+            "admission_family_clauses": 74,
+            "admission_family_literal_visits": 200,
+            "admission_source_literal_visits": 200,
+            "fallback_forced_variables": 2,
+            "fallback_trace_reuses": 1,
+            "local_baseline_probes": 1,
+            "local_guards_found": 1,
+            "local_premise_literals_copied": 402,
+            "local_premise_probes": 2,
+            "local_ranking_clause_visits": 74,
+            "local_ranking_literal_visits": 200,
+            "propagated_family_clauses": 65,
+            "propagated_family_literal_visits": 177,
+            "propagated_residual_lookups": 1,
+            "propagation_literal_visits": 2695,
+            "restriction_literal_visits": 787
+          },
+          "probe_metrics": {
+            "database_lookups": 3,
+            "key_serialized_bytes": 5453,
+            "normalization_literal_visits": 1351
+          },
+          "rows": 15,
+          "seconds": 0.021184540819376707,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "retained-prefix": 1
+            },
+            "expanded_nodes": 14,
+            "local_calls": 1,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 2,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 5930,
+            "retained_prefixes": 1,
+            "trace_publications": 1
+          },
+          "template_case": 12
+        }
+      },
+      "case": 131
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_reason": null,
+          "answer": true,
+          "baseline_forced_variables": 0,
+          "case": 142,
+          "child_expansions": 1,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 813,
+            "database_lookups": 2,
+            "expanded_nodes": 1,
+            "forced_variables": 23,
+            "inserted_bytes": 1453,
+            "inserted_nodes": 1,
+            "key_serialized_bytes": 1316,
+            "normalization_literal_visits": 324,
+            "propagation_literal_visits": 1458,
+            "read_bytes": 62,
+            "restriction_literal_visits": 162,
+            "search_disk_hits": 1,
+            "source_witness_literal_payload": 162,
+            "verification_literal_payload": 162,
+            "verified_nodes": 2,
+            "visits": 2
+          },
+          "child_root": "cnf-residual-v1:[[-24,-8,10],[-24,11],[-23,-13],[-22,-21,-17],[-22,-6],[-22,-5,18],[-21,-18,13],[-21,-6,24],[-20,-18,-3,16],[-20,-13,-10,-2,4],[-20,-12,4],[-20,-4,7],[-20,-3,8,16],[-20,9,10],[-19,-12,14],[-19,-10,-2,15],[-19,1,12],[-18,-16,-9,5],[-18,-16,17],[-17,-7],[-17,1,9],[-17,3],[-16,-14,-7],[-16,-10,-7],[-15,-5,13],[-15,-4,24],[-15,4,18],[-15,14,17],[-14,9],[-13,-12],[-11,20],[-10,-4,13],[-10,-2,-1,5,19],[-9,2],[-9,5],[-8,13,14],[-7,-4],[-6,-1,7],[-6,4,18],[-5,1,12],[-5,14,19],[-5,17],[-3,6,8],[-2,3,19],[-2,21],[-1,10,15],[1,12],[1,23],[2,5],[3,12],[4,12,22],[5,12,19,20],[6,8],[6,24],[10,12],[16],[16,22],[17],[17,18,24],[24]]",
+          "choice_kind": null,
+          "engine_rows": 1,
+          "exposed": null,
+          "fallback_reason": null,
+          "probe_counts": {},
+          "probe_metrics": {},
+          "rows": 1,
+          "seconds": 0.011618999764323235,
+          "summary": {
+            "admission_calls": 0,
+            "admission_reasons": {},
+            "expanded_nodes": 1,
+            "local_calls": 0,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 0,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 1458,
+            "retained_prefixes": 0,
+            "trace_publications": 0
+          },
+          "template_case": 8
+        },
+        "propagated": {
+          "admission_reason": "known-propagated",
+          "answer": true,
+          "baseline_forced_variables": 23,
+          "case": 142,
+          "child_expansions": 0,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 813,
+            "database_lookups": 1,
+            "inserted_bytes": 1453,
+            "inserted_nodes": 1,
+            "key_serialized_bytes": 1298,
+            "normalization_literal_visits": 324,
+            "restriction_literal_visits": 162,
+            "screen_trace_check_literals": 51,
+            "screen_trace_publications": 1,
+            "screen_traces_reused": 1,
+            "screened_result_memory_hits": 1,
+            "search_memory_hits": 1,
+            "source_witness_literal_payload": 162,
+            "verification_literal_payload": 162,
+            "verified_nodes": 1,
+            "visits": 1
+          },
+          "child_root": "cnf-residual-v1:[[-24,-8,10],[-24,11],[-23,-13],[-22,-21,-17],[-22,-6],[-22,-5,18],[-21,-18,13],[-21,-6,24],[-20,-18,-3,16],[-20,-13,-10,-2,4],[-20,-12,4],[-20,-4,7],[-20,-3,8,16],[-20,9,10],[-19,-12,14],[-19,-10,-2,15],[-19,1,12],[-18,-16,-9,5],[-18,-16,17],[-17,-7],[-17,1,9],[-17,3],[-16,-14,-7],[-16,-10,-7],[-15,-5,13],[-15,-4,24],[-15,4,18],[-15,14,17],[-14,9],[-13,-12],[-11,20],[-10,-4,13],[-10,-2,-1,5,19],[-9,2],[-9,5],[-8,13,14],[-7,-4],[-6,-1,7],[-6,4,18],[-5,1,12],[-5,14,19],[-5,17],[-3,6,8],[-2,3,19],[-2,21],[-1,10,15],[1,12],[1,23],[2,5],[3,12],[4,12,22],[5,12,19,20],[6,8],[6,24],[10,12],[16],[16,22],[17],[17,18,24],[24]]",
+          "choice_kind": "propagated",
+          "engine_rows": 1,
+          "exposed": {
+            "answer": true,
+            "family": null,
+            "known": true,
+            "root": "cnf-residual-v1:[]"
+          },
+          "fallback_reason": null,
+          "probe_counts": {
+            "admission_family_clauses": 60,
+            "admission_family_literal_visits": 162,
+            "admission_source_literal_visits": 162,
+            "local_baseline_probes": 1,
+            "propagated_residual_lookups": 1,
+            "propagated_residual_reuses": 1,
+            "propagation_literal_visits": 1458,
+            "restriction_literal_visits": 162
+          },
+          "probe_metrics": {
+            "database_lookups": 2,
+            "key_serialized_bytes": 1316,
+            "normalization_literal_visits": 324,
+            "propagated_residual_disk_hits": 1,
+            "read_bytes": 62,
+            "verification_literal_payload": 0,
+            "verified_nodes": 1
+          },
+          "rows": 1,
+          "seconds": 0.012203208170831203,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "known-propagated": 1
+            },
+            "expanded_nodes": 0,
+            "local_calls": 1,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 0,
+            "propagated_reuses": 1,
+            "propagation_literal_visits": 1458,
+            "retained_prefixes": 0,
+            "trace_publications": 1
+          },
+          "template_case": 8
+        },
+        "retained": {
+          "admission_reason": "known-propagated",
+          "answer": true,
+          "baseline_forced_variables": 23,
+          "case": 142,
+          "child_expansions": 0,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 813,
+            "database_lookups": 1,
+            "inserted_bytes": 1453,
+            "inserted_nodes": 1,
+            "key_serialized_bytes": 1298,
+            "normalization_literal_visits": 324,
+            "restriction_literal_visits": 162,
+            "screen_trace_check_literals": 51,
+            "screen_trace_publications": 1,
+            "screen_traces_reused": 1,
+            "screened_result_memory_hits": 1,
+            "search_memory_hits": 1,
+            "source_witness_literal_payload": 162,
+            "verification_literal_payload": 162,
+            "verified_nodes": 1,
+            "visits": 1
+          },
+          "child_root": "cnf-residual-v1:[[-24,-8,10],[-24,11],[-23,-13],[-22,-21,-17],[-22,-6],[-22,-5,18],[-21,-18,13],[-21,-6,24],[-20,-18,-3,16],[-20,-13,-10,-2,4],[-20,-12,4],[-20,-4,7],[-20,-3,8,16],[-20,9,10],[-19,-12,14],[-19,-10,-2,15],[-19,1,12],[-18,-16,-9,5],[-18,-16,17],[-17,-7],[-17,1,9],[-17,3],[-16,-14,-7],[-16,-10,-7],[-15,-5,13],[-15,-4,24],[-15,4,18],[-15,14,17],[-14,9],[-13,-12],[-11,20],[-10,-4,13],[-10,-2,-1,5,19],[-9,2],[-9,5],[-8,13,14],[-7,-4],[-6,-1,7],[-6,4,18],[-5,1,12],[-5,14,19],[-5,17],[-3,6,8],[-2,3,19],[-2,21],[-1,10,15],[1,12],[1,23],[2,5],[3,12],[4,12,22],[5,12,19,20],[6,8],[6,24],[10,12],[16],[16,22],[17],[17,18,24],[24]]",
+          "choice_kind": "propagated",
+          "engine_rows": 1,
+          "exposed": {
+            "answer": true,
+            "family": null,
+            "known": true,
+            "root": "cnf-residual-v1:[]"
+          },
+          "fallback_reason": null,
+          "probe_counts": {
+            "admission_family_clauses": 60,
+            "admission_family_literal_visits": 162,
+            "admission_source_literal_visits": 162,
+            "local_baseline_probes": 1,
+            "propagated_residual_lookups": 1,
+            "propagated_residual_reuses": 1,
+            "propagation_literal_visits": 1458,
+            "restriction_literal_visits": 162
+          },
+          "probe_metrics": {
+            "database_lookups": 2,
+            "key_serialized_bytes": 1316,
+            "normalization_literal_visits": 324,
+            "propagated_residual_disk_hits": 1,
+            "read_bytes": 62,
+            "verification_literal_payload": 0,
+            "verified_nodes": 1
+          },
+          "rows": 1,
+          "seconds": 0.012415125034749508,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "known-propagated": 1
+            },
+            "expanded_nodes": 0,
+            "local_calls": 1,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 0,
+            "propagated_reuses": 1,
+            "propagation_literal_visits": 1458,
+            "retained_prefixes": 0,
+            "trace_publications": 1
+          },
+          "template_case": 8
+        }
+      },
+      "case": 142
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_reason": null,
+          "answer": true,
+          "baseline_forced_variables": 0,
+          "case": 146,
+          "child_expansions": 6,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 3825,
+            "class_literal_payload": 228,
+            "database_lookups": 6,
+            "decomposition_literal_visits": 228,
+            "expanded_nodes": 6,
+            "forced_variables": 25,
+            "inserted_bytes": 6688,
+            "inserted_nodes": 6,
+            "key_serialized_bytes": 5744,
+            "matching_recognition_literal_visits": 7,
+            "normalization_literal_visits": 1388,
+            "propagation_literal_visits": 1847,
+            "restriction_literal_visits": 708,
+            "search_memory_hits": 1,
+            "source_witness_literal_payload": 196,
+            "split_nodes": 2,
+            "subsumed_positive_clauses": 0,
+            "subsumption_candidate_tests": 3,
+            "subsumption_membership_tests": 5,
+            "subsumption_posting_lookups": 45,
+            "subsumption_recognition_literal_payload": 228,
+            "unit_conflicts": 1,
+            "verification_literal_payload": 693,
+            "verification_trace_literals": 19,
+            "verified_nodes": 6,
+            "visits": 7
+          },
+          "child_root": "cnf-residual-v1:[[-28,1],[-28,24],[-27,-26,-22],[-27,-8,23],[-27,10],[-26,-23,13],[-26,-22,-15],[-26,-17],[-26,28],[-25,-17],[-25,-11,-8,12],[-25,-11,-8,20],[-25,-2],[-25,21,26],[-24,-7,9],[-24,-4,21],[-24,7,16],[-24,12],[-23,-21,19],[-22,-9],[-22,-6,4],[-22,2,12],[-21,-18,-9],[-20,-11,21],[-20,-8,13],[-20,-7,28],[-20,-5,22],[-20,7,23],[-19],[-19,-12,8],[-19,22],[-18,-11],[-18,-10,-9],[-18,12,15],[-17,-12,3],[-17,-11,27],[-17,3,11],[-17,7,16],[-16,-13,14],[-16,-10,27],[-15,-14],[-15,-9],[-15,-7,5],[-15,-4],[-15,18],[-12,3,17],[-11,-8],[-11,-8,2],[-11,-2,14],[-11,24],[-10,16,23],[-10,27],[-9,-7],[-8,-6,19],[-6,4],[-6,10,15],[-6,11],[-6,28],[-5,6,25],[-3,26],[-2,9],[-2,20],[3,8,25],[4,5,12],[4,6,10],[6,9,14],[6,12],[7,23],[7,27],[9,15],[11,15,25],[11,21],[14,20],[16,21,28],[19,25],[22,23,28]]",
+          "choice_kind": null,
+          "engine_rows": 6,
+          "exposed": null,
+          "fallback_reason": null,
+          "probe_counts": {},
+          "probe_metrics": {},
+          "rows": 6,
+          "seconds": 0.020332583226263523,
+          "summary": {
+            "admission_calls": 0,
+            "admission_reasons": {},
+            "expanded_nodes": 6,
+            "local_calls": 0,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 0,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 1847,
+            "retained_prefixes": 0,
+            "trace_publications": 0
+          },
+          "template_case": 12
+        },
+        "propagated": {
+          "admission_reason": "nonterminal-child",
+          "answer": true,
+          "baseline_forced_variables": 4,
+          "case": 146,
+          "child_expansions": 6,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 3825,
+            "class_literal_payload": 228,
+            "database_lookups": 6,
+            "decomposition_literal_visits": 228,
+            "expanded_nodes": 6,
+            "forced_variables": 25,
+            "inserted_bytes": 6688,
+            "inserted_nodes": 6,
+            "key_serialized_bytes": 5744,
+            "matching_recognition_literal_visits": 7,
+            "normalization_literal_visits": 1388,
+            "propagation_literal_visits": 1847,
+            "restriction_literal_visits": 708,
+            "search_memory_hits": 1,
+            "source_witness_literal_payload": 196,
+            "split_nodes": 2,
+            "subsumed_positive_clauses": 0,
+            "subsumption_candidate_tests": 3,
+            "subsumption_membership_tests": 5,
+            "subsumption_posting_lookups": 45,
+            "subsumption_recognition_literal_payload": 228,
+            "unit_conflicts": 1,
+            "verification_literal_payload": 693,
+            "verification_trace_literals": 19,
+            "verified_nodes": 6,
+            "visits": 7
+          },
+          "child_root": "cnf-residual-v1:[[-28,1],[-28,24],[-27,-26,-22],[-27,-8,23],[-27,10],[-26,-23,13],[-26,-22,-15],[-26,-17],[-26,28],[-25,-17],[-25,-11,-8,12],[-25,-11,-8,20],[-25,-2],[-25,21,26],[-24,-7,9],[-24,-4,21],[-24,7,16],[-24,12],[-23,-21,19],[-22,-9],[-22,-6,4],[-22,2,12],[-21,-18,-9],[-20,-11,21],[-20,-8,13],[-20,-7,28],[-20,-5,22],[-20,7,23],[-19],[-19,-12,8],[-19,22],[-18,-11],[-18,-10,-9],[-18,12,15],[-17,-12,3],[-17,-11,27],[-17,3,11],[-17,7,16],[-16,-13,14],[-16,-10,27],[-15,-14],[-15,-9],[-15,-7,5],[-15,-4],[-15,18],[-12,3,17],[-11,-8],[-11,-8,2],[-11,-2,14],[-11,24],[-10,16,23],[-10,27],[-9,-7],[-8,-6,19],[-6,4],[-6,10,15],[-6,11],[-6,28],[-5,6,25],[-3,26],[-2,9],[-2,20],[3,8,25],[4,5,12],[4,6,10],[6,9,14],[6,12],[7,23],[7,27],[9,15],[11,15,25],[11,21],[14,20],[16,21,28],[19,25],[22,23,28]]",
+          "choice_kind": null,
+          "engine_rows": 6,
+          "exposed": {
+            "answer": null,
+            "family": null,
+            "known": false,
+            "root": "cnf-residual-v1:[[-24,1],[-24,21],[-23,-22,-19],[-23,-7,20],[-23,9],[-22,-20,12],[-22,-19,-14],[-22,24],[-21,-6,8],[-21,-3,18],[-21,6,15],[-21,11],[-20,-18],[-19,-8],[-19,-5,3],[-19,11],[-18,-16,-8],[-17,-10,18],[-17,-7,12],[-17,-6,24],[-17,-4,19],[-17,6,20],[-16,-10],[-16,-9,-8],[-16,11,14],[-15,-12,13],[-15,-9,23],[-14,-13],[-14,-8],[-14,-6,4],[-14,-3],[-14,16],[-11,2],[-10,-7],[-10,-7,11],[-10,-7,17],[-10,21],[-9,15,20],[-9,23],[-8,-6],[-7,-5],[-5,3],[-5,9,14],[-5,10],[-5,24],[-2,22],[3,4,11],[3,5,9],[5,8,13],[5,11],[6,20],[6,23],[8,14],[10,18],[13,17],[15,18,24],[18,22],[19,20,24]]"
+          },
+          "fallback_reason": null,
+          "probe_counts": {
+            "admission_child_lookups": 1,
+            "admission_child_probes": 1,
+            "admission_family_clauses": 76,
+            "admission_family_literal_visits": 196,
+            "admission_source_literal_visits": 196,
+            "local_baseline_probes": 1,
+            "local_guards_found": 1,
+            "local_premise_literals_copied": 197,
+            "local_premise_probes": 1,
+            "local_ranking_clause_visits": 76,
+            "local_ranking_literal_visits": 196,
+            "propagated_family_clauses": 58,
+            "propagated_family_literal_visits": 144,
+            "propagated_residual_lookups": 1,
+            "propagation_literal_visits": 2045,
+            "restriction_literal_visits": 573
+          },
+          "probe_metrics": {
+            "database_lookups": 3,
+            "key_serialized_bytes": 4490,
+            "normalization_literal_visits": 1097
+          },
+          "rows": 6,
+          "seconds": 0.022445707581937313,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "nonterminal-child": 1
+            },
+            "expanded_nodes": 6,
+            "local_calls": 1,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 1,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 3892,
+            "retained_prefixes": 0,
+            "trace_publications": 0
+          },
+          "template_case": 12
+        },
+        "retained": {
+          "admission_reason": "retained-prefix",
+          "answer": true,
+          "baseline_forced_variables": 4,
+          "case": 146,
+          "child_expansions": 5,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 3825,
+            "class_literal_payload": 228,
+            "database_lookups": 6,
+            "decomposition_literal_visits": 228,
+            "expanded_nodes": 5,
+            "forced_variables": 21,
+            "inserted_bytes": 6688,
+            "inserted_nodes": 6,
+            "key_serialized_bytes": 5744,
+            "matching_recognition_literal_visits": 7,
+            "normalization_literal_visits": 1388,
+            "propagation_literal_visits": 1259,
+            "restriction_literal_visits": 708,
+            "screen_trace_check_literals": 7,
+            "screen_trace_publications": 1,
+            "screen_traces_reused": 1,
+            "screened_result_memory_hits": 1,
+            "search_memory_hits": 1,
+            "source_witness_literal_payload": 196,
+            "split_nodes": 2,
+            "subsumed_positive_clauses": 0,
+            "subsumption_candidate_tests": 3,
+            "subsumption_membership_tests": 5,
+            "subsumption_posting_lookups": 45,
+            "subsumption_recognition_literal_payload": 228,
+            "unit_conflicts": 1,
+            "verification_literal_payload": 693,
+            "verification_trace_literals": 19,
+            "verified_nodes": 6,
+            "visits": 6
+          },
+          "child_root": "cnf-residual-v1:[[-28,1],[-28,24],[-27,-26,-22],[-27,-8,23],[-27,10],[-26,-23,13],[-26,-22,-15],[-26,-17],[-26,28],[-25,-17],[-25,-11,-8,12],[-25,-11,-8,20],[-25,-2],[-25,21,26],[-24,-7,9],[-24,-4,21],[-24,7,16],[-24,12],[-23,-21,19],[-22,-9],[-22,-6,4],[-22,2,12],[-21,-18,-9],[-20,-11,21],[-20,-8,13],[-20,-7,28],[-20,-5,22],[-20,7,23],[-19],[-19,-12,8],[-19,22],[-18,-11],[-18,-10,-9],[-18,12,15],[-17,-12,3],[-17,-11,27],[-17,3,11],[-17,7,16],[-16,-13,14],[-16,-10,27],[-15,-14],[-15,-9],[-15,-7,5],[-15,-4],[-15,18],[-12,3,17],[-11,-8],[-11,-8,2],[-11,-2,14],[-11,24],[-10,16,23],[-10,27],[-9,-7],[-8,-6,19],[-6,4],[-6,10,15],[-6,11],[-6,28],[-5,6,25],[-3,26],[-2,9],[-2,20],[3,8,25],[4,5,12],[4,6,10],[6,9,14],[6,12],[7,23],[7,27],[9,15],[11,15,25],[11,21],[14,20],[16,21,28],[19,25],[22,23,28]]",
+          "choice_kind": "fallback-trace",
+          "engine_rows": 6,
+          "exposed": {
+            "answer": null,
+            "family": null,
+            "known": false,
+            "root": "cnf-residual-v1:[[-24,1],[-24,21],[-23,-22,-19],[-23,-7,20],[-23,9],[-22,-20,12],[-22,-19,-14],[-22,24],[-21,-6,8],[-21,-3,18],[-21,6,15],[-21,11],[-20,-18],[-19,-8],[-19,-5,3],[-19,11],[-18,-16,-8],[-17,-10,18],[-17,-7,12],[-17,-6,24],[-17,-4,19],[-17,6,20],[-16,-10],[-16,-9,-8],[-16,11,14],[-15,-12,13],[-15,-9,23],[-14,-13],[-14,-8],[-14,-6,4],[-14,-3],[-14,16],[-11,2],[-10,-7],[-10,-7,11],[-10,-7,17],[-10,21],[-9,15,20],[-9,23],[-8,-6],[-7,-5],[-5,3],[-5,9,14],[-5,10],[-5,24],[-2,22],[3,4,11],[3,5,9],[5,8,13],[5,11],[6,20],[6,23],[8,14],[10,18],[13,17],[15,18,24],[18,22],[19,20,24]]"
+          },
+          "fallback_reason": "nonterminal-child",
+          "probe_counts": {
+            "admission_child_lookups": 1,
+            "admission_child_probes": 1,
+            "admission_family_clauses": 76,
+            "admission_family_literal_visits": 196,
+            "admission_source_literal_visits": 196,
+            "fallback_forced_variables": 4,
+            "fallback_trace_reuses": 1,
+            "local_baseline_probes": 1,
+            "local_guards_found": 1,
+            "local_premise_literals_copied": 197,
+            "local_premise_probes": 1,
+            "local_ranking_clause_visits": 76,
+            "local_ranking_literal_visits": 196,
+            "propagated_family_clauses": 58,
+            "propagated_family_literal_visits": 144,
+            "propagated_residual_lookups": 1,
+            "propagation_literal_visits": 2045,
+            "restriction_literal_visits": 573
+          },
+          "probe_metrics": {
+            "database_lookups": 3,
+            "key_serialized_bytes": 4490,
+            "normalization_literal_visits": 1097
+          },
+          "rows": 6,
+          "seconds": 0.023739750031381845,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "retained-prefix": 1
+            },
+            "expanded_nodes": 5,
+            "local_calls": 1,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 1,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 3304,
+            "retained_prefixes": 1,
+            "trace_publications": 1
+          },
+          "template_case": 12
+        }
+      },
+      "case": 146
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_reason": null,
+          "answer": true,
+          "baseline_forced_variables": 0,
+          "case": 159,
+          "child_expansions": 8,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 4066,
+            "class_literal_payload": 310,
+            "database_lookups": 8,
+            "decomposition_literal_visits": 304,
+            "expanded_nodes": 8,
+            "forced_variables": 18,
+            "horn_leaves": 1,
+            "inserted_bytes": 7100,
+            "inserted_nodes": 8,
+            "key_serialized_bytes": 6068,
+            "matching_recognition_literal_visits": 15,
+            "normalization_literal_visits": 1552,
+            "propagation_literal_visits": 1632,
+            "restriction_literal_visits": 802,
+            "source_witness_literal_payload": 181,
+            "split_nodes": 3,
+            "subsumed_positive_clauses": 0,
+            "subsumption_posting_lookups": 42,
+            "subsumption_recognition_literal_payload": 304,
+            "unit_conflicts": 1,
+            "verification_literal_payload": 776,
+            "verification_trace_literals": 12,
+            "verified_nodes": 8,
+            "visits": 8
+          },
+          "child_root": "cnf-residual-v1:[[-24,1],[-24,19],[-23,-12],[-23,-8,-6],[-22,-21,-16],[-22,-6,17],[-21,-17,12],[-20,-10,14],[-20,9,23],[-20,14,23],[-20,15,21],[-19,-17,15],[-19,-12,-10,-3,5],[-19,-11,5],[-19,-5,7],[-19,9,10],[-19,15],[-18,-11,13],[-18,-10,-3,14],[-18,2,11],[-18,4,9],[-17,-15,-9,6],[-17,-15,16],[-16,-7],[-16,2,9],[-15,-13,-7],[-15,-10,-7],[-14,-8,15],[-14,-6,12],[-14,-5,24],[-14,5,17],[-14,13,16],[-13,-8,2,11],[-13,9],[-12,-11],[-10,-8,-3,-2],[-10,-5,12],[-10,-3,-2,6,18],[-10,-3,4,7],[-9,3],[-9,6,20],[-8,-4],[-8,11,19],[-7,-5],[-6,-4,16],[-6,2,11],[-6,13,18],[-4,2,11],[-4,8],[-4,24],[-3,21],[-2,10,14],[2,23],[3,6,20],[4,13,20],[5,11,22],[6,11,18,19],[8,15],[8,20],[10,11],[15,22],[16,17,24],[16,20],[24]]",
+          "choice_kind": null,
+          "engine_rows": 8,
+          "exposed": null,
+          "fallback_reason": null,
+          "probe_counts": {},
+          "probe_metrics": {},
+          "rows": 8,
+          "seconds": 0.011135541833937168,
+          "summary": {
+            "admission_calls": 0,
+            "admission_reasons": {},
+            "expanded_nodes": 8,
+            "local_calls": 0,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 0,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 1632,
+            "retained_prefixes": 0,
+            "trace_publications": 0
+          },
+          "template_case": 6
+        },
+        "propagated": {
+          "admission_reason": "nonterminal-child",
+          "answer": true,
+          "baseline_forced_variables": 4,
+          "case": 159,
+          "child_expansions": 8,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 4066,
+            "class_literal_payload": 310,
+            "database_lookups": 8,
+            "decomposition_literal_visits": 304,
+            "expanded_nodes": 8,
+            "forced_variables": 18,
+            "horn_leaves": 1,
+            "inserted_bytes": 7100,
+            "inserted_nodes": 8,
+            "key_serialized_bytes": 6068,
+            "matching_recognition_literal_visits": 15,
+            "normalization_literal_visits": 1552,
+            "propagation_literal_visits": 1632,
+            "restriction_literal_visits": 802,
+            "source_witness_literal_payload": 181,
+            "split_nodes": 3,
+            "subsumed_positive_clauses": 0,
+            "subsumption_posting_lookups": 42,
+            "subsumption_recognition_literal_payload": 304,
+            "unit_conflicts": 1,
+            "verification_literal_payload": 776,
+            "verification_trace_literals": 12,
+            "verified_nodes": 8,
+            "visits": 8
+          },
+          "child_root": "cnf-residual-v1:[[-24,1],[-24,19],[-23,-12],[-23,-8,-6],[-22,-21,-16],[-22,-6,17],[-21,-17,12],[-20,-10,14],[-20,9,23],[-20,14,23],[-20,15,21],[-19,-17,15],[-19,-12,-10,-3,5],[-19,-11,5],[-19,-5,7],[-19,9,10],[-19,15],[-18,-11,13],[-18,-10,-3,14],[-18,2,11],[-18,4,9],[-17,-15,-9,6],[-17,-15,16],[-16,-7],[-16,2,9],[-15,-13,-7],[-15,-10,-7],[-14,-8,15],[-14,-6,12],[-14,-5,24],[-14,5,17],[-14,13,16],[-13,-8,2,11],[-13,9],[-12,-11],[-10,-8,-3,-2],[-10,-5,12],[-10,-3,-2,6,18],[-10,-3,4,7],[-9,3],[-9,6,20],[-8,-4],[-8,11,19],[-7,-5],[-6,-4,16],[-6,2,11],[-6,13,18],[-4,2,11],[-4,8],[-4,24],[-3,21],[-2,10,14],[2,23],[3,6,20],[4,13,20],[5,11,22],[6,11,18,19],[8,15],[8,20],[10,11],[15,22],[16,17,24],[16,20],[24]]",
+          "choice_kind": null,
+          "engine_rows": 8,
+          "exposed": {
+            "answer": null,
+            "family": null,
+            "known": false,
+            "root": "cnf-residual-v1:[[-20,-11],[-20,-7,-5],[-19,-18,-14],[-19,-5,15],[-18,-15,11],[-17,-9,13],[-17,8,20],[-17,13,20],[-16,-10,12],[-16,-9,-2,13],[-16,1,10],[-16,3,8],[-15,-8,5],[-15,14],[-14,-6],[-14,1,8],[-13,-5,11],[-13,4,15],[-13,12,14],[-12,-7,1,10],[-12,-6],[-12,8],[-11,-10],[-11,-9,-2,4],[-10,4],[-9,-7,-2,-1],[-9,-6],[-9,-4,11],[-9,-2,-1,5,16],[-9,-2,3,6],[-8,2],[-8,5,17],[-7,-3],[-6,-4],[-5,-3,14],[-5,1,10],[-5,12,16],[-4,6],[-3,1,10],[-3,7],[-2,18],[-1,9,13],[1,20],[2,5,17],[3,12,17],[4,10,19],[7,17],[8,9],[9,10],[14,17]]"
+          },
+          "fallback_reason": null,
+          "probe_counts": {
+            "admission_child_lookups": 1,
+            "admission_child_probes": 1,
+            "admission_family_clauses": 64,
+            "admission_family_literal_visits": 181,
+            "admission_source_literal_visits": 181,
+            "local_baseline_probes": 1,
+            "local_guards_found": 1,
+            "local_premise_literals_copied": 728,
+            "local_premise_probes": 4,
+            "local_ranking_clause_visits": 64,
+            "local_ranking_literal_visits": 181,
+            "propagated_family_clauses": 50,
+            "propagated_family_literal_visits": 138,
+            "propagated_residual_lookups": 1,
+            "propagation_literal_visits": 3006,
+            "restriction_literal_visits": 1074
+          },
+          "probe_metrics": {
+            "database_lookups": 3,
+            "key_serialized_bytes": 6123,
+            "normalization_literal_visits": 1560
+          },
+          "rows": 8,
+          "seconds": 0.012393207754939795,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "nonterminal-child": 1
+            },
+            "expanded_nodes": 8,
+            "local_calls": 1,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 4,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 4638,
+            "retained_prefixes": 0,
+            "trace_publications": 0
+          },
+          "template_case": 6
+        },
+        "retained": {
+          "admission_reason": "retained-prefix",
+          "answer": true,
+          "baseline_forced_variables": 4,
+          "case": 159,
+          "child_expansions": 7,
+          "child_metrics": {
+            "accounting_reads": 1,
+            "certificate_serialized_bytes": 4066,
+            "class_literal_payload": 310,
+            "database_lookups": 8,
+            "decomposition_literal_visits": 304,
+            "expanded_nodes": 7,
+            "forced_variables": 14,
+            "horn_leaves": 1,
+            "inserted_bytes": 7100,
+            "inserted_nodes": 8,
+            "key_serialized_bytes": 6068,
+            "matching_recognition_literal_visits": 15,
+            "normalization_literal_visits": 1552,
+            "propagation_literal_visits": 1089,
+            "restriction_literal_visits": 802,
+            "screen_trace_check_literals": 7,
+            "screen_trace_publications": 1,
+            "screen_traces_reused": 1,
+            "screened_result_memory_hits": 1,
+            "source_witness_literal_payload": 181,
+            "split_nodes": 3,
+            "subsumed_positive_clauses": 0,
+            "subsumption_posting_lookups": 42,
+            "subsumption_recognition_literal_payload": 304,
+            "unit_conflicts": 1,
+            "verification_literal_payload": 776,
+            "verification_trace_literals": 12,
+            "verified_nodes": 8,
+            "visits": 7
+          },
+          "child_root": "cnf-residual-v1:[[-24,1],[-24,19],[-23,-12],[-23,-8,-6],[-22,-21,-16],[-22,-6,17],[-21,-17,12],[-20,-10,14],[-20,9,23],[-20,14,23],[-20,15,21],[-19,-17,15],[-19,-12,-10,-3,5],[-19,-11,5],[-19,-5,7],[-19,9,10],[-19,15],[-18,-11,13],[-18,-10,-3,14],[-18,2,11],[-18,4,9],[-17,-15,-9,6],[-17,-15,16],[-16,-7],[-16,2,9],[-15,-13,-7],[-15,-10,-7],[-14,-8,15],[-14,-6,12],[-14,-5,24],[-14,5,17],[-14,13,16],[-13,-8,2,11],[-13,9],[-12,-11],[-10,-8,-3,-2],[-10,-5,12],[-10,-3,-2,6,18],[-10,-3,4,7],[-9,3],[-9,6,20],[-8,-4],[-8,11,19],[-7,-5],[-6,-4,16],[-6,2,11],[-6,13,18],[-4,2,11],[-4,8],[-4,24],[-3,21],[-2,10,14],[2,23],[3,6,20],[4,13,20],[5,11,22],[6,11,18,19],[8,15],[8,20],[10,11],[15,22],[16,17,24],[16,20],[24]]",
+          "choice_kind": "fallback-trace",
+          "engine_rows": 8,
+          "exposed": {
+            "answer": null,
+            "family": null,
+            "known": false,
+            "root": "cnf-residual-v1:[[-20,-11],[-20,-7,-5],[-19,-18,-14],[-19,-5,15],[-18,-15,11],[-17,-9,13],[-17,8,20],[-17,13,20],[-16,-10,12],[-16,-9,-2,13],[-16,1,10],[-16,3,8],[-15,-8,5],[-15,14],[-14,-6],[-14,1,8],[-13,-5,11],[-13,4,15],[-13,12,14],[-12,-7,1,10],[-12,-6],[-12,8],[-11,-10],[-11,-9,-2,4],[-10,4],[-9,-7,-2,-1],[-9,-6],[-9,-4,11],[-9,-2,-1,5,16],[-9,-2,3,6],[-8,2],[-8,5,17],[-7,-3],[-6,-4],[-5,-3,14],[-5,1,10],[-5,12,16],[-4,6],[-3,1,10],[-3,7],[-2,18],[-1,9,13],[1,20],[2,5,17],[3,12,17],[4,10,19],[7,17],[8,9],[9,10],[14,17]]"
+          },
+          "fallback_reason": "nonterminal-child",
+          "probe_counts": {
+            "admission_child_lookups": 1,
+            "admission_child_probes": 1,
+            "admission_family_clauses": 64,
+            "admission_family_literal_visits": 181,
+            "admission_source_literal_visits": 181,
+            "fallback_forced_variables": 4,
+            "fallback_trace_reuses": 1,
+            "local_baseline_probes": 1,
+            "local_guards_found": 1,
+            "local_premise_literals_copied": 728,
+            "local_premise_probes": 4,
+            "local_ranking_clause_visits": 64,
+            "local_ranking_literal_visits": 181,
+            "propagated_family_clauses": 50,
+            "propagated_family_literal_visits": 138,
+            "propagated_residual_lookups": 1,
+            "propagation_literal_visits": 3006,
+            "restriction_literal_visits": 1074
+          },
+          "probe_metrics": {
+            "database_lookups": 3,
+            "key_serialized_bytes": 6123,
+            "normalization_literal_visits": 1560
+          },
+          "rows": 8,
+          "seconds": 0.014176958240568638,
+          "summary": {
+            "admission_calls": 1,
+            "admission_reasons": {
+              "retained-prefix": 1
+            },
+            "expanded_nodes": 7,
+            "local_calls": 1,
+            "local_guards": 0,
+            "local_terminals": 0,
+            "premise_probes": 4,
+            "propagated_reuses": 0,
+            "propagation_literal_visits": 4095,
+            "retained_prefixes": 1,
+            "trace_publications": 1
+          },
+          "template_case": 6
+        }
+      },
+      "case": 159
+    }
+  ],
+  "fresh_comparisons": {
+    "baseline": {
+      "expanded_nodes": {
+        "control": 53,
+        "difference": -10,
+        "percent": -18.867924528301888,
+        "retained": 43
+      },
+      "mean_complete_worker_seconds": {
+        "control": 18.299650229280815,
+        "difference": -0.0007766045164316893,
+        "percent": -0.004243821639765899,
+        "retained": 18.298873624764383
+      },
+      "mean_peak_rss_bytes": {
+        "control": 764731392.0,
+        "difference": -1007616.0,
+        "percent": -0.13176077385352059,
+        "retained": 763723776.0
+      },
+      "mean_query_seconds": {
+        "control": 0.8221229971386492,
+        "difference": 0.012742044171318412,
+        "percent": 1.5498951149239648,
+        "retained": 0.8348650413099676
+      },
+      "mean_sidecar_bytes": {
+        "control": 5358819.5,
+        "percent": 2.790362690887424,
+        "retained": 5508350.0
+      },
+      "new_nodes": {
+        "control": 271,
+        "difference": -2,
+        "percent": -0.7380073800738007,
+        "retained": 269
+      },
+      "new_payload_units": {
+        "control": 527695,
+        "difference": -665,
+        "percent": -0.12601976520527958,
+        "retained": 527030
+      },
+      "propagation_literal_visits": {
+        "control": 14126,
+        "difference": 8685,
+        "percent": 61.482372929350134,
+        "retained": 22811
+      }
+    },
+    "propagated": {
+      "expanded_nodes": {
+        "control": 46,
+        "difference": -3,
+        "percent": -6.521739130434782,
+        "retained": 43
+      },
+      "mean_complete_worker_seconds": {
+        "control": 18.466704812366515,
+        "difference": -0.16783118760213256,
+        "percent": -0.9088312685311448,
+        "retained": 18.298873624764383
+      },
+      "mean_peak_rss_bytes": {
+        "control": 762716160.0,
+        "difference": 1007616.0,
+        "percent": 0.13210890929595617,
+        "retained": 763723776.0
+      },
+      "mean_query_seconds": {
+        "control": 0.8395023753400892,
+        "difference": -0.004637334030121565,
+        "percent": -0.5523908170293078,
+        "retained": 0.8348650413099676
+      },
+      "mean_sidecar_bytes": {
+        "control": 5504126.0,
+        "percent": 0.07674242922491237,
+        "retained": 5508350.0
+      },
+      "new_nodes": {
+        "control": 269,
+        "difference": 0,
+        "percent": 0.0,
+        "retained": 269
+      },
+      "new_payload_units": {
+        "control": 527030,
+        "difference": 0,
+        "percent": 0.0,
+        "retained": 527030
+      },
+      "propagation_literal_visits": {
+        "control": 24342,
+        "difference": -1531,
+        "percent": -6.289540711527401,
+        "retained": 22811
+      }
+    }
+  },
+  "historical": [
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.09081337507814169,
+          "complete_seconds": 0.3106406247243285,
+          "evaluation_seconds": 0.004562291782349348,
+          "expanded_nodes": 5,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 3883,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1453,
+          "reason": null,
+          "retained_bytes": 23946,
+          "retained_prefixes": 0,
+          "rows": 5,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "propagated": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "nonterminal-child": 1
+          },
+          "cold_seconds": 0.03857383318245411,
+          "complete_seconds": 0.23813275014981627,
+          "evaluation_seconds": 0.0058206249959766865,
+          "expanded_nodes": 5,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 3883,
+          "premise_probes": 2,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 5299,
+          "reason": "nonterminal-child",
+          "retained_bytes": 23946,
+          "retained_prefixes": 0,
+          "rows": 5,
+          "selection_seconds": 0.0014769155532121658,
+          "trace_publications": 0
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.0384740000590682,
+          "complete_seconds": 0.2206242922693491,
+          "evaluation_seconds": 0.0059887501411139965,
+          "expanded_nodes": 4,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 3883,
+          "premise_probes": 2,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 4046,
+          "reason": "retained-prefix",
+          "retained_bytes": 23946,
+          "retained_prefixes": 1,
+          "rows": 5,
+          "selection_seconds": 0.001492209266871214,
+          "trace_publications": 1
+        }
+      },
+      "case": 36,
+      "cohort": "fallback-stream"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.03658541711047292,
+          "complete_seconds": 0.21627900004386902,
+          "evaluation_seconds": 0.005865416955202818,
+          "expanded_nodes": 6,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 11215,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1636,
+          "reason": null,
+          "retained_bytes": 24910,
+          "retained_prefixes": 0,
+          "rows": 6,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "propagated": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "nonterminal-child": 1
+          },
+          "cold_seconds": 0.036739875096827745,
+          "complete_seconds": 0.22086183307692409,
+          "evaluation_seconds": 0.007027291692793369,
+          "expanded_nodes": 6,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 11215,
+          "premise_probes": 2,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 3608,
+          "reason": "nonterminal-child",
+          "retained_bytes": 24910,
+          "retained_prefixes": 0,
+          "rows": 6,
+          "selection_seconds": 0.0013525839895009995,
+          "trace_publications": 0
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.03667658334597945,
+          "complete_seconds": 0.2203175420872867,
+          "evaluation_seconds": 0.007192582823336124,
+          "expanded_nodes": 5,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 11215,
+          "premise_probes": 2,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 3234,
+          "reason": "retained-prefix",
+          "retained_bytes": 24910,
+          "retained_prefixes": 1,
+          "rows": 6,
+          "selection_seconds": 0.0013776249252259731,
+          "trace_publications": 1
+        }
+      },
+      "case": 186,
+      "cohort": "fallback-stream"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.039154499769210815,
+          "complete_seconds": 0.20963524980470538,
+          "evaluation_seconds": 0.005076500121504068,
+          "expanded_nodes": 3,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 6331,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1083,
+          "reason": null,
+          "retained_bytes": 19894,
+          "retained_prefixes": 0,
+          "rows": 3,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "propagated": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "nonterminal-child": 1
+          },
+          "cold_seconds": 0.03712541703134775,
+          "complete_seconds": 0.2258753338828683,
+          "evaluation_seconds": 0.006503291893750429,
+          "expanded_nodes": 3,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 6331,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2069,
+          "reason": "nonterminal-child",
+          "retained_bytes": 19894,
+          "retained_prefixes": 0,
+          "rows": 3,
+          "selection_seconds": 0.0011032079346477985,
+          "trace_publications": 0
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.037034790962934494,
+          "complete_seconds": 0.2162658330053091,
+          "evaluation_seconds": 0.0062275840900838375,
+          "expanded_nodes": 2,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 6331,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1689,
+          "reason": "retained-prefix",
+          "retained_bytes": 19894,
+          "retained_prefixes": 1,
+          "rows": 3,
+          "selection_seconds": 0.0010432922281324863,
+          "trace_publications": 1
+        }
+      },
+      "case": 144,
+      "cohort": "fresh-baseline"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.046343582682311535,
+          "complete_seconds": 0.22931437473744154,
+          "evaluation_seconds": 0.008111125323921442,
+          "expanded_nodes": 8,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 15325,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2583,
+          "reason": null,
+          "retained_bytes": 37902,
+          "retained_prefixes": 0,
+          "rows": 8,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "propagated": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "unit-conflict-child": 1
+          },
+          "cold_seconds": 0.04494245909154415,
+          "complete_seconds": 0.23305541602894664,
+          "evaluation_seconds": 0.005133625119924545,
+          "expanded_nodes": 0,
+          "local_calls": 1,
+          "local_guards": 1,
+          "local_terminals": 0,
+          "native_bytes": 3462,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2061,
+          "reason": "unit-conflict-child",
+          "retained_bytes": 31497,
+          "retained_prefixes": 0,
+          "rows": 2,
+          "selection_seconds": 0.001114875078201294,
+          "trace_publications": 2
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "unit-conflict-child": 1
+          },
+          "cold_seconds": 0.04484916711226106,
+          "complete_seconds": 0.23243162501603365,
+          "evaluation_seconds": 0.0053051672875881195,
+          "expanded_nodes": 0,
+          "local_calls": 1,
+          "local_guards": 1,
+          "local_terminals": 0,
+          "native_bytes": 3462,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2061,
+          "reason": "unit-conflict-child",
+          "retained_bytes": 31497,
+          "retained_prefixes": 0,
+          "rows": 2,
+          "selection_seconds": 0.0010420000180602074,
+          "trace_publications": 2
+        }
+      },
+      "case": 167,
+      "cohort": "fresh-baseline"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.036473707761615515,
+          "complete_seconds": 0.21036912500858307,
+          "evaluation_seconds": 0.004150083754211664,
+          "expanded_nodes": 4,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 6834,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1155,
+          "reason": null,
+          "retained_bytes": 20393,
+          "retained_prefixes": 0,
+          "rows": 4,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "propagated": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "unit-conflict-child": 1
+          },
+          "cold_seconds": 0.03602812485769391,
+          "complete_seconds": 0.21331020817160606,
+          "evaluation_seconds": 0.0053969998843967915,
+          "expanded_nodes": 0,
+          "local_calls": 1,
+          "local_guards": 1,
+          "local_terminals": 0,
+          "native_bytes": 3047,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1155,
+          "reason": "unit-conflict-child",
+          "retained_bytes": 22048,
+          "retained_prefixes": 0,
+          "rows": 2,
+          "selection_seconds": 0.0010131658054888248,
+          "trace_publications": 2
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "unit-conflict-child": 1
+          },
+          "cold_seconds": 0.03583462489768863,
+          "complete_seconds": 0.21737741632387042,
+          "evaluation_seconds": 0.005412708967924118,
+          "expanded_nodes": 0,
+          "local_calls": 1,
+          "local_guards": 1,
+          "local_terminals": 0,
+          "native_bytes": 3047,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1155,
+          "reason": "unit-conflict-child",
+          "retained_bytes": 22048,
+          "retained_prefixes": 0,
+          "rows": 2,
+          "selection_seconds": 0.0010870001278817654,
+          "trace_publications": 2
+        }
+      },
+      "case": 190,
+      "cohort": "fresh-baseline"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.04496395820751786,
+          "complete_seconds": 0.2152139162644744,
+          "evaluation_seconds": 0.009000374935567379,
+          "expanded_nodes": 10,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 9798,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1611,
+          "reason": null,
+          "retained_bytes": 29685,
+          "retained_prefixes": 0,
+          "rows": 10,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "propagated": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "nonterminal-child": 1
+          },
+          "cold_seconds": 0.03890104219317436,
+          "complete_seconds": 0.2298850412480533,
+          "evaluation_seconds": 0.008248250000178814,
+          "expanded_nodes": 10,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 9798,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 3314,
+          "reason": "nonterminal-child",
+          "retained_bytes": 29685,
+          "retained_prefixes": 0,
+          "rows": 10,
+          "selection_seconds": 0.001132375095039606,
+          "trace_publications": 0
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.037535667419433594,
+          "complete_seconds": 0.21603512531146407,
+          "evaluation_seconds": 0.009058916009962559,
+          "expanded_nodes": 9,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 9798,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2686,
+          "reason": "retained-prefix",
+          "retained_bytes": 29685,
+          "retained_prefixes": 1,
+          "rows": 10,
+          "selection_seconds": 0.0010356660932302475,
+          "trace_publications": 1
+        }
+      },
+      "case": 43,
+      "cohort": "historical"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.04336987528949976,
+          "complete_seconds": 0.2160915001295507,
+          "evaluation_seconds": 0.005068709142506123,
+          "expanded_nodes": 4,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 5978,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 938,
+          "reason": null,
+          "retained_bytes": 25252,
+          "retained_prefixes": 0,
+          "rows": 4,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "propagated": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "nonterminal-child": 1
+          },
+          "cold_seconds": 0.03896729089319706,
+          "complete_seconds": 0.21774320816621184,
+          "evaluation_seconds": 0.005962791852653027,
+          "expanded_nodes": 4,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 5978,
+          "premise_probes": 2,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2413,
+          "reason": "nonterminal-child",
+          "retained_bytes": 25252,
+          "retained_prefixes": 0,
+          "rows": 4,
+          "selection_seconds": 0.001178000122308731,
+          "trace_publications": 0
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "retained-prefix": 1
+          },
+          "cold_seconds": 0.0361753748729825,
+          "complete_seconds": 0.21056166710332036,
+          "evaluation_seconds": 0.00616683391854167,
+          "expanded_nodes": 3,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 5978,
+          "premise_probes": 2,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2131,
+          "reason": "retained-prefix",
+          "retained_bytes": 25252,
+          "retained_prefixes": 1,
+          "rows": 4,
+          "selection_seconds": 0.0011204998008906841,
+          "trace_publications": 1
+        }
+      },
+      "case": 70,
+      "cohort": "historical"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.0394955831579864,
+          "complete_seconds": 0.22588916588574648,
+          "evaluation_seconds": 0.008550167083740234,
+          "expanded_nodes": 9,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 13839,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 1952,
+          "reason": null,
+          "retained_bytes": 34023,
+          "retained_prefixes": 0,
+          "rows": 9,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "propagated": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "nonterminal-child": 1
+          },
+          "cold_seconds": 0.0396287078037858,
+          "complete_seconds": 0.21702045807614923,
+          "evaluation_seconds": 0.009788999799638987,
+          "expanded_nodes": 9,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 13839,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2939,
+          "reason": "nonterminal-child",
+          "retained_bytes": 34023,
+          "retained_prefixes": 0,
+          "rows": 9,
+          "selection_seconds": 0.0010636248625814915,
+          "trace_publications": 0
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "nonterminal-child": 1
+          },
+          "cold_seconds": 0.044737167190760374,
+          "complete_seconds": 0.22031725011765957,
+          "evaluation_seconds": 0.008894917089492083,
+          "expanded_nodes": 9,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 13839,
+          "premise_probes": 1,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 2939,
+          "reason": "nonterminal-child",
+          "retained_bytes": 34023,
+          "retained_prefixes": 0,
+          "rows": 9,
+          "selection_seconds": 0.0009622089564800262,
+          "trace_publications": 0
+        }
+      },
+      "case": 172,
+      "cohort": "historical"
+    },
+    {
+      "arms": {
+        "baseline": {
+          "admission_calls": 0,
+          "admission_reasons": {},
+          "cold_seconds": 0.034497957676649094,
+          "complete_seconds": 0.2123439577408135,
+          "evaluation_seconds": 0.0021025827154517174,
+          "expanded_nodes": 1,
+          "local_calls": 0,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 1672,
+          "premise_probes": 0,
+          "propagated_reuses": 0,
+          "propagation_literal_visits": 955,
+          "reason": null,
+          "retained_bytes": 16254,
+          "retained_prefixes": 0,
+          "rows": 1,
+          "selection_seconds": 0.0,
+          "trace_publications": 0
+        },
+        "propagated": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "known-propagated": 1
+          },
+          "cold_seconds": 0.03454420901834965,
+          "complete_seconds": 0.2097254591062665,
+          "evaluation_seconds": 0.0025620833039283752,
+          "expanded_nodes": 0,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 1672,
+          "premise_probes": 0,
+          "propagated_reuses": 1,
+          "propagation_literal_visits": 955,
+          "reason": "known-propagated",
+          "retained_bytes": 16254,
+          "retained_prefixes": 0,
+          "rows": 1,
+          "selection_seconds": 0.0005419999361038208,
+          "trace_publications": 1
+        },
+        "retained": {
+          "admission_calls": 1,
+          "admission_reasons": {
+            "known-propagated": 1
+          },
+          "cold_seconds": 0.03410658286884427,
+          "complete_seconds": 0.20634787483140826,
+          "evaluation_seconds": 0.0024626250378787518,
+          "expanded_nodes": 0,
+          "local_calls": 1,
+          "local_guards": 0,
+          "local_terminals": 0,
+          "native_bytes": 1672,
+          "premise_probes": 0,
+          "propagated_reuses": 1,
+          "propagation_literal_visits": 955,
+          "reason": "known-propagated",
+          "retained_bytes": 16254,
+          "retained_prefixes": 0,
+          "rows": 1,
+          "selection_seconds": 0.0005701249465346336,
+          "trace_publications": 1
+        }
+      },
+      "case": 85,
+      "cohort": "reuse-stream"
+    }
+  ],
+  "historical_totals": {
+    "baseline": {
+      "expanded_nodes": 50,
+      "native_bytes": 74875,
+      "propagation_literal_visits": 13366,
+      "retained_bytes": 232259,
+      "rows": 50,
+      "trace_publications": 0
+    },
+    "propagated": {
+      "expanded_nodes": 37,
+      "native_bytes": 59225,
+      "propagation_literal_visits": 23813,
+      "retained_bytes": 227509,
+      "rows": 42,
+      "trace_publications": 5
+    },
+    "retained": {
+      "expanded_nodes": 32,
+      "native_bytes": 59225,
+      "propagation_literal_visits": 20896,
+      "retained_bytes": 227509,
+      "rows": 42,
+      "trace_publications": 10
+    }
+  },
+  "limitations": [
+    "Exact-prefix arms isolate the same native state; fresh-query contributions come from streams whose prefixes can diverge.",
+    "Zero expansion calls can coexist with explicit trace publication and retained native rows. Count propagation, checking, source copies and persistence separately.",
+    "Two reversed-order timing pairs and process peak RSS provide no stable general runtime or live-memory bound.",
+    "Fresh queries remain double-deletion neighbours of three existing templates. No new general structural authority or unrestricted-SAT result."
+  ],
+  "native_payloads_equal": true,
+  "paired_complete_times": [
+    {
+      "order": [
+        "baseline",
+        "propagated",
+        "retained"
+      ],
+      "repeat": 0,
+      "retained_minus_baseline": 0.09580875048413873,
+      "retained_minus_propagated": 0.09080170886591077,
+      "seconds": {
+        "baseline": 18.255572708323598,
+        "propagated": 18.260579749941826,
+        "retained": 18.351381458807737
+      }
+    },
+    {
+      "order": [
+        "retained",
+        "propagated",
+        "baseline"
+      ],
+      "repeat": 1,
+      "retained_minus_baseline": -0.0973619595170021,
+      "retained_minus_propagated": -0.4264640840701759,
+      "seconds": {
+        "baseline": 18.34372775023803,
+        "propagated": 18.672829874791205,
+        "retained": 18.24636579072103
+      }
+    }
+  ],
+  "passed": true,
+  "rejected_child_diagnostics": [
+    {
+      "case": 0,
+      "checked_child_model": null,
+      "family": null,
+      "forced_variables": 3,
+      "limitation": "Read-only unit-trace/model certificate; no rejected guard or alternate child acquired or timed.",
+      "positive_unit_terminal": false,
+      "proposal": [
+        -160
+      ],
+      "reason_literal_visits": 5,
+      "residual": [
+        [
+          -24,
+          1
+        ],
+        [
+          -24,
+          4,
+          19
+        ],
+        [
+          -23,
+          -11
+        ],
+        [
+          -22,
+          -16
+        ],
+        [
+          -22,
+          -8
+        ],
+        [
+          -22,
+          17
+        ],
+        [
+          -8,
+          24
+        ],
+        [
+          -20,
+          -8,
+          -2
+        ],
+        [
+          -19,
+          -17,
+          -5,
+          15
+        ],
+        [
+          -19,
+          -14,
+          7
+        ],
+        [
+          -19,
+          -7,
+          9
+        ],
+        [
+          -19,
+          -5,
+          10,
+          15
+        ],
+        [
+          -18,
+          2,
+          14
+        ],
+        [
+          -17,
+          -15,
+          16
+        ],
+        [
+          -16,
+          -9,
+          4
+        ],
+        [
+          -16,
+          -6,
+          5
+        ],
+        [
+          -15,
+          -13,
+          -9
+        ],
+        [
+          -15,
+          -9
+        ],
+        [
+          -14,
+          -4,
+          22
+        ],
+        [
+          -13,
+          -11,
+          -2
+        ],
+        [
+          -13,
+          -7
+        ],
+        [
+          -13,
+          6,
+          9
+        ],
+        [
+          -11,
+          -6,
+          8
+        ],
+        [
+          -11,
+          2,
+          14
+        ],
+        [
+          -11,
+          14,
+          19
+        ],
+        [
+          -11,
+          15
+        ],
+        [
+          -10,
+          -1,
+          13
+        ],
+        [
+          -9,
+          -7,
+          4
+        ],
+        [
+          -8,
+          -4
+        ],
+        [
+          -8,
+          -2,
+          9
+        ],
+        [
+          -8,
+          7,
+          17
+        ],
+        [
+          -7,
+          24
+        ],
+        [
+          -6,
+          -4,
+          14
+        ],
+        [
+          -6,
+          2,
+          14
+        ],
+        [
+          -6,
+          4,
+          11
+        ],
+        [
+          -6,
+          5,
+          14
+        ],
+        [
+          -6,
+          16
+        ],
+        [
+          -6,
+          24
+        ],
+        [
+          -5,
+          8,
+          10
+        ],
+        [
+          -4,
+          10
+        ],
+        [
+          5,
+          18
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          2,
+          23
+        ],
+        [
+          4,
+          8,
+          10
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          7,
+          14,
+          22
+        ],
+        [
+          7,
+          17
+        ],
+        [
+          8,
+          24
+        ],
+        [
+          11,
+          15
+        ],
+        [
+          11,
+          20
+        ],
+        [
+          13,
+          14
+        ],
+        [
+          15,
+          22
+        ],
+        [
+          16,
+          17,
+          24
+        ],
+        [
+          16,
+          20
+        ]
+      ],
+      "residual_clauses": 54,
+      "residual_literals": 139,
+      "residual_variables": 21,
+      "restriction_literal_visits": 168,
+      "screen": {
+        "conflict": null,
+        "residual_literals": 139,
+        "root": "cnf-residual-v1:[[-24,1],[-24,4,19],[-23,-11],[-22,-21,-16],[-22,-8],[-22,17],[-21,-8,24],[-20,-8,-2],[-20,12,23],[-20,15,21],[-19,-17,-5,15],[-19,-14,7],[-19,-7,9],[-19,-5,10,15],[-19,12,13],[-18,2,14],[-18,6,12],[-17,-15,16],[-16,-9,4],[-16,-6,5],[-16,2,12],[-15,-13,-9],[-15,-9],[-14,-4,22],[-13,-11,-3,-2],[-13,-7],[-13,-3,6,9],[-12,3],[-11,-6,8],[-11,-4,3],[-11,2,14],[-11,14,19],[-11,15],[-10,-1,13],[-9,-7,4],[-8,-4,-3],[-8,-2,9],[-8,7,17],[-7,24],[-6,-4,14],[-6,2,14],[-6,4,11],[-6,5,14],[-6,16],[-6,24],[-5,8,10],[-4,10],[-3,5,18],[-3,21],[2,14],[2,23],[4,8,10],[5,6],[7,14,22],[7,17],[8,24],[11,15],[11,20],[12],[13,14],[15,22],[16,17,24],[16,20]]",
+        "trace": [
+          [
+            12,
+            58
+          ],
+          [
+            3,
+            27
+          ],
+          [
+            21,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "case": 131,
+      "checked_child_model": null,
+      "family": null,
+      "forced_variables": 6,
+      "limitation": "Read-only unit-trace/model certificate; no rejected guard or alternate child acquired or timed.",
+      "positive_unit_terminal": false,
+      "proposal": [
+        300
+      ],
+      "reason_literal_visits": 10,
+      "residual": [
+        [
+          -27,
+          1
+        ],
+        [
+          -26,
+          20
+        ],
+        [
+          -26,
+          -10,
+          -8
+        ],
+        [
+          -26,
+          -10,
+          -8,
+          20
+        ],
+        [
+          -26,
+          -2
+        ],
+        [
+          -26,
+          22
+        ],
+        [
+          -22,
+          19
+        ],
+        [
+          -23,
+          -9
+        ],
+        [
+          -23,
+          -7,
+          4
+        ],
+        [
+          -23,
+          2
+        ],
+        [
+          -22,
+          -18,
+          -9
+        ],
+        [
+          -22,
+          -9
+        ],
+        [
+          -21,
+          -18,
+          -10
+        ],
+        [
+          -21,
+          -10,
+          -8
+        ],
+        [
+          -21,
+          -7,
+          16
+        ],
+        [
+          -20,
+          -10,
+          22
+        ],
+        [
+          -20,
+          -8,
+          14
+        ],
+        [
+          -20,
+          -6,
+          23
+        ],
+        [
+          -19,
+          13
+        ],
+        [
+          -19,
+          23
+        ],
+        [
+          -18,
+          16
+        ],
+        [
+          -16,
+          -15,
+          13
+        ],
+        [
+          -16,
+          -9
+        ],
+        [
+          -16,
+          -4
+        ],
+        [
+          -16,
+          5,
+          18
+        ],
+        [
+          -15,
+          -5,
+          -1
+        ],
+        [
+          -14,
+          -13
+        ],
+        [
+          -10,
+          -8,
+          2,
+          5
+        ],
+        [
+          -10,
+          -2,
+          15
+        ],
+        [
+          -8,
+          -7,
+          19
+        ],
+        [
+          -8,
+          18
+        ],
+        [
+          -7,
+          4,
+          13
+        ],
+        [
+          -7,
+          10
+        ],
+        [
+          -7,
+          27
+        ],
+        [
+          -6,
+          7,
+          26
+        ],
+        [
+          -4,
+          22
+        ],
+        [
+          -2,
+          8,
+          15
+        ],
+        [
+          -2,
+          9
+        ],
+        [
+          2,
+          13,
+          21
+        ],
+        [
+          8,
+          26
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          5,
+          19,
+          26
+        ],
+        [
+          7,
+          9,
+          15
+        ],
+        [
+          10,
+          16,
+          26
+        ],
+        [
+          10,
+          22
+        ],
+        [
+          22,
+          27
+        ]
+      ],
+      "residual_clauses": 47,
+      "residual_literals": 119,
+      "residual_variables": 21,
+      "restriction_literal_visits": 186,
+      "screen": {
+        "conflict": null,
+        "residual_literals": 119,
+        "root": "cnf-residual-v1:[[-27,1],[-26,-21,-17],[-26,-12,20],[-26,-10,-8,11],[-26,-10,-8,20],[-26,-2],[-26,22],[-25,-21,5],[-25,-13,18],[-25,-12],[-25,7,11],[-25,15,20],[-24,-22,19],[-23,-9],[-23,-7,4],[-23,2,11],[-22,-18,-9],[-22,-12,-9],[-21,-18,-10],[-21,-10,-8],[-21,-7,16],[-21,9,12,16],[-20,-10,22],[-20,-8,14],[-20,-6,23],[-20,24],[-19,-11,8],[-19,13],[-19,23],[-18,11,16],[-17],[-17,-11,3],[-17,3,10],[-16,-15,13],[-16,-9],[-16,-4],[-16,5,18],[-15,-12,-3],[-15,-5,-1],[-14,-13],[-11,3,17],[-10,-8,2,5],[-10,-2,15],[-8,-7,19],[-8,18,25],[-8,24],[-7,4,13],[-7,10],[-7,27],[-6,7,26],[-4,22],[-3],[-3,4,25],[-2,8,15,25],[-2,9],[-2,12,20],[2,13,21],[3,8,26],[4,6,11],[4,7],[5,12,13],[5,19,26],[7,9,15],[10,16,26],[10,22],[11,12],[22,27],[23,24,27],[24]]",
+        "trace": [
+          [
+            -17,
+            30
+          ],
+          [
+            -3,
+            51
+          ],
+          [
+            24,
+            68
+          ],
+          [
+            -11,
+            40
+          ],
+          [
+            12,
+            65
+          ],
+          [
+            -25,
+            9
+          ]
+        ]
+      }
+    },
+    {
+      "case": 146,
+      "checked_child_model": {
+        "1": true,
+        "2": false,
+        "3": true,
+        "4": false,
+        "6": false,
+        "7": false,
+        "8": false,
+        "9": true,
+        "10": true,
+        "11": true,
+        "12": true,
+        "13": true,
+        "14": false,
+        "15": true,
+        "16": false,
+        "17": false,
+        "18": false,
+        "19": false,
+        "20": false,
+        "21": false,
+        "22": true,
+        "23": true,
+        "24": true,
+        "25": true,
+        "26": true,
+        "27": true
+      },
+      "family": "constant-true",
+      "forced_variables": 26,
+      "limitation": "Read-only unit-trace/model certificate; no rejected guard or alternate child acquired or timed.",
+      "positive_unit_terminal": true,
+      "proposal": [
+        -90
+      ],
+      "reason_literal_visits": 55,
+      "residual": [],
+      "residual_clauses": 0,
+      "residual_literals": 0,
+      "residual_variables": 0,
+      "restriction_literal_visits": 181,
+      "screen": {
+        "conflict": null,
+        "residual_literals": 0,
+        "root": "cnf-residual-v1:[[-27,1],[-27,23],[-26,-25,-21],[-26,-8,22],[-26,9],[-25,-22,12],[-25,-21,-14],[-25,-16],[-25,27],[-24,-16],[-24,-10,-8,11],[-24,-10,-8,19],[-24,-2],[-24,20,25],[-23,-4,20],[-23,7,15],[-23,11],[-22,-20,18],[-21],[-21,-6,4],[-21,2,11],[-20,-17],[-19,-10,20],[-19,-8,12],[-19,-7,27],[-19,-5,21],[-19,7,22],[-18],[-18,-11,8],[-18,21],[-17,-10],[-17,-9],[-17,11,14],[-16,-11,3],[-16,-10,26],[-16,3,10],[-16,7,15],[-15,-12,13],[-15,-9,26],[-14],[-14,-13],[-14,-7,5],[-14,-4],[-14,17],[-11,3,16],[-10,-8],[-10,-8,2],[-10,-2,13],[-10,23],[-9,15,22],[-9,26],[-8,-6,18],[-7],[-6,4],[-6,9,14],[-6,10],[-6,27],[-5,6,24],[-3,25],[-2,19],[3,8,24],[4,5,11],[4,6,9],[6,11],[7,22],[7,26],[10,14,24],[10,20],[13,19],[15,20,27],[18,24],[21,22,27]]",
+        "trace": [
+          [
+            -21,
+            18
+          ],
+          [
+            -18,
+            27
+          ],
+          [
+            -14,
+            39
+          ],
+          [
+            -7,
+            52
+          ],
+          [
+            22,
+            64
+          ],
+          [
+            26,
+            65
+          ],
+          [
+            24,
+            70
+          ],
+          [
+            9,
+            4
+          ],
+          [
+            -16,
+            9
+          ],
+          [
+            -2,
+            12
+          ],
+          [
+            -20,
+            17
+          ],
+          [
+            -17,
+            31
+          ],
+          [
+            10,
+            67
+          ],
+          [
+            25,
+            13
+          ],
+          [
+            -19,
+            22
+          ],
+          [
+            -8,
+            45
+          ],
+          [
+            23,
+            48
+          ],
+          [
+            13,
+            68
+          ],
+          [
+            12,
+            5
+          ],
+          [
+            27,
+            8
+          ],
+          [
+            -4,
+            14
+          ],
+          [
+            15,
+            15
+          ],
+          [
+            11,
+            16
+          ],
+          [
+            3,
+            44
+          ],
+          [
+            -6,
+            53
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "case": 159,
+      "checked_child_model": null,
+      "family": null,
+      "forced_variables": 4,
+      "limitation": "Read-only unit-trace/model certificate; no rejected guard or alternate child acquired or timed.",
+      "positive_unit_terminal": false,
+      "proposal": [
+        50
+      ],
+      "reason_literal_visits": 7,
+      "residual": [
+        [
+          -22,
+          -11
+        ],
+        [
+          -22,
+          -7,
+          -5
+        ],
+        [
+          -21,
+          -20,
+          -15
+        ],
+        [
+          -21,
+          -5,
+          16
+        ],
+        [
+          -20,
+          -16,
+          11
+        ],
+        [
+          -19,
+          -9,
+          13
+        ],
+        [
+          -19,
+          8,
+          22
+        ],
+        [
+          -19,
+          13,
+          22
+        ],
+        [
+          -11,
+          -9,
+          -3,
+          4
+        ],
+        [
+          -10,
+          4
+        ],
+        [
+          -4,
+          6
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          -17,
+          -10,
+          12
+        ],
+        [
+          -17,
+          -9,
+          -3,
+          13
+        ],
+        [
+          -17,
+          2,
+          10
+        ],
+        [
+          -17,
+          8
+        ],
+        [
+          -16,
+          -8,
+          5
+        ],
+        [
+          -16,
+          15
+        ],
+        [
+          -15,
+          -6
+        ],
+        [
+          -15,
+          2,
+          8
+        ],
+        [
+          -12,
+          -6
+        ],
+        [
+          -9,
+          -6
+        ],
+        [
+          -13,
+          -5,
+          11
+        ],
+        [
+          -13,
+          4,
+          16
+        ],
+        [
+          -13,
+          12,
+          15
+        ],
+        [
+          -12,
+          -7,
+          2,
+          10
+        ],
+        [
+          -12,
+          8
+        ],
+        [
+          -11,
+          -10
+        ],
+        [
+          -9,
+          -7,
+          -3,
+          -2
+        ],
+        [
+          -9,
+          -4,
+          11
+        ],
+        [
+          -9,
+          -3,
+          -2,
+          5,
+          17
+        ],
+        [
+          -9,
+          -3,
+          6
+        ],
+        [
+          -8,
+          3
+        ],
+        [
+          -8,
+          5,
+          19
+        ],
+        [
+          -6,
+          -4
+        ],
+        [
+          -5,
+          2,
+          10
+        ],
+        [
+          -5,
+          12,
+          17
+        ],
+        [
+          -3,
+          20
+        ],
+        [
+          -2,
+          9,
+          13
+        ],
+        [
+          2,
+          22
+        ],
+        [
+          3,
+          5,
+          19
+        ],
+        [
+          4,
+          10,
+          21
+        ],
+        [
+          7,
+          19
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          12,
+          19
+        ],
+        [
+          15,
+          19
+        ]
+      ],
+      "residual_clauses": 46,
+      "residual_literals": 125,
+      "residual_variables": 19,
+      "restriction_literal_visits": 166,
+      "screen": {
+        "conflict": null,
+        "residual_literals": 125,
+        "root": "cnf-residual-v1:[[-23,1],[-23,18],[-22,-11],[-22,-7,-5],[-21,-20,-15],[-21,-5,16],[-20,-16,11],[-19,-9,13],[-19,8,22],[-19,13,22],[-19,14,20],[-18,-16,14],[-18,-11,-9,-3,4],[-18,-10,4],[-18,-4,6],[-18,8,9],[-18,14],[-17,-10,12],[-17,-9,-3,13],[-17,2,10],[-17,8],[-16,-14,-8,5],[-16,-14,15],[-15,-6],[-15,2,8],[-14,-12,-6],[-14,-9,-6],[-13,-7,14],[-13,-5,11],[-13,-4,23],[-13,4,16],[-13,12,15],[-12,-7,2,10],[-12,8],[-11,-10],[-9,-7,-3,-2],[-9,-4,11],[-9,-3,-2,5,17],[-9,-3,6],[-8,3],[-8,5,19],[-7,10,18],[-6,-4],[-5,2,10],[-5,12,17],[-3,20],[-2,9,13],[2,22],[3,5,19],[4,10,21],[5,10,17,18],[7,14],[7,19],[9,10],[12,19],[14,21],[15,16,23],[15,19],[23]]",
+        "trace": [
+          [
+            23,
+            58
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            18,
+            1
+          ],
+          [
+            14,
+            16
+          ]
+        ]
+      }
+    }
+  ],
+  "remaining_child_work": [
+    {
+      "admission_reason": "nonterminal-child",
+      "answer": false,
+      "baseline_forced_variables": 0,
+      "case": 0,
+      "child_expansions": 17,
+      "child_metrics": {
+        "accounting_reads": 1,
+        "certificate_disk_hits": 3,
+        "certificate_memory_hits": 17,
+        "certificate_serialized_bytes": 16165,
+        "class_literal_payload": 842,
+        "database_lookups": 21,
+        "decomposition_literal_visits": 692,
+        "expanded_nodes": 17,
+        "forced_variables": 11,
+        "inserted_bytes": 23417,
+        "inserted_nodes": 17,
+        "key_serialized_bytes": 25110,
+        "matching_recognition_literal_visits": 12,
+        "normalization_literal_visits": 6275,
+        "propagation_literal_visits": 3315,
+        "read_bytes": 3668,
+        "restriction_literal_visits": 3978,
+        "search_disk_hits": 1,
+        "source_witness_literal_payload": 0,
+        "split_nodes": 6,
+        "subsumed_positive_clauses": 1,
+        "subsumption_candidate_tests": 32,
+        "subsumption_membership_tests": 63,
+        "subsumption_nodes": 1,
+        "subsumption_posting_lookups": 175,
+        "subsumption_recognition_literal_payload": 842,
+        "unit_conflicts": 6,
+        "verification_literal_payload": 2260,
+        "verification_trace_literals": 168,
+        "verified_nodes": 21,
+        "verified_subsumption_literal_payload": 10,
+        "visits": 18
+      },
+      "child_root": "cnf-residual-v1:[[-25,1],[-25,4,20],[-24,-11],[-23,-22,-17],[-23,-8],[-23,18],[-22,-8,25],[-21,-8,-2],[-21,12,24],[-21,16,22],[-20,-18,-5,16],[-20,-14,7],[-20,-7,9],[-20,-5,10,16],[-20,12,13],[-19,-14,15],[-19,2,14],[-19,6,12],[-18,-16,17],[-17,-9,4],[-17,-6,5],[-17,2,12],[-16,-15,-9],[-16,-13,-9],[-15,-11,2,14],[-15,12],[-14,-4,23],[-13,-11,-3,-2],[-13,-7],[-13,-3,6,9],[-12,3],[-11,-6,8],[-11,-4,3],[-11,14,20],[-11,16],[-10,-1,13],[-10,15],[-9,-7,4],[-8,-4,-3],[-8,-2,9],[-8,7,18],[-7,25],[-6,-4,14],[-6,2,14],[-6,4,11],[-6,5,14],[-6,17],[-6,25],[-5,8,10],[-4,10],[-3,5,19],[-3,22],[2,14],[2,24],[4,8,10],[5,6],[6,15,21],[7,14,23],[7,18],[8,25],[11,16],[11,21],[13,14],[15,17],[15,19],[16,23],[17,18,25],[17,21]]",
+      "choice_kind": null,
+      "engine_rows": 17,
+      "exposed": null,
+      "fallback_reason": null,
+      "probe_counts": {
+        "admission_child_lookups": 1,
+        "admission_child_probes": 1,
+        "admission_family_clauses": 68,
+        "admission_family_literal_visits": 183,
+        "admission_source_literal_visits": 183,
+        "local_baseline_probes": 1,
+        "local_guards_found": 1,
+        "local_premise_literals_copied": 552,
+        "local_premise_probes": 3,
+        "local_ranking_clause_visits": 68,
+        "local_ranking_literal_visits": 183,
+        "propagation_literal_visits": 1908,
+        "restriction_literal_visits": 902
+      },
+      "probe_metrics": {
+        "database_lookups": 2,
+        "key_serialized_bytes": 4916,
+        "normalization_literal_visits": 1254
+      },
+      "rows": 17,
+      "seconds": 0.023602208122611046,
+      "summary": {
+        "admission_calls": 1,
+        "admission_reasons": {
+          "nonterminal-child": 1
+        },
+        "expanded_nodes": 17,
+        "local_calls": 1,
+        "local_guards": 0,
+        "local_terminals": 0,
+        "premise_probes": 3,
+        "propagated_reuses": 0,
+        "propagation_literal_visits": 5223,
+        "retained_prefixes": 0,
+        "trace_publications": 0
+      },
+      "template_case": 6
+    },
+    {
+      "admission_reason": "retained-prefix",
+      "answer": false,
+      "baseline_forced_variables": 2,
+      "case": 131,
+      "child_expansions": 14,
+      "child_metrics": {
+        "accounting_reads": 1,
+        "certificate_memory_hits": 14,
+        "certificate_serialized_bytes": 14963,
+        "class_literal_payload": 588,
+        "database_lookups": 15,
+        "decomposition_literal_visits": 588,
+        "expanded_nodes": 14,
+        "forced_variables": 5,
+        "inserted_bytes": 21899,
+        "inserted_nodes": 15,
+        "key_serialized_bytes": 19999,
+        "matching_recognition_literal_visits": 21,
+        "normalization_literal_visits": 4887,
+        "propagation_literal_visits": 3235,
+        "restriction_literal_visits": 3418,
+        "screen_trace_check_literals": 2,
+        "screen_trace_publications": 1,
+        "screen_traces_reused": 1,
+        "screened_result_memory_hits": 1,
+        "split_nodes": 5,
+        "subsumed_positive_clauses": 0,
+        "subsumption_candidate_tests": 12,
+        "subsumption_membership_tests": 24,
+        "subsumption_posting_lookups": 91,
+        "subsumption_recognition_literal_payload": 588,
+        "unit_conflicts": 6,
+        "verification_literal_payload": 1693,
+        "verification_trace_literals": 162,
+        "verified_nodes": 15,
+        "visits": 14
+      },
+      "child_root": "cnf-residual-v1:[[-28,1],[-27,-24,14],[-27,-23],[-27,-23,-16],[-27,-17],[-27,28],[-26,-21,-17],[-26,-12,20],[-26,-10,-8,11],[-26,-10,-8,20],[-26,-2],[-26,22,27],[-25,-21,5],[-25,-13,18],[-25,-12],[-25,7,11],[-25,15,20],[-24,-22,19],[-23,-9],[-23,-7,4],[-23,2,11],[-22,-18,-9],[-22,-12,-9],[-21,-18,-10],[-21,-10,-8],[-21,-7,16],[-21,9,12,16],[-20,-10,22],[-20,-8,14],[-20,-6,23],[-20,24],[-19,-11,8],[-19,13],[-19,23],[-18,11,16],[-17],[-17,-11,3],[-17,3,10],[-16,-15,13],[-16,-9],[-16,-4],[-16,5,18],[-15,-12,-3],[-15,-5,-1],[-14,-13],[-11,3,17],[-10,-8,2,5],[-10,-2,15],[-8,-7,19],[-8,18,25],[-8,24],[-7,4,13],[-7,10],[-7,28],[-6,7,26],[-4,22],[-3,4,25],[-3,27],[-2,8,15,25],[-2,9],[-2,12,20],[2,13,21],[3,8,26],[4,6,11],[4,7],[5,12,13],[5,19,26],[7,9,15],[10,16,26],[10,22],[11,12],[22,28],[23,24,28],[24]]",
+      "choice_kind": "fallback-trace",
+      "engine_rows": 15,
+      "exposed": {
+        "answer": null,
+        "family": null,
+        "known": false,
+        "root": "cnf-residual-v1:[[-26,1],[-25,-22],[-25,-22,-16],[-25,14],[-25,26],[-24,-12,19],[-24,-10,-8,11],[-24,-10,-8,19],[-24,-2],[-24,21,25],[-23,-20,5],[-23,-13,17],[-23,-12],[-23,7,11],[-23,15,19],[-22,-9],[-22,-7,4],[-22,2,11],[-21,-17,-9],[-21,-12,-9],[-21,18],[-20,-17,-10],[-20,-10,-8],[-20,-7,16],[-20,9,12,16],[-19,-10,21],[-19,-8,14],[-19,-6,22],[-18,-11,8],[-18,13],[-18,22],[-17,11,16],[-16,-15,13],[-16,-9],[-16,-4],[-16,5,17],[-15,-12,-3],[-15,-5,-1],[-14,-13],[-11,3],[-10,-8,2,5],[-10,-2,15],[-8,-7,18],[-8,17,23],[-7,4,13],[-7,10],[-7,26],[-6,7,24],[-4,21],[-3,4,23],[-3,25],[-2,8,15,23],[-2,9],[-2,12,19],[2,13,20],[3,8,24],[4,6,11],[4,7],[5,12,13],[5,18,24],[7,9,15],[10,16,24],[10,21],[11,12],[21,26]]"
+      },
+      "fallback_reason": "nonterminal-child",
+      "probe_counts": {
+        "admission_child_lookups": 1,
+        "admission_child_probes": 1,
+        "admission_family_clauses": 74,
+        "admission_family_literal_visits": 200,
+        "admission_source_literal_visits": 200,
+        "fallback_forced_variables": 2,
+        "fallback_trace_reuses": 1,
+        "local_baseline_probes": 1,
+        "local_guards_found": 1,
+        "local_premise_literals_copied": 402,
+        "local_premise_probes": 2,
+        "local_ranking_clause_visits": 74,
+        "local_ranking_literal_visits": 200,
+        "propagated_family_clauses": 65,
+        "propagated_family_literal_visits": 177,
+        "propagated_residual_lookups": 1,
+        "propagation_literal_visits": 2695,
+        "restriction_literal_visits": 787
+      },
+      "probe_metrics": {
+        "database_lookups": 3,
+        "key_serialized_bytes": 5453,
+        "normalization_literal_visits": 1351
+      },
+      "rows": 15,
+      "seconds": 0.021184540819376707,
+      "summary": {
+        "admission_calls": 1,
+        "admission_reasons": {
+          "retained-prefix": 1
+        },
+        "expanded_nodes": 14,
+        "local_calls": 1,
+        "local_guards": 0,
+        "local_terminals": 0,
+        "premise_probes": 2,
+        "propagated_reuses": 0,
+        "propagation_literal_visits": 5930,
+        "retained_prefixes": 1,
+        "trace_publications": 1
+      },
+      "template_case": 12
+    },
+    {
+      "admission_reason": "retained-prefix",
+      "answer": true,
+      "baseline_forced_variables": 4,
+      "case": 159,
+      "child_expansions": 7,
+      "child_metrics": {
+        "accounting_reads": 1,
+        "certificate_serialized_bytes": 4066,
+        "class_literal_payload": 310,
+        "database_lookups": 8,
+        "decomposition_literal_visits": 304,
+        "expanded_nodes": 7,
+        "forced_variables": 14,
+        "horn_leaves": 1,
+        "inserted_bytes": 7100,
+        "inserted_nodes": 8,
+        "key_serialized_bytes": 6068,
+        "matching_recognition_literal_visits": 15,
+        "normalization_literal_visits": 1552,
+        "propagation_literal_visits": 1089,
+        "restriction_literal_visits": 802,
+        "screen_trace_check_literals": 7,
+        "screen_trace_publications": 1,
+        "screen_traces_reused": 1,
+        "screened_result_memory_hits": 1,
+        "source_witness_literal_payload": 181,
+        "split_nodes": 3,
+        "subsumed_positive_clauses": 0,
+        "subsumption_posting_lookups": 42,
+        "subsumption_recognition_literal_payload": 304,
+        "unit_conflicts": 1,
+        "verification_literal_payload": 776,
+        "verification_trace_literals": 12,
+        "verified_nodes": 8,
+        "visits": 7
+      },
+      "child_root": "cnf-residual-v1:[[-24,1],[-24,19],[-23,-12],[-23,-8,-6],[-22,-21,-16],[-22,-6,17],[-21,-17,12],[-20,-10,14],[-20,9,23],[-20,14,23],[-20,15,21],[-19,-17,15],[-19,-12,-10,-3,5],[-19,-11,5],[-19,-5,7],[-19,9,10],[-19,15],[-18,-11,13],[-18,-10,-3,14],[-18,2,11],[-18,4,9],[-17,-15,-9,6],[-17,-15,16],[-16,-7],[-16,2,9],[-15,-13,-7],[-15,-10,-7],[-14,-8,15],[-14,-6,12],[-14,-5,24],[-14,5,17],[-14,13,16],[-13,-8,2,11],[-13,9],[-12,-11],[-10,-8,-3,-2],[-10,-5,12],[-10,-3,-2,6,18],[-10,-3,4,7],[-9,3],[-9,6,20],[-8,-4],[-8,11,19],[-7,-5],[-6,-4,16],[-6,2,11],[-6,13,18],[-4,2,11],[-4,8],[-4,24],[-3,21],[-2,10,14],[2,23],[3,6,20],[4,13,20],[5,11,22],[6,11,18,19],[8,15],[8,20],[10,11],[15,22],[16,17,24],[16,20],[24]]",
+      "choice_kind": "fallback-trace",
+      "engine_rows": 8,
+      "exposed": {
+        "answer": null,
+        "family": null,
+        "known": false,
+        "root": "cnf-residual-v1:[[-20,-11],[-20,-7,-5],[-19,-18,-14],[-19,-5,15],[-18,-15,11],[-17,-9,13],[-17,8,20],[-17,13,20],[-16,-10,12],[-16,-9,-2,13],[-16,1,10],[-16,3,8],[-15,-8,5],[-15,14],[-14,-6],[-14,1,8],[-13,-5,11],[-13,4,15],[-13,12,14],[-12,-7,1,10],[-12,-6],[-12,8],[-11,-10],[-11,-9,-2,4],[-10,4],[-9,-7,-2,-1],[-9,-6],[-9,-4,11],[-9,-2,-1,5,16],[-9,-2,3,6],[-8,2],[-8,5,17],[-7,-3],[-6,-4],[-5,-3,14],[-5,1,10],[-5,12,16],[-4,6],[-3,1,10],[-3,7],[-2,18],[-1,9,13],[1,20],[2,5,17],[3,12,17],[4,10,19],[7,17],[8,9],[9,10],[14,17]]"
+      },
+      "fallback_reason": "nonterminal-child",
+      "probe_counts": {
+        "admission_child_lookups": 1,
+        "admission_child_probes": 1,
+        "admission_family_clauses": 64,
+        "admission_family_literal_visits": 181,
+        "admission_source_literal_visits": 181,
+        "fallback_forced_variables": 4,
+        "fallback_trace_reuses": 1,
+        "local_baseline_probes": 1,
+        "local_guards_found": 1,
+        "local_premise_literals_copied": 728,
+        "local_premise_probes": 4,
+        "local_ranking_clause_visits": 64,
+        "local_ranking_literal_visits": 181,
+        "propagated_family_clauses": 50,
+        "propagated_family_literal_visits": 138,
+        "propagated_residual_lookups": 1,
+        "propagation_literal_visits": 3006,
+        "restriction_literal_visits": 1074
+      },
+      "probe_metrics": {
+        "database_lookups": 3,
+        "key_serialized_bytes": 6123,
+        "normalization_literal_visits": 1560
+      },
+      "rows": 8,
+      "seconds": 0.014176958240568638,
+      "summary": {
+        "admission_calls": 1,
+        "admission_reasons": {
+          "retained-prefix": 1
+        },
+        "expanded_nodes": 7,
+        "local_calls": 1,
+        "local_guards": 0,
+        "local_terminals": 0,
+        "premise_probes": 4,
+        "propagated_reuses": 0,
+        "propagation_literal_visits": 4095,
+        "retained_prefixes": 1,
+        "trace_publications": 1
+      },
+      "template_case": 6
+    },
+    {
+      "admission_reason": "retained-prefix",
+      "answer": true,
+      "baseline_forced_variables": 4,
+      "case": 146,
+      "child_expansions": 5,
+      "child_metrics": {
+        "accounting_reads": 1,
+        "certificate_serialized_bytes": 3825,
+        "class_literal_payload": 228,
+        "database_lookups": 6,
+        "decomposition_literal_visits": 228,
+        "expanded_nodes": 5,
+        "forced_variables": 21,
+        "inserted_bytes": 6688,
+        "inserted_nodes": 6,
+        "key_serialized_bytes": 5744,
+        "matching_recognition_literal_visits": 7,
+        "normalization_literal_visits": 1388,
+        "propagation_literal_visits": 1259,
+        "restriction_literal_visits": 708,
+        "screen_trace_check_literals": 7,
+        "screen_trace_publications": 1,
+        "screen_traces_reused": 1,
+        "screened_result_memory_hits": 1,
+        "search_memory_hits": 1,
+        "source_witness_literal_payload": 196,
+        "split_nodes": 2,
+        "subsumed_positive_clauses": 0,
+        "subsumption_candidate_tests": 3,
+        "subsumption_membership_tests": 5,
+        "subsumption_posting_lookups": 45,
+        "subsumption_recognition_literal_payload": 228,
+        "unit_conflicts": 1,
+        "verification_literal_payload": 693,
+        "verification_trace_literals": 19,
+        "verified_nodes": 6,
+        "visits": 6
+      },
+      "child_root": "cnf-residual-v1:[[-28,1],[-28,24],[-27,-26,-22],[-27,-8,23],[-27,10],[-26,-23,13],[-26,-22,-15],[-26,-17],[-26,28],[-25,-17],[-25,-11,-8,12],[-25,-11,-8,20],[-25,-2],[-25,21,26],[-24,-7,9],[-24,-4,21],[-24,7,16],[-24,12],[-23,-21,19],[-22,-9],[-22,-6,4],[-22,2,12],[-21,-18,-9],[-20,-11,21],[-20,-8,13],[-20,-7,28],[-20,-5,22],[-20,7,23],[-19],[-19,-12,8],[-19,22],[-18,-11],[-18,-10,-9],[-18,12,15],[-17,-12,3],[-17,-11,27],[-17,3,11],[-17,7,16],[-16,-13,14],[-16,-10,27],[-15,-14],[-15,-9],[-15,-7,5],[-15,-4],[-15,18],[-12,3,17],[-11,-8],[-11,-8,2],[-11,-2,14],[-11,24],[-10,16,23],[-10,27],[-9,-7],[-8,-6,19],[-6,4],[-6,10,15],[-6,11],[-6,28],[-5,6,25],[-3,26],[-2,9],[-2,20],[3,8,25],[4,5,12],[4,6,10],[6,9,14],[6,12],[7,23],[7,27],[9,15],[11,15,25],[11,21],[14,20],[16,21,28],[19,25],[22,23,28]]",
+      "choice_kind": "fallback-trace",
+      "engine_rows": 6,
+      "exposed": {
+        "answer": null,
+        "family": null,
+        "known": false,
+        "root": "cnf-residual-v1:[[-24,1],[-24,21],[-23,-22,-19],[-23,-7,20],[-23,9],[-22,-20,12],[-22,-19,-14],[-22,24],[-21,-6,8],[-21,-3,18],[-21,6,15],[-21,11],[-20,-18],[-19,-8],[-19,-5,3],[-19,11],[-18,-16,-8],[-17,-10,18],[-17,-7,12],[-17,-6,24],[-17,-4,19],[-17,6,20],[-16,-10],[-16,-9,-8],[-16,11,14],[-15,-12,13],[-15,-9,23],[-14,-13],[-14,-8],[-14,-6,4],[-14,-3],[-14,16],[-11,2],[-10,-7],[-10,-7,11],[-10,-7,17],[-10,21],[-9,15,20],[-9,23],[-8,-6],[-7,-5],[-5,3],[-5,9,14],[-5,10],[-5,24],[-2,22],[3,4,11],[3,5,9],[5,8,13],[5,11],[6,20],[6,23],[8,14],[10,18],[13,17],[15,18,24],[18,22],[19,20,24]]"
+      },
+      "fallback_reason": "nonterminal-child",
+      "probe_counts": {
+        "admission_child_lookups": 1,
+        "admission_child_probes": 1,
+        "admission_family_clauses": 76,
+        "admission_family_literal_visits": 196,
+        "admission_source_literal_visits": 196,
+        "fallback_forced_variables": 4,
+        "fallback_trace_reuses": 1,
+        "local_baseline_probes": 1,
+        "local_guards_found": 1,
+        "local_premise_literals_copied": 197,
+        "local_premise_probes": 1,
+        "local_ranking_clause_visits": 76,
+        "local_ranking_literal_visits": 196,
+        "propagated_family_clauses": 58,
+        "propagated_family_literal_visits": 144,
+        "propagated_residual_lookups": 1,
+        "propagation_literal_visits": 2045,
+        "restriction_literal_visits": 573
+      },
+      "probe_metrics": {
+        "database_lookups": 3,
+        "key_serialized_bytes": 4490,
+        "normalization_literal_visits": 1097
+      },
+      "rows": 6,
+      "seconds": 0.023739750031381845,
+      "summary": {
+        "admission_calls": 1,
+        "admission_reasons": {
+          "retained-prefix": 1
+        },
+        "expanded_nodes": 5,
+        "local_calls": 1,
+        "local_guards": 0,
+        "local_terminals": 0,
+        "premise_probes": 1,
+        "propagated_reuses": 0,
+        "propagation_literal_visits": 3304,
+        "retained_prefixes": 1,
+        "trace_publications": 1
+      },
+      "template_case": 12
+    }
+  ],
+  "report": {
+    "path": "experiments/results/cnf-trace-fallback/report.json",
+    "sha256": "540f8cc0424010faf648ffc6666c55136c66d604b7c45a87bb5413fa15ca773d"
+  },
+  "residual_diagnostics": [
+    {
+      "baseline_forced_variables": 0,
+      "candidate_literal_visits": 9150,
+      "candidate_variables_checked": 25,
+      "case": 0,
+      "clauses": 68,
+      "exhaustive_assignments_checked": 0,
+      "limitation": "Posthoc structural certificate only; no alternate acquisition, timing or row saving measured.",
+      "literals": 183,
+      "max_width": 4,
+      "native_child_expansions": 17,
+      "one_variable_two_cnf_candidates": [],
+      "root": "cnf-residual-v1:[[-25,1],[-25,4,20],[-24,-11],[-23,-22,-17],[-23,-8],[-23,18],[-22,-8,25],[-21,-8,-2],[-21,12,24],[-21,16,22],[-20,-18,-5,16],[-20,-14,7],[-20,-7,9],[-20,-5,10,16],[-20,12,13],[-19,-14,15],[-19,2,14],[-19,6,12],[-18,-16,17],[-17,-9,4],[-17,-6,5],[-17,2,12],[-16,-15,-9],[-16,-13,-9],[-15,-11,2,14],[-15,12],[-14,-4,23],[-13,-11,-3,-2],[-13,-7],[-13,-3,6,9],[-12,3],[-11,-6,8],[-11,-4,3],[-11,14,20],[-11,16],[-10,-1,13],[-10,15],[-9,-7,4],[-8,-4,-3],[-8,-2,9],[-8,7,18],[-7,25],[-6,-4,14],[-6,2,14],[-6,4,11],[-6,5,14],[-6,17],[-6,25],[-5,8,10],[-4,10],[-3,5,19],[-3,22],[2,14],[2,24],[4,8,10],[5,6],[6,15,21],[7,14,23],[7,18],[8,25],[11,16],[11,21],[13,14],[15,17],[15,19],[16,23],[17,18,25],[17,21]]",
+      "variables": 25,
+      "wide_clauses": [
+        [
+          -25,
+          4,
+          20
+        ],
+        [
+          -23,
+          -22,
+          -17
+        ],
+        [
+          -22,
+          -8,
+          25
+        ],
+        [
+          -21,
+          -8,
+          -2
+        ],
+        [
+          -21,
+          12,
+          24
+        ],
+        [
+          -21,
+          16,
+          22
+        ],
+        [
+          -20,
+          -18,
+          -5,
+          16
+        ],
+        [
+          -20,
+          -14,
+          7
+        ],
+        [
+          -20,
+          -7,
+          9
+        ],
+        [
+          -20,
+          -5,
+          10,
+          16
+        ],
+        [
+          -20,
+          12,
+          13
+        ],
+        [
+          -19,
+          -14,
+          15
+        ],
+        [
+          -19,
+          2,
+          14
+        ],
+        [
+          -19,
+          6,
+          12
+        ],
+        [
+          -18,
+          -16,
+          17
+        ],
+        [
+          -17,
+          -9,
+          4
+        ],
+        [
+          -17,
+          -6,
+          5
+        ],
+        [
+          -17,
+          2,
+          12
+        ],
+        [
+          -16,
+          -15,
+          -9
+        ],
+        [
+          -16,
+          -13,
+          -9
+        ],
+        [
+          -15,
+          -11,
+          2,
+          14
+        ],
+        [
+          -14,
+          -4,
+          23
+        ],
+        [
+          -13,
+          -11,
+          -3,
+          -2
+        ],
+        [
+          -13,
+          -3,
+          6,
+          9
+        ],
+        [
+          -11,
+          -6,
+          8
+        ],
+        [
+          -11,
+          -4,
+          3
+        ],
+        [
+          -11,
+          14,
+          20
+        ],
+        [
+          -10,
+          -1,
+          13
+        ],
+        [
+          -9,
+          -7,
+          4
+        ],
+        [
+          -8,
+          -4,
+          -3
+        ],
+        [
+          -8,
+          -2,
+          9
+        ],
+        [
+          -8,
+          7,
+          18
+        ],
+        [
+          -6,
+          -4,
+          14
+        ],
+        [
+          -6,
+          2,
+          14
+        ],
+        [
+          -6,
+          4,
+          11
+        ],
+        [
+          -6,
+          5,
+          14
+        ],
+        [
+          -5,
+          8,
+          10
+        ],
+        [
+          -3,
+          5,
+          19
+        ],
+        [
+          4,
+          8,
+          10
+        ],
+        [
+          6,
+          15,
+          21
+        ],
+        [
+          7,
+          14,
+          23
+        ],
+        [
+          17,
+          18,
+          25
+        ]
+      ]
+    },
+    {
+      "baseline_forced_variables": 2,
+      "candidate_literal_visits": 9204,
+      "candidate_variables_checked": 26,
+      "case": 131,
+      "clauses": 65,
+      "exhaustive_assignments_checked": 0,
+      "limitation": "Posthoc structural certificate only; no alternate acquisition, timing or row saving measured.",
+      "literals": 177,
+      "max_width": 4,
+      "native_child_expansions": 14,
+      "one_variable_two_cnf_candidates": [],
+      "root": "cnf-residual-v1:[[-26,1],[-25,-22],[-25,-22,-16],[-25,14],[-25,26],[-24,-12,19],[-24,-10,-8,11],[-24,-10,-8,19],[-24,-2],[-24,21,25],[-23,-20,5],[-23,-13,17],[-23,-12],[-23,7,11],[-23,15,19],[-22,-9],[-22,-7,4],[-22,2,11],[-21,-17,-9],[-21,-12,-9],[-21,18],[-20,-17,-10],[-20,-10,-8],[-20,-7,16],[-20,9,12,16],[-19,-10,21],[-19,-8,14],[-19,-6,22],[-18,-11,8],[-18,13],[-18,22],[-17,11,16],[-16,-15,13],[-16,-9],[-16,-4],[-16,5,17],[-15,-12,-3],[-15,-5,-1],[-14,-13],[-11,3],[-10,-8,2,5],[-10,-2,15],[-8,-7,18],[-8,17,23],[-7,4,13],[-7,10],[-7,26],[-6,7,24],[-4,21],[-3,4,23],[-3,25],[-2,8,15,23],[-2,9],[-2,12,19],[2,13,20],[3,8,24],[4,6,11],[4,7],[5,12,13],[5,18,24],[7,9,15],[10,16,24],[10,21],[11,12],[21,26]]",
+      "variables": 26,
+      "wide_clauses": [
+        [
+          -25,
+          -22,
+          -16
+        ],
+        [
+          -24,
+          -12,
+          19
+        ],
+        [
+          -24,
+          -10,
+          -8,
+          11
+        ],
+        [
+          -24,
+          -10,
+          -8,
+          19
+        ],
+        [
+          -24,
+          21,
+          25
+        ],
+        [
+          -23,
+          -20,
+          5
+        ],
+        [
+          -23,
+          -13,
+          17
+        ],
+        [
+          -23,
+          7,
+          11
+        ],
+        [
+          -23,
+          15,
+          19
+        ],
+        [
+          -22,
+          -7,
+          4
+        ],
+        [
+          -22,
+          2,
+          11
+        ],
+        [
+          -21,
+          -17,
+          -9
+        ],
+        [
+          -21,
+          -12,
+          -9
+        ],
+        [
+          -20,
+          -17,
+          -10
+        ],
+        [
+          -20,
+          -10,
+          -8
+        ],
+        [
+          -20,
+          -7,
+          16
+        ],
+        [
+          -20,
+          9,
+          12,
+          16
+        ],
+        [
+          -19,
+          -10,
+          21
+        ],
+        [
+          -19,
+          -8,
+          14
+        ],
+        [
+          -19,
+          -6,
+          22
+        ],
+        [
+          -18,
+          -11,
+          8
+        ],
+        [
+          -17,
+          11,
+          16
+        ],
+        [
+          -16,
+          -15,
+          13
+        ],
+        [
+          -16,
+          5,
+          17
+        ],
+        [
+          -15,
+          -12,
+          -3
+        ],
+        [
+          -15,
+          -5,
+          -1
+        ],
+        [
+          -10,
+          -8,
+          2,
+          5
+        ],
+        [
+          -10,
+          -2,
+          15
+        ],
+        [
+          -8,
+          -7,
+          18
+        ],
+        [
+          -8,
+          17,
+          23
+        ],
+        [
+          -7,
+          4,
+          13
+        ],
+        [
+          -6,
+          7,
+          24
+        ],
+        [
+          -3,
+          4,
+          23
+        ],
+        [
+          -2,
+          8,
+          15,
+          23
+        ],
+        [
+          -2,
+          12,
+          19
+        ],
+        [
+          2,
+          13,
+          20
+        ],
+        [
+          3,
+          8,
+          24
+        ],
+        [
+          4,
+          6,
+          11
+        ],
+        [
+          5,
+          12,
+          13
+        ],
+        [
+          5,
+          18,
+          24
+        ],
+        [
+          7,
+          9,
+          15
+        ],
+        [
+          10,
+          16,
+          24
+        ]
+      ]
+    },
+    {
+      "baseline_forced_variables": 4,
+      "candidate_literal_visits": 6912,
+      "candidate_variables_checked": 24,
+      "case": 146,
+      "clauses": 58,
+      "exhaustive_assignments_checked": 0,
+      "limitation": "Posthoc structural certificate only; no alternate acquisition, timing or row saving measured.",
+      "literals": 144,
+      "max_width": 3,
+      "native_child_expansions": 5,
+      "one_variable_two_cnf_candidates": [],
+      "root": "cnf-residual-v1:[[-24,1],[-24,21],[-23,-22,-19],[-23,-7,20],[-23,9],[-22,-20,12],[-22,-19,-14],[-22,24],[-21,-6,8],[-21,-3,18],[-21,6,15],[-21,11],[-20,-18],[-19,-8],[-19,-5,3],[-19,11],[-18,-16,-8],[-17,-10,18],[-17,-7,12],[-17,-6,24],[-17,-4,19],[-17,6,20],[-16,-10],[-16,-9,-8],[-16,11,14],[-15,-12,13],[-15,-9,23],[-14,-13],[-14,-8],[-14,-6,4],[-14,-3],[-14,16],[-11,2],[-10,-7],[-10,-7,11],[-10,-7,17],[-10,21],[-9,15,20],[-9,23],[-8,-6],[-7,-5],[-5,3],[-5,9,14],[-5,10],[-5,24],[-2,22],[3,4,11],[3,5,9],[5,8,13],[5,11],[6,20],[6,23],[8,14],[10,18],[13,17],[15,18,24],[18,22],[19,20,24]]",
+      "variables": 24,
+      "wide_clauses": [
+        [
+          -23,
+          -22,
+          -19
+        ],
+        [
+          -23,
+          -7,
+          20
+        ],
+        [
+          -22,
+          -20,
+          12
+        ],
+        [
+          -22,
+          -19,
+          -14
+        ],
+        [
+          -21,
+          -6,
+          8
+        ],
+        [
+          -21,
+          -3,
+          18
+        ],
+        [
+          -21,
+          6,
+          15
+        ],
+        [
+          -19,
+          -5,
+          3
+        ],
+        [
+          -18,
+          -16,
+          -8
+        ],
+        [
+          -17,
+          -10,
+          18
+        ],
+        [
+          -17,
+          -7,
+          12
+        ],
+        [
+          -17,
+          -6,
+          24
+        ],
+        [
+          -17,
+          -4,
+          19
+        ],
+        [
+          -17,
+          6,
+          20
+        ],
+        [
+          -16,
+          -9,
+          -8
+        ],
+        [
+          -16,
+          11,
+          14
+        ],
+        [
+          -15,
+          -12,
+          13
+        ],
+        [
+          -15,
+          -9,
+          23
+        ],
+        [
+          -14,
+          -6,
+          4
+        ],
+        [
+          -10,
+          -7,
+          11
+        ],
+        [
+          -10,
+          -7,
+          17
+        ],
+        [
+          -9,
+          15,
+          20
+        ],
+        [
+          -5,
+          9,
+          14
+        ],
+        [
+          3,
+          4,
+          11
+        ],
+        [
+          3,
+          5,
+          9
+        ],
+        [
+          5,
+          8,
+          13
+        ],
+        [
+          15,
+          18,
+          24
+        ],
+        [
+          19,
+          20,
+          24
+        ]
+      ]
+    },
+    {
+      "baseline_forced_variables": 4,
+      "candidate_literal_visits": 5520,
+      "candidate_variables_checked": 20,
+      "case": 159,
+      "clauses": 50,
+      "exhaustive_assignments_checked": 0,
+      "limitation": "Posthoc structural certificate only; no alternate acquisition, timing or row saving measured.",
+      "literals": 138,
+      "max_width": 5,
+      "native_child_expansions": 7,
+      "one_variable_two_cnf_candidates": [],
+      "root": "cnf-residual-v1:[[-20,-11],[-20,-7,-5],[-19,-18,-14],[-19,-5,15],[-18,-15,11],[-17,-9,13],[-17,8,20],[-17,13,20],[-16,-10,12],[-16,-9,-2,13],[-16,1,10],[-16,3,8],[-15,-8,5],[-15,14],[-14,-6],[-14,1,8],[-13,-5,11],[-13,4,15],[-13,12,14],[-12,-7,1,10],[-12,-6],[-12,8],[-11,-10],[-11,-9,-2,4],[-10,4],[-9,-7,-2,-1],[-9,-6],[-9,-4,11],[-9,-2,-1,5,16],[-9,-2,3,6],[-8,2],[-8,5,17],[-7,-3],[-6,-4],[-5,-3,14],[-5,1,10],[-5,12,16],[-4,6],[-3,1,10],[-3,7],[-2,18],[-1,9,13],[1,20],[2,5,17],[3,12,17],[4,10,19],[7,17],[8,9],[9,10],[14,17]]",
+      "variables": 20,
+      "wide_clauses": [
+        [
+          -20,
+          -7,
+          -5
+        ],
+        [
+          -19,
+          -18,
+          -14
+        ],
+        [
+          -19,
+          -5,
+          15
+        ],
+        [
+          -18,
+          -15,
+          11
+        ],
+        [
+          -17,
+          -9,
+          13
+        ],
+        [
+          -17,
+          8,
+          20
+        ],
+        [
+          -17,
+          13,
+          20
+        ],
+        [
+          -16,
+          -10,
+          12
+        ],
+        [
+          -16,
+          -9,
+          -2,
+          13
+        ],
+        [
+          -16,
+          1,
+          10
+        ],
+        [
+          -16,
+          3,
+          8
+        ],
+        [
+          -15,
+          -8,
+          5
+        ],
+        [
+          -14,
+          1,
+          8
+        ],
+        [
+          -13,
+          -5,
+          11
+        ],
+        [
+          -13,
+          4,
+          15
+        ],
+        [
+          -13,
+          12,
+          14
+        ],
+        [
+          -12,
+          -7,
+          1,
+          10
+        ],
+        [
+          -11,
+          -9,
+          -2,
+          4
+        ],
+        [
+          -9,
+          -7,
+          -2,
+          -1
+        ],
+        [
+          -9,
+          -4,
+          11
+        ],
+        [
+          -9,
+          -2,
+          -1,
+          5,
+          16
+        ],
+        [
+          -9,
+          -2,
+          3,
+          6
+        ],
+        [
+          -8,
+          5,
+          17
+        ],
+        [
+          -5,
+          -3,
+          14
+        ],
+        [
+          -5,
+          1,
+          10
+        ],
+        [
+          -5,
+          12,
+          16
+        ],
+        [
+          -3,
+          1,
+          10
+        ],
+        [
+          -1,
+          9,
+          13
+        ],
+        [
+          2,
+          5,
+          17
+        ],
+        [
+          3,
+          12,
+          17
+        ],
+        [
+          4,
+          10,
+          19
+        ]
+      ]
+    }
+  ]
+}

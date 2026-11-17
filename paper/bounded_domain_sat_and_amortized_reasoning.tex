@@ -6901,6 +6901,48 @@ Case 186 has no corresponding single-variable decomposition. Recognition and
 alternative proof acquisition remain to be measured; this diagnostic supplies
 neither a runtime saving nor a bound on conditioning size for arbitrary CNF.
 
+\paragraph{Retaining propagation when discovery rejects a guard.}
+The next optional fallback keeps the original target and reuses its baseline
+unit trace when discovery declines a proposal. It does not acquire the rejected
+guard. The existing publisher checks the retained unit reasons, solves the same
+remaining residual and validates the source result. General residual search and
+its expansion budget remain; one explicit target publication replaces the
+target's expansion call. This changes repeated work, not the size of the proof.
+
+Twenty-seven exact-prefix arms preserve the preceding controls and add cases
+36/186. Their propagation visits fall from 5,299 to 4,046 and from 3,608 to 3,234,
+with identical native payloads. Indexed prefix checks inspect 28 and one
+unit-reason literals, respectively. Across all nine controls, previous/new
+visits fall from 23,813 to 20,896 while both retain 42 rows. Native baseline uses
+13,366 visits, so substantial discovery overhead remains. Single-arm timings
+do not establish a speedup.
+
+Another 192 excluded queries, evaluated in six fresh workers with reversed
+policy order, contain three successful prefix reuses. Previous/new propagation
+visits fall from 24,342 to 22,811 (6.29\%), preserving identical native archives
+with 269 new rows and 527,030 added native bytes. Three more explicit trace
+publications accompany the reduction from 46 to 43 expansion calls. Sidecars
+grow 0.077\%. Mean complete times are 18.467 and 18.299 seconds, but pairwise
+differences have opposite signs. Native baseline needs 14,126 visits and 271
+rows; the earlier gate supplies the two-row saving. All policies answer 103 SAT
+and 89 UNSAT queries. All 1,094 tests pass, and no general timing or memory gain
+is established.
+
+The remaining 43 child expansions occur in four queries, contributing
+17, 14, five and seven calls. The largest has no initial unit prefix, and all
+four lack a single variable whose two restrictions are syntactic two-CNF.
+A separate replay of the rejected child traces reveals that case 146's child
+is positive-terminal: its 26 unit deductions satisfy every clause. The gate
+checks known children and unit conflicts, missing this positive closure. Its
+canonical child model is checked, but lifting it through the proposed assignment
+to the original target and pricing direct SAT publication remain open. Such a
+verified full-target witness would not require acquiring the negative premise.
+The other three proposed children retain nonfamily residuals. Pricing broader
+conditioning sets remains necessary; the immediate two-CNF test does not exclude
+closure after further propagation, and no small-decomposition guarantee for
+arbitrary CNF is established. The new queries remain neighbours of three existing
+templates, and all earlier results and structural authorities remain preserved.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -12,7 +12,60 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse saved propagation after discovery rejects a child
+## Current investigation: recover models from positive-terminal proposed children
+
+[Retained-prefix fallback](trace-fallback.md) now reuses baseline unit traces
+when discovery rejects a guard. It keeps the original target and ordinary
+residual solving; the rejected guard is not acquired. At the saved case-36/186
+prefixes, visits fall **5,299 -> 4,046 / 3,608 -> 3,234**, preserving every native
+payload. Twenty-seven equal-state arms retain all previous controls. Fewer
+expansion calls are accompanied by explicit trace publications, not fewer rows.
+
+**Fresh transfer is measured, but total savings remain limited.** Three of the
+next 192 queries reuse a prefix. Previous/new visits fall **24,342 -> 22,811
+(6.29%)**, with identical **269-row / 527,030-byte additions**. Sidecars grow
+0.077%; opposite timing-pair signs establish no stable speedup. Native baseline
+uses **14,126 visits / 271 rows**. Discovery still adds 61.48% propagation work
+against baseline, so keep the policy optional. The earlier propagated-residual
+route has two hits on this stream; both optional policies share them.
+
+**Most concrete next win: the gate misses case 146's positive closure.** Its proposed
+child has 26 checked unit deductions and **no remaining clauses**. The gate
+accepts known children or unit conflicts, so it misses this positive closure.
+The posthoc diagnostic verifies the canonical child model. Next, lift it through
+the proposed assignment, check the original target, and publish that SAT witness
+directly when valid. This can avoid acquiring an unnecessary negative premise;
+measure actual rows and total costs before claiming savings. The original-target
+model transport and alternate publication have not yet been implemented or timed.
+
+**Next unresolved structural targets: cases 0/131.** These account for **17/14
+of 43 remaining child expansions**. Case 0 has no baseline forced prefix and
+pays 1,908 extra discovery visits. After the proposed condition and propagation,
+cases 0/131/159 retain nonfamily residuals of **139/119/125 literals**. Price
+alternative conditioning and cached dependencies at equal prefixes, retaining
+historical useful 43/172 and regressing 144 controls. Do not route by size alone.
+
+None of the four baseline residuals (0/131/146/159) has one variable whose two
+immediate restrictions are syntactic two-CNF. This complete syntactic test does
+not exclude closure after further propagation. Retain the negative controls and
+the previous case-36 positive decomposition; its alternate acquisition cost
+remains unmeasured. No small-conditioning-set guarantee holds in the current
+argument for arbitrary CNF.
+
+Cold replay remains the largest full-time component (**9.031/9.091/9.017 s**).
+Shared checking and compact sources remain supporting targets. The stream still
+comes from three old templates and gives no new general structural authority.
+
+All **1,094 tests**, 25 focused tests and independent replay pass. Resume
+`experiments/results/cnf-trace-fallback/checkpoint.json`: **22,532 keys**, every
+22,259 prior payload preserved, **603 new composed records**, 1,827 earlier
+composed records, 2,957 ordinary decisions and six projections. All **488 prior
+sources / 5,329 artifacts / 91 manifests** and structural authorities are
+preserved. Ready/pending frontiers are 132/38, 141/66, 85/91 and 85/118.
+
+New manifest: **126 artifacts**. Next preservation audit: **5455 artifacts / 92 manifests**. Final source ledger: **493**.
+
+## Previous investigation: reuse saved propagation after discovery rejects a child
 
 [Propagated-residual reuse](propagated-reuse.md) is implemented and independently
 checked. At the exact prefix of case 85, propagation falls **5,750 -> 955** and

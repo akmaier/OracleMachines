@@ -9322,3 +9322,32 @@ records, 2,957 ordinary decisions and six projections. No alternate payloads.
 All 483 prior sources / 5,222 artifacts / 90 manifests and the four frontier
 lineages are preserved. Structural authorities remain unchanged. This is an
 optional experiment route, with no new Lean or unrestricted-SAT theorem.
+
+
+## 2026-11-17: retain unit prefixes after rejected discovery
+
+[Retained-prefix fallback](trace-fallback.md) reuses a saved baseline trace while
+solving the original target's residual normally; it does not acquire the rejected
+guard. Twenty-seven exact-prefix arms preserve identical previous/new native
+payloads, reducing visits 23,813 -> 20,896. On another 192 excluded queries, three
+prefix reuses reduce visits 24,342 -> 22,811 (6.29%), with identical 269-row
+additions. Three explicit publications replace three expansion calls. Sidecars
+grow 0.077%; opposite timing signs establish no stable total gain. Native baseline
+still uses only 14,126 visits, so rejected discovery remains expensive.
+
+The next concrete gap is positive closure after a proposed condition. Case 146's
+rejected child has 26 checked unit deductions and no remaining clauses, but the
+gate tests only known children or unit conflict. The diagnostic verifies its
+canonical child model; lift and check the original-target witness before direct
+SAT publication, then measure costs. No alternate acquisition has been executed.
+Cases 0/131 account for 31 of 43 remaining child expansions and need broader
+structural investigation. None of four baseline residuals has a single-variable
+immediate two-CNF decomposition; further propagation remains outside that test.
+
+All 1,094 tests, 25 focused tests and independent replay pass. Resume
+`experiments/results/cnf-trace-fallback/checkpoint.json`: 22,532 keys, all 22,259
+previous payloads, 603 new composed records, 1,827 previous composed records,
+2,957 ordinary decisions and six projections. No alternative payloads. Prior
+488 sources / 5,329 artifacts / 91 manifests are unchanged. Ready/pending banks
+are 132/38, 141/66, 85/91, 85/118; structural authority and 64 proof blocks are
+preserved. No new Lean or unrestricted-SAT bound.

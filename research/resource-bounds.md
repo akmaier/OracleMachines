@@ -3136,3 +3136,35 @@ database bytes and 5,163,292 compressed bytes. It is not one selected policy's
 working storage. All prior evidence, 597 new composed records and rejected
 routes remain retained. All 1,085 tests pass; there is no new unrestricted-SAT
 resource bound.
+
+
+## 2026-11-17: reuse the unit prefix without bounding its residual
+
+[Retained-prefix fallback](trace-fallback.md) replaces one repeated target
+propagation with checks of the saved unit reasons. It restricts the same target
+and retains ordinary residual acquisition and its expansion budget. One explicit
+publication replaces the target expansion; there is no general new row bound.
+Normalization, lookup, reason checking, source/model validation, serialization
+and cold replay remain charged. The change preserves measured native payloads,
+not a new worst-case time or storage guarantee.
+
+In exact-prefix controls 36/186, visits fall 5,299 -> 4,046 and 3,608 -> 3,234;
+additional prefix checks inspect 28/1 reason literals. Across all nine controls,
+visits fall 23,813 -> 20,896 with the same 42 rows. Native baseline uses 13,366
+visits. Single-arm times show no improvement and establish no stable conclusion.
+
+On the next 192 queries, previous/new propagation falls 24,342 -> 22,811 (6.29%),
+with the same 269 new rows / 527,030 added native bytes. Extra sidecar bytes are
+4,224 (0.077%). Three more trace publications accompany 46 -> 43 expansion calls.
+Complete-time means are 18.467/18.299 seconds, but pairwise differences have
+opposite signs. Native baseline uses 14,126 visits, 271 rows and 18.300 seconds.
+Cold replay means are 9.091/9.017 seconds. All databases occupy 72,716,288 bytes;
+previous/new compressed size is 5,223,035 bytes. Process RSS averages 763/764 MB,
+not a live-memory bound. The existing gate supplies the two-row baseline saving.
+
+The evidence union adds 273 keys (22,259 -> 22,532), occupies 72,720,384 database
+bytes / 5,223,549 compressed bytes, and retains all arms and 603 new composed
+records. It is not one policy's working storage. A posthoc positive child model
+in case 146 is checked but its original-target lifting and alternate publication
+are unmeasured; no projected row saving is counted. All 1,094 tests pass and
+all previous evidence is preserved. No unrestricted-SAT resource bound follows.

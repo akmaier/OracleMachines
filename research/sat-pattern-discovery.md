@@ -5475,3 +5475,32 @@ The new 22,259-key evidence union preserves all earlier results and adds 597
 composed records. All 1,085 tests and independent replay pass. Structural and
 supplemental authority, four frontier lineages and six projections are preserved.
 No new Lean proof, compact closure or unrestricted-SAT efficiency follows.
+
+
+## 2026-11-17: preserve rejected-prefix work and detect positive child closure
+
+[Retained-prefix fallback](trace-fallback.md) avoids repeating baseline propagation
+when a guard is rejected, while leaving residual search unrestricted. Fresh
+propagation falls 6.29% with identical native proofs; discovery still exceeds
+baseline work and no stable total speedup follows. This improves work reuse
+without adding a general structural category or reducing native storage.
+
+A separate replay identifies a recognition asymmetry: new case 146's rejected
+child is satisfied by its 26 unit deductions, with no residual clauses. The gate
+accepts known answers or conflicts, missing positive unit closure. Its canonical
+child model is checked. Next, transport it through the proposed assignment to
+the original target and verify that whole target before publishing SAT directly.
+A verified target witness does not require acquiring the proposed negative
+premise. Original-target transport and alternate acquisition remain unimplemented.
+
+The largest unresolved cases 0/131 still have nonfamily children after the
+proposed condition and propagation. They account for 31 of 43 remaining child
+expansions. All four baseline residuals fail the complete single-variable test
+for two immediate syntactic two-CNF restrictions. This is not exclusion of closure
+under subsequent propagation or mixed-family decomposition. Preserve those
+negative controls and the previous case-36 positive control when pricing broader
+conditioning. No bounded conditioning size for arbitrary CNF is established.
+
+All 1,094 tests and independent replay pass. The 22,532-key evidence union retains
+all previous results and 603 new composed records. Structural and supplemental
+authority are unchanged. No new Lean proof or unrestricted efficiency follows.

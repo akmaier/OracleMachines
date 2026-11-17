@@ -12,7 +12,45 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: minimize assumptions before adding partition branches
+## Current investigation: price bounded target-local discovery and retain fallback
+
+[Single-assumption guard acquisition](assumption-guard.md) is now priced. Cases
+43/172 improve from **10/9 -> 7/8 native rows**, but 70 regresses **4 -> 5**.
+Across the three historical cases, rows fall **23 -> 20** and native bytes fall
+**16.99%**, while propagation visits rise **31.24%** and serialized results grow
+**10.91%**. Retaining unit traces avoids 1,166 repeated propagation visits versus
+direct premise solving; both routes store identical proofs. No stable total-time
+or peak-memory gain follows. Keep the optional route and the rejection control.
+
+**Highest-priority discovery gap:** the two priced candidates still came from a
+roughly 32,000-literal full-bank conditioning scan. A checked read-only local
+ranking now finds different unit-refuted assumptions directly from the targets:
+**43 + [-20]**, **172 + [-140]**, **70 + [50]**, after **one/one/two probes**.
+It ranks at most four unforced variables by binary incidence and probes false
+then true. Original and unit-residual scoring select the same first conflict here,
+although later orders differ; the latter pays another restriction pass. Discovery plus probe propagation visits
+are 1,759/871/1,499; these are different operations from the old restriction count.
+
+**Next:** price those local candidates and their absent restricted-child proofs,
+then validate the fixed ranking/budget on excluded queries and adversarial edits.
+Do not assume a valid forced literal is cost-beneficial: case 70 already refutes
+that inference. Charge failed probes and reuse retained baseline/probe traces
+where justified. A compact source-reference representation for chain sidecars
+and shared cold checking remain supporting cost targets: full replay dominates
+the complete samples, and sidecars currently offset native storage savings.
+
+All **1,064 tests**, nine matched-arm audits, 2,957 ordinary and 438 composed
+records plus six projections pass. Resume
+`experiments/results/cnf-assumption-guard/checkpoint.json`: **21,528 keys**, all
+21,525 prior payloads preserved, only three new keys and no alternative payload.
+Prior **462 sources / 5,008 artifacts / 86 manifests**, four frontiers, structural
+authorities and 64 manuscript proof blocks are unchanged. No new Lean, fresh
+coverage, stable runtime or arbitrary-SAT bound.
+
+
+New manifest: **49 artifacts**. Next preservation audit: **5057 artifacts / 87 manifests**.
+
+## Previous investigation: minimize assumptions before adding partition branches
 
 [Conditioned-core acquisition and direct-premise controls](conditioned-core.md)
 separate branch choice from certificate reuse on cases 43/172/70. All six paired

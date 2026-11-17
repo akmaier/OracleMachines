@@ -9193,3 +9193,29 @@ and six projections pass. Resume `experiments/results/cnf-conditioned-core-expos
 retained separately. Prior 451 sources / 4,916 artifacts / 85 manifests and all
 four frontier lineages pass preservation. Structural authorities and 64 paper
 proof blocks remain unchanged. No new Lean or unrestricted-SAT bound.
+
+
+## 2026-11-17: acquire single-assumption guards and expose local candidates
+
+[Single-assumption acquisition](assumption-guard.md) now checks an unsplit terminal
+before at most two supplied clause probes, retains failed attempts and publishes
+only a checked unit-refuted premise. The remaining child is solved normally.
+Nine historical arms give native rows 23 -> 20 and bytes 29,615 -> 24,582; case
+70 regresses 4 -> 5 rows. Direct and trace acquisition store identical proofs.
+Trace reuse avoids 1,166 repeated propagation visits, but total visits exceed
+baseline (4,501 -> 5,907), and serialized deltas plus chains grow 10.91%.
+A valid forced assignment is not a minimum-cost certificate.
+
+Next, price target-local binary-incidence ranking: read-only checked probes find
+43 + [-20], 172 + [-140], 70 + [50] within one/one/two attempts, without another
+core-bank scan. All corresponding children are absent at the exact prefixes.
+Both rankings select the same first conflict; later orders can differ. Fix the policy before testing
+excluded inputs; retain 70 as fallback control and account for failed probes,
+remaining solving, full chain sources and cold replay. No fresh gain is claimed.
+
+All 1,064 tests and independent replay pass. Resume
+`experiments/results/cnf-assumption-guard/checkpoint.json`: 21,528 keys, all
+21,525 prior payloads preserved, nine new composed records and no alternative
+native payloads. All 462 prior sources / 5,008 artifacts / 86 manifests, four
+frontiers, structural authorities and 64 paper proof blocks remain preserved.
+No new Lean or unrestricted-SAT theorem.

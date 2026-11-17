@@ -5352,3 +5352,27 @@ Resume `experiments/results/cnf-conditioned-core-exposed/checkpoint.json` (21,52
 keys, prior payloads preserved). All 1,057 tests and independent replay pass.
 Original structural coverage and four frontier counts remain unchanged; fifteen
 new composed conclusions revisit three already known sources.
+
+
+## 2026-11-17: candidate validity and candidate value are separate
+
+[Priced single-assumption guards](assumption-guard.md) reduce rows on 43/172 but
+increase them on 70. All three were valid checked forced assignments. Retaining
+unit traces avoids repeated premise propagation; it does not change the stored
+proofs or remaining child search. Aggregate native storage falls, while total
+propagation and serialized decision size rise. These historical measurements
+supply no fresh category coverage or universal beneficial-reduction rule.
+
+A local discovery probe ranks up to four unforced variables by binary incidence,
+with deterministic identifier ties and false/true order. It finds different
+unit-refuted assumptions for all three targets after one/one/two probes, without
+another bank scan. Their native children remain absent. Original versus
+unit-residual scoring select the same first conflict here, although later orders
+differ; the latter adds a restriction pass. Price
+these choices before extending the fixed policy to excluded queries and mixtures.
+Unsuccessful probes certify nothing; successful ones certify only the forced
+assignment, not cheap remaining acquisition. Retain the case-70 regression.
+
+Resume `experiments/results/cnf-assumption-guard/checkpoint.json` (21,528 keys,
+all previous payloads preserved). All 1,064 tests and independent cold checks
+pass. Structural authorities and four frontier counts remain unchanged.

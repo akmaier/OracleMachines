@@ -6747,6 +6747,36 @@ minimize assumptions. All 1,057 tests and independent replay pass; the new union
 contains 21,525 keys and preserves all earlier payloads. These historical
 comparisons provide neither fresh-input coverage nor an unrestricted-SAT bound.
 
+\paragraph{Single-assumption acquisition and local discovery.}
+The three preceding candidates now have complete exact-prefix measurements.
+The optional policy first checks the unsplit target, then probes at most two
+supplied clauses and stops at the first unit-refuted premise. It reuses the
+retained trace through the native verifier and solves the one restricted child.
+Direct native premise acquisition is the control; both policies pay the same
+probing. This applies the established failed-literal reasoning from
+Section~\ref{sec:checked-failed-literals} after the earlier guards.
+
+Cases 43 and 172 reduce native rows from ten and nine to seven and eight,
+respectively; case 70 increases from four to five. Totals fall from 23 to 20
+rows and from 29,615 to 24,582 native bytes. Direct and trace-based acquisition
+store identical proofs and composed records. Trace reuse avoids 1,166 repeated
+premise propagation visits, but total propagation still rises from 4,501 to
+5,907 versus baseline. Serialized deltas plus composed records grow from 88,960
+to 98,668 bytes because another full strengthened source is retained. A valid
+forced assignment therefore need not reduce either total computation or storage.
+Single complete-time samples establish no stable speedup or peak-memory gain.
+
+A read-only follow-up ranks at most four unforced variables by binary incidence
+and probes both values, using only target clauses at this stage. It finds unit
+conflicts under $\neg x_{20}$ in case 43, $\neg x_{140}$ in case 172 and $x_{50}$
+in case 70 after one, one and two probes. These differ from the priced guards;
+their restricted-child roots are absent and acquisition costs remain unmeasured.
+Both original and unit-residual scoring make the same choices here. Bounded
+local discovery may avoid the prior full-bank scan, but needs matched acquisition
+and excluded-query tests before a net-saving claim. All 1,064 tests and cold
+replay pass; the 21,528-key union preserves all earlier payloads. Structural
+coverage and unrestricted-SAT resource obligations are unchanged.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

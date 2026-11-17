@@ -2989,3 +2989,32 @@ and cold replay must all be charged. No minimum expansion guarantee follows.
 All 1,057 tests pass; source/artifact history, frontier lineages, structural
 coverage and 64 manuscript proof blocks remain unchanged. No new Lean or
 unrestricted-SAT theorem is added.
+
+
+## 2026-11-17: fewer native rows can coexist with more propagation and sidecars
+
+[Single-assumption guards](assumption-guard.md) reduce total rows 23 -> 20 and
+native bytes 29,615 -> 24,582 across three independent historical prefixes.
+Case 70 regresses 4 -> 5 rows. Direct and retained-trace acquisition produce
+identical native payloads and composed records. Trace reuse avoids 1,166 repeated
+propagation visits; expansion calls fall 20 -> 17 only because three retained
+trace publications replace ordinary expansions. They still acquire three rows.
+Compared with baseline, propagation visits rise 4,501 -> 5,907 (31.24%).
+
+Serialized deltas plus composed records grow 88,960 -> 98,668 bytes (10.91%) as
+another full strengthened source enters each guard chain. Native-byte reduction
+is therefore not a total-storage or peak-memory result. Complete single samples
+range 6.33--6.96 seconds, including 5.16--5.63 seconds cold replay; no stable
+total-time gain is established. The combined archive preserves all old payloads
+and adds three keys, reaching 21,528; database bytes grow 67,989,504 -> 67,993,600,
+compressed bytes 4,980,892 -> 4,981,685. Old arms already acquired the remaining
+children, but these were correctly excluded from the historical query prefixes.
+
+Candidate origin still requires the earlier separately charged full-bank scan.
+A read-only target-local ranking finds different forced assumptions after
+one/one/two probes, with 1,759/871/1,499 combined discovery/probe propagation
+visits. These cannot be compared as a speed ratio with old restriction visits.
+All remaining child roots are absent. Next, measure their acquisition and fresh
+excluded queries, including failed probes, source duplication and cold replay.
+All 1,064 tests pass; frontiers, structural authorities and 64 proof blocks remain
+unchanged. No minimum-cost expansion or unrestricted-SAT bound is added.

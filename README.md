@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Price single-assumption guards and identify local discovery candidates](research/assumption-guard.md).
+Historical cases reduce native rows **23 -> 20** and native bytes **17%**, but
+propagation visits rise **31%** and serialized records grow **11%**. Case 70
+regresses. Retained traces avoid duplicate premise propagation; they store the
+same proofs as direct acquisition. Bounded target-local discovery finds new
+guards whose child costs are next to measure. All **1,064 tests** pass. Resume
+`experiments/results/cnf-assumption-guard/checkpoint.json` (**21,528 native keys**,
+all previous results preserved). No fresh-coverage or stable total-speed claim.
+
 [Separate cofactor reuse from branch-choice gains](research/conditioned-core.md).
 Fifteen historical controls show a case-43 partition reducing proof rows
 **10 -> 7**, but acquiring a separate cofactor adds cost without saving branch

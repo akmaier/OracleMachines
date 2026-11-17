@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Test local discovery on new queries and isolate its regression](research/local-guard.md).
+On **192 new neighbouring CNFs**, native rows stay at 250: seven fewer expansion
+calls are replaced by seven trace publications. Native bytes fall slightly,
+while propagation, serialized records and observed complete time increase.
+Fresh case 144 accounts for **10/12 remaining child expansions**; screening its
+restricted child before guard acquisition is the next target. All **1,069 tests**
+pass. Resume `experiments/results/cnf-local-guard/checkpoint.json` (**21,801 native
+keys**, all previous results preserved). The policy remains optional.
+
 [Price single-assumption guards and identify local discovery candidates](research/assumption-guard.md).
 Historical cases reduce native rows **23 -> 20** and native bytes **17%**, but
 propagation visits rise **31%** and serialized records grow **11%**. Case 70

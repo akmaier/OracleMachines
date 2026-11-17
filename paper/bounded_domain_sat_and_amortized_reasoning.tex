@@ -6777,6 +6777,35 @@ and excluded-query tests before a net-saving claim. All 1,064 tests and cold
 replay pass; the 21,528-key union preserves all earlier payloads. Structural
 coverage and unrestricted-SAT resource obligations are unchanged.
 
+\paragraph{Fresh local discovery exposes a costly forced residual.}
+The local ranking now shares baseline propagation and has six historical
+acquisition controls plus two reversed-order pairs on 192 new neighbouring
+CNFs, excluding inherited query and native roots. Historical rows fall from
+23 to 19. On the fresh set, both policies add 250 rows: expansion calls fall
+from 19 to 12 alongside seven explicit trace publications. Added native bytes
+fall from 495,299 to 490,681, while probe and premise/child propagation visits
+rise from 6,634 to 7,797. Serialized query and warm records grow 1.19\%.
+Mean complete times are 17.337 and 20.173 seconds; both observed pairs are slower
+under the local policy. Two pairs establish no general timing or memory guarantee.
+
+Fresh case 144 explains the remaining search cost. Forcing $x_{270}$ grows
+its contribution from three to eleven rows and requires ten of the local
+policy's twelve child expansions. The baseline reuses a stored negative
+dependency with 61 clauses and 159 literals; the conditioned child has no
+pre-query dependency hit and requires three splits. Cases 167 and 190 instead
+fall from eight and four rows to two each because their restricted children
+refute by unit propagation. These are matched-stream contributions, whose
+prefixes can diverge, rather than isolated equal-state comparisons.
+
+The next admission test should inspect the restricted child before publishing
+the guard, reusing a checked known answer or a unit-terminal trace and preserving
+cheap native-family priority. A strict gate could reject the useful nonterminal
+historical cases 43 and 172, so this remains a heuristic requiring controls and
+another excluded set. Transporting the baseline cached dependency through the
+new assignment is also unimplemented. All 1,069 tests and cold replay pass;
+the 21,801-key union preserves all previous payloads. New neighbouring queries
+do not establish broader structural authority or an unrestricted-SAT bound.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

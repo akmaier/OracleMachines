@@ -12,7 +12,49 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: price bounded target-local discovery and retain fallback
+## Current investigation: reject costly forced residuals before acquisition
+
+[Target-local discovery](local-guard.md) now has six historical controls and
+four matched streams on **192 new neighbouring CNFs**. It finds guards without
+another core-bank scan, reusing baseline propagation for ranking. Historical
+rows improve **23 -> 19**, but fresh rows remain **250 -> 250**. Expansion calls
+fall **19 -> 12** only alongside **seven trace publications**. Fresh native bytes
+fall **0.93%**, propagation rises **17.53%**, serialized records grow **1.19%**,
+and observed mean complete time rises **17.337 -> 20.173 s**. Keep the route optional.
+
+**Dominant remaining search gap: fresh case 144.** Its forced `270=true` route
+grows **3 -> 11 rows**, accounting for **10/12 remaining child expansions**.
+Baseline uses a pre-existing 61-clause / 159-literal negative dependency; the
+conditioned child has no pre-query dependency hit and needs three splits. In
+contrast, fresh cases **167/190** improve **8/4 -> 2/2 rows** because their
+restricted children close by unit propagation. The saved proof frontiers identify
+the cached root; no cofactor transport or minimum-cost conclusion is established.
+
+**Next:** screen the restricted child before publishing a guard. Test a known
+native answer or retained unit-terminal proof as an admission condition, preserve
+cheap native-family priority, and fall back on case 144's nonterminal child.
+Reuse premise and child traces. Measure exact-prefix controls, then another
+excluded set; do not count the posthoc eight-row recovery as a deployed saving.
+Retain historical 43/172 as useful nonterminal cases that a strict gate would
+miss. Investigate checked transport of the baseline cached dependency only when
+its recognition and certificate costs can be charged.
+
+Cold replay remains the largest full-cost component (means **8.681 / 10.463 s**).
+Compact references for duplicated guard sources and shared cold checking are
+supporting targets. Two timing pairs and process peak RSS establish no general
+speedup or live-memory bound. New queries remain from three neighbouring-input
+families; arbitrary-SAT coverage and uniform efficiency are separate obligations.
+
+All **1,069 tests**, six historical and four fresh audits, 2,957 ordinary and
+828 composed records plus six projections pass. Resume
+`experiments/results/cnf-local-guard/checkpoint.json`: **21,801 keys**, all 21,528
+old payloads preserved and no alternative payloads. Prior **469 sources / 5,057
+artifacts / 87 manifests**, four frontiers, structural authorities and 64 proof
+blocks remain preserved. No new Lean or unrestricted-SAT bound.
+
+New manifest: **58 artifacts**. Next preservation audit: **5115 artifacts / 88 manifests**.
+
+## Previous investigation: price bounded target-local discovery and retain fallback
 
 [Single-assumption guard acquisition](assumption-guard.md) is now priced. Cases
 43/172 improve from **10/9 -> 7/8 native rows**, but 70 regresses **4 -> 5**.

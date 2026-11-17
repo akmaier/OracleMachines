@@ -1,0 +1,106 @@
+{
+  "cases": {
+    "path": "experiments/results/cnf-local-guard/cases.json",
+    "sha256": "8a80dc461f929ac5ebcfe6906eff79bb72351065e23c245488d111aa8d1779c6"
+  },
+  "historical": {
+    "path": "experiments/results/cnf-local-guard/historical/report.json",
+    "sha256": "6d793c45a89c2b32eb49ead095831fc1b4f8a3ef4ad8c41f3c3db2843ad72b9f"
+  },
+  "protocol": {
+    "path": "experiments/results/cnf-local-guard/protocol.json",
+    "sha256": "293d3e6e4395ec6388e57b4fbc238983946ce70b62c67af0dfba125b84c03ef1"
+  },
+  "samples": [
+    {
+      "mode": "baseline",
+      "path": "experiments/results/cnf-local-guard/baseline-0/report.json",
+      "repeat": 0,
+      "sha256": "87047b83198c46595b748443027c30433b76a3f1b05702104536eb13beccba2c"
+    },
+    {
+      "mode": "local",
+      "path": "experiments/results/cnf-local-guard/local-0/report.json",
+      "repeat": 0,
+      "sha256": "617378210a262d7cf68108436c9b8dae360ba9408203519f8b261c687b9c207a"
+    },
+    {
+      "mode": "local",
+      "path": "experiments/results/cnf-local-guard/local-1/report.json",
+      "repeat": 1,
+      "sha256": "5493765a083bfbc6f8fb6f5df5ea26dc94cec0cc579f20e2deaafad7e1f9377a"
+    },
+    {
+      "mode": "baseline",
+      "path": "experiments/results/cnf-local-guard/baseline-1/report.json",
+      "repeat": 1,
+      "sha256": "1bc90036ae3f02b5784f73c1f5dcc827d62f584ee0e4f35af9b5e56fa3d405c6"
+    }
+  ],
+  "summary": {
+    "baseline": {
+      "compressed_bytes": 5042730,
+      "database_bytes": 69156864,
+      "expanded_nodes": 19,
+      "local_calls": 0,
+      "local_guards": 0,
+      "local_terminals": 0,
+      "mean_cold_seconds": 8.68050583335571,
+      "mean_complete_worker_seconds": 17.337370353983715,
+      "mean_compression_seconds": 3.977511624339968,
+      "mean_peak_rss_bytes": 522428416.0,
+      "mean_preparation_seconds": 2.035173833137378,
+      "mean_query_seconds": 1.4982799785211682,
+      "mean_serialization_seconds": 0.023199249990284443,
+      "mean_setup_seconds": 2.2225306662730873,
+      "mean_warm_query_seconds": 0.026384794851765037,
+      "mean_warm_setup_seconds": 0.5365567710250616,
+      "new_nodes": 250,
+      "new_payload_units": 495299,
+      "nodes": 21778,
+      "positive": 84,
+      "premise_probes": 0,
+      "propagation_literal_visits": 6634,
+      "queries": 192,
+      "repeat_new_nodes": 0,
+      "row_digest": "f02bcd0644ac3486db31bc5fb38273e2a51cc62361442f0c944339f7b6e5f7a9",
+      "sidecar_bytes": [
+        5409395,
+        5409415
+      ],
+      "trace_publications": 0
+    },
+    "local": {
+      "compressed_bytes": 5043275,
+      "database_bytes": 69148672,
+      "expanded_nodes": 12,
+      "local_calls": 7,
+      "local_guards": 3,
+      "local_terminals": 4,
+      "mean_cold_seconds": 10.463091333163902,
+      "mean_complete_worker_seconds": 20.17337964568287,
+      "mean_compression_seconds": 4.056196396006271,
+      "mean_peak_rss_bytes": 516243456.0,
+      "mean_preparation_seconds": 2.863198895473033,
+      "mean_query_seconds": 1.5628319189418107,
+      "mean_serialization_seconds": 0.021853229496628046,
+      "mean_setup_seconds": 3.0234409586992115,
+      "mean_warm_query_seconds": 0.025887815048918128,
+      "mean_warm_setup_seconds": 0.5658653539139777,
+      "new_nodes": 250,
+      "new_payload_units": 490681,
+      "nodes": 21778,
+      "positive": 84,
+      "premise_probes": 3,
+      "propagation_literal_visits": 7797,
+      "queries": 192,
+      "repeat_new_nodes": 0,
+      "row_digest": "275b576da4515486811b1c13abba56f6638456f5c24482ee231e4722f05acf97",
+      "sidecar_bytes": [
+        5473718,
+        5473581
+      ],
+      "trace_publications": 7
+    }
+  }
+}

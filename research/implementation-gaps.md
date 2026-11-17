@@ -9219,3 +9219,31 @@ All 1,064 tests and independent replay pass. Resume
 native payloads. All 462 prior sources / 5,008 artifacts / 86 manifests, four
 frontiers, structural authorities and 64 paper proof blocks remain preserved.
 No new Lean or unrestricted-SAT theorem.
+
+## 2026-11-17: fresh local guards expose the residual-admission gap
+
+[Target-local discovery](local-guard.md) now reuses baseline propagation, ranks
+unforced variables by original binary-clause incidence, and tests at most four
+variables without another core-bank scan. Six historical arms lower rows
+23 -> 19. Four workers on 192 excluded neighbouring inputs give 250 -> 250 rows:
+seven explicit trace publications accompany the 19 -> 12 expansion reduction.
+Propagation and serialized records increase, and both complete-time pairs regress.
+The optional policy is therefore not promoted as a general improvement.
+
+Fresh case 144 grows 3 -> 11 rows and contributes 10/12 remaining local child
+expansions. The baseline reuses a checked negative dependency that the conditioned
+path does not hit. Cases 167/190 shrink 8/4 -> 2/2 because their restricted children
+unit-refute. Next, screen the child before publishing a guard, preserve cheap
+native-family priority, reuse terminal traces, and retain ordinary fallback.
+Measure at identical prefixes and another excluded set; keep useful nonterminal
+historical cases 43/172 as controls. Cached-proof transport remains unimplemented.
+
+All 1,069 tests, 12 focused tests, independent stream and cold checks pass.
+Resume `experiments/results/cnf-local-guard/checkpoint.json`: 21,801 native keys,
+all 21,528 old payloads preserved, 390 new composed records, no alternate payloads.
+The 2,957 ordinary decisions, 438 earlier composed records and six projections
+remain checked. All 469 prior sources / 5,057 artifacts / 87 manifests are preserved.
+Union ready/pending frontiers are 131/39 (active), 139/68 (extended), 83/93
+(causal), 83/120 (incremental causal); these are retained-bank availability counts,
+not new structural authority. Structural checks and 64 proof blocks are preserved.
+No new Lean, minimum-cost expansion or unrestricted-SAT result is established.

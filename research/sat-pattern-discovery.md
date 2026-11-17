@@ -5376,3 +5376,31 @@ assignment, not cheap remaining acquisition. Retain the case-70 regression.
 Resume `experiments/results/cnf-assumption-guard/checkpoint.json` (21,528 keys,
 all previous payloads preserved). All 1,064 tests and independent cold checks
 pass. Structural authorities and four frontier counts remain unchanged.
+
+## 2026-11-17: distinguish a discoverable guard from a cheap remaining problem
+
+[Local binary-incidence discovery](local-guard.md) has a fixed four-variable
+budget, shared baseline propagation and checked trace publication. It requires
+no additional core-bank scan. Exhaustive two-variable cases and transported
+representations pass, as do six exact-prefix historical arms and four matched
+streams on 192 new neighbouring inputs. Those inputs exclude earlier query and
+native roots, but still come from three templates; this is not broad arbitrary-CNF
+coverage. Failed probes do not establish absence of a useful guard.
+
+Historical rows improve 23 -> 19. Fresh rows remain 250 -> 250, while propagation,
+sidecar bytes and observed complete time increase. Case 144's local forced child
+needs ten expansions and misses a cached negative dependency used by baseline;
+cases 167/190 close under unit propagation. The next useful distinction is thus
+between a checked forced assignment and a residual whose acquisition is cheap.
+Screen existing native answers or unit-terminal traces before guard publication,
+preserve cheap native-family priority, and price the fallback. A strict gate also
+rejects useful nonterminal historical cases 43/172, so retain them as controls.
+Exact-prefix and another excluded-set comparison are still required; posthoc
+selection is not a deployed saving. The recorded dependency root enables a later
+investigation of checked proof transport through conditioning.
+
+The 21,801-key checkpoint preserves every prior payload and retains 390 new
+composed records alongside 438 earlier records, 2,957 ordinary decisions and six
+projections. All 1,069 tests and independent cold replay pass. Existing structural
+authorities remain unchanged. Discovery bounds do not bound the unrestricted
+child solve, prove compact closure or supply a uniform polynomial SAT algorithm.

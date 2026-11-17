@@ -3018,3 +3018,34 @@ All remaining child roots are absent. Next, measure their acquisition and fresh
 excluded queries, including failed probes, source duplication and cold replay.
 All 1,064 tests pass; frontiers, structural authorities and 64 proof blocks remain
 unchanged. No minimum-cost expansion or unrestricted-SAT bound is added.
+
+## 2026-11-17: bounded local discovery does not bound child acquisition
+
+[Target-local guards](local-guard.md) share one baseline propagation and test both
+polarities of at most b unforced variables (b=4 here). Thus discovery makes at most
+1+2b propagation calls, plus original-binary incidence ranking and normalization.
+For n variables and L literal occurrences, each scan-based call takes at most n+1
+passes over at most L+1 literals; canonicalization, sorting, retained traces and
+publication are separate costs. This does not bound subsequent general search.
+
+On 192 new neighbouring inputs, expansion calls fall 19 -> 12 alongside seven
+explicit trace publications. Native rows remain 250. Added native bytes fall
+495,299 -> 490,681 (0.93%), but counted probe/premise/child propagation rises
+6,634 -> 7,797 (17.53%), and mean serialized query/warm bytes rise
+5,409,405 -> 5,473,649.5 (1.19%). Mean complete time rises 17.337 -> 20.173 seconds
+in two reversed-order pairs; cold replay alone averages 8.681 -> 10.463 seconds.
+These samples give no stable general timing claim. Process peak RSS averages
+522/516 MB, whereas SQLite bytes are 69,156,864/69,148,672 and compressed bytes
+5,042,730/5,043,275. None establishes a general live-memory improvement.
+
+Case 144 contributes ten of twelve remaining local child expansions and grows
+3 -> 11 rows. Baseline has a pre-query negative dependency hit; the conditioned
+path does not. Cases 167/190 instead close under unit propagation. Next, charge a
+restricted-child admission screen before acquiring a guard, retain native-family
+priority and fallback, and compare identical prefixes plus another excluded set.
+Do not count posthoc recovery of the eight-row regression as a measured saving.
+The union of all arms adds 273 keys (21,528 -> 21,801), with 69,226,496 database
+bytes and 5,050,133 compressed bytes; this is retained experimental evidence,
+not the storage of a single selected policy. All earlier payloads, 469 sources,
+5,057 artifacts and 87 manifests are preserved. All 1,069 tests pass. There is
+no new unrestricted-SAT resource bound.

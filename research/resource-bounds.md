@@ -2908,3 +2908,29 @@ keys, all previous 21,128 payloads preserved, and eight partition records for
 three historical sources. All 2,957 ordinary inherited decisions and 200 inherited
 chains replay. Structural authority and all 64 existing proof blocks remain
 unchanged. No new Lean or unrestricted-SAT bound is claimed.
+
+
+## 2026-11-17: bounded partition screening and a terminal-baseline counterexample
+
+[Retained unit traces](partition-screen.md) now support bounded plan selection
+and checked publication without repeating selected-branch propagation. Historical
+controls use 23 new rows versus 41 baseline; nine wrapper/conflict publications
+replace expansion calls and must remain in the accounting. Case 135's nearest
+two-clause orders are rejected, but a three-clause alternative is admitted.
+
+On 192 fresh queries, expansions 27 -> 26 coexist with rows 247 -> 249 and native
+payload 495,506 -> 499,414 bytes. The only screened target already has a unit
+conflict, so partitioning is unnecessary. Combined propagation visits rise from
+8,190 to 12,369. Keep the selector optional; no stable runtime or peak-memory
+improvement follows. First reuse the baseline terminal trace, then inspect
+cases 43/172 (19 of 26 remaining expansions) after their extra guard, where this
+policy currently stops screening. Plan budgets do not bound posting discovery,
+cold proof checking or remaining unrestricted residual search.
+
+All 1,042 tests, four fresh trial audits, six historical controls, 2,957 inherited
+ordinary decisions and 406 composed records pass. The final union retains all
+21,225 prior payloads and has 21,482 keys. Resume
+`experiments/results/cnf-partition-screen/expanded-checkpoint.json`; the intermediate
+fresh checkpoint and failed harness assumption are also retained. Preserve all
+mixed sidecar catalogs separately from ordinary schemas. Structural authorities
+and 64 prior proof blocks remain unchanged; no new Lean or unrestricted-SAT bound.

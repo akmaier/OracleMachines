@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Screen partition plans and reuse their unit traces](research/partition-screen.md).
+Historical controls reduce new proof rows **41 -> 23**, but fresh case 176 exposes
+a regression: repartitioning a target already refuted by unit propagation adds
+two rows. Keep the selector optional. Next, reuse terminal unsplit traces and
+inspect cases 43/172, which hold **19/26 remaining expansions** after an extra
+guard. All **1,042 tests** and independent replay pass. Resume
+`experiments/results/cnf-partition-screen/expanded-checkpoint.json` (**21,482 native
+keys**; prior results and all new sidecars retained). No stable total-speed claim.
+
 [Compose exact multiple-clause partitions and retain their regressions](research/clause-partition.md).
 On historical case 68, the best tested partition reduces expansions **27 -> 11**;
 case 6 improves **7 -> 3**, while both case-135 plans regress. Trying every candidate

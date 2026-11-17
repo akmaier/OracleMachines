@@ -12,7 +12,42 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: screen partition plans before full solving
+## Current investigation: avoid terminal repartitioning, then inspect guarded residuals
+
+[Bounded plan screening with retained unit traces](partition-screen.md) now checks
+up to four plans without solving them all. Historical cases 6 and 68 select the
+previously best orders; case 135 rejects the nearest two-clause orders and finds
+a three-clause alternative. New proof rows total **41 -> 23**, with **nine trace
+publications** replacing expansion calls. All acquisition/checking remains paid.
+
+**Fresh counterexample:** on 192 excluded queries, only case 176 reaches screening.
+Its unsplit target already conflicts by unit propagation. The selected partition
+reduces the expansion counter by one but adds two rows: totals **247 -> 249 rows**,
+**495,506 -> 499,414 native bytes**, and **8,190 -> 12,369 combined propagation
+literal visits**. This selector remains optional. The small complete-time mean
+difference does not establish a total-runtime or live-memory improvement.
+
+**First fix:** reuse the terminal unsplit trace before discovering partition
+plans. **Largest remaining search target:** cases **43 and 172**, accounting for
+**19/26 expansions**, followed by case 70 with four. All accept an extra guard,
+so this policy never screens their residuals. Restore their exact fresh-trial
+prefixes and price bounded further decomposition. An extra guard can expose
+structure without finishing the query; do not infer cheap closure from it.
+
+All **1,042 tests**, independent selection reconstruction, four fresh trials, six
+complete historical controls and cold replay pass. The failed historical harness
+assumption and its five completed arms remain recorded. Resume
+`experiments/results/cnf-partition-screen/expanded-checkpoint.json`: **21,482 native
+keys**, all 21,225 old payloads preserved; 192 new mixed decisions and six control
+records are retained alongside all 2,957 ordinary and 208 prior composed records.
+Seven control keys are additional to the fresh union. Earlier structural
+coverage/authorities and 64 paper proof blocks remain unchanged. Prior **435
+sources / 4,762 artifacts / 83 manifests** pass preservation. No new Lean or
+unrestricted-SAT guarantee.
+
+New manifest: **81 artifacts**. Next preservation audit: **4843 artifacts / 84 manifests**.
+
+## Previous investigation: screen partition plans before full solving
 
 [Exact first-false partitions](clause-partition.md) now compose several missing
 clauses soundly: earlier clauses hold, the selected clause is false, every

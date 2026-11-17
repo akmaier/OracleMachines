@@ -6662,6 +6662,36 @@ source/guard records, models and native proof storage. All recognition,
 publication, child solving and cold replay remain charged. Exact partitioning
 does not imply a uniform polynomial algorithm for arbitrary SAT.
 
+\paragraph{Bounded screening and a terminal-target counterexample.}
+An optional selector now screens at most four forward/reverse plans from checked
+cores missing two or three clauses, after ordinary reuse and one extra guard
+both fail. It admits all-terminal plans, or plans with at least two unit
+conflicts and one smaller unresolved residual. Selected forced-unit traces
+produce checked native certificates; only the remaining residual is solved.
+The existing verifier checks every publication. This bounds the number of
+plans examined, not posting discovery, proof verification or residual search.
+
+Across three exact historical prefixes, the selector reduces new proof rows
+from 41 to 23. It chooses the previously best orders for cases 6 and 68, and
+finds a three-clause alternative for case 135 after rejecting its nearest
+two-clause orders. Nine saved-trace publications replace expansion calls;
+they remain real proof materialization and verification work.
+
+A comparison on 192 fresh neighbouring queries exposes the limit of this gate.
+Only case 176 reaches partition screening, and its unsplit target already has
+a unit conflict. The selector still accepts two terminal children. Total
+expansions fall from 27 to 26, but new rows rise from 247 to 249 and added native
+payload rises from 495,506 to 499,414 bytes. Including screening, propagation
+literal visits rise from 8,190 to 12,369. Thus fewer expansion calls do not
+certify lower computation or storage cost. Mean complete times over two
+reversed-order pairs are 14.225 and 14.178 seconds, while query time increases;
+this small difference establishes no stable total-speed or live-memory gain.
+The next gate should reuse a terminal unsplit trace before partition discovery.
+Cases 43 and 172 retain 19 of 26 expansions after an accepted extra guard, a
+stage the present screen does not inspect. All 1,042 tests, including exhaustive
+two-variable truth tables, and independent certificate replay pass. These
+implementation results supply no new unrestricted-SAT resource theorem.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

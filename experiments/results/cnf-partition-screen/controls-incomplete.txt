@@ -1,0 +1,13 @@
+{"case":6,"expanded_nodes":7,"mode":"single","new_nodes":7,"new_payload_units":11296,"trace_publications":0}
+{"case":6,"expanded_nodes":0,"mode":"screened","new_nodes":4,"new_payload_units":6122,"trace_publications":3}
+{"case":68,"expanded_nodes":27,"mode":"single","new_nodes":27,"new_payload_units":32827,"trace_publications":0}
+{"case":68,"expanded_nodes":8,"mode":"screened","new_nodes":12,"new_payload_units":16605,"trace_publications":3}
+{"case":135,"expanded_nodes":7,"mode":"single","new_nodes":7,"new_payload_units":10761,"trace_publications":0}
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/check_cnf_partition_screen_controls.py", line 65, in <module>
+    if __name__=='__main__':run(Path(sys.argv[1]))
+                            ~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/check_cnf_partition_screen_controls.py", line 52, in run
+    assert all(k in union for k,v in delta),'Unexpected new historical key: retain in union before finalization'
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Unexpected new historical key: retain in union before finalization

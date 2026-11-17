@@ -1,0 +1,282 @@
+{
+  "changed_or_screened_cases": [
+    {
+      "baseline_expansions": 1,
+      "baseline_rows": 1,
+      "baseline_unit_conflict": true,
+      "case": 176,
+      "plan": {
+        "core": 233,
+        "order": "forward",
+        "remaining": 0,
+        "residual_literals": 0,
+        "terminal": 2
+      },
+      "screened_expansions": 0,
+      "screened_rows": 3
+    }
+  ],
+  "complete_mean_change_percent": -0.3351874976014524,
+  "conclusion": "Optional prototype only. A terminal unsplit baseline is a counterexample to selecting an all-terminal partition: fewer expanded_nodes can coexist with extra proof rows, payload and propagation. Reuse the already computed baseline conflict trace before considering partitions. This experiment does not establish a runtime or live-memory improvement.",
+  "costs": {
+    "screened": {
+      "child_metrics": {
+        "accounting_reads": 193,
+        "certificate_memory_hits": 20,
+        "certificate_serialized_bytes": 25039,
+        "class_literal_payload": 1025,
+        "database_lookups": 28,
+        "decomposition_literal_visits": 726,
+        "expanded_nodes": 26,
+        "forced_variables": 14,
+        "inserted_bytes": 38374,
+        "inserted_nodes": 28,
+        "key_serialized_bytes": 207721,
+        "matching_recognition_literal_visits": 33,
+        "normalization_literal_visits": 52576,
+        "propagation_literal_visits": 7080,
+        "restriction_literal_visits": 4000,
+        "screen_trace_check_literals": 68,
+        "screen_trace_publications": 2,
+        "screen_traces_reused": 2,
+        "screened_result_memory_hits": 2,
+        "search_memory_hits": 185,
+        "source_witness_literal_payload": 23033,
+        "split_nodes": 7,
+        "subsumed_positive_clauses": 2,
+        "subsumption_candidate_tests": 20,
+        "subsumption_membership_tests": 40,
+        "subsumption_nodes": 2,
+        "subsumption_posting_lookups": 198,
+        "subsumption_recognition_literal_payload": 1025,
+        "unit_conflicts": 13,
+        "verification_literal_payload": 3373,
+        "verification_trace_literals": 458,
+        "verified_nodes": 28,
+        "verified_subsumption_literal_payload": 12,
+        "visits": 211
+      },
+      "child_propagation_literal_visits": 7080,
+      "combined_propagation_literal_visits": 12369,
+      "screen_counts": {
+        "guard_input_literals": 31124,
+        "partition_branches_built": 10,
+        "prepared_clause_keys": 484,
+        "prepared_clause_literals": 1104,
+        "prepared_cores": 383,
+        "prepared_memberships": 11953,
+        "propagation_literal_visits": 5289,
+        "restriction_literal_visits": 2391,
+        "screen_admissions": 1,
+        "screen_baseline_probes": 1,
+        "screen_calls": 1,
+        "screen_core_reads": 2,
+        "screen_plans": 4,
+        "screen_posting_visits": 3585
+      },
+      "screen_propagation_literal_visits": 5289,
+      "trace_check_literals": 68
+    },
+    "single": {
+      "child_metrics": {
+        "accounting_reads": 192,
+        "certificate_memory_hits": 20,
+        "certificate_serialized_bytes": 24128,
+        "class_literal_payload": 1025,
+        "database_lookups": 27,
+        "decomposition_literal_visits": 726,
+        "expanded_nodes": 27,
+        "forced_variables": 14,
+        "inserted_bytes": 36688,
+        "inserted_nodes": 27,
+        "key_serialized_bytes": 206171,
+        "matching_recognition_literal_visits": 33,
+        "normalization_literal_visits": 52196,
+        "propagation_literal_visits": 8190,
+        "restriction_literal_visits": 4000,
+        "search_memory_hits": 185,
+        "source_witness_literal_payload": 23033,
+        "split_nodes": 7,
+        "subsumed_positive_clauses": 2,
+        "subsumption_candidate_tests": 20,
+        "subsumption_membership_tests": 40,
+        "subsumption_nodes": 2,
+        "subsumption_posting_lookups": 198,
+        "subsumption_recognition_literal_payload": 1025,
+        "unit_conflicts": 14,
+        "verification_literal_payload": 3183,
+        "verification_trace_literals": 452,
+        "verified_nodes": 27,
+        "verified_subsumption_literal_payload": 12,
+        "visits": 212
+      },
+      "child_propagation_literal_visits": 8190,
+      "combined_propagation_literal_visits": 8190,
+      "screen_counts": {},
+      "screen_propagation_literal_visits": 0,
+      "trace_check_literals": 0
+    }
+  },
+  "pairs": [
+    {
+      "cold_seconds": {
+        "delta": -0.29408649960532784,
+        "screened": 6.9671277911402285,
+        "single": 7.261214290745556
+      },
+      "complete_worker_seconds": {
+        "delta": -0.06425475003197789,
+        "screened": 14.455393792130053,
+        "single": 14.519648542162031
+      },
+      "peak_rss_bytes": {
+        "delta": -10321920,
+        "screened": 500498432,
+        "single": 510820352
+      },
+      "query_seconds": {
+        "delta": 0.1177324578166008,
+        "screened": 1.362453542649746,
+        "single": 1.2447210848331451
+      },
+      "repeat": 0
+    },
+    {
+      "cold_seconds": {
+        "delta": -0.11368833296000957,
+        "screened": 6.697394375223666,
+        "single": 6.811082708183676
+      },
+      "complete_worker_seconds": {
+        "delta": -0.031107415910810232,
+        "screened": 13.89963870914653,
+        "single": 13.93074612505734
+      },
+      "peak_rss_bytes": {
+        "delta": -78446592,
+        "screened": 526499840,
+        "single": 604946432
+      },
+      "query_seconds": {
+        "delta": 0.008344079367816448,
+        "screened": 1.2493483666330576,
+        "single": 1.2410042872652411
+      },
+      "repeat": 1
+    }
+  ],
+  "passed": true,
+  "payload_change_percent": 0.7886887343442783,
+  "remaining_expansion_cases": [
+    {
+      "case": 43,
+      "choice": {
+        "core": 162,
+        "inserted": false,
+        "missing_clause": [
+          -170,
+          -110,
+          180
+        ],
+        "path": "known-premise"
+      },
+      "expanded_nodes": 10,
+      "new_nodes": 10,
+      "screen_called": false,
+      "split_nodes": 3,
+      "template_case": 8
+    },
+    {
+      "case": 172,
+      "choice": {
+        "core": 163,
+        "inserted": false,
+        "missing_clause": [
+          -170,
+          -110
+        ],
+        "path": "known-premise"
+      },
+      "expanded_nodes": 9,
+      "new_nodes": 9,
+      "screen_called": false,
+      "split_nodes": 3,
+      "template_case": 8
+    },
+    {
+      "case": 70,
+      "choice": {
+        "core": 85,
+        "inserted": false,
+        "missing_clause": [
+          -220,
+          -140,
+          60
+        ],
+        "path": "known-premise"
+      },
+      "expanded_nodes": 4,
+      "new_nodes": 4,
+      "screen_called": false,
+      "split_nodes": 1,
+      "template_case": 8
+    },
+    {
+      "case": 51,
+      "choice": {
+        "core": 144,
+        "inserted": false,
+        "missing_clause": [
+          -190,
+          -90,
+          30
+        ],
+        "path": "known-premise"
+      },
+      "expanded_nodes": 1,
+      "new_nodes": 1,
+      "screen_called": false,
+      "split_nodes": 0,
+      "template_case": 6
+    },
+    {
+      "case": 133,
+      "choice": {
+        "core": 90,
+        "inserted": false,
+        "missing_clause": [
+          -130,
+          -110,
+          -20
+        ],
+        "path": "known-premise"
+      },
+      "expanded_nodes": 1,
+      "new_nodes": 1,
+      "screen_called": false,
+      "split_nodes": 0,
+      "template_case": 8
+    },
+    {
+      "case": 182,
+      "choice": {
+        "core": 173,
+        "inserted": false,
+        "missing_clause": [
+          -60,
+          320
+        ],
+        "path": "known-premise"
+      },
+      "expanded_nodes": 1,
+      "new_nodes": 1,
+      "screen_called": false,
+      "split_nodes": 0,
+      "template_case": 12
+    }
+  ],
+  "report": {
+    "path": "experiments/results/cnf-partition-screen/report.json",
+    "sha256": "9720ee1ccfeab21c9ada29a11145d1cd5017b6d16367a26e160830b6bd564ef8"
+  }
+}

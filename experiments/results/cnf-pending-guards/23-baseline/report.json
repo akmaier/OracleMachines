@@ -1,0 +1,149 @@
+{
+  "case": 23,
+  "child_metrics": {
+    "accounting_reads": 1,
+    "certificate_disk_hits": 3,
+    "certificate_memory_hits": 11,
+    "certificate_serialized_bytes": 14361,
+    "class_literal_payload": 644,
+    "database_lookups": 15,
+    "decomposition_literal_visits": 644,
+    "expanded_nodes": 11,
+    "forced_variables": 10,
+    "inserted_bytes": 21057,
+    "inserted_nodes": 11,
+    "key_serialized_bytes": 24112,
+    "matching_recognition_literal_visits": 8,
+    "normalization_literal_visits": 5926,
+    "propagation_literal_visits": 2606,
+    "read_bytes": 4179,
+    "restriction_literal_visits": 4099,
+    "search_disk_hits": 1,
+    "source_witness_literal_payload": 0,
+    "split_nodes": 4,
+    "subsumed_positive_clauses": 0,
+    "subsumption_candidate_tests": 5,
+    "subsumption_membership_tests": 10,
+    "subsumption_posting_lookups": 110,
+    "subsumption_recognition_literal_payload": 644,
+    "unit_conflicts": 4,
+    "verification_literal_payload": 2176,
+    "verification_trace_literals": 108,
+    "verified_nodes": 15,
+    "visits": 12
+  },
+  "child_seconds": 0.012290707789361477,
+  "cold": {
+    "checked_nodes": 19970,
+    "lineage": {
+      "causal": {
+        "prior_pending_roots": 127,
+        "prior_ready_roots": 62,
+        "prior_sources_checked": 389
+      },
+      "legacy": {
+        "prior_pending_roots": 84,
+        "prior_ready_roots": 148,
+        "prior_sources_checked": 389
+      }
+    },
+    "lineage_seconds": 0.7747841659002006,
+    "no_acquisition": true,
+    "proof_query_seconds": 5.640103749930859,
+    "query_answers": [
+      false
+    ],
+    "seconds": 6.445069458801299,
+    "snapshot": {
+      "censuses": 1,
+      "complete_frozen_audit": true,
+      "metadata_reads": 1,
+      "nodes": 19970,
+      "payload_units": 32955217
+    }
+  },
+  "delta": {
+    "path": "experiments/results/cnf-pending-guards/23-baseline/delta.json",
+    "sha256": "da758e069092a205d3f61917567ceefb4244a660d906df7b035791b1a5057eae"
+  },
+  "delta_bytes": 21552,
+  "extractor_counts": {},
+  "final_nodes": 19970,
+  "final_payload_units": 32955217,
+  "match": null,
+  "materialization_counts": {},
+  "materialization_seconds": 0.0,
+  "new_nodes": 11,
+  "new_payload_units": 21057,
+  "open_seconds": 0.02946237474679947,
+  "prefix": {
+    "case": 23,
+    "nodes": 19959,
+    "payload_units": 32934160,
+    "row_digest": "f04d8a05d65b24730b5118bdd54cd5e6c4c1693679ceb2bfb90a13dc2ab780c2"
+  },
+  "preparation_counts": {
+    "alternative_guard_memory_hits": 1,
+    "certificate_disk_hits": 4057,
+    "certificate_memory_hits": 694,
+    "core_bank_disk_hits": 145,
+    "database_lookups": 4209,
+    "guard_memory_hits": 5,
+    "key_serialized_bytes": 3266146,
+    "normalization_literal_visits": 794113,
+    "read_bytes": 3703499,
+    "restriction_literal_visits": 292932,
+    "verification_literal_payload": 377077,
+    "verification_trace_literals": 16727,
+    "verified_implication_edges": 85,
+    "verified_nodes": 4204,
+    "verified_subsumption_literal_payload": 6,
+    "witness_template_disk_hits": 2
+  },
+  "preparation_seconds": 0.8087549577467144,
+  "publication_counts": {},
+  "publication_seconds": 0.0,
+  "queries": {
+    "path": "experiments/results/cnf-pending-guards/23-baseline/queries.json",
+    "sha256": "5b841c5f7b41fedf3f9a07c0f3550b6da324f07d86503037ff99091e4f41a560"
+  },
+  "query_bytes": 14836,
+  "recognition_counts": {
+    "guard_bank_entries": 260,
+    "guard_candidates_compared": 121,
+    "guard_candidates_matched": 3,
+    "guard_clause_comparisons": 11752,
+    "guard_forced_variables": 6,
+    "guard_input_literals": 66894,
+    "restriction_literal_visits": 542,
+    "verified_deletion_guards": 2,
+    "witness_nonpositive_or_missing_candidates": 2
+  },
+  "repeat_metrics": {
+    "accounting_reads": 1,
+    "key_serialized_bytes": 894,
+    "normalization_literal_visits": 223,
+    "search_memory_hits": 1,
+    "source_witness_literal_payload": 0,
+    "visits": 1
+  },
+  "repeat_seconds": 0.0004081251099705696,
+  "row_digest": "db8df1eaf54b997e1552694247cfefb058f5a238e14b1750ce9b7d973c8f77bf",
+  "selection_counts": {
+    "alternative_candidates": 1,
+    "guard_candidates_compared": 36,
+    "guard_candidates_matched": 2,
+    "guard_clause_comparisons": 3762,
+    "guard_forced_variables": 5,
+    "guard_input_literals": 1599,
+    "pending_hints_skipped": 1,
+    "restriction_literal_visits": 542,
+    "selection_calls": 1,
+    "selection_misses": 1,
+    "support_candidates": 383,
+    "support_containment_clauses": 11953,
+    "support_reads": 1,
+    "verified_deletion_guards": 2
+  },
+  "serialization_seconds": 0.0005861655808985233
+}

@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_pending_guards.py", line 126, in <module>
+    if __name__=='__main__':validate(Path(sys.argv[1]))
+                            ~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_pending_guards.py", line 57, in validate
+    path=tmp/'arm';base.restore_archive(original['reference_union'],path);s=study.ResidualSolver(path)
+                   ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/continue_cnf_transfer_split.py", line 42, in restore_archive
+    with Path(path).open('xb') as f:
+         ~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileExistsError: [Errno 17] File exists: '/var/folders/y4/lt19tpt519v6tzv1_40zrvhc0000gn/T/tmpf_evxoaf/arm'

@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Price pending guard proofs before using them](research/pending-guard-costs.md).
+Historical probes identify a terminal-conflict case needing **two proof rows
+instead of six fresh expansions**, with **84.10% less added payload**. Other
+pending alternatives cost more than fresh solving. All results are preserved;
+resume `experiments/results/cnf-pending-guards/checkpoint.json` (20,340 keys).
+Fresh-query evaluation of a terminal-origin filter is the next target.
+
 [Choose another checked guard before fresh solving](research/alternative-guard.md).
 On 192 fresh queries, one extra reusable residual reduces expansions **142 ->
 135** and new proof rows **362 -> 356**. Mean total time is 1.30% higher with

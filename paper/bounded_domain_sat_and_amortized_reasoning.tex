@@ -6522,6 +6522,27 @@ Checked derivation may exceed those savings. All 135 remaining expansions are
 negative. Minimum-cost selection, broad unseen-guard transfer and unrestricted
 polynomial SAT bounds remain open.
 
+\paragraph{Pending proofs need a derivation cost.}
+Controlled historical probes restore the persistent state immediately before
+cases 23, 85 and 103, opening a cold live checker for each arm. All six pending
+alternatives avoid fresh SAT search, but their publication costs differ.
+Case 23 replaces eleven fresh rows with 35 derived rows; case 103 replaces one
+with twelve under each of its four candidates. Case 85 needs two rows instead
+of six, reducing added identifier-plus-JSON payload from 11,350 to 1,805 bytes.
+These are already-known queries, and the single timing samples establish no
+full-workload speedup or peak-memory improvement.
+
+All six origins have unit-propagation certificates. Only case 85 ends in a
+conflict at that origin; the others refer to child proofs. For a checked terminal
+unit-conflict origin, the causal extractor makes no recursive extraction call
+and publishes at most one core row. The checked subset step adds at most one
+target row. Thus one selected terminal origin requires at most two new rows.
+Trace processing, canonicalization, matching, certificate size and checking
+remain charged. The bound does not extend to an arbitrary unit certificate
+with a child, nor does a small clause core imply a cheap derivation. A terminal
+origin filter on fresh queries is the next test; recursive proof-graph pricing,
+broader structural coverage and unrestricted polynomial bounds remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

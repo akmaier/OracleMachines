@@ -12,7 +12,43 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: bounded guard choice and pending alternatives
+## Current investigation: recognize terminal conflict supports
+
+[Pricing all six pending alternatives](pending-guard-costs.md) separates a
+promising case from costly derivations. Exact pre-query payload replay gives:
+
+- **Case 85:** six fresh expansions / six rows become two derived rows, with
+  payload **11,350 -> 1,805 bytes**. Its origin is a terminal unit conflict.
+- **Case 23:** eleven fresh rows become 35 derived rows; payload rises 9.44%.
+- **Case 103:** one fresh row becomes twelve under every candidate. Smaller
+  causal supports still traverse the same seven origin nodes as legacy supports.
+
+Every candidate avoids fresh SAT search; only case 85 reduces added rows and
+payload. All six origin certificates have kind `units`, but only 85 contains a
+conflict rather than a child reference. For one such checked terminal origin,
+the existing causal extractor and target subset step publish **at most two rows**.
+This bounds neither bytes nor checking/recognition time. Single diagnostic times
+and cold prefix sessions establish no full-workload speedup.
+
+**Next target:** test a terminal-origin admission filter on new excluded inputs,
+charging recognition, checking, repeated selection, persistence and cold replay.
+Keep 23 and 103 as controls against unrestricted pending-proof materialization.
+Recursive derivation-graph pricing/sharing remains open; clause count alone is
+insufficient. Complete cold replay remains a dominant overall cost.
+
+Nine independently reconstructed arms, all 2,765 inherited decisions and 32
+relevant tests pass. New deltas retain all certificates, including three
+alternative occurrences for one target. Resume
+`experiments/results/cnf-pending-guards/checkpoint.json`: **20,340 keys**, adding
+70 and preserving all 20,270 old payloads. No fresh source-query coverage, new
+Lean result or unrestricted-SAT bound. The initial validator's temporary-path
+failure is retained; the corrected checker leaves measured sources unchanged.
+
+All 403 prior sources and 4,467 artifacts in 78 manifests remain unchanged.
+
+New manifest: **46 artifacts**. Next preservation audit: **4513 artifacts / 79 manifests**.
+
+## Previous investigation: bounded guard choice and pending alternatives
 
 [Alternative-guard selection](alternative-guard.md) tries one other matching
 extension only after the first residual misses the archive and support bank.

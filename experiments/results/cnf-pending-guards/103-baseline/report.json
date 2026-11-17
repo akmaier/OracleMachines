@@ -1,0 +1,139 @@
+{
+  "case": 103,
+  "child_metrics": {
+    "accounting_reads": 1,
+    "certificate_disk_hits": 8,
+    "certificate_memory_hits": 1,
+    "certificate_serialized_bytes": 1310,
+    "database_lookups": 10,
+    "expanded_nodes": 1,
+    "forced_variables": 5,
+    "inserted_bytes": 2012,
+    "inserted_nodes": 1,
+    "key_serialized_bytes": 6361,
+    "normalization_literal_visits": 1597,
+    "propagation_literal_visits": 534,
+    "read_bytes": 5047,
+    "restriction_literal_visits": 931,
+    "search_disk_hits": 1,
+    "source_witness_literal_payload": 0,
+    "verification_literal_payload": 735,
+    "verification_trace_literals": 85,
+    "verified_nodes": 10,
+    "visits": 2
+  },
+  "child_seconds": 0.0030505829490721226,
+  "cold": {
+    "checked_nodes": 20113,
+    "lineage": {
+      "causal": {
+        "prior_pending_roots": 124,
+        "prior_ready_roots": 65,
+        "prior_sources_checked": 389
+      },
+      "legacy": {
+        "prior_pending_roots": 84,
+        "prior_ready_roots": 148,
+        "prior_sources_checked": 389
+      }
+    },
+    "lineage_seconds": 0.5675558336079121,
+    "no_acquisition": true,
+    "proof_query_seconds": 4.550625292118639,
+    "query_answers": [
+      false
+    ],
+    "seconds": 5.146787540987134,
+    "snapshot": {
+      "censuses": 1,
+      "complete_frozen_audit": true,
+      "metadata_reads": 1,
+      "nodes": 20113,
+      "payload_units": 33209435
+    }
+  },
+  "delta": {
+    "path": "experiments/results/cnf-pending-guards/103-baseline/delta.json",
+    "sha256": "bca1b758d0763980e3bd8f9fea76004b8e1d64ccc7aee9005a93e28fff41a565"
+  },
+  "delta_bytes": 2059,
+  "extractor_counts": {},
+  "final_nodes": 20113,
+  "final_payload_units": 33209435,
+  "match": null,
+  "materialization_counts": {},
+  "materialization_seconds": 0.0,
+  "new_nodes": 1,
+  "new_payload_units": 2012,
+  "open_seconds": 0.03199858404695988,
+  "prefix": {
+    "case": 103,
+    "nodes": 20112,
+    "payload_units": 33207423,
+    "row_digest": "d511fdd1b3b990482835aa8f528bfa0196f504dc94c54e14bfbd03d4002e6e38"
+  },
+  "preparation_counts": {
+    "alternative_guard_memory_hits": 1,
+    "certificate_disk_hits": 3988,
+    "certificate_memory_hits": 694,
+    "core_bank_disk_hits": 145,
+    "database_lookups": 4143,
+    "guard_memory_hits": 5,
+    "key_serialized_bytes": 3183078,
+    "normalization_literal_visits": 774222,
+    "read_bytes": 3613666,
+    "restriction_literal_visits": 281861,
+    "verification_literal_payload": 367220,
+    "verification_trace_literals": 16267,
+    "verified_implication_edges": 70,
+    "verified_nodes": 4135,
+    "verified_subsumption_literal_payload": 5,
+    "witness_template_disk_hits": 2
+  },
+  "preparation_seconds": 0.8243512501940131,
+  "publication_counts": {},
+  "publication_seconds": 0.0,
+  "queries": {
+    "path": "experiments/results/cnf-pending-guards/103-baseline/queries.json",
+    "sha256": "844bb893473ffff2aa26192800484d610839fc67014c01a6d2eb1337d912e4f5"
+  },
+  "query_bytes": 12484,
+  "recognition_counts": {
+    "guard_bank_entries": 260,
+    "guard_candidates_compared": 196,
+    "guard_candidates_matched": 3,
+    "guard_clause_comparisons": 16002,
+    "guard_forced_variables": 6,
+    "guard_input_literals": 66678,
+    "restriction_literal_visits": 470,
+    "verified_deletion_guards": 2,
+    "witness_nonpositive_or_missing_candidates": 2
+  },
+  "repeat_metrics": {
+    "accounting_reads": 1,
+    "key_serialized_bytes": 702,
+    "normalization_literal_visits": 178,
+    "search_memory_hits": 1,
+    "source_witness_literal_payload": 0,
+    "visits": 1
+  },
+  "repeat_seconds": 0.00040958309546113014,
+  "row_digest": "4e7f354ce4cec56645fd49c151eca2e8b98b2f7a194b6a6ff3167fe13168e1b8",
+  "selection_counts": {
+    "alternative_candidates": 1,
+    "guard_candidates_compared": 120,
+    "guard_candidates_matched": 2,
+    "guard_clause_comparisons": 9922,
+    "guard_forced_variables": 6,
+    "guard_input_literals": 1360,
+    "pending_hints_skipped": 4,
+    "restriction_literal_visits": 470,
+    "selection_calls": 1,
+    "selection_misses": 1,
+    "support_candidates": 383,
+    "support_containment_clauses": 11953,
+    "support_reads": 4,
+    "verified_deletion_guards": 2
+  },
+  "serialization_seconds": 0.0005951253697276115
+}

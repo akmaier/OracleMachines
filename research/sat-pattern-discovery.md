@@ -5167,3 +5167,23 @@ regression proof remains in a separately retained archive. Structural authority
 stays 2,614 patterns / 259 pairs / 17 missing children. The paper builds to 202
 pages with 64 unchanged proof blocks. Older-test SQLite warnings are preserved;
 eight focused new tests emit none.
+
+
+## 2026-11-17: price pending alternative proofs
+
+[Controlled prefix probes](pending-guard-costs.md) check all six pending matches
+from the preceding guard study. Only case 85 reduces the publication footprint:
+six fresh expansions / six rows become two rows, with added payload 11,350 ->
+1,805 bytes. Case 23 adds 35 rows versus eleven; case 103 adds twelve versus one
+under every candidate. All alternatives avoid fresh SAT search, demonstrating
+that expansion counts alone do not price total work.
+
+The useful distinction is a checked terminal unit conflict versus a unit proof
+with a child. One terminal origin needs at most one derived core row and one
+target subset row; this bounds neither bytes nor recognition/checking time.
+The next target is a terminal-origin filter on fresh excluded inputs, keeping
+recursive cases as controls. No new source-query coverage or runtime guarantee
+is claimed. Resume `experiments/results/cnf-pending-guards/checkpoint.json`
+(20,340 keys, 70 added, all prior payloads preserved). Nine reconstructed arms,
+2,765 inherited decisions and 32 relevant tests pass. Structural coverage and
+its separate original/supplemental proof authorities remain unchanged.

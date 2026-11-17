@@ -1,0 +1,156 @@
+{
+  "case": 85,
+  "child_metrics": {
+    "accounting_reads": 1,
+    "key_serialized_bytes": 694,
+    "normalization_literal_visits": 175,
+    "search_memory_hits": 1,
+    "source_witness_literal_payload": 0,
+    "visits": 1
+  },
+  "child_seconds": 0.00011812476441264153,
+  "cold": {
+    "checked_nodes": 20086,
+    "lineage": {
+      "causal": {
+        "prior_pending_roots": 123,
+        "prior_ready_roots": 66,
+        "prior_sources_checked": 389
+      },
+      "legacy": {
+        "prior_pending_roots": 84,
+        "prior_ready_roots": 148,
+        "prior_sources_checked": 389
+      }
+    },
+    "lineage_seconds": 0.5487972912378609,
+    "no_acquisition": true,
+    "proof_query_seconds": 4.330004124902189,
+    "query_answers": [
+      false
+    ],
+    "seconds": 4.909358416683972,
+    "snapshot": {
+      "censuses": 1,
+      "complete_frozen_audit": true,
+      "metadata_reads": 1,
+      "nodes": 20086,
+      "payload_units": 33151581
+    }
+  },
+  "delta": {
+    "path": "experiments/results/cnf-pending-guards/85-causal-4/delta.json",
+    "sha256": "2209dc6d2193bfd9a05ce83aff7f83233d48718aebf248c62d7cd60e254d156a"
+  },
+  "delta_bytes": 1894,
+  "extractor_counts": {
+    "extracted_core_publications": 1,
+    "support_dropped_clauses": 60,
+    "support_kind_units": 1,
+    "support_nodes": 1,
+    "support_source_literals": 174,
+    "unit_reason_literals_examined": 10,
+    "unit_trace_steps_examined": 19,
+    "unit_trace_steps_removed": 13,
+    "unit_trace_steps_retained": 6
+  },
+  "final_nodes": 20086,
+  "final_payload_units": 33151581,
+  "match": {
+    "bank": "causal",
+    "clauses": 7,
+    "index": 4
+  },
+  "materialization_counts": {
+    "certificate_serialized_bytes": 185,
+    "database_lookups": 2,
+    "inserted_bytes": 249,
+    "inserted_nodes": 1,
+    "key_serialized_bytes": 817,
+    "normalization_literal_visits": 200,
+    "read_bytes": 920,
+    "search_memory_hits": 1,
+    "support_source_disk_hits": 1,
+    "verification_literal_payload": 187,
+    "verification_trace_literals": 52,
+    "verified_nodes": 2
+  },
+  "materialization_seconds": 0.0008463747799396515,
+  "new_nodes": 2,
+  "new_payload_units": 1805,
+  "open_seconds": 0.034665375016629696,
+  "prefix": {
+    "case": 85,
+    "nodes": 20084,
+    "payload_units": 33149776,
+    "row_digest": "35c7ef98ed0383dc20b0a4849f7a7f721b6a535787e59f534031f9895b57f493"
+  },
+  "preparation_counts": {
+    "alternative_guard_memory_hits": 1,
+    "certificate_disk_hits": 3986,
+    "certificate_memory_hits": 694,
+    "core_bank_disk_hits": 145,
+    "database_lookups": 4138,
+    "guard_memory_hits": 5,
+    "key_serialized_bytes": 3179643,
+    "normalization_literal_visits": 773351,
+    "read_bytes": 3611140,
+    "restriction_literal_visits": 281396,
+    "verification_literal_payload": 366945,
+    "verification_trace_literals": 16207,
+    "verified_implication_edges": 70,
+    "verified_nodes": 4133,
+    "verified_subsumption_literal_payload": 10,
+    "witness_template_disk_hits": 2
+  },
+  "preparation_seconds": 0.8982083341106772,
+  "publication_counts": {
+    "guard_input_literals": 188,
+    "support_publication_literals": 175,
+    "support_publications": 1
+  },
+  "publication_seconds": 0.0007639587856829166,
+  "queries": {
+    "path": "experiments/results/cnf-pending-guards/85-causal-4/queries.json",
+    "sha256": "8b1f3b654e9638013e219cdf5f5d64b54065dd668e9b580159310a6db3d235be"
+  },
+  "query_bytes": 11975,
+  "recognition_counts": {
+    "guard_bank_entries": 260,
+    "guard_candidates_compared": 276,
+    "guard_candidates_matched": 3,
+    "guard_clause_comparisons": 22402,
+    "guard_forced_variables": 6,
+    "guard_input_literals": 66678,
+    "restriction_literal_visits": 470,
+    "verified_deletion_guards": 2,
+    "witness_nonpositive_or_missing_candidates": 2
+  },
+  "repeat_metrics": {
+    "accounting_reads": 1,
+    "key_serialized_bytes": 694,
+    "normalization_literal_visits": 175,
+    "search_memory_hits": 1,
+    "source_witness_literal_payload": 0,
+    "visits": 1
+  },
+  "repeat_seconds": 0.026690499857068062,
+  "row_digest": "b7d7fe36526cc7c47057f7a8d59b327225b129fecae67d853e495d459936ccb2",
+  "selection_counts": {
+    "alternative_candidates": 1,
+    "guard_candidates_compared": 114,
+    "guard_candidates_matched": 2,
+    "guard_clause_comparisons": 9442,
+    "guard_forced_variables": 6,
+    "guard_input_literals": 1356,
+    "pending_hints_skipped": 1,
+    "restriction_literal_visits": 470,
+    "selection_calls": 1,
+    "selection_misses": 1,
+    "support_candidates": 383,
+    "support_containment_clauses": 11953,
+    "support_reads": 1,
+    "verified_deletion_guards": 2
+  },
+  "serialization_seconds": 0.0005898750387132168
+}

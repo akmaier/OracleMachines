@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Choose another checked guard before fresh solving](research/alternative-guard.md).
+On 192 fresh queries, one extra reusable residual reduces expansions **142 ->
+135** and new proof rows **362 -> 356**. Mean total time is 1.30% higher with
+large paired variation; a runtime or memory win is not established. Frozen-worker
+parity, historical regression and all **518 tests** pass. Next, price pending
+alternative proofs against the work they might avoid.
+Resume `experiments/results/cnf-alternative-guard/checkpoint.json`
+(20,270 preserved keys); the selector remains an optional policy.
+
 [Acquire causal supports incrementally and retain the failed coverage test](research/incremental-causal.md).
 Incremental extraction matches full reconstruction with **68.15% fewer support
 visits**, but its 27 additional retained supports give **no new hits** on fresh

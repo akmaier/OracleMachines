@@ -12,7 +12,102 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: acquisition saturation and alternative guards
+## Current investigation: bounded guard choice and pending alternatives
+
+[Alternative-guard selection](alternative-guard.md) tries one other matching
+extension only after the first residual misses the archive and support bank.
+It accepts checked cached targets or ready negative supports; selection itself
+never solves or materializes a pending description. Ordinary guard checking,
+subset publication, child checking and model lifting remain required.
+
+**Verified fresh coverage:** one additional hit on current case **36** reduces
+expansions **142 -> 135 (4.93%)**, splits **49 -> 47**, and new proof rows
+**362 -> 356 (1.66%)**. Materialization stays at 49 rows. No query regresses in
+expansion count. The selector runs on 15 first-visit misses and once on a repeat;
+repeated queries add no rows but may repeat guard choice.
+
+**No established total-cost win:** mean complete time rises **13.60267 ->
+13.77944 seconds (1.30%)**. Paired changes are -28.44%, +36.27%, -28.34%, +48.04%,
+tracking order in these four pairs; cause is untraced. Peak RSS averages 4.85%
+higher with mixed signs. Query time is 24.59% lower on average, but neither a
+stable total speedup nor a memory improvement follows. Guard-selection traces
+increase gzip plus first-trial sidecars **2.23%**. Full cold audit and compression
+consume **52.62% / 27.04%** of candidate time.
+
+**Next coverage target:** price checked materialization for pending alternative
+supports on current **case 23 (11 expansions)** and **85 (six)**. Keep case
+**103 (one expansion)** as a low-cost fallback control. These three cases account
+for six skipped pending matches. Do not enable unrestricted derivation: a small
+support may cost more to obtain than its target costs to solve. Preserve partial
+checked derivations if testing a budget, and charge recognition, derivation,
+publication and changed later sharing. Controlled probes require the original
+pre-query state; fresh generalization must exclude these now-retained cases.
+
+All **135 remaining expansions are negative**. Largest current cases are
+**2 (18), 120 (17), 66/67/180 (14 each), 7 (13), 23/155 (11 each)**. Templates
+6/8/12 contribute 55/34/46. These stream-local IDs differ from earlier catalogs.
+
+**Controls:** replay of the frozen prior worker gives the same semantic queries
+and a byte-identical database as the new first-guard baseline. Historical case
+121, restored from its original 19,543-key snapshot, selects the diagnosed ready
+alternative with zero fresh SAT expansions and one new subset proof. Its earlier
+20-node count was measured in the historical stream, not an isolated matched
+runtime control. The regression proof archive is separately preserved.
+
+**Guard provenance:** case 101 differs from its core's first recorded guard,
+in both policies, but another origin already uses that guard. No hit uses a
+removed-clause assignment absent from all recorded origins of its selected core.
+Do not interpret a first-origin mismatch as demonstrated unseen-guard transfer.
+
+Both policies use the same 19,907-key union and old 389-origin portfolio,
+excluding 2,304 prior sidecar answers and cached roots, then visiting 192 new
+neighbours twice in four alternating pairs. No support discovery occurs; the
+larger optional causal index remains preserved and unloaded. Broader structural
+coverage, optimal expansion and arbitrary-SAT polynomial bounds remain open.
+
+Independent validation passes **518 tests**, eight complete fresh-trial
+archive checks / **3,072 query replays**, every union node, **2,573 inherited
+decisions** and all 192 new decisions. Archive validation disables fresh search
+and reconstructs guard selection and proof choice from pre-query append history.
+Separate untimed frozen-worker replay recomputes the baseline, matching semantic
+queries and proof bytes. The historical regression adds one proof row without
+fresh SAT search and passes full cold proof/query and both-lineage checks.
+
+The fresh-query union retains **20,270 keys / 63,492,096 SQLite / 4,704,611 gzip
+bytes**, adding 363 keys and preserving every prior payload. There are no
+alternate certificates. New decisions have **144 direct roots / 48 negative
+guards**. The historical regression's additional target proof is not in this
+union; its complete archive and guarded result remain separately retained in
+`experiments/results/cnf-alternative-guard/historical-control/` and bound by
+`control-check.json`. It is not counted as a fresh-query coverage gain.
+
+Resume `experiments/results/cnf-alternative-guard/checkpoint.json`. It preserves
+all prior semantic fields and adds `alternative_guard_study` and
+`alternative_guard_decisions`. The measured banks retain the same eight-catalog /
+389-origin history, with **132/75 legacy** and **67/109 causal** ready/pending
+entries. The original 170-entry frontier has **126/44**; the optional 203-entry
+expanded causal frontier has **67/136**, retaining its eleven-catalog / 526-origin
+lineage. All four lineage checks pass. The two newest catalogs contain 98
+negative guarded records not acquired into that larger optional frontier.
+
+All prior **397 sources / 4,406 artifacts / 77 manifests** remain unchanged.
+Runtime binds 401 sources; analyzer and control checker bring the ledger to 403.
+Structural authority stays **2,614 patterns / 259 pairs / 17 missing children**,
+original **17/24 / 999 steps**, separate supplemental **24/24 / 208**, and original
+case 7's discovery pointer. The paper builds cleanly to **202 pages** with
+**64 unchanged proof blocks**. No new Lean or unrestricted-SAT resource theorem.
+The full test log retains 24 unclosed-SQLite ResourceWarnings from older tests;
+eight focused new tests emit none with warnings enabled. Allocation origins
+remain untraced.
+
+Checkpoint SHA-256: `ff7c124f610f1a7e11207b6f248d8f420d7bd0272ff91df0c9c9d75d4e8b729d`.
+Report SHA-256: `4f15e41ec39a67b7df6172cb64eba7b9c863c492655fdc1b44d9ee674d766909`.
+
+
+The new manifest binds **61 artifacts**. The next preservation audit inherits
+**4467 artifacts / 78 manifests**.
+
+## Previous investigation: acquisition saturation and alternative guards
 
 [Incremental causal acquisition](incremental-causal.md) now preserves the old
 history while extracting only new guarded-negative source records. Independent

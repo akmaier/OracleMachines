@@ -1,0 +1,112 @@
+{
+  "baseline_parity": {
+    "database_sha256": "b862b6fed7283892eba8635c1c741fb3df32afb4d1a5962db69c817ee593dcd8",
+    "expanded_nodes": 142,
+    "frozen_worker": {
+      "path": "experiments/compare_cnf_incremental_causal.py",
+      "sha256": "de41b3f407eff1ef636e01b2861179f1a29b04169b81f957e7b4cebf57739e9a"
+    },
+    "limitation": "Untimed replay recomputes the frozen baseline. Its identical proof artifact is already retained by first-0; this is not a no-search validation pass.",
+    "new_nodes": 362,
+    "passed": true,
+    "semantic_queries_identical": true
+  },
+  "checker": {
+    "path": "/Users/maier/Documents/code/OracleMachines/experiments/check_cnf_guard_control.py",
+    "sha256": "fa61d652da5ffdf60a9fdc737a50a2c52e6a9ca63a9e1defa6da618634c73152"
+  },
+  "current_report": {
+    "path": "experiments/results/cnf-alternative-guard/report.json",
+    "sha256": "4f15e41ec39a67b7df6172cb64eba7b9c863c492655fdc1b44d9ee674d766909"
+  },
+  "historical_control": {
+    "archive": {
+      "compressed_bytes": 4567407,
+      "database_bytes": 60649472,
+      "database_sha256": "57cc22d24b69af86a05c54a37451ebcc425c5845d4ce2f410301da7e249e48ed",
+      "path": "experiments/results/cnf-alternative-guard/historical-control/history.sqlite3.gz",
+      "seconds": 3.618079166393727,
+      "sha256": "7eb63496515b36311bc7c70730ed7171122e11008ef619741ae08cac06e0eb5e"
+    },
+    "cold": {
+      "checked_nodes": 19544,
+      "lineage": {
+        "causal": {
+          "prior_pending_roots": 129,
+          "prior_ready_roots": 60,
+          "prior_sources_checked": 389
+        },
+        "legacy": {
+          "prior_pending_roots": 86,
+          "prior_ready_roots": 146,
+          "prior_sources_checked": 389
+        }
+      },
+      "lineage_seconds": 0.5341461249627173,
+      "no_acquisition": true,
+      "proof_query_seconds": 4.12411674996838,
+      "query_answers": [
+        false
+      ],
+      "seconds": 4.685481667052954,
+      "snapshot": {
+        "censuses": 1,
+        "complete_frozen_audit": true,
+        "metadata_reads": 1,
+        "nodes": 19544,
+        "payload_units": 32203546
+      }
+    },
+    "controlled_expansions": 0,
+    "historical_case": 121,
+    "historical_in_stream_expansions": 20,
+    "independent_cold": {
+      "checked_nodes": 19544,
+      "no_acquisition": true,
+      "query_answers": [
+        false
+      ],
+      "seconds": 4.339428917039186
+    },
+    "initial_union": {
+      "compressed_bytes": 4567169,
+      "database_bytes": 60649472,
+      "database_sha256": "d09bad2077ec24bac01c85f121bfc98ce3ef29219d683d03e9f8613aa22280b4",
+      "path": "experiments/results/cnf-proof-choice/reference-union/history.sqlite3.gz",
+      "seconds": 3.6051617497578263,
+      "sha256": "54b16234cebb4a2bb0cd23ae7406400ce3719222b1378f0cd401e3dad1605114"
+    },
+    "limitation": "Restores the original 19543-key snapshot and validates the selected alternative with no fresh SAT search. The old 20-node count comes from its historical stream, not a new isolated matched runtime. The regression archive is retained separately from the fresh-query union.",
+    "new_proof_rows": 1,
+    "original_protocol": {
+      "path": "experiments/results/cnf-incremental-causal/protocol.json",
+      "sha256": "978d94afd94ccc9712e6bd4ae49193081b6cb0d19c0b9ed704ede87695d75f7c"
+    },
+    "original_queries": {
+      "path": "experiments/results/cnf-incremental-causal/fixed-0/queries.json",
+      "sha256": "9f06507de29c27f650dc617f38c3217e05149595f3155529fc467317d03720a3"
+    },
+    "passed": true,
+    "queries": {
+      "path": "experiments/results/cnf-alternative-guard/historical-control/queries.json",
+      "sha256": "12bc8a49f48aec8913006efb87be8705e7d5294df9b9f69a60497ec3d4c7f39f"
+    },
+    "selector_counts": {
+      "alternative_candidates": 1,
+      "guard_candidates_compared": 136,
+      "guard_candidates_matched": 2,
+      "guard_clause_comparisons": 11202,
+      "guard_forced_variables": 5,
+      "guard_input_literals": 1372,
+      "ready_choices": 1,
+      "restriction_literal_visits": 472,
+      "selection_calls": 1,
+      "support_candidates": 230,
+      "support_containment_clauses": 7598,
+      "support_reads": 1,
+      "verified_deletion_guards": 2
+    }
+  },
+  "passed": true,
+  "seconds": 30.432776999659836
+}

@@ -5143,3 +5143,27 @@ nodes and 2,381 inherited decisions pass. The new index has 62 ready roots /
 141 pending. Structural authority remains 2,614 patterns / 259 pairs / 17 missing
 children. The paper builds to 201 pages with 64 unchanged proof blocks. Older-test
 SQLite warnings remain recorded; eight focused new tests emit none.
+
+
+## 2026-11-17: bounded alternative-guard selection
+
+[Bounded alternative guards](alternative-guard.md) expose one additional
+checked residual on a fresh 192-query stream. Case 36 changes guard, saving seven
+expansions without new acquisition or materialization. The original guard remains
+the fallback when the additional checked candidate has no ready proof.
+
+No unseen removed-clause assignment is established: case 101 differs from its
+core's first origin but matches another recorded origin. Compare all provenance
+records before calling a transfer cross-guard. Next, price pending alternatives
+for cases 23/85 (11/six expansions), with one-expansion case 103 as a control.
+These are acquired descriptions, not yet checked negative proofs at selection.
+Controlled probes need the pre-query state; fresh tests must exclude cached cases.
+
+Verified resume: `experiments/results/cnf-alternative-guard/checkpoint.json`
+retains 20,270 keys, all previous payloads and checkpoint fields. All 518 tests,
+eight fresh-trial archive checks, all union nodes and 2,573 inherited decisions
+pass. Frozen-worker parity and historical case 121 also pass; its one additional
+regression proof remains in a separately retained archive. Structural authority
+stays 2,614 patterns / 259 pairs / 17 missing children. The paper builds to 202
+pages with 64 unchanged proof blocks. Older-test SQLite warnings are preserved;
+eight focused new tests emit none.

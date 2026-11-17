@@ -8982,3 +8982,29 @@ nodes and 2,381 inherited decisions pass. The new index has 62 ready roots /
 141 pending. Structural authority remains 2,614 patterns / 259 pairs / 17 missing
 children. The paper builds to 201 pages with 64 unchanged proof blocks. Older-test
 SQLite warnings remain recorded; eight focused new tests emit none.
+
+
+## 2026-11-17: bounded alternative-guard selection
+
+[The bounded selector](alternative-guard.md) checks at most one additional
+matching extension after a first-target archive/support miss. It reads only
+available target proofs or ready negative supports; the unchanged ordinary
+publication and guard path completes the result. Independent reconstruction
+checks every selection against archive contents before its query.
+
+One changed guard reduces expansions 142 -> 135 and new rows 362 -> 356. Mean
+complete time rises 1.30% with large order-correlated variation. Keep the policy
+optional. Frozen-worker replay preserves semantic baseline records and identical
+proof bytes. Historical case 121 works with fresh search disabled and one new
+subset proof, retained in a separate regression archive. The next implementation
+gap is safely pricing/bounding pending alternative materialization on cases
+23/85, rather than deriving every match regardless of cost.
+
+Verified resume: `experiments/results/cnf-alternative-guard/checkpoint.json`
+retains 20,270 keys, all previous payloads and checkpoint fields. All 518 tests,
+eight fresh-trial archive checks, all union nodes and 2,573 inherited decisions
+pass. Frozen-worker parity and historical case 121 also pass; its one additional
+regression proof remains in a separately retained archive. Structural authority
+stays 2,614 patterns / 259 pairs / 17 missing children. The paper builds to 202
+pages with 64 unchanged proof blocks. Older-test SQLite warnings are preserved;
+eight focused new tests emit none.

@@ -6478,6 +6478,50 @@ The remaining work comprises 120 negative expansions and six on SAT case 67.
 Broader cross-guard reuse, efficient acquisition and uniform polynomial bounds
 for arbitrary SAT remain open.
 
+\paragraph{Changing a checked guard can expose an available proof.}
+A bounded selector now tries one other matching extension when the first guarded
+residual misses both the archive and support bank. It selects only an already
+checked target or a contained ready negative support, skipping pending hints.
+Selection neither solves nor publishes; the ordinary guard, subset-publication,
+child-check and model-lifting path remains required. Enumeration and checking
+costs are charged. The candidate bound is not a constant-time recognition bound.
+
+Four alternating process pairs start from the same 19,907-key union, exclude
+2,304 earlier sidecar answers and cached roots, and visit 192 new neighbours
+twice. Both modes load the same 389-origin legacy and causal frontiers; neither
+acquires supports. Transfers rise from 27 to 28. Current case 36 changes guard,
+replacing seven expansions with one checked subset publication. Total expansions
+fall from 142 to 135, splits from 49 to 47, and new rows from 362 to 356.
+Materialization remains 49 rows. All modes answer 100 SAT and 92 UNSAT queries,
+and no query regresses in expansion count. Repeated visits add no rows but repeat
+selection for case 36, whose original target remains unsolved.
+
+Mean complete time is 13.60267 seconds for the first guard and 13.77944 for the
+alternative policy, a 1.30\% increase. Paired changes range from -28.44\% to
++48.04\% and track order in these four pairs; the cause remains untraced.
+Mean query time falls 24.59\%, but no stable total speedup is established.
+Peak RSS averages 4.85\% higher with mixed paired signs. Gzip plus first-trial
+sidecars grows from 11,942,205 to 12,207,972 bytes because selection traces retain
+examined guards. Complete cold audit and compression account for 52.62\% and
+27.04\% of candidate runtime. Fewer proof rows do not imply lower complete cost.
+
+Untimed frozen-worker replay confirms that the new first-guard baseline retains
+identical semantic queries and a byte-identical proof database. A separate
+historical regression restores case 121's original 19,543-key snapshot: with
+fresh SAT search disabled, the selector chooses its available alternative and
+publishes one subset proof. The child then needs zero expansions. Its earlier
+20-node count belongs to the historical stream, not a new isolated matched
+runtime comparison. The regression archive remains separately preserved.
+
+One fresh hit, case 101, differs from its core's first recorded guard, but a
+second origin already uses that guard. No measured transfer uses a removed-clause
+assignment absent from all recorded origins of its selected core. The next
+coverage candidates are pending alternative supports for cases 23 and 85, costing
+11 and six current expansions; case 103 costs only one and is a useful control.
+Checked derivation may exceed those savings. All 135 remaining expansions are
+negative. Minimum-cost selection, broad unseen-guard transfer and unrestricted
+polynomial SAT bounds remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

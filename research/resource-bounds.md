@@ -2774,3 +2774,29 @@ nodes and 2,381 inherited decisions pass. The new index has 62 ready roots /
 141 pending. Structural authority remains 2,614 patterns / 259 pairs / 17 missing
 children. The paper builds to 201 pages with 64 unchanged proof blocks. Older-test
 SQLite warnings remain recorded; eight focused new tests emit none.
+
+
+## 2026-11-17: bounded alternative-guard selection
+
+[Alternative guard selection](alternative-guard.md) caps checked matching
+extension candidates, not index-enumeration or support-scan complexity. The
+measured run adds 1,729 extension comparisons and 5,709 support inspections over
+16 selector calls. It avoids seven expansions and six proof rows but retains
+extra diagnostic guards, raising gzip plus first-trial sidecars 2.23%.
+
+Mean complete time grows 1.30%; paired signs track order and their cause is
+untraced. Peak RSS has mixed signs and a 4.85% higher mean. Cold audit and
+compression consume 52.62% / 27.04% of candidate time. Lower query time does not
+establish a total-cost gain. Pending alternative proofs may offer further reuse,
+but their derivation and checking costs must be compared with 11/six/one current
+expansions on cases 23/85/103. No minimum-cost or arbitrary-SAT polynomial bound
+is inferred from the candidate cap.
+
+Verified resume: `experiments/results/cnf-alternative-guard/checkpoint.json`
+retains 20,270 keys, all previous payloads and checkpoint fields. All 518 tests,
+eight fresh-trial archive checks, all union nodes and 2,573 inherited decisions
+pass. Frozen-worker parity and historical case 121 also pass; its one additional
+regression proof remains in a separately retained archive. Structural authority
+stays 2,614 patterns / 259 pairs / 17 missing children. The paper builds to 202
+pages with 64 unchanged proof blocks. Older-test SQLite warnings are preserved;
+eight focused new tests emit none.

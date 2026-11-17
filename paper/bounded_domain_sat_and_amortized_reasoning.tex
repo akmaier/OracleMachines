@@ -6397,6 +6397,47 @@ The retained mode spends 41.29\% of total time in complete cold audit and
 rediscovery, but incremental causal acquisition, broader cross-guard coverage,
 compact proof construction and efficient arbitrary-SAT expansion remain open.
 
+\paragraph{Choosing among acquired proofs reduces derivation, with a memory tradeoff.}
+A combined dispatcher checks both acquired frontiers before deriving another
+support. It selects the first contained support with a checked negative proof,
+in legacy-then-causal order. If no matching root is available, it materializes
+the first legacy match, or otherwise the first causal match, using the matching
+extractor. The ordinary subset checker and full-query guards remain required.
+Both complete index lineages are audited on the same pinned cold snapshot after
+the unchanged full proof and query audit. Stored descriptions remain hints.
+
+The next comparison starts from 19,091 acquired keys, excludes 1,920 prior
+sidecar answers and cached full roots, and visits 192 new neighbours twice in
+three balanced process triples. The combined index has 383 retained entries;
+its 778 provenance references point into two immutable histories of the same
+389 distinct origins. Historical acquisition and both histories remain charged.
+No new supports are discovered in this comparison.
+
+Legacy, causal and combined modes transfer 26, 30 and 30 cofactors, with
+56, 35 and 35 expansions. All answer 102 SAT and 90 UNSAT queries. Combined
+reuse preserves causal coverage while reducing materialization from 137 to
+57 rows (58.39\%) and total new rows from 351 to 271 (22.79\%). It chooses
+25 ready proofs and five materializations. On the 26 overlapping targets,
+materialization costs 85 rows for legacy, 121 for causal and 41 for combined
+reuse. All observed transfers still share their first origin's guard.
+
+Mean complete time is 13.45278, 12.42048 and 11.08200 seconds. The combined
+mean improves 10.78\% against causal and 17.62\% against legacy, but each
+comparison has one timing regression among three pairs. These measurements
+do not establish a stable universal speedup. Combined peak RSS rises 5.53\%
+against causal and 16.55\% against legacy, in all pairs; the allocation cause
+remains untraced. Gzip plus first-trial raw sidecars falls from 12,261,039 to
+11,727,695 bytes against causal, while the full SQLite file falls only 0.11\%.
+Earlier artifacts and all trial archives remain additional retained state.
+
+A ready proof can be expensive to check, and legacy-first fallback need not be
+the cheapest derivation. Earlier selections also affect later sharing. Thus this
+policy does not minimize total expansion cost. Complete cold replay and
+compression still consume 43.69\% and 31.96\% of combined time. The remaining
+35 expansions are all negative, across seven current queries. Incremental
+acquisition from new negative outcomes, broader changes of guard, compact
+certification and efficient arbitrary-SAT expansion remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

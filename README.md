@@ -28,6 +28,17 @@ classes.
 
 ## Paper
 
+[Choose a checked available proof before deriving another support](research/proof-choice.md).
+Combining the acquired frontiers preserves causal coverage while reducing proof
+materialization **58.39%** and new proof rows **22.79%** on 192 fresh queries.
+Mean complete time improves **10.78% versus causal-only reuse**, with mixed paired
+timing signs, while peak RSS rises **5.53%**. The next coverage target is
+incremental discovery from new negative outcomes and seven remaining residuals.
+All **502 tests** pass; the combined policy remains an explicit memory/runtime
+tradeoff rather than a minimum-cost claim.
+Resume `experiments/results/cnf-proof-choice/checkpoint.json` (19,543 preserved
+keys); independent complete replay and inherited-result validation pass.
+
 [Reuse the acquired causal frontier without rediscovery](research/retained-causal.md).
 Loading reduces complete time **16.56% versus rebuilding**, with identical proof
 archives and full cold audit. It uses **22.5% fewer expansions** than the loaded

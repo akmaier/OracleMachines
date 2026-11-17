@@ -12,7 +12,87 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: retained causal frontiers and proof choice
+## Current investigation: proof selection and the remaining negative cases
+
+[Checked proof selection](proof-choice.md) combines the acquired legacy and
+causal frontiers. It tries an available negative proof first, then falls back to
+the first legacy or causal derivation. All source guards, ordinary proof checks
+and both complete lineage audits remain required. This is a measured heuristic,
+not a minimum-cost guarantee.
+
+**Resolved derivation gap:** the combined policy retains all **30 causal hits**
+and **35 expansions**, while materialization falls **137 -> 57 rows (58.39%)**
+and total new rows **351 -> 271 (22.79%)**. It uses 25 ready proofs and five
+materializations. On 26 overlapping targets, legacy/causal/combined derivation
+costs **85/121/41 rows**. This is a fresh stream; the older 41-row opportunity was
+not used as an assumed result.
+
+**Runtime and memory tradeoff:** mean complete time is **11.08200 seconds**, versus
+12.42048 for causal and 13.45278 for legacy. These mean improvements (10.78% /
+17.62%) each include one regression among three pairs. Peak RSS rises **5.53% /
+16.55%**, with positive paired differences. The allocation cause remains untraced.
+Keep the combined option available for reducing proof growth; do not claim a
+stable runtime or memory win. Gzip plus first-trial raw sidecars falls to
+11,727,695 bytes, but all earlier history and trial archives remain additional.
+
+**Highest-value coverage target:** acquire causal supports incrementally from
+preserved new negative outcomes, then examine the seven uncovered residuals.
+All **35 remaining expansions are UNSAT**: current cases **46/48** cost seven,
+**27** six, **7/101/156** four, and **86** three. Templates 6/8/12 account for
+17/11/7. All measured transfers still share their first origin's guard. Changes
+of guard and shared conditional structure remain the informative coverage tests.
+Do not rebuild the same old frontier again; charge new acquisition explicitly.
+
+**Dominant complete costs:** cold replay and compression consume **43.69% /
+31.96%** of combined time. Checking both lineages costs 0.53090 seconds and is
+only part of full cold replay. Retain complete checking until a measured equally
+strong replacement exists. The next discovery experiment must charge these
+costs as well as live-memory growth, not only fresh search nodes.
+
+The experiment uses the same 19,091-key union, excluding 1,920 previous sidecar
+answers and cached roots. It visits 192 new neighbours twice in three balanced
+process triples. Both frontiers retain the same eight-catalog / 389-origin
+history; no new supports were discovered. The combined 778 origin references
+are links into those two histories, not 778 distinct sources. The two newer
+catalogs' 94 negative guarded outcomes remain preserved but unincorporated.
+
+Independent validation passes **502 tests**, nine complete archive checks /
+**3,456 trial query replays**, every union node, **2,189 inherited decisions** and
+all 192 new decisions, with fresh validation search disabled. Every combined
+selection is reconstructed from the archive's append history before that query.
+The union retains **19,543 keys / 60,649,472 SQLite / 4,567,169 gzip bytes**,
+adding 452 keys while preserving every earlier payload. All **38 alternate
+certificate occurrences** remain in trial archives. New decisions have
+**149 direct roots / 43 negative guards**.
+
+Resume `experiments/results/cnf-proof-choice/checkpoint.json`. It preserves
+all prior semantic fields and adds `proof_choice_study`, `proof_choice_decisions`
+and `proof_choice_portfolio`. The composite references the original immutable
+legacy and causal banks. Their union readiness is **129/78** and **60/116**
+(ready/pending); the original 170-entry frontier has **125/45**. All three
+complete lineage checks pass. The fixed measured banks still use eight catalogs;
+**137 guarded-negative origin records** from the three subsequent catalogs now
+remain available for incremental acquisition. These are source records, not a
+claim of 137 distinct residual structures.
+
+All prior **386 sources / 4,286 artifacts / 75 manifests** remain unchanged.
+Runtime binds 390 sources; the analyzer brings the ledger to 391. Structural
+authority stays **2,614 patterns / 259 pairs / 17 missing children**, original
+**17/24 / 999 steps**, separate supplemental **24/24 / 208**, and original
+case 7's discovery pointer. The manuscript builds cleanly to **201 pages** with
+**64 unchanged proof blocks**. No new Lean or unrestricted-SAT resource bound.
+The full suite retains 24 unclosed-SQLite ResourceWarnings during older tests;
+10 focused new tests emit none with warnings enabled. Their allocation origins
+remain untraced.
+
+Checkpoint SHA-256: `dc35b10ea9a53856e6d1b906aac4d629cf247bdc60c888f1ea01f56b8fc714fa`.
+Report SHA-256: `4dfdbc24d4b76325aaf98ce14231849ee1f18ad6a84a66dc50d190ef15d2b228`.
+
+
+The new manifest binds **59 artifacts**. The next preservation audit inherits
+**4345 artifacts / 76 manifests**.
+
+## Previous investigation: retained causal frontiers and proof choice
 
 [Retained causal loading](retained-causal.md) avoids rediscovering the acquired
 frontier while preserving its pending entries, matching materializer, actual

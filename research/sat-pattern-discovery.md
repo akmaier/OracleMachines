@@ -5093,3 +5093,29 @@ none with warnings enabled, and allocation origins are untraced. Structural
 authority remains 2,614 patterns / 259 pairs / 17 missing children, original
 17/24 / 999 steps and separate supplemental 24/24 / 208. The paper builds cleanly
 to 200 pages with 64 unchanged proof blocks. No new Lean or general SAT bound.
+
+
+## 2026-11-17: choose among acquired negative proofs
+
+[Proof choice](proof-choice.md) preserves the causal frontier's 30 target hits
+while reducing support derivation 137 -> 57 rows. It adds no new support origins
+and establishes no new arbitrary-SAT category. The composite references the same
+389 distinct origins across two acquired extraction policies. All hits still
+share their first origin's guard; whole-query guards remain mandatory.
+
+The next coverage experiment should incrementally acquire supports from preserved
+new guarded negatives. Seven current residuals account for all 35 remaining
+expansions: cases 46/48 cost seven, 27 six, 7/101/156 four, and 86 three. Compare
+their conditional structures and genuinely changed guards. These IDs are local
+to the current query catalog. Complete partitioning and efficient solution of
+every cell remain separate obligations.
+
+Verified resume: `experiments/results/cnf-proof-choice/checkpoint.json` retains
+19,543 keys, 149 new direct results and 43 guarded negative decisions, preserving
+all earlier payloads and checkpoint fields. Both source banks and their pending
+entries remain bound; 137 later guarded-negative records are available for the
+next acquisition experiment. All 502 tests, nine complete archive audits, all
+union nodes and 2,189 inherited decisions pass. Structural authority remains
+2,614 patterns / 259 pairs / 17 missing children. The paper builds to 201 pages
+with 64 unchanged proof blocks. Older-test SQLite warnings are preserved;
+the 10 focused new tests emit none with warnings enabled.

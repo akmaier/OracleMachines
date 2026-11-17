@@ -2718,3 +2718,33 @@ is not established. Gzip plus first-trial raw sidecars is 12,173,774 bytes versu
 of retained time. These finite measurements do not improve worst-case proof
 volume or arbitrary-SAT bounds. Remaining search includes 74 negative and 19
 positive expansions; all measured transfers still share their first origin's guard.
+
+
+## 2026-11-17: choose among acquired negative proofs
+
+[Checked proof selection](proof-choice.md) combines K retained entries of total
+clause volume L, requiring O(K + L) live indexing state in addition to proof
+checking caches and the retained archive. A miss scans both banks; a hit charges
+containment, canonicalization and checking of matching roots, plus possible
+fallback scanning and materialization. Ready-first selection is not a bound on
+minimum derivation cost: a ready proof can be costly to verify and earlier choices
+change later sharing. No unrestricted polynomial resource bound follows.
+
+Measured new proof rows fall 351 -> 271 and materialization 137 -> 57 versus
+causal-only reuse. The full SQLite file shrinks only 0.11%, while peak RSS grows
+5.53%. Mean complete time improves 10.78% but paired signs are mixed. Full cold
+replay and compression still cost 43.69% / 31.96% of total time. Historical
+acquisition, both index histories, all trial archives and the new union remain
+charged. The composite's 778 origin references represent 389 distinct sources,
+not doubled discovery coverage. Broader coverage and incremental acquisition
+remain open.
+
+Verified resume: `experiments/results/cnf-proof-choice/checkpoint.json` retains
+19,543 keys, 149 new direct results and 43 guarded negative decisions, preserving
+all earlier payloads and checkpoint fields. Both source banks and their pending
+entries remain bound; 137 later guarded-negative records are available for the
+next acquisition experiment. All 502 tests, nine complete archive audits, all
+union nodes and 2,189 inherited decisions pass. Structural authority remains
+2,614 patterns / 259 pairs / 17 missing children. The paper builds to 201 pages
+with 64 unchanged proof blocks. Older-test SQLite warnings are preserved;
+the 10 focused new tests emit none with warnings enabled.

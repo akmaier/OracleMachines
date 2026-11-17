@@ -8930,3 +8930,31 @@ none with warnings enabled, and allocation origins are untraced. Structural
 authority remains 2,614 patterns / 259 pairs / 17 missing children, original
 17/24 / 999 steps and separate supplemental 24/24 / 208. The paper builds cleanly
 to 200 pages with 64 unchanged proof blocks. No new Lean or general SAT bound.
+
+
+## 2026-11-17: choose among acquired negative proofs
+
+[The combined dispatcher](proof-choice.md) checks ready negative roots across
+both acquired frontiers before materializing another support. With no ready
+match it uses legacy-first fallback and the appropriate checked extractor.
+Both complete provenance histories are audited on the same frozen snapshot;
+compact references avoid duplicating the historical metadata in the composite.
+Independent replay reconstructs choices from the actual append history.
+
+On 192 fresh queries, materialization falls 137 -> 57 rows and new rows
+351 -> 271 versus causal-only reuse, retaining 30 transfers / 35 expansions.
+Mean complete time improves 10.78%, with one paired regression; peak RSS rises
+5.53% in all pairs. Keep the policy optional. The next discovery gap is incremental
+acquisition and the seven remaining negative residuals, rather than repeated
+reconstruction of old support descriptions. Full cold replay and compression
+still consume 43.69% / 31.96% of complete time.
+
+Verified resume: `experiments/results/cnf-proof-choice/checkpoint.json` retains
+19,543 keys, 149 new direct results and 43 guarded negative decisions, preserving
+all earlier payloads and checkpoint fields. Both source banks and their pending
+entries remain bound; 137 later guarded-negative records are available for the
+next acquisition experiment. All 502 tests, nine complete archive audits, all
+union nodes and 2,189 inherited decisions pass. Structural authority remains
+2,614 patterns / 259 pairs / 17 missing children. The paper builds to 201 pages
+with 64 unchanged proof blocks. Older-test SQLite warnings are preserved;
+the 10 focused new tests emit none with warnings enabled.

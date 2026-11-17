@@ -5227,3 +5227,26 @@ the bound sidecars for composed source reuse. All 16 trial arms, 2,957 inherited
 decisions and 1,022 solver tests pass. Original and supplemental structural
 coverage remain separate and unchanged. Historical savings do not establish
 fresh coverage, optimal expansion or a polynomial bound for arbitrary SAT.
+
+
+## 2026-11-17: fresh premise-first guard chains
+
+[Prepared recognition and checked-premise priority](premise-guard.md) reduce
+expansions **139 -> 67** and new native rows **436 -> 364** on 192 fresh neighbours.
+The new selector preserves the old chain policy's native proofs while reducing
+additional verified nodes **247 -> 102**. All eight strengthened premises already
+exist. Seven cases improve, with no per-case expansion/publication regression.
+Complete timings have mixed paired signs; retained trial bytes rise 0.414% versus
+ordinary because chain records offset the smaller archive. No stable total-cost
+or general memory gain is established.
+
+The largest remaining case, 68, costs 27/67 expansions and is three clauses from
+an overlapping ready core. Cases 6/135 cost seven each and need three/two missing
+clauses. Next, price exact alternative coverage or disjoint branches by the first
+falsified clause. A checked negative conjunction of several missing clauses
+forces some clause false, not all. The pre-query diagnosis publishes nothing;
+multiple-clause inference remains open. Cold checking and compact sidecars remain
+supporting cost targets. Resume `experiments/results/cnf-premise-guard/checkpoint.json`
+with 21,128 native keys, all prior payloads preserved, eight inherited and 192 new
+chain conclusions. All 1,028 tests, six native/chain audits, 2,957 inherited ordinary
+decisions and frozen-worker parity pass. No new Lean or unrestricted-SAT bound.

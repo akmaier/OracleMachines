@@ -1,0 +1,297 @@
+{
+  "cases": [
+    {
+      "answer": false,
+      "case": 68,
+      "expansions": 27,
+      "minima": {
+        "pending": {
+          "examples": [
+            {
+              "core": 239,
+              "missing_clauses": [
+                [
+                  -170,
+                  -160
+                ],
+                [
+                  -120,
+                  80
+                ],
+                [
+                  10,
+                  230
+                ],
+                [
+                  250
+                ]
+              ],
+              "missing_count": 4,
+              "overlap": 11
+            }
+          ],
+          "matching_minimum": 1,
+          "minimum_missing": 4
+        },
+        "ready": {
+          "examples": [
+            {
+              "core": 210,
+              "missing_clauses": [
+                [
+                  -260,
+                  210
+                ],
+                [
+                  -250
+                ],
+                [
+                  -70
+                ]
+              ],
+              "missing_count": 3,
+              "overlap": 2
+            },
+            {
+              "core": 258,
+              "missing_clauses": [
+                [
+                  -290
+                ],
+                [
+                  -110,
+                  160
+                ],
+                [
+                  90
+                ]
+              ],
+              "missing_count": 3,
+              "overlap": 16
+            }
+          ],
+          "matching_minimum": 2,
+          "minimum_missing": 3
+        }
+      },
+      "target_clauses": 82,
+      "target_literals": 226,
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 6,
+      "expansions": 7,
+      "minima": {
+        "pending": {
+          "examples": [
+            {
+              "core": 214,
+              "missing_clauses": [
+                [
+                  -230
+                ],
+                [
+                  -120,
+                  70,
+                  230
+                ],
+                [
+                  -110,
+                  -10
+                ],
+                [
+                  110,
+                  230
+                ],
+                [
+                  190,
+                  230
+                ]
+              ],
+              "missing_count": 5,
+              "overlap": 3
+            },
+            {
+              "core": 218,
+              "missing_clauses": [
+                [
+                  -250
+                ],
+                [
+                  -180,
+                  -160,
+                  -90
+                ],
+                [
+                  -170,
+                  160,
+                  190
+                ],
+                [
+                  90
+                ],
+                [
+                  130,
+                  170
+                ]
+              ],
+              "missing_count": 5,
+              "overlap": 5
+            },
+            {
+              "core": 224,
+              "missing_clauses": [
+                [
+                  -230,
+                  260
+                ],
+                [
+                  -160
+                ],
+                [
+                  -140,
+                  160
+                ],
+                [
+                  -100,
+                  150,
+                  160
+                ],
+                [
+                  160,
+                  230
+                ]
+              ],
+              "missing_count": 5,
+              "overlap": 7
+            },
+            {
+              "core": 241,
+              "missing_clauses": [
+                [
+                  -190,
+                  10
+                ],
+                [
+                  -160
+                ],
+                [
+                  -100,
+                  150,
+                  160
+                ],
+                [
+                  -60,
+                  90
+                ],
+                [
+                  140
+                ]
+              ],
+              "missing_count": 5,
+              "overlap": 10
+            }
+          ],
+          "matching_minimum": 4,
+          "minimum_missing": 5
+        },
+        "ready": {
+          "examples": [
+            {
+              "core": 240,
+              "missing_clauses": [
+                [
+                  -130
+                ],
+                [
+                  -60,
+                  30
+                ],
+                [
+                  120
+                ]
+              ],
+              "missing_count": 3,
+              "overlap": 12
+            }
+          ],
+          "matching_minimum": 1,
+          "minimum_missing": 3
+        }
+      },
+      "target_clauses": 64,
+      "target_literals": 177,
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 135,
+      "expansions": 7,
+      "minima": {
+        "pending": {
+          "examples": [
+            {
+              "core": 232,
+              "missing_clauses": [
+                [
+                  -130,
+                  170
+                ],
+                [
+                  90
+                ],
+                [
+                  130,
+                  170
+                ]
+              ],
+              "missing_count": 3,
+              "overlap": 10
+            }
+          ],
+          "matching_minimum": 1,
+          "minimum_missing": 3
+        },
+        "ready": {
+          "examples": [
+            {
+              "core": 211,
+              "missing_clauses": [
+                [
+                  130
+                ],
+                [
+                  260
+                ]
+              ],
+              "missing_count": 2,
+              "overlap": 5
+            }
+          ],
+          "matching_minimum": 1,
+          "minimum_missing": 2
+        }
+      },
+      "target_clauses": 69,
+      "target_literals": 189,
+      "template_case": 6
+    }
+  ],
+  "limitations": [
+    "Read-only diagnosis on the three fresh unresolved misses after the completed experiment; proof availability is masked to each exact pre-query prefix. No publication or SAT search.",
+    "Minimum missing clause count is a structural distance, not a bound on derivation or solving work. For several missing clauses the known negative conjunction only forces at least one clause to be false, not every clause. Exact branching/composition and its cost remain unimplemented."
+  ],
+  "probe": {
+    "path": "/Users/maier/Documents/code/OracleMachines/experiments/probe_cnf_premise_gaps.py",
+    "sha256": "fbcfd7b89543eab89d75cf50d68ed60b3d65bc36b704b7d24817c3b79e0d4298"
+  },
+  "protocol": {
+    "path": "experiments/results/cnf-premise-guard/protocol.json",
+    "sha256": "2bd449a11430ea3def39c1401b75fe0a56757519b8ce23da780faa2031fb6521"
+  },
+  "trial": {
+    "path": "experiments/results/cnf-premise-guard/premise-first-0/report.json",
+    "sha256": "49cdf0e87e65a4befadf9bc5caf1b1a06fbeccbd119097958eed7e4934a59431"
+  }
+}

@@ -6593,6 +6593,40 @@ sidecar storage is $O(dL)$ plus models, in addition to the native proofs. Matchi
 normalization, proof traversal, restriction, lifting and residual solving remain
 charged. Fresh generalization and unrestricted polynomial SAT bounds remain open.
 
+\paragraph{Prepared recognition and fresh guard-chain coverage.}
+A prepared clause-posting index now recognizes retained cores missing one clause
+without normalizing every core again for each query. For a suggested clause $C$,
+the selector checks the stored negative premise $T\wedge C$ first. Core metadata
+can suggest $C$ even when its own proof is pending; only the actual checked
+premise authorizes the restriction. An absent strengthened premise still needs
+the checked-core/subset path. The index charges copied descriptions, memberships
+and setup, and dense posting overlap can still visit the entire bank.
+
+On 192 new neighbouring inputs from the three selected templates, eight extra
+guards reduce expansions from 139 to 67, splits from 46 to 19, new native rows
+from 436 to 364, and added native payload from 706,491 to 579,076 bytes. Seven
+queries save expansions, with no per-query expansion or publication regression.
+Both chain policies produce identical native proof payloads; premise-first
+checking reduces additional verified nodes from 247 to 102. All strengthened
+premises already exist. Answers remain 97 SAT and 95 UNSAT. This is fresh
+coverage within the selected neighbouring-input families, not all SAT categories.
+
+Two reversed-order triplets give mean complete times of 20.14800 seconds for
+ordinary solving, 18.48525 for core-first chains and 19.60037 for premise-first
+chains. Paired premise-first changes are $-8.51\%,+1.10\%$ versus ordinary and
+$-31.67\%,+58.09\%$ versus core-first; no stable total speedup follows. Complete
+cold replay consumes about $61.9\%$ of the premise-first mean. Larger sidecars
+also raise compressed-archive-plus-record size by $0.414\%$ versus ordinary.
+Lower search counts and lower mean peak RSS do not establish a general storage
+or memory bound.
+
+The largest remaining case uses 27 of 67 expansions. Its nearest overlapping
+ready cores miss three clauses, outside the implemented rule. A negative
+$T\wedge C_1\wedge\cdots\wedge C_k$ forces at least one $C_i$ to be false;
+it does not permit simultaneously falsifying every $C_i$. Exact alternative
+coverage, branch composition and its full cost are the next structural test.
+No unrestricted polynomial SAT bound follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -28,6 +28,16 @@ classes.
 
 ## Paper
 
+[Reuse checked premises and test fresh guard-chain coverage](research/premise-guard.md).
+On **192 new queries**, expansions fall **139 -> 67** and new proof rows **436 ->
+364**. Prepared matching and premise-first checks reduce additional verified
+nodes **247 -> 102** versus the previous chain policy. Complete timings remain
+variable, and larger chain records increase retained trial bytes 0.414% versus
+ordinary solving. All **1,028 tests** and independent replay pass. Next, cover
+multiple missing clauses exactly; the largest remaining case costs 27 expansions.
+Resume `experiments/results/cnf-premise-guard/checkpoint.json` (**21,128 keys**
+plus bound chain records; previous results preserved).
+
 [Compose checked restrictions and price the remaining solve](research/guard-chain.md).
 On eight historical cases, expansions fall **68 -> 29**, added native proof
 payload falls **57.72%**, and deltas plus chain records shrink **13.47%**. Added

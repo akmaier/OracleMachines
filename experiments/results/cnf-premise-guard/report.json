@@ -1,0 +1,146 @@
+{
+  "cases": {
+    "path": "experiments/results/cnf-premise-guard/cases.json",
+    "sha256": "e96d36a0334b1697a989c93356a5aadb23fc52d7a5feae479ad6a45f870a57f9"
+  },
+  "protocol": {
+    "path": "experiments/results/cnf-premise-guard/protocol.json",
+    "sha256": "2bd449a11430ea3def39c1401b75fe0a56757519b8ce23da780faa2031fb6521"
+  },
+  "samples": [
+    {
+      "mode": "plain",
+      "path": "experiments/results/cnf-premise-guard/plain-0/report.json",
+      "repeat": 0,
+      "sha256": "6b39cbb9f69b3ca4494fd04704c36648caa174f9ba456e25bedf4e021927e5e3"
+    },
+    {
+      "mode": "core-first",
+      "path": "experiments/results/cnf-premise-guard/core-first-0/report.json",
+      "repeat": 0,
+      "sha256": "6ddc34ff97689a3040c28a529ad73885d999779f11ba4c3827d57ce4d5df5795"
+    },
+    {
+      "mode": "premise-first",
+      "path": "experiments/results/cnf-premise-guard/premise-first-0/report.json",
+      "repeat": 0,
+      "sha256": "49cdf0e87e65a4befadf9bc5caf1b1a06fbeccbd119097958eed7e4934a59431"
+    },
+    {
+      "mode": "premise-first",
+      "path": "experiments/results/cnf-premise-guard/premise-first-1/report.json",
+      "repeat": 1,
+      "sha256": "d448fb6a1875d0bc2389cfe795b2ee239355608ac5f50f693269bd2b415f2762"
+    },
+    {
+      "mode": "core-first",
+      "path": "experiments/results/cnf-premise-guard/core-first-1/report.json",
+      "repeat": 1,
+      "sha256": "15cf439bfd6be39c675aa62a868c5cf524c20b82ef47a9462e243d07ef55b62f"
+    },
+    {
+      "mode": "plain",
+      "path": "experiments/results/cnf-premise-guard/plain-1/report.json",
+      "repeat": 1,
+      "sha256": "0794d05d77168ea7dd36daaa575970330fecd1e37706fd31dc17d6682dd5feb4"
+    }
+  ],
+  "summary": {
+    "core-first": {
+      "compressed_bytes": 4863479,
+      "database_bytes": 66211840,
+      "eligible": 11,
+      "expanded_nodes": 67,
+      "extra_guards": 8,
+      "known_premise_choices": 0,
+      "mean_cold_seconds": 10.894954312592745,
+      "mean_complete_worker_seconds": 18.48524908348918,
+      "mean_compression_seconds": 3.9457409584429115,
+      "mean_extra_seconds": 0.12318189558573067,
+      "mean_peak_rss_bytes": 450600960.0,
+      "mean_prepare_seconds": 0.8766359377186745,
+      "mean_query_seconds": 1.8859999652486295,
+      "mean_serialization_seconds": 0.026302333222702146,
+      "mean_setup_seconds": 1.044655708828941,
+      "mean_warm_query_seconds": 0.025915761711075902,
+      "mean_warm_setup_seconds": 0.12307868734933436,
+      "new_nodes": 364,
+      "new_payload_units": 579076,
+      "nodes": 21030,
+      "positive": 97,
+      "premise_publications": 0,
+      "queries": 192,
+      "repeat_new_nodes": 0,
+      "row_digest": "7c0ca075345d1e3f5fa3e7ce1fb365c9c77c6b77a2515c22d7108133f3cb9509",
+      "sidecar_bytes": [
+        5083752,
+        5083738
+      ],
+      "split_nodes": 19
+    },
+    "plain": {
+      "compressed_bytes": 4879703,
+      "database_bytes": 66412544,
+      "eligible": 11,
+      "expanded_nodes": 139,
+      "extra_guards": 0,
+      "known_premise_choices": 0,
+      "mean_cold_seconds": 12.098337146220729,
+      "mean_complete_worker_seconds": 20.148002583533525,
+      "mean_compression_seconds": 3.9430656665936112,
+      "mean_extra_seconds": 0.0,
+      "mean_peak_rss_bytes": 474415104.0,
+      "mean_prepare_seconds": 0.9565467291977257,
+      "mean_query_seconds": 2.3753614008892328,
+      "mean_serialization_seconds": 0.023390604183077812,
+      "mean_setup_seconds": 1.1340847082901746,
+      "mean_warm_query_seconds": 0.02632368658669293,
+      "mean_warm_setup_seconds": 0.12041664612479508,
+      "new_nodes": 436,
+      "new_payload_units": 706491,
+      "nodes": 21102,
+      "positive": 97,
+      "premise_publications": 0,
+      "queries": 192,
+      "repeat_new_nodes": 0,
+      "row_digest": "e96a9ff171313243bd7a57af730a3dd94b7f1952b5c598fd3661c7acaf435d8c",
+      "sidecar_bytes": [
+        5026403,
+        5026399
+      ],
+      "split_nodes": 46
+    },
+    "premise-first": {
+      "compressed_bytes": 4863479,
+      "database_bytes": 66211840,
+      "eligible": 11,
+      "expanded_nodes": 67,
+      "extra_guards": 8,
+      "known_premise_choices": 8,
+      "mean_cold_seconds": 12.137668791459873,
+      "mean_complete_worker_seconds": 19.60036770813167,
+      "mean_compression_seconds": 3.9574686670675874,
+      "mean_extra_seconds": 0.03262560325674713,
+      "mean_peak_rss_bytes": 437657600.0,
+      "mean_prepare_seconds": 0.9224506663158536,
+      "mean_query_seconds": 1.7736528040841222,
+      "mean_serialization_seconds": 0.026108666323125362,
+      "mean_setup_seconds": 1.098940645577386,
+      "mean_warm_query_seconds": 0.025639390805736184,
+      "mean_warm_setup_seconds": 0.12163310404866934,
+      "new_nodes": 364,
+      "new_payload_units": 579076,
+      "nodes": 21030,
+      "positive": 97,
+      "premise_publications": 0,
+      "queries": 192,
+      "repeat_new_nodes": 0,
+      "row_digest": "7c0ca075345d1e3f5fa3e7ce1fb365c9c77c6b77a2515c22d7108133f3cb9509",
+      "sidecar_bytes": [
+        5083676,
+        5083694
+      ],
+      "split_nodes": 19
+    }
+  }
+}

@@ -12,7 +12,46 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: avoid duplicate checking in guard composition
+## Current investigation: cover several missing clauses exactly
+
+[Prepared premise-first guards](premise-guard.md) validate guard-chain savings on
+**192 fresh queries**: expansions **139 -> 67**, new rows **436 -> 364**, and added
+native payload **18.03% lower**. Seven cases improve with no per-query expansion
+or publication regressions. Eight extra guards all use stored strengthened
+premises. The prepared selector preserves the core-first native proofs while
+reducing additional verified nodes **247 -> 102** and literal visits including
+its index setup **208,132 -> 36,985**. A pending core can suggest a clause only
+because the actual strengthened premise is independently checked negative.
+
+**Highest-priority coverage target:** case **68**, costing **27/67 expansions**.
+Its nearest overlapping ready cores miss three clauses. Cases **6 and 135** cost
+seven expansions each and miss three/two clauses respectively. Price an exact
+multiple-clause decomposition, retaining 135 as a smaller control. A negative
+T AND C1 AND ... AND Ck forces at least one Ci false, not all of them. Use complete
+alternative coverage or a partition by the first falsified clause; charge
+premise construction, branch checking, recomposition and duplicated child work.
+The read-only pre-query diagnosis is retained; no such inference is implemented.
+
+**Total-cost limitation:** complete-time changes have mixed paired signs.
+Premise-first averages 2.72% below ordinary but 6.03% above core-first; neither
+establishes a stable speedup. Cold replay/compression consume about 61.9%/20.2%
+of its mean. Larger chain records increase retained trial bytes **0.414%** versus
+ordinary. Compact sidecar references and shared cold checking are supporting
+cost opportunities; fewer expansions do not by themselves establish memory or
+runtime savings. Broader SAT classes remain untested.
+
+All **1,028 tests**, six complete trial audits, 2,957 inherited ordinary decisions,
+eight inherited chains and 192 new chains pass. Frozen-worker first-query and
+native-proof parity also passes. Resume
+`experiments/results/cnf-premise-guard/checkpoint.json` (**21,128 native keys**,
+all 20,666 prior payloads preserved). Prior 422 sources and 4,649 artifacts /
+81 manifests remain unchanged; structural authorities and 64 proof blocks remain
+unchanged. No unrestricted-SAT resource claim.
+
+
+New manifest: **57 artifacts**. Next preservation audit: **4706 artifacts / 82 manifests**.
+
+## Previous investigation: avoid duplicate checking in guard composition
 
 [Checked guard chains](guard-chain.md) reduce expansions and new rows **68 -> 29**
 on the eight exact historical prefixes. Added native payload falls **57.72%**;

@@ -12,7 +12,95 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: causal unit slicing and acquisition overhead
+## Current investigation: retained causal frontiers and proof choice
+
+[Retained causal loading](retained-causal.md) avoids rediscovering the acquired
+frontier while preserving its pending entries, matching materializer, actual
+proof checks and complete cold query/provenance audit. It does not persist a
+validity flag. Source-file fingerprint and policy markers identify the saved
+hints; only ordinary checked negative proofs justify a transfer.
+
+**Resolved cost gap:** support discovery visits **2,851 -> 0 nodes**, preparation
+falls **2.29443 -> 0.08099 seconds**, and complete time falls **12.74826 ->
+10.63701 seconds (16.56%)** against rebuilding, improving in all three pairs.
+Rebuilt and retained modes have identical frontier files and byte-identical
+proof databases. Query time rises 46.39% because discovery had warmed checks
+before queries, but complete time improves. Historical acquisition remains charged.
+
+**Fresh coverage:** against loading the 207-entry legacy frontier, the retained
+176-entry causal frontier transfers **25 instead of 19** targets, cutting
+expansions **120 -> 93 (22.5%)** and splits **37 -> 30**. Six extra hits account
+for all 27 saved expansions; no query regresses. Every hit still shares its first
+origin's guard, so broad cross-guard reuse remains open. Complete time is only
+**0.67% higher than legacy** (10.56570 seconds), with mixed paired signs: there
+is no demonstrated net speedup over that baseline.
+
+**Highest-value expansion-cost target: choose among available proofs.** On the
+19 targets both banks cover, retained causal reuse creates **74 materialization
+rows versus 33** for legacy. The six additional causal targets need another 26
+materialization rows and six publications. Test using an already cheaper proof
+on overlapping matches and causal supports for added coverage. The apparent
+41-row opportunity is attribution, not a guaranteed dispatcher saving: earlier
+choices can affect sharing and later cache contents. Keep all checks and measure
+matched novel queries. Do not routinely rebuild the fixed causal frontier again.
+
+**Memory/total-cost limits:** retained causal reuse adds **365 versus 319 rows**
+and raises mean peak RSS **14.56% versus legacy** and **11.24% versus rebuild**,
+with positive paired differences. Allocation cause is not established. Gzip plus
+first-trial raw sidecars falls 12,657,545 -> 12,173,774 bytes versus legacy, but
+historical trials and the final union remain additional retained state. Complete
+cold audit and compression account for **41.29% / 33.65%** of retained runtime.
+Do not infer that either verification or old acquisition can be omitted.
+
+**Coverage targets:** remaining work is **74 negative / 19 positive expansions**.
+Current negative cases **14 / 161** cost 19 / 15; SAT cases **45 / 91** cost 14 /
+five. Templates 12/6/8 account for 54/33/6. Compare their conditional structures
+and genuinely different guards; these are current-catalog IDs. Incremental
+causal discovery from new origins is still separate and unimplemented here.
+
+All modes start from 18,672 acquired keys, exclude all 1,728 prior sidecar answers
+and cached roots, and visit 192 new neighbours twice in three balanced process
+triples. Both banks use the same 389 origins from eight ordered catalogs; none
+adds the latest 51 negative origins. Loading preserves all history and pending
+entries. Positive witness exploration remains preserved but disabled.
+
+
+Independent validation passes **492 tests**, nine complete archive checks /
+**3,456 trial query replays**, every union node, **1,997 inherited decisions** and
+all 192 new decisions, with fresh validation search disabled. The union retains
+**19,091 keys / 59,228,160 SQLite / 4,491,457 gzip bytes**, adding 419 keys while
+preserving every earlier payload. All **48 alternate certificate occurrences**
+remain in trial archives. New decisions have **147 direct roots / 45 guards**,
+including two positive guarded results.
+
+Resume `experiments/results/cnf-retained-causal/checkpoint.json`. It preserves
+all inherited semantic fields, adding `retained_causal_study` and
+`retained_causal_decisions`; the saved frontiers themselves are unchanged. Load
+`causal_support_proposals` with the fingerprinted causal loader and matching
+materializer. In the union, the causal frontier has **48 ready roots / 128 pending**;
+the extended legacy frontier has **121 / 86**, and the original 170-entry frontier
+has **120 / 50**. Both measured banks keep the same eight-catalog, 389-origin
+lineage. The ninth catalog is excluded from selection but not added to discovery.
+The original frontier retains its six-catalog lineage. All three union audits pass.
+
+All prior **381 sources / 4,230 artifacts / 74 manifests** remain unchanged.
+Runtime binds 385 sources; the analyzer brings the ledger to 386. Structural
+authority stays **2,614 patterns / 259 pairs / 17 missing children**, original
+**17/24 / 999 steps**, separate supplemental **24/24 / 208**, and original
+case 7's discovery pointer. The manuscript builds to **200 pages** without warnings,
+with **64 unchanged proof blocks**. No new Lean result or unrestricted-SAT bound.
+The full test log retains 24 unclosed-SQLite ResourceWarnings during older tests;
+the six focused new tests emit none with warnings enabled. Their allocation
+origins remain untraced; this is not a failed proof check.
+
+Checkpoint SHA-256: `34e1408f8937fab8a5e9ace56122ab95b6e49a15f1ec21b85a02270098081a2c`.
+Report SHA-256: `ea39bfb8165519399ac7117dc82156f90b59b5c16d0cd6c735ababb05e90c3ea`.
+
+
+The new manifest binds **56 artifacts**. The next preservation audit inherits
+**4286 artifacts / 75 manifests**.
+
+## Previous investigation: causal unit slicing and acquisition overhead
 
 [Causal support extraction](causal-support.md) removes propagated assignments
 that the contradiction does not use. The dependency-closed subsequence still

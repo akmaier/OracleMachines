@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Reuse the acquired causal frontier without rediscovery](research/retained-causal.md).
+Loading reduces complete time **16.56% versus rebuilding**, with identical proof
+archives and full cold audit. It uses **22.5% fewer expansions** than the loaded
+legacy frontier, but total time is effectively flat and peak memory is higher.
+The next target is choosing cheaper existing proofs where both banks match;
+smaller supports currently cause extra derivation. All **492 tests** and complete
+archive replay pass. Resume `experiments/results/cnf-retained-causal/checkpoint.json`
+(19,091 preserved keys).
+
 [Remove unused propagation dependencies from refutations](research/causal-support.md).
 Causal supports cover nine additional negative targets, cutting fresh expansions
 **48.72% (195 -> 100)** and query time **27.04%**. Rebuilding old supports still

@@ -6347,6 +6347,56 @@ catalog IDs remain distinct from original structural cases. Efficient arbitrary
 SAT acquisition, compact proof construction and minimum expansion are still
 unproved.
 
+\paragraph{Retaining causal supports avoids repeated discovery.}
+The next comparison loads the acquired causal frontier instead of re-extracting
+its supports. The loader checks the file fingerprint and causal/deferred policy
+markers, preserving every saved field and binding pending entries to the causal
+materializer. These checks establish identity and format, not UNSAT or historical
+provenance. Every match still requires an ordinary checked negative core; missing
+roots require checked derivation. Current-query guards and the complete cold
+proof, query and lineage audit remain unchanged.
+
+All workers start from the current 18,672-key union. Selection excludes 1,728
+earlier sidecar answers and cached full roots, then takes another 192 neighbours.
+Three balanced process triples compare loading the 207-entry legacy frontier,
+rebuilding the 176-entry causal frontier, and loading that causal frontier.
+Both indices use the same 389 origins in eight ordered catalogs; no mode adds
+the latest 51 negative origins. Historical acquisition remains charged separately.
+Complete time includes preparation, checking, querying, persistence, complete
+cold audit, compression and final digest/report generation. Imports, initial
+command-line reads and the final wrapper rewrite are excluded.
+
+Loading avoids 2,851 discovery-node visits and reduces preparation from 2.29443
+to 0.08099 seconds. Complete time falls from 12.74826 to 10.63701 seconds,
+an improvement of 16.56\%, present in every pair. Rebuilt and retained modes
+produce byte-identical proof databases and identical search work. Query time
+increases from 1.02010 to 1.49335 seconds because reconstruction had warmed
+proof checks before querying; the complete clock still improves.
+
+Against legacy loading at 10.56570 seconds, retained causal loading is 0.67\%
+slower, with mixed paired signs. There is no demonstrated net speedup over
+that baseline. Six additional cofactor transfers reduce expansions from 120
+to 93 (22.5\%) and splits from 37 to 30. All modes answer 99 SAT and 93 UNSAT
+queries; 45 guards include two positive children. Every measured causal hit
+still shares its first origin's guard. Repeated visits add no proof rows.
+
+New rows total 365 for causal reuse versus 319 for legacy reuse. Causal
+materialization adds 100 rows versus 33. On the 19 targets covered by both banks,
+the corresponding counts are 74 and 33; the six extra causal hits need 26
+materialization rows and six publications. This suggests testing which available
+proof is cheaper to use before deriving a smaller support. The apparent 41-row
+opportunity is an attribution, not a guaranteed saving under changed cache and
+derivation histories. Mean peak RSS also rises 14.56\% against legacy loading;
+its allocation cause is not established. Gzip plus first-trial raw sidecars falls
+from 12,657,545 to 12,173,774 bytes, without an asymptotic memory guarantee.
+
+The retained mode spends 41.29\% of total time in complete cold audit and
+33.65\% in compression. Remaining search comprises 74 negative expansions and
+19 positive ones. Current negative cases 14 and 161 cost 19 and 15; SAT cases
+45 and 91 cost 14 and five. The fixed acquired frontier can now be reused without
+rediscovery, but incremental causal acquisition, broader cross-guard coverage,
+compact proof construction and efficient arbitrary-SAT expansion remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

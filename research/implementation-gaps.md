@@ -8896,3 +8896,37 @@ and 4,174 artifacts / 73 manifests are unchanged. Structural authority remains
 2,614 patterns / 259 pairs / 17 missing children, original 17/24 / 999 steps and
 separate supplemental 24/24 / 208. The paper builds to 199 pages with 64 unchanged
 proof blocks. No new Lean, minimum-core or unrestricted polynomial SAT result.
+
+
+## 2026-11-17: retain causal discovery and compare proof choices
+
+[Retained causal loading](retained-causal.md) avoids all 2,851 repeated discovery
+node visits, reducing preparation 2.29443 -> 0.08099 seconds and total runtime
+12.74826 -> 10.63701 seconds (16.56%) against rebuilding. The frontier files
+and proof databases are identical, and every match plus complete cold lineage
+remains checked. Pending roots still require the causal materializer.
+
+Against loading the legacy frontier, six extra hits reduce expansions 120 -> 93
+(22.5%), but total time is effectively flat and measured peak RSS rises 14.56%.
+On the 19 targets both banks cover, causal materialization creates 74 rows versus
+33 for legacy. Choosing an already cheaper proof is the next matched experiment;
+that apparent 41-row opportunity is not a guaranteed saving under changed cache
+histories. Remaining work comprises 74 negative / 19 positive expansions. Negative
+cases 14/161 cost 19/15; SAT cases 45/91 cost 14/five. All measured transfers still
+share their first origin's guard, so broad cross-guard coverage remains open.
+
+Resume `experiments/results/cnf-retained-causal/checkpoint.json` (19,091 keys).
+It adds `retained_causal_study` and `retained_causal_decisions`, preserving earlier
+frontiers, their pending entries and every prior field. Both measured indices
+retain their eight-catalog / 389-origin lineage; this run adds no new sources.
+The causal frontier has 48 ready roots and 128 pending in the union. Incremental
+causal discovery from new batches remains separate and unimplemented here.
+
+All 492 tests, nine complete archive audits, all union nodes, 1,997 inherited and
+192 new decisions pass without fresh validation search. All 381 prior sources
+and 4,230 artifacts / 74 manifests remain unchanged. The broader test log retains
+24 unclosed-SQLite ResourceWarnings during older tests; focused new tests emit
+none with warnings enabled, and allocation origins are untraced. Structural
+authority remains 2,614 patterns / 259 pairs / 17 missing children, original
+17/24 / 999 steps and separate supplemental 24/24 / 208. The paper builds cleanly
+to 200 pages with 64 unchanged proof blocks. No new Lean or general SAT bound.

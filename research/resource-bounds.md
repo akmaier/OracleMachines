@@ -2690,3 +2690,31 @@ caching. All observed support hits still share their first origin's guard;
 neither broad cross-guard coverage nor a minimum-core or uniform polynomial
 bound follows. The latest residual work is 95 negative expansions and five on
 one SAT query, so it must not be described as entirely negative.
+
+## 2026-11-17: load acquired causal supports and retain the full audit
+
+[Retained causal loading](retained-causal.md) replaces re-extraction from 389
+old origins with reading, fingerprinting and indexing the saved 176-entry bank.
+These operations still cost its serialized bytes, parsed/copy state and clause
+normalization. Matched core proofs remain checked; missing roots require causal
+materialization. Full cold proof/query and lineage audit still covers the complete
+archive and all used-index origins. No persisted unchecked validity flag is used.
+
+Discovery node visits fall 2,851 -> 0, preparation 2.29443 -> 0.08099 seconds,
+and complete time 12.74826 -> 10.63701 seconds (16.56%) against rebuild. Query
+time rises 46.39% as discovery no longer warms checks. Proof databases and saved
+frontier files are identical. Original acquisition is still charged in history.
+
+Against loading the 207-entry legacy frontier, six extra hits cut expansions
+120 -> 93 (22.5%) but complete time is effectively flat: 0.67% higher, with mixed
+paired signs. New rows grow 319 -> 365 because materialization grows 33 -> 100
+rows. On 19 overlapping targets, the respective materialization counts are
+33 and 74. Choosing an already cheaper proof is the next candidate; a 41-row
+saving is not established without a matched run because cache histories interact.
+
+Mean peak RSS rises 14.56% against legacy and 11.24% against rebuild; the cause
+is not established. Gzip plus first-trial raw sidecars is 12,173,774 bytes versus
+12,657,545 for legacy. Full cold audit and compression consume 41.29% and 33.65%
+of retained time. These finite measurements do not improve worst-case proof
+volume or arbitrary-SAT bounds. Remaining search includes 74 negative and 19
+positive expansions; all measured transfers still share their first origin's guard.

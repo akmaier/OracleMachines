@@ -12,7 +12,61 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse positive premise results and conditioned families
+## Current investigation: solve and lift nonterminal conditioned families
+
+[Positive-premise recovery](positive-premise.md) now reuses a model already
+present in saved discovery. Case 50 falls from three acquired nodes / 2,503
+native bytes to one checked model node / 1,482 bytes. Thirteen earlier control
+contexts retain their exact certificates. Fresh gated-Horn cases 26/54 also
+close this way: total additions fall **410 -> 406 nodes / 472,534 -> 469,867
+native bytes**, with two model publications and six fewer expansions. Existing
+search limits, admitted choices and the candidate prefix remain unchanged.
+
+This is a small measured acquisition saving. Mean query time falls
+**0.4220 -> 0.4018 s**, but complete-worker paired differences are
+**-0.2144/+0.0855 s**. Diagnostic sidecars grow about 0.36%; process RSS is
+essentially unchanged. Discovery costs remain, and native baseline still uses
+only 0.3507 s query time versus 0.4018 s. Full cold replay remains about 10.8 s.
+Do not present this as a general end-to-end or memory scaling improvement.
+
+**Next discovery priority:** use the already saved propagation trace and source
+mapping to solve and lift **nonterminal conditioned Horn, dual-Horn and two-CNF
+residuals**. The earlier audit found 89 recognized/constant candidates across
+20 targets. Start with the gated-Horn conditions: current discovery pays
+73,886 propagation visits against 5,751 acquisition visits after recovery.
+A checked positive child model suffices for its parent. A negative condition
+requires the other branches or another sound parent certificate. Charge family
+recognition, residual solving, transport and verification; avoid replaying the
+baseline propagation. Preserve case 50 and fresh 26/54 as positive controls,
+146 as positive-child control, guards 43/172, regression 144, and misses
+0/131/159. Apply the same recognition to unlabelled mixed and edited inputs.
+
+**Remaining discovery restriction:** recovery scans only already retained
+attempts after the old selector finishes. Earlier positive stopping, candidate
+ranking and a positive-witness path outside the negative binary filter remain
+open. The explicit no-binary positive example is retained in the tests.
+The signed negative-probe filter remains supporting work, not implemented.
+Random three-CNF and coupled parity still account for 257 acquisition nodes /
+46,651 propagation visits; the new recovery path does not help them. Efficient
+coverage of arbitrary CNF and a uniform polynomial resource bound remain open.
+
+
+All **1,120 tests**, 31 focused tests, 135 counter audits and independent
+reconstruction pass. Resume `experiments/results/cnf-positive-premise/checkpoint.json`:
+**23,987 native keys**, preserving all 23,577 prior payloads, with 210 new
+composed records alongside 3,371 inherited records, 2,957 ordinary decisions
+and six projections. The union uses 76,537,856 database bytes / 5,571,577
+compressed bytes. Three alternate model payloads remain in measured evidence
+(six occurrences); preserved native payloads are never replaced. Ready/pending
+banks remain 132/38, 141/66, 86/90 and 86/117. All 508 earlier source fingerprints,
+5,780 artifacts and 95 manifests remain intact. The paper builds at 212 pages
+with all 64 existing proof blocks unchanged. The initial replay validator's
+scratch-directory failure and its separate corrected replay revision are retained.
+No new Lean theorem, structural authority or unrestricted-SAT bound is claimed.
+
+New manifest: **138 artifacts**. Next preservation audit: **5,918 artifacts / 96 manifests**. Final source ledger: **514**.
+
+## Previous investigation: reuse positive premise results and conditioned families
 
 [Residual binary filtering](binary-probe.md) is implemented as an optional policy.
 It preserves the original candidate prefix and all selected results. On 60 new

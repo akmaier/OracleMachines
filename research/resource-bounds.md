@@ -3275,3 +3275,34 @@ model. The current acquisition uses three rows / 2,503 native bytes; direct
 publication has not been implemented or priced. Recognized conditioned families
 and the signed-incidence refinement require separate matched evaluation. The
 83 polarity-futile probes account for 28,774 visits, not a measured speedup.
+
+
+## 2026-11-17: positive-premise transport before fallback
+
+See [positive-premise recovery](positive-premise.md) for scope and measurements.
+A saved positive-terminal trace of F AND u supplies a model of F after binding,
+unit-reason checking, actual residual checking, name transport and verification
+of every original clause. A reason clause cannot recur in a valid unit trace,
+since its first use satisfies it; total reason lengths are bounded by premise
+length. Additional recovery needs O(k+L+n) expected dictionary operations and
+O(L+n) temporary words after separately charging both canonicalizations and
+full keys. This excludes earlier discovery, publication/archive checking,
+persistence and inherited replay. Source integer bit lengths remain charged.
+
+Fresh recovery scans 187 saved attempts, copies 466 literals, checks 82 reason
+literals and verifies 466 source/assumption literals. It avoids six expansions
+but publishes two checked model nodes, for four fewer retained new nodes.
+Native bytes fall 472,534 -> 469,867 (about 0.56%), while diagnostic sidecars
+grow about 0.36%. Trial databases fall by 8,192 bytes, compressed archives by
+1,534 bytes; mean process RSS is essentially unchanged. The evidence union
+preserves prior nodes and alternate witnesses, so this acquisition saving does
+not delete previously stored results. Complete-worker paired differences
+-0.2144/+0.0855 seconds do not establish a stable end-to-end saving.
+
+The preservation union has 23,987 native keys, 76,537,856 database bytes and
+5,571,577 compressed bytes. It includes the measured native-baseline additions;
+three alternate model payloads are retained in trial evidence. Thus the smaller
+recovered trial is not presented as a shrinking historical database. The
+independent truth check enumerates 22,052,864 assignments over 48 small CNFs in
+1.384 seconds after timing; generation/selection costs 1.559 seconds separately.
+Full reconstruction takes 267.70 seconds outside production measurements.

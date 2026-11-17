@@ -5609,3 +5609,40 @@ Prior 503 sources / 5,655 artifacts / 94 manifests, structural authorities and
 all 64 manuscript proof blocks remain unchanged. The 211-page paper builds
 without overfull or undefined warnings. No new Lean theorem or unrestricted-SAT
 resource bound is claimed.
+
+
+## 2026-11-17: checked positive-premise model recovery
+
+[Positive-premise recovery](positive-premise.md) now lifts and checks complete
+models from already saved unit screens of target-plus-assumption. It preserves
+existing admitted choices and probes; a full target model, checked again by
+native publication, replaces fresh fallback search. Saved case 50 shrinks
+3 -> 1 acquired nodes / 2,503 -> 1,482 native bytes. Thirteen older controls
+retain exact certificates. Fresh gated-Horn cases 26/54 also save two nodes
+each; stream additions are 410/406 nodes and 472,534/469,867 native bytes for
+previous/recovered policies. Neither broad taxonomy coverage nor an efficient
+arbitrary-SAT reduction follows.
+
+Mean query times are 0.4220/0.4018 seconds. Complete paired differences have
+opposite signs, diagnostic sidecars grow about 0.36%, and process RSS is
+essentially unchanged. Earlier discovery is still charged. Gated-Horn discovery
+uses 73,886 propagation visits versus 5,751 acquisition visits. The next target
+is checked solving and model transport for nonterminal conditioned Horn,
+dual-Horn and two-CNF residuals, with exact negative-branch recomposition.
+Positive discovery outside the binary filter and early positive stopping remain
+open. All 1,120 tests pass; seven new tests include 2,048 small transported
+clause-set comparisons, malformed traces, false residual hints and cold replay.
+
+
+All **1,120 tests**, 31 focused tests, 135 counter audits and independent
+reconstruction pass. Resume `experiments/results/cnf-positive-premise/checkpoint.json`:
+**23,987 native keys**, preserving all 23,577 prior payloads, with 210 new
+composed records alongside 3,371 inherited records, 2,957 ordinary decisions
+and six projections. The union uses 76,537,856 database bytes / 5,571,577
+compressed bytes. Three alternate model payloads remain in measured evidence
+(six occurrences); preserved native payloads are never replaced. Ready/pending
+banks remain 132/38, 141/66, 86/90 and 86/117. All 508 earlier source fingerprints,
+5,780 artifacts and 95 manifests remain intact. The paper builds at 212 pages
+with all 64 existing proof blocks unchanged. The initial replay validator's
+scratch-directory failure and its separate corrected replay revision are retained.
+No new Lean theorem, structural authority or unrestricted-SAT bound is claimed.

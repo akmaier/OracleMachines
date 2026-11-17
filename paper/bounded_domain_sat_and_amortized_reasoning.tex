@@ -7092,11 +7092,10 @@ The saved screens also reveal a more direct reuse gap. Eighty-nine conditioned
 residuals in twenty queries are syntactically constant, Horn, dual-Horn or
 two-CNF. Recognition alone does not establish their answers or a saving. In case
 50, however, assumption $-169$ leaves an empty residual, and independent
-transport of the saved unit values verifies a complete target model. The current
-selector ignores this positive premise result because it selects only unit
-conflicts, then acquires three rows and 2,503 native bytes. Checked direct
-publication of that available model is the next concrete reuse target; its
-alternate acquisition cost has not been measured. Extending this route to
+transport of the saved unit values verifies a complete target model. The selector in this study
+ignores the positive premise result because it selects only unit conflicts,
+then acquires three rows and 2,503 native bytes. The following experiment
+implements and measures direct publication of that available model. Extending this route to
 recognized conditioned families requires checked model lifting or negative
 certificates and exact recomposition. One refuted condition does not refute the
 parent, and a filter for negative unit probes need not exclude useful positive
@@ -7110,6 +7109,54 @@ propagation visits, on gated Horn and graph-colouring inputs. This refinement
 has not been timed or enabled. Neither condition decides satisfiability or
 provides an efficient arbitrary-CNF decomposition; the native search, shared
 checking and retained-state costs remain.
+
+\paragraph{Recovering positive premise models.}
+An optional extension examines the saved premise screens before fallback
+acquisition. For a screen of $F\land u$, it checks the exact formula binding,
+each unit reason and the actual empty residual. It transports the values back
+to source variable names and verifies every clause of $F$ and the assumption
+$u$. A verified model of $F\land u$ supplies a model of $F$; it does not require
+a negative-premise certificate or further search. A refutation of only one
+condition would not justify the same conclusion. Existing admitted results
+retain priority, and the extension neither adds probes nor stops discovery
+early. In particular, the negative-probe filter can miss useful positive
+witnesses: $(x\lor a\lor b)\land(x\lor\neg a\lor\neg b)$ is satisfied under
+$x=1$, although its original clauses have no binary incidence.
+
+Unit-reason checking has a useful bound. Once a reason clause forces its last
+unassigned literal, that clause is satisfied and cannot serve again. The sum
+of the checked reason lengths is therefore at most the canonical premise
+length. After separately charging canonicalization of the target and premise,
+full-key construction and variable-name bit lengths, the additional scan,
+copying, reason checks, restriction and model verification take $O(k+L+n)$
+expected dictionary operations and $O(L+n)$ temporary words for $k$ retained
+attempts, $L$ input literal occurrences and $n$ active variables. This is an
+incremental recovery bound. Earlier discovery, native publication, archive
+census, serialization and inherited replay remain charged.
+
+At case 50's saved prefix, recovery replaces three acquired nodes and 2,503
+native bytes with one checked model node and 1,482 bytes. Both policy orders
+preserve this saving, while thirteen older controls retain their exact native
+payloads and composed records. A further sixty-query stream contains two new
+gated-Horn successes, on twelve and sixteen variables. Each replaces three
+search nodes with one model node. All modes answer 44 SAT and 16 UNSAT queries.
+Across the fresh stream, additions fall from 410 nodes and 472,534 native bytes
+to 406 nodes and 469,867 bytes. Discovery/acquisition propagation falls from
+171,882 to 170,891 visits. Recovery additionally scans 187 saved attempts,
+copies 466 premise literals, checks 82 reason literals and verifies 466
+source/assumption literals. The previous discovery work is unchanged.
+
+Mean query time falls from 0.4220 to 0.4018 seconds, with both paired differences
+negative. Complete worker times are 22.1767 and 22.1122 seconds, but their
+paired differences have opposite signs. Full cold replay still takes about
+10.8 seconds. Diagnostic sidecars grow from approximately 1.977 to 1.984 MB;
+the recovered models and extra accounting fields therefore offset part of the
+native proof saving. Native baseline is cheaper at 0.3507 seconds of query
+time and 67,029 propagation visits. This evidence supports a small acquisition
+saving on the measured conditions, with no stable end-to-end or memory-scaling
+guarantee. Nonterminal conditioned families, positive opportunities excluded by
+the probe policy and unrestricted SAT remain open. Earlier certificates and
+alternate witnesses are preserved rather than replaced.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}

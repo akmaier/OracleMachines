@@ -28,6 +28,16 @@ classes.
 
 ## Paper
 
+[Reuse satisfying assignments already found by premise probes](research/positive-premise.md).
+Checked recovery replaces three acquired nodes with one in the motivating saved
+case and two fresh gated-Horn cases. Across sixty fresh queries, native additions
+fall 410 -> 406 nodes; complete timing remains inconclusive and diagnostic
+sidecars grow slightly. All 1,120 tests pass. The next target is solving and
+lifting nonterminal conditioned families without repeating earlier discovery.
+Evidence is retained in `experiments/results/cnf-positive-premise/`.
+Resume its `checkpoint.json`: 23,987 native keys with all previous payloads preserved;
+independent replay, counter audits and the 212-page manuscript build pass.
+
 [Skip structurally futile premise probes](research/binary-probe.md).
 The optional residual binary filter removes 192 of 386 probes on 60 new queries,
 reduces propagation work 29.07% and query/warm sidecars 15.13%, preserving identical

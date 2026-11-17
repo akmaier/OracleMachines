@@ -12,7 +12,72 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reject structurally futile discovery probes
+## Current investigation: reuse positive premise results and conditioned families
+
+[Residual binary filtering](binary-probe.md) is implemented as an optional policy.
+It preserves the original candidate prefix and all selected results. On 60 new
+queries it removes **192/386 probes**, cuts discovery/acquisition propagation
+**252,999 -> 179,463 (29.07%)**, and reduces query/warm sidecars **15.13%**.
+All modes retain identical **450 new rows / 521,286 native bytes**. Twenty-six
+historical arms preserve all certificates, useful guards and model recovery;
+none permits a skip, so they retain the incidence-scan overhead as controls.
+
+**Do not infer a total runtime improvement.** Query differences have opposite
+signs; complete workers are **21.947/22.234 s** for previous/filtered policies.
+Cold replay remains about 10.8 s. Native baseline uses only 69,351 propagation
+visits. This is a verified discovery-work and trace-storage reduction, with
+unchanged native proof space and no general speedup established.
+
+The user's SAT-to-SAT reduction suggestion now frames this search explicitly:
+construct and check low-cost transformations to acquired or tractable targets,
+including matching and model/proof transport in the cost. Cheap conversion alone
+does not solve an unfamiliar hard target. Conditioning needs exact branch
+recomposition; polynomial online lookup with expensive offline compilation is a
+different claim from a uniform polynomial decider. See the source-backed
+[reduction discussion](binary-probe.md#remaining-gaps) and manuscript oracle section.
+
+**Next discovery priority:** the saved premise screens expose 89 recognized
+conditioned residuals across 20 targets. In case 50, assumption `-169` already
+closes positively, and independent transport verifies a complete target model.
+The selector ignores it because it looks only for a unit conflict, then acquires
+three rows / 2,503 bytes. Implement checked positive-premise recovery and price
+it at that saved prefix. Follow with Horn/dual-Horn/two-CNF conditional results
+and exact recomposition; family recognition alone is not a SAT decision. One
+refuted condition does not refute the parent. This new model/publication route
+is not implemented or timed. Keep candidate filters scoped to negative unit
+probes so they do not silently remove positive-witness opportunities.
+
+**Supporting refinement:** keep signed binary incidence after consistent
+unit closure. An unassigned candidate needs its falsified literal in a residual
+binary clause to seed another unit. The posthoc audit identifies **83 remaining
+futile probes / 28,774 visits** (35 gated Horn, 48 graph-colouring probes).
+Implement and price this signed filter without refilling the original candidate
+prefix, retain successful historical guards and the propagation-created-binary
+counterexample, and reuse the existing baseline trace. This stronger condition
+is not implemented or timed yet. It does not decide SAT or deeper closure.
+
+**Next acquisition targets:** gated Horn pays 75,825 discovery visits against
+6,572 native visits. Random 3-CNF and coupled parity still account for 279/432
+new-family acquisition rows and 45,877/66,607 visits. Investigate mixed-family
+conditioning and affine/leftover reuse at saved prefixes; preserve old cases
+32/56/52/21 and 0/131/159, positive controls 36/146 and useful/regressing guards
+43/172/144. Recognition, state checking and persistence must remain charged.
+
+All **1,113 tests**, 24 focused tests and independent reconstruction pass.
+Resume `experiments/results/cnf-binary-probe/checkpoint.json`: **23,577 native
+keys**, all 23,127 earlier payloads, **206 new composed records**, 3,165 earlier
+composed records, 2,957 ordinary decisions and six projections. No alternate
+payloads are needed. The union occupies 75,649,024 database bytes / 5,474,412
+compressed bytes. Ready/pending banks remain 132/38, 141/66, 86/90 and 86/117.
+Prior 503 sources / 5,655 artifacts / 94 manifests, structural authorities and
+all 64 manuscript proof blocks remain unchanged. The 211-page paper builds
+without overfull or undefined warnings. No new Lean theorem or unrestricted-SAT
+resource bound is claimed.
+
+
+New manifest: **125 artifacts**. Next preservation audit: **5780 artifacts / 95 manifests**. Final source ledger: **508**.
+
+## Previous investigation: reject structurally futile discovery probes
 
 [Cross-family evaluation](cross-family.md) now separates raw-query novelty from
 unfamiliar acquisition. All 48 new-family targets remain unfamiliar after

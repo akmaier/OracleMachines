@@ -28,6 +28,16 @@ classes.
 
 ## Paper
 
+[Skip structurally futile premise probes](research/binary-probe.md).
+The optional residual binary filter removes 192 of 386 probes on 60 new queries,
+reduces propagation work 29.07% and query/warm sidecars 15.13%, preserving identical
+native certificates. Timing does not establish an end-to-end gain. The next
+reuse target is a valid target model already present in case 50's discarded
+premise probe; direct recovery is not implemented yet. Results and controls are preserved in
+`experiments/results/cnf-binary-probe/`. All 1,113 tests and independent replay
+pass. Resume `experiments/results/cnf-binary-probe/checkpoint.json`: 23,577 native
+keys and 206 new composed records, with every earlier result preserved.
+
 [Unfamiliar CNFs expose wasted discovery](research/cross-family.md).
 All 48 new-family targets require unfamiliar acquisition, while 12 neighbour
 controls are known after preparation. Discovery performs 384 unsuccessful probes

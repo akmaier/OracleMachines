@@ -3233,3 +3233,45 @@ unit propagation, but this is no decision procedure for arbitrary SAT. The
 other 192 probes also fail on this corpus but are not excluded by this condition.
 Random 3-CNF and coupled parity dominate fresh acquisition; inherited replay
 continues to dominate end-to-end time. All 1,106 tests pass.
+
+
+## 2026-11-17: residual binary filtering costs
+
+[The optional filter](binary-probe.md) adds an incidence scan after existing unit
+propagation: O(m+B) expected set operations for m residual clauses and B binary
+occurrences, O(b log(b+1)) comparisons to order b distinct source names in the
+trace, and O(k) expected operations for candidate membership/skip recording.
+Additional live state is O(b+k) words at the existing candidate cap k. Name bit
+lengths and JSON serialization remain charged. There is no new bound on native
+search, cumulative acquisition, retained proof size or arbitrary SAT.
+
+On the 60-query matched stream, 192 skips replace expensive screens. Previous/
+filtered propagation is 252,999/179,463 visits, query/warm sidecars approximately
+2.346/1.991 MB, with identical 450-row / 521,286-byte native additions. The filter
+scans 3,020 residual clauses and 1,252 binary literals and transports 287 names.
+The 13 historical controls allow zero skips and retain that overhead: scan
+684 clauses / 608 binary literals, transport 242 names, and grow full reports
+727,547 -> 737,707 bytes. Their native delta/record storage stays 363,672 bytes.
+
+Mean baseline/previous/filtered query times are 0.371/0.472/0.458 seconds;
+complete workers 21.567/21.947/22.234. Previous/filtered query differences are
+-0.0414/+0.0134 seconds, complete differences +0.0850/+0.4891. Thus the measured
+work/trace saving establishes no stable query or end-to-end speedup. Cold replay
+10.658/10.806/10.802 seconds dominates. Setup means 4.324/4.405/4.674, compression
+3.903/3.905/3.920, warm-bank setup 1.949/1.990/1.998. Mean process RSS is
+715,898,880/693,698,560/712,998,912 bytes, including inherited state. Native
+baseline still does substantially less work.
+
+Generation/selection costs 1.572 seconds separately. Independent bitset truth
+validation enumerates 22,083,584 assignments over 48 small formulas after timing
+in 1.396 seconds; it is exponential and not part of the solver. Posthoc diagnosis
+is separately charged. All 23,127 previous native payloads remain intact; the
+union grows to 23,577 keys, 75,649,024 database bytes and 5,474,412 compressed
+bytes, and retains 206 new composed records. This evidence union is not a
+single policy's live state. All 1,113 tests pass.
+
+The next cheap discovery target is case 50's already valid positive premise
+model. The current acquisition uses three rows / 2,503 native bytes; direct
+publication has not been implemented or priced. Recognized conditioned families
+and the signed-incidence refinement require separate matched evaluation. The
+83 polarity-futile probes account for 28,774 visits, not a measured speedup.

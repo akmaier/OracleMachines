@@ -286,6 +286,28 @@ Hence, we must distinguish the NP-complete parent problem from its fixed finite 
 
 Let us now consider a fixed language $A\subseteq\bits^*$. We write $\Pclass^A$ and $\NPclass^A$ for the deterministic and nondeterministic polynomial-time oracle classes. The oracle returns an exact membership bit. We charge writing the query and processing the answer, while leaving the oracle's internal computation uncharged. A Karp reduction is a polynomial-time many-one map with $x\in L\iff f(x)\in A$. A Cook reduction is a polynomial-time oracle computation. It may make several adaptive queries. Note that neither reduction makes the target language polynomial-time decidable by definition.
 
+Polynomial SAT-to-SAT conversion can expose reusable answers, but the target
+must still be answered. For a certified reduction $R$ with
+$F\in\SAT\iff R(F)\in\SAT$, the query cost includes constructing $R(F)$,
+recognizing its stored representation, obtaining its answer and transporting
+any required model or certificate. A cheap encoding change alone need not
+reduce acquisition. If a prebuilt oracle answers the target, the online path
+can be cheap while construction and retained space remain costly
+\citep{darwiche2002}. Conversely, a uniformly polynomial reduction from every
+CNF to a polynomial-time decidable family would, by composition, give
+$\Pclass=\NPclass$.
+
+Conditioning supplies a useful but different transformation. Each specified
+restriction is cheap to construct, and a model of the restricted formula lifts
+to the source with the chosen assignment. A refuted restriction excludes only
+that assignment. Covering a supplied set of $k$ conditioning variables can
+require $2^k$ branches, and finding useful variables has its own cost. This is
+the established backdoor perspective of \citet{williams2003backdoors}.
+Our expansion objective is therefore to discover and verify cheap paths to
+already acquired or tractable residuals, retaining exact recomposition and
+charging the search for those paths. Mere equisatisfiability does not authorize
+reusing arbitrary learned clauses or proofs without a checked translation.
+
 \citet{baker1975} established the existence of fixed oracles $A$ and $B$ with
 \begin{equation}
 \Pclass^A=\NPclass^A,\qquad
@@ -7031,6 +7053,64 @@ probe elimination alone cannot establish a large end-to-end gain. This study
 extends evaluation coverage and preserves the failed discovery traces; it adds
 no new structural authority or unrestricted-SAT resource bound.
 
+\paragraph{Filtering impossible premise probes.}
+The next optional policy implements the residual binary-incidence condition.
+It reuses the existing baseline propagation, retains the original candidate
+order and cap, and records compact skips without replacing them by later
+candidates. Thus the selected successful proposal remains unchanged. Incidence
+construction scans the residual clauses and their binary literals; the trace
+also orders the distinct source names. The implementation requires
+$O(m+B+b\log(b+1)+k)$ additional expected set operations and comparisons for
+$m$ residual clauses, $B$ binary-literal occurrences and $b$ incident variables,
+with $O(b+k)$ additional words for incidence and skips at candidate cap $k$.
+Name bit lengths, normalization, baseline propagation, ranking and serialization
+remain charged. This bound does not cover the native remaining search.
+
+Twenty-six exact-prefix arms preserve all earlier selected results, native
+payloads and composed records. They still require all 21 original probes, so
+the new scan is overhead in these controls. A further 60-query stream contains
+48 new-family targets and twelve neighbours; 49 targets are unfamiliar after
+preparation. Six workers run native baseline, previous and filtered policies,
+then reverse that order. All answer 43 SAT and 17 UNSAT queries and retain
+identical additions of 450 native rows and 521,286 native bytes. The filter
+removes 192 of 386 premise probes on random three-CNF and coupled-parity inputs.
+Discovery/acquisition propagation falls from 252,999 to 179,463 visits, a
+29.07\% reduction. It additionally scans 3,020 residual clauses and 1,252 binary
+literals and transports 287 source names. Query/warm sidecars shrink from
+approximately 2.346 to 1.991 MB (15.13\%); native proof space is unchanged.
+
+Mean query times are 0.472 and 0.458 seconds for previous and filtered policies,
+but paired differences have opposite signs. Complete times are 21.947 and
+22.234 seconds, with both pairs slower after filtering. Cold replay remains
+about 10.8 seconds. These measurements establish work and trace-storage savings,
+not a stable query or end-to-end speedup. Native baseline uses 69,351 propagation
+visits and 0.371 seconds of query time. All failed screens and earlier results
+remain preserved, and independent truth tables check the small fresh formulas
+after timing.
+
+The saved screens also reveal a more direct reuse gap. Eighty-nine conditioned
+residuals in twenty queries are syntactically constant, Horn, dual-Horn or
+two-CNF. Recognition alone does not establish their answers or a saving. In case
+50, however, assumption $-169$ leaves an empty residual, and independent
+transport of the saved unit values verifies a complete target model. The current
+selector ignores this positive premise result because it selects only unit
+conflicts, then acquires three rows and 2,503 native bytes. Checked direct
+publication of that available model is the next concrete reuse target; its
+alternate acquisition cost has not been measured. Extending this route to
+recognized conditioned families requires checked model lifting or negative
+certificates and exact recomposition. One refuted condition does not refute the
+parent, and a filter for negative unit probes need not exclude useful positive
+witnesses.
+
+A signed version of the condition remains open for implementation. An unassigned
+assumption can seed another unit only through a binary clause containing its
+falsified literal; a binary clause with the satisfied polarity disappears.
+The posthoc audit identifies 83 further futile probes, accounting for 28,774
+propagation visits, on gated Horn and graph-colouring inputs. This refinement
+has not been timed or enabled. Neither condition decides satisfiability or
+provides an efficient arbitrary-CNF decomposition; the native search, shared
+checking and retained-state costs remain.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 
@@ -7612,6 +7692,13 @@ Wen, H.~X. (2010b).
 Knowledge recognition algorithm enables $P=NP$.
 \emph{arXiv:1009.0884}. Unestablished $P=NP$ claim.
 \url{https://arxiv.org/abs/1009.0884}.
+
+\bibitem[Williams et~al.(2003)Williams, Gomes, and Selman]{williams2003backdoors}
+Williams, R., Gomes, C.~P., and Selman, B. (2003).
+Backdoors to typical case complexity.
+In \emph{Proceedings of the Eighteenth International Joint Conference on
+Artificial Intelligence}, pp.~1173--1177.
+\href{https://ijcai.org/proceedings/2003/167}{IJCAI proceedings}.
 
 \bibitem[Williams(2025)]{williams2025conp}
 Williams, R. (2025).

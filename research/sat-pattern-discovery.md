@@ -5568,3 +5568,44 @@ bytes / 5,364,377 compressed bytes. Ready/pending banks remain 132/38, 141/66,
 86/90 and 86/117. All earlier 498 sources, 5,617 artifacts and 93 manifests
 are unchanged. Structural authorities and all 64 manuscript proof blocks remain
 unchanged. The 209-page manuscript builds without overfull or undefined warnings.
+
+
+## 2026-11-17: skip binary-ineligible probes and retain positive discovery targets
+
+[Residual binary filtering](binary-probe.md) now skips unassigned candidates with
+no binary incidence after consistent baseline propagation. Original ranking,
+candidate prefix and successful selections are preserved; skipped candidates do
+not refill the budget. The saved trace records each omission. Independent
+reconstruction checks all omitted screens and source bindings, and 2,048 small
+formula/representation comparisons preserve every previous selection.
+
+Twenty-six historical arms retain identical native/composed certificates, with
+21 probes and 38,189 visits in either policy. Filtering adds incidence-scan
+cost there. On 60 further excluded queries, 49 targets remain unfamiliar after
+preparation. The filter removes 192/386 probes, cuts propagation 252,999 ->
+179,463 (29.07%) and query/warm sidecars 15.13%, with identical 450-row / 521,286
+native-byte additions. Query timing differences have opposite signs; complete
+times regress 21.947 -> 22.234 seconds. Native baseline uses only 69,351 visits.
+Cold replay remains dominant. No overall speedup is established.
+
+The next discovery target is a useful result discarded by premise probing:
+case 50's assumption -169 has an empty residual and an independently verified
+whole-target model, but the policy selects only unit conflicts and then acquires
+three native rows / 2,503 bytes. Implement and price positive-premise recovery
+at this saved prefix. Eighty-nine conditioned residuals across twenty queries
+are syntactically constant/Horn/dual-Horn/two-CNF; they still need checked
+acquisition and recomposition. One refuted condition does not refute the parent.
+As supporting work, signed incidence could exclude 83 remaining probes / 28,774
+visits. Neither new route is implemented or timed. Keep negative-probe filters
+scoped so useful positive witnesses are not silently excluded.
+
+All **1,113 tests**, 24 focused tests and independent reconstruction pass.
+Resume `experiments/results/cnf-binary-probe/checkpoint.json`: **23,577 native
+keys**, all 23,127 earlier payloads, **206 new composed records**, 3,165 earlier
+composed records, 2,957 ordinary decisions and six projections. No alternate
+payloads are needed. The union occupies 75,649,024 database bytes / 5,474,412
+compressed bytes. Ready/pending banks remain 132/38, 141/66, 86/90 and 86/117.
+Prior 503 sources / 5,655 artifacts / 94 manifests, structural authorities and
+all 64 manuscript proof blocks remain unchanged. The 211-page paper builds
+without overfull or undefined warnings. No new Lean theorem or unrestricted-SAT
+resource bound is claimed.

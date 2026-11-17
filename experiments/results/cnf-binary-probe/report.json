@@ -1,0 +1,192 @@
+{
+  "cases": {
+    "path": "experiments/results/cnf-binary-probe/cases.json",
+    "sha256": "4912d728726653ee1a26fb4a2c270e96f629a59aaa8c6c7ca4ced6bb7002320e"
+  },
+  "controls": {
+    "path": "experiments/results/cnf-binary-probe/controls/report.json",
+    "sha256": "e705b44f4474d0aea9c5092e26eda4ae22e6a6e56ffb638c76cf046c5bdacd94"
+  },
+  "protocol": {
+    "path": "experiments/results/cnf-binary-probe/protocol.json",
+    "sha256": "f2d40cb4f2ff15c14604690ab8608d91186d3bd688a8fd3d26e6b386214c26ad"
+  },
+  "samples": [
+    {
+      "mode": "baseline",
+      "path": "experiments/results/cnf-binary-probe/baseline-0/report.json",
+      "repeat": 0,
+      "sha256": "de864c388c3b27cabb45fcd4043145cfb47b97b1331ed8948eadedcfb2882da7"
+    },
+    {
+      "mode": "positive",
+      "path": "experiments/results/cnf-binary-probe/positive-0/report.json",
+      "repeat": 0,
+      "sha256": "3495cb17125e6d3a27d4f919ca4c4a26c6a217a36dd283329ee1b056f1a8446c"
+    },
+    {
+      "mode": "filtered",
+      "path": "experiments/results/cnf-binary-probe/filtered-0/report.json",
+      "repeat": 0,
+      "sha256": "139ec49ee128d147af5d893f3000168a9d904e185e0122b75e0ba7b44c860938"
+    },
+    {
+      "mode": "filtered",
+      "path": "experiments/results/cnf-binary-probe/filtered-1/report.json",
+      "repeat": 1,
+      "sha256": "ef312bc85c651c909805edf9681e816cac28dfc825b08bd93f8220dbae99f7a8"
+    },
+    {
+      "mode": "positive",
+      "path": "experiments/results/cnf-binary-probe/positive-1/report.json",
+      "repeat": 1,
+      "sha256": "0350e4eca5426caa72f3fc8eb4dbfc7fd431065e5fddb0dafca194396c6bf3ff"
+    },
+    {
+      "mode": "baseline",
+      "path": "experiments/results/cnf-binary-probe/baseline-1/report.json",
+      "repeat": 1,
+      "sha256": "2ed18ccf8723239d2c4e91eb6d457b4e12ccb250fde74de08e0492f63ccd1f23"
+    }
+  ],
+  "summary": {
+    "baseline": {
+      "admission_calls": 0,
+      "admission_reasons": {},
+      "binary_filter_clause_visits": 0,
+      "binary_filter_literal_visits": 0,
+      "binary_filter_name_transports": 0,
+      "binary_probe_skips": 0,
+      "compressed_bytes": 5474412,
+      "database_bytes": 75649024,
+      "expanded_nodes": 440,
+      "known_after_preparation": 11,
+      "local_calls": 0,
+      "local_guards": 0,
+      "local_terminals": 0,
+      "mean_cold_seconds": 10.658120396081358,
+      "mean_complete_worker_seconds": 21.567487416556105,
+      "mean_compression_seconds": 3.9029894375707954,
+      "mean_peak_rss_bytes": 715898880.0,
+      "mean_preparation_seconds": 4.199027312686667,
+      "mean_query_seconds": 0.37082162708975375,
+      "mean_serialization_seconds": 0.004063354572281241,
+      "mean_setup_seconds": 4.324432521127164,
+      "mean_warm_query_seconds": 0.007073147688060999,
+      "mean_warm_setup_seconds": 1.9490116038359702,
+      "model_publications": 0,
+      "new_nodes": 450,
+      "new_payload_units": 521286,
+      "nodes": 23577,
+      "positive": 43,
+      "positive_models": 0,
+      "premise_probes": 0,
+      "propagated_reuses": 0,
+      "propagation_literal_visits": 69351,
+      "queries": 60,
+      "repeat_new_nodes": 0,
+      "retained_prefixes": 0,
+      "row_digest": "2ffae9db3a496bd0e25a5ad32870cb2daa2082949aaa8a20129e1414e271af08",
+      "sidecar_bytes": [
+        1173390,
+        1173405
+      ],
+      "trace_publications": 0,
+      "unfamiliar_after_preparation": 49
+    },
+    "filtered": {
+      "admission_calls": 49,
+      "admission_reasons": {
+        "no-proposal": 48,
+        "retained-prefix": 1
+      },
+      "binary_filter_clause_visits": 3020,
+      "binary_filter_literal_visits": 1252,
+      "binary_filter_name_transports": 287,
+      "binary_probe_skips": 192,
+      "compressed_bytes": 5474412,
+      "database_bytes": 75649024,
+      "expanded_nodes": 439,
+      "known_after_preparation": 11,
+      "local_calls": 49,
+      "local_guards": 0,
+      "local_terminals": 0,
+      "mean_cold_seconds": 10.802293812390417,
+      "mean_complete_worker_seconds": 22.23433985398151,
+      "mean_compression_seconds": 3.920332916546613,
+      "mean_peak_rss_bytes": 712998912.0,
+      "mean_preparation_seconds": 4.5466126669198275,
+      "mean_query_seconds": 0.4575224795844406,
+      "mean_serialization_seconds": 0.007820958504453301,
+      "mean_setup_seconds": 4.673894270788878,
+      "mean_warm_query_seconds": 0.007043707650154829,
+      "mean_warm_setup_seconds": 1.9981024996377528,
+      "model_publications": 0,
+      "new_nodes": 450,
+      "new_payload_units": 521286,
+      "nodes": 23577,
+      "positive": 43,
+      "positive_models": 0,
+      "premise_probes": 194,
+      "propagated_reuses": 0,
+      "propagation_literal_visits": 179463,
+      "queries": 60,
+      "repeat_new_nodes": 0,
+      "retained_prefixes": 1,
+      "row_digest": "2ffae9db3a496bd0e25a5ad32870cb2daa2082949aaa8a20129e1414e271af08",
+      "sidecar_bytes": [
+        1990973,
+        1990982
+      ],
+      "trace_publications": 1,
+      "unfamiliar_after_preparation": 49
+    },
+    "positive": {
+      "admission_calls": 49,
+      "admission_reasons": {
+        "no-proposal": 48,
+        "retained-prefix": 1
+      },
+      "binary_filter_clause_visits": 0,
+      "binary_filter_literal_visits": 0,
+      "binary_filter_name_transports": 0,
+      "binary_probe_skips": 0,
+      "compressed_bytes": 5474412,
+      "database_bytes": 75649024,
+      "expanded_nodes": 439,
+      "known_after_preparation": 11,
+      "local_calls": 49,
+      "local_guards": 0,
+      "local_terminals": 0,
+      "mean_cold_seconds": 10.80639531253837,
+      "mean_complete_worker_seconds": 21.947264875052497,
+      "mean_compression_seconds": 3.9047505420167,
+      "mean_peak_rss_bytes": 693698560.0,
+      "mean_preparation_seconds": 4.279673541430384,
+      "mean_query_seconds": 0.4715424806345254,
+      "mean_serialization_seconds": 0.0085423334967345,
+      "mean_setup_seconds": 4.4048396872822195,
+      "mean_warm_query_seconds": 0.007133436156436801,
+      "mean_warm_setup_seconds": 1.9897391246631742,
+      "model_publications": 0,
+      "new_nodes": 450,
+      "new_payload_units": 521286,
+      "nodes": 23577,
+      "positive": 43,
+      "positive_models": 0,
+      "premise_probes": 386,
+      "propagated_reuses": 0,
+      "propagation_literal_visits": 252999,
+      "queries": 60,
+      "repeat_new_nodes": 0,
+      "retained_prefixes": 1,
+      "row_digest": "2ffae9db3a496bd0e25a5ad32870cb2daa2082949aaa8a20129e1414e271af08",
+      "sidecar_bytes": [
+        2345856,
+        2345858
+      ],
+      "trace_publications": 1,
+      "unfamiliar_after_preparation": 49
+    }
+  }
+}

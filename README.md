@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Complete conditioned residuals with checked uniform assignments](research/uniform-premise.md).
+Nine additional fresh targets avoid search; native additions fall 452 -> 434
+nodes and 535,908 -> 521,248 bytes. Diagnostic sidecars grow 2.83%, and query
+timing remains mixed. All 1,129 tests pass. The next targets are mixed two-CNF
+conditions and earlier positive stopping, which can avoid finishing unnecessary
+probe passes. Evidence is in `experiments/results/cnf-uniform-premise/`.
+Resume its `checkpoint.json`: 24,444 native keys with all previous payloads preserved;
+independent replay and the manuscript build pass.
+
 [Reuse satisfying assignments already found by premise probes](research/positive-premise.md).
 Checked recovery replaces three acquired nodes with one in the motivating saved
 case and two fresh gated-Horn cases. Across sixty fresh queries, native additions

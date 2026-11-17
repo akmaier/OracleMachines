@@ -3306,3 +3306,38 @@ recovered trial is not presented as a shrinking historical database. The
 independent truth check enumerates 22,052,864 assignments over 48 small CNFs in
 1.384 seconds after timing; generation/selection costs 1.559 seconds separately.
 Full reconstruction takes 267.70 seconds outside production measurements.
+
+
+## 2026-11-18: checked uniform completion after conditioning
+
+[Uniform conditioned completion](uniform-premise.md) checks at most k retained
+premises. After charging each canonicalization and full key, trace validation,
+restriction and one-pass sign recognition use O(k(L+n)) expected dictionary
+operations for L literal occurrences and n variables. Working state is O(L+n),
+plus O(k) descriptors, excluding already retained screens. A valid unit-reason
+clause cannot recur after becoming satisfied. Accepted source model transport
+and verification cost O(L+n); name bit lengths, native checks, archive census,
+serialization and inherited replay remain charged. Earlier discovery is unchanged.
+
+Fresh completion checks 105 attempts, including 96 misses: 12,529 copied premise
+literals, 703 reason literals, 3,381 residual clauses, 7,226 recognition literal
+visits and 2,449 final model-verification literals. Additions fall 452 -> 434
+nodes and 535,908 -> 521,248 native bytes (2.74%). Diagnostic sidecars grow 2.83%.
+Trial database/compressed sizes fall 77,463,552/5,675,680 ->
+77,434,880/5,670,546 bytes. Mean process RSS changes 740.098 -> 738.075 MB, a small
+two-trial observation. Query paired differences -0.00855/+0.00587 seconds are
+mixed; complete differences -0.22305/-0.36887 seconds are both negative, without
+establishing general scaling. Full cold replay remains about 11.2 seconds.
+
+The preservation union retains older and comparator certificates and alternate
+models, so it is not the smallest policy state. Posthoc SCC diagnosis and the
+256-formula uniform-miss embedding check are outside production timings.
+
+The preservation union contains 24,444 keys and occupies 77,484,032 database /
+5,677,574 compressed bytes; all 23,987 prior payloads remain. Five alternative
+model payloads remain in trial evidence. The independent truth audit enumerates
+22,870,016 assignments in 1.458 seconds after timing; generation/selection costs
+1.598 seconds separately. Full independent reconstruction costs 283.00 seconds.
+A common 568-byte negative certificate acquired during ordinary neighbour
+preparation activates one core in each of two support banks; this is shared by
+all policies and must not be attributed to the new completion heuristic.

@@ -7158,6 +7158,70 @@ guarantee. Nonterminal conditioned families, positive opportunities excluded by
 the probe policy and unrestricted SAT remain open. Earlier certificates and
 alternate witnesses are preserved rather than replaced.
 
+\paragraph{Completing nonterminal conditioned residuals.}
+The next optional policy checks whether a retained premise residual admits a
+uniform completion. After verifying the formula binding and saved unit reasons,
+it reconstructs the residual. All-false satisfies it exactly when every clause
+contains a negative literal; all-true satisfies it exactly when every clause
+contains a positive literal. Their two truth values partition residuals into
+four cells: false only, true only, both, and neither. The first three provide
+explicit models after restoring the forced values. The fourth remains
+unresolved. Each accepted model is transported to source names and checked
+against every original clause and the assumption before native publication.
+Earlier accepted results keep priority, and the policy does not add probes or
+stop the earlier discovery pass.
+
+These predicates cover Horn and dual-Horn residuals after consistent unit
+closure. A nonempty Horn clause lacking a negative literal would be a positive
+unit, already eliminated by closure; the dual argument is symmetric. The
+predicates also cover broader formulas: a clause with two positive and two
+negative literals accepts both uniform assignments while belonging to neither
+family. This is a direct witness test, not a new tractability theorem.
+The unresolved cell remains broad. For unit-free $F$, conjoin
+$(a\lor b)\land(\neg a\lor\neg b)$ on fresh variables. The result remains
+unit-free, rejects both uniform assignments and is satisfiable exactly when
+$F$ is. For arbitrary $F$, first apply unit closure; map a detected conflict
+to a fixed unit-free unsatisfiable formula, and otherwise apply this construction
+to the residual. Thus a polynomial conversion can still place general SAT in
+the unresolved cell. A finite audit verifies the fresh-variable construction
+on all 256 subsets of the eight full-width three-variable clauses.
+
+Seventeen saved-prefix contexts compare the prior policy and uniform
+completion. A new nonterminal control replaces three acquired nodes and 2,439
+native bytes with one model node and 1,363 bytes; the other sixteen contexts
+retain their previous certificates. A further sixty-query stream yields nine
+additional uniform completions, all on gated-Horn inputs. With three earlier
+positive-terminal recoveries, all twelve gated inputs publish one model each.
+All modes answer 43 SAT and 17 UNSAT queries. Fresh additions fall from 452
+nodes and 535,908 native bytes to 434 nodes and 521,248 bytes. The 27 avoided
+expansions are replaced by nine model publications. There are also 96 failed
+uniform checks, all on graph-colouring inputs, which remain charged.
+
+Additional work copies 12,529 premise literals, checks 703 reason literals,
+reconstructs 3,381 clauses, visits 7,226 residual literals and verifies 2,449
+source/assumption literals for accepted models. For $k$ attempted completions,
+$L$ input literal occurrences and $n$ variables, trace checking, restriction
+and sign recognition take $O(k(L+n))$ expected dictionary operations, in addition
+to each attempt's canonicalizations and full keys. Temporary working state is
+$O(L+n)$ with $O(k)$ diagnostic descriptors, excluding previously retained
+screens. Source integer bit lengths, native checks, archive census and
+persistence remain separate costs. No propagation is repeated by completion,
+but earlier discovery is unchanged.
+
+Mean query times are 0.44913 and 0.44780 seconds, with paired differences of
+opposite signs. Complete-worker differences are both negative, $-0.22305$ and
+$-0.36887$ seconds, but two runs do not establish general scaling or isolate
+small changes in replay and compression time. Diagnostic sidecars grow about
+2.83\%, while the native acquisition payload falls about 2.74\%. Native baseline
+remains cheaper in query time. Gated-Horn discovery still incurs 74,194
+propagation visits despite zero subsequent acquisition propagation. Earlier
+positive stopping therefore remains a substantial opportunity. Posthoc SCC
+analysis also identifies four checked mixed models for one remaining graph
+query and sixteen checked negative conditions for four others. The latter need
+parent-level recomposition: a negative condition alone is insufficient. These
+SCC routes have not been integrated into timed acquisition. The measured
+successes, remaining misses and alternate witnesses are all preserved.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -9491,3 +9491,46 @@ banks remain 132/38, 141/66, 86/90 and 86/117. All 508 earlier source fingerprin
 with all 64 existing proof blocks unchanged. The initial replay validator's
 scratch-directory failure and its separate corrected replay revision are retained.
 No new Lean theorem, structural authority or unrestricted-SAT bound is claimed.
+
+
+## 2026-11-18: uniform completion of conditioned residuals
+
+[Uniform completion](uniform-premise.md) now uses checked saved unit traces to
+recognize and transport all-false/all-true residual models before fallback.
+It covers unit-closed Horn/dual-Horn and broader sign patterns. The two predicates
+partition residuals into four cells, but the neither-completion cell still
+encodes arbitrary SAT via unit closure and a fresh unequal-variable pair.
+No unrestricted-SAT efficiency or complete easy partition is claimed.
+
+Seventeen saved-prefix contexts preserve earlier controls; case 14 saves two
+acquired nodes. Nine fresh gated-Horn cases save eighteen nodes, taking additions
+452 -> 434 nodes / 535,908 -> 521,248 native bytes. All twelve gated targets now
+use direct model publication. There are 96 failed graph-colouring checks.
+Query-time differences have mixed signs; both complete-worker differences are
+negative, with no general scaling inference. Diagnostic sidecars grow 2.83%.
+All 1,129 tests pass, including nine new tests. Independent counter attribution
+covers 138 records and a 256-formula embedding check.
+
+Posthoc SCC diagnosis identifies four checked mixed models for fresh graph case
+39 and sixteen checked negative conditions on fresh 43/51/55/59. Their timed
+acquisition and negative parent recomposition remain open. These IDs refer to
+this corpus. Gated-Horn discovery still uses 74,194 propagation visits despite
+zero acquisition propagation: early positive stopping and canonical-form reuse
+are the next direct computation targets. Preserve failed uniform attempts and
+the SAT/UNSAT counterexamples to interpreting failure as refutation.
+
+
+All **1,129 tests**, 23 focused tests, 138 counter audits and independent
+reconstruction pass. Resume `experiments/results/cnf-uniform-premise/checkpoint.json`:
+**24,444 native keys**, preserving all 23,987 prior payloads, with 216 new
+composed records alongside 3,581 inherited records, 2,957 ordinary decisions
+and six projections. The union uses 77,484,032 database bytes / 5,677,574
+compressed bytes. Five alternate model payloads remain preserved (fourteen
+occurrences). Ready/pending banks are 132/38, 141/66, **87/89** and **87/116**.
+The two gains refer to one 568-byte negative certificate acquired by shared
+ordinary preparation for neighbour case 1 in every mode: causal core 46 and
+incremental-causal core 51. This activation is not a uniform-policy gain.
+All 514 earlier sources, 5,918 artifacts and 96 manifests remain unchanged.
+The paper builds at 212 pages with all 64 existing proof blocks unchanged;
+structural authority and original coverage remain unchanged. No new Lean theorem
+or unrestricted-SAT resource bound is claimed.

@@ -12,7 +12,74 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: solve and lift nonterminal conditioned families
+## Current investigation: mixed two-CNF conditions and earlier positive stopping
+
+[Uniform conditioned completion](uniform-premise.md) now recognizes exact
+all-false/all-true residual models after a checked saved unit trace. This covers
+unit-closed Horn and dual-Horn residuals and broader sign patterns. Failure of
+both completions remains unresolved; a fresh-variable conjunction embeds general
+SAT in that remaining cell. The manuscript and a 256-formula finite audit make
+this limitation explicit.
+
+On sixty fresh queries, **nine additional gated-Horn targets** accept the new
+route. With the three previous positive recoveries, all twelve gated targets
+publish one model each. New native additions fall **452 -> 434 nodes** and
+**535,908 -> 521,248 bytes**. The 27 avoided expansions require nine model
+publications. The selector also pays for **96 failed graph-colouring attempts**;
+all are retained. Seventeen exact-prefix controls preserve the earlier successes
+and difficult misses; the new case 14 shrinks three nodes to one.
+
+Mean query time changes **0.44913 -> 0.44780 s**, with opposite paired signs.
+Complete-worker differences are **-0.22305/-0.36887 s**, but two runs do not
+establish general scaling. Diagnostic sidecars grow **2.83%**. Native baseline
+still has cheaper queries, and full cold replay dominates at about 11.2 seconds.
+Keep native proof savings, diagnostic storage and total runtime separate.
+
+**Next coverage target:** mixed two-CNF conditions that fail both uniform
+completions. Posthoc SCC analysis finds twenty conditions on five fresh graph
+queries. Case **39**, from this study's fresh stream, has four mixed models
+already transported and checked against the raw target-plus-assumption; current
+acquisition is three nodes / 1,444 bytes. Integrate and price one such model at
+the saved prefix. Cases **43/51/55/59** have sixteen checked contradictory
+implication paths and currently acquire 52 parent nodes in total. Investigate
+native conditional refutation publication and the existing guard interface,
+complementary branches or checked symmetry transport. A single negative
+condition must never stand in for a parent refutation. SCC diagnosis is not yet
+a timed acquisition policy. These case IDs refer to the current fresh corpus,
+not earlier historical controls with the same numbers.
+
+**Largest avoidable discovery cost:** the twelve gated inputs still pay
+**74,194 propagation visits**, followed by zero acquisition propagation.
+The current wrapper finishes the earlier probe pass before checking completion.
+Fuse checked positive completion into discovery and measure early stopping,
+retaining the present policy as a comparator. Reuse bound canonical forms where
+possible. No extra probes or changed budgets should be hidden in this comparison.
+
+Random three-CNF and coupled parity still cost **320 acquisition nodes / 54,301
+propagation visits**; no saved uniform attempts are available after filtering.
+Positive discovery outside the negative binary filter, wider interactions,
+compact closure and uniform arbitrary-SAT bounds remain open. Keep successful
+model controls, historical guards/regressions and unresolved 0/131/159.
+
+
+All **1,129 tests**, 23 focused tests, 138 counter audits and independent
+reconstruction pass. Resume `experiments/results/cnf-uniform-premise/checkpoint.json`:
+**24,444 native keys**, preserving all 23,987 prior payloads, with 216 new
+composed records alongside 3,581 inherited records, 2,957 ordinary decisions
+and six projections. The union uses 77,484,032 database bytes / 5,677,574
+compressed bytes. Five alternate model payloads remain preserved (fourteen
+occurrences). Ready/pending banks are 132/38, 141/66, **87/89** and **87/116**.
+The two gains refer to one 568-byte negative certificate acquired by shared
+ordinary preparation for neighbour case 1 in every mode: causal core 46 and
+incremental-causal core 51. This activation is not a uniform-policy gain.
+All 514 earlier sources, 5,918 artifacts and 96 manifests remain unchanged.
+The paper builds at 212 pages with all 64 existing proof blocks unchanged;
+structural authority and original coverage remain unchanged. No new Lean theorem
+or unrestricted-SAT resource bound is claimed.
+
+New manifest: **155 artifacts**. Next preservation audit: **6,073 artifacts / 97 manifests**. Final source ledger: **519**.
+
+## Previous investigation: solve and lift nonterminal conditioned families
 
 [Positive-premise recovery](positive-premise.md) now reuses a model already
 present in saved discovery. Case 50 falls from three acquired nodes / 2,503

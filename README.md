@@ -28,6 +28,17 @@ classes.
 
 ## Paper
 
+[Unfamiliar CNFs expose wasted discovery](research/cross-family.md).
+All 48 new-family targets require unfamiliar acquisition, while 12 neighbour
+controls are known after preparation. Discovery performs 384 unsuccessful probes
+and raises mean query time 0.354 -> 0.482 seconds, with identical native results.
+A checked structural condition identifies 192 probes that cannot produce a unit
+refutation; implementing and pricing that filter is the next target. Full cold
+replay remains the largest runtime component. Results and proofs are preserved
+in `experiments/results/cnf-cross-family/`. All 1,106 tests and independent
+reconstruction pass. Resume `experiments/results/cnf-cross-family/checkpoint.json`:
+23,127 native keys and 120 new composed records, preserving all earlier results.
+
 [Recover a target model from a positive child](research/positive-child.md).
 At case 146's exact prefix, checked model recovery reduces six native rows to
 one and native bytes 6,688 -> 1,798. The next 192-query set has no activation:

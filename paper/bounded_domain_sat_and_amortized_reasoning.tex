@@ -6983,6 +6983,54 @@ nonfamily controls. The current inputs still come from three existing templates;
 the result supplies no efficient arbitrary-CNF decomposition or unrestricted-SAT
 resource bound.
 
+\paragraph{Testing unfamiliar structural acquisition.}
+We next add 48 unlabelled CNFs from four finite generators: random three-CNF,
+coupled parity constraints, gated Horn/dual-Horn formulas and graph-colouring
+encodings. Twelve excluded neighbours of the earlier templates remain as
+controls. Family labels and construction witnesses are not passed to the solver.
+All 48 new-family targets remain unfamiliar after preparation; all twelve
+neighbour targets become known. The fresh formulas have at most 21 variables
+and are independently checked by exhaustive bitset truth tables after timing.
+This exponential validation procedure is not part of the solver. The gated
+formulas are constructed satisfiable controls, and the generators do not
+constitute a partition of all CNFs.
+
+Four processes evaluate baseline/current and the reverse order with identical
+inherited state and preparation. Generation and novelty selection take 1.636
+seconds separately. Both modes answer 44 SAT and 16 UNSAT queries and retain
+identical additions of 398 native rows and 483,695 native bytes. Ordinary
+preparation accounts for twelve rows and fresh target acquisition for 386.
+Optional discovery makes 384 premise probes, finds no proposal on any unfamiliar
+target and makes no model publication. Propagation during discovery and
+acquisition rises from 65,842 to 246,726 literal visits. Mean query time rises
+from 0.354 to 0.482 seconds, with paired increases of 0.149 and 0.108 seconds.
+Mean complete worker time rises from 21.512 to 21.963 seconds; cold replay remains
+the largest component at 10.611 and 10.700 seconds. Query/warm sidecars grow from
+approximately 1.162 to 2.311 MB, while native payloads remain identical. These
+are measured regressions on the fixed corpus, not general timing bounds.
+
+The failed probes expose a useful necessary condition. After complete,
+consistent unit propagation, a residual has no unit or empty clauses. Assigning
+an unassigned variable absent from all residual binary clauses creates no further unit or
+empty clause: unsatisfied clauses containing it retain at least two literals.
+Unit propagation therefore cannot refute that single assumption. A binary
+incidence scan can exclude such probes without excluding a successful
+single-literal unit refutation. The check must use the propagated residual;
+for example, $(a)\land(\neg a\lor b\lor c)\land(\neg a\lor b\lor\neg c)$
+exposes binary clauses only after propagation, and then refutes $\neg b$.
+The posthoc audit identifies 192 such futile probes, accounting for 73,488
+propagation visits. This filter has not yet been implemented or timed, and the
+condition supplies no satisfiability decision or small-decomposition guarantee.
+
+Random three-CNF and coupled parity account for 261 of the 386 fresh acquisition
+rows and 47,263 of 65,842 acquisition propagation visits. They provide the next
+saved targets for mixed-family decomposition and affine/leftover reuse. Gated
+formulas incur the largest failed-probe overhead despite cheap native solving.
+Complete runtime is dominated by inherited-state checking and persistence, so
+probe elimination alone cannot establish a large end-to-end gain. This study
+extends evaluation coverage and preserves the failed discovery traces; it adds
+no new structural authority or unrestricted-SAT resource bound.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

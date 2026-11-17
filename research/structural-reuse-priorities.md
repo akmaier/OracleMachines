@@ -12,7 +12,55 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: broaden unfamiliar residuals and price nonterminal decompositions
+## Current investigation: reject structurally futile discovery probes
+
+[Cross-family evaluation](cross-family.md) now separates raw-query novelty from
+unfamiliar acquisition. All 48 new-family targets remain unfamiliar after
+preparation; all 12 same-template controls become known. Four matched workers
+retain identical **398 new rows / 483,695 native bytes**. Optional discovery
+makes **384 unsuccessful probes**, increasing propagation **65,842 -> 246,726**
+and mean query time **0.354 -> 0.482 s**. Both paired timing differences are
+positive. This is preserved negative evidence, not broader tractability.
+
+**Next concrete improvement:** after consistent baseline unit propagation, skip
+single-literal unit-refutation probes for unassigned variables absent from all residual
+binary clauses. Such an assignment cannot create a unit or empty clause. The
+posthoc audit identifies **192 futile probes / 73,488 propagation visits** in
+random 3-CNF and coupled-parity inputs. Build the incidence set once, reuse the
+baseline trace, validate the residual/source coordinate mapping and preserve
+successful older guards. The condition must inspect the propagated residual;
+original clause widths are insufficient. The filter is not implemented or timed
+in this checkpoint. Keep all unsuccessful screens as matched controls.
+
+**Next structural acquisition targets:** random 3-CNF and coupled parity cost
+**261/386 new acquisition rows**, with **47,263/65,842 acquisition propagation
+visits**. Saved cases 32/56/52 and 21 are the largest propagation controls.
+Gated Horn/dual-Horn has the largest discovery overhead despite cheap native
+solving. Investigate mixed-family conditioning and affine/leftover reuse at
+these exact prefixes. Preserve older 0/131/159, positive model recovery 146,
+one-variable two-CNF decomposition 36, useful guards 43/172 and regression 144.
+
+Cold replay (**10.611/10.700 s**) still dominates complete workers
+(**21.512/21.963 s**). Query/warm sidecars roughly double, **1.162 -> 2.311 MB**,
+while native storage is identical. Filtering these probes can reduce wasted
+acquisition work but cannot alone deliver a large complete-runtime gain.
+The fixed corpus has four finite generators, no general scaling or coverage
+claim, and no new solver policy or structural authority.
+
+All **1,106 tests**, 12 focused tests and independent reconstruction pass. The
+new checkpoint is `experiments/results/cnf-cross-family/checkpoint.json`:
+**23,127 native keys**, all 22,729 old payloads, **120 new composed records**,
+3,045 previous composed records, 2,957 ordinary decisions and six projections.
+There are no alternate native payloads. The union occupies 74,706,944 database
+bytes / 5,364,377 compressed bytes. Ready/pending banks remain 132/38, 141/66,
+86/90 and 86/117. All earlier 498 sources, 5,617 artifacts and 93 manifests
+are unchanged. Structural authorities and all 64 manuscript proof blocks remain
+unchanged. The 209-page manuscript builds without overfull or undefined warnings.
+
+
+New manifest: **38 artifacts**. Next preservation audit: **5655 artifacts / 94 manifests**. Final source ledger: **503**.
+
+## Previous investigation: broaden unfamiliar residuals and price nonterminal decompositions
 
 [Positive-child model recovery](positive-child.md) is implemented. At the exact
 case-146 prefix, it lifts 26 child unit deductions to a checked whole-target

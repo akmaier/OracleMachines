@@ -1,0 +1,120 @@
+{
+  "cases": {
+    "path": "experiments/results/cnf-cross-family/cases.json",
+    "sha256": "70343bcc874aef57d29142dc3f5c83d61cb04107101b3553f5bc8ec18537c60f"
+  },
+  "protocol": {
+    "path": "experiments/results/cnf-cross-family/protocol.json",
+    "sha256": "21d36dfd63e2fe5d58dc1e158ec16ceb846625233fa1593c0df989f3f0c91bec"
+  },
+  "samples": [
+    {
+      "mode": "baseline",
+      "path": "experiments/results/cnf-cross-family/baseline-0/report.json",
+      "repeat": 0,
+      "sha256": "ca25202c77c8080b49e9a5d1b486ca6f1fea8fdd31143362a7d66224b004b88d"
+    },
+    {
+      "mode": "positive",
+      "path": "experiments/results/cnf-cross-family/positive-0/report.json",
+      "repeat": 0,
+      "sha256": "34a3522f59c22b388838d126fc64421059a05f352cb6c59a06ba9431fe6ff46a"
+    },
+    {
+      "mode": "positive",
+      "path": "experiments/results/cnf-cross-family/positive-1/report.json",
+      "repeat": 1,
+      "sha256": "4f171c3411b3fce9cc4bbf73a081b781062c52a6363d5c501e180e1cd773156f"
+    },
+    {
+      "mode": "baseline",
+      "path": "experiments/results/cnf-cross-family/baseline-1/report.json",
+      "repeat": 1,
+      "sha256": "0e93f6560b3a2bcae4524dbb948494e146f744cdeb26908403f080d157d49e2f"
+    }
+  ],
+  "summary": {
+    "baseline": {
+      "admission_calls": 0,
+      "admission_reasons": {},
+      "compressed_bytes": 5364383,
+      "database_bytes": 74706944,
+      "expanded_nodes": 386,
+      "known_after_preparation": 12,
+      "local_calls": 0,
+      "local_guards": 0,
+      "local_terminals": 0,
+      "mean_cold_seconds": 10.611454437486827,
+      "mean_complete_worker_seconds": 21.511851853923872,
+      "mean_compression_seconds": 3.8678734796121716,
+      "mean_peak_rss_bytes": 705511424.0,
+      "mean_preparation_seconds": 4.224775125039741,
+      "mean_query_seconds": 0.3536410212982446,
+      "mean_serialization_seconds": 0.004186125006526709,
+      "mean_setup_seconds": 4.367907500592992,
+      "mean_warm_query_seconds": 0.007064626552164555,
+      "mean_warm_setup_seconds": 1.9435692082624882,
+      "model_publications": 0,
+      "new_nodes": 398,
+      "new_payload_units": 483695,
+      "nodes": 23127,
+      "positive": 44,
+      "positive_models": 0,
+      "premise_probes": 0,
+      "propagated_reuses": 0,
+      "propagation_literal_visits": 65842,
+      "queries": 60,
+      "repeat_new_nodes": 0,
+      "retained_prefixes": 0,
+      "row_digest": "a2f1f74c63e256d07e1e1423026a79346d6c405cb0f32a1acb0338a38995c23d",
+      "sidecar_bytes": [
+        1162063,
+        1162009
+      ],
+      "trace_publications": 0,
+      "unfamiliar_after_preparation": 48
+    },
+    "positive": {
+      "admission_calls": 48,
+      "admission_reasons": {
+        "no-proposal": 48
+      },
+      "compressed_bytes": 5364383,
+      "database_bytes": 74706944,
+      "expanded_nodes": 386,
+      "known_after_preparation": 12,
+      "local_calls": 48,
+      "local_guards": 0,
+      "local_terminals": 0,
+      "mean_cold_seconds": 10.70040391664952,
+      "mean_complete_worker_seconds": 21.96259016660042,
+      "mean_compression_seconds": 3.97643870790489,
+      "mean_peak_rss_bytes": 708976640.0,
+      "mean_preparation_seconds": 4.261854666983709,
+      "mean_query_seconds": 0.4820923104416579,
+      "mean_serialization_seconds": 0.00811660336330533,
+      "mean_setup_seconds": 4.388432020554319,
+      "mean_warm_query_seconds": 0.007230642484501004,
+      "mean_warm_setup_seconds": 1.9915794369298965,
+      "model_publications": 0,
+      "new_nodes": 398,
+      "new_payload_units": 483695,
+      "nodes": 23127,
+      "positive": 44,
+      "positive_models": 0,
+      "premise_probes": 384,
+      "propagated_reuses": 0,
+      "propagation_literal_visits": 246726,
+      "queries": 60,
+      "repeat_new_nodes": 0,
+      "retained_prefixes": 0,
+      "row_digest": "a2f1f74c63e256d07e1e1423026a79346d6c405cb0f32a1acb0338a38995c23d",
+      "sidecar_bytes": [
+        2311293,
+        2311311
+      ],
+      "trace_publications": 0,
+      "unfamiliar_after_preparation": 48
+    }
+  }
+}

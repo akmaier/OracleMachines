@@ -5533,3 +5533,38 @@ conditioning size or compact closure for arbitrary CNF is established.
 All 1,102 tests and independent replay pass. The 22,729-key union preserves all
 previous results and 615 new composed records. Structural and supplemental
 authority are unchanged; there is no new Lean or unrestricted efficiency result.
+
+
+## 2026-11-17: unfamiliar family transfer and futile premise probes
+
+[Cross-family evaluation](cross-family.md) adds 48 unlabelled CNFs from four
+finite generators and twelve same-template controls. All 48 fresh targets remain
+unfamiliar after preparation; the twelve neighbours become known. Independent
+truth tables enumerate 22,345,728 assignments across the 48 small formulas after
+timing (1.409 seconds); this exponential validator is not a solver algorithm.
+Both acquisition policies produce identical 398-row / 483,695-byte additions.
+The optional policy performs 384 unsuccessful probes and raises propagation
+65,842 -> 246,726 visits, mean query time 0.354 -> 0.482 seconds and complete
+worker time 21.512 -> 21.963 seconds. Both timing pairs regress. All failed
+screens and exact query prefixes are retained.
+
+A posthoc necessary-condition audit identifies 192 futile probes / 73,488 visits:
+after consistent baseline propagation, an unassigned variable without residual
+binary-clause incidence cannot create another unit or empty clause, so a single
+assumption cannot be unit-refuted. Implement and price this filter while reusing
+the baseline trace. Original widths are insufficient; the documented unit-prefix
+counterexample must remain a control. Random 3-CNF and coupled parity account
+for 261/386 acquisition rows and 47,263/65,842 acquisition visits. Preserve cases
+32/56/52 and 21 for broader decomposition; keep earlier useful/regressing guards.
+Cold replay still dominates complete cost, so local probe savings have limited
+end-to-end scope. This extends evaluation coverage, not structural authority.
+
+All **1,106 tests**, 12 focused tests and independent reconstruction pass. The
+new checkpoint is `experiments/results/cnf-cross-family/checkpoint.json`:
+**23,127 native keys**, all 22,729 old payloads, **120 new composed records**,
+3,045 previous composed records, 2,957 ordinary decisions and six projections.
+There are no alternate native payloads. The union occupies 74,706,944 database
+bytes / 5,364,377 compressed bytes. Ready/pending banks remain 132/38, 141/66,
+86/90 and 86/117. All earlier 498 sources, 5,617 artifacts and 93 manifests
+are unchanged. Structural authorities and all 64 manuscript proof blocks remain
+unchanged. The 209-page manuscript builds without overfull or undefined warnings.

@@ -3202,3 +3202,34 @@ previous evidence. It is not one policy's working storage. Evaluation must now
 separate raw-query novelty from unfamiliar residual acquisition and broaden
 beyond the three old template families. All 1,102 tests pass. No unrestricted-SAT
 resource bound follows.
+
+
+## 2026-11-17: cross-family acquisition costs
+
+[The new transfer corpus](cross-family.md) separates 48 unfamiliar targets from
+12 neighbours known after preparation. Both modes add 398 rows / 483,695 native
+bytes, including twelve ordinary-preparation rows. The evidence union grows
+22,729 -> 23,127 keys and 73,793,536 -> 74,706,944 database bytes; its compressed
+size grows 5,266,420 -> 5,364,377 bytes. No alternatives are needed, and all prior
+payloads persist. The four worker archives compress to 5,364,383 bytes each;
+physical representation accounts for the small union difference.
+
+Optional discovery adds 180,884 propagation visits without changing a native
+payload. Acquisition/discovery visits are 65,842/246,726 for baseline/current;
+query times 0.354/0.482 seconds, complete workers 21.512/21.963. Cold replay
+10.611/10.700, setup 4.368/4.388, compression 3.868/3.976 and warm-bank setup
+1.944/1.992 seconds dominate. Mean process RSS is 705,511,424/708,976,640 bytes,
+including inherited state. Sidecars grow approximately 1.162 -> 2.311 MB to retain
+failed discovery. These finite measurements do not establish scaling laws.
+
+Generation/selection (1.636 seconds), independent exhaustive validation of the
+48 small formulas (1.409 seconds, 22,345,728 assignments), and posthoc diagnosis
+are separate costs. The bitset truth oracle is exponential and runs only after
+timing. The posthoc scan identifies 192 probes that cannot unit-refute their
+assumption, consuming 73,488 visits; implementing that filter still requires
+charging residual incidence construction and maintaining source bindings. A
+single residual literal scan suffices to build the incidence set after existing
+unit propagation, but this is no decision procedure for arbitrary SAT. The
+other 192 probes also fail on this corpus but are not excluded by this condition.
+Random 3-CNF and coupled parity dominate fresh acquisition; inherited replay
+continues to dominate end-to-end time. All 1,106 tests pass.

@@ -1,0 +1,541 @@
+{
+  "analyzer": {
+    "path": "/Users/maier/Documents/code/OracleMachines/experiments/analyze_cnf_clause_partition.py",
+    "sha256": "f7b61be20387f15842530d929c9c44f79c1e73ddfeb6a63b7e33a15ba29bc4d7"
+  },
+  "baseline_expansions": 41,
+  "best_observed_expansions": 22,
+  "cases": [
+    {
+      "all_candidate_expansions": 77,
+      "all_candidate_new_nodes": 81,
+      "arms": [
+        {
+          "branch_expansions": [
+            27
+          ],
+          "branch_new_nodes": [
+            27
+          ],
+          "branch_seconds": 0.019964042119681835,
+          "cold_seconds": 5.092704040929675,
+          "composition_seconds": 0.0013206666335463524,
+          "expanded_nodes": 27,
+          "new_nodes": 27,
+          "new_payload_units": 32827,
+          "plan": {
+            "case": 68,
+            "core": null,
+            "missing": null,
+            "mode": "baseline"
+          },
+          "premise_inserted": false,
+          "premise_seconds": 0.0,
+          "preparation_seconds": 0.9199748751707375,
+          "query_phase_seconds": 0.021287166513502598,
+          "relative_change_percent": {
+            "expanded_nodes": 0.0,
+            "new_nodes": 0.0,
+            "new_payload_units": 0.0,
+            "retained_bytes": 0.0
+          },
+          "retained_bytes": 49672,
+          "serialization_seconds": 0.000772000290453434,
+          "warm_seconds": 0.00013587530702352524,
+          "warm_setup_seconds": 0.0009813341312110424
+        },
+        {
+          "branch_expansions": [
+            19,
+            1,
+            1
+          ],
+          "branch_new_nodes": [
+            19,
+            1,
+            1
+          ],
+          "branch_seconds": 0.014495832845568657,
+          "cold_seconds": 5.022126375231892,
+          "composition_seconds": 0.002610625233501196,
+          "expanded_nodes": 21,
+          "new_nodes": 22,
+          "new_payload_units": 27086,
+          "plan": {
+            "case": 68,
+            "core": 210,
+            "missing": [
+              [
+                -260,
+                210
+              ],
+              [
+                -250
+              ],
+              [
+                -70
+              ]
+            ],
+            "mode": "core-210-forward"
+          },
+          "premise_inserted": true,
+          "premise_seconds": 0.0028508752584457397,
+          "preparation_seconds": 0.8690335829742253,
+          "query_phase_seconds": 0.02030329219996929,
+          "relative_change_percent": {
+            "expanded_nodes": -22.22222222222222,
+            "new_nodes": -18.518518518518523,
+            "new_payload_units": -17.48865263350291,
+            "retained_bytes": -6.100016105653083
+          },
+          "retained_bytes": 46642,
+          "serialization_seconds": 0.0006518331356346607,
+          "warm_seconds": 0.00021262513473629951,
+          "warm_setup_seconds": 0.008216999936848879
+        },
+        {
+          "branch_expansions": [
+            1,
+            7,
+            16
+          ],
+          "branch_new_nodes": [
+            1,
+            7,
+            16
+          ],
+          "branch_seconds": 0.015866249334067106,
+          "cold_seconds": 5.2364863329567015,
+          "composition_seconds": 0.0025102910585701466,
+          "expanded_nodes": 24,
+          "new_nodes": 25,
+          "new_payload_units": 30177,
+          "plan": {
+            "case": 68,
+            "core": 210,
+            "missing": [
+              [
+                -70
+              ],
+              [
+                -250
+              ],
+              [
+                -260,
+                210
+              ]
+            ],
+            "mode": "core-210-reverse"
+          },
+          "premise_inserted": true,
+          "premise_seconds": 0.002803875133395195,
+          "preparation_seconds": 0.8394031664356589,
+          "query_phase_seconds": 0.021580040454864502,
+          "relative_change_percent": {
+            "expanded_nodes": -11.111111111111116,
+            "new_nodes": -7.4074074074074066,
+            "new_payload_units": -8.072623145581382,
+            "retained_bytes": 0.3804960541149871
+          },
+          "retained_bytes": 49861,
+          "serialization_seconds": 0.0007007080130279064,
+          "warm_seconds": 0.00018804240971803665,
+          "warm_setup_seconds": 0.0079283332452178
+        },
+        {
+          "branch_expansions": [
+            4,
+            10,
+            7
+          ],
+          "branch_new_nodes": [
+            4,
+            10,
+            7
+          ],
+          "branch_seconds": 0.013718665577471256,
+          "cold_seconds": 5.2443032916635275,
+          "composition_seconds": 0.0026290002278983593,
+          "expanded_nodes": 21,
+          "new_nodes": 22,
+          "new_payload_units": 24641,
+          "plan": {
+            "case": 68,
+            "core": 258,
+            "missing": [
+              [
+                -290
+              ],
+              [
+                -110,
+                160
+              ],
+              [
+                90
+              ]
+            ],
+            "mode": "core-258-forward"
+          },
+          "premise_inserted": true,
+          "premise_seconds": 0.0027247080579400063,
+          "preparation_seconds": 0.8219748330302536,
+          "query_phase_seconds": 0.01945974864065647,
+          "relative_change_percent": {
+            "expanded_nodes": -22.22222222222222,
+            "new_nodes": -18.518518518518523,
+            "new_payload_units": -24.936789837633654,
+            "retained_bytes": -11.092768561765176
+          },
+          "retained_bytes": 44162,
+          "serialization_seconds": 0.0006350004114210606,
+          "warm_seconds": 0.00019112508744001389,
+          "warm_setup_seconds": 0.008364332839846611
+        },
+        {
+          "branch_expansions": [
+            9,
+            1,
+            1
+          ],
+          "branch_new_nodes": [
+            9,
+            1,
+            1
+          ],
+          "branch_seconds": 0.00835362495854497,
+          "cold_seconds": 5.077278333250433,
+          "composition_seconds": 0.0026445831172168255,
+          "expanded_nodes": 11,
+          "new_nodes": 12,
+          "new_payload_units": 16605,
+          "plan": {
+            "case": 68,
+            "core": 258,
+            "missing": [
+              [
+                90
+              ],
+              [
+                -110,
+                160
+              ],
+              [
+                -290
+              ]
+            ],
+            "mode": "core-258-reverse"
+          },
+          "premise_inserted": true,
+          "premise_seconds": 0.0027277078479528427,
+          "preparation_seconds": 0.7851809593848884,
+          "query_phase_seconds": 0.01414887374266982,
+          "relative_change_percent": {
+            "expanded_nodes": -59.25925925925925,
+            "new_nodes": -55.55555555555556,
+            "new_payload_units": -49.416638742498556,
+            "retained_bytes": -28.176840070864873
+          },
+          "retained_bytes": 35676,
+          "serialization_seconds": 0.0006556659936904907,
+          "warm_seconds": 0.00019004102796316147,
+          "warm_setup_seconds": 0.008424832951277494
+        }
+      ],
+      "best_observed_expansions": 11,
+      "case": 68,
+      "expansion_regressions": [],
+      "publication_regressions": []
+    },
+    {
+      "all_candidate_expansions": 10,
+      "all_candidate_new_nodes": 12,
+      "arms": [
+        {
+          "branch_expansions": [
+            7
+          ],
+          "branch_new_nodes": [
+            7
+          ],
+          "branch_seconds": 0.00708562508225441,
+          "cold_seconds": 5.177825458347797,
+          "composition_seconds": 0.001190041657537222,
+          "expanded_nodes": 7,
+          "new_nodes": 7,
+          "new_payload_units": 11296,
+          "plan": {
+            "case": 6,
+            "core": null,
+            "missing": null,
+            "mode": "baseline"
+          },
+          "premise_inserted": false,
+          "premise_seconds": 0.0,
+          "preparation_seconds": 0.8339411253109574,
+          "query_phase_seconds": 0.008276416920125484,
+          "relative_change_percent": {
+            "expanded_nodes": 0.0,
+            "new_nodes": 0.0,
+            "new_payload_units": 0.0,
+            "retained_bytes": 0.0
+          },
+          "retained_bytes": 25002,
+          "serialization_seconds": 0.0006542080081999302,
+          "warm_seconds": 0.0001859995536506176,
+          "warm_setup_seconds": 0.007153874728828669
+        },
+        {
+          "branch_expansions": [
+            5,
+            1,
+            1
+          ],
+          "branch_new_nodes": [
+            5,
+            1,
+            1
+          ],
+          "branch_seconds": 0.0052938321605324745,
+          "cold_seconds": 5.189539541024715,
+          "composition_seconds": 0.0021324590779840946,
+          "expanded_nodes": 7,
+          "new_nodes": 8,
+          "new_payload_units": 12282,
+          "plan": {
+            "case": 6,
+            "core": 240,
+            "missing": [
+              [
+                -130
+              ],
+              [
+                -60,
+                30
+              ],
+              [
+                120
+              ]
+            ],
+            "mode": "core-240-forward"
+          },
+          "premise_inserted": true,
+          "premise_seconds": 0.0022053751163184643,
+          "preparation_seconds": 0.828083666972816,
+          "query_phase_seconds": 0.00993437459692359,
+          "relative_change_percent": {
+            "expanded_nodes": 0.0,
+            "new_nodes": 14.28571428571428,
+            "new_payload_units": 8.728753541076495,
+            "retained_bytes": 13.18694504439646
+          },
+          "retained_bytes": 28299,
+          "serialization_seconds": 0.0006484999321401119,
+          "warm_seconds": 0.00018025003373622894,
+          "warm_setup_seconds": 0.0078170420601964
+        },
+        {
+          "branch_expansions": [
+            1,
+            1,
+            1
+          ],
+          "branch_new_nodes": [
+            1,
+            1,
+            1
+          ],
+          "branch_seconds": 0.002266249153763056,
+          "cold_seconds": 5.104444709140807,
+          "composition_seconds": 0.0021691657602787018,
+          "expanded_nodes": 3,
+          "new_nodes": 4,
+          "new_payload_units": 6122,
+          "plan": {
+            "case": 6,
+            "core": 240,
+            "missing": [
+              [
+                120
+              ],
+              [
+                -60,
+                30
+              ],
+              [
+                -130
+              ]
+            ],
+            "mode": "core-240-reverse"
+          },
+          "premise_inserted": true,
+          "premise_seconds": 0.002772207837551832,
+          "preparation_seconds": 0.8722204170189798,
+          "query_phase_seconds": 0.007500664796680212,
+          "relative_change_percent": {
+            "expanded_nodes": -57.14285714285714,
+            "new_nodes": -42.85714285714286,
+            "new_payload_units": -45.80382436260623,
+            "retained_bytes": -12.171026317894572
+          },
+          "retained_bytes": 21959,
+          "serialization_seconds": 0.000548291951417923,
+          "warm_seconds": 0.00018754182383418083,
+          "warm_setup_seconds": 0.008147750049829483
+        }
+      ],
+      "best_observed_expansions": 3,
+      "case": 6,
+      "expansion_regressions": [],
+      "publication_regressions": [
+        "core-240-forward"
+      ]
+    },
+    {
+      "all_candidate_expansions": 18,
+      "all_candidate_new_nodes": 20,
+      "arms": [
+        {
+          "branch_expansions": [
+            7
+          ],
+          "branch_new_nodes": [
+            7
+          ],
+          "branch_seconds": 0.006167000159621239,
+          "cold_seconds": 5.244037790689617,
+          "composition_seconds": 0.0011661667376756668,
+          "expanded_nodes": 7,
+          "new_nodes": 7,
+          "new_payload_units": 10761,
+          "plan": {
+            "case": 135,
+            "core": null,
+            "missing": null,
+            "mode": "baseline"
+          },
+          "premise_inserted": false,
+          "premise_seconds": 0.0,
+          "preparation_seconds": 0.8470617923885584,
+          "query_phase_seconds": 0.007333958987146616,
+          "relative_change_percent": {
+            "expanded_nodes": 0.0,
+            "new_nodes": 0.0,
+            "new_payload_units": 0.0,
+            "retained_bytes": 0.0
+          },
+          "retained_bytes": 24497,
+          "serialization_seconds": 0.0006002918817102909,
+          "warm_seconds": 0.00017804186791181564,
+          "warm_setup_seconds": 0.007529708091169596
+        },
+        {
+          "branch_expansions": [
+            1,
+            7
+          ],
+          "branch_new_nodes": [
+            1,
+            7
+          ],
+          "branch_seconds": 0.005814749747514725,
+          "cold_seconds": 5.2036157082766294,
+          "composition_seconds": 0.0019139996729791164,
+          "expanded_nodes": 8,
+          "new_nodes": 9,
+          "new_payload_units": 11560,
+          "plan": {
+            "case": 135,
+            "core": 211,
+            "missing": [
+              [
+                130
+              ],
+              [
+                260
+              ]
+            ],
+            "mode": "core-211-forward"
+          },
+          "premise_inserted": true,
+          "premise_seconds": 0.0025878329761326313,
+          "preparation_seconds": 0.8830086668021977,
+          "query_phase_seconds": 0.010548457503318787,
+          "relative_change_percent": {
+            "expanded_nodes": 14.28571428571428,
+            "new_nodes": 28.57142857142858,
+            "new_payload_units": 7.424960505529232,
+            "retained_bytes": 10.115524349920403
+          },
+          "retained_bytes": 26975,
+          "serialization_seconds": 0.0005835001356899738,
+          "warm_seconds": 0.00017520925030112267,
+          "warm_setup_seconds": 0.00836991611868143
+        },
+        {
+          "branch_expansions": [
+            9,
+            1
+          ],
+          "branch_new_nodes": [
+            9,
+            1
+          ],
+          "branch_seconds": 0.008023250382393599,
+          "cold_seconds": 5.2967284163460135,
+          "composition_seconds": 0.0020058751106262207,
+          "expanded_nodes": 10,
+          "new_nodes": 11,
+          "new_payload_units": 14567,
+          "plan": {
+            "case": 135,
+            "core": 211,
+            "missing": [
+              [
+                260
+              ],
+              [
+                130
+              ]
+            ],
+            "mode": "core-211-reverse"
+          },
+          "premise_inserted": true,
+          "premise_seconds": 0.0020627910271286964,
+          "preparation_seconds": 0.9299968336708844,
+          "query_phase_seconds": 0.01234337454661727,
+          "relative_change_percent": {
+            "expanded_nodes": 42.85714285714286,
+            "new_nodes": 57.14285714285714,
+            "new_payload_units": 35.368460180280636,
+            "retained_bytes": 22.757888721067875
+          },
+          "retained_bytes": 30072,
+          "serialization_seconds": 0.000681332778185606,
+          "warm_seconds": 0.00017920788377523422,
+          "warm_setup_seconds": 0.008423166815191507
+        }
+      ],
+      "best_observed_expansions": 8,
+      "case": 135,
+      "expansion_regressions": [
+        "core-211-forward",
+        "core-211-reverse"
+      ],
+      "publication_regressions": [
+        "core-211-forward",
+        "core-211-reverse"
+      ]
+    }
+  ],
+  "limitations": [
+    "Every candidate starts from the same per-case prefix; its branches share in-arm results. Summed candidate work charges trying both orders and all diagnosed cores, with no cross-plan sharing. Best observed cost is post-hoc, not an implemented selection policy.",
+    "Historical cases and one sample per arm. Query-phase sum includes premise, branch construction/solving and composition; separately reported preparation, cold replay, serialization and warm-bank setup remain additional costs. No stable speedup or peak-memory claim.",
+    "Added payload counts native identifier plus ASCII JSON length. Retained bytes count each delta plus its query sidecar, not SQLite pages, historical storage, indices or all experiment files.",
+    "A correct first-false partition need not be beneficial: branches may duplicate work or lose propagation exposed in the unpartitioned target. No minimum-cost expansion or unrestricted-SAT bound."
+  ],
+  "report": {
+    "path": "experiments/results/cnf-clause-partition/report.json",
+    "sha256": "ce6c39a7023a0a51e7cb79b8dbbe7d8add8cdad94e7ec88178486caab6a4e5ab"
+  },
+  "total_candidate_expansions": 105
+}

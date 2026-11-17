@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Compose exact multiple-clause partitions and retain their regressions](research/clause-partition.md).
+On historical case 68, the best tested partition reduces expansions **27 -> 11**;
+case 6 improves **7 -> 3**, while both case-135 plans regress. Trying every candidate
+costs more than the baselines, so the next task is cheaper plan screening using
+checked propagation traces. All **1,035 tests** and independent replay pass.
+Resume `experiments/results/cnf-clause-partition/checkpoint.json` (**21,225 native
+keys** plus checked partition sidecars; all previous results preserved). No fresh
+coverage or stable total-runtime gain is claimed.
+
 [Reuse checked premises and test fresh guard-chain coverage](research/premise-guard.md).
 On **192 new queries**, expansions fall **139 -> 67** and new proof rows **436 ->
 364**. Prepared matching and premise-first checks reduce additional verified

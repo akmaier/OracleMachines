@@ -2883,3 +2883,28 @@ supporting cost targets. Resume `experiments/results/cnf-premise-guard/checkpoin
 with 21,128 native keys, all prior payloads preserved, eight inherited and 192 new
 chain conclusions. All 1,028 tests, six native/chain audits, 2,957 inherited ordinary
 decisions and frozen-worker parity pass. No new Lean or unrestricted-SAT bound.
+
+
+## 2026-11-17: exact multiple-clause composition and plan-cost gap
+
+[First-false partitions](clause-partition.md) now cover a target using an existing
+negative strengthened premise, earlier missing clauses held true, and the selected
+clause falsified. All branches must be negative for UNSAT; a checked SAT branch
+lifts to the original query. Native proofs remain unchanged; composed lookup
+requires the bound partition sidecars. Exhaustive small-formula and SAT controls,
+1,035 full-suite tests and independent native/sidecar replay pass.
+
+Historical case 68 improves **27 -> 11 expansions** in the best tested order,
+case 6 improves **7 -> 3**, and both case-135 orders regress **7 -> 8/10**. Trying
+all eight plans costs 105 expansions versus 41 for the three baselines. These
+post-hoc choices establish no fresh coverage or cheap plan-selection policy.
+A read-only propagation probe finds terminal-conflict signals for the better
+orders, but case 135's smaller residual still costs more. Next, implement bounded
+screening that reuses its unit traces, retain 135 as a fallback control, and test
+new excluded inputs with preparation, premise publication and cold replay charged.
+
+Resume `experiments/results/cnf-clause-partition/checkpoint.json`: 21,225 native
+keys, all previous 21,128 payloads preserved, and eight partition records for
+three historical sources. All 2,957 ordinary inherited decisions and 200 inherited
+chains replay. Structural authority and all 64 existing proof blocks remain
+unchanged. No new Lean or unrestricted-SAT bound is claimed.

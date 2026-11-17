@@ -6627,6 +6627,41 @@ it does not permit simultaneously falsifying every $C_i$. Exact alternative
 coverage, branch composition and its full cost are the next structural test.
 No unrestricted polynomial SAT bound follows.
 
+\paragraph{Exact composition for several missing clauses.}
+Given a checked negative premise $T\wedge C_1\wedge\cdots\wedge C_k$, partition
+models of $T$ by their first falsified $C_i$. Branch $i$ solves
+\[
+  B_i=\left(T\wedge\bigwedge_{j<i}C_j\right)\big|_{\neg C_i},
+\]
+where $\neg C_i$ fixes every literal of $C_i$ to false. Every model of $T$ has a
+unique first false clause, and each branch model lifts to $T$. Disjointness
+includes the fixed literals, not just the residual CNFs. Negative composition requires every branch to be negative; a positive branch supplies a
+checked lifted model. The implementation binds the premise, ordered clauses,
+earlier guards and native children in a replayable sidecar. Native proof formats
+remain unchanged. Composed lookup requires the checked partition bank.
+
+Eleven matched historical arms restore exact pre-query states for three cases.
+Case 68's four tested partitions use 21, 24, 21 and 11 expansions versus 27 for
+the baseline. Its best observed plan needs twelve new rows, including one premise
+row, and reduces added native payload from 32,827 to 16,605 bytes. Case 6 improves
+from seven to three expansions in one order; its other order adds a row without
+saving expansions. Both case-135 plans regress, using eight and ten expansions
+versus seven. Trying all eight partition plans costs 105 expansions versus 41
+for the three baselines. Choosing the best result afterwards is not an efficient
+selection policy. These retained historical probes establish no fresh coverage
+or stable total runtime improvement.
+
+A read-only propagation probe identifies two terminal conflicts in the best
+case-68 plan and three in the better case-6 plan. Reusing these traces during
+bounded plan screening is the next opportunity. However, case 135's smaller
+117-literal residual still costs more than its 158-literal baseline. Neither
+missing-clause count nor residual size bounds solving effort. If $L$ bounds the
+target, strengthened formula and all branch prefix/residual encodings, constructing
+$k$ branches and retaining their keys can cost $O(kL)$ space, in addition to
+source/guard records, models and native proof storage. All recognition,
+publication, child solving and cold replay remain charged. Exact partitioning
+does not imply a uniform polynomial algorithm for arbitrary SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

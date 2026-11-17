@@ -12,7 +12,50 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: cover several missing clauses exactly
+## Current investigation: screen partition plans before full solving
+
+[Exact first-false partitions](clause-partition.md) now compose several missing
+clauses soundly: earlier clauses hold, the selected clause is false, every
+negative branch is checked, and SAT witnesses lift through the original guards.
+Native proof format is unchanged; composed reuse requires checked partition
+sidecars. Eleven exact historical-prefix arms test all nearest ready cores from
+the preceding diagnosis in forward/reverse order.
+
+**Measured opportunity:** case **68** improves **27 -> 11 expansions**, **27 -> 12
+rows**, and **32,827 -> 16,605 added native bytes** with core 258 in reverse order.
+Case **6** improves **7 -> 3** in reverse order. But case **135** regresses **7 ->
+8/10** in both orders, and case 6's forward order adds a row without reducing
+expansions. Trying all eight candidate plans costs **105 expansions**, versus
+41 for the three baselines. Best observed choices are not a cheap selector;
+there is no fresh-query or stable total-runtime improvement claim.
+
+**Next priority:** bounded propagation-based plan screening that retains checked
+unit traces for reuse during publication, followed by fresh excluded inputs.
+A read-only probe finds two terminal conflicts plus a 122-literal residual in
+case 68's best plan; the competing two-conflict plan leaves 153 literals. Case
+6's better order makes all three branches terminal. These signals are computed
+without SAT search, but candidate discovery and screening must still be charged.
+The current probe is diagnostic and uses the already selected historical plans.
+
+Keep **135 as the rejection/fallback control**: its 117-literal residual is smaller
+than the 158-literal baseline yet costs more to solve. Residual size, missing-clause
+count and terminal count do not certify savings. Broader coverage, reusable plan
+recognition and cross-plan sharing remain open. Full cold replay still costs
+roughly five seconds per arm, far exceeding the 7–22 ms query-phase samples;
+compact records and shared checking remain supporting cost targets.
+
+Resume `experiments/results/cnf-clause-partition/checkpoint.json`: **21,225 native
+keys**, all 21,128 previous payloads preserved, plus eight partition records for
+three already known sources. All **1,035 tests**, eleven complete arm audits,
+2,957 inherited ordinary decisions, 200 inherited chains and the new partitions
+pass. Previous 429 sources and 4,706 artifacts / 82 manifests remain unchanged.
+The paper builds to 204 pages with 64 unchanged proof blocks. No new Lean or
+unrestricted-SAT resource theorem.
+
+
+New manifest: **56 artifacts**. Next preservation audit: **4762 artifacts / 83 manifests**.
+
+## Previous investigation: cover several missing clauses exactly
 
 [Prepared premise-first guards](premise-guard.md) validate guard-chain savings on
 **192 fresh queries**: expansions **139 -> 67**, new rows **436 -> 364**, and added

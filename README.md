@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Test terminal admission and locate the remaining matching gap](research/terminal-guard.md).
+The optional filter adds no hits on 192 fresh queries: both policies use 68
+expansions. Historical controls pass. Cases 56 and 176 account for 41 expansions;
+checked near-supports justify smaller residuals, whose composition and cost are
+the next test. No total speedup is established. Resume
+`experiments/results/cnf-terminal-guard/checkpoint.json` (20,649 keys).
+
 [Price pending guard proofs before using them](research/pending-guard-costs.md).
 Historical probes identify a terminal-conflict case needing **two proof rows
 instead of six fresh expansions**, with **84.10% less added payload**. Other

@@ -12,7 +12,38 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: recognize terminal conflict supports
+## Current investigation: compose restrictions from nearly contained cores
+
+[The terminal-filter comparison](terminal-guard.md) gives **no new fresh hit**:
+both policies use 68 expansions and 309 new rows on 192 new neighbouring queries.
+The optional selector passes historical admission/rejection controls, but none
+of eight unresolved targets contains a pending support. Twenty initial pending
+entries have terminal-conflict origins; their availability does not solve this
+matching gap. The extra scan adds 3,064 candidate inspections and 95,624 clause
+units. Timing variation establishes no total speedup; keep the policy optional.
+
+**Highest-priority next test:** cases **56 (17 expansions)** and **176 (24)**,
+accounting for 41/68 expansions. A checked core missing one clause from each
+target justifies an additional restriction: target sizes fall **79/218 ->
+67/172** and **86/240 -> 77/209** clauses/literals. Neither restricted target is
+already reusable. Implement checked composition and price the remaining solve,
+including recognition, premise publication and persistence. Case **155 is SAT**
+and is an essential control against treating near-containment as UNSAT.
+
+Six of eight unresolved cases admit such a restriction. Cases 41 and 179 remain
+at least three and two clauses from an overlapping ready core. Almost all fresh
+search is concentrated in template 12 (67/68 expansions). No measured hit uses
+an unseen guard relative to all recorded origins of its support. Broader
+discovery, proof composition and arbitrary-SAT bounds remain open.
+
+Resume `experiments/results/cnf-terminal-guard/checkpoint.json` (**20,649 keys**).
+All previous payloads and structural authorities are preserved; eight full
+trial replays, 1,013 solver tests and two condition tests pass.
+
+
+New manifest: **66 artifacts**. Next preservation audit: **4579 artifacts / 80 manifests**.
+
+## Previous investigation: recognize terminal conflict supports
 
 [Pricing all six pending alternatives](pending-guard-costs.md) separates a
 promising case from costly derivations. Exact pre-query payload replay gives:

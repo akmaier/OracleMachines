@@ -2820,3 +2820,22 @@ is claimed. Resume `experiments/results/cnf-pending-guards/checkpoint.json`
 (20,340 keys, 70 added, all prior payloads preserved). Nine reconstructed arms,
 2,765 inherited decisions and 32 relevant tests pass. Structural coverage and
 its separate original/supplemental proof authorities remain unchanged.
+
+
+## 2026-11-17: terminal admission misses the fresh unresolved structure
+
+[The fresh comparison](terminal-guard.md) gives no added coverage: both policies
+use 68 expansions and 309 new rows on 192 excluded neighbours. Historical
+controls admit terminal case 85 and reject recursive cases 23/103. The new scan
+adds 3,064 candidate inspections but finds no pending support in the eight
+unresolved targets. Timing variation establishes no total speedup.
+
+Current cases 56 and 176 account for 41/68 expansions. Checked cores missing one
+clause justify additional restrictions, reducing sizes 79/218 -> 67/172 and
+86/240 -> 77/209 clauses/literals. No restricted endpoint is already reusable.
+The next task is checked composition and a matched remaining-solve comparison,
+including SAT case 155 as a control against premature UNSAT. Preserve recognition,
+premise publication, acquisition and persistence costs. Resume
+`experiments/results/cnf-terminal-guard/checkpoint.json` (20,649 keys; all prior
+payloads preserved). Full proof replay, 1,013 solver tests and two additional
+condition tests pass; structural authority and existing proof blocks are unchanged.

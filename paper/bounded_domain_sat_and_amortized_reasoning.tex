@@ -6543,6 +6543,28 @@ with a child, nor does a small clause core imply a cheap derivation. A terminal
 origin filter on fresh queries is the next test; recursive proof-graph pricing,
 broader structural coverage and unrestricted polynomial bounds remain open.
 
+\paragraph{A cheap derivation rule can still miss the unresolved structure.}
+The optional terminal-origin selector adds no transfer on the next 192 excluded
+neighbours. Both policies use 68 expansions, 23 splits and 309 new rows, with
+31 cofactor hits and identical proof databases. None of eight unresolved
+alternative targets contains a pending support, despite twenty terminal-origin
+pending entries in the loaded banks. The additional scan examines 3,064
+candidates and 95,624 clause units. Historical controls admit the cheap terminal
+case and reject recursive alternatives. Paired timing variation establishes no
+total speedup.
+
+A further read-only check finds a different restriction opportunity in six
+unresolved targets. If a checked UNSAT core is contained in $T\cup\{C\}$, then
+$T\wedge C$ is unsatisfiable and every model of $T$ falsifies $C$. Restricting
+$T$ accordingly preserves satisfiability; omitting the missing clause does not
+establish UNSAT. Current cases 56 and 176 account for 41 of the 68 expansions.
+Their justified restrictions reduce clause/literal sizes from 79/218 to 67/172
+and from 86/240 to 77/209. Neither residual is already reusable. Checked proof
+composition and the cost of solving the remaining residuals are still open
+implementation steps. The SAT case 155 provides a necessary control against
+premature negative conclusions. No new structural coverage or unrestricted
+polynomial bound follows from these diagnostics.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

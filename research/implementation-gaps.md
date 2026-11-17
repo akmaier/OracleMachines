@@ -9268,3 +9268,28 @@ arms. All 1,076 tests, 19 focused tests and independent cold replay pass. Prior
 475 sources / 5,115 artifacts / 88 manifests, four frontiers and structural
 coverage are preserved. Resume `experiments/results/cnf-child-admission/checkpoint.json`.
 No new Lean or unrestricted-SAT theorem.
+
+
+## 2026-11-17: fresh admission reveals reuse after propagation
+
+[Fresh child-admission streams](child-stream.md) now exclude inherited query and
+native roots: four workers, 192 new queries, 101 SAT / 91 UNSAT answers. Rows fall
+229 -> 221, but propagation rises 5,590 -> 11,343, sidecars grow 2.44% and both
+complete-time pairs regress. Keep the gate optional. Eight trace publications
+must be counted alongside the 17 -> 1 expansion reduction.
+
+Case 85 exposes a concrete missing reuse step: after 23 forced variables the
+residual is a checked positive binary clause already available at that prefix.
+A read-only native/model check succeeds, yet discovery tries four premises and
+fallback repeats propagation (4,795 + 955 visits versus baseline 955). Next,
+recognize the propagated residual before probing, reuse the unit trace, and
+price exact-prefix controls plus another excluded stream. No modified-policy
+gain is claimed. Cold checking and duplicated sources remain larger supporting
+full-cost targets.
+
+All 1,076 tests, 19 focused tests and independent replay pass. Resume
+`experiments/results/cnf-child-stream/checkpoint.json`: 22,036 keys, all 21,801
+old payloads preserved, 384 new composed records and no alternative payloads.
+Earlier 846 composed records, 2,957 ordinary decisions, six projections, 480
+sources / 5,186 artifacts / 89 manifests and four frontier lineages are retained.
+Structural authority is unchanged; no new Lean or unrestricted-SAT bound.

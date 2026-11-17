@@ -6836,6 +6836,30 @@ independent cold checks pass. The same 21,801-key archive is retained with 18
 additional composed records. No broader structural authority or unrestricted
 SAT complexity claim follows.
 
+\paragraph{Fresh admission exposes reuse after propagation.}
+The fixed child-admission policy now has two reversed-order comparisons on
+192 new neighbouring query roots, excluding inherited ordinary/composed queries
+and native roots. Both modes answer 101 SAT and 91 UNSAT queries. Native rows
+fall from 229 to 221, and added native bytes from 460,398 to 448,420. Expansion
+calls fall from 17 to one alongside eight explicit trace publications. However,
+propagation visits rise from 5,590 to 11,343 and serialized query/warm records
+grow 2.44\%. Mean complete times are 28.229 and 31.695 seconds, with admission
+slower in both observed pairs. Cold replay averages 15.985 and 21.513 seconds.
+These samples establish no stable general timing or memory gain.
+
+Case 85 in the new catalogue explains most of the propagation increase. Its
+first propagation fixes 23 variables, exposing one binary clause with an
+already stored positive answer. A read-only check verifies that result and
+lifts its model through the forced prefix to the restricted target. The policy
+nevertheless tries four unsuccessful premises and then repeats propagation
+during fallback: discovery costs 4,795 literal visits and fallback 955, compared
+with 955 for baseline. The next candidate improvement is to check the exposed
+residual before probing and reuse the retained unit trace. Root binding,
+normalization, lookup, checking and publication must remain charged; this
+diagnostic is not a measured implementation gain. The inputs still come from
+three existing template families and do not enlarge the separate structural
+authority or establish an unrestricted-SAT bound.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

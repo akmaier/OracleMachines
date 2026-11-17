@@ -12,7 +12,46 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: broaden child admission without repeating costly rejection
+## Current investigation: reuse propagated residuals before trying new premises
+
+[The fixed gate on another 192 excluded queries](child-stream.md) reduces new
+native rows **229 -> 221** and added native bytes **460,398 -> 448,420**, but
+propagation rises **5,590 -> 11,343**, sidecars grow **2.44%**, and observed mean
+complete time rises **28.229 -> 31.695 seconds**. Both timing pairs regress.
+Eight explicit trace publications accompany the **17 -> 1** expansion reduction.
+Keep the gate optional; fewer expansion calls are not a total-cost improvement.
+
+**Most concrete expansion opportunity: new case 85.** Baseline propagation fixes
+23 variables and exposes the already checked SAT root `cnf-residual-v1:[[-2,-1]]`.
+The diagnostic verifies its 80-byte payload and lifts the cached model to the
+restricted target using the saved forced assignments. The current policy still
+tries four premises, then repeats propagation during fallback: **4,795 + 955**
+visits against baseline's **955**. The extra 4,795 visits explain most of the
+5,753-visit stream increase. This is a checked opportunity, not an implemented
+or timed improvement.
+
+**Next:** immediately after baseline propagation, check the normalized residual
+for a cached answer or cheap native family before ranking/probing. Reuse the
+retained unit trace for publication and preserve exact source/model binding.
+Measure case 85 at its saved prefix, retain no-hit/nonterminal and earlier 43/172
+controls, then use another excluded stream. Charge recognition, normalization,
+lookup, checking and persistence. Avoid fitting a size threshold to saved cases.
+
+Cold replay is still the largest complete-time component (**15.985 / 21.513 s**).
+Compact source references and shared checking remain supporting total-cost targets.
+The fresh roots come from three old templates, not arbitrary-SAT coverage; two
+pairs and process RSS establish no general timing or memory bound.
+
+All **1,076 tests**, 19 focused tests and independent cold/prefix checks pass.
+Resume `experiments/results/cnf-child-stream/checkpoint.json`: **22,036 keys**,
+all 21,801 old payloads preserved, **384 new composed records**, 846 previous
+composed records, 2,957 ordinary decisions and six projections. All **480 prior
+sources / 5,186 artifacts / 89 manifests**, frontier lineages and structural
+authorities remain preserved. No new Lean or unrestricted-SAT bound.
+
+New manifest: **36 artifacts**. Next preservation audit: **5222 artifacts / 90 manifests**. Final source ledger: **483**.
+
+## Previous investigation: broaden child admission without repeating costly rejection
 
 [Restricted-child admission](child-admission.md) now has eighteen equal-state
 controls. At the preceding trial's exact prefixes, case 144 returns from

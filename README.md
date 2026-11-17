@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Fresh admission saves rows but misses a cached residual](research/child-stream.md).
+On 192 new queries, the unchanged gate reduces rows 229 -> 221 while increasing
+propagation, sidecars and observed complete time. Case 85 exposes a checked binary
+residual after propagation; the next step is to reuse it before new probes.
+All 1,076 tests and independent replay pass. Resume
+`experiments/results/cnf-child-stream/checkpoint.json`: 22,036 native keys and
+384 additional composed records, preserving every previous result.
+
+
 [Check restricted children before acquiring guards](research/child-admission.md).
 Eighteen equal-state controls repair case 144's 11-row route to three rows while
 retaining the two-row solutions in 167/190. The strict gate also loses useful

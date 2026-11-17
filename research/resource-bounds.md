@@ -3074,3 +3074,29 @@ No new native keys are required: the 21,801-key archive is reused byte-for-byte;
 Next, measure excluded inputs, amortize or reuse rejected-probe work, and identify
 structural admission criteria beyond absolute residual size. No unrestricted-SAT
 bound or minimum-cost guarantee is established.
+
+
+## 2026-11-17: fresh admission reveals reuse after propagation
+
+[Fresh child admission](child-stream.md) reduces new rows 229 -> 221 and added
+native bytes 460,398 -> 448,420, but eight explicit trace publications accompany
+the 17 -> 1 expansion reduction. Propagation rises 5,590 -> 11,343 and mean
+query/warm sidecars grow 5,458,957 -> 5,591,904.5 bytes. Mean complete times are
+28.229 / 31.695 seconds; full cold replay alone costs 15.985 / 21.513 seconds.
+Both reversed-order pairs are slower under admission, but two pairs provide
+no stable general timing claim. Process RSS averages 555 / 606 MB; SQLite sizes
+are 70,328,320 / 70,316,032 bytes, and compressed sizes 5,100,581 / 5,099,949 bytes.
+Logical additions, physical archive size and peak process memory differ.
+
+Case 85 alone adds 4,795 propagation visits over baseline's 955: four failed
+premises follow a baseline that already exposes a checked positive binary root,
+and fallback repeats that baseline. A read-only diagnostic validates the cached
+80-byte payload and model lifting through 23 forced assignments. Checking the
+propagated residual and reusing the unit trace is the next measured candidate;
+no posthoc avoided-work estimate is a deployed gain. Earlier preparation, root
+normalization, dependency checks, serialization and cold replay remain charged.
+
+The evidence union adds 235 keys (21,801 -> 22,036), with 70,344,704 database bytes
+and 5,103,740 compressed bytes. It retains both policies and 384 new composed
+records; this is not the storage of a single selected policy. All 1,076 tests
+pass and all prior evidence is preserved. No new unrestricted-SAT resource bound.

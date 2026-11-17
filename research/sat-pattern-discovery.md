@@ -5424,3 +5424,27 @@ recognition and checked dependency transport remain open. Another excluded strea
 must test the fixed gate without posthoc selection. All 1,076 tests and independent
 cold checks pass; structural authority is unchanged and 18 composed controls are
 retained against the same 21,801-key archive. No arbitrary-SAT efficiency follows.
+
+
+## 2026-11-17: fresh admission reveals reuse after propagation
+
+[The unchanged child gate on 192 excluded query roots](child-stream.md) gives
+three admitted unit-conflict children, two terminal targets and one failed
+proposal search. Its eight-row saving coexists with greater propagation,
+sidecars and observed complete time. The new queries still belong to three
+old template families and do not enlarge the separate structural authority.
+
+New case 85 supplies the next pattern: a source outside the cheap syntactic
+families reduces after forced propagation to an already checked binary SAT
+residual. A read-only check validates exact pre-query availability, the native
+answer and model transport through 23 forced assignments. The gate currently
+recognizes families before propagation and misses this reuse, paying four
+failed probes and repeated baseline propagation. Check the exposed normalized
+residual before ranking candidates, reuse the unit trace, and retain no-hit and
+nonterminal controls. Recognition/checking cost and an excluded-stream test are
+still required; the diagnostic is not an implemented speedup.
+
+All 1,076 tests and independent checks pass. The new 22,036-key checkpoint
+preserves every previous payload and 384 new composed records. Original and
+supplemental structural authorities remain unchanged. No unrestricted-SAT
+efficiency or compact-closure claim follows.

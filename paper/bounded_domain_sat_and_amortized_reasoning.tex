@@ -6438,6 +6438,46 @@ compression still consume 43.69\% and 31.96\% of combined time. The remaining
 acquisition from new negative outcomes, broader changes of guard, compact
 certification and efficient arbitrary-SAT expansion remain open.
 
+\paragraph{Incremental acquisition can grow the frontier without helping fresh queries.}
+The next extension extracts causal supports from 137 newer guarded-negative
+records, merging them with the acquired eight-catalog history. Discovery visits
+only new source records, although their proofs can depend on old nodes. It
+publishes no proofs and performs no fresh SAT search. Old raw supports and
+first-origin bindings remain preserved. Independent reconstruction checks that
+the merged frontier equals full discovery from all eleven catalogs. Both complete
+lineages and all ordinary proof and query checks remain required.
+
+Four alternating process pairs start from the same 19,543-key union, exclude
+2,112 earlier sidecar answers and cached roots, and visit 192 new neighbours
+twice. The causal frontier grows from 176 to 203 retained entries, with 217 raw
+supports from 526 origin records. All 27 new retained entries are initially
+pending. None is selected in the new workload. Fixed and extended portfolios
+both transfer 37 cofactors, expand 126 nodes, and add 364 proof rows, including
+60 materialization rows. Every trial has a byte-identical proof database. All
+modes answer 101 SAT and 91 UNSAT queries. Repeated visits add no rows.
+
+Incremental discovery visits 1,181 support nodes versus 3,708 in the untimed
+independent full reconstruction of the same frontier. Preparation rises from
+0.11359 to 1.39511 seconds, and performs 3,572 proof-node verifications. Query
+verification falls from 3,333 to 1,895 nodes; query time falls 29.01\% as
+acquisition warms checks. Complete time nevertheless rises from 12.70798 to
+13.32969 seconds, a 4.89\% mean regression with three of four pairs slower.
+The additional index occupies 2,183,937 bytes; gzip plus first-trial sidecars
+grows from 11,901,671 to 14,167,905 bytes. Mean peak RSS changes by -0.31\%
+with mixed paired signs. No memory improvement or acquisition amortization is
+established. Historical acquisition and all retained artifacts remain charged.
+
+A separate read-only probe finds a more specific opportunity. Each of the twelve
+queries that still expand has two valid deletion guards. For current case 121,
+the alternative guard produces a target containing an already checked causal
+support in the starting archive; the selected guard costs 20 expansions. This
+uses an old support, not a newly acquired entry. The probe publishes no target
+proof and does not establish a runtime improvement. A matched guard-selection
+experiment must charge the extra checks and account for changed later sharing.
+The remaining work comprises 120 negative expansions and six on SAT case 67.
+Broader cross-guard reuse, efficient acquisition and uniform polynomial bounds
+for arbitrary SAT remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -12,7 +12,96 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: proof selection and the remaining negative cases
+## Current investigation: acquisition saturation and alternative guards
+
+[Incremental causal acquisition](incremental-causal.md) now preserves the old
+history while extracting only new guarded-negative source records. Independent
+reconstruction yields the same frontier with **1,181 versus 3,708 support-node
+visits (68.15% fewer)**. Dependencies can still be old; full provenance and
+ordinary proof checks remain mandatory. This count is not a total-runtime bound.
+
+**Fresh-query result: no coverage gain.** The 137 source records add 28 raw /
+27 retained supports, growing the causal frontier **176 -> 203**, but none of
+the new entries is selected on the next 192 queries. Both policies transfer
+**37 cofactors**, expand **126 nodes** and add **364 rows**. All eight trial proof
+databases are byte-identical. New supports remain available as learned state;
+do not enable acquisition for every batch merely because the index grows.
+
+**Total cost:** mean complete time rises **12.70798 -> 13.32969 seconds (4.89%)**,
+with regressions in three of four pairs. Query time improves 29.01% because
+acquisition checks 3,572 proof nodes before queries, reducing query verifications
+3,333 -> 1,895; it does not reduce search. Preparation rises 0.11359 -> 1.39511
+seconds. The new index costs **2,183,937 bytes**; gzip plus first-trial sidecars
+grows **19.04%**. RSS has mixed paired signs and no demonstrated improvement.
+Full cold replay and compression consume 38.17% / 29.71% of extended runtime.
+
+**Next best target: guard selection before fresh solving.** In a separate
+read-only probe against the initial archive, all twelve unresolved queries have
+two valid deletion guards. For **case 121**, the alternative target contains an
+old, already checked causal support; the chosen target costs **20 expansions**.
+Test a bounded alternative-guard check after the first target misses the archive
+and support bank. Charge recognition, checking and publication, and account for
+changes in later sharing. The 20-node opportunity is local, not a demonstrated
+batch or runtime saving. The diagnostic publishes no new target proof.
+
+Case 121 is now retained. Reproduce its opportunity from the pre-query
+19,543-key snapshot and test generalization on fresh queries from the new union;
+re-solving the cached case cannot validate the new policy.
+
+Other large negative cases are **182 (26), 51 (19), 10/81 (15 each)**. Remaining
+expansions are **120 negative / six positive** (SAT case 67); templates 6/8/12
+contribute 34/56/36. Raw clause proximity is only a discovery hint. The recorded
+near-supports keep exact missing clauses, and require nonempty overlap to avoid
+the empty-clause refutation's vacuous distance-one result. Missing clauses cannot
+be silently supplied. These are current-stream IDs, not original structural cases.
+
+Both modes start from 19,543 keys, excluding 2,112 prior sidecar answers and
+cached roots, and visit 192 new neighbours twice in four alternating process
+pairs. The old legacy and causal banks have eight catalogs / 389 origins; the
+extended causal index has eleven / 526. No old retained entry is retired in
+this batch. All observed measured hits still share their first origin's guard.
+Broader discovery, economical acquisition and unrestricted polynomial bounds
+remain open.
+
+Independent validation passes **510 tests**, eight complete archive checks /
+**3,072 trial query replays**, every union node, **2,381 inherited decisions** and
+all 192 new decisions, with fresh validation search disabled. Incremental and
+complete acquisition have identical frontier structure. Every portfolio choice
+is reconstructed from the append history available before its query. All eight
+trial proof databases are byte-identical; there are no alternate certificates.
+The union retains **19,907 keys / 62,033,920 SQLite / 4,632,742 gzip bytes**,
+adding 364 keys while preserving all prior payloads. New decisions comprise
+**141 direct roots / 51 guards**, including one positive guarded result.
+
+Resume `experiments/results/cnf-incremental-causal/checkpoint.json`. It preserves
+all previous semantic fields and adds `incremental_causal_study`,
+`incremental_causal_decisions`, `incremental_causal_proposals` and
+`incremental_causal_portfolio`. Keep the enlarged bank optional. Its 203 retained
+entries have **62 ready roots / 141 pending**, with eleven-catalog / 526-origin
+lineage. The old causal bank has **62/114**, legacy **131/76**, and original
+170-entry bank **125/45** (ready/pending). All four lineage checks pass.
+The newest catalog adds 50 guarded-negative records that have not been acquired
+into the expanded index; broad automatic reacquisition has no demonstrated
+benefit on this workload.
+
+All prior **391 sources / 4,345 artifacts / 76 manifests** remain unchanged.
+Runtime binds 395 sources; the analyzer and guard probe bring the ledger to
+397. Structural authority stays **2,614 patterns / 259 pairs / 17 missing
+children**, original **17/24 / 999 steps**, separate supplemental **24/24 / 208**,
+and original case 7's discovery pointer. The manuscript builds cleanly to
+**201 pages** with **64 unchanged proof blocks**. No new Lean or unrestricted-SAT
+resource bound. The full test log retains 24 unclosed-SQLite ResourceWarnings
+from older tests; eight focused new tests emit none with warnings enabled.
+Their allocation origins remain untraced.
+
+Checkpoint SHA-256: `f3941f25743a6ce157e446a4d5aec53a0750ce4bfa1dcaf26970833d477a5e0b`.
+Report SHA-256: `f58224656b5addf7c9ae648a7c94f0d827cfc05838e96d295e35493038b5141b`.
+
+
+The new manifest binds **61 artifacts**. The next preservation audit inherits
+**4406 artifacts / 77 manifests**.
+
+## Previous investigation: proof selection and the remaining negative cases
 
 [Checked proof selection](proof-choice.md) combines the acquired legacy and
 causal frontiers. It tries an available negative proof first, then falls back to

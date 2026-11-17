@@ -2748,3 +2748,29 @@ union nodes and 2,189 inherited decisions pass. Structural authority remains
 2,614 patterns / 259 pairs / 17 missing children. The paper builds to 201 pages
 with 64 unchanged proof blocks. Older-test SQLite warnings are preserved;
 the 10 focused new tests emit none with warnings enabled.
+
+
+## 2026-11-17: incremental acquisition and alternative guards
+
+[Incremental causal discovery](incremental-causal.md) traverses the proof
+dependencies of new origins instead of reacquiring every old source record.
+For the same reconstructed frontier, it visits 1,181 support nodes versus 3,708
+in full extraction. The history merge still compares clause sets and maintains
+dominance; proofs, canonicalization, full lineage replay and persistent history
+remain separately charged. This is not a polynomial bound for arbitrary SAT.
+
+On matched fresh queries, 27 new retained descriptions save no expansions or
+proof rows. Preparation rises 0.11359 -> 1.39511 seconds; mean complete time
+rises 4.89%, despite 29.01% lower query time from warmed proof checks. The new
+index adds 2,183,937 bytes; gzip plus first-trial sidecars grows 19.04%. RSS signs
+are mixed. An alternative-guard diagnostic identifies 20 potentially avoidable
+local expansions, but extra checks and later-sharing effects require a separate
+matched experiment before making a total-cost claim.
+
+Verified resume: `experiments/results/cnf-incremental-causal/checkpoint.json`
+retains 19,907 keys, all previous payloads and checkpoint fields, plus the optional
+203-entry causal frontier. All 510 tests, eight complete archive checks, all union
+nodes and 2,381 inherited decisions pass. The new index has 62 ready roots /
+141 pending. Structural authority remains 2,614 patterns / 259 pairs / 17 missing
+children. The paper builds to 201 pages with 64 unchanged proof blocks. Older-test
+SQLite warnings remain recorded; eight focused new tests emit none.

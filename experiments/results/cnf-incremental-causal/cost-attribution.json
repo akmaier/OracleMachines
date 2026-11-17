@@ -1,0 +1,4375 @@
+{
+  "acquisition": {
+    "extraction_counts": {
+      "guard_input_literals": 35631,
+      "restriction_literal_visits": 100934,
+      "support_dropped_clauses": 29663,
+      "support_kind_component": 275,
+      "support_kind_empty": 1,
+      "support_kind_implications": 4,
+      "support_kind_positive-subsumption-v1": 16,
+      "support_kind_split": 283,
+      "support_kind_units": 602,
+      "support_memo_hits": 33,
+      "support_nodes": 1181,
+      "support_source_literals": 112960,
+      "unit_reason_literals_examined": 5770,
+      "unit_trace_steps_examined": 5111,
+      "unit_trace_steps_removed": 1996,
+      "unit_trace_steps_retained": 3115
+    },
+    "merge_counts": {
+      "duplicate_supports": 64,
+      "guard_input_literals": 17636,
+      "new_supports": 28,
+      "retired_frontier_entries": 0
+    },
+    "origin_records": 137
+  },
+  "additional_hit_cases": [],
+  "additional_hit_saved_expansions": 0,
+  "analyzer": {
+    "path": "/Users/maier/Documents/code/OracleMachines/experiments/analyze_cnf_incremental_causal.py",
+    "sha256": "6e418f740dd3e69512c590111057bd015a724fbd3c05817ff47030d2ee1cef50"
+  },
+  "attribution": [
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 0,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "incremental_archive_decisions",
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 1,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 2,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 3,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 4,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 5,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 6,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 7,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 8,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 9,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 10,
+      "expanded": {
+        "extended": 15,
+        "fixed": 15
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 15,
+        "fixed": 15
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 11,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 12,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 13,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 14,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "unsat_support_decisions",
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 15,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 16,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 17,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 18,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 19,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "witness_signatures_decisions",
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 20,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 21,
+      "choice": "materialized",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 14,
+        "fixed": 14
+      },
+      "new_rows": {
+        "extended": 15,
+        "fixed": 15
+      },
+      "origin_catalog": "witness_signatures_decisions",
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 22,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 23,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "bank": "causal",
+      "case": 24,
+      "choice": "materialized",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 26,
+        "fixed": 26
+      },
+      "new_rows": {
+        "extended": 27,
+        "fixed": 27
+      },
+      "origin_catalog": "witness_signatures_decisions",
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 25,
+      "expanded": {
+        "extended": 3,
+        "fixed": 3
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 3,
+        "fixed": 3
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 26,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 27,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 28,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 29,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 30,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "incremental_archive_decisions",
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 31,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 32,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "incremental_archive_decisions",
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 33,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 34,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 35,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 36,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 37,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 38,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 39,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "unsat_support_decisions",
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 40,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 41,
+      "expanded": {
+        "extended": 4,
+        "fixed": 4
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 4,
+        "fixed": 4
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 42,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 43,
+      "expanded": {
+        "extended": 4,
+        "fixed": 4
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 4,
+        "fixed": 4
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 44,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 45,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "bank": "causal",
+      "case": 46,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "incremental_archive_decisions",
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 47,
+      "expanded": {
+        "extended": 6,
+        "fixed": 6
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 6,
+        "fixed": 6
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 48,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 49,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 50,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 51,
+      "expanded": {
+        "extended": 19,
+        "fixed": 19
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 19,
+        "fixed": 19
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 52,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 53,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 54,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 55,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 56,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 57,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 58,
+      "expanded": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 59,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 60,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 61,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "witness_signatures_decisions",
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 62,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 63,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "bank": "causal",
+      "case": 64,
+      "choice": "materialized",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 14,
+        "fixed": 14
+      },
+      "new_rows": {
+        "extended": 15,
+        "fixed": 15
+      },
+      "origin_catalog": "witness_signatures_decisions",
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 65,
+      "choice": "materialized",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 6,
+        "fixed": 6
+      },
+      "new_rows": {
+        "extended": 7,
+        "fixed": 7
+      },
+      "origin_catalog": "active_support_decisions",
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 66,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 67,
+      "expanded": {
+        "extended": 6,
+        "fixed": 6
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 6,
+        "fixed": 6
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "bank": "causal",
+      "case": 68,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "cofactor_support_decisions",
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 69,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 70,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 71,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 72,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 73,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 74,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 75,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "unsat_support_decisions",
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 76,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 77,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 78,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 79,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 80,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 81,
+      "expanded": {
+        "extended": 15,
+        "fixed": 15
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 15,
+        "fixed": 15
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 82,
+      "expanded": {
+        "extended": 7,
+        "fixed": 7
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 7,
+        "fixed": 7
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 83,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 84,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 85,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 86,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 87,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 88,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 89,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 90,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 91,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 92,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 93,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "incremental_archive_decisions",
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 94,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 95,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 96,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 97,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 98,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 99,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 100,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "snapshot_replay_decisions",
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 101,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 102,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 103,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 104,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 105,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 106,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 107,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "active_support_decisions",
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 108,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "witness_signatures_decisions",
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 109,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 110,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "snapshot_replay_decisions",
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 111,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 112,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 113,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 114,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 115,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 116,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "snapshot_replay_decisions",
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 117,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 118,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "snapshot_replay_decisions",
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 119,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 120,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 121,
+      "expanded": {
+        "extended": 20,
+        "fixed": 20
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 20,
+        "fixed": 20
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 122,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 123,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 124,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 125,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 126,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "cofactor_support_decisions",
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "bank": "causal",
+      "case": 127,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "deferred_support_decisions",
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 128,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 129,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 130,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "witness_signatures_decisions",
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 131,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 132,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "incremental_archive_decisions",
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 133,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "unsat_support_decisions",
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 134,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 135,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 136,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 137,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 138,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 139,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "bank": "causal",
+      "case": 140,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "cofactor_support_decisions",
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 141,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 142,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 143,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "cofactor_support_decisions",
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 144,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "bank": "causal",
+      "case": 145,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "incremental_archive_decisions",
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 146,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 147,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 148,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 149,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "cofactor_support_decisions",
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 150,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 151,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "bank": "causal",
+      "case": 152,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "cofactor_support_decisions",
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 153,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 154,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 155,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 156,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 157,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "unsat_support_decisions",
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 158,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "unsat_support_decisions",
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 159,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 160,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 161,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 162,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 163,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 164,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "unsat_support_decisions",
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 165,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 166,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 167,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 168,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 169,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 170,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 171,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 172,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 173,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 174,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 175,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "incremental_archive_decisions",
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 176,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "unsat_support_decisions",
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 177,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 178,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "bank": "legacy",
+      "case": 179,
+      "choice": "ready",
+      "different_first_guard": false,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": true,
+        "fixed": true
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "origin_catalog": "incremental_archive_decisions",
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 180,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 181,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 182,
+      "expanded": {
+        "extended": 26,
+        "fixed": 26
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 26,
+        "fixed": 26
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 183,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 184,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 185,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": false,
+      "case": 186,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": true,
+      "case": 187,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": false,
+      "case": 188,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    },
+    {
+      "answer": true,
+      "case": 189,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 6
+    },
+    {
+      "answer": false,
+      "case": 190,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 8
+    },
+    {
+      "answer": true,
+      "case": 191,
+      "expanded": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "hits": {
+        "extended": false,
+        "fixed": false
+      },
+      "materialization_rows": {
+        "extended": 0,
+        "fixed": 0
+      },
+      "new_rows": {
+        "extended": 1,
+        "fixed": 1
+      },
+      "template_case": 12
+    }
+  ],
+  "different_first_guard_hits": 0,
+  "expansion_regressions": [],
+  "extended_complete_phase_percent": {
+    "cold": 38.166486396870475,
+    "compression": 29.7067795299025,
+    "preparation": 10.46620293600337,
+    "query": 8.681005925814521
+  },
+  "first_trial_storage_bytes": {
+    "extended": 14167905,
+    "fixed": 11901671
+  },
+  "frontiers": {
+    "extended": {
+      "initial_ready": 60,
+      "origins": 526,
+      "raw": 217,
+      "retained": 203,
+      "retained_clauses": 5328
+    },
+    "fixed": {
+      "initial_ready": 60,
+      "origins": 389,
+      "raw": 189,
+      "retained": 176,
+      "retained_clauses": 4568
+    }
+  },
+  "hits_first_bound_to_new_catalog": 0,
+  "identical_trial_proof_databases": true,
+  "limitations": [
+    "All costs measured on the same 19543-key union and 192 novel neighbours, excluding 2112 prior sidecar answers and cached roots. Four alternating fresh-process pairs.",
+    "Extended acquisition uses 137 new guarded negative records; its old dependencies may be visited. Original acquisition remains separately charged. Complete old and new lineage checks remain mandatory.",
+    "Smaller supports do not necessarily mean cheaper proofs. Retired entries remain in raw history; the lookup frontier can omit a cheaper ready alternative.",
+    "All new index serialization bytes are charged. No established amortization, cross-guard or arbitrary-SAT polynomial bound."
+  ],
+  "proof_choices": {
+    "causal_materialized": 2,
+    "causal_ready": 6,
+    "legacy_materialized": 2,
+    "legacy_ready": 27
+  },
+  "relative_change_percent": {
+    "compressed_bytes": 0.0,
+    "database_bytes": 0.0,
+    "expanded_nodes": 0.0,
+    "mean_complete_peak_rss_bytes": -0.30888636833807936,
+    "mean_complete_worker_seconds": 4.892260255399616,
+    "mean_query_seconds": -29.007209825668745,
+    "new_nodes": 0.0
+  },
+  "remaining_expansions_by_answer": {
+    "False": 120,
+    "True": 6
+  },
+  "remaining_expansions_by_template": {
+    "12": 36,
+    "6": 34,
+    "8": 56
+  },
+  "report": {
+    "path": "experiments/results/cnf-incremental-causal/report.json",
+    "sha256": "f58224656b5addf7c9ae648a7c94f0d827cfc05838e96d295e35493038b5141b"
+  },
+  "retired_prior_entries": {
+    "count": 0,
+    "initial_ready": 0
+  },
+  "trials": [
+    {
+      "complete_seconds": {
+        "extended": 13.00959908310324,
+        "fixed": 11.366822916083038
+      },
+      "relative_change_percent": {
+        "complete_peak_rss_bytes": 5.045735409190244,
+        "complete_worker_seconds": 14.452377582972819
+      },
+      "repeat": 0
+    },
+    {
+      "complete_seconds": {
+        "extended": 13.065500209107995,
+        "fixed": 12.596341166179627
+      },
+      "relative_change_percent": {
+        "complete_peak_rss_bytes": -16.699050086355783,
+        "complete_worker_seconds": 3.724566020711073
+      },
+      "repeat": 1
+    },
+    {
+      "complete_seconds": {
+        "extended": 13.769873625133187,
+        "fixed": 12.24946445832029
+      },
+      "relative_change_percent": {
+        "complete_peak_rss_bytes": 34.198641707174126,
+        "complete_worker_seconds": 12.412046028511714
+      },
+      "repeat": 2
+    },
+    {
+      "complete_seconds": {
+        "extended": 13.473783500026911,
+        "fixed": 14.619297749828547
+      },
+      "relative_change_percent": {
+        "complete_peak_rss_bytes": -16.285721995844238,
+        "complete_worker_seconds": -7.835631159609358
+      },
+      "repeat": 3
+    }
+  ],
+  "used_core_counts": {
+    "1": 2,
+    "6": 1,
+    "7": 1,
+    "9": 1,
+    "15": 2,
+    "17": 1,
+    "22": 2,
+    "25": 1,
+    "28": 2,
+    "29": 1,
+    "43": 1,
+    "53": 1,
+    "56": 1,
+    "57": 1,
+    "63": 1,
+    "64": 1,
+    "65": 1,
+    "83": 1,
+    "102": 1,
+    "134": 1,
+    "142": 1,
+    "144": 1,
+    "159": 1,
+    "162": 1,
+    "179": 1,
+    "213": 1,
+    "228": 1,
+    "292": 1,
+    "308": 1,
+    "322": 2,
+    "369": 1,
+    "384": 1
+  },
+  "verification_placement": {
+    "extended": {
+      "preparation_verified_nodes": 3572,
+      "query_verified_nodes": 1895
+    },
+    "fixed": {
+      "preparation_verified_nodes": 0,
+      "query_verified_nodes": 3333
+    }
+  }
+}

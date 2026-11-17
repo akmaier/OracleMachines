@@ -28,6 +28,16 @@ classes.
 
 ## Paper
 
+[Acquire causal supports incrementally and retain the failed coverage test](research/incremental-causal.md).
+Incremental extraction matches full reconstruction with **68.15% fewer support
+visits**, but its 27 additional retained supports give **no new hits** on fresh
+queries and increase mean complete time **4.89%**. Keep acquisition optional.
+A read-only probe identifies an alternative checked guard for case 121 that
+could avoid 20 local expansions; matched policy costs remain to be tested.
+All **510 tests** and independent complete replay pass.
+Resume `experiments/results/cnf-incremental-causal/checkpoint.json`
+(19,907 preserved keys); the enlarged bank remains optional.
+
 [Choose a checked available proof before deriving another support](research/proof-choice.md).
 Combining the acquired frontiers preserves causal coverage while reducing proof
 materialization **58.39%** and new proof rows **22.79%** on 192 fresh queries.

@@ -9247,3 +9247,24 @@ Union ready/pending frontiers are 131/39 (active), 139/68 (extended), 83/93
 (causal), 83/120 (incremental causal); these are retained-bank availability counts,
 not new structural authority. Structural checks and 64 proof blocks are preserved.
 No new Lean, minimum-cost expansion or unrestricted-SAT result is established.
+
+
+## 2026-11-17: admit checked children and retain rejection costs
+
+[Child admission](child-admission.md) now checks an existing native child or a
+unit-conflict trace before publishing a local guard, preserving cheap syntactic
+families and native fallback for tautological sources. Eighteen exact-prefix
+arms repair prior fresh case 144 (11 -> 3 rows), keep 167/190 at two rows, but
+reject beneficial historical 43/172. Admission has at most two new native rows
+and no general child expansion; fallback remains unrestricted. Rejected probes
+are costly: historical propagation rises 4,501 -> 8,666 against baseline.
+
+Next, measure another excluded stream and explore trace reuse or structural
+admission for nonterminal children. All four rejected post-UP roots remain unknown
+and outside cheap families; absolute literal size cannot separate beneficial 172
+(112 literals) from regressing 70 (111). No fresh-stream or stable timing gain is
+claimed. The 21,801-key archive is unchanged; 18 new composed records retain all
+arms. All 1,076 tests, 19 focused tests and independent cold replay pass. Prior
+475 sources / 5,115 artifacts / 88 manifests, four frontiers and structural
+coverage are preserved. Resume `experiments/results/cnf-child-admission/checkpoint.json`.
+No new Lean or unrestricted-SAT theorem.

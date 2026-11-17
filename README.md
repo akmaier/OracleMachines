@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Check restricted children before acquiring guards](research/child-admission.md).
+Eighteen equal-state controls repair case 144's 11-row route to three rows while
+retaining the two-row solutions in 167/190. The strict gate also loses useful
+43/172 savings and adds rejected-probe work, so it stays optional pending another
+excluded stream. All 1,076 tests pass. Resume
+`experiments/results/cnf-child-admission/checkpoint.json`: the unchanged 21,801-key
+native archive and 18 additional composed records, with all earlier results kept.
+
+
 [Test local discovery on new queries and isolate its regression](research/local-guard.md).
 On **192 new neighbouring CNFs**, native rows stay at 250: seven fewer expansion
 calls are replaced by seven trace publications. Native bytes fall slightly,

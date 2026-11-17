@@ -12,7 +12,46 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reject costly forced residuals before acquisition
+## Current investigation: broaden child admission without repeating costly rejection
+
+[Restricted-child admission](child-admission.md) now has eighteen equal-state
+controls. At the preceding trial's exact prefixes, case 144 returns from
+**11 to 3 rows**, while cases 167/190 retain **2/2 rows**. Across these three
+selected controls the gate uses **7 rows**, compared with **15** for both native
+baseline and unconditional local discovery. Native bytes are **12,840** versus
+28,490 / 23,872; serialized delta/record bytes are **73,439** versus 78,189 / 90,645.
+This is a retrospective control result, not a fresh-stream improvement.
+
+**The gate is too restrictive for useful nonterminal children.** It rejects
+historical 43/172, losing their 10/9 -> 7/7 row savings. Historical propagation
+rises **4,501 -> 8,666** against baseline. Even the three positive/regression
+controls use **5,285** propagation visits against baseline's **4,821** because
+case 144 pays discovery and screening before fallback. Keep this policy optional.
+
+The admitted path publishes at most two native rows and performs no general
+child expansion; earlier preparation, proof checking and fallback remain charged.
+After propagation, all four rejected children are unknown and outside the cheap
+syntactic families. Beneficial case 172 leaves **112 literals**, versus **111**
+for regressing case 70, so an absolute smaller-residual threshold cannot separate
+them. Cached dependency transport and broader bounded child proofs remain open.
+
+**Next:** measure the fixed gate on another excluded query stream, preserving the
+six equal-state controls. Charge rejected probes; investigate reuse of their
+propagation traces and structural tests for useful nonterminal children. Do not
+promote a posthoc size threshold or the selected eight-row recovery to a general
+claim. Compact source references and shared cold replay remain supporting targets.
+
+All **1,076 tests**, 19 focused tests and independent cold checks pass. Resume
+`experiments/results/cnf-child-admission/checkpoint.json`: **21,801 native keys**,
+the exact previous archive, **18 new composed records**, 828 prior composed records,
+2,957 ordinary decisions and six projections. Prior **475 sources / 5,115 artifacts
+/ 88 manifests**, four frontier lineages and structural authorities are preserved.
+No new Lean or unrestricted-SAT bound. Single-sample arm times establish no stable
+runtime or peak-memory gain; these controls exclude repeated bank preparation.
+
+New manifest: **71 artifacts**. Next preservation audit: **5186 artifacts / 89 manifests**. Final source ledger: **480**.
+
+## Previous investigation: reject costly forced residuals before acquisition
 
 [Target-local discovery](local-guard.md) now has six historical controls and
 four matched streams on **192 new neighbouring CNFs**. It finds guards without

@@ -3049,3 +3049,28 @@ bytes and 5,050,133 compressed bytes; this is retained experimental evidence,
 not the storage of a single selected policy. All earlier payloads, 469 sources,
 5,057 artifacts and 87 manifests are preserved. All 1,069 tests pass. There is
 no new unrestricted-SAT resource bound.
+
+
+## 2026-11-17: admit checked children and retain rejection costs
+
+[The child-admission gate](child-admission.md) has at most `1+2b` discovery
+propagation calls plus one child propagation call (b=4), and charges target/child
+normalization, family scans, source eligibility and checked native reads. Accepted
+guards publish at most two native rows, reusing premise and child conflict traces;
+a checked existing child needs no new row. This bound excludes inherited
+preparation, dependency checking, source/trace size, sidecars and fallback.
+
+In three selected equal-state controls 144/167/190, baseline/local/admitted rows
+are 15/15/7, native bytes 28,490/23,872/12,840, and serialized delta/record bytes
+78,189/90,645/73,439. Propagation is 4,821/5,984/5,285: rejected-probe overhead still
+exceeds native baseline. The historical 43/70/172 controls instead give 23/19/23
+rows and 4,501/5,763/8,666 propagation visits. A tighter publication bound therefore
+does not imply cheaper total expansion. Single timing samples exclude original
+bank preparation and provide no stable runtime or memory claim. Full inherited
+cold replay is validated separately; it is not the per-arm cold timing.
+
+No new native keys are required: the 21,801-key archive is reused byte-for-byte;
+18 new composed records and all arm deltas remain retained. All 1,076 tests pass.
+Next, measure excluded inputs, amortize or reuse rejected-probe work, and identify
+structural admission criteria beyond absolute residual size. No unrestricted-SAT
+bound or minimum-cost guarantee is established.

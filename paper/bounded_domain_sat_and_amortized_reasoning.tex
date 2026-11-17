@@ -6806,6 +6806,36 @@ new assignment is also unimplemented. All 1,069 tests and cold replay pass;
 the 21,801-key union preserves all previous payloads. New neighbouring queries
 do not establish broader structural authority or an unrestricted-SAT bound.
 
+\paragraph{Child admission bounds publication, but can lose useful guards.}
+An optional gate now inspects the restricted child before acquiring a local
+guard. It preserves syntactic two-CNF, Horn and dual-Horn handling, and admits
+an existing checked child answer or a retained unit-conflict trace. An admitted
+guard inserts at most two native rows: one for the unit-refuted premise and
+one for a missing unit-refuted child. An existing child adds no row. Both
+traces are checked and reused, with no general child expansion in this path.
+This bound excludes preparation, dependency checking, certificate size,
+composed records and unrestricted fallback after rejection.
+
+Eighteen equal-state arms test six previously selected cases. At the preceding
+trial's prefixes, case 144 returns from eleven rows to three, while cases 167
+and 190 retain two rows each. Across these three controls, baseline, local and
+admitted policies use 15, 15 and 7 rows; added native bytes are 28,490, 23,872
+and 12,840. Propagation visits are 4,821, 5,984 and 5,285, so rejection overhead
+still exceeds baseline propagation. The historical 43/70/172 controls instead
+use 23, 19 and 23 rows, with 4,501, 5,763 and 8,666 propagation visits: the
+gate rejects the useful nonterminal guards in 43 and 172.
+
+All four rejected children remain unknown and outside the cheap syntactic
+families after unit propagation. Beneficial case 172 leaves 112 literals,
+whereas regressing case 70 leaves 111, so an absolute monotone preference for
+smaller residuals cannot separate these two controls. Structural recognition,
+checked dependency transport and reuse of rejected probes remain open. Another
+excluded query stream must assess the fixed gate; these retrospective controls
+and single timing samples establish no general speedup. All 1,076 tests and
+independent cold checks pass. The same 21,801-key archive is retained with 18
+additional composed records. No broader structural authority or unrestricted
+SAT complexity claim follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

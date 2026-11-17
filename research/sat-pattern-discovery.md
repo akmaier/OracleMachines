@@ -5404,3 +5404,23 @@ composed records alongside 438 earlier records, 2,957 ordinary decisions and six
 projections. All 1,069 tests and independent cold replay pass. Existing structural
 authorities remain unchanged. Discovery bounds do not bound the unrestricted
 child solve, prove compact closure or supply a uniform polynomial SAT algorithm.
+
+
+## 2026-11-17: admit checked children and retain rejection costs
+
+[Checking the remaining child](child-admission.md) distinguishes a valid guard
+from a cheaply certifiable residual. A known native answer or unit-refuted child
+admits the proposal with at most two new native rows and no general child search.
+Rejection leaves the archive intact and uses ordinary solving; native syntactic
+families retain priority. Tautological sources also fall back because deletion
+guards require a stricter source representation.
+
+At identical prefixes, case 144 falls 11 -> 3 rows and 167/190 retain two rows each.
+The gate nevertheless rejects useful 43/172 guards. Their residuals and both
+rejection controls remain outside two-CNF/Horn/dual-Horn; all post-UP native roots
+are absent. Beneficial 172 has 112 literals, versus 111 in regressing 70, refuting an
+absolute monotone smaller-residual selector for these controls. Broader structural
+recognition and checked dependency transport remain open. Another excluded stream
+must test the fixed gate without posthoc selection. All 1,076 tests and independent
+cold checks pass; structural authority is unchanged and 18 composed controls are
+retained against the same 21,801-key archive. No arbitrary-SAT efficiency follows.

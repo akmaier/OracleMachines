@@ -1,0 +1,145 @@
+{
+  "answer": false,
+  "bank_counts": {
+    "chain_hits": 1,
+    "chain_lookups": 1,
+    "checked_chain_steps": 1,
+    "checked_chains": 1,
+    "guard_clause_comparisons": 161,
+    "guard_forced_variables": 3,
+    "guard_input_literals": 473,
+    "restriction_literal_visits": 235,
+    "verified_deletion_guards": 1
+  },
+  "case": 139,
+  "chain_bytes": 13434,
+  "chains": {
+    "path": "experiments/results/cnf-guard-chain/139-baseline/chains.json",
+    "sha256": "d4aa50e6ea043c262922ffe54e326a235cf6685f54bcb4e68991123b439adfc6"
+  },
+  "child_metrics": {
+    "accounting_reads": 1,
+    "certificate_serialized_bytes": 954,
+    "database_lookups": 1,
+    "expanded_nodes": 1,
+    "inserted_bytes": 1702,
+    "inserted_nodes": 1,
+    "key_serialized_bytes": 1496,
+    "normalization_literal_visits": 380,
+    "propagation_literal_visits": 741,
+    "source_witness_literal_payload": 0,
+    "unit_conflicts": 1,
+    "verification_literal_payload": 190,
+    "verification_trace_literals": 37,
+    "verified_nodes": 1,
+    "visits": 1
+  },
+  "child_seconds": 0.0014145825989544392,
+  "choice": null,
+  "cold": {
+    "chain_answers": [
+      false
+    ],
+    "chain_seconds": 0.03709045797586441,
+    "native": {
+      "checked_nodes": 20566,
+      "lineage": {
+        "causal": {
+          "prior_pending_roots": 116,
+          "prior_ready_roots": 73,
+          "prior_sources_checked": 389
+        },
+        "legacy": {
+          "prior_pending_roots": 79,
+          "prior_ready_roots": 153,
+          "prior_sources_checked": 389
+        }
+      },
+      "lineage_seconds": 0.526909917127341,
+      "no_acquisition": true,
+      "proof_query_seconds": 4.670393790584058,
+      "query_answers": [],
+      "seconds": 5.228557874914259,
+      "snapshot": {
+        "censuses": 1,
+        "complete_frozen_audit": true,
+        "metadata_reads": 0,
+        "nodes": 20566,
+        "payload_units": 33961075
+      }
+    },
+    "seconds": 5.310693624895066
+  },
+  "composition_seconds": 0.0011230409145355225,
+  "delta": {
+    "path": "experiments/results/cnf-guard-chain/139-baseline/delta.json",
+    "sha256": "7b510ee2707e991c4b2db5f21c81f1ad3d6e0934290737902882d2d248562112"
+  },
+  "delta_bytes": 1747,
+  "guards": 1,
+  "mode": "baseline",
+  "near_counts": {},
+  "near_solver_counts": {},
+  "new_nodes": 1,
+  "new_payload_units": 1702,
+  "open_seconds": 0.03135604178532958,
+  "prefix": {
+    "case": 139,
+    "nodes": 20565,
+    "row_digest": "292e83857d6df38f9806c1b4d50c954a3deea8e54dd95c79be806f4fba2ee5ae",
+    "seconds": 0.28649966698139906
+  },
+  "premise_counts": {},
+  "premise_inserted": false,
+  "premise_seconds": 0.0,
+  "premise_solver_counts": {},
+  "preparation_counts": {
+    "alternative_guard_memory_hits": 1,
+    "certificate_disk_hits": 3993,
+    "certificate_memory_hits": 694,
+    "core_bank_disk_hits": 145,
+    "database_lookups": 4144,
+    "guard_memory_hits": 5,
+    "key_serialized_bytes": 3186955,
+    "normalization_literal_visits": 775178,
+    "read_bytes": 3619553,
+    "restriction_literal_visits": 282404,
+    "verification_literal_payload": 367863,
+    "verification_trace_literals": 16327,
+    "verified_implication_edges": 70,
+    "verified_nodes": 4140,
+    "verified_subsumption_literal_payload": 10,
+    "witness_template_disk_hits": 2
+  },
+  "preparation_seconds": 0.9196538748219609,
+  "recognition_counts": {
+    "guard_bank_entries": 260,
+    "guard_candidates_compared": 242,
+    "guard_candidates_matched": 3,
+    "guard_clause_comparisons": 19682,
+    "guard_forced_variables": 6,
+    "guard_input_literals": 66678,
+    "restriction_literal_visits": 470,
+    "verified_deletion_guards": 2,
+    "witness_nonpositive_or_missing_candidates": 2
+  },
+  "row_digest": "9c2d03adb5803ebfb9e42aababb228cc5b6047d4e964da101849756bd8ca4dd3",
+  "selection_counts": {
+    "alternative_candidates": 1,
+    "guard_candidates_compared": 104,
+    "guard_candidates_matched": 2,
+    "guard_clause_comparisons": 8642,
+    "guard_forced_variables": 6,
+    "guard_input_literals": 1356,
+    "restriction_literal_visits": 470,
+    "selection_calls": 1,
+    "selection_misses": 1,
+    "support_candidates": 383,
+    "support_containment_clauses": 11953,
+    "verified_deletion_guards": 2
+  },
+  "selection_seconds": 0.0,
+  "serialization_seconds": 0.0006388328038156033,
+  "warm_lookup_seconds": 0.00018125027418136597,
+  "warm_setup_seconds": 0.00900220824405551
+}

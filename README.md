@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Compose checked restrictions and price the remaining solve](research/guard-chain.md).
+On eight historical cases, expansions fall **68 -> 29**, added native proof
+payload falls **57.72%**, and deltas plus chain records shrink **13.47%**. Added
+recognition/checking outweighs child-solve time saved; no total runtime gain is
+established. All **1,022 tests** and independent replay pass. Next, avoid duplicate
+premise checking and test fresh inputs. Resume
+`experiments/results/cnf-guard-chain/checkpoint.json` (**20,666 native keys** plus
+eight checked chain conclusions); composed reuse requires its bound sidecars.
+
 [Test terminal admission and locate the remaining matching gap](research/terminal-guard.md).
 The optional filter adds no hits on 192 fresh queries: both policies use 68
 expansions. Historical controls pass. Cases 56 and 176 account for 41 expansions;

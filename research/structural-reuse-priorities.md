@@ -12,7 +12,38 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: compose restrictions from nearly contained cores
+## Current investigation: avoid duplicate checking in guard composition
+
+[Checked guard chains](guard-chain.md) reduce expansions and new rows **68 -> 29**
+on the eight exact historical prefixes. Added native payload falls **57.72%**;
+serialized deltas plus chains fall **13.47%**. Cases 56 and 176 fall **41 -> 11**
+expansions, and control 155 remains SAT. These are historical cases, not fresh
+coverage. Selection and premise checking outweigh child-solve time saved in the
+single samples; no total runtime or peak-memory improvement is established.
+
+**Next priority:** check the stored strengthened premise before the separate
+core proof, and reuse prepared core clause sets for near-containment. All six
+selected premises already exist. A read-only check-cost probe reduces verified
+nodes **148 -> 57**, literal payload **13,299 -> 8,073**, and read bytes
+**122,683 -> 68,141**. This is not yet a deployed selector or discovery comparison.
+Missing premises still need the checked-core/subset fallback. Compare the change
+on fresh excluded inputs with setup, recognition, checking and cold replay charged.
+More guards and smaller residuals do not guarantee lower total cost.
+
+Cases 176/41/179 retain ten/eight/four expansions. Broader coverage and exact
+recomposition remain priorities; this step supplies checked composition without
+changing the native proof format. Composed source conclusions require the bound
+sidecars and optional `GuardChainBank`; native root lookup alone is insufficient.
+
+Resume `experiments/results/cnf-guard-chain/checkpoint.json` (**20,666 native keys**,
+all prior payloads preserved, eight checked chain conclusions). All 16 arms,
+2,957 inherited decisions and **1,022 solver tests** pass. Prior 416 sources and
+4,579 artifacts / 80 manifests remain unchanged. No new unrestricted-SAT bound.
+
+
+New manifest: **70 artifacts**. Next preservation audit: **4649 artifacts / 81 manifests**.
+
+## Previous investigation: compose restrictions from nearly contained cores
 
 [The terminal-filter comparison](terminal-guard.md) gives **no new fresh hit**:
 both policies use 68 expansions and 309 new rows on 192 new neighbouring queries.

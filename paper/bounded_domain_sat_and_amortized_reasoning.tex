@@ -6559,11 +6559,39 @@ $T\wedge C$ is unsatisfiable and every model of $T$ falsifies $C$. Restricting
 $T$ accordingly preserves satisfiability; omitting the missing clause does not
 establish UNSAT. Current cases 56 and 176 account for 41 of the 68 expansions.
 Their justified restrictions reduce clause/literal sizes from 79/218 to 67/172
-and from 86/240 to 77/209. Neither residual is already reusable. Checked proof
-composition and the cost of solving the remaining residuals are still open
-implementation steps. The SAT case 155 provides a necessary control against
+and from 86/240 to 77/209. Neither residual is already reusable. These observations motivate the checked
+composition and remaining-solve comparison below. The SAT case 155 provides a necessary control against
 premature negative conclusions. No new structural coverage or unrestricted
 polynomial bound follows from these diagnostics.
+
+\paragraph{Compose restrictions, then price the remaining solve.}
+Checked guard chains now preserve the original restriction, one additional
+restriction and the final native child result. Each negative strengthened
+premise justifies its guard; SAT witnesses are lifted through both assignments.
+The native proof format is unchanged. Composed source conclusions persist in
+bound sidecar records and require a checked chain bank for reuse; ordinary
+native-root lookup alone need not contain the source conclusion.
+
+Six of eight historical unresolved cases admit the additional restriction.
+Reconstructing each exact persistent pre-query prefix reduces expansions and new
+rows from 68 to 29; cases 56 and 176 together fall from 41 to 11. Control 155
+remains SAT. All six strengthened premises are already stored. Added native
+identifier-plus-JSON payload falls from 124,143 to 52,493 bytes, while serialized
+proof deltas plus chains fall from 251,022 to 217,209 bytes. Earlier acquisition,
+retained history and index storage remain additional costs. These historical
+cases establish no fresh-query coverage or peak-memory improvement.
+
+The single-sample query-phase sum, including selection, premise checking, child
+solving and composition, rises from 0.088170 to 0.160206 seconds. Preparation,
+serialization, warm-bank construction and cold replay are reported separately;
+no total runtime gain is established. A separate read-only probe reduces verified
+nodes from 148 to 57 by checking the already stored strengthened premises without
+first traversing the support proofs. This is a checking-cost opportunity, not a
+deployed discovery improvement. A missing premise still requires checked
+construction. For $d$ guards with intermediate encodings bounded by $L$ bytes,
+sidecar storage is $O(dL)$ plus models, in addition to the native proofs. Matching,
+normalization, proof traversal, restriction, lifting and residual solving remain
+charged. Fresh generalization and unrestricted polynomial SAT bounds remain open.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}

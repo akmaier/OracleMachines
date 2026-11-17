@@ -9047,3 +9047,24 @@ premise publication, acquisition and persistence costs. Resume
 `experiments/results/cnf-terminal-guard/checkpoint.json` (20,649 keys; all prior
 payloads preserved). Full proof replay, 1,013 solver tests and two additional
 condition tests pass; structural authority and existing proof blocks are unchanged.
+
+
+## 2026-11-17: compose restrictions and locate duplicate checking cost
+
+[Guard-chain composition](guard-chain.md) reduces expansions/new rows **68 -> 29**
+on eight exact historical pre-query prefixes. Added native payload falls 57.72%;
+serialized deltas plus composition records fall 13.47%. All six strengthened
+premises already exist. Case 155 remains SAT. Selection/checking outweighs the
+child-solve time saved in single samples; no total runtime or peak-memory gain
+is established. A separate read-only probe finds that checking those premises
+without a separate support-proof traversal reduces verified nodes **148 -> 57**.
+Implement that lookup order and prepared near-containment membership next, then
+test new excluded queries. Missing premises still require checked derivation.
+
+Resume `experiments/results/cnf-guard-chain/checkpoint.json`: 20,666 native keys,
+17 added and all prior payloads preserved, plus eight checked chain conclusions.
+Native proof format is unchanged; optional `GuardChainBank` must load and check
+the bound sidecars for composed source reuse. All 16 trial arms, 2,957 inherited
+decisions and 1,022 solver tests pass. Original and supplemental structural
+coverage remain separate and unchanged. Historical savings do not establish
+fresh coverage, optimal expansion or a polynomial bound for arbitrary SAT.

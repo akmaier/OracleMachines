@@ -6860,6 +6860,47 @@ diagnostic is not a measured implementation gain. The inputs still come from
 three existing template families and do not enlarge the separate structural
 authority or establish an unrestricted-SAT bound.
 
+\paragraph{Reusing answers exposed by propagation.}
+The next optional selector implements that residual check after a nonempty
+forced prefix. A checked existing residual requires at most one new target row
+and no child expansion. A missing constant, two-CNF, Horn or dual-Horn residual
+requires at most a leaf and target row, with at most one native leaf expansion.
+The saved unit trace binds the result to the source and reconstructs the model
+or links the negative child proof. Earlier preparation, normalization, dependency
+checking, trace size and persistence remain charged. Unknown nonfamily residuals
+retain the preceding premise-ranking and admission fallback.
+
+Twenty-one exact-prefix arms compare native baseline, previous admission and
+propagated reuse. On case 85, the new path reduces propagation visits from
+5,750 to 955 and removes all four premise probes. It retains the same one row
+and 1,672 native bytes; one trace publication replaces the expansion call.
+The other six controls preserve the previous gate's payloads and propagation,
+including its rejection of useful historical cases 43/172. This establishes a
+specific avoided-computation result, not a general minimum-cost expansion rule.
+
+A further 192 excluded queries, run in six fresh workers with reversed policy
+order, produce no successful new residual reuse. Both admission policies retain
+identical native payloads: 199 new rows, 445,570 added native bytes and 14,907
+propagation visits, compared with baseline's 215 rows, 469,640 bytes and 9,528
+visits. The existing gate accounts for this row saving. Additional lookup and
+family checks remain charged; serialized query/warm records grow another
+0.12\%. Mean complete times are 27.071, 28.277 and 28.119 seconds for baseline,
+previous admission and propagated reuse. Opposite new-versus-previous timing
+signs across the two pairs establish no stable speedup. All 1,085 tests and
+independent replay checks pass; all prior native payloads and decisions remain
+preserved. These neighbouring roots do not enlarge general structural coverage.
+
+Two rejected proposals account for all eleven remaining child expansions.
+Their baselines retain thirteen and one forced variables, respectively, yet
+fallback repeats propagation before solving. Reusing these prefixes is a further
+candidate, with residual acquisition still unrestricted. A posthoc structural
+check also finds that case 36's eleven-variable residual becomes two-CNF under
+either value of canonical variable 6: every clause wider than two contains that
+variable. Both restrictions are retained and checked on all 2,048 assignments.
+Case 186 has no corresponding single-variable decomposition. Recognition and
+alternative proof acquisition remain to be measured; this diagnostic supplies
+neither a runtime saving nor a bound on conditioning size for arbitrary CNF.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

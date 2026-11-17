@@ -5448,3 +5448,30 @@ All 1,076 tests and independent checks pass. The new 22,036-key checkpoint
 preserves every previous payload and 384 new composed records. Original and
 supplemental structural authorities remain unchanged. No unrestricted-SAT
 efficiency or compact-closure claim follows.
+
+## 2026-11-17: recognize a cached residual after propagation
+
+[Propagated reuse](propagated-reuse.md) now accepts a checked native answer or
+recognized native family exposed by a nonempty unit prefix. The unit trace
+provides exact source/residual recomposition for SAT models and negative proofs.
+The new route repairs the selected case-85 regression (5,750 -> 955 visits)
+without new storage savings. Twenty-one equal-state arms preserve the other
+controls. Another 192 excluded roots produce no successful new residual lookup:
+both admission policies retain identical proofs and propagation counts. There
+is no added structural authority or stable general timing gain.
+
+Two remaining cases retain useful prefixes even though their proposals are
+rejected. Reusing those traces before general residual solving is the next
+implementation candidate. Case 36's exposed 11-variable residual also has a
+checked single-variable decomposition: all three clauses wider than two contain
+canonical variable 6, and both assignments leave two-CNF. The posthoc artifact
+retains both restrictions and checks pointwise equivalence on all 2,048 full
+assignments. Case 186 has no such variable under the same exhaustive syntactic
+test. This distinguishes a useful restricted cell from an explicitly unresolved
+one. It neither bounds conditioning size for every CNF nor prices an alternative
+proof; discovery and two-branch acquisition are still to measure.
+
+The new 22,259-key evidence union preserves all earlier results and adds 597
+composed records. All 1,085 tests and independent replay pass. Structural and
+supplemental authority, four frontier lineages and six projections are preserved.
+No new Lean proof, compact closure or unrestricted-SAT efficiency follows.

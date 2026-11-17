@@ -9293,3 +9293,32 @@ old payloads preserved, 384 new composed records and no alternative payloads.
 Earlier 846 composed records, 2,957 ordinary decisions, six projections, 480
 sources / 5,186 artifacts / 89 manifests and four frontier lineages are retained.
 Structural authority is unchanged; no new Lean or unrestricted-SAT bound.
+
+## 2026-11-17: reuse propagated residuals and retain the no-hit comparison
+
+[The optional propagated-residual selector](propagated-reuse.md) checks the root
+exposed by a nonempty forced prefix before probing new premises. It reuses the
+saved unit trace for checked target publication, preserves old family priority
+and rejection behavior, and admits missing native-family leaves only when enabled.
+Case 85 now uses 955 rather than 5,750 propagation visits with the same one-row
+result. Twenty-one exact-prefix arms retain all previous controls.
+
+On another 192 excluded queries the new route never activates. Both admission
+policies produce identical native payloads, 199 new rows and 14,907 propagation
+visits, versus baseline's 215 rows and 9,528 visits. Added lookup/recognition and
+0.12% larger sidecars remain charged; opposite timing-pair signs establish no
+stable speedup. The new check does not earn the previous gate's fresh row saving.
+
+Next, reuse baseline unit traces after a miss or rejected guard. Fresh cases
+36/186 retain 13/1 forced variables but account for all eleven child expansions.
+A posthoc diagnostic also checks that either value of case 36's canonical
+variable 6 leaves two-CNF; case 186 has no such single-variable decomposition.
+Recognition and two-branch acquisition need measurement before claiming savings.
+
+All 1,085 tests, 21 focused tests and independent replay pass. Resume
+`experiments/results/cnf-propagated-reuse/checkpoint.json`: 22,259 keys,
+all 22,036 previous payloads, 597 new composed records, 1,230 earlier composed
+records, 2,957 ordinary decisions and six projections. No alternate payloads.
+All 483 prior sources / 5,222 artifacts / 90 manifests and the four frontier
+lineages are preserved. Structural authorities remain unchanged. This is an
+optional experiment route, with no new Lean or unrestricted-SAT theorem.

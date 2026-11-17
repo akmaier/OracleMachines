@@ -3100,3 +3100,39 @@ The evidence union adds 235 keys (21,801 -> 22,036), with 70,344,704 database by
 and 5,103,740 compressed bytes. It retains both policies and 384 new composed
 records; this is not the storage of a single selected policy. All 1,076 tests
 pass and all prior evidence is preserved. No new unrestricted-SAT resource bound.
+
+## 2026-11-17: reuse forced residuals with explicit lookup and publication costs
+
+[Propagated-residual reuse](propagated-reuse.md) checks at most one additional
+normalized native root after a nonempty baseline unit prefix. The known path
+publishes at most one target row with zero child expansions. A missing constant,
+two-CNF, Horn or dual-Horn residual publishes at most two rows and performs at
+most one native leaf expansion. The previous bounded ranking/probes remain the
+fallback for a nonfamily miss. These local row bounds exclude earlier preparation,
+trace size, normalization, dependency checking, serialized records and cold replay.
+They provide no polynomial bound on arbitrary residual acquisition.
+
+At case 85's exact prefix, propagation falls 5,750 -> 955, four premise probes
+are removed, and one trace publication replaces the expansion call. All modes
+retain one row / 1,672 native bytes. The next 192-query stream has no new residual
+hits: baseline/admission/propagated rows are 215/199/199; added native bytes
+469,640/445,570/445,570; propagation visits 9,528/14,907/14,907. Both admission
+policies retain identical native payloads, while additional sidecars grow 0.12%.
+Complete-time means are 27.071/28.277/28.119 seconds; opposite signs in the two
+new-versus-previous timing pairs establish no stable speedup. Cold replay means
+are 13.001/13.639/12.760 seconds. Process RSS averages 502/564/564 MB, not a live
+memory bound. SQLite bytes are 71,483,392/71,434,240/71,434,240 and compressed
+bytes 5,159,931/5,155,317/5,155,317. The existing gate earns the fresh row saving.
+
+Cases 36/186 contribute all eleven remaining child expansions despite saved
+prefixes of 13/1 forced variables; reusing these prefixes during fallback remains
+unimplemented. Case 36 has a posthoc single-variable reduction to two two-CNF
+branches, checked on 2,048 assignments. Its eleven-candidate diagnostic scans
+1,078 literals; case 186's 24 candidates scan 8,448 literals and find none.
+These are diagnostic costs, not a deployed recognition or solving improvement.
+
+The all-arm evidence union adds 223 keys (22,036 -> 22,259), with 71,503,872
+database bytes and 5,163,292 compressed bytes. It is not one selected policy's
+working storage. All prior evidence, 597 new composed records and rejected
+routes remain retained. All 1,085 tests pass; there is no new unrestricted-SAT
+resource bound.

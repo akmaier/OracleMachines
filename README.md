@@ -28,6 +28,16 @@ classes.
 
 ## Paper
 
+[Reuse answers exposed by propagation](research/propagated-reuse.md).
+At case 85's exact prefix, the new optional path cuts propagation visits
+5,750 -> 955 and avoids four premise probes, retaining the same one-row result.
+A further 192-query comparison has no new residual hits and no stable timing
+gain. Next, reuse saved unit traces after rejected discovery and test small
+conditioning sets. All 1,085 tests and independent replay pass. Resume
+`experiments/results/cnf-propagated-reuse/checkpoint.json`: 22,259 native keys,
+597 additional composed records, with all earlier results preserved.
+
+
 [Fresh admission saves rows but misses a cached residual](research/child-stream.md).
 On 192 new queries, the unchanged gate reduces rows 229 -> 221 while increasing
 propagation, sidecars and observed complete time. Case 85 exposes a checked binary

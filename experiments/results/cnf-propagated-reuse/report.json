@@ -1,0 +1,167 @@
+{
+  "cases": {
+    "path": "experiments/results/cnf-propagated-reuse/cases.json",
+    "sha256": "a620958019a5d86d9381177511f5306093f11f89127e9dab51710dc676db7356"
+  },
+  "controls": {
+    "path": "experiments/results/cnf-propagated-reuse/controls/report.json",
+    "sha256": "4c626fc0f7b9e5920536f9e5d064565d0417c2a54b121cd9df0ba1c090427ac3"
+  },
+  "protocol": {
+    "path": "experiments/results/cnf-propagated-reuse/protocol.json",
+    "sha256": "0227f09c228417db3ee32c5949a84d1a68b66c35a770b4735045dea857bfb4c3"
+  },
+  "samples": [
+    {
+      "mode": "baseline",
+      "path": "experiments/results/cnf-propagated-reuse/baseline-0/report.json",
+      "repeat": 0,
+      "sha256": "66ffb2833194cec17a532317f7d6c92f2f6b5427a6f262c48755bc7101e127a9"
+    },
+    {
+      "mode": "admitted",
+      "path": "experiments/results/cnf-propagated-reuse/admitted-0/report.json",
+      "repeat": 0,
+      "sha256": "26c2dfd5ae0270475ba0c6b25b3c530a4b137e8d87aebecc01832845b16f1337"
+    },
+    {
+      "mode": "propagated",
+      "path": "experiments/results/cnf-propagated-reuse/propagated-0/report.json",
+      "repeat": 0,
+      "sha256": "fb98fe856db5dbb4abfa4a9ae7c97721aa11b74db28f88d8eab978756ea89951"
+    },
+    {
+      "mode": "propagated",
+      "path": "experiments/results/cnf-propagated-reuse/propagated-1/report.json",
+      "repeat": 1,
+      "sha256": "f06035b7547c0241a25f745da6d00e3dee0f96d04f585b488e1199e6bfbf3711"
+    },
+    {
+      "mode": "admitted",
+      "path": "experiments/results/cnf-propagated-reuse/admitted-1/report.json",
+      "repeat": 1,
+      "sha256": "7d2aa7a5df08bab0f23e752cd19d98759dd412739d2e66793f6bc3f14f29211c"
+    },
+    {
+      "mode": "baseline",
+      "path": "experiments/results/cnf-propagated-reuse/baseline-1/report.json",
+      "repeat": 1,
+      "sha256": "b4cb3230acb6cec20201e06bd5b3b03185a454db23ad453757cdfcceda7142ad"
+    }
+  ],
+  "summary": {
+    "admitted": {
+      "admission_calls": 8,
+      "admission_reasons": {
+        "nonterminal-child": 2,
+        "terminal-target": 2,
+        "unit-conflict-child": 4
+      },
+      "compressed_bytes": 5155317,
+      "database_bytes": 71434240,
+      "expanded_nodes": 11,
+      "local_calls": 8,
+      "local_guards": 4,
+      "local_terminals": 2,
+      "mean_cold_seconds": 13.638518624939024,
+      "mean_complete_worker_seconds": 28.27703881263733,
+      "mean_compression_seconds": 4.209632687270641,
+      "mean_peak_rss_bytes": 563609600.0,
+      "mean_preparation_seconds": 4.51220079138875,
+      "mean_query_seconds": 1.958937650313601,
+      "mean_serialization_seconds": 0.02137199998833239,
+      "mean_setup_seconds": 4.697554146172479,
+      "mean_warm_query_seconds": 0.0274701623711735,
+      "mean_warm_setup_seconds": 2.7756175415124744,
+      "new_nodes": 199,
+      "new_payload_units": 445570,
+      "nodes": 22235,
+      "positive": 99,
+      "premise_probes": 8,
+      "propagated_reuses": 0,
+      "propagation_literal_visits": 14907,
+      "queries": 192,
+      "repeat_new_nodes": 0,
+      "row_digest": "f8ad94213800e3ee3ebd6f1f88871bc7f9f58e3077c47488f66589c5eaa92310",
+      "sidecar_bytes": [
+        5667512,
+        5667488
+      ],
+      "trace_publications": 10
+    },
+    "baseline": {
+      "admission_calls": 0,
+      "admission_reasons": {},
+      "compressed_bytes": 5159931,
+      "database_bytes": 71483392,
+      "expanded_nodes": 37,
+      "local_calls": 0,
+      "local_guards": 0,
+      "local_terminals": 0,
+      "mean_cold_seconds": 13.000612895237282,
+      "mean_complete_worker_seconds": 27.07113906252198,
+      "mean_compression_seconds": 4.32279189536348,
+      "mean_peak_rss_bytes": 502366208.0,
+      "mean_preparation_seconds": 4.395303958561271,
+      "mean_query_seconds": 2.4324814989231527,
+      "mean_serialization_seconds": 0.023138624848797917,
+      "mean_setup_seconds": 4.593924208078533,
+      "mean_warm_query_seconds": 0.02707775146700442,
+      "mean_warm_setup_seconds": 1.6508043750654906,
+      "new_nodes": 215,
+      "new_payload_units": 469640,
+      "nodes": 22251,
+      "positive": 99,
+      "premise_probes": 0,
+      "propagated_reuses": 0,
+      "propagation_literal_visits": 9528,
+      "queries": 192,
+      "repeat_new_nodes": 0,
+      "row_digest": "d988d143e8d29c22f366f188f036578bc45ccff7159cfe377a904e684a34c938",
+      "sidecar_bytes": [
+        5499981,
+        5499926
+      ],
+      "trace_publications": 0
+    },
+    "propagated": {
+      "admission_calls": 8,
+      "admission_reasons": {
+        "nonterminal-child": 2,
+        "terminal-target": 2,
+        "unit-conflict-child": 4
+      },
+      "compressed_bytes": 5155317,
+      "database_bytes": 71434240,
+      "expanded_nodes": 11,
+      "local_calls": 8,
+      "local_guards": 4,
+      "local_terminals": 2,
+      "mean_cold_seconds": 12.759586999425665,
+      "mean_complete_worker_seconds": 28.118932290934026,
+      "mean_compression_seconds": 4.296287937555462,
+      "mean_peak_rss_bytes": 563798016.0,
+      "mean_preparation_seconds": 6.647749582771212,
+      "mean_query_seconds": 1.8420732840895653,
+      "mean_serialization_seconds": 0.021586520597338676,
+      "mean_setup_seconds": 6.829118228983134,
+      "mean_warm_query_seconds": 0.026643546763807535,
+      "mean_warm_setup_seconds": 1.2520074795465916,
+      "new_nodes": 199,
+      "new_payload_units": 445570,
+      "nodes": 22235,
+      "positive": 99,
+      "premise_probes": 8,
+      "propagated_reuses": 0,
+      "propagation_literal_visits": 14907,
+      "queries": 192,
+      "repeat_new_nodes": 0,
+      "row_digest": "f8ad94213800e3ee3ebd6f1f88871bc7f9f58e3077c47488f66589c5eaa92310",
+      "sidecar_bytes": [
+        5674326,
+        5674272
+      ],
+      "trace_publications": 10
+    }
+  }
+}

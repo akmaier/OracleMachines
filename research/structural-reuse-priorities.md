@@ -12,7 +12,52 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse propagated residuals before trying new premises
+## Current investigation: reuse saved propagation after discovery rejects a child
+
+[Propagated-residual reuse](propagated-reuse.md) is implemented and independently
+checked. At the exact prefix of case 85, propagation falls **5,750 -> 955** and
+four premise probes disappear. Storage remains **one row / 1,672 native bytes**;
+one trace publication replaces the expansion call. The other six equal-state
+controls preserve the old gate's payloads and propagation, including its misses
+on useful historical 43/172 guards.
+
+**The next excluded stream has no new residual hits.** All three policies answer
+99 SAT / 93 UNSAT queries. Baseline/admission/propagated rows are **215/199/199**,
+and propagation visits **9,528/14,907/14,907**. Both admission policies produce
+identical native payloads. The additional lookup/recognition adds sidecar bytes
+(**+0.12%**); opposite timing-pair signs establish no stable speedup. Keep this
+path optional. The existing gate's row saving is not a gain from the new check.
+
+**Most concrete expansion gap: fresh cases 36/186.** These account for all
+**11 remaining child expansions (5/6)**. Their absent, nonfamily residuals follow
+saved prefixes of **13/1 forced variables**, but rejected discovery falls back
+to the original target and repeats propagation. Reuse the retained unit trace
+on this fallback, then acquire the unknown residual. Preserve source/model
+binding and native dependency choice; measure equal-state positive and rejection
+controls before another excluded stream. Residual solving remains unrestricted.
+
+**Coverage opportunity:** case 36's residual has 11 variables, 23 clauses and
+49 literals. Each of its three wide clauses contains canonical variable 6;
+both assignments produce two-CNF. The read-only diagnostic retains both branches
+and checks all 2,048 assignments. Case 186 has no single-variable counterpart.
+Charge recognition and two-branch checking before claiming a saving; this
+decomposition has not been acquired or timed. Avoid an absolute size threshold.
+
+Cold replay remains the largest measured complete-time component (means
+**13.001/13.639/12.760 s**). Shared checking and compact sources remain supporting
+targets. The fresh queries come from three old templates, not arbitrary-SAT
+coverage. No new structural authority, Lean proof or unrestricted efficiency bound.
+
+All **1,085 tests**, 21 focused tests, 21 equal-state arms and six fresh workers
+validate. Resume `experiments/results/cnf-propagated-reuse/checkpoint.json`:
+**22,259 keys**, all 22,036 prior payloads preserved, **597 new composed records**,
+1,230 previous composed records, 2,957 ordinary decisions and six projections.
+All **483 prior sources / 5,222 artifacts / 90 manifests**, frontier lineages
+and structural authorities are preserved.
+
+New manifest: **107 artifacts**. Next preservation audit: **5329 artifacts / 91 manifests**. Final source ledger: **488**.
+
+## Previous investigation: reuse propagated residuals before trying new premises
 
 [The fixed gate on another 192 excluded queries](child-stream.md) reduces new
 native rows **229 -> 221** and added native bytes **460,398 -> 448,420**, but

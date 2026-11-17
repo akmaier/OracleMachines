@@ -12,7 +12,46 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: match conditioned cores after accepted guards
+## Current investigation: minimize assumptions before adding partition branches
+
+[Conditioned-core acquisition and direct-premise controls](conditioned-core.md)
+separate branch choice from certificate reuse on cases 43/172/70. All six paired
+orders have identical child roots, proofs and expansion counts. Separate cofactor
+acquisition adds a row in 43 and payload in every pair. Direct reverse improves
+43 from **10 -> 7 rows**, while forward minimizes bytes; 172 is an ordinary split
+on `[40,50]`, and both case-70 orders regress. Trying all candidates costs **94
+expansions versus 23 baseline**. Keep this prototype optional; lower expansion
+counters alone do not establish less work or memory.
+
+**Next priority:** replace these two-assumption partitions with a checked
+single-assumption guard where possible. A read-only exact-prefix probe proves
+unit conflicts for **43 + [-230]**, **172 + [-40]** and **70 + [-40]**, using
+283/642/241 propagation literal visits. Each supports one forced variable rather
+than two branches. All three remaining native child roots are absent; price
+their acquisition and all composition before claiming savings. Reuse retained
+unit traces and compare with both saved baselines and direct partitions, then
+test bounded discovery on excluded inputs. In case 70, the small support is
+just `[40,50]` and `[40,-50]`. In 43/172, recomputing after assumption deletion
+finds conflicts that backward slicing of the original trace does not expose.
+
+Broader recognition and selection remain open: a roughly 32,000-literal full-bank
+conditioning scan is not cheap discovery, and posthoc best orders do not supply
+a policy. Full cold replay dominates these complete samples. Native bytes,
+retained sidecars and live memory must stay separate: the seven-row case-43
+alternative actually has a slightly larger serialized delta-plus-decision.
+
+All **1,057 tests**, fifteen matched-arm audits, 2,957 ordinary and 429 composed
+records plus six projections pass. Resume
+`experiments/results/cnf-conditioned-core-exposed/checkpoint.json`: **21,525 keys**,
+all 21,482 prior payloads preserved. Six alternate certificates and the initial
+two-CNF gate rejection remain retained. Prior **451 sources / 4,916 artifacts /
+85 manifests**, four frontiers, structural authorities and 64 manuscript proof
+blocks are preserved. No new Lean, fresh coverage, stable runtime or arbitrary-SAT bound.
+
+
+New manifest: **92 artifacts** across complete and rejected runs. Next preservation audit: **5008 artifacts / 86 manifests**.
+
+## Previous investigation: match conditioned cores after accepted guards
 
 [Terminal-first screening](terminal-first-screen.md) fixes the previous regression.
 On exact pre-query case 176, new rows fall **3 -> 1**, native payload **6,137 ->

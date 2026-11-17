@@ -28,6 +28,16 @@ classes.
 
 ## Paper
 
+[Separate cofactor reuse from branch-choice gains](research/conditioned-core.md).
+Fifteen historical controls show a case-43 partition reducing proof rows
+**10 -> 7**, but acquiring a separate cofactor adds cost without saving branch
+solving. Regressions are retained. A checked read-only probe finds a narrower
+single-assumption guard for all three cases; remaining child acquisition is the
+next measurement. All **1,057 tests** pass. Resume
+`experiments/results/cnf-conditioned-core-exposed/checkpoint.json` (**21,525 native
+keys**, all earlier payloads and sidecars preserved). No fresh-coverage or stable
+total-runtime gain is claimed.
+
 [Reuse terminal targets before partition discovery](research/terminal-first-screen.md).
 The saved regression now uses **one proof row instead of three**, with propagation
 visits **5,289 -> 1,110**; nonterminal controls preserve their exact proofs.

@@ -1,0 +1,12 @@
+{"case":43,"cofactor_was_known":null,"contained_clause":null,"expanded_nodes":10,"mode":"baseline","new_nodes":10,"new_payload_units":9798}
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_conditioned_core.py", line 114, in <module>
+    if __name__=='__main__':run(Path(sys.argv[1]))
+                            ~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_conditioned_core.py", line 79, in run
+    phase=time.perf_counter();cofactor=acquire_core(s,projection);cofactor_seconds=time.perf_counter()-phase;counts=Counter(s.counts);phase=time.perf_counter();hint=check_projection(s,projection,projection_check_counts);projection_check_seconds=time.perf_counter()-phase;projection_check_metrics=dict(s.counts-counts)
+                                       ~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_conditioned_core.py", line 46, in acquire_core
+    if cached is None and any(len(c)>2 for c in cnf):raise ValueError('Fresh conditioning acquisition is restricted to two-CNF')
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Fresh conditioning acquisition is restricted to two-CNF

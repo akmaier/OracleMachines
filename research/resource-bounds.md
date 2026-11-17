@@ -2959,3 +2959,33 @@ Resume `experiments/results/cnf-terminal-first-complete/checkpoint.json`: all
 eight sidecars preserve both control policies. All 1,047 tests, 2,957 ordinary
 and 414 composed records pass. Earlier sources, artifacts, structural authorities
 and 64 manuscript proof blocks remain preserved. No new Lean or arbitrary-SAT bound.
+
+
+## 2026-11-17: count cofactor acquisition separately from branch selection
+
+[Exact-prefix conditioned-core controls](conditioned-core.md) have identical child
+roots, payloads and expansion counts for all six conditioned/direct pairs. A
+separate cofactor adds one row / 238 native bytes in case 43 and 29/26 bytes in
+172/70. Its lower expansion counter excludes explicit trace/subset publications;
+these are still checked and stored. The direct reverse case-43 plan reduces rows
+10 -> 7, but serialized delta-plus-decision bytes increase 29,688 -> 29,905. Direct
+forward minimizes native bytes (9,798 -> 6,932). In 172, forward regresses and
+reverse slightly lowers native bytes without lowering rows; both 70 orders regress.
+Trying all twelve candidates costs 94 expansion calls / 102 inserted rows versus
+23/23 baseline. Posthoc minima are not a selector or stream guarantee.
+
+Complete single samples take 6.37--6.80 seconds, of which 5.20--5.49 is cold replay
+and 0.76--0.99 preparation. Prior full-bank discovery costs roughly 32,000 restriction
+literal visits per case separately. No stable total runtime or peak-memory saving
+is measured. The 21,525-key union preserves all prior payloads and adds 43 keys;
+compressed bytes grow 4,970,840 -> 4,980,892 and database bytes 67,891,200 -> 67,989,504.
+This retains all new keys acquired across arms, not just a selected policy.
+
+Next, acquire and measure one-assumption guards from the checked read-only probe:
+43 + [-230], 172 + [-40], 70 + [-40] unit-refute after 283/642/241 propagation
+literal visits. All three restricted-child roots are absent at the original
+prefixes. Discovery, trace verification/publication, remaining search, composition
+and cold replay must all be charged. No minimum expansion guarantee follows.
+All 1,057 tests pass; source/artifact history, frontier lineages, structural
+coverage and 64 manuscript proof blocks remain unchanged. No new Lean or
+unrestricted-SAT theorem is added.

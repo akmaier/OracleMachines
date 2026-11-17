@@ -1,0 +1,182 @@
+{
+  "case": 172,
+  "children": [
+    {
+      "answer": false,
+      "archive_nodes": 21454,
+      "archive_payload_bytes": 35476280,
+      "metrics": {
+        "accounting_reads": 1,
+        "certificate_memory_hits": 8,
+        "certificate_serialized_bytes": 9392,
+        "class_literal_payload": 565,
+        "database_lookups": 9,
+        "decomposition_literal_visits": 385,
+        "expanded_nodes": 9,
+        "forced_variables": 3,
+        "inserted_bytes": 13839,
+        "inserted_nodes": 9,
+        "key_serialized_bytes": 12647,
+        "matching_recognition_literal_visits": 9,
+        "normalization_literal_visits": 3223,
+        "propagation_literal_visits": 1952,
+        "restriction_literal_visits": 1836,
+        "source_witness_literal_payload": 0,
+        "split_nodes": 3,
+        "subsumed_positive_clauses": 1,
+        "subsumption_candidate_tests": 13,
+        "subsumption_membership_tests": 26,
+        "subsumption_nodes": 1,
+        "subsumption_posting_lookups": 104,
+        "subsumption_recognition_literal_payload": 565,
+        "unit_conflicts": 4,
+        "verification_literal_payload": 1133,
+        "verification_trace_literals": 113,
+        "verified_nodes": 9,
+        "verified_subsumption_literal_payload": 6,
+        "visits": 9
+      },
+      "model": null,
+      "root": "cnf-residual-v1:[[-24,-10,12],[-24,13],[-23,-15],[-23,-7],[-22,-18,15],[-22,-8,24],[-21,-8,-1],[-21,11,23],[-21,22],[-20,-18,-4],[-20,-15,-12,-2,6],[-20,-14,6],[-20,-6,9],[-20,-4,10],[-20,11,12],[-19,-14,16],[-19,1,14],[-19,5,11],[-17,-9,3],[-17,-5,4],[-17,1,11],[-16,1,14],[-16,11],[-15,-14],[-14,-3],[-13,3,20],[-12,-6,15],[-12,-2,-1],[-12,-2,-1,7,19],[-12,-2,5,9],[-11,2],[-11,7,21],[-10,15,16],[-9,-6,3],[-8,-3,-2],[-8,-1,9],[-8,6,18],[-7,-5,17],[-7,1,14],[-7,15],[-7,16,19],[-6,24],[-5,-3,14],[-5,1,14],[-5,4,14],[-5,8],[-5,24],[-4,8,10],[-3,2],[-3,10],[-2,4,19],[-2,22],[1,23],[2,7,21],[3,8,10],[4,5],[5,16,21],[6,14],[6,18],[7,14,19,20],[8,24],[12,14],[14,20],[16,17],[17,18,24],[17,21]]",
+      "seconds": 0.009188749827444553
+    }
+  ],
+  "cofactor": null,
+  "cofactor_seconds": 0.0,
+  "cofactor_was_known": null,
+  "cold": {
+    "composed": {
+      "answers": [
+        false
+      ],
+      "native": {
+        "checked_nodes": 21454,
+        "lineage": {
+          "causal": {
+            "prior_pending_roots": 108,
+            "prior_ready_roots": 81,
+            "prior_sources_checked": 389
+          },
+          "legacy": {
+            "prior_pending_roots": 77,
+            "prior_ready_roots": 155,
+            "prior_sources_checked": 389
+          }
+        },
+        "lineage_seconds": 0.5378620829433203,
+        "no_acquisition": true,
+        "proof_query_seconds": 4.688012666068971,
+        "query_answers": [],
+        "seconds": 5.259387667290866,
+        "snapshot": {
+          "censuses": 1,
+          "complete_frozen_audit": true,
+          "metadata_reads": 0,
+          "nodes": 21454,
+          "payload_units": 35476280
+        }
+      },
+      "seconds": 5.3509287922643125
+    },
+    "projections": [],
+    "seconds": 5.3830184997059405
+  },
+  "composition_seconds": 0.0017605829052627087,
+  "construction_counts": {},
+  "construction_seconds": 0.0,
+  "contained_clause": [
+    50,
+    40
+  ],
+  "core": 209,
+  "delta": {
+    "path": "experiments/results/cnf-conditioned-core-exposed/172-baseline/delta.json",
+    "sha256": "0dc7a9f3b05264f6528c43aa8c411807c7970f5a378adfdf07bb36261d7c48de"
+  },
+  "expanded_nodes": 9,
+  "missing": [
+    [
+      -50
+    ],
+    [
+      -40
+    ]
+  ],
+  "mode": "baseline",
+  "near_counts": {
+    "guard_clause_comparisons": 147,
+    "guard_forced_variables": 2,
+    "guard_input_literals": 30715,
+    "known_premise_choices": 1,
+    "near_candidates": 1,
+    "posting_lookups": 73,
+    "posting_visits": 4458,
+    "premise_lookups": 1,
+    "prepared_clause_keys": 484,
+    "prepared_clause_literals": 1104,
+    "prepared_cores": 383,
+    "prepared_memberships": 11953,
+    "restriction_literal_visits": 418,
+    "selection_calls": 1,
+    "verified_deletion_guards": 1
+  },
+  "new_nodes": 9,
+  "new_payload_units": 13839,
+  "normal_counts": {
+    "guard_candidates_compared": 226,
+    "guard_candidates_matched": 3,
+    "guard_clause_comparisons": 18402,
+    "guard_forced_variables": 4,
+    "guard_input_literals": 1420,
+    "restriction_literal_visits": 472,
+    "verified_deletion_guards": 2,
+    "witness_nonpositive_or_missing_candidates": 2
+  },
+  "open_seconds": 0.07992091681808233,
+  "prefix_digest": "bc631a1ee995b1f74a94cb4bae6e9a5ea39231f296b5fba988867c306059af35",
+  "prefix_nodes": 21445,
+  "premise_child": null,
+  "premise_counts": {},
+  "premise_inserted": false,
+  "premise_metrics": {},
+  "premise_seconds": 0.0,
+  "preparation_seconds": 0.9882791247218847,
+  "preparation_solver_counts": {
+    "alternative_guard_memory_hits": 1,
+    "certificate_disk_hits": 3998,
+    "certificate_memory_hits": 694,
+    "core_bank_disk_hits": 145,
+    "database_lookups": 4150,
+    "guard_memory_hits": 8,
+    "key_serialized_bytes": 3193191,
+    "near_strengthened_disk_hits": 1,
+    "normalization_literal_visits": 776826,
+    "read_bytes": 3622997,
+    "restriction_literal_visits": 282538,
+    "verification_literal_payload": 368337,
+    "verification_trace_literals": 16385,
+    "verified_implication_edges": 70,
+    "verified_nodes": 4146,
+    "verified_subsumption_literal_payload": 16,
+    "witness_template_disk_hits": 2
+  },
+  "projection_check_counts": {},
+  "projection_check_metrics": {},
+  "projection_check_seconds": 0.0,
+  "projection_counts": {},
+  "projection_seconds": 0.0,
+  "projection_solver_counts": {},
+  "projections": {
+    "path": "experiments/results/cnf-conditioned-core-exposed/172-baseline/projections.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "records": {
+    "path": "experiments/results/cnf-conditioned-core-exposed/172-baseline/records.json",
+    "sha256": "6e562db6a817efb3898553e8f686469f406bf2c58449115f7c9c0df2bfe73176"
+  },
+  "retained_bytes": 34026,
+  "seconds": 6.703270792029798,
+  "serialization_seconds": 0.0006987499073147774,
+  "warm_seconds": 0.0001582503318786621,
+  "warm_setup_seconds": 0.008511040825396776
+}

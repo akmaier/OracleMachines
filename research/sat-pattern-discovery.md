@@ -5326,3 +5326,29 @@ Resume `experiments/results/cnf-terminal-first-complete/checkpoint.json`: all
 eight sidecars preserve both control policies. All 1,047 tests, 2,957 ordinary
 and 414 composed records pass. Earlier sources, artifacts, structural authorities
 and 64 manuscript proof blocks remain preserved. No new Lean or arbitrary-SAT bound.
+
+
+## 2026-11-17: conditioned patterns can hide simpler forced assignments
+
+The [conditioned-core comparison](conditioned-core.md) implements checked native
+cofactor acquisition after units expose a conflict or two-CNF. This broadens the
+acquisition gate, not certified input coverage. Fifteen historical arms show
+that the useful case-43 partition is equally available through a smaller direct
+premise proof. Same-order branch certificates are identical. Case 172 is literally
+an existing-clause split, and 70 regresses. Conditioned supports should therefore
+be treated as candidate generators whose benefit needs a direct control.
+
+A checked read-only probe discovers a more informative simplification: one
+assumption suffices to unit-refute each target (43: [-230], 172/70: [-40]). The
+corresponding forced assignments leave absent native children. Price this exact
+one-child decomposition before widening the policy. In 70 the support is the
+binary pair [40,50], [40,-50]; in 43/172 a new propagation trace after deleting
+an assumption is needed. Slicing one existing trace is not minimum-assumption
+recognition. Charge bounded probing, remaining acquisition, lifting and replay;
+then test adversarial edits and excluded inputs. No partition of all CNFs into
+efficient cells, compact closure or arbitrary-SAT bound is established.
+
+Resume `experiments/results/cnf-conditioned-core-exposed/checkpoint.json` (21,525
+keys, prior payloads preserved). All 1,057 tests and independent replay pass.
+Original structural coverage and four frontier counts remain unchanged; fifteen
+new composed conclusions revisit three already known sources.

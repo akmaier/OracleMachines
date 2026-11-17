@@ -9167,3 +9167,29 @@ Resume `experiments/results/cnf-terminal-first-complete/checkpoint.json`: all
 eight sidecars preserve both control policies. All 1,047 tests, 2,957 ordinary
 and 414 composed records pass. Earlier sources, artifacts, structural authorities
 and 64 manuscript proof blocks remain preserved. No new Lean or arbitrary-SAT bound.
+
+
+## 2026-11-17: conditioned acquisition and assumption reduction
+
+[Conditioned-core controls](conditioned-core.md) add source-bound projection
+records and checked acquisition when units refute a cofactor or expose two-CNF.
+The narrower initial gate rejection is retained. Fifteen historical arms compare
+baseline, both partition orders and direct acquisition of the identical premise.
+All six conditioned/direct pairs have identical branch proofs and work; separate
+cofactor acquisition adds storage. Case 43 improves by branch choice (10 -> 7
+rows in direct reverse), 172 duplicates an existing-clause split, and 70 regresses.
+Trying all alternatives costs 94 expansions versus 23 baseline. No cheap selector
+or stable runtime/memory gain follows.
+
+Next, price the single-assumption guards found by a checked read-only probe:
+43 + [-230], 172 + [-40], 70 + [-40] each unit-refute. Their remaining child roots
+are absent. Reuse traces, acquire and check the residual, then compare total cost
+and excluded inputs. Causal slicing alone misses the removable assumptions in
+43/172; repropagation after deletion finds them. General discovery remains open.
+
+All 1,057 tests, fifteen audits, 2,957 ordinary decisions, 429 composed records
+and six projections pass. Resume `experiments/results/cnf-conditioned-core-exposed/checkpoint.json`:
+21,525 keys, all 21,482 old payloads preserved, six alternative certificates
+retained separately. Prior 451 sources / 4,916 artifacts / 85 manifests and all
+four frontier lineages pass preservation. Structural authorities and 64 paper
+proof blocks remain unchanged. No new Lean or unrestricted-SAT bound.

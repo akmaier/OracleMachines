@@ -7719,6 +7719,54 @@ the first proof for each key. Certificate choice, repeated binary-core work and
 compatibility with the remaining wide clauses are further reuse opportunities.
 This rule does not supply a uniformly efficient decomposition of arbitrary SAT.
 
+\paragraph{Covering a wider clause with binary implications.}
+A satisfiable binary core can still explain a mixed-source contradiction.
+If a source clause is $C=\ell_1\lor\cdots\lor\ell_w$ and the binary core
+contains a path $\ell_i\leadsto\neg\ell_i$ for every $i$, then it entails
+$\neg C$. Hence $B\land C$, and therefore the whole source, is unsatisfiable.
+The bounded implementation considers clauses of width at most four, tries at
+most eight distinct reachability roots per residual, and reuses completed
+searches for shared literals. A binary model filters out clauses that cannot
+be entailed false; a uniform binary model avoids unnecessary SCC work. A budget
+miss is inconclusive. A satisfiable core alone still gives no whole-source decision.
+
+The compiler checks the source-bound paths and emits existing split, unit and
+implication proofs. It splits on covered literals until two remain. If those
+are $y,z$, their retained paths and the clause $y\lor z$ give
+$y\leadsto\neg y$ and $\neg y\leadsto z\leadsto\neg z\leadsto y$.
+When these path variables survive conditioning, direct transport supplies the
+last contradiction without another SCC search. Unit conflicts close earlier
+branches; a conservative binary repair handles fixed path vertices. A width-$w$
+compiler creates at most $2w-3$ native nodes, including its root; a reused older
+node may reference a larger history. The rejected compiler,
+which continued splitting to one literal, remains in the experiment record.
+
+For $m$ clauses, $b$ binary clauses and total literal payload $L$, the additional
+source/model filtering costs $O(m+L)$, and eight graph searches cost $O(8b)$
+indexed graph work. Existing variable sorting, full-source normalization and
+integer encoding costs remain. Compilation stores up to $O(wL)$ source/key
+payload and invokes the existing propagation and verification routines. With
+$v$ variables, their repeated-scan propagation can cost $O(wvL)$; a smaller
+search counter does not remove this work. Recognizer caches are local to one
+residual. Persistent reuse remains through the existing native canonical keys.
+
+On sixty newly excluded queries, both policies return 38 SAT and 22 UNSAT with
+identical preceding discovery evidence. Three covers in two random-three-CNF
+queries replace eight search expansions with six compiled children. Actual
+native additions fall only from 226 to 224, payload from 293,179 to 291,005 bytes,
+and child propagation visits from 23,611 to 23,069. The recognizer performs 126
+reachability searches, reuses 35 literal results and visits 891 graph edges;
+44 searches at the residual level remain unresolved. One final pair reuses its
+paths directly; no SCC repair is needed. Five affine extensions are unchanged.
+
+Mean query time falls from 0.39359 to 0.38860 seconds, and complete-worker time
+from 27.98359 to 27.87186 seconds; both paired orders improve. SQLite falls by
+4,096 bytes and compressed storage by 748 bytes. Mean peak RSS rises by about
+9.53 MB, and diagnostic sidecars grow by about 5.4 KB. These modest finite gains
+leave a memory tradeoff and do not establish general runtime dominance. Partial
+binary backbones that do not cover a whole clause remain an opportunity for
+reuse, while empty or uninformative binary cores retain unrestricted search.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

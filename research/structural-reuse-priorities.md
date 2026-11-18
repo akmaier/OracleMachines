@@ -12,7 +12,51 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: residuals with satisfiable binary cores
+## Current investigation: reuse partial binary backbones before splitting
+
+[Binary implication covers](binary-clause-cover.md) now recognize a wider source
+clause whose every literal is forced false by a satisfiable binary core. Source
+paths compile into existing native proofs; the final two literals reuse a
+contradictory cycle without another SCC search. Three covers in two fresh
+random-three-CNF queries replace **eight expansions with six compiled children**.
+Actual native additions fall only **226 -> 224**, by 2,174 payload bytes.
+
+Mean query time improves **1.27%** and complete-worker time **0.40%**, with both
+paired orders improving. Peak RSS rises about **9.53 MB**, and 44 examined
+residuals still miss. The policy remains optional. The rejected compiler, which
+made larger proofs, is retained with its mechanism checks. Do not report the
+eight avoided expansions as eight avoided stored nodes.
+
+**Next highest-coverage target:** new random-three cases **32/40/52**, still costing
+**4,377/3,020/2,880 child propagation visits**. Use checked partial binary
+backbones to avoid expensive branches even when no whole clause is covered.
+Compare the induced source simplification and stored child proofs with the
+existing split choice; include discovery and graph/path maintenance costs.
+The earlier residual census has 44 partial backbones but only nine full covers.
+Its fourteen repeated binary keys include directly published nodes and are not
+established native-expansion cache hits.
+
+**Second target:** graph discovery costs **24,645 visits**, against 953 during
+acquisition. Cases 47/59/35 find covers after 3,485/3,485/3,107 visits. Earlier
+cover admission remains promising. Full historical replay still costs 13.6 s.
+These costs dominate the modest fresh leaf improvement.
+
+Resume `experiments/results/cnf-binary-clause-cover/checkpoint.json`: **27,600
+native keys / eighteen extensions**, preserving every earlier payload. Optional
+native solver: `experiments.cnf_binary_clause_cover.AccountedBinaryClauseCoverSolver`.
+Affine negatives retain `TerminalStore`. Three native alternatives remain in
+trial archives; the union keeps first payloads. Comparator history grows the
+union by 569,344 SQLite / 66,325 compressed bytes. There is no unrestricted-SAT
+resource guarantee.
+
+All **1,196 tests**, 27 focused tests, 240 chronological query audits and twenty
+affine-publication counter audits pass. The 220-page manuscript builds with all
+64 old proof blocks unchanged and a clean final log. All 560 prior sources,
+7,478 artifacts and 105 manifests are unchanged. Full tests retain 44 existing
+SQLite warnings; focused tests have none. Final source ledger: **567**.
+New manifest: **39 artifacts**. Next audit: **7,517 artifacts / 106 manifests**.
+
+## Previous checkpoint: residuals with satisfiable binary cores
 
 [Binary-subset refutation](binary-subset-refutation.md) closes eight additional
 native leaves on a fresh sixty-query stream. It removes **22 native nodes /

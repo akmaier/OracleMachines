@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Cover a wider clause with binary implications](research/binary-clause-cover.md).
+Three certified covers on a fresh sixty-query stream replace eight search
+expansions with six compiled children: a net saving of two stored nodes.
+Query and complete-worker time improve slightly in both orders, while peak RSS
+rises about 9.53 MB. The optional checkpoint preserves 27,600 native keys and
+eighteen affine extensions. Next: reuse partial binary backbones before splitting.
+
 [Refute mixed residuals through their binary subset](research/binary-subset-refutation.md).
 Eight checked leaves remove 22 native nodes and 16,393 payload bytes on a fresh
 sixty-query stream. Timing remains mixed, with mean complete-worker time up 0.82%,

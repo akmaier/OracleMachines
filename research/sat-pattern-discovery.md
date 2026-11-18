@@ -5946,3 +5946,26 @@ cover admission remain open. Full historical replay still costs about 13.5 s.
 All 240 chronological queries, twelve publication-counter records, 48 exhaustive
 family truths and full historical replay validate. This supplies no new Lean
 or unrestricted-SAT resource guarantee.
+
+
+## 2026-11-18: cover wider clauses through a satisfiable binary core
+
+[The bounded cover rule](binary-clause-cover.md) shares implication reachability
+between source-clause literals and checks that the core forces every literal
+false. Retained paths, source clauses and native split/unit proofs preserve
+exactness; the final pair reuses a contradiction cycle without new SCC work.
+The earlier compiler with larger proof spines remains a rejected diagnostic.
+
+On sixty new queries, three covers in two random-three-CNF cases replace eight
+search expansions with six compiled children: native additions **226 -> 224**,
+payload **293,179 -> 291,005 bytes**. Query and complete-worker means improve
+1.27% / 0.40%, with both orders improving; peak RSS rises about 9.53 MB. All prior
+discovery evidence matches. The policy stays optional. The union preserves every
+old payload and reaches 27,600 native keys / eighteen extensions.
+
+Next investigate partial binary backbones in new cases 32/40/52, rather than
+requiring a whole covered clause. Check whether a forced literal avoids a costly
+branch after charging recognition, proof children and persistence. Graph discovery
+and historical replay remain larger costs. All 240 chronological queries, twenty
+affine-publication counter records, 48 family truth tables and full cold history
+validate. No new Lean or unrestricted-SAT resource bound follows.

@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Substitute multiple equivalence blocks](research/multiblock-equivalence.md).
+Twelve pilot inputs now use a second block, but propagation falls only 0.52%
+while native certificates grow by ten. Two sources already had a known one-block
+quotient that the new policy ignored. Next: choose a checked known quotient before
+fresh acquisition. All prior proofs and the measured regression are preserved.
+
 [Reuse binary-core discovery](research/binary-core-discovery-reuse.md).
 Exact reuse avoids 22 repeated graph constructions and cuts acquisition SCC work
 44.53% on the same pilot. It retains 34 entries (11.9 KB serialized); persistent

@@ -7988,6 +7988,56 @@ Cold exact-policy validation adds discovery again. Multi-block substitution and
 sharing graph work across recursive recognizers remain separate opportunities.
 No new source coverage or uniform unrestricted-SAT bound follows.
 
+\paragraph{Simultaneous blocks and the cost of quotient choice.}
+The next optional policy discovers all consistent nontrivial binary SCC blocks
+in one pass and checks two source-indexed trees for each. It chooses one block
+from each complementary SCC pair and rejects overlapping absolute-variable
+supports. The resulting signed maps can be united: no representative is
+eliminated by another block. A source model agrees with every signed equality;
+a model of the fully substituted CNF lifts by assigning each eliminated variable
+its signed representative value. All source clauses are substituted once,
+including clauses coupling different representatives. Their remaining interaction
+is retained in the child. This establishes exact recomposition without assuming
+that the blocks' remaining constraints are independent.
+
+Single-block negatives retain the previous compact format. Only multiple-block
+negatives need a new version containing the list of trees. The canonical source
+key and checked union substitution reconstruct an ordinary native negative child;
+SAT results lift to checked full-source models. Old records and readers remain
+valid. For block sizes $k_1,\ldots,k_q$, evidence has exactly
+$2\sum_i(k_i-1)$ implication edges. A shared SCC pass and disjoint tree searches
+avoid repeating graph discovery per block. Source inspection, sorting, keying,
+canonicalization, checking and child acquisition still have to be charged.
+
+Six serial workers compare the previous cached single-block solver with uncached
+and cached all-block policies on the same 68 inputs from empty archives. All
+return 21 satisfiable and 47 unsatisfiable answers. Twelve inputs use two blocks,
+including one positive lift and eleven negative publications. Applied merges rise
+45 to 57, but propagation falls only 51,326 to 51,059 visits (0.52\%). Native
+expansions rise 358 to 366 and native certificates 398 to 408. Combined payload
+grows 492,731 to 496,214 bytes; SQLite grows 4,096 and gzip 2,114 bytes. Cached
+all-block query deltas are $-0.02086/-0.00356$ seconds, but complete-worker deltas
+are $-0.03893/+0.00438$ seconds. Broader reduction therefore has a storage cost
+and does not establish a stable total-time gain.
+
+The source of that cost is informative. Before queries 7 and 34, the previous
+one-block quotient is already stored in both actual histories, while the complete
+quotient is new. Choosing the new quotient increases native additions from zero
+to five and from one to four. Two other later queries add one record each after
+their acquired history changes, accounting for all ten extra records. These are
+query-prefix observations, not lookups in a final archive containing future
+answers. Minimizing remaining variables can discard a cheap route through
+already acquired knowledge.
+
+The next experiment should compare the exact known one-block and complete
+quotients before fresh acquisition, using the corresponding checked block subset.
+Constructing the second quotient, canonicalizing it, looking it up and verifying
+its proof remain costs. Two alternatives do not find the globally cheapest
+subset, and untested savings must not be attributed to this diagnostic. The
+current implementation is top-level only, performs one substitution pass, and
+leaves the final child as potentially arbitrary SAT. It supplies neither a small
+universal closure nor a uniform polynomial expansion bound.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

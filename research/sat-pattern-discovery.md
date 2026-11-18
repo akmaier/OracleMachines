@@ -6094,3 +6094,40 @@ in the full suite and none in the focused suite. The **223-page manuscript**
 builds cleanly and all **64 previous proof blocks** are unchanged. Final source
 ledger: **596**. New manifest: **39 artifacts**. Next preservation audit:
 **7,722 artifacts / 111 manifests**.
+
+## 2026-11-18: simultaneous blocks expose quotient-choice cost
+
+[Multiple-block equivalence](multiblock-equivalence.md) checks disjoint supports,
+unions signed maps and substitutes every source clause once. Single-block
+negatives retain v2; multiple-block negatives use compact v3 with native negative
+dependencies. Twelve pilot inputs now use two blocks. All cached/uncached
+all-block acquisitions match, and old formats remain readable.
+
+On the unchanged 68-source pilot, applied merges rise **45 -> 57** and propagation
+falls **51,326 -> 51,059 (0.52%)**. But native expansions rise **358 -> 366**, native
+certificates **398 -> 408**, and combined payload **492,731 -> 496,214 bytes**.
+SQLite grows 4,096 / gzip 2,114 bytes. Query time falls in both orders; complete
+cached deltas **-0.03893 / +0.00438 seconds** remain mixed. Keep this optional and
+retain the measured storage regression; more substitution is not less acquisition.
+
+**Next highest-value target: choose an already known quotient.** At actual query
+prefixes 7 and 34, both streams already contain the one-block quotient while the
+all-block quotient is new. Ignoring it costs five and three extra native records;
+two other later queries add one record each after their history changes. Compare
+the exact one/all quotient keys before fresh solving, with checked recomposition
+and charged second-quotient construction, lookup, verification and storage. The
+diagnosis is not an implemented saving or a search for the globally optimal subset.
+
+Resume `experiments/results/cnf-multiblock-equivalence/checkpoint.json`: all
+**28,691 native / 26 affine / 42 v1 / 42 v2 / 34 discovery records** preserved;
+45 new native keys and eleven v3 records added. Native union: **28,736**.
+Union growth is 81,920 SQLite / 6,918 compressed bytes. Old/new histories, 408
+chronological queries and 68 source truths validate, with both quotient truths
+checked on the twelve affected sources. All 596 prior sources / 7,722 artifacts /
+111 manifests remain unchanged. No new Lean or unrestricted-SAT bound follows.
+
+The **224-page manuscript** builds cleanly with all **64 earlier proof blocks**
+unchanged. All **1,245 full / 76 focused tests** pass (44 pre-existing SQLite
+warnings in the full suite, none in focused tests). Final executable source
+ledger: **601**. New manifest: **39 artifacts**. Next preservation audit:
+**7,761 artifacts / 112 manifests**.

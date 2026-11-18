@@ -7356,6 +7356,76 @@ three-CNF and coupled parity still require 272 acquisition nodes and 43,685
 propagation visits in this stream, with no probes admitted by the binary
 filter. Broader discovery and arbitrary-SAT resource guarantees remain open.
 
+\paragraph{Compiling negative clause covers into ordinary native proofs.}
+The next optional policy collects retained negative SCC conditions after the
+unchanged mixed-completion pass and scans original source clauses for a complete
+cover. A source clause $l_1\lor\cdots\lor l_w$ and checked refutations of
+every $F\land l_i$ jointly refute $F$: every parent model would satisfy one
+of those literals. An incomplete cover gives no parent verdict. Publication
+checks the parent and premise bindings, all saved unit reasons and both
+contradictory implication paths before constructing native nodes.
+
+The compiler uses only existing split, unit, implication and empty-clause proof
+kinds. An ordered split spine sets earlier clause literals false and the
+current literal true. Its last branch requires no split because the residual
+source clause forces the last literal. Each original conditional proof is
+transported under this stronger assignment, with canonical variable names and
+clause indices rebound. Satisfied reasons disappear, forced reasons remain,
+and exposed conflicts close branches. If the stronger assignment fixes a
+vertex of a contradictory implication cycle, a charged unit-propagation
+repair produces a direct unit certificate. Neither SCC solving nor general
+SAT search is repeated. The unchanged native verifier checks the published
+nodes and the ordinary cold replay validates their composition.
+
+For $k$ retained completion records and source literal payload $L$, cover
+recognition uses $O(k+L)$ expected dictionary operations, with clause sorting
+charged separately. The current list-based opposite-sign test additionally
+uses $O(\sum_c w_c^2)$ comparisons over visited clause widths $w_c$.
+A width-$w$ cover plans at most $3w-1$ native nodes:
+$w-1$ splits and at most two proof nodes for each condition. Shared keys and
+known nodes can reduce insertions. Premise canonicalization, full-key binding,
+reason/path checking, restriction, transport, native verification and
+serialization remain separate costs. Scan-based repair can cost $O(nL)$ per
+affected branch. For the short paths emitted by the existing SCC solver,
+planned cofactor keys and full CNF payloads can use $O(wL)$ words; arbitrary
+supplied proof lengths and integer widths require additional accounting. These
+are compiler bounds, not bounds on discovery or unresolved SAT acquisition.
+
+Twenty-six saved contexts include the three motivating covers. Their native
+acquisition falls from 36 to 24 nodes and from 50,554 to 33,240 bytes; the other
+23 contexts retain their native certificates. One target repeats in reverse
+order. A further sixty-query excluded stream returns 42 SAT and 18 UNSAT in
+all modes. One fresh target replaces fourteen fallback expansions with eight
+compiled nodes. Aggregate additions fall from 370 to 364 nodes and from
+464,868 to 457,715 native bytes. All fourteen positive model publications and
+95 premise probes remain unchanged. Recognition reads eighty completion
+records and scans 196 clauses containing 410 literals. The accepted cover
+checks 417 premise literals, 45 unit-reason literals and 36 implication edges;
+transport accounts for 45 reason and 72 path literals. The measured covers
+need no unit repair, while a synthetic restriction test exercises that case.
+
+Mean query time changes from 0.35789 to 0.36050 seconds, with paired changes
+of opposite signs. Complete-worker time falls from 24.62332 to 24.53426 seconds
+in both orders, partly through variation in cold replay, which remains about
+twelve seconds. Diagnostic sidecars grow about 0.05\%, trial database size
+falls by 12,288 bytes, and mean process memory rises about 1.57 MB. This supports
+smaller native acquisition on the measured covers, without a stable query-time
+or general memory-scaling improvement. Random three-CNF and coupled parity
+still require 253 acquisition nodes and 47,204 propagation visits.
+
+The current recognizer misses a cover exposed only after deleting literals
+already falsified by baseline unit propagation. A gated colouring example
+preserves this limitation as a regression test. Supporting that case requires
+checked composition with the baseline prefix or inclusion of unit-conflict
+conditions. Earlier stopping and selecting probes that complete a nearly
+covered clause also remain open. These changes must preserve complete
+conditional coverage and charge the work needed to obtain missing evidence.
+On this fresh stream, cases 51, 55 and 59 each have a clause missing just one
+negative condition, whose literal is outside the candidate set. These are
+concrete admission candidates, without a guarantee that the additional probe
+will expose a binary residual or yield a cheap certificate.
+The compiler introduces no new native proof kind or unrestricted-SAT guarantee.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

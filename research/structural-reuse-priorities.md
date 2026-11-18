@@ -12,7 +12,59 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: recompose retained negative conditions
+## Current investigation: complete nearly covered source clauses
+
+[Negative clause-cover compilation](negative-cover.md) reuses retained
+conditional refutations to publish an ordinary native parent proof. The three
+motivating controls shrink **36 -> 24 nodes / 50,554 -> 33,240 native bytes**.
+On sixty fresh queries, one newly recognized cover replaces fourteen fallback
+expansions with eight compiled nodes: total additions fall **370 -> 364 nodes /
+464,868 -> 457,715 bytes**. All fourteen positive publications and 95 probes
+are preserved; independent comparison finds identical discovery on all 48
+family queries. This improves acquisition after discovery, not the probe cost.
+
+Paired query-time changes have opposite signs (-0.00440/+0.00963 s). Both
+complete-worker changes are negative, but cold-replay variation explains much
+of the mean 0.089-second reduction. Diagnostics grow about 0.05%, trial SQLite
+size falls 12,288 bytes, and mean RSS rises 1.57 MB. Native certificate savings
+are established on these cases; a stable query-time or general memory gain is
+not. The compiler introduces no new proof kind, SCC solving or general search.
+
+The next concrete discovery target is **cover-directed candidate admission**.
+Fresh cases 51, 55 and 59 each have a source clause missing just one refuted
+literal, and that literal lies outside the current candidate set. Case 51
+needs -158 for [-158, -54, 16]; case 55 needs -156 for [-156, -113, -12]
+(or 191 for [-151, -56, 191]); case 59 needs -320 for [-320, -71, 52].
+These are candidates for measurement, not already checked extra conditions.
+Charge the added probes and retain failures; the missing condition need not
+have a binary residual or a cheap proof. Earlier stopping at a completed cover
+and covers exposed by baseline propagation are separate opportunities. A gated
+K4 regression preserves the latter recognition miss.
+
+**The larger coverage gap remains the unresolved SAT interaction.** Random
+three-CNF and coupled parity still cost **253 acquisition nodes / 47,204
+acquisition propagation visits** on this stream, without access through the
+negative binary filter. Graph discovery itself costs 24,650 propagation visits,
+unchanged by compilation. Broader positive admission and shared nonbinary
+structure remain necessary; completing the easy covers does not resolve them.
+
+All **1,153 tests**, 24 focused tests, 294 counter audits and independent
+reconstruction pass. Resume `experiments/results/cnf-negative-cover/checkpoint.json`:
+**25,757 native keys**, preserving all 25,334 earlier payloads, with 234 new
+composed records alongside 4,245 inherited records, 2,957 ordinary decisions
+and six projections. The preservation union uses 80,306,176 database bytes /
+5,993,018 compressed bytes. Eight roots have alternate certificates in sixteen
+retained evidence occurrences. Ready/pending banks remain 132/38, 141/66,
+87/89 and 87/116; there are no new support activations. Original structural
+coverage remains 17/24 and supplemental positive coverage 24/24. All 529 prior
+sources, 6,431 artifacts and 99 manifests remain unchanged. The 215-page
+manuscript builds with all 64 existing proof blocks unchanged. No new Lean
+theorem or unrestricted-SAT resource guarantee is claimed.
+
+
+New manifest: **210 artifacts**. Next preservation audit: **6,641 artifacts / 100 manifests**. Final source ledger: **534**.
+
+## Previous checkpoint: recompose retained negative conditions
 
 [Mixed two-CNF completion](mixed-completion.md) now solves binary residuals
 that fail both uniform witnesses, reusing the current canonical binding,

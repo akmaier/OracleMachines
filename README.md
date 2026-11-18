@@ -28,6 +28,16 @@ classes.
 
 ## Paper
 
+[Compile retained negative conditions into native parent proofs](research/negative-cover.md).
+Three saved covers shrink 36 -> 24 acquired nodes; one fresh cover reduces
+aggregate additions 370 -> 364 nodes, saving 7,153 native bytes. Discovery is
+unchanged and query timing remains mixed. Three further cases each lack one
+condition outside the candidate set, providing the next discovery target.
+All 1,153 tests and independent replay pass. Resume
+`experiments/results/cnf-negative-cover/checkpoint.json`: 25,757 native keys
+preserve all earlier payloads. The 215-page manuscript builds with all existing
+proof blocks unchanged.
+
 [Complete mixed two-CNF conditions using the live residual](research/mixed-completion.md).
 Four saved controls shrink from fourteen acquired nodes to four; two fresh
 mixed-model completions reduce native additions 385 -> 381 nodes. Query and

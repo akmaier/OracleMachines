@@ -3397,3 +3397,39 @@ blocks. Fresh case 59 and saved controls 43/47 supply three exhaustive negative
 clause covers whose present parent acquisitions total 36 nodes / 50,554 bytes.
 Their combined publication and its cost remain open. No exact ordered SCC
 residual repeats within a query on the fresh sample.
+
+## 2026-11-18: bounded native compilation of negative clause covers
+
+[Negative cover compilation](negative-cover.md) adds O(k+L) expected
+hash operations and per-clause sorting to the unchanged discovery pass. The
+current list-based tautology check also needs O(sum_c w_c^2) comparisons over
+visited clauses; do not report a linear recognition bound for arbitrary width.
+A width-w accepted cover plans at most 3w-1 native nodes. For existing SCC BFS
+paths, retained cofactor keys and full native payload use O(wL) words; supplied
+path length, integer width and historical archive growth remain separate.
+
+Premise canonicalization/binding, unit reasons, implication paths, restriction,
+transport and native checks are charged. If an external assignment pins a
+contradictory cycle, unit repair can cost O(nL) per branch. Publication performs
+no SCC solving or general SAT search; discovery can still be expensive and
+not every input has a cover. Shared planned keys and stored nodes avoid duplicate
+insertion but do not make canonicalization or checking free.
+
+Fresh acquisition falls six nodes / 7,153 native bytes, with unchanged discovery.
+Diagnostic sidecars grow about 0.05%, SQLite falls 12,288 bytes and mean RSS grows
+about 1.57 MB. Query timing is mixed. The preservation union retains comparison
+runs and historical proofs, so its cumulative growth differs from the trial
+policy's acquisition saving. A bounded compiler does not bound unresolved SAT.
+
+All **1,153 tests**, 24 focused tests, 294 counter audits and independent
+reconstruction pass. Resume `experiments/results/cnf-negative-cover/checkpoint.json`:
+**25,757 native keys**, preserving all 25,334 earlier payloads, with 234 new
+composed records alongside 4,245 inherited records, 2,957 ordinary decisions
+and six projections. The preservation union uses 80,306,176 database bytes /
+5,993,018 compressed bytes. Eight roots have alternate certificates in sixteen
+retained evidence occurrences. Ready/pending banks remain 132/38, 141/66,
+87/89 and 87/116; there are no new support activations. Original structural
+coverage remains 17/24 and supplemental positive coverage 24/24. All 529 prior
+sources, 6,431 artifacts and 99 manifests remain unchanged. The 215-page
+manuscript builds with all 64 existing proof blocks unchanged. No new Lean
+theorem or unrestricted-SAT resource guarantee is claimed.

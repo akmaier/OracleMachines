@@ -1,0 +1,950 @@
+{
+  "admission": {
+    "child": null,
+    "discovery": {
+      "attempts": [
+        {
+          "clause": [
+            -24
+          ],
+          "screen": {
+            "conflict": null,
+            "residual_literals": 20,
+            "root": "cnf-residual-v1:[[-12,-10],[-12,-9],[-12,-8],[-12,5],[-11,-10],[-11,-9],[-11,1],[-11,3],[-11,7],[-10,-8],[-10,1],[-10,6],[-9,3],[-9,5],[-8,3],[-8,4],[-8,6],[-7,-6,-2],[-5,9,12],[-4,-3,8],[-1],[-1,10,11],[1,2],[1,4],[1,5],[2,4],[2,6],[2,7],[3,4],[3,7],[4,5],[6,7]]",
+            "trace": [
+              [
+                -1,
+                20
+              ],
+              [
+                2,
+                22
+              ],
+              [
+                4,
+                23
+              ],
+              [
+                5,
+                24
+              ],
+              [
+                -11,
+                6
+              ],
+              [
+                -10,
+                10
+              ]
+            ]
+          }
+        }
+      ],
+      "baseline": {
+        "conflict": null,
+        "residual_literals": 66,
+        "root": "cnf-residual-v1:[[-12,-10],[-12,-9],[-12,-8],[-12,5],[-11,-10],[-11,-9],[-11,1],[-11,3],[-11,7],[-10,-8],[-10,1],[-10,6],[-9,3],[-9,5],[-8,3],[-8,4],[-8,6],[-7,-6,-2],[-5,9,12],[-4,-3,8],[-1,10,11],[1,2],[1,4],[1,5],[2,4],[2,6],[2,7],[3,4],[3,7],[4,5],[6,7]]",
+        "trace": []
+      },
+      "binary_filter": {
+        "skipped": [],
+        "variables": [
+          24,
+          49,
+          80,
+          89,
+          94,
+          103,
+          136,
+          140,
+          174,
+          188,
+          190,
+          207
+        ]
+      },
+      "candidates": [
+        [
+          -24
+        ],
+        [
+          24
+        ],
+        [
+          -80
+        ],
+        [
+          80
+        ],
+        [
+          -89
+        ],
+        [
+          89
+        ],
+        [
+          -140
+        ],
+        [
+          140
+        ]
+      ],
+      "completions": [
+        {
+          "false_valid": false,
+          "index": 0,
+          "mixed": {
+            "metrics": {
+              "implication_edges": 20
+            },
+            "model": [
+              [
+                3,
+                false
+              ],
+              [
+                6,
+                false
+              ],
+              [
+                7,
+                true
+              ],
+              [
+                8,
+                false
+              ],
+              [
+                9,
+                false
+              ],
+              [
+                12,
+                true
+              ]
+            ],
+            "proof": null
+          },
+          "residual_literals": 20,
+          "true_valid": false,
+          "two_cnf": true
+        }
+      ],
+      "exposed": null,
+      "fixed": [],
+      "positive_selected": 0,
+      "ranks": [
+        {
+          "binary_incidence": 5,
+          "variable": 24
+        },
+        {
+          "binary_incidence": 5,
+          "variable": 80
+        },
+        {
+          "binary_incidence": 5,
+          "variable": 89
+        },
+        {
+          "binary_incidence": 5,
+          "variable": 140
+        },
+        {
+          "binary_incidence": 5,
+          "variable": 188
+        },
+        {
+          "binary_incidence": 5,
+          "variable": 190
+        },
+        {
+          "binary_incidence": 4,
+          "variable": 49
+        },
+        {
+          "binary_incidence": 4,
+          "variable": 94
+        },
+        {
+          "binary_incidence": 4,
+          "variable": 103
+        },
+        {
+          "binary_incidence": 4,
+          "variable": 136
+        },
+        {
+          "binary_incidence": 4,
+          "variable": 174
+        },
+        {
+          "binary_incidence": 4,
+          "variable": 207
+        }
+      ],
+      "selected": null
+    },
+    "proposal": {
+      "kind": "positive-model",
+      "model": [
+        [
+          24,
+          false
+        ],
+        [
+          49,
+          true
+        ],
+        [
+          80,
+          false
+        ],
+        [
+          89,
+          true
+        ],
+        [
+          94,
+          true
+        ],
+        [
+          103,
+          false
+        ],
+        [
+          136,
+          true
+        ],
+        [
+          140,
+          false
+        ],
+        [
+          174,
+          false
+        ],
+        [
+          188,
+          false
+        ],
+        [
+          190,
+          false
+        ],
+        [
+          207,
+          true
+        ]
+      ],
+      "root": "cnf-residual-v1:[[-12,-10],[-12,-9],[-12,-8],[-12,5],[-11,-10],[-11,-9],[-11,1],[-11,3],[-11,7],[-10,-8],[-10,1],[-10,6],[-9,3],[-9,5],[-8,3],[-8,4],[-8,6],[-7,-6,-2],[-5,9,12],[-4,-3,8],[-1,10,11],[1,2],[1,4],[1,5],[2,4],[2,6],[2,7],[3,4],[3,7],[4,5],[6,7]]"
+    },
+    "reason": "mixed-positive-model"
+  },
+  "case": 51,
+  "child": {
+    "answer": true,
+    "archive_nodes": 24809,
+    "archive_payload_bytes": 40499805,
+    "metrics": {
+      "accounting_reads": 1,
+      "certificate_serialized_bytes": 368,
+      "database_lookups": 1,
+      "inserted_bytes": 626,
+      "inserted_nodes": 1,
+      "key_serialized_bytes": 516,
+      "normalization_literal_visits": 132,
+      "positive_model_publications": 1,
+      "positive_publication_model_literals": 66,
+      "source_witness_literal_payload": 66,
+      "verification_literal_payload": 66,
+      "verified_nodes": 1
+    },
+    "model": {
+      "24": false,
+      "49": true,
+      "80": false,
+      "89": true,
+      "94": true,
+      "103": false,
+      "136": true,
+      "140": false,
+      "174": false,
+      "188": false,
+      "190": false,
+      "207": true
+    },
+    "root": "cnf-residual-v1:[[-12,-10],[-12,-9],[-12,-8],[-12,5],[-11,-10],[-11,-9],[-11,1],[-11,3],[-11,7],[-10,-8],[-10,1],[-10,6],[-9,3],[-9,5],[-8,3],[-8,4],[-8,6],[-7,-6,-2],[-5,9,12],[-4,-3,8],[-1,10,11],[1,2],[1,4],[1,5],[2,4],[2,6],[2,7],[3,4],[3,7],[4,5],[6,7]]",
+    "seconds": 0.0005743331275880337
+  },
+  "child_seconds": 0.0006145001389086246,
+  "cohort": "mixed-controls",
+  "cold_metrics": {
+    "key_serialized_bytes": 516,
+    "normalization_literal_visits": 132,
+    "search_memory_hits": 1,
+    "source_witness_literal_payload": 66,
+    "visits": 1
+  },
+  "cold_seconds": 0.03281429084017873,
+  "complete_arm_seconds": 0.21381979202851653,
+  "composition_metrics": {
+    "chain_child_memory_hits": 1,
+    "key_serialized_bytes": 774,
+    "normalization_literal_visits": 198
+  },
+  "composition_seconds": 0.00018087495118379593,
+  "delta": {
+    "path": "experiments/results/cnf-negative-cover/controls/mixed-controls-51-mixed/delta.json",
+    "sha256": "2dce1a6f20a2df6c0202807689c401e5e9ec21894e4626cf48f60551f74f863b"
+  },
+  "evaluation_seconds": 0.0012175412848591805,
+  "guard_counts": {},
+  "guard_metrics": {},
+  "guard_replay_metrics": {},
+  "guard_replay_seconds": 0.00013116700574755669,
+  "input_guards": [],
+  "input_target": [
+    [
+      94,
+      24
+    ],
+    [
+      24,
+      -188
+    ],
+    [
+      89,
+      24
+    ],
+    [
+      136,
+      -190
+    ],
+    [
+      -140,
+      103
+    ],
+    [
+      -174,
+      80
+    ],
+    [
+      -140,
+      -207
+    ],
+    [
+      -174,
+      94
+    ],
+    [
+      80,
+      136
+    ],
+    [
+      -207,
+      -188
+    ],
+    [
+      -207,
+      94
+    ],
+    [
+      89,
+      80
+    ],
+    [
+      80,
+      -190
+    ],
+    [
+      188,
+      190,
+      -24
+    ],
+    [
+      -190,
+      -174
+    ],
+    [
+      -140,
+      89
+    ],
+    [
+      94,
+      89
+    ],
+    [
+      -188,
+      103
+    ],
+    [
+      140,
+      -89,
+      -80
+    ],
+    [
+      -207,
+      -174
+    ],
+    [
+      49,
+      89
+    ],
+    [
+      49,
+      136
+    ],
+    [
+      24,
+      -190
+    ],
+    [
+      -140,
+      -188
+    ],
+    [
+      103,
+      136
+    ],
+    [
+      80,
+      -140
+    ],
+    [
+      24,
+      49
+    ],
+    [
+      -190,
+      -188
+    ],
+    [
+      -103,
+      -49,
+      -136
+    ],
+    [
+      49,
+      103
+    ],
+    [
+      174,
+      207,
+      -94
+    ]
+  ],
+  "local_choice": {
+    "kind": "positive-model",
+    "model": [
+      [
+        24,
+        false
+      ],
+      [
+        49,
+        true
+      ],
+      [
+        80,
+        false
+      ],
+      [
+        89,
+        true
+      ],
+      [
+        94,
+        true
+      ],
+      [
+        103,
+        false
+      ],
+      [
+        136,
+        true
+      ],
+      [
+        140,
+        false
+      ],
+      [
+        174,
+        false
+      ],
+      [
+        188,
+        false
+      ],
+      [
+        190,
+        false
+      ],
+      [
+        207,
+        true
+      ]
+    ],
+    "root": "cnf-residual-v1:[[-12,-10],[-12,-9],[-12,-8],[-12,5],[-11,-10],[-11,-9],[-11,1],[-11,3],[-11,7],[-10,-8],[-10,1],[-10,6],[-9,3],[-9,5],[-8,3],[-8,4],[-8,6],[-7,-6,-2],[-5,9,12],[-4,-3,8],[-1,10,11],[1,2],[1,4],[1,5],[2,4],[2,6],[2,7],[3,4],[3,7],[4,5],[6,7]]"
+  },
+  "local_eligible": true,
+  "local_probe": {
+    "attempts": [
+      {
+        "clause": [
+          -24
+        ],
+        "screen": {
+          "conflict": null,
+          "residual_literals": 20,
+          "root": "cnf-residual-v1:[[-12,-10],[-12,-9],[-12,-8],[-12,5],[-11,-10],[-11,-9],[-11,1],[-11,3],[-11,7],[-10,-8],[-10,1],[-10,6],[-9,3],[-9,5],[-8,3],[-8,4],[-8,6],[-7,-6,-2],[-5,9,12],[-4,-3,8],[-1],[-1,10,11],[1,2],[1,4],[1,5],[2,4],[2,6],[2,7],[3,4],[3,7],[4,5],[6,7]]",
+          "trace": [
+            [
+              -1,
+              20
+            ],
+            [
+              2,
+              22
+            ],
+            [
+              4,
+              23
+            ],
+            [
+              5,
+              24
+            ],
+            [
+              -11,
+              6
+            ],
+            [
+              -10,
+              10
+            ]
+          ]
+        }
+      }
+    ],
+    "baseline": {
+      "conflict": null,
+      "residual_literals": 66,
+      "root": "cnf-residual-v1:[[-12,-10],[-12,-9],[-12,-8],[-12,5],[-11,-10],[-11,-9],[-11,1],[-11,3],[-11,7],[-10,-8],[-10,1],[-10,6],[-9,3],[-9,5],[-8,3],[-8,4],[-8,6],[-7,-6,-2],[-5,9,12],[-4,-3,8],[-1,10,11],[1,2],[1,4],[1,5],[2,4],[2,6],[2,7],[3,4],[3,7],[4,5],[6,7]]",
+      "trace": []
+    },
+    "binary_filter": {
+      "skipped": [],
+      "variables": [
+        24,
+        49,
+        80,
+        89,
+        94,
+        103,
+        136,
+        140,
+        174,
+        188,
+        190,
+        207
+      ]
+    },
+    "candidates": [
+      [
+        -24
+      ],
+      [
+        24
+      ],
+      [
+        -80
+      ],
+      [
+        80
+      ],
+      [
+        -89
+      ],
+      [
+        89
+      ],
+      [
+        -140
+      ],
+      [
+        140
+      ]
+    ],
+    "completions": [
+      {
+        "false_valid": false,
+        "index": 0,
+        "mixed": {
+          "metrics": {
+            "implication_edges": 20
+          },
+          "model": [
+            [
+              3,
+              false
+            ],
+            [
+              6,
+              false
+            ],
+            [
+              7,
+              true
+            ],
+            [
+              8,
+              false
+            ],
+            [
+              9,
+              false
+            ],
+            [
+              12,
+              true
+            ]
+          ],
+          "proof": null
+        },
+        "residual_literals": 20,
+        "true_valid": false,
+        "two_cnf": true
+      }
+    ],
+    "exposed": null,
+    "fixed": [],
+    "positive_selected": 0,
+    "ranks": [
+      {
+        "binary_incidence": 5,
+        "variable": 24
+      },
+      {
+        "binary_incidence": 5,
+        "variable": 80
+      },
+      {
+        "binary_incidence": 5,
+        "variable": 89
+      },
+      {
+        "binary_incidence": 5,
+        "variable": 140
+      },
+      {
+        "binary_incidence": 5,
+        "variable": 188
+      },
+      {
+        "binary_incidence": 5,
+        "variable": 190
+      },
+      {
+        "binary_incidence": 4,
+        "variable": 49
+      },
+      {
+        "binary_incidence": 4,
+        "variable": 94
+      },
+      {
+        "binary_incidence": 4,
+        "variable": 103
+      },
+      {
+        "binary_incidence": 4,
+        "variable": 136
+      },
+      {
+        "binary_incidence": 4,
+        "variable": 174
+      },
+      {
+        "binary_incidence": 4,
+        "variable": 207
+      }
+    ],
+    "selected": null
+  },
+  "mode": "mixed",
+  "new_nodes": 1,
+  "new_payload_units": 626,
+  "open_seconds": 0.04452466685324907,
+  "prefix_digest": "a53b638943e3097e32579c9aede4f3352c8a79ddcf14a0bf92bfd6961577d9fb",
+  "prefix_nodes": 24808,
+  "prefix_write_seconds": 0.18200087500736117,
+  "premise": null,
+  "premise_seconds": 0.0,
+  "preparation_ids": [],
+  "probe_counts": {
+    "admission_family_clauses": 31,
+    "admission_family_literal_visits": 66,
+    "admission_source_literal_visits": 66,
+    "binary_filter_clause_visits": 31,
+    "binary_filter_literal_visits": 54,
+    "binary_filter_name_transports": 12,
+    "inline_completion_checks": 1,
+    "inline_completion_clauses": 10,
+    "inline_completion_literal_visits": 20,
+    "local_baseline_probes": 1,
+    "local_premise_literals_copied": 67,
+    "local_premise_probes": 1,
+    "local_ranking_clause_visits": 31,
+    "local_ranking_literal_visits": 66,
+    "mixed_model_literals": 67,
+    "mixed_model_variables": 12,
+    "mixed_positive_models": 1,
+    "mixed_recognition_clauses": 10,
+    "mixed_scc_calls": 1,
+    "mixed_scc_implication_edges": 20,
+    "propagation_literal_visits": 267,
+    "restriction_literal_visits": 133
+  },
+  "probe_metrics": {
+    "database_lookups": 1,
+    "key_serialized_bytes": 779,
+    "normalization_literal_visits": 199
+  },
+  "record": {
+    "answer": true,
+    "child": {
+      "answer": true,
+      "model": {
+        "24": false,
+        "49": true,
+        "80": false,
+        "89": true,
+        "94": true,
+        "103": false,
+        "136": true,
+        "140": false,
+        "174": false,
+        "188": false,
+        "190": false,
+        "207": true
+      },
+      "root": "cnf-residual-v1:[[-12,-10],[-12,-9],[-12,-8],[-12,5],[-11,-10],[-11,-9],[-11,1],[-11,3],[-11,7],[-10,-8],[-10,1],[-10,6],[-9,3],[-9,5],[-8,3],[-8,4],[-8,6],[-7,-6,-2],[-5,9,12],[-4,-3,8],[-1,10,11],[1,2],[1,4],[1,5],[2,4],[2,6],[2,7],[3,4],[3,7],[4,5],[6,7]]"
+    },
+    "format": "checked-guard-chain-v1",
+    "guards": [],
+    "model": {
+      "24": false,
+      "49": true,
+      "80": false,
+      "89": true,
+      "94": true,
+      "103": false,
+      "136": true,
+      "140": false,
+      "174": false,
+      "188": false,
+      "190": false,
+      "207": true
+    },
+    "query_root": "cnf-residual-v1:[[-12,-10],[-12,-9],[-12,-8],[-12,5],[-11,-10],[-11,-9],[-11,1],[-11,3],[-11,7],[-10,-8],[-10,1],[-10,6],[-9,3],[-9,5],[-8,3],[-8,4],[-8,6],[-7,-6,-2],[-5,9,12],[-4,-3,8],[-1,10,11],[1,2],[1,4],[1,5],[2,4],[2,6],[2,7],[3,4],[3,7],[4,5],[6,7]]",
+    "source": [
+      [
+        94,
+        24
+      ],
+      [
+        24,
+        -188
+      ],
+      [
+        89,
+        24
+      ],
+      [
+        136,
+        -190
+      ],
+      [
+        -140,
+        103
+      ],
+      [
+        -174,
+        80
+      ],
+      [
+        -140,
+        -207
+      ],
+      [
+        -174,
+        94
+      ],
+      [
+        80,
+        136
+      ],
+      [
+        -207,
+        -188
+      ],
+      [
+        -207,
+        94
+      ],
+      [
+        89,
+        80
+      ],
+      [
+        80,
+        -190
+      ],
+      [
+        188,
+        190,
+        -24
+      ],
+      [
+        -190,
+        -174
+      ],
+      [
+        -140,
+        89
+      ],
+      [
+        94,
+        89
+      ],
+      [
+        -188,
+        103
+      ],
+      [
+        140,
+        -89,
+        -80
+      ],
+      [
+        -207,
+        -174
+      ],
+      [
+        49,
+        89
+      ],
+      [
+        49,
+        136
+      ],
+      [
+        24,
+        -190
+      ],
+      [
+        -140,
+        -188
+      ],
+      [
+        103,
+        136
+      ],
+      [
+        80,
+        -140
+      ],
+      [
+        24,
+        49
+      ],
+      [
+        -190,
+        -188
+      ],
+      [
+        -103,
+        -49,
+        -136
+      ],
+      [
+        49,
+        103
+      ],
+      [
+        174,
+        207,
+        -94
+      ]
+    ]
+  },
+  "records": {
+    "path": "experiments/results/cnf-negative-cover/controls/mixed-controls-51-mixed/records.json",
+    "sha256": "5445c55a721be5b2116eaf7d85863e45ede65ce69c25b15f8f6420059bc1b649"
+  },
+  "retained_bytes": 3259,
+  "selection_seconds": 0.00042125023901462555,
+  "serialization_seconds": 0.0002960842102766037,
+  "summary": {
+    "admission_calls": 1,
+    "admission_reasons": {
+      "mixed-positive-model": 1
+    },
+    "binary_filter_clause_visits": 31,
+    "binary_filter_literal_visits": 54,
+    "binary_filter_name_transports": 12,
+    "binary_probe_skips": 0,
+    "cover_candidates": 0,
+    "cover_checked_implication_edges": 0,
+    "cover_checked_reason_literals": 0,
+    "cover_clause_visits": 0,
+    "cover_completion_reads": 0,
+    "cover_literal_visits": 0,
+    "cover_path_repairs": 0,
+    "cover_planned_nodes": 0,
+    "cover_premise_literal_payload": 0,
+    "cover_transport_path_literals": 0,
+    "cover_transport_reason_literals": 0,
+    "expanded_nodes": 0,
+    "inline_completion_checks": 1,
+    "inline_completion_clauses": 10,
+    "inline_completion_literal_visits": 20,
+    "inline_completion_model_literals": 0,
+    "inline_completion_model_variables": 0,
+    "inline_completion_models": 0,
+    "local_calls": 1,
+    "local_guards": 0,
+    "local_terminals": 0,
+    "mixed_model_literals": 67,
+    "mixed_model_variables": 12,
+    "mixed_negative_conditions": 0,
+    "mixed_positive_models": 1,
+    "mixed_recognition_clauses": 10,
+    "mixed_scc_calls": 1,
+    "mixed_scc_implication_edges": 20,
+    "model_publications": 1,
+    "negative_cover_publications": 0,
+    "positive_models": 1,
+    "positive_premise_attempts_scanned": 0,
+    "positive_premise_literals_copied": 0,
+    "positive_premise_model_literals": 0,
+    "positive_premise_models": 0,
+    "positive_premise_reason_literals": 0,
+    "premise_probes": 1,
+    "propagated_reuses": 0,
+    "propagation_literal_visits": 267,
+    "retained_prefixes": 0,
+    "trace_publications": 0,
+    "uniform_premise_attempts_scanned": 0,
+    "uniform_premise_literals_copied": 0,
+    "uniform_premise_misses": 0,
+    "uniform_premise_model_literals": 0,
+    "uniform_premise_models": 0,
+    "uniform_premise_reason_literals": 0,
+    "uniform_premise_recognition_clauses": 0,
+    "uniform_premise_recognition_literal_visits": 0
+  },
+  "warm_seconds": 0.00038524996489286423
+}

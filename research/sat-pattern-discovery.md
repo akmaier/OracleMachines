@@ -5738,3 +5738,44 @@ blocks. Fresh case 59 and saved controls 43/47 supply three exhaustive negative
 clause covers whose present parent acquisitions total 36 nodes / 50,554 bytes.
 Their combined publication and its cost remain open. No exact ordered SCC
 residual repeats within a query on the fresh sample.
+
+## 2026-11-18: certify parent UNSAT by complete conditional coverage
+
+A source clause supplies an exhaustive case split. Refuting F-and-literal
+for every literal in that clause refutes the parent; a partial cover does not.
+[The new compiler](negative-cover.md) reuses checked negative SCC conditions
+and unit traces to construct ordinary native proofs, with exact canonical
+rebinding and restriction transport. This closes three saved acquisition
+opportunities and one fresh target without new discovery probes. The class
+requires complete conditional coverage and checked transport; outside it the
+previous selector/fallback remains. The native proof schema and structural
+authority are unchanged.
+
+The next concrete discovery target is **cover-directed candidate admission**.
+Fresh cases 51, 55 and 59 each have a source clause missing just one refuted
+literal, and that literal lies outside the current candidate set. Case 51
+needs -158 for [-158, -54, 16]; case 55 needs -156 for [-156, -113, -12]
+(or 191 for [-151, -56, 191]); case 59 needs -320 for [-320, -71, 52].
+These are candidates for measurement, not already checked extra conditions.
+Charge the added probes and retain failures; the missing condition need not
+have a binary residual or a cheap proof. Earlier stopping at a completed cover
+and covers exposed by baseline propagation are separate opportunities. A gated
+K4 regression preserves the latter recognition miss.
+
+Independent analysis finds no new ready support and no change to the discovery
+pass on all 48 fresh family queries. Random three-CNF and coupled parity still
+cost 253 acquired nodes / 47,204 propagation visits. Neither exact recomposition
+nor the finite graph checks establish efficient classification of arbitrary CNF.
+
+All **1,153 tests**, 24 focused tests, 294 counter audits and independent
+reconstruction pass. Resume `experiments/results/cnf-negative-cover/checkpoint.json`:
+**25,757 native keys**, preserving all 25,334 earlier payloads, with 234 new
+composed records alongside 4,245 inherited records, 2,957 ordinary decisions
+and six projections. The preservation union uses 80,306,176 database bytes /
+5,993,018 compressed bytes. Eight roots have alternate certificates in sixteen
+retained evidence occurrences. Ready/pending banks remain 132/38, 141/66,
+87/89 and 87/116; there are no new support activations. Original structural
+coverage remains 17/24 and supplemental positive coverage 24/24. All 529 prior
+sources, 6,431 artifacts and 99 manifests remain unchanged. The 215-page
+manuscript builds with all 64 existing proof blocks unchanged. No new Lean
+theorem or unrestricted-SAT resource guarantee is claimed.

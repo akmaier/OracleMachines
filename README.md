@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Preserve clause order during normalization](research/ordered-residual-normalization.md).
+The optional exact path avoids 96,099 sort calls on the same 104 inputs, reducing
+mean query time 2.17% against batching without a retained normalization cache.
+The earlier memo remains faster; warm time regresses. Proofs and storage match.
+Next: profile larger held-out mixtures before selecting another optimization.
+
 [Reuse normalization during proof checking](research/proof-normalization-reuse.md).
 On the same 104 inputs, a bounded optional memo avoids 262 repeated normalizations
 and 21.31% of normalization visits. Mean query time falls 3.88%; complete-time

@@ -10191,3 +10191,43 @@ cleanup. All **1,292 full / 123 focused tests** pass. The full suite emits 44 SQ
 ResourceWarnings versus 43 in the parent, at unchanged source/stdlib files;
 focused tests emit none. The **227-page manuscript / 64 prior proof blocks**
 remain valid. Final source ledger: **632**; details are in `checks.json`.
+
+## 2026-11-18: exact normalization from local clause order
+
+[Ordered residual normalization](ordered-residual-normalization.md) checks local
+literal order and uses a two-pointer tautology test; unordered/duplicate-literal
+clauses keep the original fallback. Signed compact renaming preserves order, so
+the mapped clause needs no second sort. Global deduplication/sorting, support,
+name maps, exact keys and every proof check remain unchanged. Empty clauses do
+not bypass validation of the remaining input. This exact transformation applies
+to valid CNFs generally but adds no tractable SAT category.
+
+On the same 104 sources, the optional path avoids **96,099 sort calls**. Mean query
+time falls **2.17%** and complete time **1.68%** against batching, with both orders
+improving. It is still **1.19% slower than the 128-KiB memo** on query time, and
+warm time **regresses 2.95%**. It adds no retained normalization cache, but measured
+RSS does not fall. Answers, models, all ordinary counters, proofs and persistent
+storage match batching exactly. Keep both alternatives optional; do not promote
+small measured gains into a general runtime claim.
+
+**Next highest-value gap: representative cost and discovery evidence on a larger
+held-out mixture stream.** Ordered normalization remains the largest exclusive
+site here (1,163 calls / 0.07034 exclusive / 0.14104 inclusive profiled seconds);
+restriction costs 780 calls / 0.06935 inclusive seconds. After several optimizations
+on the same 104 small sources, another local reduction needs stronger evidence.
+Freeze larger novel/mixed/edited CNFs and deterministic budgets, measure
+recognition outcomes and unresolved interactions alongside acquisition, runtime
+and retained proof state, then choose the dominant bottleneck. Compare the three
+preserved variants. Direct invariant transport and combining ordering with reuse
+are candidates only; broader structure discovery remains the main objective.
+
+Resume `experiments/results/cnf-ordered-normalization/checkpoint.json`.
+All **632 prior sources / 7,990 artifacts / 117 manifests** and the full proof/decision
+union remain unchanged. Validation covers **624 chronological queries / 416 exact
+comparisons / 104 truths / 104 committed prefixes**, both old readers, and ordered
+normalization agreement on **28,886 archived CNFs / 4,961 mutations**. Eight new
+tests add exhaustive small clauses/formulas, adversarial inputs, failure recovery
+and full-key/model/proof comparisons. All **1,300 full / 131 focused tests** pass. The full suite retains 44 SQLite
+ResourceWarnings at unchanged files; focused tests emit none. The **228-page
+manuscript** builds without warnings and preserves **64 earlier proof blocks**.
+Final source ledger: **638**; build and suite details are in `checks.json`.

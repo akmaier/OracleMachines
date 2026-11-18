@@ -8250,6 +8250,39 @@ clause uniqueness and compact variable names. Any fast path must preserve those
 remaining obligations. This experiment adds no structural coverage or uniform
 polynomial expansion bound.
 
+\paragraph{Exact normalization from clause-local order.}
+A further optional path validates every literal and checks strict ascending order
+within each clause. Ordered clauses use a two-pointer complementary-pair test;
+unordered or duplicate-literal clauses retain set construction and sorting.
+If the sum of the least and greatest remaining literals is negative, the least
+cannot pair with another remaining literal; if positive, the greatest cannot.
+A zero sum identifies a tautology. The scan terminates after linearly many pointer
+moves, with integer arithmetic charged separately. All input literals are checked
+before an empty clause collapses the formula.
+
+The increasing rank map on positive variable names extends to a strictly
+increasing signed map: positive ranks preserve order, negative magnitudes and
+ranks reverse together, and negative literals precede positives. Every surviving
+clause is sorted before renaming, including fallback outputs. Consequently, a
+second per-clause sort after renaming is unnecessary. Global clause deduplication,
+support sorting, original-name mapping, global clause sorting and full keys
+remain. This proves equality with the original normalizer for valid finite CNFs.
+It does not show efficient solving of any previously unresolved SAT category.
+
+Six serial workers compare batching, the preceding 128-KiB memo and this path on
+the same 104 sources in opposite orders. The ordered path recognizes 47,059 of
+49,833 clause occurrences, falls back on 2,774, and avoids 46,748 initial plus
+49,351 mapped-clause sorts. All 119,547 normalization literal visits remain.
+Mean query time falls 2.17\% and complete time 1.68\% against batching, with both
+orders improving. However, query time is 1.19\% above the memo alternative and
+warm time regresses 2.95\% against batching. This path adds no retained cache;
+measured process memory does not decrease. Every answer, model, ordinary counter,
+proof byte and persisted byte count matches batching. The independent audit
+confirms normalizer agreement on all 28,886 archived CNFs and 4,961 mutations,
+including invalid encodings, and verifies every committed prefix. The small
+runtime differences on this repeated workload motivate larger held-out mixtures
+before choosing another optimization. No uniform expansion bound follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

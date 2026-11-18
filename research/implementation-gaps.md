@@ -9841,3 +9841,27 @@ binary cores in the stored-node census have no forced literals; this method alon
 cannot resolve them. Validation covers 360 chronological queries, 24 publication
 counter records, 48 family truths and full historical replay. No new Lean or
 unrestricted-SAT resource guarantee is claimed.
+
+
+## 2026-11-18: targeted split-variable implication discovery
+
+[The targeted policy](targeted-backbone-discovery.md) adds at most one implication
+root after the unchanged whole-cover budget, with completed searches reused.
+It recognizes all fourteen saved forced-variable misses, including six split
+nodes. On sixty new queries, native additions fall 252 -> 250 and propagation
+visits 29,008 -> 27,154, with twelve selected backbones instead of two. Fifty-six
+new root searches, ranking, checking and five excluded children remain charged.
+Timing varies substantially in unchanged preparation and cold replay; there is
+no established end-to-end speedup. The policy remains optional.
+
+The new diagnostic has twenty binary-equivalence sources with no forced literal,
+including eleven ordinary split nodes. Exact full-source substitution with native
+certificates is the next coverage target, reusing earlier probe-equivalence logic
+where justified. The saved random-three case 56 is among them; it still pays
+4,866 propagation visits. This is a measured discovery opportunity, not yet an
+implemented speedup. No uniformly efficient arbitrary-CNF expansion follows.
+
+All 1,212 tests, 43 focused tests, 240 chronological query audits, sixteen
+publication counter audits, 48 family truth tables and full cold replay pass.
+The new checkpoint preserves all old payloads and reaches 28,145 native keys /
+twenty-six extensions. Previous defaults and proof formats remain unchanged.

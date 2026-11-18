@@ -12,7 +12,66 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: target the missed split-variable backbones
+## Current investigation: merge binary-equivalent variables across the full source
+
+[Targeted backbone discovery](targeted-backbone-discovery.md) closes all fourteen
+saved recognition misses, including the six split nodes. One extra implication
+root is allowed after the unchanged whole-cover budget; completed searches are
+reused. On sixty fresh queries, selections rise two -> twelve, native additions
+fall **252 -> 250**, payload falls **2,599 bytes**, and child propagation visits
+fall **29,008 -> 27,154 (6.39%)**. Fifty-six extra searches and 8,756 ranking visits
+are charged. Eight full covers and four affine extensions remain unchanged.
+
+Timing is unstable: the first pair saves 0.00495 s of query time but adds 0.08083 s
+complete time; the reverse pair also has large changes in unchanged preparation
+and cold replay. Do not report the raw 28.21% query mean as a stable speedup.
+SQLite size is unchanged, compressed trial size falls 114 bytes, and sidecars
+grow about 5.4 KB. The solver stays optional. No study tests/audits overlapped
+the timed workers.
+
+**Next highest-coverage target:** source-checked binary SCC equivalences and exact
+substitution across every clause. The new census has **67 mixed binary cores
+without forced literals**; twenty contain equivalence blocks, including **eleven
+ordinary split nodes**. Ten are graph-colouring and one is random-three case 56,
+whose saved split source implies `x1 = not x8`. Hashes and signed blocks are in
+`experiments/results/cnf-targeted-backbone/attribution.json`; 242 independent
+two-CNF disagreement checks validate all diagnosed blocks. These are opportunities,
+not implemented savings. Reuse the earlier probe-equivalence substitution logic,
+but establish native acquisition certificates, model lifting and negative
+recomposition before measuring the change. Avoid counting eight model records
+and one subsumption record as eleven additional split opportunities.
+
+Random-three cases **44 / 56** still cost **5,153 / 4,866 child propagation visits**.
+The remaining 25 forced-variable sources only force variables other than the
+frequency choice after full-cover exclusions; arbitrary alternate choices may
+repeat the earlier first-path storage regression. Prioritize the equivalence
+bridge over another unpriced forcing heuristic. Twenty stored sources have no
+binary clauses. Larger/less explicit inputs and general interaction remain open.
+
+**Other large costs:** graph discovery spends **26,440 visits**, against 3,840 in
+acquisition. Cases 59/47/55 spend 4,231/4,127/3,191 visits before covers. Full
+historical cold replay averages 14.2--16.4 seconds in this noisy run. Earlier
+admission and cheaper replay remain separate total-cost targets.
+
+Resume `experiments/results/cnf-targeted-backbone/checkpoint.json`: **28,145 native
+keys / twenty-six extensions**, preserving every earlier payload. The optional
+solver is `experiments.cnf_targeted_backbone.AccountedTargetedBackboneSolver`;
+affine negatives retain `TerminalStore`. Four alternative native roots remain
+in trial archives, while the union retains first payloads. Growth: 647,168 SQLite /
+71,842 compressed bytes, including baseline history. No default solver changes.
+
+All **1,212 tests**, **43 focused tests**, 240 chronological query audits and
+sixteen publication counter audits pass. Warm reuse, 48 exhaustive family truths
+and full cold histories validate. The full suite retains 44 old SQLite warnings;
+focused tests have none. All 574 prior sources, 7,568 artifacts and 107 manifests
+are unchanged. There is no new Lean theorem or unrestricted-SAT resource bound.
+
+
+The **222-page manuscript** builds with a clean final log and all **64 prior
+proof blocks unchanged**. Final source ledger: **581**. New manifest: **40
+artifacts**. Next preservation audit: **7,608 artifacts / 108 manifests**.
+
+## Previous checkpoint: target the missed split-variable backbones
 
 [Partial backbone reuse](binary-backbone-reuse.md) now transports a retained
 implication path directly into an excluded-branch unit proof, without fresh

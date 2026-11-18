@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Target binary-forced split variables](research/targeted-backbone-discovery.md).
+One additional implication query closes the six saved split-node recognition
+misses. On sixty fresh queries it saves two stored nodes and 6.39% of child
+propagation visits; noisy timing does not establish an end-to-end speedup.
+Resume 28,145 native keys / twenty-six extensions in
+`experiments/results/cnf-targeted-backbone/`. Next: checked variable merging from
+binary equivalences, found in eleven ordinary split nodes without forced literals.
+
 [Reuse partial binary backbones](research/binary-backbone-reuse.md).
 A checked implication path now supplies an excluded-branch proof without rerunning
 propagation. A frequency gate saves two native nodes on sixty fresh queries;

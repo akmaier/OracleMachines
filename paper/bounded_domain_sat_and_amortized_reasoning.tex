@@ -7811,10 +7811,54 @@ finite observations do not establish memory scaling. Both policies stay optional
 A posthoc uncapped audit identifies a recognition gap: six ordinary split nodes
 already have binary-forced split variables omitted by cover-oriented candidate
 selection. A targeted query for the opposite of the binary model's value could
-recognize them, but its discovery and changed proof costs remain unmeasured.
+recognize them; this motivates the following measured extension.
 The same stored-node census contains 75 satisfiable mixed binary cores with no
 forced literals. Partial backbone reuse does not resolve these interactions or
 provide uniformly efficient expansion for unrestricted SAT.
+
+\paragraph{Targeted binary discovery beyond cover candidates.}
+The next optional policy retains the eight-root whole-cover phase, then queries
+only the opposite of the binary model's value for the frequency-selected variable.
+A completed cover search is reused, including a negative result; a budget stop
+is inconclusive. A missing binary variable skips the query. Otherwise at most
+one extra root is searched, using the shared graph. This recognizes forced
+variables even when wider clauses contain variables outside the binary subset.
+The existing path checker, cofactor lift and excluded-child compiler remain the
+certificate boundary. For a satisfiable binary core, its model excludes one
+forced-false polarity, so the remaining query detects whether that core forces
+the selected variable. It does not detect every consequence of the full CNF.
+Additional ranking and discovery cost $O(L+V_B+E_B)$ in the adjacency-list model,
+with $O(V+V_B+E_B)$ temporary space. Full restriction, normalization, verification,
+persistence and later unrestricted search remain additional costs.
+
+All fourteen saved recognition misses, including six split nodes, now yield
+checked paths. Four serial workers in opposite orders then compare sixty new
+queries, returning 44 SAT and 16 UNSAT with identical preceding discovery.
+Backbone selections rise two to twelve, ordinary expansions fall 169 to 163,
+and compiled excluded children rise one to five. Native additions fall only
+252 to 250, payload 323,614 to 321,015 bytes, and child propagation visits
+29,008 to 27,154. The targeted phase performs fourteen cached queries and
+56 fresh searches, with one absent variable and 58 misses. Ranking grows from
+1,074 to 8,756 literal visits; the fresh searches visit 370 edges. Eight full
+covers and four affine extensions remain unchanged. The gains in stored nodes
+and propagation occur only in random three-CNF.
+
+Query-time deltas are $-0.00495/-0.25149$ seconds; complete-worker deltas are
+$+0.08083/-4.92162$ seconds. Unchanged preparation also varies sharply, averaging
+9.72 versus 5.71 seconds. Hence the raw mean query reduction of 28.21\% does not
+establish a stable speedup. The first pair improves query time only 1.51\%, with
+complete time slightly higher. Trial SQLite size is unchanged, compressed size
+falls 114 bytes, and sidecars grow about 5.4 KB. Both policies remain optional.
+
+The new stored-node census retains 67 satisfiable mixed binary cores with no
+forced literal. Twenty nonetheless contain nontrivial signed-equivalence blocks;
+eleven are split nodes, including one in random-three case 56. Mutual reachability
+and independent two-CNF disagreement checks support these diagnostic blocks.
+The next opportunity is exact substitution throughout the source, with checked
+model lifting and negative dependencies. The earlier probe-equivalence inventory
+supplies related substitution logic, but the native acquisition bridge and its
+costs remain open. This diagnostic is not yet a measured optimization or a
+uniform resource bound for arbitrary SAT.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}

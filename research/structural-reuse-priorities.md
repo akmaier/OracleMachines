@@ -12,7 +12,64 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: mixed residual acquisition after early positive stopping
+## Current investigation: recompose retained negative conditions
+
+[Mixed two-CNF completion](mixed-completion.md) now solves binary residuals
+that fail both uniform witnesses, reusing the current canonical binding,
+propagation assignment and residual. Four saved positive controls shrink
+**14 -> 4 nodes / 6,163 -> 2,357 native bytes**. Twenty-one other saved contexts
+retain their native certificates. A new sixty-query stream gains two mixed
+model completions, reducing acquisition **385 -> 381 nodes / 437,869 -> 436,179
+bytes** and premise probes **102 -> 89**. This broadens checked model recognition
+under the same probe policy; it does not cover arbitrary CNF efficiently.
+
+Mean query time falls **0.37242 -> 0.35566 s**, and complete-worker time
+**24.06008 -> 23.88454 s**, with both paired differences negative. Much of the
+complete-worker change is cold-replay variation, so it is not isolated as an
+SCC benefit. Diagnostic sidecars grow **1.18%** and mean RSS about **1.91 MB**;
+trial database size is unchanged. The fourteen SCC calls include twelve
+negative conditions. Preserve these costs and misses alongside the gains.
+
+**Next concrete target: a source clause covered by conditional refutations.**
+Fresh case **59 in the mixed-completion stream** has checked negative
+conditions under -141, 47 and 72, exactly covering source clause
+[-141, 47, 72]. Every parent model must satisfy one of these literals; each
+condition is unsatisfiable. The cover therefore supplies an exhaustive parent
+argument. Current acquisition still uses twelve native nodes. Implement a
+source-bound combined certificate with independent checking, persistence and
+a matched cost comparison. Charge all conditional discovery and certificates;
+a single negative condition is never a parent refutation. The posthoc evidence
+retains premise indices and residual bindings for resumption. The same pattern
+appears in saved mixed-controls 43 and 47. These three parent acquisitions total
+**36 nodes / 50,554 bytes**, before charging any combined-certificate cost.
+There are no repeated exact ordered residuals among the fourteen fresh SCC
+attempts within a query, so simple exact memoization is not the current target.
+
+**Broader discovery remains the larger unresolved problem.** Random three-CNF
+and coupled parity cost **272 acquisition nodes / 43,685 propagation visits**
+on the current stream, without any probes admitted by the negative binary
+filter. Positive witnesses outside that filter and wider shared interactions
+remain open. Direct model publication can also omit intermediate nodes useful
+for later queries; measure that tradeoff on subsequent expansions. General SAT
+still reduces to the residual cell outside the uniform and binary recognizers.
+The manuscript gives the construction and a 257-formula audit supports it.
+
+All **1,145 tests**, 25 focused tests, 292 counter audits and independent
+reconstruction pass. Resume `experiments/results/cnf-mixed-completion/checkpoint.json`:
+**25,334 native keys**, preserving all 24,922 earlier payloads, with 232 new
+composed records alongside 4,013 inherited records, 2,957 ordinary decisions
+and six projections. The union uses 79,339,520 database bytes / 5,889,616
+compressed bytes. Four roots have alternate certificates in eight retained
+evidence occurrences. Ready/pending banks remain 132/38, 141/66, 87/89 and
+87/116; no new activation is attributed to this policy. Original structural
+coverage remains 17/24, supplemental positive coverage 24/24. All 524 prior
+sources, 6,228 artifacts and 98 manifests remain unchanged. The manuscript
+builds at 214 pages with all 64 existing proof blocks unchanged. The finite
+embedding audit checks 257 formulas (255 SAT / two UNSAT).
+
+New manifest: **203 artifacts**. Next preservation audit: **6,431 artifacts / 99 manifests**. Final source ledger: **529**.
+
+## Previous investigation: mixed residual acquisition after early positive stopping
 
 [Inline completion](inline-completion.md) now stops discovery at the first
 checked positive completion. It reuses the live propagation assignment,

@@ -9559,3 +9559,28 @@ keys with all earlier payloads preserved. All 1,137 tests, 276 counter audits,
 independent reconstruction and the 213-page manuscript build pass; the existing
 64 proof blocks are unchanged. Posthoc mixed-model conditions on fresh graph
 cases 15/27/39/51 now offer four concrete next acquisition controls.
+
+## 2026-11-18: integrate mixed two-CNF models, retain negative evidence
+
+The versioned selector `experiments/cnf_mixed_completion.py` reuses the current
+residual for SCC solving after uniform completion fails. Full raw-source model
+checks precede publication. An independent reachability checker validates SCC
+status, source models and both negative implication paths. Native search is
+never enabled inside selection. Negative conditions remain diagnostics and do
+not silently become parent refutations.
+
+Four saved controls reduce fourteen native nodes to four. Fresh acquisition
+falls 385 -> 381 nodes, with two additional models; twelve failed SCC conditions
+are charged and retained. Diagnostic sidecars grow 1.18%. Both timing orders
+show query and complete-worker reductions, without a general scaling claim.
+Next implement the combined certificate for a source clause whose literals all
+have conditional refutations: fresh mixed-stream case 59 currently costs twelve
+nodes. Preserve explicit misses without such an exhaustive cover.
+
+Resume `experiments/results/cnf-mixed-completion/checkpoint.json`: 25,334 native
+keys preserve all prior payloads. All 1,145 tests, 292 counter audits and full
+independent replay pass; the 214-page manuscript retains all 64 existing proof
+blocks. Fresh case 59 and saved controls 43/47 supply three exhaustive negative
+clause covers whose present parent acquisitions total 36 nodes / 50,554 bytes.
+Their combined publication and its cost remain open. No exact ordered SCC
+residual repeats within a query on the fresh sample.

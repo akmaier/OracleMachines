@@ -3369,3 +3369,31 @@ keys with all earlier payloads preserved. All 1,137 tests, 276 counter audits,
 independent reconstruction and the 213-page manuscript build pass; the existing
 64 proof blocks are unchanged. Posthoc mixed-model conditions on fresh graph
 cases 15/27/39/51 now offer four concrete next acquisition controls.
+
+## 2026-11-18: conditioned two-CNF completion cost
+
+[Mixed completion](mixed-completion.md) performs width recognition during the
+existing sign scan. For a binary residual with n_i variables and L_i literal
+occurrences, the reused SCC implementation costs O(n_i log n_i + L_i) expected
+word operations, including sorting variable IDs, graph traversals and optional
+contradiction-path extraction. Temporary state is O(n_i+L_i). Sum over attempted
+conditions; one accepted model additionally costs O(n+L) source transport and
+verification. Original propagation, canonicalization, bit widths, native
+publication and persistence remain separate. Negative conditions can repeat
+work and retain O(n_i+L_i) proof data each.
+
+Fourteen SCC calls on the fresh stream construct 784 implication edges, yield
+two models and retain twelve negative conditions. Native payload falls 1,690
+bytes but diagnostics grow 1.18%, database size stays unchanged and mean RSS
+rises about 1.91 MB. Direct models omit intermediate subproblem nodes, so their
+benefit for later expansion needs a separate reuse measurement. The next parent
+certificate candidate must charge all conditional refutations and their
+exhaustive source-clause cover; a negative condition alone is insufficient.
+
+Resume `experiments/results/cnf-mixed-completion/checkpoint.json`: 25,334 native
+keys preserve all prior payloads. All 1,145 tests, 292 counter audits and full
+independent replay pass; the 214-page manuscript retains all 64 existing proof
+blocks. Fresh case 59 and saved controls 43/47 supply three exhaustive negative
+clause covers whose present parent acquisitions total 36 nodes / 50,554 bytes.
+Their combined publication and its cost remain open. No exact ordered SCC
+residual repeats within a query on the fresh sample.

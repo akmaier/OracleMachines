@@ -7283,6 +7283,79 @@ fifteen negative conditions on four other instances, whose parents require
 opportunities; SCC acquisition and negative parent recomposition have not yet
 been integrated into the timed policy.
 
+\paragraph{Lifting mixed two-CNF models from live residuals.}
+The next policy extends inline completion with the existing two-CNF SCC
+solver. During the residual sign scan it also checks clause width. A failed
+uniform completion invokes SCC solving only if every residual clause has
+width at most two. A positive assignment is combined with the forced prefix,
+transported through the premise and source maps, and checked against every
+raw target clause and the assumption. Ordinary native publication independently
+checks the target model. The existing canonical binding, assignment and residual
+are reused directly, without another propagation or restriction pass. Ranking,
+filtering and the assumption budget remain unchanged. Negative SCC results
+retain their implication paths as conditional evidence; they do not replace
+parent refutations and discovery continues.
+
+For a binary residual with $n_i$ variables and $L_i$ literal occurrences,
+graph construction, SCC traversals and extraction of two contradiction paths
+cost $O(n_i+L_i)$ after ordering the variables. The current implementation sorts
+variable IDs, adding $O(n_i\log n_i)$ comparisons. Temporary storage is
+$O(n_i+L_i)$ words. Sum these costs over attempted binary conditions; a first
+accepted model adds $O(n+L)$ source transport and verification. Negative
+conditions can repeat graph work and retain proof data. Canonicalization,
+integer widths, original discovery, publication, serialization and replay
+remain charged. Direct model publication also omits intermediate subproblem
+nodes that a search route might have stored, so future reuse requires its own
+comparison.
+
+Twenty-five saved-prefix contexts include four positive SCC controls and four
+negative controls. The positive controls reduce acquisition from fourteen
+nodes and 6,163 native bytes to four model nodes and 2,357 bytes; the other
+21 contexts retain their native certificates. One positive control repeats in
+reverse order. A further sixty-query excluded stream returns 44 SAT and
+16 UNSAT answers in all modes. Two fresh graph inputs gain mixed completions,
+bringing direct model publications from thirteen to fifteen. Acquisition falls
+from 385 to 381 nodes and 437,869 to 436,179 bytes. Six avoided expansions are
+replaced by two model publications. The policy performs fourteen SCC calls,
+constructs 784 implication edges and retains twelve negative conditions.
+Mixed models contain 24 variables and are checked against 122 raw premise
+literals. Actual probes fall from 102 to 89 and discovery/acquisition
+propagation from 96,413 to 94,004 visits.
+
+Mean query time falls from 0.37242 to 0.35566 seconds, with both paired
+differences negative. Complete-worker time falls from 24.06008 to 23.88454
+seconds, again in both orders; much of this change comes from variation in
+full cold replay, which still takes about 11.7 seconds. Two trials do not
+establish general scaling or attribute the replay difference to SCC solving.
+Diagnostic sidecars grow about 1.18\%, trial database size stays unchanged,
+and mean process memory rises about 1.91 MB. Native baseline has nearly the
+same query time at 0.35474 seconds. The measured acquisition gain therefore
+coexists with additional recognition and diagnostic costs.
+
+A retained negative pattern offers the next concrete recomposition target.
+One fresh parent contains a clause whose three literals each have a checked
+unsatisfiable condition. Every parent model would satisfy one of these
+literals, contradicting its corresponding conditional refutation. This complete
+clause cover establishes a parent refutation; a single negative condition does
+not. The current timed policy still acquires twelve nodes for this parent.
+Native publication and independently checked persistence of the combined
+certificate remain open. The posthoc evidence preserves the source clause and
+references to its conditional refutations. Two saved controls have the same
+cover pattern; the three parent acquisitions total 36 nodes and 50,554 bytes,
+against which a fully charged combined certificate remains to be measured.
+
+The remaining residual cell still encodes general SAT. After unit closure,
+let $G$ be the residual, or a fixed unit-free unsatisfiable formula if closure
+finds a conflict. Conjoin fresh clauses $(a\lor b)$,
+$(\neg a\lor\neg b)$ and $(c\lor d\lor e)$. The result is satisfiable exactly
+when $G$ is, rejects both uniform assignments, and contains a ternary clause.
+This polynomial construction leaves it outside the uniform and binary cells;
+a 257-formula finite audit supports the construction. It says nothing about
+reaching a particular residual under the bounded probe policy. Random
+three-CNF and coupled parity still require 272 acquisition nodes and 43,685
+propagation visits in this stream, with no probes admitted by the binary
+filter. Broader discovery and arbitrary-SAT resource guarantees remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

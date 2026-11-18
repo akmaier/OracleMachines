@@ -28,6 +28,17 @@ classes.
 
 ## Paper
 
+[Complete mixed two-CNF conditions using the live residual](research/mixed-completion.md).
+Four saved controls shrink from fourteen acquired nodes to four; two fresh
+mixed-model completions reduce native additions 385 -> 381 nodes. Query and
+complete-worker times improve in both orders, while diagnostics grow 1.18%.
+The next target is a source clause whose every literal has a retained conditional
+refutation, enabling exact parent recomposition. Evidence is in
+`experiments/results/cnf-mixed-completion/`.
+All 1,145 tests and independent replay pass. Resume its `checkpoint.json`:
+25,334 native keys preserve all earlier payloads; the 214-page manuscript
+builds with all existing proof blocks unchanged.
+
 [Stop discovery when a checked model is already available](research/inline-completion.md).
 Inline completion removes 84 of 190 probes on sixty fresh queries. Propagation
 falls 36.18%, query time 7.33% and diagnostic sidecars 11.16%; native acquisition

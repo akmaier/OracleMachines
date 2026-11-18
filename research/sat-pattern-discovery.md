@@ -5714,3 +5714,27 @@ keys with all earlier payloads preserved. All 1,137 tests, 276 counter audits,
 independent reconstruction and the 213-page manuscript build pass; the existing
 64 proof blocks are unchanged. Posthoc mixed-model conditions on fresh graph
 cases 15/27/39/51 now offer four concrete next acquisition controls.
+
+## 2026-11-18: mixed binary residuals and exhaustive negative covers
+
+[Mixed completion](mixed-completion.md) extends uniform recognition with SCC
+solving of live two-CNF residuals. No extra assumptions or altered candidate
+budgets are used. A transported positive model is checked against the whole
+raw target and assumption before ordinary native publication. Negative paths
+remain conditional evidence. Four saved positive controls and two fresh graph
+cases gain direct model completion; other negative cases remain explicit.
+
+One fresh negative case has an existing source clause covered by three retained
+conditional refutations. This is an exhaustive parent argument, unlike a single
+negative condition, and is the next recomposition target. A native combined
+certificate and its measured resource cost are still missing. The remaining
+nonuniform, nonbinary residual cell still encodes general SAT by a fresh-variable
+conjunction; the manuscript and 257-formula audit make this restriction explicit.
+
+Resume `experiments/results/cnf-mixed-completion/checkpoint.json`: 25,334 native
+keys preserve all prior payloads. All 1,145 tests, 292 counter audits and full
+independent replay pass; the 214-page manuscript retains all 64 existing proof
+blocks. Fresh case 59 and saved controls 43/47 supply three exhaustive negative
+clause covers whose present parent acquisitions total 36 nodes / 50,554 bytes.
+Their combined publication and its cost remain open. No exact ordered SCC
+residual repeats within a query on the fresh sample.

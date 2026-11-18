@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Reuse checked affine spaces for native model completion](research/affine-completion.md).
+Eight saved targets shrink 80 -> 8 native nodes. Nine fresh added models reduce
+acquisition 395 -> 336 nodes and query time about 11%; complete-worker timing
+remains mixed. Diagnostics grow 7.86%, while native storage and mean RSS fall.
+All 1,169 tests and independent replay pass. Resume its checkpoint: 26,743
+native keys preserve all earlier payloads. The next gap is publishing negative
+affine evidence that already checks successfully but still triggers fallback. Evidence is in
+`experiments/results/cnf-affine-completion/`.
+
 [Choose one extra premise to complete a partial negative cover](research/cover-directed-probe.md).
 Four saved parents shrink 52 -> 32 acquired nodes. On sixty fresh queries,
 four added probes reduce acquisition 431 -> 407 nodes and query time 10.22%;

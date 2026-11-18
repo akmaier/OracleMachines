@@ -1,0 +1,923 @@
+{
+  "admission": {
+    "child": null,
+    "discovery": {
+      "attempts": [],
+      "baseline": {
+        "conflict": null,
+        "residual_literals": 126,
+        "root": "cnf-residual-v1:[[-12,-10,-4],[-12,-10,2],[-12,-10,5],[-12,-5,-1],[-12,-5,10],[-12,-4,2],[-12,-3,1],[-12,-2,4],[-12,-2,10],[-12,-1,8],[-12,1,5],[-12,4,10],[-11,-9,-4],[-11,4,9],[-10,-5,12],[-10,-2,12],[-10,4,12],[-9,-5,-4],[-9,-4,3],[-9,-3,4],[-9,4,5],[-9,4,11],[-8,3,10],[-8,11,12],[-6,-5,-2],[-6,2,5],[-5,1,12],[-5,2,6],[-5,4,9],[-4,-3,9],[-4,-2,12],[-4,5,9],[-4,9,11],[-4,10,12],[-2,5,6],[-1,3,10],[-1,5,12],[2,4,12],[2,10,12],[3,4,9],[3,5,7],[5,10,12]]",
+        "trace": []
+      },
+      "binary_filter": {
+        "skipped": [
+          [
+            -20
+          ],
+          [
+            20
+          ],
+          [
+            -37
+          ],
+          [
+            37
+          ],
+          [
+            -65
+          ],
+          [
+            65
+          ],
+          [
+            -74
+          ],
+          [
+            74
+          ]
+        ],
+        "variables": []
+      },
+      "candidates": [
+        [
+          -20
+        ],
+        [
+          20
+        ],
+        [
+          -37
+        ],
+        [
+          37
+        ],
+        [
+          -65
+        ],
+        [
+          65
+        ],
+        [
+          -74
+        ],
+        [
+          74
+        ]
+      ],
+      "completions": [],
+      "exposed": null,
+      "fixed": [],
+      "positive_selected": null,
+      "ranks": [
+        {
+          "binary_incidence": 0,
+          "variable": 20
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 37
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 65
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 74
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 84
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 92
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 113
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 117
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 139
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 164
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 182
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 210
+        }
+      ],
+      "selected": null
+    },
+    "proposal": null,
+    "reason": "no-proposal"
+  },
+  "case": 13,
+  "child": {
+    "answer": true,
+    "archive_nodes": 25781,
+    "archive_payload_bytes": 41654661,
+    "metrics": {
+      "accounting_reads": 1,
+      "certificate_serialized_bytes": 1556,
+      "class_literal_payload": 205,
+      "database_lookups": 5,
+      "decomposition_literal_visits": 205,
+      "expanded_nodes": 4,
+      "forced_variables": 9,
+      "inserted_bytes": 2665,
+      "inserted_nodes": 4,
+      "key_serialized_bytes": 2254,
+      "matching_recognition_literal_visits": 6,
+      "normalization_literal_visits": 606,
+      "propagation_literal_visits": 508,
+      "read_bytes": 62,
+      "restriction_literal_visits": 333,
+      "search_disk_hits": 1,
+      "source_witness_literal_payload": 126,
+      "split_nodes": 2,
+      "subsumed_positive_clauses": 0,
+      "subsumption_candidate_tests": 3,
+      "subsumption_membership_tests": 6,
+      "subsumption_posting_lookups": 27,
+      "subsumption_recognition_literal_payload": 205,
+      "unit_conflicts": 1,
+      "verification_literal_payload": 303,
+      "verification_trace_literals": 16,
+      "verified_nodes": 5,
+      "visits": 5
+    },
+    "model": {
+      "20": false,
+      "37": false,
+      "65": true,
+      "74": true,
+      "84": false,
+      "92": false,
+      "113": false,
+      "117": false,
+      "139": true,
+      "164": true,
+      "182": false,
+      "210": false
+    },
+    "root": "cnf-residual-v1:[[-12,-10,-4],[-12,-10,2],[-12,-10,5],[-12,-5,-1],[-12,-5,10],[-12,-4,2],[-12,-3,1],[-12,-2,4],[-12,-2,10],[-12,-1,8],[-12,1,5],[-12,4,10],[-11,-9,-4],[-11,4,9],[-10,-5,12],[-10,-2,12],[-10,4,12],[-9,-5,-4],[-9,-4,3],[-9,-3,4],[-9,4,5],[-9,4,11],[-8,3,10],[-8,11,12],[-6,-5,-2],[-6,2,5],[-5,1,12],[-5,2,6],[-5,4,9],[-4,-3,9],[-4,-2,12],[-4,5,9],[-4,9,11],[-4,10,12],[-2,5,6],[-1,3,10],[-1,5,12],[2,4,12],[2,10,12],[3,4,9],[3,5,7],[5,10,12]]",
+    "seconds": 0.0022485842928290367
+  },
+  "child_seconds": 0.002250750083476305,
+  "cohort": "affine-target",
+  "cold_metrics": {
+    "key_serialized_bytes": 912,
+    "normalization_literal_visits": 252,
+    "search_memory_hits": 1,
+    "source_witness_literal_payload": 126,
+    "visits": 1
+  },
+  "cold_seconds": 0.032744667027145624,
+  "complete_arm_seconds": 0.22169066686183214,
+  "composition_metrics": {
+    "chain_child_memory_hits": 1,
+    "key_serialized_bytes": 1368,
+    "normalization_literal_visits": 378
+  },
+  "composition_seconds": 0.00023608282208442688,
+  "delta": {
+    "path": "experiments/results/cnf-affine-completion/controls/affine-target-13-probe/delta.json",
+    "sha256": "6611635935aa6c5af9c4d37dc4aaaf67357b6b34eba3e7e07ef6fda77aa2cc02"
+  },
+  "evaluation_seconds": 0.002851541619747877,
+  "guard_counts": {},
+  "guard_metrics": {},
+  "guard_replay_metrics": {},
+  "guard_replay_seconds": 0.00015341723337769508,
+  "input_guards": [],
+  "input_target": [
+    [
+      210,
+      -74,
+      -37
+    ],
+    [
+      84,
+      -139,
+      74
+    ],
+    [
+      -164,
+      210,
+      -84
+    ],
+    [
+      65,
+      164,
+      -117
+    ],
+    [
+      84,
+      164,
+      210
+    ],
+    [
+      139,
+      -74,
+      -65
+    ],
+    [
+      37,
+      210,
+      164
+    ],
+    [
+      92,
+      -37,
+      84
+    ],
+    [
+      74,
+      182,
+      -139
+    ],
+    [
+      210,
+      164,
+      -74
+    ],
+    [
+      -74,
+      -210,
+      -164
+    ],
+    [
+      -92,
+      -84,
+      -37
+    ],
+    [
+      74,
+      -65,
+      -139
+    ],
+    [
+      -210,
+      37,
+      -164
+    ],
+    [
+      -210,
+      164,
+      -84
+    ],
+    [
+      -74,
+      -139,
+      -84
+    ],
+    [
+      92,
+      -84,
+      37
+    ],
+    [
+      139,
+      -84,
+      74
+    ],
+    [
+      74,
+      65,
+      139
+    ],
+    [
+      -210,
+      164,
+      74
+    ],
+    [
+      65,
+      84,
+      113
+    ],
+    [
+      182,
+      -74,
+      139
+    ],
+    [
+      -210,
+      -84,
+      -20
+    ],
+    [
+      -210,
+      -65,
+      20
+    ],
+    [
+      139,
+      84,
+      -74
+    ],
+    [
+      37,
+      -210,
+      -74
+    ],
+    [
+      -210,
+      20,
+      84
+    ],
+    [
+      74,
+      210,
+      37
+    ],
+    [
+      -37,
+      74,
+      -210
+    ],
+    [
+      -139,
+      -74,
+      65
+    ],
+    [
+      210,
+      -164,
+      74
+    ],
+    [
+      -74,
+      -182,
+      -139
+    ],
+    [
+      -210,
+      164,
+      -37
+    ],
+    [
+      -20,
+      117,
+      -210
+    ],
+    [
+      -182,
+      139,
+      74
+    ],
+    [
+      210,
+      -37,
+      -164
+    ],
+    [
+      84,
+      210,
+      -20
+    ],
+    [
+      -84,
+      210,
+      20
+    ],
+    [
+      182,
+      210,
+      -117
+    ],
+    [
+      65,
+      164,
+      -20
+    ],
+    [
+      84,
+      -210,
+      -164
+    ],
+    [
+      84,
+      37,
+      -92
+    ]
+  ],
+  "local_choice": null,
+  "local_eligible": true,
+  "local_probe": {
+    "attempts": [],
+    "baseline": {
+      "conflict": null,
+      "residual_literals": 126,
+      "root": "cnf-residual-v1:[[-12,-10,-4],[-12,-10,2],[-12,-10,5],[-12,-5,-1],[-12,-5,10],[-12,-4,2],[-12,-3,1],[-12,-2,4],[-12,-2,10],[-12,-1,8],[-12,1,5],[-12,4,10],[-11,-9,-4],[-11,4,9],[-10,-5,12],[-10,-2,12],[-10,4,12],[-9,-5,-4],[-9,-4,3],[-9,-3,4],[-9,4,5],[-9,4,11],[-8,3,10],[-8,11,12],[-6,-5,-2],[-6,2,5],[-5,1,12],[-5,2,6],[-5,4,9],[-4,-3,9],[-4,-2,12],[-4,5,9],[-4,9,11],[-4,10,12],[-2,5,6],[-1,3,10],[-1,5,12],[2,4,12],[2,10,12],[3,4,9],[3,5,7],[5,10,12]]",
+      "trace": []
+    },
+    "binary_filter": {
+      "skipped": [
+        [
+          -20
+        ],
+        [
+          20
+        ],
+        [
+          -37
+        ],
+        [
+          37
+        ],
+        [
+          -65
+        ],
+        [
+          65
+        ],
+        [
+          -74
+        ],
+        [
+          74
+        ]
+      ],
+      "variables": []
+    },
+    "candidates": [
+      [
+        -20
+      ],
+      [
+        20
+      ],
+      [
+        -37
+      ],
+      [
+        37
+      ],
+      [
+        -65
+      ],
+      [
+        65
+      ],
+      [
+        -74
+      ],
+      [
+        74
+      ]
+    ],
+    "completions": [],
+    "exposed": null,
+    "fixed": [],
+    "positive_selected": null,
+    "ranks": [
+      {
+        "binary_incidence": 0,
+        "variable": 20
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 37
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 65
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 74
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 84
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 92
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 113
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 117
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 139
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 164
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 182
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 210
+      }
+    ],
+    "selected": null
+  },
+  "mode": "probe",
+  "new_nodes": 4,
+  "new_payload_units": 2665,
+  "open_seconds": 0.04547824990004301,
+  "prefix_digest": "a606a27f12b8bcf3b726a1dca0c57b966eb983c0108e7045185baf846df4d4a7",
+  "prefix_nodes": 25777,
+  "prefix_write_seconds": 0.20362937496975064,
+  "premise": null,
+  "premise_seconds": 0.0,
+  "preparation_ids": [],
+  "probe_counts": {
+    "admission_family_clauses": 42,
+    "admission_family_literal_visits": 126,
+    "admission_source_literal_visits": 126,
+    "binary_filter_clause_visits": 42,
+    "binary_filter_name_transports": 0,
+    "binary_probe_skips": 8,
+    "local_baseline_probes": 1,
+    "local_ranking_clause_visits": 42,
+    "local_ranking_literal_visits": 126,
+    "propagation_literal_visits": 126,
+    "restriction_literal_visits": 126
+  },
+  "probe_metrics": {
+    "database_lookups": 1,
+    "key_serialized_bytes": 912,
+    "normalization_literal_visits": 252
+  },
+  "record": {
+    "answer": true,
+    "child": {
+      "answer": true,
+      "model": {
+        "20": false,
+        "37": false,
+        "65": true,
+        "74": true,
+        "84": false,
+        "92": false,
+        "113": false,
+        "117": false,
+        "139": true,
+        "164": true,
+        "182": false,
+        "210": false
+      },
+      "root": "cnf-residual-v1:[[-12,-10,-4],[-12,-10,2],[-12,-10,5],[-12,-5,-1],[-12,-5,10],[-12,-4,2],[-12,-3,1],[-12,-2,4],[-12,-2,10],[-12,-1,8],[-12,1,5],[-12,4,10],[-11,-9,-4],[-11,4,9],[-10,-5,12],[-10,-2,12],[-10,4,12],[-9,-5,-4],[-9,-4,3],[-9,-3,4],[-9,4,5],[-9,4,11],[-8,3,10],[-8,11,12],[-6,-5,-2],[-6,2,5],[-5,1,12],[-5,2,6],[-5,4,9],[-4,-3,9],[-4,-2,12],[-4,5,9],[-4,9,11],[-4,10,12],[-2,5,6],[-1,3,10],[-1,5,12],[2,4,12],[2,10,12],[3,4,9],[3,5,7],[5,10,12]]"
+    },
+    "format": "checked-guard-chain-v1",
+    "guards": [],
+    "model": {
+      "20": false,
+      "37": false,
+      "65": true,
+      "74": true,
+      "84": false,
+      "92": false,
+      "113": false,
+      "117": false,
+      "139": true,
+      "164": true,
+      "182": false,
+      "210": false
+    },
+    "query_root": "cnf-residual-v1:[[-12,-10,-4],[-12,-10,2],[-12,-10,5],[-12,-5,-1],[-12,-5,10],[-12,-4,2],[-12,-3,1],[-12,-2,4],[-12,-2,10],[-12,-1,8],[-12,1,5],[-12,4,10],[-11,-9,-4],[-11,4,9],[-10,-5,12],[-10,-2,12],[-10,4,12],[-9,-5,-4],[-9,-4,3],[-9,-3,4],[-9,4,5],[-9,4,11],[-8,3,10],[-8,11,12],[-6,-5,-2],[-6,2,5],[-5,1,12],[-5,2,6],[-5,4,9],[-4,-3,9],[-4,-2,12],[-4,5,9],[-4,9,11],[-4,10,12],[-2,5,6],[-1,3,10],[-1,5,12],[2,4,12],[2,10,12],[3,4,9],[3,5,7],[5,10,12]]",
+    "source": [
+      [
+        210,
+        -74,
+        -37
+      ],
+      [
+        84,
+        -139,
+        74
+      ],
+      [
+        -164,
+        210,
+        -84
+      ],
+      [
+        65,
+        164,
+        -117
+      ],
+      [
+        84,
+        164,
+        210
+      ],
+      [
+        139,
+        -74,
+        -65
+      ],
+      [
+        37,
+        210,
+        164
+      ],
+      [
+        92,
+        -37,
+        84
+      ],
+      [
+        74,
+        182,
+        -139
+      ],
+      [
+        210,
+        164,
+        -74
+      ],
+      [
+        -74,
+        -210,
+        -164
+      ],
+      [
+        -92,
+        -84,
+        -37
+      ],
+      [
+        74,
+        -65,
+        -139
+      ],
+      [
+        -210,
+        37,
+        -164
+      ],
+      [
+        -210,
+        164,
+        -84
+      ],
+      [
+        -74,
+        -139,
+        -84
+      ],
+      [
+        92,
+        -84,
+        37
+      ],
+      [
+        139,
+        -84,
+        74
+      ],
+      [
+        74,
+        65,
+        139
+      ],
+      [
+        -210,
+        164,
+        74
+      ],
+      [
+        65,
+        84,
+        113
+      ],
+      [
+        182,
+        -74,
+        139
+      ],
+      [
+        -210,
+        -84,
+        -20
+      ],
+      [
+        -210,
+        -65,
+        20
+      ],
+      [
+        139,
+        84,
+        -74
+      ],
+      [
+        37,
+        -210,
+        -74
+      ],
+      [
+        -210,
+        20,
+        84
+      ],
+      [
+        74,
+        210,
+        37
+      ],
+      [
+        -37,
+        74,
+        -210
+      ],
+      [
+        -139,
+        -74,
+        65
+      ],
+      [
+        210,
+        -164,
+        74
+      ],
+      [
+        -74,
+        -182,
+        -139
+      ],
+      [
+        -210,
+        164,
+        -37
+      ],
+      [
+        -20,
+        117,
+        -210
+      ],
+      [
+        -182,
+        139,
+        74
+      ],
+      [
+        210,
+        -37,
+        -164
+      ],
+      [
+        84,
+        210,
+        -20
+      ],
+      [
+        -84,
+        210,
+        20
+      ],
+      [
+        182,
+        210,
+        -117
+      ],
+      [
+        65,
+        164,
+        -20
+      ],
+      [
+        84,
+        -210,
+        -164
+      ],
+      [
+        84,
+        37,
+        -92
+      ]
+    ]
+  },
+  "records": {
+    "path": "experiments/results/cnf-affine-completion/controls/affine-target-13-probe/records.json",
+    "sha256": "197c661e40a98e73e825de1e61f4b9148c9fdf1e91c999aa00bdde516df85532"
+  },
+  "retained_bytes": 6751,
+  "selection_seconds": 0.00036387471482157707,
+  "serialization_seconds": 0.00034799985587596893,
+  "summary": {
+    "admission_calls": 1,
+    "admission_reasons": {
+      "no-proposal": 1
+    },
+    "affine_bridge_basis_xors": 0,
+    "affine_bridge_calls": 0,
+    "affine_bridge_candidates": 0,
+    "affine_bridge_clause_checks": 0,
+    "affine_bridge_exhausted": 0,
+    "affine_bridge_free_caps": 0,
+    "affine_bridge_linear_conflicts": 0,
+    "affine_bridge_model_literals": 0,
+    "affine_bridge_model_variables": 0,
+    "affine_bridge_models": 0,
+    "affine_bridge_no_equations": 0,
+    "affine_bridge_packed_literals": 0,
+    "affine_elimination_xors": 0,
+    "affine_extracted_equations": 0,
+    "affine_grouping_literals": 0,
+    "affine_leftover_clauses": 0,
+    "affine_space_backsub_rows": 0,
+    "affine_space_kernel_equation_checks": 0,
+    "affine_space_particular_equation_checks": 0,
+    "affine_space_vectors_checked": 0,
+    "affine_space_vectors_constructed": 0,
+    "affine_verification_literals": 0,
+    "affine_verification_xors": 0,
+    "affine_verified_certificates": 0,
+    "binary_filter_clause_visits": 42,
+    "binary_filter_literal_visits": 0,
+    "binary_filter_name_transports": 0,
+    "binary_probe_skips": 8,
+    "cover_candidates": 0,
+    "cover_checked_implication_edges": 0,
+    "cover_checked_reason_literals": 0,
+    "cover_clause_visits": 0,
+    "cover_completion_reads": 0,
+    "cover_gap_attempt_reads": 0,
+    "cover_gap_candidates": 0,
+    "cover_gap_clause_visits": 0,
+    "cover_gap_completion_reads": 0,
+    "cover_gap_implication_edges": 0,
+    "cover_gap_literal_visits": 0,
+    "cover_gap_model_literals": 0,
+    "cover_gap_negative": 0,
+    "cover_gap_nonbinary": 0,
+    "cover_gap_positive": 0,
+    "cover_gap_premise_literals": 0,
+    "cover_gap_probes": 0,
+    "cover_gap_recognition_clauses": 0,
+    "cover_gap_recognition_literals": 0,
+    "cover_gap_scc_calls": 0,
+    "cover_gap_unit_conflicts": 0,
+    "cover_literal_visits": 0,
+    "cover_path_repairs": 0,
+    "cover_planned_nodes": 0,
+    "cover_premise_literal_payload": 0,
+    "cover_transport_path_literals": 0,
+    "cover_transport_reason_literals": 0,
+    "expanded_nodes": 4,
+    "inline_completion_checks": 0,
+    "inline_completion_clauses": 0,
+    "inline_completion_literal_visits": 0,
+    "inline_completion_model_literals": 0,
+    "inline_completion_model_variables": 0,
+    "inline_completion_models": 0,
+    "local_calls": 1,
+    "local_guards": 0,
+    "local_terminals": 0,
+    "mixed_model_literals": 0,
+    "mixed_model_variables": 0,
+    "mixed_negative_conditions": 0,
+    "mixed_positive_models": 0,
+    "mixed_recognition_clauses": 0,
+    "mixed_scc_calls": 0,
+    "mixed_scc_implication_edges": 0,
+    "model_publications": 0,
+    "negative_cover_publications": 0,
+    "positive_models": 0,
+    "positive_premise_attempts_scanned": 0,
+    "positive_premise_literals_copied": 0,
+    "positive_premise_model_literals": 0,
+    "positive_premise_models": 0,
+    "positive_premise_reason_literals": 0,
+    "premise_probes": 0,
+    "propagated_reuses": 0,
+    "propagation_literal_visits": 634,
+    "retained_prefixes": 0,
+    "trace_publications": 0,
+    "uniform_premise_attempts_scanned": 0,
+    "uniform_premise_literals_copied": 0,
+    "uniform_premise_misses": 0,
+    "uniform_premise_model_literals": 0,
+    "uniform_premise_models": 0,
+    "uniform_premise_reason_literals": 0,
+    "uniform_premise_recognition_clauses": 0,
+    "uniform_premise_recognition_literal_visits": 0
+  },
+  "warm_seconds": 0.0004485831595957279
+}

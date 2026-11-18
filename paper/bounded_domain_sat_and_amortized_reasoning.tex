@@ -7490,6 +7490,87 @@ and this native acquisition path still need a checked integration. Unit-conflict
 missing several conditions and families without an initial negative condition
 remain explicit gaps. No unrestricted-SAT resource guarantee follows.
 
+\paragraph{Completing checked affine spaces against leftover clauses.}
+The existing affine pattern layer can supply witnesses to the native acquisition
+stream. The new optional bridge runs only after the preceding selector leaves
+a target unresolved or retains a prefix fallback. Known targets, cheap native
+families, models, guards and negative covers keep priority. It normalizes the
+source, extracts complete direct parity encodings and checks every clause's
+ownership and each Gaussian row operation. All leftover clauses remain explicit;
+family labels never enter recognition.
+
+For $n$ source variables and checked rank $r$, the total free dimension is
+$d=n-r$, including variables outside the extracted equations. Consistent
+systems with $d\leq8$ reuse the existing particular solution and complete
+nullspace basis. Checking every homogeneous direction and identity coordinates
+on all free variables establishes completeness. Leftover clauses are packed
+once into positive and negative bitmasks. A Gray-order walk changes one basis
+direction per next candidate, retaining the first falsified leftover clause
+for each rejection. A winning assignment must satisfy the entire raw source
+before ordinary native model publication. The unchanged native verifier and
+cold replay check the stored witness.
+
+The original discovery record is preserved. Separate evidence binds the
+extraction, rank, basis, candidate rejections and accepted index to the source.
+No-equation and dimension-cap misses preserve the old fallback. Inconsistent
+linear systems and fully exhausted checked spaces also preserve that fallback:
+this implementation retains their negative evidence but does not yet publish
+a compatible native refutation. Thus negative analysis is not counted as
+avoided native acquisition.
+
+Let $B=\max(1,\lceil n/W\rceil)$ be the mask length in words. Source grouping,
+sorting, normalization and full keys remain separate charges. Elimination and
+its verification require at most $O(ErB)$ word work for $E$ extracted rows,
+plus mask construction and clause checks. Space construction and checking cost
+$O((d+1)rB+E(d+1)B)$, again with mask construction separate. For $t\leq2^d$
+candidates and $m_l$ leftover clauses, the reused walk costs
+$O(t(m_l+1)B)$ after packing; raw-source verification is additional on success.
+The dimension cap is checked before constructing or enumerating the basis.
+Basis and packed-clause state use $O((d+1+m_l)B)$ words beyond source and extraction;
+the transported model additionally uses $O(n)$ words.
+Row-dependency history can retain $O(Er)$ references, and candidate rejections
+up to $2^d$ clause indices. Native payload, integer width, serialization and
+history/replay costs remain distinct. The explicit cap bounds this optional
+completion work, not arbitrary-SAT fallback or oracle construction.
+
+Forty-one saved contexts compare the bridge with the preceding probe policy.
+The eight satisfiable coupled targets shrink from 80 to eight native nodes and
+from 82,179 to 10,860 native bytes. The other 33 contexts retain their native
+certificates, including four negative coupled targets costing 83 nodes.
+One positive target repeats in reverse order. A fresh sixty-query stream,
+selected by excluding prior decision keys, returns 39 SAT and 21 UNSAT in all modes. Nine additional checked models
+replace 68 native expansions with nine model nodes: total additions fall from
+395 to 336 nodes and from 482,568 to 424,272 native bytes. Earlier guards retain
+checked outer recomposition; the model must satisfy the raw target passed to
+the bridge.
+
+Twenty-nine bridge calls group 5,222 literals and check 156 extracted equations.
+Seventeen find no equations, one finds inconsistent rows, two exhaust their
+spaces, and nine yield models; no call exceeds the dimension cap in this sample.
+Eleven checked bases contain 44 vectors. The reused candidate walks test 36
+assignments with 25 direction XORs and 186 packed clause checks. Elimination
+performs 219 XORs, checked again; space construction visits 571 rows and checking
+tests 143 particular and 433 homogeneous equation instances. Winning raw-model
+checks visit 1,566 literals. Preparation and failed analyses remain charged.
+
+Mean query time falls 0.38629 to 0.34381 seconds, with both paired changes
+negative. Complete-worker time changes 26.25352 to 26.14046 seconds, with paired
+changes of opposite signs and some reduction due to cold-replay variation.
+The native baseline's mean complete worker remains lower at 26.03394 seconds.
+Diagnostic sidecars grow about 7.86\%, trial SQLite falls by 118,784 bytes, and
+mean peak memory falls about 2.87 MB. This supports reduced acquisition and query
+cost on the measured stream, without end-to-end dominance or arbitrary-CNF
+scaling guarantees.
+
+The remaining publication gap is concrete. One fresh inconsistent system still
+acquires seven native nodes; two exhausted spaces, with four and eight candidates,
+still acquire eight and 36 nodes. These three cases therefore pay for 51 native
+fallback nodes and 7,829 acquisition propagation visits after a checked negative
+analysis. A compatible source-bound negative certificate must account for row
+or basis verification, leftover clauses, storage and cold replay before any
+saving can be claimed. Hidden equations, large free dimension and no-equation
+inputs remain separate unresolved cells.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

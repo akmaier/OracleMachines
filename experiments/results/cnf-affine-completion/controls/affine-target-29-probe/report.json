@@ -1,0 +1,1148 @@
+{
+  "admission": {
+    "child": null,
+    "discovery": {
+      "attempts": [],
+      "baseline": {
+        "conflict": null,
+        "residual_literals": 180,
+        "root": "cnf-residual-v1:[[-16,-11,4],[-16,-8,5],[-16,-5,8],[-16,-4,11],[-16,8,11],[-15,-12,3],[-15,-12,6],[-15,-12,16],[-15,-10,11],[-15,-9,5],[-15,-6,12],[-15,-5,9],[-15,-3,12],[-15,6,10],[-14,-11,-8],[-14,-10,9],[-14,-9,10],[-14,8,11],[-13,-10,-2],[-13,-9,-6],[-13,2,10],[-12,-11,2],[-12,-6,15],[-12,-3,15],[-12,-2,11],[-11,-10,8],[-11,-9,-1],[-11,-8,10],[-11,-7,-1],[-11,-4,16],[-11,-2,12],[-11,1,7],[-11,8,14],[-10,-9,-8],[-10,-9,14],[-10,-8,11],[-10,2,13],[-10,8,9],[-9,-5,15],[-9,8,10],[-8,-5,16],[-8,9,10],[-8,11,14],[-7,-5,-4],[-7,1,11],[-7,4,5],[-5,4,7],[-4,5,7],[-2,4,11],[-2,10,13],[-1,7,11],[2,11,12],[3,4,10],[3,12,15],[4,11,16],[5,8,16],[5,9,15],[6,12,15],[8,10,11],[9,10,14]]",
+        "trace": []
+      },
+      "binary_filter": {
+        "skipped": [
+          [
+            -19
+          ],
+          [
+            19
+          ],
+          [
+            -25
+          ],
+          [
+            25
+          ],
+          [
+            -48
+          ],
+          [
+            48
+          ],
+          [
+            -56
+          ],
+          [
+            56
+          ]
+        ],
+        "variables": []
+      },
+      "candidates": [
+        [
+          -19
+        ],
+        [
+          19
+        ],
+        [
+          -25
+        ],
+        [
+          25
+        ],
+        [
+          -48
+        ],
+        [
+          48
+        ],
+        [
+          -56
+        ],
+        [
+          56
+        ]
+      ],
+      "completions": [],
+      "exposed": null,
+      "fixed": [],
+      "positive_selected": null,
+      "ranks": [
+        {
+          "binary_incidence": 0,
+          "variable": 19
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 25
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 48
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 56
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 59
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 111
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 114
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 131
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 141
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 144
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 158
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 170
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 188
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 221
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 244
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 251
+        }
+      ],
+      "selected": null
+    },
+    "proposal": null,
+    "reason": "no-proposal"
+  },
+  "case": 29,
+  "child": {
+    "answer": true,
+    "archive_nodes": 25897,
+    "archive_payload_bytes": 41765329,
+    "metrics": {
+      "accounting_reads": 1,
+      "certificate_memory_hits": 2,
+      "certificate_serialized_bytes": 4993,
+      "class_literal_payload": 511,
+      "database_lookups": 9,
+      "decomposition_literal_visits": 511,
+      "expanded_nodes": 8,
+      "forced_variables": 13,
+      "inserted_bytes": 8284,
+      "inserted_nodes": 8,
+      "key_serialized_bytes": 7405,
+      "matching_recognition_literal_visits": 13,
+      "normalization_literal_visits": 1919,
+      "propagation_literal_visits": 1426,
+      "read_bytes": 62,
+      "restriction_literal_visits": 1237,
+      "search_disk_hits": 1,
+      "source_witness_literal_payload": 180,
+      "split_nodes": 4,
+      "subsumed_positive_clauses": 0,
+      "subsumption_candidate_tests": 8,
+      "subsumption_membership_tests": 16,
+      "subsumption_posting_lookups": 87,
+      "subsumption_recognition_literal_payload": 511,
+      "unit_conflicts": 2,
+      "verification_literal_payload": 858,
+      "verification_trace_literals": 20,
+      "verified_nodes": 9,
+      "visits": 9
+    },
+    "model": {
+      "19": false,
+      "25": false,
+      "48": true,
+      "56": false,
+      "59": true,
+      "111": true,
+      "114": true,
+      "131": false,
+      "141": false,
+      "144": false,
+      "158": true,
+      "170": false,
+      "188": false,
+      "221": true,
+      "244": false,
+      "251": false
+    },
+    "root": "cnf-residual-v1:[[-16,-11,4],[-16,-8,5],[-16,-5,8],[-16,-4,11],[-16,8,11],[-15,-12,3],[-15,-12,6],[-15,-12,16],[-15,-10,11],[-15,-9,5],[-15,-6,12],[-15,-5,9],[-15,-3,12],[-15,6,10],[-14,-11,-8],[-14,-10,9],[-14,-9,10],[-14,8,11],[-13,-10,-2],[-13,-9,-6],[-13,2,10],[-12,-11,2],[-12,-6,15],[-12,-3,15],[-12,-2,11],[-11,-10,8],[-11,-9,-1],[-11,-8,10],[-11,-7,-1],[-11,-4,16],[-11,-2,12],[-11,1,7],[-11,8,14],[-10,-9,-8],[-10,-9,14],[-10,-8,11],[-10,2,13],[-10,8,9],[-9,-5,15],[-9,8,10],[-8,-5,16],[-8,9,10],[-8,11,14],[-7,-5,-4],[-7,1,11],[-7,4,5],[-5,4,7],[-4,5,7],[-2,4,11],[-2,10,13],[-1,7,11],[2,11,12],[3,4,10],[3,12,15],[4,11,16],[5,8,16],[5,9,15],[6,12,15],[8,10,11],[9,10,14]]",
+    "seconds": 0.0053054168820381165
+  },
+  "child_seconds": 0.005308084189891815,
+  "cohort": "affine-target",
+  "cold_metrics": {
+    "key_serialized_bytes": 1364,
+    "normalization_literal_visits": 360,
+    "search_memory_hits": 1,
+    "source_witness_literal_payload": 180,
+    "visits": 1
+  },
+  "cold_seconds": 0.033150834031403065,
+  "complete_arm_seconds": 0.22774854069575667,
+  "composition_metrics": {
+    "chain_child_memory_hits": 1,
+    "key_serialized_bytes": 2046,
+    "normalization_literal_visits": 540
+  },
+  "composition_seconds": 0.0003665839321911335,
+  "delta": {
+    "path": "experiments/results/cnf-affine-completion/controls/affine-target-29-probe/delta.json",
+    "sha256": "0c8f32b29dfb9a81b33e74bc32bf3a1b5abeaa571c37bf9a130a7a287c5e2cfb"
+  },
+  "evaluation_seconds": 0.006114874966442585,
+  "guard_counts": {},
+  "guard_metrics": {},
+  "guard_replay_metrics": {},
+  "guard_replay_seconds": 0.00016308296471834183,
+  "input_guards": [],
+  "input_target": [
+    [
+      59,
+      -251,
+      -131
+    ],
+    [
+      -244,
+      -170,
+      111
+    ],
+    [
+      -141,
+      -111,
+      -188
+    ],
+    [
+      56,
+      -158,
+      -251
+    ],
+    [
+      -244,
+      -170,
+      251
+    ],
+    [
+      144,
+      141,
+      221
+    ],
+    [
+      -244,
+      144,
+      111
+    ],
+    [
+      -244,
+      -170,
+      48
+    ],
+    [
+      -114,
+      158,
+      19
+    ],
+    [
+      -144,
+      -221,
+      141
+    ],
+    [
+      -141,
+      144,
+      -221
+    ],
+    [
+      141,
+      -144,
+      131
+    ],
+    [
+      158,
+      56,
+      251
+    ],
+    [
+      -158,
+      -56,
+      251
+    ],
+    [
+      141,
+      144,
+      -131
+    ],
+    [
+      144,
+      -158,
+      -131
+    ],
+    [
+      -131,
+      -144,
+      158
+    ],
+    [
+      -144,
+      -244,
+      158
+    ],
+    [
+      -19,
+      -158,
+      -114
+    ],
+    [
+      -141,
+      221,
+      -144
+    ],
+    [
+      25,
+      170,
+      158
+    ],
+    [
+      25,
+      -144,
+      188
+    ],
+    [
+      -144,
+      -188,
+      -25
+    ],
+    [
+      -59,
+      56,
+      114
+    ],
+    [
+      25,
+      -188,
+      144
+    ],
+    [
+      -48,
+      -244,
+      170
+    ],
+    [
+      56,
+      144,
+      48
+    ],
+    [
+      244,
+      -170,
+      -48
+    ],
+    [
+      -141,
+      -131,
+      -144
+    ],
+    [
+      59,
+      -244,
+      -141
+    ],
+    [
+      221,
+      158,
+      -131
+    ],
+    [
+      48,
+      170,
+      244
+    ],
+    [
+      158,
+      -251,
+      131
+    ],
+    [
+      131,
+      -158,
+      -144
+    ],
+    [
+      -158,
+      -25,
+      170
+    ],
+    [
+      251,
+      -59,
+      -131
+    ],
+    [
+      -158,
+      221,
+      131
+    ],
+    [
+      131,
+      59,
+      251
+    ],
+    [
+      19,
+      -158,
+      114
+    ],
+    [
+      158,
+      -170,
+      -25
+    ],
+    [
+      114,
+      158,
+      -19
+    ],
+    [
+      -158,
+      25,
+      -170
+    ],
+    [
+      144,
+      -141,
+      131
+    ],
+    [
+      59,
+      244,
+      141
+    ],
+    [
+      -59,
+      -56,
+      -114
+    ],
+    [
+      -244,
+      -59,
+      141
+    ],
+    [
+      244,
+      111,
+      170
+    ],
+    [
+      144,
+      188,
+      -25
+    ],
+    [
+      -59,
+      244,
+      -141
+    ],
+    [
+      -158,
+      -221,
+      -131
+    ],
+    [
+      -114,
+      59,
+      56
+    ],
+    [
+      -158,
+      -19,
+      -141
+    ],
+    [
+      131,
+      144,
+      158
+    ],
+    [
+      -251,
+      -59,
+      131
+    ],
+    [
+      -111,
+      170,
+      -244
+    ],
+    [
+      131,
+      -221,
+      158
+    ],
+    [
+      -56,
+      59,
+      114
+    ],
+    [
+      -251,
+      158,
+      -56
+    ],
+    [
+      -170,
+      244,
+      -111
+    ],
+    [
+      158,
+      56,
+      -25
+    ]
+  ],
+  "local_choice": null,
+  "local_eligible": true,
+  "local_probe": {
+    "attempts": [],
+    "baseline": {
+      "conflict": null,
+      "residual_literals": 180,
+      "root": "cnf-residual-v1:[[-16,-11,4],[-16,-8,5],[-16,-5,8],[-16,-4,11],[-16,8,11],[-15,-12,3],[-15,-12,6],[-15,-12,16],[-15,-10,11],[-15,-9,5],[-15,-6,12],[-15,-5,9],[-15,-3,12],[-15,6,10],[-14,-11,-8],[-14,-10,9],[-14,-9,10],[-14,8,11],[-13,-10,-2],[-13,-9,-6],[-13,2,10],[-12,-11,2],[-12,-6,15],[-12,-3,15],[-12,-2,11],[-11,-10,8],[-11,-9,-1],[-11,-8,10],[-11,-7,-1],[-11,-4,16],[-11,-2,12],[-11,1,7],[-11,8,14],[-10,-9,-8],[-10,-9,14],[-10,-8,11],[-10,2,13],[-10,8,9],[-9,-5,15],[-9,8,10],[-8,-5,16],[-8,9,10],[-8,11,14],[-7,-5,-4],[-7,1,11],[-7,4,5],[-5,4,7],[-4,5,7],[-2,4,11],[-2,10,13],[-1,7,11],[2,11,12],[3,4,10],[3,12,15],[4,11,16],[5,8,16],[5,9,15],[6,12,15],[8,10,11],[9,10,14]]",
+      "trace": []
+    },
+    "binary_filter": {
+      "skipped": [
+        [
+          -19
+        ],
+        [
+          19
+        ],
+        [
+          -25
+        ],
+        [
+          25
+        ],
+        [
+          -48
+        ],
+        [
+          48
+        ],
+        [
+          -56
+        ],
+        [
+          56
+        ]
+      ],
+      "variables": []
+    },
+    "candidates": [
+      [
+        -19
+      ],
+      [
+        19
+      ],
+      [
+        -25
+      ],
+      [
+        25
+      ],
+      [
+        -48
+      ],
+      [
+        48
+      ],
+      [
+        -56
+      ],
+      [
+        56
+      ]
+    ],
+    "completions": [],
+    "exposed": null,
+    "fixed": [],
+    "positive_selected": null,
+    "ranks": [
+      {
+        "binary_incidence": 0,
+        "variable": 19
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 25
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 48
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 56
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 59
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 111
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 114
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 131
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 141
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 144
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 158
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 170
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 188
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 221
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 244
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 251
+      }
+    ],
+    "selected": null
+  },
+  "mode": "probe",
+  "new_nodes": 8,
+  "new_payload_units": 8284,
+  "open_seconds": 0.04674270795658231,
+  "prefix_digest": "776b273c8a9e66b3080bfe77a8e9eadcc3633b42bcac08a544b1901a4ba02d9a",
+  "prefix_nodes": 25889,
+  "prefix_write_seconds": 0.20554737513884902,
+  "premise": null,
+  "premise_seconds": 0.0,
+  "preparation_ids": [],
+  "probe_counts": {
+    "admission_family_clauses": 60,
+    "admission_family_literal_visits": 180,
+    "admission_source_literal_visits": 180,
+    "binary_filter_clause_visits": 60,
+    "binary_filter_name_transports": 0,
+    "binary_probe_skips": 8,
+    "local_baseline_probes": 1,
+    "local_ranking_clause_visits": 60,
+    "local_ranking_literal_visits": 180,
+    "propagation_literal_visits": 180,
+    "restriction_literal_visits": 180
+  },
+  "probe_metrics": {
+    "database_lookups": 1,
+    "key_serialized_bytes": 1364,
+    "normalization_literal_visits": 360
+  },
+  "record": {
+    "answer": true,
+    "child": {
+      "answer": true,
+      "model": {
+        "19": false,
+        "25": false,
+        "48": true,
+        "56": false,
+        "59": true,
+        "111": true,
+        "114": true,
+        "131": false,
+        "141": false,
+        "144": false,
+        "158": true,
+        "170": false,
+        "188": false,
+        "221": true,
+        "244": false,
+        "251": false
+      },
+      "root": "cnf-residual-v1:[[-16,-11,4],[-16,-8,5],[-16,-5,8],[-16,-4,11],[-16,8,11],[-15,-12,3],[-15,-12,6],[-15,-12,16],[-15,-10,11],[-15,-9,5],[-15,-6,12],[-15,-5,9],[-15,-3,12],[-15,6,10],[-14,-11,-8],[-14,-10,9],[-14,-9,10],[-14,8,11],[-13,-10,-2],[-13,-9,-6],[-13,2,10],[-12,-11,2],[-12,-6,15],[-12,-3,15],[-12,-2,11],[-11,-10,8],[-11,-9,-1],[-11,-8,10],[-11,-7,-1],[-11,-4,16],[-11,-2,12],[-11,1,7],[-11,8,14],[-10,-9,-8],[-10,-9,14],[-10,-8,11],[-10,2,13],[-10,8,9],[-9,-5,15],[-9,8,10],[-8,-5,16],[-8,9,10],[-8,11,14],[-7,-5,-4],[-7,1,11],[-7,4,5],[-5,4,7],[-4,5,7],[-2,4,11],[-2,10,13],[-1,7,11],[2,11,12],[3,4,10],[3,12,15],[4,11,16],[5,8,16],[5,9,15],[6,12,15],[8,10,11],[9,10,14]]"
+    },
+    "format": "checked-guard-chain-v1",
+    "guards": [],
+    "model": {
+      "19": false,
+      "25": false,
+      "48": true,
+      "56": false,
+      "59": true,
+      "111": true,
+      "114": true,
+      "131": false,
+      "141": false,
+      "144": false,
+      "158": true,
+      "170": false,
+      "188": false,
+      "221": true,
+      "244": false,
+      "251": false
+    },
+    "query_root": "cnf-residual-v1:[[-16,-11,4],[-16,-8,5],[-16,-5,8],[-16,-4,11],[-16,8,11],[-15,-12,3],[-15,-12,6],[-15,-12,16],[-15,-10,11],[-15,-9,5],[-15,-6,12],[-15,-5,9],[-15,-3,12],[-15,6,10],[-14,-11,-8],[-14,-10,9],[-14,-9,10],[-14,8,11],[-13,-10,-2],[-13,-9,-6],[-13,2,10],[-12,-11,2],[-12,-6,15],[-12,-3,15],[-12,-2,11],[-11,-10,8],[-11,-9,-1],[-11,-8,10],[-11,-7,-1],[-11,-4,16],[-11,-2,12],[-11,1,7],[-11,8,14],[-10,-9,-8],[-10,-9,14],[-10,-8,11],[-10,2,13],[-10,8,9],[-9,-5,15],[-9,8,10],[-8,-5,16],[-8,9,10],[-8,11,14],[-7,-5,-4],[-7,1,11],[-7,4,5],[-5,4,7],[-4,5,7],[-2,4,11],[-2,10,13],[-1,7,11],[2,11,12],[3,4,10],[3,12,15],[4,11,16],[5,8,16],[5,9,15],[6,12,15],[8,10,11],[9,10,14]]",
+    "source": [
+      [
+        59,
+        -251,
+        -131
+      ],
+      [
+        -244,
+        -170,
+        111
+      ],
+      [
+        -141,
+        -111,
+        -188
+      ],
+      [
+        56,
+        -158,
+        -251
+      ],
+      [
+        -244,
+        -170,
+        251
+      ],
+      [
+        144,
+        141,
+        221
+      ],
+      [
+        -244,
+        144,
+        111
+      ],
+      [
+        -244,
+        -170,
+        48
+      ],
+      [
+        -114,
+        158,
+        19
+      ],
+      [
+        -144,
+        -221,
+        141
+      ],
+      [
+        -141,
+        144,
+        -221
+      ],
+      [
+        141,
+        -144,
+        131
+      ],
+      [
+        158,
+        56,
+        251
+      ],
+      [
+        -158,
+        -56,
+        251
+      ],
+      [
+        141,
+        144,
+        -131
+      ],
+      [
+        144,
+        -158,
+        -131
+      ],
+      [
+        -131,
+        -144,
+        158
+      ],
+      [
+        -144,
+        -244,
+        158
+      ],
+      [
+        -19,
+        -158,
+        -114
+      ],
+      [
+        -141,
+        221,
+        -144
+      ],
+      [
+        25,
+        170,
+        158
+      ],
+      [
+        25,
+        -144,
+        188
+      ],
+      [
+        -144,
+        -188,
+        -25
+      ],
+      [
+        -59,
+        56,
+        114
+      ],
+      [
+        25,
+        -188,
+        144
+      ],
+      [
+        -48,
+        -244,
+        170
+      ],
+      [
+        56,
+        144,
+        48
+      ],
+      [
+        244,
+        -170,
+        -48
+      ],
+      [
+        -141,
+        -131,
+        -144
+      ],
+      [
+        59,
+        -244,
+        -141
+      ],
+      [
+        221,
+        158,
+        -131
+      ],
+      [
+        48,
+        170,
+        244
+      ],
+      [
+        158,
+        -251,
+        131
+      ],
+      [
+        131,
+        -158,
+        -144
+      ],
+      [
+        -158,
+        -25,
+        170
+      ],
+      [
+        251,
+        -59,
+        -131
+      ],
+      [
+        -158,
+        221,
+        131
+      ],
+      [
+        131,
+        59,
+        251
+      ],
+      [
+        19,
+        -158,
+        114
+      ],
+      [
+        158,
+        -170,
+        -25
+      ],
+      [
+        114,
+        158,
+        -19
+      ],
+      [
+        -158,
+        25,
+        -170
+      ],
+      [
+        144,
+        -141,
+        131
+      ],
+      [
+        59,
+        244,
+        141
+      ],
+      [
+        -59,
+        -56,
+        -114
+      ],
+      [
+        -244,
+        -59,
+        141
+      ],
+      [
+        244,
+        111,
+        170
+      ],
+      [
+        144,
+        188,
+        -25
+      ],
+      [
+        -59,
+        244,
+        -141
+      ],
+      [
+        -158,
+        -221,
+        -131
+      ],
+      [
+        -114,
+        59,
+        56
+      ],
+      [
+        -158,
+        -19,
+        -141
+      ],
+      [
+        131,
+        144,
+        158
+      ],
+      [
+        -251,
+        -59,
+        131
+      ],
+      [
+        -111,
+        170,
+        -244
+      ],
+      [
+        131,
+        -221,
+        158
+      ],
+      [
+        -56,
+        59,
+        114
+      ],
+      [
+        -251,
+        158,
+        -56
+      ],
+      [
+        -170,
+        244,
+        -111
+      ],
+      [
+        158,
+        56,
+        -25
+      ]
+    ]
+  },
+  "records": {
+    "path": "experiments/results/cnf-affine-completion/controls/affine-target-29-probe/records.json",
+    "sha256": "2b799c6dfa065edf3627716c8771f6e091b00a3f79597199ad323bc192ec2e4c"
+  },
+  "retained_bytes": 14193,
+  "selection_seconds": 0.0004392080008983612,
+  "serialization_seconds": 0.0004598340019583702,
+  "summary": {
+    "admission_calls": 1,
+    "admission_reasons": {
+      "no-proposal": 1
+    },
+    "affine_bridge_basis_xors": 0,
+    "affine_bridge_calls": 0,
+    "affine_bridge_candidates": 0,
+    "affine_bridge_clause_checks": 0,
+    "affine_bridge_exhausted": 0,
+    "affine_bridge_free_caps": 0,
+    "affine_bridge_linear_conflicts": 0,
+    "affine_bridge_model_literals": 0,
+    "affine_bridge_model_variables": 0,
+    "affine_bridge_models": 0,
+    "affine_bridge_no_equations": 0,
+    "affine_bridge_packed_literals": 0,
+    "affine_elimination_xors": 0,
+    "affine_extracted_equations": 0,
+    "affine_grouping_literals": 0,
+    "affine_leftover_clauses": 0,
+    "affine_space_backsub_rows": 0,
+    "affine_space_kernel_equation_checks": 0,
+    "affine_space_particular_equation_checks": 0,
+    "affine_space_vectors_checked": 0,
+    "affine_space_vectors_constructed": 0,
+    "affine_verification_literals": 0,
+    "affine_verification_xors": 0,
+    "affine_verified_certificates": 0,
+    "binary_filter_clause_visits": 60,
+    "binary_filter_literal_visits": 0,
+    "binary_filter_name_transports": 0,
+    "binary_probe_skips": 8,
+    "cover_candidates": 0,
+    "cover_checked_implication_edges": 0,
+    "cover_checked_reason_literals": 0,
+    "cover_clause_visits": 0,
+    "cover_completion_reads": 0,
+    "cover_gap_attempt_reads": 0,
+    "cover_gap_candidates": 0,
+    "cover_gap_clause_visits": 0,
+    "cover_gap_completion_reads": 0,
+    "cover_gap_implication_edges": 0,
+    "cover_gap_literal_visits": 0,
+    "cover_gap_model_literals": 0,
+    "cover_gap_negative": 0,
+    "cover_gap_nonbinary": 0,
+    "cover_gap_positive": 0,
+    "cover_gap_premise_literals": 0,
+    "cover_gap_probes": 0,
+    "cover_gap_recognition_clauses": 0,
+    "cover_gap_recognition_literals": 0,
+    "cover_gap_scc_calls": 0,
+    "cover_gap_unit_conflicts": 0,
+    "cover_literal_visits": 0,
+    "cover_path_repairs": 0,
+    "cover_planned_nodes": 0,
+    "cover_premise_literal_payload": 0,
+    "cover_transport_path_literals": 0,
+    "cover_transport_reason_literals": 0,
+    "expanded_nodes": 8,
+    "inline_completion_checks": 0,
+    "inline_completion_clauses": 0,
+    "inline_completion_literal_visits": 0,
+    "inline_completion_model_literals": 0,
+    "inline_completion_model_variables": 0,
+    "inline_completion_models": 0,
+    "local_calls": 1,
+    "local_guards": 0,
+    "local_terminals": 0,
+    "mixed_model_literals": 0,
+    "mixed_model_variables": 0,
+    "mixed_negative_conditions": 0,
+    "mixed_positive_models": 0,
+    "mixed_recognition_clauses": 0,
+    "mixed_scc_calls": 0,
+    "mixed_scc_implication_edges": 0,
+    "model_publications": 0,
+    "negative_cover_publications": 0,
+    "positive_models": 0,
+    "positive_premise_attempts_scanned": 0,
+    "positive_premise_literals_copied": 0,
+    "positive_premise_model_literals": 0,
+    "positive_premise_models": 0,
+    "positive_premise_reason_literals": 0,
+    "premise_probes": 0,
+    "propagated_reuses": 0,
+    "propagation_literal_visits": 1606,
+    "retained_prefixes": 0,
+    "trace_publications": 0,
+    "uniform_premise_attempts_scanned": 0,
+    "uniform_premise_literals_copied": 0,
+    "uniform_premise_misses": 0,
+    "uniform_premise_model_literals": 0,
+    "uniform_premise_models": 0,
+    "uniform_premise_reason_literals": 0,
+    "uniform_premise_recognition_clauses": 0,
+    "uniform_premise_recognition_literal_visits": 0
+  },
+  "warm_seconds": 0.0006075836718082428
+}

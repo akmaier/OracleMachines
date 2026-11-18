@@ -1,0 +1,921 @@
+{
+  "admission": {
+    "child": null,
+    "discovery": {
+      "attempts": [],
+      "baseline": {
+        "conflict": null,
+        "residual_literals": 126,
+        "root": "cnf-residual-v1:[[-12,-7,5],[-12,-5,1],[-12,-5,2],[-12,-5,7],[-12,-2,5],[-12,-1,5],[-12,3,5],[-11,-9,8],[-11,-8,-3],[-11,-8,9],[-11,3,8],[-10,-8,-2],[-10,-8,3],[-10,-7,6],[-10,-3,8],[-10,2,8],[-9,-8,11],[-8,-3,10],[-8,2,10],[-8,3,11],[-8,6,7],[-7,-5,12],[-7,-4,1],[-7,-4,6],[-7,-1,4],[-7,5,6],[-6,-5,12],[-6,-4,-3],[-6,3,4],[-5,-2,12],[-5,-1,12],[-4,-1,7],[-4,3,6],[-3,4,6],[-3,8,11],[-2,8,10],[1,4,7],[1,5,12],[2,5,12],[3,8,10],[5,7,12],[8,9,11]]",
+        "trace": []
+      },
+      "binary_filter": {
+        "skipped": [
+          [
+            -26
+          ],
+          [
+            26
+          ],
+          [
+            -31
+          ],
+          [
+            31
+          ],
+          [
+            -60
+          ],
+          [
+            60
+          ],
+          [
+            -71
+          ],
+          [
+            71
+          ]
+        ],
+        "variables": []
+      },
+      "candidates": [
+        [
+          -26
+        ],
+        [
+          26
+        ],
+        [
+          -31
+        ],
+        [
+          31
+        ],
+        [
+          -60
+        ],
+        [
+          60
+        ],
+        [
+          -71
+        ],
+        [
+          71
+        ]
+      ],
+      "completions": [],
+      "exposed": null,
+      "fixed": [],
+      "positive_selected": null,
+      "ranks": [
+        {
+          "binary_incidence": 0,
+          "variable": 26
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 31
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 60
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 71
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 72
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 93
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 101
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 145
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 171
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 183
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 193
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 206
+        }
+      ],
+      "selected": null
+    },
+    "proposal": null,
+    "reason": "no-proposal"
+  },
+  "case": 49,
+  "child": {
+    "answer": true,
+    "archive_nodes": 26070,
+    "archive_payload_bytes": 42007493,
+    "metrics": {
+      "accounting_reads": 1,
+      "certificate_serialized_bytes": 1584,
+      "class_literal_payload": 279,
+      "database_lookups": 5,
+      "decomposition_literal_visits": 279,
+      "expanded_nodes": 4,
+      "forced_variables": 9,
+      "inserted_bytes": 2772,
+      "inserted_nodes": 4,
+      "key_serialized_bytes": 2412,
+      "matching_recognition_literal_visits": 14,
+      "normalization_literal_visits": 652,
+      "propagation_literal_visits": 420,
+      "read_bytes": 62,
+      "restriction_literal_visits": 326,
+      "search_disk_hits": 1,
+      "source_witness_literal_payload": 126,
+      "split_nodes": 3,
+      "subsumed_positive_clauses": 0,
+      "subsumption_candidate_tests": 2,
+      "subsumption_membership_tests": 4,
+      "subsumption_posting_lookups": 47,
+      "subsumption_recognition_literal_payload": 279,
+      "verification_literal_payload": 326,
+      "verified_nodes": 5,
+      "visits": 5
+    },
+    "model": {
+      "26": true,
+      "31": true,
+      "60": false,
+      "71": true,
+      "72": false,
+      "93": true,
+      "101": true,
+      "145": false,
+      "171": true,
+      "183": true,
+      "193": false,
+      "206": false
+    },
+    "root": "cnf-residual-v1:[[-12,-7,5],[-12,-5,1],[-12,-5,2],[-12,-5,7],[-12,-2,5],[-12,-1,5],[-12,3,5],[-11,-9,8],[-11,-8,-3],[-11,-8,9],[-11,3,8],[-10,-8,-2],[-10,-8,3],[-10,-7,6],[-10,-3,8],[-10,2,8],[-9,-8,11],[-8,-3,10],[-8,2,10],[-8,3,11],[-8,6,7],[-7,-5,12],[-7,-4,1],[-7,-4,6],[-7,-1,4],[-7,5,6],[-6,-5,12],[-6,-4,-3],[-6,3,4],[-5,-2,12],[-5,-1,12],[-4,-1,7],[-4,3,6],[-3,4,6],[-3,8,11],[-2,8,10],[1,4,7],[1,5,12],[2,5,12],[3,8,10],[5,7,12],[8,9,11]]",
+    "seconds": 0.0020224587060511112
+  },
+  "child_seconds": 0.002024292014539242,
+  "cohort": "affine-target",
+  "cold_metrics": {
+    "key_serialized_bytes": 894,
+    "normalization_literal_visits": 252,
+    "search_memory_hits": 1,
+    "source_witness_literal_payload": 126,
+    "visits": 1
+  },
+  "cold_seconds": 0.03297362523153424,
+  "complete_arm_seconds": 0.22204858297482133,
+  "composition_metrics": {
+    "chain_child_memory_hits": 1,
+    "key_serialized_bytes": 1341,
+    "normalization_literal_visits": 378
+  },
+  "composition_seconds": 0.00023191608488559723,
+  "delta": {
+    "path": "experiments/results/cnf-affine-completion/controls/affine-target-49-probe/delta.json",
+    "sha256": "9d7f3019af79b5d7082fb496933964ac17e789992685545bd2ecb51731e1b0ac"
+  },
+  "evaluation_seconds": 0.002599666826426983,
+  "guard_counts": {},
+  "guard_metrics": {},
+  "guard_replay_metrics": {},
+  "guard_replay_seconds": 0.00014120806008577347,
+  "input_guards": [],
+  "input_target": [
+    [
+      60,
+      72,
+      -206
+    ],
+    [
+      -71,
+      93,
+      -101
+    ],
+    [
+      206,
+      -72,
+      -93
+    ],
+    [
+      145,
+      -60,
+      -183
+    ],
+    [
+      93,
+      101,
+      -145
+    ],
+    [
+      183,
+      60,
+      145
+    ],
+    [
+      206,
+      -72,
+      -101
+    ],
+    [
+      -60,
+      -93,
+      -71
+    ],
+    [
+      -72,
+      26,
+      -206
+    ],
+    [
+      206,
+      26,
+      72
+    ],
+    [
+      -71,
+      101,
+      -26
+    ],
+    [
+      71,
+      -60,
+      93
+    ],
+    [
+      -183,
+      93,
+      -101
+    ],
+    [
+      93,
+      -71,
+      60
+    ],
+    [
+      -145,
+      60,
+      -183
+    ],
+    [
+      -171,
+      145,
+      -193
+    ],
+    [
+      -72,
+      -206,
+      101
+    ],
+    [
+      -145,
+      -60,
+      183
+    ],
+    [
+      72,
+      101,
+      206
+    ],
+    [
+      -183,
+      31,
+      145
+    ],
+    [
+      -101,
+      26,
+      -71
+    ],
+    [
+      -193,
+      -60,
+      -145
+    ],
+    [
+      -145,
+      -31,
+      -183
+    ],
+    [
+      145,
+      183,
+      -31
+    ],
+    [
+      -93,
+      71,
+      60
+    ],
+    [
+      71,
+      -101,
+      -26
+    ],
+    [
+      -171,
+      193,
+      -145
+    ],
+    [
+      -101,
+      72,
+      -206
+    ],
+    [
+      206,
+      -31,
+      -72
+    ],
+    [
+      -145,
+      183,
+      31
+    ],
+    [
+      101,
+      26,
+      71
+    ],
+    [
+      -145,
+      171,
+      -193
+    ],
+    [
+      -193,
+      60,
+      145
+    ],
+    [
+      72,
+      206,
+      31
+    ],
+    [
+      -206,
+      72,
+      -26
+    ],
+    [
+      145,
+      171,
+      193
+    ],
+    [
+      193,
+      145,
+      -60
+    ],
+    [
+      -31,
+      72,
+      -206
+    ],
+    [
+      93,
+      -101,
+      72
+    ],
+    [
+      206,
+      -72,
+      -26
+    ],
+    [
+      193,
+      60,
+      -145
+    ],
+    [
+      -72,
+      -206,
+      31
+    ]
+  ],
+  "local_choice": null,
+  "local_eligible": true,
+  "local_probe": {
+    "attempts": [],
+    "baseline": {
+      "conflict": null,
+      "residual_literals": 126,
+      "root": "cnf-residual-v1:[[-12,-7,5],[-12,-5,1],[-12,-5,2],[-12,-5,7],[-12,-2,5],[-12,-1,5],[-12,3,5],[-11,-9,8],[-11,-8,-3],[-11,-8,9],[-11,3,8],[-10,-8,-2],[-10,-8,3],[-10,-7,6],[-10,-3,8],[-10,2,8],[-9,-8,11],[-8,-3,10],[-8,2,10],[-8,3,11],[-8,6,7],[-7,-5,12],[-7,-4,1],[-7,-4,6],[-7,-1,4],[-7,5,6],[-6,-5,12],[-6,-4,-3],[-6,3,4],[-5,-2,12],[-5,-1,12],[-4,-1,7],[-4,3,6],[-3,4,6],[-3,8,11],[-2,8,10],[1,4,7],[1,5,12],[2,5,12],[3,8,10],[5,7,12],[8,9,11]]",
+      "trace": []
+    },
+    "binary_filter": {
+      "skipped": [
+        [
+          -26
+        ],
+        [
+          26
+        ],
+        [
+          -31
+        ],
+        [
+          31
+        ],
+        [
+          -60
+        ],
+        [
+          60
+        ],
+        [
+          -71
+        ],
+        [
+          71
+        ]
+      ],
+      "variables": []
+    },
+    "candidates": [
+      [
+        -26
+      ],
+      [
+        26
+      ],
+      [
+        -31
+      ],
+      [
+        31
+      ],
+      [
+        -60
+      ],
+      [
+        60
+      ],
+      [
+        -71
+      ],
+      [
+        71
+      ]
+    ],
+    "completions": [],
+    "exposed": null,
+    "fixed": [],
+    "positive_selected": null,
+    "ranks": [
+      {
+        "binary_incidence": 0,
+        "variable": 26
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 31
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 60
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 71
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 72
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 93
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 101
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 145
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 171
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 183
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 193
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 206
+      }
+    ],
+    "selected": null
+  },
+  "mode": "probe",
+  "new_nodes": 4,
+  "new_payload_units": 2772,
+  "open_seconds": 0.04824370797723532,
+  "prefix_digest": "bcd1de555fe342e2eebc2d6a0a76d60b8af376300d9c3224a97e8f0a86c8af61",
+  "prefix_nodes": 26066,
+  "prefix_write_seconds": 0.18450925033539534,
+  "premise": null,
+  "premise_seconds": 0.0,
+  "preparation_ids": [],
+  "probe_counts": {
+    "admission_family_clauses": 42,
+    "admission_family_literal_visits": 126,
+    "admission_source_literal_visits": 126,
+    "binary_filter_clause_visits": 42,
+    "binary_filter_name_transports": 0,
+    "binary_probe_skips": 8,
+    "local_baseline_probes": 1,
+    "local_ranking_clause_visits": 42,
+    "local_ranking_literal_visits": 126,
+    "propagation_literal_visits": 126,
+    "restriction_literal_visits": 126
+  },
+  "probe_metrics": {
+    "database_lookups": 1,
+    "key_serialized_bytes": 894,
+    "normalization_literal_visits": 252
+  },
+  "record": {
+    "answer": true,
+    "child": {
+      "answer": true,
+      "model": {
+        "26": true,
+        "31": true,
+        "60": false,
+        "71": true,
+        "72": false,
+        "93": true,
+        "101": true,
+        "145": false,
+        "171": true,
+        "183": true,
+        "193": false,
+        "206": false
+      },
+      "root": "cnf-residual-v1:[[-12,-7,5],[-12,-5,1],[-12,-5,2],[-12,-5,7],[-12,-2,5],[-12,-1,5],[-12,3,5],[-11,-9,8],[-11,-8,-3],[-11,-8,9],[-11,3,8],[-10,-8,-2],[-10,-8,3],[-10,-7,6],[-10,-3,8],[-10,2,8],[-9,-8,11],[-8,-3,10],[-8,2,10],[-8,3,11],[-8,6,7],[-7,-5,12],[-7,-4,1],[-7,-4,6],[-7,-1,4],[-7,5,6],[-6,-5,12],[-6,-4,-3],[-6,3,4],[-5,-2,12],[-5,-1,12],[-4,-1,7],[-4,3,6],[-3,4,6],[-3,8,11],[-2,8,10],[1,4,7],[1,5,12],[2,5,12],[3,8,10],[5,7,12],[8,9,11]]"
+    },
+    "format": "checked-guard-chain-v1",
+    "guards": [],
+    "model": {
+      "26": true,
+      "31": true,
+      "60": false,
+      "71": true,
+      "72": false,
+      "93": true,
+      "101": true,
+      "145": false,
+      "171": true,
+      "183": true,
+      "193": false,
+      "206": false
+    },
+    "query_root": "cnf-residual-v1:[[-12,-7,5],[-12,-5,1],[-12,-5,2],[-12,-5,7],[-12,-2,5],[-12,-1,5],[-12,3,5],[-11,-9,8],[-11,-8,-3],[-11,-8,9],[-11,3,8],[-10,-8,-2],[-10,-8,3],[-10,-7,6],[-10,-3,8],[-10,2,8],[-9,-8,11],[-8,-3,10],[-8,2,10],[-8,3,11],[-8,6,7],[-7,-5,12],[-7,-4,1],[-7,-4,6],[-7,-1,4],[-7,5,6],[-6,-5,12],[-6,-4,-3],[-6,3,4],[-5,-2,12],[-5,-1,12],[-4,-1,7],[-4,3,6],[-3,4,6],[-3,8,11],[-2,8,10],[1,4,7],[1,5,12],[2,5,12],[3,8,10],[5,7,12],[8,9,11]]",
+    "source": [
+      [
+        60,
+        72,
+        -206
+      ],
+      [
+        -71,
+        93,
+        -101
+      ],
+      [
+        206,
+        -72,
+        -93
+      ],
+      [
+        145,
+        -60,
+        -183
+      ],
+      [
+        93,
+        101,
+        -145
+      ],
+      [
+        183,
+        60,
+        145
+      ],
+      [
+        206,
+        -72,
+        -101
+      ],
+      [
+        -60,
+        -93,
+        -71
+      ],
+      [
+        -72,
+        26,
+        -206
+      ],
+      [
+        206,
+        26,
+        72
+      ],
+      [
+        -71,
+        101,
+        -26
+      ],
+      [
+        71,
+        -60,
+        93
+      ],
+      [
+        -183,
+        93,
+        -101
+      ],
+      [
+        93,
+        -71,
+        60
+      ],
+      [
+        -145,
+        60,
+        -183
+      ],
+      [
+        -171,
+        145,
+        -193
+      ],
+      [
+        -72,
+        -206,
+        101
+      ],
+      [
+        -145,
+        -60,
+        183
+      ],
+      [
+        72,
+        101,
+        206
+      ],
+      [
+        -183,
+        31,
+        145
+      ],
+      [
+        -101,
+        26,
+        -71
+      ],
+      [
+        -193,
+        -60,
+        -145
+      ],
+      [
+        -145,
+        -31,
+        -183
+      ],
+      [
+        145,
+        183,
+        -31
+      ],
+      [
+        -93,
+        71,
+        60
+      ],
+      [
+        71,
+        -101,
+        -26
+      ],
+      [
+        -171,
+        193,
+        -145
+      ],
+      [
+        -101,
+        72,
+        -206
+      ],
+      [
+        206,
+        -31,
+        -72
+      ],
+      [
+        -145,
+        183,
+        31
+      ],
+      [
+        101,
+        26,
+        71
+      ],
+      [
+        -145,
+        171,
+        -193
+      ],
+      [
+        -193,
+        60,
+        145
+      ],
+      [
+        72,
+        206,
+        31
+      ],
+      [
+        -206,
+        72,
+        -26
+      ],
+      [
+        145,
+        171,
+        193
+      ],
+      [
+        193,
+        145,
+        -60
+      ],
+      [
+        -31,
+        72,
+        -206
+      ],
+      [
+        93,
+        -101,
+        72
+      ],
+      [
+        206,
+        -72,
+        -26
+      ],
+      [
+        193,
+        60,
+        -145
+      ],
+      [
+        -72,
+        -206,
+        31
+      ]
+    ]
+  },
+  "records": {
+    "path": "experiments/results/cnf-affine-completion/controls/affine-target-49-probe/records.json",
+    "sha256": "0853cdf4d90ccaec027fd0bc50c4249bb565dd9aa46eb9c35c9891e5c5f771e3"
+  },
+  "retained_bytes": 6834,
+  "selection_seconds": 0.0003424999304115772,
+  "serialization_seconds": 0.000385957770049572,
+  "summary": {
+    "admission_calls": 1,
+    "admission_reasons": {
+      "no-proposal": 1
+    },
+    "affine_bridge_basis_xors": 0,
+    "affine_bridge_calls": 0,
+    "affine_bridge_candidates": 0,
+    "affine_bridge_clause_checks": 0,
+    "affine_bridge_exhausted": 0,
+    "affine_bridge_free_caps": 0,
+    "affine_bridge_linear_conflicts": 0,
+    "affine_bridge_model_literals": 0,
+    "affine_bridge_model_variables": 0,
+    "affine_bridge_models": 0,
+    "affine_bridge_no_equations": 0,
+    "affine_bridge_packed_literals": 0,
+    "affine_elimination_xors": 0,
+    "affine_extracted_equations": 0,
+    "affine_grouping_literals": 0,
+    "affine_leftover_clauses": 0,
+    "affine_space_backsub_rows": 0,
+    "affine_space_kernel_equation_checks": 0,
+    "affine_space_particular_equation_checks": 0,
+    "affine_space_vectors_checked": 0,
+    "affine_space_vectors_constructed": 0,
+    "affine_verification_literals": 0,
+    "affine_verification_xors": 0,
+    "affine_verified_certificates": 0,
+    "binary_filter_clause_visits": 42,
+    "binary_filter_literal_visits": 0,
+    "binary_filter_name_transports": 0,
+    "binary_probe_skips": 8,
+    "cover_candidates": 0,
+    "cover_checked_implication_edges": 0,
+    "cover_checked_reason_literals": 0,
+    "cover_clause_visits": 0,
+    "cover_completion_reads": 0,
+    "cover_gap_attempt_reads": 0,
+    "cover_gap_candidates": 0,
+    "cover_gap_clause_visits": 0,
+    "cover_gap_completion_reads": 0,
+    "cover_gap_implication_edges": 0,
+    "cover_gap_literal_visits": 0,
+    "cover_gap_model_literals": 0,
+    "cover_gap_negative": 0,
+    "cover_gap_nonbinary": 0,
+    "cover_gap_positive": 0,
+    "cover_gap_premise_literals": 0,
+    "cover_gap_probes": 0,
+    "cover_gap_recognition_clauses": 0,
+    "cover_gap_recognition_literals": 0,
+    "cover_gap_scc_calls": 0,
+    "cover_gap_unit_conflicts": 0,
+    "cover_literal_visits": 0,
+    "cover_path_repairs": 0,
+    "cover_planned_nodes": 0,
+    "cover_premise_literal_payload": 0,
+    "cover_transport_path_literals": 0,
+    "cover_transport_reason_literals": 0,
+    "expanded_nodes": 4,
+    "inline_completion_checks": 0,
+    "inline_completion_clauses": 0,
+    "inline_completion_literal_visits": 0,
+    "inline_completion_model_literals": 0,
+    "inline_completion_model_variables": 0,
+    "inline_completion_models": 0,
+    "local_calls": 1,
+    "local_guards": 0,
+    "local_terminals": 0,
+    "mixed_model_literals": 0,
+    "mixed_model_variables": 0,
+    "mixed_negative_conditions": 0,
+    "mixed_positive_models": 0,
+    "mixed_recognition_clauses": 0,
+    "mixed_scc_calls": 0,
+    "mixed_scc_implication_edges": 0,
+    "model_publications": 0,
+    "negative_cover_publications": 0,
+    "positive_models": 0,
+    "positive_premise_attempts_scanned": 0,
+    "positive_premise_literals_copied": 0,
+    "positive_premise_model_literals": 0,
+    "positive_premise_models": 0,
+    "positive_premise_reason_literals": 0,
+    "premise_probes": 0,
+    "propagated_reuses": 0,
+    "propagation_literal_visits": 546,
+    "retained_prefixes": 0,
+    "trace_publications": 0,
+    "uniform_premise_attempts_scanned": 0,
+    "uniform_premise_literals_copied": 0,
+    "uniform_premise_misses": 0,
+    "uniform_premise_model_literals": 0,
+    "uniform_premise_models": 0,
+    "uniform_premise_reason_literals": 0,
+    "uniform_premise_recognition_clauses": 0,
+    "uniform_premise_recognition_literal_visits": 0
+  },
+  "warm_seconds": 0.00046274997293949127
+}

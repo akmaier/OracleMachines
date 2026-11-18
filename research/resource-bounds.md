@@ -3483,3 +3483,49 @@ evidence occurrences. Ready/pending banks remain 132/38, 141/66, 87/89 and
 6,641 artifacts and 100 manifests remain unchanged. The 216-page manuscript
 builds with all 64 existing proof blocks unchanged. No new Lean theorem or
 unrestricted-SAT resource guarantee is claimed.
+
+## 2026-11-18: reuse a checked basis and packed leftovers across candidates
+
+The [affine bridge](affine-completion.md) checks d=n-r<=8 before constructing
+or enumerating a basis. Variables outside extracted equations count toward d.
+For B=max(1,ceil(n/W)), Gaussian elimination/checking is O(E r B), plus source
+and mask construction/sorting; basis construction/checking costs
+O((d+1)rB+E(d+1)B), with sorting and masks separate. A walk of t<=2^d candidates
+uses t-1 direction XORs and at most t m_l packed leftover-clause checks,
+O(t(m_l+1)B) work after packing. Full raw-source checking follows success.
+Basis/packed state uses O((d+1+m_l)B) words, a transported model O(n), and row
+history can retain O(E r) dependency references. Native/history costs are extra.
+
+Fresh calls test 36 candidates using 25 direction XORs and 186 clause checks;
+extraction groups 5,222 literals and checks 156 equations. Added positives
+remove 59 native nodes / 58,296 bytes. Query time falls about 11%, but complete
+worker timing has mixed signs and remains above the native baseline on average.
+Diagnostics grow 7.86%, trial SQLite falls 118,784 bytes, and mean RSS falls
+2.87 MB. These conditional and finite bounds do not bound arbitrary-SAT fallback.
+
+Three negative affine analyses still pay for 51 native fallback nodes and
+7,829 propagation visits. Their retained evidence is not counted as avoided
+acquisition. A compatible negative certificate must include its own checking,
+representation and replay cost before a saving can be established.
+
+The fresh base discovery agrees on all 49 locally unfamiliar queries across
+the two policies. Eleven neighbour queries become known after preparation;
+neighbour case 4 remains unfamiliar behind two checked guards and adds ten
+nodes in every policy. This is a shared control miss, not an affine regression.
+Random three-CNF still adds 169 nodes / 28,452 acquisition propagation visits.
+Fresh graph case 47 retains incomplete covers with two missing conditions per
+candidate clause, beyond the one-extra-probe rule. These misses are preserved
+alongside the negative affine publication target.
+
+All **1,169 tests**, 24 focused tests, 324 counter audits and independent
+reconstruction pass. Resume `experiments/results/cnf-affine-completion/checkpoint.json`:
+**26,743 native keys**, preserving all 26,279 prior payloads, with 264 new
+composed records alongside 4,719 inherited records, 2,957 ordinary decisions
+and six projections. The union uses 82,378,752 database bytes / 6,217,639
+compressed bytes. Twenty-six roots have alternate certificates in 67 retained
+evidence occurrences. Ready/pending banks remain 132/38, 141/66, 87/89 and
+87/116, with no new support activation. Original structural coverage remains
+17/24 and supplemental positive coverage 24/24. All 539 prior sources,
+6,871 artifacts and 101 manifests remain unchanged. The 217-page manuscript
+builds with all 64 existing proof blocks unchanged. No new Lean theorem,
+native proof kind or unrestricted-SAT resource guarantee is claimed.

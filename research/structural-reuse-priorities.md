@@ -12,7 +12,70 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse affine discovery in costly coupled inputs
+## Current investigation: publish retained negative affine evidence
+
+[Affine completion](affine-completion.md) connects the existing exact extractor
+and checked basis routines to native positive publication. A Gray-order walk
+reuses one basis XOR per next candidate and packed leftover clauses. Only a
+model verified against the whole raw target changes acquisition; prior routes
+keep priority. The total free dimension is capped at eight before basis
+construction or enumeration, including variables absent from the equations.
+
+Eight saved satisfiable coupled targets shrink **80 -> 8 nodes / 82,179 ->
+10,860 native bytes**. On sixty fresh queries, nine added models reduce native
+additions **395 -> 336 nodes / 482,568 -> 424,272 bytes**. Mean query time falls
+about **11.00%**, with both orders improving, while complete-worker deltas have mixed signs. Full
+cold replay still costs about 12.7 seconds. Diagnostics grow 7.86%; trial SQLite
+falls 118,784 bytes and mean RSS falls 2.87 MB. These are finite matched gains,
+without end-to-end dominance over the native baseline.
+
+**Next concrete target: a checked negative publication interface.** The fresh
+bridge already verifies one inconsistent system (case 29) and two exhausted
+spaces (41/57, four/eight candidates). These still acquire **51 native fallback
+nodes / 7,829 propagation visits**. Four saved negative coupled controls still
+acquire 83 nodes. Preserve their exact source, extraction, row or basis evidence
+and every rejecting leftover clause; price a compatible stored negative decision
+and its cold replay against the current fallback. A small translation into the
+current native proof kinds has not been established. If a versioned checker is
+needed, keep all old proofs valid and make the new authority explicit.
+
+**Broader coverage remains open.** Seventeen fresh bridge calls find no
+extracted equations. Random three-CNF, unrecognized encodings and large free
+dimension are outside this completion rule. A 2^d basis search is only bounded
+because the policy enforces its cap. Exact projection, shared affine kernels
+and better failure recognition remain candidates; none removes the general
+SAT interaction or the cost of building the retained knowledge.
+
+The lower-cost scheduling opportunity also remains: admit completed covers
+inside the original probe pass and maintain clause coverage without repeated
+full scans. This is distinct from closing the negative affine publication gap.
+
+The fresh base discovery agrees on all 49 locally unfamiliar queries across
+the two policies. Eleven neighbour queries become known after preparation;
+neighbour case 4 remains unfamiliar behind two checked guards and adds ten
+nodes in every policy. This is a shared control miss, not an affine regression.
+Random three-CNF still adds 169 nodes / 28,452 acquisition propagation visits.
+Fresh graph case 47 retains incomplete covers with two missing conditions per
+candidate clause, beyond the one-extra-probe rule. These misses are preserved
+alongside the negative affine publication target.
+
+All **1,169 tests**, 24 focused tests, 324 counter audits and independent
+reconstruction pass. Resume `experiments/results/cnf-affine-completion/checkpoint.json`:
+**26,743 native keys**, preserving all 26,279 prior payloads, with 264 new
+composed records alongside 4,719 inherited records, 2,957 ordinary decisions
+and six projections. The union uses 82,378,752 database bytes / 6,217,639
+compressed bytes. Twenty-six roots have alternate certificates in 67 retained
+evidence occurrences. Ready/pending banks remain 132/38, 141/66, 87/89 and
+87/116, with no new support activation. Original structural coverage remains
+17/24 and supplemental positive coverage 24/24. All 539 prior sources,
+6,871 artifacts and 101 manifests remain unchanged. The 217-page manuscript
+builds with all 64 existing proof blocks unchanged. No new Lean theorem,
+native proof kind or unrestricted-SAT resource guarantee is claimed.
+
+
+New manifest: **300 artifacts**. Next preservation audit: **7,171 artifacts / 102 manifests**. Final source ledger: **544**.
+
+## Previous checkpoint: reuse affine discovery in costly coupled inputs
 
 [Cover-directed probing](cover-directed-probe.md) closes the three saved missing
 conditions with one extra probe each. One older control also benefits: four

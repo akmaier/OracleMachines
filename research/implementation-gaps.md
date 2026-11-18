@@ -10151,3 +10151,43 @@ SAT resource bound follows.
 
 Final executable source ledger: **625**. The new manifest binds **43 artifacts**;
 next preservation audit: **7,947 artifacts / 116 manifests**.
+
+## 2026-11-18: targeted acquisition-to-proof normalization reuse
+
+[Targeted proof-normalization reuse](proof-normalization-reuse.md) now retains
+`_visit` results only for `_negative_child` checks. Exact raw inputs bind the
+immutable CNF, name map and key; the original child-key and checked-UNSAT tests
+still run. Invalid equal-hash literals are rejected before lookup. Query-local
+FIFO state clears on success/failure and adds no persisted proof authority.
+
+On the same 104 inputs, the 128-KiB cap avoids **262 of 311** negative-child
+normalizations, reducing normalization visits **21.31%**. Mean query time improves
+**3.88%**, with both orders improving, but mean complete time improves only 2.07%
+and its second paired delta **regresses 1.86 ms**. The 32-KiB arm also regresses
+in its second query measurement. Keep this optional; there is no robust general
+speedup claim. All decisions, proofs, expansions, publication counters and final
+storage remain identical. Peak retained charge is **131,020 bytes / 13 entries**;
+an independent graph walk measures 83,489 bytes. The cap excludes transients,
+allocator overhead and full-solver memory. Persistent storage does not shrink.
+
+**Next highest-value target: preserve local clause order during residual
+normalization.** The census finds **501/546 producer inputs / 47,894 literal units**
+with sorted, distinct, tautology-free literals. Restrictions preserve that local
+property, but not global clause order, duplicates or compact names. Prove and
+check those boundaries before bypassing any sorting or renaming. Memo128 still
+spends 901 normalization calls / **0.14642 inclusive profiled seconds**, compared
+with 780 restrictions / 0.07031 seconds. Its admission sizing alone costs
+0.02845 seconds; shorter-lived direct transport is the second candidate. Profile
+times overlap and are separate from matched wall times. No new pattern coverage
+or unrestricted SAT bound follows from this supporting optimization.
+
+Resume `experiments/results/cnf-proof-normalization-reuse/checkpoint.json`.
+The parent union and **5,650 composed / 444 pilot results** remain unchanged.
+Validation covers **624 queries / 416 exact comparisons / 104 truths / 104 visible
+committed prefixes**, both old readers, all **28,886 fixed points / 4,961 mutations**.
+All **625 prior sources / 7,947 artifacts / 116 manifests** are preserved. Nine
+new tests cover proof authority, name maps, invalid literals, capacity and failure
+cleanup. All **1,292 full / 123 focused tests** pass. The full suite emits 44 SQLite
+ResourceWarnings versus 43 in the parent, at unchanged source/stdlib files;
+focused tests emit none. The **227-page manuscript / 64 prior proof blocks**
+remain valid. Final source ledger: **632**; details are in `checks.json`.

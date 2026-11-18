@@ -8208,6 +8208,48 @@ exclusive costs. Exact residual reuse across acquisition and proof checking is
 the next investigation; the experiment adds no structural coverage, Lean theorem
 or uniform polynomial expansion bound.
 
+\paragraph{Targeted reuse from acquisition to negative-proof checking.}
+An exact-raw census finds that all 311 negative-child checks repeat an input
+normalized earlier in the same source query. In 270 cases the preceding producer
+is child acquisition; cover and excluded-child helpers account for the remainder.
+An optional query-local memo retains only acquisition results and supplies them
+only to negative-child checks. Each immutable entry binds the raw formula to its
+normalized CNF, original variable names and full key. Consumers reject noninteger
+and zero literals before lookup, including values that Python compares equal to
+integers. The original referenced-key comparison, archive lookup and checked-UNSAT
+requirement still execute. A memo hit supplies a pure transformation result and
+confers no proof authority. State clears on both success and failure.
+
+Six serial workers compare the preceding batched solver with 128-KiB and 32-KiB
+memo limits in opposite orders on the same 104 inputs. The larger memo avoids
+262 normalization calls and reduces ordinary normalization literal visits from
+119,547 to 94,069 (21.31\%). Mean query time falls from 0.32562 to 0.31300 seconds
+(3.88\%), with paired reductions of 22.37 and 2.87 milliseconds. Mean complete
+time falls 2.07\%, but its second paired measurement increases 1.86 milliseconds.
+The smaller memo avoids 178 calls, and its second query measurement also
+regresses. Two short replays establish a work reduction, not a robust general
+runtime advantage. Warm queries perform no memo work; cold readers and archives
+are identical, so their timing variation is not a reuse benefit.
+
+All decisions, proof checks, 505 expansions, 104 commits and persisted bytes
+remain unchanged. The 128-KiB policy peaks at 131,020 conservatively charged
+retained bytes and thirteen entries; a separate deduplicated object-graph walk
+observes 83,489 bytes. FIFO eviction and oversized-entry skipping preserve the
+cap after each operation. Transient snapshots, dictionary resizing, allocator
+overhead and the existing proof archive are outside that cap. Persistent storage
+and process memory do not decrease. Hits still scan and hash the input, while
+producers still normalize, snapshot and charge their results.
+
+The independent validation retains all prior proofs and decisions and checks
+every visible committed prefix. The remaining profile places 901 normalization
+calls first among exclusive sites; memo admission sizing also consumes measurable
+work. A subsequent candidate is local clause-order preservation: 501 of 546
+acquisition inputs already have sorted, distinct, tautology-free clause literals.
+Restriction preserves that local property but can alter global clause order,
+clause uniqueness and compact variable names. Any fast path must preserve those
+remaining obligations. This experiment adds no structural coverage or uniform
+polynomial expansion bound.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

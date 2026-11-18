@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Reuse normalization during proof checking](research/proof-normalization-reuse.md).
+On the same 104 inputs, a bounded optional memo avoids 262 repeated normalizations
+and 21.31% of normalization visits. Mean query time falls 3.88%; complete-time
+results are mixed. Proofs and persistent storage are unchanged. Next: exploit
+preserved clause order without losing exact names, deduplication or proof checks.
+
 [Batch verified publications](research/bounded-publication-batches.md).
 On the same 104 inputs, grouping checked writes reduces commits from 605 to 104
 and mean query time 35.55%, with identical answers and proof storage. Failed

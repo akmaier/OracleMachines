@@ -1,0 +1,69 @@
+{
+  "limits": [
+    "Both memo arms preserve every ordinary counter except skipped normalization/key serialization, exact certificates and publication counters. Memo128 committed prefixes are independently verified.",
+    "Same 104 replayed small inputs; no new coverage or representative general-SAT speedup.",
+    "Memo caps conservatively bound retained Python objects after each operation, not transient allocation or full solver memory. Cold and warm paths retain no memo entries."
+  ],
+  "pairs": [
+    {
+      "cold_seconds": -0.0034435843117535114,
+      "complete_worker_seconds": -0.024976584129035473,
+      "mode": "memo128",
+      "query_seconds": -0.022372623439878225,
+      "repeat": 0,
+      "warm_seconds": -0.000348708126693964
+    },
+    {
+      "cold_seconds": -0.0034138341434299946,
+      "complete_worker_seconds": -0.01331100007519126,
+      "mode": "memo32",
+      "query_seconds": -0.012954289559274912,
+      "repeat": 0,
+      "warm_seconds": -0.0003870422951877117
+    },
+    {
+      "cold_seconds": 0.002125666942447424,
+      "complete_worker_seconds": 0.0018627080135047436,
+      "mode": "memo128",
+      "query_seconds": -0.0028664194978773594,
+      "repeat": 1,
+      "warm_seconds": -0.00014316709712147713
+    },
+    {
+      "cold_seconds": 0.0006737075746059418,
+      "complete_worker_seconds": 0.006415833253413439,
+      "mode": "memo32",
+      "query_seconds": 0.0036055073142051697,
+      "repeat": 1,
+      "warm_seconds": -0.00025687599554657936
+    }
+  ],
+  "solve_seconds": {
+    "batch32": [
+      0.2548979609273374,
+      0.24206211511045694
+    ],
+    "memo128": [
+      0.2393434620462358,
+      0.23958620429039001
+    ],
+    "memo32": [
+      0.24789316998794675,
+      0.2457501688040793
+    ]
+  },
+  "warm_cache_hits": {
+    "batch32": [
+      0,
+      0
+    ],
+    "memo128": [
+      0,
+      0
+    ],
+    "memo32": [
+      0,
+      0
+    ]
+  }
+}

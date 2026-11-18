@@ -9744,3 +9744,31 @@ remain open. No-equation targets and large free dimension retain fallback.
 The checkpoint explicitly identifies its extension reader; the previous ordinary
 production checkpoint remains valid. No new Lean theorem or unrestricted-SAT
 resource bound is claimed.
+
+
+## 2026-11-18: resumable affine negatives on fresh inputs
+
+[The new session](affine-session-reuse.md) checks exact-target negative lookup
+before local discovery and persists new versioned refutations. Versioned chain
+replay uses its checked extension terminal directly; native search cannot read
+extension proofs. Guarded conclusions are indexed in a checked source-bound bank.
+
+A newly excluded sixty-query stream returns 37 SAT / 23 UNSAT in both policies.
+Three negatives replace 67 native nodes with three certificates; nine coupled
+models remain. Combined additions fall 344 -> 280 certificates and payload
+460,091 -> 384,362 bytes. Query time falls 7.76%, complete time only 0.45% on
+average, with both orders improving. Sixty lookup misses cost about 0.00579
+seconds; there are no fresh extension hits. All discovery traces/counters match.
+Full historical replay remains about thirteen seconds. Trial storage and RSS
+fall, but the preservation union adds 344 native keys and three extensions
+because comparator proofs remain available: 888,832 SQLite / 95,921 compressed
+bytes of growth, to 27,087 native keys and ten extension certificates.
+
+Independent validation checks 240 chronological queries, six new-negative
+publication-counter records, exhaustive truth for 48 family cases, warm answers
+and full historical cold replay. The extension phase loads no native alternative
+proofs. Largest remaining acquisition: random three-CNF, 140 expanded nodes /
+27,761 propagation visits (start with case 56). Graph discovery pays 25,375
+visits and has unresolved cases 47/35. Hidden/no-equation structures, large free
+dimension, exact projection and extension-aware internal support remain open.
+No unrestricted-SAT resource guarantee follows from these finite measurements.

@@ -12,7 +12,55 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: adopt checked negative reuse on a fresh stream
+## Current investigation: recognize the expensive no-equation residuals
+
+[Resumable affine sessions](affine-session-reuse.md) now run on a newly excluded
+sixty-query stream. Three checked negatives replace 67 native nodes with three
+extension certificates; nine other coupled inputs produce models. All twelve
+coupled inputs avoid native expansion on this stream. The policies retain
+identical discovery evidence. Combined additions fall **344 -> 280 certificates**
+and payload **460,091 -> 384,362 bytes**. Mean query time falls **7.76%**; mean
+complete worker time falls only **0.45%**, with both paired deltas negative.
+Full cold replay remains about thirteen seconds. Sixty extension lookup misses
+are charged; this fresh stream has no exact-target extension hits.
+
+**Next highest-coverage target:** random three-CNF still expands **140 nodes /
+27,761 propagation visits**. Start with saved fresh case 56 (33 nodes / 8,144
+visits), then 44 and 52. Their affine extraction has no equations. Inspect
+conditioned residuals for reusable clause/component descriptions and exact
+recomposition, rather than treating a family label as a recognizer. Persist
+counterexamples and account for discovery overhead on the other categories.
+
+**Second cost target:** graph discovery spends 25,375 propagation visits, versus
+5,416 in child acquisition. Cases 47/35 retain no proposal; case 59 reaches a
+negative cover only after 4,271 discovery visits. Partial-cover completion and
+early admission remain credible improvements. Gated Horn already avoids native
+expansion but pays 12,579 discovery visits. Historical replay dominates total
+runtime; propagation counts alone do not determine the largest wall-time saving.
+
+Resume `experiments/results/cnf-affine-session/checkpoint.json`, using its
+explicit `TerminalStore` reader and native/negative catalogs. It preserves every
+prior payload and contains **27,087 native keys / ten extension certificates**.
+Terminal-first replay no longer loads the alternative native proofs. The union
+retains comparator results too, growing 888,832 SQLite bytes / 95,921 compressed
+bytes over its parent. Broader recognition, hidden encodings, large free dimension
+and extension-aware internal support scheduling remain open; native search still
+cannot depend silently on versioned extension proofs.
+
+
+All **1,181 tests**, twelve focused tests, 240 chronological query audits and
+six negative publication-counter audits pass. All **548 prior sources,
+7,399 artifacts and 103 manifests** remain unchanged. The final source ledger
+has 553 entries, including the posthoc validator and analyzer. Full
+historical native/composed/projection replay passes for every worker and the
+union. The 219-page manuscript builds with all 64 existing proof blocks unchanged
+and a clean final compiler log. The full suite retains 44 existing unclosed-SQLite
+warnings; focused tests have none. No new Lean theorem is claimed.
+
+
+New manifest: **40 artifacts**. Next preservation audit: **7,439 artifacts / 104 manifests**. Final source ledger: **553**.
+
+## Previous checkpoint: adopt checked negative reuse on a fresh stream
 
 [Negative affine publication](affine-negative-publication.md) now stores checked
 row contradictions and complete-space exhaustion certificates in a versioned

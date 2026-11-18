@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Resume affine negatives on fresh queries](research/affine-session-reuse.md).
+On sixty newly excluded queries, combined additions fall 344 -> 280 certificates
+and mean query time 7.76%; complete worker time falls 0.45%. All prior payloads
+remain in a resumable checkpoint with 27,087 native keys and ten affine negatives.
+The largest unresolved acquisition cost is now random three-CNF; graph discovery
+is another substantial cost. Evidence: `experiments/results/cnf-affine-session/`.
+
 [Publish checked negative affine evidence](research/affine-negative-publication.md).
 Seven selected negative targets now use seven versioned extension certificates
 instead of 134 fresh native nodes. All 26,743 prior native payloads remain intact.

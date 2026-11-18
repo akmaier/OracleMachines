@@ -5922,3 +5922,27 @@ proofs. Largest remaining acquisition: random three-CNF, 140 expanded nodes /
 visits and has unresolved cases 47/35. Hidden/no-equation structures, large free
 dimension, exact projection and extension-aware internal support remain open.
 No unrestricted-SAT resource guarantee follows from these finite measurements.
+
+
+## 2026-11-18: binary-subset refutation during native expansion
+
+[The optional native rule](binary-subset-refutation.md) checks a mixed residual's
+binary clauses for contradictory implication paths. Original source indices let
+the unchanged checker validate the result. A satisfiable binary core is
+inconclusive. Unit, pure-binary and uniform-core filters avoid redundant SCCs.
+
+On sixty new queries, eight refutation leaves remove 22 native nodes / 16,393
+payload bytes across random three-CNF and graph colouring. Discovery is unchanged.
+The policy pays 76 failed SCCs; paired query timings have mixed signs and mean
+complete-worker time rises 0.82%. This is a deterministic search/storage reduction,
+with no established runtime dominance. The checkpoint preserves 27,087 old native
+payloads and ten extensions, reaching 27,368 / thirteen. Alternative native
+proofs remain in the trial archives; the union preserves first payloads.
+
+The next cases are new random-three 56/44 (5,159/5,117 propagation visits), whose
+remaining interaction is not refuted by their binary cores. Repeated binary
+graphs, wide-clause compatibility, failed-recognition overhead and earlier graph
+cover admission remain open. Full historical replay still costs about 13.5 s.
+All 240 chronological queries, twelve publication-counter records, 48 exhaustive
+family truths and full historical replay validate. This supplies no new Lean
+or unrestricted-SAT resource guarantee.

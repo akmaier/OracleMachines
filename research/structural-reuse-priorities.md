@@ -12,7 +12,46 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: recognize the expensive no-equation residuals
+## Current investigation: residuals with satisfiable binary cores
+
+[Binary-subset refutation](binary-subset-refutation.md) closes eight additional
+native leaves on a fresh sixty-query stream. It removes **22 native nodes /
+16,393 payload bytes** across random three-CNF and graph colouring, using the
+existing source-indexed implication checker. Native additions fall **281 -> 259**.
+All prior discovery evidence remains identical. The policy is optional: **76 of
+84 SCC calls miss**, query timing has mixed signs, and mean complete-worker time
+rises **0.82%** despite a 3.40% mean query reduction. Retain this regression.
+
+**Next highest-coverage target:** new random-three cases **56 and 44** still pay
+**5,159 / 5,117 child propagation visits**. Their remaining wide clauses interact
+with satisfiable binary cores. Look for reusable binary graphs or conditional
+compatibility descriptions that avoid repeated graph construction and splitting;
+a satisfiable core alone cannot decide the full source. The current negative
+rule is sufficient and source checked, without solving every such residual.
+
+**Second target:** graph discovery spends **28,131 visits**, versus 4,724 in
+acquisition. Cases 59/47/43 reach checked covers after 4,271/3,319/3,191 visits.
+Earlier admission or reuse of cover evidence is still credible. Historical cold
+replay remains about 13.5 seconds and dominates query time. Acquisition counters
+alone do not determine total runtime.
+
+Resume `experiments/results/cnf-binary-subset/checkpoint.json`: **27,368 native
+keys / thirteen extensions**, preserving all prior payloads. The optional native
+solver is `experiments.cnf_binary_subset.AccountedBinarySubsetSolver`; affine
+extensions retain the explicit `TerminalStore` reader. Eight shorter native
+alternatives remain in the trial archives; the union keeps the first proof for
+each root. Selecting cheaper native alternatives without replacing history is
+another reuse gap. This union grows 688,128 SQLite / 79,234 compressed bytes,
+including comparator history. No unrestricted-SAT resource bound follows.
+
+All **1,188 tests**, nineteen focused tests, 240 chronological query audits and
+twelve affine-publication counter audits pass. The 220-page manuscript builds
+with all 64 old proof blocks unchanged and a clean final log. All 553 prior
+sources, 7,439 artifacts and 104 manifests are unchanged. Full tests retain 44
+existing SQLite warnings; focused tests have none. Final source ledger: **560**.
+New manifest: **39 artifacts**. Next audit: **7,478 artifacts / 105 manifests**.
+
+## Previous checkpoint: recognize the expensive no-equation residuals
 
 [Resumable affine sessions](affine-session-reuse.md) now run on a newly excluded
 sixty-query stream. Three checked negatives replace 67 native nodes with three

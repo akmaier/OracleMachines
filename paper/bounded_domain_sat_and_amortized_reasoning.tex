@@ -7678,6 +7678,47 @@ earlier admission are concrete next investigations. Hidden affine encodings,
 large free dimension, complete projection onto leftover variables and
 extension-aware internal support scheduling remain separate open obligations.
 
+\paragraph{Refuting a mixed residual through its binary subset.}
+A further sufficient leaf rule uses the binary clauses even when wider clauses
+remain. Write a normalized residual as $F=B\land W$, where $B$ contains exactly
+its binary clauses. Opposing implication paths $x\leadsto\neg x$ and
+$\neg x\leadsto x$ in $B$ refute $F$. Each path edge keeps its clause index in
+$F$, so the existing native checker can validate the result without a new proof
+format. A satisfying assignment of $B$ alone gives no decision for $F$.
+The optional implementation leaves unit propagation and pure-binary sources to
+the preceding solver. It skips SCC construction when all-false or all-true
+satisfies $B$; otherwise a failed refutation attempt retains complete search.
+
+For $m$ clauses and $b$ binary clauses, width/sign recognition takes $O(m+b)$
+work, and the graph and paths occupy $O(b)$ temporary entries. SCC and path
+extraction take linear graph work, but the current implementation also sorts
+variable identifiers, giving an $O(b\log b)$ comparison-model construction bound.
+Integer encoding, full-source keys, checking and persistence remain charged.
+Across the search these costs are paid per tested residual, and the number of
+residuals can still be exponential. Existing canonical-key lookup reuses the
+resulting native proof. Shared binary graphs across distinct residuals are not
+yet maintained, and existing stored proofs are not replaced.
+
+On a fresh sixty-query stream, both policies return 40 SAT and 20 UNSAT with
+identical preceding discovery evidence. Eight refutation leaves remove sixteen
+native nodes from random three-CNF and six from graph colouring. Native additions
+fall from 281 to 259, payload from 363,736 to 347,343 bytes, and child propagation
+visits from 32,980 to 30,779. Both policies also add three affine certificates.
+The candidate pays 186 recognition calls, 6,823 width checks and 84 SCC calls;
+76 SCC calls are inconclusive. Trial SQLite falls by 16,384 bytes and compressed
+storage by 2,319 bytes, while diagnostic sidecars grow by about 5.1 KB.
+
+Mean query time falls from 0.43247 to 0.41775 seconds, but paired changes have
+opposite signs: $+0.02453$ and $-0.05397$ seconds. Mean complete-worker time rises
+from 27.67783 to 27.90523 seconds, about 0.82\%, with cold replay also varying.
+These observations establish a finite search/storage reduction, without a stable
+runtime advantage. The rule remains optional. All earlier native and extension
+payloads survive in a union of 27,368 native keys and thirteen extensions.
+Eight alternative native proofs remain in the trial archives; the union keeps
+the first proof for each key. Certificate choice, repeated binary-core work and
+compatibility with the remaining wide clauses are further reuse opportunities.
+This rule does not supply a uniformly efficient decomposition of arbitrary SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

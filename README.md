@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Refute mixed residuals through their binary subset](research/binary-subset-refutation.md).
+Eight checked leaves remove 22 native nodes and 16,393 payload bytes on a fresh
+sixty-query stream. Timing remains mixed, with mean complete-worker time up 0.82%,
+so this remains optional. Resume the preserved 27,368-native / thirteen-extension
+checkpoint in `experiments/results/cnf-binary-subset/`. The next discovery gap is
+compatibility between satisfiable binary cores and the remaining wide clauses.
+
 [Resume affine negatives on fresh queries](research/affine-session-reuse.md).
 On sixty newly excluded queries, combined additions fall 344 -> 280 certificates
 and mean query time 7.76%; complete worker time falls 0.45%. All prior payloads

@@ -3341,3 +3341,31 @@ model payloads remain in trial evidence. The independent truth audit enumerates
 A common 568-byte negative certificate acquired during ordinary neighbour
 preparation activates one core in each of two support banks; this is shared by
 all policies and must not be attributed to the new completion heuristic.
+
+## 2026-11-18: early completion reuses the live premise state
+
+The [inline completion policy](inline-completion.md) executes a prefix of the
+same eligible candidate sequence. If j probes are executed, residual sign
+recognition costs O(sum R_i), with R_i=0 for a conflict. A first success adds
+O(n+L) source-coordinate transport and raw-model verification. The current
+probe's canonical binding, forced assignment and residual are reused directly;
+there is no extra canonicalization, trace reconstruction or restriction for
+completion. An early model avoids the remaining discovery suffix. Misses add
+work, and earlier positive checks can run before guards that previously skipped
+late completion, so this is not an all-input dominance bound.
+
+Extra live state is O(n+L) words plus one diagnostic record per completion
+attempt. Retained screen keys/traces may use O(j(L+n)) words; integer widths,
+full keys, native publication, cumulative archive state and replay are separate.
+In the matched stream, selection normalization falls 80,200 -> 31,510 literal
+occurrences and full-key output 300,907 -> 119,042 bytes. Diagnostic sidecars
+fall 11.16%, but native nodes remain 446 and SQLite bytes are unchanged.
+Mean query time falls 7.33%; complete workers instead rise about 0.162 seconds,
+with roughly 11.4 seconds spent in full cold replay. Neither these conditional
+bounds nor the finite measurements resolve arbitrary-SAT acquisition costs.
+
+Resume `experiments/results/cnf-inline-completion/checkpoint.json`: 24,922 native
+keys with all earlier payloads preserved. All 1,137 tests, 276 counter audits,
+independent reconstruction and the 213-page manuscript build pass; the existing
+64 proof blocks are unchanged. Posthoc mixed-model conditions on fresh graph
+cases 15/27/39/51 now offer four concrete next acquisition controls.

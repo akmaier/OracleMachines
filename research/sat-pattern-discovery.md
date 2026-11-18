@@ -5689,3 +5689,28 @@ All 514 earlier sources, 5,918 artifacts and 96 manifests remain unchanged.
 The paper builds at 212 pages with all 64 existing proof blocks unchanged;
 structural authority and original coverage remain unchanged. No new Lean theorem
 or unrestricted-SAT resource bound is claimed.
+
+## 2026-11-18: stop on a checked positive completion
+
+[Inline completion](inline-completion.md) brings uniform witness recognition
+into the existing probe loop. The canonical binding, forced values and residual
+are reused directly; a raw source/assumption model check precedes native
+publication. The candidate cap and filter remain unchanged. A positive model
+can replace a later guard, and saved evidence distinguishes an unvisited suffix
+from failed or filtered candidates. This is cheaper discovery, with unchanged
+solved coverage in the new sixty-query stream: thirteen model publications in
+both policies. Exhaustive small cases exercise guard preemption and coordinate
+transport. General SAT remains in the unresolved uniform-miss cell.
+
+Probes fall 190 -> 106 and total discovery/acquisition propagation
+171,670 -> 109,554. Query time and diagnostic storage improve, while complete
+workers rise slightly; native acquisition stays 446 nodes. Next, integrate
+source-checked mixed two-CNF models at the previous study's preserved prefixes,
+and investigate positive witnesses excluded by negative-probe filtering.
+Negative conditions still require sound parent recomposition.
+
+Resume `experiments/results/cnf-inline-completion/checkpoint.json`: 24,922 native
+keys with all earlier payloads preserved. All 1,137 tests, 276 counter audits,
+independent reconstruction and the 213-page manuscript build pass; the existing
+64 proof blocks are unchanged. Posthoc mixed-model conditions on fresh graph
+cases 15/27/39/51 now offer four concrete next acquisition controls.

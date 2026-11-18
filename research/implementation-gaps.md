@@ -9534,3 +9534,28 @@ All 514 earlier sources, 5,918 artifacts and 96 manifests remain unchanged.
 The paper builds at 212 pages with all 64 existing proof blocks unchanged;
 structural authority and original coverage remain unchanged. No new Lean theorem
 or unrestricted-SAT resource bound is claimed.
+
+## 2026-11-18: inline completion closes redundant discovery suffixes
+
+The new versioned selector `experiments/cnf_inline_completion.py` tests the
+fresh residual during discovery and stops at a verified target model. It
+avoids both later probes and late reconstruction of already computed bindings,
+forced values and residuals. The ranking, cap and binary filter are unchanged;
+negative guard and positive-child paths retain their certificate checks.
+An independent selector reconstruction checks the exact stopped prefix, and
+full raw-model verification prevents a bad propagation result from publishing
+an invalid answer. Four alternative fresh witnesses are retained without
+replacing historical payloads.
+
+On sixty new queries, 84 probes and 62,116 propagation visits disappear; native
+acquisition and coverage do not change. Diagnostic sidecars shrink 11.16%.
+Query time improves in both orders, but complete workers worsen in both,
+so end-to-end speedup remains unestablished. See [the detailed record](inline-completion.md).
+Mixed two-CNF acquisition, negative parent recomposition, opportunities outside
+the filter, and arbitrary-CNF resource guarantees remain open.
+
+Resume `experiments/results/cnf-inline-completion/checkpoint.json`: 24,922 native
+keys with all earlier payloads preserved. All 1,137 tests, 276 counter audits,
+independent reconstruction and the 213-page manuscript build pass; the existing
+64 proof blocks are unchanged. Posthoc mixed-model conditions on fresh graph
+cases 15/27/39/51 now offer four concrete next acquisition controls.

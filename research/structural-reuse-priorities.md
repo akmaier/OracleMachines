@@ -1,6 +1,6 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-17 after the user's shift toward pattern discovery and a valid
+Updated 2026-11-18 after the user's shift toward pattern discovery and a valid
 partition of the entire SAT problem. This is the working record for the hourly
 investigation. Start with the [discovery plan](sat-pattern-discovery.md), then
 consult [implementation history](implementation-gaps.md),
@@ -12,7 +12,59 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: mixed two-CNF conditions and earlier positive stopping
+## Current investigation: mixed residual acquisition after early positive stopping
+
+[Inline completion](inline-completion.md) now stops discovery at the first
+checked positive completion. It reuses the live propagation assignment,
+residual and canonical binding. On sixty new excluded queries, probes fall
+**190 -> 106**, discovery/acquisition propagation **171,670 -> 109,554** and
+gated-Horn propagation **72,205 -> 10,484**. Selection normalization falls
+80,200 -> 31,510 literal occurrences. Candidate ranking and budget are unchanged;
+unvisited candidates are explicitly outside the executed prefix.
+
+The thirteen model publications and 446 acquired native nodes are unchanged.
+Four valid alternative models change total native payload by only three bytes.
+Mean query time falls **0.45709 -> 0.42358 s** (both orders), and diagnostic
+sidecars fall **11.16%**. Complete workers instead rise **23.24245 -> 23.40440 s**
+(both orders). Cold replay dominates at about 11.4 s. Native database size and
+process RSS do not materially improve. Keep this measured discovery saving
+separate from total runtime, native-state growth and broader SAT coverage.
+
+**Next concrete coverage target:** integrate a mixed two-CNF model using the
+live conditioned residual. Posthoc analysis of this run checks **thirteen
+positive conditions on fresh cases 15/27/39/51**. Their current parent
+acquisition totals **14 nodes / 6,163 bytes**. Four direct models could avoid
+part of that work, but discovery, SCC solving, transport and verification still
+need a timed comparison. The same audit checks fifteen negative conditions on
+fresh cases 43/47/55/59, whose parents acquire **54 nodes / 75,511 bytes**.
+Negative parent recomposition remains open. These are this run's case IDs;
+retain the previous study's case 39 and 43/51/55/59 as separate fixed controls.
+
+**Largest unresolved fresh acquisition:** random three-CNF and coupled parity
+still consume **329 acquisition nodes / 56,622 propagation visits**. The negative binary filter offers
+no premise probes there. Investigate positive discovery outside that filter
+and shared conditional structure, with explicit misses and complete cost.
+Graph acquisition still costs **11,452 propagation visits**. The inline policy
+performs 106 checks including 93 misses; broader recognition must earn its cost.
+General-SAT interaction, compact closure and uniform polynomial bounds remain
+open. Incremental replay could address the largest complete-worker cost, but
+must retain the independent full inherited audit as its comparator.
+
+All **1,137 tests**, 24 focused tests, 276 independent counter audits and
+full reconstruction pass. Resume `experiments/results/cnf-inline-completion/checkpoint.json`:
+**24,922 native keys**, preserving all 24,444 prior payloads, with 216 new
+composed records alongside 3,797 inherited records, 2,957 ordinary decisions
+and six projections. The union uses 78,471,168 database bytes / 5,788,630
+compressed bytes. Alternate certificates for eight roots remain in fifteen
+evidence occurrences. Ready/pending banks remain 132/38, 141/66, 87/89 and
+87/116; no frontier activation is attributed to this change. Original structural
+coverage stays 17/24 and supplemental positive coverage 24/24. All 519 prior
+sources, 6,073 artifacts and 97 manifests remain unchanged. The manuscript
+builds at 213 pages with all 64 existing proof blocks unchanged.
+
+New manifest: **155 artifacts**. Next preservation audit: **6,228 artifacts / 98 manifests**. Final source ledger: **524**.
+
+## Previous investigation: mixed two-CNF conditions and earlier positive stopping
 
 [Uniform conditioned completion](uniform-premise.md) now recognizes exact
 all-false/all-true residual models after a checked saved unit trace. This covers

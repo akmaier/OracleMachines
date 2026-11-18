@@ -7222,6 +7222,67 @@ parent-level recomposition: a negative condition alone is insufficient. These
 SCC routes have not been integrated into timed acquisition. The measured
 successes, remaining misses and alternate witnesses are all preserved.
 
+\paragraph{Stopping discovery at a checked positive completion.}
+The next optional policy moves the same witness test into the premise loop.
+After each nonconflicting probe, it reuses the freshly computed canonical
+binding, forced assignment and residual. A successful uniform completion is
+transported to source coordinates and checked against the entire raw target
+and assumption; native model publication independently verifies the target
+again. The candidate ranking, cap and binary-incidence filter are unchanged.
+Only the prefix through the first checked model or negative guard is executed.
+Unvisited candidates are not counted as failed probes or filter skips. Earlier
+positive stopping can preempt a later guard or a different positive-terminal
+model, so valid native witnesses need not coincide. Prior persistent payloads
+are preserved, with alternative witnesses retained in the evidence.
+
+For an executed prefix of $j$ probes, let $R_i$ be the nonconflicting residual
+length, or zero for a conflict. The new sign tests cost $O(\sum_i R_i)$ expected dictionary operations.
+A first success adds $O(n+L)$ transport and raw-model checking. It avoids the
+remaining probes of the old candidate prefix and the late reconstruction of
+formula bindings, unit reasons and residuals. The extra live state is
+$O(n+L)$ words, with one diagnostic descriptor per attempted completion;
+already retained screen keys and traces can occupy $O(j(L+n))$ words.
+Canonicalization, integer bit lengths, native checks and persistence remain
+separate charges. Failed checks add work, including prefixes preceding a guard
+that would previously have prevented late completion entirely. Consequently,
+this transformation has no all-input runtime dominance guarantee. Its full
+source-model check supplies correctness independently of trust in a fresh
+propagation trace; saved traces are also reconstructed after timing.
+
+A new sixty-query stream, excluding inherited query roots, compares native
+baseline, late uniform completion and inline completion in two opposite serial
+orders. All modes answer 42 SAT and 18 UNSAT queries. Both discovery policies
+publish thirteen models, including all twelve gated-Horn targets. Actual
+premise probes fall from 190 to 106, and discovery/acquisition propagation
+falls from 171,670 to 109,554 visits. Gated-Horn discovery alone falls from
+72,205 to 10,484 visits. Selection normalization falls from 80,200 to 31,510
+literal occurrences and serialized keys from 300,907 to 119,042 bytes.
+The inline checks scan 3,469 clauses and 7,423 residual literals, accept thirteen
+models and retain 93 misses. Accepted model payloads contain 210 variables and
+3,259 raw target/assumption literals. Native acquisition stays at 446 nodes;
+payload changes from 556,237 to 556,240 bytes as four alternative valid
+models change the Boolean serialization by three bytes overall. This is a discovery saving, with unchanged
+solved coverage on this stream.
+
+Mean query time falls from 0.45709 to 0.42358 seconds, or 7.33\%, with both
+paired differences negative. Diagnostic sidecars fall about 11.16\%, from
+1.973 to 1.753 MB. Complete-worker time instead rises from 23.24245 to
+23.40440 seconds, with both paired differences positive; full cold replay
+alone takes about 11.4 seconds. Trial database size is unchanged and the mean
+process-memory difference is negligible. Native baseline still has cheaper
+query time at 0.41409 seconds. These measurements support reduced discovery
+work and diagnostic storage on the tested inputs, without an end-to-end or
+arbitrary-CNF scaling claim. Random three-CNF and coupled parity still account
+for 56,622 acquisition propagation visits; the binary filter offers no probes
+there. Mixed two-CNF model acquisition, negative parent recomposition and
+positive discovery beyond that filter remain open. A posthoc audit of the new
+stream checks thirteen mixed two-CNF model conditions on four graph instances,
+whose current acquisition totals fourteen nodes and 6,163 bytes. It also checks
+fifteen negative conditions on four other instances, whose parents require
+54 nodes and 75,511 bytes. These are source-checked model and implication-path
+opportunities; SCC acquisition and negative parent recomposition have not yet
+been integrated into the timed policy.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

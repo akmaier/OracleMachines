@@ -28,6 +28,16 @@ classes.
 
 ## Paper
 
+[Stop discovery when a checked model is already available](research/inline-completion.md).
+Inline completion removes 84 of 190 probes on sixty fresh queries. Propagation
+falls 36.18%, query time 7.33% and diagnostic sidecars 11.16%; native acquisition
+is unchanged, and complete-worker time increases slightly. The next targets
+are mixed conditioned models and positive discovery beyond the negative binary
+filter. Evidence is in `experiments/results/cnf-inline-completion/`.
+All 1,137 tests and independent replay pass. Resume its `checkpoint.json`:
+24,922 native keys preserve all previous payloads; the 213-page manuscript
+builds with every existing proof block unchanged.
+
 [Complete conditioned residuals with checked uniform assignments](research/uniform-premise.md).
 Nine additional fresh targets avoid search; native additions fall 452 -> 434
 nodes and 535,908 -> 521,248 bytes. Diagnostic sidecars grow 2.83%, and query

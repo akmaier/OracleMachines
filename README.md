@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Reuse binary-core discovery](research/binary-core-discovery-reuse.md).
+Exact reuse avoids 22 repeated graph constructions and cuts acquisition SCC work
+44.53% on the same pilot. It retains 34 entries (11.9 KB serialized); persistent
+cold validation makes total discovery work higher. Timings remain inconclusive.
+All proof payloads are unchanged. Next: reduce child solving by substituting
+multiple disjoint equivalence blocks.
+
 [Compact equivalence certificates](research/compact-equivalence-certificates.md).
 Exact source-key parsing and checked substitution remove duplicated formulas,
 shrinking equivalence storage 60.80%. Combined certificate payload is now 6.17%

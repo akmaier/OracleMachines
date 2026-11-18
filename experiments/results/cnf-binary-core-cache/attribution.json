@@ -1,0 +1,59 @@
+{
+  "equal_acquisition": {
+    "chronological_acquisitions": 136
+  },
+  "limits": [
+    "Same 68 inputs; all proof payloads and source decisions unchanged. No new source coverage.",
+    "Only identical binary clauses in identical coordinates share entries; discovery misses are not UNSAT answers.",
+    "Persisted outcomes are recomputed once on first use; cold replay includes this cost.",
+    "Complete-worker timings include per-query metadata scans and cache serialization for the audit; not just the public solve API."
+  ],
+  "pairs": [
+    {
+      "cold_seconds": -0.01767587522044778,
+      "complete_worker_seconds": -0.03855391684919596,
+      "mode": "memory",
+      "query_seconds": -0.019487328361719847,
+      "repeat": 0
+    },
+    {
+      "cold_seconds": -0.0108537501655519,
+      "complete_worker_seconds": -0.0009092078544199467,
+      "mode": "persistent",
+      "query_seconds": 0.008597505744546652,
+      "repeat": 0
+    },
+    {
+      "cold_seconds": -9.729200974106789e-05,
+      "complete_worker_seconds": 0.010630916804075241,
+      "mode": "memory",
+      "query_seconds": 0.009740618057549,
+      "repeat": 1
+    },
+    {
+      "cold_seconds": 0.0015203747898340225,
+      "complete_worker_seconds": -0.002536333166062832,
+      "mode": "persistent",
+      "query_seconds": -0.007173087913542986,
+      "repeat": 1
+    }
+  ],
+  "prior_structural_opportunities": {
+    "path": "experiments/results/cnf-binary-equivalence/attribution.json",
+    "sha256": "43753830d391c0783c6e8ad5f95c5dbe14f458bb3174ff8557f88a7127251015"
+  },
+  "solve_seconds": {
+    "compact": [
+      0.3143834169022739,
+      0.30028583481907845
+    ],
+    "memory": [
+      0.29090996040031314,
+      0.30481337662786245
+    ],
+    "persistent": [
+      0.3183240811340511,
+      0.28902996331453323
+    ]
+  }
+}

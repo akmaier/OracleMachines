@@ -9910,3 +9910,37 @@ charged cache/cold costs. Multiple blocks and production integration remain open
 All 1,228 tests, 59 focused tests, 408 chronological audits, 68 exhaustive truths
 and full old/new replay pass. The union preserves 28,691 native, twenty-six affine
 and forty-two v1 records, adding forty-two v2 alternatives without replacing them.
+
+## 2026-11-18: exact binary-core discovery reuse
+
+[Binary-core discovery reuse](binary-core-discovery-reuse.md) implements the 22
+repeated-core opportunities on the unchanged 68-input pilot. Binary-local trees
+are translated to current source indices and checked before substitution; binary
+or coordinate edits miss the exact key. Null discovery outcomes are never SAT
+answers. Native and compact proof payloads match byte-for-byte.
+
+Acquisition graph/SCC work falls **44.53%**: constructed edges 4,276 -> 2,372 and
+SCC visits 8,552 -> 4,744. The 34 entries use **11,906 serialized / 25,887 Python
+object bytes**. Persistent mode adds 36,864 SQLite / 3,618 trial gzip bytes and
+recomputes every entry at cold validation. Acquisition plus cold discovery thus
+rises **10.94%** above the uncached control. Memory-mode complete timings have
+mixed signs; persistent total gains are only 0.00091 / 0.00254 seconds with mixed
+query timing. Keep both modes optional; this is no established production speedup.
+
+**Next:** multi-block substitution on the twelve diagnosed sources with a second
+disjoint block. Child solving still costs 51,326 propagation visits / 358 expansions.
+Price proof size and child acquisition before claiming broader gains. Sharing the
+other recognizers' graph construction remains a separate target: 8,344 subset
+edges, 6,772 cover edges and 171 subset SCC calls are unchanged.
+
+Resume `experiments/results/cnf-binary-core-cache/checkpoint.json`: all **28,691
+native / 26 affine / 42 v1 / 42 v2** records unchanged, plus 34 discovery entries.
+Old/new histories, 408 chronological queries and 68 exhaustive truths validate.
+All 591 prior sources / 7,683 artifacts / 110 manifests are preserved. No new
+coverage, Lean theorem or unrestricted-SAT resource bound follows.
+
+All **1,236 full / 67 focused tests** pass, with 44 pre-existing SQLite warnings
+in the full suite and none in the focused suite. The **223-page manuscript**
+builds cleanly and all **64 previous proof blocks** are unchanged. Final source
+ledger: **596**. New manifest: **39 artifacts**. Next preservation audit:
+**7,722 artifacts / 111 manifests**.

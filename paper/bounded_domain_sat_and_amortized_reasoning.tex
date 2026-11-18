@@ -7943,6 +7943,51 @@ its SCC facts requires checked transport to current source-clause indices and
 invalidation after binary edits. Such reuse is not yet implemented here, and
 no new coverage or uniform unrestricted-SAT bound follows from compact storage.
 
+\paragraph{Reusing discovery across wide-clause edits.}
+The next optional adapter keys discovery by the exact ordered binary subset in
+its current signed variable coordinates. It stores the original recognizer's
+selected block or null outcome, using binary-local clause references. Wide clauses
+only affect discovery eligibility, so their edits preserve the result when the
+binary core and coordinates stay fixed. The adapter translates references back
+to current source indices, and the existing checker verifies the trees before
+full-source substitution. Binary or coordinate changes miss the key. A null
+entry supplies no satisfiability conclusion; ordinary acquisition still runs.
+
+The relative binary-clause order, graph traversal and block selection are
+unchanged. Extraction therefore preserves the selected evidence up to its clause
+indices. Cold persistent lookup parses the exact key and recomputes the complete
+outcome once before accepting it, including null outcomes. This also preserves
+the original selection policy. Discovery entries are separate from SAT proof
+authorities; the existing native and equivalence readers remain valid.
+
+Six serial workers compare the compact control, memory-only cache and persistent
+cache on the same 68 inputs from empty archives. All native and compact proof
+payloads match, with 21 satisfiable and 47 unsatisfiable answers. Twenty-two hits
+reduce fresh graph constructions from 56 to 34, constructed edges from 4,276 to
+2,372 and SCC visits from 8,552 to 4,744, a 44.53\% acquisition reduction. All 45
+substitutions still run; 358 native expansions, 51,326 propagation visits and
+10,859 substitution/verification literal visits remain unchanged. Keying charges
+18,593 encoded bytes and 4,276 binary literal units; ninety evidence edges are
+translated. Source width scans and full-source checking are still required.
+
+The 34 discovery entries retain 11,906 key/value bytes and about 25,887 bytes of
+Python objects, excluding allocator and database overhead. Persistent trial
+storage grows by 36,864 SQLite and 3,618 compressed bytes. Cold cache validation
+adds another 2,372 constructed edges and 4,744 SCC visits. Acquisition plus this
+replay therefore costs 9,488 SCC visits, 10.94\% above the uncached control's
+8,552. Persisting the exact recognizer outcome currently skips no first-use SCC
+computation after restart; preserving it is distinct from saving that computation.
+
+Memory-cache complete-worker deltas are $-0.03855/+0.01063$ seconds. Persistent
+deltas are $-0.00091/-0.00254$ seconds, with opposite-signed query deltas. Cold
+control timing varies although memory mode has identical stored certificates.
+These runs establish reduced repeated acquisition work, but no reliable total-time
+or memory-scaling advantage. Cache storage grows with distinct exact cores; each
+query still pays extraction, key comparison, transport, substitution and checking.
+Cold exact-policy validation adds discovery again. Multi-block substitution and
+sharing graph work across recursive recognizers remain separate opportunities.
+No new source coverage or uniform unrestricted-SAT bound follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -7767,6 +7767,55 @@ leave a memory tradeoff and do not establish general runtime dominance. Partial
 binary backbones that do not cover a whole clause remain an opportunity for
 reuse, while empty or uninformative binary cores retain unrestricted search.
 
+\paragraph{Partial backbones and direct excluded-branch proofs.}
+An unresolved whole-clause cover can retain a path
+$\ell\leadsto\neg\ell$. This entails $\neg\ell$, so the full source is
+satisfiable exactly when its cofactor under $\ell=\mathrm{false}$ is satisfiable.
+The optional extension reuses those already discovered paths. Whole covers keep
+priority, and a given residual receives no additional reachability queries.
+The selected path is checked before the surviving cofactor is searched. A SAT
+result lifts to a full-source model without publishing the excluded branch.
+For an UNSAT survivor, retained binary reasons are transported into a unit trace
+for the excluded cofactor. No propagation search is repeated during this
+compilation. The existing native split/unit checker validates the negative parent.
+
+Two policies distinguish validity from value. The first-path policy uses the
+first retained implication. A frequency gate accepts it only if its variable has
+the largest literal frequency, breaking ties by smallest identifier. This is the
+ordinary splitter's variable rule, but it does not establish identical control
+flow: simplification, leaf recognition or decomposition may precede that split.
+The gate adds $O(L+v)$ ranking work when paths are available. A path of length $p$
+requires $O(p)$ checking/transport work, with full cofactor construction,
+normalization, storage and independent verification additional. At most $v$
+consecutive forced-variable steps can occur. Later unrestricted branching,
+stacked evidence and historical replay are not bounded by that observation.
+
+Six serial workers compare the three policies in opposite orders on sixty new
+queries. All return 42 SAT and 18 UNSAT, with identical preceding discovery.
+First selects eleven partial backbones and reduces child propagation visits
+from 29,379 to 27,699, but adds nine compiled children: actual native additions
+increase from 255 to 260. Frequency accepts only two candidates, producing one
+positive lift and one negative split, while rejecting twelve other residuals.
+Its native additions fall to 253, payload from 351,260 to 349,493 bytes, and child
+propagation to 28,982 visits. Ranking costs 1,607 literal visits. Seven whole
+covers and four affine extensions remain unchanged. The first-path storage
+regression is retained alongside the gated alternative.
+
+Frequency's mean query time falls from 0.33351 to 0.32338 seconds, or 3.04\%,
+with both orders improving. Complete-worker changes are $+0.38675$ and
+$-0.37551$ seconds, leaving its mean 0.02\% higher. Hence no end-to-end gain is
+established. Trial SQLite falls by 4,096 bytes, compressed storage by only sixty
+bytes, and sidecars grow about 1.3 KB. Mean peak RSS falls about 17.29 MB; these
+finite observations do not establish memory scaling. Both policies stay optional.
+
+A posthoc uncapped audit identifies a recognition gap: six ordinary split nodes
+already have binary-forced split variables omitted by cover-oriented candidate
+selection. A targeted query for the opposite of the binary model's value could
+recognize them, but its discovery and changed proof costs remain unmeasured.
+The same stored-node census contains 75 satisfiable mixed binary cores with no
+forced literals. Partial backbone reuse does not resolve these interactions or
+provide uniformly efficient expansion for unrestricted SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

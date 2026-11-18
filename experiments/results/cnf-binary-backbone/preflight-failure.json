@@ -1,0 +1,9 @@
+{
+  "cause": "The independent UNSAT component has higher-frequency variables, so the frequency gate correctly skipped this backbone. The fixture was wrongly expected to select it.",
+  "error": "KeyError: 'binary_backbone_negative_splits'",
+  "new_test_sha256": "8ffbffc3aac00b912911f56a9fa2183139fef2d892c31f003b179768e74646f3",
+  "old_test_sha256": "e838bf207c6295ca46f8bbc7b58443441e61623678a6aaeacc5552190dab97dc",
+  "production_started": false,
+  "resolution": "Exercise negative path compilation with the first-path policy here; frequency hit/miss and both-policy truth tests remain separate.",
+  "test": "test_negative_split_and_original_cold_reader_preserve_history"
+}

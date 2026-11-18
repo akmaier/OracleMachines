@@ -1,0 +1,100 @@
+from collections import Counter
+from itertools import combinations,product
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from unittest.mock import patch
+import copy,unittest
+from experiments.cnf_binary_backbone import BinaryBackboneSolver,FrequencyBinaryBackboneSolver,inspect_backbones,excluded_child
+from experiments.cnf_residual_dag import ResidualSolver,normalize,holds
+from experiments.cnf_cross_family import generate,truth_table
+
+
+def positive():return [[-1,2],[-1,-2],[-3,-4],[1,3,4]]
+def negative():return positive()+[list(c) for c in product((5,-5),(6,-6),(7,-7))]
+
+
+class BinaryBackboneTests(unittest.TestCase):
+    def test_path_compiles_without_propagation_or_search(self):
+        cnf,_=normalize(positive());_,cover,partials=inspect_backbones(cnf,Counter())
+        self.assertIsNone(cover);self.assertTrue(partials)
+        s=ResidualSolver();self.addCleanup(s.close)
+        with patch('experiments.cnf_residual_dag.propagate',side_effect=AssertionError('Repeated propagation')),patch.object(s,'_expand',side_effect=AssertionError('Search')):
+            key=excluded_child(s,cnf,partials[0])
+        self.assertFalse(s.checked[key]['answer']);self.assertEqual(s.checked[key]['proof']['kind'],'units')
+        self.assertEqual(s.counts['binary_backbone_compiled_children'],1)
+        with patch.object(s,'_store',side_effect=AssertionError('Repeated publication')):
+            self.assertEqual(excluded_child(s,cnf,partials[0]),key)
+
+    def test_positive_lift_avoids_excluded_publication(self):
+        for cls in (BinaryBackboneSolver,FrequencyBinaryBackboneSolver):
+            s=cls();self.addCleanup(s.close)
+            with patch('experiments.cnf_binary_backbone.excluded_child',side_effect=AssertionError('Unneeded negative branch')):
+                r=s.solve(positive())
+            self.assertTrue(r['answer']);self.assertEqual(r['metrics']['binary_backbone_positive_lifts'],1)
+            self.assertTrue(holds(positive(),r['model']))
+
+    def test_negative_split_and_original_cold_reader_preserve_history(self):
+        with TemporaryDirectory() as td:
+            path=Path(td)/'proofs';s=FrequencyBinaryBackboneSolver(path)
+            try:
+                s.solve([[999]]);before=dict(s.db.execute('SELECT id,payload FROM cnf_residual_v1'))
+                r=s.solve(negative());self.assertFalse(r['answer'])
+                self.assertEqual(r['metrics']['binary_backbone_negative_splits'],1)
+                final=dict(s.db.execute('SELECT id,payload FROM cnf_residual_v1'));self.assertTrue(before.items()<=final.items())
+            finally:s.close()
+            s=ResidualSolver(path)
+            try:
+                s.db.execute('PRAGMA query_only=ON')
+                with patch.object(s,'_expand',side_effect=AssertionError('Cold search')),patch.object(s,'_store',side_effect=AssertionError('Cold write')):
+                    self.assertFalse(s.solve(negative())['answer'])
+                self.assertEqual(final,dict(s.db.execute('SELECT id,payload FROM cnf_residual_v1')))
+            finally:s.close()
+
+    def test_corrupt_reasons_and_endpoint_are_rejected(self):
+        cnf,_=normalize(positive());_,_,partials=inspect_backbones(cnf,Counter());s=ResidualSolver();self.addCleanup(s.close)
+        bad=copy.deepcopy(partials[0]);bad['path']=bad['path'][:-1]
+        with self.assertRaises(ValueError):excluded_child(s,cnf,bad)
+        bad=copy.deepcopy(partials[0]);bad['path'][0][1]=next(i for i,c in enumerate(cnf) if len(c)>2)
+        with self.assertRaises(ValueError):excluded_child(s,cnf,bad)
+        self.assertEqual(s.archive_storage()[0],0)
+
+    def test_signed_lifts_and_negative_transport(self):
+        names={1:-31,2:10,3:-83,4:55,5:91,6:-66,7:29}
+        for raw in (positive(),negative()):
+            source=[[(1 if l>0 else -1)*names[abs(l)] for l in c] for c in reversed(raw)]
+            s=BinaryBackboneSolver();self.addCleanup(s.close);r=s.solve(source)
+            self.assertEqual(r['answer'],truth_table(source)['answer'])
+            if r['answer']:self.assertTrue(holds(source,r['model']))
+
+    def test_frequency_gate_and_disabled_leaves(self):
+        cnf,_=normalize(positive());_,_,partials=inspect_backbones(cnf,Counter())
+        s=FrequencyBinaryBackboneSolver();self.addCleanup(s.close)
+        self.assertEqual(s._choose_backbone(cnf,partials),partials[0])
+        source=cnf+tuple((3,i) for i in range(5,12))
+        self.assertIsNone(s._choose_backbone(source,partials));self.assertEqual(s.counts['binary_backbone_frequency_misses'],1)
+        s=BinaryBackboneSolver(leaves=False);self.addCleanup(s.close)
+        with patch('experiments.cnf_binary_backbone.inspect_backbones',side_effect=AssertionError('Disabled')):
+            self.assertFalse(s.solve(negative())['answer'])
+
+    def test_exhaustive_small_mixed_sources(self):
+        binary=[c for vs in combinations((1,2,3),2) for c in product(*[(v,-v) for v in vs])]
+        a=BinaryBackboneSolver();b=FrequencyBinaryBackboneSolver();self.addCleanup(a.close);self.addCleanup(b.close)
+        for mask in range(1<<len(binary)):
+            source=[c for i,c in enumerate(binary) if mask>>i&1]+[(1 if mask&1 else -1,2,-3)]
+            expected=any(holds(source,dict(zip((1,2,3),bits))) for bits in product((False,True),repeat=3))
+            self.assertEqual(a.solve(source)['answer'],expected);self.assertEqual(b.solve(source)['answer'],expected)
+
+    def test_cross_family_truth_and_known_reuse(self):
+        for family in ('random-three','coupled-parity','gated-horn','graph-colouring'):
+            for sample in range(4):
+                source=generate(family,12,sample,36)
+                for cls in (BinaryBackboneSolver,FrequencyBinaryBackboneSolver):
+                    s=cls()
+                    try:
+                        r=s.solve(source);self.assertEqual(r['answer'],truth_table(source)['answer'])
+                        with patch.object(s,'_expand',side_effect=AssertionError('Known source')):
+                            self.assertEqual(s.solve(source)['answer'],r['answer'])
+                    finally:s.close()
+
+
+if __name__=='__main__':unittest.main()

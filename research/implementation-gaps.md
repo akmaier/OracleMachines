@@ -9819,3 +9819,25 @@ branch after charging recognition, proof children and persistence. Graph discove
 and historical replay remain larger costs. All 240 chronological queries, twenty
 affine-publication counter records, 48 family truth tables and full cold history
 validate. No new Lean or unrestricted-SAT resource bound follows.
+
+
+## 2026-11-18: partial backbones with direct excluded-branch proofs
+
+[The new optional policies](binary-backbone-reuse.md) reuse successful implication
+paths from otherwise unresolved clause-cover searches. A surviving SAT cofactor
+lifts a model; an UNSAT cofactor combines with a directly transported unit proof
+of the excluded branch. The original native checker validates both outcomes.
+
+On sixty fresh queries, first adds five native nodes despite less propagation.
+The frequency gate saves two nodes / 1,767 bytes and improves query time 3.04%,
+with both orders improving. Complete-worker timing stays mixed and its mean rises
+0.02%. All earlier discovery evidence matches. The three-policy union preserves
+all old payloads and reaches 27,888 native keys / twenty-two extensions.
+
+The next target is selective recognition: six stored ordinary split nodes have
+forced split variables omitted by cover-oriented candidate selection. Test a
+bounded targeted implication query with full cost accounting. Seventy-five mixed
+binary cores in the stored-node census have no forced literals; this method alone
+cannot resolve them. Validation covers 360 chronological queries, 24 publication
+counter records, 48 family truths and full historical replay. No new Lean or
+unrestricted-SAT resource guarantee is claimed.

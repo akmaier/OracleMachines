@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Reuse partial binary backbones](research/binary-backbone-reuse.md).
+A checked implication path now supplies an excluded-branch proof without rerunning
+propagation. A frequency gate saves two native nodes on sixty fresh queries;
+query time improves 3.04%, while total-worker time is essentially unchanged.
+The first-path policy's storage regression is retained. Resume 27,888 native keys /
+twenty-two extensions in `experiments/results/cnf-binary-backbone/`.
+
 [Cover a wider clause with binary implications](research/binary-clause-cover.md).
 Three certified covers on a fresh sixty-query stream replace eight search
 expansions with six compiled children: a net saving of two stored nodes.

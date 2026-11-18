@@ -12,7 +12,53 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse partial binary backbones before splitting
+## Current investigation: target the missed split-variable backbones
+
+[Partial backbone reuse](binary-backbone-reuse.md) now transports a retained
+implication path directly into an excluded-branch unit proof, without fresh
+propagation. Only the surviving cofactor is searched; a SAT lift publishes no
+excluded child. Whole-clause covers retain priority.
+
+The first-path policy saves propagation but adds **five native nodes** on a fresh
+sixty-query stream. A frequency gate instead saves **two nodes / 1,767 bytes**,
+with a 3.04% mean query reduction in both orders. Complete-worker timing is mixed
+and its mean is 0.02% higher; keep both policies optional. Compiled children,
+ranking and proof transport are charged. The earlier storage regression and a
+corrected preflight fixture are preserved.
+
+**Next highest-coverage target:** one targeted implication query for the selected
+split variable. Cover-oriented candidates miss a forced default variable in
+fourteen stored sources. **Six are ordinary split nodes**, with matching recorded
+variables: cases **20, 28, 32, 44 and two residuals of 52**. Exact hashes and forced
+literals are in the new `attribution.json`. The other eight include directly stored
+models/subsumption; fourteen is not a count of avoidable expansions. Use the binary
+model to select the opposite premise, charge the extra root search, and compare
+with the unchanged cover budget. This opportunity is diagnostic, not implemented.
+
+New cases **32/44/56** still pay **5,494/4,114/3,894 child propagation visits**.
+The stored-node census also contains 75 satisfiable mixed binary cores with no
+forced literal, plus twenty nodes with no binary clauses. Those interactions,
+larger sizes and less explicit encodings remain broader coverage gaps.
+
+**Second cost target:** graph discovery spends **27,451 visits**, versus 2,606 in
+acquisition. Cases 47/59/55 reach covers after 4,415/4,415/3,335 visits. Full
+historical replay still costs 13.3 s and dominates fresh query time.
+
+Resume `experiments/results/cnf-binary-backbone/checkpoint.json`: **27,888 native
+keys / twenty-two extensions**, preserving all earlier payloads. It lists both
+optional backbone solvers; affine negatives retain `TerminalStore`. Eight roots
+have alternative native evidence in the trials; the union preserves first
+payloads and all three policies. Growth: 712,704 SQLite / 78,123 compressed bytes.
+No default solver or unrestricted-SAT resource bound changes.
+
+All **1,204 tests**, 35 focused tests, 360 chronological query audits and 24
+affine-publication counter audits pass. The 221-page manuscript builds with all
+64 old proof blocks unchanged and a clean final log. All 567 prior sources,
+7,517 artifacts and 106 manifests are unchanged. Full tests retain 44 existing
+SQLite warnings; focused tests have none. Final source ledger: **574**.
+New manifest: **51 artifacts**. Next audit: **7,568 artifacts / 107 manifests**.
+
+## Previous checkpoint: reuse partial binary backbones before splitting
 
 [Binary implication covers](binary-clause-cover.md) now recognize a wider source
 clause whose every literal is forced false by a satisfiable binary core. Source

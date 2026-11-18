@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Batch verified publications](research/bounded-publication-batches.md).
+On the same 104 inputs, grouping checked writes reduces commits from 605 to 104
+and mean query time 35.55%, with identical answers and proof storage. Failed
+queries retain committed prefixes; recovery and cache invalidation are tested.
+Pending state and journal size grow. Next: reduce repeated residual normalization.
+
 [Recognize canonical certificates directly](research/direct-canonical-verification.md).
 Checking the stored normal form avoids 552 sorting/renaming calls while preserving
 every proof rule. On the same 104 inputs, mean total runtime falls 6.63% and cold

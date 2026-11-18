@@ -1,0 +1,69 @@
+{
+  "limits": [
+    "Both batch arms preserve every non-batch work counter and exact certificate. Successful queries flush and every externally visible committed prefix is independently verified.",
+    "Same 104 replayed small inputs; no new coverage or representative general-SAT speedup.",
+    "Pending-record/payload caps exclude SQLite journal/page cache and the existing checked proof archive. One oversized record is committed alone; this workload has none."
+  ],
+  "pairs": [
+    {
+      "cold_seconds": -0.058710833080112934,
+      "complete_worker_seconds": -0.05600658291950822,
+      "mode": "batch1",
+      "query_seconds": 0.00340904388576746,
+      "repeat": 0,
+      "warm_seconds": 0.00029629049822688103
+    },
+    {
+      "cold_seconds": -0.05756458407267928,
+      "complete_worker_seconds": -0.2644499992020428,
+      "mode": "batch32",
+      "query_seconds": -0.20882108435034752,
+      "repeat": 0,
+      "warm_seconds": 0.00027949875220656395
+    },
+    {
+      "cold_seconds": -0.0007814168930053711,
+      "complete_worker_seconds": 0.006151165813207626,
+      "mode": "batch1",
+      "query_seconds": 0.007594290189445019,
+      "repeat": 1,
+      "warm_seconds": -0.0002287500537931919
+    },
+    {
+      "cold_seconds": 0.0015732920728623867,
+      "complete_worker_seconds": -0.12054520938545465,
+      "mode": "batch32",
+      "query_seconds": -0.12221133476123214,
+      "repeat": 1,
+      "warm_seconds": 0.000424292404204607
+    }
+  ],
+  "solve_seconds": {
+    "batch1": [
+      0.43801645981147885,
+      0.36398496478796005
+    ],
+    "batch32": [
+      0.22786124981939793,
+      0.23447074741125107
+    ],
+    "linear": [
+      0.43581766495481133,
+      0.35785120306536555
+    ]
+  },
+  "warm_cache_hits": {
+    "batch1": [
+      0,
+      0
+    ],
+    "batch32": [
+      0,
+      0
+    ],
+    "linear": [
+      0,
+      0
+    ]
+  }
+}

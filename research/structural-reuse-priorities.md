@@ -12,7 +12,56 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: batch verified publication without losing durable results
+## Current investigation: reuse repeated residual construction and normalization
+
+[Bounded publication batches](bounded-publication-batches.md) group the unchanged
+verified INSERT stream, flushing before a successful answer. Failed queries roll
+back the pending suffix and evict its checked aliases; committed prefixes remain.
+Uncertain rollback poisons the instance until reopening. Exclusive ownership is
+required. The optional policy changes partial-query visibility, with no proof
+format or journal/synchronous-setting change.
+
+On the same 104 sources, **605 commits fall to 104**. Mean query time falls
+**35.55%** versus direct verification and **36.30%** versus a one-record adapter,
+with gains in both orders. Observed complete reductions are 26.87% / 24.24%, but
+an unusually slow first control cold sample must not be attributed to batching.
+Every non-batch counter, answer, model, certificate and storage byte count matches.
+The timed 32-record / 256-KiB policy peaks at **27 records / 39,747 payload bytes /
+17,086 charged pending-key object bytes**; neither limit is reached here. Separate
+tests exercise cuts and oversized records. Journal sampling rises **49,760 ->
+103,112 bytes**; process RSS also rises. These limits do not cap SQLite journals,
+whole-solver RAM or lock duration. Completed results remain durable; unfinished
+batches may be lost on failure.
+
+**Next highest-value target: repeated residual construction and canonicalization
+across acquisition and proof checking.** The posthoc profile leaves **1,163
+normalizer calls / 0.07401 exclusive / 0.18230 inclusive seconds** as the largest
+exclusive site,
+while 104 commits take 0.03340 seconds. Restriction still costs 780 calls / 0.06973
+inclusive seconds. Count exact raw repeats, including noncompact name maps, at
+those call sites before selecting transport/reuse. Keep source/conditioning
+identity, variable maps, full keys and independent proof checks bound. The earlier
+already-normalized-output census found only 45 visitation opportunities; do not
+claim additional savings yet or reinstate the regressing general cache.
+
+Resume `experiments/results/cnf-publication-batches/checkpoint.json`. The parent
+archive and decisions are referenced unchanged: **28,886 native / 26 affine /
+42 v1 / 53 v2 / 22 v3 / 34 discovery records**, all **5,650 composed / 444 pilot
+results**. Validation covers 624 chronological queries, 416 alternative/control
+comparisons, 104 exhaustive truths, 144 choices and 84 known hits. An independent
+replay certifies every externally visible archive after **104 batch commits**.
+Full old histories/readers and all 28,886 canonical fixed points remain valid.
+All **619 prior sources / 7,904 artifacts / 115 manifests** remain unchanged.
+All **1,283 full / 114 focused tests** pass, including process-exit recovery and
+rollback tests; 43 pre-existing-site SQLite warnings remain in the full suite,
+none in focused tests. The **227-page manuscript** builds with all **64 prior
+proof blocks** unchanged. No new structural coverage, Lean theorem or unrestricted
+SAT resource bound follows.
+
+Final executable source ledger: **625**. The new manifest binds **43 artifacts**;
+next preservation audit: **7,947 artifacts / 116 manifests**.
+
+## Previous checkpoint: batch verified publication without losing durable results
 
 [Direct canonical verification](direct-canonical-verification.md) now recognizes
 stored normalizer fixed points without sorting/renaming, then passes the checked

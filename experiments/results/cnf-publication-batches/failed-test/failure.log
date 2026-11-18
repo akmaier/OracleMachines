@@ -1,0 +1,43 @@
+..F..F..F...
+======================================================================
+FAIL: test_duplicate_accounting_and_warm_queries (solver.test_cnf_publication_batches.PublicationBatchTests.test_duplicate_accounting_and_warm_queries)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_publication_batches.py", line 134, in test_duplicate_accounting_and_warm_queries
+    self.assertEqual(s.archive_storage(),(1,sum(len(k)+len(v) for k,v in table(s,NATIVE).items())))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: (2, 170) != (1, 170)
+
+First differing element 0:
+2
+1
+
+- (2, 170)
+?  ^
+
++ (1, 170)
+?  ^
+
+
+======================================================================
+FAIL: test_failed_suffix_invalidates_only_pending_native_checks (solver.test_cnf_publication_batches.PublicationBatchTests.test_failed_suffix_invalidates_only_pending_native_checks)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_publication_batches.py", line 76, in test_failed_suffix_invalidates_only_pending_native_checks
+    self.assertEqual(len(table(s,NATIVE)),3);self.assertEqual(len(s.checked),3)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 4 != 3
+
+======================================================================
+FAIL: test_process_death_recovers_committed_prefix (solver.test_cnf_publication_batches.PublicationBatchTests.test_process_death_recovers_committed_prefix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_publication_batches.py", line 172, in test_process_death_recovers_committed_prefix
+    self.assertEqual(len(table(s,NATIVE)),expected);self.assertIn(saved['root'],table(s,NATIVE))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 1
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.160s
+
+FAILED (failures=3)

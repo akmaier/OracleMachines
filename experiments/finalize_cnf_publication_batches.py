@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+"""Seal verified publication batching, rollback tests and preserved dependency histories."""
+from pathlib import Path
+from collections import Counter
+import re,subprocess,sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+from experiments import compare_cnf_publication_batches as study
+base=study.base
+POSTHOC=('experiments/validate_cnf_publication_batches.py','experiments/profile_cnf_publication_batches.py','experiments/finalize_cnf_publication_batches.py')
+
+
+def finalize(out):
+    p=base.load(out/'protocol.json');parent=study.bound(p['parent']);v=base.load(out/'validation.json')
+    for ledger in (parent['source_fingerprints'],p['source_fingerprints']):
+        for f,h in ledger.items():assert base.sha(f)==h,f
+    assert len(parent['source_fingerprints'])==619
+    for path,entry in v['parent_manifests'].items():
+        assert base.sha(path)==entry['sha256'];artifacts=base.load(path)['artifacts'];assert len(artifacts)==entry['artifacts_checked']
+        for f,h in artifacts.items():assert base.sha(f)==h,f
+    assert len(v['parent_manifests'])==115 and v['prior_artifacts_unchanged']==7904
+    sources=dict(p['source_fingerprints']);sources.update({f:base.sha(f) for f in POSTHOC});assert len(sources)==625
+    checkpoint=base.load(out/'checkpoint.json');assert checkpoint['reference_union']==parent['reference_union']
+    checkpoint['source_fingerprints']=sources;base.write(out/'checkpoint.json',checkpoint)
+    v['source_fingerprints']=sources;v['checkpoint']=study.binding(out/'checkpoint.json');base.write(out/'validation.json',v)
+    assert sorted(v['preserved_tables'].values())==[22,26,34,42,53,28886]
+    assert v['reference_union_unchanged'] and v['new_native']==v['new_extensions']==0
+    assert (v['query_audits'],v['truth_tables'],v['choice_audits'],v['known_hit_audits'],v['exact_query_comparisons'])==(624,104,144,84,416)
+    assert (v['old_composed_records'],v['old_pilot_records'])==(5650,444)
+    assert (v['canonical_fixedpoints'],v['representation_mutations'])==(28886,4961)
+    assert len(v['committed_prefix_audits'])==104
+    summaries=base.load(out/'report.json')['summary'];a=summaries['linear'];b=summaries['batch32'];single=summaries['batch1']
+    for arm in (b,single):
+        for k in ('native_digest','extension_digest','database_bytes','compressed_bytes','native_payload','extension_payload','cache_digest'):
+            assert arm[k]==a[k]
+        assert arm['sqlite_settings']==a['sqlite_settings']==dict(journal_mode='delete',synchronous=2)
+        assert arm['counters']['batch_committed_records']==605 and arm['counters']['batch_committed_payload']==651784
+        assert arm['batch_peak_records']<=arm['batch_rows'] and arm['batch_peak_payload']<=arm['batch_payload_limit']
+    assert single['counters']['batch_commits']==605 and b['counters']['batch_commits']==104
+    assert (b['batch_peak_records'],b['batch_peak_payload'],b['batch_peak_python_bytes'])==(27,39747,17086)
+    attribution=base.load(out/'attribution.json')
+    assert all(p[k]<0 for p in attribution['pairs'] if p['mode']=='batch32' for k in ('query_seconds','complete_worker_seconds'))
+    profile=base.load(out/'profile.json')
+    assert all(p['outputs_and_counters_identical'] for p in profile['profiles'].values())
+    assert profile['profile_source']['sha256']==sources['experiments/profile_cnf_publication_batches.py']
+    assert profile['journal_observations']==dict(batch1=dict(commits=605,inserts=605,peak_journal_bytes=49760),batch32=dict(commits=104,inserts=605,peak_journal_bytes=103112))
+    paper='paper/bounded_domain_sat_and_amortized_reasoning.tex';commit=subprocess.check_output(['git','rev-parse','7c1cbbb'],text=True).strip()
+    old=subprocess.check_output(['git','show',commit+':'+paper],text=True);pattern=r'\\begin\{proof\}.*?\\end\{proof\}'
+    proofs=re.findall(pattern,old,re.S);assert len(proofs)==64 and proofs==re.findall(pattern,Path(paper).read_text(),re.S)
+    logs={name:(out/name).read_text() for name in ('full-tests.log','focused-tests.log','latex-final.log')}
+    assert re.search(r'Ran 1283 tests in .*\n\nOK',logs['full-tests.log'])
+    assert re.search(r'Ran 114 tests in .*\n\nOK',logs['focused-tests.log'])
+    warnings={k:len(re.findall('ResourceWarning: unclosed database',x)) for k,x in logs.items() if k!='latex-final.log'}
+    assert warnings=={'full-tests.log':43,'focused-tests.log':0}
+    def warning_sites(text):
+        return Counter(re.sub(r'0x[0-9a-f]+','ADDR',line.lstrip('.')) for line in text.splitlines() if 'ResourceWarning: unclosed database' in line)
+    current_warning_sites=warning_sites(logs['full-tests.log'])
+    parent_warning_sites=warning_sites((study.PARENT/'full-tests.log').read_text())
+    assert current_warning_sites<=parent_warning_sites
+
+    latex=logs['latex-final.log'];pages=int(re.search(r'\((\d+) pages,',latex)[1]);assert not re.search(r'Warning|Overfull|Underfull|^!',latex,re.M)
+    checks=dict(passed=True,baseline_commit=commit,prior_sources=619,final_sources=len(sources),prior_artifacts=7904,prior_manifests=115,
+        source_fingerprints=sources,full_tests=1283,focused_tests=114,warnings=warnings,warning_sites=dict(current_warning_sites),warning_sites_within_parent=True,proof_blocks_unchanged=64,manuscript_pages=pages,paper_sha256=base.sha(paper),
+        limitations=['All 104 inputs replay the preceding study; two run orders do not establish representative arbitrary-SAT performance.',
+            'The first control cold sample is unusually slow; identical cold readers/archives provide no batching-related cold speedup.',
+            'Partial-query visibility changes: unfinished batches may roll back, while completed queries and committed prefixes persist.',
+            'Record/payload caps exclude SQLite journal/page cache, elapsed lock time, allocator overhead and whole-solver memory. Oversized records commit singly.',
+            'Exclusive solver ownership; uncertain rollback requires reopening. Process-exit tests do not test power loss or concurrent writers.',
+            'No new persisted mathematical answers, production-default change, Lean theorem or unrestricted-SAT resource bound.'])
+    base.write(out/'checks.json',checks)
+    files=sorted(f for f in out.rglob('*') if f.is_file() and f.name!='manifest.json')
+    base.write(out/'manifest.json',dict(artifacts={str(f):base.sha(f) for f in files}))
+    print(base.encode(dict(passed=True,artifacts=len(files),next_artifacts=7904+len(files),next_manifests=116,final_sources=len(sources),pages=pages)),flush=True)
+
+
+if __name__=='__main__':finalize(Path(sys.argv[1]))

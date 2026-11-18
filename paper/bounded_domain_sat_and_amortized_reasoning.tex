@@ -8162,6 +8162,52 @@ rollback and in-memory invalidation treated explicitly. Neither batching nor
 further result transport is implemented by this experiment. There is no new
 structural coverage, Lean theorem or uniform polynomial expansion bound.
 
+\paragraph{Bounded publication of verified dependency prefixes.}
+An optional connection adapter now groups the original verified INSERT stream
+without changing search, certificate contents or proof checks. It flushes before
+exceeding an encoded key/payload limit, on reaching the record limit, and before
+returning a successful answer. An oversized record commits alone. Its contract
+requires exclusive ownership of an idle connection; journal and synchronous
+settings remain unchanged. Failure rolls back the pending suffix and evicts its
+checked native/extension aliases. Committed prefixes and pure discovery results
+remain available. An uncertain rollback disables the instance until reopening.
+
+Dependency closure follows by induction over committed batches. Each new record
+is checked against earlier committed records or earlier verified records in its
+transaction. Atomic publication of that prefix preserves closure; rollback leaves
+the preceding closed archive. Successful answers require a final committed
+dependency chain. This changes partial-query visibility: unfinished work in the
+current batch may be lost on failure. It does not make every intermediate result
+immediately durable or formally verify SQLite's recovery implementation.
+
+Six serial workers compare direct verification, a one-record adapter and a
+32-record/256-KiB adapter on the same 104 inputs in opposite orders. The larger
+batch reduces commits 605 to 104. Mean query time falls 0.46559 to 0.30007 seconds
+(35.55\%); both paired query deltas improve. Against the one-record adapter,
+query time falls 36.30\%, while that adapter alone raises query time 1.18\%.
+Observed complete time falls 26.87\% against direct verification and 24.24\%
+against the one-record adapter. The first direct-control cold replay is unusually
+slow (0.14304 versus 0.08365 seconds in the other order); the reader and archives
+are identical, so that variation must not be attributed to batching.
+
+All non-batching counters, answers, models, proof payloads, 505 native expansions
+and 1,179,648 SQLite bytes remain unchanged. Peak pending state is 27 records /
+39,747 encoded bytes, with 17,086 bytes charged to pending-key containers and
+referents. Neither configured limit is reached in this timed workload; here the
+policy commits once per query. Separate tests exercise earlier cuts and oversized
+records. An untimed journal census observes a peak increase from 49,760 to
+103,112 bytes. Payload limits are not journal, whole-process-memory or lock-duration
+bounds, and measured RSS does not decrease.
+
+An additional replay verifies every externally visible archive after all 104
+commits. Failure tests cover rollback, checked-state invalidation, failure after
+commit and abrupt process exit followed by writable recovery and independent
+read-only proof checking. Power loss and concurrent writers are not evaluated.
+The remaining profile places 1,163 ordinary normalization calls ahead of other
+exclusive costs. Exact residual reuse across acquisition and proof checking is
+the next investigation; the experiment adds no structural coverage, Lean theorem
+or uniform polynomial expansion bound.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

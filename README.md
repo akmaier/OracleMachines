@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Measure larger mixtures and recover a stopped query](research/larger-mixture-expansion-costs.md).
+On 108 new-stream queries, both normalization alternatives regress; random 3-CNF
+and fresh work after small edits dominate. A later checked model closes the last
+unresolved source with one certificate and zero expansions. Initial budget stops
+remain recorded. Next: bounded witness retrieval without generator hints.
+
 [Preserve clause order during normalization](research/ordered-residual-normalization.md).
 The optional exact path avoids 96,099 sort calls on the same 104 inputs, reducing
 mean query time 2.17% against batching without a retained normalization cache.

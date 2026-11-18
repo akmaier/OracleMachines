@@ -1,6 +1,6 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-18 after the user's shift toward pattern discovery and a valid
+Updated 2026-11-19 after the user's shift toward pattern discovery and a valid
 partition of the entire SAT problem. This is the working record for the hourly
 investigation. Start with the [discovery plan](sat-pattern-discovery.md), then
 consult [implementation history](implementation-gaps.md),
@@ -12,7 +12,57 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: broaden the cost and discovery evidence
+## Current investigation: retrieve reusable witnesses across clause edits
+
+[The larger-mixture study](larger-mixture-expansion-costs.md) freezes **108 queries /
+72 new canonical roots**, with scales 24/48/72, six designs, edits and exact-root
+repeats. Plain batching now wins mean query time: the memo regresses **1.49%** and
+ordered normalization **1.09%**, in both orders. Keep all timings and alternatives;
+the earlier small-catalog improvements did not generalize to this designed stream.
+
+All variants initially return **70 SAT / 36 UNSAT / 2 unresolved attempts** under
+256 native expansions per attempt. Budget stops are not UNSAT. Both preserve
+256 committed records, rolling back 20/13 pending records. A later repeat solves
+one stopped base using the accumulated archive. **Random 3-CNF consumes 58.48% of
+query time**, parity mixtures 21.54%. Edits need **1,013 expansions / 1,055 records**,
+nearly matching bases' 1,041 / 1,086. New acquisition across edits is the main
+reuse gap. Normalization remains the largest profiled exclusive routine; avoiding
+whole acquisitions can avoid its work together with restriction and propagation.
+
+The timed archive grows to **2,259 records / 12.13 MB encoded payload / 22.85 MB
+SQLite**, with **53.93 MB** in checked Python cache objects. Cohort measurements
+are cumulative observations, not asymptotic bounds. Worker RSS includes benchmark
+metadata and cold replay. The separate bounded inventory closes only **18/108**
+family decompositions, despite 106 completed decisions. Every root has the same
+coarse syntax vector; unresolved interactions remain explicit. Its 624 checked
+nodes and 108 source bindings are persisted separately.
+
+**Concrete recovery:** a fully checked later donor model also satisfies the one
+root still unresolved at stream end. The new optional helper validates the full
+target and publishes **one SAT certificate / 7,895 payload bytes / zero expansions**.
+Both readers now certify **48 SAT / 24 UNSAT distinct roots**. This post-timing
+recovery preserves both original budget-stop observations; candidate selection
+was supplied, so it is not yet a general retrieval algorithm or complexity result.
+
+**Next highest-value implementation target: bounded, label-free candidate retrieval
+for SAT witnesses**, with complete checks, misses and persistence charged. A
+posthoc check finds **21/23 available parent models** also satisfy their edits;
+those edits incurred 225 expansions, but their work is not an additive guaranteed
+saving. The hardest remaining mechanism is partial negative-search reuse across
+clause edits; witness reuse does not solve UNSAT cases. Preserve a fresh evaluation
+split before tuning on this now-exposed stream. Compact proof state and better
+recognition of mixed/shared interactions remain open.
+
+Resume `experiments/results/cnf-larger-mixtures/checkpoint.json`. All **638 prior
+sources / 8,032 artifacts / 118 manifests** are unchanged. The union now contains
+**31,141 native** records, with all old affine/equivalence/discovery records and
+**5,650 composed / 444 pilot decisions** intact. The failed inventory audit's
+incomplete expected configuration is preserved and corrected. All **1,311 full / 142 focused tests** pass; 44 existing-site SQLite warnings
+remain in the full suite, none in focused tests. The **228-page manuscript**
+builds without warnings with **64 prior proof blocks** unchanged. Final source
+ledger: **647**; details are in `checks.json`.
+
+## Previous checkpoint: broaden the cost and discovery evidence
 
 [Ordered residual normalization](ordered-residual-normalization.md) checks local
 literal order and uses a two-pointer tautology test; unordered/duplicate-literal

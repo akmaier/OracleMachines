@@ -8283,6 +8283,47 @@ including invalid encodings, and verifies every committed prefix. The small
 runtime differences on this repeated workload motivate larger held-out mixtures
 before choosing another optimization. No uniform expansion bound follows.
 
+\paragraph{Larger mixtures and recovery through a checked witness.}
+A subsequent frozen evaluation uses 108 queries at scales 24, 48 and 72: six
+synthetic designs, two samples, and base/edit/relabelled-repeat variants. The
+72 distinct canonical roots are absent from the preceding archive. Labels never
+enter search, and selection does not depend on outcomes. Each attempt permits
+256 native expansions; this limits neither all proof-compilation work nor total
+memory or time. Budget exhaustion yields an unresolved observation, never UNSAT.
+
+Six serial workers compare the three unchanged variants in opposite orders.
+All produce 70 SAT, 36 UNSAT and two unresolved attempts, with identical proof
+bytes. Mean query time for batching is 2.70053 seconds; memo and ordered variants
+regress 1.49\% and 1.09\%, respectively, with both paired query deltas regressing.
+Random 3-CNF accounts for 58.48\% of query time. Edits require 1,013 expansions
+and 1,055 new records, close to the bases' 1,041 expansions and 1,086 records.
+The archive reaches 2,259 native records, 12,128,848 key/payload bytes and
+22,851,584 SQLite bytes; checked Python cache objects occupy 53,930,391 bytes.
+These are workload observations, not asymptotic storage bounds. A separate
+bounded inventory closes only 18 of 108 family decompositions; decision success
+on other queries must not be counted as structural closure.
+
+The two stopped attempts preserve 256 committed proof records each and roll back
+20 and 13 pending records. A later repeat solves the stopped base using the
+accumulated archive, leaving one distinct source unresolved. Its newly available
+model also satisfies that edited source. A separate post-timing helper reads the
+checked SAT donor, transports the assignment through original variable names,
+tries false for absent names, and validates the complete target before publishing
+through the original native witness verifier. A failed candidate returns only a
+miss. With expansion disabled, this recovery adds one certificate and 7,895
+key/payload bytes; both readers then certify all 72 distinct roots, 48 SAT and
+24 UNSAT. The earlier unresolved observations are preserved. Donor selection
+was supplied and its earlier acquisition is not free.
+
+A broader posthoc check finds that 21 of 23 available parent SAT models satisfy
+their edits. Those edits incurred 225 expansions in the measured stream. This
+identifies an opportunity rather than an additive saving: changed acquisition
+alters future cached state, and candidate discovery and publication still cost
+work. Bounded witness retrieval without supplied relationships is the next
+implementation gap. Partial negative-search reuse across clause edits and
+recognition of shared interactions remain separate obligations. Completion of
+this finite catalog supplies no uniform polynomial expansion bound.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -9865,3 +9865,27 @@ All 1,212 tests, 43 focused tests, 240 chronological query audits, sixteen
 publication counter audits, 48 family truth tables and full cold replay pass.
 The new checkpoint preserves all old payloads and reaches 28,145 native keys /
 twenty-six extensions. Previous defaults and proof formats remain unchanged.
+
+
+## 2026-11-18: binary equivalence acquisition and its cost regression
+
+[The quotient pilot](binary-equivalence-acquisition.md) implements full-source
+substitution, checked signed model lifts and explicit negative dependencies.
+Two shared implication trees use `2(k-1)` edges for a `k`-literal block. Old native
+proof formats and recursive search remain unchanged; this top-level API requires
+an explicit extension reader and is not yet in the prepared production pipeline.
+
+On 68 reconstruction/edit/control inputs, propagation falls 16.57%, but combined
+certificates grow 420 -> 440 and payload 525,136 -> 534,611 bytes. Complete time
+regresses in both orders. All selected blocks merge one variable. The regression
+is retained, and the policy remains optional. The next strongest compression
+target is the 41,208 bytes of duplicated source/child formula fields in the new
+negative payloads; reconstructing them from exact keys and checked substitution
+must be measured. Twenty-two binary cores repeat, and twelve inputs have an
+unused second equivalence block. Neither is yet a measured saving.
+
+All 1,220 tests, 51 focused tests, 272 chronological audits, 68 exhaustive truth
+tables and full historical/new replay pass. The checkpoint preserves prior results
+and reaches 28,691 native keys, twenty-six affine and forty-two explicit equivalence
+records. Native recursive integration, prepared admission, compact arbitrary
+interaction and uniformly efficient expansion remain open.

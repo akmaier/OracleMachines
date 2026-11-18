@@ -7860,6 +7860,51 @@ supplies related substitution logic, but the native acquisition bridge and its
 costs remain open. This diagnostic is not yet a measured optimization or a
 uniform resource bound for arbitrary SAT.
 
+\paragraph{Binary equivalence quotients with shared proof trees.}
+An optional top-level acquisition API now substitutes one signed binary SCC
+block throughout the full source and solves the quotient with the preceding
+native solver. For $k$ equivalent literals, two rooted implication trees certify
+the block with exactly $2(k-1)$ source-indexed edges: one reaches every member
+from a positive representative, the other returns every member to it. Checking
+both rooted supports proves mutual implication. Full-source substitution and
+signed model lifting therefore preserve satisfiability. A 24-variable cycle
+needs 46 shared tree edges instead of 552 separately materialized star-path
+edges. This uses established SCC reasoning. It does not imply a compact quotient
+or efficient acquisition for arbitrary CNF.
+
+SAT lifts publish ordinary native witnesses. Negative quotient records use an
+explicit separate authority whose dependency must be a checked native UNSAT
+child. Native recursive search never reads this extension table. The pilot
+performs its own SCC analysis and attempts substitution only at the top level;
+sharing discovery with other recognizers and recursive production integration
+remain open. Graph discovery and deterministic sorting cost
+$O(L+V_B\log V_B+E_B)$ adjacency operations. Evidence uses $O(k)$ edges, but the
+current record additionally stores a full source key, source CNF and child key.
+Checking, full substitution, normalization and child acquisition remain charged.
+
+Four serial workers compare 68 inputs from empty archives: eleven saved split
+sources, 33 clause edits and 24 unfamiliar generated controls. Results persist
+within each stream. All decisions agree with exhaustive truth tables:
+21 SAT and 47 UNSAT. This is a reconstruction/edit pilot, not historical
+production-prefix replay. Forty-five selected blocks each merge one variable,
+yielding three native SAT lifts and 42 negative extensions. Native certificates
+fall 420 to 398, but combined certificates rise to 440. Combined payload grows
+525,136 to 534,611 bytes, despite propagation visits falling 61,517 to 51,326.
+The six fewer native expansion calls accompany 45 additional substitution steps.
+Query and complete-worker means increase 1.25\% and 1.29\%; both complete-time
+orders regress. SQLite grows 24,576 bytes and compressed size 931 bytes. The
+method remains optional, and the storage/runtime regression is preserved.
+
+The new negative records occupy 68,878 bytes, of which only 2,713 encode the
+equivalence evidence. Their payload repeats 20,673 bytes of source CNFs and
+20,535 bytes of child keys. Reconstructing these from the canonical source key
+and checked substitution is the next compression experiment; its costs remain
+unmeasured. Separately, 22 of 56 eligible inputs repeat an earlier exact binary
+core, and twelve inputs have a second disjoint block omitted by the single-block
+policy. Source-index transport, invalidation, multi-block proof accounting and
+production integration remain obligations. None supplies a uniform bound on
+unrestricted SAT expansion.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

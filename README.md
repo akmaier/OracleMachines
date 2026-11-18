@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Acquire checked binary equivalence quotients](research/binary-equivalence-acquisition.md).
+Two shared implication trees support exact full-source substitution and model/proof
+reconstruction. A 68-input pilot reduces propagation 16.57% but increases combined
+storage and runtime, so the API remains optional. Next: remove duplicated formulas
+from its certificates. The preserved checkpoint contains 28,691 native keys,
+twenty-six affine and forty-two explicit equivalence records.
+
 [Target binary-forced split variables](research/targeted-backbone-discovery.md).
 One additional implication query closes the six saved split-node recognition
 misses. On sixty fresh queries it saves two stored nodes and 6.39% of child

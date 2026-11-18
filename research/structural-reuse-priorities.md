@@ -12,7 +12,64 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: merge binary-equivalent variables across the full source
+## Current investigation: remove duplicated formulas from quotient certificates
+
+[Binary equivalence acquisition](binary-equivalence-acquisition.md) now has a
+checked top-level quotient API. Two shared trees certify a signed block with
+exactly `2(k-1)` edges. Every source clause is substituted; SAT models lift to
+native witnesses, and UNSAT uses an explicit extension record with a native
+negative child. Recursive native search and old proof formats remain unchanged.
+The prototype still performs its own SCC work and is outside the prepared
+production admission pipeline.
+
+The 68-input empty-archive pilot (eleven saved sources, 33 edits, 24 fresh controls)
+reduces propagation **61,517 -> 51,326 (16.57%)**, but native-plus-extension
+certificates grow **420 -> 440**, payload **525,136 -> 534,611 bytes**, and complete
+time **1.29%**. Both timing orders regress. Forty-five extra substitution steps
+accompany six fewer native expansions. All selected blocks merge only one
+variable. Keep the policy optional; this is a preserved cost regression, not an
+end-to-end production gain or new arbitrary-SAT coverage result.
+
+**Next highest-value target:** remove two redundant fields from the negative
+extension payload. The 68,878 stored bytes contain **20,673 bytes of source CNFs**
+and **20,535 bytes of child keys**, versus only 2,713 bytes of equivalence evidence.
+The full canonical source key already encodes the source; checked substitution
+reconstructs the child key. Test a separately versioned compact record and reader
+on the same workloads, preserving version-one readability and exact source/child
+checks. Charge parsing, normalization and replay; do not claim the 41,208-byte
+opportunity as a measured net saving. Full keys can remain collision independent.
+
+**Second target:** reuse the **22 repeated binary cores among 56 eligible inputs**.
+Adding wide clauses preserves their binary SCCs; deletion invalidates that key.
+Reuse must transport binary-local clause indices to the current source and respect
+literal coordinates. Current code rebuilds 4,276 edges and visits 8,552 SCC edges.
+The repeated-core census is not yet a cache or timing improvement.
+
+**Third target:** twelve inputs have two disjoint equivalence blocks, but only one
+is used. Posthoc full quotients remove two variables/eight literals with preserved
+truth; none is already known at its query prefix. Avoid assuming multi-block
+rewriting saves acquisition before charging certificates and child solving.
+Production admission and recursive integration remain open after these pilot costs.
+
+Resume `experiments/results/cnf-binary-equivalence/checkpoint.json`: **28,691 native
+keys / twenty-six affine extensions / forty-two equivalence records**, preserving
+all prior payloads. New negatives require `EquivalenceStore`; they are not native
+source roots. Four native alternatives remain in trial archives. Union growth:
+1,327,104 SQLite / 127,289 compressed bytes, including comparator histories.
+Earlier native/composed/affine authorities and solver defaults remain unchanged.
+
+All **1,220 tests**, **51 focused tests**, 272 chronological query/dependency audits,
+68 exhaustive truths, warm answers and full old/new cold histories pass. The full
+suite retains 44 old SQLite warnings; focused tests have none. All 581 prior sources,
+7,608 artifacts and 108 manifests are unchanged. No new Lean or unrestricted-SAT
+resource bound follows.
+
+
+The **222-page manuscript** builds with a clean final log and all **64 prior
+proof blocks unchanged**. Final source ledger: **586**. New manifest: **34
+artifacts**. Next preservation audit: **7,642 artifacts / 109 manifests**.
+
+## Previous checkpoint: merge binary-equivalent variables across the full source
 
 [Targeted backbone discovery](targeted-backbone-discovery.md) closes all fourteen
 saved recognition misses, including the six split nodes. One extra implication

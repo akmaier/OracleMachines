@@ -7426,6 +7426,70 @@ concrete admission candidates, without a guarantee that the additional probe
 will expose a binary residual or yield a cheap certificate.
 The compiler introduces no new native proof kind or unrestricted-SAT guarantee.
 
+\paragraph{One additional probe chosen by a partial cover.}
+The next optional policy addresses conditions excluded by the fixed candidate
+ranking. It preserves the preceding discovery pass and any already admitted
+route. Otherwise, it scans source clauses for a nontautological clause with
+at least one retained negative SCC condition and exactly one missing condition.
+The missing literal must not have been probed before. The narrowest eligible
+clause wins, with original source index breaking ties. This selects a condition
+because it can complete an exhaustive argument, rather than because its
+variable has high binary incidence. Family labels are not used.
+
+At most one extra premise is canonicalized and propagated. A binary residual
+is passed to the existing SCC solver. A negative outcome joins the retained
+conditions and uses the existing native cover compiler. A positive outcome
+must supply a model of the entire raw source and assumption before ordinary
+native model publication. The missing condition is therefore not assumed
+negative. Unit-conflict and nonbinary outcomes remain explicit misses in this
+version, preserving the preceding fallback. Original discovery records remain
+unchanged; a separate bound record supplies the extra trace and SCC outcome.
+The compiler and cold replay retain their existing source and proof checks.
+
+For $k$ retained records, $m$ clauses and $L$ literal occurrences, a conservative
+recognition bound is $O(k+mk+L+\sum_c w_c\log w_c)$ expected word operations,
+charging dictionary-key set operations and candidate sorting. The additional
+premise has scan-based propagation cost up to $O(nL)$, plus canonicalization,
+full-key construction, and $O(n_i\log n_i+L_i)$ SCC work when its residual is
+binary. Positive model checking or negative compilation is additional.
+The extra diagnostic and transient state can use $O(n+L+k)$ words, separate
+from retained history and native publication. This one-probe budget is added
+to the old signed-variable budget; it does not replace that discovery cost.
+A failed probe can increase total work.
+
+Twenty-nine saved contexts include the three motivating missing conditions.
+All three now close with one extra probe; one older context also improves.
+The four changed parents shrink from 52 to 32 acquired nodes and from 63,028
+to 38,503 native bytes. On sixty further excluded queries, all modes return
+40 SAT and 20 UNSAT. Four added probes complete covers, replacing 56 fallback
+expansions with 32 compiled nodes. Total additions fall from 431 to 407 nodes
+and from 542,374 to 512,936 bytes. All 99 original premise probes and fourteen
+positive publications remain. Additional recognition scans 268 clauses with
+561 literals; the four premises copy 565 literals and create 224 implication
+edges. Total discovery/acquisition propagation falls 104,544 to 98,303 visits.
+
+Mean query time falls 0.42943 to 0.38553 seconds, with reductions in both
+orders. Complete-worker time instead changes 25.46195 to 25.48478 seconds,
+with paired changes of opposite signs; full cold replay averages 12.41804
+seconds. Diagnostic sidecars grow about 0.82\%, trial SQLite size falls 36,864
+bytes and mean peak process memory rises about 1.61 MB. These measurements
+support cheaper acquisition and lower query cost on this finite sample, without
+an end-to-end speedup or general memory-scaling claim. An initial timing attempt
+that overlapped the tail of preflight was stopped, preserved and excluded;
+only the subsequent isolated run supplies these comparisons.
+
+The selected covers' required old conditions were available after 8, 5, 7 and
+4 base probes, compared with eight executed for each. This retrospectively
+identifies eight later probes that might be avoided for those same clauses.
+Early admission, prefix-dependent candidate choices and maintenance costs have
+not yet been evaluated.
+Coupled parity and random three-CNF still add 308 native nodes and require
+52,385 acquisition propagation visits, unchanged by this extension.
+These remain the larger acquisition gap; the existing affine pattern layer
+and this native acquisition path still need a checked integration. Unit-conflict conditions, propagated clauses, covers
+missing several conditions and families without an initial negative condition
+remain explicit gaps. No unrestricted-SAT resource guarantee follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

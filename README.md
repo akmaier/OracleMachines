@@ -28,6 +28,16 @@ classes.
 
 ## Paper
 
+[Choose one extra premise to complete a partial negative cover](research/cover-directed-probe.md).
+Four saved parents shrink 52 -> 32 acquired nodes. On sixty fresh queries,
+four added probes reduce acquisition 431 -> 407 nodes and query time 10.22%;
+complete-worker time remains mixed. Diagnostic storage and peak memory grow
+slightly. All 1,161 tests and independent replay pass. Resume its checkpoint:
+26,279 native keys preserve all earlier payloads. Coupled parity and random
+three-CNF still dominate acquisition; reuse of the existing affine discovery
+layer is the next broader-coverage target. Evidence is preserved
+in `experiments/results/cnf-cover-probe/`.
+
 [Compile retained negative conditions into native parent proofs](research/negative-cover.md).
 Three saved covers shrink 36 -> 24 acquired nodes; one fresh cover reduces
 aggregate additions 370 -> 364 nodes, saving 7,153 native bytes. Discovery is

@@ -9622,3 +9622,53 @@ coverage remains 17/24 and supplemental positive coverage 24/24. All 529 prior
 sources, 6,431 artifacts and 99 manifests remain unchanged. The 215-page
 manuscript builds with all 64 existing proof blocks unchanged. No new Lean
 theorem or unrestricted-SAT resource guarantee is claimed.
+
+## 2026-11-18: one extra probe completes retained partial covers
+
+The optional versioned selector `experiments/cnf_cover_probe.py` retains the
+old discovery record and adds at most one unattempted literal from a clause
+with exactly one missing negative condition. Narrowest clause then source index
+sets the priority. A negative binary residual feeds the existing cover compiler;
+a positive model must satisfy the full raw premise. Unit-conflict and nonbinary
+outcomes remain explicit misses. Old native routes and payloads remain intact.
+
+Four saved contexts shrink 52 -> 32 native nodes. Four fresh added conditions
+reduce acquisition 431 -> 407 nodes and propagation 104,544 -> 98,303 visits.
+Query time improves in both orders; complete-worker time remains mixed and mean
+RSS grows. The first overlapped timing pilot is excluded and preserved, with
+all sixty pilot deltas equal to the clean comparison. See
+[the complete measured record](cover-directed-probe.md).
+
+Next: select and maintain partial covers during the original discovery pass.
+For the chosen fresh clauses, eight later base probes could retrospectively
+be avoided; this saving is not implemented or timed. Broader discovery still
+needs a way to seed useful conditions outside the current partial-cover cell.
+
+**Largest remaining measured acquisition cost:** coupled parity and random
+three-CNF still add **308 native nodes / 52,385 acquisition propagation visits**,
+unchanged across policies. Coupled parity alone adds 163 nodes / 25,354 visits;
+random three-CNF adds 145 / 27,031. These dominate the remaining native work.
+The existing pattern-discovery layer already extracts explicit affine equations
+and preserves leftover clauses, whereas this native acquisition path currently
+has uniform and binary leaves. The next broad-coverage investigation should
+measure a source-checked bridge from that existing affine extraction to native
+acquisition on unlabelled coupled inputs: record rank, free dimension and
+leftover interaction before choosing a completion rule. Charge extraction,
+projection, checking and any enumeration; a 2^d free-coordinate search is only
+cheap when d is small, not uniformly polynomial for arbitrary CNF. Positive
+models require full-source verification and negative results require their own
+checked recomposition. This is a concrete integration target, not an already
+measured improvement.
+
+All **1,161 tests**, 24 focused tests, 300 counter audits and independent
+reconstruction pass. Resume `experiments/results/cnf-cover-probe/checkpoint.json`:
+**26,279 native keys**, preserving all 25,757 earlier payloads, with 240 new
+composed records alongside 4,479 inherited records, 2,957 ordinary decisions
+and six projections. The union uses 81,416,192 database bytes / 6,113,510
+compressed bytes. Fourteen roots have alternate certificates in 27 retained
+evidence occurrences. Ready/pending banks remain 132/38, 141/66, 87/89 and
+87/116, with no new support activation. Original structural coverage remains
+17/24 and supplemental positive coverage 24/24. All 534 earlier sources,
+6,641 artifacts and 100 manifests remain unchanged. The 216-page manuscript
+builds with all 64 existing proof blocks unchanged. No new Lean theorem or
+unrestricted-SAT resource guarantee is claimed.

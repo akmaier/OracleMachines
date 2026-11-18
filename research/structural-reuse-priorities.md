@@ -12,7 +12,75 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: complete nearly covered source clauses
+## Current investigation: reuse affine discovery in costly coupled inputs
+
+[Cover-directed probing](cover-directed-probe.md) closes the three saved missing
+conditions with one extra probe each. One older control also benefits: four
+saved parents shrink **52 -> 32 acquired nodes / 63,028 -> 38,503 native bytes**.
+On sixty fresh queries, four extra conditions reduce acquisition **431 -> 407
+nodes / 542,374 -> 512,936 bytes**. All 99 base probes and fourteen positive
+publications remain. The extra conditions use the existing SCC solver and cover
+compiler; no new proof kind or general search is used during publication.
+
+Mean query time falls **10.22%**, with both paired deltas negative. Total
+propagation falls **104,544 -> 98,303 visits**, including the extra conditions.
+Complete-worker deltas have mixed signs and the mean rises about 0.023 seconds,
+partly through cold replay. Diagnostics grow 0.82%, trial SQLite falls 36,864
+bytes and mean peak RSS rises 1.61 MB. Native acquisition and query savings are
+measured here; an end-to-end speedup or general memory bound is not established.
+The overlapped first timing attempt is preserved and excluded; all sixty pilot
+control deltas match the clean run.
+
+**Largest remaining measured acquisition cost:** coupled parity and random
+three-CNF still add **308 native nodes / 52,385 acquisition propagation visits**,
+unchanged across policies. Coupled parity alone adds 163 nodes / 25,354 visits;
+random three-CNF adds 145 / 27,031. These dominate the remaining native work.
+The existing pattern-discovery layer already extracts explicit affine equations
+and preserves leftover clauses, whereas this native acquisition path currently
+has uniform and binary leaves. The next broad-coverage investigation should
+measure a source-checked bridge from that existing affine extraction to native
+acquisition on unlabelled coupled inputs: record rank, free dimension and
+leftover interaction before choosing a completion rule. Charge extraction,
+projection, checking and any enumeration; a 2^d free-coordinate search is only
+cheap when d is small, not uniformly polynomial for arbitrary CNF. Positive
+models require full-source verification and negative results require their own
+checked recomposition. This is a concrete integration target, not an already
+measured improvement.
+
+**Smaller direct cost target: admit covers during the original pass.**
+The four chosen covers had their required original conditions after 8, 5, 7
+and 4 base probes, compared with eight executed for each. For those clauses,
+early admission could avoid eight later probes. This retrospective observation
+is not a tested early-selection policy. Track clause coverage as negative
+conditions arrive, choose an explicit extra-probe budget, and compare the saved
+suffix against maintenance, failed candidates and changed prefix choices.
+Avoid repeatedly rescanning every source clause after each negative result.
+
+**The larger structural gap is seeding families with no negative condition.**
+This extension needs an existing partial cover. It does not admit new probes on
+random three-CNF or coupled parity and leaves their interactions to native
+acquisition. Broader positive discovery, shared nonbinary structure and covers
+missing several conditions remain open. Unit-conflict conditions and clauses
+shortened by baseline propagation also need checked composition. The remaining
+cell still contains arbitrary SAT; compact covers are a restricted guarantee.
+
+All **1,161 tests**, 24 focused tests, 300 counter audits and independent
+reconstruction pass. Resume `experiments/results/cnf-cover-probe/checkpoint.json`:
+**26,279 native keys**, preserving all 25,757 earlier payloads, with 240 new
+composed records alongside 4,479 inherited records, 2,957 ordinary decisions
+and six projections. The union uses 81,416,192 database bytes / 6,113,510
+compressed bytes. Fourteen roots have alternate certificates in 27 retained
+evidence occurrences. Ready/pending banks remain 132/38, 141/66, 87/89 and
+87/116, with no new support activation. Original structural coverage remains
+17/24 and supplemental positive coverage 24/24. All 534 earlier sources,
+6,641 artifacts and 100 manifests remain unchanged. The 216-page manuscript
+builds with all 64 existing proof blocks unchanged. No new Lean theorem or
+unrestricted-SAT resource guarantee is claimed.
+
+
+New manifest: **230 artifacts**. Next preservation audit: **6,871 artifacts / 101 manifests**. Final source ledger: **539**.
+
+## Previous checkpoint: complete nearly covered source clauses
 
 [Negative clause-cover compilation](negative-cover.md) reuses retained
 conditional refutations to publish an ordinary native parent proof. The three

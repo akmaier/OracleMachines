@@ -12,7 +12,59 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: remove duplicated formulas from quotient certificates
+## Current investigation: reuse binary-core discovery across wide-clause edits
+
+[Compact equivalence certificates](compact-equivalence-certificates.md) remove
+redundant source/child formula fields. Exact source-key parsing and checked
+substitution reconstruct their identities; both old and new readers remain
+available. On the unchanged 68-input pilot, native acquisitions and all 42
+negative reconstructions match. Equivalence storage falls **68,878 -> 26,998
+bytes (60.80%)**; combined payload falls to **492,731 bytes**, **6.17% below the
+native control**. Native-plus-extension count remains 440 versus 420.
+
+SQLite falls 61,440 bytes versus v1; gzip falls only 1,172 bytes. Complete-worker
+paired deltas have mixed signs against both v1 and native control. Query time
+remains **3.93% above the native control**, higher in both orders. The compact
+API remains optional; this is a representation improvement with no new solving
+coverage or established production speedup.
+
+**Next highest-value target:** cache binary-core discovery and source-checkable
+equivalence trees. The same 56 eligible inputs contain **34 distinct exact binary
+keys / 22 repeats**; wide-clause additions preserve those cores. Current code
+still constructs 4,276 edges and visits 8,552 SCC edges. Reuse binary-local clause
+references, transport them to each full source, and check exact literal coordinates.
+Binary deletions/changes must invalidate or miss the key. Charge extraction/keying,
+cache lookup, retained space, verification, persistence and cold reconstruction
+alongside avoided graph/SCC work. Do not count these diagnostic repeats as
+implemented cache hits. Keep baseline history and all unsuccessful comparisons.
+
+**Next coverage target:** twelve inputs contain two disjoint equivalence blocks
+but the policy merges only one. Complete quotients remove two variables/eight
+literals; none was known at its query prefix. Multi-block acquisition and shared
+SCC computation with the other recognizers remain open. Prepared production
+admission and recursive integration still need their own measured certificates
+and resource accounting. Compactness alone does not resolve arbitrary interaction.
+
+Resume `experiments/results/cnf-compact-equivalence/checkpoint.json`. All **28,691
+native payloads / twenty-six affine / forty-two v1 equivalence records** remain
+byte-identical; the union adds **forty-two v2 alternatives**. No native or v1 record
+is inserted or replaced. Keeping both versions grows the union by 69,632 SQLite /
+3,701 compressed bytes, separate from the smaller v2-only trial. New negative
+roots require the explicit compact reader, with legacy fallback; native recursive
+search and existing defaults remain unchanged.
+
+All **1,228 tests**, **59 focused tests**, 408 chronological query/dependency audits,
+68 exhaustive truths, warm answers and complete old/new histories pass. Full tests
+retain 44 old SQLite warnings; focused tests have none. All 586 prior sources,
+7,642 artifacts and 109 manifests remain unchanged. No new Lean theorem or
+unrestricted-SAT resource bound follows.
+
+
+The **223-page manuscript** builds with a clean final log and all **64 prior
+proof blocks unchanged**. Final source ledger: **591**. New manifest: **41
+artifacts**. Next preservation audit: **7,683 artifacts / 110 manifests**.
+
+## Previous checkpoint: remove duplicated formulas from quotient certificates
 
 [Binary equivalence acquisition](binary-equivalence-acquisition.md) now has a
 checked top-level quotient API. Two shared trees certify a signed block with

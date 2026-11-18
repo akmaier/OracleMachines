@@ -7905,6 +7905,44 @@ policy. Source-index transport, invalidation, multi-block proof accounting and
 production integration remain obligations. None supplies a uniform bound on
 unrestricted SAT expansion.
 
+\paragraph{Reconstructing redundant certificate fields.}
+A separately versioned equivalence record now omits its source CNF and child key.
+The full source key already encodes the canonical CNF; checked substitution
+reconstructs the exact native dependency. The reader checks the key prefix,
+canonical serialization, source-indexed trees and negative native child. Publication
+also compares the producer's source and child with those reconstructed values.
+Cached records retain only the compact fields. The new reader supports both
+versions, while old rows remain unchanged and the original reader remains valid.
+This changes representation and replay, not the equivalence argument or discovery.
+
+Six serial workers compare the native control, original quotient API and compact
+API on the same 68 inputs from empty archives. Native acquisitions, source models,
+discovery/search counters and all 42 negative reconstructions match between the
+two quotient versions. Equivalence storage falls 68,878 to 26,998 bytes, a 60.80\%
+reduction including exact source keys. The saving is 41,208 bytes of duplicated
+formula fields plus 672 bytes of field overhead. Combined payload falls 534,611
+to 492,731 bytes, now 6.17\% below the native control's 525,136 bytes. Both quotient
+versions still retain 440 certificates versus the control's 420. Trial SQLite
+falls 61,440 bytes versus the original quotient API and 36,864 versus the control;
+compressed savings are only 1,172 and 241 bytes respectively.
+
+The compact publisher additionally parses 21,345 source-key bytes. The unchanged
+45 substitution steps still perform 358 native expansions and 51,326 propagation
+visits. Against the original quotient API, complete-worker deltas are
+$+0.00590/-0.01318$ seconds; against the native control they are
+$-0.01210/+0.00290$ seconds. Query time remains 3.93\% above the control in the
+mean and higher in both orders. Cold replay improves slightly in both comparisons,
+but these finite runs do not establish a stable total-time advantage. Storage
+improves while acquisition overhead remains. The API stays optional.
+
+The record still has source-dependent size $O(L+k)$; it is not merely an
+$O(k)$ tree certificate. Parsing, canonicalization, substitution and native replay
+remain explicit costs. The next computational opportunity is unchanged: 22 of
+56 eligible inputs repeat a previously encountered exact binary core. Reusing
+its SCC facts requires checked transport to current source-clause indices and
+invalidation after binary edits. Such reuse is not yet implemented here, and
+no new coverage or uniform unrestricted-SAT bound follows from compact storage.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

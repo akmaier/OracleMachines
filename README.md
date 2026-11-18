@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Compact equivalence certificates](research/compact-equivalence-certificates.md).
+Exact source-key parsing and checked substitution remove duplicated formulas,
+shrinking equivalence storage 60.80%. Combined certificate payload is now 6.17%
+below the native control on the same pilot; query time remains higher. Both
+formats and all previous results are preserved. Next: reuse binary-core discovery
+across the 22 repeated cores in this workload.
+
 [Acquire checked binary equivalence quotients](research/binary-equivalence-acquisition.md).
 Two shared implication trees support exact full-source substitution and model/proof
 reconstruction. A 68-input pilot reduces propagation 16.57% but increases combined

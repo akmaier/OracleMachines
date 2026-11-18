@@ -6039,3 +6039,24 @@ tables and full historical/new replay pass. The checkpoint preserves prior resul
 and reaches 28,691 native keys, twenty-six affine and forty-two explicit equivalence
 records. Native recursive integration, prepared admission, compact arbitrary
 interaction and uniformly efficient expansion remain open.
+
+
+## 2026-11-18: compact equivalence records with exact reconstruction
+
+[Version-two certificates](compact-equivalence-certificates.md) omit duplicated
+source/child formulas. The full canonical source key and checked substitution
+reconstruct both identities before requiring the native UNSAT child. Old records
+remain byte-identical and readable; native search never consults the extensions.
+
+The same 68-input, empty-archive comparison retains identical native acquisitions
+and source results. Equivalence storage falls 68,878 -> 26,998 bytes, combined
+payload to 492,731 bytes: 6.17% below the native control. The certificate count
+remains higher, and paired complete timing is mixed. Query time is still 3.93%
+above the control. Keep the API optional; no new structural coverage is claimed.
+
+The next target is reuse of 22 repeated binary cores among 56 eligible queries,
+with binary-local indices, checked full-source transport, edit invalidation and
+charged cache/cold costs. Multiple blocks and production integration remain open.
+All 1,228 tests, 59 focused tests, 408 chronological audits, 68 exhaustive truths
+and full old/new replay pass. The union preserves 28,691 native, twenty-six affine
+and forty-two v1 records, adding forty-two v2 alternatives without replacing them.

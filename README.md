@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Recognize canonical certificates directly](research/direct-canonical-verification.md).
+Checking the stored normal form avoids 552 sorting/renaming calls while preserving
+every proof rule. On the same 104 inputs, mean total runtime falls 6.63% and cold
+replay 18.12%, with identical storage. Both readers validate all 28,886 native
+records. The next measured bottleneck is 605 individual SQLite commits.
+
 [Measure bounded normalization reuse](research/query-canonicalization-reuse.md).
 A query-local cache avoids 19.57% of normalization visits on the same 104 inputs,
 but validation and bookkeeping raise mean complete runtime 3.65%. Proofs and

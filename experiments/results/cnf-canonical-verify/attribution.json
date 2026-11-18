@@ -1,0 +1,69 @@
+{
+  "limits": [
+    "Both alternatives preserve acquisition and certificates. Linear replaces normalization of already canonical certificate CNFs with direct recognition and delegates all proof checks unchanged.",
+    "Same 104 replayed small inputs; no new coverage or representative general-SAT speedup.",
+    "The direct recognizer retains no canonical cache, but transient support/clause sets, immutable triples, key serialization and all certificate checks still cost work and space."
+  ],
+  "pairs": [
+    {
+      "cold_seconds": -0.006100292317569256,
+      "complete_worker_seconds": 0.010095625184476376,
+      "mode": "cached",
+      "query_seconds": 0.012618792243301868,
+      "repeat": 0,
+      "warm_seconds": 0.004264375194907188
+    },
+    {
+      "cold_seconds": -0.024007875937968493,
+      "complete_worker_seconds": -0.05422875005751848,
+      "mode": "linear",
+      "query_seconds": -0.029430211056023836,
+      "repeat": 0,
+      "warm_seconds": -0.0003490825183689594
+    },
+    {
+      "cold_seconds": 0.002957917284220457,
+      "complete_worker_seconds": 0.029885833617299795,
+      "mode": "cached",
+      "query_seconds": 0.024393338710069656,
+      "repeat": 1,
+      "warm_seconds": 0.004648082889616489
+    },
+    {
+      "cold_seconds": -0.012513916473835707,
+      "complete_worker_seconds": -0.03835879126563668,
+      "mode": "linear",
+      "query_seconds": -0.02378850383684039,
+      "repeat": 1,
+      "warm_seconds": 8.724909275770187e-05
+    }
+  ],
+  "solve_seconds": {
+    "cached": [
+      0.41209416510537267,
+      0.4068952491506934
+    ],
+    "known": [
+      0.39703924767673016,
+      0.3843927150592208
+    ],
+    "linear": [
+      0.37024346087127924,
+      0.3604109548032284
+    ]
+  },
+  "warm_cache_hits": {
+    "cached": [
+      0,
+      0
+    ],
+    "known": [
+      0,
+      0
+    ],
+    "linear": [
+      0,
+      0
+    ]
+  }
+}

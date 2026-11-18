@@ -1,0 +1,4575 @@
+{
+  "canonical_output_census": {
+    "_negative_child": {
+      "calls": 311,
+      "earlier_normalized_output_hits": 7,
+      "hit_literal_units": 1004,
+      "literal_units": 30259
+    },
+    "_verify": {
+      "calls": 552,
+      "earlier_normalized_output_hits": 552,
+      "hit_literal_units": 55601,
+      "literal_units": 55601
+    },
+    "_visit": {
+      "calls": 546,
+      "earlier_normalized_output_hits": 45,
+      "hit_literal_units": 8011,
+      "literal_units": 53773
+    },
+    "dependency": {
+      "calls": 53,
+      "literal_units": 6243
+    },
+    "excluded_child": {
+      "calls": 7,
+      "literal_units": 763
+    },
+    "lookup": {
+      "calls": 38,
+      "literal_units": 3061
+    },
+    "node": {
+      "calls": 51,
+      "earlier_normalized_output_hits": 17,
+      "hit_literal_units": 1530,
+      "literal_units": 4115
+    },
+    "solve": {
+      "calls": 104,
+      "literal_units": 15090
+    },
+    "source_from_key": {
+      "calls": 53,
+      "earlier_normalized_output_hits": 53,
+      "hit_literal_units": 6243,
+      "literal_units": 6243
+    }
+  },
+  "limitations": [
+    "One instrumented solve-only replay per arm; imports/setup, metadata, warm/cold replay and compression excluded.",
+    "Inclusive times overlap and instrumentation affects methods unequally. Use matched report.json workers for runtime comparisons.",
+    "The separate census recognizes exact earlier normalized outputs within one query; it retains diagnostic state and is not a production transport mechanism or measured saving. All original input-name maps must remain bound."
+  ],
+  "profile_source": {
+    "path": "experiments/profile_cnf_canonical_verify.py",
+    "sha256": "0cca4b8bab925c603d7adf7ba65319ca47804e258cd77cbf3884c08af9673458"
+  },
+  "profiles": {
+    "cached": {
+      "canonical_callers": [
+        {
+          "callee": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_canonical",
+            "line": 378
+          },
+          "caller": {
+            "file": "experiments/cnf_query_canonical_cache.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "counts": [
+            1347,
+            1347,
+            0.001861767,
+            0.22490875200000002
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_query_canonical_cache.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_negative_child",
+            "line": 406
+          },
+          "counts": [
+            311,
+            311,
+            0.012837941,
+            0.031979008
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_query_canonical_cache.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_verify",
+            "line": 414
+          },
+          "counts": [
+            552,
+            552,
+            0.024940512,
+            0.130826558
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_query_canonical_cache.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_binary_backbone.py",
+            "function": "excluded_child",
+            "line": 113
+          },
+          "counts": [
+            7,
+            7,
+            0.000335675,
+            0.001925957
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_query_canonical_cache.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_compact_equivalence.py",
+            "function": "dependency",
+            "line": 30
+          },
+          "counts": [
+            33,
+            33,
+            0.001985908,
+            0.008252165
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_query_canonical_cache.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_multiblock_equivalence.py",
+            "function": "dependency",
+            "line": 133
+          },
+          "counts": [
+            20,
+            20,
+            0.0008098570000000001,
+            0.0011543760000000001
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_query_canonical_cache.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_known_quotient.py",
+            "function": "lookup",
+            "line": 18
+          },
+          "counts": [
+            38,
+            38,
+            0.001431685,
+            0.008418293
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_query_canonical_cache.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_compact_equivalence.py",
+            "function": "source_from_key",
+            "line": 18
+          },
+          "counts": [
+            53,
+            53,
+            0.0029113840000000004,
+            0.014704581000000001
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_query_canonical_cache.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_visit",
+            "line": 519
+          },
+          "counts": [
+            546,
+            546,
+            0.023419162,
+            0.13584907300000001
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_query_canonical_cache.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_binary_clause_cover.py",
+            "function": "node",
+            "line": 111
+          },
+          "counts": [
+            51,
+            51,
+            0.0018785700000000002,
+            0.011005128000000001
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_query_canonical_cache.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_known_quotient.py",
+            "function": "solve",
+            "line": 41
+          },
+          "counts": [
+            104,
+            104,
+            0.006591364000000001,
+            0.036617334
+          ]
+        }
+      ],
+      "functions": [
+        {
+          "cumulative_seconds": 0.14005514300000002,
+          "file": "~",
+          "function": "<method '__exit__' of 'sqlite3.Connection' objects>",
+          "line": 0,
+          "primitive_calls": 605,
+          "self_seconds": 0.14005514300000002,
+          "total_calls": 605
+        },
+        {
+          "cumulative_seconds": 0.20901212700000002,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "normalize",
+          "line": 20,
+          "primitive_calls": 1347,
+          "self_seconds": 0.085483105,
+          "total_calls": 1347
+        },
+        {
+          "cumulative_seconds": 0.380732473,
+          "file": "experiments/cnf_query_canonical_cache.py",
+          "function": "_canonical",
+          "line": 49,
+          "primitive_calls": 1715,
+          "self_seconds": 0.077142058,
+          "total_calls": 1715
+        },
+        {
+          "cumulative_seconds": 0.07234409900000001,
+          "file": "~",
+          "function": "<method 'execute' of 'sqlite3.Connection' objects>",
+          "line": 0,
+          "primitive_calls": 1591,
+          "self_seconds": 0.07234409900000001,
+          "total_calls": 1591
+        },
+        {
+          "cumulative_seconds": 0.043392779,
+          "file": "~",
+          "function": "<built-in method builtins.abs>",
+          "line": 0,
+          "primitive_calls": 973886,
+          "self_seconds": 0.043392779,
+          "total_calls": 973886
+        },
+        {
+          "cumulative_seconds": 0.077426833,
+          "file": "~",
+          "function": "<built-in method builtins.sorted>",
+          "line": 0,
+          "primitive_calls": 62118,
+          "self_seconds": 0.036255285000000005,
+          "total_calls": 119409
+        },
+        {
+          "cumulative_seconds": 0.068968466,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "restrict_scan",
+          "line": 63,
+          "primitive_calls": 780,
+          "self_seconds": 0.034332846,
+          "total_calls": 780
+        },
+        {
+          "cumulative_seconds": 0.043282664000000005,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "propagate",
+          "line": 88,
+          "primitive_calls": 474,
+          "self_seconds": 0.023768665,
+          "total_calls": 474
+        },
+        {
+          "cumulative_seconds": 0.021714731,
+          "file": "~",
+          "function": "<built-in method builtins.len>",
+          "line": 0,
+          "primitive_calls": 454651,
+          "self_seconds": 0.021714731,
+          "total_calls": 454651
+        },
+        {
+          "cumulative_seconds": 0.016893476,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 30,
+          "primitive_calls": 198464,
+          "self_seconds": 0.016893476,
+          "total_calls": 198464
+        },
+        {
+          "cumulative_seconds": 0.059691986,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 39,
+          "primitive_calls": 58638,
+          "self_seconds": 0.015390082000000001,
+          "total_calls": 58638
+        },
+        {
+          "cumulative_seconds": 0.015375042,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 33,
+          "primitive_calls": 198166,
+          "self_seconds": 0.015375042,
+          "total_calls": 198166
+        },
+        {
+          "cumulative_seconds": 0.022636842,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "two_cnf",
+          "line": 133,
+          "primitive_calls": 259,
+          "self_seconds": 0.014878461,
+          "total_calls": 259
+        },
+        {
+          "cumulative_seconds": 0.014786473000000001,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/encoder.py",
+          "function": "iterencode",
+          "line": 207,
+          "primitive_calls": 2032,
+          "self_seconds": 0.014786473000000001,
+          "total_calls": 2032
+        },
+        {
+          "cumulative_seconds": 0.017359797,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 68,
+          "primitive_calls": 124447,
+          "self_seconds": 0.013397734000000001,
+          "total_calls": 124447
+        },
+        {
+          "cumulative_seconds": 0.012865921,
+          "file": "~",
+          "function": "<method 'append' of 'list' objects>",
+          "line": 0,
+          "primitive_calls": 185667,
+          "self_seconds": 0.012865921,
+          "total_calls": 185667
+        },
+        {
+          "cumulative_seconds": 0.054203506000000005,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "inspect_targeted_backbone",
+          "line": 14,
+          "primitive_calls": 505,
+          "self_seconds": 0.012564267,
+          "total_calls": 505
+        },
+        {
+          "cumulative_seconds": 0.015053276,
+          "file": "~",
+          "function": "<built-in method builtins.max>",
+          "line": 0,
+          "primitive_calls": 178035,
+          "self_seconds": 0.012410138000000001,
+          "total_calls": 178035
+        },
+        {
+          "cumulative_seconds": 0.011671883000000001,
+          "file": "~",
+          "function": "<built-in method sys.getsizeof>",
+          "line": 0,
+          "primitive_calls": 131526,
+          "self_seconds": 0.011671883000000001,
+          "total_calls": 131526
+        },
+        {
+          "cumulative_seconds": 0.018453137,
+          "file": "experiments/cnf_query_canonical_cache.py",
+          "function": "<genexpr>",
+          "line": 27,
+          "primitive_calls": 58948,
+          "self_seconds": 0.010964608,
+          "total_calls": 58948
+        },
+        {
+          "cumulative_seconds": 0.013486642,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 96,
+          "primitive_calls": 100301,
+          "self_seconds": 0.010376965,
+          "total_calls": 100301
+        },
+        {
+          "cumulative_seconds": 0.013281005,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 71,
+          "primitive_calls": 101322,
+          "self_seconds": 0.010268914,
+          "total_calls": 101322
+        },
+        {
+          "cumulative_seconds": 0.016418726,
+          "file": "experiments/cnf_query_canonical_cache.py",
+          "function": "<genexpr>",
+          "line": 28,
+          "primitive_calls": 58638,
+          "self_seconds": 0.009621566,
+          "total_calls": 58638
+        },
+        {
+          "cumulative_seconds": 0.020657422,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "components",
+          "line": 110,
+          "primitive_calls": 192,
+          "self_seconds": 0.009601646,
+          "total_calls": 192
+        },
+        {
+          "cumulative_seconds": 0.044462165000000005,
+          "file": "~",
+          "function": "<built-in method builtins.sum>",
+          "line": 0,
+          "primitive_calls": 7043,
+          "self_seconds": 0.008966901000000001,
+          "total_calls": 7043
+        },
+        {
+          "cumulative_seconds": 0.20954143900000002,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_verify",
+          "line": 414,
+          "primitive_calls": 552,
+          "self_seconds": 0.008481496,
+          "total_calls": 552
+        },
+        {
+          "cumulative_seconds": 0.014322079000000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "positive_core",
+          "line": 283,
+          "primitive_calls": 201,
+          "self_seconds": 0.007943997000000001,
+          "total_calls": 201
+        },
+        {
+          "cumulative_seconds": 0.008668077,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "path",
+          "line": 60,
+          "primitive_calls": 751,
+          "self_seconds": 0.005945224000000001,
+          "total_calls": 751
+        },
+        {
+          "cumulative_seconds": 0.005870817,
+          "file": "~",
+          "function": "<method 'add' of 'set' objects>",
+          "line": 0,
+          "primitive_calls": 65336,
+          "self_seconds": 0.005870817,
+          "total_calls": 65336
+        },
+        {
+          "cumulative_seconds": 0.007575267,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "find",
+          "line": 113,
+          "primitive_calls": 33748,
+          "self_seconds": 0.005609188,
+          "total_calls": 33748
+        },
+        {
+          "cumulative_seconds": 0.008019713000000001,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "discover_all",
+          "line": 20,
+          "primitive_calls": 46,
+          "self_seconds": 0.005077712000000001,
+          "total_calls": 46
+        },
+        {
+          "cumulative_seconds": 0.004544768,
+          "file": "~",
+          "function": "<method 'setdefault' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 66344,
+          "self_seconds": 0.004544768,
+          "total_calls": 66344
+        },
+        {
+          "cumulative_seconds": 0.0040594360000000005,
+          "file": "~",
+          "function": "<method 'get' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 44212,
+          "self_seconds": 0.0040594360000000005,
+          "total_calls": 44212
+        },
+        {
+          "cumulative_seconds": 0.010510962,
+          "file": "~",
+          "function": "<built-in method _collections._count_elements>",
+          "line": 0,
+          "primitive_calls": 2023,
+          "self_seconds": 0.0036725620000000003,
+          "total_calls": 2023
+        },
+        {
+          "cumulative_seconds": 0.005147701,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 76,
+          "primitive_calls": 23356,
+          "self_seconds": 0.0035690690000000002,
+          "total_calls": 23356
+        },
+        {
+          "cumulative_seconds": 0.7567765000000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_visit",
+          "line": 519,
+          "primitive_calls": 90,
+          "self_seconds": 0.003496241,
+          "total_calls": 546
+        },
+        {
+          "cumulative_seconds": 0.04694393,
+          "file": "experiments/cnf_query_canonical_cache.py",
+          "function": "_entry_charge",
+          "line": 20,
+          "primitive_calls": 1347,
+          "self_seconds": 0.00289439,
+          "total_calls": 1347
+        },
+        {
+          "cumulative_seconds": 0.007854382,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_read",
+          "line": 382,
+          "primitive_calls": 1093,
+          "self_seconds": 0.002655227,
+          "total_calls": 1093
+        },
+        {
+          "cumulative_seconds": 0.00894578,
+          "file": "experiments/cnf_probe_equivalence.py",
+          "function": "<genexpr>",
+          "line": 43,
+          "primitive_calls": 6504,
+          "self_seconds": 0.0026200050000000003,
+          "total_calls": 6504
+        },
+        {
+          "cumulative_seconds": 0.00341529,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 600,
+          "primitive_calls": 24315,
+          "self_seconds": 0.002490332,
+          "total_calls": 24315
+        },
+        {
+          "cumulative_seconds": 0.00342311,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "<genexpr>",
+          "line": 101,
+          "primitive_calls": 23594,
+          "self_seconds": 0.002456324,
+          "total_calls": 23594
+        },
+        {
+          "cumulative_seconds": 0.61904979,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_expand",
+          "line": 540,
+          "primitive_calls": 90,
+          "self_seconds": 0.002328456,
+          "total_calls": 441
+        },
+        {
+          "cumulative_seconds": 0.011793291000000001,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "find",
+          "line": 181,
+          "primitive_calls": 104,
+          "self_seconds": 0.002072019,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.0025507940000000003,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "<genexpr>",
+          "line": 53,
+          "primitive_calls": 12414,
+          "self_seconds": 0.001982461,
+          "total_calls": 12414
+        },
+        {
+          "cumulative_seconds": 0.019431114000000003,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py",
+          "function": "dumps",
+          "line": 185,
+          "primitive_calls": 2032,
+          "self_seconds": 0.001947893,
+          "total_calls": 2032
+        },
+        {
+          "cumulative_seconds": 0.002643138,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 531,
+          "primitive_calls": 18434,
+          "self_seconds": 0.001915632,
+          "total_calls": 18434
+        },
+        {
+          "cumulative_seconds": 0.408468215,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_store",
+          "line": 508,
+          "primitive_calls": 552,
+          "self_seconds": 0.0018934190000000001,
+          "total_calls": 552
+        },
+        {
+          "cumulative_seconds": 0.22490875200000002,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_canonical",
+          "line": 378,
+          "primitive_calls": 1347,
+          "self_seconds": 0.001861767,
+          "total_calls": 1347
+        },
+        {
+          "cumulative_seconds": 0.011053831,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "check_blocks",
+          "line": 120,
+          "primitive_calls": 93,
+          "self_seconds": 0.001741722,
+          "total_calls": 93
+        },
+        {
+          "cumulative_seconds": 0.017022156,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/encoder.py",
+          "function": "encode",
+          "line": 185,
+          "primitive_calls": 2032,
+          "self_seconds": 0.001575348,
+          "total_calls": 2032
+        },
+        {
+          "cumulative_seconds": 0.0026618460000000003,
+          "file": "~",
+          "function": "<built-in method builtins.next>",
+          "line": 0,
+          "primitive_calls": 22784,
+          "self_seconds": 0.0015446790000000002,
+          "total_calls": 22784
+        },
+        {
+          "cumulative_seconds": 0.0020708270000000003,
+          "file": "~",
+          "function": "<built-in method builtins.min>",
+          "line": 0,
+          "primitive_calls": 2075,
+          "self_seconds": 0.001361741,
+          "total_calls": 2075
+        },
+        {
+          "cumulative_seconds": 0.001331797,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 294,
+          "primitive_calls": 21568,
+          "self_seconds": 0.001331797,
+          "total_calls": 21568
+        },
+        {
+          "cumulative_seconds": 0.014034858,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "token",
+          "line": 80,
+          "primitive_calls": 1347,
+          "self_seconds": 0.001300841,
+          "total_calls": 1347
+        },
+        {
+          "cumulative_seconds": 0.0012825240000000002,
+          "file": "~",
+          "function": "<method 'pop' of 'list' objects>",
+          "line": 0,
+          "primitive_calls": 15448,
+          "self_seconds": 0.0012825240000000002,
+          "total_calls": 15448
+        },
+        {
+          "cumulative_seconds": 0.001721122,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "check_tree",
+          "line": 84,
+          "primitive_calls": 137,
+          "self_seconds": 0.001227875,
+          "total_calls": 137
+        },
+        {
+          "cumulative_seconds": 0.001117167,
+          "file": "experiments/cnf_query_canonical_cache.py",
+          "function": "canonical_session",
+          "line": 38,
+          "primitive_calls": 208,
+          "self_seconds": 0.0011006170000000001,
+          "total_calls": 208
+        },
+        {
+          "cumulative_seconds": 0.001606156,
+          "file": "experiments/cnf_query_canonical_cache.py",
+          "function": "_note_retained",
+          "line": 32,
+          "primitive_calls": 1347,
+          "self_seconds": 0.0010722910000000002,
+          "total_calls": 1347
+        },
+        {
+          "cumulative_seconds": 0.004511,
+          "file": "experiments/cnf_binary_equivalence.py",
+          "function": "check_substitution",
+          "line": 79,
+          "primitive_calls": 33,
+          "self_seconds": 0.0010226970000000001,
+          "total_calls": 33
+        },
+        {
+          "cumulative_seconds": 0.638576131,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "_expand",
+          "line": 117,
+          "primitive_calls": 90,
+          "self_seconds": 0.001000879,
+          "total_calls": 505
+        },
+        {
+          "cumulative_seconds": 0.882667626,
+          "file": "experiments/cnf_known_quotient.py",
+          "function": "solve",
+          "line": 41,
+          "primitive_calls": 104,
+          "self_seconds": 0.000995372,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.001685237,
+          "file": "~",
+          "function": "<built-in method builtins.isinstance>",
+          "line": 0,
+          "primitive_calls": 6372,
+          "self_seconds": 0.0009386770000000001,
+          "total_calls": 6372
+        },
+        {
+          "cumulative_seconds": 0.012696852000000002,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/collections/__init__.py",
+          "function": "update",
+          "line": 679,
+          "primitive_calls": 2792,
+          "self_seconds": 0.0008783840000000001,
+          "total_calls": 2792
+        },
+        {
+          "cumulative_seconds": 0.00107891,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "path",
+          "line": 175,
+          "primitive_calls": 104,
+          "self_seconds": 0.000789435,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.001044798,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "matching_structure",
+          "line": 199,
+          "primitive_calls": 192,
+          "self_seconds": 0.0007356410000000001,
+          "total_calls": 192
+        },
+        {
+          "cumulative_seconds": 0.016273581000000002,
+          "file": "experiments/cnf_compact_equivalence.py",
+          "function": "source_from_key",
+          "line": 18,
+          "primitive_calls": 53,
+          "self_seconds": 0.000714786,
+          "total_calls": 53
+        },
+        {
+          "cumulative_seconds": 0.009533376000000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "holds",
+          "line": 75,
+          "primitive_calls": 247,
+          "self_seconds": 0.0007135420000000001,
+          "total_calls": 247
+        },
+        {
+          "cumulative_seconds": 0.011329038000000001,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/collections/__init__.py",
+          "function": "__init__",
+          "line": 602,
+          "primitive_calls": 925,
+          "self_seconds": 0.0006562870000000001,
+          "total_calls": 925
+        },
+        {
+          "cumulative_seconds": 0.009652832,
+          "file": "experiments/cnf_probe_equivalence.py",
+          "function": "substitute_block",
+          "line": 38,
+          "primitive_calls": 126,
+          "self_seconds": 0.000636629,
+          "total_calls": 126
+        },
+        {
+          "cumulative_seconds": 0.002005597,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 561,
+          "primitive_calls": 2736,
+          "self_seconds": 0.000600446,
+          "total_calls": 2736
+        },
+        {
+          "cumulative_seconds": 0.000586444,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 325,
+          "primitive_calls": 9840,
+          "self_seconds": 0.000586444,
+          "total_calls": 9840
+        },
+        {
+          "cumulative_seconds": 0.0005375260000000001,
+          "file": "~",
+          "function": "<built-in method builtins.iter>",
+          "line": 0,
+          "primitive_calls": 7854,
+          "self_seconds": 0.0005375260000000001,
+          "total_calls": 7854
+        },
+        {
+          "cumulative_seconds": 0.0005109110000000001,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/collections/__init__.py",
+          "function": "__missing__",
+          "line": 616,
+          "primitive_calls": 8176,
+          "self_seconds": 0.0005109110000000001,
+          "total_calls": 8176
+        },
+        {
+          "cumulative_seconds": 0.0005054090000000001,
+          "file": "~",
+          "function": "<method 'popleft' of 'collections.deque' objects>",
+          "line": 0,
+          "primitive_calls": 6427,
+          "self_seconds": 0.0005054090000000001,
+          "total_calls": 6427
+        },
+        {
+          "cumulative_seconds": 0.000490214,
+          "file": "~",
+          "function": "<method 'append' of 'collections.deque' objects>",
+          "line": 0,
+          "primitive_calls": 6160,
+          "self_seconds": 0.000490214,
+          "total_calls": 6160
+        },
+        {
+          "cumulative_seconds": 0.8846774180000001,
+          "file": "experiments/cnf_query_canonical_cache.py",
+          "function": "solve",
+          "line": 83,
+          "primitive_calls": 104,
+          "self_seconds": 0.000480197,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.000469578,
+          "file": "~",
+          "function": "<method 'encode' of 'str' objects>",
+          "line": 0,
+          "primitive_calls": 2637,
+          "self_seconds": 0.000469578,
+          "total_calls": 2637
+        },
+        {
+          "cumulative_seconds": 0.00046106500000000003,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/encoder.py",
+          "function": "__init__",
+          "line": 105,
+          "primitive_calls": 2032,
+          "self_seconds": 0.00046106500000000003,
+          "total_calls": 2032
+        },
+        {
+          "cumulative_seconds": 0.069482442,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "restrict",
+          "line": 57,
+          "primitive_calls": 780,
+          "self_seconds": 0.00041417900000000003,
+          "total_calls": 780
+        },
+        {
+          "cumulative_seconds": 0.036439539,
+          "file": "experiments/cnf_binary_clause_cover.py",
+          "function": "node",
+          "line": 111,
+          "primitive_calls": 17,
+          "self_seconds": 0.00038487000000000005,
+          "total_calls": 51
+        },
+        {
+          "cumulative_seconds": 0.0007465600000000001,
+          "file": "<frozen abc>",
+          "function": "__instancecheck__",
+          "line": 117,
+          "primitive_calls": 2255,
+          "self_seconds": 0.000375337,
+          "total_calls": 2255
+        },
+        {
+          "cumulative_seconds": 0.00037491900000000003,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py",
+          "function": "raw_decode",
+          "line": 351,
+          "primitive_calls": 53,
+          "self_seconds": 0.00037491900000000003,
+          "total_calls": 53
+        },
+        {
+          "cumulative_seconds": 0.000371223,
+          "file": "~",
+          "function": "<built-in method _abc._abc_instancecheck>",
+          "line": 0,
+          "primitive_calls": 2255,
+          "self_seconds": 0.000371223,
+          "total_calls": 2255
+        },
+        {
+          "cumulative_seconds": 0.00034064100000000003,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "<genexpr>",
+          "line": 37,
+          "primitive_calls": 5539,
+          "self_seconds": 0.00034064100000000003,
+          "total_calls": 5539
+        },
+        {
+          "cumulative_seconds": 0.000670579,
+          "file": "~",
+          "function": "<method 'sort' of 'list' objects>",
+          "line": 0,
+          "primitive_calls": 201,
+          "self_seconds": 0.000329346,
+          "total_calls": 201
+        },
+        {
+          "cumulative_seconds": 0.00039449900000000003,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 441,
+          "primitive_calls": 1850,
+          "self_seconds": 0.000326206,
+          "total_calls": 1850
+        },
+        {
+          "cumulative_seconds": 0.033751374,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_negative_child",
+          "line": 406,
+          "primitive_calls": 311,
+          "self_seconds": 0.00031103200000000004,
+          "total_calls": 311
+        },
+        {
+          "cumulative_seconds": 0.00028032,
+          "file": "~",
+          "function": "<method 'fetchone' of 'sqlite3.Cursor' objects>",
+          "line": 0,
+          "primitive_calls": 986,
+          "self_seconds": 0.00028032,
+          "total_calls": 986
+        },
+        {
+          "cumulative_seconds": 0.00027519100000000004,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<lambda>",
+          "line": 319,
+          "primitive_calls": 3875,
+          "self_seconds": 0.00027519100000000004,
+          "total_calls": 3875
+        },
+        {
+          "cumulative_seconds": 0.00034123300000000003,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<lambda>",
+          "line": 297,
+          "primitive_calls": 1635,
+          "self_seconds": 0.000261376,
+          "total_calls": 1635
+        },
+        {
+          "cumulative_seconds": 0.000256459,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 425,
+          "primitive_calls": 2647,
+          "self_seconds": 0.000256459,
+          "total_calls": 2647
+        },
+        {
+          "cumulative_seconds": 0.00022786100000000002,
+          "file": "~",
+          "function": "<method 'join' of 'str' objects>",
+          "line": 0,
+          "primitive_calls": 2032,
+          "self_seconds": 0.00022786100000000002,
+          "total_calls": 2032
+        },
+        {
+          "cumulative_seconds": 0.00022762700000000002,
+          "file": "experiments/cnf_compact_equivalence.py",
+          "function": "<genexpr>",
+          "line": 24,
+          "primitive_calls": 2874,
+          "self_seconds": 0.00022762700000000002,
+          "total_calls": 2874
+        },
+        {
+          "cumulative_seconds": 0.000224266,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<lambda>",
+          "line": 601,
+          "primitive_calls": 2785,
+          "self_seconds": 0.000224266,
+          "total_calls": 2785
+        },
+        {
+          "cumulative_seconds": 0.036728791000000004,
+          "file": "experiments/cnf_binary_clause_cover.py",
+          "function": "compile_cover",
+          "line": 97,
+          "primitive_calls": 17,
+          "self_seconds": 0.000223799,
+          "total_calls": 17
+        },
+        {
+          "cumulative_seconds": 0.034914707,
+          "file": "experiments/cnf_compact_equivalence.py",
+          "function": "publish",
+          "line": 70,
+          "primitive_calls": 33,
+          "self_seconds": 0.000221575,
+          "total_calls": 33
+        },
+        {
+          "cumulative_seconds": 0.00020962900000000002,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "<lambda>",
+          "line": 103,
+          "primitive_calls": 2926,
+          "self_seconds": 0.00020962900000000002,
+          "total_calls": 2926
+        },
+        {
+          "cumulative_seconds": 0.000256016,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 567,
+          "primitive_calls": 1478,
+          "self_seconds": 0.000194002,
+          "total_calls": 1478
+        },
+        {
+          "cumulative_seconds": 0.024761752,
+          "file": "experiments/cnf_compact_equivalence.py",
+          "function": "dependency",
+          "line": 30,
+          "primitive_calls": 33,
+          "self_seconds": 0.000174419,
+          "total_calls": 33
+        },
+        {
+          "cumulative_seconds": 0.00016626300000000002,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "<genexpr>",
+          "line": 191,
+          "primitive_calls": 2887,
+          "self_seconds": 0.00016626300000000002,
+          "total_calls": 2887
+        },
+        {
+          "cumulative_seconds": 0.048682254,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "publish",
+          "line": 164,
+          "primitive_calls": 53,
+          "self_seconds": 0.00016588,
+          "total_calls": 53
+        },
+        {
+          "cumulative_seconds": 0.001152836,
+          "file": "experiments/cnf_accounted_residuals.py",
+          "function": "archive_storage",
+          "line": 86,
+          "primitive_calls": 104,
+          "self_seconds": 0.00016155800000000001,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.0014532450000000001,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "read",
+          "line": 151,
+          "primitive_calls": 104,
+          "self_seconds": 0.000154964,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.000178378,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "tree",
+          "line": 65,
+          "primitive_calls": 62,
+          "self_seconds": 0.000151134,
+          "total_calls": 62
+        },
+        {
+          "cumulative_seconds": 0.008696582000000001,
+          "file": "experiments/cnf_binary_backbone.py",
+          "function": "excluded_child",
+          "line": 113,
+          "primitive_calls": 7,
+          "self_seconds": 0.00015070600000000002,
+          "total_calls": 7
+        },
+        {
+          "cumulative_seconds": 0.00015620600000000002,
+          "file": "experiments/cnf_binary_core_cache.py",
+          "function": "transport",
+          "line": 44,
+          "primitive_calls": 83,
+          "self_seconds": 0.000145164,
+          "total_calls": 83
+        },
+        {
+          "cumulative_seconds": 0.000136248,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "<genexpr>",
+          "line": 56,
+          "primitive_calls": 1292,
+          "self_seconds": 0.000136248,
+          "total_calls": 1292
+        },
+        {
+          "cumulative_seconds": 0.0007127430000000001,
+          "file": "experiments/cnf_compact_equivalence.py",
+          "function": "read",
+          "line": 53,
+          "primitive_calls": 104,
+          "self_seconds": 0.00013156000000000002,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.000315258,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 564,
+          "primitive_calls": 553,
+          "self_seconds": 0.000104568,
+          "total_calls": 553
+        },
+        {
+          "cumulative_seconds": 9.979700000000001e-05,
+          "file": "~",
+          "function": "<method 'get' of '_contextvars.ContextVar' objects>",
+          "line": 0,
+          "primitive_calls": 780,
+          "self_seconds": 9.979700000000001e-05,
+          "total_calls": 780
+        },
+        {
+          "cumulative_seconds": 0.017682293,
+          "file": "experiments/cnf_known_quotient.py",
+          "function": "choose_quotient",
+          "line": 14,
+          "primitive_calls": 59,
+          "self_seconds": 9.437800000000001e-05,
+          "total_calls": 59
+        },
+        {
+          "cumulative_seconds": 0.00011437300000000001,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/contextlib.py",
+          "function": "__init__",
+          "line": 108,
+          "primitive_calls": 104,
+          "self_seconds": 9.1081e-05,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.00024724800000000004,
+          "file": "experiments/cnf_binary_clause_cover.py",
+          "function": "transport",
+          "line": 133,
+          "primitive_calls": 18,
+          "self_seconds": 8.3949e-05,
+          "total_calls": 18
+        },
+        {
+          "cumulative_seconds": 8.3121e-05,
+          "file": "~",
+          "function": "<method '__enter__' of 'sqlite3.Connection' objects>",
+          "line": 0,
+          "primitive_calls": 605,
+          "self_seconds": 8.3121e-05,
+          "total_calls": 605
+        },
+        {
+          "cumulative_seconds": 0.000108126,
+          "file": "experiments/cnf_binary_backbone.py",
+          "function": "check_path",
+          "line": 101,
+          "primitive_calls": 19,
+          "self_seconds": 8.171e-05,
+          "total_calls": 19
+        },
+        {
+          "cumulative_seconds": 0.008235165000000001,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "dependency",
+          "line": 133,
+          "primitive_calls": 20,
+          "self_seconds": 8.1703e-05,
+          "total_calls": 20
+        },
+        {
+          "cumulative_seconds": 7.9039e-05,
+          "file": "~",
+          "function": "<method 'items' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 596,
+          "self_seconds": 7.9039e-05,
+          "total_calls": 596
+        },
+        {
+          "cumulative_seconds": 0.000534168,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py",
+          "function": "decode",
+          "line": 340,
+          "primitive_calls": 53,
+          "self_seconds": 7.9005e-05,
+          "total_calls": 53
+        },
+        {
+          "cumulative_seconds": 0.000190125,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/contextlib.py",
+          "function": "helper",
+          "line": 303,
+          "primitive_calls": 104,
+          "self_seconds": 7.5752e-05,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.001228081,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/contextlib.py",
+          "function": "__exit__",
+          "line": 145,
+          "primitive_calls": 104,
+          "self_seconds": 7.1788e-05,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 7.1666e-05,
+          "file": "~",
+          "function": "<method 'pop' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 470,
+          "self_seconds": 7.1666e-05,
+          "total_calls": 470
+        },
+        {
+          "cumulative_seconds": 0.008757832,
+          "file": "experiments/cnf_known_quotient.py",
+          "function": "lookup",
+          "line": 18,
+          "primitive_calls": 38,
+          "self_seconds": 6.575400000000001e-05,
+          "total_calls": 38
+        },
+        {
+          "cumulative_seconds": 8.4331e-05,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 450,
+          "primitive_calls": 321,
+          "self_seconds": 6.4936e-05,
+          "total_calls": 321
+        },
+        {
+          "cumulative_seconds": 5.9707e-05,
+          "file": "~",
+          "function": "<method 'match' of 're.Pattern' objects>",
+          "line": 0,
+          "primitive_calls": 106,
+          "self_seconds": 5.9707e-05,
+          "total_calls": 106
+        },
+        {
+          "cumulative_seconds": 5.5973e-05,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 213,
+          "primitive_calls": 644,
+          "self_seconds": 5.5973e-05,
+          "total_calls": 644
+        },
+        {
+          "cumulative_seconds": 7.1838e-05,
+          "file": "experiments/cnf_binary_clause_cover.py",
+          "function": "lit",
+          "line": 132,
+          "primitive_calls": 387,
+          "self_seconds": 5.4727000000000006e-05,
+          "total_calls": 387
+        },
+        {
+          "cumulative_seconds": 8.649800000000001e-05,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "check_positive_core",
+          "line": 328,
+          "primitive_calls": 6,
+          "self_seconds": 5.1833e-05,
+          "total_calls": 6
+        },
+        {
+          "cumulative_seconds": 5.1450000000000004e-05,
+          "file": "~",
+          "function": "<method 'update' of 'set' objects>",
+          "line": 0,
+          "primitive_calls": 340,
+          "self_seconds": 5.1450000000000004e-05,
+          "total_calls": 340
+        },
+        {
+          "cumulative_seconds": 4.9680000000000005e-05,
+          "file": "~",
+          "function": "<built-in method time.perf_counter>",
+          "line": 0,
+          "primitive_calls": 416,
+          "self_seconds": 4.9680000000000005e-05,
+          "total_calls": 416
+        },
+        {
+          "cumulative_seconds": 0.000593131,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py",
+          "function": "loads",
+          "line": 304,
+          "primitive_calls": 53,
+          "self_seconds": 4.8047e-05,
+          "total_calls": 53
+        },
+        {
+          "cumulative_seconds": 8.5667e-05,
+          "file": "experiments/cnf_binary_clause_cover.py",
+          "function": "<genexpr>",
+          "line": 136,
+          "primitive_calls": 342,
+          "self_seconds": 4.3963000000000006e-05,
+          "total_calls": 342
+        },
+        {
+          "cumulative_seconds": 8.950700000000001e-05,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/contextlib.py",
+          "function": "__enter__",
+          "line": 136,
+          "primitive_calls": 104,
+          "self_seconds": 4.2837e-05,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.0007701730000000001,
+          "file": "experiments/cnf_binary_core_cache.py",
+          "function": "encode",
+          "line": 18,
+          "primitive_calls": 100,
+          "self_seconds": 4.2709e-05,
+          "total_calls": 100
+        },
+        {
+          "cumulative_seconds": 3.8382e-05,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 218,
+          "primitive_calls": 516,
+          "self_seconds": 3.8382e-05,
+          "total_calls": 516
+        },
+        {
+          "cumulative_seconds": 3.575e-05,
+          "file": "~",
+          "function": "<method 'update' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 154,
+          "self_seconds": 3.575e-05,
+          "total_calls": 154
+        },
+        {
+          "cumulative_seconds": 3.196e-05,
+          "file": "~",
+          "function": "<method 'keys' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 274,
+          "self_seconds": 3.196e-05,
+          "total_calls": 274
+        },
+        {
+          "cumulative_seconds": 2.3783000000000003e-05,
+          "file": "~",
+          "function": "<method 'values' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 192,
+          "self_seconds": 2.3783000000000003e-05,
+          "total_calls": 192
+        },
+        {
+          "cumulative_seconds": 2.3292e-05,
+          "file": "~",
+          "function": "<built-in method builtins.getattr>",
+          "line": 0,
+          "primitive_calls": 104,
+          "self_seconds": 2.3292e-05,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 2.0542e-05,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 352,
+          "primitive_calls": 312,
+          "self_seconds": 2.0542e-05,
+          "total_calls": 312
+        },
+        {
+          "cumulative_seconds": 1.7708e-05,
+          "file": "~",
+          "function": "<method 'startswith' of 'str' objects>",
+          "line": 0,
+          "primitive_calls": 106,
+          "self_seconds": 1.7708e-05,
+          "total_calls": 106
+        },
+        {
+          "cumulative_seconds": 1.6288e-05,
+          "file": "~",
+          "function": "<method 'end' of 're.Match' objects>",
+          "line": 0,
+          "primitive_calls": 106,
+          "self_seconds": 1.6288e-05,
+          "total_calls": 106
+        },
+        {
+          "cumulative_seconds": 1.5208e-05,
+          "file": "~",
+          "function": "<method 'disable' of '_lsprof.Profiler' objects>",
+          "line": 0,
+          "primitive_calls": 1,
+          "self_seconds": 1.5208e-05,
+          "total_calls": 1
+        },
+        {
+          "cumulative_seconds": 1.6957e-05,
+          "file": "experiments/cnf_binary_backbone.py",
+          "function": "<genexpr>",
+          "line": 130,
+          "primitive_calls": 82,
+          "self_seconds": 1.4288000000000001e-05,
+          "total_calls": 82
+        },
+        {
+          "cumulative_seconds": 1.7579000000000002e-05,
+          "file": "experiments/cnf_binary_backbone.py",
+          "function": "<genexpr>",
+          "line": 132,
+          "primitive_calls": 82,
+          "self_seconds": 1.3534000000000001e-05,
+          "total_calls": 82
+        },
+        {
+          "cumulative_seconds": 1.0171000000000001e-05,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 494,
+          "primitive_calls": 45,
+          "self_seconds": 8.506000000000001e-06,
+          "total_calls": 45
+        },
+        {
+          "cumulative_seconds": 9.669e-06,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "<lambda>",
+          "line": 62,
+          "primitive_calls": 31,
+          "self_seconds": 7.963e-06,
+          "total_calls": 31
+        },
+        {
+          "cumulative_seconds": 7.5940000000000005e-06,
+          "file": "~",
+          "function": "<method 'reverse' of 'list' objects>",
+          "line": 0,
+          "primitive_calls": 77,
+          "self_seconds": 7.5940000000000005e-06,
+          "total_calls": 77
+        },
+        {
+          "cumulative_seconds": 5.375e-06,
+          "file": "~",
+          "function": "<method 'intersection' of 'set' objects>",
+          "line": 0,
+          "primitive_calls": 9,
+          "self_seconds": 5.375e-06,
+          "total_calls": 9
+        },
+        {
+          "cumulative_seconds": 5.2090000000000004e-06,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 341,
+          "primitive_calls": 18,
+          "self_seconds": 4.666e-06,
+          "total_calls": 18
+        },
+        {
+          "cumulative_seconds": 3.8280000000000004e-06,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 349,
+          "primitive_calls": 36,
+          "self_seconds": 3.8280000000000004e-06,
+          "total_calls": 36
+        },
+        {
+          "cumulative_seconds": 3.621e-06,
+          "file": "~",
+          "function": "<method 'index' of 'tuple' objects>",
+          "line": 0,
+          "primitive_calls": 17,
+          "self_seconds": 3.621e-06,
+          "total_calls": 17
+        },
+        {
+          "cumulative_seconds": 2.875e-06,
+          "file": "~",
+          "function": "<method 'issubset' of 'set' objects>",
+          "line": 0,
+          "primitive_calls": 6,
+          "self_seconds": 2.875e-06,
+          "total_calls": 6
+        }
+      ],
+      "outputs_and_counters_identical": true,
+      "total_calls": 3460213,
+      "total_profiled_seconds": 0.8565668669999997
+    },
+    "known": {
+      "canonical_callers": [
+        {
+          "callee": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_canonical",
+            "line": 378
+          },
+          "caller": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_negative_child",
+            "line": 406
+          },
+          "counts": [
+            311,
+            311,
+            0.00033136200000000003,
+            0.04620329
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_canonical",
+            "line": 378
+          },
+          "caller": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_verify",
+            "line": 414
+          },
+          "counts": [
+            552,
+            552,
+            0.0007553260000000001,
+            0.085802404
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_canonical",
+            "line": 378
+          },
+          "caller": {
+            "file": "experiments/cnf_binary_backbone.py",
+            "function": "excluded_child",
+            "line": 113
+          },
+          "counts": [
+            7,
+            7,
+            9.125e-06,
+            0.0011455430000000002
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_canonical",
+            "line": 378
+          },
+          "caller": {
+            "file": "experiments/cnf_compact_equivalence.py",
+            "function": "dependency",
+            "line": 30
+          },
+          "counts": [
+            33,
+            33,
+            4.6667000000000006e-05,
+            0.0067555010000000006
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_canonical",
+            "line": 378
+          },
+          "caller": {
+            "file": "experiments/cnf_multiblock_equivalence.py",
+            "function": "dependency",
+            "line": 133
+          },
+          "counts": [
+            20,
+            20,
+            2.2787e-05,
+            0.003017622
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_canonical",
+            "line": 378
+          },
+          "caller": {
+            "file": "experiments/cnf_known_quotient.py",
+            "function": "lookup",
+            "line": 18
+          },
+          "counts": [
+            38,
+            38,
+            4.5711e-05,
+            0.005324334
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_canonical",
+            "line": 378
+          },
+          "caller": {
+            "file": "experiments/cnf_compact_equivalence.py",
+            "function": "source_from_key",
+            "line": 18
+          },
+          "counts": [
+            53,
+            53,
+            7.9374e-05,
+            0.012086462000000001
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_canonical",
+            "line": 378
+          },
+          "caller": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_visit",
+            "line": 519
+          },
+          "counts": [
+            546,
+            546,
+            0.000689577,
+            0.082324636
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_canonical",
+            "line": 378
+          },
+          "caller": {
+            "file": "experiments/cnf_binary_clause_cover.py",
+            "function": "node",
+            "line": 111
+          },
+          "counts": [
+            51,
+            51,
+            5.691200000000001e-05,
+            0.006611163000000001
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_canonical",
+            "line": 378
+          },
+          "caller": {
+            "file": "experiments/cnf_known_quotient.py",
+            "function": "solve",
+            "line": 41
+          },
+          "counts": [
+            104,
+            104,
+            0.000183672,
+            0.023839712000000002
+          ]
+        }
+      ],
+      "functions": [
+        {
+          "cumulative_seconds": 0.131794656,
+          "file": "~",
+          "function": "<method '__exit__' of 'sqlite3.Connection' objects>",
+          "line": 0,
+          "primitive_calls": 605,
+          "self_seconds": 0.131794656,
+          "total_calls": 605
+        },
+        {
+          "cumulative_seconds": 0.254368086,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "normalize",
+          "line": 20,
+          "primitive_calls": 1715,
+          "self_seconds": 0.105053136,
+          "total_calls": 1715
+        },
+        {
+          "cumulative_seconds": 0.069961496,
+          "file": "~",
+          "function": "<method 'execute' of 'sqlite3.Connection' objects>",
+          "line": 0,
+          "primitive_calls": 1591,
+          "self_seconds": 0.069961496,
+          "total_calls": 1591
+        },
+        {
+          "cumulative_seconds": 0.093417897,
+          "file": "~",
+          "function": "<built-in method builtins.sorted>",
+          "line": 0,
+          "primitive_calls": 77443,
+          "self_seconds": 0.043868484000000006,
+          "total_calls": 149314
+        },
+        {
+          "cumulative_seconds": 0.036059419,
+          "file": "~",
+          "function": "<built-in method builtins.abs>",
+          "line": 0,
+          "primitive_calls": 866576,
+          "self_seconds": 0.036059419,
+          "total_calls": 866576
+        },
+        {
+          "cumulative_seconds": 0.066613299,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "restrict_scan",
+          "line": 63,
+          "primitive_calls": 780,
+          "self_seconds": 0.033148807,
+          "total_calls": 780
+        },
+        {
+          "cumulative_seconds": 0.041525917,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "propagate",
+          "line": 88,
+          "primitive_calls": 474,
+          "self_seconds": 0.022882865000000002,
+          "total_calls": 474
+        },
+        {
+          "cumulative_seconds": 0.02035311,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 30,
+          "primitive_calls": 247501,
+          "self_seconds": 0.02035311,
+          "total_calls": 247501
+        },
+        {
+          "cumulative_seconds": 0.018704388000000002,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 33,
+          "primitive_calls": 247030,
+          "self_seconds": 0.018704388000000002,
+          "total_calls": 247030
+        },
+        {
+          "cumulative_seconds": 0.072201633,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 39,
+          "primitive_calls": 73586,
+          "self_seconds": 0.018558217000000002,
+          "total_calls": 73586
+        },
+        {
+          "cumulative_seconds": 0.016334958,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/encoder.py",
+          "function": "iterencode",
+          "line": 207,
+          "primitive_calls": 2400,
+          "self_seconds": 0.016334958,
+          "total_calls": 2400
+        },
+        {
+          "cumulative_seconds": 0.021681919,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "two_cnf",
+          "line": 133,
+          "primitive_calls": 259,
+          "self_seconds": 0.014202144000000002,
+          "total_calls": 259
+        },
+        {
+          "cumulative_seconds": 0.013562885,
+          "file": "~",
+          "function": "<built-in method builtins.len>",
+          "line": 0,
+          "primitive_calls": 275687,
+          "self_seconds": 0.013562885,
+          "total_calls": 275687
+        },
+        {
+          "cumulative_seconds": 0.016705353000000003,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 68,
+          "primitive_calls": 124447,
+          "self_seconds": 0.012874841000000001,
+          "total_calls": 124447
+        },
+        {
+          "cumulative_seconds": 0.051869081000000004,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "inspect_targeted_backbone",
+          "line": 14,
+          "primitive_calls": 505,
+          "self_seconds": 0.012050266,
+          "total_calls": 505
+        },
+        {
+          "cumulative_seconds": 0.012834674,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 71,
+          "primitive_calls": 101322,
+          "self_seconds": 0.009916698,
+          "total_calls": 101322
+        },
+        {
+          "cumulative_seconds": 0.012832501000000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 96,
+          "primitive_calls": 100301,
+          "self_seconds": 0.009866702,
+          "total_calls": 100301
+        },
+        {
+          "cumulative_seconds": 0.019873951,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "components",
+          "line": 110,
+          "primitive_calls": 192,
+          "self_seconds": 0.009178532000000001,
+          "total_calls": 192
+        },
+        {
+          "cumulative_seconds": 0.176675246,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_verify",
+          "line": 414,
+          "primitive_calls": 552,
+          "self_seconds": 0.007777672,
+          "total_calls": 552
+        },
+        {
+          "cumulative_seconds": 0.007738461,
+          "file": "~",
+          "function": "<method 'append' of 'list' objects>",
+          "line": 0,
+          "primitive_calls": 113314,
+          "self_seconds": 0.007738461,
+          "total_calls": 113314
+        },
+        {
+          "cumulative_seconds": 0.013764407000000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "positive_core",
+          "line": 283,
+          "primitive_calls": 201,
+          "self_seconds": 0.007627480000000001,
+          "total_calls": 201
+        },
+        {
+          "cumulative_seconds": 0.006844117,
+          "file": "~",
+          "function": "<method 'add' of 'set' objects>",
+          "line": 0,
+          "primitive_calls": 79925,
+          "self_seconds": 0.006844117,
+          "total_calls": 79925
+        },
+        {
+          "cumulative_seconds": 0.008257508,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "path",
+          "line": 60,
+          "primitive_calls": 751,
+          "self_seconds": 0.005643382000000001,
+          "total_calls": 751
+        },
+        {
+          "cumulative_seconds": 0.007343415000000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "find",
+          "line": 113,
+          "primitive_calls": 33748,
+          "self_seconds": 0.005415737,
+          "total_calls": 33748
+        },
+        {
+          "cumulative_seconds": 0.007701245000000001,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "discover_all",
+          "line": 20,
+          "primitive_calls": 46,
+          "self_seconds": 0.004874413,
+          "total_calls": 46
+        },
+        {
+          "cumulative_seconds": 0.004401787,
+          "file": "~",
+          "function": "<method 'setdefault' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 66344,
+          "self_seconds": 0.004401787,
+          "total_calls": 66344
+        },
+        {
+          "cumulative_seconds": 0.010133696000000001,
+          "file": "~",
+          "function": "<built-in method _collections._count_elements>",
+          "line": 0,
+          "primitive_calls": 2023,
+          "self_seconds": 0.003540048,
+          "total_calls": 2023
+        },
+        {
+          "cumulative_seconds": 0.005017384000000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 76,
+          "primitive_calls": 23356,
+          "self_seconds": 0.003472291,
+          "total_calls": 23356
+        },
+        {
+          "cumulative_seconds": 0.647001044,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_visit",
+          "line": 519,
+          "primitive_calls": 90,
+          "self_seconds": 0.0032103110000000004,
+          "total_calls": 546
+        },
+        {
+          "cumulative_seconds": 0.002993309,
+          "file": "~",
+          "function": "<method 'get' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 42497,
+          "self_seconds": 0.002993309,
+          "total_calls": 42497
+        },
+        {
+          "cumulative_seconds": 0.007505015,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_read",
+          "line": 382,
+          "primitive_calls": 1093,
+          "self_seconds": 0.0026795340000000003,
+          "total_calls": 1093
+        },
+        {
+          "cumulative_seconds": 0.008737126000000001,
+          "file": "experiments/cnf_probe_equivalence.py",
+          "function": "<genexpr>",
+          "line": 43,
+          "primitive_calls": 6504,
+          "self_seconds": 0.002547735,
+          "total_calls": 6504
+        },
+        {
+          "cumulative_seconds": 0.526020959,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_expand",
+          "line": 540,
+          "primitive_calls": 90,
+          "self_seconds": 0.002523122,
+          "total_calls": 441
+        },
+        {
+          "cumulative_seconds": 0.003327519,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 600,
+          "primitive_calls": 24315,
+          "self_seconds": 0.002417958,
+          "total_calls": 24315
+        },
+        {
+          "cumulative_seconds": 0.003266129,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "<genexpr>",
+          "line": 101,
+          "primitive_calls": 23594,
+          "self_seconds": 0.0023552480000000003,
+          "total_calls": 23594
+        },
+        {
+          "cumulative_seconds": 0.27311066700000003,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_canonical",
+          "line": 378,
+          "primitive_calls": 1715,
+          "self_seconds": 0.0022205130000000003,
+          "total_calls": 1715
+        },
+        {
+          "cumulative_seconds": 0.36502996400000004,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_store",
+          "line": 508,
+          "primitive_calls": 552,
+          "self_seconds": 0.002194072,
+          "total_calls": 552
+        },
+        {
+          "cumulative_seconds": 0.011535747,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "find",
+          "line": 181,
+          "primitive_calls": 104,
+          "self_seconds": 0.0021283490000000003,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.021274716000000003,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py",
+          "function": "dumps",
+          "line": 185,
+          "primitive_calls": 2400,
+          "self_seconds": 0.002061671,
+          "total_calls": 2400
+        },
+        {
+          "cumulative_seconds": 0.0026181100000000003,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 531,
+          "primitive_calls": 18434,
+          "self_seconds": 0.0018947780000000002,
+          "total_calls": 18434
+        },
+        {
+          "cumulative_seconds": 0.0024054190000000002,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "<genexpr>",
+          "line": 53,
+          "primitive_calls": 12414,
+          "self_seconds": 0.001867783,
+          "total_calls": 12414
+        },
+        {
+          "cumulative_seconds": 0.011054044,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "check_blocks",
+          "line": 120,
+          "primitive_calls": 93,
+          "self_seconds": 0.001734903,
+          "total_calls": 93
+        },
+        {
+          "cumulative_seconds": 0.018734692,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/encoder.py",
+          "function": "encode",
+          "line": 185,
+          "primitive_calls": 2400,
+          "self_seconds": 0.0016779050000000002,
+          "total_calls": 2400
+        },
+        {
+          "cumulative_seconds": 0.016522068,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "token",
+          "line": 80,
+          "primitive_calls": 1715,
+          "self_seconds": 0.001476733,
+          "total_calls": 1715
+        },
+        {
+          "cumulative_seconds": 0.002065346,
+          "file": "~",
+          "function": "<built-in method builtins.sum>",
+          "line": 0,
+          "primitive_calls": 3981,
+          "self_seconds": 0.0014692350000000002,
+          "total_calls": 3981
+        },
+        {
+          "cumulative_seconds": 0.001344789,
+          "file": "~",
+          "function": "<built-in method builtins.next>",
+          "line": 0,
+          "primitive_calls": 22106,
+          "self_seconds": 0.001344789,
+          "total_calls": 22106
+        },
+        {
+          "cumulative_seconds": 0.002008801,
+          "file": "~",
+          "function": "<built-in method builtins.min>",
+          "line": 0,
+          "primitive_calls": 2075,
+          "self_seconds": 0.001310757,
+          "total_calls": 2075
+        },
+        {
+          "cumulative_seconds": 0.0012918320000000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 294,
+          "primitive_calls": 21568,
+          "self_seconds": 0.0012918320000000001,
+          "total_calls": 21568
+        },
+        {
+          "cumulative_seconds": 0.001756423,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "check_tree",
+          "line": 84,
+          "primitive_calls": 137,
+          "self_seconds": 0.001252824,
+          "total_calls": 137
+        },
+        {
+          "cumulative_seconds": 0.001248792,
+          "file": "~",
+          "function": "<method 'pop' of 'list' objects>",
+          "line": 0,
+          "primitive_calls": 15448,
+          "self_seconds": 0.001248792,
+          "total_calls": 15448
+        },
+        {
+          "cumulative_seconds": 0.0038105300000000003,
+          "file": "~",
+          "function": "<built-in method builtins.max>",
+          "line": 0,
+          "primitive_calls": 193,
+          "self_seconds": 0.00119242,
+          "total_calls": 193
+        },
+        {
+          "cumulative_seconds": 0.544233755,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "_expand",
+          "line": 117,
+          "primitive_calls": 90,
+          "self_seconds": 0.001000082,
+          "total_calls": 505
+        },
+        {
+          "cumulative_seconds": 0.7545022950000001,
+          "file": "experiments/cnf_known_quotient.py",
+          "function": "solve",
+          "line": 41,
+          "primitive_calls": 104,
+          "self_seconds": 0.000991418,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.004244753,
+          "file": "experiments/cnf_binary_equivalence.py",
+          "function": "check_substitution",
+          "line": 79,
+          "primitive_calls": 33,
+          "self_seconds": 0.0009730750000000001,
+          "total_calls": 33
+        },
+        {
+          "cumulative_seconds": 0.0016883360000000001,
+          "file": "~",
+          "function": "<built-in method builtins.isinstance>",
+          "line": 0,
+          "primitive_calls": 7108,
+          "self_seconds": 0.0009434100000000001,
+          "total_calls": 7108
+        },
+        {
+          "cumulative_seconds": 0.012238566000000001,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/collections/__init__.py",
+          "function": "update",
+          "line": 679,
+          "primitive_calls": 2792,
+          "self_seconds": 0.0008354170000000001,
+          "total_calls": 2792
+        },
+        {
+          "cumulative_seconds": 0.0010080830000000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "path",
+          "line": 175,
+          "primitive_calls": 104,
+          "self_seconds": 0.0007333270000000001,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.009282425,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "holds",
+          "line": 75,
+          "primitive_calls": 247,
+          "self_seconds": 0.00070832,
+          "total_calls": 247
+        },
+        {
+          "cumulative_seconds": 0.000989508,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "matching_structure",
+          "line": 199,
+          "primitive_calls": 192,
+          "self_seconds": 0.000693287,
+          "total_calls": 192
+        },
+        {
+          "cumulative_seconds": 0.013561088,
+          "file": "experiments/cnf_compact_equivalence.py",
+          "function": "source_from_key",
+          "line": 18,
+          "primitive_calls": 53,
+          "self_seconds": 0.000649481,
+          "total_calls": 53
+        },
+        {
+          "cumulative_seconds": 0.010939879000000001,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/collections/__init__.py",
+          "function": "__init__",
+          "line": 602,
+          "primitive_calls": 925,
+          "self_seconds": 0.0006314020000000001,
+          "total_calls": 925
+        },
+        {
+          "cumulative_seconds": 0.009425082000000001,
+          "file": "experiments/cnf_probe_equivalence.py",
+          "function": "substitute_block",
+          "line": 38,
+          "primitive_calls": 126,
+          "self_seconds": 0.000614039,
+          "total_calls": 126
+        },
+        {
+          "cumulative_seconds": 0.001910479,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 561,
+          "primitive_calls": 2736,
+          "self_seconds": 0.0005751430000000001,
+          "total_calls": 2736
+        },
+        {
+          "cumulative_seconds": 0.00055533,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 325,
+          "primitive_calls": 9840,
+          "self_seconds": 0.00055533,
+          "total_calls": 9840
+        },
+        {
+          "cumulative_seconds": 0.046598746,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "publish",
+          "line": 164,
+          "primitive_calls": 53,
+          "self_seconds": 0.0005402100000000001,
+          "total_calls": 53
+        },
+        {
+          "cumulative_seconds": 0.000488482,
+          "file": "~",
+          "function": "<method 'popleft' of 'collections.deque' objects>",
+          "line": 0,
+          "primitive_calls": 6427,
+          "self_seconds": 0.000488482,
+          "total_calls": 6427
+        },
+        {
+          "cumulative_seconds": 0.000482834,
+          "file": "~",
+          "function": "<method 'encode' of 'str' objects>",
+          "line": 0,
+          "primitive_calls": 3005,
+          "self_seconds": 0.000482834,
+          "total_calls": 3005
+        },
+        {
+          "cumulative_seconds": 0.00048200600000000005,
+          "file": "~",
+          "function": "<built-in method builtins.iter>",
+          "line": 0,
+          "primitive_calls": 7384,
+          "self_seconds": 0.00048200600000000005,
+          "total_calls": 7384
+        },
+        {
+          "cumulative_seconds": 0.00047835300000000005,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/encoder.py",
+          "function": "__init__",
+          "line": 105,
+          "primitive_calls": 2400,
+          "self_seconds": 0.00047835300000000005,
+          "total_calls": 2400
+        },
+        {
+          "cumulative_seconds": 0.00047414900000000004,
+          "file": "~",
+          "function": "<method 'append' of 'collections.deque' objects>",
+          "line": 0,
+          "primitive_calls": 6160,
+          "self_seconds": 0.00047414900000000004,
+          "total_calls": 6160
+        },
+        {
+          "cumulative_seconds": 0.000427323,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/collections/__init__.py",
+          "function": "__missing__",
+          "line": 616,
+          "primitive_calls": 6795,
+          "self_seconds": 0.000427323,
+          "total_calls": 6795
+        },
+        {
+          "cumulative_seconds": 0.06711731900000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "restrict",
+          "line": 57,
+          "primitive_calls": 780,
+          "self_seconds": 0.000398778,
+          "total_calls": 780
+        },
+        {
+          "cumulative_seconds": 0.02740642,
+          "file": "experiments/cnf_binary_clause_cover.py",
+          "function": "node",
+          "line": 111,
+          "primitive_calls": 17,
+          "self_seconds": 0.000374457,
+          "total_calls": 51
+        },
+        {
+          "cumulative_seconds": 0.000744926,
+          "file": "<frozen abc>",
+          "function": "__instancecheck__",
+          "line": 117,
+          "primitive_calls": 2255,
+          "self_seconds": 0.00036334100000000004,
+          "total_calls": 2255
+        },
+        {
+          "cumulative_seconds": 0.000351123,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py",
+          "function": "raw_decode",
+          "line": 351,
+          "primitive_calls": 53,
+          "self_seconds": 0.000351123,
+          "total_calls": 53
+        },
+        {
+          "cumulative_seconds": 0.00038158500000000004,
+          "file": "~",
+          "function": "<built-in method _abc._abc_instancecheck>",
+          "line": 0,
+          "primitive_calls": 2255,
+          "self_seconds": 0.000336959,
+          "total_calls": 2255
+        },
+        {
+          "cumulative_seconds": 0.00033397,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "<genexpr>",
+          "line": 37,
+          "primitive_calls": 5539,
+          "self_seconds": 0.00033397,
+          "total_calls": 5539
+        },
+        {
+          "cumulative_seconds": 0.000637401,
+          "file": "~",
+          "function": "<method 'sort' of 'list' objects>",
+          "line": 0,
+          "primitive_calls": 201,
+          "self_seconds": 0.000309518,
+          "total_calls": 201
+        },
+        {
+          "cumulative_seconds": 0.00035598700000000005,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 441,
+          "primitive_calls": 1850,
+          "self_seconds": 0.000293946,
+          "total_calls": 1850
+        },
+        {
+          "cumulative_seconds": 0.000270638,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<lambda>",
+          "line": 319,
+          "primitive_calls": 3875,
+          "self_seconds": 0.000270638,
+          "total_calls": 3875
+        },
+        {
+          "cumulative_seconds": 0.00026740600000000003,
+          "file": "~",
+          "function": "<method 'fetchone' of 'sqlite3.Cursor' objects>",
+          "line": 0,
+          "primitive_calls": 986,
+          "self_seconds": 0.00026740600000000003,
+          "total_calls": 986
+        },
+        {
+          "cumulative_seconds": 0.00025249,
+          "file": "~",
+          "function": "<method 'join' of 'str' objects>",
+          "line": 0,
+          "primitive_calls": 2400,
+          "self_seconds": 0.00025249,
+          "total_calls": 2400
+        },
+        {
+          "cumulative_seconds": 0.000327883,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<lambda>",
+          "line": 297,
+          "primitive_calls": 1635,
+          "self_seconds": 0.000251994,
+          "total_calls": 1635
+        },
+        {
+          "cumulative_seconds": 0.000241362,
+          "file": "experiments/cnf_compact_equivalence.py",
+          "function": "<genexpr>",
+          "line": 24,
+          "primitive_calls": 2874,
+          "self_seconds": 0.000241362,
+          "total_calls": 2874
+        },
+        {
+          "cumulative_seconds": 0.00023138700000000003,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 425,
+          "primitive_calls": 2647,
+          "self_seconds": 0.00023138700000000003,
+          "total_calls": 2647
+        },
+        {
+          "cumulative_seconds": 0.027696085000000002,
+          "file": "experiments/cnf_binary_clause_cover.py",
+          "function": "compile_cover",
+          "line": 97,
+          "primitive_calls": 17,
+          "self_seconds": 0.00022665,
+          "total_calls": 17
+        },
+        {
+          "cumulative_seconds": 0.000223572,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<lambda>",
+          "line": 601,
+          "primitive_calls": 2785,
+          "self_seconds": 0.000223572,
+          "total_calls": 2785
+        },
+        {
+          "cumulative_seconds": 0.028851457,
+          "file": "experiments/cnf_compact_equivalence.py",
+          "function": "publish",
+          "line": 70,
+          "primitive_calls": 33,
+          "self_seconds": 0.000222534,
+          "total_calls": 33
+        },
+        {
+          "cumulative_seconds": 0.00020383400000000001,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "<lambda>",
+          "line": 103,
+          "primitive_calls": 2926,
+          "self_seconds": 0.00020383400000000001,
+          "total_calls": 2926
+        },
+        {
+          "cumulative_seconds": 0.047877243,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_negative_child",
+          "line": 406,
+          "primitive_calls": 311,
+          "self_seconds": 0.00019017100000000002,
+          "total_calls": 311
+        },
+        {
+          "cumulative_seconds": 0.000246616,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 567,
+          "primitive_calls": 1478,
+          "self_seconds": 0.00018622000000000002,
+          "total_calls": 1478
+        },
+        {
+          "cumulative_seconds": 0.000172343,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "<genexpr>",
+          "line": 191,
+          "primitive_calls": 2887,
+          "self_seconds": 0.000172343,
+          "total_calls": 2887
+        },
+        {
+          "cumulative_seconds": 0.001173957,
+          "file": "experiments/cnf_accounted_residuals.py",
+          "function": "archive_storage",
+          "line": 86,
+          "primitive_calls": 104,
+          "self_seconds": 0.000151742,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.001464912,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "read",
+          "line": 151,
+          "primitive_calls": 104,
+          "self_seconds": 0.000149745,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.00016345700000000002,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "tree",
+          "line": 65,
+          "primitive_calls": 62,
+          "self_seconds": 0.000137999,
+          "total_calls": 62
+        },
+        {
+          "cumulative_seconds": 0.006817916,
+          "file": "experiments/cnf_binary_backbone.py",
+          "function": "excluded_child",
+          "line": 113,
+          "primitive_calls": 7,
+          "self_seconds": 0.000136796,
+          "total_calls": 7
+        },
+        {
+          "cumulative_seconds": 0.00014620600000000002,
+          "file": "experiments/cnf_binary_core_cache.py",
+          "function": "transport",
+          "line": 44,
+          "primitive_calls": 83,
+          "self_seconds": 0.00013449000000000002,
+          "total_calls": 83
+        },
+        {
+          "cumulative_seconds": 0.019356544,
+          "file": "experiments/cnf_compact_equivalence.py",
+          "function": "dependency",
+          "line": 30,
+          "primitive_calls": 33,
+          "self_seconds": 0.000133909,
+          "total_calls": 33
+        },
+        {
+          "cumulative_seconds": 0.000132506,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "<genexpr>",
+          "line": 56,
+          "primitive_calls": 1292,
+          "self_seconds": 0.000132506,
+          "total_calls": 1292
+        },
+        {
+          "cumulative_seconds": 0.0007166620000000001,
+          "file": "experiments/cnf_compact_equivalence.py",
+          "function": "read",
+          "line": 53,
+          "primitive_calls": 104,
+          "self_seconds": 0.00012015900000000001,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.014533915000000001,
+          "file": "experiments/cnf_known_quotient.py",
+          "function": "choose_quotient",
+          "line": 14,
+          "primitive_calls": 59,
+          "self_seconds": 0.000110075,
+          "total_calls": 59
+        },
+        {
+          "cumulative_seconds": 0.000105242,
+          "file": "~",
+          "function": "<method 'get' of '_contextvars.ContextVar' objects>",
+          "line": 0,
+          "primitive_calls": 780,
+          "self_seconds": 0.000105242,
+          "total_calls": 780
+        },
+        {
+          "cumulative_seconds": 0.00029613400000000003,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 564,
+          "primitive_calls": 553,
+          "self_seconds": 9.8626e-05,
+          "total_calls": 553
+        },
+        {
+          "cumulative_seconds": 0.011083,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "dependency",
+          "line": 133,
+          "primitive_calls": 20,
+          "self_seconds": 8.1957e-05,
+          "total_calls": 20
+        },
+        {
+          "cumulative_seconds": 0.000244251,
+          "file": "experiments/cnf_binary_clause_cover.py",
+          "function": "transport",
+          "line": 133,
+          "primitive_calls": 18,
+          "self_seconds": 8.1365e-05,
+          "total_calls": 18
+        },
+        {
+          "cumulative_seconds": 7.5917e-05,
+          "file": "~",
+          "function": "<method '__enter__' of 'sqlite3.Connection' objects>",
+          "line": 0,
+          "primitive_calls": 605,
+          "self_seconds": 7.5917e-05,
+          "total_calls": 605
+        },
+        {
+          "cumulative_seconds": 9.879100000000001e-05,
+          "file": "experiments/cnf_binary_backbone.py",
+          "function": "check_path",
+          "line": 101,
+          "primitive_calls": 19,
+          "self_seconds": 7.529700000000001e-05,
+          "total_calls": 19
+        },
+        {
+          "cumulative_seconds": 7.431400000000001e-05,
+          "file": "~",
+          "function": "<method 'items' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 596,
+          "self_seconds": 7.431400000000001e-05,
+          "total_calls": 596
+        },
+        {
+          "cumulative_seconds": 0.000499416,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py",
+          "function": "decode",
+          "line": 340,
+          "primitive_calls": 53,
+          "self_seconds": 7.176200000000001e-05,
+          "total_calls": 53
+        },
+        {
+          "cumulative_seconds": 0.005685791,
+          "file": "experiments/cnf_known_quotient.py",
+          "function": "lookup",
+          "line": 18,
+          "primitive_calls": 38,
+          "self_seconds": 6.632900000000001e-05,
+          "total_calls": 38
+        },
+        {
+          "cumulative_seconds": 7.7754e-05,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 450,
+          "primitive_calls": 321,
+          "self_seconds": 5.9904e-05,
+          "total_calls": 321
+        },
+        {
+          "cumulative_seconds": 9.7793e-05,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "check_positive_core",
+          "line": 328,
+          "primitive_calls": 6,
+          "self_seconds": 5.9291000000000005e-05,
+          "total_calls": 6
+        },
+        {
+          "cumulative_seconds": 5.7202000000000006e-05,
+          "file": "~",
+          "function": "<method 'match' of 're.Pattern' objects>",
+          "line": 0,
+          "primitive_calls": 106,
+          "self_seconds": 5.7202000000000006e-05,
+          "total_calls": 106
+        },
+        {
+          "cumulative_seconds": 5.4593000000000004e-05,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 213,
+          "primitive_calls": 644,
+          "self_seconds": 5.4593000000000004e-05,
+          "total_calls": 644
+        },
+        {
+          "cumulative_seconds": 7.101e-05,
+          "file": "experiments/cnf_binary_clause_cover.py",
+          "function": "lit",
+          "line": 132,
+          "primitive_calls": 387,
+          "self_seconds": 5.4144e-05,
+          "total_calls": 387
+        },
+        {
+          "cumulative_seconds": 5.3789e-05,
+          "file": "~",
+          "function": "<method 'update' of 'set' objects>",
+          "line": 0,
+          "primitive_calls": 340,
+          "self_seconds": 5.3789e-05,
+          "total_calls": 340
+        },
+        {
+          "cumulative_seconds": 8.6872e-05,
+          "file": "experiments/cnf_binary_clause_cover.py",
+          "function": "<genexpr>",
+          "line": 136,
+          "primitive_calls": 342,
+          "self_seconds": 4.5248000000000005e-05,
+          "total_calls": 342
+        },
+        {
+          "cumulative_seconds": 0.000552834,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py",
+          "function": "loads",
+          "line": 304,
+          "primitive_calls": 53,
+          "self_seconds": 4.2539e-05,
+          "total_calls": 53
+        },
+        {
+          "cumulative_seconds": 0.000759958,
+          "file": "experiments/cnf_binary_core_cache.py",
+          "function": "encode",
+          "line": 18,
+          "primitive_calls": 100,
+          "self_seconds": 4.0503e-05,
+          "total_calls": 100
+        },
+        {
+          "cumulative_seconds": 4.3749000000000004e-05,
+          "file": "~",
+          "function": "<built-in method _abc._abc_subclasscheck>",
+          "line": 0,
+          "primitive_calls": 3,
+          "self_seconds": 3.7248e-05,
+          "total_calls": 30
+        },
+        {
+          "cumulative_seconds": 3.5220000000000005e-05,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 218,
+          "primitive_calls": 516,
+          "self_seconds": 3.5220000000000005e-05,
+          "total_calls": 516
+        },
+        {
+          "cumulative_seconds": 3.4865e-05,
+          "file": "~",
+          "function": "<method 'update' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 154,
+          "self_seconds": 3.4865e-05,
+          "total_calls": 154
+        },
+        {
+          "cumulative_seconds": 3.4167e-05,
+          "file": "~",
+          "function": "<method 'keys' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 274,
+          "self_seconds": 3.4167e-05,
+          "total_calls": 274
+        },
+        {
+          "cumulative_seconds": 3.1053e-05,
+          "file": "~",
+          "function": "<built-in method time.perf_counter>",
+          "line": 0,
+          "primitive_calls": 208,
+          "self_seconds": 3.1053e-05,
+          "total_calls": 208
+        },
+        {
+          "cumulative_seconds": 2.4666e-05,
+          "file": "~",
+          "function": "<method 'values' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 192,
+          "self_seconds": 2.4666e-05,
+          "total_calls": 192
+        },
+        {
+          "cumulative_seconds": 2.3371e-05,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 352,
+          "primitive_calls": 312,
+          "self_seconds": 2.3371e-05,
+          "total_calls": 312
+        },
+        {
+          "cumulative_seconds": 1.7375000000000002e-05,
+          "file": "~",
+          "function": "<method 'disable' of '_lsprof.Profiler' objects>",
+          "line": 0,
+          "primitive_calls": 1,
+          "self_seconds": 1.7375000000000002e-05,
+          "total_calls": 1
+        },
+        {
+          "cumulative_seconds": 1.6332000000000002e-05,
+          "file": "~",
+          "function": "<method 'startswith' of 'str' objects>",
+          "line": 0,
+          "primitive_calls": 106,
+          "self_seconds": 1.6332000000000002e-05,
+          "total_calls": 106
+        },
+        {
+          "cumulative_seconds": 1.5325e-05,
+          "file": "~",
+          "function": "<method 'end' of 're.Match' objects>",
+          "line": 0,
+          "primitive_calls": 106,
+          "self_seconds": 1.5325e-05,
+          "total_calls": 106
+        },
+        {
+          "cumulative_seconds": 1.6215e-05,
+          "file": "experiments/cnf_binary_backbone.py",
+          "function": "<genexpr>",
+          "line": 130,
+          "primitive_calls": 82,
+          "self_seconds": 1.3837000000000002e-05,
+          "total_calls": 82
+        },
+        {
+          "cumulative_seconds": 1.6958000000000003e-05,
+          "file": "experiments/cnf_binary_backbone.py",
+          "function": "<genexpr>",
+          "line": 132,
+          "primitive_calls": 82,
+          "self_seconds": 1.3834e-05,
+          "total_calls": 82
+        },
+        {
+          "cumulative_seconds": 1.1256e-05,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 494,
+          "primitive_calls": 45,
+          "self_seconds": 9.007e-06,
+          "total_calls": 45
+        },
+        {
+          "cumulative_seconds": 7.581000000000001e-06,
+          "file": "~",
+          "function": "<method 'reverse' of 'list' objects>",
+          "line": 0,
+          "primitive_calls": 77,
+          "self_seconds": 7.581000000000001e-06,
+          "total_calls": 77
+        },
+        {
+          "cumulative_seconds": 8.750000000000001e-06,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "<lambda>",
+          "line": 62,
+          "primitive_calls": 31,
+          "self_seconds": 7.294000000000001e-06,
+          "total_calls": 31
+        },
+        {
+          "cumulative_seconds": 6.375000000000001e-06,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 341,
+          "primitive_calls": 18,
+          "self_seconds": 5.543e-06,
+          "total_calls": 18
+        },
+        {
+          "cumulative_seconds": 4.4626e-05,
+          "file": "<frozen abc>",
+          "function": "__subclasscheck__",
+          "line": 121,
+          "primitive_calls": 3,
+          "self_seconds": 4.628e-06,
+          "total_calls": 30
+        },
+        {
+          "cumulative_seconds": 3.5840000000000003e-06,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 349,
+          "primitive_calls": 36,
+          "self_seconds": 3.5840000000000003e-06,
+          "total_calls": 36
+        },
+        {
+          "cumulative_seconds": 3.5430000000000002e-06,
+          "file": "~",
+          "function": "<method 'intersection' of 'set' objects>",
+          "line": 0,
+          "primitive_calls": 9,
+          "self_seconds": 3.5430000000000002e-06,
+          "total_calls": 9
+        },
+        {
+          "cumulative_seconds": 3.373e-06,
+          "file": "~",
+          "function": "<method 'index' of 'tuple' objects>",
+          "line": 0,
+          "primitive_calls": 17,
+          "self_seconds": 3.373e-06,
+          "total_calls": 17
+        },
+        {
+          "cumulative_seconds": 3.0420000000000003e-06,
+          "file": "~",
+          "function": "<method 'issubset' of 'set' objects>",
+          "line": 0,
+          "primitive_calls": 6,
+          "self_seconds": 3.0420000000000003e-06,
+          "total_calls": 6
+        },
+        {
+          "cumulative_seconds": 2.7500000000000004e-06,
+          "file": "<frozen _collections_abc>",
+          "function": "__subclasshook__",
+          "line": 439,
+          "primitive_calls": 30,
+          "self_seconds": 2.7500000000000004e-06,
+          "total_calls": 30
+        }
+      ],
+      "outputs_and_counters_identical": true,
+      "total_calls": 2822888,
+      "total_profiled_seconds": 0.7225344270000001
+    },
+    "linear": {
+      "canonical_callers": [
+        {
+          "callee": {
+            "file": "experiments/cnf_canonical_verify.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_negative_child",
+            "line": 406
+          },
+          "counts": [
+            311,
+            311,
+            0.000132333,
+            0.047140475
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_canonical_verify.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_verify",
+            "line": 414
+          },
+          "counts": [
+            552,
+            552,
+            0.000171373,
+            0.00017729600000000002
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_canonical_verify.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_binary_backbone.py",
+            "function": "excluded_child",
+            "line": 113
+          },
+          "counts": [
+            7,
+            7,
+            3.457e-06,
+            0.0011553330000000001
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_canonical_verify.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_compact_equivalence.py",
+            "function": "dependency",
+            "line": 30
+          },
+          "counts": [
+            33,
+            33,
+            1.5253000000000001e-05,
+            0.006803002000000001
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_canonical_verify.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_multiblock_equivalence.py",
+            "function": "dependency",
+            "line": 133
+          },
+          "counts": [
+            20,
+            20,
+            8.792e-06,
+            0.002789335
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_canonical_verify.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_known_quotient.py",
+            "function": "lookup",
+            "line": 18
+          },
+          "counts": [
+            38,
+            38,
+            1.821e-05,
+            0.004862254
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_canonical_verify.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_compact_equivalence.py",
+            "function": "source_from_key",
+            "line": 18
+          },
+          "counts": [
+            53,
+            53,
+            2.5997000000000002e-05,
+            0.01015821
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_canonical_verify.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_visit",
+            "line": 519
+          },
+          "counts": [
+            546,
+            546,
+            0.00025913900000000003,
+            0.08320534900000001
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_canonical_verify.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_binary_clause_cover.py",
+            "function": "node",
+            "line": 111
+          },
+          "counts": [
+            51,
+            51,
+            2.4588000000000002e-05,
+            0.006692007000000001
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_canonical_verify.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "caller": {
+            "file": "experiments/cnf_known_quotient.py",
+            "function": "solve",
+            "line": 41
+          },
+          "counts": [
+            104,
+            104,
+            5.4249e-05,
+            0.02268446
+          ]
+        },
+        {
+          "callee": {
+            "file": "experiments/cnf_residual_dag.py",
+            "function": "_canonical",
+            "line": 378
+          },
+          "caller": {
+            "file": "experiments/cnf_canonical_verify.py",
+            "function": "_canonical",
+            "line": 49
+          },
+          "counts": [
+            1163,
+            1163,
+            0.001481712,
+            0.184948407
+          ]
+        }
+      ],
+      "functions": [
+        {
+          "cumulative_seconds": 0.12606798900000002,
+          "file": "~",
+          "function": "<method '__exit__' of 'sqlite3.Connection' objects>",
+          "line": 0,
+          "primitive_calls": 605,
+          "self_seconds": 0.12606798900000002,
+          "total_calls": 605
+        },
+        {
+          "cumulative_seconds": 0.1724408,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "normalize",
+          "line": 20,
+          "primitive_calls": 1163,
+          "self_seconds": 0.0705379,
+          "total_calls": 1163
+        },
+        {
+          "cumulative_seconds": 0.065223484,
+          "file": "~",
+          "function": "<method 'execute' of 'sqlite3.Connection' objects>",
+          "line": 0,
+          "primitive_calls": 1591,
+          "self_seconds": 0.065223484,
+          "total_calls": 1591
+        },
+        {
+          "cumulative_seconds": 0.034086164,
+          "file": "~",
+          "function": "<built-in method builtins.abs>",
+          "line": 0,
+          "primitive_calls": 810975,
+          "self_seconds": 0.034086164,
+          "total_calls": 810975
+        },
+        {
+          "cumulative_seconds": 0.067135815,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "restrict_scan",
+          "line": 63,
+          "primitive_calls": 780,
+          "self_seconds": 0.033390912,
+          "total_calls": 780
+        },
+        {
+          "cumulative_seconds": 0.048256643,
+          "file": "experiments/cnf_canonical_verify.py",
+          "function": "canonical_certificate",
+          "line": 12,
+          "primitive_calls": 552,
+          "self_seconds": 0.031184244000000003,
+          "total_calls": 552
+        },
+        {
+          "cumulative_seconds": 0.063877024,
+          "file": "~",
+          "function": "<built-in method builtins.sorted>",
+          "line": 0,
+          "primitive_calls": 53819,
+          "self_seconds": 0.029974485000000002,
+          "total_calls": 103170
+        },
+        {
+          "cumulative_seconds": 0.041637323000000004,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "propagate",
+          "line": 88,
+          "primitive_calls": 474,
+          "self_seconds": 0.022956513,
+          "total_calls": 474
+        },
+        {
+          "cumulative_seconds": 0.01606368,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/encoder.py",
+          "function": "iterencode",
+          "line": 207,
+          "primitive_calls": 2400,
+          "self_seconds": 0.01606368,
+          "total_calls": 2400
+        },
+        {
+          "cumulative_seconds": 0.021706868,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "two_cnf",
+          "line": 133,
+          "primitive_calls": 259,
+          "self_seconds": 0.014212134000000001,
+          "total_calls": 259
+        },
+        {
+          "cumulative_seconds": 0.014051293000000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 30,
+          "primitive_calls": 169380,
+          "self_seconds": 0.014051293000000001,
+          "total_calls": 169380
+        },
+        {
+          "cumulative_seconds": 0.01685675,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 68,
+          "primitive_calls": 124447,
+          "self_seconds": 0.012971264000000001,
+          "total_calls": 124447
+        },
+        {
+          "cumulative_seconds": 0.049260161000000004,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 39,
+          "primitive_calls": 50514,
+          "self_seconds": 0.012700396000000001,
+          "total_calls": 50514
+        },
+        {
+          "cumulative_seconds": 0.012627989000000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 33,
+          "primitive_calls": 168909,
+          "self_seconds": 0.012627989000000001,
+          "total_calls": 168909
+        },
+        {
+          "cumulative_seconds": 0.012615002,
+          "file": "~",
+          "function": "<built-in method builtins.len>",
+          "line": 0,
+          "primitive_calls": 254823,
+          "self_seconds": 0.012615002,
+          "total_calls": 254823
+        },
+        {
+          "cumulative_seconds": 0.012152922,
+          "file": "~",
+          "function": "<method 'add' of 'set' objects>",
+          "line": 0,
+          "primitive_calls": 168607,
+          "self_seconds": 0.012152922,
+          "total_calls": 168607
+        },
+        {
+          "cumulative_seconds": 0.051904664,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "inspect_targeted_backbone",
+          "line": 14,
+          "primitive_calls": 505,
+          "self_seconds": 0.01199508,
+          "total_calls": 505
+        },
+        {
+          "cumulative_seconds": 0.012929031,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 71,
+          "primitive_calls": 101322,
+          "self_seconds": 0.009990994000000001,
+          "total_calls": 101322
+        },
+        {
+          "cumulative_seconds": 0.012877682000000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 96,
+          "primitive_calls": 100301,
+          "self_seconds": 0.009916973,
+          "total_calls": 100301
+        },
+        {
+          "cumulative_seconds": 0.019979539,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "components",
+          "line": 110,
+          "primitive_calls": 192,
+          "self_seconds": 0.009236543,
+          "total_calls": 192
+        },
+        {
+          "cumulative_seconds": 0.009229704,
+          "file": "~",
+          "function": "<method 'append' of 'list' objects>",
+          "line": 0,
+          "primitive_calls": 135834,
+          "self_seconds": 0.009229704,
+          "total_calls": 135834
+        },
+        {
+          "cumulative_seconds": 0.013900839000000002,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "positive_core",
+          "line": 283,
+          "primitive_calls": 201,
+          "self_seconds": 0.007721194000000001,
+          "total_calls": 201
+        },
+        {
+          "cumulative_seconds": 0.091146509,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_verify",
+          "line": 414,
+          "primitive_calls": 552,
+          "self_seconds": 0.006576803,
+          "total_calls": 552
+        },
+        {
+          "cumulative_seconds": 0.008348801000000001,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "path",
+          "line": 60,
+          "primitive_calls": 751,
+          "self_seconds": 0.005702907,
+          "total_calls": 751
+        },
+        {
+          "cumulative_seconds": 0.0073629920000000005,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "find",
+          "line": 113,
+          "primitive_calls": 33748,
+          "self_seconds": 0.005423603,
+          "total_calls": 33748
+        },
+        {
+          "cumulative_seconds": 0.007881458000000001,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "discover_all",
+          "line": 20,
+          "primitive_calls": 46,
+          "self_seconds": 0.005027353,
+          "total_calls": 46
+        },
+        {
+          "cumulative_seconds": 0.004440835000000001,
+          "file": "~",
+          "function": "<method 'setdefault' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 66344,
+          "self_seconds": 0.004440835000000001,
+          "total_calls": 66344
+        },
+        {
+          "cumulative_seconds": 0.010173116000000001,
+          "file": "~",
+          "function": "<built-in method _collections._count_elements>",
+          "line": 0,
+          "primitive_calls": 2023,
+          "self_seconds": 0.003546155,
+          "total_calls": 2023
+        },
+        {
+          "cumulative_seconds": 0.005040116000000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 76,
+          "primitive_calls": 23356,
+          "self_seconds": 0.003478095,
+          "total_calls": 23356
+        },
+        {
+          "cumulative_seconds": 0.603997085,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_visit",
+          "line": 519,
+          "primitive_calls": 90,
+          "self_seconds": 0.0032659100000000003,
+          "total_calls": 546
+        },
+        {
+          "cumulative_seconds": 0.0029921350000000004,
+          "file": "~",
+          "function": "<method 'get' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 42497,
+          "self_seconds": 0.0029921350000000004,
+          "total_calls": 42497
+        },
+        {
+          "cumulative_seconds": 0.007227272000000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_read",
+          "line": 382,
+          "primitive_calls": 1093,
+          "self_seconds": 0.002598205,
+          "total_calls": 1093
+        },
+        {
+          "cumulative_seconds": 0.492731375,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_expand",
+          "line": 540,
+          "primitive_calls": 90,
+          "self_seconds": 0.0024978690000000002,
+          "total_calls": 441
+        },
+        {
+          "cumulative_seconds": 0.008435066,
+          "file": "experiments/cnf_probe_equivalence.py",
+          "function": "<genexpr>",
+          "line": 43,
+          "primitive_calls": 6504,
+          "self_seconds": 0.0024511610000000003,
+          "total_calls": 6504
+        },
+        {
+          "cumulative_seconds": 0.003326434,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 600,
+          "primitive_calls": 24315,
+          "self_seconds": 0.002409299,
+          "total_calls": 24315
+        },
+        {
+          "cumulative_seconds": 0.003300527,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "<genexpr>",
+          "line": 101,
+          "primitive_calls": 23594,
+          "self_seconds": 0.00237434,
+          "total_calls": 23594
+        },
+        {
+          "cumulative_seconds": 0.020972854000000003,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py",
+          "function": "dumps",
+          "line": 185,
+          "primitive_calls": 2400,
+          "self_seconds": 0.002046299,
+          "total_calls": 2400
+        },
+        {
+          "cumulative_seconds": 0.011551623,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "find",
+          "line": 181,
+          "primitive_calls": 104,
+          "self_seconds": 0.002032163,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.31997429800000005,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_store",
+          "line": 508,
+          "primitive_calls": 552,
+          "self_seconds": 0.001917941,
+          "total_calls": 552
+        },
+        {
+          "cumulative_seconds": 0.002409666,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "<genexpr>",
+          "line": 53,
+          "primitive_calls": 12414,
+          "self_seconds": 0.0018732540000000002,
+          "total_calls": 12414
+        },
+        {
+          "cumulative_seconds": 0.002587409,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 531,
+          "primitive_calls": 18434,
+          "self_seconds": 0.001867675,
+          "total_calls": 18434
+        },
+        {
+          "cumulative_seconds": 0.018474797,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/encoder.py",
+          "function": "encode",
+          "line": 185,
+          "primitive_calls": 2400,
+          "self_seconds": 0.0017008350000000002,
+          "total_calls": 2400
+        },
+        {
+          "cumulative_seconds": 0.010433011,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "check_blocks",
+          "line": 120,
+          "primitive_calls": 93,
+          "self_seconds": 0.0016233670000000001,
+          "total_calls": 93
+        },
+        {
+          "cumulative_seconds": 0.184948407,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_canonical",
+          "line": 378,
+          "primitive_calls": 1163,
+          "self_seconds": 0.001481712,
+          "total_calls": 1163
+        },
+        {
+          "cumulative_seconds": 0.002082853,
+          "file": "~",
+          "function": "<built-in method builtins.sum>",
+          "line": 0,
+          "primitive_calls": 3981,
+          "self_seconds": 0.0014772020000000002,
+          "total_calls": 3981
+        },
+        {
+          "cumulative_seconds": 0.016329142,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "token",
+          "line": 80,
+          "primitive_calls": 1715,
+          "self_seconds": 0.001474381,
+          "total_calls": 1715
+        },
+        {
+          "cumulative_seconds": 0.003925013000000001,
+          "file": "~",
+          "function": "<built-in method builtins.max>",
+          "line": 0,
+          "primitive_calls": 745,
+          "self_seconds": 0.001337604,
+          "total_calls": 745
+        },
+        {
+          "cumulative_seconds": 0.0013356260000000001,
+          "file": "~",
+          "function": "<built-in method builtins.next>",
+          "line": 0,
+          "primitive_calls": 22106,
+          "self_seconds": 0.0013356260000000001,
+          "total_calls": 22106
+        },
+        {
+          "cumulative_seconds": 0.002015788,
+          "file": "~",
+          "function": "<built-in method builtins.min>",
+          "line": 0,
+          "primitive_calls": 2075,
+          "self_seconds": 0.001314342,
+          "total_calls": 2075
+        },
+        {
+          "cumulative_seconds": 0.0012907790000000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 294,
+          "primitive_calls": 21568,
+          "self_seconds": 0.0012907790000000001,
+          "total_calls": 21568
+        },
+        {
+          "cumulative_seconds": 0.001226305,
+          "file": "~",
+          "function": "<method 'pop' of 'list' objects>",
+          "line": 0,
+          "primitive_calls": 15448,
+          "self_seconds": 0.001226305,
+          "total_calls": 15448
+        },
+        {
+          "cumulative_seconds": 0.0016367030000000002,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "check_tree",
+          "line": 84,
+          "primitive_calls": 137,
+          "self_seconds": 0.001163835,
+          "total_calls": 137
+        },
+        {
+          "cumulative_seconds": 0.004212751000000001,
+          "file": "experiments/cnf_binary_equivalence.py",
+          "function": "check_substitution",
+          "line": 79,
+          "primitive_calls": 33,
+          "self_seconds": 0.0009491650000000001,
+          "total_calls": 33
+        },
+        {
+          "cumulative_seconds": 0.0016467460000000001,
+          "file": "~",
+          "function": "<built-in method builtins.isinstance>",
+          "line": 0,
+          "primitive_calls": 7108,
+          "self_seconds": 0.000946629,
+          "total_calls": 7108
+        },
+        {
+          "cumulative_seconds": 0.510992837,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "_expand",
+          "line": 117,
+          "primitive_calls": 90,
+          "self_seconds": 0.000934253,
+          "total_calls": 505
+        },
+        {
+          "cumulative_seconds": 0.703348878,
+          "file": "experiments/cnf_known_quotient.py",
+          "function": "solve",
+          "line": 41,
+          "primitive_calls": 104,
+          "self_seconds": 0.0009086000000000001,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.012235597,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/collections/__init__.py",
+          "function": "update",
+          "line": 679,
+          "primitive_calls": 2792,
+          "self_seconds": 0.0008370820000000001,
+          "total_calls": 2792
+        },
+        {
+          "cumulative_seconds": 0.0010185790000000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "path",
+          "line": 175,
+          "primitive_calls": 104,
+          "self_seconds": 0.0007383740000000001,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.185667721,
+          "file": "experiments/cnf_canonical_verify.py",
+          "function": "_canonical",
+          "line": 49,
+          "primitive_calls": 1715,
+          "self_seconds": 0.0007133910000000001,
+          "total_calls": 1715
+        },
+        {
+          "cumulative_seconds": 0.009295666000000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "holds",
+          "line": 75,
+          "primitive_calls": 247,
+          "self_seconds": 0.000689757,
+          "total_calls": 247
+        },
+        {
+          "cumulative_seconds": 0.000990447,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "matching_structure",
+          "line": 199,
+          "primitive_calls": 192,
+          "self_seconds": 0.000686499,
+          "total_calls": 192
+        },
+        {
+          "cumulative_seconds": 0.140047534,
+          "file": "experiments/cnf_canonical_verify.py",
+          "function": "_verify",
+          "line": 59,
+          "primitive_calls": 552,
+          "self_seconds": 0.0006443820000000001,
+          "total_calls": 552
+        },
+        {
+          "cumulative_seconds": 0.011501583000000001,
+          "file": "experiments/cnf_compact_equivalence.py",
+          "function": "source_from_key",
+          "line": 18,
+          "primitive_calls": 53,
+          "self_seconds": 0.000607209,
+          "total_calls": 53
+        },
+        {
+          "cumulative_seconds": 0.010914391,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/collections/__init__.py",
+          "function": "__init__",
+          "line": 602,
+          "primitive_calls": 925,
+          "self_seconds": 0.000594977,
+          "total_calls": 925
+        },
+        {
+          "cumulative_seconds": 0.0019429410000000001,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 561,
+          "primitive_calls": 2736,
+          "self_seconds": 0.000588298,
+          "total_calls": 2736
+        },
+        {
+          "cumulative_seconds": 0.009090245,
+          "file": "experiments/cnf_probe_equivalence.py",
+          "function": "substitute_block",
+          "line": 38,
+          "primitive_calls": 126,
+          "self_seconds": 0.0005857260000000001,
+          "total_calls": 126
+        },
+        {
+          "cumulative_seconds": 0.000564273,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 325,
+          "primitive_calls": 9840,
+          "self_seconds": 0.000564273,
+          "total_calls": 9840
+        },
+        {
+          "cumulative_seconds": 0.0004922360000000001,
+          "file": "~",
+          "function": "<method 'popleft' of 'collections.deque' objects>",
+          "line": 0,
+          "primitive_calls": 6427,
+          "self_seconds": 0.0004922360000000001,
+          "total_calls": 6427
+        },
+        {
+          "cumulative_seconds": 0.00048112700000000003,
+          "file": "~",
+          "function": "<method 'append' of 'collections.deque' objects>",
+          "line": 0,
+          "primitive_calls": 6160,
+          "self_seconds": 0.00048112700000000003,
+          "total_calls": 6160
+        },
+        {
+          "cumulative_seconds": 0.000476354,
+          "file": "~",
+          "function": "<built-in method builtins.iter>",
+          "line": 0,
+          "primitive_calls": 7384,
+          "self_seconds": 0.000476354,
+          "total_calls": 7384
+        },
+        {
+          "cumulative_seconds": 0.000451758,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/encoder.py",
+          "function": "__init__",
+          "line": 105,
+          "primitive_calls": 2400,
+          "self_seconds": 0.000451758,
+          "total_calls": 2400
+        },
+        {
+          "cumulative_seconds": 0.00045054700000000004,
+          "file": "~",
+          "function": "<method 'encode' of 'str' objects>",
+          "line": 0,
+          "primitive_calls": 3005,
+          "self_seconds": 0.00045054700000000004,
+          "total_calls": 3005
+        },
+        {
+          "cumulative_seconds": 0.00044147800000000003,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/collections/__init__.py",
+          "function": "__missing__",
+          "line": 616,
+          "primitive_calls": 7255,
+          "self_seconds": 0.00044147800000000003,
+          "total_calls": 7255
+        },
+        {
+          "cumulative_seconds": 0.067639925,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "restrict",
+          "line": 57,
+          "primitive_calls": 780,
+          "self_seconds": 0.00040211500000000004,
+          "total_calls": 780
+        },
+        {
+          "cumulative_seconds": 0.025775627000000002,
+          "file": "experiments/cnf_binary_clause_cover.py",
+          "function": "node",
+          "line": 111,
+          "primitive_calls": 17,
+          "self_seconds": 0.00037795,
+          "total_calls": 51
+        },
+        {
+          "cumulative_seconds": 0.000700117,
+          "file": "<frozen abc>",
+          "function": "__instancecheck__",
+          "line": 117,
+          "primitive_calls": 2255,
+          "self_seconds": 0.000364592,
+          "total_calls": 2255
+        },
+        {
+          "cumulative_seconds": 0.000335932,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "<genexpr>",
+          "line": 37,
+          "primitive_calls": 5539,
+          "self_seconds": 0.000335932,
+          "total_calls": 5539
+        },
+        {
+          "cumulative_seconds": 0.00033552500000000004,
+          "file": "~",
+          "function": "<built-in method _abc._abc_instancecheck>",
+          "line": 0,
+          "primitive_calls": 2255,
+          "self_seconds": 0.00033552500000000004,
+          "total_calls": 2255
+        },
+        {
+          "cumulative_seconds": 0.00031333,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py",
+          "function": "raw_decode",
+          "line": 351,
+          "primitive_calls": 53,
+          "self_seconds": 0.00031333,
+          "total_calls": 53
+        },
+        {
+          "cumulative_seconds": 0.000638457,
+          "file": "~",
+          "function": "<method 'sort' of 'list' objects>",
+          "line": 0,
+          "primitive_calls": 201,
+          "self_seconds": 0.000303766,
+          "total_calls": 201
+        },
+        {
+          "cumulative_seconds": 0.000365294,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 441,
+          "primitive_calls": 1850,
+          "self_seconds": 0.000300914,
+          "total_calls": 1850
+        },
+        {
+          "cumulative_seconds": 0.000275963,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<lambda>",
+          "line": 319,
+          "primitive_calls": 3875,
+          "self_seconds": 0.000275963,
+          "total_calls": 3875
+        },
+        {
+          "cumulative_seconds": 0.000257768,
+          "file": "~",
+          "function": "<method 'fetchone' of 'sqlite3.Cursor' objects>",
+          "line": 0,
+          "primitive_calls": 986,
+          "self_seconds": 0.000257768,
+          "total_calls": 986
+        },
+        {
+          "cumulative_seconds": 0.000334691,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<lambda>",
+          "line": 297,
+          "primitive_calls": 1635,
+          "self_seconds": 0.00025735900000000003,
+          "total_calls": 1635
+        },
+        {
+          "cumulative_seconds": 0.00024039700000000002,
+          "file": "~",
+          "function": "<method 'join' of 'str' objects>",
+          "line": 0,
+          "primitive_calls": 2400,
+          "self_seconds": 0.00024039700000000002,
+          "total_calls": 2400
+        },
+        {
+          "cumulative_seconds": 0.00022905400000000002,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 425,
+          "primitive_calls": 2647,
+          "self_seconds": 0.00022905400000000002,
+          "total_calls": 2647
+        },
+        {
+          "cumulative_seconds": 0.00022828800000000002,
+          "file": "experiments/cnf_compact_equivalence.py",
+          "function": "<genexpr>",
+          "line": 24,
+          "primitive_calls": 2874,
+          "self_seconds": 0.00022828800000000002,
+          "total_calls": 2874
+        },
+        {
+          "cumulative_seconds": 0.028099503,
+          "file": "experiments/cnf_compact_equivalence.py",
+          "function": "publish",
+          "line": 70,
+          "primitive_calls": 33,
+          "self_seconds": 0.00022216600000000001,
+          "total_calls": 33
+        },
+        {
+          "cumulative_seconds": 0.000220415,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<lambda>",
+          "line": 601,
+          "primitive_calls": 2785,
+          "self_seconds": 0.000220415,
+          "total_calls": 2785
+        },
+        {
+          "cumulative_seconds": 0.026056830000000003,
+          "file": "experiments/cnf_binary_clause_cover.py",
+          "function": "compile_cover",
+          "line": 97,
+          "primitive_calls": 17,
+          "self_seconds": 0.000218569,
+          "total_calls": 17
+        },
+        {
+          "cumulative_seconds": 0.000205068,
+          "file": "experiments/cnf_targeted_backbone.py",
+          "function": "<lambda>",
+          "line": 103,
+          "primitive_calls": 2926,
+          "self_seconds": 0.000205068,
+          "total_calls": 2926
+        },
+        {
+          "cumulative_seconds": 0.048824961,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "_negative_child",
+          "line": 406,
+          "primitive_calls": 311,
+          "self_seconds": 0.0002031,
+          "total_calls": 311
+        },
+        {
+          "cumulative_seconds": 0.00025154,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 567,
+          "primitive_calls": 1478,
+          "self_seconds": 0.000193131,
+          "total_calls": 1478
+        },
+        {
+          "cumulative_seconds": 0.00021862400000000003,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "tree",
+          "line": 65,
+          "primitive_calls": 62,
+          "self_seconds": 0.000192663,
+          "total_calls": 62
+        },
+        {
+          "cumulative_seconds": 0.041729417000000005,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "publish",
+          "line": 164,
+          "primitive_calls": 53,
+          "self_seconds": 0.000181163,
+          "total_calls": 53
+        },
+        {
+          "cumulative_seconds": 0.00017152,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "<genexpr>",
+          "line": 191,
+          "primitive_calls": 2887,
+          "self_seconds": 0.00017152,
+          "total_calls": 2887
+        },
+        {
+          "cumulative_seconds": 0.001321287,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "read",
+          "line": 151,
+          "primitive_calls": 104,
+          "self_seconds": 0.00013696700000000002,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.001044625,
+          "file": "experiments/cnf_accounted_residuals.py",
+          "function": "archive_storage",
+          "line": 86,
+          "primitive_calls": 104,
+          "self_seconds": 0.00013541,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.005064502,
+          "file": "experiments/cnf_binary_backbone.py",
+          "function": "excluded_child",
+          "line": 113,
+          "primitive_calls": 7,
+          "self_seconds": 0.00013198500000000002,
+          "total_calls": 7
+        },
+        {
+          "cumulative_seconds": 0.019401586000000002,
+          "file": "experiments/cnf_compact_equivalence.py",
+          "function": "dependency",
+          "line": 30,
+          "primitive_calls": 33,
+          "self_seconds": 0.00012804,
+          "total_calls": 33
+        },
+        {
+          "cumulative_seconds": 0.000126079,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "<genexpr>",
+          "line": 56,
+          "primitive_calls": 1292,
+          "self_seconds": 0.000126079,
+          "total_calls": 1292
+        },
+        {
+          "cumulative_seconds": 0.000128834,
+          "file": "experiments/cnf_binary_core_cache.py",
+          "function": "transport",
+          "line": 44,
+          "primitive_calls": 83,
+          "self_seconds": 0.00011755100000000001,
+          "total_calls": 83
+        },
+        {
+          "cumulative_seconds": 0.00064212,
+          "file": "experiments/cnf_compact_equivalence.py",
+          "function": "read",
+          "line": 53,
+          "primitive_calls": 104,
+          "self_seconds": 0.00010978600000000001,
+          "total_calls": 104
+        },
+        {
+          "cumulative_seconds": 0.000101995,
+          "file": "~",
+          "function": "<method 'get' of '_contextvars.ContextVar' objects>",
+          "line": 0,
+          "primitive_calls": 780,
+          "self_seconds": 0.000101995,
+          "total_calls": 780
+        },
+        {
+          "cumulative_seconds": 0.013566166000000001,
+          "file": "experiments/cnf_known_quotient.py",
+          "function": "choose_quotient",
+          "line": 14,
+          "primitive_calls": 59,
+          "self_seconds": 9.9944e-05,
+          "total_calls": 59
+        },
+        {
+          "cumulative_seconds": 0.000295939,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 564,
+          "primitive_calls": 553,
+          "self_seconds": 9.835100000000001e-05,
+          "total_calls": 553
+        },
+        {
+          "cumulative_seconds": 0.00024254400000000003,
+          "file": "experiments/cnf_binary_clause_cover.py",
+          "function": "transport",
+          "line": 133,
+          "primitive_calls": 18,
+          "self_seconds": 8.0751e-05,
+          "total_calls": 18
+        },
+        {
+          "cumulative_seconds": 9.9208e-05,
+          "file": "experiments/cnf_binary_backbone.py",
+          "function": "check_path",
+          "line": 101,
+          "primitive_calls": 19,
+          "self_seconds": 7.566200000000001e-05,
+          "total_calls": 19
+        },
+        {
+          "cumulative_seconds": 7.4765e-05,
+          "file": "~",
+          "function": "<method '__enter__' of 'sqlite3.Connection' objects>",
+          "line": 0,
+          "primitive_calls": 605,
+          "self_seconds": 7.4765e-05,
+          "total_calls": 605
+        },
+        {
+          "cumulative_seconds": 7.1782e-05,
+          "file": "~",
+          "function": "<method 'items' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 596,
+          "self_seconds": 7.1782e-05,
+          "total_calls": 596
+        },
+        {
+          "cumulative_seconds": 0.008554543000000001,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "dependency",
+          "line": 133,
+          "primitive_calls": 20,
+          "self_seconds": 7.158300000000001e-05,
+          "total_calls": 20
+        },
+        {
+          "cumulative_seconds": 0.000432084,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py",
+          "function": "decode",
+          "line": 340,
+          "primitive_calls": 53,
+          "self_seconds": 6.4826e-05,
+          "total_calls": 53
+        },
+        {
+          "cumulative_seconds": 0.00516704,
+          "file": "experiments/cnf_known_quotient.py",
+          "function": "lookup",
+          "line": 18,
+          "primitive_calls": 38,
+          "self_seconds": 5.7364e-05,
+          "total_calls": 38
+        },
+        {
+          "cumulative_seconds": 7.508100000000001e-05,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 450,
+          "primitive_calls": 321,
+          "self_seconds": 5.7353000000000005e-05,
+          "total_calls": 321
+        },
+        {
+          "cumulative_seconds": 5.6183e-05,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 213,
+          "primitive_calls": 644,
+          "self_seconds": 5.6183e-05,
+          "total_calls": 644
+        },
+        {
+          "cumulative_seconds": 7.2669e-05,
+          "file": "experiments/cnf_binary_clause_cover.py",
+          "function": "lit",
+          "line": 132,
+          "primitive_calls": 387,
+          "self_seconds": 5.4088e-05,
+          "total_calls": 387
+        },
+        {
+          "cumulative_seconds": 5.0701e-05,
+          "file": "~",
+          "function": "<method 'update' of 'set' objects>",
+          "line": 0,
+          "primitive_calls": 340,
+          "self_seconds": 5.0701e-05,
+          "total_calls": 340
+        },
+        {
+          "cumulative_seconds": 8.366700000000001e-05,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "check_positive_core",
+          "line": 328,
+          "primitive_calls": 6,
+          "self_seconds": 5.0036e-05,
+          "total_calls": 6
+        },
+        {
+          "cumulative_seconds": 8.665200000000001e-05,
+          "file": "experiments/cnf_binary_clause_cover.py",
+          "function": "<genexpr>",
+          "line": 136,
+          "primitive_calls": 342,
+          "self_seconds": 4.4397e-05,
+          "total_calls": 342
+        },
+        {
+          "cumulative_seconds": 0.0007065800000000001,
+          "file": "experiments/cnf_binary_core_cache.py",
+          "function": "encode",
+          "line": 18,
+          "primitive_calls": 100,
+          "self_seconds": 3.7828000000000004e-05,
+          "total_calls": 100
+        },
+        {
+          "cumulative_seconds": 0.00048003900000000003,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py",
+          "function": "loads",
+          "line": 304,
+          "primitive_calls": 53,
+          "self_seconds": 3.7412e-05,
+          "total_calls": 53
+        },
+        {
+          "cumulative_seconds": 3.6136e-05,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 218,
+          "primitive_calls": 516,
+          "self_seconds": 3.6136e-05,
+          "total_calls": 516
+        },
+        {
+          "cumulative_seconds": 3.5048e-05,
+          "file": "~",
+          "function": "<method 'match' of 're.Pattern' objects>",
+          "line": 0,
+          "primitive_calls": 106,
+          "self_seconds": 3.5048e-05,
+          "total_calls": 106
+        },
+        {
+          "cumulative_seconds": 3.0748000000000004e-05,
+          "file": "~",
+          "function": "<method 'update' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 154,
+          "self_seconds": 3.0748000000000004e-05,
+          "total_calls": 154
+        },
+        {
+          "cumulative_seconds": 3.0049000000000003e-05,
+          "file": "~",
+          "function": "<method 'keys' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 274,
+          "self_seconds": 3.0049000000000003e-05,
+          "total_calls": 274
+        },
+        {
+          "cumulative_seconds": 2.9545000000000003e-05,
+          "file": "~",
+          "function": "<built-in method time.perf_counter>",
+          "line": 0,
+          "primitive_calls": 208,
+          "self_seconds": 2.9545000000000003e-05,
+          "total_calls": 208
+        },
+        {
+          "cumulative_seconds": 2.3707000000000002e-05,
+          "file": "~",
+          "function": "<method 'values' of 'dict' objects>",
+          "line": 0,
+          "primitive_calls": 192,
+          "self_seconds": 2.3707000000000002e-05,
+          "total_calls": 192
+        },
+        {
+          "cumulative_seconds": 2.0463e-05,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 352,
+          "primitive_calls": 312,
+          "self_seconds": 2.0463e-05,
+          "total_calls": 312
+        },
+        {
+          "cumulative_seconds": 1.7583e-05,
+          "file": "~",
+          "function": "<method 'disable' of '_lsprof.Profiler' objects>",
+          "line": 0,
+          "primitive_calls": 1,
+          "self_seconds": 1.7583e-05,
+          "total_calls": 1
+        },
+        {
+          "cumulative_seconds": 1.5037e-05,
+          "file": "~",
+          "function": "<method 'end' of 're.Match' objects>",
+          "line": 0,
+          "primitive_calls": 106,
+          "self_seconds": 1.5037e-05,
+          "total_calls": 106
+        },
+        {
+          "cumulative_seconds": 1.4915e-05,
+          "file": "~",
+          "function": "<method 'startswith' of 'str' objects>",
+          "line": 0,
+          "primitive_calls": 106,
+          "self_seconds": 1.4915e-05,
+          "total_calls": 106
+        },
+        {
+          "cumulative_seconds": 1.5626000000000003e-05,
+          "file": "experiments/cnf_binary_backbone.py",
+          "function": "<genexpr>",
+          "line": 130,
+          "primitive_calls": 82,
+          "self_seconds": 1.3299000000000001e-05,
+          "total_calls": 82
+        },
+        {
+          "cumulative_seconds": 1.5301e-05,
+          "file": "experiments/cnf_binary_backbone.py",
+          "function": "<genexpr>",
+          "line": 132,
+          "primitive_calls": 82,
+          "self_seconds": 1.2056000000000001e-05,
+          "total_calls": 82
+        },
+        {
+          "cumulative_seconds": 1.0084e-05,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 494,
+          "primitive_calls": 45,
+          "self_seconds": 8.089e-06,
+          "total_calls": 45
+        },
+        {
+          "cumulative_seconds": 7.2510000000000005e-06,
+          "file": "~",
+          "function": "<method 'reverse' of 'list' objects>",
+          "line": 0,
+          "primitive_calls": 77,
+          "self_seconds": 7.2510000000000005e-06,
+          "total_calls": 77
+        },
+        {
+          "cumulative_seconds": 8.416e-06,
+          "file": "experiments/cnf_multiblock_equivalence.py",
+          "function": "<lambda>",
+          "line": 62,
+          "primitive_calls": 31,
+          "self_seconds": 7.004e-06,
+          "total_calls": 31
+        },
+        {
+          "cumulative_seconds": 5.246e-06,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 341,
+          "primitive_calls": 18,
+          "self_seconds": 4.620000000000001e-06,
+          "total_calls": 18
+        },
+        {
+          "cumulative_seconds": 3.4200000000000003e-06,
+          "file": "experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 349,
+          "primitive_calls": 36,
+          "self_seconds": 3.4200000000000003e-06,
+          "total_calls": 36
+        },
+        {
+          "cumulative_seconds": 3.168e-06,
+          "file": "~",
+          "function": "<method 'intersection' of 'set' objects>",
+          "line": 0,
+          "primitive_calls": 9,
+          "self_seconds": 3.168e-06,
+          "total_calls": 9
+        },
+        {
+          "cumulative_seconds": 3.084e-06,
+          "file": "~",
+          "function": "<method 'index' of 'tuple' objects>",
+          "line": 0,
+          "primitive_calls": 17,
+          "self_seconds": 3.084e-06,
+          "total_calls": 17
+        },
+        {
+          "cumulative_seconds": 2.499e-06,
+          "file": "~",
+          "function": "<method 'issubset' of 'set' objects>",
+          "line": 0,
+          "primitive_calls": 6,
+          "self_seconds": 2.499e-06,
+          "total_calls": 6
+        }
+      ],
+      "outputs_and_counters_identical": true,
+      "total_calls": 2634804,
+      "total_profiled_seconds": 0.6790562719999997
+    }
+  },
+  "protocol": {
+    "path": "experiments/results/cnf-canonical-verify/protocol.json",
+    "sha256": "f15049378e2d379d21cdf510496445984bd0724d8ee9111fa99cf1c64737a653"
+  },
+  "queries": 104
+}

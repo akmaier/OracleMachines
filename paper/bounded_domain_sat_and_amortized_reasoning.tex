@@ -8121,6 +8121,47 @@ Passing already validated immutable results between appropriate callers is the
 next candidate, with external-input validation and proof checks retained. No new
 Lean theorem, general SAT coverage or uniform polynomial bound follows.
 
+\paragraph{Direct recognition of stored canonical formulas.}
+The next implementation checks the normalizer's fixed point instead of running
+its sorting and renaming operations again during native certificate verification.
+A valid stored JSON CNF has exact nonzero integer literals, strictly increasing
+literals within each clause, no complementary pair, strictly lexicographically ordered
+clauses, compact positive support $\{1,\ldots,n\}$, and no empty clause unless it
+is the sole clause. These conditions are necessary for the normalizer's output
+and sufficient to leave each of its operations unchanged. Both empty CNF and the
+singleton empty clause remain valid, distinct representations. The support check
+uses positive cardinality and maximum before allocating the identity name map.
+
+The recognizer constructs an immutable CNF/name-map/key triple and supplies it
+once to the unchanged verifier for that exact input object. Header, key, formula,
+SAT witness, negative proof rules and child dependencies are still checked. The
+binding clears or restores on failure, and there is no persistent canonical cache.
+Source and transformed-residual normalization remain unchanged. With usual
+expected set costs and unit-cost bounded integers, recognition uses linear work
+in the represented formula and variable count. Actual integer, hashing, key
+encoding and temporary-space costs remain; this is not a linear-time SAT claim.
+
+Six serial workers compare the unchanged control, the preceding 128 KiB cache
+and direct recognition in opposite orders on the same 104 sources. Direct
+recognition replaces 552 normalizations spanning 55,601 literals; normalizer
+visits fall 175,148 to 119,547, while those same 55,601 literals undergo explicit
+canonical-form checks. Key bytes and semantic verification counters are identical.
+Mean query time falls 0.45985 to 0.43324 seconds (5.79\%), cold time 0.10076 to
+0.08249 (18.12\%), and complete time 0.69873 to 0.65244 (6.63\%). Both paired
+query, cold and complete deltas are negative; warm deltas are mixed. Answers,
+models, proof payloads, 505 native expansions and 1,179,648 SQLite bytes are
+unchanged. These two order-balanced observations do not establish a general
+performance law. Both readers validate all 28,886 preserved native records, and
+4,961 representation mutations agree with the original normalization criterion.
+
+The remaining profile places 605 individual SQLite transaction exits ahead of
+other exclusive costs. A separate census finds only 45 visitation calls whose
+input equals an earlier normalized output in the same query. Bounded publication
+batching is therefore the next candidate, with durability, dependency closure,
+rollback and in-memory invalidation treated explicitly. Neither batching nor
+further result transport is implemented by this experiment. There is no new
+structural coverage, Lean theorem or uniform polynomial expansion bound.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

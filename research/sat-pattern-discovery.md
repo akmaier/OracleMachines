@@ -6210,3 +6210,45 @@ none in focused tests. No new coverage, Lean theorem or unrestricted SAT bound.
 The **225-page manuscript** builds cleanly with all **64 earlier proof blocks**
 unchanged. Final executable source ledger: **613**. The new manifest binds **52
 artifacts**. Next preservation audit: **7,859 artifacts / 114 manifests**.
+
+## 2026-11-18 checkpoint: batch verified publication without losing durable results
+
+[Direct canonical verification](direct-canonical-verification.md) now recognizes
+stored normalizer fixed points without sorting/renaming, then passes the checked
+immutable CNF/name-map/key triple once to the original verifier. Every key, SAT
+model, negative proof rule and child dependency remains checked. Acquisition and
+cold replay share this optional recognizer; no canonical cache is retained.
+
+On the same 104-source stream, **552 normalization calls / 55,601 literal visits**
+are replaced by explicit canonical-form checks. Normalization-only visits fall
+**31.75%**; total input validation is not removed. Mean query time falls **5.79%**,
+cold replay **18.12%**, and complete time **6.63%**. Both paired query/cold/complete
+deltas improve; warm deltas remain mixed. All answers, models, quotient choices,
+ordinary proof/acquisition counters, 552 native / 53 extension payloads and
+1,179,648 SQLite bytes remain identical. No general speedup or new coverage claim.
+
+**Next highest-value target: bounded publication transactions.** The posthoc
+identical-output profile leaves **605 SQLite transaction exits / 0.12607 exclusive
+seconds**, now the largest exclusive site, plus 1,591 SQL executions. A separate
+census finds only **45 visitation opportunities / 8,011 literal units** that equal
+an earlier normalized output in the same query; direct transport remains a smaller
+secondary target. Test batching with explicit dependency-closure durability,
+partial-query visibility, memory limits, rollback/invalidation and injected
+failures. Preserve committed history and commit a returned answer's dependencies
+before success. This is a next design investigation, not an implemented saving.
+
+Resume `experiments/results/cnf-canonical-verify/checkpoint.json`. Parent archive
+and all decisions are referenced unchanged: **28,886 native / 26 affine / 42 v1 /
+53 v2 / 22 v3 / 34 discovery records**, all **5,650 composed / 444 pilot decisions**.
+Both readers validate every native record; all 28,886 formulas match the original
+normalizer, and 4,961 representation mutations match its acceptance criterion.
+The audit also covers 624 chronological queries, 416 exact alternative/control
+comparisons, 104 exhaustive truths, 144 choices and 84 known hits. All **613 prior
+sources / 7,859 artifacts / 114 manifests** remain unchanged. A test-generator
+setup error is preserved. All **1,271 full / 102 focused tests** pass, with 43
+SQLite warnings at pre-existing sites in the full suite and none in focused tests. The
+**226-page manuscript** builds cleanly with all **64 prior proof blocks** unchanged.
+No production-default change, new Lean theorem or unrestricted SAT bound follows.
+
+Final executable source ledger: **619**. The new manifest binds **45 artifacts**;
+next preservation audit: **7,904 artifacts / 115 manifests**.

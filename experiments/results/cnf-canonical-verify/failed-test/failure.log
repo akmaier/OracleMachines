@@ -1,0 +1,15 @@
+E
+======================================================================
+ERROR: test_random_normalized_outputs_are_accepted (solver.test_cnf_canonical_verify.CanonicalVerifyTests.test_random_normalized_outputs_are_accepted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_canonical_verify.py", line 27, in test_random_normalized_outputs_are_accepted
+    raw=generate(family,12,seed,825);cnf,_=normalize(raw);source=[list(c) for c in cnf]
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_cross_family.py", line 16, in generate
+    raise ValueError('Unknown frozen workload configuration')
+ValueError: Unknown frozen workload configuration
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (errors=1)

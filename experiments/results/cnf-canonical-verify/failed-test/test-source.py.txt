@@ -1,0 +1,96 @@
+from collections import Counter
+from itertools import product
+from unittest.mock import patch
+import copy,tempfile,unittest
+from pathlib import Path
+from experiments.cnf_canonical_verify import canonical_certificate,CanonicalVerifySolver,CanonicalVerifySnapshot
+from experiments.cnf_known_quotient import KnownQuotientSolver
+from experiments.cnf_residual_dag import ResidualSolver,normalize,token
+from experiments.cnf_cross_family import generate,truth_table
+from solver.test_cnf_multiblock_equivalence import two_blocks,table
+
+
+class CanonicalVerifyTests(unittest.TestCase):
+    def test_all_small_canonical_fixed_points(self):
+        clauses=[[],[1],[2],[-1],[-2],[1,-1],[1,1],[1,2],[-1,2],[-2,1]]
+        for length in range(4):
+            for parts in product(clauses,repeat=length):
+                raw=list(parts);cnf,names=normalize(raw);counts=Counter()
+                if raw==[list(c) for c in cnf]:
+                    self.assertEqual(canonical_certificate(raw,counts),(cnf,names,token(cnf,Counter())))
+                else:
+                    with self.assertRaises(ValueError):canonical_certificate(raw,counts)
+
+    def test_random_normalized_outputs_are_accepted(self):
+        for family in ('random-three','coupled-parity','gated-horn','graph-colouring'):
+            for seed in range(15):
+                raw=generate(family,12,seed,825);cnf,_=normalize(raw);source=[list(c) for c in cnf]
+                self.assertEqual(canonical_certificate(source,Counter()),ResidualSolver._canonical(ResidualSolverForCanonical(),source))
+
+    def test_invalid_equal_integer_literals_and_containers(self):
+        for raw in ([[True]],[[1.0]],[[0]],[["1"]],[(1,)],((1,),),[[None]]):
+            with self.assertRaises(ValueError):canonical_certificate(raw,Counter())
+
+    def test_order_tautology_empty_and_sparse_support_rejected(self):
+        for raw in ([[2,1]],[[1],[1]],[[-1,1]],[[],[1]],[[2]],[[2**200]],[[1,3]],[[1],[-1]]):
+            with self.assertRaises(ValueError):canonical_certificate(raw,Counter())
+        self.assertEqual(canonical_certificate([],Counter())[:2],((),()))
+        self.assertEqual(canonical_certificate([[]],Counter())[:2],(((),),()))
+
+    def test_immutable_result_and_original_input_unchanged(self):
+        raw=[[-2,1],[2]];old=copy.deepcopy(raw);result=canonical_certificate(raw,Counter())
+        self.assertEqual(raw,old);raw[0][0]=-1
+        self.assertEqual(result[0],((-2,1),(2,)))
+
+    def test_one_use_binding_avoids_only_verifier_normalization(self):
+        s=CanonicalVerifySolver();self.addCleanup(s.close);raw=[[1]];cnf,names,key=canonical_certificate(raw,Counter())
+        node=dict(format='cnf-residual-v1',cnf=raw,answer=True,model=[True])
+        with patch.object(KnownQuotientSolver,'_canonical',side_effect=AssertionError('Repeated normalization')):
+            s._verify(key,node)
+        self.assertEqual(s.counts['canonical_form_reuses'],1);self.assertIsNone(s._verification_canonical)
+        before=s.counts['normalization_literal_visits'];s._canonical([[1]])
+        self.assertEqual(s.counts['normalization_literal_visits'],before+1)
+
+    def test_model_key_and_proof_checks_are_not_bypassed(self):
+        s=CanonicalVerifySolver();self.addCleanup(s.close);key=token(((1,),),Counter())
+        good=dict(format='cnf-residual-v1',cnf=[[1]],answer=True,model=[True])
+        bad=[dict(good,model=[False]),dict(good,model=[1]),dict(good,format='bad'),dict(good,answer=1),dict(good,answer=False,proof={'kind':'empty'})]
+        for node in bad:
+            with self.assertRaises(ValueError):s._verify(key,node)
+            self.assertIsNone(s._verification_canonical)
+        with self.assertRaises(ValueError):s._verify('wrong-key',good)
+        self.assertIsNone(s._verification_canonical)
+
+    def test_recursive_proof_children_still_checked(self):
+        s=CanonicalVerifySolver();self.addCleanup(s.close)
+        source=[list(c) for c in normalize([[1,2],[1,-2],[-1,2],[-1,-2]])[0]]
+        s.leaves=False;s.solve(source);key=s._canonical(source)[2]
+        node=copy.deepcopy(s._read(key));node['proof']={'kind':'split','variable':1,'low':'missing','high':'missing'}
+        with self.assertRaises(ValueError):s._verify(key,node)
+        self.assertIsNone(s._verification_canonical)
+
+    def test_stream_answers_payloads_and_cold_replay_match(self):
+        with tempfile.TemporaryDirectory() as td:
+            a=KnownQuotientSolver(Path(td)/'a');b=CanonicalVerifySolver(Path(td)/'b')
+            try:
+                sources=[two_blocks(True),two_blocks()]+[generate(f,12,i,826) for f in ('random-three','coupled-parity','gated-horn','graph-colouring') for i in (0,1)]
+                for raw in sources:
+                    for source in (raw,raw+[[10,-20,30]]):
+                        x=a.solve(source);y=b.solve(source)
+                        for field in ('answer','model','root','authority','quotient_choice'):self.assertEqual(x[field],y[field])
+                        self.assertEqual(y['answer'],truth_table(source)['answer']);self.assertIsNone(b._verification_canonical)
+                for t in ('cnf_residual_v1','cnf_binary_equivalence_v2','cnf_binary_equivalence_v3'):self.assertEqual(table(a,t),table(b,t))
+                native=table(b,'cnf_residual_v1')
+            finally:a.close();b.close()
+            s=CanonicalVerifySnapshot(Path(td)/'b')
+            try:
+                for key in native:self.assertIsNotNone(s._read(key))
+                self.assertIsNone(s._verification_canonical)
+            finally:s.close()
+
+
+class ResidualSolverForCanonical:
+    def __init__(self):self.counts=Counter()
+
+
+if __name__=='__main__':unittest.main()

@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Publish checked negative affine evidence](research/affine-negative-publication.md).
+Seven selected negative targets now use seven versioned extension certificates
+instead of 134 fresh native nodes. All 26,743 prior native payloads remain intact.
+This matched prefix pilot improves both timing orders; a fresh-stream evaluation
+and automatic production-checkpoint adoption remain open. The optional extension
+checkpoint is in `experiments/results/cnf-affine-negative/`.
+
 [Reuse checked affine spaces for native model completion](research/affine-completion.md).
 Eight saved targets shrink 80 -> 8 native nodes. Nine fresh added models reduce
 acquisition 395 -> 336 nodes and query time about 11%; complete-worker timing

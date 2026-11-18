@@ -7571,6 +7571,60 @@ or basis verification, leftover clauses, storage and cold replay before any
 saving can be claimed. Hidden equations, large free dimension and no-equation
 inputs remain separate unresolved cells.
 
+\paragraph{Publishing checked negative affine evidence.}
+The retained negative outcomes can be published through a separate, versioned
+certificate interface. A \texttt{cnf-affine-negative-v1} node binds the full
+normalized source to its exact extraction and either a checked contradictory
+Gaussian row or a complete-space exhaustion certificate. The latter supplies
+a particular solution, an identity-coordinate kernel basis and one falsified
+leftover clause for every coefficient vector. The checker reconstructs each
+point directly from its Gray coefficient vector, independently of the producer's
+incremental walk. It checks the dimension cap before basis verification or
+enumeration. Completeness of the basis and complete rejection coverage establish
+that no assignment satisfies both the extracted equations and all leftovers.
+Neither the discovery status nor a partial list of failed assignments suffices.
+
+The extension uses a separate SQLite table and explicit exact-source lookup.
+Native search does not read that table, so old native certificates cannot gain
+hidden dependencies on the new checker. A separately versioned negative chain
+composes the terminal with existing checked guards. Publication checks before
+writing, preserves the first stored payload and verifies that payload again on
+a duplicate insertion. The new interface extends experimental proof authority;
+it is not a translation into existing native proof kinds or a new Lean theorem.
+
+Extraction and Gaussian checking retain their charged costs. For exhaustion,
+checking the complete basis requires $O(E(d+1)B)$ equation work, with mask
+construction and sorting separate. Direct coefficient reconstruction uses
+$d2^{d-1}$ direction XORs when $d>0$, plus $2^d$ rejection tests after packing
+the distinct named source clauses. The certificate retains the full source,
+extraction, row dependencies, basis and $2^d$ clause indices. The version fixes
+$d\leq8$; unrestricted fallback is not bounded by that cap. Full keys,
+serialization, persistence and cold replay remain additional costs.
+
+A retrospective pilot compares thirteen exact prefixes in opposite orders:
+seven negative affine targets and six positive or unresolved controls. The seven
+negatives replace 134 native nodes and 175,449 payload bytes with seven extension
+certificates and 21,561 bytes, avoiding 20,949 native propagation visits. The six
+controls retain their 47 native nodes. Combined new payload across all thirteen
+cases falls from 229,996 to 76,108 bytes. Summed query time, averaged over the two
+orders, falls from 0.13998 to 0.05627 seconds; summed comparison-arm time falls
+from 1.74035 to 1.62858 seconds, with both paired changes negative. These arm
+times include per-target cold replay and delta/record serialization, but exclude
+shared prefix reconstruction, final timing-report encoding and full historical
+replay. Selected prefixes and two orders do not establish a fresh-stream
+coverage gain or a general scaling result.
+
+The preservation checkpoint keeps all 26,743 native payloads unchanged and adds
+seven alternative refutations. It grows by 45,056 SQLite bytes and 4,627 compressed
+bytes; the six unchanged controls each pay 8,192 bytes for the extension table.
+Current chain checking prefers a native alternative when one is present, so
+cold checking the seven extension chains in this union also reads 134 native
+nodes. Explicit certificate choice, fresh-stream evaluation and adoption by the
+ordinary resumable query path remain open. Hidden equations, no-equation targets
+and large free dimension still retain their preceding fallback. Projection onto
+leftover-clause variables may reduce the relevant dimension, but requires its
+own complete basis, exact recomposition and measured discovery costs.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

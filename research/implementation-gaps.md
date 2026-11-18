@@ -9716,3 +9716,31 @@ evidence occurrences. Ready/pending banks remain 132/38, 141/66, 87/89 and
 6,871 artifacts and 101 manifests remain unchanged. The 217-page manuscript
 builds with all 64 existing proof blocks unchanged. No new Lean theorem,
 native proof kind or unrestricted-SAT resource guarantee is claimed.
+
+
+## 2026-11-18: Versioned negative affine publication
+
+See [negative affine publication](affine-negative-publication.md). An optional
+source-bound certificate now checks either a contradictory Gaussian row or every
+point of a complete affine space with at most eight free coordinates. Each
+point has a falsified leftover-clause witness. Direct Gray-coordinate checking
+is independent of the discovery walk. The versioned extension table and guarded
+chain reader leave native search and all old native payloads unchanged.
+
+Seven selected negative prefixes replace 134 native nodes / 175,449 bytes with
+seven certificates / 21,561 bytes, avoiding 20,949 propagation visits. Six
+controls retain 47 native nodes. Across all thirteen cases and two opposite
+orders, combined new payload falls 229,996 -> 76,108 bytes; summed query time
+falls 0.13998 -> 0.05627 seconds, with both complete-arm deltas negative. This is
+a retrospective mechanism pilot, not a fresh-stream coverage estimate. Full
+historical replay is separate from per-arm timing; peak RSS was not measured.
+
+All 26,743 prior native payloads remain. The extended archive adds 45,056 SQLite
+bytes / 4,627 compressed bytes and preserves native alternatives. Its seven
+cold extension-chain checks also read 134 native nodes because the current view
+prefers native alternatives. Automatic discovery/checkpoint adoption, certificate
+choice, a newly excluded stream and complete projection onto leftover variables
+remain open. No-equation targets and large free dimension retain fallback.
+The checkpoint explicitly identifies its extension reader; the previous ordinary
+production checkpoint remains valid. No new Lean theorem or unrestricted-SAT
+resource bound is claimed.

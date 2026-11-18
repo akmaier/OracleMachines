@@ -1,0 +1,1126 @@
+{
+  "admission": {
+    "affine_bridge": {
+      "accepted": {
+        "index": 0,
+        "mask": 780
+      },
+      "affine": {
+        "equations": [
+          {
+            "clauses": [
+              3,
+              10,
+              26,
+              36
+            ],
+            "rhs": 0,
+            "variables": [
+              1,
+              5,
+              12
+            ]
+          },
+          {
+            "clauses": [
+              5,
+              7,
+              30,
+              37
+            ],
+            "rhs": 1,
+            "variables": [
+              2,
+              4,
+              12
+            ]
+          },
+          {
+            "clauses": [
+              24,
+              25,
+              27,
+              34
+            ],
+            "rhs": 0,
+            "variables": [
+              2,
+              5,
+              6
+            ]
+          },
+          {
+            "clauses": [
+              1,
+              8,
+              15,
+              38
+            ],
+            "rhs": 1,
+            "variables": [
+              2,
+              10,
+              12
+            ]
+          },
+          {
+            "clauses": [
+              18,
+              19,
+              29,
+              39
+            ],
+            "rhs": 1,
+            "variables": [
+              3,
+              4,
+              9
+            ]
+          },
+          {
+            "clauses": [
+              17,
+              20,
+              28,
+              31
+            ],
+            "rhs": 0,
+            "variables": [
+              4,
+              5,
+              9
+            ]
+          },
+          {
+            "clauses": [
+              12,
+              13,
+              21,
+              32
+            ],
+            "rhs": 0,
+            "variables": [
+              4,
+              9,
+              11
+            ]
+          },
+          {
+            "clauses": [
+              0,
+              11,
+              16,
+              33
+            ],
+            "rhs": 0,
+            "variables": [
+              4,
+              10,
+              12
+            ]
+          },
+          {
+            "clauses": [
+              2,
+              4,
+              14,
+              41
+            ],
+            "rhs": 1,
+            "variables": [
+              5,
+              10,
+              12
+            ]
+          }
+        ],
+        "leftovers": [
+          6,
+          9,
+          22,
+          23,
+          35,
+          40
+        ],
+        "reductions": [
+          {
+            "mask": 2065,
+            "rhs": 0,
+            "using": []
+          },
+          {
+            "mask": 2058,
+            "rhs": 1,
+            "using": []
+          },
+          {
+            "mask": 2104,
+            "rhs": 1,
+            "using": [
+              1
+            ]
+          },
+          {
+            "mask": 2608,
+            "rhs": 1,
+            "using": [
+              1,
+              2
+            ]
+          },
+          {
+            "mask": 268,
+            "rhs": 1,
+            "using": []
+          },
+          {
+            "mask": 2336,
+            "rhs": 1,
+            "using": [
+              2
+            ]
+          },
+          {
+            "mask": 1792,
+            "rhs": 0,
+            "using": [
+              2,
+              3
+            ]
+          },
+          {
+            "mask": 2048,
+            "rhs": 0,
+            "using": [
+              2,
+              3
+            ]
+          },
+          {
+            "mask": 3584,
+            "rhs": 1,
+            "using": [
+              3,
+              5,
+              6
+            ]
+          }
+        ]
+      },
+      "free": 3,
+      "free_limit": 8,
+      "rejected": [],
+      "root": "cnf-residual-v1:[[-12,-10,-4],[-12,-10,2],[-12,-10,5],[-12,-5,-1],[-12,-5,10],[-12,-4,2],[-12,-3,1],[-12,-2,4],[-12,-2,10],[-12,-1,8],[-12,1,5],[-12,4,10],[-11,-9,-4],[-11,4,9],[-10,-5,12],[-10,-2,12],[-10,4,12],[-9,-5,-4],[-9,-4,3],[-9,-3,4],[-9,4,5],[-9,4,11],[-8,3,10],[-8,11,12],[-6,-5,-2],[-6,2,5],[-5,1,12],[-5,2,6],[-5,4,9],[-4,-3,9],[-4,-2,12],[-4,5,9],[-4,9,11],[-4,10,12],[-2,5,6],[-1,3,10],[-1,5,12],[2,4,12],[2,10,12],[3,4,9],[3,5,7],[5,10,12]]",
+      "space": {
+        "directions": [
+          64,
+          128,
+          1567
+        ],
+        "particular": 780
+      },
+      "status": "model",
+      "summary": {
+        "equation_count": 9,
+        "inconsistent": false,
+        "interface_variables": [
+          1,
+          3,
+          5,
+          10,
+          11,
+          12
+        ],
+        "leftover_clauses": 6,
+        "leftover_literals": 18,
+        "pure": false,
+        "rank": 9
+      },
+      "variables": 12
+    },
+    "affine_previous_reason": "no-proposal",
+    "child": null,
+    "discovery": {
+      "attempts": [],
+      "baseline": {
+        "conflict": null,
+        "residual_literals": 126,
+        "root": "cnf-residual-v1:[[-12,-10,-4],[-12,-10,2],[-12,-10,5],[-12,-5,-1],[-12,-5,10],[-12,-4,2],[-12,-3,1],[-12,-2,4],[-12,-2,10],[-12,-1,8],[-12,1,5],[-12,4,10],[-11,-9,-4],[-11,4,9],[-10,-5,12],[-10,-2,12],[-10,4,12],[-9,-5,-4],[-9,-4,3],[-9,-3,4],[-9,4,5],[-9,4,11],[-8,3,10],[-8,11,12],[-6,-5,-2],[-6,2,5],[-5,1,12],[-5,2,6],[-5,4,9],[-4,-3,9],[-4,-2,12],[-4,5,9],[-4,9,11],[-4,10,12],[-2,5,6],[-1,3,10],[-1,5,12],[2,4,12],[2,10,12],[3,4,9],[3,5,7],[5,10,12]]",
+        "trace": []
+      },
+      "binary_filter": {
+        "skipped": [
+          [
+            -20
+          ],
+          [
+            20
+          ],
+          [
+            -37
+          ],
+          [
+            37
+          ],
+          [
+            -65
+          ],
+          [
+            65
+          ],
+          [
+            -74
+          ],
+          [
+            74
+          ]
+        ],
+        "variables": []
+      },
+      "candidates": [
+        [
+          -20
+        ],
+        [
+          20
+        ],
+        [
+          -37
+        ],
+        [
+          37
+        ],
+        [
+          -65
+        ],
+        [
+          65
+        ],
+        [
+          -74
+        ],
+        [
+          74
+        ]
+      ],
+      "completions": [],
+      "exposed": null,
+      "fixed": [],
+      "positive_selected": null,
+      "ranks": [
+        {
+          "binary_incidence": 0,
+          "variable": 20
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 37
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 65
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 74
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 84
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 92
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 113
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 117
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 139
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 164
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 182
+        },
+        {
+          "binary_incidence": 0,
+          "variable": 210
+        }
+      ],
+      "selected": null
+    },
+    "proposal": null,
+    "reason": "affine-positive-model"
+  },
+  "case": 13,
+  "child": {
+    "answer": true,
+    "archive_nodes": 25778,
+    "archive_payload_bytes": 41653019,
+    "metrics": {
+      "accounting_reads": 1,
+      "certificate_serialized_bytes": 567,
+      "database_lookups": 1,
+      "inserted_bytes": 1023,
+      "inserted_nodes": 1,
+      "key_serialized_bytes": 912,
+      "normalization_literal_visits": 252,
+      "positive_model_publications": 1,
+      "positive_publication_model_literals": 126,
+      "source_witness_literal_payload": 126,
+      "verification_literal_payload": 126,
+      "verified_nodes": 1
+    },
+    "model": {
+      "20": false,
+      "37": false,
+      "65": true,
+      "74": true,
+      "84": false,
+      "92": false,
+      "113": false,
+      "117": false,
+      "139": true,
+      "164": true,
+      "182": false,
+      "210": false
+    },
+    "root": "cnf-residual-v1:[[-12,-10,-4],[-12,-10,2],[-12,-10,5],[-12,-5,-1],[-12,-5,10],[-12,-4,2],[-12,-3,1],[-12,-2,4],[-12,-2,10],[-12,-1,8],[-12,1,5],[-12,4,10],[-11,-9,-4],[-11,4,9],[-10,-5,12],[-10,-2,12],[-10,4,12],[-9,-5,-4],[-9,-4,3],[-9,-3,4],[-9,4,5],[-9,4,11],[-8,3,10],[-8,11,12],[-6,-5,-2],[-6,2,5],[-5,1,12],[-5,2,6],[-5,4,9],[-4,-3,9],[-4,-2,12],[-4,5,9],[-4,9,11],[-4,10,12],[-2,5,6],[-1,3,10],[-1,5,12],[2,4,12],[2,10,12],[3,4,9],[3,5,7],[5,10,12]]",
+    "seconds": 0.000585624948143959
+  },
+  "child_seconds": 0.0006208750419318676,
+  "cohort": "affine-target",
+  "cold_metrics": {
+    "key_serialized_bytes": 912,
+    "normalization_literal_visits": 252,
+    "search_memory_hits": 1,
+    "source_witness_literal_payload": 126,
+    "visits": 1
+  },
+  "cold_seconds": 0.03255816688761115,
+  "complete_arm_seconds": 0.11506162490695715,
+  "composition_metrics": {
+    "chain_child_memory_hits": 1,
+    "key_serialized_bytes": 1368,
+    "normalization_literal_visits": 378
+  },
+  "composition_seconds": 0.0002216249704360962,
+  "database_bytes": 80384000,
+  "evaluation_seconds": 0.001493958756327629,
+  "extension": false,
+  "extension_delta": {
+    "path": "experiments/results/cnf-affine-negative/affine-target-13-affine-1/extension-delta.json",
+    "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+  },
+  "guard_counts": {},
+  "guard_metrics": {},
+  "guard_seconds": 6.658956408500671e-07,
+  "input_guards": [],
+  "input_target": [
+    [
+      210,
+      -74,
+      -37
+    ],
+    [
+      84,
+      -139,
+      74
+    ],
+    [
+      -164,
+      210,
+      -84
+    ],
+    [
+      65,
+      164,
+      -117
+    ],
+    [
+      84,
+      164,
+      210
+    ],
+    [
+      139,
+      -74,
+      -65
+    ],
+    [
+      37,
+      210,
+      164
+    ],
+    [
+      92,
+      -37,
+      84
+    ],
+    [
+      74,
+      182,
+      -139
+    ],
+    [
+      210,
+      164,
+      -74
+    ],
+    [
+      -74,
+      -210,
+      -164
+    ],
+    [
+      -92,
+      -84,
+      -37
+    ],
+    [
+      74,
+      -65,
+      -139
+    ],
+    [
+      -210,
+      37,
+      -164
+    ],
+    [
+      -210,
+      164,
+      -84
+    ],
+    [
+      -74,
+      -139,
+      -84
+    ],
+    [
+      92,
+      -84,
+      37
+    ],
+    [
+      139,
+      -84,
+      74
+    ],
+    [
+      74,
+      65,
+      139
+    ],
+    [
+      -210,
+      164,
+      74
+    ],
+    [
+      65,
+      84,
+      113
+    ],
+    [
+      182,
+      -74,
+      139
+    ],
+    [
+      -210,
+      -84,
+      -20
+    ],
+    [
+      -210,
+      -65,
+      20
+    ],
+    [
+      139,
+      84,
+      -74
+    ],
+    [
+      37,
+      -210,
+      -74
+    ],
+    [
+      -210,
+      20,
+      84
+    ],
+    [
+      74,
+      210,
+      37
+    ],
+    [
+      -37,
+      74,
+      -210
+    ],
+    [
+      -139,
+      -74,
+      65
+    ],
+    [
+      210,
+      -164,
+      74
+    ],
+    [
+      -74,
+      -182,
+      -139
+    ],
+    [
+      -210,
+      164,
+      -37
+    ],
+    [
+      -20,
+      117,
+      -210
+    ],
+    [
+      -182,
+      139,
+      74
+    ],
+    [
+      210,
+      -37,
+      -164
+    ],
+    [
+      84,
+      210,
+      -20
+    ],
+    [
+      -84,
+      210,
+      20
+    ],
+    [
+      182,
+      210,
+      -117
+    ],
+    [
+      65,
+      164,
+      -20
+    ],
+    [
+      84,
+      -210,
+      -164
+    ],
+    [
+      84,
+      37,
+      -92
+    ]
+  ],
+  "local_choice": {
+    "kind": "positive-model",
+    "model": [
+      [
+        20,
+        false
+      ],
+      [
+        37,
+        false
+      ],
+      [
+        65,
+        true
+      ],
+      [
+        74,
+        true
+      ],
+      [
+        84,
+        false
+      ],
+      [
+        92,
+        false
+      ],
+      [
+        113,
+        false
+      ],
+      [
+        117,
+        false
+      ],
+      [
+        139,
+        true
+      ],
+      [
+        164,
+        true
+      ],
+      [
+        182,
+        false
+      ],
+      [
+        210,
+        false
+      ]
+    ],
+    "root": "cnf-residual-v1:[[-12,-10,-4],[-12,-10,2],[-12,-10,5],[-12,-5,-1],[-12,-5,10],[-12,-4,2],[-12,-3,1],[-12,-2,4],[-12,-2,10],[-12,-1,8],[-12,1,5],[-12,4,10],[-11,-9,-4],[-11,4,9],[-10,-5,12],[-10,-2,12],[-10,4,12],[-9,-5,-4],[-9,-4,3],[-9,-3,4],[-9,4,5],[-9,4,11],[-8,3,10],[-8,11,12],[-6,-5,-2],[-6,2,5],[-5,1,12],[-5,2,6],[-5,4,9],[-4,-3,9],[-4,-2,12],[-4,5,9],[-4,9,11],[-4,10,12],[-2,5,6],[-1,3,10],[-1,5,12],[2,4,12],[2,10,12],[3,4,9],[3,5,7],[5,10,12]]"
+  },
+  "local_eligible": true,
+  "local_probe": {
+    "attempts": [],
+    "baseline": {
+      "conflict": null,
+      "residual_literals": 126,
+      "root": "cnf-residual-v1:[[-12,-10,-4],[-12,-10,2],[-12,-10,5],[-12,-5,-1],[-12,-5,10],[-12,-4,2],[-12,-3,1],[-12,-2,4],[-12,-2,10],[-12,-1,8],[-12,1,5],[-12,4,10],[-11,-9,-4],[-11,4,9],[-10,-5,12],[-10,-2,12],[-10,4,12],[-9,-5,-4],[-9,-4,3],[-9,-3,4],[-9,4,5],[-9,4,11],[-8,3,10],[-8,11,12],[-6,-5,-2],[-6,2,5],[-5,1,12],[-5,2,6],[-5,4,9],[-4,-3,9],[-4,-2,12],[-4,5,9],[-4,9,11],[-4,10,12],[-2,5,6],[-1,3,10],[-1,5,12],[2,4,12],[2,10,12],[3,4,9],[3,5,7],[5,10,12]]",
+      "trace": []
+    },
+    "binary_filter": {
+      "skipped": [
+        [
+          -20
+        ],
+        [
+          20
+        ],
+        [
+          -37
+        ],
+        [
+          37
+        ],
+        [
+          -65
+        ],
+        [
+          65
+        ],
+        [
+          -74
+        ],
+        [
+          74
+        ]
+      ],
+      "variables": []
+    },
+    "candidates": [
+      [
+        -20
+      ],
+      [
+        20
+      ],
+      [
+        -37
+      ],
+      [
+        37
+      ],
+      [
+        -65
+      ],
+      [
+        65
+      ],
+      [
+        -74
+      ],
+      [
+        74
+      ]
+    ],
+    "completions": [],
+    "exposed": null,
+    "fixed": [],
+    "positive_selected": null,
+    "ranks": [
+      {
+        "binary_incidence": 0,
+        "variable": 20
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 37
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 65
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 74
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 84
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 92
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 113
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 117
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 139
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 164
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 182
+      },
+      {
+        "binary_incidence": 0,
+        "variable": 210
+      }
+    ],
+    "selected": null
+  },
+  "mode": "affine",
+  "native_delta": {
+    "path": "experiments/results/cnf-affine-negative/affine-target-13-affine-1/native-delta.json",
+    "sha256": "1d084965ba65121371843572cee9e33f73c7b896784e241698425ff44a80adc6"
+  },
+  "new_extension_bytes": 0,
+  "new_extension_nodes": 0,
+  "new_native_bytes": 1023,
+  "new_native_nodes": 1,
+  "open_seconds": 0.04432024993002415,
+  "prefix_digest": "a606a27f12b8bcf3b726a1dca0c57b966eb983c0108e7045185baf846df4d4a7",
+  "prefix_nodes": 25777,
+  "premise": null,
+  "premise_seconds": 0.0,
+  "preparation_ids": [],
+  "probe_counts": {
+    "admission_family_clauses": 42,
+    "admission_family_literal_visits": 126,
+    "admission_source_literal_visits": 126,
+    "affine_bridge_calls": 1,
+    "affine_bridge_candidates": 1,
+    "affine_bridge_clause_checks": 6,
+    "affine_bridge_model_literals": 126,
+    "affine_bridge_model_variables": 12,
+    "affine_bridge_models": 1,
+    "affine_bridge_packed_literals": 18,
+    "affine_elimination_xors": 11,
+    "affine_extracted_equations": 9,
+    "affine_grouping_literals": 126,
+    "affine_leftover_clauses": 6,
+    "affine_space_backsub_rows": 36,
+    "affine_space_kernel_equation_checks": 27,
+    "affine_space_particular_equation_checks": 9,
+    "affine_space_vectors_checked": 4,
+    "affine_space_vectors_constructed": 4,
+    "affine_verification_literals": 108,
+    "affine_verification_xors": 11,
+    "affine_verified_certificates": 1,
+    "binary_filter_clause_visits": 42,
+    "binary_filter_name_transports": 0,
+    "binary_probe_skips": 8,
+    "local_baseline_probes": 1,
+    "local_ranking_clause_visits": 42,
+    "local_ranking_literal_visits": 126,
+    "propagation_literal_visits": 126,
+    "restriction_literal_visits": 126
+  },
+  "probe_metrics": {
+    "database_lookups": 1,
+    "key_serialized_bytes": 1368,
+    "normalization_literal_visits": 378
+  },
+  "record": {
+    "answer": true,
+    "child": {
+      "answer": true,
+      "model": {
+        "20": false,
+        "37": false,
+        "65": true,
+        "74": true,
+        "84": false,
+        "92": false,
+        "113": false,
+        "117": false,
+        "139": true,
+        "164": true,
+        "182": false,
+        "210": false
+      },
+      "root": "cnf-residual-v1:[[-12,-10,-4],[-12,-10,2],[-12,-10,5],[-12,-5,-1],[-12,-5,10],[-12,-4,2],[-12,-3,1],[-12,-2,4],[-12,-2,10],[-12,-1,8],[-12,1,5],[-12,4,10],[-11,-9,-4],[-11,4,9],[-10,-5,12],[-10,-2,12],[-10,4,12],[-9,-5,-4],[-9,-4,3],[-9,-3,4],[-9,4,5],[-9,4,11],[-8,3,10],[-8,11,12],[-6,-5,-2],[-6,2,5],[-5,1,12],[-5,2,6],[-5,4,9],[-4,-3,9],[-4,-2,12],[-4,5,9],[-4,9,11],[-4,10,12],[-2,5,6],[-1,3,10],[-1,5,12],[2,4,12],[2,10,12],[3,4,9],[3,5,7],[5,10,12]]"
+    },
+    "format": "checked-guard-chain-v1",
+    "guards": [],
+    "model": {
+      "20": false,
+      "37": false,
+      "65": true,
+      "74": true,
+      "84": false,
+      "92": false,
+      "113": false,
+      "117": false,
+      "139": true,
+      "164": true,
+      "182": false,
+      "210": false
+    },
+    "query_root": "cnf-residual-v1:[[-12,-10,-4],[-12,-10,2],[-12,-10,5],[-12,-5,-1],[-12,-5,10],[-12,-4,2],[-12,-3,1],[-12,-2,4],[-12,-2,10],[-12,-1,8],[-12,1,5],[-12,4,10],[-11,-9,-4],[-11,4,9],[-10,-5,12],[-10,-2,12],[-10,4,12],[-9,-5,-4],[-9,-4,3],[-9,-3,4],[-9,4,5],[-9,4,11],[-8,3,10],[-8,11,12],[-6,-5,-2],[-6,2,5],[-5,1,12],[-5,2,6],[-5,4,9],[-4,-3,9],[-4,-2,12],[-4,5,9],[-4,9,11],[-4,10,12],[-2,5,6],[-1,3,10],[-1,5,12],[2,4,12],[2,10,12],[3,4,9],[3,5,7],[5,10,12]]",
+    "source": [
+      [
+        210,
+        -74,
+        -37
+      ],
+      [
+        84,
+        -139,
+        74
+      ],
+      [
+        -164,
+        210,
+        -84
+      ],
+      [
+        65,
+        164,
+        -117
+      ],
+      [
+        84,
+        164,
+        210
+      ],
+      [
+        139,
+        -74,
+        -65
+      ],
+      [
+        37,
+        210,
+        164
+      ],
+      [
+        92,
+        -37,
+        84
+      ],
+      [
+        74,
+        182,
+        -139
+      ],
+      [
+        210,
+        164,
+        -74
+      ],
+      [
+        -74,
+        -210,
+        -164
+      ],
+      [
+        -92,
+        -84,
+        -37
+      ],
+      [
+        74,
+        -65,
+        -139
+      ],
+      [
+        -210,
+        37,
+        -164
+      ],
+      [
+        -210,
+        164,
+        -84
+      ],
+      [
+        -74,
+        -139,
+        -84
+      ],
+      [
+        92,
+        -84,
+        37
+      ],
+      [
+        139,
+        -84,
+        74
+      ],
+      [
+        74,
+        65,
+        139
+      ],
+      [
+        -210,
+        164,
+        74
+      ],
+      [
+        65,
+        84,
+        113
+      ],
+      [
+        182,
+        -74,
+        139
+      ],
+      [
+        -210,
+        -84,
+        -20
+      ],
+      [
+        -210,
+        -65,
+        20
+      ],
+      [
+        139,
+        84,
+        -74
+      ],
+      [
+        37,
+        -210,
+        -74
+      ],
+      [
+        -210,
+        20,
+        84
+      ],
+      [
+        74,
+        210,
+        37
+      ],
+      [
+        -37,
+        74,
+        -210
+      ],
+      [
+        -139,
+        -74,
+        65
+      ],
+      [
+        210,
+        -164,
+        74
+      ],
+      [
+        -74,
+        -182,
+        -139
+      ],
+      [
+        -210,
+        164,
+        -37
+      ],
+      [
+        -20,
+        117,
+        -210
+      ],
+      [
+        -182,
+        139,
+        74
+      ],
+      [
+        210,
+        -37,
+        -164
+      ],
+      [
+        84,
+        210,
+        -20
+      ],
+      [
+        -84,
+        210,
+        20
+      ],
+      [
+        182,
+        210,
+        -117
+      ],
+      [
+        65,
+        164,
+        -20
+      ],
+      [
+        84,
+        -210,
+        -164
+      ],
+      [
+        84,
+        37,
+        -92
+      ]
+    ]
+  },
+  "records": {
+    "path": "experiments/results/cnf-affine-negative/affine-target-13-affine-1/records.json",
+    "sha256": "197c661e40a98e73e825de1e61f4b9148c9fdf1e91c999aa00bdde516df85532"
+  },
+  "repeat": 1,
+  "retained_bytes": 5002,
+  "selection_seconds": 0.0006505418568849564,
+  "serialization_seconds": 0.0003519998863339424,
+  "warm_seconds": 0.00033224979415535927
+}

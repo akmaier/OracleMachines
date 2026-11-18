@@ -12,7 +12,50 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: publish retained negative affine evidence
+## Current investigation: adopt checked negative reuse on a fresh stream
+
+[Negative affine publication](affine-negative-publication.md) now stores checked
+row contradictions and complete-space exhaustion certificates in a versioned
+extension table. Exact-source lookup and guarded negative composition are
+explicit; native search and native payloads remain unchanged. Seven selected
+negative targets replace **134 native nodes / 175,449 bytes** with **seven
+extension certificates / 21,561 bytes**, avoiding 20,949 propagation visits.
+Six controls keep the same 47 native nodes. Across thirteen exact prefixes,
+combined new payload falls 229,996 -> 76,108 bytes and summed query time falls
+0.13998 -> 0.05627 seconds. Both timing orders improve, including comparison-arm
+costs, but this is a retrospective pilot, not a new coverage or stream result.
+
+**Next concrete target:** integrate this explicitly versioned backend into a
+newly excluded stream and its resumable query path. Measure lookup, discovery,
+publication, guards, native fallback and full cold replay together. The preserved
+union contains native alternatives as well as the seven new refutations; current
+chain checking prefers those native alternatives and rechecks 134 native nodes.
+Choosing the cheaper already-checked certificate is a separate reuse opportunity.
+Never let native search silently depend on extension proofs its reader ignores.
+
+All 26,743 native payloads are preserved. The optional extended checkpoint is
+`experiments/results/cnf-affine-negative/checkpoint.json`; the last ordinary
+production checkpoint remains `experiments/results/cnf-affine-completion/checkpoint.json`.
+The extended archive grows 45,056 SQLite bytes / 4,627 compressed bytes because
+it preserves both histories. Each unchanged control pays 8,192 empty-table bytes.
+Broader coverage gaps remain: hidden/no-equation structure and large free
+dimension. A complete projection onto leftover-clause variables is a candidate
+for reducing the relevant dimension; it has not yet been implemented or priced.
+The previous random-three-CNF frontier of 169 nodes remains unchanged.
+
+
+All **1,177 tests**, 16 focused tests, 52 independently reconstructed comparison
+arms and fourteen negative publication-counter audits pass. All **544 prior
+sources, 7,171 artifacts and 102 manifests** remain unchanged. The final source
+ledger contains 548 entries. All 26,743 native proofs and seven new negative
+chains replay without acquisition. The 218-page manuscript builds with its
+64 existing proof blocks unchanged and a clean final compiler log. The full
+suite retains 44 existing unclosed-SQLite warnings; focused tests have none.
+
+
+New manifest: **228 artifacts**. Next preservation audit: **7,399 artifacts / 103 manifests**. Final source ledger: **548**.
+
+## Previous checkpoint: publish retained negative affine evidence
 
 [Affine completion](affine-completion.md) connects the existing exact extractor
 and checked basis routines to native positive publication. A Gray-order walk

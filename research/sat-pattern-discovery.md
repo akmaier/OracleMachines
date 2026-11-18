@@ -6170,3 +6170,43 @@ unchanged. All **1,253 full / 84 focused tests** pass. Final executable source
 ledger: **607**. New manifest: **46 artifacts**, including the retained failed
 setups and posthoc profile. Next preservation audit:
 **7,807 artifacts / 113 manifests**.
+
+
+## 2026-11-18 checkpoint: avoid rediscovering already validated canonical results
+
+[Bounded query-local normalization reuse](query-canonicalization-reuse.md) now
+implements the previous repeat opportunity with exact CNF/name-map/key triples,
+strict pre-lookup literal validation, conservative object charging, FIFO eviction
+and unconditional query-end clearing. Both 128 KiB and 8 KiB arms preserve all
+answers, models, quotient choices, ordinary acquisition counters and certificates.
+
+On the same 104 replayed inputs, 128 KiB saves **19.57% of normalization visits /
+19.55% of serialized key bytes**, with **368 hits / 470 evictions** and a peak
+**131,018 charged bytes / 20 entries**. Yet mean complete time rises **3.65%**,
+with positive deltas in both orders. At 8 KiB it rises **8.44%**, with only fourteen
+hits and 1,295 oversized skips. Every lookup adds validation/copying/hash work.
+Warm streams have zero cache hits and regress. Keep the optional experiment and
+its negative result; no production/default change or storage saving is claimed.
+
+**Next highest-value target: reuse validated canonical results directly along
+native verification and child visitation.** The separate control profile assigns
+552 calls / 0.08700 inclusive seconds to `_verify`, and 546 / 0.08263 seconds to
+`_visit`. The cache increases both costs. Investigate passing exact immutable
+triples between appropriate callers or cheaper explicit canonical-form recognition,
+while preserving external-input validation and all proof checks. Charge warm-path
+cost and identity transport; increasing the general cache size is not the next
+default step. The 605 individual SQLite commits remain a separate durability task.
+
+Resume `experiments/results/cnf-query-canonical-cache/checkpoint.json`. Its parent
+archive is referenced unchanged: **28,886 native / 26 affine / 42 v1 / 53 v2 /
+22 v3 / 34 discovery records**, all 5,650 composed and 444 pilot decisions.
+Validation covers 832 chronological queries, 416 exact cache/control comparisons,
+104 exhaustive truths, 144 choice checks and 84 known hits. All **607 prior sources /
+7,807 artifacts / 113 manifests** remain unchanged. Two validator setup errors are
+preserved; timing workers and solver results were unaffected. All **1,262 full /
+93 focused tests** pass, with 44 pre-existing SQLite warnings in the full suite and
+none in focused tests. No new coverage, Lean theorem or unrestricted SAT bound.
+
+The **225-page manuscript** builds cleanly with all **64 earlier proof blocks**
+unchanged. Final executable source ledger: **613**. The new manifest binds **52
+artifacts**. Next preservation audit: **7,859 artifacts / 114 manifests**.

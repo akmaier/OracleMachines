@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_query_canonical_cache.py", line 154, in <module>
+    if __name__=='__main__':validate(Path(sys.argv[1]))
+                            ~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_query_canonical_cache.py", line 109, in validate
+    for f in result_fields+('metrics',):assert a['result'][f]==b['result'][f]
+                                               ~~~~~~~~~~~^^^
+KeyError: 'quotient_choice'

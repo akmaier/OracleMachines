@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Measure bounded normalization reuse](research/query-canonicalization-reuse.md).
+A query-local cache avoids 19.57% of normalization visits on the same 104 inputs,
+but validation and bookkeeping raise mean complete runtime 3.65%. Proofs and
+acquisition are identical; keep the cache optional. Next: reuse validated results
+directly between callers, with all identity and certificate checks preserved.
+
 [Choose a checked known quotient](research/known-quotient-selection.md).
 The new policy recovers eight extra native certificates from the all-block pilot,
 with SAT and UNSAT reuse validated on an extended 104-query stream. Extra choice

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_query_canonical_cache.py", line 154, in <module>
+    if __name__=='__main__':validate(Path(sys.argv[1]))
+                            ~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_query_canonical_cache.py", line 83, in validate
+    assert rr['metrics']['canonical_cache_calls']==rr['metrics']['canonical_cache_hits']+rr['metrics']['canonical_cache_misses']
+                                                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'canonical_cache_hits'

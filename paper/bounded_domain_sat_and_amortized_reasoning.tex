@@ -8086,6 +8086,41 @@ validation, hashing, lookup and eviction. This offers a broader reuse target;
 neither it nor two-target selection resolves arbitrary residual interaction or
 supplies a uniform polynomial expansion bound.
 
+\paragraph{Measured limits of a bounded canonicalization cache.}
+An optional query-local cache now retains the exact immutable input and its
+normalized CNF, original-variable names and full key together. Every lookup first
+validates nonzero integer literals; this rejects Boolean and floating-point values
+even when Python considers them equal to an integer key. Misses use the unchanged
+normalizer. Conservative object charges enforce a configured retained-state cap
+through FIFO eviction and oversized-entry rejection. The cache clears after each
+query, including failure. Its cap excludes transient snapshots/results, allocator
+overhead and other solver state; it is not a process-memory bound. Proof readers,
+native acquisition and certificate formats are unchanged.
+
+Eight serial workers compare the two previous controls with 128 KiB and 8 KiB
+caches in opposite orders on the same 104 inputs. This is a replay, not additional
+structural coverage. The larger cache hits 368 of 1,715 calls, avoiding 34,285 of
+175,148 normalization literal visits (19.57\%) and 132,631 serialized key bytes
+(19.55\%). Peak charged state is 131,018 bytes with at most twenty simultaneous
+entries; 470 evictions show why encoded size is not an object-memory bound. The
+smaller cache hits only fourteen calls, skips 1,295 oversized entries and saves
+0.35\% of normalization visits. Both still validate all 175,148 input literals
+before lookup, with copying, hashing, admission and eviction also charged.
+
+All answers, models, quotient choices and native/v2/v3 payloads match the
+known-quotient control, retaining 552 native and 53 extension records and the
+same 1,179,648-byte SQLite archive. Native expansions remain 505. Mean complete
+time rises from 0.69122 to 0.71647 seconds at 128 KiB (3.65\%) and to 0.74958
+seconds at 8 KiB (8.44\%). Both paired complete-time deltas are positive at either
+capacity. Warm queries have no cache hits; mean warm time rises from 0.01067 to
+0.01534/0.01496 seconds. Two orders describe this small workload, not a general
+performance law. The cache remains optional: avoided normalization alone does
+not establish cheaper expansion. A separate identical-output profile locates
+552 canonicalization calls in native verification and 546 in child visitation.
+Passing already validated immutable results between appropriate callers is the
+next candidate, with external-input validation and proof checks retained. No new
+Lean theorem, general SAT coverage or uniform polynomial bound follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -1,0 +1,77 @@
+{
+  "limits": [
+    "Both cache arms preserve acquisition counters and exact certificates. Only pure normalization/key generation is reused.",
+    "Same 104 replayed small inputs; no new coverage or representative general-SAT speedup.",
+    "Cache object bounds are conservative retained-state charges, not total runtime/RSS/transient-allocation bounds."
+  ],
+  "pairs": [
+    {
+      "cold_seconds": -0.0005030832253396511,
+      "complete_worker_seconds": 0.04802499990910292,
+      "mode": "cached",
+      "query_seconds": 0.0420396295376122,
+      "repeat": 0,
+      "warm_seconds": 0.0044678752310574055
+    },
+    {
+      "cold_seconds": -0.0016429172828793526,
+      "complete_worker_seconds": 0.05281141586601734,
+      "mode": "small",
+      "query_seconds": 0.04996030405163765,
+      "repeat": 0,
+      "warm_seconds": 0.00425966689363122
+    },
+    {
+      "cold_seconds": 0.000715749803930521,
+      "complete_worker_seconds": 0.002465291414409876,
+      "mode": "cached",
+      "query_seconds": -0.004708742257207632,
+      "repeat": 1,
+      "warm_seconds": 0.00487533351406455
+    },
+    {
+      "cold_seconds": -0.0005855835042893887,
+      "complete_worker_seconds": 0.06390666589140892,
+      "mode": "small",
+      "query_seconds": 0.05861841095611453,
+      "repeat": 1,
+      "warm_seconds": 0.004307666327804327
+    }
+  ],
+  "solve_seconds": {
+    "cached": [
+      0.41405962128192186,
+      0.39825675217434764
+    ],
+    "known": [
+      0.3752541234716773,
+      0.40093612391501665
+    ],
+    "single": [
+      0.40651629213243723,
+      0.386358751449734
+    ],
+    "small": [
+      0.42563307797536254,
+      0.46218420285731554
+    ]
+  },
+  "warm_cache_hits": {
+    "cached": [
+      0,
+      0
+    ],
+    "known": [
+      0,
+      0
+    ],
+    "single": [
+      0,
+      0
+    ],
+    "small": [
+      0,
+      0
+    ]
+  }
+}

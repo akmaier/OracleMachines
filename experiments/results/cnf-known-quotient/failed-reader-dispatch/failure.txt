@@ -1,0 +1,6 @@
+Initial comparison failed during cold replay before trial archival.
+AttributeError: CompactEquivalenceStore has no attribute old
+check_answer passed store.old to the new parent wrapper, which itself expects MultiEquivalenceStore and unwraps .old.
+The temporary acquisition database was removed by the existing harness cleanup; no completed sample is claimed.
+Preserved source and protocol identify the failed setup. Protocol path bindings describe the original run paths; archived files were moved here after failure.
+The corrected harness passes the complete store and archives partial records/database if cold replay fails.

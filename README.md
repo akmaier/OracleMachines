@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Choose a checked known quotient](research/known-quotient-selection.md).
+The new policy recovers eight extra native certificates from the all-block pilot,
+with SAT and UNSAT reuse validated on an extended 104-query stream. Extra choice
+work still raises mean runtime. Profiling identifies the next broader target:
+469 repeated normalization calls within individual queries, with their variable
+maps and exact keys preserved.
+
 [Substitute multiple equivalence blocks](research/multiblock-equivalence.md).
 Twelve pilot inputs now use a second block, but propagation falls only 0.52%
 while native certificates grow by ten. Two sources already had a known one-block

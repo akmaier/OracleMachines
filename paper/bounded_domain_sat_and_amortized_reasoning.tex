@@ -8038,6 +8038,54 @@ current implementation is top-level only, performs one substitution pass, and
 leaves the final child as potentially arbitrary SAT. It supplies neither a small
 universal closure nor a uniform polynomial expansion bound.
 
+\paragraph{Choosing a checked known quotient.}
+An optional policy now checks at most two native targets before fresh acquisition.
+It first constructs and verifies the complete quotient. If its exact native
+certificate is present, that quotient is used. Otherwise it constructs the
+original first-block quotient and checks its native key. A first-target hit uses
+that block's evidence; two misses retain complete reduction. Native SAT models
+are transported through the canonical name map and lifted with the selected
+substitution. UNSAT publication retains the corresponding checked source trees
+and native negative dependency. Existing proof formats and authorities are
+unchanged. This selects an available route, not a globally minimum-cost subset
+or the cheapest cold proof when both targets are known.
+
+Six serial workers compare single-block, all-block and known-target policies
+on the original 68 inputs followed by 24 generated sources and twelve designed
+quotient-preserving edits. All 36 appended roots are excluded against the parent
+native and equivalence archives; they are not a representative arbitrary-SAT
+sample. All policies return 42 satisfiable and 62 unsatisfiable answers. The new
+policy makes 24 choices: ten complete-target hits, four first-target hits and ten
+two-target misses. Every hit exists before its actual source query and performs
+no fresh native expansion; both positive and negative first-target hits occur.
+
+Against all-block acquisition, native certificates fall 560 to 552, native
+expansions 511 to 505 and propagation visits 74,713 to 74,503. Combined payload
+falls 655,190 to 651,784 bytes; SQLite falls 28,672 and gzip 2,938 bytes. All eight
+native savings occur on the original pilot. The fresh continuation adds 152
+native nodes under every policy, with only a further 65-byte extension saving.
+Single-block acquisition still retains two fewer native nodes and 843 fewer
+combined bytes than the new policy. Fourteen extra first-block transformations
+and 38 native lookups raise substitution/verification scans by 1,075 literals.
+Complete-time deltas against all blocks are $-0.01613/+0.03052$ seconds, with a
+1.00\% higher mean; against single block the mean rises 2.47\%. Avoided acquisition
+therefore does not by itself establish a total-runtime advantage.
+
+A separate instrumented solve-only replay, checked against identical outputs,
+counters and archive payloads, identifies larger costs. Normalization is called
+1,715 times (0.098 seconds exclusive, 0.244 inclusive); 605 SQLite transaction
+exits take 0.116 seconds. These profiled times exclude metadata, cold replay and
+compression, and inclusive values overlap. An exact-input census finds 505
+repeated normalization calls, of which 469 occur within one source query. Those
+local repeats account for 96.39\% of repeated input literals. The largest query's
+encoded input/result state is 73,860 bytes, versus 1,448,226 over the full stream.
+These are diagnostic footprints, not implemented cache savings or Python-memory
+bounds. A bounded per-query cache should retain normalized CNF, original-variable
+names and exact key together, while charging immutable snapshots, strict literal
+validation, hashing, lookup and eviction. This offers a broader reuse target;
+neither it nor two-target selection resolves arbitrary residual interaction or
+supplies a uniform polynomial expansion bound.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

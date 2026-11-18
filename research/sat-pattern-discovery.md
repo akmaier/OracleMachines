@@ -6131,3 +6131,42 @@ unchanged. All **1,245 full / 76 focused tests** pass (44 pre-existing SQLite
 warnings in the full suite, none in focused tests). Final executable source
 ledger: **601**. New manifest: **39 artifacts**. Next preservation audit:
 **7,761 artifacts / 112 manifests**.
+
+## 2026-11-18: checked known-quotient choice and normalization cost
+
+[Known-quotient selection](known-quotient-selection.md) checks the complete native
+target, then the first-block target only on a miss, before fresh acquisition.
+Correct canonical-name transport and the selected source evidence retain existing
+SAT models and v2/v3 proof authorities. At most two alternatives are considered.
+
+The 68-query pilot plus 36 excluded fresh sources recover **eight native nodes**
+versus all-block acquisition (560 -> 552), saving **3,406 payload / 28,672 SQLite /
+2,938 gzip bytes**. All eight native savings occur on the original pilot; the fresh
+segment has the same 152 native additions under every policy. Four first-target
+hits include SAT and UNSAT. Thirty-eight lookups and fourteen extra transforms
+are charged. Mean complete time rises 1.00% versus all blocks, with mixed paired
+deltas, and 2.47% versus single block. Keep the policy optional.
+
+**Next highest-value structural reuse target: per-query normalization results.**
+A separate identical-output solve profile places normalization and individual
+SQLite commits ahead of propagation in elapsed cost. An exact census finds 505
+repeats among 1,715 normalization calls; 469 repeats occur within one query and
+cover 96.39% of repeated input literals. Peak per-query encoded input/result state
+is 73,860 bytes versus 1,448,226 for the full stream. Test a bounded immutable cache
+of the CNF/name-map/key triple; charge validation, copying, hashing, lookup,
+objects and eviction. Reject booleans/floats before hits. These are opportunities,
+not implemented savings. Transaction batching remains a separate durability task.
+
+Resume `experiments/results/cnf-known-quotient/checkpoint.json`: all prior **28,736
+native / 26 affine / 42 v1 / 42 v2 / 11 v3 / 34 discovery records** preserved; union
+now **28,886 native / 53 v2 / 22 v3**. Full histories, 624 chronological queries,
+104 truths, 36 fresh exclusions and both orders of all known choices validate.
+The failed benchmark dispatch and profile-comparison setups are retained. All
+601 previous sources / 7,761 artifacts / 112 manifests are unchanged. No new
+Lean or unrestricted-SAT resource bound follows.
+
+The **225-page manuscript** builds cleanly with all **64 earlier proof blocks**
+unchanged. All **1,253 full / 84 focused tests** pass. Final executable source
+ledger: **607**. New manifest: **46 artifacts**, including the retained failed
+setups and posthoc profile. Next preservation audit:
+**7,807 artifacts / 113 manifests**.

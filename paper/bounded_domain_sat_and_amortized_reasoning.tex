@@ -8432,6 +8432,74 @@ or proposal state. All previous payloads remain authoritative in the expanded
 archive, and the exhaustive two-variable audit and unchanged proof readers check
 the new results. No uniform polynomial arbitrary-SAT bound is established.
 
+\paragraph{Sharing a causal derivation across discovery and emission.}
+The next optional implementation retains the choices made by support discovery:
+selected parent clauses, core identity, compact names, dependencies, causal unit
+traces and split choices. It emits ordinary certificates from these query-local
+recipes without selecting the same support again. Restriction, subset construction,
+serialization and independent native verification remain necessary. A plan has
+no proof authority; the origin, extracted core and final target retain their
+original checking obligations. All plans clear on a hit, miss or exception.
+
+Preparation retains the preceding node and source-literal limits and adds a
+4 MiB conservative charge for recipe strings, origin keys, result objects and
+indices, core keys and mapping tables. The charge is checked after insertion;
+an oversized candidate may allocate temporary space before the partial plan is
+discarded. Encoding and decoding transients, active emission workspace, allocator
+overhead and the existing checked graph are excluded. The limit therefore bounds
+accepted retained plans, not peak process memory. Plan-cap exhaustion charges
+discarded preparation and falls back to the original bounded extractor, possibly
+repeating work. A missing required clause or support-budget stop gives no verdict.
+
+Twelve serial workers compare the witness pool, unchanged negative edit reuse
+and shared plans in opposite orders, starting from empty archives. The exposed
+scales remain 24/48/72; a fresh size holdout uses 42/66/90. Each stream contains
+108 attempts and 72 roots from the same six synthetic designs. Policy and sources
+are frozen before timing. Mean query time falls from 2.61769 to 2.44895 seconds
+exposed and from 8.65822 to 8.43098 seconds on holdout against negative reuse,
+reductions of 6.45\% and 2.62\%. Complete worker time falls 3.14\% and 1.02\%.
+Both orders improve. These costs include planning, emission, checking, publication,
+retained-object measurement, warm and cold replay, reconstruction and compression;
+study preparation and posthoc audits are separate.
+
+The plan eliminates 415 and 518 repeated support-node visits while discovery
+still visits 448 and 889 nodes. Accepted retained charges peak at 711,610 and
+1,378,956 bytes; the matched streams do not exercise capacity fallback. All
+per-query acquisition outcomes and actual proof bytes match negative reuse.
+Permanent storage is identical: 2,298 and 5,443 native records occupying
+18,231,296 and 59,691,008 SQLite bytes. Checked-object measurements increase
+slightly through different object sharing, as do mean worker RSS and mean cold
+and warm replay times. These regressions remain part of the comparison.
+
+Witness-only query means are 2.58311 and 8.35832 seconds. Shared planning wins
+on exposed inputs but still costs 0.87\% more on the holdout mean, with mixed
+paired signs. Neither two orders nor these designed workloads establish a
+general latency improvement. All three policies retain 70 SAT, 36 UNSAT and
+two unresolved exposed attempts, and 57 SAT, 41 UNSAT and ten unresolved holdout
+attempts. This change improves reuse within acquisition without expanding
+decision coverage or recognized-family closure.
+
+The remaining cost points toward a structural integration gap. In the first
+holdout plan worker, random 3-CNF and parity mixtures consume 79.16\% of query
+time. Budget-stopped attempts consume 4.976 of 8.428 seconds and commit 2,622
+checked negative residual records. Those conditioned residuals do not by
+themselves refute their unconditioned sources. Cross-edit reuse requires checked
+transport of source clauses and assumptions; six distinct source roots remain
+absent at stream end, despite some later repeats completing earlier stops.
+
+A separate posthoc screen applies the existing explicit-parity extractor and
+affine-negative checker to all 108 holdout inputs without generator labels.
+It obtains fourteen checked negative observations, including two native
+budget-stopped attempts. One of those source roots remains absent at native
+stream end. Normalization, extraction and checking take 0.099 seconds in this
+screen, excluding publication, persistence and cold replay. Source bindings and
+certificates are preserved separately; the timed native observations remain
+unchanged. A consistent extracted subsystem gives no verdict for its leftover
+CNF. Integrating a bounded version of this existing authority before expensive
+native acquisition is the next experiment, with misses, elimination, certificate
+storage and restart all charged on a fresh split. It is not yet an integrated
+speedup or an efficient classification of arbitrary SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

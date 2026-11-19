@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Share support discovery with proof construction](research/shared-support-derivations.md).
+Bounded query-local plans reduce query time 6.45% exposed and 2.62% on a fresh
+size holdout against negative edit reuse, with identical proof bytes. Holdout
+query time still exceeds witness-only search by 0.87% on the mean. A separate
+checked affine screen refutes two native budget-stopped attempts; integrating
+that structural probe with all costs charged is the next target.
+
 [Reuse negative proofs only after an edit match](research/on-demand-negative-edit-reuse.md).
 The optional policy finds ten checked UNSAT transfers per stream and reduces
 holdout SQLite storage 9.37%, but query time increases 5.81%. Core materialization

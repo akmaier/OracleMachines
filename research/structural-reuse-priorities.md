@@ -12,7 +12,45 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: share support discovery with proof materialization
+## Current investigation: recognize affine contradictions before native acquisition
+
+[Shared support derivations](shared-support-derivations.md) now retain causal
+choices under a 4 MiB plan charge and emit through the unchanged native verifier.
+The second support-selection traversal disappears: 415 exposed / 518 fresh-holdout
+node visits. Against negative edit reuse, mean query time falls **6.45% / 2.62%**
+and complete worker time **3.14% / 1.02%**, in both orders. Proof bytes, decisions,
+expansions and persistent storage are identical. Accepted plan charges peak at
+711,610 / 1,378,956 bytes. The cap excludes transients and emission workspace.
+
+**Retain the limits:** holdout query time remains **0.87% above witness-only search**
+on the mean, with mixed paired signs. Checked-object space, RSS and mean warm/cold
+times increase slightly against negative reuse. All modes retain the same ten
+holdout budget-stopped attempts. This optimization does not expand family closure.
+
+**Next primary target: integrate a bounded affine-negative probe into general CNF
+acquisition.** Random 3-CNF and parity mixtures account for **79.16%** of first-order
+holdout query time. Applying the existing source-bound affine checker to all 108
+inputs without labels yields 14 negative observations, including stopped cases
+42 and 43. Case 43 remains absent at native stream end. The screen takes 0.099
+seconds but excludes publication, persistence and cold replay; it is posthoc
+evidence, not an integrated speedup. Keep the original unknown observations.
+Consistent subsystems give no verdict for leftover clauses. Freeze a fresh split
+and measure misses and all costs against both existing policies.
+
+The ten stopped attempts consumed 4.976 of 8.428 query seconds and committed
+2,622 checked negative residuals. Their source/assumption bindings must be
+transported before cross-edit reuse. Six distinct source roots remain missing at
+stream end. This is the next broader gap after affine integration; alternative
+surviving supports and durable candidate retention remain open.
+
+Resume `experiments/results/cnf-support-plan/checkpoint.json`. Preserve all
+**658 prior sources / 8,197 artifacts / 121 manifests**. The union contains
+**45,061 native records**, with earlier payloads authoritative and alternative
+valid proofs retained in trial archives. The audit checks **1,296 attempts /
+432 exact plan comparisons / 512 exhaustive formulas**. Final source ledger:
+**664**. Test/build evidence and unchanged proof blocks are bound in `checks.json`.
+
+## Previous checkpoint: share support discovery with proof materialization
 
 [On-demand negative edit reuse](on-demand-negative-edit-reuse.md) now remembers
 sixteen checked native UNSAT roots, recognizes near edits without supplied donor

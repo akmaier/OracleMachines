@@ -6496,3 +6496,45 @@ The 230-page manuscript builds cleanly with 64 proof blocks unchanged. Forty-fou
 SQLite warnings remain at unchanged full-suite sites. The first profiler's
 JSON-versus-integer model-key comparison failure is preserved; corrected comparison
 matches all semantic fields, counters and native digests. Timed runs are unchanged.
+
+
+## 2026-11-19: share causal derivations and expose an affine integration gap
+
+[Shared support derivations](shared-support-derivations.md) remove repeated
+support selection during proof emission. The query-local plan keeps exact source
+choices under a 4 MiB retained charge; all output uses the unchanged native
+verifier. The cap excludes encoding/decoding transients and emission workspace.
+Capacity fallback and failed/rolled-back queries discard their plans safely.
+
+Twelve frozen serial workers compare witness-only retrieval, negative edit reuse
+and shared plans on exposed 24/48/72 and fresh 42/66/90 scales. Mean query time
+falls 6.45% / 2.62% against negative reuse, in both orders; complete time falls
+3.14% / 1.02%. Plans eliminate 415 / 518 repeated support-node visits. Proof bytes,
+expansions, outcomes and permanent storage match negative reuse exactly. Accepted
+plan charges peak at 711,610 / 1,378,956 bytes. Holdout query time still exceeds
+witness-only search by 0.87% on the mean, with mixed paired signs. Memory and
+mean warm/cold replay costs rise slightly against negative reuse.
+
+Decision and family closure coverage do not increase: exposed outcomes remain
+70 SAT / 36 UNSAT / 2 unresolved attempts, holdout 57 SAT / 41 UNSAT / 10 unresolved.
+Random 3-CNF and parity mixtures consume 79.16% of first-order holdout query time.
+The ten stops commit 2,622 checked negative residuals, whose conditions cannot be
+silently dropped during reuse. Six distinct source roots remain absent at stream
+end; query stops are not counts of permanently unresolved distinct roots.
+
+A posthoc label-free screen applies the existing affine-negative checker to all
+108 holdout inputs. It preserves 14 checked negative observations, including
+stopped cases 42 and 43; case 43 is still absent at native stream end. Screen time
+is 0.099 seconds before publication/persistence/replay. Native observations are
+unchanged and the screen certificates remain separate from the SQLite union.
+Consistent extracted subsystems give no verdict for leftover clauses. Next:
+integrate a bounded source-checked affine probe with all costs measured on a fresh
+split, then address transport of conditioned residuals and surviving supports.
+
+Resume `experiments/results/cnf-support-plan/checkpoint.json`. All 658 prior
+sources and 8,197 artifacts across 121 manifests are unchanged. Both readers
+verify the union of 45,061 native records and all earlier extensions/observations.
+The audit checks 1,296 chronological attempts, 432 exact plan/negative comparisons,
+and 512 exhaustive formulas. All 1,336 full / 197 focused tests pass. Final build,
+64 unchanged proof blocks and the 664-source ledger are recorded in `checks.json`.
+No uniform polynomial expansion or arbitrary-SAT result is established.

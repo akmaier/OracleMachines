@@ -10388,3 +10388,49 @@ The audit checks 1,296 chronological attempts, 432 exact plan/negative compariso
 and 512 exhaustive formulas. All 1,336 full / 197 focused tests pass. Final build,
 64 unchanged proof blocks and the 664-source ledger are recorded in `checks.json`.
 No uniform polynomial expansion or arbitrary-SAT result is established.
+
+
+## 2026-11-19: bounded affine probing and the remaining partial-search gap
+
+[The bounded affine probe](bounded-affine-probe.md) integrates the existing
+source-checked negative authority before native acquisition. It accepts only
+contradictions; consistent/incomplete or budget-stopped subsystems fall back.
+No native certificate acquires an affine dependency. The public input adapter
+snapshots finite outer/inner iterables after review exposed consumption before
+fallback in the first kernel. Both twelve-worker runs and exact comparisons are
+preserved; final timings include copying, checking, persistence and cold replay.
+
+On exposed 42/66/90 and fresh 96/108/120 streams, mean query time falls 20.25% /
+41.87% against planned reuse and 19.93% / 42.96% against witness-only retrieval.
+Holdout native expansions fall 8,261 to 4,982, SQLite bytes 133,857,280 to
+77,430,784, and checked objects 368,606,936 to 210,148,243. Complete time improves
+in both orders. Holdout outcomes change from 50 SAT / 32 UNSAT / 26 unresolved to
+50 SAT / 43 UNSAT / 15 unresolved attempts, with no newly stopped completed case.
+Seven additional distinct roots are available at stream end, leaving nine absent.
+All eighteen parity attempts use affine certificates without native expansion.
+
+Retain the warm regression: on matched completed cohorts, warm solve time rises
+89.44% exposed / 93.27% holdout against planned reuse. Discovery limits exclude
+input copying, canonicalization, stored-proof checking, publication, native
+fallback and full archive/cache growth. These designed workloads and fixed budgets
+do not establish representative performance or unrestricted SAT closure.
+
+Next: bounded support/containment reuse from committed partial searches. Random
+3-CNF and shared mixtures consume 92.46% of holdout query time. Fifteen stops
+consume 9.335 of 12.187 seconds and commit 3,820 checked negative residuals;
+all fit the current 4,096-literal origin limit. The negative pool currently admits
+completed query roots only, while exact residual memoization already exists.
+Conditional refutations need checked source/assumption transport or containment
+in the current residual before broader reuse. Charge selection, extraction,
+checking, invalidation and cold reconstruction. Every remaining stopped source
+has affine rank zero; no low-free-dimension completion shortcut applies directly.
+
+Resume `experiments/results/cnf-affine-probe-safe/checkpoint.json`. The union has
+54,418 native and 47 affine-negative records plus unchanged prior extension
+records. All 664 previous sources, 8,275 previous artifacts and 57 preserved
+first-run artifacts remain intact. The audit checks 1,296 chronological attempts,
+1,296 exact first-run comparisons, 512 exhaustive formulas and all earlier
+observations. All 1,347 full / 208 focused tests pass. The 232-page manuscript
+builds without warnings and keeps all 64 proof blocks. Final source ledger: 672.
+Initial fixture failures, the corrected input boundary, regressions and remaining
+SQLite warning sites are recorded; old authoritative bytes remain unchanged.

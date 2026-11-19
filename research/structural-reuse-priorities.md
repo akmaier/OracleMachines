@@ -12,7 +12,53 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: recognize affine contradictions before native acquisition
+## Current investigation: retrieve supports from committed partial searches
+
+[The bounded affine probe](bounded-affine-probe.md) now runs before native
+acquisition, with the existing independent source/row checker and separate proof
+table. The public adapter snapshots finite outer/inner inputs; review caught an
+iterator-consumption flaw in the first kernel, and all twelve workers were rerun
+with copying charged. All first-run decisions and proof tables match the rerun.
+
+Against planned reuse, mean query time falls **20.25% exposed / 41.87% on the
+fresh 96/108/120 holdout**; complete time falls **20.34% / 41.88%**, in both orders.
+Holdout SQLite storage falls **42.15%**, checked objects **42.99%**, and cold proof
+time **42.74%**. Outcomes improve from **50 SAT / 32 UNSAT / 26 unresolved** to
+**50 SAT / 43 UNSAT / 15 unresolved attempts**. No previously completed attempt
+is lost. All eighteen holdout parity attempts use affine certificates without
+native expansion. This is a constructed-stream result, not unrestricted closure.
+
+**Keep the regression:** matched warm solve time increases **89.44% / 93.27%**
+against planned reuse. Copying, extra lookups and repeated canonicalization on
+native fallback cost work. Improving that path is supporting work; it is smaller
+than the remaining acquisition cost on this stream.
+
+**Next primary target: bounded support retrieval from checked residual proofs
+left by incomplete searches.** Random 3-CNF and shared mixtures now consume
+**92.46%** of holdout query time. The fifteen budget stops consume **9.335 / 12.187
+seconds** and commit **3,820 negative residual records**, all below the preceding
+4,096-literal origin limit. The present negative pool admits completed native
+query roots only. Native exact residual reuse already exists, so the experiment
+must add useful checked support/containment matches across changed residual keys.
+Charge selection, extraction, checking, invalidation and cold reconstruction;
+do not treat conditioned residual refutations as unconditional source refutations.
+
+Nine distinct source roots remain absent at stream end. Every stopped holdout
+source has affine rank zero and 96--120 free variables; the existing small-free-
+dimension completion path cannot settle these cases directly. Alternative
+surviving supports, variable correspondence, shared-variable decomposition and
+representative external benchmarks remain open. Candidate eligibility is not
+evidence of a net saving or a polynomial bound.
+
+Resume `experiments/results/cnf-affine-probe-safe/checkpoint.json`. The union has
+**54,418 native / 47 affine-negative records**, preserving all earlier payloads.
+All **664 prior sources / 8,275 prior artifacts** and **57 first-run artifacts**
+remain intact. Validation checks **1,296 chronological attempts / 1,296 exact
+first-run comparisons / 512 exhaustive formulas**. All **1,347 full / 208 focused
+tests** pass. The **232-page manuscript** builds cleanly with **64 proof blocks**
+unchanged; final source ledger **672**. All limits and warning sites are recorded.
+
+## Previous checkpoint: recognize affine contradictions before native acquisition
 
 [Shared support derivations](shared-support-derivations.md) now retain causal
 choices under a 4 MiB plan charge and emit through the unchanged native verifier.

@@ -1,0 +1,35 @@
+test_commit_failure_does_not_publish_checked_hint (solver.test_cnf_affine_probe.AffineProbeTests.test_commit_failure_does_not_publish_checked_hint) ... ok
+test_conflict_without_native_search_and_exact_cold_replay (solver.test_cnf_affine_probe.AffineProbeTests.test_conflict_without_native_search_and_exact_cold_replay) ... ok
+test_consistent_subsystem_does_not_decide_coupling_cnf (solver.test_cnf_affine_probe.AffineProbeTests.test_consistent_subsystem_does_not_decide_coupling_cnf) ... FAIL
+test_corrupt_cold_record_is_rejected (solver.test_cnf_affine_probe.AffineProbeTests.test_corrupt_cold_record_is_rejected) ... ok
+test_exhaustive_two_variable_stream (solver.test_cnf_affine_probe.AffineProbeTests.test_exhaustive_two_variable_stream) ... ok
+test_extraction_matches_existing_checker (solver.test_cnf_affine_probe.AffineProbeTests.test_extraction_matches_existing_checker) ... ok
+test_invalid_probe_limits (solver.test_cnf_affine_probe.AffineProbeTests.test_invalid_probe_limits) ... ok
+test_size_and_xor_budget_stop_fall_back (solver.test_cnf_affine_probe.AffineProbeTests.test_size_and_xor_budget_stop_fall_back) ... FAIL
+test_tampered_discovery_is_rejected_before_publication (solver.test_cnf_affine_probe.AffineProbeTests.test_tampered_discovery_is_rejected_before_publication) ... ok
+
+======================================================================
+FAIL: test_consistent_subsystem_does_not_decide_coupling_cnf (solver.test_cnf_affine_probe.AffineProbeTests.test_consistent_subsystem_does_not_decide_coupling_cnf)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_affine_probe.py", line 49, in test_consistent_subsystem_does_not_decide_coupling_cnf
+    self.assertEqual(a.counts['affine_probe_misses'],1)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_size_and_xor_budget_stop_fall_back (solver.test_cnf_affine_probe.AffineProbeTests.test_size_and_xor_budget_stop_fall_back)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_affine_probe.py", line 54, in test_size_and_xor_budget_stop_fall_back
+    s=self.make(**kw);r=s.solve(source);self.assertFalse(r['answer']);self.assertEqual(r['authority'],'native')
+                                                                      ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'cnf-affine-negative-v1' != 'native'
+- cnf-affine-negative-v1
++ native
+
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.068s
+
+FAILED (failures=2)

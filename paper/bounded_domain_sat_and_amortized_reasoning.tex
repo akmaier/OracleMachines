@@ -8500,6 +8500,86 @@ native acquisition is the next experiment, with misses, elimination, certificate
 storage and restart all charged on a fresh split. It is not yet an integrated
 speedup or an efficient classification of arbitrary SAT.
 
+\paragraph{A bounded affine-negative probe before acquisition.}
+The next optional policy integrates the existing affine authority into top-level
+CNF queries. It snapshots the finite input, normalizes it and checks exact stored
+results before fresh discovery. Unknown sources with at most 256 variables,
+4,096 clauses and 16,384 literal occurrences are grouped by support and forbidden
+parity. Only complete, distinct parity halves become XOR equations. Every other
+clause remains a coupling clause. Discovery performs at most 65,536 row XORs;
+a consistent or budget-stopped subsystem falls back without a verdict.
+
+A contradictory reduced row is independently checked against the complete
+source-bound extraction and elimination trace, then published in the existing
+affine-negative table. This uses the established checker rather than extending
+the native proof language. Publication commits immediately while the exclusively
+owned connection is idle, and checked memory is populated only after success.
+Native batching and native certificate dependencies remain unchanged on fallback.
+Persisted affine conclusions support exact cold replay without rediscovery.
+
+The input snapshot is necessary because probing and fallback make separate
+passes. Review identified an iterator-consumption flaw in the original
+reusable-sequence kernel. A separate adapter copies finite outer and inner
+iterables before either pass. Its copying cost and temporary space are charged,
+and all twelve workers are rerun on the same frozen cases after the correction.
+The original list-only runs remain preserved for exact outcome/proof comparison;
+their timings are not substituted for the corrected implementation's timings.
+
+The discovery limits apply after normalization. They do not cap raw-input copying,
+normalization, exact stored-proof checks, serialization, transaction work or
+native fallback. For $q$ extracted equations over $n$ compact variables and at
+most $X$ elimination steps, reduced rows and dependency indices use
+$O(qn+X\log(q+1))$ bits in addition to the source/support descriptions and
+container overhead. Integer XORs have their $n$-bit cost. Compilation copies and
+checks the evidence again. The complete affine archive can grow with the stream;
+its retained cache and transient publication workspace have no global bound from
+these discovery limits. Consistent affine subsystems can still leave an arbitrary
+coupling CNF. The probe therefore expands useful checked coverage without proving
+efficient closure for unrestricted SAT.
+
+The corrected experiment compares witness-only retrieval, planned negative reuse
+and the probe on exposed scales 42/66/90 and a fresh holdout at 96/108/120. Each
+stream has 108 attempts; all twelve workers start empty. Against planned reuse,
+mean query time falls from 8.43813 to 6.72975 seconds exposed and from 20.93019
+to 12.16731 seconds on holdout, reductions of 20.25\% and 41.87\%. Complete
+worker time falls 20.34\% and 41.88\%, with both orders improving. Query time
+also improves 19.93\% and 42.96\% against witness-only retrieval. These are
+fixed-stream measurements, with different numbers of completed attempts, from
+six constructed designs rather than a representative external benchmark.
+
+On holdout, native expansions fall from 8,261 to 4,982 and native records from
+8,955 to 5,655. Twelve affine certificates add 311,973 key/payload bytes, while
+SQLite storage falls from 133,857,280 to 77,430,784 bytes. Checked graph and
+candidate objects fall from 368,606,936 to 210,148,243 bytes, and mean cold proof
+time falls from 8.36092 to 4.78717 seconds. Full worker time charges input copying,
+misses, recognition, checking, publication, retained-object measurement, replay,
+reconstruction and compression. The probe makes 78 fresh holdout attempts, of
+which twelve certify contradictions and 66 miss, plus six exact affine hits.
+
+Exposed outcomes change from 57 SAT, 41 UNSAT and ten unresolved attempts to
+57 SAT, 43 UNSAT and eight unresolved. Holdout outcomes change from 50 SAT,
+32 UNSAT and 26 unresolved to 50 SAT, 43 UNSAT and fifteen unresolved against
+planned reuse. All eighteen holdout parity attempts use affine certificates with
+no native expansion. Earlier native budget stops remain preserved observations.
+This is broader checked decision coverage, not closure of every semantic family.
+
+Warm replay is slower even after matching completed cohorts. The same 98 exposed
+queries take 0.05552 seconds under planned reuse and 0.10517 with the probe;
+82 holdout queries take 0.08625 and 0.16669 seconds. Input copying, extra lookups
+and repeated normalization on native fallback add work. Acquisition and storage
+savings therefore do not imply uniformly faster use of the stored result.
+
+The remaining cost is concentrated in random 3-CNF and shared mixtures, which
+consume 92.46\% of first-order holdout query time. Fifteen stopped attempts use
+9.335 of 12.187 seconds and commit 3,820 checked negative residual records. Nine
+distinct source roots remain absent at stream end. The next candidate improvement
+is bounded support retrieval from committed partial searches: the present negative
+pool admits completed native query roots only. Exact residual memoization is
+already available, so any further saving requires a checked broader match. A
+refutation of a conditioned residual cannot silently become a refutation of its
+unconditioned source. Selection, transport, support discovery, invalidation and
+cold reconstruction must all be charged before promoting this opportunity.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -1,0 +1,3 @@
+# Superseded list-only timing
+
+The frozen affine kernel is correct on the materialized CNF sequences used here. Review found that a one-shot outer iterator could be consumed before native fallback; the final adapter snapshots finite outer and inner iterables. These first twelve workers are preserved without promoting their timings as the final implementation result. See ../cnf-affine-probe-safe for the complete rerun, input snapshot charges, final independent audit and checkpoint. The final audit compares every decision and proof digest with these list-only runs. No outcome or size selection changed. Initial test fixture failures are retained as well.

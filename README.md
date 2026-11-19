@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Recognize affine contradictions before acquisition](research/bounded-affine-probe.md).
+The checked probe reduces fresh-holdout query time 41.87% and SQLite storage
+42.15% against planned reuse; unresolved attempts fall from 26 to 15. Warm replay
+regresses, including on matched cases. All remaining holdout stops have affine
+rank zero. Next: reuse certified residual supports from committed partial searches.
+
 [Share support discovery with proof construction](research/shared-support-derivations.md).
 Bounded query-local plans reduce query time 6.45% exposed and 2.62% on a fresh
 size holdout against negative edit reuse, with identical proof bytes. Holdout

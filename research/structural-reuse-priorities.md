@@ -12,7 +12,53 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: compose transported supports with a few missing clauses
+## Current investigation: predict useful structure after missing-clause conditioning
+
+[Transported support partitions](transported-support-partition.md) now combine
+bounded causal extraction, checked transport and the existing first-false rule.
+The prefix-controlled pilot uses three supplied historical residuals and six fixed
+edits, with five arms and two opposite orders. Every baseline already solves all
+nine targets; no source-level closure or automatic-discovery gain is claimed.
+
+**The useful pattern is case 31:** five missing clauses produce three unit
+conflicts and two branches that use binary-backbone reasoning. Reverse order cuts
+historical expansions **69 to 17** and query time **0.14747 to 0.06522 seconds**.
+Its combined edit stream improves **143 to 92 expansions**, **0.30542 to 0.22353
+seconds**, entirely through the addition. Deletion leaves six missing clauses,
+falls back, and regresses from 74 to 75 expansions. Cases 25 and 61 regress because
+ordinary reuse already takes only two/four expansions.
+The existing single-unresolved-branch screen rejects the useful case and accepts
+the expensive alternatives. Aggregate screen query time rises **49.47% / 26.81%**.
+
+**Next primary target: the six-missing-clause deletion boundary and branch costs.**
+That deletion consumes 75 of 112 edit expansions and about half the reverse arm's
+edit query time. Read-only prefix-plus-addition screening gives four unit conflicts
+and two nonterminal branches in both orders, with no known native branch or
+propagated-residual root. Neither remaining mixture is binary, Horn or dual-Horn.
+`next-boundary.json` preserves this unsolved diagnostic. Freeze a new comparison
+before increasing the cap; a repeated branch shape is not a cheapness guarantee.
+Inspect exact archive hits and the binary implication/backbone structure exposed
+by conditioning. Permit multiple unresolved branches when their combined cost is
+credible; protect cheap native queries from expensive preparation. Charge probing
+against a shared budget and test new unlabelled mixtures. Neither branch count
+nor residual literal count alone predicts the saving on this pilot. Donor/map
+selection remains supplied and must become automatic before an end-to-end claim.
+
+The fixed reverse arm reduces aggregate query time **24.87% historical / 5.94%
+on edits**, but complete measured workflow time changes by only **0.55% / 0.61%**
+in two repeats. Sidecar loading makes warm setup plus lookup slower; historical
+cold replay also regresses. Endpoint checked-object totals fall **31.22% / 12.07%**,
+but compressed proof delta plus uncompressed partition sidecars grow **117.16% /
+88.11%**. Compact source-bound sidecars are a supporting target. Keep the safe
+affine baseline and preserve the failed screen; do not deploy a posthoc best arm.
+
+Resume `experiments/results/cnf-transported-partition/checkpoint.json`. The three
+prefixes contain only proofs committed before the original source query; target
+roots are absent. Trial deltas and checked sidecars retain exact evidence, while
+the union preserves all earlier payloads. New native expansion remains uncapped
+in general; the 256 limit is a shared per-query stop, not polynomial SAT closure.
+
+## Previous checkpoint: compose transported supports with a few missing clauses
 
 [Source-variable transport](residual-variable-transport.md) now retains bounded
 normalization maps and restores hint metadata after restart. Five transfers work

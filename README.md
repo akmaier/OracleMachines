@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Compose transported supports with missing clauses](research/transported-support-partition.md).
+A checked historical-prefix pilot cuts one residual's expansions from 69 to 17;
+its edit stream improves from 143 to 92 through the addition, while deletion
+falls back and regresses. Two cheap cases regress, and the old
+branch-count screen selects poorly. Query gains shrink to under 1% in the complete
+measured workflow; sidecar storage grows. Next: recognize useful structure after
+conditioning and price all branches. The affine baseline stays in place.
+
 [Retain variable maps across residuals](research/residual-variable-transport.md).
 Automatic map transport and cold hint recovery work on numbering-shift controls,
 but fresh-holdout query time rises 5.26% with unchanged outcomes. A mismatch audit

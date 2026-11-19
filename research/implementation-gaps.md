@@ -4,6 +4,14 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
+Latest expansion checkpoint (19 November):
+[transported support partitions](transported-support-partition.md) establish a
+useful residual-level conditioning pattern and a failed admission heuristic.
+Case 31 improves from 69 to 17 expansions; two already cheap cases regress.
+Automatic donor selection and cost prediction remain open. Sidecar duplication
+increases persisted delta space despite smaller native proofs. Resume the
+`cnf-transported-partition` checkpoint; keep the affine policy as the baseline.
+
 | Item | Concrete work | Stronger claim that must not be inferred |
 | --- | --- | --- |
 | 1. Uniform expansion | Executable compact coverage states for the logarithmic-width SAT family, with preservation, coverage, construction-size and query-cost theorems. | Uniform polynomial-time SAT for unrestricted inputs. |

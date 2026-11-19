@@ -1,0 +1,2446 @@
+{
+  "first_order_phase_seconds": {
+    "edits": {
+      "affine": {},
+      "forward": {
+        "baseline_screen": 1.125037670135498e-06,
+        "branch_construction": 0.005199873819947243,
+        "composition": 0.02522162487730384,
+        "premise": 0.026086207944899797,
+        "query": 0.25006641866639256,
+        "support_prepare": 0.025955541525036097
+      },
+      "native": {},
+      "reverse": {
+        "baseline_screen": 9.587965905666351e-07,
+        "branch_construction": 0.0055102091282606125,
+        "composition": 0.025613250210881233,
+        "premise": 0.026756792329251766,
+        "query": 0.2313714986667037,
+        "support_prepare": 0.0258886250667274
+      },
+      "screen": {
+        "baseline_screen": 0.004342749714851379,
+        "branch_construction": 0.002306000329554081,
+        "composition": 0.01081608422100544,
+        "plan_screen": 0.035265331622213125,
+        "premise": 0.014653750229626894,
+        "query": 0.3333299160003662,
+        "support_prepare": 0.025662334635853767
+      }
+    },
+    "historical": {
+      "affine": {},
+      "forward": {
+        "baseline_screen": 4.163011908531189e-07,
+        "branch_construction": 0.004241626244038343,
+        "composition": 0.020491499453783035,
+        "premise": 0.023157916963100433,
+        "query": 0.07442037528380752,
+        "support_prepare": 0.017249793279916048
+      },
+      "native": {},
+      "reverse": {
+        "baseline_screen": 4.568137228488922e-07,
+        "branch_construction": 0.004070875700563192,
+        "composition": 0.020030834712088108,
+        "premise": 0.023248916491866112,
+        "query": 0.057436083909124136,
+        "support_prepare": 0.017641916871070862
+      },
+      "screen": {
+        "baseline_screen": 0.002222583629190922,
+        "branch_construction": 0.002290708012878895,
+        "composition": 0.010630333796143532,
+        "plan_screen": 0.028309624176472425,
+        "premise": 0.014735250268131495,
+        "query": 0.1673537502065301,
+        "support_prepare": 0.01738133281469345
+      }
+    }
+  },
+  "groups": {
+    "edits": {
+      "affine": {
+        "checked_python_bytes": 6991998.0,
+        "cold_seconds": 11.232482436811551,
+        "complete_worker_seconds": 24.5510076880455,
+        "database_bytes": 189726720.0,
+        "expanded_nodes": 155.0,
+        "new_native_records": 177,
+        "new_payload_bytes": 1648926.0,
+        "partition_bytes": 9.0,
+        "persisted_delta_and_partition_bytes": 123386.0,
+        "persistence_seconds": 0.09949454222805798,
+        "proof_delta_compressed_bytes": 123377.0,
+        "query_seconds": 0.3374230607878417,
+        "reconstruction_seconds": 11.640035646269098,
+        "warm_seconds": 0.006819228874519467,
+        "warm_setup_seconds": 4.185386933386326e-05
+      },
+      "forward": {
+        "checked_python_bytes": 6553188.0,
+        "cold_seconds": 11.16583629208617,
+        "complete_worker_seconds": 24.343623479595408,
+        "database_bytes": 189161472.0,
+        "expanded_nodes": 121.0,
+        "new_native_records": 166,
+        "new_payload_bytes": 1267160.0,
+        "partition_bytes": 135667.0,
+        "persisted_delta_and_partition_bytes": 236028.0,
+        "persistence_seconds": 0.07703676982782781,
+        "proof_delta_compressed_bytes": 100361.0,
+        "query_seconds": 0.33388997917063534,
+        "reconstruction_seconds": 11.50816797837615,
+        "warm_seconds": 0.004164291545748711,
+        "warm_setup_seconds": 0.01843579113483429
+      },
+      "native": {
+        "checked_python_bytes": 6970180.0,
+        "cold_seconds": 11.26865137531422,
+        "complete_worker_seconds": 24.550817583920434,
+        "database_bytes": 189726720.0,
+        "expanded_nodes": 155.0,
+        "new_native_records": 177,
+        "new_payload_bytes": 1648926.0,
+        "partition_bytes": 9.0,
+        "persisted_delta_and_partition_bytes": 123386.0,
+        "persistence_seconds": 0.09946229099296033,
+        "proof_delta_compressed_bytes": 123377.0,
+        "query_seconds": 0.32855452015064657,
+        "reconstruction_seconds": 11.588252103421837,
+        "warm_seconds": 0.007165770744904876,
+        "warm_setup_seconds": 3.837514668703079e-05
+      },
+      "reverse": {
+        "checked_python_bytes": 6148055.0,
+        "cold_seconds": 11.186089874710888,
+        "complete_worker_seconds": 24.400522583164275,
+        "database_bytes": 188981248.0,
+        "expanded_nodes": 112.0,
+        "new_native_records": 162,
+        "new_payload_bytes": 1164063.0,
+        "partition_bytes": 135652.0,
+        "persisted_delta_and_partition_bytes": 232098.0,
+        "persistence_seconds": 0.07339941710233688,
+        "proof_delta_compressed_bytes": 96446.0,
+        "query_seconds": 0.31737414631061256,
+        "reconstruction_seconds": 11.587617187295109,
+        "warm_seconds": 0.004152584122493863,
+        "warm_setup_seconds": 0.01852274965494871
+      },
+      "screen": {
+        "checked_python_bytes": 7918645.0,
+        "cold_seconds": 11.210889645386487,
+        "complete_worker_seconds": 24.548314354149625,
+        "database_bytes": 189820928.0,
+        "expanded_nodes": 153.0,
+        "new_native_records": 200,
+        "new_payload_bytes": 1697016.0,
+        "partition_bytes": 58288.0,
+        "persisted_delta_and_partition_bytes": 191051.0,
+        "persistence_seconds": 0.10474300058558583,
+        "proof_delta_compressed_bytes": 132763.0,
+        "query_seconds": 0.42789766541682184,
+        "reconstruction_seconds": 11.574473061831668,
+        "warm_seconds": 0.005696938373148441,
+        "warm_setup_seconds": 0.007686937926337123
+      }
+    },
+    "historical": {
+      "affine": {
+        "checked_python_bytes": 3510443.0,
+        "cold_seconds": 11.059868729440495,
+        "complete_worker_seconds": 23.884147229371592,
+        "database_bytes": 188391424.0,
+        "expanded_nodes": 75.0,
+        "new_native_records": 89,
+        "new_payload_bytes": 825854.0,
+        "partition_bytes": 9.0,
+        "persisted_delta_and_partition_bytes": 63713.0,
+        "persistence_seconds": 0.046466062078252435,
+        "proof_delta_compressed_bytes": 63704.0,
+        "query_seconds": 0.16300895810127258,
+        "reconstruction_seconds": 11.44895589724183,
+        "warm_seconds": 0.003864582860842347,
+        "warm_setup_seconds": 3.393762744963169e-05
+      },
+      "forward": {
+        "checked_python_bytes": 2792104.0,
+        "cold_seconds": 10.985500624869019,
+        "complete_worker_seconds": 23.63507639640011,
+        "database_bytes": 187760640.0,
+        "expanded_nodes": 35.0,
+        "new_native_records": 70,
+        "new_payload_bytes": 400510.0,
+        "partition_bytes": 106705.0,
+        "persisted_delta_and_partition_bytes": 142121.0,
+        "persistence_seconds": 0.02470906311646104,
+        "proof_delta_compressed_bytes": 35416.0,
+        "query_seconds": 0.13879756280221045,
+        "reconstruction_seconds": 11.368005604948848,
+        "warm_seconds": 0.0015468341298401356,
+        "warm_setup_seconds": 0.01367606152780354
+      },
+      "native": {
+        "checked_python_bytes": 3499411.0,
+        "cold_seconds": 11.095360188279301,
+        "complete_worker_seconds": 23.95633808383718,
+        "database_bytes": 188391424.0,
+        "expanded_nodes": 75.0,
+        "new_native_records": 89,
+        "new_payload_bytes": 825854.0,
+        "partition_bytes": 9.0,
+        "persisted_delta_and_partition_bytes": 63713.0,
+        "persistence_seconds": 0.04760343860834837,
+        "proof_delta_compressed_bytes": 63704.0,
+        "query_seconds": 0.15922789578326046,
+        "reconstruction_seconds": 11.510736209340394,
+        "warm_seconds": 0.004016354447230697,
+        "warm_setup_seconds": 3.954186104238033e-05
+      },
+      "reverse": {
+        "checked_python_bytes": 2414553.0,
+        "cold_seconds": 11.090441355016083,
+        "complete_worker_seconds": 23.753052146639675,
+        "database_bytes": 187621376.0,
+        "expanded_nodes": 28.0,
+        "new_native_records": 61,
+        "new_payload_bytes": 309683.0,
+        "partition_bytes": 106693.0,
+        "persisted_delta_and_partition_bytes": 138360.0,
+        "persistence_seconds": 0.02189150103367865,
+        "proof_delta_compressed_bytes": 31667.0,
+        "query_seconds": 0.12246108381077647,
+        "reconstruction_seconds": 11.423300395254046,
+        "warm_seconds": 0.0015213126316666603,
+        "warm_setup_seconds": 0.013732271967455745
+      },
+      "screen": {
+        "checked_python_bytes": 4448387.0,
+        "cold_seconds": 11.144155312795192,
+        "complete_worker_seconds": 24.059751832624897,
+        "database_bytes": 188493824.0,
+        "expanded_nodes": 73.0,
+        "new_native_records": 112,
+        "new_payload_bytes": 873791.0,
+        "partition_bytes": 58049.0,
+        "persisted_delta_and_partition_bytes": 127652.0,
+        "persistence_seconds": 0.05108464485965669,
+        "proof_delta_compressed_bytes": 69603.0,
+        "query_seconds": 0.24364989530295134,
+        "reconstruction_seconds": 11.488567019812763,
+        "warm_seconds": 0.0023378743790090084,
+        "warm_setup_seconds": 0.0075413326267153025
+      }
+    }
+  },
+  "limitations": [
+    "Paired totals sum the three independent case streams. Object/SQLite byte totals are sums of endpoints, not one combined live archive; RSS is not a live retained-space bound.",
+    "Complete worker time includes full prefix restoration, two independent cold checks, diagnostic table scans, Python object measurement, serialization and persistence. Query timing excludes these separately reported costs.",
+    "Prior precomputation and posthoc candidate selection are sunk historical work, not included in query-time speedups. Prefix construction and this audit remain separate. No automated discovery speedup is established.",
+    "Two repeats characterize this constructed pilot only. No confidence interval or representative arbitrary-SAT claim is made."
+  ],
+  "paired_difference_from_affine": {
+    "edits": {
+      "affine": [
+        {
+          "cold_seconds": 0.0,
+          "complete_worker_seconds": 0.0,
+          "query_seconds": 0.0,
+          "warm_seconds": 0.0
+        },
+        {
+          "cold_seconds": 0.0,
+          "complete_worker_seconds": 0.0,
+          "query_seconds": 0.0,
+          "warm_seconds": 0.0
+        }
+      ],
+      "forward": [
+        {
+          "cold_seconds": -0.09581716544926167,
+          "complete_worker_seconds": -0.254889958538115,
+          "query_seconds": -0.0035012499429285526,
+          "warm_seconds": -0.0026788758113980293
+        },
+        {
+          "cold_seconds": -0.03747512400150299,
+          "complete_worker_seconds": -0.1598784583620727,
+          "query_seconds": -0.0035649132914841175,
+          "warm_seconds": -0.002630998846143484
+        }
+      ],
+      "native": [
+        {
+          "cold_seconds": 0.06234879232943058,
+          "complete_worker_seconds": 0.003126375377178192,
+          "query_seconds": -0.009674041997641325,
+          "warm_seconds": 0.0003475826233625412
+        },
+        {
+          "cold_seconds": 0.009989084675908089,
+          "complete_worker_seconds": -0.0035065836273133755,
+          "query_seconds": -0.008063039276748896,
+          "warm_seconds": 0.0003455011174082756
+        }
+      ],
+      "reverse": [
+        {
+          "cold_seconds": -0.08023008378222585,
+          "complete_worker_seconds": -0.23794862534850836,
+          "query_seconds": -0.020889373496174812,
+          "warm_seconds": -0.002666957676410675
+        },
+        {
+          "cold_seconds": -0.012555040419101715,
+          "complete_worker_seconds": -0.06302158441394567,
+          "query_seconds": -0.019208455458283424,
+          "warm_seconds": -0.0026663318276405334
+        }
+      ],
+      "screen": [
+        {
+          "cold_seconds": -0.023943833075463772,
+          "complete_worker_seconds": -0.048070416785776615,
+          "query_seconds": 0.0903648748062551,
+          "warm_seconds": -0.0011324998922646046
+        },
+        {
+          "cold_seconds": -0.01924174977466464,
+          "complete_worker_seconds": 0.04268374899402261,
+          "query_seconds": 0.09058433445170522,
+          "warm_seconds": -0.0011120811104774475
+        }
+      ]
+    },
+    "historical": {
+      "affine": [
+        {
+          "cold_seconds": 0.0,
+          "complete_worker_seconds": 0.0,
+          "query_seconds": 0.0,
+          "warm_seconds": 0.0
+        },
+        {
+          "cold_seconds": 0.0,
+          "complete_worker_seconds": 0.0,
+          "query_seconds": 0.0,
+          "warm_seconds": 0.0
+        }
+      ],
+      "forward": [
+        {
+          "cold_seconds": -0.06026600021868944,
+          "complete_worker_seconds": -0.2567913318052888,
+          "query_seconds": -0.022744332905858755,
+          "warm_seconds": -0.002264539711177349
+        },
+        {
+          "cold_seconds": -0.08847020892426372,
+          "complete_worker_seconds": -0.24135033413767815,
+          "query_seconds": -0.02567845769226551,
+          "warm_seconds": -0.002370957750827074
+        }
+      ],
+      "native": [
+        {
+          "cold_seconds": 0.00905670877546072,
+          "complete_worker_seconds": 0.010809291154146194,
+          "query_seconds": -0.003411415033042431,
+          "warm_seconds": 0.00015295902267098427
+        },
+        {
+          "cold_seconds": 0.06192620890215039,
+          "complete_worker_seconds": 0.13357241777703166,
+          "query_seconds": -0.004150709602981806,
+          "warm_seconds": 0.0001505841501057148
+        }
+      ],
+      "reverse": [
+        {
+          "cold_seconds": 0.04813816770911217,
+          "complete_worker_seconds": -0.07013078965246677,
+          "query_seconds": -0.03983258083462715,
+          "warm_seconds": -0.0023120827972888947
+        },
+        {
+          "cold_seconds": 0.01300708344206214,
+          "complete_worker_seconds": -0.19205937581136823,
+          "query_seconds": -0.04126316774636507,
+          "warm_seconds": -0.002374457661062479
+        }
+      ],
+      "screen": [
+        {
+          "cold_seconds": 0.10503883333876729,
+          "complete_worker_seconds": 0.33643204206600785,
+          "query_seconds": 0.0806403337046504,
+          "warm_seconds": -0.0015039159916341305
+        },
+        {
+          "cold_seconds": 0.06353433337062597,
+          "complete_worker_seconds": 0.014777164440602064,
+          "query_seconds": 0.0806415406987071,
+          "warm_seconds": -0.001549500972032547
+        }
+      ]
+    }
+  },
+  "per_case": {
+    "edits": {
+      "25": {
+        "affine": {
+          "attempts": [
+            {
+              "expanded_nodes": 2,
+              "missing": 0,
+              "route": "affine",
+              "status": "unsat",
+              "variant": "add"
+            },
+            {
+              "expanded_nodes": 2,
+              "missing": 0,
+              "route": "affine",
+              "status": "unsat",
+              "variant": "delete"
+            }
+          ],
+          "branch_expansions": [
+            [],
+            []
+          ],
+          "branch_structural_counters": [
+            [],
+            []
+          ],
+          "checked_python_bytes": 283574,
+          "complete_worker_seconds": 4.97233762498945,
+          "expanded_nodes": 4,
+          "native_proof_kinds": {
+            "implications": 2,
+            "split": 2,
+            "units": 4
+          },
+          "new_payload_bytes": 55929,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 8
+          },
+          "query_seconds": 0.015662082703784108,
+          "routes": [
+            "affine",
+            "affine"
+          ],
+          "screens": [
+            [],
+            []
+          ],
+          "statuses": [
+            "unsat",
+            "unsat"
+          ]
+        },
+        "forward": {
+          "attempts": [
+            {
+              "expanded_nodes": 6,
+              "missing": 5,
+              "route": "partition",
+              "status": "unsat",
+              "variant": "add"
+            },
+            {
+              "expanded_nodes": 2,
+              "missing": 6,
+              "route": "fallback",
+              "status": "unsat",
+              "variant": "delete"
+            }
+          ],
+          "branch_expansions": [
+            [
+              1,
+              2,
+              1,
+              1,
+              1
+            ],
+            [
+              2
+            ]
+          ],
+          "branch_structural_counters": [
+            [
+              {},
+              {},
+              {},
+              {},
+              {}
+            ],
+            [
+              {}
+            ]
+          ],
+          "checked_python_bytes": 639923,
+          "complete_worker_seconds": 4.957005020463839,
+          "expanded_nodes": 8,
+          "native_proof_kinds": {
+            "component": 3,
+            "implications": 2,
+            "split": 3,
+            "units": 10
+          },
+          "new_payload_bytes": 79521,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 18
+          },
+          "query_seconds": 0.036436729365959764,
+          "routes": [
+            "partition",
+            "fallback"
+          ],
+          "screens": [
+            [],
+            []
+          ],
+          "statuses": [
+            "unsat",
+            "unsat"
+          ]
+        },
+        "native": {
+          "attempts": [
+            {
+              "expanded_nodes": 2,
+              "missing": 0,
+              "route": "native",
+              "status": "unsat",
+              "variant": "add"
+            },
+            {
+              "expanded_nodes": 2,
+              "missing": 0,
+              "route": "native",
+              "status": "unsat",
+              "variant": "delete"
+            }
+          ],
+          "branch_expansions": [
+            [],
+            []
+          ],
+          "branch_structural_counters": [
+            [],
+            []
+          ],
+          "checked_python_bytes": 278156,
+          "complete_worker_seconds": 4.956389020895585,
+          "expanded_nodes": 4,
+          "native_proof_kinds": {
+            "implications": 2,
+            "split": 2,
+            "units": 4
+          },
+          "new_payload_bytes": 55929,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 8
+          },
+          "query_seconds": 0.013082104735076427,
+          "routes": [
+            "native",
+            "native"
+          ],
+          "screens": [
+            [],
+            []
+          ],
+          "statuses": [
+            "unsat",
+            "unsat"
+          ]
+        },
+        "reverse": {
+          "attempts": [
+            {
+              "expanded_nodes": 6,
+              "missing": 5,
+              "route": "partition",
+              "status": "unsat",
+              "variant": "add"
+            },
+            {
+              "expanded_nodes": 2,
+              "missing": 6,
+              "route": "fallback",
+              "status": "unsat",
+              "variant": "delete"
+            }
+          ],
+          "branch_expansions": [
+            [
+              1,
+              1,
+              1,
+              2,
+              1
+            ],
+            [
+              2
+            ]
+          ],
+          "branch_structural_counters": [
+            [
+              {},
+              {},
+              {},
+              {},
+              {}
+            ],
+            [
+              {}
+            ]
+          ],
+          "checked_python_bytes": 639749,
+          "complete_worker_seconds": 4.944192167138681,
+          "expanded_nodes": 8,
+          "native_proof_kinds": {
+            "component": 3,
+            "implications": 2,
+            "split": 3,
+            "units": 10
+          },
+          "new_payload_bytes": 79505,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 18
+          },
+          "query_seconds": 0.03768920851871371,
+          "routes": [
+            "partition",
+            "fallback"
+          ],
+          "screens": [
+            [],
+            []
+          ],
+          "statuses": [
+            "unsat",
+            "unsat"
+          ]
+        },
+        "screen": {
+          "attempts": [
+            {
+              "expanded_nodes": 1,
+              "missing": 5,
+              "route": "partition",
+              "status": "unsat",
+              "variant": "add"
+            },
+            {
+              "expanded_nodes": 2,
+              "missing": 6,
+              "route": "fallback",
+              "status": "unsat",
+              "variant": "delete"
+            }
+          ],
+          "branch_expansions": [
+            [
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              2
+            ]
+          ],
+          "branch_structural_counters": [
+            [
+              {},
+              {},
+              {},
+              {},
+              {}
+            ],
+            [
+              {}
+            ]
+          ],
+          "checked_python_bytes": 641963,
+          "complete_worker_seconds": 4.964185792254284,
+          "expanded_nodes": 3,
+          "native_proof_kinds": {
+            "component": 3,
+            "implications": 2,
+            "split": 3,
+            "units": 10
+          },
+          "new_payload_bytes": 79521,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 18
+          },
+          "query_seconds": 0.04595726984553039,
+          "routes": [
+            "partition",
+            "fallback"
+          ],
+          "screens": [
+            [
+              {
+                "admitted": true,
+                "order": "forward",
+                "terminal": 4
+              },
+              {
+                "admitted": true,
+                "order": "reverse",
+                "terminal": 4
+              }
+            ],
+            []
+          ],
+          "statuses": [
+            "unsat",
+            "unsat"
+          ]
+        }
+      },
+      "31": {
+        "affine": {
+          "attempts": [
+            {
+              "expanded_nodes": 69,
+              "missing": 0,
+              "route": "affine",
+              "status": "unsat",
+              "variant": "add"
+            },
+            {
+              "expanded_nodes": 74,
+              "missing": 0,
+              "route": "affine",
+              "status": "unsat",
+              "variant": "delete"
+            }
+          ],
+          "branch_expansions": [
+            [],
+            []
+          ],
+          "branch_structural_counters": [
+            [],
+            []
+          ],
+          "checked_python_bytes": 6440875,
+          "complete_worker_seconds": 6.693075187969953,
+          "expanded_nodes": 143,
+          "native_proof_kinds": {
+            "implications": 15,
+            "split": 64,
+            "units": 82
+          },
+          "new_payload_bytes": 1542124,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 161
+          },
+          "query_seconds": 0.30542485299520195,
+          "routes": [
+            "affine",
+            "affine"
+          ],
+          "screens": [
+            [],
+            []
+          ],
+          "statuses": [
+            "unsat",
+            "unsat"
+          ]
+        },
+        "forward": {
+          "attempts": [
+            {
+              "expanded_nodes": 23,
+              "missing": 5,
+              "route": "partition",
+              "status": "unsat",
+              "variant": "add"
+            },
+            {
+              "expanded_nodes": 75,
+              "missing": 6,
+              "route": "fallback",
+              "status": "unsat",
+              "variant": "delete"
+            }
+          ],
+          "branch_expansions": [
+            [
+              10,
+              1,
+              10,
+              1,
+              1
+            ],
+            [
+              75
+            ]
+          ],
+          "branch_structural_counters": [
+            [
+              {
+                "binary_backbone_checked_edges": 24,
+                "binary_backbone_compiled_children": 2,
+                "binary_backbone_negative_splits": 2,
+                "binary_backbone_selections": 2,
+                "binary_backbone_transport_literals": 24,
+                "binary_backbone_transported_units": 10
+              },
+              {},
+              {
+                "binary_backbone_checked_edges": 44,
+                "binary_backbone_compiled_children": 2,
+                "binary_backbone_negative_splits": 2,
+                "binary_backbone_selections": 2,
+                "binary_backbone_transport_literals": 36,
+                "binary_backbone_transported_units": 16
+              },
+              {},
+              {}
+            ],
+            [
+              {
+                "binary_backbone_checked_edges": 78,
+                "binary_backbone_compiled_children": 6,
+                "binary_backbone_negative_splits": 6,
+                "binary_backbone_selections": 6,
+                "binary_backbone_transport_literals": 78,
+                "binary_backbone_transported_units": 33
+              }
+            ]
+          ],
+          "checked_python_bytes": 4978276,
+          "complete_worker_seconds": 6.429481979459524,
+          "expanded_nodes": 98,
+          "native_proof_kinds": {
+            "component": 4,
+            "implications": 10,
+            "split": 43,
+            "units": 63
+          },
+          "new_payload_bytes": 1072854,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 120
+          },
+          "query_seconds": 0.24004589579999447,
+          "routes": [
+            "partition",
+            "fallback"
+          ],
+          "screens": [
+            [],
+            []
+          ],
+          "statuses": [
+            "unsat",
+            "unsat"
+          ]
+        },
+        "native": {
+          "attempts": [
+            {
+              "expanded_nodes": 69,
+              "missing": 0,
+              "route": "native",
+              "status": "unsat",
+              "variant": "add"
+            },
+            {
+              "expanded_nodes": 74,
+              "missing": 0,
+              "route": "native",
+              "status": "unsat",
+              "variant": "delete"
+            }
+          ],
+          "branch_expansions": [
+            [],
+            []
+          ],
+          "branch_structural_counters": [
+            [],
+            []
+          ],
+          "checked_python_bytes": 6431161,
+          "complete_worker_seconds": 6.644446125021204,
+          "expanded_nodes": 143,
+          "native_proof_kinds": {
+            "implications": 15,
+            "split": 64,
+            "units": 82
+          },
+          "new_payload_bytes": 1542124,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 161
+          },
+          "query_seconds": 0.3022960831876844,
+          "routes": [
+            "native",
+            "native"
+          ],
+          "screens": [
+            [],
+            []
+          ],
+          "statuses": [
+            "unsat",
+            "unsat"
+          ]
+        },
+        "reverse": {
+          "attempts": [
+            {
+              "expanded_nodes": 17,
+              "missing": 5,
+              "route": "partition",
+              "status": "unsat",
+              "variant": "add"
+            },
+            {
+              "expanded_nodes": 75,
+              "missing": 6,
+              "route": "fallback",
+              "status": "unsat",
+              "variant": "delete"
+            }
+          ],
+          "branch_expansions": [
+            [
+              1,
+              1,
+              10,
+              1,
+              4
+            ],
+            [
+              75
+            ]
+          ],
+          "branch_structural_counters": [
+            [
+              {},
+              {},
+              {
+                "binary_backbone_checked_edges": 16,
+                "binary_backbone_compiled_children": 1,
+                "binary_backbone_negative_splits": 1,
+                "binary_backbone_selections": 1,
+                "binary_backbone_transport_literals": 16,
+                "binary_backbone_transported_units": 7
+              },
+              {},
+              {
+                "binary_backbone_checked_edges": 48,
+                "binary_backbone_compiled_children": 2,
+                "binary_backbone_negative_splits": 2,
+                "binary_backbone_selections": 2,
+                "binary_backbone_transport_literals": 38,
+                "binary_backbone_transported_units": 17
+              }
+            ],
+            [
+              {
+                "binary_backbone_checked_edges": 78,
+                "binary_backbone_compiled_children": 6,
+                "binary_backbone_negative_splits": 6,
+                "binary_backbone_selections": 6,
+                "binary_backbone_transport_literals": 78,
+                "binary_backbone_transported_units": 33
+              }
+            ]
+          ],
+          "checked_python_bytes": 4602592,
+          "complete_worker_seconds": 6.393760478822514,
+          "expanded_nodes": 92,
+          "native_proof_kinds": {
+            "component": 4,
+            "implications": 9,
+            "split": 40,
+            "units": 58
+          },
+          "new_payload_bytes": 981789,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 111
+          },
+          "query_seconds": 0.22353450022637844,
+          "routes": [
+            "partition",
+            "fallback"
+          ],
+          "screens": [
+            [],
+            []
+          ],
+          "statuses": [
+            "unsat",
+            "unsat"
+          ]
+        },
+        "screen": {
+          "attempts": [
+            {
+              "expanded_nodes": 69,
+              "missing": 5,
+              "route": "fallback",
+              "status": "unsat",
+              "variant": "add"
+            },
+            {
+              "expanded_nodes": 74,
+              "missing": 6,
+              "route": "fallback",
+              "status": "unsat",
+              "variant": "delete"
+            }
+          ],
+          "branch_expansions": [
+            [
+              69
+            ],
+            [
+              74
+            ]
+          ],
+          "branch_structural_counters": [
+            [
+              {
+                "binary_backbone_checked_edges": 198,
+                "binary_backbone_compiled_children": 12,
+                "binary_backbone_negative_splits": 12,
+                "binary_backbone_selections": 12,
+                "binary_backbone_transport_literals": 150,
+                "binary_backbone_transported_units": 63
+              }
+            ],
+            [
+              {
+                "binary_backbone_checked_edges": 78,
+                "binary_backbone_compiled_children": 6,
+                "binary_backbone_negative_splits": 6,
+                "binary_backbone_selections": 6,
+                "binary_backbone_transport_literals": 78,
+                "binary_backbone_transported_units": 33
+              }
+            ]
+          ],
+          "checked_python_bytes": 6602147,
+          "complete_worker_seconds": 6.705944000044838,
+          "expanded_nodes": 143,
+          "native_proof_kinds": {
+            "implications": 15,
+            "split": 64,
+            "units": 82
+          },
+          "new_payload_bytes": 1542124,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 161
+          },
+          "query_seconds": 0.32891500019468367,
+          "routes": [
+            "fallback",
+            "fallback"
+          ],
+          "screens": [
+            [
+              {
+                "admitted": false,
+                "order": "forward",
+                "terminal": 3
+              },
+              {
+                "admitted": false,
+                "order": "reverse",
+                "terminal": 3
+              }
+            ],
+            []
+          ],
+          "statuses": [
+            "unsat",
+            "unsat"
+          ]
+        }
+      },
+      "61": {
+        "affine": {
+          "attempts": [
+            {
+              "expanded_nodes": 4,
+              "missing": 0,
+              "route": "affine",
+              "status": "unsat",
+              "variant": "add"
+            },
+            {
+              "expanded_nodes": 4,
+              "missing": 0,
+              "route": "affine",
+              "status": "unsat",
+              "variant": "delete"
+            }
+          ],
+          "branch_expansions": [
+            [],
+            []
+          ],
+          "branch_structural_counters": [
+            [],
+            []
+          ],
+          "checked_python_bytes": 267549,
+          "complete_worker_seconds": 12.885594875086099,
+          "expanded_nodes": 8,
+          "native_proof_kinds": {
+            "implications": 2,
+            "split": 2,
+            "units": 4
+          },
+          "new_payload_bytes": 50873,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 8
+          },
+          "query_seconds": 0.016336125088855624,
+          "routes": [
+            "affine",
+            "affine"
+          ],
+          "screens": [
+            [],
+            []
+          ],
+          "statuses": [
+            "unsat",
+            "unsat"
+          ]
+        },
+        "forward": {
+          "attempts": [
+            {
+              "expanded_nodes": 6,
+              "missing": 3,
+              "route": "partition",
+              "status": "unsat",
+              "variant": "add"
+            },
+            {
+              "expanded_nodes": 9,
+              "missing": 4,
+              "route": "partition",
+              "status": "unsat",
+              "variant": "delete"
+            }
+          ],
+          "branch_expansions": [
+            [
+              4,
+              1,
+              1
+            ],
+            [
+              4,
+              1,
+              4,
+              0
+            ]
+          ],
+          "branch_structural_counters": [
+            [
+              {},
+              {},
+              {}
+            ],
+            [
+              {},
+              {},
+              {},
+              {}
+            ]
+          ],
+          "checked_python_bytes": 934989,
+          "complete_worker_seconds": 12.957136479672045,
+          "expanded_nodes": 15,
+          "native_proof_kinds": {
+            "component": 7,
+            "implications": 1,
+            "split": 5,
+            "units": 15
+          },
+          "new_payload_bytes": 114785,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 28
+          },
+          "query_seconds": 0.05740735400468111,
+          "routes": [
+            "partition",
+            "partition"
+          ],
+          "screens": [
+            [],
+            []
+          ],
+          "statuses": [
+            "unsat",
+            "unsat"
+          ]
+        },
+        "native": {
+          "attempts": [
+            {
+              "expanded_nodes": 4,
+              "missing": 0,
+              "route": "native",
+              "status": "unsat",
+              "variant": "add"
+            },
+            {
+              "expanded_nodes": 4,
+              "missing": 0,
+              "route": "native",
+              "status": "unsat",
+              "variant": "delete"
+            }
+          ],
+          "branch_expansions": [
+            [],
+            []
+          ],
+          "branch_structural_counters": [
+            [],
+            []
+          ],
+          "checked_python_bytes": 260863,
+          "complete_worker_seconds": 12.949982438003644,
+          "expanded_nodes": 8,
+          "native_proof_kinds": {
+            "implications": 2,
+            "split": 2,
+            "units": 4
+          },
+          "new_payload_bytes": 50873,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 8
+          },
+          "query_seconds": 0.013176332227885723,
+          "routes": [
+            "native",
+            "native"
+          ],
+          "screens": [
+            [],
+            []
+          ],
+          "statuses": [
+            "unsat",
+            "unsat"
+          ]
+        },
+        "reverse": {
+          "attempts": [
+            {
+              "expanded_nodes": 5,
+              "missing": 3,
+              "route": "partition",
+              "status": "unsat",
+              "variant": "add"
+            },
+            {
+              "expanded_nodes": 7,
+              "missing": 4,
+              "route": "partition",
+              "status": "unsat",
+              "variant": "delete"
+            }
+          ],
+          "branch_expansions": [
+            [
+              1,
+              1,
+              3
+            ],
+            [
+              1,
+              4,
+              1,
+              1
+            ]
+          ],
+          "branch_structural_counters": [
+            [
+              {},
+              {},
+              {
+                "binary_backbone_checked_edges": 28,
+                "binary_backbone_compiled_children": 1,
+                "binary_backbone_negative_splits": 1,
+                "binary_backbone_selections": 1,
+                "binary_backbone_transport_literals": 20,
+                "binary_backbone_transported_units": 9
+              }
+            ],
+            [
+              {},
+              {},
+              {},
+              {}
+            ]
+          ],
+          "checked_python_bytes": 905714,
+          "complete_worker_seconds": 13.06256993720308,
+          "expanded_nodes": 12,
+          "native_proof_kinds": {
+            "component": 11,
+            "implications": 1,
+            "split": 5,
+            "units": 16
+          },
+          "new_payload_bytes": 102769,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 33
+          },
+          "query_seconds": 0.056150437565520406,
+          "routes": [
+            "partition",
+            "partition"
+          ],
+          "screens": [
+            [],
+            []
+          ],
+          "statuses": [
+            "unsat",
+            "unsat"
+          ]
+        },
+        "screen": {
+          "attempts": [
+            {
+              "expanded_nodes": 3,
+              "missing": 3,
+              "route": "partition",
+              "status": "unsat",
+              "variant": "add"
+            },
+            {
+              "expanded_nodes": 4,
+              "missing": 4,
+              "route": "fallback",
+              "status": "unsat",
+              "variant": "delete"
+            }
+          ],
+          "branch_expansions": [
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              4
+            ]
+          ],
+          "branch_structural_counters": [
+            [
+              {},
+              {},
+              {}
+            ],
+            [
+              {}
+            ]
+          ],
+          "checked_python_bytes": 674535,
+          "complete_worker_seconds": 12.878184561850503,
+          "expanded_nodes": 7,
+          "native_proof_kinds": {
+            "component": 5,
+            "implications": 2,
+            "split": 4,
+            "units": 10
+          },
+          "new_payload_bytes": 75371,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 21
+          },
+          "query_seconds": 0.053025395376607776,
+          "routes": [
+            "partition",
+            "fallback"
+          ],
+          "screens": [
+            [
+              {
+                "admitted": true,
+                "order": "forward",
+                "terminal": 2
+              },
+              {
+                "admitted": true,
+                "order": "reverse",
+                "terminal": 2
+              }
+            ],
+            [
+              {
+                "admitted": false,
+                "order": "forward",
+                "terminal": 2
+              },
+              {
+                "admitted": false,
+                "order": "reverse",
+                "terminal": 2
+              }
+            ]
+          ],
+          "statuses": [
+            "unsat",
+            "unsat"
+          ]
+        }
+      }
+    },
+    "historical": {
+      "25": {
+        "affine": {
+          "attempts": [
+            {
+              "expanded_nodes": 2,
+              "missing": 0,
+              "route": "affine",
+              "status": "unsat",
+              "variant": "original"
+            }
+          ],
+          "branch_expansions": [
+            []
+          ],
+          "branch_structural_counters": [
+            []
+          ],
+          "checked_python_bytes": 143940,
+          "complete_worker_seconds": 4.799714521039277,
+          "expanded_nodes": 2,
+          "native_proof_kinds": {
+            "implications": 1,
+            "split": 1,
+            "units": 2
+          },
+          "new_payload_bytes": 28003,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 4
+          },
+          "query_seconds": 0.007608083076775074,
+          "routes": [
+            "affine"
+          ],
+          "screens": [
+            []
+          ],
+          "statuses": [
+            "unsat"
+          ]
+        },
+        "forward": {
+          "attempts": [
+            {
+              "expanded_nodes": 6,
+              "missing": 5,
+              "route": "partition",
+              "status": "unsat",
+              "variant": "original"
+            }
+          ],
+          "branch_expansions": [
+            [
+              1,
+              2,
+              1,
+              1,
+              1
+            ]
+          ],
+          "branch_structural_counters": [
+            [
+              {},
+              {},
+              {},
+              {},
+              {}
+            ]
+          ],
+          "checked_python_bytes": 501975,
+          "complete_worker_seconds": 4.7595555416774005,
+          "expanded_nodes": 6,
+          "native_proof_kinds": {
+            "component": 3,
+            "implications": 1,
+            "split": 2,
+            "units": 8
+          },
+          "new_payload_bytes": 51491,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 14
+          },
+          "query_seconds": 0.027913000201806426,
+          "routes": [
+            "partition"
+          ],
+          "screens": [
+            []
+          ],
+          "statuses": [
+            "unsat"
+          ]
+        },
+        "native": {
+          "attempts": [
+            {
+              "expanded_nodes": 2,
+              "missing": 0,
+              "route": "native",
+              "status": "unsat",
+              "variant": "original"
+            }
+          ],
+          "branch_expansions": [
+            []
+          ],
+          "branch_structural_counters": [
+            []
+          ],
+          "checked_python_bytes": 141232,
+          "complete_worker_seconds": 4.809380666585639,
+          "expanded_nodes": 2,
+          "native_proof_kinds": {
+            "implications": 1,
+            "split": 1,
+            "units": 2
+          },
+          "new_payload_bytes": 28003,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 4
+          },
+          "query_seconds": 0.006293020443990827,
+          "routes": [
+            "native"
+          ],
+          "screens": [
+            []
+          ],
+          "statuses": [
+            "unsat"
+          ]
+        },
+        "reverse": {
+          "attempts": [
+            {
+              "expanded_nodes": 6,
+              "missing": 5,
+              "route": "partition",
+              "status": "unsat",
+              "variant": "original"
+            }
+          ],
+          "branch_expansions": [
+            [
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          ],
+          "branch_structural_counters": [
+            [
+              {},
+              {},
+              {},
+              {},
+              {}
+            ]
+          ],
+          "checked_python_bytes": 501689,
+          "complete_worker_seconds": 4.786041896091774,
+          "expanded_nodes": 6,
+          "native_proof_kinds": {
+            "component": 3,
+            "implications": 1,
+            "split": 2,
+            "units": 8
+          },
+          "new_payload_bytes": 51475,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 14
+          },
+          "query_seconds": 0.02730027073994279,
+          "routes": [
+            "partition"
+          ],
+          "screens": [
+            []
+          ],
+          "statuses": [
+            "unsat"
+          ]
+        },
+        "screen": {
+          "attempts": [
+            {
+              "expanded_nodes": 1,
+              "missing": 5,
+              "route": "partition",
+              "status": "unsat",
+              "variant": "original"
+            }
+          ],
+          "branch_expansions": [
+            [
+              0,
+              1,
+              0,
+              0,
+              0
+            ]
+          ],
+          "branch_structural_counters": [
+            [
+              {},
+              {},
+              {},
+              {},
+              {}
+            ]
+          ],
+          "checked_python_bytes": 504015,
+          "complete_worker_seconds": 4.877307750051841,
+          "expanded_nodes": 1,
+          "native_proof_kinds": {
+            "component": 3,
+            "implications": 1,
+            "split": 2,
+            "units": 8
+          },
+          "new_payload_bytes": 51491,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 14
+          },
+          "query_seconds": 0.03687916649505496,
+          "routes": [
+            "partition"
+          ],
+          "screens": [
+            [
+              {
+                "admitted": true,
+                "order": "forward",
+                "terminal": 4
+              },
+              {
+                "admitted": true,
+                "order": "reverse",
+                "terminal": 4
+              }
+            ]
+          ],
+          "statuses": [
+            "unsat"
+          ]
+        }
+      },
+      "31": {
+        "affine": {
+          "attempts": [
+            {
+              "expanded_nodes": 69,
+              "missing": 0,
+              "route": "affine",
+              "status": "unsat",
+              "variant": "original"
+            }
+          ],
+          "branch_expansions": [
+            []
+          ],
+          "branch_structural_counters": [
+            []
+          ],
+          "checked_python_bytes": 3230448,
+          "complete_worker_seconds": 6.196017750306055,
+          "expanded_nodes": 69,
+          "native_proof_kinds": {
+            "implications": 8,
+            "split": 32,
+            "units": 41
+          },
+          "new_payload_bytes": 772431,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 81
+          },
+          "query_seconds": 0.147473624907434,
+          "routes": [
+            "affine"
+          ],
+          "screens": [
+            []
+          ],
+          "statuses": [
+            "unsat"
+          ]
+        },
+        "forward": {
+          "attempts": [
+            {
+              "expanded_nodes": 23,
+              "missing": 5,
+              "route": "partition",
+              "status": "unsat",
+              "variant": "original"
+            }
+          ],
+          "branch_expansions": [
+            [
+              10,
+              1,
+              10,
+              1,
+              1
+            ]
+          ],
+          "branch_structural_counters": [
+            [
+              {
+                "binary_backbone_checked_edges": 24,
+                "binary_backbone_compiled_children": 2,
+                "binary_backbone_negative_splits": 2,
+                "binary_backbone_selections": 2,
+                "binary_backbone_transport_literals": 24,
+                "binary_backbone_transported_units": 10
+              },
+              {},
+              {
+                "binary_backbone_checked_edges": 44,
+                "binary_backbone_compiled_children": 2,
+                "binary_backbone_negative_splits": 2,
+                "binary_backbone_selections": 2,
+                "binary_backbone_transport_literals": 36,
+                "binary_backbone_transported_units": 16
+              },
+              {},
+              {}
+            ]
+          ],
+          "checked_python_bytes": 1746013,
+          "complete_worker_seconds": 6.018628166755661,
+          "expanded_nodes": 23,
+          "native_proof_kinds": {
+            "component": 4,
+            "implications": 2,
+            "split": 11,
+            "units": 22
+          },
+          "new_payload_bytes": 299150,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 39
+          },
+          "query_seconds": 0.08119312534108758,
+          "routes": [
+            "partition"
+          ],
+          "screens": [
+            []
+          ],
+          "statuses": [
+            "unsat"
+          ]
+        },
+        "native": {
+          "attempts": [
+            {
+              "expanded_nodes": 69,
+              "missing": 0,
+              "route": "native",
+              "status": "unsat",
+              "variant": "original"
+            }
+          ],
+          "branch_expansions": [
+            []
+          ],
+          "branch_structural_counters": [
+            []
+          ],
+          "checked_python_bytes": 3225530,
+          "complete_worker_seconds": 6.264680063119158,
+          "expanded_nodes": 69,
+          "native_proof_kinds": {
+            "implications": 8,
+            "split": 32,
+            "units": 41
+          },
+          "new_payload_bytes": 772431,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 81
+          },
+          "query_seconds": 0.14637935464270413,
+          "routes": [
+            "native"
+          ],
+          "screens": [
+            []
+          ],
+          "statuses": [
+            "unsat"
+          ]
+        },
+        "reverse": {
+          "attempts": [
+            {
+              "expanded_nodes": 17,
+              "missing": 5,
+              "route": "partition",
+              "status": "unsat",
+              "variant": "original"
+            }
+          ],
+          "branch_expansions": [
+            [
+              1,
+              1,
+              10,
+              1,
+              4
+            ]
+          ],
+          "branch_structural_counters": [
+            [
+              {},
+              {},
+              {
+                "binary_backbone_checked_edges": 16,
+                "binary_backbone_compiled_children": 1,
+                "binary_backbone_negative_splits": 1,
+                "binary_backbone_selections": 1,
+                "binary_backbone_transport_literals": 16,
+                "binary_backbone_transported_units": 7
+              },
+              {},
+              {
+                "binary_backbone_checked_edges": 48,
+                "binary_backbone_compiled_children": 2,
+                "binary_backbone_negative_splits": 2,
+                "binary_backbone_selections": 2,
+                "binary_backbone_transport_literals": 38,
+                "binary_backbone_transported_units": 17
+              }
+            ]
+          ],
+          "checked_python_bytes": 1369892,
+          "complete_worker_seconds": 6.015240792185068,
+          "expanded_nodes": 17,
+          "native_proof_kinds": {
+            "component": 4,
+            "implications": 1,
+            "split": 8,
+            "units": 17
+          },
+          "new_payload_bytes": 208373,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 30
+          },
+          "query_seconds": 0.0652242295909673,
+          "routes": [
+            "partition"
+          ],
+          "screens": [
+            []
+          ],
+          "statuses": [
+            "unsat"
+          ]
+        },
+        "screen": {
+          "attempts": [
+            {
+              "expanded_nodes": 69,
+              "missing": 5,
+              "route": "fallback",
+              "status": "unsat",
+              "variant": "original"
+            }
+          ],
+          "branch_expansions": [
+            [
+              69
+            ]
+          ],
+          "branch_structural_counters": [
+            [
+              {
+                "binary_backbone_checked_edges": 198,
+                "binary_backbone_compiled_children": 12,
+                "binary_backbone_negative_splits": 12,
+                "binary_backbone_selections": 12,
+                "binary_backbone_transport_literals": 150,
+                "binary_backbone_transported_units": 63
+              }
+            ]
+          ],
+          "checked_python_bytes": 3398260,
+          "complete_worker_seconds": 6.3380012284033,
+          "expanded_nodes": 69,
+          "native_proof_kinds": {
+            "implications": 8,
+            "split": 32,
+            "units": 41
+          },
+          "new_payload_bytes": 772431,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 81
+          },
+          "query_seconds": 0.17138718673959374,
+          "routes": [
+            "fallback"
+          ],
+          "screens": [
+            [
+              {
+                "admitted": false,
+                "order": "forward",
+                "terminal": 3
+              },
+              {
+                "admitted": false,
+                "order": "reverse",
+                "terminal": 3
+              }
+            ]
+          ],
+          "statuses": [
+            "unsat"
+          ]
+        }
+      },
+      "61": {
+        "affine": {
+          "attempts": [
+            {
+              "expanded_nodes": 4,
+              "missing": 0,
+              "route": "affine",
+              "status": "unsat",
+              "variant": "original"
+            }
+          ],
+          "branch_expansions": [
+            []
+          ],
+          "branch_structural_counters": [
+            []
+          ],
+          "checked_python_bytes": 136055,
+          "complete_worker_seconds": 12.88841495802626,
+          "expanded_nodes": 4,
+          "native_proof_kinds": {
+            "implications": 1,
+            "split": 1,
+            "units": 2
+          },
+          "new_payload_bytes": 25420,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 4
+          },
+          "query_seconds": 0.007927250117063522,
+          "routes": [
+            "affine"
+          ],
+          "screens": [
+            []
+          ],
+          "statuses": [
+            "unsat"
+          ]
+        },
+        "forward": {
+          "attempts": [
+            {
+              "expanded_nodes": 6,
+              "missing": 3,
+              "route": "partition",
+              "status": "unsat",
+              "variant": "original"
+            }
+          ],
+          "branch_expansions": [
+            [
+              4,
+              1,
+              1
+            ]
+          ],
+          "branch_structural_counters": [
+            [
+              {},
+              {},
+              {}
+            ]
+          ],
+          "checked_python_bytes": 544116,
+          "complete_worker_seconds": 12.856892687967047,
+          "expanded_nodes": 6,
+          "native_proof_kinds": {
+            "component": 5,
+            "implications": 1,
+            "split": 3,
+            "units": 8
+          },
+          "new_payload_bytes": 49869,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 17
+          },
+          "query_seconds": 0.029691437259316444,
+          "routes": [
+            "partition"
+          ],
+          "screens": [
+            []
+          ],
+          "statuses": [
+            "unsat"
+          ]
+        },
+        "native": {
+          "attempts": [
+            {
+              "expanded_nodes": 4,
+              "missing": 0,
+              "route": "native",
+              "status": "unsat",
+              "variant": "original"
+            }
+          ],
+          "branch_expansions": [
+            []
+          ],
+          "branch_structural_counters": [
+            []
+          ],
+          "checked_python_bytes": 132649,
+          "complete_worker_seconds": 12.882277354132384,
+          "expanded_nodes": 4,
+          "native_proof_kinds": {
+            "implications": 1,
+            "split": 1,
+            "units": 2
+          },
+          "new_payload_bytes": 25420,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 4
+          },
+          "query_seconds": 0.006555520696565509,
+          "routes": [
+            "native"
+          ],
+          "screens": [
+            []
+          ],
+          "statuses": [
+            "unsat"
+          ]
+        },
+        "reverse": {
+          "attempts": [
+            {
+              "expanded_nodes": 5,
+              "missing": 3,
+              "route": "partition",
+              "status": "unsat",
+              "variant": "original"
+            }
+          ],
+          "branch_expansions": [
+            [
+              1,
+              1,
+              3
+            ]
+          ],
+          "branch_structural_counters": [
+            [
+              {},
+              {},
+              {
+                "binary_backbone_checked_edges": 28,
+                "binary_backbone_compiled_children": 1,
+                "binary_backbone_negative_splits": 1,
+                "binary_backbone_selections": 1,
+                "binary_backbone_transport_literals": 20,
+                "binary_backbone_transported_units": 9
+              }
+            ]
+          ],
+          "checked_python_bytes": 542972,
+          "complete_worker_seconds": 12.951769458362833,
+          "expanded_nodes": 5,
+          "native_proof_kinds": {
+            "component": 5,
+            "implications": 1,
+            "split": 3,
+            "units": 8
+          },
+          "new_payload_bytes": 49835,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 17
+          },
+          "query_seconds": 0.029936583479866385,
+          "routes": [
+            "partition"
+          ],
+          "screens": [
+            []
+          ],
+          "statuses": [
+            "unsat"
+          ]
+        },
+        "screen": {
+          "attempts": [
+            {
+              "expanded_nodes": 3,
+              "missing": 3,
+              "route": "partition",
+              "status": "unsat",
+              "variant": "original"
+            }
+          ],
+          "branch_expansions": [
+            [
+              3,
+              0,
+              0
+            ]
+          ],
+          "branch_structural_counters": [
+            [
+              {},
+              {},
+              {}
+            ]
+          ],
+          "checked_python_bytes": 546112,
+          "complete_worker_seconds": 12.844442854169756,
+          "expanded_nodes": 3,
+          "native_proof_kinds": {
+            "component": 5,
+            "implications": 1,
+            "split": 3,
+            "units": 8
+          },
+          "new_payload_bytes": 49869,
+          "new_records": {
+            "cnf_affine_negative_v1": 0,
+            "cnf_binary_equivalence_v2": 0,
+            "cnf_binary_equivalence_v3": 0,
+            "cnf_residual_v1": 17
+          },
+          "query_seconds": 0.03538354206830263,
+          "routes": [
+            "partition"
+          ],
+          "screens": [
+            [
+              {
+                "admitted": true,
+                "order": "forward",
+                "terminal": 2
+              },
+              {
+                "admitted": true,
+                "order": "reverse",
+                "terminal": 2
+              }
+            ]
+          ],
+          "statuses": [
+            "unsat"
+          ]
+        }
+      }
+    }
+  },
+  "reductions_from_affine": {
+    "edits": {
+      "affine": {
+        "checked_python_bytes": 0.0,
+        "cold_seconds": 0.0,
+        "complete_worker_seconds": 0.0,
+        "database_bytes": 0.0,
+        "expanded_nodes": 0.0,
+        "new_native_records": 0.0,
+        "new_payload_bytes": 0.0,
+        "partition_bytes": 0.0,
+        "persisted_delta_and_partition_bytes": 0.0,
+        "persistence_seconds": 0.0,
+        "proof_delta_compressed_bytes": 0.0,
+        "query_seconds": 0.0,
+        "reconstruction_seconds": 0.0,
+        "warm_seconds": 0.0,
+        "warm_setup_seconds": 0.0
+      },
+      "forward": {
+        "checked_python_bytes": 0.06275888522851403,
+        "cold_seconds": 0.005933340657356956,
+        "complete_worker_seconds": 0.008447075211135857,
+        "database_bytes": 0.0029792746113990187,
+        "expanded_nodes": 0.21935483870967742,
+        "new_native_records": 0.062146892655367214,
+        "new_payload_bytes": 0.23152403443210912,
+        "partition_bytes": -15073.111111111111,
+        "persisted_delta_and_partition_bytes": -0.912923670432626,
+        "persistence_seconds": 0.22571863639266998,
+        "proof_delta_compressed_bytes": 0.18655016737317331,
+        "query_seconds": 0.010470776979371266,
+        "reconstruction_seconds": 0.011328802754587253,
+        "warm_seconds": 0.3893310193313966,
+        "warm_setup_seconds": -439.4799706276667
+      },
+      "native": {
+        "checked_python_bytes": 0.003120424233530983,
+        "cold_seconds": -0.0032200307194902855,
+        "complete_worker_seconds": 7.743231051127175e-06,
+        "database_bytes": 0.0,
+        "expanded_nodes": 0.0,
+        "new_native_records": 0.0,
+        "new_payload_bytes": 0.0,
+        "partition_bytes": 0.0,
+        "persisted_delta_and_partition_bytes": 0.0,
+        "persistence_seconds": 0.0003241507963694934,
+        "proof_delta_compressed_bytes": 0.0,
+        "query_seconds": 0.026283149161435926,
+        "reconstruction_seconds": 0.004448744352759659,
+        "warm_seconds": -0.05081833690614013,
+        "warm_setup_seconds": 0.08311591502049942
+      },
+      "reverse": {
+        "checked_python_bytes": 0.12070126450265006,
+        "cold_seconds": 0.004130214523961673,
+        "complete_worker_seconds": 0.0061294879132192115,
+        "database_bytes": 0.00392918825561317,
+        "expanded_nodes": 0.2774193548387097,
+        "new_native_records": 0.0847457627118644,
+        "new_payload_bytes": 0.29404776199780946,
+        "partition_bytes": -15071.444444444445,
+        "persisted_delta_and_partition_bytes": -0.8810724069181268,
+        "persistence_seconds": 0.26227695048746236,
+        "proof_delta_compressed_bytes": 0.21828217577020026,
+        "query_seconds": 0.05941773638831127,
+        "reconstruction_seconds": 0.004503290244715852,
+        "warm_seconds": 0.3910478444255936,
+        "warm_setup_seconds": -441.55764042256106
+      },
+      "screen": {
+        "checked_python_bytes": -0.1325296431720948,
+        "cold_seconds": 0.0019223525651195228,
+        "complete_worker_seconds": 0.00010970359873208047,
+        "database_bytes": -0.0004965457685663921,
+        "expanded_nodes": 0.012903225806451646,
+        "new_native_records": -0.12994350282485878,
+        "new_payload_bytes": -0.02916443794324297,
+        "partition_bytes": -6475.444444444444,
+        "persisted_delta_and_partition_bytes": -0.5484009531065113,
+        "persistence_seconds": -0.05275121871004251,
+        "proof_delta_compressed_bytes": -0.07607576776870895,
+        "query_seconds": -0.2681340285922753,
+        "reconstruction_seconds": 0.005632507187247726,
+        "warm_seconds": 0.16457733301261435,
+        "warm_setup_seconds": -182.6613447855764
+      }
+    },
+    "historical": {
+      "affine": {
+        "checked_python_bytes": 0.0,
+        "cold_seconds": 0.0,
+        "complete_worker_seconds": 0.0,
+        "database_bytes": 0.0,
+        "expanded_nodes": 0.0,
+        "new_native_records": 0.0,
+        "new_payload_bytes": 0.0,
+        "partition_bytes": 0.0,
+        "persisted_delta_and_partition_bytes": 0.0,
+        "persistence_seconds": 0.0,
+        "proof_delta_compressed_bytes": 0.0,
+        "query_seconds": 0.0,
+        "reconstruction_seconds": 0.0,
+        "warm_seconds": 0.0,
+        "warm_setup_seconds": 0.0
+      },
+      "forward": {
+        "checked_python_bytes": 0.2046291593397187,
+        "cold_seconds": 0.006724139896300496,
+        "complete_worker_seconds": 0.010428290806430263,
+        "database_bytes": 0.003348262816889158,
+        "expanded_nodes": 0.5333333333333333,
+        "new_native_records": 0.2134831460674157,
+        "new_payload_bytes": 0.515035345230513,
+        "partition_bytes": -11855.111111111111,
+        "persisted_delta_and_partition_bytes": -1.23064366769733,
+        "persistence_seconds": 0.46823419047542547,
+        "proof_delta_compressed_bytes": 0.4440537485872159,
+        "query_seconds": 0.14852800472487115,
+        "reconstruction_seconds": 0.007070539271837317,
+        "warm_seconds": 0.5997409848516022,
+        "warm_setup_seconds": -401.97635855955986
+      },
+      "native": {
+        "checked_python_bytes": 0.0031426233099355327,
+        "cold_seconds": -0.0032090307495540316,
+        "complete_worker_seconds": -0.0030225426837435787,
+        "database_bytes": 0.0,
+        "expanded_nodes": 0.0,
+        "new_native_records": 0.0,
+        "new_payload_bytes": 0.0,
+        "partition_bytes": 0.0,
+        "persisted_delta_and_partition_bytes": 0.0,
+        "persistence_seconds": -0.024477575228572412,
+        "proof_delta_compressed_bytes": 0.0,
+        "query_seconds": 0.02319542657074747,
+        "reconstruction_seconds": -0.00539615250971881,
+        "warm_seconds": -0.039272436858882154,
+        "warm_setup_seconds": -0.16513333470544245
+      },
+      "reverse": {
+        "checked_python_bytes": 0.31217997272708886,
+        "cold_seconds": -0.0027642846695101753,
+        "complete_worker_seconds": 0.005488790597082849,
+        "database_bytes": 0.004087489672566003,
+        "expanded_nodes": 0.6266666666666667,
+        "new_native_records": 0.3146067415730337,
+        "new_payload_bytes": 0.6250148331303111,
+        "partition_bytes": -11853.777777777777,
+        "persisted_delta_and_partition_bytes": -1.171613328520082,
+        "persistence_seconds": 0.5288711792100722,
+        "proof_delta_compressed_bytes": 0.5029040562602034,
+        "query_seconds": 0.24874629445398289,
+        "reconstruction_seconds": 0.0022408595349699967,
+        "warm_seconds": 0.6063449312780251,
+        "warm_setup_seconds": -403.63264522060086
+      },
+      "screen": {
+        "checked_python_bytes": -0.26718679095487374,
+        "cold_seconds": -0.007620938857107129,
+        "complete_worker_seconds": -0.0073523497224701195,
+        "database_bytes": -0.0005435491585858987,
+        "expanded_nodes": 0.026666666666666616,
+        "new_native_records": -0.2584269662921348,
+        "new_payload_bytes": -0.05804536879399991,
+        "partition_bytes": -6448.888888888889,
+        "persisted_delta_and_partition_bytes": -1.0035471567811904,
+        "persistence_seconds": -0.09939690550118518,
+        "proof_delta_compressed_bytes": -0.09260015069697358,
+        "query_seconds": -0.49470248838458897,
+        "reconstruction_seconds": -0.0034598021799066014,
+        "warm_seconds": 0.3950512996635731,
+        "warm_setup_seconds": -221.21154492628344
+      }
+    }
+  }
+}

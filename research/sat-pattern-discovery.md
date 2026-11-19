@@ -5,6 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
+## Latest evidence: conditioning can expose useful binary structure
+
+The [transported-support pilot](transported-support-partition.md) checks a
+first-false cover when two to five clauses of a transported UNSAT support are
+absent. Case 31 benefits despite two nonterminal branches: reverse order reduces
+expansions from 69 to 17; its combined edit stream falls from 143 to 92 through
+the addition. Deletion exceeds the five-clause cap and regresses by one expansion.
+Both historical nonterminal branches use existing binary-backbone reasoning. The old screen
+rejects this case while accepting two already cheap cases that regress.
+
+This is a supplied-candidate residual experiment with exact historical prefixes,
+not automatic classification of whole CNFs. All nine targets already finish in
+the baseline; no new coverage cell or tractability theorem is claimed. Next,
+measure bounded recognition of the structure exposed by conditioning, including
+archive hits and total branch costs. Preserve the explicit fallback, all-branch
+UNSAT obligation, SAT witness lifting, and source/residual distinction. See the
+[ranked priorities](structural-reuse-priorities.md) for storage and replay regressions.
+
 ## What a valid partition must mean
 
 The universe is all valid finite CNF encodings, including satisfiable and

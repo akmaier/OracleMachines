@@ -8725,6 +8725,109 @@ must all be priced, retaining the earlier partition regressions. Stopped attempt
 consume 27.627 of 30.091 seconds in the first mapped holdout run. Neither the
 new map mechanism nor this opportunity supplies efficient arbitrary-SAT closure.
 
+\paragraph{Composing transported supports across missing clauses.}
+We next test that opportunity on the three selected residuals. The adapter
+prepares a causal support under limits of 32 nodes, 8,192 source literals and
+128 KiB of retained plan objects. An increasing injective variable map transports
+the support into the target's coordinates. It considers two to five absent
+clauses, all using variables already in the target, with at least one core clause
+shared with the target. The original native checker validates the core and the
+strengthened premise; the existing first-false checker validates composition.
+The causal-plan caps exclude prerequisite proof checking and native search state.
+
+If the transported core is $K$ and its clauses absent from target $T$ are
+$D_1,\ldots,D_k$, then $T\wedge D_1\wedge\cdots\wedge D_k$ contains $K$ and is
+UNSAT. A satisfying assignment of $T$ must belong to exactly one first-false
+region, satisfying $D_1,\ldots,D_{i-1}$ and falsifying $D_i$. Assigning all
+literals of $D_i$ false produces that region's residual. Every negative branch
+is required for a negative conclusion. A positive branch supplies a checked
+witness lifted back to $T$; a stopped branch gives no conclusion. This applies
+the earlier partition rule, not a new tractability theorem. In particular, a
+verdict for an encountered residual does not discharge its original source's
+other branches or assumptions.
+
+The final preceding archive already knows these residuals. To avoid future
+reuse, each worker instead receives a fresh database containing only proofs
+committed before the corresponding original source query. All three origins are
+available and all three target roots are absent in these prefixes. Work earlier
+within the original query is also excluded. A fixed addition and deletion per
+case supplies six further targets whose roots are absent from the preceding
+cumulative union. These edits are generated before timing; they share the
+supplied candidate. This is a local residual pilot, not automatic discovery,
+a source-query speedup or representative coverage evidence.
+
+Five policies run in separate serial processes in two opposite orders: the
+input-safe affine baseline, a native-only ablation, forward and reverse
+first-false order, and the preceding style of branch screen. Every query shares
+one 256-native-expansion budget across all branches. The screen checks the
+unsplit target first, then admits all-terminal covers or exactly one unresolved
+branch with at least two unit conflicts and fewer residual literals than the
+unsplit target. Screening can publish a checked unit-conflict proof with zero
+recorded expansions; its work and stored bytes are still charged. The trial
+measures support preparation, premise publication, branch construction,
+acquisition, composition, warm setup and lookup, full cold replay, reconstruction,
+serialization and persistence. Previous acquisition and posthoc candidate
+selection remain separate sunk work.
+
+All nine targets finish as UNSAT in every arm, giving 90 attempts across 60
+workers. No new decision coverage is established. The historical results show
+why the route needs a better cost estimate:
+\begin{center}
+\begin{tabular}{lrrrr}
+\hline
+& \multicolumn{2}{c}{Native expansions} & \multicolumn{2}{c}{Mean query seconds} \\
+Case & Baseline & Reverse & Baseline & Reverse \\
+\hline
+25 & 2 & 6 & 0.00761 & 0.02730 \\
+31 & 69 & 17 & 0.14747 & 0.06522 \\
+61 & 4 & 5 & 0.00793 & 0.02994 \\
+\hline
+\end{tabular}
+\end{center}
+Case 31's combined edit stream improves from 143 to 92 expansions and from
+0.30542 to 0.22353 seconds. The addition accounts for this gain, taking 17 rather
+than 69 expansions. Deletion removes a core clause and leaves six missing
+clauses, exceeding the pilot limit; it falls back and takes 75 rather than 74
+expansions in the changed stream state. The gain therefore does not survive both
+edit types individually. Its two nonterminal historical branches use the existing binary
+backbone reasoning and require ten and four recorded expansions; three terminal
+branches take one each in the unscreened arm. Historical split proof records
+fall from 32 to eight. The screen nevertheless rejects this route because two
+branches remain nonterminal, while accepting cases 25 and 61. Its aggregate query
+time rises 49.47\% historically and 26.81\% on the edits. A small number of
+remaining branches is therefore an insufficient cost criterion on this pilot.
+
+Reverse order reduces aggregate query time 24.87\% on the historical targets and
+5.94\% on the edits, in both paired orders. Complete measured worker time falls
+only 0.55\% and 0.61\%; two repeats do not establish a stable advantage at that
+scale. Full-prefix restoration and replay dominate this measurement. Historical
+cold replay becomes slightly slower, and partition-bank setup plus warm lookup
+costs 0.01525 rather than 0.00390 seconds. The edit comparison is 0.02268 versus
+0.00686 seconds. Faster individual retrieval does not erase preparation cost.
+
+Endpoint checked-object totals fall 31.22\% historically and 12.07\% on edits,
+and new native key/payload bytes fall 62.50\% and 29.40\%. These are sums of
+three independent endpoint measurements, not peak bounds or one live archive.
+The persisted delta package moves in the opposite direction: compressed proof
+deltas plus the current uncompressed partition sidecars grow from 63,713 to
+138,360 bytes historically, and from 123,386 to 232,098 bytes on edits. Source and
+child descriptions are duplicated in the sidecars. The SQLite endpoints shrink
+only about 0.4\% because the common prefixes dominate. All alternative trial
+proofs and sidecars remain available; earlier cumulative payloads stay authoritative.
+
+The next investigation should recognize the implication and backbone structure
+exposed by conditioning, account for archive hits and combined branch costs,
+and protect cheap native queries from expensive preparation. Such a probe must
+be bounded and tested on new unlabelled streams with automatic donor selection.
+A read-only follow-up on case 31's six-missing-clause deletion restores only the
+prefix and first addition. Either order gives four unit conflicts and two
+nonterminal branches, with no known native branch or propagated-residual root.
+The remaining mixtures are neither purely binary, Horn nor dual-Horn. This
+identifies a concrete next boundary; its partition solving cost is not measured.
+Compact sidecar storage is supporting work. The affine policy remains the
+baseline: neither posthoc order selection nor this small supplied-candidate
+study establishes efficient expansion for arbitrary SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -6630,3 +6630,51 @@ focused tests pass; the 233-page manuscript builds without warnings and preserve
 warning sites and the prefreeze policy revision are retained. Detailed union
 counts and evidence bindings are in `checks.json`. No arbitrary-SAT resource bound
 or complete efficient classification follows from this experiment.
+
+
+## 2026-11-19: retain residual variable maps; locate multi-clause reuse gaps
+
+[Source-variable transport](residual-variable-transport.md) composes existing
+normalization maps along native visits, stages bounded negative hints, admits
+only committed origins, and restores hint metadata after restart. Exact target
+subset identity and the original native proof checker remain authority. A
+conditional residual never refutes its unconditioned source by itself. Stable
+external IDs supply the proposal; arbitrary renaming discovery remains open.
+
+Three policies run in two opposite orders on twelve serial workers: affine
+baseline, compact-coordinate ablation and mapped matching. The diagnostic finds
+five mapped transfers versus none compact, reducing recorded expansions 17 to 16,
+but mapped runtime stays above baseline. On the fresh 144/150/156 holdout, all
+arms preserve identical native/affine proof digests, 10,249 expansions and
+33 SAT / 38 UNSAT / 37 unresolved attempts. Mean mapped query time **rises 5.26%**
+against baseline and 1.56% against compact, in both orders. Complete time rises
+2.09% against baseline. SQLite grows 0.024%; checked objects grow 0.087%. Retain
+the affine baseline. Separate stage/pool/map limits do not cap total computation.
+
+Mapped matching produces 1,758 candidates versus 31, but no holdout transfer.
+A posthoc census reproduces every result, counter and native/affine digest.
+All candidates miss 7–220 clauses (median 89). Bounded causal support extraction
+on eighteen closest proposals gives six budget stops and twelve supports still
+missing 3–19 clauses, with no new refutation. The old one-missing-clause policy
+therefore cannot help these observed candidates. The exact residuals, origins,
+maps, counterexamples and trial costs remain preserved.
+
+Next: price the existing guarded/first-false composition rules on transported
+supports with small gaps, starting with the selected residual from case 61
+(30 support clauses, three missing), then cases 25/31 (five missing). Reconstruct
+and check the core and bind the target before screening or acquisition. The
+augmented target contains the UNSAT core; only the all-true region of the missing
+clauses is excluded. Other regions need checked branches, and SAT branches must
+lift correctly. Preserve historical partition regressions and follow the pilot
+with fresh inputs. Random/shared mixtures consume 81.26% of holdout query time;
+stops consume 27.627 of 30.091 seconds. No arbitrary-SAT bound follows.
+
+Resume `experiments/results/cnf-residual-transport/checkpoint.json`. Its proof
+union contains 73,835 native / 71 affine-negative records plus all previous
+extensions. All 678 preceding sources and 8,462 artifacts across 125 manifests
+are unchanged; previous authoritative bytes remain intact. The mapped trial's
+hint state has a separate resume archive. Validation checks 720 chronological
+attempts, independent readers, old histories and 512 exhaustive formulas.
+All 1,366 full / 227 focused tests pass. The 234-page manuscript builds without
+warnings and preserves all 64 proof blocks. Final source ledger: 684. Initial
+fixture failure, full-suite SQLite warning sites and all regressions are retained.

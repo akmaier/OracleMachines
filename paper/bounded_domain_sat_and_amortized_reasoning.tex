@@ -8651,6 +8651,80 @@ of first-order holdout query time, and stopped attempts consume 19.463 of
 of necessary residuals or on arbitrary-SAT expansion. The failed policy,
 counterexample and original observations remain preserved.
 
+\paragraph{Retaining source-variable correspondence across residuals.}
+The next optional policy composes the normalizer's variable maps along native
+search visits. It retains a bounded association between a checked negative
+residual and the external variable names from its source. A later residual can
+then propose containment in those coordinates even when compact numbering has
+changed. The selected target subset must normalize to the original native key,
+and the original negative proof and subset rule must verify. The maps are hints,
+not an additional proof authority. This handles order-preserving correspondence
+already present in the inputs; it does not discover arbitrary renamings or sign
+changes between unrelated formulas.
+
+For example, a core acquired using external variables $4,5,6$ can be reused
+after a query introduces $1,2,3$ and changes its compact ranks. A core acquired
+on $1,2,3$ and subsequently renamed to $4,5,6$ still requires discovering that
+new correspondence. Both cases are retained as controls. Refuted conditional
+residuals remain facts about their exact CNFs; no branch assumption is silently
+discharged to refute an unconditioned source.
+
+At most 32 hints are staged per query and 32 retained, with separate 512 KiB
+stage and pool charges. Search uses at most 32 probes per query and four
+anchor-matching candidates per probe. Origins have at most 1,024 literals;
+maps have at most 256 variables, 64-bit positive external IDs, depth 128 and
+a separate 512 KiB live tuple charge. These limits disable optional retrieval
+when exceeded; they do not reject otherwise valid SAT inputs. After native
+publication becomes idle, a separate metadata transaction retains only origins
+that actually committed. Cold restart reconstructs these bounded hints. Native
+and affine proof archives remain append-only, with no global size bound.
+
+Map composition costs work over the mapped variables of every visited node.
+Admission may scan negative residuals before finding they exceed the hint-size
+limit. Probe-count and retained-byte caps do not cover those scans, input
+normalization, transient copies, prerequisite proof checking or native fallback.
+The comparison charges metadata transactions, all misses, checking, publication,
+retained-object measurement, warm/cold replay, reconstruction and compression.
+An ablation uses the same admission rules but compact matching coordinates;
+different representation charges can change evictions, so its retained candidate
+sets need not be identical to those of the mapped policy.
+
+Twelve serial workers compare the affine baseline, compact ablation and mapped
+policy in two opposite orders. A small numbering-shift diagnostic yields five
+mapped transfers versus none in the ablation and reduces recorded expansions
+from 17 to 16. Its three SAT and nine UNSAT outcomes are unchanged. Mean mapped
+query time is 0.01291 seconds, above the baseline's 0.01034; this demonstrates
+a mechanism, not a net speedup. Affine discovery is disabled beyond one variable
+equally in these diagnostic arms to expose native transport.
+
+A fresh larger holdout at sizes 144/150/156 retains the ordinary affine limits
+and has 108 attempts from the six existing designs. All three arms produce the
+same native/affine proof digests, 10,249 recorded expansions and 33 SAT, 38 UNSAT
+and 37 unresolved attempts. Mapped mean query time is 29.99474 seconds versus
+28.49598 baseline and 29.53542 compact: regressions of 5.26\% and 1.56\%, in
+both orders. Complete time remains 2.09\% above baseline. Hint metadata raises
+SQLite storage 0.024\% and checked-object space 0.087\%; native proof storage
+is unchanged. The affine policy therefore remains the performance baseline.
+
+Maps increase holdout candidates from 31 to 1,758, but none passes full
+containment. A posthoc replay reproduces all results, counters and proof digests.
+Candidate formulas lack between seven and 220 clauses in the target, with median
+89. Trying one closest candidate per query under bounded causal extraction
+gives eighteen plans: six budget stops and twelve supports still missing between
+three and nineteen clauses. No new refutation results. These observations do not
+exclude other supports or mappings, but rule out the earlier one-missing-clause
+policy on the observed candidates.
+
+The next concrete experiment is guarded or first-false composition around the
+smallest remaining support gaps, using the previously implemented checked rules.
+The selected residual from case 61 has a 30-clause support missing three clauses;
+cases 25 and 31 each miss five. The target conjoined with the missing clauses
+contains the UNSAT core, excluding their all-true region. The remaining regions
+still require checks. Branch recognition, acquisition and recomposition costs
+must all be priced, retaining the earlier partition regressions. Stopped attempts
+consume 27.627 of 30.091 seconds in the first mapped holdout run. Neither the
+new map mechanism nor this opportunity supplies efficient arbitrary-SAT closure.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Retain variable maps across residuals](research/residual-variable-transport.md).
+Automatic map transport and cold hint recovery work on numbering-shift controls,
+but fresh-holdout query time rises 5.26% with unchanged outcomes. A mismatch audit
+finds supports still missing 3–19 clauses. Next: price guarded/first-false
+composition on the smallest gaps; keep the affine policy as the baseline.
+
 [Learn from bounded partial-residual retrieval](research/partial-residual-retrieval.md).
 The candidate pool adds 4.27% holdout query time with unchanged outcomes and
 expansion counts. Keep the affine policy as the baseline. A checked counterexample

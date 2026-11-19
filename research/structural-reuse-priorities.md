@@ -12,7 +12,48 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: retain variable correspondence before widening retrieval
+## Current investigation: compose transported supports with a few missing clauses
+
+[Source-variable transport](residual-variable-transport.md) now retains bounded
+normalization maps and restores hint metadata after restart. Five transfers work
+on numbering-shift controls versus zero compact-coordinate transfers. General
+renaming discovery remains open, and this is **not a net speedup**: fresh holdout
+query time rises **5.26% against affine / 1.56% against compact**, in both orders.
+All arms retain identical native/affine proof digests, 10,249 recorded expansions
+and 33 SAT / 38 UNSAT / 37 unresolved attempts. Keep the safe affine baseline.
+
+Maps produce **1,758 candidates versus 31**, but **zero holdout transfers**.
+A counter/result/digest-matched census finds **7–220 missing clauses, median 89**;
+none qualifies for the previous one-missing-clause support path. Existing bounded
+causal extraction on eighteen closest candidates gives six budget stops and
+twelve supports still missing **3–19 clauses**, with no new refutation. These
+negative results are retained; neither enlarging the pool nor enabling the
+one-missing path is justified by this evidence.
+
+**Next primary target: reuse the existing guarded/first-false composition rules
+on transported supports with small gaps.** Start with the residual selected from
+holdout case 61 (30 support clauses, three absent); cases 25 and 31 each miss five.
+Reconstruct and check the extracted core, bind the exact target residual, screen
+branch costs, and account for premise publication, every branch and cold replay.
+The target plus all missing clauses is UNSAT because it contains the core; this
+excludes only the all-true region. All other regions need checked composition,
+and a SAT branch must lift correctly. Use the historical
+[first-false partition](clause-partition.md) and [guard recognition](premise-guard.md)
+implementations, preserving their regressions. A source-level verdict cannot be
+inferred from a conditional residual alone. Fresh inputs must follow the pilot.
+
+Random/shared mixtures consume **81.26%** of first-order holdout query time;
+37 stops consume **27.627 / 30.091 seconds**. Alternative supports, unrelated
+renaming discovery and representative external workloads remain open. Retained
+map/hint budgets do not cap total proof checking, archive size or SAT expansion.
+
+Resume `experiments/results/cnf-residual-transport/checkpoint.json` for preserved
+proof evidence. Its `hint_resume_archive` retains the mapped policy's metadata;
+the cumulative union merges proof authority only. Detailed mismatches and exact
+residual/origin bindings are in `mismatch-analysis.json`. Tests, historical audit,
+source ledger and manuscript build are bound in `checks.json`.
+
+## Previous checkpoint: retain variable correspondence before widening retrieval
 
 [The partial-residual pool](partial-residual-retrieval.md) is a **negative result**
 for the tested admission/index policy. Query time increases **5.88% exposed /

@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Learn from bounded partial-residual retrieval](research/partial-residual-retrieval.md).
+The candidate pool adds 4.27% holdout query time with unchanged outcomes and
+expansion counts. Keep the affine policy as the baseline. A checked counterexample
+shows how compact variable numbering hides a reusable core; the next target is
+bounded variable correspondence, with discovery and maintenance costs charged.
+
 [Recognize affine contradictions before acquisition](research/bounded-affine-probe.md).
 The checked probe reduces fresh-holdout query time 41.87% and SQLite storage
 42.15% against planned reuse; unresolved attempts fall from 26 to 15. Warm replay

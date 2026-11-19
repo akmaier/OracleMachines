@@ -12,7 +12,44 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: retrieve supports from committed partial searches
+## Current investigation: retain variable correspondence before widening retrieval
+
+[The partial-residual pool](partial-residual-retrieval.md) is a **negative result**
+for the tested admission/index policy. Query time increases **5.88% exposed /
+4.27% fresh holdout**, and complete time increases **3.08% / 2.13%**, in both
+orders. Outcomes and recorded native expansion counts do not improve. Holdout
+SQLite changes by only -0.034%; checked objects and compressed storage grow.
+Keep `InputSafeAffineProbeSolver` as the performance baseline.
+
+The pool admits committed nonterminal negative proofs under a 512 KiB retained
+charge, including residuals left by stops. All matches pass the existing native
+checker. Holdout produces **one hit / 1,346 probes / 37 candidates**, after
+28.15 MB of tail reads, 993 admissions and 985 evictions. Instrumented admission
+costs 1.863 seconds versus 0.341 for retrieval, with repeated size charging a
+large component. These profile times are diagnostic and overlap at call sites.
+
+**Next primary target: bounded root-variable correspondence for residual reuse.**
+A checked counterexample shows that separately compacted literal anchors miss a
+core which the unchanged subset checker accepts under a supplied injection.
+Retain normalization maps as untrusted proposals, compose them into source/root
+coordinates, and recheck transported clauses and native proof authority. Test
+same-source branches and edits before general renaming search. Never lift a
+conditional refutation to its unconditioned source. Bound map admission and
+lookup, charge persistence/reconstruction, and use a fresh split. The example
+establishes a blind spot, not the prevalence or cost saving of automatic mapping.
+
+Avoid growing the current pool blindly. Selective admission and incremental
+accounting are supporting work once useful mappings are demonstrated. Random
+and shared mixtures consume **86.02%** of first-order holdout query time; 27
+stops consume **19.463 / 23.074 seconds**. Wider family discovery, alternative
+surviving supports, separator decomposition and external validation remain open.
+
+Resume `experiments/results/cnf-partial-residual-pool/checkpoint.json` for all
+preserved evidence; the optional pool is not the performance baseline. The final
+source ledger, union counts, historical checks and test/build evidence are bound
+in its `checks.json`. All prior sources, proofs and trial artifacts are retained.
+
+## Previous checkpoint: retrieve supports from committed partial searches
 
 [The bounded affine probe](bounded-affine-probe.md) now runs before native
 acquisition, with the existing independent source/row checker and separate proof

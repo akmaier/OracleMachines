@@ -6584,3 +6584,49 @@ observations. All 1,347 full / 208 focused tests pass. The 232-page manuscript
 builds without warnings and keeps all 64 proof blocks. Final source ledger: 672.
 Initial fixture failures, the corrected input boundary, regressions and remaining
 SQLite warning sites are recorded; old authoritative bytes remain unchanged.
+
+
+## 2026-11-19: partial-residual retrieval fails the total-cost comparison
+
+[The bounded residual pool](partial-residual-retrieval.md) admits committed
+nonterminal negative proofs, including proofs left by stopped searches. It caps
+retained pool/index charge at 512 KiB, probes at 32 per query, candidates at four
+per probe, and causal support planning at one bounded attempt per query. The
+original native checker validates every origin/core and target containment.
+Conditional refutations cannot become unconditional source verdicts. Cold tail
+seeding is supported; exact pool-order and source-map restoration are not.
+
+On exposed 96/108/120 and fresh 126/132/138 streams, mean query time **increases
+5.88% / 4.27%** and complete time **3.08% / 2.13%**, in both orders. Outcomes and
+recorded expansion counts are unchanged: holdout remains 42 SAT / 39 UNSAT /
+27 unresolved attempts. Holdout SQLite bytes fall only 0.034%, while compressed
+storage and checked-object space grow. Keep the input-safe affine policy as the
+performance baseline; this optional experiment does not widen certified coverage.
+
+Holdout yields one hit from 1,346 probes and 37 candidates, after 28.15 MB of tail
+reads, 993 admissions and 985 evictions. An instrumented replay reproduces all
+query counters, results and native/affine digests; admission costs 1.863 seconds
+versus 0.341 for retrieval, with repeated size charging a large component. These
+profile times overlap and are diagnostic. Total bounds exclude transient decode,
+prerequisite checking, full checked state, publication and fallback.
+
+A separate checked counterexample shows literal anchors in separately compacted
+coordinates missing a core that the unchanged subset checker accepts under a
+supplied injective map. The map is not automatically discovered; frequency and
+savings on the timed streams remain unknown. Next: retain bounded source-variable
+correspondence for residuals across same-source branches and edits, recheck
+transported containment, and charge map admission, maintenance and cold restart.
+Selective admission and incremental size accounting are supporting work once
+useful transport is demonstrated. Random/shared mixtures still consume 86.02% of
+holdout query time, and stopped attempts 19.463 of 23.074 seconds.
+
+Resume `experiments/results/cnf-partial-residual-pool/checkpoint.json` for the
+preserved evidence union. All 672 preceding sources and 8,402 artifacts across
+124 manifests are checked unchanged; earlier proofs and observations remain
+authoritative. The audit covers 864 chronological attempts, both independent
+readers and old histories, plus 512 exhaustive formulas. All 1,355 full / 216
+focused tests pass; the 233-page manuscript builds without warnings and preserves
+64 proof blocks. The final source ledger has 678 entries. Full-suite SQLite
+warning sites and the prefreeze policy revision are retained. Detailed union
+counts and evidence bindings are in `checks.json`. No arbitrary-SAT resource bound
+or complete efficient classification follows from this experiment.

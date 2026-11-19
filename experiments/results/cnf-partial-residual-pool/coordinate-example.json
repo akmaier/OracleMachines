@@ -1,0 +1,233 @@
+{
+  "archive": {
+    "compressed_bytes": 1376,
+    "database_bytes": 40960,
+    "database_sha256": "7bd59efb17dfcad9b260ab2f3db39be3861fecde3c3992c52eb8b606ee17a44c",
+    "path": "experiments/results/cnf-partial-residual-pool/coordinate-example/history.sqlite3.gz",
+    "seconds": 0.0003370000049471855,
+    "sha256": "c2deedaa37138ea1e3bc2826d3e17b4ceb9714c6c5b395c870a360e5ea0e8580"
+  },
+  "cold": {
+    "affine": 0,
+    "completed": 1,
+    "extensions": 0,
+    "metrics": {
+      "canonical_form_calls": 4,
+      "canonical_form_clauses": 25,
+      "canonical_form_literal_visits": 67,
+      "canonical_form_name_variables": 15,
+      "canonical_form_reuses": 4,
+      "certificate_memory_hits": 5,
+      "database_lookups": 4,
+      "key_serialized_bytes": 633,
+      "normalization_literal_visits": 77,
+      "read_bytes": 890,
+      "restriction_literal_visits": 64,
+      "search_disk_hits": 4,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 67,
+      "verification_trace_literals": 2,
+      "verified_nodes": 4
+    },
+    "native": 4,
+    "seconds": 0.011185833252966404
+  },
+  "core": [
+    [
+      -1,
+      -2,
+      -3
+    ],
+    [
+      -1,
+      -2,
+      3
+    ],
+    [
+      -1,
+      2,
+      -3
+    ],
+    [
+      -1,
+      2,
+      3
+    ],
+    [
+      1,
+      -2,
+      -3
+    ],
+    [
+      1,
+      -2,
+      3
+    ],
+    [
+      1,
+      2,
+      -3
+    ],
+    [
+      1,
+      2,
+      3
+    ]
+  ],
+  "limitations": [
+    "The order-preserving map is supplied for this diagnostic; no automatic map discovery or benchmark speedup is claimed.",
+    "Literal-valued anchors in separately compacted coordinates miss this reusable core. The original subset checker validates its explicit injection.",
+    "The example establishes a representation blind spot, not its frequency in the held-out random/shared mixtures."
+  ],
+  "node": {
+    "answer": false,
+    "cnf": [
+      [
+        -6,
+        -5,
+        -4
+      ],
+      [
+        -6,
+        -5,
+        4
+      ],
+      [
+        -6,
+        -4,
+        5
+      ],
+      [
+        -6,
+        4,
+        5
+      ],
+      [
+        -5,
+        -4,
+        6
+      ],
+      [
+        -5,
+        4,
+        6
+      ],
+      [
+        -4,
+        5,
+        6
+      ],
+      [
+        1,
+        4,
+        7
+      ],
+      [
+        2,
+        5,
+        8
+      ],
+      [
+        3,
+        6,
+        9
+      ],
+      [
+        4,
+        5,
+        6
+      ]
+    ],
+    "format": "cnf-residual-v1",
+    "proof": {
+      "child": "cnf-residual-v1:[[-3,-2,-1],[-3,-2,1],[-3,-1,2],[-3,1,2],[-2,-1,3],[-2,1,3],[-1,2,3],[1,2,3]]",
+      "clauses": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        10
+      ],
+      "kind": "component"
+    }
+  },
+  "origin": "cnf-residual-v1:[[-3,-2,-1],[-3,-2,1],[-3,-1,2],[-3,1,2],[-2,-1,3],[-2,1,3],[-1,2,3],[1,2,3]]",
+  "proposal_miss": {
+    "key_serialized_bytes": 117,
+    "normalization_literal_visits": 33,
+    "partial_anchor_clauses": 11,
+    "partial_anchor_literals": 33,
+    "partial_probes": 1
+  },
+  "root": "cnf-residual-v1:[[-6,-5,-4],[-6,-5,4],[-6,-4,5],[-6,4,5],[-5,-4,6],[-5,4,6],[-4,5,6],[1,4,7],[2,5,8],[3,6,9],[4,5,6]]",
+  "target": [
+    [
+      -4,
+      -5,
+      -6
+    ],
+    [
+      -4,
+      -5,
+      6
+    ],
+    [
+      -4,
+      5,
+      -6
+    ],
+    [
+      -4,
+      5,
+      6
+    ],
+    [
+      4,
+      -5,
+      -6
+    ],
+    [
+      4,
+      -5,
+      6
+    ],
+    [
+      4,
+      5,
+      -6
+    ],
+    [
+      4,
+      5,
+      6
+    ],
+    [
+      1,
+      4,
+      7
+    ],
+    [
+      2,
+      5,
+      8
+    ],
+    [
+      3,
+      6,
+      9
+    ]
+  ],
+  "transport": {
+    "1": 4,
+    "2": 5,
+    "3": 6
+  },
+  "transport_counts": {
+    "guard_input_literals": 57,
+    "support_publication_literals": 33,
+    "support_publications": 1
+  }
+}

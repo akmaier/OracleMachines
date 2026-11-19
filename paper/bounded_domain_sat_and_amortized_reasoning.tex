@@ -8580,6 +8580,77 @@ refutation of a conditioned residual cannot silently become a refutation of its
 unconditioned source. Selection, transport, support discovery, invalidation and
 cold reconstruction must all be charged before promoting this opportunity.
 
+\paragraph{Bounded retrieval from partial searches: a negative result.}
+The next optional policy admits hints from committed negative residual proofs,
+including proofs left by budget-stopped searches. It examines at most 64 new
+archive-tail records after each completed query or native budget stop. Records
+above 256 KiB of key and payload are skipped before decoding; admitted proofs
+have at most 1,024 literal occurrences. Nonterminal split, component and unit
+proofs are preferred because terminal contradictions are inexpensive to recover.
+The pool retains at most 64 hints under a conservative 512 KiB charge, including
+index containers and independently charged anchor clauses.
+
+Two longest clauses, with lexical ties, index each hint in its own compact
+variable coordinates. Each query permits at most 32 residual probes and four
+candidates per probe. Full containment qualifies for reuse; one missing clause
+may trigger one bounded causal support plan, with limits of 32 nodes, 8,192
+source literals and 128 KiB of retained plan. The existing native checker still
+verifies the origin, derived support and target containment. A candidate is not
+an authority, and a refuted conditional residual does not refute its original
+source. Admission requires committed, idle storage. Cold reconstruction reads
+the bounded tail but does not restore the exact previous candidate order.
+
+Eight serial workers compare the preceding affine policy with this addition in
+two opposite orders. Exposed sizes are 96/108/120; a fresh size holdout uses
+126/132/138. Each stream contains 108 attempts and 72 roots from six designs,
+with no family or donor labels supplied to search. Mean query time increases
+from 11.84740 to 12.54410 seconds exposed and from 22.14798 to 23.09321 seconds
+on holdout, regressions of 5.88\% and 4.27\%. Complete worker time increases
+3.08\% and 2.13\%. Both orders regress. Setup, misses, hint maintenance,
+checking, publication, retained-object measurement, replay, reconstruction,
+sidecars and compression are charged; posthoc audits are separate.
+
+Outcomes remain 50 SAT, 43 UNSAT and fifteen unresolved attempts exposed, and
+42 SAT, 39 UNSAT and 27 unresolved on holdout. Recorded native expansion counts
+remain 4,982 and 8,450. Holdout native records increase from 8,825 to 8,840;
+SQLite bytes fall only from 145,874,944 to 145,825,792, while compressed storage
+grows 0.011\%. Checked graph and candidate objects grow from 398,449,606 to
+398,704,123 bytes. Mean cold proof time rises from 9.00763 to 9.03188 seconds.
+These measurements provide no substantial space benefit or coverage gain.
+The preceding affine policy remains the performance baseline.
+
+The pool obtains two exposed hits from 999 probes and one holdout hit from
+1,346 probes. Holdout admission reads 28,147,556 key/payload bytes, admits 993
+hints and evicts 985. A posthoc profile reproduces every result, query counter
+and native/affine digest. Instrumented admission takes 1.863 seconds, compared
+with 0.341 for retrieval; repeated retained-size charging is a substantial part
+of admission. These inclusive profile times overlap and cannot replace the
+frozen policy comparison. Pool limits exclude decoding and insertion transients,
+prerequisite proof checks, full checked memory, publication and fallback. SQL
+length inspection may touch oversized payloads before rejection. Persistent
+proof storage remains uncapped.
+
+A separate checked example exposes one retrieval limitation. Store the eight
+ternary clauses excluding all assignments on variables $1,2,3$. Let the target
+contain the same clauses on variables $4,5,6$, together with $(1\lor4\lor7)$,
+$(2\lor5\lor8)$ and $(3\lor6\lor9)$. Compact literal-valued anchors miss the
+target, although the supplied injective map $1\mapsto4$, $2\mapsto5$,
+$3\mapsto6$ lets the unchanged subset checker certify it without fresh solving.
+Independent cold replay checks the resulting proof. The map is supplied for
+this diagnostic; neither automatic mapping nor its frequency in the measured
+workload is established.
+
+This result redirects the next experiment toward bounded source-variable
+correspondence across residuals and edits. Normalization maps may propose an
+injection into a later residual, but transported clauses and native proof
+authority must still be checked. Discovering maps between unrelated renamed
+inputs, retaining them through restart and finding surviving alternative
+supports remain separate costs. Random and shared mixtures consume 86.02\%
+of first-order holdout query time, and stopped attempts consume 19.463 of
+23.074 seconds. Improving correspondence alone supplies no bound on the number
+of necessary residuals or on arbitrary-SAT expansion. The failed policy,
+counterexample and original observations remain preserved.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

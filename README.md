@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Reuse negative proofs only after an edit match](research/on-demand-negative-edit-reuse.md).
+The optional policy finds ten checked UNSAT transfers per stream and reduces
+holdout SQLite storage 9.37%, but query time increases 5.81%. Core materialization
+adds smaller proof records. Next: share the bounded derivation work between
+support discovery and checked publication; keep the latency regression visible.
+
 [Retrieve SAT witnesses automatically](research/bounded-witness-pool.md).
 A bounded pool checks assignment candidates without supplied donor labels. Across
 exposed and separately frozen size-holdout streams, mean query time falls 2.97%

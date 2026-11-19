@@ -8377,6 +8377,61 @@ clause-set CNFs over two variables and independent archive replay support this
 implementation's soundness; no new tractable family or unrestricted SAT bound
 follows.
 
+\paragraph{On-demand negative supports across edits.}
+A subsequent optional policy remembers at most sixteen completed native UNSAT
+roots, each with at most 4,096 literals. It probes the first expanded residual
+of a query for a retained origin with at most one absent clause. A contained
+origin supplies a checked subset immediately. Otherwise, the existing causal
+extractor discovers a support and materializes its ordinary proof only when every
+support clause survives in the target. Candidate discovery receives no generator
+labels or donor relationships. Comparison uses actual signed clauses in compact
+coordinates, and the native subset verifier checks the exact transport.
+
+Each separate discovery or materialization traversal permits at most 256 support
+nodes and 131,072 source literals. A budget stop or missing premise falls back
+without a verdict. A proposal never certifies UNSAT: both the origin and the
+materialized core require independently checked negative proofs, and the final
+target uses the unchanged contradictory-subset rule. Existing proof identities
+are reused directly when the core equals the target, avoiding a self-reference.
+These mechanisms use the preceding causal support machinery; they introduce no
+new proof rule or tractable family.
+
+Eight serial workers compare this policy with the witness pool on the exposed
+24/48/72 scales and a fresh 36/60/84 size holdout. Each stream has 108 queries.
+The new policy finds ten negative transfers in each, covering several designs,
+and saves 382 and 378 native expansions, respectively. It nevertheless increases
+mean query time by 2.40\% and 5.81\%, with regressions in both orders. Exposed
+outcomes remain 70 SAT, 36 UNSAT and two unresolved attempts; holdout outcomes
+remain 57 SAT, 48 UNSAT and three unresolved. No decision-coverage gain follows.
+
+Materialization adds 650 and 740 core or subset-wrapper records. Total native
+records rise from 2,044 to 2,298 and from 3,414 to 3,745, while encoded payload
+falls 14.84\% and 9.24\%. Holdout SQLite storage falls from 38,293,504 to
+34,705,408 bytes, and checked graph plus candidate objects fall from 92,374,013
+to 84,789,324 bytes. Additional records contain smaller formulas; record count
+and stored bytes therefore move in opposite directions. Cold proof replay also
+becomes cheaper. Complete worker time falls 7.40\% and 1.46\%, but the first
+holdout difference is only 12 milliseconds. The policy remains an optional
+space/replay tradeoff; it is not promoted as a query-latency improvement.
+
+The holdout traverses 994 support nodes for discovery and another 488 for
+materialization. Discovery retains indices and identity but repeats coordinate
+reconstruction when emitting the proof. A profile with identical results,
+counters and native payload digest places normalization and restriction first
+among exclusive routines. Reusing a bounded derivation plan between discovery
+and independently checked materialization is the next candidate improvement.
+The six failed holdout supports still require a deleted clause; alternative
+surviving supports are a separate discovery obligation.
+
+Candidate matching scans the target and bounded origin descriptions. Proof
+traversal budgets exclude prerequisite checks, emitted certificates, temporary
+allocations and fallback, and do not bound the acquired refutation polynomially.
+The negative pool starts empty after restart. Cold replay validates persisted
+ordinary certificates and can readmit roots, but does not restore candidate order
+or proposal state. All previous payloads remain authoritative in the expanded
+archive, and the exhaustive two-variable audit and unchanged proof readers check
+the new results. No uniform polynomial arbitrary-SAT bound is established.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

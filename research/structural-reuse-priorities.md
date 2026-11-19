@@ -12,7 +12,51 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: negative search reuse and durable candidate retention
+## Current investigation: share support discovery with proof materialization
+
+[On-demand negative edit reuse](on-demand-negative-edit-reuse.md) now remembers
+sixteen checked native UNSAT roots, recognizes near edits without supplied donor
+labels, and defers causal proof materialization until a surviving support matches.
+Ten negative transfers occur in each exposed/fresh-size stream. All targets still
+pass the original native verifier; deleted required clauses cause a miss.
+
+**Retain the query regression:** mean query time rises **2.40% exposed / 5.81%
+holdout**, in both orders. Warm time also rises. Keep the preceding witness pool
+as the latency baseline. Native expansions fall **1,961 to 1,579 / 3,159 to 2,781**,
+but core materialization adds **650 / 740** records. Total records rise while
+smaller formulas reduce SQLite bytes **15.30% / 9.37%**, checked-object bytes
+**13.14% / 8.21%**, and cold proof time **17.94% / 6.13%**. Complete worker time
+falls 7.40% / 1.46%, with the first holdout gain only 12 ms. This is an optional
+space/replay tradeoff on constructed workloads, not a general speedup.
+
+**Next primary target: reuse a bounded derivation plan across discovery and
+checked materialization.** Holdout discovery visits 994 support nodes, followed
+by another 488 materialization visits. The current plan stores only indices/key,
+so coordinate reconstruction and causal traversal repeat. Normalization and
+restriction dominate the posthoc profile; every result/counter/native digest
+matches the frozen trial. Retain exact parent clauses, residual identities,
+renamings and unit/branch evidence under a byte budget, then emit through the
+unchanged verifier. Charge plan creation, checking, storage, invalidation and
+restart. Use a fresh split; do not promote an unmeasured saving.
+
+Six of sixteen holdout near matches fail because their selected support still
+requires a deleted clause. Alternative surviving preimages/supports and selection
+beyond the first near match remain separate discovery gaps. The negative pool
+starts empty after restart, so durable candidate retention also remains open.
+Outcome counts are unchanged: exposed **70 SAT / 36 UNSAT / 2 unresolved** and
+holdout **57 SAT / 48 UNSAT / 3 unresolved attempts**. Neither decision coverage
+nor recognized-family closure increased.
+
+Resume `experiments/results/cnf-negative-edit-pool/checkpoint.json`. Preserve all
+**652 prior sources / 8,141 artifacts / 120 manifests**. The append-only union has
+**39,211 native** records, with all earlier proofs and observations rechecked.
+All **1,327 full / 188 focused tests** and 512 exhaustive formula checks pass.
+The **230-page manuscript** builds without warnings and retains 64 proof blocks;
+44 unchanged-site SQLite warnings remain in the full suite. Final source ledger:
+**658**. The failed profiler's JSON/in-memory model-key comparison and its corrected
+rerun are preserved. No timed run was altered.
+
+## Previous checkpoint: negative search reuse and durable candidate retention
 
 [Bounded automatic witness retrieval](bounded-witness-pool.md) now tests at most
 four recent same-size assignment vectors from a 64-entry pool. It receives no

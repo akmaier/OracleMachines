@@ -1,0 +1,494 @@
+{
+  "exposed": {
+    "groups": {
+      "family": {
+        "disjoint-mix": {
+          "negative": {
+            "expansions": 147,
+            "hits": 0,
+            "new_nodes": 159,
+            "seconds": 0.13351595867425203,
+            "statuses": {
+              "sat": 15,
+              "unsat": 3
+            }
+          },
+          "pool": {
+            "expansions": 147,
+            "hits": 0,
+            "new_nodes": 159,
+            "seconds": 0.1137820458970964,
+            "statuses": {
+              "sat": 15,
+              "unsat": 3
+            }
+          }
+        },
+        "gated-horn": {
+          "negative": {
+            "expansions": 24,
+            "hits": 0,
+            "new_nodes": 24,
+            "seconds": 0.0331884166225791,
+            "statuses": {
+              "sat": 18
+            }
+          },
+          "pool": {
+            "expansions": 24,
+            "hits": 0,
+            "new_nodes": 24,
+            "seconds": 0.030412460677325726,
+            "statuses": {
+              "sat": 18
+            }
+          }
+        },
+        "graph-colouring": {
+          "negative": {
+            "expansions": 84,
+            "hits": 2,
+            "new_nodes": 120,
+            "seconds": 0.12343866704031825,
+            "statuses": {
+              "sat": 12,
+              "unsat": 6
+            }
+          },
+          "pool": {
+            "expansions": 106,
+            "hits": 0,
+            "new_nodes": 106,
+            "seconds": 0.12126820720732212,
+            "statuses": {
+              "sat": 12,
+              "unsat": 6
+            }
+          }
+        },
+        "parity-bridge": {
+          "negative": {
+            "expansions": 231,
+            "hits": 5,
+            "new_nodes": 552,
+            "seconds": 0.643476000521332,
+            "statuses": {
+              "unsat": 18
+            }
+          },
+          "pool": {
+            "expansions": 427,
+            "hits": 0,
+            "new_nodes": 433,
+            "seconds": 0.6053607095964253,
+            "statuses": {
+              "unsat": 18
+            }
+          }
+        },
+        "random-three": {
+          "negative": {
+            "expansions": 962,
+            "hits": 1,
+            "new_nodes": 1217,
+            "seconds": 1.6766235819086432,
+            "statuses": {
+              "sat": 13,
+              "unresolved": 2,
+              "unsat": 3
+            }
+          },
+          "pool": {
+            "expansions": 1063,
+            "hits": 0,
+            "new_nodes": 1117,
+            "seconds": 1.6008984581567347,
+            "statuses": {
+              "sat": 13,
+              "unresolved": 2,
+              "unsat": 3
+            }
+          }
+        },
+        "shared-mix": {
+          "negative": {
+            "expansions": 131,
+            "hits": 2,
+            "new_nodes": 226,
+            "seconds": 0.1834848732687533,
+            "statuses": {
+              "sat": 12,
+              "unsat": 6
+            }
+          },
+          "pool": {
+            "expansions": 194,
+            "hits": 0,
+            "new_nodes": 205,
+            "seconds": 0.19782137591391802,
+            "statuses": {
+              "sat": 12,
+              "unsat": 6
+            }
+          }
+        }
+      },
+      "variant": {
+        "base": {
+          "negative": {
+            "expansions": 1040,
+            "hits": 0,
+            "new_nodes": 1085,
+            "seconds": 1.3502057916484773,
+            "statuses": {
+              "sat": 23,
+              "unresolved": 1,
+              "unsat": 12
+            }
+          },
+          "pool": {
+            "expansions": 1040,
+            "hits": 0,
+            "new_nodes": 1085,
+            "seconds": 1.3136421269737184,
+            "statuses": {
+              "sat": 23,
+              "unresolved": 1,
+              "unsat": 12
+            }
+          }
+        },
+        "edit": {
+          "negative": {
+            "expansions": 427,
+            "hits": 10,
+            "new_nodes": 1095,
+            "seconds": 1.2424057461321354,
+            "statuses": {
+              "sat": 23,
+              "unresolved": 1,
+              "unsat": 12
+            }
+          },
+          "pool": {
+            "expansions": 809,
+            "hits": 0,
+            "new_nodes": 841,
+            "seconds": 1.1568535002879798,
+            "statuses": {
+              "sat": 23,
+              "unresolved": 1,
+              "unsat": 12
+            }
+          }
+        },
+        "repeat": {
+          "negative": {
+            "expansions": 112,
+            "hits": 0,
+            "new_nodes": 118,
+            "seconds": 0.20111596025526524,
+            "statuses": {
+              "sat": 24,
+              "unsat": 12
+            }
+          },
+          "pool": {
+            "expansions": 112,
+            "hits": 0,
+            "new_nodes": 118,
+            "seconds": 0.19904763018712401,
+            "statuses": {
+              "sat": 24,
+              "unsat": 12
+            }
+          }
+        }
+      }
+    },
+    "paired_negative_minus_pool": [
+      {
+        "cold_seconds": -0.21223654225468636,
+        "complete_worker_seconds": -0.3723235409706831,
+        "query_seconds": 0.12418424058705568,
+        "reconstruction_seconds": -0.16234537540003657,
+        "warm_seconds": 0.006239582784473896
+      },
+      {
+        "cold_seconds": -0.19338349997997284,
+        "complete_worker_seconds": -0.47788270795717835,
+        "query_seconds": 0.0043357363902032375,
+        "reconstruction_seconds": -0.16594512481242418,
+        "warm_seconds": 0.005501125007867813
+      }
+    ],
+    "reductions": {
+      "checked_python_bytes": 0.1313556781848576,
+      "compressed_bytes": 0.0738845640495055,
+      "database_bytes": 0.15299714557564226,
+      "mean_cold_seconds": 0.1793901741654178,
+      "mean_complete_worker_seconds": 0.07396900011214103,
+      "mean_query_seconds": -0.02398030594118139,
+      "native_nodes": -0.12426614481409004,
+      "native_payload": 0.14839236483500984
+    },
+    "unknown_cases": {
+      "negative": [
+        75,
+        76
+      ],
+      "pool": [
+        75,
+        76
+      ]
+    }
+  },
+  "holdout": {
+    "groups": {
+      "family": {
+        "disjoint-mix": {
+          "negative": {
+            "expansions": 391,
+            "hits": 3,
+            "new_nodes": 576,
+            "seconds": 0.47922779293730855,
+            "statuses": {
+              "sat": 6,
+              "unsat": 12
+            }
+          },
+          "pool": {
+            "expansions": 448,
+            "hits": 0,
+            "new_nodes": 501,
+            "seconds": 0.4754513739608228,
+            "statuses": {
+              "sat": 6,
+              "unsat": 12
+            }
+          }
+        },
+        "gated-horn": {
+          "negative": {
+            "expansions": 73,
+            "hits": 0,
+            "new_nodes": 73,
+            "seconds": 0.06678020674735308,
+            "statuses": {
+              "sat": 18
+            }
+          },
+          "pool": {
+            "expansions": 73,
+            "hits": 0,
+            "new_nodes": 73,
+            "seconds": 0.06465675076469779,
+            "statuses": {
+              "sat": 18
+            }
+          }
+        },
+        "graph-colouring": {
+          "negative": {
+            "expansions": 127,
+            "hits": 2,
+            "new_nodes": 185,
+            "seconds": 0.2621158380061388,
+            "statuses": {
+              "sat": 9,
+              "unsat": 9
+            }
+          },
+          "pool": {
+            "expansions": 147,
+            "hits": 0,
+            "new_nodes": 172,
+            "seconds": 0.25090966327115893,
+            "statuses": {
+              "sat": 9,
+              "unsat": 9
+            }
+          }
+        },
+        "parity-bridge": {
+          "negative": {
+            "expansions": 701,
+            "hits": 4,
+            "new_nodes": 1205,
+            "seconds": 1.728401413653046,
+            "statuses": {
+              "unsat": 18
+            }
+          },
+          "pool": {
+            "expansions": 976,
+            "hits": 0,
+            "new_nodes": 1027,
+            "seconds": 1.567646376322955,
+            "statuses": {
+              "unsat": 18
+            }
+          }
+        },
+        "random-three": {
+          "negative": {
+            "expansions": 1268,
+            "hits": 0,
+            "new_nodes": 1361,
+            "seconds": 2.2609241642057896,
+            "statuses": {
+              "sat": 12,
+              "unresolved": 3,
+              "unsat": 3
+            }
+          },
+          "pool": {
+            "expansions": 1268,
+            "hits": 0,
+            "new_nodes": 1361,
+            "seconds": 2.1686221240088344,
+            "statuses": {
+              "sat": 12,
+              "unresolved": 3,
+              "unsat": 3
+            }
+          }
+        },
+        "shared-mix": {
+          "negative": {
+            "expansions": 221,
+            "hits": 1,
+            "new_nodes": 345,
+            "seconds": 0.32028979202732444,
+            "statuses": {
+              "sat": 12,
+              "unsat": 6
+            }
+          },
+          "pool": {
+            "expansions": 247,
+            "hits": 0,
+            "new_nodes": 280,
+            "seconds": 0.2588131232187152,
+            "statuses": {
+              "sat": 12,
+              "unsat": 6
+            }
+          }
+        }
+      },
+      "variant": {
+        "base": {
+          "negative": {
+            "expansions": 1495,
+            "hits": 0,
+            "new_nodes": 1662,
+            "seconds": 2.158235376700759,
+            "statuses": {
+              "sat": 19,
+              "unresolved": 1,
+              "unsat": 16
+            }
+          },
+          "pool": {
+            "expansions": 1495,
+            "hits": 0,
+            "new_nodes": 1662,
+            "seconds": 2.1434651627205312,
+            "statuses": {
+              "sat": 19,
+              "unresolved": 1,
+              "unsat": 16
+            }
+          }
+        },
+        "edit": {
+          "negative": {
+            "expansions": 1030,
+            "hits": 10,
+            "new_nodes": 1830,
+            "seconds": 2.432963415980339,
+            "statuses": {
+              "sat": 19,
+              "unresolved": 1,
+              "unsat": 16
+            }
+          },
+          "pool": {
+            "expansions": 1408,
+            "hits": 0,
+            "new_nodes": 1499,
+            "seconds": 2.1155269551090896,
+            "statuses": {
+              "sat": 19,
+              "unresolved": 1,
+              "unsat": 16
+            }
+          }
+        },
+        "repeat": {
+          "negative": {
+            "expansions": 256,
+            "hits": 0,
+            "new_nodes": 253,
+            "seconds": 0.5265404148958623,
+            "statuses": {
+              "sat": 19,
+              "unresolved": 1,
+              "unsat": 16
+            }
+          },
+          "pool": {
+            "expansions": 256,
+            "hits": 0,
+            "new_nodes": 253,
+            "seconds": 0.5271072937175632,
+            "statuses": {
+              "sat": 19,
+              "unresolved": 1,
+              "unsat": 16
+            }
+          }
+        }
+      }
+    },
+    "paired_negative_minus_pool": [
+      {
+        "cold_seconds": -0.08288191631436348,
+        "complete_worker_seconds": -0.012291792314499617,
+        "query_seconds": 0.33163979602977633,
+        "reconstruction_seconds": -0.15420874999836087,
+        "warm_seconds": 0.010984125081449747
+      },
+      {
+        "cold_seconds": -0.1701523750089109,
+        "complete_worker_seconds": -0.30004766723141074,
+        "query_seconds": 0.2310162498615682,
+        "reconstruction_seconds": -0.19801899883896112,
+        "warm_seconds": 0.008624499663710594
+      }
+    ],
+    "reductions": {
+      "checked_python_bytes": 0.08210847135113641,
+      "compressed_bytes": 0.048458813491818686,
+      "database_bytes": 0.09369986094769489,
+      "mean_cold_seconds": 0.06125803350234316,
+      "mean_complete_worker_seconds": 0.01456261334567599,
+      "mean_query_seconds": -0.0581165048535901,
+      "native_nodes": -0.0969537199765671,
+      "native_payload": 0.09236356244640886
+    },
+    "unknown_cases": {
+      "negative": [
+        72,
+        73,
+        74
+      ],
+      "pool": [
+        72,
+        73,
+        74
+      ]
+    }
+  }
+}

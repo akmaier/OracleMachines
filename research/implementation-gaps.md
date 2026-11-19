@@ -10314,3 +10314,35 @@ and cheaper failed-probe selection. Candidate caps bound proposals only;
 residual count, cumulative proof size and arbitrary-SAT expansion remain unbounded
 by a polynomial guarantee. The fresh split shares the same six synthetic designs,
 so external representative workloads remain necessary.
+
+
+## 2026-11-19: on-demand negative support reuse and its acquisition cost
+
+The [new optional policy](on-demand-negative-edit-reuse.md) retrieves recent checked
+UNSAT roots, discovers a causal support only after a near-edit match, and emits
+ordinary core/subset proofs only after containment. It finds ten negative transfers
+per stream without supplied donor labels. All new results are independently checked.
+
+Exposed/holdout native expansions fall 1,961 to 1,579 / 3,159 to 2,781, but query
+time rises 2.40% / 5.81% in both orders. Materialization adds 650 / 740 smaller
+proof records. SQLite bytes fall 15.30% / 9.37%; cold replay improves, while warm
+time regresses. Outcome and family closure coverage are unchanged. Keep this as
+a space/replay tradeoff and retain the previous witness pool as the latency baseline.
+
+Next: reuse a bounded, exact derivation plan between support discovery and checked
+materialization, which now repeat causal traversal and coordinate reconstruction.
+Holdout visits 994 support nodes in discovery and another 488 in materialization.
+Six failed supports need a deleted clause; alternative surviving supports remain
+a distinct coverage gap. Negative proposals and candidate order are not restored
+on reopening. Budgeted extraction is not a total time/space or arbitrary-SAT bound.
+
+Resume `experiments/results/cnf-negative-edit-pool/checkpoint.json`. All 652 prior
+sources and 8,141 artifacts across 120 manifests remain unchanged. The union now
+contains 39,211 native records; old payloads remain authoritative and all trial
+alternatives are preserved. Both readers recheck earlier composed/pilot decisions,
+864 witness-pool observations, larger-stream results/recovery and inventory.
+All 1,327 full / 188 focused tests and 512 exhaustive two-variable checks pass.
+The 230-page manuscript builds cleanly with 64 proof blocks unchanged. Forty-four
+SQLite warnings remain at unchanged full-suite sites. The first profiler's
+JSON-versus-integer model-key comparison failure is preserved; corrected comparison
+matches all semantic fields, counters and native digests. Timed runs are unchanged.

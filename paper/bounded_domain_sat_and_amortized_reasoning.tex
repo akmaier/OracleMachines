@@ -8324,6 +8324,59 @@ implementation gap. Partial negative-search reuse across clause edits and
 recognition of shared interactions remain separate obligations. Completion of
 this finite catalog supplies no uniform polynomial expansion bound.
 
+\paragraph{Automatic bounded witness retrieval.}
+The next optional experiment removes supplied donor relationships. It retains at
+most 64 distinct packed assignment vectors from native SAT publications and tries
+at most four recent vectors with the target's compact variable count. Equal
+variable count supplies no semantic equivalence: each vector is simply a proposed
+assignment. The full target CNF must be satisfied, followed by the unchanged
+native witness verifier. Thus a hit certifies SAT independently of the donor;
+a miss says nothing about UNSAT. Proof checking and rollback invalidation of
+checked records remain unchanged. Pure assignment hints may survive a rolled-back
+batch because every later target is checked again.
+
+The policy is frozen before two separate 108-query streams: the exposed scales
+24/48/72 and a size holdout at 30/54/78, using the same six synthetic designs.
+Eight serial workers start empty and compare batching with retrieval in opposite
+orders. Mean query time falls from 2.66956 to 2.59017 seconds on exposed inputs
+and from 4.16415 to 3.81977 seconds on the holdout, reductions of 2.97\% and 8.27\%.
+Both paired query differences improve. Complete worker time, including cold
+proof replay and solver reconstruction, falls 4.36\% and 9.06\%. Each arm retains
+two unresolved attempts under the same expansion cap; coverage does not increase.
+These designed size splits and two orders do not establish representative or
+uniform runtime guarantees.
+
+Native records fall from 2,259 to 2,044 and from 3,292 to 2,873. Holdout SQLite
+storage falls from 34,770,944 to 30,937,088 bytes; checked cache objects plus the
+pool fall from 83,155,305 to 74,284,351 bytes. The pool's conservative retained
+charge peaks below 14,200 bytes in each stream. These measurements exclude
+transient allocations and are not total process-memory bounds. Holdout edit
+expansions fall from 1,342 to 955, while base expansions remain 1,518. Parity
+mixtures receive no hits, retain their expansion counts and incur extra lookup
+work. Mean holdout warm time also regresses slightly. Trial archives retain all
+results, including different valid witnesses for the same canonical key; merging
+preserves the earlier authoritative payload.
+
+For a residual with $n$ variables and $L$ literal occurrences, entry cap $C$
+and candidate cap $K$,
+proposal work is $O(L+C+KL)$ in a word-cost model, plus $O(n)$ to materialize a hit
+and the original checking and publication cost. Validating and packing a model
+takes $O(n)$ work; dictionary lookup, hashing, eviction and resizing are charged additionally.
+With variable cap $V$, packed vectors require $O(C\lceil V/8\rceil)$ bytes
+plus container metadata. Integer and encoding costs remain separate. These bounds
+concern the proposal mechanism, not the number of residuals, proof size or total
+expansion cost, all of which can remain exponential.
+
+Reopening reads at most 64 newest native payloads as untrusted candidate hints.
+This reconstructs 33 vectors on the holdout but none on the exposed archive,
+whose tail contains no SAT models. A row cap does not cap decoded payload bytes,
+and warm exact-root replay does not establish cold candidate availability.
+Selective durable candidate retention and dependency-checked reuse of negative
+search across clause edits are the next gaps. Exhaustive checks of the 512
+clause-set CNFs over two variables and independent archive replay support this
+implementation's soundness; no new tractable family or unrestricted SAT bound
+follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

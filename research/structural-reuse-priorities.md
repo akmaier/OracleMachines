@@ -12,7 +12,50 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: retrieve reusable witnesses across clause edits
+## Current investigation: negative search reuse and durable candidate retention
+
+[Bounded automatic witness retrieval](bounded-witness-pool.md) now tests at most
+four recent same-size assignment vectors from a 64-entry pool. It receives no
+supplied donor relationships or family labels. Every hit passes the complete
+CNF and native witness checks; misses give no UNSAT evidence. Packed coordinates
+are arbitrary compact-rank proposals, not a claim of semantic correspondence.
+
+On separate 108-query exposed and frozen size-holdout streams, mean query time
+falls **2.97% / 8.27%**, and complete worker time **4.36% / 9.06%**, with both orders
+improving. Holdout edit expansions fall **1,342 to 955**, native records **3,292 to
+2,873**, SQLite bytes **34,770,944 to 30,937,088**, and checked-object-plus-pool
+bytes **83,155,305 to 74,284,351**. Candidate retained charge stays below 14,200
+bytes. These are matched-stream observations, not unrestricted resource bounds.
+Each arm still has two budget-limited attempts. Family closure was not expanded.
+
+**Highest-value next target: dependency-checked negative reuse across edits.**
+Random 3-CNF and parity still consume about **83%** of first-order pool query time
+in both streams. Parity has zero hits, unchanged expansion counts and higher
+lookup cost. Test whether retained refutations depend only on clauses surviving
+an edit, preserving all shared-variable conditions and independent verification.
+Discovery/dependency accounting must show a net gain; a deleted premise cannot
+silently remain authoritative. New candidate screening should avoid spending
+more on the families with no witnessed savings.
+
+**Concrete persistence gap:** seeding from the newest 64 native payloads rebuilds
+**zero** candidates after the exposed stream's UNSAT tail, versus 33 on holdout.
+A bounded SAT-only index is a plausible low-cost supporting improvement, with
+its update, byte limit, durability and reconstruction charges measured explicitly.
+The current entry/width cap excludes seed JSON bytes and transient allocations.
+Holdout warm time also regresses slightly. Keep all misses and regressions.
+
+Resume `experiments/results/cnf-witness-pool/checkpoint.json`. The immutable prior
+**647 sources / 8,088 artifacts / 119 manifests** remain intact. Both readers check
+the append-only union of **34,426 native** records and all earlier extensions;
+**5,650 composed / 444 pilot decisions**, 108 earlier larger-stream observations
+and 624 inventory nodes remain valid. The audit checks 864 chronological attempts
+and all 512 two-variable clause-set formulas. Eight new tests bring the full suite
+to **1,319**, focused suite **150**, with 44 earlier-site SQLite warnings only in
+the full suite. The **229-page manuscript** builds without warnings and retains
+64 proof blocks unchanged. Final source ledger: **652**. The failed audit's
+incorrect nested recovery-result access is preserved with its corrected rerun.
+
+## Previous checkpoint: retrieve reusable witnesses across clause edits
 
 [The larger-mixture study](larger-mixture-expansion-costs.md) freezes **108 queries /
 72 new canonical roots**, with scales 24/48/72, six designs, edits and exact-root

@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Retrieve SAT witnesses automatically](research/bounded-witness-pool.md).
+A bounded pool checks assignment candidates without supplied donor labels. Across
+exposed and separately frozen size-holdout streams, mean query time falls 2.97%
+and 8.27%; holdout edit expansions fall from 1,342 to 955. Two capped attempts
+remain unresolved in each arm. Next: reuse negative search across edits and retain
+useful candidates through cold restart.
+
 [Measure larger mixtures and recover a stopped query](research/larger-mixture-expansion-costs.md).
 On 108 new-stream queries, both normalization alternatives regress; random 3-CNF
 and fresh work after small edits dominate. A later checked model closes the last

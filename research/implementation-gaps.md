@@ -10281,3 +10281,36 @@ incomplete expected configuration is preserved and corrected. All **1,311 full /
 remain in the full suite, none in focused tests. The **228-page manuscript**
 builds without warnings with **64 prior proof blocks** unchanged. Final source
 ledger: **647**; details are in `checks.json`.
+
+
+## 2026-11-19: bounded automatic witness retrieval
+
+The [new study](bounded-witness-pool.md) removes supplied donor relationships from
+SAT model reuse. A 64-vector pool tries at most four same-count compact-rank
+assignments, validates the entire target, and publishes through the original
+native witness verifier. Misses never certify UNSAT. This applies as a proposal
+mechanism across categories; it adds no semantic family closure.
+
+Eight serial workers on exposed and separately frozen size-holdout streams show
+2.97% / 8.27% lower mean query time and 4.36% / 9.06% lower complete worker time.
+Holdout edit expansions fall 1,342 to 955; native records fall 3,292 to 2,873.
+Two capped attempts remain in each arm/split. Parity receives zero hits and incurs
+extra probe work. Cold seeding from a 64-row tail yields zero exposed candidates
+and 33 holdout candidates, exposing the need for selective durable retention.
+
+Both old readers verify all proof records. The append-only union now has 34,426
+native records, retaining earlier authoritative bytes when another trial yields
+a different valid witness. All prior sources/artifacts and earlier composed,
+pilot, larger-stream and inventory observations are preserved. Validation covers
+864 chronological attempts, 512 exhaustive two-variable formulas, 1,319 full and
+150 focused tests. The 229-page manuscript builds with all 64 proof blocks
+unchanged. Forty-four existing-site SQLite warnings remain in the full suite.
+The first audit used an incorrect nested key for the preceding recovery result;
+its source/log are preserved, and the corrected audit passes.
+
+Resume `experiments/results/cnf-witness-pool/checkpoint.json`. Priorities are
+negative proof dependencies across edits, a bounded durable SAT candidate index,
+and cheaper failed-probe selection. Candidate caps bound proposals only;
+residual count, cumulative proof size and arbitrary-SAT expansion remain unbounded
+by a polynomial guarantee. The fresh split shares the same six synthetic designs,
+so external representative workloads remain necessary.

@@ -1,0 +1,488 @@
+{
+  "exposed": {
+    "groups": {
+      "family": {
+        "disjoint-mix": {
+          "batch32": {
+            "expansions": 174,
+            "hits": 0,
+            "new_nodes": 188,
+            "seconds": 0.12491783034056425,
+            "statuses": {
+              "sat": 15,
+              "unsat": 3
+            }
+          },
+          "pool": {
+            "expansions": 147,
+            "hits": 8,
+            "new_nodes": 159,
+            "seconds": 0.10996887693181634,
+            "statuses": {
+              "sat": 15,
+              "unsat": 3
+            }
+          }
+        },
+        "gated-horn": {
+          "batch32": {
+            "expansions": 42,
+            "hits": 0,
+            "new_nodes": 42,
+            "seconds": 0.03695774916559458,
+            "statuses": {
+              "sat": 18
+            }
+          },
+          "pool": {
+            "expansions": 24,
+            "hits": 9,
+            "new_nodes": 24,
+            "seconds": 0.028840084094554186,
+            "statuses": {
+              "sat": 18
+            }
+          }
+        },
+        "graph-colouring": {
+          "batch32": {
+            "expansions": 153,
+            "hits": 0,
+            "new_nodes": 153,
+            "seconds": 0.13937650248408318,
+            "statuses": {
+              "sat": 12,
+              "unsat": 6
+            }
+          },
+          "pool": {
+            "expansions": 106,
+            "hits": 6,
+            "new_nodes": 106,
+            "seconds": 0.11837087478488684,
+            "statuses": {
+              "sat": 12,
+              "unsat": 6
+            }
+          }
+        },
+        "parity-bridge": {
+          "batch32": {
+            "expansions": 427,
+            "hits": 0,
+            "new_nodes": 433,
+            "seconds": 0.5672271209768951,
+            "statuses": {
+              "unsat": 18
+            }
+          },
+          "pool": {
+            "expansions": 427,
+            "hits": 0,
+            "new_nodes": 433,
+            "seconds": 0.5918866246938705,
+            "statuses": {
+              "unsat": 18
+            }
+          }
+        },
+        "random-three": {
+          "batch32": {
+            "expansions": 1120,
+            "hits": 0,
+            "new_nodes": 1179,
+            "seconds": 1.545749583747238,
+            "statuses": {
+              "sat": 13,
+              "unresolved": 2,
+              "unsat": 3
+            }
+          },
+          "pool": {
+            "expansions": 1063,
+            "hits": 3,
+            "new_nodes": 1117,
+            "seconds": 1.5512867495417595,
+            "statuses": {
+              "sat": 13,
+              "unresolved": 2,
+              "unsat": 3
+            }
+          }
+        },
+        "shared-mix": {
+          "batch32": {
+            "expansions": 250,
+            "hits": 0,
+            "new_nodes": 264,
+            "seconds": 0.22670066682621837,
+            "statuses": {
+              "sat": 12,
+              "unsat": 6
+            }
+          },
+          "pool": {
+            "expansions": 194,
+            "hits": 6,
+            "new_nodes": 205,
+            "seconds": 0.1919259144924581,
+            "statuses": {
+              "sat": 12,
+              "unsat": 6
+            }
+          }
+        }
+      },
+      "variant": {
+        "base": {
+          "batch32": {
+            "expansions": 1041,
+            "hits": 0,
+            "new_nodes": 1086,
+            "seconds": 1.2098624985665083,
+            "statuses": {
+              "sat": 23,
+              "unresolved": 1,
+              "unsat": 12
+            }
+          },
+          "pool": {
+            "expansions": 1040,
+            "hits": 10,
+            "new_nodes": 1085,
+            "seconds": 1.2661639982834458,
+            "statuses": {
+              "sat": 23,
+              "unresolved": 1,
+              "unsat": 12
+            }
+          }
+        },
+        "edit": {
+          "batch32": {
+            "expansions": 1013,
+            "hits": 0,
+            "new_nodes": 1055,
+            "seconds": 1.2412022058852017,
+            "statuses": {
+              "sat": 23,
+              "unresolved": 1,
+              "unsat": 12
+            }
+          },
+          "pool": {
+            "expansions": 809,
+            "hits": 22,
+            "new_nodes": 841,
+            "seconds": 1.1350247105583549,
+            "statuses": {
+              "sat": 23,
+              "unresolved": 1,
+              "unsat": 12
+            }
+          }
+        },
+        "repeat": {
+          "batch32": {
+            "expansions": 112,
+            "hits": 0,
+            "new_nodes": 118,
+            "seconds": 0.1898647490888834,
+            "statuses": {
+              "sat": 24,
+              "unsat": 12
+            }
+          },
+          "pool": {
+            "expansions": 112,
+            "hits": 0,
+            "new_nodes": 118,
+            "seconds": 0.1910904156975448,
+            "statuses": {
+              "sat": 24,
+              "unsat": 12
+            }
+          }
+        }
+      }
+    },
+    "paired_pool_minus_baseline": [
+      {
+        "cold_seconds": -0.06251141661778092,
+        "complete_worker_seconds": -0.20282370783388615,
+        "query_seconds": -0.04865032900124788,
+        "reconstruction_seconds": 0.01830795919522643,
+        "warm_seconds": -0.0014708330854773521
+      },
+      {
+        "cold_seconds": -0.07264495780691504,
+        "complete_worker_seconds": -0.3072986681945622,
+        "query_seconds": -0.1101447083055973,
+        "reconstruction_seconds": -0.01734812557697296,
+        "warm_seconds": -0.0009492072276771069
+      }
+    ],
+    "reductions": {
+      "checked_python_bytes": 0.057236426840985954,
+      "compressed_bytes": 0.06437817452016925,
+      "database_bytes": 0.05807492382147339,
+      "mean_cold_seconds": 0.05801251664039919,
+      "mean_complete_worker_seconds": 0.043608080640344715,
+      "mean_query_seconds": 0.029741767393264507,
+      "native_nodes": 0.09517485613103138,
+      "native_payload": 0.04612408367224985
+    },
+    "unknown_cases": {
+      "batch32": [
+        75,
+        76
+      ],
+      "pool": [
+        75,
+        76
+      ]
+    }
+  },
+  "holdout": {
+    "groups": {
+      "family": {
+        "disjoint-mix": {
+          "batch32": {
+            "expansions": 180,
+            "hits": 0,
+            "new_nodes": 190,
+            "seconds": 0.12519341707229614,
+            "statuses": {
+              "sat": 18
+            }
+          },
+          "pool": {
+            "expansions": 143,
+            "hits": 9,
+            "new_nodes": 151,
+            "seconds": 0.10259741637855768,
+            "statuses": {
+              "sat": 18
+            }
+          }
+        },
+        "gated-horn": {
+          "batch32": {
+            "expansions": 59,
+            "hits": 0,
+            "new_nodes": 59,
+            "seconds": 0.049822664353996515,
+            "statuses": {
+              "sat": 18
+            }
+          },
+          "pool": {
+            "expansions": 24,
+            "hits": 8,
+            "new_nodes": 24,
+            "seconds": 0.031830084044486284,
+            "statuses": {
+              "sat": 18
+            }
+          }
+        },
+        "graph-colouring": {
+          "batch32": {
+            "expansions": 159,
+            "hits": 0,
+            "new_nodes": 170,
+            "seconds": 0.19750033039599657,
+            "statuses": {
+              "sat": 3,
+              "unsat": 15
+            }
+          },
+          "pool": {
+            "expansions": 151,
+            "hits": 1,
+            "new_nodes": 162,
+            "seconds": 0.20588783081620932,
+            "statuses": {
+              "sat": 3,
+              "unsat": 15
+            }
+          }
+        },
+        "parity-bridge": {
+          "batch32": {
+            "expansions": 750,
+            "hits": 0,
+            "new_nodes": 813,
+            "seconds": 1.3061227924190462,
+            "statuses": {
+              "unsat": 18
+            }
+          },
+          "pool": {
+            "expansions": 750,
+            "hits": 0,
+            "new_nodes": 813,
+            "seconds": 1.323257583193481,
+            "statuses": {
+              "unsat": 18
+            }
+          }
+        },
+        "random-three": {
+          "batch32": {
+            "expansions": 1432,
+            "hits": 0,
+            "new_nodes": 1562,
+            "seconds": 2.0107610803097486,
+            "statuses": {
+              "sat": 13,
+              "unresolved": 2,
+              "unsat": 3
+            }
+          },
+          "pool": {
+            "expansions": 1261,
+            "hits": 3,
+            "new_nodes": 1374,
+            "seconds": 1.8658037525601685,
+            "statuses": {
+              "sat": 13,
+              "unresolved": 2,
+              "unsat": 3
+            }
+          }
+        },
+        "shared-mix": {
+          "batch32": {
+            "expansions": 448,
+            "hits": 0,
+            "new_nodes": 498,
+            "seconds": 0.4468735000118613,
+            "statuses": {
+              "sat": 12,
+              "unsat": 6
+            }
+          },
+          "pool": {
+            "expansions": 312,
+            "hits": 9,
+            "new_nodes": 349,
+            "seconds": 0.2839391240850091,
+            "statuses": {
+              "sat": 12,
+              "unsat": 6
+            }
+          }
+        }
+      },
+      "variant": {
+        "base": {
+          "batch32": {
+            "expansions": 1518,
+            "hits": 0,
+            "new_nodes": 1630,
+            "seconds": 1.9848492499440908,
+            "statuses": {
+              "sat": 21,
+              "unresolved": 1,
+              "unsat": 14
+            }
+          },
+          "pool": {
+            "expansions": 1518,
+            "hits": 10,
+            "new_nodes": 1630,
+            "seconds": 2.048414206597954,
+            "statuses": {
+              "sat": 21,
+              "unresolved": 1,
+              "unsat": 14
+            }
+          }
+        },
+        "edit": {
+          "batch32": {
+            "expansions": 1342,
+            "hits": 0,
+            "new_nodes": 1469,
+            "seconds": 1.8579017044976354,
+            "statuses": {
+              "sat": 21,
+              "unresolved": 1,
+              "unsat": 14
+            }
+          },
+          "pool": {
+            "expansions": 955,
+            "hits": 20,
+            "new_nodes": 1050,
+            "seconds": 1.462714835535735,
+            "statuses": {
+              "sat": 21,
+              "unresolved": 1,
+              "unsat": 14
+            }
+          }
+        },
+        "repeat": {
+          "batch32": {
+            "expansions": 168,
+            "hits": 0,
+            "new_nodes": 193,
+            "seconds": 0.29352283012121916,
+            "statuses": {
+              "sat": 22,
+              "unsat": 14
+            }
+          },
+          "pool": {
+            "expansions": 168,
+            "hits": 0,
+            "new_nodes": 193,
+            "seconds": 0.3021867489442229,
+            "statuses": {
+              "sat": 22,
+              "unsat": 14
+            }
+          }
+        }
+      }
+    },
+    "paired_pool_minus_baseline": [
+      {
+        "cold_seconds": -0.19340791599825025,
+        "complete_worker_seconds": -0.8019068739376962,
+        "query_seconds": -0.3229579934850335,
+        "reconstruction_seconds": -0.018118166830390692,
+        "warm_seconds": 0.00042791618034243584
+      },
+      {
+        "cold_seconds": -0.19627254316583276,
+        "complete_worker_seconds": -0.8469543755054474,
+        "query_seconds": -0.3658051723614335,
+        "reconstruction_seconds": -0.02172379195690155,
+        "warm_seconds": 0.0008636671118438244
+      }
+    ],
+    "reductions": {
+      "checked_python_bytes": 0.10667935136549611,
+      "compressed_bytes": 0.12653673918580388,
+      "database_bytes": 0.11026033690658499,
+      "mean_cold_seconds": 0.10586120617309225,
+      "mean_complete_worker_seconds": 0.0905641798340242,
+      "mean_query_seconds": 0.08270151425226213,
+      "native_nodes": 0.12727825030376672,
+      "native_payload": 0.09989610322971088
+    },
+    "unknown_cases": {
+      "batch32": [
+        72,
+        73
+      ],
+      "pool": [
+        72,
+        73
+      ]
+    }
+  }
+}

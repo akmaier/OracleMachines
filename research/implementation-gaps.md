@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (19 November):
+Latest expansion checkpoint (22 November):
+[probing before support partitioning](probed-support-partition.md) preserves
+checked partial results and avoids preparing partitions for cheap native queries.
+The six-clause boundary improves from 75 to 26 expansions including the probe,
+but a fresh deletion regresses from 65 to 86. Its 61-expansion branch is saved
+with the exact pre-branch state as the next structural target. Automatic donor
+selection, source integration, continuation reuse and sidecar compression remain
+open. The general affine baseline is unchanged.
+
+Previous expansion checkpoint (19 November):
 [transported support partitions](transported-support-partition.md) establish a
 useful residual-level conditioning pattern and a failed admission heuristic.
 Case 31 improves from 69 to 17 expansions; two already cheap cases regress.

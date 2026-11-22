@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Probe cheap native queries before support partitioning](research/probed-support-partition.md).
+A short probe preserves checked partial proofs and avoids costly preparation for
+cheap queries. The six-clause boundary improves from 75 to 26 expansions, but a
+fresh deletion regresses from 65 to 86. Its dominant 61-expansion branch is saved
+for the next structural investigation. Storage and warm-setup regressions remain;
+the affine baseline stays in place.
+
 [Compose transported supports with missing clauses](research/transported-support-partition.md).
 A checked historical-prefix pilot cuts one residual's expansions from 69 to 17;
 its edit stream improves from 143 to 92 through the addition, while deletion

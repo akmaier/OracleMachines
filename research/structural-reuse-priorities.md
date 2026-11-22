@@ -1,6 +1,6 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-19 after the user's shift toward pattern discovery and a valid
+Updated 2026-11-22 after the user's shift toward pattern discovery and a valid
 partition of the entire SAT problem. This is the working record for the hourly
 investigation. Start with the [discovery plan](sat-pattern-discovery.md), then
 consult [implementation history](implementation-gaps.md),
@@ -12,7 +12,45 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: predict useful structure after missing-clause conditioning
+## Current investigation: the expensive branch left by a six-clause partition
+
+[Probe before partitioning](probed-support-partition.md) protects cheap native
+queries and retains checked proofs from a stopped eight-expansion probe. Probe
+and subsequent work share the same 256-expansion limit. The previous six-clause
+deletion boundary improves from **75 to 26 expansions**, including the probe;
+unprobed partitioning takes 18. Two cheap controls finish within the probe.
+
+Across three exposed targets and six fresh core-clause edits, combined query time
+falls **46.23% / 12.49%**, in both orders. All nine targets already finish under
+the baseline; no new whole-source coverage is claimed. Complete measured time
+changes by only **0.46% / 0.53%**, with mixed paired signs on the exposed cases.
+Endpoint checked objects shrink, but compressed deltas plus raw sidecars grow
+**26.73% / 77.09%** and warm setup plus lookup regresses. Keep the affine baseline.
+
+**Next primary target: the 61-expansion branch in fresh case 31's deletion.**
+That query regresses to **86 versus 65 expansions**, while the replacement takes
+28 versus 65. One branch accounts for **61 of 122 fresh-stream expansions**.
+`experiments/results/cnf-probed-partition/next-branch.json` binds its source and
+exact pre-branch proof state: the common prefix plus five earlier publications,
+with the branch's own root absent. Unit propagation leaves 920 residual literals.
+Inspect its shared-variable interactions and binary structure, then freeze one
+recognition/decomposition comparison that can explain this regression and
+transfer to fresh inputs. Do not import its final archived answer into the seed.
+
+The second fresh query reuses one native proof first published by the first query;
+formula changes also contribute, so this is not a causal runtime attribution.
+Probe-then-native repeats five incomplete expansions on the exposed hard case:
+completed proof retention does not preserve the search continuation. Automatic
+donor/map discovery and source-level composition remain major coverage gaps;
+continuation reuse and compact sidecars are supporting work.
+
+Resume `experiments/results/cnf-probed-partition/checkpoint.json`. Validation:
+**1,388 full / 70 focused tests**, 90 attempts, 24 new partition records and
+**74,517 cumulative native records**. All prior sources, artifacts and proof
+payloads are retained. Limits bound selected operations, not arbitrary-SAT time
+or memory; supplied candidates still require automatic discovery evidence.
+
+## Previous checkpoint: predict useful structure after missing-clause conditioning
 
 [Transported support partitions](transported-support-partition.md) now combine
 bounded causal extraction, checked transport and the existing first-false rule.

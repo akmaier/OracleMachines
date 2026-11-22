@@ -5,7 +5,22 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: conditioning can expose useful binary structure
+## Latest evidence: cheap probes and an expensive residual branch
+
+The [probe/partition experiment](probed-support-partition.md) widens the supplied
+support gap to six clauses and retains checked proof prefixes from a short native
+probe. It avoids preparing partitions for cheap queries. Query totals improve on
+both the exposed boundary and six new edits, but all targets already close under
+the baseline. This adds a tested strategy, not a new tractable class.
+
+A fresh deletion remains informative: the combined policy spends 86 expansions
+where native solving spends 65, with 61 in one branch. Its exact pre-branch state
+is saved without the later answer. The next recognition target is the binary
+and shared-variable structure inside this branch. Donor selection and original
+source-query integration remain open; a residual conclusion cannot discharge
+unrepresented source branches or assumptions. See the [ranked costs](structural-reuse-priorities.md).
+
+## Previous evidence: conditioning can expose useful binary structure
 
 The [transported-support pilot](transported-support-partition.md) checks a
 first-false cover when two to five clauses of a transported UNSAT support are

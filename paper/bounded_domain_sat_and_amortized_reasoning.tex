@@ -8828,6 +8828,79 @@ Compact sidecar storage is supporting work. The affine policy remains the
 baseline: neither posthoc order selection nor this small supplied-candidate
 study establishes efficient expansion for arbitrary SAT.
 
+\paragraph{Probing cheap queries before preparing a partition.}
+The six-clause boundary motivates a further controlled experiment. We first allow
+up to eight native expansions. A completed probe returns its checked answer
+without support preparation. When the expansion budget stops the probe, we commit
+its pending checked proof nodes, then attempt a reverse first-false partition
+with two to six missing clauses. Probe and subsequent acquisition share one total
+of 256 native expansions. A native-only probe/fallback arm separates restart
+overhead from the benefit of partitioning.
+
+The retained prefix is sound because native publication checks each node and its
+dependencies before insertion. These nodes describe completed subproblems; the
+incomplete queried root remains unknown. Committing them does not interpret a
+budget stop as UNSAT. Unexpected exceptions and failed commits retain the previous
+rollback and checked-cache invalidation behavior. The search stack is not saved:
+we restart using persisted proofs, so unfinished work can be repeated. Neither
+the eight-expansion probe nor the total expansion cap bounds normalization,
+prerequisite verification, database work, time or memory.
+
+Five policies run in separate serial processes in two opposite orders: the affine
+baseline, native-only solving, probe then native fallback, unconditional reverse
+six-clause partitioning, and probe then partitioning. Their cold seeds contain
+only the earlier historical prefix and the preceding experiment's first addition
+proofs. Deletion answers and later work are excluded. Three exposed deletion
+targets and six new core-clause edits supply nine absent query roots; the new
+roots are also absent from the preceding cumulative union. The candidate origins
+and variable maps remain supplied. These are local residual tests, not automatic
+whole-source discovery or representative external SAT evaluation.
+
+Every arm solves all nine targets as UNSAT. The combined policy reduces recorded
+expansions from 81 to 32 on the exposed cases and from 138 to 122 on the fresh
+edits. Mean aggregate query time falls from 0.16900 to 0.09087 seconds and from
+0.36859 to 0.32256 seconds: reductions of 46.23\% and 12.49\%, with both paired
+orders favourable. On the original case-31 deletion, the matched cold baseline
+takes 75 expansions. The partition alone takes 18, and the combined policy takes
+26, including its eight-expansion probe. Query time falls from 0.15347 to 0.07738
+seconds. The probe retains three checked records but does not reduce this
+partition's expansion count. Probe then native fallback instead takes 80
+expansions: five incomplete expansions are repeated. Cases 25 and 61 finish
+within two and four probe expansions, avoiding their preparation regressions.
+
+The fresh case-31 deletion remains a counterexample to uniformly cheaper
+expansion. The combined policy takes 86 expansions where the baseline takes 65.
+Its six branch counts are 1, 61, 1, 10, 1 and 4, before the eight-expansion probe.
+The following replacement takes 28 rather than 65 expansions. Its proof graph
+uses one native record first published by the preceding query and absent from
+the common seed. This identifies exact saved-result reuse, but formula changes
+also matter; an independent cold comparison is needed to attribute the timing
+difference. Unconditional partitioning raises aggregate fresh query time to
+0.38211 seconds despite fewer expansions. Probe then native fallback costs
+0.38244 seconds. The combination helps this stream, not every individual input.
+
+Complete measured worker time changes by only 0.46\% on the exposed cases and
+0.53\% on the fresh edits; the exposed paired signs are mixed. Full-prefix
+restoration and replay dominate those totals. Endpoint checked-object sums fall
+47.07\% and 5.05\%, while SQLite endpoints shrink only 0.44\% and 0.24\%.
+These are sums across three independent states, not peak memory bounds. The
+compressed proof deltas plus raw partition sidecars grow from 64,399 to 81,616
+bytes and from 118,075 to 209,095 bytes. Warm-bank setup plus lookup also regresses,
+from 0.00378 to 0.01000 seconds and from 0.00682 to 0.01995 seconds. The saved
+sidecars and setup costs must remain in the accounting.
+
+The dominant remaining fresh acquisition is now one 61-expansion branch. We save
+its exact source and pre-branch proof state: the common prefix plus five committed
+records from the probe, premise and completed first branch. Its root is absent
+from that state, and unit propagation leaves 920 residual literals. This isolates
+a concrete structural target without importing its later answer. The next
+investigation should explain its binary and shared-variable interactions and
+validate a transferable recognition or decomposition change. Automatic candidate
+retrieval, composition back into original source queries, continuation reuse and
+compact sidecars remain open. The general affine baseline stays in place; this
+experiment establishes neither a new tractable class nor polynomial expansion
+for unrestricted SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -4,7 +4,15 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (22 November, binary target rankings):
+Latest expansion checkpoint (22 November, routing counterexample):
+[matched-state routing](binary-routing.md) confirms the local policy effect and
+rejects a false-only cofactor guard as a speed optimization. It lowers ordinary
+expansion counts slightly but raises query time on controls and new edits. The
+first later divergence has a checked true-cofactor contradiction missed by the
+gate. Its exact pre-target state is saved for polarity-sensitive recognition and
+signed-variant comparisons. General solver defaults remain unchanged.
+
+Previous expansion checkpoint (22 November, binary target rankings):
 [bounded binary targets](ranked-binary-targets.md) reduce the exposed branch from
 61 to nine expansions and six new residual edits from 107 to 51. Native proof
 rules are unchanged. A replacement branch regresses from ten to 33 despite the

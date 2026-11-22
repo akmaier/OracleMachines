@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Control routing and probe polarity](research/binary-routing.md).
+An identical-state comparison confirms the routing regression. A false-only
+cofactor guard lowers expansion counts but increases query time, so it is kept
+as an unsuccessful experiment. A missed, checked true-cofactor contradiction is
+the next precise discovery target.
+
 [Choose binary consequences beyond the next split variable](research/ranked-binary-targets.md).
 Binary-frequency targeting cuts the saved branch from 61 to nine expansions and
 six new residual edits from 107 to 51. Another branch regresses from ten to 33,

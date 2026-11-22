@@ -12,7 +12,39 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: choose a useful binary consequence without bad routing
+## Current investigation: probe polarity at a verified routing counterexample
+
+The [matched-state routing study](binary-routing.md) reproduces the saved
+regression at **10 / 35 / 33 expansions** from identical persistent state.
+Different earlier archives therefore do not explain this local policy effect.
+A checked default-false cofactor guard was implemented and tested, but is **not
+promoted**: it changes control expansions **88 -> 86** and new-edit expansions
+**53 -> 52**, while query time rises **4.32% / 4.82%** in both orders. Extra
+propagation, checking and direct publication outweigh those small count changes.
+
+**Next primary target: the unprobed true cofactor at the first later divergence.**
+The original policy selects variable 76; the guard chooses binary-forced variable
+8. The false cofactor of 76 produces no unit deduction, while its true cofactor
+has an independently checked contradiction after 39 forced assignments. Compare
+both-polarity probing or justified polarity selection, with signed variants and
+fresh edits. Charge both successes and misses; reuse checked cofactor evidence.
+
+`experiments/results/cnf-binary-routing/next-target.json` binds the 285-clause,
+784-literal residual and exact pre-target availability: the saved regression
+prefix plus one checked earlier publication. Instrumentation stops before the
+target is visited. A fresh reader verifies this prefix and confirms the target
+root is absent. Do not seed the next comparison from the final union.
+
+The false-only guard remains preserved as a failed optimization. Its expansion
+counter excludes direct probe work, which is separately measured. No new
+whole-source coverage is established. Automatic retrieval, source composition,
+compact sidecars and cost-aware continuation selection remain open.
+
+Resume `experiments/results/cnf-binary-routing/checkpoint.json`. The old source
+and artifact ledgers, exploratory proofs, first-pass timings and repeated timing
+stratum are retained. The general solver defaults stay unchanged.
+
+## Previous checkpoint: choose a useful binary consequence without bad routing
 
 [Bounded binary target rankings](ranked-binary-targets.md) resolve the saved
 61-expansion branch in **25 expansions** with four total-frequency targets and

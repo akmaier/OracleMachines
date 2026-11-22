@@ -5,7 +5,21 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: a forced consequence can expose a cheaper continuation
+## Latest evidence: a routing regression survives an insufficient guard
+
+The [matched-state study](binary-routing.md) confirms that target policy alone
+reproduces the ten-versus-33 expansion difference on the exposed residual.
+Checking the ordinary split's false cofactor before selecting another binary
+consequence saves only one expansion there and increases aggregate control and
+new-edit query time. The unsuccessful rule and all proofs remain preserved.
+
+The next exact counterexample has a unit-refutable **true** cofactor, which the
+false-only gate misses. Test polarity selection and signed variants from the
+saved pre-target state. This is a concrete discovery restriction, not a new
+tractable SAT class. Coverage still depends on supplied donors/maps and residual
+to source composition. See the [ranked gaps](structural-reuse-priorities.md).
+
+## Previous evidence: a forced consequence can expose a cheaper continuation
 
 The [bounded target-ranking comparison](ranked-binary-targets.md) finds two binary
 consequences missed by the previous candidate selection. The saved branch falls

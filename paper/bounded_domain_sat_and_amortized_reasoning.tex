@@ -8938,6 +8938,35 @@ expansions. These policies remain optional. The evidence concerns local residual
 acquisition with supplied candidates, not automatic whole-source coverage,
 a new tractable class or uniformly efficient SAT expansion.
 
+\paragraph{A checked cofactor guard can lower counts without lowering cost.}
+Restoring the same persistent pre-branch state reproduces ten, 35 and 33 native
+expansions for the original, four-target and binary-frequency rankings on the
+regressing residual. This controls the earlier-archive confound. We then test a
+local guard: when binary-frequency discovery chooses a different variable from
+the ordinary split, inspect the ordinary variable's false cofactor. A cached
+negative or a checked unit contradiction licenses solving only its true cofactor.
+A miss grants no verdict. The new unit proof and final split use the unchanged
+native checker. Shape limits bound admission, while normalization, propagation,
+verification and publication remain charged.
+
+On six prior controls, the guard changes 88 ordinary expansions to 86 but raises
+mean query time from 0.23293 to 0.24299 seconds. On six new local edits it changes
+53 to 52 and raises time from 0.18176 to 0.19052 seconds. Both orders regress in
+each group. The extra propagation costs 26,736 and 23,815 literal visits,
+respectively. Directly compiling a refuted cofactor reduces an expansion counter
+without removing that computation. New-edit payload also grows from 467,415 to
+481,103 bytes. We retain this unsuccessful optimization and keep the previous
+policies.
+
+The guarded regression still takes 32 expansions. At the first later common
+residual, the original policy selects variable 76 and the guard selects variable
+8. Variable 76's false cofactor yields no unit deduction, but its true cofactor
+has a checked unit refutation after 39 assignments. Thus the fixed false polarity
+misses an available deduction. We preserve the exact pre-target state without its
+later answer. Comparing both polarities or a justified polarity choice, including
+signed variants and full probe costs, is the next step. This counterexample
+constrains the routing heuristic; it implies no efficient unrestricted-SAT bound.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

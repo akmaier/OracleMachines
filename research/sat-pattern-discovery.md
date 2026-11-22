@@ -5,7 +5,22 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: cheap probes and an expensive residual branch
+## Latest evidence: a forced consequence can expose a cheaper continuation
+
+The [bounded target-ranking comparison](ranked-binary-targets.md) finds two binary
+consequences missed by the previous candidate selection. The saved branch falls
+from 61 to nine expansions, and six new local edits fall from 107 to 51. All
+16 targets already finish under the baseline, so this improves acquisition rather
+than decision coverage. Existing native path checking and compilation suffice.
+
+The main counterexample is a replacement branch that rises from ten to 33
+expansions. Its earlier reused proof is still present, so the next comparison
+must isolate routing from an identical pre-branch state. A useful consequence
+need not induce the cheapest cofactor. Automatic donor/map retrieval, source
+composition and arbitrary wide-clause interaction remain open. The [ranked
+cost record](structural-reuse-priorities.md) identifies the saved next target.
+
+## Previous evidence: cheap probes and an expensive residual branch
 
 The [probe/partition experiment](probed-support-partition.md) widens the supplied
 support gap to six clauses and retains checked proof prefixes from a short native

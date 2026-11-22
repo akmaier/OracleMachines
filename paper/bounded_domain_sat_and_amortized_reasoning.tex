@@ -8901,6 +8901,43 @@ compact sidecars remain open. The general affine baseline stays in place; this
 experiment establishes neither a new tractable class nor polynomial expansion
 for unrestricted SAT.
 
+\paragraph{Choosing a binary consequence beyond the next split variable.}
+The saved 61-expansion branch has 125 variables, 58 binary clauses and 268 ternary
+clauses in one component. Its binary implication graph has no nontrivial strongly
+connected component, but still forces two signed literals. Neither is found by
+the bounded whole-cover search or the subsequent search for the most frequent
+variable. We preserve the whole-cover phase and compare two final target rankings:
+the first four variables by total occurrence count, or one variable by binary
+occurrence count. Both share the existing implication graph and completed searches.
+Every selected path is checked and compiled through the unchanged native proof
+rules. A forced variable leaves a cofactor to solve; it does not certify that the
+remaining computation is cheap.
+
+Three policies run in two opposite serial orders on the isolated branch, nine
+previous targets and six new neighbouring edits. All 16 targets remain UNSAT
+under every policy. The isolated branch takes 61 expansions under the original
+ranking, 25 under the four-target ranking and nine under binary-frequency ranking.
+For binary-frequency ranking, aggregate expansions on the six new edits fall
+from 107 to 51, and query time from 0.35625 to 0.18101 seconds. The 49.19\% query
+reduction occurs in both orders. Complete measured time falls only 2.63\%, from
+24.97835 to 24.32241 seconds. New native payload falls from 1,123,355 to 466,555
+bytes, but compressed proof deltas plus raw sidecars fall more modestly, from
+199,383 to 149,999 bytes. Prefix replay, stored history and unchanged sidecars
+remain charged.
+
+A replacement exposes the limit of this ranking. Its total acquisition rises
+from 28 to 51 expansions, with one first-false branch rising from ten to 33.
+The preceding deletion improves from 86 to 29, so their combined stream still
+benefits. A dependency audit finds that the one earlier proof reused by the
+original policy remains available and is used in a different branch. The
+regressing branch's final proofs have no prior-query dependencies under either
+policy. Losing that earlier proof therefore does not explain the regression;
+a matched pre-branch comparison is needed to isolate routing effects. On the
+three exposed boundary targets, mean query time also rises 1.63\% despite fewer
+expansions. These policies remain optional. The evidence concerns local residual
+acquisition with supplied candidates, not automatic whole-source coverage,
+a new tractable class or uniformly efficient SAT expansion.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

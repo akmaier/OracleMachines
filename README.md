@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Choose binary consequences beyond the next split variable](research/ranked-binary-targets.md).
+Binary-frequency targeting cuts the saved branch from 61 to nine expansions and
+six new residual edits from 107 to 51. Another branch regresses from ten to 33,
+so cost-aware routing remains the next gap. All proof records and failed cases
+are retained; the general solver default is unchanged.
+
 [Probe cheap native queries before support partitioning](research/probed-support-partition.md).
 A short probe preserves checked partial proofs and avoids costly preparation for
 cheap queries. The six-clause boundary improves from 75 to 26 expansions, but a

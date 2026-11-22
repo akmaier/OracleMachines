@@ -4,7 +4,15 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (22 November):
+Latest expansion checkpoint (22 November, binary target rankings):
+[bounded binary targets](ranked-binary-targets.md) reduce the exposed branch from
+61 to nine expansions and six new residual edits from 107 to 51. Native proof
+rules are unchanged. A replacement branch regresses from ten to 33 despite the
+original reused earlier proof still being available. Its exact pre-branch state
+is saved for a controlled routing comparison. Keep the policy optional; automatic
+retrieval, source composition and unrestricted-SAT bounds remain open.
+
+Previous expansion checkpoint (22 November):
 [probing before support partitioning](probed-support-partition.md) preserves
 checked partial results and avoids preparing partitions for cheap native queries.
 The six-clause boundary improves from 75 to 26 expansions including the probe,

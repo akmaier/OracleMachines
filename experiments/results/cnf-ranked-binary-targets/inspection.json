@@ -1,0 +1,204 @@
+{
+  "binary": {
+    "forced_literals": [
+      -50,
+      117
+    ],
+    "kind": "dag",
+    "removable_wide_clauses": [
+      18,
+      28,
+      41,
+      50,
+      68,
+      90,
+      101,
+      112,
+      122,
+      129,
+      130,
+      131,
+      146,
+      191,
+      217,
+      222,
+      235,
+      270,
+      288,
+      312,
+      315
+    ]
+  },
+  "branch": {
+    "path": "experiments/results/cnf-probed-partition/next-branch.json",
+    "sha256": "58b024231536ffd385be877a6b3c6fa5b0f0caf0579cf6bfa801a1f66818f567"
+  },
+  "candidates": {
+    "binary1": [
+      null,
+      null,
+      [
+        {
+          "literal": 50,
+          "path": [
+            [
+              -64,
+              203
+            ],
+            [
+              -6,
+              291
+            ],
+            [
+              -50,
+              233
+            ]
+          ]
+        }
+      ]
+    ],
+    "total4": [
+      null,
+      null,
+      [
+        {
+          "literal": -117,
+          "path": [
+            [
+              50,
+              316
+            ],
+            [
+              -64,
+              203
+            ],
+            [
+              -6,
+              291
+            ],
+            [
+              -50,
+              233
+            ],
+            [
+              117,
+              316
+            ]
+          ]
+        }
+      ]
+    ]
+  },
+  "counterchecks": [
+    {
+      "forced": -50,
+      "refutation": {
+        "backward": [
+          [
+            -50,
+            31
+          ],
+          [
+            50,
+            58
+          ],
+          [
+            6,
+            31
+          ]
+        ],
+        "forward": [
+          [
+            64,
+            41
+          ],
+          [
+            -50,
+            25
+          ],
+          [
+            50,
+            58
+          ],
+          [
+            -64,
+            25
+          ],
+          [
+            -6,
+            41
+          ]
+        ],
+        "kind": "implications",
+        "variable": 6
+      }
+    },
+    {
+      "forced": 117,
+      "refutation": {
+        "backward": [
+          [
+            -50,
+            31
+          ],
+          [
+            117,
+            52
+          ],
+          [
+            -117,
+            58
+          ],
+          [
+            50,
+            52
+          ],
+          [
+            6,
+            31
+          ]
+        ],
+        "forward": [
+          [
+            64,
+            41
+          ],
+          [
+            -50,
+            25
+          ],
+          [
+            117,
+            52
+          ],
+          [
+            -117,
+            58
+          ],
+          [
+            50,
+            52
+          ],
+          [
+            -64,
+            25
+          ],
+          [
+            -6,
+            41
+          ]
+        ],
+        "kind": "implications",
+        "variable": 6
+      }
+    }
+  ],
+  "limitations": [
+    "Unbounded read-only posthoc census; excluded from comparative query timing. Candidate policies chosen after this exposed branch."
+  ],
+  "original_target": [
+    null,
+    null,
+    null
+  ]
+}

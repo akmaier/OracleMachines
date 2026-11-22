@@ -12,7 +12,42 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: the expensive branch left by a six-clause partition
+## Current investigation: choose a useful binary consequence without bad routing
+
+[Bounded binary target rankings](ranked-binary-targets.md) resolve the saved
+61-expansion branch in **25 expansions** with four total-frequency targets and
+**nine** with one binary-frequency target. The earlier recognizer missed two
+binary-forced literals because it targeted a different variable. Whole-cover
+recognition, native proof checking and compilation remain unchanged.
+
+On six new residual edits, binary-frequency targeting reduces expansions
+**107 -> 51** and query time **49.19%** in both orders. Complete measured time
+falls **2.63%**; compressed deltas plus raw sidecars shrink **199,383 -> 149,999
+bytes**. All 16 targets already close under the baseline. Donors/maps remain
+supplied, and the general affine policy stays unchanged.
+
+**Next primary target: the replacement branch that regresses from 10 to 33
+expansions.** Its whole query rises **28 -> 51**, although the preceding deletion
+improves **86 -> 29**. The original policy's one reused previous-query proof is
+still available and belongs to another branch. The costly branch's final proofs
+have no seed or previous-query dependencies under any policy. Do not attribute
+this regression to lost earlier results without a controlled test.
+
+`experiments/results/cnf-ranked-binary-targets/next-target.json` binds the exact
+source and persistent pre-branch state: the common prefix plus 35 earlier
+publications, with the target root absent. Compare rankings from this identical
+state, then inspect which cofactor structures distinguish useful and expensive
+forced-variable choices. Fixed occurrence rankings can still pick a costly
+continuation. On the exposed boundary, query time also regresses 1.63% despite
+fewer expansions; full replay and warm reuse do not consistently improve.
+
+Resume `experiments/results/cnf-ranked-binary-targets/checkpoint.json`.
+**1,394 full / 76 focused tests**, 96 chronological attempts and cumulative replay
+pass. Preserve **74,879 native records**, all previous payloads and alternate
+trial proofs. Automatic retrieval, source composition and compact sidecars remain
+coverage and storage gaps; this local result proves no uniform SAT bound.
+
+## Previous checkpoint: the expensive branch left by a six-clause partition
 
 [Probe before partitioning](probed-support-partition.md) protects cheap native
 queries and retains checked proofs from a stopped eight-expansion probe. Probe

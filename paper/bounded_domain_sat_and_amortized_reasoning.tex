@@ -8963,9 +8963,48 @@ residual, the original policy selects variable 76 and the guard selects variable
 8. Variable 76's false cofactor yields no unit deduction, but its true cofactor
 has a checked unit refutation after 39 assignments. Thus the fixed false polarity
 misses an available deduction. We preserve the exact pre-target state without its
-later answer. Comparing both polarities or a justified polarity choice, including
-signed variants and full probe costs, is the next step. This counterexample
+later answer. The following comparison checks both polarities, including
+signed variants and full probe costs. This counterexample
 constrains the routing heuristic; it implies no efficient unrestricted-SAT bound.
+
+\paragraph{Recognizing both polarities still requires cost-aware admission.}
+The next frozen experiment checks both cofactors of the ordinary split before
+following a different binary-forced variable. A checked negative cofactor permits
+searching only the other; a miss grants no verdict. Positive witnesses and two
+negative children use the unchanged native model and split rules. Completed
+cofactor proofs are retained, while inconclusive propagation can be repeated.
+At most two probes are admitted under the preceding shape limits. Each current
+repeated-scan propagation costs $O((V+1)L)$ literal visits and $O(L+V)$ working
+words; normalization, historical dependency checking, publication and surviving
+search remain additional. Direct probes are not ordinary native expansions.
+
+We compare four policies in two opposite serial orders on six previous edit
+controls, six new nearby edits, and the exposed residual under three sign choices:
+unchanged, variable 76 flipped, and every literal complemented. The sign variants
+restore the same pre-target proof state independently. Both-polarity probing takes
+four expansions on each, compared with 30 for binary-frequency routing and 30,
+four and five for the false-only guard. Query time falls from approximately
+58\,ms to 14--15\,ms relative to binary-frequency routing. The original ordinary
+policy already takes seven expansions and about 15\,ms. This primarily repairs
+a routing regression; it does not establish superiority over all policies.
+
+The broader comparison rejects unconditional promotion. Controls and new edits
+both change from 53 to 54 expansions, with query time increasing 21.31\% and
+18.85\%, respectively, in both orders. New-edit native key/payload bytes grow
+from 466,301 to 631,623, and compressed deltas plus raw sidecars from 150,206 to
+163,969 bytes. Complete measured time changes by $+1.22\%$ on controls and
+$-0.37\%$ on edits, the latter with mixed order signs; historical checking and
+reconstruction dominate this measurement harness. All 15 targets already close
+under the original policy, so decision coverage does not increase.
+
+A posthoc profile preserves the largest new-edit query regression, 90.47 to
+110.66\,ms. Instrumented replay reproduces the frozen proof payloads and finds
+normalization calls increasing from 110 to 130, publication calls from 30 to 39,
+and propagation calls from 23 to 32. These overlapping costs include changed
+proof graphs, not just repeated scans. The next question is whether source-bound
+prepared cofactors and propagation evidence can be shared, and when admission
+is worthwhile. More recognized deductions alone establish neither cheaper
+expansion nor an efficient class covering arbitrary SAT.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}

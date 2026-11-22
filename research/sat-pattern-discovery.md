@@ -5,7 +5,22 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: a routing regression survives an insufficient guard
+## Latest evidence: polarity-complete probing still needs cost-aware admission
+
+[Checking both cofactors](bipolar-routing.md) recognizes the missed deduction
+on the saved residual and both tested sign variants. Each takes four ordinary
+expansions instead of 30 under binary-frequency routing. The native unit and
+split checkers validate either polarity; no new trusted proof rule is needed.
+
+The added recognition also increases query time and retained proof size on
+nearby edits. These are routing and acquisition results: all comparison targets
+already close under the original policy. They add no whole-source coverage cell
+or efficient partition of arbitrary SAT. The next gap is pricing the probes and
+the surviving search together, with source-bound reuse of completed evidence
+and explicit accounting for inconclusive propagation. The profiles and exact
+pre-query publications are retained in the [ranked gaps](structural-reuse-priorities.md).
+
+## Previous evidence: a routing regression survives an insufficient guard
 
 The [matched-state study](binary-routing.md) confirms that target policy alone
 reproduces the ten-versus-33 expansion difference on the exposed residual.

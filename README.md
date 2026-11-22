@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Check both cofactor polarities](research/bipolar-routing.md).
+The two-polarity guard reduces the saved residual and both sign variants from
+30 to four expansions. It fixes the demonstrated recognition blind spot, but
+raises time and proof storage on nearby edit streams. Keep it optional; cheaper
+probe admission and reuse of propagation work are the next cost questions.
+
 [Control routing and probe polarity](research/binary-routing.md).
 An identical-state comparison confirms the routing regression. A false-only
 cofactor guard lowers expansion counts but increases query time, so it is kept

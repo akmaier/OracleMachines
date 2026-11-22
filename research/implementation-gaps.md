@@ -4,7 +4,15 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (22 November, routing counterexample):
+Latest expansion checkpoint (22 November, both cofactor polarities):
+[Two-polarity recognition](bipolar-routing.md) closes the saved fixed-polarity
+blind spot: all three sign variants take four expansions versus 30 under
+binary-frequency routing. The extra probes increase time and proof storage on
+nearby edits. The policy remains experimental. Price recognition and the surviving
+continuation together; retain completed cofactor proofs and investigate reuse of
+propagation work. No new whole-source coverage or unrestricted bound is claimed.
+
+Previous expansion checkpoint (22 November, routing counterexample):
 [matched-state routing](binary-routing.md) confirms the local policy effect and
 rejects a false-only cofactor guard as a speed optimization. It lowers ordinary
 expansion counts slightly but raises query time on controls and new edits. The

@@ -12,7 +12,43 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: probe polarity at a verified routing counterexample
+## Current investigation: price recognition and the surviving continuation
+
+The [two-polarity experiment](bipolar-routing.md) fixes the saved blind spot:
+the original residual, variable-76 sign flip and global complement all take
+**four versus 30 expansions** under binary-frequency routing. Checking either
+negative cofactor uses unchanged native proof rules and preserves completed
+evidence. The false-only rule takes 30, four and five expansions respectively.
+
+The rule is **not promoted**. Query time rises **21.31% on controls and 18.85% on
+new edits**, with both orders worse. New-edit native payload grows **35.45%**.
+More recognition can change the continuation unfavourably; a
+successful local deduction does not establish a total-cost saving. Direct probe
+work remains separate from the ordinary expansion counter.
+
+**Next primary target: cheaper admission and shared prepared cofactors.**
+Use the saved paired trials and posthoc profile in
+`experiments/results/cnf-bipolar-routing/next-target.json`. The selected deletion
+rises from **90.47 to 110.66 ms**. Native normalization calls rise **110 -> 130**,
+publication calls **30 -> 39**, and propagation calls **23 -> 32**. These costs
+overlap and reflect changed proof graphs too; do not assume every new call is
+redundant. Investigate sharing exact prepared cofactors, normalization and checked
+propagation evidence across discovery and acquisition. Compare any
+bounded/event-driven propagation or continuation policy
+against binary-frequency routing on fresh cases; preserve the regression and
+charge proof checking and storage. A source-bound completed proof can be reused;
+an inconclusive probe cannot be treated as a solved cofactor.
+
+Full cold checking and reconstruction dominate complete measured worker time;
+the new-edit complete-time mean changes only -0.37% with mixed order signs.
+Reducing acquisition alone will not remove that historical replay cost.
+
+Resume `experiments/results/cnf-bipolar-routing/checkpoint.json`. Donor selection
+and maps remain supplied. Automatic retrieval, source composition and compact
+sidecars are still broader coverage/storage gaps. No uniform arbitrary-SAT
+efficiency or new tractable class follows from this local recognition change.
+
+## Previous checkpoint: probe polarity at a verified routing counterexample
 
 The [matched-state routing study](binary-routing.md) reproduces the saved
 regression at **10 / 35 / 33 expansions** from identical persistent state.

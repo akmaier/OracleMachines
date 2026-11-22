@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Reuse prepared cofactor normalization](research/prepared-cofactors.md).
+A bounded memo removes about 7% of normalizer input work on nearby edits while
+preserving every proof byte. New-edit query time still rises 0.75%; lookup and
+validation costs offset the reuse. It remains optional. Next: direct handoff of
+prepared cofactors and useful propagation evidence, with probe admission charged.
+
 [Check both cofactor polarities](research/bipolar-routing.md).
 The two-polarity guard reduces the saved residual and both sign variants from
 30 to four expansions. It fixes the demonstrated recognition blind spot, but

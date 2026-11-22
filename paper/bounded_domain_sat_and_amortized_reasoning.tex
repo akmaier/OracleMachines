@@ -9006,6 +9006,46 @@ prepared cofactors and propagation evidence can be shared, and when admission
 is worthwhile. More recognized deductions alone establish neither cheaper
 expansion nor an efficient class covering arbitrary SAT.
 
+\paragraph{Normalization savings can be smaller than lookup costs.}
+We next retain pure cofactor-normalization triples produced by probes and reuse
+them only in native visits or negative-child checks. Exact raw inputs and original
+variable names remain bound together. Consumers validate nonzero integer literals
+before equality lookup; cached normalization grants no proof authority. All child,
+model and certificate checks remain unchanged. A query-local 256\,KiB cap charges
+retained tuple, string, integer and dictionary objects. Entries clear on success
+or failure and are not persisted. Transient construction and whole-process memory
+are outside this cap.
+
+Three policies, two opposite serial orders and 15 targets compare binary-frequency
+routing, two-polarity routing, and the latter with this memo. The memo preserves
+every native proof byte, decision, model, partition and expansion count. On six
+new edits it reuses 13 normalizations and reduces normalizer input-literal visits
+from 132,839 to 123,095, a 7.34\% decrease. Nevertheless, query time rises from
+0.22539 to 0.22709 seconds, with both orders worse. There are 101 misses besides
+the 13 hits; consumer snapshots and validation visit 67,057 literals, and producer
+snapshotting and sizing each visit another 16,961. These are different operations,
+so their counts cannot be substituted for measured runtime.
+
+Native key/payload space stays at 659,675 bytes and compressed deltas plus raw
+sidecars at 167,221 bytes. Maximum retained memo charge across the trials is
+215,699 bytes. An independent object-graph audit of 22 admissions in the selected
+fresh stream finds at most 159,794 actual graph bytes below its 215,169-byte
+charge. Complete new-edit time changes only $-0.01\%$, with mixed order signs;
+control query time rises 0.69\%. We retain this unsuccessful speed optimization
+without changing defaults. Binary-frequency routing still takes 53 expansions
+on the new edits, against 61 for both two-polarity arms.
+
+A posthoc profile of the largest fresh query reduces normalization calls from
+130 to 122 while leaving 39 publications and 33 propagations. This motivates
+handing prepared work directly to the selected child rather than probing unrelated
+consumers. Non-conflicting unit traces may also provide reusable preparation,
+but cannot certify satisfiability. A separate census finds only three unit-free
+calls among 22 cofactor propagations, so skipping vacuous propagation alone would
+address a small part of this stream. Cached negative cofactors, discovery
+priority, exact bindings and all proof obligations must remain explicit. These
+results concern acquisition costs, not broader decision coverage or a new
+unrestricted-SAT bound.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

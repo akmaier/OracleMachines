@@ -4,7 +4,14 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (22 November, both cofactor polarities):
+Latest expansion checkpoint (23 November, prepared cofactors):
+[Targeted normalization reuse](prepared-cofactors.md) preserves exact proof bytes
+and removes 7.34% of normalizer input work on new edits, but increases query time
+0.75%. Keep it optional. The saved dominant query motivates a direct prepared-child
+handoff and sharing useful unit traces; cached-negative lookup and unchanged
+proof checking remain required. The two-polarity routing regression is still open.
+
+Previous expansion checkpoint (22 November, both cofactor polarities):
 [Two-polarity recognition](bipolar-routing.md) closes the saved fixed-polarity
 blind spot: all three sign variants take four expansions versus 30 under
 binary-frequency routing. The extra probes increase time and proof storage on

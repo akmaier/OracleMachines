@@ -5,7 +5,21 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: polarity-complete probing still needs cost-aware admission
+## Latest evidence: a reuse hit must pay for its recognition
+
+The [prepared-cofactor comparison](prepared-cofactors.md) preserves every proof
+byte and decision while reducing normalizer input work by 7.34% on new edits.
+Query time rises 0.75%. The memo has 101 misses for 13 hits; its added
+work offsets the normalization saving. This is a checked negative result for a
+reuse strategy, not a new SAT class.
+
+Next, test a direct handoff to the selected child and reuse of source-bound unit
+propagation evidence. Preserve discovery priority, negative-cache lookup and
+source-model checking. All 15 targets already close under the comparison policies;
+a narrower preparation mechanism would improve acquisition only. Automatic
+whole-source coverage and uniformly cheap unrestricted expansion remain open.
+
+## Previous evidence: polarity-complete probing still needs cost-aware admission
 
 [Checking both cofactors](bipolar-routing.md) recognizes the missed deduction
 on the saved residual and both tested sign variants. Each takes four ordinary

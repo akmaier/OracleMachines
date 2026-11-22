@@ -1,6 +1,6 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-22 after the user's shift toward pattern discovery and a valid
+Updated 2026-11-23 after the user's shift toward pattern discovery and a valid
 partition of the entire SAT problem. This is the working record for the hourly
 investigation. Start with the [discovery plan](sat-pattern-discovery.md), then
 consult [implementation history](implementation-gaps.md),
@@ -12,7 +12,37 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: price recognition and the surviving continuation
+## Current investigation: avoid broad lookup for prepared work
+
+The [prepared-cofactor memo](prepared-cofactors.md) reuses 13 exact normalization
+results on six new edits, reducing normalizer input-literal visits **7.34%**.
+Every proof payload, decision and expansion is identical to two-polarity routing.
+Mean query time nevertheless rises **0.75%, with both orders worse**. There are **101 misses
+for 13 hits**, plus snapshots, validation, sizing and eviction. The bounded memo
+remains an unsuccessful speed optimization. Persistent proof storage is unchanged.
+
+**Next primary target: direct handoff of prepared cofactors and unit traces.**
+The largest fresh prepared query takes **110.66 ms**. Its profile reduces native
+normalization calls **130 -> 122**, while publication remains 39 and propagation 33.
+Avoid checking unrelated consumers for a memo hit. Pass immutable prepared work
+to the actual selected child, and investigate sharing a non-conflicting unit trace
+without changing discovery priority or treating it as a SAT answer. Exact raw
+source, assignment, variable-name map and checker bindings remain necessary.
+
+`experiments/results/cnf-prepared-cofactors/next-target.json` binds the source,
+pre-query prefix, paired profiles and a separate object-graph/probe audit. Only
+three of 22 probe calls are unit-free, accounting for 2,378 literal visits, so a
+trivial propagation screen is only a partial opportunity. Cached negative
+cofactors still require lookup even when no unit deduction is possible.
+
+The larger admission/continuation gap remains: binary-frequency routing takes 53
+expansions on these edits, against 61 for both two-polarity arms. Changing only
+normalization cannot eliminate the additional search/proof graph. Compare new
+policies against both. Cold replay, automatic donors/maps, source recomposition
+and compact sidecars remain wider gaps. Resume
+`experiments/results/cnf-prepared-cofactors/checkpoint.json`.
+
+## Previous checkpoint: price recognition and the surviving continuation
 
 The [two-polarity experiment](bipolar-routing.md) fixes the saved blind spot:
 the original residual, variable-76 sign flip and global complement all take

@@ -9390,6 +9390,59 @@ bank and with discovery, transport and checking charged. A small trace obtained
 after solving does not imply cheap recognition beforehand. No new coverage cell,
 uniform construction bound or unrestricted-SAT result follows.
 
+\paragraph{Extract conditional refutations and price the stronger baseline.}
+We now lift the conflict leaves to original source clauses, carrying ancestor
+unit reasons and split assignments through exact variable maps. Backward slicing
+removes irrelevant reasons and assumptions. A template contains clauses $S$, an
+assignment $a$, and a checked unit refutation of $S\!\upharpoonright_a$.
+If $S\subseteq G$, every model of $G$ extending $a$ would satisfy each forced
+step and then falsify the conflict clause. Thus $G\!\upharpoonright_a$ is
+unsatisfiable. This proves a conditional statement; deciding $G$ requires a
+checked exhaustive cover or another complete certificate. Stronger query
+assignments must extend $a$. Injective signed variable transport preserves the
+argument, but discovering a useful map remains a separate task. Unsupported
+proof endpoints remain unresolved. Publication still checks an ordinary native
+proof for the full target cofactor.
+
+The exposed 315-clause donor yields six templates with 3--28 clauses and one to
+five assumptions. Ancestor lifting gives 188 source literal occurrences across
+them, rather than the earlier 148 local reason occurrences. Two templates lose
+an unnecessary split assumption. Extraction rescans original clauses and records
+22,191 restriction literal visits; with $q$ visited path occurrences and $L$
+source literal occurrences, source scanning contributes an $O(qL)$ literal-work
+upper bound when dictionary operations have unit cost. Budgets on
+visited nodes and their CNFs do not bound all discovery work or supply small
+proofs for arbitrary inputs.
+
+Eleven clause sets under six supplied guards give 66 conditional queries per
+worker. Native solving, conditioned causal cores and unit templates each run
+in two opposite serial orders from the same historical prefix. All pay nine
+donor expansions. Both reuse methods obtain the same forty hits and reduce
+query expansions from 68 to 28; causal preparation adds five expansions.
+They agree on 59 UNSAT and seven SAT cofactor answers. The stronger causal
+baseline conditions and slices the existing whole core: partial template matches
+after a deletion therefore establish no incremental coverage advantage. Mean
+preparation plus query time is 193.30 ms for native solving, 226.37 ms for causal
+cores and 212.57 ms for templates. Less fresh search does not pay for all the
+additional work on this workload.
+
+The initial template bundle stores excessive donor and traversal metadata.
+A second frozen comparison retains only self-contained conditional refutations
+in the active cache, while preserving all provenance in the research archive.
+Four workers give 264 additional attempts with identical native proofs and
+answers. Hint JSON falls from 51,929 to 11,505 bytes; compressed proof delta
+plus hints falls from 115,438 to 75,014 bytes. The conditioned causal comparator
+uses 75,905 bytes and native solving uses 65,359. Compact copying and validation
+slightly increase preparation-plus-query time in this pair, while complete-worker
+time decreases; two orders establish no reliable runtime improvement.
+Cold answer replay is included in worker time, and persisted-hint reload and
+validation are recorded separately. Full target CNFs still accumulate, so this
+metadata reduction is not a bound on total solver memory. The remaining
+support-breaking edits include both an UNSAT cofactor needing alternative
+reasons and a SAT cofactor needing a witness. Automatic guard selection, useful
+correspondence, whole-input composition and cheap arbitrary-CNF expansion remain
+open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

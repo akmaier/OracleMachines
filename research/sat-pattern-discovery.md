@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: small construction reuse exposes conditional reason structure
+## Latest evidence: conditional certificates match an existing stronger baseline
+
+[Conditional unit supports](conditional-unit-support.md) expose six reusable
+unit-refutation patterns, with ancestor reasons lifted to original variable
+coordinates and unnecessary assumptions removed. Their 40 conditional reuse
+hits are also found by conditioning and slicing existing causal cores. Partial
+matches after a core-breaking deletion do not decide the whole CNF and do not
+establish additional coverage against that stronger comparator.
+
+A provenance-free active cache cuts hint bytes by 77.84%, while keeping native
+proofs and the full diagnostic archive. Fresh query expansions fall 68 to 28,
+but total preparation-plus-query times regress against native-only solving on
+this small supplied-guard workload. Discovery and compactness must be evaluated
+separately from avoided expansions. The next useful cases are support deletions
+that leave alternative UNSAT reasons and one that becomes SAT. Their bound inputs
+and counters are in the [ranked gap record](structural-reuse-priorities.md).
+
+## Previous evidence: small construction reuse exposes conditional reason structure
 
 [Direct joint-prefix reuse](joint-prefix-reuse.md) removes two reconstructions
 while retaining all proofs and checks. The main opportunity is now the surviving

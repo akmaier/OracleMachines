@@ -1,0 +1,3580 @@
+{
+  "cold": {
+    "readers": {
+      "CanonicalVerifySnapshot": {
+        "canonical_form_calls": 79,
+        "canonical_form_clauses": 20010,
+        "canonical_form_literal_visits": 55697,
+        "canonical_form_name_variables": 8535,
+        "canonical_form_reuses": 79,
+        "certificate_disk_hits": 24,
+        "certificate_memory_hits": 34,
+        "database_lookups": 79,
+        "key_serialized_bytes": 516337,
+        "normalization_literal_visits": 61434,
+        "read_bytes": 310245,
+        "restriction_literal_visits": 11486,
+        "search_disk_hits": 55,
+        "search_memory_hits": 11,
+        "verification_literal_payload": 55697,
+        "verification_trace_literals": 1154,
+        "verified_nodes": 79
+      },
+      "SnapshotResidualSolver": {
+        "certificate_disk_hits": 24,
+        "certificate_memory_hits": 34,
+        "database_lookups": 79,
+        "key_serialized_bytes": 516337,
+        "normalization_literal_visits": 117131,
+        "read_bytes": 310245,
+        "restriction_literal_visits": 11486,
+        "search_disk_hits": 55,
+        "search_memory_hits": 11,
+        "verification_literal_payload": 55697,
+        "verification_trace_literals": 1154,
+        "verified_nodes": 79
+      }
+    },
+    "seconds": 0.20988062489777803
+  },
+  "delta": {
+    "compressed_bytes": 68672,
+    "path": "experiments/results/cnf-conditional-unit-support/causal-1/delta.json.gz",
+    "raw_bytes": 730508,
+    "seconds": 0.05631787469610572,
+    "sha256": "3058fd07b4780059836671f7faab0bbd53a36c1ecae4add770d56c3ec26520fa"
+  },
+  "donor": {
+    "metrics": {
+      "accounting_reads": 1,
+      "batch_commits": 1,
+      "batch_committed_payload": 132288,
+      "batch_committed_records": 14,
+      "batch_contexts": 14,
+      "batch_insert_attempts": 14,
+      "batch_peak_payload": 132288,
+      "batch_peak_python_bytes": 47228,
+      "batch_peak_records": 14,
+      "batch_sized_payload": 132288,
+      "binary_backbone_checked_edges": 57,
+      "binary_backbone_compiled_children": 2,
+      "binary_backbone_transport_literals": 16,
+      "binary_backbone_transported_units": 6,
+      "binary_cover_budget_skips": 5,
+      "binary_cover_clause_checks": 1046,
+      "binary_cover_edge_visits": 344,
+      "binary_cover_graph_edges": 418,
+      "binary_cover_model_literals": 2511,
+      "binary_cover_path_steps": 13,
+      "binary_cover_reach_hits": 8,
+      "binary_cover_reach_roots": 28,
+      "binary_cover_reached_entries": 350,
+      "binary_cover_unresolved": 4,
+      "binary_subset_calls": 9,
+      "binary_subset_implication_edges": 418,
+      "binary_subset_satisfiable_misses": 4,
+      "binary_subset_scc_calls": 4,
+      "binary_subset_sign_literals": 792,
+      "binary_subset_unit_skips": 5,
+      "binary_subset_width_checks": 2127,
+      "binary_target_edge_visits": 314,
+      "binary_target_path_steps": 13,
+      "binary_target_reach_hits": 6,
+      "binary_target_reach_roots": 25,
+      "binary_target_reached_entries": 308,
+      "bipolar_false_probes": 1,
+      "bipolar_no_conflict": 2,
+      "bipolar_probe_trace_entries": 0,
+      "bipolar_propagation_literal_visits": 1222,
+      "bipolar_true_probes": 1,
+      "canonical_form_calls": 14,
+      "canonical_form_clauses": 3666,
+      "canonical_form_literal_visits": 10242,
+      "canonical_form_name_variables": 1598,
+      "canonical_form_reuses": 14,
+      "certificate_memory_hits": 13,
+      "certificate_serialized_bytes": 87498,
+      "class_literal_payload": 586,
+      "database_lookups": 16,
+      "decomposition_literal_visits": 586,
+      "expanded_nodes": 9,
+      "forced_variables": 18,
+      "inserted_bytes": 132288,
+      "inserted_nodes": 14,
+      "joint_closure_edge_visits": 7,
+      "joint_closure_roots": 3,
+      "joint_compiled_excluded": 2,
+      "joint_compiled_parents": 1,
+      "joint_negative_batches": 1,
+      "joint_paths_found": 4,
+      "joint_prefix_construction_reuses": 1,
+      "joint_redundant_candidates": 1,
+      "joint_selected_paths": 4,
+      "joint_sort_variables": 170,
+      "joint_target_candidates": 31,
+      "joint_transport_literals": 22,
+      "joint_transported_units": 9,
+      "key_serialized_bytes": 139339,
+      "matching_recognition_literal_visits": 3,
+      "negative_admission_literals": 889,
+      "negative_admissions": 1,
+      "negative_pool_admission_memory_hits": 1,
+      "negative_target_literals": 889,
+      "normalization_literal_visits": 21642,
+      "priority_binary_scan_literals": 1522,
+      "priority_candidates": 1,
+      "priority_first_target_skips": 1,
+      "priority_full_scan_literals": 633,
+      "priority_joint_skips": 1,
+      "priority_misses": 1,
+      "probe_acquisition_calls": 1,
+      "propagation_literal_visits": 15269,
+      "ranked_target_calls": 4,
+      "ranked_target_ranking_literals": 2929,
+      "restriction_literal_visits": 21613,
+      "source_witness_literal_payload": 0,
+      "split_nodes": 1,
+      "subsumed_positive_clauses": 0,
+      "subsumption_candidate_tests": 4,
+      "subsumption_membership_tests": 6,
+      "subsumption_posting_lookups": 45,
+      "subsumption_recognition_literal_payload": 586,
+      "unit_conflicts": 2,
+      "verification_literal_payload": 10242,
+      "verification_trace_literals": 148,
+      "verified_nodes": 14,
+      "visits": 9,
+      "witness_peak_bytes": 64,
+      "witness_peak_entries": 0
+    },
+    "reason": null,
+    "result": {
+      "answer": false,
+      "archive_nodes": 2591,
+      "archive_payload_bytes": 30771266,
+      "authority": "native",
+      "metrics": {
+        "accounting_reads": 1,
+        "batch_commits": 1,
+        "batch_committed_payload": 132288,
+        "batch_committed_records": 14,
+        "batch_contexts": 14,
+        "batch_insert_attempts": 14,
+        "batch_peak_payload": 132288,
+        "batch_peak_python_bytes": 47228,
+        "batch_peak_records": 14,
+        "batch_sized_payload": 132288,
+        "binary_backbone_checked_edges": 57,
+        "binary_backbone_compiled_children": 2,
+        "binary_backbone_transport_literals": 16,
+        "binary_backbone_transported_units": 6,
+        "binary_cover_budget_skips": 5,
+        "binary_cover_clause_checks": 1046,
+        "binary_cover_edge_visits": 344,
+        "binary_cover_graph_edges": 418,
+        "binary_cover_model_literals": 2511,
+        "binary_cover_path_steps": 13,
+        "binary_cover_reach_hits": 8,
+        "binary_cover_reach_roots": 28,
+        "binary_cover_reached_entries": 350,
+        "binary_cover_unresolved": 4,
+        "binary_subset_calls": 9,
+        "binary_subset_implication_edges": 418,
+        "binary_subset_satisfiable_misses": 4,
+        "binary_subset_scc_calls": 4,
+        "binary_subset_sign_literals": 792,
+        "binary_subset_unit_skips": 5,
+        "binary_subset_width_checks": 2127,
+        "binary_target_edge_visits": 314,
+        "binary_target_path_steps": 13,
+        "binary_target_reach_hits": 6,
+        "binary_target_reach_roots": 25,
+        "binary_target_reached_entries": 308,
+        "bipolar_false_probes": 1,
+        "bipolar_no_conflict": 2,
+        "bipolar_probe_trace_entries": 0,
+        "bipolar_propagation_literal_visits": 1222,
+        "bipolar_true_probes": 1,
+        "canonical_form_calls": 14,
+        "canonical_form_clauses": 3666,
+        "canonical_form_literal_visits": 10242,
+        "canonical_form_name_variables": 1598,
+        "canonical_form_reuses": 14,
+        "certificate_memory_hits": 13,
+        "certificate_serialized_bytes": 87498,
+        "class_literal_payload": 586,
+        "database_lookups": 16,
+        "decomposition_literal_visits": 586,
+        "expanded_nodes": 9,
+        "forced_variables": 18,
+        "inserted_bytes": 132288,
+        "inserted_nodes": 14,
+        "joint_closure_edge_visits": 7,
+        "joint_closure_roots": 3,
+        "joint_compiled_excluded": 2,
+        "joint_compiled_parents": 1,
+        "joint_negative_batches": 1,
+        "joint_paths_found": 4,
+        "joint_prefix_construction_reuses": 1,
+        "joint_redundant_candidates": 1,
+        "joint_selected_paths": 4,
+        "joint_sort_variables": 170,
+        "joint_target_candidates": 31,
+        "joint_transport_literals": 22,
+        "joint_transported_units": 9,
+        "key_serialized_bytes": 139339,
+        "matching_recognition_literal_visits": 3,
+        "negative_admission_literals": 889,
+        "negative_admissions": 1,
+        "negative_pool_admission_memory_hits": 1,
+        "negative_target_literals": 889,
+        "normalization_literal_visits": 21642,
+        "priority_binary_scan_literals": 1522,
+        "priority_candidates": 1,
+        "priority_first_target_skips": 1,
+        "priority_full_scan_literals": 633,
+        "priority_joint_skips": 1,
+        "priority_misses": 1,
+        "probe_acquisition_calls": 1,
+        "propagation_literal_visits": 15269,
+        "ranked_target_calls": 4,
+        "ranked_target_ranking_literals": 2929,
+        "restriction_literal_visits": 21613,
+        "source_witness_literal_payload": 0,
+        "split_nodes": 1,
+        "subsumed_positive_clauses": 0,
+        "subsumption_candidate_tests": 4,
+        "subsumption_membership_tests": 6,
+        "subsumption_posting_lookups": 45,
+        "subsumption_recognition_literal_payload": 586,
+        "unit_conflicts": 2,
+        "verification_literal_payload": 10242,
+        "verification_trace_literals": 148,
+        "verified_nodes": 14,
+        "visits": 9,
+        "witness_peak_bytes": 64,
+        "witness_peak_entries": 0
+      },
+      "model": null,
+      "quotient_choice": null,
+      "root": "cnf-residual-v1:[[-125,-116,122],[-125,-96,85],[-125,-76,56],[-125,-58,12],[-124,-80],[-124,6],[-124,52,99],[-123,-77,5],[-123,-30,38],[-122,-112,26],[-122,-96,116],[-122,-54,113],[-122,-53,112],[-122,-43,30],[-121,-108,6],[-121,-104,124],[-121,-92,61],[-121,-78,-17],[-121,-49,66],[-121,-40,72],[-120,-99,-15],[-120,-81,115],[-120,-27,78],[-120,28],[-120,57,88],[-119,-68,12],[-119,-63,58],[-118,-112,53],[-118,-105,4],[-118,-101,8],[-118,-70,11],[-118,-8,16],[-117,-114,64],[-117,-92],[-117,-69,27],[-117,-67,-21],[-117,-23,17],[-117,-1,78],[-117,17,71],[-117,25,103],[-116,-65,26],[-116,-37,101],[-115,-48,-42],[-115,-48,17],[-115,23],[-115,57,78],[-115,72,73],[-114,-97,15],[-114,-50,124],[-114,-17,108],[-114,36],[-114,60,61],[-113,-95,41],[-113,-47,35],[-113,-43,79],[-113,-4,95],[-112,-98,107],[-112,-77,105],[-112,-41,45],[-111,-59,118],[-111,-56,59],[-111,-34,20],[-111,-16,24],[-111,-16,39],[-111,-12,37],[-110,-30,118],[-109,-75,78],[-109,-67,17],[-109,46,73],[-109,88],[-108,10,58],[-108,40,67],[-108,73],[-108,109],[-107,-77,3],[-107,-68,39],[-107,-65,8],[-106,-105,11],[-106,-96,70],[-106,-19,111],[-106,-8,84],[-106,-5,41],[-106,-3,111],[-105,-77,63],[-105,-4,91],[-104,-103],[-104,-67,72],[-104,7,36],[-103,-27,109],[-103,-23],[-103,75,100],[-102,-92],[-102,-61,99],[-102,-7,23],[-102,-7,67],[-102,71],[-101,-31,91],[-101,-12,82],[-100,-15,50],[-100,49,120],[-99,-52,27],[-99,-50],[-99,-46],[-99,15,94],[-99,22,78],[-98,-45,89],[-98,-10,43],[-97,-81,72],[-97,67,109],[-97,104,109],[-96,-84,31],[-96,-65,38],[-96,-47,31],[-96,-20,107],[-95,-80,38],[-95,-2,76],[-94,-57,-48],[-94,-52,-48],[-94,-48,46],[-94,-21,1],[-94,42],[-93,-50],[-93,-7,78],[-93,-1,15],[-93,25],[-93,55],[-92,-69,49],[-92,-40,114],[-92,-9,67],[-91,-45,30],[-90,-80,79],[-90,-19,89],[-90,-16,8],[-90,-12,24],[-89,-63,107],[-89,-29,24],[-89,-19,34],[-88,-78,-62],[-88,-71,22],[-88,-36,-7],[-88,36,73],[-88,72,99],[-87,55,121],[-87,104],[-86,-79,111],[-86,-11,41],[-85,-79,68],[-85,-70,77],[-85,-30,112],[-84,-45,43],[-84,-37,82],[-84,-35,54],[-84,-3,19],[-83,-56,35],[-83,-38,12],[-82,-80,111],[-82,-31,4],[-82,-20,79],[-82,-8,68],[-81,-48,-36],[-81,-36,75],[-81,-25,-1],[-81,42,88],[-80,-75,55],[-80,-68,4],[-80,-65,74],[-80,-30,119],[-80,-19,116],[-80,7],[-80,17,99],[-79,-59,80],[-79,-34,91],[-79,-30,12],[-79,-4,37],[-78,-25,48],[-78,17,75],[-77,-58,95],[-77,-56,79],[-77,-8,111],[-76,-74,96],[-76,-53,14],[-75,64],[-74,-45,59],[-74,-18,107],[-73,27,61],[-72,62],[-72,64,73],[-71,-1,7],[-70,-35,3],[-69,-52,55],[-68,-65,74],[-68,-5,107],[-67,-60,94],[-67,-9,81],[-66,-52,-40],[-66,-13],[-65,-38,14],[-64,-50],[-64,78],[-63,-41,112],[-63,-4,86],[-63,58],[-62,-25,27],[-62,6,42],[-62,7,23],[-62,121],[-61,-57,81],[-60,-40,109],[-60,9,81],[-60,22,78],[-60,36,52],[-60,117,121],[-59,-47,95],[-59,-29,18],[-59,-19,3],[-58,-35,84],[-57,13,73],[-57,75,78],[-56,-5,83],[-55,27,87],[-54,-32,84],[-54,-30,29],[-53,-45,19],[-52,28],[-52,121],[-51,-16,14],[-50,6],[-50,52],[-50,52,87],[-49,-28,124],[-49,-9,104],[-49,52,87],[-48,-23,61],[-47,-44,96],[-47,-43,85],[-47,-35,30],[-47,-24,74],[-47,-19,37],[-44,-4,45],[-44,-4,76],[-43,-39,47],[-43,-31,82],[-42,1],[-42,7],[-41,-18,65],[-40,-27,-1],[-39,-35,84],[-39,-4,84],[-38,-19,90],[-38,-12,76],[-37,-32,83],[-37,-11,38],[-37,-10,24],[-36,25],[-36,67],[-35,-26,37],[-35,-10,18],[-34,-31,110],[-33,-24,68],[-32,-3,47],[-29,-19,106],[-29,-4,18],[-28,-13],[-28,6,117],[-27,-15,9],[-27,-7,87],[-25,-21,102],[-25,27,81],[-25,121],[-23,-22,102],[-23,78,103],[-22,-21,-17],[-22,15,64],[-22,94,103],[-21,81,88],[-20,-5,19],[-15,27],[-14,-8,3],[-13,62,64],[-11,-10,14],[-6,22,67],[-6,64],[1,13,103],[1,115],[7,87],[9,81,103],[13,22,66],[15,120],[21,46,61],[21,117],[22,50,72],[23,73],[25,40,72],[25,103],[27,36,71],[28,102,103],[42,55],[42,67,75],[42,71],[46,92,114],[48,55,120],[48,109,121],[48,117],[49,50],[49,108,114],[50,117],[52,60,94],[55,57],[57,100,103],[62,75,87],[62,120],[64,120],[67,94,108],[73,124],[87,108]]",
+      "seconds": 0.027059291023761034
+    },
+    "seconds": 0.028788874857127666,
+    "status": "unsat"
+  },
+  "hints": {
+    "path": "experiments/results/cnf-conditional-unit-support/causal-1/hints.json",
+    "sha256": "6205a3d1c3ea786b96f9b41bd6f559c05e3537df6c5e3899f10684a17fad3c03"
+  },
+  "preparation": {
+    "initial_solver": {
+      "canonical_form_calls": 22,
+      "canonical_form_clauses": 606,
+      "canonical_form_literal_visits": 1418,
+      "canonical_form_name_variables": 512,
+      "canonical_form_reuses": 22,
+      "certificate_memory_hits": 21,
+      "certificate_serialized_bytes": 14113,
+      "database_lookups": 22,
+      "inserted_bytes": 20140,
+      "inserted_nodes": 22,
+      "key_serialized_bytes": 68153,
+      "normalization_literal_visits": 4955,
+      "plan_origin_memory_hits": 14,
+      "restriction_literal_visits": 1152,
+      "support_premise_memory_hits": 13,
+      "support_query_memory_hits": 5,
+      "verification_literal_payload": 1418,
+      "verification_trace_literals": 112,
+      "verified_nodes": 22
+    },
+    "plan": {
+      "extracted_core_publications": 14,
+      "guard_input_literals": 1730,
+      "plan_decoded_bytes": 53642,
+      "plan_emitted_recipes": 14,
+      "plan_encoded_bytes": 53642,
+      "plan_peak_bytes": 121602,
+      "plan_recipes": 14,
+      "preimage_calls": 13,
+      "preimage_duplicate_clauses": 1,
+      "preimage_name_variables": 1473,
+      "preimage_renamed_literals": 9353,
+      "preimage_reused_literals": 9230,
+      "preimage_satisfied_clauses": 126,
+      "preimage_scanned_literals": 9659,
+      "preimage_selected_indices": 292,
+      "preimage_shortened_clauses": 75,
+      "preimage_unchanged_clauses": 3277,
+      "preimage_unique_clauses": 3351,
+      "restriction_literal_visits": 11604,
+      "support_dropped_clauses": 3326,
+      "support_kind_split": 5,
+      "support_kind_units": 9,
+      "support_nodes": 14,
+      "support_publication_literals": 623,
+      "support_publications": 8,
+      "support_source_literals": 10242,
+      "unit_reason_literals_examined": 104,
+      "unit_trace_steps_examined": 71,
+      "unit_trace_steps_removed": 17,
+      "unit_trace_steps_retained": 54
+    },
+    "projections": [
+      {
+        "acquisition": {
+          "accounting_reads": 1,
+          "batch_commits": 1,
+          "batch_committed_payload": 1064,
+          "batch_committed_records": 1,
+          "batch_contexts": 1,
+          "batch_insert_attempts": 1,
+          "batch_peak_payload": 1064,
+          "batch_peak_python_bytes": 712,
+          "batch_peak_records": 1,
+          "batch_sized_payload": 1064,
+          "binary_subset_calls": 1,
+          "binary_subset_sign_literals": 26,
+          "binary_subset_unit_skips": 1,
+          "binary_subset_width_checks": 34,
+          "canonical_form_calls": 1,
+          "canonical_form_clauses": 45,
+          "canonical_form_literal_visits": 110,
+          "canonical_form_name_variables": 37,
+          "canonical_form_reuses": 1,
+          "certificate_serialized_bytes": 601,
+          "database_lookups": 1,
+          "expanded_nodes": 1,
+          "inserted_bytes": 1064,
+          "inserted_nodes": 1,
+          "key_serialized_bytes": 926,
+          "negative_admission_literals": 110,
+          "negative_admissions": 1,
+          "negative_candidates": 1,
+          "negative_clause_tests": 2,
+          "negative_containment_clauses": 315,
+          "negative_pool_admission_memory_hits": 1,
+          "negative_target_literals": 110,
+          "normalization_literal_visits": 110,
+          "probe_acquisition_calls": 1,
+          "propagation_literal_visits": 178,
+          "source_witness_literal_payload": 0,
+          "unit_conflicts": 1,
+          "verification_literal_payload": 110,
+          "verification_trace_literals": 13,
+          "verified_nodes": 1,
+          "visits": 1,
+          "witness_peak_bytes": 64,
+          "witness_peak_entries": 0
+        },
+        "checks": {
+          "checked_conditioned_cores": 1,
+          "conditioned_cores": 1,
+          "restriction_literal_visits": 240
+        },
+        "extractor": {
+          "extracted_core_publications": 1,
+          "support_dropped_clauses": 39,
+          "support_kind_units": 1,
+          "support_nodes": 1,
+          "support_source_literals": 110,
+          "unit_reason_literals_examined": 7,
+          "unit_trace_steps_examined": 7,
+          "unit_trace_steps_removed": 2,
+          "unit_trace_steps_retained": 5
+        },
+        "record": {
+          "assignment": [
+            [
+              2483,
+              false
+            ],
+            [
+              2858,
+              false
+            ]
+          ],
+          "format": "checked-conditioned-core-v1",
+          "parent_root": "cnf-residual-v1:[[-39,2],[-39,17,30],[-38,-25,-6],[-37,-26,35],[-37,11],[-36,-28],[-36,-8,6],[-36,6,23],[-36,9,32],[-35,8],[-34,12],[-33,-32],[-31,-3,8],[-30,-13],[-29,-17,-14],[-27,33],[-26,-9,-1],[-25,-9,14],[-24,10,20],[-23,-1,3],[-22,-4,26],[-21,-16],[-21,25],[-20,-19,26],[-18,10,27],[-17,11],[-17,38],[-16,2],[-15,-11,39],[-15,17,27],[-12,22],[-10,-3,27],[-9,10,26],[-9,38],[-7,29,32],[-5,10],[-2,7,22],[-2,21],[1,35],[4,26,32],[5,37],[8,24],[11,31,32],[13,28,34],[15,16],[16,36],[18,19],[21,37]]",
+          "parent_source": [
+            [
+              -5419,
+              566
+            ],
+            [
+              -5419,
+              2514,
+              4177
+            ],
+            [
+              -5126,
+              -3403,
+              -1004
+            ],
+            [
+              -5071,
+              -3598,
+              4844
+            ],
+            [
+              -5071,
+              1490
+            ],
+            [
+              -4938,
+              -4032
+            ],
+            [
+              -4938,
+              -1257,
+              1004
+            ],
+            [
+              -4938,
+              1004,
+              3057
+            ],
+            [
+              -4938,
+              1356,
+              4377
+            ],
+            [
+              -4844,
+              1257
+            ],
+            [
+              -4824,
+              1931
+            ],
+            [
+              -4384,
+              -4377
+            ],
+            [
+              -4212,
+              -578,
+              1257
+            ],
+            [
+              -4177,
+              -2340
+            ],
+            [
+              -4079,
+              -2514,
+              -2413
+            ],
+            [
+              -3836,
+              4384
+            ],
+            [
+              -3598,
+              -1356,
+              -175
+            ],
+            [
+              -3403,
+              -1356,
+              2413
+            ],
+            [
+              -3157,
+              1467,
+              2726
+            ],
+            [
+              -3057,
+              -175,
+              578
+            ],
+            [
+              -2898,
+              -599,
+              3598
+            ],
+            [
+              -2858,
+              -2483
+            ],
+            [
+              -2858,
+              3403
+            ],
+            [
+              -2726,
+              -2649,
+              3598
+            ],
+            [
+              -2561,
+              1467,
+              3836
+            ],
+            [
+              -2514,
+              1490
+            ],
+            [
+              -2514,
+              5126
+            ],
+            [
+              -2483,
+              566
+            ],
+            [
+              -2468,
+              -1490,
+              5419
+            ],
+            [
+              -2468,
+              2514,
+              3836
+            ],
+            [
+              -1931,
+              2898
+            ],
+            [
+              -1467,
+              -578,
+              3836
+            ],
+            [
+              -1356,
+              1467,
+              3598
+            ],
+            [
+              -1356,
+              5126
+            ],
+            [
+              -1246,
+              4079,
+              4377
+            ],
+            [
+              -880,
+              1467
+            ],
+            [
+              -566,
+              1246,
+              2898
+            ],
+            [
+              -566,
+              2858
+            ],
+            [
+              175,
+              4844
+            ],
+            [
+              599,
+              3598,
+              4377
+            ],
+            [
+              880,
+              5071
+            ],
+            [
+              1257,
+              3157
+            ],
+            [
+              1490,
+              4212,
+              4377
+            ],
+            [
+              2340,
+              4032,
+              4824
+            ],
+            [
+              2468,
+              2483
+            ],
+            [
+              2483,
+              4938
+            ],
+            [
+              2561,
+              2649
+            ],
+            [
+              2858,
+              5071
+            ]
+          ],
+          "root": "cnf-residual-v1:[[-37,2],[-37,16,28],[-36,-23,-6],[-35,-24,33],[-35,11],[-34,-26],[-34,-8,6],[-34,6,21],[-34,9,30],[-33,8],[-32,12],[-31,-30],[-29,-3,8],[-28,-13],[-27,-16,-14],[-25,31],[-24,-9,-1],[-23,-9,14],[-22,10,19],[-21,-1,3],[-20,-4,24],[-19,-18,24],[-17,10,25],[-16,11],[-16,36],[-15,-11,37],[-15,16,25],[-12,20],[-10,-3,25],[-9,10,24],[-9,36],[-7,27,30],[-5,10],[-2],[-2,7,20],[1,33],[4,24,30],[5,35],[8,22],[11,29,30],[13,26,32],[15],[17,18],[34],[35]]",
+          "source": [
+            [
+              -5419,
+              566
+            ],
+            [
+              -5419,
+              2514,
+              4177
+            ],
+            [
+              -5126,
+              -3403,
+              -1004
+            ],
+            [
+              -5071,
+              -3598,
+              4844
+            ],
+            [
+              -5071,
+              1490
+            ],
+            [
+              -4938,
+              -4032
+            ],
+            [
+              -4938,
+              -1257,
+              1004
+            ],
+            [
+              -4938,
+              1004,
+              3057
+            ],
+            [
+              -4938,
+              1356,
+              4377
+            ],
+            [
+              -4844,
+              1257
+            ],
+            [
+              -4824,
+              1931
+            ],
+            [
+              -4384,
+              -4377
+            ],
+            [
+              -4212,
+              -578,
+              1257
+            ],
+            [
+              -4177,
+              -2340
+            ],
+            [
+              -4079,
+              -2514,
+              -2413
+            ],
+            [
+              -3836,
+              4384
+            ],
+            [
+              -3598,
+              -1356,
+              -175
+            ],
+            [
+              -3403,
+              -1356,
+              2413
+            ],
+            [
+              -3157,
+              1467,
+              2726
+            ],
+            [
+              -3057,
+              -175,
+              578
+            ],
+            [
+              -2898,
+              -599,
+              3598
+            ],
+            [
+              -2726,
+              -2649,
+              3598
+            ],
+            [
+              -2561,
+              1467,
+              3836
+            ],
+            [
+              -2514,
+              1490
+            ],
+            [
+              -2514,
+              5126
+            ],
+            [
+              -2468,
+              -1490,
+              5419
+            ],
+            [
+              -2468,
+              2514,
+              3836
+            ],
+            [
+              -1931,
+              2898
+            ],
+            [
+              -1467,
+              -578,
+              3836
+            ],
+            [
+              -1356,
+              1467,
+              3598
+            ],
+            [
+              -1356,
+              5126
+            ],
+            [
+              -1246,
+              4079,
+              4377
+            ],
+            [
+              -880,
+              1467
+            ],
+            [
+              -566,
+              1246,
+              2898
+            ],
+            [
+              -566
+            ],
+            [
+              175,
+              4844
+            ],
+            [
+              599,
+              3598,
+              4377
+            ],
+            [
+              880,
+              5071
+            ],
+            [
+              1257,
+              3157
+            ],
+            [
+              1490,
+              4212,
+              4377
+            ],
+            [
+              2340,
+              4032,
+              4824
+            ],
+            [
+              2468
+            ],
+            [
+              4938
+            ],
+            [
+              2561,
+              2649
+            ],
+            [
+              5071
+            ]
+          ]
+        },
+        "solver": {
+          "accounting_reads": 1,
+          "batch_commits": 1,
+          "batch_committed_payload": 1064,
+          "batch_committed_records": 1,
+          "batch_contexts": 1,
+          "batch_insert_attempts": 1,
+          "batch_peak_payload": 1064,
+          "batch_peak_python_bytes": 712,
+          "batch_peak_records": 1,
+          "batch_sized_payload": 1064,
+          "binary_subset_calls": 1,
+          "binary_subset_sign_literals": 26,
+          "binary_subset_unit_skips": 1,
+          "binary_subset_width_checks": 34,
+          "canonical_form_calls": 2,
+          "canonical_form_clauses": 51,
+          "canonical_form_literal_visits": 120,
+          "canonical_form_name_variables": 42,
+          "canonical_form_reuses": 2,
+          "certificate_serialized_bytes": 769,
+          "conditioning_child_memory_hits": 1,
+          "conditioning_parent_memory_hits": 1,
+          "database_lookups": 2,
+          "expanded_nodes": 1,
+          "inserted_bytes": 1286,
+          "inserted_nodes": 2,
+          "key_serialized_bytes": 2462,
+          "negative_admission_literals": 110,
+          "negative_admissions": 1,
+          "negative_candidates": 1,
+          "negative_clause_tests": 2,
+          "negative_containment_clauses": 315,
+          "negative_pool_admission_memory_hits": 1,
+          "negative_target_literals": 110,
+          "normalization_literal_visits": 460,
+          "probe_acquisition_calls": 1,
+          "propagation_literal_visits": 178,
+          "source_witness_literal_payload": 0,
+          "support_source_memory_hits": 1,
+          "unit_conflicts": 1,
+          "verification_literal_payload": 120,
+          "verification_trace_literals": 23,
+          "verified_nodes": 2,
+          "visits": 1,
+          "witness_peak_bytes": 64,
+          "witness_peak_entries": 0
+        }
+      },
+      {
+        "acquisition": {
+          "accounting_reads": 1,
+          "batch_commits": 1,
+          "batch_committed_payload": 1067,
+          "batch_committed_records": 1,
+          "batch_contexts": 1,
+          "batch_insert_attempts": 1,
+          "batch_peak_payload": 1067,
+          "batch_peak_python_bytes": 708,
+          "batch_peak_records": 1,
+          "batch_sized_payload": 1067,
+          "binary_subset_calls": 1,
+          "binary_subset_sign_literals": 18,
+          "binary_subset_unit_skips": 1,
+          "binary_subset_width_checks": 24,
+          "canonical_form_calls": 1,
+          "canonical_form_clauses": 45,
+          "canonical_form_literal_visits": 109,
+          "canonical_form_name_variables": 37,
+          "canonical_form_reuses": 1,
+          "certificate_serialized_bytes": 608,
+          "database_lookups": 1,
+          "expanded_nodes": 1,
+          "inserted_bytes": 1067,
+          "inserted_nodes": 1,
+          "key_serialized_bytes": 918,
+          "negative_admission_literals": 109,
+          "negative_admissions": 1,
+          "negative_candidates": 2,
+          "negative_clause_tests": 5,
+          "negative_containment_clauses": 360,
+          "negative_pool_admission_memory_hits": 1,
+          "negative_target_literals": 109,
+          "normalization_literal_visits": 109,
+          "probe_acquisition_calls": 1,
+          "propagation_literal_visits": 178,
+          "source_witness_literal_payload": 0,
+          "unit_conflicts": 1,
+          "verification_literal_payload": 109,
+          "verification_trace_literals": 16,
+          "verified_nodes": 1,
+          "visits": 1,
+          "witness_peak_bytes": 64,
+          "witness_peak_entries": 0
+        },
+        "checks": {
+          "checked_conditioned_cores": 1,
+          "conditioned_cores": 1,
+          "restriction_literal_visits": 240
+        },
+        "extractor": {
+          "extracted_core_publications": 1,
+          "support_dropped_clauses": 37,
+          "support_kind_units": 1,
+          "support_nodes": 1,
+          "support_source_literals": 109,
+          "unit_reason_literals_examined": 11,
+          "unit_trace_steps_examined": 8,
+          "unit_trace_steps_removed": 1,
+          "unit_trace_steps_retained": 7
+        },
+        "record": {
+          "assignment": [
+            [
+              2483,
+              false
+            ],
+            [
+              5126,
+              false
+            ]
+          ],
+          "format": "checked-conditioned-core-v1",
+          "parent_root": "cnf-residual-v1:[[-39,2],[-39,17,30],[-38,-25,-6],[-37,-26,35],[-37,11],[-36,-28],[-36,-8,6],[-36,6,23],[-36,9,32],[-35,8],[-34,12],[-33,-32],[-31,-3,8],[-30,-13],[-29,-17,-14],[-27,33],[-26,-9,-1],[-25,-9,14],[-24,10,20],[-23,-1,3],[-22,-4,26],[-21,-16],[-21,25],[-20,-19,26],[-18,10,27],[-17,11],[-17,38],[-16,2],[-15,-11,39],[-15,17,27],[-12,22],[-10,-3,27],[-9,10,26],[-9,38],[-7,29,32],[-5,10],[-2,7,22],[-2,21],[1,35],[4,26,32],[5,37],[8,24],[11,31,32],[13,28,34],[15,16],[16,36],[18,19],[21,37]]",
+          "parent_source": [
+            [
+              -5419,
+              566
+            ],
+            [
+              -5419,
+              2514,
+              4177
+            ],
+            [
+              -5126,
+              -3403,
+              -1004
+            ],
+            [
+              -5071,
+              -3598,
+              4844
+            ],
+            [
+              -5071,
+              1490
+            ],
+            [
+              -4938,
+              -4032
+            ],
+            [
+              -4938,
+              -1257,
+              1004
+            ],
+            [
+              -4938,
+              1004,
+              3057
+            ],
+            [
+              -4938,
+              1356,
+              4377
+            ],
+            [
+              -4844,
+              1257
+            ],
+            [
+              -4824,
+              1931
+            ],
+            [
+              -4384,
+              -4377
+            ],
+            [
+              -4212,
+              -578,
+              1257
+            ],
+            [
+              -4177,
+              -2340
+            ],
+            [
+              -4079,
+              -2514,
+              -2413
+            ],
+            [
+              -3836,
+              4384
+            ],
+            [
+              -3598,
+              -1356,
+              -175
+            ],
+            [
+              -3403,
+              -1356,
+              2413
+            ],
+            [
+              -3157,
+              1467,
+              2726
+            ],
+            [
+              -3057,
+              -175,
+              578
+            ],
+            [
+              -2898,
+              -599,
+              3598
+            ],
+            [
+              -2858,
+              -2483
+            ],
+            [
+              -2858,
+              3403
+            ],
+            [
+              -2726,
+              -2649,
+              3598
+            ],
+            [
+              -2561,
+              1467,
+              3836
+            ],
+            [
+              -2514,
+              1490
+            ],
+            [
+              -2514,
+              5126
+            ],
+            [
+              -2483,
+              566
+            ],
+            [
+              -2468,
+              -1490,
+              5419
+            ],
+            [
+              -2468,
+              2514,
+              3836
+            ],
+            [
+              -1931,
+              2898
+            ],
+            [
+              -1467,
+              -578,
+              3836
+            ],
+            [
+              -1356,
+              1467,
+              3598
+            ],
+            [
+              -1356,
+              5126
+            ],
+            [
+              -1246,
+              4079,
+              4377
+            ],
+            [
+              -880,
+              1467
+            ],
+            [
+              -566,
+              1246,
+              2898
+            ],
+            [
+              -566,
+              2858
+            ],
+            [
+              175,
+              4844
+            ],
+            [
+              599,
+              3598,
+              4377
+            ],
+            [
+              880,
+              5071
+            ],
+            [
+              1257,
+              3157
+            ],
+            [
+              1490,
+              4212,
+              4377
+            ],
+            [
+              2340,
+              4032,
+              4824
+            ],
+            [
+              2468,
+              2483
+            ],
+            [
+              2483,
+              4938
+            ],
+            [
+              2561,
+              2649
+            ],
+            [
+              2858,
+              5071
+            ]
+          ],
+          "root": "cnf-residual-v1:[[-37,2],[-37,16,29],[-36,-25,34],[-36,11],[-35,-27],[-35,-8,6],[-35,6,22],[-35,9,31],[-34,8],[-33,12],[-32,-31],[-30,-3,8],[-29,-13],[-28,-16,-14],[-26,32],[-25,-9,-1],[-24,-9,14],[-23,10,19],[-22,-1,3],[-21,-4,25],[-20,24],[-19,-18,25],[-17,10,26],[-16],[-16,11],[-15,-11,37],[-15,16,26],[-12,21],[-10,-3,26],[-9],[-9,10,25],[-7,28,31],[-5,10],[-2,7,21],[-2,20],[1,34],[4,25,31],[5,36],[8,23],[11,30,31],[13,27,33],[15],[17,18],[20,36],[35]]",
+          "source": [
+            [
+              -5419,
+              566
+            ],
+            [
+              -5419,
+              2514,
+              4177
+            ],
+            [
+              -5071,
+              -3598,
+              4844
+            ],
+            [
+              -5071,
+              1490
+            ],
+            [
+              -4938,
+              -4032
+            ],
+            [
+              -4938,
+              -1257,
+              1004
+            ],
+            [
+              -4938,
+              1004,
+              3057
+            ],
+            [
+              -4938,
+              1356,
+              4377
+            ],
+            [
+              -4844,
+              1257
+            ],
+            [
+              -4824,
+              1931
+            ],
+            [
+              -4384,
+              -4377
+            ],
+            [
+              -4212,
+              -578,
+              1257
+            ],
+            [
+              -4177,
+              -2340
+            ],
+            [
+              -4079,
+              -2514,
+              -2413
+            ],
+            [
+              -3836,
+              4384
+            ],
+            [
+              -3598,
+              -1356,
+              -175
+            ],
+            [
+              -3403,
+              -1356,
+              2413
+            ],
+            [
+              -3157,
+              1467,
+              2726
+            ],
+            [
+              -3057,
+              -175,
+              578
+            ],
+            [
+              -2898,
+              -599,
+              3598
+            ],
+            [
+              -2858,
+              3403
+            ],
+            [
+              -2726,
+              -2649,
+              3598
+            ],
+            [
+              -2561,
+              1467,
+              3836
+            ],
+            [
+              -2514,
+              1490
+            ],
+            [
+              -2514
+            ],
+            [
+              -2468,
+              -1490,
+              5419
+            ],
+            [
+              -2468,
+              2514,
+              3836
+            ],
+            [
+              -1931,
+              2898
+            ],
+            [
+              -1467,
+              -578,
+              3836
+            ],
+            [
+              -1356,
+              1467,
+              3598
+            ],
+            [
+              -1356
+            ],
+            [
+              -1246,
+              4079,
+              4377
+            ],
+            [
+              -880,
+              1467
+            ],
+            [
+              -566,
+              1246,
+              2898
+            ],
+            [
+              -566,
+              2858
+            ],
+            [
+              175,
+              4844
+            ],
+            [
+              599,
+              3598,
+              4377
+            ],
+            [
+              880,
+              5071
+            ],
+            [
+              1257,
+              3157
+            ],
+            [
+              1490,
+              4212,
+              4377
+            ],
+            [
+              2340,
+              4032,
+              4824
+            ],
+            [
+              2468
+            ],
+            [
+              4938
+            ],
+            [
+              2561,
+              2649
+            ],
+            [
+              2858,
+              5071
+            ]
+          ]
+        },
+        "solver": {
+          "accounting_reads": 1,
+          "batch_commits": 1,
+          "batch_committed_payload": 1067,
+          "batch_committed_records": 1,
+          "batch_contexts": 1,
+          "batch_insert_attempts": 1,
+          "batch_peak_payload": 1067,
+          "batch_peak_python_bytes": 708,
+          "batch_peak_records": 1,
+          "batch_sized_payload": 1067,
+          "binary_subset_calls": 1,
+          "binary_subset_sign_literals": 18,
+          "binary_subset_unit_skips": 1,
+          "binary_subset_width_checks": 24,
+          "canonical_form_calls": 2,
+          "canonical_form_clauses": 53,
+          "canonical_form_literal_visits": 123,
+          "canonical_form_name_variables": 44,
+          "canonical_form_reuses": 2,
+          "certificate_serialized_bytes": 804,
+          "conditioning_child_memory_hits": 1,
+          "conditioning_parent_memory_hits": 1,
+          "database_lookups": 2,
+          "expanded_nodes": 1,
+          "inserted_bytes": 1331,
+          "inserted_nodes": 2,
+          "key_serialized_bytes": 2474,
+          "negative_admission_literals": 109,
+          "negative_admissions": 1,
+          "negative_candidates": 2,
+          "negative_clause_tests": 5,
+          "negative_containment_clauses": 360,
+          "negative_pool_admission_memory_hits": 1,
+          "negative_target_literals": 109,
+          "normalization_literal_visits": 461,
+          "probe_acquisition_calls": 1,
+          "propagation_literal_visits": 178,
+          "source_witness_literal_payload": 0,
+          "support_source_memory_hits": 1,
+          "unit_conflicts": 1,
+          "verification_literal_payload": 123,
+          "verification_trace_literals": 30,
+          "verified_nodes": 2,
+          "visits": 1,
+          "witness_peak_bytes": 64,
+          "witness_peak_entries": 0
+        }
+      },
+      {
+        "acquisition": {
+          "accounting_reads": 1,
+          "batch_commits": 1,
+          "batch_committed_payload": 1068,
+          "batch_committed_records": 1,
+          "batch_contexts": 1,
+          "batch_insert_attempts": 1,
+          "batch_peak_payload": 1068,
+          "batch_peak_python_bytes": 664,
+          "batch_peak_records": 1,
+          "batch_sized_payload": 1068,
+          "binary_subset_calls": 1,
+          "binary_subset_sign_literals": 2,
+          "binary_subset_unit_skips": 1,
+          "binary_subset_width_checks": 3,
+          "canonical_form_calls": 1,
+          "canonical_form_clauses": 41,
+          "canonical_form_literal_visits": 98,
+          "canonical_form_name_variables": 35,
+          "canonical_form_reuses": 1,
+          "certificate_serialized_bytes": 653,
+          "database_lookups": 1,
+          "expanded_nodes": 1,
+          "inserted_bytes": 1068,
+          "inserted_nodes": 1,
+          "key_serialized_bytes": 830,
+          "negative_admission_literals": 98,
+          "negative_admissions": 1,
+          "negative_candidates": 3,
+          "negative_clause_tests": 6,
+          "negative_containment_clauses": 405,
+          "negative_pool_admission_memory_hits": 1,
+          "negative_target_literals": 98,
+          "normalization_literal_visits": 98,
+          "probe_acquisition_calls": 1,
+          "propagation_literal_visits": 421,
+          "source_witness_literal_payload": 0,
+          "unit_conflicts": 1,
+          "verification_literal_payload": 98,
+          "verification_trace_literals": 43,
+          "verified_nodes": 1,
+          "visits": 1,
+          "witness_peak_bytes": 64,
+          "witness_peak_entries": 0
+        },
+        "checks": {
+          "checked_conditioned_cores": 1,
+          "conditioned_cores": 1,
+          "restriction_literal_visits": 240
+        },
+        "extractor": {
+          "extracted_core_publications": 1,
+          "support_dropped_clauses": 26,
+          "support_kind_units": 1,
+          "support_nodes": 1,
+          "support_source_literals": 98,
+          "unit_reason_literals_examined": 28,
+          "unit_trace_steps_examined": 20,
+          "unit_trace_steps_removed": 6,
+          "unit_trace_steps_retained": 14
+        },
+        "record": {
+          "assignment": [
+            [
+              1490,
+              false
+            ],
+            [
+              2483,
+              false
+            ],
+            [
+              2858,
+              true
+            ],
+            [
+              5126,
+              true
+            ]
+          ],
+          "format": "checked-conditioned-core-v1",
+          "parent_root": "cnf-residual-v1:[[-39,2],[-39,17,30],[-38,-25,-6],[-37,-26,35],[-37,11],[-36,-28],[-36,-8,6],[-36,6,23],[-36,9,32],[-35,8],[-34,12],[-33,-32],[-31,-3,8],[-30,-13],[-29,-17,-14],[-27,33],[-26,-9,-1],[-25,-9,14],[-24,10,20],[-23,-1,3],[-22,-4,26],[-21,-16],[-21,25],[-20,-19,26],[-18,10,27],[-17,11],[-17,38],[-16,2],[-15,-11,39],[-15,17,27],[-12,22],[-10,-3,27],[-9,10,26],[-9,38],[-7,29,32],[-5,10],[-2,7,22],[-2,21],[1,35],[4,26,32],[5,37],[8,24],[11,31,32],[13,28,34],[15,16],[16,36],[18,19],[21,37]]",
+          "parent_source": [
+            [
+              -5419,
+              566
+            ],
+            [
+              -5419,
+              2514,
+              4177
+            ],
+            [
+              -5126,
+              -3403,
+              -1004
+            ],
+            [
+              -5071,
+              -3598,
+              4844
+            ],
+            [
+              -5071,
+              1490
+            ],
+            [
+              -4938,
+              -4032
+            ],
+            [
+              -4938,
+              -1257,
+              1004
+            ],
+            [
+              -4938,
+              1004,
+              3057
+            ],
+            [
+              -4938,
+              1356,
+              4377
+            ],
+            [
+              -4844,
+              1257
+            ],
+            [
+              -4824,
+              1931
+            ],
+            [
+              -4384,
+              -4377
+            ],
+            [
+              -4212,
+              -578,
+              1257
+            ],
+            [
+              -4177,
+              -2340
+            ],
+            [
+              -4079,
+              -2514,
+              -2413
+            ],
+            [
+              -3836,
+              4384
+            ],
+            [
+              -3598,
+              -1356,
+              -175
+            ],
+            [
+              -3403,
+              -1356,
+              2413
+            ],
+            [
+              -3157,
+              1467,
+              2726
+            ],
+            [
+              -3057,
+              -175,
+              578
+            ],
+            [
+              -2898,
+              -599,
+              3598
+            ],
+            [
+              -2858,
+              -2483
+            ],
+            [
+              -2858,
+              3403
+            ],
+            [
+              -2726,
+              -2649,
+              3598
+            ],
+            [
+              -2561,
+              1467,
+              3836
+            ],
+            [
+              -2514,
+              1490
+            ],
+            [
+              -2514,
+              5126
+            ],
+            [
+              -2483,
+              566
+            ],
+            [
+              -2468,
+              -1490,
+              5419
+            ],
+            [
+              -2468,
+              2514,
+              3836
+            ],
+            [
+              -1931,
+              2898
+            ],
+            [
+              -1467,
+              -578,
+              3836
+            ],
+            [
+              -1356,
+              1467,
+              3598
+            ],
+            [
+              -1356,
+              5126
+            ],
+            [
+              -1246,
+              4079,
+              4377
+            ],
+            [
+              -880,
+              1467
+            ],
+            [
+              -566,
+              1246,
+              2898
+            ],
+            [
+              -566,
+              2858
+            ],
+            [
+              175,
+              4844
+            ],
+            [
+              599,
+              3598,
+              4377
+            ],
+            [
+              880,
+              5071
+            ],
+            [
+              1257,
+              3157
+            ],
+            [
+              1490,
+              4212,
+              4377
+            ],
+            [
+              2340,
+              4032,
+              4824
+            ],
+            [
+              2468,
+              2483
+            ],
+            [
+              2483,
+              4938
+            ],
+            [
+              2561,
+              2649
+            ],
+            [
+              2858,
+              5071
+            ]
+          ],
+          "root": "cnf-residual-v1:[[-35,2],[-35,15,27],[-34],[-34,-23,32],[-33,-25],[-33,-8,6],[-33,6,20],[-33,9,29],[-32,8],[-31,11],[-30,-29],[-28,-3,8],[-27,-12],[-26,-15,-13],[-24,30],[-23,-9,-1],[-22,-9,13],[-22,-6],[-21,10,18],[-20,-1,3],[-19,-4,23],[-18,-17,23],[-16,10,24],[-15],[-14,15,24],[-11,19],[-10,-3,24],[-9,10,23],[-7,26,29],[-5,10],[-2,7,19],[1,32],[4,23,29],[5,34],[8,21],[12,25,31],[14],[16,17],[22],[28,29],[33]]",
+          "source": [
+            [
+              -5419,
+              566
+            ],
+            [
+              -5419,
+              2514,
+              4177
+            ],
+            [
+              -3403,
+              -1004
+            ],
+            [
+              -5071,
+              -3598,
+              4844
+            ],
+            [
+              -5071
+            ],
+            [
+              -4938,
+              -4032
+            ],
+            [
+              -4938,
+              -1257,
+              1004
+            ],
+            [
+              -4938,
+              1004,
+              3057
+            ],
+            [
+              -4938,
+              1356,
+              4377
+            ],
+            [
+              -4844,
+              1257
+            ],
+            [
+              -4824,
+              1931
+            ],
+            [
+              -4384,
+              -4377
+            ],
+            [
+              -4212,
+              -578,
+              1257
+            ],
+            [
+              -4177,
+              -2340
+            ],
+            [
+              -4079,
+              -2514,
+              -2413
+            ],
+            [
+              -3836,
+              4384
+            ],
+            [
+              -3598,
+              -1356,
+              -175
+            ],
+            [
+              -3403,
+              -1356,
+              2413
+            ],
+            [
+              -3157,
+              1467,
+              2726
+            ],
+            [
+              -3057,
+              -175,
+              578
+            ],
+            [
+              -2898,
+              -599,
+              3598
+            ],
+            [
+              3403
+            ],
+            [
+              -2726,
+              -2649,
+              3598
+            ],
+            [
+              -2561,
+              1467,
+              3836
+            ],
+            [
+              -2514
+            ],
+            [
+              -2468,
+              2514,
+              3836
+            ],
+            [
+              -1931,
+              2898
+            ],
+            [
+              -1467,
+              -578,
+              3836
+            ],
+            [
+              -1356,
+              1467,
+              3598
+            ],
+            [
+              -1246,
+              4079,
+              4377
+            ],
+            [
+              -880,
+              1467
+            ],
+            [
+              -566,
+              1246,
+              2898
+            ],
+            [
+              175,
+              4844
+            ],
+            [
+              599,
+              3598,
+              4377
+            ],
+            [
+              880,
+              5071
+            ],
+            [
+              1257,
+              3157
+            ],
+            [
+              4212,
+              4377
+            ],
+            [
+              2340,
+              4032,
+              4824
+            ],
+            [
+              2468
+            ],
+            [
+              4938
+            ],
+            [
+              2561,
+              2649
+            ]
+          ]
+        },
+        "solver": {
+          "accounting_reads": 1,
+          "batch_commits": 1,
+          "batch_committed_payload": 1068,
+          "batch_committed_records": 1,
+          "batch_contexts": 1,
+          "batch_insert_attempts": 1,
+          "batch_peak_payload": 1068,
+          "batch_peak_python_bytes": 664,
+          "batch_peak_records": 1,
+          "batch_sized_payload": 1068,
+          "binary_subset_calls": 1,
+          "binary_subset_sign_literals": 2,
+          "binary_subset_unit_skips": 1,
+          "binary_subset_width_checks": 3,
+          "canonical_form_calls": 2,
+          "canonical_form_clauses": 56,
+          "canonical_form_literal_visits": 129,
+          "canonical_form_name_variables": 49,
+          "canonical_form_reuses": 2,
+          "certificate_serialized_bytes": 969,
+          "conditioning_child_memory_hits": 1,
+          "conditioning_parent_memory_hits": 1,
+          "database_lookups": 2,
+          "expanded_nodes": 1,
+          "inserted_bytes": 1519,
+          "inserted_nodes": 2,
+          "key_serialized_bytes": 2432,
+          "negative_admission_literals": 98,
+          "negative_admissions": 1,
+          "negative_candidates": 3,
+          "negative_clause_tests": 6,
+          "negative_containment_clauses": 405,
+          "negative_pool_admission_memory_hits": 1,
+          "negative_target_literals": 98,
+          "normalization_literal_visits": 445,
+          "probe_acquisition_calls": 1,
+          "propagation_literal_visits": 421,
+          "source_witness_literal_payload": 0,
+          "support_source_memory_hits": 1,
+          "unit_conflicts": 1,
+          "verification_literal_payload": 129,
+          "verification_trace_literals": 74,
+          "verified_nodes": 2,
+          "visits": 1,
+          "witness_peak_bytes": 64,
+          "witness_peak_entries": 0
+        }
+      },
+      {
+        "acquisition": {
+          "accounting_reads": 1,
+          "batch_commits": 1,
+          "batch_committed_payload": 1105,
+          "batch_committed_records": 1,
+          "batch_contexts": 1,
+          "batch_insert_attempts": 1,
+          "batch_peak_payload": 1105,
+          "batch_peak_python_bytes": 662,
+          "batch_peak_records": 1,
+          "batch_sized_payload": 1105,
+          "binary_subset_calls": 1,
+          "binary_subset_sign_literals": 28,
+          "binary_subset_unit_skips": 1,
+          "binary_subset_width_checks": 30,
+          "canonical_form_calls": 1,
+          "canonical_form_clauses": 41,
+          "canonical_form_literal_visits": 97,
+          "canonical_form_name_variables": 35,
+          "canonical_form_reuses": 1,
+          "certificate_serialized_bytes": 692,
+          "database_lookups": 1,
+          "expanded_nodes": 1,
+          "inserted_bytes": 1105,
+          "inserted_nodes": 1,
+          "key_serialized_bytes": 826,
+          "negative_admission_literals": 97,
+          "negative_admissions": 1,
+          "negative_candidates": 4,
+          "negative_clause_tests": 14,
+          "negative_containment_clauses": 446,
+          "negative_pool_admission_memory_hits": 1,
+          "negative_target_literals": 97,
+          "normalization_literal_visits": 97,
+          "probe_acquisition_calls": 1,
+          "propagation_literal_visits": 446,
+          "source_witness_literal_payload": 0,
+          "unit_conflicts": 1,
+          "verification_literal_payload": 97,
+          "verification_trace_literals": 56,
+          "verified_nodes": 1,
+          "visits": 1,
+          "witness_peak_bytes": 64,
+          "witness_peak_entries": 0
+        },
+        "checks": {
+          "checked_conditioned_cores": 1,
+          "conditioned_cores": 1,
+          "restriction_literal_visits": 240
+        },
+        "extractor": {
+          "extracted_core_publications": 1,
+          "support_dropped_clauses": 24,
+          "support_kind_units": 1,
+          "support_nodes": 1,
+          "support_source_literals": 97,
+          "unit_reason_literals_examined": 33,
+          "unit_trace_steps_examined": 25,
+          "unit_trace_steps_removed": 9,
+          "unit_trace_steps_retained": 16
+        },
+        "record": {
+          "assignment": [
+            [
+              1467,
+              false
+            ],
+            [
+              2483,
+              false
+            ],
+            [
+              2858,
+              true
+            ],
+            [
+              5126,
+              true
+            ]
+          ],
+          "format": "checked-conditioned-core-v1",
+          "parent_root": "cnf-residual-v1:[[-39,2],[-39,17,30],[-38,-25,-6],[-37,-26,35],[-37,11],[-36,-28],[-36,-8,6],[-36,6,23],[-36,9,32],[-35,8],[-34,12],[-33,-32],[-31,-3,8],[-30,-13],[-29,-17,-14],[-27,33],[-26,-9,-1],[-25,-9,14],[-24,10,20],[-23,-1,3],[-22,-4,26],[-21,-16],[-21,25],[-20,-19,26],[-18,10,27],[-17,11],[-17,38],[-16,2],[-15,-11,39],[-15,17,27],[-12,22],[-10,-3,27],[-9,10,26],[-9,38],[-7,29,32],[-5,10],[-2,7,22],[-2,21],[1,35],[4,26,32],[5,37],[8,24],[11,31,32],[13,28,34],[15,16],[16,36],[18,19],[21,37]]",
+          "parent_source": [
+            [
+              -5419,
+              566
+            ],
+            [
+              -5419,
+              2514,
+              4177
+            ],
+            [
+              -5126,
+              -3403,
+              -1004
+            ],
+            [
+              -5071,
+              -3598,
+              4844
+            ],
+            [
+              -5071,
+              1490
+            ],
+            [
+              -4938,
+              -4032
+            ],
+            [
+              -4938,
+              -1257,
+              1004
+            ],
+            [
+              -4938,
+              1004,
+              3057
+            ],
+            [
+              -4938,
+              1356,
+              4377
+            ],
+            [
+              -4844,
+              1257
+            ],
+            [
+              -4824,
+              1931
+            ],
+            [
+              -4384,
+              -4377
+            ],
+            [
+              -4212,
+              -578,
+              1257
+            ],
+            [
+              -4177,
+              -2340
+            ],
+            [
+              -4079,
+              -2514,
+              -2413
+            ],
+            [
+              -3836,
+              4384
+            ],
+            [
+              -3598,
+              -1356,
+              -175
+            ],
+            [
+              -3403,
+              -1356,
+              2413
+            ],
+            [
+              -3157,
+              1467,
+              2726
+            ],
+            [
+              -3057,
+              -175,
+              578
+            ],
+            [
+              -2898,
+              -599,
+              3598
+            ],
+            [
+              -2858,
+              -2483
+            ],
+            [
+              -2858,
+              3403
+            ],
+            [
+              -2726,
+              -2649,
+              3598
+            ],
+            [
+              -2561,
+              1467,
+              3836
+            ],
+            [
+              -2514,
+              1490
+            ],
+            [
+              -2514,
+              5126
+            ],
+            [
+              -2483,
+              566
+            ],
+            [
+              -2468,
+              -1490,
+              5419
+            ],
+            [
+              -2468,
+              2514,
+              3836
+            ],
+            [
+              -1931,
+              2898
+            ],
+            [
+              -1467,
+              -578,
+              3836
+            ],
+            [
+              -1356,
+              1467,
+              3598
+            ],
+            [
+              -1356,
+              5126
+            ],
+            [
+              -1246,
+              4079,
+              4377
+            ],
+            [
+              -880,
+              1467
+            ],
+            [
+              -566,
+              1246,
+              2898
+            ],
+            [
+              -566,
+              2858
+            ],
+            [
+              175,
+              4844
+            ],
+            [
+              599,
+              3598,
+              4377
+            ],
+            [
+              880,
+              5071
+            ],
+            [
+              1257,
+              3157
+            ],
+            [
+              1490,
+              4212,
+              4377
+            ],
+            [
+              2340,
+              4032,
+              4824
+            ],
+            [
+              2468,
+              2483
+            ],
+            [
+              2483,
+              4938
+            ],
+            [
+              2561,
+              2649
+            ],
+            [
+              2858,
+              5071
+            ]
+          ],
+          "root": "cnf-residual-v1:[[-35,2],[-35,15,27],[-34,-23,32],[-34,10],[-33,-25],[-33,-8,6],[-33,6,20],[-33,9,29],[-32,8],[-31,11],[-30,-29],[-28,-3,8],[-27,-12],[-26,-15,-13],[-24,30],[-23,-9,-1],[-22,-9,13],[-22,-6],[-21,18],[-20,-1,3],[-19,-4,23],[-18,-17,23],[-16,24],[-15,10],[-14,-10,35],[-14,15,24],[-11,19],[-9,23],[-7,26,29],[-5],[-2,7,19],[1,32],[4,23,29],[5,34],[8,21],[10,28,29],[12,25,31],[14],[16,17],[22],[33]]",
+          "source": [
+            [
+              -5419,
+              566
+            ],
+            [
+              -5419,
+              2514,
+              4177
+            ],
+            [
+              -3403,
+              -1004
+            ],
+            [
+              -5071,
+              -3598,
+              4844
+            ],
+            [
+              -5071,
+              1490
+            ],
+            [
+              -4938,
+              -4032
+            ],
+            [
+              -4938,
+              -1257,
+              1004
+            ],
+            [
+              -4938,
+              1004,
+              3057
+            ],
+            [
+              -4938,
+              1356,
+              4377
+            ],
+            [
+              -4844,
+              1257
+            ],
+            [
+              -4824,
+              1931
+            ],
+            [
+              -4384,
+              -4377
+            ],
+            [
+              -4212,
+              -578,
+              1257
+            ],
+            [
+              -4177,
+              -2340
+            ],
+            [
+              -4079,
+              -2514,
+              -2413
+            ],
+            [
+              -3836,
+              4384
+            ],
+            [
+              -3598,
+              -1356,
+              -175
+            ],
+            [
+              -3403,
+              -1356,
+              2413
+            ],
+            [
+              -3157,
+              2726
+            ],
+            [
+              -3057,
+              -175,
+              578
+            ],
+            [
+              -2898,
+              -599,
+              3598
+            ],
+            [
+              3403
+            ],
+            [
+              -2726,
+              -2649,
+              3598
+            ],
+            [
+              -2561,
+              3836
+            ],
+            [
+              -2514,
+              1490
+            ],
+            [
+              -2468,
+              -1490,
+              5419
+            ],
+            [
+              -2468,
+              2514,
+              3836
+            ],
+            [
+              -1931,
+              2898
+            ],
+            [
+              -1356,
+              3598
+            ],
+            [
+              -1246,
+              4079,
+              4377
+            ],
+            [
+              -880
+            ],
+            [
+              -566,
+              1246,
+              2898
+            ],
+            [
+              175,
+              4844
+            ],
+            [
+              599,
+              3598,
+              4377
+            ],
+            [
+              880,
+              5071
+            ],
+            [
+              1257,
+              3157
+            ],
+            [
+              1490,
+              4212,
+              4377
+            ],
+            [
+              2340,
+              4032,
+              4824
+            ],
+            [
+              2468
+            ],
+            [
+              4938
+            ],
+            [
+              2561,
+              2649
+            ]
+          ]
+        },
+        "solver": {
+          "accounting_reads": 1,
+          "batch_commits": 1,
+          "batch_committed_payload": 1105,
+          "batch_committed_records": 1,
+          "batch_contexts": 1,
+          "batch_insert_attempts": 1,
+          "batch_peak_payload": 1105,
+          "batch_peak_python_bytes": 662,
+          "batch_peak_records": 1,
+          "batch_sized_payload": 1105,
+          "binary_subset_calls": 1,
+          "binary_subset_sign_literals": 28,
+          "binary_subset_unit_skips": 1,
+          "binary_subset_width_checks": 30,
+          "canonical_form_calls": 2,
+          "canonical_form_clauses": 58,
+          "canonical_form_literal_visits": 132,
+          "canonical_form_name_variables": 51,
+          "canonical_form_reuses": 2,
+          "certificate_serialized_bytes": 1047,
+          "conditioning_child_memory_hits": 1,
+          "conditioning_parent_memory_hits": 1,
+          "database_lookups": 2,
+          "expanded_nodes": 1,
+          "inserted_bytes": 1614,
+          "inserted_nodes": 2,
+          "key_serialized_bytes": 2462,
+          "negative_admission_literals": 97,
+          "negative_admissions": 1,
+          "negative_candidates": 4,
+          "negative_clause_tests": 14,
+          "negative_containment_clauses": 446,
+          "negative_pool_admission_memory_hits": 1,
+          "negative_target_literals": 97,
+          "normalization_literal_visits": 446,
+          "probe_acquisition_calls": 1,
+          "propagation_literal_visits": 446,
+          "source_witness_literal_payload": 0,
+          "support_source_memory_hits": 1,
+          "unit_conflicts": 1,
+          "verification_literal_payload": 132,
+          "verification_trace_literals": 91,
+          "verified_nodes": 2,
+          "visits": 1,
+          "witness_peak_bytes": 64,
+          "witness_peak_entries": 0
+        }
+      },
+      {
+        "acquisition": {
+          "accounting_reads": 1,
+          "batch_commits": 1,
+          "batch_committed_payload": 1024,
+          "batch_committed_records": 1,
+          "batch_contexts": 1,
+          "batch_insert_attempts": 1,
+          "batch_peak_payload": 1024,
+          "batch_peak_python_bytes": 606,
+          "batch_peak_records": 1,
+          "batch_sized_payload": 1024,
+          "binary_subset_calls": 1,
+          "binary_subset_sign_literals": 28,
+          "binary_subset_unit_skips": 1,
+          "binary_subset_width_checks": 32,
+          "canonical_form_calls": 1,
+          "canonical_form_clauses": 35,
+          "canonical_form_literal_visits": 84,
+          "canonical_form_name_variables": 34,
+          "canonical_form_reuses": 1,
+          "certificate_serialized_bytes": 667,
+          "database_lookups": 1,
+          "expanded_nodes": 1,
+          "inserted_bytes": 1024,
+          "inserted_nodes": 1,
+          "key_serialized_bytes": 714,
+          "negative_admission_literals": 84,
+          "negative_admissions": 1,
+          "negative_candidates": 5,
+          "negative_clause_tests": 10,
+          "negative_containment_clauses": 487,
+          "negative_pool_admission_memory_hits": 1,
+          "negative_target_literals": 84,
+          "normalization_literal_visits": 84,
+          "probe_acquisition_calls": 1,
+          "propagation_literal_visits": 845,
+          "source_witness_literal_payload": 0,
+          "unit_conflicts": 1,
+          "verification_literal_payload": 84,
+          "verification_trace_literals": 71,
+          "verified_nodes": 1,
+          "visits": 1,
+          "witness_peak_bytes": 64,
+          "witness_peak_entries": 0
+        },
+        "checks": {
+          "checked_conditioned_cores": 1,
+          "conditioned_cores": 1,
+          "restriction_literal_visits": 240
+        },
+        "extractor": {
+          "extracted_core_publications": 1,
+          "support_dropped_clauses": 7,
+          "support_kind_units": 1,
+          "support_nodes": 1,
+          "support_source_literals": 84,
+          "unit_reason_literals_examined": 63,
+          "unit_trace_steps_examined": 29,
+          "unit_trace_steps_removed": 2,
+          "unit_trace_steps_retained": 27
+        },
+        "record": {
+          "assignment": [
+            [
+              1467,
+              true
+            ],
+            [
+              1490,
+              true
+            ],
+            [
+              2483,
+              false
+            ],
+            [
+              2858,
+              true
+            ],
+            [
+              5126,
+              true
+            ]
+          ],
+          "format": "checked-conditioned-core-v1",
+          "parent_root": "cnf-residual-v1:[[-39,2],[-39,17,30],[-38,-25,-6],[-37,-26,35],[-37,11],[-36,-28],[-36,-8,6],[-36,6,23],[-36,9,32],[-35,8],[-34,12],[-33,-32],[-31,-3,8],[-30,-13],[-29,-17,-14],[-27,33],[-26,-9,-1],[-25,-9,14],[-24,10,20],[-23,-1,3],[-22,-4,26],[-21,-16],[-21,25],[-20,-19,26],[-18,10,27],[-17,11],[-17,38],[-16,2],[-15,-11,39],[-15,17,27],[-12,22],[-10,-3,27],[-9,10,26],[-9,38],[-7,29,32],[-5,10],[-2,7,22],[-2,21],[1,35],[4,26,32],[5,37],[8,24],[11,31,32],[13,28,34],[15,16],[16,36],[18,19],[21,37]]",
+          "parent_source": [
+            [
+              -5419,
+              566
+            ],
+            [
+              -5419,
+              2514,
+              4177
+            ],
+            [
+              -5126,
+              -3403,
+              -1004
+            ],
+            [
+              -5071,
+              -3598,
+              4844
+            ],
+            [
+              -5071,
+              1490
+            ],
+            [
+              -4938,
+              -4032
+            ],
+            [
+              -4938,
+              -1257,
+              1004
+            ],
+            [
+              -4938,
+              1004,
+              3057
+            ],
+            [
+              -4938,
+              1356,
+              4377
+            ],
+            [
+              -4844,
+              1257
+            ],
+            [
+              -4824,
+              1931
+            ],
+            [
+              -4384,
+              -4377
+            ],
+            [
+              -4212,
+              -578,
+              1257
+            ],
+            [
+              -4177,
+              -2340
+            ],
+            [
+              -4079,
+              -2514,
+              -2413
+            ],
+            [
+              -3836,
+              4384
+            ],
+            [
+              -3598,
+              -1356,
+              -175
+            ],
+            [
+              -3403,
+              -1356,
+              2413
+            ],
+            [
+              -3157,
+              1467,
+              2726
+            ],
+            [
+              -3057,
+              -175,
+              578
+            ],
+            [
+              -2898,
+              -599,
+              3598
+            ],
+            [
+              -2858,
+              -2483
+            ],
+            [
+              -2858,
+              3403
+            ],
+            [
+              -2726,
+              -2649,
+              3598
+            ],
+            [
+              -2561,
+              1467,
+              3836
+            ],
+            [
+              -2514,
+              1490
+            ],
+            [
+              -2514,
+              5126
+            ],
+            [
+              -2483,
+              566
+            ],
+            [
+              -2468,
+              -1490,
+              5419
+            ],
+            [
+              -2468,
+              2514,
+              3836
+            ],
+            [
+              -1931,
+              2898
+            ],
+            [
+              -1467,
+              -578,
+              3836
+            ],
+            [
+              -1356,
+              1467,
+              3598
+            ],
+            [
+              -1356,
+              5126
+            ],
+            [
+              -1246,
+              4079,
+              4377
+            ],
+            [
+              -880,
+              1467
+            ],
+            [
+              -566,
+              1246,
+              2898
+            ],
+            [
+              -566,
+              2858
+            ],
+            [
+              175,
+              4844
+            ],
+            [
+              599,
+              3598,
+              4377
+            ],
+            [
+              880,
+              5071
+            ],
+            [
+              1257,
+              3157
+            ],
+            [
+              1490,
+              4212,
+              4377
+            ],
+            [
+              2340,
+              4032,
+              4824
+            ],
+            [
+              2468,
+              2483
+            ],
+            [
+              2483,
+              4938
+            ],
+            [
+              2561,
+              2649
+            ],
+            [
+              2858,
+              5071
+            ]
+          ],
+          "root": "cnf-residual-v1:[[-34,2],[-34,14,26],[-33,-22,31],[-32,-24],[-32,-8,6],[-32,6,19],[-32,9,28],[-31,8],[-30,10],[-29,-28],[-27,-3,8],[-26,-11],[-25,-14,-12],[-23,29],[-22,-9,-1],[-21,-9,12],[-21,-6],[-19,-1,3],[-18,-4,22],[-17,-16,22],[-13,14,23],[-13,34],[-10,18],[-7,25,28],[-3,23],[-2,7,18],[1,31],[4,22,28],[5,33],[8,20],[11,24,30],[13],[15,16],[21],[32]]",
+          "source": [
+            [
+              -5419,
+              566
+            ],
+            [
+              -5419,
+              2514,
+              4177
+            ],
+            [
+              -3403,
+              -1004
+            ],
+            [
+              -5071,
+              -3598,
+              4844
+            ],
+            [
+              -4938,
+              -4032
+            ],
+            [
+              -4938,
+              -1257,
+              1004
+            ],
+            [
+              -4938,
+              1004,
+              3057
+            ],
+            [
+              -4938,
+              1356,
+              4377
+            ],
+            [
+              -4844,
+              1257
+            ],
+            [
+              -4824,
+              1931
+            ],
+            [
+              -4384,
+              -4377
+            ],
+            [
+              -4212,
+              -578,
+              1257
+            ],
+            [
+              -4177,
+              -2340
+            ],
+            [
+              -4079,
+              -2514,
+              -2413
+            ],
+            [
+              -3836,
+              4384
+            ],
+            [
+              -3598,
+              -1356,
+              -175
+            ],
+            [
+              -3403,
+              -1356,
+              2413
+            ],
+            [
+              -3057,
+              -175,
+              578
+            ],
+            [
+              -2898,
+              -599,
+              3598
+            ],
+            [
+              3403
+            ],
+            [
+              -2726,
+              -2649,
+              3598
+            ],
+            [
+              -2468,
+              5419
+            ],
+            [
+              -2468,
+              2514,
+              3836
+            ],
+            [
+              -1931,
+              2898
+            ],
+            [
+              -578,
+              3836
+            ],
+            [
+              -1246,
+              4079,
+              4377
+            ],
+            [
+              -566,
+              1246,
+              2898
+            ],
+            [
+              175,
+              4844
+            ],
+            [
+              599,
+              3598,
+              4377
+            ],
+            [
+              880,
+              5071
+            ],
+            [
+              1257,
+              3157
+            ],
+            [
+              2340,
+              4032,
+              4824
+            ],
+            [
+              2468
+            ],
+            [
+              4938
+            ],
+            [
+              2561,
+              2649
+            ]
+          ]
+        },
+        "solver": {
+          "accounting_reads": 1,
+          "batch_commits": 1,
+          "batch_committed_payload": 1024,
+          "batch_committed_records": 1,
+          "batch_contexts": 1,
+          "batch_insert_attempts": 1,
+          "batch_peak_payload": 1024,
+          "batch_peak_python_bytes": 606,
+          "batch_peak_records": 1,
+          "batch_sized_payload": 1024,
+          "binary_subset_calls": 1,
+          "binary_subset_sign_literals": 28,
+          "binary_subset_unit_skips": 1,
+          "binary_subset_width_checks": 32,
+          "canonical_form_calls": 2,
+          "canonical_form_clauses": 63,
+          "canonical_form_literal_visits": 150,
+          "canonical_form_name_variables": 61,
+          "canonical_form_reuses": 2,
+          "certificate_serialized_bytes": 1242,
+          "conditioning_child_memory_hits": 1,
+          "conditioning_parent_memory_hits": 1,
+          "database_lookups": 2,
+          "expanded_nodes": 1,
+          "inserted_bytes": 1883,
+          "inserted_nodes": 2,
+          "key_serialized_bytes": 2498,
+          "negative_admission_literals": 84,
+          "negative_admissions": 1,
+          "negative_candidates": 5,
+          "negative_clause_tests": 10,
+          "negative_containment_clauses": 487,
+          "negative_pool_admission_memory_hits": 1,
+          "negative_target_literals": 84,
+          "normalization_literal_visits": 438,
+          "probe_acquisition_calls": 1,
+          "propagation_literal_visits": 845,
+          "source_witness_literal_payload": 0,
+          "support_source_memory_hits": 1,
+          "unit_conflicts": 1,
+          "verification_literal_payload": 150,
+          "verification_trace_literals": 137,
+          "verified_nodes": 2,
+          "visits": 1,
+          "witness_peak_bytes": 64,
+          "witness_peak_entries": 0
+        }
+      },
+      {
+        "acquisition": {
+          "accounting_reads": 1,
+          "key_serialized_bytes": 478,
+          "negative_admission_literals": 114,
+          "negative_admissions": 1,
+          "negative_pool_admission_memory_hits": 1,
+          "normalization_literal_visits": 114,
+          "probe_acquisition_calls": 1,
+          "search_memory_hits": 1,
+          "source_witness_literal_payload": 0,
+          "visits": 1,
+          "witness_peak_bytes": 64,
+          "witness_peak_entries": 0
+        },
+        "checks": {
+          "checked_conditioned_cores": 1,
+          "conditioned_cores": 1,
+          "restriction_literal_visits": 240
+        },
+        "extractor": {
+          "preimage_calls": 1,
+          "preimage_name_variables": 2,
+          "preimage_renamed_literals": 4,
+          "preimage_reused_literals": 4,
+          "preimage_scanned_literals": 4,
+          "preimage_selected_indices": 3,
+          "preimage_unchanged_clauses": 3,
+          "preimage_unique_clauses": 3,
+          "restriction_literal_visits": 4,
+          "support_dropped_clauses": 43,
+          "support_kind_component": 1,
+          "support_kind_units": 1,
+          "support_nodes": 2,
+          "support_source_literals": 118,
+          "unit_reason_literals_examined": 3,
+          "unit_trace_steps_examined": 2,
+          "unit_trace_steps_removed": 0,
+          "unit_trace_steps_retained": 2
+        },
+        "record": {
+          "assignment": [
+            [
+              2483,
+              true
+            ]
+          ],
+          "format": "checked-conditioned-core-v1",
+          "parent_root": "cnf-residual-v1:[[-39,2],[-39,17,30],[-38,-25,-6],[-37,-26,35],[-37,11],[-36,-28],[-36,-8,6],[-36,6,23],[-36,9,32],[-35,8],[-34,12],[-33,-32],[-31,-3,8],[-30,-13],[-29,-17,-14],[-27,33],[-26,-9,-1],[-25,-9,14],[-24,10,20],[-23,-1,3],[-22,-4,26],[-21,-16],[-21,25],[-20,-19,26],[-18,10,27],[-17,11],[-17,38],[-16,2],[-15,-11,39],[-15,17,27],[-12,22],[-10,-3,27],[-9,10,26],[-9,38],[-7,29,32],[-5,10],[-2,7,22],[-2,21],[1,35],[4,26,32],[5,37],[8,24],[11,31,32],[13,28,34],[15,16],[16,36],[18,19],[21,37]]",
+          "parent_source": [
+            [
+              -5419,
+              566
+            ],
+            [
+              -5419,
+              2514,
+              4177
+            ],
+            [
+              -5126,
+              -3403,
+              -1004
+            ],
+            [
+              -5071,
+              -3598,
+              4844
+            ],
+            [
+              -5071,
+              1490
+            ],
+            [
+              -4938,
+              -4032
+            ],
+            [
+              -4938,
+              -1257,
+              1004
+            ],
+            [
+              -4938,
+              1004,
+              3057
+            ],
+            [
+              -4938,
+              1356,
+              4377
+            ],
+            [
+              -4844,
+              1257
+            ],
+            [
+              -4824,
+              1931
+            ],
+            [
+              -4384,
+              -4377
+            ],
+            [
+              -4212,
+              -578,
+              1257
+            ],
+            [
+              -4177,
+              -2340
+            ],
+            [
+              -4079,
+              -2514,
+              -2413
+            ],
+            [
+              -3836,
+              4384
+            ],
+            [
+              -3598,
+              -1356,
+              -175
+            ],
+            [
+              -3403,
+              -1356,
+              2413
+            ],
+            [
+              -3157,
+              1467,
+              2726
+            ],
+            [
+              -3057,
+              -175,
+              578
+            ],
+            [
+              -2898,
+              -599,
+              3598
+            ],
+            [
+              -2858,
+              -2483
+            ],
+            [
+              -2858,
+              3403
+            ],
+            [
+              -2726,
+              -2649,
+              3598
+            ],
+            [
+              -2561,
+              1467,
+              3836
+            ],
+            [
+              -2514,
+              1490
+            ],
+            [
+              -2514,
+              5126
+            ],
+            [
+              -2483,
+              566
+            ],
+            [
+              -2468,
+              -1490,
+              5419
+            ],
+            [
+              -2468,
+              2514,
+              3836
+            ],
+            [
+              -1931,
+              2898
+            ],
+            [
+              -1467,
+              -578,
+              3836
+            ],
+            [
+              -1356,
+              1467,
+              3598
+            ],
+            [
+              -1356,
+              5126
+            ],
+            [
+              -1246,
+              4079,
+              4377
+            ],
+            [
+              -880,
+              1467
+            ],
+            [
+              -566,
+              1246,
+              2898
+            ],
+            [
+              -566,
+              2858
+            ],
+            [
+              175,
+              4844
+            ],
+            [
+              599,
+              3598,
+              4377
+            ],
+            [
+              880,
+              5071
+            ],
+            [
+              1257,
+              3157
+            ],
+            [
+              1490,
+              4212,
+              4377
+            ],
+            [
+              2340,
+              4032,
+              4824
+            ],
+            [
+              2468,
+              2483
+            ],
+            [
+              2483,
+              4938
+            ],
+            [
+              2561,
+              2649
+            ],
+            [
+              2858,
+              5071
+            ]
+          ],
+          "root": "cnf-residual-v1:[[-38,2],[-38,16,29],[-37,-24,-6],[-36,-25,34],[-36,11],[-35,-27],[-35,-8,6],[-35,6,22],[-35,9,31],[-34,8],[-33,12],[-32,-31],[-30,-3,8],[-29,-13],[-28,-16,-14],[-26,32],[-25,-9,-1],[-24,-9,14],[-23,10,19],[-22,-1,3],[-21,-4,25],[-20],[-20,24],[-19,-18,25],[-17,10,26],[-16,11],[-16,37],[-15,-11,38],[-15,16,26],[-12,21],[-10,-3,26],[-9,10,25],[-9,37],[-7,28,31],[-5,10],[-2,7,21],[-2,20],[1,34],[2],[4,25,31],[5,36],[8,23],[11,30,31],[13,27,33],[17,18],[20,36]]",
+          "source": [
+            [
+              -5419,
+              566
+            ],
+            [
+              -5419,
+              2514,
+              4177
+            ],
+            [
+              -5126,
+              -3403,
+              -1004
+            ],
+            [
+              -5071,
+              -3598,
+              4844
+            ],
+            [
+              -5071,
+              1490
+            ],
+            [
+              -4938,
+              -4032
+            ],
+            [
+              -4938,
+              -1257,
+              1004
+            ],
+            [
+              -4938,
+              1004,
+              3057
+            ],
+            [
+              -4938,
+              1356,
+              4377
+            ],
+            [
+              -4844,
+              1257
+            ],
+            [
+              -4824,
+              1931
+            ],
+            [
+              -4384,
+              -4377
+            ],
+            [
+              -4212,
+              -578,
+              1257
+            ],
+            [
+              -4177,
+              -2340
+            ],
+            [
+              -4079,
+              -2514,
+              -2413
+            ],
+            [
+              -3836,
+              4384
+            ],
+            [
+              -3598,
+              -1356,
+              -175
+            ],
+            [
+              -3403,
+              -1356,
+              2413
+            ],
+            [
+              -3157,
+              1467,
+              2726
+            ],
+            [
+              -3057,
+              -175,
+              578
+            ],
+            [
+              -2898,
+              -599,
+              3598
+            ],
+            [
+              -2858
+            ],
+            [
+              -2858,
+              3403
+            ],
+            [
+              -2726,
+              -2649,
+              3598
+            ],
+            [
+              -2561,
+              1467,
+              3836
+            ],
+            [
+              -2514,
+              1490
+            ],
+            [
+              -2514,
+              5126
+            ],
+            [
+              566
+            ],
+            [
+              -2468,
+              -1490,
+              5419
+            ],
+            [
+              -2468,
+              2514,
+              3836
+            ],
+            [
+              -1931,
+              2898
+            ],
+            [
+              -1467,
+              -578,
+              3836
+            ],
+            [
+              -1356,
+              1467,
+              3598
+            ],
+            [
+              -1356,
+              5126
+            ],
+            [
+              -1246,
+              4079,
+              4377
+            ],
+            [
+              -880,
+              1467
+            ],
+            [
+              -566,
+              1246,
+              2898
+            ],
+            [
+              -566,
+              2858
+            ],
+            [
+              175,
+              4844
+            ],
+            [
+              599,
+              3598,
+              4377
+            ],
+            [
+              880,
+              5071
+            ],
+            [
+              1257,
+              3157
+            ],
+            [
+              1490,
+              4212,
+              4377
+            ],
+            [
+              2340,
+              4032,
+              4824
+            ],
+            [
+              2561,
+              2649
+            ],
+            [
+              2858,
+              5071
+            ]
+          ]
+        },
+        "solver": {
+          "accounting_reads": 1,
+          "conditioning_child_memory_hits": 1,
+          "conditioning_parent_memory_hits": 1,
+          "key_serialized_bytes": 2035,
+          "negative_admission_literals": 114,
+          "negative_admissions": 1,
+          "negative_pool_admission_memory_hits": 1,
+          "normalization_literal_visits": 470,
+          "probe_acquisition_calls": 1,
+          "search_memory_hits": 1,
+          "source_witness_literal_payload": 0,
+          "support_existing_memory_hits": 2,
+          "support_source_memory_hits": 2,
+          "visits": 1,
+          "witness_peak_bytes": 64,
+          "witness_peak_entries": 0
+        }
+      }
+    ]
+  },
+  "preparation_delta": {
+    "compressed_bytes": 12846,
+    "path": "experiments/results/cnf-conditional-unit-support/causal-1/preparation-delta.json.gz",
+    "raw_bytes": 161456,
+    "seconds": 0.009058790747076273,
+    "sha256": "d10ebd45a0330b41031ea56f4d13d417cd8d683a6f4cee42b196c84352358669"
+  },
+  "queries": {
+    "path": "experiments/results/cnf-conditional-unit-support/causal-1/queries.json",
+    "sha256": "32b46e72b1809f333bc5581e6ba9eecf1f394b78bbe1b85cb71e6a8981fbd471"
+  },
+  "reconstructed": {
+    "readers": {
+      "CanonicalVerifySnapshot": {
+        "canonical_form_calls": 79,
+        "canonical_form_clauses": 20010,
+        "canonical_form_literal_visits": 55697,
+        "canonical_form_name_variables": 8535,
+        "canonical_form_reuses": 79,
+        "certificate_disk_hits": 24,
+        "certificate_memory_hits": 34,
+        "database_lookups": 79,
+        "key_serialized_bytes": 516337,
+        "normalization_literal_visits": 61434,
+        "read_bytes": 310245,
+        "restriction_literal_visits": 11486,
+        "search_disk_hits": 55,
+        "search_memory_hits": 11,
+        "verification_literal_payload": 55697,
+        "verification_trace_literals": 1154,
+        "verified_nodes": 79
+      },
+      "SnapshotResidualSolver": {
+        "certificate_disk_hits": 24,
+        "certificate_memory_hits": 34,
+        "database_lookups": 79,
+        "key_serialized_bytes": 516337,
+        "normalization_literal_visits": 117131,
+        "read_bytes": 310245,
+        "restriction_literal_visits": 11486,
+        "search_disk_hits": 55,
+        "search_memory_hits": 11,
+        "verification_literal_payload": 55697,
+        "verification_trace_literals": 1154,
+        "verified_nodes": 79
+      }
+    },
+    "seconds": 0.2068892908282578
+  },
+  "summary": {
+    "attempts": 66,
+    "checked_python_bytes": 4031691,
+    "cold_seconds": 0.20988062489777803,
+    "complete_worker_seconds": 2.0725494157522917,
+    "database_bytes": 48922624,
+    "donor_seconds": 0.028788874857127666,
+    "expanded_nodes": 28,
+    "hint_bytes": 7233,
+    "mode": "causal",
+    "mode_setup_seconds": 7.312605157494545e-05,
+    "new_payload_bytes": 727039,
+    "new_records": {
+      "cnf_affine_negative_v1": 0,
+      "cnf_binary_equivalence_v2": 0,
+      "cnf_binary_equivalence_v3": 0,
+      "cnf_residual_v1": 123
+    },
+    "peak_rss_bytes": 342720512,
+    "persistence_seconds": 0.06557587534189224,
+    "preparation_and_queries": 0.23334807949140668,
+    "prepare_seconds": 0.032656332943588495,
+    "proof_delta_compressed_bytes": 68672,
+    "query_seconds": 0.20069174654781818,
+    "reconstruction_seconds": 0.31956329103559256,
+    "restore_seconds": 0.1391992918215692,
+    "routes": {
+      "cached": 12,
+      "causal": 40,
+      "native": 14
+    },
+    "setup_seconds": 0.029802500270307064,
+    "statuses": {
+      "sat": 7,
+      "unsat": 59
+    },
+    "warm_seconds": 0.00024958280846476555
+  }
+}

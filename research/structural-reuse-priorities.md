@@ -12,7 +12,37 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: conditional mixed-width supports before full reconstruction
+## Current investigation: recover after missing reasons, retaining positive cases
+
+[Conditional unit supports](conditional-unit-support.md) yield six source-bound
+refutations with 3–28 clauses. Both these templates and the stronger conditioned
+causal-core baseline reuse the same **40 of 66 supplied conditional queries**;
+query expansions fall 68 to 28, but preparation-plus-query time regresses against
+native solving. There is no incremental coverage win over conditioned cores.
+The common donor costs nine expansions; causal preparation costs five more.
+
+Separating runtime certificates from archived provenance reduces template hints
+**51,929 to 11,505 bytes**, with identical native proofs. Proof delta plus hints
+is 75,014 bytes, still above native-only 65,359. Native target CNFs continue to
+accumulate. This establishes a representation saving, not general memory or
+runtime improvement. Cold hint validation is charged separately from the
+workers' cold answer replay; the full provenance remains preserved.
+
+**Next primary target: bounded alternative-reason recovery and witness reuse
+when a small edit destroys a support.** The largest remaining UNSAT miss is
+case 4 (`delete-reason-2`), template 4: five expansions, 13.94 ms in the first
+order. Case 7 (`random-three-deletions-1`), template 4 uses six expansions and is
+SAT: never infer a negative answer from the donor's remaining structure. Compare
+both with native fallback and the existing conditioned causal bank. Automatic
+guard selection and variable correspondence are still supplied, unpriced gaps.
+
+Resume `experiments/results/cnf-conditional-unit-support/checkpoint.json`.
+`analysis.json` preserves fourteen fallback sources, guards, counters and new IDs.
+Use the protocol prefix plus preparation and preceding query additions only.
+Retain the two-order timing regressions, the oversized metadata candidate and
+all existing native/extension proofs. This adds no whole-input coverage cell.
+
+## Previous investigation: conditional mixed-width supports before full reconstruction
 
 [Direct joint-prefix reuse](joint-prefix-reuse.md) removes two redundant
 reconstructions from each edit group, reusing a canonical triple already live in

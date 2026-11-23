@@ -28,11 +28,12 @@ classes.
 
 ## Paper
 
-[Reuse the live joint prefix](research/joint-prefix-reuse.md).
-The largest query avoids two repeated cofactor constructions with identical
-proofs and storage. Runtime gains remain uncertain. Next: recognize conditional
-mixed-width supports before rebuilding full residual proofs, preserving their
-assignments, variable maps and child obligations.
+[Conditional unit supports and compact active hints](research/conditional-unit-support.md).
+Six guarded refutations match the existing conditioned causal-core baseline.
+They avoid fresh expansions on supplied queries, but preparation plus query
+time still increases. Compact hints save 77.84% of template metadata; full native
+proofs and provenance remain preserved. Next: alternative reasons and witness
+reuse after a support-breaking edit.
 
 [Reuse checked order during causal reconstruction](research/preimage-fusion.md).
 Sharing untouched clauses and their canonical order reduces repeated support

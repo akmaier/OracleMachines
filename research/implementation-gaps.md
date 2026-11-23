@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, direct joint-prefix reuse):
+Latest expansion checkpoint (23 November, conditional unit supports):
+[Guarded refutations and compact active hints](conditional-unit-support.md) lift
+ancestor reasons and preserve split assumptions. Forty conditional hits match the
+existing conditioned causal-core baseline; fresh query expansions fall 68 to 28,
+but preparation-plus-query time regresses against native-only solving. Compact
+hints shrink 77.84%, with identical native proofs and retained provenance. Next:
+bounded recovery after a reason deletion, including the surviving SAT case;
+automatic guard/map discovery and full native proof-space growth remain open.
+
+Previous expansion checkpoint (23 November, direct joint-prefix reuse):
 [Reusing the already-live first cofactor](joint-prefix-reuse.md) removes two
 normalizations and restrictions from the largest query without changing proof
 bytes, storage or verification. Runtime differences are small and noisy. Next:

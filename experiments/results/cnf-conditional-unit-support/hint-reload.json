@@ -1,0 +1,189 @@
+{
+  "limitations": [
+    "Diagnostic serial read and validation costs, outside original worker timing. Causal reload includes reader construction and native proof checks; self-contained templates require no donor database. Query-time containment and native publication are separately included in query costs."
+  ],
+  "samples": [
+    {
+      "counts": {},
+      "hint_binding": {
+        "path": "experiments/results/cnf-conditional-unit-support/native-0/hints.json",
+        "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      },
+      "sample": {
+        "mode": "native",
+        "path": "experiments/results/cnf-conditional-unit-support/native-0/report.json",
+        "repeat": 0,
+        "sha256": "7ad982a096943995b073cc39f1dde87394a85db1d2b0dacf07fca641bdea7062"
+      },
+      "seconds": 0.00010075001046061516
+    },
+    {
+      "counts": {
+        "database_lookups": 6,
+        "key_serialized_bytes": 1456,
+        "normalization_literal_visits": 320,
+        "read_bytes": 1739,
+        "search_disk_hits": 6,
+        "verification_literal_payload": 160,
+        "verification_trace_literals": 160,
+        "verified_nodes": 6
+      },
+      "hint_binding": {
+        "path": "experiments/results/cnf-conditional-unit-support/causal-0/hints.json",
+        "sha256": "6205a3d1c3ea786b96f9b41bd6f559c05e3537df6c5e3899f10684a17fad3c03"
+      },
+      "sample": {
+        "mode": "causal",
+        "path": "experiments/results/cnf-conditional-unit-support/causal-0/report.json",
+        "repeat": 0,
+        "sha256": "d16389c78357e8be48ecd23f361035c454526badff11a77e8c8cab7b0ab80847"
+      },
+      "seconds": 0.027015834115445614
+    },
+    {
+      "counts": {
+        "guard_input_literals": 188,
+        "template_checked_reason_literals": 188,
+        "templates_checked": 6
+      },
+      "hint_binding": {
+        "path": "experiments/results/cnf-conditional-unit-support/templates-0/hints.json",
+        "sha256": "434940727b74c72ed0389e3f0a3b2f93e85d12f183d48c5851fb9b90c13d64eb"
+      },
+      "sample": {
+        "mode": "templates",
+        "path": "experiments/results/cnf-conditional-unit-support/templates-0/report.json",
+        "repeat": 0,
+        "sha256": "de2e5fe489b93662ae4b182aa68d84c3d8c9bb1b7c2e7261e3db93acc886bce2"
+      },
+      "seconds": 0.0003510420210659504
+    },
+    {
+      "counts": {
+        "guard_input_literals": 188,
+        "template_checked_reason_literals": 188,
+        "templates_checked": 6
+      },
+      "hint_binding": {
+        "path": "experiments/results/cnf-conditional-unit-support/templates-1/hints.json",
+        "sha256": "434940727b74c72ed0389e3f0a3b2f93e85d12f183d48c5851fb9b90c13d64eb"
+      },
+      "sample": {
+        "mode": "templates",
+        "path": "experiments/results/cnf-conditional-unit-support/templates-1/report.json",
+        "repeat": 1,
+        "sha256": "36c08e57bfa68c23ebfebf318a3c5c3d0cba7011d2e7a6d15780c5ec3bedc14a"
+      },
+      "seconds": 0.0003636670298874378
+    },
+    {
+      "counts": {
+        "database_lookups": 6,
+        "key_serialized_bytes": 1456,
+        "normalization_literal_visits": 320,
+        "read_bytes": 1739,
+        "search_disk_hits": 6,
+        "verification_literal_payload": 160,
+        "verification_trace_literals": 160,
+        "verified_nodes": 6
+      },
+      "hint_binding": {
+        "path": "experiments/results/cnf-conditional-unit-support/causal-1/hints.json",
+        "sha256": "6205a3d1c3ea786b96f9b41bd6f559c05e3537df6c5e3899f10684a17fad3c03"
+      },
+      "sample": {
+        "mode": "causal",
+        "path": "experiments/results/cnf-conditional-unit-support/causal-1/report.json",
+        "repeat": 1,
+        "sha256": "47db6e454cda15594f391be3a1052d70303d4cb3de35d8ceaa5892aa47875463"
+      },
+      "seconds": 0.024899084120988846
+    },
+    {
+      "counts": {},
+      "hint_binding": {
+        "path": "experiments/results/cnf-conditional-unit-support/native-1/hints.json",
+        "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      },
+      "sample": {
+        "mode": "native",
+        "path": "experiments/results/cnf-conditional-unit-support/native-1/report.json",
+        "repeat": 1,
+        "sha256": "7b06af596a1effec011ad46dda64b25ba77784966ef91b40c9802bc31368baab"
+      },
+      "seconds": 9.508337825536728e-05
+    },
+    {
+      "counts": {
+        "guard_input_literals": 188,
+        "template_checked_reason_literals": 188,
+        "templates_checked": 6
+      },
+      "hint_binding": {
+        "path": "experiments/results/cnf-conditional-unit-support/cache-templates-0/hints.json",
+        "sha256": "434940727b74c72ed0389e3f0a3b2f93e85d12f183d48c5851fb9b90c13d64eb"
+      },
+      "sample": {
+        "path": "experiments/results/cnf-conditional-unit-support/cache-templates-0/report.json",
+        "policy": "templates",
+        "repeat": 0,
+        "sha256": "315a2127b9b5afb966fb0afe68ec5cc3628b266693282f6ac197c90f4dc4dc65"
+      },
+      "seconds": 0.000351583119481802
+    },
+    {
+      "counts": {
+        "guard_input_literals": 188,
+        "template_checked_reason_literals": 188,
+        "templates_checked": 6
+      },
+      "hint_binding": {
+        "path": "experiments/results/cnf-conditional-unit-support/cache-compact-0/hints.json",
+        "sha256": "2d105086471e481d7b14a5f1bed96b146629a41e17cb960b361958b485a7acfa"
+      },
+      "sample": {
+        "path": "experiments/results/cnf-conditional-unit-support/cache-compact-0/report.json",
+        "policy": "compact",
+        "repeat": 0,
+        "sha256": "cbf5b2ba7e0c22597f101f1a7f5d0b98351884f2343647d742ece7f6b685d548"
+      },
+      "seconds": 0.0002750838175415993
+    },
+    {
+      "counts": {
+        "guard_input_literals": 188,
+        "template_checked_reason_literals": 188,
+        "templates_checked": 6
+      },
+      "hint_binding": {
+        "path": "experiments/results/cnf-conditional-unit-support/cache-compact-1/hints.json",
+        "sha256": "2d105086471e481d7b14a5f1bed96b146629a41e17cb960b361958b485a7acfa"
+      },
+      "sample": {
+        "path": "experiments/results/cnf-conditional-unit-support/cache-compact-1/report.json",
+        "policy": "compact",
+        "repeat": 1,
+        "sha256": "e3cddb671a17ad660d4d7cfd15aab61a0202995b17576ea8fefc2212d94ff413"
+      },
+      "seconds": 0.00027008308097720146
+    },
+    {
+      "counts": {
+        "guard_input_literals": 188,
+        "template_checked_reason_literals": 188,
+        "templates_checked": 6
+      },
+      "hint_binding": {
+        "path": "experiments/results/cnf-conditional-unit-support/cache-templates-1/hints.json",
+        "sha256": "434940727b74c72ed0389e3f0a3b2f93e85d12f183d48c5851fb9b90c13d64eb"
+      },
+      "sample": {
+        "path": "experiments/results/cnf-conditional-unit-support/cache-templates-1/report.json",
+        "policy": "templates",
+        "repeat": 1,
+        "sha256": "eb4421384c10a1f93f9ec7406f7ae0dccf0c31c8e54e12cd2d14d4d25871e2c3"
+      },
+      "seconds": 0.0003682500682771206
+    }
+  ]
+}

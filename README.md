@@ -28,11 +28,11 @@ classes.
 
 ## Paper
 
-[Learned conditional covers](research/learned-conditional-covers.md).
-Three chronological transfers reduce expansion dispatches from 43 to 33, but
-preparation-plus-query time grows 7.74% and retained state increases. The route
-remains experimental. Next: recognize cheap unit conflicts before paying for
-cover discovery and reconstruction.
+[Unit-gated conditional covers](research/unit-cover-gate.md).
+Preserving cheap unit proofs improves preparation-plus-query time by 5.53%
+against ungated learning, but remains 6.76% slower than baseline. Next: reuse
+three intact conditional branches when an edit breaks only the fourth, with
+exact recomposition and full cost accounting.
 
 [Reuse checked order during causal reconstruction](research/preimage-fusion.md).
 Sharing untouched clauses and their canonical order reduces repeated support

@@ -1,0 +1,120 @@
+from collections import Counter
+from itertools import product
+from types import SimpleNamespace
+from unittest.mock import patch
+import unittest
+
+from experiments.cnf_unit_cover_gate import has_candidate, run_after_pool_miss
+from experiments.cnf_learned_conditional import LearnedCoverBank
+from experiments.cnf_consequence_priority import ConsequencePrioritySolver
+from experiments.cnf_probed_partition import acquire
+from experiments.cnf_residual_dag import holds
+
+CUBE = list(product((-1, 1), (-2, 2), (-3, 3)))
+
+
+class UnitCoverGateTests(unittest.TestCase):
+    def solver(self, **kwargs):
+        s = ConsequencePrioritySolver(**kwargs)
+        self.addCleanup(s.close)
+        return s
+
+    def prepared(self, s, target):
+        cnf, names, key = s._canonical(target)
+        return SimpleNamespace(cnf=cnf, names=names, key=key, target=tuple(map(tuple, target)))
+
+    def bank(self, s):
+        acquire(s, CUBE, 256)
+        bank = LearnedCoverBank(s, [])
+        bank.register(self.prepared(s, CUBE), [], 3)
+        return bank.entries
+
+    def test_unit_conflict_never_extracts_a_cover(self):
+        s = self.solver(leaves=False); entries = self.bank(s)
+        target = CUBE + [(7,), (-7,)]
+        prepared = self.prepared(s, target); c = Counter()
+        with patch.object(LearnedCoverBank, 'reuse', side_effect=AssertionError('Unnecessary discovery')):
+            evidence = run_after_pool_miss(s, prepared, [], entries, 0, c)
+        self.assertEqual(evidence['route'], 'unit-conflict')
+        self.assertEqual(s._read(prepared.key)['proof']['kind'], 'units')
+        self.assertFalse(s._read(prepared.key)['answer'])
+        self.assertIsNone(entries[0]['cover'])
+        self.assertEqual(c['unit_gate_conflicts'], 1)
+
+    def test_nonconflicting_prefix_is_shared_with_native_fallback(self):
+        s = self.solver(leaves=False); entries = self.bank(s)
+        prepared = self.prepared(s, [(7,), (-7, 8), (-8, 9)])
+        c = Counter(); evidence = run_after_pool_miss(s, prepared, [], entries, 256, c)
+        self.assertEqual(evidence['route'], 'unit-fallback')
+        node = s._read(prepared.key)
+        self.assertTrue(node['answer'])
+        self.assertTrue(holds(prepared.target, dict(zip(prepared.names, node['model']))))
+        self.assertEqual(s.counts['screen_traces_reused'], 1)
+
+    def test_guard_miss_does_not_screen_or_discover(self):
+        s = self.solver(leaves=False); entries = self.bank(s)
+        prepared = self.prepared(s, [(9,)])
+        c = Counter()
+        with patch('experiments.cnf_unit_cover_gate.propagate', side_effect=AssertionError('Unnecessary screen')):
+            evidence = run_after_pool_miss(s, prepared, [[77, True]], entries, 256, c)
+        self.assertEqual(evidence['route'], 'native')
+        self.assertEqual(c['unit_gate_screens'], 0)
+
+    def test_later_complete_cover_remains_available(self):
+        s = self.solver(leaves=False); entries = self.bank(s)
+        prepared = self.prepared(s, CUBE + [(9, 10)])
+        c = Counter()
+        with patch.object(s, '_expand', side_effect=AssertionError('Fresh search')):
+            evidence = run_after_pool_miss(s, prepared, [], entries, 256, c)
+        self.assertEqual(evidence['route'], 'learned-cover')
+        self.assertFalse(s._read(prepared.key)['answer'])
+        self.assertIsNone(evidence['screen']['conflict'])
+
+    def test_screen_only_ablation_retains_negative_answer(self):
+        s = self.solver(leaves=False); entries = self.bank(s)
+        prepared = self.prepared(s, CUBE + [(9, 10)])
+        with patch.object(LearnedCoverBank, 'reuse', side_effect=AssertionError('Cover disabled')):
+            evidence = run_after_pool_miss(s, prepared, [], entries, 256, Counter(), use_covers=False)
+        self.assertEqual(evidence['route'], 'unit-fallback')
+        self.assertFalse(s._read(prepared.key)['answer'])
+
+    def test_bad_identity_or_unforced_retained_trace_cannot_publish(self):
+        for corruption in ('key', 'trace'):
+            s = self.solver(leaves=False); entries = self.bank(s)
+            prepared = self.prepared(s, [(7,), (-7,), (8, 9)])
+            if corruption == 'key':
+                prepared.key = 'wrong'
+                with self.assertRaises(ValueError):
+                    run_after_pool_miss(s, prepared, [], entries, 256, Counter())
+            else:
+                with patch('experiments.cnf_unit_cover_gate.propagate', return_value=({}, [(1, 0)], 0)):
+                    with self.assertRaises(ValueError):
+                        run_after_pool_miss(s, prepared, [], entries, 256, Counter())
+            self.assertFalse(s.db.active)
+            self.assertFalse(s.db.pending)
+
+    def test_budget_stop_does_not_register_an_incomplete_result(self):
+        s = self.solver(leaves=False); entries = self.bank(s)
+        target = [(20, 21, 22), (-20, -21, -22)]
+        prepared = self.prepared(s, target); before = len(entries)
+        evidence = run_after_pool_miss(s, prepared, [], entries, 0, Counter(), use_covers=False)
+        self.assertTrue(evidence['stopped'])
+        self.assertEqual(len(entries), before)
+        self.assertIsNone(s._read(prepared.key))
+        self.assertFalse(s.db.active)
+
+    def test_exhaustive_two_variable_formulas_keep_both_answers(self):
+        s = self.solver(leaves=False); entries = self.bank(s)
+        clauses = [[(i+1)*v for i, v in enumerate(bits) if v] for bits in product((-1, 0, 1), repeat=2)]
+        for mask in range(512):
+            target = [cl for i, cl in enumerate(clauses) if mask >> i & 1]
+            prepared = self.prepared(s, target)
+            evidence = run_after_pool_miss(s, prepared, [], entries, 256, Counter())
+            self.assertFalse(evidence['stopped'])
+            answer = any(holds(target, dict(zip((1, 2), bits))) for bits in product((False, True), repeat=2))
+            self.assertEqual(s._read(prepared.key)['answer'], answer)
+
+    def test_candidate_filter_excludes_rejected_entries(self):
+        c = Counter()
+        self.assertFalse(has_candidate([dict(guard=[], rejected=True)], [], c))
+        with self.assertRaises(ValueError): has_candidate([], [[1, 0]], c)

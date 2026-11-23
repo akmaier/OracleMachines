@@ -12,7 +12,33 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: avoid costly cover discovery on cheap unit conflicts
+## Current investigation: reuse intact branches of partially broken covers
+
+[Unit gating](unit-cover-gate.md) fixes the largest regression: case 6/guard 3
+returns to a native unit proof, **17.77 to 3.30 ms**, while the two useful later
+transfers survive. Gated learning saves **5.53%** preparation-plus-query time
+against ungated learning but remains **6.76% slower** than baseline. The
+gate-only ablation preserves identical native proofs; its fewer dispatches
+are bookkeeping savings. Keep the learned route experimental.
+
+**Next primary target: exact partial-cover recomposition on cases 19/20,
+guard 3.** A single deleted clause breaks one leaf while three of four earlier
+supports remain valid (origin 15 for target 19, origin 19 for target 20).
+Current all-or-nothing matching discards that opportunity and reacquires the
+entire target. Query means are 24.83/31.48 ms against baseline 17.67/22.71 ms.
+
+Preserve checked intact leaves and solve only failed branches, with explicit
+path guards, source maps and unit-prefix binding. A negative root needs all
+reachable branches; a positive leaf needs full-target witness lifting. Price
+the complete construction and discovery, rather than counting matched leaves
+as a solved query. Retain the nearby SAT controls and all earlier authority.
+Automatic guards/maps and unrestricted bounds remain open.
+
+Resume `experiments/results/cnf-unit-cover-gate/checkpoint.json`.
+`next-target.json` binds exact missing clauses, prior origins and the ordered
+stream; it is diagnostic evidence, not a measured partial-cover algorithm.
+
+## Previous investigation: avoid costly cover discovery on cheap unit conflicts
 
 [Learned conditional covers](learned-conditional-covers.md) transfer earlier
 source-bound reasons to three later cofactors after the existing negative pool

@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, learned conditional covers):
+Latest expansion checkpoint (23 November, unit-gated covers):
+[Keep cheap unit proofs](unit-cover-gate.md). The largest cover regression falls
+17.77 to 3.30 ms. Gated learning improves 5.53% against ungated learning, but
+remains 6.76% slower than baseline. The gate-only ablation has identical native
+proof bytes despite fewer expansion dispatches. Next: preserve intact leaves
+when one deleted clause breaks a conditional cover. Cases 19/20 each admit an
+earlier four-leaf cover with three intact supports; exact partial recomposition
+and full witness/proof checking remain to be implemented and priced.
+
+Previous expansion checkpoint (23 November, learned conditional covers):
 [Transfer complete conditional supports](learned-conditional-covers.md).
 Three chronological transfers reduce expansion dispatches 43 to 33, with native
 unit/split checking and no future-answer seeding. Preparation plus query is

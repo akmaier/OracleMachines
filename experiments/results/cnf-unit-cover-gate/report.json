@@ -1,0 +1,244 @@
+{
+  "groups": {
+    "baseline": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 12.0,
+        "query_seconds": 0.08634887496009469
+      },
+      "controls": {
+        "attempts": 114.0,
+        "expanded_nodes": 43.0,
+        "query_seconds": 0.31514235329814255
+      }
+    },
+    "gate-only": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 10.0,
+        "query_seconds": 0.08688150183297694
+      },
+      "controls": {
+        "attempts": 114.0,
+        "expanded_nodes": 36.0,
+        "query_seconds": 0.3175396657316014
+      }
+    },
+    "learned": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 12.0,
+        "query_seconds": 0.10254003072623163
+      },
+      "controls": {
+        "attempts": 114.0,
+        "expanded_nodes": 33.0,
+        "query_seconds": 0.35282760800328106
+      }
+    },
+    "unit-gated": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 10.0,
+        "query_seconds": 0.10098479117732495
+      },
+      "controls": {
+        "attempts": 114.0,
+        "expanded_nodes": 29.0,
+        "query_seconds": 0.3286682111211121
+      }
+    }
+  },
+  "means": {
+    "baseline": {
+      "attempts": 138.0,
+      "checked_python_bytes": 8460643.0,
+      "cold_seconds": 0.4326950415270403,
+      "complete_worker_seconds": 3.5410828851163387,
+      "database_bytes": 50343936.0,
+      "donor_seconds": 0.02622842730488628,
+      "expanded_nodes": 55.0,
+      "hint_bytes": 11505.0,
+      "mode_setup_seconds": 6.88543077558279e-05,
+      "new_payload_bytes": 1551836.0,
+      "peak_rss_bytes": 344702976.0,
+      "persistence_seconds": 0.11727054172661155,
+      "preparation_and_queries": 0.41447835322469473,
+      "prepare_seconds": 0.012987124966457486,
+      "proof_delta_compressed_bytes": 144816.0,
+      "query_seconds": 0.40149122825823724,
+      "reconstruction_seconds": 0.5304366045165807,
+      "restore_seconds": 0.11052005214150995,
+      "setup_seconds": 0.026505687623284757,
+      "warm_seconds": 0.00036958325654268265
+    },
+    "gate-only": {
+      "attempts": 138.0,
+      "checked_python_bytes": 8531930.0,
+      "cold_seconds": 0.4249404169386253,
+      "complete_worker_seconds": 3.5898737082025036,
+      "database_bytes": 50343936.0,
+      "donor_seconds": 0.027293218998238444,
+      "expanded_nodes": 46.0,
+      "hint_bytes": 56055.0,
+      "mode_setup_seconds": 6.776023656129837e-05,
+      "new_payload_bytes": 1551836.0,
+      "peak_rss_bytes": 327921664.0,
+      "persistence_seconds": 0.11987196875270456,
+      "preparation_and_queries": 0.4174673029920086,
+      "prepare_seconds": 0.013046135427430272,
+      "proof_delta_compressed_bytes": 144816.0,
+      "query_seconds": 0.40442116756457835,
+      "reconstruction_seconds": 0.5387878646142781,
+      "restore_seconds": 0.12422515638172626,
+      "setup_seconds": 0.0275950210634619,
+      "warm_seconds": 0.0002466354053467512
+    },
+    "learned": {
+      "attempts": 138.0,
+      "checked_python_bytes": 8668024.0,
+      "cold_seconds": 0.44323232281021774,
+      "complete_worker_seconds": 3.6435507083078846,
+      "database_bytes": 50364416.0,
+      "donor_seconds": 0.029298792011104524,
+      "expanded_nodes": 45.0,
+      "hint_bytes": 83351.0,
+      "mode_setup_seconds": 6.656290497630835e-05,
+      "new_payload_bytes": 1575964.0,
+      "peak_rss_bytes": 327712768.0,
+      "persistence_seconds": 0.1199803645722568,
+      "preparation_and_queries": 0.4684303782414645,
+      "prepare_seconds": 0.013062739511951804,
+      "proof_delta_compressed_bytes": 145118.0,
+      "query_seconds": 0.4553676387295127,
+      "reconstruction_seconds": 0.5445673022186384,
+      "restore_seconds": 0.11540758307091892,
+      "setup_seconds": 0.026605864171870053,
+      "warm_seconds": 0.00023442727979272604
+    },
+    "unit-gated": {
+      "attempts": 138.0,
+      "checked_python_bytes": 8493876.0,
+      "cold_seconds": 0.41647791652940214,
+      "complete_worker_seconds": 3.5098683539545164,
+      "database_bytes": 50302976.0,
+      "donor_seconds": 0.027197969146072865,
+      "expanded_nodes": 39.0,
+      "hint_bytes": 76533.0,
+      "mode_setup_seconds": 6.78433571010828e-05,
+      "new_payload_bytes": 1535146.0,
+      "peak_rss_bytes": 324329472.0,
+      "persistence_seconds": 0.11639763542916626,
+      "preparation_and_queries": 0.4425131999887526,
+      "prepare_seconds": 0.012860197690315545,
+      "proof_delta_compressed_bytes": 141625.0,
+      "query_seconds": 0.42965300229843706,
+      "reconstruction_seconds": 0.5156456662807614,
+      "restore_seconds": 0.10373783332761377,
+      "setup_seconds": 0.026307229069061577,
+      "warm_seconds": 0.00025841640308499336
+    }
+  },
+  "protocol": {
+    "path": "experiments/results/cnf-unit-cover-gate/protocol.json",
+    "sha256": "3895f930586d7c1859bb0774ea53a9593cde0e12d5f80875b36301a722e1dff5"
+  },
+  "samples": [
+    {
+      "path": "experiments/results/cnf-unit-cover-gate/baseline-0/report.json",
+      "policy": "baseline",
+      "repeat": 0,
+      "sha256": "95d304254e9136de99deb3ad40955244f9f99292ba26f2ddb7fb31b6f5af8cdf"
+    },
+    {
+      "path": "experiments/results/cnf-unit-cover-gate/learned-0/report.json",
+      "policy": "learned",
+      "repeat": 0,
+      "sha256": "c248e6c49d6979102ffd51ab1c2c0f9b090500b182c1712a3ada7815490c1c6a"
+    },
+    {
+      "path": "experiments/results/cnf-unit-cover-gate/gate-only-0/report.json",
+      "policy": "gate-only",
+      "repeat": 0,
+      "sha256": "cb9bbfcf4ca80f3fa04f6fbe7545f7594e68ba2647b3c4aceb6a05e68ced6f9d"
+    },
+    {
+      "path": "experiments/results/cnf-unit-cover-gate/unit-gated-0/report.json",
+      "policy": "unit-gated",
+      "repeat": 0,
+      "sha256": "f1663be704d635fefc89566bae1de6b1e022a1abfa6903b6cd563d868a0a507d"
+    },
+    {
+      "path": "experiments/results/cnf-unit-cover-gate/unit-gated-1/report.json",
+      "policy": "unit-gated",
+      "repeat": 1,
+      "sha256": "4c2654f0e8365bc9da3e72ef15fee5a562022b631196ddefbbd7bb5ee1d68508"
+    },
+    {
+      "path": "experiments/results/cnf-unit-cover-gate/gate-only-1/report.json",
+      "policy": "gate-only",
+      "repeat": 1,
+      "sha256": "bf85634db37f17dbc531aef44f2879f907a967e7b8c734895477b80358f3850b"
+    },
+    {
+      "path": "experiments/results/cnf-unit-cover-gate/learned-1/report.json",
+      "policy": "learned",
+      "repeat": 1,
+      "sha256": "a43a06f22c496ddeb251f41854c5999330e26b0815e3171a504109f4bd7a0033"
+    },
+    {
+      "path": "experiments/results/cnf-unit-cover-gate/baseline-1/report.json",
+      "policy": "baseline",
+      "repeat": 1,
+      "sha256": "25e55cd57353504cf2991a6227cbe9bee9385bbd806bfe277f6b9ada71096e49"
+    },
+    {
+      "path": "experiments/results/cnf-unit-cover-gate/baseline-2/report.json",
+      "policy": "baseline",
+      "repeat": 2,
+      "sha256": "856978909113d5cdedaa420679c6359f1fb510ff8f67c1923dad1ef3d5d2e933"
+    },
+    {
+      "path": "experiments/results/cnf-unit-cover-gate/learned-2/report.json",
+      "policy": "learned",
+      "repeat": 2,
+      "sha256": "fc07907ce4436b444a64bc2b9cd449fa81e06a39310a2b18876858939cda9496"
+    },
+    {
+      "path": "experiments/results/cnf-unit-cover-gate/gate-only-2/report.json",
+      "policy": "gate-only",
+      "repeat": 2,
+      "sha256": "b617a7ee722a503b1976add6a0f502bf2a52bc49680facf0ddc8717a529dee3a"
+    },
+    {
+      "path": "experiments/results/cnf-unit-cover-gate/unit-gated-2/report.json",
+      "policy": "unit-gated",
+      "repeat": 2,
+      "sha256": "aa314aac92c673bf6f2dd6428614614ab46746c3b3171d6d7b467488044d3e5e"
+    },
+    {
+      "path": "experiments/results/cnf-unit-cover-gate/unit-gated-3/report.json",
+      "policy": "unit-gated",
+      "repeat": 3,
+      "sha256": "ec6dbf2c3caa491637dd9e50aeb03af60f511fc2914a5718c9b4dd55b5e7334f"
+    },
+    {
+      "path": "experiments/results/cnf-unit-cover-gate/gate-only-3/report.json",
+      "policy": "gate-only",
+      "repeat": 3,
+      "sha256": "97c60c9d5761f66c43f07c3f2ae2b574f4a089c63914faac71f9eb18182bc2cb"
+    },
+    {
+      "path": "experiments/results/cnf-unit-cover-gate/learned-3/report.json",
+      "policy": "learned",
+      "repeat": 3,
+      "sha256": "e7a444f75a05fafd5234376f1907a18d30b6bf2cc529c2abad50f27d145bd4fb"
+    },
+    {
+      "path": "experiments/results/cnf-unit-cover-gate/baseline-3/report.json",
+      "policy": "baseline",
+      "repeat": 3,
+      "sha256": "2a6a3102c0d8cc7f024e72897ae5a564ecf399d51a13032b39b0c99e5cfd12b7"
+    }
+  ]
+}

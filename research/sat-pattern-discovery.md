@@ -5,7 +5,22 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: complete conditional covers transfer, but discovery can lose
+## Latest evidence: partial covers retain useful structure after edits
+
+[Unit gating](unit-cover-gate.md) avoids three unnecessary cover attempts and
+preserves two useful transfers, improving preparation plus query by 5.53%
+against ungated learning. It still loses 6.76% against baseline, so neither
+complete matching nor reduced dispatch counts establish overall efficiency.
+
+Two prospective edits reveal a more precise pattern: one leaf loses one clause
+while three of four conditional supports from an earlier origin remain intact.
+The current matcher rejects the whole cover. The next task is exact partial
+recomposition: reuse intact branches, acquire failed leaves and lift either a
+full negative proof or a positive witness. Path conditions and unit-prefix
+restrictions must remain explicit. The measured opportunities do not certify
+the target by themselves or add an efficient arbitrary-CNF class.
+
+## Previous evidence: complete conditional covers transfer, but discovery can lose
 
 [Learned covers](learned-conditional-covers.md) expose a precise reusable pattern:
 every path in a complete binary tree implies a checked conditional unit

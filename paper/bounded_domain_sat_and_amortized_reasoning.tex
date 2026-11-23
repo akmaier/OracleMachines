@@ -9589,6 +9589,35 @@ needed to amortize discovery. All 114 conditional queries already solved under
 the baseline. The result identifies a reusable proof pattern and its current
 cost limits; it adds no efficient whole-input SAT class or unrestricted bound.
 
+\paragraph{Preserve cheap unit proofs before learning a cover.}
+A unit screen on an already prepared cofactor can prevent needless cover
+construction. It runs after template and pool misses with an eligible learned
+descriptor. Conflicts use the existing native unit publisher; a nonconflicting
+prefix is reused by fallback after a cover miss. Source identity, trace and
+full-target certificate checking remain required.
+
+Four additional fixed-seed clause deletions give 138 queries per worker. Four
+policies in four alternating serial orders agree on 125 UNSAT and thirteen SAT
+cofactor answers. The gate finds three unit conflicts and retains two useful
+cover transfers. Case 6 under guard 3 falls from 17.77 to 3.30 ms. Preparation
+plus query improves 5.53\% against ungated learning, yet remains 6.76\% slower
+than baseline. A gate-only ablation stores byte-identical native proofs to
+baseline while reducing dispatches from 55 to 46; these counts bypass calls,
+not branching proof obligations. Gated learning uses 39 dispatches and slightly
+smaller native payload, but its larger hints must also be charged.
+
+The new misses identify surviving structure. For target 19 under guard 3, an
+earlier four-leaf cover loses one clause in one leaf while the other three
+supports remain contained. The same pattern occurs from origin 19 to target 20.
+The current matcher abandons the whole cover, giving query means of 24.83 and
+31.48 ms against baseline 17.67 and 22.71 ms. The next experiment should retain
+the intact conditional branches and acquire only failed leaves. Every path
+condition remains binding: a negative root needs all reachable branches, while
+a positive leaf needs full-target witness lifting. These posthoc support
+matches are neither completed proofs nor evidence of a net saving from partial
+recomposition. Automatic useful-pattern discovery and unrestricted bounds stay
+open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

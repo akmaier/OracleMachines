@@ -12,7 +12,36 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: recover after missing reasons, retaining positive cases
+## Current investigation: preserve cheap pool hits before conditional recovery
+
+[Missing-clause recovery](conditional-support-recovery.md) identifies one extra
+forced value after unit propagation in three exposed hard cofactors. The SAT
+case falls from six expansions to two. The rule is existing deletion-guard /
+failed-literal reasoning, with native proof and full witness reconstruction.
+For a unit-refutable strengthening missing only one clause, a saturated
+nonconflicting unit prefix leaves at most one new failed literal.
+
+The full cost comparison rejects enabling the route unconditionally. Screened
+recovery reduces 90-query expansions 36 to 17 but raises preparation-plus-query
+time and stored payload. A narrower ordinary-fallback gate gives **36 to 30**
+expansions, yet **10.66% more preparation-plus-query time** and **13.05% more
+native payload**. All decisions remain identical. No default changes.
+
+**Next primary target: preserve checked negative-core and witness-pool hits
+before recovery preparation.** Additional case 12 / guard 3 already reuses a
+negative core in one expansion: recovery increases publication from one node
+(4,086 serialized proof bytes) to nine (22,101). Cases 13 / 4 and 14 / 4 already
+have witness hits. For genuine remaining recovery wins, compare the cost of
+full native reconstruction with existing checked guard composition. Keep
+recognition, maintenance and cold validation in the comparison.
+
+Resume `experiments/results/cnf-conditional-recovery/checkpoint.json`.
+`analysis.json` retains bound sources, guards and both policies' counters; its
+largest regressions are more informative than the smallest expansion counts.
+The prior fourteen misses, failed other-template matching and the positive case
+are preserved. Supplied guards/maps and arbitrary-CNF coverage remain open.
+
+## Previous investigation: recover after missing reasons, retaining positive cases
 
 [Conditional unit supports](conditional-unit-support.md) yield six source-bound
 refutations with 3–28 clauses. Both these templates and the stronger conditioned

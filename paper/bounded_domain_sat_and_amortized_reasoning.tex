@@ -9443,6 +9443,53 @@ reasons and a SAT cofactor needing a witness. Automatic guard selection, useful
 correspondence, whole-input composition and cheap arbitrary-CNF expansion remain
 open.
 
+\paragraph{Recover a missing reason without assuming the edited formula is false.}
+Suppose a checked unit template refutes $K\land C$ under $a$, while $K$ is
+contained in an edited target $G$ and $C$ is the only missing template clause.
+Every model of $G$ extending $a$ must falsify $C$. This is the existing
+clause-deletion implication. It reduces the remaining obligation but does not
+make it UNSAT. For unit-refutable strengthenings there is a sharper structural
+restriction. After a complete nonconflicting unit closure of $G$ under $a$,
+$C$ cannot be satisfied or have two unassigned literals: adding it would introduce
+neither a unit nor an empty clause, contradicting unit refutability. Thus $C$
+is already false or has exactly one unassigned literal. Only the latter case
+provides a new failed literal, using the established rule of
+Section~\ref{sec:checked-failed-literals}. This argument requires a unit fixed
+point and a unit-refutable strengthening; an arbitrary UNSAT donor is insufficient.
+
+Our optional recovery route checks the source support and unit prefix, solves
+the forced restriction, then either checks a full target witness or reconstructs
+native split and unit proofs. In an excluded alternative, the missing clause
+is satisfied and disappears, so the original unit template refutes a cofactor
+of $G$ itself. Budget exhaustion remains unknown. The implementation caps the
+initial reduced missing clause at three literals; that cap bounds neither the
+remaining search nor full proof construction. Trying other compatible templates
+alone closes none of the preceding fourteen fallback queries. Missing-clause
+guidance instead reduces two exposed negative queries from four/five expansions
+to two/four, and the positive query from six to two.
+
+Fifteen clause sets under six supplied guards, including four further fixed-seed
+deletions, give ninety queries per worker. Native, compact reuse, unit-screened
+reuse and screened recovery run in two opposite serial orders. All agree on
+81 UNSAT and nine SAT cofactor answers. Screened recovery reduces fresh query
+expansions from compact reuse's 36 to 17, but preparation plus query time rises
+from 299.82 to 336.39 ms. A separate paired follow-up keeps the ordinary native
+route whenever no new forced value is found. It reduces expansions from 36 to
+30, yet raises preparation plus query time from 297.36 to 329.05 ms and native
+payload from 889,261 to 1,005,314 bytes. Both comparisons charge donor acquisition,
+checking, persistence and cold answer replay; hint reload is measured separately.
+These policies remain optional.
+
+The regressions identify a more useful next target. A later negative query
+already has a cheap core hit: compact reuse publishes one node with 4,086
+serialized proof bytes, while recovery publishes nine with 22,101 bytes despite
+the same single fresh expansion. Later positive queries already hit the witness
+pool. Extra forced reasoning bypasses those cheaper routes and rebuilds context.
+We should preserve checked core and witness reuse before recovery preparation,
+then price full native reconstruction against existing guard composition.
+A lower expansion count alone does not establish lower runtime or memory, and
+these supplied conditional queries add no efficient whole-input SAT class.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

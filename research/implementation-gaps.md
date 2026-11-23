@@ -4,7 +4,17 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, conditional unit supports):
+Latest expansion checkpoint (23 November, conditional recovery):
+[One missing reason selects a forced value](conditional-support-recovery.md).
+Native reconstruction validates UNSAT and SAT results, and the hard positive
+case falls from six expansions to two. Across matched streams, however, the
+ordinary-fallback recovery gate adds 10.66% preparation-plus-query time and
+13.05% native payload despite fewer expansions. Keep it optional. Next: preserve
+cheap negative-core and witness hits before recovery and reduce redundant full
+proof construction. The one-new-literal property requires a unit fixed point
+and a unit-refutable strengthening, not an arbitrary UNSAT donor.
+
+Previous expansion checkpoint (23 November, conditional unit supports):
 [Guarded refutations and compact active hints](conditional-unit-support.md) lift
 ancestor reasons and preserve split assumptions. Forty conditional hits match the
 existing conditioned causal-core baseline; fresh query expansions fall 68 to 28,

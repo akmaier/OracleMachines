@@ -5,7 +5,22 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: conditional certificates match an existing stronger baseline
+## Latest evidence: a missing unit reason selects one failed literal
+
+[Conditional support recovery](conditional-support-recovery.md) supplies a
+precise restricted pattern. If a checked unit-refutable strengthening differs
+by one missing clause, a nonconflicting unit fixed point leaves at most one
+unassigned literal of that clause. Its opposite value is forced. The remaining
+cofactor can be SAT or UNSAT; both branches of that distinction are validated.
+This uses the existing deletion-guard and failed-literal implication.
+
+Discovery still has to pay. Forced recovery reduces fresh search on the exposed
+hard cases but loses overall to existing compact reuse, because later queries
+already hit cheaper negative-core or witness pools. The next task is to preserve
+those hits before preparing a recovery path and to charge full proof assembly.
+No new whole-input coverage cell or efficient partition of arbitrary CNF follows.
+
+## Previous evidence: conditional certificates match an existing stronger baseline
 
 [Conditional unit supports](conditional-unit-support.md) expose six reusable
 unit-refutation patterns, with ancestor reasons lifted to original variable

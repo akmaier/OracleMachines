@@ -1,0 +1,104 @@
+{
+  "groups": {
+    "compact": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 8.0,
+        "query_seconds": 0.07559139444492757
+      },
+      "controls": {
+        "attempts": 66.0,
+        "expanded_nodes": 28.0,
+        "query_seconds": 0.20887185586616397
+      }
+    },
+    "gated": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 9.0,
+        "query_seconds": 0.10784549941308796
+      },
+      "controls": {
+        "attempts": 66.0,
+        "expanded_nodes": 21.0,
+        "query_seconds": 0.20844722934998572
+      }
+    }
+  },
+  "means": {
+    "compact": {
+      "attempts": 90.0,
+      "checked_python_bytes": 5092347.0,
+      "cold_seconds": 0.26678047934547067,
+      "complete_worker_seconds": 2.6001130626536906,
+      "database_bytes": 49225728.0,
+      "donor_seconds": 0.028561395592987537,
+      "expanded_nodes": 36.0,
+      "hint_bytes": 11505.0,
+      "mode_setup_seconds": 6.445846520364285e-05,
+      "new_payload_bytes": 889261.0,
+      "peak_rss_bytes": 301711360.0,
+      "persistence_seconds": 0.06953704147599638,
+      "preparation_and_queries": 0.2973627089522779,
+      "prepare_seconds": 0.012899458641186357,
+      "proof_delta_compressed_bytes": 82869.0,
+      "query_seconds": 0.28446325031109154,
+      "reconstruction_seconds": 0.3705790638923645,
+      "restore_seconds": 0.11999343731440604,
+      "setup_seconds": 0.0290799995418638,
+      "warm_seconds": 0.00022347946651279926
+    },
+    "gated": {
+      "attempts": 90.0,
+      "checked_python_bytes": 5550849.0,
+      "cold_seconds": 0.2887740631122142,
+      "complete_worker_seconds": 2.511181354522705,
+      "database_bytes": 49426432.0,
+      "donor_seconds": 0.026359229581430554,
+      "expanded_nodes": 30.0,
+      "hint_bytes": 11505.0,
+      "mode_setup_seconds": 9.237462654709816e-05,
+      "new_payload_bytes": 1005314.0,
+      "peak_rss_bytes": 344342528.0,
+      "persistence_seconds": 0.07594377105124295,
+      "preparation_and_queries": 0.3290536452550441,
+      "prepare_seconds": 0.01276091649197042,
+      "proof_delta_compressed_bytes": 92892.0,
+      "query_seconds": 0.3162927287630737,
+      "reconstruction_seconds": 0.4003249993547797,
+      "restore_seconds": 0.1081726043485105,
+      "setup_seconds": 0.03183535416610539,
+      "warm_seconds": 0.0002623333130031824
+    }
+  },
+  "protocol": {
+    "path": "experiments/results/cnf-conditional-recovery/gate-protocol.json",
+    "sha256": "3a4af226a02f3e6d6ec7197150cbbd8d989e34a4960ff9d28083d53f9b5b9d52"
+  },
+  "samples": [
+    {
+      "path": "experiments/results/cnf-conditional-recovery/gate-compact-0/report.json",
+      "policy": "compact",
+      "repeat": 0,
+      "sha256": "405af3751e258535b1c7158ee84186e991ddc31b4d8305e2a39469c1a824c030"
+    },
+    {
+      "path": "experiments/results/cnf-conditional-recovery/gate-gated-0/report.json",
+      "policy": "gated",
+      "repeat": 0,
+      "sha256": "45c715463f01670c0ee223d97949d3fd939f59660d220c4e08bfea6790e383bb"
+    },
+    {
+      "path": "experiments/results/cnf-conditional-recovery/gate-gated-1/report.json",
+      "policy": "gated",
+      "repeat": 1,
+      "sha256": "519ee407b95cd96f53da23d8a3791ae62bef50fb4935a1eb9a9f82e72f11318f"
+    },
+    {
+      "path": "experiments/results/cnf-conditional-recovery/gate-compact-1/report.json",
+      "policy": "compact",
+      "repeat": 1,
+      "sha256": "e986139e2467ccf05b08a9694243cce7b4f244ee6b07d1581e35df6f5c04ce1b"
+    }
+  ]
+}

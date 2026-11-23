@@ -9725,6 +9725,38 @@ measured comparison charging admission, extraction, retained hints and
 recomposition; it is not yet an online-policy improvement. Automatic useful
 guards and efficient acquisition of arbitrary CNFs remain open.
 
+\paragraph{A finer cover can preserve the same expensive residual.}
+We next admit selected recomposed negative roots into the live origin bank.
+Only completed partial queries with at least two native expansion dispatches
+are proposed; positive or stopped results are excluded. The source map and
+committed native result are checked, and existing guard filters, lazy extraction,
+bank limits and candidate ranking remain. Admission occurs after the query and
+can benefit only a later input. The threshold is an exposed-workload heuristic,
+not a prediction of optimal future reuse.
+
+The case-15 cover is then selected for cases 19 and 20. It retains more intact
+leaves, but native acquisition remains at 32 dispatches and five missing leaves
+across the stream. Case 19 pays for cold extraction and extra recomposition
+while its missing residual is unchanged. Case 20's smaller residual still needs
+the same number of native dispatches. Published support leaves and split
+certificates each rise from six to eight. Thus, a larger fraction of retained
+supports need not reduce the remaining computation.
+
+Preparation-plus-query mean rises 2.39\%, with three of four pairs regressing.
+Hint bytes rise from 42,031 to 61,318, native payload from 1,508,442 to 1,525,496,
+and selected retained Python state by 1.22\%. Complete-worker mean is 0.65\%
+lower with two faster and two slower pairs; this mixed timing does not establish
+a consistent overall gain. Compressed proof deltas shrink slightly despite
+larger logical payload, illustrating why compression size cannot replace
+acquisition, checking and uncompressed-storage accounting.
+
+We retain the negative experiment without changing defaults. All conditional
+queries were already solved under the baseline. The next investigation returns
+to unlabelled whole-CNF discovery and the interactions that existing automatic
+guard recognizers leave unresolved. Useful partitions must reduce or explain
+remaining acquisition after charging recognition and exact recomposition;
+finer descriptions alone supply no unrestricted-SAT efficiency theorem.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -5,7 +5,22 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: preparation reuse preserves coverage but does not save total time
+## Latest evidence: finer covers can leave the unresolved computation unchanged
+
+[Admitting recomposed origins](refined-proof-origins.md) puts the earlier
+finer-branch hypothesis into the live chronological stream. It retains more
+supports but still needs 32 native dispatches and five missing leaves.
+Preparation/query mean regresses 2.39%, hints grow 45.89%, and no new whole-CNF
+coverage cell is added. All answers remain checked and unchanged.
+
+Return to unlabelled whole-input discovery with fresh fixed generator seeds,
+archive novelty recorded, matched budgets and explicit unresolved interactions.
+Inspect the existing automatic guard recognizers before extending them. The
+current counterexample shows why a finer structural description is insufficient:
+it can add certificates while leaving the expensive residual unchanged. Price
+remaining acquisition and recomposition, not just the fraction of intact leaves.
+
+## Previous evidence: preparation reuse preserves coverage but does not save total time
 
 [One-use leaf preparation](missing-leaf-handoff.md) preserves exactly the same
 conditional answers, branch events and native proof payloads while removing

@@ -28,6 +28,11 @@ classes.
 
 ## Paper
 
+[Test finer origins from recomposed proofs](research/refined-proof-origins.md).
+The finer cover retains more supports but avoids no native expansion. It adds
+2.39% preparation/query time and 45.89% hint bytes, so the admission policy stays
+experimental. Next: return to structural discovery on unlabelled whole CNFs.
+
 [Pass prepared missing leaves into acquisition](research/missing-leaf-handoff.md).
 Five duplicate normalizations disappear with identical native proof bytes and
 checks, but preparation/query mean regresses 2.29%. The experiment stays

@@ -12,7 +12,40 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: price finer reusable branches after recomposition
+## Current investigation: return to discovery on unlabelled whole CNFs
+
+[Live finer-origin admission](refined-proof-origins.md) tests the preceding
+hypothesis. The case-15 cover is selected for cases 19/20, but native expansion
+stays at **32 dispatches and five missing leaves**. Preparation/query mean
+regresses **2.39%** (three pairs worse), hints grow **45.89%**, and native payload
+grows **1.13%**. Complete-worker mean is 0.65% lower with mixed pairs; it does
+not establish a consistent total-cost advantage. Reject this admission rule
+as a default and retain the counterexample.
+
+**Next primary target: discover useful conditions on unlabelled whole CNFs.**
+Freeze fresh seeds for the existing larger-mixture generators, record novelty
+against the preserved archive, and compare cold discovery with later reuse on
+base/edit/repeat streams. Use the current solver and inspect existing automatic
+guard recognizers under matched budgets, with no supplied assignments or
+future answers. Identify the largest remaining shared-variable interaction
+and implement one checkable decomposition that explains it. Preserve unknowns
+and charge failed recognition and exact recomposition.
+
+Consult `cnf_larger_mixtures.py`, `compare_cnf_affine_probe_safe.py`,
+`cnf_pattern_inventory.py`, `cnf_ranked_binary_targets.py`, `cnf_local_guard.py`
+and `cnf_alternative_guard.py` before designing another recognizer. The latest
+23-source stream measures already solved conditional queries and cannot
+establish progress in whole-input structural coverage.
+
+The ranking lesson is concrete: more intact leaves can refine only already
+solved branches. Case 19 pays for an extra extraction and publications while
+its missing residual is unchanged; case 20's smaller residual still takes
+three dispatches in total. Future reuse selection must price the remaining
+computations and certificate construction, not intact-leaf counts alone.
+Resume `experiments/results/cnf-refined-origins/checkpoint.json`. All previous
+results and alternative valid proofs are retained; production defaults stay.
+
+## Previous investigation: price finer reusable branches after recomposition
 
 [Missing-leaf handoff](missing-leaf-handoff.md) removes five duplicate
 normalizations, saving 3,133 literal visits and 13,573 key-serialization bytes

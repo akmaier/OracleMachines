@@ -4,7 +4,17 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, missing-leaf handoff):
+Latest expansion checkpoint (23 November, finer recomposed origins):
+[Price live origin admission](refined-proof-origins.md). Two completed partial
+proofs become lazy candidates. The finer cover is selected, but expansion stays
+at 32 dispatches; extra extraction/publication grows preparation/query time
+2.39%, native payload 1.13% and hints 45.89%. The policy remains optional and is
+rejected as a default. More intact leaves can leave the same missing residual.
+Next: return to fresh unlabelled whole-CNF discovery using the current solver
+and existing automatic guard recognizers, rather than further optimizing this
+already solved conditional stream. Preserve unknowns and exact composition.
+
+Previous expansion checkpoint (23 November, missing-leaf handoff):
 [Pass prepared leaves into acquisition](missing-leaf-handoff.md). Five fewer
 normalizations preserve all native proof payloads, hints and checks. Work falls
 by 3,133 literal visits and 13,573 key bytes, but preparation/query time regresses

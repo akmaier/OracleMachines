@@ -1,0 +1,186 @@
+{
+  "groups": {
+    "baseline": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 12.0,
+        "query_seconds": 0.08075731387361884
+      },
+      "controls": {
+        "attempts": 114.0,
+        "expanded_nodes": 43.0,
+        "query_seconds": 0.29985075106378645
+      }
+    },
+    "handoff": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 5.0,
+        "query_seconds": 0.07489289634395391
+      },
+      "controls": {
+        "attempts": 114.0,
+        "expanded_nodes": 27.0,
+        "query_seconds": 0.30869527941104025
+      }
+    },
+    "refined": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 5.0,
+        "query_seconds": 0.082101208739914
+      },
+      "controls": {
+        "attempts": 114.0,
+        "expanded_nodes": 27.0,
+        "query_seconds": 0.3106086131883785
+      }
+    }
+  },
+  "means": {
+    "baseline": {
+      "attempts": 138.0,
+      "checked_python_bytes": 8460643.0,
+      "cold_seconds": 0.4008029584074393,
+      "complete_worker_seconds": 3.2770468124654144,
+      "database_bytes": 50343936.0,
+      "donor_seconds": 0.028637739247642457,
+      "expanded_nodes": 55.0,
+      "hint_bytes": 11505.0,
+      "mode_setup_seconds": 5.560438148677349e-05,
+      "new_payload_bytes": 1551836.0,
+      "peak_rss_bytes": 326463488.0,
+      "persistence_seconds": 0.11504939594306052,
+      "preparation_and_queries": 0.39308014838024974,
+      "prepare_seconds": 0.01247208344284445,
+      "proof_delta_compressed_bytes": 144816.0,
+      "query_seconds": 0.3806080649374053,
+      "reconstruction_seconds": 0.49405029171612114,
+      "restore_seconds": 0.1023963961051777,
+      "setup_seconds": 0.0265152397332713,
+      "warm_seconds": 0.00021613540593534708
+    },
+    "handoff": {
+      "attempts": 138.0,
+      "checked_python_bytes": 8337127.0,
+      "cold_seconds": 0.38380681222770363,
+      "complete_worker_seconds": 3.304885885445401,
+      "database_bytes": 50253824.0,
+      "donor_seconds": 0.02468980208504945,
+      "expanded_nodes": 32.0,
+      "hint_bytes": 42031.0,
+      "mode_setup_seconds": 4.528113640844822e-05,
+      "new_payload_bytes": 1508442.0,
+      "peak_rss_bytes": 316608512.0,
+      "persistence_seconds": 0.11496081284713,
+      "preparation_and_queries": 0.39558352972380817,
+      "prepare_seconds": 0.011995353968814015,
+      "proof_delta_compressed_bytes": 138342.0,
+      "query_seconds": 0.38358817575499415,
+      "reconstruction_seconds": 0.5326839375775307,
+      "restore_seconds": 0.09856142743956298,
+      "setup_seconds": 0.024492228752933443,
+      "warm_seconds": 0.00027542724274098873
+    },
+    "refined": {
+      "attempts": 138.0,
+      "checked_python_bytes": 8439124.0,
+      "cold_seconds": 0.3819974792422727,
+      "complete_worker_seconds": 3.2834333438659087,
+      "database_bytes": 50278400.0,
+      "donor_seconds": 0.02510691713541746,
+      "expanded_nodes": 32.0,
+      "hint_bytes": 61318.0,
+      "mode_setup_seconds": 4.619755782186985e-05,
+      "new_payload_bytes": 1525496.0,
+      "peak_rss_bytes": 322285568.0,
+      "persistence_seconds": 0.1114111669594422,
+      "preparation_and_queries": 0.40504005108959973,
+      "prepare_seconds": 0.012330229161307216,
+      "proof_delta_compressed_bytes": 138070.0,
+      "query_seconds": 0.3927098219282925,
+      "reconstruction_seconds": 0.5000119893811643,
+      "restore_seconds": 0.10257529141381383,
+      "setup_seconds": 0.02489929145667702,
+      "warm_seconds": 0.00024892669171094894
+    }
+  },
+  "protocol": {
+    "path": "experiments/results/cnf-refined-origins/protocol.json",
+    "sha256": "48e5257a159891cd3ee6a896730378c07bb37a2fcaed4b673561e01e8da5d03f"
+  },
+  "samples": [
+    {
+      "path": "experiments/results/cnf-refined-origins/baseline-0/report.json",
+      "policy": "baseline",
+      "repeat": 0,
+      "sha256": "20d3a5e7bf09dce21d64d7cac087e73e9cae8afa70286326f87307d4b23b3737"
+    },
+    {
+      "path": "experiments/results/cnf-refined-origins/handoff-0/report.json",
+      "policy": "handoff",
+      "repeat": 0,
+      "sha256": "98040b40265aaf6362f48ad875603391a2ad13903a726fb16725670bfbe14ffd"
+    },
+    {
+      "path": "experiments/results/cnf-refined-origins/refined-0/report.json",
+      "policy": "refined",
+      "repeat": 0,
+      "sha256": "ae09501a401924a173b14473e0762813cf75fe288f939a6dcca4329ef045cf0a"
+    },
+    {
+      "path": "experiments/results/cnf-refined-origins/refined-1/report.json",
+      "policy": "refined",
+      "repeat": 1,
+      "sha256": "45034708aa2c27ebe3f31ccd31acec1a185b0b3dffde8f2bc4822f1ef138801b"
+    },
+    {
+      "path": "experiments/results/cnf-refined-origins/handoff-1/report.json",
+      "policy": "handoff",
+      "repeat": 1,
+      "sha256": "f36af7dda91dfa54f7b896950c9d72f51554fb7b049b3de807fafc8391daf149"
+    },
+    {
+      "path": "experiments/results/cnf-refined-origins/baseline-1/report.json",
+      "policy": "baseline",
+      "repeat": 1,
+      "sha256": "d6c578a17fd2dbb581d2e38e2e2648f5bdc65d9f2e75ccfd5609a493d52f18fa"
+    },
+    {
+      "path": "experiments/results/cnf-refined-origins/baseline-2/report.json",
+      "policy": "baseline",
+      "repeat": 2,
+      "sha256": "b81e00145208a51a1f7639b7e6c0f65890c0f92018d311647a5dcff6b164e042"
+    },
+    {
+      "path": "experiments/results/cnf-refined-origins/handoff-2/report.json",
+      "policy": "handoff",
+      "repeat": 2,
+      "sha256": "e2e83c531b178dc33cccbea4168493e25156f4df6d62a89328f7c5af0ad625c2"
+    },
+    {
+      "path": "experiments/results/cnf-refined-origins/refined-2/report.json",
+      "policy": "refined",
+      "repeat": 2,
+      "sha256": "f15a1ce21bf805fc3122e710a32ef2a47706099f456a32ad309f7d2ea17c8cc8"
+    },
+    {
+      "path": "experiments/results/cnf-refined-origins/refined-3/report.json",
+      "policy": "refined",
+      "repeat": 3,
+      "sha256": "05a89d3555bb9899d1b4adbcfd23943a55bdaea0addf7b2f5a823ea6bb8af733"
+    },
+    {
+      "path": "experiments/results/cnf-refined-origins/handoff-3/report.json",
+      "policy": "handoff",
+      "repeat": 3,
+      "sha256": "30948a0f5d3124ded6cbc41b5cfe9e0e8ade794d0c50af10d2d96b6fdcd053de"
+    },
+    {
+      "path": "experiments/results/cnf-refined-origins/baseline-3/report.json",
+      "policy": "baseline",
+      "repeat": 3,
+      "sha256": "dab43bd36134b788343f081962155ddf41675f7abd2e46c0fd3f0c58bec43be1"
+    }
+  ]
+}

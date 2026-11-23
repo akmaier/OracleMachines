@@ -5,7 +5,25 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: continuation reuse is conditional on the route
+## Latest evidence: useful consequences depend on their continuation
+
+[Joint binary consequences](joint-binary-consequences.md) share a source-bound
+graph and combine two checked forced values. The exposed branch and its sign
+variants fall from nine expansions to four; the original saves 24.10% query time
+and 24.86% new proof payload. Wider discovery alone takes six expansions in a
+posthoc single-selected ablation. This improves acquisition within an existing
+coverage cell; all 15 targets already close under the baseline.
+
+New edits use fewer expansions overall but regress 4.05% in query time and grow
+native payload 8.65%. One deletion rises from four to seven expansions, and its
+changed intermediate proofs also affect the next query. The next gap is deciding
+when a correct binary consequence helps the full mixed-width continuation.
+Investigate a cheap, source-bound assessment and a matched-state ablation before
+broadening discovery further. Preserve the successful case and the harmful case;
+the [ranked gaps](structural-reuse-priorities.md) bind both. General defaults and
+unrestricted-SAT obligations remain unchanged.
+
+## Previous evidence: continuation reuse is conditional on the route
 
 [The synchronous fallback](live-fallback.md) closes the exposed restart gap:
 17 -> 11 expansions with identical proof bytes. It saves work when routing

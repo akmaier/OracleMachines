@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, live fallback):
+Latest expansion checkpoint (23 November, joint binary consequences):
+[Checked joint conditioning](joint-binary-consequences.md) reduces the exposed
+branch and two sign variants from nine to four expansions. The original saves
+24.10% query time and 24.86% proof payload. New edits regress 4.05% in time and
+grow payload 8.65%, despite fewer expansions; keep the policy optional. Next:
+assess full-CNF continuation cost, using the preserved case-61 regression against
+the case-31 success. All prior proofs remain authoritative. No new coverage cell
+or general complexity claim follows.
+
+Previous expansion checkpoint (23 November, live fallback):
 [Synchronous continuation](live-fallback.md) reduces the exposed replacement from
 17 to 11 expansions and query time by 20.71%, with identical proof bytes. Six
 controls improve 2.58%; six new edits never resume and regress 3.89%. Keep it

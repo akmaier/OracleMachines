@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Combine useful binary consequences](research/joint-binary-consequences.md).
+The exposed branch takes four rather than nine expansions, saving 24.10% query
+time and 24.86% new proof payload. Nearby new edits regress 4.05% in time, so the
+policy stays optional. Next: recognize when a correct consequence yields a cheaper
+full-CNF continuation, including its proof and future reuse costs.
+
 [Resume native fallback before unwinding](research/live-fallback.md).
 The exposed query takes 11 rather than 17 expansions and 20.71% less query time,
 with identical proofs. New edits never need fallback and regress 3.89%, so the

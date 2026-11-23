@@ -12,7 +12,43 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: combine useful binary consequences
+## Current investigation: price the surviving mixed-width continuation
+
+[Joint consequences](joint-binary-consequences.md) reduce the exposed branch from
+**9 to 4 expansions**, with **24.10% less query time** and **24.86% less new proof
+payload**; both sign variants improve too. A same-discovery, single-selected
+ablation takes six expansions. The recognizer shares one graph, inspects at most
+eight ranked targets and retains at most two consequences not already implied by
+earlier selections. Existing native units/splits independently certify them.
+
+**Next primary target: a cheap structural acceptance test for consequences whose
+surviving full-CNF continuation is actually useful.** On six new edits, expansions
+fall **58 -> 55**, but query time rises **4.05%** and proof payload **8.65%**.
+The case-61 deletion is the counterexample: **4 -> 7 expansions**, **6.58 -> 16.06
+ms**, and **24,340 -> 71,373 new bytes**. The following replacement remains one
+expansion but also slows, with different stored intermediate evidence. Run a
+single-selected versus joint ablation there, then compare any acceptance test on
+both helpful and harmful cases. Preserve propagation/cache priority and charge
+assessment and proof construction. General defaults remain unchanged.
+
+The largest new query is case 31's deletion: **29 -> 23 expansions**, **84.15 ->
+76.14 ms**, with joint branch counts **[1,4,1,5,1,3]** after eight probe expansions.
+Its profile has **104 normalizations** and **23 discovery calls**; canonicalization
+and proof construction outweigh graph recognition in instrumented time. Reuse
+exact conditioning/preparation where justified; a broad cofactor memo already
+failed its total-cost test. Do not replace discovery work with repeated unrelated
+hardening or assume fewer expansion-counter increments imply less total work.
+
+Resume `experiments/results/cnf-joint-backbone/checkpoint.json`. Its
+`next-target.json` binds the exposed branch and largest query, exact prefixes,
+earlier native IDs, paths and profiles. The informative regression is the frozen
+`novel-61-{mode}-0` stream, seeded from protocol prefix `61`; the final union must
+not seed comparison queries. All previous payloads and unsuccessful trials remain
+preserved. Automatic donor/map selection, source recomposition, cold audit and
+storage costs remain open. No new whole-source coverage or unrestricted bound
+is claimed.
+
+## Previous checkpoint: combine useful binary consequences
 
 [Live native fallback](live-fallback.md) makes the existing routing decision before
 unwinding the search stack. The exposed replacement takes **11 instead of 17**

@@ -1,0 +1,37 @@
+Combine checked consequences when their continuations are useful. A source-bound census exposes
+a useful distinction. At the saved 125-variable branch, the first forced binary value already implies
+three others, so adding them would repeat information. A later 121-variable residual has two useful
+surviving-literal closures, covering two and three forced values respectively; neither covers the other. An
+optional recognizer shares the binary implication graph and completed reachability searches, inspects at
+most eight ranked binary variables, and retains at most two checked contradiction paths. After selecting
+one, it skips later values implied by its surviving literal. This directional filter does not compute a minimum
+basis: a later selection may imply an earlier one. With source length 𝐿, binary vertices 𝑉𝑏 and edges
+𝐸 𝑏 , the default recognition limits give a comparison/RAM bound 𝑂 (𝐿 + 𝑉𝑏 log 𝑉𝑏 + 17(𝑉𝑏 + 𝐸 𝑏 )) under
+expected constant-time dictionary operations. This includes up to eight cover roots, eight target roots and
+one closure; integer widths and allocation require separate accounting.
+Joint conditioning first checks intermediate cofactor caches. A previously solved prefix therefore avoids
+fresh deeper acquisition. A surviving model is lifted and checked on the source. A surviving refutation
+is compiled backwards into existing native split rules: each excluded branch receives a unit trace built
+from its original path reasons after earlier assignments. Reasons are conditioned, renamed and located
+in the exact child; raw source indices are not reused across renaming. The existing checker validates
+every emitted node. Compiled exclusions and intermediate parents consume storage and verification work
+outside the ordinary expansion counter. Neither the implication rule nor the proof format is new.
+Fifteen local targets, three policies and two opposite serial orders give ninety attempts. The exposed
+branch and two sign variants fall from nine expansions to four. The original falls from 22.54 to 17.11
+milliseconds (24.10%) and from 114,266 to 85,865 new native bytes (24.86%). A separate posthoc ablation
+uses the same discovery but consumes only its first selected path at each node: it takes six expansions and
+stores 95,421 bytes. Subsequent residuals differ, so this separates some count effects without establishing a
+timing attribution. All fifteen targets already close under the baseline; this adds no decision coverage cell.
+The broader result is mixed. Six controls fall from 53 to 50 expansions but regress 1.17% in query
+time. Six new edits fall from 58 to 55 expansions but regress 4.05% in both order signs, while new
+native payload rises 8.65% and summed checked-object endpoint space rises 5.71%. The latter is not
+peak RAM. One new deletion takes four versus seven expansions and 6.58 versus 16.06 milliseconds,
+publishing four versus eleven nodes. Its following replacement still takes one expansion but also slows; the
+changed intermediate evidence requires a matched-state reuse analysis. Complete-worker means change
+by +0.21% on controls and −0.81% on new edits, including historical replay and measurement work. We
+keep the policy optional and retain these regressions. A correct forced value need not yield the cheapest
+full-CNF continuation. Cheap recognition of a beneficial continuation, together with conditioning, proof
+and future-reuse costs, is the next obligation. Supplied donors, local edits and bounded consequences
+establish no uniformly efficient arbitrary-SAT expansion.
+
+13

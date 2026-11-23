@@ -28,11 +28,11 @@ classes.
 
 ## Paper
 
-[Conditional support recovery](research/conditional-support-recovery.md).
-A missing reason can identify one forced value, reducing search on hard SAT and
-UNSAT cofactors. Matched tests still show higher total query cost and storage;
-the policy remains optional. Next: preserve cheap negative-core and witness
-reuse before preparing recovery, then reduce full proof reconstruction.
+[Checked pools before recovery](research/pool-priority.md).
+Earlier core and witness lookup preserves identical proofs and saves 2.50% in
+local preparation-plus-query time, with no complete-worker gain. Recovery stays
+optional. Next: reuse the exact cofactor already computed for 71 template
+applications, retaining source binding and native verification.
 
 [Reuse checked order during causal reconstruction](research/preimage-fusion.md).
 Sharing untouched clauses and their canonical order reduces repeated support

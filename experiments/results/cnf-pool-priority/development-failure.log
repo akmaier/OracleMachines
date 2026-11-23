@@ -1,0 +1,32 @@
+E.F....F.
+======================================================================
+ERROR: test_cold_native_replay_with_both_readers (solver.test_cnf_pool_priority.PoolPriorityTests.test_cold_native_replay_with_both_readers)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_pool_priority.py", line 80, in test_cold_native_replay_with_both_readers
+    try:self.assertFalse(rd._read(negative)['answer']);self.assertTrue(rd._read(positive)['answer'])
+                         ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+======================================================================
+FAIL: test_full_negative_core_and_near_edit (solver.test_cnf_pool_priority.PoolPriorityTests.test_full_negative_core_and_near_edit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_pool_priority.py", line 30, in test_full_negative_core_and_near_edit
+    self.assertEqual(route,'negative-pool');self.assertFalse(s._read(key)['answer'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != 'negative-pool'
+
+======================================================================
+FAIL: test_stale_negative_origin_not_authority (solver.test_cnf_pool_priority.PoolPriorityTests.test_stale_negative_origin_not_authority)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_pool_priority.py", line 60, in test_stale_negative_origin_not_authority
+    self.assertIsNone(route);self.assertGreater(s.counts['negative_stale_origins'],0)
+                             ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 not greater than 0
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.088s
+
+FAILED (failures=2, errors=1)

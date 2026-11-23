@@ -1,0 +1,242 @@
+{
+  "groups": {
+    "compact": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 19.0,
+        "query_seconds": 0.09999727178364992
+      },
+      "controls": {
+        "attempts": 90.0,
+        "expanded_nodes": 36.0,
+        "query_seconds": 0.2628743548411876
+      }
+    },
+    "gated": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 15.0,
+        "query_seconds": 0.12853822973556817
+      },
+      "controls": {
+        "attempts": 90.0,
+        "expanded_nodes": 30.0,
+        "query_seconds": 0.3176492704078555
+      }
+    },
+    "native": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 34.0,
+        "query_seconds": 0.09362614806741476
+      },
+      "controls": {
+        "attempts": 90.0,
+        "expanded_nodes": 99.0,
+        "query_seconds": 0.2674627141095698
+      }
+    },
+    "pools-native": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 16.0,
+        "query_seconds": 0.09844441548921168
+      },
+      "controls": {
+        "attempts": 90.0,
+        "expanded_nodes": 27.0,
+        "query_seconds": 0.25441889907233417
+      }
+    },
+    "pools-recovery": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 13.0,
+        "query_seconds": 0.1228684987872839
+      },
+      "controls": {
+        "attempts": 90.0,
+        "expanded_nodes": 26.0,
+        "query_seconds": 0.2988635008223355
+      }
+    }
+  },
+  "means": {
+    "compact": {
+      "attempts": 114.0,
+      "checked_python_bytes": 6847167.0,
+      "cold_seconds": 0.33052014582790434,
+      "complete_worker_seconds": 2.828794667031616,
+      "database_bytes": 49819648.0,
+      "donor_seconds": 0.025064917048439384,
+      "expanded_nodes": 55.0,
+      "hint_bytes": 11505.0,
+      "mode_setup_seconds": 5.9125013649463654e-05,
+      "new_payload_bytes": 1237109.0,
+      "peak_rss_bytes": 338878464.0,
+      "persistence_seconds": 0.09253804222680628,
+      "preparation_and_queries": 0.37489100149832666,
+      "prepare_seconds": 0.012019374873489141,
+      "proof_delta_compressed_bytes": 115152.0,
+      "query_seconds": 0.3628716266248375,
+      "reconstruction_seconds": 0.43528345809318125,
+      "restore_seconds": 0.09760502097196877,
+      "setup_seconds": 0.024494062643498182,
+      "warm_seconds": 0.00023893732577562332
+    },
+    "gated": {
+      "attempts": 114.0,
+      "checked_python_bytes": 7553756.0,
+      "cold_seconds": 0.36898802127689123,
+      "complete_worker_seconds": 3.068851124960929,
+      "database_bytes": 50110464.0,
+      "donor_seconds": 0.02496885391883552,
+      "expanded_nodes": 45.0,
+      "hint_bytes": 11505.0,
+      "mode_setup_seconds": 5.6812306866049767e-05,
+      "new_payload_bytes": 1409164.0,
+      "peak_rss_bytes": 334462976.0,
+      "persistence_seconds": 0.10211754124611616,
+      "preparation_and_queries": 0.45825322926975787,
+      "prepare_seconds": 0.01206572912633419,
+      "proof_delta_compressed_bytes": 128988.0,
+      "query_seconds": 0.4461875001434237,
+      "reconstruction_seconds": 0.5020424164831638,
+      "restore_seconds": 0.10630981251597404,
+      "setup_seconds": 0.024592417059466243,
+      "warm_seconds": 0.00026216660626232624
+    },
+    "native": {
+      "attempts": 114.0,
+      "checked_python_bytes": 7275886.0,
+      "cold_seconds": 0.3613356873393059,
+      "complete_worker_seconds": 2.9414297917392105,
+      "database_bytes": 49991680.0,
+      "donor_seconds": 0.027103416621685028,
+      "expanded_nodes": 133.0,
+      "hint_bytes": 3.0,
+      "mode_setup_seconds": 7.668696343898773e-05,
+      "new_payload_bytes": 1343598.0,
+      "peak_rss_bytes": 338501632.0,
+      "persistence_seconds": 0.10074689611792564,
+      "preparation_and_queries": 0.36109225801192224,
+      "prepare_seconds": 3.3958349376916885e-06,
+      "proof_delta_compressed_bytes": 126774.0,
+      "query_seconds": 0.36108886217698455,
+      "reconstruction_seconds": 0.47450477024540305,
+      "restore_seconds": 0.12041135458275676,
+      "setup_seconds": 0.02600727090612054,
+      "warm_seconds": 0.00030841585248708725
+    },
+    "pools-native": {
+      "attempts": 114.0,
+      "checked_python_bytes": 6847167.0,
+      "cold_seconds": 0.3300718334503472,
+      "complete_worker_seconds": 2.8380731465294957,
+      "database_bytes": 49819648.0,
+      "donor_seconds": 0.026531916577368975,
+      "expanded_nodes": 43.0,
+      "hint_bytes": 11505.0,
+      "mode_setup_seconds": 5.6520337238907814e-05,
+      "new_payload_bytes": 1237109.0,
+      "peak_rss_bytes": 322600960.0,
+      "persistence_seconds": 0.09252654202282429,
+      "preparation_and_queries": 0.3655349190812558,
+      "prepare_seconds": 0.012671604519709945,
+      "proof_delta_compressed_bytes": 115152.0,
+      "query_seconds": 0.35286331456154585,
+      "reconstruction_seconds": 0.44652208290062845,
+      "restore_seconds": 0.09846577048301697,
+      "setup_seconds": 0.024620624957606196,
+      "warm_seconds": 0.00022995797917246819
+    },
+    "pools-recovery": {
+      "attempts": 114.0,
+      "checked_python_bytes": 7441608.0,
+      "cold_seconds": 0.368626979412511,
+      "complete_worker_seconds": 3.0712184163276106,
+      "database_bytes": 50069504.0,
+      "donor_seconds": 0.02679752092808485,
+      "expanded_nodes": 39.0,
+      "hint_bytes": 11505.0,
+      "mode_setup_seconds": 6.191595457494259e-05,
+      "new_payload_bytes": 1383341.0,
+      "peak_rss_bytes": 325574656.0,
+      "persistence_seconds": 0.101724271196872,
+      "preparation_and_queries": 0.4349814576562494,
+      "prepare_seconds": 0.013249458046630025,
+      "proof_delta_compressed_bytes": 126585.0,
+      "query_seconds": 0.4217319996096194,
+      "reconstruction_seconds": 0.504784188233316,
+      "restore_seconds": 0.11019543721340597,
+      "setup_seconds": 0.02550670807249844,
+      "warm_seconds": 0.000242187874391675
+    }
+  },
+  "protocol": {
+    "path": "experiments/results/cnf-pool-priority/protocol.json",
+    "sha256": "02623e23a436b32d8e711580e6db339a632d5211071ee0b59a6a98a8b064e6f5"
+  },
+  "samples": [
+    {
+      "path": "experiments/results/cnf-pool-priority/native-0/report.json",
+      "policy": "native",
+      "repeat": 0,
+      "sha256": "a876fd4b6f2e574fb72383146bebfc56e6c7595d358004a13de5498e94fd7ce5"
+    },
+    {
+      "path": "experiments/results/cnf-pool-priority/compact-0/report.json",
+      "policy": "compact",
+      "repeat": 0,
+      "sha256": "3a4c2ca727263d4887059198eebb6279c2fc764d15bb721f1a62f396392afe10"
+    },
+    {
+      "path": "experiments/results/cnf-pool-priority/gated-0/report.json",
+      "policy": "gated",
+      "repeat": 0,
+      "sha256": "e3ed545d8c4fea5800e531840da35415164233daab5e84873993cf5298cbc422"
+    },
+    {
+      "path": "experiments/results/cnf-pool-priority/pools-native-0/report.json",
+      "policy": "pools-native",
+      "repeat": 0,
+      "sha256": "9ac6b6b28fe84956168cf6b87a37cd508e80780b6a26d7e039094f4f3ffa6c91"
+    },
+    {
+      "path": "experiments/results/cnf-pool-priority/pools-recovery-0/report.json",
+      "policy": "pools-recovery",
+      "repeat": 0,
+      "sha256": "41b87f26931e7f4d304442c54b1b330d1c7e79ca3bc37a5a082ff8da1b120ebf"
+    },
+    {
+      "path": "experiments/results/cnf-pool-priority/pools-recovery-1/report.json",
+      "policy": "pools-recovery",
+      "repeat": 1,
+      "sha256": "538145a22214fd1d437f55bdae00faa8b50885cc2bf5977a594e69e186d9bc16"
+    },
+    {
+      "path": "experiments/results/cnf-pool-priority/pools-native-1/report.json",
+      "policy": "pools-native",
+      "repeat": 1,
+      "sha256": "97b5fdf59644e7252f6e2e0a5b7ff3982b65123dc74311349c126bc193d5e1a1"
+    },
+    {
+      "path": "experiments/results/cnf-pool-priority/gated-1/report.json",
+      "policy": "gated",
+      "repeat": 1,
+      "sha256": "b2827f5b0f211d5d5bef4f6226ea97a1c3bc8ad6ad82c6b80b8c996c8efda4a6"
+    },
+    {
+      "path": "experiments/results/cnf-pool-priority/compact-1/report.json",
+      "policy": "compact",
+      "repeat": 1,
+      "sha256": "88079fee0115bbaef0e8214a96ef29075fddd2e8af8a1ebfef05e65e099128fe"
+    },
+    {
+      "path": "experiments/results/cnf-pool-priority/native-1/report.json",
+      "policy": "native",
+      "repeat": 1,
+      "sha256": "52b26c99d4750cb97ba26ecdb8cf9e8b3c71d906b92b1d5313535bfe3f5033e9"
+    }
+  ]
+}

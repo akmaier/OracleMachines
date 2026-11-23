@@ -12,7 +12,37 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: preserve cheap pool hits before conditional recovery
+## Current investigation: share template preparation already held by the caller
+
+[Early checked-pool lookup](pool-priority.md) recovers eight negative-core and
+four witness hits before recovery preparation. With ordinary native fallback,
+all proof bytes and the selected-container memory endpoint remain identical to
+compact reuse. Two-order preparation-plus-query mean falls **2.50%**; complete
+worker time is essentially unchanged, and native-only total query preparation
+remains slightly cheaper. Recovery still grows time and stored payload. Keep
+these scheduling options experimental; fewer dispatch counts add no coverage.
+
+**Next primary target: reuse the live source/assignment/cofactor during the
+71 template publications.** The query has already restricted, canonicalized
+and checked that exact target. `materialize` repeats source containment,
+restriction and canonicalization. There are 173 template checks: 102 uncached
+initial checks plus 71 repeated checks. An instrumented query-only profile puts
+normalization and template materialization at about 0.297 and 0.295 seconds
+cumulatively; these overlap and do not predict a speedup.
+
+Preserve immutable source and assignment bindings, the exact compact-name map,
+and all native proof checks. Prefer passing already computed preparation in
+this call over a cross-query cache with new invalidation rules. Charge copying,
+retained state, misses, checking and cold replay. Full proof serialization and
+cumulative native storage remain open even if this construction becomes cheaper.
+
+Resume `experiments/results/cnf-pool-priority/checkpoint.json`. `profile.json`
+binds an identical-proof diagnostic run. `analysis.json` includes failed-probe
+counters before fallback resets, all paired measurements and the recovery
+regressions. The new four edits still use supplied guards and correspondence;
+this is a construction opportunity, not efficient arbitrary-SAT coverage.
+
+## Previous investigation: preserve cheap pool hits before conditional recovery
 
 [Missing-clause recovery](conditional-support-recovery.md) identifies one extra
 forced value after unit propagation in three exposed hard cofactors. The SAT

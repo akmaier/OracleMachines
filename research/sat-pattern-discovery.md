@@ -5,7 +5,22 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: a missing unit reason selects one failed literal
+## Latest evidence: earlier recognition preserves an existing proof
+
+[Checked pools before recovery](pool-priority.md) move twelve saved-answer hits
+ahead of the native expansion dispatcher. All proof bytes and decisions remain
+identical to compact reuse; local preparation-plus-query means improve 2.50%,
+with no complete-worker gain in the two-order comparison. Recovery still costs
+more overall. This is recognition scheduling, not a smaller branching proof or
+a new coverage class.
+
+The next profiled duplication is in 71 template applications: the caller already
+holds the exact guarded cofactor, but materialization repeats containment,
+restriction and normalization. Reuse that preparation under explicit immutable
+bindings and preserve native checking. Automatic pattern/guard/map discovery,
+whole-input composition and arbitrary-CNF storage bounds remain unresolved.
+
+## Previous evidence: a missing unit reason selects one failed literal
 
 [Conditional support recovery](conditional-support-recovery.md) supplies a
 precise restricted pattern. If a checked unit-refutable strengthening differs

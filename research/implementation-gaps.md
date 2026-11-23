@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, conditional recovery):
+Latest expansion checkpoint (23 November, early pool priority):
+[Use checked answers before recovery](pool-priority.md). Eight negative-core
+and four witness hits move ahead of native dispatch with identical proof bytes
+and selected endpoint memory. Local preparation-plus-query mean improves 2.50%
+over compact reuse; full-worker time is unchanged and native-only remains
+slightly cheaper. Recovery remains more costly. Next: eliminate the 71 repeated
+full-cofactor constructions and template checks while preserving input binding
+and every native verification. This changes no coverage or unrestricted bound.
+
+Previous expansion checkpoint (23 November, conditional recovery):
 [One missing reason selects a forced value](conditional-support-recovery.md).
 Native reconstruction validates UNSAT and SAT results, and the hard positive
 case falls from six expansions to two. Across matched streams, however, the

@@ -12,7 +12,35 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: price failed whole-clause probes before adding more
+## Current investigation: use the consistent affine core already discovered
+
+[Canonical probe preparation](ordered-probe-preparation.md) saves 4.54% solve
+mean on a fresh holdout against whole-clause lookahead, with identical decisions
+and proof bytes. Exposed timing is mixed. Even the improved policy remains
+20.20% slower than the original binary route on the fresh stream, with 12.83%
+more native payload. It completes 39/48 distinct roots instead of 38/48; the
+local preparation specialization itself adds no coverage.
+
+**Next target: whole-input affine completion on unresolved case 43.** Checked
+extraction finds 111 consistent equations of rank 108 on 112 actual variables,
+leaving four free bits and 61 coupling clauses. There are only 16 affine-space
+candidates. The current top-level probe ignores consistent spaces, but
+`cnf_affine_completion.py` and `cnf_affine_negative.py` already provide completion
+and checked negative exhaustion up to eight free coordinates. Test their
+integration with full-source witness checks, separate negative authority, charged
+recognition, fresh validation and cold replay. Do not implement a new proof rule
+before examining these existing modules.
+
+Eight other fresh unresolved roots have no extracted affine equations and remain
+controls. Their twelve random-three attempts all exhaust the native cap. This
+structural integration is more promising than another small preparation saving;
+it does not cover arbitrary CNF or remove the exponential free-dimension bound.
+
+Resume `experiments/results/cnf-ordered-probe/checkpoint.json` and its
+`frontier-inspection.json`. The 16-candidate observation is verified rank
+information, not a newly asserted verdict for case 43.
+
+## Previous investigation: price failed whole-clause probes before adding more
 
 [Whole-input lookahead](whole-cnf-lookahead.md) tests 72 fresh exposed and 72
 prospective holdout queries with no supplied guard or family label. Random 3-CNF

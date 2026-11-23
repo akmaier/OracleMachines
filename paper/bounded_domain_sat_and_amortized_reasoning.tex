@@ -9798,6 +9798,45 @@ propagation alone cannot find. We keep the policy optional. Reduced dispatches,
 earlier completion and smaller stored proofs are distinct from lower total
 computation or efficient acquisition for every CNF.
 
+\paragraph{Reuse of canonical clause structure does not remove discovery costs.}
+A narrower specialization reuses the canonical parent's literal order when
+preparing whole-clause probes. Restriction deletes clauses or literals; it does
+not create duplicate or complementary literals inside a surviving clause.
+Signed rank renaming preserves this order. Global clause deduplication and
+sorting, support compaction and exact key serialization still remain necessary.
+Only private probe preparation uses this invariant under the scanning restriction;
+external input normalization and every certificate checker remain unchanged.
+
+The preceding holdout becomes exposed, and a new fixed-seed stream supplies 72
+prospective queries. Four alternating repetitions preserve every search decision
+and native or extension payload between the two lookahead implementations.
+General-normalizer visits fall by 839,311 exposed literals and 2,051,816 fresh
+literals, but specialized support collection and remapping still traverse the
+surviving data. Fresh solve mean improves 4.54\% and complete-worker mean 2.52\%,
+with all four pairs faster. Exposed solve mean improves only 0.57\%, while
+complete-worker mean regresses 0.45\%. Retained proof storage is unchanged.
+
+The fresh stream also limits the earlier lookahead claim. Both lookahead variants
+complete 39 of 48 distinct roots, against 38 for the original binary policy.
+The added refutation concerns one shared-mixture edit; preparation specialization
+adds no coverage. Even the faster preparation remains 20.20\% slower than the
+binary policy and stores 12.83\% more native payload on this stream. All twelve
+random-three attempts still exhaust the native cap. Thus fewer dispatches and
+local preparation savings need not lower overall acquisition or storage.
+
+A checked diagnostic identifies a more useful structural opportunity. One
+unresolved edited input has 112 actual variables, 111 consistent affine equations
+of rank 108, and 61 leftover clauses. The affine subsystem involves 108 variables
+and fixes all of them; four other variables remain free. Its complete affine
+space therefore has only 16 assignments. The current whole-input affine probe
+uses contradictory Gaussian rows but does not complete consistent spaces against
+leftover clauses. Existing bounded completion and negative-exhaustion checkers
+can be tested here. The diagnostic establishes the small space, not a verdict
+for the coupled CNF. Eight other unresolved roots have no extracted affine
+equations. Integrating existing checked structure may broaden useful coverage;
+it supplies no uniform polynomial bound when free dimension or uncovered
+interaction grows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

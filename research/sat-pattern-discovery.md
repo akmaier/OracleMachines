@@ -5,7 +5,25 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: earlier completion need not expand distinct-root coverage
+## Latest evidence: a consistent affine core is being ignored at whole-input acquisition
+
+[Probe preparation specialization](ordered-probe-preparation.md) preserves all
+lookahead certificates and saves 4.54% solve mean on fresh inputs. It adds no
+coverage. The new stream also exposes a stronger opportunity: unresolved case
+43 has 111 checked equations of rank 108, 112 actual variables and 61 leftover
+clauses. Its complete affine space has only 16 assignments. Existing completion
+and negative-exhaustion checkers already support this small free dimension;
+the current top-level affine probe uses only inconsistent Gaussian rows.
+
+Investigate that integration before further normalization work. The diagnostic
+has not yet decided the coupled formula. Positive answers must satisfy the full
+CNF, negative answers must pass the existing exhaustion checker, and costs on
+no-equation inputs must remain visible. Eight unresolved random-three roots have
+no extracted affine core. Lookahead completes 39/48 distinct fresh roots against
+38/48 for the current binary policy, but is slower and stores more evidence on
+this workload; no uniform speed, storage or arbitrary-SAT conclusion follows.
+
+## Previous evidence: earlier completion need not expand distinct-root coverage
 
 [Bounded whole-clause lookahead](whole-cnf-lookahead.md) receives only fresh CNFs.
 It saves native dispatches and retained proof data, but increases solve time.

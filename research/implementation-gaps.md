@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, whole-CNF lookahead):
+Latest expansion checkpoint (23 November, canonical probe preparation):
+[Reuse the parent's clause invariant](ordered-probe-preparation.md). Exact proof
+bytes and search decisions survive; fresh solve mean falls 4.54% against the
+preceding lookahead policy, while exposed timing is mixed. Fresh lookahead still
+costs more than the original binary policy. Next: unresolved whole-input case 43
+has a consistent rank-108 affine subsystem on 112 actual variables, leaving only
+16 assignments to check against 61 clauses. Reuse the existing affine completion
+and separate negative-exhaustion authority; eight no-equation roots remain open.
+
+Previous expansion checkpoint (23 November, whole-CNF lookahead):
 [Price broader probing on fresh inputs](whole-cnf-lookahead.md). The policy uses
 only CNF structure and existing checked proof rules. Expansion dispatches fall
 12.1% exposed and 16.6% held out; native payload falls 2.5% and 7.4%. Solve time

@@ -28,7 +28,12 @@ classes.
 
 ## Paper
 
-[Measure whole-input lookahead and its failed-probe costs](research/whole-cnf-lookahead.md).
+[Reuse canonical clause structure in probe preparation](research/ordered-probe-preparation.md).
+Fresh solve mean improves 4.54% against lookahead with identical proof bytes.
+The next target is an unresolved whole CNF whose checked affine core leaves
+only 16 assignments; existing completion and exhaustion checkers can be reused.
+
+Previous: [Measure whole-input lookahead and its failed-probe costs](research/whole-cnf-lookahead.md).
 The optional policy saves dispatches and stored proofs but adds solve time. It
 completes one held-out query earlier; both arms eventually solve 47/48 distinct
 roots. Next: price failed-probe recognition and share cofactor preparation.

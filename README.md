@@ -28,7 +28,13 @@ classes.
 
 ## Paper
 
-[Reuse canonical clause structure in probe preparation](research/ordered-probe-preparation.md).
+[Complete an already discovered affine space](research/whole-input-affine-completion.md).
+An unresolved whole CNF now has a checked UNSAT certificate after testing only
+16 affine candidates. Exposed coverage grows from 39/48 to 40/48 distinct roots;
+fresh inputs retain the preceding coverage. Next: automatically reuse a checked
+whole-CNF proof on a nearby edit that still exhausts the expansion budget.
+
+Previous: [Reuse canonical clause structure in probe preparation](research/ordered-probe-preparation.md).
 Fresh solve mean improves 4.54% against lookahead with identical proof bytes.
 The next target is an unresolved whole CNF whose checked affine core leaves
 only 16 assignments; existing completion and exhaustion checkers can be reused.

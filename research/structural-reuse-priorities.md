@@ -12,7 +12,38 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: use the consistent affine core already discovered
+## Current investigation: use an earlier whole-CNF proof on an unresolved edit
+
+[Whole-input affine completion](whole-input-affine-completion.md) closes the
+preceding case-43 gap: 16 checked affine assignments all fail a remaining clause.
+The existing extension authority publishes UNSAT without native expansion.
+Exposed coverage grows from 39 to 40 of 48 distinct roots. On the new 96/120
+stream no completion is eligible, so answers, proof bytes and retained state
+match ordered probing. Broader coverage on new inputs remains open.
+Exposed solve mean improves 6.94% and selected retained Python state falls
+6.62%; fresh solve mean regresses 0.46%. The combined policy still costs 16.99%
+more fresh solve time than the original binary route. Preserve this tradeoff.
+
+**Next target: automatically transfer the checked proof from fresh case 69 to
+its still-unresolved edit 70.** The integrated policy solves case 69 in 246
+dispatches; case 70 then exhausts 256. Inspect the lost source support and
+surviving branches, and use the existing partial-cover extraction/recomposition
+machinery before inventing a new proof rule. Recognition must receive only
+source CNFs and earlier checked proofs, with no supplied guard or future answer.
+Charge extraction, correspondence, failed support matching and full recomposition.
+
+Random-three attempts consume 72.95% of fresh solve time and all twelve exhaust the cap;
+their eight distinct roots have no extracted equations. Two edited mixed roots
+(61 and 70) are also unresolved and have no direct affine core. The case-69 proof
+gives case 70 a concrete prior result to reuse. Case 61 precedes its base root's
+eventual completion on repeat, so that later proof cannot justify earlier reuse.
+
+Resume `experiments/results/cnf-whole-affine/checkpoint.json`, its exact-prefix
+profiles and `frontier-inspection.json`. Affine enumeration retains its `2^d`
+cost and eight-free-coordinate cap. No production default changes, compact
+closure result or unrestricted-SAT guarantee follows.
+
+## Previous investigation: use the consistent affine core already discovered
 
 [Canonical probe preparation](ordered-probe-preparation.md) saves 4.54% solve
 mean on a fresh holdout against whole-clause lookahead, with identical decisions

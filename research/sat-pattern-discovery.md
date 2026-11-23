@@ -5,7 +5,26 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: a consistent affine core is being ignored at whole-input acquisition
+## Latest evidence: a checked small affine space can close a whole-input gap
+
+[Whole-input completion](whole-input-affine-completion.md) reuses the equations
+already extracted at the acquisition gate. Exposed case 43 has four free bits;
+all 16 candidates fail a leftover clause. The existing negative-exhaustion
+authority verifies UNSAT with no native expansion, raising distinct-root
+coverage from 39/48 to 40/48. Positive completion instead supplies a full-source
+checked native model. This integrates an existing restricted method and adds no
+proof format or unrestricted tractability claim.
+
+The fresh fixed-seed stream triggers no bounded completion and preserves the
+preceding policy's proofs and coverage. Ten distinct roots remain unresolved:
+eight random-three inputs and two edited mixed inputs, all without directly
+extracted affine equations. The next promising transfer is chronological:
+case 69 is refuted before its edit 70 exhausts the budget. Discover which checked
+branches survive the edit and test automatic partial recomposition, including
+recognition and extraction costs. The expensive random-three cases remain
+controls; a known nearby proof does not itself certify an edited source.
+
+## Previous evidence: a consistent affine core is being ignored at whole-input acquisition
 
 [Probe preparation specialization](ordered-probe-preparation.md) preserves all
 lookahead certificates and saves 4.54% solve mean on fresh inputs. It adds no

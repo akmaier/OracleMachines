@@ -4,7 +4,18 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, canonical probe preparation):
+Latest expansion checkpoint (23 November, whole-input affine completion):
+[Complete an already extracted affine space](whole-input-affine-completion.md).
+The existing bounded completion and exhaustion checkers now serve whole-input
+acquisition. All 16 candidates reject exposed case 43; checked UNSAT raises
+coverage from 39/48 to 40/48 with zero native expansion for that query. The fresh
+stream triggers no completion and retains the preceding proof bytes and
+coverage. Exposed solve mean improves 6.94%; fresh solve mean regresses 0.46%.
+Next: discover reusable branches of fresh case 69's checked refutation
+for its still-unresolved edit 70. Preserve chronology, source correspondence,
+all extraction costs and the ten unresolved fresh no-equation roots.
+
+Previous expansion checkpoint (23 November, canonical probe preparation):
 [Reuse the parent's clause invariant](ordered-probe-preparation.md). Exact proof
 bytes and search decisions survive; fresh solve mean falls 4.54% against the
 preceding lookahead policy, while exposed timing is mixed. Fresh lookahead still

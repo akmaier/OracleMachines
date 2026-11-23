@@ -9837,6 +9837,60 @@ equations. Integrating existing checked structure may broaden useful coverage;
 it supplies no uniform polynomial bound when free dimension or uncovered
 interaction grows.
 
+\paragraph{Completing the affine space already discovered at the whole-input gate.}
+The next integration reuses the extracted consistent equations instead of
+discarding them. If their checked rank is $r$ on $n$ variables, every full-CNF
+model lies in an affine space of dimension $d=n-r$. The existing checker
+validates a particular solution and a complete independent basis. For $d\leq8$,
+the producer walks all $2^d$ candidates in Gray order and tests the leftover
+clauses. A surviving model passes both the raw-source check and native model
+checker. Exhaustion retains one failed source-clause index per point and uses
+the existing separate affine-negative authority. Its checker independently
+reconstructs the candidates from their Gray coefficients. Native proof nodes
+never depend on these extension answers; no new proof format is introduced.
+
+This route reuses one whole-input extraction and retains the existing source
+and elimination budgets. Known results keep priority. Missing affine structure,
+too many free coordinates or a budget stop leave the original fallback and its
+explicit unresolved outcome. Let $m$ be the source clause count,
+$m_L$ the number of leftover clauses and
+$w$ the word width. Packed candidate testing and independent exhaustion replay
+cost $O(2^d(m_L+d+1)\lceil n/w\rceil)$ beyond extraction, space construction,
+clause packing, structural checking, serialization and persistence. Integer operations on arbitrary-width
+masks are charged. The additional basis uses $O((d+1)n)$ bits and rejection
+indices into the original source use $O(2^d\log(m+1))$ bits, besides source and extraction evidence.
+Packed leftover masks also use $O(m_Ln)$ transient bits and are not persisted.
+Small free dimension is the useful condition; arbitrary CNFs need not satisfy
+it, and allowing $d$ to grow retains exponential enumeration.
+
+Four alternating serial repetitions compare the original binary policy,
+ordered whole-clause probing and probing with this completion gate. The
+preceding 72-query holdout becomes exposed; a fixed new seed supplies another
+72 prospective queries at generator sizes 96 and 120. Every worker starts
+empty and receives only CNFs. Recognition, checking, persistence, warm reuse,
+cold replay, reconstruction and compression are charged.
+
+The exposed 112-variable case is now refuted after 16 affine candidates, 400
+packed clause tests and 15 basis XORs, with no native expansion. Its mean attempt
+changes from a 904.87 ms budget stop to a 5.87 ms checked refutation; the former
+is not a completed solve. Across the exposed stream, distinct-root coverage
+grows from 39/48 to 40/48, solve mean falls 6.94\% and complete-worker mean
+falls 6.69\%, with all four pairs faster. Native dispatches fall by 256 and
+combined logical proof storage by 3,759,040 bytes. Selected retained Python
+state falls 6.62\%; reconstruction time nevertheless increases and remains
+charged.
+
+The fresh stream triggers no bounded completion and retains identical proofs,
+selected Python state and 38/48 distinct-root coverage between the two probing
+policies. Solve mean instead increases 0.46\%, and complete-worker mean 0.21\%.
+The integrated policy still costs 16.99\% more fresh solve time and 8.35\% more
+native payload than the original binary route. It remains optional. Ten fresh
+roots are unresolved and have no directly extracted affine equations. Random
+$3$-CNF inputs consume 72.95\% of solve time; an earlier checked
+mixed-input refutation also offers a specific transfer target for its unresolved
+edit. Automatic correspondence, useful conditional structure and efficient
+arbitrary-CNF acquisition remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

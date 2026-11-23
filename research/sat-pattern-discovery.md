@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: earlier recognition preserves an existing proof
+## Latest evidence: shared preparation exposes a cluster of expensive edits
+
+[Shared template preparation](template-preparation.md) removes 71 repeated
+constructions without changing any decision, native proof or coverage cell.
+Preparation-plus-query means fall 14.35% across four paired repeats, with no
+complete-worker improvement. This is a construction saving under explicit
+source/guard binding; native verification and proof storage stay unchanged.
+
+The next discovery target is now a measured cluster: five negative cofactors
+from three related sources consume 56.28% of native-fallback time. Determine
+whether conditional supports learned on the first source survive subsequent
+clause deletions and improve on the already active negative pool. Preserve the
+nearby positive cofactor, all split assumptions and chronological availability.
+Useful conditional transfer is separate from recognizing or solving a whole CNF
+category efficiently. The [ranked record](structural-reuse-priorities.md) binds
+the concrete inputs and controls.
+
+## Previous evidence: earlier recognition preserves an existing proof
 
 [Checked pools before recovery](pool-priority.md) move twelve saved-answer hits
 ahead of the native expansion dispatcher. All proof bytes and decisions remain

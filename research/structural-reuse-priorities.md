@@ -12,7 +12,34 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: share template preparation already held by the caller
+## Current investigation: transfer conditional supports across nearby edits
+
+[Shared template preparation](template-preparation.md) removes 71 duplicate
+checks, restrictions and canonicalizations with identical proofs, routes,
+storage and native verification. Four alternating pairs reduce local
+preparation-plus-query means **14.35%**, but complete-worker time does not improve.
+The operation uses immutable source/guard bindings within one call; it adds
+temporary source-copy space and changes no default solver or coverage class.
+
+**Next primary target: conditional supports in five related native fallbacks.**
+Cases 4/guards 3 and 4, 15/guard 3, and 16/guards 3 and 4 consume **56.28% of
+native-fallback query time**, with 22 expansion dispatches. Cases 15 and 16 are
+two-clause deletions from case 4. Determine which earlier source-bound reasons
+survive the later edits and whether they can improve on the existing negative
+pool, which already misses here. Keep the SAT case 7/guard 4 as a control.
+
+Preserve branch assumptions and explicit variable maps. Charge discovery,
+recognition, full-target recomposition and cold verification; only earlier
+stream results may supply authority. This tests reusable patterns across edits
+instead of presuming that all needed supports remain available. Automatic guard
+selection, wider correspondence and whole-input coverage remain open.
+
+Resume `experiments/results/cnf-template-preparation/checkpoint.json`.
+`next-target.json` binds the source queries, chronological availability and
+ranked costs. The new checkpoint reuses the previous immutable cumulative
+archive because every measured native proof already exists there.
+
+## Previous investigation: share template preparation already held by the caller
 
 [Early checked-pool lookup](pool-priority.md) recovers eight negative-core and
 four witness hits before recovery preparation. With ordinary native fallback,

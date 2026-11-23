@@ -4,7 +4,17 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, early pool priority):
+Latest expansion checkpoint (23 November, shared template preparation):
+[Reuse the live cofactor](template-preparation.md). Sharing one immutable
+source/guard preparation removes 71 repeated checks and constructions with
+identical proof bytes, routes, storage and native verification. Local
+preparation-plus-query mean improves 14.35%; full-worker time does not improve.
+Next: source-bound conditional supports across five related native fallbacks
+that account for 56.28% of native-fallback time. Existing early negative reuse
+already misses these cases. Charge discovery and recomposition, preserve
+branch guards and the nearby SAT control, and use only earlier stream results.
+
+Previous expansion checkpoint (23 November, early pool priority):
 [Use checked answers before recovery](pool-priority.md). Eight negative-core
 and four witness hits move ahead of native dispatch with identical proof bytes
 and selected endpoint memory. Local preparation-plus-query mean improves 2.50%

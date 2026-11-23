@@ -28,11 +28,11 @@ classes.
 
 ## Paper
 
-[Checked pools before recovery](research/pool-priority.md).
-Earlier core and witness lookup preserves identical proofs and saves 2.50% in
-local preparation-plus-query time, with no complete-worker gain. Recovery stays
-optional. Next: reuse the exact cofactor already computed for 71 template
-applications, retaining source binding and native verification.
+[Shared template preparation](research/template-preparation.md).
+Reusing the live cofactor removes 71 repeated constructions and reduces local
+preparation-plus-query time by 14.35%, preserving all proofs and native checks.
+Complete-worker time does not improve. Next: conditional supports across five
+related edits that account for 56.28% of native-fallback time.
 
 [Reuse checked order during causal reconstruction](research/preimage-fusion.md).
 Sharing untouched clauses and their canonical order reduces repeated support

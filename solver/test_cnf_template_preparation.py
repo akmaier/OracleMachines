@@ -1,0 +1,163 @@
+from collections import Counter
+from copy import deepcopy
+from dataclasses import FrozenInstanceError
+from itertools import product
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from unittest.mock import patch
+import unittest
+
+from experiments.cnf_template_preparation import prepare_and_publish
+from experiments.cnf_conditional_unit_support import extract, materialize, transport, match
+from experiments.cnf_consequence_priority import ConsequencePrioritySolver
+from experiments.cnf_probed_partition import acquire
+from experiments.cnf_residual_dag import holds, restrict
+from experiments.cnf_snapshot_replay import SnapshotResidualSolver
+from experiments.cnf_canonical_verify import CanonicalVerifySnapshot
+
+CUBE = list(product((-1, 1), (-2, 2), (-3, 3)))
+UNIT = dict(clauses=[[-2], [-1, 2], [1]], assumptions=[],
+            trace=[[1, 2], [2, 1]], conflict=0)
+
+
+class TemplatePreparationTests(unittest.TestCase):
+    def solver(self, **kwargs):
+        s = ConsequencePrioritySolver(**kwargs)
+        self.addCleanup(s.close)
+        return s
+
+    def bundle(self):
+        s = self.solver(leaves=False)
+        acquire(s, CUBE, 256)
+        return extract(s, CUBE)[0]
+
+    def test_one_check_and_identical_unit_payload(self):
+        source = UNIT['clauses'] + [[7, -9]]
+        s, old = self.solver(), self.solver()
+        c = Counter()
+        with patch.object(s, '_expand', side_effect=AssertionError('Fresh search')):
+            prepared, route = prepare_and_publish(s, source, UNIT, [], c)
+        result = materialize(old, source, UNIT, context=[])
+        self.assertEqual(route, 'template')
+        self.assertEqual(result['root'], prepared.key)
+        self.assertEqual(s._read(prepared.key), old._read(prepared.key))
+        self.assertEqual(c['templates_checked'], 1)
+        self.assertEqual(c['shared_template_preparations'], 1)
+
+    def test_sparse_signed_guards_and_stronger_contexts(self):
+        mapping = {1: -71, 2: 901, 3: -11}
+        source = [[mapping[abs(l)] * (1 if l > 0 else -1) for l in cl] for cl in CUBE]
+        for entry in self.bundle()['entries']:
+            template = transport(entry['template'], mapping)
+            fixed = dict(template['assumptions'])
+            extra = next(v for v in (11, 71, 901) if v not in fixed)
+            for bit in (False, True):
+                context = sorted([[v, b] for v, b in {**fixed, extra: bit}.items()])
+                s, old = self.solver(), self.solver()
+                prepared, route = prepare_and_publish(s, source, template, context)
+                result = materialize(old, source, template, context=context)
+                self.assertEqual(route, 'template')
+                self.assertEqual(prepared.key, result['root'])
+                self.assertEqual(s._read(prepared.key), old._read(result['root']))
+
+    def test_missing_reason_has_no_answer(self):
+        s = self.solver()
+        prepared, route = prepare_and_publish(s, [[1], [-1, 2]], UNIT, [])
+        self.assertIsNone(route)
+        self.assertIsNone(s._read(prepared.key))
+        self.assertTrue(acquire(s, prepared.target, 256)['result']['answer'])
+
+    def test_context_cannot_drop_or_reverse_assumptions(self):
+        template = dict(clauses=[[1]], assumptions=[[1, False]], trace=[], conflict=0)
+        for context in ([], [[1, True]]):
+            s = self.solver()
+            with self.assertRaises(ValueError):
+                prepare_and_publish(s, [[1]], template, context)
+            self.assertEqual(s.db.execute('SELECT COUNT(*) FROM cnf_residual_v1').fetchone()[0], 0)
+
+    def test_invalid_contexts_and_templates_fail_closed(self):
+        for context in ([[True, False]], [[1, 0]], [[1, False], [1, False]]):
+            with self.assertRaises(ValueError):
+                prepare_and_publish(self.solver(), UNIT['clauses'], UNIT, context)
+        for field, value in (('trace', [[1, 0]]), ('conflict', True)):
+            template = deepcopy(UNIT)
+            template[field] = value
+            with self.assertRaises(ValueError):
+                prepare_and_publish(self.solver(), UNIT['clauses'], template, [])
+
+    def test_input_mutation_cannot_change_prepared_binding(self):
+        source, context = deepcopy(UNIT['clauses']), [[77, True]]
+        s = self.solver()
+        prepared, _ = prepare_and_publish(s, source, UNIT, context)
+        before = deepcopy(prepared)
+        source[0].clear()
+        context[0][1] = False
+        self.assertEqual(prepared, before)
+        with self.assertRaises(FrozenInstanceError):
+            prepared.key = 'wrong'
+        self.assertFalse(s._read(prepared.key)['answer'])
+
+    def test_cached_answer_and_constants_preserve_native_authority(self):
+        s = self.solver()
+        for source in ([], [[]], [[1]]):
+            result = acquire(s, source, 256)['result']
+            prepared, route = prepare_and_publish(s, source, UNIT, [])
+            self.assertEqual(route, 'cached')
+            self.assertEqual(prepared.key, result['root'])
+        empty = dict(clauses=[[]], assumptions=[], trace=[], conflict=0)
+        prepared, route = prepare_and_publish(self.solver(), [[]], empty, [])
+        self.assertEqual(route, 'template')
+        self.assertEqual(prepared.cnf, ((),))
+
+    def test_duplicate_permuted_clauses_keep_exact_payload(self):
+        source = [[2, -1, 2], [1], [-2], [1], [90, 91]]
+        s, old = self.solver(), self.solver()
+        prepared, route = prepare_and_publish(s, source, UNIT, [])
+        materialize(old, source, UNIT, context=[])
+        self.assertEqual(route, 'template')
+        self.assertEqual(s._read(prepared.key), old._read(prepared.key))
+
+    def test_native_checker_rejects_invalid_generated_proof(self):
+        s = self.solver()
+        with patch('experiments.cnf_template_preparation.propagate', return_value=({}, [(2, 0)], 0)):
+            with self.assertRaises(ValueError):
+                prepare_and_publish(s, UNIT['clauses'], UNIT, [])
+        self.assertEqual(s.db.execute('SELECT COUNT(*) FROM cnf_residual_v1').fetchone()[0], 0)
+        # The inherited template interface deliberately excludes tautologies.
+        with self.assertRaises(ValueError):
+            prepare_and_publish(s, UNIT['clauses'] + [[90, -90]], UNIT, [])
+
+    def test_all_cube_deletions_and_guarded_truth(self):
+        entries = self.bundle()['entries']
+        s = self.solver()
+        hits = 0
+        for mask in range(256):
+            source = [cl for i, cl in enumerate(CUBE) if mask >> i & 1]
+            for entry in entries:
+                template = entry['template']
+                context = template['assumptions']
+                prepared, route = prepare_and_publish(s, source, template, context)
+                self.assertEqual(prepared.target, restrict(source, dict(context)))
+                if route is not None:
+                    hits += route == 'template'
+                    self.assertFalse(any(holds(source, {**dict(zip((1, 2, 3), bits)), **dict(context)})
+                                         for bits in product((False, True), repeat=3)))
+                    self.assertFalse(s._read(prepared.key)['answer'])
+                else:
+                    self.assertFalse(match(source, template))
+        self.assertGreater(hits, 0)
+
+    def test_cold_native_replay(self):
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / 'db'
+            s = ConsequencePrioritySolver(path)
+            try:
+                prepared, _ = prepare_and_publish(s, UNIT['clauses'] + [[7, 8]], UNIT, [])
+            finally:
+                s.close()
+            for cls in (SnapshotResidualSolver, CanonicalVerifySnapshot):
+                reader = cls(path)
+                try:
+                    self.assertFalse(reader._read(prepared.key, prepared.cnf)['answer'])
+                finally:
+                    reader.close()

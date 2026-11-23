@@ -1,0 +1,23 @@
+....E.....
+======================================================================
+ERROR: test_duplicate_permuted_clauses_keep_exact_payload (solver.test_cnf_template_preparation.TemplatePreparationTests.test_duplicate_permuted_clauses_keep_exact_payload)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_template_preparation.py", line 115, in test_duplicate_permuted_clauses_keep_exact_payload
+    prepared, route = prepare_and_publish(s, source, UNIT, [])
+                      ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_template_preparation.py", line 44, in prepare_and_publish
+    if not match(source, template, c):
+           ~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_conditional_unit_support.py", line 129, in match
+    c=Counter() if counts is None else counts;wanted=check_template(template,c);members=clause_set(source,c)
+                                                                                        ~~~~~~~~~~^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_clause_deletion_guard.py", line 20, in clause_set
+    if any(-l in items for l in items):raise ValueError('Tautological clause is outside this interface')
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Tautological clause is outside this interface
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.056s
+
+FAILED (errors=1)

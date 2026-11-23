@@ -9527,6 +9527,39 @@ question, with immutable bindings and all native checks retained. Full proof
 serialization, growing storage and automatic useful-pattern discovery remain
 separate obligations.
 
+\paragraph{Share the live template preparation.}
+The next adapter binds an immutable source snapshot and validated guard within
+one synchronous call. It restricts and canonicalizes the source once, checks
+the existing answer, then checks a proposed template once if needed. A hit
+constructs the same native unit or empty proof from that cofactor and its
+variable-name map; a miss passes the target to the existing pools and native
+fallback. No external prepared target is accepted as authority. Every native
+proof check remains, and the template assumptions must still be extended by
+the query guard.
+
+Four alternating pairs on the same 114 conditional queries remove 71 repeated
+template checks and full-cofactor constructions. Checks fall from 173 to 102,
+restriction literal visits from 216,720 to 154,153, and normalization literal
+visits from 221,946 to 162,778. Native verification still examines 109,760
+payload literals, with identical proof bytes, chronological additions, routes
+and answers. Preparation plus query mean falls from 377.28 to 323.13 ms
+(14.35\%); all four pairs favor sharing on this measure. Complete-worker means
+are 3.056 and 3.083 seconds, so this comparison establishes no end-to-end gain.
+The source snapshot costs temporary $O(m+L+g)$ space for $m$ clauses, $L$ literal
+occurrences and $g$ guard entries; ordering the guard costs $O(g\log g)$.
+Retained proof storage is unchanged. All measured identities already exist in
+the prior archive, which the new checkpoint references without copying.
+
+The remaining native fallbacks expose a more structural question. Five negative
+cofactors from three related source formulas account for 56.28\% of native-fallback
+query time and 22 of 43 expansion dispatches. Two sources delete two
+additional clauses from the first. Can conditional supports learned on the
+earlier source survive those edits and improve on the existing negative pool?
+This is a next experiment, not an established transfer result. It must preserve
+all branch assumptions, exact variable maps and chronological availability;
+the nearby SAT cofactor remains a control. Automatic useful-pattern discovery,
+whole-input composition and unrestricted storage bounds remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

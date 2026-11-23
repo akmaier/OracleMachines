@@ -12,7 +12,32 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: transfer conditional supports across nearby edits
+## Current investigation: avoid costly cover discovery on cheap unit conflicts
+
+[Learned conditional covers](learned-conditional-covers.md) transfer earlier
+source-bound reasons to three later cofactors after the existing negative pool
+misses. Native expansion dispatches fall **43 to 33**, with all branch guards
+checked and no future answers seeded. However, preparation-plus-query mean is
+**7.74% worse**, native payload grows 1.95%, and active hints grow from 11,505 to
+54,396 bytes. All four paired repeats regress on preparation plus query. Keep
+the policy experimental; there is no new whole-input coverage cell.
+
+**Next primary target: preserve a cheap full-target unit conflict before lazy
+cover extraction and recomposition.** Case 6/guard 3 was already a one-expansion
+unit refutation; the learned cover makes it **3.57 to 17.60 ms**. Failed first
+discoveries at cases 7/guard 4 (SAT) and 9/guard 5 add about 6 ms each. Later
+transfer at case 16/guards 3 and 4 saves only about 1.43 and 2.37 ms. Price a
+checked unit gate on misses, sharing its prefix with fallback when possible.
+Then test amortization over more distinct supported edits.
+
+Ready covers also retain origin keys and name maps despite self-contained unit
+proofs; separating active certificates from archived provenance is a secondary
+space opportunity. Deferred origins still need exact reconstruction bindings.
+Automatic useful guards/maps, arbitrary-edit closure and general bounds remain
+open. Resume `experiments/results/cnf-learned-conditional/checkpoint.json`;
+`analysis.json` retains paired per-query costs and every transfer certificate.
+
+## Previous investigation: transfer conditional supports across nearby edits
 
 [Shared template preparation](template-preparation.md) removes 71 duplicate
 checks, restrictions and canonicalizations with identical proofs, routes,

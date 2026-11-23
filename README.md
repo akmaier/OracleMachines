@@ -28,11 +28,11 @@ classes.
 
 ## Paper
 
-[Shared template preparation](research/template-preparation.md).
-Reusing the live cofactor removes 71 repeated constructions and reduces local
-preparation-plus-query time by 14.35%, preserving all proofs and native checks.
-Complete-worker time does not improve. Next: conditional supports across five
-related edits that account for 56.28% of native-fallback time.
+[Learned conditional covers](research/learned-conditional-covers.md).
+Three chronological transfers reduce expansion dispatches from 43 to 33, but
+preparation-plus-query time grows 7.74% and retained state increases. The route
+remains experimental. Next: recognize cheap unit conflicts before paying for
+cover discovery and reconstruction.
 
 [Reuse checked order during causal reconstruction](research/preimage-fusion.md).
 Sharing untouched clauses and their canonical order reduces repeated support

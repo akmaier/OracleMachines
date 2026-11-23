@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/probe_cnf_learned_conditional.py", line 29, in probe
+    s.db.executemany(f'INSERT INTO {t}(id,payload) VALUES (?,?)',[(k,dict(delta[t])[k]) for k in ids])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.DatabaseError: not authorized
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/probe_cnf_learned_conditional.py", line 41, in <module>
+    if __name__=='__main__':probe(Path(sys.argv[1]))
+                            ~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/probe_cnf_learned_conditional.py", line 27, in probe
+    with s.db:
+         ^^^^
+sqlite3.DatabaseError: not authorized

@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, shared template preparation):
+Latest expansion checkpoint (23 November, learned conditional covers):
+[Transfer complete conditional supports](learned-conditional-covers.md).
+Three chronological transfers reduce expansion dispatches 43 to 33, with native
+unit/split checking and no future-answer seeding. Preparation plus query is
+7.74% slower, native payload grows 1.95% and active hints grow. Keep optional.
+Next: preserve a cheap unit conflict before cover discovery; the largest
+regression replaces a 3.57 ms unit refutation with 17.60 ms of cover work.
+Price miss handling, prefix sharing and discovery amortization explicitly.
+
+Previous expansion checkpoint (23 November, shared template preparation):
 [Reuse the live cofactor](template-preparation.md). Sharing one immutable
 source/guard preparation removes 71 repeated checks and constructions with
 identical proof bytes, routes, storage and native verification. Local

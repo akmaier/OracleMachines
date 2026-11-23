@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+"""Chronological, read-only discovery of transferable conditional support trees."""
+from collections import Counter
+from pathlib import Path
+import sys,tempfile,time
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+from experiments import compare_cnf_template_preparation as study
+from experiments.cnf_conditional_unit_support import extract,match
+from experiments.cnf_snapshot_replay import SnapshotResidualSolver
+from experiments.cnf_residual_dag import restrict
+base=study.base
+
+
+def probe(out):
+    p=base.load('experiments/results/cnf-template-preparation/protocol.json')
+    report=base.load('experiments/results/cnf-template-preparation/shared-0/report.json')
+    cases=study.bound(p['cases']);rows=study.bound(report['queries']);delta=study.read_zip(report['delta']);prep=study.read_zip(report['preparation_delta']);bank=[];observations=[]
+    with tempfile.TemporaryDirectory() as directory:
+        db=Path(directory)/'db';study.restore(study.read_zip(p['prefix']),db,prep);s=SnapshotResidualSolver(db)
+        try:
+            for row in rows:
+                target=restrict(cases[row['case']]['source'],dict(row['assignment']));events=[]
+                if row['route']=='native':
+                    for origin,bundle in bank:
+                        c=Counter();tick=time.perf_counter();matched=[i for i,e in enumerate(bundle['entries']) if match(target,e['template'],c)]
+                        events.append(dict(origin=origin,matched=matched,total=len(bundle['entries']),all_matched=len(matched)==len(bundle['entries']),seconds=time.perf_counter()-tick,counts=dict(c)))
+                with s.db:
+                    for t,ids in row['new_ids'].items():
+                        s.db.executemany(f'INSERT INTO {t}(id,payload) VALUES (?,?)',[(k,dict(delta[t])[k]) for k in ids])
+                learned=None
+                if row['route']=='native' and row['status']=='unsat':
+                    tick=time.perf_counter();bundle,c=extract(s,target)
+                    learned=dict(entries=len(bundle['entries']),clauses=[len(e['template']['clauses']) for e in bundle['entries']],assumptions=[e['template']['assumptions'] for e in bundle['entries']],tree=bundle['tree'],seconds=time.perf_counter()-tick,counts=c)
+                    bank.append(([row['case'],row['template']],bundle))
+                observations.append(dict(case=row['case'],template=row['template'],status=row['status'],route=row['route'],events=events,learned=learned))
+        finally:s.close()
+    base.write(out/'exploration.json',dict(script_sha256=base.sha(__file__),protocol=study.binding('experiments/results/cnf-template-preparation/protocol.json'),queries=report['queries'],observations=observations,bundles=[dict(origin=o,bundle=b) for o,b in bank],limitations=['Read-only chronological analysis of the prior stream; matching all leaves is a candidate only until tree coverage and full native recomposition are checked. No publication or measured speedup.']))
+    for r in observations:
+        if r['events']:print(base.encode(dict(case=r['case'],template=r['template'],status=r['status'],matches=[e['origin'] for e in r['events'] if e['all_matched']],learned=r['learned'])),flush=True)
+
+if __name__=='__main__':probe(Path(sys.argv[1]))

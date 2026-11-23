@@ -5,7 +5,22 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: shared preparation exposes a cluster of expensive edits
+## Latest evidence: complete conditional covers transfer, but discovery can lose
+
+[Learned covers](learned-conditional-covers.md) expose a precise reusable pattern:
+every path in a complete binary tree implies a checked conditional unit
+refutation whose clauses remain in the target. Native recomposition validates
+the full cofactor. This reuses three earlier outcomes across edits after the
+existing negative pool misses, reducing 43 to 33 expansion dispatches.
+
+All inputs already solved under the baseline. Preparation plus query regresses
+7.74% and retained state grows; avoiding search alone is insufficient. The next
+gap is to recognize a cheap full-target unit conflict before constructing a
+larger learned cover, then price amortization across distinct edits. Partial
+covers never decide the target, and the nearby SAT control remains positive.
+Guard/map discovery and efficient whole-input classification remain open.
+
+## Previous evidence: shared preparation exposes a cluster of expensive edits
 
 [Shared template preparation](template-preparation.md) removes 71 repeated
 constructions without changing any decision, native proof or coverage cell.

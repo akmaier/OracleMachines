@@ -5,7 +5,23 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: source provenance can survive proof transitions exactly
+## Latest evidence: preparation reuse preserves coverage but does not save total time
+
+[One-use leaf preparation](missing-leaf-handoff.md) preserves exactly the same
+conditional answers, branch events and native proof payloads while removing
+five normalizations. Preparation/query mean nevertheless regresses 2.29%.
+These already solved inputs add no classification cell. Keep the experiment
+optional; cheaper construction in one place need not lower total cost.
+
+A causal diagnostic tests three newly recomposed origins. All preserve the
+number of missing leaves; the case-19 origin gives no smaller missing residuals
+for case 20. Case 15 offers a finer split that reduces one case-20 residual by
+only ten literals and one variable. Price that specific subbranch opportunity
+before generalizing admission. If it does not amortize, return to useful guard
+and correspondence discovery on unlabelled inputs. Efficient arbitrary-CNF
+acquisition and compact reusable closure remain open.
+
+## Previous evidence: source provenance can survive proof transitions exactly
 
 [Carried original representatives](carried-clause-origins.md) provide an exact
 reuse invariant: equal residual clauses remain equal under later restrictions,

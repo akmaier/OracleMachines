@@ -1,0 +1,23 @@
+..........E.
+======================================================================
+ERROR: test_sparse_labels_tautologies_duplicates_and_empty_clauses (solver.test_cnf_leaf_handoff.LeafHandoffTests.test_sparse_labels_tautologies_duplicates_and_empty_clauses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_leaf_handoff.py", line 79, in test_sparse_labels_tautologies_duplicates_and_empty_clauses
+    self.compare(target)
+    ~~~~~~~~~~~~^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_leaf_handoff.py", line 40, in compare
+    result = method(s, target, self.cover, budget, screen, c)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_prepared_partial.py", line 35, in recompose
+    intact = survival(target, cover, c)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_prepared_partial.py", line 23, in survival
+    members = clause_set(target, counts)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_clause_deletion_guard.py", line 20, in clause_set
+    if any(-l in items for l in items):raise ValueError('Tautological clause is outside this interface')
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Tautological clause is outside this interface
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.256s
+
+FAILED (errors=1)

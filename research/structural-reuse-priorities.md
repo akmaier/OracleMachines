@@ -12,7 +12,35 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: pass prepared missing leaves into native acquisition
+## Current investigation: price finer reusable branches after recomposition
+
+[Missing-leaf handoff](missing-leaf-handoff.md) removes five duplicate
+normalizations, saving 3,133 literal visits and 13,573 key-serialization bytes
+with identical native proofs and checks. Nevertheless, preparation/query mean
+regresses **2.29%**, and complete-worker mean **2.58%**; both have two wins and
+two losses. Keep optional. Selected endpoint Python state is 11,655 bytes
+smaller; stored bytes and structural coverage are unchanged.
+
+**Next target: test a finer surviving subbranch from an earlier recomposed
+proof.** The actual case-15 proof adds a split inside case 20's failed support.
+With the same checked unit prefix, one missing residual changes from 693 to
+683 literals (113 to 112 variables), while the other stays at 673 literals.
+Missing-leaf counts remain two. This is a small hypothesis requiring a complete
+cost comparison, including extra extraction, hints and branch publication.
+
+Do not blindly admit every recomposed root: the actual case-19 proof gives
+case 20 exactly the current missing residuals. The three prospective pairs
+all preserve missing-leaf counts. Their diagnostic is chronological and uses
+actual proof bytes, but is not an evaluated online admission policy. Retain
+the negative control. If the finer branch does not pay, prioritize broader
+unlabelled guard/map discovery over further preparation micro-optimizations.
+
+Resume `experiments/results/cnf-leaf-handoff/checkpoint.json` and its bound
+`origin-followup.json`. Native acquisition/checking, automatic useful guards,
+variable correspondence and unrestricted compact closure remain unresolved.
+No production default changes.
+
+## Previous investigation: pass prepared missing leaves into native acquisition
 
 [Indexed origin carry](carried-clause-origins.md) preserves exact extracted
 bundles and all native proofs while skipping **2,647 unchanged representatives**.

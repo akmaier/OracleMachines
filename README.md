@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Pass prepared missing leaves into acquisition](research/missing-leaf-handoff.md).
+Five duplicate normalizations disappear with identical native proof bytes and
+checks, but preparation/query mean regresses 2.29%. The experiment stays
+optional. Next: test a specific finer reusable subbranch; blanket admission of
+newly recomposed origins does not reduce missing-leaf counts in the diagnostic.
+
 [Carry original clause provenance](research/carried-clause-origins.md).
 Indexed updates preserve exact supports and proofs while skipping 2,647
 unchanged representatives. Cover-phase time improves 8.36%, but whole-stream

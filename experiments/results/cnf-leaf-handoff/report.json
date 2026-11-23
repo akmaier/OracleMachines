@@ -1,0 +1,186 @@
+{
+  "groups": {
+    "baseline": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 12.0,
+        "query_seconds": 0.08700881141703576
+      },
+      "controls": {
+        "attempts": 114.0,
+        "expanded_nodes": 43.0,
+        "query_seconds": 0.3200117307715118
+      }
+    },
+    "carried": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 5.0,
+        "query_seconds": 0.0775675440672785
+      },
+      "controls": {
+        "attempts": 114.0,
+        "expanded_nodes": 27.0,
+        "query_seconds": 0.3337292473297566
+      }
+    },
+    "handoff": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 5.0,
+        "query_seconds": 0.08735179272480309
+      },
+      "controls": {
+        "attempts": 114.0,
+        "expanded_nodes": 27.0,
+        "query_seconds": 0.3337366321356967
+      }
+    }
+  },
+  "means": {
+    "baseline": {
+      "attempts": 138.0,
+      "checked_python_bytes": 8460643.0,
+      "cold_seconds": 0.4316784063121304,
+      "complete_worker_seconds": 3.6462195938220248,
+      "database_bytes": 50343936.0,
+      "donor_seconds": 0.027850999613292515,
+      "expanded_nodes": 55.0,
+      "hint_bytes": 11505.0,
+      "mode_setup_seconds": 6.912497337907553e-05,
+      "new_payload_bytes": 1551836.0,
+      "peak_rss_bytes": 316985344.0,
+      "persistence_seconds": 0.11853595811408013,
+      "preparation_and_queries": 0.4207254486391321,
+      "prepare_seconds": 0.01370490645058453,
+      "proof_delta_compressed_bytes": 144816.0,
+      "query_seconds": 0.40702054218854755,
+      "reconstruction_seconds": 0.5483855517813936,
+      "restore_seconds": 0.12411318754311651,
+      "setup_seconds": 0.02896845864597708,
+      "warm_seconds": 0.0002477293601259589
+    },
+    "carried": {
+      "attempts": 138.0,
+      "checked_python_bytes": 8348782.0,
+      "cold_seconds": 0.4208223959431052,
+      "complete_worker_seconds": 3.7038567395647988,
+      "database_bytes": 50253824.0,
+      "donor_seconds": 0.028264999971725047,
+      "expanded_nodes": 32.0,
+      "hint_bytes": 42031.0,
+      "mode_setup_seconds": 7.37607479095459e-05,
+      "new_payload_bytes": 1508442.0,
+      "peak_rss_bytes": 316305408.0,
+      "persistence_seconds": 0.11796342732850462,
+      "preparation_and_queries": 0.4246231666766107,
+      "prepare_seconds": 0.013326375279575586,
+      "proof_delta_compressed_bytes": 138342.0,
+      "query_seconds": 0.4112967913970351,
+      "reconstruction_seconds": 0.5393988956930116,
+      "restore_seconds": 0.15196529182139784,
+      "setup_seconds": 0.03014645806979388,
+      "warm_seconds": 0.00039053126238286495
+    },
+    "handoff": {
+      "attempts": 138.0,
+      "checked_python_bytes": 8337127.0,
+      "cold_seconds": 0.46168073965236545,
+      "complete_worker_seconds": 3.7993073747493327,
+      "database_bytes": 50253824.0,
+      "donor_seconds": 0.026453343918547034,
+      "expanded_nodes": 32.0,
+      "hint_bytes": 42031.0,
+      "mode_setup_seconds": 5.833327304571867e-05,
+      "new_payload_bytes": 1508442.0,
+      "peak_rss_bytes": 300007424.0,
+      "persistence_seconds": 0.11724429181776941,
+      "preparation_and_queries": 0.4343363104853779,
+      "prepare_seconds": 0.013247885624878109,
+      "proof_delta_compressed_bytes": 138342.0,
+      "query_seconds": 0.4210884248604998,
+      "reconstruction_seconds": 0.5527296250220388,
+      "restore_seconds": 0.10789343772921711,
+      "setup_seconds": 0.026459833490662277,
+      "warm_seconds": 0.00028005195781588554
+    }
+  },
+  "protocol": {
+    "path": "experiments/results/cnf-leaf-handoff/protocol.json",
+    "sha256": "08fa317d27b8c31d8a32898d8c83528d30e3a7c90ffdd1e3246fd4d49a45bf01"
+  },
+  "samples": [
+    {
+      "path": "experiments/results/cnf-leaf-handoff/baseline-0/report.json",
+      "policy": "baseline",
+      "repeat": 0,
+      "sha256": "b21ea8d0fdf942109ecfcb59232011a8bf9760c1173dc4e938ed7db3ccc7de11"
+    },
+    {
+      "path": "experiments/results/cnf-leaf-handoff/carried-0/report.json",
+      "policy": "carried",
+      "repeat": 0,
+      "sha256": "22bc368c7fcf74030179d072beb39c46e1bc61de7924184c2588a5ec1dc8f2cd"
+    },
+    {
+      "path": "experiments/results/cnf-leaf-handoff/handoff-0/report.json",
+      "policy": "handoff",
+      "repeat": 0,
+      "sha256": "346838cd8ecabd29b454dd4849a918e0d640b8c568f9c23d5f5bc232242bb5f6"
+    },
+    {
+      "path": "experiments/results/cnf-leaf-handoff/handoff-1/report.json",
+      "policy": "handoff",
+      "repeat": 1,
+      "sha256": "170ae73f5f10846f70e9ee35bcdcad4e652caca8bf6ad6c6df39728d432e1a40"
+    },
+    {
+      "path": "experiments/results/cnf-leaf-handoff/carried-1/report.json",
+      "policy": "carried",
+      "repeat": 1,
+      "sha256": "2534df0076156a49ecab9d100643570623747cc4f7790320d4f945fc35c7c277"
+    },
+    {
+      "path": "experiments/results/cnf-leaf-handoff/baseline-1/report.json",
+      "policy": "baseline",
+      "repeat": 1,
+      "sha256": "9a170fa09aebaca6a46dff5cda9f60b6119755bf1b242f4a7be2d8e5a45b12b7"
+    },
+    {
+      "path": "experiments/results/cnf-leaf-handoff/baseline-2/report.json",
+      "policy": "baseline",
+      "repeat": 2,
+      "sha256": "5008c444364296f0ca84722893ce0c2e8de9020d4e46211f6b737354c362ec87"
+    },
+    {
+      "path": "experiments/results/cnf-leaf-handoff/carried-2/report.json",
+      "policy": "carried",
+      "repeat": 2,
+      "sha256": "47c0fec84a95fd9960e0745cf531d669703b6bce1bccea4cc15513898a9b3272"
+    },
+    {
+      "path": "experiments/results/cnf-leaf-handoff/handoff-2/report.json",
+      "policy": "handoff",
+      "repeat": 2,
+      "sha256": "336f5b558b969da2fbbf1d2cd3f220876e2dcbdac5f91277732045076af51178"
+    },
+    {
+      "path": "experiments/results/cnf-leaf-handoff/handoff-3/report.json",
+      "policy": "handoff",
+      "repeat": 3,
+      "sha256": "6a20e2d285abe389d5ae39712b0c2c125cda02946def3479126fa71d0f0b115a"
+    },
+    {
+      "path": "experiments/results/cnf-leaf-handoff/carried-3/report.json",
+      "policy": "carried",
+      "repeat": 3,
+      "sha256": "da51d2c6e1ec03d01da16f27eb4e0c0c1fa57d1d6ec782336abd9f726c7f3b2a"
+    },
+    {
+      "path": "experiments/results/cnf-leaf-handoff/baseline-3/report.json",
+      "policy": "baseline",
+      "repeat": 3,
+      "sha256": "00f93f1e093edcd42ccae17aa3dcfcebf6ff4f2a44640f93eb14cc1f31e4d906"
+    }
+  ]
+}

@@ -4,7 +4,18 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, carried clause origins):
+Latest expansion checkpoint (23 November, missing-leaf handoff):
+[Pass prepared leaves into acquisition](missing-leaf-handoff.md). Five fewer
+normalizations preserve all native proof payloads, hints and checks. Work falls
+by 3,133 literal visits and 13,573 key bytes, but preparation/query time regresses
+2.29% and complete-worker time 2.58%. Keep optional. Twelve new tests pass; no
+new native identity is needed. Next: price a finer surviving branch from the
+actual case-15 recomposed proof, including admission and extraction. It shrinks
+one case-20 residual by only ten literals and one variable. Case-19 admission
+provides no smaller missing residual; preserve this failed idea. All three
+prospective origin pairs keep the same missing-leaf counts.
+
+Previous expansion checkpoint (23 November, carried clause origins):
 [Reuse original provenance](carried-clause-origins.md). Indexed path updates
 retain exact minimum original representatives, covers, native payloads and
 hints. Cover-phase mean improves 8.36%, but preparation/query mean regresses

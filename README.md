@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Resume native fallback before unwinding](research/live-fallback.md).
+The exposed query takes 11 rather than 17 expansions and 20.71% less query time,
+with identical proofs. New edits never need fallback and regress 3.89%, so the
+mechanism remains optional. Next: share discovery and propagation of independently
+useful binary consequences in the dominant partition branch.
+
 [Try a second binary target after a miss](research/binary-target-fallback.md).
 The optional recognizer reduces six new edits from 69 to 60 expansions and query
 time by 8.29%; controls regress 1.14%. A direct-solving ablation separates better

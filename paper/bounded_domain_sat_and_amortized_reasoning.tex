@@ -9169,6 +9169,46 @@ deletion still takes 29 expansions under either policy. These local supplied-don
 experiments establish neither broader whole-input decision coverage nor a
 uniformly efficient expansion procedure for arbitrary SAT.
 
+\paragraph{Keep the native continuation live through the routing decision.}
+We can avoid the exposed restart loss without serializing unfinished frames.
+At the original expansion-budget guard, an optional visitor commits the completed
+checked prefix and performs the existing support-preparation decision while the
+native stack remains live. Native fallback extends the same query's allowance
+and continues in place. A selected partition discards the stack and uses the
+existing branch and composition checkers. Preparation runs once, recursive search
+during the decision is rejected, and the callback is removed on every exit.
+The source and solver remain bound by the synchronous call. The total allowance
+is still 256 expansions, including the first eight; recognition, checking,
+publication and memory have separate costs. No unfinished frame grants answer
+authority. A later stop preserves completed checked proofs, while process loss
+or return discards unfinished frames.
+
+Two policies, twelve local targets and two opposite serial orders give 48
+attempts. All targets already close under the baseline, and every paired native
+proof delta and partition sidecar is byte-identical. The exposed replacement
+falls from seventeen to eleven expansions, matching direct acquisition. Mean
+query time falls from 31.14 to 24.69 milliseconds (20.71\%) in both orders.
+Visitor calls fall from twenty to eleven, normalizations from 56 to 47 and
+propagation calls from sixteen to ten; publications remain twelve. Across six
+controls, expansions fall from 69 to 63 and query time improves 2.58\%. The six
+new edits never need native fallback: four finish within the probe and two choose
+a partition. Their counts remain 53 and query time regresses 3.89\% in both
+orders. Complete-worker mean changes are small, with mixed paired signs. The
+optional mechanism establishes a local reuse opportunity, not a general speedup.
+
+Saved native payload remains 509,786 control bytes and 447,919 new-edit bytes;
+compressed deltas plus raw sidecars remain 151,881 and 146,370 bytes. A separate
+census observes 315,998 bytes reachable from native-frame locals at the successful
+handoff and 600,765 bytes at the discarded new-deletion continuation, plus 10,568
+and 11,824 bytes of shallow frame objects. These graphs overlap caches and exclude
+routing plans and interpreter/C-stack overhead. They are not marginal retention
+or peak RAM bounds. Keeping the stack live during preparation can increase peak
+memory, and a discarded continuation supplies no search saving. The dominant
+new deletion still takes 29 expansions. Sharing discovery and propagation across
+several independently forced binary consequences in its mixed-width branch is
+the next structural candidate; no such useful consequence set is guaranteed for
+arbitrary SAT, and source recomposition remains necessary.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

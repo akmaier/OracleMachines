@@ -5,7 +5,23 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: a new consequence exposes a continuation cost
+## Latest evidence: continuation reuse is conditional on the route
+
+[The synchronous fallback](live-fallback.md) closes the exposed restart gap:
+17 -> 11 expansions with identical proof bytes. It saves work when routing
+returns to native search. Six new edits finish in the probe or select a partition,
+so they gain no expansion saving and regress in query time. This adds no coverage
+cell and does not change the general solver default.
+
+Return to structural discovery in the dominant partition branch. The saved
+125-variable binary/ternary source still requires nine expansions. Investigate
+whether several independently forced binary values can share discovery and
+propagation, with every path bound to the exact source and every final decision
+checked. A bounded set of consequences need not exist or suffice on arbitrary
+CNFs. Automatic donors/maps and source-level recomposition remain open; the
+[ranked gaps](structural-reuse-priorities.md) bind the exact next seed.
+
+## Previous evidence: a new consequence exposes a continuation cost
 
 [Trying one more binary target](binary-target-fallback.md) finds a checked
 implication consequence missed by the first target. It preserves all decisions;

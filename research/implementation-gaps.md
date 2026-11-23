@@ -4,7 +4,15 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, second binary target):
+Latest expansion checkpoint (23 November, live fallback):
+[Synchronous continuation](live-fallback.md) reduces the exposed replacement from
+17 to 11 expansions and query time by 20.71%, with identical proof bytes. Six
+controls improve 2.58%; six new edits never resume and regress 3.89%. Keep it
+optional. Completed proofs persist, while unfinished frames remain local to the
+call. Next: combine independently useful binary consequences in the saved dominant
+partition branch, with recognition, compilation and source recomposition charged.
+
+Previous expansion checkpoint (23 November, second binary target):
 [Bounded consequence recognition](binary-target-fallback.md) adds a checked path
 missed by the first target. New edits take 69 -> 60 expansions and 8.29% less query
 time, but controls regress 1.14% and exposed branches remain nine expansions.

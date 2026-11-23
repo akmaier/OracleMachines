@@ -12,7 +12,43 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: preserve unfinished acquisition work
+## Current investigation: combine useful binary consequences
+
+[Live native fallback](live-fallback.md) makes the existing routing decision before
+unwinding the search stack. The exposed replacement takes **11 instead of 17**
+expansions and **20.71% less query time**, with the same native proof bytes.
+Six controls improve **2.58%**, but six new edits never need native fallback and
+regress **3.89%** in query time. Counts and all paired proof deltas/sidecars match
+except the six avoided control expansions. General defaults remain unchanged.
+
+**Next primary target: joint propagation of independently forced binary values in
+the dominant mixed-width branch.** Reuse a source-bound implication graph and
+several checked paths when their consequences cover different variables. Test
+whether a bounded consequence set reduces repeated restrictions, graph discovery
+or ordinary splits enough to pay for recognition and proof compilation. Compare
+with one-target and two-target policies. More deductions can still enlarge the
+certificate or choose a worse continuation; retain these counterexamples.
+
+The largest fresh query still uses **29 expansions** and takes **81.82/87.31 ms**
+under restart/live routing. Its branch counts are **[1,9,1,6,1,3]** after the initial
+eight expansions. The nine-expansion branch has **125 variables, 57 binary and
+261 ternary clauses, 897 literal occurrences**. In
+`experiments/results/cnf-live-fallback/next-target.json`, the `novel` capture's
+acquisition at index **2** binds the exact source and pre-acquisition prefix:
+the historical seed plus three earlier native IDs from the bound trial delta.
+Its root is absent, and 247 expansions remain. Warm hint pools are not serialized.
+
+Native fallback continuation is now a narrow optional mechanism, not the next
+structural bottleneck. It keeps unfinished frames only during the synchronous
+call; process loss discards them. The frame census is not a peak-memory bound,
+and complete-worker timing changes have mixed signs. Automatic donor/map
+selection, original-source recomposition and cold-audit/storage costs remain
+separate larger obligations. Resume
+`experiments/results/cnf-live-fallback/checkpoint.json`: 75,724 native records
+and 258 partition records, with prior authority preserved. No new whole-input
+coverage or unrestricted bound is claimed.
+
+## Previous checkpoint: preserve unfinished acquisition work
 
 [Bounded second-target recognition](binary-target-fallback.md) finds a checked
 binary consequence missed by the first target. The exposed branch and sign

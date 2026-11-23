@@ -9757,6 +9757,47 @@ guard recognizers leave unresolved. Useful partitions must reduce or explain
 remaining acquisition after charging recognition and exact recomposition;
 finer descriptions alone supply no unrestricted-SAT efficiency theorem.
 
+\paragraph{Whole-input lookahead separates query completion from root coverage.}
+We return to unlabelled whole CNFs with 72 exposed queries and 72 prospective
+holdout queries. Each stream combines six generated designs, two samples and
+base/edit/repeat inputs; the holdout uses larger sizes and a fresh fixed seed.
+All 96 distinct roots are absent from the parent archive. The solver receives
+only the CNF. No supplied guard, correspondence or generator label selects its
+actions. These small synthetic streams do not represent arbitrary SAT.
+
+After binary structural discovery misses, an optional policy probes both values
+of the most frequent variable using full-clause unit propagation. Constants,
+existing units and sources above fixed variable, clause and literal limits skip
+this step. A checked negative cofactor excludes one branch; the surviving branch
+still consumes the common native expansion budget. Existing unit and split
+certificates check recomposition. Inconclusive probes supply no verdict. This is
+an application of established lookahead reasoning \citep{li1997up,heule2005marcheq},
+not a new tractable class.
+
+Across four alternating serial repeats, expansion dispatches fall from 1,330 to
+1,169 on exposed inputs and from 2,567 to 2,142 on the holdout. Native payload
+falls 2.50\% and 7.37\%, respectively. Solve time nevertheless rises 10.08\% and
+3.71\%. The 1.28\% lower held-out complete-worker mean includes cheaper cold
+replay and has one slower pair; it does not establish a general runtime gain.
+The common 256-dispatch cap excludes probe publication and is not a wall-time
+or memory cap.
+
+One fresh 108-variable base query now completes in 251 dispatches instead of
+stopping at 256. Its subsequent edit takes one dispatch rather than 197.
+However, the baseline eventually completes the same base root on its repeat.
+Thus both policies complete the same 47 of 48 distinct held-out roots, although
+their query-attempt counts differ. The remaining 84-variable edited root has no
+verdict under either policy. We retain both the early-reuse example and this
+unresolved interaction.
+
+The added policy has 310 inconclusive exposed candidate attempts and 499 on the
+holdout. These pay preparation, lookup and propagation before ordinary search
+repeats related work. The next target is recognizing useful probes cheaply and
+reusing their prepared cofactors, including exact cached negatives that unit
+propagation alone cannot find. We keep the policy optional. Reduced dispatches,
+earlier completion and smaller stored proofs are distinct from lower total
+computation or efficient acquisition for every CNF.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

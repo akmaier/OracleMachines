@@ -28,10 +28,15 @@ classes.
 
 ## Paper
 
-[Test finer origins from recomposed proofs](research/refined-proof-origins.md).
+[Measure whole-input lookahead and its failed-probe costs](research/whole-cnf-lookahead.md).
+The optional policy saves dispatches and stored proofs but adds solve time. It
+completes one held-out query earlier; both arms eventually solve 47/48 distinct
+roots. Next: price failed-probe recognition and share cofactor preparation.
+
+Previous: [Test finer origins from recomposed proofs](research/refined-proof-origins.md).
 The finer cover retains more supports but avoids no native expansion. It adds
 2.39% preparation/query time and 45.89% hint bytes, so the admission policy stays
-experimental. Next: return to structural discovery on unlabelled whole CNFs.
+experimental. This motivated the whole-input study above.
 
 [Pass prepared missing leaves into acquisition](research/missing-leaf-handoff.md).
 Five duplicate normalizations disappear with identical native proof bytes and

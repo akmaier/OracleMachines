@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_whole_discovery.py", line 152, in <module>
+    if __name__=='__main__': validate(Path(sys.argv[1]))
+                             ~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_whole_discovery.py", line 96, in validate
+    stored, counts=audit(dest, trial['cases'], trial['rows'])
+                   ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_whole_discovery.py", line 31, in audit
+    for key in stored[table]: assert equiv.read(key) is not None
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

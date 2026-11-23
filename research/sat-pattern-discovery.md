@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: finer covers can leave the unresolved computation unchanged
+## Latest evidence: earlier completion need not expand distinct-root coverage
+
+[Bounded whole-clause lookahead](whole-cnf-lookahead.md) receives only fresh CNFs.
+It saves native dispatches and retained proof data, but increases solve time.
+One 108-variable base query completes within the common 256-dispatch cap and
+then supplies useful reuse to its edit. The baseline eventually completes the
+same root on a repeat. Both arms therefore cover 47 of 48 distinct held-out
+roots, despite different counts of completed query attempts.
+
+The 84-variable edited root (held-out case 1) remains unresolved. Probe misses
+repeat preparation and propagation; 499 held-out candidate attempts produce
+no exclusion. The next gap is recognizing useful probes cheaply and reusing
+prepared cofactors while preserving exact cached results. Price recognition on
+both random and shared mixtures, retain this unresolved interaction, and freeze
+another holdout before tuning. A complete classification, efficient acquisition
+of every class and compact closure remain separate open obligations.
+
+## Previous evidence: finer covers can leave the unresolved computation unchanged
 
 [Admitting recomposed origins](refined-proof-origins.md) puts the earlier
 finer-branch hypothesis into the live chronological stream. It retains more

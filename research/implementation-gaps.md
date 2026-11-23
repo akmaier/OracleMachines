@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, finer recomposed origins):
+Latest expansion checkpoint (23 November, whole-CNF lookahead):
+[Price broader probing on fresh inputs](whole-cnf-lookahead.md). The policy uses
+only CNF structure and existing checked proof rules. Expansion dispatches fall
+12.1% exposed and 16.6% held out; native payload falls 2.5% and 7.4%. Solve time
+rises 10.08% and 3.71%, so keep it optional. One query completes earlier and
+supports its edit, but both arms eventually solve the same 47/48 distinct
+held-out roots. Next: cheap recognition and prepared-cofactor reuse for the
+499 inconclusive held-out probe attempts; retain the unresolved edited root.
+
+Previous expansion checkpoint (23 November, finer recomposed origins):
 [Price live origin admission](refined-proof-origins.md). Two completed partial
 proofs become lazy candidates. The finer cover is selected, but expansion stays
 at 32 dispatches; extra extraction/publication grows preparation/query time

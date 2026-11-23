@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_whole_discovery.py", line 154, in <module>
+    if __name__=='__main__': validate(Path(sys.argv[1]))
+                             ~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_whole_discovery.py", line 97, in validate
+    stored, counts=audit(dest, trial['cases'], trial['rows'])
+                   ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_whole_discovery.py", line 26, in audit
+    stored = {t: dict(s.db.execute(f'SELECT id,payload FROM {t}')) for t in TABLES}
+                      ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: cnf_binary_equivalence_v1

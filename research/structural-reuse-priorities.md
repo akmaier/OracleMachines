@@ -12,7 +12,34 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: return to discovery on unlabelled whole CNFs
+## Current investigation: price failed whole-clause probes before adding more
+
+[Whole-input lookahead](whole-cnf-lookahead.md) tests 72 fresh exposed and 72
+prospective holdout queries with no supplied guard or family label. Random 3-CNF
+is the largest initial cost. Wider-clause probing reduces expansion dispatches
+by 12.1% exposed and 16.6% held out, and native payload by 2.5% and 7.4%.
+However, solve time rises 10.08% and 3.71%. Keep the policy optional.
+
+One held-out base query completes earlier (251 dispatches rather than a stop at
+256), enabling cheap reuse on its edit. Both policies eventually complete the
+same 47 of 48 distinct held-out roots. Case 1 remains unresolved; this is no
+new tractable class or distinct-root coverage improvement. The modest held-out
+complete-worker gain comes partly from cheaper replay and does not erase the
+solve-time regression.
+
+**Next target:** reduce the 310 exposed and 499 held-out inconclusive probe
+attempts through a cheap source-derived gate and reuse of prepared cofactors.
+Inspect unit-chain seeds, repeated restriction/canonicalization and checked
+cofactor hits. Preserve exact cached-negative authority even when propagation
+would miss. Use the unresolved held-out case 1 and early-completion case 36 to
+explain interactions, then freeze new validation inputs before tuning. The
+shared-mixture regression must be included; do not route by generator labels.
+
+Resume `experiments/results/cnf-whole-discovery/checkpoint.json`. The study
+preserves raw trials, exact-prefix profiles, explicit unknowns and the cumulative
+proof archive. The two previous partial-cover refinements remain failed defaults.
+
+## Previous investigation: return to discovery on unlabelled whole CNFs
 
 [Live finer-origin admission](refined-proof-origins.md) tests the preceding
 hypothesis. The case-15 cover is selected for cases 19/20, but native expansion

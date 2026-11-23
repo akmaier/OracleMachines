@@ -9352,6 +9352,44 @@ compilation remains a concrete next question. All targets already close under
 the baseline; this experiment adds no decision coverage cell and no uniformly
 cheap arbitrary-SAT expansion bound.
 
+\paragraph{Reuse the prefix already held by joint proof construction.}
+The next census finds a narrower duplication. A two-consequence batch prepares
+its first surviving cofactor for a checked lookup, descends into the cofactor
+satisfying both forced values, and then reconstructs that first prefix during
+negative proof assembly. Its immutable canonical CNF, original-variable name
+map and complete key are still live in the caller's local variables. We reuse
+that exact triple. This relies on the existing bound of two consequences;
+larger batches need a separate state invariant. Cached-prefix priority, positive
+exits, single consequences and disappearing variables keep their previous
+behavior. Excluded-path compilation and every native proof check remain intact.
+No additional CNF, hash lookup or persistent cache is introduced.
+
+Fifteen local targets, two policies and two opposite serial orders give sixty
+attempts. Each six-edit group avoids two reconstructions; each exposed sign
+variant avoids one. Controls remove 1,518 normalizer literal visits, 1,554
+restriction literal visits and 6,657 serialized key bytes. These are work
+counters, not persistent storage savings. Query means fall 2.98\% on controls
+and 1.42\% on new edits, but no-hit queries also vary and one isolated-branch
+order regresses. Two orders establish no robust runtime attribution. Native
+proof bytes, partitions, expansion counts and stored space remain identical.
+The largest query falls from 116 to 114 normalizations and from 103 to 101
+restrictions, retaining all 51 verification calls. Its mixed branch still
+requires nine expansions; the construction saving is small.
+
+The checked branch DAG exposes a larger question. It contains five split and
+nine unit nodes, all newly acquired. The unit nodes store CNFs with 6,495 literal
+occurrences, while their explicit unit reasons and conflict clauses reference
+148 occurrences: 18 unit, 47 binary and 12 ternary clauses, counted locally
+across the nodes. Six unit nodes end in conflicts; three depend on child proofs.
+These counts identify neither a common 148-literal core nor a compression ratio.
+A reusable conditional support must retain ancestor assignments, original-variable
+correspondence, checked source membership and every nonterminal child obligation.
+We should test whether such supports can be recognized across mixed-width edits
+before constructing the full residual proof, against the existing causal core
+bank and with discovery, transport and checking charged. A small trace obtained
+after solving does not imply cheap recognition beforehand. No new coverage cell,
+uniform construction bound or unrestricted-SAT result follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

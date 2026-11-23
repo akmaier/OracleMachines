@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Reuse the live joint prefix](research/joint-prefix-reuse.md).
+The largest query avoids two repeated cofactor constructions with identical
+proofs and storage. Runtime gains remain uncertain. Next: recognize conditional
+mixed-width supports before rebuilding full residual proofs, preserving their
+assignments, variable maps and child obligations.
+
 [Reuse checked order during causal reconstruction](research/preimage-fusion.md).
 Sharing untouched clauses and their canonical order reduces repeated support
 construction. Balanced repeats save 6.32% on controls and 4.49% on nearby new-edit

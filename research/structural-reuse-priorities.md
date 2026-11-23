@@ -12,7 +12,44 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse checked order, then attack mixed-branch construction
+## Current investigation: conditional mixed-width supports before full reconstruction
+
+[Direct joint-prefix reuse](joint-prefix-reuse.md) removes two redundant
+reconstructions from each edit group, reusing a canonical triple already live in
+the caller. The largest query falls from **116 to 114 normalizations** and **103
+to 101 restrictions**, with all 51 verification calls intact. Query means fall
+2.98% on controls and 1.42% on nearby new edits, but no-hit queries also vary and
+one isolated-branch order regresses. Treat the exact work reduction as established;
+these two-order timings do not establish a robust runtime speedup. Proof bytes,
+persistent storage, checked-object endpoints and coverage remain unchanged.
+
+**Next primary target: recognize transferable conditional unit supports in the
+remaining mixed-width branch before constructing full residual proofs.** Its
+checked DAG contains **five split and nine unit nodes**, all newly acquired. The
+unit nodes store 6,495 literal occurrences; their local reasons use 148, comprising
+18 unit, 47 binary and 12 ternary clauses across the nine nodes. Six unit nodes
+end in conflicts; three have child obligations. This is potential structure to
+investigate, not a 148-literal unconditional core or a proven compression ratio.
+
+Census explicit ancestor conditions and original-variable maps, then compare
+bounded recognition/transport against the existing causal support and core bank.
+Test nearby edits and sign changes, including source membership failures and
+missing child evidence. A match must preserve its conditions and full-source
+certificate checks. Charge discovery, mapping, validation, materialization and
+cold replay. This offers a larger possible reduction than removing another two
+canonicalizations, but cross-input reuse has not yet been demonstrated.
+
+Resume `experiments/results/cnf-joint-prefix/checkpoint.json`. In `next-target.json`,
+the `novel` observation (query position **0**), acquisition index **2**, binds
+**125 variables, 258 ternary and 56 binary clauses; 886 literal occurrences**,
+budget **247** and **three earlier native IDs**. The `proof_census` records the
+checked reachable DAG. Restore only its bound prefix and those IDs; replay the
+preceding probe/branch for warm pools. The final union must never seed comparison
+queries. The largest new query is 86.36 ms and keeps branch counts `[1,9,1,6,1,3]`
+after eight probe expansions. Automatic correspondence, whole-source composition,
+useful arbitrary-CNF coverage, storage growth and cold replay remain open.
+
+## Previous checkpoint: reuse checked order, then attack mixed-branch construction
 
 [Fused causal reconstruction](preimage-fusion.md) exploits exact order invariants:
 restriction preserves order within each clause. After the residual clauses are

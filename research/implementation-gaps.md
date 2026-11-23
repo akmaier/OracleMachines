@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, fused causal reconstruction):
+Latest expansion checkpoint (23 November, direct joint-prefix reuse):
+[Reusing the already-live first cofactor](joint-prefix-reuse.md) removes two
+normalizations and restrictions from the largest query without changing proof
+bytes, storage or verification. Runtime differences are small and noisy. Next:
+conditional mixed-width supports in the remaining 14-node proof; its nine unit
+nodes use 148 reason literals within 6,495 stored CNF literals. These are local
+reason counts, not an unconditional compressed core. Exact source/condition/map
+checks and child obligations must accompany any transfer.
+
+Previous expansion checkpoint (23 November, fused causal reconstruction):
 [Order-preserving preimages](preimage-fusion.md) share untouched checked clauses
 and avoid redundant normalization/reverse mapping. Six balanced repeat pairs,
 including setup, save 6.32% on controls and 4.49% on new-edit query means, with

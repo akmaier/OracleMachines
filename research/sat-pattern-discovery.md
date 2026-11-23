@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: an exact representation invariant saves reconstruction work
+## Latest evidence: small construction reuse exposes conditional reason structure
+
+[Direct joint-prefix reuse](joint-prefix-reuse.md) removes two reconstructions
+while retaining all proofs and checks. The main opportunity is now the surviving
+mixed-width proof: five splits and nine unit nodes. Those unit nodes contain
+6,495 stored literal occurrences but use 148 in their explicit local reasons,
+including twelve ternary reason clauses. Six are conflict leaves and three still
+require a child proof. These counts do not identify one transferable core.
+
+Discover which conditional supports recur across edits under explicit variable
+maps and checked source membership. Compare against the existing causal core bank,
+retaining all split assumptions and nonterminal child obligations. Recognizing a
+sound reusable pattern cheaply is separate from having a small reason trace after
+solving. The [ranked record](structural-reuse-priorities.md) binds the precise
+branch, prefix and three earlier IDs. No new whole-input coverage cell or uniform
+arbitrary-SAT guarantee is established by this checkpoint.
+
+## Previous evidence: an exact representation invariant saves reconstruction work
 
 [Fused causal reconstruction](preimage-fusion.md) reuses checked canonical order
 and untouched clause tuples while lifting child support to its parent. It keeps

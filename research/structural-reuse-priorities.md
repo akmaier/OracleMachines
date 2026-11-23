@@ -12,7 +12,44 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: share partition preparation
+## Current investigation: the remaining binary/ternary branch
+
+[Shared partition preparation](partition-preparation.md) replaces four identical
+branch constructions with one shared producer preparation and one independent
+reconstruction. On six new edits, binary-frequency query time falls **6.15%** and
+cofactor-handoff query time **4.01%**, with both orders improving. Native payloads,
+models, partitions and expansions match each parent. A single returned preparation
+graph is **35.72% smaller**; process peak memory is not established. Complete
+new-edit worker time regresses **1.07% / 0.23%**, so defaults remain unchanged.
+
+**Next primary target: discover useful structure in the dominant residual branch.**
+The prepared binary-frequency policy's largest query takes 82.51 ms. Its second
+first-false branch takes nine expansions and 22.51 ms in the first trial. The
+saved input has **125 variables, 57 binary clauses and 263 ternary clauses**.
+Investigate a compact checked consequence set, useful decomposition or shared
+subproof across that interaction. Compare existing bounded recognizers first;
+charge recognition, remaining search and proof construction. Inconclusive
+propagation supplies preparation only, and any result still needs exact source
+recomposition.
+
+`experiments/results/cnf-partition-preparation/next-target.json` binds all four
+profiles and a `branch_candidate` captured before acquisition. Its historical
+prefix plus **three** earlier rows from the bound trial delta reconstruct persistent
+availability. A fresh reader verifies them and confirms the target is absent.
+The target has 247 expansions left in the shared budget. Warm transient pools are
+not serialized. Use this seed, not the final union containing the answer.
+
+The cheaper prepared policy has branch expansions `[1,9,1,6,1,3]`; prepared
+cofactor handoff has `[1,9,1,7,1,4]`. Probe admission and continuation choice remain
+open. Cold replay and sidecar representation dominate the complete measured worker,
+which includes full auditing; these costs are distinct from query latency.
+Automatic donor/map selection and original-source coverage remain broader gaps.
+
+Resume `experiments/results/cnf-partition-preparation/checkpoint.json`: **75,508
+native records**, with all older authority intact. This adds no tractable class
+or uniform unrestricted-SAT expansion guarantee.
+
+## Previous checkpoint: share partition preparation
 
 The [direct cofactor handoff](cofactor-handoff.md) avoids unrelated memo lookups
 and reuses three nonconflicting unit propagations on six new edits. Query time

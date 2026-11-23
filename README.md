@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Share first-false partition preparation](research/partition-preparation.md).
+One shared preparation plus independent reconstruction replaces four identical
+constructions. New-edit query time falls 6.15% under binary-frequency routing,
+with identical proofs; complete worker time still regresses. The selected
+preparation graph is 35.72% smaller, without a process-memory claim. Next: inspect
+the saved 125-variable binary/ternary branch that still needs nine expansions.
+
 [Hand prepared cofactor work directly to its child](research/cofactor-handoff.md).
 One-use normalization and unit-propagation reuse lowers query time 2.66% on six
 new edits, preserving all proof bytes. Complete worker time does not improve;

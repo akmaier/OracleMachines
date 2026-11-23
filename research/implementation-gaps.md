@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, direct cofactor handoff):
+Latest expansion checkpoint (23 November, partition preparation):
+[Immutable partition preparation](partition-preparation.md) replaces four branch
+constructions with shared acquisition data plus independent reconstruction.
+New-edit binary-frequency query time falls 6.15%, preserving proof bytes and
+expansions, but complete worker time regresses. The next target is a saved
+125-variable binary/ternary branch requiring nine expansions. Its exact prior
+state excludes its answer. All 75,508 native records and earlier experiments
+remain preserved; no new whole-source coverage class is claimed.
+
+Previous expansion checkpoint (23 November, direct cofactor handoff):
 [One-use preparation](cofactor-handoff.md) reuses normalization and unit traces,
 reducing new-edit query time 2.66% with identical proof bytes and decisions.
 Complete worker time does not improve, and routing still costs more than the

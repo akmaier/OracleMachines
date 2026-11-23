@@ -9085,6 +9085,49 @@ Choosing which probes and continuations to acquire remains a larger obligation
 than reusing their preparation. Donors and maps remain supplied; this experiment
 adds no decision coverage cell or unrestricted-SAT bound.
 
+\paragraph{Share partition preparation while reconstructing it for checking.}
+A first-false partition was constructed separately during premise publication,
+branch acquisition, sidecar creation and sidecar checking. We now prepare one
+immutable source, ordered missing-clause description and branch collection for
+the first three consumers. Prefix tuples share immutable clauses; residuals are
+still materialized. Premise publication consumes the validated clause membership
+without constructing unused branches. The final sidecar enters the unchanged
+independent checker, which receives no prepared object and reconstructs the
+partition, checks the strengthened premise and binds each native child and model.
+This acquisition path has no guard chain. Preparation is local to a query and
+never grants answer authority or enters the persistent archive.
+
+For $k$ missing clauses, $M$ source clauses, $L$ source literal occurrences,
+$R$ missing-clause occurrences and residual sizes $L_i$, retained preparation
+uses $O(L+R+kM+k^2+\sum_i L_i)$ cells, with integer widths and object overhead
+charged separately. The wrapper admits at most six missing clauses. There is no
+fixed descriptor byte cap, and preparation does not make the branch-solving
+obligations cheap. Validation, restriction, snapshots, sizing and disposal remain
+measured. One producer preparation plus one independent reconstruction replaces
+four identical constructions on the selected completed queries.
+
+Four policies, two opposite serial orders and twelve targets compare preparation
+with each of binary-frequency routing and cofactor-handoff routing. On six new
+nearby edits, binary-frequency query time falls from 0.18988 to 0.17821 seconds
+(6.15\%); cofactor-handoff time falls from 0.23540 to 0.22597 seconds (4.01\%).
+Both orders improve in each comparison. Models, decisions, native payloads,
+partitions and expansions are unchanged: 58 expansions for both binary-frequency
+arms and 61 for both handoff arms. Native key/payload space remains 522,190 bytes
+for binary frequency and 727,736 bytes for handoff. Compressed deltas plus raw
+sidecars remain 152,812 and 171,816 bytes respectively.
+
+An independent graph audit compares one returned preparation at a time. The
+selected deletion's descriptor occupies 259,532 bytes against 403,780 bytes for
+an old returned structure, a 35.72\% reduction. The independent checker still
+reconstructs its own structure while the descriptor remains live; these figures
+are not process peaks. Maximum conservative descriptor charge across the trials
+is 741,716 bytes. Complete measured new-edit worker time rises 1.07\% in both
+orders for binary frequency and 0.23\% with mixed signs for handoff. We retain
+these regressions and leave the general default unchanged. Control query means
+improve 8.09\% and 6.61\%, but the local supplied-candidate experiment establishes
+neither broad decision coverage nor a general total-cost speedup. The unchanged
+residual branches remain the next structural-search obligation.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

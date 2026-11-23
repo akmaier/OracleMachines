@@ -5,7 +5,22 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: reuse prepared structure without repeating recognition
+## Latest evidence: shared construction exposes the remaining branch cost
+
+[Partition preparation](partition-preparation.md) shares producer work while
+retaining independent source/child checking. It preserves the exact first-false
+regions, proof bytes and verdicts. New-edit query time improves, but full worker
+time does not; this adds no new coverage cell.
+
+The next saved branch has 125 variables, 57 binary clauses and 263 ternary clauses
+and still needs nine expansions. Its exact pre-acquisition state is preserved
+without the answer. Inspect the interaction for reusable consequences or a useful
+checked decomposition, and compare current bounded recognizers before adding
+another. This is a residual-level opportunity: source recomposition, automatic
+donors/maps and unrestricted interactions still require their own construction
+and cost bounds. See the [ranked gaps](structural-reuse-priorities.md).
+
+## Previous evidence: reuse prepared structure without repeating recognition
 
 The [direct cofactor handoff](cofactor-handoff.md) replaces broad memo lookup
 with an exact producer-to-child connection. It saves normalization and unit scans

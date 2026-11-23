@@ -12,7 +12,41 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: price the surviving mixed-width continuation
+## Current investigation: repeated preparation in the remaining mixed branch
+
+[Consequence priority](consequence-priority.md) reuses the checked two-polarity
+cofactor probe before a single late binary consequence. It recovers the case-61
+failure while preserving the exposed joint benefit. Six new edits take **57
+versus 63 joint expansions**, save **4.54% query time** and **3.91% native payload**.
+They improve **3.34%** versus one-target timing, but controls still regress
+**0.80%** versus that baseline. The optional policy adds no new coverage cell.
+
+**Next primary target: repeated source-bound preparation and causal support
+extraction around the remaining six-expansion branch.** The largest new query,
+case 31's replacement, takes **32 / 27 / 25 expansions** under one-target / joint /
+priority, but priority's **94.12 ms** is slower than joint's **91.25 ms**. Its
+profile records **142 normalizations**, **6,353 restriction calls**, seven
+negative-reuse calls and 26 causal preimage calls. Identify repeated conditioned
+clauses and reason/support descriptions, then test exact reuse with every
+source, assignment and availability check intact. Earlier broad cofactor and
+normalization memos already regressed; do not repeat them without a narrower
+producer/consumer pattern and a measured total-cost case.
+
+Resume `experiments/results/cnf-consequence-priority/checkpoint.json`. In its
+`next-target.json`, the `novel` observation (query position **1**) has acquisition
+index **4**: **125 variables, 257 ternary, 60 binary and one unit clause; 892
+literal occurrences**. It needs six expansions with a budget of **242**. Restore
+its prefix plus **42 earlier native IDs** from the bound trial delta. The target
+was absent. This reconstructs persistent availability, not warm pools; replay
+the preceding stream to recover those. The final union must never seed comparisons.
+
+The case-61 streams restore baseline-identical proof bytes, so their **4 -> 3**
+expansion reduction partly reflects compiling rather than visiting a unit-refuted
+child. Keep publications and total time visible. General defaults remain unchanged;
+automatic donors/maps, source recomposition, cold audit/storage and unrestricted
+interaction bounds remain open.
+
+## Previous checkpoint: price the surviving mixed-width continuation
 
 [Joint consequences](joint-binary-consequences.md) reduce the exposed branch from
 **9 to 4 expansions**, with **24.10% less query time** and **24.86% less new proof

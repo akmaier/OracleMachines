@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, joint binary consequences):
+Latest expansion checkpoint (23 November, consequence priority):
+[Checked cofactor priority](consequence-priority.md) recovers the late-consequence
+regression and preserves the exposed joint proof bytes. Six new edits save 4.54%
+query time and 3.91% native payload versus joint conditioning. Controls still
+regress 0.80% versus one-target search, so the rule stays optional. Next: exact
+reuse of repeated conditioning and causal support around the remaining
+six-expansion branch. Fewer expansions alone do not guarantee lower total cost;
+no new coverage cell or unrestricted complexity claim follows.
+
+Previous expansion checkpoint (23 November, joint binary consequences):
 [Checked joint conditioning](joint-binary-consequences.md) reduces the exposed
 branch and two sign variants from nine to four expansions. The original saves
 24.10% query time and 24.86% proof payload. New edits regress 4.05% in time and

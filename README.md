@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Prioritize a checked full-CNF cofactor](research/consequence-priority.md).
+A narrow arbitration rule recovers the late-consequence regression and preserves
+the useful joint case. New edits save 4.54% query time and 3.91% native payload
+versus joint conditioning. Controls still regress slightly versus one-target
+search; defaults remain unchanged. Next: reuse repeated conditioned structure
+and causal support in the remaining expensive branch.
+
 [Combine useful binary consequences](research/joint-binary-consequences.md).
 The exposed branch takes four rather than nine expansions, saving 24.10% query
 time and 24.86% new proof payload. Nearby new edits regress 4.05% in time, so the

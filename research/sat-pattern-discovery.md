@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: useful consequences depend on their continuation
+## Latest evidence: arbitrate with an existing full-CNF certificate
+
+[Consequence priority](consequence-priority.md) checks an ordinary cofactor before
+following one late binary consequence. It recovers the observed wider-discovery
+failure while retaining the useful joint case. Six new edits save 4.54% query
+time versus joint conditioning and 3.34% versus one-target search; controls remain
+0.80% slower than one-target. All 15 targets already closed, so no coverage cell
+is added. The rule remains optional and does not identify an optimal continuation.
+
+The remaining largest replacement takes fewer expansions but more time than
+joint conditioning. Its profile points to repeated normalization and causal
+support extraction around a six-expansion mixed-width branch. Discover which
+conditioned clauses and proof reasons recur and can be reused exactly. The
+[ranked gaps](structural-reuse-priorities.md) bind the source, historical prefix
+and earlier IDs. Preserve full-source composition and unrestricted bounds as
+separate obligations.
+
+## Previous evidence: useful consequences depend on their continuation
 
 [Joint binary consequences](joint-binary-consequences.md) share a source-bound
 graph and combine two checked forced values. The exposed branch and its sign

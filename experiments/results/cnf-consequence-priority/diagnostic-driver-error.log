@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/probe_cnf_consequence_priority.py", line 62, in <module>
+    if __name__=='__main__':run(Path(sys.argv[1]))
+                            ~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/probe_cnf_consequence_priority.py", line 47, in run
+    for q in queries:assert q['result'] is not None and rd._read(q['root'])['answer']==q['result']['answer']
+                                                                 ~^^^^^^^^
+KeyError: 'root'

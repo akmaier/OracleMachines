@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/profile_cnf_consequence_priority.py", line 97, in <module>
+    if __name__=='__main__':profile(Path(sys.argv[1]))
+                            ~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/profile_cnf_consequence_priority.py", line 94, in profile
+    print(base.encode(dict(selection={k:v for k,v in worst.items() if k!='root'},identical_delta_streams=matches,observations=[dict(split=o['split'],accepted=sum(e['accepted'] for e in o['events']),events=len(o['events'])) for o in observations])),flush=True)
+                                                                                                                                                              ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/profile_cnf_consequence_priority.py", line 94, in <genexpr>
+    print(base.encode(dict(selection={k:v for k,v in worst.items() if k!='root'},identical_delta_streams=matches,observations=[dict(split=o['split'],accepted=sum(e['accepted'] for e in o['events']),events=len(o['events'])) for o in observations])),flush=True)
+                                                                                                                                                                  ~^^^^^^^^^^^^
+KeyError: 'accepted'

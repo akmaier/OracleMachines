@@ -1,0 +1,186 @@
+{
+  "groups": {
+    "baseline": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 12.0,
+        "query_seconds": 0.08904741518199444
+      },
+      "controls": {
+        "attempts": 114.0,
+        "expanded_nodes": 43.0,
+        "query_seconds": 0.3256358976941556
+      }
+    },
+    "partial": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 5.0,
+        "query_seconds": 0.08453199034556746
+      },
+      "controls": {
+        "attempts": 114.0,
+        "expanded_nodes": 27.0,
+        "query_seconds": 0.3409053658833727
+      }
+    },
+    "unit-gated": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 10.0,
+        "query_seconds": 0.10688666487112641
+      },
+      "controls": {
+        "attempts": 114.0,
+        "expanded_nodes": 29.0,
+        "query_seconds": 0.3367176679894328
+      }
+    }
+  },
+  "means": {
+    "baseline": {
+      "attempts": 138.0,
+      "checked_python_bytes": 8460643.0,
+      "cold_seconds": 0.4266630000201985,
+      "complete_worker_seconds": 3.5191638125106692,
+      "database_bytes": 50343936.0,
+      "donor_seconds": 0.027953729266300797,
+      "expanded_nodes": 55.0,
+      "hint_bytes": 11505.0,
+      "mode_setup_seconds": 6.851018406450748e-05,
+      "new_payload_bytes": 1551836.0,
+      "peak_rss_bytes": 360939520.0,
+      "persistence_seconds": 0.12068364571314305,
+      "preparation_and_queries": 0.42817361489869654,
+      "prepare_seconds": 0.01349030202254653,
+      "proof_delta_compressed_bytes": 144816.0,
+      "query_seconds": 0.41468331287615,
+      "reconstruction_seconds": 0.5375563020352274,
+      "restore_seconds": 0.10781382257118821,
+      "setup_seconds": 0.029309354024007916,
+      "warm_seconds": 0.00023931276518851519
+    },
+    "partial": {
+      "attempts": 138.0,
+      "checked_python_bytes": 8362875.0,
+      "cold_seconds": 0.41988247889094055,
+      "complete_worker_seconds": 3.5659181458177045,
+      "database_bytes": 50253824.0,
+      "donor_seconds": 0.028142270748503506,
+      "expanded_nodes": 32.0,
+      "hint_bytes": 42031.0,
+      "mode_setup_seconds": 6.823998410254717e-05,
+      "new_payload_bytes": 1508442.0,
+      "peak_rss_bytes": 359104512.0,
+      "persistence_seconds": 0.12000883289147168,
+      "preparation_and_queries": 0.43865683546755463,
+      "prepare_seconds": 0.01321947923861444,
+      "proof_delta_compressed_bytes": 138342.0,
+      "query_seconds": 0.4254373562289402,
+      "reconstruction_seconds": 0.5369649268686771,
+      "restore_seconds": 0.11310854193288833,
+      "setup_seconds": 0.027933385455980897,
+      "warm_seconds": 0.0002600831212475896
+    },
+    "unit-gated": {
+      "attempts": 138.0,
+      "checked_python_bytes": 8493876.0,
+      "cold_seconds": 0.4338037082925439,
+      "complete_worker_seconds": 3.5580424170475453,
+      "database_bytes": 50302976.0,
+      "donor_seconds": 0.027959604165516794,
+      "expanded_nodes": 39.0,
+      "hint_bytes": 76533.0,
+      "mode_setup_seconds": 6.763509009033442e-05,
+      "new_payload_bytes": 1535146.0,
+      "peak_rss_bytes": 359133184.0,
+      "persistence_seconds": 0.11952560395002365,
+      "preparation_and_queries": 0.4568706975551322,
+      "prepare_seconds": 0.013266364694572985,
+      "proof_delta_compressed_bytes": 141625.0,
+      "query_seconds": 0.4436043328605592,
+      "reconstruction_seconds": 0.5289359375601634,
+      "restore_seconds": 0.11153047939296812,
+      "setup_seconds": 0.027118969010189176,
+      "warm_seconds": 0.000263062072917819
+    }
+  },
+  "protocol": {
+    "path": "experiments/results/cnf-partial-cover/protocol.json",
+    "sha256": "5aa376f8c56ea84a07d14da21ea18d54eae8ecf223c0875d545f78b106ef9079"
+  },
+  "samples": [
+    {
+      "path": "experiments/results/cnf-partial-cover/baseline-0/report.json",
+      "policy": "baseline",
+      "repeat": 0,
+      "sha256": "930ab3612aa53dd38ea504faf97664ba45b6d2c26400ce5bcc8ca6acff063e1c"
+    },
+    {
+      "path": "experiments/results/cnf-partial-cover/unit-gated-0/report.json",
+      "policy": "unit-gated",
+      "repeat": 0,
+      "sha256": "075f6089099f55f933175a29c65d2b217f404366126978c1d53c872899923d36"
+    },
+    {
+      "path": "experiments/results/cnf-partial-cover/partial-0/report.json",
+      "policy": "partial",
+      "repeat": 0,
+      "sha256": "09e10188a7d83475e2b157ca15f6be65d6014d258221d338278e696bea2565c2"
+    },
+    {
+      "path": "experiments/results/cnf-partial-cover/partial-1/report.json",
+      "policy": "partial",
+      "repeat": 1,
+      "sha256": "4b6d5e89aee8504adf82fbac11df6f756d466f8ce43cf97328a5d6b38a2bd283"
+    },
+    {
+      "path": "experiments/results/cnf-partial-cover/unit-gated-1/report.json",
+      "policy": "unit-gated",
+      "repeat": 1,
+      "sha256": "e844ca7bce3e3a988ab7f878f66a1e451e8ea873e120c47539aa0891306342ea"
+    },
+    {
+      "path": "experiments/results/cnf-partial-cover/baseline-1/report.json",
+      "policy": "baseline",
+      "repeat": 1,
+      "sha256": "114ff12425128e174a8ce78f91b652bd5a8847f9a9da0c022f8c496e44bc60ff"
+    },
+    {
+      "path": "experiments/results/cnf-partial-cover/baseline-2/report.json",
+      "policy": "baseline",
+      "repeat": 2,
+      "sha256": "920d305a03ef1462b8dca4fba41a8c6e6e30a38b3b01ea13d4d10ebff7cd8237"
+    },
+    {
+      "path": "experiments/results/cnf-partial-cover/unit-gated-2/report.json",
+      "policy": "unit-gated",
+      "repeat": 2,
+      "sha256": "588101b419325b2846567eb582729896e8f0e2fe947e8fc56b11d99475a59d45"
+    },
+    {
+      "path": "experiments/results/cnf-partial-cover/partial-2/report.json",
+      "policy": "partial",
+      "repeat": 2,
+      "sha256": "74bdf471a2e21d708b867d6177242ad388e72f1c442d87cd985da6aeb276752b"
+    },
+    {
+      "path": "experiments/results/cnf-partial-cover/partial-3/report.json",
+      "policy": "partial",
+      "repeat": 3,
+      "sha256": "878e47d7c71856525c709e30182587936f60b41e7f47e5af5c71fd1baa3f7c71"
+    },
+    {
+      "path": "experiments/results/cnf-partial-cover/unit-gated-3/report.json",
+      "policy": "unit-gated",
+      "repeat": 3,
+      "sha256": "7b728e747e30b3c85dda70873d9b29d82fca5c2fce31eb15326de47950af9315"
+    },
+    {
+      "path": "experiments/results/cnf-partial-cover/baseline-3/report.json",
+      "policy": "baseline",
+      "repeat": 3,
+      "sha256": "ce148516bb7e5624015992efcfbdd6c76d6eed2be69cc81019e525faf8522bc6"
+    }
+  ]
+}

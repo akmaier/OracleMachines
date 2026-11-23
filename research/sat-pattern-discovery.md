@@ -5,7 +5,22 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: partial covers retain useful structure after edits
+## Latest evidence: partial supports can be recomposed exactly
+
+[Partial-cover reconstruction](partial-cover-recomposition.md) handles missing
+support clauses by acquiring only affected leaves and keeping intact reasons.
+A negative root requires every reachable branch; a positive leaf lifts and
+checks a full-target model. Checked units prune only incompatible paths. Four
+chronological transfers include both outcomes and use no future origin.
+
+Dispatches fall 39 to 32, but the 3.99% preparation/query saving against complete
+covers still leaves a 2.45% loss against baseline. Two later edits improve;
+first extraction and reconstruction regress on two earlier targets. The next
+gap is duplicate conditioned-residual and support preparation. This is a
+checked transfer pattern with explicit unresolved budget stops, not efficient
+coverage of arbitrary SAT. Supplied guards/maps and origin selection remain.
+
+## Previous evidence: partial covers retain useful structure after edits
 
 [Unit gating](unit-cover-gate.md) avoids three unnecessary cover attempts and
 preserves two useful transfers, improving preparation plus query by 5.53%

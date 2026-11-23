@@ -1,0 +1,146 @@
+from collections import Counter
+from copy import deepcopy
+from itertools import product
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from types import SimpleNamespace
+import unittest
+
+from experiments.cnf_partial_cover import recompose, survival, run_after_pool_miss
+from experiments.cnf_learned_conditional import COVER_FORMAT, check_cover, LearnedCoverBank
+from experiments.cnf_consequence_priority import ConsequencePrioritySolver
+from experiments.cnf_conditional_unit_support import extract
+from experiments.cnf_residual_dag import holds, propagate
+from experiments.cnf_probed_partition import acquire
+from experiments.cnf_snapshot_replay import SnapshotResidualSolver
+from experiments.cnf_canonical_verify import CanonicalVerifySnapshot
+
+CUBE = list(product((-1, 1), (-2, 2), (-3, 3)))
+
+
+class PartialCoverTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        s = ConsequencePrioritySolver(leaves=False)
+        try:
+            acquire(s, CUBE, 256)
+            bundle, _ = extract(s, CUBE)
+            cls.cover = dict(format=COVER_FORMAT, tree=bundle['tree'],
+                templates=[e['template'] for e in bundle['entries']])
+            check_cover(cls.cover)
+        finally:
+            s.close()
+
+    def solver(self, path=None):
+        s = ConsequencePrioritySolver(path, leaves=False) if path else ConsequencePrioritySolver(leaves=False)
+        self.addCleanup(s.close)
+        return s
+
+    def prepared(self, s, target):
+        cnf, names, key = s._canonical(target)
+        return SimpleNamespace(target=target, cnf=cnf, names=names, key=key)
+
+    def test_one_deleted_clause_lifts_a_sat_witness(self):
+        s = self.solver(); target = CUBE[1:]
+        c = Counter(); r = recompose(s, target, self.cover, 256, counts=c)
+        node = s._read(r['root'])
+        self.assertTrue(node['answer'])
+        self.assertEqual(sum(r['intact']), 3)
+        self.assertEqual(c['partial_native_leaves'], 1)
+        self.assertTrue(holds(target, dict(enumerate(node['model'], 1))))
+
+    def test_broken_support_with_alternative_reason_stays_unsat(self):
+        s = self.solver(); target = CUBE[1:] + [(-1, -2, -3, 4), (-1, -2, -3, -4)]
+        c = Counter(); r = recompose(s, target, self.cover, 256, counts=c)
+        self.assertFalse(s._read(r['root'])['answer'])
+        self.assertEqual(c['partial_native_leaves'], 1)
+        self.assertGreater(c['partial_support_leaves'] + c['partial_existing_hits'], 0)
+
+    def test_unit_prefix_prunes_only_incompatible_plan_branch(self):
+        s = self.solver(); target = CUBE[1:] + [(1,)]
+        p = self.prepared(s, target); _, trace, conflict = propagate(p.cnf, Counter())
+        c = Counter(); r = recompose(s, target, self.cover, 0,
+            dict(root=p.key, trace=trace, conflict=conflict), c)
+        self.assertFalse(r['stopped'])
+        self.assertFalse(s._read(p.key)['answer'])
+        self.assertGreater(c['partial_prefix_pruned_splits'], 0)
+        self.assertEqual(s._read(p.key)['proof']['kind'], 'units')
+
+    def test_prefix_rejects_wrong_identity_and_unforced_value(self):
+        for screen in (dict(root='wrong', trace=[], conflict=None),
+                       dict(root=None, trace=[[1, 0]], conflict=None)):
+            s = self.solver(); target = CUBE[1:]
+            if screen['root'] is None: screen['root'] = s._canonical(target)[2]
+            with self.assertRaises(ValueError): recompose(s, target, self.cover, 256, screen)
+            self.assertFalse(s.db.active)
+
+    def test_budget_stop_never_publishes_incomplete_root(self):
+        # Break the last leaf, allowing earlier checked supports to be retained.
+        s = self.solver(); target = CUBE[:-1]
+        r = recompose(s, target, self.cover, 0)
+        self.assertTrue(r['stopped'])
+        self.assertIsNone(s._read(r['root']))
+        self.assertFalse(s.db.active)
+        self.assertFalse(s.db.pending)
+        self.assertGreater(s.archive_storage()[0], 0)
+        resumed = recompose(s, target, self.cover, 256)
+        self.assertFalse(resumed['stopped'])
+        self.assertTrue(s._read(r['root'])['answer'])
+
+    def test_one_shared_expansion_budget_across_native_leaves(self):
+        for budget in range(4):
+            s = self.solver(); target = CUBE[1:-1] + [(4, 5, 6), (-4, -5, -6)]
+            recompose(s, target, self.cover, budget)
+            self.assertLessEqual(s.counts['expanded_nodes'], budget)
+
+    def test_bad_cover_paths_cannot_supply_authority(self):
+        s = self.solver(); cover = deepcopy(self.cover)
+        cover['tree']['low'], cover['tree']['high'] = cover['tree']['high'], cover['tree']['low']
+        with self.assertRaises(ValueError): recompose(s, CUBE, cover, 256)
+
+    def test_absent_plan_variables_and_sparse_names(self):
+        for target in ([], [(19,)], [(19,), (-19,)], [(19, 73), (-19, -73)]):
+            s = self.solver(); r = recompose(s, target, self.cover, 256)
+            expected = any(holds(target, dict(zip((19, 73), bits))) for bits in product((False, True), repeat=2))
+            self.assertEqual(s._read(r['root'])['answer'], expected)
+
+    def test_all_clause_deletions_of_cube_against_truth_table(self):
+        for mask in range(256):
+            s = ConsequencePrioritySolver(leaves=False)
+            try:
+                target = [cl for i, cl in enumerate(CUBE) if mask >> i & 1]
+                r = recompose(s, target, self.cover, 256)
+                expected = any(holds(target, dict(zip((1, 2, 3), bits))) for bits in product((False, True), repeat=3))
+                self.assertFalse(r['stopped'])
+                self.assertEqual(s._read(r['root'])['answer'], expected)
+            finally: s.close()
+
+    def test_both_cold_readers_accept_recomposed_answers(self):
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / 'proof.sqlite3'
+            s = ConsequencePrioritySolver(path, leaves=False)
+            try:
+                roots = [recompose(s, target, self.cover, 256)['root'] for target in
+                         (CUBE[1:], CUBE[1:] + [(-1, -2, -3, 4), (-1, -2, -3, -4)])]
+            finally: s.close()
+            for cls in (SnapshotResidualSolver, CanonicalVerifySnapshot):
+                reader = cls(path)
+                try:
+                    for root in roots: self.assertIsNotNone(reader._read(root))
+                finally: reader.close()
+
+    def test_bank_only_uses_previously_registered_origins(self):
+        s = self.solver(); bank = LearnedCoverBank(s, [])
+        acquire(s, CUBE, 256); bank.register(self.prepared(s, CUBE), [], 3)
+        target = CUBE[1:] + [(7, 8)]
+        r = run_after_pool_miss(s, self.prepared(s, target), [], bank.entries, 256, Counter())
+        self.assertEqual(r['route'], 'partial-cover')
+        self.assertTrue(s._read(r['partial']['root'])['answer'])
+        self.assertEqual(len(bank.entries), 1)
+
+    def test_invalid_budget_and_nonmatching_guard(self):
+        s = self.solver()
+        for budget in (-1, True, 1.2):
+            with self.assertRaises(ValueError): recompose(s, CUBE, self.cover, budget)
+        r = run_after_pool_miss(s, self.prepared(s, [(9,)]), [[77, True]], [], 256, Counter())
+        self.assertEqual(r['route'], 'native')

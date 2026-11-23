@@ -28,11 +28,11 @@ classes.
 
 ## Paper
 
-[Unit-gated conditional covers](research/unit-cover-gate.md).
-Preserving cheap unit proofs improves preparation-plus-query time by 5.53%
-against ungated learning, but remains 6.76% slower than baseline. Next: reuse
-three intact conditional branches when an edit breaks only the fourth, with
-exact recomposition and full cost accounting.
+[Partial conditional covers](research/partial-cover-recomposition.md).
+Reusing intact branches reduces expansion dispatches from 39 to 32 and saves
+3.99% preparation-plus-query time against unit-gated complete covers. It remains
+2.45% slower than the native baseline. Next: share repeated residual preparation
+and support checks while preserving native proof validation.
 
 [Reuse checked order during causal reconstruction](research/preimage-fusion.md).
 Sharing untouched clauses and their canonical order reduces repeated support

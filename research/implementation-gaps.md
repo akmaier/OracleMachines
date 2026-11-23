@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, unit-gated covers):
+Latest expansion checkpoint (23 November, partial-cover recomposition):
+[Preserve intact proof branches](partial-cover-recomposition.md). Four partial
+attempts use native leaves for broken supports and reconstruct both SAT and
+UNSAT answers. Dispatches fall 39 to 32, preparation/query improves 3.99% against
+complete covers, and native payload falls 2.80% against baseline. The route is
+still 2.45% slower than baseline. Next: share repeated conditioned-residual
+construction and support preparation; preserve native checking and cold
+extraction costs. Recomposition outcomes are not yet new learned origins.
+
+Previous expansion checkpoint (23 November, unit-gated covers):
 [Keep cheap unit proofs](unit-cover-gate.md). The largest cover regression falls
 17.77 to 3.30 ms. Gated learning improves 5.53% against ungated learning, but
 remains 6.76% slower than baseline. The gate-only ablation has identical native

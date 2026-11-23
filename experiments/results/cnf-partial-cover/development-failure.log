@@ -1,0 +1,35 @@
+test_absent_plan_variables_and_sparse_names (solver.test_cnf_partial_cover.PartialCoverTests.test_absent_plan_variables_and_sparse_names) ... ok
+test_all_clause_deletions_of_cube_against_truth_table (solver.test_cnf_partial_cover.PartialCoverTests.test_all_clause_deletions_of_cube_against_truth_table) ... ok
+test_bad_cover_paths_cannot_supply_authority (solver.test_cnf_partial_cover.PartialCoverTests.test_bad_cover_paths_cannot_supply_authority) ... ok
+test_bank_only_uses_previously_registered_origins (solver.test_cnf_partial_cover.PartialCoverTests.test_bank_only_uses_previously_registered_origins) ... ok
+test_both_cold_readers_accept_recomposed_answers (solver.test_cnf_partial_cover.PartialCoverTests.test_both_cold_readers_accept_recomposed_answers) ... ok
+test_broken_support_with_alternative_reason_stays_unsat (solver.test_cnf_partial_cover.PartialCoverTests.test_broken_support_with_alternative_reason_stays_unsat) ... ok
+test_budget_stop_never_publishes_incomplete_root (solver.test_cnf_partial_cover.PartialCoverTests.test_budget_stop_never_publishes_incomplete_root) ... FAIL
+test_invalid_budget_and_nonmatching_guard (solver.test_cnf_partial_cover.PartialCoverTests.test_invalid_budget_and_nonmatching_guard) ... ok
+test_one_deleted_clause_lifts_a_sat_witness (solver.test_cnf_partial_cover.PartialCoverTests.test_one_deleted_clause_lifts_a_sat_witness) ... ok
+test_one_shared_expansion_budget_across_native_leaves (solver.test_cnf_partial_cover.PartialCoverTests.test_one_shared_expansion_budget_across_native_leaves) ... ok
+test_prefix_rejects_wrong_identity_and_unforced_value (solver.test_cnf_partial_cover.PartialCoverTests.test_prefix_rejects_wrong_identity_and_unforced_value) ... ok
+test_unit_prefix_prunes_only_incompatible_plan_branch (solver.test_cnf_partial_cover.PartialCoverTests.test_unit_prefix_prunes_only_incompatible_plan_branch) ... FAIL
+
+======================================================================
+FAIL: test_budget_stop_never_publishes_incomplete_root (solver.test_cnf_partial_cover.PartialCoverTests.test_budget_stop_never_publishes_incomplete_root)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_partial_cover.py", line 85, in test_budget_stop_never_publishes_incomplete_root
+    self.assertGreater(s.archive_storage()[0], 0)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 not greater than 0
+
+======================================================================
+FAIL: test_unit_prefix_prunes_only_incompatible_plan_branch (solver.test_cnf_partial_cover.PartialCoverTests.test_unit_prefix_prunes_only_incompatible_plan_branch)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_partial_cover.py", line 64, in test_unit_prefix_prunes_only_incompatible_plan_branch
+    self.assertFalse(r['stopped'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.150s
+
+FAILED (failures=2)

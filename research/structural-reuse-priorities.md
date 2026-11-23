@@ -12,7 +12,34 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse intact branches of partially broken covers
+## Current investigation: share residual preparation in partial recomposition
+
+[Partial covers](partial-cover-recomposition.md) now retain intact supports and
+solve only failed leaves, with checked split/unit recomposition and full SAT
+witness lifting. Four attempts include one SAT control. Dispatches fall **39
+to 32**, preparation plus query improves **3.99%** against complete-cover reuse,
+and native payload is **2.80% below baseline**. Yet preparation plus query stays
+**2.45% above baseline**; complete-worker time does not improve. Keep optional.
+
+**Next primary target: duplicate conditioned-residual construction and support
+checking.** Cold extraction plus recomposition still makes case 15/guard 3
+**26.13 ms**, versus baseline **17.14 ms**. A diagnostic profile finds 38
+canonicalization calls including 29 normalizations; normalization is about
+26 of 72 profiled milliseconds. Reuse immutable residuals/maps and prepared
+support membership inside traversal and leaf publication, retaining every
+native certificate check. Carry preparation counters across resets explicitly.
+
+Later cases 19/20 beat baseline at **15.39/21.48 ms** versus **17.88/23.61 ms**,
+so retain cold and warm distinctions and the case 7 SAT regression. The partial
+stream currently learns no new origins from recomposition; it uses the older
+three-leaf cover, not the posthoc four-leaf examples from the previous stream.
+Extending that origin policy is a secondary coverage/storage tradeoff.
+
+Resume `experiments/results/cnf-partial-cover/checkpoint.json`. The exact
+chronological branches, paired costs and identical-proof diagnostic profile
+are preserved. Automatic guards/maps and unrestricted bounds remain open.
+
+## Previous investigation: reuse intact branches of partially broken covers
 
 [Unit gating](unit-cover-gate.md) fixes the largest regression: case 6/guard 3
 returns to a native unit proof, **17.77 to 3.30 ms**, while the two useful later

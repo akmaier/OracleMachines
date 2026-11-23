@@ -12,7 +12,50 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: repeated preparation in the remaining mixed branch
+## Current investigation: reuse checked order, then attack mixed-branch construction
+
+[Fused causal reconstruction](preimage-fusion.md) exploits exact order invariants:
+restriction preserves order within each clause. After the residual clauses are
+sorted, monotone variable compaction preserves their lexicographic order too.
+It shares untouched parent tuples and maps selected child positions directly to
+their first parent representative. There is only one duplicate reduced clause
+in the exposed 26-request census, so broad duplicate compression was not the win.
+
+The initial two-order comparison reduces query means by **5.53% on six controls**
+and **5.65% on six new edits**. Six additional balanced pairs, including mode
+setup, improve **6.32%** and **4.49%** respectively; one new-edit pair regresses.
+Every expansion count, native proof byte and partition stays identical. Persistent
+space and checked-object endpoint space are unchanged. Complete-worker means
+change only **+0.27% / -0.16%**, with no robust end-to-end gain. A zero-hit isolated
+branch has noisy timings, so its apparent changes are not attributed to fusion.
+Keep the method optional and serial; this adds no coverage cell.
+
+**Next primary target: shared source-bound conditioning and reason construction
+inside the remaining nine-expansion mixed branch.** The largest new query is
+case 31's deletion: 89.04 ms in the initial fused mean, with branch expansion
+counts **[1,9,1,6,1,3]** after eight probe expansions. Its profile still has **116
+normalizations**, **103 restrictions** and **51 verification calls**. Inspect
+`force_all` and `excluded_context`: prefix preparation, backwards parent
+construction and excluded-path compilation revisit related conditioned sources.
+First census exact source/assignment/renaming pairs and live consumers; then test
+a bounded direct handoff or shared immutable description. Native verification
+must still independently check every edge. Do not introduce another broad memo
+without measuring a sufficiently narrow producer/consumer pattern.
+
+Resume `experiments/results/cnf-preimage-fusion/checkpoint.json`. The `novel`
+observation in `next-target.json`, query position **0**, acquisition index **2**,
+binds **125 variables, 259 ternary clauses and 56 binary clauses; 889
+literal occurrences**, budget **247**, and **three earlier native IDs** from its
+bound trial delta. The target is absent. Restore only that prefix and those IDs;
+replay the preceding probe/branch stream for warm pools. The final union must
+never seed comparisons. The previous six-expansion source is retained under the
+`controls` observation, acquisition index 4.
+
+Automatic donors/maps, source-level composition, a useful partition of arbitrary
+CNFs, persistent-space growth and cold replay remain larger general gaps. Local
+construction savings do not establish compact or uniformly cheap SAT expansion.
+
+## Previous checkpoint: repeated preparation in the remaining mixed branch
 
 [Consequence priority](consequence-priority.md) reuses the checked two-polarity
 cofactor probe before a single late binary consequence. It recovers the case-61

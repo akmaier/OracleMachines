@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_preimage_fusion.py", line 164, in <module>
+    if __name__=='__main__':validate(Path(sys.argv[1]))
+                            ~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_preimage_fusion.py", line 156, in validate
+    prior_tables={t:len(v) for t,v in initial.items()},preserved_tables={t:len(v) for t,v in merged.items()},new_records=dict(new),
+                                                                                                                         ~~~~^^^^^
+TypeError: 'CausalSupportExtractor' object is not iterable

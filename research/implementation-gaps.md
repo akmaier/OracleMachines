@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, consequence priority):
+Latest expansion checkpoint (23 November, fused causal reconstruction):
+[Order-preserving preimages](preimage-fusion.md) share untouched checked clauses
+and avoid redundant normalization/reverse mapping. Six balanced repeat pairs,
+including setup, save 6.32% on controls and 4.49% on new-edit query means, with
+identical native proofs, partitions and storage. Complete-worker means barely
+change; the policy stays optional and serial. Next: exact source/assignment
+reuse in prefix and excluded-path construction around the new nine-expansion
+mixed branch. No decision coverage cell or unrestricted bound is added.
+
+Previous expansion checkpoint (23 November, consequence priority):
 [Checked cofactor priority](consequence-priority.md) recovers the late-consequence
 regression and preserves the exposed joint proof bytes. Six new edits save 4.54%
 query time and 3.91% native payload versus joint conditioning. Controls still

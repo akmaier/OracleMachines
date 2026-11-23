@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Reuse checked order during causal reconstruction](research/preimage-fusion.md).
+Sharing untouched clauses and their canonical order reduces repeated support
+construction. Balanced repeats save 6.32% on controls and 4.49% on nearby new-edit
+query means, including setup. Proofs and storage stay identical; complete-worker
+cost barely changes. Next: source-bound reuse inside the surviving mixed branch.
+
 [Prioritize a checked full-CNF cofactor](research/consequence-priority.md).
 A narrow arbitration rule recovers the late-consequence regression and preserves
 the useful joint case. New edits save 4.54% query time and 3.91% native payload

@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: arbitrate with an existing full-CNF certificate
+## Latest evidence: an exact representation invariant saves reconstruction work
+
+[Fused causal reconstruction](preimage-fusion.md) reuses checked canonical order
+and untouched clause tuples while lifting child support to its parent. It keeps
+the first representative, full child-key comparison and native verifier. Query
+means improve locally, with unchanged proof bytes, storage, expansion counts and
+decision coverage. Balanced repeats including setup save 6.32% on controls and
+4.49% on nearby new edits; complete-worker cost barely changes.
+
+The unresolved structural question is still how to recognize useful interacting
+patterns from arbitrary inputs. The largest new deletion leaves a nine-expansion
+mixed binary/ternary branch. Inspect related conditioning and path-reason
+construction there before broadening consequence discovery. Exact source bindings,
+renaming and full-CNF composition must remain visible. The [ranked gaps](structural-reuse-priorities.md)
+bind its historical prefix and three earlier native IDs. Saving construction
+work within an existing cell supplies no efficient partition of all SAT inputs.
+
+## Previous evidence: arbitrate with an existing full-CNF certificate
 
 [Consequence priority](consequence-priority.md) checks an ordinary cofactor before
 following one late binary consequence. It recovers the observed wider-discovery

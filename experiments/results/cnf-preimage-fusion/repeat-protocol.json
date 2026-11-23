@@ -1,0 +1,29 @@
+{
+  "groups": [
+    "controls",
+    "novel",
+    "branch-original"
+  ],
+  "limitations": [
+    "Posthoc repeated timings on the same exposed/nearby inputs, not new held-out cases. Every case stream restores its exact prefix; no answer-bearing final union is seeded.",
+    "Serial balanced query-only samples in one interpreter. Full historical cold audit is not repeated. Restoration, solver opening and scoped-mode overhead are recorded separately; this does not replace complete-worker accounting.",
+    "Each repeated stream must reproduce every frozen native byte and partition, so no new proof needs merging. All repetitions and both order signs are retained."
+  ],
+  "orders": [
+    [
+      "priority",
+      "fused"
+    ],
+    [
+      "fused",
+      "priority"
+    ]
+  ],
+  "parent": {
+    "path": "experiments/results/cnf-preimage-fusion/protocol.json",
+    "sha256": "597271d56f1e49f30feea1c04c252359fb9ead387f44f68bf567df3fb1258138"
+  },
+  "reason": "Original isolated branch has no preimage calls but a large apparent timing gain in the first order; check query variability without altering frozen kernels or samples.",
+  "repeats": 6,
+  "script_sha256": "e9cd608d73a4a22cd1b0bb5eeea67b32ff6d0661d3c2fbce88d2996822086a37"
+}

@@ -1,0 +1,46 @@
+Reuse checked clause order when reconstructing causal support. The preceding replacement uses 26
+parent-to-child support reconstructions, processing 6,239 clauses and 17,095 literal occurrences. Only
+one reduced clause is duplicated. The useful structure is already checked order: restriction preserves strict
+signed literal order, and increasing variable compaction preserves both signed order and lexicographic
+clause order. We restrict each clause once, share untouched immutable tuples, and retain the first parent
+representative for each distinct residual. After sorting the residual clauses, a selected child position
+addresses that representative directly. Empty-clause collapse and an empty residual receive the normalizer’s
+existing treatment. The complete serialized child key is still compared, and every published native proof
+passes the unchanged verifier. This specialization requires a checked canonical parent and the fixed
+order-preserving normalizer; it is not a general semantic-equivalence test or a replacement for input
+validation.
+For 𝐿 parent literal occurrences, 𝑟 distinct residual clauses, 𝑉 surviving variables and maximum
+width 𝑤, construction has expected dictionary costs plus 𝑂 (𝑟 log(𝑟)𝑤 + 𝑉 log(𝑉)) sorting work and
+surviving-literal compaction and full-key serialization. Temporary descriptions remain 𝑂 (𝐿 + 𝑉 + 𝑟)
+machine words, with integer widths and Python allocation separate. We remove redundant scans, sorts
+and inverse mapping, without changing the asymptotic SAT search bound or adding a persistent memo.
+The experimental override is serial and optional.
+Fifteen local targets, two policies and two opposite worker orders give sixty attempts. Query means
+improve 5.53% on six controls and 5.65% on six new edits; all expansion counts, native proof bytes,
+partition records and persistent-space measures remain identical. Complete-worker means change only
++0.27% and −0.16%, including historical reconstruction and measurement work. An isolated branch
+never calls the changed routine yet appears faster. We therefore freeze six further balanced pairs on
+controls, new edits and this zero-hit branch, restoring their exact historical prefixes. These 156 additional
+query attempts save 6.32% and 4.49% in mean query time including mode setup. All six control pairs
+
+235
+
+
+Bounded-domain SAT and amortized reasoning
+
+Perspective
+
+and five new-edit pairs improve; the remaining new-edit pair regresses. The zero-hit branch now appears
+slower, with one large outlier. These local repeats support a construction saving, not a branch-specific
+attribution, statistical significance or a robust complete-worker speedup.
+The exposed replacement falls from 142 to 116 general normalizations and from 6,353 to 114 restriction
+calls. A separate allocation probe over 34 captured preimages records priority/fused traced peaks of
+141,016/48,093 bytes in one order and 71,728/43,837 in reverse order. Inputs were already allocated;
+counters and assertion temporaries are included, while existing proof graphs, SQLite and untraced
+allocations are excluded. These are kernel measurements, not process peak RAM. Stored proofs and
+checked-object endpoints do not shrink. The largest new deletion still leaves a nine-expansion mixed
+branch. Source-bound reuse between prefix preparation, backwards parent construction and excluded-path
+compilation remains a concrete next question. All targets already close under the baseline; this experiment
+adds no decision coverage cell and no uniformly cheap arbitrary-SAT expansion bound.
+
+13

@@ -12,7 +12,36 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: share residual preparation in partial recomposition
+## Current investigation: reuse provenance during cold cover extraction
+
+[Shared partial preparation](prepared-partial-recomposition.md) avoids six
+repeated leaf preparations and one unchanged frame while preserving **identical
+native payloads, hints, origins, decisions and 32 dispatches**. Preparation plus
+query improves **0.98%** on average against the previous partial route, with
+three pairs improving and one regressing. The native-baseline difference is
+only **0.06%**; treat it as a local tie. No default change.
+
+**Next primary target: original-clause provenance in cold conditional-cover
+extraction.** Cases 7/guard 4 and 15/guard 3 still cost **17.46/24.86 ms**, versus
+baseline **9.10/17.39 ms**. Each first-use extraction takes about 20 instrumented
+milliseconds; cold queries make roughly 2,000 restriction calls while the
+extractor rescans the full source at every proof node. Carry original reason
+bindings through unit, split and component transitions, reusing unchanged
+residuals and checking deterministic duplicate representatives and assumptions.
+Consult the existing preimage-reuse machinery before creating another mapper.
+
+The later transfers avoid discovery and remain cheaper. Preserve the SAT
+control, extraction bounds and unsupported endpoints; price setup, retained
+provenance, native checks and subsequent reuse. The prepared composer now
+charges its root canonicalization explicitly; its seven fewer normalization
+calls are independently confirmed by identical-proof profiles.
+
+Resume `experiments/results/cnf-prepared-partial/checkpoint.json`. No new native
+identities are required: reuse the preceding cumulative archive. Automatic
+useful guards/maps, new origins after recomposition and unrestricted bounds
+remain open.
+
+## Previous investigation: share residual preparation in partial recomposition
 
 [Partial covers](partial-cover-recomposition.md) now retain intact supports and
 solve only failed leaves, with checked split/unit recomposition and full SAT

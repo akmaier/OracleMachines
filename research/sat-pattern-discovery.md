@@ -5,7 +5,21 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: partial supports can be recomposed exactly
+## Latest evidence: preparation sharing preserves the structural classification
+
+[Prepared partial reconstruction](prepared-partial-recomposition.md) retains
+exactly the same branch decisions, supports, native proofs and learned hints.
+It removes six repeated leaf preparations and one unchanged frame. The small
+0.98% mean preparation/query saving varies across repeats; it does not broaden
+coverage or establish a baseline speed advantage.
+
+First-use cover discovery remains expensive on both SAT and UNSAT edits. The
+next gap is carrying original-clause provenance through a checked proof rather
+than repeatedly rescanning its full source. Preserve path assumptions,
+source-coordinate maps, duplicate representatives and extraction limits.
+Automatic guard discovery and efficient arbitrary-CNF acquisition remain open.
+
+## Previous evidence: partial supports can be recomposed exactly
 
 [Partial-cover reconstruction](partial-cover-recomposition.md) handles missing
 support clauses by acquiring only affected leaves and keeping intact reasons.

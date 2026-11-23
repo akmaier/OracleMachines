@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, partial-cover recomposition):
+Latest expansion checkpoint (23 November, shared partial preparation):
+[Reuse conditioned leaf preparation](prepared-partial-recomposition.md).
+Identical native proof bytes, hints, origins and dispatch counts isolate six
+avoided leaf preparations and one unchanged frame. Preparation/query mean is
+0.98% lower than the preceding partial route, with one of four pairs regressing;
+it is effectively tied with baseline. The root-work counter omission is fixed.
+Next: reuse original reason-clause provenance in cold cover extraction, which
+still rescans the full source at each checked proof node. No new native IDs.
+
+Previous expansion checkpoint (23 November, partial-cover recomposition):
 [Preserve intact proof branches](partial-cover-recomposition.md). Four partial
 attempts use native leaves for broken supports and reconstruct both SAT and
 UNSAT answers. Dispatches fall 39 to 32, preparation/query improves 3.99% against

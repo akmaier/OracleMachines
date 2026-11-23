@@ -1,0 +1,186 @@
+{
+  "groups": {
+    "baseline": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 12.0,
+        "query_seconds": 0.09061752050183713
+      },
+      "controls": {
+        "attempts": 114.0,
+        "expanded_nodes": 43.0,
+        "query_seconds": 0.3363046891754493
+      }
+    },
+    "partial": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 5.0,
+        "query_seconds": 0.08538660709746182
+      },
+      "controls": {
+        "attempts": 114.0,
+        "expanded_nodes": 27.0,
+        "query_seconds": 0.34571401134599
+      }
+    },
+    "prepared": {
+      "additional": {
+        "attempts": 24.0,
+        "expanded_nodes": 5.0,
+        "query_seconds": 0.08373230206780136
+      },
+      "controls": {
+        "attempts": 114.0,
+        "expanded_nodes": 27.0,
+        "query_seconds": 0.3429196735378355
+      }
+    }
+  },
+  "means": {
+    "baseline": {
+      "attempts": 138.0,
+      "checked_python_bytes": 8460643.0,
+      "cold_seconds": 0.43526332289911807,
+      "complete_worker_seconds": 3.6886983540607616,
+      "database_bytes": 50343936.0,
+      "donor_seconds": 0.02861167734954506,
+      "expanded_nodes": 55.0,
+      "hint_bytes": 11505.0,
+      "mode_setup_seconds": 6.818748079240322e-05,
+      "new_payload_bytes": 1551836.0,
+      "peak_rss_bytes": 324476928.0,
+      "persistence_seconds": 0.12266642728354782,
+      "preparation_and_queries": 0.4402465948369354,
+      "prepare_seconds": 0.013324385159648955,
+      "proof_delta_compressed_bytes": 144816.0,
+      "query_seconds": 0.42692220967728645,
+      "reconstruction_seconds": 0.5659917187876999,
+      "restore_seconds": 0.11802859348244965,
+      "setup_seconds": 0.02703180199023336,
+      "warm_seconds": 0.0002951250644400716
+    },
+    "partial": {
+      "attempts": 138.0,
+      "checked_python_bytes": 8362875.0,
+      "cold_seconds": 0.4264995624544099,
+      "complete_worker_seconds": 3.668851208756678,
+      "database_bytes": 50253824.0,
+      "donor_seconds": 0.028979344060644507,
+      "expanded_nodes": 32.0,
+      "hint_bytes": 42031.0,
+      "mode_setup_seconds": 7.463572546839714e-05,
+      "new_payload_bytes": 1508442.0,
+      "peak_rss_bytes": 320061440.0,
+      "persistence_seconds": 0.11854294827207923,
+      "preparation_and_queries": 0.4443327639019117,
+      "prepare_seconds": 0.013232145458459854,
+      "proof_delta_compressed_bytes": 138342.0,
+      "query_seconds": 0.4311006184434518,
+      "reconstruction_seconds": 0.5639935000799596,
+      "restore_seconds": 0.11677271907683462,
+      "setup_seconds": 0.026099458103999496,
+      "warm_seconds": 0.00027191604021936655
+    },
+    "prepared": {
+      "attempts": 138.0,
+      "checked_python_bytes": 8348782.0,
+      "cold_seconds": 0.42461555218324065,
+      "complete_worker_seconds": 3.582865010597743,
+      "database_bytes": 50253824.0,
+      "donor_seconds": 0.027684916742146015,
+      "expanded_nodes": 32.0,
+      "hint_bytes": 42031.0,
+      "mode_setup_seconds": 6.44064275547862e-05,
+      "new_payload_bytes": 1508442.0,
+      "peak_rss_bytes": 319488000.0,
+      "persistence_seconds": 0.11936770845204592,
+      "preparation_and_queries": 0.4399896211689338,
+      "prepare_seconds": 0.013337645563296974,
+      "proof_delta_compressed_bytes": 138342.0,
+      "query_seconds": 0.42665197560563684,
+      "reconstruction_seconds": 0.5514359270455316,
+      "restore_seconds": 0.11034393776208162,
+      "setup_seconds": 0.02709892683196813,
+      "warm_seconds": 0.0002482293639332056
+    }
+  },
+  "protocol": {
+    "path": "experiments/results/cnf-prepared-partial/protocol.json",
+    "sha256": "bc461b8b6d68f9604807a3fd98a4fa896223566617b7a8f3fada19bfa9ce5768"
+  },
+  "samples": [
+    {
+      "path": "experiments/results/cnf-prepared-partial/baseline-0/report.json",
+      "policy": "baseline",
+      "repeat": 0,
+      "sha256": "8a652fc226baa4c9fb7eecfc079eee4daa64a5ba2ad96449d8484681cbdeeec8"
+    },
+    {
+      "path": "experiments/results/cnf-prepared-partial/partial-0/report.json",
+      "policy": "partial",
+      "repeat": 0,
+      "sha256": "e8e1503b8e15dcaf53b72123eeb7085ee2f7cd9077d52e2c9062639952a859ba"
+    },
+    {
+      "path": "experiments/results/cnf-prepared-partial/prepared-0/report.json",
+      "policy": "prepared",
+      "repeat": 0,
+      "sha256": "eecbf04a280b27301b6955fecda6881fd71e8e50b5ba6b758d03c4c94719bb98"
+    },
+    {
+      "path": "experiments/results/cnf-prepared-partial/prepared-1/report.json",
+      "policy": "prepared",
+      "repeat": 1,
+      "sha256": "0c62ae7d688250858ba093c650e8a38160c4d625a1a5ecbafb7c2e49cbdf33e1"
+    },
+    {
+      "path": "experiments/results/cnf-prepared-partial/partial-1/report.json",
+      "policy": "partial",
+      "repeat": 1,
+      "sha256": "83d951914fb4409799d25bee4700088a00947a15878dfe6ba9d51242058ccd28"
+    },
+    {
+      "path": "experiments/results/cnf-prepared-partial/baseline-1/report.json",
+      "policy": "baseline",
+      "repeat": 1,
+      "sha256": "c3c2815afbc61ac7b18c60a5040d04fe3f6a3914302095fe24d67deeee6e0fbe"
+    },
+    {
+      "path": "experiments/results/cnf-prepared-partial/baseline-2/report.json",
+      "policy": "baseline",
+      "repeat": 2,
+      "sha256": "b97ca1fa7b1e1a597a4739435ada6625efec448c73bf539daa2be89b1cc7f7f1"
+    },
+    {
+      "path": "experiments/results/cnf-prepared-partial/partial-2/report.json",
+      "policy": "partial",
+      "repeat": 2,
+      "sha256": "5f185380279ab9ad57a1813353854ab2574efba3a3a2839bc79db658720f7cf1"
+    },
+    {
+      "path": "experiments/results/cnf-prepared-partial/prepared-2/report.json",
+      "policy": "prepared",
+      "repeat": 2,
+      "sha256": "ecea1b279a52c360af67ecb089a48f586cebcb22be04ce8ddc54e0a3595be4ed"
+    },
+    {
+      "path": "experiments/results/cnf-prepared-partial/prepared-3/report.json",
+      "policy": "prepared",
+      "repeat": 3,
+      "sha256": "ef5e7fbb395039a8735908676d00793399d99852db9d3f38504523bb9310d48e"
+    },
+    {
+      "path": "experiments/results/cnf-prepared-partial/partial-3/report.json",
+      "policy": "partial",
+      "repeat": 3,
+      "sha256": "5e977ee1880c9b48c1539713541c5531e9d91867f254df40143d690cc057d745"
+    },
+    {
+      "path": "experiments/results/cnf-prepared-partial/baseline-3/report.json",
+      "policy": "baseline",
+      "repeat": 3,
+      "sha256": "a2a7147972fb92165785a4e0d50b4310c4d89b97559964263a50e33a9b052604"
+    }
+  ]
+}

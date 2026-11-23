@@ -28,11 +28,12 @@ classes.
 
 ## Paper
 
-[Partial conditional covers](research/partial-cover-recomposition.md).
-Reusing intact branches reduces expansion dispatches from 39 to 32 and saves
-3.99% preparation-plus-query time against unit-gated complete covers. It remains
-2.45% slower than the native baseline. Next: share repeated residual preparation
-and support checks while preserving native proof validation.
+[Share preparation during partial reconstruction](research/prepared-partial-recomposition.md).
+Six leaf preparations and one unchanged-frame reconstruction are avoided with
+identical proofs, hints and expansion counts. Preparation/query mean improves
+0.98% against the preceding partial route, with one of four repeats regressing;
+the native-baseline comparison is effectively tied. Next: reuse original-clause
+provenance during cold conditional-cover extraction.
 
 [Reuse checked order during causal reconstruction](research/preimage-fusion.md).
 Sharing untouched clauses and their canonical order reduces repeated support

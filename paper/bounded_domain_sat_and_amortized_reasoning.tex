@@ -9646,6 +9646,32 @@ that preparation is the next construction target; independent native checking
 remains required. Failed leaves can still require arbitrary SAT acquisition.
 This exact decomposition therefore adds no uniform polynomial-time bound.
 
+\paragraph{Share preparation inside partial reconstruction.}
+An intact leaf can use the conditioned formula, variable map and key already
+held by the traversal. A split fixed by a checked unit prefix also leaves that
+preparation unchanged. We copy and validate the raw source and cover inside
+one call, retain the leaf assumptions, and construct the same native proof.
+No caller-supplied preparation becomes authority; every native check remains.
+
+On the same stream, six repeated leaf preparations and one unchanged frame
+are avoided. Proof payloads, hints, origins, decisions and 32 expansion
+dispatches remain identical. A separate identical-proof profile counts 96 to
+89 normalizations across the four partial queries. The initial root
+canonicalization is now retained in operation counters; both timings already
+charged it. Preparation-plus-query mean improves 0.98\% over the preceding
+partial route, with three of four pairs improving and one regressing. Its
+0.06\% difference from baseline is effectively a tie in this local experiment.
+The complete-worker mean is lower, but these few variable measurements do not
+establish a general end-to-end gain or a new memory bound.
+
+Cold extraction remains expensive on the first SAT and UNSAT transfers. The
+extractor repeatedly scans the original source to recover reason-clause
+representatives after each proof transition. Carrying that provenance through
+unit, split and component steps is the next discovery-cost target. Original
+coordinates, duplicate representatives, assumptions and extraction limits must
+remain explicit. The structural coverage and unrestricted acquisition
+obligations are unchanged.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

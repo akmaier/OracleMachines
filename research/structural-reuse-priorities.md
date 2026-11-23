@@ -12,7 +12,44 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: the remaining binary/ternary branch
+## Current investigation: preserve unfinished acquisition work
+
+[Bounded second-target recognition](binary-target-fallback.md) finds a checked
+binary consequence missed by the first target. The exposed branch and sign
+variants still need nine expansions. On six new edits the optional policy takes
+**69 -> 60 expansions** and reduces query time **8.29%**, with both orders better;
+complete measured worker time improves only **0.61%**. Controls regress **1.14%**,
+and the complemented branch regresses **3.27%**. Defaults remain unchanged.
+
+**Next primary target: reuse the unfinished continuation across probe and native
+fallback.** The main saving occurs in new case 61's replacement, which now finishes
+within the eight-expansion probe. A bound posthoc ablation gives **11 -> 8** direct
+expansions but **17 -> 8** through the probe/restart wrapper. The baseline uses
+six extra expansions relative to direct acquisition even after retaining completed
+proofs; the net difference need not consist only of identical repeated frames. Continuation loss was already observed in the earlier probe study; this
+exact case offers a narrow comparison of restart, direct solving and resumption.
+
+Bind retained frames to exact source, policy and solver state; unresolved frames
+must not enter the checked answer archive. Charge memory, invalidation, publication
+and cold reconstruction. Test both verdicts, budget stops and source edits. Keep
+state bounded and discard unusable frames when partition routing is selected.
+This can help across categories without assuming every CNF has cheap structure.
+
+`experiments/results/cnf-binary-interactions/next-target.json` binds the boundary
+ablation and the largest query's profiles and historical prefixes. Direct-ablation
+proof bytes are subsets of the frozen, independently checked trial deltas. The
+largest query remains case 31's deletion at **83.67/84.72 ms**, with 29 expansions
+in either policy. More recognized consequences do not necessarily reduce proof
+size: publications there rise from 29 to 30. Consequence utility and compression
+remain secondary targets; automatic donors/maps and original-source composition
+remain larger coverage gaps. Full cold auditing still dominates the complete
+worker, so it must remain distinct from query latency.
+
+Resume `experiments/results/cnf-binary-interactions/checkpoint.json`: **75,677
+native records**, **242 partition records**, all prior extension authority intact.
+The checkpoint adds no whole-input decision coverage or unrestricted-SAT bound.
+
+## Previous checkpoint: the remaining binary/ternary branch
 
 [Shared partition preparation](partition-preparation.md) replaces four identical
 branch constructions with one shared producer preparation and one independent

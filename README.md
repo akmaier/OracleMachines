@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Try a second binary target after a miss](research/binary-target-fallback.md).
+The optional recognizer reduces six new edits from 69 to 60 expansions and query
+time by 8.29%; controls regress 1.14%. A direct-solving ablation separates better
+search from avoided probe restart. Exposed branches still need nine expansions.
+Next: reuse unfinished acquisition continuations while preserving checked proofs.
+
 [Share first-false partition preparation](research/partition-preparation.md).
 One shared preparation plus independent reconstruction replaces four identical
 constructions. New-edit query time falls 6.15% under binary-frequency routing,

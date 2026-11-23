@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: shared construction exposes the remaining branch cost
+## Latest evidence: a new consequence exposes a continuation cost
+
+[Trying one more binary target](binary-target-fallback.md) finds a checked
+implication consequence missed by the first target. It preserves all decisions;
+the exposed branch remains nine expansions and no whole-input coverage cell is
+added. Six new edits improve from 69 to 60 expansions and by 8.29% in query time,
+but controls regress. General defaults remain unchanged.
+
+One replacement crosses the eight-expansion probe boundary: direct solving takes
+11 versus 8 expansions, while probing then restarting takes 17 versus 8. The next
+reuse opportunity is the unfinished acquisition continuation, alongside already
+retained checked proofs. A continuation is work state, not answer authority.
+Preserve exact bindings, bounded retained state and independent final checking.
+The dominant 29-expansion deletion still needs better consequence selection or
+structure. Automatic donor/map discovery, source composition and unrestricted
+interactions remain open. See the [ranked gaps](structural-reuse-priorities.md).
+
+## Previous evidence: shared construction exposes the remaining branch cost
 
 [Partition preparation](partition-preparation.md) shares producer work while
 retaining independent source/child checking. It preserves the exact first-false

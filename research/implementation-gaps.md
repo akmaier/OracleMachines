@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, partition preparation):
+Latest expansion checkpoint (23 November, second binary target):
+[Bounded consequence recognition](binary-target-fallback.md) adds a checked path
+missed by the first target. New edits take 69 -> 60 expansions and 8.29% less query
+time, but controls regress 1.14% and exposed branches remain nine expansions.
+The main saving crosses the probe budget: direct 11 -> 8 versus wrapped 17 -> 8.
+Next: retain source-bound unfinished continuation work across native fallback,
+separately from checked proof authority. All 75,677 native records and 242 partition
+records are preserved. No new whole-source coverage or default change is claimed.
+
+Previous expansion checkpoint (23 November, partition preparation):
 [Immutable partition preparation](partition-preparation.md) replaces four branch
 constructions with shared acquisition data plus independent reconstruction.
 New-edit binary-frequency query time falls 6.15%, preserving proof bytes and

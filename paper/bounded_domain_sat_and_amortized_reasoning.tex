@@ -9128,6 +9128,47 @@ improve 8.09\% and 6.61\%, but the local supplied-candidate experiment establish
 neither broad decision coverage nor a general total-cost speedup. The unchanged
 residual branches remain the next structural-search obligation.
 
+\paragraph{A missed binary consequence and the cost of restarting a probe.}
+The saved 125-variable branch contains 57 binary and 263 ternary clauses. The
+binary-frequency policy solves it in nine ordinary expansions, but misses a
+forced value in a later 121-variable residual: its first-ranked variable is not
+forced, while the second is. An optional bounded policy tries the second target
+only after the first misses, sharing the existing implication graph and completed
+reachability results. A source-indexed path from a literal to its complement
+certifies the excluded polarity. The existing checker and native compiler
+validate that evidence; no new inference rule or answer authority is introduced.
+A budget-skipped path remains inconclusive. Recognition adds at most one targeted
+reachability search, but recursive acquisition and proof storage remain separate
+costs.
+
+Fifteen local targets, two policies and two opposite serial orders give sixty
+attempts. All targets already close under the baseline. The exposed branch and
+both sign variants still require nine expansions. Six new nearby edits fall
+from 69 to 60 expansions and from 0.19327 to 0.17724 query seconds (8.29\%), with
+both orders improving. Complete measured worker time falls only 0.61\%; it
+includes prefix restoration and full cold auditing. New native key/payload space
+falls from 509,786 to 505,227 bytes, and compressed deltas plus raw sidecars from
+151,881 to 150,562 bytes. Summed endpoint checked-object space falls 6.86\%,
+which is not a peak RAM bound. Controls regress 1.14\% in query time and retain
+1.92\% more native payload. The complemented exposed branch regresses 3.27\%
+in query time. All three exposed variants retain approximately 8.4--8.5\% more
+native payload. We preserve these regressions and keep the policy optional.
+
+The expansion gain is concentrated in one replacement query. The baseline uses
+eight probe expansions and nine after restart; the second-target policy finishes
+within the probe in eight. A separate posthoc count ablation replays the earlier
+query and then acquires this replacement directly, giving eleven versus eight
+expansions. The wrapped seventeen-to-eight reduction therefore includes a
+net six extra baseline expansions in the probe/fallback workflow relative to
+direct acquisition, alongside the three-expansion direct search difference.
+Retained hints can also change subsequent search; this is neither a count of
+identical repeated frames nor a timing attribution. Every direct-ablation proof byte is already present in the checked
+trial deltas. Retaining completed proofs does not retain unfinished search frames;
+source-bound continuation reuse remains a concrete next obligation. A larger
+deletion still takes 29 expansions under either policy. These local supplied-donor
+experiments establish neither broader whole-input decision coverage nor a
+uniformly efficient expansion procedure for arbitrary SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

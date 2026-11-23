@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, prepared cofactors):
+Latest expansion checkpoint (23 November, direct cofactor handoff):
+[One-use preparation](cofactor-handoff.md) reuses normalization and unit traces,
+reducing new-edit query time 2.66% with identical proof bytes and decisions.
+Complete worker time does not improve, and routing still costs more than the
+binary-frequency baseline. The next concrete reuse target is the same six-branch
+partition structure built four times per selected query. Preserve independent
+source/child checking while sharing immutable construction work. All 75,416
+native records and earlier experiments remain preserved.
+
+Previous expansion checkpoint (23 November, prepared cofactors):
 [Targeted normalization reuse](prepared-cofactors.md) preserves exact proof bytes
 and removes 7.34% of normalizer input work on new edits, but increases query time
 0.75%. Keep it optional. The saved dominant query motivates a direct prepared-child

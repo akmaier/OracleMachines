@@ -12,7 +12,40 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: avoid broad lookup for prepared work
+## Current investigation: share partition preparation
+
+The [direct cofactor handoff](cofactor-handoff.md) avoids unrelated memo lookups
+and reuses three nonconflicting unit propagations on six new edits. Query time
+falls **2.66% on the mean, with both orders improving**, and identical models, proof bytes, partitions
+and expansions. Complete measured worker time changes **+0.15% with mixed signs**.
+The optional mechanism does not fix the routing regression: new edits still take
+55 versus 53 expansions, 17.39% more query time and 38.87% more native payload
+than binary-frequency routing. General defaults remain unchanged.
+
+**Next primary target: repeated first-false partition construction.** The largest
+fresh handoff query takes **108.98 ms**. An untimed audit finds four identical
+six-branch structures per query, at premise publication, acquisition, sidecar
+construction and checking. The same four calls occur under binary-frequency
+routing. Avoid constructing unused premise branches and share immutable preparation
+between acquisition and sidecar construction. Keep the independent record checker,
+fresh prerequisite lookups and exact source/ordered-clause/guard/name-map bindings.
+Charge retained space, invalidation, malformed-sidecar checks and cold replay.
+This opportunity can help the cheaper policy without requiring two-polarity routing.
+
+`experiments/results/cnf-cofactor-handoff/next-target.json` preserves the source,
+exact pre-query prefix, all three profiles and duplicate-structure audit. The
+selected deletion has no extra earlier-query publications. Handoff reduces native
+normalizations 130 -> 127 and propagations 33 -> 31, but publications remain 39;
+binary-frequency routing uses 108, 24 and 29 respectively. Probe admission and
+the surviving continuation remain the next search-policy gap. Cold replay and
+sidecar representation dominate the complete measured worker, which includes
+auditing costs and must not be equated with query latency.
+
+Resume `experiments/results/cnf-cofactor-handoff/checkpoint.json`: **75,416 native
+records** with all earlier authority preserved. This acquisition study adds no
+whole-source coverage cell or uniformly polynomial unrestricted-SAT bound.
+
+## Previous checkpoint: avoid broad lookup for prepared work
 
 The [prepared-cofactor memo](prepared-cofactors.md) reuses 13 exact normalization
 results on six new edits, reducing normalizer input-literal visits **7.34%**.

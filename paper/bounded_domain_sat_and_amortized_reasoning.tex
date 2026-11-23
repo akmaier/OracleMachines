@@ -9046,6 +9046,45 @@ priority, exact bindings and all proof obligations must remain explicit. These
 results concern acquisition costs, not broader decision coverage or a new
 unrestricted-SAT bound.
 
+\paragraph{Direct handoff removes repeated work without changing the search.}
+The next experiment passes a solver-owned immutable cofactor directly from its
+probe to the selected native child. It binds the raw formula, canonical formula,
+original-name map and key, and optionally retains the non-conflicting propagation
+result. Exact object identity admits a one-use normalization handoff; the
+propagation dispatcher additionally binds the active counter. The existing
+recognition priority remains unchanged, so propagation is reused only when native
+search reaches that step. Neither preparation nor a non-conflicting trace grants
+answer authority. Models, negative children and certificates are still checked.
+An aggregate 256\,KiB retained-offer cap includes active ancestors; oversize offers
+fall back to ordinary computation. Unselected offers clear before fallback, and
+all preparation clears on query completion or failure. The cap excludes transient
+construction, control fields and other solver memory.
+
+Three policies, two opposite serial orders and 15 targets compare binary-frequency
+routing, two-polarity routing and direct handoff. On six new nearby edits, handoff
+reduces query time from 0.21834 to 0.21253 seconds (2.66\%), with both orders
+improving. Six offers are admitted, four consumed and three reach propagation.
+Normalizer input-literal visits fall from 123,779 to 120,730; native propagation
+visits fall from 71,723 to 61,663. Probe propagation remains at 39,332, giving a
+9.06\% reduction in their combined literal visits. Freezing, sizing, copying,
+dispatch and cleanup remain charged. Proof bytes, models, decisions, partitions
+and expansion counts are identical to two-polarity routing. New-edit native
+key/payload space stays at 628,482 bytes, and compressed deltas plus raw sidecars
+at 162,328 bytes. Maximum retained offer charge across trials is 183,297 bytes.
+A separate graph audit observes two live offers and at most 130,021 actual graph
+bytes below its 182,613-byte charge.
+
+The complete measured worker time rises 0.15\%, with mixed order signs; this is
+not a demonstrated end-to-end speedup. The control query mean improves 14.99\%,
+but the paired savings are highly unequal (79.18 and 2.83 milliseconds). The
+original exposed sign variant regresses 6.90\% with mixed signs. These small,
+local samples support a narrow reuse mechanism, not a general performance claim.
+Handoff still takes 55 versus 53 new-edit expansions under binary-frequency
+routing, with 17.39\% greater query time and 38.87\% greater native payload.
+Choosing which probes and continuations to acquire remains a larger obligation
+than reusing their preparation. Donors and maps remain supplied; this experiment
+adds no decision coverage cell or unrestricted-SAT bound.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

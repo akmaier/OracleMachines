@@ -28,6 +28,12 @@ classes.
 
 ## Paper
 
+[Hand prepared cofactor work directly to its child](research/cofactor-handoff.md).
+One-use normalization and unit-propagation reuse lowers query time 2.66% on six
+new edits, preserving all proof bytes. Complete worker time does not improve;
+probe routing still costs more than binary-frequency routing. Next: share the
+identical partition structure currently built four times per selected query.
+
 [Reuse prepared cofactor normalization](research/prepared-cofactors.md).
 A bounded memo removes about 7% of normalizer input work on nearby edits while
 preserving every proof byte. New-edit query time still rises 0.75%; lookup and

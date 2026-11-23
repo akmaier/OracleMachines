@@ -5,7 +5,23 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: a reuse hit must pay for its recognition
+## Latest evidence: reuse prepared structure without repeating recognition
+
+The [direct cofactor handoff](cofactor-handoff.md) replaces broad memo lookup
+with an exact producer-to-child connection. It saves normalization and unit scans
+without changing any decision or proof byte. New-edit query time falls 2.66%,
+but complete worker time does not improve and the probe policy still loses to
+binary-frequency routing on those edits. This adds no tractable SAT class.
+
+The next reusable structure is the first-false partition itself: the selected
+query constructs the same six-branch structure four times. Share immutable
+preparation for acquisition/composition while retaining independent record checks,
+exact source/guard/ordered-clause bindings and fresh child availability checks.
+This applies across the branch solvers' recognized categories, but does not make
+all resulting branches cheap. Automatic donors/maps, original-source coverage and
+unrestricted interaction remain open. See the [ranked gaps](structural-reuse-priorities.md).
+
+## Previous evidence: a reuse hit must pay for its recognition
 
 The [prepared-cofactor comparison](prepared-cofactors.md) preserves every proof
 byte and decision while reducing normalizer input work by 7.34% on new edits.

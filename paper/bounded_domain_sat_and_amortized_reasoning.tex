@@ -9891,6 +9891,56 @@ mixed-input refutation also offers a specific transfer target for its unresolved
 edit. Automatic correspondence, useful conditional structure and efficient
 arbitrary-CNF acquisition remain open.
 
+\paragraph{An incomplete prior cover can still provide a useful branching plan.}
+The next experiment considers an earlier whole-CNF refutation whose nearby edit
+still exhausts the native budget. Complete-cover extraction stops after 64 proof
+nodes. A larger diagnostic visits 136 nodes and finds 44 conditional unit
+supports, all retained by the edit, but also nine unsupported endpoints. The
+complete-cover interface rejects this result. Instead, we keep the checked
+supports and mark unsupported endpoints or budget frontiers as open leaves.
+Open leaves provide no proof authority and require native acquisition on the
+actual target under the recorded branch assignments.
+
+The optional online policy selects at most one earlier checked native root from
+the existing bounded pool. Its canonical clause set must overlap the target and
+miss exactly one clause. No supplied guard, family label or later answer selects
+an origin. Extraction retains at most 64 node occurrences and a cumulative
+65,536 literals from those nodes. The existing partial composer validates surviving conditional supports
+and acquires the remaining leaves under one shared 256-dispatch budget. A
+negative result needs all reachable branches; a positive branch must lift a
+full-target model. Ordinary native unit, split and model checks provide every
+published result. No new SAT certificate format is introduced.
+
+An extraction bound $B$ gives at most $2B+1$ plan nodes and $B+1$ leaves, with
+template payload at most $O(BL)$ for encoded source length $L$, including clause
+boundaries and variable identifiers. Source indices,
+provenance copies, contexts and target buffers remain additional costs. A cold
+native read can verify the earlier proof graph before bounded traversal, so the
+extraction cap is not a complete time or memory bound. Native dispatches also
+exclude support and split publications. Plans are transient; cold replay uses
+the retained native certificates. The composer adapter requires exclusive
+serial use. The open leaves preserve exact coverage obligations but can retain
+the original SAT difficulty; no uniform polynomial bound follows.
+
+Four alternating repetitions use 72 exposed queries and 72 fresh fixed-seed
+queries, starting every worker empty. The automatic plan refutes the exposed
+edit in 223 dispatches using 22 surviving leaves and five native acquisitions.
+Distinct-root coverage grows from 38/48 to 39/48. Nevertheless, exposed solve
+mean rises 1.54\% and complete-worker mean 3.25\%. Fresh coverage remains 42/48,
+while solve mean rises 4.04\%, complete-worker mean 6.60\% and native payload
+6.85\%. Every paired solve and worker comparison regresses. The policy remains
+optional: a useful partial transfer does not guarantee useful arbitration.
+
+Two fresh edits explain most of the added solve time. A one-dispatch completion
+becomes 57 or 58 dispatches, adding 329.33 ms of the total 499.15 ms increase.
+Posthoc reconstruction of the new policy's exact prefix confirms that complete
+negative-pool results are already available for both targets without search.
+The same probe misses on the useful exposed edit and therefore adds work there.
+Prioritizing complete reuse before partial extraction is the next test, with
+those misses charged. These diagnostics do not establish the performance of
+that revised policy. They distinguish a coverage gap, now closed on one exposed
+input, from the remaining cost of deciding which reusable structure to use.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

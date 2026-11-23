@@ -28,7 +28,12 @@ classes.
 
 ## Paper
 
-[Complete an already discovered affine space](research/whole-input-affine-completion.md).
+[Reuse surviving leaves from a whole refutation](research/whole-proof-frontiers.md).
+An unresolved edit now has a checked native refutation within the same budget.
+Exposed coverage grows from 38/48 to 39/48; fresh coverage is unchanged and solve
+time regresses 4.04%. Next: preserve cheap complete reuse before partial reconstruction.
+
+Previous: [Complete an already discovered affine space](research/whole-input-affine-completion.md).
 An unresolved whole CNF now has a checked UNSAT certificate after testing only
 16 affine candidates. Exposed coverage grows from 39/48 to 40/48 distinct roots;
 fresh inputs retain the preceding coverage. Next: automatically reuse a checked

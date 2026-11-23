@@ -4,7 +4,15 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, whole-input affine completion):
+Latest expansion checkpoint (24 November, partial whole-proof plans):
+[Retain reusable leaves at an open frontier](whole-proof-frontiers.md). The
+automatic policy certifies exposed edit 70 in 223 dispatches using 22 surviving
+supports, raising coverage from 38/48 to 39/48. Fresh coverage stays 42/48 and
+solve mean regresses 4.04%. Next: prioritize existing complete proof/model pool
+results; edits 31/34 unnecessarily grow from one dispatch each to 57/58. Keep
+the successful partial transfer, explicit open leaves and all measured costs.
+
+Previous expansion checkpoint (23 November, whole-input affine completion):
 [Complete an already extracted affine space](whole-input-affine-completion.md).
 The existing bounded completion and exhaustion checkers now serve whole-input
 acquisition. All 16 candidates reject exposed case 43; checked UNSAT raises

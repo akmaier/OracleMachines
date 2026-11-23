@@ -5,7 +5,23 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: a checked small affine space can close a whole-input gap
+## Latest evidence: open proof frontiers retain useful conditional structure
+
+[Partial whole-proof plans](whole-proof-frontiers.md) keep checked unit supports
+when a prior refutation contains unsupported endpoints or exceeds extraction
+limits. Every uncovered leaf remains a native SAT obligation. Automatic matching
+and recomposition certify the exposed edit 70 within 223 dispatches, raising
+coverage from 38/48 to 39/48 without a supplied guard or future result.
+
+The fresh stream retains 42/48 coverage and regresses 4.04% in solve time.
+On two edits, a one-dispatch completion becomes 57/58 dispatches. The next
+discovery question is arbitration: recognize an available complete reusable
+result before constructing a partial plan. The causal prefix checks use the
+existing proof/model pools; retain their misses and the successful partial
+transfer. A finite exact branch plan still leaves difficult residuals and does
+not establish tractability of every SAT category.
+
+## Previous evidence: a checked small affine space can close a whole-input gap
 
 [Whole-input completion](whole-input-affine-completion.md) reuses the equations
 already extracted at the acquisition gate. Exposed case 43 has four free bits;

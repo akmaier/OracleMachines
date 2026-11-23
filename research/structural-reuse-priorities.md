@@ -1,6 +1,6 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-23 after the user's shift toward pattern discovery and a valid
+Updated 2026-11-24 after the user's shift toward pattern discovery and a valid
 partition of the entire SAT problem. This is the working record for the hourly
 investigation. Start with the [discovery plan](sat-pattern-discovery.md), then
 consult [implementation history](implementation-gaps.md),
@@ -12,7 +12,36 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: use an earlier whole-CNF proof on an unresolved edit
+## Current investigation: preserve cheap complete reuse before partial reconstruction
+
+[Whole-proof frontiers](whole-proof-frontiers.md) closes the exposed case-70
+gap. Automatic matching selects its earlier checked refutation, retains 22
+surviving leaves and acquires the five uncovered leaves within 223 dispatches.
+Distinct-root coverage grows from 38/48 to 39/48. Open leaves carry no authority;
+the ordinary native checker verifies the completed target.
+
+The cost comparison rejects this priority as a default. Exposed solve mean
+regresses 1.54%; fresh solve mean regresses 4.04%, with no fresh coverage gain.
+Fresh proof payload grows 6.85%. Two edits (31/34) change from one dispatch each
+to 57/58, adding 329.33 ms of the stream's 499.15 ms solve-time increase. Their
+valid partial evidence displaces the preceding cheaper completion path.
+
+**Next target: apply the existing `cnf_pool_priority.try_pools` before committing
+to partial extraction.** Exact-prefix causal probes confirm complete negative-pool
+hits for both edits without fresh expansion. The exposed case-70 probe misses.
+Use those results to design the gate, preserve the successful case-70 transfer,
+and measure failed pool checks on a new frozen stream. Do not infer a total-cost
+win from fewer native dispatches: fresh case 70 uses 89 instead of 115 but takes
+slightly longer.
+
+Random-three consumes 73.74% of fresh solve time and remains the largest general
+cost. The two unnecessary edit expansions are the most concrete immediate reuse
+opportunity. The 64-node extraction frontier and nine unsupported endpoints in
+the larger diagnostic remain secondary questions after restoring cheap complete
+reuse priority. Resume `experiments/results/cnf-whole-proof-reuse/checkpoint.json`.
+No efficient arbitrary-CNF closure or new native proof authority is claimed.
+
+## Previous investigation: use an earlier whole-CNF proof on an unresolved edit
 
 [Whole-input affine completion](whole-input-affine-completion.md) closes the
 preceding case-43 gap: 16 checked affine assignments all fail a remaining clause.

@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (23 November, shared partial preparation):
+Latest expansion checkpoint (23 November, carried clause origins):
+[Reuse original provenance](carried-clause-origins.md). Indexed path updates
+retain exact minimum original representatives, covers, native payloads and
+hints. Cover-phase mean improves 8.36%, but preparation/query mean regresses
+1.79% and complete-worker mean 6.32%. All costs and negative results remain
+visible. Next: pass the existing canonical triple at five missing-leaf calls
+into native acquisition, preserving source validation and every proof check.
+No new native identities or unrestricted bound.
+
+Previous expansion checkpoint (23 November, shared partial preparation):
 [Reuse conditioned leaf preparation](prepared-partial-recomposition.md).
 Identical native proof bytes, hints, origins and dispatch counts isolate six
 avoided leaf preparations and one unchanged frame. Preparation/query mean is

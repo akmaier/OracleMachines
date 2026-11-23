@@ -9672,6 +9672,31 @@ coordinates, duplicate representatives, assumptions and extraction limits must
 remain explicit. The structural coverage and unrestricted acquisition
 obligations are unchanged.
 
+\paragraph{Carry original reasons through the proof.}
+The extractor can retain, for each residual clause, its minimum original-clause
+index. Equal residuals remain equal under any later extension of the same path
+assignment, so discarded duplicate representatives cannot later diverge. New
+images merge by minimum original index. This establishes the map invariant by
+induction over restrictions. A source-variable index selects affected live
+representatives; component steps retain the global map, including clauses
+outside the selected component. Native edge, assumption and reason checks remain.
+
+On the same stream, the two cold extractions skip 2,647 unchanged representatives.
+They index 1,593 literals, inspect 480 affected literals and copy 5,740 map slots.
+Those copies still cost O(m) for m current representatives; temporary snapshots
+and integer costs are not a constant-space lookup. Exact extracted bundles,
+hints, proof payloads, decisions and 32 dispatches remain unchanged.
+
+The local cover-phase mean falls 8.36\%, improving in every pair. Nevertheless,
+preparation-plus-query mean rises 1.79\% with two faster and two slower trials,
+and complete-worker mean rises 6.32\%. The total-cost result is negative despite
+less provenance work. We retain the experiment without changing the default.
+The next target is the missing-leaf acquisition boundary: traversal already
+holds a conditioned formula, map and key before native acquisition normalizes
+that input again. Explicit preparation transport must retain independent
+source and proof checks. Neither construction reduces the unresolved
+unrestricted-SAT acquisition obligation.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

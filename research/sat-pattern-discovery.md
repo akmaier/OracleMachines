@@ -5,7 +5,21 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: preparation sharing preserves the structural classification
+## Latest evidence: source provenance can survive proof transitions exactly
+
+[Carried original representatives](carried-clause-origins.md) provide an exact
+reuse invariant: equal residual clauses remain equal under later restrictions,
+so their minimum original index suffices. A source-variable index updates only
+affected live representatives, while component edges retain the global map.
+Extracted supports and their assumptions remain byte-for-byte equivalent.
+
+This lowers local cover-discovery cost but regresses on whole-stream time; it
+adds no SAT coverage cell. The next gap is passing already prepared missing
+leaves into native acquisition without duplicate normalization or weakened
+checks. Efficient arbitrary-CNF acquisition, automatic guards and variable
+correspondence remain unresolved.
+
+## Previous evidence: preparation sharing preserves the structural classification
 
 [Prepared partial reconstruction](prepared-partial-recomposition.md) retains
 exactly the same branch decisions, supports, native proofs and learned hints.

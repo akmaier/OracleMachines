@@ -12,7 +12,35 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse provenance during cold cover extraction
+## Current investigation: pass prepared missing leaves into native acquisition
+
+[Indexed origin carry](carried-clause-origins.md) preserves exact extracted
+bundles and all native proofs while skipping **2,647 unchanged representatives**.
+Cover-phase mean improves **8.36%** in all four pairs. However, preparation plus
+query regresses **1.79%** overall (two wins, two losses), and complete-worker
+mean regresses **6.32%**. Keep optional and retain that total-cost failure.
+Map copies and indexing are charged; endpoint state and stored bytes are equal.
+
+**Next primary target: repeated input normalization at the five missing-leaf
+acquisitions.** Partial traversal already has a conditioned formula/name/key
+triple, then `_visit` reconstructs it. The case 15 profile still has 27
+normalizations, about 24 of 62 instrumented milliseconds; verification accounts
+for about 17 ms and overlaps those costs. Investigate explicit call-local
+preparation transport at this producer/consumer boundary, keeping every source
+and native proof check. Preserve SAT witness lifting and the shared budget.
+
+The existing [general normalization cache](query-canonicalization-reuse.md)
+already lost after lookup/sizing/validation overhead. Do not reintroduce it
+without new evidence. The indexed extractor still copies O(m) map containers
+on affected transitions; improving that is secondary to the remaining measured
+acquisition/checking costs. Automatic guards/maps and unrestricted bounds stay
+open.
+
+Resume `experiments/results/cnf-carried-origins/checkpoint.json`. No new native
+identities are needed; the cumulative archive is reused. Raw pair regressions,
+all original representatives and identical-proof diagnostics are preserved.
+
+## Previous investigation: reuse provenance during cold cover extraction
 
 [Shared partial preparation](prepared-partial-recomposition.md) avoids six
 repeated leaf preparations and one unchanged frame while preserving **identical

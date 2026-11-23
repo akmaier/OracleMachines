@@ -28,12 +28,11 @@ classes.
 
 ## Paper
 
-[Share preparation during partial reconstruction](research/prepared-partial-recomposition.md).
-Six leaf preparations and one unchanged-frame reconstruction are avoided with
-identical proofs, hints and expansion counts. Preparation/query mean improves
-0.98% against the preceding partial route, with one of four repeats regressing;
-the native-baseline comparison is effectively tied. Next: reuse original-clause
-provenance during cold conditional-cover extraction.
+[Carry original clause provenance](research/carried-clause-origins.md).
+Indexed updates preserve exact supports and proofs while skipping 2,647
+unchanged representatives. Cover-phase time improves 8.36%, but whole-stream
+preparation/query mean regresses 1.79%; the negative result is retained. Next:
+reuse the prepared missing-leaf input at the native acquisition boundary.
 
 [Reuse checked order during causal reconstruction](research/preimage-fusion.md).
 Sharing untouched clauses and their canonical order reduces repeated support

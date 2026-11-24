@@ -5,7 +5,25 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: open proof frontiers retain useful conditional structure
+## Latest evidence: complete-first arbitration avoids unnecessary reconstruction
+
+[Complete-result priority](whole-pool-priority.md) retains the same source-derived
+near-match rule and tries an existing complete proof or model before extracting
+a partial branch plan. The two exposed 57/58-dispatch regressions become checked
+zero-dispatch hits. Five fresh complete hits include a 77-dispatch reconstruction.
+No family label or later answer enters discovery; every result passes the same
+native authority.
+
+Both streams retain 42/48 coverage. Fresh solve time is essentially unchanged,
+but complete-worker mean falls 1.63% and native payload 3.03% relative to partial
+reuse. Against affine completion alone, solve mean is still 0.98% higher. The
+useful earlier partial transfer survives, while its new complete-lookup miss
+adds work. Arbitration saves some repeated acquisition without closing the six
+remaining fresh random-three roots. Investigate whether inconclusive probe
+preparation can serve the ordinary child; first verify that it is the same
+cofactor and preserve recognition priority and full certificate checks.
+
+## Previous evidence: open proof frontiers retain useful conditional structure
 
 [Partial whole-proof plans](whole-proof-frontiers.md) keep checked unit supports
 when a prior refutation contains unsupported endpoints or exceeds extraction

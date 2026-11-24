@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/profile_cnf_whole_pool_priority.py", line 52, in <module>
+    if __name__=='__main__':profile(Path(sys.argv[1]))
+                            ~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/profile_cnf_whole_pool_priority.py", line 29, in profile
+    captured={t:dict(solver.db.execute(f'SELECT id,payload FROM {t}')) for t in study.ALL_TABLES}
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_publication_batches.py", line 92, in execute
+    if not self.active:return self.connection.execute(sql,parameters)
+                              ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: cnf_binary_equivalence_v1

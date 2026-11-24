@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Prefer complete results before partial reconstruction](research/whole-pool-priority.md).
+Existing proofs replace two 57/58-dispatch reconstructions with zero fresh search.
+Exposed solve mean improves 2.17%; fresh solve time is essentially unchanged,
+while fresh complete-worker time falls 1.63% and proof payload 3.03%. Coverage
+stays 42/48, and affine completion alone remains faster. The next target is
+reusing inconclusive probe preparation on the unresolved random-three roots.
+
 [Reuse surviving leaves from a whole refutation](research/whole-proof-frontiers.md).
 An unresolved edit now has a checked native refutation within the same budget.
 Exposed coverage grows from 38/48 to 39/48; fresh coverage is unchanged and solve

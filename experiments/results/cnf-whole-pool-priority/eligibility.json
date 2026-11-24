@@ -1,0 +1,9 @@
+{
+  "checked_successful_priority_routes": true,
+  "clarification": "Exactly one origin clause is absent from the target; the number of added target clauses is unrestricted. This makes the frozen protocol wording precise and does not change the frozen implementation or inputs.",
+  "condition": "len(origin_clauses - target_clauses) == 1 and bool(origin_clauses & target_clauses)",
+  "protocol": {
+    "path": "experiments/results/cnf-whole-pool-priority/protocol.json",
+    "sha256": "81165ab2ab971cd294510fa8bab83b01bf62548002fd4bbc3f3a56cfe0e847fe"
+  }
+}

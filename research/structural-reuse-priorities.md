@@ -12,7 +12,36 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: preserve cheap complete reuse before partial reconstruction
+## Current investigation: reuse work from inconclusive whole-clause probes
+
+[Complete-result priority](whole-pool-priority.md) removes the two exposed
+57/58-dispatch reconstructions by using existing complete proofs. Each measured
+stream has five such hits. Exposed solve mean improves 2.17%; fresh solve mean
+changes only -0.08%, with mixed paired signs. Fresh complete-worker mean falls
+1.63% and native payload 3.03%. Coverage remains 42/48, and affine completion
+alone is still faster. The earlier case-70 partial transfer survives in 223
+dispatches; its added complete-lookup miss remains a measured regression.
+
+**Next target: confirm and exploit the handoff from an inconclusive whole-clause
+probe to the actual ordinary child.** Random-three consumes 69.70% of fresh
+solve time and contains all six roots still unresolved at the end. Inspect the
+exact-prefix profile of fresh case 40: 131 specialized cofactor preparations,
+126 nonconflicting bipolar probes and 48 whole-clause lookahead misses. It also
+performs 779 general normalizations. Determine which restriction, normalization
+and propagation results are produced twice before proposing a saved-work bound.
+Use the existing `cnf_cofactor_handoff.py` machinery when applicable, preserving
+higher-priority discovery and full certificate checks. Charge retaining,
+matching, copying and discarding offers. Its earlier mixed total-cost results
+remain relevant; no nonconflicting probe is a SAT certificate.
+
+Complete-first arbitration also retains a secondary cost gap: fresh misses
+62/67 gain 126.93/110.65 ms without reducing dispatches. Do not extend the gate
+blindly. The six unresolved random-three roots are the broader coverage gap.
+Resume `experiments/results/cnf-whole-pool-priority/checkpoint.json`, using
+`experiments.cnf_archive_parts.restore_archive` for its cumulative history.
+Transport chunking preserves every byte but does not reduce archive growth.
+
+## Previous investigation: preserve cheap complete reuse before partial reconstruction
 
 [Whole-proof frontiers](whole-proof-frontiers.md) closes the exposed case-70
 gap. Automatic matching selects its earlier checked refutation, retains 22

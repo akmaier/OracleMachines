@@ -4,7 +4,17 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, partial whole-proof plans):
+Latest expansion checkpoint (24 November, complete-result priority):
+[Try complete reuse before a partial plan](whole-pool-priority.md). Five exposed
+and five fresh queries use checked complete proofs without native expansion.
+Coverage remains 42/48 in each stream. Exposed solve mean improves 2.17%; fresh
+solve time is mixed, while complete-worker mean falls 1.63% and payload 3.03%.
+Misses remain costly; the known 223-dispatch transfer survives with added lookup
+work. Next: inspect prepared whole-clause cofactors on the six unresolved fresh
+random-three roots. Restore the cumulative checkpoint with the new backward-
+compatible `experiments.cnf_archive_parts.restore_archive` helper.
+
+Previous expansion checkpoint (24 November, partial whole-proof plans):
 [Retain reusable leaves at an open frontier](whole-proof-frontiers.md). The
 automatic policy certifies exposed edit 70 in 223 dispatches using 22 surviving
 supports, raising coverage from 38/48 to 39/48. Fresh coverage stays 42/48 and

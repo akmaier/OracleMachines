@@ -9903,7 +9903,7 @@ actual target under the recorded branch assignments.
 
 The optional online policy selects at most one earlier checked native root from
 the existing bounded pool. Its canonical clause set must overlap the target and
-miss exactly one clause. No supplied guard, family label or later answer selects
+contain exactly one clause absent from that target. No supplied guard, family label or later answer selects
 an origin. Extraction retains at most 64 node occurrences and a cumulative
 65,536 literals from those nodes. The existing partial composer validates surviving conditional supports
 and acquires the remaining leaves under one shared 256-dispatch budget. A
@@ -9940,6 +9940,43 @@ Prioritizing complete reuse before partial extraction is the next test, with
 those misses charged. These diagnostics do not establish the performance of
 that revised policy. They distinguish a coverage gap, now closed on one exposed
 input, from the remaining cost of deciding which reusable structure to use.
+
+\paragraph{Complete-result reuse can prevent unnecessary partial reconstruction.}
+The next policy adds one check after the same near-origin recognition and before
+partial extraction. Existing negative-support and model pools first try to
+publish a complete native result. A negative hit uses the unchanged subset
+checker; a positive hit must satisfy the full target and its raw-input lift.
+A miss has no verdict and continues the original partial policy. No new proof
+format, pool or miss cache is introduced. Causal support discovery and
+materialization remain part of the lookup cost.
+
+Four alternating repetitions compare affine completion, partial reuse and the
+new priority on 72 exposed and 72 fresh queries. The two exposed reconstructions
+fall from 57 and 58 dispatches to zero. Each stream has five complete negative
+hits; a fresh edit falls from 77 dispatches to zero. All three policies retain
+42/48 distinct-root coverage on both streams. Against partial reuse, exposed
+solve mean falls 2.17\% and complete-worker mean 4.46\%, with every pair faster.
+Fresh solve mean changes only $-0.08\%$, with mixed paired signs, while
+complete-worker mean falls 1.63\% in all four pairs. Native payload falls
+5.46\% exposed and 3.03\% fresh; selected retained Python state falls 5.43\%
+and 2.78\%, despite more individual proof records.
+
+The gate also exposes its cost. An exposed positive edit retains nine dispatches
+but rises from 121.56 to 240.39 ms. Two fresh misses retain 35 and 110 dispatches
+but add 126.93 and 110.65 ms. A separate single paired replay preserves the
+earlier 223-dispatch partial refutation, while its unsuccessful complete lookup
+raises that attempt from 820.28 to 963.05 ms. These misses remain in the measured
+costs. Against affine completion alone, the new policy still increases solve
+mean 0.45\% exposed and 0.98\% fresh, so it remains optional.
+
+All six fresh roots still unresolved at the end belong to the random-three
+family, which consumes 69.70\% of fresh solve time. The next reuse question is
+whether preparation from an inconclusive whole-clause probe can pass to the
+actual ordinary cofactor without repeating restriction, normalization or unit
+propagation. Such a handoff must preserve recognition priority, bind the exact
+source and charge unconsumed preparation. A nonconflicting propagation result
+provides no SAT verdict. These finite measurements do not establish an efficient
+partition or polynomial expansion bound for arbitrary CNF.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}

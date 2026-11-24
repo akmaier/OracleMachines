@@ -12,7 +12,54 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: avoid full preparation on inconclusive binary checks
+## Current investigation: reuse unfinished origins across small edits
+
+[Deferred binary preparation](probe-binary-lazy.md) closes the identified waste:
+the exposed target normalizes six residuals instead of 67, with identical
+certificates. Four repetitions save 3.21% exposed / 3.57% fresh solve time and
+1.60% / 1.48% complete-worker time versus eager closure. One exposed worker pair
+regresses. The new gate is still slower than handoff-only by 5.24% / 4.97% solve
+and 4.11% / 4.05% worker time; keep it experimental. Proof bytes and retained
+state are identical to eager closure. Fresh payload remains 2.67% above the
+handoff control, despite 51 fewer native dispatches.
+
+All policies retain 40/48 exposed and 34/48 fresh roots. Different streams are
+not a policy-induced coverage loss. Eight fresh random-three roots, four
+disjoint-mixture roots and two shared-mixture roots remain unresolved. Those
+three categories consume 97.13% of fresh lazy solve time. Further gate tuning
+alone leaves that coverage frontier intact.
+
+**Next target: census source-bound partial plans from budget-stopped origins.**
+The largest fresh paired regression is edited disjoint mixture 64. Its earlier
+source 63 also stops at 256 dispatches; identical variable coordinates expose
+exactly one removed and one added clause. The current whole-plan route searches
+ten completed negative origins and finds no eligible plan. It requires a checked
+negative root, so 63 cannot supply a branch plan. Individual stored residuals
+can already be reused; the missing route is broader source-bound recomposition
+from an unfinished origin, not a claim that all previous work is discarded.
+
+The posthoc census includes all 24 base/edit pairs: seven have unfinished origins
+at the time of their edits, whose targets remain unfinished, across random-three and both mixture categories. Start
+with 63/64, retain exact guards and source mappings for checked conditional
+leaves, and mark every unresolved branch open. Use completed-origin 27/28 as a
+control: it already reuses 22/27 leaves but still stops. A deleted support must
+invalidate its leaf; every split needs complete coverage before a verdict.
+First measure reusable supports and bounded skeleton retention, including cold
+reload and edit checks. Classify leaf proof kinds: the current partial extractor
+leaves unsupported endpoints, including implications, open. No coverage or speed gain is established for this
+candidate. Avoid treating a stopped parent as a negative proof.
+
+The remaining binary cost is a secondary candidate: validate a previous binary
+model against the current subset before rebuilding its graph. This needs a
+coordinate-aware hit census and complete checking of current binary clauses;
+no model-sharing hit rate has been measured. Prefer the unfinished-origin
+coverage investigation before another local gate optimization.
+
+Resume `experiments/results/cnf-probe-binary-lazy/checkpoint.json` with
+`experiments.cnf_archive_parts.restore_archive`. The study preserves both timing
+controls, failed test fixture, all older authoritative payloads and raw trials.
+
+## Previous investigation: avoid full preparation on inconclusive binary checks
 
 [Binary closure inside whole probes](probe-binary-closure.md) establishes a
 real recognition opportunity and a negative total-cost result. An unchanged

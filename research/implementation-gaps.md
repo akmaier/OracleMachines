@@ -4,7 +4,22 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, binary closure inside whole probes):
+Latest expansion checkpoint (24 November, deferred binary preparation):
+[Normalize only when a binary contradiction needs publication](probe-binary-lazy.md).
+The target drops 67 residual normalizations to six with the same certificates.
+Four repetitions reduce solve mean 3.21% exposed / 3.57% fresh versus eager
+closure, but remain 5.24% / 4.97% slower than handoff-only. All policies close
+40/48 exposed and 34/48 fresh roots; retained proof bytes are unchanged between
+binary policies. The gate remains experimental. Next: inspect source-bound
+conditional leaves from unfinished origins. Fresh 63/64 differ by one removed
+and one added clause but both stop; the existing whole-plan route requires a
+completed negative root. All 24 edit pairs are recorded, including seven
+unfinished origins and the failed completed-origin control 27/28. A stopped
+root is never proof authority. Resume
+`experiments/results/cnf-probe-binary-lazy/checkpoint.json` with the multipart
+reader. All 1,697 tests and 86 focused checks pass.
+
+Previous expansion checkpoint (24 November, binary closure inside whole probes):
 [Keep new recognition subject to total cost](probe-binary-closure.md). An exact
 census certifies 19 previously inconclusive cofactors using existing binary and
 unit proofs. The live gate adds 80 fresh negative cofactors but retains the

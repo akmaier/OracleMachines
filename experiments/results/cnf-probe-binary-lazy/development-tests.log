@@ -1,0 +1,17 @@
+.......E
+======================================================================
+ERROR: test_random_search_exact_payloads_and_budget_stops (solver.test_cnf_probe_binary_lazy.LazyBinaryClosureTests.test_random_search_exact_payloads_and_budget_stops)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_probe_binary_lazy.py", line 136, in test_random_search_exact_payloads_and_budget_stops
+    self.assertEqual(dict(old.db.execute(f'SELECT id,payload FROM {table}')), dict(new.db.execute(f'SELECT id,payload FROM {table}')))
+                          ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_publication_batches.py", line 92, in execute
+    if not self.active:return self.connection.execute(sql,parameters)
+                              ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: cnf_binary_equivalence_v1
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.028s
+
+FAILED (errors=1)

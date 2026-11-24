@@ -10079,6 +10079,60 @@ mapping and full checking. Its saving has not yet been measured. Finding more
 local structure is useful evidence, but neither more certificates nor fewer
 dispatches alone establishes cheaper expansion or broader tractable coverage.
 
+\paragraph{Defer canonical preparation until a binary contradiction needs a certificate.}
+The next implementation tests raw post-unit binary clauses before normalizing
+and serializing the full residual. This is valid under the existing canonical
+cofactor invariant: restriction preserves distinct, noncomplementary literals
+within each clause. Normalization of the restricted formula only removes
+duplicate clauses and renames its variables injectively. These operations
+preserve satisfiability of its binary subset. An inconclusive raw result can
+therefore continue the preceding search without constructing a residual key.
+When no variable was forced, the formula is already canonical and uses the
+original gate directly.
+
+A raw contradiction still needs a source-bound certificate. We normalize that
+residual and rerun the canonical SCC routine, preserving the preceding gate's
+exact implication paths and unit lift. Full native checking remains the
+publication boundary. Misses save one normalization and full-key serialization;
+hits pay an additional SCC pass, and raw duplicate clauses can increase graph
+work. With input cofactor volume $L_0$, residual clause count $m$, binary clause
+count $b$ and binary support size $v$, a forced-assignment miss costs
+$O(L_0+m+b+v\log(v+1))$ expected word operations in this helper. The preceding
+unit pass, variable bit lengths and subsequent search remain separate costs.
+No retained cache or proof schema is added. A satisfiable binary subset still
+provides no verdict on its other clauses.
+
+Four alternating repetitions compare handoff-only, eager binary closure and
+lazy binary closure on exposed sizes 126/150 and fresh sizes 132/156, seed
+202611240406. Lazy preparation lowers solve mean by 3.21\% exposed and 3.57\%
+fresh versus eager closure; complete-worker mean falls 1.60\% and 1.48\%.
+One exposed worker pair regresses. Against handoff-only, however, lazy closure
+still increases solve mean 5.24\% and 4.97\%, and complete-worker mean 4.11\%
+and 4.05\%. Every comparison with that control regresses. The gate remains
+experimental. All three policies retain 40/48 exposed and 34/48 fresh roots;
+the different streams do not measure a policy-induced coverage loss.
+
+Fresh lazy closure avoids 1,549 normalizations, but adds 108 canonical SCC
+passes. Both binary policies retain identical certificates, models and stored
+payloads. They save 51 native dispatches against handoff-only while adding 216
+native records, 2.67\% native payload and 2.64\% selected retained Python state.
+Lower preparation cost therefore does not establish lower total expansion cost
+or broader structural coverage.
+
+The fresh unresolved roots include eight random-three sources, four disjoint
+mixtures and two shared mixtures. A posthoc census identifies a separate reuse
+gap: seven of the 24 base/edit pairs have unfinished origins when the edit is
+queried, and their targets also remain unfinished. The largest remaining paired regression is edit 64; its source 63 also
+exhausts the search budget. They differ by one deleted and one added clause in
+identical variable coordinates, but the existing whole-plan route requires a
+completed checked negative origin. Individual residual reuse remains available.
+The next question is which checked conditional leaves and branch contexts can
+be retained from an unfinished origin. Unresolved leaves must remain explicitly
+open, deleted supports must invalidate affected leaves, and every split must be
+covered before composition yields a verdict. No stopped root is a negative
+certificate, and no coverage or runtime improvement is yet established for this
+extension.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -5,7 +5,31 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: more local refutations do not ensure broader coverage
+## Latest evidence: unfinished origins are outside the whole-plan route
+
+[Deferred preparation](probe-binary-lazy.md) saves 3.57% fresh solve time versus
+eager binary closure while preserving exact certificates. It still costs 4.97%
+more than handoff-only, and adds no completed roots. All three policies retain
+40/48 exposed and 34/48 fresh coverage. The fresh unresolved set spans eight
+random-three roots, four disjoint-mixture roots and two shared-mixture roots.
+A fixed local recognizer's lower preparation cost is not broader tractability.
+
+The largest fresh paired regression is edit 64. Its preceding source 63 is also
+unfinished; they differ by exactly one removed and one added clause in identical
+variable coordinates. The whole-plan route only extracts from completed checked
+negative roots. It scans ten such candidates without a hit and cannot use 63 as
+an origin. Existing exact residual reuse remains in place.
+
+A census of all 24 fresh base/edit pairs finds seven origins unfinished when their edit is queried, each
+with an unfinished target, across all three costly categories. Next inspect
+which checked conditional leaves and branch contexts can be retained from such
+searches. An open leaf has no authority; a stopped root is not UNSAT. Exact
+source supports, edit invalidation, coordinate transport and exhaustive split
+composition are required. Use 27/28 as a control: completed-origin reuse already
+preserves 22/27 leaves there and still stops. No new coverage or efficient
+partition follows merely from making unfinished origins eligible.
+
+## Previous evidence: more local refutations do not ensure broader coverage
 
 [Binary closure after unit-consistent probes](probe-binary-closure.md) finds
 19 additional negative cofactors in an unchanged 353-probe exposed census.

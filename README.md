@@ -28,7 +28,14 @@ classes.
 
 ## Paper
 
-[Measure binary refutations inside inconclusive probes](research/probe-binary-closure.md).
+[Defer binary preparation and retain the coverage frontier](research/probe-binary-lazy.md).
+Lazy preparation saves 3.57% fresh solve time versus eager binary closure, but
+remains 4.97% slower than handoff-only. Proof bytes are identical to eager closure;
+all three policies retain 34/48 fresh coverage. Keep the gate experimental.
+Next: reuse checked conditional leaves from unfinished origins across small
+edits, with explicit open branches and source-support invalidation.
+
+Previous: [Measure binary refutations inside inconclusive probes](research/probe-binary-closure.md).
 The new gate finds valid cofactors but keeps 40/48 coverage and increases fresh
 solve time 8.86%, complete-worker time 5.03%, and native payload 2.72%. It remains
 experimental. Next: defer full-residual normalization until a binary refutation

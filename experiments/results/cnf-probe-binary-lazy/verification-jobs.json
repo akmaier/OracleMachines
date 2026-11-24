@@ -1,0 +1,52 @@
+{
+  "validation-run.log": {
+    "command": [
+      "python3",
+      "experiments/validate_cnf_probe_binary_lazy.py",
+      "experiments/results/cnf-probe-binary-lazy"
+    ],
+    "exit_code": 0,
+    "seconds": 1118.9110591667704
+  },
+  "profile-run.log": {
+    "command": [
+      "python3",
+      "experiments/profile_cnf_probe_binary_lazy.py",
+      "experiments/results/cnf-probe-binary-lazy"
+    ],
+    "exit_code": 0,
+    "seconds": 83.16226570820436
+  },
+  "full-tests.log": {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "solver"
+    ],
+    "exit_code": 0,
+    "seconds": 131.4767267499119
+  },
+  "focused-tests.log": {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "solver.test_cnf_probe_binary_lazy",
+      "solver.test_cnf_probe_binary_census",
+      "solver.test_cnf_probe_binary_closure",
+      "solver.test_cnf_probe_lifetime",
+      "solver.test_cnf_probe_handoff",
+      "solver.test_cnf_cofactor_handoff",
+      "solver.test_cnf_ordered_probe",
+      "solver.test_cnf_whole_pool_priority",
+      "solver.test_cnf_whole_proof_reuse",
+      "solver.test_cnf_canonical_verify",
+      "solver.test_cnf_archive_parts"
+    ],
+    "exit_code": 0,
+    "seconds": 2.1384055837988853
+  }
+}

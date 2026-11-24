@@ -4,7 +4,22 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, guard-guided probe census):
+Latest expansion checkpoint (24 November, live guard-guided probe selection):
+[Select probes without retaining diagnostic event graphs](guard-probe-selection.md).
+Four alternating comparisons on all eight exposed edits preserve the native
+256-dispatch budget. Tracking alone reproduces counters and SQLite files at
+1.27% aggregate solve overhead. Guided selection costs 1.84% more solve time and
+0.77% more complete-worker time; all eight targets remain unresolved. Native
+checked-cache endpoint totals rise 1.68%, plus the provisioned banks. Edit 28
+regresses 11.13%: its query-only profile charges 0.50635 seconds to normalization,
+0.49224 to native verification and 0.00188 to guard choice; cumulative costs
+overlap. Next: test exact local transport of already checked conditional supports
+under the same selection path, with component containment and native checking.
+Existing memo/ordered-normalization experiments must remain comparison evidence.
+Resume `experiments/results/cnf-guard-probe-selection/checkpoint.json` using the
+multipart reader. Earlier payloads, raw controls and negative results stay saved.
+
+Previous expansion checkpoint (24 November, guard-guided probe census):
 [Use saved exclusions to identify probes ordinary search misses](guard-probe-census.md).
 Eight causal cold edits expose 648 ordinary probe contexts and 394 distinct
 unit-refutable cofactors. Ordinary probing does not try 260 of those polarities;

@@ -5,7 +5,25 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: guards identify untried local refutations
+## Latest evidence: local exclusions need cheaper use and useful composition
+
+[Live guard-guided probing](guard-probe-selection.md) now changes ordinary probe
+selection without retaining the census event graphs. Exact tracking controls
+reproduce original counters and proof files with 1.27% aggregate solve overhead.
+Guided selection costs 1.84% more overall and leaves all eight exposed edits
+unresolved. It selects a guard offer at 148 contexts, changing 75 variables;
+those events are not additional solved instances or new tractable categories.
+
+The largest regression's profile shows that matching is small compared with
+normalization, restriction and certificate checking. Next test direct local
+transport of the saved conditional support, preserving the same selection path
+and checking actual component containment. This may avoid recomputing a known
+local refutation, but supplies no verdict on the remaining branch. Broader
+coverage still requires useful composition among surviving guarded regions,
+automatic recognition and fresh evaluation. Preserve previous failed memo
+experiments; do not infer efficient global closure from more local hints.
+
+## Previous evidence: guards identify untried local refutations
 
 [The guard-guided probe census](guard-probe-census.md) observes all eight saved
 origin/edit pairs without changing search. It finds 394 distinct negative local

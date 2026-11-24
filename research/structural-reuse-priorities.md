@@ -12,7 +12,46 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: select useful probes without expensive capture
+## Current investigation: reuse local certificates under a fixed selection path
+
+[The live guard selector](guard-probe-selection.md) removes duplicate tracking
+normalization and event retention. Tracking alone preserves native counters and
+SQLite files with 1.27% aggregate solve overhead. Guided selection makes 148
+offers, changing the variable at 75 sites, but costs 1.84% more solve time and
+0.77% more complete-worker time. All eight exposed edits remain unresolved.
+Checked-cache endpoint totals increase 1.68%, plus 249--403 KB banks per worker.
+Keep this negative result and all four controls; no default change is justified.
+
+**Next target: transport a surviving conditional certificate to the actual local
+cofactor, holding probe selection fixed.** The saved guard is currently used
+as a selection hint while the local refutation is acquired again. Review
+`experiments/cnf_conditional_unit_support.py` and its `materialize` path first.
+Bind source variables, fixed assignments and current clause support exactly;
+missing support in a selected component must fall back to the unchanged probe.
+Compare total construction/checking, proof bytes, warm reuse and cold replay.
+This candidate does not remove the opposite branch or all normalization costs.
+
+The adaptive query-only profile selects the largest regression, edit 28
+(+11.13%). Guided normalization takes 0.50635 profiled seconds, native checking
+0.49224, negative-child checking 0.31392 and guard choice only 0.00188. Cumulative
+times overlap. Fewer normalization and propagation calls still cost more because
+the chosen residuals change. An index for guard matching is therefore a low
+priority on this evidence.
+
+Avoid repeating preserved alternatives: broad proof-normalization reuse had
+mixed gains, the prepared-cofactor memo regressed despite less normalization,
+and checked ordered normalization already exists. Direct canonical-header
+checking is already in the live stack. Any new sharing of preparation must
+identify its additional boundary and preserve independent proof checks.
+
+Broader structural coverage remains open: after useful local certificate reuse,
+census interactions among guards with more than one unfixed assumption, with
+component-local support and explicit unresolved regions. Origin recognition,
+general coordinate transport and fresh unlabelled evaluation remain necessary.
+Resume `experiments/results/cnf-guard-probe-selection/checkpoint.json` with the
+multipart reader. All previous authority and failed comparisons remain saved.
+
+## Previous investigation: select useful probes without expensive capture
 
 [The passive guard-probe census](guard-probe-census.md) finds a concrete target:
 648 ordinary contexts expose 394 distinct unit-refutable local cofactors.

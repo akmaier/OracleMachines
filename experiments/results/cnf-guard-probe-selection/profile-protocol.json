@@ -1,0 +1,31 @@
+{
+  "comparisons": {
+    "path": "experiments/results/cnf-guard-probe-selection/comparisons.json",
+    "sha256": "8bb51eb75c51bcf8244c42166a95d0c29daa3162574da33868d2d2e0880ba209"
+  },
+  "limitations": [
+    "Only attempt(solver, source) is profiled. Profile timing is diagnostic and excluded from the four unprofiled comparisons.",
+    "Sorted cumulative rows overlap along the call graph and must not be summed as exclusive attribution. Native self time and call counts are also retained.",
+    "Both profiles repeat the same exact causal prefix. Native counters and authority digests must match their unprofiled arm."
+  ],
+  "parent_protocol": {
+    "path": "experiments/results/cnf-guard-probe-selection/protocol.json",
+    "sha256": "f8744f5e2e92759a40ca02f0e4902f66f7ec4bec079c909940c296188e3c22a3"
+  },
+  "relative_changes": {
+    "1": -0.0132977615367319,
+    "4": -0.01329720633281306,
+    "28": 0.11133238413663293,
+    "37": 0.004644449515005977,
+    "40": -0.004156852682846379,
+    "61": 0.027787177879346148,
+    "64": 0.0426792729370602,
+    "67": 0.06291917107356415
+  },
+  "selection": "Largest observed guided/native mean solve-time ratio; adaptive diagnostic, not a holdout.",
+  "source": {
+    "path": "/Users/maier/Documents/code/OracleMachines/experiments/profile_cnf_guard_selection.py",
+    "sha256": "45454ecd64f285aa9b3380693a0e4aebf970f48804e94bf5289b99f702750965"
+  },
+  "target": 28
+}

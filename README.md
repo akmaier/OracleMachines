@@ -28,7 +28,15 @@ classes.
 
 ## Paper
 
-[Find missed probes at ordinary search contexts](research/guard-probe-census.md).
+[Test guard-guided probes inside ordinary search](research/guard-probe-selection.md).
+The new tracker preserves native search with 1.27% aggregate solve overhead.
+Guard-guided selection instead costs 1.84% more overall, with mixed per-case
+results and no new completed inputs. The largest regression's profile puts
+normalization, checking and propagation far above guard matching. Next: test
+direct reuse of conditional certificates on the exact local cofactor while
+holding probe selection fixed. All controls and unsuccessful results are saved.
+
+Previous: [Find missed probes at ordinary search contexts](research/guard-probe-census.md).
 Saved guards identify 394 independently checked negative cofactors; ordinary
 probing misses 260 of those polarities, including 232 on different variables.
 Search and native proof files remain identical. All eight targets still stop;

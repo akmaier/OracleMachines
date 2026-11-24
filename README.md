@@ -28,6 +28,16 @@ classes.
 
 ## Paper
 
+[Reuse completed negative reachability searches](research/negative-reach-reuse.md).
+The optional detector recognizes 202 of 615 saved event patterns versus 142
+at the original budget, representing 37 additional local roots. Each new root
+has checked native proof archives. Ordinary search already knows these roots.
+The uncached detector with twice the root budget recognizes 211 events at nearly
+the same measured cost, with four cache-only and thirteen larger-budget-only events. Selected
+supports save retained bytes but ordinary solving remains faster. Reuse stays
+optional, with all misses, costs and prior evidence preserved.
+
+Previous:
 [Share checked preparation during partial clause shortening](research/shortening-context-reuse.md).
 One immutable context now serves the guard checks within each conditioned state.
 Discovery is 57.63% faster and compilation 28.90% faster than the frozen support

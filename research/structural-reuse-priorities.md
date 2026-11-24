@@ -12,7 +12,37 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: use cheaper preparation to address root-budget misses
+## Current investigation: choose useful searches and avoid rebuilding their state
+
+[Negative reachability reuse](negative-reach-reuse.md) recognizes 202 of 615
+saved events, versus 142 at 64 ordinary BFS roots and 211 at 128 roots. It reuses
+15,883 completed searches using closed reachable sets, exact source coordinates
+and checked invalidation after edge additions. It gains 60 events / 37 local
+roots over the 64-root policy without losing a refutation. All 37 already occur
+in ordinary whole-query archives. No whole-query gain is claimed.
+
+**Cost evidence:** cached discovery takes 8.62661 seconds, versus 6.55291 for the
+original budget and 8.75225 for 128 roots; initial binding adds about 5.19 seconds.
+The larger-budget control recognizes more at nearly the same measured time.
+Neither dominates: four events are cache-only and thirteen larger-budget-only.
+The cache adds graph-delta and index work, and two profiles show conditioned-state
+preparation still dominates. Maximum cached membership is 1,456, with graph and
+inverse-index storage additional. This is not a process-memory cap or theorem.
+
+**Next best target:** use those seventeen disagreement events and the remaining
+320 cached root-budget stops to test structural root priorities, charging their
+selection and conditioning costs. Inspect whether small affected clause sets
+allow exact incremental state preparation. Compare against both 64 and 128
+uncached roots; preserve the 93 no-useful-literal cases and test held-out edits.
+Do not promote the cache solely on its smaller BFS count or post-hoc union.
+
+All 1,839 tests pass. The 37 new roots enter matched ordinary/full/support trials;
+selected supports retain 32.41% fewer record bytes than ordinary search, but
+ordinary solving remains faster. Both native readers audit every supplemental
+archive. Resume `experiments/results/cnf-reach-reuse/checkpoint.json`; all prior
+banks, frozen sources and 64 manuscript proof blocks are preserved.
+
+## Previous investigation: use cheaper preparation to address root-budget misses
 
 [Shared shortening contexts](shortening-context-reuse.md) reduce discovery time
 57.63% and its complete measured phase 43.08% on all 615 saved events. Unit-reason,

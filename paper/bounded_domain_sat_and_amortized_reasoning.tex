@@ -11227,6 +11227,89 @@ The bounded recognizer remains optional, and the matched observations do not
 add a SAT category or a completed whole query. Useful automatic guards, miss
 handling, live routing and unrestricted resource bounds remain open.
 
+\subsection{Reusing failed searches under checked graph changes}
+\label{sec:shortening-negative-reach}
+
+A completed unsuccessful search can remain useful after the implication graph
+changes. Let $R$ contain a candidate literal $r$, exclude $\neg r$, and be
+closed under outgoing graph edges. Every path from $r$ stays in $R$, so none
+reaches $\neg r$. Edge deletion preserves this property even when $R$ is no
+longer the exact reachable set. An added edge $(u,v)$ threatens the certificate
+only when $u\in R$ and $v\notin R$. An inverse membership index identifies
+the affected sets, which are invalidated before the next lookup.
+
+The detector stores signed original-source literals, not the changing local
+variable indices. Every round reconstructs the graph from the checked source
+and guards and computes the exact edge difference. Only a completed BFS admits
+an internal certificate: queue exhaustion establishes that every outgoing edge
+of every reached vertex was inspected. Supplied sets instead receive a full
+closure check. A budget-interrupted search admits nothing, and an incomplete
+update clears the cache and stops discovery. These sets guide recognition;
+independent template, path and native proof checks still authorize every
+published refutation. The cache is local to one discovery call.
+
+We compare four policies on all 615 saved events, in two alternating isolated
+repetitions per target. The original 64-root policy recognizes 142 refuted
+events and 97 distinct local roots in 6.55291 seconds of discovery. Raising its
+root budget to 128 recognizes 211 events and 139 roots in 8.75225 seconds.
+Caching with a complete graph scan on every admission recognizes 199 events
+and 132 roots in 9.11839 seconds, with 26 edge-budget stops. Admitting completed
+BFS results directly recognizes 202 events and 134 roots in 8.62661 seconds.
+Including initial local binding and event serialization, the measured phase
+totals are 11.74840, 13.96009, 14.35201 and 13.84983 seconds, respectively.
+Initial acquisition, input loading, process startup and final audits remain
+additional. These two-run means do not establish a stable timing advantage.
+
+Completed-BFS reuse gains 60 events and 37 local roots over the original budget,
+without losing a refutation. All 37 roots already occur in ordinary whole-query
+archives. The larger uncached budget recognizes more at nearly the same observed
+cost, but neither policy dominates: four events are cache-only and thirteen
+are larger-budget-only. Their post-hoc union contains 215 events; obtaining that
+union through a live portfolio would require charging both discovery policies
+or constructing and evaluating a routing rule. The cache leaves 320 root-budget
+stops and 93 cases without a useful forced literal, all unresolved.
+
+The cached policy performs 30,784 fresh BFS traversals and 369,897 edge visits,
+compared with 53,118 and 564,931 at 128 uncached roots. It also performs 15,883
+cache hits, 10,274 invalidation checks, 1,118,390 graph-delta edge visits,
+310,254 index insertions and 156,191 removals. These costs explain why traversal
+counts alone are insufficient. Both cache variants retain 64 fresh roots,
+32 rounds and witness paths of at most 256 edges. Their per-attempt limit of
+16,384 checks covers BFS, admission and relevant invalidation checks. Graph
+construction, edge differences and sorting, index maintenance, lookup, source
+preparation and template checking remain additional. A hit does not consume a
+fresh-root slot, so these are not equal total-work budgets.
+
+With $M$ stored literal memberships and $E$ graph edges, the cache and inverse
+index occupy $O(M+E)$ words, including temporary old/new edge sets. The limit
+$M\leq16{,}384$ is not a process-memory cap; the largest observed $M$ is 1,456.
+Maximum census-worker peak RSS is 80,822,272 bytes at 64 uncached roots,
+81,608,704 at 128 roots and 83,378,176 with completed-BFS reuse. These measurements
+include other resident state. A graph change can invalidate every cached set,
+and discovering or rebuilding useful certificates remains charged.
+
+All 37 new local roots enter 222 isolated ordinary/full-context/selected-support
+workers, with two alternating repetitions per method. Both existing readers
+check every stored authority table and validate each root against its source.
+Ordinary solving takes 1.08273 seconds, full-context compilation 7.55455 and
+selected-support compilation 2.61820. Their complete measured phases take
+3.01905, 17.82919 and 5.29984 seconds, excluding prior discovery and process
+startup. Selected supports retain 3,153,584 record bytes, versus 25,419,955 for
+full contexts and 4,665,940 for ordinary search. They use 2,302 records, versus
+2,282 and 400: more small records can occupy less content space. Warm rechecks
+add no records. Native archives, cold replay and compression costs are retained;
+record-content bytes are not database pages or total experiment storage.
+
+Selected supports therefore save retained content but ordinary solving remains
+faster before discovery. Two instrumented disagreement cases still spend most
+discovery time preparing conditioned states, with normalization a large part;
+their cumulative profile entries overlap. The next target is a charged
+structural root priority or exact incremental conditioning rule, tested against
+both uncached budgets and held-out edits. All 1,839 solver tests pass and prior
+proof blocks and banks remain preserved. This optional local method establishes
+neither a whole-query speedup nor compact closure or polynomial resource bounds
+for arbitrary CNFs.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

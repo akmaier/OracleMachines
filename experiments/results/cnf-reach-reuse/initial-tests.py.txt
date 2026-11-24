@@ -1,0 +1,91 @@
+from collections import Counter,deque
+from itertools import product
+from pathlib import Path
+import random,tempfile,unittest
+from experiments import cnf_shortening_reach_reuse as reuse
+from experiments import cnf_guard_shortening_context as frozen
+from experiments import cnf_residual_dag as native
+from experiments.cnf_conditional_unit_support import transport
+from solver.test_cnf_guard_shortening import chain
+
+
+def reach(edges,root):
+    seen={root};queue=deque([root])
+    while queue:
+        v=queue.popleft()
+        for a,b in edges:
+            if a==v and b not in seen:seen.add(b);queue.append(b)
+    return seen
+
+
+class NegativeReachReuseTests(unittest.TestCase):
+    def test_exhaustive_edge_updates(self):
+        # All 64 directed graphs and all one-edge edits, on three vertices.
+        vertices=(-1,1,2);universe=[(a,b) for a in vertices for b in vertices if a!=b]
+        for mask in range(64):
+            edges={e for i,e in enumerate(universe) if mask>>i&1}
+            for edit in universe:
+                for root in (-1,1):
+                    cache=reuse.NegativeReachCache();c=Counter();self.assertTrue(cache.update(edges,c,1000))
+                    r=reach(edges,root)
+                    if -root in r:continue
+                    cache.remember(root,r,c);changed=edges^{edit};self.assertTrue(cache.update(changed,c,1000))
+                    if cache.contains(root,c):self.assertNotIn(-root,reach(changed,root))
+
+    def test_deletions_internal_additions_and_crossing_edges(self):
+        cache=reuse.NegativeReachCache();c=Counter();cache.update({(1,2)},c,100)
+        cache.remember(1,{1,2},c)
+        cache.update({(2,1)},c,100);self.assertTrue(cache.contains(1,c))
+        cache.update({(2,1),(2,-1)},c,100);self.assertFalse(cache.contains(1,c))
+        self.assertEqual(c['cache_invalidations'],1)
+
+    def test_capacity_and_partial_transition_do_not_authorize_reuse(self):
+        cache=reuse.NegativeReachCache(1);c=Counter();cache.update({(1,2)},c,100);cache.remember(1,{1,2},c)
+        self.assertFalse(cache.contains(1,c));self.assertEqual(c['cache_capacity_misses'],1)
+        cache=reuse.NegativeReachCache();cache.update(set(),c,100);cache.remember(1,{1},c)
+        self.assertFalse(cache.update({(1,-1)},c,0));self.assertFalse(cache.contains(1,c))
+        with self.assertRaises(ValueError):cache.remember(1,{1},c)
+        with self.assertRaises(ValueError):cache.remember(1,{1,-1},c)
+
+    def test_complete_programs_still_use_native_authority(self):
+        for depth in (1,2,4,8):
+            source,templates=chain(depth,8);c=Counter();p=reuse.discover(source,templates,c)
+            self.assertEqual(p['status'],'refuted');s=native.ResidualSolver()
+            try:self.assertFalse(s._read(reuse.compile_program(s,source,templates,p,Counter()))['answer'])
+            finally:s.close()
+            self.assertEqual(p,frozen.discover(source,templates,Counter()))
+            self.assertLessEqual(c['reach_edge_visits']+c['cache_admission_edge_checks']+c['reuse_invalidation_checks'],16384)
+
+    def test_random_graph_sequences_and_signed_source_coordinates(self):
+        rng=random.Random(242021)
+        for _ in range(50):
+            cache=reuse.NegativeReachCache();edges=set();c=Counter()
+            for _ in range(20):
+                edge=tuple(rng.sample((-3,-2,-1,1,2,3),2));edges^={edge};cache.update(edges,c,10000)
+                for root in (-3,-2,-1,1,2,3):
+                    if cache.contains(root,c):self.assertNotIn(-root,reach(edges,root))
+                    else:
+                        r=reach(edges,root)
+                        if -root not in r:cache.remember(root,r,c)
+        for _ in range(12):
+            source,ts=chain(4,4);vs=sorted({abs(l) for cl in source for l in cl});names=vs[:];rng.shuffle(names)
+            mapping={v:w*rng.choice((-1,1)) for v,w in zip(vs,names)};lit=lambda l:mapping[abs(l)]*(1 if l>0 else -1)
+            changed=native.normalize([[lit(l) for l in cl] for cl in source])[0];ts=[transport(t,mapping) for t in ts]
+            p=reuse.discover(changed,ts,Counter());self.assertEqual(p['status'],'refuted')
+            s=native.ResidualSolver()
+            try:self.assertFalse(s._read(reuse.compile_program(s,changed,ts,p,Counter()))['answer'])
+            finally:s.close()
+
+    def test_unlabelled_inputs_against_truth(self):
+        rng=random.Random(242022)
+        for _ in range(160):
+            source=native.normalize([[v*rng.choice((-1,1)) for v in rng.sample(range(1,6),rng.randrange(1,5))]
+                for _ in range(rng.randrange(1,18))])[0];p=reuse.discover(source,[],Counter())
+            if p['status']=='refuted':
+                self.assertFalse(any(native.holds(source,dict(enumerate(bits,1))) for bits in product((False,True),repeat=5)))
+                s=native.ResidualSolver()
+                try:self.assertFalse(s._read(reuse.compile_program(s,source,[],p,Counter()))['answer'])
+                finally:s.close()
+
+
+if __name__=='__main__':unittest.main()

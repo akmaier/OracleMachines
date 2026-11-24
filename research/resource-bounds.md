@@ -18,6 +18,18 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+The [negative-reach cache](negative-reach-reuse.md) stores closed sets in original
+source coordinates. Edge deletion preserves absence of a path; an added edge
+leaving a set invalidates it. With M literal memberships and E graph edges,
+cache storage is O(M+E) words including the inverse index and temporary edge
+sets. M is capped at 16,384 per discovery call; this is not a process-RAM cap.
+The 16,384 checking budget includes BFS, admission and relevant invalidation
+checks, but excludes graph construction/differences/sorting, index maintenance,
+source preparation and template validation. Hits do not consume fresh BFS slots.
+Changing graphs can invalidate every certificate. The measured coverage/cost
+tradeoff has no uniform improvement over ordinary budget expansion; native
+proof-content and persistent enclosing-wrapper bounds are unchanged.
+
 The [shared-context shortening experiment](shortening-context-reuse.md) removes
 per-guard canonicalization by checking against one immutable local context per
 conditioned state. Exact native proof records remain unchanged, so the previous

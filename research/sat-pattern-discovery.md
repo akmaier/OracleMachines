@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: discovery preparation is cheaper; coverage is unchanged
+## Latest evidence: exact negative-search reuse broadens bounded recognition
+
+[Closed reachable sets](negative-reach-reuse.md) let the shortening detector
+reuse completed failed searches after deletions and checked additions to the
+implication graph. Cache membership uses original source coordinates. Results
+rise from 142 to 202 refuted event patterns / 97 to 134 local roots on the saved
+census, without losing an earlier refutation. All new roots have native proofs,
+but ordinary whole-query search already stores them.
+
+The larger-budget uncached control recognizes 211 events at nearly the same
+time. Four events are cache-only and thirteen are larger-budget-only, so neither
+policy dominates. Reuse remains optional. The next discovery target is a charged
+structural root priority or exact incremental conditioning rule, tested on those
+disagreements and then held-out edits. Retain 320 root-budget stops and 93
+no-useful-literal cases as unresolved. Completed local recognition, automatic
+useful origin acquisition and uniform arbitrary-SAT coverage remain separate.
+
+## Previous evidence: discovery preparation is cheaper; coverage is unchanged
 
 [Shared contexts](shortening-context-reuse.md) reduce discovery time 57.63% while
 preserving all 615 programs and every matched native proof archive. This removes

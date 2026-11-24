@@ -5,7 +5,26 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: local exclusions need cheaper use and useful composition
+## Latest evidence: direct local reuse leaves the interaction gap
+
+[Conditional certificate transport](local-certificate-transport.md) replaces 148
+fresh local refutations with checked saved traces. Further assignments skip
+redundant steps or expose an earlier conflict, provided every surviving support
+clause occurs in the actual cofactor. Fresh probe propagation visits fall 17.19%
+on eight exposed edits. Solve time falls only 0.55%, complete-worker time rises
+0.20%, and all inputs remain unresolved. This adds a reusable proof operation,
+not broader root coverage or a default performance improvement.
+
+The next discovery question concerns guards with several unfixed assumptions:
+which interactions decompose into independently reusable local supports, which
+regions overlap or complement each other, and which residual regions still
+require fresh work? Inspect actual local cofactors with exact source bindings;
+a full-source exclusion cannot automatically certify a selected component.
+Retain the previous guard-frontier tree as negative comparison evidence.
+Automatic origin recognition and fresh evaluation remain open, as does any
+uniformly efficient classification of arbitrary CNF.
+
+## Previous evidence: local exclusions need cheaper use and useful composition
 
 [Live guard-guided probing](guard-probe-selection.md) now changes ordinary probe
 selection without retaining the census event graphs. Exact tracking controls

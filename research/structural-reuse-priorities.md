@@ -12,7 +12,32 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse local certificates under a fixed selection path
+## Current investigation: interactions beyond one remaining guard variable
+
+[Direct certificate transport](local-certificate-transport.md) reuses 148 local
+unit refutations on the same guided search path. It reduces fresh probe
+propagation visits 17.19%, but aggregate solve time only 0.55%; complete-worker
+time rises 0.20%. All eight exposed edits still stop at 256 dispatches. Native
+checked-cache totals fall 0.135%; SQLite totals fall just 8,192 bytes. Peak RSS
+shows no reduction. The mechanism remains optional, with all regressions saved.
+
+**Next target: discover how surviving guards with multiple unfixed assumptions
+interact at actual local residuals.** Group by exact current support/component,
+measure overlap and complementary regions, and determine where exact local
+composition closes an interaction versus where fresh acquisition remains.
+Require component-local support and checked recomposition. Do not repeat the
+existing guard-frontier tree solely because it covers more assignment mass;
+its comparisons already showed that more covered mass need not reduce work.
+
+Full-cofactor preparation, reason binding and native checking remain costs even
+when a local unit trace is known. Matching and opposite-branch acquisition also
+remain. An index or smaller local counter alone is not a total-cost result.
+Keep automatic origin discovery, general coordinate transport, fresh unlabelled
+evaluation and unrestricted expansion bounds explicit. Resume
+`experiments/results/cnf-guard-certificate-reuse/checkpoint.json`; the prior
+cumulative authority and alternate raw certificates remain preserved.
+
+## Previous investigation: reuse local certificates under a fixed selection path
 
 [The live guard selector](guard-probe-selection.md) removes duplicate tracking
 normalization and event retention. Tracking alone preserves native counters and

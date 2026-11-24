@@ -28,7 +28,14 @@ classes.
 
 ## Paper
 
-[Test guard-guided probes inside ordinary search](research/guard-probe-selection.md).
+[Reuse conditional certificates on the actual local cofactor](research/local-certificate-transport.md).
+Direct reuse replaces 148 fresh unit refutations on the same guided search path.
+Probe propagation work falls 17.19%, but solve time only 0.55%; complete-worker
+time rises 0.20%. All eight exposed edits remain unresolved. The implementation
+stays optional. Next: discover useful interactions among multi-assumption guards,
+with exact local support and composition checks. Previous results stay preserved.
+
+Previous: [Test guard-guided probes inside ordinary search](research/guard-probe-selection.md).
 The new tracker preserves native search with 1.27% aggregate solve overhead.
 Guard-guided selection instead costs 1.84% more overall, with mixed per-case
 results and no new completed inputs. The largest regression's profile puts

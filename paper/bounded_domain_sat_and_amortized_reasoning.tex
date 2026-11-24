@@ -10351,6 +10351,63 @@ native verification. Existing memo and ordered-normalization experiments remain
 necessary controls. Automatic origin recognition, useful composition of guarded
 regions and fresh evaluation remain open; no general expansion bound follows.
 
+\paragraph{Reuse the conditional unit trace on the same search path.}
+We next hold the guided selector fixed and transport its saved unit certificates
+into actual local cofactors. Let $H$ be a checked clause support refuted by units
+under guard $G$. A current source assignment $\rho$ must extend $G$, and every
+clause surviving in $H|_\rho$ must occur in the actual child after its injective
+coordinate map. This containment condition is necessary for a component or
+subset: a full-source exclusion alone is insufficient. Missing support or an
+exhausted transport allowance invokes the existing lazy probe.
+
+Transport follows the saved trace. A literal already fixed true is redundant.
+If its forced value instead conflicts with $\rho$, its reason yields an earlier
+conflict. Otherwise we retain its renamed literal and actual child clause index.
+Induction along the trace justifies the transformation: each preceding forced
+value is supplied by $\rho$ or by a retained step, so all other literals of the
+next reason remain false until the first conflict. The final conflict is handled
+in the same way. Native unit-proof checking validates each publication; no new
+proof rule or unchecked source hint enters the authority path. The opposite
+branch and existing split/model composition remain necessary.
+
+Four alternating repetitions on the same eight causal prefixes replace 148
+fresh local refutations. Separate traced reruns compare ordered visits,
+expansions, probe inputs and selector choices. Reuse skips 566 fixed steps,
+finds three earlier conflicts and retains 1,946 transported steps. Fresh probe
+propagation charges 3,009,722 rather than 3,634,460 literal visits, a 17.19\%
+reduction. Fresh trace entries fall from 15,039 to 10,453; that counter excludes
+the transported steps and is not total proof length. All 64 timed trials still
+stop at 256 dispatches, with no additional completed input.
+
+The sum of per-case solve means falls only 0.55\%, from 8.10222 to 8.05796 seconds.
+Per-case changes range from a 2.80\% reduction to a 2.10\% increase. Complete-worker
+mean totals instead rise 0.20\%, from 91.92411 to 92.11039 seconds, including
+restoration, accounting, warm/cold replay, serialization and compression.
+Setup and solve charge bank loading, checking, matching, source maps and transport;
+prior acquisition and final audits remain additional. These exposed comparisons
+establish neither a reliable end-to-end gain nor an advantage over the ordinary
+default solver, which is not remeasured in this pair.
+
+Native checked-cache endpoint totals decrease 0.135\%, from 157,044,382 to
+156,832,198 bytes. The compiled bank graph charges 252,495--406,059 bytes per
+worker before its extra references are released. Summed SQLite sizes decrease
+only 8,192 bytes; persisted payloads decrease 24,593 bytes. Mean process peak-RSS
+totals increase 1.67\%, so no peak-memory saving is established. These totals
+sum separate workers; they are not simultaneous storage requirements. Every
+previous cumulative payload and the alternative raw traces remain preserved.
+
+The reused proof still requires a full-cofactor position table and native checking.
+With $L$ child literal occurrences, $S$ support occurrences and $t$ trace steps,
+position hashing costs expected $O(L)$ work; support transformation costs
+$O(S+\sum_c |c|\log |c|)$ and trace transport $O(t)$. Preparation, guard scans,
+verification and persistence are additional. The implementation admits at most
+100,000 candidate checks and 1,000,000 reserved support literals per query;
+these caps do not bound all work or memory. It stays optional. Broader structural
+coverage now requires useful interactions among guards with several unfixed
+assumptions, exact component-local recomposition and explicit open regions.
+The earlier guard-frontier tree remains a control: larger excluded regions alone
+do not guarantee cheaper expansion. No unrestricted polynomial bound follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

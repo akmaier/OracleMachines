@@ -4,7 +4,20 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, live guard-guided probe selection):
+Latest expansion checkpoint (24 November, direct local certificate transport):
+[Reuse checked unit traces on the actual cofactor](local-certificate-transport.md).
+Four alternating comparisons reuse 148 local refutations with unchanged guided
+choices. Fresh probe propagation visits fall 17.19%, but solve time only 0.55%;
+complete-worker time rises 0.20%. No input completes. Native checked-cache totals
+fall 0.135%, SQLite totals only 8,192 bytes, and peak RSS does not fall. Exact
+support containment, fixed/name maps and native verification remain mandatory;
+missing support or exhausted allowances use the original lazy probe. Keep this
+optional. Next investigate interactions among multi-assumption guards at actual
+local residuals, including overlaps, complementarity, components and open regions;
+do not repeat the earlier guard-frontier tree without new structural evidence.
+Resume `experiments/results/cnf-guard-certificate-reuse/checkpoint.json`.
+
+Previous expansion checkpoint (24 November, live guard-guided probe selection):
 [Select probes without retaining diagnostic event graphs](guard-probe-selection.md).
 Four alternating comparisons on all eight exposed edits preserve the native
 256-dispatch budget. Tracking alone reproduces counters and SQLite files at

@@ -4,7 +4,21 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, deferred binary preparation):
+Latest expansion checkpoint (24 November, conditional supports from stopped origins):
+[Capture checked regions while retaining open branches](stopped-origin-supports.md).
+The seven unfinished origins yield 342 conditional templates; the completed
+control adds 53. All survive their edits, and the original search is unchanged.
+Cold diagnostics on 28/64 still stop: supports increase solve time 6.31%/5.62%
+over identical open trees and retain more state. No default changes. Next:
+measure shared and subsumed guard structure, avoiding the current expensive
+branch order; then reduce repeated source restriction and unit extraction.
+The census retains rolled-back candidates as misses and preserves causal
+prefixes, conditional proofs and both controls. Resume
+`experiments/results/cnf-stopped-origins/checkpoint.json` with the multipart
+reader. Validation distinguishes fresh dependency replay from preserved earlier
+full-history audits; previous authoritative payloads remain byte-identical.
+
+Previous expansion checkpoint (24 November, deferred binary preparation):
 [Normalize only when a binary contradiction needs publication](probe-binary-lazy.md).
 The target drops 67 residual normalizations to six with the same certificates.
 Four repetitions reduce solve mean 3.21% exposed / 3.57% fresh versus eager

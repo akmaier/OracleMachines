@@ -5,7 +5,32 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: unfinished origins are outside the whole-plan route
+## Latest evidence: conditional reuse from unfinished origins needs better composition
+
+[Passive source-bound capture](stopped-origin-supports.md) extracts 342 checked
+conditional unit supports from the seven stopped origins and 53 from the
+completed control. All survive the corresponding edit. Exact original counters,
+verdicts and retained proof payloads are unchanged, and extraction uses only
+the causal prefix before each edit. Rolled-back endpoints are recorded as
+unretained. Every template is independently checked and persisted as a
+conditional target proof; none gives an unfinished parent a verdict.
+
+The bounded trees leave explicit open regions. They reuse 31/15 support leaves
+on targets 28/64 but neither target completes. Relative to the same tree with
+all leaves open, solve mean rises 6.31%/5.62% and database size 1.06%/0.20%.
+Those negative controls separate conditional support use from branch selection
+and publication policy. All inputs are exposed; no population result follows.
+
+The next discovery question is how to represent and use the guarded exclusions
+without expanding a poor tree. Measure subsumption and shared prefixes among
+the saved assumptions, retain exact source supports, and compare bounded shared
+composition or checked guard-derived clauses. The existing tree's uniform
+closed-assignment mass is only 0.0254%--6.8146%; this is not instance coverage or
+a cost model. Remaining open regions, automatic origin recognition, variable
+transport and fresh evaluation remain obligations. Restriction/propagation
+sharing may reduce the separately measured extraction cost.
+
+## Previous evidence: unfinished origins are outside the whole-plan route
 
 [Deferred preparation](probe-binary-lazy.md) saves 3.57% fresh solve time versus
 eager binary closure while preserving exact certificates. It still costs 4.97%

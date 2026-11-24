@@ -12,7 +12,48 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse unfinished origins across small edits
+## Current investigation: use conditional exclusions without costly tree expansion
+
+[The unfinished-origin census](stopped-origin-supports.md) supplies 342 checked
+conditional templates from all seven stopped sources, plus 53 from completed
+control 27. Every template survives its paired edit. Capture leaves the original
+72-query search counters and six-table proof payloads unchanged. Missing tail
+certificates are explicit: source 60 has three candidates rolled back on stop.
+
+The first 129-node plans do not repay their cost. They use only 5--18 distinct
+templates each; the selected closed regions cover 0.0254%--6.8146% of uniform
+assignments, not SAT-instance coverage. Four alternating cold trials on edits
+28/64 consume 31/15 support leaves but still stop at 256 dispatches. Against
+identical trees with all certificates removed, solve time rises 6.31%/5.62%,
+complete-worker time 1.63%/1.22%, and database size 1.06%/0.20%. The ordinary
+solve route is faster still, but differs in handoff and stop-tail publication.
+No default changes and no new whole-CNF coverage are justified.
+
+**Next target: shared conditional exclusions and guard redundancy.** Start with
+the preserved 395 templates: quantify subsumed assumptions, shared prefixes
+and overlapping regions before choosing a representation. The current
+first-compatible tree wastes its bounded frontier on narrow contexts and forces
+a costly order. Investigate a bounded shared representation or checked clauses
+excluding the guarded assignments while retaining exact support invalidation.
+Measure remaining acquisition and construction cost; more local reuse alone
+did not save total work. Fresh unlabelled inputs are required after these
+exposed diagnostics, and no compact closure of arbitrary SAT is established.
+
+Second, independent extraction costs 7.5308 seconds across eight origins,
+in addition to 10.1341 seconds of observed source search and capture. Reusing
+source restriction/propagation prefixes is a concrete cost opportunity. The
+candidate cap rejects 138 further events; increasing it without better selection
+would add preparation and storage before demonstrating useful coverage.
+Selected pending graphs reach 10.31 MB despite the slot cap; it is not a byte
+or whole-process limit. Tail recovery is a smaller separate gap in this census.
+
+Resume `experiments/results/cnf-stopped-origins/checkpoint.json` using
+`experiments.cnf_archive_parts.restore_archive`. Conditional native proofs,
+failed development replay, same-tree controls and every previous payload remain
+preserved. The cumulative audit rechecks new nodes and dependencies, verifies
+old payload identity, and retains preceding full-history audits by their hashes.
+
+## Previous investigation: reuse unfinished origins across small edits
 
 [Deferred binary preparation](probe-binary-lazy.md) closes the identified waste:
 the exposed target normalizes six residuals instead of 67, with identical

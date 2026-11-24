@@ -28,7 +28,14 @@ classes.
 
 ## Paper
 
-[Defer binary preparation and retain the coverage frontier](research/probe-binary-lazy.md).
+[Capture conditional supports from unfinished origins](research/stopped-origin-supports.md).
+Seven unfinished sources yield 342 checked conditional templates that survive
+their edits. The first bounded plans still leave both tested targets unresolved:
+solve time rises 6.31% / 5.62% versus the same trees with open leaves. Keep the
+observer experimental. Next: compress and use the conditional exclusions without
+imposing the current expensive branch order; charge extraction and checking.
+
+Previous: [Defer binary preparation and retain the coverage frontier](research/probe-binary-lazy.md).
 Lazy preparation saves 3.57% fresh solve time versus eager binary closure, but
 remains 4.97% slower than handoff-only. Proof bytes are identical to eager closure;
 all three policies retain 34/48 fresh coverage. Keep the gate experimental.

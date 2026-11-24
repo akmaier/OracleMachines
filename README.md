@@ -28,7 +28,15 @@ classes.
 
 ## Paper
 
-[Select shared guard regions within the split budget](research/guard-frontier-selection.md).
+[Find missed probes at ordinary search contexts](research/guard-probe-census.md).
+Saved guards identify 394 independently checked negative cofactors; ordinary
+probing misses 260 of those polarities, including 232 on different variables.
+Search and native proof files remain identical. All eight targets still stop;
+capture adds about 32% solve time. Next: test a bounded live selector with cheaper
+matching and exact local checking. No runtime or whole-input coverage gain is
+claimed by this passive census; every previous result remains preserved.
+
+Previous: [Select shared guard regions within the split budget](research/guard-frontier-selection.md).
 The new plan cuts solve time 27.38% on one exposed edit but adds 4.66% on the
 other. Both remain unresolved, and ordinary solving is still faster. Larger
 closed assignment regions are useful structure, not a search-cost guarantee.

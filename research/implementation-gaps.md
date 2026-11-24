@@ -4,7 +4,23 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, shared guard-frontier selection):
+Latest expansion checkpoint (24 November, guard-guided probe census):
+[Use saved exclusions to identify probes ordinary search misses](guard-probe-census.md).
+Eight causal cold edits expose 648 ordinary probe contexts and 394 distinct
+unit-refutable cofactors. Ordinary probing does not try 260 of those polarities;
+232 use different variables. All 260 are absent at observation time. Every
+actual local child is independently checked, including 134 proposals from
+strict source subsets. A retained counterexample rejects automatic lifting of
+full-source negativity to a component. Search counters and SQLite files stay
+identical, and all targets still stop at 256 dispatches. Capture adds 31.71%
+aggregate solve time; off-line checking/storage adds 3.15887 seconds. Next:
+bounded live probe selection with cheaper matching and coordinate maintenance,
+native proof composition and order-matched controls. Provisioned origins and
+exposed inputs leave recognition and fresh evaluation open. Resume
+`experiments/results/cnf-guard-probe-census/checkpoint.json` with the multipart
+reader; preserve all prior authority and alternative proofs.
+
+Previous expansion checkpoint (24 November, shared guard-frontier selection):
 [Use the split allowance on shared guarded regions](guard-frontier-selection.md).
 The new bounded tree closes more assignment mass on all eight saved banks.
 Edit 64 improves 27.38% in solve mean and 1.80% in database size against the old

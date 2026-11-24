@@ -10262,6 +10262,46 @@ of the machinery; arbitrary multi-assumption exclusions still need their own
 justification, source invalidation and proof lifting. No general tractability
 or unrestricted complexity conclusion follows from the bounded selector.
 
+\paragraph{Use saved guards to identify untried probes.}
+We next observe ordinary probing on all eight saved origin/edit pairs without
+changing its choices. Each edit restores only the causal history immediately
+after its origin. A source-checked guard proposes a local variable and polarity
+when the current assignments match all but one of its assumptions, and the
+remaining variable is present. Exact source-coordinate maps bind this offer to
+the current residual. A source exclusion alone cannot refute a selected clause
+subset or component: removing clauses can restore satisfiability. We therefore
+check the actual local cofactor by unit propagation before constructing an
+existing native certificate. A test retains a counterexample to automatic
+lifting from a full source to its subset. The opposite branch remains open.
+
+The passive census visits 648 ordinary probing contexts and offers 394 distinct
+cofactors; all have local unit refutations. Ordinary probing does not try 260
+of those polarities at their recorded contexts, including 232 whose variable
+differs from its selected probe. All 260 are absent from the live database
+when that context is first observed. This presence check reads pending as well
+as committed rows without warming the proof cache; it is instrumented metadata,
+not proof authority. There are 248 contexts with an offer, and 134 of the
+cofactors come from strict source subsets. We save their independently checked
+certificates separately. They never enter either live search. Original and
+observed counters, verdicts and complete SQLite files agree exactly. All eight
+targets still stop at 256 dispatches.
+
+One cold pair per edit takes 7.82736 seconds in aggregate ordinary solve time
+and 10.30903 seconds with capture, a 31.71\% increase. Separate checking and
+certificate storage add 3.15887 seconds. The complete census takes 99.95011
+seconds including restoration, setup, serialization and archive creation;
+earlier acquisition and the later preservation audit are additional. Matching
+performs 32,044 guard checks and 262,032 guard-pair checks, while source-coordinate
+tracking adds further work. Captured event graphs reach 2,344,173 charged Python
+bytes per target, excluding templates, tracking frames and database memory.
+Neither the event limit nor the parent-key byte limit bounds all process memory.
+The separate 394-certificate bank uses 6,144,000 SQLite bytes. These diagnostic
+pairs establish a selection opportunity, not a faster live policy. A bounded
+selector must repay matching, checking and maintenance, and distinguish its
+effect from branch order. Provisioned origins, exposed inputs, general
+coordinate transport and fresh evaluation remain limitations. No whole-input
+coverage gain or unrestricted complexity consequence follows from this census.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

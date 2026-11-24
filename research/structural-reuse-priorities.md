@@ -12,7 +12,40 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: use exclusions at ordinary search contexts
+## Current investigation: select useful probes without expensive capture
+
+[The passive guard-probe census](guard-probe-census.md) finds a concrete target:
+648 ordinary contexts expose 394 distinct unit-refutable local cofactors.
+Ordinary probing misses 260 of those polarities; 232 concern a different
+variable, and all 260 are absent at the first probe of their recorded context.
+The 395 prior templates are explicitly provisioned and all survive their edits.
+Local checking is essential: full-source exclusions do not automatically refute
+a component or subset. Every actual candidate is independently checked.
+
+**Next target: a bounded live guard-guided selector at ordinary probe sites.**
+Use the existing unit/split/model proof path; charge recognition and source maps,
+check actual local cofactors, and retain an order-matched control. All eight
+inputs still stop at 256 dispatches in the passive census, with byte-identical
+native databases. These are opportunities to change selection, not demonstrated
+runtime or whole-input coverage improvements.
+
+The chief immediate cost is observer overhead: aggregate solve time rises
+7.82736 to 10.30903 seconds; separate checking/storage adds 3.15887 seconds.
+Live matching performs 32,044 guard checks and 262,032 guard-pair checks.
+Coordinate tracking and diagnostic serialization are also charged, so these
+figures do not isolate matching as the dominant subroutine. Avoid full event
+capture in a live implementation; investigate incremental matching with precise
+rollback, deleted-support and subset-binding rules. Compare total runtime,
+retained state and fresh whole-root coverage before adopting any default.
+
+Automatic origin discovery and fresh unlabelled evaluation remain open. The
+captured event graphs reach 2.34 MB, excluding banks and tracking frames; a key
+or event cap is not a whole-process bound. Existing source extraction sharing
+remains second. Resume `experiments/results/cnf-guard-probe-census/checkpoint.json`
+with the multipart reader. The cumulative audit preserves all prior payloads
+and raw alternatives, including the failed memory-charge audit assumption.
+
+## Previous investigation: use exclusions at ordinary search contexts
 
 [Shared guard-frontier selection](guard-frontier-selection.md) quantifies the
 saved structure: ten of 395 guards are subsumed within their origin, and five

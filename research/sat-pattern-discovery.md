@@ -5,7 +5,25 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: larger excluded regions do not guarantee cheaper acquisition
+## Latest evidence: guards identify untried local refutations
+
+[The guard-guided probe census](guard-probe-census.md) observes all eight saved
+origin/edit pairs without changing search. It finds 394 distinct negative local
+cofactors across 648 ordinary probe contexts. Ordinary probing does not try 260
+of those polarities; 232 use a different variable. Every proposal is checked on
+its actual local child. A source guard alone cannot certify a selected component
+or clause subset, as a preserved counterexample demonstrates.
+
+The observation introduces no additional whole-input coverage: all eight edits
+still stop at 256 dispatches with identical native proof files. Capture adds
+31.71% aggregate solve time, and posthoc checking/storage costs 3.15887 seconds.
+The next step is a bounded live selector that repays exact matching, coordinate
+maintenance and checking. Compare branch-order controls, preserve explicit open
+regions, and then test fresh unlabelled inputs. Provisioned source banks remain
+a recognition limitation; local opportunities do not give compact closure of
+arbitrary SAT or imply that their individual savings will add along a new path.
+
+## Previous evidence: larger excluded regions do not guarantee cheaper acquisition
 
 [Shared guard-frontier selection](guard-frontier-selection.md) improves the
 closed assignment mass of all eight saved banks at the same 129-node limit.

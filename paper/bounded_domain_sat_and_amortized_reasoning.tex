@@ -10204,6 +10204,64 @@ shared prefixes and checked conditional exclusions that do not force this
 expensive branch order. No compact closure or uniformly polynomial solution
 for unrestricted SAT follows.
 
+\paragraph{Allocate the split budget across shared guard regions.}
+A structural census of the 395 saved templates finds ten guards subsumed by
+another guard in the same origin bank, and five complementary pairs among
+the remaining inclusion-minimal guards. Separate tries of sorted guards use
+2,512 edges for 3,239 literal occurrences. This reveals shared prefixes, but
+does not measure a corresponding reduction in proof bytes. Alternative source
+supports remain necessary: a later deletion can invalidate a stronger exclusion
+while preserving a weaker one. No template is discarded from the stored bank.
+
+The next selector checks each certificate and its support containment against
+the current target, then allocates at most 129 tree nodes. In an open region
+fixing $d$ variables, a compatible guard with $r>0$ remaining assumptions can
+close mass $2^{-(d+r)}$ using $r$ additional splits. We prioritize that mass
+per split. Sibling regions retain explicit open leaves and may reuse the
+established prefix for further compatible guards. A guard already implied by
+the region closes it without a split. Exact rational priorities choose a greedy
+allocation; they do not certify a minimum-cost tree. The existing plan checker
+and native composer remain unchanged.
+
+All eight saved banks obtain greater closed assignment mass under the same
+output bound. Origin 63 rises from 1.0178\% to 27.3438\%, and control 27 from
+6.8146\% to 45.7031\%. All plans still contain open regions. Selected plan
+memory changes from 65,579 to 65,299 bytes for origin 63, but from 64,259 to
+117,391 bytes for control 27. The node bound does not cap the copied certificate
+bank, pending candidate lists, contexts, arithmetic or construction transients.
+Larger excluded assignment regions need not be cheaper to represent or solve.
+
+Four alternating serial comparisons retain the same exposed edits, causal
+prefixes and 256-dispatch allowance. We compare ordinary solving, the preceding
+supported tree, the new supported tree and the same new tree with certificates
+erased. Bank loading, containment, checking and construction are included in
+the new solve times; earlier source acquisition remains additional. The old
+controls reproduce their preceding counters and proof payloads exactly.
+
+For edit 64, solve mean falls from 1.00094 to 0.72692 seconds against the old
+tree, a 27.38\% reduction. All four paired runs improve. Complete-worker mean
+falls 3.68\%, and database size falls 1.80\%. Edit 28 instead rises from
+1.01138 to 1.05851 seconds, a 4.66\% regression; three of four pairs regress.
+Both targets still exhaust the native budget. The ordinary solver remains
+faster at 0.63441 and 0.57628 seconds, respectively. Its different session
+handoff and stop-tail transaction policy remain part of that route comparison.
+
+The new-tree open control takes 0.73161 seconds on 64 and 0.92879 seconds on 28.
+Thus supports alone save only 0.64\% on 64, with mixed pair signs, and cost
+13.97\% more on 28. Most of the target-64 improvement is associated with changed
+branch order. The supported plans reach only four and nineteen support leaves,
+respectively, before stopping, fewer than the earlier trees. On 64, two open
+regions consume 122 and 69 dispatches; the latter remains unfinished. These
+operation counts identify remaining acquisition, not a wall-time decomposition.
+
+The policy stays experimental. Closed uniform assignment mass is neither
+SAT-instance coverage nor a search-cost model. The next candidate is to use
+checked conditional exclusions at ordinary search contexts without imposing
+a separate tree. Existing source-checked binary trace-learning provides part
+of the machinery; arbitrary multi-assumption exclusions still need their own
+justification, source invalidation and proof lifting. No general tractability
+or unrestricted complexity conclusion follows from the bounded selector.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

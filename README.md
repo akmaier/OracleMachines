@@ -28,7 +28,14 @@ classes.
 
 ## Paper
 
-[Capture conditional supports from unfinished origins](research/stopped-origin-supports.md).
+[Select shared guard regions within the split budget](research/guard-frontier-selection.md).
+The new plan cuts solve time 27.38% on one exposed edit but adds 4.66% on the
+other. Both remain unresolved, and ordinary solving is still faster. Larger
+closed assignment regions are useful structure, not a search-cost guarantee.
+Next: apply checked exclusions at ordinary search contexts without forcing a
+separate tree. All previous templates, controls and proof results remain saved.
+
+Previous: [Capture conditional supports from unfinished origins](research/stopped-origin-supports.md).
 Seven unfinished sources yield 342 checked conditional templates that survive
 their edits. The first bounded plans still leave both tested targets unresolved:
 solve time rises 6.31% / 5.62% versus the same trees with open leaves. Keep the

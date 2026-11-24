@@ -1,0 +1,20 @@
+......E
+======================================================================
+ERROR: test_shorter_guard_wins_over_first_template (solver.test_cnf_guard_frontier.GuardFrontierTests.test_shorter_guard_wins_over_first_template)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_guard_frontier.py", line 47, in test_shorter_guard_wins_over_first_template
+    ts=[conditional_unit(source,[[1,True],[2,True],[3,True]],Counter()),
+        ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_stopped_support.py", line 38, in conditional_unit
+    check_template(result,counts)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_conditional_unit_support.py", line 34, in check_template
+    if [list(cl) for cl in sorted(members)]!=clauses:raise ValueError('Template clauses must be sorted and unique')
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Template clauses must be sorted and unique
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.015s
+
+FAILED (errors=1)

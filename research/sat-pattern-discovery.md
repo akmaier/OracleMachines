@@ -5,7 +5,29 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: conditional reuse from unfinished origins needs better composition
+## Latest evidence: larger excluded regions do not guarantee cheaper acquisition
+
+[Shared guard-frontier selection](guard-frontier-selection.md) improves the
+closed assignment mass of all eight saved banks at the same 129-node limit.
+Origin 63 rises from 1.02% to 27.34%, and control 27 from 6.81% to 45.70%.
+Every template is independently checked against the current target, every
+remaining region is explicitly open, and the native proof boundary is unchanged.
+The full bank remains saved for alternative clause-deletion outcomes.
+
+Cold target 64 improves 27.38% in solve mean against the old plan, while target
+28 regresses 4.66%. Both remain unresolved; ordinary solving is faster on both.
+Erasing the new tree's supports retains almost all of the target-64 gain, so
+the evidence mainly concerns branch selection. Closed assignment mass is
+neither SAT-instance coverage nor a search-cost guarantee.
+
+Only ten retained guards are subsumed and five complementary pairs remain
+among the per-origin inclusion-minimal guards. Next test how the conditional
+exclusions can constrain ordinary search without forcing a separate tree.
+Existing checked binary trace-learning offers relevant source-binding machinery;
+multi-assumption exclusions still require exact justification and proof lifting.
+Preserve open cases, invalidation, all controls and fresh-evaluation obligations.
+
+## Previous evidence: conditional reuse from unfinished origins needs better composition
 
 [Passive source-bound capture](stopped-origin-supports.md) extracts 342 checked
 conditional unit supports from the seven stopped origins and 53 from the

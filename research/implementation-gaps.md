@@ -4,7 +4,20 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, conditional supports from stopped origins):
+Latest expansion checkpoint (24 November, shared guard-frontier selection):
+[Use the split allowance on shared guarded regions](guard-frontier-selection.md).
+The new bounded tree closes more assignment mass on all eight saved banks.
+Edit 64 improves 27.38% in solve mean and 1.80% in database size against the old
+plan, but edit 28 regresses 4.66%. Both remain unresolved and ordinary solving
+is faster. The open-tree ablation attributes most of the improvement to branch
+order; guard mass is not a cost model. Next: use checked exclusions within
+ordinary search, reusing the existing trace-learning source checks where
+applicable and adding the missing multi-assumption justification. Preserve
+deletion alternatives and charge construction, checking and remaining acquisition.
+Resume `experiments/results/cnf-guard-frontier/checkpoint.json` with the multipart
+reader. Earlier proof payloads and all controls remain intact.
+
+Previous expansion checkpoint (24 November, conditional supports from stopped origins):
 [Capture checked regions while retaining open branches](stopped-origin-supports.md).
 The seven unfinished origins yield 342 conditional templates; the completed
 control adds 53. All survive their edits, and the original search is unchanged.

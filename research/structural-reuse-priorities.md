@@ -12,7 +12,59 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: use conditional exclusions without costly tree expansion
+## Current investigation: use exclusions at ordinary search contexts
+
+[Shared guard-frontier selection](guard-frontier-selection.md) quantifies the
+saved structure: ten of 395 guards are subsumed within their origin, and five
+complementary pairs remain among inclusion-minimal guards. Sorted-prefix tries
+would use 2,512 edges for 3,239 guard-literal occurrences; this is a structural
+count, not a proof-memory saving. Preserve alternative supports under deletions.
+
+The new greedy tree spends the same 129-node allowance on uniform covered mass
+per added split. All eight plans close more assignment mass; origin 63 improves
+from 1.02% to 27.34%. But both cold edits still stop at 256 dispatches. On edit
+64, solve mean falls 27.38% and complete-worker mean 3.68% versus the previous
+plan; its database is 1.80% smaller. Edit 28 instead costs 4.66% more solve time.
+The new supported route is still 14.58%/83.68% slower than ordinary solving on
+64/28. No default change or expanded whole-input coverage is justified.
+
+The same-new-tree open control isolates the support effect: only 0.64% solve
+saving on 64, with mixed pair signs, and a 13.97% regression on 28. Much of the
+target-64 gain is associated with branch order. Two open regions there consume
+122 and 69 of 256 native dispatches, with 152/151 variables and 613/600 clauses
+before acquisition. The second remains unfinished. These are operation counts,
+not wall-time attribution. Counting more closed assignments is an inadequate
+cost objective for the remaining search.
+
+**Next target: apply checked exclusions at natural search contexts.** Avoid
+imposing another guard tree on ordinary acquisition. Review
+`experiments/cnf_trace_learning.py` and `experiments/cnf_probe_learning.py` first:
+their existing source-checked binary implications are relevant machinery, but
+do not already implement exclusions from arbitrary multi-assumption guards.
+Test a bounded extension with exact support containment, no circular reasons,
+native proof lifting and deleted-clause invalidation. Retain the ordinary,
+old-tree and open-tree controls; fresh unlabelled evaluation and automatic
+origin discovery remain open. No compact closure of arbitrary SAT follows.
+
+A concrete first census is guard-guided failed-literal selection: at an ordinary
+context matching all but one assumption, offer that last variable to the
+existing `cnf_whole_lookahead.py` unit-certificate and split/model machinery.
+Check exact coordinate binding, count opportunities absent from current probing,
+and charge matching before implementation. This may avoid a new arbitrary-clause
+proof format; it supplies no verdict on the opposite branch and has no measured
+hit rate yet.
+
+Source restriction and unit-extraction sharing remain second: the previous
+census paid 7.53 seconds beyond source search/capture. Increasing the 256-event
+capture allowance or discarding dominated alternatives is not justified by
+this result. Output-tree size does not bound copied certificate banks, pending
+candidate lists, contexts or all process memory.
+
+Resume `experiments/results/cnf-guard-frontier/checkpoint.json` with
+`experiments.cnf_archive_parts.restore_archive`. All earlier authority payloads
+and alternative trial proofs remain preserved, including every negative result.
+
+## Previous investigation: use conditional exclusions without costly tree expansion
 
 [The unfinished-origin census](stopped-origin-supports.md) supplies 342 checked
 conditional templates from all seven stopped sources, plus 53 from completed

@@ -12,7 +12,48 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reduce the context carried by closure proofs
+## Current investigation: reuse unchanged proof history during publication
+
+[Support-subset composition](guard-support-composition.md) preserves 34 local
+closures while reducing solve time 3.61%, complete-worker time 1.26% and checked
+native state 5.17% against full-context witness composition. The compiled
+supports contain 2,433 literals versus 32,371 in their enclosing contexts; five
+native support roots are reused and 29 published. All eight whole queries remain
+unresolved. Solve time is still 4.60% above ordinary search, and edit 4 retains
+slightly more state than the witness gate. Keep this optional and preserve the
+regressions; smaller proof bodies do not guarantee fewer records or lower RSS.
+
+**Highest next publication target: retain the immutable parent archive and
+publish checked append records through a bound parent-plus-delta descriptor.**
+The preservation audit adds 173 native records but recompresses 2.10 GB in
+109.15 seconds, within 252.80 seconds of final auditing outside worker timings.
+This exceeds the remaining gate cost. Reuse existing `cnf_append_delta.py` and
+append-cursor contracts where compatible; check six-table schemas, parent
+identity, duplicate conflicts, dependencies and unchanged old payloads. Compare
+export, compressed storage, reconstruction and replay with the full snapshot,
+which must remain a preserved control. Distinguish logical equality from binary
+SQLite identity. This targets publication cost, not SAT coverage or query time.
+
+**Next solver target: bind the immutable local CNF and its clause positions once per
+witness attempt, then reuse that binding across selected guard certificates.**
+On edit 28, native composition falls from 0.17027 to 0.02096 cumulative seconds;
+total gate time falls to 0.06997. Selected support transport now takes 0.02328,
+including 0.02093 in RUP checking. The existing checker repeats canonical-form
+validation and source-position preparation for each hint. Retain every unit
+reason, conflict, coordinate and actual support check. Bindings must not survive
+a changed component, assignment or query; native publication remains checked.
+
+Full-query native verification and normalization remain much larger than this
+small gate phase, so compare total costs and misses. Profile times are nested,
+not additive. Ready compact cores also offer a later recognition opportunity
+before guard rediscovery, but older negative/partial-residual pools already
+preserve expensive matching failures. Require new evidence before another broad
+scan. Automatic origins, fresh unlabelled mixtures, wider interactions and
+uniform unrestricted bounds remain open. Resume
+`experiments/results/cnf-guard-support/checkpoint.json`; every earlier authority
+and alternative proof remains preserved.
+
+## Previous investigation: reduce the context carried by closure proofs
 
 [Witness-directed checking](guard-witness-deferral.md) preserves the eager gate's
 34 local closures and exact native databases while reducing local consequence

@@ -10613,6 +10613,101 @@ native replay. These operations are distinct. Fresh performance, automatic
 origin discovery, wider interactions and unrestricted expansion bounds remain
 open; no new Lean refinement is claimed.
 
+\subsection{Composing a contradiction on its clause support}
+
+The next implementation reduces the context carried by the native proof.
+For the two selected implication paths, collect their original binary clauses
+and the template clauses supporting each nonoriginal edge. Let their union be
+$H$. We check $H\subseteq C$ against the actual local formula $C$. The supported
+paths refute $H$, so a native refutation of $H$ suffices to refute $C$. The
+existing negative component rule records the selected clause indices and the
+checked child root. This inference requires no variable independence and gives
+no positive component join. The support is a sufficient subset, not a minimum
+unsatisfiable core, and no global minimization is performed.
+
+If $H=C$, the previous compiler remains in use. Otherwise, the solver checks
+for an existing native root of $H$, compiles one if necessary, and returns a
+subset wrapper for $C$. Path templates retain enclosing coordinates; each
+published native node uses its own canonical variable map. In particular, the
+final split variable must be rebound through $H$'s map. If the contradictory
+premise variable is absent from $H$, conditioning on it leaves $H$ itself.
+The first path already refutes $H$, and no split on a nonexistent variable is
+published. Exact membership and native checking remain mandatory.
+
+This representation can reuse one native support root across different
+enclosing formulas when their selected supports have the same normalized
+encoding. It does not recognize arbitrary signed isomorphisms or guarantee a
+small reusable support. Selection scans the full clause set, chosen edges and
+template supports; sorting, canonicalization, composition, verification, wrapper
+storage and cold replay remain charged. Temporary maps are additional to the
+reported template-bank size. New proof keys may alter later cache hits, so we
+do not assume equal execution paths or equal whole-query work.
+
+Two alternating repetitions compare ordinary search, the frozen witness gate
+and support composition on the same eight exposed edits and causal prefixes.
+All retain the 256-dispatch allowance and all remain unresolved. Solve-mean
+totals are 7.95907, 8.63729 and 8.32519 seconds, respectively. Support composition
+saves 3.61\% against the witness gate but remains 4.60\% above ordinary search.
+Complete-worker totals are 91.38423, 93.31281 and 92.13506 seconds, a 1.26\%
+saving against the witness gate and a 0.82\% overhead against ordinary search.
+These intervals retain restoration, preparation, accounting, replay,
+serialization and compression. Earlier acquisition and final audits are additional.
+All eight per-case solve means improve against the witness gate, while each
+remains above ordinary search. No default changes.
+
+The same 34 local contexts close, each with a proper support subset. Summing
+initial sizes once per compilation site, the full contexts contain 32,371
+literals and their supports 2,433, a 92.48\% reduction in that volume. This is
+not a reduction of all computation or memory traffic. The gate's restriction
+counter falls from 253,291 to 17,276 literal visits. Five existing support roots
+are reused and 29 published. The hit counter does not distinguish origin-prefix
+from within-query reuse. Candidate and guard-pair checks remain 33,006 and
+142,003, with 87 checked consequences and 635 inconclusive sites among 669.
+
+Checked-native-state endpoint totals fall from 164,001,110 to 155,521,837 bytes,
+a 5.17\% reduction against the witness gate, and SQLite totals fall from
+723,243,008 to 720,076,800 bytes. Both remain above ordinary search. Attempted
+native insertions rise from 3,093 to 3,101 while their payload bytes fall 4.65\%.
+Edit 4 retains 56,126 more checked bytes and 36,864 more SQLite bytes than the
+witness gate. Smaller supports therefore need not produce fewer records or
+improve every case. No reliable peak-RSS saving is established. Each wrapper
+still records its full local CNF; historical results remain append-only.
+
+The largest remaining regression, edit 28 at 10.33\%, is profiled separately.
+Seven closure compilations fall from 0.17027 to 0.02096 cumulative seconds,
+and the gate falls from 0.21922 to 0.06997. Support selection takes 0.00033.
+Selected consequence transport now takes 0.02328, including 0.02093 in local
+RUP checking. The next solver-specific experiment is to bind the immutable local CNF
+and its clause positions once per witness attempt, reusing that binding across
+selected certificates while retaining every reason, conflict, coordinate and
+support check. Changed components, assignments or queries require a new
+binding. Full-query native verification and normalization still take 0.66317
+and 0.52307 cumulative seconds; nested profile costs overlap. Large local
+savings must not be extrapolated to the full solver.
+
+Checks include all 256 binary-clause subsets against the full candidate bank,
+sparse and absent variables, unsupported edges, full-support fallback, unlabelled
+small formulas, and cold native reuse across two enclosing formulas. No new
+proof rule or Lean refinement is introduced. Fresh performance, automatic
+origin discovery and efficient broader core recognition remain open; earlier
+negative-pool matching regressions remain relevant. A compact support for every
+CNF, uniformly cheap recognition and unrestricted polynomial expansion do not
+follow from this experiment.
+
+Publication exposes a larger cost outside the query comparison. The final
+audit adds 173 native records while retaining every old payload, bringing the
+cumulative bank to 160,338 native records. Nevertheless, it recompresses the
+entire 2,102,272,000-byte database: gzip takes 109.15 seconds within a 252.80-second
+preservation audit. This is additional to the timed workers. The next
+publication experiment should reuse the immutable parent archive and export
+only checked append records, with bound parent identity, conflict checks,
+proof dependencies and exact cold reconstruction. Existing append-export
+machinery provides a starting point. Retain the full snapshot as a control,
+charge restoration and replay, and distinguish logical table equality from
+binary database identity. Such a saving would concern publication of expanded
+knowledge, not SAT query time or additional structural coverage; it is not
+implemented or measured here.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

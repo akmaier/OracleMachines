@@ -5,7 +5,31 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: discover the support behind a closed guard interaction
+## Latest evidence: compact supports survive different enclosing formulas
+
+[Native composition on clause supports](guard-support-composition.md) makes the
+selected contradictory support an explicit reusable native root. Exact
+membership and the existing negative subset rule lift it to the local CNF;
+variable overlap needs no independence assumption. Sparse names and an absent
+premise variable are handled explicitly. A dedicated cold test reuses one core
+across two enclosing formulas. This is a tested transfer mechanism, not general
+pattern recognition or an efficient arbitrary-CNF partition.
+
+Across the eight exposed edits, 34 closures use proper supports containing
+2,433 literals versus 32,371 in the enclosing contexts. Five existing support
+roots are reused, without distinguishing origin-prefix from within-query hits.
+Solve time falls 3.61% and checked native state 5.17% versus the witness gate,
+but ordinary search remains faster and no additional whole query completes.
+Next within the solver, share exact local context binding across selected
+certificates, the largest remaining gate phase in the profile. The final audit
+separately identifies a larger publication cost: recompressing 2.10 GB for 173
+new rows takes 109.15 seconds. A checked parent-plus-delta archive is therefore
+the highest immediate publication target; it would not improve SAT coverage. Preserve changed-context invalidation and
+native proof checks. Earlier negative/partial-residual pool failures remain
+relevant before trying broader ready-core retrieval. Automatic origin discovery,
+fresh inputs, wider guards and unrestricted closure remain open.
+
+## Previous evidence: discover the support behind a closed guard interaction
 
 [Deferring guard proof preparation](guard-witness-deferral.md) reduces checked
 local consequences 92.86% while preserving 34 closures and the eager policy's

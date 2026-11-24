@@ -28,7 +28,16 @@ classes.
 
 ## Paper
 
-[Prepare local proofs only for guard contradiction witnesses](research/guard-witness-deferral.md).
+[Compose guard proofs on their supporting clauses](research/guard-support-composition.md).
+The same 34 local closures now use compact native cores and checked subset
+wrappers. Solve time falls 3.61% and checked native state 5.17% versus full-context
+witness composition. Ordinary search remains faster by the measured 4.60%
+overhead; no additional whole query completes. The audit identifies a larger
+publication cost: 109 seconds recompressing old history for 173 new records.
+Next test a checked parent-plus-delta archive; shared local context binding is
+the next solver target. Prior results stay preserved and the gate stays optional.
+
+Previous: [Prepare local proofs only for guard contradiction witnesses](research/guard-witness-deferral.md).
 Deferring support checks preserves all 34 local closures and identical native
 databases while reducing checked consequences from 1,218 to 87. Solve time falls
 7.01% versus the eager gate, but remains 7.87% above ordinary search; no additional

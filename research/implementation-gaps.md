@@ -4,7 +4,25 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, witness-directed guard checking):
+Latest expansion checkpoint (24 November, composition on clause supports):
+[Reuse a compact native support and lift it to its enclosing CNF](guard-support-composition.md).
+The 34 local closures use supports with 2,433 literals instead of carrying
+32,371 full-context literals at those sites. Solve time falls 3.61% and checked
+native state 5.17% against witness composition; five support roots are reused.
+All eight exposed whole queries remain unresolved, solve time remains 4.60%
+above ordinary search, and edit 4 has a small storage regression. Keep this
+optional. The audit exposes a larger publication gap: 173 new native records
+trigger 109.15 seconds recompressing the 2.10 GB historical union. First test
+reusing that immutable parent with a checked append delta, charging export,
+restoration and proof replay; keep the full archive control and all older bytes.
+Within the solver, next share one exact local context binding across selected certificate
+checks: composition now takes 0.02096 cumulative seconds on edit 28, while
+support transport takes 0.02328, including 0.02093 in RUP checking. Reset binding
+on changed coordinates/components and keep native verification. Broader core
+retrieval must account for the preserved negative/partial-pool failures. Resume
+`experiments/results/cnf-guard-support/checkpoint.json`; prior results remain intact.
+
+Previous expansion checkpoint (24 November, witness-directed guard checking):
 [Defer local support proofs until a contradiction witness needs them](guard-witness-deferral.md).
 All 34 closures and native database bytes match the eager gate. Local consequence
 checks fall 1,218 to 87, solve time 7.01% and complete-worker time 1.74% against

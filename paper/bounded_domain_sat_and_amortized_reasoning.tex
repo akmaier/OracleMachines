@@ -10408,6 +10408,75 @@ assumptions, exact component-local recomposition and explicit open regions.
 The earlier guard-frontier tree remains a control: larger excluded regions alone
 do not guarantee cheaper expansion. No unrestricted polynomial bound follows.
 
+\paragraph{Compose surviving guards into a local refutation.}
+The next experiment examines interactions among guards with several unfixed
+assumptions. A support $H$ refuted under guard $G$ establishes the clause
+$\neg G$. At a local residual $C$, we restrict $H$ by the current source
+assignment and transport its coordinates. Every surviving support clause must
+occur in $C$, including when $C$ is a selected component or subset. We check
+the resulting clause by reverse unit propagation on this exact $C$. Twelve
+otherwise compatible supports fail local containment and remain recorded misses.
+For the conjunction $Q$ of admitted consequences,
+\[
+ C\models Q,\qquad \operatorname{Mod}(C)=\operatorname{Mod}(C\land Q).
+\]
+Thus $Q$ describes excluded regions exactly, while its satisfying region still
+requires $C$. A satisfiable consequence graph cannot replace the source formula.
+This uses established consequence checking and implication-graph reasoning;
+the experiment concerns their composition with our retained conditional supports.
+
+We inspect all 648 saved ordinary contexts, admitting 6,150 hint occurrences
+and retaining 6,100 distinct core-bound clauses on 616 cores. Of the occurrences,
+415 are units, 894 are binary, and 4,841 are wider. We compare original clauses
+of width at most two, short guard consequences, and their union. The combined
+fragment is contradictory at 61 distinct local CNFs. Forty have opposite unit
+guards, one more closes through unit guards and original binary clauses, and
+20 require binary guards beyond that baseline. The other 587 fragments are
+satisfiable and contain 735 candidate events using binary guards beyond original
+binary paths and direct unit hints. These are local events, not distinct solved
+inputs. Path-set differences on the contradictory fragments are recorded
+separately: inconsistency already entails every literal, so these differences
+cannot be counted as new logical backbones. Guard graph components can share
+proof-support variables; their disconnection alone does not justify independent
+source solving.
+
+Each implication path is compiled into a native refutation of the actual source
+cofactor. Its edge certificate refutes the branch that violates that implication;
+the other branch follows the path. Existing unit and split rules compose these
+branches. Opposite paths for one variable and a final split refute $C$ itself.
+Both native proof readers check the resulting certificates. Thirty-six closures
+concern the full conditioned source, and 25 concern strict subsets. Three local
+roots were absent after the earlier query exhausted its shared 256-dispatch
+budget. Their new certificates do not establish completion of the originating
+whole query. All fresh individual comparators also finish within their own
+256-dispatch allowance.
+
+Single alternating cold pairs reveal a useful distinction. Compiling 116
+individual exclusions takes 1.64082 seconds versus 1.50819 seconds for fresh
+acquisition, an 8.79\% regression, with 740 versus 545 proof rows. An adaptive
+follow-up, frozen after the census and including every contradictory context,
+compiles all 61 complete local refutations in 0.80095 versus 1.26243 seconds,
+36.55\% less acquisition time, with 413 versus 470 rows. These diagnostic pairs
+use provisioned supports and empty native stores. They are not a statistically
+established end-to-end improvement. Discovery and checked transport add 7.32573
+seconds, and hint persistence adds 7.94632 seconds. The initial study takes
+37.59133 seconds including selected acquisitions and warm/cold replay; the
+closure follow-up takes another 5.29129 seconds. Earlier acquisition and the
+final historical audit remain additional.
+
+The hint bank occupies 117,690,368 SQLite bytes, or 2,751,615 compressed bytes,
+for 67,898,593 logical key/payload bytes. It repeats full core identities and
+bodies across hints; sharing the 616 cores is an opportunity, not an implemented
+memory saving. Enumerating all paths costs $O(V(V+E))$ for $V$ graph variables
+and $E$ edges. A contradiction-only gate can instead use one SCC pass and two
+witness paths, after preparation. A $k$-edge path uses $O(k)$ native unit/split
+nodes, but their full cofactor bodies and child keys can occupy $O(kL)$ literal
+slots for a source with $L$ literal occurrences. Recognition, checking and
+persistence remain charged. The next test is a selective live gate, beginning
+with opposite units and admitting supported binary interactions where useful.
+Wider guards, automatic origin discovery, fresh evaluation and a uniform bound
+for arbitrary CNF remain open. No solver default changes in this experiment.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

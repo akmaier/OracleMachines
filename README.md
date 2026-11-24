@@ -28,7 +28,15 @@ classes.
 
 ## Paper
 
-[Reuse conditional certificates on the actual local cofactor](research/local-certificate-transport.md).
+[Compose guard interactions into checked local refutations](research/guard-interactions.md).
+Saved consequences refute 61 local CNFs; 20 need binary guards, and three roots
+were absent after the earlier shared query budget stopped. Local closure
+acquisition takes 36.55% less time in single cold pairs, but discovery and storage
+costs remain additional; isolated exclusion compilation regresses. No new whole
+input completes. Next: a selective live closure check, starting with opposite
+unit guards. All proofs, comparisons and prior solver results stay preserved.
+
+Previous: [Reuse conditional certificates on the actual local cofactor](research/local-certificate-transport.md).
 Direct reuse replaces 148 fresh unit refutations on the same guided search path.
 Probe propagation work falls 17.19%, but solve time only 0.55%; complete-worker
 time rises 0.20%. All eight exposed edits remain unresolved. The implementation

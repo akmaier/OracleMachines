@@ -4,7 +4,21 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, direct local certificate transport):
+Latest expansion checkpoint (24 November, local guard interaction composition):
+[Compose conditional consequences into native local refutations](guard-interactions.md).
+All 648 saved contexts are checked; 61 distinct local CNFs receive composed
+native refutations. Forty close from opposite unit guards, one more from units
+and original binary clauses, and 20 need binary guards. Three roots were absent
+after the preceding query's shared budget, but no whole-query completion is
+established. Local closure compilation takes 0.80095 versus 1.26243 seconds in
+single cold pairs; isolated exclusions instead regress 8.79%. Discovery and
+hint persistence add 7.32573 and 7.94632 seconds. Next test a selective live
+closure gate with exact local support checks; defer wider guards and all-backbone
+enumeration. Repeated core bodies in the 117,690,368-byte hint bank are a second
+target. All 1,749 tests and 105 focused tests pass; old payloads remain intact.
+Resume `experiments/results/cnf-guard-interactions/checkpoint.json`.
+
+Previous expansion checkpoint (24 November, direct local certificate transport):
 [Reuse checked unit traces on the actual cofactor](local-certificate-transport.md).
 Four alternating comparisons reuse 148 local refutations with unchanged guided
 choices. Fresh probe propagation visits fall 17.19%, but solve time only 0.55%;

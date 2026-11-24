@@ -5,7 +5,33 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: direct local reuse leaves the interaction gap
+## Latest evidence: guard interactions yield checked local closures
+
+[Composing local guard consequences](guard-interactions.md) adds an exact
+interaction description. Each admitted guard consequence is RUP-checked on the
+actual residual C after source restriction and coordinate transport. If Q is
+their conjunction, C entails Q and has exactly the models of C together with Q.
+The region satisfying Q still requires C; a satisfiable consequence graph is
+not a replacement solver. Components of Q can share support variables in C.
+
+The short-clause fragment contradicts 61 distinct local residuals. Every closure
+now has a native source-level unit/split certificate; 20 need binary guards
+beyond original binary clauses and unit guards. Three roots were absent after
+the earlier query exhausted its shared budget. This is local coverage, with no
+new whole-query completion. Among the other 587, satisfiable fragments there
+are 735 candidate events using binary guards beyond existing binary paths and
+direct unit hints. Counts from contradictory graphs are kept separate: path
+differences there are not new logical backbones.
+
+Next test a selective live closure gate, beginning with opposite unit guards
+(40 closures), then original binary interaction (one more), then binary guards
+(20 more). Local closure acquisition is promising, but all-context discovery
+and persistence dominate its measured saving, and isolated-exclusion compilation
+regresses. Wider guards, fresh origin recognition, cold use and full query costs
+remain explicit. No efficient closure for every CNF or unrestricted polynomial
+expansion bound follows. Resume the guard-interactions checkpoint.
+
+## Previous evidence: direct local reuse leaves the interaction gap
 
 [Conditional certificate transport](local-certificate-transport.md) replaces 148
 fresh local refutations with checked saved traces. Further assignments skip

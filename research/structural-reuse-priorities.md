@@ -12,7 +12,38 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: interactions beyond one remaining guard variable
+## Current investigation: selectively close local guard contradictions
+
+[Guard interaction composition](guard-interactions.md) refutes 61 distinct local
+CNFs from the 648 saved ordinary contexts. Forty have opposite unit guards,
+one more closes with unit guards and original binary clauses, and 20 require
+binary guards. Three local roots were absent after the earlier shared query
+budget stopped. No new whole input is completed by this offline experiment.
+
+**Next target: a selective live local-contradiction gate.** Test opposite unit
+guards first, then their interaction with original binary clauses, then supported
+binary guards. Transport only active short guards and use an SCC contradiction
+test with two witness paths. Avoid eagerly checking/storing all wider guards or
+enumerating every forced value. Retain the original clauses, exact local support
+containment and native unit/split recomposition. Compare whole-query cost and
+completion against ordinary search and the guided policy, including misses and
+cold replay. Provisioned origins and fresh unlabelled evaluation remain gaps.
+
+In single cold paired diagnostics, all 61 local closures take 0.80095 seconds
+to compile versus 1.26243 seconds to acquire afresh, with 413 versus 470 proof
+rows. However, 116 isolated exclusions take 8.79% longer to compile. Discovery
+costs 7.32573 seconds and hint persistence 7.94632 seconds; these are additional
+to acquisition. This supports testing a selective gate, not adopting a default
+or claiming an end-to-end speedup. All controls and regressions stay preserved.
+
+The exact-core hint bank repeats 616 cores across 6,100 hints and occupies
+117,690,368 SQLite bytes. Core-body sharing is the second target; no memory
+saving has yet been implemented. Guard graph components can share proof-support
+variables, so they do not automatically define independent source components.
+Resume `experiments/results/cnf-guard-interactions/checkpoint.json`; the cumulative
+native bank and separate hint evidence remain distinct, preserved authorities.
+
+## Previous investigation: interactions beyond one remaining guard variable
 
 [Direct certificate transport](local-certificate-transport.md) reuses 148 local
 unit refutations on the same guided search path. It reduces fresh probe

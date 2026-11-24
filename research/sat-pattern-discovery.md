@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: a satisfiable guard graph can still exclude a source clause
+## Latest evidence: supported wide-clause covers compile, but cost more
+
+[The new cover experiment](guard-clause-covers.md) checks every selected learned
+edge against its actual source, compiles under strengthened branch contexts and
+publishes ordinary native proof nodes. It certifies 15 proposals/11 distinct
+local roots, nine at formerly inconclusive gate sites. All 11 are eventually
+known to ordinary search. No whole-query outcome changes.
+
+Full-context composition is slower and larger than ordinary local solving;
+keep it offline and reduce proofs to their necessary shared supports. Seven
+additional proposals from relaxed discovery limits remain explicitly unchecked.
+The next broader pattern is partial clause shortening using checked forced
+literals, which can expose new binary interactions even before an entire wide
+clause is covered. Its iteration, source supports, acquisition and total costs
+must be measured on unresolved contexts and fresh mixtures. None of this gives
+an efficient complete partition of arbitrary SAT.
+
+## Previous evidence: a satisfiable guard graph can still exclude a source clause
 
 [The shared-context experiment](guard-context-reuse.md) reduces repeated local
 checking but leaves all eight whole queries unresolved and provides no complete

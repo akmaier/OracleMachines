@@ -12,7 +12,34 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: expand guard composition beyond SCC contradictions
+## Current investigation: broaden interactions without copying full contexts
+
+[Learned-guard clause covers](guard-clause-covers.md) now have bounded discovery
+and checked native compilation. Fifteen supported proposals yield 11 distinct
+local refutations; nine first appear at old inconclusive gate sites. All 11
+are eventually retained by ordinary search, and all eight whole queries remain
+unresolved. This is broader local recognition, not a new completed query.
+
+**Highest measured composition cost:** full-context cover proofs take 0.52823
+seconds and 2,098,251 record bytes versus ordinary search's 0.17208 seconds and
+745,772 bytes on those 11 contexts. Independent support binding adds 0.08092
+seconds. Keep the policy offline. Compile only the union of selected path
+supports and the actual wide clause, then lift and reuse that checked subset.
+
+**Next coverage gap:** root/edge relaxation finds seven extra proposals on the
+600 bounded misses; check their supports and prior availability first. Investigate
+partial exclusions that shorten wider source clauses into new binary relations,
+with shared support proofs and exact iteration. Target unresolved contexts and
+fresh mixtures; the current 11 examples already succumb to ordinary search.
+The eight-root budget stopped 520 of 615 graph calls, but more proposals alone
+do not establish useful or economical coverage.
+
+Resume `experiments/results/cnf-guard-covers/checkpoint.json`. It retains 38
+audited supplemental archives; the 160,338-record cumulative bank and layered
+reader remain unchanged. The failed local audit's native-only assumption was
+corrected to check all six authorities, with the failed source and outputs kept.
+
+## Previous investigation: expand guard composition beyond SCC contradictions
 
 [Shared local contexts](guard-context-reuse.md) preserve all 34 local closures
 and exact native archives while reducing normalization visits 60.88% and clause

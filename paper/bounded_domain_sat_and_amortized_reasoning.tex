@@ -10902,6 +10902,87 @@ unchanged, so there is no new proof acquisition or publication layer. This
 experiment improves reuse inside a recognizer without establishing broader
 whole-query coverage or a uniformly efficient partition of arbitrary CNF.
 
+\subsection{Covering wider source clauses with learned consequences}
+\label{sec:guard-clause-covers}
+
+The separating example above now has a bounded recognizer and a native proof
+compiler. Let $F$ be the actual local CNF and let $G$ contain original binary
+clauses and checked binary consequences of $F$. A path from $\ell$ to
+$\neg\ell$ in $G$ establishes $F\models\neg\ell$. If such a path exists for
+every literal of an actual source clause $C\in F$, then $F$ is unsatisfiable.
+The graph $G$ may still be satisfiable. This elementary consequence argument
+extends the recognizer; it does not establish a new tractable class covering
+every CNF.
+
+The compiler checks the identity of $C$, every selected edge and its actual
+source support before publishing a node. It then considers the literals of $C$
+in order. The true branch is refuted by its implication path under the preceding
+false assignments; the final all-false branch empties $C$. Along a path, checked
+unit supports refute excluded branches. Restriction and canonicalization bind
+each strengthened context again. Supports may overlap, and synthetic graph
+indices never become native source-clause indices. Only the existing empty,
+unit and split certificates are published. There is no new Lean refinement of
+the Python compiler.
+
+The diagnostic recognizer reuses the satisfiable graph's model to screen source
+clauses, then searches for the required paths. Its bounds are clause width
+eight, eight distinct roots, 4,096 visited edges and path length 256 per call.
+Completed searches share results within that graph; a budget stop is never
+stored as absence. Source scanning, graph preparation, verification and event
+retention remain charged. For a supplied valid cover of width $w$ and path
+lengths $p_i$, compilation creates $O(w+\sum_i p_i)$ native nodes before reuse.
+Each node can retain a full conditioned source and full child keys. A small
+implication witness therefore need not yield a small proof archive or faster
+execution. Obtaining useful supported paths for arbitrary input remains open.
+
+On the eight exposed queries, the read-only census records 615 satisfiable
+graph calls and proposes 15 covers. Every proposal has valid local supports.
+Four repeat an exact root, leaving 11 distinct local refutations. Nine first
+occur at sites where the old guard gate was inconclusive; the other two occur
+at sites it later closes. Ordinary search eventually retains all 11 roots.
+All eight whole queries remain unresolved at 256 dispatches. Thus the result
+extends local recognition without adding a final query result on this workload.
+
+Two alternating serial repetitions give summed per-case mean solve times of
+8.42563 seconds for the context control and 8.69481 seconds with observation.
+Complete-worker means sum to 93.66518 and 93.83854 seconds. Observation itself
+takes 0.18786 seconds and saves 12,269,105 bytes of diagnostic JSON. Native
+archives and existing proof/search counters remain identical. An earlier run
+overlapped the test suite; it is preserved but excluded from these timing
+aggregates. The observer is diagnostic, not a live optimization.
+
+The local follow-up compares all 11 distinct supported CNFs from empty stores,
+alternating arm order. Ordinary search resolves every one within its dispatch
+cap. Its total solving time is 0.17208 seconds, compared with 0.52823 seconds
+for full-context cover compilation. Independent source binding and support
+transport add 0.08092 seconds to the latter. Stored authority records total
+77 versus 185, with 745,772 versus 2,098,251 bytes of keys and payloads.
+The comparisons include ordinary equivalence authorities as well as native
+proofs. The first audit incorrectly required a native root for an equivalence
+result; its source and failure are retained. The corrected audit checks all
+six authority tables with both existing snapshot readers.
+
+Controlled covers of widths three, four, six and eight, including signed
+permutations and two alternating repetitions, also regress. Summed fresh
+solving and cover-compilation times are 0.03238 and 0.10670 seconds; separate
+template/model preparation adds 0.01571 seconds. Record bytes total 100,144
+and 164,386. Warm calls reuse checked roots without publishing nodes.
+Missing-support and satisfiable edits remain misses. These short diagnostics
+support correctness and preserve the cost regression, not a general runtime
+ratio. All 1,807 solver tests and 37 focused tests pass; previous proof blocks
+are unchanged. The checkpoint retains 38 independently audited supplemental
+archives without replacing the cumulative history or causal prefixes.
+
+The eight-root limit stops 520 graph calls. Relaxing root and edge limits on
+the 600 bounded misses finds seven further proposals in 0.19358 seconds,
+retaining the width and path-length limits. Those proposals remain unchecked
+and are not counted as certified coverage. The next composition target is
+the selected path supports together with the actual wide clause, lifted as
+a reusable negative subset. For broader coverage, checked forced literals
+may shorten source clauses and expose further binary interactions before
+an entire clause is excluded. Exact iteration, useful acquisition and total
+costs remain open. The current cover recognizer stays offline.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

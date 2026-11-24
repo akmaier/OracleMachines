@@ -4,7 +4,19 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, shared guard contexts):
+Latest expansion checkpoint (24 November, learned-guard clause covers):
+[Check wider source clauses against learned binary consequences](guard-clause-covers.md).
+Fifteen supported proposals produce 11 distinct native local refutations; nine
+first occur at old inconclusive gate sites. Ordinary search eventually retains
+all 11, and all eight whole queries remain unresolved. Local compilation is
+3.07 times slower before support checking and uses 2.81 times the record bytes;
+keep offline. Next compile and reuse only necessary supports, check the seven
+additional relaxed-discovery proposals, and investigate exact partial clause
+shortening on unresolved cases. All new proofs are preserved in checkpoint-linked
+supplemental archives; the cumulative layered bank is unchanged. Resume
+`experiments/results/cnf-guard-covers/checkpoint.json`.
+
+Previous expansion checkpoint (24 November, shared guard contexts):
 [Prepare a local source once for selected guard certificates](guard-context-reuse.md).
 The same 87 hints use 34 context preparations. Normalization visits fall 60.88%
 and position visits 56.63%, but complete-worker time rises 0.28% against support

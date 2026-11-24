@@ -1,0 +1,10 @@
+followed target 1 candidate records 0 compiled roots 0
+followed target 4 candidate records 1 compiled roots 1
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/close_cnf_guard_covers.py", line 111, in <module>
+    if __name__=='__main__':run(Path(sys.argv[1]))
+                            ~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/close_cnf_guard_covers.py", line 84, in run
+    if root is not None:assert root==event['root'] and not s._read(root)['answer']
+                                                           ~~~~~~~~~~~~~^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable

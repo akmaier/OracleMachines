@@ -18,6 +18,19 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+The [24 November learned-guard cover experiment](guard-clause-covers.md) adds
+a conditional bound for another sufficient UNSAT recognizer. Given checked
+binary consequences and paths excluding each literal of an actual width-w
+source clause, compilation creates O(w + sum of path lengths) native nodes
+before reuse. Each node may still retain a full conditioned source and full
+child keys. Discovery, template acquisition, source checking, canonicalization,
+verification and persistence are additional costs. The implemented diagnostic
+caps width at 8, BFS roots at 8, visited edges at 4,096 and path length at 256 per
+graph call; source/model/graph scans and retained events lie outside those
+traversal caps. This is neither a uniform bound for arbitrary SAT nor a bound
+on whole-process memory. Its new proof banks supplement the prior cumulative
+archive and are explicitly referenced by the new checkpoint.
+
 We must keep four accounts separate:
 
 1. **Proved abstract work:** parser operations, search nodes, intermediate-state

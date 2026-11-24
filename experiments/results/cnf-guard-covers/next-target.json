@@ -1,0 +1,48 @@
+{
+  "closure_summary": {
+    "already_closed_sites": 2,
+    "compiled": 11,
+    "distinct_old_inconclusive_roots": 9,
+    "duplicate": 4
+  },
+  "decision": {
+    "findings": [
+      "Fifteen supported covers yield eleven distinct local refutations, nine first seen at old inconclusive sites. All eleven are eventually present in the ordinary query archive.",
+      "Full-context cover composition costs 0.52823 seconds and 2098251 record bytes versus 0.17208 seconds and 745772 bytes for ordinary local search; add 0.08092 seconds for independent support binding.",
+      "Relaxed root/edge discovery produces seven further unverified proposals, retained as candidates only."
+    ],
+    "limitations": [
+      "No whole-query completion gain, automatic-origin guarantee, new Lean refinement or arbitrary-SAT polynomial bound.",
+      "Supplemental proof banks are persistent and checkpoint-referenced but not merged into the cumulative or causal history."
+    ],
+    "next": [
+      "Compile the union of selected path supports and the actual wide clause; reuse the resulting native negative subset across enclosing contexts.",
+      "Check the seven extra proposals and existing-root availability, then investigate partial wide-clause shortening by checked forced literals on unresolved cases and fresh mixtures."
+    ],
+    "policy": "Keep offline; no live default change"
+  },
+  "event_counts": {
+    "candidate_covers": 15,
+    "graph_edges": 110496,
+    "graphs": 615,
+    "missing_graph_variables": 55384,
+    "model_satisfied_clauses": 45876,
+    "peak_reach_vertices": 14735,
+    "reach_edge_visits": 47629,
+    "reach_roots": 4714,
+    "root_limit_stops": 520,
+    "root_reuses": 1376,
+    "screened_clauses": 6054,
+    "source_clauses": 132158,
+    "source_literals": 371630,
+    "unreachable_roots": 4304,
+    "wide_clauses": 107314,
+    "witness_edges": 313
+  },
+  "expanded_discovery": {
+    "candidates": 7,
+    "events": 600,
+    "limitation": "Adaptive offline diagnostic on bounded misses: relax root/edge limits to cover all graph roots and traversals, retain width 8 and path length 256. Extra proposals are not support-checked or compiled here; no live policy or absence guarantee beyond the retained bounds.",
+    "seconds": 0.1935757463797927
+  }
+}

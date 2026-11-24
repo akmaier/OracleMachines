@@ -28,7 +28,15 @@ classes.
 
 ## Paper
 
-[Share source preparation across selected guard proofs](research/guard-context-reuse.md).
+[Compile wider source-clause covers from learned guards](research/guard-clause-covers.md).
+Fifteen supported proposals yield 11 distinct local refutations, nine at previously
+inconclusive gate sites. Ordinary search eventually finds all of them. The new
+compiler is slower and stores more state, so it stays offline. Next reduce proof
+contexts to shared supports and investigate partial clause shortening. The new
+checkpoint preserves 38 supplemental proof archives and the unchanged cumulative
+history.
+
+Previous: [Share source preparation across selected guard proofs](research/guard-context-reuse.md).
 Normalization visits fall 60.88% and position-map visits 56.63%, with identical
 native proofs. Complete-worker time nevertheless rises 0.28%; keep this optional.
 A preserved 12-variable counterexample identifies the next coverage gap: learned

@@ -1,0 +1,435 @@
+{
+  "added": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 1
+  },
+  "archive": {
+    "compressed_bytes": 1351,
+    "database_bytes": 20480,
+    "database_sha256": "307490f38a56d076ae100bf868ffc820ef82962df909a01029c1b03b418dc351",
+    "path": "experiments/results/cnf-cover-support/stream-support-padded-3-64/history.sqlite3.gz",
+    "seconds": 0.00037954095751047134,
+    "sha256": "9db463eb59da407f5db74fe946c427aed13dcb9c74544edab6ad195efde00fd3"
+  },
+  "authority_tables": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 12
+  },
+  "case": "padded-3-64",
+  "cold_seconds": 0.0017035841010510921,
+  "complete_seconds": 0.0032122088596224785,
+  "counts": {
+    "guard_input_literals": 36,
+    "normalization_literal_visits": 167,
+    "support_root_hits": 1,
+    "support_selected_clauses": 13,
+    "support_selected_hints": 6,
+    "support_selected_literals": 39,
+    "support_source_clauses": 77,
+    "support_source_literals": 167,
+    "support_wrappers": 1,
+    "template_checked_reason_literals": 36,
+    "templates_checked": 6
+  },
+  "digest": {
+    "cnf_affine_negative_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_core_discovery_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v2": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v3": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_residual_v1": "038fe676f58b5970c3bc41a694752c1ac61a7963b884041ef25883bf0b4989f5"
+  },
+  "mode": "support",
+  "readers": {
+    "CanonicalVerifySnapshot": {
+      "canonical_form_calls": 12,
+      "canonical_form_clauses": 176,
+      "canonical_form_literal_visits": 418,
+      "canonical_form_name_variables": 164,
+      "canonical_form_reuses": 12,
+      "certificate_memory_hits": 14,
+      "database_lookups": 12,
+      "key_serialized_bytes": 3394,
+      "normalization_literal_visits": 428,
+      "read_bytes": 3897,
+      "restriction_literal_visits": 276,
+      "search_disk_hits": 12,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 418,
+      "verification_trace_literals": 6,
+      "verified_nodes": 12
+    },
+    "SnapshotResidualSolver": {
+      "certificate_memory_hits": 14,
+      "database_lookups": 12,
+      "key_serialized_bytes": 3394,
+      "normalization_literal_visits": 846,
+      "read_bytes": 3897,
+      "restriction_literal_visits": 276,
+      "search_disk_hits": 12,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 418,
+      "verification_trace_literals": 6,
+      "verified_nodes": 12
+    }
+  },
+  "record_bytes": 5551,
+  "result": {
+    "metrics": {
+      "certificate_disk_hits": 9,
+      "certificate_memory_hits": 4,
+      "certificate_serialized_bytes": 865,
+      "cover_support_root_disk_hits": 1,
+      "database_lookups": 11,
+      "inserted_bytes": 1464,
+      "inserted_nodes": 1,
+      "key_serialized_bytes": 3131,
+      "normalization_literal_visits": 775,
+      "read_bytes": 2503,
+      "restriction_literal_visits": 276,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 347,
+      "verification_trace_literals": 6,
+      "verified_nodes": 11
+    },
+    "result": {
+      "answer": false,
+      "authority": "native",
+      "model": null,
+      "root": "cnf-residual-v1:[[-12,-3,6],[-11,-6,-3],[-10,-2,5],[-9,-5,-2],[-8,-1,4],[-7,-4,-1],[-6,-3,11],[-5,-2,9],[-4,-1,7],[-3,6,12],[-2,5,10],[-1,4,8],[1,2,3],[1,13],[1,14],[1,15],[1,16],[1,17],[1,18],[1,19],[1,20],[1,21],[1,22],[1,23],[1,24],[1,25],[1,26],[1,27],[1,28],[1,29],[1,30],[1,31],[1,32],[1,33],[1,34],[1,35],[1,36],[1,37],[1,38],[1,39],[1,40],[1,41],[1,42],[1,43],[1,44],[1,45],[1,46],[1,47],[1,48],[1,49],[1,50],[1,51],[1,52],[1,53],[1,54],[1,55],[1,56],[1,57],[1,58],[1,59],[1,60],[1,61],[1,62],[1,63],[1,64],[1,65],[1,66],[1,67],[1,68],[1,69],[1,70],[1,71],[1,72],[1,73],[1,74],[1,75],[1,76]]"
+    },
+    "status": "unsat"
+  },
+  "solve_seconds": 0.000997417140752077,
+  "source": [
+    [
+      -12,
+      -3,
+      6
+    ],
+    [
+      -11,
+      -6,
+      -3
+    ],
+    [
+      -10,
+      -2,
+      5
+    ],
+    [
+      -9,
+      -5,
+      -2
+    ],
+    [
+      -8,
+      -1,
+      4
+    ],
+    [
+      -7,
+      -4,
+      -1
+    ],
+    [
+      -6,
+      -3,
+      11
+    ],
+    [
+      -5,
+      -2,
+      9
+    ],
+    [
+      -4,
+      -1,
+      7
+    ],
+    [
+      -3,
+      6,
+      12
+    ],
+    [
+      -2,
+      5,
+      10
+    ],
+    [
+      -1,
+      4,
+      8
+    ],
+    [
+      1,
+      2,
+      3
+    ],
+    [
+      1,
+      13
+    ],
+    [
+      1,
+      14
+    ],
+    [
+      1,
+      15
+    ],
+    [
+      1,
+      16
+    ],
+    [
+      1,
+      17
+    ],
+    [
+      1,
+      18
+    ],
+    [
+      1,
+      19
+    ],
+    [
+      1,
+      20
+    ],
+    [
+      1,
+      21
+    ],
+    [
+      1,
+      22
+    ],
+    [
+      1,
+      23
+    ],
+    [
+      1,
+      24
+    ],
+    [
+      1,
+      25
+    ],
+    [
+      1,
+      26
+    ],
+    [
+      1,
+      27
+    ],
+    [
+      1,
+      28
+    ],
+    [
+      1,
+      29
+    ],
+    [
+      1,
+      30
+    ],
+    [
+      1,
+      31
+    ],
+    [
+      1,
+      32
+    ],
+    [
+      1,
+      33
+    ],
+    [
+      1,
+      34
+    ],
+    [
+      1,
+      35
+    ],
+    [
+      1,
+      36
+    ],
+    [
+      1,
+      37
+    ],
+    [
+      1,
+      38
+    ],
+    [
+      1,
+      39
+    ],
+    [
+      1,
+      40
+    ],
+    [
+      1,
+      41
+    ],
+    [
+      1,
+      42
+    ],
+    [
+      1,
+      43
+    ],
+    [
+      1,
+      44
+    ],
+    [
+      1,
+      45
+    ],
+    [
+      1,
+      46
+    ],
+    [
+      1,
+      47
+    ],
+    [
+      1,
+      48
+    ],
+    [
+      1,
+      49
+    ],
+    [
+      1,
+      50
+    ],
+    [
+      1,
+      51
+    ],
+    [
+      1,
+      52
+    ],
+    [
+      1,
+      53
+    ],
+    [
+      1,
+      54
+    ],
+    [
+      1,
+      55
+    ],
+    [
+      1,
+      56
+    ],
+    [
+      1,
+      57
+    ],
+    [
+      1,
+      58
+    ],
+    [
+      1,
+      59
+    ],
+    [
+      1,
+      60
+    ],
+    [
+      1,
+      61
+    ],
+    [
+      1,
+      62
+    ],
+    [
+      1,
+      63
+    ],
+    [
+      1,
+      64
+    ],
+    [
+      1,
+      65
+    ],
+    [
+      1,
+      66
+    ],
+    [
+      1,
+      67
+    ],
+    [
+      1,
+      68
+    ],
+    [
+      1,
+      69
+    ],
+    [
+      1,
+      70
+    ],
+    [
+      1,
+      71
+    ],
+    [
+      1,
+      72
+    ],
+    [
+      1,
+      73
+    ],
+    [
+      1,
+      74
+    ],
+    [
+      1,
+      75
+    ],
+    [
+      1,
+      76
+    ]
+  ]
+}

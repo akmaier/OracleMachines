@@ -1,0 +1,306 @@
+{
+  "added": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 1
+  },
+  "archive": {
+    "compressed_bytes": 3185,
+    "database_bytes": 49152,
+    "database_sha256": "2b476539462c8f63044abb6116fbdec78d2ea7fba6542bdd6a1c328da32db933",
+    "path": "experiments/results/cnf-cover-support/stream-support-padded-6-16/history.sqlite3.gz",
+    "seconds": 0.0008986671455204487,
+    "sha256": "f285fc6ab984bca491fda028c5b5a09b76c159d687f600e0bb7c3487e54a412c"
+  },
+  "authority_tables": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 23
+  },
+  "case": "padded-6-16",
+  "cold_seconds": 0.004363249987363815,
+  "complete_seconds": 0.007307792082428932,
+  "counts": {
+    "guard_input_literals": 72,
+    "normalization_literal_visits": 110,
+    "support_root_hits": 1,
+    "support_selected_clauses": 25,
+    "support_selected_hints": 12,
+    "support_selected_literals": 78,
+    "support_source_clauses": 41,
+    "support_source_literals": 110,
+    "support_wrappers": 1,
+    "template_checked_reason_literals": 72,
+    "templates_checked": 12
+  },
+  "digest": {
+    "cnf_affine_negative_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_core_discovery_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v2": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v3": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_residual_v1": "e3bd1f0e77445e81bb72825b96626f5b1cb9c6e512bff219af9c3379fa0d9d9f"
+  },
+  "mode": "support",
+  "readers": {
+    "CanonicalVerifySnapshot": {
+      "canonical_form_calls": 23,
+      "canonical_form_clauses": 663,
+      "canonical_form_literal_visits": 1592,
+      "canonical_form_name_variables": 640,
+      "canonical_form_reuses": 23,
+      "certificate_memory_hits": 28,
+      "database_lookups": 23,
+      "key_serialized_bytes": 10751,
+      "normalization_literal_visits": 1112,
+      "read_bytes": 12518,
+      "restriction_literal_visits": 1002,
+      "search_disk_hits": 23,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 1592,
+      "verification_trace_literals": 12,
+      "verified_nodes": 23
+    },
+    "SnapshotResidualSolver": {
+      "certificate_memory_hits": 28,
+      "database_lookups": 23,
+      "key_serialized_bytes": 10751,
+      "normalization_literal_visits": 2704,
+      "read_bytes": 12518,
+      "restriction_literal_visits": 1002,
+      "search_disk_hits": 23,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 1592,
+      "verification_trace_literals": 12,
+      "verified_nodes": 23
+    }
+  },
+  "record_bytes": 18751,
+  "result": {
+    "metrics": {
+      "certificate_disk_hits": 18,
+      "certificate_memory_hits": 7,
+      "certificate_serialized_bytes": 877,
+      "cover_support_root_disk_hits": 1,
+      "database_lookups": 20,
+      "inserted_bytes": 1296,
+      "inserted_nodes": 1,
+      "key_serialized_bytes": 7631,
+      "normalization_literal_visits": 1876,
+      "read_bytes": 7869,
+      "restriction_literal_visits": 1002,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 803,
+      "verification_trace_literals": 12,
+      "verified_nodes": 20
+    },
+    "result": {
+      "answer": false,
+      "authority": "native",
+      "model": null,
+      "root": "cnf-residual-v1:[[-24,-6,12],[-23,-12,-6],[-22,-5,11],[-21,-11,-5],[-20,-4,10],[-19,-10,-4],[-18,-3,9],[-17,-9,-3],[-16,-2,8],[-15,-8,-2],[-14,-1,7],[-13,-7,-1],[-12,-6,23],[-11,-5,21],[-10,-4,19],[-9,-3,17],[-8,-2,15],[-7,-1,13],[-6,12,24],[-5,11,22],[-4,10,20],[-3,9,18],[-2,8,16],[-1,7,14],[1,2,3,4,5,6],[1,25],[1,26],[1,27],[1,28],[1,29],[1,30],[1,31],[1,32],[1,33],[1,34],[1,35],[1,36],[1,37],[1,38],[1,39],[1,40]]"
+    },
+    "status": "unsat"
+  },
+  "solve_seconds": 0.0018903748132288456,
+  "source": [
+    [
+      -24,
+      -6,
+      12
+    ],
+    [
+      -23,
+      -12,
+      -6
+    ],
+    [
+      -22,
+      -5,
+      11
+    ],
+    [
+      -21,
+      -11,
+      -5
+    ],
+    [
+      -20,
+      -4,
+      10
+    ],
+    [
+      -19,
+      -10,
+      -4
+    ],
+    [
+      -18,
+      -3,
+      9
+    ],
+    [
+      -17,
+      -9,
+      -3
+    ],
+    [
+      -16,
+      -2,
+      8
+    ],
+    [
+      -15,
+      -8,
+      -2
+    ],
+    [
+      -14,
+      -1,
+      7
+    ],
+    [
+      -13,
+      -7,
+      -1
+    ],
+    [
+      -12,
+      -6,
+      23
+    ],
+    [
+      -11,
+      -5,
+      21
+    ],
+    [
+      -10,
+      -4,
+      19
+    ],
+    [
+      -9,
+      -3,
+      17
+    ],
+    [
+      -8,
+      -2,
+      15
+    ],
+    [
+      -7,
+      -1,
+      13
+    ],
+    [
+      -6,
+      12,
+      24
+    ],
+    [
+      -5,
+      11,
+      22
+    ],
+    [
+      -4,
+      10,
+      20
+    ],
+    [
+      -3,
+      9,
+      18
+    ],
+    [
+      -2,
+      8,
+      16
+    ],
+    [
+      -1,
+      7,
+      14
+    ],
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    [
+      1,
+      25
+    ],
+    [
+      1,
+      26
+    ],
+    [
+      1,
+      27
+    ],
+    [
+      1,
+      28
+    ],
+    [
+      1,
+      29
+    ],
+    [
+      1,
+      30
+    ],
+    [
+      1,
+      31
+    ],
+    [
+      1,
+      32
+    ],
+    [
+      1,
+      33
+    ],
+    [
+      1,
+      34
+    ],
+    [
+      1,
+      35
+    ],
+    [
+      1,
+      36
+    ],
+    [
+      1,
+      37
+    ],
+    [
+      1,
+      38
+    ],
+    [
+      1,
+      39
+    ],
+    [
+      1,
+      40
+    ]
+  ]
+}

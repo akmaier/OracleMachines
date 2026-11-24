@@ -28,7 +28,14 @@ classes.
 
 ## Paper
 
-[Compile wider source-clause covers from learned guards](research/guard-clause-covers.md).
+[Reuse clause-cover proofs through their selected supports](research/guard-cover-support.md).
+Across 18 local CNFs, compilation takes 75.30% less time and stores 86.16% fewer
+record bytes than full-context covers. Six persisted expansions each add only
+one wrapper. All seven pending proposals are now checked; ordinary search already
+finds all 18 roots. Preparation costs and small-case regressions remain, so this
+stays optional. Next: exact partial clause shortening with reusable proof supports.
+
+Previous: [Compile wider source-clause covers from learned guards](research/guard-clause-covers.md).
 Fifteen supported proposals yield 11 distinct local refutations, nine at previously
 inconclusive gate sites. Ordinary search eventually finds all of them. The new
 compiler is slower and stores more state, so it stays offline. Next reduce proof

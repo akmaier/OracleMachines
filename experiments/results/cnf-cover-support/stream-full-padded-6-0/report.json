@@ -1,0 +1,247 @@
+{
+  "added": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 9
+  },
+  "archive": {
+    "compressed_bytes": 6133,
+    "database_bytes": 122880,
+    "database_sha256": "09c029987900766c4405f1ed35433e8d3458dd1877673f9f29972f005f1cb713",
+    "path": "experiments/results/cnf-cover-support/stream-full-padded-6-0/history.sqlite3.gz",
+    "seconds": 0.002884290646761656,
+    "sha256": "1e64c6c1da19dd7a9535e4b7f02cab4fce4af345a1b26bfb249cf43cdb64c262"
+  },
+  "authority_tables": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 40
+  },
+  "case": "padded-6-0",
+  "cold_seconds": 0.017678082920610905,
+  "complete_seconds": 0.025779000017791986,
+  "counts": {
+    "cover_splits": 3,
+    "existing_nodes": 4,
+    "guard_input_literals": 72,
+    "normalization_literal_visits": 78,
+    "path_splits": 3,
+    "position_clauses": 54,
+    "position_literals": 150,
+    "published_nodes": 9,
+    "restriction_literal_visits": 1014,
+    "template_checked_reason_literals": 72,
+    "templates_checked": 12,
+    "transport_literal_visits": 18,
+    "transport_trace_steps": 3,
+    "transported_leaves": 3,
+    "validated_covers": 1
+  },
+  "digest": {
+    "cnf_affine_negative_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_core_discovery_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v2": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v3": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_residual_v1": "e204e0d94de167b8d23730908e69b7bfc98c0934b8d7aa00566761eb086213dd"
+  },
+  "mode": "full",
+  "readers": {
+    "CanonicalVerifySnapshot": {
+      "canonical_form_calls": 40,
+      "canonical_form_clauses": 2740,
+      "canonical_form_literal_visits": 3747,
+      "canonical_form_name_variables": 2700,
+      "canonical_form_reuses": 40,
+      "certificate_memory_hits": 54,
+      "database_lookups": 40,
+      "key_serialized_bytes": 38087,
+      "normalization_literal_visits": 4302,
+      "read_bytes": 41369,
+      "restriction_literal_visits": 5670,
+      "search_disk_hits": 40,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 3747,
+      "verification_trace_literals": 24,
+      "verified_nodes": 40
+    },
+    "SnapshotResidualSolver": {
+      "certificate_memory_hits": 54,
+      "database_lookups": 40,
+      "key_serialized_bytes": 38087,
+      "normalization_literal_visits": 8049,
+      "read_bytes": 41369,
+      "restriction_literal_visits": 5670,
+      "search_disk_hits": 40,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 3747,
+      "verification_trace_literals": 24,
+      "verified_nodes": 40
+    }
+  },
+  "record_bytes": 59313,
+  "result": {
+    "metrics": {
+      "certificate_disk_hits": 9,
+      "certificate_memory_hits": 15,
+      "certificate_serialized_bytes": 5366,
+      "database_lookups": 19,
+      "guard_cover_existing_disk_hits": 1,
+      "guard_cover_existing_memory_hits": 3,
+      "inserted_bytes": 7414,
+      "inserted_nodes": 9,
+      "key_serialized_bytes": 8986,
+      "normalization_literal_visits": 2202,
+      "read_bytes": 2503,
+      "restriction_literal_visits": 1002,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 693,
+      "verification_trace_literals": 12,
+      "verified_nodes": 19
+    },
+    "result": {
+      "answer": false,
+      "authority": "native",
+      "model": null,
+      "root": "cnf-residual-v1:[[-24,-6,12],[-23,-12,-6],[-22,-5,11],[-21,-11,-5],[-20,-4,10],[-19,-10,-4],[-18,-3,9],[-17,-9,-3],[-16,-2,8],[-15,-8,-2],[-14,-1,7],[-13,-7,-1],[-12,-6,23],[-11,-5,21],[-10,-4,19],[-9,-3,17],[-8,-2,15],[-7,-1,13],[-6,12,24],[-5,11,22],[-4,10,20],[-3,9,18],[-2,8,16],[-1,7,14],[1,2,3,4,5,6]]"
+    },
+    "status": "unsat"
+  },
+  "solve_seconds": 0.004977167118340731,
+  "source": [
+    [
+      -24,
+      -6,
+      12
+    ],
+    [
+      -23,
+      -12,
+      -6
+    ],
+    [
+      -22,
+      -5,
+      11
+    ],
+    [
+      -21,
+      -11,
+      -5
+    ],
+    [
+      -20,
+      -4,
+      10
+    ],
+    [
+      -19,
+      -10,
+      -4
+    ],
+    [
+      -18,
+      -3,
+      9
+    ],
+    [
+      -17,
+      -9,
+      -3
+    ],
+    [
+      -16,
+      -2,
+      8
+    ],
+    [
+      -15,
+      -8,
+      -2
+    ],
+    [
+      -14,
+      -1,
+      7
+    ],
+    [
+      -13,
+      -7,
+      -1
+    ],
+    [
+      -12,
+      -6,
+      23
+    ],
+    [
+      -11,
+      -5,
+      21
+    ],
+    [
+      -10,
+      -4,
+      19
+    ],
+    [
+      -9,
+      -3,
+      17
+    ],
+    [
+      -8,
+      -2,
+      15
+    ],
+    [
+      -7,
+      -1,
+      13
+    ],
+    [
+      -6,
+      12,
+      24
+    ],
+    [
+      -5,
+      11,
+      22
+    ],
+    [
+      -4,
+      10,
+      20
+    ],
+    [
+      -3,
+      9,
+      18
+    ],
+    [
+      -2,
+      8,
+      16
+    ],
+    [
+      -1,
+      7,
+      14
+    ],
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  ]
+}

@@ -1,0 +1,1 @@
+Before any timed worker, inspection found that the first harness draft assumed ordinary search would finish every local case. The final harness preserves unresolved capped results and their partial archives, and does not resume them during a warm-hit measurement. This was a preflight correction, not an observed solver failure. Both draft source and protocol are retained.

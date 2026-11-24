@@ -10983,6 +10983,85 @@ may shorten source clauses and expose further binary interactions before
 an entire clause is excluded. Exact iteration, useful acquisition and total
 costs remain open. The current cover recognizer stays offline.
 
+\subsection{Reusing a cover proof through its selected support}
+\label{sec:cover-support-reuse}
+
+The preceding compiler repeatedly carries the full local source through its
+splits. We now form $H$ from the actual covered clause, the original binary
+clauses used by its paths, and the source clauses supporting its selected learned
+edges. Membership, guard traces, paths and clause identity are checked before
+publication. Each selected consequence remains entailed by $H$, so the cover
+refutes $H\subseteq F$. We normalize $H$, transport the guards and paths into
+its coordinates, and compile with the frozen cover compiler. One existing
+negative subset certificate then lifts that checked root to $F$. Additional
+clauses may share variables with $H$; no independence premise is required.
+
+Reuse requires the exact normalized support key and a checked native proof.
+Changed source clauses and coordinates are rebound for every input. If $H=F$,
+or a required path/assumption coordinate is absent from $H$, the implementation
+explicitly falls back to full-context compilation. It does not find a minimum
+support or a universal canonical representation. With $S_F,S_H$ denoting
+literal-occurrence sizes and $q$ cover width plus total path length, the
+successful subset branch has an explicit proof-content envelope
+$O(qS_H+S_F)$ rather than $O(qS_F)$. Reusing one checked $H$ across enclosing
+formulas retains $O(qS_H+\sum_i S_{F_i})$ content. Each wrapper still stores its
+enclosing source; discovery, normalization, checking, lookup and persistence
+remain charged. These are word-size content envelopes, not physical RAM bounds.
+
+All seven pending relaxed-budget proposals now have valid source supports and
+distinct roots. Together with the original eleven, this gives 18 local cases;
+ordinary search already retains every root. We compare ordinary search,
+full-context compilation and selected-support compilation in fresh isolated
+workers with two alternating serial repetitions. Eight supplied-core controls
+bring the comparison to 156 workers. All six authority tables are checked by
+both existing snapshot readers, and the original eleven ordinary/full controls
+reproduce the preceding database bytes exactly.
+
+Across the 18 local cases, summed per-case mean solve/compile times are
+0.48743, 0.77840 and 0.19227 seconds for ordinary, full and support modes.
+Complete-worker totals are 1.36568, 2.01897 and 0.56481 seconds. Full-context
+record bytes fall from 3,179,203 to 440,066 with selected supports, or 86.16\%,
+while compile time falls 75.30\%. Record counts rise from 275 to 290, so smaller
+bodies explain the saving. The supports contain 1,534 of 18,631 enclosing
+literal occurrences. SQLite bytes fall from 5,001,216 to 942,080; the sum of
+per-case mean peak RSS falls only about 4.51\%. This is not a simultaneous
+process peak or an 86.16\% RAM reduction.
+
+Per-case discovery and independent source binding add 0.14476 seconds to the
+support arm, giving 0.33703 seconds versus 0.48743 for ordinary local solving.
+Earlier acquisition, discovery misses, process startup and shared orchestration
+remain additional. The original eleven-case subgroup still regresses after
+those measured costs: 0.21138 versus 0.17884 seconds. The seven added cases give
+0.12565 versus 0.30859 seconds. Supplied width-three/six cores with
+0, 16, 64 and 256 extra overlapping clauses also retain a regression against
+ordinary solving, at 0.05406 versus 0.02949 seconds. There is no new live policy
+or whole-query runtime claim.
+
+An append-only stream closes and reopens the store between those eight
+controlled contexts. Six later contexts reuse a checked support and add exactly
+one wrapper each, with no new core proof node. The full/support modes retain
+70/25 records and 143,234/25,737 record bytes; solve/compile totals are
+0.06721/0.01778 seconds and complete-worker totals 0.23051/0.05084 seconds.
+Every prior row remains byte-identical. This reduces new proof duplication
+without shrinking already published history. The checkpoint preserves 89
+audited supplemental archives, all earlier banks and the cumulative native
+union. All 1,815 solver tests and 45 focused tests pass, with earlier proof
+blocks unchanged and no new Lean refinement.
+
+A six-variable separation now identifies the next coverage target. Four
+ternary gadget clauses establish $(\neg x\lor a)$ and
+$(\neg x\lor\neg a)$. Their satisfiable graph forces only $\neg x$.
+Add the four clauses $(x\lor y\lor z)$, $(x\lor y\lor\neg z)$,
+$(x\lor\neg y\lor z)$ and $(x\lor\neg y\lor\neg z)$.
+No source clause is entirely covered by the existing guard graph. Yet
+conditioning on the checked $\neg x$ exposes four contradictory binary clauses.
+All sixteen subsets of the four wider clauses are checked over all 64
+assignments; only the full set is unsatisfiable. This elementary example
+motivates exact partial clause shortening, with reusable support proofs for
+new binary consequences and charged closure iteration. It is a recognizer
+separation, not a complete-solver failure or a uniformly efficient method for
+arbitrary CNF.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

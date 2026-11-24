@@ -1,0 +1,503 @@
+{
+  "added": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 10
+  },
+  "archive": {
+    "compressed_bytes": 7228,
+    "database_bytes": 167936,
+    "database_sha256": "3da71484fb2a1b827be96cee3f005f27c26b06a7f7d5fe7a21295610d78bcf86",
+    "path": "experiments/results/cnf-cover-support/stream-full-padded-6-64/history.sqlite3.gz",
+    "seconds": 0.003486915957182646,
+    "sha256": "c78e289ee3157bfb18f84b248411b1bf991599851e92a427f00f20689d34983a"
+  },
+  "authority_tables": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 60
+  },
+  "case": "padded-6-64",
+  "cold_seconds": 0.025578582659363747,
+  "complete_seconds": 0.038755541667342186,
+  "counts": {
+    "cover_splits": 4,
+    "existing_nodes": 5,
+    "guard_input_literals": 72,
+    "normalization_literal_visits": 206,
+    "path_splits": 3,
+    "position_clauses": 234,
+    "position_literals": 306,
+    "published_nodes": 10,
+    "restriction_literal_visits": 3090,
+    "template_checked_reason_literals": 72,
+    "templates_checked": 12,
+    "transport_literal_visits": 18,
+    "transport_trace_steps": 3,
+    "transported_leaves": 3,
+    "validated_covers": 1
+  },
+  "digest": {
+    "cnf_affine_negative_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_core_discovery_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v2": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v3": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_residual_v1": "2ea2d9d1d460dbe34c8b750b82d1be157242329d92c1553acf7f993cdc0d0d51"
+  },
+  "mode": "full",
+  "readers": {
+    "CanonicalVerifySnapshot": {
+      "canonical_form_calls": 60,
+      "canonical_form_clauses": 3872,
+      "canonical_form_literal_visits": 5587,
+      "canonical_form_name_variables": 3812,
+      "canonical_form_reuses": 60,
+      "certificate_memory_hits": 82,
+      "database_lookups": 60,
+      "key_serialized_bytes": 56583,
+      "normalization_literal_visits": 6690,
+      "read_bytes": 61229,
+      "restriction_literal_visits": 8414,
+      "search_disk_hits": 60,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 5587,
+      "verification_trace_literals": 36,
+      "verified_nodes": 60
+    },
+    "SnapshotResidualSolver": {
+      "certificate_memory_hits": 82,
+      "database_lookups": 60,
+      "key_serialized_bytes": 56583,
+      "normalization_literal_visits": 12277,
+      "read_bytes": 61229,
+      "restriction_literal_visits": 8414,
+      "search_disk_hits": 60,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 5587,
+      "verification_trace_literals": 36,
+      "verified_nodes": 60
+    }
+  },
+  "record_bytes": 87143,
+  "result": {
+    "metrics": {
+      "certificate_disk_hits": 7,
+      "certificate_memory_hits": 17,
+      "certificate_serialized_bytes": 12738,
+      "database_lookups": 19,
+      "guard_cover_existing_disk_hits": 2,
+      "guard_cover_existing_memory_hits": 3,
+      "inserted_bytes": 17971,
+      "inserted_nodes": 10,
+      "key_serialized_bytes": 25117,
+      "normalization_literal_visits": 5580,
+      "read_bytes": 6715,
+      "restriction_literal_visits": 2538,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 1781,
+      "verification_trace_literals": 12,
+      "verified_nodes": 19
+    },
+    "result": {
+      "answer": false,
+      "authority": "native",
+      "model": null,
+      "root": "cnf-residual-v1:[[-24,-6,12],[-23,-12,-6],[-22,-5,11],[-21,-11,-5],[-20,-4,10],[-19,-10,-4],[-18,-3,9],[-17,-9,-3],[-16,-2,8],[-15,-8,-2],[-14,-1,7],[-13,-7,-1],[-12,-6,23],[-11,-5,21],[-10,-4,19],[-9,-3,17],[-8,-2,15],[-7,-1,13],[-6,12,24],[-5,11,22],[-4,10,20],[-3,9,18],[-2,8,16],[-1,7,14],[1,2,3,4,5,6],[1,25],[1,26],[1,27],[1,28],[1,29],[1,30],[1,31],[1,32],[1,33],[1,34],[1,35],[1,36],[1,37],[1,38],[1,39],[1,40],[1,41],[1,42],[1,43],[1,44],[1,45],[1,46],[1,47],[1,48],[1,49],[1,50],[1,51],[1,52],[1,53],[1,54],[1,55],[1,56],[1,57],[1,58],[1,59],[1,60],[1,61],[1,62],[1,63],[1,64],[1,65],[1,66],[1,67],[1,68],[1,69],[1,70],[1,71],[1,72],[1,73],[1,74],[1,75],[1,76],[1,77],[1,78],[1,79],[1,80],[1,81],[1,82],[1,83],[1,84],[1,85],[1,86],[1,87],[1,88]]"
+    },
+    "status": "unsat"
+  },
+  "solve_seconds": 0.009446624666452408,
+  "source": [
+    [
+      -24,
+      -6,
+      12
+    ],
+    [
+      -23,
+      -12,
+      -6
+    ],
+    [
+      -22,
+      -5,
+      11
+    ],
+    [
+      -21,
+      -11,
+      -5
+    ],
+    [
+      -20,
+      -4,
+      10
+    ],
+    [
+      -19,
+      -10,
+      -4
+    ],
+    [
+      -18,
+      -3,
+      9
+    ],
+    [
+      -17,
+      -9,
+      -3
+    ],
+    [
+      -16,
+      -2,
+      8
+    ],
+    [
+      -15,
+      -8,
+      -2
+    ],
+    [
+      -14,
+      -1,
+      7
+    ],
+    [
+      -13,
+      -7,
+      -1
+    ],
+    [
+      -12,
+      -6,
+      23
+    ],
+    [
+      -11,
+      -5,
+      21
+    ],
+    [
+      -10,
+      -4,
+      19
+    ],
+    [
+      -9,
+      -3,
+      17
+    ],
+    [
+      -8,
+      -2,
+      15
+    ],
+    [
+      -7,
+      -1,
+      13
+    ],
+    [
+      -6,
+      12,
+      24
+    ],
+    [
+      -5,
+      11,
+      22
+    ],
+    [
+      -4,
+      10,
+      20
+    ],
+    [
+      -3,
+      9,
+      18
+    ],
+    [
+      -2,
+      8,
+      16
+    ],
+    [
+      -1,
+      7,
+      14
+    ],
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    [
+      1,
+      25
+    ],
+    [
+      1,
+      26
+    ],
+    [
+      1,
+      27
+    ],
+    [
+      1,
+      28
+    ],
+    [
+      1,
+      29
+    ],
+    [
+      1,
+      30
+    ],
+    [
+      1,
+      31
+    ],
+    [
+      1,
+      32
+    ],
+    [
+      1,
+      33
+    ],
+    [
+      1,
+      34
+    ],
+    [
+      1,
+      35
+    ],
+    [
+      1,
+      36
+    ],
+    [
+      1,
+      37
+    ],
+    [
+      1,
+      38
+    ],
+    [
+      1,
+      39
+    ],
+    [
+      1,
+      40
+    ],
+    [
+      1,
+      41
+    ],
+    [
+      1,
+      42
+    ],
+    [
+      1,
+      43
+    ],
+    [
+      1,
+      44
+    ],
+    [
+      1,
+      45
+    ],
+    [
+      1,
+      46
+    ],
+    [
+      1,
+      47
+    ],
+    [
+      1,
+      48
+    ],
+    [
+      1,
+      49
+    ],
+    [
+      1,
+      50
+    ],
+    [
+      1,
+      51
+    ],
+    [
+      1,
+      52
+    ],
+    [
+      1,
+      53
+    ],
+    [
+      1,
+      54
+    ],
+    [
+      1,
+      55
+    ],
+    [
+      1,
+      56
+    ],
+    [
+      1,
+      57
+    ],
+    [
+      1,
+      58
+    ],
+    [
+      1,
+      59
+    ],
+    [
+      1,
+      60
+    ],
+    [
+      1,
+      61
+    ],
+    [
+      1,
+      62
+    ],
+    [
+      1,
+      63
+    ],
+    [
+      1,
+      64
+    ],
+    [
+      1,
+      65
+    ],
+    [
+      1,
+      66
+    ],
+    [
+      1,
+      67
+    ],
+    [
+      1,
+      68
+    ],
+    [
+      1,
+      69
+    ],
+    [
+      1,
+      70
+    ],
+    [
+      1,
+      71
+    ],
+    [
+      1,
+      72
+    ],
+    [
+      1,
+      73
+    ],
+    [
+      1,
+      74
+    ],
+    [
+      1,
+      75
+    ],
+    [
+      1,
+      76
+    ],
+    [
+      1,
+      77
+    ],
+    [
+      1,
+      78
+    ],
+    [
+      1,
+      79
+    ],
+    [
+      1,
+      80
+    ],
+    [
+      1,
+      81
+    ],
+    [
+      1,
+      82
+    ],
+    [
+      1,
+      83
+    ],
+    [
+      1,
+      84
+    ],
+    [
+      1,
+      85
+    ],
+    [
+      1,
+      86
+    ],
+    [
+      1,
+      87
+    ],
+    [
+      1,
+      88
+    ]
+  ]
+}

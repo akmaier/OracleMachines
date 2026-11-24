@@ -1,0 +1,187 @@
+{
+  "added": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 10
+  },
+  "archive": {
+    "compressed_bytes": 990,
+    "database_bytes": 12288,
+    "database_sha256": "2e0928c643e8457fadee8deed459cd68df36cffa60854d185009f774ab1aad44",
+    "path": "experiments/results/cnf-cover-support/stream-support-padded-3-0/history.sqlite3.gz",
+    "seconds": 0.00025400007143616676,
+    "sha256": "5f8c2d00bef5e98c2bca309fb213d3d7ee0dbaa5cce3ad0f3f155dc9148ff442"
+  },
+  "authority_tables": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 10
+  },
+  "case": "padded-3-0",
+  "cold_seconds": 0.0012719999067485332,
+  "complete_seconds": 0.004818667192012072,
+  "counts": {
+    "cover_splits": 3,
+    "existing_nodes": 3,
+    "full_support_fallbacks": 1,
+    "guard_input_literals": 72,
+    "normalization_literal_visits": 78,
+    "path_splits": 3,
+    "position_clauses": 18,
+    "position_literals": 42,
+    "published_nodes": 10,
+    "restriction_literal_visits": 507,
+    "support_selected_clauses": 13,
+    "support_selected_hints": 6,
+    "support_selected_literals": 39,
+    "support_source_clauses": 13,
+    "support_source_literals": 39,
+    "template_checked_reason_literals": 72,
+    "templates_checked": 12,
+    "transport_literal_visits": 18,
+    "transport_trace_steps": 3,
+    "transported_leaves": 3,
+    "validated_covers": 1
+  },
+  "digest": {
+    "cnf_affine_negative_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_core_discovery_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v2": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v3": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_residual_v1": "fd047334e0402f3d0d90387eeee63aba5f9d643906565a727fedcf1231f23e76"
+  },
+  "mode": "support",
+  "readers": {
+    "CanonicalVerifySnapshot": {
+      "canonical_form_calls": 10,
+      "canonical_form_clauses": 70,
+      "canonical_form_literal_visits": 180,
+      "canonical_form_name_variables": 60,
+      "canonical_form_reuses": 10,
+      "certificate_memory_hits": 12,
+      "database_lookups": 10,
+      "key_serialized_bytes": 1782,
+      "normalization_literal_visits": 222,
+      "read_bytes": 2503,
+      "restriction_literal_visits": 276,
+      "search_disk_hits": 10,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 180,
+      "verification_trace_literals": 6,
+      "verified_nodes": 10
+    },
+    "SnapshotResidualSolver": {
+      "certificate_memory_hits": 12,
+      "database_lookups": 10,
+      "key_serialized_bytes": 1782,
+      "normalization_literal_visits": 402,
+      "read_bytes": 2503,
+      "restriction_literal_visits": 276,
+      "search_disk_hits": 10,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 180,
+      "verification_trace_literals": 6,
+      "verified_nodes": 10
+    }
+  },
+  "record_bytes": 3295,
+  "result": {
+    "metrics": {
+      "certificate_memory_hits": 12,
+      "certificate_serialized_bytes": 2503,
+      "database_lookups": 11,
+      "guard_cover_existing_memory_hits": 3,
+      "inserted_bytes": 3295,
+      "inserted_nodes": 10,
+      "key_serialized_bytes": 2772,
+      "normalization_literal_visits": 624,
+      "restriction_literal_visits": 276,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 180,
+      "verification_trace_literals": 6,
+      "verified_nodes": 10
+    },
+    "result": {
+      "answer": false,
+      "authority": "native",
+      "model": null,
+      "root": "cnf-residual-v1:[[-12,-3,6],[-11,-6,-3],[-10,-2,5],[-9,-5,-2],[-8,-1,4],[-7,-4,-1],[-6,-3,11],[-5,-2,9],[-4,-1,7],[-3,6,12],[-2,5,10],[-1,4,8],[1,2,3]]"
+    },
+    "status": "unsat"
+  },
+  "solve_seconds": 0.0029247920028865337,
+  "source": [
+    [
+      -12,
+      -3,
+      6
+    ],
+    [
+      -11,
+      -6,
+      -3
+    ],
+    [
+      -10,
+      -2,
+      5
+    ],
+    [
+      -9,
+      -5,
+      -2
+    ],
+    [
+      -8,
+      -1,
+      4
+    ],
+    [
+      -7,
+      -4,
+      -1
+    ],
+    [
+      -6,
+      -3,
+      11
+    ],
+    [
+      -5,
+      -2,
+      9
+    ],
+    [
+      -4,
+      -1,
+      7
+    ],
+    [
+      -3,
+      6,
+      12
+    ],
+    [
+      -2,
+      5,
+      10
+    ],
+    [
+      -1,
+      4,
+      8
+    ],
+    [
+      1,
+      2,
+      3
+    ]
+  ]
+}

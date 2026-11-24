@@ -1,0 +1,311 @@
+{
+  "added": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 10
+  },
+  "archive": {
+    "compressed_bytes": 6688,
+    "database_bytes": 139264,
+    "database_sha256": "548d434f721f6f8f97d1d6def9db35ce148a815a8acb6165719144793dc60dc5",
+    "path": "experiments/results/cnf-cover-support/stream-full-padded-6-16/history.sqlite3.gz",
+    "seconds": 0.0031124576926231384,
+    "sha256": "cc19ea30a0847332a336b5bd8c87fb7653e990c352ae19d7802a05b4e35a7380"
+  },
+  "authority_tables": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 50
+  },
+  "case": "padded-6-16",
+  "cold_seconds": 0.020601625088602304,
+  "complete_seconds": 0.030112083069980145,
+  "counts": {
+    "cover_splits": 4,
+    "existing_nodes": 5,
+    "guard_input_literals": 72,
+    "normalization_literal_visits": 110,
+    "path_splits": 3,
+    "position_clauses": 90,
+    "position_literals": 162,
+    "published_nodes": 10,
+    "restriction_literal_visits": 1650,
+    "template_checked_reason_literals": 72,
+    "templates_checked": 12,
+    "transport_literal_visits": 18,
+    "transport_trace_steps": 3,
+    "transported_leaves": 3,
+    "validated_covers": 1
+  },
+  "digest": {
+    "cnf_affine_negative_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_core_discovery_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v2": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v3": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_residual_v1": "5df3806ebb1325ba5887d3cad9d48da2584fa355d80d87dcb6f81f566459e13b"
+  },
+  "mode": "full",
+  "readers": {
+    "CanonicalVerifySnapshot": {
+      "canonical_form_calls": 50,
+      "canonical_form_clauses": 3066,
+      "canonical_form_literal_visits": 4403,
+      "canonical_form_name_variables": 3016,
+      "canonical_form_reuses": 50,
+      "certificate_memory_hits": 68,
+      "database_lookups": 50,
+      "key_serialized_bytes": 44415,
+      "normalization_literal_visits": 5152,
+      "read_bytes": 48491,
+      "restriction_literal_visits": 6658,
+      "search_disk_hits": 50,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 4403,
+      "verification_trace_literals": 30,
+      "verified_nodes": 50
+    },
+    "SnapshotResidualSolver": {
+      "certificate_memory_hits": 68,
+      "database_lookups": 50,
+      "key_serialized_bytes": 44415,
+      "normalization_literal_visits": 9555,
+      "read_bytes": 48491,
+      "restriction_literal_visits": 6658,
+      "search_disk_hits": 50,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 4403,
+      "verification_trace_literals": 30,
+      "verified_nodes": 50
+    }
+  },
+  "record_bytes": 69172,
+  "result": {
+    "metrics": {
+      "certificate_disk_hits": 7,
+      "certificate_memory_hits": 17,
+      "certificate_serialized_bytes": 7122,
+      "database_lookups": 19,
+      "guard_cover_existing_disk_hits": 2,
+      "guard_cover_existing_memory_hits": 3,
+      "inserted_bytes": 9859,
+      "inserted_nodes": 10,
+      "key_serialized_bytes": 12925,
+      "normalization_literal_visits": 3036,
+      "read_bytes": 3595,
+      "restriction_literal_visits": 1386,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 965,
+      "verification_trace_literals": 12,
+      "verified_nodes": 19
+    },
+    "result": {
+      "answer": false,
+      "authority": "native",
+      "model": null,
+      "root": "cnf-residual-v1:[[-24,-6,12],[-23,-12,-6],[-22,-5,11],[-21,-11,-5],[-20,-4,10],[-19,-10,-4],[-18,-3,9],[-17,-9,-3],[-16,-2,8],[-15,-8,-2],[-14,-1,7],[-13,-7,-1],[-12,-6,23],[-11,-5,21],[-10,-4,19],[-9,-3,17],[-8,-2,15],[-7,-1,13],[-6,12,24],[-5,11,22],[-4,10,20],[-3,9,18],[-2,8,16],[-1,7,14],[1,2,3,4,5,6],[1,25],[1,26],[1,27],[1,28],[1,29],[1,30],[1,31],[1,32],[1,33],[1,34],[1,35],[1,36],[1,37],[1,38],[1,39],[1,40]]"
+    },
+    "status": "unsat"
+  },
+  "solve_seconds": 0.006164291873574257,
+  "source": [
+    [
+      -24,
+      -6,
+      12
+    ],
+    [
+      -23,
+      -12,
+      -6
+    ],
+    [
+      -22,
+      -5,
+      11
+    ],
+    [
+      -21,
+      -11,
+      -5
+    ],
+    [
+      -20,
+      -4,
+      10
+    ],
+    [
+      -19,
+      -10,
+      -4
+    ],
+    [
+      -18,
+      -3,
+      9
+    ],
+    [
+      -17,
+      -9,
+      -3
+    ],
+    [
+      -16,
+      -2,
+      8
+    ],
+    [
+      -15,
+      -8,
+      -2
+    ],
+    [
+      -14,
+      -1,
+      7
+    ],
+    [
+      -13,
+      -7,
+      -1
+    ],
+    [
+      -12,
+      -6,
+      23
+    ],
+    [
+      -11,
+      -5,
+      21
+    ],
+    [
+      -10,
+      -4,
+      19
+    ],
+    [
+      -9,
+      -3,
+      17
+    ],
+    [
+      -8,
+      -2,
+      15
+    ],
+    [
+      -7,
+      -1,
+      13
+    ],
+    [
+      -6,
+      12,
+      24
+    ],
+    [
+      -5,
+      11,
+      22
+    ],
+    [
+      -4,
+      10,
+      20
+    ],
+    [
+      -3,
+      9,
+      18
+    ],
+    [
+      -2,
+      8,
+      16
+    ],
+    [
+      -1,
+      7,
+      14
+    ],
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    [
+      1,
+      25
+    ],
+    [
+      1,
+      26
+    ],
+    [
+      1,
+      27
+    ],
+    [
+      1,
+      28
+    ],
+    [
+      1,
+      29
+    ],
+    [
+      1,
+      30
+    ],
+    [
+      1,
+      31
+    ],
+    [
+      1,
+      32
+    ],
+    [
+      1,
+      33
+    ],
+    [
+      1,
+      34
+    ],
+    [
+      1,
+      35
+    ],
+    [
+      1,
+      36
+    ],
+    [
+      1,
+      37
+    ],
+    [
+      1,
+      38
+    ],
+    [
+      1,
+      39
+    ],
+    [
+      1,
+      40
+    ]
+  ]
+}

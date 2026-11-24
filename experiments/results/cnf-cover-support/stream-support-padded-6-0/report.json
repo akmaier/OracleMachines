@@ -1,0 +1,253 @@
+{
+  "added": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 9
+  },
+  "archive": {
+    "compressed_bytes": 3075,
+    "database_bytes": 45056,
+    "database_sha256": "f6f207e75a6f96cf38bd083e8404c52bfb6d31e28794d6e2c51fbaa8374ba981",
+    "path": "experiments/results/cnf-cover-support/stream-support-padded-6-0/history.sqlite3.gz",
+    "seconds": 0.00084725022315979,
+    "sha256": "25d9149d3f188778393fe26f182981d8f16ffe7be3376e19daa691506ec452f0"
+  },
+  "authority_tables": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 22
+  },
+  "case": "padded-6-0",
+  "cold_seconds": 0.004129041917622089,
+  "complete_seconds": 0.009562457911670208,
+  "counts": {
+    "cover_splits": 3,
+    "existing_nodes": 4,
+    "full_support_fallbacks": 1,
+    "guard_input_literals": 144,
+    "normalization_literal_visits": 156,
+    "path_splits": 3,
+    "position_clauses": 54,
+    "position_literals": 150,
+    "published_nodes": 9,
+    "restriction_literal_visits": 1014,
+    "support_selected_clauses": 25,
+    "support_selected_hints": 12,
+    "support_selected_literals": 78,
+    "support_source_clauses": 25,
+    "support_source_literals": 78,
+    "template_checked_reason_literals": 144,
+    "templates_checked": 24,
+    "transport_literal_visits": 18,
+    "transport_trace_steps": 3,
+    "transported_leaves": 3,
+    "validated_covers": 1
+  },
+  "digest": {
+    "cnf_affine_negative_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_core_discovery_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v2": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v3": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_residual_v1": "983cee593c51847f1d1eb840e2a61fdebf83d53ea58ac79e8980331eef9c56ee"
+  },
+  "mode": "support",
+  "readers": {
+    "CanonicalVerifySnapshot": {
+      "canonical_form_calls": 22,
+      "canonical_form_clauses": 622,
+      "canonical_form_literal_visits": 1482,
+      "canonical_form_name_variables": 600,
+      "canonical_form_reuses": 22,
+      "certificate_memory_hits": 27,
+      "database_lookups": 22,
+      "key_serialized_bytes": 9913,
+      "normalization_literal_visits": 1002,
+      "read_bytes": 11641,
+      "restriction_literal_visits": 1002,
+      "search_disk_hits": 22,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 1482,
+      "verification_trace_literals": 12,
+      "verified_nodes": 22
+    },
+    "SnapshotResidualSolver": {
+      "certificate_memory_hits": 27,
+      "database_lookups": 22,
+      "key_serialized_bytes": 9913,
+      "normalization_literal_visits": 2484,
+      "read_bytes": 11641,
+      "restriction_literal_visits": 1002,
+      "search_disk_hits": 22,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 1482,
+      "verification_trace_literals": 12,
+      "verified_nodes": 22
+    }
+  },
+  "record_bytes": 17455,
+  "result": {
+    "metrics": {
+      "certificate_disk_hits": 9,
+      "certificate_memory_hits": 15,
+      "certificate_serialized_bytes": 5366,
+      "database_lookups": 20,
+      "guard_cover_existing_disk_hits": 1,
+      "guard_cover_existing_memory_hits": 3,
+      "inserted_bytes": 7414,
+      "inserted_nodes": 9,
+      "key_serialized_bytes": 9293,
+      "normalization_literal_visits": 2280,
+      "read_bytes": 2503,
+      "restriction_literal_visits": 1002,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 693,
+      "verification_trace_literals": 12,
+      "verified_nodes": 19
+    },
+    "result": {
+      "answer": false,
+      "authority": "native",
+      "model": null,
+      "root": "cnf-residual-v1:[[-24,-6,12],[-23,-12,-6],[-22,-5,11],[-21,-11,-5],[-20,-4,10],[-19,-10,-4],[-18,-3,9],[-17,-9,-3],[-16,-2,8],[-15,-8,-2],[-14,-1,7],[-13,-7,-1],[-12,-6,23],[-11,-5,21],[-10,-4,19],[-9,-3,17],[-8,-2,15],[-7,-1,13],[-6,12,24],[-5,11,22],[-4,10,20],[-3,9,18],[-2,8,16],[-1,7,14],[1,2,3,4,5,6]]"
+    },
+    "status": "unsat"
+  },
+  "solve_seconds": 0.0044305408373475075,
+  "source": [
+    [
+      -24,
+      -6,
+      12
+    ],
+    [
+      -23,
+      -12,
+      -6
+    ],
+    [
+      -22,
+      -5,
+      11
+    ],
+    [
+      -21,
+      -11,
+      -5
+    ],
+    [
+      -20,
+      -4,
+      10
+    ],
+    [
+      -19,
+      -10,
+      -4
+    ],
+    [
+      -18,
+      -3,
+      9
+    ],
+    [
+      -17,
+      -9,
+      -3
+    ],
+    [
+      -16,
+      -2,
+      8
+    ],
+    [
+      -15,
+      -8,
+      -2
+    ],
+    [
+      -14,
+      -1,
+      7
+    ],
+    [
+      -13,
+      -7,
+      -1
+    ],
+    [
+      -12,
+      -6,
+      23
+    ],
+    [
+      -11,
+      -5,
+      21
+    ],
+    [
+      -10,
+      -4,
+      19
+    ],
+    [
+      -9,
+      -3,
+      17
+    ],
+    [
+      -8,
+      -2,
+      15
+    ],
+    [
+      -7,
+      -1,
+      13
+    ],
+    [
+      -6,
+      12,
+      24
+    ],
+    [
+      -5,
+      11,
+      22
+    ],
+    [
+      -4,
+      10,
+      20
+    ],
+    [
+      -3,
+      9,
+      18
+    ],
+    [
+      -2,
+      8,
+      16
+    ],
+    [
+      -1,
+      7,
+      14
+    ],
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  ]
+}

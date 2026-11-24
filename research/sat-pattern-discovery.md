@@ -5,7 +5,25 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: supported wide-clause covers compile, but cost more
+## Latest evidence: smaller shared cover proofs; partial shortening remains open
+
+[Selected-support composition](guard-cover-support.md) makes the cover compiler
+substantially smaller and faster than full-context composition and reuses saved
+cores after cold reopen. All seven pending proposals are now certified, giving
+18 distinct local roots; ordinary search already retains all of them. Measured
+preparation costs and small-case regressions prevent a universal or live gain
+claim. No query-level coverage result changes.
+
+The next concrete separation needs partial shortening: checked guards force
+not-x, while four ternary source clauses `(x or +/-y or +/-z)` become contradictory
+binary clauses only after that fact is used. Neither current guard SCC nor full
+clause-cover recognition detects the original source. Test exact derived-edge
+supports and closure iteration on unresolved contexts and fresh mixtures, using
+the smaller persistent proof supports. The six-variable example is exhaustive
+small evidence, not a new tractability theorem or a completed arbitrary-SAT
+partition.
+
+## Previous evidence: supported wide-clause covers compile, but cost more
 
 [The new cover experiment](guard-clause-covers.md) checks every selected learned
 edge against its actual source, compiles under strengthened branch contexts and

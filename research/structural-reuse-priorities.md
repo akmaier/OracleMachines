@@ -12,7 +12,36 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: broaden interactions without copying full contexts
+## Current investigation: exact partial shortening with reusable supports
+
+[Selected-support cover compilation](guard-cover-support.md) cuts compile time
+75.30% and record bytes 86.16% against full-context covers on 18 local CNFs.
+It checks the actual source support, compiles one smaller root and publishes a
+native negative-subset lift. Six persisted expansions each reuse that root and
+add exactly one wrapper. The same principle works with overlapping variables;
+there is no component-independence assumption or minimum-core claim.
+
+All seven formerly unchecked proposals now have valid supports, but all 18 roots
+are already found by ordinary search. On the original 11-case subgroup, adding
+source binding/discovery still loses to ordinary solving; supplied small-core
+controls also regress. Keep optional. No whole-query outcome changes.
+
+**Highest next coverage target: exact partial clause shortening by checked
+forced literals.** A preserved six-variable, eight-clause example has a
+satisfiable guard graph forcing only not-x. No source clause is fully covered,
+but shortening four `(x or +/-y or +/-z)` clauses produces a binary contradiction.
+All 1,024 assignment/subset pairs check. Inventory this pattern on unresolved
+contexts and fresh mixtures, retaining support proofs for every derived edge and
+charging iteration, discovery, compilation and cold replay. Reuse the selected
+supports instead of returning to full-context proof duplication.
+
+Resume `experiments/results/cnf-cover-support/checkpoint.json`. It adds 89
+independently audited supplemental archives and retains every earlier bank.
+The 160,338-record cumulative native union remains unchanged; wrapper space and
+source recognition still grow with enclosing inputs. Automatic useful origins,
+uniform unrestricted bounds and live total-cost gains remain open.
+
+## Previous investigation: broaden interactions without copying full contexts
 
 [Learned-guard clause covers](guard-clause-covers.md) now have bounded discovery
 and checked native compilation. Fifteen supported proposals yield 11 distinct

@@ -4,7 +4,19 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, learned-guard clause covers):
+Latest expansion checkpoint (24 November, selected cover supports):
+[Compile and persist only the selected cover support](guard-cover-support.md).
+Compile time falls 75.30% and record bytes 86.16% versus full-context composition
+across 18 local CNFs. Six expansions after cold reopen each reuse a checked core
+and add one wrapper. All seven pending proposals are supported; ordinary search
+already retains all 18 roots. Source-binding costs still reverse the comparison
+on the original 11-case subgroup, and small controlled cases regress. Keep this
+optional. Next investigate exact partial clause shortening with proof-supported
+binary consequences, using the preserved six-variable separation and unresolved
+contexts. Resume `experiments/results/cnf-cover-support/checkpoint.json`; every
+prior bank remains intact, with 89 new audited supplemental archives.
+
+Previous expansion checkpoint (24 November, learned-guard clause covers):
 [Check wider source clauses against learned binary consequences](guard-clause-covers.md).
 Fifteen supported proposals produce 11 distinct native local refutations; nine
 first occur at old inconclusive gate sites. Ordinary search eventually retains

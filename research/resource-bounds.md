@@ -18,6 +18,19 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+The subsequent [selected-support compiler](guard-cover-support.md) replaces
+repeated full-context proof bodies with a checked support H and one negative
+subset wrapper for F. When all required coordinates survive in H, its explicit
+proof-content envelope is O(q S_H + S_F), where q is cover width plus total path
+length and S counts literal occurrences. Reusing one H across k enclosing
+contexts retains O(q S_H + sum S_F_i) content. This does not make expansion
+constant-cost: every enclosing input is scanned/bound and its wrapper stores
+that input. Source membership, path checks, coordinate transport, cold proof
+reads and persistence remain charged. The measured 86.16% reduction concerns
+record bytes versus full-context covers; summed per-case peak RSS falls about
+4.51%, and neither is a uniform process-memory bound. Earlier history remains
+preserved, so smaller new proofs do not shrink previously published archives.
+
 The [24 November learned-guard cover experiment](guard-clause-covers.md) adds
 a conditional bound for another sufficient UNSAT recognizer. Given checked
 binary consequences and paths excluding each literal of an actual width-w

@@ -1,0 +1,145 @@
+{
+  "archive": {
+    "compressed_bytes": 4354,
+    "database_bytes": 98304,
+    "database_sha256": "fce2c757ea759bf93f6c7917dcf60f4dc5194bf2f618b9e23c8e448f967ea042",
+    "path": "experiments/results/cnf-cover-support/local-28-23-full-0/history.sqlite3.gz",
+    "seconds": 0.0020016245543956757,
+    "sha256": "2084f6de60e27fd910313dce2a6893febb0290f6464cb9bb7ee8d1c83ce30c90"
+  },
+  "authority_tables": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 9
+  },
+  "case": {
+    "path": "experiments/results/cnf-cover-support/local-28-23.json",
+    "sha256": "8b259b7ba614250faccd21abfd3736324ae3b6e5fe872e957813e57284dfb09b"
+  },
+  "category": "bounded",
+  "checked_logical_bytes": 35970,
+  "cold_readers": {
+    "CanonicalVerifySnapshot": {
+      "canonical_form_calls": 9,
+      "canonical_form_clauses": 1525,
+      "canonical_form_literal_visits": 4007,
+      "canonical_form_name_variables": 434,
+      "canonical_form_reuses": 9,
+      "certificate_memory_hits": 14,
+      "database_lookups": 9,
+      "key_serialized_bytes": 33244,
+      "normalization_literal_visits": 7348,
+      "read_bytes": 31844,
+      "restriction_literal_visits": 7082,
+      "search_disk_hits": 9,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 4007,
+      "verification_trace_literals": 11,
+      "verified_nodes": 9
+    },
+    "SnapshotResidualSolver": {
+      "certificate_memory_hits": 14,
+      "database_lookups": 9,
+      "key_serialized_bytes": 33244,
+      "normalization_literal_visits": 11355,
+      "read_bytes": 31844,
+      "restriction_literal_visits": 7082,
+      "search_disk_hits": 9,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 4007,
+      "verification_trace_literals": 11,
+      "verified_nodes": 9
+    }
+  },
+  "cold_seconds": 0.02254199981689453,
+  "complete_seconds": 0.04330070875585079,
+  "counts": {
+    "cover_splits": 3,
+    "existing_nodes": 6,
+    "guard_input_literals": 16,
+    "normalization_literal_visits": 542,
+    "path_splits": 4,
+    "position_clauses": 179,
+    "position_literals": 466,
+    "published_nodes": 9,
+    "restriction_literal_visits": 8672,
+    "template_checked_reason_literals": 16,
+    "templates_checked": 1,
+    "transport_literal_visits": 15,
+    "transport_skipped_steps": 1,
+    "transport_trace_steps": 6,
+    "transported_leaves": 1,
+    "validated_covers": 1
+  },
+  "digest": {
+    "cnf_affine_negative_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_core_discovery_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v2": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v3": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_residual_v1": "81809f82fbb75d2c6167facd6f1b68ce8b63f673356929f0e5d7444b49b8ed89"
+  },
+  "index": 3,
+  "mode": "full",
+  "native_counts": {
+    "certificate_memory_hits": 14,
+    "certificate_serialized_bytes": 31844,
+    "database_lookups": 10,
+    "guard_cover_existing_memory_hits": 6,
+    "inserted_bytes": 48406,
+    "inserted_nodes": 9,
+    "key_serialized_bytes": 49620,
+    "normalization_literal_visits": 18627,
+    "restriction_literal_visits": 7082,
+    "search_memory_hits": 1,
+    "verification_literal_payload": 4007,
+    "verification_trace_literals": 11,
+    "verified_nodes": 9
+  },
+  "peak_rss_bytes": 48218112,
+  "persistence_seconds": 0.0020030420273542404,
+  "protocol": {
+    "path": "experiments/results/cnf-cover-support/protocol.json",
+    "sha256": "167d9ab3032fdef4514284f588040527499429bea184775fb2cfa8e45d6c3b8e"
+  },
+  "record_bytes": 48406,
+  "result": {
+    "metrics": {
+      "certificate_memory_hits": 14,
+      "certificate_serialized_bytes": 31844,
+      "database_lookups": 10,
+      "guard_cover_existing_memory_hits": 6,
+      "inserted_bytes": 48406,
+      "inserted_nodes": 9,
+      "key_serialized_bytes": 49620,
+      "normalization_literal_visits": 18627,
+      "restriction_literal_visits": 7082,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 4007,
+      "verification_trace_literals": 11,
+      "verified_nodes": 9
+    },
+    "result": {
+      "answer": false,
+      "authority": "native",
+      "model": null,
+      "root": "cnf-residual-v1:[[-56,-50,-7],[-56,-30],[-56,-15,28],[-56,19,36],[-56,23,50],[-56,30],[-56,34,48],[-55,-52,-49],[-55,-52,-17],[-55,-37],[-55,-30,43],[-55,-29,46],[-55,-25,-12],[-54,-53,-40],[-54,-51,15],[-54,-42,25],[-54,-41],[-54,-27,9],[-54,-12,-4],[-54,19,21],[-53,-39,-3],[-53,-28,27],[-53,-26],[-53,-11,-10],[-53,27,49],[-52,-51,56],[-52,-49,-42],[-52,-40],[-52,-22,25],[-52,16,39],[-52,41],[-51,-8,39],[-50,15,49],[-50,23,40],[-49,-46,30],[-49,-25,36],[-48,-43,-27],[-48,-3,53],[-48,21,28],[-47,21,50],[-47,23,44],[-47,32,46],[-46,-33,36],[-46,-24,36],[-46,15,32],[-45,-32],[-45,-9,54],[-45,-4,33],[-45,44,56],[-44,-24,48],[-44,8,43],[-43,-18,47],[-43,-11,7],[-43,-5],[-43,-1,56],[-43,7,54],[-42,29],[-42,34,38],[-41,49],[-40,-9,30],[-40,54],[-39,-27,50],[-39,-24,30],[-39,-2,5],[-39,8,20],[-39,35,52],[-39,47],[-38,-26,-5],[-38,-22],[-38,-19,-2],[-38,-17],[-38,34],[-38,37,47],[-37,-34,13],[-37,-29,-21],[-37,22,45],[-37,29,51],[-36,15,51],[-36,51],[-36,53],[-35,-34,-30],[-35,-32,-23],[-35,-23],[-35,-22,-1],[-34,-30],[-34,-18,4],[-34,9,50],[-34,14,37],[-34,52],[-33,-14,55],[-33,8,24],[-33,13,26],[-33,31,36],[-32,-9,11],[-32,10],[-32,10,29],[-32,54],[-31,20,47],[-31,38,52],[-31,43],[-30,-3,9],[-30,-2],[-29,20,41],[-28,-21,24],[-28,1],[-28,17,39],[-27,-19],[-27,-14,-6],[-27,-9,28],[-27,-4,45],[-27,-4,56],[-26,-9,24],[-26,16,50],[-26,42,43],[-25,-17,8],[-25,-2,49],[-25,7],[-25,52],[-24,-15,47],[-24,2],[-24,19,25],[-24,23,27],[-23,15,37],[-23,39],[-22,-14,6],[-21,-18,49],[-21,39],[-21,45],[-20,17,41],[-20,41],[-19,55],[-18,-16],[-18,-9,-6],[-18,42],[-17,1,55],[-17,56],[-16,15],[-16,19,55],[-16,52,56],[-15,37,41],[-15,39],[-14,-10,-3],[-14,-8,44],[-13,44],[-12,15,23],[-12,20],[-12,43],[-11,-1],[-11,6,21],[-11,35,43],[-10,6],[-7,23],[-7,25],[-7,28],[-5,15],[-4,12,32],[-4,17,54],[-4,27,35],[-3,16,53],[-3,33],[-2,4,55],[-2,11,48],[-2,12],[-2,28],[-1,8,42],[-1,18,32],[3,13,17],[3,29,36],[3,34],[4,34,50],[4,55],[5,41,51],[5,50],[5,55],[8,26,51],[8,33,44],[9,19,45],[9,29,47],[10,13,42],[10,46,53],[11,35,56],[13,37],[14,24],[16,18,44],[16,19],[16,28,40],[18,31],[22,28,51],[25,26,47],[25,35,55],[26,35,47],[27,32,40],[27,44],[29,38,53],[29,50],[29,51,54],[30,31,32],[34,35,38],[35,39,49],[39,40,49],[40,42],[48,51]]"
+    },
+    "status": "unsat"
+  },
+  "setup_seconds": 0.000529916025698185,
+  "solve_seconds": 0.016165916807949543,
+  "warm_counts": {
+    "existing_nodes": 1,
+    "guard_input_literals": 16,
+    "normalization_literal_visits": 542,
+    "restriction_literal_visits": 542,
+    "template_checked_reason_literals": 16,
+    "templates_checked": 1,
+    "validated_covers": 1
+  },
+  "warm_seconds": 0.0006927079521119595
+}

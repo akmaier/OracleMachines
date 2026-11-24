@@ -3711,7 +3711,7 @@ The next ordinary probe block on the thirteen-variable leaf begins with variable
 
 This example shows why an exhausted probe stream at one source should not prevent probing after a checked structural change. Conditioning and elimination can expose consequences in a smaller representation. Conversely, finding a forced literal makes the remaining probes on its old source unnecessary for this route: discovery continues on the checked restriction. The final elimination increases clause count, and the retained history grows. Neither a smaller live obligation nor a bounded admission allowance establishes a total runtime improvement or polynomial expansion for arbitrary CNFs.
 
-Acquisition for this continuation takes 0.02000 seconds. Working SQLite grows by 57,344 bytes to 770,031,616 bytes, and the immutable delta occupies 6,225 compressed bytes. All earlier evidence is preserved. The complete pipeline takes 282.11723 seconds, including 69.25253 seconds of preparation, a 115.65564-second full audit and 65.40336 seconds of cold route reconstruction. Independent reference proofs confirm satisfiability of the source and its forced restriction and check the lifted model. These answers are separate from structural coverage, which still requires a plan for the ten-variable leaf. The experiment therefore identifies both a smaller discovery obligation and the continuing cost of checking accumulated history.
+Acquisition for this continuation takes 0.02000 seconds. Working SQLite grows by 57,344 bytes to 770,031,616 bytes, and the immutable delta occupies 6,225 compressed bytes. All earlier evidence is preserved. The complete pipeline takes 282.11723 seconds, including 69.25253 seconds of preparation, a 115.65564-second full audit and 65.51336 seconds of cold route reconstruction. Independent reference proofs confirm satisfiability of the source and its forced restriction and check the lifted model. These answers are separate from structural coverage, which still requires a plan for the ten-variable leaf. The experiment therefore identifies both a smaller discovery obligation and the continuing cost of checking accumulated history.
 
 The last ordinary candidate on the ten-variable leaf, variable 7, is clear in both polarities. Ten retained traces then cover both values of every variable in a binary clause. The other five variables occur only in clauses of width at least three, so assigning any one of them cannot start unit propagation. A source-bound certificate establishes that no single-variable assignment yields a unit-propagation refutation. This is an obstruction to that inference, not a satisfiability decision or an exclusion of stronger methods.
 
@@ -10707,6 +10707,94 @@ charge restoration and replay, and distinguish logical table equality from
 binary database identity. Such a saving would concern publication of expanded
 knowledge, not SAT query time or additional structural coverage; it is not
 implemented or measured here.
+
+\subsection{Reusing immutable history during checkpoint publication}
+\label{sec:history-layer-publication}
+
+The preceding publication bottleneck admits a direct reuse mechanism. Keep the
+immutable parent archive and publish only records appended to its six authority
+tables. A descriptor binds both archives, their row counts, chain depth, and the
+size and hash of the reconstructed database. For every parent key, preparation
+checks that the target retains its exact payload. The delta contains the target
+keys absent from the parent. Restoration rejects overlapping keys, applies all
+six tables in one transaction, and publishes a temporary reconstruction only
+after its physical hash matches. Existing destinations are never overwritten.
+These checks preserve stored knowledge; native certificate readers still decide
+whether that knowledge supports a SAT or UNSAT claim.
+
+The experiment republishes the preceding 173-record append. It acquires no new
+SAT result and leaves the cumulative bank at 160,338 native records. Both
+policies start from the same closed, exclusively owned snapshots. The control
+uses the frozen full gzip publisher and its multipart transport. The alternative
+exports and compresses the append database, copies the parent once and applies
+the delta to bind the reconstructed bytes. Both then cold restore, compare all
+six authority tables and accounting metadata, and replay all 173 new roots and
+their dependencies through both existing readers. Imports and source hashing
+precede the worker interval; common input restoration and final preservation
+auditing are additional. Two repetitions reverse the publication order.
+
+An initial failed trial required a compatibility correction. Both preserved
+endpoints have the same explicitly dirty accounting tuple. Its counters are
+stale and cannot serve as row-count or resource authority. We retain that tuple
+unchanged and count authority rows directly. Clean ledgers must follow exact
+append increments; changed dirty metadata requires a full snapshot. The failed
+source, protocol and log remain preserved. Existing accounting code reconstructs
+stale counters when opened. The historical append cursor targets a different
+eight-table schema and a live connection, so the new implementation uses an
+explicit snapshot diff rather than claiming unchanged cursor compatibility.
+
+Mean preparation plus publication falls from 132.99170 to 18.67420 seconds,
+an 85.96\% reduction. Complete workers fall from 141.94210 to 40.58869 seconds,
+a 71.40\% reduction after charging restoration, full logical comparison and
+new-proof replay. Publication after preparation falls from 107.88634 to
+5.07342 seconds. Preparation itself uses the same algorithm and varies with
+order and cache state; we do not attribute its differing means to layering.
+The two paired complete-worker reductions are 75.99\% and 65.51\%, on one
+exposed historical append rather than fresh performance cases.
+
+The append database occupies 438,272 bytes and compresses to 36,562 bytes.
+New archive files, including the descriptor, average 38,120.5 bytes instead of
+152,624,963 bytes. This 99.975\% reduction concerns incremental publication
+output. Required compressed dependencies remain 152,621,777 bytes, only 2,042
+below the full snapshot. The materialized database still occupies
+2,102,272,000 bytes. Mean worker peak RSS falls from 1,375,010,816 to 51,650,560
+bytes; this comparison concerns the frozen full-buffer gzip publisher and this
+append workload, not a general optimal-compression bound.
+
+The regressions are explicit. Cold restoration rises from 1.60643 to 3.23116
+seconds, and full logical comparison from 3.37663 to 14.51644. Layout and cache
+effects are not isolated by this experiment. New-root dependency replay remains
+about 2.11 seconds. These costs are included in the complete-worker comparison;
+neither cheap cold access nor shrinking total historical storage follows from
+a small publication delta.
+
+Let $B$ denote full database bytes and $D$ the exported append database bytes.
+Compression now processes $D$, but publication is not bounded by $D$ alone.
+Preparation hashes both complete snapshots, checks all old payloads through
+indexed joins, and retains the new IDs. Publication still copies and hashes a
+full reconstruction. Cold use reads the parent and every delta, checks their
+identities and writes the full database; it does not obtain a small materialized
+history. SQLite caches, payload buffers, proof checking and the prepared key
+lists require additional working memory. Chains are capped at 32 layers, after
+which publication requires compaction or a full snapshot. Ancestor retention
+and compaction costs remain part of any amortized account.
+
+Logical equality and physical identity have distinct roles. The layer preserves
+all six authority tables and the accounting tuple, while a different transaction
+sequence changes the SQLite file hash. Its own reconstructed bytes are bound
+explicitly; the old raw-file hash is not reused for different bytes. Repeated
+layers reproduce the same physical database. The earlier full snapshot remains
+available as a control. Legacy readers require that control; the new checkpoint
+names the layer-aware reader explicitly.
+
+This result concerns the cost of publishing acquired knowledge. It establishes
+no new structural SAT category, query-time improvement, compact unrestricted
+closure or polynomial expansion bound. Remaining publication costs include
+history-wide preparation and cold materialization. Within the solver, sharing
+the immutable local CNF binding across selected guard certificates remains the
+next measured gate opportunity, with changed-context invalidation and all native
+proof checks retained. Automatic origin discovery and broader fresh coverage
+remain separate obligations.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}

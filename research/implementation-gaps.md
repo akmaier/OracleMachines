@@ -4,7 +4,26 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, composition on clause supports):
+Latest expansion checkpoint (24 November, immutable history layers):
+[Publish only checked append records](history-layer-publication.md).
+The exact preceding 173-record expansion now publishes about 38.1 KB while
+reusing its immutable parent, versus 152.6 MB for another full snapshot.
+Preparation plus publication falls 85.96%; complete workers fall 71.40%,
+including slower cold restoration and full table comparison. The full 2.10 GB
+materialized history, 160,338 native records and all prior authorities remain.
+No SAT query or structural coverage result changes. Initial rejection of the
+unchanged dirty accounting ledger is retained as a failed experiment; the new
+reader preserves stale metadata without trusting its counters.
+
+Preparation and logical comparison remain history-wide. Future append-boundary
+capture needs explicit conflict/rollback/schema contracts; cold materialization
+and chain compaction remain charged. Next within the solver, share exact local
+context preparation across selected guard certificates and test complete costs
+on fresh inputs. Resume `experiments/results/cnf-history-layers/checkpoint.json`
+with its named `experiments.cnf_history_layers.restore_archive` reader; use
+`full_snapshot_control` with legacy restore code. All prior proof blocks remain.
+
+Previous expansion checkpoint (24 November, composition on clause supports):
 [Reuse a compact native support and lift it to its enclosing CNF](guard-support-composition.md).
 The 34 local closures use supports with 2,433 literals instead of carrying
 32,371 full-context literals at those sites. Solve time falls 3.61% and checked

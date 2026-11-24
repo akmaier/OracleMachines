@@ -5,7 +5,26 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: compact supports survive different enclosing formulas
+## Latest evidence: reuse the stored history as well as its proofs
+
+[Layered publication](history-layer-publication.md) preserves the exact prior
+six-table union while publishing only its 173 appended native records. Complete
+publication workers fall 71.40%, and incremental archive output falls to 38.1 KB.
+The immutable parent and 2.10 GB materialized history remain necessary; cold
+restoration and full logical comparison regress. This closes a publication
+inefficiency without adding any discovered SAT category or completed query.
+
+Return to the solver's measured context-sharing opportunity: prepare one exact
+local CNF/position binding per contradiction witness and share it across selected
+guard certificates, retaining changed-context invalidation and native checking.
+Use fresh unlabelled inputs to test coverage and total recognition costs. Compact
+core recognition before guard rediscovery remains a candidate, but the older
+negative-pool failures rule out assuming a cheap broad scan. Automatic origins,
+wider interactions and efficient arbitrary-CNF closure remain open. The new
+checkpoint names a layer-aware restoration function and preserves the previous
+full snapshot for legacy readers.
+
+## Previous evidence: compact supports survive different enclosing formulas
 
 [Native composition on clause supports](guard-support-composition.md) makes the
 selected contradictory support an explicit reusable native root. Exact

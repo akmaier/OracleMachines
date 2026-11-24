@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_history_layers.py", line 117, in <module>
+    elif action=='trial':trial(out,Path(sys.argv[3]),sys.argv[4],int(sys.argv[5]))
+                         ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_history_layers.py", line 77, in trial
+    prepared=layers.prepare_append(p['base_archive'],work/'parent',work/'target',p['target_archive']['database_sha256'])
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_history_layers.py", line 69, in prepare_append
+    before=ledger(db,'prior');after=ledger(db)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_history_layers.py", line 47, in ledger
+    raise ValueError('Unclean accounting state; use a full snapshot')
+ValueError: Unclean accounting state; use a full snapshot
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_history_layers.py", line 116, in <module>
+    elif action=='run':run(out,Path(sys.argv[3]))
+                       ~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_history_layers.py", line 106, in run
+    subprocess.run([sys.executable,__file__,'trial',str(out),str(work),mode,str(repeat)],check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/opt/homebrew/opt/python@3.14/bin/python3.14', '/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_history_layers.py', 'trial', 'experiments/results/cnf-history-layers', '/private/tmp/oraclemachines-history-layers-20261124', 'full', '0']' returned non-zero exit status 1.

@@ -28,7 +28,16 @@ classes.
 
 ## Paper
 
-[Compose guard proofs on their supporting clauses](research/guard-support-composition.md).
+[Reuse the immutable parent when publishing proof history](research/history-layer-publication.md).
+The same 173-record append now publishes about 38.1 KB instead of another
+152.6 MB full snapshot. Preparation and publication fall 85.96%, and the
+complete worker falls 71.40%, including cold restoration, exact table
+comparison and proof replay. The parent remains required; cold restoration is
+slower and the materialized history remains 2.10 GB. No SAT coverage or query
+runtime changes. Resume the new checkpoint with its explicitly named layer
+reader; the previous full snapshot remains available.
+
+Previous: [Compose guard proofs on their supporting clauses](research/guard-support-composition.md).
 The same 34 local closures now use compact native cores and checked subset
 wrappers. Solve time falls 3.61% and checked native state 5.17% versus full-context
 witness composition. Ordinary search remains faster by the measured 4.60%

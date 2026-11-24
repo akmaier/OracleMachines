@@ -1,0 +1,36 @@
+{
+  "decision": "Use the checked history layer for this append-only publication, retaining the previous full snapshot and explicitly naming the new reader. No solver default, proof authority or SAT coverage changes.",
+  "limitations": [
+    "This is publication of the already checked support-composition expansion: exactly the same parent and target rows, with no new SAT acquisition or coverage experiment.",
+    "Both policies charge snapshot identity, old-payload/schema/accounting preservation checks, publication, cold restoration, exact logical comparison and new-proof dependency replay through both readers. Shared input restoration is reported separately; imports and source hashing precede worker timing.",
+    "Full uses the preceding gzip-and-parts publisher unchanged. Layer exports the prepared append set, compresses only the delta, reconstructs once to bind physical SQLite bytes, and publishes a bound descriptor referencing the immutable parent.",
+    "An unchanged dirty accounting ledger is preserved as stale metadata, never trusted for row or resource counts. Clean ledgers must follow exact append accounting; changed dirty metadata requires a full snapshot.",
+    "Logical table/ledger equality is required. Physical target-file identity is not required for the layer, because applying appends in one transaction can change SQLite layout/header bytes. Each restored layer must match its own declared physical hash.",
+    "The old AppendDelta cursor exports a different eight-table schema on a live connection; it cannot be reused unchanged. The new closed-snapshot diff preserves its append/conflict discipline for the six current tables and existing accounting triggers.",
+    "A layer still needs its parent, full materialized disk space and cold parent reads. Preparation scans/checks old history and retains new IDs; costs are not proportional only to new rows. Chains are capped at 32 layers and unsupported/non-append changes require a full snapshot.",
+    "The parent and target are closed and exclusively owned between preparation and export. Hashes authenticate bytes relative to trusted experiment entries, not arbitrary SAT claims. Prior full-history proof authority is reused, while all new roots and dependencies are replayed.",
+    "Two serial repetitions in reverse order on one exposed historical expansion; no general scale or peak-memory theorem. The frozen full-snapshot checkpoint remains available."
+  ],
+  "new_records_this_run": 0,
+  "next_publication_target": "If publication remains dominant, capture an exclusively owned append boundary during the checked merge; require explicit schema, rollback, duplicate and dirty-ledger contracts before avoiding endpoint rediscovery.",
+  "next_solver_target": "Bind the immutable local CNF and its positions once per contradiction witness, sharing that context across selected guard certificates while retaining all reasons, conflicts, coordinate checks and native replay.",
+  "publication_delta_records": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 173
+  },
+  "relative_changes": {
+    "cold_restore_seconds": 1.0113912900737918,
+    "complete_worker_seconds": -0.7140475754445277,
+    "logical_equality_seconds": 3.2990949391229236,
+    "new_dependency_replay_seconds": -0.0019026208918311305,
+    "new_retained_bytes": -0.9997502341736849,
+    "peak_rss_bytes": -0.9624362518469091,
+    "publication_complete_seconds": -0.8595837400633588,
+    "required_compressed_bytes": -1.3379300907168101e-05
+  },
+  "remaining_publication_cost": "Full snapshot identity/payload comparisons, cold materialization and dependency retention; layers do not establish O(delta) total cost."
+}

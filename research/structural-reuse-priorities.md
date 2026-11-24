@@ -12,7 +12,40 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse unchanged proof history during publication
+## Current investigation: unchanged history now reused during publication
+
+[Parent-plus-delta publication](history-layer-publication.md) implements the
+previous highest publication target on the exact 173-record append. Mean
+preparation plus publication falls 132.99 to 18.67 seconds (85.96%); complete
+workers fall 141.94 to 40.59 seconds (71.40%). Newly published files fall from
+152.6 MB to 38.1 KB, but the parent remains required and the materialized history
+stays 2.10 GB. Cold restore rises 1.61 to 3.23 seconds; full logical comparison
+rises 3.38 to 14.52. Both regressions are included. All 160,338 native records,
+other authorities and the previous full snapshot remain preserved. This is a
+publication saving, not broader coverage or faster SAT solving.
+
+**Remaining publication cost:** history-wide preparation (13.60 seconds) and
+logical comparison (14.52) dominate the layered worker. An owned append boundary
+captured during the checked merge could avoid rediscovering additions, subject
+to explicit rollback/conflict/schema/accounting contracts. Parent bytes, cold
+materialization and eventual chain compaction remain real costs. The first
+failed trial and the correction for unchanged dirty accounting are preserved.
+
+**Next solver investigation:** share the immutable local CNF and its clause
+positions once per witness attempt across selected guard certificates. The
+previous edit-28 profile puts 0.02093 cumulative seconds in local RUP checks;
+composition now takes 0.02096. Retain every reason, conflict, support membership
+and native proof check; reset bindings on changed contexts. Charge misses and
+complete query costs. Fresh unlabelled coverage, automatic origins, useful wider
+interactions and unrestricted bounds remain open. Broad ready-core matching
+must account for preserved negative/partial-pool regressions.
+
+Resume `experiments/results/cnf-history-layers/checkpoint.json` using
+`experiments.cnf_history_layers.restore_archive`; its `full_snapshot_control`
+retains the previous format for legacy readers. Do not pass a layered descriptor
+to frozen legacy restore functions.
+
+## Previous investigation: reuse unchanged proof history during publication
 
 [Support-subset composition](guard-support-composition.md) preserves 34 local
 closures while reducing solve time 3.61%, complete-worker time 1.26% and checked

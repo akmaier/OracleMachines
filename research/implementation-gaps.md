@@ -4,7 +4,20 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, consumed preparation lifetime):
+Latest expansion checkpoint (24 November, binary closure inside whole probes):
+[Keep new recognition subject to total cost](probe-binary-closure.md). An exact
+census certifies 19 previously inconclusive cofactors using existing binary and
+unit proofs. The live gate adds 80 fresh negative cofactors but retains the
+same 40/48 coverage, raises solve mean 8.86% and worker mean 5.03%, and stores
+2.72% more native payload. Every pair regresses; no default changes. Next:
+defer full-residual normalization/key creation on binary misses. Fresh case
+38 pays for 67 such normalizations and obtains only six refutations. Preserve
+source-bound publication and the existing gate's decisions, then compare with
+both controls. The eight unresolved roots still need broader structural work.
+Resume `experiments/results/cnf-probe-binary-census/checkpoint.json` using the
+multipart archive reader. All 1,689 tests and 78 focused checks pass.
+
+Previous expansion checkpoint (24 November, consumed preparation lifetime):
 [Separate cleanup, admission and active memory](probe-lifetime.md). Early release
 reduces solve mean 4.57% exposed / 3.54% fresh and complete-worker mean 1.67% /
 1.92% versus original 2 MiB retention. A 4 MiB original control nearly matches

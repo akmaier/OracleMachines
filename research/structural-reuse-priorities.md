@@ -12,7 +12,46 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: distinguish preparation savings from new structure
+## Current investigation: avoid full preparation on inconclusive binary checks
+
+[Binary closure inside whole probes](probe-binary-closure.md) establishes a
+real recognition opportunity and a negative total-cost result. An unchanged
+exact-prefix census finds 19 checked binary refutations among 353 unit-consistent
+cofactors. The optional gate uses those existing native proof rules, but four
+alternating repetitions retain 40/48 roots in each stream while raising solve
+mean 8.85% exposed / 8.86% fresh and complete-worker mean 5.27% / 5.03%.
+Every pair regresses. Keep this gate experimental; more local certificates are
+not evidence of cheaper expansion or broader whole-input coverage.
+
+Fresh closure compiles 80 negative cofactors from 2,239 attempts and leaves
+2,159 inconclusive. It saves 61 native dispatches but adds 172 native records,
+2.72% payload and 2.69% selected retained Python state. Native dispatch counts
+exclude the gate's compiled certificates. The larger accounting is decisive.
+
+**Next target: defer full-residual canonicalization until a raw binary
+contradiction needs publication.** The largest fresh paired regression is
+unresolved repeat 38 (size 150): 1.1528 to 1.3005 seconds. Its gate makes 100
+SCC calls, finds six refutations and normalizes 67 residuals; 61 normalizations
+serve only misses. The existing SCC routine accepts noncompact variable labels.
+Test raw post-UP binary discovery first, canonicalize and build the checked
+source-bound certificate only on hits, and preserve old certificate bytes by
+canonical SCC reconstruction if needed. Measure against both the preceding
+handoff policy and the slower closure gate; this saving is not yet measured.
+
+This removes only part of the overhead. The exact-prefix profile attributes
+0.1078 of 0.3275 instrumented helper seconds to normalization, and 0.1228 to SCC;
+these cumulative costs are not unprofiled savings estimates. Binary model or
+graph reuse is a secondary candidate, requiring current-clause validation and
+explicit coordinate handling. The fresh remaining roots are six random-three
+sources and shared-mix edits 34/67. Their interaction still needs broader
+certified coverage, regardless of cheaper recognition.
+
+Resume `experiments/results/cnf-probe-binary-census/checkpoint.json` with
+`experiments.cnf_archive_parts.restore_archive`. The failed guard-test fixture
+and corrected audit-variable failure are preserved alongside the negative
+benchmark. All earlier authoritative payloads and experiments remain intact.
+
+## Previous investigation: distinguish preparation savings from new structure
 
 [Consumed preparation lifetime](probe-lifetime.md) clears used references and
 separates cleanup from earlier admission. Four alternating repetitions show

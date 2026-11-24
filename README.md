@@ -28,7 +28,14 @@ classes.
 
 ## Paper
 
-[Retire consumed preparation and account for active memory](research/probe-lifetime.md).
+[Measure binary refutations inside inconclusive probes](research/probe-binary-closure.md).
+The new gate finds valid cofactors but keeps 40/48 coverage and increases fresh
+solve time 8.86%, complete-worker time 5.03%, and native payload 2.72%. It remains
+experimental. Next: defer full-residual normalization until a binary refutation
+actually requires a stored certificate; 61 of 67 normalizations in the worst
+fresh regression serve only inconclusive checks.
+
+Previous: [Retire consumed preparation and account for active memory](research/probe-lifetime.md).
 Early release saves 3.54% fresh solve time and 1.92% complete-worker time versus
 2 MiB retention; original 4 MiB retention nearly matches it. Proof storage and
 coverage are unchanged, and no substantial memory reduction is demonstrated.

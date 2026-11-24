@@ -10048,6 +10048,37 @@ mixtures remain unresolved. These are different fixed streams, not a loss of
 coverage caused by cleanup. Further buffer tuning cannot by itself establish
 broader certified structure or polynomial expansion for arbitrary CNF.
 
+\paragraph{A valid additional recognizer can make expansion more expensive.}
+Unit-consistent probes can still contain contradictory binary subsystems.
+An exact-prefix census of three exposed unresolved attempts finds 19 such
+cofactors among 353 probes. The observer leaves the original search unchanged.
+Each candidate reuses its forced assignment, refutes the residual binary subset
+with the existing implication-path certificate, and links that result to the
+cofactor through the existing unit rule. A refuted cofactor excludes one
+polarity; it does not by itself refute the parent. A satisfiable binary subset
+remains inconclusive for its other clauses.
+
+We test this additional gate against the preceding handoff policy in four
+alternating repetitions. The exposed stream has sizes 120/144; fresh sizes
+126/150 use seed 202611240303. Both arms retain 40/48 distinct-root coverage on
+each stream, with identical per-query verdict status. Solve mean nevertheless
+rises 8.85\% exposed and 8.86\% fresh; complete-worker mean rises 5.27\% and
+5.03\%. Every pair regresses. On fresh inputs, 80 of 2,239 closure attempts
+produce a negative cofactor, while 2,159 remain inconclusive. Native dispatches
+fall from 4,762 to 4,701, but stored native records rise from 6,558 to 6,730.
+Native key-plus-payload bytes increase 2.72\% and selected retained Python
+state 2.69\%. The dispatch cap does not charge these compiled certificates
+as native expansions; complete time and storage expose their cost.
+
+The gate therefore remains experimental. A profile of the largest fresh query
+regression finds 100 closure calls, six refutations and 67 residual
+normalizations. Only six of those normalizations lead to a certificate.
+The next candidate is to defer full-residual canonicalization and key creation
+until a raw binary contradiction requires publication, preserving exact source
+mapping and full checking. Its saving has not yet been measured. Finding more
+local structure is useful evidence, but neither more certificates nor fewer
+dispatches alone establishes cheaper expansion or broader tractable coverage.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

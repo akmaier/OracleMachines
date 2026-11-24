@@ -1,0 +1,14 @@
+..F...
+======================================================================
+FAIL: test_guarded_binary_conflict_uses_native_authority (solver.test_cnf_probe_binary_closure.BinaryClosureTests.test_guarded_binary_conflict_uses_native_authority)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_probe_binary_closure.py", line 26, in test_guarded_binary_conflict_uses_native_authority
+    self.assertGreater(r['metrics'].get('closure_compiled_children',0),0)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 not greater than 0
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.102s
+
+FAILED (failures=1)

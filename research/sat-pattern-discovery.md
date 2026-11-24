@@ -5,7 +5,26 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: more preparation reuse leaves the structural frontier intact
+## Latest evidence: more local refutations do not ensure broader coverage
+
+[Binary closure after unit-consistent probes](probe-binary-closure.md) finds
+19 additional negative cofactors in an unchanged 353-probe exposed census.
+Existing unit and implication-path certificates check every source lift. The
+optional live gate compiles 80 fresh negative cofactors, but both policies
+still close the same 40/48 roots in both streams. Fresh solve time rises 8.86%,
+complete-worker time 5.03%, proof payload 2.72% and retained Python state 2.69%.
+All paired comparisons regress. A binary SAT result remains inconclusive for
+its full cofactor, and one excluded polarity does not refute its parent.
+
+The next cost gap is unnecessary preparation of misses: fresh worst regression
+38 performs 67 full-residual normalizations for six certificates. Test binary
+discovery in raw post-UP coordinates before paying for canonical publication.
+This has not been implemented or timed. Keep the gate experimental and preserve
+the two original timing controls. Six fresh random-three roots and two
+shared-mix edits remain unresolved; lower recognition cost alone would not
+establish an efficient partition of their interactions or arbitrary SAT.
+
+## Previous evidence: more preparation reuse leaves the structural frontier intact
 
 [Consumed preparation lifetime](probe-lifetime.md) separates reference cleanup,
 earlier admission and a larger original allowance. Early release saves 3.54%

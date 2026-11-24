@@ -9978,6 +9978,44 @@ source and charge unconsumed preparation. A nonconflicting propagation result
 provides no SAT verdict. These finite measurements do not establish an efficient
 partition or polynomial expansion bound for arbitrary CNF.
 
+\paragraph{Inconclusive probes can prepare the actual search child.}
+An inconclusive whole-clause probe has already restricted, canonicalized and
+propagated a cofactor that ordinary search may visit next. We pass this
+preparation only to the identical parent, exact Boolean assignment and actual
+child object. Native verification suppresses the hints. Existing pool reuse,
+recognition priority and branch order remain unchanged. A nonconflicting probe
+provides no SAT verdict; its deterministic preparation can still avoid repeated
+work. The offers are transient and add no proof format or persistent table.
+
+The private canonicalization uses the parent's established clause invariant:
+restriction preserves literal order, and strictly increasing compact relabeling
+preserves that order. Deduplication and exact serialization are still required.
+The consumer receives the same canonical formula and propagation trace that
+recomputation would produce. Source identity and one-use consumption are
+implementation obligations in addition to this semantic correspondence.
+
+We compare the preceding policy with selected preparation allowances of
+256 KiB and 2 MiB. Four alternating serial repetitions use the exposed 108/132
+stream and a fresh 114/138 stream with seed 202611240057; each has 72 queries and
+48 distinct roots. All policies retain the same models, dispatches, proof bytes
+and 42/48 coverage. With 2 MiB, solve mean falls 3.58\% exposed and 2.68\% fresh;
+complete-worker mean falls 1.98\% and 1.58\%, with every pair faster. The 256 KiB
+policy instead raises solve mean 0.31\% and 1.16\%. Admission, failed retention,
+trace copying, verification, serialization and persistence remain charged.
+
+The larger policy reuses 783 fresh child preparations and 659 propagation
+results, avoiding 1,291,626 native propagation literal visits. Yet admission
+sizing visits 1,664,172 literals. Persistent storage and retained solver graphs
+are unchanged; mean process RSS remains near 0.83 GB. The selected-payload cap
+excludes control structures, allocator overhead and construction transients, so
+it is not a process-memory bound. Moreover, consumed ancestor offers stay held
+until their recursive visits return. The fresh stream still rejects 684 offers
+and discards 218 admitted ones. The next lifetime question is when their data
+can transfer to the existing native computation or be released, without hiding
+retained references. All six fresh unresolved roots remain random-three, which
+accounts for 76.64\% of solve time. This local saving establishes neither broader
+tractable coverage nor a uniform polynomial bound for unrestricted SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

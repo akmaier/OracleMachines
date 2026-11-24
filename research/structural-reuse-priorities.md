@@ -12,7 +12,39 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse work from inconclusive whole-clause probes
+## Current investigation: release consumed preparation before retaining more
+
+[Exact probe-to-child handoff](probe-handoff.md) reuses work from inconclusive
+whole-clause probes at the ordinary child while preserving prior pool and
+recognition order. Four alternating repetitions give a 2 MiB selected-payload
+policy solve savings of 3.58% exposed and 2.68% fresh; complete-worker savings
+are 1.98% and 1.58%. Every pair improves. The 256 KiB policy is slower by
+0.31% and 1.16% in solve mean. Proof bytes, models, dispatches, retained solver
+graphs and 42/48 coverage are identical across all three policies.
+
+**Next target: shorten the lifetime of consumed offers.** At 2 MiB, the fresh
+stream consumes 783 preparations and reuses 659 propagation results, but rejects
+684 offers and discards 218 admitted ones. Ancestor offers remain charged until
+the entire child visit returns. Determine when ownership can move to the already
+existing native visit, and remove now-unused preparation references. Release
+only after canonicalization and any needed propagation have been consumed;
+keep genuine pending opposite branches charged. Lowering a counter alone is
+not a memory improvement. Measure admission sizing (1.66 million fresh literal
+visits), failed offers, peak charge and RSS before considering a higher cap.
+
+Fresh worst unresolved case 37 (size 138, mean 1.2407 seconds) consumes only 11
+offers at 2 MiB and rejects 90; normalization calls fall 739 to 728. Its exact
+prefix and native payloads match the measured worker. This is the concrete
+lifetime test case, not a new supplied structural label.
+
+Random-three still accounts for 76.64% of fresh solve time and all six remaining
+unresolved roots. Broader structural decomposition remains the coverage gap.
+The handoff changes acquisition overhead, not the search tree or tractable
+categories. Use the exact-prefix profile and retain the small-cap regression.
+Resume `experiments/results/cnf-probe-handoff/checkpoint.json`; its cumulative
+archive uses `experiments.cnf_archive_parts.restore_archive`.
+
+## Previous investigation: reuse work from inconclusive whole-clause probes
 
 [Complete-result priority](whole-pool-priority.md) removes the two exposed
 57/58-dispatch reconstructions by using existing complete proofs. Each measured

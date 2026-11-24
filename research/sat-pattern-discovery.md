@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: complete-first arbitration avoids unnecessary reconstruction
+## Latest evidence: preparation reuse preserves coverage and reduces repeated work
+
+[Exact probe-to-child handoff](probe-handoff.md) binds earlier inconclusive
+probe preparation to the actual ordinary child. Pool reuse, recognition order,
+branch choices and all certificate checks remain in place. With 2 MiB of
+selected preparation payload, four paired repetitions reduce solve mean 3.58%
+exposed and 2.68% fresh. A 256 KiB allowance instead adds 0.31% and 1.16%.
+All models, native dispatches and proof bytes remain identical.
+
+Coverage remains 42/48, with six fresh random-three roots unresolved. This is
+cheaper preparation within the current classification, not an expanded tractable
+family. The strongest immediate reuse opportunity is lifetime: consumed ancestor
+offers remain held while deeper search runs and block descendant admissions.
+Establish safe ownership transfer and disposal before raising capacity again.
+Keep broader decomposition of the unresolved residuals as the discovery goal;
+random-three still consumes 76.64% of fresh solve time.
+
+## Previous evidence: complete-first arbitration avoids unnecessary reconstruction
 
 [Complete-result priority](whole-pool-priority.md) retains the same source-derived
 near-match rule and tries an existing complete proof or model before extracting

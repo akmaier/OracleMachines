@@ -4,7 +4,17 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, complete-result priority):
+Latest expansion checkpoint (24 November, exact probe handoff):
+[Reuse preparation at the actual child](probe-handoff.md). The 2 MiB policy
+reduces mean solve time 3.58% exposed / 2.68% fresh, with all four pairs faster.
+The 256 KiB policy regresses. Answers, models, proof bytes, retained solver state
+and 42/48 coverage remain unchanged. Next: release consumed preparation before
+descendant search; fresh acquisition rejects 684 offers despite its larger cap.
+The six unresolved random-three roots still need broader structural discovery.
+Resume `experiments/results/cnf-probe-handoff/checkpoint.json` using the existing
+multipart archive reader; all earlier results remain preserved.
+
+Previous expansion checkpoint (24 November, complete-result priority):
 [Try complete reuse before a partial plan](whole-pool-priority.md). Five exposed
 and five fresh queries use checked complete proofs without native expansion.
 Coverage remains 42/48 in each stream. Exposed solve mean improves 2.17%; fresh

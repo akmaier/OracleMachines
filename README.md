@@ -28,7 +28,12 @@ classes.
 
 ## Paper
 
-[Prefer complete results before partial reconstruction](research/whole-pool-priority.md).
+[Reuse probe preparation at the actual child](research/probe-handoff.md).
+A 2 MiB preparation allowance reduces solve mean 3.58% exposed / 2.68% fresh;
+a 256 KiB allowance is slower. Proof storage and 42/48 coverage remain unchanged.
+Next: release consumed ancestor preparation so useful descendant offers fit.
+
+Previous: [Prefer complete results before partial reconstruction](research/whole-pool-priority.md).
 Existing proofs replace two 57/58-dispatch reconstructions with zero fresh search.
 Exposed solve mean improves 2.17%; fresh solve time is essentially unchanged,
 while fresh complete-worker time falls 1.63% and proof payload 3.03%. Coverage

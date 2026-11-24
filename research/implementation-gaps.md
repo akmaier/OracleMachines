@@ -4,7 +4,21 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, local guard interaction composition):
+Latest expansion checkpoint (24 November, selective live guard closure):
+[Measure local guard composition within whole queries](guard-closure-live.md).
+The unit/binary gates close 25/34 local contexts on different paths, but all
+eight queries remain unresolved. Solve time rises 7.40%/18.80% and complete-worker
+time 2.02%/3.04% against ordinary search; checked-native-state totals also grow.
+Binary checking admits 1,218 consequences while 635 of 669 sites are inconclusive.
+The largest regression's profile charges 0.61726 cumulative seconds to support
+transport (including 0.56672 in RUP checking), versus 0.28442 for seven closures.
+Next build a tentative graph first, then validate only candidate witness-path
+supports; reject a satisfiable superset graph without treating it as a source
+verdict. Preserve native publication checks and explicit invalid-edge fallback.
+Keep both current gates experimental. Resume
+`experiments/results/cnf-guard-closure/checkpoint.json`.
+
+Previous expansion checkpoint (24 November, local guard interaction composition):
 [Compose conditional consequences into native local refutations](guard-interactions.md).
 All 648 saved contexts are checked; 61 distinct local CNFs receive composed
 native refutations. Forty close from opposite unit guards, one more from units

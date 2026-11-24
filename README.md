@@ -28,7 +28,14 @@ classes.
 
 ## Paper
 
-[Compose guard interactions into checked local refutations](research/guard-interactions.md).
+[Test guard closure during live search](research/guard-closure-live.md).
+Unit and binary guards close 25 and 34 local contexts, but complete no additional
+whole query. Solve time rises 7.40% and 18.80% against ordinary search. The profile
+points to proof preparation on inconclusive sites: next build a tentative graph
+first and validate only its contradiction paths before native publication.
+Both gates remain optional; all previous results and regressions are preserved.
+
+Previous: [Compose guard interactions into checked local refutations](research/guard-interactions.md).
 Saved consequences refute 61 local CNFs; 20 need binary guards, and three roots
 were absent after the earlier shared query budget stopped. Local closure
 acquisition takes 36.55% less time in single cold pairs, but discovery and storage

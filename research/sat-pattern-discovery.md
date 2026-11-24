@@ -5,7 +5,27 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: guard interactions yield checked local closures
+## Latest evidence: distinguish candidate graphs from checked proof paths
+
+[Live short-guard closure](guard-closure-live.md) reaches 25 local closures with
+unit guards and 34 with binary guards, but completes no additional whole query.
+Two alternating comparisons on all eight exposed edits regress 7.40% / 18.80%
+in solve time against ordinary search. The binary policy checks 1,218 consequences
+across 669 sites while 635 sites remain inconclusive. More recognized local
+structure has not yet repaid its discovery and proof-preparation costs.
+
+The next structural filter separates tentative recognition from checked use.
+The graph of all matching short guards contains the graph of locally supported
+guards. If the former is satisfiable, the latter cannot contradict. If it is
+contradictory, only a pair of paths whose actual supports and unit/split proofs
+pass checking may refute the original local CNF. Missing support requires bounded
+reconsideration or ordinary fallback; a tentative graph supplies no source
+verdict. The largest regression's profile identifies local RUP preparation as
+the dominant gate cost. Test deferral before adopting more elaborate matching
+or storing every local consequence. Wider guards, automatic origin discovery,
+fresh evaluation and a uniformly efficient arbitrary-CNF partition remain open.
+
+## Previous evidence: guard interactions yield checked local closures
 
 [Composing local guard consequences](guard-interactions.md) adds an exact
 interaction description. Each admitted guard consequence is RUP-checked on the

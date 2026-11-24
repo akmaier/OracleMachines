@@ -1,0 +1,31 @@
+{
+  "comparisons": {
+    "path": "experiments/results/cnf-guard-closure/comparisons.json",
+    "sha256": "b0a5a75cc830b8cdfa73743a6e2358133bfc31fb8fa8270a07967f827f313677"
+  },
+  "limitations": [
+    "Only attempt is profiled. The two unprofiled alternating repetitions remain the timing comparison.",
+    "Cumulative rows overlap; retain self time and calls, and do not sum nested cumulative times.",
+    "Both profiles must reproduce their unprofiled native counters, gate summaries and database payloads."
+  ],
+  "parent_protocol": {
+    "path": "experiments/results/cnf-guard-closure/protocol.json",
+    "sha256": "4558e07a7f357adaae64af854bf7946437dc6184396083a9c260a25bd7546910"
+  },
+  "relative_changes": {
+    "1": 0.059849043398372714,
+    "4": 0.11778952165931522,
+    "28": 0.28041815193303576,
+    "37": 0.1897081560858671,
+    "40": 0.3637849128047381,
+    "61": 0.18694065068995003,
+    "64": 0.0906660866663036,
+    "67": 0.22607273898285007
+  },
+  "selection": "Largest observed binary/ordinary mean solve-time ratio; adaptive exposed diagnostic.",
+  "source": {
+    "path": "/Users/maier/Documents/code/OracleMachines/experiments/profile_cnf_guard_closure.py",
+    "sha256": "508127d04864743d0002b5796664dade9d403af94f7416eeea1a23b16ff22245"
+  },
+  "target": 40
+}

@@ -12,7 +12,38 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: selectively close local guard contradictions
+## Current investigation: reject inconclusive guard graphs before preparing proofs
+
+[The selective live gate](guard-closure-live.md) compiles valid local closures,
+but its total-cost comparison regresses. Unit guards close 25 contexts and
+binary guards 34 on their respective paths; all eight whole queries still stop
+at 256 dispatches. Solve-mean totals rise 7.40% / 18.80% against ordinary search,
+and complete-worker totals rise 2.02% / 3.04%. Checked-native-state totals grow
+1.64% / 6.19%. Keep both gates optional and retain every comparison.
+
+**Next target: build a tentative short-guard graph before transporting and
+checking all local consequences.** If that larger graph is satisfiable, its
+valid subset cannot contradict. If it is contradictory, check only the actual
+supports on its two witness paths, then compile native source proofs. An invalid
+edge must be removed and reconsidered within a budget, or cause ordinary fallback.
+The tentative graph never has authority to prune a branch or assert SAT.
+
+This boundary is supported by the largest regression's query profile: edit 40
+spends 0.98437 cumulative profiled seconds in the gate, including 0.61726 for
+318 support transports (0.56672 in local RUP checking), versus 0.28442 for seven
+closures. These nested times overlap. Across all cases, binary guards check
+1,218 consequences at 669 sites but leave 635 sites inconclusive. Full-query
+normalization and native verification remain substantial costs after useful
+paths are found. Compare the proposed filter with this frozen eager gate,
+ordinary search and the guided policy, including invalid supports and miss costs.
+
+Sharing repeated hint core bodies remains second; it does not address this
+gate's repeated preparation on inconclusive contexts. Origin discovery, fresh
+unlabelled coverage, wider guards and unrestricted resource bounds remain open.
+Resume `experiments/results/cnf-guard-closure/checkpoint.json`; all earlier
+authoritative payloads, local certificates and negative comparisons are retained.
+
+## Previous investigation: selectively close local guard contradictions
 
 [Guard interaction composition](guard-interactions.md) refutes 61 distinct local
 CNFs from the 648 saved ordinary contexts. Forty have opposite unit guards,

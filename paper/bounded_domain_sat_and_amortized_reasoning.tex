@@ -10477,6 +10477,74 @@ with opposite units and admitting supported binary interactions where useful.
 Wider guards, automatic origin discovery, fresh evaluation and a uniform bound
 for arbitrary CNF remain open. No solver default changes in this experiment.
 
+\paragraph{Test local closure inside the whole query.}
+We next integrate short-guard composition at ordinary probe sites, after the
+existing structural discovery attempt. The gate first checks source bindings
+and local support containment. It transports and RUP-checks each eligible
+consequence before admitting it to the graph. It tries opposite units, then
+units together with original binary clauses, then supported binary guards.
+Only a contradictory SCC supplies paths for native source-level unit/split
+composition. A satisfiable graph supplies no source verdict, and an unsupported
+or budget-limited attempt retains ordinary probing and branch order.
+
+Two alternating serial repetitions compare all eight exposed edits under four
+policies: ordinary lazy binary probing, guided certificate reuse, a gate limited
+to unit guards, and a gate also admitting binary guards. Every worker restores
+the causal origin prefix and loads its earlier support bank; later repeats and
+the posthoc local census do not seed search. All retain the 256-dispatch query
+budget. Separate allowances cap 100,000 template checks, 1,000,000 reserved
+support literals, 4,096 compiled witness edges and 256 edges per path. These
+allowances do not bound total work or memory, and compiled proof nodes remain
+distinct from native search dispatches. Preparation, checking, persistence and
+cold replay must accompany any local acquisition saving.
+
+All 64 timed workers still stop at the query limit. Unit guards close 25 local
+contexts: 24 from opposite units and one from units with original binary clauses.
+Binary guards close 34: 15 from opposite units, one from unit/binary interaction
+and 18 requiring binary guards. The policies follow different paths, so these
+counts are neither additive coverage gains nor a decomposition of the earlier
+61 offline closures. Solve-mean totals are 8.02247 seconds for ordinary search,
+8.13361 for guided certificate reuse, 8.61624 for unit guards and 9.53052 for
+binary guards. The two gates therefore add 7.40\% and 18.80\% solve time relative
+to ordinary search. Complete-worker totals rise from 93.68631 seconds to
+95.58210 and 96.52998 seconds, increases of 2.02\% and 3.04\%. These intervals
+include restoration, setup, replay, serialization and compression; previous
+origin acquisition and final audits remain additional. No default changes.
+
+The binary policy checks 1,218 local consequences across 669 sites, runs 634
+graph checks and leaves 635 sites inconclusive. It reserves 188 compiled witness
+edges, but constructs position maps over 496,901 clauses and charges 1,286,336
+literal visits to consequence normalization. All eight per-case solve means
+regress. The largest regression, edit 40 at 36.38\%, is selected for a separate
+adaptive query profile. There the gate takes 0.98437 cumulative profiled seconds:
+318 support transports take 0.61726 seconds, including 0.56672 for local RUP
+checking, while seven closure compilations take 0.28442 seconds. Across the full
+query, normalization rises from 679 calls to 1,117. Cumulative profile times
+overlap and are not additive exclusive costs. The two comparison repetitions
+remain an exposed diagnostic, not a population guarantee.
+
+Checked-native-state endpoint totals also increase: ordinary search retains
+154,443,458 bytes, unit guards 156,982,934 and binary guards 164,001,110. SQLite
+endpoint totals rise from 719,503,360 to 720,584,704 and 723,243,008 bytes. Gate
+template/record graphs add 226,503--367,731 bytes per worker; overlapping tracker
+metadata must not be counted twice. These sums describe separate runs, not
+simultaneous space. No peak-memory reduction is established. The old cumulative
+payloads and all retained alternative certificates remain preserved.
+
+This regression identifies a more selective next boundary: discover a candidate
+contradiction before preparing every local proof. Let $B$ be the original binary
+fragment, $Q$ the tentative short-guard clauses and $Q_{\mathrm{valid}}\subseteq Q$
+the locally supported subset. Any model of $B\land Q$ also satisfies
+$B\land Q_{\mathrm{valid}}$. A satisfiable tentative graph therefore excludes
+a contradiction in that supported subgraph, without deciding the original CNF.
+For a contradictory graph, every nonoriginal edge on the two selected paths
+must still pass local support and proof checks before native publication. An
+empty candidate instead requires its own local unit certificate. An invalid
+edge requires removal and bounded reconsideration, or ordinary fallback.
+The proposed filter can defer unnecessary preparation; it supplies no unchecked
+authority and has not yet demonstrated a cost saving. Automatic origin discovery,
+wider interactions, fresh evaluation and unrestricted expansion bounds remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

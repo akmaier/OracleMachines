@@ -11394,6 +11394,102 @@ policy adds neither a completed whole query nor an efficient partition of
 arbitrary CNFs; useful origin acquisition, live routing and uniform resource
 bounds remain open.
 
+\subsection{Filtering impossible paths and using contrapositive symmetry}
+\label{sec:shortening-reach-filters}
+
+A candidate need not consume a fresh BFS slot when its desired path is already
+impossible. For a nonzero literal $r$, a path to $\neg r$ cannot exist if $r$
+has no outgoing edge, $\neg r$ has no incoming edge, or the endpoints belong to
+different weak components of the implication graph. Every directed path would
+also connect them in the underlying undirected graph. These conditions concern
+the supported binary graph: wider source clauses can still imply $\neg r$.
+Neither rejection nor a fixed point of this detector authorizes SAT or UNSAT.
+
+After a negative-cache miss, the generic filter prepares an incoming-endpoint
+set. The stronger variant also prepares a union-find index lazily when a
+candidate survives the degree tests. Each conditioned state gets a new index
+in its current coordinates. Filtered roots neither spend a BFS slot nor store
+a completed reachable set. An older full set could remain useful after a graph
+change where the simple filter fails, so a uniform bounded-budget dominance
+claim would be unjustified. Native path and guard replay remain unchanged.
+
+All 615 exposed events enter two alternating isolated repetitions per target
+for six policies. With numeric ordering, no filter, endpoint filtering and
+additional weak-component filtering recognize 202, 204 and 210 events, with
+134, 136 and 139 roots. Discovery takes 8.56951, 8.80648 and 9.49568 seconds.
+With ternary-first ordering, the same variants recognize 263, 266 and 266 events,
+with 170, 173 and 173 roots, in 7.70442, 8.02671 and 8.69187 seconds. Their
+complete measured phases, including initial binding and event serialization,
+take 13.79011, 14.02425, 14.72403, 12.94034, 13.25283 and 13.92533 seconds in
+that order. Acquisition, input loading, startup, final reports and audits remain
+additional. These are descriptive two-run samples.
+
+No filtered policy loses a success relative to its own root order in this
+census, but none repairs any of the eleven previous ordering regressions.
+Weak components add no ternary-first success beyond endpoints and cost more.
+They turn 25 further root-budget stops into no-useful-literal outcomes: the
+endpoint policy leaves 245 stops and 104 such outcomes, while the weak variant
+leaves 220 and 129. This supplies more complete exploration of the current
+binary abstraction, not another solved SAT category.
+
+The generic census exposes a redundant preparation step. A binary clause
+generates contrapositive edges: whenever $u\to v$ is inserted, so is
+$\neg v\to\neg u$. A unit generates one self-contrapositive edge. Incoming
+edges at $\neg r$ therefore correspond exactly to outgoing edges at $r$.
+Their emptiness tests are equivalent. Across the four filtered policies, the
+generic incoming indices scan 620,786, 632,177, 533,755 and 550,725 adjacency
+entries without producing a distinct rejection. A specialized filter removes
+those scans and the incoming sets, retaining the same discovery function and
+optional weak index. Exact program and operational-count identity, apart from
+the removed scans, is required in a separate matched comparison.
+
+That comparison uses 128 isolated workers with two alternating generic and
+specialized repetitions per target and filtered policy. Numeric endpoint
+discovery takes 8.80652 versus 8.69148 seconds; numeric weak-component discovery
+takes 9.46966 versus 9.38382. Ternary endpoint discovery takes 8.00335 versus
+7.93273, and ternary weak-component discovery 8.65979 versus 8.57701 seconds.
+Every program and all other operational counts are identical. The exact removal
+of redundant index work yields observed reductions of only 0.88--1.31\%; these
+samples do not establish a stable timing ratio or a practical advantage over
+unfiltered ternary-first search.
+
+The specialized endpoint test takes constant expected lookup work using the
+existing adjacency table and constant extra storage. The optional union-find
+index takes $O(V)$ extra words for $V$ graph vertices, with near-linear amortized
+construction under the stated word and hash-table assumptions. Its largest
+observed size is 242 literal vertices. These costs, candidate checks and graph
+preparation lie outside the 16,384 BFS/invalidation-check cap and remain in
+elapsed time. The 64-root, 32-round and 256-witness-edge limits are unchanged.
+
+Fewer fresh traversals still need not reduce total work. Ternary endpoint
+filtering uses 26,361 roots instead of 27,075 but raises edge visits from
+327,276 to 339,030 and conditioned states from 2,777 to 2,837. The weak variant
+uses 22,953 roots, 338,595 edge visits and 2,914 states. Maximum cached membership
+rises from 1,409 to 1,538 and 1,564. The available budget supports more
+exploration; no general memory saving follows from the traversal count.
+
+Three roots lie beyond the union of all four preceding policies, and all three
+are already stored by ordinary whole-query search. Twelve isolated native-proof
+workers compare ordinary search and selected-support compilation with two
+alternating repetitions. Both readers verify all six authority tables. Ordinary
+solving takes 0.04549 seconds and retains 193,188 record bytes in 17 records;
+selected-support compilation takes 0.25871 seconds and retains 294,104 bytes in
+240 records. Complete phases take 0.15341 and 0.51439 seconds before discovery.
+This regression is retained: selected supports need not be minimal or beat a
+short ordinary proof. Warm rechecks add no records, and the cumulative bank
+remains unchanged.
+
+Neither the 48 repeated edits nor 48 newly seeded edits gains a recognition
+from filtering: each group retains eight numeric and fourteen ternary-first
+successes. These are edits of exposed source families. The current evidence
+supports keeping the filters optional and stopping further weak-component
+optimization for ternary-first coverage on this corpus. A larger cost target
+is repeated immutable source and template preparation across conditioned states,
+retaining every check that depends on changed assignments. Further path filtering
+alone cannot create the missing binary consequences. All 1,853 solver tests pass,
+and the new native archives and both comparison phases remain preserved. No
+whole-query gain or unrestricted complexity claim follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

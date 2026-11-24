@@ -1,0 +1,31 @@
+{
+  "analysis": {
+    "path": "experiments/results/cnf-shortening-filters/analysis.json",
+    "sha256": "7ea1367318800100aacbe9a4f01c77b36ce95cb8173d237e6c457f0e1072064a"
+  },
+  "costs": "The paired specialization reduces measured discovery only 0.88 to 1.31 percent versus generic filtering. This does not establish an end-to-end advantage over unfiltered ternary-first discovery. Ordinary search is faster on the three new local cases and smaller in aggregate.",
+  "limitations": [
+    "Two alternating isolated repetitions per target, all 615 exposed events including misses and regressions. Initial binding is separately timed.",
+    "The 64 fresh-root, 32-round, 256-path and 16384 BFS/invalidation limits are unchanged. Endpoint/component index work and checks do not consume BFS slots or edge budget; their counts, time and memory are additional. This is not an equal total-work cap.",
+    "Filter state is local to one exact graph and rebuilt after conditioning. It never authorizes SAT or UNSAT. Only native proof replay does so. Filtered roots do not create completed-BFS cache entries, so later changes can require searches that the unfiltered cache avoided.",
+    "New roots beyond the union of all four preceding policies enter fresh/support compilation trials. No live or whole-query policy changes.",
+    "Edits reproduce the prior 48 renamed/added-clause sources, and add 48 with a new fixed seed. Both sets share exposed source families and are not independent-domain holdouts.",
+    "Origin acquisition, input loading, process startup, final reporting and preservation audits remain additional. No uniform arbitrary-SAT bound follows."
+  ],
+  "next": "Stop weak-component polishing on this corpus. Profile immutable source/template preparation across rounds; test an owned reusable prepared source while retaining cofactor-dependent checks and requiring exact-program/native-record comparisons.",
+  "preservation": "All 177 prior manifests, 20859 prior artifact entries and 1025 frozen sources are unchanged. Six new native archives are audited by both readers. No cumulative bank or live query policy change.",
+  "result": "Ternary endpoint filters add three events, 263 to 266. Weak components add no further ternary successes, recover none of eleven targeted regressions and add no edit successes.",
+  "status": "optional_research_only",
+  "structural_reuse": "Contrapositive edge pairs make incoming(-r) empty exactly when outgoing(r) is empty. Remove incoming-index scans and sets; all programs and other counters remain identical.",
+  "validator_correction": {
+    "log": {
+      "path": "experiments/results/cnf-shortening-filters/validation-first-attempt.log",
+      "sha256": "82adf58ec3d40ab1d3ffc36f1a4d61e583cd826b48536750513e4e0f4f968ce8"
+    },
+    "reason": "Initialize peak-RSS aggregation bucket before reading it. This affected only final reporting; timed workers, proofs and product sources are unchanged.",
+    "source": {
+      "path": "experiments/results/cnf-shortening-filters/validator-before-rss-fix.py.txt",
+      "sha256": "b3836a398f4247b23076d8c373222d33678960a269cf1eebf70453d20ddc0f1e"
+    }
+  }
+}

@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Filter impossible paths using binary-clause structure](research/shortening-reach-filters.md).
+Endpoint filters increase ternary-first recognition from 263 to 266 saved events;
+weak components add no further successes. Contrapositive edge pairs make the
+incoming-endpoint index redundant, so a specialized version removes its scans
+without changing any result. Measured savings are small, and ordinary search
+beats proof compilation on the three new local roots. All 1,853 tests pass.
+The filters remain optional; the next target is repeated source preparation.
+
+Previous:
 [Prioritize literals with more potential clause shortening](research/shortening-root-priority.md).
 Ternary-first ordering with reuse recognizes 263 of 615 saved events, versus
 202 with numeric ordering, while measured discovery time falls 9.89%. It gains

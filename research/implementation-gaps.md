@@ -4,7 +4,17 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, ternary-first root ordering):
+Latest expansion checkpoint (24 November, structural no-path filtering):
+[Exploit contrapositive symmetry and retain limited filter gains](shortening-reach-filters.md).
+Endpoint tests add three ternary-first successes; weak components add none and
+repair none of the targeted regressions. The incoming index is mathematically
+redundant for the constructed binary graphs and is removed in a checked
+specialization. Both comparison phases and all regressions remain preserved.
+All 1,853 tests pass. Ordinary search is faster on all three new local-proof
+cases and retains fewer record bytes in aggregate. Next investigate immutable source/template preparation across
+states. Resume `experiments/results/cnf-shortening-filters/checkpoint.json`.
+
+Previous expansion checkpoint (24 November, ternary-first root ordering):
 [Prioritize potential binary-clause yield](shortening-root-priority.md).
 The bounded detector recognizes 263 saved events versus 202 with numeric reuse,
 with 72 gains and 11 losses. Discovery falls 9.89% in the matched sample; 38

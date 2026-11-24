@@ -5,7 +5,23 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: structural ordering changes which bounded patterns close
+## Latest evidence: elementary reachability filtering has limited coverage value
+
+[Endpoint and weak-component filters](shortening-reach-filters.md) prove absence
+of selected paths in the supported binary graph, never satisfiability of the
+whole CNF. Ternary-first recognition rises from 263 to 266 events; weak components
+add no further success. None of the eleven earlier ordering regressions closes,
+and neither 48-case edit group improves. The three new roots are already known
+to ordinary whole-query search. These losses of expected benefit are preserved.
+
+Contrapositive edge pairs allow exact removal of the incoming index with identical
+programs. The measured runtime saving is small. Next examine reusable immutable
+source/template preparation, retaining cofactor-dependent checks, while treating
+the 104 endpoint-filter fixed points as unresolved sources needing more than
+another no-path filter. Broader relation discovery, useful origin acquisition
+and live gains remain separate obligations. Resume the new filter checkpoint.
+
+## Previous evidence: structural ordering changes which bounded patterns close
 
 [Ternary-first search ordering](shortening-root-priority.md) prioritizes literals
 whose checked exclusion would shorten more current ternary source clauses.

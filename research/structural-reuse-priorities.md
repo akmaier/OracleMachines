@@ -12,7 +12,40 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: filter impossible roots before spending search slots
+## Current investigation: reuse immutable preparation; stop weak-index polishing
+
+[Exact no-path filters](shortening-reach-filters.md) add only three ternary-first
+successes (263 to 266), and weak components add none beyond endpoint tests.
+They repair none of the eleven targeted ordering regressions and add no success
+on either set of 48 edited cases. Numeric weak filters gain eight events, but
+cost more. All three new roots beyond the previous policy union were already
+stored by ordinary whole-query search. On the new local cohort, ordinary search
+beats compiled support proofs in runtime and aggregate record bytes. Keep the filters optional.
+
+**Structural improvement:** binary implication edges occur in contrapositive
+pairs, making empty incoming adjacency at -r equivalent to empty outgoing
+adjacency at r. A specialization removes 533,755--632,177 redundant incoming
+index visits per filtered census while preserving every program and all other
+operational counts. New matched discovery reductions are only 0.88--1.31%,
+with two repetitions. This does not establish a practical runtime win over the
+unfiltered policy. Extra exploration can grow states, edge visits and cache space.
+
+**Next best target:** profile repeated immutable source/template preparation
+across conditioned states. Test an owned prepared source and reuse its validated
+canonical form, original supports and guard descriptions, while retaining all
+checks that depend on the changed cofactor or assignment. Require exact program
+and native-record comparisons before spending any saving on wider discovery.
+Previous profiles identify preparation as the largest discovery phase; avoid
+another round of weak-component indexing with no added ternary-first coverage.
+
+The endpoint policy leaves 245 root-budget stops and 104 no-useful-literal cases;
+weak filtering leaves 220 and 129 without another success. More path filtering
+does not create missing consequences. Automatic useful guards and whole-query
+gains remain open. All 1,853 tests pass; resume
+`experiments/results/cnf-shortening-filters/checkpoint.json`, preserving both
+generic/specialized comparisons, all prior banks and 64 proof blocks.
+
+## Previous investigation: filter impossible roots before spending search slots
 
 [Ternary-first root ordering](shortening-root-priority.md) recognizes 263 of 615
 saved events versus 202 with numeric reuse and 211 at 128 uncached roots.

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_shortening_filters.py", line 195, in <module>
+    if __name__=='__main__':globals()[sys.argv[1]](Path(sys.argv[2]))
+                            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_shortening_filters.py", line 141, in validate
+    srss.setdefault(mode,{})[engine]=max(srss[mode].get(engine,0),r['peak_rss_bytes'])
+                                         ~~~~^^^^^^
+KeyError: 'numeric_endpoint'

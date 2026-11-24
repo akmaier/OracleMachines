@@ -18,6 +18,17 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+The [no-path filter experiment](shortening-reach-filters.md) uses the exact
+contrapositive pairing of binary implication edges to remove an unnecessary
+incoming index. The specialized endpoint test has constant extra state and
+constant expected lookup work on existing adjacency. Optional weak components
+still require O(V) words and near-linear amortized index construction, under
+ordinary word/hash-table assumptions, rebuilt after each changed graph.
+Index construction and candidate checks lie outside the BFS edge/root limits
+and remain charged. Fewer fresh roots can support more costly exploration;
+neither total runtime nor retained cache space necessarily falls. Native proof
+semantics and unrestricted-SAT obligations are unchanged.
+
 The [ternary-first ordering experiment](shortening-root-priority.md) uses
 O(C+L_w+R log R) work per prepared state for root enumeration, scoring and sorting,
 with C current clauses, L_w wider-clause literal occurrences and R eligible roots,

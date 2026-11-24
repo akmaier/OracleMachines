@@ -1,0 +1,566 @@
+{
+  "event": 17,
+  "limitations": "One instrumented miss; cumulative times overlap. No causal or population-wide speed ratio follows from this profile.",
+  "modes": {
+    "frozen": {
+      "counts": {
+        "accepted_width_1": 19,
+        "accepted_width_2": 19,
+        "accepted_width_3": 56,
+        "accepted_width_4": 28,
+        "accepted_width_5": 76,
+        "accepted_width_6": 9,
+        "compatible_width_1": 19,
+        "compatible_width_2": 19,
+        "compatible_width_3": 56,
+        "compatible_width_4": 28,
+        "compatible_width_5": 76,
+        "compatible_width_6": 9,
+        "conditioned_source_literals": 24415,
+        "forced_steps": 18,
+        "guard_input_literals": 14894,
+        "hint_check_literals": 5650,
+        "implication_edges": 5655,
+        "incompatible_guards": 21,
+        "key_serialized_bytes": 95573,
+        "local_containment_clauses": 2782,
+        "normalization_literal_visits": 285270,
+        "peak_reach_vertices": 89,
+        "reach_edge_visits": 2195,
+        "reach_roots": 64,
+        "restriction_literal_visits": 56099,
+        "rounds": 19,
+        "template_candidates": 228,
+        "template_checked_reason_literals": 13550,
+        "templates_checked": 447,
+        "trace_transport_steps": 2304,
+        "verified_core_hints": 207
+      },
+      "functions": [
+        {
+          "calls": 1,
+          "cumulative_seconds": 0.556939041,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_guard_shortening.py",
+          "function": "discover",
+          "line": 42,
+          "own_seconds": 0.0067378690000000005
+        },
+        {
+          "calls": 19,
+          "cumulative_seconds": 0.5332509590000001,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_guard_shortening.py",
+          "function": "_state",
+          "line": 23,
+          "own_seconds": 0.0016050320000000002
+        },
+        {
+          "calls": 19,
+          "cumulative_seconds": 0.483397167,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_guard_interactions.py",
+          "function": "local_hints",
+          "line": 14,
+          "own_seconds": 0.01473315
+        },
+        {
+          "calls": 265,
+          "cumulative_seconds": 0.39580830100000003,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "normalize",
+          "line": 20,
+          "own_seconds": 0.154893888
+        },
+        {
+          "calls": 207,
+          "cumulative_seconds": 0.34133570900000004,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_hint_transport.py",
+          "function": "check_rup",
+          "line": 31,
+          "own_seconds": 0.004944734
+        },
+        {
+          "calls": 207,
+          "cumulative_seconds": 0.334144378,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_hint_transport.py",
+          "function": "_validate",
+          "line": 22,
+          "own_seconds": 0.001963794
+        },
+        {
+          "calls": 250876,
+          "cumulative_seconds": 0.162992685,
+          "file": "~",
+          "function": "<built-in method builtins.sorted>",
+          "line": 0,
+          "own_seconds": 0.07776276600000001
+        },
+        {
+          "calls": 116114,
+          "cumulative_seconds": 0.11654956000000001,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 39,
+          "own_seconds": 0.029440468
+        },
+        {
+          "calls": 2995,
+          "cumulative_seconds": 0.042338181,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "restrict_scan",
+          "line": 63,
+          "own_seconds": 0.02051708
+        },
+        {
+          "calls": 889548,
+          "cumulative_seconds": 0.035680215,
+          "file": "~",
+          "function": "<built-in method builtins.abs>",
+          "line": 0,
+          "own_seconds": 0.035680215
+        },
+        {
+          "calls": 422794,
+          "cumulative_seconds": 0.03294915,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 30,
+          "own_seconds": 0.03294915
+        },
+        {
+          "calls": 19,
+          "cumulative_seconds": 0.029964166,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_guard_probe_census.py",
+          "function": "decode_key",
+          "line": 17,
+          "own_seconds": 0.000965454
+        },
+        {
+          "calls": 422794,
+          "cumulative_seconds": 0.028891890000000003,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 33,
+          "own_seconds": 0.028891890000000003
+        },
+        {
+          "calls": 447,
+          "cumulative_seconds": 0.028134208,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_conditional_unit_support.py",
+          "function": "check_template",
+          "line": 28,
+          "own_seconds": 0.00708147
+        },
+        {
+          "calls": 452,
+          "cumulative_seconds": 0.026390476000000003,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py",
+          "function": "dumps",
+          "line": 185,
+          "own_seconds": 0.00040844000000000004
+        },
+        {
+          "calls": 452,
+          "cumulative_seconds": 0.025896839,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/encoder.py",
+          "function": "encode",
+          "line": 185,
+          "own_seconds": 0.00036795800000000004
+        },
+        {
+          "calls": 452,
+          "cumulative_seconds": 0.025398286000000003,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/encoder.py",
+          "function": "iterencode",
+          "line": 207,
+          "own_seconds": 0.025398286000000003
+        },
+        {
+          "calls": 414,
+          "cumulative_seconds": 0.024214885000000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_pattern_inventory.py",
+          "function": "encode",
+          "line": 21,
+          "own_seconds": 0.00014536600000000002
+        },
+        {
+          "calls": 447,
+          "cumulative_seconds": 0.013087009,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_clause_deletion_guard.py",
+          "function": "clause_set",
+          "line": 14,
+          "own_seconds": 0.007860652000000001
+        },
+        {
+          "calls": 19,
+          "cumulative_seconds": 0.011139709000000001,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "two_cnf",
+          "line": 133,
+          "own_seconds": 0.007511556000000001
+        },
+        {
+          "calls": 126169,
+          "cumulative_seconds": 0.010509851,
+          "file": "~",
+          "function": "<method 'add' of 'set' objects>",
+          "line": 0,
+          "own_seconds": 0.010509851
+        },
+        {
+          "calls": 76792,
+          "cumulative_seconds": 0.010491695,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 68,
+          "own_seconds": 0.008136943
+        },
+        {
+          "calls": 69204,
+          "cumulative_seconds": 0.009018088,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 71,
+          "own_seconds": 0.006982742
+        },
+        {
+          "calls": 185744,
+          "cumulative_seconds": 0.008733145000000001,
+          "file": "~",
+          "function": "<built-in method builtins.len>",
+          "line": 0,
+          "own_seconds": 0.008733145000000001
+        },
+        {
+          "calls": 29880,
+          "cumulative_seconds": 0.0034043180000000004,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_guard_interactions.py",
+          "function": "<genexpr>",
+          "line": 23,
+          "own_seconds": 0.0026109970000000003
+        },
+        {
+          "calls": 49060,
+          "cumulative_seconds": 0.003329128,
+          "file": "~",
+          "function": "<method 'append' of 'list' objects>",
+          "line": 0,
+          "own_seconds": 0.003329128
+        },
+        {
+          "calls": 12537,
+          "cumulative_seconds": 0.0028022000000000004,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_conditional_unit_support.py",
+          "function": "<genexpr>",
+          "line": 44,
+          "own_seconds": 0.0021442500000000003
+        },
+        {
+          "calls": 1,
+          "cumulative_seconds": 0.00248275,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_guard_shortening.py",
+          "function": "_source",
+          "line": 12,
+          "own_seconds": 6.145800000000001e-05
+        },
+        {
+          "calls": 38,
+          "cumulative_seconds": 0.0023995830000000003,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "token",
+          "line": 80,
+          "own_seconds": 5.7375000000000005e-05
+        },
+        {
+          "calls": 5594,
+          "cumulative_seconds": 0.002346915,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_conditional_unit_support.py",
+          "function": "clause",
+          "line": 37,
+          "own_seconds": 0.001829309
+        }
+      ]
+    },
+    "shared": {
+      "counts": {
+        "accepted_width_1": 19,
+        "accepted_width_2": 19,
+        "accepted_width_3": 56,
+        "accepted_width_4": 28,
+        "accepted_width_5": 76,
+        "accepted_width_6": 9,
+        "compatible_width_1": 19,
+        "compatible_width_2": 19,
+        "compatible_width_3": 56,
+        "compatible_width_4": 28,
+        "compatible_width_5": 76,
+        "compatible_width_6": 9,
+        "conditioned_source_literals": 24415,
+        "context_hint_checks": 207,
+        "context_literal_slots": 21669,
+        "context_peak_clause_slots": 473,
+        "context_peak_literal_slots": 1285,
+        "context_preparations": 19,
+        "forced_steps": 18,
+        "guard_input_literals": 14894,
+        "hint_check_literals": 5650,
+        "implication_edges": 5655,
+        "incompatible_guards": 21,
+        "local_containment_clauses": 2782,
+        "normalization_literal_visits": 69046,
+        "peak_reach_vertices": 89,
+        "position_clauses": 8211,
+        "reach_edge_visits": 2195,
+        "reach_roots": 64,
+        "restriction_literal_visits": 31684,
+        "rounds": 19,
+        "template_candidates": 228,
+        "template_checked_reason_literals": 13550,
+        "templates_checked": 447,
+        "trace_transport_steps": 2304,
+        "verified_core_hints": 207
+      },
+      "functions": [
+        {
+          "calls": 1,
+          "cumulative_seconds": 0.18895045800000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_guard_shortening_context.py",
+          "function": "discover",
+          "line": 74,
+          "own_seconds": 0.006504612000000001
+        },
+        {
+          "calls": 19,
+          "cumulative_seconds": 0.16593991900000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_guard_shortening_context.py",
+          "function": "_state",
+          "line": 26,
+          "own_seconds": 0.004765968000000001
+        },
+        {
+          "calls": 58,
+          "cumulative_seconds": 0.08864633400000001,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "normalize",
+          "line": 20,
+          "own_seconds": 0.03467854
+        },
+        {
+          "calls": 62298,
+          "cumulative_seconds": 0.038671317000000004,
+          "file": "~",
+          "function": "<built-in method builtins.sorted>",
+          "line": 0,
+          "own_seconds": 0.019183758000000002
+        },
+        {
+          "calls": 207,
+          "cumulative_seconds": 0.035872874,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_shortening_transport.py",
+          "function": "transport_state",
+          "line": 11,
+          "own_seconds": 0.005609412
+        },
+        {
+          "calls": 19,
+          "cumulative_seconds": 0.032063582,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_guard_context_solver.py",
+          "function": "prepare",
+          "line": 23,
+          "own_seconds": 0.001214896
+        },
+        {
+          "calls": 447,
+          "cumulative_seconds": 0.027441029000000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_conditional_unit_support.py",
+          "function": "check_template",
+          "line": 28,
+          "own_seconds": 0.006872019
+        },
+        {
+          "calls": 25940,
+          "cumulative_seconds": 0.025894390000000003,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 39,
+          "own_seconds": 0.006532953
+        },
+        {
+          "calls": 2976,
+          "cumulative_seconds": 0.024301571,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "restrict_scan",
+          "line": 63,
+          "own_seconds": 0.011796732
+        },
+        {
+          "calls": 322237,
+          "cumulative_seconds": 0.013205553,
+          "file": "~",
+          "function": "<built-in method builtins.abs>",
+          "line": 0,
+          "own_seconds": 0.013205553
+        },
+        {
+          "calls": 447,
+          "cumulative_seconds": 0.012771588,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_clause_deletion_guard.py",
+          "function": "clause_set",
+          "line": 14,
+          "own_seconds": 0.0076775490000000005
+        },
+        {
+          "calls": 19,
+          "cumulative_seconds": 0.010816874,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "two_cnf",
+          "line": 133,
+          "own_seconds": 0.007286842000000001
+        },
+        {
+          "calls": 94934,
+          "cumulative_seconds": 0.007392298,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 30,
+          "own_seconds": 0.007392298
+        },
+        {
+          "calls": 94934,
+          "cumulative_seconds": 0.006515573,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 33,
+          "own_seconds": 0.006515573
+        },
+        {
+          "calls": 43501,
+          "cumulative_seconds": 0.006018736,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 68,
+          "own_seconds": 0.004695843
+        },
+        {
+          "calls": 207,
+          "cumulative_seconds": 0.005997296,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_guard_context_solver.py",
+          "function": "check_bound_rup",
+          "line": 42,
+          "own_seconds": 0.0034829220000000003
+        },
+        {
+          "calls": 39310,
+          "cumulative_seconds": 0.005156127,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 71,
+          "own_seconds": 0.004018952
+        },
+        {
+          "calls": 93947,
+          "cumulative_seconds": 0.004471276000000001,
+          "file": "~",
+          "function": "<built-in method builtins.len>",
+          "line": 0,
+          "own_seconds": 0.004471276000000001
+        },
+        {
+          "calls": 36202,
+          "cumulative_seconds": 0.003034578,
+          "file": "~",
+          "function": "<method 'add' of 'set' objects>",
+          "line": 0,
+          "own_seconds": 0.003034578
+        },
+        {
+          "calls": 12537,
+          "cumulative_seconds": 0.002745229,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_conditional_unit_support.py",
+          "function": "<genexpr>",
+          "line": 44,
+          "own_seconds": 0.0020908560000000003
+        },
+        {
+          "calls": 40843,
+          "cumulative_seconds": 0.0027088810000000002,
+          "file": "~",
+          "function": "<method 'append' of 'list' objects>",
+          "line": 0,
+          "own_seconds": 0.0027088810000000002
+        },
+        {
+          "calls": 1,
+          "cumulative_seconds": 0.0024533330000000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_guard_shortening_context.py",
+          "function": "_source",
+          "line": 15,
+          "own_seconds": 6.2166e-05
+        },
+        {
+          "calls": 38,
+          "cumulative_seconds": 0.0022975860000000003,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_pattern_inventory.py",
+          "function": "encode",
+          "line": 21,
+          "own_seconds": 1.6879000000000002e-05
+        },
+        {
+          "calls": 5594,
+          "cumulative_seconds": 0.002291336,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_conditional_unit_support.py",
+          "function": "clause",
+          "line": 37,
+          "own_seconds": 0.0017763610000000002
+        },
+        {
+          "calls": 38,
+          "cumulative_seconds": 0.0022807070000000003,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py",
+          "function": "dumps",
+          "line": 185,
+          "own_seconds": 4.279e-05
+        },
+        {
+          "calls": 38,
+          "cumulative_seconds": 0.002229338,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/encoder.py",
+          "function": "encode",
+          "line": 185,
+          "own_seconds": 3.758e-05
+        },
+        {
+          "calls": 38,
+          "cumulative_seconds": 0.002179248,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/encoder.py",
+          "function": "iterencode",
+          "line": 207,
+          "own_seconds": 0.002179248
+        },
+        {
+          "calls": 21036,
+          "cumulative_seconds": 0.001797998,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_clause_deletion_guard.py",
+          "function": "<genexpr>",
+          "line": 18,
+          "own_seconds": 0.001797998
+        },
+        {
+          "calls": 21036,
+          "cumulative_seconds": 0.001587752,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_clause_deletion_guard.py",
+          "function": "<genexpr>",
+          "line": 20,
+          "own_seconds": 0.001587752
+        },
+        {
+          "calls": 9416,
+          "cumulative_seconds": 0.001386412,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_shortening_transport.py",
+          "function": "<genexpr>",
+          "line": 25,
+          "own_seconds": 0.0011154420000000001
+        }
+      ]
+    }
+  },
+  "target": 37
+}

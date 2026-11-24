@@ -28,8 +28,16 @@ classes.
 
 ## Paper
 
+[Share checked preparation during partial clause shortening](research/shortening-context-reuse.md).
+One immutable context now serves the guard checks within each conditioned state.
+Discovery is 57.63% faster and compilation 28.90% faster than the frozen support
+compiler, with identical discovery programs and native proof archives. Every
+reason and conflict remains checked. The preserved failed trial led to
+a regression fix for satisfied support clauses with disappearing variables.
+The method remains optional; ordinary solving and all discovery misses stay in
+the cost comparison.
 
-[Discover binary interactions by checked partial clause shortening](research/guard-partial-shortening.md).
+Previous: [Discover binary interactions by checked partial clause shortening](research/guard-partial-shortening.md).
 The offline detector closes 104 previously missed event patterns, representing
 67 local roots, by iterating forced literals and rebuilding the binary graph.
 All 67 are eventually found by ordinary search. Native replay validates every

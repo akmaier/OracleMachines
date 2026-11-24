@@ -11155,6 +11155,78 @@ reads, normalization and enclosing wrappers still cost work on a reuse hit.
 The bounded recognizer stays optional. Automatic guard acquisition, useful
 routing, whole-query gains and uniform arbitrary-CNF bounds remain open.
 
+\subsection{Reusing checked preparation within each shortening state}
+\label{sec:shortening-shared-context}
+
+The previous profile identified repeated canonicalization during guard checking.
+We now prepare one immutable normalized CNF, clause-position map and coordinate
+binding for each conditioned state, created lazily when a guard needs it.
+All guards in that state share the preparation; every changed assignment creates
+a new context. Each original template, reduced support, unit reason and conflict
+is still checked against the actual source. The context is private preparation,
+not certificate authority. An AST comparison fixes every other discovery,
+replay, support-selection and compilation function relative to the frozen version.
+Independent native readers still validate the published proof.
+
+Conditioning needs two explicit edge cases. A satisfied support clause may
+contain a variable absent from the residual. Testing that variable before a
+later literal establishes satisfaction can incorrectly discard the guard.
+A first comparison failed at case 22 with an unsupported edge; no unchecked
+refutation was published. The corrected transport restricts the whole clause
+before testing surviving coordinates. Separately, normalization can collapse
+a contradictory cofactor to the singleton empty clause. Comparing its clause
+set with all unreduced residual clauses can reject this sound collapse.
+Direct restriction handles it correctly; its native proof and the old rejection
+are preserved outside the matched census.
+
+The comparison replays all 615 saved events, including discovery misses, in two
+alternating serial repetitions per target. The 105 local and controlled
+compilation cases enter 630 isolated workers comparing ordinary search and the
+frozen/shared selected-support compilers. Programs, table digests and database
+bytes must reproduce the prior results. Compression is actually charged, but
+identical archives reference the verified earlier files rather than duplicating
+permanent proof banks. Initial acquisition, input/protocol preparation, process
+startup and final preservation audits remain additional costs.
+
+Discovery totals fall from 15.41523 to 6.53121 seconds, a 57.63\% reduction.
+Including initial binding and serialization, the measured phase falls from
+20.63127 to 11.74341 seconds (43.08\%). Normalization literal visits fall from
+19,680,665 to 7,932,837. All 33,377 template checks and 400,811 unit-reason and
+conflict literal checks remain. Every program matches: 142 refutations,
+388 root-budget stops and 85 no-useful-literal outcomes. Initial binding remains
+about 5.18 seconds, and the matched census adds no coverage.
+
+Across 97 local cases, frozen/shared compilation totals are 4.88731/3.47493
+seconds; complete-worker totals are 10.31049/7.55220. These are reductions of
+28.90\% and 26.75\%. Ordinary solving takes 2.32904 seconds and 6.78229 seconds
+for its complete worker, so it remains faster before discovery costs. The eight
+supplied controls also regress versus ordinary solving: shared compilation takes
+0.04521 seconds against 0.01910. Both compilers retain the same 3,630 records and
+4,416,810 record bytes; cold replay and measured peak RSS are effectively unchanged.
+The summed peak-RSS samples do not define a simultaneous process-memory bound.
+
+The cold-reopen stream reproduces prior database bytes, with one new wrapper
+and no new core node in each of three expansions. All 105 compilation cases
+reproduce their previous archives. The final audit checks 215 distinct archives
+and preserves the failed attempt; identical banks are referenced, while the
+empty-cofactor regression adds one separate archive. All 1,832 solver tests and
+41 focused tests pass, and all previous manuscript proof blocks remain unchanged.
+
+In the diagnostic miss, normalization calls fall from 265 to 58 across 19
+states. The next coverage target is the 388 root-budget stops: identify repeated
+unsuccessful roots or unchanged implication components and test structural root
+priorities or exact search reuse. Cached absence requires an unchanged checked
+graph or a justified update, with edge changes, coordinates and lookup costs
+accounted for. Initial binding remains a substantial fixed phase. No whole-query
+speedup follows from these local savings.
+
+
+The proof-content envelope and enclosing-wrapper growth are unchanged.
+Reduced normalization work does not establish an equal process-memory saving.
+The bounded recognizer remains optional, and the matched observations do not
+add a SAT category or a completed whole query. Useful automatic guards, miss
+handling, live routing and unrestricted resource bounds remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

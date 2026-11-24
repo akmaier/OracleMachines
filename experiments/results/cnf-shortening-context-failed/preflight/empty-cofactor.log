@@ -1,0 +1,23 @@
+test_all_fixed_states_and_changed_inputs (solver.test_cnf_guard_shortening_context.SharedShorteningContextTests.test_all_fixed_states_and_changed_inputs) ... ok
+test_contexts_are_local_and_controls_unchanged (solver.test_cnf_guard_shortening_context.SharedShorteningContextTests.test_contexts_are_local_and_controls_unchanged) ... ok
+test_exact_native_archive_and_cold_reuse (solver.test_cnf_guard_shortening_context.SharedShorteningContextTests.test_exact_native_archive_and_cold_reuse) ... ok
+test_exhaustive_deletions_and_independent_models (solver.test_cnf_guard_shortening_context.SharedShorteningContextTests.test_exhaustive_deletions_and_independent_models) ... ok
+test_malformed_support_program_and_assignment (solver.test_cnf_guard_shortening_context.SharedShorteningContextTests.test_malformed_support_program_and_assignment) ... ok
+test_only_state_preparation_changes (solver.test_cnf_guard_shortening_context.SharedShorteningContextTests.test_only_state_preparation_changes) ... ok
+test_random_and_signed_states (solver.test_cnf_guard_shortening_context.SharedShorteningContextTests.test_random_and_signed_states) ... ERROR
+
+======================================================================
+ERROR: test_random_and_signed_states (solver.test_cnf_guard_shortening_context.SharedShorteningContextTests.test_random_and_signed_states)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_guard_shortening_context.py", line 53, in test_random_and_signed_states
+    self.assertEqual(old._state(source,templates,fixed,Counter()),shared._state(source,templates,fixed,Counter()))
+                     ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_guard_shortening.py", line 31, in _state
+    raise ValueError('Expected whole cofactor')
+ValueError: Expected whole cofactor
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.205s
+
+FAILED (errors=1)

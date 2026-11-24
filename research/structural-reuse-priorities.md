@@ -12,7 +12,36 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: share checked contexts across shortening rounds
+## Current investigation: use cheaper preparation to address root-budget misses
+
+[Shared shortening contexts](shortening-context-reuse.md) reduce discovery time
+57.63% and its complete measured phase 43.08% on all 615 saved events. Unit-reason,
+conflict and template checks are unchanged; every discovery program and matched
+proof archive is identical. Compilation falls 28.90% on 97 local cases, but
+ordinary solving remains faster before discovery costs. The policy stays optional.
+
+**Largest remaining fixed phase:** initial local binding, 5.18 seconds, versus
+6.53 seconds of optimized discovery including misses. Native storage and peak
+RSS are effectively unchanged. The 388 root-budget stops and 85 no-useful-literal
+outcomes remain unresolved. No query-level coverage gain is claimed.
+
+**Next coverage target:** inspect repeated unsuccessful roots and unchanged
+implication components across shortening rounds. Test structure-guided root
+selection or exact search reuse within a charged budget. Cache absence only for
+an unchanged checked graph/component; account for new edges, coordinate changes,
+hashing and invalidation. Compare with the current policy and fresh edits before
+spending the saved runtime on broader exploration. Initial source-binding reuse
+remains a supporting optimization, not evidence of a complete SAT partition.
+
+All 1,832 tests pass. The first timed attempt failed on a satisfied support clause
+with an absent variable; its sources and outputs are preserved. The corrected
+transport restricts the clause before testing remaining coordinates. A separate
+empty-cofactor normalization regression is also certified. Resume
+`experiments/results/cnf-shortening-context/checkpoint.json`; 215 archives are
+audited, with identical banks referenced rather than duplicated and one new
+supplemental regression archive. Every older bank and all 64 proof blocks remain.
+
+## Previous investigation: share checked contexts across shortening rounds
 
 [Iterative partial shortening](guard-partial-shortening.md) closes 104 event
 patterns / 67 local roots missed by initial SCC and full-clause covers on the

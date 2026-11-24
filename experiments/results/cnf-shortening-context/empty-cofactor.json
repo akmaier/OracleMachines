@@ -1,0 +1,209 @@
+{
+  "archive": {
+    "compressed_bytes": 665,
+    "database_bytes": 12288,
+    "database_sha256": "98093d07aab0494b46d8abfc33a9020af13e0a3295bf3e0ee00a90b607a1a9ce",
+    "path": "experiments/results/cnf-shortening-context/empty-cofactor/history.sqlite3.gz",
+    "seconds": 0.00026733288541436195,
+    "sha256": "85a6d9f55812ea4be47723ad9a14971d27c66d50bfeca8a83331ee409e657a7b"
+  },
+  "cold_readers": {
+    "CanonicalVerifySnapshot": {
+      "canonical_form_calls": 5,
+      "canonical_form_clauses": 25,
+      "canonical_form_literal_visits": 56,
+      "canonical_form_name_variables": 18,
+      "canonical_form_reuses": 5,
+      "certificate_memory_hits": 5,
+      "database_lookups": 5,
+      "key_serialized_bytes": 574,
+      "normalization_literal_visits": 58,
+      "read_bytes": 878,
+      "restriction_literal_visits": 42,
+      "search_disk_hits": 5,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 56,
+      "verification_trace_literals": 2,
+      "verified_nodes": 5
+    },
+    "SnapshotResidualSolver": {
+      "certificate_memory_hits": 5,
+      "database_lookups": 5,
+      "key_serialized_bytes": 574,
+      "normalization_literal_visits": 114,
+      "read_bytes": 878,
+      "restriction_literal_visits": 42,
+      "search_disk_hits": 5,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 56,
+      "verification_trace_literals": 2,
+      "verified_nodes": 5
+    }
+  },
+  "limitations": "A sound contradiction-normalization edge case outside the matched 615-event census. It is not a new whole-query result.",
+  "old_rejection": "Expected whole cofactor",
+  "program": {
+    "path_limit": 256,
+    "reason": "binary",
+    "status": "refuted",
+    "steps": [
+      {
+        "forced": -1,
+        "path": [
+          [
+            -2,
+            [
+              -2,
+              -1
+            ]
+          ],
+          [
+            -1,
+            [
+              -1,
+              2
+            ]
+          ]
+        ]
+      }
+    ],
+    "terminal": {
+      "kind": "empty"
+    }
+  },
+  "records": 5,
+  "result": {
+    "result": {
+      "answer": false,
+      "authority": "native",
+      "model": null,
+      "root": "cnf-residual-v1:[[-6,-5,1],[-6,1,5],[-5,1,6],[-4,-2,-1],[-3,-1,2],[-2,-1,4],[-1,2,3],[1],[1,5,6],[1,7],[1,8],[1,9],[1,10]]"
+    },
+    "status": "unsat"
+  },
+  "source": [
+    [
+      -6,
+      -5,
+      1
+    ],
+    [
+      -6,
+      1,
+      5
+    ],
+    [
+      -5,
+      1,
+      6
+    ],
+    [
+      -4,
+      -2,
+      -1
+    ],
+    [
+      -3,
+      -1,
+      2
+    ],
+    [
+      -2,
+      -1,
+      4
+    ],
+    [
+      -1,
+      2,
+      3
+    ],
+    [
+      1
+    ],
+    [
+      1,
+      5,
+      6
+    ],
+    [
+      1,
+      7
+    ],
+    [
+      1,
+      8
+    ],
+    [
+      1,
+      9
+    ],
+    [
+      1,
+      10
+    ]
+  ],
+  "templates": [
+    {
+      "assumptions": [
+        [
+          1,
+          true
+        ],
+        [
+          2,
+          false
+        ]
+      ],
+      "clauses": [
+        [
+          -3,
+          -1,
+          2
+        ],
+        [
+          -1,
+          2,
+          3
+        ]
+      ],
+      "conflict": 1,
+      "trace": [
+        [
+          -3,
+          0
+        ]
+      ]
+    },
+    {
+      "assumptions": [
+        [
+          1,
+          true
+        ],
+        [
+          2,
+          true
+        ]
+      ],
+      "clauses": [
+        [
+          -4,
+          -2,
+          -1
+        ],
+        [
+          -2,
+          -1,
+          4
+        ]
+      ],
+      "conflict": 1,
+      "trace": [
+        [
+          -4,
+          0
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "case": 22,
+  "cause": "The reused transport_bound helper checks an absent coordinate before a later literal can satisfy the support clause. This can drop a valid guard after support shrinking.",
+  "correction": "Restrict the entire clause before checking surviving coordinates, then retain all native/template/reason/conflict checks.",
+  "exception": "Unsupported edge",
+  "mode": "shared",
+  "relocation": {
+    "note": "Earlier report paths and source hashes remain verbatim historical evidence, not current executable input.",
+    "original": "experiments/results/cnf-shortening-context",
+    "preserved": "experiments/results/cnf-shortening-context-failed"
+  },
+  "status": "rejected before publication"
+}

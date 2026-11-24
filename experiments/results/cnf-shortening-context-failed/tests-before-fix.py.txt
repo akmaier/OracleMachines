@@ -1,0 +1,126 @@
+from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
+from copy import deepcopy
+from itertools import product
+from pathlib import Path
+import ast,random,tempfile,unittest
+from experiments import cnf_guard_shortening as old
+from experiments import cnf_guard_shortening_context as shared
+from experiments import cnf_residual_dag as native
+from experiments.cnf_conditional_unit_support import transport
+from experiments.cnf_canonical_verify import CanonicalVerifySnapshot
+from solver.test_cnf_guard_shortening import chain
+
+
+class SharedShorteningContextTests(unittest.TestCase):
+    def test_only_state_preparation_changes(self):
+        def functions(module):
+            return {node.name:ast.dump(node,include_attributes=False) for node in ast.parse(Path(module.__file__).read_text()).body
+                    if isinstance(node,ast.FunctionDef) and node.name!='_state'}
+        self.assertEqual(functions(old),functions(shared))
+
+    def test_all_fixed_states_and_changed_inputs(self):
+        source,templates=chain()
+        for values in product((None,False,True),repeat=6):
+            fixed={i+1:b for i,b in enumerate(values) if b is not None}
+            before=deepcopy((source,templates,fixed))
+            a=old._state(source,templates,fixed,Counter());c=Counter();b=shared._state(source,templates,fixed,c)
+            self.assertEqual(a,b);self.assertLessEqual(c['context_preparations'],1)
+            self.assertEqual((source,templates,fixed),before)
+        # A subsequent source edit cannot reuse the earlier position map.
+        for removed in range(len(source)):
+            changed,names=native.normalize([cl for i,cl in enumerate(source) if i!=removed])
+            ts=[transport(t,{v:i+1 for i,v in enumerate(names)}) for t in templates
+                if set(map(tuple,t['clauses']))<=set(cl for i,cl in enumerate(source) if i!=removed)]
+            self.assertEqual(old.discover(changed,ts,Counter()),shared.discover(changed,ts,Counter()))
+
+    def test_exhaustive_deletions_and_independent_models(self):
+        source,templates=chain();assignments=[dict(enumerate(bits,1)) for bits in product((False,True),repeat=6)]
+        for mask in range(256):
+            subset=tuple(cl for i,cl in enumerate(source) if mask>>i&1);local,names=native.normalize(subset)
+            ts=[transport(t,{v:i+1 for i,v in enumerate(names)}) for t in templates if set(map(tuple,t['clauses']))<=set(subset)]
+            p=shared.discover(local,ts,Counter());self.assertEqual(p,old.discover(local,ts,Counter()))
+            if p['status']=='refuted':self.assertFalse(any(native.holds(subset,a) for a in assignments))
+
+    def test_random_and_signed_states(self):
+        rng=random.Random(241917)
+        for i in range(100):
+            source,templates=chain(1+i%4,i%7);variables=sorted({abs(l) for cl in source for l in cl});names=variables[:];rng.shuffle(names)
+            mapping={v:w*rng.choice((-1,1)) for v,w in zip(variables,names)}
+            lit=lambda l:mapping[abs(l)]*(1 if l>0 else -1)
+            source=native.normalize([[lit(l) for l in cl] for cl in source])[0];templates=[transport(t,mapping) for t in templates]
+            fixed={v:rng.choice((False,True)) for v in variables if rng.random()<.2}
+            raw=native.restrict_scan(source,fixed,Counter())
+            if () in raw and set(raw)!={()}:
+                # Normalization represents any contradictory cofactor by {()}.
+                # The frozen whole-residual set comparison rejects this valid
+                # collapse; the new direct source restriction handles it exactly.
+                with self.assertRaisesRegex(ValueError,'Expected whole cofactor'):
+                    old._state(source,templates,fixed,Counter())
+                self.assertEqual(shared._state(source,templates,fixed,Counter())['local'],((),))
+            else:
+                self.assertEqual(old._state(source,templates,fixed,Counter()),shared._state(source,templates,fixed,Counter()))
+            self.assertEqual(old.discover(source,templates,Counter()),shared.discover(source,templates,Counter()))
+        for _ in range(100):
+            source=native.normalize([[v*rng.choice((-1,1)) for v in rng.sample(range(1,6),rng.randrange(1,5))]
+                                     for _ in range(rng.randrange(1,18))])[0]
+            self.assertEqual(old.discover(source,[],Counter()),shared.discover(source,[],Counter()))
+
+    def test_exact_native_archive_and_cold_reuse(self):
+        with tempfile.TemporaryDirectory() as td:
+            paths=[Path(td)/mode for mode in ('old','shared')]
+            for padding in (4,16,64):
+                source,templates=chain(4,padding);program=old.discover(source,templates,Counter());rows=[]
+                for module,path in zip((old,shared),paths):
+                    s=native.ResidualSolver(path);c=Counter()
+                    try:
+                        before=dict(s.db.execute('SELECT id,payload FROM cnf_residual_v1'))
+                        root=module.compile_program(s,source,templates,program,c)
+                        after=dict(s.db.execute('SELECT id,payload FROM cnf_residual_v1'));rows.append(after)
+                        self.assertTrue(all(after[k]==v for k,v in before.items()))
+                        if padding>4:self.assertEqual(len(after)-len(before),1);self.assertEqual(c['support_hits'],1)
+                    finally:s.close()
+                    reader=CanonicalVerifySnapshot(path)
+                    try:self.assertFalse(reader._read(root)['answer'])
+                    finally:reader.close()
+                self.assertEqual(*rows)
+
+    def test_malformed_support_program_and_assignment(self):
+        source,templates=chain();program=old.discover(source,templates,Counter())
+        for change in ('trace','support','path'):
+            ts=deepcopy(templates);p=deepcopy(program)
+            if change=='trace':ts[0]['trace'][0][1]=999
+            elif change=='support':ts[0]['clauses'][0]=[999]
+            else:p['steps'][0]['path'][0][1]=[999]
+            s=native.ResidualSolver()
+            try:
+                with self.assertRaises(ValueError):shared.compile_program(s,source,ts,p,Counter())
+                self.assertEqual(s.db.execute('SELECT count(*) FROM cnf_residual_v1').fetchone()[0],0)
+            finally:s.close()
+        for fixed in ({True:False},{1:0},{0:True},{999:False}):
+            with self.assertRaises(ValueError):shared._state(source,templates,fixed,Counter())
+
+    def test_empty_cofactor_collapse_preserves_native_soundness(self):
+        source,templates=chain(1,4)
+        program=old.discover(source,templates,Counter())
+        changed=native.normalize(list(source)+[(1,)])[0]
+        program=dict(program,steps=[program['steps'][0]],terminal=dict(kind='empty'))
+        with self.assertRaisesRegex(ValueError,'Expected whole cofactor'):
+            old.validate(changed,templates,program,Counter())
+        s=native.ResidualSolver()
+        try:self.assertFalse(s._read(shared.compile_program(s,changed,templates,program,Counter()))['answer'])
+        finally:s.close()
+
+    def test_contexts_are_local_and_controls_unchanged(self):
+        before=old._state
+        source,templates=chain(3,8);expected=old.discover(source,templates,Counter())
+        def run(index):return (shared if index%2 else old).discover(source,templates,Counter())
+        with ThreadPoolExecutor(max_workers=4) as pool:self.assertTrue(all(x==expected for x in pool.map(run,range(24))))
+        self.assertIs(old._state,before)
+        a=Counter();b=Counter();old.discover(source,templates,a);shared.discover(source,templates,b)
+        self.assertLess(b['normalization_literal_visits'],a['normalization_literal_visits'])
+        self.assertEqual(b['hint_check_literals'],a['hint_check_literals'])
+        self.assertEqual(b['templates_checked'],a['templates_checked'])
+
+
+if __name__=='__main__':unittest.main()

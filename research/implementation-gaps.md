@@ -4,7 +4,18 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, iterative partial shortening):
+Latest expansion checkpoint (24 November, shared shortening preparation):
+[Share one immutable context across each state's guard checks](shortening-context-reuse.md).
+The optimized preparation retains source, support, reason and conflict checks.
+Discovery falls 57.63% with identical programs; compilation falls 28.90% with
+identical proof archives. Ordinary solving remains faster and the cumulative
+bank is unchanged. A failed compilation exposed premature rejection
+of a satisfied support clause containing an absent variable; the corrected
+transport restricts the clause first, with the failure preserved. No live policy
+or unrestricted-SAT claim changes. Resume the new checked checkpoint at
+`experiments/results/cnf-shortening-context/checkpoint.json`.
+
+Previous expansion checkpoint (24 November, iterative partial shortening):
 [Use checked forced literals to expose new binary interactions](guard-partial-shortening.md).
 All 615 prior graph events are replayed; 104 extensions beyond initial SCC and
 full-clause covers represent 67 local roots. All 67 are already found by ordinary

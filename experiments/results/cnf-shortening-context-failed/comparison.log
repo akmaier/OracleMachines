@@ -1,0 +1,59 @@
+{"census":1}
+{"census":4}
+{"census":28}
+{"census":37}
+{"census":40}
+{"census":61}
+{"census":64}
+{"census":67}
+{"case":0,"total":105}
+{"case":1,"total":105}
+{"case":2,"total":105}
+{"case":3,"total":105}
+{"case":4,"total":105}
+{"case":5,"total":105}
+{"case":6,"total":105}
+{"case":7,"total":105}
+{"case":8,"total":105}
+{"case":9,"total":105}
+{"case":10,"total":105}
+{"case":11,"total":105}
+{"case":12,"total":105}
+{"case":13,"total":105}
+{"case":14,"total":105}
+{"case":15,"total":105}
+{"case":16,"total":105}
+{"case":17,"total":105}
+{"case":18,"total":105}
+{"case":19,"total":105}
+{"case":20,"total":105}
+{"case":21,"total":105}
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_shortening_context.py", line 119, in <module>
+    elif action=='trial':trial(Path(sys.argv[3]),out,int(sys.argv[4]),sys.argv[5])
+                         ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_shortening_context.py", line 73, in trial
+    root=module.compile_program(s,case['source'],case['templates'],case['program'],c)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_guard_shortening_context.py", line 242, in compile_program
+    actual=compile_program(solver,child,[transport(t,mapping,counts) for t in needed],compact,counts,select_support=False)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_guard_shortening_context.py", line 206, in compile_program
+    source=tuple(map(tuple,source));frames,tail,ids=validate(source,templates,program,counts)
+                                                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_guard_shortening_context.py", line 179, in validate
+    forced,path=_bind_path(step['path'],step['forced'],state,source,templates,fixed,support,counts,limit)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_guard_shortening_context.py", line 156, in _bind_path
+    if local_clause not in positions: raise ValueError('Unsupported edge')
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Unsupported edge
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_shortening_context.py", line 118, in <module>
+    elif action=='run':run(out)
+                       ~~~^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_shortening_context.py", line 109, in run
+    subprocess.run([sys.executable,__file__,'trial',str(out),str(dest),str(index),mode],check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/opt/homebrew/opt/python@3.14/bin/python3.14', '/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_shortening_context.py', 'trial', 'experiments/results/cnf-shortening-context', 'experiments/results/cnf-shortening-context/case-22-shared-0', '22', 'shared']' returned non-zero exit status 1.

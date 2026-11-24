@@ -5,7 +5,22 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: checked shortening expands local recognition
+## Latest evidence: discovery preparation is cheaper; coverage is unchanged
+
+[Shared contexts](shortening-context-reuse.md) reduce discovery time 57.63% while
+preserving all 615 programs and every matched native proof archive. This removes
+repeated normalization without skipping template, reason or conflict checks.
+Ordinary solving remains faster; the new preparation stays optional. The failed
+transport attempt and the corrected disappearing-variable regression are retained.
+
+The 388 root-budget stops are the next concrete coverage target. Investigate
+repeated unsuccessful roots, unchanged implication components and structural
+root priorities. Recognition reuse must bind the exact checked graph and account
+for changed edges and coordinates. Charge the remaining 5.18-second initial
+binding phase and all misses; cheap preparation alone supplies neither useful
+origins nor a uniform solution of arbitrary CNF.
+
+## Previous evidence: checked shortening expands local recognition
 
 [Iterative partial shortening](guard-partial-shortening.md) recognizes 104 event
 patterns / 67 distinct roots missed by both initial SCC contradiction detection

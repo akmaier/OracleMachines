@@ -1,0 +1,121 @@
+#!/usr/bin/env python3
+"""Matched immutable-context reuse, including misses and exact native archives."""
+from collections import Counter
+from pathlib import Path
+import resource,subprocess,sys,tempfile,time
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+from experiments import compare_cnf_guard_shortening as previous
+from experiments import cnf_guard_shortening as frozen
+from experiments import cnf_guard_shortening_context as shared
+base=previous.base;old=previous.old;native=previous.native
+PARENT=Path('experiments/results/cnf-guard-shortening')
+FILES=('experiments/cnf_shortening_transport.py','experiments/cnf_guard_shortening_context.py','solver/test_cnf_guard_shortening_context.py','experiments/compare_cnf_shortening_context.py')
+MODES=('fresh','frozen','shared')
+
+
+def prepare(out):
+    assert not (out/'protocol.json').exists();out.mkdir(parents=True,exist_ok=True)
+    parent=base.load(PARENT/'checkpoint.json');p=base.load(PARENT/'protocol.json')
+    for f,h in parent['source_fingerprints'].items():assert base.sha(f)==h,f
+    controls={}
+    for sample in base.load(PARENT/'comparisons.json')['samples']:
+        if sample['repeat']==0 and sample['mode'] in ('fresh','support'):
+            controls.setdefault(str(sample['index']),{})[sample['mode']]=old.binding(sample['path'])
+    base.write(out/'protocol.json',dict(parent=old.binding(PARENT/'checkpoint.json'),parent_manifest=old.binding(PARENT/'manifest.json'),failed_manifest=old.binding(Path('experiments/results/cnf-shortening-context-failed/manifest.json')),
+        previous_protocol=old.binding(PARENT/'protocol.json'),previous_census=old.binding(PARENT/'census.json'),
+        cases=p['cases'],limits=p['limits'],node_limit=p['node_limit'],controls=controls,
+        orders=[list(MODES),list(reversed(MODES))],census_orders=[['frozen','shared'],['shared','frozen']],
+        source_fingerprints={**parent['source_fingerprints'],**{f:base.sha(f) for f in FILES}},
+        limitations=['Only conditioned-state preparation changes. AST comparison fixes all other algorithm functions. Every support template, unit reason and conflict remains checked; contexts are rebuilt after each assignment.',
+        'Census replays all 615 saved events in two alternating serial repetitions per target, including binding, misses and serialization. No live solver query rerun or new origin acquisition.',
+        'All 105 prior local/controlled cases enter two alternating isolated repetitions of ordinary search and frozen/shared support compilers. Exact table digests and database bytes must reproduce the prior archives.',
+        'Complete compilation worker includes load, setup, compilation, warm checking, both cold readers, accounting and temporary compression. Imports/process startup, earlier acquisition, census/discovery and final preservation audits are additional.',
+        'Identical archives are linked to their checked prior files after actually charging compression; no duplicate permanent proof bank is created. A separate repeated-context stream checks reopen reuse.',
+        'Direct restriction handles contradictory cofactors normalized to an empty clause; the old whole-residual comparison can reject that sound collapse. The adversarial regression is separate from matched census gains.',
+        'No new proof rule, Lean refinement, arbitrary-SAT bound, new live policy or whole-query gain.']))
+
+
+def census(dest,out,target,mode):
+    p=base.load(out/'protocol.json');parent=old.bound(p['parent']);prior=old.bound(parent['guard_covers']['protocol'])
+    position=prior['targets'].index(target);original=old.bound(prior['cases'])[target]
+    source=native.normalize(original['source'])[0];templates=old.bound(old.bound(prior['inputs'][position])['extraction'])['templates']
+    refs=[r for r in old.bound(p['previous_census'])['records'] if r['target']==target]
+    events=old.bound(refs[0]['events'])['events'];module=frozen if mode=='frozen' else shared
+    dest.mkdir();began=time.perf_counter();rows=[]
+    for ref in refs:
+        c=Counter();tick=time.perf_counter();local,hints,whole=previous.local_hints(source,templates,events[ref['event']],c)
+        binding=time.perf_counter()-tick;bc=dict(c);ts=[h['template'] for h in hints];c=Counter();tick=time.perf_counter()
+        program=module.discover(local,ts,c,**p['limits']);seconds=time.perf_counter()-tick
+        assert program==ref['program']
+        if mode=='frozen':assert dict(c)==ref['counts']
+        rows.append(dict(event=ref['event'],program_sha256=base.key_sha(base.encode(program)),status=program['status'],reason=program['reason'],
+            binding_seconds=binding,discovery_seconds=seconds,counts=dict(c),binding_counts=bc))
+    tick=time.perf_counter();base.write(dest/'events.json',dict(rows=rows));serialization=time.perf_counter()-tick
+    base.write(dest/'report.json',dict(target=target,mode=mode,events=old.binding(dest/'events.json'),
+        binding_seconds=sum(r['binding_seconds'] for r in rows),discovery_seconds=sum(r['discovery_seconds'] for r in rows),
+        counts=dict(sum((Counter(r['counts']) for r in rows),Counter())),
+        serialization_seconds=serialization,complete_seconds=time.perf_counter()-began,
+        peak_rss_bytes=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss))
+
+
+def trial(dest,out,index,mode):
+    p=base.load(out/'protocol.json');reference=old.bound(p['controls'][str(index)]['fresh' if mode=='fresh' else 'support'])
+    dest.mkdir();began=time.perf_counter();case=old.bound(p['cases'][index]);c=Counter()
+    module=frozen if mode=='frozen' else shared
+    with tempfile.TemporaryDirectory() as td:
+        path=Path(td)/'db';tick=time.perf_counter()
+        s=previous.LazyBinaryClosureSolver(path,node_limit=p['node_limit']) if mode=='fresh' else native.ResidualSolver(path)
+        setup=time.perf_counter()-tick
+        try:
+            tick=time.perf_counter()
+            if mode=='fresh':result=previous.attempt(s,case['source'])
+            else:
+                root=module.compile_program(s,case['source'],case['templates'],case['program'],c)
+                result=dict(status='unsat',result=dict(root=root,answer=False,model=None,authority='native'))
+            solve=time.perf_counter()-tick;stored=old.tables(s.db);nc=dict(s.counts);tick=time.perf_counter()
+            if result['status']=='unsat':
+                if mode=='fresh':assert previous.attempt(s,case['source'])['status']=='unsat'
+                else:assert module.compile_program(s,case['source'],case['templates'],case['program'],Counter())==case['root']
+            warm=time.perf_counter()-tick;assert stored==old.tables(s.db)
+        finally:s.close()
+        tick=time.perf_counter();actual,readers=previous.audit(path,[dict(source=case['source'])],[result]);cold=time.perf_counter()-tick;assert actual==stored
+        tick=time.perf_counter();made=base.archive(path,Path(td));persistence=time.perf_counter()-tick
+        assert made['database_sha256']==reference['archive']['database_sha256']
+        assert base.sha(reference['archive']['path'])==reference['archive']['sha256']
+        assert {t:base.key_sha(base.encode(sorted(v.items()))) for t,v in stored.items()}==reference['digest']
+        record_bytes=sum(len(k.encode())+len(v.encode()) for r in stored.values() for k,v in r.items())
+        assert record_bytes==reference['record_bytes']
+    base.write(dest/'report.json',dict(index=index,case=p['cases'][index],mode=mode,result=result,counts=dict(c),native_counts=nc,
+        setup_seconds=setup,solve_seconds=solve,warm_seconds=warm,cold_seconds=cold,persistence_seconds=persistence,
+        complete_seconds=time.perf_counter()-began,peak_rss_bytes=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+        authority_tables=reference['authority_tables'],digest=reference['digest'],record_bytes=record_bytes,
+        archive=reference['archive'],temporary_compression={k:v for k,v in made.items() if k!='path'},cold_readers=readers))
+
+
+def run(out):
+    p=base.load(out/'protocol.json');samples=[];censuses=[];began=time.perf_counter()
+    for target in (1,4,28,37,40,61,64,67):
+        for repeat,order in enumerate(p['census_orders']):
+            for mode in order:
+                dest=out/f'census-{target}-{mode}-{repeat}'
+                subprocess.run([sys.executable,__file__,'census',str(out),str(dest),str(target),mode],check=True)
+                censuses.append(dict(**old.binding(dest/'report.json'),target=target,mode=mode,repeat=repeat))
+        print(base.encode(dict(census=target)),flush=True)
+    base.write(out/'censuses.json',dict(samples=censuses))
+    for index in range(len(p['cases'])):
+        for repeat,order in enumerate(p['orders']):
+            for mode in order:
+                dest=out/f'case-{index}-{mode}-{repeat}'
+                subprocess.run([sys.executable,__file__,'trial',str(out),str(dest),str(index),mode],check=True)
+                samples.append(dict(**old.binding(dest/'report.json'),index=index,mode=mode,repeat=repeat))
+        print(base.encode(dict(case=index,total=len(p['cases']))),flush=True)
+    base.write(out/'comparisons.json',dict(samples=samples,seconds=time.perf_counter()-began,protocol=old.binding(out/'protocol.json')))
+
+
+if __name__=='__main__':
+    action=sys.argv[1];out=Path(sys.argv[2])
+    if action=='prepare':prepare(out)
+    elif action=='run':run(out)
+    elif action=='trial':trial(Path(sys.argv[3]),out,int(sys.argv[4]),sys.argv[5])
+    elif action=='census':census(Path(sys.argv[3]),out,int(sys.argv[4]),sys.argv[5])
+    else:raise ValueError(action)

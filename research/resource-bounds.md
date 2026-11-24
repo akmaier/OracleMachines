@@ -18,6 +18,14 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+The [shared-context shortening experiment](shortening-context-reuse.md) removes
+per-guard canonicalization by checking against one immutable local context per
+conditioned state. Exact native proof records remain unchanged, so the previous
+retained-content envelope and enclosing-wrapper growth still apply. Template
+validation, reason/conflict checks, source scans, graph construction and BFS
+misses remain charged. Changed assignments require a new context. Fewer visits
+are neither a proportional process-RAM saving nor an unrestricted-SAT bound.
+
 The [partial-shortening compiler](guard-partial-shortening.md) adds a conditional
 proof-content envelope O((r+P+1) S_H + S_F), for r forced rounds and P total
 witness-path edges, including the terminal contradiction, when the selected

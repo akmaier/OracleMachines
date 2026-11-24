@@ -1,0 +1,23 @@
+{
+  "failure": {
+    "correction": "Restrict a satisfied support clause before checking absent coordinates",
+    "manifest": {
+      "path": "experiments/results/cnf-shortening-context-failed/manifest.json",
+      "sha256": "1fd51052df05e80b89b0319051bce9de687f1d3e0b5d73d4ea4e3ee42f57402c"
+    }
+  },
+  "limits": [
+    "615 matched programs unchanged: 142 refutations, 388 root-budget stops, 85 no-useful-literal results.",
+    "Initial binding remains about 5.18 seconds; cold proof replay, retained native bytes and peak RSS effectively unchanged.",
+    "No new whole-query completion, live deployment, automatic-origin construction or arbitrary-SAT guarantee."
+  ],
+  "next": "Investigate repeated unsuccessful roots and unchanged implication components, then test structural root priorities or exact negative-search reuse with explicit graph/coordinate invalidation and charged lookup costs.",
+  "policy": "Keep optional: exact matched recognition/proof results, cheaper preparation, ordinary solving still faster",
+  "reductions_percent": {
+    "compile": 28.898894391317008,
+    "complete_compile": 26.75225850283902,
+    "complete_discovery": 43.0795770821463,
+    "discovery": 57.6314146315786,
+    "normalization": 59.69223092817239
+  }
+}

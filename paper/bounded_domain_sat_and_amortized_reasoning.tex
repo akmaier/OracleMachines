@@ -11490,6 +11490,92 @@ alone cannot create the missing binary consequences. All 1,853 solver tests pass
 and the new native archives and both comparison phases remain preserved. No
 whole-query gain or unrestricted complexity claim follows.
 
+\subsection{Reusing immutable preparation across conditioned states}
+
+Within one discovery call, conditioning changes the assignment and residual,
+but it does not change the original CNF or supplied conditional-unit templates.
+The preceding state builder nevertheless normalizes the original source and
+validates all original supports again at every state. We replace those repeated
+checks with one owned preparation. The source is checked once; each template is
+copied, validated and stored in immutable containers with its parsed guard.
+Later caller edits cannot change the checked inputs. A source or template edit
+requires a new preparation. No prepared object is accepted as a certificate.
+
+This reuse concerns only facts about the original inputs. Every new assignment
+is checked, the actual cofactor is restricted and normalized, live coordinates
+and guard compatibility are checked, and current clause positions are rebuilt.
+Transported support clauses and unit reasons still undergo reduced-template
+validation and RUP checking against that cofactor. The frozen program validator
+and native compiler independently check published consequences. The discovery
+function changes only its source-preparation and state-builder calls; an AST
+comparison checks the remaining control flow. Root order, filters, cache handling
+and limits remain unchanged.
+
+Thirty-two isolated workers compare the existing and prepared implementations
+on all 615 saved events, using two alternating repetitions per target and engine.
+Copying is included in discovery time. Summed mean discovery falls from 7.62653
+to 5.98966 seconds, a 21.46\% reduction. Initial event binding takes 5.00313 and
+5.00540 seconds; the complete measured phase falls from 12.66067 to 11.02757
+seconds, or 12.90\%. Both the 156 one-state cases and the 459 cases with several
+states improve in aggregate. These exposed two-run samples establish neither a
+stable speed ratio nor a pointwise improvement. Origin acquisition, process
+startup, input loading and preservation audits remain additional.
+
+All programs are identical, including unresolved outcomes. Recognition remains
+266 events and 173 distinct local roots, and all 96 earlier edits preserve their
+programs. Search still constructs 2,837 states, starts 26,361 fresh roots and
+visits 339,030 BFS edges. The exact removed work is 2,921,976 original-source
+normalization literal visits, 17,331 original-template checks, 585,592 support
+literal visits and 562,633 template reason-literal visits. All 12,983 checks of
+hints against current clause positions remain, including 396,982 reason-literal
+checks. Adding one original static-validation counter vector per state to the
+new counts reconstructs every earlier operational count, apart from the three
+new preparation counters. Allocation and copying remain charged in elapsed time.
+
+Let $R$ be the number of conditioned states, $A$ the repeated original-input
+preparation cost per state, and $D$ the additional ownership overhead after the
+initial checks. The change removes $R$ repetitions of $A$ and pays $D$ once;
+changed-cofactor work and search remain. Canonicalization and support ordering
+include sorting, so $A$ is not silently assumed linear. For source encoding size
+$L$, source variable count $V$ and template encoding size $T$, retained
+preparation uses $O(L+V+T)$ words under the existing word and hash-table model.
+Mutable template containers are copied; immutable source clauses can be shared.
+The largest measured retained-input proxy is 6,773 scalar slots, including
+source content and excluding Python container overhead and integer bit lengths.
+
+Maximum census worker RSS rises from 82,264,064 to 83,673,088 bytes. On one
+separately instrumented seven-state event, traced peak allocations fall from
+375,000 to 337,216 bytes. These are different measurement scopes; ownership
+copies do not establish a uniform memory saving. Current-cofactor normalization,
+restriction and template transport remain material costs in that profile.
+
+Two native compilation streams cover every recognized root and produce
+byte-identical databases: 6,535 native records with 10,508,807 key/payload bytes,
+and no entries in the other five authority tables. Both independent cold readers
+accept all roots; warm replay changes no record. Complete stream times are
+17.62925 and 16.63988 seconds. These single-stream timings include discovery,
+compilation, warm verification, cold verification and persistence. Compilation
+and reader code are unchanged, so their timing variation is not a compiler
+optimization. Persistent proof size is identical. A separate cold-reopen
+expansion at padding sizes 4, 16, 64 and 256 retains the twelve-record initial
+support, then adds one wrapper per extension with a support hit. Every resulting
+database matches its earlier archive.
+
+All 1,861 tests pass. Tests include exhaustive partial assignments and source
+deletions on the small fixture, seeded CNFs checked against exhaustive truth,
+caller mutation, malformed supports, changed-cofactor checking, budget stops
+and native persistence. Earlier artifacts and proof blocks remain unchanged.
+The failed first archive-helper invocation and corrected rerun are also retained;
+the correction changes no timed discovery code.
+
+The next coverage question is whether broader search budgets can use this
+preparation saving to close some of the 245 root-budget stops at a competitive
+total cost. The 104 no-useful-literal cases remain separate: further BFS does not
+create missing consequences in their current binary abstraction. They require
+stronger useful guards or another exact structural description. Neither the
+unchanged classification nor cheaper preparation proves efficient coverage of
+arbitrary CNF, a whole-query speedup, or a bound on unlimited persistent growth.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

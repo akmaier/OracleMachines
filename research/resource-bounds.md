@@ -18,6 +18,17 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+The [immutable preparation experiment](shortening-prepared-source.md) validates
+original source/template facts once per discovery call and retains owned data of
+O(L+V+T) words for source size L, variables V and template encoding size T under
+the existing word/hash-table model. For R conditioned states it removes R repeated
+static validation passes, paying ownership overhead once. Canonicalization and
+support ordering still include sorting; copying is included in measured time.
+Every changed cofactor, transported trace and native proof remains checked.
+Measured discovery falls 21.46%, with identical coverage and stored proof bytes.
+Maximum census RSS rises slightly, and logical slot counts omit Python overhead;
+this is no uniform time or memory bound for arbitrary SAT or an unlimited stream.
+
 The [no-path filter experiment](shortening-reach-filters.md) uses the exact
 contrapositive pairing of binary implication edges to remove an unnecessary
 incoming index. The specialized endpoint test has constant extra state and

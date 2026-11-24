@@ -5,7 +5,22 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: elementary reachability filtering has limited coverage value
+## Latest evidence: identical coverage with less repeated preparation
+
+[Immutable source preparation](shortening-prepared-source.md) preserves every
+program over 615 saved events and 96 edits while reducing measured discovery
+21.46%, including ownership copying. Coverage remains 266 events / 173 roots;
+all native records and cold replay results match exactly. This creates a measured
+cost opportunity, not a new SAT class or a complete efficient partition.
+
+Next compare larger discovery budgets with the 64-root baseline at their actual
+total costs. The 245 root-budget stops may contain reachable patterns that the
+current limits miss. The 104 no-useful-literal cases need stronger consequences,
+not more searches of the same abstraction. Acquisition, proof compilation,
+live-query improvements and independent-domain evidence remain open. Resume
+`experiments/results/cnf-shortening-prepared-source/checkpoint.json`.
+
+## Previous evidence: elementary reachability filtering has limited coverage value
 
 [Endpoint and weak-component filters](shortening-reach-filters.md) prove absence
 of selected paths in the supported binary graph, never satisfiability of the

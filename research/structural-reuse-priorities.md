@@ -1,6 +1,6 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-24 after the user's shift toward pattern discovery and a valid
+Updated 2026-11-25 after the user's shift toward pattern discovery and a valid
 partition of the entire SAT problem. This is the working record for the hourly
 investigation. Start with the [discovery plan](sat-pattern-discovery.md), then
 consult [implementation history](implementation-gaps.md),
@@ -12,7 +12,35 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse immutable preparation; stop weak-index polishing
+## Current investigation: spend verified preparation savings on coverage
+
+[Owned immutable preparation](shortening-prepared-source.md) cuts measured
+discovery from 7.62653 to 5.98966 seconds (21.46%) across all 615 saved events;
+the complete phase including initial binding falls 12.90%. Copying is charged.
+Every program and all 96 edited-case results are identical. The same 266 events
+and 173 roots close. The change removes 17,331 original-template checks and
+2,921,976 normalization literal visits, retaining all current-cofactor checks.
+
+Both native streams produce identical 6,535-record databases. Warm replay adds
+nothing; cold expansion retains the twelve-record support and adds one wrapper
+per extension. Persistent proof size is unchanged. Maximum census RSS rises
+slightly despite lower traced allocations on one event; no uniform RAM saving
+is claimed. All 1,861 tests pass and 64 proof blocks remain unchanged.
+
+**Next best target:** measure whether broader search budgets can turn the saved
+preparation cost into certified coverage of the 245 root-budget stops. Compare
+against the new 64-root baseline and the old total measured cost, charging
+compilation and cold replay. Keep the 104 no-useful-literal cases separate;
+additional BFS cannot create missing supported consequences. Stronger useful
+guards remain their main structural gap. Current-cofactor normalization and
+transport are still substantial costs, but avoid another purely local polish
+before testing a coverage gain. No whole-query speedup is established.
+
+Resume `experiments/results/cnf-shortening-prepared-source/checkpoint.json`.
+The audit preserves all prior manifests, source files and banks, including the
+archive-helper failure and its corrected, verified rerun.
+
+## Previous investigation: reuse immutable preparation; stop weak-index polishing
 
 [Exact no-path filters](shortening-reach-filters.md) add only three ternary-first
 successes (263 to 266), and weak components add none beyond endpoint tests.

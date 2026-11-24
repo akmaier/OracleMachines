@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, structural no-path filtering):
+Latest expansion checkpoint (25 November, immutable source preparation):
+[Reuse original validation across conditioned states](shortening-prepared-source.md).
+Discovery falls 21.46% in the matched sample; current-cofactor and native proof
+checks remain. All 615 programs and 96 edit results are unchanged, with identical
+6,535-record native archives for 173 roots. Persistent proof size is unchanged.
+All 1,861 tests pass. Next measure whether broader search budgets convert this
+saving into coverage of root-budget stops, separating fixed points that require
+stronger guards. Resume `experiments/results/cnf-shortening-prepared-source/checkpoint.json`.
+
+Previous expansion checkpoint (24 November, structural no-path filtering):
 [Exploit contrapositive symmetry and retain limited filter gains](shortening-reach-filters.md).
 Endpoint tests add three ternary-first successes; weak components add none and
 repair none of the targeted regressions. The incoming index is mathematically

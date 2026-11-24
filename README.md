@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Reuse immutable source preparation across conditioning](research/shortening-prepared-source.md).
+Discovery time falls 21.46% across 615 saved events, including copying costs;
+the complete measured phase falls 12.90%. All programs and 173 native root proofs
+are identical, with unchanged persistent proof size. All 1,861 tests pass.
+Next measure whether broader discovery budgets convert the saving into coverage.
+No whole-query speedup or unrestricted-SAT bound is established.
+
+Previous:
 [Filter impossible paths using binary-clause structure](research/shortening-reach-filters.md).
 Endpoint filters increase ternary-first recognition from 263 to 266 saved events;
 weak components add no further successes. Contrapositive edge pairs make the

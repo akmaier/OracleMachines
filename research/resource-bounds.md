@@ -18,6 +18,17 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+The [ternary-first ordering experiment](shortening-root-priority.md) uses
+O(C+L_w+R log R) work per prepared state for root enumeration, scoring and sorting,
+with C current clauses, L_w wider-clause literal occurrences and R eligible roots,
+and O(R) word storage under ordinary word/hash-table assumptions. Numeric ordering
+already enumerates and sorts; these are not all incremental costs. The change
+preserves inference and proof-content
+bounds. Its score scans, sorting and preparation are outside the BFS checking
+cap and included in elapsed time. Earlier closure reduces conditioned states
+in the measured census, but some earlier successes are lost. Neither score nor
+observed memory maxima yield a uniform arbitrary-SAT resource bound.
+
 The [negative-reach cache](negative-reach-reuse.md) stores closed sets in original
 source coordinates. Edge deletion preserves absence of a path; an added edge
 leaving a set invalidates it. With M literal memberships and E graph edges,

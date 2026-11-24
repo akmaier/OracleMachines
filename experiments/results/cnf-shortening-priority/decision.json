@@ -1,0 +1,20 @@
+{
+  "evidence": {
+    "path": "experiments/results/cnf-shortening-priority/analysis.json",
+    "sha256": "09d427c84481be27dc0c2e83bb6817d984d8935e9d8afc1eaace9669cd74d314"
+  },
+  "limitations": [
+    "Two alternating isolated repetitions per target; all 615 exposed saved events, including losses and misses. Initial guard binding is separately timed.",
+    "All 64-root modes retain 32 rounds, witness length 256, and 16384 BFS/invalidation edge checks; priority scanning and sorting, source preparation, graph differences and cache index work are additional, not an equal total-work budget.",
+    "priority_plain64 disables negative certificate storage and lookup but retains the same graph-coordinate preparation; it is an ablation, not a claim to the fastest uncached implementation.",
+    "Only newly recognized roots beyond the union of previous cached64 and expanded128 controls enter the fresh/support local comparison. No whole-query policy changes.",
+    "New support-preserving clause additions and signed permutations test edits after the policy was fixed. They share exposed source families and are not an independent-domain holdout.",
+    "Input loading, process startup, original template acquisition, final reports and preservation audits remain additional. No new arbitrary-SAT tractability claim."
+  ],
+  "limits": "Ordering is not pointwise dominant. Uncached ordering is cheaper but recognizes fewer cases. Ordinary local solving remains faster before discovery. Edits share exposed source families.",
+  "mechanism": "Earlier contradictions require 486 fewer conditioned states and forced steps. Score-pass counters include enumeration already required by numeric ordering; tally updates and score keys are additional.",
+  "next": "Test charged endpoint and weak-component no-path filters before consuming fresh BFS roots, comparing both orders and preserving the two zero-exclusion regressions. Diagnostic candidates include cache hits and are not measured avoided searches.",
+  "persistence": "All 38 new roots beyond both old controls have native proof archives, audited by both readers; all were already known to ordinary whole-query search. Cumulative reference bank unchanged.",
+  "result": "Fixed ternary-source incidence ordering recognizes 263 events versus 202 with numeric reuse, with 72 gains and 11 losses. Measured discovery falls 9.89 percent and complete phase 6.25 percent.",
+  "status": "optional_research_only"
+}

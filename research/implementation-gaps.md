@@ -4,7 +4,17 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, negative reachability reuse):
+Latest expansion checkpoint (24 November, ternary-first root ordering):
+[Prioritize potential binary-clause yield](shortening-root-priority.md).
+The bounded detector recognizes 263 saved events versus 202 with numeric reuse,
+with 72 gains and 11 losses. Discovery falls 9.89% in the matched sample; 38
+roots beyond both prior controls have checked native archives. Ordinary search
+already stores every new root and remains faster in local solving comparisons.
+All 1,844 tests pass. Next test charged endpoint/component reachability filters
+on the 11 root-budget regressions, keeping the two zero-exclusion cases and all
+unresolved events. Resume `experiments/results/cnf-shortening-priority/checkpoint.json`.
+
+Previous expansion checkpoint (24 November, negative reachability reuse):
 [Reuse closed failed-search sets across changed graphs](negative-reach-reuse.md).
 The selected detector gains 60 saved events / 37 local roots over the 64-root
 policy; all new native proofs are audited and already known to ordinary search.

@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Prioritize literals with more potential clause shortening](research/shortening-root-priority.md).
+Ternary-first ordering with reuse recognizes 263 of 615 saved events, versus
+202 with numeric ordering, while measured discovery time falls 9.89%. It gains
+72 events and loses 11, so it remains optional. Thirty-eight roots beyond both
+previous controls have checked native archives; ordinary search already knows
+them. Edited-case checks and all 1,844 tests pass. Costs and regressions remain
+explicit; no whole-query improvement is claimed.
+
+Previous:
 [Reuse completed negative reachability searches](research/negative-reach-reuse.md).
 The optional detector recognizes 202 of 615 saved event patterns versus 142
 at the original budget, representing 37 additional local roots. Each new root

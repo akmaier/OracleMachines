@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: exact negative-search reuse broadens bounded recognition
+## Latest evidence: structural ordering changes which bounded patterns close
+
+[Ternary-first search ordering](shortening-root-priority.md) prioritizes literals
+whose checked exclusion would shorten more current ternary source clauses.
+It recognizes 263 saved events versus 202 with numeric reuse, with 72 gains and
+11 losses. Fewer conditioned states reduce measured discovery time 9.89% after
+charging the score scans. Thirty-eight roots beyond both previous controls have
+native proofs; ordinary whole-query search already knows all of them.
+
+This is a scheduling improvement, not a new inference rule or complete SAT
+partition. All 11 regressions exhaust the root budget. The next experiment is
+to filter structurally impossible paths before spending fresh BFS slots, while
+retaining both ordering controls and charging index work. The 257 remaining
+root-budget stops, 95 no-useful-literal cases and two regressions with no simple
+endpoint/component exclusions remain explicit. Edited-case checks improve but
+share the exposed source families; live and independent-domain evidence is open.
+
+## Previous evidence: exact negative-search reuse broadens bounded recognition
 
 [Closed reachable sets](negative-reach-reuse.md) let the shortening detector
 reuse completed failed searches after deletions and checked additions to the

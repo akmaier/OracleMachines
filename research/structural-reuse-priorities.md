@@ -12,7 +12,38 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: choose useful searches and avoid rebuilding their state
+## Current investigation: filter impossible roots before spending search slots
+
+[Ternary-first root ordering](shortening-root-priority.md) recognizes 263 of 615
+saved events versus 202 with numeric reuse and 211 at 128 uncached roots.
+Discovery takes 7.77112 seconds versus 8.62367 with numeric reuse, a measured
+9.89% reduction; the complete phase falls 6.25%. The improvement comes with
+72 gains and 11 losses, all retained. All 38 roots beyond both older controls
+have native proof archives and were already found by ordinary whole-query search.
+
+**Structural evidence:** the new order reaches more contradictions with 486
+fewer conditioned states and 486 fewer forced steps. Its scoring pass makes
+1,932,243 wider-clause literal visits, including enumeration required by the
+numeric control. Preparation remains material, and this is not a
+uniform or pointwise speedup. The uncached ordering ablation costs less but
+recognizes fewer events (227). All policies remain optional.
+
+**Next best target:** all 11 regressions exhaust the fresh-root budget. Test
+cheap sufficient no-path conditions before spending a BFS slot: empty outgoing
+adjacency, empty target incoming adjacency, or different weak components.
+The final-state diagnostics exclude 0--17 eligible roots per regression; two
+exclude none. Counts include cache hits and do not yet establish avoided fresh
+search. Charge index construction and maintenance, compare both root orders,
+and retain the zero-exclusion cases. Then test new edits and whole-query costs.
+
+The policy leaves 257 root-budget stops and 95 no-useful-literal outcomes.
+On 48 edited exposed cases, recognition rises from eight to fourteen without
+loss; this is not independent-domain evidence. All 1,844 tests pass. Native
+support compilation saves content bytes but ordinary solving remains faster.
+Resume `experiments/results/cnf-shortening-priority/checkpoint.json`; prior
+banks, frozen sources and all 64 manuscript proof blocks remain preserved.
+
+## Previous investigation: choose useful searches and avoid rebuilding their state
 
 [Negative reachability reuse](negative-reach-reuse.md) recognizes 202 of 615
 saved events, versus 142 at 64 ordinary BFS roots and 211 at 128 roots. It reuses

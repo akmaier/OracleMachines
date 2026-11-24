@@ -11310,6 +11310,90 @@ proof blocks and banks remain preserved. This optional local method establishes
 neither a whole-query speedup nor compact closure or polynomial resource bounds
 for arbitrary CNFs.
 
+\subsection{Ordering searches by potential clause shortening}
+\label{sec:shortening-root-priority}
+
+Negative-search reuse changes how much work is repeated, but root order still
+determines which opportunities a bounded attempt reaches. For an eligible
+literal $r$ in the current cofactor $F_\alpha$, define
+\[
+s(r)=\bigl|\{C\in F_\alpha: |C|=3,\ r\in C\}\bigr|.
+\]
+We search in descending $s(r)$ order, breaking ties by signed numeric order.
+If an independently checked implication path forces $\neg r$, each counted
+clause becomes binary. This is potential source-clause yield, not a count of
+new graph edges: reduced clauses can coincide or already be present. The score
+does not prove the literal forced or the resulting graph contradictory.
+Eligible roots, inference rules, negative-cache invalidation and native proof
+authority remain unchanged. A necessary step affecting only longer clauses can
+be delayed, and ties still depend on variable numbering.
+
+We fix this rule before comparing all 615 exposed events in two alternating
+isolated repetitions per target. Numeric ordering with reuse recognizes 202
+events and 134 roots in 8.62367 seconds of discovery. Ternary-first ordering
+with reuse recognizes 263 events and 170 roots in 7.77112 seconds. Without
+negative-search reuse, the same ordering recognizes 227 events and 145 roots
+in 6.73860 seconds. The numeric 128-root control recognizes 211 events and
+139 roots in 8.73492 seconds. Complete measured phases, including initial local
+binding and event serialization, take 13.87567, 13.00844, 11.95823 and 13.97728
+seconds, respectively. Original acquisition, input loading, process startup,
+final reports and preservation audits remain additional. These two-run samples
+do not establish a stable timing ratio.
+
+Ternary-first reuse gains 72 events and loses 11 relative to numeric reuse.
+Measured discovery time falls 9.89\% and the complete phase 6.25\%, but the
+policy is not a pointwise replacement. It prepares 2,777 conditioned states
+instead of 3,263 and makes 2,162 forced steps instead of 2,648. Fresh BFS roots
+fall from 30,784 to 27,075, edge visits from 369,897 to 327,276, and normalization
+literal visits from 10,013,857 to 8,694,145. Earlier closure can reduce repeated
+preparation as well as search. The scoring pass visits 902,476 clauses and
+1,932,243 wider-clause literals and scores 207,334 roots. These counts are not
+all incremental work: numeric ordering already enumerates and sorts candidates.
+
+For $C$ current clauses, $L_w$ literal occurrences in wider clauses and $R$
+eligible roots, enumeration, scoring and sorting cost $O(C+L_w+R\log R)$ work
+and $O(R)$ word storage per prepared state, under ordinary word and hash-table
+assumptions. Ternary tallying and score-key lookups are the main added operations.
+These costs are outside the 16,384 BFS/invalidation-check cap and inside elapsed
+time. The 64-root policies retain 32 rounds and witness paths of at most
+256 edges. Maximum census-worker peak RSS is 83,361,792, 81,739,776, 81,133,568
+and 82,673,664 bytes in the order above; these measurements include other state
+and are not general memory bounds. The uncached ordering ablation retains the
+same coordinate preparation and is not claimed to be the fastest uncached
+implementation.
+
+The cached ordering recognizes 38 roots beyond the union of the two previous
+controls; its uncached ablation recognizes 27 of those same roots. All 38 are
+already stored by ordinary whole-query search. In 152 isolated native-proof
+workers, ordinary search and selected-support compilation independently return
+UNSAT for every new source. Both existing readers check all six authority
+tables. Ordinary solving takes 1.06101 seconds and selected-support compilation
+1.77779 seconds; their complete measured phases take 3.01942 and 3.73598 seconds,
+before discovery. Selected supports retain 2,278,938 record bytes versus
+4,888,823 for ordinary search, a 53.38\% reduction, with 1,779 versus 439
+records. Warm rechecks add no records. Cold audit and compression costs and all
+76 distinct new proof archives are preserved; the cumulative bank is unchanged.
+
+Forty-eight deterministic signed renamings and support-preserving clause
+additions test the fixed rule on edited cases. Recognition rises from eight
+with numeric reuse to fourteen with ternary-first reuse, with no losses in
+this sample. The uncached ordering recognizes twelve and the 128-root control
+eight. These edits share exposed source families and do not supply independent
+domain or whole-query evidence.
+
+All eleven original-census regressions exhaust the fresh-root budget. Replayed
+prefix diagnostics examine sufficient no-path conditions: empty outgoing
+adjacency at $r$, empty incoming adjacency at $\neg r$, or distinct weak graph
+components. At the final states these exclude zero to seventeen eligible roots;
+two regressions have no such exclusions. Counts overlap and include cache hits,
+so they do not establish avoided fresh BFS. No such filter is included in the
+measured policy. Testing these filters with their construction costs is the next
+narrow target. The current ordering leaves 257 root-budget stops and 95 cases
+without a useful forced literal. All 1,844 solver tests pass. The optional
+policy adds neither a completed whole query nor an efficient partition of
+arbitrary CNFs; useful origin acquisition, live routing and uniform resource
+bounds remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

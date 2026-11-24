@@ -4,7 +4,21 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, exact probe handoff):
+Latest expansion checkpoint (24 November, consumed preparation lifetime):
+[Separate cleanup, admission and active memory](probe-lifetime.md). Early release
+reduces solve mean 4.57% exposed / 3.54% fresh and complete-worker mean 1.67% /
+1.92% versus original 2 MiB retention. A 4 MiB original control nearly matches
+it; cleanup alone regresses solve mean. Fresh pending charge stays below 2 MiB,
+but its full-visit envelope reaches 4.61 MB. The selected allocation trace and
+unchanged retained proof state do not show a substantial memory saving. All
+four arms retain 42/48 exposed and 40/48 fresh coverage. Next: census existing
+binary refutations in inconclusive probe residuals, including the hardest fresh
+case 37 and unresolved mixture edits 61/67. Treat this as an untested discovery
+hypothesis; preserve failed recognition and source-bound proof obligations.
+Resume `experiments/results/cnf-probe-lifetime/checkpoint.json` with the multipart
+archive reader. All 1,677 tests and 66 focused checks pass.
+
+Previous expansion checkpoint (24 November, exact probe handoff):
 [Reuse preparation at the actual child](probe-handoff.md). The 2 MiB policy
 reduces mean solve time 3.58% exposed / 2.68% fresh, with all four pairs faster.
 The 256 KiB policy regresses. Answers, models, proof bytes, retained solver state

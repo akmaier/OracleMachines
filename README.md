@@ -28,7 +28,14 @@ classes.
 
 ## Paper
 
-[Reuse probe preparation at the actual child](research/probe-handoff.md).
+[Retire consumed preparation and account for active memory](research/probe-lifetime.md).
+Early release saves 3.54% fresh solve time and 1.92% complete-worker time versus
+2 MiB retention; original 4 MiB retention nearly matches it. Proof storage and
+coverage are unchanged, and no substantial memory reduction is demonstrated.
+Next: inspect inconclusive probes for existing binary refutations on the eight
+fresh roots still unresolved, including two edited mixtures.
+
+Previous: [Reuse probe preparation at the actual child](research/probe-handoff.md).
 A 2 MiB preparation allowance reduces solve mean 3.58% exposed / 2.68% fresh;
 a 256 KiB allowance is slower. Proof storage and 42/48 coverage remain unchanged.
 Next: release consumed ancestor preparation so useful descendant offers fit.

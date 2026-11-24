@@ -10016,6 +10016,38 @@ retained references. All six fresh unresolved roots remain random-three, which
 accounts for 76.64\% of solve time. This local saving establishes neither broader
 tractable coverage nor a uniform polynomial bound for unrestricted SAT.
 
+\paragraph{A preparation allowance is not a bound on active search memory.}
+We next clear each consumed offer's references and distinguish that cleanup
+from releasing its charge before the recursive visit returns. The native visit
+still owns the formula and mapping it needs. Pending opposite branches remain
+charged; verification cannot consume preparation hints. A separate accounting
+envelope keeps transferred charges until their visits end. Thus earlier admission
+does not make active computation disappear from the resource account.
+
+Four alternating repetitions compare original 2 MiB retention, cleanup with
+unchanged charging, cleanup with a 2 MiB pending allowance, and original
+retention with 4 MiB. The exposed stream has sizes 114/138; the fresh stream has
+sizes 120/144 and seed 202611240203. Early release reduces solve mean by 4.57\%
+exposed and 3.54\% fresh, and complete-worker mean by 1.67\% and 1.92\%.
+Cleanup alone instead raises solve mean by 0.74\% and 0.12\%. Original 4 MiB
+retention gives similar solve savings, 4.80\% and 3.28\%. Its comparison with
+early release has mixed signs. One exposed complete-worker pair also regresses
+for each of these faster policies. The evidence supports greater preparation
+reuse, but does not establish that earlier charge release is better than the
+simpler larger allowance.
+
+Fresh early release consumes 1,505 offers instead of 994 and rejects 231 instead
+of 838; the 4 MiB control consumes 1,527. Its pending peak is 2,094,861 bytes,
+but the full-visit envelope reaches 4,607,922 bytes. Selected retained solver
+state remains 315,074,010 bytes and native key-plus-payload storage 76,527,327
+bytes across all four policies. Mean process RSS ranges from 1.17 to 1.20 GB.
+Neither the pending allowance nor its envelope is a whole-process memory bound.
+All models, dispatches and authoritative payloads remain identical. Coverage
+is 42/48 exposed and 40/48 fresh: six fresh random-three roots and two edited
+mixtures remain unresolved. These are different fixed streams, not a loss of
+coverage caused by cleanup. Further buffer tuning cannot by itself establish
+broader certified structure or polynomial expansion for arbitrary CNF.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

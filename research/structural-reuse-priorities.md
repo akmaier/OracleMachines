@@ -12,7 +12,47 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: release consumed preparation before retaining more
+## Current investigation: distinguish preparation savings from new structure
+
+[Consumed preparation lifetime](probe-lifetime.md) clears used references and
+separates cleanup from earlier admission. Four alternating repetitions show
+4.57% exposed / 3.54% fresh solve savings and 1.67% / 1.92% complete-worker
+savings versus original 2 MiB retention. Original 4 MiB retention gives similar
+savings; the comparison with early release has mixed signs. Cleanup alone adds
+0.74% / 0.12% solve time. All controls and regressions remain preserved.
+
+**Memory conclusion:** the 2 MiB pending cap is not a 2 MiB full-visit cap.
+Its fresh envelope reaches 4,607,922 bytes. On the largest unresolved attempt,
+new traced allocations peak at 27.32 MB versus 27.18 MB for original 2 MiB
+retention and 27.33 MB for original 4 MiB retention. Selected retained state
+and proof payload are identical across arms. Do not claim a memory reduction
+from the lower pending counter, or increase capacity again without a new reason.
+
+**Next target: census checked binary structure in inconclusive probes.** The
+fresh stream retains 40/48 distinct roots in every arm; six random-three roots
+and edited disjoint/shared mixtures 61/67 remain unresolved. Random-three costs
+53.80% of fresh transfer solve time and the mixture families another 43.56%.
+Case 37 is the largest unresolved attempt at 1.2852 seconds. It already performs
+145 binary SCC checks, yielding ten refutations and 135 satisfiable-subset
+misses, but 49 whole probes remain inconclusive. Inspect their exact residuals
+for an existing binary refutation after any already computed unit assignments.
+Measure both polarities, restriction, mapping and source-bound proof checks.
+This is a discovery hypothesis, not an observed additional certificate. A
+satisfiable binary subset gives no verdict on its other clauses.
+
+Use the two mixture edits as controls. Case 61 reuses 20/25 proof leaves but
+still exhausts acquisition on the rest. Certified interaction coverage matters
+more than further handoff tuning that leaves the same search tree. Supporting
+runtime work can inspect 372 remaining negative-child canonicalizations on
+case 37, but must retain the earlier proof-memo and ordered-normalization
+regressions rather than retrying a broad cache without evidence.
+
+Resume `experiments/results/cnf-probe-lifetime/checkpoint.json` with
+`experiments.cnf_archive_parts.restore_archive`. No production default or
+unrestricted-SAT claim changes. Exposed coverage stays 42/48; comparing that
+with fresh 40/48 does not measure a policy-induced loss.
+
+## Previous investigation: release consumed preparation before retaining more
 
 [Exact probe-to-child handoff](probe-handoff.md) reuses work from inconclusive
 whole-clause probes at the ordinary child while preserving prior pool and

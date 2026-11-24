@@ -5,7 +5,29 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: preparation reuse preserves coverage and reduces repeated work
+## Latest evidence: more preparation reuse leaves the structural frontier intact
+
+[Consumed preparation lifetime](probe-lifetime.md) separates reference cleanup,
+earlier admission and a larger original allowance. Early release saves 3.54%
+fresh solve time versus 2 MiB retention, but original 4 MiB retention nearly
+matches it. Cleanup alone does not improve solve mean. Native search, proof
+bytes and coverage are identical in all four policies: 42/48 exposed and 40/48
+fresh. A 2 MiB pending cap reaches a 4.61 MB full-visit accounting envelope;
+the exact-prefix allocation trace shows no substantial memory reduction.
+
+The fresh unresolved set has six random-three roots plus two edited mixtures.
+The next discovery hypothesis is to inspect nonconflicting whole probes for
+binary-core refutations using already computed unit assignments and existing
+source-bound paths. Fresh case 37 already has ten native binary-subset
+refutations, 135 satisfiable-subset misses and 49 whole-probe misses. This does
+not establish that an additional probe can be refuted: first run a census,
+charge failed recognition and retain unknowns. Include mixture edits 61 and 67;
+case 61 retains 20/25 previous proof leaves but still cannot close the rest
+within the budget. All recognition must use only the current CNF and its causal
+history, with exact source mappings and recomposition. Further buffer changes
+alone cannot establish efficient coverage of the unresolved interactions.
+
+## Previous evidence: preparation reuse preserves coverage and reduces repeated work
 
 [Exact probe-to-child handoff](probe-handoff.md) binds earlier inconclusive
 probe preparation to the actual ordinary child. Pool reuse, recognition order,

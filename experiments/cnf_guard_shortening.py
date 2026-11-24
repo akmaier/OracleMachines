@@ -1,0 +1,236 @@
+"""Bounded forced-literal shortening with native, selected-support refutations.
+
+The program is a proposal: replay binds every edge to the actual conditioned
+source or a checked guard. No conditioned edge is asserted unconditionally.
+"""
+from collections import Counter, deque
+from experiments import cnf_residual_dag as native
+from experiments.cnf_guard_interactions import local_hints, compile_path
+from experiments.cnf_conditional_unit_support import check_template, transport
+
+
+def _source(source, templates, counts):
+    source = tuple(map(tuple, source))
+    if native.normalize(source, counts)[0] != source:
+        raise ValueError('Canonical source required')
+    members = set(source)
+    for template in templates:
+        if not check_template(template, counts) <= members:
+            raise ValueError('Missing template support')
+    return source
+
+
+def _state(source, templates, fixed, counts):
+    raw = native.restrict_scan(source, fixed, counts)
+    local, names = native.normalize(raw, counts)
+    counts['conditioned_source_literals'] += sum(map(len, source))
+    event = dict(root=native.token(local, counts), mapping=[[i+1,v] for i,v in enumerate(names)],
+                 fixed=sorted([v,b] for v,b in fixed.items()))
+    _, hints, whole = local_hints(source, templates, event, counts)
+    if not whole:
+        raise ValueError('Expected whole cofactor')
+    graph = sorted({cl for cl in local if 1 <= len(cl) <= 2} |
+                   {tuple(h['clause']) for h in hints if 1 <= len(h['clause']) <= 2})
+    return dict(local=local, names=names, hints=hints, graph=graph)
+
+
+def _external_path(path, state):
+    def lit(l): return state['names'][abs(l)-1] * (1 if l > 0 else -1)
+    return [[lit(nxt), sorted(lit(l) for l in state['graph'][cid])] for nxt,cid in path]
+
+
+def discover(source, templates, counts, *, round_limit=32, root_limit=64,
+             edge_limit=16384, path_limit=256):
+    """Return a refutation program or an explicit bounded/inconclusive result.
+
+    Roots/edge visits are cumulative BFS budgets, not total-work bounds. Each
+    successful round fixes a previously live variable. Only roots occurring in
+    a wider source clause are searched; SCC contradictions need no such root.
+    """
+    if any(type(v) is not int or v < 1 for v in (round_limit,root_limit,edge_limit,path_limit)):
+        raise ValueError('Positive discovery bounds required')
+    source = _source(source, templates, counts); fixed = {}; steps = []
+    start_roots, start_edges = counts['reach_roots'], counts['reach_edge_visits']
+    def result(status, reason, terminal=None):
+        return dict(status=status, reason=reason, steps=steps, terminal=terminal,
+                    path_limit=path_limit)
+    for iteration in range(round_limit+1):
+        state = _state(source, templates, fixed, counts); counts['rounds'] += 1
+        if () in state['local']:
+            return result('refuted','empty',dict(kind='empty'))
+        empty = next((h for h in state['hints'] if not h['clause']), None)
+        if empty is not None:
+            return result('refuted','guard',dict(kind='guard', template=empty['origin_template']))
+        model, proof = native.two_cnf(state['graph'], counts)
+        if proof is not None:
+            if max(len(proof['forward']),len(proof['backward'])) > path_limit:
+                return result('unresolved','path_limit')
+            return result('refuted','binary',dict(kind='binary',
+                variable=state['names'][proof['variable']-1],
+                forward=_external_path(proof['forward'],state),
+                backward=_external_path(proof['backward'],state)))
+        if iteration == round_limit:
+            return result('unresolved','round_limit')
+        adjacency = {}
+        for cid,cl in enumerate(state['graph']):
+            a,b=cl[0],cl[-1];adjacency.setdefault(-a,[]).append((b,cid))
+            if a != b: adjacency.setdefault(-b,[]).append((a,cid))
+        # A model-true literal cannot be excluded by this satisfiable graph.
+        roots = sorted({l for cl in state['local'] if len(cl)>2 for l in cl
+                        if abs(l) in model and model[abs(l)] != (l>0)})
+        chosen = None
+        for root in roots:
+            if counts['reach_roots'] - start_roots >= root_limit: return result('unresolved','root_limit')
+            counts['reach_roots'] += 1; parents={root:None}; queue=deque([root])
+            while queue and -root not in parents:
+                current=queue.popleft()
+                for nxt,cid in adjacency.get(current,()):
+                    if counts['reach_edge_visits'] - start_edges >= edge_limit: return result('unresolved','edge_limit')
+                    counts['reach_edge_visits'] += 1
+                    if nxt not in parents: parents[nxt]=(current,cid);queue.append(nxt)
+            counts['peak_reach_vertices']=max(counts['peak_reach_vertices'],len(parents))
+            if -root not in parents: continue
+            path=[];current=-root
+            while current!=root:
+                prev,cid=parents[current];path.append([current,cid]);current=prev
+            path.reverse()
+            if len(path)>path_limit: return result('unresolved','path_limit')
+            forced=state['names'][abs(root)-1]*(-1 if root>0 else 1)
+            chosen=dict(forced=forced,path=_external_path(path,state));break
+        if chosen is None: return result('unresolved','no_useful_forced_literal')
+        steps.append(chosen);fixed[abs(chosen['forced'])]=chosen['forced']>0
+        counts['forced_steps']+=1
+    raise AssertionError('Unreachable')
+
+
+def _bind_path(path, forced, state, source, templates, fixed, support, counts, limit):
+    if type(forced) is not int or not forced or not isinstance(path,list) or not 1<=len(path)<=limit:
+        raise ValueError('Invalid path')
+    inverse={v:i+1 for i,v in enumerate(state['names'])}
+    if abs(forced) not in inverse: raise ValueError('Absent forced variable')
+    def lit(l):
+        if type(l) is not int or not l or abs(l) not in inverse: raise ValueError('Absent edge coordinate')
+        return inverse[abs(l)]*(1 if l>0 else -1)
+    positions={tuple(cl):i for i,cl in enumerate(state['graph'])}
+    bank={tuple(h['clause']):h for h in state['hints']}
+    origins={}
+    for cid,cl in enumerate(source):
+        reduced=native.restrict_scan((cl,),fixed,counts)
+        if reduced: origins.setdefault(tuple(reduced[0]),cid)
+    current=-forced;bound=[]
+    for nxt,clause in path:
+        if type(nxt) is not int or not nxt or clause!=sorted({-current,nxt}):
+            raise ValueError('Invalid implication transition')
+        local_clause=tuple(sorted(lit(l) for l in clause))
+        if local_clause not in positions: raise ValueError('Unsupported edge')
+        if tuple(clause) in origins:
+            support.add(origins[tuple(clause)])
+        else:
+            hint=bank.get(local_clause)
+            if hint is None: raise ValueError('Missing edge guard')
+            for cl in templates[hint['origin_template']]['clauses']:
+                support.add(source.index(tuple(cl)))
+        bound.append([lit(nxt),positions[local_clause]]);current=nxt
+    if current!=forced: raise ValueError('Wrong path endpoint')
+    counts['validated_path_edges']+=len(bound)
+    return lit(forced),bound
+
+
+def validate(source, templates, program, counts):
+    """Replay every round before any archive write; collect original support IDs."""
+    source=_source(source,templates,counts)
+    if program.get('status')!='refuted' or type(program.get('path_limit')) is not int or program['path_limit']<1:
+        raise ValueError('A complete refutation program is required')
+    fixed={};support=set();frames=[];limit=program['path_limit']
+    if len(program['steps'])>len({abs(l) for cl in source for l in cl}): raise ValueError('Too many steps')
+    for step in program['steps']:
+        state=_state(source,templates,fixed,counts)
+        forced,path=_bind_path(step['path'],step['forced'],state,source,templates,fixed,support,counts,limit)
+        frames.append(dict(state=state,forced=forced,path=path))
+        fixed[abs(step['forced'])]=step['forced']>0
+    state=_state(source,templates,fixed,counts);terminal=program['terminal'];kind=terminal['kind']
+    if kind=='empty':
+        ids=[i for i,cl in enumerate(source) if native.restrict_scan((cl,),fixed,counts)==((),)]
+        if not ids: raise ValueError('Missing empty source clause')
+        support.add(ids[0]);tail=dict(state=state,kind=kind)
+    elif kind=='guard':
+        index=terminal['template']
+        if type(index) is not int or not 0<=index<len(templates): raise ValueError('Invalid terminal guard')
+        hint=next((h for h in state['hints'] if h['origin_template']==index and not h['clause']),None)
+        if hint is None: raise ValueError('Missing empty guard')
+        support.update(source.index(tuple(cl)) for cl in templates[index]['clauses'])
+        tail=dict(state=state,kind=kind,proof=dict(kind='units',trace=hint['proof']['units'],conflict=hint['proof']['conflict']))
+    elif kind=='binary':
+        v=terminal['variable']
+        if type(v) is not int or v<1: raise ValueError('Invalid terminal variable')
+        negative,forward=_bind_path(terminal['forward'],-v,state,source,templates,fixed,support,counts,limit)
+        positive,backward=_bind_path(terminal['backward'],v,state,source,templates,fixed,support,counts,limit)
+        tail=dict(state=state,kind=kind,variable=positive,forward=forward,backward=backward)
+    else: raise ValueError('Unknown terminal kind')
+    return frames,tail,sorted(support)
+
+
+def compile_program(solver, source, templates, program, counts, *, select_support=True):
+    """Publish a selected support and one subset lift with existing native rules."""
+    source=tuple(map(tuple,source));frames,tail,ids=validate(source,templates,program,counts)
+    full,names,root=solver._canonical(source)
+    old=solver._read(root,full,purpose='shortening_root')
+    if old is not None:
+        if old['answer']: raise ValueError('Contradictory root')
+        counts['root_hits']+=1;return root
+    support=tuple(source[i] for i in ids)
+    if select_support and support!=source:
+        child,names,key=solver._canonical(support)
+        # Keep irrelevant assumption coordinates explicit via full fallback.
+        used_templates={h['origin_template'] for f in frames+[tail] for h in f['state']['hints']
+                        if set(map(tuple,templates[h['origin_template']]['clauses']))<=set(support)}
+        needed=[templates[i] for i in sorted(used_templates)]
+        coordinates={v for t in needed for v,_ in t['assumptions']}
+        coordinates.update(abs(s['forced']) for s in program['steps'])
+        for step in program['steps']:
+            coordinates.update(abs(l) for nxt,cl in step['path'] for l in [nxt]+cl)
+        if tail['kind']=='binary':
+            for side in ('forward','backward'):
+                coordinates.update(abs(l) for nxt,cl in program['terminal'][side] for l in [nxt]+cl)
+        if not coordinates<=set(names):
+            counts['absent_coordinate_fallbacks']+=1
+        else:
+            known=solver._read(key,child,purpose='shortening_support')
+            if known is not None:
+                if known['answer']: raise ValueError('Contradictory support')
+                counts['support_hits']+=1
+            else:
+                mapping={v:i+1 for i,v in enumerate(names)}
+                def lit(l): return mapping[abs(l)]*(1 if l>0 else -1)
+                def path(p): return [[lit(n),sorted(lit(l) for l in cl)] for n,cl in p]
+                end=dict(program['terminal'])
+                if end['kind']=='binary':
+                    end.update(variable=mapping[end['variable']],forward=path(end['forward']),backward=path(end['backward']))
+                elif end['kind']=='guard': end['template']=sorted(used_templates).index(end['template'])
+                compact={**program,'steps':[dict(forced=lit(s['forced']),path=path(s['path'])) for s in program['steps']], 'terminal':end}
+                actual=compile_program(solver,child,[transport(t,mapping,counts) for t in needed],compact,counts,select_support=False)
+                if actual!=key: raise ValueError('Changed support root')
+                counts['support_publications']+=1
+            solver._store(root,dict(format=native.FORMAT,cnf=list(map(list,source)),answer=False,
+                                   proof=dict(kind='component',clauses=ids,child=key)))
+            counts['support_wrappers']+=1;return root
+    counts['compiled_support_literals']+=sum(map(len,source))
+    def save(state,proof):
+        cnf=state['local'];key=native.token(cnf,counts)
+        solver._store(key,dict(format=native.FORMAT,cnf=list(map(list,cnf)),answer=False,proof=proof))
+        return key
+    state=tail['state']
+    if tail['kind']=='binary':
+        v=tail['variable'];profile=dict(clauses=state['graph'],paths={v:tail['backward'],-v:tail['forward']})
+        low=compile_path(solver,state['local'],state['hints'],profile,v,counts,path_limit=program['path_limit'])
+        high=compile_path(solver,state['local'],state['hints'],profile,-v,counts,path_limit=program['path_limit'])
+        key=save(state,dict(kind='split',variable=v,low=low,high=high))
+    else: key=save(state,tail.get('proof',dict(kind='empty')))
+    for frame in reversed(frames):
+        state=frame['state'];forced=frame['forced']
+        profile=dict(clauses=state['graph'],paths={forced:frame['path']})
+        excluded=compile_path(solver,state['local'],state['hints'],profile,forced,counts,path_limit=program['path_limit'])
+        key=save(state,dict(kind='split',variable=abs(forced),low=excluded if forced>0 else key,high=key if forced>0 else excluded))
+        counts['shortening_splits']+=1
+    if key!=root: raise ValueError('Changed program root')
+    return key

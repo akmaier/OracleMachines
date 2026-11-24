@@ -12,7 +12,37 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: exact partial shortening with reusable supports
+## Current investigation: share checked contexts across shortening rounds
+
+[Iterative partial shortening](guard-partial-shortening.md) closes 104 event
+patterns / 67 local roots missed by initial SCC and full-clause covers on the
+same supported graph. All 67 are eventually known to ordinary search. The new
+compiler uses existing native rules; all 1,823 solver tests pass. No whole-query
+result changes and the implementation stays optional.
+
+**Largest measured discovery cost:** repeated local guard binding and source
+normalization. One profiled miss performs 265 normalizations across 19 states;
+local hint binding takes 0.481 cumulative seconds and normalization 0.395 within
+0.554 seconds of instrumented discovery. These timings overlap. Across 615
+attempts, discovery takes 15.40578 seconds plus 5.16800 initial binding; 388 stop
+at the root budget and 85 find no useful forced literal.
+
+**Next concrete target:** prepare one immutable normalized CNF and position map
+per conditioned state and share it across guard checks. Rebuild after every
+assignment and retain every support, reason, conflict and native proof check.
+Compare exact recognition programs, unresolved cases, archives and total costs.
+Then use the lower measured cost to investigate root prioritization or broader
+reachability; do not assume larger budgets close arbitrary CNFs.
+
+Selected-support compilation reduces time 57.97% and record bytes 87.39% versus
+full-context proofs across 97 local cases. It still takes 4.93164 seconds versus
+2.31647 for ordinary solving, before binding/discovery. Controlled cases regress
+as well. Three expansions after reopening each reuse one support and add one
+wrapper. Resume `experiments/results/cnf-guard-shortening/checkpoint.json`;
+315 supplemental archives and all prior banks remain preserved. Useful automatic
+origins, live total-cost savings and unrestricted resource bounds remain open.
+
+## Previous investigation: exact partial shortening with reusable supports
 
 [Selected-support cover compilation](guard-cover-support.md) cuts compile time
 75.30% and record bytes 86.16% against full-context covers on 18 local CNFs.

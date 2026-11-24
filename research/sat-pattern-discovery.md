@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: smaller shared cover proofs; partial shortening remains open
+## Latest evidence: checked shortening expands local recognition
+
+[Iterative partial shortening](guard-partial-shortening.md) recognizes 104 event
+patterns / 67 distinct roots missed by both initial SCC contradiction detection
+and full-clause covers on the same checked graph. Every transition and the
+terminal contradiction compile into existing native certificates. Selected
+supports can be reused across enclosing formulas after reopening the store.
+All 67 roots are eventually retained by ordinary search. The one other previously
+absent root closes without shortening, through additional checked guards; that
+inventory effect is reported separately. No whole-query result changes.
+
+The bounded census leaves 388 root-budget stops and 85 attempts without a useful
+forced literal. Neither a budget stop nor a fixed point proves satisfiability or
+absence of a stronger decomposition. Ordinary solving remains an essential
+matched control; initial guard acquisition, discovery misses and repeated source
+binding remain part of the total cost. The implementation stays optional.
+
+## Previous evidence: smaller shared cover proofs; partial shortening remains open
 
 [Selected-support composition](guard-cover-support.md) makes the cover compiler
 substantially smaller and faster than full-context composition and reuses saved

@@ -1,0 +1,125 @@
+{
+  "archive": {
+    "compressed_bytes": 7858,
+    "database_bytes": 139264,
+    "database_sha256": "9d615678f1768beb647c1f04569013e5a5a05329702ba023845101ae23b628c4",
+    "path": "experiments/results/cnf-guard-shortening/case-69-full-0/history.sqlite3.gz",
+    "seconds": 0.004495042376220226,
+    "sha256": "e9279f5e1936850a6913f4587fa60321a72adf06f4b18ac46eab67ab50f897e6"
+  },
+  "authority_tables": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 11
+  },
+  "case": {
+    "path": "experiments/results/cnf-guard-shortening/local-61-57.json",
+    "sha256": "efc63fda6969f88955fe7a1b31151ac571da2ee543f4915899801cf89de59da2"
+  },
+  "cold_readers": {
+    "CanonicalVerifySnapshot": {
+      "canonical_form_calls": 11,
+      "canonical_form_clauses": 2033,
+      "canonical_form_literal_visits": 5288,
+      "canonical_form_name_variables": 596,
+      "canonical_form_reuses": 11,
+      "certificate_memory_hits": 14,
+      "database_lookups": 11,
+      "key_serialized_bytes": 44052,
+      "normalization_literal_visits": 7912,
+      "read_bytes": 42840,
+      "restriction_literal_visits": 7638,
+      "search_disk_hits": 11,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 5288,
+      "verification_trace_literals": 54,
+      "verified_nodes": 11
+    },
+    "SnapshotResidualSolver": {
+      "certificate_memory_hits": 14,
+      "database_lookups": 11,
+      "key_serialized_bytes": 44052,
+      "normalization_literal_visits": 13200,
+      "read_bytes": 42840,
+      "restriction_literal_visits": 7638,
+      "search_disk_hits": 11,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 5288,
+      "verification_trace_literals": 54,
+      "verified_nodes": 11
+    }
+  },
+  "cold_seconds": 0.026450958102941513,
+  "complete_seconds": 0.059376916848123074,
+  "counts": {
+    "accepted_width_1": 2,
+    "accepted_width_2": 2,
+    "accepted_width_4": 1,
+    "compatible_width_1": 2,
+    "compatible_width_2": 2,
+    "compatible_width_4": 1,
+    "compiled_support_literals": 580,
+    "composed_splits": 6,
+    "conditioned_source_literals": 580,
+    "existing_leaves": 4,
+    "guard_input_literals": 875,
+    "hint_check_literals": 175,
+    "key_serialized_bytes": 4800,
+    "local_containment_clauses": 71,
+    "normalization_literal_visits": 4640,
+    "position_clauses": 576,
+    "position_literals": 1469,
+    "restriction_literal_visits": 11775,
+    "template_candidates": 5,
+    "template_checked_reason_literals": 875,
+    "templates_checked": 25,
+    "trace_transport_steps": 66,
+    "transport_literal_visits": 71,
+    "transport_skipped_steps": 2,
+    "transport_trace_steps": 26,
+    "transported_leaves": 4,
+    "validated_path_edges": 14,
+    "verified_core_hints": 5
+  },
+  "digest": {
+    "cnf_affine_negative_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_core_discovery_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v2": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v3": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_residual_v1": "8ab8f29bfd8fe4d3beb8fd12bb9c67392012913641bbafba981c8249d2a1a0e7"
+  },
+  "mode": "full",
+  "native_counts": {
+    "certificate_memory_hits": 14,
+    "certificate_serialized_bytes": 42840,
+    "database_lookups": 13,
+    "guard_path_leaf_memory_hits": 4,
+    "inserted_bytes": 64826,
+    "inserted_nodes": 11,
+    "key_serialized_bytes": 67851,
+    "normalization_literal_visits": 21523,
+    "restriction_literal_visits": 7638,
+    "verification_literal_payload": 5288,
+    "verification_trace_literals": 54,
+    "verified_nodes": 11
+  },
+  "peak_rss_bytes": 48398336,
+  "persistence_seconds": 0.0044985003769397736,
+  "record_bytes": 64826,
+  "result": {
+    "result": {
+      "answer": false,
+      "authority": "native",
+      "model": null,
+      "root": "cnf-residual-v1:[[-62,-57,-23],[-62,-35,45],[-62,43,48],[-61,-53,-39],[-61,-6],[-60,-55,-18],[-60,-38],[-60,-37],[-60,-16,29],[-60,-13,39],[-60,3,11],[-60,53],[-60,58],[-59,-52,-23],[-59,-46,55],[-59,21,44],[-59,24,42],[-58,-42,2],[-58,-29,31],[-58,-17,22],[-58,-8,29],[-58,4],[-58,12,33],[-57,-54,58],[-57,-47,13],[-57,-39,38],[-57,-18,-16],[-57,-17],[-57,-6,18],[-57,3,12],[-57,7,23],[-57,23,46],[-56,-48],[-56,26],[-55,-11,59],[-55,-4,18],[-55,-1,5],[-55,-1,35],[-55,4,31],[-55,10,48],[-54,-30,-9],[-54,-18],[-54,-12,16],[-54,8],[-54,20,36],[-54,21,26],[-54,35],[-53,-48,39],[-53,-29,-9],[-53,1],[-53,22,55],[-53,25,32],[-52,-42,-24],[-52,-24,40],[-52,-7,40],[-52,4,49],[-52,28],[-52,44],[-51,-19,23],[-51,20,50],[-50,-35,56],[-50,-31],[-50,-26,-8],[-50,-3,12],[-50,47],[-50,54],[-49,-47,-36],[-49,-35,32],[-49,34,57],[-48,-33,5],[-48,-5,18],[-48,22,35],[-47,-35,3],[-47,28],[-47,29,48],[-47,36,40],[-46,-33,21],[-46,-29,44],[-46,-2,15],[-45,-17,53],[-45,6,15],[-44,-12,41],[-44,25],[-44,59],[-43,-37,-20],[-43,-11,6],[-43,8,55],[-43,47],[-42,-31,46],[-42,-27,22],[-42,-5,58],[-41,-37,17],[-41,-24,-4],[-41,25,33],[-41,29,52],[-40,-35,10],[-40,-18,41],[-40,19],[-40,46],[-39,-38,-5],[-38,-14,10],[-37,-26,-16],[-36,-33,34],[-36,-11,-7],[-36,-7,19],[-36,10,60],[-35,-16],[-35,9,33],[-34,-15],[-34,-12,39],[-34,-2,54],[-34,30],[-34,45],[-33,-30,38],[-33,-6,29],[-33,-1,60],[-33,19],[-32,-31,28],[-32,-29],[-32,-25,28],[-32,-24,38],[-32,-4,3],[-31,-28,11],[-31,-25,8],[-31,-5,54],[-31,38],[-30,32,37],[-29,19,56],[-29,52,56],[-28,-22,-21],[-28,-7],[-28,15,25],[-28,35,57],[-27,-26,4],[-27,5],[-27,13],[-26,-8,31],[-26,-1,7],[-26,43],[-25,-9],[-25,30],[-24,-2,27],[-23,-6],[-23,38],[-23,44,53],[-22,9],[-22,12,17],[-22,13,30],[-22,47],[-21,16,57],[-21,33,60],[-20,-9,3],[-20,10,25],[-20,17,19],[-19,59],[-17,39,61],[-16,-11,49],[-16,-8,60],[-16,14,30],[-15,8,37],[-13,-3,44],[-13,-3,61],[-13,21,43],[-13,53],[-11,18,38],[-10,13,36],[-8,3,27],[-8,58],[-7,8,15],[-7,24],[-7,25],[-7,31],[-6,-2],[-6,19],[-6,41,45],[-5,43],[-5,48],[-4,55],[-4,58],[-3,41,43],[-1,4,18],[-1,35],[1,30,47],[2,43],[3,5],[6,20],[7,17],[8,60],[10,19],[11,44],[12,25,37],[12,28,57],[13,15,50],[14,20,61],[14,21,51],[16,41],[16,53],[17,20,62],[18,45],[20,41],[20,62],[21,25,57],[21,42],[23,48,56],[24,25,27],[24,43],[26,34,49],[31,59],[32,43,58],[33,47,50],[33,55],[35,46],[36,39,45],[37,47],[38,42,43],[39,43],[42,52,56],[44,45]]"
+    },
+    "status": "unsat"
+  },
+  "setup_seconds": 0.000653333030641079,
+  "solve_seconds": 0.02257912466302514,
+  "warm_seconds": 0.004293708596378565
+}

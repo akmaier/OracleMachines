@@ -1,0 +1,123 @@
+{
+  "archive": {
+    "compressed_bytes": 599,
+    "database_bytes": 12288,
+    "database_sha256": "debd83808dd47c9d24498a6f35635c7dfd17d58ae205c7ea82753642b1b7a101",
+    "path": "experiments/results/cnf-guard-shortening/case-97-support-0/history.sqlite3.gz",
+    "seconds": 0.0002887910231947899,
+    "sha256": "2bd009db03137dbb5ea1bd385e5d950e069c53f5627b37a9ae24f75cbc9d1be7"
+  },
+  "authority_tables": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 5
+  },
+  "case": {
+    "path": "experiments/results/cnf-guard-shortening/chain-1-0.json",
+    "sha256": "2e74bd5540a8886bf074a72bd74c1d2a7f28df57e7bef468d268eb3fee5cc412"
+  },
+  "cold_readers": {
+    "CanonicalVerifySnapshot": {
+      "canonical_form_calls": 5,
+      "canonical_form_clauses": 19,
+      "canonical_form_literal_visits": 42,
+      "canonical_form_name_variables": 12,
+      "canonical_form_reuses": 5,
+      "certificate_memory_hits": 8,
+      "database_lookups": 5,
+      "key_serialized_bytes": 556,
+      "normalization_literal_visits": 48,
+      "read_bytes": 910,
+      "restriction_literal_visits": 84,
+      "search_disk_hits": 5,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 42,
+      "verification_trace_literals": 0,
+      "verified_nodes": 5
+    },
+    "SnapshotResidualSolver": {
+      "certificate_memory_hits": 8,
+      "database_lookups": 5,
+      "key_serialized_bytes": 556,
+      "normalization_literal_visits": 90,
+      "read_bytes": 910,
+      "restriction_literal_visits": 84,
+      "search_disk_hits": 5,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 42,
+      "verification_trace_literals": 0,
+      "verified_nodes": 5
+    }
+  },
+  "cold_seconds": 0.009773749858140945,
+  "complete_seconds": 0.0137941250577569,
+  "counts": {
+    "accepted_width_2": 2,
+    "compatible_width_2": 2,
+    "compiled_support_literals": 24,
+    "composed_splits": 2,
+    "conditioned_source_literals": 48,
+    "existing_leaves": 1,
+    "existing_path_nodes": 3,
+    "guard_input_literals": 60,
+    "hint_check_literals": 12,
+    "incompatible_guards": 2,
+    "key_serialized_bytes": 276,
+    "local_containment_clauses": 4,
+    "normalization_literal_visits": 152,
+    "position_clauses": 1,
+    "position_literals": 0,
+    "restriction_literal_visits": 284,
+    "shortening_splits": 1,
+    "template_candidates": 4,
+    "template_checked_reason_literals": 60,
+    "templates_checked": 10,
+    "trace_transport_steps": 2,
+    "transport_literal_visits": 2,
+    "transported_leaves": 1,
+    "validated_path_edges": 6,
+    "verified_core_hints": 2
+  },
+  "digest": {
+    "cnf_affine_negative_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_core_discovery_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v2": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v3": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_residual_v1": "8410641ec31036ba19b88daf572aae39d4afab84e6d295c63dbef1beb1831083"
+  },
+  "mode": "support",
+  "native_counts": {
+    "certificate_memory_hits": 8,
+    "certificate_serialized_bytes": 910,
+    "database_lookups": 4,
+    "guard_path_existing_memory_hits": 3,
+    "guard_path_leaf_memory_hits": 1,
+    "inserted_bytes": 1139,
+    "inserted_nodes": 5,
+    "key_serialized_bytes": 745,
+    "normalization_literal_visits": 106,
+    "restriction_literal_visits": 84,
+    "verification_literal_payload": 42,
+    "verification_trace_literals": 0,
+    "verified_nodes": 5
+  },
+  "peak_rss_bytes": 47300608,
+  "persistence_seconds": 0.0002920422703027725,
+  "record_bytes": 1139,
+  "result": {
+    "result": {
+      "answer": false,
+      "authority": "native",
+      "model": null,
+      "root": "cnf-residual-v1:[[-6,-5,1],[-6,1,5],[-5,1,6],[-4,-2,-1],[-3,-1,2],[-2,-1,4],[-1,2,3],[1,5,6]]"
+    },
+    "status": "unsat"
+  },
+  "setup_seconds": 0.000528333242982626,
+  "solve_seconds": 0.002029166091233492,
+  "warm_seconds": 0.0003110421821475029
+}

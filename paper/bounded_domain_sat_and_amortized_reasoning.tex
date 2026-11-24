@@ -11062,6 +11062,99 @@ new binary consequences and charged closure iteration. It is a recognizer
 separation, not a complete-solver failure or a uniformly efficient method for
 arbitrary CNF.
 
+\subsection{Iterating checked partial clause shortening}
+\label{sec:guard-partial-shortening}
+
+The preceding separation can be closed using the same native proof rules.
+Let $R_i$ be the source after the previously justified assignments, and let
+$G_i$ contain its actual unit and binary clauses together with checked guard
+consequences. A path from $\neg\ell$ to $\ell$ in $G_i$ establishes
+$R_i\models\ell$. Thus $R_i$ is satisfiable exactly when
+$R_{i+1}=R_i|_{\ell}$ is satisfiable. Rebuilding the graph after this
+restriction can expose binary clauses that were previously wider. Iteration
+ends in a checked contradiction or an explicitly unresolved result. Each
+successful round fixes a previously live variable. This elementary argument
+supplies no reason that arbitrary CNFs have useful short guards or forced
+literals, or that the process closes every unsatisfiable input.
+
+Discovery records implication paths in source coordinates. Before publishing
+anything, a separate replay binds every transition to the actual conditioned
+source or a checked guard and validates the terminal contradiction. The compiler
+refutes each rejected branch with the existing path compiler and combines it
+with the live branch using the existing native split rule. It collects the
+original source support $H$, replays the program on its normalized coordinates,
+and lifts the result to $F$ with one negative subset certificate. Supports may
+share variables with other source clauses. Deleting a required clause invalidates
+the lift; changes outside $H$ preserve it. Missing evidence coordinates trigger
+an explicit full-context fallback. We introduce no new trusted native rule or
+Lean refinement.
+
+The offline census binds all available local guards at 615 saved events from
+the eight unresolved queries. The initial SCC and cover comparisons use the same
+supported graph. Bounds allow 32 forced rounds, 64 cumulative BFS roots,
+16,384 visited BFS edges and 256 edges per path. Normalization, source scanning,
+template checking, SCC construction and retained programs are additional work.
+The detector proposes 142 refuted events with 97 distinct local roots.
+Of these, 104 events, representing 67 roots, are missed by both initial SCC
+contradiction detection and the width-eight cover detector with matching BFS
+budgets. All 67 are already retained after ordinary search. One other root is
+absent from the ordinary archive, but it closes with zero shortening rounds:
+additional supported guards enable an initial SCC contradiction. We therefore
+do not attribute that result to partial shortening. No whole query is rerun or
+newly completed. The 473 unresolved events comprise 388 root-budget stops and
+85 attempts with no useful forced literal under this policy.
+
+All discovered configurations enter the matched local comparison, together with
+eight supplied chain controls of depths 1, 2, 4 and 8, with zero or 64 overlapping
+padding clauses. Two alternating serial repetitions yield 630 isolated workers.
+The three arms are capped ordinary search, full-context compilation and
+selected-support compilation. Initial binding and discovery must be added to
+compiler costs, including failed discovery attempts; earlier template acquisition
+remains additional. Complete-worker measurements include setup, repeated-root
+checking, both cold readers, accounting and archive compression, with imports
+and process startup additional.
+
+Across the 97 local cases, solve/compile totals (sums of per-case means) are
+2.31647/11.73316/4.93164 seconds for ordinary/full/support arms. Complete-worker
+totals are 6.73768/27.67483/10.33868 seconds. Stored record bytes are
+9,938,150/35,017,067/4,416,810, with 928/3,535/3,630 records.
+Selected supports reduce compile time 57.97\% and record bytes 87.39\% against
+full-context compilation, but ordinary solving remains faster. Adding initial
+binding and discovery for the selected cases adds 0.68089 and 2.47280 seconds
+to the support arm. Across all 615 attempts, these phases cost 5.16800 and
+15.40578 seconds, including misses. These all-attempt costs must not be compared
+as though they were the same workload as 97 positive-only solves.
+The supplied chain controls also regress: support compilation takes 0.05229
+seconds versus ordinary solving's 0.02087 seconds. No live speedup follows.
+
+A separate support-only stream reopens its archive between four padded contexts.
+The first writes 12 records; each later context reuses the same support and adds
+one wrapper. Record bytes grow from 4,345 to 11,146, while all old rows remain
+byte-identical. Both readers verify every snapshot. The checkpoint links 315
+audited supplemental archives and preserves all previous banks. All 1,823 solver
+tests and 32 focused tests pass, including exhaustive source deletions, unlabelled
+random inputs, signed renamings, malformed programs and cold reuse.
+
+Profiling identifies repeated guard binding as the next concrete cost: one miss
+performs 265 normalizations across 19 conditioned states. Local hint binding
+accounts for 0.481 cumulative seconds and normalization for 0.395 within
+0.554 seconds of instrumented discovery; these times overlap. Sharing one
+immutable source binding per conditioned state is the next measured opportunity,
+with changed-state invalidation and every proof check retained. The 388 root
+budget stops still require separate coverage investigation.
+
+
+Conditional on an accepted program, let $r$ count forced rounds and $P$ count
+all witness-path edges, including the terminal paths. The construction uses
+$O(r+P+1)$ native nodes before reuse. When the selected support retains all evidence coordinates, its word-content
+envelope is $O((r+P+1)S_H+S_F)$ for support and source literal counts $S_H,S_F$.
+Neither the support nor the paths are claimed minimal. Complete replay frames
+and repeated template binding remain resident costs; smaller stored records do
+not establish the same process-memory saving. Source membership, cold proof
+reads, normalization and enclosing wrappers still cost work on a reuse hit.
+The bounded recognizer stays optional. Automatic guard acquisition, useful
+routing, whole-query gains and uniform arbitrary-CNF bounds remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

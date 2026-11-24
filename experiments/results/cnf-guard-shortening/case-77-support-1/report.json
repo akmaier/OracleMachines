@@ -1,0 +1,130 @@
+{
+  "archive": {
+    "compressed_bytes": 8148,
+    "database_bytes": 114688,
+    "database_sha256": "1a33aeed94919dec3265ed7a8cb3602bafd763341cc186f40d0d005b2cadcc65",
+    "path": "experiments/results/cnf-guard-shortening/case-77-support-1/history.sqlite3.gz",
+    "seconds": 0.005292499903589487,
+    "sha256": "6c48d84922fb944df8b3d53cec68f1ebc6e5b17d8e8fbbd52d68df39b932e066"
+  },
+  "authority_tables": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 71
+  },
+  "case": {
+    "path": "experiments/results/cnf-guard-shortening/local-64-21.json",
+    "sha256": "1c5a852e8475f337bb3a97cf2b5064c8860ec0b68a355908d0354e37a0e46b62"
+  },
+  "cold_readers": {
+    "CanonicalVerifySnapshot": {
+      "canonical_form_calls": 71,
+      "canonical_form_clauses": 2267,
+      "canonical_form_literal_visits": 4658,
+      "canonical_form_name_variables": 1866,
+      "canonical_form_reuses": 71,
+      "certificate_memory_hits": 135,
+      "database_lookups": 71,
+      "key_serialized_bytes": 42482,
+      "normalization_literal_visits": 8202,
+      "read_bytes": 47782,
+      "restriction_literal_visits": 8340,
+      "search_disk_hits": 71,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 4658,
+      "verification_trace_literals": 42,
+      "verified_nodes": 71
+    },
+    "SnapshotResidualSolver": {
+      "certificate_memory_hits": 135,
+      "database_lookups": 71,
+      "key_serialized_bytes": 42482,
+      "normalization_literal_visits": 12860,
+      "read_bytes": 47782,
+      "restriction_literal_visits": 8340,
+      "search_disk_hits": 71,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 4658,
+      "verification_trace_literals": 42,
+      "verified_nodes": 71
+    }
+  },
+  "cold_seconds": 0.03164975019171834,
+  "complete_seconds": 0.11547341709956527,
+  "counts": {
+    "accepted_width_2": 22,
+    "accepted_width_3": 18,
+    "accepted_width_5": 10,
+    "compatible_width_2": 22,
+    "compatible_width_3": 18,
+    "compatible_width_5": 10,
+    "compiled_support_literals": 97,
+    "composed_splits": 57,
+    "conditioned_source_literals": 4580,
+    "existing_leaves": 54,
+    "existing_path_nodes": 11,
+    "guard_input_literals": 3740,
+    "hint_check_literals": 1227,
+    "key_serialized_bytes": 19702,
+    "local_containment_clauses": 618,
+    "normalization_literal_visits": 19601,
+    "position_clauses": 64,
+    "position_literals": 127,
+    "restriction_literal_visits": 26221,
+    "shortening_splits": 9,
+    "support_publications": 1,
+    "support_wrappers": 1,
+    "template_candidates": 50,
+    "template_checked_reason_literals": 3500,
+    "template_transport_literals": 61,
+    "templates_checked": 131,
+    "trace_transport_steps": 608,
+    "transport_literal_visits": 48,
+    "transport_trace_steps": 21,
+    "transported_leaves": 3,
+    "validated_path_edges": 188,
+    "verified_core_hints": 50
+  },
+  "digest": {
+    "cnf_affine_negative_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_core_discovery_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v2": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v3": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_residual_v1": "af0e6d02b55cbc4e8db5ea2d01c6464937654b4e7f4882d17a0881ee2ce17890"
+  },
+  "mode": "support",
+  "native_counts": {
+    "certificate_memory_hits": 135,
+    "certificate_serialized_bytes": 47782,
+    "database_lookups": 63,
+    "guard_path_existing_memory_hits": 11,
+    "guard_path_leaf_memory_hits": 54,
+    "inserted_bytes": 68373,
+    "inserted_nodes": 71,
+    "key_serialized_bytes": 60223,
+    "normalization_literal_visits": 20097,
+    "restriction_literal_visits": 8340,
+    "verification_literal_payload": 4658,
+    "verification_trace_literals": 42,
+    "verified_nodes": 71
+  },
+  "peak_rss_bytes": 48316416,
+  "persistence_seconds": 0.005294458009302616,
+  "record_bytes": 68373,
+  "result": {
+    "result": {
+      "answer": false,
+      "authority": "native",
+      "model": null,
+      "root": "cnf-residual-v1:[[-50,-35,23],[-50,31],[-50,41],[-49,-37,11],[-49,22],[-48,-43,-14],[-48,-37],[-48,-21],[-48,-21,32],[-48,5],[-48,31,45],[-47,-20,-9],[-46,-24],[-46,-19],[-46,34,36],[-44,-30,23],[-44,-28],[-44,-27],[-44,4,20],[-44,7,42],[-43,-19],[-43,-3,48],[-43,38,49],[-42,-22],[-42,8],[-41,-26,-23],[-41,-12],[-41,5,8],[-40,-32],[-40,-7],[-40,28,29],[-39,-34],[-39,-13],[-38,-9],[-38,-1,23],[-37,-29,8],[-37,-4,49],[-37,18],[-37,33],[-36,-27],[-36,-18,28],[-36,23,37],[-36,24],[-35,-29,17],[-35,-22],[-35,-20,2],[-35,23],[-34,-10],[-34,-10,24],[-34,15],[-33,-32,3],[-33,-19],[-32,-5,49],[-32,14,26],[-32,20,21],[-32,49],[-31,-25,47],[-31,-18,44],[-31,-10,41],[-31,26,36],[-30,-18,24],[-30,-14,47],[-29,-13,4],[-29,-5,24],[-29,21],[-29,47],[-27,-20,10],[-27,5],[-27,40],[-26,12],[-25,9,31],[-25,26],[-25,35,41],[-24,-22,7],[-24,-16,10],[-24,12,28],[-23,-10,39],[-23,30],[-23,34],[-22,-21,10],[-22,32],[-21,23],[-21,41],[-20,-5,25],[-20,3,19],[-20,33],[-18,-2,19],[-17,3,35],[-17,10,23],[-17,12,24],[-17,21],[-16,1,43],[-16,9,39],[-16,43],[-15,-14],[-15,21,43],[-15,38],[-14,47],[-13,18],[-12,-4],[-12,39],[-11,18],[-10,17,41],[-9,10,14],[-8,9,27],[-8,13,49],[-8,27,50],[-8,43],[-7,13,20],[-7,47],[-6,33],[-4,1,50],[-4,11],[-3,45],[-2,25,26],[-2,27,37],[-1,12,42],[-1,13],[-1,42],[2,6],[4,36],[4,39],[4,44],[5,18,26],[6,25],[6,45],[7,24,47],[7,31,37],[8,18,33],[8,30,41],[8,48],[9,31,45],[10,19,43],[11,12],[13,14,17],[13,22],[15,37],[19,29],[20,30],[20,39],[20,46,49],[24,43],[24,48],[26,30],[33,49]]"
+    },
+    "status": "unsat"
+  },
+  "setup_seconds": 0.0005517499521374702,
+  "solve_seconds": 0.05899183312430978,
+  "warm_seconds": 0.017351875081658363
+}

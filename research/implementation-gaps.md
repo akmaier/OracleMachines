@@ -4,7 +4,18 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, selected cover supports):
+Latest expansion checkpoint (24 November, iterative partial shortening):
+[Use checked forced literals to expose new binary interactions](guard-partial-shortening.md).
+All 615 prior graph events are replayed; 104 extensions beyond initial SCC and
+full-clause covers represent 67 local roots. All 67 are already found by ordinary
+search. Existing native certificates validate every forced step and terminal
+contradiction, and selected supports remain reusable after cold reopen. Full
+context and selected-support costs are compared on all 97 refuted local roots
+and eight supplied chain controls. Misses and ordinary-solving regressions stay
+in the evidence. Resume `experiments/results/cnf-guard-shortening/checkpoint.json`;
+all prior banks remain unchanged and new archives are supplemental only.
+
+Previous expansion checkpoint (24 November, selected cover supports):
 [Compile and persist only the selected cover support](guard-cover-support.md).
 Compile time falls 75.30% and record bytes 86.16% versus full-context composition
 across 18 local CNFs. Six expansions after cold reopen each reuse a checked core

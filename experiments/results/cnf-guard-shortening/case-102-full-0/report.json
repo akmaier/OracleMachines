@@ -1,0 +1,124 @@
+{
+  "archive": {
+    "compressed_bytes": 1570,
+    "database_bytes": 28672,
+    "database_sha256": "5d4fef80abd24375b5620c49b94922575c6eddcd7381b4752608847dd3598a6a",
+    "path": "experiments/results/cnf-guard-shortening/case-102-full-0/history.sqlite3.gz",
+    "seconds": 0.000562750268727541,
+    "sha256": "ac80e12ab7fe0809202f9f67f5832083098cc6436557362625099bc75ea3eba0"
+  },
+  "authority_tables": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 11
+  },
+  "case": {
+    "path": "experiments/results/cnf-guard-shortening/chain-4-64.json",
+    "sha256": "c6c31f39888abf7e7aa4631a660aaa39b5f18d971034bbbb1d62db16516a9334"
+  },
+  "cold_readers": {
+    "CanonicalVerifySnapshot": {
+      "canonical_form_calls": 11,
+      "canonical_form_clauses": 593,
+      "canonical_form_literal_visits": 786,
+      "canonical_form_name_variables": 573,
+      "canonical_form_reuses": 11,
+      "certificate_memory_hits": 18,
+      "database_lookups": 11,
+      "key_serialized_bytes": 7932,
+      "normalization_literal_visits": 1388,
+      "read_bytes": 8319,
+      "restriction_literal_visits": 1520,
+      "search_disk_hits": 11,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 786,
+      "verification_trace_literals": 2,
+      "verified_nodes": 11
+    },
+    "SnapshotResidualSolver": {
+      "certificate_memory_hits": 18,
+      "database_lookups": 11,
+      "key_serialized_bytes": 7932,
+      "normalization_literal_visits": 2174,
+      "read_bytes": 8319,
+      "restriction_literal_visits": 1520,
+      "search_disk_hits": 11,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 786,
+      "verification_trace_literals": 2,
+      "verified_nodes": 11
+    }
+  },
+  "cold_seconds": 0.01423995802178979,
+  "complete_seconds": 0.028752749785780907,
+  "counts": {
+    "accepted_width_2": 2,
+    "compatible_width_2": 2,
+    "compiled_support_literals": 170,
+    "composed_splits": 4,
+    "conditioned_source_literals": 850,
+    "existing_leaves": 2,
+    "existing_path_nodes": 6,
+    "guard_input_literals": 96,
+    "hint_check_literals": 12,
+    "incompatible_guards": 8,
+    "key_serialized_bytes": 4348,
+    "local_containment_clauses": 4,
+    "normalization_literal_visits": 1860,
+    "position_clauses": 11,
+    "position_literals": 26,
+    "restriction_literal_visits": 4144,
+    "shortening_splits": 4,
+    "template_candidates": 10,
+    "template_checked_reason_literals": 96,
+    "templates_checked": 16,
+    "trace_transport_steps": 2,
+    "transport_literal_visits": 8,
+    "transport_trace_steps": 1,
+    "transported_leaves": 2,
+    "validated_path_edges": 12,
+    "verified_core_hints": 2
+  },
+  "digest": {
+    "cnf_affine_negative_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_core_discovery_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v2": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v3": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_residual_v1": "20c26c7add93566ef7e45b8d25635e6c8c70bf321edee5afd127cb5a46ec504b"
+  },
+  "mode": "full",
+  "native_counts": {
+    "certificate_memory_hits": 18,
+    "certificate_serialized_bytes": 8319,
+    "database_lookups": 7,
+    "guard_path_existing_memory_hits": 6,
+    "guard_path_leaf_memory_hits": 2,
+    "inserted_bytes": 11847,
+    "inserted_nodes": 11,
+    "key_serialized_bytes": 10162,
+    "normalization_literal_visits": 3062,
+    "restriction_literal_visits": 1520,
+    "verification_literal_payload": 786,
+    "verification_trace_literals": 2,
+    "verified_nodes": 11
+  },
+  "peak_rss_bytes": 47661056,
+  "persistence_seconds": 0.0005673328414559364,
+  "record_bytes": 11847,
+  "result": {
+    "result": {
+      "answer": false,
+      "authority": "native",
+      "model": null,
+      "root": "cnf-residual-v1:[[-12,-4,3],[-11,-3,2],[-10,-2,1],[-9,-8,4],[-9,4,8],[-8,4,9],[-7,-5,-1],[-6,-1,5],[-5,-1,7],[-4,3,12],[-3,2,11],[-2,1,10],[-1,5,6],[1,13],[1,14],[1,15],[1,16],[1,17],[1,18],[1,19],[1,20],[1,21],[1,22],[1,23],[1,24],[1,25],[1,26],[1,27],[1,28],[1,29],[1,30],[1,31],[1,32],[1,33],[1,34],[1,35],[1,36],[1,37],[1,38],[1,39],[1,40],[1,41],[1,42],[1,43],[1,44],[1,45],[1,46],[1,47],[1,48],[1,49],[1,50],[1,51],[1,52],[1,53],[1,54],[1,55],[1,56],[1,57],[1,58],[1,59],[1,60],[1,61],[1,62],[1,63],[1,64],[1,65],[1,66],[1,67],[1,68],[1,69],[1,70],[1,71],[1,72],[1,73],[1,74],[1,75],[1,76],[4,8,9]]"
+    },
+    "status": "unsat"
+  },
+  "setup_seconds": 0.000596500001847744,
+  "solve_seconds": 0.00943012535572052,
+  "warm_seconds": 0.0027382499538362026
+}

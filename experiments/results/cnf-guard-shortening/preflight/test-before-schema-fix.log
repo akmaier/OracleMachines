@@ -1,0 +1,22 @@
+test_bad_programs_rejected_before_writes (solver.test_cnf_guard_shortening.GuardShorteningTests.test_bad_programs_rejected_before_writes) ... ok
+test_empty_source_empty_guard_and_terminal_binary (solver.test_cnf_guard_shortening.GuardShorteningTests.test_empty_source_empty_guard_and_terminal_binary) ... ok
+test_exhaustive_source_deletions (solver.test_cnf_guard_shortening.GuardShorteningTests.test_exhaustive_source_deletions) ... ok
+test_limits_are_unresolved_not_negative (solver.test_cnf_guard_shortening.GuardShorteningTests.test_limits_are_unresolved_not_negative) ... ok
+test_persistence_and_overlapping_padding (solver.test_cnf_guard_shortening.GuardShorteningTests.test_persistence_and_overlapping_padding) ... ERROR
+test_separating_example_and_multiple_rounds (solver.test_cnf_guard_shortening.GuardShorteningTests.test_separating_example_and_multiple_rounds) ... ok
+test_signed_permutations (solver.test_cnf_guard_shortening.GuardShorteningTests.test_signed_permutations) ... ok
+test_unlabelled_random_formulas (solver.test_cnf_guard_shortening.GuardShorteningTests.test_unlabelled_random_formulas) ... ok
+
+======================================================================
+ERROR: test_persistence_and_overlapping_padding (solver.test_cnf_guard_shortening.GuardShorteningTests.test_persistence_and_overlapping_padding)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_guard_shortening.py", line 86, in test_persistence_and_overlapping_padding
+    before=dict(s.db.execute('SELECT key,payload FROM cnf_residual_v1'))
+                ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: key
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.162s
+
+FAILED (errors=1)

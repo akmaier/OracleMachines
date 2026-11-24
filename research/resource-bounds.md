@@ -18,6 +18,17 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+The [partial-shortening compiler](guard-partial-shortening.md) adds a conditional
+proof-content envelope O((r+P+1) S_H + S_F), for r forced rounds and P total
+witness-path edges, including the terminal contradiction, when the selected
+support retains all required evidence coordinates. Each round fixes a
+previously live variable. This bounds the constructed native proof content in
+word units given accepted evidence; it does not establish useful evidence for
+all CNFs. Replay retains full frames and rebinds templates each round. The
+32-round, 64-root and 16,384-edge discovery caps exclude normalization, source
+scanning, template checking and SCC work. Core reuse leaves enclosing-wrapper
+growth and checking costs. No new process-RAM or unrestricted-SAT bound follows.
+
 The subsequent [selected-support compiler](guard-cover-support.md) replaces
 repeated full-context proof bodies with a checked support H and one negative
 subset wrapper for F. When all required coordinates survive in H, its explicit

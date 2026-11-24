@@ -1,0 +1,130 @@
+from collections import Counter
+from copy import deepcopy
+from itertools import product
+from pathlib import Path
+import random,tempfile,unittest
+from experiments import cnf_residual_dag as native
+from experiments.cnf_guard_shortening import discover,compile_program,validate
+from experiments.cnf_guard_shortening_gap import evidence
+from experiments.cnf_conditional_unit_support import transport
+from experiments.cnf_canonical_verify import CanonicalVerifySnapshot
+
+
+def chain(depth=1,padding=0):
+    from experiments.cnf_stopped_support import conditional_unit
+    a=depth+1;guards=[(-1,a),(-a,-1)];gadgets=[];templates=[]
+    for i,cl in enumerate(guards):
+        g=tuple(sorted(tuple(sorted(cl+(sign*(depth+2+i),))) for sign in (-1,1)))
+        gadgets.extend(g)
+        templates.append(conditional_unit(g,sorted([[abs(l),l<0] for l in cl]),Counter()))
+    clauses=list(gadgets)
+    for i in range(1,depth):
+        z=depth+5+i
+        clauses.extend(tuple(sorted((i,-(i+1),s*z))) for s in (-1,1))
+    clauses.extend(tuple(sorted((depth,s*(depth+4),t*(depth+5)))) for s,t in product((-1,1),repeat=2))
+    last=max(abs(l) for cl in clauses for l in cl)
+    clauses.extend((1,last+i+1) for i in range(padding))
+    return native.normalize(clauses)[0],templates
+
+
+class GuardShorteningTests(unittest.TestCase):
+    def compile(self,source,templates):
+        c=Counter();p=discover(source,templates,c);self.assertEqual(p['status'],'refuted')
+        s=native.ResidualSolver()
+        try:self.assertFalse(s._read(compile_program(s,source,templates,p,c))['answer'])
+        finally:s.close()
+        return p,c
+
+    def test_separating_example_and_multiple_rounds(self):
+        x=evidence();self.compile(x['source'],x['templates'])
+        for depth in (1,2,4,8):
+            p,c=self.compile(*chain(depth));self.assertEqual(len(p['steps']),depth)
+            self.assertEqual(c['shortening_splits'],depth)
+
+    def test_exhaustive_source_deletions(self):
+        source,templates=chain();assignments=[dict(enumerate(bits,1)) for bits in product((False,True),repeat=6)]
+        for mask in range(256):
+            subset=tuple(cl for i,cl in enumerate(source) if mask>>i&1)
+            normalized,names=native.normalize(subset);mapping={v:i+1 for i,v in enumerate(names)}
+            ts=[transport(t,mapping) for t in templates if set(map(tuple,t['clauses']))<=set(subset)]
+            p=discover(normalized,ts,Counter())
+            satisfiable=any(native.holds(subset,a) for a in assignments)
+            if p['status']=='refuted':
+                self.assertFalse(satisfiable);s=native.ResidualSolver()
+                try:self.assertFalse(s._read(compile_program(s,normalized,ts,p,Counter()))['answer'])
+                finally:s.close()
+            if mask==255:self.assertEqual(p['status'],'refuted')
+
+    def test_unlabelled_random_formulas(self):
+        rng=random.Random(241816);closed=0
+        for _ in range(200):
+            clauses=[]
+            for _ in range(rng.randrange(1,19)):
+                vs=rng.sample(range(1,6),rng.randrange(1,5));clauses.append([v*rng.choice((-1,1)) for v in vs])
+            source=native.normalize(clauses)[0];p=discover(source,[],Counter())
+            if p['status']=='refuted':
+                closed+=1
+                self.assertFalse(any(native.holds(source,dict(enumerate(bits,1))) for bits in product((False,True),repeat=5)))
+                self.compile(source,[])
+        self.assertGreater(closed,0)
+
+    def test_signed_permutations(self):
+        rng=random.Random(241817)
+        for _ in range(16):
+            source,templates=chain(3,8);vs=sorted({abs(l) for cl in source for l in cl});names=vs[:];rng.shuffle(names)
+            mapping={v:w*rng.choice((-1,1)) for v,w in zip(vs,names)}
+            lit=lambda l:mapping[abs(l)]*(1 if l>0 else -1)
+            changed=native.normalize([[lit(l) for l in cl] for cl in source])[0]
+            self.compile(changed,[transport(t,mapping) for t in templates])
+
+    def test_persistence_and_overlapping_padding(self):
+        with tempfile.TemporaryDirectory() as td:
+            path=Path(td)/'db';saved=None
+            for padding in (4,16,64):
+                source,templates=chain(3,padding);p=discover(source,templates,Counter());s=native.ResidualSolver(path);c=Counter()
+                try:
+                    before=dict(s.db.execute('SELECT id,payload FROM cnf_residual_v1'))
+                    root=compile_program(s,source,templates,p,c);node=s._read(root)
+                    after=dict(s.db.execute('SELECT id,payload FROM cnf_residual_v1'))
+                    self.assertTrue(all(after[k]==v for k,v in before.items()))
+                    self.assertEqual(node['proof']['kind'],'component')
+                    if saved is not None:
+                        self.assertEqual(c['support_hits'],1);self.assertEqual(node['proof']['child'],saved)
+                        self.assertEqual(len(after)-len(before),1)
+                    saved=node['proof']['child']
+                finally:s.close()
+                reader=CanonicalVerifySnapshot(path)
+                try:self.assertFalse(reader._read(root)['answer'])
+                finally:reader.close()
+
+    def test_bad_programs_rejected_before_writes(self):
+        source,templates=chain(2);p=discover(source,templates,Counter());cases=[]
+        q=deepcopy(p);q['steps'][0]['forced']*=-1;cases.append(q)
+        q=deepcopy(p);q['terminal']['forward'][0][1]=[999];cases.append(q)
+        q=deepcopy(p);q['steps']=q['steps'][1:];cases.append(q)
+        q=deepcopy(p);q['terminal']['variable']=True;cases.append(q)
+        q=deepcopy(p);q['steps'][0]['path'][0][0]=True;cases.append(q)
+        for bad in cases:
+            s=native.ResidualSolver()
+            try:
+                with self.assertRaises(ValueError):compile_program(s,source,templates,bad,Counter())
+                self.assertEqual(s.db.execute('SELECT count(*) FROM cnf_residual_v1').fetchone()[0],0)
+            finally:s.close()
+        with self.assertRaises(ValueError):discover(source,templates+[dict(templates[0],clauses=[[999]])],Counter())
+
+    def test_limits_are_unresolved_not_negative(self):
+        source,templates=chain(4)
+        for kw in (dict(round_limit=1),dict(root_limit=1),dict(edge_limit=1),dict(path_limit=1)):
+            p=discover(source,templates,Counter(),**kw);self.assertEqual(p['status'],'unresolved')
+            with self.assertRaises(ValueError):validate(source,templates,p,Counter())
+
+    def test_empty_source_empty_guard_and_terminal_binary(self):
+        self.assertEqual(discover((),[],Counter())['status'],'unresolved')
+        self.compile(((),),[])
+        self.compile(((-1,),(1,)),[])
+        from experiments.cnf_stopped_support import conditional_unit
+        source=((-1,),(1,));t=conditional_unit(source,[],Counter())
+        p,c=self.compile(source,[t]);self.assertEqual(p['terminal']['kind'],'guard')
+
+
+if __name__=='__main__':unittest.main()

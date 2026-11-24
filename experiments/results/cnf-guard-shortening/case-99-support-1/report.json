@@ -1,0 +1,122 @@
+{
+  "archive": {
+    "compressed_bytes": 761,
+    "database_bytes": 12288,
+    "database_sha256": "d76447ac35b76eeda34463efebb7d3288cfde4d05ea667eabdb754c757cd124c",
+    "path": "experiments/results/cnf-guard-shortening/case-99-support-1/history.sqlite3.gz",
+    "seconds": 0.000303708016872406,
+    "sha256": "7c1c91f9540b9a5d94b1c1c7aa42056e8cf1c1a6eb941ca3df97de4dbdaaddd5"
+  },
+  "authority_tables": {
+    "cnf_affine_negative_v1": 0,
+    "cnf_binary_core_discovery_v1": 0,
+    "cnf_binary_equivalence_v1": 0,
+    "cnf_binary_equivalence_v2": 0,
+    "cnf_binary_equivalence_v3": 0,
+    "cnf_residual_v1": 7
+  },
+  "case": {
+    "path": "experiments/results/cnf-guard-shortening/chain-2-0.json",
+    "sha256": "449cb489d66b79f5cdb35b708467e7cab9544e432191f99c8d38397c1ea49276"
+  },
+  "cold_readers": {
+    "CanonicalVerifySnapshot": {
+      "canonical_form_calls": 7,
+      "canonical_form_clauses": 37,
+      "canonical_form_literal_visits": 90,
+      "canonical_form_name_variables": 25,
+      "canonical_form_reuses": 7,
+      "certificate_memory_hits": 10,
+      "database_lookups": 7,
+      "key_serialized_bytes": 962,
+      "normalization_literal_visits": 108,
+      "read_bytes": 1477,
+      "restriction_literal_visits": 152,
+      "search_disk_hits": 7,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 90,
+      "verification_trace_literals": 2,
+      "verified_nodes": 7
+    },
+    "SnapshotResidualSolver": {
+      "certificate_memory_hits": 10,
+      "database_lookups": 7,
+      "key_serialized_bytes": 962,
+      "normalization_literal_visits": 198,
+      "read_bytes": 1477,
+      "restriction_literal_visits": 152,
+      "search_disk_hits": 7,
+      "search_memory_hits": 1,
+      "verification_literal_payload": 90,
+      "verification_trace_literals": 2,
+      "verified_nodes": 7
+    }
+  },
+  "cold_seconds": 0.010322708170861006,
+  "complete_seconds": 0.014822999946773052,
+  "counts": {
+    "accepted_width_2": 2,
+    "compatible_width_2": 2,
+    "compiled_support_literals": 30,
+    "composed_splits": 2,
+    "conditioned_source_literals": 90,
+    "existing_path_nodes": 4,
+    "guard_input_literals": 72,
+    "hint_check_literals": 12,
+    "incompatible_guards": 4,
+    "key_serialized_bytes": 450,
+    "local_containment_clauses": 4,
+    "normalization_literal_visits": 234,
+    "position_clauses": 7,
+    "position_literals": 14,
+    "restriction_literal_visits": 450,
+    "shortening_splits": 2,
+    "template_candidates": 6,
+    "template_checked_reason_literals": 72,
+    "templates_checked": 12,
+    "trace_transport_steps": 2,
+    "transport_literal_visits": 8,
+    "transport_trace_steps": 1,
+    "transported_leaves": 2,
+    "validated_path_edges": 8,
+    "verified_core_hints": 2
+  },
+  "digest": {
+    "cnf_affine_negative_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_core_discovery_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v1": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v2": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_binary_equivalence_v3": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "cnf_residual_v1": "a3ccba87f9b7354c1b9d16f88bba77c453b5710a4956dc50467739d00f56a818"
+  },
+  "mode": "support",
+  "native_counts": {
+    "certificate_memory_hits": 10,
+    "certificate_serialized_bytes": 1477,
+    "database_lookups": 5,
+    "guard_path_existing_memory_hits": 4,
+    "inserted_bytes": 1891,
+    "inserted_nodes": 7,
+    "key_serialized_bytes": 1285,
+    "normalization_literal_visits": 252,
+    "restriction_literal_visits": 152,
+    "verification_literal_payload": 90,
+    "verification_trace_literals": 2,
+    "verified_nodes": 7
+  },
+  "peak_rss_bytes": 47316992,
+  "persistence_seconds": 0.0003069997765123844,
+  "record_bytes": 1891,
+  "result": {
+    "result": {
+      "answer": false,
+      "authority": "native",
+      "model": null,
+      "root": "cnf-residual-v1:[[-8,-2,1],[-7,-6,2],[-7,2,6],[-6,2,7],[-5,-3,-1],[-4,-1,3],[-3,-1,5],[-2,1,8],[-1,3,4],[2,6,7]]"
+    },
+    "status": "unsat"
+  },
+  "setup_seconds": 0.0005269171670079231,
+  "solve_seconds": 0.002442500088363886,
+  "warm_seconds": 0.00037300027906894684
+}

@@ -28,7 +28,16 @@ classes.
 
 ## Paper
 
-[Reuse clause-cover proofs through their selected supports](research/guard-cover-support.md).
+
+[Discover binary interactions by checked partial clause shortening](research/guard-partial-shortening.md).
+The offline detector closes 104 previously missed event patterns, representing
+67 local roots, by iterating forced literals and rebuilding the binary graph.
+All 67 are eventually found by ordinary search. Native replay validates every
+step and keeps the selected support reusable across changed enclosing formulas.
+Matched costs, misses and persistent proof archives are retained; the policy
+stays optional and no whole-query gain is claimed.
+
+Previous: [Reuse clause-cover proofs through their selected supports](research/guard-cover-support.md).
 Across 18 local CNFs, compilation takes 75.30% less time and stores 86.16% fewer
 record bytes than full-context covers. Six persisted expansions each add only
 one wrapper. All seven pending proposals are now checked; ordinary search already

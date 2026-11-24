@@ -10541,9 +10541,77 @@ For a contradictory graph, every nonoriginal edge on the two selected paths
 must still pass local support and proof checks before native publication. An
 empty candidate instead requires its own local unit certificate. An invalid
 edge requires removal and bounded reconsideration, or ordinary fallback.
-The proposed filter can defer unnecessary preparation; it supplies no unchecked
-authority and has not yet demonstrated a cost saving. Automatic origin discovery,
+At this checkpoint, the proposed filter has not yet demonstrated a cost saving;
+it must preserve the checked publication boundary. Automatic origin discovery,
 wider interactions, fresh evaluation and unrestricted expansion bounds remain open.
+
+\subsection{Checking only the supports of a tentative contradiction}
+
+We now implement that filter as an optional extension of the live guard gate.
+It first forms short candidate clauses in the current coordinates, retaining
+alternative supports for the same clause. A satisfiable candidate graph rejects
+only this local contradiction opportunity. For a contradictory graph, every
+selected nonoriginal edge must acquire the preceding local support and RUP
+certificate before native composition. An empty candidate needs its own local
+unit refutation. A failed support is removed and the graph reconsidered;
+alternative supports remain available. Checked hints are shared only within
+that local attempt. No tentative edge authorizes pruning or a positive verdict.
+
+The gate preserves the earlier tier order: opposite unit candidates, units with
+original binary clauses, then binary guards. It adds allowances of 32 rejected
+candidates per site and 1,024 tentative graph checks per query. Exhaustion
+retains ordinary fallback. These allowances complement the previous limits;
+they bound neither total verification work nor process memory. Selecting paths
+before local filtering can change the chosen witness. Equality of resulting
+native records must therefore be measured rather than assumed.
+
+Two alternating repetitions again compare all eight exposed edits, now using
+ordinary search, guided certificate reuse, eager binary-guard closure and the
+deferred gate. The causal prefixes, provisioned banks and 256-dispatch budgets
+are unchanged. Solve-mean totals are 8.23359, 8.33761, 9.55177 and 8.88176 seconds,
+respectively. Deferral saves 7.01\% against the eager gate but remains 7.87\%
+above ordinary search. Complete-worker totals are 92.92351, 92.99237, 95.64075
+and 93.97898 seconds: a 1.74\% saving against eager closure and a 1.14\% overhead
+against ordinary search. Those intervals include restoration, preparation,
+replay, serialization and compression; earlier acquisition and final audits
+remain additional. All whole queries remain unresolved. Seven per-case solve
+means improve against the eager gate; edit 64 instead regresses 1.46\%.
+
+Local consequence checks fall from 1,218 to 87, a reduction of 92.86\%.
+Consequence-normalization literal visits fall from 1,286,336 to 82,753, while
+candidate checks remain 33,006. Both gates close the same 34 contexts and retain
+identical native metrics, six-table payload digests and SQLite hashes on every
+target. This establishes no equality of ordered execution traces. Checked
+native state remains 164,001,110 aggregate endpoint bytes, 6.19\% above ordinary
+search, and SQLite totals remain 723,243,008 bytes. The unchanged template/record
+counter excludes temporary candidate lists and local hint caches. No peak-memory
+saving is established, and no default changes.
+
+An adaptive profile selects edit 28, the largest remaining deferred/ordinary
+solve regression, at 15.49\%. There, support transport falls from 0.15604 to
+0.02386 cumulative seconds, and total gate time falls from 0.35083 to 0.22224.
+Seven native closure compilations now take 0.17224 seconds. Full-query native
+verification and normalization take 0.75619 and 0.61663 cumulative seconds;
+these nested costs overlap. The next concrete target is therefore the context
+carried by native composition. Collect the actual clause supports of both
+witness paths into $H\subseteq C$. If $H$ receives a native refutation, the
+existing negative subset rule lifts it to $C$, without requiring independent
+support variables. This gives no positive component join. A smaller $H$ could
+reduce repeated full-context cofactor construction and permit reuse across
+different enclosing CNFs. That saving has not yet been implemented or measured.
+Exact membership, variable rebinding, absent guard variables, extraction,
+checking, wrapper storage and cold replay remain charged. No compact support
+for every CNF follows.
+
+The checks include all 256 subsets of the eight nonempty unit/binary clauses
+over two variables against the full candidate bank, plus alternative
+supports, allowance exhaustion, unlabelled small inputs and cold replay. Every
+returned refutation passes native publication. Exact previously audited archives
+reuse their manifest-bound two-reader authority only with matching bytes,
+same-case verdicts and table digests; every timed worker still performs cold
+native replay. These operations are distinct. Fresh performance, automatic
+origin discovery, wider interactions and unrestricted expansion bounds remain
+open; no new Lean refinement is claimed.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}

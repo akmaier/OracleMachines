@@ -12,7 +12,38 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reject inconclusive guard graphs before preparing proofs
+## Current investigation: reduce the context carried by closure proofs
+
+[Witness-directed checking](guard-witness-deferral.md) preserves the eager gate's
+34 local closures and exact native databases while reducing local consequence
+checks from 1,218 to 87. Solve-mean totals fall 7.01% and complete-worker totals
+1.74% versus eager closure. They remain 7.87% / 1.14% above ordinary search, and
+all eight exposed whole queries still stop at 256 dispatches. Checked native
+state remains 6.19% above ordinary search. Keep the gate optional.
+
+**Next target: collect and compile the actual clause support of a contradiction
+witness, then lift its checked refutation to the full local CNF.** The new
+largest-regression profile, edit 28, spends 0.17224 cumulative seconds in seven
+native closure compilations within 0.22224 seconds of gate time. Selected support
+transport now takes only 0.02386 seconds. Full-query checking and normalization
+remain substantial; nested cumulative times overlap. This identifies native
+composition, not another matching index, as the next measured gate bottleneck.
+
+Measure the support union H relative to the full context C before adopting it.
+The existing negative `component` certificate can lift any refuted clause subset;
+independence is unnecessary for this negative inference. Preserve exact support
+membership, coordinate binding, absent-variable handling and native checking.
+Charge discovery, canonicalization, wrapper storage and cold replay. Smaller
+cofactors and reuse across larger enclosing contexts are opportunities, not
+established improvements or guarantees of a compact support for every CNF.
+
+Core-body sharing remains a second memory target. Origin discovery, fresh
+unlabelled coverage, wider guards and unrestricted resource bounds remain open.
+Resume `experiments/results/cnf-guard-witness/checkpoint.json`; the parent union
+is reused unchanged, with all prior artifacts and unsuccessful comparisons
+preserved. Identical payloads/counters do not establish identical ordered traces.
+
+## Previous investigation: reject inconclusive guard graphs before preparing proofs
 
 [The selective live gate](guard-closure-live.md) compiles valid local closures,
 but its total-cost comparison regresses. Unit guards close 25 contexts and

@@ -5,7 +5,32 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: distinguish candidate graphs from checked proof paths
+## Latest evidence: discover the support behind a closed guard interaction
+
+[Deferring guard proof preparation](guard-witness-deferral.md) reduces checked
+local consequences 92.86% while preserving 34 closures and the eager policy's
+native databases. The four-arm comparison still leaves all eight exposed
+queries unresolved. Solve time falls 7.01% against the eager gate but remains
+7.87% above ordinary search. This improves a discovery filter's cost without
+establishing broader whole-query coverage or a memory saving.
+
+The next structural description is the union H of the actual source clauses
+supporting a selected contradiction. If H is a checked subset of C and has a
+native refutation, the existing negative subset rule refutes C. This does not
+require H to be an independent component and gives no SAT join. Measure whether
+H is small enough to avoid repeated full-context cofactor construction and to
+reuse its refutation across distinct enclosing CNFs. Support extraction, exact
+membership, variable rebinding (including absent guards), proof composition,
+persistence and cold replay remain obligations.
+
+The profile supports this target: native composition accounts for 0.17224 of
+0.22224 cumulative seconds in the deferred gate on edit 28; selected support
+transport is down to 0.02386 seconds. These nested times are not additive. No
+compact support bound for arbitrary CNF follows. Automatic origin acquisition,
+wider interactions, fresh unlabelled evaluation and complete efficient coverage
+remain open. Resume the witness checkpoint and retain all earlier authorities.
+
+## Previous evidence: distinguish candidate graphs from checked proof paths
 
 [Live short-guard closure](guard-closure-live.md) reaches 25 local closures with
 unit guards and 34 with binary guards, but completes no additional whole query.

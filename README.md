@@ -28,7 +28,15 @@ classes.
 
 ## Paper
 
-[Test guard closure during live search](research/guard-closure-live.md).
+[Prepare local proofs only for guard contradiction witnesses](research/guard-witness-deferral.md).
+Deferring support checks preserves all 34 local closures and identical native
+databases while reducing checked consequences from 1,218 to 87. Solve time falls
+7.01% versus the eager gate, but remains 7.87% above ordinary search; no additional
+whole query completes. The next target is native composition over the actual
+contradictory clause support, with a checked lift to the full context. The gate
+remains optional; prior results and regressions stay preserved.
+
+Previous: [Test guard closure during live search](research/guard-closure-live.md).
 Unit and binary guards close 25 and 34 local contexts, but complete no additional
 whole query. Solve time rises 7.40% and 18.80% against ordinary search. The profile
 points to proof preparation on inconclusive sites: next build a tentative graph

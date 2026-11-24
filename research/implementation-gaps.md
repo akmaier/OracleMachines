@@ -4,7 +4,21 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, selective live guard closure):
+Latest expansion checkpoint (24 November, witness-directed guard checking):
+[Defer local support proofs until a contradiction witness needs them](guard-witness-deferral.md).
+All 34 closures and native database bytes match the eager gate. Local consequence
+checks fall 1,218 to 87, solve time 7.01% and complete-worker time 1.74% against
+that gate. Ordinary search remains faster by the measured 7.87% solve overhead;
+all eight exposed queries remain unresolved. There is no durable-state saving.
+Next measure the actual clause support of each contradiction and compile over
+that subset, using the existing checked negative-component lift to the full CNF.
+Native composition now dominates the profiled gate (0.17224 / 0.22224 cumulative
+seconds); support transport takes 0.02386. Smaller supports are not guaranteed,
+and extraction, coordinate handling, checking, wrappers and cold replay must be
+charged. Prior archives, all negative results and source fingerprints are
+preserved. Resume `experiments/results/cnf-guard-witness/checkpoint.json`.
+
+Previous expansion checkpoint (24 November, selective live guard closure):
 [Measure local guard composition within whole queries](guard-closure-live.md).
 The unit/binary gates close 25/34 local contexts on different paths, but all
 eight queries remain unresolved. Solve time rises 7.40%/18.80% and complete-worker

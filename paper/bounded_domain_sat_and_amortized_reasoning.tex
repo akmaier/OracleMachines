@@ -10796,6 +10796,112 @@ next measured gate opportunity, with changed-context invalidation and all native
 proof checks retained. Automatic origin discovery and broader fresh coverage
 remain separate obligations.
 
+\subsection{Sharing source preparation across selected guard certificates}
+\label{sec:guard-context-reuse}
+
+We next address the repeated local source checks identified by the guard profile.
+A prepared context contains an immutable snapshot of the exact normalized local
+CNF, its clause positions and variable count, and read-only copies of the current
+coordinate map and fixed assignment. It is created only when a selected candidate
+needs support transport and fits the existing allowance. A satisfiable tentative
+graph does not create a context. Preparation checks canonical form once, after
+which selected hints share the same bound source.
+
+Every hint still validates its own clause, each unit reason and the final
+conflict under the negation of that clause. Source-support containment, coordinate
+transport and local template checks remain mandatory. The support compiler and
+native certificate readers are unchanged. The prepared object is implementation
+state, not a new proof rule or a portable authority. It exists only within one
+witness call; no object is stored on the solver or carried across a changed
+component, assignment or query. Mutable source containers and maps are copied
+before validation, preventing later changes from altering the checked context.
+
+For $j$ selected hints, source preparation can be paid once instead of repeatedly.
+The sum of their support and reason checks remains. Canonical sorting and encoding
+also remain charged. A miss can regress: the new context checks source form before
+the first support translation, whereas the old transport reached canonical
+validation only after that translation succeeded. A call with only missing
+supports can therefore pay an additional source check. Transient tuples and maps
+require memory; clause/literal-slot counters describe the bound structure rather
+than allocated Python bytes. Immutable clause tuples may share existing objects.
+A template-bank byte counter does not include these temporary structures.
+
+Two alternating repetitions compare ordinary search, the frozen support compiler
+and shared context preparation on the same eight chronological edits. Each uses
+only its causal origin prefix and provisioned templates, with the existing
+256-dispatch allowance. Compiled proof nodes and verification are additional.
+Workers include restoration, setup, solve, accounting, warm and cold replay,
+serialization and compression. Earlier acquisition, source hashing and final
+audits remain outside this interval. An adaptive profile selects the largest
+remaining context/ordinary solve-time ratio.
+
+Solve-mean totals are 7.94209 seconds for ordinary search, 8.27046 for the
+support compiler and 8.24769 for shared contexts. The new method reduces solve
+time only 0.28\% against support composition. Complete-worker totals are
+91.26756, 92.09834 and 92.35632 seconds: shared contexts cost 0.28\% more than
+support composition and 1.19\% more than ordinary search. All eight queries
+remain unresolved. Six case solve means improve against support, but edit 28
+regresses 2.80\% and edit 37 regresses 0.18\%. This does not establish a net
+end-to-end gain; the policy remains optional.
+
+All 87 hint checks remain, using 34 prepared contexts. Normalization literal
+visits fall from 82,753 to 32,371, or 60.88\%, and position-map clause visits
+from 32,305 to 14,012, or 56.63\%. The same 34 local contexts close; 635 of 669
+sites remain inconclusive. Candidate checks and guard-pair checks remain
+33,006 and 142,003. Native proof bytes and checked-native-state totals are
+identical to support composition, so there is no persistent-state saving.
+The sum of per-case mean peak RSS is 3.55\% lower, but this is neither a
+simultaneous peak nor a reliable general memory improvement.
+
+Edit 28 remains the largest context/ordinary solve regression, at 11.00\%.
+Its separate profile shows the gate falling from 0.06852 to 0.05581 cumulative
+seconds. Twenty-one old transport calls cost 0.02294 seconds; seven context
+preparations and 21 bound transports cost 0.00706 and 0.00262. Native composition
+still costs about 0.02069. Full-query native verification and normalization
+remain much larger at 0.65741 and 0.50331; these nested costs overlap. The profile
+confirms the local saving without overriding the complete-worker regression.
+
+A preserved separating example motivates a coverage experiment instead. For
+$i=1,2,3$, pair the clauses
+$(\neg x_i\lor a_i\lor u_i)$ and $(\neg x_i\lor a_i\lor\neg u_i)$,
+and pair $(\neg x_i\lor\neg a_i\lor v_i)$ with
+$(\neg x_i\lor\neg a_i\lor\neg v_i)$. Add the actual source clause
+$(x_1\lor x_2\lor x_3)$. This gives 12 variables and 13 ternary clauses.
+The six checked guards are $(\neg x_i\lor a_i)$ and
+$(\neg x_i\lor\neg a_i)$. Their graph is satisfiable with every $x_i$ false,
+but each path $x_i\to a_i\to\neg x_i$ excludes a literal of the wider clause.
+The whole conjunction is UNSAT, also verified over all 4,096 assignments.
+The original-binary cover sees no binary source clause, while the current
+learned-guard SCC gate sees a satisfiable graph. Both local recognizers miss
+this pattern. Ordinary SAT search may still solve it cheaply; this is an
+elementary resolvent construction, not a new tractability result.
+
+The next proposed recognizer uses bounded wide-clause covers in the augmented
+graph. First inventory the inconclusive sites and fresh controls, then check
+all selected learned edges and compile their actual supports under each
+strengthened branch context. Synthetic graph indices must never be presented
+as native source-clause indices. Source scanning, reachability, missing supports,
+proof compilation, retained state and cold replay remain charged. No such live
+cover policy or runtime advantage is implemented by this checkpoint.
+
+Correctness checks cover all subsets of the nine possible two-variable clauses
+and their RUP consequences, all 256 nonempty unit/binary-clause subsets with
+adversarial extra candidates, invalid reasons and conflicts, changed assignments,
+missing supports, mutable input snapshots and lazy preparation. Forty-eight new
+seeded small CNFs are checked against truth tables and replayed through both
+native readers. They establish small-instance correctness, not fresh large-scale
+performance or automatic acquisition of useful origins. No new Lean refinement
+is introduced, and prior manuscript proof blocks remain unchanged.
+
+The preservation test requires identical native database bytes and ordinary
+proof/search counters, allowing only the specifically changed source-preparation
+counters and new context statistics. Identical same-case archives can reuse their
+prior manifest-bound audits; every current worker and profile still performs
+cold native replay. The cumulative union and its layer-aware reader remain
+unchanged, so there is no new proof acquisition or publication layer. This
+experiment improves reuse inside a recognizer without establishing broader
+whole-query coverage or a uniformly efficient partition of arbitrary CNF.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

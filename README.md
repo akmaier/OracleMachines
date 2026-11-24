@@ -28,7 +28,15 @@ classes.
 
 ## Paper
 
-[Reuse the immutable parent when publishing proof history](research/history-layer-publication.md).
+[Share source preparation across selected guard proofs](research/guard-context-reuse.md).
+Normalization visits fall 60.88% and position-map visits 56.63%, with identical
+native proofs. Complete-worker time nevertheless rises 0.28%; keep this optional.
+A preserved 12-variable counterexample identifies the next coverage gap: learned
+binary guards can exclude every literal of a wider source clause while their
+graph remains satisfiable. Next test bounded clause covers on that augmented
+graph, with actual support proofs and native recomposition.
+
+Previous: [Reuse the immutable parent when publishing proof history](research/history-layer-publication.md).
 The same 173-record append now publishes about 38.1 KB instead of another
 152.6 MB full snapshot. Preparation and publication fall 85.96%, and the
 complete worker falls 71.40%, including cold restoration, exact table

@@ -4,7 +4,24 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (24 November, immutable history layers):
+Latest expansion checkpoint (24 November, shared guard contexts):
+[Prepare a local source once for selected guard certificates](guard-context-reuse.md).
+The same 87 hints use 34 context preparations. Normalization visits fall 60.88%
+and position visits 56.63%, but complete-worker time rises 0.28% against support
+composition. All native records and the 34 closures are unchanged; all eight
+whole queries remain unresolved. Keep optional and retain the regressions.
+
+A checked 12-variable, 13-clause counterexample identifies the next structural
+gap: learned binary guards can exclude every literal of a wider source clause
+even when their graph is satisfiable. The original binary cover and current
+guard SCC gates both miss it. Next inventory augmented-graph covers on the 635
+inconclusive sites and fresh controls before adding a live policy. Retain native
+support proofs, exact conditioning and full resource accounting; a recognizer
+separation is not a complete-solver failure or an unrestricted SAT result.
+Resume `experiments/results/cnf-guard-context/checkpoint.json`; its cumulative
+layered history is unchanged, with no new authority rows or publication layer.
+
+Previous expansion checkpoint (24 November, immutable history layers):
 [Publish only checked append records](history-layer-publication.md).
 The exact preceding 173-record expansion now publishes about 38.1 KB while
 reusing its immutable parent, versus 152.6 MB for another full snapshot.

@@ -5,7 +5,29 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: reuse the stored history as well as its proofs
+## Latest evidence: a satisfiable guard graph can still exclude a source clause
+
+[The shared-context experiment](guard-context-reuse.md) reduces repeated local
+checking but leaves all eight whole queries unresolved and provides no complete
+worker speedup. It preserves every native proof and is optional. The next gap
+is useful interaction coverage, not another assumed speedup from fewer visits.
+
+A preserved 12-variable, 13-clause UNSAT example has only ternary source clauses.
+Six individually checked learned binary guards form a satisfiable graph, yet
+that graph excludes all three literals of an actual wider source clause. The
+current guard SCC gate and original-binary clause-cover recognizer both miss
+this local pattern. Its 4,096 assignments are exhaustively checked. Ordinary
+search may still solve it cheaply; no total-cost gain is established.
+
+Next test bounded wide-clause covers in the augmented graph, first offline on
+the 635 inconclusive sites and fresh controlled examples. Recompose only after
+checking every selected guard support and each strengthened branch context.
+Retain actual wide-clause identity, adversarial overlap, absent support and SAT
+edits; never reinterpret graph edges as source clauses. This extends a specific
+recognizer if successful, not an efficient partition of every CNF. Templates
+remain supplied; acquisition, useful coverage and resource bounds remain open.
+
+## Previous evidence: reuse the stored history as well as its proofs
 
 [Layered publication](history-layer-publication.md) preserves the exact prior
 six-table union while publishing only its 173 appended native records. Complete

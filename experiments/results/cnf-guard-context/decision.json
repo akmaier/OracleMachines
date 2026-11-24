@@ -1,0 +1,56 @@
+{
+  "aggregate_changes": {
+    "ordinary": {
+      "database_bytes": 0.0007969941933281266,
+      "mean_complete_seconds": 0.011929368727232603,
+      "mean_peak_rss_bytes": -0.0501830680261387,
+      "mean_solve_seconds": 0.0384787320535489,
+      "native_checked_bytes": 0.006982354668593427
+    },
+    "support": {
+      "database_bytes": 0.0,
+      "mean_complete_seconds": 0.0028011994154601982,
+      "mean_peak_rss_bytes": -0.03550065479772058,
+      "mean_solve_seconds": -0.0027530583753628823,
+      "native_checked_bytes": 0.0
+    }
+  },
+  "cumulative_native_records": 160338,
+  "decision": "Keep shared contexts optional: fewer source-preparation visits and identical proofs do not produce a complete-worker gain. Preserve both improvements and regressions; no default changes.",
+  "exact_work": {
+    "context_preparations": 34,
+    "hints_checked": 87,
+    "inconclusive_sites": 635,
+    "local_closures": 34,
+    "new_normalization_visits": 32371,
+    "new_position_visits": 14012,
+    "old_normalization_visits": 82753,
+    "old_position_visits": 32305
+  },
+  "gap_evidence": {
+    "assignments_checked": 4096,
+    "clauses": 13,
+    "path": "experiments/results/cnf-guard-context/wide-clause-gap.json",
+    "variables": 12
+  },
+  "limitations": [
+    "All eight exposed chronological edits, two alternating serial repetitions. Each worker restores only its causal origin prefix and provisioned bank, never the cumulative union or a later query.",
+    "Ordinary and support controls are frozen. Context changes only short-guard support transport: lazily prepare one immutable canonical local CNF and position map per witness call, then check every selected clause, reason and conflict against that bound source.",
+    "The context is a local implementation value, never a persistent proof or trust token. Native compilation, publication and cold readers remain unchanged. No context survives a guard-call boundary; inconclusive graphs prepare none.",
+    "Native search remains capped at 256 dispatches; separately compiled proof nodes and previous gate limits are unchanged. This is not a bound on total work, process memory or verification.",
+    "The unchanged worker charges restoration, setup, solve, accounting, warm/cold native replay, serialization and compression. Imports, source hashing, protocol/case loading, earlier acquisition/extraction and final preservation audits remain additional.",
+    "All source/proof counters are compared except the specifically reduced position/normalization visits and new context-allocation counters. Identical counters and archive bytes do not establish identical ordered execution traces.",
+    "Provisioned banks, exposed edits, automatic origin discovery, wider guards and arbitrary-SAT bounds remain limitations. Fresh small unlabelled tests establish correctness, not fresh large-instance performance. Peak context slots are additional to bank-byte counters; RSS includes the whole worker.",
+    "Same-case identical compressed/raw archive hashes, table digests and verdicts reuse prior manifest-bound two-reader audits for all 24 target/arm archives. Every current trial and profile separately performs cold native replay. No novel rows are merged or new cumulative archive published.",
+    "The full prior cumulative bank and layered reader are preserved unchanged. No claim is made to re-prove all historical records in this audit."
+  ],
+  "new_authority_records": 0,
+  "next_target": "Inventory bounded wide-clause covers in the augmented learned-guard graph, starting with the preserved 12-variable separation example, inconclusive sites and fresh SAT/UNSAT controls. Only then test a live policy.",
+  "obligations": [
+    "Every selected learned edge needs exact source support; synthetic indices are never native clause indices.",
+    "Recompose under strengthened branch assignments, preserving actual wide-clause identity and checking all native nodes.",
+    "Charge scanning, bounded reachability, rejected candidates, template acquisition, compilation, retained state and cold replay.",
+    "The current example uses supplied templates and establishes recognizer separation, not failure of ordinary SAT solving or a measured runtime gain."
+  ],
+  "reference_union_unchanged": true
+}

@@ -1,0 +1,31 @@
+{
+  "comparisons": {
+    "path": "experiments/results/cnf-guard-context/comparisons.json",
+    "sha256": "0dffc0a1120827de03fbd4b8c360a0590667f521b65b11b374718e7cbe5a74a3"
+  },
+  "limitations": [
+    "Only attempt is profiled. The two unprofiled alternating repetitions remain the timing comparison.",
+    "Cumulative rows overlap; retain self time and calls rather than summing nested cumulative times.",
+    "Each profile must reproduce its unprofiled native counters, gate summaries and database payloads."
+  ],
+  "parent_protocol": {
+    "path": "experiments/results/cnf-guard-context/protocol.json",
+    "sha256": "188b89398636eec30671de3015c31d29e84256d972f2d05ea92a291eeb7ae1f6"
+  },
+  "relative_changes": {
+    "1": 0.007025263314152319,
+    "4": 0.035279027741031976,
+    "28": 0.10997059974751089,
+    "37": 0.04261143453017291,
+    "40": 0.04809048682347439,
+    "61": 0.029072459008793627,
+    "64": 0.001911967071270837,
+    "67": 0.05501681873408737
+  },
+  "selection": "Largest context/ordinary solve-time ratio after comparison, including the least improvement if all ratios are below one. Adaptive exposed diagnostic.",
+  "source": {
+    "path": "/Users/maier/Documents/code/OracleMachines/experiments/profile_cnf_guard_context.py",
+    "sha256": "0c5df5041e4626d8f7885263c9a4730529171a2768af983f088241c79850d36c"
+  },
+  "target": 28
+}

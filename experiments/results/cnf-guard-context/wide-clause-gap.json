@@ -1,0 +1,674 @@
+{
+  "evidence": {
+    "clauses": 13,
+    "covered_source_clause": [
+      1,
+      2,
+      3
+    ],
+    "current_guard_gate": {
+      "candidate_checks": 6,
+      "graph_calls": 1,
+      "graph_clauses": 6,
+      "guard_pair_checks": 12,
+      "implication_edges": 12,
+      "inconclusive_sites": 1,
+      "peak_site_candidates": 6,
+      "sites": 1,
+      "source_support_clauses": 12,
+      "tentative_graph_checks": 1,
+      "tentative_satisfiable_graphs": 1,
+      "tentative_width_2": 6
+    },
+    "graph": [
+      [
+        -6,
+        -3
+      ],
+      [
+        -5,
+        -2
+      ],
+      [
+        -4,
+        -1
+      ],
+      [
+        -3,
+        6
+      ],
+      [
+        -2,
+        5
+      ],
+      [
+        -1,
+        4
+      ]
+    ],
+    "graph_model": [
+      [
+        1,
+        false
+      ],
+      [
+        2,
+        false
+      ],
+      [
+        3,
+        false
+      ],
+      [
+        4,
+        false
+      ],
+      [
+        5,
+        false
+      ],
+      [
+        6,
+        false
+      ]
+    ],
+    "hints": [
+      {
+        "clause": [
+          -4,
+          -1
+        ],
+        "proof": {
+          "conflict": 8,
+          "units": [
+            [
+              -7,
+              5
+            ]
+          ]
+        },
+        "template": {
+          "assumptions": [
+            [
+              1,
+              true
+            ],
+            [
+              4,
+              true
+            ]
+          ],
+          "clauses": [
+            [
+              -7,
+              -4,
+              -1
+            ],
+            [
+              -4,
+              -1,
+              7
+            ]
+          ],
+          "conflict": 1,
+          "trace": [
+            [
+              -7,
+              0
+            ]
+          ]
+        }
+      },
+      {
+        "clause": [
+          -1,
+          4
+        ],
+        "proof": {
+          "conflict": 11,
+          "units": [
+            [
+              -8,
+              4
+            ]
+          ]
+        },
+        "template": {
+          "assumptions": [
+            [
+              1,
+              true
+            ],
+            [
+              4,
+              false
+            ]
+          ],
+          "clauses": [
+            [
+              -8,
+              -1,
+              4
+            ],
+            [
+              -1,
+              4,
+              8
+            ]
+          ],
+          "conflict": 1,
+          "trace": [
+            [
+              -8,
+              0
+            ]
+          ]
+        }
+      },
+      {
+        "clause": [
+          -5,
+          -2
+        ],
+        "proof": {
+          "conflict": 7,
+          "units": [
+            [
+              -9,
+              3
+            ]
+          ]
+        },
+        "template": {
+          "assumptions": [
+            [
+              2,
+              true
+            ],
+            [
+              5,
+              true
+            ]
+          ],
+          "clauses": [
+            [
+              -9,
+              -5,
+              -2
+            ],
+            [
+              -5,
+              -2,
+              9
+            ]
+          ],
+          "conflict": 1,
+          "trace": [
+            [
+              -9,
+              0
+            ]
+          ]
+        }
+      },
+      {
+        "clause": [
+          -2,
+          5
+        ],
+        "proof": {
+          "conflict": 10,
+          "units": [
+            [
+              -10,
+              2
+            ]
+          ]
+        },
+        "template": {
+          "assumptions": [
+            [
+              2,
+              true
+            ],
+            [
+              5,
+              false
+            ]
+          ],
+          "clauses": [
+            [
+              -10,
+              -2,
+              5
+            ],
+            [
+              -2,
+              5,
+              10
+            ]
+          ],
+          "conflict": 1,
+          "trace": [
+            [
+              -10,
+              0
+            ]
+          ]
+        }
+      },
+      {
+        "clause": [
+          -6,
+          -3
+        ],
+        "proof": {
+          "conflict": 6,
+          "units": [
+            [
+              -11,
+              1
+            ]
+          ]
+        },
+        "template": {
+          "assumptions": [
+            [
+              3,
+              true
+            ],
+            [
+              6,
+              true
+            ]
+          ],
+          "clauses": [
+            [
+              -11,
+              -6,
+              -3
+            ],
+            [
+              -6,
+              -3,
+              11
+            ]
+          ],
+          "conflict": 1,
+          "trace": [
+            [
+              -11,
+              0
+            ]
+          ]
+        }
+      },
+      {
+        "clause": [
+          -3,
+          6
+        ],
+        "proof": {
+          "conflict": 9,
+          "units": [
+            [
+              -12,
+              0
+            ]
+          ]
+        },
+        "template": {
+          "assumptions": [
+            [
+              3,
+              true
+            ],
+            [
+              6,
+              false
+            ]
+          ],
+          "clauses": [
+            [
+              -12,
+              -3,
+              6
+            ],
+            [
+              -3,
+              6,
+              12
+            ]
+          ],
+          "conflict": 1,
+          "trace": [
+            [
+              -12,
+              0
+            ]
+          ]
+        }
+      }
+    ],
+    "limitations": [
+      "The current learned-guard SCC gate and original-binary cover recognizer both miss this source, although the whole CNF is UNSAT. No complete-solver failure or new complexity result is claimed.",
+      "The six guard templates are deliberately supplied. Automatic acquisition and origin costs remain open.",
+      "Each source-clause literal has a checked path to its negation in the augmented graph. Their supports must be compiled under strengthened branch contexts before a new native clause-cover policy can be used.",
+      "Do not pass synthetic guard-edge indices to a native checker as if they indexed actual source clauses. No new live policy, runtime advantage or native authority records are produced here."
+    ],
+    "models": 0,
+    "paths": [
+      {
+        "literal": 1,
+        "path": [
+          [
+            4,
+            5
+          ],
+          [
+            -1,
+            2
+          ]
+        ]
+      },
+      {
+        "literal": 2,
+        "path": [
+          [
+            5,
+            4
+          ],
+          [
+            -2,
+            1
+          ]
+        ]
+      },
+      {
+        "literal": 3,
+        "path": [
+          [
+            6,
+            3
+          ],
+          [
+            -3,
+            0
+          ]
+        ]
+      }
+    ],
+    "source": [
+      [
+        -12,
+        -3,
+        6
+      ],
+      [
+        -11,
+        -6,
+        -3
+      ],
+      [
+        -10,
+        -2,
+        5
+      ],
+      [
+        -9,
+        -5,
+        -2
+      ],
+      [
+        -8,
+        -1,
+        4
+      ],
+      [
+        -7,
+        -4,
+        -1
+      ],
+      [
+        -6,
+        -3,
+        11
+      ],
+      [
+        -5,
+        -2,
+        9
+      ],
+      [
+        -4,
+        -1,
+        7
+      ],
+      [
+        -3,
+        6,
+        12
+      ],
+      [
+        -2,
+        5,
+        10
+      ],
+      [
+        -1,
+        4,
+        8
+      ],
+      [
+        1,
+        2,
+        3
+      ]
+    ],
+    "templates": [
+      {
+        "assumptions": [
+          [
+            1,
+            true
+          ],
+          [
+            4,
+            true
+          ]
+        ],
+        "clauses": [
+          [
+            -7,
+            -4,
+            -1
+          ],
+          [
+            -4,
+            -1,
+            7
+          ]
+        ],
+        "conflict": 1,
+        "trace": [
+          [
+            -7,
+            0
+          ]
+        ]
+      },
+      {
+        "assumptions": [
+          [
+            1,
+            true
+          ],
+          [
+            4,
+            false
+          ]
+        ],
+        "clauses": [
+          [
+            -8,
+            -1,
+            4
+          ],
+          [
+            -1,
+            4,
+            8
+          ]
+        ],
+        "conflict": 1,
+        "trace": [
+          [
+            -8,
+            0
+          ]
+        ]
+      },
+      {
+        "assumptions": [
+          [
+            2,
+            true
+          ],
+          [
+            5,
+            true
+          ]
+        ],
+        "clauses": [
+          [
+            -9,
+            -5,
+            -2
+          ],
+          [
+            -5,
+            -2,
+            9
+          ]
+        ],
+        "conflict": 1,
+        "trace": [
+          [
+            -9,
+            0
+          ]
+        ]
+      },
+      {
+        "assumptions": [
+          [
+            2,
+            true
+          ],
+          [
+            5,
+            false
+          ]
+        ],
+        "clauses": [
+          [
+            -10,
+            -2,
+            5
+          ],
+          [
+            -2,
+            5,
+            10
+          ]
+        ],
+        "conflict": 1,
+        "trace": [
+          [
+            -10,
+            0
+          ]
+        ]
+      },
+      {
+        "assumptions": [
+          [
+            3,
+            true
+          ],
+          [
+            6,
+            true
+          ]
+        ],
+        "clauses": [
+          [
+            -11,
+            -6,
+            -3
+          ],
+          [
+            -6,
+            -3,
+            11
+          ]
+        ],
+        "conflict": 1,
+        "trace": [
+          [
+            -11,
+            0
+          ]
+        ]
+      },
+      {
+        "assumptions": [
+          [
+            3,
+            true
+          ],
+          [
+            6,
+            false
+          ]
+        ],
+        "clauses": [
+          [
+            -12,
+            -3,
+            6
+          ],
+          [
+            -3,
+            6,
+            12
+          ]
+        ],
+        "conflict": 1,
+        "trace": [
+          [
+            -12,
+            0
+          ]
+        ]
+      }
+    ],
+    "transport_checks": {
+      "guard_input_literals": 36,
+      "hint_check_literals": 36,
+      "normalization_literal_visits": 234,
+      "position_clauses": 78,
+      "support_literal_visits": 36,
+      "template_checked_reason_literals": 36,
+      "templates_checked": 6,
+      "trace_steps": 6,
+      "verified_core_hints": 6
+    },
+    "truth_assignments_checked": 4096,
+    "variables": 12
+  },
+  "source_implementation": {
+    "path": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_guard_wide_gap.py",
+    "sha256": "a4e2ad867e0c4003e05defdfaedb5005e5f71d2c66e55dcd6106944529f18bec"
+  }
+}

@@ -12,7 +12,40 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: unchanged history now reused during publication
+## Current investigation: expand guard composition beyond SCC contradictions
+
+[Shared local contexts](guard-context-reuse.md) preserve all 34 local closures
+and exact native archives while reducing normalization visits 60.88% and clause
+position visits 56.63%. Solve time falls only 0.28% against support composition,
+and complete-worker time rises 0.28%; all eight queries remain unresolved.
+The new policy stays optional. On edit 28, the gate falls 0.06852 to 0.05581
+cumulative seconds, while full-query verification and normalization remain
+0.65741 and 0.50331. Nested timings overlap. More checker micro-optimization is
+not the highest demonstrated route to whole-query gains.
+
+**Highest next coverage target: bounded wide-clause covers using the augmented
+learned-guard graph.** The new preserved example has 12 variables and 13 ternary
+clauses, no original binary edges, and six checked learned guards. Its guard
+graph is satisfiable but has a path from each literal of an actual source clause
+to its negation. Both current recognizers miss that local pattern; exhaustive
+4,096-assignment checking verifies UNSAT. This is a recognizer separation, not
+a complete-solver failure, automatic origin discovery, or a runtime advantage.
+
+First inspect the 635 inconclusive sites for such covers, with fresh satisfiable
+edits and missing-support controls. Reuse `cnf_binary_clause_cover.py` search
+ideas and `cnf_guard_interactions.py` supported-path compilation. The current
+model can screen wide clauses, but every selected synthetic edge needs checked
+source support and every branch needs exact conditioning. Do not treat graph
+indices as native clause indices. Charge scans, reachability, proof preparation,
+compiled state and cold replay before choosing a live policy. Broader origins,
+wider guards and uniform arbitrary-CNF resource bounds remain open.
+
+Resume `experiments/results/cnf-guard-context/checkpoint.json`; the cumulative
+160,338-record native bank and layered archive are unchanged. Publication's
+history-wide preparation, cold materialization and eventual compaction remain
+separate cost limits, as documented in the preceding checkpoint.
+
+## Previous investigation: unchanged history now reused during publication
 
 [Parent-plus-delta publication](history-layer-publication.md) implements the
 previous highest publication target on the exact 173-record append. Mean

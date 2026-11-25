@@ -5,7 +5,29 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: full-clause probes reveal useful but costly exclusions
+## Latest evidence: opposite probes improve coverage; feedback remains open
+
+[Prioritizing the opposite of a checked failed probe](complement-probes.md)
+raises source/binary/all recognition from 16/24/26 to 55/64/66 of 246 events with
+the same budgets. There are 37 additional distinct native roots; two were unknown
+in prior inspected snapshots, and ordinary local solving also refutes both.
+All new proofs pass both cold readers. Native compilation is slower and larger
+than ordinary solving on every new case, so broader recognition does not yet
+provide an end-to-end expansion advantage.
+
+The old order loses no success within a fixed clause bank in this sample, but a
+retained three-probe counterexample shows that promotion can displace a decisive
+probe. Adding binary guards also loses one source-bank event under the adaptive
+schedule; all guards recover it. Keep these overlap and budget effects explicit.
+
+Of 180 remaining all-guard events, 160 retain 851 exclusions, with just 14 untested
+opposites. Next test checked feedback of these exclusions and economical source
+support reconstruction. Twenty events have no exclusion; all 180 hit the root
+budget. A larger budget, iterative closure and compact proof sharing remain
+separate obligations. Resume
+`experiments/results/cnf-complement-probes/checkpoint.json`.
+
+## Previous evidence: full-clause probes reveal useful but costly exclusions
 
 [One-pass guarded unit propagation](wide-guard-probes.md) refutes 26 previously
 unresolved events, compared with 16 using source clauses and 24 adding only binary

@@ -12,7 +12,37 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse failed probes; reduce native proof expansion
+## Current investigation: feed checked exclusions back; reduce proof expansion
+
+[Complement scheduling](complement-probes.md) raises all-guard recognition from
+26 to 66 of the same 246 events at the same 64-assumption budget. No earlier
+success is lost within any bank on this sample. A permanent three-probe
+counterexample nevertheless shows that the new order can displace a decisive
+probe. Source/binary/all adaptive coverage is 55/64/66; the binary bank loses one
+source-bank success. These are exposed-case results, not a monotonicity theorem.
+
+**Largest demonstrated total-cost gap remains native proof expansion.** The
+37 additional distinct roots have checked native archives, including two with
+unknown prior snapshot status. Ordinary local solving also proves all 37 UNSAT.
+Compilation takes 8.05303 seconds versus 1.40474 for ordinary solving and stores
+24.37 MB versus 6.32 MB of isolated record bytes. It is slower and larger on every
+case. Choose and share small source supports before claiming an end-to-end win.
+
+**Next coverage target:** checked feedback of accumulated exclusions. Among
+180 unresolved all-guard events, 160 have 851 exclusions. Only 14 exclusions now
+have an untested opposite, down from 1,218: scheduling has largely exhausted that
+particular opportunity. Test whether these consequences unlock further propagation
+when fed back with provenance, charging native reconstruction. Twenty events have
+no exclusion in the tested prefix. Every remaining event hits the root cap;
+a separate budget comparison may expose more pairs but is not iterative closure.
+
+All 1,881 tests pass. Resume
+`experiments/results/cnf-complement-probes/checkpoint.json`. All previous banks,
+conditional traces, experiments and 64 proof blocks are preserved. Discovery is
+6.45% lower in the all-guard sample, but the complete census phase falls only
+1.42%; proof reconstruction remains additional and dominates the cost regression.
+
+## Previous investigation: reuse failed probes; reduce native proof expansion
 
 [Full-clause unit probes](wide-guard-probes.md) close 26 of the 246 remaining
 events, versus 16 with source clauses alone and 24 with binary guards. Thus only

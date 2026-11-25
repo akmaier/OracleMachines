@@ -11799,6 +11799,85 @@ replay. All 1,875 tests pass. Earlier proof blocks and artifacts remain unchange
 This is a checked extension of bounded pattern discovery, with explicit failures
 and proof costs, not an unrestricted-SAT complexity conclusion.
 
+\subsection{Prioritizing the opposite of a checked failed probe}
+
+The previous experiment leaves many certified failures whose opposite assumptions
+have not been tried. We change only the search order: after a failed probe under
+literal l, try not-l next if it is still untested. Retain the existing failure
+trace and skip any later queue entry for an already tested literal. Two failed
+opposites refute the cofactor; an open promoted branch causes search to resume.
+An open unit closure is not a SAT verdict. No exclusion is fed back into later
+propagation, and there is no new cross-call cache or native inference rule.
+The clause bank, source binding, validator and compiler remain unchanged.
+
+Every recorded failure remains a checked trace over the same clause bank, and
+each literal is tested at most once. These invariants justify reuse of the
+failure when the other branch also conflicts. Without a budget there are at
+most $2V$ assumed literals for V variables, but unit probing remains incomplete
+for arbitrary SAT. For P attempted assumptions, queue and tested-set management
+adds $O(V+P)$ expected word work and $O(V+\min(P,2V))$ words under the existing
+hash-table model. Ordering, source validation, per-probe clause initialization
+and native compilation retain their previous costs. Promoted assumptions spend
+the same root, occurrence-visit and trace allowances as ordinary assumptions.
+
+Ninety-six isolated census workers compare frozen and complement scheduling for
+all three clause banks, with two alternating repetitions per target. The same
+246 events and 64-assumption budget give the following counts and mean times
+summed over targets:
+\begin{center}
+\begin{tabular}{lrrrr}
+\hline
+& \multicolumn{2}{c}{Refuted events} & \multicolumn{2}{c}{Discovery (s)} \\
+Clause bank & Frozen & Complement & Frozen & Complement \\
+\hline
+Source & 16 & 55 & 0.97800 & 0.92760 \\
+Binary guards & 24 & 64 & 0.98821 & 0.92102 \\
+All guards & 26 & 66 & 0.98971 & 0.92587 \\
+\hline
+\end{tabular}
+\end{center}
+Every frozen program and deterministic counter reproduces the earlier checkpoint.
+Within each bank, no earlier event success is lost in this sample. Adding binary
+guards to the adaptive schedule nevertheless loses one source-bank success while
+gaining ten others; all guards recover that event. A separate eight-clause
+counterexample also refutes any universal scheduling guarantee: promoting an open
+opposite displaces a decisive probe at a budget of three. The frozen order then
+refutes while the new order remains unresolved; both refute at a budget of four.
+The counterexample and all changed-event inputs are retained.
+
+With all guards, assumed probes fall from 15,212 to 12,699, occurrence visits
+from 1,054,393 to 764,400, and clause initialization slots from 5,834,594 to
+4,983,166. Of 984 promoted probes, 918 stay open. Earlier termination reduces
+retained successful traces from 1,946 to 1,161 without deleting earlier artifacts.
+Maximum queue and tested-set sizes are 298 and 64 literals; process RSS remains
+near 82.6--82.7 MB. Discovery falls 6.45\%, but the complete census phase,
+including saved-prefix reconstruction and event serialization, falls only
+1.42\%, from 5.32998 to 5.25440 seconds. Earlier acquisition and binary discovery,
+loading, startup, final audits and native compilation are additional. This is
+not a whole-query speed or general memory bound.
+
+The 66 events represent 60 roots, including 37 absent from the previous
+three-bank success union. These enter 148 isolated native trials. Both ordinary
+local solving and extension compilation refute all 37; two were unknown in the
+inspected snapshot stores. Both independent readers check all 74 distinct
+archive/root pairs, and warm checks add no authority records. Compilation is
+slower and larger on every case. Summed mean solve/compile times are 1.40474 and
+8.05303 seconds; complete local trials take 3.77522 and 18.06486 seconds.
+Extension proofs retain 24,370,613 encoded record bytes in 2,717 records, against
+6,319,690 bytes in 548 ordinary records. These isolated-database totals can
+duplicate shared subproofs; the cumulative bank is unchanged. Full-cofactor
+native proof expansion remains the largest demonstrated total-cost regression.
+
+All 180 remaining all-guard events hit the root cap. Of these, 160 retain 851
+checked exclusions, with only 14 untested opposites; the other opposite closures
+stayed open. Twenty events have no exclusion in the attempted prefix. The next
+coverage question is checked feedback of accumulated exclusions, with compact
+source-support proofs to control certification cost. Scheduling, a larger root
+budget and iterative propagation are distinct steps. All 1,881 tests pass,
+including the budget counterexample. Earlier sources, results and 64 proof
+blocks are preserved. These exposed-case gains establish neither an efficient
+partition of all CNFs nor a uniform polynomial solution of unrestricted SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

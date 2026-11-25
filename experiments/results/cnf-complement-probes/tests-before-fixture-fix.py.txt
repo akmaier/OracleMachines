@@ -1,0 +1,58 @@
+from collections import Counter
+from itertools import product
+from unittest.mock import patch
+import random,unittest
+from experiments import cnf_complement_probes as paired
+from experiments import cnf_wide_guard_probes as frozen
+from experiments import cnf_residual_dag as native
+from solver.test_cnf_wide_guard_probes import fixture
+
+
+class ComplementProbeTests(unittest.TestCase):
+    def test_immediate_opposite_uses_existing_proof_and_native_checker(self):
+        source,ts=fixture();c=Counter();p=paired.discover(source,ts,c)
+        self.assertEqual(p['status'],'refuted');self.assertGreater(c['complement_promoted_probes'],0)
+        paired.validate(source,ts,p,Counter());s=native.ResidualSolver()
+        try:self.assertFalse(s._read(paired.compile_program(s,source,ts,p,Counter()))['answer'])
+        finally:s.close()
+        self.assertIs(paired.validate,frozen.validate);self.assertIs(paired.compile_extension,frozen.compile_extension)
+
+    def test_duplicate_queue_entries_never_repeat_probes(self):
+        source,ts=fixture();seen=[];original=frozen.UnitIndex.probe
+        def record(index,assumption,*args):seen.append(assumption);return original(index,assumption,*args)
+        with patch.object(frozen.UnitIndex,'probe',record):p=paired.discover(source,ts,Counter(),mode='source')
+        self.assertEqual(p['status'],'unresolved');self.assertEqual(p['reason'],'complete')
+        self.assertEqual(len(seen),len(set(seen)));self.assertEqual(seen[0],None)
+        self.assertEqual(set(seen[1:]),set(frozen.roots(source)))
+
+    def test_open_opposites_do_not_authorize_refutation(self):
+        # 1 is forced, but the formula is satisfiable. Its failed negative probe
+        # schedules a successful/open positive probe, never a false UNSAT result.
+        source=native.normalize([(1,2),(1,-2),(1,3,4)])[0];c=Counter();p=paired.discover(source,[],c)
+        self.assertEqual(p['status'],'unresolved');self.assertGreater(c['complement_open_opposites'],0)
+        paired.validate(source,[],p,Counter())
+
+    def test_random_sources_against_truth_and_full_search_control(self):
+        rng=random.Random(242505)
+        for _ in range(180):
+            source=native.normalize([[v*rng.choice((-1,1)) for v in rng.sample(range(1,7),rng.randrange(2,5))] for _ in range(rng.randrange(4,25))])[0]
+            models=[dict(enumerate(bits,1)) for bits in product((False,True),repeat=6)];models=[m for m in models if native.holds(source,m)]
+            p=paired.discover(source,[],Counter());q=frozen.discover(source,[],Counter())
+            self.assertEqual(p['status'],q['status']);paired.validate(source,[],p,Counter())
+            for row in p['probes']:self.assertTrue(all(m[abs(row['assumption'])]!=(row['assumption']>0) for m in models))
+            if p['status']=='refuted':self.assertFalse(models)
+            else:self.assertEqual({r['assumption'] for r in p['probes']},{r['assumption'] for r in q['probes']})
+
+    def test_all_budgets_count_promoted_probes(self):
+        source,ts=fixture()
+        for roots in (1,2,3,4):
+            c=Counter();p=paired.discover(source,ts,c,probe_limit=roots)
+            self.assertLessEqual(c['probe_roots'],roots)
+            self.assertEqual(c['probe_roots'],c['complement_base_probes']+c['complement_promoted_probes'])
+            paired.validate(source,ts,p,Counter())
+        for kwargs in ({'work_limit':1},{'trace_limit':1}):
+            c=Counter();p=paired.discover(source,ts,c,**kwargs);self.assertEqual(p['status'],'unresolved');paired.validate(source,ts,p,Counter())
+            self.assertLessEqual(c['probe_occurrence_visits'],kwargs.get('work_limit',262144))
+
+
+if __name__=='__main__':unittest.main()

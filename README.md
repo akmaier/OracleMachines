@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Use failed probes to prioritize their opposites](research/complement-probes.md).
+The same 64-assumption budget now closes 66 of 246 remaining events, up from 26.
+All 37 additional distinct roots have checked native archives; two were unknown
+in the prior snapshots. All 1,881 tests pass. Native proof reconstruction remains
+slower and larger than ordinary local solving. Next: checked exclusion feedback
+and smaller source-support proofs. A retained counterexample prevents treating
+this sample gain as a universal guarantee.
+
+Previous:
 [Reuse wider guards in bounded unit probes](research/wide-guard-probes.md).
 The new detector closes 26 remaining events, versus 24 with binary guards and
 16 with source clauses alone. All 23 distinct gained roots have checked native

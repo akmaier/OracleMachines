@@ -18,6 +18,18 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Complement scheduling](complement-probes.md) adds a queue and tested-literal set
+so a failed probe can promote its untested opposite without probing any literal
+twice. For V variables and P attempted assumptions this adds O(V+P) expected word
+work and O(V+min(P,2V)) words under the existing hash-table model. It does not
+change unit-probe or native-proof asymptotics. In the all-guard sample, assumed
+probes fall 15,212 to 12,699 and occurrence visits fall 27.50%, while recognition
+rises from 26 to 66 events. Discovery falls 6.45%; the census including saved-prefix
+reconstruction falls only 1.42%. Native compilation and proof bytes regress on
+all 37 new distinct roots. Stored earlier traces are preserved, not compressed
+away. A retained counterexample shows that a promoted open opposite can displace
+a decisive probe at a fixed budget. No universal saving follows.
+
 The [guarded unit-probe experiment](wide-guard-probes.md) builds one fixed
 clause-occurrence index and reuses it across P probes. For C clauses and L literal
 occurrences, preparation costs O(C+L) word work/space; each probe initializes O(C)

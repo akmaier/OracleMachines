@@ -1,0 +1,14 @@
+...F.
+======================================================================
+FAIL: test_open_opposites_do_not_authorize_refutation (solver.test_cnf_complement_probes.ComplementProbeTests.test_open_opposites_do_not_authorize_refutation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_complement_probes.py", line 32, in test_open_opposites_do_not_authorize_refutation
+    self.assertEqual(p['status'],'unresolved');self.assertGreater(c['complement_open_opposites'],0)
+                                               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 not greater than 0
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.082s
+
+FAILED (failures=1)

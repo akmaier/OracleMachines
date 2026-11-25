@@ -4,7 +4,18 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (25 November, wider-clause unit probes):
+Latest expansion checkpoint (25 November, complement scheduling):
+[Reuse failures to schedule their opposites](complement-probes.md). Source/binary/
+all recognition reaches 55/64/66 events, up from 16/24/26 at the same budget.
+All 37 additional roots have native archives; two were unknown in prior inspected
+snapshots, and ordinary local solving also proves them. Compilation is slower
+and larger on all new cases. All 1,881 tests pass, including a counterexample to
+monotone coverage under a fixed budget. Next investigate checked exclusion
+feedback and compact source-support proofs: 160 unresolved events retain 851
+exclusions, only 14 of which still have untested opposites. Resume
+`experiments/results/cnf-complement-probes/checkpoint.json`.
+
+Previous expansion checkpoint (25 November, wider-clause unit probes):
 [Reuse checked guards in bounded propagation](wide-guard-probes.md). Source-only,
 binary-guard and all-guard controls close 16/24/26 remaining events. The 23 distinct
 roots have native proof archives; compilation is slower on all cases than ordinary

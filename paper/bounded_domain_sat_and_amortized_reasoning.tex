@@ -12781,6 +12781,53 @@ events, with 29 unresolved. The next coverage target is probing the nineteen
 strengthened B4 closures with fresh bindings, now with a cheaper measured
 certification path; a complete efficient classification remains open.
 
+\subsection{Fresh fourth-bank probe frontiers}
+The next bounded search experiment restarts candidate discovery on the actual
+fourth feedback bank, denoted $B_4$, with exact source, bank, closure, order and
+policy bindings. Earlier $B_3$ history remains checked provenance for derived
+units but does not justify skipping a candidate in the changed bank. A cursor
+retains completed assumptions and checked failed-unit traces. Cold continuation
+reconstructs the order, verifies every retained failure, and retries interrupted
+attempts. Open-history entries are trusted scheduling data, not proof axioms;
+even a completed order is not a satisfiability certificate.
+
+On the 29 remaining open events, the first 64 assumptions per event expose 69
+checked failures in 13 events, but no opposite-polarity refutation. Recognition
+therefore stays at 217 of 246 sampled events. Probing only the 19 changed
+bank/assignment pairs finds the same failures on this sample and avoids 640
+assumptions, reducing the count from 1,856 to 1,216. This is a scheduling
+heuristic: a retained counterexample has an unchanged bank that the selected
+policy skips even though unrestricted use of this bounded probe procedure
+refutes it. No general preservation of coverage is asserted.
+
+Two opposite-order isolated repetitions include source-prefix reconstruction,
+preparation, discovery, JSON persistence and semantic cold verification.
+Discovery time decreases from $0.21477$ to $0.20481$ seconds; complete census time
+decreases only from $1.01278$ to $0.99228$ seconds. These descriptive differences
+are $4.63\%$ and $2.02\%$, respectively, on exposed cases. Selected reconstruction
+and cold verification cost $0.58238$ and $0.19027$ seconds. Peak process memory
+does not improve. Startup, input loading, prior acquisition and eventual fallback
+remain additional. Per-probe initialization visits decrease from 719,232 to
+446,400 clauses, and propagation visits from 85,842 to 66,479 occurrences.
+
+Standalone cursor/result bytes decrease from 391,534 to 272,483, but the complete
+open-state export grows from 989,481 to 1,379,665 bytes because it preserves prior
+layers and the measured control history for all 29 cases. The ten skipped
+histories were acquired by the control, not for free by the selected policy.
+With $Q$ probes and $C$ clauses, initialization still costs $O(QC)$ in addition
+to bounded occurrence work, preparation and checking. Exact bindings and failed
+traces also grow with source size and retained history. Thus a propagation-visit
+allowance is not a total-work or lifetime-storage bound.
+
+All 1,969 tests pass, including cold split-versus-single equality, invalidation,
+malformed-history rejection, small exhaustive truth checks and the skip
+counterexample. No new native whole-root certificate is claimed for the 69
+individual failures. The next experiment should compose their consequences in
+the 13 affected cases through checked dependencies, retaining the direct-unit
+compiler as the measured certificate baseline. The other 16 cases require later
+candidates or stronger interaction. These results do not establish an efficient
+partition or a uniform polynomial algorithm for unrestricted SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

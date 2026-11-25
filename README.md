@@ -28,6 +28,16 @@ classes.
 
 ## Paper
 
+[Fresh B4 frontiers](research/b4-probe-cursor.md) expose 69 checked failures in
+13 open cases, with no direct refutations. Changed-only probing avoids 640
+assumptions with the same observed failures; complete census time improves
+only 2.02%, and peak memory does not improve. All 1,969 tests pass. Coverage
+remains 217/246. Next compose these failures; preserve the full control cursors
+for later candidates. [External research](research/pequalnp-watch.md) is reviewed
+daily for relevant ideas while our own gap analysis continues to guide the work.
+
+Previous:
+
 [Close native residuals before expanding saved proofs](research/direct-unit-closure.md).
 Bounded ordinary unit proofs reduce complete local trial time 78.35% and encoded
 bytes 80.33% versus the B4 compiler on the same eleven roots. Records fall from

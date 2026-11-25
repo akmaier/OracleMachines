@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: cheaper certification for the current structural gains
+## Latest evidence: a fresh B4 frontier exposes consequences, not new coverage
+
+[Fresh B4 cursors](b4-probe-cursor.md) find 69 checked failures in 13 open events.
+There are no direct refutations: sampled coverage remains 217/246, with 29 open.
+Changed-only search avoids 640 probes with the same observed failures, but is a
+heuristic with a preserved missed-refutation counterexample. All 1,969 tests pass.
+New B4 bindings prevent unsafe reuse of the older B3 completed-candidate list.
+
+Next compose these 69 failures in the 13 affected cases through a checked new
+layer. Sixteen others need later candidates or stronger interaction; control
+cursors retain the tested prefix for all 29. Resume
+`experiments/results/cnf-b4-probe-cursor/checkpoint.json`. Reconstruction and
+provenance checking still dominate time; the full open export grows to 1,379,665
+bytes and peak RSS does not improve. Complete classification and efficient
+unrestricted SAT remain separate, open obligations. The daily
+[external watch](pequalnp-watch.md) supplies leads without replacing this agenda.
+
+## Previous evidence: cheaper certification for the current structural gains
 
 [Direct unit closure](direct-unit-closure.md) replaces many expanded native
 split trees with checked unit contradictions on the actual source residual.

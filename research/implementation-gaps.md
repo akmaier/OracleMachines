@@ -4,7 +4,18 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (25 November, direct native unit closure):
+Latest expansion checkpoint (25 November, fresh B4 cursor):
+[Probe the strengthened banks](b4-probe-cursor.md). Fresh exact B4 bindings expose
+69 checked failures in 13 cases without direct refutations. Coverage remains
+217/246. Changed-only search avoids 640 probes; complete census time falls only
+2.02% and peak RSS does not improve. All 1,969 tests pass. Prior source/artifact
+ledgers and 64 proof blocks are preserved. Next compose these failures; continue
+past the retained prefix for the other 16 cases. Resume
+`experiments/results/cnf-b4-probe-cursor/checkpoint.json`. The full open export
+grows to 1,379,665 bytes, including measured control history for skipped cases.
+No native records or production defaults change.
+
+Previous expansion checkpoint (25 November, direct native unit closure):
 [Avoid expanding already unit-refutable residuals](direct-unit-closure.md).
 Bounded direct unit proofs reduce complete local trial time 78.35% and bytes
 80.33% versus the B4 compiler on the same eleven roots; records fall to 306

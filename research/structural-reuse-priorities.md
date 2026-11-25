@@ -12,7 +12,28 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: probe strengthened closures using cheaper native proofs
+## Current investigation: compose new B4 failures and advance open frontiers
+
+[B4 probing](b4-probe-cursor.md) exposes 69 checked failures in 13 of the 29 open
+events, with no direct refutations. Next compose those consequences through one
+checked feedback layer. Retain direct-unit closure as the measured native
+compiler baseline. The other 16 cases need untested candidates or stronger
+interaction; all control cursors preserve the first 64 completed B4 assumptions.
+
+Probing only changed banks avoids 640 assumptions and 30.41% of standalone
+cursor/result bytes with the same observed failures, but complete census time
+improves only 2.02% and peak RSS does not improve. Reconstruction is about 59%
+of the selected census and semantic cold verification about 19%; repeated
+preparation remains the main avoidable runtime cost. The cumulative open export
+grows from 989,481 to 1,379,665 bytes. Exact bindings duplicate full content.
+
+All 1,969 tests pass; coverage stays 217/246. Skipping unchanged cases is a
+heuristic, with a tested counterexample, not an exhaustion certificate. Resume
+`experiments/results/cnf-b4-probe-cursor/checkpoint.json`. The daily
+[external research watch](pequalnp-watch.md) records leads such as repeated
+neighborhood factoring; adoption still requires a relevant measured benefit.
+
+## Previous investigation: probe strengthened closures using cheaper native proofs
 
 [Direct unit closure](direct-unit-closure.md) addresses the measured certificate
 expansion bottleneck. Before expanding a saved trace, bounded propagation tests

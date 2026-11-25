@@ -1,0 +1,34 @@
+{
+  "costs": {
+    "avoided_assumptions": 640,
+    "complete_reduction_percent": 2.0240770643897954,
+    "discovery_reduction_percent": 4.634401688820899,
+    "open_export_bytes_after": 1379665,
+    "open_export_bytes_before": 989481,
+    "peak_memory_improved": false
+  },
+  "coverage": {
+    "new_refutations": 0,
+    "recognized": 217,
+    "total": 246,
+    "unresolved": 29
+  },
+  "decision": "Compose the 69 checked B4 failures in 13 cases; resume later candidates on the other16. Retain direct unit closure as the measured native baseline.",
+  "external_watch": {
+    "automation_id": "review-external-sat-research",
+    "external_lean_checked": false,
+    "local_identity_checked_assignments": 16,
+    "local_time": "09:00 Europe/Berlin",
+    "record": "research/pequalnp-watch.md"
+  },
+  "failure_cases": 13,
+  "limitations": [
+    "Exposed finite corpus; descriptive timing with eight discovery regressions. No native records added.",
+    "Preparation, exact bindings and repeated source reconstruction remain costly.",
+    "Open or budget-limited probes never establish SAT. Skipping unchanged cases can miss refutations.",
+    "Control cursor storage and prior artifacts remain preserved; no lifetime-space bound."
+  ],
+  "new_failures": 69,
+  "selected_policy": "changed is heuristic; all control histories retained and their acquisition charged to all",
+  "test_development_note": "First focused test assumed cursor_reused_completed counted only B4 history; corrected to subtract inherited B3 preparation count. All retained experimental source was unchanged."
+}

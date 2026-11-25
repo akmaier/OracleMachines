@@ -18,6 +18,21 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Fresh B4 cursors](b4-probe-cursor.md) retain exact source/bank/closure/policy
+bindings, completed candidates and checked failure traces. Q probes on a residual
+with C clauses still cost O(QC) initialization plus at most W charged occurrence
+visits; preparation, recognition, exact binding and verification are extra.
+The occurrence index uses O(C+L) slots for L literal occurrences. Cursor history
+uses O(Q+FT+L+H) word slots for F failures of at most T steps and closure/source
+content H, with encoded-identifier costs additionally affecting bytes.
+
+On 29 open events, changed-only probing avoids 640 assumptions with the same 69
+observed failures, but complete census time improves only 2.02% and peak process
+RSS does not improve. The full resumable export grows from 989,481 to 1,379,665
+bytes. Standalone selected-result bytes fall 30.41%; preserving old artifacts
+and the control's extra history still increases lifetime storage. Coverage is
+unchanged at 217/246; no total-work or lifetime bound follows from bounded visits.
+
 [Direct native unit closure](direct-unit-closure.md) tests the canonical source
 residual before expanding a saved trace. One inner-compilation allowance B
 charges gate clauses, index clause/literal slots and occurrence visits. With K

@@ -1,0 +1,927 @@
+{
+  "counts": {
+    "all": {
+      "accepted_width_2": 41,
+      "accepted_width_3": 75,
+      "accepted_width_4": 94,
+      "accepted_width_5": 115,
+      "accepted_width_6": 84,
+      "accepted_width_7": 42,
+      "accepted_width_8": 11,
+      "accepted_width_9": 7,
+      "b4_schedule_assignment_slots": 124,
+      "b4_schedule_bank_literals": 70458,
+      "b4_searched": 29,
+      "checked_probe_proofs": 114,
+      "closure_checked_literals": 224,
+      "closure_condition_literals": 70458,
+      "closure_fixed_point_literals": 140862,
+      "closure_residual_clauses": 22961,
+      "closure_residual_literals": 67132,
+      "compatible_width_2": 41,
+      "compatible_width_3": 75,
+      "compatible_width_4": 94,
+      "compatible_width_5": 115,
+      "compatible_width_6": 84,
+      "compatible_width_7": 42,
+      "compatible_width_8": 11,
+      "compatible_width_9": 7,
+      "conditioned_source_literals": 32982,
+      "context_hint_checks": 469,
+      "context_literal_slots": 32982,
+      "context_peak_clause_slots": 11468,
+      "context_peak_literal_slots": 32982,
+      "context_preparations": 29,
+      "cursor_base_probes": 1799,
+      "cursor_binding_bytes": 635035,
+      "cursor_completed_probes": 1856,
+      "cursor_feedback_added_units": 46,
+      "cursor_feedback_exclusions": 46,
+      "cursor_lifted_steps": 431,
+      "cursor_promoted_probes": 57,
+      "cursor_reused_completed": 3704,
+      "cursor_schedule_checks": 3704,
+      "feedback_added_units": 16,
+      "feedback_exclusions": 16,
+      "guard_input_literals": 40484,
+      "hint_check_literals": 20157,
+      "layer_added_units": 4,
+      "layer_exclusions": 4,
+      "local_containment_clauses": 7582,
+      "normalization_literal_visits": 98946,
+      "position_clauses": 11468,
+      "prepared_input_slots": 79665,
+      "prepared_templates": 469,
+      "probe_checked_literals": 10946,
+      "probe_exclusions": 69,
+      "probe_index_builds": 29,
+      "probe_index_literals": 32753,
+      "probe_index_peak_literals": 32753,
+      "probe_initialization_clauses": 719232,
+      "probe_occurrence_visits": 85842,
+      "probe_open_closures": 1787,
+      "probe_queue_insertions": 5805,
+      "probe_roots": 1856,
+      "probe_selected_guards": 469,
+      "probe_units": 4995,
+      "restriction_literal_visits": 53224,
+      "schedule_assignment_slots": 28,
+      "schedule_bank_literal_slots": 63532,
+      "source_preparations": 29,
+      "template_candidates": 469,
+      "template_checked_reason_literals": 40314,
+      "templates_checked": 938,
+      "third_added_units": 2,
+      "third_exclusions": 2,
+      "trace_transport_steps": 7083,
+      "unit_probes": 1856,
+      "verified_core_hints": 469
+    },
+    "changed": {
+      "accepted_width_2": 41,
+      "accepted_width_3": 75,
+      "accepted_width_4": 94,
+      "accepted_width_5": 115,
+      "accepted_width_6": 84,
+      "accepted_width_7": 42,
+      "accepted_width_8": 11,
+      "accepted_width_9": 7,
+      "b4_schedule_assignment_slots": 124,
+      "b4_schedule_bank_literals": 70458,
+      "b4_searched": 19,
+      "b4_unchanged_skips": 10,
+      "checked_probe_proofs": 114,
+      "closure_checked_literals": 224,
+      "closure_condition_literals": 70458,
+      "closure_fixed_point_literals": 140862,
+      "closure_residual_clauses": 22961,
+      "closure_residual_literals": 67132,
+      "compatible_width_2": 41,
+      "compatible_width_3": 75,
+      "compatible_width_4": 94,
+      "compatible_width_5": 115,
+      "compatible_width_6": 84,
+      "compatible_width_7": 42,
+      "compatible_width_8": 11,
+      "compatible_width_9": 7,
+      "conditioned_source_literals": 32982,
+      "context_hint_checks": 469,
+      "context_literal_slots": 32982,
+      "context_peak_clause_slots": 11468,
+      "context_peak_literal_slots": 32982,
+      "context_preparations": 29,
+      "cursor_base_probes": 1159,
+      "cursor_binding_bytes": 635035,
+      "cursor_completed_probes": 1216,
+      "cursor_feedback_added_units": 46,
+      "cursor_feedback_exclusions": 46,
+      "cursor_lifted_steps": 431,
+      "cursor_promoted_probes": 57,
+      "cursor_reused_completed": 3704,
+      "cursor_schedule_checks": 3704,
+      "feedback_added_units": 16,
+      "feedback_exclusions": 16,
+      "guard_input_literals": 40484,
+      "hint_check_literals": 20157,
+      "layer_added_units": 4,
+      "layer_exclusions": 4,
+      "local_containment_clauses": 7582,
+      "normalization_literal_visits": 98946,
+      "position_clauses": 11468,
+      "prepared_input_slots": 79665,
+      "prepared_templates": 469,
+      "probe_checked_literals": 10946,
+      "probe_exclusions": 69,
+      "probe_index_builds": 19,
+      "probe_index_literals": 19878,
+      "probe_index_peak_literals": 19878,
+      "probe_initialization_clauses": 446400,
+      "probe_occurrence_visits": 66479,
+      "probe_open_closures": 1147,
+      "probe_queue_insertions": 5168,
+      "probe_roots": 1216,
+      "probe_selected_guards": 469,
+      "probe_units": 4358,
+      "restriction_literal_visits": 53224,
+      "schedule_assignment_slots": 28,
+      "schedule_bank_literal_slots": 63532,
+      "source_preparations": 29,
+      "template_candidates": 469,
+      "template_checked_reason_literals": 40314,
+      "templates_checked": 938,
+      "third_added_units": 2,
+      "third_exclusions": 2,
+      "trace_transport_steps": 7083,
+      "unit_probes": 1216,
+      "verified_core_hints": 469
+    }
+  },
+  "discovery_regressions": [
+    [
+      28,
+      18
+    ],
+    [
+      28,
+      19
+    ],
+    [
+      61,
+      1
+    ],
+    [
+      61,
+      52
+    ],
+    [
+      61,
+      60
+    ],
+    [
+      61,
+      61
+    ],
+    [
+      64,
+      31
+    ],
+    [
+      67,
+      63
+    ]
+  ],
+  "events": 29,
+  "failed_cases": [
+    {
+      "event": 16,
+      "failures": 8,
+      "target": 1
+    },
+    {
+      "event": 17,
+      "failures": 7,
+      "target": 1
+    },
+    {
+      "event": 44,
+      "failures": 8,
+      "target": 1
+    },
+    {
+      "event": 45,
+      "failures": 8,
+      "target": 1
+    },
+    {
+      "event": 19,
+      "failures": 1,
+      "target": 28
+    },
+    {
+      "event": 0,
+      "failures": 1,
+      "target": 37
+    },
+    {
+      "event": 1,
+      "failures": 2,
+      "target": 37
+    },
+    {
+      "event": 20,
+      "failures": 5,
+      "target": 37
+    },
+    {
+      "event": 40,
+      "failures": 1,
+      "target": 37
+    },
+    {
+      "event": 1,
+      "failures": 4,
+      "target": 61
+    },
+    {
+      "event": 16,
+      "failures": 5,
+      "target": 64
+    },
+    {
+      "event": 24,
+      "failures": 7,
+      "target": 64
+    },
+    {
+      "event": 31,
+      "failures": 12,
+      "target": 64
+    }
+  ],
+  "failed_proofs": 69,
+  "inherited_export_bytes": 989481,
+  "limitations": [
+    "Same29 exposed unresolved B4 cases; no holdout. Both arms reconstruct and check all earlier provenance and closures. All probes every case; changed skips10 exactly unchanged B3/B4 bank-and-assignment pairs.",
+    "New cursors bind the exact B4 bank, source, closure, order, policy and trace limit. Old B3 history supplies checked implications but never skips candidates in B4. Open history remains trusted scheduling data, not a SAT or exhaustive-proof certificate.",
+    "Per searched case:64 new assumptions,262144 occurrence visits,256 proof steps including the closure prefix. Index construction, per-probe initialization, preparation, checking and persistence are additionally charged in counters/timings. No global linear-work claim.",
+    "Two opposite-order isolated repetitions per target. Complete census includes source-prefix reconstruction, discovery, JSON write/reload, semantic cold checking and reporting; startup/input loading, earlier acquisition and final audit are additional.",
+    "No direct refutations observed. Saved B4 failure traces have checked provenance but are not native whole-root certificates. No new cumulative records or native archives, production changes or broader coverage claim.",
+    "Skipping unchanged cases is a heuristic policy. A preserved counterexample shows missed refutation; equality of observed failures on this sample is not a general coverage guarantee.",
+    "Exact bindings duplicate full content. Retained histories and growing proof layers remain unbounded; no unrestricted SAT or P-versus-NP conclusion."
+  ],
+  "new_refutations": 0,
+  "peak_rss_bytes": {
+    "all": 96387072,
+    "changed": 96468992
+  },
+  "reasons": {
+    "probe_limit": 29
+  },
+  "recognized_events": 217,
+  "remaining_events": 29,
+  "remaining_export_bytes": 1379665,
+  "selected_export_bytes": 273467,
+  "skips": [
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      15
+    ],
+    [
+      28,
+      17
+    ],
+    [
+      37,
+      39
+    ],
+    [
+      40,
+      0
+    ],
+    [
+      61,
+      0
+    ],
+    [
+      61,
+      21
+    ],
+    [
+      61,
+      50
+    ],
+    [
+      61,
+      51
+    ],
+    [
+      67,
+      0
+    ]
+  ],
+  "summary": [
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.011227791430428624,
+          "persistence_seconds": 0.0003180413041263819,
+          "reconstruction_seconds": 0.04261533357203007,
+          "record_bytes": 15284.0,
+          "verification_seconds": 0.010181416990235448
+        },
+        "changed": {
+          "discovery_seconds": 0.010014770552515984,
+          "persistence_seconds": 0.0002590001095086336,
+          "reconstruction_seconds": 0.04142445861361921,
+          "record_bytes": 52.0,
+          "verification_seconds": 0.010014459025114775
+        }
+      },
+      "event": 0,
+      "target": 1
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.006998521042987704,
+          "persistence_seconds": 0.00027583353221416473,
+          "reconstruction_seconds": 0.014376249630004168,
+          "record_bytes": 14329.0,
+          "verification_seconds": 0.006029020994901657
+        },
+        "changed": {
+          "discovery_seconds": 0.006039020838215947,
+          "persistence_seconds": 0.0002272294368594885,
+          "reconstruction_seconds": 0.014277896145358682,
+          "record_bytes": 52.0,
+          "verification_seconds": 0.0059260837733745575
+        }
+      },
+      "event": 15,
+      "target": 1
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.007826729211956263,
+          "persistence_seconds": 0.0005191669333726168,
+          "reconstruction_seconds": 0.012857791502028704,
+          "record_bytes": 22814.0,
+          "verification_seconds": 0.007456229301169515
+        },
+        "changed": {
+          "discovery_seconds": 0.007646812591701746,
+          "persistence_seconds": 0.000476479297503829,
+          "reconstruction_seconds": 0.012783333659172058,
+          "record_bytes": 22814.0,
+          "verification_seconds": 0.007338854484260082
+        }
+      },
+      "event": 16,
+      "target": 1
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.007494041696190834,
+          "persistence_seconds": 0.0005072085186839104,
+          "reconstruction_seconds": 0.011448104633018374,
+          "record_bytes": 20631.0,
+          "verification_seconds": 0.006691874470561743
+        },
+        "changed": {
+          "discovery_seconds": 0.007314417045563459,
+          "persistence_seconds": 0.0005746874958276749,
+          "reconstruction_seconds": 0.011288624722510576,
+          "record_bytes": 20631.0,
+          "verification_seconds": 0.006636520382016897
+        }
+      },
+      "event": 17,
+      "target": 1
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.009348665829747915,
+          "persistence_seconds": 0.00047324993647634983,
+          "reconstruction_seconds": 0.014633603859692812,
+          "record_bytes": 22033.0,
+          "verification_seconds": 0.007294708397239447
+        },
+        "changed": {
+          "discovery_seconds": 0.007795104058459401,
+          "persistence_seconds": 0.00041668745689094067,
+          "reconstruction_seconds": 0.011963938130065799,
+          "record_bytes": 22033.0,
+          "verification_seconds": 0.007318249903619289
+        }
+      },
+      "event": 44,
+      "target": 1
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.007483936846256256,
+          "persistence_seconds": 0.00041466602124273777,
+          "reconstruction_seconds": 0.010707687120884657,
+          "record_bytes": 21731.0,
+          "verification_seconds": 0.006827146513387561
+        },
+        "changed": {
+          "discovery_seconds": 0.007458333624526858,
+          "persistence_seconds": 0.00043420796282589436,
+          "reconstruction_seconds": 0.010707833338528872,
+          "record_bytes": 21731.0,
+          "verification_seconds": 0.006915686884894967
+        }
+      },
+      "event": 45,
+      "target": 1
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.005206104135140777,
+          "persistence_seconds": 0.0002660835161805153,
+          "reconstruction_seconds": 0.01534118759445846,
+          "record_bytes": 7439.0,
+          "verification_seconds": 0.004494166933000088
+        },
+        "changed": {
+          "discovery_seconds": 0.004756707698106766,
+          "persistence_seconds": 0.0002296045422554016,
+          "reconstruction_seconds": 0.015680208569392562,
+          "record_bytes": 52.0,
+          "verification_seconds": 0.004527729470282793
+        }
+      },
+      "event": 17,
+      "target": 28
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.004649916663765907,
+          "persistence_seconds": 0.00020697899162769318,
+          "reconstruction_seconds": 0.012459395453333855,
+          "record_bytes": 7038.0,
+          "verification_seconds": 0.004032229073345661
+        },
+        "changed": {
+          "discovery_seconds": 0.004689041990786791,
+          "persistence_seconds": 0.00022600009106099606,
+          "reconstruction_seconds": 0.01260968716815114,
+          "record_bytes": 7038.0,
+          "verification_seconds": 0.004059062572196126
+        }
+      },
+      "event": 18,
+      "target": 28
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.0040564381051808596,
+          "persistence_seconds": 0.00022833351977169514,
+          "reconstruction_seconds": 0.010375020559877157,
+          "record_bytes": 7063.0,
+          "verification_seconds": 0.0035133748315274715
+        },
+        "changed": {
+          "discovery_seconds": 0.0040714165661484,
+          "persistence_seconds": 0.00022085430100560188,
+          "reconstruction_seconds": 0.010354958474636078,
+          "record_bytes": 7063.0,
+          "verification_seconds": 0.0035029996652156115
+        }
+      },
+      "event": 19,
+      "target": 28
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.011202353984117508,
+          "persistence_seconds": 0.0003457919228821993,
+          "reconstruction_seconds": 0.03581427107565105,
+          "record_bytes": 17843.0,
+          "verification_seconds": 0.010272603947669268
+        },
+        "changed": {
+          "discovery_seconds": 0.010823562508448958,
+          "persistence_seconds": 0.00044314609840512276,
+          "reconstruction_seconds": 0.03573150001466274,
+          "record_bytes": 17843.0,
+          "verification_seconds": 0.009797937702387571
+        }
+      },
+      "event": 0,
+      "target": 37
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.010839374735951424,
+          "persistence_seconds": 0.0003815414384007454,
+          "reconstruction_seconds": 0.034245541552081704,
+          "record_bytes": 18673.0,
+          "verification_seconds": 0.009760042186826468
+        },
+        "changed": {
+          "discovery_seconds": 0.010398583021014929,
+          "persistence_seconds": 0.0003158748149871826,
+          "reconstruction_seconds": 0.03340127062983811,
+          "record_bytes": 18673.0,
+          "verification_seconds": 0.009383375057950616
+        }
+      },
+      "event": 1,
+      "target": 37
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.010446625063195825,
+          "persistence_seconds": 0.0004903539083898067,
+          "reconstruction_seconds": 0.026796250138431787,
+          "record_bytes": 21995.0,
+          "verification_seconds": 0.009925354504957795
+        },
+        "changed": {
+          "discovery_seconds": 0.010280354414135218,
+          "persistence_seconds": 0.0003837081603705883,
+          "reconstruction_seconds": 0.026250687893480062,
+          "record_bytes": 21995.0,
+          "verification_seconds": 0.009548000060021877
+        }
+      },
+      "event": 20,
+      "target": 37
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.008677875623106956,
+          "persistence_seconds": 0.00036170845851302147,
+          "reconstruction_seconds": 0.024182312190532684,
+          "record_bytes": 16911.0,
+          "verification_seconds": 0.007895666640251875
+        },
+        "changed": {
+          "discovery_seconds": 0.00773593713529408,
+          "persistence_seconds": 0.0002757918555289507,
+          "reconstruction_seconds": 0.02353627048432827,
+          "record_bytes": 52.0,
+          "verification_seconds": 0.007848604349419475
+        }
+      },
+      "event": 39,
+      "target": 37
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.008477417286485434,
+          "persistence_seconds": 0.00032302108593285084,
+          "reconstruction_seconds": 0.020135270431637764,
+          "record_bytes": 17172.0,
+          "verification_seconds": 0.007438937434926629
+        },
+        "changed": {
+          "discovery_seconds": 0.008331896038725972,
+          "persistence_seconds": 0.0002973752561956644,
+          "reconstruction_seconds": 0.019732499960809946,
+          "record_bytes": 17172.0,
+          "verification_seconds": 0.007287521148100495
+        }
+      },
+      "event": 40,
+      "target": 37
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.01427268679253757,
+          "persistence_seconds": 0.0003929794766008854,
+          "reconstruction_seconds": 0.05867208284325898,
+          "record_bytes": 15932.0,
+          "verification_seconds": 0.012992999982088804
+        },
+        "changed": {
+          "discovery_seconds": 0.012969687581062317,
+          "persistence_seconds": 0.0003131246194243431,
+          "reconstruction_seconds": 0.05771539593115449,
+          "record_bytes": 52.0,
+          "verification_seconds": 0.012763103935867548
+        }
+      },
+      "event": 0,
+      "target": 40
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.007898937677964568,
+          "persistence_seconds": 0.0008623539470136166,
+          "reconstruction_seconds": 0.027834541629999876,
+          "record_bytes": 9157.0,
+          "verification_seconds": 0.007083853706717491
+        },
+        "changed": {
+          "discovery_seconds": 0.00726127065718174,
+          "persistence_seconds": 0.00036112498492002487,
+          "reconstruction_seconds": 0.02765091648325324,
+          "record_bytes": 52.0,
+          "verification_seconds": 0.007105604046955705
+        }
+      },
+      "event": 0,
+      "target": 61
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.0063680624589324,
+          "persistence_seconds": 0.0002912296913564205,
+          "reconstruction_seconds": 0.018987521063536406,
+          "record_bytes": 10959.0,
+          "verification_seconds": 0.0058438959531486034
+        },
+        "changed": {
+          "discovery_seconds": 0.006411541486158967,
+          "persistence_seconds": 0.0003015210386365652,
+          "reconstruction_seconds": 0.019063666462898254,
+          "record_bytes": 10959.0,
+          "verification_seconds": 0.005881499964743853
+        }
+      },
+      "event": 1,
+      "target": 61
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.005000354256480932,
+          "persistence_seconds": 0.00022535398602485657,
+          "reconstruction_seconds": 0.014308791840448976,
+          "record_bytes": 8160.0,
+          "verification_seconds": 0.004349812865257263
+        },
+        "changed": {
+          "discovery_seconds": 0.004421438090503216,
+          "persistence_seconds": 0.00017008325085043907,
+          "reconstruction_seconds": 0.014417354250326753,
+          "record_bytes": 52.0,
+          "verification_seconds": 0.004381041508167982
+        }
+      },
+      "event": 21,
+      "target": 61
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.0071323337033391,
+          "persistence_seconds": 0.00020622950978577137,
+          "reconstruction_seconds": 0.02267431258223951,
+          "record_bytes": 9008.0,
+          "verification_seconds": 0.006264375057071447
+        },
+        "changed": {
+          "discovery_seconds": 0.006272728554904461,
+          "persistence_seconds": 0.00021275016479194164,
+          "reconstruction_seconds": 0.022672625025734305,
+          "record_bytes": 52.0,
+          "verification_seconds": 0.006197333103045821
+        }
+      },
+      "event": 50,
+      "target": 61
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.006475896341726184,
+          "persistence_seconds": 0.00020887493155896664,
+          "reconstruction_seconds": 0.019341499311849475,
+          "record_bytes": 8575.0,
+          "verification_seconds": 0.005592812551185489
+        },
+        "changed": {
+          "discovery_seconds": 0.0060185210313647985,
+          "persistence_seconds": 0.00016962457448244095,
+          "reconstruction_seconds": 0.01921066641807556,
+          "record_bytes": 52.0,
+          "verification_seconds": 0.005647729383781552
+        }
+      },
+      "event": 51,
+      "target": 61
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.005996020743623376,
+          "persistence_seconds": 0.00021060393191874027,
+          "reconstruction_seconds": 0.016037166584283113,
+          "record_bytes": 8300.0,
+          "verification_seconds": 0.005309958476573229
+        },
+        "changed": {
+          "discovery_seconds": 0.006227145902812481,
+          "persistence_seconds": 0.00020804163068532944,
+          "reconstruction_seconds": 0.016370896017178893,
+          "record_bytes": 8300.0,
+          "verification_seconds": 0.005425333045423031
+        }
+      },
+      "event": 52,
+      "target": 61
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.005226853769272566,
+          "persistence_seconds": 0.00018918723799288273,
+          "reconstruction_seconds": 0.012341499561443925,
+          "record_bytes": 7929.0,
+          "verification_seconds": 0.004471146268770099
+        },
+        "changed": {
+          "discovery_seconds": 0.005407458636909723,
+          "persistence_seconds": 0.0001930000726133585,
+          "reconstruction_seconds": 0.01265929127112031,
+          "record_bytes": 7929.0,
+          "verification_seconds": 0.004744208417832851
+        }
+      },
+      "event": 60,
+      "target": 61
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.00513333291746676,
+          "persistence_seconds": 0.00018472876399755478,
+          "reconstruction_seconds": 0.012134437449276447,
+          "record_bytes": 7877.0,
+          "verification_seconds": 0.004444938153028488
+        },
+        "changed": {
+          "discovery_seconds": 0.005566958570852876,
+          "persistence_seconds": 0.00026397942565381527,
+          "reconstruction_seconds": 0.01218956196680665,
+          "record_bytes": 7877.0,
+          "verification_seconds": 0.004617063095793128
+        }
+      },
+      "event": 61,
+      "target": 61
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.004624374909326434,
+          "persistence_seconds": 0.00020002108067274094,
+          "reconstruction_seconds": 0.010801833122968674,
+          "record_bytes": 8088.0,
+          "verification_seconds": 0.004024541471153498
+        },
+        "changed": {
+          "discovery_seconds": 0.0046091454569250345,
+          "persistence_seconds": 0.00018252129666507244,
+          "reconstruction_seconds": 0.011509833158925176,
+          "record_bytes": 8088.0,
+          "verification_seconds": 0.003969375044107437
+        }
+      },
+      "event": 74,
+      "target": 61
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.005316437920555472,
+          "persistence_seconds": 0.0004223124124109745,
+          "reconstruction_seconds": 0.011995416833087802,
+          "record_bytes": 11223.0,
+          "verification_seconds": 0.004740687552839518
+        },
+        "changed": {
+          "discovery_seconds": 0.005222708219662309,
+          "persistence_seconds": 0.0005182086024433374,
+          "reconstruction_seconds": 0.011984062381088734,
+          "record_bytes": 11223.0,
+          "verification_seconds": 0.004719770513474941
+        }
+      },
+      "event": 16,
+      "target": 64
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.004944104002788663,
+          "persistence_seconds": 0.00033852062188088894,
+          "reconstruction_seconds": 0.010194479487836361,
+          "record_bytes": 11760.0,
+          "verification_seconds": 0.004545020638033748
+        },
+        "changed": {
+          "discovery_seconds": 0.004851687932386994,
+          "persistence_seconds": 0.0003181248903274536,
+          "reconstruction_seconds": 0.010138832964003086,
+          "record_bytes": 11760.0,
+          "verification_seconds": 0.004387937719002366
+        }
+      },
+      "event": 24,
+      "target": 64
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.004851749865338206,
+          "persistence_seconds": 0.0004606046713888645,
+          "reconstruction_seconds": 0.007559499936178327,
+          "record_bytes": 15956.0,
+          "verification_seconds": 0.004606874892488122
+        },
+        "changed": {
+          "discovery_seconds": 0.004868041491135955,
+          "persistence_seconds": 0.00045412452891469,
+          "reconstruction_seconds": 0.007537270430475473,
+          "record_bytes": 15956.0,
+          "verification_seconds": 0.004745020531117916
+        }
+      },
+      "event": 31,
+      "target": 64
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.011330083711072803,
+          "persistence_seconds": 0.0005026247818022966,
+          "reconstruction_seconds": 0.045900562312453985,
+          "record_bytes": 14776.0,
+          "verification_seconds": 0.010323250433430076
+        },
+        "changed": {
+          "discovery_seconds": 0.011020520469173789,
+          "persistence_seconds": 0.0005808547139167786,
+          "reconstruction_seconds": 0.04480437561869621,
+          "record_bytes": 52.0,
+          "verification_seconds": 0.010195041541010141
+        }
+      },
+      "event": 0,
+      "target": 67
+    },
+    {
+      "arms": {
+        "all": {
+          "discovery_seconds": 0.006258666981011629,
+          "persistence_seconds": 0.0004276873078197241,
+          "reconstruction_seconds": 0.014044270850718021,
+          "record_bytes": 12878.0,
+          "verification_seconds": 0.005711229285225272
+        },
+        "changed": {
+          "discovery_seconds": 0.006327770883217454,
+          "persistence_seconds": 0.00048070820048451424,
+          "reconstruction_seconds": 0.014710854506120086,
+          "record_bytes": 12878.0,
+          "verification_seconds": 0.005384979071095586
+        }
+      },
+      "event": 63,
+      "target": 67
+    }
+  ],
+  "total_events": 246,
+  "totals": {
+    "all": {
+      "complete_seconds": 1.0127804782241583,
+      "discovery_seconds": 0.21476568770594895,
+      "persistence_seconds": 0.010235291440039873,
+      "reconstruction_seconds": 0.5888159347232431,
+      "record_bytes": 391534.0,
+      "verification_seconds": 0.19211816950701177
+    },
+    "changed": {
+      "complete_seconds": 0.9922810208518058,
+      "discovery_seconds": 0.20481258304789662,
+      "persistence_seconds": 0.009508438874036074,
+      "reconstruction_seconds": 0.5823787706904113,
+      "record_bytes": 272483.0,
+      "verification_seconds": 0.190270125400275
+    }
+  }
+}

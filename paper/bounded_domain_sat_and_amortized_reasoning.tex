@@ -12371,6 +12371,95 @@ closures retain 120 additional assignments for a future bounded search. The
 present improvement reduces repeated representation work; it neither bounds
 proof size nor supplies an efficient complete partition of unrestricted SAT.
 
+\subsection{Search after a changed closure}
+\label{sec:changed-closure-probes}
+
+The next bounded round examines the 53 events left by second-layer feedback.
+Only 21 closures changed when the preceding failures were added. The control
+repeats the deterministic, complement-promoting probe order on every second
+feedback bank. The candidate first checks both proof layers and both closures,
+then compares the complete first and second banks and their fixed assignments.
+Both arms include the equality diagnostic; only the candidate skips unchanged
+cases as unresolved. On this sample the 32 skipped cases
+produce no new failed probe in the control either. Both arms refute eight events,
+yielding eight distinct native roots and recognition of 201 of the original 246
+post-binary events. All eight were already UNSAT in inspected snapshots; fresh
+local solving also proves them. Forty-five events remain unresolved.
+
+The skip is a scheduling policy, not a completeness theorem. An unresolved
+program certifies its recorded failures; it need not certify which unsuccessful
+probes were attempted. A changed budget, order or search history can therefore
+make search on an unchanged bank useful. A retained regression test supplies an
+unchanged bank with an empty history: skipping leaves it unresolved while the
+control refutes it. Neither a skip nor an open bounded search certifies SAT or
+search exhaustion. Exact search-prefix receipts and a resumable candidate cursor
+remain separate requirements for stronger reuse guarantees.
+
+Write B0 for the source plus checked guard consequences, B1 for the bank with
+original exclusions, and B2 for the bank with the next exclusions. Each original
+failed probe is checked on B0, and each next failed probe on B1. The new round
+conditions B2 on its checked complete unit closure and probes active variables.
+Its additional per-event limits are 64 assumptions, 262,144 occurrence visits
+and 256 trace steps including the closure prefix. Indexing, ranking, validation
+and earlier acquisition are additional. Residual reasons are transported to B2
+and prefixed by the saved closure trace. Opposite failed assumptions establish
+UNSAT. New failures are not premises for other probes in this round.
+
+This composition preserves soundness: every exclusion added to B1 is entailed
+by B0, and every exclusion added to B2 is entailed by B1. The checked guards
+are themselves consequences of the source. Hence every source model would
+satisfy B2, whereas the two checked opposite traces rule out both values of
+their split variable. Native reconstruction slices both causal supports and
+expands exclusion leaves through strictly decreasing proof layers before
+publishing that split. Existing binary-prefix proofs lift it to the original
+root. Both independent readers accept all sixteen unique archive/root pairs.
+No learned exclusion is admitted as an unchecked native axiom.
+
+Two opposite orders per target and arm give 32 isolated census workers; the
+pilot was exposed before timing. Skipping unchanged cases reduces assumptions
+from 2,969 to 921, occurrence visits from 111,214 to 45,964, and probe-initialization
+clause visits from 1,157,819 to 329,595. All 49 failed probes are retained.
+Summed target-mean discovery time falls from 0.26477 to 0.23367 seconds
+(11.75\%). Complete census time falls from 1.19897 to 1.17252 seconds (2.21\%).
+Source-prefix reconstruction takes 0.92847 and 0.93337 seconds respectively,
+about 80\% of complete cost; its identical paths have no algorithmic saving.
+Preparation, checking, indexing and event serialization are charged; prior
+acquisition, input loading, startup and final audits remain additional.
+
+Eight positive roots receive two opposite-order fresh/native trials each,
+with publication-only preparation reuse in the layered compiler. Summed
+case-mean compilation takes 1.55292 seconds versus 0.89211 for fresh solving,
+a 74.07\% regression. Complete trials, including warm checking, both cold
+readers and persistence, take 3.21401 versus 2.20470 seconds, a 45.78\%
+regression. Only one compile time and two complete times improve. Encoded
+record bytes fall from 4,569,461 to 3,925,230 (14.10\%), but records rise from
+379 to 1,518, and three cases grow in bytes. Causal source supports shrink from
+8,481 to 1,878 literal occurrences while reconstruction still emits 1,429
+trace splits. Discovery, seed acquisition and unresolved fallback are excluded
+from these positive-case totals. Smaller supports have not established a
+full-workload advantage over fresh solving.
+
+Exact bank and assignment comparison takes linear worst-case work in the
+compared data and retains no equality index. Skipped cases avoid residual/index
+and probe allocations, while checked histories remain resident. Searched cases
+still copy closure prefixes into failed traces. Peak census RSS is 96.85 MB
+for all cases and 96.73 MB for changed cases, providing no useful whole-process
+memory-saving evidence. Native-trial peak RSS is 69.57 MB versus 64.27 MB fresh.
+Isolated native archives can duplicate shared content; cumulative authority
+tables remain unchanged.
+
+Eight of the 45 remaining events retain 27 additional failures on B2, containing
+1,243 unit-trace steps. Their next feedback pass has not yet run. The complete
+remaining-state export is 811,351 bytes and preserves previous sources, guards,
+closures and proof layers; the eight case files total 145,557 bytes. These are
+export sizes, not RAM or lifetime-storage bounds. The other 37 open events have
+no newly failed assumption and need untested candidates or stronger interaction.
+All 1,927 tests pass, including exhaustive small-formula truth checks, guards,
+budgets, malformed warm-cache inputs, layered provenance and both cold readers.
+All 64 earlier proof blocks remain intact. Further rounds can still require
+exponentially many distinct contexts and unbounded retained history; the finite
+coverage gain supplies no polynomial construction covering unrestricted SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

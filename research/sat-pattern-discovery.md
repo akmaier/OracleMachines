@@ -5,7 +5,28 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: cheaper certification with unchanged recognition
+## Latest evidence: target changed closures without losing observed coverage
+
+[Another bounded probe round](changed-closure-probes.md) finds eight new
+refutations on the 21 changed closures. All eight native roots pass both readers;
+recognition reaches 201/246, leaving 45 unresolved. All were already UNSAT in
+inspected snapshots and fresh solving also proves them. This is measured
+recognizer coverage, not a new tractability result.
+
+Skipping the 32 unchanged cases avoids 2,048 probes with identical observed
+outcomes. Discovery falls 11.75%, complete census time only 2.21%; checking and
+prefix reconstruction remain. The skip certifies neither SAT nor search
+exhaustion. A saved unresolved proof does not certify the omitted search prefix.
+All 1,927 tests pass, including a counterexample to unconditional coverage
+preservation for such a skip policy.
+
+Eight open events retain 27 new failures with B2 provenance. Next compose these
+without new assumptions. The other 37 require untested candidates or stronger
+interaction; an exact source-bound search cursor is still missing. Native
+reconstruction remains slower than fresh solving. Resume
+`experiments/results/cnf-changed-closure-probes/checkpoint.json`.
+
+## Previous evidence: cheaper certification with unchanged recognition
 
 [Passing prepared residuals into publication](prepared-publication.md) reduces
 compilation 7.43% and complete local trial time 3.72% on all fifteen latest roots,

@@ -1,0 +1,84 @@
+{
+  "decision": "Retain the third-stage recognizer, exact skip policy and all native archives. Next compose retained failures; do not infer exhaustion from an unchanged bank.",
+  "evidence": {
+    "analysis": {
+      "path": "experiments/results/cnf-changed-closure-probes/analysis.json",
+      "sha256": "42f0b957986f8f916929a6a9363c4ee4f56ad1e00207f0e4e39872878b6b2774"
+    },
+    "cases": {
+      "path": "experiments/results/cnf-changed-closure-probes/cases.json",
+      "sha256": "4d435360894a8290b0c655fe64fcfb0b0e90cdcd57672f69b5eb6818673c3459"
+    },
+    "censuses": {
+      "path": "experiments/results/cnf-changed-closure-probes/censuses.json",
+      "sha256": "529863c9e260c266c49f569661b37d42a1039174aad930f0bea46b5059e2ac95"
+    },
+    "comparisons": {
+      "path": "experiments/results/cnf-changed-closure-probes/comparisons.json",
+      "sha256": "1577bac1934aa893ebd934a881e5474abb78ed6d673cd4ac5896eecc0422cbd0"
+    },
+    "protocol": {
+      "path": "experiments/results/cnf-changed-closure-probes/protocol.json",
+      "sha256": "d120cc086e291c6de563b58f2ee427eb25d9286df17c0ae5b12d804978c08bb9"
+    },
+    "remaining": {
+      "path": "experiments/results/cnf-changed-closure-probes/remaining.json",
+      "sha256": "b198bde84e45044b5b87c83656e5fbe3ebbbb747e61516ec7a9e9e12693f434e"
+    }
+  },
+  "limitations": [
+    "Same53 retained unresolved events, with21 changed closures and32 unchanged. Pilot exposed before timing; no holdout.",
+    "All repeats a bounded deterministic search on every B2 bank. Changed checks exact B1/B2 bank and fixed-assignment equality, skipping unchanged banks as unresolved. This is a search policy, not proof of search exhaustion or guaranteed coverage equivalence for arbitrary prior histories or budgets.",
+    "Both arms check every old seed, new seed, old closure and B2 closure. Preparation and scheduling remain charged even on skipped cases. Budgets are additional to all earlier acquisition.",
+    "Saved source-prefix reconstruction, checking, indexing and propagation are charged. Startup, input loading, earlier acquisition and final audit remain additional. Two reverse-order isolated repetitions are descriptive timings.",
+    "New failures are proofs on B2; old failures on B0 and preceding failures on B1 remain separate. Open and budget stops are unresolved, never SAT.",
+    "Native reconstruction slices supports, expands proof leaves through decreasing layers and uses publication-only preparation reuse. Native proof rules and cold readers are unchanged.",
+    "Positive-only native comparisons exclude unresolved fallback and seed acquisition. Isolated archives duplicate shared content; cumulative solver tables remain untouched. No unrestricted SAT or P-versus-NP bound."
+  ],
+  "new_refutations": 8,
+  "next_targets": [
+    "Propagate the 27 additional B2 failures in eight open events as a checked next bank, with strictly decreasing proof dependencies.",
+    "Persist exact source-bound search-prefix metadata and a candidate cursor before trying later candidates on the other37 open events.",
+    "Reuse checked source/prefix preparation, which dominates census cost; reduce native cofactor/publication work while retaining exact child checks."
+  ],
+  "observed_equal_coverage": true,
+  "recognized_events": 201,
+  "regressions": {
+    "complete_seconds": {
+      "improved": 2,
+      "regressed": [
+        "new-1-50",
+        "new-4-0",
+        "new-28-51",
+        "new-64-0",
+        "new-67-21",
+        "new-67-81"
+      ]
+    },
+    "record_bytes": {
+      "improved": 5,
+      "regressed": [
+        "new-1-50",
+        "new-4-0",
+        "new-28-51"
+      ]
+    },
+    "solve_seconds": {
+      "improved": 1,
+      "regressed": [
+        "new-1-50",
+        "new-4-0",
+        "new-28-51",
+        "new-64-0",
+        "new-67-21",
+        "new-67-49",
+        "new-67-81"
+      ]
+    }
+  },
+  "remaining_events": 45,
+  "remaining_events_with_new_failures": 8,
+  "retained_failed_probes": 27,
+  "skip_is_not_a_completeness_guarantee": true,
+  "total_events": 246
+}

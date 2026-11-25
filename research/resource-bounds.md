@@ -18,6 +18,25 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Probing changed closures](changed-closure-probes.md) charges complete seed,
+guard and closure checking before an exact bank/assignment comparison. An
+unchanged event skips search as unresolved; it does not establish exhaustion.
+The comparison has a linear worst-case bound in the compared banks/assignments.
+Active events retain the full history and additionally build a residual/index,
+with an extra cap of 64 assumptions, 262,144 occurrence visits and 256 trace
+steps including the closure prefix. Preparation, sorting and checking remain
+additional; these are per-round budgets, not lifetime bounds.
+
+On 53 exposed events, skipping 32 unchanged banks removes 2,048 assumptions and
+reduces discovery 11.75%, but total census cost only 2.21%. Eight more events
+are recognized; 45 remain open, with 27 new B2 failures retained in eight of them.
+Native compilation takes 74.07% more time and complete trials 45.78% more than
+fresh solving on the eight positives. Encoded bytes fall 14.10%, while records
+rise from 379 to 1,518. All 16 new archive/root pairs pass both readers. Neither
+peak RSS nor isolated exports establish a general memory reduction. The complete
+remaining-state export is 811,351 bytes and retains prior layers; the cumulative
+authority tables remain unchanged. No bound on arbitrary future rounds follows.
+
 [Prepared publication](prepared-publication.md) reuses a producer's immutable
 canonical triple for one exact header object, restoring ordinary normalization
 before child checks. All semantic proof checks remain. Identity-name construction

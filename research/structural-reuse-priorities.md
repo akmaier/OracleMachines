@@ -12,7 +12,31 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse child preparation; probe changed closures
+## Current investigation: compose new failures; advance the search frontier
+
+[Probing changed closures](changed-closure-probes.md) closes eight more events,
+with eight native roots accepted by both readers. Recognition reaches 201/246;
+45 events remain unresolved. Skipping 32 unchanged banks avoids 2,048 probes
+with the same observed coverage: discovery falls 11.75%, complete census time
+only 2.21%. This is a search policy, not certified exhaustion; a test preserves
+an unchanged-bank counterexample where skipped search would have helped.
+
+**Next coverage target:** eight remaining events retain 27 new failed probes on
+B2. Compose these through one checked feedback pass, retaining decreasing proof
+dependencies. The other 37 have no new failed assumption. They need untested
+candidates or interaction; implement a bound, resumable search frontier rather
+than repeat the same prefix. A saved unresolved proof program alone does not
+certify which candidates were tested.
+
+**Largest costs remain reconstruction and certification.** Source-prefix
+reconstruction is about 80% of census time. On the eight new roots, native
+compilation is 74.07% slower and complete local trials 45.78% slower than fresh
+solving, despite 14.10% fewer encoded bytes. Preserve all regressions. Reuse
+source-bound preparation and exact child cofactors before claiming net savings.
+No general memory saving or unrestricted-SAT bound follows. All 1,927 tests pass;
+resume `experiments/results/cnf-changed-closure-probes/checkpoint.json`.
+
+## Previous investigation: reuse child preparation; probe changed closures
 
 [Direct publication handoff](prepared-publication.md) reduces layered compilation
 7.43% and complete local trial time 3.72%, improving all fifteen cases with

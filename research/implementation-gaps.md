@@ -4,7 +4,17 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (25 November, prepared publication):
+Latest expansion checkpoint (25 November, changed closure probes):
+[Target the changed closures](changed-closure-probes.md). Eight additional
+refutations have native proofs checked by both readers, bringing coverage to
+201/246; 45 events remain open. Skipping 32 unchanged events saves 2,048 probes,
+11.75% discovery time and 2.21% complete census time. The scheduling policy does
+not certify search exhaustion. All 1,927 tests pass. Native compilation still
+regresses against fresh solving. Next compose 27 new failed probes retained in
+eight open events, and retain a cursor for untested candidates in the others.
+Resume `experiments/results/cnf-changed-closure-probes/checkpoint.json`.
+
+Previous expansion checkpoint (25 November, prepared publication):
 [Reuse the normalizer result at publication](prepared-publication.md). Compilation
 falls 7.43% and complete local trials 3.72% on all fifteen cases. All native proof
 payloads and rule checks stay identical; all 1,919 tests pass. Extra unchanged-context

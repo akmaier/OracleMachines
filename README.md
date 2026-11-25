@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Probe changed closures](research/changed-closure-probes.md). Eight more events
+have verified native proofs, reaching 201/246 recognized events; 45 remain open.
+Skipping unchanged cases avoids 2,048 probes and reduces discovery 11.75%, but
+complete census time only 2.21%. Native compilation remains slower than fresh
+solving. All 1,927 tests pass. Next: compose the 27 new failures retained in eight
+open cases and advance search beyond previously tested candidates.
+
+Previous:
+
 [Reuse prepared residuals at publication](research/prepared-publication.md).
 Compilation falls 7.43% and complete local trial time 3.72% on the fifteen latest
 roots, with identical proofs and checks; all 1,919 tests pass. Coverage and storage

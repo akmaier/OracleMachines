@@ -12828,6 +12828,58 @@ compiler as the measured certificate baseline. The other 16 cases require later
 candidates or stronger interaction. These results do not establish an efficient
 partition or a uniform polynomial algorithm for unrestricted SAT.
 
+\subsection{Composition of fourth-bank failures}
+The 69 retained failed probes on $B_4$ supply checked exclusions in a fifth bank
+$B_5$. One unconditional propagation per event refutes four additional events,
+with no new assumed probes. All four distinct native certificates pass both
+independent readers. Sampled recognition reaches 221 of 246 events, leaving 25
+unresolved. These four formulas already had negative answers in the inspected
+reference snapshot: the gain is a newly certified structural route, not four
+previously unknown truth values. Open-history claims supply no proof axioms.
+
+Before appending an exclusion, its failed-assumption trace is checked on $B_4$,
+which does not contain that new exclusion as an assumed axiom. Native proof
+construction expands used derivations through strictly decreasing banks from
+$B_5$ to $B_0$. Support slicing retains required source clauses and remaps and
+checks the compacted traces. Bounded direct-unit shortcuts use only the actual
+canonical source residual and fall back to the layered derivation when open or
+interrupted. The native proof rules are unchanged.
+
+Two opposite-order repetitions per target give census times of $0.74783$
+seconds for the $B_4$ control and $0.75261$ for $B_5$ feedback. Thus this coverage
+gain is not a discovery speedup. Reconstruction takes $0.55531$ seconds, about
+$74\%$ of the feedback census. Historical acquisition, startup/loading, final
+audit and the separate open-closure diagnostic are additional. Both arms check
+all provenance and construct $B_5$; only the propagated bank differs.
+
+On the four positive roots, 24 isolated trials compare fresh bounded solving,
+the $B_5$ compiler with direct-unit shortcuts disabled, and the compiler with
+shortcuts enabled. Summed per-root mean complete times, including warm checks,
+both cold readers and persistence, are respectively $2.25891$, $5.17953$ and
+$0.60201$ seconds. Encoded key/payload bytes are respectively 4,488,235,
+6,733,895 and 834,744, with 346, 2,172 and 215 records. Direct shortcuts improve
+all four cases: complete time falls $73.35\%$ and bytes $81.40\%$ against fresh
+solving. Maximum process memory also falls, but warm checking of the layered
+provenance remains more expensive. Earlier acquisition/discovery and unresolved
+fallback are excluded, so this is not a complete-workload saving theorem.
+
+The disabled compiler preserves a substantial expansion regression. Support
+slicing alone reduces 5,192 source literal occurrences to 1,322, yet produces
+2,123 native splits. With direct units, 95 of 185 attempts close a residual;
+splits fall to 106 and frame constructions from 4,334 to 217. All 12 unique
+archive/root pairs pass independent replay. Separate archives can duplicate
+shared records, and these byte sums are not lifetime database sizes.
+
+Nine remaining closures gain 85 assignments, including 49 beyond their 36 new
+exclusion variables. The other sixteen remain unchanged. The complete open
+export contains 151 assignments and occupies 1,199,685 bytes; it is smaller than
+the previous export partly because four closed cases are removed. All earlier
+exports remain preserved. The next discovery step is newly bound probing on
+the stronger $B_5$ banks and later candidates on unchanged banks. Prior $B_4$
+history cannot skip candidates on changed banks. All 1,977 tests pass, but no
+uniform bound on unrestricted-SAT construction, future contexts or lifetime
+storage follows from this finite experiment.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

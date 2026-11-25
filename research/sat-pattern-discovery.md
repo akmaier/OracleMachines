@@ -5,7 +5,28 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: a fresh B4 frontier exposes consequences, not new coverage
+## Latest evidence: checked B4 consequences interact in a fifth bank
+
+[B4-failure composition](b4-cursor-feedback.md) refutes four more sampled events
+without new assumed probes. All four native roots pass both readers, reaching
+221/246 recognition with 25 unresolved. All four had UNSAT answers in the
+reference snapshot; the gain is a new certified structural route. All 1,977
+tests pass, with earlier proofs and artifacts preserved.
+
+Nine open B5 closures gain 85 assignments, 49 beyond the 36 explicit new
+exclusion variables. Next probe these stronger banks with fresh exact bindings;
+old B4 candidate history cannot skip changed B5 candidates. For sixteen unchanged
+cases, advance the preserved B4 frontier beyond its first 64 candidates or
+investigate stronger interaction. Resume
+`experiments/results/cnf-b4-cursor-feedback/checkpoint.json`.
+
+Direct-unit certificates improve all four positive cases versus fresh solving,
+but acquisition/discovery and unresolved fallback remain additional. Discovery
+itself has a small timing regression; reconstruction is about 74% of its census.
+Finite coverage and cheaper certificates do not give a uniform efficient
+partition of all CNFs.
+
+## Previous evidence: a fresh B4 frontier exposes consequences, not new coverage
 
 [Fresh B4 cursors](b4-probe-cursor.md) find 69 checked failures in 13 open events.
 There are no direct refutations: sampled coverage remains 217/246, with 29 open.

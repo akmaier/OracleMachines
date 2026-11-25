@@ -4,7 +4,19 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (25 November, fresh B4 cursor):
+Latest expansion checkpoint (25 November, B4-failure composition):
+[Compose the retained B4 consequences](b4-cursor-feedback.md). Four new native
+roots pass both readers without new assumed probes, reaching 221/246 sampled
+recognition with 25 unresolved. Direct-unit certificates improve all four
+positive cases versus fresh solving, but prior acquisition and discovery are
+additional. All 1,977 tests pass; earlier source/artifact ledgers and 64 proof
+blocks remain unchanged. Next probe the nine stronger B5 closures, which gain
+85 assignments, and advance the preserved frontier for sixteen unchanged cases.
+Repeated reconstruction remains the main census cost. Resume
+`experiments/results/cnf-b4-cursor-feedback/checkpoint.json`. Production defaults
+and cumulative authority tables remain unchanged; new archives are supplemental.
+
+Previous expansion checkpoint (25 November, fresh B4 cursor):
 [Probe the strengthened banks](b4-probe-cursor.md). Fresh exact B4 bindings expose
 69 checked failures in 13 cases without direct refutations. Coverage remains
 217/246. Changed-only search avoids 640 probes; complete census time falls only

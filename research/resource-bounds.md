@@ -18,6 +18,23 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[B4-failure composition](b4-cursor-feedback.md) checks and appends 69 exclusions,
+then runs one unconditional B5 propagation per case, with zero new assumed
+probes. It refutes four events and strengthens nine other closures by 85
+assignments. Full provenance validation, clause-map construction/sorting, source
+reconstruction and indexing remain additional to the propagation allowance.
+Dependencies strictly decrease through six banks, but future proof expansion
+and context counts have no general polynomial bound.
+
+On four gained roots, direct-unit compilation takes 0.60201 seconds complete
+versus 2.25891 fresh and 5.17953 with shortcuts disabled; encoded bytes are
+834,744 versus 4,488,235 and 6,733,895. All four improve, with smaller peak
+process RSS, but these are positive-only trials excluding acquisition/discovery
+and unresolved fallback. The 25-case open export is 1,199,685 bytes; its reduction
+includes four removed closed cases, not same-set compression. Older artifacts
+remain preserved and total history grows. Discovery census time slightly
+regresses, with reconstruction about 74% of the feedback census.
+
 [Fresh B4 cursors](b4-probe-cursor.md) retain exact source/bank/closure/policy
 bindings, completed candidates and checked failure traces. Q probes on a residual
 with C clauses still cost O(QC) initialization plus at most W charged occurrence

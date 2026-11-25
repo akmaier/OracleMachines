@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Compose B4 failures](research/b4-cursor-feedback.md): four more events obtain
+checked native refutations, reaching 221/246 sampled coverage with 25 unresolved.
+On all four gained roots, direct-unit certificates beat fresh bounded solving;
+complete positive trial time falls 73.35% and bytes 81.40%, excluding historical
+acquisition and discovery. All 1,977 tests pass. Nine open B5 closures gain 85
+assignments; these and later candidates in sixteen unchanged cases are next.
+
+Previous:
+
 [Fresh B4 frontiers](research/b4-probe-cursor.md) expose 69 checked failures in
 13 open cases, with no direct refutations. Changed-only probing avoids 640
 assumptions with the same observed failures; complete census time improves

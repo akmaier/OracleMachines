@@ -12,7 +12,31 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: compose new B4 failures and advance open frontiers
+## Current investigation: nine stronger B5 closures and sixteen later frontiers
+
+[Composing B4 failures](b4-cursor-feedback.md) closes four events with no new
+assumed probes; four distinct native roots pass both readers. Sampled coverage
+reaches 221/246, leaving 25 unresolved. Nine open closures gain 85 assignments,
+including 49 beyond 36 explicit exclusion variables. Next probe those nine B5
+banks with fresh exact bindings, starting with `(61,1)`'s 30 added assignments.
+The sixteen unchanged cases need later candidates or stronger interaction; their
+full B4 cursors retain the first 64 tests. Avoid reacquiring an identical prefix.
+
+Direct-unit compilation improves all four positives against fresh solving:
+complete local time falls 73.35%, bytes 81.40%, and maximum process RSS also
+falls. These exclude acquisition/discovery and unresolved fallback. Disabled
+shortcuts still make complete native trials 2.29 times fresh. Retain the direct
+method as the measured baseline, with its bounded allowance and fallback.
+
+Reconstruction remains about 74% of census time; feedback discovery itself
+does not speed up. Repeated source/provenance preparation is still the largest
+avoidable runtime gap. The 1,199,685-byte open export contains fewer cases than
+before and is not a same-set compression claim. All history remains preserved.
+All 1,977 tests pass. Resume
+`experiments/results/cnf-b4-cursor-feedback/checkpoint.json`; unrestricted SAT,
+future context counts and lifetime storage bounds remain open.
+
+## Previous investigation: compose new B4 failures and advance open frontiers
 
 [B4 probing](b4-probe-cursor.md) exposes 69 checked failures in 13 of the 29 open
 events, with no direct refutations. Next compose those consequences through one

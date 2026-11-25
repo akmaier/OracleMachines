@@ -12,7 +12,38 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reuse wider checked guards at binary fixed points
+## Current investigation: reuse failed probes; reduce native proof expansion
+
+[Full-clause unit probes](wide-guard-probes.md) close 26 of the 246 remaining
+events, versus 16 with source clauses alone and 24 with binary guards. Thus only
+two event gains require wider guards beyond that control. One reusable occurrence
+index per cofactor keeps discovery near 0.96 seconds; cold reconstruction of the
+saved prefixes adds about 4.20 seconds. All 23 distinct gained roots have native
+archives, and all were already known to ordinary whole-query search.
+
+**Largest demonstrated total-cost gap:** native proof expansion. Probe-extension
+compilation takes 4.55969 seconds versus 0.71085 for ordinary local solving, and
+retains 13.79 MB versus 3.15 MB of isolated record bytes. It is slower on all
+23 cases and larger on 22. Full cofactors and repeated splits need economical
+support selection before claiming an end-to-end win. The compiler remains a
+sound control, with both readers verifying every published root.
+
+**Next coverage target:** reuse the completed negative probes and test their
+untested opposites under the same budget. Of 220 remaining all-guard events,
+200 have checked exclusions. In 191 events, at least one excluded literal's
+opposite was not tried; 1,218 such complements remain. Preserve current traces
+and source bindings, avoid repeating known failures, and measure gains/losses
+against the frozen order. Their outcomes are unknown. Feed exclusions back into
+later propagation only as a separately checked step; the retained chain example
+shows that one pass does not provide this automatically. Twenty events have no
+exclusion in the tested prefix and remain a distinct gap.
+
+All 1,875 tests pass. Resume
+`experiments/results/cnf-wide-guard-probes/checkpoint.json`, retaining the native
+cost regressions, all conditional traces, and the explicit one-pass limitation.
+Earlier artifacts, cumulative banks and all 64 proof blocks are unchanged.
+
+## Previous investigation: reuse wider checked guards at binary fixed points
 
 [The root-budget frontier](shortening-budget-frontier.md) converts preparation
 savings into more certified patterns: 96 and 128 roots refute 318 and 347 of 615

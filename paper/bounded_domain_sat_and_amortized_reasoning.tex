@@ -11680,6 +11680,125 @@ comparison proofs are supplemental. This experiment expands certified detector
 coverage while preserving its unresolved class. It does not provide an efficient
 partition covering arbitrary CNF or an unrestricted-SAT complexity result.
 
+\subsection{Reusing checked guards in full-clause unit probes}
+
+The binary-budget experiment leaves 246 unresolved events, most with wider
+checked guards. We test a stronger but still bounded continuation: unit
+propagation through source clauses alone, source plus binary guards, or source
+plus all guards. Each setting uses the same source-based ordering of both signs
+of every variable. It runs one unconditional probe and at most 64 single-literal
+assumptions, with a shared cap of 262,144 occurrence visits and a maximum of
+256 unit steps per trace. Newly proved exclusions are recorded but are not fed
+back into later probes. A contradiction without an assumption, or contradictions
+under both signs of one variable, gives a refutation. All other outcomes remain
+unresolved rather than SAT.
+
+One clause-occurrence index is constructed for the exact cofactor and guard set
+and reused across probes. Each probe initializes clause lengths, satisfaction
+flags, XOR summaries and a unit queue. Removing assigned-false occurrences from
+a clause's XOR summary identifies its last unassigned literal when the clause
+becomes unit. This is an indexing operation, not an affine inference rule.
+An edit to the source or guard set requires new preparation.
+
+Every guard retains a source-only conditional unit proof. The independent
+program checker reconstructs the extended clause bank and checks each unit
+reason and final conflict. Extended clauses are not native axioms. If a trace
+uses a consequence C to force literal l, all other literals of C are already
+false. Assigning not-l therefore falsifies C completely, so its original
+conditional proof refutes that branch using source clauses alone. A native split
+joins this exclusion to the checked continuation. The terminal conflict uses the
+same construction, and two opposite failed assumptions join at their variable.
+Existing binary-prefix steps are checked and lifted back to the original local
+source. Normalization may remove a split variable; in that case the excluded
+child must be exactly the current cofactor. Only existing empty, unit and split
+proof rules are published. Proof checks precede archive lookup or publication.
+
+Forty-eight isolated census workers compare the three settings over eight
+targets with two alternating repetitions, retaining all 246 events. Mean times
+summed over targets and refutation counts are:
+\begin{center}
+\begin{tabular}{lrrrr}
+\hline
+Clause bank & Events & Discovery (s) & Reconstruction (s) & Complete (s) \\
+\hline
+Source & 16 & 0.95776 & 4.22074 & 5.20112 \\
+Source and binary guards & 24 & 0.97409 & 4.26073 & 5.25755 \\
+Source and all guards & 26 & 0.96247 & 4.19671 & 5.18191 \\
+\hline
+\end{tabular}
+\end{center}
+Reconstruction includes event binding and independent replay of the saved binary
+prefix. Discovery includes source and guard validation, index construction,
+initialization and propagation. Earlier binary discovery, original acquisition,
+process startup, input loading and final preservation audits remain additional.
+These are continuations from saved states, not a live whole-query comparison.
+
+No source-control success is lost by adding binary guards in this sample, and
+no binary-guard success is lost by adding all guards. Wider guards add only two
+events beyond the binary-guard control. Most recognition gain therefore comes
+from propagating through wider source clauses. The small timing differences do
+not establish a stable speed advantage. The source, binary-guard and all-guard
+settings retain 1,760, 1,907 and 1,946 successful conditional traces, respectively;
+each trace is checked, but these counts depend on early stopping at refutation.
+
+The all-guard setting builds 246 indices over 258,398 literal occurrences and
+performs 15,458 probes, including unconditional probes. It initializes 5,834,594
+clause slots and visits 1,054,393 indexed occurrences. The largest index has
+1,809 literal occurrences. Maximum occurrence visits for one event are 9,848,
+well below the work cap; all 220 remaining events hit the 64-assumption cap.
+Census process RSS is about 82.6--82.7 MB across settings and includes interpreter
+and input state.
+
+For C clauses and L occurrences in the fixed extended bank, index preparation
+uses $O(C+L)$ word work and storage. A complete probe initializes $O(C)$ state
+and visits each assigned variable's occurrences at most once, giving
+$O(C+L)$ word work. For P probes, the resulting bound is
+$O(C+L+P(C+L))$, plus source/guard checks and retained traces. Successful traces
+can require $O(PV)$ words for V variables. The occurrence cap excludes index
+construction, initialization, source checking and native reconstruction. Scalar
+counts are not byte bounds, and none of these bounds establishes complete
+arbitrary-CNF coverage.
+
+The 26 additional refuted events represent 23 distinct local roots. All already
+have checked UNSAT results in ordinary whole-query snapshots. Ninety-two isolated
+fresh/extension workers compare their certificates with two alternating
+repetitions. Both methods refute every case, both independent readers accept all
+six authority tables, repeated records match, and warm replay changes nothing.
+The audit checks 46 distinct archive/root pairs.
+
+The native compilation cost is a substantial regression. Ordinary solving takes
+0.71085 seconds against 4.55969 for extension compilation; warm verification
+takes 0.03377 against 0.27066, cold verification 0.90518 against 4.14027, and
+persistence 0.23816 against 1.20253. Complete local trials take 1.97290 and
+10.24679 seconds, before continuation discovery and reconstruction. Extension
+compilation is slower on all 23 cases and retains more record bytes on 22.
+It stores 13,789,150 key/payload bytes in 1,726 records, against 3,145,434 bytes
+in 315 ordinary records. Full cofactors recur through many native splits;
+this compiler has no support-slicing optimization. These are isolated-database
+sums and can duplicate shared subproofs. The cumulative bank remains unchanged,
+with supplemental native archives preserving the new comparisons. More
+recognized patterns therefore do not establish an end-to-end efficiency gain.
+
+The retained exclusions identify a more specific next opportunity. Of the 220
+remaining all-guard events, 200 have a checked exclusion. Their programs contain
+1,602 successful conditional traces. For 1,218 of these, the opposite assumption
+was not tested within the budget; such candidates occur in 191 events. Their
+outcomes remain unknown. Reusing the known failure and prioritizing its untested
+opposite can be compared with the frozen ordering under the same allowance,
+without repeating the certified failed branch. These traces are preserved and
+checked but are not all separately materialized in native archives. Iterative
+feedback of exclusions and economical native support selection remain separate
+obligations. Twenty events have no exclusion in the tested prefix.
+
+The initial test incorrectly expected one pass to close a multi-round chain.
+Its failed attempt is retained, and a permanent regression now checks that the
+case remains unresolved despite valid exclusions. Tests also compare the index
+with scan propagation, check small random CNFs against exhaustive truth, transport
+signed guards, reject malformed evidence, and verify prefix lifting and cold
+replay. All 1,875 tests pass. Earlier proof blocks and artifacts remain unchanged.
+This is a checked extension of bounded pattern discovery, with explicit failures
+and proof costs, not an unrestricted-SAT complexity conclusion.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

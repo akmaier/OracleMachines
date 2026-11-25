@@ -18,6 +18,17 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+The [guarded unit-probe experiment](wide-guard-probes.md) builds one fixed
+clause-occurrence index and reuses it across P probes. For C clauses and L literal
+occurrences, preparation costs O(C+L) word work/space; each probe initializes O(C)
+state and visits each assigned variable's occurrences at most once, giving
+O(C+L) work. Retained successful traces can require O(PV) words for V variables.
+Source/guard validation, copying, index preparation and proof reconstruction are
+additional to the occurrence-visit cap. Native reconstruction uses source-only
+leaves and splits, currently retaining full cofactors; measured proof bytes grow
+rather than shrink. Neither bounded probing nor its unresolved outcome decides
+arbitrary SAT or supplies a total-work/RAM guarantee for the complete solver.
+
 The [root-budget frontier](shortening-budget-frontier.md) keeps all other limits
 fixed while increasing fresh BFS roots from 64 to 96/128/256. Completed programs
 are preserved because the limit only stops the same deterministic execution.

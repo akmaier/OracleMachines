@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (25 November, discovery-budget frontier):
+Latest expansion checkpoint (25 November, wider-clause unit probes):
+[Reuse checked guards in bounded propagation](wide-guard-probes.md). Source-only,
+binary-guard and all-guard controls close 16/24/26 remaining events. The 23 distinct
+roots have native proof archives; compilation is slower on all cases than ordinary
+local solving and larger on 22. All 1,875 tests pass. Next reuse checked failed
+probes to test untried opposites in 191 remaining events, then address iterative
+feedback and full-cofactor proof expansion as separate gaps. Resume
+`experiments/results/cnf-wide-guard-probes/checkpoint.json`.
+
+Previous expansion checkpoint (25 November, discovery-budget frontier):
 [Spend preparation savings on certified coverage](shortening-budget-frontier.md).
 Recognition rises from 266 to 318/347/369 events at 96/128/256 roots; all earlier
 successes remain. The 96/128 measured costs are below the older 64-root control,

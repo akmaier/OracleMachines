@@ -5,7 +5,23 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: budget limits give way to missing wider interactions
+## Latest evidence: full-clause probes reveal useful but costly exclusions
+
+[One-pass guarded unit propagation](wide-guard-probes.md) refutes 26 previously
+unresolved events, compared with 16 using source clauses and 24 adding only binary
+guards. Each successful trace is bound to source-only evidence; 23 distinct roots
+have native archives. All were already known to ordinary whole-query search.
+Native compilation is substantially slower and larger than ordinary local proof
+search, so this is certified detector coverage without a whole-query speedup.
+
+Next reuse the saved failed probes to prioritize untested opposite assumptions:
+191 of 220 remaining events have such candidates. Preserve the 1,602 checked
+exclusions in unresolved cases, keep untested results unknown, and compare under
+the same budget. Iterative feedback and compact native support are separate
+obligations. The retained one-pass chain counterexample prevents conflating these
+steps. Resume `experiments/results/cnf-wide-guard-probes/checkpoint.json`.
+
+## Previous evidence: budget limits give way to missing wider interactions
 
 [The fixed budget sweep](shortening-budget-frontier.md) raises recognition from
 266 of 615 events at 64 roots to 318, 347 and 369 at 96, 128 and 256. Earlier

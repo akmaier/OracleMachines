@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Reuse wider guards in bounded unit probes](research/wide-guard-probes.md).
+The new detector closes 26 remaining events, versus 24 with binary guards and
+16 with source clauses alone. All 23 distinct gained roots have checked native
+proofs; all 1,875 tests pass. Proof reconstruction is substantially more expensive
+than ordinary local solving. Next: reuse failed probes to test untried opposites,
+while retaining the proof-cost regression and unresolved cases.
+
+Previous:
 [Convert preparation savings into broader discovery](research/shortening-budget-frontier.md).
 A fixed search-budget sweep raises recognition from 266 to 347 of 615 events at
 slightly less measured cost than the older implementation, or to 369 with a small

@@ -1,0 +1,48 @@
+{
+  "cost_regression": "Extension compilation is slower on all 23 local cases and uses more record bytes on 22. Complete local trial time is 10.24679 s versus 1.97290 s for ordinary solving; isolated record bytes are 13789150 versus 3145434. All roots were already known to ordinary whole-query search.",
+  "limitations": [
+    "Most new event recognition comes from wider source-clause propagation; wider guards add only two events beyond binary guards.",
+    "The earlier binary discovery and acquisition costs are additional to this continuation benchmark.",
+    "The occurrence cap excludes preparation, per-probe initialization, checking and proof reconstruction.",
+    "No whole-query gain, compact arbitrary-SAT closure, or uniform polynomial-time conclusion is established."
+  ],
+  "next": "Reuse checked failed probes and prioritize their untested opposite assumptions under the same budget; preserve losses and charge validation/native reconstruction. Then investigate iterative exclusion feedback and economical source-support selection as separate changes.",
+  "persistence": "All earlier banks and source fingerprints remain. Successful conditional traces are stored in checked event programs; not all have separate native archives. Complete refutations have supplemental native SQLite archives with warm and independent cold verification.",
+  "remaining": {
+    "all": {
+      "events": 220,
+      "exclusions": 1602,
+      "untested_complements": 1218,
+      "with_exclusions": 200,
+      "with_untested_complements": 191
+    },
+    "binary": {
+      "events": 222,
+      "exclusions": 1594,
+      "untested_complements": 1220,
+      "with_exclusions": 200,
+      "with_untested_complements": 192
+    },
+    "source": {
+      "events": 230,
+      "exclusions": 1551,
+      "untested_complements": 1189,
+      "with_exclusions": 203,
+      "with_untested_complements": 196
+    }
+  },
+  "result": "Source, binary-guard and all-guard probes refute 16, 24 and 26 remaining events. All 23 distinct gained local roots have checked native archives; every successful conditional trace is independently checked.",
+  "retained_failure": "The initial extension test assumed one-pass probing could chain exclusions across rounds. Preserve its source/log; the corrected scope and a permanent regression retain the unresolved multi-round-chain result.",
+  "scope": "One fixed source/cofactor and guard bank per call; one shared occurrence index, one unconditional probe and at most 64 single-literal assumptions. No iterative feedback or live default change.",
+  "status": "verified optional one-pass propagation extension; native cost regression retained",
+  "validation": {
+    "earlier_proof_blocks": 64,
+    "final_sources": 1045,
+    "focused_tests": 18,
+    "full_tests": 1875,
+    "native_archive_root_audits": 46,
+    "prior_artifacts": 22276,
+    "prior_manifests": 180,
+    "prior_sources": 1040
+  }
+}

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_probe_support.py", line 99, in <module>
+    if __name__=='__main__':globals()[sys.argv[1]](Path(sys.argv[2]))
+                            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_probe_support.py", line 41, in validate
+    for key in ('result','counts','native_counts','authority_tables','digest','record_bytes'):assert r[key]==earlier[key],(index,mode,key)
+                                                                                                     ^^^^^^^^^^^^^^^^^^^^
+AssertionError: (0, 'fresh', 'result')

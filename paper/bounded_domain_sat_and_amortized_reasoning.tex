@@ -11878,6 +11878,89 @@ including the budget counterexample. Earlier sources, results and 64 proof
 blocks are preserved. These exposed-case gains establish neither an efficient
 partition of all CNFs nor a uniform polynomial solution of unrestricted SAT.
 
+\subsection{Compiling causal source supports for probe refutations}
+
+The preceding experiment improves recognition but leaves native reconstruction
+expensive. We now hold its 60 recognized local roots fixed and reduce the source
+carried through their proofs. First validate the entire original program. Then
+trace backwards from each terminal conflict, keeping only units needed by that
+conflict or by a retained reason. Replace each retained unit's dependency by the
+other variables of its reason clause. The remaining dependencies must be supplied
+by the probe assumption. If none remain, that branch gives an unconditional
+refutation and the opposite branch is unnecessary.
+
+For each retained reason, select its source clause or the complete source support
+of its checked guard. Normalize their union, transport the needed templates and
+trace indices, and check the compact program independently. Missing coordinates
+cause fallback to full compilation. The existing compiler refutes this subset,
+and one existing native component certificate lifts it to the full source.
+For UNSAT, this rule needs containment, not variable independence: a conjunction
+containing an unsatisfiable subset is unsatisfiable. Guards remain derived facts,
+never native axioms. Earlier binary-prefix reconstruction is unchanged.
+
+The dependency argument preserves every justification required by the conflict;
+including each used guard's source support preserves its provenance. Checked
+name transport and subset lifting bind the compact proof to the original input.
+The selected subset is sufficient, not proved minimum. Exact normalized support
+keys can also be reused across different supersets. A regression adds 1, 4 and
+16 irrelevant binary clauses, closing and reopening the database between queries.
+Each later query reuses the same core and adds one wrapper, preserving every
+earlier payload. Source checking and support selection still run, and wrappers
+still contain the full current formula. Arbitrary semantic equivalence is not
+recognized.
+
+Three hundred and sixty isolated workers compare fresh local solving, full
+compilation and support compilation on the same 60 roots, with two alternating
+repetitions. All methods refute all cases. Frozen controls reproduce their earlier
+deterministic results and stored contents. Mean times summed over cases are:
+\begin{center}
+\begin{tabular}{lrrr}
+\hline
+Measure & Fresh & Full & Support \\
+\hline
+Solve/compile (s) & 2.10379 & 12.56235 & 3.33724 \\
+Warm check (s) & 0.09542 & 0.58340 & 0.58335 \\
+Cold readers (s) & 2.61144 & 11.55219 & 2.83166 \\
+Persistence (s) & 0.68554 & 3.39429 & 0.63738 \\
+Complete trial (s) & 5.71311 & 28.27209 & 7.52341 \\
+Record bytes & 9,465,124 & 38,159,763 & 8,040,728 \\
+Records & 863 & 4,443 & 2,615 \\
+\hline
+\end{tabular}
+\end{center}
+Support compilation includes selection, transport, source and program checks,
+and publication. Relative to full compilation, its time falls 73.43\% and record
+bytes fall 78.93\%; all 60 cases improve on both measures. Relative to ordinary
+solving it compiles faster on 15 cases, completes local trials faster on 21, and
+retains fewer bytes on 35. Aggregate bytes are 15.05\% lower than fresh solving,
+but aggregate time remains higher. Earlier acquisition and discovery, input
+loading, startup and final preservation audits are additional. These exposed-case
+proof costs do not establish a whole-query speedup or a universal timing ratio.
+
+All selected sources are strictly smaller: aggregate clauses/literals fall from
+19,937/54,157 to 2,151/5,104. Slicing keeps 1,900 of 3,786 terminal unit steps;
+native probe splits fall from 3,846 to 1,960, while 122 binary-prefix splits remain.
+Sixty subset wrappers bind the compact proofs. Peak process RSS is 72.71 MB for
+full compilation, 67.49 MB for support compilation and 62.18 MB for fresh solving.
+These maxima include interpreter/input state. Isolated database byte sums can
+duplicate subproofs and do not measure cumulative-bank growth.
+
+For full-source size L, terminal trace length T, retained reason size R and
+traversed guard-support size G, dependency and support collection require
+$O(L+T+R+G)$ expected word work. Original-program validation, normalization,
+sorting, transport and compact-proof checking remain additional. A large selected
+support or expanding native proof can erase the benefit. The unchanged warm
+validation and remaining full-cofactor binary-prefix stages still need profiling.
+Both cold readers verify 180 unique archive/root pairs, and warm replay adds no
+authority rows. All 1,889 tests pass, including the cold superset-reuse test.
+Earlier sources, artifacts, cumulative banks and 64 proof blocks are preserved.
+
+This change reduces certification cost without expanding detector coverage.
+The 180 unresolved all-guard events remain, including 160 with 851 checked
+exclusions. Their feedback into further propagation is the next coverage
+experiment. Neither smaller certificates nor subset reuse supplies a minimum-cost
+expansion guarantee or a uniform polynomial solution of arbitrary SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -18,6 +18,18 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Causal source-support compilation](probe-support.md) replaces full-cofactor
+proof construction by a checked subset proof plus a native wrapper. For source
+size L, terminal trace length T, retained reason size R and traversed guard
+supports G, dependency/support collection uses O(L+T+R+G) expected word work;
+original validation, sorting, normalization, transport and proof checking are
+additional. Support size can still equal the whole source, and no minimum support
+is computed. The 60-case study cuts compilation time 73.43% and bytes 78.93%
+relative to the full compiler, while ordinary solving remains faster. A cold
+superset-reuse test adds one wrapper per later formula, preserving the same core;
+each wrapper still stores the full source, so this is not constant-byte expansion
+or a bounded unlimited history. Coverage and unrestricted-SAT bounds are unchanged.
+
 [Complement scheduling](complement-probes.md) adds a queue and tested-literal set
 so a failed probe can promote its untested opposite without probing any literal
 twice. For V variables and P attempted assumptions this adds O(V+P) expected word

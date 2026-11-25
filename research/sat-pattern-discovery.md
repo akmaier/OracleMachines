@@ -5,7 +5,23 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: opposite probes improve coverage; feedback remains open
+## Latest evidence: smaller certificates make further discovery cheaper
+
+[Compiling causal source supports](probe-support.md) keeps the same 60 recognized
+roots while cutting native compilation time 73.43% and record bytes 78.93%
+relative to the full compiler. All 60 cases improve and both cold readers accept
+all 180 archive/root pairs. Ordinary local solving remains faster in aggregate;
+the support compiler now uses fewer aggregate bytes. No coverage gain is claimed.
+
+Exact support keys also enable cold reuse across growing supersets: a regression
+adds only one wrapper for each later source while retaining the same core proof.
+Recognition, source/guard checks and wrapper size remain costs. The selected
+support is sufficient, not minimum. Next investigate checked feedback of the
+851 exclusions across 160 unresolved events using this cheaper certification
+path. The same 180 all-guard events remain unresolved. Resume
+`experiments/results/cnf-probe-support/checkpoint.json`.
+
+## Previous evidence: opposite probes improve coverage; feedback remains open
 
 [Prioritizing the opposite of a checked failed probe](complement-probes.md)
 raises source/binary/all recognition from 16/24/26 to 55/64/66 of 246 events with

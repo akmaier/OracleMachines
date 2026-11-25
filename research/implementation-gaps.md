@@ -4,7 +4,17 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (25 November, complement scheduling):
+Latest expansion checkpoint (25 November, causal probe supports):
+[Reduce full-cofactor proof reconstruction](probe-support.md). All 60 existing
+roots compile with smaller source supports: 73.43% less compilation time and
+78.93% fewer record bytes than the full compiler, with all 180 archive/root pairs
+checked by both readers. All 1,889 tests pass, including cold exact-core reuse
+across growing supersets. Coverage is unchanged. Ordinary solving is still faster
+in aggregate; warm validation and 122 binary-prefix splits remain. Next test
+checked exclusion feedback and profile remaining prefix/transport costs. Resume
+`experiments/results/cnf-probe-support/checkpoint.json`.
+
+Previous expansion checkpoint (25 November, complement scheduling):
 [Reuse failures to schedule their opposites](complement-probes.md). Source/binary/
 all recognition reaches 55/64/66 events, up from 16/24/26 at the same budget.
 All 37 additional roots have native archives; two were unknown in prior inspected

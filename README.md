@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Compile smaller causal source supports](research/probe-support.md).
+The same 60 recognized roots now compile 73% faster with 79% fewer proof bytes
+than the full compiler; all 1,889 tests pass. Cold reuse across growing supersets
+adds just a wrapper for each later formula. Coverage is unchanged, and ordinary
+local solving remains faster in aggregate. Next: checked exclusion feedback and
+profiling the remaining proof-construction costs.
+
+Previous:
 [Use failed probes to prioritize their opposites](research/complement-probes.md).
 The same 64-assumption budget now closes 66 of 246 remaining events, up from 26.
 All 37 additional distinct roots have checked native archives; two were unknown

@@ -12,7 +12,36 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: feed checked exclusions back; reduce proof expansion
+## Current investigation: cheaper source supports; resume checked feedback
+
+[Causal probe supports](probe-support.md) reduce the largest measured proof-cost
+gap without changing coverage. On all 60 previously recognized roots, selected
+supports cut compilation time from 12.56235 to 3.33724 seconds and encoded record
+bytes from 38.16 MB to 8.04 MB: reductions of 73.43% and 78.93%. Every case improves
+over the full compiler. All 180 archive/root pairs pass both cold readers.
+
+**Remaining cost gap:** ordinary local solving still takes only 2.10379 seconds;
+complete local trials cost 5.71311 versus 7.52341 for support compilation. The
+latter uses 15.05% fewer aggregate bytes but is slower on most cases. Warm checking
+is unchanged. Profile the 122 remaining full-cofactor binary-prefix splits and
+repeated transport/checking before extending support selection. A cold-reopen
+regression shows exact core reuse across growing supersets, with one new wrapper
+per later formula; source checking and full-source wrapper space remain charged.
+
+**Next coverage target remains checked exclusion feedback.** The same 180
+all-guard events are unresolved; 160 have 851 checked exclusions and only 14
+untested opposites. Use the cheaper compiler when testing whether these exclusions
+unlock new propagation, with explicit provenance and matched budgets. Twenty
+events have no exclusion in the attempted prefix. Do not confuse support
+compression with broader recognition or a minimum-cost guarantee.
+
+All 1,889 tests pass. Resume
+`experiments/results/cnf-probe-support/checkpoint.json`. All earlier sources,
+experiments, cumulative banks and 64 proof blocks are preserved. The selected
+supports are sufficient, not proven minimum, and exposed-case proof improvements
+do not establish a whole-query or unrestricted-SAT bound.
+
+## Previous investigation: feed checked exclusions back; reduce proof expansion
 
 [Complement scheduling](complement-probes.md) raises all-guard recognition from
 26 to 66 of the same 246 events at the same 64-assumption budget. No earlier

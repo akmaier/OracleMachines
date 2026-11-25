@@ -1,0 +1,23 @@
+"""Diagnostic only: profile the largest exposed compilation regression."""
+import cProfile,json,pstats,sys,tempfile
+from collections import Counter
+from pathlib import Path
+sys.path.insert(0,str(Path.cwd()))
+from experiments import compare_cnf_layered_feedback as s
+out=Path('experiments/results/cnf-layered-feedback');analysis=s.base.load(out/'analysis.json')
+chosen=max(analysis['summary'],key=lambda r:r['arms']['layered']['solve_seconds']-r['arms']['fresh']['solve_seconds'])
+bindings=s.base.load(out/'cases.json')['cases'];index=next(i for i,b in enumerate(bindings) if s.old.bound(b)['name']==chosen['name']);case=s.old.bound(bindings[index])
+with tempfile.TemporaryDirectory() as td:
+    solver=s.native.ResidualSolver(Path(td)/'db');counts=Counter();prof=cProfile.Profile()
+    try:
+        prof.enable();root=s.candidate.compile_extension(solver,case['source'],case['templates'],case['prefix'],case['seed'],case['closure'],case['new'],case['program'],counts);prof.disable()
+        assert root==case['root'];tables=s.old.tables(solver.db)
+        report=s.base.load(out/f'case-{index}-layered-0/report.json')
+        assert dict(counts)==report['counts'] and dict(solver.counts)==report['native_counts']
+        assert {t:s.base.key_sha(s.base.encode(sorted(v.items()))) for t,v in tables.items()}==report['digest']
+    finally:solver.close()
+prof.dump_stats(str(out/'largest-compile.prof'));stats=pstats.Stats(prof);rows=[]
+for (file,line,name),(primitive,calls,self_seconds,cumulative,callers) in stats.stats.items():
+    rows.append(dict(file=file,line=line,name=name,primitive_calls=primitive,total_calls=calls,self_seconds=self_seconds,cumulative_seconds=cumulative))
+s.base.write(out/'profile-largest.json',dict(case=bindings[index],name=chosen['name'],instrumented_seconds=stats.total_tt,functions=sorted(rows,key=lambda r:r['cumulative_seconds'],reverse=True),scope='One exposed largest-regression native compilation, instrumented separately after timed trials. Same authority digests and counters as trial. Timings are diagnostic, not a new matched performance claim; cumulative calls overlap.'))
+print(chosen['name'],stats.total_tt)

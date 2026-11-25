@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Compose the next layer of saved failed probes](research/layered-feedback.md).
+One propagation pass closes 16 more events without new assumed probes, producing
+15 verified native roots; all 1,911 tests pass. The remaining 53 cases retain
+207 assignments. Native compilation is 54% slower than ordinary solving despite
+26% fewer bytes. Next: reuse canonical cofactors and probe the 21 changed closures.
+
+Previous:
+
 [Probe the residual of a checked closure](research/closure-probes.md).
 An additional bounded round closes 47 of 116 remaining events, with 41 distinct
 new native proofs; all 1,903 tests pass. Reusing the closure halves propagation

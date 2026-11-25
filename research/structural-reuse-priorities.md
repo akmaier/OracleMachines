@@ -12,7 +12,34 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: compose the next proof layer; reuse preparation
+## Current investigation: reduce reconstruction cost; probe changed closures
+
+[Two-layer feedback](layered-feedback.md) closes 16 more events without new
+assumed probes, producing 15 distinct new native roots. All were already UNSAT
+in inspected snapshots. Recognition reaches 193/246 post-binary events; 53 remain
+open. All 30 archive/root pairs pass both independent readers.
+
+**Highest measured runtime gap:** native compilation is now 54.24% slower than
+ordinary solving (3.91085 versus 2.53550 seconds), despite 26.38% fewer record
+bytes. Complete local trials are 26.09% slower; only two of fifteen improve.
+The largest-regression profile reproduces the same authority and records 1,584
+normalizations, 1,414 restriction scans and 317 publication verifications. Next
+reuse immutable canonical cofactors and source-bound preparation while preserving
+publication checks and cold readers. Do not remove validation to create a gain.
+
+**Next coverage opportunity:** 21 open cases gain 120 checked assignments,
+including 67 beyond their new exclusion variables. Probe those changed closures
+with an explicit budget and acyclic provenance. The other 32 cases have unchanged
+closures; twenty have no exclusions at either layer. They need untested candidates
+or stronger interaction, not repetition of the same search prefix. The 53 open
+cases retain 207 assignments, 59 old exclusions and 53 new exclusions.
+
+All 1,911 tests pass. Resume
+`experiments/results/cnf-layered-feedback/checkpoint.json`. Prior results,
+cumulative banks and 64 proof blocks are preserved. Fixed layer depth validates
+this composition; it does not bound unrestricted-SAT search or future history.
+
+## Previous investigation: compose the next proof layer; reuse preparation
 
 [Probing checked residual closures](closure-probes.md) closes 47 of the 116
 remaining events, representing 41 new distinct roots. This spends an additional

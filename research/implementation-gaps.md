@@ -4,7 +4,17 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (25 November, checked closure probes):
+Latest expansion checkpoint (25 November, second-layer feedback):
+[Compose failed probes with explicit proof layers](layered-feedback.md). One
+propagation pass closes 16/69 events without new assumed probes. All 15 distinct
+new roots have native proofs and both readers accept 30 archive/root pairs.
+All 1,911 tests pass. The 53 open cases retain 207 assignments; 21 gain 120 facts
+and 32 have unchanged closures. Native compilation is 54.24% slower than ordinary
+solving despite 26.38% fewer bytes. Next reuse canonical cofactors/preparation
+under strict checking, and target bounded new probes to changed closures. Resume
+`experiments/results/cnf-layered-feedback/checkpoint.json`.
+
+Previous expansion checkpoint (25 November, checked closure probes):
 [Reuse the residual before another bounded search](closure-probes.md). An
 additional 64-assumption budget closes 47/116 remaining events, with 41 distinct
 new roots verified by both cold readers. Restart and conditioned arms agree on

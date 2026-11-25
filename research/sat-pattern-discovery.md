@@ -5,7 +5,23 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: closure reuse makes the next search round cheaper
+## Latest evidence: another checked proof layer expands recognition
+
+[Composing second-round exclusions](layered-feedback.md) closes 16 of 69
+remaining events with zero new assumed probes. The 15 distinct new native roots
+all pass both readers and were already UNSAT in inspected snapshots. The original
+post-binary sample now has 193/246 recognized events. All 1,911 tests pass.
+
+The 53 open events preserve both proof layers and 207 checked assignments. Of
+these, 21 gain 120 assignments; 32 have unchanged closures. Next probe changed
+closures with a bounded budget, while investigating untested candidates or
+interaction for unchanged ones. Native compilation regresses 54.24% against
+ordinary solving even though aggregate bytes fall 26.38%; profile-guided cofactor
+and preparation reuse is the next cost target. Resume
+`experiments/results/cnf-layered-feedback/checkpoint.json`. No unrestricted
+coverage or polynomial completeness claim follows from these finite rounds.
+
+## Previous evidence: closure reuse makes the next search round cheaper
 
 [Bounded residual probing](closure-probes.md) refutes 47 more events using an
 additional 64-assumption budget, with 41 distinct new native roots. Four were

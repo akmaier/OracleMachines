@@ -1,0 +1,43 @@
+"""One feedback pass using two acyclic layers of checked failed probes."""
+from experiments import cnf_closure_probes as prior
+from experiments.cnf_conditional_unit_support import transport,materialize
+frozen=prior.frozen;feedback=prior.feedback;support=prior.support;native=prior.native
+
+
+def add_layer(prepared,new,counts):
+    source,base,basis,first,origins=prepared
+    prior.check_program(source,first,new,counts)
+    if new['status']!='unresolved':raise ValueError('Unresolved new probe layer required')
+    second={cl:entry for cl,entry in zip(first,origins)}
+    for i,row in enumerate(new['probes']):
+        cl=(-row['assumption'],);counts['layer_exclusions']+=1
+        if cl not in second:second[cl]=dict(kind='new_probe',index=i);counts['layer_added_units']+=1
+    bank=tuple(sorted(second))
+    return (*prepared,bank,[second[cl] for cl in bank])
+
+
+def prepare(source,templates,seed,closure,new,counts):
+    prepared=prior.validate(source,templates,seed,closure,new,counts)
+    return add_layer(prepared,new,counts)
+
+
+def discover(source,templates,seed,closure,new,counts,*,mode='feedback',work_limit=262144,trace_limit=256):
+    if mode not in ('base','feedback') or any(type(v) is not int or v<1 for v in (work_limit,trace_limit)):raise ValueError('Invalid layered feedback bounds')
+    prepared=prepare(source,templates,seed,closure,new,counts)
+    bank=prepared[3] if mode=='base' else prepared[5]
+    index=frozen.UnitIndex(bank,counts);start=counts['probe_occurrence_visits']
+    try:proof=index.probe(None,counts,lambda:work_limit-(counts['probe_occurrence_visits']-start),trace_limit)
+    except frozen.ProbeLimit as error:return dict(status='unresolved',reason=str(error),trace_limit=trace_limit,proof=None,mode=mode)
+    return dict(status='refuted' if proof is not None else 'unresolved',reason='units' if proof is not None else 'open',trace_limit=trace_limit,proof=proof,mode=mode)
+
+
+def check_program(prepared,program,counts):
+    if (type(program) is not dict or set(program)!={'status','reason','trace_limit','proof','mode'} or type(program['trace_limit']) is not int or program['trace_limit']<1 or program['mode'] not in ('base','feedback')):raise ValueError('Invalid layered feedback program')
+    bank=prepared[3] if program['mode']=='base' else prepared[5]
+    if program['status']=='refuted' and program['reason']=='units':frozen.check_trace(prepared[0],bank,None,program['proof'],counts,program['trace_limit'])
+    elif not (program['status']=='unresolved' and program['reason'] in ('open','work_limit','trace_limit') and program['proof'] is None):raise ValueError('Invalid layered feedback outcome')
+
+
+def validate(source,templates,seed,closure,new,program,counts):
+    prepared=prepare(source,templates,seed,closure,new,counts);check_program(prepared,program,counts)
+    return prepared

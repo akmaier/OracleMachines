@@ -1,0 +1,15 @@
+import sys,json
+from pathlib import Path
+from collections import Counter
+sys.path.insert(0,str(Path.cwd()))
+from experiments import cnf_layered_feedback as c
+p=Path('experiments/results/cnf-layered-feedback');rows=[]
+for row in json.loads(Path('experiments/results/cnf-closure-probes/remaining.json').read_text())['rows']:
+    arms={}
+    for mode in ('base','feedback'):
+        counts=Counter();program=c.discover(row['final_source'],row['templates'],row['seed'],row['closure'],row['program'],counts,mode=mode)
+        c.validate(row['final_source'],row['templates'],row['seed'],row['closure'],row['program'],program,Counter())
+        arms[mode]=dict(program=program,counts=dict(counts))
+    rows.append(dict(target=row['target'],event=row['event'],arms=arms))
+(p/'pilot.json').write_text(json.dumps(dict(rows=rows),sort_keys=True,indent=2)+'\n')
+print({m:dict(Counter(r['arms'][m]['program']['reason'] for r in rows)) for m in ('base','feedback')})

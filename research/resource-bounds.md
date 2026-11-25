@@ -18,6 +18,21 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Second-layer feedback](layered-feedback.md) adds units whose proofs depend on
+the first feedback bank, with strictly decreasing proof dependencies. For a base
+bank of C clauses and L occurrences and U1/U2 retained units, index construction
+and complete propagation use O(C+L+U1+U2) expected word work/space; sorting,
+seed/closure/provenance checking and native expansion are additional. All three
+banks and both proof layers remain resident. Fixed layer depth does not bound
+future rounds, distinct contexts or unlimited history.
+
+The 69-event pass refutes 16 without new assumed probes. Native compilation is
+54.24% slower than ordinary solving and complete local trials 26.09% slower,
+although record bytes fall 26.38%. A largest-regression profile identifies
+repeated normalization, restriction and publication verification. The 53 misses
+retain 207 assignments; only 21 closures change. More layers need selective work
+and explicit acquisition/reconstruction accounting, not a completeness inference.
+
 [Checked residual probing](closure-probes.md) conditions a C-clause, L-occurrence
 feedback bank once, with K saved assignments, before P additional probes. A
 residual with C_r clauses and L_r occurrences takes O(L) expected word work plus

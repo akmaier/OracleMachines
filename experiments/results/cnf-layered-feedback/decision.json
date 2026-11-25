@@ -1,0 +1,80 @@
+{
+  "evidence": {
+    "analysis": {
+      "path": "experiments/results/cnf-layered-feedback/analysis.json",
+      "sha256": "4c9ef4b4a8ecfcef7d1307cf23fca242330537aecadaef543711fcc825f83878"
+    },
+    "profile-largest": {
+      "path": "experiments/results/cnf-layered-feedback/profile-largest.json",
+      "sha256": "72a06b6cb1612a948ffc73d6dd05cd2e748500e8bca9cc64e347e29cfcdff1ce"
+    },
+    "protocol": {
+      "path": "experiments/results/cnf-layered-feedback/protocol.json",
+      "sha256": "512f5089dbcf0c81133ec81abe3f15d5cb074d2b14eba5d6b877a429f64a378c"
+    },
+    "remaining": {
+      "path": "experiments/results/cnf-layered-feedback/remaining.json",
+      "sha256": "9b0d66ef3924bb67e4256e80e55f6d1ada54d47362169c6436316ffccc9a13cf"
+    },
+    "remaining-closures": {
+      "path": "experiments/results/cnf-layered-feedback/remaining-closures.json",
+      "sha256": "c286b8cc4644b96857c06dbab6e8c1242167ed957aa530df48d8d7d6ad277fe0"
+    },
+    "support-plans": {
+      "path": "experiments/results/cnf-layered-feedback/support-plans.json",
+      "sha256": "c4602479e9484f1d588efa0494df391969e5f84855eae8b55647c6c8a9cfd9ca"
+    }
+  },
+  "findings": {
+    "additional_assignments": 120,
+    "additional_beyond_new_exclusions": 67,
+    "changed_open_closures": 21,
+    "complete_local_trial_increase_percent": 26.089677509955678,
+    "encoded_record_byte_reduction_percent": 26.376640576761968,
+    "native_compile_increase_percent": 54.243369977592515,
+    "new_assumed_probes": 0,
+    "new_distinct_roots": 15,
+    "new_event_refutations": 16,
+    "original_sample_events": 246,
+    "previous_snapshot_unknown_roots": 0,
+    "recognized_original_sample_events": 193,
+    "remaining_assignments": 207,
+    "remaining_events": 53
+  },
+  "limitations": [
+    "Same69 unresolved closure-probe events. Both arms validate the old seeds, old closure and new probe layer, build both banks, then run one unconditional propagation pass; zero new assumed probes.",
+    "Base propagates the old feedback bank. Feedback additionally adds the complements of new failed probes. Each new proof is checked on the old feedback bank, and every old proof on the original bank; dependencies decrease strictly.",
+    "Two alternating isolated repetitions per target and mode. Pilot outcomes exposed before timing; no independent holdout. The first pilot repeated new-layer checking; its data and source are retained before removing that duplicate check.",
+    "Reconstruction, checking, bank/index preparation and propagation are charged; prior acquisition, closure diagnostics, startup/loading and final audits are additional.",
+    "One feedback pass, no new assumed probes or iteration to an unrestricted fixed point. Open or bounded outputs are unresolved, never SAT.",
+    "Native proof reconstruction slices source supports and expands used old/new exclusion leaves under stronger contexts through existing native rules; no learned axioms or production-default change.",
+    "Fresh/layered comparisons cover all distinct gained roots, including warm checks, both cold readers and persistence. Positive-only costs exclude fallback; isolated archive byte sums may duplicate shared proofs.",
+    "All15 gained roots already have UNSAT status in the inspected snapshots. This is finite detector coverage, not a new ordinary-SAT verdict or arbitrary-CNF guarantee.",
+    "Native compilation and complete local trials regress on13 of15 cases. The positive-only subtotal after continuation is also slower and excludes acquisition and unresolved fallback.",
+    "Three banks, both proof layers and their closures are retained. Strictly decreasing proof dependencies establish sound composition, not compactness or polynomial completeness of future rounds."
+  ],
+  "next_targets": [
+    {
+      "priority": 1,
+      "task": "Reuse immutable canonical cofactors and checked preparation in native reconstruction. Largest-regression profile records1584 normalizations,1414 restriction scans and317 publication verifications. Keep publication/cold checks and measure cache space."
+    },
+    {
+      "priority": 2,
+      "task": "Probe the21 changed closures with an explicit new budget, retaining all earlier proof layers and the120 additional assignments."
+    },
+    {
+      "priority": 3,
+      "task": "For32 unchanged cases, investigate untested candidates or stronger interaction;20 have no exclusions at either layer. Repeating identical probe prefixes is unproductive."
+    }
+  ],
+  "preservation": {
+    "cumulative_authority_unchanged": true,
+    "existing_manuscript_proof_blocks_unchanged": 64,
+    "initial_pilot_and_source_preserved": true,
+    "new_archives": "supplemental only",
+    "prior_artifacts": 24953,
+    "prior_manifests": 185,
+    "prior_sources": 1064
+  },
+  "status": "validated research checkpoint; no production-default change"
+}

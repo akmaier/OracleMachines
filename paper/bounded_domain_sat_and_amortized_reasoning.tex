@@ -12173,6 +12173,106 @@ guard provenance, malformed-input rejection before warm reuse and both cold
 readers. All 64 preceding proof blocks remain intact. Future round count,
 context count and unlimited history growth remain unbounded by this experiment.
 
+\subsection{Feedback across two checked proof layers}
+
+The previous round leaves 69 events unresolved with 180 new failed probes in
+37 events. These new proofs depend on the old feedback bank, so they cannot be
+flattened into the original seed. Let $B_0$ contain the source and its checked
+guards, and let $U_1$ be the complements of assumptions refuted on $B_0$. Then
+$B_1=B_0\land U_1$ is equivalent to the source. The new failures are checked on
+$B_1$, implying complements $U_2$; hence $B_2=B_1\land U_2$ is also equivalent
+to the source. A unit conflict on $B_2$ is a refutation. An open closure supplies
+entailed assignments, not a SAT verdict.
+
+Clause IDs bind each proof to its bank. Old seeds, the old closure and new traces
+are checked before publication or warm reuse. Every learned-unit origin points
+to a proof on a strictly earlier bank, excluding self-support and forward
+references. Native reconstruction slices dependencies through both layers back
+to source clauses and guards, transports and checks the selected certificate,
+then expands used exclusions under the current branch context. Already fixed
+trace variables either agree and are skipped, or disagree and terminate at their
+checked reason. Existing split and subset rules retain source-only authority;
+no learned unit becomes an axiom. Binary-prefix lifting is unchanged.
+
+Two alternating repetitions per target and mode give 32 isolated census workers.
+Both arms validate the same proof layers and build both banks. Base propagates
+$B_1$; feedback propagates $B_2$. Each makes one unconditional pass, capped at
+262,144 occurrence visits and 256 unit steps, with zero new assumed probes.
+Pilot outcomes were exposed before timing. The original pilot repeated a new-layer
+check; its source and results remain preserved before removing that duplication.
+This is not an independent holdout or a fixed-point iteration over all possible
+failed literals.
+
+Base leaves all 69 open. Feedback closes 16 and leaves 53 open; no work or trace
+cap is reached. Recognition thus reaches 193 of the original 246 post-binary
+events. Per-target mean discovery times sum to 0.27823 and 0.27560 seconds;
+saved-prefix reconstruction adds 1.24479 and 1.23027 seconds. Complete census
+times are 1.53066 and 1.51325 seconds. These small timing differences do not
+establish a stable speed advantage. Both arms check 125 old and 180 new probe
+proofs. Feedback adds 180 distinct unit clauses, increases occurrence visits
+from 2,929 to 12,009, and unit assignments from 207 to 989. Earlier acquisition,
+closure diagnostics, loading/startup, native compilation and final audits remain
+additional. Peak census RSS is 96.47 and 96.58 MB.
+
+The 16 gains represent 15 distinct roots absent from preceding recognized sets.
+All were already UNSAT in inspected snapshots; fresh local solving also refutes
+all 15. Sixty isolated native trials give the following summed per-case means:
+\begin{center}
+\begin{tabular}{lrr}
+\hline
+Measure & Fresh & Layered \\
+\hline
+Solve/compile (s) & 2.53550 & 3.91085 \\
+Warm check (s) & 0.02775 & 0.16463 \\
+Cold readers (s) & 2.66090 & 2.69872 \\
+Persistence (s) & 0.97361 & 1.07253 \\
+Complete trial (s) & 6.26689 & 7.90190 \\
+Record bytes & 12,209,959 & 8,989,382 \\
+Records & 959 & 3,477 \\
+\hline
+\end{tabular}
+\end{center}
+Compilation is 54.24\% slower and complete trials 26.09\% slower, despite
+26.38\% fewer aggregate record bytes. Only two cases improve in runtime; seven
+use fewer bytes. Representative continuation adds 0.30670 seconds, giving a
+partial subtotal of 8.20860 seconds versus 6.26689 for fresh local trials. This
+still excludes acquisition and unresolved fallback. The experiment establishes
+broader recognition, with a retained cost regression rather than an end-to-end
+advantage. Both readers accept all 30 unique archive/root pairs; warm reuse adds
+no authority records. New archives supplement the unchanged cumulative bank.
+
+Selected source support falls from 16,371 to 3,823 literals without coordinate
+fallback. Reconstruction makes 3,351 trace splits plus 16 original prefix splits,
+reuses 243 cofactor results, and expands 67 new and 163 old exclusion leaves.
+Only 56 old exclusions occur in the selected supports; repeated expansion under
+different contexts remains costly. A separate profile of the largest exposed
+compilation regression reproduces its exact counters and authority digests. It
+records 1,584 normalizations, 1,414 restriction scans and 317 publication
+verifications. Their instrumented cumulative costs are 0.448, 0.256 and 0.411
+seconds, overlap, and must not be added. Reusing immutable canonical cofactors
+and checked preparation is a more credible next runtime target than reducing
+the short propagation pass. Publication checks and cold replay remain obligations.
+
+A separately charged diagnostic preserves complete checked $B_2$ closures for
+all 53 misses: 207 assignments, compared with 87 in their old closures. The 120
+additional assignments include 67 beyond new exclusion variables. Exactly 21
+closures change; the other 32 do not, and twenty have no exclusions at either
+layer. Both proof layers and both closures remain bound to their respective
+banks. The diagnostic takes 0.24079 seconds. Next bounded probes can use the
+changed closures; unchanged cases need untested candidates or stronger
+interaction. Repeating identical prefixes does not generate new information.
+
+For C source-plus-guard clauses, L occurrences and $U_1,U_2$ retained units,
+index construction and complete propagation use $O(C+L+U_1+U_2)$ expected word
+work/space. Sorting, proof and provenance checks, and native expansion are
+additional. All three banks and seed traces remain resident. Strict descent
+through two proof layers ensures sound composition, but supplies no bound on
+future layer count, distinct contexts or unlimited history. All 1,911 tests
+pass, including malformed and forward dependencies, guard provenance, small
+exhaustive truth checks, budget stops and cold replay. All 64 preceding proof
+blocks remain unchanged. No efficient partition or polynomial solution covering
+every unrestricted CNF has been established.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

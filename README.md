@@ -28,6 +28,16 @@ classes.
 
 ## Paper
 
+[Compose the cursor's saved failures](research/cursor-feedback.md). One checked
+propagation pass closes 12 more events without new assumed probes, reaching
+217/246 sampled events; 29 remain unresolved. Nineteen open closures gain 70
+assignments. Both readers verify all 11 distinct new native roots; all 1,953
+tests pass. Complete positive-case trials are 60.18% slower than fresh solving,
+so the next cost target is repeated certificate expansion. Next coverage target:
+probe the strengthened B4 closures with fresh bindings.
+
+Previous:
+
 [Resume the probe frontier](research/probe-cursor.md). Cold cursors avoid 2,624
 repeated probes and exactly match one 128-probe run. Later candidates yield 142
 additional failures in 31 cases; two first-prefix refutations bring coverage to

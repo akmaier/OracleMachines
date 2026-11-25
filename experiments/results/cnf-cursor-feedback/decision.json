@@ -1,0 +1,111 @@
+{
+  "cost_change_percent": {
+    "complete_seconds": 60.18,
+    "record_bytes": 0.73,
+    "solve_seconds": 90.14
+  },
+  "cursor_skip_history_invalid_on_changed_bank": true,
+  "decision": "Retain checked B4 feedback as a coverage improvement and preserve all regressions. Do not promote it as a default runtime optimization.",
+  "evidence": {
+    "analysis": {
+      "path": "experiments/results/cnf-cursor-feedback/analysis.json",
+      "sha256": "ca54f633cd9d8cfae3f38285d5d83969478c2e4d87f1f7d55e17c5b3a914ba98"
+    },
+    "cases": {
+      "path": "experiments/results/cnf-cursor-feedback/cases.json",
+      "sha256": "675d9015510c70761c457605f1c01e0f48fa712fe9357b57916a442c62e2220e"
+    },
+    "censuses": {
+      "path": "experiments/results/cnf-cursor-feedback/censuses.json",
+      "sha256": "db97ec85755212650f7f3c4a18c3f0f6a3ac690bb19cc72354fb65f9e1088726"
+    },
+    "comparisons": {
+      "path": "experiments/results/cnf-cursor-feedback/comparisons.json",
+      "sha256": "dfc5906c1fbd2569df67b72d2417f39021ed35363a3e61736089e8c95d2b869f"
+    },
+    "protocol": {
+      "path": "experiments/results/cnf-cursor-feedback/protocol.json",
+      "sha256": "e12985ceb56d8ce3fc0cd4b51e9afa1ad6506368feb4bd37099dcc8078743b8e"
+    },
+    "remaining": {
+      "path": "experiments/results/cnf-cursor-feedback/remaining.json",
+      "sha256": "7b8122fa0256232afaf9a59210d38bb7fb142a22aa20d2d3750e000d3c4e46dc"
+    },
+    "remaining-closures": {
+      "path": "experiments/results/cnf-cursor-feedback/remaining-closures.json",
+      "sha256": "731b2963c623c9a6430f9a9295b06c99983a8dcf434df73b9d3998a29a8e6331"
+    },
+    "support-plans": {
+      "path": "experiments/results/cnf-cursor-feedback/support-plans.json",
+      "sha256": "4b13ec54758e41fcaa75dfa20aa280949dd38b0e25cbf51961720ea166d43a79"
+    }
+  },
+  "limitations": [
+    "Same41 retained B3 closures and search cursors. Thirty-one cases contain161 verified failures on B3. Pilot exposed before timing; no holdout.",
+    "Both arms check source, guards, all earlier failure layers and saved closures, cursor binding/schedule and every retained failed proof, then construct B4. Base propagates B3; feedback propagates B4. Zero new assumed probes.",
+    "Only checked failed-probe consequences become units. Open-history claims provide no axioms. Native reconstruction expands every used consequence through strictly decreasing banks B4/B3/B2/B1/B0.",
+    "Two opposite-order isolated repetitions per target and arm. Reconstruction, preparation, cursor validation, indexing and propagation are charged. Earlier acquisition, startup/loading and final audits are additional.",
+    "Open B4 closures are reconstructed in a separate scan-based diagnostic with explicit timing/counters outside bounded discovery. Open or budget-limited outcomes never mean SAT.",
+    "Fresh/native positive comparisons include warm checking, both cold readers and persistence, but exclude discovery, seed acquisition and unresolved fallback. Isolated archives can duplicate shared records; cumulative tables and production defaults remain unchanged.",
+    "Old cursors still bind B3 and cannot be used to skip candidates on changed B4 banks. Fixed four-layer composition does not bound future contexts, proof expansion or retained history; no unrestricted-SAT conclusion."
+  ],
+  "new_assumed_probes": 0,
+  "new_feedback_bank": "B4",
+  "new_refutations": 12,
+  "new_roots": 11,
+  "next_targets": [
+    "Probe the 19 strengthened B4 closures with fresh exact bindings. Do not skip formerly open B3 candidates on changed banks.",
+    "Profile repeated cofactor preparation and native proof expansion, especially new-28-62 and new-61-70. Compare against publication-only preparation reuse and retain all checking costs.",
+    "For ten unchanged cases, investigate untried candidates or stronger interaction. No open history or exhausted single-literal order proves SAT."
+  ],
+  "old_cursor_bank": "B3",
+  "open_closures": {
+    "additional_assignments": 70,
+    "additional_beyond_exclusions": 24,
+    "assignments": 97,
+    "changed_events": 19,
+    "diagnostic_seconds": 0.18231333186849952,
+    "events": 29
+  },
+  "recognized_events": 217,
+  "regressions": {
+    "complete_seconds": {
+      "improved": 2,
+      "regressed": [
+        "new-28-62",
+        "new-61-3",
+        "new-61-6",
+        "new-61-7",
+        "new-61-70",
+        "new-67-22",
+        "new-67-24",
+        "new-67-79",
+        "new-67-80"
+      ]
+    },
+    "record_bytes": {
+      "improved": 9,
+      "regressed": [
+        "new-28-62",
+        "new-61-70"
+      ]
+    },
+    "solve_seconds": {
+      "improved": 2,
+      "regressed": [
+        "new-28-62",
+        "new-61-3",
+        "new-61-6",
+        "new-61-7",
+        "new-61-70",
+        "new-67-22",
+        "new-67-24",
+        "new-67-79",
+        "new-67-80"
+      ]
+    }
+  },
+  "remaining_events": 29,
+  "retained_open_failures": 46,
+  "total_events": 246
+}

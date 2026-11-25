@@ -12,7 +12,36 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: compose newly exposed failures; reuse checked preparation
+## Current investigation: strengthened closures and certificate expansion
+
+[Cursor-failure feedback](cursor-feedback.md) closes 12 more events without new
+assumed probes, producing 11 distinct native roots verified by both readers.
+Sampled coverage reaches 217/246, leaving 29 unresolved. One gained root was
+unknown in the inspected snapshot; fresh bounded solving now proves all eleven.
+All 1,953 tests pass and every previous artifact remains intact.
+
+**Next coverage target:** 19 open B4 closures gain 70 assignments, including 24
+beyond the 46 retained cursor-exclusion variables. Probe these stronger banks
+with fresh bindings. Old B3 cursors cannot justify skipping candidates on changed
+B4. Ten unchanged cases require untried candidates or stronger interaction;
+none has a SAT or general exhaustion certificate.
+
+**Largest measured cost gap:** complete positive-case trials take 4.70459 seconds
+versus 2.93697 fresh, a 60.18% regression. Native compilation is 90.14% slower,
+and bytes increase 0.73% despite reductions on nine of eleven roots. The
+`new-28-62` and `new-61-70` certificate-growth cases are the strongest immediate
+profiling targets: 2,065 splits and 2,246 records remain across the gains. Reuse
+exact cofactors and checked derivations only if total measured costs improve.
+Source/prefix reconstruction also accounts for 76% of census time. The 0.15%
+census timing difference is too small to establish a speed advantage.
+
+The 29 open states retain all prior proofs, cursors and 97 B4 assignments in a
+989,481-byte closure/history export. Production defaults and cumulative tables
+are unchanged. Resume `experiments/results/cnf-cursor-feedback/checkpoint.json`;
+use its `remaining-closures.json` for the next bounded coverage experiment.
+No complete workload saving or unrestricted-SAT guarantee is established.
+
+## Previous investigation: compose newly exposed failures; reuse checked preparation
 
 [Cold probe cursors](probe-cursor.md) avoid 2,624 repeated assumptions and match
 single-pass results exactly. Later candidates add 142 failures in 31 cases,

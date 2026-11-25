@@ -12641,6 +12641,75 @@ remain intact. Honest cursor reuse avoids repeated acquisition on this finite
 sample; it neither certifies search exhaustion nor gives polynomial acquisition
 or compact closure for unrestricted SAT.
 
+\subsection{Composing failures from the resumed frontier}
+
+The saved cursor failures provide another exact feedback opportunity. Each
+checked B3 refutation under literal $l$ proves the unit consequence $\neg l$.
+Append these consequences to B3 to form B4, retaining their original proof
+reasons. Every source model satisfies B0 and, inductively, every later bank.
+A checked unconditional conflict on B4 therefore refutes the source. No claimed
+open probe or cursor-exhaustion flag supplies a logical premise. The support
+planner slices used traces, selects source clauses and guards, remaps coordinates
+and rechecks the compact banks. Native reconstruction descends strictly through
+B4, B3, B2, B1 and B0 and uses the existing checked component, unit, empty and
+split rules. It adds no native proof axiom or reader rule.
+
+On the 41 remaining events, 161 checked B3 failures yield 12 refutations without
+new assumed probes. They contain eleven distinct native roots accepted by both
+independent readers, raising recognition to 217 of 246 sampled post-binary events
+and leaving 29 unresolved. One gained root was unknown in the inspected snapshot;
+ten were already UNSAT. Fresh bounded local solving also proves all eleven in
+the present comparison. These are exposed sample results, not a holdout or a
+complete classification of CNF.
+
+Two opposite-order repetitions per target and arm give 32 isolated census
+workers. Both arms check all earlier layers, saved closures, exact cursor bindings
+and schedules, then build B4. The control propagates B3 and the candidate B4;
+this comparison isolates composition and does not omit the saved evidence's
+checking costs from the control. Both perform 41 unconditional passes and zero
+assumed probes. Aggregate indexed occurrences rise from 47,629 to 47,790 and
+propagation occurrence visits from 1,053 to 6,515. Summed target-mean discovery
+times are 0.21959 and 0.21901 seconds, and complete census times 0.93508 and
+0.93364 seconds. This small difference supplies no speed claim. About 76\% of
+candidate census time is source/prefix reconstruction. Earlier acquisition,
+startup, input loading and final audits remain additional.
+
+Forty-four isolated native trials compare fresh solving and layered compilation
+on the eleven positive roots in both orders. Both cold readers accept all 22
+unique archive/root pairs. Summed case-mean compilation is 2.24338 seconds versus
+1.17985 fresh, a 90.14\% regression. Complete trials, including setup, warm
+checks, both cold readers and persistence, take 4.70459 versus 2.93697 seconds,
+a 60.18\% regression. Encoded key/payload bytes are 5,744,105 versus 5,702,467,
+or 0.73\% more, with 2,246 versus 489 records. Runtime improves on two roots and
+regresses on nine; bytes improve on nine but two large growth cases dominate
+the total. Despite causal support selection, native expansion creates 2,065
+split nodes. The positive-only comparison excludes discovery, old acquisition
+and unresolved fallback. It establishes neither a full-workload saving nor a
+general memory improvement. Cumulative authority tables and production defaults
+are unchanged; independent archives can duplicate shared records.
+
+The 29 open B4 closures contain 97 assignments. Nineteen gain 70 assignments
+relative to their B3 closures, including 24 beyond the 46 retained cursor-exclusion
+variables. Ten remain unchanged. A separately charged scan-based reconstruction
+and checking diagnostic takes 0.18231 seconds and exports all earlier fields
+with the complete B4 closures in 989,481 bytes. The smaller event population
+precludes interpreting this as per-instance compression. Old cursors bind B3
+and cannot justify skipping candidates on a changed B4 bank: previously open
+candidates may now fail. Bounded probing on strengthened closures is the next
+coverage target; repeated cofactor and native proof construction is a cost target.
+
+For $C$ old clauses, $L$ literal occurrences and $U$ added units, occurrence-index
+construction and one complete propagation pass require $O(C+L+U)$ expected word
+work and space. Dictionary construction, sorting, all earlier trace and binding
+checks, and retained banks are additional. The 262,144 occurrence-visit and
+256-step trace caps do not bound preparation work. Five banks do not bound the
+number of future contexts, certificate expansion or lifetime history. All 1,953
+solver tests and 88 focused tests pass, including exhaustive and generated small
+cases, guarded compilation, both cold readers, malformed provenance and budget
+limits. All 64 earlier proof blocks remain intact. This finite composition
+improves structural recognition without providing a uniformly polynomial
+algorithm for unrestricted SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

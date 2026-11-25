@@ -5,7 +5,29 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: the untested frontier yields new reusable failures
+## Latest evidence: new probe failures interact through a checked fourth layer
+
+[Composing the cursor failures](cursor-feedback.md) refutes 12 more events with
+zero new assumed probes. Eleven distinct native roots pass both readers, bringing
+sampled recognition to 217/246 with 29 unresolved. The pattern is interaction
+among individually certified exclusions: B3 failures become B4 units, and their
+joint propagation yields a conflict. Dependencies remain strictly decreasing
+through the five proof banks; search-history claims provide no proof axioms.
+
+Nineteen remaining closures gain 70 assignments, including 24 beyond explicit
+new exclusions. Next test these stronger banks with fresh cursor bindings;
+previously open B3 candidates can now fail. Ten unchanged cases need untried
+candidates or stronger interaction. All earlier histories and complete new
+closures are retained in `experiments/results/cnf-cursor-feedback/remaining-closures.json`.
+Resume its sibling `checkpoint.json`. All 1,953 tests pass.
+
+This is recognition coverage on exposed cases, not an efficient partition of
+arbitrary CNF. Fresh solving also proves all eleven gained roots. Native complete
+positive-case trials are 60.18% slower and encoded bytes 0.73% larger in aggregate,
+so proof expansion remains a cost gap. Acquisition, discovery and unresolved
+fallback must be included before claiming a complete workload advantage.
+
+## Previous evidence: the untested frontier yields new reusable failures
 
 [Persistent cursors](probe-cursor.md) match one 128-probe run while avoiding 2,624
 repeated probes versus growing restarts. Candidates beyond the old prefix add

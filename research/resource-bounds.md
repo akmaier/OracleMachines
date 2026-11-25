@@ -18,6 +18,33 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Cursor-failure feedback](cursor-feedback.md) appends U checked B3 consequences
+as units to B4. Index construction and a complete propagation pass require
+O(C+L+U) expected word work/space for C old clauses and L old occurrences,
+additional to sorting, all previous proof/closure/cursor validation and retained
+banks. The occurrence-visit cap does not bound preparation. Native expansion
+still depends on contexts and proof size; five banks do not imply a polynomial
+bound on future search, certificate construction or retained history.
+
+On 41 events, 161 saved failures close 12 cases without assumed probes. The
+complete census takes 0.93364 seconds, with 76% spent reconstructing sources and
+prefixes; the B3 control takes 0.93508 seconds, too close for a speed claim.
+Both arms build/check B4 before choosing the propagated bank. Census peak RSS
+is effectively unchanged. The 29 open B4 closures retain 97 assignments,
+including 70 additions in 19 cases and 24 beyond new exclusions. Their separate
+scan/check diagnostic costs 0.18231 seconds; the full preserved history/closure
+export is 989,481 bytes. A smaller event set is not per-instance compression.
+
+On eleven positive roots, native compilation takes 2.24338 seconds versus
+1.17985 fresh (+90.14%); complete local trials take 4.70459 versus 2.93697
+(+60.18%). Encoded key/payload bytes rise 0.73% to 5,744,105, with 2,246 records
+versus 489. Nine roots shrink in bytes, but two large regressions dominate.
+Peak positive-worker RSS falls locally from 88,768,512 to 76,988,416 bytes;
+this does not establish a general memory reduction. Both readers verify all
+22 unique archive/root pairs. Acquisition, discovery and unresolved fallback
+remain outside this positive comparison, and cumulative tables are unchanged.
+Old B3 cursors must be invalidated for skipping probes on a changed B4 bank.
+
 [Persistent probe cursors](probe-cursor.md) retain at most 2n completed literals
 and 2n failure records for a fixed bank with n active variables. With trace cap
 T, retained failures use O(nT) trace entries, plus exact source/bank/closure/order

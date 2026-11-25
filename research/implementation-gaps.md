@@ -4,7 +4,19 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (25 November, persistent probe cursor):
+Latest expansion checkpoint (25 November, cursor-failure feedback):
+[Compose the saved B3 failures](cursor-feedback.md). A checked B4 propagation
+pass closes 12 events without new assumed probes; all 11 distinct new native
+roots pass both readers. Recognition reaches 217/246, leaving 29 unresolved.
+Nineteen open closures gain 70 assignments. All 1,953 tests pass; 64 manuscript
+proof blocks and all earlier artifacts remain unchanged. Complete positive-case
+trials regress 60.18% against fresh solving, with 0.73% more encoded bytes.
+Next probe strengthened B4 closures with new bindings and investigate repeated
+native proof expansion. Old B3 cursor history cannot justify skipping B4 probes.
+Resume `experiments/results/cnf-cursor-feedback/checkpoint.json` and its preserved
+`remaining-closures.json`. No unrestricted-SAT or net workload gain is claimed.
+
+Previous expansion checkpoint (25 November, persistent probe cursor):
 [Resume the actual probe frontier](probe-cursor.md). Cold reload avoids 2,624
 repeated probes with exact single-pass outcomes. Later candidates expose 142 new
 failures in 31 cases; two first-prefix refutations reach 205/246 coverage. All

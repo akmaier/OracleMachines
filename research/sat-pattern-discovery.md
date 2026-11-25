@@ -5,7 +5,26 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: new probe failures interact through a checked fourth layer
+## Latest evidence: cheaper certification for the current structural gains
+
+[Direct unit closure](direct-unit-closure.md) replaces many expanded native
+split trees with checked unit contradictions on the actual source residual.
+The same eleven B4 roots need 306 records instead of 2,246; complete local
+trial time falls 78.35% and encoded bytes 80.33%. Both readers accept all native
+proofs; 1,961 tests pass. This changes certification cost, not the recognized
+category or sampled coverage: 217/246 events are recognized and 29 remain open.
+
+The next discovery target is still bounded probing on the 19 strengthened B4
+closures, using fresh bindings. Ten unchanged cases need untried candidates or
+stronger interaction. Use the new bounded unit shortcut as the measured B4
+compilation baseline, retaining original fallback and all provenance checks.
+One positive remains slower than fresh solving, and complete workload costs
+still require acquisition and unresolved fallback. No efficient partition of
+arbitrary CNF has been established. Resume
+`experiments/results/cnf-direct-unit-closure/checkpoint.json`, which preserves
+the previous complete open-state export through its `cursor_feedback` entry.
+
+## Previous evidence: new probe failures interact through a checked fourth layer
 
 [Composing the cursor failures](cursor-feedback.md) refutes 12 more events with
 zero new assumed probes. Eleven distinct native roots pass both readers, bringing

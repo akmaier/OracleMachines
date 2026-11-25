@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Close native residuals before expanding saved proofs](research/direct-unit-closure.md).
+Bounded ordinary unit proofs reduce complete local trial time 78.35% and encoded
+bytes 80.33% versus the B4 compiler on the same eleven roots. Records fall from
+2,246 to 306, all independently checked. One case remains slower than fresh
+solving; acquisition and unresolved fallback are outside this comparison. All
+1,961 tests pass. Coverage stays 217/246; next probe the 19 strengthened closures.
+
+Previous:
+
 [Compose the cursor's saved failures](research/cursor-feedback.md). One checked
 propagation pass closes 12 more events without new assumed probes, reaching
 217/246 sampled events; 29 remain unresolved. Nineteen open closures gain 70

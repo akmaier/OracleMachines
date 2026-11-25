@@ -4,7 +4,20 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (25 November, cursor-failure feedback):
+Latest expansion checkpoint (25 November, direct native unit closure):
+[Avoid expanding already unit-refutable residuals](direct-unit-closure.md).
+Bounded direct unit proofs reduce complete local trial time 78.35% and bytes
+80.33% versus the B4 compiler on the same eleven roots; records fall to 306
+from 2,246. Both readers verify 44 unique archive/root pairs, and all 1,961
+tests pass. All older proofs and artifacts remain preserved. One case still
+regresses against fresh solving; acquisition/discovery and unresolved fallback
+are additional. Coverage remains 217/246 with 29 unresolved. Next probe the
+19 strengthened B4 closures using fresh bindings; retain the bounded shortcut
+as the measured compilation baseline. Resume
+`experiments/results/cnf-direct-unit-closure/checkpoint.json` and its inherited
+`cursor_feedback` open-state bindings. Production defaults are unchanged.
+
+Previous expansion checkpoint (25 November, cursor-failure feedback):
 [Compose the saved B3 failures](cursor-feedback.md). A checked B4 propagation
 pass closes 12 events without new assumed probes; all 11 distinct new native
 roots pass both readers. Recognition reaches 217/246, leaving 29 unresolved.

@@ -12710,6 +12710,77 @@ limits. All 64 earlier proof blocks remain intact. This finite composition
 improves structural recognition without providing a uniformly polynomial
 algorithm for unrestricted SAT.
 
+\subsection{Direct unit certificates before layered proof expansion}
+
+The previous coverage gain exposed a certification cost: the eleven B4 roots
+required 2,246 native records, including 2,065 trace splits. Profiles of the two
+largest certificate-growth cases show repeated residual construction and native
+child checking. A source residual can already be unit-refutable even when the
+saved layered trace represents its contradiction with many splits. Before
+expanding that trace, a bounded unconditional propagation attempt on the actual
+canonical source residual can produce a shorter ordinary native unit proof.
+All source/guard bindings, earlier layers, cursor provenance, support selection
+and final native checks remain. Derived bank units are not silently added to
+the source. An open or interrupted attempt asserts nothing and falls back to
+the original compiler; accepted unit proofs pass the unchanged verifier.
+
+One allowance per inner compilation charges every gate clause, then index
+clause/literal slots and propagation occurrence visits. It is 262,144 work units
+in the experiment, with at most 256 retained unit-trace steps per attempt.
+An index is constructed only when a source unit is present and its construction
+fits the remaining allowance. Every attempt builds its own index. There is no
+cross-context cache, persistent index or new proof rule. Existing whole-root warm
+reuse still checks the supplied provenance first. Publication retains the prior
+immutable header handoff and all semantic child checks.
+
+Four methods replay the same eleven exposed positive roots in two opposite
+orders, yielding 88 isolated trials: fresh bounded solving, the unchanged B4
+compiler, direct attempts only at proof-layer entry, and direct attempts at
+every trace-walk entry. There is no new discovery, holdout or coverage gain.
+The controls reproduce their previous deterministic counters and authority
+tables. Summed case-mean compilation times are respectively 1.17547, 2.25700,
+1.13853 and 0.46211 seconds. Complete local trial times, including setup, warm
+checking, both cold readers and persistence, are 2.93913, 4.71358, 2.43027 and
+1.02071 seconds. Encoded key/payload bytes are 5,702,467, 5,744,105, 2,910,847
+and 1,129,929; record counts are 489, 2,246, 1,004 and 306.
+
+Every-entry attempts reduce compilation 79.53\%, complete local time 78.35\%
+and bytes 80.33\% against the unchanged compiler, improving all eleven roots in
+all three measures. Against fresh solving, aggregate complete time falls 65.27\%
+and bytes 80.19\%; ten roots improve in runtime and all eleven in bytes. The
+preserved exception, \texttt{new-28-62}, takes 0.13321 seconds complete versus
+0.10758 fresh despite a smaller certificate. Earlier acquisition, discovery,
+unresolved fallback, loading/startup and final audit remain additional. These
+positive-only comparisons do not establish a complete workload advantage.
+
+There are 244 every-entry unit attempts: 112 direct conflicts and 132 open
+fallbacks. Another 26 candidates contain no unit; no work or trace cap binds.
+The gate/index/occurrence charge totals 124,853 across eleven separate allowances.
+Trace splits fall from 2,065 to 148 and frames from 4,255 to 317. Native
+normalization visits fall from 1,534,343 to 199,899 and native restriction visits
+from 777,206 to 91,478. All 306 resulting records still receive ordinary native
+verification. Both independent readers accept all 44 unique archive/root pairs.
+Peak positive-worker RSS is 88,752,128 bytes fresh, 75,661,312 baseline,
+66,961,408 at layer entry and 53,985,280 at every entry. The old certificates
+remain preserved, and cumulative tables and production defaults are unchanged.
+
+With $K$ trace-walk entries and allowance $B$, additional gate, index and
+propagation work is $O(K+B)$ expected word work, plus native checking and
+publication of accepted shortcuts. One index is live per attempt, using
+$O(C+L)$ slots for its current clauses and occurrences, plus the bounded trace.
+Original preparation, layered expansion, encoded integer costs, the number of
+contexts and lifetime history remain additional. This local allowance does not
+provide a uniform improvement for arbitrary SAT.
+
+All 1,961 solver tests and 96 focused tests pass. They include all 512 formulas
+formed from non-tautological clauses on two variables, guarded and sparse-coordinate
+cases, full/support compilation, cold replay, forced fallback, corrupt native
+traces and rejection of malformed old provenance before warm reuse. All 64
+earlier proof blocks are unchanged. Recognition remains 217 of 246 sampled
+events, with 29 unresolved. The next coverage target is probing the nineteen
+strengthened B4 closures with fresh bindings, now with a cheaper measured
+certification path; a complete efficient classification remains open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

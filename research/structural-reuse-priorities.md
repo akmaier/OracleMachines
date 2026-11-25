@@ -12,7 +12,33 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: strengthened closures and certificate expansion
+## Current investigation: probe strengthened closures using cheaper native proofs
+
+[Direct unit closure](direct-unit-closure.md) addresses the measured certificate
+expansion bottleneck. Before expanding a saved trace, bounded propagation tests
+the actual canonical source residual. A contradiction becomes an ordinary native
+unit proof; open or interrupted attempts fall back. On the same eleven B4 roots,
+complete local time falls 78.35% and bytes 80.33% against the existing compiler;
+native records fall from 2,246 to 306. Both readers verify all 44 archive/root
+pairs; all 1,961 tests pass. This is proof compression, with unchanged coverage.
+
+Carry the every-entry method forward as the measured B4 compilation baseline,
+retaining the per-query allowance, native checks and publication-only handoff.
+Every tested root improves against the old compiler. Against fresh solving,
+`new-28-62` still regresses in runtime; old acquisition, discovery and unresolved
+fallback are additional. Production defaults and historical certificates remain
+unchanged. Broader cases and growing proof layers still need measurement.
+
+**Next coverage target:** the 19 strengthened open B4 closures, with fresh exact
+bindings. Old B3 cursor skips are invalid for changed B4 banks. Ten other open
+cases need untried candidates or stronger interaction. Coverage remains 217/246
+with 29 unresolved. Repeated warm provenance preparation remains a cost gap,
+but the current result favors returning to new structural coverage before
+another speculative cache. Resume
+`experiments/results/cnf-direct-unit-closure/checkpoint.json`; its inherited
+`cursor_feedback` entry preserves the complete open-state export.
+
+## Previous investigation: strengthened closures and certificate expansion
 
 [Cursor-failure feedback](cursor-feedback.md) closes 12 more events without new
 assumed probes, producing 11 distinct native roots verified by both readers.

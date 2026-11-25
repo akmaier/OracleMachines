@@ -1,0 +1,144 @@
+{
+  "cost_change_percent": {
+    "baseline": {
+      "complete_seconds": -78.35,
+      "record_bytes": -80.33,
+      "solve_seconds": -79.53
+    },
+    "fresh": {
+      "complete_seconds": -65.27,
+      "record_bytes": -80.19,
+      "solve_seconds": -60.69
+    },
+    "layer": {
+      "complete_seconds": -58.0,
+      "record_bytes": -61.18,
+      "solve_seconds": -59.41
+    }
+  },
+  "coverage_unchanged": true,
+  "decision": "Carry bounded every-entry direct unit closure forward as the measured B4 native compilation baseline; retain fallback and all source/provenance/native checks. Keep production defaults unchanged.",
+  "evidence": {
+    "analysis": {
+      "path": "experiments/results/cnf-direct-unit-closure/analysis.json",
+      "sha256": "faff014b8777d7e2efd0f45ad5534bab706f4f2073fe996026c8fe5eee6d43a2"
+    },
+    "cases": {
+      "path": "experiments/results/cnf-direct-unit-closure/cases.json",
+      "sha256": "675d9015510c70761c457605f1c01e0f48fa712fe9357b57916a442c62e2220e"
+    },
+    "comparisons": {
+      "path": "experiments/results/cnf-direct-unit-closure/comparisons.json",
+      "sha256": "41daa03c95d35c0dd47731f7b7e7c70e4645fd887425bdeb746fafd175e1ff71"
+    },
+    "pilot": {
+      "path": "experiments/results/cnf-direct-unit-closure/pilot.json",
+      "sha256": "777dc0efb93dca9ccbcabc77920a403a4e4474548a0c273f335e3a4baba29907"
+    },
+    "profiles": {
+      "path": "experiments/results/cnf-direct-unit-closure/profiles.json",
+      "sha256": "c64f1309a7a3afa72c46b387b55d4dab0a3015275ccac4a1af87cc4477f74cfc"
+    },
+    "protocol": {
+      "path": "experiments/results/cnf-direct-unit-closure/protocol.json",
+      "sha256": "d10f5c93bcd7014d889c45316df59f81759c871a5f5fa9a9a86684f62db975d1"
+    }
+  },
+  "limitations": [
+    "Same11 exposed positive B4-feedback roots; no holdout, new discovery or coverage gain. The two previous certificate-growth cases were profiled first.",
+    "Fresh solving, unchanged publication-only B4 compiler, bounded direct units at layer entry only, and bounded direct units at every trace-walk entry. Two opposite-order isolated repetitions.",
+    "Shortcuts use only the actual canonical source residual and publish ordinary native unit proofs. All earlier provenance, source/support bindings, child checks and cold readers remain unchanged.",
+    "One query-local allowance charges each gate clause plus index clause/literal slots and occurrence visits. The allowance excludes original compilation, frame preparation, publication and checking. Open or interrupted attempts fall back without asserting a fact.",
+    "Each attempt builds a separate occurrence index. No context cache, persistent index, new native rule or production-default change. Exact whole-root warm reuse remains unchanged.",
+    "Complete local trials include compilation, warm checks, both cold readers and persistence. Previous acquisition/discovery, unresolved fallback, loading/startup and final audit are additional.",
+    "Independent archives may duplicate shared records. Changed proof shape can change cold verification and storage; lifetime history and unrestricted SAT remain unbounded."
+  ],
+  "limits": {
+    "unit_trace_limit": 256,
+    "unit_work_limit": 262144
+  },
+  "new_proof_rules": 0,
+  "next_targets": [
+    "Probe the 19 strengthened open B4 closures with fresh exact bindings; old B3 cursor skips are invalid on changed banks.",
+    "Carry the bounded direct unit path into the next measured proof compiler while preserving fallback and all native checks. Evaluate novel/growing proofs before generalizing these eleven exposed roots.",
+    "Retain the new-28-62 runtime regression against fresh solving. Repeated warm provenance checking remains a cost, but any cache must pay for exact binding and retained space."
+  ],
+  "preferred_mode": "all",
+  "recognized_events": 217,
+  "regressions": {
+    "all_vs_baseline": {
+      "complete_seconds": {
+        "equal": 0,
+        "improved": 11,
+        "regressed": []
+      },
+      "record_bytes": {
+        "equal": 0,
+        "improved": 11,
+        "regressed": []
+      },
+      "solve_seconds": {
+        "equal": 0,
+        "improved": 11,
+        "regressed": []
+      }
+    },
+    "all_vs_fresh": {
+      "complete_seconds": {
+        "equal": 0,
+        "improved": 10,
+        "regressed": [
+          "new-28-62"
+        ]
+      },
+      "record_bytes": {
+        "equal": 0,
+        "improved": 11,
+        "regressed": []
+      },
+      "solve_seconds": {
+        "equal": 0,
+        "improved": 10,
+        "regressed": [
+          "new-28-62"
+        ]
+      }
+    },
+    "all_vs_layer": {
+      "complete_seconds": {
+        "equal": 0,
+        "improved": 11,
+        "regressed": []
+      },
+      "record_bytes": {
+        "equal": 0,
+        "improved": 11,
+        "regressed": []
+      },
+      "solve_seconds": {
+        "equal": 0,
+        "improved": 11,
+        "regressed": []
+      }
+    },
+    "layer_vs_baseline": {
+      "complete_seconds": {
+        "equal": 0,
+        "improved": 11,
+        "regressed": []
+      },
+      "record_bytes": {
+        "equal": 0,
+        "improved": 11,
+        "regressed": []
+      },
+      "solve_seconds": {
+        "equal": 0,
+        "improved": 11,
+        "regressed": []
+      }
+    }
+  },
+  "remaining_events": 29,
+  "total_events": 246
+}

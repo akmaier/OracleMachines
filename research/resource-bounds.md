@@ -18,6 +18,30 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Direct native unit closure](direct-unit-closure.md) tests the canonical source
+residual before expanding a saved trace. One inner-compilation allowance B
+charges gate clauses, index clause/literal slots and occurrence visits. With K
+trace-walk entries, additional gate/index/propagation work is O(K+B) expected
+word work, plus native checking/publication of accepted unit proofs. One index
+is live per attempt; open or interrupted attempts fall back with no new fact.
+Baseline preparation, proof expansion and the number of contexts K remain
+outside the allowance. There is no cross-context cache or new native rule.
+
+On eleven existing B4 roots, every-entry attempts reduce compile time 79.53%,
+complete local time 78.35% and encoded bytes 80.33% against baseline. Records
+fall from 2,246 to 306 and splits from 2,065 to 148. Of 244 unit attempts, 112
+close directly and 132 remain open. Gate/index/occurrence work totals 124,853
+units across eleven allowances of 262,144 each; no cap binds. Peak positive-worker
+RSS falls from 75,661,312 to 53,985,280 bytes. Both readers verify all 44 unique
+archive/root pairs. Coverage stays 217/246 with 29 unresolved. The old larger
+certificates remain stored; cumulative tables and production defaults are unchanged.
+
+Complete local trials take 1.02071 seconds versus 4.71358 baseline and 2.93913
+fresh; encoded bytes are 1,129,929 versus 5,744,105 and 5,702,467 respectively.
+One case remains slower than fresh solving. Earlier acquisition, discovery,
+unresolved fallback and lifetime history are outside this positive comparison;
+it supplies no uniform runtime or memory improvement for arbitrary SAT.
+
 [Cursor-failure feedback](cursor-feedback.md) appends U checked B3 consequences
 as units to B4. Index construction and a complete propagation pass require
 O(C+L+U) expected word work/space for C old clauses and L old occurrences,

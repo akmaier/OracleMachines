@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Transfer exact B4/B5 frontiers](research/b5-probe-cursor.md): five more events
+obtain checked native refutations, reaching 226/246 sampled coverage with 20 open.
+Sixteen exact bank/closure matches reuse 1,024 prior assumptions and match a
+fresh extended search exactly; complete census time improves only 1.48%.
+Twenty open states retain 26 new failures in eight cases for composition.
+All 1,987 tests pass. Acquisition and unrestricted-SAT obligations remain explicit.
+
+Previous:
+
 [Compose B4 failures](research/b4-cursor-feedback.md): four more events obtain
 checked native refutations, reaching 221/246 sampled coverage with 25 unresolved.
 On all four gained roots, direct-unit certificates beat fresh bounded solving;

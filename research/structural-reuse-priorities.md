@@ -12,7 +12,30 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: nine stronger B5 closures and sixteen later frontiers
+## Current investigation: compose B5 failures; avoid repeated preparation
+
+[Exact B4/B5 frontier transfer](b5-probe-cursor.md) avoids 1,024 repeated
+assumptions on sixteen unchanged banks and exactly matches fresh extended
+search. Fresh probing on stronger banks supplies five new native refutations,
+reaching 226/246 sampled recognition, with 20 unresolved. All 1,987 tests pass.
+
+**Next coverage target:** compose 26 checked B5 failures in eight remaining cases.
+Five of these failures were reached only beyond the old prefix. The other twelve
+need later candidates or stronger interaction; two exhaust the current literal
+order without a SAT certificate. Cursor transfer requires equality of full
+banks, closure traces and trace allowance, plus original and new schedule/proof
+checks; a common category label is insufficient.
+
+Complete census time improves only 1.48% against the matched frontier; source
+reconstruction and semantic checks take about 77%. Repeated checked preparation
+remains the dominant avoidable runtime gap. Search peak RSS is essentially
+unchanged and cursor bytes equal the matched control. Positive certificate
+trials improve all five cases against fresh solving but exclude acquisition,
+discovery and unresolved fallback. Resume
+`experiments/results/cnf-b5-probe-cursor/checkpoint.json`; retain all regressions
+and the direct-unit native baseline. General SAT and lifetime bounds remain open.
+
+## Previous investigation: nine stronger B5 closures and sixteen later frontiers
 
 [Composing B4 failures](b4-cursor-feedback.md) closes four events with no new
 assumed probes; four distinct native roots pass both readers. Sampled coverage

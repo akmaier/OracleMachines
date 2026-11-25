@@ -4,7 +4,18 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (25 November, B4-failure composition):
+Latest expansion checkpoint (25 November, exact B5 frontier transfer):
+[Reuse histories only across equal banks](b5-probe-cursor.md). Five new native
+refutations reach 226/246 sampled recognition, leaving 20 unresolved. Sixteen
+exact bank/closure matches avoid 1,024 repeated assumptions while matching the
+fresh extended frontier; complete census time improves only 1.48%. All 1,987
+tests, ten unique archive/root pairs and prior source/artifact ledgers pass;
+64 manuscript proof blocks remain unchanged. Next compose 26 checked failures
+in eight open cases and investigate later candidates/interaction in twelve
+others. Resume `experiments/results/cnf-b5-probe-cursor/checkpoint.json`.
+No production default or cumulative authority table changes.
+
+Previous expansion checkpoint (25 November, B4-failure composition):
 [Compose the retained B4 consequences](b4-cursor-feedback.md). Four new native
 roots pass both readers without new assumed probes, reaching 221/246 sampled
 recognition with 25 unresolved. Direct-unit certificates improve all four

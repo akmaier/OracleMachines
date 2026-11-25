@@ -5,7 +5,25 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: checked B4 consequences interact in a fifth bank
+## Latest evidence: exact cross-layer histories and broader B5 recognition
+
+[B5 search and cursor migration](b5-probe-cursor.md) refute five more events,
+reaching 226/246 recognition with 20 unresolved. All five native roots pass both
+readers; all 1,987 tests pass. The five formulas already had UNSAT reference
+answers; this expands certified structural recognition. On sixteen exact
+B4/B5 bank-and-closure matches, checked histories avoid 1,024 repeated probes
+and exactly match a fresh search reaching the same frontier. Changed banks
+start fresh; open-history entries never become proof axioms.
+
+Next compose the 26 retained B5 failures in eight open cases, including five
+later failures missed by a short restart. Twelve others need later candidates
+or stronger interaction; two complete the current literal order without a SAT
+certificate. Resume `experiments/results/cnf-b5-probe-cursor/checkpoint.json`.
+Complete census time improves only 1.48% against the matched frontier, with
+essentially unchanged peak RSS and identical retained cursor size. All previous
+limitations on unrestricted coverage, recognition and lifetime storage remain.
+
+## Previous evidence: checked B4 consequences interact in a fifth bank
 
 [B4-failure composition](b4-cursor-feedback.md) refutes four more sampled events
 without new assumed probes. All four native roots pass both readers, reaching

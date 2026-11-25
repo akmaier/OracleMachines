@@ -18,6 +18,22 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Exact B4/B5 cursor migration](b5-probe-cursor.md) transfers checked scheduling
+history only when full banks, complete closures including traces, and trace
+allowances agree. Both original and new bindings/schedules/failure proofs are
+checked. On sixteen matches it avoids 1,024 assumptions and 381,504 per-probe
+initialization clause visits, with results identical to fresh extended search.
+Complete census time improves only 1.48%; reconstruction and semantic checks
+remain about 77% of time. Peak search RSS is essentially unchanged, and retained
+cursor bytes equal the matched control. Migration itself copies/rechecks history
+and constructs a full exact binding, so saved probing is not a total-cost bound.
+
+Five new native positive roots improve complete trial time 78.01% and encoded
+bytes 87.52% against fresh solving; prior acquisition/discovery and unresolved
+fallback are excluded. The open export is 1,175,494 bytes for twenty cases;
+removing five closed cases precludes a same-set compression claim. Lifetime
+history and future contexts remain unbounded, with no unrestricted-SAT result.
+
 [B4-failure composition](b4-cursor-feedback.md) checks and appends 69 exclusions,
 then runs one unconditional B5 propagation per case, with zero new assumed
 probes. It refutes four events and strengthens nine other closures by 85

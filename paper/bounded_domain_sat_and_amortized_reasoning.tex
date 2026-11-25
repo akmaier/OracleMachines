@@ -12880,6 +12880,58 @@ history cannot skip candidates on changed banks. All 1,977 tests pass, but no
 uniform bound on unrestricted-SAT construction, future contexts or lifetime
 storage follows from this finite experiment.
 
+\subsection{Exact transfer of unchanged search frontiers}
+The next experiment recognizes when a feedback transition leaves the complete
+bank, closure trace and trace allowance unchanged. On such a transition, the
+residual clauses and active variables agree; both implemented search policies
+use the same source occurrence order and complement-first promotion rule.
+After checking the old input binding, schedule and all failed proofs, the
+history is copied into the new bank's binding and checked again there. Changed
+banks start fresh. Open-history entries remain trusted scheduling information,
+not satisfiability certificates or proof axioms. Work-interrupted assumptions
+are retried rather than marked completed.
+
+Sixteen of the 25 open $B_4/B_5$ pairs meet this exact criterion; nine are changed.
+Three exposed-corpus controls run twice in opposite order: fresh 64-assumption
+search, fresh search reaching the reuse frontier (128 on the sixteen matches,
+64 otherwise), and transfer followed by up to 64 new assumptions. The 128
+control doubles the occurrence allowance; all arms pay preparation and exact
+comparison. Historical acquisition is already paid and excluded from current
+continuation costs. Every transferred result and final cursor exactly equals
+its matched fresh-frontier result. Transfer avoids 1,024 repeated assumptions:
+new attempts fall from 2,323 to 1,299, and per-probe initialization visits from
+870,272 to 488,768 clauses.
+
+Five new opposite-probe refutations yield native certificates accepted by both
+readers, raising sampled recognition to 226 of 246 events. All five already
+had negative reference-snapshot answers; these are newly certified structural
+routes. Transfer and the matched control retain 39 failed probes, versus 34
+for the shorter restart. The additional five failures occur at later candidates;
+the five refutations are the same across all three controls. Twenty events
+remain open, retaining 26 failed probes in eight cases. Two finish the current
+single-literal order without establishing satisfiability.
+
+Measured discovery time is $0.20070$ seconds for the matched control and
+$0.19190$ for transfer; complete census time is $0.89750$ versus $0.88422$,
+improvements of $4.38\%$ and $1.48\%$. These are descriptive timings, with three
+per-case discovery regressions retained. Reconstruction and semantic cold
+checking together consume about $77\%$ of transfer time. Peak process memory
+is essentially unchanged. Both matched methods retain 319,536 cursor/result
+bytes, versus 312,831 for the shorter restart. Avoided search does not imply
+smaller retained state or free recognition and checking.
+
+Twenty isolated trials on the five gained roots give complete local times of
+$2.67493$ seconds fresh and $0.58810$ with direct-unit native compilation,
+including warm checks, both readers and persistence. Encoded key/payload bytes
+fall from 5,239,018 to 653,817, and records from 421 to 187. All five improve,
+but warm provenance checking remains more expensive; prior acquisition,
+discovery and unresolved fallback are additional. The open export is 1,175,494
+bytes for twenty cases, after removing five closed cases and retaining later
+history. All old exports remain preserved, so this is neither same-set
+compression nor a lifetime-space bound. All 1,987 tests pass. The next target
+is checked composition of the 26 retained failures, with later candidates or
+stronger interaction needed elsewhere; unrestricted-SAT obligations remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

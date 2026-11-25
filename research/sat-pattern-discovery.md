@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: B5 failure interaction and seven stronger B6 closures
+## Latest evidence: later B6 candidates and the limit of one literal order
+
+[B6 probing](b6-probe-cursor.md) refutes `(37,0)`, reaching 228/246 sampled
+recognition with 18 open. Twelve exact B5/B6 matches reuse 1,472 completed
+assumptions and match fresh extended search exactly. The remaining nine
+checked failures occur in six cases; seven failures lie beyond the short
+restart frontier. Compose these next. The gained formula was already UNSAT
+in the reference snapshot; this expands certified structural recognition.
+
+Six other cases exhaust the current single-literal order without a SAT
+certificate. If feedback does not change their bank, investigate stronger
+bounded interactions instead of repeating this order. Complete census time
+barely improves and the open export grows 9.03%; repeated preparation and
+duplicated provenance remain cost gaps. All 2,005 tests pass. Resume
+`experiments/results/cnf-b6-probe-cursor/checkpoint.json`. A complete efficient
+partition of arbitrary CNF and a lifetime storage bound remain open.
+
+## Previous evidence: B5 failure interaction and seven stronger B6 closures
 
 [Composing the 26 B5 failures](b5-cursor-feedback.md) refutes `(64,16)` with zero
 new assumed probes. Both native readers accept its certificate, reaching

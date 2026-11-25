@@ -18,6 +18,21 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[B6 history continuation](b6-probe-cursor.md) avoids 1,472 completed assumptions
+and 615,872 initialization clause visits on twelve exact bank/closure matches.
+Programs and cursors equal fresh extended search, but complete census time
+improves only 0.11%; no material total speedup is established. Reconstruction
+and semantic checks take 76.35%, and RSS does not improve. Migration must still
+copy/rebind/check old history. The 18-case open export grows 9.03% to 1,259,314
+bytes, preserving prior state plus new cursors; lifetime history remains unbounded.
+
+On one gained root, direct certification takes 0.14327 seconds complete versus
+1.25723 fresh and stores 146,110 encoded bytes versus 2,521,305. Warm checking
+remains costlier; acquisition/discovery and unresolved fallback are additional.
+Six open cases exhaust the current order. The at-most-two-literals-per-active-
+variable candidate bound decides neither SAT nor the cost of future interaction,
+proof expansion, preprocessing, or an arbitrary stream.
+
 [B5-failure composition](b5-cursor-feedback.md) adds at most one unit per checked
 failure, but still checks all retained provenance, constructs/sorts the new
 clause-origin map and rebuilds its index. The occurrence budget does not bound

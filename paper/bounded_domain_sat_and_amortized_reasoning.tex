@@ -12962,6 +12962,34 @@ growth, and unrestricted-SAT obligations remain; a sixth feedback bank supplies
 no uniform polynomial bound. The reproducible checkpoint is
 \texttt{experiments/results/cnf-b5-cursor-feedback/}.
 
+\subsection{Later B6 frontiers and exhausted literal orders}
+Fresh bounded probing of the strengthened B6 bank refutes event $(37,0)$;
+both native readers accept the source-only certificate. Sampled structural
+recognition reaches $228/246$, leaving eighteen open. The reference snapshot
+already knew the gained formula was unsatisfiable. Twelve exact B5/B6
+bank-and-closure matches permit transfer of 1,472 completed assumptions after
+checking original and new bindings, schedules, failure proofs and trace limits.
+Reuse and fresh search reaching the same frontier produce identical programs
+and cursors, while reuse avoids 615,872 initialization clause visits. Nine
+failures remain in six open cases, seven beyond a short restart's frontier.
+Six other cases exhaust their current single-literal order without deciding SAT;
+unchanged exhausted orders require stronger interaction rather than repetition.
+
+Across two opposite-order repetitions, discovery/preparation takes $0.15807$
+seconds with reuse versus $0.16706$ matched fresh search. Complete census time
+is $0.71970$ versus $0.72048$: the $0.11\%$ difference does not demonstrate a
+material total speedup. Reconstruction and semantic checking consume $76.35\%$
+of reuse time; peak resident memory does not improve. The eighteen-case open
+export grows $9.03\%$ to 1,259,314 bytes as old histories and new bindings persist.
+On the gained root, direct-unit certification takes $0.14327$ seconds including
+warm checks, both cold readers and persistence, versus $1.25723$ fresh; 35
+records occupy 146,110 encoded bytes versus 141 records and 2,521,305 bytes.
+Warm checking remains more expensive, and acquisition, discovery and unresolved
+fallback are additional. All 2,005 tests pass. These finite measured gains
+supply neither an efficient partition of arbitrary CNF nor a bound on future
+layers, native contexts or lifetime storage. The checkpoint is
+\texttt{experiments/results/cnf-b6-probe-cursor/}.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

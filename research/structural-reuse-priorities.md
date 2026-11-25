@@ -12,7 +12,30 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: probe stronger B6 closures; reuse checked preparation
+## Current investigation: compose B6 failures and diagnose exhausted orders
+
+[B6 continuation](b6-probe-cursor.md) closes `(37,0)`, reaching 228/246 sampled
+recognition with 18 open. **Next coverage target:** compose nine checked failures
+in six cases, including seven found only beyond the short restart frontier.
+Six other cases exhaust their present single-literal order. If feedback leaves
+them unchanged, stronger bounded interaction is needed; exhaustion is not SAT.
+
+**Largest avoidable costs:** reconstruction/checking still take 76.35% of the
+census, and full exact bindings duplicate retained state. Avoiding 1,472 repeated
+assumptions saves 5.38% of discovery time but only 0.11% of complete time, which
+does not demonstrate a material total speedup. RSS does not improve. The open
+export grows 9.03% to 1,259,314 bytes despite dropping one case. Investigate
+immutable checked preparation reuse and shared provenance with exact invalidation
+and cold validation. Direct units remain the native baseline: the gained root
+uses 35 records versus 141 fresh, with 94.20% fewer bytes, excluding acquisition,
+discovery and unresolved fallback. Warm checking still regresses.
+
+All 2,005 tests pass. Resume
+`experiments/results/cnf-b6-probe-cursor/checkpoint.json`; preserve regressions,
+old histories and the six exhausted-order cases as future diagnostic targets.
+Unrestricted SAT, context growth and lifetime memory remain open.
+
+## Previous investigation: probe stronger B6 closures; reuse checked preparation
 
 [B5-failure composition](b5-cursor-feedback.md) adds one checked structural
 refutation, reaching 227/246 sampled recognition with 19 unresolved. Seven

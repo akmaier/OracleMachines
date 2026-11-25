@@ -4,7 +4,18 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (25 November, B5-failure composition):
+Latest expansion checkpoint (25 November, B6 frontier continuation):
+[Advance exact B6 histories](b6-probe-cursor.md). One additional native refutation
+reaches 228/246 sampled recognition with 18 open. Exact transfer avoids 1,472
+repeated assumptions, but total census time barely changes and retained open
+state grows 9.03%. Compose nine failures in six cases next; six other exhausted
+literal orders need stronger interactions if feedback leaves them unchanged.
+All 2,005 tests, two unique native archive/root audits, prior source/artifact
+ledgers and 64 manuscript proof blocks pass. Resume
+`experiments/results/cnf-b6-probe-cursor/checkpoint.json`. Cumulative tables and
+production defaults remain unchanged; new archives are supplemental.
+
+Previous expansion checkpoint (25 November, B5-failure composition):
 [Compose the retained consequences](b5-cursor-feedback.md). One additional native
 refutation reaches 227/246 sampled recognition with 19 open. Seven open closures
 gain 22 assignments; probe these fresh, especially `(37,0)`, and preserve later

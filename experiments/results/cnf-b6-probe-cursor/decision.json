@@ -1,0 +1,228 @@
+{
+  "avoided_initialization_clauses": 615872,
+  "checks": {
+    "focused_tests": 140,
+    "full_tests": 2005,
+    "parent_manifests": 196,
+    "prior_artifact_entries": 27449,
+    "prior_sources": 1111,
+    "proof_blocks": 64
+  },
+  "complete_census_reduction_percent": 0.10768035374804086,
+  "coverage": {
+    "after": 228,
+    "before": 227,
+    "total": 246
+  },
+  "direct_vs_fresh_bytes_reduction_percent": 94.20498511683434,
+  "direct_vs_fresh_complete_reduction_percent": 88.60414068890059,
+  "discovery_reduction_percent": 5.383758531569893,
+  "exhausted_literal_orders": [
+    {
+      "completed": 128,
+      "event": 17,
+      "target": 28
+    },
+    {
+      "completed": 152,
+      "event": 0,
+      "target": 61
+    },
+    {
+      "completed": 146,
+      "event": 21,
+      "target": 61
+    },
+    {
+      "completed": 152,
+      "event": 50,
+      "target": 61
+    },
+    {
+      "completed": 150,
+      "event": 51,
+      "target": 61
+    },
+    {
+      "completed": 142,
+      "event": 74,
+      "target": 61
+    }
+  ],
+  "gain": {
+    "event": 0,
+    "snapshot_answer": "unsat",
+    "target": 37
+  },
+  "limitations": [
+    "Same19 exposed open B6 cases; seven changed, twelve exact B5/B6 bank and closure matches. No holdout; pilot exposed before timing.",
+    "Restart attempts64 per case. Reuse imports a checked B5 cursor only when full bank and closure including trace and trace bound agree, then attempts64 more; changed cases start fresh. Both old and new schedules/proofs are checked.",
+    "Matched control reaches the same frontier from scratch:64 plus the retained completed prefix on the12 pilot-identified exact matches,64 otherwise. The matched allowance is262144 times the number of64-attempt chunks rounded up. These fixed matched budgets are experimental controls; all arms still pay current preparation and exact comparison.",
+    "A fresh64 chunk has262144 occurrence visits and256 trace steps including closure prefix. Index construction, per-probe initialization, exact content bindings and verification are extra. No global linear-work bound.",
+    "All prior history acquisition is already paid and excluded from current continuation costs. Claimed open-history entries remain trusted scheduling data, not SAT or exhaustion proofs. No cross-bank skip without exact equality.",
+    "Two opposite-order isolated repetitions. Census includes source-prefix reconstruction, discovery/preparation, serialization/reload, cold semantic verification and reporting. Startup/loading, earlier acquisition and final audit are additional.",
+    "Native positive comparisons use fresh bounded solving and the measured direct-unit seven-bank compiler. Warm checks, both cold readers and persistence are charged, but discovery, acquisition and unresolved fallback are excluded.",
+    "New results preserve old layers and cursors. Exact bindings duplicate content, isolated archives may duplicate records and lifetime storage remains unbounded. No production default or unrestricted SAT claim."
+  ],
+  "matched_imported_completed": 1472,
+  "newly_found_later_failures": 7,
+  "next_targets": [
+    "Compose nine verified B6 failed assumptions in six open cases, keeping source-only native reconstruction and strictly decreasing dependencies.",
+    "Preserve later frontiers on the other twelve cases. Six exhaust their present single-literal order without a SAT certificate; if unchanged by new feedback, investigate stronger bounded interaction rather than restarting that order.",
+    "Preparation and semantic checking remain the dominant avoidable costs. Evaluate immutable checked preparation reuse with full-content invalidation and cold validation.",
+    "Retained bindings and prior histories now grow the open export despite removing a case. Share exact immutable data without losing provenance; no lifetime-space bound yet."
+  ],
+  "open_export_growth_percent": 9.028116872547699,
+  "outcome": "One additional native refutation; exact B5/B6 migration saves repeated work but does not materially improve complete census runtime.",
+  "preparation_checking_fraction": 0.7634936851432904,
+  "regressions": {
+    "matched": {
+      "discovery_seconds": {
+        "improved": 13,
+        "regressed": [
+          [
+            28,
+            18
+          ],
+          [
+            28,
+            19
+          ],
+          [
+            37,
+            0
+          ],
+          [
+            61,
+            52
+          ],
+          [
+            61,
+            60
+          ],
+          [
+            61,
+            61
+          ]
+        ]
+      },
+      "record_bytes": {
+        "improved": 0,
+        "regressed": []
+      }
+    },
+    "restart": {
+      "discovery_seconds": {
+        "improved": 14,
+        "regressed": [
+          [
+            40,
+            0
+          ],
+          [
+            61,
+            52
+          ],
+          [
+            61,
+            60
+          ],
+          [
+            61,
+            61
+          ],
+          [
+            67,
+            63
+          ]
+        ]
+      },
+      "record_bytes": {
+        "improved": 0,
+        "regressed": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            15
+          ],
+          [
+            28,
+            17
+          ],
+          [
+            37,
+            39
+          ],
+          [
+            37,
+            40
+          ],
+          [
+            40,
+            0
+          ],
+          [
+            61,
+            0
+          ],
+          [
+            61,
+            21
+          ],
+          [
+            61,
+            50
+          ],
+          [
+            61,
+            51
+          ],
+          [
+            61,
+            74
+          ],
+          [
+            67,
+            0
+          ]
+        ]
+      }
+    }
+  },
+  "remaining": 18,
+  "retained_failures": [
+    {
+      "event": 15,
+      "failures": 1,
+      "target": 1
+    },
+    {
+      "event": 18,
+      "failures": 1,
+      "target": 28
+    },
+    {
+      "event": 19,
+      "failures": 1,
+      "target": 28
+    },
+    {
+      "event": 39,
+      "failures": 2,
+      "target": 37
+    },
+    {
+      "event": 40,
+      "failures": 3,
+      "target": 37
+    },
+    {
+      "event": 0,
+      "failures": 1,
+      "target": 40
+    }
+  ]
+}

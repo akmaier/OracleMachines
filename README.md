@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Advance B6 discovery](research/b6-probe-cursor.md): one more checked structural
+refutation reaches 228/246 sampled recognition, with 18 open. Exact history
+transfer avoids 1,472 repeated assumptions, but complete census time barely
+changes and the open export grows 9%. Nine failures in six cases are ready for
+composition; six other cases exhaust the current literal order without deciding
+SAT. All 2,005 tests pass.
+
+Previous:
+
 [Compose B5 failures](research/b5-cursor-feedback.md): one additional checked
 refutation reaches 227/246 sampled recognition, leaving 19 open. Seven remaining
 closures gain 22 assignments. The gained root uses 81% fewer certificate bytes

@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: exact cross-layer histories and broader B5 recognition
+## Latest evidence: B5 failure interaction and seven stronger B6 closures
+
+[Composing the 26 B5 failures](b5-cursor-feedback.md) refutes `(64,16)` with zero
+new assumed probes. Both native readers accept its certificate, reaching
+227/246 sampled recognition with 19 open. Seven open closures gain 22 assignments,
+ten beyond explicit exclusion variables. The reference snapshot already knew
+the gained formula was UNSAT; this expands certified structural recognition.
+
+Next probe those seven changed banks with fresh bindings, starting with
+`(37,0)` and its 16 added assignments. Twelve unchanged cases need later
+candidates or stronger interaction; preserve exact-history transfer conditions.
+The current failures are already incorporated, so another identical composition
+adds nothing. Repeated reconstruction/checking remains 78.71% of the census.
+All 1,995 tests pass. Resume
+`experiments/results/cnf-b5-cursor-feedback/checkpoint.json` and its complete
+`remaining-closures.json`. Unrestricted SAT and lifetime storage bounds remain open.
+
+## Previous evidence: exact cross-layer histories and broader B5 recognition
 
 [B5 search and cursor migration](b5-probe-cursor.md) refute five more events,
 reaching 226/246 recognition with 20 unresolved. All five native roots pass both

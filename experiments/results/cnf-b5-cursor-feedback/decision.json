@@ -1,0 +1,255 @@
+{
+  "census_complete_regression_percent": 0.2859754911144208,
+  "checks": {
+    "focused_tests": 130,
+    "full_tests": 1995
+  },
+  "coverage": {
+    "after": 227,
+    "before": 226,
+    "total": 246
+  },
+  "direct_vs_fresh_bytes_reduction_percent": 80.73141652719309,
+  "direct_vs_fresh_complete_reduction_percent": 64.2235929201792,
+  "discovery_regressions": [
+    {
+      "event": 0,
+      "seconds": {
+        "base": 0.011005708249285817,
+        "feedback": 0.01132022961974144
+      },
+      "target": 1
+    },
+    {
+      "event": 15,
+      "seconds": {
+        "base": 0.006780666531994939,
+        "feedback": 0.0069418123457580805
+      },
+      "target": 1
+    },
+    {
+      "event": 17,
+      "seconds": {
+        "base": 0.005187312373891473,
+        "feedback": 0.005320229101926088
+      },
+      "target": 28
+    },
+    {
+      "event": 18,
+      "seconds": {
+        "base": 0.004651437047868967,
+        "feedback": 0.00477945851162076
+      },
+      "target": 28
+    },
+    {
+      "event": 19,
+      "seconds": {
+        "base": 0.003965459065511823,
+        "feedback": 0.004114416427910328
+      },
+      "target": 28
+    },
+    {
+      "event": 0,
+      "seconds": {
+        "base": 0.01190845831297338,
+        "feedback": 0.012025333242490888
+      },
+      "target": 37
+    },
+    {
+      "event": 39,
+      "seconds": {
+        "base": 0.00880579138174653,
+        "feedback": 0.008901833090931177
+      },
+      "target": 37
+    },
+    {
+      "event": 40,
+      "seconds": {
+        "base": 0.008360499981790781,
+        "feedback": 0.008426999673247337
+      },
+      "target": 37
+    },
+    {
+      "event": 0,
+      "seconds": {
+        "base": 0.013305708533152938,
+        "feedback": 0.013709833845496178
+      },
+      "target": 40
+    },
+    {
+      "event": 16,
+      "seconds": {
+        "base": 0.006512874970212579,
+        "feedback": 0.006545520853251219
+      },
+      "target": 64
+    },
+    {
+      "event": 0,
+      "seconds": {
+        "base": 0.010959249222651124,
+        "feedback": 0.011234542122110724
+      },
+      "target": 67
+    }
+  ],
+  "gain": {
+    "event": 16,
+    "snapshot_answer": "unsat",
+    "target": 64,
+    "trace_units": 37
+  },
+  "limitations": [
+    "Same20 retained B5 closures/cursors;26 verified failures in8 cases. Pilot exposed before timing; no holdout. Zero new assumed probes.",
+    "Both arms check all source/guard/probe/closure provenance, all three cursor bindings and failed proofs, and construct B6. Base propagates B5; feedback propagates B6.",
+    "Only checked failed assumptions become exclusions. Native reconstruction expands used derivations through strictly decreasing banks B6 to B0; open-history claims never provide axioms.",
+    "Two opposite-order isolated repetitions per target and arm. Source-prefix reconstruction, discovery preparation, indexing, checking, propagation, serialization/reload and semantic cold verification are charged. Startup/loading, historical acquisition, final audit and diagnostic open closures are additional.",
+    "Native comparisons cover all distinct new roots: fresh bounded solving, new B6 compiler with shortcut disabled, and bounded direct unit closure at every trace entry. Both readers, warm checks and persistence are charged. Prior acquisition, discovery and unresolved fallback are additional.",
+    "Direct unit shortcuts use only the canonical source residual, with the inherited262144 work allowance and256 trace bound. Existing source support selection, publication handoff, native rules and checks remain.",
+    "Isolated archives may duplicate content. Open states retain old layers and complete B6 closures; old B5 history cannot skip changed B6 candidates. Cumulative tables and production defaults are unchanged.",
+    "Finite sampled coverage and cheaper positive certificates do not bound unrestricted SAT, future proof layers, distinct contexts or lifetime memory."
+  ],
+  "next_targets": [
+    "Probe the seven strengthened B6 banks with fresh bindings; start with (37,0), which gains16 assignments,10 beyond explicit exclusions.",
+    "Advance untouched frontiers on the twelve unchanged cases only after exact bank, closure, trace allowance and old/new cursor checks. (28,17) already exhausts this literal order; it needs stronger interaction.",
+    "Repeated source reconstruction and semantic validation dominate total census cost. Investigate immutable checked preparation reuse with explicit invalidation and cold verification.",
+    "Do not repeat composition of the same12 retained B5 failures: all are already present in B6. No arbitrary-SAT or lifetime-memory bound."
+  ],
+  "outcome": "One additional checked structural refutation; seven stronger open closures; no new assumed probes.",
+  "preserved": {
+    "parent_manifests": 195,
+    "prior_artifact_entries": 27344,
+    "prior_sources": 1107,
+    "production_defaults": true,
+    "proof_blocks": 64,
+    "reference_union": true
+  },
+  "reconstruction_and_checking_fraction": 0.7871034344362102,
+  "remaining": 19,
+  "strengthened_cases": [
+    {
+      "added_assignments": 1,
+      "beyond_exclusions": 0,
+      "event": 18,
+      "target": 28
+    },
+    {
+      "added_assignments": 1,
+      "beyond_exclusions": 0,
+      "event": 19,
+      "target": 28
+    },
+    {
+      "added_assignments": 16,
+      "beyond_exclusions": 10,
+      "event": 0,
+      "target": 37
+    },
+    {
+      "added_assignments": 1,
+      "beyond_exclusions": 0,
+      "event": 52,
+      "target": 61
+    },
+    {
+      "added_assignments": 1,
+      "beyond_exclusions": 0,
+      "event": 60,
+      "target": 61
+    },
+    {
+      "added_assignments": 1,
+      "beyond_exclusions": 0,
+      "event": 61,
+      "target": 61
+    },
+    {
+      "added_assignments": 1,
+      "beyond_exclusions": 0,
+      "event": 63,
+      "target": 67
+    }
+  ],
+  "unchanged_closures": [
+    {
+      "added_assignments": 0,
+      "beyond_exclusions": 0,
+      "event": 0,
+      "target": 1
+    },
+    {
+      "added_assignments": 0,
+      "beyond_exclusions": 0,
+      "event": 15,
+      "target": 1
+    },
+    {
+      "added_assignments": 0,
+      "beyond_exclusions": 0,
+      "event": 17,
+      "target": 28
+    },
+    {
+      "added_assignments": 0,
+      "beyond_exclusions": 0,
+      "event": 39,
+      "target": 37
+    },
+    {
+      "added_assignments": 0,
+      "beyond_exclusions": 0,
+      "event": 40,
+      "target": 37
+    },
+    {
+      "added_assignments": 0,
+      "beyond_exclusions": 0,
+      "event": 0,
+      "target": 40
+    },
+    {
+      "added_assignments": 0,
+      "beyond_exclusions": 0,
+      "event": 0,
+      "target": 61
+    },
+    {
+      "added_assignments": 0,
+      "beyond_exclusions": 0,
+      "event": 21,
+      "target": 61
+    },
+    {
+      "added_assignments": 0,
+      "beyond_exclusions": 0,
+      "event": 50,
+      "target": 61
+    },
+    {
+      "added_assignments": 0,
+      "beyond_exclusions": 0,
+      "event": 51,
+      "target": 61
+    },
+    {
+      "added_assignments": 0,
+      "beyond_exclusions": 0,
+      "event": 74,
+      "target": 61
+    },
+    {
+      "added_assignments": 0,
+      "beyond_exclusions": 0,
+      "event": 0,
+      "target": 67
+    }
+  ]
+}

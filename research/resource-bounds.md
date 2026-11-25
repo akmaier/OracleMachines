@@ -18,6 +18,20 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[B5-failure composition](b5-cursor-feedback.md) adds at most one unit per checked
+failure, but still checks all retained provenance, constructs/sorts the new
+clause-origin map and rebuilds its index. The occurrence budget does not bound
+these costs. On twenty cases it adds 26 exclusions, refutes one event and
+strengthens seven closures by 22 assignments. Complete census time regresses
+0.29%; reconstruction and semantic checks take 78.71%, with unchanged-scale RSS.
+
+On the gained root, direct native closure cuts complete local time from 0.27312
+to 0.09771 seconds and encoded bytes from 527,579 to 101,657, excluding prior
+acquisition/discovery and unresolved fallback. Warm checking remains costlier.
+The 1,155,036-byte open-closure export now contains nineteen rather than twenty
+cases, so its smaller size does not establish same-set compression. All older
+artifacts remain; future proof layers, contexts and lifetime storage are unbounded.
+
 [Exact B4/B5 cursor migration](b5-probe-cursor.md) transfers checked scheduling
 history only when full banks, complete closures including traces, and trace
 allowances agree. Both original and new bindings/schedules/failure proofs are

@@ -12,7 +12,27 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: compose B5 failures; avoid repeated preparation
+## Current investigation: probe stronger B6 closures; reuse checked preparation
+
+[B5-failure composition](b5-cursor-feedback.md) adds one checked structural
+refutation, reaching 227/246 sampled recognition with 19 unresolved. Seven
+closures gain 22 assignments; `(37,0)` gains 16, including ten beyond explicit
+exclusions. **Next coverage target:** fresh bounded probing on these seven
+changed banks. Twelve unchanged cases retain useful histories, transferable only
+under exact bank/closure/trace-bound checks. An exhausted literal order is not SAT.
+
+**Largest avoidable runtime cost:** source reconstruction and semantic checking
+still take 78.71% of the complete census. Composition itself takes slightly more
+work and the census regresses 0.29%; RSS does not improve. Investigate immutable
+checked preparation reuse with explicit invalidation and cold verification.
+Direct units remain the native baseline: the one gained root uses 44 records
+and 101,657 bytes versus 78 and 527,579 fresh; complete positive trial time falls
+64.22%, excluding acquisition/discovery and unresolved fallback. Warm checking
+still regresses. All 1,995 tests pass. Resume
+`experiments/results/cnf-b5-cursor-feedback/checkpoint.json`. General coverage,
+proof-context growth and lifetime memory remain open.
+
+## Previous investigation: compose B5 failures; avoid repeated preparation
 
 [Exact B4/B5 frontier transfer](b5-probe-cursor.md) avoids 1,024 repeated
 assumptions on sixteen unchanged banks and exactly matches fresh extended

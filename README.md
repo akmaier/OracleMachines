@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Compose B5 failures](research/b5-cursor-feedback.md): one additional checked
+refutation reaches 227/246 sampled recognition, leaving 19 open. Seven remaining
+closures gain 22 assignments. The gained root uses 81% fewer certificate bytes
+than fresh solving; the full discovery census is slightly slower. All 1,995
+tests pass. Next probe the strengthened closures and reduce repeated preparation.
+
+Previous:
+
 [Transfer exact B4/B5 frontiers](research/b5-probe-cursor.md): five more events
 obtain checked native refutations, reaching 226/246 sampled coverage with 20 open.
 Sixteen exact bank/closure matches reuse 1,024 prior assumptions and match a

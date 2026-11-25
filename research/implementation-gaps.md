@@ -4,7 +4,19 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (25 November, checked exclusion feedback):
+Latest expansion checkpoint (25 November, checked closure probes):
+[Reuse the residual before another bounded search](closure-probes.md). An
+additional 64-assumption budget closes 47/116 remaining events, with 41 distinct
+new roots verified by both cold readers. Restart and conditioned arms agree on
+coverage; conditioning cuts visits 50.06% and discovery time 8.45%, but total
+census time only 1.51%. All 1,903 tests pass. The 69 unresolved cases retain 180
+new failures in 37 events, with 125 old exclusions. Next compose that proof layer
+by checked feedback and reuse expensive source/prefix preparation across rounds.
+Native proof bytes roughly halve versus ordinary solving; compilation is still
+6.57% slower. No complete workload advantage is established. Resume
+`experiments/results/cnf-closure-probes/checkpoint.json`.
+
+Previous expansion checkpoint (25 November, checked exclusion feedback):
 [Compose saved failed probes by propagation](probe-feedback.md). One feedback
 pass refutes 64 of 180 remaining events without new assumed probes. All 53 distinct
 roots have native proofs and both readers accept 106 archive/root pairs. The

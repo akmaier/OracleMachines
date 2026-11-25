@@ -1,0 +1,14 @@
+from collections import Counter
+from pathlib import Path
+from experiments import compare_cnf_probe_feedback as prior
+from experiments import cnf_closure_probes as candidate
+rows=[]
+for row in prior.base.load(Path('experiments/results/cnf-probe-feedback/remaining-closures.json'))['rows']:
+ closure={k:row[k] for k in ('units','assignment')};out=dict(target=row['target'],event=row['event'],arms={})
+ for mode in ('restart','conditioned'):
+  c=Counter();p=candidate.discover(row['final_source'],row['templates'],row['seed'],closure,c,mode=mode)
+  candidate.validate(row['final_source'],row['templates'],row['seed'],closure,p,Counter())
+  out['arms'][mode]=dict(program=p,counts=dict(c))
+ rows.append(out)
+prior.compact(Path('experiments/results/cnf-closure-probes/pilot.json'),dict(rows=rows))
+print({mode:dict(Counter(r['arms'][mode]['program']['reason'] for r in rows)) for mode in ('restart','conditioned')})

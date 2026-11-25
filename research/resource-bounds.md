@@ -18,6 +18,24 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Checked residual probing](closure-probes.md) conditions a C-clause, L-occurrence
+feedback bank once, with K saved assignments, before P additional probes. A
+residual with C_r clauses and L_r occurrences takes O(L) expected word work plus
+sorting to build and O(C_r+L_r) to index. Each probe initializes O(C_r) state and
+visits O(L_r) occurrences; F retained failures copy O(FK) closure-prefix steps
+in addition to residual traces. Source ranking, seed/guard/closure validation,
+transport and native reconstruction are additional. The full bank stays resident,
+so reduced index size does not imply an equal reduction in total memory.
+
+The 116-event experiment halves propagation visits and cuts discovery 8.45%, but
+complete census time only 1.51%; prefix reconstruction is 80.22% of that cost.
+Retained trace steps rise from 13,376 to 13,378, and peak census RSS is unchanged.
+An additional 64-assumption budget closes 47 events in both arms. Native proof
+bytes fall 49.46% versus ordinary local solving, while compilation is 6.57% slower.
+The positive-case cost subtotal excludes acquisition and unresolved fallback.
+These bounded recognizer costs neither bound unlimited expansion/history nor
+supply a complete unrestricted-SAT algorithm.
+
 [One-pass exclusion feedback](probe-feedback.md) adds U checked unit consequences
 to a fixed C-clause, L-occurrence bank. Index construction and complete propagation
 use O(C+L+U) expected word work/space under the existing dictionary model; bank

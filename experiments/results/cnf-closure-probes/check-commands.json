@@ -1,0 +1,7 @@
+{
+  "audit": "python3 experiments/validate_cnf_closure_probes.py validate experiments/results/cnf-closure-probes",
+  "focused": "python3 -m unittest solver.test_cnf_wide_guard_probes solver.test_cnf_wide_guard_probe_scope solver.test_cnf_complement_probes solver.test_cnf_complement_probe_scope solver.test_cnf_probe_support solver.test_cnf_probe_support_reuse solver.test_cnf_probe_feedback solver.test_cnf_probe_feedback_guards solver.test_cnf_closure_probes",
+  "full": "python3 -m unittest discover -s solver",
+  "latex": "latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=/private/tmp/oracle-closure-probes-paper paper/bounded_domain_sat_and_amortized_reasoning.tex",
+  "seal": "python3 experiments/validate_cnf_closure_probes.py seal experiments/results/cnf-closure-probes"
+}

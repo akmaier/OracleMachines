@@ -1,0 +1,20 @@
+..E...
+======================================================================
+ERROR: test_guard_and_old_probe_provenance_remain_separate (solver.test_cnf_closure_probes.ClosureProbeTests.test_guard_and_old_probe_provenance_remain_separate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_closure_probes.py", line 51, in test_guard_and_old_probe_provenance_remain_separate
+    source=fixture();template=conditional_unit(((1,-2),(1,2)),[[1,False]],Counter());templates=[template]
+                              ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_stopped_support.py", line 38, in conditional_unit
+    check_template(result,counts)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_conditional_unit_support.py", line 34, in check_template
+    if [list(cl) for cl in sorted(members)]!=clauses:raise ValueError('Template clauses must be sorted and unique')
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Template clauses must be sorted and unique
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.094s
+
+FAILED (errors=1)

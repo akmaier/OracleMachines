@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Probe the residual of a checked closure](research/closure-probes.md).
+An additional bounded round closes 47 of 116 remaining events, with 41 distinct
+new native proofs; all 1,903 tests pass. Reusing the closure halves propagation
+visits and cuts discovery time 8.45%, with the same coverage as restarting.
+Prefix reconstruction still dominates total census cost. Next: compose the 180
+new failures retained in 37 open events and reuse preparation across rounds.
+
+Previous:
+
 [Feed saved exclusions back into propagation](research/probe-feedback.md).
 One pass closes 64 of 180 remaining events without new assumed probes. All 53
 distinct gained roots have native proofs; all 1,897 tests pass. The 116 open cases

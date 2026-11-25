@@ -12,7 +12,38 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: condition on checked closures before new probes
+## Current investigation: compose the next proof layer; reuse preparation
+
+[Probing checked residual closures](closure-probes.md) closes 47 of the 116
+remaining events, representing 41 new distinct roots. This spends an additional
+64-assumption budget. Restart and conditioned search have identical coverage in
+this sample: conditioning cuts occurrence visits 50.06%, discovery time 8.45%,
+and complete census time only 1.51%. The original post-binary sample now has
+177/246 recognized events; all 82 new archive/root pairs pass both cold readers.
+
+**Next coverage target:** feed the 180 new failed probes in 37 open events into
+one checked propagation round. Their proofs depend on the old feedback bank:
+keep the proof layers explicit. Of 69 remaining events, 32 have no new failure
+and twenty have neither old nor new exclusions. Repeating unchanged probes there
+is unproductive; investigate untested candidates or stronger interaction separately.
+
+**Largest measured cost:** saved-prefix reconstruction accounts for 80.22% of the
+conditioned census. Reuse source-bound preparation across rounds before pursuing
+smaller propagation savings. Native compilation still costs 5.70532 seconds
+versus 5.35369 for ordinary solving. Record bytes fall 49.46%; complete local
+trials fall from 13.30158 to 11.77838 seconds, but only 17/41 cases improve.
+The partial subtotal after representative continuation is 12.72764 seconds and
+excludes seed acquisition and unresolved fallback. Retain all regressions.
+
+Closure-prefix copies also remain a storage opportunity: conditioned programs
+contain 13,378 trace steps versus 13,376 for restart despite fewer propagated
+steps. Working memory retains the full bank; peak census RSS is unchanged.
+All 1,903 tests pass. Resume
+`experiments/results/cnf-closure-probes/checkpoint.json`. All prior results,
+cumulative banks and 64 proof blocks are preserved. No unrestricted-SAT bound
+or bound on the number of future rounds follows.
+
+## Previous investigation: condition on checked closures before new probes
 
 [One-pass exclusion feedback](probe-feedback.md) refutes 64 of the 180 remaining
 all-guard events without new assumed probes. The 53 distinct gained roots have

@@ -5,7 +5,26 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: saved exclusions compose into new refutations
+## Latest evidence: closure reuse makes the next search round cheaper
+
+[Bounded residual probing](closure-probes.md) refutes 47 more events using an
+additional 64-assumption budget, with 41 distinct new native roots. Four were
+unknown in inspected snapshots; ordinary solving also proves all 41. Recognition
+reaches 177/246 post-binary events, leaving 69 unresolved. Both restart and
+conditioned search find the same 47: the extra budget expands coverage, while
+conditioning halves propagation visits and reduces discovery time 8.45%.
+
+Next compose the 180 newly retained failures in 37 open events through a checked
+feedback pass. Preserve their dependencies on old exclusions as a separate proof
+layer. Thirty-two open events have no new failure; twenty have neither old nor
+new exclusions. Those cases need different candidates or interaction, not another
+unchanged pass. Native compilation remains slower than ordinary solving, though
+proof bytes roughly halve. Prefix reconstruction dominates discovery's total
+cost. All 1,903 tests pass; resume
+`experiments/results/cnf-closure-probes/checkpoint.json`. This exposed finite
+sample does not establish efficient coverage of arbitrary CNFs.
+
+## Previous evidence: saved exclusions compose into new refutations
 
 [One checked feedback pass](probe-feedback.md) closes 64 of 180 remaining events,
 using 851 saved exclusions and zero new assumed probes. The 53 distinct gained

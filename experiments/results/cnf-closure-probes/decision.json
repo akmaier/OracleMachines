@@ -1,0 +1,79 @@
+{
+  "evidence": {
+    "analysis": {
+      "path": "experiments/results/cnf-closure-probes/analysis.json",
+      "sha256": "e1cb76f541d4a0cf4bfd35873bdf18d0a37d7e67bbae4456686891d235296315"
+    },
+    "protocol": {
+      "path": "experiments/results/cnf-closure-probes/protocol.json",
+      "sha256": "08aadce98658f220626d1d052c155704a0a9d9c28d5596a9f2ef24314e3d9e30"
+    },
+    "remaining": {
+      "path": "experiments/results/cnf-closure-probes/remaining.json",
+      "sha256": "bb2e2198474a92a2170527aae6f0a41277be3743c0ef8fa32eb24e8c675df9a3"
+    },
+    "retained-state": {
+      "path": "experiments/results/cnf-closure-probes/retained-state.json",
+      "sha256": "bcfe1d200393056354cebd33b950792a389f84c55351b014a7d79edf91a2296e"
+    },
+    "support-plans": {
+      "path": "experiments/results/cnf-closure-probes/support-plans.json",
+      "sha256": "4da55b81f08dcd3da8c50178b22fb6f0a96273b7f2a30afa501d97f8218da0d6"
+    }
+  },
+  "findings": {
+    "additional_probe_budget": 64,
+    "complete_census_reduction_percent": 1.50780214580023,
+    "coverage_gain_source": "Additional bounded probing after the old feedback closure. Both restart and conditioned arms recognize the same47.",
+    "discovery_reduction_percent": 8.44867188926588,
+    "native_compile_increase_percent": 6.56794226841908,
+    "native_record_byte_reduction_percent": 49.456707923208334,
+    "new_distinct_roots": 41,
+    "new_event_refutations": 47,
+    "original_sample_events": 246,
+    "previous_snapshot_unknown_roots": 4,
+    "propagation_visit_reduction_percent": 50.060466026292005,
+    "recognized_original_sample_events": 177
+  },
+  "limitations": [
+    "Same116 saved open feedback closures; pilot outcomes exposed before matched measurement. Two alternating isolated repetitions per target and mode.",
+    "Both arms validate seeds/closures, construct the residual bank and use the same original-source literal order restricted to active residual variables, promoting the opposite of a new failure.",
+    "Restart propagates the full feedback bank for every new assumption; conditioned mode probes the residual and prepends the checked closure trace. The256-step limit includes that prefix.",
+    "This is an additional64-assumption budget per event, not the original seed budget. The262144 visit cap applies to indexed propagation; checking, copying, conditioning and lifting are also measured separately.",
+    "Original event/prefix reconstruction is charged; prior seed acquisition, saved-closure diagnostics, startup/loading and final audit are additional.",
+    "The union of new refutations enters native fresh/closure comparisons, preferring conditioned certificates. Old failures and new failures are kept in distinct proof layers. No new failed-literal feedback round.",
+    "Support selection expands used old exclusions to source-only native proofs; new opposite probes join by existing split rules. No production default, arbitrary-SAT or whole-workload speed claim.",
+    "The69 misses remain unresolved, not SAT. New failures have not been fed back. No arbitrary-SAT coverage theorem, universal dominance, uniform polynomial solver or bound on unlimited retained history.",
+    "The exposed-case positive subtotal excludes acquisition and fallback. Most native compilation/trial cases remain slower than ordinary solving. Memory retains the original bank; census RSS is unchanged.",
+    "Copied closure prefixes make portable program bytes slightly larger. Isolated native byte sums can duplicate shared proofs."
+  ],
+  "next_targets": [
+    {
+      "priority": 1,
+      "remaining_events": 69,
+      "task": "Feed the180 new failed probes in37 unresolved events into a checked propagation pass. Keep new proofs bound to the old feedback bank with explicit acyclic dependencies."
+    },
+    {
+      "priority": 2,
+      "task": "Reuse source-bound preparation and binary-prefix reconstruction across rounds; it accounts for80.22percent of this census, limiting the value of further propagation optimization."
+    },
+    {
+      "priority": 3,
+      "task": "Share checked closure prefixes in portable certificates without losing independent binding and cold replay. Measure total costs; current trace steps slightly increase."
+    },
+    {
+      "priority": 4,
+      "task": "Analyze untested candidates or interaction in32 events with no new failures;20 have neither old nor new exclusions. Avoid rerunning identical probes as a discovery strategy."
+    }
+  ],
+  "preservation": {
+    "cumulative_authority_unchanged": true,
+    "existing_manuscript_proof_blocks_unchanged": 64,
+    "failed_fixture_preserved": true,
+    "new_native_archives": "supplemental only",
+    "prior_artifacts": 24487,
+    "prior_manifests": 184,
+    "prior_sources": 1060
+  },
+  "status": "validated research checkpoint; production defaults unchanged"
+}

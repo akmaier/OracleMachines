@@ -12058,6 +12058,121 @@ stronger-context reconstruction and rejection before warm reuse. All 64 existing
 proof blocks are preserved. This is broader certified pattern coverage with
 explicit costs, not a uniform polynomial solution of unrestricted SAT.
 
+\subsection{Bounded probes after a checked closure}
+
+The 116 open feedback cases retain complete checked unit closures. We now
+condition on these assignments before testing new assumptions. Check every old
+exclusion, guard and closure reason; confirm the assignment map and absence of
+another unit or conflict. Remove satisfied clauses and fixed-false literals,
+deduplicate residual clauses, and retain their original augmented-bank reason
+IDs. The closure is entailed by the source, so residual models extend by its
+assignments and source models restrict to residual models. Discovery retains the
+original variable names and filters the original-source literal ranking to
+active residual variables. Failed assumptions promote their untested opposites.
+
+To lift a failed residual probe, prepend the checked closure and map each residual
+reason to its original clause. The assumption uses an unfixed variable, so it
+cannot disagree with the closure. Independently check the whole lifted trace;
+failed opposite assumptions give a refutation. Causal slicing selects both
+traces and the original source supports of their used old exclusions. Checked
+transport, native split rules and subset lifting reconstruct the result without
+new axioms. Binary-prefix lifting is unchanged. All checks precede reuse or
+publication. New failures depend on the old feedback bank and remain a separate
+proof layer; no further feedback round has yet been applied. An open or exhausted
+search is unresolved, including an empty residual in this refutation-only API.
+
+The matched study gives each event 64 additional assumed probes, 262,144 indexed
+occurrence visits and 256 unit steps per certificate, including any copied
+closure prefix. This is an additional search budget, not the original allowance.
+Both arms pay input checks and residual construction and use the same candidate
+order. Restart propagates the full feedback bank per assumption; conditioned
+mode probes its residual. A pilot exposed outcomes before two alternating
+repetitions per target and mode, giving 32 isolated census workers.
+
+Both arms refute the same 47 events and stop 69 at the root budget. None reaches
+the work or trace cap. Thus the added search expands coverage, while conditioning
+reduces its cost. Together with the earlier successes, recognition reaches
+177 of the original 246 post-binary events. Different propagation orders and
+prefix charges can affect bounded outcomes elsewhere; no universal dominance
+or arbitrary-CNF coverage follows from this exposed sample.
+\begin{center}
+\begin{tabular}{lrr}
+\hline
+Measure & Restart & Conditioned \\
+\hline
+Discovery (s) & 0.59058 & 0.54068 \\
+Prefix reconstruction (s) & 2.23439 & 2.24098 \\
+Complete census (s) & 2.83627 & 2.79350 \\
+Assumed probes & 5,063 & 5,063 \\
+Occurrence visits & 536,665 & 268,008 \\
+Initialized clause slots & 2,062,917 & 1,930,964 \\
+Index literal occurrences & 133,486 & 118,720 \\
+Propagated unit steps & 36,938 & 18,597 \\
+Retained trace steps & 13,376 & 13,378 \\
+\hline
+\end{tabular}
+\end{center}
+Times are per-target means summed over targets. Visits fall 50.06\%, discovery
+8.45\%, and complete census time only 1.51\%. Prefix reconstruction is 80.22\%
+of the conditioned census. Discovery charges checks, conditioning, ranking,
+indexing and lifting. Earlier acquisition, closure diagnostics, loading/startup,
+native compilation and final audits remain additional. Both arms retain the full
+bank; peak census RSS is the same 96.50 MB. Reduced index size is therefore not
+an equal reduction in total memory. The 344 saved failures copy 2,634 closure
+steps; compact program bytes rise from 156,933 to 157,432. Shared computation
+does not automatically give a smaller certificate.
+
+The gains represent 41 distinct roots absent from the preceding recognized sets.
+Thirty-seven were UNSAT in inspected snapshots and four were unknown. Ordinary
+local solving and native reconstruction both refute all 41. There are 164 isolated
+trials, with two alternating repetitions per method; both cold readers accept
+all 82 unique archive/root pairs, and warm reuse changes no authority table.
+\begin{center}
+\begin{tabular}{lrr}
+\hline
+Measure & Fresh & Closure \\
+\hline
+Solve/compile (s) & 5.35369 & 5.70532 \\
+Warm check (s) & 0.07348 & 0.50879 \\
+Cold readers (s) & 5.70760 & 4.10581 \\
+Persistence (s) & 1.99794 & 1.34822 \\
+Complete trial (s) & 13.30158 & 11.77838 \\
+Record bytes & 25,538,657 & 12,908,078 \\
+Records & 2,011 & 4,960 \\
+\hline
+\end{tabular}
+\end{center}
+Compilation is 6.57\% slower in aggregate, while record bytes fall 49.46\% and
+complete local trials fall 11.45\%. Compilation improves on 15 cases, complete
+trials on 17, and bytes on 31; all regressions remain recorded. Representative
+continuation adds 0.94926 seconds, giving a partial subtotal of 12.72764 seconds
+against 13.30158 for fresh local trials. This excludes acquisition and fallback
+on unresolved cases and does not establish a whole-workload advantage. Isolated
+byte totals may duplicate shared proofs. Source support falls from 43,114 to
+8,616 literals without coordinate fallback; 62 original prefix splits remain.
+New archives supplement the unchanged cumulative bank.
+
+For a feedback bank with C clauses, L occurrences and K closure assignments,
+constructing its residual takes $O(L)$ expected word work plus sorting. An index
+for the residual costs $O(C_r+L_r)$ work/space; each new probe initializes
+$O(C_r)$ state and visits $O(L_r)$ occurrences. F saved failures copy $O(FK)$
+prefix steps in addition to their residual traces. Original-source ranking,
+validation, normalization and native proof reconstruction are additional. The
+full bank remains resident, so working space includes $O(C+L+C_r+L_r)$ words
+plus inputs, proofs and auxiliary storage. Fixed discovery budgets bound this
+recognizer's work, not the cost of deciding every unrestricted SAT instance.
+
+The 69 misses retain 180 new failures in 37 events and 125 old exclusions.
+The next coverage experiment should feed these new complements through checked
+propagation with explicit dependencies between proof layers. Thirty-two misses
+have no new failure; twenty have neither old nor new exclusions. Repeating
+unchanged probes there supplies no new information. Source-bound preparation
+reuse and shared closure certificates are separate cost opportunities. All
+1,903 tests pass, including budget stops, small exhaustive truth comparisons,
+guard provenance, malformed-input rejection before warm reuse and both cold
+readers. All 64 preceding proof blocks remain intact. Future round count,
+context count and unlimited history growth remain unbounded by this experiment.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

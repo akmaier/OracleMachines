@@ -1,0 +1,12 @@
+"""Extra retained-state accounting; run from repository root after validation."""
+import json
+from pathlib import Path
+p=Path('experiments/results/cnf-closure-probes')
+a=json.loads((p/'analysis.json').read_text());arms={}
+for mode in ('restart','conditioned'):
+    rows=[r for f in sorted(p.glob('census-*'+mode+'-0/events.json')) for r in json.loads(f.read_text())['rows']]
+    arms[mode]=dict(program_bytes=sum(len(json.dumps(r['program'],sort_keys=True,separators=(',',':')).encode()) for r in rows),retained_unit_steps=sum(len(q['proof']['units']) for r in rows for q in r['program']['probes']))
+r=json.loads((p/'remaining.json').read_text())['rows']
+result=dict(arms=arms,remaining=dict(no_new_exclusions=sum(x['new_exclusions']==0 for x in r),no_old_exclusions=sum(x['old_exclusions']==0 for x in r),neither=sum(x['new_exclusions']==0 and x['old_exclusions']==0 for x in r)),scope='One program per event and mode, compact sorted JSON; excludes common inputs, reports, old proofs and native archives. Both modes already validated. Prefix copies can increase stored proof size even when propagation work falls.')
+(p/'retained-state.json').write_text(json.dumps(result,sort_keys=True,indent=2)+'\n')
+print(json.dumps(result,sort_keys=True))

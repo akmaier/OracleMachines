@@ -1,0 +1,16 @@
+from collections import Counter
+from pathlib import Path
+from experiments import compare_cnf_complement_probes as prior
+from experiments import cnf_probe_feedback as candidate
+p=prior.base.load(Path('experiments/results/cnf-complement-probes/protocol.json'));rows=[]
+for target in p['targets']:
+ source,ts,refs,events=prior.inputs(p,target);refby={r['event']:r for r in refs}
+ report=prior.base.load(Path(f'experiments/results/cnf-complement-probes/census-{target}-all-complement-0/report.json'))
+ for row in prior.old.bound(report['events'])['rows']:
+  if row['program']['status']=='refuted':continue
+  ref=refby[row['event']];local,templates,state=prior.bind(source,ts,ref,events[row['event']],Counter());counts=Counter()
+  program=candidate.discover(state['local'],[h['template'] for h in state['hints']],row['program'],counts)
+  candidate.validate(state['local'],[h['template'] for h in state['hints']],row['program'],program,Counter())
+  rows.append(dict(target=target,event=row['event'],program=program,counts=dict(counts)))
+prior.compact(Path('experiments/results/cnf-probe-feedback/pilot.json'),dict(rows=rows))
+print(Counter(r['program']['reason'] for r in rows))

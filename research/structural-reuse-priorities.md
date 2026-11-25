@@ -12,7 +12,36 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: cheaper source supports; resume checked feedback
+## Current investigation: condition on checked closures before new probes
+
+[One-pass exclusion feedback](probe-feedback.md) refutes 64 of the 180 remaining
+all-guard events without new assumed probes. The 53 distinct gained roots have
+native archives; six were unknown in inspected snapshots, and ordinary local
+solving also proves all 53. The earlier 66 successes remain, for 130 recognized
+post-binary events out of 246. All 106 new archive/root pairs pass both readers.
+
+**Next coverage target:** condition on the retained closure, then test new failed
+probes with an explicit budget and acyclic provenance between rounds. The 116
+open cases now retain 656 checked assignments, including 308 variables beyond
+the exclusion premises. Ninety-six cases have 348 exclusions; twenty have none.
+Repeating propagation on the unchanged bank cannot add facts: these are checked
+unit fixed points. The portable traces are preserved in `remaining-closures.json`;
+they are not SAT verdicts or separately published native facts.
+
+**Cost boundary:** feedback compilation takes 4.73235 seconds versus 4.55241 for
+ordinary solving, but stores 10.75 MB versus 21.54 MB. Complete local trials cost
+10.05090 versus 11.51819 seconds; adding the 53 representative events' continuation
+cost gives 11.06898 seconds. That small positive-case subtotal excludes earlier
+seed acquisition and fallback on the 116 misses. Most individual cases are still
+slower. Keep matched whole-workload evaluation open, along with profiling repeated
+seed checks, stronger-context reconstruction and binary-prefix proof costs.
+
+All 1,897 tests pass. Resume
+`experiments/results/cnf-probe-feedback/checkpoint.json`. All earlier sources,
+artifacts, cumulative banks and 64 proof blocks are preserved. The bounded feedback
+step does not control future discovery rounds or unrestricted-SAT complexity.
+
+## Previous investigation: cheaper source supports; resume checked feedback
 
 [Causal probe supports](probe-support.md) reduce the largest measured proof-cost
 gap without changing coverage. On all 60 previously recognized roots, selected

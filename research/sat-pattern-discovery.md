@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: smaller certificates make further discovery cheaper
+## Latest evidence: saved exclusions compose into new refutations
+
+[One checked feedback pass](probe-feedback.md) closes 64 of 180 remaining events,
+using 851 saved exclusions and zero new assumed probes. The 53 distinct gained
+roots all have native proofs; six were unknown in prior inspected snapshots.
+Ordinary local solving also refutes all of them. Earlier successes remain, giving
+130 recognized events out of the 246-event post-binary sample. No arbitrary-CNF
+coverage or whole-query speed claim follows.
+
+The 116 open cases retain 656 source-bound assignments and complete propagation
+traces, including 308 variables beyond exclusion premises. Next condition on these
+checked closures before a bounded new probe search, keeping dependencies between
+rounds acyclic. Ninety-six open cases retain 348 exclusions; twenty have none.
+Unchanged-bank propagation is already at a checked fixed point. All 1,897 tests
+pass. Resume `experiments/results/cnf-probe-feedback/checkpoint.json`, retaining
+native cost regressions and the separately charged closure diagnostic.
+
+## Previous evidence: smaller certificates make further discovery cheaper
 
 [Compiling causal source supports](probe-support.md) keeps the same 60 recognized
 roots while cutting native compilation time 73.43% and record bytes 78.93%

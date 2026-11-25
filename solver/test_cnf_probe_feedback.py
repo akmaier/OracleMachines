@@ -1,0 +1,108 @@
+from collections import Counter
+from copy import deepcopy
+from itertools import product
+from pathlib import Path
+import random,tempfile,unittest
+from experiments import cnf_probe_feedback as feedback
+from experiments import cnf_complement_probes as probes
+from experiments import cnf_residual_dag as native
+from experiments.cnf_canonical_verify import CanonicalVerifySnapshot
+from experiments.cnf_snapshot_replay import SnapshotResidualSolver
+from experiments import cnf_shortening_prepared_source as binary
+from solver.test_cnf_guard_shortening import chain
+
+
+def fixture():
+    return native.normalize([(1,4),(1,-4),(2,5),(2,-5),(3,6),(3,-6),(-1,-2,-3),(7,8)])[0]
+
+
+class ProbeFeedbackTests(unittest.TestCase):
+    def test_retained_exclusions_jointly_close_a_one_pass_miss(self):
+        source=fixture();seed=probes.discover(source,[],Counter());self.assertEqual(seed['status'],'unresolved')
+        c=Counter();p=feedback.discover(source,[],seed,c);self.assertEqual(p['status'],'refuted')
+        self.assertEqual(c['unit_probes'],1);self.assertEqual(c['probe_roots'],0);feedback.validate(source,[],seed,p,Counter())
+        self.assertFalse(any(native.holds(source,dict(enumerate(bits,1))) for bits in product((False,True),repeat=8)))
+
+    def test_native_support_warm_and_both_cold_readers(self):
+        source=fixture();seed=probes.discover(source,[],Counter());p=feedback.discover(source,[],seed,Counter())
+        with tempfile.TemporaryDirectory() as td:
+            path=Path(td)/'db';s=native.ResidualSolver(path)
+            try:
+                c=Counter();root=feedback.compile_program(s,source,[],seed,p,c)
+                self.assertFalse(s._read(root)['answer']);self.assertEqual(s._read(root)['proof']['kind'],'component')
+                before=list(s.db.execute('SELECT id,payload FROM cnf_residual_v1 ORDER BY id'))
+                self.assertEqual(root,feedback.compile_program(s,source,[],seed,p,Counter()))
+                self.assertEqual(before,list(s.db.execute('SELECT id,payload FROM cnf_residual_v1 ORDER BY id')))
+            finally:s.close()
+            for cls in (SnapshotResidualSolver,CanonicalVerifySnapshot):
+                r=cls(path)
+                try:self.assertFalse(r._read(root)['answer'])
+                finally:r.close()
+
+    def test_prior_context_can_already_fix_a_base_trace_variable(self):
+        source=native.normalize(list(fixture())+[(7,)])[0];_,_,bank,_=feedback.frozen.prepare(source,[],'all',Counter());idx=feedback.frozen.UnitIndex(bank,Counter())
+        seed=dict(status='unresolved',reason='probe_limit',mode='all',trace_limit=256,terminal=None,
+                  probes=[dict(assumption=l,proof=idx.probe(l,Counter(),lambda:99999,256)) for l in (-1,-2,-3)])
+        p=feedback.discover(source,[],seed,Counter())
+        _,_,_,augmented,_=feedback.prepare(source,[],seed,Counter())
+        p['proof']['units'].insert(0,[7,augmented.index((7,))])
+        s=native.ResidualSolver()
+        try:
+            c=Counter();root=feedback.compile_program(s,source,[],seed,p,c,select_support=False)
+            self.assertFalse(s._read(root)['answer']);self.assertGreater(c['feedback_fixed_trace_steps'],0)
+        finally:s.close()
+
+    def test_random_small_seeds_against_truth(self):
+        rng=random.Random(242508);checked=0
+        for _ in range(160):
+            source=native.normalize([[v*rng.choice((-1,1)) for v in rng.sample(range(1,6),rng.randrange(2,5))] for _ in range(rng.randrange(6,23))])[0]
+            seed=probes.discover(source,[],Counter(),probe_limit=3)
+            if seed['status']=='refuted':continue
+            p=feedback.discover(source,[],seed,Counter());feedback.validate(source,[],seed,p,Counter());checked+=1
+            if p['status']=='refuted':
+                self.assertFalse(any(native.holds(source,dict(enumerate(bits,1))) for bits in product((False,True),repeat=5)))
+                for selected in (True,False):
+                    s=native.ResidualSolver()
+                    try:self.assertFalse(s._read(feedback.compile_program(s,source,[],seed,p,Counter(),select_support=selected))['answer'])
+                    finally:s.close()
+        self.assertGreater(checked,80)
+
+    def test_bad_seed_and_feedback_are_rejected_before_any_write(self):
+        source=fixture();seed=probes.discover(source,[],Counter());p=feedback.discover(source,[],seed,Counter())
+        for warm in (False,True):
+            s=native.ResidualSolver()
+            try:
+                if warm:feedback.compile_program(s,source,[],seed,p,Counter())
+                before=list(s.db.execute('SELECT id,payload FROM cnf_residual_v1 ORDER BY id'))
+                for kind in ('seed','feedback','premise','open'):
+                    q=deepcopy(seed);r=deepcopy(p)
+                    if kind=='seed':q['probes'][0]['proof']['conflict']=9999
+                    elif kind=='feedback':r['proof']['conflict']=9999
+                    elif kind=='premise':q['probes'][0]['assumption']=9999
+                    else:r.update(status='unresolved',reason='open',proof=None)
+                    with self.assertRaises(ValueError):feedback.compile_program(s,source,[],q,r,Counter())
+                    self.assertEqual(before,list(s.db.execute('SELECT id,payload FROM cnf_residual_v1 ORDER BY id')))
+            finally:s.close()
+
+    def test_budgets_and_satisfiable_inputs_remain_unresolved(self):
+        source=fixture();seed=probes.discover(source,[],Counter())
+        for kw in ({'work_limit':1},{'trace_limit':1}):
+            c=Counter();p=feedback.discover(source,[],seed,c,**kw);self.assertEqual(p['status'],'unresolved');feedback.validate(source,[],seed,p,Counter())
+            self.assertLessEqual(c['probe_occurrence_visits'],kw.get('work_limit',262144))
+        source=native.normalize([(1,2),(1,-2)])[0];seed=probes.discover(source,[],Counter());p=feedback.discover(source,[],seed,Counter())
+        self.assertEqual((p['status'],p['reason']),('unresolved','open'))
+        source=();seed=probes.discover(source,[],Counter());self.assertEqual(feedback.discover(source,[],seed,Counter())['reason'],'open')
+
+    def test_binary_prefix_and_checked_guards_reconstruct(self):
+        source,ts=chain(4,8);prefix=binary.discover(source,ts,Counter(),round_limit=1)
+        _,state=feedback.frozen.bind_prefix(source,ts,prefix,Counter());templates=[h['template'] for h in state['hints']]
+        seed=probes.discover(state['local'],templates,Counter());self.assertEqual(seed['status'],'unresolved')
+        p=feedback.discover(state['local'],templates,seed,Counter());feedback.validate(state['local'],templates,seed,p,Counter())
+        # This fixture may require further failed-literal rounds, not just one feedback pass.
+        if p['status']=='refuted':
+            s=native.ResidualSolver()
+            try:self.assertFalse(s._read(feedback.compile_extension(s,source,ts,prefix,seed,p,Counter()))['answer'])
+            finally:s.close()
+
+
+if __name__=='__main__':unittest.main()

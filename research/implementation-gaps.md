@@ -4,7 +4,18 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (25 November, causal probe supports):
+Latest expansion checkpoint (25 November, checked exclusion feedback):
+[Compose saved failed probes by propagation](probe-feedback.md). One feedback
+pass refutes 64 of 180 remaining events without new assumed probes. All 53 distinct
+roots have native proofs and both readers accept 106 archive/root pairs. The
+116 open cases preserve 656 checked assignments; 96 retain 348 exclusions and
+20 have none. All 1,897 tests pass. Next condition on the saved unit fixed points
+and test bounded new probes with acyclic provenance. Positive-case certificate
+costs improve in aggregate after cold replay, but seed acquisition and unresolved
+fallback remain outside that comparison. Resume
+`experiments/results/cnf-probe-feedback/checkpoint.json`.
+
+Previous expansion checkpoint (25 November, causal probe supports):
 [Reduce full-cofactor proof reconstruction](probe-support.md). All 60 existing
 roots compile with smaller source supports: 73.43% less compilation time and
 78.93% fewer record bytes than the full compiler, with all 180 archive/root pairs

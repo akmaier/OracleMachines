@@ -18,6 +18,17 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[One-pass exclusion feedback](probe-feedback.md) adds U checked unit consequences
+to a fixed C-clause, L-occurrence bank. Index construction and complete propagation
+use O(C+L+U) expected word work/space under the existing dictionary model; bank
+sorting, seed/guard checking and native reconstruction remain additional. Earlier
+acquisition is not free. The sample refutes 64 remaining events with zero new
+assumed probes. Native proof bytes roughly halve versus ordinary local solving,
+but compilation is slightly slower. The small positive-case local-cost advantage
+after reconstruction excludes unresolved fallback and seed acquisition. Retaining
+656 assignments in 116 open cases supports future reuse without making those
+cases SAT. No bound on future rounds, distinct contexts or unlimited history follows.
+
 [Causal source-support compilation](probe-support.md) replaces full-cofactor
 proof construction by a checked subset proof plus a native wrapper. For source
 size L, terminal trace length T, retained reason size R and traversed guard

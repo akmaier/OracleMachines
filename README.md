@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Feed saved exclusions back into propagation](research/probe-feedback.md).
+One pass closes 64 of 180 remaining events without new assumed probes. All 53
+distinct gained roots have native proofs; all 1,897 tests pass. The 116 open cases
+retain 656 checked assignments for the next bounded search. Proof bytes roughly
+halve versus ordinary local solving, but the whole-workload cost comparison
+remains open. Next: condition on those closures and test new probes with provenance.
+
+Previous:
 [Compile smaller causal source supports](research/probe-support.md).
 The same 60 recognized roots now compile 73% faster with 79% fewer proof bytes
 than the full compiler; all 1,889 tests pass. Cold reuse across growing supersets

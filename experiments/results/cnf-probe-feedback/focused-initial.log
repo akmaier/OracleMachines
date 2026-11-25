@@ -1,0 +1,14 @@
+....F..
+======================================================================
+FAIL: test_prior_context_can_already_fix_a_base_trace_variable (solver.test_cnf_probe_feedback.ProbeFeedbackTests.test_prior_context_can_already_fix_a_base_trace_variable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_probe_feedback.py", line 49, in test_prior_context_can_already_fix_a_base_trace_variable
+    self.assertFalse(s._read(root)['answer']);self.assertGreater(c['feedback_fixed_trace_steps'],0)
+                                              ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 not greater than 0
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.063s
+
+FAILED (failures=1)

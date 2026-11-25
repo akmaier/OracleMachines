@@ -11961,6 +11961,103 @@ exclusions. Their feedback into further propagation is the next coverage
 experiment. Neither smaller certificates nor subset reuse supplies a minimum-cost
 expansion guarantee or a uniform polynomial solution of arbitrary SAT.
 
+\subsection{One feedback pass over retained failed probes}
+
+The previous support compiler leaves detector coverage unchanged. We now reuse
+the 851 exclusions retained in 180 unresolved all-guard events. A checked failed
+assumption l implies the unit not-l. Validate every seed trace and its original
+guard provenance, add these units to the same clause bank, and propagate once.
+No new assumed probes are made. Each learned unit has an independent proof over
+the original bank, so there is no circular justification. A conflict refutes the
+source; an open closure remains unresolved, never SAT.
+
+To reconstruct a native proof, expand any used learned unit through its saved
+failed-probe trace on the branch falsifying that unit. Its original assumption
+then holds. Other branch assignments may already fix a saved trace variable:
+skip an agreeing step, or use its reason as an immediate conflict when it
+disagrees. Before the first disagreement, earlier reason assignments remain
+consistent. Guard leaves retain their source-only proofs under the stronger
+context. An absent normalized variable requires an identical cofactor key,
+rather than an invalid split. Causal slicing, checked coordinate transport and
+subset lifting reduce the source carried through the proof. Only existing native
+rules are used; learned units never become native axioms. Binary-prefix lifting
+is unchanged, and all portable checks precede reuse or publication.
+
+A pilot exposed all 180 outcomes before the matched study; these are not holdout
+results. Thirty-two isolated census workers compare the original bank with the
+feedback bank, using two alternating repetitions per target. Both validate the
+same seeds and make one unconditional unit pass, bounded by 262,144 occurrence
+visits and 256 trace steps. The control leaves all 180 events open. Feedback
+refutes 64 and leaves 116 open, without reaching either cap. Mean discovery times
+summed over targets are 0.60281 and 0.61321 seconds; saved-prefix reconstruction
+adds 3.35849 and 3.33529 seconds. Complete census times are 3.97325 and 3.95921
+seconds. These small timing differences do not establish a stable speed benefit.
+Earlier acquisition and seed discovery, input loading, startup, native compilation
+and final audits are additional.
+
+The 851 distinct added units increase bank literal occurrences from 199,744 to
+200,595 and initialized clause slots from 70,430 to 71,281. Feedback performs
+30,683 occurrence visits and 2,611 assignments, versus 3 and 1 in the control.
+Both perform 180 unconditional probes and zero assumed probes. Peak census RSS
+is about 82.8 MB. Together with the earlier 66 successes, these continuation
+steps recognize 130 of the original 246 post-binary events. They do not provide
+coverage guarantees for arbitrary CNFs.
+
+The 64 gains represent 53 distinct roots absent from the earlier recognized set;
+47 were already UNSAT in inspected snapshots and six were unknown. Fresh local
+solving and feedback reconstruction both refute all 53. Two hundred and twelve
+isolated trials, with two alternating repetitions per method, give:
+\begin{center}
+\begin{tabular}{lrr}
+\hline
+Measure & Fresh & Feedback \\
+\hline
+Solve/compile (s) & 4.55241 & 4.73235 \\
+Warm check (s) & 0.09275 & 0.58074 \\
+Cold readers (s) & 5.00175 & 3.53210 \\
+Persistence (s) & 1.65163 & 1.07833 \\
+Complete trial (s) & 11.51819 & 10.05090 \\
+Record bytes & 21,544,173 & 10,752,547 \\
+Records & 1,739 & 4,086 \\
+\hline
+\end{tabular}
+\end{center}
+Feedback compiles faster on 18 cases, completes local trials faster on 21, and
+uses fewer record bytes on 38. All regressions are retained. Aggregate compilation
+is slightly slower; smaller records reduce cold checking and persistence costs.
+The 53 chosen events' additional discovery and reconstruction cost 1.01808 seconds,
+giving a partial feedback subtotal of 11.06898 seconds. This small exposed-case
+advantage over fresh local trials excludes seed acquisition, unresolved-case
+fallback, startup/loading, closure diagnostics and final audits. It is not an
+end-to-end workload comparison. Isolated byte sums can duplicate shared subproofs.
+
+Selected source literals fall from 54,000 to 8,954. Reconstruction expands 226
+used exclusions, makes 3,627 native splits, reuses 264 cofactor results and handles
+93 already-fixed trace steps. It adds 53 subset wrappers and retains 94 earlier
+binary-prefix splits. No coordinate fallback occurs. Both cold readers verify
+all 106 unique archive/root pairs; warm replay adds no authority records. The
+cumulative bank and prior proofs remain unchanged.
+
+For the 116 open cases, an additional scan-based diagnostic preserves complete
+propagation traces. Each step and the absence of a further unit or conflict are
+checked. These traces retain 656 assignments, including 308 variables beyond the
+recorded exclusion variables. Their extra work is recorded separately. They are
+source-bound portable deductions, not native SAT verdicts. Of these events, 96
+retain 348 exclusions and 20 have none. A further pass on the unchanged bank
+cannot improve the checked unit fixed point. New failed probes after conditioning
+on the closure are a separate experiment requiring acyclic provenance across
+rounds.
+
+Given a fixed bank with C clauses, L occurrences and U added units, index
+construction and complete unit propagation use $O(C+L+U)$ expected word work
+under the existing dictionary model. Bank sorting, seed/guard verification,
+prior acquisition and native reconstruction remain additional. Neither the
+number of future contexts nor total history growth is bounded by this step.
+All 1,897 tests pass, including signed guard transport, exhaustive small checks,
+stronger-context reconstruction and rejection before warm reuse. All 64 existing
+proof blocks are preserved. This is broader certified pattern coverage with
+explicit costs, not a uniform polynomial solution of unrestricted SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

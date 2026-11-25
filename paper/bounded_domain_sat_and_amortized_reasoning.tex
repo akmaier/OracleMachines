@@ -12273,6 +12273,104 @@ exhaustive truth checks, budget stops and cold replay. All 64 preceding proof
 blocks remain unchanged. No efficient partition or polynomial solution covering
 every unrestricted CNF has been established.
 
+\subsection{Direct reuse of prepared residuals at publication}
+
+The layered compiler repeats normalization when publishing a residual it has
+just constructed. The earlier general canonicalization cache reduced operation
+counts but increased total time through snapshotting, lookup and admission work.
+We instead pass a producer's result directly to its next consumer. Ordinary
+normalization constructs an immutable CNF, original-name map and exact key. A
+publisher closure accepts only a proof and builds its own private header from
+that result. Its verifier name map is the identity map of normalized variables,
+not the producer's original-name map. Sparse-name and mutable-input tests check
+this distinction and the snapshot boundary.
+
+Exactly one canonicalization call on that private header object consumes the
+prepared triple. The original method is restored before any child relation is
+checked, and in a finalizer on success or failure. Equal but different inputs
+receive ordinary normalization. The unchanged verifier checks the key, header
+equality, every proof rule and every child. External publications retain their
+original input validation. No prepared value authenticates a proof. This requires
+exclusive synchronous use of the unchanged verifier; concurrent private-state
+mutation or replacement verifier semantics are outside the existing contract.
+Old source, seed, closure, guard and support checks remain unchanged.
+
+A second variant also carries prepared frames across unchanged proof contexts:
+matching already-fixed steps, terminal leaves and descent into earlier proof
+layers. It never carries a frame across a new assignment. Conditional containment,
+assumption checks and unit reconstruction still run. Neither variant adds a
+content-indexed cache, persistent format or production default. Binary-prefix and
+outer support-wrapper publications retain the original path.
+
+Four methods run in opposite orders on the same fifteen exposed roots, giving
+120 isolated workers. All roots were already UNSAT in inspected snapshots.
+Compilation charges frame creation, binding, checks and cleanup. Complete trials
+also charge warm reuse, both cold readers and persistence. Earlier acquisition,
+discovery, unresolved fallback, loading/startup and final audits remain additional.
+Summed per-case means are:
+\begin{center}
+\begin{tabular}{lrrrr}
+\hline
+Measure & Fresh & Baseline & Headers & Prepared \\
+\hline
+Solve/compile (s) & 2.65964 & 3.88032 & 3.59202 & 3.59831 \\
+Warm check (s) & 0.02844 & 0.17037 & 0.16962 & 0.17139 \\
+Cold readers (s) & 2.77431 & 2.82484 & 2.81667 & 2.84743 \\
+Persistence (s) & 0.99466 & 1.07608 & 1.08010 & 1.09296 \\
+Complete trial (s) & 6.52243 & 8.00489 & 7.70687 & 7.76767 \\
+Records & 959 & 3,477 & 3,477 & 3,477 \\
+\hline
+\end{tabular}
+\end{center}
+Headers denotes publication reuse alone; prepared also reuses unchanged contexts.
+Publication reuse reduces compilation 7.43\% and complete local trial time 3.72\%,
+with improvements in every case's mean. Paired aggregate compilation differences
+are -0.32939/-0.24722 seconds; complete differences are -0.33221/-0.26383 seconds.
+These two orders are descriptive evidence, not a production guarantee. Cold and
+warm checking use unchanged paths, so their timing differences are not algorithmic
+improvements.
+
+Additional context reuse saves operations but adds no aggregate timing benefit
+over headers alone: compilation is 0.18\% higher and complete time 0.79\% higher.
+Against the original compiler it improves fourteen cases and regresses on one.
+Both variants and their regressions remain available; publication-only reuse is
+the measured baseline for further work. Even that arm takes 35.06\% more compile
+time and 18.16\% more complete local time than ordinary fresh solving. No
+end-to-end advantage over ordinary solving is established.
+
+The 3,415 publication handoffs avoid re-normalizing 595,857 literal slots.
+Native normalization visits fall from 3,147,103 to 2,551,246 and serialized key
+bytes from 8,661,829 to 6,097,932. Source/support preparation is additional.
+All 3,477 publication verifications, 670,538 verified literal slots and every
+semantic proof counter remain identical. The three compiler arms retain exactly
+the same six authority-table payloads: 3,477 records and 8,989,382 encoded bytes,
+versus 959 records and 12,209,959 bytes for fresh solving. Both independent readers
+accept all thirty unique archive/root pairs. No mathematical history is added.
+
+Headers mode constructs 6,815 frames. The full variant reuses 98 unchanged
+contexts, reducing frame builds to 6,717, compiler restriction visits from
+2,012,031 to 1,986,815, and native normalization visits to 2,535,308. The native
+verifier's 1,278,612 restriction visits remain. This child-relation work remains
+a substantial cost; further reuse must preserve exact relation checks.
+
+A frame holds existing canonical data, an identity-name tuple and a publisher
+closure. Identity-name construction uses $O(V)$ work/words for V normalized
+variables; active frames can add $O(\sum_i(V_i+1))$ words alongside existing CNFs,
+keys and proof state. Header copies and semantic checks remain input-dependent.
+There is no fixed whole-process memory cap. Peak compiler RSS is 66.49, 66.42
+and 66.47 MB for baseline, headers and prepared. A separate Python-allocation
+diagnostic on the largest prior regression records peaks of 4,851,938,
+4,855,058 and 4,843,514 bytes. It excludes pre-existing inputs, native allocations
+and allocator retention; neither sample supports a general memory-saving claim.
+
+All 1,919 tests pass, including 1,111 small representations, sparse names, invalid
+integer lookalikes, false proofs, missing children, exception restoration, guarded
+proofs and both cold readers. All 64 earlier proof blocks remain intact. Coverage
+stays at 193 of 246 post-binary events, with 53 unresolved. Twenty-one changed
+closures retain 120 additional assignments for a future bounded search. The
+present improvement reduces repeated representation work; it neither bounds
+proof size nor supplies an efficient complete partition of unrestricted SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

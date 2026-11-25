@@ -1,0 +1,67 @@
+{
+  "evidence": {
+    "analysis": {
+      "path": "experiments/results/cnf-prepared-publication/analysis.json",
+      "sha256": "4c6eec3da272dbf5e084007435cd04d7989068c4a31dd3a2aa7dd2c21818482d"
+    },
+    "memory-diagnostic": {
+      "path": "experiments/results/cnf-prepared-publication/memory-diagnostic.json",
+      "sha256": "26b468ffa6a49ade0481eea0713da1c54d8a78bc75711a8cc61cb949c0915fce"
+    },
+    "paired-deltas": {
+      "path": "experiments/results/cnf-prepared-publication/paired-deltas.json",
+      "sha256": "a6218a02c1c24b56e34e3c3ecdbd66ec7b28bdfb7aa33d4011569db43e1e1258"
+    },
+    "protocol": {
+      "path": "experiments/results/cnf-prepared-publication/protocol.json",
+      "sha256": "0c26b7428b31626ec81cc62b0ddf930b3ec9488cc43a4b38af6075de6ea3f0da"
+    }
+  },
+  "findings": {
+    "avoided_native_normalization_literal_slots": 595857,
+    "compared_cases": 15,
+    "compilation_reduction_percent": 7.4299458224827415,
+    "complete_local_trial_reduction_percent": 3.722964362389558,
+    "coverage_unchanged": true,
+    "header_handoffs": 3415,
+    "improved_cases": 15,
+    "limitation": "Header compilation still takes35.06percent more time than fresh solving; complete header trials take18.16percent more.",
+    "native_payloads_unchanged": true,
+    "publication_verifications_unchanged": 3477,
+    "recognized_original_sample_events": 193,
+    "remaining_events": 53
+  },
+  "limitations": [
+    "Same15 exposed layered-feedback roots, all already UNSAT in inspected snapshots. No new discovery or coverage gain.",
+    "Fresh ordinary solving, unchanged layered compiler, publication-header handoff, and header plus unchanged-context handoff. Two alternating isolated repetitions per case/mode.",
+    "Frames arise only from ordinary normalization. Their publishers construct private headers; one exact-object call reuses the producer result. Every proof rule and child relation is still checked.",
+    "Prepared mode also carries frames across unchanged contexts into lower-layer proofs and conditional support leaves. No content-indexed cache, retained cross-query preparation or persistent format change.",
+    "Compilation includes checks and handoff construction/cleanup. Complete local trials include warm checks, both cold readers and persistence. Prior acquisition/discovery, unresolved fallback, loading/startup and final audits are additional.",
+    "Publication handoff assumes exclusive synchronous use of the unchanged native verifier; private-state tampering and concurrent callbacks are outside the existing execution contract.",
+    "An earlier general canonicalization cache regressed and remains preserved. This experiment tests direct producer/consumer reuse, not that cache again.",
+    "No general memory saving or fixed process-memory cap. Frame identity maps add O(sum(V_i+1)) words over live frames; original state and construction transients remain additional.",
+    "No new SAT category, arbitrary-CNF guarantee, changed proof format, persistent cache or proof-size bound. Two order-balanced exposed-case repetitions are descriptive.",
+    "All earlier general-cache regressions remain preserved. Native proof payloads and acquisition counts are identical; timing differences in unchanged warm/cold paths are not algorithmic gains."
+  ],
+  "next_targets": [
+    {
+      "priority": 1,
+      "task": "Use publication-only reuse as the measured compiler baseline, then investigate child-cofactor construction/normalization with exact relation checks. Do not bypass publication or cold verification."
+    },
+    {
+      "priority": 2,
+      "task": "Continue bounded coverage discovery on the21 changed closures with120 additional checked assignments. Reuse earlier proof layers and preserve all53 unresolved cases."
+    }
+  ],
+  "preservation": {
+    "cumulative_authority_unchanged": true,
+    "existing_manuscript_proof_blocks_unchanged": 64,
+    "new_mathematical_records": 0,
+    "prior_artifacts": 25188,
+    "prior_manifests": 186,
+    "prior_sources": 1068
+  },
+  "rejected_inference": "More avoided operations do not establish a further wall-time gain:98 context handoffs add no aggregate benefit over headers alone. Preserve the new-40-65 regression of the full variant against baseline.",
+  "selected_arm": "headers: call compile_extension or compile_program with reuse_frames=False",
+  "status": "validated optional compiler optimization; production defaults unchanged"
+}

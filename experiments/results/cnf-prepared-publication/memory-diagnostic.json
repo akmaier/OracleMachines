@@ -1,0 +1,24 @@
+{
+  "case": {
+    "path": "experiments/results/cnf-layered-feedback/new-1-38.json",
+    "sha256": "66b0694d599bc5de90c12fa4d95a6c1515700ac918c2a90b6dfff129e55fd121"
+  },
+  "rows": [
+    {
+      "live_traced_bytes": 4641522,
+      "mode": "baseline",
+      "peak_traced_bytes": 4851938
+    },
+    {
+      "live_traced_bytes": 4644642,
+      "mode": "headers",
+      "peak_traced_bytes": 4855058
+    },
+    {
+      "live_traced_bytes": 4633098,
+      "mode": "prepared",
+      "peak_traced_bytes": 4843514
+    }
+  ],
+  "scope": "One exposed largest-regression case. Python allocations traced only during compilation, after input loading and SQLite construction. Native allocations, pre-existing input objects and allocator retention are outside this scope. This is not a whole-process or worst-case memory bound. Same proof digests/counters as matched trials; no canonical override remains after compilation."
+}

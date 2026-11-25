@@ -18,6 +18,21 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Prepared publication](prepared-publication.md) reuses a producer's immutable
+canonical triple for one exact header object, restoring ordinary normalization
+before child checks. All semantic proof checks remain. Identity-name construction
+costs O(V) work/words per prepared frame; active frames add O(sum(V_i+1)) control
+and name-map storage alongside already-held CNFs and keys. No persistent cache
+or fixed whole-process memory bound is introduced. Header copies, external input
+validation, child relations and arbitrary proof sizes remain costs.
+
+On fifteen existing roots, compilation falls 7.43% and complete local trial time
+3.72%, with identical 3,477-record archives and unchanged coverage. The 595,857
+avoided native normalization visits do not reduce the number of proof checks.
+Extra context handoffs have no aggregate benefit over publication reuse alone;
+ordinary solving remains faster. Peak RSS and a separate traced-allocation
+sample establish no general memory saving.
+
 [Second-layer feedback](layered-feedback.md) adds units whose proofs depend on
 the first feedback bank, with strictly decreasing proof dependencies. For a base
 bank of C clauses and L occurrences and U1/U2 retained units, index construction

@@ -12,7 +12,31 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reduce reconstruction cost; probe changed closures
+## Current investigation: reuse child preparation; probe changed closures
+
+[Direct publication handoff](prepared-publication.md) reduces layered compilation
+7.43% and complete local trial time 3.72%, improving all fifteen cases with
+identical certificates and proof checks. Carry the publication-only (`headers`)
+arm forward as the measured compiler baseline. The extra unchanged-context
+variant saves more work but has no aggregate timing advantage and retains a
+regression on `new-40-65` against the original compiler.
+
+**Remaining runtime gap:** header compilation is still 35.06% slower than fresh
+ordinary solving, and complete local trials 18.16% slower. All 3,477 publication
+verifications and 1,278,612 native restriction visits remain. Next investigate
+child-cofactor construction/normalization through exact relation checks. Do not
+revive the earlier general canonical cache without new evidence: it already
+regressed. Persistent proof bytes are unchanged by this handoff.
+
+**Coverage remains 193/246.** The 53 unresolved events and all stored proof layers
+are unchanged. Twenty-one closures retain 120 additional assignments; bounded
+search there remains the next coverage opportunity. The other 32 need different
+candidates or interaction. All 1,919 tests pass, with all earlier sources,
+artifacts, cumulative banks and 64 proof blocks intact. Resume
+`experiments/results/cnf-prepared-publication/checkpoint.json`. The result is
+measured reuse of representation work, not a general SAT complexity bound.
+
+## Previous investigation: reduce reconstruction cost; probe changed closures
 
 [Two-layer feedback](layered-feedback.md) closes 16 more events without new
 assumed probes, producing 15 distinct new native roots. All were already UNSAT

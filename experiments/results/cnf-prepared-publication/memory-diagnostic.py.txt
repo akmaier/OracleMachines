@@ -1,0 +1,25 @@
+"""Separate traced-allocation diagnostic; not a timed performance comparison."""
+import gc,sys,tempfile,tracemalloc
+from collections import Counter
+from pathlib import Path
+sys.path.insert(0,str(Path.cwd()))
+from experiments import compare_cnf_prepared_publication as s
+out=Path('experiments/results/cnf-prepared-publication');bindings=s.base.load(out/'cases.json')['cases']
+index=next(i for i,b in enumerate(bindings) if s.old.bound(b)['name']=='new-1-38');case=s.old.bound(bindings[index]);results=[]
+for mode in ('baseline','headers','prepared'):
+    gc.collect()
+    with tempfile.TemporaryDirectory() as td:
+        solver=s.native.ResidualSolver(Path(td)/'db');counts=Counter();tracemalloc.start()
+        try:
+            if mode=='baseline':root=s.prior.candidate.compile_extension(solver,case['source'],case['templates'],case['prefix'],case['seed'],case['closure'],case['new'],case['program'],counts)
+            else:root=s.candidate.compile_extension(solver,case['source'],case['templates'],case['prefix'],case['seed'],case['closure'],case['new'],case['program'],counts,reuse_frames=mode=='prepared')
+            current,peak=tracemalloc.get_traced_memory();tracemalloc.stop();gc.collect()
+            assert root==case['root'] and '_canonical' not in solver.__dict__
+            report=s.base.load(out/f'case-{index}-{mode}-0/report.json');tables=s.old.tables(solver.db)
+            assert dict(counts)==report['counts'] and dict(solver.counts)==report['native_counts']
+            assert {t:s.base.key_sha(s.base.encode(sorted(v.items()))) for t,v in tables.items()}==report['digest']
+            results.append(dict(mode=mode,peak_traced_bytes=peak,live_traced_bytes=current))
+        finally:
+            tracemalloc.stop();solver.close();del solver
+s.base.write(out/'memory-diagnostic.json',dict(case=bindings[index],rows=results,scope='One exposed largest-regression case. Python allocations traced only during compilation, after input loading and SQLite construction. Native allocations, pre-existing input objects and allocator retention are outside this scope. This is not a whole-process or worst-case memory bound. Same proof digests/counters as matched trials; no canonical override remains after compilation.'))
+print(s.base.encode(results))

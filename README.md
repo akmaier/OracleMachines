@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Reuse prepared residuals at publication](research/prepared-publication.md).
+Compilation falls 7.43% and complete local trial time 3.72% on the fifteen latest
+roots, with identical proofs and checks; all 1,919 tests pass. Coverage and storage
+are unchanged. Ordinary solving is still faster. Next: exact child-cofactor reuse
+and bounded search on the 21 changed closures.
+
+Previous:
+
 [Compose the next layer of saved failed probes](research/layered-feedback.md).
 One propagation pass closes 16 more events without new assumed probes, producing
 15 verified native roots; all 1,911 tests pass. The remaining 53 cases retain

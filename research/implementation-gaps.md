@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (25 November, second-layer feedback):
+Latest expansion checkpoint (25 November, prepared publication):
+[Reuse the normalizer result at publication](prepared-publication.md). Compilation
+falls 7.43% and complete local trials 3.72% on all fifteen cases. All native proof
+payloads and rule checks stay identical; all 1,919 tests pass. Extra unchanged-context
+reuse saves operations but adds no aggregate benefit over publication reuse alone.
+Use the publication-only arm as the next measured baseline. Ordinary solving
+remains faster; exact child-cofactor reuse and the 21 changed open closures are
+next targets. Resume `experiments/results/cnf-prepared-publication/checkpoint.json`.
+
+Previous expansion checkpoint (25 November, second-layer feedback):
 [Compose failed probes with explicit proof layers](layered-feedback.md). One
 propagation pass closes 16/69 events without new assumed probes. All 15 distinct
 new roots have native proofs and both readers accept 30 archive/root pairs.

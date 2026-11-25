@@ -5,7 +5,22 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: another checked proof layer expands recognition
+## Latest evidence: cheaper certification with unchanged recognition
+
+[Passing prepared residuals into publication](prepared-publication.md) reduces
+compilation 7.43% and complete local trial time 3.72% on all fifteen latest roots,
+without changing proofs or coverage. All 1,919 tests pass. The full context-reuse
+variant saves more operations but adds no aggregate timing benefit over publication
+reuse alone; its regression is preserved. Ordinary solving remains faster.
+
+Recognition stays 193/246 and the 53 open cases remain bound to their old proof
+layers. Next bounded search can exploit the 21 changed closures and their 120
+additional assignments. Child-cofactor construction and checking remain the main
+reconstruction target. Resume
+`experiments/results/cnf-prepared-publication/checkpoint.json`; no new category,
+coverage theorem or unrestricted-SAT guarantee is claimed.
+
+## Previous evidence: another checked proof layer expands recognition
 
 [Composing second-round exclusions](layered-feedback.md) closes 16 of 69
 remaining events with zero new assumed probes. The 15 distinct new native roots

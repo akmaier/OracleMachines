@@ -4,7 +4,17 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (25 November, third-layer feedback):
+Latest expansion checkpoint (25 November, persistent probe cursor):
+[Resume the actual probe frontier](probe-cursor.md). Cold reload avoids 2,624
+repeated probes with exact single-pass outcomes. Later candidates expose 142 new
+failures in 31 cases; two first-prefix refutations reach 205/246 coverage. All
+1,945 tests pass. Total census time falls 1.37% against restart but remains 15.77%
+higher than uninterrupted search. Next compose the 161 B3 failures retained in
+31 open cases, and reuse checked preparation. Honest history is required for
+coverage reuse; every refutation remains independently checked. Resume
+`experiments/results/cnf-probe-cursor/checkpoint.json`.
+
+Previous expansion checkpoint (25 November, third-layer feedback):
 [Compose the B2 failures](third-feedback.md). Two additional refutations require
 no new assumed probes; both native roots pass both readers. Sampled coverage is
 203/246, with 43 events unresolved. Six B3 closures gain 18 assignments. All

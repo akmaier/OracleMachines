@@ -12,7 +12,34 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: resume untested candidates; reduce proof construction
+## Current investigation: compose newly exposed failures; reuse checked preparation
+
+[Cold probe cursors](probe-cursor.md) avoid 2,624 repeated assumptions and match
+single-pass results exactly. Later candidates add 142 failures in 31 cases,
+including 116 in 27 previously unchanged cases. Two refutations occur in the
+first prefix on changed closures, reaching 205/246 recognized events; 41 remain
+open. All four new archive/root pairs pass both readers.
+
+**Next coverage target:** one checked feedback pass over the 161 B3 failures
+retained in 31 open cases. Preserve their provenance as a new layer. Ten open
+cases retain no failure; four of the 41 exhaust the current single-literal order
+without refutation. None is certified SAT. Further candidate choices or stronger
+interaction remain necessary for those cases.
+
+**Largest avoidable cost:** cold continuation still rebuilds source/layer
+preparation and rechecks old history. Resume reduces discovery 4.32% and total
+census time 1.37% against restart, but takes 15.77% more total time than a single
+uninterrupted pass. Reuse checked preparation under exact invalidation before
+claiming a broader speed benefit. Cursor history is trusted scheduling data;
+every failure and native refutation remains checked, and a forged open history
+can lose coverage without establishing SAT.
+
+Positive-case native costs improve in aggregate on these two roots, but one
+regresses in runtime, and previous studies' regressions remain. All 1,945 tests
+pass. Resume `experiments/results/cnf-probe-cursor/checkpoint.json`; its
+`remaining.json` retains cursors and all earlier proof/closure layers.
+
+## Previous investigation: resume untested candidates; reduce proof construction
 
 [Third-layer feedback](third-feedback.md) refutes two more events with zero new
 assumed probes, reaching 203/246 recognized events. Both native roots pass both

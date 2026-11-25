@@ -18,6 +18,24 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Persistent probe cursors](probe-cursor.md) retain at most 2n completed literals
+and 2n failure records for a fixed bank with n active variables. With trace cap
+T, retained failures use O(nT) trace entries, plus exact source/bank/closure/order
+binding storage. Cold loading replays the schedule, copies proofs and rechecks
+all failure reasons and old provenance. Interrupted probes are retried, not
+recorded as completed. Multiple banks and lifetime history remain unbounded;
+open history is not a search-exhaustion or SAT certificate.
+
+On 43 events, resume avoids 2,624 probes, reduces discovery 4.32% and complete
+census time 1.37% against growing restarts. It is still 74.00% slower in discovery
+and 15.77% slower overall than one uninterrupted pass. Later candidates add 142
+failures; 161 are retained in 31 of 41 remaining cases. Final cursor encodings
+total 543,300 bytes; the full remaining-state export is 1,329,458 bytes with all
+prior layers. Peak census RSS shows no useful memory reduction. Two positive
+native comparisons improve in aggregate but retain one runtime regression and
+exclude acquisition/discovery/fallback; all four archive/root pairs pass both
+readers. No unrestricted-SAT or full-workload cost guarantee follows.
+
 [Third-layer feedback](third-feedback.md) adds U checked units to a B2 bank with
 C clauses and L occurrences. Index construction and complete propagation use
 O(C+L+U) expected word work/space, additional to sorting, proof/closure checking

@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Resume the probe frontier](research/probe-cursor.md). Cold cursors avoid 2,624
+repeated probes and exactly match one 128-probe run. Later candidates yield 142
+additional failures in 31 cases; two first-prefix refutations bring coverage to
+205/246. Resume saves 1.37% total time versus restart, but costs more than a single
+uninterrupted run. All 1,945 tests pass. Next: compose the 161 failures retained
+in 31 open cases and reuse checked preparation.
+
+Previous:
+
 [Compose the third layer of failures](research/third-feedback.md). Two more
 verified refutations require no new assumed probes, bringing sampled coverage
 to 203/246; 43 remain open. Six closures gain 18 assignments. Native compilation

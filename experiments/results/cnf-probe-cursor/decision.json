@@ -1,0 +1,71 @@
+{
+  "additional_failures": 142,
+  "avoided_repeated_probes": 2624,
+  "decision": "Retain exact-bound cold probe cursors and all newly acquired failures. Use resumption for continued acquisition, not to split a known single-pass budget.",
+  "events_with_additional_failures": 31,
+  "evidence": {
+    "analysis": {
+      "path": "experiments/results/cnf-probe-cursor/analysis.json",
+      "sha256": "ce4e9704e92fdad285eebd49b8cce649db57883dd1334c6ce6a1ca8387cd242a"
+    },
+    "cases": {
+      "path": "experiments/results/cnf-probe-cursor/cases.json",
+      "sha256": "0c5f9ff3151eaca6531f82730169087e8e7dab93e3b4522945895148d427d98f"
+    },
+    "censuses": {
+      "path": "experiments/results/cnf-probe-cursor/censuses.json",
+      "sha256": "0adc86247b63ae8bf5e260ffd2574649b45f48774fcf5e557d04ede38b7f932c"
+    },
+    "comparisons": {
+      "path": "experiments/results/cnf-probe-cursor/comparisons.json",
+      "sha256": "23d9ce6d238bf248553b49c8250925de21977a10e951288c5b625667f3c9336b"
+    },
+    "protocol": {
+      "path": "experiments/results/cnf-probe-cursor/protocol.json",
+      "sha256": "23d0bada828fad7f6285f673098a02d2536dabbfba549c50a75e8ef081ddaf9c"
+    },
+    "remaining": {
+      "path": "experiments/results/cnf-probe-cursor/remaining.json",
+      "sha256": "d3b367aa62d6a62386bb98d05674a2c56343864202024cd0e607643c4afe1297"
+    }
+  },
+  "limitations": [
+    "Same43 retained B3 closures. Pilot exposed before timing; no holdout. No unrecorded historical prefix is assumed tested: the first64 are reacquired and charged.",
+    "Single runs128 probes; restart runs64 then starts over with128 if unresolved; resume runs64, writes/reloads the exact cursor, then attempts up to64 additional probes. First-stage refutations are retained without a second search in both chunked arms.",
+    "Each64 chunk has262144 occurrence visits; single/restart128 have524288. These limits are additional to older acquisition; work/trace interruptions are not completed probes and must be retried. Prefix equality requires no differing active work limits.",
+    "Cursors bind exact full source/B3/closure/order/trace policy content, replay the completed schedule and recheck every saved failure. Open-probe history is trusted scheduling data, not a certified search-exhaustion claim; forged open histories can lose coverage but cannot establish SAT or unchecked UNSAT.",
+    "Two opposite-order isolated repetitions. Source-prefix reconstruction, discovery, JSON serialization/reload, final semantic validation and reporting are timed. Startup/input loading, earlier seed acquisition and final audit are additional. Both chunked arms retain initial/final files.",
+    "Native proofs expand B3 failures through existing strictly decreasing proof banks and use publication-only preparation reuse. Both cold readers and warm validation remain unchanged.",
+    "Positive-only native comparisons exclude discovery, old acquisition and unresolved fallback. Archives may duplicate content; cumulative tables and production defaults are unchanged. No unrestricted-SAT or finite-history size bound."
+  ],
+  "new_refutations": 2,
+  "next_targets": [
+    "Compose the161 retained B3 failures in31 open cases through a checked feedback bank, preserving all lower-layer provenance.",
+    "Reuse checked source/layer preparation under exact invalidation; cold resumption still rebuilds preparation and is slower than a single uninterrupted pass.",
+    "Investigate stronger interaction or further candidates for ten failure-free open cases; exhausted single-literal probing is not SAT certification."
+  ],
+  "open_cases_with_failures": 31,
+  "open_history_is_trusted_scheduling_data": true,
+  "recognized_events": 205,
+  "regressions": {
+    "complete_seconds": {
+      "improved": 1,
+      "regressed": [
+        "new-67-48"
+      ]
+    },
+    "record_bytes": {
+      "improved": 2,
+      "regressed": []
+    },
+    "solve_seconds": {
+      "improved": 1,
+      "regressed": [
+        "new-67-48"
+      ]
+    }
+  },
+  "remaining_events": 41,
+  "retained_open_failures": 161,
+  "total_events": 246
+}

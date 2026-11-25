@@ -1,0 +1,9 @@
+python3 experiments/compare_cnf_probe_cursor.py prepare experiments/results/cnf-probe-cursor
+python3 experiments/compare_cnf_probe_cursor.py run_census experiments/results/cnf-probe-cursor
+python3 experiments/compare_cnf_probe_cursor.py cases experiments/results/cnf-probe-cursor
+python3 experiments/compare_cnf_probe_cursor.py run_trials experiments/results/cnf-probe-cursor
+python3 experiments/validate_cnf_probe_cursor.py validate experiments/results/cnf-probe-cursor
+python3 -m unittest discover -s solver
+python3 -m unittest solver.test_cnf_wide_guard_probes solver.test_cnf_wide_guard_probe_scope solver.test_cnf_complement_probes solver.test_cnf_complement_probe_scope solver.test_cnf_probe_support solver.test_cnf_probe_support_reuse solver.test_cnf_probe_feedback solver.test_cnf_probe_feedback_guards solver.test_cnf_closure_probes solver.test_cnf_layered_feedback solver.test_cnf_prepared_publication solver.test_cnf_changed_closure_probes solver.test_cnf_third_feedback solver.test_cnf_probe_cursor
+latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=/private/tmp/oracle-probe-cursor-paper paper/bounded_domain_sat_and_amortized_reasoning.tex
+python3 experiments/validate_cnf_probe_cursor.py seal experiments/results/cnf-probe-cursor

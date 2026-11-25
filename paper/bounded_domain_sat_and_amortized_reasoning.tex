@@ -12547,6 +12547,100 @@ small-formula truth checks and both cold readers. The 64 earlier proof blocks
 remain intact. The measured coverage gain does not supply polynomial construction,
 compact closure or efficient acquisition for unrestricted SAT.
 
+\subsection{Persistent cursors for the untested probe frontier}
+\label{sec:probe-cursor}
+
+A saved unresolved proof program records failures, but need not record every
+candidate tested. The next experiment therefore reacquires the first 64 probes
+with an explicit recorder and charges that acquisition. Its cursor binds the
+full exact source, B3 bank, saved closure trace and assignment, active-literal
+order, trace limit and policy identifier. Reload compares complete content,
+replays the completed schedule including complement promotion, and independently
+checks every retained failure on B3. Changed banks, closures, orders, bounds or
+policy identifiers reject reuse. A semantic change requires a new policy
+identifier; version discipline remains part of the contract.
+
+Only completed probes advance the cursor. A work- or trace-interrupted probe
+is retried, including when it was a promoted complement. Its partial propagation
+state is not retained, and repeated work is charged. A permanently insufficient
+budget can keep interrupting the same candidate. Open-probe history is trusted
+scheduling data: reload does not rerun each claimed open probe. A fabricated
+open history can skip useful search, as an explicit regression test demonstrates.
+It cannot establish SAT or justify an unchecked UNSAT result. Opposite failed
+traces still require semantic checking and native reconstruction through the
+strictly decreasing earlier banks. Even exhausting all single-literal candidates
+without a conflict remains unresolved.
+
+All 43 saved B3 closures receive three matched methods. Single allows 128
+assumptions. Restart runs 64, writes and reloads its result, then starts again
+with 128 if unresolved. Resume runs 64, writes and reloads its cursor, then
+attempts 64 additional assumptions. Both chunked methods retain first-stage
+refutations without another search. Each 64-probe call has 262,144 occurrence
+visits, and each 128-probe call 524,288. No work or trace interruption occurs in
+this sample. Two opposite orders per target and method give 48 isolated workers;
+the pilot was exposed before timing.
+
+Every final cursor and proof matches the single-pass result exactly. Resume
+performs 5,271 assumed probes versus 7,895 for restart, avoiding 2,624 repeated
+probes. Occurrence visits are 208,190 versus 298,387; initialization clause visits
+are 2,029,906 versus 3,036,626. The first prefix yields 29 failures; continuation
+raises this to 171. The 142 additional failures occur in 31 cases, including
+116 failures in 27 cases whose closure had not changed. The old fixed prefix
+had missed this reusable evidence. Continuation itself adds no immediate
+refutation. Two refutations already occur in the first prefix on changed B3
+closures, bringing recognition to 205 of 246 sampled post-binary events, with
+41 unresolved. Both were already UNSAT in inspected snapshots, and fresh local
+solving also proves them.
+
+Summed target-mean discovery time is 0.26394 seconds for single, 0.47999 for
+restart and 0.45926 for resume. Complete census time is 1.27489, 1.49648 and
+1.47595 seconds. Resume saves 4.32\% in discovery and 1.37\% overall against
+restart, but takes 74.00\% more discovery time and 15.77\% more total time than
+single. Its purpose is continued acquisition across interruptions, not making
+an already known single-pass budget faster. Preparation, exact binding,
+schedule replay and retained-proof checking limit the saving. Complete time
+includes prefix reconstruction, JSON write/read, final semantic validation and
+reporting; earlier acquisition, startup, input loading and final audit remain
+additional. Two orders supply descriptive evidence, not a production guarantee.
+
+The 41 open events retain 161 B3 failures in 31 cases, with 4,948 trace steps
+and 5,224 completed candidates. Ten events retain no failure. Four open events
+exhaust the current single-literal order without refutation; the other 37 stop
+at the 128-probe cap. A checked feedback pass over these retained failures is
+the next coverage opportunity. All previous sources, guards, layers and closures
+remain available; the cursor does not replace their justification.
+
+The two positive roots receive eight isolated fresh/native trials. Both cold
+readers accept all four unique archive/root pairs. Summed case-mean compilation
+is 0.48771 seconds versus 0.91352 for fresh solving; complete local trials are
+1.03376 versus 2.18668 seconds. Encoded bytes are 1,188,542 versus 4,414,607,
+with 477 versus 318 records. Aggregate compilation falls 46.61\%, total local
+time 52.72\%, and bytes 73.08\%. Both byte counts improve, but only one root
+improves in compile and complete time; the other regresses. These different
+roots do not reverse earlier studies' preserved regressions. The positive-only
+comparison excludes discovery, old acquisition and unresolved fallback, so it
+does not establish a full-workload advantage.
+
+For a fixed bank with n active variables, history contains at most $2n$ completed
+literals and $2n$ failure records. With trace cap T the failures require $O(nT)$
+trace entries, plus source/bank/closure/order binding storage. Reload replays
+the schedule, copies retained proofs and rechecks failure reasons and older
+provenance. Clause lengths, sorting, integer encoding and serialization remain
+additional costs. Arbitrarily many changing banks can still create unbounded
+history. Final cursor encodings total 543,300 bytes, and the complete open-state
+export 1,329,458 bytes. The latter retains old layers and duplicates some content
+between program and cursor. Peak census RSS is 97.12, 97.09 and 96.99 MB; no
+useful whole-process memory reduction follows. Cumulative authority tables remain
+unchanged, and isolated native archives can duplicate shared content.
+
+All 1,945 tests pass, including cold reload, complement promotion, interruption
+and retry, exact-binding invalidation, malformed histories and proofs, forged
+open histories, guards, warm rejection, full/support compilation, both cold
+readers, and generated small-formula truth checks. All 64 earlier proof blocks
+remain intact. Honest cursor reuse avoids repeated acquisition on this finite
+sample; it neither certifies search exhaustion nor gives polynomial acquisition
+or compact closure for unrestricted SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

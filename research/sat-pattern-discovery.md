@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: another checked layer; untested candidates remain the frontier
+## Latest evidence: the untested frontier yields new reusable failures
+
+[Persistent cursors](probe-cursor.md) match one 128-probe run while avoiding 2,624
+repeated probes versus growing restarts. Candidates beyond the old prefix add
+142 failures in 31 cases, including 116 in 27 unchanged cases. They add no immediate
+refutation; two refutations already arise in the first prefix on changed B3
+closures. Sampled coverage reaches 205/246, leaving 41 unresolved.
+
+Next compose the 161 B3 failures retained in 31 open cases through checked
+feedback. The remaining ten have no failure, and four open cases exhaust the
+current single-literal order without deciding SAT. Cursors preserve actual
+completed history and retry interruptions. Claimed open history is scheduling
+data, not certified exhaustion; failure traces and native proofs are checked.
+All 1,945 tests pass. Resume `experiments/results/cnf-probe-cursor/checkpoint.json`.
+The 1.37% total saving over restart does not beat an uninterrupted single pass,
+and no efficient classification of arbitrary CNF has been established.
+
+## Previous evidence: another checked layer; untested candidates remain the frontier
 
 [Third-layer feedback](third-feedback.md) composes the 27 saved B2 failures and
 refutes two more events without new assumed probes. Both native roots pass both

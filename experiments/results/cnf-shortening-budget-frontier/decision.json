@@ -1,0 +1,79 @@
+{
+  "certification": "67 gained local roots have 134 independently audited native archive/root pairs. All were already stored by ordinary whole-query search. Support compilation is slower in aggregate despite lower summed proof bytes; no whole-query gain is claimed.",
+  "coverage": {
+    "control64": {
+      "events": 266,
+      "outcomes": {
+        "no_useful_forced_literal": 104,
+        "refuted": 266,
+        "root_limit": 245
+      },
+      "roots": 173
+    },
+    "prepared128": {
+      "events": 347,
+      "outcomes": {
+        "no_useful_forced_literal": 221,
+        "refuted": 347,
+        "root_limit": 47
+      },
+      "roots": 224
+    },
+    "prepared256": {
+      "events": 369,
+      "outcomes": {
+        "no_useful_forced_literal": 245,
+        "refuted": 369,
+        "root_limit": 1
+      },
+      "roots": 240
+    },
+    "prepared64": {
+      "events": 266,
+      "outcomes": {
+        "no_useful_forced_literal": 104,
+        "refuted": 266,
+        "root_limit": 245
+      },
+      "roots": 173
+    },
+    "prepared96": {
+      "events": 318,
+      "outcomes": {
+        "no_useful_forced_literal": 164,
+        "refuted": 318,
+        "root_limit": 133
+      },
+      "roots": 206
+    }
+  },
+  "limitations": [
+    "Exposed-source study; fixed sweep and 96 previous edits are not independent-domain validation.",
+    "Root budgets do not bound total work or resident memory.",
+    "Local proof-byte sums use separate databases and may duplicate shared records; the cumulative bank is unchanged.",
+    "No efficient arbitrary-CNF partition or unrestricted complexity claim."
+  ],
+  "next": "Probe full source clauses with already checked wider guard consequences, preserving provenance and native reconstruction. Start with checked-negative exhausted cases, retain unknown cases, and compare all costs with binary-only detection and ordinary local solving.",
+  "policy": "Keep all settings explicit and optional; no live default or automatic wall-time policy. The 96-root setting has a larger timing margin than the 128-root setting, but no pointwise or stable speed-ratio guarantee is established.",
+  "residuals": {
+    "exhausted": 245,
+    "exhausted_checked_unsat": 230,
+    "exhausted_unknown": 15,
+    "exhausted_with_wider_guards": 228,
+    "exhausted_without_wider_guards": 17,
+    "remaining_root_stop": {
+      "event": 3,
+      "target": 1
+    }
+  },
+  "result": "Preparation savings support 96/128 fresh-root settings with more refutations below the older 64-root measured discovery and complete-phase costs. The 256 setting leaves one root stop and 245 exhausted cases.",
+  "status": "verified optional budget frontier; prioritize wider-guard interaction next",
+  "validation": {
+    "focused_tests": 12,
+    "full_tests": 1865,
+    "prior_artifacts": 21482,
+    "prior_manifests": 179,
+    "prior_proof_blocks": 64,
+    "prior_sources": 1036
+  }
+}

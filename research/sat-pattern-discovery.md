@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: identical coverage with less repeated preparation
+## Latest evidence: budget limits give way to missing wider interactions
+
+[The fixed budget sweep](shortening-budget-frontier.md) raises recognition from
+266 of 615 events at 64 roots to 318, 347 and 369 at 96, 128 and 256. Earlier
+programs remain intact; the 96/128 settings fit below the older 64-root measured
+cost after preparation reuse. All 67 gained local roots have native proofs and
+were already found by ordinary whole-query search. Certification remains costly.
+
+At 256 roots, 245 cases exhaust the current abstraction and only one still hits
+the root limit. Checked snapshots certify 230 of those exhausted cases as UNSAT;
+15 remain unknown. Wider checked guards survive in 228 cases. Next test whether
+bounded propagation with their full clauses can establish useful exclusions,
+retaining source provenance and native replay. Neither exhaustive binary search
+nor failed model completion establishes satisfiability. The 17 exhausted cases
+without wider guards remain a separate gap. Resume
+`experiments/results/cnf-shortening-budget-frontier/checkpoint.json`.
+
+## Previous evidence: identical coverage with less repeated preparation
 
 [Immutable source preparation](shortening-prepared-source.md) preserves every
 program over 615 saved events and 96 edits while reducing measured discovery

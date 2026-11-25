@@ -12,7 +12,36 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: spend verified preparation savings on coverage
+## Current investigation: reuse wider checked guards at binary fixed points
+
+[The root-budget frontier](shortening-budget-frontier.md) converts preparation
+savings into more certified patterns: 96 and 128 roots refute 318 and 347 of 615
+events, versus 266 at 64, while both measured phases remain below the older
+64-root cost. The 128-root timing margin is small. At 256 roots, 369 events close;
+only one still hits the root limit and 245 exhaust available consequences.
+Larger budgets cost more than the new prepared64 baseline and grow cached state.
+
+All 67 newly recognized local roots have native proof archives and already occur
+in ordinary whole-query snapshots. Support compilation takes 6.84888 seconds
+versus 3.41877 for ordinary local solving, although it saves aggregate record
+bytes. This certification cost remains important; no whole-query win is claimed.
+All 1,865 tests pass; earlier sources, artifacts and 64 proof blocks are preserved.
+
+**Next best target:** 230 of the 245 exhausted events have checked UNSAT results;
+15 are unknown in the inspected stores. In 228 exhausted events, wider checked
+guard clauses remain available. Test bounded unit-propagation probes through
+source clauses and these existing consequences, keeping their provenance and
+compiling exclusions through native rules. Charge preparation, probes, support
+selection, checking and replay against binary-only discovery and ordinary local
+solving. Wider guards may be redundant; preserve misses and regressions. The 17
+exhausted events without such guards need a separate acquisition/interaction
+analysis. Another broad root-budget increase has little remaining value here.
+
+Resume `experiments/results/cnf-shortening-budget-frontier/checkpoint.json`.
+The fixed budget sweep, all new proofs, edited inputs, cost regressions and
+read-only diagnosis of 246 remaining events are preserved.
+
+## Previous investigation: spend verified preparation savings on coverage
 
 [Owned immutable preparation](shortening-prepared-source.md) cuts measured
 discovery from 7.62653 to 5.98966 seconds (21.46%) across all 615 saved events;

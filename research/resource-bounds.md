@@ -18,6 +18,17 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+The [root-budget frontier](shortening-budget-frontier.md) keeps all other limits
+fixed while increasing fresh BFS roots from 64 to 96/128/256. Completed programs
+are preserved because the limit only stops the same deterministic execution.
+Neither runtime nor memory is monotone downward: conditioned states and edge
+visits grow, and maximum cache memberships rise from 1,538 to 2,181. Measured
+96/128-root cost fits below the earlier repeated-preparation 64-root control,
+but exceeds the new prepared64 cost. The 67 new local proof comparisons require
+additional compilation, replay and persistence. Isolated proof-byte totals are
+not cumulative-bank growth. No uniform total-work, RAM or arbitrary-SAT bound
+follows from this empirical cost/coverage frontier.
+
 The [immutable preparation experiment](shortening-prepared-source.md) validates
 original source/template facts once per discovery call and retains owned data of
 O(L+V+T) words for source size L, variables V and template encoding size T under

@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Convert preparation savings into broader discovery](research/shortening-budget-frontier.md).
+A fixed search-budget sweep raises recognition from 266 to 347 of 615 events at
+slightly less measured cost than the older implementation, or to 369 with a small
+increase. All 67 gained local roots have checked native archives; all 1,865 tests
+pass. They were already known to ordinary whole-query search, so no whole-query
+speedup is claimed. Next: exploit wider checked guards in the remaining cases.
+
+Previous:
 [Reuse immutable source preparation across conditioning](research/shortening-prepared-source.md).
 Discovery time falls 21.46% across 615 saved events, including copying costs;
 the complete measured phase falls 12.90%. All programs and 173 native root proofs

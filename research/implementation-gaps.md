@@ -4,7 +4,17 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (25 November, immutable source preparation):
+Latest expansion checkpoint (25 November, discovery-budget frontier):
+[Spend preparation savings on certified coverage](shortening-budget-frontier.md).
+Recognition rises from 266 to 318/347/369 events at 96/128/256 roots; all earlier
+successes remain. The 96/128 measured costs are below the older 64-root control,
+but compilation and cold replay remain additional. All 67 new roots have native
+archives and are already in ordinary-query stores. All 1,865 tests pass. Next
+probe source clauses with the wider checked guards present in 228 of the 245
+exhausted cases, retaining 15 unknown cases as unknown and testing native proof
+costs. Resume `experiments/results/cnf-shortening-budget-frontier/checkpoint.json`.
+
+Previous expansion checkpoint (25 November, immutable source preparation):
 [Reuse original validation across conditioned states](shortening-prepared-source.md).
 Discovery falls 21.46% in the matched sample; current-cofactor and native proof
 checks remain. All 615 programs and 96 edit results are unchanged, with identical

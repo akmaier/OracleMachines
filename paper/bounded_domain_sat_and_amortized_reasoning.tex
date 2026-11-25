@@ -11576,6 +11576,110 @@ stronger useful guards or another exact structural description. Neither the
 unchanged classification nor cheaper preparation proves efficient coverage of
 arbitrary CNF, a whole-query speedup, or a bound on unlimited persistent growth.
 
+\subsection{Spending preparation savings on broader discovery}
+
+The preceding preparation saving creates a concrete coverage question: can the
+same bounded detector inspect more candidate literals at a competitive total
+cost? We fix a sweep of 64, 96, 128 and 256 fresh BFS roots before measurement,
+retaining the 32-round, 256-path and 16,384 combined BFS, admission and
+invalidation-check limits. The cache membership cap, root order, endpoint filter,
+inference rules and native certificate authority remain unchanged. The earlier
+64-root implementation with repeated preparation supplies a second baseline.
+
+For this deterministic detector, the root allowance only stops an otherwise
+identical execution. Increasing it preserves the operation sequence up to the
+smaller limit. A completed refutation remains identical, and any run that stops
+for a different reason remains identical. A root-limited run can extend its
+forced-step prefix without necessarily finding a contradiction. This property
+does not assert lower total work, a pointwise speedup, or monotonic behavior for
+arbitrary heuristics whose choices depend on their budget.
+
+Eighty isolated census workers compare five settings on eight targets with two
+alternating repetitions. All 615 exposed events are retained. Mean times summed
+over targets are:
+\begin{center}
+\begin{tabular}{lrrrr}
+\hline
+Preparation and roots & Events & Roots & Discovery (s) & Complete (s) \\
+\hline
+Repeated, 64 & 266 & 173 & 7.80051 & 12.95475 \\
+Prepared, 64 & 266 & 173 & 6.10815 & 11.23735 \\
+Prepared, 96 & 318 & 206 & 7.11800 & 12.29904 \\
+Prepared, 128 & 347 & 224 & 7.60298 & 12.76253 \\
+Prepared, 256 & 369 & 240 & 8.01857 & 13.16403 \\
+\hline
+\end{tabular}
+\end{center}
+Here events and roots count refutations. Complete time includes initial event
+binding, discovery with copying and preparation, and event serialization.
+Acquisition, process startup, input loading and preservation audits remain
+additional, as does native compilation measured below. Root limits are not
+equal wall-time or total-work budgets.
+
+The 96-root setting gains 52 events at 8.75\% less discovery time and 5.06\% less
+complete-phase time than the earlier control. At 128 roots the gain is 81 events,
+with reductions of 2.53\% and 1.48\%; that margin is small and two repetitions do
+not establish a stable ratio. The 256-root setting gains 103 events at increases
+of 2.80\% and 1.62\%. Every larger allowance costs more than prepared64. These
+measurements support a cost/coverage tradeoff rather than a universally preferred
+setting. All previous successes and forced-step prefixes remain intact. On the
+96 earlier edited cases, refutations rise from 28 to 34, 38 and 40 without loss;
+these transformations share exposed source families.
+
+Prepared 64, 96, 128 and 256 roots construct 2,837, 3,289, 3,552 and 3,770
+conditioned states and visit 339,030, 444,394, 509,333 and 557,568 BFS edges.
+Maximum cached literal memberships grow from 1,538 to 1,841, 2,166 and 2,181.
+Prepared-input storage stays at a maximum proxy of 6,773 scalar slots. Worker
+RSS lies between about 79.6 and 83.6 MB across settings and includes interpreter
+and input state; it supplies no monotone memory guarantee.
+
+The largest allowance adds 67 local roots beyond prepared64; 58 also lie outside
+the earlier six-policy filter union. All 67 already occur in the checked ordinary
+whole-query snapshots. Each enters two alternating isolated comparisons of
+ordinary local search and selected-support compilation, giving 268 workers.
+Both approaches refute all cases, both independent readers accept the records,
+and warm replay changes nothing. The audit checks 134 unique archive/root pairs
+across all six authority tables.
+
+Ordinary solve time sums to 3.41877 seconds against 6.84888 for compilation.
+Warm verification takes 0.13119 against 2.55595 seconds, cold verification
+3.94279 against 3.42864, and persistence 1.19186 against 0.83185. Complete local
+trial phases sum to 8.93284 and 13.81499 seconds, before census discovery.
+Support compilation is slower in solve/compile time on 57 of 67 cases and in
+complete time on 54. It retains 9,296,395 key/payload bytes in 5,321 records,
+against 15,360,617 bytes in 1,114 ordinary records, but uses more bytes on 30
+individual cases. These sums concern separate databases and can duplicate shared
+subproofs; they are not cumulative-bank growth. The measured discovery saving
+therefore does not establish a whole-query win or remove certification costs.
+
+At 256 roots only one event still hits the root limit. The other 245 exhaust the
+detector's available useful binary consequences. A read-only diagnosis replays
+every partial program through the frozen source-bound checker. Ordinary
+snapshots certify 230 of those exhausted events as UNSAT; the other 15 are
+absent from the inspected stores and remain unknown. The one root-limited event
+also has a checked UNSAT result. A deterministic completion of the binary model
+provides no full-source SAT witness on these remaining events, but failure of
+one candidate assignment does not establish UNSAT.
+
+Wider checked guard consequences survive in 228 of the 245 exhausted events.
+Across the remaining events, their occurrences include 540 ternary guards,
+422 guards of width four and 302 of width five. These are repeated event
+occurrences, not distinct template counts. The current binary graph cannot use
+their full joint interaction before additional literals are fixed. Their presence
+suggests testing bounded unit-propagation probes through source clauses and
+these existing consequences, with explicit guard provenance and native
+reconstruction of every exclusion. It does not guarantee further coverage.
+The 17 exhausted events without such guards remain a separate acquisition or
+interaction gap. Another general root-budget increase has little remaining
+coverage opportunity on this corpus.
+
+All 1,865 tests pass, including budget-prefix checks on conditioned chains and
+seeded small CNFs checked against exhaustive truth. Earlier proof blocks,
+archives and sources remain preserved. The cumulative bank is unchanged; new
+comparison proofs are supplemental. This experiment expands certified detector
+coverage while preserving its unresolved class. It does not provide an efficient
+partition covering arbitrary CNF or an unrestricted-SAT complexity result.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

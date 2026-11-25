@@ -1,0 +1,81 @@
+{
+  "additional_assignments": 18,
+  "additional_beyond_exclusions": 5,
+  "changed_remaining_closures": 6,
+  "decision": "Retain third-layer feedback and its native proofs as a coverage result with a measured runtime/storage regression. Prioritize untested candidate history and proof construction next.",
+  "evidence": {
+    "analysis": {
+      "path": "experiments/results/cnf-third-feedback/analysis.json",
+      "sha256": "897e77e0caee5ed018cb8b74164671297223ad2455e8c9ef56f5bcb84a9bbc3b"
+    },
+    "cases": {
+      "path": "experiments/results/cnf-third-feedback/cases.json",
+      "sha256": "32e47d7a7e5828a701e1966a2492ad92bd05aeb347e4f594f0abb8fb4b137d82"
+    },
+    "censuses": {
+      "path": "experiments/results/cnf-third-feedback/censuses.json",
+      "sha256": "7645e3fb4a04a5117147000b46e79e2e645c6f5cc3c6a7ca6054fb530273f47d"
+    },
+    "comparisons": {
+      "path": "experiments/results/cnf-third-feedback/comparisons.json",
+      "sha256": "55974dd28043f1e1e06811ff57a9371520dfc65ea2b7666827fb5df33b06b659"
+    },
+    "protocol": {
+      "path": "experiments/results/cnf-third-feedback/protocol.json",
+      "sha256": "e87466f9bd5adfa981a73dce366f0870e093e8617a63aac99f0dbced65431669"
+    },
+    "remaining": {
+      "path": "experiments/results/cnf-third-feedback/remaining.json",
+      "sha256": "19613a82ce424b3a2a0abe38e362fb86d59e1592c62b89eca91740ae9914a8ed"
+    },
+    "remaining-closures": {
+      "path": "experiments/results/cnf-third-feedback/remaining-closures.json",
+      "sha256": "2ae021a1606e8e18ebeb3c5c8ae871bf25b8779c74309ed5260524efaab4cb3c"
+    },
+    "support-plans": {
+      "path": "experiments/results/cnf-third-feedback/support-plans.json",
+      "sha256": "80cf2f787b8117e41081dacc240ed4b13c4bcef17d05521cc93b571d9c44004e"
+    }
+  },
+  "limitations": [
+    "Same45 remaining events. Eight retain27 B2 failures; the other37 contribute no new unit. Pilot exposed before timing; no holdout.",
+    "Both arms check source, guards, all previous proof layers and both saved closures, and build B3. Base propagates B2; feedback propagates B3. Zero new assumed probes; one bounded unconditional pass per event.",
+    "New units are justified by failed probes checked on B2. B2 units refer to B1 failures, B1 units to B0 failures. Proof dependencies strictly decrease, and native publication accepts no learned axiom.",
+    "Two opposite-order isolated repetitions per target and arm. Reconstruction, preparation, checking, bank/index building and event serialization are charged. Startup/loading, prior acquisition and final audit are additional.",
+    "Open closures are reconstructed by a separate scan-based diagnostic, with its own timing/counters, outside the timed bounded discovery. Unresolved and budget outcomes never mean SAT.",
+    "Native comparisons cover all distinct gained roots, warm checking, both cold readers and persistence, but exclude discovery, seed acquisition and unresolved fallback. Isolated archives may duplicate content; no cumulative table or production default changes.",
+    "Fixed three-layer provenance does not bound arbitrary future layers, proof expansion, search contexts or storage. No unrestricted-SAT or P-versus-NP conclusion."
+  ],
+  "new_assumed_probes": 0,
+  "new_refutations": 2,
+  "next_targets": [
+    "Persist source-bound tested-candidate history and a cursor; investigate untested candidates in37 unchanged cases, invalidating reuse when bank, ranking or semantics change.",
+    "Use the six changed B3 closures for a separately bounded search; do not repeat propagation on the same checked fixed point.",
+    "Reuse checked source/prefix preparation and reduce native cofactor/proof reconstruction while retaining exact child checks."
+  ],
+  "recognized_events": 203,
+  "regressions": {
+    "complete_seconds": {
+      "improved": 0,
+      "regressed": [
+        "new-1-57",
+        "new-37-62"
+      ]
+    },
+    "record_bytes": {
+      "improved": 1,
+      "regressed": [
+        "new-1-57"
+      ]
+    },
+    "solve_seconds": {
+      "improved": 0,
+      "regressed": [
+        "new-1-57",
+        "new-37-62"
+      ]
+    }
+  },
+  "remaining_events": 43,
+  "total_events": 246
+}

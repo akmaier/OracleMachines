@@ -12,7 +12,34 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: compose new failures; advance the search frontier
+## Current investigation: resume untested candidates; reduce proof construction
+
+[Third-layer feedback](third-feedback.md) refutes two more events with zero new
+assumed probes, reaching 203/246 recognized events. Both native roots pass both
+readers. Of 43 remaining events, six gain 18 B3 assignments, including five beyond
+their 13 added exclusion variables. Thirty-seven closures stay unchanged.
+
+**Highest coverage priority:** preserve a source-bound cursor and actual tested
+candidate history, then resume beyond the previous prefix on unchanged banks.
+A saved unresolved proof program is not a receipt for all attempted search.
+Changed banks, rankings and semantics require explicit invalidation. The six
+changed closures remain a smaller bounded-search opportunity; another identical
+propagation pass cannot improve a checked fixed point.
+
+**Cost priority:** prefix reconstruction still consumes about 80% of census time.
+Native compilation on the two new roots takes 2.16 times fresh-solving time;
+complete trials take 1.89 times, and encoded bytes grow 27.92%. Both timing
+regressions and the byte-growth case are preserved. Support reduction alone is
+insufficient: 793 trace splits remain despite support shrinking to 780 literal
+occurrences. Reuse checked preparation and reduce repeated native proof
+construction without weakening child checks.
+
+All 1,935 tests pass. The complete B3 closures and all previous layers are retained
+in `experiments/results/cnf-third-feedback/remaining-closures.json`; resume its
+sibling `checkpoint.json`. No general memory saving or unrestricted-SAT guarantee
+is established.
+
+## Previous investigation: compose new failures; advance the search frontier
 
 [Probing changed closures](changed-closure-probes.md) closes eight more events,
 with eight native roots accepted by both readers. Recognition reaches 201/246;

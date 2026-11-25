@@ -12460,6 +12460,93 @@ All 64 earlier proof blocks remain intact. Further rounds can still require
 exponentially many distinct contexts and unbounded retained history; the finite
 coverage gain supplies no polynomial construction covering unrestricted SAT.
 
+\subsection{Composition of a third failed-probe layer}
+\label{sec:third-feedback}
+
+The 27 B2 failures retained by the preceding round justify another bank, B3,
+formed by adding their complemented assumptions. Each failure is checked on
+B2 before its unit is added. B2 itself uses only failures checked on B1, whose
+additional units use failures checked on B0. Source clauses and checked guard
+consequences form B0. Thus every source model would satisfy all four banks.
+A checked unit conflict in B3 rules out such a model. Native reconstruction
+expands used failures through strictly decreasing bank levels until it reaches
+source clauses or checked guards. No learned unit becomes an unchecked native
+axiom, and no proof uses a unit introduced by its own failed-probe layer.
+
+One bounded unconditional propagation pass refutes two of the 45 remaining
+events, with zero new assumed probes. Both distinct roots pass both independent
+readers, increasing recognition to 203 of 246 post-binary events and leaving
+43 unresolved. Both roots were already UNSAT in inspected snapshots; fresh
+local solving also proves them. This is additional coverage of an exposed sample,
+not a new tractable category or an unrestricted-SAT result.
+
+The matched control propagates B2 and the candidate propagates B3. Both arms
+validate the source, guards, all preceding failures and saved closures, and
+construct B3. Each runs 45 unconditional propagation calls, with the existing
+per-event limits of 262,144 occurrence visits and 256 trace steps. Preparation,
+checking and indexing are additional. An open or bounded result remains
+unresolved. Two opposite orders per target and arm give 32 isolated census
+workers; the pilot was exposed before timing.
+
+Summed target-mean discovery time is 0.19622 seconds for B2 and 0.19890 for B3.
+Complete census time is 1.00702 and 1.02114 seconds, including prefix
+reconstruction and event serialization. Reconstruction accounts for about
+80\% of that cost; its unchanged path has no algorithmic saving. Occurrence
+visits rise from 1,349 to 3,036, derived trace units from 92 to 230, and indexed
+literal slots from 53,541 to 53,568. The extra units enable more propagation;
+this coverage gain is not a discovery speedup. Earlier acquisition, loading,
+startup and final audits remain additional.
+
+The two gained roots receive two opposite-order fresh/native trials each. All
+four unique archive/root pairs pass both cold readers. Summed case-mean
+compilation takes 1.04567 seconds versus 0.48330 for fresh solving (116.36\%
+more). Complete trials, including warm checking, both cold readers and
+persistence, take 2.24492 versus 1.18954 seconds (88.72\% more). Both roots
+regress in both timings. Encoded record bytes increase from 2,394,394 to
+3,062,862 (27.92\%), with one growing case and one shrinking case. Record
+counts rise from 145 to 823. These positive-case totals exclude discovery,
+prior acquisition and unresolved fallback.
+
+Causal source support shrinks from 2,901 to 780 literal occurrences, while
+native reconstruction still emits 793 trace splits and one binary-prefix split.
+It uses six original failures, seven second-stage failures and nine third-stage
+failures. Support reduction therefore does not ensure a smaller or faster
+native proof. All regressions remain in the preserved experiment, and no
+full-workload advantage over ordinary solving is established.
+
+For a B2 bank with C clauses and L occurrences and U added units, index
+construction and complete propagation use $O(C+L+U)$ expected word work and
+space, additional to sorting, validation and retained history. Earlier banks
+and proofs remain available. Native cofactor construction, recursive proof
+expansion, publication and retained certificates are additional; fixed depth
+here does not bound the cost of arbitrary future layers or contexts. Peak
+census RSS is 96.67 MB for B2 and 96.73 MB for B3. Peak trial RSS is 78.40 MB
+fresh and 77.99 MB layered. These small differences establish no general
+memory saving; the aggregate native record payload grows. Supplemental
+isolated archives can duplicate shared content, and cumulative authority
+tables remain unchanged.
+
+A separately charged scan-based diagnostic reconstructs and checks complete
+B3 unit closures for all 43 open events in 0.21165 seconds. They contain 90
+assignments. Six cases gain 18 assignments over B2, including five beyond the
+13 new exclusion variables retained in those cases; 37 closures remain
+unchanged. All earlier sources, guards, failures and closures are preserved.
+The two gained case files retain their fourteen B2 failures, and the open-state
+files retain the other thirteen. The complete closure export is 819,457 bytes,
+compared with 765,499 bytes before adding that diagnostic; the two case files
+total 51,517 bytes. These are export sizes, not RAM or lifetime-storage bounds.
+
+The next broad coverage target is a source-bound cursor for untested candidates.
+An unresolved proof program alone does not record or certify its complete search
+prefix. Reuse must account for changes in the exact bank, ranking and search
+semantics. The six changed closures support a separate bounded search; identical
+propagation on their complete fixed points cannot add facts. All 1,935 tests
+pass, including malformed and forward dependencies, guards, warm validation,
+full/support compilation, budget stops, satisfiable open banks, exhaustive
+small-formula truth checks and both cold readers. The 64 earlier proof blocks
+remain intact. The measured coverage gain does not supply polynomial construction,
+compact closure or efficient acquisition for unrestricted SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

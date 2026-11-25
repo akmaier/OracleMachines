@@ -5,7 +5,25 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: target changed closures without losing observed coverage
+## Latest evidence: another checked layer; untested candidates remain the frontier
+
+[Third-layer feedback](third-feedback.md) composes the 27 saved B2 failures and
+refutes two more events without new assumed probes. Both native roots pass both
+readers, reaching 203/246 sampled events and leaving 43 unresolved. Both gained
+roots were already UNSAT in inspected snapshots, and fresh solving also proves
+them. Six open B3 closures gain 18 assignments; 37 stay unchanged.
+
+Next preserve actual candidate history and a source-bound cursor to search beyond
+the old prefix. Unresolved programs alone do not certify omitted search. A
+changed bank needs explicit invalidation; the six strengthened closures can
+receive a separate bounded search. Further identical propagation cannot change
+these checked fixed points. Native compilation is 2.16 times fresh-solving time,
+and encoded bytes grow 27.92% on the two new roots. Coverage has expanded without
+a net cost advantage. All 1,935 tests pass. Resume
+`experiments/results/cnf-third-feedback/checkpoint.json` and its preserved B3
+closures. No efficient partition of arbitrary CNF has been established.
+
+## Previous evidence: target changed closures without losing observed coverage
 
 [Another bounded probe round](changed-closure-probes.md) finds eight new
 refutations on the 21 changed closures. All eight native roots pass both readers;

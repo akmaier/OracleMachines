@@ -4,7 +4,17 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (25 November, changed closure probes):
+Latest expansion checkpoint (25 November, third-layer feedback):
+[Compose the B2 failures](third-feedback.md). Two additional refutations require
+no new assumed probes; both native roots pass both readers. Sampled coverage is
+203/246, with 43 events unresolved. Six B3 closures gain 18 assignments. All
+1,935 tests pass. Native compilation takes 2.16 times fresh-solving time and
+encoded bytes grow 27.92% on these two gains. Next retain and advance a bound
+candidate cursor on unchanged banks, and reduce checked proof construction.
+Resume `experiments/results/cnf-third-feedback/checkpoint.json`; all prior
+layers and complete B3 closures remain available.
+
+Previous expansion checkpoint (25 November, changed closure probes):
 [Target the changed closures](changed-closure-probes.md). Eight additional
 refutations have native proofs checked by both readers, bringing coverage to
 201/246; 45 events remain open. Skipping 32 unchanged events saves 2,048 probes,

@@ -18,6 +18,23 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Third-layer feedback](third-feedback.md) adds U checked units to a B2 bank with
+C clauses and L occurrences. Index construction and complete propagation use
+O(C+L+U) expected word work/space, additional to sorting, proof/closure checking
+and the retained earlier banks. Native expansion still reconstructs source
+cofactors and lower-layer proofs under contexts; a fixed layer count does not
+bound future contexts or proof size.
+
+The 45-event pass closes two cases without assumed probes. Six of 43 remaining
+closures gain 18 assignments; a separately charged diagnostic retains all 90 B3
+assignments in an 819,457-byte export. Discovery takes 0.19890 seconds and complete
+census 1.02114 seconds; about 80% is prefix reconstruction. Native compile time
+is 116.36% higher than fresh solving, complete trials 88.72% higher, and record
+bytes 27.92% higher (823 versus 145 records). Both cold readers accept all four
+new archive/root pairs. Peak RSS differences establish no memory improvement;
+cumulative tables are untouched. Further search needs an actual resumable
+candidate history, not an inference of exhaustion from unresolved programs.
+
 [Probing changed closures](changed-closure-probes.md) charges complete seed,
 guard and closure checking before an exact bank/assignment comparison. An
 unchanged event skips search as unresolved; it does not establish exhaustion.

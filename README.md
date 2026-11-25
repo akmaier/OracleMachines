@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Compose the third layer of failures](research/third-feedback.md). Two more
+verified refutations require no new assumed probes, bringing sampled coverage
+to 203/246; 43 remain open. Six closures gain 18 assignments. Native compilation
+is 2.16 times as slow as fresh solving and uses 27.92% more record bytes on the
+two gains. All 1,935 tests pass. Next: resume untested candidates and reduce proof
+construction costs; retain the observed regressions.
+
+Previous:
+
 [Probe changed closures](research/changed-closure-probes.md). Eight more events
 have verified native proofs, reaching 201/246 recognized events; 45 remain open.
 Skipping unchanged cases avoids 2,048 probes and reduces discovery 11.75%, but

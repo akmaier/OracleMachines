@@ -22,7 +22,7 @@
 \usepackage[authoryear,round]{natbib}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
-\hypersetup{hidelinks,pdftitle={Bounded-Domain SAT, Compiled Knowledge, and Amortized Reasoning},pdfauthor={Andreas Maier},pdfsubject={Finite-domain compilation, neural computation, oracle complexity, and System 1/System 2}}
+\hypersetup{hidelinks,pdftitle={Bounded-Domain SAT, Compiled Knowledge, and Amortized Reasoning},pdfauthor={Andreas Maier and GPT Astra (OpenAI AI research assistant)},pdfsubject={Finite-domain compilation, neural computation, oracle complexity, and System 1/System 2}}
 \urlstyle{same}
 \pagestyle{fancy}
 \fancyhf{}
@@ -77,8 +77,8 @@
 
 \title{\vspace{-1.0cm}\textbf{Bounded-Domain SAT, Compiled Knowledge,\\and Amortized Reasoning}\\[0.5em]
 \large A perspective on resource accounting for learned reasoning}
-\author{Andreas Maier}
-\date{8 November 2026}
+\author{Andreas Maier \and GPT Astra\thanks{OpenAI AI research assistant; credited as an AI research collaborator at the human author\textquotesingle s request.}}
+\date{8 November 2026; publication revision 26 November 2026}
 
 \begin{document}
 \maketitle
@@ -87,6 +87,20 @@
 \begin{abstract}
 Whether $\Pclass=\NPclass$ does not by itself determine whether a System 1/System 2 architecture saves computation. Learning allows us to spend computation once and reuse the result. Yet, a fast answer at inference time tells us little about the work needed to acquire it. Here, we use Boolean satisfiability to examine this trade. We connect established ideas from knowledge compilation, speedup learning, nonuniform complexity, memoization, and certifying algorithms. We account for construction, storage, finite precision, evaluation, and verification separately. Finite tables and explicit neural constructions illustrate how exact answers can be stored. Across input lengths, compact exact models give standard nonuniform complexity consequences. Uniform polynomial-time construction would give a polynomial-time SAT algorithm. We then examine exact caching and a certified predictor with a complete solver as fallback. Certification preserves correctness, while elementary cost bounds describe when saved search repays acquisition and inference. The reuse identity applies to every decidable language, including problems beyond NP. Its validity requires neither $\Pclass=\NPclass$ nor $\Pclass\neq\NPclass$; actual savings require the stated cost inequalities. Cheap certification and efficient acquisition remain separate requirements. Explicit budgets also limit additional work when prediction fails. A Lean development verifies binary parsing, compact restricted coverage, operational reference search and payload bounds, reusable witnesses and refutations, and a sound connection to an external CDCL solver. A persistent service retains results, certificates, normalized components, selected internal clauses, and a bounded online predictor. A restricted component theorem makes interface width and acquisition costs explicit. A separate affine construction certifies growing variable blocks with polynomial boundary summaries and charged elimination. Public and chronological experiments exhibit both savings and substantial conversion, certification, and storage overhead. Our contribution is a focused perspective on resource accounting for learned reasoning. Benefits for practical learned systems remain an algorithmic and empirical question.
 \end{abstract}
+
+\paragraph{Contributions and reproducibility.}
+Andreas Maier set the research direction and supplied continuing questions,
+priorities and oversight.  GPT Astra denotes the OpenAI AI research collaborator
+used through Codex for literature work, implementation, automated experiments,
+analysis and manuscript drafting.  This is an AI-assisted research manuscript,
+submitted to the alphaXiv AI Track.  Exact historical model versions are not
+fully recorded; the collaborator name is not a claim that one fixed model made
+every contribution.  Source, proofs and retained evidence are available at
+\url{https://github.com/akmaier/OracleMachines}.  This publication includes
+verified research through repository checkpoint \texttt{918fc95a}; unfinished
+experiments are excluded.  Machine checks support the stated artifacts and
+hypotheses, not a proof of unrestricted $\Pclass=\NPclass$.
+
 
 \section{Introduction}
 

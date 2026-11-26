@@ -12,7 +12,26 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: probe the two strengthened banks with shared preparation
+## Current investigation: combine complementary discoveries without losing schedule progress
+
+[B11 expansion versus B10 continuation](b11-probe-cursor.md) yields three new
+failed assumptions and **four added assignments across two open cases**. B11
+finds `-45` at `(37,39)`; continuing B10 finds `97,129` at `(67,63)`. Neither case
+closes: coverage remains **232/246**, with **14 open**. Preserve both proof sets.
+
+Reuse avoids 1,882 probes but reduces matched total time only 2.15%; B11 costs
+8.67% more than B10 continuation. Reconstruction/history checking remains the
+main cost. A changed bank's fresh order can also lose useful bounded progress.
+Next, use the combined closures while testing whether older unfinished schedules
+can prioritize untested assumptions on the new bank. Old open completions are
+ordering hints only and cannot certify a probe on a different bank.
+
+Resume `experiments/results/cnf-b11-probe-cursor/checkpoint.json`. Three orders
+remain unfinished and eleven exhausted. The 8,654-byte overlay references
+3,087,280 bytes of transitive frontier data; no lifetime-space saving follows.
+All 2,109 tests pass. No new native certificate or unrestricted guarantee is added.
+
+## Previous investigation: probe the two strengthened banks with shared preparation
 
 [Shared B10 preparation](shared-b10-preparation.md) removes the duplicated B8
 prefix check within each call. Matched complete time falls **39.30%**, from

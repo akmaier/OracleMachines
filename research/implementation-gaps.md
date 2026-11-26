@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, shared B8 checking within B10):
+Latest expansion checkpoint (26 November, complementary B11/B10 discovery):
+[B11 probing](b11-probe-cursor.md) and continued B10 find three new failed
+assumptions whose combined closure forces four assignments across two open cases.
+Coverage remains 232/246. Reuse avoids 1,882 probes but saves 2.15% matched total
+time and costs 8.67% more than B10 continuation. Preserve both histories; test
+scheduling from older unfinished progress on the new bank without trusting old
+open completions as proofs. All 2,109 tests and prior evidence audits pass.
+Resume `experiments/results/cnf-b11-probe-cursor/checkpoint.json`.
+
+Previous expansion checkpoint (26 November, shared B8 checking within B10):
 [Shared B10 preparation](shared-b10-preparation.md) reduces complete matched
 replay time 39.30%, discovery 49.61% and independent checking 49.69%. All results,
 origins and search counters match the frozen route. Coverage remains 232/246;

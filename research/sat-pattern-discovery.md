@@ -5,7 +5,25 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: cheaper exact checking before the next feedback layer
+## Latest evidence: a stronger bank and an older schedule remain complementary
+
+[B11 probing](b11-probe-cursor.md) finds `-45` at `(37,39)`, while B10 continuation
+finds `97,129` at `(67,63)` within the same additional-probe allowance. Combining
+independently checked original-bank proofs forces four additional assignments,
+but neither case closes. Coverage remains **232/246** with **14 open**.
+
+The stronger bank exposes one new implication but misses two found farther along
+the older schedule. Preserve both histories and combined closures. The next test
+should use old unfinished progress as an ordering hint after strengthening, while
+checking every selected assumption on the new bank. Eleven exhausted unchanged
+orders still need stronger interaction or a different decomposition.
+
+Resume `experiments/results/cnf-b11-probe-cursor/checkpoint.json`. Matched reuse
+avoids 1,882 probes but saves only 2.15% total time; B11 is 8.67% slower than B10
+continuation. All 2,109 tests pass. No new native certificate, general efficient
+partition or arbitrary-SAT resource bound follows.
+
+## Previous evidence: cheaper exact checking before the next feedback layer
 
 [Shared B10 preparation](shared-b10-preparation.md) preserves every historical
 result and clause origin while reducing complete replay time **39.30%**. Original

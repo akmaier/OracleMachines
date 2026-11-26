@@ -1,0 +1,95 @@
+{
+  "coverage": {
+    "after": 232,
+    "before": 232,
+    "total": 246
+  },
+  "joint_assignments": [
+    {
+      "assignment": [
+        [
+          45,
+          true
+        ]
+      ],
+      "event": 39,
+      "target": 37
+    },
+    {
+      "assignment": [
+        [
+          39,
+          true
+        ],
+        [
+          97,
+          false
+        ],
+        [
+          129,
+          false
+        ]
+      ],
+      "event": 63,
+      "target": 67
+    }
+  ],
+  "limits": {
+    "probe_limit": 64,
+    "trace_limit": 256,
+    "work_limit": 262144
+  },
+  "new_failed_assumptions": [
+    {
+      "b10_new": [],
+      "b10_only": [],
+      "b11": [
+        -45
+      ],
+      "b11_only": [
+        -45
+      ],
+      "event": 39,
+      "target": 37
+    },
+    {
+      "b10_new": [
+        97,
+        129
+      ],
+      "b10_only": [
+        97,
+        129
+      ],
+      "b11": [],
+      "b11_only": [],
+      "event": 63,
+      "target": 67
+    }
+  ],
+  "new_native_records": 0,
+  "next_target": "Use both checked proof sets and their joint closures at (37,39) and (67,63); test older unfinished progress as an ordering hint after strengthening, checking each selected assumption on the new bank. Preserve (1,15) and all histories.",
+  "remaining": {
+    "path": "experiments/results/cnf-b11-probe-cursor/remaining-overlay.json",
+    "sha256": "9fa20fdb192bcc63aefd7f8816273d09df579f5d06bdef2ae0ff86a5f0434ed8"
+  },
+  "remaining_events": 14,
+  "reproduce": [
+    "Use a new output directory and copy pilot.json, pilot-source.py and b10-comparison-pilot.json before prepare. These are frozen deterministic comparison evidence, not fresh timing samples.",
+    "python3 experiments/compare_cnf_b11_probe_cursor.py prepare NEW_OUTPUT",
+    "python3 experiments/compare_cnf_b11_probe_cursor.py run_census NEW_OUTPUT",
+    "python3 experiments/validate_cnf_b11_probe_cursor.py validate NEW_OUTPUT",
+    "Run the full/focused suites and manuscript build, save logs and a decision record, then seal. Do not overwrite this checkpoint frozen reports."
+  ],
+  "retained_limitations": [
+    "B11 finds one new failure; continued B10 finds two different failures. Neither bounded result dominates the other.",
+    "No additional case closes: coverage remains 232/246. Three B11 orders are unfinished, eleven exhausted; exhaustion is not SAT.",
+    "Avoiding 1,882 probes yields only 2.15% matched total reduction in two repetitions. B11 costs 8.67% more than continued B10.",
+    "Discovery regresses on one matched case mean and checking on seven. All measured stage regressions are retained.",
+    "Cold original-bank checks and feedback cost 0.88537 seconds separately, with 0.01281 seconds for overlay publication/reload. Loading/startup, acquisition, pilots and final audits are additional.",
+    "The 8,654-byte overlay references 3,087,280 bytes across 91 transitive frontier files. Native archives and diagnostic storage are additional; lifetime storage grows.",
+    "Open completion cannot be transported across a bank change as proof. Reordering from prior progress is a proposed experiment, not an implemented exact reuse rule.",
+    "No new native compiler, production policy, uniformly efficient classification or unrestricted SAT resource bound."
+  ],
+  "status": "verified-complementary-expansion-frontier"
+}

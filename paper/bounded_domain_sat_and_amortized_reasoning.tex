@@ -13468,6 +13468,54 @@ two newly strengthened open banks; eleven unchanged exhausted orders still
 require stronger interaction or another decomposition.  No new native rule,
 production policy or unrestricted-SAT bound follows.
 
+\subsection{B11 expansion and continued B10 schedules remain complementary}
+
+B11 appends the checked B10 failed-assumption complements.  Two banks change and
+restart, while twelve unchanged banks import schedules only after exact clause,
+complete-closure-trace and trace-bound equality.  Source histories use the shared
+B8 preparation independently within discovery and cold checking.  The final
+audit additionally reconstructs B11 with the frozen B10 feedback implementation
+and checks every new proof on that independently reconstructed original bank.
+Continued B10 failures are checked separately on bank 10.  Open completions
+remain scheduling hints and cannot certify SAT or a probe on a changed bank.
+
+With the same additional-probe allowance, B11 finds failure $-45$ at $(37,39)$,
+whereas continued B10 finds new failures $97$ and $129$ at $(67,63)$.  Their joint
+closure adds $45=1$ in the former local bank and $97=0$, $129=0$, $39=1$ in the
+latter.  B11 alone adds one assignment, the combination four.  Neither case
+closes; coverage remains $232/246$ with fourteen open and no new native
+certificate.  Three B11 orders remain unfinished and eleven exhausted.
+A stronger bank can expose a new implication while restarting its capped schedule
+misses implications reached farther along the older order.  Both histories are
+retained; this concerns bounded discovery, not the bank's logical strength.
+
+Two opposite-order isolated repetitions compare B10 continuation, fixed-budget
+B11 restart, matched extended fresh B11 search and exact B11 reuse.  Reuse avoids
+$1{,}882$ probes, reducing attempts from $2{,}074$ to $192$ and occurrence visits
+from $51{,}818$ to $6{,}416$.  Matched discovery time falls from $0.20172$ to
+$0.18930$ seconds ($6.16\%$); complete census time falls from $0.55884$ to $0.54683$
+seconds ($2.15\%$).  Discovery regresses on one case-level mean and checking on
+seven.  These two repetitions do not establish a general speedup.  B10
+continuation takes $0.50319$ seconds, so B11 reuse is $8.67\%$ more expensive and
+finds a different implication rather than strictly greater coverage.
+
+Reconstruction, discovery and independent checking take $0.16576$, $0.18930$ and
+$0.18237$ seconds respectively; serialization/reload takes $0.00356$.  Matched
+results occupy $154{,}676$ bytes in either arm.  Process RSS is about $98$ MB,
+without a material reduction.  Independent original-bank reconstruction and
+individual/joint feedback diagnostics cost $0.88537$ seconds separately; overlay
+publication/reload costs $0.01281$.  Startup/loading, acquisition, pilots, native
+compilation and final lineage auditing are additional.
+
+The new $8{,}654$-byte overlay references $3{,}087{,}280$ bytes across $91$
+transitive frontier files.  Inlining this pass's results into fourteen flattened
+rows would take $2{,}106{,}602$ bytes while still retaining older result bindings.
+Avoided duplicate writing does not remove dependencies or bound lifetime storage.
+The next experiment should retain the combined closures and test old unfinished
+progress as an ordering hint, checking each selected assumption on the new bank.
+Copies, canonicalization, old proof checks and indexing remain outside the probe
+occurrence cap.  No unrestricted-SAT or polynomial construction bound follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -12,7 +12,26 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reduce repeated preparation; follow the last strengthened bank
+## Current investigation: share source-prefix reconstruction; keep the coverage frontier
+
+[Shared joint preparation](shared-joint-preparation.md) removes one duplicate
+common-prefix construction inside each discovery/checking call. All three original
+histories still receive their own binding, schedule and proof checks. The complete
+sixteen-case census improves **22.07%** with identical outputs; discovery improves
+38.30% and cold checking 38.70%. Peak memory and result bytes are unchanged.
+
+**Next runtime target:** source-prefix reconstruction now takes **50.89%** of the
+shared total. Investigate an owned checked handoff from source/prefix reconstruction
+to downstream preparation, preserving exact bindings and cold checks. No new search
+or recognition was performed: keep the stronger `(28,18)` bank, six unfinished
+orders and ten exhausted unchanged orders. The previous native regression remains.
+
+The 2,070,735-byte open export is referenced unchanged; all 2,066 tests pass. Resume
+`experiments/results/cnf-shared-joint-preparation/checkpoint.json` and its
+`shared_joint_preparation.remaining` binding. Uniform efficient construction,
+full arbitrary-CNF recognition and bounded lifetime storage remain open.
+
+## Previous investigation: reduce repeated preparation; follow the last strengthened bank
 
 [Joint-bank probing](joint-probe-cursor.md) adds a source-only refutation of
 `(28,19)`, reaching **230/246** with **16 open**. Twenty of its 21 new failures

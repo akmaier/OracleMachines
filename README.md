@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Share common proof preparation](research/shared-joint-preparation.md): complete
+measured discovery/checking time falls 22.07% on sixteen current cases, with
+identical banks, results and search counters. Memory and retained state are
+unchanged; source reconstruction is the next largest cost. Recognition stays 230/246.
+All 2,066 tests pass.
+
+
 [Probe combined constraints with exact history reuse](research/joint-probe-cursor.md):
 one additional checked refutation raises sampled recognition to 230/246.
 Reuse avoids 1,878 probes but saves only 1.49% of complete census time; the new

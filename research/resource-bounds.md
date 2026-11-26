@@ -18,6 +18,18 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Shared joint preparation](shared-joint-preparation.md) reduces the sixteen-case
+replay from 0.90572 to 0.70579 s (22.07%) while keeping every search result and
+counter equal. Discovery and independent cold checking prepare the common B6
+prefix once each instead of twice; all three branch histories still receive
+separate checks. Ownership copies and unequal-bound binding construction are
+charged. Discovery improves 38.30%, checking 38.70%, but peak memory remains about
+98 MB and result bytes remain 177,042. Source reconstruction is now 50.89% of total.
+The unchanged 2,070,735-byte open export is referenced without another full copy;
+new experiment artifacts still grow retained storage. No acquisition, native
+context-count, coverage or lifetime-space bound changes.
+
+
 [Joint-bank probing](joint-probe-cursor.md) adds one structural refutation, reaching
 230/246. Exact reuse cuts assumed probes from 2,326 to 448, but complete matched
 census time only from 0.90588 to 0.89239 s. Source reconstruction and final checking

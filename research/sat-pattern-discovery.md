@@ -5,7 +5,23 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: joint-bank probes reveal another refutation
+## Latest evidence: cheaper independent preparation with the same discovery frontier
+
+[Shared common-prefix checking](shared-joint-preparation.md) makes the current
+sixteen-case discovery/checking replay 22.07% cheaper in complete measured time.
+Each original/comparison B6 and B7 history retains its own proof and exact-binding
+checks; only their identical common preparation is shared inside a call. Frozen
+validation confirms every prepared bank, origin and result. Memory/state size
+and sampled recognition remain unchanged at **230/246**, with **16 open**.
+
+Source-prefix reconstruction is now the largest stage at 50.89%. Optimize that
+handoff while preserving the next coverage targets: changed `(28,18)`, six unfinished
+orders, and stronger interaction on ten exhausted banks. The prior native cost
+regression remains preserved. Resume
+`experiments/results/cnf-shared-joint-preparation/checkpoint.json`; the full frontier
+and all native archives are referenced unchanged. No unrestricted bound follows.
+
+## Previous evidence: joint-bank probes reveal another refutation
 
 [Checked B8 probing and B9 feedback](joint-probe-cursor.md) finds 21 failed
 assumptions on four changed banks. Twenty compose to refute `(28,19)`, raising

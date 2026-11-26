@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, probing the combined bank):
+Latest expansion checkpoint (26 November, shared common provenance):
+[One common preparation per independent call](shared-joint-preparation.md) reduces
+complete replay time 22.07%, with identical prepared banks, search counters and
+results on all sixteen current cases. Discovery and cold checking improve 38.30%
+and 38.70%; memory and result size do not materially change. No new coverage or
+native record. The next cost target is source-prefix reconstruction (50.89% of
+shared total). Resume `experiments/results/cnf-shared-joint-preparation/checkpoint.json`;
+the existing frontier, native regression and all prior proof/artifact ledgers remain.
+
+Previous expansion checkpoint (26 November, probing the combined bank):
 [Joint probe cursors and original-bank feedback](joint-probe-cursor.md) add the
 native refutation `(28,19)`, reaching 230/246 with 16 open. Exact reuse saves
 1,878 probes, but complete census time improves only 1.49%. The positive native

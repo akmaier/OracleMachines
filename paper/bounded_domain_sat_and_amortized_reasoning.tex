@@ -13221,6 +13221,52 @@ preparation, transport, verification, new-bank acquisition and native context
 growth remain separate.  No unrestricted coverage, uniform polynomial expansion,
 or lifetime-space bound follows from this finite checkpoint.
 
+\subsection{Sharing common preparation while checking histories independently}
+
+A subsequent checkpoint removes duplicated common-prefix preparation inside
+joint discovery and cold validation.  The original route prepares the same B6
+source, prior proof layers and closure once while checking the original B6/B7
+history and again while checking the comparison B6 history.  Both branches have
+identical original prefix inputs.  The new route privately copies those inputs,
+prepares the common bank once, and independently checks all three histories'
+exact bindings, deterministic schedules, failed probes and full programs.
+Comparison failures retain their B6 reasons; B7 is still constructed only from
+the original B6 failures.  The resulting joint clause and origin order is unchanged.
+
+A trace allowance affects a history's exact binding, but not construction of the
+common bank, residual or source-derived order.  Unequal B6 allowances therefore
+receive separate checked bindings.  Equal allowances reuse the common binding.
+The deterministic common constructor returns the same result on the identical
+prefix; branch-specific checking remains necessary after sharing.  No external
+prepared token or verified marker is accepted.  Independent cold validation
+starts from a new owned copy and receives no trusted preparation from discovery.
+The experiment's final audit additionally invokes the frozen original full checker
+and compares every returned bank and origin entry.
+
+Two isolated opposite-order repetitions replay the sixteen retained B8 results.
+Separate preparation takes $0.90572$ seconds in complete measured census time;
+sharing only discovery takes $0.81140$ seconds; sharing within both discovery and
+its independent cold checker takes $0.70579$ seconds, a $22.07\%$ reduction.
+Discovery falls from $0.27873$ to $0.17199$ seconds ($38.30\%$), and checking from
+$0.26977$ to $0.16536$ seconds ($38.70\%$).  Both stages improve on all sixteen
+case-level means, with identical results and search counters.  The discovery-only
+arm's unchanged checking stage regresses $1.90\%$ in aggregate; this variation is
+retained.  Peak process memory remains about $98$ MB, and serialized results stay
+at $177{,}042$ bytes.  Copies, recognition, source-prefix reconstruction, checking
+and persistence are charged; prior acquisition, startup/loading and final audit
+remain additional.  This replays an existing frontier rather than acquiring new
+refutations or establishing a universal speedup.
+
+If common preparation costs $P$, sharing removes one repeated evaluation of $P$
+per call but adds ownership copying and any needed alternate binding construction.
+The branch proof checks remain.  Both independent calls receive this improvement;
+no validated object is cached across them.  Source-prefix reconstruction now
+accounts for $50.89\%$ of shared complete time and is the next individual cost.
+The $2{,}070{,}735$-byte open export and existing native archives are referenced
+unchanged, although new experiment artifacts still add storage.  Recognition
+stays at $230/246$ and the previous native regression remains.  No production
+default, proof rule, unrestricted coverage or lifetime-space bound changes.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

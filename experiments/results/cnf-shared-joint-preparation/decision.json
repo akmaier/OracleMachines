@@ -1,0 +1,129 @@
+{
+  "checks": {
+    "focused_tests": 55,
+    "full_tests": 2066,
+    "new_native_archives": 0,
+    "parent_manifests": 203,
+    "prior_artifact_entries": 29141,
+    "prior_sources": 1142,
+    "proof_blocks": 64
+  },
+  "comparisons": {
+    "shared_both": {
+      "discovery_seconds": {
+        "improved": 16,
+        "regressed": []
+      },
+      "record_bytes": {
+        "improved": 0,
+        "regressed": []
+      },
+      "verification_seconds": {
+        "improved": 16,
+        "regressed": []
+      }
+    },
+    "shared_discovery": {
+      "discovery_seconds": {
+        "improved": 16,
+        "regressed": []
+      },
+      "record_bytes": {
+        "improved": 0,
+        "regressed": []
+      },
+      "verification_seconds": {
+        "improved": 5,
+        "regressed": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            15
+          ],
+          [
+            28,
+            17
+          ],
+          [
+            28,
+            18
+          ],
+          [
+            40,
+            0
+          ],
+          [
+            61,
+            50
+          ],
+          [
+            61,
+            51
+          ],
+          [
+            61,
+            52
+          ],
+          [
+            61,
+            60
+          ],
+          [
+            61,
+            61
+          ],
+          [
+            61,
+            74
+          ]
+        ]
+      }
+    }
+  },
+  "coverage": {
+    "after": 230,
+    "before": 230,
+    "total": 246
+  },
+  "frontier_unchanged": true,
+  "limitations": [
+    "Replay of sixteen currently unresolved cases, reproducing the already retained B8 search result; this is no new search frontier, refutation or held-out coverage.",
+    "Separate is the current full discovery/checking route. Shared discovery changes only discovery; shared both uses fresh independent shared preparation again for cold validation. No checked state crosses the boundary between calls.",
+    "Original B6, comparison B6 and upper B7 programs, exact bindings, deterministic schedules and proof reasons are all checked. Only their common B6 source/provenance/closure preparation is computed once inside a call.",
+    "A differing comparison trace allowance gets a distinct exact binding. The bank, residual and order depend on the common original inputs and not on that allowance. Source and all payloads are privately copied before shared preparation.",
+    "The sixteen-case pilot compares every returned prepared bank and result to the frozen implementation. Final audit always uses the frozen full validator, even for the shared-both arm.",
+    "Two isolated opposite-order repetitions charge source-prefix reconstruction, discovery including ownership copies and recognition, serialization/reload, and independent full cold checking. Startup/input loading, historical acquisition, pilot and final audit are additional.",
+    "Search engine, allowances, logical stages, origin choices and serialized formats are unchanged. Search counters and all results must match across arms. Exhaustion and open completion are not SAT.",
+    "The parent open export and all native archives are referenced unchanged. New diagnostic artifacts still increase retained experiment storage. No production-default, native proof-rule, unrestricted-SAT or lifetime-space change."
+  ],
+  "memory_improvement_claim": false,
+  "next": [
+    "Share checked source-prefix reconstruction and downstream preparation; this stage is now 50.89% of the shared census.",
+    "Keep the stronger (28,18) bank, six unfinished orders and ten exhausted unchanged orders for coverage work.",
+    "Preserve the prior native regression and consider existing equivalence reuse or smaller source support."
+  ],
+  "open_export": {
+    "bytes": 2070735,
+    "duplicated": false,
+    "path": "experiments/results/cnf-joint-probe-cursor/remaining-closures.json",
+    "sha256": "b0ef6b5214095908a11fce4950aee8cf3f41809a02a00cb613c8f85054a2f806"
+  },
+  "outcome": "Shared common-prefix preparation reduces measured discovery/checking cost with identical banks, origins, search results and counters.",
+  "reductions_percent": {
+    "shared_both": {
+      "complete_seconds": 22.074886468240894,
+      "discovery_seconds": 38.29598380974814,
+      "verification_seconds": 38.70265500369469
+    },
+    "shared_discovery": {
+      "complete_seconds": 10.413496078878081,
+      "discovery_seconds": 38.125922029775026,
+      "verification_seconds": -1.8966403811467858
+    }
+  },
+  "remaining": 16,
+  "result_bytes_unchanged": true
+}

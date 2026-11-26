@@ -13571,6 +13571,58 @@ are checked; open histories remain hints, never SAT certificates.  No new native
 rule, production default, unrestricted-SAT efficiency or lifetime-space bound
 follows from changing the order.
 
+\subsection{Sharing common B10 preparation within B12 calls}
+
+The two B12 history paths reconstruct the same B10 clauses and provenance from
+identical inputs and closures.  A private owned copy lets each call prepare this
+common prefix once, while checking the original B10, comparison B10 and B11
+programs independently on their original banks.  Each keeps its schedule, proof
+reasons and trace-bound binding.  Different bounds receive separate bindings;
+they do not alter the common source-derived clauses, provenance or residual order.
+The original insertion order preserves duplicate-clause origins.  B12's closure,
+ordering policy, search allowances and serialized format are unchanged.
+
+For common preparation cost $P$ and distinct upper checking and construction
+cost $V+A$, the duplicated portion changes from $2P+V+A$ to $P+V+A$, with fewer
+ownership copies too.  Every cold check prepares again from portable inputs:
+no verified marker or authority passes from discovery to checking.  The audit
+compares all results, banks and origins with frozen full validation and an
+independent reconstruction from lower-bank routines.  Both source-order and
+untested-first results match the preceding checkpoint exactly.
+
+On fourteen exposed inputs, two isolated opposite-order repetitions reduce
+complete measured census time from $0.90794$ to $0.55167$ seconds for source
+order ($39.24\%$), and from $0.91505$ to $0.55221$ seconds for untested-first
+($39.65\%$).  Discovery improves $48.15\%$ and $48.87\%$ respectively; independent
+cold checking improves $49.25\%$ and $49.92\%$.  Both stages improve on every
+case-level mean.  Common context preparations fall from $28$ to $14$ in each
+ordering's discovery census, with the same reduction in cold checking.  The
+three distinct upper histories still receive $42$ independent checks per census.
+Search remains $192$ probe attempts, $1{,}946$ imported completions, and
+$5{,}650$ or $6{,}686$ occurrence visits according to the ordering.
+
+The shared untested-first census charges $0.16660$ seconds reconstruction,
+$0.18777$ discovery, $0.18062$ checking and $0.00638$ serialization/reload.
+Unchanged reconstruction is $1.91\%$ slower; six case-level persistence regressions
+remain despite a lower aggregate time.  The source-order arm has eight persistence
+regressions.  Sharing discovery alone leaves checking unchanged, with ten and
+nine checking regressions for the two orders.  These variations are retained.
+Startup/input loading, acquisition, pilots, native compilation and final lineage
+auditing are additional.  The timed census precedes regression testing; the
+final audit runs alongside tests and is not a production timing measurement.
+
+Result sizes remain $154{,}254$ and $154{,}210$ bytes.  Peak RSS stays about
+$98$ MB, without a material memory improvement.  The unchanged $13{,}386$-byte
+resume overlay still references $3{,}560{,}471$ bytes of transitive frontier data;
+new experiment evidence increases lifetime storage.  Coverage stays $232/246$,
+with fourteen open and both complementary proof sets preserved.  After sharing,
+reconstruction, discovery and checking account for approximately $30\%$, $34\%$
+and $33\%$ of total measured time.  The next coverage experiment can use the
+combined $(67,63)$ closure while comparing continuation of both saved B12 orders.
+Eleven exhausted unchanged orders still need stronger interactions or another
+decomposition.  No new native certificate, production default, unrestricted-SAT
+bound or polynomial acquisition claim follows from this local reuse.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

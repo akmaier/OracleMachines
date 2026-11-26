@@ -12,7 +12,28 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: share common B10 history; retain both B12 orders
+## Current investigation: use complementary B12 closure after cheaper checking
+
+[Shared B12 preparation](shared-b12-preparation.md) reduces complete matched
+census time **39.24% for source order** and **39.65% for untested-first**. Common
+B10 preparation occurs once per call; each distinct B10/B11 history keeps its
+original-bank proof check. Discovery and cold checking each fall roughly half.
+Both saved result sets, search counters and serialized sizes are unchanged.
+Peak RSS stays about 98 MB; coverage remains **232/246**, with **14 open**.
+
+The remaining time is roughly 30% reconstruction, 34% discovery and 33% cold
+checking. Next compare expansion from `(67,63)`'s combined B12 closure (68=true,
+83=false) with continuing both saved B12 orders. Preserve unfinished `(1,15)`
+and `(37,39)` histories; eleven exhausted unchanged orders need stronger
+interactions or a different decomposition. Native compilation's earlier
+regression remains. Uniform arbitrary-SAT coverage and resource bounds are open.
+
+Resume `experiments/results/cnf-shared-b12-preparation/checkpoint.json`; its
+`shared_b12_preparation.remaining` references the unchanged B12 overlay. All
+2,127 tests pass. No persistent trusted cache, new native result or lifetime-space
+saving is claimed.
+
+## Previous investigation: share common B10 history; retain both B12 orders
 
 [B12 progress-guided ordering](b12-progress-order.md) checks 92 assumptions absent
 from the selected older completion lists on two changed cases. It finds `83` at

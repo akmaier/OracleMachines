@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, B12 progress-guided ordering):
+Latest expansion checkpoint (26 November, shared B10 preparation inside B12):
+[Shared B12 checking](shared-b12-preparation.md) cuts matched complete time
+39.24% for source order and 39.65% for untested-first, with exact result, provenance
+and search-counter equality. Every distinct upper history remains independently
+checked. Coverage stays 232/246; result bytes and peak memory do not materially
+improve. All 2,127 tests pass. Resume
+`experiments/results/cnf-shared-b12-preparation/checkpoint.json`. Next use the
+combined `(67,63)` closure while comparing continuation of both saved orders.
+
+Previous expansion checkpoint (26 November, B12 progress-guided ordering):
 [B12 ordering](b12-progress-order.md) finds `83` at `(67,63)` while source order
 finds `-68`. The combined closure gains two assignments; coverage stays 232/246.
 The heuristic reaches more previously unrecorded assumptions but does not dominate

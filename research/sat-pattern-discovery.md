@@ -5,7 +5,23 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: progress-guided ordering exposes a complementary implication
+## Latest evidence: preserve both orders with cheaper independent checking
+
+[Shared B12 preparation](shared-b12-preparation.md) removes a duplicated common
+B10 preparation, retaining independent checks of every distinct upper history.
+Complete measured replay time falls **39.24% / 39.65%** for source / untested-first.
+All fourteen results, origins and search counters match the frozen routes.
+Coverage stays **232/246**; peak memory and serialized result space are unchanged
+in practical terms. All 2,127 tests pass.
+
+Use the combined `(67,63)` closure next, comparing its expansion with continuation
+of both preserved B12 orders. Their complementary implications remain available;
+old open assumptions cannot be skipped permanently after strengthening. Eleven
+exhausted unchanged cases still need stronger interactions or another decomposition.
+Resume `experiments/results/cnf-shared-b12-preparation/checkpoint.json`; there is
+no new native result, efficient arbitrary-CNF partition or unrestricted bound.
+
+## Previous evidence: progress-guided ordering exposes a complementary implication
 
 [B12 ordering](b12-progress-order.md) tests source order against a stable
 untested-first partition on the same combined bank. At `(67,63)` they find `-68`

@@ -1,0 +1,52 @@
+{
+  "daily_external_review": "Already completed 2026-11-26; see research/pequalnp-watch.md. No external theorem imported.",
+  "decision": "Retain shared B12 preparation for experimental expansion and independent cold checking; preserve both order policies and the entire frontier.",
+  "evidence": {
+    "analysis": {
+      "path": "experiments/results/cnf-shared-b12-preparation/analysis.json",
+      "sha256": "f890cf54508d6fc021822157da1412b7a324abef9922a368a8629ae130b01b01"
+    },
+    "parent_validation": {
+      "path": "experiments/results/cnf-b12-progress-order/validation.json",
+      "sha256": "63ef5287481793bd1aa90def7183a5c81a774c7d03428c639d3c12abefae3b2e"
+    }
+  },
+  "limitations": [
+    "Fourteen exposed inputs and two opposite-order repetitions; no held-out or production-wide claim.",
+    "No coverage gain: 232/246 with 14 unresolved. No new native certificates or archives.",
+    "Stored results unchanged; peak RSS remains about 98 MB. New diagnostics increase lifetime storage.",
+    "Final lineage-audit elapsed time overlaps regression testing; timed census completed before tests.",
+    "Open progress is scheduling data, not SAT authority. No uniform arbitrary-SAT resource or polynomial oracle-construction bound."
+  ],
+  "measurements": {
+    "source": {
+      "after_seconds": 0.5516686670016497,
+      "before_seconds": 0.9079359576571733,
+      "context_preparations": {
+        "after": 14,
+        "before": 28
+      },
+      "record_bytes": 154254.0,
+      "reductions_percent": {
+        "complete_seconds": 39.23925334721088,
+        "discovery_seconds": 48.15308270175552,
+        "verification_seconds": 49.24567741266239
+      }
+    },
+    "unseen": {
+      "after_seconds": 0.5522149382159114,
+      "before_seconds": 0.9150540204718709,
+      "context_preparations": {
+        "after": 14,
+        "before": 28
+      },
+      "record_bytes": 154210.0,
+      "reductions_percent": {
+        "complete_seconds": 39.652203491642204,
+        "discovery_seconds": 48.8717704709422,
+        "verification_seconds": 49.917584970848715
+      }
+    }
+  },
+  "next_target": "Compare expansion from the combined (67,63) B12 closure with continuing both saved orders, preserving (1,15) and (37,39). Eleven exhausted unchanged orders need stronger interactions or another decomposition."
+}

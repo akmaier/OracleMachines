@@ -12,7 +12,30 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: strengthen exhausted residuals; share cold-check preparation
+## Current investigation: use strengthened residuals after cheaper cold checking
+
+[An owned cold-validation batch](b12-cold-batch.md) shares invariant preparation
+while replaying and proof-checking every snapshot. Checking falls **26.98% / 26.97%**
+for source / untested-first; complete matched time falls **11.79% / 11.39%**.
+Results, discovery work and all frontier bindings are unchanged. This is a replay
+cost improvement, with **no coverage gain**: 232/246 recognized, fourteen open.
+Peak RSS slightly increases; snapshot bytes and lifetime-space obligations remain.
+Single-snapshot cases include seven / two checking regressions.
+
+The remaining phase shares are about **35% discovery, 33% checking and 30%
+reconstruction**. No phase overwhelmingly dominates. **Next priority:** compare
+the strengthened `(37,39)` and `(67,63)` closures against retained B13 schedules.
+Avoid identical exhausted B12 replays. The unchanged exhausted cases require
+stronger checked interactions or another decomposition; native-compilation
+regressions and unrestricted acquisition/resource bounds remain open.
+
+Resume `experiments/results/cnf-b12-cold-batch/checkpoint.json`; its
+`b12_cold_batch.remaining` points to the unchanged continuation overlay. All
+2,154 tests pass. Do not pass discovery state into cold validation or treat a
+batch as proof that its snapshots are consecutive; every snapshot is independently
+checked, and this experiment separately audits exact saved-round equality.
+
+## Previous investigation: strengthen exhausted residuals; share cold-check preparation
 
 [Batched B12 continuation](b12-continuation-batch.md) finds two new failed
 assumptions, forcing **four additional assignments across two cases**. Residual

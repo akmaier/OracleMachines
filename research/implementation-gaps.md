@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, batched B12 continuation):
+Latest expansion checkpoint (26 November, independent cold batch):
+[Cold validation batching](b12-cold-batch.md) reduces checking 27% and complete
+matched replay time 11–12%, keeping every snapshot's proof and cursor checks.
+Cold preparation occurs 14 rather than 18 times per ordering. All saved results,
+search counters and frontier bindings remain unchanged; coverage stays 232/246.
+RSS slightly increases and result bytes are unchanged. All 2,154 tests pass.
+Resume `experiments/results/cnf-b12-cold-batch/checkpoint.json`. Next compare the
+two strengthened closures with B13 schedules; no phase now dominates runtime.
+
+Previous expansion checkpoint (26 November, batched B12 continuation):
 [Batched continuation](b12-continuation-batch.md) shares one checked preparation
 across bounded rounds, saving 25% discovery and 9–10% total time. Exact per-round
 results and search work are unchanged. Two new failures force four values across

@@ -16,6 +16,19 @@ production time/RAM theorem. Reuse changes which calculations are repeated; it
 does not bound the number of distinct difficult calculations in an arbitrary
 stream. Persistent storage remains unbounded by default.
 
+## Latest bounded replay update (26 November 2026)
+
+[Independent cold batching](b12-cold-batch.md) changes `r` common preparations
+into one while retaining each snapshot's cursor/proof/program checks. Four-order
+measurements reduce cold checking about 27% and complete replay 11–12% on fourteen
+exposed cases. No search, native-coverage or lifetime-space bound improves.
+Additional owned live space is `O(H + sum(S_i) + M + W)` for common portable
+inputs `H`, snapshots `S_i`, prepared space `M` and maximum single-check workspace
+`W`. The API copies all snapshots; individual streaming checks can use less space.
+Measured peak RSS slightly increases and serialized results are unchanged.
+Reconstruction, discovery and checking now each consume roughly a third of the
+measured workflow. Historical measurements below describe their own checkpoints.
+
 ## 1. What a bound means here
 
 [Local reconstruction context reuse](prepared-prefix-replay.md) removes repeated

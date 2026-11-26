@@ -1,0 +1,62 @@
+{
+  "coverage": {
+    "after": 232,
+    "before": 232,
+    "total": 246
+  },
+  "daily_external_review": "Already completed 2026-11-26; see research/pequalnp-watch.md. No external theorem imported.",
+  "decision": "Retain the optional independently owned cold batch for multiple snapshots sharing a context, policy and trace bound. Return to strengthened residual coverage; no further identical exhausted B12 replay is needed.",
+  "evidence": {
+    "analysis": {
+      "path": "experiments/results/cnf-b12-cold-batch/analysis.json",
+      "sha256": "2be8cdf8680c8c424a7bff764b468cc6605c092fc9177f1aaaacab35a083e21c"
+    },
+    "parent_validation": {
+      "path": "experiments/results/cnf-b12-continuation-batch/validation.json",
+      "sha256": "da2bd329ffd6e7a66f3d50e33a09a02e67fa2efeb70d2d0d33b45401d1b64368"
+    }
+  },
+  "limitations": [
+    "Fourteen exposed cases, eighteen snapshots per policy, four balanced timing repetitions; gains concentrate in the two three-snapshot cases.",
+    "Every snapshot is independently replayed and proof-checked; no discovery state or cross-call authority is trusted. Common preparation alone is shared.",
+    "Snapshots need not be consecutive and the API does not certify completeness of their list or search budgets. The audit separately checks exact equality with all saved rounds.",
+    "Mixed trace bounds require separate batches. Open completions retain the pre-existing honest-history assumption; no SAT verdict follows from exhaustion.",
+    "Seven source-order and two unseen single-snapshot checking regressions remain; persistence regresses despite unchanged implementation and bytes.",
+    "Peak RSS increases slightly and snapshot bytes remain unchanged. Owning all snapshots can use more memory than individual streaming checks. Retained evidence still grows.",
+    "No new implication, coverage, native certificate, production default or unrestricted-SAT resource bound. Startup/loading, acquisition, pilots, native compilation and audits are additional."
+  ],
+  "measurements": {
+    "source": {
+      "after_seconds": 0.5291333335917443,
+      "before_seconds": 0.5998664060607553,
+      "cold_preparations": {
+        "after": 14,
+        "before": 18
+      },
+      "individually_checked_snapshots": 18,
+      "record_bytes": 226983.0,
+      "reductions_percent": {
+        "complete_seconds": 11.791470859904596,
+        "verification_seconds": 26.978347960739345
+      }
+    },
+    "unseen": {
+      "after_seconds": 0.5275890415068716,
+      "before_seconds": 0.5954185110749677,
+      "cold_preparations": {
+        "after": 14,
+        "before": 18
+      },
+      "individually_checked_snapshots": 18,
+      "record_bytes": 229561.0,
+      "reductions_percent": {
+        "complete_seconds": 11.3918980190315,
+        "verification_seconds": 26.97024761757454
+      }
+    }
+  },
+  "new_assignments": [],
+  "new_failures": [],
+  "next_cost_target": "Discovery, independent checking and reconstruction now each take roughly a third of runtime. Profile the next changed-bank coverage experiment before choosing another optimization.",
+  "next_coverage_target": "Compare strengthened closures at (37,39) and (67,63) against retained B13 schedules; unchanged exhausted cases need stronger checked interactions or another decomposition."
+}

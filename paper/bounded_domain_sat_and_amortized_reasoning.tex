@@ -13753,6 +13753,69 @@ residuals and retained B13 schedules; identical exhausted B12 replays cannot add
 information.  No native certificate, production default or uniform polynomial
 bound for arbitrary SAT or oracle acquisition follows.
 
+\subsection{Independent cold batches share preparation without sharing discovery trust}
+
+Cold checking now reuses one privately reconstructed B12 context across several
+portable snapshots.  The new entry point copies the original inputs, closures
+and nonempty snapshot list, validates their headers and requires one common
+positive trace bound and ordering policy.  It prepares the common bank,
+provenance, closure and schedule once.  For every snapshot it still invokes the
+unchanged cursor loader, checks the failed proofs and exported program, and
+requires exact program/cursor agreement.  No prepared object is accepted from
+discovery, and no checked authority survives between calls.
+
+For fixed owned inputs and controls, preparation is deterministic.  Snapshot
+checks do not mutate that preparation; cursor loading constructs private state.
+Thus the shared context supplies exactly the bank and binding each separate
+cold call would reconstruct.  Every acceptance check remains present, including
+for duplicate snapshots.  Mixed trace bounds require separate batches.  Reversed
+valid snapshots are allowed: the API validates each individually, not their
+consecutiveness, completeness or acquisition budget.  The experiment audit
+separately checks exact equality with all preserved rounds.  Open completions
+retain the earlier honest-history assumption and never constitute SAT evidence.
+
+Four balanced rotating orders compare separate calls to the current validator
+with the owned batch.  Both arms use identical already-batched discovery and
+serialize/reload every snapshot.  Twelve cases have one snapshot and two have
+three, giving eighteen per policy.  Cold checking falls from $0.23974$ to
+$0.17506$ seconds for source order ($26.98\%$), and from $0.23956$ to $0.17495$
+for untested-first ($26.97\%$).  Complete measured time falls from $0.59987$ to
+$0.52913$ seconds ($11.79\%$), and from $0.59542$ to $0.52759$ ($11.39\%$).
+Cold preparations fall from eighteen to fourteen.  All-history schedule checks
+fall from $35{,}192$ to $28{,}404$, while every current snapshot still receives
+its own replay and proof checks.  Discovery results and all its counters match,
+including $296$ probes and eighteen index builds per policy.  No case closes:
+coverage remains $232/246$, with no new implication or native certificate.
+
+On the two multi-snapshot cases, checking improves $65.21\%$ and $64.94\%$.
+Seven source-order and two untested-first checking regressions remain, all on
+single-snapshot cases.  Unchanged persistence is $2.56\%$ and $11.06\%$ slower;
+all case-level measurements are retained.  The optimized source workflow charges
+$0.15767$ seconds reconstruction, $0.18234$ discovery, $0.17506$ checking and
+$0.00544$ persistence.  Startup/loading, acquisition, pilots, native compilation
+and lineage audits are additional.  Timings concern this exposed small frontier,
+not arbitrary SAT or an independent held-out workload.
+
+Snapshot bytes remain $226{,}983$ and $229{,}561$.  Peak RSS rises from
+$99{,}188{,}736$ to $99{,}483{,}648$ bytes for source order, and from $99{,}172{,}352$
+to $100{,}564{,}992$ for untested-first.  No memory or proof-storage gain is
+established.  The unchanged $15{,}490$-byte frontier overlay references
+$4{,}508{,}174$ bytes across $214$ transitive files; this experiment adds evidence
+storage without another resume overlay.  Native archives are additional.
+
+For $r$ snapshots, preparation work $rP$ becomes $P$, and common input copying
+occurs once.  Every snapshot still pays copying, binding, cursor and proof work.
+If common portable inputs occupy $H$ bytes, snapshots occupy $S_i$, prepared
+state uses $M$ space and maximum single-check workspace is $W$, additional owned
+live space is $O(H+\sum_i S_i+M+W)$ apart from caller data and counters.  Owning all
+snapshots can cost more than streaming individual checks.  No semantic context
+equivalence test or cross-call cache is assumed, and lifetime space is unchanged.
+The remaining phase shares are roughly $35\%$ discovery, $33\%$ checking and
+$30\%$ reconstruction.  The next coverage comparison should use the strengthened
+$(37,39)$ and $(67,63)$ closures against retained B13 schedules.  Unchanged
+exhausted cases still need stronger interactions or another decomposition.  No
+production default or uniform polynomial arbitrary-SAT bound follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

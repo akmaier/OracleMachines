@@ -5,7 +5,26 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: finishing both B12 orders adds four forced values
+## Latest evidence: cheaper independent checking preserves every saved round
+
+[Cold validation batching](b12-cold-batch.md) shares common preparation across
+saved B12 snapshots while retaining every binding, cursor replay and failed-proof
+check. Checking improves about **27%** and complete matched runtime **11–12%**.
+There are no new implications or closed cases: coverage stays **232/246**, with
+fourteen open. Memory and storage do not improve; some single-snapshot cases regress.
+
+With reconstruction, discovery and checking each roughly a third of runtime,
+return to the coverage experiment: test the previously strengthened `(37,39)` and
+`(67,63)` closures against retained B13 histories. Repeating an identical exhausted
+B12 bank adds no information. Stronger interactions or another decomposition are
+still needed for unchanged exhausted cases, with recognition and exact composition
+costs charged. Efficient arbitrary-CNF partitioning remains unestablished.
+
+Resume `experiments/results/cnf-b12-cold-batch/checkpoint.json`, whose remaining
+binding is unchanged from the parent. All 2,154 tests pass; no new native certificate
+or unrestricted-SAT resource bound follows.
+
+## Previous evidence: finishing both B12 orders adds four forced values
 
 [Batched continuation](b12-continuation-batch.md) finds failures 32 at `(37,39)`
 and 131 at `(67,63)`. Checked recomposition forces 32=false in the first case and

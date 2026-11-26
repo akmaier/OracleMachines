@@ -5,7 +5,29 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: conditioned saturation and cross-pivot implications
+## Latest evidence: exact cross-pivot implication reuse
+
+[Joint failed-side consequences](cross-pivot-feedback.md) now certify `(61,0)` and
+`(67,0)` through original-source reconstruction and both cold readers:
+**245/246 covered, one remaining**. A refutation of `B ∧ l` proves `B ⇒ ¬l`, so
+implications from different pivots of the same seed can be combined without proving
+their open siblings. A checked joint contradiction supplies the parent verdict.
+
+Causal slicing retains 7/9 and 3/10 branch certificates. Compact summaries preserve
+the required refutation, not every possible future implication; original histories
+and full summaries remain. Cold replay is 72.00% faster with 77.35% fewer input
+bytes, after 0.802 s preparation that repays after three measured replays. Native
+workflow savings exclude this acquisition and old discovery. These are selected
+frontier results, not evidence of a uniform arbitrary-CNF resource bound.
+
+The remaining row `(61,50)` is unchanged. Its independently checked summary keeps
+two implications, `60=false` and `73=false`, reducing 334 → 314 clauses. Next
+search this strengthened bank with exact source provenance. Resume
+`experiments/results/cnf-cross-pivot-feedback/checkpoint.json` and its comparison
+loader. All earlier records remain; broader pattern discovery on novel cases is
+still required even if every case in this finite workload becomes certified.
+
+## Previous evidence: conditioned saturation and cross-pivot implications
 
 [One-variable conditioning](conditioned-saturation.md) extends flat saturation on
 the twelve retained fixed points. Nine now have paired branch refutations and

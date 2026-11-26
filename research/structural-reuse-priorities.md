@@ -12,7 +12,33 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: one-variable conditioning closes nine fixed points
+## Current investigation: joint implications close two more cases
+
+[Cross-pivot feedback](cross-pivot-feedback.md) reconstructs the saved one-sided
+implications at `(61,0)` and `(67,0)` into source-only certificates. Both cold
+readers pass: **245/246 covered, one open**. Proof-directed summaries keep only
+7/9 and 3/10 failed-side certificates; open sibling histories are unnecessary for
+checking these implications. All original histories and full summaries remain.
+
+Across the three frontier cases, compact cold replay falls **0.553 → 0.155 s**
+(72.00%), input payload **3.65 → 0.83 MB** (77.35%), and peak RSS 24.07%. Building
+the summaries costs 0.802 s and repays after three measured replays. Native
+workflows on the two certified cases total **1.666 s versus 1.993 s fresh**, with
+31.25% fewer raw bytes; acquisition is additional. Full summaries lose to fresh on
+`(67,0)`. Compact/full native graphs are identical; their difference is checking
+and setup cost. Compact replay is now about 63% checking and 31% seed construction.
+
+**Next coverage priority:** apply saturation or conditioning to `(61,50)` after
+the checked implications `60=false, 73=false` reduce **334 → 314 clauses**. Preserve
+their source provenance and avoid repeating the unchanged old search. Native
+construction and cold verification remain major costs; the `(67,0)` direct-unit
+work of 257,570 nearly uses its global 262,144 allowance, so no growth bound follows.
+Resume `experiments/results/cnf-cross-pivot-feedback/checkpoint.json`, key
+`cross_pivot_feedback.remaining`, through its comparison module's loader. All
+2,200 full tests and 25 focused tests pass. Novel-CNF discovery and unrestricted
+acquisition/representation bounds remain open even if this benchmark is exhausted.
+
+## Previous investigation: one-variable conditioning closes nine fixed points
 
 [Conditioned saturation](conditioned-saturation.md) certifies nine of the twelve
 retained fixed points through original-source reconstruction and both cold readers:

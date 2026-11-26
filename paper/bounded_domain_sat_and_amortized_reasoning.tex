@@ -98,8 +98,8 @@ fully recorded; the collaborator name is not a claim that one fixed model made
 every contribution.  Source, proofs and retained evidence are available at
 \url{https://github.com/akmaier/OracleMachines}.  The first alphaXiv publication covers repository checkpoint \texttt{918fc95a}.
 This working revision additionally records checked B13 strengthening, generic
-and conditioned failed-literal saturation, their source-only certificates, and
-causal slicing of native reconstruction; published-version
+and conditioned failed-literal saturation, cross-pivot implication summaries,
+their source-only certificates, and causal slicing of native reconstruction; published-version
 metadata and exact PDFs are retained separately in the repository.  Machine checks support the stated artifacts and
 hypotheses, not a proof of unrestricted $\Pclass=\NPclass$.
 
@@ -14212,6 +14212,91 @@ cross-pivot implications and then investigate this strengthened residual.  The
 saved joint traces avoid repeating their discovery.  This expands certified
 coverage on the retained workload, without a uniform acquisition bound, compact
 closure theorem, or efficient solution of every CNF.
+
+\subsection{Cross-pivot implications admit smaller checked summaries}
+\label{sec:cross-pivot-feedback}
+
+The preceding candidates can now be reconstructed from their original sources.
+Both cold readers accept $(61,0)$ and $(67,0)$, raising structural coverage from
+$243/246$ to $245/246$.  Only $(61,50)$ remains.  No single tested pivot in these
+cases has two refuted branches.  Instead, each checked refutation of $B\land l$
+proves $B\Rightarrow\neg l$.  Consequences from different pivots of the same seed
+can be joined, and a checked unit contradiction in their union refutes the seed.
+Original-source reconstruction separately discharges acquired-bank provenance.
+An open sibling is unnecessary for this implication and is never UNSAT authority.
+
+The collector checks the old partition records and retains only failed-side
+certificates, bound to the canonical seed, coordinates, ordering and signed
+assumption.  A cold checker validates those certificates and the joint unit proof;
+it need not replay discarded siblings' search histories.  A second representation
+uses backward causal slicing of the joint trace to select required implied units,
+drops the other branch certificates, remaps clause indices and independently checks
+the resulting proof.  At $(61,0)$ this keeps seven of nine failed sides and reduces
+$36$ joint unit steps to $18$.  At $(67,0)$ it keeps three of ten failed sides and
+reduces $13$ steps to four.  The unresolved $(61,50)$ summary keeps both implications
+and its checked open closure.  All full summaries and original histories remain:
+the compact representation preserves the chosen refutation, not every future
+inference that a discarded implication might support.
+
+Native conversion enters a failed-side proof only when the current source context
+contains its original assumption.  Every recursive context preserves that premise;
+a condition-origin leaf is rejected so that an assumption cannot justify itself.
+The joint bank and each branch bank have distinct environment identifiers in memo
+keys, preventing cross-bank aliasing of identical clause indices.  All environments
+share one $262{,}144$ direct-unit work allowance per compilation.  Warm hits check
+incoming source, prefix, summary and underlying histories before using a cached
+root.  Full and compact summaries produce identical native graphs and compressed
+archives on both cases.  Their difference is proof checking and setup cost.
+
+Six fresh-process permutations compare cold reconstruction from the old histories,
+checking the full failed-side summaries, and checking compact summaries on the same
+three snapshots.  Complete times are $0.55279$, $0.22109$ and $0.15478$ seconds.
+Input sizes are $3{,}654{,}264$, $1{,}328{,}981$ and $827{,}782$ bytes; peak RSS is
+$73{,}515{,}008$, $60{,}080{,}128$ and $55{,}820{,}288$ bytes.  Compact replay is
+$72.00\%$ faster than history reconstruction, with $77.35\%$ fewer input bytes and
+$24.07\%$ lower peak RSS.  Against full summaries it is $29.99\%$ faster with
+$37.71\%$ fewer bytes.  Compact loading, seed preparation, checking and persistence
+take $0.00753$, $0.04812$, $0.09796$ and $0.00100$ seconds.  Checking and preparation
+remain about $63\%$ and $31\%$ of its replay cost.  Old histories remain archived,
+so a smaller replay payload does not imply smaller total historical disk use.
+
+Constructing full summaries costs $0.54168$ seconds, and checked compaction adds
+$0.25996$ seconds.  These include their input work and serialization.  Using the
+observed means, full summaries repay construction after two replays versus the
+old histories, and compact summaries repay their full $0.80164$-second preparation
+after three.  If full summaries already exist, extra compaction repays after four
+replays.  Historical branch discovery and final lineage auditing are additional.
+These are measured workload-specific break-even counts, not worst-case bounds.
+
+Six native mode permutations compare fresh solving, full-summary reconstruction
+and compact-summary reconstruction on both refuted snapshots.  Fresh uses its
+existing $256$-node bound; it is a different algorithm with a different work budget.
+At $(61,0)$ complete times are $0.86989$, $0.68329$ and $0.62752$ seconds; fresh has
+$204$ records and $1{,}644{,}718$ raw bytes, while both summary routes have $91$
+records and $857{,}487$ bytes.  At $(67,0)$ the times are $1.12335$, $1.17863$ and
+$1.03889$ seconds; fresh has $175$ records and $2{,}443{,}583$ bytes, and summary
+routes have $123$ records and $1{,}953{,}396$ bytes.  Full reconstruction regresses
+against fresh on this latter case, despite its smaller graph.  All trials remain.
+
+Compact native workflows total $1.66642$ seconds versus $1.86192$ full and $1.99324$
+fresh, reductions of $10.50\%$ and $16.40\%$.  Their $2{,}810{,}883$ raw bytes are
+$31.25\%$ below fresh.  Complete time includes input loading, construction, one warm
+call, both cold readers, database handling and compressed persistence.  Earlier
+summary construction and branch discovery are additional; no end-to-end one-shot
+advantage is claimed.  At $(61,0)$ peak RSS is $82{,}640{,}896$, $71{,}335{,}936$ and
+$70{,}074{,}368$ bytes for fresh, full and compact.  At $(67,0)$ it is $92{,}897{,}280$,
+$90{,}292{,}224$ and $87{,}490{,}560$ bytes.  These peaks do not bound lifetime space.
+Direct-unit work is $137{,}505$ and $257{,}570$ in the compact reconstructions, without
+budget skips.  The second nearly uses the allowance; behavior after exhaustion and
+worst-case native expansion remain unresolved.
+
+All previous records and proofs are preserved.  The remaining $(61,50)$ summary
+keeps $60=\mathrm{false}$ and $73=\mathrm{false}$, reducing its residual from $334$
+to $314$ clauses.  The next coverage task is saturation or conditioning of this
+strengthened bank, retaining source provenance for those units.  Exact implication
+reuse broadens the certified finite workload.  Even complete coverage of that
+workload would not establish efficient discovery, compact closure or a uniformly
+polynomial solution for arbitrary CNF.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}

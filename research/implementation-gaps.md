@@ -4,7 +4,19 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, conditioned saturation):
+Latest expansion checkpoint (26 November, cross-pivot feedback):
+[Joining saved failed-side implications](cross-pivot-feedback.md) certifies two
+more original snapshots: **245/246 covered, one open**. Compact proof summaries
+retain 7/9 and 3/10 branch proofs; both cold readers pass. Reuse costs 0.155 s versus
+0.553 s from histories, with 77.35% fewer input bytes and 24.07% lower peak RSS.
+Preparation costs 0.802 s, repaid after three measured replays. Native workflows
+save 16.40% time and 31.25% raw bytes versus fresh, excluding acquisition; the full
+summary route regresses on one case. All 2,200 tests and 25 focused tests pass.
+Resume `experiments/results/cnf-cross-pivot-feedback/checkpoint.json`. Next search
+the remaining `(61,50)` bank strengthened by its two checked units (334 → 314
+clauses). Old sources, artifacts, native results and 64 proof blocks are unchanged.
+
+Previous expansion checkpoint (26 November, conditioned saturation):
 [Checked variable partitions](conditioned-saturation.md) certify nine more original
 snapshots through both cold readers: **243/246 covered, three open**. Combining
 one-sided implications across pivots already gives two further augmented-bank

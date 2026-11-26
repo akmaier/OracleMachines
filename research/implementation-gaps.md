@@ -4,7 +4,19 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, cross-pivot feedback):
+Latest expansion checkpoint (26 November, repeated cross-pivot feedback):
+[Two checked feedback levels](strengthened-cross-pivot.md) certify the final
+`(61,50)` snapshot: **246/246 retained frontier snapshots covered**. Exact resume
+avoids 6,078 probes and saves 29.01% with the first level already available.
+Native conversion exhausts its shortcut budget (626 records, 3.017 s); a larger
+ceiling gives 170 records and 1.043 s, still slower than 0.940 s fresh. All costs,
+controls and previous proofs remain. All 2,210 tests and 27 focused tests pass.
+Resume `experiments/results/cnf-strengthened-cross-pivot/checkpoint.json`; its
+frontier is empty. Next broaden held-out discovery and decouple the generic kernel
+from historical B13 provenance. The rule's retained four-variable UNSAT fixed
+point demonstrates that this finite completion does not cover arbitrary SAT.
+
+Previous expansion checkpoint (26 November, cross-pivot feedback):
 [Joining saved failed-side implications](cross-pivot-feedback.md) certifies two
 more original snapshots: **245/246 covered, one open**. Compact proof summaries
 retain 7/9 and 3/10 branch proofs; both cold readers pass. Reuse costs 0.155 s versus

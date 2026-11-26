@@ -98,7 +98,7 @@ fully recorded; the collaborator name is not a claim that one fixed model made
 every contribution.  Source, proofs and retained evidence are available at
 \url{https://github.com/akmaier/OracleMachines}.  The first alphaXiv publication covers repository checkpoint \texttt{918fc95a}.
 This working revision additionally records checked B13 strengthening, generic
-and conditioned failed-literal saturation, cross-pivot implication summaries,
+and conditioned failed-literal saturation, repeated cross-pivot implication summaries,
 their source-only certificates, and causal slicing of native reconstruction; published-version
 metadata and exact PDFs are retained separately in the repository.  Machine checks support the stated artifacts and
 hypotheses, not a proof of unrestricted $\Pclass=\NPclass$.
@@ -14297,6 +14297,92 @@ strengthened bank, retaining source provenance for those units.  Exact implicati
 reuse broadens the certified finite workload.  Even complete coverage of that
 workload would not establish efficient discovery, compact closure or a uniformly
 polynomial solution for arbitrary CNF.
+
+\subsection{Repeated feedback completes the retained finite frontier}
+\label{sec:iterated-cross-pivot}
+
+The final retained snapshot $(61,50)$ now has an original-source certificate
+accepted by both cold readers.  Structural coverage reaches $246/246$ retained
+frontier snapshots, and its remaining overlay is empty.  The original bank and
+its two-unit strengthening both remain flat failed-literal fixed points.  A new
+conditioning pass on the strengthened bank finds nine more failed sides; their
+consequences jointly contradict it.  The full chain retains two first-level and
+nine second-level branch certificates with a $52$-step final unit contradiction.
+Final-level compaction keeps seven second-level certificates and $21$ steps.
+Earlier bank contents remain exact because subsequent histories bind those banks.
+Changing an earlier level would require transporting and rechecking its dependents.
+
+A generic schema now repeats bounded conditioning and cross-pivot implication
+collection.  Each level is checked against exactly the preceding augmented bank.
+Resume validates the entire saved chain before continuing.  Refuted terminal
+chains need no new search.  A saved no-new-units round is instead rechecked on
+resume, replacing that unchanged last round, since larger bounds could find new
+information.  No-new-units is never SAT authority.  Each productive unresolved
+discovery round fixes at least one previously unfixed pivot, bounding such
+productive rounds by the number of seed variables.  This bounds monotone unit
+accumulation, not complete solving or source-certificate expansion.
+
+The source compiler uses level-indexed environments.  Cross-pivot references from
+a branch strictly decrease the feedback level, while local saturation references
+decrease the bank stage.  Branch assumptions persist in recursive contexts and
+cannot justify their own excluded contexts.  Memo keys distinguish environment,
+stage, assumption and trace.  All levels share one direct-unit work allowance.
+The earlier B13 base and all its proofs remain checked.  This eliminates the need
+to write a new compiler for each feedback level; it does not eliminate acquisition
+of the base or bound the size of the resulting native graph.
+
+Six separate-process permutations compare one round, a two-round restart and
+continuation from the acquired first round.  Their complete times are $0.27634$,
+$0.72224$ and $0.51269$ seconds.  The one-round control remains unresolved;
+restart and resume produce identical chains and concatenated search histories.
+Resume avoids $6{,}078$ probes, using $8{,}721$ versus $14{,}799$, and saves $29.01\%$
+complete time with the first round already available.  Discovery times are
+$0.22822$, $0.56682$ and $0.36004$ seconds; independent checking takes $0.02666$,
+$0.11809$ and $0.12052$ seconds.  Discovery accounts for about $70\%$ of resumed
+cost, and checking about $24\%$.  Case and history loading, seed reconstruction,
+serialization and cold checking are charged; earlier acquisition is additional.
+Creating the first round and then resuming costs $0.78903$ seconds, exceeding the
+uninterrupted $0.72224$-second restart.  This is a reuse benefit, not free acquisition.
+
+Chain sizes are $86{,}885$, $633{,}696$ and $633{,}696$ bytes, with newly written search
+histories of $816{,}360$, $2{,}033{,}696$ and $1{,}217{,}338$ bytes.  Resume retains
+the earlier history elsewhere; it does not reduce total lifetime history.  Peak
+RSS is $57{,}933{,}824$, $81{,}412{,}096$ and $72{,}237{,}056$ bytes.  Checked final-level
+compaction costs another $0.35524$ seconds and yields a $513{,}811$-byte chain.
+
+Four cyclic native mode orders compare fresh solving, full and compact chains at
+the global $262{,}144$ direct-unit allowance, and a compact-chain control with an
+eightfold ceiling of $2{,}097{,}152$.  Fresh solving uses its existing $256$-node
+bound and also refutes the snapshot.  Complete native-workflow times are $0.94034$,
+$3.11340$, $3.01690$ and $1.04320$ seconds; record counts are $236$, $626$, $626$ and
+$170$.  Raw record sizes are $1{,}776{,}473$, $4{,}301{,}898$, $4{,}301{,}898$ and
+$1{,}520{,}105$ bytes.  Full and compact chains produce identical native graphs.
+Their shortcut budget is exhausted, causing $699$ skipped direct candidates and
+$26$ cross-pivot branch expansions.  The larger-allowance control spends $277{,}866$
+actual shortcut work units, avoids budget skips and uses fifteen branch expansions.
+Small differences in shortcut work can thus greatly affect subsequent expansion.
+
+The larger ceiling saves $65.42\%$ complete native time relative to compact at the
+original ceiling, but remains $10.94\%$ slower than fresh despite $14.43\%$ fewer raw
+bytes.  Peak RSS is $82{,}919{,}424$, $124{,}141{,}568$, $124{,}305{,}408$ and $84{,}639{,}744$
+bytes in the same order.  Compressed archives occupy $193{,}713$, $456{,}188$,
+$456{,}188$ and $134{,}291$ bytes.  Complete times include input loading, construction,
+one warm call, both cold readers, database handling and persistence.  Discovery,
+summary acquisition and compaction are additional.  Fresh is the selected measured
+native workflow; every compiled certificate and regression remains archived.
+
+Finite frontier completion must not be confused with unrestricted coverage.  The
+new feedback rule alone still stalls on the unsatisfiable four-variable CNF made
+of all sixteen clauses excluding its sixteen assignments.  This retained test
+is a counterexample to the rule's completeness, not to the entire portfolio or a
+complexity lower bound.  Even solving every recorded frontier snapshot does not
+solve all generating target formulas or all valid CNFs.  The next investigation
+must use fresh, unlabelled held-out SAT and UNSAT cases, structural mixtures and
+edits, and growing sizes.  Non-unit boundary consequences or deeper conditioning
+are candidates where no new units appear.  The arbitrary-seed round kernel must
+also be distinguished from its native adapter's historical B13 prerequisites.
+General source/lemma interfaces, economical recognition, and bounded native
+recomposition remain open requirements for transfer beyond this finite workload.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}

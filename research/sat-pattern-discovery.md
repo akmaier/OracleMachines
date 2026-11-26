@@ -5,7 +5,34 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: exact cross-pivot implication reuse
+## Latest evidence: the retained frontier is certified; broader discovery is open
+
+[Repeated feedback](strengthened-cross-pivot.md) closes the final `(61,50)` case:
+**246/246 retained frontier snapshots certified**, with both cold readers. The old
+two-unit strengthening exposes nine additional failed sides in a new conditioning
+round. Their joint contradiction is reconstructed through both exact bank levels.
+The generic compiler supports repeated levels with decreasing dependency ranks.
+
+The new rule remains incomplete even on small CNFs: it returns no-new-units for
+the unsatisfiable four-variable full clause cube. This is a counterexample to that
+rule's completeness, not to the whole portfolio. A bounded no-new-units outcome
+is rechecked on resume because larger bounds can find more information; it is
+never SAT authority. Earlier banks remain exact when final proof summaries shrink.
+
+**Next:** freeze a fresh held-out SAT/UNSAT panel with unlabelled mixtures, edits
+and growing sizes. Test discovery without old acquired histories, and compare
+non-unit consequences or deeper conditioning at unresolved boundaries. The
+arbitrary-seed kernel and historical-B13 native adapter must be distinguished;
+general source/lemma interfaces and economical recomposition remain open.
+
+Resume saves 29.01% when its first round already exists, but its acquisition is
+additional. Default-budget native conversion is over three times fresh cost; a
+larger-budget control reduces expansion but is still 10.94% slower than fresh.
+All controls are preserved in `experiments/results/cnf-strengthened-cross-pivot/checkpoint.json`.
+Its frontier is empty; finite workload completion is not a uniform arbitrary-SAT
+construction or resource bound.
+
+## Previous evidence: exact cross-pivot implication reuse
 
 [Joint failed-side consequences](cross-pivot-feedback.md) now certify `(61,0)` and
 `(67,0)` through original-source reconstruction and both cold readers:

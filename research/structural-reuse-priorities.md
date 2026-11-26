@@ -12,7 +12,37 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: joint implications close two more cases
+## Current investigation: repeated feedback closes the finite frontier
+
+[Iterated cross-pivot feedback](strengthened-cross-pivot.md) certifies the final
+`(61,50)` snapshot through two checked feedback levels and both cold readers:
+**246/246 retained frontier snapshots covered, none remaining**. The strengthened
+bank is still a flat fixed point; a new conditioning pass finds nine failed sides
+whose consequences jointly contradict it. The compiler now handles arbitrary
+numbers of checked levels, rather than adding an adapter per level.
+
+With the first level already acquired, resume avoids 6,078 probes and saves
+**29.01% complete discovery time** (0.722 → 0.513 s). Creating that first level and
+then resuming costs more than uninterrupted restart. Native expansion exhausts its
+262,144 shortcut allowance: 626 records, 3.017 s. An eightfold ceiling uses 277,866
+actual work units and reduces this to 170 records, 1.043 s; fresh remains faster
+at 0.940 s. Preserve the regression and acquisition costs. No default is changed.
+
+**Next priority:** broaden discovery on a frozen, unlabelled held-out panel with
+SAT/UNSAT mixtures, edits and growing sizes, starting from fresh seeds. The new
+feedback rule alone still stalls on the unsatisfiable four-variable full clause
+cube; the entire portfolio need not stall there. Investigate reusable non-unit
+consequences or deeper conditioning, and separate the native adapter from the
+historical B13 proof stack. This is now more informative than further tuning the
+exhausted frontier. Discovery is about 70% of resumed census time; native
+construction/checking and shortcut-budget cliffs remain the measured cost gaps.
+
+Resume `experiments/results/cnf-strengthened-cross-pivot/checkpoint.json`, key
+`strengthened_cross_pivot.remaining` (empty). All 2,210 full tests and 27 focused
+tests pass. Finite workload completion is not an unrestricted-SAT result or a
+uniform acquisition, space or expansion bound.
+
+## Previous investigation: joint implications close two more cases
 
 [Cross-pivot feedback](cross-pivot-feedback.md) reconstructs the saved one-sided
 implications at `(61,0)` and `(67,0)` into source-only certificates. Both cold

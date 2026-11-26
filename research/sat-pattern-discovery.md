@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: B7 failure discovery and the cost of another layer
+## Latest evidence: share checked expansion; retain both failure frontiers
+
+[Fused B7 expansion](fused-b7-expansion.md) validates once and reuses physical
+clause/closure/residual state for eleven empty checked failure sets. Expansion
+time falls 44.70% and complete measured time 16.97% with identical results on the
+eighteen measured inputs. Independent cold checks remain. Alternate valid
+closure trace orders can yield different valid outputs; the no-op path preserves
+the checked existing trace.
+
+This replays earlier expansion inputs; it adds no search or recognition. The
+30 B6 failures and 15 B7 failures remain intact for combined, bank-aware reasoning,
+especially the three B6-only additions at `(37,40)`. Coverage stays 228/246.
+Source reconstruction now takes 52.85% of total time. All 2,039 tests pass.
+Resume `experiments/results/cnf-fused-b7-expansion/checkpoint.json`, which points
+to the unchanged 2,122,938-byte open export. Native B7 compilation, lifetime
+storage and unrestricted-SAT bounds remain open.
+
+## Previous evidence: B7 failure discovery and the cost of another layer
 
 [B7 probing](b7-probe-cursor.md) composes 25 prior failures into 26 additional
 assignments, then finds 15 failed assumptions in five cases. No new refutation:

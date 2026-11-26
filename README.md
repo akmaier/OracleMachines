@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Share checked B7 expansion](research/fused-b7-expansion.md): combining validation,
+composition and search cuts expansion time 44.70% and total measured time 16.97%,
+with identical results on eighteen inputs. Eleven empty stages reuse physical
+state. All 2,039 tests pass. Both discovery histories remain unchanged; combining
+their proofs and sharing source reconstruction are the next targets.
+
+Previous:
+
 [Explore B7 failure interactions](research/b7-probe-cursor.md): composition
 forces 26 assignments and probing finds 15 failed assumptions, without a new
 refutation. Exact reuse avoids 1,788 probes, but total measured saving is only

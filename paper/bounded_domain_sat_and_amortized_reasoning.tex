@@ -13082,6 +13082,41 @@ preparation are the next cost targets. The full open export grows from
 new authority records, SAT verdict from exhaustion or unrestricted-SAT bound
 is claimed. The checkpoint is \texttt{experiments/results/cnf-b7-probe-cursor/}.
 
+\subsection{Sharing checked preparation across B7 composition and search}
+A single owned expansion validates the full B6 input and result, then internally
+passes checked state to composition and B7 search. No caller-supplied verified
+marker or prepared token is accepted. When the checked failure set is empty,
+the next bank is identical: its checked closure trace, residual view and reason
+coordinates remain valid. Eleven retained cases therefore reuse those physical
+objects. The logical B7 version and portable binding remain. Exact bank, closure
+trace and trace-allowance equality also permits reusing the already checked
+schedule. Changed banks restart; explicit B7 cursors still undergo validation.
+
+Two opposite-order repetitions on the same eighteen expansion inputs compare
+separate composition/discovery, shared preparation with full reconstruction,
+and shared preparation with empty-stage reuse. All return the same corpus
+closures and results, with 546 probes, 217,940 clause initializations and 23,500
+occurrence visits. Expansion time falls from $0.29800$ to $0.16479$ seconds;
+complete census time falls from $0.81751$ to $0.67877$, or $16.97\%$. Relative to
+shared preparation alone, empty-stage reuse reduces expansion another $5.67\%$
+and complete time $2.57\%$, with two per-case expansion regressions. The census
+charges source reconstruction, recognition, input copies, composition/search,
+serialization/reload and independent final checking. Historical acquisition,
+startup/input loading and the final audit are additional.
+
+Binding bytes constructed fall from 1,675,213 to 930,964 and schedule checks from
+19,300 to 8,756. Final validation remains independent. Peak memory and portable
+result size do not materially improve. Source reconstruction now consumes
+$52.85\%$ of complete time. The API preserves an existing valid closure trace;
+an alternate trace order may yield a different valid portable result than
+recomputation, so exact output equality is restricted to the measured corpus.
+Contradictory composition is rejected for separate feedback handling. The prior
+2,122,938-byte open export is referenced unchanged. All 2,039 tests pass, with
+no new frontier, native authority record or unrestricted-SAT bound. Recognition
+remains $228/246$; both the thirty-failure B6 and fifteen-failure B7 histories
+remain available. The checkpoint is
+\texttt{experiments/results/cnf-fused-b7-expansion/}.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

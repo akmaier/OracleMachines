@@ -18,6 +18,20 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Fused B7 expansion](fused-b7-expansion.md) validates once for composition and
+search, and reuses physical clause/closure/residual state for eleven empty
+failure sets. Expansion takes 0.16479 versus 0.29800 seconds; complete measured
+time is 0.67877 versus 0.81751, a 16.97% reduction. All 546 probes, 217,940
+initialization clauses and 23,500 occurrence visits remain identical. Binding
+construction falls from 1,675,213 to 930,964 bytes; schedule checks from 19,300
+to 8,756. Final independent validation is retained.
+
+Source reconstruction is now 52.85% of runtime. Whole-input copying is charged;
+peak RSS and portable result size do not materially improve. The logical B7
+stage remains, but unchanged physical objects need not be rebuilt. The previous
+2,122,938-byte open export is referenced unchanged, while experiment evidence
+still grows. No lifetime-space or unrestricted-SAT bound follows.
+
 [B7 discovery](b7-probe-cursor.md) avoids 1,788 probes by exact bank/closure/trace
 matching. Fresh matched search performs 877,394 clause initializations versus
 217,940 with reuse. Discovery is 6.27% faster, but complete measured time improves

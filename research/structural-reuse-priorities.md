@@ -12,7 +12,29 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: combine both frontiers; avoid empty proof layers
+## Current investigation: combine both proof sets; share source reconstruction
+
+[Fused expansion](fused-b7-expansion.md) removes repeated preparation between
+composition and search, then reuses the physical bank, closure and residual view
+on eleven empty failure sets. Expansion improves 44.70%; complete measured time
+improves 16.97%. All eighteen cases return the same B7 result. The logical stage
+and portable binding remain; memory and result bytes do not materially improve.
+Source-prefix reconstruction is now the largest individual stage at 52.85%.
+
+**Next coverage target:** combine the 30 B6 and 15 B7 failures with their original
+bank proofs, retaining three B6-only additions at `(37,40)`. Ten B7 orders and
+sixteen B6 orders are exhausted. Changed provenance requires explicit checking
+and transport, not cursor relabelling. **Next runtime target:** share checked
+source-prefix reconstruction; consider lazy index construction on exhausted
+orders as supporting work. Independent cold validation remains required.
+
+This checkpoint replays the prior workload, without extra discovery. Coverage
+remains 228/246. The 2,122,938-byte open export is referenced unchanged, preserving
+both frontiers without another duplicate export. All 2,039 tests pass. Resume
+`experiments/results/cnf-fused-b7-expansion/checkpoint.json`. Native B7 compilation
+and unrestricted-SAT/lifetime-space bounds remain open.
+
+## Previous investigation: combine both frontiers; avoid empty proof layers
 
 [B7 discovery](b7-probe-cursor.md) adds 26 forced assignments across seven cases
 and finds 15 failed assumptions in five cases. There is no new refutation.

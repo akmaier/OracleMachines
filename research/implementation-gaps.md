@@ -4,7 +4,18 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, B7 discovery and exact history reuse):
+Latest expansion checkpoint (26 November, shared B7 preparation and empty stages):
+[One checked expansion](fused-b7-expansion.md) reduces expansion time 44.70% and
+complete measured time 16.97%, with the same results on all eighteen measured
+inputs. Eleven empty failure sets reuse the physical bank, closure and residual
+view. Final cold validation remains independent. No new frontier or recognition;
+retain the 30 B6 and 15 B7 failures for combined reasoning under original-bank
+bindings. Source reconstruction is now 52.85% of measured runtime. All 2,039 tests
+and prior source/artifact/proof ledgers pass. Resume
+`experiments/results/cnf-fused-b7-expansion/checkpoint.json`; the open export is
+referenced unchanged. Native B7 compilation and unrestricted bounds remain open.
+
+Previous expansion checkpoint (26 November, B7 discovery and exact history reuse):
 [B7 failure frontiers](b7-probe-cursor.md). Composition forces 26 new assignments;
 B7 probing retains 15 failures across five cases, without a new refutation.
 Reuse avoids 1,788 probes but improves matched complete time only 1.05%; adding

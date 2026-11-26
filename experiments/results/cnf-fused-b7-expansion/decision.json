@@ -1,0 +1,170 @@
+{
+  "checks": {
+    "focused_tests": 174,
+    "full_tests": 2039,
+    "parent_manifests": 200,
+    "prior_artifact_entries": 28380,
+    "prior_sources": 1129,
+    "proof_blocks": 64
+  },
+  "comparisons": {
+    "fused_rebuild": {
+      "expansion_seconds": {
+        "improved": 16,
+        "regressed": [
+          [
+            28,
+            18
+          ],
+          [
+            28,
+            19
+          ]
+        ]
+      },
+      "record_bytes": {
+        "improved": 0,
+        "regressed": []
+      },
+      "verification_seconds": {
+        "improved": 14,
+        "regressed": [
+          [
+            28,
+            17
+          ],
+          [
+            28,
+            18
+          ],
+          [
+            28,
+            19
+          ],
+          [
+            40,
+            0
+          ]
+        ]
+      }
+    },
+    "split": {
+      "expansion_seconds": {
+        "improved": 18,
+        "regressed": []
+      },
+      "record_bytes": {
+        "improved": 0,
+        "regressed": []
+      },
+      "verification_seconds": {
+        "improved": 12,
+        "regressed": [
+          [
+            28,
+            17
+          ],
+          [
+            37,
+            39
+          ],
+          [
+            61,
+            0
+          ],
+          [
+            61,
+            52
+          ],
+          [
+            61,
+            60
+          ],
+          [
+            61,
+            74
+          ]
+        ]
+      }
+    }
+  },
+  "complete_reduction_percent": 16.971396046702814,
+  "coverage": {
+    "after": 228,
+    "before": 228,
+    "total": 246
+  },
+  "empty_layers": [
+    {
+      "event": 0,
+      "target": 1
+    },
+    {
+      "event": 17,
+      "target": 28
+    },
+    {
+      "event": 0,
+      "target": 61
+    },
+    {
+      "event": 21,
+      "target": 61
+    },
+    {
+      "event": 50,
+      "target": 61
+    },
+    {
+      "event": 51,
+      "target": 61
+    },
+    {
+      "event": 52,
+      "target": 61
+    },
+    {
+      "event": 60,
+      "target": 61
+    },
+    {
+      "event": 74,
+      "target": 61
+    },
+    {
+      "event": 0,
+      "target": 67
+    },
+    {
+      "event": 63,
+      "target": 67
+    }
+  ],
+  "empty_reuse_complete_reduction_percent": 2.5707881083257833,
+  "empty_reuse_expansion_reduction_percent": 5.670027426809376,
+  "expansion_reduction_percent": 44.70012789806417,
+  "limitations": [
+    "Replay of the same eighteen exposed expansion inputs from the B7 checkpoint, not additional search or held-out coverage. All three arms must reproduce the same parent closures and B7 results on this corpus.",
+    "Split independently prepares for composition and discovery. Fused rebuild validates once but reconstructs every bank/closure. Fused also reuses the bank, closure trace, residual view and checked schedule on empty checked B6 failure sets.",
+    "All original source, guard, earlier-layer, closure, full program, cursor-binding and failure checks precede the internal handoff. Caller inputs are privately copied. No externally supplied prepared token or verified flag is accepted.",
+    "For an unchanged bank the optimized API may retain any valid existing closure trace. An alternate trace can produce a different valid portable result than scan-based recomputation; exact result equality is claimed for the measured canonical-closure corpus, not arbitrary trace reorderings.",
+    "Original B6 result must be unresolved; contradictory composition is explicitly rejected for separate feedback handling. No B7 native compiler or new authority record is introduced.",
+    "Census charges source-prefix reconstruction, complete expansion including recognition and copies, final serialization/reload and full independent checking. Startup/input loading, historical acquisition and final audit are additional.",
+    "Each new probe still pays full residual-clause initialization. Complete scan-based composition on changed banks lies outside the occurrence-probe budget. Exact binding serialization and final independent validation remain charged.",
+    "The parent open export and both discovery histories are referenced unchanged, not duplicated into another remaining file. Census artifacts still increase experiment storage. No lifetime memory or unrestricted-SAT bound is claimed."
+  ],
+  "new_refutations": 0,
+  "new_search_frontier": false,
+  "next_targets": [
+    "Combine the retained 30 B6 and 15 B7 failed assumptions under their original bank bindings, preserving the three B6-only new failures at (37,40).",
+    "Share source-prefix reconstruction, now 52.85% of total measured time, under exact source/guard/context bindings.",
+    "Consider lazy occurrence-index construction for exhausted orders. New probes still pay full residual-clause initialization; persistence and proof-layer growth remain open.",
+    "No B7 native compiler or new authority records are added. Preserve both discovery routes and their existing independent proof checks."
+  ],
+  "outcome": "Validate B6 once and internally share checked preparation with B7 composition/search; reuse physical state for empty checked failure sets.",
+  "remaining": {
+    "path": "experiments/results/cnf-b7-probe-cursor/remaining.json",
+    "sha256": "2e13ea54d37edb6b2079f22946246464bfc0309bc12c4a61d0496ce44e06670e"
+  },
+  "remaining_bytes": 2122938
+}

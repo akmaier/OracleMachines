@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_b9_probe_cursor.py", line 146, in <module>
+    if __name__=='__main__': globals()[sys.argv[1]](Path(sys.argv[2]))
+                             ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_b9_probe_cursor.py", line 103, in validate
+    comparisons={metric:dict(improved=sum(sum(r[metric] for r,_ in events[key,'reuse'])<sum(r[metric] for r,_ in events[key,'matched']) for key in seeds),
+                                      ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_b9_probe_cursor.py", line 103, in <genexpr>
+    comparisons={metric:dict(improved=sum(sum(r[metric] for r,_ in events[key,'reuse'])<sum(r[metric] for r,_ in events[key,'matched']) for key in seeds),
+                                          ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_b9_probe_cursor.py", line 103, in <genexpr>
+    comparisons={metric:dict(improved=sum(sum(r[metric] for r,_ in events[key,'reuse'])<sum(r[metric] for r,_ in events[key,'matched']) for key in seeds),
+                                              ~^^^^^^^^
+KeyError: 'complete_seconds'

@@ -4,7 +4,18 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, local source context reuse):
+Latest expansion checkpoint (26 November, complementary B8/B9 discovery):
+[B9 frontier reuse](b9-probe-cursor.md) avoids 2,198 probes, improving matched
+complete census time 3.26%. Continuing B8 remains 7.74% cheaper and finds four
+failures absent from B9; B9 finds two absent from B8. Retaining both checked sets
+forces 17 additional assignments across four cases, without a new refutation.
+Coverage stays 230/246. The 10,429-byte overlay references prior history and both
+result sets; all dependencies remain. All 2,082 tests pass. Resume
+`experiments/results/cnf-b9-probe-cursor/checkpoint.json`; next compose both proof
+sets with original-bank provenance and probe the four changed closures. Repeated
+boundary checks, native proof expansion and unrestricted bounds remain open.
+
+Previous expansion checkpoint (26 November, local source context reuse):
 [Prepared reconstruction](prepared-prefix-replay.md) improves source reconstruction
 45.00% and complete measured workflow time 23.41%, with identical hints, states,
 results and downstream counters. All sixteen prefixes are empty; the profile

@@ -1,0 +1,38 @@
+......E
+======================================================================
+ERROR: test_small_truth_tables_conditioned_failures (solver.test_cnf_b9_probe_cursor.B9ProbeCursorTests.test_small_truth_tables_conditioned_failures)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_b9_probe_cursor.py", line 80, in test_small_truth_tables_conditioned_failures
+    full=tiny(source)
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_b7_probe_cursor.py", line 19, in tiny
+    args=previous_tiny(source)
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_b6_probe_cursor.py", line 21, in tiny
+    args=small(source)
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_b5_probe_cursor.py", line 21, in tiny
+    args=small(source)
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_b4_probe_cursor.py", line 15, in small
+    history=c.feedback.cursor.discover(*args,Counter(),work_limit=1)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_cursor.py", line 77, in discover
+    prepared,bank,ids,order,binding=prepare(source,templates,seed,closure,new,next_closure,third,feedback_closure,counts,trace_limit=trace_limit)
+                                    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_cursor.py", line 19, in prepare
+    prepared=feedback.prepare(source,templates,seed,closure,new,next_closure,third,counts)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_third_feedback.py", line 24, in prepare
+    prepared=changed.validate(source,templates,seed,closure,new,next_closure,third,counts)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_changed_closure_probes.py", line 92, in validate
+    prepared, fixed = prepare(source, templates, seed, closure, new, next_closure, counts)
+                      ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_changed_closure_probes.py", line 15, in prepare
+    prepared = layered.prepare(source, templates, seed, closure, new, counts)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_layered_feedback.py", line 21, in prepare
+    fixed=prior.check_closure(prepared[3],closure,counts)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_closure_probes.py", line 21, in check_closure
+    if not any(fixed.get(abs(l))==(l>0) for l in cl) and sum(abs(l) not in fixed for l in cl)<2:raise ValueError('Not an open unit fixed point')
+                                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Not an open unit fixed point
+
+----------------------------------------------------------------------
+Ran 7 tests in 1.229s
+
+FAILED (errors=1)

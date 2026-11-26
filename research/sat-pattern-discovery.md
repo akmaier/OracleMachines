@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: cheaper source reconstruction; the frontier is unchanged
+## Latest evidence: complementary bounded searches strengthen four open cells
+
+[B9 probing and B8 continuation](b9-probe-cursor.md) find eight and ten new failed
+assumptions respectively. Two are unique to the B9 pass, four to B8. Combining
+their checked original-bank proofs forces **17 additional assignments** across
+`(1,15)`, `(28,18)`, `(37,39)` and `(40,0)`, without a contradiction. Recognition
+stays **230/246** with sixteen open. The stronger bank changes the bounded search
+frontier; it does not make the older unfinished history redundant.
+
+Probe those four changed closures next, retaining both proof sets and five
+unfinished B9 orders. Eleven unchanged orders are exhausted; exhaustion is not
+SAT. Reuse avoids 2,198 probes but improves matched complete time only 3.26% and
+costs 7.74% more than continuing B8. A 10,429-byte overlay references the preserved
+parent and both new result sets; lifetime storage still grows. Resume
+`experiments/results/cnf-b9-probe-cursor/checkpoint.json`. All 2,082 tests pass;
+native compilation of the new layer and unrestricted efficient coverage remain open.
+
+## Previous evidence: cheaper source reconstruction; the frontier is unchanged
 
 [One local checking context per event](prepared-prefix-replay.md) removes repeated
 canonical-source checks across transported hints. Reconstruction improves 45.00%

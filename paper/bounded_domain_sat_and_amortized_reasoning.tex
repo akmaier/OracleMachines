@@ -13321,6 +13321,52 @@ The $2{,}070{,}735$-byte frontier and native archives are referenced unchanged.
 Recognition stays at $230/246$; no production default, proof rule, unrestricted
 SAT bound or lifetime-space bound changes.
 
+\subsection{Complementary bounded searches after another feedback expansion}
+
+The next pass probes the B9 bank obtained from checked B8 failures.  Fifteen
+inputs have exactly unchanged banks, complete closure traces and trace bounds;
+only $(28,18)$ starts fresh.  Full source and history checks precede schedule
+reuse, and every retained failure is checked on its original bank.  Open
+completions remain scheduling information, never SAT evidence.  An independent
+frozen reconstruction verifies every B9 bank and new failure program.
+
+B9 finds eight failed assumptions in four cases.  Continuing B8 separately finds
+ten new failures, including four absent from this B9 pass; B9 contributes two
+absent from that B8 continuation.  Combining the twelve distinct new failures,
+with their original bank proofs, yields seventeen additional unit assignments:
+one at $(1,15)$, six at $(28,18)$, one at $(37,39)$ and nine at $(40,0)$.
+B9-only feedback yields fourteen.  Neither closure refutes an additional root.
+A stronger bank changes active literals and the bounded schedule, so an older
+unfinished history can remain useful.  Eleven B9 orders are exhausted and five
+remain unfinished.  Exhaustion is not SAT; sampled recognition stays $230/246$.
+
+Two isolated repetitions in opposite order compare B9 reuse with fresh search
+extended to the same frontier.  Results agree exactly.  Reuse avoids $2{,}198$
+probes ($2{,}522$ down to $324$), but discovery falls only from $0.20664$ to
+$0.19067$ seconds ($7.73\%$), and complete census time from $0.59038$ to $0.57111$
+seconds ($3.26\%$).  Continuing B8 costs $0.53010$ seconds: B9 reuse is $7.74\%$
+slower despite its complementary failures.  Reconstruction, discovery and cold
+checking each account for roughly one third of the census.  Result bytes are
+$186{,}336$ for both matched B9 arms; peak process memory remains about $99$ MB.
+Timing regressions in unchanged stages are retained.  Ownership, recognition,
+reconstruction, search, cold checking and result persistence are charged.
+Startup/loading, acquisition, pilots and lineage audit are additional.  Independent
+joint-closure diagnostics cost $0.77961$ seconds separately; overlay publication
+and reload cost $0.01216$ seconds.  No new native compilation is included.
+
+The resume frontier is a $10{,}429$-byte overlay referencing the unchanged
+$2{,}070{,}735$-byte parent and $374{,}308$ bytes of new B8/B9 result files.  This
+avoids writing another full export when those dependencies are already retained.
+Its standalone dependency set plus overlay is $2{,}455{,}472$ bytes, slightly
+larger than a hypothetical $2{,}447{,}881$-byte expanded compact export.  It does
+not establish smaller total retained storage or resident memory.  All old proofs,
+trials and archives remain.  For a fixed bank on $n$ variables, at most $2n$
+distinct literal probes are completed; trace allowance $t$ bounds their stored
+traces by $O(nt)$ word slots, beyond the full binding and inherited proof history.
+Copies, indexing, canonicalization and inherited checking are outside the
+occurrence-work cap.  The next target is checked joint composition of the four
+changed closures.  No unrestricted SAT or lifetime-space bound follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

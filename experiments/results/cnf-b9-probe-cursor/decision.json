@@ -1,0 +1,32 @@
+{
+  "coverage": {
+    "after": 230,
+    "before": 230,
+    "total": 246
+  },
+  "limits": {
+    "probe_limit": 64,
+    "trace_limit": 256,
+    "work_limit": 262144
+  },
+  "new_native_records": 0,
+  "next_target": "Compose original-bank B8 continuation and B9 failures, then probe the four strengthened closures; preserve both unfinished histories.",
+  "remaining": {
+    "path": "experiments/results/cnf-b9-probe-cursor/remaining-overlay.json",
+    "sha256": "e8d5c168f8455415a27c4436152b36eb93511c37a6b2212ba0668538466c7be4"
+  },
+  "reproduce": [
+    "prepare",
+    "run_census",
+    "validate",
+    "seal"
+  ],
+  "retained_regressions": [
+    "B9 reuse is 7.74% slower than B8 continuation.",
+    "Per-stage timing regressions remain despite matched discovery improvement.",
+    "Reference storage avoids duplicate export, not retained dependencies or lifetime growth.",
+    "Initial open-closure fixture and per-worker/per-event audit failures are preserved."
+  ],
+  "scope": "Sixteen exposed inputs; no unrestricted efficient classification or new native certificate.",
+  "status": "verified-research-frontier"
+}

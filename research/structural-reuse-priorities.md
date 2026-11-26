@@ -12,7 +12,28 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reduce boundary rechecks; gate low-yield context setup
+## Current investigation: combine complementary bank failures before expanding
+
+[B9 discovery](b9-probe-cursor.md) finds eight failed assumptions, while continuing
+B8 finds ten new failures. Their bounded searches are complementary: two occur
+only in B9, four only in B8. Checked combined closure forces **17 new assignments
+across four cases**, without a contradiction. Coverage remains **230/246**.
+
+**Next coverage target:** jointly use both original-bank proof sets for `(1,15)`,
+`(28,18)`, `(37,39)` and `(40,0)`, then probe their changed closures. The last case
+gains nine assignments. Five B9 orders remain unfinished; eleven are exhausted
+and need changed interaction. Preserve both older and newer histories.
+
+Exact reuse avoids 2,198 probes on fifteen unchanged banks, but complete matched
+census time improves only **3.26%**. It remains **7.74% slower** than continuing
+B8. Reconstruction, discovery and cold checking each take roughly one third;
+repeated boundary checks remain the cost gap. The 10,429-byte resume overlay
+references 2,445,043 bytes of parent/results; it avoids another duplicate export,
+not the retained dependencies. Resume
+`experiments/results/cnf-b9-probe-cursor/checkpoint.json`. All 2,082 tests pass;
+there is no new native certificate or unrestricted bound.
+
+## Previous investigation: reduce boundary rechecks; gate low-yield context setup
 
 [Local source context reuse](prepared-prefix-replay.md) improves reconstruction
 45.00% and complete measured workflow time 23.41% on all sixteen current cases,

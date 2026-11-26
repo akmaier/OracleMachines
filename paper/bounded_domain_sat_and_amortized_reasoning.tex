@@ -14384,6 +14384,80 @@ also be distinguished from its native adapter's historical B13 prerequisites.
 General source/lemma interfaces, economical recognition, and bounded native
 recomposition remain open requirements for transfer beyond this finite workload.
 
+\subsection{Source-only feedback on fresh CNFs}
+\label{sec:fresh-source-feedback}
+
+A separate compiler now accepts a checked feedback chain directly over its
+supplied CNF, without the historical B13 templates, closures, cursors or prefix.
+Its root banks contain source clauses and earlier checked implied units.  Branch
+banks add a conditioning literal and successive failed-probe units.  A source
+leaf requires its clause to be false in the current context.  Local probe
+references decrease bank stage, and cross-pivot references from a branch decrease
+feedback level.  A condition cannot justify its own excluded context.  Induction
+over these dependencies and the remaining sliced trace reconstructs both sides
+of every native split; each publication is checked by the existing native
+verifier.  Cold readers need only the resulting source-residual graph.  This
+removes an input-interface restriction, not the cost of discovering the chain or
+the possibility of large graph expansion.
+
+A new synthetic panel freezes 36 CNFs before compiler implementation, independently
+of the earlier 246-snapshot frontier.  It includes clause cubes of widths three
+through five, random 3-CNF and signed implication cycles on six, nine and twelve
+variables, parity constraints on graphs with six, nine and twelve edge variables,
+disjoint and shared-coordinate mixtures, and single-literal bridge edits.  Signed
+variable permutations, sparse names, literal and clause order, and case order are
+scrambled deterministically.  Discovery receives only CNFs; generator descriptions
+and exhaustive truth labels are audit-only.  These are small transfer cases, not
+a representative SAT distribution or independent external benchmark.
+
+Exhaustive enumeration identifies 22 SAT and 14 UNSAT cases.  The unchanged
+feedback rule refutes eight UNSAT inputs, including an edited mixture requiring
+two levels with four and two branch lemmas.  Both cold readers accept all eight
+source-only reconstructions.  The other 28 inputs remain unresolved by feedback;
+it emits no SAT verdict.  The unchanged fresh fallback correctly decides all 36.
+The six feedback-unresolved UNSAT cases are the width-four and width-five clause
+cubes, all three odd-charge parity graphs, and the largest contradictory bridge
+mixture.  The completed old frontier remains separate and unchanged.  Neither
+count establishes unrestricted structural coverage.
+
+Six process-order permutations compare fresh solving, compilation from acquired
+chains with fallback on open inputs, and online acquisition plus compilation and
+fallback.  Each workflow starts with an empty database, shares exact normalized
+residuals within the same panel order, repeats all queries warm, runs both cold
+readers, and compresses its archive.  Input loading, hashing, checking and
+persistence are charged.  Complete times are 0.08072, 0.12040 and 0.44621 seconds:
+prepared feedback is 49.16\% slower than fresh despite excluding acquisition,
+and online feedback costs 5.53 times fresh.  Online discovery costs 0.30854 seconds,
+about 69\% of its total, and history persistence costs another 0.02270 seconds.
+Prepared chain loading costs 0.00825 seconds and reads 355,102 bytes.  Online
+writes 2,154,538 bytes of chains and search histories per run.  Interpreter startup,
+report-metadata serialization and the final lineage audit are additional.
+
+Query construction costs 0.03547, 0.05599 and 0.05450 seconds, warm queries cost
+0.00604, 0.01750 and 0.01863 seconds, and the two cold readers together cost
+0.02766, 0.02642 and 0.02867 seconds.  Warm feedback calls still revalidate the
+source, ordering and whole chain before accepting root cache hits.  The fresh
+archive contains 88 records and 57,400 raw bytes; both feedback modes contain the
+same 102-record graph and 61,072 bytes, a 6.40\% increase.  Compressed archives
+occupy 12,779, 13,786 and 13,786 bytes.  Peak process RSS is 51,691,520,
+54,493,184 and 54,509,568 bytes.  Historical chains, new search histories and
+unsuccessful attempts remain additional retained space.  Fresh remains the
+selected measured workflow; this experiment claims an applicability improvement,
+not a runtime or memory improvement.
+
+Profiling the unchanged discovery rule attributes approximately 0.598 of 1.017
+seconds to implication collection, including 0.566 seconds of partition
+validation, while partition discovery takes 0.407 seconds.  These nested times
+must not be added.  Repeated normalization accounts for 0.198 seconds, whereas
+the underlying probe search accounts for about 0.066 seconds.  Checked preparation
+reuse is therefore a concrete supporting cost target.  The primary coverage
+target is non-unit boundary consequences or deeper conditioning on the six fresh
+gaps, reserving another unexposed panel before tuning.  Exact ownership and
+invalidation, full cold checking, clause growth and native recomposition costs
+remain necessary.  A shared shortcut allowance bounds only shortcut work, not
+total construction.  No uniform polynomial acquisition, closure or expansion
+bound follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -5,7 +5,32 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: the retained frontier is certified; broader discovery is open
+## Latest evidence: feedback transfer from fresh CNFs, with explicit gaps
+
+[Direct source-feedback compilation](fresh-seed-feedback.md) needs no historical
+B13 templates, closures or cursor histories. It checks the chain against the
+supplied CNF and publishes existing source-only native records; both cold readers
+pass. The unchanged discovery rule refutes 8 of 14 UNSAT inputs in a fresh frozen
+36-case synthetic panel; 22 SAT inputs and six UNSAT inputs remain unresolved by
+that rule. The same existing fallback correctly decides all 36. These are small
+generated transfer cases, not evidence of representative or unrestricted coverage.
+
+The six retained gaps are widths 4 and 5 clause cubes, three odd-charge parity
+graphs, and a contradictory bridge between two components. These expose
+interactions that unit-only feedback misses. Next investigate checked non-unit
+consequences or deeper conditioning while reserving a second unexposed panel.
+Keep overlapping structural descriptions, exact source binding and recomposition
+costs explicit. Source-only output no longer depends on B13, but its graph may
+still expand rapidly and its discovery may remain incomplete.
+
+Full panel cost is 0.08072 s fresh, 0.12040 s using acquired feedback, and
+0.44621 s with online acquisition. Raw archive bytes grow 6.40%; repeated warm
+provenance checking also costs more. Profiling points to partition validation and
+normalization, not only probing. Preserve the regression and fresh alternative.
+All 2,218 tests pass. Resume `experiments/results/cnf-fresh-seed-feedback/checkpoint.json`
+and `fresh_seed_feedback.remaining`; the old finite frontier remains empty.
+
+## Previous evidence: the retained frontier is certified; broader discovery is open
 
 [Repeated feedback](strengthened-cross-pivot.md) closes the final `(61,50)` case:
 **246/246 retained frontier snapshots certified**, with both cold readers. The old

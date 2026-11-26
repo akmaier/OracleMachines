@@ -1,0 +1,30 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_fresh_seed_feedback.py", line 130, in <module>
+    if action=='trial':trial(out,Path(sys.argv[3]),sys.argv[4])
+                       ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_fresh_seed_feedback.py", line 107, in trial
+    tick=time.perf_counter();readers=audit(db,rows,results);cold=time.perf_counter()-tick
+                                     ~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_fresh_seed_feedback.py", line 58, in audit
+    got=reader.solve(row['source']);assert (got['answer'],got['root'])==(result['answer'],result['root'])
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py", line 614, in solve
+    model, key = self._visit(cnf)
+                 ~~~~~~~~~~~^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py", line 527, in _visit
+    model, proof = self._expand(normalized)
+                   ~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_snapshot_replay.py", line 45, in _expand
+    def _expand(self,cnf):raise RuntimeError('Fresh snapshot search is forbidden')
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Fresh snapshot search is forbidden
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_fresh_seed_feedback.py", line 131, in <module>
+    else:globals()[action](out)
+         ~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_fresh_seed_feedback.py", line 122, in run
+    dest=out/f'{mode}-{repeat}';subprocess.run([sys.executable,__file__,'trial',str(out),str(dest),mode],check=True)
+                                ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/opt/homebrew/opt/python@3.14/bin/python3.14', '/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_fresh_seed_feedback.py', 'trial', 'experiments/results/cnf-fresh-seed-feedback', 'experiments/results/cnf-fresh-seed-feedback/fresh-0', 'fresh']' returned non-zero exit status 1.

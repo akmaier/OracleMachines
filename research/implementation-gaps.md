@@ -4,7 +4,20 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, repeated cross-pivot feedback):
+Latest expansion checkpoint (27 November, direct fresh-source feedback):
+[A source-only compiler](fresh-seed-feedback.md) eliminates historical B13 input
+requirements for checked feedback chains. Both cold readers validate eight
+refutations on 36 fresh generated CNFs, including one two-level case. Independent
+truth gives 22 SAT and 14 UNSAT cases; six UNSAT cases remain open to feedback,
+while the existing fallback solves all 36. This closes an adapter restriction,
+not unrestricted structural coverage. Full workflows cost 0.08072 s fresh,
+0.12040 s prepared and 0.44621 s online; preserve this regression. Next investigate
+non-unit interactions on the six fresh gaps and reuse checked preparation only
+with exact ownership/invalidation. All 2,218 tests and 27 focused tests pass.
+Resume `experiments/results/cnf-fresh-seed-feedback/checkpoint.json`; previous
+sources, 221 manifests, 33,634 artifacts and 64 proof blocks remain unchanged.
+
+Previous expansion checkpoint (26 November, repeated cross-pivot feedback):
 [Two checked feedback levels](strengthened-cross-pivot.md) certify the final
 `(61,50)` snapshot: **246/246 retained frontier snapshots covered**. Exact resume
 avoids 6,078 probes and saves 29.01% with the first level already available.

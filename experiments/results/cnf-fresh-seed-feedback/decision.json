@@ -1,0 +1,146 @@
+{
+  "analysis": {
+    "path": "experiments/results/cnf-fresh-seed-feedback/analysis.json",
+    "sha256": "507d3756fd02944c5f36493abbf59a7cbb440e314234137664414bb906d5d682"
+  },
+  "checkpoint": "fresh-seed-feedback",
+  "controls": [
+    "All 36 synthetic inputs were frozen before the compiler was implemented. Labels and descriptions are withheld from workflows. Independent exhaustive enumeration finds 22 SAT and 14 UNSAT inputs; feedback alone refutes eight and never issues a SAT verdict.",
+    "Fresh, acquired-feedback and online-feedback workflows use the same existing fallback, initially empty archives, panel order, warm repeats, two cold readers and archive compression. Six process-order permutations are retained.",
+    "The final initial timing order overlapped test startup; its reports remain preserved and are replaced by an isolated rerun in the measured comparison bindings.",
+    "An initial native-only audit could not handle a legitimate equivalence root from the existing fallback. It was stopped; the full established authority-table audit replaces it, and the failed script/protocol/log remain archived.",
+    "Prepared feedback costs 49.16% more than fresh excluding acquisition; online costs 5.53 times fresh. Feedback archives use 6.40% more raw bytes. No runtime or memory win is claimed; fresh stays selected.",
+    "The profiled discovery cost is dominated by implication collection/partition validation and repeated normalization; profiler timings are diagnostic and not mixed into unprofiled workflow measurements.",
+    "All prior 246 retained frontier results are unchanged. The 36 fresh cases are a separate synthetic transfer panel and are now exposed, not representative or unrestricted SAT evidence."
+  ],
+  "date": "2026-11-27",
+  "docs": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "7074db0e617233266e709fd76b616af66347aceab10f968bee1e18e54d763baf",
+    "research/fresh-seed-feedback.md": "ca439d5d4b1e5967eaeef49d98bf0a10e0f6e7adb65e32169ca41053746a5d70",
+    "research/implementation-gaps.md": "1d9f1ab717c09308c942320b6237462d85dafb25e960f035a8d2de0386ea2bcb",
+    "research/sat-pattern-discovery.md": "3000165902b34aca77cfcd69edb7099e00f5b84a8391c16faa27f0fbf79aa748",
+    "research/structural-reuse-priorities.md": "28e680be1ef726ae76083198c443b980ca916690d44b69866b4d227ffaef37e8"
+  },
+  "measurements": {
+    "archive_bytes": {
+      "fresh": 12779,
+      "online": 13786,
+      "prepared": 13786
+    },
+    "coverage": {
+      "refuted": 8,
+      "sat": 22,
+      "unresolved": 28,
+      "unsat": 14
+    },
+    "families": {
+      "clause_cube": {
+        "refuted": 1,
+        "sat": 3,
+        "unresolved": 5,
+        "unsat": 3
+      },
+      "mixed_components": {
+        "sat": 6,
+        "unresolved": 6
+      },
+      "mixture_edit": {
+        "refuted": 2,
+        "sat": 3,
+        "unresolved": 4,
+        "unsat": 3
+      },
+      "parity_prism": {
+        "sat": 3,
+        "unresolved": 6,
+        "unsat": 3
+      },
+      "random_3cnf": {
+        "refuted": 2,
+        "sat": 4,
+        "unresolved": 4,
+        "unsat": 2
+      },
+      "signed_implication_cycle": {
+        "refuted": 3,
+        "sat": 3,
+        "unresolved": 3,
+        "unsat": 3
+      }
+    },
+    "online_vs_fresh_complete_factor": 5.5276745742613596,
+    "panel_size": 36,
+    "peak_rss_bytes": {
+      "fresh": 51691520,
+      "online": 54509568,
+      "prepared": 54493184
+    },
+    "prepared_vs_fresh_complete_percent": 49.15699461490286,
+    "raw_record_growth_percent": 6.3972125435540095,
+    "remaining": [
+      "p04",
+      "p21",
+      "p23",
+      "p02",
+      "p19",
+      "p34"
+    ],
+    "selected": "fresh",
+    "totals": {
+      "fresh": {
+        "cold_seconds": 0.02766469431420167,
+        "complete_seconds": 0.08072311136250694,
+        "input_seconds": 0.0007211875636130571,
+        "loaded_chain_bytes": 0,
+        "new_history_bytes": 0,
+        "persistence_seconds": 0.006483742967247963,
+        "phases": {
+          "solve_seconds": 0.035469646798446774
+        },
+        "record_bytes": 57400,
+        "records": 88,
+        "warm_seconds": 0.006037624940897028
+      },
+      "online": {
+        "cold_seconds": 0.028665409811461966,
+        "complete_seconds": 0.44621109023379785,
+        "input_seconds": 0.0007430832677831253,
+        "loaded_chain_bytes": 0,
+        "new_history_bytes": 2154538,
+        "persistence_seconds": 0.006844312107811372,
+        "phases": {
+          "discovery_seconds": 0.30853533116169274,
+          "history_persistence_seconds": 0.02270374377258122,
+          "solve_seconds": 0.05450381928433975
+        },
+        "record_bytes": 61072,
+        "records": 102,
+        "warm_seconds": 0.018630263783658545
+      },
+      "prepared": {
+        "cold_seconds": 0.02641593765777846,
+        "complete_seconds": 0.12040416686795652,
+        "input_seconds": 0.0007331807476778825,
+        "loaded_chain_bytes": 355102,
+        "new_history_bytes": 0,
+        "persistence_seconds": 0.006784458256637056,
+        "phases": {
+          "load_chain_seconds": 0.008249682141467929,
+          "solve_seconds": 0.05599430506117642
+        },
+        "record_bytes": 61072,
+        "records": 102,
+        "warm_seconds": 0.017503361217677593
+      }
+    }
+  },
+  "next": "Investigate reusable non-unit boundary clauses or deeper conditioning on the six fresh feedback-unresolved UNSAT inputs, reserving another unexposed panel before tuning. Use exact owned seed/index reuse as supporting work only with explicit invalidation and full cold checks. Measure clause growth and source-only recomposition against the cheaper fresh solver.",
+  "outcome": "A native source compiler now accepts checked feedback chains on arbitrary supplied CNFs without historical B13 inputs. Both cold readers certify all eight refutations found by the unchanged rule on a frozen 36-case panel. Six independently UNSAT cases remain unresolved by feedback; the existing fallback solves all 36.",
+  "parent": {
+    "path": "experiments/results/cnf-strengthened-cross-pivot/checkpoint.json",
+    "sha256": "53df12d1687e7e364d12aca9dff9ee40a21dafa0888cb03849f0aaed196756e4"
+  },
+  "pattern": "Root banks start with source clauses. Branch environments add a signed condition and checked failed-probe units. Cross-pivot dependencies decrease feedback level, local probe dependencies decrease bank stage, and native splits reconstruct exact source residuals. The same compiler handles multiple levels.",
+  "recognition": "Validate source normalization, heuristic ordering and the entire copied chain before warm cache lookup. Reject edited sources, stale or reordered levels, changed assumptions and invalid traces. Branch assumptions cannot prove their own excluded contexts. Reuse exact normalized residual identities only; no general isomorphism or semantic equivalence claim.",
+  "resources": "One direct-unit allowance covers all levels of each compilation. It does not bound total graph expansion, normalization, validation, recursion depth or acquisition. Earlier histories, baseline chains, online search histories and unsuccessful attempts remain additional retained storage. Imported helper implementations are reused without rewriting their scientific sources."
+}

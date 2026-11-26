@@ -1,6 +1,6 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-26 after the user's shift toward pattern discovery and a valid
+Updated 2026-11-27 after the user's shift toward pattern discovery and a valid
 partition of the entire SAT problem. This is the working record for the hourly
 investigation. Start with the [discovery plan](sat-pattern-discovery.md), then
 consult [implementation history](implementation-gaps.md),
@@ -12,7 +12,36 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: repeated feedback closes the finite frontier
+## Current investigation: direct certificates on fresh source CNFs
+
+[Fresh-seed feedback](fresh-seed-feedback.md) removes the native compiler's
+historical B13 input requirement. Checked chains now compile directly from their
+supplied CNF, including multiple feedback levels, and both cold readers pass.
+The discovery rule is unchanged. A new frozen 36-case synthetic panel has
+22 SAT and 14 UNSAT cases: feedback certifies 8 UNSAT cases, while the existing
+fallback correctly decides all 36. Keep these counts separate from the completed
+246-snapshot frontier. Descriptions and exhaustive labels are withheld from search.
+
+This transfer brings a cost regression: complete panel workflows take **0.08072 s
+fresh, 0.12040 s with acquired feedback, and 0.44621 s with online acquisition**.
+The feedback graph has 102 records and 61,072 raw bytes versus 88 and 57,400 fresh.
+Online discovery is 69% of total time. Within profiled discovery, repeated
+partition validation and seed normalization dominate the actual probe search.
+Fresh remains the measured choice; no production policy changes.
+
+**Next priority:** checked non-unit boundary consequences or deeper conditioning
+on the six feedback-unresolved UNSAT cases (two wider clause cubes, three parity
+graphs and a bridge mixture), with another unexposed panel frozen before tuning.
+The fallback already solves these cases; they isolate limits of the feedback rule.
+Investigate exact checked seed/index reuse as supporting work, charging full cold
+validation and clause/native-graph growth. General recognition, compact closure
+and polynomial source-only expansion remain open.
+
+Resume `experiments/results/cnf-fresh-seed-feedback/checkpoint.json`, key
+`fresh_seed_feedback.remaining`. All 2,218 tests and 27 focused tests pass. The
+prior 221 manifests, 33,634 artifacts and 64 proof blocks remain unchanged.
+
+## Previous investigation: repeated feedback closes the finite frontier
 
 [Iterated cross-pivot feedback](strengthened-cross-pivot.md) certifies the final
 `(61,50)` snapshot through two checked feedback levels and both cold readers:

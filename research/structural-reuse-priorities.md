@@ -12,7 +12,32 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: remove irrelevant trace work before native expansion
+## Current investigation: one-variable conditioning closes nine fixed points
+
+[Conditioned saturation](conditioned-saturation.md) certifies nine of the twelve
+retained fixed points through original-source reconstruction and both cold readers:
+**243/246 covered, three open**. The same saturation rule now runs in each side of
+an exact variable partition, with at most sixteen pivots. One failed branch proves
+only an opposite unit; both branch refutations are needed for a parent verdict.
+
+Discovery and independent checking cost **1.915 s across twelve cases**, versus
+0.396 s flat, with larger search budgets and 5.26 MB versus 0.24 MB result records.
+They each account for about 43–44% of conditioned cost. Resume avoids 768 probes
+but costs **5.95% more**. Native conversion across nine cases is **7.41% faster**
+and **23.74% smaller** than fresh in aggregate, yet loses on four cases; discovery
+exceeds that time saving. Preserve these regressions and all fresh certificates.
+
+**Next priority:** combine the already checked one-sided implications across
+pivots. They produce augmented-bank contradictions at `(61,0)` and `(67,0)` that
+still need source-only reconstruction. Do not count these candidates as covered.
+At `(61,50)`, two implied units reduce **334 → 314 clauses**; investigate the
+strengthened bank next. No need to repeat identical flat fixed-point discovery.
+For cost, target repeated preparation/checking and duplicated branch state with
+explicit invalidation. Resume `experiments/results/cnf-conditioned-saturation/checkpoint.json`,
+key `conditioned_saturation.remaining`, using its comparison module's loader.
+All 2,191 full tests and 24 focused tests pass. No unrestricted guarantee follows.
+
+## Previous investigation: remove irrelevant trace work before native expansion
 
 [Causal slicing of saturation traces](sliced-saturation.md) reduces `(37,39)`'s
 native graph **5,587 → 76 records**, complete time **52.719 → 0.797 s**, raw bytes

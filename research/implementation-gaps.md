@@ -4,7 +4,20 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, causal saturation slicing):
+Latest expansion checkpoint (26 November, conditioned saturation):
+[Checked variable partitions](conditioned-saturation.md) certify nine more original
+snapshots through both cold readers: **243/246 covered, three open**. Combining
+one-sided implications across pivots already gives two further augmented-bank
+contradictions, but source-only reconstruction is pending; those cases remain open.
+The third bank shrinks 334 → 314 clauses. Next reconstruct the joint implications.
+Discovery/checking takes 1.915 s versus 0.396 s flat at larger search allowances;
+resume is 5.95% slower. Native conversion saves 7.41% aggregate time and 23.74%
+bytes against fresh, with four regressions and additional discovery costs. All
+2,191 tests and 24 focused tests pass. Resume
+`experiments/results/cnf-conditioned-saturation/checkpoint.json`. Prior sources,
+certificates, artifacts and 64 manuscript proof blocks remain unchanged.
+
+Previous expansion checkpoint (26 November, causal saturation slicing):
 [Backward dependency slicing](sliced-saturation.md) cuts `(37,39)`'s native graph
 5,587 → 76 records and complete reconstruction 52.719 → 0.797 s, with the same
 shortcut allowance. Both cold readers pass. An eightfold-budget control reaches

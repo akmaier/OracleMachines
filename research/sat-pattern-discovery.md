@@ -5,7 +5,30 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: dependency closure makes native expansion cheaper
+## Latest evidence: conditioned saturation and cross-pivot implications
+
+[One-variable conditioning](conditioned-saturation.md) extends flat saturation on
+the twelve retained fixed points. Nine now have paired branch refutations and
+source-only certificates accepted by both cold readers: **243/246 covered, three
+open**. Assignment partitioning is exact, while the sixteen-pivot search remains
+bounded. An open branch is not SAT; one failed branch supplies only an implied unit.
+
+The remaining cases expose the next reusable interaction. Combining failures from
+different pivots yields checked augmented contradictions at `(61,0)` and `(67,0)`.
+These are candidates pending original-source reconstruction, so both stay in the
+frontier. At `(61,50)` two implied units shrink **334 → 314 residual clauses**.
+Next compile those joint implications, then investigate the strengthened third bank.
+The analysis retains their exact derivations and joint traces.
+
+Conditioned discovery/checking costs 1.915 s versus 0.396 s flat with unequal total
+search allowances. Checked resume is 5.95% slower despite avoiding 768 probes.
+Native conversion saves 7.41% aggregate time and 23.74% bytes against fresh, with
+four per-case regressions and additional discovery cost. These selected cases do
+not establish an efficient arbitrary-CNF partition or a uniform acquisition bound.
+Resume `experiments/results/cnf-conditioned-saturation/checkpoint.json` with its
+comparison module's loader; all prior certificates and remaining fields are kept.
+
+## Previous evidence: dependency closure makes native expansion cheaper
 
 [Causal trace slicing](sliced-saturation.md) removes irrelevant unit steps before
 reconstructing their source contexts. It reduces the large native graph from

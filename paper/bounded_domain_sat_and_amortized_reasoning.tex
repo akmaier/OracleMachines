@@ -97,8 +97,9 @@ submitted to the alphaXiv AI Track.  Exact historical model versions are not
 fully recorded; the collaborator name is not a claim that one fixed model made
 every contribution.  Source, proofs and retained evidence are available at
 \url{https://github.com/akmaier/OracleMachines}.  The first alphaXiv publication covers repository checkpoint \texttt{918fc95a}.
-This working revision additionally records checked B13 strengthening and generic
-failed-literal saturation, their source-only certificates, and causal slicing of native reconstruction; published-version
+This working revision additionally records checked B13 strengthening, generic
+and conditioned failed-literal saturation, their source-only certificates, and
+causal slicing of native reconstruction; published-version
 metadata and exact PDFs are retained separately in the repository.  Machine checks support the stated artifacts and
 hypotheses, not a proof of unrestricted $\Pclass=\NPclass$.
 
@@ -14122,6 +14123,95 @@ to stronger shared-variable interactions or bounded conditioning/decomposition
 on the twelve exhausted fixed points.  Remaining conversion costs include repeated
 whole-residual payloads and cold checking, so future support selection or shared
 representation must retain exact recomposition and a fresh-solve baseline.
+
+\subsection{Conditioning extends the checked saturation frontier}
+\label{sec:conditioned-saturation}
+
+The twelve retained feedback banks are fixed points for flat saturation.
+Conditioning on one variable before applying the same rule exposes further
+interactions.  The new bounded search tries at most sixteen distinct, unfixed
+variables in frozen source occurrence order.  For each pivot $v$, it checks
+saturation of both $B\land\neg v$ and $B\land v$, stopping at the first paired
+refutation.  Nine snapshots now have original-source certificates accepted by
+both cold readers.  Structural coverage rises from $234/246$ to $243/246$;
+the remaining three rows retain their previous fields and histories.
+
+The partition is exact: every assignment belongs to exactly one branch.  Two
+branch refutations refute the parent.  One refutation of $B\land l$ implies only
+$B\Rightarrow\neg l$.  An interrupted or exhausted branch is not SAT authority.
+For example, all eight clauses excluding the assignments on three variables form
+a flat failed-literal fixed point, but either one-variable partition leaves two
+branches refutable by that rule.  Gating the four-clause two-variable contradiction
+with a third literal instead gives a satisfiable example with one failed branch.
+The tests retain this distinction.  Exact partitioning does not guarantee cheap
+solution of its cells, and unrestricted recursive conditioning may generate
+exponentially many contexts.
+
+Recognition binds the canonical seed, coordinates, ordering, pivot, branch sign
+and trace limit.  Saved child results are checked before terminal reuse or
+interrupted continuation.  Edited bindings invalidate reuse.  Native conversion
+inserts the local condition into the last acquired bank while keeping older bank
+indices unchanged.  Every recursive source context preserves the branch assignment;
+a condition-origin leaf is explicitly rejected so that an assumption cannot justify
+its own excluded context.  Each branch has a private causal-slice memo.  An ordinary
+native split combines the two source residuals, followed by reconstruction of the
+original prefix.  No new native certificate format is required, and warm hits
+still check source, prefix and provenance.
+
+Six separate-process permutations compare flat, conditioned and resumed discovery
+on the same twelve snapshots.  Each saturation call has bounds of eight rounds,
+$512$ probes, $2{,}097{,}152$ work units and trace length $256$.  Conditioned search
+can make two calls per pivot: equal per-call bounds are not equal total budgets.
+Complete census times are $0.39602$, $1.91544$ and $2.02939$ seconds, with
+$236{,}393$, $5{,}264{,}828$ and $5{,}264{,}828$ result bytes.  Maximum RSS is
+$58{,}687{,}488$, $85{,}704{,}704$ and $90{,}177{,}536$ bytes.  Flat repeats $2{,}062$
+probes without new information.  Conditioned search uses $62$ pivots, $124$ branch
+calls and $39{,}474$ probes.  Resume avoids $768$ probes but costs $5.95\%$ more
+complete time; its first-pivot acquisition costs another $0.24041$ seconds and
+retained space.  This negative reuse result is preserved.
+
+Conditioned preparation, discovery, cold checking and persistence take $0.16308$,
+$0.81985$, $0.85189$ and $0.08027$ seconds.  Thus discovery and checking each account
+for about $43$--$44\%$ of cost.  The census includes seed reconstruction, result
+serialization, reload and independent cold checking.  JSON input loading, original
+snapshot binding, historical acquisition and final lineage auditing are additional.
+The experiment was developed on these retained cases and is not held-out evidence
+of generalization to arbitrary CNF.
+
+Two opposite native mode orders compare all nine successful pairs with fresh
+solving at the existing $256$-node bound.  Both routes refute all nine snapshots.
+Complete native-workflow totals are $4.71433$ seconds conditioned and $5.09154$
+seconds fresh; record counts are $682$ and $1{,}011$, with $7{,}540{,}186$ and
+$9{,}887{,}649$ raw bytes.  The conditioned route saves $7.41\%$ native-workflow
+time and $23.74\%$ raw bytes but is slower on four cases.  At $(1,15)$ it takes
+$0.76600$ versus $1.36218$ seconds; at $(61,21)$ it takes $0.43053$ versus $0.25046$
+seconds.  Two repetitions do not establish significance for small timing changes.
+The aggregate $0.37720$-second saving is smaller than the added discovery census;
+this is not an end-to-end speedup over fresh solving.
+
+These native totals include construction, a warm call, both cold readers,
+database handling and compressed persistence.  Discovery and earlier acquisition
+remain additional.  Conditioned construction, warm checking, cold checking and
+persistence sum to $2.02663$, $0.30948$, $1.76302$ and $0.58773$ seconds; fresh totals
+are $2.14760$, $0.01414$, $2.14264$ and $0.74288$ seconds.  Maximum process RSS is
+$91{,}979{,}776$ bytes conditioned and $97{,}665{,}024$ fresh; compressed archives
+total $809{,}301$ and $1{,}064{,}528$ bytes.  Each compiler branch owns a $262{,}144$
+direct-unit allowance, so the combined allowance is at most $524{,}288$.  All
+conditioned records use ordinary residual authority.  Fresh $(61,21)$ also uses
+one independently checked binary-equivalence record, included in its totals.
+All trials and regressions are retained, without changing production defaults.
+
+The three remaining cases show how implications can cross partition boundaries.
+Across sixteen pivots, $(61,0)$ yields nine failed branches, $(61,50)$ yields two,
+and $(67,0)$ yields ten.  Combining their opposite units gives checked augmented-bank
+contradictions for $(61,0)$ and $(67,0)$.  These remain candidates until source-only
+reconstruction and both native readers pass; they are not included in the $243$
+covered cases.  The two units at $(61,50)$ reduce its residual from $334$ to $314$
+clauses without contradiction.  The next coverage task is to reconstruct the
+cross-pivot implications and then investigate this strengthened residual.  The
+saved joint traces avoid repeating their discovery.  This expands certified
+coverage on the retained workload, without a uniform acquisition bound, compact
+closure theorem, or efficient solution of every CNF.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}

@@ -1,0 +1,43 @@
+{
+  "initial_censuses": {
+    "path": "experiments/results/cnf-b13-probe-cursor/censuses.json",
+    "sha256": "1c3827963cb688ec862fb2796e2eb152a1b9936fbdc3c2d0a9837f8500c8fb5a"
+  },
+  "interpretation": "Keep both runs. Compare unchanged reconstruction across arms; report uncertainty if variation remains. Do not pool away or suppress the initial unstable trial.",
+  "limits": {
+    "probe_limit": 64,
+    "trace_limit": 256,
+    "work_limit": 262144
+  },
+  "orders": [
+    [
+      "source",
+      "unseen",
+      "reuse",
+      "matched"
+    ],
+    [
+      "unseen",
+      "reuse",
+      "matched",
+      "source"
+    ],
+    [
+      "reuse",
+      "matched",
+      "source",
+      "unseen"
+    ],
+    [
+      "matched",
+      "source",
+      "unseen",
+      "reuse"
+    ]
+  ],
+  "reason": "Initial paired census shows large variation even in unchanged reconstruction. Preserve all initial data, then repeat four balanced rotating orders after regression testing, without changing search policies or budgets.",
+  "runner_source": {
+    "path": "experiments/compare_cnf_b13_probe_cursor.py",
+    "sha256": "5a65bbe29bb8db122316910087c0f21a40520649dd6e10a5d4bf7c2671b4e274"
+  }
+}

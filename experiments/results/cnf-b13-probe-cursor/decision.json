@@ -1,0 +1,73 @@
+{
+  "audit_correction": {
+    "path": "experiments/results/cnf-b13-probe-cursor/audit-correction.json",
+    "sha256": "e61805a701311a30d1bb5b70f2c51aba720e93421a36f6300d1f9638a580d43c"
+  },
+  "daily_external_review": "Already completed 2026-11-26; see research/pequalnp-watch.md. No external theorem imported.",
+  "decision": "Prefer productive B12 continuation on the measured cases; retain B13 as a checked negative expansion result rather than adopting it as a default.",
+  "evidence": {
+    "analysis": {
+      "path": "experiments/results/cnf-b13-probe-cursor/analysis.json",
+      "sha256": "0af5c4a74d7c78847a6c1960f87b7a772302634e21f23b292271e0726dbd7e76"
+    },
+    "followup": {
+      "path": "experiments/results/cnf-b13-probe-cursor/followup-analysis.json",
+      "sha256": "3b004527f4a618c5aecabc48c83a766de6e266b6541ba8225b4ce9af70b13552"
+    },
+    "followup_plan": {
+      "path": "experiments/results/cnf-b13-probe-cursor/followup-plan.json",
+      "sha256": "784ada71a4b0a51dbf2f9a5ff3febd6ff995c657d77bdef8d1b395acc8dbe18e"
+    },
+    "parent_validation": {
+      "path": "experiments/results/cnf-shared-b12-preparation/validation.json",
+      "sha256": "eb112ed1a17dcb8b4a12d255e0a245ec89542b5239e437b7be2026a60f8bd264"
+    }
+  },
+  "findings": {
+    "avoided_probes": 2074,
+    "b13_total_cost_percent_vs_source": 7.906615383898985,
+    "b13_total_cost_percent_vs_unseen": 8.670524563698745,
+    "coverage": {
+      "after": 232,
+      "before": 232,
+      "total": 246
+    },
+    "exhausted_orders": 12,
+    "new_joint_assignments": [
+      [
+        116,
+        true
+      ],
+      [
+        119,
+        true
+      ]
+    ],
+    "new_source_failures": [
+      -119,
+      -116
+    ],
+    "residual_clauses": [
+      358,
+      347
+    ],
+    "reuse_total_saving_percent": 1.8634187124877966,
+    "unfinished": [
+      [
+        37,
+        39
+      ],
+      [
+        67,
+        63
+      ]
+    ]
+  },
+  "limitations": [
+    "Initial timing was unstable; all data retained. Four balanced follow-up orders were declared before their measurement and run after tests.",
+    "Fourteen exposed cases; continuation is preferred only on this measured workload. No new native certificate or production default.",
+    "Results differ across policies; fewer result bytes are not proof compression. Peak memory remains about 99 MB and retained storage grows.",
+    "Startup/loading, acquisition, pilots, native compilation and lineage audits are additional to the census; no unrestricted-SAT or polynomial acquisition bound."
+  ],
+  "next_target": "Continue the two unfinished histories and evaluate stronger checked interactions or decomposition for twelve exhausted unchanged cases; compare any new-bank schedule before adding another feedback layer."
+}

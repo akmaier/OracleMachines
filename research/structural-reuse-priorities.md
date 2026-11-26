@@ -12,7 +12,33 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: use complementary B12 closure after cheaper checking
+## Current investigation: continue productive schedules before another expansion layer
+
+[B13 versus B12 continuation](b13-probe-cursor.md) finds that continued source
+order supplies two new failures at `(67,63)`, forcing 116=true and 119=true.
+The joint residual shrinks **358 → 347 clauses**, **136 → 134 variables**. B13
+finds no new failure with the same additional 64-probe allowance. Coverage stays
+**232/246**, with **14 open**. `(1,15)` finishes its order; twelve orders are now
+exhausted and only `(37,39)` and `(67,63)` remain unfinished.
+
+The initial timing run was unstable and is retained. A declared four-order
+follow-up gives B13 **7.91% higher total cost** than source continuation and
+8.67% more than untested-first continuation. Exact unchanged-bank reuse avoids
+2,074 probes but saves only **1.86%** against matched fresh B13. Discovery plus
+cold checking is 69.54% of B13 time; common preparation is already shared once.
+
+**Next priority:** continue the two unfinished histories and compare any proposed
+changed-bank schedule against those continuations before adding another feedback
+layer. For the twelve exhausted unchanged cases, investigate a stronger checked
+interaction or decomposition, consulting retained failures first. Their current
+single-assumption orders cannot discover anything new by identical repetition.
+No peak-memory improvement or native-compilation gain is established.
+
+Resume `experiments/results/cnf-b13-probe-cursor/checkpoint.json`. The overlay
+retains all older schedules and both new B12 continuations. All 2,136 tests pass;
+no new native root, unrestricted efficiency or polynomial acquisition claim follows.
+
+## Previous investigation: use complementary B12 closure after cheaper checking
 
 [Shared B12 preparation](shared-b12-preparation.md) reduces complete matched
 census time **39.24% for source order** and **39.65% for untested-first**. Common

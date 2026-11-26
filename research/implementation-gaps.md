@@ -4,7 +4,17 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, shared B10 preparation inside B12):
+Latest expansion checkpoint (26 November, B13 versus continued B12):
+[B13 comparison](b13-probe-cursor.md) retains a negative expansion result: no new
+failure versus two from continued source-order B12. Their closure forces 116=true
+and 119=true at `(67,63)`, reducing 358 clauses to 347. Coverage remains 232/246.
+Twelve orders are exhausted; `(37,39)` and `(67,63)` remain unfinished. A balanced
+follow-up after an unstable initial trial puts B13 7.91% above source continuation
+in total cost; reuse saves only 1.86% versus matched fresh B13. All 2,136 tests pass.
+Resume `experiments/results/cnf-b13-probe-cursor/checkpoint.json`; preserve productive
+continuations and investigate stronger interactions for the exhausted cases.
+
+Previous expansion checkpoint (26 November, shared B10 preparation inside B12):
 [Shared B12 checking](shared-b12-preparation.md) cuts matched complete time
 39.24% for source order and 39.65% for untested-first, with exact result, provenance
 and search-counter equality. Every distinct upper history remains independently

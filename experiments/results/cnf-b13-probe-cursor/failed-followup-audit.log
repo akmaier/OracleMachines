@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_b13_probe_cursor.py", line 173, in <module>
+    if __name__=='__main__':globals()[sys.argv[1]](Path(sys.argv[2]))
+                            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_b13_probe_cursor.py", line 144, in validate
+    followup_analysis=followup(out,p,seeds,events)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_b13_probe_cursor.py", line 26, in followup
+    plan=base.load(out/'followup-plan.json'); old.bound(plan['initial_censuses']); old.bound(plan['runner_source'])
+                                                                                   ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_unsat_support.py", line 18, in bound
+    return base.load(item['path'])
+           ~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_subsumption_transfer.py", line 55, in load
+    return json.loads(Path(path).read_text())
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)

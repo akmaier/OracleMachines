@@ -5,7 +5,26 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: preserve both orders with cheaper independent checking
+## Latest evidence: stronger bank loses to productive schedule continuation
+
+[B13 expansion](b13-probe-cursor.md) preserves both B12 failure histories and
+B11 continuation through separate original-bank checks and shared preparation.
+It finds no new failure in 64 probes. Continuing source-order B12 instead finds
+-119 and -116 at `(67,63)`, reducing its joint residual from 358 to 347 clauses.
+Coverage stays **232/246**. Twelve orders are exhausted; `(37,39)` and `(67,63)`
+remain unfinished. Exhaustion is not SAT.
+
+An unstable initial timing trial is retained. Four balanced follow-up orders put
+B13 total cost **7.91% above source continuation**; exact reuse saves only 1.86%
+against matched fresh B13 despite avoiding 2,074 probes. Preserve productive
+unfinished schedules before adding layers. Exhausted unchanged cases need a
+stronger interaction or decomposition, not another identical probe pass.
+
+Resume `experiments/results/cnf-b13-probe-cursor/checkpoint.json`. All 2,136 tests
+pass. Both proof sets, failed expansion results and prior regressions remain;
+there is no new native certificate or general efficient partition.
+
+## Previous evidence: preserve both orders with cheaper independent checking
 
 [Shared B12 preparation](shared-b12-preparation.md) removes a duplicated common
 B10 preparation, retaining independent checks of every distinct upper history.

@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Probe combined constraints with exact history reuse](research/joint-probe-cursor.md):
+one additional checked refutation raises sampled recognition to 230/246.
+Reuse avoids 1,878 probes but saves only 1.49% of complete census time; the new
+native certificate is slower and larger than fresh solving. Six orders remain
+unfinished, and one newly strengthened residual is the next coverage target.
+All 2,057 tests pass.
+
+
 [Compose failures on their original banks](research/joint-cursor-feedback.md):
 one additional source-only refutation raises sampled recognition to 229/246.
 The combined certificate uses 35 records versus 77 fresh, with 39.93% lower

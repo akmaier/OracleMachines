@@ -4,7 +4,17 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, original-bank B6/B7 composition):
+Latest expansion checkpoint (26 November, probing the combined bank):
+[Joint probe cursors and original-bank feedback](joint-probe-cursor.md) add the
+native refutation `(28,19)`, reaching 230/246 with 16 open. Exact reuse saves
+1,878 probes, but complete census time improves only 1.49%. The positive native
+certificate is 67.29% slower and 52.21% larger than fresh solving; preserve this
+regression. The open export grows 4.91%. Next: stronger `(28,18)`, unfinished
+orders, common-prefix checking/reconstruction, and equivalence/source-support
+reuse. Resume `experiments/results/cnf-joint-probe-cursor/checkpoint.json`.
+All earlier proofs, artifacts, tables and reference bindings remain intact.
+
+Previous expansion checkpoint (26 November, original-bank B6/B7 composition):
 [Joint failure feedback](joint-cursor-feedback.md) adds the source-only native
 refutation `(37,40)`, reaching 229/246 sampled recognition with 17 open. B7-only
 feedback also refutes it; joint reasons reduce the certificate to 35 records

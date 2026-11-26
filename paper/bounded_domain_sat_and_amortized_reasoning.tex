@@ -13163,6 +13163,64 @@ banks establish well-founded reconstruction, not polynomially many contexts or
 an unrestricted-SAT result. The checkpoint is
 \texttt{experiments/results/cnf-joint-cursor-feedback/}.
 
+\subsection{Probing a joint bank: coverage and a retained cost regression}
+
+The next checkpoint probes the four changed combined banks while reusing thirteen
+unchanged histories only after exact equality of their clause banks, closure
+assignments and reason traces, active orders, and trace allowances.  Portable
+bindings include the source, current bank, closure, order, policy and trace bound.
+Every retained failed probe is checked again on that bank; open completions supply
+scheduling information and no satisfiability certificate.  The frozen search
+engine operates on an explicit view of the current joint bank, called B8.
+
+The seventeen exposed inputs yield twenty-one new failed assumptions.  Twenty
+belong to case $(28,19)$; their unit consequences compose to a contradiction on
+B9.  Both independent native readers accept the reconstructed source-only proof.
+Sampled structural recognition rises from $229/246$ to $230/246$, with sixteen
+cases still open.  The reference snapshot already classified the gained root as
+unsatisfiable.  The remaining failed assumption strengthens case $(28,18)$ by
+one assignment.  Six surviving B8 orders retain later candidates; ten exhaust
+this order on their present banks.  Exhaustion is not a SAT answer.
+
+A matched fresh control reruns the imported prefix and reaches exactly the same
+portable result as reuse on every input.  Across two isolated opposite-order
+repetitions, reuse lowers assumed probes from $2{,}326$ to $448$ and occurrence
+visits from $65{,}935$ to $20{,}604$.  Preparation and discovery fall from
+$0.28804$ to $0.27569$ seconds, but complete census time falls only from $0.90588$
+to $0.89239$ seconds ($1.49\%$).  Reconstruction and independent checking consume
+$68.08\%$ of reuse time, with additional preparation inside discovery.  Peak
+process memory remains about $98$ MB.  Feedback discovery and checking cost a
+further $0.55497$ seconds; complete remaining-closure diagnostics cost $0.28195$
+seconds separately.  Historical acquisition, startup/loading and final archive
+audits remain additional costs.  Two repetitions do not establish a robust
+end-to-end speedup.
+
+Native reconstruction follows each B9 exclusion back to its checked B8 probe,
+then follows strictly decreasing original reason banks to source clauses.  This
+well-founded dependency does not bound the number of contexts polynomially.
+On the gained complete root, bounded direct reconstruction takes $0.26778$
+seconds and retains $67$ records containing $438{,}852$ bytes.  Fresh solving takes
+$0.16007$ seconds and retains $49$ records containing $288{,}318$ bytes, including
+one binary-equivalence record.  Both trials include warm checking, two cold
+readers and persistence; discovery and unresolved fallback are additional.
+Thus direct reconstruction regresses $67.29\%$ in measured time and $52.21\%$
+in record bytes against fresh solving.  Disabling its direct source propagation
+shortcut retains $1{,}832$ records and costs $6.03835$ seconds.  The regression
+motivates testing equivalence reuse and source-support selection, without
+attributing the whole difference to a particular record type.
+
+The checked open export grows from $1{,}973{,}910$ to $2{,}070{,}735$ bytes
+($4.91\%$) despite removing one case.  Earlier histories and three distinct
+supplemental archive/root combinations remain preserved.  A fixed residual
+occurrence index occupies $O(1+L+n)$ word slots for $L$ literal occurrences and $n$
+active variables, excluding incoming provenance, exact bindings and output
+proofs.  Each attempt also initializes $O(m)$ counters for $m$ residual clauses;
+the occurrence-work allowance does not bound this initialization.  Explicit
+search allowances bound attempted probes and occurrence visits;
+preparation, transport, verification, new-bank acquisition and native context
+growth remain separate.  No unrestricted coverage, uniform polynomial expansion,
+or lifetime-space bound follows from this finite checkpoint.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

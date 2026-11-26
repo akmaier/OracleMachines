@@ -5,7 +5,23 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: a checked joint-bank refutation and four stronger closures
+## Latest evidence: joint-bank probes reveal another refutation
+
+[Checked B8 probing and B9 feedback](joint-probe-cursor.md) finds 21 failed
+assumptions on four changed banks. Twenty compose to refute `(28,19)`, raising
+sampled recognition to **230/246** with **16 open**; both native readers accept
+its source-only certificate. The remaining failure strengthens `(28,18)`.
+The reference snapshot already knew the gained root was UNSAT.
+
+Thirteen exact unchanged-bank histories reuse 1,878 completed probes. Matched
+fresh search yields identical outputs; complete census time improves only 1.49%.
+The gained native certificate regresses against fresh solving in time and space.
+Preserve this counterexample to automatic savings from deeper proof provenance.
+Next: changed `(28,18)`, six unfinished orders, and stronger interaction on ten
+exhausted banks. Resume `experiments/results/cnf-joint-probe-cursor/checkpoint.json`.
+No exhaustion is SAT; unrestricted coverage and lifetime-space bounds remain open.
+
+## Previous evidence: a checked joint-bank refutation and four stronger closures
 
 [Original-bank failure composition](joint-cursor-feedback.md) refutes `(37,40)`,
 raising sampled structural recognition to 229/246 with 17 open. The reference

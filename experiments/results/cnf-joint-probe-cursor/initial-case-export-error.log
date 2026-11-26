@@ -1,0 +1,3 @@
+Initial census completed all six targets. Case export then failed before writing a case:
+TypeError: dict() got multiple values for keyword argument 'closure'
+The original input already has a field named closure. Renamed the new joint closure field to joint_closure in case export and native trial input; census/search code is byte-identical.

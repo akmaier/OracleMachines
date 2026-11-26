@@ -12,7 +12,27 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: probe four changed closures; share common proof prefixes
+## Current investigation: reduce repeated preparation; follow the last strengthened bank
+
+[Joint-bank probing](joint-probe-cursor.md) adds a source-only refutation of
+`(28,19)`, reaching **230/246** with **16 open**. Twenty of its 21 new failures
+compose to the contradiction; the remaining failure strengthens `(28,18)`.
+Exact unchanged-bank reuse skips 1,878 probes on thirteen cases, but complete
+matched census time improves only 1.49%. Reconstruction and final checking
+still take 68.08%; repeated preparation is the dominant avoidable cost.
+
+**Next coverage target:** probe the stronger `(28,18)` closure; retain the six
+unfinished B8 orders. Ten unchanged exhausted orders need stronger interaction.
+**Native cost warning:** the new direct certificate costs 0.26778 s and 438,852
+record bytes versus 0.16007 s and 288,318 fresh. Test existing equivalence reuse
+and smaller source supports. Do not extrapolate the previous case's speedup.
+
+The checked open export grows 4.91% to 2,070,735 bytes despite one fewer case.
+All earlier histories remain; 2,057 tests and three native archive audits pass.
+Resume `experiments/results/cnf-joint-probe-cursor/checkpoint.json`. Full coverage,
+uniform efficient construction and bounded lifetime storage remain open.
+
+## Previous investigation: probe four changed closures; share common proof prefixes
 
 [Joint failure composition](joint-cursor-feedback.md) adds one source-only native
 refutation, `(37,40)`, reaching 229/246 sampled recognition with 17 open. B7-only

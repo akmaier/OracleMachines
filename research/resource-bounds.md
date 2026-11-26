@@ -18,6 +18,19 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Joint-bank probing](joint-probe-cursor.md) adds one structural refutation, reaching
+230/246. Exact reuse cuts assumed probes from 2,326 to 448, but complete matched
+census time only from 0.90588 to 0.89239 s. Source reconstruction and final checking
+are 68.08%; feedback/verification adds 0.55497 s and remaining closure diagnostics
+0.28195 s separately. Census peak memory remains about 98 MB.
+
+On the gained root, direct native reconstruction regresses: 0.26778 s, 67 records
+and 438,852 record bytes, versus 0.16007 s, 49 records and 288,318 bytes fresh.
+The disabled reconstruction's 1,832 records and 6.03835 s remain as an ablation.
+The checked open export grows 4.91% to 2,070,735 bytes despite one fewer case.
+Exact index reuse does not bound preparation, proof contexts or lifetime state.
+
+
 [Original-bank joint feedback](joint-cursor-feedback.md) recognizes one more
 sampled case, reaching 229/246. Its source-only certificate uses 35 records and
 680,946 bytes, versus 77 and 1,339,495 for fresh solving. Complete positive trial

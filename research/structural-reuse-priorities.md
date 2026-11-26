@@ -12,7 +12,30 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: compose 24 failures; avoid duplicate cold preparation
+## Current investigation: changed B7 banks and shared source-prefix reconstruction
+
+[Full checked cold recovery](checked-b6-restore.md) now shares preparation
+between result validation and session construction. Restoration improves 46.86%
+on the matched workload; complete measured time falls 16.47%. All eighteen cases
+improve restoration with identical results. Native checks remain; peak memory and
+result bytes do not materially improve. This benchmark is not directly comparable
+to the earlier 64-probe chunk experiment.
+
+**Next coverage target:** compose all 25 current B6 failures in seven cases and
+probe the changed B7 banks. The earlier 24-failure diagnostic gave 25 additional
+assignments but no contradiction; its complete closures are preserved. Thirteen
+current orders are exhausted and need changed banks or stronger interaction.
+Five other B6 cases retain later candidates. Recognition remains 228/246.
+
+**Largest remaining runtime stage:** source-prefix reconstruction takes 55.17%
+of shared total time. Investigate sharing checked prefixes under exact source,
+guard and context bindings. The open export is 1,689,359 bytes, retaining all old
+histories; provenance/cursor storage sharing remains open. All 2,021 tests pass.
+Resume `experiments/results/cnf-checked-b6-restore/checkpoint.json` and each row's
+`b6_checked_restore_cursor`. Production defaults and unrestricted bounds remain
+unchanged.
+
+## Previous investigation: compose 24 failures; avoid duplicate cold preparation
 
 [Owned checked sessions](prepared-b6-search.md) address repeated preparation:
 100 incremental calls use 18 indexes instead of 100, preserving every result.

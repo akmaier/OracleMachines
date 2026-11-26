@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Share checked cold recovery](research/checked-b6-restore.md): validating a full
+saved result and constructing its session share preparation, reducing restoration
+time 46.86% and complete measured time 16.47%, with identical results. Source
+reconstruction now dominates. No new refutation; 25 failures in seven cases are
+retained for composition. All 2,021 tests pass. Storage and general-SAT bounds
+remain open.
+
+Previous:
+
 [Reuse checked B6 preparation](research/prepared-b6-search.md): prepared sessions
 cut complete incremental-search time 44.32% versus repeated chunk calls, with
 identical results. A single uninterrupted pass remains 2.61% faster; peak memory

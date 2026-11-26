@@ -18,6 +18,19 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Checked B6 cold handoff](checked-b6-restore.md) validates a full portable result
+once and uses its checked bank and schedule to initialize the owned session.
+Source, guards, prior layers, closure, binding, failure proofs and program/cursor
+agreement are still checked. Restoration time falls from 0.28143 to 0.14956 seconds;
+complete measured time falls from 0.79580 to 0.66470. Results and advancement work
+are identical. Source-prefix reconstruction is now 55.17% of total time.
+
+This removes one repeated preparation/replay, not the dependence on provenance
+size. Whole-input/result copying, per-probe initialization and final semantic
+checking remain charged. Peak RSS and standalone bytes do not materially improve;
+the full open export grows to 1,689,359 bytes by preserving earlier histories.
+No new native refutation or lifetime-space/unrestricted-SAT bound follows.
+
 [Owned B6 sessions](prepared-b6-search.md) pay source/provenance preparation once
 per fixed-input session and reuse one occurrence index across chunks. On eighteen
 cases, 100 calls build 18 indexes instead of 100, with identical probes and

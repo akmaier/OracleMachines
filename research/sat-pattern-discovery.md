@@ -5,7 +5,23 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: cheaper incremental search and a larger failure frontier
+## Latest evidence: cheaper cold recovery; changed banks are the next frontier
+
+[Checked cold handoff](checked-b6-restore.md) removes duplicated preparation
+between full-result validation and session construction. Complete measured time
+falls 16.47%, with the same results and checking contract. No new refutation is
+found: recognition stays 228/246 with 18 open. Short continuation retains 25 B6
+failures across seven cases. Compose the full set and probe changed B7 banks next.
+
+The preserved 24-failure diagnostic adds 25 assignments in seven cases but yields
+no contradiction. Thirteen current literal orders are now exhausted; if feedback
+leaves them unchanged, stronger interactions are required. Source reconstruction
+is 55.17% of remaining measured time. All 2,021 tests pass. Resume
+`experiments/results/cnf-checked-b6-restore/checkpoint.json`, using the new
+`b6_checked_restore_cursor`. Older histories remain intact. Unrestricted coverage
+and lifetime storage remain open.
+
+## Previous evidence: cheaper incremental search and a larger failure frontier
 
 [Prepared B6 sessions](prepared-b6-search.md) make the same incremental search
 44.32% cheaper in complete measured time by avoiding repeated preparation.

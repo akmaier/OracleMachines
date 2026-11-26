@@ -4,7 +4,18 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, owned B6 preparation):
+Latest expansion checkpoint (26 November, checked cold B6 recovery):
+[Share validated preparation](checked-b6-restore.md). Full-result checking and
+session construction now reuse the same checked state, reducing complete measured
+time 16.47% with identical continuations. No new refutation; 25 failures in seven
+cases remain for composition and fresh B7 probing. Thirteen current orders are
+exhausted. All 2,021 tests, prior source/artifact ledgers and 64 proof blocks pass.
+No native records or production defaults change. Resume
+`experiments/results/cnf-checked-b6-restore/checkpoint.json`, using appended
+`b6_checked_restore_cursor`. Source-prefix reconstruction is the next major cost;
+retain the unsuccessful 24-failure composition diagnostic.
+
+Previous expansion checkpoint (26 November, owned B6 preparation):
 [Reuse validated state across chunks](prepared-b6-search.md). Complete measured
 incremental-search time falls 44.32% against ordinary chunk calls; single-pass
 search remains faster, with no cold or peak-memory gain. Exact continuation adds

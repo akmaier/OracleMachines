@@ -13021,6 +13021,34 @@ interruption, cold recovery and small truth tables. Session reuse does not bound
 future banks, proof contexts or lifetime memory, and yields no unrestricted-SAT
 claim. The checkpoint is \texttt{experiments/results/cnf-prepared-b6-search/}.
 
+\subsection{Sharing checked preparation in cold B6 recovery}
+A full-result restore operation checks the original source, guards, prior banks,
+closure, exact binding, schedule, failure proofs and agreement between the
+portable program and cursor. Only then does it initialize the existing owned
+session from that checked state. This removes the old workflow's second
+preparation and schedule replay. No external verified flag or prepared token is
+accepted; input and result copies are charged, and native proof checks remain.
+
+On eighteen exposed cases, two opposite-order repetitions compare separate
+validation/construction with the shared operation. Restoration takes $0.14956$
+seconds versus $0.28143$, and complete census time $0.66470$ versus $0.79580$,
+a $16.47\%$ reduction. The census includes source-prefix reconstruction, full
+checking/restoration, one eight-probe continuation, final serialization/reload
+and independent output verification. Startup/input loading, prior acquisition,
+diagnostics and final audit are additional. Both arms perform the same 56
+assumptions and 1,525 occurrence visits and emit identical results. Restoration
+improves on all cases; peak resident memory and standalone result bytes do not
+materially improve. Source-prefix reconstruction is now $55.17\%$ of total time.
+
+The 24 parent failures compose to 25 assignments in seven diagnostic B7
+closures but no contradiction. Short continuation of the original B6 banks adds
+one failure, leaving 25 in seven cases and thirteen exhausted literal orders.
+Recognition stays $228/246$ with eighteen open. The full open export grows to
+1,689,359 bytes because earlier histories remain. All 2,021 tests pass. The
+saving concerns duplicate checking of a complete result before recovery; it
+neither bounds provenance growth nor solves unrestricted SAT. The checkpoint
+is \texttt{experiments/results/cnf-checked-b6-restore/}.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -12,7 +12,28 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: generic saturation closes the changed case
+## Current investigation: remove irrelevant trace work before native expansion
+
+[Causal slicing of saturation traces](sliced-saturation.md) reduces `(37,39)`'s
+native graph **5,587 → 76 records**, complete time **52.719 → 0.797 s**, raw bytes
+**77.50 → 1.56 MB**, and peak RSS **967.25 → 82.02 MB**. Every retained slice is
+derived from checked provenance, and both source-only readers pass. Coverage stays
+**234/246, twelve open**; this improves construction of an already certified root.
+
+The large gain partly avoids shortcut-budget exhaustion. Raising the old budget
+eightfold gives 146 records and 1.515 s; slicing with the original budget remains
+47.36% faster. Fresh solving is still 3.02% faster than slicing on this case.
+On `(67,63)`, slicing saves 9.18% raw bytes but is 1.11% slower than full expansion;
+fresh solving remains cheaper. All controls and regressions are retained.
+
+**Next priority:** return to shared-variable interactions or bounded conditioning
+on the twelve unchanged fixed points. Remaining native costs are construction,
+cold checking and repeated whole-residual payloads; a smaller record count alone
+does not establish a space or runtime win. Resume
+`experiments/results/cnf-sliced-saturation/checkpoint.json`; its remaining binding
+is unchanged. All 2,183 tests pass; no unrestricted-SAT guarantee follows.
+
+## Previous investigation: generic saturation closes the changed case
 
 [Checked saturation](probe-saturation.md) reuses one round schema until no new
 unit is found. Two productive rounds expose fourteen failed assumptions and

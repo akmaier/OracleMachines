@@ -1,0 +1,298 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/__main__.py", line 18, in <module>
+    main(module=None)
+    ~~~~^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/main.py", line 103, in __init__
+    self.parseArgs(argv)
+    ~~~~~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/main.py", line 142, in parseArgs
+    self.createTests()
+    ~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/main.py", line 153, in createTests
+    self.test = self.testLoader.loadTestsFromNames(self.testNames,
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+                                                   self.module)
+                                                   ^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/loader.py", line 207, in loadTestsFromNames
+    suites = [self.loadTestsFromName(name, module) for name in names]
+              ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_sliced_saturation.py", line 6, in <module>
+    from experiments import compare_cnf_sliced_saturation as s
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_sliced_saturation.py", line 7, in <module>
+    from experiments import compare_cnf_probe_saturation as parent,cnf_sliced_saturation_native as sliced
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_probe_saturation.py", line 8, in <module>
+    from experiments import compare_cnf_b13_native_feedback as parent
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_b13_native_feedback.py", line 8, in <module>
+    from experiments import compare_cnf_b13_strengthened_histories as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_b13_strengthened_histories.py", line 8, in <module>
+    from experiments import compare_cnf_b12_cold_batch as prior,compare_cnf_b13_probe_cursor as frozen
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_b12_cold_batch.py", line 8, in <module>
+    from experiments import compare_cnf_b12_continuation_batch as prior, cnf_b12_cold_batch as candidate
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_b12_continuation_batch.py", line 8, in <module>
+    from experiments import compare_cnf_b13_probe_cursor as prior, cnf_b12_continuation_batch as candidate
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_b13_probe_cursor.py", line 7, in <module>
+    from experiments import compare_cnf_b12_progress_order as prior, cnf_b13_probe_cursor as candidate
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_b12_progress_order.py", line 7, in <module>
+    from experiments import compare_cnf_b11_probe_cursor as prior, cnf_b12_progress_order as candidate
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_b11_probe_cursor.py", line 7, in <module>
+    from experiments import compare_cnf_shared_b10_preparation as prior, cnf_b11_probe_cursor as candidate
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_shared_b10_preparation.py", line 7, in <module>
+    from experiments import compare_cnf_b10_probe_cursor as prior,cnf_shared_b10_preparation as candidate
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_b10_probe_cursor.py", line 7, in <module>
+    from experiments import compare_cnf_b9_probe_cursor as prior, cnf_b10_probe_cursor as candidate, cnf_b10_probe_feedback as feedback
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_b9_probe_cursor.py", line 7, in <module>
+    from experiments import compare_cnf_prepared_prefix_replay as prior, cnf_b9_probe_cursor as candidate
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_prepared_prefix_replay.py", line 7, in <module>
+    from experiments import compare_cnf_shared_joint_preparation as prior,cnf_prepared_prefix_replay as candidate
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_shared_joint_preparation.py", line 7, in <module>
+    from experiments import compare_cnf_joint_probe_cursor as prior,cnf_shared_joint_preparation as candidate
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_joint_probe_cursor.py", line 7, in <module>
+    from experiments import compare_cnf_joint_cursor_feedback as prior,cnf_joint_probe_cursor as candidate,cnf_joint_probe_feedback as feedback
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_joint_cursor_feedback.py", line 7, in <module>
+    from experiments import compare_cnf_fused_b7_expansion as prior,compare_cnf_b5_cursor_feedback as legacy,cnf_joint_cursor_feedback as candidate
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_fused_b7_expansion.py", line 7, in <module>
+    from experiments import compare_cnf_b7_probe_cursor as prior,cnf_fused_b7_expansion as candidate
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_b7_probe_cursor.py", line 7, in <module>
+    from experiments import compare_cnf_checked_b6_restore as prior,cnf_b7_probe_cursor as candidate
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_checked_b6_restore.py", line 7, in <module>
+    from experiments import compare_cnf_prepared_b6_search as prior,cnf_checked_b6_restore as candidate
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_prepared_b6_search.py", line 7, in <module>
+    from experiments import compare_cnf_b6_probe_cursor as prior,cnf_prepared_b6_search as candidate
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_b6_probe_cursor.py", line 7, in <module>
+    from experiments import compare_cnf_b5_cursor_feedback as prior,cnf_b6_probe_cursor as candidate,cnf_b6_probe_native as compiler
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_b5_cursor_feedback.py", line 7, in <module>
+    from experiments import compare_cnf_b5_probe_cursor as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_b5_probe_cursor.py", line 7, in <module>
+    from experiments import compare_cnf_b4_cursor_feedback as prior,cnf_b5_probe_cursor as candidate,cnf_b5_probe_native as compiler
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_b4_cursor_feedback.py", line 7, in <module>
+    from experiments import compare_cnf_b4_probe_cursor as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_b4_probe_cursor.py", line 7, in <module>
+    from experiments import compare_cnf_cursor_feedback as prior,cnf_b4_probe_cursor as candidate
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_cursor_feedback.py", line 7, in <module>
+    from experiments import compare_cnf_probe_cursor as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_probe_cursor.py", line 7, in <module>
+    from experiments import compare_cnf_third_feedback as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_third_feedback.py", line 7, in <module>
+    from experiments import compare_cnf_changed_closure_probes as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_changed_closure_probes.py", line 7, in <module>
+    from experiments import compare_cnf_layered_feedback as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_layered_feedback.py", line 7, in <module>
+    from experiments import compare_cnf_closure_probes as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_closure_probes.py", line 7, in <module>
+    from experiments import compare_cnf_probe_feedback as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_probe_feedback.py", line 7, in <module>
+    from experiments import compare_cnf_complement_probes as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_complement_probes.py", line 7, in <module>
+    from experiments import compare_cnf_wide_guard_probes as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_wide_guard_probes.py", line 7, in <module>
+    from experiments import compare_cnf_shortening_budget_frontier as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_shortening_budget_frontier.py", line 7, in <module>
+    from experiments import compare_cnf_shortening_prepared_source as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_shortening_prepared_source.py", line 7, in <module>
+    from experiments import compare_cnf_shortening_filters as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_shortening_filters.py", line 7, in <module>
+    from experiments import compare_cnf_shortening_priority as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_shortening_priority.py", line 7, in <module>
+    from experiments import compare_cnf_reach_reuse as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_reach_reuse.py", line 7, in <module>
+    from experiments import compare_cnf_shortening_context as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_shortening_context.py", line 7, in <module>
+    from experiments import compare_cnf_guard_shortening as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_guard_shortening.py", line 7, in <module>
+    from experiments import compare_cnf_cover_support as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_cover_support.py", line 7, in <module>
+    from experiments import compare_cnf_guard_covers as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_guard_covers.py", line 8, in <module>
+    from experiments import compare_cnf_guard_context as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_guard_context.py", line 6, in <module>
+    from experiments import compare_cnf_guard_support as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_guard_support.py", line 6, in <module>
+    from experiments import compare_cnf_guard_witness as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_guard_witness.py", line 6, in <module>
+    from experiments import compare_cnf_guard_closure as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_guard_closure.py", line 11, in <module>
+    from experiments import compare_cnf_guard_certificates as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_guard_certificates.py", line 6, in <module>
+    from experiments import study_cnf_guard_probes as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/study_cnf_guard_probes.py", line 7, in <module>
+    from experiments import study_cnf_stopped_origins as old
+  File "/Users/maier/Documents/code/OracleMachines/experiments/study_cnf_stopped_origins.py", line 9, in <module>
+    from experiments import compare_cnf_probe_binary_lazy as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_probe_binary_lazy.py", line 7, in <module>
+    from experiments import compare_cnf_affine_probe_safe as harness
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_affine_probe_safe.py", line 8, in <module>
+    from experiments import compare_cnf_larger_mixtures as larger
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_larger_mixtures.py", line 8, in <module>
+    from experiments import compare_cnf_ordered_normalization as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_ordered_normalization.py", line 8, in <module>
+    from experiments import compare_cnf_proof_normalization_reuse as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_proof_normalization_reuse.py", line 8, in <module>
+    from experiments import compare_cnf_publication_batches as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_publication_batches.py", line 8, in <module>
+    from experiments import compare_cnf_canonical_verify as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_canonical_verify.py", line 8, in <module>
+    from experiments import compare_cnf_query_canonical_cache as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_query_canonical_cache.py", line 8, in <module>
+    from experiments import compare_cnf_known_quotient as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_known_quotient.py", line 8, in <module>
+    from experiments import compare_cnf_multiblock_equivalence as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_multiblock_equivalence.py", line 8, in <module>
+    from experiments import compare_cnf_binary_core_cache as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_binary_core_cache.py", line 8, in <module>
+    from experiments import compare_cnf_compact_equivalence as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_compact_equivalence.py", line 8, in <module>
+    from experiments import compare_cnf_binary_equivalence as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_binary_equivalence.py", line 8, in <module>
+    from experiments import compare_cnf_targeted_backbone as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_targeted_backbone.py", line 7, in <module>
+    from experiments import compare_cnf_binary_backbone as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_binary_backbone.py", line 7, in <module>
+    from experiments import compare_cnf_binary_clause_cover as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_binary_clause_cover.py", line 7, in <module>
+    from experiments import compare_cnf_binary_subset as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_binary_subset.py", line 7, in <module>
+    from experiments import compare_cnf_affine_session as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_affine_session.py", line 8, in <module>
+    from experiments import compare_cnf_affine_completion as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_affine_completion.py", line 8, in <module>
+    from experiments import compare_cnf_cover_probe as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_cover_probe.py", line 8, in <module>
+    from experiments import compare_cnf_negative_cover as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_negative_cover.py", line 8, in <module>
+    from experiments import compare_cnf_mixed_completion as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_mixed_completion.py", line 8, in <module>
+    from experiments import compare_cnf_inline_completion as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_inline_completion.py", line 8, in <module>
+    from experiments import compare_cnf_uniform_premise as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_uniform_premise.py", line 8, in <module>
+    from experiments import compare_cnf_positive_premise as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_positive_premise.py", line 8, in <module>
+    from experiments import compare_cnf_binary_probe as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_binary_probe.py", line 8, in <module>
+    from experiments import compare_cnf_cross_family as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_cross_family.py", line 8, in <module>
+    from experiments import compare_cnf_positive_child as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_positive_child.py", line 8, in <module>
+    from experiments import compare_cnf_local_guard as old
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_local_guard.py", line 8, in <module>
+    from experiments import compare_cnf_assumption_guard as old
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_assumption_guard.py", line 8, in <module>
+    from experiments import compare_cnf_conditioned_core as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_conditioned_core.py", line 8, in <module>
+    from experiments import compare_cnf_partition_screen as history
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_partition_screen.py", line 8, in <module>
+    from experiments import compare_cnf_premise_guard as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_premise_guard.py", line 8, in <module>
+    from experiments import compare_cnf_guard_chain as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_guard_chain.py", line 8, in <module>
+    from experiments import compare_cnf_terminal_guard as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_terminal_guard.py", line 7, in <module>
+    from experiments import compare_cnf_alternative_guard as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_alternative_guard.py", line 8, in <module>
+    from experiments import compare_cnf_incremental_causal as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_incremental_causal.py", line 9, in <module>
+    from experiments import compare_cnf_proof_choice as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_proof_choice.py", line 9, in <module>
+    from experiments import compare_cnf_retained_causal as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_retained_causal.py", line 9, in <module>
+    from experiments import compare_cnf_causal_support as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_causal_support.py", line 9, in <module>
+    from experiments import compare_cnf_witness_signatures as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_witness_signatures.py", line 9, in <module>
+    from experiments import compare_cnf_active_support as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_active_support.py", line 9, in <module>
+    from experiments import compare_cnf_incremental_support as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_incremental_support.py", line 8, in <module>
+    from experiments import compare_cnf_deferred_support as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_deferred_support.py", line 8, in <module>
+    from experiments import compare_cnf_cofactor_support as eager
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_cofactor_support.py", line 8, in <module>
+    from experiments import compare_cnf_incremental_archive as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_incremental_archive.py", line 8, in <module>
+    from experiments import compare_cnf_unsat_support as prior
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_unsat_support.py", line 9, in <module>
+    from experiments import compare_cnf_model_rotation as old
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_model_rotation.py", line 7, in <module>
+    from experiments import compare_cnf_clause_witness_reuse as previous
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_clause_witness_reuse.py", line 8, in <module>
+    from experiments import compare_cnf_bootstrap as base
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_bootstrap.py", line 17, in <module>
+    from experiments import cnf_bootstrap_conditioning as split
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_bootstrap_conditioning.py", line 14, in <module>
+    from experiments.cnf_selected_routes import SelectedRoutes
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_selected_routes.py", line 18, in <module>
+    from experiments.cnf_trace_reuse import verify_rewrite, record_key as rewrite_key
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_trace_reuse.py", line 13, in <module>
+    from experiments.cnf_probe_exhaustion import check_clear_attempts
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_exhaustion.py", line 15, in <module>
+    from experiments.continue_cnf_probes import restore_report
+  File "/Users/maier/Documents/code/OracleMachines/experiments/continue_cnf_probes.py", line 25, in <module>
+    from experiments.compare_cnf_probe_continuation import (
+        TABLES, PREVIOUS, restore, apply_delta, export_delta, digests, sha, sha_key,
+        unpack, compressed, audit, WithoutGrowth, endpoints)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_probe_continuation.py", line 24, in <module>
+    from experiments.compare_cnf_probe_window import (
+    ...<2 lines>...
+        table_digest, WithoutGrowth)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_probe_window.py", line 24, in <module>
+    from experiments.compare_cnf_growth_escape import (
+        TABLES as OLD_TABLES,restore_latest,apply_delta as apply_growth_delta,sha,sha_key,unpack)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_growth_escape.py", line 21, in <module>
+    from experiments.compare_cnf_clause_mask import table_digest
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_clause_mask.py", line 25, in <module>
+    from experiments.compare_cnf_binary_paths import fresh_cases, root_lift
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_binary_paths.py", line 21, in <module>
+    import experiments.compare_cnf_polarity_horn as traversal
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_polarity_horn.py", line 20, in <module>
+    from experiments.compare_cnf_implied_subsumption import root_lift as old_root_lift
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_implied_subsumption.py", line 18, in <module>
+    from experiments.compare_cnf_signed_subsumption import MODES as PREVIOUS_MODES
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_signed_subsumption.py", line 18, in <module>
+    from experiments.compare_cnf_learning_activity import MODES as PREVIOUS_MODES
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_learning_activity.py", line 27, in <module>
+    from experiments.compare_cnf_learning_core_order import MODES as PREVIOUS_MODES
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_learning_core_order.py", line 27, in <module>
+    from experiments.compare_cnf_learning_core import MODES as PREVIOUS_MODES
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_learning_core.py", line 27, in <module>
+    from experiments.compare_cnf_learning_fixed_order import MODES as PREVIOUS_MODES
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_learning_fixed_order.py", line 26, in <module>
+    from experiments.compare_cnf_learning_selection import MODES as PREVIOUS_MODES
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_learning_selection.py", line 25, in <module>
+    from experiments.compare_cnf_probe_closure_reuse import MODES as OLD_MODES
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_probe_closure_reuse.py", line 23, in <module>
+    from experiments.compare_cnf_probe_learning import MODES as PREVIOUS_MODES
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_probe_learning.py", line 22, in <module>
+    from experiments.compare_cnf_probe_equivalence import MODES as PREVIOUS_MODES
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_probe_equivalence.py", line 21, in <module>
+    from experiments.compare_cnf_common_consequence import MODES as PREVIOUS_MODES
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_common_consequence.py", line 20, in <module>
+    from experiments.compare_cnf_failed_literal import MODES as PREVIOUS_MODES
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_failed_literal.py", line 19, in <module>
+    from experiments.compare_cnf_fused_conditioning import MODES as PREVIOUS_MODES, root_lift as previous_root_lift
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_fused_conditioning.py", line 21, in <module>
+    from experiments.compare_cnf_conditioning import MODES as CONDITIONING_MODES
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_conditioning.py", line 20, in <module>
+    from experiments.compare_cnf_simplification import new_cases as simplification_cases, MODES as SIMPLIFICATION_MODES
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_simplification.py", line 19, in <module>
+    from experiments.compare_cnf_affine_projection import new_cases as projection_cases, MODES as PROJECTION_MODES
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_affine_projection.py", line 18, in <module>
+    from experiments.compare_cnf_affine_patterns import new_cases as affine_cases, MODES as AFFINE_MODES
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_affine_patterns.py", line 19, in <module>
+    from experiments.compare_cnf_pattern_inventory import scenarios, node_summary, audit, memory_profile, MODES as OLD_MODES
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_pattern_inventory.py", line 21, in <module>
+    from experiments.compare_cnf_matching import domain_cnf
+  File "<frozen importlib._bootstrap>", line 1371, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1333, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1267, in _find_spec
+  File "<frozen importlib._bootstrap_external>", line 1292, in find_spec
+  File "<frozen importlib._bootstrap_external>", line 1261, in _get_spec
+  File "<frozen importlib._bootstrap_external>", line 1132, in __iter__
+  File "<frozen importlib._bootstrap_external>", line 1121, in _recalculate
+  File "<frozen importlib._bootstrap_external>", line 1266, in _get_spec
+  File "<frozen importlib._bootstrap_external>", line 1384, in find_spec
+  File "<frozen importlib._bootstrap_external>", line 166, in _path_isfile
+RecursionError: maximum recursion depth exceeded

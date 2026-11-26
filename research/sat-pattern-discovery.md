@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: one generic rule reaches a checked propagation fixed point
+## Latest evidence: dependency closure makes native expansion cheaper
+
+[Causal trace slicing](sliced-saturation.md) removes irrelevant unit steps before
+reconstructing their source contexts. It reduces the large native graph from
+5,587 to 76 records at the same shortcut budget, with both cold readers accepting
+the result. Coverage remains **234/246, twelve open**. Exact seed/history checks,
+bank-specific slice memoization and source-only recomposition remain mandatory.
+
+The 98.49% runtime reduction is relative to full expansion that exhausts its
+shortcut budget; an eightfold-budget control reduces that gap, and fresh solving
+is still cheaper. The earlier case has a small runtime regression despite smaller
+records. These controls prevent a construction gain from becoming a general SAT
+claim. Next characterize shared-variable interactions and bounded conditioning
+in the twelve exhausted fixed points. Resume
+`experiments/results/cnf-sliced-saturation/checkpoint.json`, retaining the unchanged
+frontier and all preceding certificates.
+
+## Previous evidence: one generic rule reaches a checked propagation fixed point
 
 [Checked failed-literal saturation](probe-saturation.md) closes `(37,39)` after
 two productive rounds and fourteen new failed assumptions. Both source-only

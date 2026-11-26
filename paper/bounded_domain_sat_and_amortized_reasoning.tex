@@ -98,7 +98,7 @@ fully recorded; the collaborator name is not a claim that one fixed model made
 every contribution.  Source, proofs and retained evidence are available at
 \url{https://github.com/akmaier/OracleMachines}.  The first alphaXiv publication covers repository checkpoint \texttt{918fc95a}.
 This working revision additionally records checked B13 strengthening and generic
-failed-literal saturation, their source-only certificates and measured reconstruction costs; published-version
+failed-literal saturation, their source-only certificates, and causal slicing of native reconstruction; published-version
 metadata and exact PDFs are retained separately in the repository.  Machine checks support the stated artifacts and
 hypotheses, not a proof of unrestricted $\Pclass=\NPclass$.
 
@@ -14024,6 +14024,104 @@ the next concrete cost target.  Stronger shared-variable interactions or bounded
 conditioning/decomposition are needed for the twelve fixed points.  Repeating
 their exhausted pass adds no information.  The generic progress bound establishes
 neither an efficient arbitrary-CNF partition nor a uniform polynomial SAT solver.
+
+\subsection{Causal trace slicing reduces redundant native reconstruction}
+
+The preceding saturation certificate exposes a concrete structural redundancy.
+A unit trace can record many forced assignments that do not influence its final
+conflict.  Expanding all such steps into native source splits creates additional
+conditioned contexts and recursively unfolds their earlier-bank reasons.  The
+new compiler applies the existing backward causal slicer before each bank trace
+is expanded.  All source provenance is still checked first; native proof rules,
+direct unit shortcuts and both independent cold readers remain unchanged.
+
+Starting from variables in the conflict clause, scan the checked unit trace
+backwards.  Retain a step only if its variable is needed, then replace that
+variable by the other variables of its reason clause.  The remaining initial
+dependencies must lie in the failed assumption, or be empty for an unconditional
+trace.  Keep retained steps in their original order with unchanged clause IDs.
+Inductively, each retained reason is still unit under the initial assumption
+and earlier retained assignments, and the final retained assignment falsifies
+the same conflict clause.  This establishes a dependency-closed subsequence,
+not a minimum proof or source core.  Source-only reconstruction then uses the
+same strictly decreasing bank dependencies as before.
+
+A memo private to one compilation stores slices under keys containing bank
+stage, assumption, complete ordered trace and conflict clause.  Different banks
+with the same clause indices cannot share a key.  A slice justified under one
+failed assumption may be reused under stronger contexts that contain that
+assumption; every native residual and published node is still checked separately.
+A new call builds a new memo, and warm hits revalidate all incoming histories.
+Slicing visits each trace step once and the reason literals of retained steps.
+Memo-key construction still visits the entire offered trace on a hit.  Retained
+keys and slices consume space until the call ends.  Neither these local bounds
+nor memoization bound the number of native conditioning contexts.
+
+On $(37,39)$, the full compiler builds $12{,}251$ prepared frames and $5{,}516$
+native splits.  It attempts $93$ direct unit closures, then skips $6{,}671$
+further candidates after its allowance is exhausted.  Slicing examines $993$
+unique trace steps, retains $467$, and obtains $17$ memo hits across $37$
+expansions; key construction visits $1{,}664$ steps.  It builds $81$ prepared
+frames and $39$ splits, with $35$ direct closures and no budget exhaustion.
+The native graph shrinks from $5{,}587$ records to $76$ with the same shortcut
+allowance.  Both source-only cold readers accept it.  The earlier $(67,63)$
+case also remains certified.  Coverage is unchanged at $234/246$, with twelve
+unresolved snapshots.
+
+This large reduction interacts with the shortcut budget.  An ablation increases
+the full compiler's work allowance eightfold, from $262{,}144$ to $2{,}097{,}152$,
+and reduces the main case to $146$ records without slicing.  It would therefore
+be misleading to attribute the entire reduction to pruning alone.  Slicing
+still reaches fewer records while retaining the original allowance.  Trace limit
+$256$ and all other native construction rules are shared.  The older-case baseline
+uses the generic zero-round saturation trace and can differ from the earlier
+B13-specific compiler's graph.
+
+On $(37,39)$, complete times for full, sliced, full with the larger budget,
+and fresh are $52.71934$, $0.79748$, $1.51482$ and $0.77409$ seconds.  Their
+record counts are $5{,}587$, $76$, $146$ and $88$, with $77{,}497{,}609$,
+$1{,}560{,}875$, $2{,}826{,}494$ and $1{,}543{,}539$ raw record bytes.
+Slicing reduces full-expansion time by $98.49\%$ and raw bytes by $97.99\%$
+at the same allowance.  Against the eightfold-budget ablation it saves $47.36\%$
+of time and $44.78\%$ of raw bytes.  Against fresh solving, however, it costs
+$3.02\%$ more time and $1.12\%$ more raw bytes.  Its construction, warm call,
+cold readers and persistence take $0.31849$, $0.03704$, $0.32378$ and $0.11460$
+seconds.  Full-expansion values are $22.34315$, $0.04141$, $23.02682$ and
+$6.93664$ seconds.  Cold checking and construction still dominate sliced cost.
+
+Peak RSS in the same order is $967{,}245{,}824$, $82{,}018{,}304$,
+$97{,}435{,}648$ and $80{,}576{,}512$ bytes.  Compressed archives occupy
+$8{,}524{,}365$, $153{,}770$, $345{,}779$ and $189{,}777$ bytes.  Slicing
+reduces full-expansion peak RSS by $91.52\%$.  Its smaller compressed archive
+than fresh solving coexists with slightly larger raw records; node counts alone
+do not describe the space cost of whole-residual keys and payloads.
+
+On $(67,63)$, the same four complete means are $0.84336$, $0.85274$, $0.84551$
+and $0.62960$ seconds.  Record counts are $118$, $107$, $118$ and $95$; raw
+bytes are $1{,}674{,}855$, $1{,}521{,}056$, $1{,}674{,}855$ and $1{,}256{,}004$.
+Slicing saves $9.18\%$ of raw bytes but costs $1.11\%$ more time than full
+expansion.  It is $35.44\%$ slower and stores $21.10\%$ more raw bytes than
+fresh solving.  Peak RSS is $81{,}969{,}152$, $79{,}872{,}000$, $81{,}969{,}152$
+and $72{,}990{,}720$ bytes.  The small runtime regression is retained; four
+repetitions do not establish significance for small differences.  Fresh solving
+has the lowest measured complete time on both snapshots.  There is no change to
+production defaults and no claim of general dominance.
+
+Four balanced cyclic orders place each mode in every position once, in separate
+processes on each of the two already certified snapshots.  Complete times include
+original-bank checking and slicing during construction, database handling, warm
+reuse, both cold readers and compressed persistence.  Historical acquisition,
+discovery, input loading and final lineage audits remain additional.  The fresh
+solver uses its $256$-node limit; compiler warm calls recheck histories, while fresh
+warm calls invoke the solver again.  All modes and pilot evidence are retained.
+
+The remaining frontier and all earlier authority tables and proof blocks are
+unchanged.  The optimization reduces a measured expansion cost; it establishes
+neither a new tractable SAT class nor a uniform native-size bound.  Return next
+to stronger shared-variable interactions or bounded conditioning/decomposition
+on the twelve exhausted fixed points.  Remaining conversion costs include repeated
+whole-residual payloads and cold checking, so future support selection or shared
+representation must retain exact recomposition and a fresh-solve baseline.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}

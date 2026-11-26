@@ -4,7 +4,17 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, generic checked saturation):
+Latest expansion checkpoint (26 November, causal saturation slicing):
+[Backward dependency slicing](sliced-saturation.md) cuts `(37,39)`'s native graph
+5,587 → 76 records and complete reconstruction 52.719 → 0.797 s, with the same
+shortcut allowance. Both cold readers pass. An eightfold-budget control reaches
+146 records; fresh solving remains cheaper. On the earlier case, raw bytes fall
+9.18% but runtime increases 1.11%. Coverage and twelve frontier rows are unchanged
+at **234/246**. All 2,183 full tests and 22 focused tests pass. Resume
+`experiments/results/cnf-sliced-saturation/checkpoint.json`. Next return to stronger
+interactions/decomposition on the remaining fixed points; preserve all regressions.
+
+Previous expansion checkpoint (26 November, generic checked saturation):
 [Reusable failed-literal rounds](probe-saturation.md) close `(37,39)` with fourteen
 new failed assumptions and source-only certification: **234/246, twelve open**.
 The generic schema supports interrupted rounds, exact checked reuse and a bound

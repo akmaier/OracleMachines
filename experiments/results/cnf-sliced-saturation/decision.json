@@ -1,0 +1,122 @@
+{
+  "analysis": {
+    "path": "experiments/results/cnf-sliced-saturation/analysis.json",
+    "sha256": "8d039df628ca9f31a02172891f69b68d04d296ff593e92add2d9cc9ee0cc8a2f"
+  },
+  "checkpoint": "causal-saturation-slicing",
+  "controls": [
+    "Same 262144 shortcut allowance for full and sliced; full_large spends up to 2097152.",
+    "Full expansion exhausts the allowance on (37,39), while slicing and the larger-budget ablation do not. The 98.49% total reduction includes avoiding that exhaustion.",
+    "Sliced is 3.02% slower and 1.12% larger in raw bytes than fresh on (37,39). On (67,63) it saves 9.18% raw bytes but is 1.11% slower than full; fresh is cheaper on both."
+  ],
+  "correction": "The first focused run exceeded Python import nesting through frozen historical modules. Preloading the existing base resolves it; original source and failure log remain and all timings followed the fix.",
+  "date": "2026-11-26",
+  "docs": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "dba548d7dd78f08a25ee0a99b0ed0905ee5668a7753fdb79b2fd5e4a0511c3fb",
+    "research/implementation-gaps.md": "2165d1b56516ec754158ea854b950684898fb6498b28d6756bfeb9333b5c88b6",
+    "research/sat-pattern-discovery.md": "64e95ce7dd132e5cbba98f55c27ef2a1edfd38281a9f970b00007a71f1e1b8c0",
+    "research/sliced-saturation.md": "0f4d9099c8a2959fcdd59be58bc4b01bab83947059f3cea352658cb5b4025e16",
+    "research/structural-reuse-priorities.md": "aba54aeda3dca942c3e26bae40bce72c01360deedb3e9a26921a1926ae598b5f"
+  },
+  "measurements": {
+    "cases": 2,
+    "modes": [
+      "full",
+      "sliced",
+      "full_large",
+      "fresh"
+    ],
+    "native_records": {
+      "cascade": {
+        "fresh": 88,
+        "full": 5587,
+        "full_large": 146,
+        "sliced": 76
+      },
+      "prior": {
+        "fresh": 95,
+        "full": 118,
+        "full_large": 118,
+        "sliced": 107
+      }
+    },
+    "orders": 4,
+    "peak_rss_bytes": {
+      "cascade": {
+        "fresh": 80576512,
+        "full": 967245824,
+        "full_large": 97435648,
+        "sliced": 82018304
+      },
+      "prior": {
+        "fresh": 72990720,
+        "full": 81969152,
+        "full_large": 81969152,
+        "sliced": 79872000
+      }
+    },
+    "sliced_over_baseline": {
+      "cascade": {
+        "fresh": {
+          "cold_seconds": 0.9926778440104367,
+          "complete_seconds": 1.0302132028845157,
+          "persistence_seconds": 0.8855380005876402,
+          "record_bytes": 1.0112313326712186,
+          "solve_seconds": 1.026799265179485,
+          "warm_seconds": 13.293103085194474
+        },
+        "full": {
+          "cold_seconds": 0.014061147674826318,
+          "complete_seconds": 0.015126822093005983,
+          "persistence_seconds": 0.016520841180834682,
+          "record_bytes": 0.02014094396125176,
+          "solve_seconds": 0.014254504295188663,
+          "warm_seconds": 0.8944592111704711
+        },
+        "full_large": {
+          "cold_seconds": 0.5320849388004323,
+          "complete_seconds": 0.5264489808927495,
+          "persistence_seconds": 0.4395669137931531,
+          "record_bytes": 0.552230077261795,
+          "solve_seconds": 0.5289573966732918,
+          "warm_seconds": 0.9706528517672876
+        }
+      },
+      "prior": {
+        "fresh": {
+          "cold_seconds": 1.4035019967114801,
+          "complete_seconds": 1.3544069252373088,
+          "persistence_seconds": 1.3271722465652889,
+          "record_bytes": 1.2110279903567187,
+          "solve_seconds": 1.2312489990171143,
+          "warm_seconds": 12.37063472775849
+        },
+        "full": {
+          "cold_seconds": 1.064583684976421,
+          "complete_seconds": 1.0111133975189983,
+          "persistence_seconds": 0.980715919209045,
+          "record_bytes": 0.9081717521815321,
+          "solve_seconds": 0.9606971714048583,
+          "warm_seconds": 1.012110430227283
+        },
+        "full_large": {
+          "cold_seconds": 1.0620483840958814,
+          "complete_seconds": 1.0085471481178192,
+          "persistence_seconds": 0.9834389650232521,
+          "record_bytes": 0.9081717521815321,
+          "solve_seconds": 0.9562820164346505,
+          "warm_seconds": 1.0178680294936922
+        }
+      }
+    }
+  },
+  "next": "Return to stronger shared-variable interactions or bounded conditioning/decomposition in the twelve exhausted fixed points. Remaining conversion costs include repeated whole-residual payloads and cold checking.",
+  "outcome": "Reduce native reconstruction by dependency-closed unit-trace slicing; coverage stays 234/246 and all twelve frontier rows are unchanged.",
+  "parent": {
+    "path": "experiments/results/cnf-probe-saturation/checkpoint.json",
+    "sha256": "7fece8a4516caed3e8ab651923f4648bec9b9de8011b61f9947de15ae7fbcefd"
+  },
+  "pattern": "Backward dependency closure removes irrelevant unit steps before they generate native source splits. A per-compilation memo reuses slices keyed by stage, failed assumption and exact trace.",
+  "recognition": "Validate all original histories first. Key the private slice memo by exact checked bank stage, assumption, ordered units and conflict; start a new memo per call. Warm hits revalidate incoming provenance.",
+  "resources": "Slicing is linear in visited explicit trace/reason payloads under ordinary set-operation assumptions; memo-key construction is charged on every offered trace. No bound on native context proliferation or arbitrary-SAT solving follows."
+}

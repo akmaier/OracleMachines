@@ -5,7 +5,23 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: cheaper cold recovery; changed banks are the next frontier
+## Latest evidence: B7 failure discovery and the cost of another layer
+
+[B7 probing](b7-probe-cursor.md) composes 25 prior failures into 26 additional
+assignments, then finds 15 failed assumptions in five cases. No new refutation:
+recognition remains 228/246 with 18 open. The old B6 continuation also finds five
+new failures; retain its 30-failure history alongside B7, including three new
+B6-only failures at `(37,40)`. Proofs must retain their original bank bindings.
+
+Exact reuse saves 1,788 probes on eleven unchanged cases, but only 1.05% of
+complete measured time against matched fresh search; two repetitions do not
+establish a robust total speedup. The broader B7 route costs 26.98% more than B6
+continuation. Avoid empty layers and repeated preparation next. Ten B7 orders
+are exhausted; the other eight retain later candidates. No exhaustion is SAT.
+All 2,030 tests pass. Resume `experiments/results/cnf-b7-probe-cursor/checkpoint.json`.
+Native B7 compilation, persistent compression and unrestricted bounds remain open.
+
+## Previous evidence: cheaper cold recovery; changed banks are the next frontier
 
 [Checked cold handoff](checked-b6-restore.md) removes duplicated preparation
 between full-result validation and session construction. Complete measured time

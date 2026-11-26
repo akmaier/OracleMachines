@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Explore B7 failure interactions](research/b7-probe-cursor.md): composition
+forces 26 assignments and probing finds 15 failed assumptions, without a new
+refutation. Exact reuse avoids 1,788 probes, but total measured saving is only
+1.05% versus matched fresh search. Adding the layer is costlier than continuing
+B6; avoiding empty layers and repeated preparation is the next target. All 2,030
+tests pass. Both discovery histories and regressions are retained.
+
+Previous:
+
 [Share checked cold recovery](research/checked-b6-restore.md): validating a full
 saved result and constructing its session share preparation, reducing restoration
 time 46.86% and complete measured time 16.47%, with identical results. Source

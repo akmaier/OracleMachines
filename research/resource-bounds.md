@@ -18,6 +18,18 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[B7 discovery](b7-probe-cursor.md) avoids 1,788 probes by exact bank/closure/trace
+matching. Fresh matched search performs 877,394 clause initializations versus
+217,940 with reuse. Discovery is 6.27% faster, but complete measured time improves
+only 1.05%, with two repetitions. Composition and checking offset most of the
+saving: the broader search is 26.98% slower than continuing B6. Source
+reconstruction, composition and final checking account for 79.92% of total time.
+
+Peak RSS and standalone matched result bytes do not materially improve. Preserving
+both frontiers grows the open export to 2,122,938 bytes. Avoid empty layers and
+share checked preparation before adding more provenance. Recognition remains
+228/246; no native B7 publication or unrestricted/lifetime-space bound is added.
+
 [Checked B6 cold handoff](checked-b6-restore.md) validates a full portable result
 once and uses its checked bank and schedule to initialize the owned session.
 Source, guards, prior layers, closure, binding, failure proofs and program/cursor

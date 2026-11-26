@@ -4,7 +4,18 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, checked cold B6 recovery):
+Latest expansion checkpoint (26 November, B7 discovery and exact history reuse):
+[B7 failure frontiers](b7-probe-cursor.md). Composition forces 26 new assignments;
+B7 probing retains 15 failures across five cases, without a new refutation.
+Reuse avoids 1,788 probes but improves matched complete time only 1.05%; adding
+the layer costs 26.98% more than continuing B6. Preserve the 30-failure B6
+comparison history too. Next: combine both proof sets with exact original-bank
+checks, avoid empty layers and share composition/search preparation. All 2,030
+tests and prior ledgers/proofs pass. Resume
+`experiments/results/cnf-b7-probe-cursor/checkpoint.json`. No B7 native compiler,
+new authority records, production defaults or unrestricted bounds are claimed.
+
+Previous expansion checkpoint (26 November, checked cold B6 recovery):
 [Share validated preparation](checked-b6-restore.md). Full-result checking and
 session construction now reuse the same checked state, reducing complete measured
 time 16.47% with identical continuations. No new refutation; 25 failures in seven

@@ -13049,6 +13049,39 @@ saving concerns duplicate checking of a complete result before recovery; it
 neither bounds provenance growth nor solves unrestricted SAT. The checkpoint
 is \texttt{experiments/results/cnf-checked-b6-restore/}.
 
+\subsection{B7 discovery and the cost of another proof layer}
+Composing 25 checked B6 failed assumptions into B7 forces 26 additional
+assignments across seven retained cases, but no contradiction. Every exclusion
+is justified on its preceding bank, and open search history adds no clause.
+B7 probing independently checks lifted traces and binds source, bank, closure
+trace, candidate order and trace allowance. Exact equality of the B6 and B7
+banks, closure traces and trace allowances permits history import; changed
+banks restart. This preserves the conditioned schedule and reason coordinates.
+
+On eighteen exposed cases, two opposite-order repetitions compare B6
+continuation, short B7 restart, extended fresh B7 search and B7 history reuse.
+The last two produce identical full results. Eleven exact matches reuse
+1,788 completed assumptions, reducing new probes from 2,334 to 546 and clause
+initializations from 877,394 to 217,940. Discovery time falls from $0.16599$ to
+$0.15558$ seconds, but complete census time falls only from $0.83446$ to
+$0.82573$, or $1.05\%$. Two repetitions do not establish a robust total speedup.
+The census charges source reconstruction, full composition, discovery,
+serialization/reload and independent verification; acquisition, startup/input
+loading and final audit are additional. Reconstruction, composition and final
+checking consume $79.92\%$ of the reused total. Peak memory does not materially
+improve.
+
+B7 retains fifteen failures across five cases. The B6 comparison independently
+adds five failures, retaining thirty across eight cases, including three new
+failures absent from B7 at $(37,40)$. Both histories are preserved with their
+original bank bindings. No new case is refuted: recognition remains $228/246$.
+B6 continuation takes $0.65030$ seconds, so the broader B7 route costs $26.98\%$
+more while exploring different interactions. Empty layers and repeated
+preparation are the next cost targets. The full open export grows from
+1,689,359 to 2,122,938 bytes. All 2,030 tests pass; no native B7 compiler,
+new authority records, SAT verdict from exhaustion or unrestricted-SAT bound
+is claimed. The checkpoint is \texttt{experiments/results/cnf-b7-probe-cursor/}.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

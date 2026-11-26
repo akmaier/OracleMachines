@@ -12,7 +12,28 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: changed B7 banks and shared source-prefix reconstruction
+## Current investigation: combine both frontiers; avoid empty proof layers
+
+[B7 discovery](b7-probe-cursor.md) adds 26 forced assignments across seven cases
+and finds 15 failed assumptions in five cases. There is no new refutation.
+Continuing B6 separately adds five failures, giving 30 across eight cases. Keep
+both routes: three newly found B6 failures at `(37,40)` are absent from B7.
+Combine them only with checked original-bank provenance; updating B6 changes the
+B7 binding, so old cursors cannot simply be relabelled.
+
+**Largest cost gap:** exact reuse avoids 1,788 probes, but complete measured time
+improves only 1.05% versus matched fresh search and regresses 26.98% versus B6
+continuation. Source reconstruction, composition and final checking consume
+79.92%; source reconstruction alone is 44.40%. Avoid empty layers on eleven
+unchanged cases and share checked preparation before extending the layer stack.
+Ten B7 orders are exhausted; eight retain later candidates.
+
+Storage grows 25.67% to 2,122,938 bytes while retaining both frontiers. All 2,030
+tests pass; coverage stays 228/246. Resume
+`experiments/results/cnf-b7-probe-cursor/checkpoint.json`. Native B7 compilation
+and unrestricted-SAT/lifetime-space bounds remain open.
+
+## Previous investigation: changed B7 banks and shared source-prefix reconstruction
 
 [Full checked cold recovery](checked-b6-restore.md) now shares preparation
 between result validation and session construction. Restoration improves 46.86%

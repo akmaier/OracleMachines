@@ -4,7 +4,17 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, shared common provenance):
+Latest expansion checkpoint (26 November, local source context reuse):
+[Prepared reconstruction](prepared-prefix-replay.md) improves source reconstruction
+45.00% and complete measured workflow time 23.41%, with identical hints, states,
+results and downstream counters. All sixteen prefixes are empty; the profile
+identified per-hint canonicalization. Novel/repeated-hint scaling improves, but
+zero/single-hint and missing-support controls regress. Preserve those limits.
+Coverage, native certificates and the open export are unchanged. Resume
+`experiments/results/cnf-prepared-prefix-replay/checkpoint.json`; next investigate
+boundary rechecks, cheap context admission and the retained coverage targets.
+
+Previous expansion checkpoint (26 November, shared common provenance):
 [One common preparation per independent call](shared-joint-preparation.md) reduces
 complete replay time 22.07%, with identical prepared banks, search counters and
 results on all sixteen current cases. Discovery and cold checking improve 38.30%

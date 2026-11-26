@@ -1,0 +1,99 @@
+{
+  "checks": {
+    "focused_tests": 64,
+    "full_tests": 2075,
+    "new_native_archives": 0,
+    "parent_manifests": 204,
+    "prior_artifact_entries": 29327,
+    "prior_sources": 1146,
+    "proof_blocks": 64
+  },
+  "comparisons": {
+    "discovery_seconds": {
+      "improved": 13,
+      "regressed": [
+        [
+          1,
+          0
+        ],
+        [
+          40,
+          0
+        ],
+        [
+          67,
+          63
+        ]
+      ]
+    },
+    "reconstruction_seconds": {
+      "improved": 16,
+      "regressed": []
+    },
+    "record_bytes": {
+      "improved": 0,
+      "regressed": []
+    },
+    "verification_seconds": {
+      "improved": 14,
+      "regressed": [
+        [
+          37,
+          39
+        ],
+        [
+          40,
+          0
+        ]
+      ]
+    }
+  },
+  "coverage": {
+    "after": 230,
+    "before": 230,
+    "total": 246
+  },
+  "frontier_unchanged": true,
+  "limitations": [
+    "Sixteen currently unresolved inputs; replay only, no additional search frontier or structural coverage. All actual binary prefixes are empty. Profiling identifies repeated local-hint canonicalization rather than repeated binary prefix steps.",
+    "Both arms retain exact source/event coordinate and conditioned-subset checks, every original template check, transport containment, lifted template checks and every local RUP reason/conflict check. Context preparation is owned and lazy within a single reconstruction call.",
+    "The context arm reuses existing LocalContext and transport_state. Its context never crosses events or calls; no caller-supplied prepared object or verified flag is accepted. Source/template/event/prefix edits require new checked reconstruction.",
+    "Both arms use the same frozen binary-prefix replay, shared joint discovery, independent shared cold validation and search allowances. Final audit additionally reconstructs every result through the original bind and frozen full search validator.",
+    "Two isolated opposite-order census repetitions charge complete reconstruction including ownership copying, discovery, persistence/reload and cold checking. Input loading/startup, historical acquisition, profiling, pilot and final audit are additional.",
+    "Synthetic controls cover 8,32,128 variables with no hints, one hint, novel and repeated hints, and valid original support absent from the local subset. Each isolated arm executes sixteen independent cold local_hints calls per fixture. Fixture creation and summary serialization are outside these diagnostic reconstruction timings; full persistence is charged in the main census.",
+    "Context construction can be wasted if a candidate passes guard filtering but its clause support does not survive. Retain that regression and zero/single-hint overhead; no claim that sharing always wins.",
+    "Existing native certificates, proofs, cumulative/reference tables and the 2070735-byte open export remain unchanged. New benchmark artifacts add lifetime storage. No production default or unrestricted SAT bound changes."
+  ],
+  "memory_improvement_claim": false,
+  "next": [
+    "Keep the stronger (28,18) bank and six unfinished orders as coverage targets; exhausted unchanged orders need stronger interaction.",
+    "Investigate repeated source/template work across initial transport, empty-prefix replay and joint preparation; current phase shares are 36.17%,31.85%,30.23%.",
+    "Test cheap context admission for zero/single-hint and missing-support cases before applying this optional path broadly.",
+    "Preserve the existing native certificate regression and source-support/equivalence opportunities."
+  ],
+  "open_export": {
+    "bytes": 2070735,
+    "duplicated": false,
+    "path": "experiments/results/cnf-joint-probe-cursor/remaining-closures.json",
+    "sha256": "b0ef6b5214095908a11fce4950aee8cf3f41809a02a00cb613c8f85054a2f806"
+  },
+  "outcome": "One exact local source context replaces repeated per-hint canonicalization, with identical proofs, states and downstream search.",
+  "preserved_failure": "Initial nonempty-prefix test fixture omitted the forced variable from wide clauses; retained its source, protocol and failed log. Only the fixture changed.",
+  "reductions_percent": {
+    "complete_seconds": 23.406876012090972,
+    "reconstruction_seconds": 44.997583658892225
+  },
+  "remaining": 16,
+  "result_bytes_unchanged": true,
+  "synthetic_regressions": [
+    "none-8",
+    "single-8",
+    "missing-support-8",
+    "none-32",
+    "single-32",
+    "missing-support-32",
+    "none-128",
+    "single-128",
+    "missing-support-128"
+  ]
+}

@@ -12,7 +12,27 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: share source-prefix reconstruction; keep the coverage frontier
+## Current investigation: reduce boundary rechecks; gate low-yield context setup
+
+[Local source context reuse](prepared-prefix-replay.md) improves reconstruction
+45.00% and complete measured workflow time 23.41% on all sixteen current cases,
+with identical states, hints, results and downstream counters. Profiling found
+empty binary prefixes in every case: repeated per-hint canonicalization, rather
+than repeated prefix steps, was the bottleneck. Memory/result bytes are unchanged.
+
+**Next cost targets:** reconstruction is now 36.17%, discovery 31.85% and cold
+checking 30.23%. Investigate repeated source/template work across their checked
+boundaries. Retain the synthetic regressions: zero/single hints and missing local
+support do not amortize copying/context setup. Test cheap admission conditions
+before expanding this optional path to those cases.
+
+Coverage stays **230/246** with sixteen open; the stronger `(28,18)` bank, six
+unfinished orders, ten exhausted orders and prior native regression remain.
+Resume `experiments/results/cnf-prepared-prefix-replay/checkpoint.json`; the
+2,070,735-byte frontier is referenced unchanged. All 2,075 tests pass; no
+unrestricted bound follows.
+
+## Previous investigation: share source-prefix reconstruction; keep the coverage frontier
 
 [Shared joint preparation](shared-joint-preparation.md) removes one duplicate
 common-prefix construction inside each discovery/checking call. All three original

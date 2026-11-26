@@ -18,6 +18,18 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Local reconstruction context reuse](prepared-prefix-replay.md) removes repeated
+canonicalization of the same local CNF across transported proof checks. The full
+sixteen-case replay falls from 0.69546 to 0.53267 s (23.41%); reconstruction falls
+45.00%. All 640 verified hints and 28,316 checked reason literals remain, while
+instrumented normalization visits fall from 460,644 to 118,539. Result bytes remain
+177,042 and peak RSS about 99 MB. Additional context space is linear in local
+literal/variable slots, plus ownership copies. Zero/single-hint and missing-support
+fixtures regress; useful sharing must amortize setup. Current phase shares are
+36.17% reconstruction, 31.85% discovery and 30.23% checking. The complete frontier
+and native archive sizes are unchanged; no lifetime bound changes.
+
+
 [Shared joint preparation](shared-joint-preparation.md) reduces the sixteen-case
 replay from 0.90572 to 0.70579 s (22.07%) while keeping every search result and
 counter equal. Discovery and independent cold checking prepare the common B6

@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: cheaper independent preparation with the same discovery frontier
+## Latest evidence: cheaper source reconstruction; the frontier is unchanged
+
+[One local checking context per event](prepared-prefix-replay.md) removes repeated
+canonical-source checks across transported hints. Reconstruction improves 45.00%
+and the measured full replay 23.41%, preserving every state, proof and search
+counter. All sixteen saved binary prefixes were empty; profiling redirected work
+to per-hint checking. Synthetic novel/repeated hints benefit, while zero/single
+hints and absent local support regress. Those counterexamples remain preserved.
+
+Recognition stays **230/246** with **16 open**. Keep changed `(28,18)`, six unfinished
+orders and stronger interactions for ten exhausted banks as coverage targets.
+Runtime is now split between reconstruction (36.17%), discovery (31.85%) and cold
+checking (30.23%). Resume
+`experiments/results/cnf-prepared-prefix-replay/checkpoint.json`; the complete
+frontier and native archives are referenced unchanged. Uniform efficient coverage
+and lifetime storage remain open.
+
+## Previous evidence: cheaper independent preparation with the same discovery frontier
 
 [Shared common-prefix checking](shared-joint-preparation.md) makes the current
 sixteen-case discovery/checking replay 22.07% cheaper in complete measured time.

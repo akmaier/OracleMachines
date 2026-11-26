@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Reuse a local proof-checking context](research/prepared-prefix-replay.md): source
+reconstruction improves 45.00% and the complete measured workflow 23.41%, with
+identical hints and search results. Sparse-hint and missing-support regressions
+are preserved. Memory and structural recognition remain unchanged at 230/246.
+All 2,075 tests pass.
+
+
 [Share common proof preparation](research/shared-joint-preparation.md): complete
 measured discovery/checking time falls 22.07% on sixteen current cases, with
 identical banks, results and search counters. Memory and retained state are

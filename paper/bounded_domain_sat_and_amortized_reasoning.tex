@@ -13267,6 +13267,60 @@ unchanged, although new experiment artifacts still add storage.  Recognition
 stays at $230/246$ and the previous native regression remains.  No production
 default, proof rule, unrestricted coverage or lifetime-space bound changes.
 
+\subsection{Reusing an exact local source across transported proof checks}
+
+Profiling the next reconstruction bottleneck changes the target: all sixteen
+retained binary prefixes are empty.  Initial source-event reconstruction instead
+checks $320$ transported hints, normalizing the same local CNF separately in each
+original RUP-checker call.  The diagnostic profile records $416$ normalization
+calls.  Reusing prefix steps would not address this particular workload.
+
+The new reconstruction owns copies of its source, templates and event, checks
+the source coordinates and conditioned-subset relation, and validates every
+original template and guard.  It lazily creates the existing immutable local
+context for that exact core, mapping and fixed assignment.  The existing
+transport routine checks containment, translated traces, lifted templates and
+every local unit reason and conflict against this context.  Canonical-source
+validation is shared; proof checks are retained.  Contexts do not cross events or
+calls, and no externally prepared context is accepted.  Original binary-prefix
+replay, joint discovery and independent cold checking remain unchanged.
+
+Two isolated opposite-order repetitions reduce source reconstruction from
+$0.35028$ to $0.19266$ seconds ($45.00\%$) and complete measured workflow time from
+$0.69546$ to $0.53267$ seconds ($23.41\%$).  Reconstruction improves on all sixteen
+case-level means.  Every state, hint, origin and result agrees with the original
+reconstruction, and all downstream counters agree.  The $640$ verified hints and
+$28{,}316$ checked reason literals across initial reconstruction and subsequent
+prefix replay are unchanged; instrumented normalization literal visits fall from
+$460{,}644$ to $118{,}539$.  Serialized results remain $177{,}042$ bytes and peak
+process memory remains about $99$ MB.  Copying, recognition, reconstruction,
+search, cold checking and persistence are charged.  Historical acquisition,
+startup/loading, profiling and final audit remain additional.  Timing variations
+in unchanged downstream stages are retained.
+
+Synthetic cold-call controls cover $8$, $32$ and $128$ variables.  Both distinct
+and repeated hints benefit from their shared local source.  At $128$ variables,
+sixteen reconstruction calls with distinct hints take $353.540$ ms in the original
+path and $38.675$ ms with context reuse; repeated hints take $364.391$ and
+$37.550$ ms respectively.  In contrast, zero-hint, single-hint and missing-support
+controls regress at every measured size.  At $128$ variables their time increases
+are $24.60\%$, $19.94\%$ and $53.11\%$.  A candidate may pass guard filtering yet
+lose clause support during transport, wasting context setup.  These diagnostics
+exclude fixture generation and summary serialization; full persistence is charged
+in the main census.  Their regressions preclude a universal speedup claim.
+
+For $h$ accepted hints on one core with $L$ literal occurrences, the old checker
+repeats canonical-source validation of cost $N(L)$ for every hint.  Context reuse
+performs it once and builds a clause-position map while retaining all reason
+checks.  Ownership copying, original-template checks, transport and recognition
+remain additional; setup must be amortized.  The live context uses
+$O(1+L+n)$ word slots for $n$ local variables, alongside owned inputs and returned
+hints, and is released after the call.  Reconstruction now accounts for
+$36.17\%$ of total time, discovery $31.85\%$ and cold checking $30.23\%$.
+The $2{,}070{,}735$-byte frontier and native archives are referenced unchanged.
+Recognition stays at $230/246$; no production default, proof rule, unrestricted
+SAT bound or lifetime-space bound changes.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

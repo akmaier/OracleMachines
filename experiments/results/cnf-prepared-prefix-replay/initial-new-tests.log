@@ -1,0 +1,14 @@
+......F..
+======================================================================
+FAIL: test_nonempty_binary_prefix_and_invalid_path_keep_frozen_checks (solver.test_cnf_prepared_prefix_replay.PreparedPrefixReplayTests.test_nonempty_binary_prefix_and_invalid_path_keep_frozen_checks)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_prepared_prefix_replay.py", line 92, in test_nonempty_binary_prefix_and_invalid_path_keep_frozen_checks
+    p=c.prefix.frozen.discover(local,[],Counter());self.assertEqual(p['status'],'unresolved');self.assertGreater(len(p['steps']),0)
+                                                                                              ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 not greater than 0
+
+----------------------------------------------------------------------
+Ran 9 tests in 2.109s
+
+FAILED (failures=1)

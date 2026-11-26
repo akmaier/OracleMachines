@@ -13516,6 +13516,61 @@ progress as an ordering hint, checking each selected assumption on the new bank.
 Copies, canonicalization, old proof checks and indexing remain outside the probe
 occurrence cap.  No unrestricted-SAT or polynomial construction bound follows.
 
+\subsection{Prior progress changes B12 ordering without dominating source order}
+
+The combined B10 and B11 failures form B12.  Each remains checked on its original
+bank, and the joint closure is checked before search.  On a changed bank, let
+$R$ be the deterministic source order of active signed literals and $S$ the union
+of the two supplied old completion lists.  The alternative stably orders
+$R\setminus S$ before $R\cap S$, retaining every active literal.  Opposite-literal
+promotion after a checked failure is unchanged.  Old completions influence order
+only; every new completion on the changed bank is actually probed.  Twelve
+unchanged banks retain source order and import histories only under exact bank,
+closure-trace and trace-bound equality.  Policy and the full derived order are
+bound in the cursor, and cross-policy replay is rejected.
+
+On the two changed cases, source order spends all $128$ probes revisiting
+assumptions present in the selected older lists.  Untested-first instead completes
+$92$ absent from those lists and $36$ previously present.  At $(67,63)$, source
+order finds failure $-68$, while untested-first finds $83$.  Their joint closure
+forces $68=1$ and $83=0$ in local coordinates.  Neither closes a case; coverage
+remains $232/246$ with fourteen open.  The union consumes both budgets, not one
+$64$-probe allowance.  Source order's new failure on a previously open assumption
+is a concrete reason not to skip old assumptions permanently after strengthening.
+Neither bounded result subsumes the other.  Continued B11 separately finds $-39$,
+an alternative proof of a value already implied by B12, without a measured
+native reconstruction saving.
+
+Two opposite-order isolated repetitions take $0.90776$ seconds for source order
+and $0.90850$ for untested-first: the $0.08\%$ increase is effectively a tie at
+this measurement resolution.  Untested-first has nine discovery and eleven
+checking case-level regressions against source order.  Exact unchanged-bank reuse
+is a separate improvement, avoiding $1{,}946$ probes and reducing matched fresh
+time from $0.93416$ to $0.90850$ seconds ($2.75\%$).  Continued B11 takes $0.54725$
+seconds, so B12 is $66.01\%$ more expensive.  Discovery and checking consume
+$80.48\%$ of B12 time; common history preparation is again duplicated through two
+paths.  This is the next measured cost target, with every distinct program's
+original-bank proof check retained when common preparation is shared.
+
+The untested-first census charges $0.16324$ seconds reconstruction, $0.36773$
+discovery, $0.36346$ independent checking and $0.00533$ serialization/reload.
+Matched results are $154{,}210$ bytes, versus $154{,}254$ for source order; process
+RSS remains about $98$ MB.  Both B12 censuses together cost $1.81626$ seconds.
+Separate independent reconstruction and three-way feedback diagnostics take
+$2.74026$ seconds and overlay publication/reload $0.01270$; these audit diagnostic
+times were collected alongside regression tests, not as isolated production
+compilation timings.  Startup/loading, acquisition, pilots, native compilation
+and remaining lineage auditing are additional.
+
+A $13{,}386$-byte overlay references $3{,}560{,}471$ bytes across $134$ transitive
+frontier files, preserving both policies and B11 continuation.  Earlier archives
+remain and new evidence grows lifetime storage.  The final independent audit
+reconstructs B12 from frozen lower-bank routines and derives the expected order
+without using the new preparation function.  All failure proofs and schedules
+are checked; open histories remain hints, never SAT certificates.  No new native
+rule, production default, unrestricted-SAT efficiency or lifetime-space bound
+follows from changing the order.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

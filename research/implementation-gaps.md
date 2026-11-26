@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, complementary B11/B10 discovery):
+Latest expansion checkpoint (26 November, B12 progress-guided ordering):
+[B12 ordering](b12-progress-order.md) finds `83` at `(67,63)` while source order
+finds `-68`. The combined closure gains two assignments; coverage stays 232/246.
+The heuristic reaches more previously unrecorded assumptions but does not dominate
+source order or improve total runtime materially. B12 is 66.01% costlier than B11
+continuation; repeated common-history checking is the next cost target. Both
+orders, the redundant B11 implication and all regressions are retained. All 2,118
+tests pass. Resume `experiments/results/cnf-b12-progress-order/checkpoint.json`.
+
+Previous expansion checkpoint (26 November, complementary B11/B10 discovery):
 [B11 probing](b11-probe-cursor.md) and continued B10 find three new failed
 assumptions whose combined closure forces four assignments across two open cases.
 Coverage remains 232/246. Reuse avoids 1,882 probes but saves 2.15% matched total

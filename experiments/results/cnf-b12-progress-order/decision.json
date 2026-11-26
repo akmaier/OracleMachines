@@ -1,0 +1,104 @@
+{
+  "coverage": {
+    "after": 232,
+    "before": 232,
+    "total": 246
+  },
+  "limits": {
+    "probe_limit": 64,
+    "trace_limit": 256,
+    "work_limit": 262144
+  },
+  "new_assignments": [
+    {
+      "assignment": [
+        [
+          68,
+          true
+        ],
+        [
+          83,
+          false
+        ]
+      ],
+      "event": 63,
+      "target": 67
+    }
+  ],
+  "new_failed_assumptions": [
+    {
+      "b11_new": [
+        -39
+      ],
+      "event": 63,
+      "source": [
+        -68
+      ],
+      "target": 67,
+      "unseen": [
+        83
+      ]
+    }
+  ],
+  "new_native_records": 0,
+  "next_target": "Share repeated common B10 preparation inside B12 discovery and validation; independently check every distinct original/comparison program. Preserve both ordering frontiers and the combined units at (67,63).",
+  "novelty": [
+    {
+      "completed": 64,
+      "event": 39,
+      "mode": "source",
+      "previously_seen": 64,
+      "previously_unseen": 0,
+      "target": 37
+    },
+    {
+      "completed": 64,
+      "event": 39,
+      "mode": "unseen",
+      "previously_seen": 0,
+      "previously_unseen": 64,
+      "target": 37
+    },
+    {
+      "completed": 64,
+      "event": 63,
+      "mode": "source",
+      "previously_seen": 64,
+      "previously_unseen": 0,
+      "target": 67
+    },
+    {
+      "completed": 64,
+      "event": 63,
+      "mode": "unseen",
+      "previously_seen": 36,
+      "previously_unseen": 28,
+      "target": 67
+    }
+  ],
+  "ordering_dominance_rejected": true,
+  "remaining": {
+    "path": "experiments/results/cnf-b12-progress-order/remaining-overlay.json",
+    "sha256": "7e879225fb9421936ddf22f6fe9c08c4d967321554d15414aa9ffb47ecc0df0e"
+  },
+  "remaining_events": 14,
+  "reproduce": [
+    "Use a new output directory. Copy pilot.json, pilot-source.py and b11-comparison-pilot.json before prepare; these are frozen equality evidence, not newly timed samples.",
+    "python3 experiments/compare_cnf_b12_progress_order.py prepare NEW_OUTPUT",
+    "python3 experiments/compare_cnf_b12_progress_order.py run_census NEW_OUTPUT",
+    "python3 experiments/validate_cnf_b12_progress_order.py validate NEW_OUTPUT",
+    "Run the full/focused suites and manuscript build, save logs and a decision record, then seal. Preserve the original frozen reports."
+  ],
+  "retained_limitations": [
+    "Untested-first reaches 92 literals absent from the two selected older lists on changed banks, not necessarily never tried on any earlier bank.",
+    "Source order finds -68 and untested-first finds 83; their union consumes both budgets. No policy dominates or closes a new case.",
+    "Continuing B11 finds -39, but B12 already implies variable 39 true. Alternative provenance is retained without a measured native saving.",
+    "Untested-first is 0.08% slower than source order, effectively tied in two repetitions. All stage regressions are retained.",
+    "Unchanged-bank reuse avoids 1,946 probes and reduces matched total time 2.75%; that is separate from the ordering experiment.",
+    "B12 costs 66.01% more than B11 continuation. Repeated history checking remains the dominant avoidable cost.",
+    "Independent reconstruction and feedback diagnostics cost 2.74026 seconds and overlay publication 0.01270 seconds alongside regression tests; these are not isolated production timings.",
+    "The 13,386-byte overlay references 3,560,471 bytes in 134 transitive frontier files. Native archives and diagnostics add space; lifetime storage grows.",
+    "Open completions are hints, never SAT authority or transportable new-bank proofs. No production default or unrestricted-SAT resource bound changes."
+  ],
+  "status": "verified-ordering-experiment-with-preserved-negative-result"
+}

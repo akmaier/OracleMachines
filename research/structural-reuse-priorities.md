@@ -12,7 +12,26 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: combine complementary discoveries without losing schedule progress
+## Current investigation: share common B10 history; retain both B12 orders
+
+[B12 progress-guided ordering](b12-progress-order.md) checks 92 assumptions absent
+from the selected older completion lists on two changed cases. It finds `83` at
+`(67,63)`, while source order finds `-68` by revisiting an older open assumption.
+Neither policy dominates; combining both forces two new assignments but closes
+no case. Coverage stays **232/246**, with **14 open**. Keep both histories.
+
+The ordering change is effectively tied in total runtime (+0.08%). B12 costs
+66.01% more than B11 continuation, and discovery/checking consume 80.48% of B12
+time. The highest measured cost target is repeated common B10 preparation:
+share it within an owned call while retaining every distinct history's proof
+checks. This recurring history-graph duplication is more promising than adopting
+untested-first as a replacement policy. Old open completions remain hints only.
+
+Resume `experiments/results/cnf-b12-progress-order/checkpoint.json`. Its 13,386-byte
+overlay references 3,560,471 bytes of transitive frontier data. All 2,118 tests
+pass. No new native certificate, production default or unrestricted bound follows.
+
+## Previous investigation: combine complementary discoveries without losing schedule progress
 
 [B11 expansion versus B10 continuation](b11-probe-cursor.md) yields three new
 failed assumptions and **four added assignments across two open cases**. B11

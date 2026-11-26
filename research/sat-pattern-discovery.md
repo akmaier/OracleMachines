@@ -5,7 +5,26 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: a stronger bank and an older schedule remain complementary
+## Latest evidence: progress-guided ordering exposes a complementary implication
+
+[B12 ordering](b12-progress-order.md) tests source order against a stable
+untested-first partition on the same combined bank. At `(67,63)` they find `-68`
+and `83` respectively; their union forces 68=true and 83=false, consuming both
+budgets. Neither closes a case. Coverage remains **232/246**, with **14 open**.
+
+Untested-first reaches more assumptions absent from two older completion lists,
+but source order's new failure comes from an assumption previously open. This
+rejects permanently skipping old assumptions after strengthening. Preserve both
+orders and their checked proofs. Continued B11 also supplies an alternative proof
+of the already implied value 39=true; no cheaper native proof is established yet.
+
+Runtime is effectively tied between orders; duplicated common history makes B12
+66.01% costlier than B11 continuation. Next share checked B10 preparation within
+each call, keeping distinct proof checks. Resume
+`experiments/results/cnf-b12-progress-order/checkpoint.json`. All 2,118 tests pass;
+no general efficient partition or new native certificate follows.
+
+## Previous evidence: a stronger bank and an older schedule remain complementary
 
 [B11 probing](b11-probe-cursor.md) finds `-45` at `(37,39)`, while B10 continuation
 finds `97,129` at `(67,63)` within the same additional-probe allowance. Combining

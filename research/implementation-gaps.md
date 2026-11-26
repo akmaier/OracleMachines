@@ -4,7 +4,18 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, shared B7 preparation and empty stages):
+Latest expansion checkpoint (26 November, original-bank B6/B7 composition):
+[Joint failure feedback](joint-cursor-feedback.md) adds the source-only native
+refutation `(37,40)`, reaching 229/246 sampled recognition with 17 open. B7-only
+feedback also refutes it; joint reasons reduce the certificate to 35 records
+versus 51 B7-only and 77 fresh. Four open closures gain eight assignments and are
+the next search targets. Both proof histories retain their original banks.
+All 2,048 tests, four native archive/root audits and prior ledgers/proofs pass.
+Resume `experiments/results/cnf-joint-cursor-feedback/checkpoint.json` and
+`joint_cursor_feedback.remaining-closures`. Repeated prefix checking, source
+support selection and unrestricted/lifetime-space bounds remain open.
+
+Previous expansion checkpoint (26 November, shared B7 preparation and empty stages):
 [One checked expansion](fused-b7-expansion.md) reduces expansion time 44.70% and
 complete measured time 16.97%, with the same results on all eighteen measured
 inputs. Eleven empty failure sets reuse the physical bank, closure and residual

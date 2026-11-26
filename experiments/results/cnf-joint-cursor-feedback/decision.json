@@ -1,0 +1,175 @@
+{
+  "b7_only_also_refutes": true,
+  "checks": {
+    "archive_audits": 4,
+    "focused_tests": 183,
+    "full_tests": 2048,
+    "parent_manifests": 201,
+    "prior_artifact_entries": 28609,
+    "prior_sources": 1133,
+    "proof_blocks": 64
+  },
+  "comparisons": {
+    "b7_direct": {
+      "cold_seconds": {
+        "improved": 1,
+        "regressed": []
+      },
+      "complete_seconds": {
+        "improved": 1,
+        "regressed": []
+      },
+      "record_bytes": {
+        "improved": 1,
+        "regressed": []
+      },
+      "solve_seconds": {
+        "improved": 1,
+        "regressed": []
+      },
+      "warm_seconds": {
+        "improved": 1,
+        "regressed": []
+      }
+    },
+    "disabled": {
+      "cold_seconds": {
+        "improved": 1,
+        "regressed": []
+      },
+      "complete_seconds": {
+        "improved": 1,
+        "regressed": []
+      },
+      "record_bytes": {
+        "improved": 1,
+        "regressed": []
+      },
+      "solve_seconds": {
+        "improved": 1,
+        "regressed": []
+      },
+      "warm_seconds": {
+        "improved": 1,
+        "regressed": []
+      }
+    },
+    "fresh": {
+      "cold_seconds": {
+        "improved": 1,
+        "regressed": []
+      },
+      "complete_seconds": {
+        "improved": 1,
+        "regressed": []
+      },
+      "record_bytes": {
+        "improved": 1,
+        "regressed": []
+      },
+      "solve_seconds": {
+        "improved": 1,
+        "regressed": []
+      },
+      "warm_seconds": {
+        "improved": 0,
+        "regressed": [
+          "new-37-40"
+        ]
+      }
+    }
+  },
+  "coverage": {
+    "after": 229,
+    "before": 228,
+    "total": 246
+  },
+  "limitations": [
+    "Eighteen exposed inputs; no held-out coverage claim. Both complete histories are checked on their original banks before composition. All controls pay this same validation; base is an ablation, not an optimized old-search runtime baseline.",
+    "Base retains B7. B6-only adds the B6 comparison failures, B7-only adds the new B7 failures, and joint adds both. All use zero fresh assumptions. Duplicate units retain an earlier valid origin.",
+    "Two opposite-order isolated census repetitions charge source-prefix reconstruction, complete discovery/preparation/recognition/indexing, serialization/reload and independent semantic verification. Startup/loading, historical acquisition, scan diagnostics and final audit are additional.",
+    "Both B7-only and joint refute the same new sampled case. Joint must not be credited with a refutation unavailable to B7-only; its benefit is the source-only certificate cost.",
+    "Native compilation checks inputs before warm lookup, follows strictly decreasing bank dependencies, and uses only source-clause native records. The first generic compiler retains the full source without support selection.",
+    "Native comparisons cover all newly recognized roots: bounded fresh solving, joint reconstruction with direct units disabled, B7-only direct reconstruction and joint direct reconstruction. Warm checking, both cold readers and serialization are charged. Prior acquisition, discovery and unresolved fallback are additional.",
+    "Direct units use only canonical source residuals with a global 262144 work allowance and 256 trace bound. Earlier source results, proofs, cumulative tables and production defaults remain unchanged; archives are supplemental.",
+    "Open exports retain both original histories and append checked joint closures. Changed clause sets invalidate earlier scheduling bindings. Native context growth, lifetime storage and unrestricted-SAT bounds remain open."
+  ],
+  "native_totals": {
+    "b7_direct": {
+      "cold_seconds": 0.2024788132403046,
+      "complete_seconds": 0.5365493118297309,
+      "persistence_seconds": 0.08939202036708593,
+      "record_bytes": 1006246.0,
+      "records": 51,
+      "solve_seconds": 0.21328533301129937,
+      "warm_seconds": 0.028038583230227232
+    },
+    "disabled": {
+      "cold_seconds": 4.632478999905288,
+      "complete_seconds": 10.336637166561559,
+      "persistence_seconds": 1.4386966039892286,
+      "record_bytes": 16812163.0,
+      "records": 1164,
+      "solve_seconds": 4.213626520941034,
+      "warm_seconds": 0.02833475056104362
+    },
+    "fresh": {
+      "cold_seconds": 0.2764563546516001,
+      "complete_seconds": 0.648441688157618,
+      "persistence_seconds": 0.10655950009822845,
+      "record_bytes": 1339495.0,
+      "records": 77,
+      "solve_seconds": 0.2576426244340837,
+      "warm_seconds": 0.002626333385705948
+    },
+    "joint_direct": {
+      "cold_seconds": 0.14019152126275003,
+      "complete_seconds": 0.38949664612300694,
+      "persistence_seconds": 0.05885352031327784,
+      "record_bytes": 680946.0,
+      "records": 35,
+      "solve_seconds": 0.15991762490011752,
+      "warm_seconds": 0.02714016637764871
+    }
+  },
+  "new_case": [
+    37,
+    40
+  ],
+  "next_targets": [
+    "Probe the four changed joint closures: (28,18), (28,19), (40,0), (67,63). Reuse unchanged-bank histories only with exact bank/closure/trace checks.",
+    "Share validated common B6 prefixes between the two histories and reduce source-prefix reconstruction; source reconstruction plus final checking is 68.54% of the census.",
+    "Investigate smaller source support for mixed-bank native proofs. Warm portable validation still regresses versus fresh native hits.",
+    "Preserve all old histories and supplemental archives. Context growth, general SAT coverage and lifetime storage remain unbounded."
+  ],
+  "open_closures": {
+    "additional_assignments": 8,
+    "additional_beyond_exclusions": 1,
+    "changed_events": 4,
+    "diagnostic_seconds": 0.29561862675473094,
+    "events": 17
+  },
+  "outcome": "Compose B6 and B7 failures with original-bank proofs; add one independently replayed source-only structural refutation and preserve shorter joint certificates.",
+  "reductions": {
+    "b7_direct": {
+      "complete_seconds": 27.407111045441013,
+      "record_bytes": 32.32807881969221
+    },
+    "disabled": {
+      "complete_seconds": 96.23188238257015,
+      "record_bytes": 95.94968238173756
+    },
+    "fresh": {
+      "complete_seconds": 39.93343530554575,
+      "record_bytes": 49.163975976020815
+    }
+  },
+  "reference_snapshot_answer": "unsat",
+  "remaining": 17,
+  "result_bytes": {
+    "cases": 137968,
+    "closures": 1973910,
+    "previous": 2122938,
+    "remaining": 1944017
+  }
+}

@@ -28,6 +28,15 @@ classes.
 
 ## Paper
 
+[Compose failures on their original banks](research/joint-cursor-feedback.md):
+one additional source-only refutation raises sampled recognition to 229/246.
+The combined certificate uses 35 records versus 77 fresh, with 39.93% lower
+complete positive-case time. B7-only proofs also suffice; joint proofs reduce
+cost. Four remaining closures strengthen. All 2,048 tests and both independent
+readers pass; unrestricted-SAT and lifetime-storage bounds remain open.
+
+Previous:
+
 [Share checked B7 expansion](research/fused-b7-expansion.md): combining validation,
 composition and search cuts expansion time 44.70% and total measured time 16.97%,
 with identical results on eighteen inputs. Eleven empty stages reuse physical

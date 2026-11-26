@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: share checked expansion; retain both failure frontiers
+## Latest evidence: a checked joint-bank refutation and four stronger closures
+
+[Original-bank failure composition](joint-cursor-feedback.md) refutes `(37,40)`,
+raising sampled structural recognition to 229/246 with 17 open. The reference
+snapshot already knew this root was UNSAT. B7 failures alone suffice; adding B6
+comparison failures improves native certificate cost rather than unique coverage.
+Both independent readers accept the source-only proof. Joint direct compilation
+uses 35 records versus 51 for B7-only direct and 77 for fresh solving.
+
+Four remaining joint closures gain eight assignments: `(28,18)`, `(28,19)`,
+`(40,0)` and `(67,63)`. Probe these changed residuals next, retaining exact bindings
+and original reason banks. Nineteen B6 and seven B7 failure proofs remain. Repeated
+preparation and source reconstruction still dominate census costs; the positive
+certificate speedup excludes discovery and unresolved fallback. All 2,048 tests
+pass. Resume `experiments/results/cnf-joint-cursor-feedback/checkpoint.json` and
+its `remaining-closures` binding. Unrestricted coverage and lifetime space remain open.
+
+## Previous evidence: share checked expansion; retain both failure frontiers
 
 [Fused B7 expansion](fused-b7-expansion.md) validates once and reuses physical
 clause/closure/residual state for eleven empty checked failure sets. Expansion

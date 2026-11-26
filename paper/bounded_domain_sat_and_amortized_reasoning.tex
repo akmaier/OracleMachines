@@ -13117,6 +13117,52 @@ remains $228/246$; both the thirty-failure B6 and fifteen-failure B7 histories
 remain available. The checkpoint is
 \texttt{experiments/results/cnf-fused-b7-expansion/}.
 
+\subsection{Joint feedback with original-bank proof provenance}
+The retained B7 history and the continued B6 comparison history are checked on
+their original banks, including complete source, guard, closure, binding,
+schedule and failure validation. Their prepared B6 prefixes are compared
+explicitly. A new bank appends the union of checked exclusions, retaining a valid
+origin for duplicates. B6 comparison reasons point to bank 6 and B7 reasons to
+bank 7; the top composition is bank 8. Native reconstruction follows strictly
+decreasing bank indices and emits source-only empty, units and split records.
+Portable checks precede warm lookup, and bounded direct-unit shortcuts use only
+canonical source residuals. The initial mixed-bank compiler retains the full
+source without support selection.
+
+On eighteen exposed cases, B7-only and joint feedback both refute $(37,40)$,
+raising sampled structural recognition from $228/246$ to $229/246$. The reference
+snapshot already knew the formula was UNSAT. Base and B6-only ablations do not
+refute it. Every arm uses zero new assumed probes. Scan-based diagnostic traces
+have 102 and 51 units for B7-only and joint feedback; the measured indexed
+propagator instead produces 67 and 64. Both orders are independently checked.
+Two opposite-order census repetitions include reconstruction, preparation,
+propagation, serialization/reload and independent verification. Joint census
+time is $0.95761$ seconds; reconstruction and final checking alone consume
+$68.54\%$. All ablations check both histories, so their similar times are not an
+optimized old-search baseline. Acquisition, startup/loading, diagnostics and
+final archive audit are additional.
+
+For the newly recognized root, complete certificate trials include warm checks,
+both cold readers and persistence. Fresh solving takes $0.64844$ seconds with
+77 records and 1,339,495 bytes. B7-only direct reconstruction takes $0.53655$
+seconds with 51 records and 1,006,246 bytes. Joint direct reconstruction takes
+$0.38950$ seconds with 35 records and 680,946 bytes: $39.93\%$ less complete time
+and $49.16\%$ fewer bytes than fresh solving. Warm validation regresses against
+fresh native hits; discovery and unresolved fallback are additional. Disabling
+direct units yields 1,164 records and $10.33664$ seconds, preserved as an
+unsuccessful cost baseline. The joint benefit is certificate cost, not a
+refutation missing from B7-only feedback.
+
+Seventeen open cases retain nineteen B6 and seven B7 failures. Four joint
+closures gain eight assignments, one beyond explicit exclusions; these changed
+residuals are the next probing targets. The checked open export is 1,973,910
+bytes, reduced by removing the recognized case rather than by a general storage
+bound. All 2,048 tests and four distinct native archive/root audits pass.
+Earlier evidence and 64 original proof blocks remain intact. Decreasing proof
+banks establish well-founded reconstruction, not polynomially many contexts or
+an unrestricted-SAT result. The checkpoint is
+\texttt{experiments/results/cnf-joint-cursor-feedback/}.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

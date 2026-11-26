@@ -18,6 +18,21 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Original-bank joint feedback](joint-cursor-feedback.md) recognizes one more
+sampled case, reaching 229/246. Its source-only certificate uses 35 records and
+680,946 bytes, versus 77 and 1,339,495 for fresh solving. Complete positive trial
+time, including warm checks, two cold readers and persistence, is 0.38950 versus
+0.64844 seconds. B7-only direct reconstruction also refutes the case but uses
+51 records and 1,006,246 bytes. Joint warm validation is slower than a fresh
+native hit; discovery, historical acquisition and unresolved fallback are additional.
+
+The all-case joint census takes 0.95761 seconds; source reconstruction and final
+checking account for 68.54%, with more preparation inside discovery. The base
+ablation checks both histories too, so its similar timing is not an optimized
+old-search baseline. Four remaining closures gain eight assignments. The checked
+open export falls to 1,973,910 bytes by removing one case; old files and archives
+remain. No uniform preprocessing, context-count or lifetime-space bound follows.
+
 [Fused B7 expansion](fused-b7-expansion.md) validates once for composition and
 search, and reuses physical clause/closure/residual state for eleven empty
 failure sets. Expansion takes 0.16479 versus 0.29800 seconds; complete measured

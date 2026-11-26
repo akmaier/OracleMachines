@@ -12,7 +12,30 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: combine both proof sets; share source reconstruction
+## Current investigation: probe four changed closures; share common proof prefixes
+
+[Joint failure composition](joint-cursor-feedback.md) adds one source-only native
+refutation, `(37,40)`, reaching 229/246 sampled recognition with 17 open. B7-only
+composition already refutes it; the B6 comparison proofs improve the certificate:
+35 records versus 51 for B7 direct and 77 fresh. Complete positive certificate
+time falls 39.93% versus fresh, with 49.16% fewer record bytes. Warm checking
+regresses, and discovery/unresolved fallback are additional costs.
+
+**Next coverage target:** probe the four changed joint closures at `(28,18)`,
+`(28,19)`, `(40,0)` and `(67,63)`, which gain eight assignments. The other thirteen
+banks are unchanged; preserve prior work only under exact bank/closure/trace
+checks. Both retained proof sets remain, with 19 B6 comparison and seven B7
+failures. **Largest cost gap:** repeated common-prefix validation and source
+reconstruction. Reconstruction plus final checking is 68.54% of census time;
+discovery also repeats preparation. Smaller source support remains a native gap.
+
+The checked open export is 1,973,910 bytes after removing the gained case; this
+is not a general compression guarantee. Four unique supplemental archive/root
+combinations pass both cold readers. All 2,048 tests pass. Resume
+`experiments/results/cnf-joint-cursor-feedback/checkpoint.json`. Arbitrary-SAT
+coverage, native context growth and lifetime-space bounds remain open.
+
+## Previous investigation: combine both proof sets; share source reconstruction
 
 [Fused expansion](fused-b7-expansion.md) removes repeated preparation between
 composition and search, then reuses the physical bank, closure and residual view

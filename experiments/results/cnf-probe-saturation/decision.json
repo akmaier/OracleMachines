@@ -1,0 +1,59 @@
+{
+  "analysis": {
+    "path": "experiments/results/cnf-probe-saturation/analysis.json",
+    "sha256": "cd56cbf4e339e0df70d70aa9308db9cc17e3061f1e079f02e08d758fc284de70"
+  },
+  "checkpoint": "checked-probe-saturation",
+  "corrections": [
+    "Initial kernel prototype compacted sparse names; corrected before formal trials, both sources retained.",
+    "Initial audit expected the benchmark schema in pilot reports; corrected adapter binds pilot hashes/results to independently replayed native archives, with the failure and old validator retained."
+  ],
+  "date": "2026-11-26",
+  "docs": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "8b04bef8a2bf183457b8f5bfe60eb66be76777ce3adc3175e2d406ec694cfb40",
+    "research/implementation-gaps.md": "d6e1088ac532a61c5bf67508d3ac996eeb62b3a73a8c4c02727eb47180551247",
+    "research/probe-saturation.md": "6eac3ed9a3d4a63e04ee4c6cef70c8b3eaad6fa4eb1c514cd67df64f36ce3278",
+    "research/sat-pattern-discovery.md": "6a8e3e7090d12cea19c995358b27c26a5d61f68907341e76a65c8ac09a6cd00c",
+    "research/structural-reuse-priorities.md": "fc7e1fc000601ea19c72f9b48c4caccc2ebab7a1c66bbc677ae345599ade9cd2"
+  },
+  "measurement": {
+    "census_orders": 6,
+    "native_orders": 2,
+    "native_peak_rss_bytes": {
+      "direct": 914161664,
+      "fresh": 80461824
+    },
+    "native_ratios": {
+      "cold_seconds": 70.66308262123952,
+      "complete_seconds": 67.78915625875374,
+      "persistence_seconds": 52.47601004528637,
+      "record_bytes": 50.207742726293276,
+      "solve_seconds": 71.61740025636473,
+      "warm_seconds": 15.094908733994979
+    },
+    "probes_full": 530,
+    "probes_resumed": 260,
+    "resume_percent_change": {
+      "complete_seconds": 1.651635809768215,
+      "discovery_seconds": 8.691576589829308,
+      "persistence_seconds": 3.0024485457271544,
+      "preparation_seconds": 1.9116814004162652,
+      "record_bytes": 0.0,
+      "verification_seconds": -1.7411760894026296
+    }
+  },
+  "next_cost": "Profile repeated conditioned source contexts and compare smaller supports or a fresh-certificate cost gate, charging conversion, cold checking and storage.",
+  "next_coverage": "Characterize shared-variable interactions and bounded conditioning/decomposition on twelve unchanged fixed points before another expansion pass.",
+  "outcome": "One additional original snapshot certified: (37,39), 234/246 covered, twelve unresolved.",
+  "parent": {
+    "path": "experiments/results/cnf-b13-native-feedback/checkpoint.json",
+    "sha256": "75bcf29fdde556d672b0025752f99c15e2c0365eb6a5adb8a7f220c300f340cf"
+  },
+  "pattern": "A reusable checked round appends negated failed assumptions; productive completed rounds fix a new seed variable or refute, so their count is at most the number of seed variables.",
+  "regressions": [
+    "Resume is 1.65% slower despite avoiding 270 probes; first-round acquisition is additional.",
+    "Native provenance reconstruction is 67.79 times slower and stores 50.21 times more bytes than fresh solving; direct artifacts are preserved and the smaller fresh archive selected."
+  ],
+  "restrictions": "Fixed points are unresolved, not SAT. Bounds apply to this inference rule; honest open-history assumptions, historical acquisition and source-only graph growth remain separate.",
+  "reuse": "Exact seed, ordering, bank, closure, cursor and trace-limit checks permit interrupted or completed-round reuse. Twelve identical exhausted banks are checked and skipped."
+}

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_probe_saturation.py", line 152, in <module>
+    if __name__=='__main__':globals()[sys.argv[1]](Path(sys.argv[2]))
+                            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_probe_saturation.py", line 82, in validate
+    mode=report['mode'];assert report['result']['status']=='unsat' and report['result']['result']['root']==case['root']
+         ~~~~~~^^^^^^^^
+KeyError: 'mode'

@@ -97,8 +97,8 @@ submitted to the alphaXiv AI Track.  Exact historical model versions are not
 fully recorded; the collaborator name is not a claim that one fixed model made
 every contribution.  Source, proofs and retained evidence are available at
 \url{https://github.com/akmaier/OracleMachines}.  The first alphaXiv publication covers repository checkpoint \texttt{918fc95a}.
-This working revision additionally records the checked strengthened-B13
-experiment, its source-only certificate and measured reconstruction costs; published-version
+This working revision additionally records checked B13 strengthening and generic
+failed-literal saturation, their source-only certificates and measured reconstruction costs; published-version
 metadata and exact PDFs are retained separately in the repository.  Machine checks support the stated artifacts and
 hypotheses, not a proof of unrestricted $\Pclass=\NPclass$.
 
@@ -13942,6 +13942,88 @@ should use $(37,39)$'s saved new closure and stronger interactions or another
 decomposition on the remaining thirteen, avoiding identical exhausted searches.
 No production default, efficient arbitrary-CNF partition or uniform polynomial
 unrestricted-SAT bound changes in this selected-case checkpoint.
+
+\subsection{Generic checked saturation bounds productive rounds, not unrestricted solving}
+
+A generic failed-literal loop now continues productive feedback without adding
+a separately named search schema for each bank.  Its input is an arbitrary seed
+CNF; using derived clauses in that seed requires separately checked provenance.
+For the changed snapshot $(37,39)$, the seed contains $604$ clauses: $602$ from
+B13 plus two previously proved units.  Two completed rounds find fourteen new
+failed assumptions, whose negations yield a checked unit contradiction.  Native
+reconstruction through all earlier banks and both source-only cold readers
+certify the original snapshot.  Structural coverage rises from $233/246$ to
+$234/246$, leaving twelve open snapshots.  Fresh solving also refutes this case.
+
+Each round checks complete unit closure, probes the remaining signed variables
+with the existing bounded engine, and checks every failed-assumption trace on
+the exact current bank.  An exhausted productive round appends the negations of
+its failures as units.  An exhausted pass with no failures is an unresolved
+fixed point; it does not establish SAT.  A budget interruption retains the
+cursor.  Reuse checks the seed, ordering policy, bank, closure, trace bound,
+cursor and saved proofs before continuing.  The ordering source is only a
+heuristic and must cover the seed coordinates.  Original variable names,
+including sparse names, are preserved.  Claimed open probes retain the existing
+honest-history assumption; refutations depend on checked failed traces instead.
+
+This rule has a useful progress bound.  Every failure is on a variable unassigned
+by the round's checked initial closure.  Adding its negated unit therefore fixes
+a previously unassigned seed variable, or refutes the bank.  Assignments are
+monotone as units accumulate.  Thus a seed with $n$ variables permits at most
+$n$ productive completed rounds, followed if needed by one no-gain pass.
+Interrupted calls need not satisfy a bound on their number.  This argument does
+not decide the unresolved fixed points or bound the work needed to acquire
+derived seed clauses.  It also supplies no bound on source-only proof expansion.
+
+Native compilation indexes the generic rounds dynamically.  Each unit's origin
+is a checked failed trace on an earlier bank, with the actual assumption present
+in the conditioned source context.  Origin expansion strictly decreases stage;
+trace continuation advances within a stage.  Source leaves, guard supports,
+prefix reconstruction and direct source-unit shortcuts retain their previous
+checks and native record formats.  The inductive reconstruction argument thus
+extends to any finite checked round sequence.  Warm compiler hits validate the
+histories first.  Archive readers need no discovery histories.  The measured
+snapshot has no prefix steps.  The twelve other frontier banks remain identical,
+exhausted and without failures to append, so their checked state is retained
+without another search pass.
+
+The two productive rounds probe $270$ and $260$ assumptions.  They fail
+$44,142,-80,-60,50$ and $-62,5,-43,107,-74,84,132,88,108$, respectively.
+Six fresh-process permutations compare one round, saturation with an eight-round
+limit, and resumption from the separately acquired first round.  Complete means
+are $0.05811$, $0.06880$ and $0.06993$ seconds, including seed preparation,
+discovery, serialization and independent cold reconstruction/checking.  Saturation
+and resumption produce identical final records.  Resume avoids $270$ of $530$
+probes but costs $1.65\%$ more overall because checking saved state offsets the
+cheap probes.  Acquiring once then resuming costs $0.12804$ seconds.  The one-round
+arm has a different aggregate search budget and remains unresolved.  Its record
+has $39{,}649$ bytes; either final record has $70{,}705$ bytes.  Retaining both
+snapshots adds their storage.  Peak RSS is $50{,}970{,}624$, $51{,}347{,}456$
+and $51{,}642{,}368$ bytes.  Historical acquisition, original snapshot
+reconstruction, loading and final audits are additional.
+
+Two opposite native-trial orders expose a much larger cost.  Fresh solving
+with a $256$-node limit takes $0.29982$ seconds to solve, $0.00268$ warm,
+$0.32388$ for both cold readers and $0.12759$ for persistence, totalling
+$0.75903$ seconds.  Direct provenance reconstruction takes $21.47261$,
+$0.04043$, $22.88668$ and $6.69520$ seconds, totalling $51.45391$ seconds.
+It retains the existing bounded direct-unit shortcut.  The native graphs have
+$88$ versus $5{,}587$ records and $1{,}543{,}539$ versus $77{,}497{,}609$ raw
+record bytes.  Peak RSS is $80{,}461{,}824$ versus $914{,}161{,}664$ bytes;
+compressed archives occupy $189{,}777$ versus $8{,}524{,}365$ bytes.  Direct
+reconstruction costs $67.79$ times as much overall and stores $50.21$ times
+as many raw bytes.  Discovery and acquisition are additional to these native
+workflow times.  Compiler and fresh warm calls use distinct public workflows.
+
+The smaller fresh archive is selected for continuation, with all direct proofs
+and pilot archives preserved.  The two certificate variants count as one coverage
+gain.  Construction and cold checking account for about $42\%$ and $44\%$ of
+direct time: a short augmented contradiction can still unfold into many source
+contexts.  Reducing that expansion, or choosing a cheaper fresh certificate, is
+the next concrete cost target.  Stronger shared-variable interactions or bounded
+conditioning/decomposition are needed for the twelve fixed points.  Repeating
+their exhausted pass adds no information.  The generic progress bound establishes
+neither an efficient arbitrary-CNF partition nor a uniform polynomial SAT solver.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}

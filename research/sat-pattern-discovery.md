@@ -5,7 +5,25 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: the augmented contradiction now has source-only authority
+## Latest evidence: one generic rule reaches a checked propagation fixed point
+
+[Checked failed-literal saturation](probe-saturation.md) closes `(37,39)` after
+two productive rounds and fourteen new failed assumptions. Both source-only
+native readers accept the certificate: **234/246 covered, twelve open**. A generic
+round schema now supports exact interrupted continuation and completed-round reuse;
+each productive round fixes a new seed variable or refutes. This bounds the number
+of productive rounds for this rule, not the difficulty of its unresolved cells.
+
+The twelve unchanged exhausted banks require stronger interactions or another
+decomposition. A fixed point is not SAT. Seed acquisition, discovery, partition
+recognition and exact recomposition remain separate obligations. Reusing the first
+round avoids 270 probes but is 1.65% slower overall; native provenance reconstruction
+is 67.79 times slower and stores 50.21 times more bytes than fresh solving. Both
+regressions are retained. Next investigate shared-variable conditioning on the
+fixed points and smaller native source contexts. Resume
+`experiments/results/cnf-probe-saturation/checkpoint.json`.
+
+## Previous evidence: the augmented contradiction now has source-only authority
 
 [Native B13 feedback reconstruction](b13-native-feedback.md) certifies `(67,63)`
 through every original-bank dependency and both independent archive readers.

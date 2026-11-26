@@ -4,7 +4,19 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, native B13 feedback):
+Latest expansion checkpoint (26 November, generic checked saturation):
+[Reusable failed-literal rounds](probe-saturation.md) close `(37,39)` with fourteen
+new failed assumptions and source-only certification: **234/246, twelve open**.
+The generic schema supports interrupted rounds, exact checked reuse and a bound
+of at most one productive round per seed variable. Fixed points remain unresolved.
+Avoiding 270 probes is 1.65% slower after checking; direct native reconstruction
+costs 67.79 times fresh runtime and 50.21 times its record bytes. Preserve these
+regressions and investigate stronger interactions on the twelve fixed points.
+All 2,175 full tests and 21 focused tests pass. Resume
+`experiments/results/cnf-probe-saturation/checkpoint.json`; previous artifacts and
+64 manuscript proof blocks remain unchanged.
+
+Previous expansion checkpoint (26 November, native B13 feedback):
 [Source-only reconstruction](b13-native-feedback.md) certifies `(67,63)` with both
 cold readers: coverage **233/246**, thirteen open. Direct reconstruction is 32.83%
 slower and stores 32.49% more bytes than fresh solving on this case; the disabled

@@ -12,7 +12,28 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: thirteen open cases and native proof expansion cost
+## Current investigation: generic saturation closes the changed case
+
+[Checked saturation](probe-saturation.md) reuses one round schema until no new
+unit is found. Two productive rounds expose fourteen failed assumptions and
+certify `(37,39)` through source-only records and both cold readers. Coverage is
+**234/246, twelve open**. The other twelve banks remain exactly unchanged and
+exhausted; repeating the same pass adds no information. At most one productive
+round per seed variable is possible, but unresolved fixed points and seed/native
+construction costs prevent an unrestricted-SAT polynomial conclusion.
+
+Resume avoids **270/530 probes**, yet costs **1.65% more** after history checking.
+Native provenance expansion is the dominant measured cost: **51.454 s and
+77.50 MB** of records, versus **0.759 s and 1.54 MB** fresh. Retain the regression;
+the smaller fresh archive is selected and the direct certificate is preserved.
+
+**Next coverage target:** stronger shared-variable interactions or bounded
+conditioning/decomposition of the twelve fixed points. **Next cost target:**
+repeated conditioned source contexts, charging both construction and cold checks,
+with fresh solving as a measured alternative. Resume
+`experiments/results/cnf-probe-saturation/checkpoint.json`; 2,175 full tests pass.
+
+## Previous investigation: thirteen open cases and native proof expansion cost
 
 [Source-only B13 certification](b13-native-feedback.md) closes `(67,63)` with
 both cold readers, raising structural coverage to **233/246**, with **13 open**.

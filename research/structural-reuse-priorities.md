@@ -12,7 +12,26 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: share B8 checking; probe two strengthened remaining banks
+## Current investigation: probe the two strengthened banks with shared preparation
+
+[Shared B10 preparation](shared-b10-preparation.md) removes the duplicated B8
+prefix check within each call. Matched complete time falls **39.30%**, from
+1.06922 s to 0.64904 s; discovery and independent cold checking each fall about
+half. All sixteen historical results and 189,782 result bytes are unchanged.
+Peak RSS remains about 100 MB; coverage remains **232/246**, with **14 open**.
+The historical replay includes the two roots already certified by B10.
+
+Source reconstruction, discovery and checking now each account for roughly a
+third of measured runtime. The next coverage targets are the strengthened
+`(37,39)` and `(67,63)` banks; use the shared preparation while retaining the
+unfinished `(1,15)` order and all older histories. Eleven exhausted orders need
+stronger interactions or another decomposition. Earlier native regressions remain.
+
+Resume `experiments/results/cnf-shared-b10-preparation/checkpoint.json`; it
+references the unchanged B10 remaining overlay. All 2,100 tests pass. Persistent
+storage, native compilation and unrestricted-SAT bounds are not improved here.
+
+## Previous investigation: share B8 checking; probe two strengthened remaining banks
 
 [Joint B10 discovery](b10-probe-cursor.md) adds native refutations for `(28,18)`
 and `(40,0)`, reaching **232/246** with **14 open**. Continuing B9 already refutes

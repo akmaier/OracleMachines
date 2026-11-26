@@ -1,0 +1,48 @@
+{
+  "already_certified_cases_in_replay": [
+    [
+      28,
+      18
+    ],
+    [
+      40,
+      0
+    ]
+  ],
+  "coverage": {
+    "after": 232,
+    "before": 232,
+    "total": 246
+  },
+  "matched_cases": 16,
+  "new_native_records": 0,
+  "next_target": "Probe the stronger (37,39) and (67,63) banks using independently checked shared B8 preparation; retain (1,15) and all earlier histories.",
+  "reductions_percent": {
+    "complete_seconds": 39.29790409202499,
+    "discovery_seconds": 49.60992298446876,
+    "verification_seconds": 49.68754678459077
+  },
+  "remaining": {
+    "path": "experiments/results/cnf-b10-probe-cursor/remaining-overlay.json",
+    "sha256": "111821c3c9521437c0377cb082ca20b349a8fd6b7954ae7d0ed90fce4ef5710d"
+  },
+  "remaining_events": 14,
+  "reproduce": [
+    "Use a new output directory. Copy this checkpoint pilot.json and pilot-source.py into it before prepare; these are frozen equality evidence, not new timing samples.",
+    "python3 experiments/compare_cnf_shared_b10_preparation.py prepare NEW_OUTPUT",
+    "python3 experiments/compare_cnf_shared_b10_preparation.py run_census NEW_OUTPUT",
+    "python3 experiments/validate_cnf_shared_b10_preparation.py validate NEW_OUTPUT",
+    "Run the full and focused tests and manuscript build, save their logs and a decision record, then run seal. Never overwrite this checkpoint frozen reports."
+  ],
+  "retained_limitations": [
+    "Historical matched replay, no additional coverage or held-out generalization claim.",
+    "Process peak RSS is slightly higher and serialized result bytes are unchanged.",
+    "Persistence time regresses 5.90%; stage-level variations remain in the reports.",
+    "No checked state crosses calls; native feedback compilation and production policy remain unchanged.",
+    "The prior native reconstruction regression and fresh 256-node cap remain as previously recorded.",
+    "Profiling, pilot, startup/loading, historical acquisition, native compilation and final auditing are additional costs.",
+    "Reference storage avoids duplicate frontier export, not retained dependencies or lifetime growth.",
+    "No uniform efficient arbitrary-SAT construction or polynomial lifetime-space bound follows."
+  ],
+  "status": "verified-preparation-cost-improvement"
+}

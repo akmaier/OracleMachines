@@ -5,7 +5,22 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: combined original-bank failures close two retained cases
+## Latest evidence: cheaper exact checking before the next feedback layer
+
+[Shared B10 preparation](shared-b10-preparation.md) preserves every historical
+result and clause origin while reducing complete replay time **39.30%**. Original
+B8, comparison B8 and B9 histories keep independent proof checks and trace-bound
+bindings; their identical B8 prefix is reconstructed once within a call. Cold
+checking starts independently. No cross-call verified state is trusted.
+
+Coverage stays **232/246**, with **14 open**. Continue with the stronger closures
+at `(37,39)` and `(67,63)` using this preparation. The sixteen-case timing replay
+includes two already certified roots; it is not a new coverage measurement.
+Resume `experiments/results/cnf-shared-b10-preparation/checkpoint.json`.
+All 2,100 tests pass. Peak RSS and result storage are unchanged in practical terms;
+uniform efficient arbitrary-SAT coverage remains open.
+
+## Previous evidence: combined original-bank failures close two retained cases
 
 [Joint B10 probing](b10-probe-cursor.md) yields source-only native certificates for
 `(28,18)` and `(40,0)`, checked by both cold readers. Recognition reaches **232/246**

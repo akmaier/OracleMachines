@@ -13427,6 +13427,47 @@ and trials add storage.  Strictly decreasing bank dependencies establish finite
 reconstruction, not polynomial context growth.  Uniform arbitrary-SAT coverage,
 construction cost and lifetime-space bounds remain open.
 
+\subsection{Sharing the common B8 preparation inside B10 checks}
+
+The original B8 history and its continuation use identical source inputs,
+clauses, provenance and closure.  The B10 path previously rebuilt that prefix
+once while checking B9 and again while checking the B8 comparison.  An owned
+copy of all inputs now permits one common preparation inside each call, followed
+by independent checks of the two B8 programs and the B9 program on their original
+banks.  Different trace allowances retain different full bindings.  The bound
+changes the binding, not the common source-derived bank or literal order.
+Original insertion order preserves every duplicate-clause origin.  Discovery and
+cold validation prepare independently; no trusted state crosses calls.
+
+A matched replay of the sixteen historical B10 inputs includes the two previously
+certified roots.  All results, prepared clause banks, origins and search counters
+agree with the frozen implementation; coverage remains $232/246$ with fourteen
+open.  Two opposite-order isolated repetitions reduce complete census time from
+$1.06922$ to $0.64904$ seconds ($39.30\%$), discovery from $0.42215$ to $0.21272$
+seconds ($49.61\%$), and independent checking from $0.41358$ to $0.20808$ seconds
+($49.69\%$).  Both discovery and checking improve on every case-level mean.
+Changing discovery alone takes $0.88594$ seconds overall.  Serialization/reload
+regresses $5.90\%$ in the shared-both arm; all measured regressions are retained.
+Startup/loading, historical acquisition, profiling, pilots, native compilation
+and final auditing are additional to these census totals.
+
+Common prefix preparations fall from $32$ to $16$ per census; all $48$ distinct
+upper-history checks remain.  Search still attempts $258$ probes with $14{,}406$
+occurrence visits and $1{,}946$ imported completions.  Serialized results remain
+$189{,}782$ bytes.  Peak process RSS is $99{,}287{,}040$ bytes separately versus
+$99{,}467{,}264$ shared, so no memory reduction is established.  The unchanged
+resume overlay and native archives are referenced without duplication, while new
+experiment evidence increases lifetime storage.
+
+Writing $P$ for common-prefix preparation and $V+A$ for the distinct upper checks
+and construction, the duplicated portion changes from $2P+V+A$ to $P+V+A$.
+This local saving does not bound $P$, inherited history size or native dependency
+expansion polynomially.  Source reconstruction, discovery and checking now each
+consume about one third of measured runtime.  The next coverage targets are the
+two newly strengthened open banks; eleven unchanged exhausted orders still
+require stronger interaction or another decomposition.  No new native rule,
+production policy or unrestricted-SAT bound follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

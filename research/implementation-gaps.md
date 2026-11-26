@@ -4,7 +4,15 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, combined B10 refutations):
+Latest expansion checkpoint (26 November, shared B8 checking within B10):
+[Shared B10 preparation](shared-b10-preparation.md) reduces complete matched
+replay time 39.30%, discovery 49.61% and independent checking 49.69%. All results,
+origins and search counters match the frozen route. Coverage remains 232/246;
+no peak-memory or serialized-space saving is established. All 2,100 tests pass.
+Resume `experiments/results/cnf-shared-b10-preparation/checkpoint.json`, which
+retains the unchanged B10 frontier. Next: probe the two strengthened open banks.
+
+Previous expansion checkpoint (26 November, combined B10 refutations):
 [Joint B10 probing](b10-probe-cursor.md) certifies `(28,18)` and `(40,0)`, reaching
 232/246 with fourteen open. B9 continuation already closes the latter; B10 adds
 the former under the measured budget. New failures strengthen `(37,39)` and

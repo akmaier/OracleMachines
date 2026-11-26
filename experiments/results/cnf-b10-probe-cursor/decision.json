@@ -1,0 +1,62 @@
+{
+  "b9_continuation_also_refutes": [
+    [
+      40,
+      0
+    ]
+  ],
+  "coverage": {
+    "after": 232,
+    "before": 230,
+    "total": 246
+  },
+  "external_review": {
+    "date": "2026-11-26",
+    "evidence": "experiments/results/cnf-b10-probe-cursor/pequalnp-review.json",
+    "record": "research/pequalnp-watch.md",
+    "scope": "Inspiration only; external Lean proofs not independently rebuilt or imported."
+  },
+  "limits": {
+    "fresh_native_node_limit": 256,
+    "probe_limit": 64,
+    "trace_limit": 256,
+    "work_limit": 262144
+  },
+  "new_native_refutations": [
+    [
+      28,
+      18
+    ],
+    [
+      40,
+      0
+    ]
+  ],
+  "next_target": "Share independently checked common B8 preparation; then probe the strengthened remaining banks (37,39) and (67,63), preserving unfinished histories.",
+  "remaining": {
+    "path": "experiments/results/cnf-b10-probe-cursor/remaining-overlay.json",
+    "sha256": "111821c3c9521437c0377cb082ca20b349a8fd6b7954ae7d0ed90fce4ef5710d"
+  },
+  "remaining_events": 14,
+  "reproduce": [
+    "Preserve this checkpoint. Use a disposable checkout for semantic revalidation, since validate rewrites analysis/checkpoint files.",
+    "python3 experiments/validate_cnf_b10_probe_cursor.py validate experiments/results/cnf-b10-probe-cursor",
+    "For new timings, use a separate output directory. Copy the frozen pilot.json, pilot-source.py, native-pilot.json, feedback-pilot-source.py and b9-continuation-pilot.json into it before prepare.",
+    "python3 experiments/compare_cnf_b10_probe_cursor.py prepare NEW_OUTPUT",
+    "Carry the saved protocol native_runner_correction bindings and node_limit=256 into the new protocol; retain their original artifact paths. These are historical correction evidence required by validate.",
+    "python3 experiments/compare_cnf_b10_probe_cursor.py run_census NEW_OUTPUT",
+    "python3 experiments/compare_cnf_b10_probe_cursor.py cases NEW_OUTPUT",
+    "python3 experiments/compare_cnf_b10_probe_cursor.py run_trials NEW_OUTPUT",
+    "python3 experiments/validate_cnf_b10_probe_cursor.py validate NEW_OUTPUT",
+    "Run the full/focused suites and manuscript build, supply their logs and a decision record, then seal. The frozen pilots remain deterministic comparison evidence, not newly measured samples."
+  ],
+  "retained_regressions": [
+    "B10 reuse is 68.01% slower than B9 continuation; matched total improvement is only 2.82% despite avoiding 1,946 probes.",
+    "Direct native reconstruction at (28,18) is 95.17% slower and stores 83.76% more bytes than successful fresh solving.",
+    "Fresh solving at (40,0) stops at its 256-node cap; comparison with the completed native certificate is not a completed-solve speedup.",
+    "The initial native harness incorrectly required fresh UNSAT completion. Its source, protocol and reproduced failure are retained.",
+    "Reference storage avoids duplicate export, not retained dependencies or lifetime growth."
+  ],
+  "scope": "Sixteen exposed retained inputs; two additional source-only native certificates accepted by both cold readers. No unrestricted efficient classification or polynomial construction/lifetime-space guarantee.",
+  "status": "verified-native-coverage-checkpoint"
+}

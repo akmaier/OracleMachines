@@ -12,7 +12,28 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: combine complementary bank failures before expanding
+## Current investigation: share B8 checking; probe two strengthened remaining banks
+
+[Joint B10 discovery](b10-probe-cursor.md) adds native refutations for `(28,18)`
+and `(40,0)`, reaching **232/246** with **14 open**. Continuing B9 already refutes
+`(40,0)`; the combined bank adds `(28,18)` within the measured allowance. New
+failures strengthen `(37,39)` and `(67,63)`; these are the next coverage targets.
+Three B10 orders remain unfinished and eleven exhausted. Keep older frontiers.
+
+**Largest cost gap:** discovery plus cold checking is now 78.78% of census time,
+including repeated B8 preparation. Exact reuse avoids 1,946 probes but improves
+matched total time only 2.82%; the new route costs 68.01% more than B9 continuation.
+Share independently checked common history before extending more duplicate layers.
+**Native limitation:** direct `(28,18)` reconstruction is 95.17% slower and 83.76%
+larger than fresh solving. Direct `(40,0)` completes where the 256-node fresh
+baseline stops; that is not a completed-solve speedup comparison.
+
+Resume `experiments/results/cnf-b10-probe-cursor/checkpoint.json`. The 7,077-byte
+overlay references 2,768,222 bytes of frontier dependencies; lifetime storage grows.
+All 2,091 tests and six native archive/root audits pass. Uniform arbitrary-SAT
+coverage and resource bounds remain open.
+
+## Previous investigation: combine complementary bank failures before expanding
 
 [B9 discovery](b9-probe-cursor.md) finds eight failed assumptions, while continuing
 B8 finds ten new failures. Their bounded searches are complementary: two occur

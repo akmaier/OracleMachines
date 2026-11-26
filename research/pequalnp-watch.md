@@ -5,6 +5,41 @@ The daily `review-external-sat-research` automation checks
 OracleMachines investigation remains guided by our own gap analysis. External
 results are leads, not imported axioms or a replacement research agenda.
 
+## 26 November 2026: finite circuit result and a relevant negative benchmark
+
+Checked the live browser versions of [papers](https://pequalnp.com/papers),
+[programs](https://pequalnp.com/programs) and the algorithm-search board. The paper
+listing still shows Note 1. Static web extraction again returned loading shells;
+the live browser was necessary to see the populated records.
+
+The new highlighted [L-meta-18980](https://pequalnp.com/lemma#L-meta-18980), marked
+checked on 26 November at 06:57 UTC, says the Hamiltonian-cycle function on the
+six edge bits of a labelled four-vertex graph cannot be computed using at most
+six AND/OR (fan-in two) and NOT gates, with inputs free and every gate counted.
+Its [external PR](https://github.com/open-goat/pequalnp-proofs/pull/23793) is merged.
+This is a finite restricted circuit claim. Locally, we checked the displayed
+Boolean function against explicit Hamiltonian-cycle enumeration on all 64 graphs;
+that verifies the function's interpretation, **not the circuit lower bound**.
+The table and reviewed links are preserved in
+`experiments/results/cnf-b10-probe-cursor/pequalnp-review.json`. We did not build
+the external Lean code or independently audit its circuit definitions.
+
+More relevant to our current gaps is the newly inspected, but **22 November**,
+[L-alg-002 record](https://pequalnp.com/lemma#L-alg-002). It rejects a universal
+fixed-width resolution-saturation algorithm for 3-SAT, citing Tseitin formulas
+on degree-three split grids and reporting a Lean-checked width counterexample.
+The supplied Lean artifact was inaccessible through the web tool; its full proof
+and transitive definitions have not been independently checked here. Treat the
+record as a concrete lead, not an imported axiom.
+
+A useful follow-up is an adversarial evaluation family: encoded parity constraints
+whose global inconsistency survives small local views. Measure affine recognition,
+separator summaries and proof/reuse costs against bounded local saturation. This
+is our proposed experiment, not a new result from the site. Resolution-width
+limitations concern that proof system and do not establish limitations of all
+SAT representations or of our affine route. Our checked B8/B9/B10 composition
+work continues; no external claim changes proof authority or production policy.
+
 ## 25 November 2026: repeated neighborhoods and equivalent restrictions
 
 Reviewed the live [papers page](https://pequalnp.com/papers),

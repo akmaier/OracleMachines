@@ -5,7 +5,26 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: complementary bounded searches strengthen four open cells
+## Latest evidence: combined original-bank failures close two retained cases
+
+[Joint B10 probing](b10-probe-cursor.md) yields source-only native certificates for
+`(28,18)` and `(40,0)`, checked by both cold readers. Recognition reaches **232/246**
+with **14 open**. The B9 continuation comparison already refutes `(40,0)` through
+feedback; `(28,18)` is the additional gain from the combined route under this
+budget. The reference snapshot already knew both roots were UNSAT.
+
+Seventeen B10 failures leave two strengthened open banks: `(37,39)` forces 112 true
+and `(67,63)` forces 66 false. Probe these next, retaining three unfinished B10
+orders and older histories. Eleven unchanged orders are exhausted, not SAT.
+Repeated history checking now dominates cost; native reconstruction also retains
+a large regression against fresh solving at `(28,18)`. The fresh baseline stops
+at its 256-node cap on `(40,0)` while the new certificate completes.
+
+Resume `experiments/results/cnf-b10-probe-cursor/checkpoint.json`, using its checked
+remaining overlay. All 2,091 tests and six native archive/root audits pass.
+No uniform efficient partition, arbitrary-SAT runtime or lifetime-space bound follows.
+
+## Previous evidence: complementary bounded searches strengthen four open cells
 
 [B9 probing and B8 continuation](b9-probe-cursor.md) find eight and ten new failed
 assumptions respectively. Two are unique to the B9 pass, four to B8. Combining

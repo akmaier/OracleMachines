@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/results/cnf-b10-probe-cursor/initial-compare.py", line 162, in <module>
+    elif action=='trial': trial(out,Path(sys.argv[3]),int(sys.argv[4]),sys.argv[5])
+                          ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/results/cnf-b10-probe-cursor/initial-compare.py", line 135, in trial
+    solve=time.perf_counter()-tick;assert result['status']=='unsat';tables=old.tables(solver.db);nc=dict(solver.counts);tick=time.perf_counter()
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

@@ -4,7 +4,18 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, complementary B8/B9 discovery):
+Latest expansion checkpoint (26 November, combined B10 refutations):
+[Joint B10 probing](b10-probe-cursor.md) certifies `(28,18)` and `(40,0)`, reaching
+232/246 with fourteen open. B9 continuation already closes the latter; B10 adds
+the former under the measured budget. New failures strengthen `(37,39)` and
+`(67,63)`. Reuse saves 1,946 probes but just 2.82% matched total time; repeated
+history preparation dominates and B10 costs 68.01% more than B9 continuation.
+Direct native reconstruction regresses at `(28,18)`; on `(40,0)` it completes
+where fresh solving stops at 256 nodes. The stopped trial and corrected harness
+are preserved. All 2,091 tests, six native archive/root audits and prior ledgers
+pass. Resume `experiments/results/cnf-b10-probe-cursor/checkpoint.json`.
+
+Previous expansion checkpoint (26 November, complementary B8/B9 discovery):
 [B9 frontier reuse](b9-probe-cursor.md) avoids 2,198 probes, improving matched
 complete census time 3.26%. Continuing B8 remains 7.74% cheaper and finds four
 failures absent from B9; B9 finds two absent from B8. Retaining both checked sets

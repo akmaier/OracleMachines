@@ -12,7 +12,31 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: use strengthened residuals after cheaper cold checking
+## Current investigation: reconstruct the new augmented refutation natively
+
+[Extended B12 histories within B13](b13-strengthened-histories.md) expose **14 new
+failed assumptions** across the two changed cases, without adding a B14 search
+layer. At `(37,39)`, two new forced values reduce **545 → 534 residual clauses**.
+At `(67,63)`, the derived units produce a **checked 34-step augmented-bank
+contradiction**. Native coverage stays **232/246** until source-only reconstruction
+and both cold archive readers certify the candidate; all fourteen rows remain.
+
+Strengthening costs **4.37% more** than continuing the old bank, with 28.95% larger
+result records. Its gain is stronger inference, not a measured runtime or memory
+reduction. Old continuation avoids 192 probes versus fresh old-bank solving but
+is 1.77% slower overall. Six balanced mode orders and all regressions are retained.
+The twelve unchanged exhausted cases were checked for unchanged context and were
+not searched again.
+
+**Next priority:** compile `(67,63)`'s candidate through every original-bank
+provenance dependency to source-only native records, then measure conversion,
+persistence and cold checking against fresh solving. Preserve `(37,39)`'s new
+closure and the exhausted twelve for later decomposition work. Resume
+`experiments/results/cnf-b13-strengthened-histories/checkpoint.json`; the candidate
+is marked `candidate_refutation_pending_native`. All 2,161 tests pass. No uniform
+arbitrary-SAT claim or new native certificate is made in this checkpoint.
+
+## Previous investigation: use strengthened residuals after cheaper cold checking
 
 [An owned cold-validation batch](b12-cold-batch.md) shares invariant preparation
 while replaying and proof-checking every snapshot. Checking falls **26.98% / 26.97%**

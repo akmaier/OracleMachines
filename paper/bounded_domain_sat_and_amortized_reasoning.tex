@@ -96,9 +96,10 @@ analysis and manuscript drafting.  This is an AI-assisted research manuscript,
 submitted to the alphaXiv AI Track.  Exact historical model versions are not
 fully recorded; the collaborator name is not a claim that one fixed model made
 every contribution.  Source, proofs and retained evidence are available at
-\url{https://github.com/akmaier/OracleMachines}.  This publication includes
-verified research through repository checkpoint \texttt{918fc95a}; unfinished
-experiments are excluded.  Machine checks support the stated artifacts and
+\url{https://github.com/akmaier/OracleMachines}.  The first alphaXiv publication covers repository checkpoint \texttt{918fc95a}.
+This working revision additionally records the checked strengthened-B13
+experiment and its pending native-certificate obligation; published-version
+metadata and exact PDFs are retained separately in the repository.  Machine checks support the stated artifacts and
 hypotheses, not a proof of unrestricted $\Pclass=\NPclass$.
 
 
@@ -13829,6 +13830,58 @@ $30\%$ reconstruction.  The next coverage comparison should use the strengthened
 $(37,39)$ and $(67,63)$ closures against retained B13 schedules.  Unchanged
 exhausted cases still need stronger interactions or another decomposition.  No
 production default or uniform polynomial arbitrary-SAT bound follows.
+
+\subsection{Extended histories reveal an augmented refutation without another search layer}
+
+The existing B13 schema accepts the completed extensions of its two B12 inputs.
+Each is checked on its original B12 bank, with independent policy binding,
+schedule, failed-proof and program checks; B11 continuation remains separate.
+Only two physical banks change: $(37,39)$ grows from $601$ to $602$ clauses and
+$(67,63)$ from $437$ to $440$ before restriction.  The other twelve contexts and
+provenance tuples are identical, and their existing exhausted results remain
+valid without another search.  Old cursors fail exact bindings on changed banks;
+search restarts there.  No B14 search layer or new proof representation is needed.
+
+The pilot tries $64$ and $320$ additional probes.  The declared comparison uses
+$320$ additional probes, occurrence work at most $1{,}310{,}720$ and trace bound
+$256$ to finish these fixed-bank schedules.  On $(37,39)$, strengthening finds
+failed assumptions $-61$ and $37$, forcing $61$ true and $37$ false.  Its residual
+shrinks from $545$ to $534$ clauses, $1{,}552$ to $1{,}515$ literals and $137$ to
+$135$ variables.  On $(67,63)$ it finds twelve new failures, whose unit conclusions
+produce a checked $34$-step contradiction on the augmented bank.  Old-bank
+continuation finds only implications already present in the retained knowledge.
+
+The augmented contradiction is retained as a candidate awaiting source-only
+native reconstruction.  It is not counted as a new native root: coverage remains
+$232/246$ and all fourteen frontier rows remain.  Every derived-unit dependency
+must be reconstructed through its original bank, and both native cold readers
+must check the resulting archive before publication as a native certificate.
+An initial test incorrectly assumed that both feedback closures stayed open.
+That failed test and its protocol are preserved; the correction checks the
+contradiction rather than representing it as an open complete closure.  Timed
+code, pilot and census results are unchanged by the test correction.
+
+All six permutations of old continuation, old fresh search and strengthening run
+in separate processes before heavy tests.  Complete measured times on the two
+selected cases are $0.11556$, $0.11355$ and $0.12060$ seconds, respectively.
+Strengthening costs $4.37\%$ more than old continuation and $6.21\%$ more than
+old fresh search, while providing stronger inference.  The arms perform $356$,
+$548$ and $536$ probes, with $11{,}905$, $18{,}352$ and $19{,}496$ occurrence
+visits.  Old continuation avoids $192$ probes and saves $2.27\%$ discovery time,
+but is $1.77\%$ slower overall.  Persistence fluctuates; avoided probes alone
+do not establish an end-to-end speedup.  The strengthened arm charges $0.02526$
+seconds reconstruction, $0.04675$ discovery, $0.04324$ independent checking and
+$0.00136$ serialization/reload.  Historical acquisition, startup/loading, pilots,
+feedback, native conversion and final lineage audits are additional.
+
+Strengthened result bytes rise from $34{,}206$ to $44{,}108$ ($28.95\%$); peak
+RSS stays about $100$ MB.  The $6{,}871$-byte resume overlay references
+$4{,}601{,}978$ bytes across $219$ transitive files, in addition to native archives
+and experimental evidence.  No memory or lifetime-space reduction follows.
+The next task is source-only reconstruction of $(67,63)$, charging conversion
+and cold checks against fresh solving, while retaining $(37,39)$'s new closure.
+This selected-case experiment supplies neither an efficient arbitrary-CNF
+partition nor a bound on the number of future strengthening rounds.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}

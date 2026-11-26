@@ -1,0 +1,17 @@
+.F.......................
+======================================================================
+FAIL: test_combined_feedback_preserves_closure_and_rejects_bad_trace (solver.test_cnf_b13_strengthened_histories.B13StrengthenedHistoryTests.test_combined_feedback_preserves_closure_and_rejects_bad_trace)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_b13_strengthened_histories.py", line 78, in test_combined_feedback_preserves_closure_and_rejects_bad_trace
+    joint,clauses=compose(banks['strengthen'][27],[p for b in books.values() for p in b['program']['probes']],Counter())
+                  ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_b12_continuation_batch.py", line 19, in compose
+    assert conflict is None,'A contradiction requires native source-only certification before coverage publication'
+           ^^^^^^^^^^^^^^^^
+AssertionError: A contradiction requires native source-only certification before coverage publication
+
+----------------------------------------------------------------------
+Ran 25 tests in 19.300s
+
+FAILED (failures=1)

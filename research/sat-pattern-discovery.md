@@ -5,7 +5,27 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: cheaper independent checking preserves every saved round
+## Latest evidence: stronger checked histories expose an augmented contradiction
+
+[Updating B13 with completed B12 histories](b13-strengthened-histories.md) yields
+14 new failed assumptions across the two changed cases. `(37,39)` gains 37=false
+and 61=true, shrinking to 534 residual clauses. At `(67,63)`, twelve new failures
+jointly unit-refute the augmented bank in a checked 34-step trace. The next task
+is source-only native reconstruction; **coverage remains 232/246** until its
+archive and both cold readers pass. All earlier results and fourteen rows remain.
+
+The same B13 schema handles longer histories with original-bank checking; no new
+search-bank layer is needed. The other twelve contexts remain exactly unchanged
+and are not searched again. Strengthening costs 4.37% more than old continuation
+on these selected cases and increases result bytes 28.95%. This is a measured
+inference gain, not a general recognition or tractability result.
+
+Resume `experiments/results/cnf-b13-strengthened-histories/checkpoint.json` and
+its `candidate_refutation_pending_native` row. All 2,161 tests pass. Check the
+preserved candidate before inventing another feedback layer; unrestricted SAT
+coverage and resource obligations remain open.
+
+## Previous evidence: cheaper independent checking preserves every saved round
 
 [Cold validation batching](b12-cold-batch.md) shares common preparation across
 saved B12 snapshots while retaining every binding, cursor replay and failed-proof

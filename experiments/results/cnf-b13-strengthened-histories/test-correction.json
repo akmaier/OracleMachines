@@ -1,0 +1,13 @@
+{
+  "initial_protocol": {
+    "path": "experiments/results/cnf-b13-strengthened-histories/initial-protocol.json",
+    "sha256": "4a5deb51690234f89aec770cbeebc698541829676bb2ede5a42ba5edf550cb0d"
+  },
+  "initial_test": {
+    "path": "experiments/results/cnf-b13-strengthened-histories/initial-test-source.py",
+    "sha256": "d5ce26a77a3c234f9765711cf15a81af084457f39f699d76ccdfb8c2e418cdca"
+  },
+  "pilot_and_census_results_unchanged": true,
+  "reason": "Initial test incorrectly assumed that joint feedback remains open. At (67,63) the checked augmented bank unit-refutes. Retain the conflict as a candidate pending source-only native certification; do not increase native coverage.",
+  "timed_driver_unchanged": true
+}

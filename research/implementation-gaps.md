@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, independent cold batch):
+Latest expansion checkpoint (26 November, strengthened B13 histories):
+[Longer checked histories in the existing B13 schema](b13-strengthened-histories.md)
+find 14 new failed assumptions. `(37,39)` shrinks 545 → 534 residual clauses;
+`(67,63)` yields a checked 34-step augmented-bank contradiction. Source-only native
+reconstruction is now the highest-priority gap, so native coverage remains 232/246.
+Strengthening costs 4.37% more than old continuation; records grow 28.95%. All 2,161
+tests pass. Resume `experiments/results/cnf-b13-strengthened-histories/checkpoint.json`.
+The initial incorrect expectation of open feedback is retained with its correction.
+
+Previous expansion checkpoint (26 November, independent cold batch):
 [Cold validation batching](b12-cold-batch.md) reduces checking 27% and complete
 matched replay time 11–12%, keeping every snapshot's proof and cursor checks.
 Cold preparation occurs 14 rather than 18 times per ordering. All saved results,

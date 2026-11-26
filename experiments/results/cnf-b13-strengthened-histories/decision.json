@@ -1,0 +1,110 @@
+{
+  "candidate_refutations_pending_native": [
+    [
+      67,
+      63
+    ]
+  ],
+  "coverage": {
+    "after": 232,
+    "before": 232,
+    "total": 246
+  },
+  "decision": "Preserve the existing B13 schema with extended checked B12 histories. Keep the augmented contradiction as a candidate pending source-only native reconstruction; reuse unchanged exhausted banks without new search.",
+  "evidence": {
+    "analysis": {
+      "path": "experiments/results/cnf-b13-strengthened-histories/analysis.json",
+      "sha256": "f28842c165ce4fd861545edf2f4005e1f94b0690121d1229abb18d7163a63c57"
+    },
+    "parent_validation": {
+      "path": "experiments/results/cnf-b12-cold-batch/validation.json",
+      "sha256": "1aeb286e4626cf2106e0f1d5477ebd6e0c0a7c6d9bca3249cace92c5d3a0abf9"
+    },
+    "test_correction": {
+      "path": "experiments/results/cnf-b13-strengthened-histories/test-correction.json",
+      "sha256": "d7f0dd9b84877a2649c5cc45d998a0806badefd3e7ce11271af1dc0f3c1d89d4"
+    }
+  },
+  "external_review": "The alphaXiv source was critically reviewed separately; no external claim is a premise. See research/alphaxiv-knowledge-record-review.md.",
+  "limitations": [
+    "Two selected changed cases, six balanced mode orders; pilot selected the 320-probe comparison. This is exploratory coverage evidence, not a held-out benchmark.",
+    "Every history remains bound and checked on its original bank. Changed-bank cursors are rejected; unchanged banks are independently reconstructed before old results are reused.",
+    "The augmented-bank conflict is checked, but its source-only native proof graph has not been compiled or accepted by the two native cold readers. Native coverage remains 232/246.",
+    "The other twelve exhausted cases remain unresolved. Exhaustion gives no SAT verdict and open histories retain the existing honest-production assumption.",
+    "Strengthening raises measured runtime and record bytes. Peak RSS does not establish a memory saving. Startup/loading, acquisition, pilots, feedback, native conversion and lineage audits are additional.",
+    "No new production default, efficient arbitrary-CNF partition, universal round bound, or polynomial unrestricted-SAT claim."
+  ],
+  "measurements": {
+    "census_totals": {
+      "continue": {
+        "complete_seconds": 0.11555723659694193,
+        "discovery_seconds": 0.04384472213375072,
+        "persistence_seconds": 0.0018843887373805046,
+        "reconstruction_seconds": 0.02579445120257636,
+        "record_bytes": 34206.00000000001,
+        "verification_seconds": 0.04097204826151331
+      },
+      "fresh": {
+        "complete_seconds": 0.1135515971109271,
+        "discovery_seconds": 0.04486431251280009,
+        "persistence_seconds": 0.0008990693216522534,
+        "reconstruction_seconds": 0.025190520721177265,
+        "record_bytes": 34206.00000000001,
+        "verification_seconds": 0.04032485435406367
+      },
+      "strengthen": {
+        "complete_seconds": 0.12060168726990621,
+        "discovery_seconds": 0.046751097310334444,
+        "persistence_seconds": 0.0013633476725469034,
+        "reconstruction_seconds": 0.025256263635431726,
+        "record_bytes": 44108.0,
+        "verification_seconds": 0.04324379136475424
+      }
+    },
+    "peak_rss_bytes": {
+      "continue": 99614720,
+      "fresh": 99745792,
+      "strengthen": 99631104
+    },
+    "storage": {
+      "overlay_bytes": 6871,
+      "referenced_bytes": 4601978,
+      "referenced_files": 219
+    },
+    "strengthened_record_increase_percent": 28.948137753610446,
+    "strengthened_total_increase_percent_vs_continue": 4.365326500978095,
+    "strengthened_total_increase_percent_vs_fresh": 6.208710699235653
+  },
+  "new_failed_assumptions": [
+    {
+      "event": 39,
+      "new_failures": [
+        -61,
+        37
+      ],
+      "target": 37
+    },
+    {
+      "event": 63,
+      "new_failures": [
+        -130,
+        -123,
+        -112,
+        -88,
+        -9,
+        45,
+        50,
+        79,
+        100,
+        107,
+        110,
+        133
+      ],
+      "target": 67
+    }
+  ],
+  "new_native_records": 0,
+  "next_cost_target": "Compare native conversion, checking, persistence and cold replay with bounded fresh solving before claiming a reuse speedup.",
+  "next_coverage_target": "Compile (67,63) through original-bank provenance to a source-only native certificate, preserving the prefix and checking both native readers. Retain (37,39) new closure and all unchanged exhausted cases.",
+  "publication": "The first alphaXiv version covers checkpoint 918fc95a. The daily updater may publish this verified later checkpoint as a new version of the same paper."
+}

@@ -12990,6 +12990,37 @@ supply neither an efficient partition of arbitrary CNF nor a bound on future
 layers, native contexts or lifetime storage. The checkpoint is
 \texttt{experiments/results/cnf-b6-probe-cursor/}.
 
+\subsection{Owned preparation for incremental B6 search}
+A prepared search session owns a deep copy of a checked fixed input and retains
+its exact binding, residual occurrence index, closure prefix and live cursor.
+Caller edits and returned-result edits cannot alter its snapshot; changed inputs
+or trace allowance require a new session. Pending and interrupted candidates
+remain uncompleted, preserving the standalone schedule across chunk boundaries.
+Cold recovery still validates original provenance and portable history. The
+object accelerates discovery and does not bypass native proof checks.
+
+On eighteen exposed cases, up to eight eight-probe chunks perform exactly the
+same 740 assumptions and 23,090 occurrence visits as a single 64-probe pass.
+Ordinary chunks make 100 calls and build 100 indexes; prepared chunks build
+18 indexes. Continuation including setup falls from $0.80055$ to $0.15688$
+seconds. Complete time, including reconstruction, final persistence, semantic
+checking and cold session reconstruction, falls from $1.44732$ to $0.80591$
+seconds, a $44.32\%$ reduction. The uninterrupted pass takes $0.78541$ seconds,
+so the prepared arm is still $2.61\%$ slower than that control. All six already
+exhausted inputs regress in continuation time; cold recovery and peak process
+memory do not improve. Setup and copies are charged, while prior acquisition,
+process startup/loading, diagnostics and final audit are additional.
+
+The nine earlier B6 failures compose to ten additional assignments but no
+contradiction. This diagnostic is preserved. Continuing the original B6 banks
+adds fifteen failures, leaving 24 in seven cases and ten exhausted literal
+orders. Sampled recognition remains $228/246$, with eighteen open. The complete
+open export grows to 1,474,056 bytes because earlier histories are retained.
+All 2,013 tests pass, including intermediate equivalence, mutation isolation,
+interruption, cold recovery and small truth tables. Session reuse does not bound
+future banks, proof contexts or lifetime memory, and yields no unrestricted-SAT
+claim. The checkpoint is \texttt{experiments/results/cnf-prepared-b6-search/}.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

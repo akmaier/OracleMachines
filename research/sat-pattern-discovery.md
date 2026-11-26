@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: later B6 candidates and the limit of one literal order
+## Latest evidence: cheaper incremental search and a larger failure frontier
+
+[Prepared B6 sessions](prepared-b6-search.md) make the same incremental search
+44.32% cheaper in complete measured time by avoiding repeated preparation.
+They remain slower than one uninterrupted pass and do not improve cold recovery
+or peak memory. No additional refutation is found: sampled recognition stays
+228/246 with 18 open. Continuing the saved frontiers adds fifteen checked
+failures, for 24 in seven cases; compose that complete set next.
+
+The earlier nine-failure composition is preserved as a diagnostic: ten new
+assignments in six cases, no contradiction. Ten current literal orders are now
+exhausted. If new feedback leaves them unchanged, investigate stronger bounded
+interactions instead of repeating the order. All 2,013 tests pass. Resume
+`experiments/results/cnf-prepared-b6-search/checkpoint.json`, using the appended
+`b6_prepared_cursor`; earlier `b6_probe_cursor` values remain unchanged.
+Unrestricted coverage and lifetime space remain open.
+
+## Previous evidence: later B6 candidates and the limit of one literal order
 
 [B6 probing](b6-probe-cursor.md) refutes `(37,0)`, reaching 228/246 sampled
 recognition with 18 open. Twelve exact B5/B6 matches reuse 1,472 completed

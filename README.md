@@ -28,6 +28,14 @@ classes.
 
 ## Paper
 
+[Reuse checked B6 preparation](research/prepared-b6-search.md): prepared sessions
+cut complete incremental-search time 44.32% versus repeated chunk calls, with
+identical results. A single uninterrupted pass remains 2.61% faster; peak memory
+and cold recovery do not improve. Continuation retains 24 failures in seven
+cases, with coverage unchanged at 228/246. All 2,013 tests pass.
+
+Previous:
+
 [Advance B6 discovery](research/b6-probe-cursor.md): one more checked structural
 refutation reaches 228/246 sampled recognition, with 18 open. Exact history
 transfer avoids 1,472 repeated assumptions, but complete census time barely

@@ -18,6 +18,22 @@ stream. Persistent storage remains unbounded by default.
 
 ## 1. What a bound means here
 
+[Owned B6 sessions](prepared-b6-search.md) pay source/provenance preparation once
+per fixed-input session and reuse one occurrence index across chunks. On eighteen
+cases, 100 calls build 18 indexes instead of 100, with identical probes and
+results. Complete time falls from 1.44732 to 0.80591 seconds versus ordinary
+chunks, but one uninterrupted pass takes 0.78541. Cold verification/recovery and
+peak memory do not improve. Private input ownership and result copies are charged;
+changed input or trace allowance requires a new checked session.
+
+Per-probe clause initialization, exact bindings, growing proof exports and cold
+checks remain. Session space is proportional to the residual index, binding,
+closure and accumulated history; it gives no lifetime bound over changing banks
+or many sessions. The eighteen-case open export grows to 1,474,056 bytes by
+appending new history while retaining the old. No new native refutation is found;
+the checked failure set grows to24 across seven cases. Repeated source-prefix
+reconstruction and duplicate cold preparation are the next measured cost gaps.
+
 [B6 history continuation](b6-probe-cursor.md) avoids 1,472 completed assumptions
 and 615,872 initialization clause visits on twelve exact bank/closure matches.
 Programs and cursors equal fresh extended search, but complete census time

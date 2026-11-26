@@ -4,7 +4,19 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (25 November, B6 frontier continuation):
+Latest expansion checkpoint (26 November, owned B6 preparation):
+[Reuse validated state across chunks](prepared-b6-search.md). Complete measured
+incremental-search time falls 44.32% against ordinary chunk calls; single-pass
+search remains faster, with no cold or peak-memory gain. Exact continuation adds
+15 failures for 24 retained in seven cases, without a new refutation. Sampled
+coverage remains 228/246 and 18 open; ten current orders are exhausted. All 2,013
+tests, source/artifact ledgers and 64 manuscript proof blocks pass. No new native
+records or production defaults change. Resume
+`experiments/results/cnf-prepared-b6-search/checkpoint.json`, using appended
+`b6_prepared_cursor` histories. Next compose all24 failures and investigate
+checked cold-preparation handoff; retain the unsuccessful nine-failure diagnostic.
+
+Previous expansion checkpoint (25 November, B6 frontier continuation):
 [Advance exact B6 histories](b6-probe-cursor.md). One additional native refutation
 reaches 228/246 sampled recognition with 18 open. Exact transfer avoids 1,472
 repeated assumptions, but total census time barely changes and retained open

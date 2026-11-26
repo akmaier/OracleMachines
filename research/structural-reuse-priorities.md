@@ -1,6 +1,6 @@
 # Structural reuse: cost map and investigation priorities
 
-Updated 2026-11-25 after the user's shift toward pattern discovery and a valid
+Updated 2026-11-26 after the user's shift toward pattern discovery and a valid
 partition of the entire SAT problem. This is the working record for the hourly
 investigation. Start with the [discovery plan](sat-pattern-discovery.md), then
 consult [implementation history](implementation-gaps.md),
@@ -12,7 +12,29 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: compose B6 failures and diagnose exhausted orders
+## Current investigation: compose 24 failures; avoid duplicate cold preparation
+
+[Owned checked sessions](prepared-b6-search.md) address repeated preparation:
+100 incremental calls use 18 indexes instead of 100, preserving every result.
+Complete measured time falls 44.32% versus ordinary chunks, but remains 2.61%
+slower than one uninterrupted pass. Six exhausted inputs regress because setup
+cannot be amortized. Cold recovery and peak memory do not improve. Use sessions
+for incremental work and the standalone API for a single pass.
+
+**Next coverage target:** compose the 24 current B6 failures in seven cases.
+The earlier nine-failure diagnostic produced ten assignments and no contradiction;
+continuation has since added fifteen failures. Ten literal orders are exhausted;
+unchanged exhausted banks need stronger interaction. Coverage remains 228/246.
+
+**Remaining cost targets:** source-prefix reconstruction is the largest individual
+stage; cold semantic checking and new-session construction repeat much of the
+same validation. Investigate a checked preparation handoff, preserving source,
+proof, closure and cursor checks. The open export grows to 1,474,056 bytes while
+all old histories remain; storage sharing is still open. All 2,013 tests pass.
+Resume `experiments/results/cnf-prepared-b6-search/checkpoint.json` and each row's
+new `b6_prepared_cursor`. No production default or unrestricted-SAT bound changes.
+
+## Previous investigation: compose B6 failures and diagnose exhausted orders
 
 [B6 continuation](b6-probe-cursor.md) closes `(37,0)`, reaching 228/246 sampled
 recognition with 18 open. **Next coverage target:** compose nine checked failures

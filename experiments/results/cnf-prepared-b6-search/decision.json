@@ -1,0 +1,355 @@
+{
+  "checks": {
+    "focused_tests": 148,
+    "full_tests": 2013,
+    "new_native_archives": 0,
+    "parent_manifests": 197,
+    "prior_artifact_entries": 27695,
+    "prior_sources": 1116,
+    "proof_blocks": 64
+  },
+  "comparisons": {
+    "chunks": {
+      "continuation_seconds": {
+        "improved": 12,
+        "regressed": [
+          [
+            28,
+            17
+          ],
+          [
+            61,
+            0
+          ],
+          [
+            61,
+            21
+          ],
+          [
+            61,
+            50
+          ],
+          [
+            61,
+            51
+          ],
+          [
+            61,
+            74
+          ]
+        ]
+      },
+      "record_bytes": {
+        "improved": 0,
+        "regressed": []
+      },
+      "recovery_seconds": {
+        "improved": 6,
+        "regressed": [
+          [
+            28,
+            17
+          ],
+          [
+            28,
+            18
+          ],
+          [
+            28,
+            19
+          ],
+          [
+            37,
+            39
+          ],
+          [
+            40,
+            0
+          ],
+          [
+            61,
+            0
+          ],
+          [
+            61,
+            21
+          ],
+          [
+            61,
+            50
+          ],
+          [
+            61,
+            51
+          ],
+          [
+            61,
+            52
+          ],
+          [
+            61,
+            61
+          ],
+          [
+            61,
+            74
+          ]
+        ]
+      }
+    },
+    "single": {
+      "continuation_seconds": {
+        "improved": 0,
+        "regressed": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            15
+          ],
+          [
+            28,
+            17
+          ],
+          [
+            28,
+            18
+          ],
+          [
+            28,
+            19
+          ],
+          [
+            37,
+            39
+          ],
+          [
+            37,
+            40
+          ],
+          [
+            40,
+            0
+          ],
+          [
+            61,
+            0
+          ],
+          [
+            61,
+            21
+          ],
+          [
+            61,
+            50
+          ],
+          [
+            61,
+            51
+          ],
+          [
+            61,
+            52
+          ],
+          [
+            61,
+            60
+          ],
+          [
+            61,
+            61
+          ],
+          [
+            61,
+            74
+          ],
+          [
+            67,
+            0
+          ],
+          [
+            67,
+            63
+          ]
+        ]
+      },
+      "record_bytes": {
+        "improved": 0,
+        "regressed": []
+      },
+      "recovery_seconds": {
+        "improved": 7,
+        "regressed": [
+          [
+            28,
+            17
+          ],
+          [
+            28,
+            18
+          ],
+          [
+            28,
+            19
+          ],
+          [
+            37,
+            39
+          ],
+          [
+            37,
+            40
+          ],
+          [
+            40,
+            0
+          ],
+          [
+            61,
+            52
+          ],
+          [
+            61,
+            60
+          ],
+          [
+            61,
+            61
+          ],
+          [
+            61,
+            74
+          ],
+          [
+            67,
+            63
+          ]
+        ]
+      }
+    }
+  },
+  "complete_reduction_vs_chunks_percent": 44.31708028241977,
+  "complete_regression_vs_single_percent": 2.610609546137166,
+  "continuation_reduction_vs_chunks_percent": 80.4035684725473,
+  "coverage": {
+    "after": 228,
+    "before": 228,
+    "total": 246
+  },
+  "diagnostic": {
+    "additional_assignments": 10,
+    "changed_cases": 6,
+    "refutations": 0
+  },
+  "exhausted_orders": [
+    {
+      "completed": 254,
+      "event": 0,
+      "target": 1
+    },
+    {
+      "completed": 250,
+      "event": 15,
+      "target": 1
+    },
+    {
+      "completed": 128,
+      "event": 17,
+      "target": 28
+    },
+    {
+      "completed": 120,
+      "event": 18,
+      "target": 28
+    },
+    {
+      "completed": 116,
+      "event": 19,
+      "target": 28
+    },
+    {
+      "completed": 152,
+      "event": 0,
+      "target": 61
+    },
+    {
+      "completed": 146,
+      "event": 21,
+      "target": 61
+    },
+    {
+      "completed": 152,
+      "event": 50,
+      "target": 61
+    },
+    {
+      "completed": 150,
+      "event": 51,
+      "target": 61
+    },
+    {
+      "completed": 142,
+      "event": 74,
+      "target": 61
+    }
+  ],
+  "limitations": [
+    "Eighteen exposed B6 cases, including six already exhausted literal orders. The nine parent failures were composed diagnostically first: no contradiction and ten new assignments. No holdout.",
+    "All arms reconstruct the source prefix once and continue the identical retained B6 cursor. Single takes one64-probe call. Chunks and prepared take at most eight8-probe calls, stopping immediately on complete/refuted/budget status.",
+    "Each call allows262144 occurrence visits and256 trace steps. Chunked arms can spend more total work allowance; observed propagation and final results must match the single arm. Earlier acquisition is excluded.",
+    "Prepared owns a deep copy of the original inputs, validates once, retains the exact binding, fixed closure prefix, residual index and live scheduling state, then drops unused proof layers. Public results are deep copies. Same-process private state is trusted; reflection or concurrent mutation is outside contract.",
+    "A changed input, closure or trace allowance requires a new checked session. Portable cursor imports and cold recovery validate original inputs and history; no process-global digest-only cache or native proof bypass.",
+    "Census charges source reconstruction, construction/copying, all calls, final serialization/reload, full semantic verification and a new cold session construction. Startup/loading, prior acquisition, pilot diagnostic and final audit are additional.",
+    "Cold recovery and one uninterrupted pass are controls; warm chunk savings do not imply a cold or single-pass advantage. Per-probe initialization, proof copying, provenance and lifetime storage remain.",
+    "All old histories and diagnostic closures remain; new cursors are appended, not overwritten. No production default, native authority table or unrestricted SAT bound changes."
+  ],
+  "new_failures": 15,
+  "next_targets": [
+    "Compose all24 current B6 failed assumptions in seven cases. The diagnostic composed only the earlier nine, gaining ten assignments but no contradiction.",
+    "Ten cases exhaust the current literal order. Changed feedback banks permit fresh probing; unchanged exhausted banks need stronger interaction, not a repeated order.",
+    "Retain prepared sessions for repeated chunks; prefer the standalone API for one uninterrupted pass. Cold recovery still pays full validation.",
+    "Investigate a checked handoff from cold result verification into session construction to avoid validating the same payload twice. Do not bypass source/proof/closure validation.",
+    "Source-prefix reconstruction remains the largest individual stage. Evaluate shared checked prefix data with exact source/guard/context bindings; lifetime proof/cursor storage remains unbounded."
+  ],
+  "outcome": "Owned checked sessions remove repeated setup during incremental B6 search, with unchanged exact search results and no new refutation.",
+  "remaining": 18,
+  "retained_failures": [
+    {
+      "event": 15,
+      "failures": 2,
+      "target": 1
+    },
+    {
+      "event": 18,
+      "failures": 1,
+      "target": 28
+    },
+    {
+      "event": 19,
+      "failures": 5,
+      "target": 28
+    },
+    {
+      "event": 39,
+      "failures": 4,
+      "target": 37
+    },
+    {
+      "event": 40,
+      "failures": 8,
+      "target": 37
+    },
+    {
+      "event": 0,
+      "failures": 3,
+      "target": 40
+    },
+    {
+      "event": 61,
+      "failures": 1,
+      "target": 61
+    }
+  ]
+}

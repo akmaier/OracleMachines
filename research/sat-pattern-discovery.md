@@ -5,7 +5,25 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: stronger bank loses to productive schedule continuation
+## Latest evidence: finishing both B12 orders adds four forced values
+
+[Batched continuation](b12-continuation-batch.md) finds failures 32 at `(37,39)`
+and 131 at `(67,63)`. Checked recomposition forces 32=false in the first case and
+49=true, 131=false, 145=true in the second. Residual clauses shrink by eight and
+seventeen respectively. Coverage remains **232/246** with fourteen open.
+
+Both fixed-bank B12 orders now exhaust every case; no SAT verdict follows, and
+B13 histories remain separate. Test the newly strengthened residuals next, while
+avoiding identical exhausted replays. Cases without changed structure need
+stronger interactions or another decomposition. Common preparation across rounds
+saves 9–10% of total measured time with exactly matching snapshots; cold checking
+is now about 40% of runtime. All 2,145 tests pass.
+
+Resume `experiments/results/cnf-b12-continuation-batch/checkpoint.json`. Round
+budgets, provenance, cold checking and growing retained space remain explicit;
+there is no new native certificate or efficient arbitrary-CNF partition.
+
+## Previous evidence: stronger bank loses to productive schedule continuation
 
 [B13 expansion](b13-probe-cursor.md) preserves both B12 failure histories and
 B11 continuation through separate original-bank checks and shared preparation.

@@ -13686,6 +13686,73 @@ Exhausted unchanged cases need stronger interactions or another decomposition.
 No new native certificate, production default, compact-closure guarantee or
 uniform polynomial acquisition bound follows.
 
+\subsection{One owned preparation supports several bounded continuation rounds}
+
+The next experiment continues both B12 policies for at most three additional
+rounds of $64$ probes each.  A batch privately copies the original inputs,
+closures and cursor, prepares the common bank and provenance once, and uses the
+existing search engine and per-round limits.  Each result is copied before
+export and retains the existing B12 format.  An ordinary cold validator checks
+every saved round independently; no trust passes from discovery to checking.
+
+Portable cursor replay remains necessary between rounds.  The existing search
+can pop its next root before noticing a probe or work limit.  Directly reusing
+its mutated queue could skip that uncompleted root or lose an opposite-literal
+promotion.  Replaying the completed sequence reconstructs the exact next root,
+checks the policy binding and rechecks saved failed proofs.  Only the invariant
+preparation is shared.  Each round still constructs its index and receives its
+own work allowance.  Refutation, a generated complete result, or zero completed
+progress stops the batch; stalled work remains available for cold resumption.
+
+Both B12 orders now finish all fourteen fixed-bank schedules.  They find new
+failures $32$ at $(37,39)$ and $131$ at $(67,63)$.  Checked joint closure forces
+$32=0$ in the first case and $49=1$, $131=0$, $145=1$ in the second, in local
+coordinates.  Their residuals shrink from $553$ to $545$ clauses and $138$ to
+$137$ variables, and from $347$ to $330$ clauses and $134$ to $131$ variables.
+The two policies also rediscover failures already retained from the other policy;
+these are not counted as novel.  No case closes: coverage remains $232/246$.
+Exhausting B12 does not establish SAT or exhaust retained B13 histories.  A union
+consumes all constituent rounds and both policy budgets, not one $64$-probe pass.
+
+Four balanced rotating mode orders compare the batch with separate calls to the
+current shared-B12 implementation before regression tests run.  Twelve cases
+stop after one already-complete round; two use three rounds, producing eighteen
+snapshots per policy.  Source-order discovery falls from $0.25510$ to $0.19005$
+seconds ($25.50\%$), and untested-first from $0.25401$ to $0.18989$ ($25.24\%$).
+Complete measured time falls from $0.68498$ to $0.61624$ seconds ($10.03\%$), and
+from $0.67816$ to $0.61496$ ($9.32\%$).  Every round's result and search counters
+match separate calls.  Common preparations fall from $18$ to $14$, while search
+keeps $296$ probes, eighteen index builds and $10{,}028$ or $8{,}969$ occurrence
+visits.  All-history schedule checks fall from $34{,}896$ to $28{,}108$; their
+reduction belongs to preparation rather than changed search work.
+
+On the two productive cases alone, discovery improves $62.56\%$ and $62.66\%$.
+Each policy nevertheless has five discovery case regressions among single-round
+cases, where no preparation reuse is available.  Unchanged cold checking has six
+and nine case regressions, and untested-first aggregate checking is $0.91\%$
+slower.  Source persistence has ten case regressions despite a lower total.
+All measurements and the initial counter-classification test correction are
+retained.  The implementation was unchanged by that test correction.
+
+The source batch charges $0.16425$ seconds reconstruction, $0.19005$ discovery,
+$0.24717$ cold checking and $0.00558$ serialization/reload.  Cold checking is now
+about $40\%$ of measured total time.  Startup/loading, acquisition, pilots, native
+compilation, feedback composition and lineage audits are additional.  Audit
+diagnostics run alongside tests and are not production timings.  Snapshot bytes
+remain $226{,}983$ and $229{,}561$ for the two policies, with peak RSS about
+$99$ MB.  No material peak-memory or serialized-space saving is established.
+
+For $r$ rounds, common preparation cost $rP$ becomes $P$; cursor replay, indexes,
+search, copied snapshots, persistence and cold checks remain charged per round.
+Probe budgets do not cover all these costs.  An independently owned cold batch
+could share preparation while checking every snapshot, but it must establish its
+own authority from portable inputs.  The new $15{,}490$-byte resume overlay
+references $4{,}508{,}174$ bytes across $214$ transitive frontier files.  Lifetime
+evidence space grows.  The next coverage comparison should use the strengthened
+residuals and retained B13 schedules; identical exhausted B12 replays cannot add
+information.  No native certificate, production default or uniform polynomial
+bound for arbitrary SAT or oracle acquisition follows.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

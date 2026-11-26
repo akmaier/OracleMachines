@@ -4,7 +4,17 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, B13 versus continued B12):
+Latest expansion checkpoint (26 November, batched B12 continuation):
+[Batched continuation](b12-continuation-batch.md) shares one checked preparation
+across bounded rounds, saving 25% discovery and 9–10% total time. Exact per-round
+results and search work are unchanged. Two new failures force four values across
+`(37,39)` and `(67,63)`, shrinking their residuals to 545 and 330 clauses. Both
+B12 policies are now exhausted on all fourteen fixed banks; coverage stays 232/246.
+Cold checking is the next measured cost at about 40%; stronger residuals and
+retained B13 schedules are the next coverage comparison. All 2,145 tests pass.
+Resume `experiments/results/cnf-b12-continuation-batch/checkpoint.json`.
+
+Previous expansion checkpoint (26 November, B13 versus continued B12):
 [B13 comparison](b13-probe-cursor.md) retains a negative expansion result: no new
 failure versus two from continued source-order B12. Their closure forces 116=true
 and 119=true at `(67,63)`, reducing 358 clauses to 347. Coverage remains 232/246.

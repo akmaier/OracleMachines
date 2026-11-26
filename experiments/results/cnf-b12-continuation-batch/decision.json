@@ -1,0 +1,145 @@
+{
+  "closure_gains": [
+    {
+      "event": 39,
+      "joint_added": [
+        [
+          32,
+          false
+        ]
+      ],
+      "residual_after": {
+        "clauses": 545,
+        "literals": 1552,
+        "variables": 137
+      },
+      "residual_before": {
+        "clauses": 553,
+        "literals": 1575,
+        "variables": 138
+      },
+      "seconds": 0.28645516699180007,
+      "source_new": [
+        32
+      ],
+      "target": 37,
+      "unseen_new": [
+        32
+      ]
+    },
+    {
+      "event": 63,
+      "joint_added": [
+        [
+          49,
+          true
+        ],
+        [
+          131,
+          false
+        ],
+        [
+          145,
+          true
+        ]
+      ],
+      "residual_after": {
+        "clauses": 330,
+        "literals": 935,
+        "variables": 131
+      },
+      "residual_before": {
+        "clauses": 347,
+        "literals": 986,
+        "variables": 134
+      },
+      "seconds": 0.19702591700479388,
+      "source_new": [
+        83,
+        131
+      ],
+      "target": 67,
+      "unseen_new": [
+        -119,
+        -116,
+        131
+      ]
+    }
+  ],
+  "coverage": {
+    "after": 232,
+    "before": 232,
+    "total": 246
+  },
+  "daily_external_review": "Already completed 2026-11-26; see research/pequalnp-watch.md. No external theorem imported.",
+  "decision": "Retain the owned continuation batch for repeated bounded rounds. Stop identical exhausted B12 replays; compare the strengthened residuals with retained B13 histories.",
+  "evidence": {
+    "analysis": {
+      "path": "experiments/results/cnf-b12-continuation-batch/analysis.json",
+      "sha256": "7fd6f120fce58d016884a2382f9e37a22079dc4abc83d65e54a6575c36a4b747"
+    },
+    "parent_validation": {
+      "path": "experiments/results/cnf-b13-probe-cursor/validation.json",
+      "sha256": "99604739088d152c250dbeb486b45c877fed39001d841d7a52bdf96cb4c9a54c"
+    },
+    "test_correction": {
+      "path": "experiments/results/cnf-b12-continuation-batch/test-correction.json",
+      "sha256": "3271ca310876027caab05affbfa28b510563a79fee45f08485980d49375233cc"
+    }
+  },
+  "limitations": [
+    "Fourteen exposed cases and at most three rounds per policy; four balanced repetitions. Savings concentrate in the two multi-round cases.",
+    "Exact search and every snapshot are unchanged. Cold checking remains separate for each snapshot and consumes about 40% of measured time.",
+    "Both B12 schedules are exhausted on fixed banks. This does not decide SAT or exhaust other stronger-bank histories.",
+    "Peak memory and snapshot bytes do not materially improve; all round evidence and historical dependencies remain and lifetime space grows.",
+    "No new native certificate, production default or unrestricted-SAT resource bound. Startup/loading, acquisition, pilots, native compilation and audits are additional."
+  ],
+  "measurements": {
+    "source": {
+      "after_seconds": 0.6162415627622977,
+      "before_seconds": 0.6849788436666131,
+      "cold_checks": 18,
+      "preparations": {
+        "after": 14,
+        "before": 18
+      },
+      "record_bytes": 226983.0,
+      "reductions_percent": {
+        "complete_seconds": 10.034949479077726,
+        "discovery_seconds": 25.500333125039333
+      }
+    },
+    "unseen": {
+      "after_seconds": 0.6149599991040304,
+      "before_seconds": 0.6781566245481372,
+      "cold_checks": 18,
+      "preparations": {
+        "after": 14,
+        "before": 18
+      },
+      "record_bytes": 229561.0,
+      "reductions_percent": {
+        "complete_seconds": 9.318883449116989,
+        "discovery_seconds": 25.241215122156223
+      }
+    }
+  },
+  "new_failures": [
+    {
+      "event": 39,
+      "globally_new_failures": [
+        32
+      ],
+      "target": 37
+    },
+    {
+      "event": 63,
+      "globally_new_failures": [
+        131
+      ],
+      "target": 67
+    }
+  ],
+  "next_cost_target": "Share invariant preparation in an independently owned cold batch while checking each snapshot; no trust may pass from discovery.",
+  "next_coverage_target": "Test changed closures at (37,39) and (67,63) against retained B13 schedules; stronger checked interactions or decomposition are needed for unchanged exhausted cases."
+}

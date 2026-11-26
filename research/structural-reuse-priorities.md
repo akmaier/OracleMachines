@@ -12,7 +12,32 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: continue productive schedules before another expansion layer
+## Current investigation: strengthen exhausted residuals; share cold-check preparation
+
+[Batched B12 continuation](b12-continuation-batch.md) finds two new failed
+assumptions, forcing **four additional assignments across two cases**. Residual
+clauses shrink **553 → 545** at `(37,39)` and **347 → 330** at `(67,63)`. Coverage
+stays **232/246**, with fourteen open. Both B12 policies now exhaust all fourteen
+fixed-bank orders; this is not SAT and does not exhaust retained B13 searches.
+
+One owned preparation across up to three bounded rounds saves **25.50% / 25.24%**
+discovery time and **10.03% / 9.32%** complete measured time for source / untested-first.
+Every round matches separate calls exactly and keeps its ordinary independent
+cold check. Cursor replay remains mandatory at round boundaries to restore any
+popped but unfinished root. Peak memory and snapshot sizes do not improve.
+
+**Next coverage target:** test the two strengthened closures against retained B13
+schedules; stop identical replays of exhausted B12 banks. Unchanged exhausted
+cases require stronger checked interactions or another decomposition. **Next
+measured runtime target:** cold checking now costs about 40% of the workflow;
+share only its invariant preparation within an independently owned cold batch,
+while checking every snapshot. Earlier native compilation limitations remain.
+
+Resume `experiments/results/cnf-b12-continuation-batch/checkpoint.json`. All 2,145
+tests pass. Every round, previous proof set and negative result is retained; no
+new native certificate or unrestricted-SAT resource bound follows.
+
+## Previous investigation: continue productive schedules before another expansion layer
 
 [B13 versus B12 continuation](b13-probe-cursor.md) finds that continued source
 order supplies two new failures at `(67,63)`, forcing 116=true and 119=true.

@@ -1,0 +1,5 @@
+{
+  "correction": "Keep exact search-operation and snapshot equality; track preparation/history counters separately. A spy verifies one portable cursor reload per round.",
+  "failure": "A test compared cursor_schedule_checks as if it counted only current-round work. It includes lower-history checking inside preparation, so the expected reduction broke the assertion (2282 versus 5694).",
+  "scope": "Test correction only; batch implementation and pilot unchanged. Failure retained."
+}

@@ -5,7 +5,24 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: stronger checked histories expose an augmented contradiction
+## Latest evidence: the augmented contradiction now has source-only authority
+
+[Native B13 feedback reconstruction](b13-native-feedback.md) certifies `(67,63)`
+through every original-bank dependency and both independent archive readers.
+Structural coverage is **233/246**, leaving **thirteen open cases**. All older
+results and every field of the remaining frontier are preserved; the new
+`(37,39)` closure is the next concrete interaction lead.
+
+The coverage gain does not establish an efficient new SAT class. Fresh solving
+also refutes this snapshot and is cheaper: direct reconstruction is **32.83%
+slower end to end** and stores **32.49% more bytes**. Following provenance without
+direct source-unit shortcuts expands to 2,507 native records. Future reuse policy
+must compare native conversion and cold checking with a fresh solve, while
+discovery seeks broader structural coverage. No arbitrary-CNF partition or
+uniform acquisition bound follows. Resume
+`experiments/results/cnf-b13-native-feedback/checkpoint.json`.
+
+## Previous evidence: stronger checked histories expose an augmented contradiction
 
 [Updating B13 with completed B12 histories](b13-strengthened-histories.md) yields
 14 new failed assumptions across the two changed cases. `(37,39)` gains 37=false

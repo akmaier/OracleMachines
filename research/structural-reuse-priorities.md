@@ -12,7 +12,29 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: reconstruct the new augmented refutation natively
+## Current investigation: thirteen open cases and native proof expansion cost
+
+[Source-only B13 certification](b13-native-feedback.md) closes `(67,63)` with
+both cold readers, raising structural coverage to **233/246**, with **13 open**.
+The saved candidate is now a native certificate for its original snapshot;
+all older histories and native results remain. Fresh solving also closes it.
+
+Direct reconstruction costs **0.791 s versus 0.595 s fresh** (**32.83% more**)
+and stores **117 versus 95 native records**, **32.49% more bytes**. Without
+direct source-unit shortcuts, reconstruction expands to **2,507 records** and
+**18.468 s**. Retain this regression: checked provenance alone does not make
+reconstruction cheap. Construction and cold checking account for about 39% and
+43% of direct cost; no production default is changed.
+
+**Next coverage priority:** exploit `(37,39)`'s retained new closure and seek
+stronger interactions or another decomposition on the remaining thirteen.
+**Next cost priority:** reduce repeated conditioned source contexts or select
+smaller source supports, compared against fresh solving with storage and cold
+checking charged. Avoid further identical exhausted-bank replay. Resume
+`experiments/results/cnf-b13-native-feedback/checkpoint.json`; the supplemental
+archives certify one root, not an unrestricted-SAT resource bound.
+
+## Previous investigation: reconstruct the new augmented refutation natively
 
 [Extended B12 histories within B13](b13-strengthened-histories.md) expose **14 new
 failed assumptions** across the two changed cases, without adding a B14 search

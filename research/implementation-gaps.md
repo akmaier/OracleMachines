@@ -4,7 +4,16 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (26 November, strengthened B13 histories):
+Latest expansion checkpoint (26 November, native B13 feedback):
+[Source-only reconstruction](b13-native-feedback.md) certifies `(67,63)` with both
+cold readers: coverage **233/246**, thirteen open. Direct reconstruction is 32.83%
+slower and stores 32.49% more bytes than fresh solving on this case; the disabled
+shortcut arm's 2,507 records expose native proof expansion as a remaining cost.
+Preserve the regression and `(37,39)`'s new closure. Resume
+`experiments/results/cnf-b13-native-feedback/checkpoint.json`; earlier archives,
+tables and frontier fields are unchanged. All 2,167 tests and 31 focused tests pass.
+
+Previous expansion checkpoint (26 November, strengthened B13 histories):
 [Longer checked histories in the existing B13 schema](b13-strengthened-histories.md)
 find 14 new failed assumptions. `(37,39)` shrinks 545 → 534 residual clauses;
 `(67,63)` yields a checked 34-step augmented-bank contradiction. Source-only native

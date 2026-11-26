@@ -98,7 +98,7 @@ fully recorded; the collaborator name is not a claim that one fixed model made
 every contribution.  Source, proofs and retained evidence are available at
 \url{https://github.com/akmaier/OracleMachines}.  The first alphaXiv publication covers repository checkpoint \texttt{918fc95a}.
 This working revision additionally records the checked strengthened-B13
-experiment and its pending native-certificate obligation; published-version
+experiment, its source-only certificate and measured reconstruction costs; published-version
 metadata and exact PDFs are retained separately in the repository.  Machine checks support the stated artifacts and
 hypotheses, not a proof of unrestricted $\Pclass=\NPclass$.
 
@@ -13882,6 +13882,66 @@ The next task is source-only reconstruction of $(67,63)$, charging conversion
 and cold checks against fresh solving, while retaining $(37,39)$'s new closure.
 This selected-case experiment supplies neither an efficient arbitrary-CNF
 partition nor a bound on the number of future strengthening rounds.
+
+\subsection{Source-only B13 certification exposes the cost of native proof expansion}
+
+The retained $(67,63)$ augmented contradiction now has a native refutation of
+its original $419$-clause, $1{,}215$-literal snapshot.  Both independent cold
+readers accept it using source-only empty, unit and split records.  Certified
+structural coverage rises from $232/246$ to $233/246$, leaving thirteen open
+snapshots.  The generating target formula is not thereby certified.  The measured
+snapshot has an empty prefix; nonempty-prefix cost is not established here.
+
+The compiler validates all histories on their original banks, then appends
+negated B13 failed assumptions to feedback bank B14 and checks the saved
+$34$-step unit contradiction there.  B14 is a compilation/checking bank, not a
+new search layer.  New origin maps retain B10 comparison at bank $10$, B11 and
+its continuation at bank $11$, B12 source/unseen at bank $12$, and B13 failures
+at bank $13$.  Each derived-unit dependency must descend to a lower bank, with
+its failed assumption present in the current context.  Original source and
+guard support remain checked separately.
+
+The reconstruction argument follows these dependencies inductively.  A forced
+literal splits the restricted source: its excluded branch is refuted through
+the unit's checked origin, and its live branch through the remainder of the
+trace.  Origin expansion decreases bank stage; continuation advances trace
+position.  Source leaves and optional direct unit shortcuts depend only on the
+restricted source.  An absent-coordinate lift requires identical canonical
+roots.  Native record checking and both cold readers validate the resulting
+graph.  Compiler warm hits revalidate the supplied histories before lookup;
+native archive readers require no discovery histories.  This gives exact
+recomposition but no unrestricted bound on acquisition, rounds or graph growth.
+
+Six balanced permutations compare fresh solving with a $256$-node limit,
+provenance compilation with direct shortcuts disabled, and compilation with
+the existing bounded source-unit shortcut.  All three refute the same snapshot.
+Their complete times are $0.59542$, $18.46791$ and $0.79089$ seconds.  Native
+record counts are $95$, $2{,}507$ and $117$; record bytes are $1{,}256{,}004$,
+$31{,}081{,}306$ and $1{,}664{,}028$.  Direct compilation is $32.83\%$ slower
+overall and stores $32.49\%$ more bytes than fresh solving.  Its construction
+takes $0.31226$ seconds, warm reuse $0.02295$, both cold readers $0.33677$, and
+persistence $0.11514$.  Fresh values are $0.25507$, $0.00192$, $0.25065$ and
+$0.08280$.  Compiler warm reuse checks the histories again, whereas fresh warm
+reuse calls the solver again; these are distinct public workflows, not identical
+root-lookup microbenchmarks.  Historical acquisition, discovery, loading and
+final lineage audits remain additional.
+
+Peak RSS is $72{,}220{,}672$, $427{,}671{,}552$ and $76{,}873{,}728$ bytes;
+compressed archives occupy $126{,}513$, $3{,}217{,}692$ and $164{,}024$ bytes.
+The $6{,}099$-byte resume overlay excludes only the certified root and retains
+all fields of the thirteen others.  Its $263{,}160$-byte case and archived trials
+are additional to the earlier histories.  The three archive variants certify
+one root, not three coverage gains.  Earlier authority tables are unchanged.
+
+Direct source-unit shortcuts greatly reduce expansion relative to disabled
+compilation but do not beat the fresh baseline.  Cold checking and construction
+account for about $43\%$ and $39\%$ of direct cost.  The next cost investigation
+should examine smaller source supports or repeated conditioned contexts, with
+fresh solving retained as an alternative.  The next coverage investigation
+should use $(37,39)$'s saved new closure and stronger interactions or another
+decomposition on the remaining thirteen, avoiding identical exhausted searches.
+No production default, efficient arbitrary-CNF partition or uniform polynomial
+unrestricted-SAT bound changes in this selected-case checkpoint.
 
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}

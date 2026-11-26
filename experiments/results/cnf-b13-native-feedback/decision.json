@@ -1,0 +1,80 @@
+{
+  "coverage": {
+    "after": 233,
+    "before": 232,
+    "total": 246
+  },
+  "decision": "Retain the source-only B13 certificate and remove only (67,63) from the open frontier. Preserve the fresh-solve performance advantage; do not promote provenance compilation to a production default.",
+  "evidence": {
+    "analysis": {
+      "path": "experiments/results/cnf-b13-native-feedback/analysis.json",
+      "sha256": "47560a21881e10ad5802a4f174a10a82fee71bb36f74d5a9b95a05e4a21e5b22"
+    },
+    "parent_validation": {
+      "path": "experiments/results/cnf-b13-strengthened-histories/validation.json",
+      "sha256": "b581f00180b9f08029fe88cb3e7873d49f9e81fe4b7088c5720b5c97069f324c"
+    }
+  },
+  "gained_events": [
+    [
+      67,
+      63
+    ]
+  ],
+  "limitations": [
+    "One exposed candidate (67,63), selected by the preceding augmented-bank contradiction; not held-out or representative arbitrary SAT evidence.",
+    "Six balanced order permutations run in fresh processes before heavy checks. Native solve includes all original-bank history checking and prefix reconstruction.",
+    "Fresh solving receives a 256-node limit. Disabled follows checked provenance without direct unit shortcuts; direct adds the existing bounded source-unit shortcut.",
+    "Warm compiler reuse revalidates supplied histories before root lookup. Cold archive readers use source-only native records and need no B13 histories.",
+    "Timed complete cost includes database creation, native conversion/solving, warm reuse, both cold readers and compressed persistence. Historical acquisition, candidate discovery, input loading and final audit are additional.",
+    "All prior source files, archives and frontier fields remain unchanged. A supplemental archive certifies one original snapshot root, not the full target formula or all unrestricted SAT.",
+    "Recursive proof dependencies strictly decrease bank stage; within a trace its index advances. Repeated contexts can still produce exponential native graphs.",
+    "The measured prefix is empty. Compiler warm calls revalidate all histories, unlike an ordinary native root lookup.",
+    "Both initial failures were incorrect test fixture mutations, not compiler failures. Their sources and logs are preserved; the test-only protocol correction leaves timed code unchanged."
+  ],
+  "measurements": {
+    "native_records": {
+      "direct": 117,
+      "disabled": 2507,
+      "fresh": 95
+    },
+    "native_totals": {
+      "direct": {
+        "cold_seconds": 0.3367701875201116,
+        "complete_seconds": 0.7908874026034027,
+        "persistence_seconds": 0.11513781943358481,
+        "record_bytes": 1664028.0,
+        "solve_seconds": 0.31226077078220743,
+        "warm_seconds": 0.02294700002918641
+      },
+      "disabled": {
+        "cold_seconds": 8.322374791683009,
+        "complete_seconds": 18.46791208302602,
+        "persistence_seconds": 2.35029577719979,
+        "record_bytes": 31081306.0,
+        "solve_seconds": 7.681114632170647,
+        "warm_seconds": 0.024370729302366573
+      },
+      "fresh": {
+        "cold_seconds": 0.25064709736034274,
+        "complete_seconds": 0.5954180484792838,
+        "persistence_seconds": 0.08280105524075528,
+        "record_bytes": 1256004.0,
+        "solve_seconds": 0.2550662427674979,
+        "warm_seconds": 0.0019213887862861156
+      }
+    },
+    "peak_rss_bytes": {
+      "direct": 76873728,
+      "disabled": 427671552,
+      "fresh": 72220672
+    },
+    "record_increase_vs_fresh_percent": 32.48588380291781,
+    "total_increase_vs_fresh_percent": 32.82892660431671
+  },
+  "native_archive_variants": 3,
+  "new_native_root_count": 1,
+  "next_cost_target": "Profile native graph materialization and cold checking; compare smaller source supports or shared conditioned contexts with fresh solving, charging storage and all preparation.",
+  "next_coverage_target": "Investigate stronger interactions or another decomposition on the thirteen remaining cases, starting from the new (37,39) closure. Do not replay identical exhausted banks.",
+  "publication": "The existing alphaXiv publication remains frozen at 918fc95a; the daily update can publish this newly verified work as a revision."
+}

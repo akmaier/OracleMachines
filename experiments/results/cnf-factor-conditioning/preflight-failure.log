@@ -1,0 +1,4 @@
+Initial root-transport preflight failed before any benchmark protocol or timing was accepted.
+TypeError: can only concatenate list (not "tuple") to list
+  experiments/cnf_factor_conditioning.py, frontier: current+learned
+The stored node CNF is a JSON list; joint.check returns a tuple. The correction converts learned clauses to a list for this concatenation. No SAT claim or measured result from this failed preflight is retained as verified.

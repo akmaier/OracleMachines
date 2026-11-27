@@ -1,0 +1,59 @@
+{
+  "audit_reproduction": {
+    "path": "experiments/results/cnf-factor-conditioning/audit_cutsets.py",
+    "sha256": "f7905f23a4a1f47175fdb0e71a9c78b7beaf9187a1466a1a564c427049c1482d"
+  },
+  "coverage_union": {
+    "path": "experiments/results/cnf-factor-conditioning/coverage-union.json",
+    "sha256": "dae126aabfb584d25ffdd1d1aac189558f2218323f5a5bd4848bafdbaa79865f"
+  },
+  "development_failure_explanations": [
+    "JSON-list/tuple concatenation fixed before benchmark protocol; no accepted timing used the initial source.",
+    "JSON integer/string dictionary keys compared as parsed values after validation-only correction; measured code and evidence unchanged."
+  ],
+  "development_failures": [
+    {
+      "path": "experiments/results/cnf-factor-conditioning/preflight-source-before-fix.py",
+      "sha256": "2cc79c9a4d9b8875a745a7c0e1801fd47dd962d5cb60f3eee2632e30927a6a3b"
+    },
+    {
+      "path": "experiments/results/cnf-factor-conditioning/validator-before-json-key-fix.py",
+      "sha256": "7305e2dd842b5bc916f98e786d0c3ebb2f4ab24b08b72f78f5e4d9cb15ab5d14"
+    }
+  ],
+  "existing_resource_warnings_retained": true,
+  "focused_tests": 16,
+  "full_test_seconds": 283.718,
+  "full_tests": 2431,
+  "manuscript": {
+    "added_proofs": 1,
+    "clean_latex_passes": 2,
+    "old_proofs_unchanged": 81,
+    "pages": 350,
+    "visually_inspected_pages": [
+      341,
+      342,
+      343
+    ]
+  },
+  "passed": true,
+  "retained_diagnostic_screen": {
+    "path": "experiments/results/cnf-factor-conditioning/cutset-screen.json",
+    "sha256": "2482184fc9eb14b384b04509e38a951bd175d79746bb3c9a61fbcc97ea515f86"
+  },
+  "scope": "Independent audits and previous-root acquisition are outside matched incremental timing. Root union completion is restricted to the retained synthetic panel.",
+  "semantic_archive": {
+    "path": "experiments/results/cnf-factor-conditioning/semantic-audit-certificates.json.gz",
+    "sha256": "ff9a2f363ffe36cf219dfa25eba31c96f29689b21c0084f28abc135edf39f00c"
+  },
+  "semantic_archive_rechecked": true,
+  "semantic_audit": {
+    "path": "experiments/results/cnf-factor-conditioning/semantic-audit.json",
+    "sha256": "5af410f70af6cb0ed2a76b56ed7f9136a941cf6ed337dfcacc57d43b9ff9ad62"
+  },
+  "semantic_records": 632,
+  "semantic_results": {
+    "sat": 212,
+    "unsat": 420
+  }
+}

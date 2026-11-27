@@ -4,7 +4,48 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-## Latest checkpoint: exact factor-width partition and obstructions
+## Latest evidence: conditioned factors close the retained panel
+
+[Checked factor conditioning](factor-conditioning.md) supplies original-source
+SAT witnesses for **both remaining roots**. The independently rechecked union
+covers **182/182 queries on the existing synthetic panel**, preserving all 180
+prior authorities. This is finite-panel completion, not arbitrary SAT or external
+coverage. One internal frontier remains unresolved beneath an already-SAT root.
+
+Exact local covers are shared across a complete Boolean partition on at most four
+graph-degree-selected variables. Prefix work is charged once and all branches
+share the original remaining projection allowance. Every source, cover, branch
+and old root context is checked; models lift through all earlier reductions and
+conditioning edges and must satisfy the original root. SAT needs one valid branch;
+UNSAT requires every branch refuted. The adapter grants new root SAT authority
+only from a complete source witness.
+
+The 48 retained cut-four branches contain **6 SAT, 17 UNSAT and 25 unresolved**.
+Two-variable conditioning closes one root; four closes both. The maximum was
+selected after the retained screen and is explicitly exploratory. All modes pay
+for all three frontiers, including the still-open third. Complete incremental cost
+is **1.39737 s**, versus **0.59316 s** for width-ten continuation: **135.58% more**,
+with all eight paired signs unfavorable. Compressed new evidence grows
+730→15,980 bytes. This stage includes full old-context validation/root transport;
+it is not a new full-pipeline or fresh-solving comparison. Defaults stay unchanged.
+
+**Next coverage target: generalization and economical cutset recognition.** Freeze
+new graph structures and external CNFs before tuning; measure overlap, remaining
+interaction and whether small useful cutsets can be found cheaply. The old panel
+has reached its coverage ceiling; broader nonconstant transfer remains weak.
+**Next cost targets:** selective/adaptive branch expansion and validated source
+contexts, charging construction, invalidation and all required UNSAT obligations.
+No saving from those policies has yet been measured.
+
+The independent semantic audit checks **632 inputs, 2,486 branches and 18,230
+cofactor assignments**, with direct truth-table agreement and discovery-disabled
+cold replay. Prior evidence and 81 proof blocks are preserved; development
+failures are retained. All **2,431 full and 16 focused tests pass**; manuscript
+checks are recorded in `checks.json`.
+Resume `experiments/results/cnf-factor-conditioning/checkpoint.json`, key
+`factor_conditioning`; the new `coverage-union.json` identifies every authority.
+
+## Previous checkpoint: exact factor-width partition and obstructions
 
 [Exact factor clause-width classification](factor-clause-width.md) identifies the
 remaining obstruction more precisely. All **244 active factors** have exact

@@ -1,0 +1,5302 @@
+{
+  "counts": {
+    "bucket_checked_steps": 435,
+    "bucket_compacted_rows": 1015,
+    "bucket_leaf_rows": 1693,
+    "bucket_lookup_factors": 351,
+    "bucket_lookup_scope_visits": 890,
+    "bucket_operator_misses": 96,
+    "bucket_planning_scope_visits": 13101,
+    "bucket_projected_rows": 1902,
+    "bucket_removed_coordinates": 138,
+    "bucket_reserved_probe_work": 14850,
+    "bucket_support_pair_checks": 2305,
+    "bucket_table_probes": 9005,
+    "bucket_verified_rows": 3306,
+    "bucket_verify_table_probes": 28570,
+    "clause_candidates": 5478,
+    "clause_cover_verified_literals": 45984,
+    "clause_cover_verified_rows": 3510,
+    "clause_direct_covers": 64,
+    "clause_mask_intersections": 19302,
+    "clause_mask_rows": 6048,
+    "closed_checked_edges": 9,
+    "closed_checked_folds": 5,
+    "closed_checked_nodes": 7,
+    "closed_checked_units": 78,
+    "continuation_checked_rounds": 4,
+    "cutset_checked_branches": 32,
+    "cutset_edge_visits": 207,
+    "cutset_rank_vertices": 70,
+    "cutset_restriction_literals": 11232,
+    "feedback_checked_rounds": 2,
+    "feedback_transport_reconstructions": 4,
+    "forcing_checked_literals": 14,
+    "forcing_checked_support_edges": 148,
+    "forcing_path_walk_edges": 148,
+    "iterated_checked_rounds": 1,
+    "normalization_literal_visits": 42155,
+    "pair_checked_clauses": 92,
+    "pair_checked_copy_entries": 996,
+    "pair_checked_literals": 2394,
+    "pair_checked_prefixes": 16,
+    "probe_checked_failures": 76,
+    "probe_checked_literals": 3156,
+    "probe_checked_rounds": 14,
+    "relation_cleanup_literal_visits": 7922,
+    "restriction_literal_visits": 23468,
+    "verified_operator_hits": 327,
+    "verified_operator_insertions": 108,
+    "verified_operator_key_factors": 1616,
+    "verified_operator_key_scope_visits": 5276,
+    "verified_operator_misses": 108,
+    "verified_operator_saved_constant_rows": 1064,
+    "verified_operator_saved_nonconstant_rows": 8622,
+    "verified_operator_saved_probes": 86534,
+    "verified_operator_saved_rows": 9686,
+    "widen_checked_suffix_steps": 2,
+    "widen_materialized_leaf_rows": 5626,
+    "widen_materialized_steps": 220
+  },
+  "diagnostic": {
+    "branches": [
+      {
+        "reason": "complete",
+        "spent": 1774
+      },
+      {
+        "reason": "complete",
+        "spent": 2016
+      },
+      {
+        "reason": "complete",
+        "spent": 1376
+      },
+      {
+        "reason": "complete",
+        "spent": 2544
+      },
+      {
+        "reason": "complete",
+        "spent": 0
+      },
+      {
+        "reason": "complete",
+        "spent": 2214
+      },
+      {
+        "reason": "complete",
+        "spent": 0
+      },
+      {
+        "reason": "complete",
+        "spent": 3172
+      },
+      {
+        "reason": "complete",
+        "spent": 1754
+      },
+      {
+        "reason": "complete",
+        "spent": 0
+      },
+      {
+        "reason": "complete",
+        "spent": 0
+      },
+      {
+        "reason": "complete",
+        "spent": 0
+      },
+      {
+        "reason": "complete",
+        "spent": 0
+      },
+      {
+        "reason": "complete",
+        "spent": 0
+      },
+      {
+        "reason": "complete",
+        "spent": 0
+      },
+      {
+        "reason": "complete",
+        "spent": 0
+      }
+    ],
+    "clause_spent": 5478,
+    "factors": [
+      {
+        "index": 0,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 1,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 2,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 3,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 4,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 5,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 6,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 7,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 8,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 9,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 10,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 11,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 12,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 13,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 16,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 17,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 18,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 19,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 21,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 22,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 23,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 25,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 26,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 28,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 29,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 30,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 31,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 32,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 33,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 34,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 35,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 36,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 37,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 40,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 44,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 45,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 46,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 49,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 50,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 51,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 52,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 53,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 54,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 55,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 56,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 60,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 62,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 63,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 65,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 67,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 69,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 71,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 72,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 73,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 74,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 76,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 77,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 79,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 80,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 83,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 90,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 91,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 93,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 94,
+        "reason": "single-clause",
+        "spent": 0
+      },
+      {
+        "index": 95,
+        "reason": "tautology",
+        "spent": 0
+      },
+      {
+        "index": 96,
+        "reason": "tautology",
+        "spent": 0
+      },
+      {
+        "index": 97,
+        "reason": "exact-cover",
+        "spent": 210
+      },
+      {
+        "index": 98,
+        "reason": "exact-cover",
+        "spent": 938
+      },
+      {
+        "index": 99,
+        "reason": "exact-cover",
+        "spent": 938
+      },
+      {
+        "index": 100,
+        "reason": "exact-cover",
+        "spent": 1696
+      },
+      {
+        "index": 101,
+        "reason": "exact-cover",
+        "spent": 1696
+      }
+    ],
+    "reserved_work": 24018
+  },
+  "proof": {
+    "branches": [
+      {
+        "terminal": {
+          "cnf": [
+            [
+              -15,
+              9
+            ],
+            [
+              -14,
+              -1
+            ],
+            [
+              -14,
+              1,
+              4,
+              10
+            ],
+            [
+              -14,
+              4
+            ],
+            [
+              -14,
+              11
+            ],
+            [
+              -13,
+              -4
+            ],
+            [
+              -13,
+              1,
+              14
+            ],
+            [
+              -13,
+              2
+            ],
+            [
+              -13,
+              5,
+              6
+            ],
+            [
+              -12,
+              -11,
+              -10
+            ],
+            [
+              -12,
+              -7,
+              2
+            ],
+            [
+              -12,
+              -3
+            ],
+            [
+              -12,
+              7
+            ],
+            [
+              -11,
+              -10
+            ],
+            [
+              -11,
+              -10,
+              -9,
+              2
+            ],
+            [
+              -11,
+              -10,
+              -5
+            ],
+            [
+              -11,
+              -8
+            ],
+            [
+              -10,
+              8
+            ],
+            [
+              -9,
+              -2,
+              10
+            ],
+            [
+              -9,
+              6
+            ],
+            [
+              -8,
+              -3
+            ],
+            [
+              -8,
+              1,
+              10
+            ],
+            [
+              -6,
+              2,
+              7
+            ],
+            [
+              -6,
+              13,
+              15
+            ],
+            [
+              -5
+            ],
+            [
+              -5,
+              -4
+            ],
+            [
+              -5,
+              7
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              4,
+              15
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              1,
+              4,
+              8
+            ],
+            [
+              4,
+              11,
+              14
+            ],
+            [
+              6,
+              11,
+              13
+            ],
+            [
+              10
+            ],
+            [
+              11,
+              12,
+              15
+            ]
+          ],
+          "format": "cnf-semantic-buckets-v1",
+          "limits": {
+            "bag_limit": 9,
+            "work_limit": 252976
+          },
+          "model": [
+            false,
+            false,
+            false,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            true
+          ],
+          "reduce": true,
+          "status": "sat",
+          "steps": [
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                11,
+                20,
+                27
+              ],
+              "scope": [],
+              "variable": 3
+            },
+            {
+              "bits": 11,
+              "choices": 43740,
+              "inputs": [
+                10,
+                12,
+                22,
+                26
+              ],
+              "scope": [
+                2,
+                12
+              ],
+              "variable": 7
+            },
+            {
+              "bits": 254,
+              "choices": 10,
+              "inputs": [
+                9,
+                34,
+                36
+              ],
+              "scope": [
+                2,
+                11,
+                15
+              ],
+              "variable": 12
+            },
+            {
+              "bits": 3838,
+              "choices": 240,
+              "inputs": [
+                16,
+                17,
+                21,
+                30
+              ],
+              "scope": [
+                1,
+                4,
+                10,
+                11
+              ],
+              "variable": 8
+            },
+            {
+              "bits": 3724533245,
+              "choices": 3716210061,
+              "inputs": [
+                7,
+                14,
+                18,
+                37
+              ],
+              "scope": [
+                9,
+                10,
+                11,
+                13,
+                15
+              ],
+              "variable": 2
+            },
+            {
+              "bits": 35583,
+              "choices": 2292842496,
+              "inputs": [
+                0,
+                19,
+                39
+              ],
+              "scope": [
+                6,
+                10,
+                13,
+                15
+              ],
+              "variable": 9
+            },
+            {
+              "bits": 4259184125,
+              "choices": 536932592,
+              "inputs": [
+                23,
+                28,
+                40
+              ],
+              "scope": [
+                1,
+                4,
+                6,
+                10,
+                13
+              ],
+              "variable": 15
+            },
+            {
+              "bits": 11,
+              "choices": 0,
+              "inputs": [
+                8,
+                15,
+                24,
+                25
+              ],
+              "scope": [
+                6,
+                13
+              ],
+              "variable": 5
+            },
+            {
+              "bits": 65023,
+              "choices": 4261225215,
+              "inputs": [
+                32,
+                41,
+                42
+              ],
+              "scope": [
+                1,
+                4,
+                10,
+                13
+              ],
+              "variable": 6
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                5,
+                6,
+                43
+              ],
+              "scope": [],
+              "variable": 13
+            },
+            {
+              "bits": 10815,
+              "choices": 21,
+              "inputs": [
+                1,
+                2,
+                29,
+                38
+              ],
+              "scope": [
+                4,
+                10,
+                11,
+                14
+              ],
+              "variable": 1
+            },
+            {
+              "bits": 7,
+              "choices": 115,
+              "inputs": [
+                3,
+                31,
+                45
+              ],
+              "scope": [
+                10,
+                11
+              ],
+              "variable": 4
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                4
+              ],
+              "scope": [],
+              "variable": 14
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                13,
+                46
+              ],
+              "scope": [],
+              "variable": 11
+            },
+            {
+              "bits": 1,
+              "choices": 1,
+              "inputs": [
+                33
+              ],
+              "scope": [],
+              "variable": 10
+            }
+          ]
+        },
+        "values": [
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "terminal": {
+          "cnf": [
+            [
+              -15,
+              9
+            ],
+            [
+              -14,
+              -1
+            ],
+            [
+              -14,
+              1,
+              4,
+              10
+            ],
+            [
+              -14,
+              4
+            ],
+            [
+              -14,
+              11
+            ],
+            [
+              -13,
+              -6
+            ],
+            [
+              -13,
+              -4
+            ],
+            [
+              -13,
+              1,
+              14
+            ],
+            [
+              -13,
+              2
+            ],
+            [
+              -13,
+              5,
+              6
+            ],
+            [
+              -12,
+              -11,
+              -10
+            ],
+            [
+              -12,
+              -7,
+              2
+            ],
+            [
+              -12,
+              7
+            ],
+            [
+              -11,
+              -10
+            ],
+            [
+              -11,
+              -10,
+              -9,
+              2
+            ],
+            [
+              -11,
+              -10,
+              -5
+            ],
+            [
+              -11,
+              -8
+            ],
+            [
+              -11,
+              -6,
+              -2
+            ],
+            [
+              -9,
+              -2,
+              10
+            ],
+            [
+              -9,
+              6
+            ],
+            [
+              -8,
+              -3
+            ],
+            [
+              -8,
+              1,
+              10
+            ],
+            [
+              -7,
+              -6
+            ],
+            [
+              -6,
+              -3
+            ],
+            [
+              -6,
+              2,
+              7
+            ],
+            [
+              -6,
+              13,
+              15
+            ],
+            [
+              -5
+            ],
+            [
+              -5,
+              -4
+            ],
+            [
+              -5,
+              7
+            ],
+            [
+              -4,
+              5
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1,
+              4,
+              15
+            ],
+            [
+              1,
+              4,
+              8
+            ],
+            [
+              4,
+              11,
+              14
+            ],
+            [
+              6,
+              11,
+              13
+            ],
+            [
+              7
+            ],
+            [
+              10
+            ],
+            [
+              11,
+              12,
+              15
+            ]
+          ],
+          "format": "cnf-semantic-buckets-v1",
+          "limits": {
+            "bag_limit": 9,
+            "work_limit": 251202
+          },
+          "model": null,
+          "reduce": true,
+          "status": "unsat",
+          "steps": [
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                20,
+                23,
+                30
+              ],
+              "scope": [],
+              "variable": 3
+            },
+            {
+              "bits": 61182,
+              "choices": 16,
+              "inputs": [
+                16,
+                21,
+                32
+              ],
+              "scope": [
+                1,
+                4,
+                10,
+                11
+              ],
+              "variable": 8
+            },
+            {
+              "bits": 35,
+              "choices": 2575,
+              "inputs": [
+                11,
+                12,
+                22,
+                24,
+                28,
+                35
+              ],
+              "scope": [
+                2,
+                6,
+                12
+              ],
+              "variable": 7
+            },
+            {
+              "bits": 13106,
+              "choices": 34,
+              "inputs": [
+                10,
+                37,
+                40
+              ],
+              "scope": [
+                2,
+                6,
+                11,
+                15
+              ],
+              "variable": 12
+            },
+            {
+              "bits": 2227503103,
+              "choices": 2227437568,
+              "inputs": [
+                0,
+                14,
+                18,
+                19
+              ],
+              "scope": [
+                2,
+                6,
+                10,
+                11,
+                15
+              ],
+              "variable": 9
+            },
+            {
+              "bits": 1,
+              "choices": 21765,
+              "inputs": [
+                8,
+                17,
+                41,
+                42
+              ],
+              "scope": [
+                6,
+                15
+              ],
+              "variable": 2
+            },
+            {
+              "bits": 13,
+              "choices": 0,
+              "inputs": [
+                25,
+                31,
+                43
+              ],
+              "scope": [
+                1,
+                4,
+                6
+              ],
+              "variable": 15
+            },
+            {
+              "bits": 3503348992,
+              "choices": 0,
+              "inputs": [
+                5,
+                9,
+                34,
+                44
+              ],
+              "scope": [
+                1,
+                4,
+                5,
+                11,
+                13
+              ],
+              "variable": 6
+            },
+            {
+              "bits": 3708869888,
+              "choices": 1048576,
+              "inputs": [
+                6,
+                7,
+                45
+              ],
+              "scope": [
+                1,
+                4,
+                5,
+                11,
+                14
+              ],
+              "variable": 13
+            },
+            {
+              "bits": 2856364544,
+              "choices": 0,
+              "inputs": [
+                1,
+                2,
+                39,
+                46
+              ],
+              "scope": [
+                4,
+                5,
+                10,
+                11,
+                14
+              ],
+              "variable": 1
+            },
+            {
+              "bits": 1024,
+              "choices": 1024,
+              "inputs": [
+                13,
+                15,
+                36,
+                47
+              ],
+              "scope": [
+                4,
+                5,
+                11,
+                14
+              ],
+              "variable": 10
+            },
+            {
+              "bits": 0,
+              "choices": 0,
+              "inputs": [
+                4,
+                33,
+                48
+              ],
+              "scope": [],
+              "variable": 11
+            }
+          ]
+        },
+        "values": [
+          false,
+          false,
+          false,
+          true
+        ]
+      },
+      {
+        "terminal": {
+          "cnf": [
+            [
+              -14,
+              -1
+            ],
+            [
+              -14,
+              1,
+              4,
+              10
+            ],
+            [
+              -14,
+              4
+            ],
+            [
+              -14,
+              11
+            ],
+            [
+              -13,
+              -4
+            ],
+            [
+              -13,
+              1,
+              14
+            ],
+            [
+              -13,
+              2
+            ],
+            [
+              -13,
+              5,
+              6
+            ],
+            [
+              -12,
+              -11,
+              -10
+            ],
+            [
+              -12,
+              -7,
+              2
+            ],
+            [
+              -12,
+              -3
+            ],
+            [
+              -12,
+              7
+            ],
+            [
+              -11,
+              -10,
+              -9,
+              2
+            ],
+            [
+              -11,
+              -10,
+              -5
+            ],
+            [
+              -11,
+              -8
+            ],
+            [
+              -10,
+              -5
+            ],
+            [
+              -10,
+              8
+            ],
+            [
+              -9,
+              -2,
+              10
+            ],
+            [
+              -9,
+              6
+            ],
+            [
+              -8,
+              -6,
+              13
+            ],
+            [
+              -8,
+              -3
+            ],
+            [
+              -8,
+              -1,
+              4
+            ],
+            [
+              -8,
+              1,
+              10
+            ],
+            [
+              -6,
+              2,
+              7
+            ],
+            [
+              -6,
+              13,
+              15
+            ],
+            [
+              -5
+            ],
+            [
+              -5,
+              -4
+            ],
+            [
+              -5,
+              7
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -3,
+              12
+            ],
+            [
+              -1,
+              4,
+              15
+            ],
+            [
+              -1,
+              12
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              1,
+              4,
+              8
+            ],
+            [
+              1,
+              13
+            ],
+            [
+              4,
+              11,
+              14
+            ],
+            [
+              6,
+              11,
+              13
+            ],
+            [
+              10
+            ],
+            [
+              11,
+              12,
+              15
+            ]
+          ],
+          "format": "cnf-semantic-buckets-v1",
+          "limits": {
+            "bag_limit": 9,
+            "work_limit": 249186
+          },
+          "model": null,
+          "reduce": true,
+          "status": "unsat",
+          "steps": [
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                10,
+                20,
+                28,
+                29
+              ],
+              "scope": [],
+              "variable": 3
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                12,
+                17,
+                18
+              ],
+              "scope": [],
+              "variable": 9
+            },
+            {
+              "bits": 1,
+              "choices": 65506,
+              "inputs": [
+                6,
+                9,
+                23
+              ],
+              "scope": [],
+              "variable": 2
+            },
+            {
+              "bits": 1,
+              "choices": 14,
+              "inputs": [
+                11,
+                27
+              ],
+              "scope": [],
+              "variable": 7
+            },
+            {
+              "bits": 127,
+              "choices": 10799,
+              "inputs": [
+                8,
+                31,
+                38
+              ],
+              "scope": [
+                1,
+                10,
+                11
+              ],
+              "variable": 12
+            },
+            {
+              "bits": 1,
+              "choices": 8946,
+              "inputs": [
+                24,
+                30
+              ],
+              "scope": [],
+              "variable": 15
+            },
+            {
+              "bits": 253,
+              "choices": 21763,
+              "inputs": [
+                7,
+                19,
+                36
+              ],
+              "scope": [
+                8,
+                11,
+                13
+              ],
+              "variable": 6
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                13,
+                15,
+                25,
+                26
+              ],
+              "scope": [],
+              "variable": 5
+            },
+            {
+              "bits": 3141249578,
+              "choices": 288423968,
+              "inputs": [
+                4,
+                5,
+                34,
+                45
+              ],
+              "scope": [
+                1,
+                4,
+                8,
+                11,
+                14
+              ],
+              "variable": 13
+            },
+            {
+              "bits": 76,
+              "choices": 1357926640,
+              "inputs": [
+                1,
+                16,
+                22,
+                37,
+                43
+              ],
+              "scope": [
+                1,
+                8,
+                11
+              ],
+              "variable": 10
+            },
+            {
+              "bits": 256,
+              "choices": 256,
+              "inputs": [
+                14,
+                21,
+                33,
+                47,
+                48
+              ],
+              "scope": [
+                1,
+                4,
+                11,
+                14
+              ],
+              "variable": 8
+            },
+            {
+              "bits": 0,
+              "choices": 0,
+              "inputs": [
+                0,
+                32,
+                49
+              ],
+              "scope": [],
+              "variable": 1
+            }
+          ]
+        },
+        "values": [
+          false,
+          false,
+          true,
+          false
+        ]
+      },
+      {
+        "terminal": {
+          "cnf": [
+            [
+              -14,
+              -1
+            ],
+            [
+              -14,
+              1,
+              4,
+              10
+            ],
+            [
+              -14,
+              4
+            ],
+            [
+              -14,
+              11
+            ],
+            [
+              -13,
+              -6
+            ],
+            [
+              -13,
+              -4
+            ],
+            [
+              -13,
+              1,
+              14
+            ],
+            [
+              -13,
+              2
+            ],
+            [
+              -13,
+              5,
+              6
+            ],
+            [
+              -12,
+              -11,
+              -10
+            ],
+            [
+              -12,
+              -7,
+              2
+            ],
+            [
+              -12,
+              7
+            ],
+            [
+              -11,
+              -10,
+              -9,
+              2
+            ],
+            [
+              -11,
+              -10,
+              -5
+            ],
+            [
+              -11,
+              -8
+            ],
+            [
+              -11,
+              -6,
+              -2
+            ],
+            [
+              -10,
+              -5
+            ],
+            [
+              -9,
+              -2,
+              10
+            ],
+            [
+              -9,
+              6
+            ],
+            [
+              -8,
+              -6,
+              13
+            ],
+            [
+              -8,
+              -3
+            ],
+            [
+              -8,
+              -1,
+              4
+            ],
+            [
+              -8,
+              1,
+              10
+            ],
+            [
+              -7,
+              -6
+            ],
+            [
+              -6,
+              -3
+            ],
+            [
+              -6,
+              2,
+              7
+            ],
+            [
+              -6,
+              13,
+              15
+            ],
+            [
+              -5
+            ],
+            [
+              -5,
+              -4
+            ],
+            [
+              -5,
+              7
+            ],
+            [
+              -4,
+              5
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -3,
+              12
+            ],
+            [
+              -1,
+              4,
+              15
+            ],
+            [
+              -1,
+              12
+            ],
+            [
+              1,
+              4,
+              8
+            ],
+            [
+              1,
+              13
+            ],
+            [
+              4,
+              11,
+              14
+            ],
+            [
+              6,
+              11,
+              13
+            ],
+            [
+              10
+            ],
+            [
+              11,
+              12,
+              15
+            ]
+          ],
+          "format": "cnf-semantic-buckets-v1",
+          "limits": {
+            "bag_limit": 9,
+            "work_limit": 247810
+          },
+          "model": null,
+          "reduce": true,
+          "status": "unsat",
+          "steps": [
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                12,
+                17,
+                18
+              ],
+              "scope": [],
+              "variable": 9
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                20,
+                24,
+                31,
+                32
+              ],
+              "scope": [],
+              "variable": 3
+            },
+            {
+              "bits": 2607,
+              "choices": 2572,
+              "inputs": [
+                10,
+                11,
+                23,
+                25,
+                29
+              ],
+              "scope": [
+                2,
+                5,
+                6,
+                12
+              ],
+              "variable": 7
+            },
+            {
+              "bits": 13111,
+              "choices": 859255556,
+              "inputs": [
+                7,
+                15,
+                43
+              ],
+              "scope": [
+                5,
+                6,
+                11,
+                12
+              ],
+              "variable": 2
+            },
+            {
+              "bits": 59644,
+              "choices": 1140850688,
+              "inputs": [
+                0,
+                1,
+                2,
+                3,
+                6,
+                37
+              ],
+              "scope": [
+                1,
+                4,
+                11,
+                13
+              ],
+              "variable": 14
+            },
+            {
+              "bits": 21,
+              "choices": 3355443,
+              "inputs": [
+                9,
+                13,
+                16,
+                22,
+                39
+              ],
+              "scope": [
+                5,
+                11,
+                12
+              ],
+              "variable": 10
+            },
+            {
+              "bits": 4009750255,
+              "choices": 1114113,
+              "inputs": [
+                14,
+                19,
+                21,
+                35
+              ],
+              "scope": [
+                1,
+                4,
+                6,
+                11,
+                13
+              ],
+              "variable": 8
+            },
+            {
+              "bits": 18022659,
+              "choices": 131075,
+              "inputs": [
+                34,
+                40,
+                44,
+                46
+              ],
+              "scope": [
+                1,
+                5,
+                6,
+                11,
+                15
+              ],
+              "variable": 12
+            },
+            {
+              "bits": 275,
+              "choices": 5506148074754,
+              "inputs": [
+                26,
+                33,
+                48
+              ],
+              "scope": [
+                1,
+                5,
+                6,
+                11
+              ],
+              "variable": 15
+            },
+            {
+              "bits": 33685506,
+              "choices": 131074,
+              "inputs": [
+                36,
+                45,
+                47,
+                49
+              ],
+              "scope": [
+                4,
+                5,
+                6,
+                11,
+                13
+              ],
+              "variable": 1
+            },
+            {
+              "bits": 512,
+              "choices": 0,
+              "inputs": [
+                38,
+                50
+              ],
+              "scope": [
+                4,
+                5,
+                6,
+                13
+              ],
+              "variable": 11
+            },
+            {
+              "bits": 0,
+              "choices": 0,
+              "inputs": [
+                4,
+                8,
+                51
+              ],
+              "scope": [],
+              "variable": 6
+            }
+          ]
+        },
+        "values": [
+          false,
+          false,
+          true,
+          true
+        ]
+      },
+      {
+        "terminal": {
+          "cnf": [
+            []
+          ],
+          "format": "cnf-semantic-buckets-v1",
+          "limits": {
+            "bag_limit": 9,
+            "work_limit": 245266
+          },
+          "model": null,
+          "reduce": true,
+          "status": "unsat",
+          "steps": []
+        },
+        "values": [
+          false,
+          true,
+          false,
+          false
+        ]
+      },
+      {
+        "terminal": {
+          "cnf": [
+            [
+              -15,
+              -3
+            ],
+            [
+              -15,
+              9
+            ],
+            [
+              -14
+            ],
+            [
+              -14,
+              -1
+            ],
+            [
+              -14,
+              1,
+              4,
+              10
+            ],
+            [
+              -14,
+              4
+            ],
+            [
+              -14,
+              10
+            ],
+            [
+              -14,
+              11
+            ],
+            [
+              -13,
+              -6
+            ],
+            [
+              -13,
+              -4
+            ],
+            [
+              -13,
+              1,
+              14
+            ],
+            [
+              -13,
+              2
+            ],
+            [
+              -13,
+              5,
+              6
+            ],
+            [
+              -12,
+              -11,
+              -10
+            ],
+            [
+              -12,
+              -7,
+              2
+            ],
+            [
+              -11,
+              -10
+            ],
+            [
+              -11,
+              -10,
+              -9,
+              2
+            ],
+            [
+              -11,
+              -10,
+              -5
+            ],
+            [
+              -11,
+              -8
+            ],
+            [
+              -11,
+              -6,
+              -2
+            ],
+            [
+              -10
+            ],
+            [
+              -9
+            ],
+            [
+              -9,
+              -2,
+              10
+            ],
+            [
+              -9,
+              6
+            ],
+            [
+              -8
+            ],
+            [
+              -8,
+              1,
+              10
+            ],
+            [
+              -7,
+              -6
+            ],
+            [
+              -6
+            ],
+            [
+              -6,
+              -3
+            ],
+            [
+              -6,
+              2,
+              7
+            ],
+            [
+              -6,
+              13,
+              15
+            ],
+            [
+              -5,
+              -4
+            ],
+            [
+              -5,
+              7
+            ],
+            [
+              -4
+            ],
+            [
+              -4,
+              5
+            ],
+            [
+              -3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -3,
+              13
+            ],
+            [
+              -1,
+              4,
+              15
+            ],
+            [
+              4,
+              11,
+              14
+            ],
+            [
+              6,
+              11,
+              13
+            ],
+            [
+              7
+            ],
+            [
+              11
+            ],
+            [
+              11,
+              12,
+              15
+            ]
+          ],
+          "format": "cnf-semantic-buckets-v1",
+          "limits": {
+            "bag_limit": 9,
+            "work_limit": 245266
+          },
+          "model": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false
+          ],
+          "reduce": true,
+          "status": "sat",
+          "steps": [
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                18,
+                24,
+                25
+              ],
+              "scope": [],
+              "variable": 8
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                0,
+                28,
+                35,
+                36,
+                37
+              ],
+              "scope": [],
+              "variable": 3
+            },
+            {
+              "bits": 35,
+              "choices": 2575,
+              "inputs": [
+                14,
+                26,
+                29,
+                32,
+                41
+              ],
+              "scope": [
+                2,
+                6,
+                12
+              ],
+              "variable": 7
+            },
+            {
+              "bits": 13106,
+              "choices": 34,
+              "inputs": [
+                13,
+                43,
+                46
+              ],
+              "scope": [
+                2,
+                6,
+                11,
+                15
+              ],
+              "variable": 12
+            },
+            {
+              "bits": 4009750191,
+              "choices": 15728800,
+              "inputs": [
+                3,
+                4,
+                10,
+                38
+              ],
+              "scope": [
+                4,
+                10,
+                13,
+                14,
+                15
+              ],
+              "variable": 1
+            },
+            {
+              "bits": 1163220309,
+              "choices": 17891328,
+              "inputs": [
+                12,
+                17,
+                31,
+                34
+              ],
+              "scope": [
+                4,
+                6,
+                10,
+                11,
+                13
+              ],
+              "variable": 5
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                1,
+                16,
+                21,
+                22,
+                23
+              ],
+              "scope": [
+                15
+              ],
+              "variable": 9
+            },
+            {
+              "bits": 1,
+              "choices": 20561,
+              "inputs": [
+                11,
+                19,
+                47
+              ],
+              "scope": [
+                6
+              ],
+              "variable": 2
+            },
+            {
+              "bits": 4197624371,
+              "choices": 0,
+              "inputs": [
+                30,
+                48,
+                50
+              ],
+              "scope": [
+                4,
+                6,
+                10,
+                13,
+                14
+              ],
+              "variable": 15
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                6,
+                15,
+                20,
+                49,
+                52
+              ],
+              "scope": [
+                4,
+                6,
+                13,
+                14
+              ],
+              "variable": 10
+            },
+            {
+              "bits": 1,
+              "choices": 65535,
+              "inputs": [
+                7,
+                39,
+                40,
+                42
+              ],
+              "scope": [],
+              "variable": 11
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                8,
+                9,
+                53
+              ],
+              "scope": [
+                4,
+                6,
+                14
+              ],
+              "variable": 13
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                5,
+                33,
+                55
+              ],
+              "scope": [
+                6,
+                14
+              ],
+              "variable": 4
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                2,
+                56
+              ],
+              "scope": [
+                6
+              ],
+              "variable": 14
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                27,
+                51,
+                57
+              ],
+              "scope": [],
+              "variable": 6
+            }
+          ]
+        },
+        "values": [
+          false,
+          true,
+          false,
+          true
+        ]
+      },
+      {
+        "terminal": {
+          "cnf": [
+            []
+          ],
+          "format": "cnf-semantic-buckets-v1",
+          "limits": {
+            "bag_limit": 9,
+            "work_limit": 243052
+          },
+          "model": null,
+          "reduce": true,
+          "status": "unsat",
+          "steps": []
+        },
+        "values": [
+          false,
+          true,
+          true,
+          false
+        ]
+      },
+      {
+        "terminal": {
+          "cnf": [
+            [
+              -15,
+              -3
+            ],
+            [
+              -14
+            ],
+            [
+              -14,
+              -1
+            ],
+            [
+              -14,
+              1,
+              4,
+              10
+            ],
+            [
+              -14,
+              4
+            ],
+            [
+              -14,
+              10
+            ],
+            [
+              -14,
+              11
+            ],
+            [
+              -13,
+              -6
+            ],
+            [
+              -13,
+              -4
+            ],
+            [
+              -13,
+              1,
+              14
+            ],
+            [
+              -13,
+              2
+            ],
+            [
+              -13,
+              5,
+              6
+            ],
+            [
+              -12,
+              -11,
+              -10
+            ],
+            [
+              -12,
+              -7,
+              2
+            ],
+            [
+              -11,
+              -10,
+              -9,
+              2
+            ],
+            [
+              -11,
+              -10,
+              -5
+            ],
+            [
+              -11,
+              -8
+            ],
+            [
+              -11,
+              -6,
+              -2
+            ],
+            [
+              -10
+            ],
+            [
+              -10,
+              -5
+            ],
+            [
+              -9
+            ],
+            [
+              -9,
+              -2,
+              10
+            ],
+            [
+              -9,
+              6
+            ],
+            [
+              -8
+            ],
+            [
+              -8,
+              -6,
+              13
+            ],
+            [
+              -8,
+              -1,
+              4
+            ],
+            [
+              -8,
+              1,
+              10
+            ],
+            [
+              -7,
+              -6
+            ],
+            [
+              -6
+            ],
+            [
+              -6,
+              -3
+            ],
+            [
+              -6,
+              2,
+              7
+            ],
+            [
+              -6,
+              13,
+              15
+            ],
+            [
+              -5,
+              -4
+            ],
+            [
+              -5,
+              7
+            ],
+            [
+              -4
+            ],
+            [
+              -4,
+              5
+            ],
+            [
+              -3
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -3,
+              12
+            ],
+            [
+              -3,
+              13
+            ],
+            [
+              -1,
+              4,
+              15
+            ],
+            [
+              -1,
+              12
+            ],
+            [
+              1
+            ],
+            [
+              1,
+              13
+            ],
+            [
+              4,
+              11,
+              14
+            ],
+            [
+              6,
+              11,
+              13
+            ],
+            [
+              11
+            ],
+            [
+              11,
+              12,
+              15
+            ]
+          ],
+          "format": "cnf-semantic-buckets-v1",
+          "limits": {
+            "bag_limit": 9,
+            "work_limit": 243052
+          },
+          "model": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            false,
+            false,
+            true
+          ],
+          "reduce": true,
+          "status": "sat",
+          "steps": [
+            {
+              "bits": 11055,
+              "choices": 2060,
+              "inputs": [
+                13,
+                27,
+                30,
+                33
+              ],
+              "scope": [
+                2,
+                5,
+                6,
+                12
+              ],
+              "variable": 7
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                14,
+                20,
+                21,
+                22
+              ],
+              "scope": [],
+              "variable": 9
+            },
+            {
+              "bits": 55,
+              "choices": 926361092,
+              "inputs": [
+                10,
+                17,
+                48
+              ],
+              "scope": [
+                5,
+                6,
+                11
+              ],
+              "variable": 2
+            },
+            {
+              "bits": 8191,
+              "choices": 250482431,
+              "inputs": [
+                12,
+                38,
+                41,
+                47
+              ],
+              "scope": [
+                1,
+                3,
+                10,
+                11
+              ],
+              "variable": 12
+            },
+            {
+              "bits": 4160173047,
+              "choices": 33698562,
+              "inputs": [
+                0,
+                31,
+                40
+              ],
+              "scope": [
+                1,
+                3,
+                4,
+                6,
+                13
+              ],
+              "variable": 15
+            },
+            {
+              "bits": 21303637,
+              "choices": 16842752,
+              "inputs": [
+                11,
+                15,
+                19,
+                32,
+                35,
+                50
+              ],
+              "scope": [
+                4,
+                6,
+                10,
+                11,
+                13
+              ],
+              "variable": 5
+            },
+            {
+              "bits": 43260,
+              "choices": 0,
+              "inputs": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                9,
+                44
+              ],
+              "scope": [
+                1,
+                4,
+                11,
+                13
+              ],
+              "variable": 14
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                16,
+                23,
+                24,
+                25,
+                26
+              ],
+              "scope": [],
+              "variable": 8
+            },
+            {
+              "bits": 21,
+              "choices": 0,
+              "inputs": [
+                18,
+                51,
+                53
+              ],
+              "scope": [
+                4,
+                6,
+                11
+              ],
+              "variable": 10
+            },
+            {
+              "bits": 515,
+              "choices": 515,
+              "inputs": [
+                45,
+                46,
+                54,
+                56
+              ],
+              "scope": [
+                1,
+                4,
+                6,
+                13
+              ],
+              "variable": 11
+            },
+            {
+              "bits": 519,
+              "choices": 0,
+              "inputs": [
+                8,
+                34,
+                52,
+                57
+              ],
+              "scope": [
+                1,
+                3,
+                6,
+                13
+              ],
+              "variable": 4
+            },
+            {
+              "bits": 1,
+              "choices": 17,
+              "inputs": [
+                37,
+                42,
+                43,
+                58
+              ],
+              "scope": [
+                3,
+                6
+              ],
+              "variable": 1
+            },
+            {
+              "bits": 7,
+              "choices": 2,
+              "inputs": [
+                7,
+                39
+              ],
+              "scope": [
+                3,
+                6
+              ],
+              "variable": 13
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                29,
+                36,
+                59,
+                60
+              ],
+              "scope": [
+                6
+              ],
+              "variable": 3
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                28,
+                61
+              ],
+              "scope": [],
+              "variable": 6
+            }
+          ]
+        },
+        "values": [
+          false,
+          true,
+          true,
+          true
+        ]
+      },
+      {
+        "terminal": {
+          "cnf": [
+            [
+              -15
+            ],
+            [
+              -15,
+              9
+            ],
+            [
+              -14,
+              1,
+              4,
+              10
+            ],
+            [
+              -14,
+              4
+            ],
+            [
+              -14,
+              11
+            ],
+            [
+              -13
+            ],
+            [
+              -13,
+              -4
+            ],
+            [
+              -13,
+              1,
+              14
+            ],
+            [
+              -13,
+              2
+            ],
+            [
+              -13,
+              5,
+              6
+            ],
+            [
+              -12
+            ],
+            [
+              -12,
+              -11,
+              -10
+            ],
+            [
+              -12,
+              -7,
+              2
+            ],
+            [
+              -12,
+              -3
+            ],
+            [
+              -12,
+              7
+            ],
+            [
+              -11,
+              -10
+            ],
+            [
+              -11,
+              -10,
+              -9,
+              2
+            ],
+            [
+              -11,
+              -10,
+              -5
+            ],
+            [
+              -11,
+              -8
+            ],
+            [
+              -10
+            ],
+            [
+              -10,
+              8
+            ],
+            [
+              -9
+            ],
+            [
+              -9,
+              -2,
+              10
+            ],
+            [
+              -9,
+              6
+            ],
+            [
+              -8
+            ],
+            [
+              -8,
+              -3
+            ],
+            [
+              -8,
+              1,
+              10
+            ],
+            [
+              -7
+            ],
+            [
+              -7,
+              10
+            ],
+            [
+              -6
+            ],
+            [
+              -6,
+              2,
+              7
+            ],
+            [
+              -6,
+              13
+            ],
+            [
+              -6,
+              13,
+              15
+            ],
+            [
+              -5
+            ],
+            [
+              -5,
+              -4
+            ],
+            [
+              -5,
+              7
+            ],
+            [
+              -3,
+              -1
+            ],
+            [
+              -1
+            ],
+            [
+              -1,
+              4
+            ],
+            [
+              -1,
+              4,
+              15
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              1,
+              4,
+              8
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              4,
+              11,
+              14
+            ],
+            [
+              6,
+              11,
+              13
+            ],
+            [
+              11
+            ],
+            [
+              11,
+              12,
+              15
+            ]
+          ],
+          "format": "cnf-semantic-buckets-v1",
+          "limits": {
+            "bag_limit": 9,
+            "work_limit": 239880
+          },
+          "model": [
+            false,
+            false,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false
+          ],
+          "reduce": true,
+          "status": "sat",
+          "steps": [
+            {
+              "bits": 1,
+              "choices": 1,
+              "inputs": [
+                13,
+                25,
+                36,
+                42
+              ],
+              "scope": [
+                1,
+                8,
+                12
+              ],
+              "variable": 3
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                1,
+                16,
+                21,
+                22,
+                23
+              ],
+              "scope": [
+                15
+              ],
+              "variable": 9
+            },
+            {
+              "bits": 1,
+              "choices": 65506,
+              "inputs": [
+                8,
+                12,
+                30
+              ],
+              "scope": [],
+              "variable": 2
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                14,
+                27,
+                28,
+                35
+              ],
+              "scope": [
+                5,
+                12
+              ],
+              "variable": 7
+            },
+            {
+              "bits": 172,
+              "choices": 0,
+              "inputs": [
+                9,
+                29,
+                31,
+                32,
+                45
+              ],
+              "scope": [
+                5,
+                11,
+                13
+              ],
+              "variable": 6
+            },
+            {
+              "bits": 56784,
+              "choices": 0,
+              "inputs": [
+                0,
+                39,
+                47,
+                49
+              ],
+              "scope": [
+                1,
+                4,
+                11,
+                12
+              ],
+              "variable": 15
+            },
+            {
+              "bits": 2,
+              "choices": 0,
+              "inputs": [
+                5,
+                6,
+                7,
+                52
+              ],
+              "scope": [
+                11
+              ],
+              "variable": 13
+            },
+            {
+              "bits": 1,
+              "choices": 0,
+              "inputs": [
+                17,
+                33,
+                34,
+                51
+              ],
+              "scope": [
+                12
+              ],
+              "variable": 5
+            },
+            {
+              "bits": 14,
+              "choices": 0,
+              "inputs": [
+                2,
+                3,
+                4,
+                44
+              ],
+              "scope": [
+                4,
+                11
+              ],
+              "variable": 14
+            },
+            {
+              "bits": 11,
+              "choices": 0,
+              "inputs": [
+                11,
+                15,
+                19,
+                20,
+                26
+              ],
+              "scope": [
+                1,
+                8
+              ],
+              "variable": 10
+            },
+            {
+              "bits": 16,
+              "choices": 0,
+              "inputs": [
+                10,
+                48,
+                53,
+                55
+              ],
+              "scope": [
+                1,
+                8,
+                11
+              ],
+              "variable": 12
+            },
+            {
+              "bits": 1,
+              "choices": 255,
+              "inputs": [
+                38,
+                40,
+                41,
+                43,
+                56
+              ],
+              "scope": [],
+              "variable": 4
+            },
+            {
+              "bits": 4,
+              "choices": 0,
+              "inputs": [
+                37,
+                57,
+                58
+              ],
+              "scope": [
+                8,
+                11
+              ],
+              "variable": 1
+            },
+            {
+              "bits": 2,
+              "choices": 0,
+              "inputs": [
+                18,
+                24,
+                60
+              ],
+              "scope": [
+                11
+              ],
+              "variable": 8
+            },
+            {
+              "bits": 1,
+              "choices": 1,
+              "inputs": [
+                46,
+                54,
+                61
+              ],
+              "scope": [],
+              "variable": 11
+            }
+          ]
+        },
+        "values": [
+          true,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "terminal": {
+          "cnf": [
+            []
+          ],
+          "format": "cnf-semantic-buckets-v1",
+          "limits": {
+            "bag_limit": 9,
+            "work_limit": 238126
+          },
+          "model": null,
+          "reduce": true,
+          "status": "unsat",
+          "steps": []
+        },
+        "values": [
+          true,
+          false,
+          false,
+          true
+        ]
+      },
+      {
+        "terminal": {
+          "cnf": [
+            []
+          ],
+          "format": "cnf-semantic-buckets-v1",
+          "limits": {
+            "bag_limit": 9,
+            "work_limit": 238126
+          },
+          "model": null,
+          "reduce": true,
+          "status": "unsat",
+          "steps": []
+        },
+        "values": [
+          true,
+          false,
+          true,
+          false
+        ]
+      },
+      {
+        "terminal": {
+          "cnf": [
+            []
+          ],
+          "format": "cnf-semantic-buckets-v1",
+          "limits": {
+            "bag_limit": 9,
+            "work_limit": 238126
+          },
+          "model": null,
+          "reduce": true,
+          "status": "unsat",
+          "steps": []
+        },
+        "values": [
+          true,
+          false,
+          true,
+          true
+        ]
+      },
+      {
+        "terminal": {
+          "cnf": [
+            []
+          ],
+          "format": "cnf-semantic-buckets-v1",
+          "limits": {
+            "bag_limit": 9,
+            "work_limit": 238126
+          },
+          "model": null,
+          "reduce": true,
+          "status": "unsat",
+          "steps": []
+        },
+        "values": [
+          true,
+          true,
+          false,
+          false
+        ]
+      },
+      {
+        "terminal": {
+          "cnf": [
+            []
+          ],
+          "format": "cnf-semantic-buckets-v1",
+          "limits": {
+            "bag_limit": 9,
+            "work_limit": 238126
+          },
+          "model": null,
+          "reduce": true,
+          "status": "unsat",
+          "steps": []
+        },
+        "values": [
+          true,
+          true,
+          false,
+          true
+        ]
+      },
+      {
+        "terminal": {
+          "cnf": [
+            []
+          ],
+          "format": "cnf-semantic-buckets-v1",
+          "limits": {
+            "bag_limit": 9,
+            "work_limit": 238126
+          },
+          "model": null,
+          "reduce": true,
+          "status": "unsat",
+          "steps": []
+        },
+        "values": [
+          true,
+          true,
+          true,
+          false
+        ]
+      },
+      {
+        "terminal": {
+          "cnf": [
+            []
+          ],
+          "format": "cnf-semantic-buckets-v1",
+          "limits": {
+            "bag_limit": 9,
+            "work_limit": 238126
+          },
+          "model": null,
+          "reduce": true,
+          "status": "unsat",
+          "steps": []
+        },
+        "values": [
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    ],
+    "clause_width": 4,
+    "cut_limit": 4,
+    "cutset": [
+      15,
+      25,
+      14,
+      24
+    ],
+    "entries": [
+      {
+        "certificate": {
+          "bits": 127,
+          "clauses": [
+            [
+              -5,
+              -25,
+              -26
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            5,
+            25,
+            26
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 0
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -15,
+              -26
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            15,
+            26
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 1
+      },
+      {
+        "certificate": {
+          "bits": 239,
+          "clauses": [
+            [
+              13,
+              14,
+              -26
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            13,
+            14,
+            26
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 2
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -23,
+              -25
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            23,
+            25
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 3
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -17,
+              -25
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            17,
+            25
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 4
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -15,
+              -25
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            15,
+            25
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 5
+      },
+      {
+        "certificate": {
+          "bits": 191,
+          "clauses": [
+            [
+              2,
+              -14,
+              -25
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            2,
+            14,
+            25
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 6
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -13,
+              -25
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            13,
+            25
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 7
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -12,
+              -25
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            12,
+            25
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 8
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -10,
+              -25
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            10,
+            25
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 9
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -7,
+              -25
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            7,
+            25
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 10
+      },
+      {
+        "certificate": {
+          "bits": 223,
+          "clauses": [
+            [
+              -7,
+              14,
+              -25
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            7,
+            14,
+            25
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 11
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -5,
+              -25
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            5,
+            25
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 12
+      },
+      {
+        "certificate": {
+          "bits": 223,
+          "clauses": [
+            [
+              -5,
+              22,
+              -25
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            5,
+            22,
+            25
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 13
+      },
+      {
+        "certificate": {
+          "bits": 11,
+          "clauses": [
+            [
+              20,
+              -25
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            20,
+            25
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 16
+      },
+      {
+        "certificate": {
+          "bits": 11,
+          "clauses": [
+            [
+              24,
+              -25
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            24,
+            25
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 17
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -15,
+              -24
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            15,
+            24
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 18
+      },
+      {
+        "certificate": {
+          "bits": 247,
+          "clauses": [
+            [
+              -15,
+              -24,
+              26
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            15,
+            24,
+            26
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 19
+      },
+      {
+        "certificate": {
+          "bits": 223,
+          "clauses": [
+            [
+              -7,
+              9,
+              -24
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            7,
+            9,
+            24
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 21
+      },
+      {
+        "certificate": {
+          "bits": 239,
+          "clauses": [
+            [
+              11,
+              14,
+              -24
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            11,
+            14,
+            24
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 22
+      },
+      {
+        "certificate": {
+          "bits": 223,
+          "clauses": [
+            [
+              -2,
+              15,
+              -23
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            2,
+            15,
+            23
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 23
+      },
+      {
+        "certificate": {
+          "bits": 11,
+          "clauses": [
+            [
+              7,
+              -23
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            7,
+            23
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 25
+      },
+      {
+        "certificate": {
+          "bits": 11,
+          "clauses": [
+            [
+              20,
+              -23
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            20,
+            23
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 26
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -15,
+              -22
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            15,
+            22
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 28
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -7,
+              -22
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            7,
+            22
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 29
+      },
+      {
+        "certificate": {
+          "bits": 251,
+          "clauses": [
+            [
+              2,
+              -22,
+              23
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            2,
+            22,
+            23
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 30
+      },
+      {
+        "certificate": {
+          "bits": 11,
+          "clauses": [
+            [
+              3,
+              -22
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            3,
+            22
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 31
+      },
+      {
+        "certificate": {
+          "bits": 239,
+          "clauses": [
+            [
+              9,
+              10,
+              -22
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            9,
+            10,
+            22
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 32
+      },
+      {
+        "certificate": {
+          "bits": 127,
+          "clauses": [
+            [
+              -17,
+              -20,
+              -21
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            17,
+            20,
+            21
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 33
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -15,
+              -21
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            15,
+            21
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 34
+      },
+      {
+        "certificate": {
+          "bits": 191,
+          "clauses": [
+            [
+              3,
+              -11,
+              -21
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            3,
+            11,
+            21
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 35
+      },
+      {
+        "certificate": {
+          "bits": 247,
+          "clauses": [
+            [
+              -5,
+              -21,
+              24
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            5,
+            21,
+            24
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 36
+      },
+      {
+        "certificate": {
+          "bits": 251,
+          "clauses": [
+            [
+              11,
+              -21,
+              25
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            11,
+            21,
+            25
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 37
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -12,
+              -20
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            12,
+            20
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 40
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -15,
+              -17
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            15,
+            17
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 44
+      },
+      {
+        "certificate": {
+          "bits": 127,
+          "clauses": [
+            [
+              -9,
+              -14,
+              -17
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            9,
+            14,
+            17
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 45
+      },
+      {
+        "certificate": {
+          "bits": 251,
+          "clauses": [
+            [
+              12,
+              -17,
+              24
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            12,
+            17,
+            24
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 46
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -14,
+              -15
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            14,
+            15
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 49
+      },
+      {
+        "certificate": {
+          "bits": 247,
+          "clauses": [
+            [
+              -14,
+              -15,
+              24
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            14,
+            15,
+            24
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 50
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -13,
+              -15
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            13,
+            15
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 51
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -12,
+              -15
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            12,
+            15
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 52
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -11,
+              -15
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            11,
+            15
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 53
+      },
+      {
+        "certificate": {
+          "bits": 247,
+          "clauses": [
+            [
+              -11,
+              -15,
+              17
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            11,
+            15,
+            17
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 54
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -10,
+              -15
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            10,
+            15
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 55
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -9,
+              -15
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            9,
+            15
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 56
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -2,
+              -15
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            2,
+            15
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 60
+      },
+      {
+        "certificate": {
+          "bits": 11,
+          "clauses": [
+            [
+              5,
+              -15
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            5,
+            15
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 62
+      },
+      {
+        "certificate": {
+          "bits": 11,
+          "clauses": [
+            [
+              7,
+              -15
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            7,
+            15
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 63
+      },
+      {
+        "certificate": {
+          "bits": 13,
+          "clauses": [
+            [
+              -15,
+              20
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            15,
+            20
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 65
+      },
+      {
+        "certificate": {
+          "bits": 251,
+          "clauses": [
+            [
+              2,
+              -14,
+              22
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            2,
+            14,
+            22
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 67
+      },
+      {
+        "certificate": {
+          "bits": 247,
+          "clauses": [
+            [
+              -3,
+              -13,
+              17
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            3,
+            13,
+            17
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 69
+      },
+      {
+        "certificate": {
+          "bits": 11,
+          "clauses": [
+            [
+              10,
+              -13
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            10,
+            13
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 71
+      },
+      {
+        "certificate": {
+          "bits": 247,
+          "clauses": [
+            [
+              -5,
+              -12,
+              25
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            5,
+            12,
+            25
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 72
+      },
+      {
+        "certificate": {
+          "bits": 251,
+          "clauses": [
+            [
+              2,
+              -12,
+              17
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            2,
+            12,
+            17
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 73
+      },
+      {
+        "certificate": {
+          "bits": 251,
+          "clauses": [
+            [
+              3,
+              -10,
+              11
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            3,
+            10,
+            11
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 74
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -7,
+              -9
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            7,
+            9
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 76
+      },
+      {
+        "certificate": {
+          "bits": 13,
+          "clauses": [
+            [
+              -9,
+              11
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            9,
+            11
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 77
+      },
+      {
+        "certificate": {
+          "bits": 13,
+          "clauses": [
+            [
+              -9,
+              24
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            9,
+            24
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 79
+      },
+      {
+        "certificate": {
+          "bits": 13,
+          "clauses": [
+            [
+              -9,
+              25
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            9,
+            25
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 80
+      },
+      {
+        "certificate": {
+          "bits": 7,
+          "clauses": [
+            [
+              -2,
+              -5
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            2,
+            5
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 83
+      },
+      {
+        "certificate": {
+          "bits": 254,
+          "clauses": [
+            [
+              7,
+              20,
+              23
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            7,
+            20,
+            23
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 90
+      },
+      {
+        "certificate": {
+          "bits": 254,
+          "clauses": [
+            [
+              10,
+              20,
+              22
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            10,
+            20,
+            22
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 91
+      },
+      {
+        "certificate": {
+          "bits": 254,
+          "clauses": [
+            [
+              15,
+              17,
+              25
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            15,
+            17,
+            25
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 93
+      },
+      {
+        "certificate": {
+          "bits": 254,
+          "clauses": [
+            [
+              20,
+              21,
+              26
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            20,
+            21,
+            26
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 94
+      },
+      {
+        "certificate": {
+          "bits": 1,
+          "clauses": [],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 95
+      },
+      {
+        "certificate": {
+          "bits": 1,
+          "clauses": [],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 96
+      },
+      {
+        "certificate": {
+          "bits": 4294905631,
+          "clauses": [
+            [
+              -2,
+              -14,
+              21
+            ],
+            [
+              -5,
+              -14,
+              21
+            ],
+            [
+              -14,
+              -15,
+              21
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            2,
+            5,
+            14,
+            15,
+            21
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 97
+      },
+      {
+        "certificate": {
+          "bits": 20016609818898076860823579758449131519,
+          "clauses": [
+            [
+              -5,
+              -10,
+              -24
+            ],
+            [
+              -10,
+              -11,
+              -24
+            ],
+            [
+              -10,
+              -22,
+              -24
+            ],
+            [
+              -3,
+              -10,
+              -20,
+              -24
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            3,
+            5,
+            10,
+            11,
+            20,
+            22,
+            24
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 98
+      },
+      {
+        "certificate": {
+          "bits": 709884645612799911496738569977855,
+          "clauses": [
+            [
+              -14,
+              -15
+            ],
+            [
+              -9,
+              -17,
+              -20
+            ],
+            [
+              14,
+              -17,
+              -20
+            ],
+            [
+              -15,
+              -17,
+              -20
+            ],
+            [
+              3,
+              -13,
+              -17,
+              -20
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            3,
+            9,
+            13,
+            14,
+            15,
+            17,
+            20
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 99
+      },
+      {
+        "certificate": {
+          "bits": 100353144005688077666693568671786516389884784839524330691465922234679053585677,
+          "clauses": [
+            [
+              -2,
+              7,
+              -15
+            ],
+            [
+              -2,
+              7,
+              26
+            ],
+            [
+              -10,
+              -15,
+              22
+            ],
+            [
+              -10,
+              22,
+              26
+            ],
+            [
+              -2,
+              7,
+              -12,
+              -14
+            ],
+            [
+              -10,
+              -12,
+              -14,
+              22
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            2,
+            7,
+            10,
+            12,
+            14,
+            15,
+            22,
+            26
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 100
+      },
+      {
+        "certificate": {
+          "bits": 450546001623390520233910271480418285368022358893500151438589830070625300206,
+          "clauses": [
+            [
+              -15,
+              -25
+            ],
+            [
+              24,
+              -25
+            ],
+            [
+              2,
+              7,
+              -15
+            ],
+            [
+              2,
+              7,
+              24
+            ],
+            [
+              17,
+              -23,
+              -25
+            ],
+            [
+              2,
+              7,
+              12,
+              25
+            ],
+            [
+              2,
+              7,
+              17,
+              -23
+            ]
+          ],
+          "format": "cnf-factor-clause-width-v1",
+          "obstruction": null,
+          "scope": [
+            2,
+            7,
+            12,
+            15,
+            17,
+            23,
+            24,
+            25
+          ],
+          "status": "cover",
+          "width": 4
+        },
+        "index": 101
+      }
+    ],
+    "format": "cnf-factor-conditioning-v1",
+    "model": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      false,
+      false,
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true
+    ],
+    "status": "sat"
+  },
+  "result": {
+    "answer": true,
+    "model": {
+      "1": false,
+      "2": false,
+      "3": false,
+      "4": false,
+      "5": false,
+      "6": true,
+      "7": true,
+      "8": true,
+      "9": false,
+      "10": true,
+      "11": true,
+      "12": true,
+      "13": true,
+      "14": false,
+      "15": false,
+      "16": false,
+      "17": true,
+      "18": true,
+      "19": false,
+      "20": false,
+      "21": false,
+      "22": false,
+      "23": false,
+      "24": false,
+      "25": false,
+      "26": true
+    }
+  },
+  "root_result": {
+    "answer": true,
+    "model": {
+      "19066": false,
+      "19119": false,
+      "19172": false,
+      "19225": false,
+      "19278": false,
+      "19331": true,
+      "19384": true,
+      "19437": true,
+      "19490": false,
+      "19543": false,
+      "19596": false,
+      "19649": true,
+      "19702": true,
+      "19755": true,
+      "19808": true,
+      "19861": true,
+      "19914": true,
+      "19967": true,
+      "20020": false,
+      "20073": false,
+      "20126": false,
+      "20179": false,
+      "20232": true,
+      "20285": true,
+      "20338": false,
+      "20391": false,
+      "20444": true,
+      "20497": false,
+      "20550": false,
+      "20603": true,
+      "20656": false,
+      "20709": false,
+      "20762": false,
+      "20815": false,
+      "20868": false,
+      "20921": true,
+      "20974": false,
+      "21027": false,
+      "21080": true,
+      "21133": false
+    }
+  }
+}

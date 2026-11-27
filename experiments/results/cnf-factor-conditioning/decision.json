@@ -1,0 +1,205 @@
+{
+  "branches": {
+    "cut0": [
+      {
+        "cutset": [],
+        "id": "d-d-d-j06:1",
+        "outcomes": {
+          "unresolved": 1
+        },
+        "projected_steps": 2,
+        "reserved_work": 14288
+      },
+      {
+        "cutset": [],
+        "id": "d-d-k09:0",
+        "outcomes": {
+          "unresolved": 1
+        },
+        "projected_steps": 1,
+        "reserved_work": 16512
+      },
+      {
+        "cutset": [],
+        "id": "d-d-k09:3",
+        "outcomes": {
+          "unresolved": 1
+        },
+        "projected_steps": 1,
+        "reserved_work": 9152
+      }
+    ],
+    "cut2": [
+      {
+        "cutset": [
+          15,
+          25
+        ],
+        "id": "d-d-d-j06:1",
+        "outcomes": {
+          "sat": 2,
+          "unresolved": 1,
+          "unsat": 1
+        },
+        "projected_steps": 39,
+        "reserved_work": 45916
+      },
+      {
+        "cutset": [
+          7,
+          19
+        ],
+        "id": "d-d-k09:0",
+        "outcomes": {
+          "unresolved": 4
+        },
+        "projected_steps": 25,
+        "reserved_work": 57024
+      },
+      {
+        "cutset": [
+          27,
+          6
+        ],
+        "id": "d-d-k09:3",
+        "outcomes": {
+          "unresolved": 4
+        },
+        "projected_steps": 15,
+        "reserved_work": 39616
+      }
+    ],
+    "cut4": [
+      {
+        "cutset": [
+          15,
+          25,
+          14,
+          24
+        ],
+        "id": "d-d-d-j06:1",
+        "outcomes": {
+          "sat": 4,
+          "unsat": 12
+        },
+        "projected_steps": 96,
+        "reserved_work": 24018
+      },
+      {
+        "cutset": [
+          7,
+          19,
+          1,
+          21
+        ],
+        "id": "d-d-k09:0",
+        "outcomes": {
+          "sat": 2,
+          "unresolved": 9,
+          "unsat": 5
+        },
+        "projected_steps": 181,
+        "reserved_work": 167548
+      },
+      {
+        "cutset": [
+          27,
+          6,
+          31,
+          12
+        ],
+        "id": "d-d-k09:3",
+        "outcomes": {
+          "unresolved": 16
+        },
+        "projected_steps": 98,
+        "reserved_work": 157376
+      }
+    ]
+  },
+  "cost_comparisons_percent": {
+    "cut2_vs_cut0": 47.03746735587937,
+    "cut4_vs_cut0": 128.8651627988792,
+    "cut4_vs_cut2": 55.65091463725344,
+    "cut4_vs_wide": 135.5800522553728
+  },
+  "decision": "Retain checked cutset conditioning and exact original-root witness transport. Adds both remaining SAT roots, completing the retained 182-query structural certificate union. Higher incremental cost; no default change or unrestricted/external-coverage claim.",
+  "documents": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "048015190ca3c244ad29760bdce5773d17f5f04a7b8a43e4cf48053b70fcf71d",
+    "research/factor-conditioning.md": "aa9defea4e747b56c62e030846fe063fdcc35d64339a1feda82a80c1f3789e69",
+    "research/implementation-gaps.md": "cf08c57d28da37ec904d13c0c28c2d6ed0b897e5f44da20933d2a48b83dc95da",
+    "research/sat-pattern-discovery.md": "d0e3ee945253d75be11a156a7a30a0ffc5aae83fa562b1795c34a360effcd14e",
+    "research/structural-reuse-priorities.md": "47baf63b3d895c465966f58aab385d3e0009a3114a0275ef1da9ad5c24473fc9"
+  },
+  "limitations": [
+    "Exploratory screen-guided policy on the same three exposed frontiers; cutset size four was selected after the retained screen. IDs, descriptions and truth labels do not enter graph ranking. This is not held-out external generalization.",
+    "Wide continues the original checked factor prefix at width ten. Cut0, cut2 and cut4 rebuild exact width-four covers and condition zero, two or four graph-degree-ranked variables before width-nine elimination. Every Boolean branch is retained, including failures and work exhaustion.",
+    "Original prefix projection work is charged once and deducted from a single 262144-unit projection allowance across all branches of each frontier. Cover search has a separate 65536 candidate/completion cap. Graph ranking, normalization, restriction, bit operations and all verification are additional charged work.",
+    "Each acquisition includes internal checking. Explicit, warm and each of two cold passes independently validate the old whole-root context, cover/branch certificates and root SAT witness transport. Only an actual complete source witness upgrades a root. Warm and cold start with empty bounded verified-operator banks; operating-system file caches are not flushed.",
+    "The same three frontiers are attempted in every mode, even when an earlier frontier already supplies a model of the same root. This deliberately retains the unresolved third-frontier cost; no conditional early-stopping saving is claimed.",
+    "Charged incremental stage includes input/context loading, discovery/internal checks, explicit checking/root recomposition, writes, compression, warm and two cold replays. Historical root acquisition, startup, final report metadata and independent audits remain additional; no full 182-query pipeline or fresh-solver speedup is claimed.",
+    "All previous 180 structural certificates remain retained. Adding original-source models for the two exposed roots completes only this finite synthetic 182-query panel. One active frontier can stay unresolved beneath a SAT root; arbitrary SAT, new distributions and efficient unrestricted partitioning remain open."
+  ],
+  "new_roots": {
+    "cut0": [],
+    "cut2": [
+      "d-d-d-j06"
+    ],
+    "cut4": [
+      "d-d-d-j06",
+      "d-d-k09"
+    ],
+    "wide": []
+  },
+  "next_cost_target": "Measure selective/adaptive branching and stopping after a checked root witness, together with exact validated source contexts. Charge discovery, construction, invalidation, replay and all necessary UNSAT branch obligations. No savings from those unimplemented policies claimed.",
+  "next_coverage_target": "Freeze new graph structures and external CNFs before tuning cutset recognition. Record overlaps, interaction and unresolved cases; the old synthetic panel is now saturated. The third frontier and twenty-five open branches remain concrete stress cases.",
+  "paired_percent": {
+    "cut2_vs_cut0": [
+      49.27822294904143,
+      47.92622894944471,
+      31.62761642270646,
+      49.03460297569606,
+      52.28049299120978,
+      49.05698094754199,
+      50.857387084604696,
+      47.94134369407745
+    ],
+    "cut4_vs_cut0": [
+      141.1063779139164,
+      127.13667822557824,
+      107.92661051083643,
+      133.63833213317125,
+      133.56497740130516,
+      135.26605308807729,
+      125.90449353160862,
+      129.52150052214918
+    ],
+    "cut4_vs_cut2": [
+      61.5147696367085,
+      53.54726463229484,
+      57.965794839819026,
+      56.76784281518299,
+      53.37813321551792,
+      57.83631977013886,
+      49.747054418300095,
+      55.14358244357196
+    ],
+    "cut4_vs_wide": [
+      131.75334266762943,
+      139.44869223288308,
+      142.59179586950984,
+      132.51323972353703,
+      140.2723270578045,
+      126.58517203576127,
+      137.28938358177888,
+      134.9091035351615
+    ]
+  },
+  "retained_root_coverage": 180,
+  "root_panel_size": 182,
+  "supplemental_checks": {
+    "path": "experiments/results/cnf-factor-conditioning/supplemental-checks.json",
+    "sha256": "d038c4d020e9d7b9c90d23d00d882616b0c9c73eaf4f1c69b9c89e401f30c541"
+  },
+  "union_root_coverage": 182
+}

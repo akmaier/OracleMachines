@@ -16694,6 +16694,141 @@ The previous full-pipeline profile still identifies repeated validated source
 preparation as the next cost target.  Neither representation bounds nor small
 local factors settle unrestricted SAT complexity.
 
+\subsection{Conditioning exact factor covers and closing the retained panel}
+\label{sec:factor-conditioning}
+
+The preceding factor-width classification leaves a global interaction problem:
+short clauses describe every active relation, but elimination still stalls.
+A bounded conditioning experiment now supplies original-source SAT witnesses for
+both remaining roots.  The union of those two witnesses with 180 independently
+rechecked retained authorities covers all 182 queries of the existing synthetic
+panel.  This is a finite-panel completion, not new external-distribution coverage
+or a solution of unrestricted SAT.  One of the three internal frontiers remains
+unresolved beneath an already-SAT root.
+
+\begin{proposition}[Conditioning a checked factor frontier]
+Let a checked existential projection prefix transform a source CNF $F$ into an
+active conjunction $H$, and let checked exact covers describe all factors of $H$.
+For any subset $S$ of its variables,
+\[
+ \operatorname{SAT}(F)\quad\Longleftrightarrow\quad
+ \bigvee_{\alpha\in\{0,1\}^{S}}\operatorname{SAT}(H|_{\alpha}).
+\]
+A checked SAT cofactor witness, combined with $\alpha$ and the earlier
+reconstruction choices, yields a source witness.  Checked refutations of every
+cofactor refute $F$; an unresolved cofactor cannot be counted as a refutation.
+\end{proposition}
+\begin{proof}
+Exact factor covers preserve $H$ pointwise.  Every assignment to its variables
+restricts to exactly one $\alpha$ on $S$, and its remaining coordinates satisfy
+$H|_{\alpha}$ exactly when the full assignment satisfies $H$.  Thus the cofactors
+partition all assignments.  Existential projection preserves satisfiability;
+reverse traversal of its verified choice tables extends a model of $H$ to one
+of $F$.  Consequently any satisfying branch suffices, whereas a refutation needs
+all branches.  Composition through earlier checked substitutions, restrictions
+and conditioning edges preserves the transported assignment, which can be checked
+directly against the original source.  Neither this identity nor a bounded
+implementation guarantees a small useful $S$ or cheap cofactor solving.
+\end{proof}
+
+The new experimental certificate checks the old source-bound prefix and discovers
+exact same-variable width-four covers for every active factor.  Those descriptions
+are stored once and shared across branches.  A greedy heuristic repeatedly chooses
+a highest-degree vertex in the cover's primal graph, deletes it, and selects at
+most four vertices.  Variable IDs break ties; the ranking is label-blind but not
+invariant under all renamings.  It is not a proof of minimum separator size or of
+graph disconnection.  The checker need not reproduce this heuristic: any bounded
+valid cutset is sound when its entire Boolean assignment partition is supplied.
+
+Every branch retains its width-nine semantic bucket certificate or an explicit
+unresolved entry.  SAT needs one checked branch model; UNSAT needs every branch
+refuted.  The old prefix's reserved projection work is deducted once from the
+original 262,144-unit allowance, and all new branches share the remainder.  The
+allowance is not reset per branch.  Cover search separately permits 65,536
+candidate clauses/completions per frontier; ranking, restriction, normalization,
+bit operations and verification remain additional charged work.  Across the three
+inputs, old prefix reservations sum to 30,736 and new cut-four reservations to
+318,206.  These units are neither time nor total-memory bounds.
+
+A root-transport adapter checks the complete earlier context, reconstructs the
+selected frontier from the retained pair-learning rounds and terminal reductions,
+and requires exact equality with the new certificate's source and prefix.  A SAT
+model lifts through those reductions, incoming relation/preprocessing edges,
+conditioning parents and the original prefix.  The final assignment must satisfy
+the original root CNF.  The adapter grants only this explicit SAT authority; a
+frontier UNSAT result does not alone refute an old root.  No fresh solving or
+trusted truth label participates in this transport.
+
+With zero conditioned variables, all three frontiers remain unresolved, as they
+do under original-table width-ten continuation.  Conditioning two variables closes
+\texttt{d-d-d-j06}; four also closes \texttt{d-d-k09}.  The cut-four pivot lists
+in the three frontiers' own normalized coordinates are $(15,25,14,24)$,
+$(7,19,1,21)$ and $(27,6,31,12)$.  All 48 branches are retained: six SAT,
+seventeen UNSAT and twenty-five unresolved.  The first two frontiers are SAT;
+all sixteen branches of the third remain unresolved.  Another conditioning path
+of its parent root supplies the SAT witness.  The three total reservations,
+including their old prefixes, are 24,018, 167,548 and 157,376, and they add 96,
+181 and 98 projections, respectively.
+
+The initial size-zero-through-four diagnostic screen is preserved.  Two variables
+first supplied a witness for the first frontier, and four for the second, so the
+chosen maximum is explicitly screen-guided exploratory work.  Size three already
+decides all eight branches of the first frontier; larger cuts are not monotonically
+cheaper or better.  The accepted comparison fixes sizes zero, two and four before
+its timed runs and attempts all three inputs in every mode, including the third
+after its root already has a model.  No early-stopping saving is claimed.
+
+Eight cyclic process orders charge input/context loading, discovery with internal
+checks, explicit checking and root transport, evidence writes, compression, warm
+replay and two cold passes.  Each phase starts with an empty bounded
+verified-operator bank; operating-system file caches are not flushed.  Mean
+incremental-stage seconds are 0.593162 for width ten, 0.610566 for cut zero,
+0.897760 for cut two and 1.397372 for cut four.  Cut four costs 135.58\% more than
+width ten, 128.87\% more than cut zero and 55.65\% more than cut two; cut two costs
+47.04\% more than cut zero.  All eight paired signs in each comparison are
+unfavorable.  The coverage gain spends more work; production defaults are unchanged.
+
+Cut-four acquisition/internal checking costs 0.352807\,s, explicit checking/root
+transport 0.141721\,s, warm replay 0.297694\,s, and the two cold passes
+0.590465\,s.  It projects 31,311 rows, versus 2,048 for width ten and 768 for cut
+zero.  New certificate sizes, uncompressed/compressed, are 403,656/15,980 bytes
+for cut four, 192,103/8,847 for cut two, 119,957/5,439 for cut zero and 2,262/730
+for width ten.  Peak process RSS is 56,426,496 bytes for cut four versus 55,803,904
+for width ten; no memory saving is established.  Historical root acquisition,
+startup, final metadata and independent audits are additional.  These stages now
+include full root-context checks, unlike the preceding smaller frontier-only
+experiment.  This is not a new complete 182-query pipeline comparison or a speedup
+over fresh solving.  The existing fallback already answered every query; the
+improvement is in the independently checked structural certificate union.
+
+Sixteen focused tests exercise exhaustive two-variable formulas, seeded edits and
+mixtures, SAT/UNSAT composition, corrupted partitions and witnesses, shared-budget
+resets, unavailable covers, nonempty-prefix transport and original-root binding.
+Cold replay also runs with discovery and ranking disabled.  A separate semantic
+audit retains complete certificates for 632 inputs: all 512 two-variable CNFs,
+forty seeded cases, forty signed permutations and forty edits or disjoint mixtures.
+It verifies 2,486 branches, 18,230 direct cofactor assignments and 481 earlier
+prefix steps, with 212 SAT and 420 UNSAT results agreeing with direct truth tables.
+Some checked terminal prefixes are deliberately left open for this semantic stress
+audit; these counts are not an external coverage estimate.
+
+Two development failures remain in the record.  A JSON-list/tuple concatenation
+in initial root transport was corrected before freezing the benchmark.  A later
+validator initially compared integer-key models and parsed string-key models as
+serialized text, whose key order differs; it now compares parsed JSON values.
+Timed algorithms and retained certificates were unchanged by that validation
+correction.  Failed logs and source snapshots are preserved.
+
+The panel's coverage ceiling is now reached, so the next coverage experiment
+should freeze new graph structures and external CNFs before tuning, retain
+unresolved cases and measure whether small useful cutsets can be recognized
+economically.  The surviving third frontier remains a concrete interaction test.
+Branch enumeration grows exponentially with cutset size; adaptive expansion,
+checked stopping after a root witness and exact validated-source reuse are cost
+opportunities requiring new matched measurements.  Broader nonconstant transfer,
+recognition across distinct structures and unrestricted expansion bounds remain
+open.  Completing a fixed synthetic panel resolves none of those general claims.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -1,0 +1,1680 @@
+{
+  "cache_sessions": [
+    {
+      "entries": 36,
+      "key_bytes": 59364,
+      "max_bytes": 4194304,
+      "max_entries": 4096,
+      "peak_entries": 36,
+      "peak_key_bytes": 59364
+    },
+    {
+      "entries": 36,
+      "key_bytes": 59364,
+      "max_bytes": 4194304,
+      "max_entries": 4096,
+      "peak_entries": 36,
+      "peak_key_bytes": 59364
+    },
+    {
+      "entries": 36,
+      "key_bytes": 59364,
+      "max_bytes": 4194304,
+      "max_entries": 4096,
+      "peak_entries": 36,
+      "peak_key_bytes": 59364
+    },
+    {
+      "entries": 36,
+      "key_bytes": 59364,
+      "max_bytes": 4194304,
+      "max_entries": 4096,
+      "peak_entries": 36,
+      "peak_key_bytes": 59364
+    }
+  ],
+  "cases": [
+    {
+      "counts": {
+        "bucket_checked_steps": 57,
+        "bucket_compacted_rows": 288,
+        "bucket_leaf_rows": 592,
+        "bucket_lookup_factors": 14,
+        "bucket_lookup_scope_visits": 41,
+        "bucket_operator_misses": 2,
+        "bucket_planning_scope_visits": 1831,
+        "bucket_projected_rows": 384,
+        "bucket_removed_coordinates": 2,
+        "bucket_reserved_probe_work": 5120,
+        "bucket_support_pair_checks": 313,
+        "bucket_table_probes": 3080,
+        "bucket_verified_rows": 1892,
+        "bucket_verify_table_probes": 19592,
+        "clause_candidates": 5478,
+        "clause_cover_verified_literals": 45984,
+        "clause_cover_verified_rows": 3510,
+        "clause_direct_covers": 64,
+        "clause_mask_intersections": 19302,
+        "clause_mask_rows": 6048,
+        "closed_checked_edges": 9,
+        "closed_checked_folds": 4,
+        "closed_checked_nodes": 7,
+        "closed_checked_units": 73,
+        "continuation_checked_rounds": 3,
+        "cutset_checked_branches": 2,
+        "cutset_edge_visits": 207,
+        "cutset_restriction_literals": 702,
+        "feedback_checked_rounds": 2,
+        "feedback_transport_reconstructions": 4,
+        "forcing_checked_literals": 14,
+        "forcing_checked_support_edges": 148,
+        "forcing_path_walk_edges": 148,
+        "iterated_checked_rounds": 1,
+        "normalization_literal_visits": 27256,
+        "pair_checked_clauses": 92,
+        "pair_checked_copy_entries": 996,
+        "pair_checked_literals": 2394,
+        "pair_checked_prefixes": 16,
+        "probe_checked_failures": 72,
+        "probe_checked_literals": 2963,
+        "probe_checked_rounds": 12,
+        "relation_cleanup_literal_visits": 6875,
+        "restriction_literal_visits": 20656,
+        "verified_operator_hits": 38,
+        "verified_operator_insertions": 19,
+        "verified_operator_key_factors": 254,
+        "verified_operator_key_scope_visits": 954,
+        "verified_operator_misses": 19,
+        "verified_operator_saved_constant_rows": 100,
+        "verified_operator_saved_nonconstant_rows": 4544,
+        "verified_operator_saved_probes": 51472,
+        "verified_operator_saved_rows": 4644,
+        "widen_checked_suffix_steps": 2,
+        "widen_materialized_leaf_rows": 3424,
+        "widen_materialized_steps": 32
+      },
+      "diagnostic": {
+        "branches": [
+          {
+            "reason": "bag-width",
+            "spent": 5120,
+            "width": 11
+          }
+        ],
+        "clause_spent": 5478,
+        "factors": [
+          {
+            "index": 0,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 1,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 2,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 3,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 4,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 5,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 6,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 7,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 8,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 9,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 10,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 11,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 12,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 13,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 16,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 17,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 18,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 19,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 21,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 22,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 23,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 25,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 26,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 28,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 29,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 30,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 31,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 32,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 33,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 34,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 35,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 36,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 37,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 40,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 44,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 45,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 46,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 49,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 50,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 51,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 52,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 53,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 54,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 55,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 56,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 60,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 62,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 63,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 65,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 67,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 69,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 71,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 72,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 73,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 74,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 76,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 77,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 79,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 80,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 83,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 90,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 91,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 93,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 94,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 95,
+            "reason": "tautology",
+            "spent": 0
+          },
+          {
+            "index": 96,
+            "reason": "tautology",
+            "spent": 0
+          },
+          {
+            "index": 97,
+            "reason": "exact-cover",
+            "spent": 210
+          },
+          {
+            "index": 98,
+            "reason": "exact-cover",
+            "spent": 938
+          },
+          {
+            "index": 99,
+            "reason": "exact-cover",
+            "spent": 938
+          },
+          {
+            "index": 100,
+            "reason": "exact-cover",
+            "spent": 1696
+          },
+          {
+            "index": 101,
+            "reason": "exact-cover",
+            "spent": 1696
+          }
+        ],
+        "reserved_work": 14288
+      },
+      "id": "d-d-d-j06:1",
+      "result": {
+        "leaf": {
+          "answer": null,
+          "model": null
+        },
+        "root": {
+          "answer": null,
+          "model": null
+        }
+      },
+      "status": "unresolved"
+    },
+    {
+      "counts": {
+        "bucket_checked_steps": 58,
+        "bucket_compacted_rows": 256,
+        "bucket_leaf_rows": 800,
+        "bucket_lookup_factors": 6,
+        "bucket_lookup_scope_visits": 17,
+        "bucket_operator_misses": 1,
+        "bucket_planning_scope_visits": 1737,
+        "bucket_projected_rows": 256,
+        "bucket_removed_coordinates": 0,
+        "bucket_reserved_probe_work": 3072,
+        "bucket_support_pair_checks": 55,
+        "bucket_table_probes": 1758,
+        "bucket_verified_rows": 2432,
+        "bucket_verify_table_probes": 25280,
+        "clause_candidates": 6212,
+        "clause_cover_verified_literals": 50616,
+        "clause_cover_verified_rows": 4299,
+        "clause_direct_covers": 79,
+        "clause_mask_intersections": 21796,
+        "clause_mask_rows": 6656,
+        "closed_checked_edges": 11,
+        "closed_checked_folds": 5,
+        "closed_checked_nodes": 10,
+        "closed_checked_units": 78,
+        "continuation_checked_rounds": 8,
+        "cutset_checked_branches": 2,
+        "cutset_edge_visits": 284,
+        "cutset_restriction_literals": 906,
+        "equiv_certificate_walk_edges": 4,
+        "equiv_checked_edges": 4,
+        "equivalence_substitution_literal_visits": 1028,
+        "feedback_checked_rounds": 4,
+        "feedback_transport_reconstructions": 6,
+        "normalization_literal_visits": 52785,
+        "pair_checked_clauses": 81,
+        "pair_checked_copy_entries": 252,
+        "pair_checked_literals": 4784,
+        "pair_checked_prefixes": 19,
+        "probe_checked_failures": 53,
+        "probe_checked_literals": 2709,
+        "probe_checked_rounds": 13,
+        "relation_cleanup_literal_visits": 13539,
+        "restriction_literal_visits": 35144,
+        "verified_operator_hits": 42,
+        "verified_operator_insertions": 16,
+        "verified_operator_key_factors": 294,
+        "verified_operator_key_scope_visits": 1135,
+        "verified_operator_misses": 16,
+        "verified_operator_saved_constant_rows": 640,
+        "verified_operator_saved_nonconstant_rows": 5312,
+        "verified_operator_saved_probes": 65600,
+        "verified_operator_saved_rows": 5952,
+        "widen_checked_suffix_steps": 6,
+        "widen_materialized_leaf_rows": 5516,
+        "widen_materialized_steps": 40
+      },
+      "diagnostic": {
+        "branches": [
+          {
+            "reason": "bag-width",
+            "spent": 3072,
+            "width": 10
+          }
+        ],
+        "clause_spent": 6212,
+        "factors": [
+          {
+            "index": 0,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 1,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 2,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 4,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 6,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 7,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 9,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 10,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 11,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 12,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 13,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 22,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 25,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 29,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 30,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 31,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 32,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 33,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 34,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 35,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 37,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 38,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 39,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 40,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 41,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 42,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 43,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 47,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 48,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 49,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 50,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 51,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 52,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 54,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 55,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 56,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 57,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 58,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 59,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 60,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 61,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 62,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 63,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 64,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 65,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 66,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 67,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 68,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 69,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 70,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 73,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 74,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 78,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 79,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 80,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 81,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 82,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 84,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 85,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 86,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 87,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 88,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 89,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 95,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 96,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 99,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 100,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 101,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 102,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 104,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 105,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 108,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 109,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 111,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 112,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 114,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 115,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 116,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 118,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 121,
+            "reason": "tautology",
+            "spent": 0
+          },
+          {
+            "index": 122,
+            "reason": "exact-cover",
+            "spent": 472
+          },
+          {
+            "index": 123,
+            "reason": "exact-cover",
+            "spent": 472
+          },
+          {
+            "index": 124,
+            "reason": "exact-cover",
+            "spent": 938
+          },
+          {
+            "index": 125,
+            "reason": "exact-cover",
+            "spent": 1696
+          },
+          {
+            "index": 126,
+            "reason": "exact-cover",
+            "spent": 938
+          },
+          {
+            "index": 127,
+            "reason": "exact-cover",
+            "spent": 1696
+          }
+        ],
+        "reserved_work": 16512
+      },
+      "id": "d-d-k09:0",
+      "result": {
+        "leaf": {
+          "answer": null,
+          "model": null
+        },
+        "root": {
+          "answer": null,
+          "model": null
+        }
+      },
+      "status": "unresolved"
+    },
+    {
+      "counts": {
+        "bucket_checked_steps": 50,
+        "bucket_compacted_rows": 128,
+        "bucket_leaf_rows": 804,
+        "bucket_lookup_factors": 4,
+        "bucket_lookup_scope_visits": 12,
+        "bucket_operator_misses": 1,
+        "bucket_planning_scope_visits": 1745,
+        "bucket_projected_rows": 128,
+        "bucket_removed_coordinates": 0,
+        "bucket_reserved_probe_work": 1024,
+        "bucket_support_pair_checks": 80,
+        "bucket_table_probes": 624,
+        "bucket_verified_rows": 128,
+        "bucket_verify_table_probes": 1024,
+        "clause_candidates": 5980,
+        "clause_cover_verified_literals": 48552,
+        "clause_cover_verified_rows": 4296,
+        "clause_direct_covers": 81,
+        "clause_mask_intersections": 21064,
+        "clause_mask_rows": 6848,
+        "closed_checked_edges": 11,
+        "closed_checked_folds": 5,
+        "closed_checked_nodes": 10,
+        "closed_checked_units": 80,
+        "continuation_checked_rounds": 7,
+        "cutset_checked_branches": 2,
+        "cutset_edge_visits": 287,
+        "cutset_restriction_literals": 876,
+        "equiv_certificate_walk_edges": 6,
+        "equiv_checked_edges": 6,
+        "equivalence_substitution_literal_visits": 1542,
+        "feedback_checked_rounds": 4,
+        "feedback_transport_reconstructions": 6,
+        "normalization_literal_visits": 53250,
+        "pair_checked_clauses": 81,
+        "pair_checked_copy_entries": 258,
+        "pair_checked_literals": 4399,
+        "pair_checked_prefixes": 20,
+        "probe_checked_failures": 56,
+        "probe_checked_literals": 3017,
+        "probe_checked_rounds": 15,
+        "relation_cleanup_literal_visits": 14380,
+        "restriction_literal_visits": 35841,
+        "verified_operator_hits": 49,
+        "verified_operator_insertions": 1,
+        "verified_operator_key_factors": 220,
+        "verified_operator_key_scope_visits": 921,
+        "verified_operator_misses": 1,
+        "verified_operator_saved_constant_rows": 256,
+        "verified_operator_saved_nonconstant_rows": 6336,
+        "verified_operator_saved_probes": 62464,
+        "verified_operator_saved_rows": 6592,
+        "widen_checked_suffix_steps": 6,
+        "widen_materialized_leaf_rows": 5272,
+        "widen_materialized_steps": 34
+      },
+      "diagnostic": {
+        "branches": [
+          {
+            "reason": "bag-width",
+            "spent": 1024,
+            "width": 10
+          }
+        ],
+        "clause_spent": 5980,
+        "factors": [
+          {
+            "index": 0,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 1,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 2,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 3,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 4,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 5,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 6,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 7,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 8,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 9,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 10,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 11,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 13,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 14,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 15,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 16,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 17,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 18,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 23,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 24,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 25,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 28,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 29,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 30,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 31,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 33,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 34,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 35,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 36,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 38,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 39,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 40,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 42,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 43,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 44,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 45,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 46,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 47,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 48,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 49,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 52,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 53,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 54,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 55,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 56,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 57,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 58,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 59,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 60,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 62,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 63,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 64,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 65,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 66,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 67,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 71,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 72,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 73,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 74,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 75,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 76,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 77,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 80,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 81,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 82,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 83,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 84,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 85,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 86,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 88,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 89,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 92,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 94,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 95,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 97,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 98,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 99,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 101,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 103,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 104,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 105,
+            "reason": "single-clause",
+            "spent": 0
+          },
+          {
+            "index": 106,
+            "reason": "exact-cover",
+            "spent": 210
+          },
+          {
+            "index": 107,
+            "reason": "exact-cover",
+            "spent": 210
+          },
+          {
+            "index": 108,
+            "reason": "exact-cover",
+            "spent": 472
+          },
+          {
+            "index": 109,
+            "reason": "exact-cover",
+            "spent": 1696
+          },
+          {
+            "index": 110,
+            "reason": "exact-cover",
+            "spent": 1696
+          },
+          {
+            "index": 111,
+            "reason": "exact-cover",
+            "spent": 1696
+          }
+        ],
+        "reserved_work": 9152
+      },
+      "id": "d-d-k09:3",
+      "result": {
+        "leaf": {
+          "answer": null,
+          "model": null
+        },
+        "root": {
+          "answer": null,
+          "model": null
+        }
+      },
+      "status": "unresolved"
+    }
+  ],
+  "cold_counts": {
+    "bucket_checked_steps": 230,
+    "bucket_verified_rows": 8904,
+    "bucket_verify_table_probes": 91792,
+    "clause_cover_verified_literals": 96768,
+    "clause_cover_verified_rows": 8070,
+    "closed_checked_edges": 62,
+    "closed_checked_folds": 28,
+    "closed_checked_nodes": 54,
+    "closed_checked_units": 462,
+    "continuation_checked_rounds": 36,
+    "cutset_checked_branches": 6,
+    "cutset_restriction_literals": 1656,
+    "equiv_certificate_walk_edges": 20,
+    "equiv_checked_edges": 20,
+    "equivalence_substitution_literal_visits": 5140,
+    "feedback_checked_rounds": 20,
+    "feedback_transport_reconstructions": 32,
+    "forcing_checked_literals": 28,
+    "forcing_checked_support_edges": 296,
+    "forcing_path_walk_edges": 296,
+    "iterated_checked_rounds": 2,
+    "normalization_literal_visits": 253238,
+    "pair_checked_clauses": 508,
+    "pair_checked_copy_entries": 3012,
+    "pair_checked_literals": 23154,
+    "pair_checked_prefixes": 110,
+    "probe_checked_failures": 362,
+    "probe_checked_literals": 17378,
+    "probe_checked_rounds": 80,
+    "relation_cleanup_literal_visits": 69588,
+    "restriction_literal_visits": 183282,
+    "verified_operator_hits": 158,
+    "verified_operator_insertions": 72,
+    "verified_operator_key_factors": 1048,
+    "verified_operator_key_scope_visits": 4096,
+    "verified_operator_misses": 72,
+    "verified_operator_saved_constant_rows": 1400,
+    "verified_operator_saved_nonconstant_rows": 18048,
+    "verified_operator_saved_probes": 199264,
+    "verified_operator_saved_rows": 19448,
+    "widen_checked_suffix_steps": 28,
+    "widen_materialized_leaf_rows": 15728,
+    "widen_materialized_steps": 120
+  },
+  "cold_seconds": 0.27104133274406195,
+  "complete_stage_seconds": 0.5904352501966059,
+  "compressed_bytes": 5439,
+  "counts": {
+    "bucket_checked_steps": 165,
+    "bucket_compacted_rows": 672,
+    "bucket_leaf_rows": 2196,
+    "bucket_lookup_factors": 24,
+    "bucket_lookup_scope_visits": 70,
+    "bucket_operator_misses": 4,
+    "bucket_planning_scope_visits": 5313,
+    "bucket_projected_rows": 768,
+    "bucket_removed_coordinates": 2,
+    "bucket_reserved_probe_work": 9216,
+    "bucket_support_pair_checks": 448,
+    "bucket_table_probes": 5462,
+    "bucket_verified_rows": 4452,
+    "bucket_verify_table_probes": 45896,
+    "clause_candidates": 17670,
+    "clause_cover_verified_literals": 145152,
+    "clause_cover_verified_rows": 12105,
+    "clause_direct_covers": 224,
+    "clause_mask_intersections": 62162,
+    "clause_mask_rows": 19552,
+    "closed_checked_edges": 31,
+    "closed_checked_folds": 14,
+    "closed_checked_nodes": 27,
+    "closed_checked_units": 231,
+    "continuation_checked_rounds": 18,
+    "cutset_checked_branches": 6,
+    "cutset_edge_visits": 778,
+    "cutset_restriction_literals": 2484,
+    "equiv_certificate_walk_edges": 10,
+    "equiv_checked_edges": 10,
+    "equivalence_substitution_literal_visits": 2570,
+    "feedback_checked_rounds": 10,
+    "feedback_transport_reconstructions": 16,
+    "forcing_checked_literals": 14,
+    "forcing_checked_support_edges": 148,
+    "forcing_path_walk_edges": 148,
+    "iterated_checked_rounds": 1,
+    "normalization_literal_visits": 133291,
+    "pair_checked_clauses": 254,
+    "pair_checked_copy_entries": 1506,
+    "pair_checked_literals": 11577,
+    "pair_checked_prefixes": 55,
+    "probe_checked_failures": 181,
+    "probe_checked_literals": 8689,
+    "probe_checked_rounds": 40,
+    "relation_cleanup_literal_visits": 34794,
+    "restriction_literal_visits": 91641,
+    "verified_operator_hits": 129,
+    "verified_operator_insertions": 36,
+    "verified_operator_key_factors": 768,
+    "verified_operator_key_scope_visits": 3010,
+    "verified_operator_misses": 36,
+    "verified_operator_saved_constant_rows": 996,
+    "verified_operator_saved_nonconstant_rows": 16192,
+    "verified_operator_saved_probes": 179536,
+    "verified_operator_saved_rows": 17188,
+    "widen_checked_suffix_steps": 14,
+    "widen_materialized_leaf_rows": 14212,
+    "widen_materialized_steps": 106
+  },
+  "input_seconds": 0.007348000071942806,
+  "mode": "cut0",
+  "panel": {
+    "path": "experiments/results/cnf-factor-conditioning/panel.json",
+    "sha256": "f54ff77d326b7e6c5c87f60d98b3065708e09f42128e93268fe098ff95137b27"
+  },
+  "peak_rss_bytes": 55934976,
+  "persistence_seconds": 0.0014085415750741959,
+  "phases": {
+    "acquisition_seconds": 0.05513220699504018,
+    "checking_seconds": 0.11841437453404069,
+    "writing_seconds": 0.0010585421696305275
+  },
+  "proof_bytes": 119957,
+  "warm_counts": {
+    "bucket_checked_steps": 115,
+    "bucket_verified_rows": 4452,
+    "bucket_verify_table_probes": 45896,
+    "clause_cover_verified_literals": 48384,
+    "clause_cover_verified_rows": 4035,
+    "closed_checked_edges": 31,
+    "closed_checked_folds": 14,
+    "closed_checked_nodes": 27,
+    "closed_checked_units": 231,
+    "continuation_checked_rounds": 18,
+    "cutset_checked_branches": 3,
+    "cutset_restriction_literals": 828,
+    "equiv_certificate_walk_edges": 10,
+    "equiv_checked_edges": 10,
+    "equivalence_substitution_literal_visits": 2570,
+    "feedback_checked_rounds": 10,
+    "feedback_transport_reconstructions": 16,
+    "forcing_checked_literals": 14,
+    "forcing_checked_support_edges": 148,
+    "forcing_path_walk_edges": 148,
+    "iterated_checked_rounds": 1,
+    "normalization_literal_visits": 126619,
+    "pair_checked_clauses": 254,
+    "pair_checked_copy_entries": 1506,
+    "pair_checked_literals": 11577,
+    "pair_checked_prefixes": 55,
+    "probe_checked_failures": 181,
+    "probe_checked_literals": 8689,
+    "probe_checked_rounds": 40,
+    "relation_cleanup_literal_visits": 34794,
+    "restriction_literal_visits": 91641,
+    "verified_operator_hits": 79,
+    "verified_operator_insertions": 36,
+    "verified_operator_key_factors": 524,
+    "verified_operator_key_scope_visits": 2048,
+    "verified_operator_misses": 36,
+    "verified_operator_saved_constant_rows": 700,
+    "verified_operator_saved_nonconstant_rows": 9024,
+    "verified_operator_saved_probes": 99632,
+    "verified_operator_saved_rows": 9724,
+    "widen_checked_suffix_steps": 14,
+    "widen_materialized_leaf_rows": 7864,
+    "widen_materialized_steps": 60
+  },
+  "warm_seconds": 0.13594870828092098
+}

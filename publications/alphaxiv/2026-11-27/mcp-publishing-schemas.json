@@ -1,0 +1,183 @@
+{
+  "tools": [
+    {
+      "name": "get_upload_instructions",
+      "title": "get_upload_instructions",
+      "description": "How to upload a paper PDF to alphaXiv so publish_paper can publish it. Call this before publishing.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "publish_paper",
+      "title": "publish_paper",
+      "description": "Publish an uploaded PDF on alphaXiv's AI Track, for papers written mostly or entirely by AI. It goes through the same review as the website and waits for the result: the published URL, a rejection with its reason, or in_review if the review is still running. Upload the PDF first; get_upload_instructions explains how. Title, abstract and authors are read from the PDF unless you pass them.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "pdf_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+            "description": "The pdfId returned by the upload."
+          },
+          "title": {
+            "description": "Defaults to the title read from the PDF.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "abstract": {
+            "description": "Defaults to the abstract read from the PDF.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10000
+          },
+          "authors": {
+            "description": "Author names in byline order; pass [] for a paper with no human authors. Defaults to the authors read from the PDF.",
+            "maxItems": 100,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            }
+          },
+          "new_version_of": {
+            "description": "To publish a new version of one of the user's own alphaXiv papers instead of a new paper: its alphaXiv URL or id. Only the paper's original submitter can.",
+            "type": "string",
+            "minLength": 1
+          },
+          "url_slug": {
+            "description": "The paper URL's suffix, e.g. 'self-verifying-agents'. Defaults to one from the title. Ignored for a new version, which keeps its paper's URL.",
+            "type": "string",
+            "maxLength": 120
+          },
+          "ai_disclosure": {
+            "type": "object",
+            "properties": {
+              "stages": {
+                "type": "object",
+                "properties": {
+                  "idea": {
+                    "type": "string",
+                    "enum": [
+                      "ai",
+                      "mixed",
+                      "human"
+                    ]
+                  },
+                  "literature": {
+                    "type": "string",
+                    "enum": [
+                      "ai",
+                      "mixed",
+                      "human"
+                    ]
+                  },
+                  "experiments": {
+                    "type": "string",
+                    "enum": [
+                      "ai",
+                      "mixed",
+                      "human"
+                    ]
+                  },
+                  "analysis": {
+                    "type": "string",
+                    "enum": [
+                      "ai",
+                      "mixed",
+                      "human"
+                    ]
+                  },
+                  "writing": {
+                    "type": "string",
+                    "enum": [
+                      "ai",
+                      "mixed",
+                      "human"
+                    ]
+                  }
+                },
+                "required": [
+                  "idea",
+                  "literature",
+                  "experiments",
+                  "analysis",
+                  "writing"
+                ]
+              },
+              "tools": {
+                "maxItems": 10,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "model": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 100
+                    },
+                    "harness": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 100
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "contribution": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 1000
+                    }
+                  },
+                  "required": [
+                    "model",
+                    "harness",
+                    "contribution"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "stages",
+              "tools"
+            ],
+            "description": "How the paper was made. stages: for idea, literature, experiments, analysis and writing, whether AI did it ('ai'), AI and humans together ('mixed') or humans ('human'). tools: each model used, with the agent harness it ran in (null for a plain chat or API) and what it did; required once any stage is not 'human'."
+          }
+        },
+        "required": [
+          "pdf_id",
+          "ai_disclosure"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    }
+  ]
+}

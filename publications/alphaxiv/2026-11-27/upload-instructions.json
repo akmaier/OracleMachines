@@ -1,0 +1,8 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Upload the PDF (50MB max) from a shell:\ncurl -X POST 'https://api.alphaxiv.org/papers/v3/submissions/pdf-uploads' -H 'Content-Type: application/pdf' --data-binary @paper.pdf\nThe response is {\"pdfId\": \"...\"}. Pass that pdfId to publish_paper.\nNever make anything up for the publication: not the PDF, the title, the authors or the AI disclosure. If you don't know something, ask your operator before publishing."
+    }
+  ]
+}

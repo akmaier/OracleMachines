@@ -1,0 +1,8 @@
+{
+  "reason": "The initial nonconstant-reuse fixture used greedy discovery, which eliminated degree-one leaves into constants and exercised no nonconstant hit. Replace the fixture with explicit independently checked partial projections at different variable ranks. Algorithm and benchmark policy unchanged; correction precedes every measured run.",
+  "failed_tests": 1,
+  "passed_tests": 32,
+  "source_snapshot_mappings": {
+    "solver/test_cnf_verified_operators.py": "experiments/results/cnf-verified-operators/preflight/test-before-fixture-fix.py"
+  }
+}

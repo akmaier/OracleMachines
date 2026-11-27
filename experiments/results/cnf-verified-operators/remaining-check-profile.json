@@ -1,0 +1,1762 @@
+{
+  "cache": [
+    {
+      "entries": 0,
+      "key_bytes": 0,
+      "max_bytes": 4194304,
+      "max_entries": 4096,
+      "peak_entries": 0,
+      "peak_key_bytes": 0,
+      "phase": "discovery"
+    },
+    {
+      "entries": 1325,
+      "key_bytes": 1797404,
+      "max_bytes": 4194304,
+      "max_entries": 4096,
+      "peak_entries": 1325,
+      "peak_key_bytes": 1797404,
+      "phase": "cold"
+    }
+  ],
+  "counts": {
+    "bucket_checked_steps": 3279,
+    "bucket_verified_rows": 54544,
+    "bucket_verify_table_probes": 441660,
+    "closed_checked_edges": 731,
+    "closed_checked_folds": 270,
+    "closed_checked_nodes": 673,
+    "closed_checked_units": 5515,
+    "continuation_checked_rounds": 177,
+    "equiv_certificate_walk_edges": 698,
+    "equiv_checked_edges": 698,
+    "equivalence_substitution_literal_visits": 41150,
+    "feedback_checked_rounds": 85,
+    "feedback_transport_reconstructions": 41,
+    "forcing_checked_literals": 531,
+    "forcing_checked_support_edges": 2687,
+    "forcing_path_walk_edges": 2687,
+    "iterated_checked_rounds": 125,
+    "key_serialized_bytes": 273131,
+    "normalization_literal_visits": 1669981,
+    "pair_checked_clauses": 1986,
+    "pair_checked_copy_entries": 10631,
+    "pair_checked_literals": 67934,
+    "pair_checked_prefixes": 278,
+    "post_probe_checked_transforms": 65,
+    "probe_checked_failures": 4275,
+    "probe_checked_literals": 142514,
+    "probe_checked_rounds": 626,
+    "relation_checked_conflict_edges": 19,
+    "relation_cleanup_literal_visits": 375977,
+    "restriction_literal_visits": 1512338,
+    "verified_operator_hits": 1954,
+    "verified_operator_insertions": 1325,
+    "verified_operator_key_factors": 11178,
+    "verified_operator_key_scope_visits": 41883,
+    "verified_operator_misses": 1325,
+    "verified_operator_saved_constant_rows": 6262,
+    "verified_operator_saved_nonconstant_rows": 26668,
+    "verified_operator_saved_probes": 288484,
+    "verified_operator_saved_rows": 32930,
+    "widen_checked_suffix_steps": 59,
+    "widen_materialized_leaf_rows": 13352,
+    "widen_materialized_steps": 150
+  },
+  "records": [
+    {
+      "calls": 5449,
+      "cumulative_seconds": 2.143520342,
+      "file": "experiments/cnf_residual_dag.py",
+      "line": 20,
+      "name": "normalize",
+      "primitive": 5449,
+      "self_seconds": 0.84833775
+    },
+    {
+      "calls": 6127,
+      "cumulative_seconds": 1.086974206,
+      "file": "experiments/cnf_residual_dag.py",
+      "line": 63,
+      "name": "restrict_scan",
+      "primitive": 6127,
+      "self_seconds": 0.541938983
+    },
+    {
+      "calls": 1380244,
+      "cumulative_seconds": 0.87237648,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method builtins.sorted>",
+      "primitive": 811215,
+      "self_seconds": 0.42076193700000003
+    },
+    {
+      "calls": 10317918,
+      "cumulative_seconds": 0.41030301,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method builtins.abs>",
+      "primitive": 10317918,
+      "self_seconds": 0.41030301
+    },
+    {
+      "calls": 691,
+      "cumulative_seconds": 1.12515727,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 67,
+      "name": "check_certificate",
+      "primitive": 691,
+      "self_seconds": 0.24258453700000002
+    },
+    {
+      "calls": 2048264,
+      "cumulative_seconds": 0.253464713,
+      "file": "experiments/cnf_residual_dag.py",
+      "line": 68,
+      "name": "<genexpr>",
+      "primitive": 2048264,
+      "self_seconds": 0.193572827
+    },
+    {
+      "calls": 2253439,
+      "cumulative_seconds": 0.17929450400000002,
+      "file": "experiments/cnf_residual_dag.py",
+      "line": 30,
+      "name": "<genexpr>",
+      "primitive": 2253439,
+      "self_seconds": 0.17929450400000002
+    },
+    {
+      "calls": 570175,
+      "cumulative_seconds": 0.379472662,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method builtins.sum>",
+      "primitive": 558279,
+      "self_seconds": 0.174712521
+    },
+    {
+      "calls": 1919128,
+      "cumulative_seconds": 0.22900102500000002,
+      "file": "experiments/cnf_residual_dag.py",
+      "line": 71,
+      "name": "<genexpr>",
+      "primitive": 1919128,
+      "self_seconds": 0.174633918
+    },
+    {
+      "calls": 2134056,
+      "cumulative_seconds": 0.168555269,
+      "file": "experiments/cnf_semantic_buckets.py",
+      "line": 56,
+      "name": "<genexpr>",
+      "primitive": 2134056,
+      "self_seconds": 0.168555269
+    },
+    {
+      "calls": 2253439,
+      "cumulative_seconds": 0.16612433000000001,
+      "file": "experiments/cnf_residual_dag.py",
+      "line": 33,
+      "name": "<genexpr>",
+      "primitive": 2253439,
+      "self_seconds": 0.16612433000000001
+    },
+    {
+      "calls": 496204,
+      "cumulative_seconds": 0.479364799,
+      "file": "experiments/cnf_semantic_buckets.py",
+      "line": 55,
+      "name": "evaluate",
+      "primitive": 496204,
+      "self_seconds": 0.157254273
+    },
+    {
+      "calls": 573909,
+      "cumulative_seconds": 0.6244416850000001,
+      "file": "experiments/cnf_residual_dag.py",
+      "line": 39,
+      "name": "<genexpr>",
+      "primitive": 573909,
+      "self_seconds": 0.151277452
+    },
+    {
+      "calls": 4275,
+      "cumulative_seconds": 0.27067920900000003,
+      "file": "experiments/cnf_probe_buckets.py",
+      "line": 67,
+      "name": "check_probe",
+      "primitive": 4275,
+      "self_seconds": 0.148029881
+    },
+    {
+      "calls": 1174,
+      "cumulative_seconds": 0.205393459,
+      "file": "experiments/cnf_relation_buckets.py",
+      "line": 59,
+      "name": "clean_quotient",
+      "primitive": 1174,
+      "self_seconds": 0.11799431
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.09309325,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py",
+      "line": 351,
+      "name": "raw_decode",
+      "primitive": 182,
+      "self_seconds": 0.09309325
+    },
+    {
+      "calls": 1755389,
+      "cumulative_seconds": 0.08403819100000001,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method builtins.len>",
+      "primitive": 1755389,
+      "self_seconds": 0.08403819100000001
+    },
+    {
+      "calls": 233226,
+      "cumulative_seconds": 0.187814126,
+      "file": "experiments/cnf_residual_dag.py",
+      "line": 76,
+      "name": "<genexpr>",
+      "primitive": 233226,
+      "self_seconds": 0.079987004
+    },
+    {
+      "calls": 1020918,
+      "cumulative_seconds": 0.070598388,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'append' of 'list' objects>",
+      "primitive": 1020918,
+      "self_seconds": 0.070598388
+    },
+    {
+      "calls": 734767,
+      "cumulative_seconds": 0.06211136800000001,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'add' of 'set' objects>",
+      "primitive": 734767,
+      "self_seconds": 0.06211136800000001
+    },
+    {
+      "calls": 2538,
+      "cumulative_seconds": 0.08168016700000001,
+      "file": "experiments/cnf_iterated_forcing.py",
+      "line": 18,
+      "name": "variables",
+      "primitive": 2538,
+      "self_seconds": 0.051390059
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.051009537,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'read' of '_io.TextIOWrapper' objects>",
+      "primitive": 182,
+      "self_seconds": 0.048853205000000004
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 5.154522337,
+      "file": "experiments/cnf_selective_width_buckets.py",
+      "line": 154,
+      "name": "check_certificate",
+      "primitive": 182,
+      "self_seconds": 0.046652493
+    },
+    {
+      "calls": 1805,
+      "cumulative_seconds": 0.225667575,
+      "file": "experiments/cnf_relation_buckets.py",
+      "line": 36,
+      "name": "restore",
+      "primitive": 1805,
+      "self_seconds": 0.040878382000000005
+    },
+    {
+      "calls": 511742,
+      "cumulative_seconds": 0.035924077000000006,
+      "file": "experiments/cnf_relation_buckets.py",
+      "line": 65,
+      "name": "<genexpr>",
+      "primitive": 511742,
+      "self_seconds": 0.035924077000000006
+    },
+    {
+      "calls": 2234,
+      "cumulative_seconds": 1.798204136,
+      "file": "experiments/cnf_relation_buckets.py",
+      "line": 14,
+      "name": "replay",
+      "primitive": 2234,
+      "self_seconds": 0.035817242
+    },
+    {
+      "calls": 57167,
+      "cumulative_seconds": 0.074848326,
+      "file": "experiments/cnf_semantic_buckets.py",
+      "line": 13,
+      "name": "leaf",
+      "primitive": 57167,
+      "self_seconds": 0.034185574
+    },
+    {
+      "calls": 1849,
+      "cumulative_seconds": 0.067737368,
+      "file": "experiments/cnf_pair_probe_learning.py",
+      "line": 83,
+      "name": "trace",
+      "primitive": 1849,
+      "self_seconds": 0.030753452
+    },
+    {
+      "calls": 185500,
+      "cumulative_seconds": 0.033749021000000004,
+      "file": "experiments/cnf_probe_buckets.py",
+      "line": 79,
+      "name": "<genexpr>",
+      "primitive": 185500,
+      "self_seconds": 0.025271227
+    },
+    {
+      "calls": 377514,
+      "cumulative_seconds": 0.021744335,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'get' of 'dict' objects>",
+      "primitive": 377514,
+      "self_seconds": 0.021744335
+    },
+    {
+      "calls": 58483,
+      "cumulative_seconds": 0.024251351,
+      "file": "experiments/cnf_probe_buckets.py",
+      "line": 73,
+      "name": "clause",
+      "primitive": 58483,
+      "self_seconds": 0.01882125
+    },
+    {
+      "calls": 140572,
+      "cumulative_seconds": 0.014559997000000002,
+      "file": "experiments/cnf_semantic_buckets.py",
+      "line": 14,
+      "name": "<genexpr>",
+      "primitive": 140572,
+      "self_seconds": 0.014559997000000002
+    },
+    {
+      "calls": 1,
+      "cumulative_seconds": 5.432385292,
+      "file": "experiments/results/cnf-verified-operators/profile_remaining_checks.py",
+      "line": 11,
+      "name": "replay",
+      "primitive": 1,
+      "self_seconds": 0.014015639000000002
+    },
+    {
+      "calls": 2312,
+      "cumulative_seconds": 0.200941842,
+      "file": "experiments/cnf_residual_dag.py",
+      "line": 75,
+      "name": "holds",
+      "primitive": 2312,
+      "self_seconds": 0.013127716000000001
+    },
+    {
+      "calls": 87171,
+      "cumulative_seconds": 0.015934099,
+      "file": "experiments/cnf_pair_probe_learning.py",
+      "line": 88,
+      "name": "<genexpr>",
+      "primitive": 87171,
+      "self_seconds": 0.01176368
+    },
+    {
+      "calls": 14457,
+      "cumulative_seconds": 0.010735050000000001,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 84,
+      "name": "<genexpr>",
+      "primitive": 14457,
+      "self_seconds": 0.010735050000000001
+    },
+    {
+      "calls": 85,
+      "cumulative_seconds": 0.084638168,
+      "file": "experiments/cnf_pair_probe_learning.py",
+      "line": 73,
+      "name": "check",
+      "primitive": 85,
+      "self_seconds": 0.010662125000000001
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 5.165655124000001,
+      "file": "experiments/compare_cnf_verified_operators.py",
+      "line": 36,
+      "name": "invoke",
+      "primitive": 182,
+      "self_seconds": 0.009639777
+    },
+    {
+      "calls": 41584,
+      "cumulative_seconds": 0.024134875,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 20,
+      "name": "storage_size",
+      "primitive": 1325,
+      "self_seconds": 0.009187230000000001
+    },
+    {
+      "calls": 109088,
+      "cumulative_seconds": 0.008369050000000001,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method builtins.all>",
+      "primitive": 109088,
+      "self_seconds": 0.008369050000000001
+    },
+    {
+      "calls": 161,
+      "cumulative_seconds": 0.037202882,
+      "file": "experiments/cnf_binary_equivalence.py",
+      "line": 79,
+      "name": "check_substitution",
+      "primitive": 161,
+      "self_seconds": 0.008259554
+    },
+    {
+      "calls": 25222,
+      "cumulative_seconds": 0.01015621,
+      "file": "experiments/cnf_pair_probe_learning.py",
+      "line": 80,
+      "name": "clause",
+      "primitive": 25222,
+      "self_seconds": 0.0077603410000000005
+    },
+    {
+      "calls": 3279,
+      "cumulative_seconds": 0.02494187,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 31,
+      "name": "_key",
+      "primitive": 3279,
+      "self_seconds": 0.007453199000000001
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.009378582,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method _io.open>",
+      "primitive": 182,
+      "self_seconds": 0.007124644
+    },
+    {
+      "calls": 85,
+      "cumulative_seconds": 0.7606476990000001,
+      "file": "experiments/cnf_selective_probes.py",
+      "line": 166,
+      "name": "check_certificate",
+      "primitive": 85,
+      "self_seconds": 0.006766768
+    },
+    {
+      "calls": 772,
+      "cumulative_seconds": 1.780611793,
+      "file": "experiments/cnf_probe_buckets.py",
+      "line": 111,
+      "name": "replay_edge",
+      "primitive": 772,
+      "self_seconds": 0.0065435580000000005
+    },
+    {
+      "calls": 55814,
+      "cumulative_seconds": 0.008719633000000001,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 76,
+      "name": "<genexpr>",
+      "primitive": 55814,
+      "self_seconds": 0.006453488
+    },
+    {
+      "calls": 53480,
+      "cumulative_seconds": 0.022524044,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 22,
+      "name": "<genexpr>",
+      "primitive": 9275,
+      "self_seconds": 0.006379004000000001
+    },
+    {
+      "calls": 14803,
+      "cumulative_seconds": 0.023210612000000002,
+      "file": "experiments/cnf_probe_equivalence.py",
+      "line": 43,
+      "name": "<genexpr>",
+      "primitive": 14803,
+      "self_seconds": 0.006260170000000001
+    },
+    {
+      "calls": 148,
+      "cumulative_seconds": 0.13165795700000002,
+      "file": "experiments/cnf_conditioned_buckets.py",
+      "line": 26,
+      "name": "lift",
+      "primitive": 148,
+      "self_seconds": 0.0042898070000000005
+    },
+    {
+      "calls": 42909,
+      "cumulative_seconds": 0.00406583,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method sys.getsizeof>",
+      "primitive": 42909,
+      "self_seconds": 0.00406583
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.003998543,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/encoder.py",
+      "line": 207,
+      "name": "iterencode",
+      "primitive": 182,
+      "self_seconds": 0.003998543
+    },
+    {
+      "calls": 25913,
+      "cumulative_seconds": 0.005083167,
+      "file": "experiments/cnf_pair_probe_learning.py",
+      "line": 78,
+      "name": "literal",
+      "primitive": 25913,
+      "self_seconds": 0.003907224
+    },
+    {
+      "calls": 691,
+      "cumulative_seconds": 1.128689627,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 61,
+      "name": "checked",
+      "primitive": 691,
+      "self_seconds": 0.0035323570000000003
+    },
+    {
+      "calls": 717,
+      "cumulative_seconds": 0.12996059000000001,
+      "file": "experiments/cnf_relation_buckets.py",
+      "line": 69,
+      "name": "relation_restore",
+      "primitive": 717,
+      "self_seconds": 0.003358961
+    },
+    {
+      "calls": 125,
+      "cumulative_seconds": 0.007531210000000001,
+      "file": "experiments/cnf_forcing_buckets.py",
+      "line": 49,
+      "name": "check_forcing",
+      "primitive": 125,
+      "self_seconds": 0.0029198400000000004
+    },
+    {
+      "calls": 772,
+      "cumulative_seconds": 2.1809001400000003,
+      "file": "experiments/cnf_selective_probes.py",
+      "line": 88,
+      "name": "replay_edge",
+      "primitive": 772,
+      "self_seconds": 0.0027713480000000003
+    },
+    {
+      "calls": 62,
+      "cumulative_seconds": 1.1620505030000001,
+      "file": "experiments/cnf_selective_width_buckets.py",
+      "line": 73,
+      "name": "check_refinement",
+      "primitive": 62,
+      "self_seconds": 0.0027052200000000004
+    },
+    {
+      "calls": 612,
+      "cumulative_seconds": 0.46719584200000003,
+      "file": "experiments/cnf_conditioned_buckets.py",
+      "line": 22,
+      "name": "cofactor",
+      "primitive": 612,
+      "self_seconds": 0.0026943680000000004
+    },
+    {
+      "calls": 15497,
+      "cumulative_seconds": 0.0034711520000000004,
+      "file": "experiments/cnf_probe_buckets.py",
+      "line": 82,
+      "name": "<genexpr>",
+      "primitive": 15497,
+      "self_seconds": 0.0025556000000000003
+    },
+    {
+      "calls": 837,
+      "cumulative_seconds": 0.547559225,
+      "file": "experiments/cnf_relation_buckets.py",
+      "line": 102,
+      "name": "replay_edge",
+      "primitive": 837,
+      "self_seconds": 0.002091444
+    },
+    {
+      "calls": 14457,
+      "cumulative_seconds": 0.0025657450000000004,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 34,
+      "name": "<genexpr>",
+      "primitive": 14457,
+      "self_seconds": 0.001992391
+    },
+    {
+      "calls": 772,
+      "cumulative_seconds": 0.6675721170000001,
+      "file": "experiments/cnf_iterated_forcing.py",
+      "line": 42,
+      "name": "replay_edge",
+      "primitive": 772,
+      "self_seconds": 0.001985675
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.001974048,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method _codecs.utf_8_decode>",
+      "primitive": 182,
+      "self_seconds": 0.001974048
+    },
+    {
+      "calls": 2687,
+      "cumulative_seconds": 0.002421911,
+      "file": "experiments/cnf_forcing_buckets.py",
+      "line": 53,
+      "name": "support",
+      "primitive": 2687,
+      "self_seconds": 0.0018544520000000001
+    },
+    {
+      "calls": 3279,
+      "cumulative_seconds": 0.0017325560000000001,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 37,
+      "name": "_contains",
+      "primitive": 3279,
+      "self_seconds": 0.0017323050000000002
+    },
+    {
+      "calls": 1325,
+      "cumulative_seconds": 0.026284342000000002,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 41,
+      "name": "_remember",
+      "primitive": 1325,
+      "self_seconds": 0.001525157
+    },
+    {
+      "calls": 14457,
+      "cumulative_seconds": 0.001375383,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 83,
+      "name": "<genexpr>",
+      "primitive": 14457,
+      "self_seconds": 0.001375383
+    },
+    {
+      "calls": 161,
+      "cumulative_seconds": 0.024636827,
+      "file": "experiments/cnf_probe_equivalence.py",
+      "line": 38,
+      "name": "substitute_block",
+      "primitive": 161,
+      "self_seconds": 0.0012880480000000002
+    },
+    {
+      "calls": 913,
+      "cumulative_seconds": 0.001329461,
+      "file": "experiments/cnf_selective_width_buckets.py",
+      "line": 15,
+      "name": "base_options",
+      "primitive": 913,
+      "self_seconds": 0.0012012020000000002
+    },
+    {
+      "calls": 3940,
+      "cumulative_seconds": 0.001079749,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'update' of 'dict' objects>",
+      "primitive": 3940,
+      "self_seconds": 0.001079749
+    },
+    {
+      "calls": 12033,
+      "cumulative_seconds": 0.00106308,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 88,
+      "name": "<genexpr>",
+      "primitive": 12033,
+      "self_seconds": 0.00106308
+    },
+    {
+      "calls": 41,
+      "cumulative_seconds": 0.126192793,
+      "file": "experiments/cnf_selective_width_buckets.py",
+      "line": 31,
+      "name": "terminal_transport",
+      "primitive": 41,
+      "self_seconds": 0.0010252080000000001
+    },
+    {
+      "calls": 3490,
+      "cumulative_seconds": 0.001481822,
+      "file": "experiments/cnf_forcing_buckets.py",
+      "line": 52,
+      "name": "<genexpr>",
+      "primitive": 3490,
+      "self_seconds": 0.000988188
+    },
+    {
+      "calls": 1573,
+      "cumulative_seconds": 0.002940456,
+      "file": "experiments/cnf_pair_probe_learning.py",
+      "line": 90,
+      "name": "conflict",
+      "primitive": 1573,
+      "self_seconds": 0.000976236
+    },
+    {
+      "calls": 5985,
+      "cumulative_seconds": 0.001326162,
+      "file": "experiments/cnf_pair_probe_learning.py",
+      "line": 91,
+      "name": "<genexpr>",
+      "primitive": 5985,
+      "self_seconds": 0.0009705180000000001
+    },
+    {
+      "calls": 267,
+      "cumulative_seconds": 0.0033729840000000003,
+      "file": "experiments/cnf_probe_buckets.py",
+      "line": 11,
+      "name": "options",
+      "primitive": 267,
+      "self_seconds": 0.0008427490000000001
+    },
+    {
+      "calls": 12033,
+      "cumulative_seconds": 0.0007830630000000001,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 35,
+      "name": "<genexpr>",
+      "primitive": 12033,
+      "self_seconds": 0.0007830630000000001
+    },
+    {
+      "calls": 267,
+      "cumulative_seconds": 0.004112778,
+      "file": "experiments/cnf_selective_probes.py",
+      "line": 17,
+      "name": "options",
+      "primitive": 267,
+      "self_seconds": 0.000686231
+    },
+    {
+      "calls": 267,
+      "cumulative_seconds": 0.001586738,
+      "file": "experiments/cnf_symbolic_buckets.py",
+      "line": 16,
+      "name": "options",
+      "primitive": 267,
+      "self_seconds": 0.000683758
+    },
+    {
+      "calls": 267,
+      "cumulative_seconds": 0.0022587500000000003,
+      "file": "experiments/cnf_iterated_forcing.py",
+      "line": 11,
+      "name": "options",
+      "primitive": 267,
+      "self_seconds": 0.0006054690000000001
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.15613296000000002,
+      "file": "experiments/compare_cnf_subsumption_transfer.py",
+      "line": 54,
+      "name": "load",
+      "primitive": 182,
+      "self_seconds": 0.000574397
+    },
+    {
+      "calls": 3429,
+      "cumulative_seconds": 0.000562627,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'difference_update' of 'set' objects>",
+      "primitive": 3429,
+      "self_seconds": 0.000562627
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.000548373,
+      "file": "~",
+      "line": 0,
+      "name": "<method '__exit__' of '_io._IOBase' objects>",
+      "primitive": 182,
+      "self_seconds": 0.000548373
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.003816752,
+      "file": "experiments/cnf_selective_width_buckets.py",
+      "line": 18,
+      "name": "options",
+      "primitive": 182,
+      "self_seconds": 0.000543582
+    },
+    {
+      "calls": 772,
+      "cumulative_seconds": 1.8393176770000002,
+      "file": "experiments/cnf_probe_relations.py",
+      "line": 34,
+      "name": "replay_edge",
+      "primitive": 772,
+      "self_seconds": 0.000526841
+    },
+    {
+      "calls": 18,
+      "cumulative_seconds": 0.0035812920000000002,
+      "file": "experiments/cnf_bucket_continuation.py",
+      "line": 8,
+      "name": "materialize",
+      "primitive": 18,
+      "self_seconds": 0.000518466
+    },
+    {
+      "calls": 546,
+      "cumulative_seconds": 0.000789238,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py",
+      "line": 135,
+      "name": "__init__",
+      "primitive": 546,
+      "self_seconds": 0.000490524
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.0020448790000000003,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py",
+      "line": 251,
+      "name": "__str__",
+      "primitive": 182,
+      "self_seconds": 0.00048394800000000005
+    },
+    {
+      "calls": 622,
+      "cumulative_seconds": 0.180936388,
+      "file": "experiments/cnf_probe_buckets.py",
+      "line": 126,
+      "name": "relation_restore",
+      "primitive": 622,
+      "self_seconds": 0.00045232100000000005
+    },
+    {
+      "calls": 267,
+      "cumulative_seconds": 0.000692288,
+      "file": "experiments/cnf_conditioned_buckets.py",
+      "line": 14,
+      "name": "options",
+      "primitive": 267,
+      "self_seconds": 0.000445361
+    },
+    {
+      "calls": 1156,
+      "cumulative_seconds": 0.220807532,
+      "file": "experiments/cnf_selective_probes.py",
+      "line": 104,
+      "name": "relation_restore",
+      "primitive": 1156,
+      "self_seconds": 0.00043048800000000003
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.004822871,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py",
+      "line": 185,
+      "name": "dumps",
+      "primitive": 182,
+      "self_seconds": 0.000368497
+    },
+    {
+      "calls": 364,
+      "cumulative_seconds": 0.0007707100000000001,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 55,
+      "name": "installed",
+      "primitive": 364,
+      "self_seconds": 0.000366069
+    },
+    {
+      "calls": 2,
+      "cumulative_seconds": 0.00036370900000000004,
+      "file": "experiments/compare_cnf_verified_operators.py",
+      "line": 23,
+      "name": "save",
+      "primitive": 2,
+      "self_seconds": 0.000359792
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.005246039,
+      "file": "experiments/cnf_residual_dag.py",
+      "line": 80,
+      "name": "token",
+      "primitive": 182,
+      "self_seconds": 0.00034228000000000004
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.061510491,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py",
+      "line": 780,
+      "name": "read_text",
+      "primitive": 182,
+      "self_seconds": 0.000341122
+    },
+    {
+      "calls": 3914,
+      "cumulative_seconds": 0.00034102300000000003,
+      "file": "experiments/cnf_selective_width_buckets.py",
+      "line": 220,
+      "name": "<genexpr>",
+      "primitive": 3914,
+      "self_seconds": 0.00034102300000000003
+    },
+    {
+      "calls": 3739,
+      "cumulative_seconds": 0.000335104,
+      "file": "experiments/cnf_probe_buckets.py",
+      "line": 119,
+      "name": "<genexpr>",
+      "primitive": 3739,
+      "self_seconds": 0.000335104
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.000533624,
+      "file": "<frozen posixpath>",
+      "line": 72,
+      "name": "join",
+      "primitive": 182,
+      "self_seconds": 0.00032895
+    },
+    {
+      "calls": 18,
+      "cumulative_seconds": 0.159868961,
+      "file": "experiments/cnf_bucket_continuation.py",
+      "line": 19,
+      "name": "check",
+      "primitive": 18,
+      "self_seconds": 0.000324973
+    },
+    {
+      "calls": 622,
+      "cumulative_seconds": 0.116966158,
+      "file": "experiments/cnf_iterated_forcing.py",
+      "line": 60,
+      "name": "relation_restore",
+      "primitive": 622,
+      "self_seconds": 0.000319703
+    },
+    {
+      "calls": 976,
+      "cumulative_seconds": 0.18762851900000002,
+      "file": "experiments/cnf_selective_width_buckets.py",
+      "line": 173,
+      "name": "edge_model",
+      "primitive": 976,
+      "self_seconds": 0.00031419600000000004
+    },
+    {
+      "calls": 2073,
+      "cumulative_seconds": 0.000307805,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 74,
+      "name": "<genexpr>",
+      "primitive": 2073,
+      "self_seconds": 0.000307805
+    },
+    {
+      "calls": 2591,
+      "cumulative_seconds": 0.000299458,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'items' of 'dict' objects>",
+      "primitive": 2591,
+      "self_seconds": 0.000299458
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.09362621500000001,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py",
+      "line": 340,
+      "name": "decode",
+      "primitive": 182,
+      "self_seconds": 0.000283146
+    },
+    {
+      "calls": 364,
+      "cumulative_seconds": 0.0011225850000000002,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py",
+      "line": 157,
+      "name": "with_segments",
+      "primitive": 364,
+      "self_seconds": 0.000280253
+    },
+    {
+      "calls": 2650,
+      "cumulative_seconds": 0.00026479300000000004,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method builtins.max>",
+      "primitive": 2650,
+      "self_seconds": 0.00026479300000000004
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.004380047000000001,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/encoder.py",
+      "line": 185,
+      "name": "encode",
+      "primitive": 182,
+      "self_seconds": 0.000264629
+    },
+    {
+      "calls": 622,
+      "cumulative_seconds": 0.20161792,
+      "file": "experiments/cnf_probe_relations.py",
+      "line": 47,
+      "name": "relation_restore",
+      "primitive": 622,
+      "self_seconds": 0.000254194
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.001389625,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py",
+      "line": 341,
+      "name": "drive",
+      "primitive": 182,
+      "self_seconds": 0.000246599
+    },
+    {
+      "calls": 2002,
+      "cumulative_seconds": 0.00023736000000000002,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method builtins.isinstance>",
+      "primitive": 2002,
+      "self_seconds": 0.00023736000000000002
+    },
+    {
+      "calls": 2062,
+      "cumulative_seconds": 0.000316363,
+      "file": "experiments/cnf_bucket_continuation.py",
+      "line": 28,
+      "name": "<genexpr>",
+      "primitive": 2062,
+      "self_seconds": 0.000234398
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 5.16588075,
+      "file": "experiments/compare_cnf_verified_operators.py",
+      "line": 41,
+      "name": "check_certificate",
+      "primitive": 182,
+      "self_seconds": 0.000225626
+    },
+    {
+      "calls": 1068,
+      "cumulative_seconds": 0.00022274000000000003,
+      "file": "experiments/cnf_conditioned_buckets.py",
+      "line": 17,
+      "name": "<genexpr>",
+      "primitive": 1068,
+      "self_seconds": 0.00022274000000000003
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.000454364,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py",
+      "line": 281,
+      "name": "_parse_path",
+      "primitive": 182,
+      "self_seconds": 0.00021561800000000002
+    },
+    {
+      "calls": 634,
+      "cumulative_seconds": 0.000985364,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method builtins.next>",
+      "primitive": 634,
+      "self_seconds": 0.00021465400000000002
+    },
+    {
+      "calls": 2000,
+      "cumulative_seconds": 0.000211594,
+      "file": "experiments/cnf_relation_buckets.py",
+      "line": 25,
+      "name": "<genexpr>",
+      "primitive": 2000,
+      "self_seconds": 0.000211594
+    },
+    {
+      "calls": 2062,
+      "cumulative_seconds": 0.000288554,
+      "file": "experiments/cnf_bucket_continuation.py",
+      "line": 10,
+      "name": "<genexpr>",
+      "primitive": 2062,
+      "self_seconds": 0.000208766
+    },
+    {
+      "calls": 2325,
+      "cumulative_seconds": 0.000199132,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 123,
+      "name": "<genexpr>",
+      "primitive": 2325,
+      "self_seconds": 0.000199132
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.093869875,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py",
+      "line": 304,
+      "name": "loads",
+      "primitive": 182,
+      "self_seconds": 0.00019766300000000002
+    },
+    {
+      "calls": 1751,
+      "cumulative_seconds": 0.00019575900000000002,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'pop' of 'list' objects>",
+      "primitive": 1751,
+      "self_seconds": 0.00019575900000000002
+    },
+    {
+      "calls": 801,
+      "cumulative_seconds": 0.000185409,
+      "file": "experiments/cnf_symbolic_buckets.py",
+      "line": 20,
+      "name": "<genexpr>",
+      "primitive": 801,
+      "self_seconds": 0.000185409
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.002156332,
+      "file": "<frozen codecs>",
+      "line": 322,
+      "name": "decode",
+      "primitive": 182,
+      "self_seconds": 0.000182284
+    },
+    {
+      "calls": 801,
+      "cumulative_seconds": 0.00018182500000000002,
+      "file": "experiments/cnf_probe_buckets.py",
+      "line": 14,
+      "name": "<genexpr>",
+      "primitive": 801,
+      "self_seconds": 0.00018182500000000002
+    },
+    {
+      "calls": 364,
+      "cumulative_seconds": 0.000178278,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'match' of 're.Pattern' objects>",
+      "primitive": 364,
+      "self_seconds": 0.000178278
+    },
+    {
+      "calls": 1629,
+      "cumulative_seconds": 0.000163966,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method builtins.min>",
+      "primitive": 1629,
+      "self_seconds": 0.000163966
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.000269457,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/threading.py",
+      "line": 1493,
+      "name": "active_count",
+      "primitive": 182,
+      "self_seconds": 0.000155357
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.00019841700000000002,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/contextlib.py",
+      "line": 108,
+      "name": "__init__",
+      "primitive": 182,
+      "self_seconds": 0.000152421
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.00034104400000000004,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/contextlib.py",
+      "line": 303,
+      "name": "helper",
+      "primitive": 182,
+      "self_seconds": 0.00014262700000000002
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.000688662,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py",
+      "line": 330,
+      "name": "_raw_path",
+      "primitive": 182,
+      "self_seconds": 0.00013986100000000002
+    },
+    {
+      "calls": 546,
+      "cumulative_seconds": 0.000231291,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py",
+      "line": 632,
+      "name": "__new__",
+      "primitive": 546,
+      "self_seconds": 0.000138414
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.0001327,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method posix._path_splitroot_ex>",
+      "primitive": 182,
+      "self_seconds": 0.0001327
+    },
+    {
+      "calls": 364,
+      "cumulative_seconds": 0.001248161,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py",
+      "line": 172,
+      "name": "__truediv__",
+      "primitive": 364,
+      "self_seconds": 0.00012557600000000002
+    },
+    {
+      "calls": 764,
+      "cumulative_seconds": 0.00012020700000000001,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 122,
+      "name": "<genexpr>",
+      "primitive": 764,
+      "self_seconds": 0.00012020700000000001
+    },
+    {
+      "calls": 698,
+      "cumulative_seconds": 0.00011495500000000001,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'update' of 'set' objects>",
+      "primitive": 698,
+      "self_seconds": 0.00011495500000000001
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.000305002,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/contextlib.py",
+      "line": 145,
+      "name": "__exit__",
+      "primitive": 182,
+      "self_seconds": 0.00011467500000000001
+    },
+    {
+      "calls": 1339,
+      "cumulative_seconds": 0.000112991,
+      "file": "experiments/cnf_selective_probes.py",
+      "line": 97,
+      "name": "<genexpr>",
+      "primitive": 1339,
+      "self_seconds": 0.000112991
+    },
+    {
+      "calls": 778,
+      "cumulative_seconds": 0.000109956,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'extend' of 'list' objects>",
+      "primitive": 778,
+      "self_seconds": 0.000109956
+    },
+    {
+      "calls": 656,
+      "cumulative_seconds": 0.000130677,
+      "file": "experiments/cnf_iterated_forcing.py",
+      "line": 50,
+      "name": "<genexpr>",
+      "primitive": 656,
+      "self_seconds": 0.00010728900000000001
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.00010604600000000001,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'split' of 'str' objects>",
+      "primitive": 182,
+      "self_seconds": 0.00010604600000000001
+    },
+    {
+      "calls": 546,
+      "cumulative_seconds": 0.00010196700000000001,
+      "file": "experiments/cnf_selective_width_buckets.py",
+      "line": 21,
+      "name": "<genexpr>",
+      "primitive": 546,
+      "self_seconds": 0.00010196700000000001
+    },
+    {
+      "calls": 910,
+      "cumulative_seconds": 0.000101249,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method posix.fspath>",
+      "primitive": 910,
+      "self_seconds": 0.000101249
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.009499338000000001,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py",
+      "line": 763,
+      "name": "open",
+      "primitive": 182,
+      "self_seconds": 9.8552e-05
+    },
+    {
+      "calls": 364,
+      "cumulative_seconds": 9.8325e-05,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'join' of 'str' objects>",
+      "primitive": 364,
+      "self_seconds": 9.8325e-05
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.00214137,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py",
+      "line": 190,
+      "name": "__fspath__",
+      "primitive": 182,
+      "self_seconds": 9.649100000000001e-05
+    },
+    {
+      "calls": 546,
+      "cumulative_seconds": 9.287700000000001e-05,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method __new__ of type object at 0x1052d0908>",
+      "primitive": 546,
+      "self_seconds": 9.287700000000001e-05
+    },
+    {
+      "calls": 770,
+      "cumulative_seconds": 9.1947e-05,
+      "file": "experiments/cnf_selective_width_buckets.py",
+      "line": 161,
+      "name": "<genexpr>",
+      "primitive": 770,
+      "self_seconds": 9.1947e-05
+    },
+    {
+      "calls": 698,
+      "cumulative_seconds": 9.1272e-05,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'setdefault' of 'dict' objects>",
+      "primitive": 698,
+      "self_seconds": 9.1272e-05
+    },
+    {
+      "calls": 691,
+      "cumulative_seconds": 9.0572e-05,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'values' of 'dict' objects>",
+      "primitive": 691,
+      "self_seconds": 9.0572e-05
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.00011256800000000001,
+      "file": "<frozen codecs>",
+      "line": 312,
+      "name": "__init__",
+      "primitive": 182,
+      "self_seconds": 8.848100000000001e-05
+    },
+    {
+      "calls": 941,
+      "cumulative_seconds": 8.3798e-05,
+      "file": "experiments/cnf_selective_probes.py",
+      "line": 228,
+      "name": "<genexpr>",
+      "primitive": 941,
+      "self_seconds": 8.3798e-05
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.0008469640000000001,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/contextlib.py",
+      "line": 136,
+      "name": "__enter__",
+      "primitive": 182,
+      "self_seconds": 8.305e-05
+    },
+    {
+      "calls": 382,
+      "cumulative_seconds": 8.197900000000001e-05,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 120,
+      "name": "<genexpr>",
+      "primitive": 382,
+      "self_seconds": 8.197900000000001e-05
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.00011901,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/threading.py",
+      "line": 1470,
+      "name": "current_thread",
+      "primitive": 182,
+      "self_seconds": 8.0301e-05
+    },
+    {
+      "calls": 546,
+      "cumulative_seconds": 7.8125e-05,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'startswith' of 'str' objects>",
+      "primitive": 546,
+      "self_seconds": 7.8125e-05
+    },
+    {
+      "calls": 540,
+      "cumulative_seconds": 7.629900000000001e-05,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'remove' of 'set' objects>",
+      "primitive": 540,
+      "self_seconds": 7.629900000000001e-05
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 7.5327e-05,
+      "file": "~",
+      "line": 0,
+      "name": "<method '__enter__' of '_io._IOBase' objects>",
+      "primitive": 182,
+      "self_seconds": 7.5327e-05
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 7.432700000000001e-05,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/encoder.py",
+      "line": 105,
+      "name": "__init__",
+      "primitive": 182,
+      "self_seconds": 7.432700000000001e-05
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.00013087800000000002,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py",
+      "line": 261,
+      "name": "_format_parsed_parts",
+      "primitive": 182,
+      "self_seconds": 7.204700000000001e-05
+    },
+    {
+      "calls": 170,
+      "cumulative_seconds": 0.030581336,
+      "file": "experiments/cnf_selective_probes.py",
+      "line": 185,
+      "name": "edge_model",
+      "primitive": 170,
+      "self_seconds": 6.875300000000001e-05
+    },
+    {
+      "calls": 364,
+      "cumulative_seconds": 5.899800000000001e-05,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method _io.text_encoding>",
+      "primitive": 364,
+      "self_seconds": 5.899800000000001e-05
+    },
+    {
+      "calls": 656,
+      "cumulative_seconds": 5.7038000000000005e-05,
+      "file": "experiments/cnf_iterated_forcing.py",
+      "line": 52,
+      "name": "<genexpr>",
+      "primitive": 656,
+      "self_seconds": 5.7038000000000005e-05
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 5.6543000000000004e-05,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'encode' of 'str' objects>",
+      "primitive": 182,
+      "self_seconds": 5.6543000000000004e-05
+    },
+    {
+      "calls": 364,
+      "cumulative_seconds": 5.0283000000000006e-05,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'end' of 're.Match' objects>",
+      "primitive": 364,
+      "self_seconds": 5.0283000000000006e-05
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 4.7085e-05,
+      "file": "~",
+      "line": 0,
+      "name": "<method '__enter__' of '_thread.RLock' objects>",
+      "primitive": 182,
+      "self_seconds": 4.7085e-05
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 4.5996000000000005e-05,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method builtins.getattr>",
+      "primitive": 182,
+      "self_seconds": 4.5996000000000005e-05
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 6.3279e-05,
+      "file": "<frozen posixpath>",
+      "line": 42,
+      "name": "_get_sep",
+      "primitive": 182,
+      "self_seconds": 4.4659e-05
+    },
+    {
+      "calls": 364,
+      "cumulative_seconds": 4.1965e-05,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'endswith' of 'str' objects>",
+      "primitive": 364,
+      "self_seconds": 4.1965e-05
+    },
+    {
+      "calls": 62,
+      "cumulative_seconds": 3.9625e-05,
+      "file": "experiments/cnf_selective_width_buckets.py",
+      "line": 26,
+      "name": "policy",
+      "primitive": 62,
+      "self_seconds": 3.9625e-05
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 3.8709000000000005e-05,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method _thread.get_ident>",
+      "primitive": 182,
+      "self_seconds": 3.8709000000000005e-05
+    },
+    {
+      "calls": 270,
+      "cumulative_seconds": 3.4012e-05,
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method builtins.iter>",
+      "primitive": 270,
+      "self_seconds": 3.4012e-05
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 3.1083e-05,
+      "file": "~",
+      "line": 0,
+      "name": "<method '__exit__' of '_thread.RLock' objects>",
+      "primitive": 182,
+      "self_seconds": 3.1083e-05
+    },
+    {
+      "calls": 1,
+      "cumulative_seconds": 5.1250000000000006e-05,
+      "file": "experiments/cnf_relation_buckets.py",
+      "line": 43,
+      "name": "check_binary_conflict",
+      "primitive": 1,
+      "self_seconds": 2.9958000000000004e-05
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 2.4087e-05,
+      "file": "<frozen codecs>",
+      "line": 263,
+      "name": "__init__",
+      "primitive": 182,
+      "self_seconds": 2.4087e-05
+    },
+    {
+      "calls": 170,
+      "cumulative_seconds": 2.2915e-05,
+      "file": "experiments/cnf_selective_probes.py",
+      "line": 173,
+      "name": "<genexpr>",
+      "primitive": 170,
+      "self_seconds": 2.2915e-05
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 2.1673e-05,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py",
+      "line": 350,
+      "name": "root",
+      "primitive": 182,
+      "self_seconds": 2.1673e-05
+    },
+    {
+      "calls": 10,
+      "cumulative_seconds": 0.004371667,
+      "file": "experiments/cnf_selective_width_buckets.py",
+      "line": 44,
+      "name": "lift_terminal",
+      "primitive": 10,
+      "self_seconds": 2.0204000000000002e-05
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 1.8755000000000003e-05,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py",
+      "line": 359,
+      "name": "_tail",
+      "primitive": 182,
+      "self_seconds": 1.8755000000000003e-05
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 1.6174e-05,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/threading.py",
+      "line": 1586,
+      "name": "main_thread",
+      "primitive": 182,
+      "self_seconds": 1.6174e-05
+    },
+    {
+      "calls": 1,
+      "cumulative_seconds": 1.4208e-05,
+      "file": "~",
+      "line": 0,
+      "name": "<method 'disable' of '_lsprof.Profiler' objects>",
+      "primitive": 1,
+      "self_seconds": 1.4208e-05
+    },
+    {
+      "calls": 39,
+      "cumulative_seconds": 1.3754e-05,
+      "file": "experiments/cnf_relation_buckets.py",
+      "line": 44,
+      "name": "<genexpr>",
+      "primitive": 39,
+      "self_seconds": 9.552000000000001e-06
+    },
+    {
+      "calls": 1,
+      "cumulative_seconds": 8.25e-06,
+      "file": "experiments/compare_cnf_verified_operators.py",
+      "line": 18,
+      "name": "__init__",
+      "primitive": 1,
+      "self_seconds": 5.667e-06
+    },
+    {
+      "calls": 42,
+      "cumulative_seconds": 4.005000000000001e-06,
+      "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/collections/__init__.py",
+      "line": 616,
+      "name": "__missing__",
+      "primitive": 42,
+      "self_seconds": 4.005000000000001e-06
+    },
+    {
+      "calls": 2,
+      "cumulative_seconds": 3.541e-06,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 26,
+      "name": "__init__",
+      "primitive": 2,
+      "self_seconds": 3.541e-06
+    },
+    {
+      "calls": 2,
+      "cumulative_seconds": 3.5000000000000004e-06,
+      "file": "experiments/cnf_verified_operators.py",
+      "line": 51,
+      "name": "stats",
+      "primitive": 2,
+      "self_seconds": 3.0830000000000004e-06
+    },
+    {
+      "calls": 1,
+      "cumulative_seconds": 1.0166e-05,
+      "file": "experiments/compare_cnf_verified_operators.py",
+      "line": 27,
+      "name": "phase",
+      "primitive": 1,
+      "self_seconds": 2.499e-06
+    },
+    {
+      "calls": 1,
+      "cumulative_seconds": 0.00035825,
+      "file": "experiments/compare_cnf_verified_operators.py",
+      "line": 34,
+      "name": "finish",
+      "primitive": 1,
+      "self_seconds": 1.25e-06
+    }
+  ],
+  "scope": "Instrumented one-pass JSON replay, excluding native fallback audit. Includes JSON reads and an empty operator bank; this is diagnostic CPU attribution, not a new matched timing sample. Cumulative times overlap.",
+  "seconds": 5.432545917108655
+}

@@ -1,0 +1,50 @@
+{
+  "cost_comparisons_percent": {
+    "off_vs_legacy": 0.6322533428984478,
+    "pass_vs_fresh": 38.775309067384065,
+    "pass_vs_legacy": -10.373241692085244,
+    "pass_vs_off": -10.936349599052619,
+    "pass_vs_query": -3.720077291945123,
+    "query_vs_legacy": -6.910230308674226
+  },
+  "coverage": {
+    "fresh": 0,
+    "legacy": 180,
+    "off": 180,
+    "pass": 180,
+    "query": 180
+  },
+  "decision": "Retain bounded ephemeral reuse of independently checked exact projection operators as a verified 10.37 percent complete-cost reduction against unchanged checking. No production default changes; the full pipeline remains slower than fresh solving on this panel.",
+  "documents": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "3d1138b63e4e3c9ae61212725e14ac63567ab93edb4fa625e79f4c0190074b7a",
+    "research/implementation-gaps.md": "3fce8463640137c70a04d94ab550dfbc7367d63df0b64768cf2f18348848469c",
+    "research/sat-pattern-discovery.md": "46d006fc7744c831c8d83cc041319237fd8c0ae634e46102e9a6a824805a1232",
+    "research/structural-reuse-priorities.md": "99097cab8b677b3c8d0f8f31682c18669ab128e2f7de92ce835de8634a55e0c5",
+    "research/verified-operator-reuse.md": "24ae99c0eb8ab0780ca4d9dda9a8cd532e0ef5bd774a23a7620159bd7eb9b4d0"
+  },
+  "limitations": [
+    "Same frozen 182-query synthetic panel as the previous checkpoint; no new coverage or generalization claim. All variants use the unchanged two-round selective-width acquisition and certificates. Labels remain audit-only.",
+    "Legacy is the unchanged checker. Off uses the new checker with no bank. Query shares a bank across discovery/internal/explicit checks for one query, then discards it. Pass shares across one complete phase. Warm starts empty and each of two cold passes starts empty. No persistent authority or restored cache exists.",
+    "Every source, incident bucket, encoding, output scope, verdict and root witness is checked on each occurrence. Only the independent exhaustive operator row loop may be skipped after an exactly matching immutable input/pivot/output/choice signature has passed that loop in the current bank.",
+    "FIFO bounds are 4096 entries and 4 MiB conservative retained key/value object accounting, excluding dictionary infrastructure. These are not total RAM bounds; peak RSS is measured. Key construction, size accounting, insertion, lookup and eviction are charged.",
+    "The adapter temporarily replaces the legacy bucket checker only inside an isolated single-threaded experimental call and restores it on exit. It rejects nested hooks and concurrent/background execution. Production defaults and historical scientific files are unchanged.",
+    "Five cyclic process orders start empty with the same fallback. Complete cost charges input, discovery/internal checking, explicit checks, persistence, compression and warm/cold replay. Startup, final report metadata, labels, historical acquisition and independent audits are additional. Two native archive readers and two JSON passes are retained.",
+    "Identical persisted structural certificates, models, native fallback evidence and complete-check counters except exactly accounted skipped operator rows/probes. Structural coverage remains 180 of 182; there is no new-distribution coverage result.",
+    "The pass bank avoids 39.51 percent of cold bucket table probes but only 10.37 percent of complete runtime. It retains 1325 keys with conservative object accounting of 1797404 bytes, excluding dictionary infrastructure; the query bank peaks at 72 keys and 94620 bytes.",
+    "The uncached new checker regresses 0.63 percent on average with mixed signs. Pass reuse remains 38.78 percent more costly than fresh solving. All timing signs and memory observations are retained.",
+    "Only six nonconstant operator occurrences (144 probes) transfer across different stored generator/frontier labels after excluding repeated normalized sources and repeated local operators. These labels do not define disjoint semantic SAT categories; no broad nonconstant whole-residual transfer is established.",
+    "The direct checker assumes a trusted in-process bank. Its adapter validates session type and isolated single-threaded use. Arbitrary Python code mutating private state is outside the certificate-input threat model; no serialized bank is accepted.",
+    "The initial nonconstant-transfer test used greedy discovery and exercised only constant outputs. Its corrected independently checked partial-program fixture preceded all measurements; failed log, source snapshot and earlier protocol are retained. Algorithm unchanged.",
+    "Cold-profile cumulative times overlap and include profiling overhead; they are diagnostic attribution, not measured attainable savings. Finite panel coverage and bounded reuse provide no efficient arbitrary-SAT guarantee."
+  ],
+  "next_cost_target": "Reuse exact validated source/intermediate contexts during checking. Instrumented JSON replay has 5449 normalizations and 6127 restrictions; measured construction, bindings and invalidation are needed before claiming savings.",
+  "next_coverage_target": "Exact factor recognition, separators or conditioning on the three coupled active-factor frontiers of d-d-d-j06 and d-d-k09, with source-bound recomposition. The prior width-ten screen still adds no verdict.",
+  "remaining": [
+    "d-d-d-j06",
+    "d-d-k09"
+  ],
+  "supplemental_checks": {
+    "path": "experiments/results/cnf-verified-operators/supplemental-checks.json",
+    "sha256": "8d388a15e6c9f8e416a2aaed0e6a126a897b241c23e8d34e5f23ec8736206c08"
+  }
+}

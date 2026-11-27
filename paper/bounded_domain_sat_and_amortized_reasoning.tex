@@ -16425,6 +16425,141 @@ Restart and resume agree exactly.  The initial dense-only audit, which exercised
 no nonempty retained prefix, is preserved separately; the final audit adds private
 variable tails and refutation controls.  This audit is outside measured cost.
 
+\subsection{Ephemeral reuse of independently verified operators}
+\label{sec:verified-operators}
+
+The preceding census isolates repeated work in verification itself.  A proposal
+cache that recomputes every operator cannot remove this cost.  The present
+experiment instead retains results of the independent local row checker in an
+empty-at-start, bounded in-process bank.  Source binding, incident-factor
+membership, relation encoding, terminal conditions and complete source witnesses
+remain checked at every occurrence.  Only an exactly repeated operator row loop
+may be skipped.
+
+The key contains the reduction flag, the pivot rank in the sorted local bag, the
+sorted multiset of input scopes and complete tables, the output-scope ranks,
+output bits and full reconstruction-choice table.  Input multiplicities are
+retained.  Tuple equality resolves matches; a hash digest alone is never an
+authority.  Different valid output representations have different keys.  Local
+coordinate bindings are rebuilt for each occurrence.  No certificate can seed
+the bank, and no bank is restored from persistence.
+
+\begin{proposition}[Reuse of a checked exact local operator]
+Suppose an empty bank inserts a complete immutable operator key only after the
+independent row checker has accepted its projection relation and reconstruction
+choices.  Suppose each later occurrence checks its current incident input factors
+and coordinate bindings before looking up the key, and retains all source and
+terminal checks.  Reusing a matching entry preserves the original checker's
+soundness.  Evicting entries can change verification cost but not the verdict.
+\end{proposition}
+\begin{proof}
+Equality of input-scope/table multisets and pivot ranks gives an order-preserving
+bijection of local coordinates under which the two conjunctions agree on every
+assignment.  Multiplicity and every input relation are included.  Equality of
+output scope, output bits and the full choice table gives the same proposed
+existential relation and the same false-before-true reconstruction choices in
+these coordinates.  Their row identities were established before insertion and
+are immutable.  A hit therefore satisfies the same identities that the local
+row loop would establish anew.  Induction over the current program's checked
+source factors and earlier outputs preserves all dependencies.  The unchanged
+source, incident-bucket and terminal checks prevent a local match from asserting
+an unchecked root result.  Valid local entries from a subsequently rejected root
+still establish only those local identities.  Eviction causes a new independent
+check; it creates no accepted identity.  This argument assumes a trusted bank
+created and maintained by the checker, not arbitrary Python code mutating its
+private state, and implies no bound on unrestricted SAT expansion.
+\end{proof}
+
+The experimental adapter temporarily installs the checker inside an isolated
+single-threaded call, restores the legacy function on exit, and rejects nested
+hooks or background/concurrent execution.  It is not a production integration.
+FIFO limits are 4,096 entries and 4 MiB of conservatively counted retained key and
+value objects.  Dictionary infrastructure, inputs and interpreter storage are
+additional; this is not a total-memory bound.  Size accounting, key construction,
+lookup, insertion and eviction are charged.
+
+The matched panel is the unchanged 182-query panel from the preceding experiment,
+with 158 distinct normalized sources and 24 repeats.  Acquisition, conditioning,
+pair closure, selective width and persisted certificates remain unchanged.
+There is no new coverage or external-generalization claim.  Five cyclic process
+orders compare fresh solving, the unchanged checker, the new checker without a
+bank, a bank shared within one query's discovery/internal/explicit checking, and
+a bank shared across one complete phase.  Warm replay starts empty, and each of
+the two cold passes starts empty.  No cold pass inherits acquisition, warm or
+other cold-pass state.
+
+Mean complete seconds are $8.90555$ fresh, $13.78908$ unchanged, $13.87626$ new
+without reuse, $12.83622$ within-query reuse, and $12.35870$ across-pass reuse.
+Across-pass reuse reduces complete cost by $10.37\%$ against unchanged checking,
+with reductions of $9.94$--$10.85\%$ in all five pairs.  Within-query reuse saves
+$6.91\%$; extending its lifetime to a pass saves another $3.72\%$, again with all
+paired signs favorable.  The uncached new checker costs $0.63\%$ more on average,
+with mixed signs.  The entire pass-reuse pipeline remains $38.78\%$ more costly
+than fresh solving, and production defaults remain unchanged.
+
+For unchanged versus across-pass checking, discovery with internal checks falls
+from $5.07198$ to $4.50848$ seconds, explicit checking/fallback from $1.94878$ to
+$1.50094$, warm replay from $2.03201$ to $1.88609$, and cold replay from $4.09000$
+to $3.81622$.  Complete time also charges input, evidence/database writes,
+compression and all bank operations.  Startup, final report metadata, labels,
+historical acquisition and independent audits remain additional.  Two independent
+native readers audit fallback archives; JSON replay retains two passes of the
+same checker.  These measurements do not establish concurrent or persistent-cache
+performance.
+
+All structural policies certify $180/182$ queries and retain exactly the same
+certificates, answers, models and native fallback data.  Combined compressed
+SQLite/JSON remains 607,765 bytes, including 577,137 JSON bytes; there are 61
+fallback records and 1,068,073 diagnostic bytes.  Fresh uses 2,193,009 compressed
+bytes.  Observed maximum RSS is 285,556,736 fresh, 130,744,320 unchanged,
+126,451,712 uncached-new, 127,336,448 within-query and 127,582,208 across-pass
+bytes.  These are process peaks, not evidence that adding a bank reduces memory.
+
+One cold pass has 3,279 operator occurrences and retains 1,325 distinct keys,
+accounting conservatively for 1,797,404 key/value bytes without eviction.
+Across-pass reuse avoids 288,484 of 730,144 verification table probes
+($39.51\%$) and 32,930 of 87,474 rows.  Within-query reuse avoids 107,408 probes
+per cold pass ($14.71\%$).  Discovery/internal and explicit checking together
+avoid another 1,679,408 probes and 197,026 rows with the pass bank.  All other
+checker counters match, and skipped rows/probes exactly reconcile the differences
+from unchanged checking.  This validates the preceding opportunity census as
+execution reuse; its probe fraction is still not the runtime-saving fraction.
+
+A separately charged transfer audit excludes repeated normalized sources and
+counts only first local occurrences against the first owner of each signature.
+It finds 100,948 matching probes across distinct sources.  However, only six
+nonconstant occurrences, 36 rows and 144 probes match an owner with a different
+stored family label; another 1,232 probes cross labels through constant operators.
+These inherited generator/frontier labels are not disjoint semantic SAT classes.
+The result is limited local transfer, not new nonconstant sharing of whole
+residuals or broad reuse across arbitrary SAT categories.  Most savings come from
+repeated checking within the retained programs and panel.
+
+The two unresolved roots and three coupled active-factor frontiers are unchanged.
+Their retained width-ten diagnostic still certifies none before widths eleven or
+twelve under the current order and factorization.  Exact factor descriptions,
+separators or conditioning with recomposition remain the coverage target; these
+observed widths are not lower bounds on optimal decompositions.  On cost,
+discovery/internal checking and cold replay remain the largest phases.  A
+separately instrumented JSON cold pass invokes normalization 5,449 times and
+restriction 6,127 times.  Their cumulative profiled times are $2.1435$ and
+$1.0870$ seconds in a $5.4325$-second profiled run.  Cumulative costs overlap and
+instrumentation changes timing, so these are diagnostic attributions, not new
+matched savings.  Exact validated source/intermediate contexts are the next
+checking-cost experiment, with binding, construction and invalidation charged.
+
+An independent clause-truth-table audit checks 1,303 valid partial projection
+programs over 692 CNFs, repeats every program and rejects 6,515 mutations with
+both checkers.  Mutations change output bits, reconstruction choices, incident
+inputs, coordinates or source binding after valid entries have warmed the bank.
+Full boundary scopes exercise valid nonminimal support representations.  The
+first nonconstant-transfer test fixture failed because greedy discovery removed
+degree-one leaves into constants.  Its correction uses explicitly checked partial
+projections at different ranks; the algorithm was unchanged.  The failed log,
+source snapshot and preliminary protocol remain retained, and the correction
+preceded every measured run.  Neither this audit nor finite-panel preservation
+establishes efficient recognition or solving of unrestricted SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

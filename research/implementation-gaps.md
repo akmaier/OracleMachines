@@ -4,7 +4,45 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-## Latest checkpoint: checked projection continuation
+## Latest checkpoint: ephemeral verified operator reuse
+
+[Verified operator reuse](verified-operator-reuse.md) reduces complete cost
+**10.37% versus unchanged checking**, with all five paired signs favorable.
+Within-query reuse saves **6.91%**; sharing across a pass saves another **3.72%**.
+All certificates and fallback evidence remain identical, preserving **180/182**
+structural verdicts. The pipeline remains **38.78% more costly than fresh** on
+this unchanged synthetic panel; production defaults stay unchanged. The uncached
+new checker regresses 0.63% on average with mixed signs.
+
+Every occurrence still checks source binding, complete incident factors, encoding,
+coordinate mapping, verdict and source witness. An empty bounded bank skips only
+a local row loop whose complete immutable input/pivot/output/choice description
+has already passed that loop. Each warm/cold phase starts empty. One cold pass
+avoids **39.51% of verification table probes**, retaining 1,325 keys accounting
+for 1,797,404 key/value bytes, excluding dictionary infrastructure. This realizes
+the earlier reuse opportunity; its work fraction is not a runtime fraction.
+
+**Next coverage target:** the two coupled-factor roots `d-d-d-j06` and `d-d-k09`.
+The three retained width-ten frontiers and failed width-ten diagnostic remain
+unchanged. Investigate exact factor recognition, separators or conditioning with
+recomposition. **Next cost target:** validated source/intermediate contexts.
+Discovery/internal checking (**4.50848 s**) and cold replay (**3.81622 s**) still
+dominate. A separate instrumented replay invokes normalization 5,449 times and
+restriction 6,127 times; its overlapping profiled times are diagnostic, not
+measured potential savings. Charge binding, construction and invalidation.
+
+Broader transfer remains a major gap: only **six nonconstant operator occurrences
+(144 probes)** match an earlier owner with a different stored family label after
+excluding repeated sources. These are generator/frontier labels, not disjoint
+semantic SAT classes; most gains are repeated checking within the retained panel.
+There is no new coverage, whole-residual sharing or unrestricted-SAT result.
+An independent audit checks 1,303 partial programs and rejects 6,515 mutations.
+Prior evidence and 79 proof blocks are preserved; the initial failed test fixture
+and its correction are retained. Resume
+`experiments/results/cnf-verified-operators/checkpoint.json`, key
+`verified_operators`. All **2,401 full and 33 focused tests pass**.
+
+## Previous checkpoint: checked projection continuation
 
 [Selective width expansion](selective-width-discovery.md) raises structural
 coverage **177/182 to 180/182** after two checked pair rounds, with no feedback

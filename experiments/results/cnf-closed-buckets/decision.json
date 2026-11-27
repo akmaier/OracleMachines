@@ -1,0 +1,328 @@
+{
+  "analysis": {
+    "path": "experiments/results/cnf-closed-buckets/analysis.json",
+    "sha256": "8d53503d016aba0d9109202b019f59504bdd6635add9761a3fb57616ddf0ee17"
+  },
+  "checkpoint": "closed-buckets",
+  "controls": [
+    "Twenty exposed sources (15 SAT, five UNSAT), 24 frozen unique constructions (17 SAT, seven UNSAT), four exact repeats (two SAT, two UNSAT). No new source duplicates the preceding panel after normalization. Labels and descriptions do not guide solving. Synthetic families cover growing random, forced-guard/deleted-guard, parity-prism and conditioned planted instances; no representative external benchmark claim.",
+    "Root is the preceding root-fold policy in the new wrapper with raw-cofactor sharing, not a historical timing rerun. Tree adds per-cofactor units but removes node memoization; closed adds sharing of post-unit residuals. Closed/tree isolates sharing; closed/root includes closure and changed memo identity. Tree/root is not a pure units ablation.",
+    "Sixteen fresh processes in four cyclic orders charge preparation, acquisition, checking, persistence, warm reuse, cold reconstruction and compression. Interpreter startup, report metadata, generation, post-hoc structure profiling, historical storage and final preservation audit are additional. Both native readers audit fallback records; two JSON replay passes use the same checker.",
+    "Tree-to-shared calls fall 250 to 219, elimination steps 456 to 414. Closed makes 242 requests with 23 direct hits. Nineteen targets join distinct raw cofactors: twelve constant, seven nonconstant. Avoided descendants explain the 31-node reduction. Nineteen queries with internal hits improve discovery 12.92%; the other 29 regress 0.09%.",
+    "Cold checking is largest at 0.79109 seconds, followed by discovery at 0.56785. Raw certificate-file bytes fall 4307744 to 4147444 versus tree, but combined compressed storage falls only 544 bytes (182982 to 182438). Peak RSS 72433664 remains above fresh 71303168. Diagnostic files, historical archives, process/container overhead and repeated trial copies are additional.",
+    "Twenty-one unique remaining roots (fourteen old, seven new) plus one repeat contain 45 unknown depth-zero nodes at width nine to eleven. Eleven stop before elimination and 34 after partial work. A separate checked binary profile finds no units/components/Horn/dual-Horn leaves, three binary contradictions and fifteen equivalence blocks merging 23 variable occurrences. Its 0.02420 seconds and full counters are additional, not measured acquisition or root authority.",
+    "All 227 prior manifests, 38630 artifact entries, 1248 scientific sources and 69 proof blocks are unchanged. Five new source/test files give 1253 sources and one restricted proof is added. All 2266 full and 24 focused tests pass; raw SQLite ResourceWarnings and regressions are preserved."
+  ],
+  "date": "2026-11-27",
+  "docs": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "ad5ec91d7634798d419a6644e18c3c34eed5754a7b57ea52242faf081654218f",
+    "research/closed-bucket-discovery.md": "925aa7c7b5d3f04f9751c786aa693dbb382569058a0bfbfce6b3fcc584cda58e",
+    "research/implementation-gaps.md": "c99162b9c172d3b32b5387e26ac2598174dc107e7e18ef0b8012fdbbd945d678",
+    "research/sat-pattern-discovery.md": "4280230c96b19cbdba5d6af3bc7bff85e06394e6353aa0b757e8341eebdd5c59",
+    "research/structural-reuse-priorities.md": "4125c2ea910f34343542838b1ceae6e2719c6344db401603a30a6c1cda24ab18"
+  },
+  "maintenance": "Memo hits suppress repeated bucket acquisition and descendants, but preserve incoming evidence and verification. Cache scope is one root program; exact whole programs share within a stream. Source edits invalidate incoming certificates and root reuse; a new edge may target an existing residual only after exact checking. Different depth or policy invalidates a key. All warm/cold programs are rechecked.",
+  "measurements": {
+    "combined_compressed_bytes": {
+      "closed": 182438,
+      "fresh": 165974,
+      "root": 221996,
+      "tree": 182982
+    },
+    "comparisons_percent": {
+      "closed_vs_fresh": 234.05362615784767,
+      "closed_vs_root": -9.174488061307285,
+      "closed_vs_tree": -4.215423485353121
+    },
+    "coverage": {
+      "closed": {
+        "development_cases": 20,
+        "development_direct": 6,
+        "development_sat": 15,
+        "repeats_cases": 4,
+        "repeats_direct": 3,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 17,
+        "unique_panel_sat": 17
+      },
+      "fresh": {
+        "development_cases": 20,
+        "development_direct": 0,
+        "development_sat": 15,
+        "repeats_cases": 4,
+        "repeats_direct": 0,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 0,
+        "unique_panel_sat": 17
+      },
+      "root": {
+        "development_cases": 20,
+        "development_direct": 0,
+        "development_sat": 15,
+        "repeats_cases": 4,
+        "repeats_direct": 3,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 12,
+        "unique_panel_sat": 17
+      },
+      "tree": {
+        "development_cases": 20,
+        "development_direct": 6,
+        "development_sat": 15,
+        "repeats_cases": 4,
+        "repeats_direct": 3,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 17,
+        "unique_panel_sat": 17
+      }
+    },
+    "coverage_losses": [],
+    "new_direct_cases": [
+      "d-d-d-s04",
+      "d-d-d-s07",
+      "d-y06",
+      "d-y10",
+      "d-y17",
+      "d-y02",
+      "u22",
+      "u20",
+      "u08",
+      "u21",
+      "u02"
+    ],
+    "observed_reuse_strata": {
+      "no_new_reuse": {
+        "cases": 29,
+        "discovery_seconds": {
+          "closed": 0.3249878293136135,
+          "percent": 0.08807290445542737,
+          "tree": 0.3247018549591303
+        },
+        "solve_check_seconds": {
+          "closed": 0.29551802040077746,
+          "percent": -0.665268734560609,
+          "tree": 0.2974971760995686
+        }
+      },
+      "reused": {
+        "cases": 19,
+        "discovery_seconds": {
+          "closed": 0.24285843595862389,
+          "percent": -12.919411717727169,
+          "tree": 0.27888929180335253
+        },
+        "solve_check_seconds": {
+          "closed": 0.1802072694990784,
+          "percent": -9.030099342676678,
+          "tree": 0.1980954889440909
+        }
+      }
+    },
+    "paired_percent": {
+      "closed_vs_fresh": [
+        214.94210284951424,
+        256.9454164379752,
+        243.75227138669962,
+        223.61521008131692
+      ],
+      "closed_vs_root": [
+        -9.515008077171316,
+        -7.300006316093565,
+        -9.187755170621081,
+        -10.62988632964792
+      ],
+      "closed_vs_tree": [
+        -4.019156726809559,
+        -2.5456232364515774,
+        -5.038347665759879,
+        -5.216064569675938
+      ]
+    },
+    "peak_rss_bytes": {
+      "closed": 72433664,
+      "fresh": 71303168,
+      "root": 77873152,
+      "tree": 73154560
+    },
+    "remaining": [
+      "d-d-d-s05",
+      "d-d-d-s06",
+      "d-d-c06",
+      "d-d-c07",
+      "d-d-c04",
+      "d-d-c12",
+      "d-d-c13",
+      "d-d-c05",
+      "d-y05",
+      "d-y07",
+      "d-y12",
+      "d-y16",
+      "d-y04",
+      "d-y13",
+      "u10",
+      "u23",
+      "u12",
+      "u04",
+      "u07",
+      "u05",
+      "u06",
+      "u10r"
+    ],
+    "remaining_shape": {
+      "positive_work_leaves": 34,
+      "reasons": {
+        "bag-width": 45
+      },
+      "repeated_queries": 1,
+      "unique_sources": 21,
+      "unknown_leaves": 45,
+      "width_counts": {
+        "10": 11,
+        "11": 2,
+        "9": 32
+      },
+      "zero_work_leaves": 11
+    },
+    "remaining_structure_profile": {
+      "binary_conflicts": 3,
+      "disconnected": 0,
+      "dual_horn": 0,
+      "equivalence_blocks": 15,
+      "horn": 0,
+      "leaves": 45,
+      "merged_variable_occurrences": 23,
+      "unit_conflicts": 0,
+      "with_units": 0
+    },
+    "selected": "fresh",
+    "structural": {
+      "closed": {
+        "bucket_steps": 414,
+        "constant_raw_merges": 12,
+        "distinct_raw_merges": 19,
+        "edge_unit_steps": 467,
+        "edges": 242,
+        "leaf_nodes": 120,
+        "leaf_sat": 16,
+        "leaf_unresolved": 57,
+        "leaf_unsat": 47,
+        "nodes": 219,
+        "nonconstant_raw_merges": 7,
+        "prefix_fold_steps": 929,
+        "shared_targets": 19,
+        "split_nodes": 99
+      },
+      "fresh": {},
+      "root": {
+        "bucket_steps": 337,
+        "edge_unit_steps": 0,
+        "edges": 272,
+        "leaf_nodes": 141,
+        "leaf_sat": 8,
+        "leaf_unresolved": 107,
+        "leaf_unsat": 26,
+        "nodes": 255,
+        "prefix_fold_steps": 929,
+        "shared_targets": 17,
+        "split_nodes": 114
+      },
+      "tree": {
+        "bucket_steps": 456,
+        "edge_unit_steps": 491,
+        "edges": 250,
+        "leaf_nodes": 147,
+        "leaf_sat": 18,
+        "leaf_unresolved": 62,
+        "leaf_unsat": 67,
+        "nodes": 250,
+        "prefix_fold_steps": 929,
+        "split_nodes": 103
+      }
+    },
+    "totals": {
+      "closed": {
+        "certificate_bytes": 4147444,
+        "certificate_compressed_bytes": 76058,
+        "cold_seconds": 0.7910907393088564,
+        "complete_seconds": 2.3574814063031226,
+        "diagnostic_bytes": 60219,
+        "input_seconds": 0.001846114406362176,
+        "persistence_seconds": 0.1643546875566244,
+        "phases": {
+          "discovery_seconds": 0.5678462652722374,
+          "evidence_persistence_seconds": 0.025822924450039864,
+          "solve_check_seconds": 0.47572528989985585
+        },
+        "record_bytes": 586142,
+        "records": 377,
+        "warm_seconds": 0.32413105200976133
+      },
+      "fresh": {
+        "certificate_bytes": 0,
+        "certificate_compressed_bytes": 22,
+        "cold_seconds": 0.2107979792635888,
+        "complete_seconds": 0.7057194479275495,
+        "diagnostic_bytes": 0,
+        "input_seconds": 0.0019219685345888138,
+        "persistence_seconds": 0.14300720836035907,
+        "phases": {
+          "solve_check_seconds": 0.3134701994713396
+        },
+        "record_bytes": 888841,
+        "records": 578,
+        "warm_seconds": 0.03014060400892049
+      },
+      "root": {
+        "certificate_bytes": 4989744,
+        "certificate_compressed_bytes": 72895,
+        "cold_seconds": 0.83905550010968,
+        "complete_seconds": 2.5956158748595044,
+        "diagnostic_bytes": 67587,
+        "input_seconds": 0.001884114695712924,
+        "persistence_seconds": 0.1963723333319649,
+        "phases": {
+          "discovery_seconds": 0.6020503725158051,
+          "evidence_persistence_seconds": 0.031193010276183486,
+          "solve_check_seconds": 0.5765844876877964
+        },
+        "record_bytes": 819454,
+        "records": 524,
+        "warm_seconds": 0.34085234359372407
+      },
+      "tree": {
+        "certificate_bytes": 4307744,
+        "certificate_compressed_bytes": 76602,
+        "cold_seconds": 0.8078362807864323,
+        "complete_seconds": 2.461232791421935,
+        "diagnostic_bytes": 64736,
+        "input_seconds": 0.0018563959747552872,
+        "persistence_seconds": 0.16305617697071284,
+        "phases": {
+          "discovery_seconds": 0.6035911467624828,
+          "evidence_persistence_seconds": 0.029870010330341756,
+          "solve_check_seconds": 0.4955926650436595
+        },
+        "record_bytes": 586142,
+        "records": 377,
+        "warm_seconds": 0.352885521017015
+      }
+    }
+  },
+  "next": "Integrate and measure checked binary implication/equivalence substitution after unit closure, before full buckets, with separate edge witness transport and exact quotient reuse. Three contradictory leaves do not necessarily refute their roots; fifteen equivalence blocks may still leave wide cores. Preserve unresolved mixtures and random/edited controls. Cold source/transport verification remains the largest cost. No uniform deeper partition, compact arbitrary-SAT closure or unrestricted polynomial bound is established.",
+  "outcome": "Per-cofactor unit closure certifies 6/20 exposed misses (five SAT, one UNSAT) and increases frozen unique coverage 12/24 to 17/24; repeats remain 3/4. The common fallback already decides all 48 queries. No coverage losses on this panel. Shared closed residuals cost 4.22% less than the same unit policy in a tree, and closure plus sharing costs 9.17% less than the wrapped root-only policy. Every paired order improves. The pipeline still costs 3.34 times fresh solving, so production defaults stay unchanged.",
+  "parent": {
+    "path": "experiments/results/cnf-symbolic-buckets/checkpoint.json",
+    "sha256": "4b9721e26808610f11e00d6c66498e36900587275937cc5613752fbd751e92ec"
+  },
+  "pattern": "Different raw cofactors can become identical normalized residuals after active-unit restriction. Share the residual/depth node while retaining separate incoming unit evidence and reconstructible inverse normalization. A guarded parity core has opposite incoming forced values and the same residual; swapping edge units is rejected.",
+  "recognition": "Full normalized residual and remaining depth under fixed policy define local node identity. Every incoming edge pays for unit preparation, normalization and lookup. The independent checker scans active units, verifies exact residuals/cofactors, depth, reachability, bucket policy and every SAT edge transport. SAT lifts through edge-specific units; UNSAT needs both exact split branches. Unknown is never UNSAT. Reuse is syntactic, not general semantic equivalence.",
+  "resources": "Depth two, width eight, 262144 reserved bucket probes per node, and 512 steps/262144 reserved index-work units per preprocessing invocation. A partial unit transformation remains exact; closed does not promise fixed-point propagation on every input. At depth d at most 2^(d+1)-1 incoming requests are possible; each distinct residual/depth node is acquired once in shared mode. Preparation on hits, scans, candidate handling, normalization, verification, serialization, time and RAM remain explicit additional obligations. Separate JSON authority only; native/equivalence/affine/Lean formats unchanged.",
+  "structure_profile": {
+    "path": "experiments/results/cnf-closed-buckets/remaining-structure-profile.json",
+    "sha256": "517d7898f316a0c42ab855d0504f73ef8ae70b97ce81adea18ddc0db49960764"
+  }
+}

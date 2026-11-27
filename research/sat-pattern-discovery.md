@@ -5,7 +5,27 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: exact symbolic clause folding
+## Latest evidence: closure after conditioning and exact residual reuse
+
+[Per-cofactor unit closure](closed-bucket-discovery.md) certifies **6/20** exposed
+misses and increases new unique-panel coverage **12/24 to 17/24**. The fallback
+already supplies all 48 answers. Separate incoming unit assignments let distinct
+raw cofactors share the same normalized residual without corrupting witnesses.
+Sharing cuts bucket calls **250 to 219** and complete time **4.22%** against an
+otherwise identical tree; closure plus sharing improves **9.17%** over the
+wrapped root-only policy. It still costs **3.34 times fresh solving**; no defaults
+change. Cold checking remains the largest phase.
+
+Twenty-one unique roots retain 45 unknown nodes at widths nine through eleven.
+A source-bound diagnostic finds no units or disconnected components, but three
+binary implication contradictions and fifteen checked equivalence blocks.
+**Next: binary implication/equivalence closure before buckets**, with separate
+witness transport and exact quotient reuse. Diagnostic leaf evidence is not new
+root coverage. Resume `experiments/results/cnf-closed-buckets/checkpoint.json`.
+All **2,266 full and 24 focused tests pass**; prior artifacts and 69 proofs remain
+unchanged. Restricted coverage is not an efficient partition of arbitrary SAT.
+
+## Previous evidence: exact symbolic clause folding
 
 [Complementary-clause preprocessing](symbolic-bucket-preprocessing.md) uses the
 exact identity `(C or x) and (C or not x) = C`, with independent checks of active

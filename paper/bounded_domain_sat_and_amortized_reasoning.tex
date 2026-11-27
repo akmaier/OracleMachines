@@ -15026,6 +15026,133 @@ by branching. Applying deletion-signature indexing everywhere or uniformly
 increasing depth is not justified by these timings. General compact classification
 and polynomial unrestricted-SAT bounds remain open.
 
+\subsection{Sharing unit-simplified cofactors with separate transport}
+\label{sec:closed-conditioned-buckets}
+Root preprocessing omits forced assignments exposed by conditioning. The next
+experiment repeats checked unit propagation on each incoming cofactor before
+bucket construction. Distinct raw cofactors can then reach the same normalized
+residual. Reuse must retain the incoming transformation separately from the
+shared residual model: opposite branch contexts can force opposite values of
+variables that disappear from that residual.
+
+\begin{proposition}[Exact sharing after incoming unit restriction]
+Let an incoming cofactor $R$ undergo a finite sequence of active-unit restrictions,
+recording forced literals $U$, and let $H$ be the normalized residual with inverse
+renaming $\rho$. Then, over the incoming variables,
+\[
+ R\ \equiv\ \left(\bigwedge_{l\in U}l\right)\land\rho(H).
+\]
+Under a fixed acquisition policy, incoming cofactors with identical $H$ and
+remaining depth may share one checked bucket/conditioning node, provided each
+incoming edge retains its own restrictions and reconstructs and verifies its
+inverse renaming.
+SAT lifts through that edge; a checked UNSAT residual refutes its incoming
+cofactor. Exact binary conditioning composes these results, with both children
+required for an UNSAT parent and either SAT child sufficient for a SAT parent.
+An unresolved residual is not a refutation. A memoized program acquires each
+distinct residual/depth node at most once, but still prepares and checks every
+incoming edge.
+\end{proposition}
+\begin{proof}
+An active unit $l$ forces its value in every model of the current residual.
+Conjoining $l$ with the restriction by that value therefore recovers precisely
+the current formula. Induction over the recorded restrictions proves the
+identity; inverse normalization only restores variable names. A residual model
+extends by the recorded values, with arbitrary values for other disappearing
+variables, and the identity proves it satisfies the incoming cofactor. The
+identity also transports UNSAT. Identical normalized residuals have identical
+residual obligations, so their checked node can be shared while these lifts
+remain edge-specific. Induction over decreasing remaining depth uses the exact
+two Shannon cofactors at every split. A model of either cofactor extends by its
+branch value, whereas absence of models in both excludes both values. This proves
+the composition rules. Memoization suppresses further node acquisition for the
+same full residual/depth key; incoming restriction and transport work is not
+suppressed. A depth-$d$ binary expansion has at most $2^{d+1}-1$ incoming requests,
+which is exponential in $d$ and supplies no unrestricted polynomial-time bound.
+\end{proof}
+
+A guarded parity-core test realizes the opposite-forcing example. Both branches
+reach the same nonconstant residual but require opposite incoming unit values.
+Swapping their unit evidence is rejected. The checker independently scans active
+clauses, verifies exact cofactors, decreasing depth, node identities and full
+reachability, and checks every SAT edge transport, including unused witness
+branches. Cold replay works with discovery disabled. Identity is full normalized
+syntax, not a semantic-equivalence oracle. Edits require fresh checked incoming
+transport; different depth or policy invalidates a reuse key. A separate
+experimental JSON authority retains edges and nodes without changing native,
+equivalence, affine or Lean formats.
+
+Four modes compare the unchanged fallback alone, root folding with raw-cofactor
+sharing, root folding with per-cofactor units in a tree, and the same unit policy
+with shared residual nodes. The tree/shared pair isolates sharing. The root/shared
+pair includes both unit closure and changed sharing identity; tree is not a pure
+units-only ablation of root because it also removes raw-cofactor memoization.
+The root arm wraps the preceding policy in this authority. All structural modes
+retain depth two, width eight and 262,144 reserved bucket probes per node. Each
+preprocessing invocation allows 512 steps and 262,144 reserved index-work units.
+Budget-limited restrictions remain exact even if units remain, so the shared
+mode's name does not guarantee a fixed point on every input. Normalization,
+scanning, checking, serialization, time and RAM are additional obligations.
+
+Twenty exposed inputs contain fifteen SAT and five UNSAT cases. Twenty-four
+frozen unique constructions contain seventeen SAT and seven UNSAT cases, with
+four separate repeats split evenly between SAT and UNSAT. New inputs include
+random three-CNFs of 12--23 variables, forced-guard cores and deleted forcing
+clauses, parity prisms, and conditioned planted cores. Names, signs and order are
+scrambled; descriptions and independent truth labels do not guide acquisition.
+No new normalized input duplicates the preceding panel. These are synthetic
+controls, not representative external SAT evidence.
+
+Per-cofactor units certify six of twenty exposed misses, five SAT and one UNSAT,
+and increase new unique coverage from $12/24$ to $17/24$. Repeats stay $3/4$;
+there are no observed coverage losses. The fallback already decides all
+forty-eight queries. Four cyclic process orders give complete mean times
+0.70572 seconds fresh, 2.59562 root, 2.46123 tree and 2.35748 shared. Sharing
+improves 4.22\% over tree; closure and sharing improve 9.17\% over root.
+All paired reductions are positive: 2.55--5.22\% versus tree and 7.30--10.63\%
+versus root. Nevertheless, shared acquisition costs 3.34 times fresh solving;
+production defaults remain unchanged.
+
+Tree-to-shared bucket calls decrease from 250 to 219 and elimination steps from
+456 to 414. The shared mode has 242 incoming requests and twenty-three memo hits;
+nineteen targets join distinct raw cofactors, twelve constant and seven
+nonconstant. Avoiding descendants accounts for the difference between direct
+hits and avoided nodes. Nineteen queries with internal hits reduce discovery
+12.92\% relative to tree; the other twenty-nine regress 0.09\% in discovery.
+Root folding performs 929 steps in each structural arm. Incoming units perform
+491 steps in tree and 467 in shared mode.
+
+Pretty-printed certificate files occupy 4,989,744 bytes root, 4,307,744 tree and
+4,147,444 shared. Native record bytes are 888,841 fresh, 819,454 root and 586,142
+for each unit mode. Combined compressed SQLite/JSON packages occupy 165,974,
+221,996, 182,982 and 182,438 bytes respectively; sharing saves only 544 compressed
+bytes against tree. Peak RSS is respectively 71,303,168, 77,873,152, 73,154,560
+and 72,433,664 bytes. Diagnostics, historical archives and container overhead are
+extra. Smaller retained evidence is not a general peak-memory guarantee.
+
+Shared discovery costs 0.56785 seconds, solve/check 0.47573, warm replay 0.32413
+and cold replay 0.79109. Cold checking is the largest phase. Preparation,
+recognition, edge transport, checking, evidence/database persistence and
+compression are charged. Interpreter startup, report metadata, panel generation,
+post-hoc profiling and preservation audit are additional. Both native cold
+readers audit fallback records; two additional passes use the same JSON checker,
+not independently implemented JSON verifiers.
+
+Twenty-one unique sources remain, fourteen old and seven new, plus one repeat.
+Their forty-five unresolved depth-zero nodes exceed width eight: thirty-two have
+width nine, eleven width ten, and two width eleven. Thirty-four do some bucket
+work before hitting the cap. A separately bound post-hoc profile of these node
+CNFs finds no further units, unit conflicts, disconnected components, Horn or
+dual-Horn leaves. Binary subsets yield three contradictions with checked
+implication paths; fifteen leaves have checked equivalence blocks, merging
+twenty-three variable occurrences in the selected blocks. The profile costs
+0.02420 seconds separately from the measured acquisition. These are leaf-local
+diagnostics, not additional root verdicts. The next target is checked binary
+implication and equivalence substitution after units, retaining edge-specific
+witness transport and exact quotient reuse before forming full buckets. Wide
+cores may persist after substitution. General compact classification and
+polynomial unrestricted-SAT bounds remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

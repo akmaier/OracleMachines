@@ -12,7 +12,32 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: symbolic preprocessing before conditioning
+## Current investigation: closure and sharing of conditioned residuals
+
+[Unit closure on each cofactor](closed-bucket-discovery.md) closes **6/20** exposed
+acquisition gaps; unique frozen-panel coverage rises **12/24 to 17/24**. Separate
+edge evidence preserves forced assignments while target nodes share identical
+normalized residual/depth pairs. Tree-to-shared calls fall **250 to 219**;
+complete cost falls **4.22%**. Closure plus sharing improves **9.17%** against the
+wrapped root-only policy, with no observed coverage losses. All answers already
+come from the fallback, and the shared pipeline remains **3.34 times fresh**.
+Defaults stay unchanged. Peak RSS is 72.43 MB shared versus 71.30 MB fresh.
+
+**Next:** binary implication and equivalence substitution after units. The 45
+unknown nodes from 21 unique remaining sources have no further units or component
+splits; a separately checked diagnostic finds three binary contradictions and
+fifteen equivalence blocks (23 merged-variable occurrences). Integrate and measure
+these relations with exact witness transport before counting any new root gains.
+Cold checking (0.79109 s) exceeds discovery (0.56785 s) and is the largest remaining
+measured cost. A smaller shared graph still carries incoming source/transport
+checks; the compressed saving over tree is only 544 bytes. Preserve the fresh
+regression and the seven nonconstant versus twelve constant shared-target cases.
+Resume `experiments/results/cnf-closed-buckets/checkpoint.json`, key
+`closed_buckets.remaining`. All **2,266 full and 24 focused tests pass**. Prior
+227 manifests, 38,630 artifact entries, 1,248 sources and 69 proofs are unchanged;
+unrestricted efficiency remains open.
+
+## Previous investigation: symbolic preprocessing before conditioning
 
 [Exact complementary-clause folding](symbolic-bucket-preprocessing.md) closes
 **2/12** exposed acquisition gaps. Frozen unique coverage is **11/24 base,

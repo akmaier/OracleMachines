@@ -4,7 +4,21 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (27 November, symbolic bucket preprocessing):
+Latest expansion checkpoint (27 November, closed conditioned buckets):
+[Unit closure with separate incoming transport](closed-bucket-discovery.md)
+closes 6/20 exposed misses and raises unique-panel coverage 12/24 to 17/24.
+Sharing closed residuals cuts 250 bucket calls to 219 and complete cost 4.22%
+versus a tree; closure plus sharing improves 9.17% over the wrapped root-only
+policy. The pipeline remains 3.34 times fresh solving; no default changes.
+Twenty-one unique sources retain 45 unknown nodes without units or component
+splits. A post-hoc checked diagnostic finds three binary contradictions and
+fifteen equivalence blocks: next test binary closure with exact model transport,
+without counting leaf diagnostics as root verdicts. Resume
+`experiments/results/cnf-closed-buckets/checkpoint.json`. All 2,266 full and 24
+focused tests pass; 227 prior manifests, 38,630 artifact entries, 1,248 sources
+and 69 proofs are preserved. One restricted sharing proof is added.
+
+Previous expansion checkpoint (27 November, symbolic bucket preprocessing):
 [Exact complementary-clause folding](symbolic-bucket-preprocessing.md) closes
 2/12 exposed misses and raises new unique coverage 11/24 to 14/24; units alone
 reach 13/24 and are 2.95% faster than folding. Both remain slower than fresh

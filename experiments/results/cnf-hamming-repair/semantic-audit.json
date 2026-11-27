@@ -1,0 +1,7849 @@
+{
+  "checked_reuses": 30,
+  "counts": {
+    "ball_queries": 25629,
+    "budget_unknowns": 2860,
+    "cnf2_inputs": 512,
+    "cnf2_sat": 95,
+    "cnf2_unsat": 417,
+    "cnf3_inputs": 3304,
+    "cnf3_sat": 2853,
+    "cnf3_unsat": 451,
+    "excluded_balls": 13129,
+    "fresh_inputs": 64,
+    "fresh_sat": 30,
+    "fresh_unsat": 34,
+    "random_inputs": 1000,
+    "random_sat": 256,
+    "random_unsat": 744,
+    "retained_domain_inputs": 228,
+    "retained_domain_sat": 228,
+    "sat_balls": 12500
+  },
+  "fresh_records": [
+    {
+      "minimum_distance": 2,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 2,
+          "expanded": 3,
+          "initial_failed": 2,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            405,
+            2994,
+            5040,
+            5277,
+            6037,
+            9244
+          ],
+          "values": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            true
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          405,
+          2994,
+          5040,
+          5277,
+          6037,
+          9244
+        ],
+        "values": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          6037,
+          -405
+        ],
+        [
+          9244,
+          -6037,
+          -405,
+          2994
+        ],
+        [
+          -5040,
+          5277
+        ],
+        [
+          6037,
+          -2994
+        ],
+        [
+          405,
+          -6037
+        ],
+        [
+          -6037
+        ],
+        [
+          5040,
+          -5277
+        ],
+        [
+          6037,
+          9244
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 3,
+          "expanded": 2,
+          "initial_failed": 3,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 13
+            },
+            "1": {
+              "blocked": 11
+            }
+          },
+          "radius": 6,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              1649,
+              1831,
+              6598,
+              7112,
+              7355,
+              7954
+            ],
+            "values": [
+              false,
+              true,
+              false,
+              false,
+              false,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1649,
+          1831,
+          6598,
+          7112,
+          7355,
+          7954
+        ],
+        "values": [
+          false,
+          true,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          -7355,
+          -1649,
+          -7954,
+          -7112
+        ],
+        [
+          -7112,
+          -1649
+        ],
+        [
+          -7954
+        ],
+        [
+          6598,
+          7112,
+          7954,
+          -7355,
+          1649,
+          -1831
+        ],
+        [
+          7954,
+          7355,
+          7112,
+          6598,
+          1831,
+          -1649
+        ],
+        [
+          7355,
+          -6598,
+          7954,
+          1831,
+          -7112,
+          1649
+        ],
+        [
+          1649
+        ],
+        [
+          -7954
+        ],
+        [
+          -1649,
+          1831,
+          -7112,
+          7355
+        ],
+        [
+          1649,
+          7954,
+          -6598,
+          7355,
+          -1831
+        ],
+        [
+          -6598
+        ],
+        [
+          -7954,
+          -7112,
+          1649,
+          -1831,
+          6598
+        ],
+        [
+          7954
+        ],
+        [
+          7954,
+          7355
+        ],
+        [
+          -1831,
+          -6598
+        ],
+        [
+          -1649
+        ],
+        [
+          1649
+        ],
+        [
+          -7355,
+          -7112,
+          1831
+        ],
+        [
+          7954
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 2,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 2,
+          "expanded": 3,
+          "initial_failed": 1,
+          "node_limit": 20000,
+          "radius": 3,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            1099,
+            3521,
+            6216
+          ],
+          "values": [
+            true,
+            true,
+            true
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1099,
+          3521,
+          6216
+        ],
+        "values": [
+          false,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -1099,
+          3521
+        ],
+        [
+          6216
+        ],
+        [
+          -1099,
+          3521,
+          1099
+        ],
+        [
+          -1099,
+          -6216,
+          3521
+        ],
+        [
+          -1099,
+          3521
+        ],
+        [
+          3521
+        ],
+        [
+          3521,
+          6216
+        ],
+        [
+          6216
+        ],
+        [
+          -6216,
+          -3521,
+          1099
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 1,
+          "expanded": 2,
+          "initial_failed": 1,
+          "node_limit": 20000,
+          "radius": 7,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 7
+            },
+            "8": {
+              "blocked": 10
+            }
+          },
+          "radius": 7,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              933,
+              2561,
+              6711,
+              7132,
+              7231,
+              8553,
+              9293
+            ],
+            "values": [
+              false,
+              true,
+              false,
+              true,
+              true,
+              false,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          933,
+          2561,
+          6711,
+          7132,
+          7231,
+          8553,
+          9293
+        ],
+        "values": [
+          false,
+          true,
+          false,
+          true,
+          true,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          9293,
+          8553,
+          -7132,
+          -2561,
+          6711,
+          7231,
+          933
+        ],
+        [
+          7132
+        ],
+        [
+          -2561,
+          933,
+          -7231,
+          -8553,
+          9293,
+          6711,
+          -7132
+        ],
+        [
+          7231,
+          -6711,
+          -9293,
+          2561
+        ],
+        [
+          -933,
+          9293,
+          -2561,
+          7132,
+          -8553,
+          6711,
+          7231
+        ],
+        [
+          2561,
+          8553,
+          -7132,
+          6711,
+          933,
+          7231,
+          9293
+        ],
+        [
+          -6711,
+          -7132,
+          9293,
+          -7231,
+          2561,
+          8553,
+          -933
+        ],
+        [
+          -7231,
+          7132,
+          -8553,
+          6711,
+          2561
+        ],
+        [
+          -7132
+        ],
+        [
+          -9293,
+          7231,
+          -6711,
+          -7132,
+          2561,
+          933
+        ],
+        [
+          6711,
+          -7231,
+          -8553,
+          9293,
+          7132,
+          -2561
+        ],
+        [
+          -7132
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 2,
+          "expanded": 3,
+          "initial_failed": 2,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 15
+            },
+            "32": {
+              "clause": 3
+            },
+            "36": {
+              "blocked": 11
+            }
+          },
+          "radius": 6,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              1781,
+              2663,
+              2932,
+              3339,
+              3637,
+              7127
+            ],
+            "values": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1781,
+          2663,
+          2932,
+          3339,
+          3637,
+          7127
+        ],
+        "values": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          2663,
+          2932,
+          7127,
+          -3637
+        ],
+        [
+          2932,
+          -7127
+        ],
+        [
+          -7127,
+          2932,
+          3637,
+          2663
+        ],
+        [
+          3637,
+          2663,
+          -7127,
+          2932
+        ],
+        [
+          2663,
+          -3637
+        ],
+        [
+          2663,
+          -7127,
+          -2932
+        ],
+        [
+          -2932
+        ],
+        [
+          -2932,
+          3637,
+          -7127
+        ],
+        [
+          7127
+        ],
+        [
+          3637,
+          2663,
+          7127
+        ],
+        [
+          -3637,
+          -2932
+        ],
+        [
+          -3637,
+          2932,
+          -2663
+        ],
+        [
+          -2663
+        ],
+        [
+          7127,
+          2932,
+          -3637,
+          2663
+        ],
+        [
+          -3637
+        ],
+        [
+          -3637,
+          2663,
+          2932
+        ],
+        [
+          -1781,
+          3339
+        ],
+        [
+          1781,
+          -3339
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 3,
+          "expanded": 2,
+          "initial_failed": 3,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 9
+            },
+            "1": {
+              "blocked": 7
+            }
+          },
+          "radius": 6,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              2130,
+              3186,
+              4095,
+              4726,
+              6945,
+              7395
+            ],
+            "values": [
+              false,
+              true,
+              true,
+              false,
+              true,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          2130,
+          3186,
+          4095,
+          4726,
+          6945,
+          7395
+        ],
+        "values": [
+          false,
+          true,
+          true,
+          false,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          2130
+        ],
+        [
+          -2130
+        ],
+        [
+          4095,
+          7395,
+          -3186
+        ],
+        [
+          -3186
+        ],
+        [
+          4726
+        ],
+        [
+          -7395,
+          -4095,
+          6945,
+          3186
+        ],
+        [
+          -6945,
+          -2130,
+          7395,
+          4095,
+          -3186
+        ],
+        [
+          4726
+        ],
+        [
+          -4095,
+          2130,
+          -6945,
+          3186,
+          4726
+        ],
+        [
+          7395,
+          -2130
+        ],
+        [
+          -7395,
+          -6945,
+          -3186,
+          -4095,
+          4726
+        ],
+        [
+          4726,
+          -3186,
+          -2130,
+          4095
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 2,
+          "expanded": 2,
+          "initial_failed": 3,
+          "node_limit": 20000,
+          "radius": 5,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 6
+            },
+            "1": {
+              "blocked": 8
+            }
+          },
+          "radius": 5,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              150,
+              1956,
+              3047,
+              4430,
+              9286
+            ],
+            "values": [
+              true,
+              true,
+              false,
+              true,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          150,
+          1956,
+          3047,
+          4430,
+          9286
+        ],
+        "values": [
+          true,
+          true,
+          false,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -3047,
+          -150,
+          4430
+        ],
+        [
+          -9286,
+          -1956,
+          150,
+          3047,
+          -4430
+        ],
+        [
+          9286,
+          -150
+        ],
+        [
+          -150
+        ],
+        [
+          -1956,
+          -4430,
+          -9286,
+          3047,
+          -150
+        ],
+        [
+          9286,
+          -150,
+          -9286
+        ],
+        [
+          4430,
+          -9286
+        ],
+        [
+          1956
+        ],
+        [
+          -150
+        ],
+        [
+          9286,
+          -150
+        ],
+        [
+          -4430
+        ],
+        [
+          -1956,
+          -3047
+        ],
+        [
+          150
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 2,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 2,
+          "expanded": 3,
+          "initial_failed": 3,
+          "node_limit": 20000,
+          "radius": 4,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            2525,
+            3169,
+            4896,
+            4931
+          ],
+          "values": [
+            true,
+            false,
+            true,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          2525,
+          3169,
+          4896,
+          4931
+        ],
+        "values": [
+          false,
+          true,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -4931
+        ],
+        [
+          3169,
+          4896,
+          -4931,
+          -2525
+        ],
+        [
+          4931,
+          4896,
+          2525,
+          3169
+        ],
+        [
+          4931,
+          -3169,
+          2525
+        ],
+        [
+          3169,
+          -2525,
+          -4896,
+          -4931
+        ],
+        [
+          -3169
+        ],
+        [
+          2525
+        ],
+        [
+          2525,
+          -4931,
+          -3169,
+          4896
+        ],
+        [
+          -4896,
+          2525,
+          -3169,
+          -4931
+        ],
+        [
+          4896
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 1,
+          "expanded": 4,
+          "initial_failed": 2,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 10
+            },
+            "12": {
+              "blocked": 13
+            },
+            "36": {
+              "blocked": 2
+            },
+            "4": {
+              "clause": 9
+            }
+          },
+          "radius": 6,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              149,
+              6003,
+              6158,
+              6715,
+              7284,
+              8978
+            ],
+            "values": [
+              true,
+              false,
+              true,
+              true,
+              false,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          149,
+          6003,
+          6158,
+          6715,
+          7284,
+          8978
+        ],
+        "values": [
+          true,
+          false,
+          true,
+          true,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          149,
+          -8978,
+          -6715,
+          -6158
+        ],
+        [
+          149,
+          -6715
+        ],
+        [
+          -6158
+        ],
+        [
+          149,
+          -6158,
+          -6715
+        ],
+        [
+          6158,
+          -8978
+        ],
+        [
+          8978,
+          149,
+          -6715,
+          6158
+        ],
+        [
+          6158,
+          8978,
+          149
+        ],
+        [
+          6715
+        ],
+        [
+          -6715,
+          -6158,
+          -8978,
+          149
+        ],
+        [
+          -149,
+          -6158,
+          -6715,
+          -8978
+        ],
+        [
+          6158,
+          -6715,
+          149
+        ],
+        [
+          6003,
+          -7284
+        ],
+        [
+          8978,
+          -6715
+        ],
+        [
+          -8978,
+          6715
+        ],
+        [
+          -6003,
+          7284
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 3,
+          "expanded": 2,
+          "initial_failed": 4,
+          "node_limit": 20000,
+          "radius": 4,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 6
+            },
+            "1": {
+              "blocked": 9
+            }
+          },
+          "radius": 4,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              2183,
+              2761,
+              3392,
+              8323
+            ],
+            "values": [
+              true,
+              false,
+              false,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          2183,
+          2761,
+          3392,
+          8323
+        ],
+        "values": [
+          true,
+          false,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          -3392,
+          -8323,
+          -2761
+        ],
+        [
+          8323,
+          2183,
+          2761
+        ],
+        [
+          -8323
+        ],
+        [
+          -2183,
+          3392,
+          2761
+        ],
+        [
+          -2761,
+          -3392,
+          -8323
+        ],
+        [
+          -3392
+        ],
+        [
+          -8323,
+          2761,
+          -2183,
+          3392
+        ],
+        [
+          2183
+        ],
+        [
+          -8323
+        ],
+        [
+          -2183
+        ],
+        [
+          -3392,
+          2761
+        ],
+        [
+          -3392
+        ],
+        [
+          3392
+        ],
+        [
+          -8323,
+          2761,
+          -2183
+        ],
+        [
+          -8323
+        ],
+        [
+          2183
+        ],
+        [
+          3392,
+          -2183
+        ],
+        [
+          3392,
+          -2183,
+          2761,
+          -8323
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 2,
+          "expanded": 2,
+          "initial_failed": 2,
+          "node_limit": 20000,
+          "radius": 3,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 6
+            },
+            "1": {
+              "blocked": 7
+            }
+          },
+          "radius": 3,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              1904,
+              6914,
+              9184
+            ],
+            "values": [
+              true,
+              true,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1904,
+          6914,
+          9184
+        ],
+        "values": [
+          true,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          9184,
+          1904
+        ],
+        [
+          1904,
+          9184
+        ],
+        [
+          -1904,
+          -9184,
+          -6914
+        ],
+        [
+          1904,
+          -9184
+        ],
+        [
+          1904
+        ],
+        [
+          9184,
+          1904,
+          -6914
+        ],
+        [
+          1904,
+          -9184
+        ],
+        [
+          -9184,
+          -6914
+        ],
+        [
+          1904,
+          -9184,
+          -1904
+        ],
+        [
+          -1904
+        ],
+        [
+          9184,
+          6914
+        ],
+        [
+          -1904
+        ],
+        [
+          -6914,
+          9184,
+          -1904
+        ],
+        [
+          -9184,
+          -6914,
+          1904
+        ],
+        [
+          -1904,
+          -6914,
+          9184
+        ],
+        [
+          -1904
+        ],
+        [
+          1904
+        ],
+        [
+          9184,
+          -6914,
+          -1904
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 0,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 0,
+          "expanded": 1,
+          "initial_failed": 0,
+          "node_limit": 20000,
+          "radius": 7,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            127,
+            189,
+            1007,
+            2740,
+            4813,
+            6069,
+            7467
+          ],
+          "values": [
+            true,
+            true,
+            false,
+            true,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          127,
+          189,
+          1007,
+          2740,
+          4813,
+          6069,
+          7467
+        ],
+        "values": [
+          true,
+          true,
+          false,
+          true,
+          false,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          -7467,
+          127
+        ],
+        [
+          1007,
+          -7467,
+          -189,
+          -2740,
+          -127,
+          6069,
+          4813
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 3,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 3,
+          "expanded": 4,
+          "initial_failed": 5,
+          "node_limit": 20000,
+          "radius": 8,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            941,
+            2595,
+            2644,
+            3692,
+            5109,
+            7762,
+            9133,
+            9293
+          ],
+          "values": [
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          941,
+          2595,
+          2644,
+          3692,
+          5109,
+          7762,
+          9133,
+          9293
+        ],
+        "values": [
+          true,
+          true,
+          true,
+          true,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          -2595,
+          -7762,
+          -941,
+          -9133,
+          2644
+        ],
+        [
+          7762,
+          -2595
+        ],
+        [
+          9293,
+          -941
+        ],
+        [
+          2595,
+          941,
+          9293,
+          2644
+        ],
+        [
+          -2644,
+          2595,
+          9293,
+          7762,
+          -941,
+          -9133
+        ],
+        [
+          -941,
+          -2595,
+          -9293,
+          -2644,
+          7762,
+          9133
+        ],
+        [
+          5109,
+          3692
+        ],
+        [
+          7762
+        ],
+        [
+          9133
+        ],
+        [
+          2644,
+          -941,
+          -7762,
+          2595
+        ],
+        [
+          -2595,
+          9133,
+          941,
+          7762,
+          9293,
+          2644
+        ],
+        [
+          -941,
+          2644,
+          -9293,
+          -2595,
+          7762
+        ],
+        [
+          7762
+        ],
+        [
+          -2644,
+          941
+        ],
+        [
+          941
+        ],
+        [
+          9293,
+          7762
+        ],
+        [
+          -5109,
+          -3692
+        ],
+        [
+          2644
+        ],
+        [
+          -7762,
+          -941,
+          2595,
+          -9133
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 2,
+          "expanded": 2,
+          "initial_failed": 2,
+          "node_limit": 20000,
+          "radius": 3,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 3
+            },
+            "2": {
+              "blocked": 1
+            }
+          },
+          "radius": 3,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              4961,
+              6057,
+              6841
+            ],
+            "values": [
+              true,
+              false,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          4961,
+          6057,
+          6841
+        ],
+        "values": [
+          true,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          6841
+        ],
+        [
+          -6057
+        ],
+        [
+          6057
+        ],
+        [
+          6057
+        ],
+        [
+          -6841,
+          -4961,
+          6057
+        ],
+        [
+          4961
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 1,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 1,
+          "expanded": 2,
+          "initial_failed": 1,
+          "node_limit": 20000,
+          "radius": 5,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            3840,
+            3990,
+            5407,
+            6642,
+            6814
+          ],
+          "values": [
+            false,
+            true,
+            true,
+            true,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          3840,
+          3990,
+          5407,
+          6642,
+          6814
+        ],
+        "values": [
+          false,
+          true,
+          false,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          6814,
+          -3840
+        ],
+        [
+          5407,
+          -6642
+        ],
+        [
+          5407,
+          -6642,
+          -5407
+        ],
+        [
+          -6814,
+          -3990,
+          -6642
+        ],
+        [
+          5407,
+          -6642
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 1,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 1,
+          "expanded": 2,
+          "initial_failed": 1,
+          "node_limit": 20000,
+          "radius": 5,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            605,
+            3279,
+            6417,
+            6994,
+            7129
+          ],
+          "values": [
+            true,
+            false,
+            false,
+            false,
+            true
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          605,
+          3279,
+          6417,
+          6994,
+          7129
+        ],
+        "values": [
+          true,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          7129,
+          6994,
+          3279,
+          6417,
+          605
+        ],
+        [
+          7129,
+          -605
+        ],
+        [
+          6994,
+          7129,
+          6417,
+          605,
+          3279
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 1,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 1,
+          "expanded": 2,
+          "initial_failed": 1,
+          "node_limit": 20000,
+          "radius": 8,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            2829,
+            3125,
+            3482,
+            4187,
+            4319,
+            5073,
+            6085,
+            9451
+          ],
+          "values": [
+            true,
+            false,
+            false,
+            true,
+            false,
+            false,
+            true,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          2829,
+          3125,
+          3482,
+          4187,
+          4319,
+          5073,
+          6085,
+          9451
+        ],
+        "values": [
+          false,
+          false,
+          false,
+          true,
+          false,
+          false,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          4319,
+          -9451,
+          2829,
+          -4187
+        ],
+        [
+          2829,
+          -4187,
+          -4319,
+          -5073,
+          -9451
+        ],
+        [
+          -9451,
+          6085,
+          4319,
+          4187
+        ],
+        [
+          -4187,
+          2829,
+          4319,
+          -5073
+        ],
+        [
+          -3482,
+          3125
+        ],
+        [
+          -9451,
+          6085,
+          4319,
+          5073,
+          2829
+        ],
+        [
+          4319,
+          -4187,
+          6085,
+          9451,
+          5073
+        ],
+        [
+          -5073,
+          4187,
+          -4319,
+          2829,
+          6085
+        ],
+        [
+          2829,
+          -4187,
+          4319,
+          -6085
+        ],
+        [
+          3482,
+          -3125
+        ],
+        [
+          4187,
+          6085,
+          5073,
+          -2829
+        ],
+        [
+          4187,
+          -2829,
+          5073,
+          9451
+        ],
+        [
+          -9451,
+          -2829,
+          -6085
+        ],
+        [
+          -5073,
+          -6085,
+          -2829,
+          -9451
+        ],
+        [
+          -9451,
+          5073,
+          -4187,
+          -6085,
+          2829
+        ],
+        [
+          -2829,
+          -9451,
+          6085
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 1,
+          "expanded": 5,
+          "initial_failed": 4,
+          "node_limit": 20000,
+          "radius": 4,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 10
+            },
+            "1": {
+              "clause": 9
+            },
+            "15": {
+              "blocked": 0
+            },
+            "3": {
+              "clause": 4
+            },
+            "7": {
+              "clause": 12
+            }
+          },
+          "radius": 4,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              2656,
+              5940,
+              6710,
+              7176
+            ],
+            "values": [
+              false,
+              false,
+              true,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          2656,
+          5940,
+          6710,
+          7176
+        ],
+        "values": [
+          false,
+          false,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          2656,
+          6710,
+          5940
+        ],
+        [
+          -6710,
+          -7176,
+          5940
+        ],
+        [
+          2656
+        ],
+        [
+          -6710
+        ],
+        [
+          -7176,
+          2656,
+          6710,
+          -5940
+        ],
+        [
+          -6710,
+          5940,
+          -2656
+        ],
+        [
+          -7176,
+          2656,
+          5940,
+          -6710
+        ],
+        [
+          7176
+        ],
+        [
+          -6710,
+          -5940,
+          2656
+        ],
+        [
+          5940,
+          -2656
+        ],
+        [
+          -7176
+        ],
+        [
+          7176,
+          -6710,
+          -5940,
+          -2656
+        ],
+        [
+          2656,
+          7176,
+          5940,
+          -6710
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 1,
+          "expanded": 5,
+          "initial_failed": 3,
+          "node_limit": 20000,
+          "radius": 5,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 9
+            },
+            "15": {
+              "blocked": 13
+            },
+            "2": {
+              "clause": 12
+            },
+            "6": {
+              "clause": 8
+            },
+            "7": {
+              "clause": 5
+            }
+          },
+          "radius": 5,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              293,
+              4545,
+              8005,
+              9650,
+              9871
+            ],
+            "values": [
+              false,
+              true,
+              false,
+              true,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          293,
+          4545,
+          8005,
+          9650,
+          9871
+        ],
+        "values": [
+          false,
+          true,
+          false,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -293,
+          8005,
+          4545,
+          -9871,
+          -9650
+        ],
+        [
+          9871,
+          -4545,
+          293,
+          -9650
+        ],
+        [
+          -9650,
+          9871,
+          4545,
+          293,
+          8005
+        ],
+        [
+          -4545,
+          4545
+        ],
+        [
+          8005,
+          -9871,
+          293,
+          -4545,
+          -9650
+        ],
+        [
+          9650
+        ],
+        [
+          -4545
+        ],
+        [
+          9650,
+          -293,
+          9871,
+          8005
+        ],
+        [
+          -9871,
+          -293,
+          -4545,
+          -8005
+        ],
+        [
+          293,
+          9650,
+          -4545
+        ],
+        [
+          -293,
+          9871,
+          4545,
+          -9650,
+          8005
+        ],
+        [
+          8005
+        ],
+        [
+          -8005,
+          293
+        ],
+        [
+          -4545
+        ],
+        [
+          4545,
+          -9871,
+          293
+        ],
+        [
+          -293,
+          -9650
+        ],
+        [
+          -4545
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 0,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 0,
+          "expanded": 1,
+          "initial_failed": 0,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            431,
+            4391,
+            4509,
+            4843,
+            9147,
+            9158
+          ],
+          "values": [
+            false,
+            false,
+            true,
+            false,
+            true,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          431,
+          4391,
+          4509,
+          4843,
+          9147,
+          9158
+        ],
+        "values": [
+          false,
+          false,
+          true,
+          false,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -4843
+        ],
+        [
+          9158,
+          4509,
+          4843
+        ],
+        [
+          9158,
+          -9147,
+          -4843
+        ],
+        [
+          -4509,
+          -4391,
+          -9147
+        ],
+        [
+          -4843,
+          4509
+        ],
+        [
+          -4391,
+          -431,
+          9158,
+          4843
+        ],
+        [
+          9158,
+          431,
+          -4509,
+          -4391,
+          -9147,
+          4843
+        ],
+        [
+          -4509,
+          4843,
+          4391,
+          431,
+          -9147,
+          -9158
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 1,
+          "expanded": 6,
+          "initial_failed": 3,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 10
+            },
+            "2": {
+              "clause": 9
+            },
+            "3": {
+              "blocked": 4
+            },
+            "38": {
+              "blocked": 0
+            },
+            "6": {
+              "clause": 3
+            },
+            "7": {
+              "blocked": 4
+            }
+          },
+          "radius": 6,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              1723,
+              2881,
+              3705,
+              3928,
+              6413,
+              6755
+            ],
+            "values": [
+              false,
+              false,
+              false,
+              true,
+              false,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1723,
+          2881,
+          3705,
+          3928,
+          6413,
+          6755
+        ],
+        "values": [
+          false,
+          false,
+          false,
+          true,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          -6755,
+          1723,
+          -3705
+        ],
+        [
+          -1723
+        ],
+        [
+          1723,
+          6755,
+          3705,
+          -2881
+        ],
+        [
+          1723,
+          3705
+        ],
+        [
+          -1723
+        ],
+        [
+          -6755
+        ],
+        [
+          6755,
+          -1723
+        ],
+        [
+          -6755
+        ],
+        [
+          3928,
+          6413
+        ],
+        [
+          6755,
+          1723,
+          -3705
+        ],
+        [
+          2881
+        ],
+        [
+          2881,
+          -1723
+        ],
+        [
+          3705,
+          6755,
+          2881
+        ],
+        [
+          -1723,
+          -2881
+        ],
+        [
+          -3928,
+          -6413
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 2,
+          "expanded": 3,
+          "initial_failed": 5,
+          "node_limit": 20000,
+          "radius": 5,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 8
+            },
+            "2": {
+              "clause": 5
+            },
+            "6": {
+              "blocked": 13
+            }
+          },
+          "radius": 5,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              1491,
+              4614,
+              6769,
+              8090,
+              9732
+            ],
+            "values": [
+              false,
+              true,
+              true,
+              true,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1491,
+          4614,
+          6769,
+          8090,
+          9732
+        ],
+        "values": [
+          false,
+          true,
+          true,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -4614,
+          9732
+        ],
+        [
+          -9732,
+          -8090
+        ],
+        [
+          6769
+        ],
+        [
+          6769
+        ],
+        [
+          -8090,
+          -4614,
+          -6769,
+          1491,
+          -9732
+        ],
+        [
+          -6769,
+          -4614
+        ],
+        [
+          -4614
+        ],
+        [
+          8090,
+          4614
+        ],
+        [
+          -4614,
+          8090,
+          1491,
+          6769
+        ],
+        [
+          9732,
+          -6769,
+          -8090
+        ],
+        [
+          8090,
+          -4614
+        ],
+        [
+          -4614,
+          8090,
+          -6769
+        ],
+        [
+          4614,
+          9732,
+          -8090
+        ],
+        [
+          -6769
+        ],
+        [
+          -1491,
+          8090,
+          -9732
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 3,
+          "expanded": 2,
+          "initial_failed": 3,
+          "node_limit": 20000,
+          "radius": 5,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 10
+            },
+            "2": {
+              "blocked": 12
+            }
+          },
+          "radius": 5,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              3741,
+              8113,
+              8487,
+              8623,
+              9318
+            ],
+            "values": [
+              true,
+              true,
+              true,
+              true,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          3741,
+          8113,
+          8487,
+          8623,
+          9318
+        ],
+        "values": [
+          true,
+          true,
+          true,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -3741,
+          -8113,
+          3741
+        ],
+        [
+          3741,
+          -8487,
+          -9318,
+          -8113,
+          -8623
+        ],
+        [
+          -3741,
+          -8113,
+          -9318,
+          -8623,
+          -8487
+        ],
+        [
+          -3741,
+          -8113
+        ],
+        [
+          8487,
+          -9318,
+          -8113,
+          3741
+        ],
+        [
+          -3741,
+          -8113
+        ],
+        [
+          -8487
+        ],
+        [
+          8113,
+          -8623,
+          -3741,
+          9318
+        ],
+        [
+          -8113,
+          -3741,
+          8623,
+          9318,
+          -8487
+        ],
+        [
+          -8487,
+          3741,
+          9318,
+          8623
+        ],
+        [
+          9318,
+          -8623,
+          8113,
+          -8487,
+          3741
+        ],
+        [
+          -8487,
+          9318,
+          -3741,
+          8113,
+          -8623
+        ],
+        [
+          -8113
+        ],
+        [
+          8113
+        ],
+        [
+          -9318,
+          8487,
+          -8623,
+          -8113,
+          3741
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 1,
+          "expanded": 2,
+          "initial_failed": 1,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 13
+            },
+            "4": {
+              "blocked": 9
+            }
+          },
+          "radius": 6,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              4258,
+              5367,
+              7866,
+              7897,
+              8395,
+              8851
+            ],
+            "values": [
+              true,
+              true,
+              false,
+              false,
+              true,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          4258,
+          5367,
+          7866,
+          7897,
+          8395,
+          8851
+        ],
+        "values": [
+          true,
+          true,
+          false,
+          false,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -7866
+        ],
+        [
+          5367,
+          8395,
+          -7866,
+          8851
+        ],
+        [
+          -7866
+        ],
+        [
+          4258,
+          -5367
+        ],
+        [
+          -7866,
+          -5367,
+          -4258,
+          -7897,
+          8395
+        ],
+        [
+          7866
+        ],
+        [
+          -8851,
+          7866
+        ],
+        [
+          -7897,
+          -8395
+        ],
+        [
+          -8851
+        ],
+        [
+          7897,
+          -8395,
+          -8851,
+          7866,
+          -4258,
+          -5367
+        ],
+        [
+          -4258,
+          8851,
+          5367,
+          -8395,
+          7866,
+          -7897
+        ],
+        [
+          -8851,
+          -7866,
+          4258,
+          5367
+        ],
+        [
+          -4258,
+          -8851,
+          7897,
+          7866,
+          -5367
+        ],
+        [
+          5367,
+          -8851
+        ],
+        [
+          4258
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 2,
+          "expanded": 2,
+          "initial_failed": 2,
+          "node_limit": 20000,
+          "radius": 5,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 12
+            },
+            "8": {
+              "blocked": 1
+            }
+          },
+          "radius": 5,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              329,
+              390,
+              950,
+              4635,
+              9377
+            ],
+            "values": [
+              false,
+              false,
+              true,
+              false,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          329,
+          390,
+          950,
+          4635,
+          9377
+        ],
+        "values": [
+          false,
+          false,
+          true,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          390,
+          -9377
+        ],
+        [
+          4635
+        ],
+        [
+          329,
+          4635
+        ],
+        [
+          -329
+        ],
+        [
+          4635
+        ],
+        [
+          -329,
+          -4635,
+          950
+        ],
+        [
+          -329
+        ],
+        [
+          950,
+          -329,
+          4635
+        ],
+        [
+          329,
+          4635
+        ],
+        [
+          -329
+        ],
+        [
+          4635,
+          -329,
+          -950
+        ],
+        [
+          -4635
+        ],
+        [
+          950
+        ],
+        [
+          329,
+          4635,
+          950
+        ],
+        [
+          -390,
+          9377
+        ],
+        [
+          950,
+          -329,
+          -4635
+        ],
+        [
+          -4635,
+          329,
+          -950
+        ],
+        [
+          -329,
+          -4635,
+          950
+        ],
+        [
+          950,
+          -329
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 2,
+          "expanded": 2,
+          "initial_failed": 2,
+          "node_limit": 20000,
+          "radius": 3,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 7
+            },
+            "1": {
+              "blocked": 5
+            }
+          },
+          "radius": 3,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              968,
+              8104,
+              8222
+            ],
+            "values": [
+              false,
+              false,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          968,
+          8104,
+          8222
+        ],
+        "values": [
+          false,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          -8104
+        ],
+        [
+          -968,
+          8104
+        ],
+        [
+          -968
+        ],
+        [
+          -8104
+        ],
+        [
+          968
+        ],
+        [
+          8222,
+          -8104,
+          -968
+        ],
+        [
+          8222
+        ],
+        [
+          -8104,
+          8222
+        ],
+        [
+          968
+        ],
+        [
+          968,
+          8104,
+          -8222
+        ],
+        [
+          968,
+          -8222
+        ],
+        [
+          968,
+          -8222
+        ],
+        [
+          8222,
+          -8104
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 0,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 0,
+          "expanded": 1,
+          "initial_failed": 0,
+          "node_limit": 20000,
+          "radius": 5,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            888,
+            2505,
+            4416,
+            8010,
+            8177
+          ],
+          "values": [
+            false,
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          888,
+          2505,
+          4416,
+          8010,
+          8177
+        ],
+        "values": [
+          false,
+          true,
+          true,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          4416,
+          -888,
+          -8177,
+          8010
+        ],
+        [
+          8177,
+          2505,
+          -8010
+        ],
+        [
+          -4416,
+          -8177,
+          8010,
+          888,
+          -2505
+        ],
+        [
+          -4416,
+          -8177,
+          8010,
+          888,
+          -2505
+        ],
+        [
+          -888
+        ],
+        [
+          2505,
+          -8010,
+          888
+        ],
+        [
+          -4416,
+          -8177,
+          8010,
+          888,
+          -2505,
+          4416
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 3,
+          "expanded": 2,
+          "initial_failed": 3,
+          "node_limit": 20000,
+          "radius": 3,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 5
+            },
+            "4": {
+              "blocked": 0
+            }
+          },
+          "radius": 3,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              1982,
+              4751,
+              7519
+            ],
+            "values": [
+              false,
+              false,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1982,
+          4751,
+          7519
+        ],
+        "values": [
+          false,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          1982,
+          7519,
+          4751
+        ],
+        [
+          7519
+        ],
+        [
+          -7519,
+          1982,
+          4751
+        ],
+        [
+          1982,
+          4751
+        ],
+        [
+          -7519
+        ],
+        [
+          -1982,
+          -4751
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 1,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 1,
+          "expanded": 2,
+          "initial_failed": 1,
+          "node_limit": 20000,
+          "radius": 9,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            435,
+            1568,
+            1579,
+            2058,
+            5585,
+            5910,
+            8418,
+            8900,
+            9987
+          ],
+          "values": [
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            true,
+            true,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          435,
+          1568,
+          1579,
+          2058,
+          5585,
+          5910,
+          8418,
+          8900,
+          9987
+        ],
+        "values": [
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -5585,
+          1568
+        ],
+        [
+          5910,
+          -5585,
+          1568,
+          -8418,
+          -9987,
+          -8900,
+          -1579
+        ],
+        [
+          2058,
+          435
+        ],
+        [
+          -2058,
+          -435
+        ],
+        [
+          1568,
+          -5910,
+          -1579,
+          -8418
+        ],
+        [
+          9987,
+          -1579,
+          8900
+        ],
+        [
+          8418,
+          -5585,
+          8900
+        ],
+        [
+          8900
+        ],
+        [
+          -8418,
+          8900
+        ],
+        [
+          -1568,
+          -9987,
+          5910
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 3,
+          "expanded": 2,
+          "initial_failed": 3,
+          "node_limit": 20000,
+          "radius": 5,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 17
+            },
+            "16": {
+              "blocked": 0
+            }
+          },
+          "radius": 5,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              3913,
+              6744,
+              7749,
+              8532,
+              9744
+            ],
+            "values": [
+              true,
+              false,
+              true,
+              true,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          3913,
+          6744,
+          7749,
+          8532,
+          9744
+        ],
+        "values": [
+          true,
+          false,
+          true,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -7749,
+          -3913,
+          -8532,
+          -9744,
+          6744
+        ],
+        [
+          9744
+        ],
+        [
+          7749,
+          -3913
+        ],
+        [
+          -6744,
+          -8532,
+          7749,
+          3913,
+          9744
+        ],
+        [
+          -3913,
+          7749,
+          6744,
+          9744
+        ],
+        [
+          7749,
+          9744
+        ],
+        [
+          7749,
+          3913,
+          9744
+        ],
+        [
+          6744,
+          -9744,
+          -3913,
+          7749,
+          -8532
+        ],
+        [
+          -9744,
+          3913,
+          6744,
+          -8532,
+          7749
+        ],
+        [
+          -9744
+        ],
+        [
+          3913,
+          -8532,
+          6744,
+          -7749
+        ],
+        [
+          -3913,
+          -9744,
+          6744,
+          -8532,
+          -7749
+        ],
+        [
+          -7749,
+          9744
+        ],
+        [
+          9744,
+          -3913,
+          7749,
+          8532
+        ],
+        [
+          7749,
+          6744
+        ],
+        [
+          -9744,
+          -3913
+        ],
+        [
+          -7749,
+          9744,
+          -3913,
+          -8532,
+          -6744
+        ],
+        [
+          -3913,
+          9744
+        ],
+        [
+          -6744
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 1,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 1,
+          "expanded": 2,
+          "initial_failed": 1,
+          "node_limit": 20000,
+          "radius": 7,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            2691,
+            3368,
+            5255,
+            6930,
+            7097,
+            8738,
+            8993
+          ],
+          "values": [
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          2691,
+          3368,
+          5255,
+          6930,
+          7097,
+          8738,
+          8993
+        ],
+        "values": [
+          true,
+          false,
+          false,
+          true,
+          true,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          8738,
+          -8993,
+          -7097,
+          3368,
+          -2691
+        ],
+        [
+          5255,
+          7097,
+          -2691,
+          8738,
+          -3368
+        ],
+        [
+          6930
+        ],
+        [
+          8993,
+          -3368
+        ],
+        [
+          -8738,
+          -6930,
+          -7097,
+          3368,
+          -8993,
+          -5255
+        ],
+        [
+          -8738,
+          -7097,
+          -6930,
+          -8993,
+          3368,
+          5255,
+          2691
+        ],
+        [
+          -8738,
+          -7097,
+          -6930,
+          -8993,
+          3368,
+          5255,
+          2691
+        ],
+        [
+          -8738,
+          -7097,
+          -6930,
+          -8993,
+          3368,
+          5255,
+          2691,
+          8738
+        ],
+        [
+          -7097,
+          -5255,
+          -8738,
+          -3368,
+          -6930
+        ],
+        [
+          5255,
+          -8738,
+          -3368,
+          -2691,
+          7097,
+          -6930,
+          8993
+        ],
+        [
+          -8993,
+          2691
+        ],
+        [
+          8738,
+          3368,
+          -5255,
+          -2691,
+          -6930,
+          -8993,
+          7097
+        ],
+        [
+          -2691,
+          5255,
+          -6930
+        ],
+        [
+          -8993,
+          -7097,
+          -2691,
+          3368,
+          -8738,
+          5255,
+          -6930
+        ],
+        [
+          8993,
+          -8738,
+          -2691,
+          7097,
+          6930
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 0,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 0,
+          "expanded": 1,
+          "initial_failed": 0,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            1056,
+            3712,
+            6013,
+            6455,
+            6913,
+            8831
+          ],
+          "values": [
+            true,
+            true,
+            false,
+            false,
+            true,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1056,
+          3712,
+          6013,
+          6455,
+          6913,
+          8831
+        ],
+        "values": [
+          true,
+          true,
+          false,
+          false,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -1056,
+          -6913,
+          -8831,
+          6013,
+          -3712
+        ],
+        [
+          -6455,
+          8831,
+          -3712
+        ],
+        [
+          6455,
+          6013,
+          1056,
+          -3712,
+          6913
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 3,
+          "expanded": 2,
+          "initial_failed": 3,
+          "node_limit": 20000,
+          "radius": 5,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 2
+            },
+            "8": {
+              "blocked": 6
+            }
+          },
+          "radius": 5,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              1629,
+              1733,
+              2643,
+              5106,
+              9239
+            ],
+            "values": [
+              true,
+              false,
+              true,
+              true,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1629,
+          1733,
+          2643,
+          5106,
+          9239
+        ],
+        "values": [
+          true,
+          false,
+          true,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -9239,
+          2643,
+          5106
+        ],
+        [
+          9239,
+          -2643
+        ],
+        [
+          9239
+        ],
+        [
+          -5106
+        ],
+        [
+          -5106,
+          -2643,
+          -9239
+        ],
+        [
+          5106
+        ],
+        [
+          -1629,
+          -1733
+        ],
+        [
+          1629,
+          1733
+        ],
+        [
+          -2643,
+          -5106,
+          -9239
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 3,
+          "expanded": 2,
+          "initial_failed": 3,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 7
+            },
+            "1": {
+              "blocked": 5
+            }
+          },
+          "radius": 6,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              1345,
+              1901,
+              3618,
+              5200,
+              6303,
+              8424
+            ],
+            "values": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1345,
+          1901,
+          3618,
+          5200,
+          6303,
+          8424
+        ],
+        "values": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          -1345,
+          -6303
+        ],
+        [
+          1345
+        ],
+        [
+          6303,
+          3618,
+          -8424
+        ],
+        [
+          1345,
+          -8424,
+          -3618,
+          6303
+        ],
+        [
+          -1345
+        ],
+        [
+          5200
+        ],
+        [
+          1901,
+          -8424
+        ],
+        [
+          -1345,
+          1901,
+          6303,
+          -3618
+        ],
+        [
+          8424
+        ],
+        [
+          5200,
+          8424,
+          1901,
+          -1345,
+          3618
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 1,
+          "expanded": 6,
+          "initial_failed": 2,
+          "node_limit": 20000,
+          "radius": 4,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 10
+            },
+            "10": {
+              "blocked": 5
+            },
+            "12": {
+              "blocked": 11
+            },
+            "2": {
+              "blocked": 5
+            },
+            "8": {
+              "clause": 0
+            },
+            "9": {
+              "blocked": 8
+            }
+          },
+          "radius": 4,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              277,
+              1252,
+              2203,
+              8964
+            ],
+            "values": [
+              false,
+              false,
+              true,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          277,
+          1252,
+          2203,
+          8964
+        ],
+        "values": [
+          false,
+          false,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          1252,
+          -2203,
+          -8964,
+          277
+        ],
+        [
+          8964,
+          277,
+          -1252
+        ],
+        [
+          1252,
+          277,
+          8964,
+          -2203
+        ],
+        [
+          1252,
+          8964
+        ],
+        [
+          1252,
+          -2203,
+          -8964,
+          277,
+          -1252
+        ],
+        [
+          2203,
+          277
+        ],
+        [
+          -277
+        ],
+        [
+          -8964,
+          277,
+          2203,
+          -1252
+        ],
+        [
+          2203,
+          -1252,
+          -277
+        ],
+        [
+          1252,
+          -2203,
+          -8964,
+          277
+        ],
+        [
+          1252,
+          -8964,
+          2203,
+          277
+        ],
+        [
+          2203
+        ],
+        [
+          -2203,
+          -277,
+          -1252
+        ],
+        [
+          -1252
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 2,
+          "expanded": 2,
+          "initial_failed": 2,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 9
+            },
+            "16": {
+              "blocked": 1
+            }
+          },
+          "radius": 6,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              1359,
+              2545,
+              2609,
+              2832,
+              6414,
+              9973
+            ],
+            "values": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1359,
+          2545,
+          2609,
+          2832,
+          6414,
+          9973
+        ],
+        "values": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          2545,
+          -6414
+        ],
+        [
+          -6414,
+          9973,
+          -2832
+        ],
+        [
+          -9973,
+          1359,
+          -2609,
+          -2832
+        ],
+        [
+          1359,
+          6414,
+          9973,
+          2545,
+          -2832
+        ],
+        [
+          -1359,
+          2545,
+          -6414,
+          2609
+        ],
+        [
+          6414
+        ],
+        [
+          6414
+        ],
+        [
+          6414,
+          2545,
+          1359,
+          2609
+        ],
+        [
+          -6414
+        ],
+        [
+          2832,
+          -2545
+        ],
+        [
+          -2832,
+          1359
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 2,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 2,
+          "expanded": 3,
+          "initial_failed": 2,
+          "node_limit": 20000,
+          "radius": 7,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            1372,
+            3299,
+            3437,
+            5010,
+            5589,
+            7908,
+            9584
+          ],
+          "values": [
+            false,
+            true,
+            false,
+            true,
+            false,
+            false,
+            true
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1372,
+          3299,
+          3437,
+          5010,
+          5589,
+          7908,
+          9584
+        ],
+        "values": [
+          false,
+          false,
+          false,
+          true,
+          false,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          9584,
+          -5010,
+          -3299
+        ],
+        [
+          -3437,
+          1372
+        ],
+        [
+          -9584,
+          5589,
+          -5010,
+          7908,
+          3299
+        ],
+        [
+          -5589,
+          3299
+        ],
+        [
+          -5589,
+          9584
+        ],
+        [
+          -5010,
+          9584,
+          5589
+        ],
+        [
+          9584,
+          3299,
+          5589
+        ],
+        [
+          -7908,
+          -3299
+        ],
+        [
+          3437,
+          -1372
+        ],
+        [
+          -5010,
+          -3299,
+          5589,
+          -7908
+        ],
+        [
+          -7908,
+          -5010,
+          3299,
+          -5589
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 2,
+          "expanded": 2,
+          "initial_failed": 3,
+          "node_limit": 20000,
+          "radius": 7,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 12
+            },
+            "1": {
+              "blocked": 11
+            }
+          },
+          "radius": 7,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              1250,
+              1627,
+              1816,
+              3473,
+              5807,
+              6579,
+              6892
+            ],
+            "values": [
+              false,
+              false,
+              true,
+              true,
+              false,
+              true,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1250,
+          1627,
+          1816,
+          3473,
+          5807,
+          6579,
+          6892
+        ],
+        "values": [
+          false,
+          false,
+          true,
+          true,
+          false,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -1627,
+          6579,
+          -5807,
+          -1816
+        ],
+        [
+          1627,
+          3473,
+          -1816,
+          -5807,
+          6579
+        ],
+        [
+          -5807,
+          -1816,
+          6579
+        ],
+        [
+          -1250
+        ],
+        [
+          6892,
+          1250,
+          -3473,
+          1627,
+          -1816
+        ],
+        [
+          -6579
+        ],
+        [
+          1627,
+          3473,
+          5807,
+          6579,
+          -1816,
+          -1250
+        ],
+        [
+          6579,
+          -3473
+        ],
+        [
+          1627,
+          5807,
+          1250,
+          -6892,
+          -3473,
+          -6579,
+          -1816
+        ],
+        [
+          6892,
+          -1250,
+          3473,
+          5807,
+          6579,
+          -1627
+        ],
+        [
+          5807,
+          1816,
+          -6579,
+          -3473,
+          1250
+        ],
+        [
+          1250
+        ],
+        [
+          6579,
+          -5807,
+          -1250,
+          1627,
+          -3473,
+          -1816
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 1,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 1,
+          "expanded": 2,
+          "initial_failed": 1,
+          "node_limit": 20000,
+          "radius": 7,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            2417,
+            2835,
+            3946,
+            5893,
+            6917,
+            6986,
+            8384
+          ],
+          "values": [
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          2417,
+          2835,
+          3946,
+          5893,
+          6917,
+          6986,
+          8384
+        ],
+        "values": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          -6917,
+          5893,
+          -8384,
+          2417
+        ],
+        [
+          -5893,
+          8384,
+          6917,
+          3946,
+          2835,
+          6986
+        ],
+        [
+          3946,
+          -6986,
+          -5893,
+          2417,
+          -2835
+        ],
+        [
+          6917,
+          8384,
+          5893,
+          -3946
+        ],
+        [
+          2835,
+          -5893
+        ],
+        [
+          6986,
+          6917
+        ],
+        [
+          6917,
+          8384,
+          5893,
+          -3946,
+          -6917
+        ],
+        [
+          6917,
+          8384,
+          5893,
+          -3946
+        ],
+        [
+          -8384,
+          2835,
+          -5893
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 1,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 1,
+          "expanded": 2,
+          "initial_failed": 1,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            691,
+            2935,
+            5948,
+            6058,
+            7566,
+            7899
+          ],
+          "values": [
+            false,
+            true,
+            false,
+            true,
+            true,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          691,
+          2935,
+          5948,
+          6058,
+          7566,
+          7899
+        ],
+        "values": [
+          false,
+          false,
+          false,
+          true,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -2935,
+          691,
+          7566,
+          6058
+        ],
+        [
+          -7899,
+          5948,
+          2935,
+          -6058,
+          -7566
+        ],
+        [
+          -7566,
+          -691,
+          -6058,
+          -7899
+        ],
+        [
+          -7899
+        ],
+        [
+          6058,
+          691,
+          5948
+        ],
+        [
+          -691,
+          2935,
+          5948,
+          -6058,
+          7566
+        ],
+        [
+          2935
+        ],
+        [
+          -7899,
+          2935,
+          -6058
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 2,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 2,
+          "expanded": 3,
+          "initial_failed": 4,
+          "node_limit": 20000,
+          "radius": 7,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            947,
+            1766,
+            2180,
+            4871,
+            4926,
+            6767,
+            6900
+          ],
+          "values": [
+            false,
+            false,
+            false,
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          947,
+          1766,
+          2180,
+          4871,
+          4926,
+          6767,
+          6900
+        ],
+        "values": [
+          false,
+          false,
+          false,
+          false,
+          true,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          4871
+        ],
+        [
+          6900,
+          4926,
+          947,
+          4871,
+          -6767
+        ],
+        [
+          -6767,
+          4871,
+          6900
+        ],
+        [
+          -6900,
+          4871,
+          -947,
+          -6767
+        ],
+        [
+          947,
+          -6767,
+          -4926,
+          4871,
+          -6900
+        ],
+        [
+          947,
+          4871,
+          -6767,
+          -6900
+        ],
+        [
+          -4926,
+          4871,
+          -947
+        ],
+        [
+          -6767
+        ],
+        [
+          4871,
+          947,
+          6767,
+          -4926
+        ],
+        [
+          -1766,
+          2180
+        ],
+        [
+          947,
+          -6767
+        ],
+        [
+          4926
+        ],
+        [
+          1766,
+          -2180
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 1,
+          "expanded": 2,
+          "initial_failed": 2,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 5
+            },
+            "32": {
+              "blocked": 0
+            }
+          },
+          "radius": 6,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              1701,
+              3574,
+              6493,
+              6707,
+              9596,
+              9690
+            ],
+            "values": [
+              false,
+              true,
+              true,
+              true,
+              false,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1701,
+          3574,
+          6493,
+          6707,
+          9596,
+          9690
+        ],
+        "values": [
+          false,
+          true,
+          true,
+          true,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          -3574,
+          9690
+        ],
+        [
+          3574,
+          -9596,
+          -1701,
+          9690
+        ],
+        [
+          -9596,
+          6707,
+          -9690,
+          -6493
+        ],
+        [
+          -9690
+        ],
+        [
+          -6707,
+          -6493,
+          9690,
+          1701,
+          -9596,
+          -3574
+        ],
+        [
+          9690
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 1,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 1,
+          "expanded": 2,
+          "initial_failed": 3,
+          "node_limit": 20000,
+          "radius": 5,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            2642,
+            4867,
+            6452,
+            6981,
+            8522
+          ],
+          "values": [
+            false,
+            true,
+            false,
+            true,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          2642,
+          4867,
+          6452,
+          6981,
+          8522
+        ],
+        "values": [
+          true,
+          true,
+          false,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -2642
+        ],
+        [
+          -2642
+        ],
+        [
+          -6452,
+          8522
+        ],
+        [
+          6981,
+          -2642,
+          8522
+        ],
+        [
+          -6452
+        ],
+        [
+          -2642,
+          8522,
+          -6981
+        ],
+        [
+          -2642,
+          2642
+        ],
+        [
+          -2642,
+          -4867,
+          6452,
+          -6981,
+          -8522
+        ],
+        [
+          4867,
+          -6452,
+          8522
+        ],
+        [
+          -4867,
+          -6452,
+          2642,
+          6981
+        ],
+        [
+          6981,
+          2642
+        ],
+        [
+          -2642,
+          -6981,
+          6452,
+          -4867,
+          8522
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 1,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 1,
+          "expanded": 2,
+          "initial_failed": 2,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            392,
+            1829,
+            2044,
+            3711,
+            5355,
+            8111
+          ],
+          "values": [
+            true,
+            false,
+            true,
+            false,
+            true,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          392,
+          1829,
+          2044,
+          3711,
+          5355,
+          8111
+        ],
+        "values": [
+          true,
+          false,
+          true,
+          true,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          8111,
+          -5355,
+          392,
+          -2044,
+          -1829
+        ],
+        [
+          -392,
+          -2044,
+          -5355,
+          1829,
+          -8111,
+          -3711
+        ],
+        [
+          -8111,
+          5355,
+          2044
+        ],
+        [
+          -1829,
+          -5355,
+          -2044
+        ],
+        [
+          -8111,
+          -392
+        ],
+        [
+          392,
+          5355,
+          -8111,
+          2044,
+          -3711
+        ],
+        [
+          5355,
+          3711,
+          2044,
+          1829,
+          -392,
+          8111
+        ],
+        [
+          2044,
+          8111,
+          -3711
+        ],
+        [
+          8111,
+          5355,
+          -392,
+          3711,
+          -2044
+        ],
+        [
+          -1829,
+          3711,
+          392,
+          8111,
+          -2044
+        ],
+        [
+          2044,
+          -8111,
+          392,
+          3711,
+          1829
+        ],
+        [
+          -5355,
+          -3711,
+          -2044,
+          8111
+        ],
+        [
+          8111,
+          -2044,
+          1829,
+          -3711
+        ],
+        [
+          -392,
+          2044,
+          -1829,
+          -5355,
+          8111
+        ],
+        [
+          5355,
+          3711,
+          -2044
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 1,
+          "expanded": 4,
+          "initial_failed": 2,
+          "node_limit": 20000,
+          "radius": 5,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 6
+            },
+            "12": {
+              "blocked": 12
+            },
+            "4": {
+              "clause": 8
+            },
+            "8": {
+              "blocked": 12
+            }
+          },
+          "radius": 5,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              1003,
+              2953,
+              3994,
+              5030,
+              5318
+            ],
+            "values": [
+              false,
+              false,
+              true,
+              true,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1003,
+          2953,
+          3994,
+          5030,
+          5318
+        ],
+        "values": [
+          false,
+          false,
+          true,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          5030
+        ],
+        [
+          -1003,
+          2953
+        ],
+        [
+          -5030,
+          3994,
+          -5318
+        ],
+        [
+          -5030,
+          3994
+        ],
+        [
+          -3994,
+          -5318,
+          -5030
+        ],
+        [
+          -5318,
+          3994
+        ],
+        [
+          -5318,
+          -5030,
+          -3994
+        ],
+        [
+          -5318,
+          3994
+        ],
+        [
+          -5030,
+          -3994
+        ],
+        [
+          -3994,
+          -5318
+        ],
+        [
+          -3994,
+          -5030,
+          5318
+        ],
+        [
+          5030,
+          -3994
+        ],
+        [
+          -5318
+        ],
+        [
+          1003,
+          -2953
+        ],
+        [
+          -5318,
+          5030,
+          -3994
+        ],
+        [
+          -5030,
+          3994
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 3,
+          "expanded": 2,
+          "initial_failed": 3,
+          "node_limit": 20000,
+          "radius": 3,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 7
+            },
+            "1": {
+              "blocked": 9
+            }
+          },
+          "radius": 3,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              3963,
+              8065,
+              8324
+            ],
+            "values": [
+              true,
+              false,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          3963,
+          8065,
+          8324
+        ],
+        "values": [
+          true,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          -3963,
+          8324,
+          8065
+        ],
+        [
+          -3963
+        ],
+        [
+          8065
+        ],
+        [
+          -8065,
+          -3963
+        ],
+        [
+          -8324,
+          -3963
+        ],
+        [
+          -8065,
+          -8324
+        ],
+        [
+          3963
+        ],
+        [
+          8324,
+          8065,
+          3963
+        ],
+        [
+          -8065
+        ],
+        [
+          3963,
+          -8065,
+          8324
+        ],
+        [
+          3963,
+          8065,
+          8324
+        ],
+        [
+          -8324,
+          -3963,
+          8065
+        ],
+        [
+          -8324,
+          3963
+        ],
+        [
+          -3963,
+          8065,
+          -8324
+        ],
+        [
+          8324,
+          -8065,
+          3963
+        ],
+        [
+          -3963
+        ],
+        [
+          8324,
+          8065,
+          3963
+        ],
+        [
+          -8324,
+          8065,
+          -3963
+        ],
+        [
+          -3963
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 0,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 0,
+          "expanded": 1,
+          "initial_failed": 0,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            514,
+            901,
+            2958,
+            7464,
+            8496,
+            9697
+          ],
+          "values": [
+            false,
+            false,
+            false,
+            true,
+            true,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          514,
+          901,
+          2958,
+          7464,
+          8496,
+          9697
+        ],
+        "values": [
+          false,
+          false,
+          false,
+          true,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -8496,
+          9697,
+          901,
+          -7464,
+          -2958,
+          514
+        ],
+        [
+          2958,
+          7464,
+          -8496,
+          -901,
+          514,
+          -9697
+        ],
+        [
+          -9697,
+          901,
+          -8496,
+          514,
+          -7464,
+          2958
+        ],
+        [
+          2958,
+          -9697,
+          -8496,
+          -901,
+          -7464
+        ],
+        [
+          -9697,
+          901,
+          -8496,
+          514,
+          -7464,
+          2958,
+          9697
+        ],
+        [
+          -9697,
+          901,
+          -8496,
+          514,
+          -7464,
+          2958
+        ],
+        [
+          -901,
+          8496,
+          -7464,
+          9697,
+          -514
+        ],
+        [
+          -514,
+          9697
+        ],
+        [
+          901,
+          7464,
+          8496,
+          -9697
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 1,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 1,
+          "expanded": 2,
+          "initial_failed": 2,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            1995,
+            2108,
+            2514,
+            2595,
+            6228,
+            8197
+          ],
+          "values": [
+            false,
+            true,
+            false,
+            false,
+            true,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1995,
+          2108,
+          2514,
+          2595,
+          6228,
+          8197
+        ],
+        "values": [
+          true,
+          true,
+          false,
+          false,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -6228,
+          2514,
+          -8197,
+          -2595
+        ],
+        [
+          -2514,
+          -8197,
+          -2595
+        ],
+        [
+          2514,
+          -6228,
+          -1995,
+          -2108,
+          2595,
+          -8197
+        ],
+        [
+          -2595,
+          -2514,
+          -8197,
+          -6228,
+          2108
+        ],
+        [
+          -2108,
+          -1995
+        ],
+        [
+          2108,
+          6228
+        ],
+        [
+          6228,
+          -2514
+        ],
+        [
+          -1995
+        ],
+        [
+          2595,
+          6228,
+          2108,
+          1995
+        ],
+        [
+          -2595,
+          -2514,
+          6228,
+          -2108,
+          8197
+        ],
+        [
+          8197,
+          6228
+        ],
+        [
+          -2514,
+          -6228,
+          2108,
+          8197
+        ],
+        [
+          2595,
+          2108
+        ],
+        [
+          8197,
+          -2108,
+          -6228,
+          -2595
+        ],
+        [
+          2108,
+          -8197,
+          -2595,
+          -6228,
+          -2514
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 1,
+          "expanded": 6,
+          "initial_failed": 1,
+          "node_limit": 20000,
+          "radius": 5,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 6
+            },
+            "10": {
+              "clause": 2
+            },
+            "11": {
+              "blocked": 4
+            },
+            "2": {
+              "clause": 11
+            },
+            "8": {
+              "clause": 2
+            },
+            "9": {
+              "blocked": 8
+            }
+          },
+          "radius": 5,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              1926,
+              6760,
+              7088,
+              7385,
+              7413
+            ],
+            "values": [
+              true,
+              true,
+              true,
+              false,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1926,
+          6760,
+          7088,
+          7385,
+          7413
+        ],
+        "values": [
+          true,
+          true,
+          true,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          1926
+        ],
+        [
+          7385,
+          -1926,
+          6760
+        ],
+        [
+          6760,
+          7385
+        ],
+        [
+          -6760,
+          7385
+        ],
+        [
+          7385,
+          1926
+        ],
+        [
+          -7088,
+          -7413
+        ],
+        [
+          7088,
+          7413
+        ],
+        [
+          1926,
+          -6760
+        ],
+        [
+          -7385,
+          -1926
+        ],
+        [
+          -7385,
+          -6760,
+          -1926
+        ],
+        [
+          -7385,
+          6760,
+          1926
+        ],
+        [
+          1926,
+          -6760
+        ],
+        [
+          -6760,
+          1926
+        ],
+        [
+          -7385,
+          6760,
+          -1926
+        ],
+        [
+          6760,
+          1926,
+          7385
+        ],
+        [
+          -7385,
+          6760,
+          -1926
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 2,
+          "expanded": 2,
+          "initial_failed": 2,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 6
+            },
+            "2": {
+              "blocked": 7
+            }
+          },
+          "radius": 6,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              1100,
+              1703,
+              4028,
+              4104,
+              7883,
+              8745
+            ],
+            "values": [
+              false,
+              true,
+              true,
+              true,
+              true,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1100,
+          1703,
+          4028,
+          4104,
+          7883,
+          8745
+        ],
+        "values": [
+          false,
+          true,
+          true,
+          true,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -7883,
+          4104,
+          1703,
+          1100,
+          -4028,
+          -8745
+        ],
+        [
+          -1703,
+          -8745,
+          1100,
+          -4028,
+          -4104,
+          -7883
+        ],
+        [
+          1703,
+          8745,
+          4104,
+          7883,
+          1100,
+          -4028
+        ],
+        [
+          1703
+        ],
+        [
+          7883,
+          -8745,
+          -4028
+        ],
+        [
+          -1703
+        ],
+        [
+          -8745,
+          1100,
+          7883,
+          -4104
+        ],
+        [
+          -7883
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 2,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 2,
+          "expanded": 3,
+          "initial_failed": 2,
+          "node_limit": 20000,
+          "radius": 7,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            287,
+            3935,
+            5563,
+            5620,
+            7834,
+            8518,
+            9399
+          ],
+          "values": [
+            true,
+            true,
+            false,
+            true,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          287,
+          3935,
+          5563,
+          5620,
+          7834,
+          8518,
+          9399
+        ],
+        "values": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          -8518,
+          3935,
+          9399,
+          5620,
+          7834,
+          -287,
+          5563
+        ],
+        [
+          -8518,
+          -287,
+          9399,
+          -7834
+        ],
+        [
+          7834,
+          5620
+        ],
+        [
+          7834,
+          -287,
+          5563,
+          -8518,
+          -3935
+        ],
+        [
+          9399,
+          -7834
+        ],
+        [
+          7834,
+          5563,
+          8518,
+          9399,
+          3935,
+          287,
+          5620
+        ],
+        [
+          7834,
+          5563,
+          8518,
+          9399,
+          3935,
+          287,
+          5620
+        ],
+        [
+          -287,
+          -5620,
+          -5563,
+          7834
+        ],
+        [
+          -5620,
+          -5563,
+          3935
+        ],
+        [
+          7834,
+          5563,
+          8518,
+          9399,
+          3935,
+          287,
+          5620,
+          -7834
+        ],
+        [
+          -8518,
+          5563
+        ],
+        [
+          9399,
+          3935
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 2,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 2,
+          "expanded": 3,
+          "initial_failed": 1,
+          "node_limit": 20000,
+          "radius": 4,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            1016,
+            1675,
+            2933,
+            8155
+          ],
+          "values": [
+            true,
+            false,
+            true,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1016,
+          1675,
+          2933,
+          8155
+        ],
+        "values": [
+          true,
+          true,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          8155,
+          1675,
+          1016,
+          2933
+        ],
+        [
+          -8155,
+          -1016
+        ],
+        [
+          2933,
+          -8155,
+          -1016,
+          1675
+        ],
+        [
+          -1675
+        ],
+        [
+          8155,
+          -2933,
+          1016
+        ],
+        [
+          1675,
+          8155,
+          1016,
+          -2933
+        ],
+        [
+          -8155
+        ],
+        [
+          1675,
+          -8155,
+          2933
+        ],
+        [
+          -2933,
+          1675,
+          1016
+        ],
+        [
+          -8155
+        ],
+        [
+          -8155,
+          1675,
+          2933
+        ],
+        [
+          8155,
+          1675,
+          2933,
+          -1016
+        ],
+        [
+          -8155,
+          -1016,
+          2933,
+          -1675
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 0,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 0,
+          "expanded": 1,
+          "initial_failed": 0,
+          "node_limit": 20000,
+          "radius": 9,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            590,
+            1006,
+            1314,
+            1775,
+            2617,
+            3103,
+            8148,
+            8704,
+            9835
+          ],
+          "values": [
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          590,
+          1006,
+          1314,
+          1775,
+          2617,
+          3103,
+          8148,
+          8704,
+          9835
+        ],
+        "values": [
+          false,
+          false,
+          false,
+          false,
+          true,
+          true,
+          true,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          2617,
+          8704,
+          1314
+        ],
+        [
+          -9835,
+          -8704,
+          -8148,
+          -3103,
+          -1775,
+          -2617
+        ],
+        [
+          -1314,
+          -9835,
+          8704
+        ],
+        [
+          -8704,
+          -9835
+        ],
+        [
+          -9835,
+          -2617,
+          1314,
+          8148
+        ],
+        [
+          -2617,
+          -1314,
+          3103,
+          -1775,
+          8704
+        ],
+        [
+          1314,
+          8704,
+          3103,
+          -8148,
+          1775
+        ],
+        [
+          -1006,
+          590
+        ],
+        [
+          9835,
+          -2617,
+          8148,
+          3103,
+          8704,
+          1775,
+          -1314
+        ],
+        [
+          1314,
+          -8704,
+          1775,
+          -2617,
+          -8148,
+          -9835,
+          -3103
+        ],
+        [
+          9835,
+          8148
+        ],
+        [
+          1006,
+          -590
+        ],
+        [
+          -8704,
+          -1775,
+          -9835,
+          3103,
+          2617,
+          -8148,
+          -1314
+        ],
+        [
+          -8704,
+          9835,
+          3103,
+          1775
+        ],
+        [
+          -9835,
+          1314,
+          3103,
+          2617,
+          8704
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 1,
+          "expanded": 2,
+          "initial_failed": 1,
+          "node_limit": 20000,
+          "radius": 5,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 14
+            },
+            "16": {
+              "blocked": 0
+            }
+          },
+          "radius": 5,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              1020,
+              2218,
+              3067,
+              7262,
+              8886
+            ],
+            "values": [
+              true,
+              true,
+              false,
+              true,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1020,
+          2218,
+          3067,
+          7262,
+          8886
+        ],
+        "values": [
+          true,
+          true,
+          false,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          1020
+        ],
+        [
+          -2218,
+          -7262,
+          3067,
+          -1020,
+          -8886
+        ],
+        [
+          8886,
+          3067,
+          7262
+        ],
+        [
+          -3067,
+          8886,
+          -1020,
+          -2218
+        ],
+        [
+          7262,
+          -2218,
+          -3067,
+          1020
+        ],
+        [
+          2218,
+          8886,
+          -1020,
+          -3067,
+          -7262
+        ],
+        [
+          -3067,
+          2218
+        ],
+        [
+          1020,
+          -3067,
+          8886,
+          -7262,
+          -2218
+        ],
+        [
+          2218,
+          7262,
+          -1020,
+          -3067
+        ],
+        [
+          8886
+        ],
+        [
+          -7262,
+          8886,
+          -3067,
+          1020,
+          -2218
+        ],
+        [
+          8886,
+          -3067,
+          -1020
+        ],
+        [
+          7262
+        ],
+        [
+          1020,
+          -7262,
+          -3067
+        ],
+        [
+          -8886
+        ],
+        [
+          -7262,
+          2218,
+          1020
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 2,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 2,
+          "expanded": 3,
+          "initial_failed": 2,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            603,
+            2926,
+            7063,
+            8535,
+            8717,
+            9390
+          ],
+          "values": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          603,
+          2926,
+          7063,
+          8535,
+          8717,
+          9390
+        ],
+        "values": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          7063,
+          603
+        ],
+        [
+          -8535,
+          -2926,
+          -603,
+          8717
+        ],
+        [
+          8535,
+          2926
+        ],
+        [
+          -8535,
+          -2926,
+          -603,
+          8717
+        ],
+        [
+          8535,
+          7063,
+          603,
+          9390,
+          -2926
+        ],
+        [
+          -8535,
+          -2926,
+          -603,
+          8717,
+          8535
+        ],
+        [
+          -2926,
+          -8535
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 2,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 2,
+          "expanded": 3,
+          "initial_failed": 1,
+          "node_limit": 20000,
+          "radius": 7,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            2904,
+            3946,
+            5454,
+            5965,
+            8894,
+            9088,
+            9370
+          ],
+          "values": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          2904,
+          3946,
+          5454,
+          5965,
+          8894,
+          9088,
+          9370
+        ],
+        "values": [
+          true,
+          true,
+          false,
+          false,
+          true,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          3946,
+          9088,
+          -8894,
+          5454
+        ],
+        [
+          9370,
+          -8894,
+          9088,
+          -5454,
+          5965,
+          -2904,
+          -3946
+        ],
+        [
+          -5965,
+          8894,
+          9088,
+          3946,
+          -9370
+        ],
+        [
+          -9370,
+          -2904,
+          -3946,
+          -8894,
+          9088,
+          5454,
+          5965
+        ],
+        [
+          5965,
+          9088,
+          -5454
+        ],
+        [
+          5454
+        ],
+        [
+          -9370,
+          -5965,
+          9088,
+          -3946,
+          -5454,
+          -2904
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 2,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 2,
+          "expanded": 3,
+          "initial_failed": 3,
+          "node_limit": 20000,
+          "radius": 7,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            1710,
+            1783,
+            3915,
+            4274,
+            4577,
+            7269,
+            8329
+          ],
+          "values": [
+            false,
+            false,
+            false,
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1710,
+          1783,
+          3915,
+          4274,
+          4577,
+          7269,
+          8329
+        ],
+        "values": [
+          false,
+          true,
+          false,
+          false,
+          true,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          -3915,
+          4274,
+          -4577
+        ],
+        [
+          -1783,
+          7269
+        ],
+        [
+          -8329,
+          1710
+        ],
+        [
+          3915,
+          4274
+        ],
+        [
+          -7269,
+          -1783,
+          -4577,
+          4274
+        ],
+        [
+          8329,
+          -1710
+        ],
+        [
+          4274
+        ],
+        [
+          4274,
+          4577
+        ],
+        [
+          -3915,
+          -7269
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 2,
+          "expanded": 2,
+          "initial_failed": 3,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 11
+            },
+            "2": {
+              "blocked": 8
+            }
+          },
+          "radius": 6,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              878,
+              1895,
+              2345,
+              8748,
+              9264,
+              9658
+            ],
+            "values": [
+              false,
+              false,
+              false,
+              true,
+              false,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          878,
+          1895,
+          2345,
+          8748,
+          9264,
+          9658
+        ],
+        "values": [
+          false,
+          false,
+          false,
+          true,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          -2345,
+          -8748
+        ],
+        [
+          9264,
+          878,
+          2345,
+          8748,
+          1895
+        ],
+        [
+          -9264,
+          -9658,
+          -1895,
+          -2345,
+          -8748
+        ],
+        [
+          -9658,
+          2345,
+          1895
+        ],
+        [
+          8748,
+          -2345,
+          -1895,
+          9658,
+          -878
+        ],
+        [
+          1895
+        ],
+        [
+          -2345,
+          9658,
+          -1895,
+          -8748
+        ],
+        [
+          -878,
+          2345
+        ],
+        [
+          9658,
+          -8748,
+          1895,
+          9264,
+          878,
+          2345
+        ],
+        [
+          -9264,
+          -2345,
+          9658
+        ],
+        [
+          -1895
+        ],
+        [
+          2345,
+          9264
+        ],
+        [
+          -1895
+        ],
+        [
+          2345,
+          -8748,
+          9264,
+          878,
+          -9658,
+          1895
+        ],
+        [
+          1895
+        ],
+        [
+          -2345,
+          -8748
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 3,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 3,
+          "expanded": 7,
+          "initial_failed": 4,
+          "node_limit": 20000,
+          "radius": 7,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            145,
+            2860,
+            3305,
+            3539,
+            4052,
+            5252,
+            8067
+          ],
+          "values": [
+            true,
+            false,
+            true,
+            false,
+            true,
+            false,
+            true
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          145,
+          2860,
+          3305,
+          3539,
+          4052,
+          5252,
+          8067
+        ],
+        "values": [
+          true,
+          false,
+          false,
+          true,
+          true,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          -4052,
+          5252,
+          -145,
+          -3539,
+          2860
+        ],
+        [
+          -2860,
+          -145,
+          3539,
+          -5252,
+          -3305,
+          4052
+        ],
+        [
+          -5252,
+          3539,
+          -3305,
+          -2860,
+          -145
+        ],
+        [
+          2860,
+          3539,
+          8067,
+          -4052
+        ],
+        [
+          3305,
+          8067,
+          2860,
+          -4052,
+          -5252,
+          -3539,
+          -145
+        ],
+        [
+          -3539,
+          3305
+        ],
+        [
+          -5252,
+          3539,
+          -3305,
+          -2860,
+          -145,
+          5252
+        ],
+        [
+          -4052,
+          -2860
+        ],
+        [
+          2860,
+          5252,
+          -4052,
+          3305
+        ],
+        [
+          -145,
+          3305,
+          -4052,
+          2860,
+          5252,
+          3539
+        ],
+        [
+          4052,
+          3539
+        ],
+        [
+          -3539
+        ],
+        [
+          -5252,
+          3539,
+          -3305,
+          -2860,
+          -145
+        ],
+        [
+          -5252,
+          4052,
+          3305,
+          -2860,
+          -3539
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 1,
+          "expanded": 5,
+          "initial_failed": 3,
+          "node_limit": 20000,
+          "radius": 7,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 12
+            },
+            "12": {
+              "clause": 4
+            },
+            "4": {
+              "clause": 11
+            },
+            "44": {
+              "blocked": 13
+            },
+            "76": {
+              "blocked": 0
+            }
+          },
+          "radius": 7,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              126,
+              2610,
+              6593,
+              7230,
+              8151,
+              8886,
+              9626
+            ],
+            "values": [
+              false,
+              true,
+              true,
+              true,
+              true,
+              true,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          126,
+          2610,
+          6593,
+          7230,
+          8151,
+          8886,
+          9626
+        ],
+        "values": [
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          -8151,
+          7230,
+          8886,
+          -2610
+        ],
+        [
+          2610,
+          -8151
+        ],
+        [
+          6593,
+          9626,
+          7230,
+          -8886
+        ],
+        [
+          -9626
+        ],
+        [
+          -2610,
+          8151,
+          9626,
+          -6593,
+          -8886,
+          -7230
+        ],
+        [
+          -6593
+        ],
+        [
+          -7230,
+          9626,
+          -8151,
+          -6593
+        ],
+        [
+          -126,
+          -6593,
+          -8151,
+          9626,
+          8886,
+          2610
+        ],
+        [
+          6593,
+          -7230,
+          -8151,
+          -126,
+          2610
+        ],
+        [
+          7230,
+          -6593,
+          -9626,
+          126
+        ],
+        [
+          -7230
+        ],
+        [
+          8886
+        ],
+        [
+          8151,
+          -8886
+        ],
+        [
+          -2610,
+          126,
+          -7230,
+          -9626,
+          -8151,
+          -6593
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 1,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 1,
+          "expanded": 2,
+          "initial_failed": 1,
+          "node_limit": 20000,
+          "radius": 7,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            2488,
+            4194,
+            6297,
+            6351,
+            7277,
+            9183,
+            9197
+          ],
+          "values": [
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          2488,
+          4194,
+          6297,
+          6351,
+          7277,
+          9183,
+          9197
+        ],
+        "values": [
+          false,
+          true,
+          false,
+          false,
+          true,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          6297,
+          -9197,
+          7277
+        ],
+        [
+          -9183,
+          -4194,
+          -7277
+        ],
+        [
+          4194,
+          -6297,
+          7277,
+          9197,
+          -9183
+        ],
+        [
+          9183,
+          -6297,
+          -4194,
+          9197
+        ],
+        [
+          9197,
+          6297,
+          -9183,
+          -4194,
+          -7277
+        ],
+        [
+          -9183,
+          -7277,
+          -4194,
+          6297,
+          9197
+        ],
+        [
+          4194,
+          9183
+        ],
+        [
+          6297,
+          -7277,
+          -9183,
+          -4194
+        ],
+        [
+          -6297,
+          9197,
+          -4194
+        ],
+        [
+          -7277,
+          9197,
+          6297,
+          4194
+        ],
+        [
+          4194
+        ],
+        [
+          -9183,
+          -7277
+        ],
+        [
+          -9197,
+          -7277,
+          9183,
+          6297
+        ],
+        [
+          -7277,
+          9197,
+          9183,
+          6297,
+          -4194
+        ],
+        [
+          2488,
+          -6351
+        ],
+        [
+          9197,
+          -6297,
+          -9183,
+          4194,
+          7277
+        ],
+        [
+          -9197
+        ],
+        [
+          -2488,
+          6351
+        ],
+        [
+          -6297
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 4,
+          "expanded": 2,
+          "initial_failed": 4,
+          "node_limit": 20000,
+          "radius": 6,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 7
+            },
+            "4": {
+              "blocked": 2
+            }
+          },
+          "radius": 6,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              1172,
+              1224,
+              1659,
+              2443,
+              5258,
+              8106
+            ],
+            "values": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1172,
+          1224,
+          1659,
+          2443,
+          5258,
+          8106
+        ],
+        "values": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "source": [
+        [
+          1659
+        ],
+        [
+          -1659
+        ],
+        [
+          5258,
+          8106,
+          2443,
+          1172
+        ],
+        [
+          1172,
+          1224
+        ],
+        [
+          1659,
+          2443,
+          8106,
+          5258,
+          1224,
+          -1172
+        ],
+        [
+          5258,
+          1172,
+          8106
+        ],
+        [
+          1172,
+          -8106,
+          -5258,
+          1659
+        ],
+        [
+          1659,
+          -5258
+        ]
+      ]
+    },
+    {
+      "minimum_distance": 0,
+      "result": {
+        "diagnostic": {
+          "best_failed": 0,
+          "distance": 0,
+          "expanded": 1,
+          "initial_failed": 0,
+          "node_limit": 20000,
+          "radius": 3,
+          "reason": "sat"
+        },
+        "exclusion": null,
+        "witness": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            4338,
+            5388,
+            5750
+          ],
+          "values": [
+            true,
+            true,
+            false
+          ]
+        }
+      },
+      "satisfiable": true,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          4338,
+          5388,
+          5750
+        ],
+        "values": [
+          true,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          5388,
+          -4338
+        ],
+        [
+          5388,
+          -5388
+        ],
+        [
+          5388
+        ],
+        [
+          5388
+        ],
+        [
+          -4338,
+          -5750,
+          -5388
+        ]
+      ]
+    },
+    {
+      "minimum_distance": null,
+      "result": {
+        "diagnostic": {
+          "best_failed": 1,
+          "expanded": 4,
+          "initial_failed": 2,
+          "node_limit": 20000,
+          "radius": 4,
+          "reason": "radius-exhausted"
+        },
+        "exclusion": {
+          "format": "cnf-hamming-ball-exclusion-v1",
+          "nodes": {
+            "0": {
+              "clause": 10
+            },
+            "1": {
+              "clause": 7
+            },
+            "5": {
+              "clause": 12
+            },
+            "7": {
+              "blocked": 8
+            }
+          },
+          "radius": 4,
+          "seed": {
+            "format": "cnf-choice-witness-v1",
+            "names": [
+              323,
+              2088,
+              6915,
+              7174
+            ],
+            "values": [
+              true,
+              false,
+              true,
+              false
+            ]
+          }
+        },
+        "witness": null
+      },
+      "satisfiable": false,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          323,
+          2088,
+          6915,
+          7174
+        ],
+        "values": [
+          true,
+          false,
+          true,
+          false
+        ]
+      },
+      "source": [
+        [
+          323,
+          6915,
+          7174
+        ],
+        [
+          -6915
+        ],
+        [
+          323,
+          -2088
+        ],
+        [
+          323,
+          2088,
+          6915
+        ],
+        [
+          -323,
+          6915
+        ],
+        [
+          7174,
+          -2088,
+          6915
+        ],
+        [
+          -323
+        ],
+        [
+          -7174
+        ],
+        [
+          2088,
+          6915,
+          -7174
+        ],
+        [
+          6915,
+          -7174
+        ],
+        [
+          -2088,
+          -323,
+          -7174,
+          6915
+        ],
+        [
+          -7174,
+          -6915,
+          2088,
+          -323
+        ],
+        [
+          -7174,
+          -2088
+        ],
+        [
+          323,
+          -6915,
+          -7174
+        ],
+        [
+          6915,
+          -7174
+        ]
+      ]
+    }
+  ],
+  "invalidated_witnesses": 30,
+  "passed": true,
+  "scope": "Explicit truth tables determine minimum distance independently. Ball exhaustion excludes only that radius; budget exhaustion remains unknown. Old domain misses and fresh mixtures are finite gate audits, not representative transfer.",
+  "seconds": 2.3336482089944184
+}

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/maier/Documents/code/OracleMachines/experiments/results/cnf-hamming-repair/finalize_evidence.py", line 60, in <module>
+    else:main(Path(sys.argv[1]),int(sys.argv[2]),list(map(int,sys.argv[3:])))
+         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/results/cnf-hamming-repair/finalize_evidence.py", line 36, in main
+    assert a['coverage']['repair']['derived']['certified']==12
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+KeyError: 'derived'

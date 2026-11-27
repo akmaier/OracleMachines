@@ -17215,6 +17215,167 @@ ternary interactions, context reuse and unrestricted expansion bounds remain ope
 Completing the derived controls establishes none of the missing general SAT
 claims.
 
+\subsection{Exact bounded repair of rejected proposals}
+\label{sec:hamming-repair}
+
+The last unresolved source on the exposed external panel,
+\texttt{uf50-01000.cnf}, now has a complete checked SAT model.  Coverage rises
+from 24/25 to 25/25 originals, with 12/12 derived controls unchanged.  This is
+finite panel completion, not representative transfer, a new tractable class,
+or an efficient solution of arbitrary CNFs.  The synthetic 182/182 union
+remains separate.  All earlier certificates and rejected proposals survive.
+
+A fixed optional gate first runs the unchanged signed-choice/capacity/
+conditioning portfolio.  Only its unresolved inputs receive a new repair
+attempt.  A deterministic proposer selects variable-disjoint clauses in
+order of decreasing width and literal tuple, sets each selected clause's first
+literal true and its other literals false, and defaults unused variables false.
+This seed is only a proposal.  On the retained random source it reconstructs
+exactly the earlier assignment with 26 false clauses.  Discovery receives
+clauses only, never filenames or publisher labels.
+
+For a complete seed $s$ on the actual source support $V$, every assignment has
+unique form $s\oplus M$ for a set $M\subseteq V$ of flipped variables.  In flip
+coordinates, each original literal changes sign exactly when its variable is
+true in $s$.  This is a bijective substitution with linear literal-occurrence
+volume.  Its polynomial conversion cost preserves, rather than discharges,
+the SAT obligation on the transformed instance.
+
+\begin{proposition}[Exact extension coverage in a repair ball]
+Fix a CNF $F$, a complete seed $s$, a radius $0\le r\le |V|$, and a current
+flip set $M$ with $|M|\le r$.  If $C$ is false at $s\oplus M$, every satisfying
+extension $s\oplus T$ with $M\subseteq T$ and $|T|\le r$ belongs to at least one
+child $M\cup\{v\}$, where $v\in\operatorname{vars}(C)\setminus M$.
+An empty child set excludes all such extensions.  A collection of false clauses
+with pairwise disjoint, nonempty available-variable sets also excludes them
+when the collection has more than $r-|M|$ members.  Consequently a complete
+acyclic certificate rooted at $M=\varnothing$, using these leaves and all children
+of each split, excludes the radius-$r$ ball.
+\end{proposition}
+\begin{proof}
+Every literal of $C$ is false at the current assignment.  Variables already in
+$M$ retain their values in any extension.  To make $C$ true, at least one
+variable outside $M$ occurring in $C$ must therefore join $T$.  This establishes
+the covering union of children; it need not be disjoint.  If there is no such
+variable, the clause remains false.  Each false clause in a disjoint packing
+requires a distinct additional variable, so a packing larger than the remaining
+radius is impossible to satisfy.  Children strictly increase $|M|$, and induction
+from valid leaves through complete covering unions proves the root exclusion.
+Identical masks denote identical extension problems and may share one node.
+\end{proof}
+
+The implementation builds fresh occurrence lists and clause-satisfaction
+counts from validated canonical source clauses.  A flip and its undo touch
+only occurrences of that variable; unchanged counts and the source index are
+shared across states.  Search selects a false clause with fewest available
+variables, uses a greedy disjoint packing as a lower bound, and orders children
+by immediate satisfaction gain and variable identifier.  An explicit stack
+avoids a recursion-depth restriction.  Complete flip masks memoize convergent
+paths; no approximate signature identifies distinct states.
+
+The gate admits at most 20,000 distinct states and sets the radius to actual
+source-support size.  A budget stop is unknown.  Complete exhaustion at a
+smaller radius excludes only that ball, while full-support exhaustion would
+exclude the whole assignment space.  The portfolio gate publishes only SAT
+witnesses: an independent checker validates the complete Boolean assignment
+against every original clause.  A separate checker for recorded ball exclusions
+recomputes false-clause premises from source and mask, checks packings and every
+required child, and rejects missing or unreachable records.  It uses neither
+the repair search nor its incremental occurrence state.  Production defaults
+are unchanged.
+
+This extends the repository's earlier pure-variable repair and
+single-transition-clause model-rotation experiments to arbitrary rejected seeds
+and multi-clause interactions.  Flips may break previously satisfied clauses;
+those constraints remain explicit through current satisfaction counts and full
+source verification.  This is bounded exact search, not a new unrestricted
+tractability theorem.  If maximum clause width is $w$, $B$ admitted states
+create at most $Bw$ branch edges, including edges to memoized states.  Source
+normalization, sorting, false-clause scans, packing, gain ranking, incident
+updates and undos, arbitrary-width mask operations, checking and persistence
+remain additional work.  Masks may each need $|V|$ bits; exclusion records may
+also list up to the number of source clauses in a packing.  Without the cap,
+there can be $\sum_{j=0}^{r}\binom{|V|}{j}$ distinct masks, exponential at
+$r=|V|$.
+
+The fixed gate finds a model after 12,669 distinct states, at distance 27 from
+the retained seed.  A supplementary 100,000-state diagnosis establishes an exact
+seed-specific minimum: a radius-25 exclusion DAG has 35,065 states, and another
+search finds a model at distance 26 in 6,748 states.  Together these certificates
+prove minimum repair distance 26.  The radius-25 run reaches an assignment with
+only one false clause, demonstrating why a low violated-clause count alone does
+not justify a nearby satisfying completion.  The exclusion occupies 2,408,673
+JSON bytes or 272,571 gzip bytes.  Its construction takes 0.57186\,s and two
+source-bound reload/checks take 0.10839 and 0.10938\,s.  These are separately
+charged diagnostic costs, outside the paired portfolio timing; the gate does
+not search for minimum distance or persist this DAG in each trial.
+
+Four fresh-process pairs alternate baseline/repair order.  Initial raw parsing,
+preparation, discovery/internal and explicit checking, JSON writes, compression,
+warm replay and two cold reload/checks are charged.  Each replay reparses source
+and reloads its certificate; operator banks start empty per phase, while OS
+caches are not flushed.  Startup, final metadata and independent audits are
+additional.  Baseline still leaves one source open, so this is not comparison
+with a complete fresh-CDCL solve of every input.
+
+Mean complete time is 23.43449 versus 23.30960\,s, a small 0.53\% reduction.
+The paired changes are $+2.50\%$, $-0.75\%$, $-1.94\%$ and $-1.78\%$; mixed
+signs do not establish a reliable speedup.  Acquisition/internal checking rises
+from 11.25582 to 11.54279\,s, explicit checking falls from 2.25444 to 2.19557\,s,
+warm replay from 3.20266 to 3.07918\,s, and two cold passes from 6.38662 to
+6.16799\,s.  JSON proof bytes fall from 28,912,506 to 27,489,632, gzip bytes from
+419,973 to 402,186, and maximum observed RSS from 91,521,024 to 89,669,632 bytes.
+The new SAT wrapper occupies 1,237 bytes.  Both arms use the same additional
+wrapper layer, whose indentation changes absolute JSON sizes relative to the
+previous checkpoint.  More costly discovery is partly offset by cheaper
+checking and replay; the retained result is expanded coverage at roughly
+unchanged measured complete cost.
+
+The new search builds 654 indexed occurrences, records 404 memo hits and
+13,088 branch edges, and performs 357,291 incident updates.  It separately
+charges 499,485 false-clause literal positions, 179,075 gain occurrences and
+302,934 packing-variable positions.  These categories are not a complete
+instruction count.  The initial 26 false clauses involve 39 variables.  The
+radius-25 diagnostic contains 23,495 splits, 4,944 blocked leaves and 6,626
+packing leaves.  The source index is rebuilt on each search, and no satisfied
+clause or exclusion record is trusted after an edit without current-source
+checking.
+
+Independent explicit truth tables check 25,629 ball queries across 5,108 inputs:
+all 512 normalized two-variable CNFs with every seed, 3,304 three-variable CNFs
+with at most three distinct clauses, 1,000 newly seeded random small CNFs, all
+228 retained satisfiable domain misses, and 64 fresh signed, edited or mixed
+sources.  All 12,500 SAT balls and 13,129 exclusion balls agree with their
+truth-table minimum distances.  Another one-state allowance records 2,860
+unknown attempts.  All thirty fresh SAT witnesses survive a satisfied-clause
+addition and fail a contradicted addition after complete current-source checks.
+Exclusion checks disable search.  Twenty focused tests cover malformed seeds,
+inputs and masks, signed sparse names, tautologies and duplicates, exact small
+balls, shared states, missing branches, overlapping packings, changed sources,
+interruption and cold replay.  A corrected memoization fixture and its original
+failure log are retained.  All 2,505 full and twenty focused tests pass.
+All 83 previous proof blocks remain unchanged.
+
+A separate protocol freezes 32 new constructed planted-SAT sources before
+running the unchanged repair cap: eight each at 50, 60, 70 and 80 variables,
+clause density 4.36, sparse names and shuffled clauses.  Audit models validate
+truth but never seed discovery.  The gate finds 22 witnesses and reaches its
+20,000-state budget on ten sources; five of those reach one false clause.
+Inputs, counts, audit witnesses and failures remain retained.  This is a
+repair-only probe, not a fresh external benchmark or evidence that the full
+portfolio leaves those ten inputs unresolved.  Its execution can overlap
+independent checks and is excluded from performance comparisons.  Per-trial
+proof-byte reductions likewise do not imply reduced total append-only research
+storage, which also retains old evidence and supplementary exclusion proofs.
+
+The next coverage test should freeze unseen external encodings at a fixed
+policy.  Closing the old domain misses by explicit search does not recognize
+new tractable structures.  Seed transformations, nonclique compatibility,
+small interfaces and reusable conditional descriptions may reduce interaction,
+but efficient recognition, compact shared refutations, edit invalidation and
+unrestricted expansion bounds remain open.  No arbitrary-SAT efficiency claim
+follows from completing this exposed panel.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

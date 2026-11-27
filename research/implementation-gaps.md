@@ -4,7 +4,56 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-## Latest evidence: checked choices complete the derived controls
+## Latest evidence: exact repair completes the exposed external panel
+
+[Exact bounded repair](hamming-repair.md) closes `uf50-01000.cnf`, the last
+unresolved input on the **already exposed** external panel: **24/25 → 25/25
+originals**, with **12/12 derived controls** unchanged. The earlier synthetic
+182/182 union remains separate. This is finite panel completion, not a new
+tractable class or a representative external coverage estimate.
+
+A clause-derived seed and a freshly built occurrence index support exact search
+over flip sets. A false clause requires another flip; disjoint false-clause
+supports give checked lower bounds. Memoized masks share convergent states.
+The fixed 20,000-state gate finds a fully checked model in **12,669 states**.
+Budget exhaustion remains unknown, and production defaults are unchanged.
+
+A separate checked exclusion DAG rules out **all assignments within 25 flips**
+of the retained seed; a distance-26 model proves the **minimum repair distance
+is 26**. This explains why local repairs were difficult despite only 26 initially
+false clauses. The larger diagnostic budget and its storage/checking costs are
+recorded separately. Ball exclusion is not global UNSAT unless its radius spans
+the full source support.
+
+Mean measured complete cost is **23.43449 → 23.30960 s (−0.53%)**, with mixed
+paired signs (+2.50%, −0.75%, −1.94%, −1.78%): no reliable speedup is claimed.
+Discovery gets more expensive; replacing the incomplete proof by a 1,237-byte
+model makes checking and replay cheaper. Gzip proofs fall 419,973 → 402,186 bytes.
+
+Truth tables validate **25,629 ball queries over 5,108 inputs**, including all
+228 retained SAT domain misses and fresh signed/edited mixtures. Explicit search
+solving those small misses does not improve their structural classification.
+All **2,505 full and 20 focused tests pass**. The evidence preserves 243 prior
+manifests, 81,700 artifact entries, 1,326
+scientific sources and all 83 earlier proof blocks; one exact-coverage proof is
+added. Resume `experiments/results/cnf-hamming-repair/checkpoint.json`, key
+`hamming_repair`.
+
+A separately frozen repair-only probe on 32 new constructed planted-SAT sources
+finds **22 models and 10 budget-exhausted cases** at the unchanged cap. These ten
+sources are retained for the next structural investigation; they are not claimed
+to be unresolved by the full portfolio. Five capped searches reach one false
+clause, which supplies no certificate. This is not fresh external evidence.
+
+**Largest remaining gaps:** analyze those ten fixed-policy repair failures;
+freeze unseen external encodings at the fixed policy;
+reduce coupled interactions through better seeds, small interfaces and richer
+nonclique descriptions; and obtain economical, reusable negative evidence.
+General recognition, edit invalidation, compact acquisition and unrestricted
+SAT expansion bounds remain open. Removing this panel's final unresolved input
+does not remove those obligations.
+
+## Previous evidence: checked choices complete the derived controls
 
 [Checked signed-choice witnesses](signed-choice-witnesses.md) close the edited
 `hole10` with a complete SAT assignment. On the **already exposed** external

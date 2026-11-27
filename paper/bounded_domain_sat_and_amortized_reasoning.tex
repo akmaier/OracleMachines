@@ -16829,6 +16829,134 @@ opportunities requiring new matched measurements.  Broader nonconstant transfer,
 recognition across distinct structures and unrestricted expansion bounds remain
 open.  Completing a fixed synthetic panel resolves none of those general claims.
 
+\subsection{A frozen external SATLIB audit}
+\label{sec:external-cutsets}
+
+The preceding 182-query synthetic panel is saturated, so the next experiment
+freezes external inputs before evaluating the unchanged method.  On 25 original
+SATLIB inputs, the fixed frontier continuation raises certified coverage from
+17 to 19.  Twelve related renaming/edit controls remain at ten certified inputs.
+Thus the aggregate changes from 27/37 to 29/37, but those 37 inputs are not
+independent external samples.  No baseline result is lost, and the earlier
+182/182 certificate union remains unchanged.  The gain is accompanied by a
+123.95\% complete-cost increase; it is not a runtime improvement.
+
+The public source is the University of British Columbia's SATLIB benchmark
+collection.\footnote{\url{https://www.cs.ubc.ca/~hoos/SATLIB/benchm.html}}
+Selection precedes download and evaluation: four lexicographically first CNF
+basenames from each of \texttt{uf20-91}, \texttt{uf50-218}, \texttt{uuf50-218}
+and \texttt{flat30-60}; four first \texttt{par8*.cnf} basenames from PARITY; and
+all five PHOLE inputs.  The parity selection includes compact and larger
+encodings.  This is a size/family-limited convenience sample, not a random,
+representative or contemporary competition-scale evaluation.  The originals
+range from 20 to 350 declared variables and 91 to 1,157 clauses.  Archive URLs,
+hashes, members and selected raw bytes are retained.
+
+For the first selected file of each group, a predetermined seed creates a signed
+permutation; a second control deletes its first clause and flips a literal in its
+last nonempty clause.  These controls are explicitly related to six originals,
+and edits inherit no truth label.  They do not test renaming stability of the
+two newly closed colouring inputs.  No new input is an exact normalized duplicate
+of another new input or of the preceding 182-query panel.  This overlap check does
+not establish semantic or all-history novelty.  Algorithms receive only clauses;
+filenames, families and publisher answers remain audit metadata.  Certified
+answers agree with applicable publisher labels, which supply no proof authority.
+
+A new adapter admits DIMACS sources strictly: it checks the header, variable
+range, clause count and complete zero termination, preserving raw clauses and
+rejecting trailing data.  It supports SATLIB's legacy percent terminator and
+optional final zero.  A separate cursor parser verifies all 37 retained raw files;
+148 malformed variants are rejected.  Exact literal bijections and clause
+multisets verify all six signed-renaming controls.  Comments and benchmark labels
+do not reach discovery.
+
+Both modes run the unchanged two-round selective-width pipeline from the original
+CNF.  The expanded mode then invokes the existing exact-cover/cut-four continuation
+on unresolved depth-zero leaves, in stored order.  The old limits, recognizers,
+ranking and scientific sources are unchanged.  Initial certificates are exactly
+equal between modes on every input.  A still-unmaterialized wide frontier is
+rejected before table construction.  Admitted frontiers share their old prefix
+and exact factor descriptions across the Boolean partition, preserving the earlier
+projection-budget accounting.  New root authority requires a model transported
+through all earlier reductions and checked against the original CNF; subsequent
+leaf attempts stop only after that witness.  No incomplete branch becomes a
+refutation.  The adapter does not promote an individual frontier UNSAT result to
+root UNSAT: every parent obligation would need to be discharged.
+
+Catalog groups are provenance strata, not disjoint semantic SAT classes.
+On original inputs, uniform 20-variable 3-SAT remains 4/4 certified, satisfiable
+50-variable 3-SAT remains 3/4, and the unsatisfiable 50-variable group remains 4/4.
+Graph colouring improves 2/4 to 4/4; parity remains 4/4; pigeonhole remains 0/5.
+The gains are \texttt{flat30-10.cnf} and \texttt{flat30-100.cnf}.  Expanded proofs
+establish fifteen original inputs SAT and four UNSAT.  The six unresolved originals
+are \texttt{uf50-01000.cnf} and \texttt{hole6.cnf} through \texttt{hole10.cnf}.
+A renamed and an edited \texttt{hole10} also remain unresolved.  Every incomplete
+source-bound certificate is retained; publisher labels do not close these cases.
+
+There are 35 frontier attempts: two SAT, one UNSAT, 29 unresolved and three
+unmaterialized-width rejections.  Materialized attempts contain 7,930 cover
+occurrences, 185 checked width-four obstructions and fifteen budget-unresolved
+factor classifications.  The 128 retained cofactor programs contain thirteen SAT,
+47 UNSAT and 68 unresolved branches; sixty stop at bag width and eight at reserved
+projection work.  These are occurrence counts across leaves, not unique reusable
+structures.  The new frontier refutation still leaves other alternatives of its
+root unresolved, so adding UNSAT transport alone would not close that root.
+
+A post-hoc census sharpens the admission gap: 184 of 185 obstructions and all
+fifteen budget-open factors have a single excluded assignment.  They are wide
+single-clause relations.  Generic bounded-consequence search spends work on a
+simple local representation restriction.  These same-variable width-four
+obstructions do not exclude auxiliary encodings, heterogeneous factor languages,
+conditioning or a compact global capacity argument.  Candidate-budget exhaustion
+remains distinct from a proved width obstruction.
+
+Four paired process orders charge all new-input preparation and initial discovery,
+expansion/internal checks, explicit checking, evidence writes, compression, warm
+replay and two cold passes.  Replays reparse the raw source and reload the JSON.
+Each phase starts with an empty bounded verified-operator bank; operating-system
+file caches are not flushed.  Download/selection, process startup, final metadata
+and independent audits are separate.  Unlike the preceding frontier-only stage,
+there is no excluded historical root acquisition for these new inputs.  There is
+also no fallback solver: unresolved means unanswered by this bounded structural
+workflow, not a completed solving run or a comparison against fresh solving.
+
+Mean complete seconds are 15.70674 for baseline and 35.17482 for expanded.
+Acquisition/internal checking costs 8.63766 versus 15.75755\,s, explicit checking
+1.24696 versus 3.97464\,s, warm replay 1.78996 versus 5.01476\,s, and the two cold
+passes 3.60378 versus 9.95976\,s.  Paired regressions are 130.41\%, 119.87\%,
+124.52\% and 121.34\%.  Uncompressed evidence grows from 24,587,244 to 30,653,233
+bytes, compressed evidence from 431,796 to 562,509 bytes, and peak process RSS
+from 112,361,472 to 132,907,008 bytes.  These RSS values are observations, not
+worst-case bounds.  No production default changes or new native fallback archives
+are introduced.
+
+Acquisition and cold replay remain the largest phases.  Pigeonhole originals
+and their two controls consume 4.64803\,s of expanded acquisition versus
+1.19522\,s baseline, adding no root verdict.  The four graph-colouring originals
+consume 6.39656 versus 2.98318\,s acquisition for the two gains.  These totals
+include initial processing and checking, and must not be interpreted as isolated
+cover-recognition time.  All per-input regressions and failures remain retained.
+
+Sixteen focused tests exercise reader round trips and malformed input, legacy
+termination, SAT/UNSAT composition, fixed-policy and source binding, missing
+frontier attempts, wide admission and discovery-disabled cold replay.  The
+validator checks all eight saved runs, regenerates deterministic certificates and
+counts, and independently repeats every warm/cold schedule.  All older evidence
+and 82 proof blocks remain unchanged.
+
+The largest new coverage target is global capacity or injectivity structure: five
+of the six unresolved originals are pigeonhole inputs.  A proposed next experiment
+should recognize a clause-derived demand exceeding capacity, with a checked
+matching/Hall-style deficiency core, and test renamed, edited and mixed cases.
+The filename cannot be the recognizer, and no such new authority is claimed here.
+A supporting cost target is direct admission of wide single-clause factors,
+avoiding generic consequence enumeration or allowing heterogeneous exact relations
+through conditioning.  Neither shortcut by itself supplies a root verdict.
+Repeated validated source/context preparation remains another cost opportunity,
+with bindings, ownership and invalidation charged.  These external results support
+limited transfer while leaving economical broad recognition, nonconstant reuse
+across arbitrary structures and unrestricted expansion bounds open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

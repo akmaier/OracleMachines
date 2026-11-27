@@ -4,7 +4,49 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-## Latest evidence: conditioned factors close the retained panel
+## Latest evidence: frozen external coverage and capacity gaps
+
+[Frozen external SATLIB audit](external-cutset-audit.md) separates the prior
+synthetic completion from external transfer. On **25 original public inputs**,
+unchanged cutset expansion raises certified coverage **17/25 → 19/25**, closing
+`flat30-10.cnf` and `flat30-100.cnf`. Twelve related renaming/edit controls remain
+**10/12**. No baseline result is lost. Selection and policies were frozen before
+evaluation; labels are audit-only. The earlier 182/182 union is unchanged.
+
+The full measured structural-discovery workflow costs **35.17482 s versus
+15.70674 s (+123.95%)**, with all four paired signs unfavorable. This includes
+new-input preparation, initial discovery, checking, persistence and warm/cold
+replay. There is no fallback in this comparison, so unresolved inputs stay open;
+this is not total time to answer every query or a speedup over fresh solving.
+Compressed evidence grows **431,796→562,509 bytes**. Defaults remain unchanged.
+
+**Largest new coverage gap: compact capacity/injectivity structure.** Five of the
+six unresolved originals are pigeonhole inputs; the sixth is `uf50-01000.cnf`.
+A renamed and an edited pigeonhole control also remain open. Investigate a
+CNF-derived matching/Hall-style deficiency certificate, with recognition from
+clauses rather than labels and explicit tests of mixtures/edits. This is a next
+hypothesis, not an implemented authority or a general SAT claim.
+
+**Cheaper admission is supporting work.** Of 185 checked width-four obstructions,
+184 have a single excluded assignment; all fifteen budget-open factors have the
+same simple single-clause shape. Direct width reasoning could avoid generic
+consequence enumeration, while heterogeneous exact factors could avoid requiring
+every relation to have a width-four cover. Neither alone establishes a root
+verdict or measured saving. **Validated source/context reuse** remains the larger
+workflow cost target: acquisition/internal checks cost 15.75755 s and two cold
+passes 9.95976 s. Preserve exact bindings and invalidation when sharing them.
+
+The 35 retained frontier attempts include three unmaterialized-width rejections;
+128 cofactor programs contain 13 SAT, 47 UNSAT and **68 unresolved branches**.
+The independent admission audit reparses all 37 raw files, rejects 148 malformed
+variants and checks all six signed bijections. All prior evidence and 82 proof
+blocks are preserved. All **2,447 full and 16 focused tests pass**; manuscript
+checks are recorded in `checks.json`.
+Resume `experiments/results/cnf-external-cutsets/checkpoint.json`, key
+`external_cutsets`. Keep original, derived and prior-panel denominators separate;
+this convenience sample is not representative external coverage.
+
+## Previous evidence: conditioned factors close the retained panel
 
 [Checked factor conditioning](factor-conditioning.md) supplies original-source
 SAT witnesses for **both remaining roots**. The independently rechecked union

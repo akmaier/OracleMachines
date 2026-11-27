@@ -1,0 +1,9 @@
+{
+  "frozen_before_evaluation": true,
+  "parent_commit": "a41b2129",
+  "source_index": "https://www.cs.ubc.ca/~hoos/SATLIB/benchm.html",
+  "selection": "Lexicographically first four .cnf basenames in uf20, uf50, uuf50 and flat30; lexicographically first four par8*.cnf basenames in PARITY; all five PHOLE files. Selection is size/family limited for a bounded first external audit, not random or representative. No solver results are consulted.",
+  "derived_controls": "For the first selected file of each of the six archive groups, add one deterministic signed permutation (seed 2711271954 plus group index) and one edit deleting its first clause and negating the first literal of its last nonempty clause. Retain all originals and edits; labels are audit-only and edited truth is initially unknown.",
+  "policy": "Compare unchanged two-round selective-width pipeline with the same pipeline plus the already-implemented width-four-cover/cut-four frontier continuation on each unresolved depth-zero leaf. No tuning of existing limits, ranking or certificates. At most four leaves per root. Stop further expansion after a checked original-source SAT witness, with skipped attempts recorded. Complete UNSAT roots remain those certified by the original pipeline; no unsupported leaf-to-root UNSAT promotion.",
+  "comparison": "Four paired process orders: baseline/expanded, expanded/baseline, repeated twice. Charge all initial discovery, checks, expansion, persistence, warm and two empty-bank cold passes; no fallback or historical acquisition excluded from these new-input runs. Startup, download/selection, final metadata and independent audit costs are separate. If a workload fails admission or exhausts a cap, retain it unresolved. No empirical external coverage conclusion before all retained inputs are checked."
+}

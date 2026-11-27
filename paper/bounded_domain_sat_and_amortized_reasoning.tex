@@ -15301,6 +15301,162 @@ searches and retaining incoming witness transport. General semantic
 canonicalization, compact closure and efficient coverage of unrestricted SAT
 remain open.
 
+\subsection{One-way binary forcing and shared support-edge evidence}
+\label{sec:forcing-conditioned-buckets}
+The next experiment uses a binary consequence that neither active-unit scanning
+nor equivalence substitution alone captures. A supported path from $x$ to
+$\neg x$ entails $\neg x$ without a return path. Recognition runs once after
+the preceding unit/conflict/equivalence stage; the verified consequences are
+added as units and propagated before bucket construction. A second ablation
+stores repeated implication edges once instead of repeating their support in
+every path.
+
+\begin{proposition}[Forcing by one-way paths and scoped edge sharing]
+Let $F$ be a CNF and let each edge of a directed implication path be supported
+by a binary clause of $F$. A path from $\neg l$ to $l$ entails the unit $l$.
+For any set $L$ of literals with such certificates,
+$F\equiv F\land\bigwedge_{l\in L}l$. Unit restriction of this augmented CNF
+therefore preserves satisfiability and admits the usual inverse-name and
+forced-value model lift. Suppose the certificates have $P$ path-step occurrences
+and $U$ distinct directed support edges. A pool of those exact source-supported
+edges can replace repeated edge support, provided every path still verifies
+consecutive endpoints and its required start and finish. This needs $U$ source
+support checks and $P$ path-step walks, rather than $P$ of each. It does not imply
+smaller total evidence or lower total runtime. If each path comes from a separate
+breadth-first search and discovery stops after $T$ edge visits, the returned
+paths have at most $T$ total steps; interrupted searches give no refutation.
+\end{proposition}
+\begin{proof}
+The implication supported by $(a\lor b)$ is $\neg a\to b$ or its contrapositive.
+Every model of $F$ respects each edge and hence the complete path. Assuming
+$\neg l$ would then yield $l$, a contradiction, so $F$ entails $l$. Conjoining
+any collection of these entailed units preserves the model set. The previously
+proved unit-transport invariant applies to the augmented formula. For pooling,
+checking each distinct triple of start, end and supporting clause establishes
+all usable implications. Path-reference and endpoint checks compose exactly the
+same implications as separate paths; the union of edges need not be acyclic.
+Sharing removes repeated support checks but leaves every path walk. A discovered
+breadth-first path consists of edges visited in its own search. Its length is
+bounded by that search's visits, so summing over the separately charged searches
+gives the $T$ bound. An incomplete search produces no unsupported literal or
+negative SAT verdict. These facts establish exact preprocessing and limited
+verification reuse, not efficient solution of every resulting SAT residual.
+\end{proof}
+
+Discovery builds the binary implication graph and searches from each signed
+variable for its negation. There are at most $2n$ searches on a graph with at most
+$2b$ edges for $n$ binary variables and $b$ binary clauses. Each search visits
+an edge at most once, so traversal has the additional bound $4nb$ before the
+explicit allowance. Graph setup, queues, start enumeration, path assembly,
+normalization, checking, serialization, elapsed time and RAM are separate costs.
+The experiment uses a 262,144-visit allowance per incoming cofactor; the same
+numeric policy independently caps bucket probes per node. No measured forcing
+call exhausts its traversal allowance. Completed paths remain usable after an
+interruption, with partial unit processing still exact.
+
+The separate-path format stores a next literal and clause index at each step;
+the current literal is implicit. The pooled format stores unique triples of
+start, end and clause index, plus references in each path. It requires all pooled
+edges to be supported, unique and used, and checks every path's connectivity and
+endpoints. This scope is one incoming forcing certificate, not a global cache
+of implications independent of their source. Source edits invalidate clause
+bindings. Final normalized residual/depth nodes and exact whole-root programs
+retain their preceding reuse rules, with every incoming relation, forcing and
+normalization transport checked separately. Policy or depth changes invalidate
+reuse. All SAT edge lifts are verified; UNSAT splits still need both exact
+children, and unknown remains unknown. Native, equivalence, affine and Lean
+formats are unchanged; the experiment uses a separate JSON authority.
+
+Three structural arms wrap the preceding relation policy, add one-way forcing
+with separate paths, or encode the same forcing with shared support edges.
+Discovery order, accepted paths, unit consequences and bucket decisions are
+identical in the last two arms. The audit expands every shared program into its
+separate-path form and checks exact equality. All retain root folding, initial
+units, binary-subset conflict checking, one signed SCC block per incoming edge,
+depth two and width eight. Each unit invocation has 512 steps and 262,144 reserved
+index-work units. The binary partition bound remains exponential in depth.
+A single forcing pass is not a fixed point: its unit consequences can create
+new binary clauses and further paths that the same pass does not reconsider.
+
+The frozen panel includes twenty-seven exposed sources, eighteen SAT and nine
+UNSAT; twenty-four unique new constructions, twelve SAT and twelve UNSAT; and
+four repeats, one SAT and three UNSAT. New controls include random three-CNFs
+at 14/18/22 variables, forcing funnels with shared middle paths, deleted middle
+edges, parity prisms at sizes 7/9/11, and planted funnels with consistent or
+opposing wide clauses. Names, signs and order are scrambled. No new normalized
+source duplicates the preceding panel. Descriptions and independent truth labels
+are withheld from acquisition. These are designed synthetic controls, not
+representative external SAT evidence or a global classification rate.
+
+Both forcing modes certify seven of twenty-seven exposed gaps, five SAT and
+two UNSAT, and increase new unique coverage from $17/24$ to $20/24$. All four
+repeats remain covered with no observed coverage loss. The fallback already
+supplies all fifty-five answers. Four cyclic process orders give complete mean
+times 0.82811 seconds fresh, 2.72120 relations, 2.38363 separate paths and 2.38109
+shared edges. Paths reduce complete cost 12.41\% versus relations, with every
+paired reduction between 11.64\% and 13.83\%. Shared reduces 12.50\% versus
+relations, but only 0.11\% versus paths. Its paired comparison with paths has two
+wins and two regressions, ranging from 2.45\% faster to 1.52\% slower. This does
+not establish a dependable runtime gain from pooling. Both forcing modes remain
+about 2.88 times as costly as fresh solving; production defaults stay unchanged.
+
+Forcing reduces bucket calls from 232 to 204, split nodes from 109 to 94, and
+elimination steps from 424 to 387. Across new root programs, both modes record
+199 forced-literal occurrences in sixty-two incoming certificates, with 794 path
+steps and 241 subsequent unit steps. Shared pools contain 492 distinct support
+entries. Discovery performs 3,510 reachability searches and visits 9,705
+implication edges, in addition to graph setup. Root folding performs 502 steps
+in all structural arms. Across acquisition and its checks, pooled source-support
+checks fall from 2,400 to 1,488, a 38\% reduction; path walks remain 2,400.
+Thirty queries reuse some support edges, including one whole-program repeat.
+Their discovery regresses 1.06\% and solve/check 1.30\% against separate paths;
+interning, set validation and references can outweigh saved support checks.
+Both forcing modes join distinct raw contexts only at fifteen constant residuals;
+no additional nonconstant residual-sharing gain is established.
+
+Pretty-printed certificate files occupy 4,481,627 bytes for relations, 3,969,462
+for paths and 3,963,403 for shared edges. Pooling saves only 6,059 file bytes,
+0.15\%, while compact forcing records grow from 12,185 to 13,791 bytes,
+13.18\%. The pooled format explicitly adds starts and references that separate
+paths omit. Native record bytes are 1,095,175 fresh, 955,621 relations and 751,391
+for either forcing mode. Combined compressed SQLite/JSON packages occupy
+212,745, 263,143, 221,537 and 222,534 bytes respectively; shared evidence costs
+997 more compressed bytes than paths. Diagnostics, historical copies and
+container overhead are additional. Peak RSS is respectively 76,333,056,
+78,692,352, 74,727,424 and 74,760,192 bytes. The modest reduction below fresh in
+these runs is a process-level observation, not a general peak-memory guarantee.
+
+Separate paths spend 0.55955 seconds in discovery, 0.49644 in solve/check,
+0.31348 warm and 0.78695 cold. Shared spends 0.56275, 0.49865, 0.30975 and
+0.77961 seconds respectively. Cold verification remains the largest phase.
+Complete time charges preparation, recognition, checking, evidence/database
+persistence, warm reuse, cold reconstruction and compression. Interpreter
+startup, report metadata, generation, post-hoc profiling and the preservation
+audit are additional. Both native cold readers audit fallback archives; two
+additional JSON passes use the same checker rather than independent
+implementations.
+
+Twenty-four unique roots remain, twenty exposed and four new, with forty-three
+unknown depth-zero nodes. Widths are nine for thirty-two nodes, ten for six and
+eleven for five. Thirty-seven retain partial bucket work before exceeding the
+cap. A separately checked source-bound profile finds no active units, unit
+conflicts, disconnected components, Horn or dual-Horn leaves, or contradictory
+binary subsets. Four equivalence blocks remain, merging eleven variable
+occurrences. More directly, thirteen of forty-three nodes have new forcing paths
+after the first pass's unit consequences. They yield fifty-eight forced-literal
+occurrences; subsequent units assign ninety-one occurrences and expose six leaf
+conflicts. No measured traversal cap was exhausted, so this is missing iteration,
+not an exhausted search allowance. The profile costs 0.02548 seconds, including
+1,192 forcing searches, 4,034 traversed edges and 250 checked path edges. It was
+not used during acquisition and supplies no additional root verdicts.
+
+The next target is bounded repeated unit/binary forcing, with explicit progress,
+exact transport for each round and reuse of unaffected structure where justified.
+The separate-path policy is the useful next baseline; further pooling has weak
+cost evidence here. Iteration must be measured on complete roots, including
+repeated graph reconstruction, checking and remaining wide cases. General compact
+closure and efficient coverage of unrestricted SAT remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

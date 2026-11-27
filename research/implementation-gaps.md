@@ -4,7 +4,20 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (27 November, binary relation buckets):
+Latest expansion checkpoint (27 November, one-way forcing buckets):
+[Checked binary forcing](forcing-bucket-discovery.md) closes 7/27 exposed misses
+and raises new unique coverage 17/24 to 20/24. Separate-path complete cost improves
+12.41% versus the wrapped relation policy, but remains about 2.88 times fresh.
+Pooling support edges cuts checks 38% without a convincing runtime gain and
+increases compact forcing payload 13.18%; the negative result is retained.
+Twenty-four unique remaining sources have 43 wide nodes. New forcing appears in
+13 nodes after earlier unit consequences; next test bounded repeated closure,
+without treating six diagnostic leaf conflicts as new root verdicts. Resume
+`experiments/results/cnf-forcing-buckets/checkpoint.json`. All 2,288 full and 30
+focused tests pass. Prior 229 manifests, 41,034 artifact entries, 1,258 sources
+and 71 proofs remain unchanged; one restricted proof is added. Defaults stay unchanged.
+
+Previous expansion checkpoint (27 November, binary relation buckets):
 [Checked binary conflicts and signed equivalence substitution](relation-bucket-discovery.md)
 certify 2/21 exposed misses. Frozen unique coverage stays 16/24; all repeats are
 covered. Total cost falls 10.57% versus shared units, but remains 3.09 times fresh

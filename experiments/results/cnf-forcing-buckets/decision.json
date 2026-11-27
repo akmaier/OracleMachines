@@ -1,0 +1,367 @@
+{
+  "analysis": {
+    "path": "experiments/results/cnf-forcing-buckets/analysis.json",
+    "sha256": "13c4ca67482f55645f9c4a7d0bc7057ece8279c248c46626cf8778bea0413af8"
+  },
+  "checkpoint": "forcing-buckets",
+  "controls": [
+    "27 exposed sources (18 SAT, nine UNSAT), 24 frozen new constructions (12 SAT, 12 UNSAT), and four repeats (one SAT, three UNSAT). No new normalized source duplicates the preceding panel. Scrambled names/signs/order and withheld descriptions/labels test discovery on growing random, shared-funnel/deleted-edge, parity-prism and planted/opposed-clause controls. These synthetic constructions are not representative external SAT benchmarks.",
+    "Sixteen fresh processes in four cyclic orders share a common fallback. Relations wraps the preceding policy; paths and shared have identical recognition, consequences and bucket decisions. The audit expands every shared program and verifies exact equality to its matched separate-path program. All preparation, discovery, checking, evidence/database persistence, warm/cold replay and compression are charged. Startup, report metadata, generation, post-hoc profiling and final preservation audit are additional.",
+    "Forcing reduces bucket nodes from 232 to 204, split nodes from 109 to 94 and elimination steps from 424 to 387. New programs have 62 forcing records, 199 forced-literal occurrences, 794 path steps and 241 subsequent unit steps. Discovery performs 3510 searches and 9705 edge visits, plus graph setup. The 15 distinct-raw-cofactor merges are all constant, so this does not demonstrate new nonconstant semantic sharing.",
+    "Pooling reduces source-support checks from 2400 to 1488 (38%) while retaining 2400 path walks. Compact forcing payload increases from 12185 to 13791 bytes (13.18%). Full pretty-printed certificates save only 6059 bytes (0.15%); combined compressed persistence increases by 997 bytes. On 30 queries with duplicate support edges, discovery and solve/check regress 1.06% and 1.30%. The extra start fields, indices and validation can outweigh saved support checks. Both formats and all regressions remain preserved.",
+    "Separate paths take 0.55955 seconds discovery, 0.49644 solve/check, 0.31348 warm and 0.78695 cold. Cold checking remains largest. Peak RSS is 74727424 bytes versus 78692352 relations and 76333056 fresh; this is a process-level observation, not a universal memory bound. Diagnostic/history/container costs remain separate.",
+    "The post-hoc structural profile costs 0.02548 seconds and is never read by measured acquisition. All 43 residual leaves have bag-width failures; widths nine/ten/eleven occur 32/6/5 times. There are no active units, disconnected components, Horn/dual-Horn leaves or binary conflicts. Four equivalence blocks merge eleven variable occurrences. Further forcing is evidence for missing iteration, not proof of additional whole-root coverage.",
+    "All 229 previous manifests, 41034 artifact entries, 1258 scientific sources and 71 proof blocks remain unchanged. Five new source/test files give 1263 sources and one restricted proof is added. All 2288 full and 30 focused tests pass; the 12 new tests include exhaustive 512 two-variable CNFs, seeded mixtures, corruption and cold replay with discovery disabled. Both native cold readers audit archives; extra JSON replay passes share one checker. Existing SQLite ResourceWarnings are retained."
+  ],
+  "date": "2026-11-27",
+  "docs": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "c7cae57393a3428e3ab30f7846db0ae36c1acf4e3032419274531c061d0a90b6",
+    "research/forcing-bucket-discovery.md": "e6af1d4919d2a5d4e3aa250fa5f7f8b2c393afcb689c5a671bfab1c59ceef8b0",
+    "research/implementation-gaps.md": "d579beb13c13c4a6e5c4f9074475eb4282fd6e7bbb7fc948d56b7ab0e16afd7e",
+    "research/sat-pattern-discovery.md": "aab212b9f4ae691484211559061f696a86e44b47d87e4a046192d0b672a1ee83",
+    "research/structural-reuse-priorities.md": "92cc893b77cf40d68d4e0083ca4a81097194dd6c132943e8bd1af07c0189de90"
+  },
+  "maintenance": "Every incoming cofactor retains its own relation, forcing, unit and inverse-normalization transport. Source edits invalidate clause-index bindings; only verified consequences and exact normalized residual/depth identities can be reused under the fixed policy. Whole-root programs share within each stream and are rechecked on warm and cold replay. Unknown remains unknown; split refutation needs both exact children. Native, equivalence, affine and Lean formats are unchanged.",
+  "measurements": {
+    "combined_compressed_bytes": {
+      "fresh": 212745,
+      "paths": 221537,
+      "relations": 263143,
+      "shared": 222534
+    },
+    "comparisons_percent": {
+      "paths_vs_relations": -12.40517926756487,
+      "shared_vs_fresh": 187.53247292842065,
+      "shared_vs_paths": -0.10675636208945516,
+      "shared_vs_relations": -12.498692311557601
+    },
+    "coverage": {
+      "fresh": {
+        "development_cases": 27,
+        "development_direct": 0,
+        "development_sat": 18,
+        "repeats_cases": 4,
+        "repeats_direct": 0,
+        "repeats_sat": 1,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 0,
+        "unique_panel_sat": 12
+      },
+      "paths": {
+        "development_cases": 27,
+        "development_direct": 7,
+        "development_sat": 18,
+        "repeats_cases": 4,
+        "repeats_direct": 4,
+        "repeats_sat": 1,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 20,
+        "unique_panel_sat": 12
+      },
+      "relations": {
+        "development_cases": 27,
+        "development_direct": 0,
+        "development_sat": 18,
+        "repeats_cases": 4,
+        "repeats_direct": 4,
+        "repeats_sat": 1,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 17,
+        "unique_panel_sat": 12
+      },
+      "shared": {
+        "development_cases": 27,
+        "development_direct": 7,
+        "development_sat": 18,
+        "repeats_cases": 4,
+        "repeats_direct": 4,
+        "repeats_sat": 1,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 20,
+        "unique_panel_sat": 12
+      }
+    },
+    "coverage_losses": [],
+    "new_direct_cases": [
+      "d-d-d-d-c04",
+      "d-d-d-d-c12",
+      "d-d-d-d-c13",
+      "d-d-d-y12",
+      "d-d-d-y13",
+      "d-d-u23",
+      "d-v03",
+      "w02",
+      "w22",
+      "w20"
+    ],
+    "observed_sharing_strata": {
+      "duplicate_path_edges": {
+        "cases": 30,
+        "discovery_seconds": {
+          "paths": 0.2684676555218175,
+          "percent": 1.059123819484853,
+          "shared": 0.2713110604090616
+        },
+        "solve_check_seconds": {
+          "paths": 0.22968904220033437,
+          "percent": 1.3012700855096648,
+          "shared": 0.232677916996181
+        }
+      },
+      "no_duplicate_path_edges": {
+        "cases": 25,
+        "discovery_seconds": {
+          "paths": 0.29107982257846743,
+          "percent": 0.12217761077737421,
+          "shared": 0.2914354569511488
+        },
+        "solve_check_seconds": {
+          "paths": 0.26675562479067594,
+          "percent": -0.29525720201906136,
+          "shared": 0.26596800959669054
+        }
+      }
+    },
+    "paired_percent": {
+      "paths_vs_relations": [
+        -11.643727402517289,
+        -11.824992050613615,
+        -13.831547534719968,
+        -12.30001065702665
+      ],
+      "shared_vs_fresh": [
+        176.56633787307575,
+        193.0426730955721,
+        190.44407764736079,
+        190.3063047705773
+      ],
+      "shared_vs_paths": [
+        -2.452924440213633,
+        -0.9066392035092297,
+        1.4181293225618896,
+        1.5172769441778033
+      ],
+      "shared_vs_relations": [
+        -13.811040007522724,
+        -12.624421240380135,
+        -12.609567443512038,
+        -10.96935893867933
+      ]
+    },
+    "peak_rss_bytes": {
+      "fresh": 76333056,
+      "paths": 74727424,
+      "relations": 78692352,
+      "shared": 74760192
+    },
+    "remaining": [
+      "d-d-d-d-d-s06",
+      "d-d-d-d-c06",
+      "d-d-d-d-c07",
+      "d-d-d-d-c05",
+      "d-d-d-y05",
+      "d-d-d-y07",
+      "d-d-d-y04",
+      "d-d-u10",
+      "d-d-u12",
+      "d-d-u04",
+      "d-d-u07",
+      "d-d-u05",
+      "d-d-u06",
+      "d-v02",
+      "d-v10",
+      "d-v09",
+      "d-v04",
+      "d-v08",
+      "d-v05",
+      "d-v11",
+      "w09",
+      "w05",
+      "w11",
+      "w04"
+    ],
+    "remaining_shape": {
+      "positive_work_leaves": 37,
+      "reasons": {
+        "bag-width": 43
+      },
+      "repeated_queries": 0,
+      "unique_sources": 24,
+      "unknown_leaves": 43,
+      "width_counts": {
+        "10": 6,
+        "11": 5,
+        "9": 32
+      },
+      "zero_work_leaves": 6
+    },
+    "remaining_structure_profile": {
+      "after_forcing_conflicts": 6,
+      "binary_conflicts": 0,
+      "disconnected": 0,
+      "dual_horn": 0,
+      "equivalence_blocks": 4,
+      "forced_literals": 58,
+      "forcing_leaves": 13,
+      "forcing_propagated_variables": 91,
+      "horn": 0,
+      "leaves": 43,
+      "merged_variable_occurrences": 11,
+      "unit_conflicts": 0,
+      "with_units": 0
+    },
+    "selected": "fresh",
+    "structural": {
+      "fresh": {},
+      "paths": {
+        "after_unit_steps": 32,
+        "bucket_steps": 387,
+        "constant_raw_merges": 15,
+        "distinct_raw_merges": 15,
+        "edge_unit_steps": 433,
+        "edges": 239,
+        "forcing_compact_bytes": 12185,
+        "forcing_literals": 199,
+        "forcing_path_steps": 794,
+        "forcing_records": 62,
+        "forcing_support_entries": 794,
+        "forcing_unit_steps": 241,
+        "leaf_nodes": 110,
+        "leaf_sat": 18,
+        "leaf_unresolved": 43,
+        "leaf_unsat": 49,
+        "nodes": 204,
+        "prefix_fold_steps": 502,
+        "relation_conflict": 7,
+        "relation_equivalence": 51,
+        "shared_targets": 22,
+        "split_nodes": 94
+      },
+      "relations": {
+        "after_unit_steps": 39,
+        "bucket_steps": 424,
+        "constant_raw_merges": 24,
+        "distinct_raw_merges": 24,
+        "edge_unit_steps": 477,
+        "edges": 269,
+        "forcing_unit_steps": 0,
+        "leaf_nodes": 123,
+        "leaf_sat": 10,
+        "leaf_unresolved": 63,
+        "leaf_unsat": 50,
+        "nodes": 232,
+        "prefix_fold_steps": 502,
+        "relation_conflict": 18,
+        "relation_equivalence": 55,
+        "shared_targets": 31,
+        "split_nodes": 109
+      },
+      "shared": {
+        "after_unit_steps": 32,
+        "bucket_steps": 387,
+        "constant_raw_merges": 15,
+        "distinct_raw_merges": 15,
+        "edge_unit_steps": 433,
+        "edges": 239,
+        "forcing_compact_bytes": 13791,
+        "forcing_literals": 199,
+        "forcing_path_steps": 794,
+        "forcing_records": 62,
+        "forcing_support_entries": 492,
+        "forcing_unit_steps": 241,
+        "leaf_nodes": 110,
+        "leaf_sat": 18,
+        "leaf_unresolved": 43,
+        "leaf_unsat": 49,
+        "nodes": 204,
+        "prefix_fold_steps": 502,
+        "relation_conflict": 7,
+        "relation_equivalence": 51,
+        "shared_targets": 22,
+        "split_nodes": 94
+      }
+    },
+    "totals": {
+      "fresh": {
+        "certificate_bytes": 0,
+        "certificate_compressed_bytes": 22,
+        "cold_seconds": 0.2571530001005158,
+        "complete_seconds": 0.8281101250322536,
+        "diagnostic_bytes": 0,
+        "input_seconds": 0.0017831873847171664,
+        "persistence_seconds": 0.17738135415129364,
+        "phases": {
+          "solve_check_seconds": 0.3549647715408355
+        },
+        "record_bytes": 1095175,
+        "records": 702,
+        "warm_seconds": 0.030181937501765788
+      },
+      "paths": {
+        "certificate_bytes": 3969462,
+        "certificate_compressed_bytes": 79954,
+        "cold_seconds": 0.7869527394650504,
+        "complete_seconds": 2.3836301979608834,
+        "diagnostic_bytes": 125500,
+        "input_seconds": 0.0017102083656936884,
+        "persistence_seconds": 0.19496558350510895,
+        "phases": {
+          "discovery_seconds": 0.5595474781002849,
+          "evidence_persistence_seconds": 0.02450847753789276,
+          "solve_check_seconds": 0.4964446669910103
+        },
+        "record_bytes": 751391,
+        "records": 468,
+        "warm_seconds": 0.3134801459964365
+      },
+      "relations": {
+        "certificate_bytes": 4481627,
+        "certificate_compressed_bytes": 82553,
+        "cold_seconds": 0.8843748749932274,
+        "complete_seconds": 2.721199927153066,
+        "diagnostic_bytes": 138655,
+        "input_seconds": 0.0017184998141601682,
+        "persistence_seconds": 0.23495061451103538,
+        "phases": {
+          "discovery_seconds": 0.6095579789252952,
+          "evidence_persistence_seconds": 0.03066815552301705,
+          "solve_check_seconds": 0.6061356153804809
+        },
+        "record_bytes": 955621,
+        "records": 595,
+        "warm_seconds": 0.3465774165233597
+      },
+      "shared": {
+        "certificate_bytes": 3963403,
+        "certificate_compressed_bytes": 80951,
+        "cold_seconds": 0.7796059479005635,
+        "complete_seconds": 2.3810855210758746,
+        "diagnostic_bytes": 125500,
+        "input_seconds": 0.0017149896593764424,
+        "persistence_seconds": 0.19662689580582082,
+        "phases": {
+          "discovery_seconds": 0.5627465173602104,
+          "evidence_persistence_seconds": 0.025140594108961523,
+          "solve_check_seconds": 0.49864592659287155
+        },
+        "record_bytes": 751391,
+        "records": 468,
+        "warm_seconds": 0.30975135427434
+      }
+    }
+  },
+  "next": "Measure bounded repeated unit/binary forcing with explicit progress and checked model transport for every round. Thirteen of 43 unresolved leaves expose further paths after the first pass; the diagnostic yields 58 forced-literal occurrences, 91 propagated-variable occurrences and six leaf conflicts. No measured traversal cap was exhausted. These are not additional root certificates. Charge repeated discovery, graph maintenance and cold replay; investigate unaffected-structure reuse only with exact invalidation. Four remaining equivalence blocks and wide arbitrary CNF interactions remain open. Cold verification remains the largest measured phase.",
+  "next_research_baseline": "paths",
+  "outcome": "Both forcing modes certify 7/27 exposed gaps (five SAT, two UNSAT), increase new unique structural coverage from 17/24 to 20/24, and retain 4/4 repeats without coverage losses. The fallback already decides all 55 inputs. Separate paths reduce complete cost 12.41% versus relations; shared edges reduce it 12.50%. Both still cost about 2.88 times fresh solving, so production defaults remain unchanged. Separate paths are the next research baseline: pooling has two paired wins and two regressions, only 0.11% lower mean total time, larger compact forcing payload and larger compressed persistence.",
+  "parent": {
+    "path": "experiments/results/cnf-relation-buckets/checkpoint.json",
+    "sha256": "6e17670852943ef886ca7751719dd9445216131bae6065d4698a7c66fc480e44"
+  },
+  "pattern": "A path from the negation of literal l to l, supported by active binary clauses, entails l even without a return path or nontrivial equivalence SCC. Add checked consequences as units and propagate before bucket construction. A second encoding interns repeated directed support edges inside each incoming forcing certificate while retaining every path walk.",
+  "recognition": "After the preceding unit/conflict/equivalence stage, build the exact binary-clause implication graph and search from each signed variable to its negation. Return only completed paths. The independent checker reconstructs the binary subsequence, checks clause support and endpoints, and never runs discovery. Pooled edges must be unique and used; all path references and connectivity are checked. This is one pass, not a fixed point.",
+  "resources": "Depth two and width eight. The 262144 work limit separately caps forcing edge visits per incoming cofactor and reserved bucket probes per node. Each unit invocation has 512 steps and 262144 reserved index-work units. At most 2n reachability searches visit at most 2b graph edges each before the cap; returned path lengths sum to at most charged visits. Graph construction, queues, starts, path assembly, normalization, checking, serialization, time and RAM remain additional costs. Conditioning still has exponentially many requests in depth. No compact unrestricted closure follows.",
+  "structure_profile": {
+    "path": "experiments/results/cnf-forcing-buckets/remaining-structure-profile.json",
+    "sha256": "e475d09b6baf2afe29329860103c14cf164bb686e3edaa7979e743289830dfde"
+  }
+}

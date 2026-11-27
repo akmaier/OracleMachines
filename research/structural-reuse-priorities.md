@@ -12,7 +12,32 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: checked binary relations before buckets
+## Current investigation: one-way forcing before bucket expansion
+
+[Source-bound one-way implication paths](forcing-bucket-discovery.md) certify
+**7/27** exposed acquisition gaps and increase frozen unique coverage
+**17/24 to 20/24**. Bucket calls fall **232 to 204**. Separate-path total cost
+improves **12.41%** over the wrapped relation policy. Shared support edges cut
+checks **38%**, but runtime differences have mixed signs and the mean is only
+0.11%; compact forcing records grow **13.18%** and compressed packages grow 997
+bytes. Prefer the separate-path baseline for the next comparison. Both pipelines
+remain about **2.88 times fresh**; defaults stay unchanged. Cold checking
+(0.78695 s paths) remains largest, ahead of discovery (0.55955 s).
+
+**Next:** bounded repeated unit/binary forcing with checked progress and transport.
+The 43 unknown nodes from 24 unique roots have no units or binary conflicts, but
+13 contain new forcing paths created by earlier consequences. A separately checked
+profile finds 58 forced literals and six subsequent leaf conflicts. No traversal
+cap was hit, so these expose a missing iteration, not an exhausted allowance.
+Four additional equivalence blocks also remain. Charge round discovery, unchanged
+structure scans, checking and persistence; seek exact reuse only where its full
+cost pays. Uniform deeper splitting and further edge pooling have weaker evidence.
+Resume `experiments/results/cnf-forcing-buckets/checkpoint.json`, key
+`forcing_buckets.remaining`. All **2,288 full and 30 focused tests pass**; prior
+229 manifests, 41,034 artifact entries, 1,258 sources and 71 proofs are preserved.
+Leaf diagnostics are not additional root authority or unrestricted SAT bounds.
+
+## Previous investigation: checked binary relations before buckets
 
 [Binary conflict paths and signed SCC substitution](relation-bucket-discovery.md)
 close **2/21** exposed acquisition gaps; new-panel coverage stays **16/24**, with

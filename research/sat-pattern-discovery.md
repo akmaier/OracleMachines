@@ -5,7 +5,27 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: binary conflicts and signed quotient transport
+## Latest evidence: one-way forcing and its evidence-sharing limit
+
+[Checked one-way binary forcing](forcing-bucket-discovery.md) certifies **7/27**
+exposed misses (five SAT, two UNSAT) and raises new unique-panel coverage
+**17/24 to 20/24**. All four repeats remain covered, with no observed losses;
+the fallback already decides all 55 queries. Separate paths lower complete cost
+**12.41%** versus the preceding relation policy in the same wrapper. Sharing
+support edges cuts checks **38%**, but has only a 0.11% mean time difference with
+mixed paired signs, and grows compact forcing payload **13.18%**. It is not a
+supported runtime/compression win. Both remain about **2.88 times fresh**.
+
+The 24 remaining unique sources have 43 wide nodes. A separate profile finds new
+forcing paths in **13/43** after the first pass's unit consequences, giving 58
+forced literals and six leaf conflicts after propagation. No measured traversal
+cap was exhausted. **Next: bounded repeated unit/binary forcing**, with progress
+and exact transport for each round; diagnostic leaves are not new root verdicts.
+Resume `experiments/results/cnf-forcing-buckets/checkpoint.json`.
+All **2,288 full and 30 focused tests pass**; prior artifacts and 71 proofs are
+preserved. Efficient unrestricted coverage remains open.
+
+## Previous evidence: binary conflicts and signed quotient transport
 
 [Checked binary relations](relation-bucket-discovery.md) certify **2/21** exposed
 misses, one SAT and one UNSAT. New unique-panel coverage remains **16/24**, with

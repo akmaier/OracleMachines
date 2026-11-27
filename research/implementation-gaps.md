@@ -4,7 +4,19 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (27 November, affine boundary completion):
+Latest expansion checkpoint (27 November, semantic bucket support):
+[Exact non-affine table compression](semantic-bucket-support.md) reduces stored
+output rows 35.26% and certificate bytes 12.51%, retaining full-boundary witness
+choices. It covers the same 2/6 exposed misses and 18/24 new unique constructions
+as raw bucket elimination; the existing fallback solves all cases. Complete cost
+remains 50.53% above fresh, and operator caching adds storage. The ten remaining
+misses exceed the width-eight cap before the first elimination. Next test exact
+small factor combinations or conditioning before forming whole buckets. Resume
+`experiments/results/cnf-semantic-buckets/checkpoint.json`. Prior 224 manifests,
+35,821 artifacts, 1,233 sources and 66 proofs are unchanged; one restricted proof
+and a separate experimental JSON authority are added. Defaults remain unchanged.
+
+Previous expansion checkpoint (27 November, affine boundary completion):
 [Exact projected-image completion](affine-boundary-completion.md) replaces total
 free dimension with the rank visible to leftover clauses. It covers 18/24 unique
 synthetic controls directly versus 14/24 for the old gate; the existing fallback

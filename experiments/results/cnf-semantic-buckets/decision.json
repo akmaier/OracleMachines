@@ -1,0 +1,238 @@
+{
+  "analysis": {
+    "path": "experiments/results/cnf-semantic-buckets/analysis.json",
+    "sha256": "c485bdfbf6ec2f1a410dbe1f60e826a8d37025fe3b4d61c6de028f71ade0f9c4"
+  },
+  "checkpoint": "semantic-buckets",
+  "controls": [
+    "24 frozen constructions (20 SAT, four UNSAT), four separate all-SAT repeated queries and six exposed cases (four SAT, two UNSAT). No normalized duplicate of the preceding panel. Designed synthetic controls do not establish representative external coverage.",
+    "16 matched trials in four cyclic process orders. Empty starts, common fallback and full recognition, checking, persistence, warm reuse, cold replay and compression are charged. Interpreter startup, report metadata, panel generation and lineage audit are additional.",
+    "Elimination steps fall 352 to 287 (18.47%), output rows 3389 to 2194 (35.26%) and JSON proof bytes 45268 to 39607 (12.51%). Of 328 removed coordinates, 306 come from 200 constant-output steps and only 22 from 21 nonconstant steps. No constant-only ablation isolates the latter benefit.",
+    "Reduced improves mean complete cost 2.59% over raw, and shared another 0.75%, but both have paired regressions. These small mixed-sign timing differences do not establish a robust speedup. Shared is 50.53% slower than fresh, with every paired comparison regressing 38.51\u201362.12%.",
+    "Shared gives 164 operator hits and 123 misses, yet full checking remains. Its extra 12989 encoded operator bytes reverse the package-size benefit relative to reduced and even raw. Process RSS is similar; output-row savings are not a peak-memory bound.",
+    "224 prior manifests, 35821 artifact entries, 1233 sources and 66 earlier proof blocks remain unchanged. Five new source/test files raise the source ledger to 1238; one restricted proof is added. All 2242 full and 21 focused tests pass. Existing SQLite ResourceWarnings are preserved. All comparison arms, including regressions, remain available."
+  ],
+  "date": "2026-11-27",
+  "docs": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "c547a59d6ab337c2991c8e83a01c4e0dbaa2a572f8e83cd05bba66004c0c19b0",
+    "research/implementation-gaps.md": "433dcbc8e3707c523e856538aa22348081e54e06af2c878ad13a71612f68b0b9",
+    "research/sat-pattern-discovery.md": "a5a2d94d69488d885f7d0a5ac278cc215dd4924899151d9e6d3b6cb50ec477aa",
+    "research/semantic-bucket-support.md": "9875d2d63537d752852642253e632084331ae00730284c02ea82e87bcb0fa820",
+    "research/structural-reuse-priorities.md": "4d6c8de9eb45f28277ed63c9b942e22efb3bb181a10e1290c799a147016a6c34"
+  },
+  "measurements": {
+    "combined_compressed_bytes": {
+      "fresh": 39737,
+      "raw": 34352,
+      "reduced": 32925,
+      "shared": 34882
+    },
+    "comparisons_percent": {
+      "reduced_vs_raw": -2.593369824694658,
+      "shared_vs_fresh": 50.53009364796921,
+      "shared_vs_reduced": -0.7506525133795794
+    },
+    "coverage": {
+      "fresh": {
+        "development_cases": 6,
+        "development_direct": 0,
+        "development_sat": 4,
+        "repeats_cases": 4,
+        "repeats_direct": 0,
+        "repeats_sat": 4,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 0,
+        "unique_panel_sat": 20
+      },
+      "raw": {
+        "development_cases": 6,
+        "development_direct": 2,
+        "development_sat": 4,
+        "repeats_cases": 4,
+        "repeats_direct": 4,
+        "repeats_sat": 4,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 18,
+        "unique_panel_sat": 20
+      },
+      "reduced": {
+        "development_cases": 6,
+        "development_direct": 2,
+        "development_sat": 4,
+        "repeats_cases": 4,
+        "repeats_direct": 4,
+        "repeats_sat": 4,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 18,
+        "unique_panel_sat": 20
+      },
+      "shared": {
+        "development_cases": 6,
+        "development_direct": 2,
+        "development_sat": 4,
+        "repeats_cases": 4,
+        "repeats_direct": 4,
+        "repeats_sat": 4,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 18,
+        "unique_panel_sat": 20
+      }
+    },
+    "paired_percent": {
+      "reduced_vs_raw": [
+        -2.6769573132733537,
+        0.2552157495576024,
+        -5.212008139969592,
+        -2.7348620312356076
+      ],
+      "shared_vs_fresh": [
+        38.50636755728865,
+        48.482400532135884,
+        62.11866991418129,
+        54.189963661192266
+      ],
+      "shared_vs_reduced": [
+        -4.3182940811232084,
+        -5.701765123917413,
+        8.02724152095735,
+        -0.534577285039739
+      ]
+    },
+    "peak_rss_bytes": {
+      "fresh": 55050240,
+      "raw": 54001664,
+      "reduced": 53919744,
+      "shared": 54067200
+    },
+    "remaining": [
+      "d-b17",
+      "d-b18",
+      "d-b16",
+      "d-b19",
+      "s04",
+      "s05",
+      "s03",
+      "s06",
+      "s07",
+      "s02"
+    ],
+    "selected": "fresh",
+    "structural": {
+      "fresh": {},
+      "raw": {
+        "choice_rows": 3389,
+        "full_boundary_rows": 3389,
+        "removed_coordinates": 0,
+        "retained_relation_rows": 3389,
+        "steps": 352
+      },
+      "reduced": {
+        "choice_rows": 3034,
+        "constant_reduced_steps": 200,
+        "constant_removed_coordinates": 306,
+        "full_boundary_rows": 3034,
+        "nonconstant_reduced_steps": 21,
+        "nonconstant_removed_coordinates": 22,
+        "removed_coordinates": 328,
+        "retained_relation_rows": 2194,
+        "steps": 287
+      },
+      "shared": {
+        "choice_rows": 3034,
+        "constant_reduced_steps": 200,
+        "constant_removed_coordinates": 306,
+        "full_boundary_rows": 3034,
+        "nonconstant_reduced_steps": 21,
+        "nonconstant_removed_coordinates": 22,
+        "removed_coordinates": 328,
+        "retained_relation_rows": 2194,
+        "steps": 287
+      }
+    },
+    "totals": {
+      "fresh": {
+        "certificate_bytes": 0,
+        "certificate_compressed_bytes": 22,
+        "cold_seconds": 0.053935020696371794,
+        "complete_seconds": 0.18232530204113573,
+        "diagnostic_bytes": 0,
+        "input_seconds": 0.0008356247562915087,
+        "operator_compressed_bytes": 22,
+        "operator_encoded_bytes": 2,
+        "persistence_seconds": 0.029901541653089225,
+        "phases": {
+          "solve_check_seconds": 0.08503110485617071
+        },
+        "record_bytes": 182007,
+        "records": 236,
+        "warm_seconds": 0.008216781192459166
+      },
+      "raw": {
+        "certificate_bytes": 45268,
+        "certificate_compressed_bytes": 10413,
+        "cold_seconds": 0.09765251039061695,
+        "complete_seconds": 0.2838926144177094,
+        "diagnostic_bytes": 1255,
+        "input_seconds": 0.0008192186942324042,
+        "operator_compressed_bytes": 22,
+        "operator_encoded_bytes": 2,
+        "persistence_seconds": 0.02114838536363095,
+        "phases": {
+          "discovery_seconds": 0.0501898645889014,
+          "evidence_persistence_seconds": 0.00654857256449759,
+          "solve_check_seconds": 0.07086672657169402
+        },
+        "record_bytes": 124836,
+        "records": 120,
+        "warm_seconds": 0.032135062385350466
+      },
+      "reduced": {
+        "certificate_bytes": 39607,
+        "certificate_compressed_bytes": 8986,
+        "cold_seconds": 0.09402022953145206,
+        "complete_seconds": 0.27653022902086377,
+        "diagnostic_bytes": 1253,
+        "input_seconds": 0.0008334167068824172,
+        "operator_compressed_bytes": 22,
+        "operator_encoded_bytes": 2,
+        "persistence_seconds": 0.02142109372653067,
+        "phases": {
+          "discovery_seconds": 0.04841227864380926,
+          "evidence_persistence_seconds": 0.007013489026576281,
+          "solve_check_seconds": 0.06962773797567934
+        },
+        "record_bytes": 124836,
+        "records": 120,
+        "warm_seconds": 0.030185833224095404
+      },
+      "shared": {
+        "certificate_bytes": 39607,
+        "certificate_compressed_bytes": 8986,
+        "cold_seconds": 0.09297686442732811,
+        "complete_seconds": 0.27445444790646434,
+        "diagnostic_bytes": 1245,
+        "input_seconds": 0.000817833817563951,
+        "operator_compressed_bytes": 1979,
+        "operator_encoded_bytes": 12989,
+        "persistence_seconds": 0.021489698090590537,
+        "phases": {
+          "discovery_seconds": 0.04653155116830021,
+          "evidence_persistence_seconds": 0.007010935922153294,
+          "solve_check_seconds": 0.07171036314684898
+        },
+        "record_bytes": 124836,
+        "records": 120,
+        "warm_seconds": 0.029781312798149884
+      }
+    }
+  },
+  "next": "All ten remaining acquisition misses stop at the initial full incident bucket, width 9\u201311, before any elimination (spent=0). Test small exact factor combinations or conditioning before forming those large buckets, with recognition and exact recomposition charged. Increasing the table cap alone exposes exponential width. Witness reconstruction and cold verification are secondary costs. No production default change or unrestricted compactness/polynomial SAT claim.",
+  "outcome": "Raw, reduced and shared bucket acquisition cover the same 2/6 exposed misses, 18/24 new unique synthetic constructions and 4/4 repeated queries. All 34 answers were already available through the fallback. Support compression reduces steps, retained output rows and proof bytes, but adds no direct coverage on this panel. Current fresh solving remains selected.",
+  "parent": {
+    "path": "experiments/results/cnf-affine-boundary/checkpoint.json",
+    "sha256": "fc2f9fb082934486ee193afdfffc728e54c8be38a73f6fd1f7a6185bb6d55f55"
+  },
+  "pattern": "Complete incident-bucket projection permits removing every boundary coordinate whose two cofactors agree on all rows. The result is exactly preserved, but full pre-reduction witness choices must remain: projecting x=y gives true while reconstructing x depends on y.",
+  "recognition": "All active factors incident to the eliminated variable must participate. Every full boundary assignment and both variable values are independently checked. Operator keys contain locally ordered scopes, complete tables, eliminated position and reduction policy; general isomorphism and sign symmetry are not recognized. Exact canonical source programs share only at the same policy; edits invalidate them. Width/work stops remain unknown.",
+  "resources": "The bag-width cap is eight and reserved discovery probe limit is 262144. Planning, normalization, checking, leaf construction, runtime and RAM are not bounded by that probe allowance. Full witness-choice tables remain. New JSON is a separate experimental authority; no native, equivalence, affine or Lean format changes. Two native cold readers and the same additional bucket checker validate replay; there are not two independent bucket checkers. All warm/cold proof loads recheck complete programs. The serialized operator cache is diagnostic, not trusted persistent state."
+}

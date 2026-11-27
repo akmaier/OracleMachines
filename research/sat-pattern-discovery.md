@@ -5,7 +5,31 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: exact affine image on leftover-clause support
+## Latest evidence: compressed non-affine bucket relations
+
+[Checked semantic support removal](semantic-bucket-support.md) deletes a boundary
+coordinate only when its two cofactors agree. It reduces 352 elimination steps to
+287 and retained output rows 3,389 to 2,194. Witness choices keep the full original
+boundary: the result of eliminating `x` from `x = y` is independent of `y`, but
+reconstructing `x` still depends on it.
+
+Raw and compressed bucket methods cover the same **2/6 exposed misses and 18/24
+new unique synthetic constructions**. Four exact repeats are separate. The
+existing fallback already decides all 34 queries. The shared method costs
+**0.27445 s versus 0.18233 s fresh**, despite smaller proof tables; cache storage
+and full verification remain charged. No default changes.
+
+All ten remaining misses exceed the bag-width cap before any projection starts.
+Next investigate exact small factor combinations or conditioning before full
+bucket formation, preserving these initial-width obstructions. Semantic support
+is only discovered on tables that can first be constructed; no unrestricted
+small-width or polynomial acquisition guarantee follows. Resume
+`experiments/results/cnf-semantic-buckets/checkpoint.json`.
+
+Most removed coordinates belong to constant results (306/328); only 22 are
+removed from nonconstant relations. All **2,242 tests and 21 focused tests pass**.
+
+## Previous evidence: exact affine image on leftover-clause support
 
 [Checked boundary completion](affine-boundary-completion.md) enumerates one
 representative per distinct boundary assignment, reusing full affine solutions

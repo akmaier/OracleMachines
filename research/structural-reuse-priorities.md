@@ -12,7 +12,33 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: completion over visible affine boundaries
+## Current investigation: semantic support in Boolean buckets
+
+[Complete non-affine bucket relations](semantic-bucket-support.md) handle **2/6**
+exposed affine-acquisition misses and **18/24** new unique synthetic inputs.
+All variants have that coverage, and the current fallback decides every query.
+Dropping coordinates with equal cofactors reduces steps **352 to 287**, retained
+relation rows **3,389 to 2,194**, and proof bytes **45,268 to 39,607**. Full witness
+choices must still retain the unreduced boundary.
+
+The new operator cache finds 164 hits but adds 12,989 encoded bytes. Complete
+times are **0.18233 s fresh / 0.28389 raw / 0.27653 reduced / 0.27445 shared**.
+Small differences between bucket variants have mixed paired signs; shared is
+50.53% slower than fresh. Fresh remains selected. These are representation and
+correctness gains, not a robust total runtime win or additional semantic coverage.
+
+**Next:** all ten remaining acquisition misses exceed width eight before the
+first elimination. Test small factor combinations or conditioning before forming
+full incident buckets, with exact recomposition and recognition costs. Later
+support compression cannot repair this initial obstruction. Retain the full
+witness-dependence counterexample and cold-check overhead. Resume
+`experiments/results/cnf-semantic-buckets/checkpoint.json`, key
+`semantic_buckets.remaining`. Native and Lean formats/defaults remain unchanged.
+
+Most removed coordinates belong to constant results (306/328); only 22 are
+removed from nonconstant relations. All **2,242 tests and 21 focused tests pass**.
+
+## Previous investigation: completion over visible affine boundaries
 
 [Boundary completion](affine-boundary-completion.md) addresses the free-dimension
 cap, after confirming that all five preceding feedback gaps are already covered

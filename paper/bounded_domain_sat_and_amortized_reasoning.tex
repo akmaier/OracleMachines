@@ -14665,6 +14665,123 @@ before production integration; defaults remain unchanged.  No general compact
 classification, polynomial acquisition, or unrestricted-SAT expansion bound is
 established.
 
+\subsection{Semantic support in complete Boolean bucket relations}
+\label{sec:semantic-bucket-support}
+
+A subsequent experiment leaves the affine family and represents bounded Boolean
+buckets directly.  Every source clause becomes its complete relation.  For a
+selected variable, all active factors containing it are conjoined and
+existentially projected.  The planner minimizes bag width, then incident factor
+count, then variable name.  The new option removes a boundary coordinate only
+when its two cofactors agree on every row.  The input and bucket width cap is
+eight, with at most 262,144 reserved discovery table probes.  Stops remain
+unknown; uncomputed rows are never interpreted as false.
+
+\begin{proposition}[Semantic support reduction with full witness dependence]
+Let $R(x,Y)$ be the conjunction of all factors in an elimination bucket, and let
+$Q(Y)=\exists x\,R(x,Y)$.  Suppose $I\subseteq Y$ consists of coordinates for
+which the two cofactors of $Q$ are identical.  Restricting these coordinates to
+zero defines a relation $Q'$ on $Y\setminus I$ such that
+$Q'(y|_{Y\setminus I})=Q(y)$ for every assignment $y$.  Replacing the bucket by
+$Q'$ preserves existential satisfiability with the other factors.  For model
+lifting, a choice $c(y)$ with $R(c(y),y)$ whenever $Q(y)$ is true suffices, but
+$c$ need not be independent of the coordinates in $I$.
+\end{proposition}
+\begin{proof}
+Flipping one coordinate in $I$ does not change $Q$.  Flipping those coordinates
+one at a time transforms any assignment into one setting all of them to zero,
+without changing the relation's value.  This proves the stated identity and
+therefore the replacement's exact projection semantics.  Given a model of the
+remaining factors, the identity supplies the full boundary value of $Q$ and the
+stored choice supplies an extension satisfying the eliminated bucket.  Repeating
+this step in reverse elimination order reconstructs a source model.  A zero
+active relation certifies impossibility.  Witness independence does not follow:
+for $R(x,y)$ given by $x=y$, the projection is constantly true, whereas the
+unique valid choice is $c(y)=y$.
+\end{proof}
+
+Discovery stores the smaller result table but retains choices over the full
+unreduced boundary.  Reverse lifting assigns any disappeared free variables
+false, uses the assignments already reconstructed at later stages, and then
+sets the eliminated variable from its saved choice.  A test adds the unit clause
+$y$ to $x=y$ and requires both values true; deleting the choice dependency is
+rejected.  The checker reconstructs every full boundary assignment, evaluates
+both values of the eliminated variable using the actual input factors, and
+checks the reduced result and choice.  Every incident active factor must be
+included.  SAT also requires a full source model.  This experimental JSON
+authority changes neither native nor Lean factor formats.
+
+An optional cache keys operator proposals by locally ordered input scopes and
+complete tables, the eliminated position and the reduction flag.  External
+variable names can differ, but general permutations, sign symmetries and semantic
+isomorphism are not recognized.  Cached proposals receive full verification
+before any verdict; the cache itself has no proof authority.  Exact canonical
+source programs, including partial programs at the same fixed policy, share
+within a stream.  Source edits invalidate them.  Every incoming warm or cold
+program is fully checked.  Both native readers check fallback records and each
+cold pass additionally uses the same bucket checker, not two independently
+implemented bucket verifiers.
+
+The frozen transfer panel contains twenty-four generated constructions, with
+twenty SAT and four UNSAT cases: random three-CNFs on 9, 12, 16 and 20 variables,
+AND-gate groups, parity prisms and gate edits.  Four exact repeated queries are
+separate controls; all four are SAT.  Six exposed development inputs contain
+four SAT and two UNSAT cases.  No normalized new input duplicates the preceding
+panel, but these are synthetic structural controls rather than a representative
+external benchmark.  Descriptions and independent DPLL audit labels are withheld
+from solving.  Exhaustive two-variable formulas, all 256 three-variable Boolean
+relations, sparse renaming and corruption controls check the implementation.
+
+Raw tables, reduced-support tables and reduced tables with operator sharing all
+handle the same two of six exposed misses and eighteen of twenty-four unique
+new constructions directly.  The unchanged fallback decides all thirty-four
+queries.  Support compression reduces elimination steps from 352 to 287,
+retained output rows from 3,389 to 2,194, and JSON certificate bytes from 45,268
+to 39,607.  These are reductions of 18.47\%, 35.26\% and 12.51\%, respectively.
+Of 328 removed coordinates, 306 belong to 200 constant-output steps and only
+22 to 21 nonconstant steps.  There is no constant-only ablation, so these savings
+cannot be attributed entirely to nonconstant support recognition.
+Full choice rows decline only to 3,034 through the shorter elimination sequence;
+they are not compressed to the result's 2,194 rows.  Compression adds no direct
+coverage on this panel.
+
+Four cyclic process orders compare current fresh solving, raw buckets, reduced
+buckets and shared reduced buckets.  Complete times are 0.18233, 0.28389, 0.27653
+and 0.27445 seconds.  Reduced improves on raw by 2.59\% on the mean but one paired
+order regresses 0.26\%.  Shared improves on reduced by 0.75\% on the mean but one
+paired order regresses 8.03\%.  These small mixed-sign comparisons do not establish
+a robust runtime saving.  Shared remains 50.53\% slower than fresh, with every
+paired comparison regressing between 38.51\% and 62.12\%.  Fresh stays selected.
+
+Operator sharing records 164 hits and 123 misses.  Discovery table probes decline
+from 19,047 to 17,188 relative to reduced, but acquisition/solve verification
+still performs 64,284 probes.  Shared and reduced proof files are byte-identical.
+The shared operator descriptions add 12,989 encoded bytes.  Combined SQLite
+record, JSON proof and operator encodings occupy 170,106 bytes raw, 164,445 reduced
+and 177,432 shared; their compressed packages occupy 34,352, 32,925 and 34,882
+bytes.  Thus caching reverses the storage benefit relative to reduced and even
+exceeds raw's package.  Fresh's compressed package is 39,737 bytes.  Diagnostic
+bytes, historical archives, repeated reports and database/container overhead are
+additional.  Peak process RSS is 55,050,240 bytes fresh, 54,001,664 raw,
+53,919,744 reduced and 54,067,200 shared; table-row reduction is not a process-memory
+bound.
+
+All workers start empty with the same fallback.  Preparation, recognition,
+checking, JSON/SQLite persistence, warm replay, both cold passes and compression
+are charged; interpreter startup, report metadata, panel generation and final
+lineage audit are additional.  The discovery probe allowance does not bound
+planning, normalization, leaf construction, verification, runtime or RAM.
+
+All ten remaining acquisition misses exceed the width-eight cap before their
+first elimination, with zero reserved projection work.  Later support compression
+cannot overcome that initial obstruction.  The next hypothesis is to combine
+small factors or condition before forming full incident buckets, checking exact
+recomposition and discovery cost.  Increasing the cap instead exposes the
+exponential width cost.  Result sharing also does not automatically share witness
+reconstruction or cold verification.  No production default, unrestricted
+small-width guarantee, polynomial acquisition theorem or new Lean refinement is
+claimed.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

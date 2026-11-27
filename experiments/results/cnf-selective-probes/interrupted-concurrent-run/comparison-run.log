@@ -1,0 +1,42 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_selective_probes.py", line 103, in <module>
+    if action=='trial':trial(out,Path(sys.argv[3]),sys.argv[4])
+                       ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_selective_probes.py", line 81, in trial
+    got=k.check_certificate(row['source'],base.load(dest/stored[root]),coldcounts)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_selective_probes.py", line 181, in check_certificate
+    closed,transport_data=replay_edge(raw,edge['units'],edge['relation'],edge['after_units'],edge['rounds'],edge['probe_rounds'],edge['tail'],edge['continuation'],mode,limits,counts)
+                          ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_selective_probes.py", line 98, in replay_edge
+    closed,names,fixed=replay(augmented,r['units'],limits,counts,fold=False)
+                       ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_relation_buckets.py", line 22, in replay
+    fixed[abs(l)]=l>0;active=set(native.restrict_scan(active,{abs(l):l>0},counts));counts['closed_checked_units']+=1
+                                 ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py", line 68, in restrict_scan
+    if any(abs(lit) in assignment and assignment[abs(lit)] == (lit > 0)
+       ^^^
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_selective_probes.py", line 104, in <module>
+    else:globals()[action](out)
+         ~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_selective_probes.py", line 96, in run
+    dest=out/f'{mode}-{i}';subprocess.run([sys.executable,__file__,'trial',str(out),str(dest),mode],check=True);samples.append(dict(**old.binding(dest/'report.json'),mode=mode,repeat=i))
+                           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 557, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1213, in communicate
+    self.wait()
+    ~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1279, in wait
+    return self._wait(timeout=timeout)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 2084, in _wait
+    (pid, sts) = self._try_wait(0)
+                 ~~~~~~~~~~~~~~^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 2042, in _try_wait
+    (pid, sts) = os.waitpid(self.pid, wait_flags)
+                 ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

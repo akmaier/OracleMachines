@@ -4,7 +4,30 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-## Latest checkpoint: source-checked relations after probing
+## Latest checkpoint: selective continuation and its reuse regression
+
+[Selective capped-probe continuation](selective-probe-discovery.md) raises
+structural coverage **97/110 to 105/110**, versus **103/110** with uniform doubling.
+It closes all four exposed frontier misses, raises new unique coverage **17/24 to
+20/24**, and loses no baseline verdict. Complete cost is **13.28% below base** and
+**2.61% below uniform doubling**, but **31.61% above fresh**. Defaults stay unchanged.
+The narrower cursor reuse avoids 710 repeated probes and 20 index builds but is
+**0.63% slower than selective restart in all five pairs**; retain that negative
+result. No new nonconstant residual sharing is observed.
+
+Four unique roots plus one repeat remain. Their seven width-9–12 leaves have no
+unit, disconnected component, binary conflict, forcing or alias; **598 complete
+single-literal probes find no failure**. Next investigate stronger joint binary
+consequences in this residual pipeline, comparing charged acquisition and exact
+recomposition with bounded width/ordering or conditioning controls. More of the
+same single-literal probing has no opportunity on these unchanged leaves.
+Cold replay (**1.73346 s**) and discovery including internal checking
+(**1.59018 s**) remain the largest costs: reuse validated normalization/intermediate
+state within one replay. Efficient arbitrary-SAT coverage remains open.
+All **2,338 full and 62 focused tests pass**; prior evidence and proofs are
+preserved. Resume `experiments/results/cnf-selective-probes/checkpoint.json`.
+
+## Previous checkpoint: source-checked relations after probing
 
 [Post-probe signed substitution](probe-relation-discovery.md) certifies the last
 exposed root within width eight and all 76 matched queries. It is 6.70% cheaper

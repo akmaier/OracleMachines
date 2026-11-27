@@ -5,7 +5,30 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: relations exposed by probe consequences
+## Latest evidence: selective continuation and exhausted single probes
+
+[Selective capped-probe continuation](selective-probe-discovery.md) raises
+structural coverage **97/110 to 105/110**, versus **103/110** with uniform doubling.
+It closes all four exposed frontier misses, raises new unique coverage **17/24 to
+20/24**, and loses no baseline verdict. Complete cost is **13.28% below base** and
+**2.61% below uniform doubling**, but **31.61% above fresh**. Defaults stay unchanged.
+The narrower cursor reuse avoids 710 repeated probes and 20 index builds but is
+**0.63% slower than selective restart in all five pairs**; retain that negative
+result. No new nonconstant residual sharing is observed.
+
+Four unique roots plus one repeat remain. Their seven width-9–12 leaves have no
+unit, disconnected component, binary conflict, forcing or alias; **598 complete
+single-literal probes find no failure**. Next investigate stronger joint binary
+consequences in this residual pipeline, comparing charged acquisition and exact
+recomposition with bounded width/ordering or conditioning controls. More of the
+same single-literal probing has no opportunity on these unchanged leaves.
+Cold replay (**1.73346 s**) and discovery including internal checking
+(**1.59018 s**) remain the largest costs: reuse validated normalization/intermediate
+state within one replay. Efficient arbitrary-SAT coverage remains open.
+All **2,338 full and 62 focused tests pass**; prior evidence and proofs are
+preserved. Resume `experiments/results/cnf-selective-probes/checkpoint.json`.
+
+## Previous evidence: relations exposed by probe consequences
 
 [Checked post-probe substitutions](probe-relation-discovery.md) close the last
 exposed root at width eight: previous coverage **47/48 to 48/48**, and **76/76**

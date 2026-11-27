@@ -15869,6 +15869,124 @@ no-failure controls and charging work and index lifetimes.  Reusing validated
 normalization and intermediate residuals within one replay remains the leading
 cost target.  Complete unrestricted coverage and efficient expansion remain open.
 
+\subsection{Selective continuation of capped probe acquisition}
+\label{sec:selective-probes}
+
+The next experiment integrates probe continuation into the residual-bucket path.
+It follows the earlier checked-prefix and cursor work
+(Sections~\ref{sec:changed-closure-probes} and~\ref{sec:probe-cursor});
+failed-literal reasoning and cursor resumption are not new tractability results.
+An initial allowance of 128 probes and the existing single relation tail are
+followed by a charged bucket attempt.  Only a nonconstant unresolved result whose
+probe acquisition stopped at its allowance receives up to 128 more probes.
+There is no second relation tail.  A successful bucket result is reused directly;
+a failed result is reused only if continuation leaves its exact source unchanged.
+Uniformly using 256 probes before the relation tail is a separate control, so
+its ordering can differ as well as its allocation of work.
+
+\begin{proposition}[Ephemeral clear-prefix reuse with checked consequences]
+Let deterministic single-assumption propagation have completed a clear prefix of
+an ordered candidate list on an exact normalized CNF $R$.  If $R$ and that order
+are unchanged, the same occurrence index and next-candidate offset can resume
+acquisition without repeating the prefix.  Such a cursor supplies no satisfiability
+or exhaustion claim.  Independently checked conflict traces for subsequent
+assumptions justify opposite literals on $R$; checked unit restriction and
+normalization yield an equisatisfiable residual with inverse model transport.
+Only these consequences and the downstream certificate need be replayed cold.
+\end{proposition}
+\begin{proof}
+An unchanged CNF gives every indexed occurrence the same source clause and every
+candidate the same propagation problem.  Repeating the completed clear prefix
+would therefore add no failed assumption.  Skipping it changes neither the
+remaining candidate problems nor the validity of independently checked later
+conflicts.  A conflict under assumption $l$ proves that each model of $R$ assigns
+$\neg l$.  Adjoining these consequences preserves the model set; verified unit
+restriction and inverse renaming then preserve satisfiability and reconstruct
+source models.  Compose these maps with the previously checked incoming map and
+bucket or conditioning evidence.  If the CNF changes, discard the cursor and
+rebuild on the new exact source.  An incorrect skip could only suppress acquisition: the cursor is absent from the accepted
+proof, whose consequences and verdict are checked on their actual sources.
+\end{proof}
+
+The implementation retains a cursor only when a partially scanned round has no
+failed assumptions.  A round with a new consequence discards its old index after
+restriction; a relation substitution also invalidates a changed-source cursor.
+The index is local to this incoming visit, not shared across formulas or persisted
+as authority.  Initial and continuation acquisition share at most eight accepted
+probe rounds.  At depth two there are at most seven incoming edges, so each mode
+performs at most $7\cdot256=1792$ budgeted probes per root.  The restart control
+can repeat at most another $7\cdot128=896$ clear probes.  These are attempt bounds,
+not propagation-operation or wall-time bounds; binary, unit and bucket work has
+separate charged limits.  Cold checking validates consequences and transport,
+not the search heuristic's claimed quota exhaustion.
+
+The frozen comparison includes the previous 76 queries, six exposed frontier
+inputs and 24 new unlabelled constructions plus four repeats.  The new panel
+uses random three-CNFs at 32--48 variables, nonfolding failure/alias mixtures
+with deleted-direction controls and parity prisms.  No new exact normalized
+source duplicates the preceding panel, although families recur.  There are
+69 SAT and 41 UNSAT queries, all independently labelled and answered by the
+common fallback if needed.  Source labels never guide acquisition.
+
+All previous 76 queries remain covered.  Among the six exposed frontier inputs,
+coverage rises from two to six, versus five with uniform doubling.  New unique
+coverage rises from $17/24$ to $20/24$, versus $19/24$ with uniform doubling;
+repeat coverage rises from $2/4$ to $3/4$ in both policies.  Hence total structural
+coverage is $97/110$ base, $103/110$ eager and $105/110$ selective, with no
+base-to-selective losses.  The selective restart and resume controls produce
+identical certificates except for their mode field.  Baseline and eager
+certificates translate exactly to the previous engine at their stated quotas.
+These controls separate continuation policy from the narrower reuse ablation.
+
+Five cyclic process orders give mean complete seconds of $4.07538$ fresh,
+$6.18505$ base, $5.50747$ eager, $5.32977$ selective restart and $5.36356$
+selective resume.  Resume saves $13.28\%$ against base and $2.61\%$ against
+eager, in all five paired comparisons.  It remains $31.61\%$ above fresh.
+Against restart, it is $0.63\%$ slower, also in all five pairs: the narrower
+index/prefix reuse has no supported end-to-end runtime win here.  Its acquisition
+phase is slightly shorter, but other phases dominate the small difference.
+Production defaults remain unchanged.  Total time includes input, discovery and
+its internal check, explicit checking, persistence, warm/cold replay and
+compression.  Process startup, labels, lineage audit, historical acquisition and
+post-hoc diagnostics are additional.
+
+Selective discovery performs 47 charged gates and 3,516 additional budgeted
+probes.  It retains 44 continuation rounds with 234 failed assumptions and
+298 unit steps, adding 45,579 compact evidence bytes.  Twenty unchanged-source
+cursors avoid 710 repeated probes and twenty index builds; three changed-source
+cursors are invalidated.  Total budgeted probes are 23,074 base, 26,342 eager and
+26,026 selective; restart additionally repeats those 710 clear probes.  Index
+builds are 472, 505, 531 and 511 respectively for base, eager, restart and resume.
+Retained graph nodes fall from 297 to 287 and splits from 115 to 110 relative
+to base, while retained bucket steps grow from 917 to 972.  The 28 shared targets
+and 23 distinct-raw merges persist, all these merges constant; there is still no
+new nonconstant sharing result.
+
+Combined compressed SQLite/JSON bytes are 988,298 fresh, 566,548 base, 398,753
+eager, 354,570 restart and 354,530 resume.  The latter two encode identical
+proofs modulo their mode strings, so their 40-byte difference is not structural
+compression.  Resume's compressed JSON is 211,009 bytes versus 213,301 base;
+most package reduction therefore comes from fewer fallback records, which fall
+from 669 to 264.  Diagnostics occupy an additional 469,751 bytes.  Peak RSS is
+respectively 160,481,280, 123,469,824, 103,743,488, 98,402,304 and 95,485,952 bytes;
+these are process observations, not memory guarantees.  Resume spends
+$1.59018$ seconds in discovery, including its internal check, and $1.73346$ in
+cold replay.  Reusing validated normalized/intermediate state within one replay
+remains the leading cost opportunity.
+
+Four unique random-three sources remain unresolved, with one repeated query:
+three have SAT labels and one is UNSAT.  Their seven unknown leaves have widths
+9--12; six stop before a bucket elimination step.  A separate complete census
+of 598 single-assumption probes finds no failed assumption.  None has a unit,
+disconnected decomposition, binary conflict, binary forcing or signed-equivalence
+block; none is Horn or dual-Horn.  Raising only the single-assumption allowance
+on these unchanged leaves cannot expose another such consequence.  The next
+coverage investigation should test stronger joint binary consequences using the
+existing checked-consequence machinery against bounded ordering/width or
+conditioning controls, with acquisition and recomposition fully charged.  This
+frontier explains a limit of the present recognizer; it neither proves hardness
+of these particular instances nor supplies an efficient arbitrary-SAT partition.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

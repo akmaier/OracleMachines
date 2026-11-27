@@ -12,7 +12,30 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: post-probe relations and capped acquisition
+## Current investigation: joint constraints beyond single probes
+
+[Selective capped-probe continuation](selective-probe-discovery.md) raises
+structural coverage **97/110 to 105/110**, versus **103/110** with uniform doubling.
+It closes all four exposed frontier misses, raises new unique coverage **17/24 to
+20/24**, and loses no baseline verdict. Complete cost is **13.28% below base** and
+**2.61% below uniform doubling**, but **31.61% above fresh**. Defaults stay unchanged.
+The narrower cursor reuse avoids 710 repeated probes and 20 index builds but is
+**0.63% slower than selective restart in all five pairs**; retain that negative
+result. No new nonconstant residual sharing is observed.
+
+Four unique roots plus one repeat remain. Their seven width-9–12 leaves have no
+unit, disconnected component, binary conflict, forcing or alias; **598 complete
+single-literal probes find no failure**. Next investigate stronger joint binary
+consequences in this residual pipeline, comparing charged acquisition and exact
+recomposition with bounded width/ordering or conditioning controls. More of the
+same single-literal probing has no opportunity on these unchanged leaves.
+Cold replay (**1.73346 s**) and discovery including internal checking
+(**1.59018 s**) remain the largest costs: reuse validated normalization/intermediate
+state within one replay. Efficient arbitrary-SAT coverage remains open.
+All **2,338 full and 62 focused tests pass**; prior evidence and proofs are
+preserved. Resume `experiments/results/cnf-selective-probes/checkpoint.json`.
+
+## Previous investigation: post-probe relations and capped acquisition
 
 [One checked signed substitution after probe consequences](probe-relation-discovery.md)
 raises previous coverage **47/48 to 48/48**, retaining all 28 new queries:

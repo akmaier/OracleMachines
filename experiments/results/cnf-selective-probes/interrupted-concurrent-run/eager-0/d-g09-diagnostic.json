@@ -1,0 +1,96 @@
+{
+  "attempts": [
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "spent": 32
+      },
+      "node": 0
+    }
+  ],
+  "edges": [
+    {
+      "diagnostic": {
+        "continuation": null,
+        "gate": null,
+        "post_relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 14
+          }
+        },
+        "probes": {
+          "binary": {
+            "reason": "complete",
+            "relation": {
+              "after_units": null,
+              "units": {
+                "reason": "fixed-point",
+                "spent": 233
+              }
+            },
+            "rounds": [
+              {
+                "forcing": {
+                  "reason": "complete",
+                  "searches": 14,
+                  "spent": 8
+                }
+              }
+            ],
+            "spent": 8
+          },
+          "probes": [
+            {
+              "failures": 1,
+              "offset": 0,
+              "probes": 46,
+              "truncated": false,
+              "units": {
+                "reason": "fixed-point",
+                "spent": 280
+              },
+              "variables_removed": 1
+            },
+            {
+              "failures": 2,
+              "offset": 0,
+              "probes": 44,
+              "truncated": false,
+              "units": {
+                "reason": "fixed-point",
+                "spent": 303
+              },
+              "variables_removed": 2
+            },
+            {
+              "failures": 4,
+              "offset": 0,
+              "probes": 40,
+              "truncated": false,
+              "units": {
+                "reason": "fixed-point",
+                "spent": 408
+              },
+              "variables_removed": 12
+            },
+            {
+              "failures": 0,
+              "offset": 0,
+              "probes": 16,
+              "truncated": false
+            }
+          ],
+          "reason": "no-failed-literal",
+          "spent": 146
+        }
+      },
+      "edge": 0
+    }
+  ],
+  "preprocessing": {
+    "reason": "fixed-point",
+    "spent": 1020
+  }
+}

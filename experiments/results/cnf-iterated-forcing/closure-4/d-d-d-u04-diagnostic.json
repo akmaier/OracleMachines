@@ -1,0 +1,192 @@
+{
+  "attempts": [
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "spent": 0
+      },
+      "node": 0
+    },
+    {
+      "diagnostic": {
+        "reason": "bag-width",
+        "spent": 0,
+        "width": 9
+      },
+      "node": 1
+    },
+    {
+      "diagnostic": {
+        "reason": "bag-width",
+        "spent": 0,
+        "width": 9
+      },
+      "node": 2
+    },
+    {
+      "diagnostic": {
+        "reason": "bag-width",
+        "spent": 0,
+        "width": 10
+      },
+      "node": 3
+    },
+    {
+      "diagnostic": {
+        "reason": "bag-width",
+        "spent": 0,
+        "width": 12
+      },
+      "node": 4
+    }
+  ],
+  "edges": [
+    {
+      "diagnostic": {
+        "reason": "constant",
+        "relation": {
+          "after_units": null,
+          "units": {
+            "reason": "empty-clause",
+            "spent": 336
+          }
+        },
+        "rounds": [],
+        "spent": 0
+      },
+      "edge": 0
+    },
+    {
+      "diagnostic": {
+        "reason": "constant",
+        "relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 218
+          }
+        },
+        "rounds": [],
+        "spent": 0
+      },
+      "edge": 1
+    },
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "relation": {
+          "after_units": {
+            "reason": "fixed-point",
+            "spent": 172
+          },
+          "units": {
+            "reason": "fixed-point",
+            "spent": 238
+          }
+        },
+        "rounds": [
+          {
+            "forcing": {
+              "reason": "complete",
+              "searches": 22,
+              "spent": 58
+            }
+          }
+        ],
+        "spent": 58
+      },
+      "edge": 2
+    },
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "relation": {
+          "after_units": {
+            "reason": "fixed-point",
+            "spent": 161
+          },
+          "units": {
+            "reason": "fixed-point",
+            "spent": 165
+          }
+        },
+        "rounds": [
+          {
+            "forcing": {
+              "reason": "complete",
+              "searches": 22,
+              "spent": 56
+            }
+          }
+        ],
+        "spent": 56
+      },
+      "edge": 3
+    },
+    {
+      "diagnostic": {
+        "reason": "constant",
+        "relation": {
+          "after_units": null,
+          "units": {
+            "reason": "empty-clause",
+            "spent": 432
+          }
+        },
+        "rounds": [],
+        "spent": 0
+      },
+      "edge": 4
+    },
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 198
+          }
+        },
+        "rounds": [
+          {
+            "forcing": {
+              "reason": "complete",
+              "searches": 24,
+              "spent": 26
+            }
+          }
+        ],
+        "spent": 26
+      },
+      "edge": 5
+    },
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 236
+          }
+        },
+        "rounds": [
+          {
+            "forcing": {
+              "reason": "complete",
+              "searches": 4,
+              "spent": 2
+            }
+          }
+        ],
+        "spent": 2
+      },
+      "edge": 6
+    }
+  ],
+  "preprocessing": {
+    "reason": "fixed-point",
+    "spent": 990
+  }
+}

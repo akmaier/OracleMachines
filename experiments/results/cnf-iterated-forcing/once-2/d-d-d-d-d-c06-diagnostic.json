@@ -1,0 +1,212 @@
+{
+  "attempts": [
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "spent": 0
+      },
+      "node": 0
+    },
+    {
+      "diagnostic": {
+        "reason": "bag-width",
+        "spent": 2352,
+        "width": 9
+      },
+      "node": 1
+    },
+    {
+      "diagnostic": {
+        "reason": "bag-width",
+        "spent": 640,
+        "width": 11
+      },
+      "node": 2
+    },
+    {
+      "diagnostic": {
+        "reason": "bag-width",
+        "spent": 768,
+        "width": 9
+      },
+      "node": 3
+    },
+    {
+      "diagnostic": {
+        "reason": "bag-width",
+        "spent": 1536,
+        "width": 11
+      },
+      "node": 4
+    },
+    {
+      "diagnostic": {
+        "reason": "bag-width",
+        "spent": 0,
+        "width": 9
+      },
+      "node": 5
+    }
+  ],
+  "edges": [
+    {
+      "diagnostic": {
+        "reason": "constant",
+        "relation": {
+          "after_units": null,
+          "units": {
+            "reason": "empty-clause",
+            "spent": 435
+          }
+        },
+        "rounds": [],
+        "spent": 0
+      },
+      "edge": 0
+    },
+    {
+      "diagnostic": {
+        "reason": "round-limit",
+        "relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 228
+          }
+        },
+        "rounds": [
+          {
+            "forcing": {
+              "reason": "complete",
+              "searches": 36,
+              "spent": 149
+            },
+            "units": {
+              "reason": "fixed-point",
+              "spent": 270
+            },
+            "variables_removed": 3
+          }
+        ],
+        "spent": 149
+      },
+      "edge": 1
+    },
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 220
+          }
+        },
+        "rounds": [
+          {
+            "forcing": {
+              "reason": "complete",
+              "searches": 32,
+              "spent": 70
+            }
+          }
+        ],
+        "spent": 70
+      },
+      "edge": 2
+    },
+    {
+      "diagnostic": {
+        "reason": "round-limit",
+        "relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 220
+          }
+        },
+        "rounds": [
+          {
+            "forcing": {
+              "reason": "complete",
+              "searches": 32,
+              "spent": 65
+            },
+            "units": {
+              "reason": "fixed-point",
+              "spent": 210
+            },
+            "variables_removed": 1
+          }
+        ],
+        "spent": 65
+      },
+      "edge": 3
+    },
+    {
+      "diagnostic": {
+        "reason": "constant",
+        "relation": {
+          "after_units": null,
+          "units": {
+            "reason": "empty-clause",
+            "spent": 448
+          }
+        },
+        "rounds": [],
+        "spent": 0
+      },
+      "edge": 4
+    },
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 212
+          }
+        },
+        "rounds": [
+          {
+            "forcing": {
+              "reason": "complete",
+              "searches": 28,
+              "spent": 28
+            }
+          }
+        ],
+        "spent": 28
+      },
+      "edge": 5
+    },
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 260
+          }
+        },
+        "rounds": [
+          {
+            "forcing": {
+              "reason": "complete",
+              "searches": 4,
+              "spent": 2
+            }
+          }
+        ],
+        "spent": 2
+      },
+      "edge": 6
+    }
+  ],
+  "preprocessing": {
+    "reason": "fixed-point",
+    "spent": 1086
+  }
+}

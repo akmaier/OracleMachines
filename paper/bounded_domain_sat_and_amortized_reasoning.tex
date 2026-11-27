@@ -15457,6 +15457,152 @@ cost evidence here. Iteration must be measured on complete roots, including
 repeated graph reconstruction, checking and remaining wide cases. General compact
 closure and efficient coverage of unrestricted SAT remain open.
 
+\subsection{Repeated binary forcing and remaining wide-clause consequences}
+\label{sec:iterated-forcing-buckets}
+
+The next experiment addresses the missing iteration identified above.  After
+initial unit, binary-conflict and one-block signed-equivalence preparation, it
+repeats checked one-way forcing and unit restriction on each resulting cofactor.
+Consequences of one round can shorten wide clauses into binary implications for
+the next.  The single-pass control and repeated variant share the same exact
+bucket and conditioning machinery; no additional SCC substitution is performed
+between forcing rounds.
+
+\begin{proposition}[Exact bounded forcing rounds with strict progress]
+Let $F_0$ be a CNF with $n$ active variables.  In round $i$, let $L_i$ be literals
+entailed by source-supported binary paths in $F_i$, and let $F_{i+1}$ be a
+normalized residual obtained by active-unit restriction of
+$F_i\land\bigwedge_{l\in L_i}l$.  Retain the unit values and inverse renaming for
+each round.  Any finite such chain preserves satisfiability and admits a model
+lift by reversing the retained transports.  Suppose another round is permitted
+only after a strict decrease in active variables, and no forcing round is taken
+on a constant formula.  There are at most $n$ accepted rounds, including a
+possible final nonprogressing round.  If all path discoveries together use at
+most $T$ separately charged edge visits, their stored path-step occurrences sum
+to at most $T$; enforcing a smaller round or traversal cap preserves exactness
+without asserting a fixed point.
+\end{proposition}
+\begin{proof}
+The preceding forcing proposition gives
+$F_i\equiv F_i\land\bigwedge_{l\in L_i}l$.  The unit-transport identity then
+relates this augmented formula to its residual and recorded values.  Inverse
+normalization only restores names.  Induction over the rounds composes these
+identities, and reversing the transports reconstructs a model of $F_0$ from a
+final residual model.  A refuted residual likewise excludes every model of
+$F_0$.  Each productive round removes at least one active variable.  If all $n$
+variables disappear the residual is constant, so no further forcing round is
+available.  Otherwise at most $n-1$ productive rounds can precede a final
+nonprogressing round.  This proves the accepted-round bound, including the
+zero-variable case.  Each stored path consists of edges visited by its own
+search, so its length is at most that search's charged visits; summing gives
+the $T$ bound.  Stopping removes possible later consequences but invalidates no
+accepted identity.  Neither this termination argument nor the traversal cap
+bounds the difficulty of the remaining general SAT problem.
+\end{proof}
+
+Discovery uses at most eight rounds and a cumulative allowance of 262,144
+forcing-edge visits per incoming cofactor, shared across all its rounds.
+Each unit invocation separately allows 512 steps and 262,144 reserved index-work
+units.  Buckets retain depth two, width eight and their separate 262,144-probe
+allowance.  Graph setup, queues, start enumeration, path assembly, normalization,
+checking, persistence, time and RAM remain additional costs.  The binary graph
+is rebuilt each round; this is not an incremental graph-maintenance speedup.
+A final round with no variable decrease may retain entailed units but cannot
+justify another round.  Partial unit processing and budget exhaustion remain
+exact partial transformations, with no assertion of complete closure.
+
+The certificate stores source-supported paths and unit steps for each round.
+Replay reconstructs the current CNF, checks its exact clause bindings and units,
+then derives the next residual and inverse map.  It enforces a cumulative
+path-step bound; unrecorded discovery traversals are not reconstructed by that
+bound.  SAT lifting reverses all round maps before the initial signed-relation
+and unit maps.  Every incoming transport remains separate, every SAT edge is
+checked, and UNSAT splits still require both exact children.  Unknown is not a
+refutation.  Full normalized residual and remaining depth remain the local
+reuse key under fixed policy; whole-root programs share within a stream and are
+rechecked on warm and cold use.  Source edits invalidate clause bindings, and
+policy changes invalidate reuse.  The new JSON authority changes no native,
+equivalence, affine or Lean format.  Its single-pass mode is audited against the
+preceding separate-path implementation after a lossless format translation.
+
+The matched panel has twenty-four exposed sources, fifteen SAT and nine UNSAT;
+twenty-four new constructions, ten SAT and fourteen UNSAT; and four SAT repeats.
+The new panel was frozen before kernel implementation.  It contains growing
+random three-CNFs, guarded forcing cascades with deleted links, parity prisms,
+and chains with opposing wide clauses.  Names, signs and order are scrambled.
+Descriptions and independent labels are withheld from acquisition, and no new
+normalized source duplicates the preceding panel.  These synthetic controls are
+not a representative external SAT distribution.
+
+Repeated forcing certifies six of the twenty-four exposed gaps, three SAT and
+three UNSAT.  New unique coverage stays at $22/24$ and repeat coverage at $3/4$,
+with no observed losses.  The fallback already supplies all fifty-two answers.
+All six permutations of fresh solving, one pass and repeated closure run in
+fresh processes.  Mean complete times are respectively $0.82988$, $2.59466$ and
+$2.12170$ seconds.  Closure saves $18.23\%$ against one pass; every paired order
+improves, from $10.37\%$ to $32.50\%$.  It still costs $2.56$ times fresh solving,
+so production defaults remain unchanged.  Complete time includes preparation,
+discovery, verification, evidence and database writes, warm use, cold replay and
+compression.  Startup, report metadata, generation, post-hoc diagnostics,
+historical acquisition and final lineage audit remain additional.
+
+Bucket nodes fall from $186$ to $175$, split nodes from $83$ to $80$, and
+elimination steps from $407$ to $327$.  Accepted forcing rounds rise from $51$
+to $96$ and subsequent unit steps from $156$ to $317$.  Twenty-three incoming
+edges accept multiple rounds, with a maximum of six.  Discovered forced-literal
+occurrences rise from $131$ to $298$, stored path steps from $488$ to $1,292$,
+reachability searches from $3,206$ to $4,670$, and traversed edges from $7,862$
+to $14,034$.  Including acquisition checks, support checks rise from $1,535$ to
+$3,970$.  Compact forcing evidence grows from $8,014$ to $18,923$ bytes.  The
+benefit comes from removing enough later work to repay these additional local
+costs, not from compressing the forcing evidence itself.  Both arms have
+twenty-one shared targets and fifteen joins of distinct raw cofactors, all
+constant; no additional nonconstant semantic sharing is established.
+
+No measured closure call reaches its round, traversal or nonprogress stop.
+Sixty-seven incoming edges end constant and 141 finish without another forced
+literal.  Maximum cumulative forcing traversal is $782$ visits, far below the
+allowance.  Thus simply increasing the binary round cap has little evidence as
+the next target.  Initial preparation and branching trajectories differ once
+more roots close, so changed call totals are not a pure per-call microbenchmark.
+
+Raw certificates occupy $3,646,507$ bytes for one pass and $3,520,828$ for closure.
+Native record bytes are $1,063,204$ fresh, $796,000$ once and $589,421$ closure;
+combined compressed SQLite/JSON packages occupy $204,714$, $218,868$ and
+$176,174$ bytes.  Diagnostic bytes are separately $0$, $129,409$ and $142,636$.
+Peak RSS is $74,924,032$, $74,711,040$ and $71,188,480$ bytes.  These are
+process-level observations, not asymptotic or universal memory guarantees;
+historical copies and container overhead remain additional.  Closure spends
+$0.51010$ seconds in discovery, $0.44027$ solve/check, $0.28465$ warm and
+$0.69853$ cold, versus $0.55496$, $0.56120$, $0.33540$ and $0.90352$ for one
+pass.  Cold verification remains the largest phase.  Both native readers check
+fallback archives; the extra JSON passes share one checker rather than two
+independent JSON implementations.
+
+Twenty unique roots remain structurally unresolved, eighteen exposed and two
+new, plus one repeated query.  Their thirty unknown depth-zero nodes all fail
+width limits: nineteen at nine, six at ten and five at eleven.  Seven stop before
+elimination and twenty-three retain partial work.  A separately checked
+structural profile finds no units, disconnected components, Horn/dual-Horn
+leaves, binary conflicts or remaining one-way forcing.  One equivalence block
+remains, merging one variable.  This profile costs $0.01995$ seconds and adds
+no root verdict.
+
+A stronger lead appears when unit propagation uses the full CNF under a single
+assumption.  A separate diagnostic tries both signs of each variable, with at
+most 128 probes per leaf, checking every returned unit reason and conflict
+clause against the exact source.  All $1,022$ probes fit without truncation.
+Every one of the thirty leaves has a failed assumption, with 207 failed-literal
+occurrences; six leaves fail under both signs of some variable.  Wider clauses
+therefore expose consequences missed by binary reachability.  Nonfailed probes
+are not SAT witnesses.  This profile costs $0.09285$ seconds, with $505,678$
+propagation-literal visits and $9,576$ checked reason/conflict literals.  It is
+post-hoc, not measured acquisition, and its leaf refutations are not additional
+whole-root certificates.  The next target is bounded source-certified full-CNF
+failed-literal closure, charging unsuccessful probes, repeated scans, exact
+round transport and cold verification.  General wide interactions and efficient
+unrestricted SAT coverage remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -4,7 +4,23 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (27 November, one-way forcing buckets):
+## Latest checkpoint: bounded repeated binary forcing
+
+[Repeated forcing](iterated-forcing-discovery.md) certifies six of 24 exposed
+misses and lowers matched complete cost 18.23% versus one pass, still 2.56 times
+fresh. New unique coverage stays 22/24; prior results and all 72 proofs remain
+preserved. All 2,300 full and 34 focused tests pass. Resume
+`experiments/results/cnf-iterated-forcing/checkpoint.json`.
+
+The next gap is wider-clause propagation: binary forcing is exhausted on the
+30 remaining unknown nodes, but a separately checked full-CNF probe census finds
+failed assumptions in all thirty. Integrate bounded failed-literal closure with
+exact round transport and complete costs; leaf diagnostics do not supply root
+certificates or an unrestricted SAT bound. The new record retains the single-pass
+misses, increased path evidence and repeated-query gap.
+
+
+Previous expansion checkpoint (27 November, one-way forcing buckets):
 [Checked binary forcing](forcing-bucket-discovery.md) closes 7/27 exposed misses
 and raises new unique coverage 17/24 to 20/24. Separate-path complete cost improves
 12.41% versus the wrapped relation policy, but remains about 2.88 times fresh.
@@ -1193,6 +1209,7 @@ current-engine results and 129 proofs, and retains a bounded current model.
 and hashes confirming preservation. Four historical experiment datasets are
 unchanged. `expanded-pilot/` preserves the development failures; `expanded/`
 contains the final data and source/binary fingerprints.
+
 
 ## Structural follow-up on items 1 and 4
 

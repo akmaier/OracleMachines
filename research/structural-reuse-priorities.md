@@ -12,7 +12,29 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: one-way forcing before bucket expansion
+## Current investigation: repeated forcing before expansion
+
+[Repeated binary forcing](iterated-forcing-discovery.md) certifies **6/24**
+exposed structural misses and saves **18.23%** complete cost versus one pass.
+All six paired orders improve; novel unique coverage stays **22/24**. Bucket
+nodes fall **186 to 175**, elimination steps **407 to 327**, and compressed
+SQLite/JSON **218,868 to 176,174 bytes**. Forcing evidence itself grows. Complete
+cost remains **2.56 times fresh**, so defaults stay unchanged. Cold checking
+(0.69853 s) remains largest, followed by discovery (0.51010 s).
+
+**Next: checked full-CNF failed-literal closure before buckets.** The remaining
+30 wide nodes from 20 unique roots have no binary forcing; only one more signed
+alias remains. Yet a separate checked probe census finds failed assumptions in
+all thirty, with 207 failures and six leaves refutable under both signs. Its
+1,022 probes cost 0.09285 s and are not additional root authority. Charge failed
+and successful probes, source binding, round transport and cold verification;
+reuse unaffected propagation work only when its total cost pays. Increasing the
+binary round cap or repeating SCC recognition has weaker evidence here.
+Resume `experiments/results/cnf-iterated-forcing/checkpoint.json`, key
+`iterated_forcing.remaining`. All **2,300 full and 34 focused tests pass**; prior
+230 manifests, 42,390 artifact entries, 1,263 sources and 72 proofs are preserved.
+
+## Previous investigation: one-way forcing before bucket expansion
 
 [Source-bound one-way implication paths](forcing-bucket-discovery.md) certify
 **7/27** exposed acquisition gaps and increase frozen unique coverage

@@ -1,0 +1,201 @@
+{
+  "attempts": [
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "spent": 0
+      },
+      "node": 0
+    },
+    {
+      "diagnostic": {
+        "reason": "bag-width",
+        "spent": 640,
+        "width": 11
+      },
+      "node": 1
+    },
+    {
+      "diagnostic": {
+        "reason": "bag-width",
+        "spent": 256,
+        "width": 10
+      },
+      "node": 2
+    },
+    {
+      "diagnostic": {
+        "reason": "bag-width",
+        "spent": 0,
+        "width": 9
+      },
+      "node": 3
+    }
+  ],
+  "edges": [
+    {
+      "diagnostic": {
+        "reason": "constant",
+        "relation": {
+          "after_units": {
+            "reason": "empty-clause",
+            "spent": 304
+          },
+          "units": {
+            "reason": "fixed-point",
+            "spent": 190
+          }
+        },
+        "rounds": [],
+        "spent": 0
+      },
+      "edge": 0
+    },
+    {
+      "diagnostic": {
+        "reason": "constant",
+        "relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 145
+          }
+        },
+        "rounds": [
+          {
+            "forcing": {
+              "reason": "complete",
+              "searches": 22,
+              "spent": 140
+            },
+            "units": {
+              "reason": "fixed-point",
+              "spent": 232
+            },
+            "variables_removed": 3
+          },
+          {
+            "forcing": {
+              "reason": "complete",
+              "searches": 22,
+              "spent": 201
+            },
+            "units": {
+              "reason": "empty-clause",
+              "spent": 262
+            },
+            "variables_removed": 12
+          }
+        ],
+        "spent": 341
+      },
+      "edge": 1
+    },
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 172
+          }
+        },
+        "rounds": [
+          {
+            "forcing": {
+              "reason": "complete",
+              "searches": 22,
+              "spent": 22
+            }
+          }
+        ],
+        "spent": 22
+      },
+      "edge": 2
+    },
+    {
+      "diagnostic": {
+        "reason": "constant",
+        "relation": {
+          "after_units": {
+            "reason": "empty-clause",
+            "spent": 147
+          },
+          "units": {
+            "reason": "fixed-point",
+            "spent": 194
+          }
+        },
+        "rounds": [],
+        "spent": 0
+      },
+      "edge": 3
+    },
+    {
+      "diagnostic": {
+        "reason": "constant",
+        "relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 147
+          }
+        },
+        "rounds": [],
+        "spent": 0
+      },
+      "edge": 4
+    },
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 207
+          }
+        },
+        "rounds": [
+          {
+            "forcing": {
+              "reason": "complete",
+              "searches": 26,
+              "spent": 34
+            }
+          }
+        ],
+        "spent": 34
+      },
+      "edge": 5
+    },
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 206
+          }
+        },
+        "rounds": [
+          {
+            "forcing": {
+              "reason": "complete",
+              "searches": 4,
+              "spent": 2
+            }
+          }
+        ],
+        "spent": 2
+      },
+      "edge": 6
+    }
+  ],
+  "preprocessing": {
+    "reason": "fixed-point",
+    "spent": 870
+  }
+}

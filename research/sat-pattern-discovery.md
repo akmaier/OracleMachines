@@ -5,7 +5,26 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: one-way forcing and its evidence-sharing limit
+## Latest evidence: repeated forcing and the wide-clause gap
+
+[Bounded repeated forcing](iterated-forcing-discovery.md) certifies **6/24**
+exposed misses (three SAT, three UNSAT), while new unique coverage stays **22/24**
+and repeats **3/4**, without observed losses. Total cost falls **18.23%** against
+the single pass; all six paired runs improve. It still costs **2.56 times fresh**.
+Bucket nodes fall 186 to 175; path evidence grows, but later solving and cold
+checking shrink. No production default or unrestricted-SAT bound changes.
+
+The 20 remaining unique roots have 30 wide unknown nodes and no remaining binary
+forcing. A separate checked full-CNF probe profile finds failed assumptions in
+**30/30** nodes: 207 failed literals from 1,022 probes, with both signs failing in
+six leaves. These are diagnostic leaf results, not new root certificates.
+**Next: bounded full-CNF failed-literal closure**, charging misses, proof
+construction and replay before claiming a gain. More binary-only rounds have
+little evidence: the eight-round cap was never hit.
+Resume `experiments/results/cnf-iterated-forcing/checkpoint.json`.
+All **2,300 full and 34 focused tests pass**; previous results remain preserved.
+
+## Previous evidence: one-way forcing and its evidence-sharing limit
 
 [Checked one-way binary forcing](forcing-bucket-discovery.md) certifies **7/27**
 exposed misses (five SAT, two UNSAT) and raises new unique-panel coverage

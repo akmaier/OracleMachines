@@ -16957,6 +16957,137 @@ with bindings, ownership and invalidation charged.  These external results suppo
 limited transfer while leaving economical broad recognition, nonconstant reuse
 across arbitrary structures and unrestricted expansion bounds open.
 
+\subsection{Clause-derived demand and capacity refutations}
+\label{sec:capacity-core}
+
+The preceding external audit isolates five pigeonhole originals among its six
+unresolved originals.  A new optional recognizer derives a capacity core directly
+from clauses, closing all five and their signed-renaming control.  On the same
+already exposed panel, original coverage rises from 19/25 to 24/25, while related
+controls rise from 10/12 to 11/12.  No previous verdict is lost.  This is an
+exploratory response to an observed gap, not a fresh holdout result, representative
+coverage estimate or complete efficient classification.
+
+\begin{proposition}[Disjoint demands exceeding checked capacity]
+Let $D_1,\ldots,D_d$ be distinct clauses of a CNF $F$ whose literal sets are
+pairwise disjoint.  Let $G_1,\ldots,G_g$ partition their literal union into
+nonempty groups.  Suppose every distinct pair $a,b$ in each group either consists
+of complementary literals, or has $(\neg a\lor\neg b)$ as a clause of $F$.
+If $d>g$, then $F$ is unsatisfiable.  The empty-clause case permits one empty
+demand and zero groups.
+\end{proposition}
+\begin{proof}
+A satisfying assignment would make at least one literal in every demand true.
+Literal disjointness makes these at least $d$ distinct true literals.  No group
+can contain two true literals: complementary literals cannot both be true, and
+otherwise their checked binary exclusion would be violated.  Since the groups
+partition all demand literals, there can be at most $g$ true literals in their
+union.  This contradicts $d>g$.  An empty demand directly contradicts
+satisfaction and satisfies the same count with $d=1$ and $g=0$.
+\end{proof}
+
+Literal disjointness is essential; variable disjointness is not required.
+Opposite literals can occur in different demands.  The certificate stores the
+demand clauses and capacity groups.  The checker normalizes source duplicates
+and tautologies, verifies demand containment and disjointness, checks the exact
+group partition and every exclusion pair, and tests strict deficiency.  It does
+not invoke discovery or matching.  The certificate is an inconsistent subset of
+the source, not an exact decomposition or semantic equivalent of the full CNF.
+Adding constraints preserves its authority; reusing it after a source change
+requires rechecking its support against the current clauses.  Filenames, publisher
+labels, hashes and proposed resource names provide no logical authority.
+
+Discovery makes two fixed greedy selections, first from clauses of width at least
+three and then from all nonempty clauses, ordered by decreasing width and literal
+tuple.  Selected demands have disjoint literal sets.  Binary exclusions and
+complementary literals induce a conflict graph; a degree-ordered greedy clique
+partition proposes capacity groups.  An augmenting-path matching procedure
+matches demands to incident groups.  A failed augmentation supplies alternating
+reachable demands and their neighboring groups; only this deficient subset is
+retained.  Its independently checked proof can detect local deficiency even
+when unrelated components contribute spare global capacity.  Conversely, a
+matching does not prove SAT: omitted clauses and conflicts between different
+groups can still prevent satisfaction.
+
+The recognizer shares a 300,000-probe allowance across both selections.  It does
+not include source scans, sorting, adjacency construction, checking or storage;
+all of those are timed externally.  Budget exhaustion and failure of the greedy
+selections remain unresolved.  Verification must inspect all source support and
+all within-group pairs; a compact certificate does not make that input work free.
+Neither selection nor clique partition is a complete recognizer of all possible
+capacity cores.  No general small-core or unrestricted SAT bound is claimed.
+
+The new gate runs before the unchanged expanded external pipeline.  A checked
+core refutes the original source directly; otherwise the old pipeline runs.
+All 31 non-hit certificate payloads exactly equal their baseline counterparts,
+and every baseline payload equals the earlier checkpoint's external certificate.
+The six hits previously had no verdict, so this panel has no overlap with earlier
+certified answers, although semantic overlap with other recognizers is possible.
+Gate-first dispatch partitions operational outcomes, not all SAT instances into
+tractable semantic classes.
+
+The five new original cores have demand/capacity counts $7/6$, $8/7$, $9/8$,
+$10/9$ and $11/10$.  The signed-renaming control has $11/10$.  Their serialized
+wrapper certificates total 14,120 bytes and require 2,115 exclusion-pair checks
+per complete verification pass, in addition to source scanning and parsing.
+Only \texttt{uf50-01000.cnf} remains unresolved among originals; the edited
+\texttt{hole10} control also remains unresolved and cannot inherit the original's
+UNSAT proof or label.  Exact sources, incomplete certificates and recognition
+diagnostics are retained.  The unchanged synthetic 182/182 union remains separate.
+
+Four new paired process orders compare the gate with the expanded baseline.
+Initial source parsing, search, internal and explicit checks, writes, compression,
+warm reload and two cold passes are charged.  Replays reparse the raw source and
+load JSON; verified-operator banks start empty per phase.  Operating-system caches
+are not flushed.  Startup, final metadata and independent audits are extra.
+There is no fallback solver, so this is not total cost to answer every input or
+a comparison against fresh CDCL solving.  Mean complete time falls from
+35.06016 to 25.69409\,s, a 26.71\% reduction.  All four paired reductions are
+favorable: 26.08\%, 27.16\%, 26.64\% and 26.96\%.
+
+Acquisition/internal checking costs 15.76543 versus 12.11574\,s; explicit checking
+3.97096 versus 2.57986\,s; warm replay 4.96090 versus 3.53669\,s; and the two cold
+passes 9.90301 versus 7.10375\,s.  JSON evidence decreases from 33,896,356 to
+26,263,102 bytes, compressed evidence from 562,876 to 445,179 bytes, and observed
+maximum process RSS from 143,294,464 to 121,421,824 bytes.  Both arms use the same
+wrapper serialization, whose indentation changes absolute JSON byte counts from
+the earlier adapter-only experiment.  These are observed costs, not worst-case
+bounds.  Recognition of non-hits is charged; total gate probes are 360,694 over
+37 inputs.  Production defaults remain unchanged on this exposed convenience
+sample.
+
+An independent explicit truth-table audit checks 5,462 inputs: all 512 normalized
+two-variable CNFs; all 3,304 three-variable CNFs with at most three distinct
+clauses; 64 and 512 domain restrictions for three demands with two and three
+resources; 1,000 random small CNFs; 22 deletions; and 48 signed, edited or mixed
+controls.  All 1,260 emitted refutations agree with truth tables.  Cold checks
+disable discovery, and a second audit reproduces all semantic records exactly.
+Every single-clause deletion from the four-demand/three-resource core is SAT and
+invalidates the old proof.  Four conjunctive additions permit checked core reuse.
+Twenty focused tests also reject malformed proofs, overlapping or duplicate
+demands, incomplete partitions and non-strict deficiency, and check budget stops
+and unchanged fallback behavior.
+
+The retained negative evidence is significant: discovery misses thirty UNSAT
+domain restrictions and two of sixteen UNSAT mixtures.  All missed sources are
+saved.  These are gate-only misses; the existing pipeline may still decide them.
+Overlapping clauses or edits can disrupt greedy demand selection, and
+general renaming invariance is not proved.  A checked core can remain valid under
+an addition even when fresh greedy discovery fails to find it.  Soundness of the
+certificate therefore does not imply complete discovery, even for small related
+encodings.  All older sources, evidence and 82 proof blocks remain unchanged;
+this subsection adds the elementary counting argument above.
+
+Next, inspect the surviving random 3-CNF interaction and the edited capacity
+instance.  Choice structure might support a SAT proposal, but every original
+clause must be checked before granting SAT authority.  Better bounded demand
+selection and checked reuse through edits should be tested against the retained
+thirty domain and two mixed counterexamples.  Broader transfer needs newly frozen
+unseen encodings, including auxiliary representations and non-clique exclusions.
+Validated context reuse and direct single-clause width reasoning remain cost
+opportunities.  None of these observations supplies a uniformly efficient
+partition or an unrestricted polynomial SAT procedure.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

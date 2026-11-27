@@ -1,0 +1,9 @@
+{
+  "stage": "metadata finalization",
+  "first_command": "python3 -m experiments.results.cnf-capacity-core.finalize_evidence experiments/results/cnf-capacity-core 354 344 345 346 347",
+  "first_failure": "RecursionError while importing the long historical comparison chain; reproduced in import-reproduction.log before correction.",
+  "dependent_seal_failure": "FileNotFoundError for decision.json because finalization had failed. No checkpoint or validation bytes changed during that failed seal.",
+  "correction": "Use direct standard-library JSON/SHA256 helpers in the metadata finalizer; remove the historical benchmark import chain.",
+  "timed_algorithms_and_results_unchanged": true,
+  "full_tests_unaffected": true
+}

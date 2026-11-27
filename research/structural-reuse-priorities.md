@@ -12,7 +12,50 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: external capacity and recognition gaps
+## Current investigation: capacity recognition and the surviving interactions
+
+[Clause-derived capacity cores](capacity-core-certificates.md) close all five
+previously unresolved pigeonhole originals and their signed renaming. On the
+**already exposed** external panel, coverage rises **19/25 → 24/25 originals**
+and **10/12 → 11/12 derived controls**, with no lost result. This follow-up is
+motivated by the prior gap; it is not fresh holdout or representative coverage.
+The earlier synthetic 182/182 union remains separate and unchanged.
+
+A checked inconsistent subset supplies whole-source UNSAT authority: selected
+source clauses have disjoint literal sets, their literals are partitioned into
+groups with checked pairwise exclusions, and demand exceeds capacity. Greedy
+selection and a clique partition propose the structure; an alternating reachable
+subset can isolate local deficiency. The checker verifies source containment,
+disjointness, every exclusion and strict deficiency without discovery. Reuse
+under additions or edits requires fresh current-source support checks. A matching
+or failed recognition does not prove SAT. The remainder is unrestricted.
+
+In four new paired runs, complete measured cost falls **35.06016 → 25.69409 s
+(26.71%)**, with all paired signs favorable. Discovery, internal/explicit checking,
+persistence and warm/two cold replays are charged. Compressed proofs shrink
+**562,876 → 445,179 bytes**. There is no fallback solver and two inputs remain
+unanswered, so this is not complete solving cost or a fresh-CDCL comparison.
+The gate is optional; production defaults stay unchanged.
+
+**Remaining external gap:** `uf50-01000.cnf` is the one unresolved original;
+the edited `hole10` control also remains open. Inspect their coupled interaction
+and possible checked SAT reconstruction. **Recognition gap:** independent truth
+tables certify all 1,260 emitted refutations across 5,462 small/adversarial inputs,
+but greedy search misses thirty UNSAT domain restrictions and two UNSAT mixtures.
+Their exact sources are retained; these are gate-only misses, not claims that
+the full pipeline leaves them unanswered. Better bounded demand selection or checked core
+reuse through edits should target these counterexamples, followed by unseen
+encodings. No general renaming invariance or compact-core guarantee is proved.
+
+All **2,467 full and 20 focused tests pass**. The new counting proof preserves all
+82 earlier proof blocks; all 241 preceding manifests, 80,996 artifact entries and
+1,316 scientific sources are unchanged. The validator reproduces certificates,
+counters and warm/cold checks for all eight runs. Resume
+`experiments/results/cnf-capacity-core/checkpoint.json`, key `capacity_core`.
+Broader auxiliary/non-clique encodings, economical recognition, validated context
+reuse and unrestricted expansion bounds remain open.
+
+## Previous investigation: external capacity and recognition gaps
 
 [Frozen external SATLIB audit](external-cutset-audit.md) separates the prior
 synthetic completion from external transfer. On **25 original public inputs**,

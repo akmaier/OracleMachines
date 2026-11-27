@@ -5,7 +5,27 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: closure after conditioning and exact residual reuse
+## Latest evidence: binary conflicts and signed quotient transport
+
+[Checked binary relations](relation-bucket-discovery.md) certify **2/21** exposed
+misses, one SAT and one UNSAT. New unique-panel coverage remains **16/24**, with
+all four repeats covered; the fallback already supplies every answer. Binary
+conflict checking reduces total cost 5.34% versus units, and one signed SCC
+substitution per edge saves another 5.53%: **10.57% overall**. The pipeline still
+costs **3.09 times fresh solving**; defaults stay unchanged. Smaller quotients do
+not demonstrate broader nonconstant sharing on this panel.
+
+Twenty-seven unique remaining sources have fifty wide unresolved nodes. Only
+one more equivalence block remains, but a separately checked diagnostic finds
+one-way forcing paths in **32/50** leaves, giving 91 forced literals and five
+conflicts after propagation. **Next: checked one-way binary forcing**, with
+source-bound paths and incoming witness transport. These leaf diagnostics are
+not new root coverage. Resume
+`experiments/results/cnf-relation-buckets/checkpoint.json`.
+All **2,276 full and 26 focused tests pass**; previous artifacts and 70 proofs
+are preserved. General compact classification remains open.
+
+## Previous evidence: closure after conditioning and exact residual reuse
 
 [Per-cofactor unit closure](closed-bucket-discovery.md) certifies **6/20** exposed
 misses and increases new unique-panel coverage **12/24 to 17/24**. The fallback

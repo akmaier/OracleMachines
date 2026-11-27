@@ -12,7 +12,32 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: closure and sharing of conditioned residuals
+## Current investigation: checked binary relations before buckets
+
+[Binary conflict paths and signed SCC substitution](relation-bucket-discovery.md)
+close **2/21** exposed acquisition gaps; new-panel coverage stays **16/24**, with
+all four repeats covered. Complete cost falls **10.57%** versus the wrapped
+shared-unit policy: 5.34% from binary conflict checking, then 5.53% from one
+checked equivalence block per incoming cofactor. Bucket calls fall **204 to 187**.
+The full relation pipeline remains **3.09 times fresh**; defaults stay unchanged.
+Cold checking (0.70451 s) is still the largest phase, before discovery (0.48673 s).
+Raw certificates shrink, but compressed storage grows 247 bytes versus
+conflict-only, and nonconstant merges from distinct raw cofactors disappear.
+These results do not establish broader quotient reuse.
+
+**Next:** checked one-way implication forcing. The fifty unresolved nodes from
+27 unique roots have no units, components or binary conflicts and just one
+remaining equivalence block. Yet source-bound paths `x -> not x` force values in
+**32/50** nodes (91 occurrences); follow-up units yield five leaf contradictions.
+The 0.02944 s diagnostic is additional work and supplies no new root verdicts.
+Charge path discovery, unsuccessful recognition and transport when integrating
+it. More SCC passes or uniform deeper branching have weaker evidence here.
+Resume `experiments/results/cnf-relation-buckets/checkpoint.json`, key
+`relation_buckets.remaining`. All **2,276 full and 26 focused tests pass**. Prior
+228 manifests, 39,818 artifact entries, 1,253 sources and 70 proofs are preserved;
+the cleanup counterexample and initial failed tests remain in the new evidence.
+
+## Previous investigation: closure and sharing of conditioned residuals
 
 [Unit closure on each cofactor](closed-bucket-discovery.md) closes **6/20** exposed
 acquisition gaps; unique frozen-panel coverage rises **12/24 to 17/24**. Separate

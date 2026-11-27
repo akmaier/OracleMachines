@@ -4,7 +4,20 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (27 November, closed conditioned buckets):
+Latest expansion checkpoint (27 November, binary relation buckets):
+[Checked binary conflicts and signed equivalence substitution](relation-bucket-discovery.md)
+certify 2/21 exposed misses. Frozen unique coverage stays 16/24; all repeats are
+covered. Total cost falls 10.57% versus shared units, but remains 3.09 times fresh
+solving. No defaults change. Twenty-seven unique remaining sources retain fifty
+wide nodes with only one more equivalence block. Checked one-way forcing paths
+appear in 32/50 nodes and expose five conflicts after units: integrate those next,
+without counting diagnostic leaves as root verdicts. Resume
+`experiments/results/cnf-relation-buckets/checkpoint.json`. All 2,276 full and 26
+focused tests pass. Previous 228 manifests, 39,818 artifact entries, 1,253 sources
+and 70 proofs remain intact; one restricted proof is added. A substitution-cleanup
+counterexample and the repaired draft's failed tests are preserved.
+
+Previous expansion checkpoint (27 November, closed conditioned buckets):
 [Unit closure with separate incoming transport](closed-bucket-discovery.md)
 closes 6/20 exposed misses and raises unique-panel coverage 12/24 to 17/24.
 Sharing closed residuals cuts 250 bucket calls to 219 and complete cost 4.22%

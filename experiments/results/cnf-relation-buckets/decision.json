@@ -1,0 +1,352 @@
+{
+  "analysis": {
+    "path": "experiments/results/cnf-relation-buckets/analysis.json",
+    "sha256": "815ec1d2aa506775a1afc8ddb98c06c21f756c2d264a64b96a041e663229a13a"
+  },
+  "checkpoint": "relation-buckets",
+  "controls": [
+    "21 exposed sources (16 SAT, five UNSAT), 24 frozen unique constructions (ten SAT, fourteen UNSAT) and four exact repeats (three SAT, one UNSAT). No new normalized source duplicates the preceding panel. Labels/descriptions are withheld. Growing random, signed-alias/deleted-implication, parity-prism and binary-cycle mixtures are synthetic controls, not representative external SAT benchmarks.",
+    "Sixteen fresh processes in four cyclic orders use one common fallback. Units wraps the old shared-unit policy; conflict adds binary-subset refutation; relations adds one checked SCC block and subsequent units. This is not a historical timing rerun or a tree/DAG ablation. Preparation, recognition, checking, persistence, warm/cold replay and compression are charged. Startup, metadata, generation, post-hoc diagnostics, history and final audit are additional.",
+    "Bucket calls fall 204/196/187 and steps 430/368/295 across units/conflict/relations. Relations records 13 binary conflicts, 54 substitutions and 165 merged-variable occurrences, plus 30 post-substitution unit steps. Twenty-nine substitution queries improve discovery 8.88%; the other twenty regress 1.60%.",
+    "Relations has 22 shared targets, but only thirteen join distinct raw cofactors, all constant. The units baseline has nine nonconstant distinct-cofactor merges. This experiment does not demonstrate better general quotient sharing; transforms change identities and pivots.",
+    "Cold checking (0.70451 s) remains largest, before discovery (0.48673 s). Raw certificate files shrink to 3746557 bytes, but combined compressed SQLite/JSON is 216503 bytes, 247 more than conflict-only. Peak RSS 74498048 remains above fresh 72138752. Diagnostic/history/container costs are separate.",
+    "The first draft missed a unit when substitution left [1,1,1] before the unit index. Final normalization/bucket verification stayed sound, but propagation was incomplete. Corrected cleanup precedes matched measurements. The counterexample, failed tests, draft code and pilot are retained.",
+    "The fifty remaining nodes have no units/components/binary conflicts and only one more equivalence block. A separate source-bound one-way forcing diagnostic finds 91 forced-literal occurrences in 32/50 leaves; later units assign 116 occurrences and yield five leaf conflicts. This is not new root authority or measured acquisition. The 0.02944 s profile includes 1364 forcing searches, 4493 traversed and 346 checked path edges.",
+    "All 228 prior manifests, 39818 artifact entries, 1253 scientific sources and 70 proof blocks remain unchanged. Five source/test files give 1258 sources; one restricted proof is added. All 2276 full and 26 focused tests pass. Four unique native archives pass both cold readers; extra JSON passes share one checker. Existing SQLite ResourceWarnings and cost/coverage regressions remain saved."
+  ],
+  "counterexample": {
+    "path": "experiments/results/cnf-relation-buckets/cleanup-counterexample.json",
+    "sha256": "95468c0112897ad6f1cf03cc6c1ea54d289b72d8212eefe09898773a19057ff8"
+  },
+  "date": "2026-11-27",
+  "docs": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "ce3fc0886c8c72b2cab18d15665e91c70e1ff09f763c7212b404173c6572a12d",
+    "research/implementation-gaps.md": "48c067fa274412f06731cad07d6c5de874a861bf5c2dc7f3ef48c457bb7853ae",
+    "research/relation-bucket-discovery.md": "34c0e25c350641c088ebb6ab780395a237ea94e259ce1eea877948cd6ed8247a",
+    "research/sat-pattern-discovery.md": "450c4eb18053c801f4b82b4ff1faf089e13d8b9caa3868bbf157507cd0286b6e",
+    "research/structural-reuse-priorities.md": "c9f5f6068e597280b9be8ed272ab8c28cc57ae104d354954ed6d886fb6bef593"
+  },
+  "maintenance": "Full normalized quotient and remaining depth under fixed policy define local target identity. Edits invalidate incoming evidence; new transport must be checked before reusing a quotient. Policy/depth changes invalidate reuse keys. Exact root programs share within each stream; every warm/cold program is fully rechecked. Unknown is not UNSAT, and split refutation needs both exact children. No native/equivalence/affine/Lean format changes.",
+  "measurements": {
+    "combined_compressed_bytes": {
+      "conflict": 216256,
+      "fresh": 179759,
+      "relations": 216503,
+      "units": 225856
+    },
+    "comparisons_percent": {
+      "conflict_vs_units": -5.3419684265284095,
+      "relations_vs_conflict": -5.527790750381245,
+      "relations_vs_fresh": 209.02322303822757,
+      "relations_vs_units": -10.574466340339727
+    },
+    "coverage": {
+      "conflict": {
+        "development_cases": 21,
+        "development_direct": 1,
+        "development_sat": 16,
+        "repeats_cases": 4,
+        "repeats_direct": 4,
+        "repeats_sat": 3,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 16,
+        "unique_panel_sat": 10
+      },
+      "fresh": {
+        "development_cases": 21,
+        "development_direct": 0,
+        "development_sat": 16,
+        "repeats_cases": 4,
+        "repeats_direct": 0,
+        "repeats_sat": 3,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 0,
+        "unique_panel_sat": 10
+      },
+      "relations": {
+        "development_cases": 21,
+        "development_direct": 2,
+        "development_sat": 16,
+        "repeats_cases": 4,
+        "repeats_direct": 4,
+        "repeats_sat": 3,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 16,
+        "unique_panel_sat": 10
+      },
+      "units": {
+        "development_cases": 21,
+        "development_direct": 0,
+        "development_sat": 16,
+        "repeats_cases": 4,
+        "repeats_direct": 4,
+        "repeats_sat": 3,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 16,
+        "unique_panel_sat": 10
+      }
+    },
+    "coverage_losses": [],
+    "new_direct_cases": [
+      "d-d-d-d-s05",
+      "d-d-y16"
+    ],
+    "observed_relation_strata": {
+      "no_substitution": {
+        "cases": 20,
+        "discovery_seconds": {
+          "conflict": 0.14004297857172787,
+          "percent": 1.6043226360707097,
+          "relations": 0.14228971977718174
+        },
+        "solve_check_seconds": {
+          "conflict": 0.12217253318522125,
+          "percent": -0.3071661824201266,
+          "relations": 0.12179726047907025
+        }
+      },
+      "substituted": {
+        "cases": 29,
+        "discovery_seconds": {
+          "conflict": 0.37801158253569156,
+          "percent": -8.881710868229975,
+          "relations": 0.3444376867264509
+        },
+        "solve_check_seconds": {
+          "conflict": 0.3793169786222279,
+          "percent": -7.439102758914229,
+          "relations": 0.35109919880051166
+        }
+      }
+    },
+    "paired_percent": {
+      "conflict_vs_units": [
+        -5.565728450691266,
+        -4.109286927466316,
+        -7.737450958467762,
+        -3.880090099631428
+      ],
+      "relations_vs_conflict": [
+        -2.4986368107393964,
+        -6.747227284071222,
+        -6.265612838028767,
+        -6.560351661572684
+      ],
+      "relations_vs_fresh": [
+        205.8520569938103,
+        202.97672474123144,
+        212.44963373665547,
+        215.22374096948508
+      ],
+      "relations_vs_units": [
+        -7.925297921575892,
+        -10.57925128278675,
+        -13.5182650759066,
+        -10.185894205882418
+      ]
+    },
+    "peak_rss_bytes": {
+      "conflict": 75055104,
+      "fresh": 72138752,
+      "relations": 74498048,
+      "units": 76333056
+    },
+    "remaining": [
+      "d-d-d-d-s06",
+      "d-d-d-c06",
+      "d-d-d-c07",
+      "d-d-d-c04",
+      "d-d-d-c12",
+      "d-d-d-c13",
+      "d-d-d-c05",
+      "d-d-y05",
+      "d-d-y07",
+      "d-d-y12",
+      "d-d-y04",
+      "d-d-y13",
+      "d-u10",
+      "d-u23",
+      "d-u12",
+      "d-u04",
+      "d-u07",
+      "d-u05",
+      "d-u06",
+      "v02",
+      "v10",
+      "v09",
+      "v03",
+      "v04",
+      "v08",
+      "v05",
+      "v11"
+    ],
+    "remaining_shape": {
+      "positive_work_leaves": 37,
+      "reasons": {
+        "bag-width": 50
+      },
+      "repeated_queries": 0,
+      "unique_sources": 27,
+      "unknown_leaves": 50,
+      "width_counts": {
+        "10": 13,
+        "11": 6,
+        "9": 31
+      },
+      "zero_work_leaves": 13
+    },
+    "remaining_structure_profile": {
+      "after_forcing_conflicts": 5,
+      "binary_conflicts": 0,
+      "disconnected": 0,
+      "dual_horn": 0,
+      "equivalence_blocks": 1,
+      "forced_literals": 91,
+      "forcing_leaves": 32,
+      "forcing_propagated_variables": 116,
+      "horn": 0,
+      "leaves": 50,
+      "merged_variable_occurrences": 1,
+      "unit_conflicts": 0,
+      "with_units": 0
+    },
+    "selected": "fresh",
+    "structural": {
+      "conflict": {
+        "after_unit_steps": 0,
+        "bucket_steps": 368,
+        "constant_raw_merges": 15,
+        "distinct_raw_merges": 24,
+        "edge_unit_steps": 377,
+        "edges": 223,
+        "leaf_nodes": 107,
+        "leaf_sat": 10,
+        "leaf_unresolved": 59,
+        "leaf_unsat": 38,
+        "nodes": 196,
+        "nonconstant_raw_merges": 9,
+        "prefix_fold_steps": 665,
+        "relation_conflict": 13,
+        "shared_targets": 24,
+        "split_nodes": 89
+      },
+      "fresh": {},
+      "relations": {
+        "after_unit_steps": 30,
+        "bucket_steps": 295,
+        "constant_raw_merges": 13,
+        "distinct_raw_merges": 13,
+        "edge_unit_steps": 329,
+        "edges": 215,
+        "leaf_nodes": 102,
+        "leaf_sat": 11,
+        "leaf_unresolved": 52,
+        "leaf_unsat": 39,
+        "nodes": 187,
+        "prefix_fold_steps": 665,
+        "relation_conflict": 13,
+        "relation_equivalence": 54,
+        "shared_targets": 22,
+        "split_nodes": 85
+      },
+      "units": {
+        "after_unit_steps": 0,
+        "bucket_steps": 430,
+        "constant_raw_merges": 15,
+        "distinct_raw_merges": 24,
+        "edge_unit_steps": 406,
+        "edges": 229,
+        "leaf_nodes": 112,
+        "leaf_sat": 10,
+        "leaf_unresolved": 63,
+        "leaf_unsat": 39,
+        "nodes": 204,
+        "nonconstant_raw_merges": 9,
+        "prefix_fold_steps": 665,
+        "shared_targets": 24,
+        "split_nodes": 92
+      }
+    },
+    "totals": {
+      "conflict": {
+        "certificate_bytes": 3999432,
+        "certificate_compressed_bytes": 71484,
+        "cold_seconds": 0.7497819167328998,
+        "complete_seconds": 2.2947430413914844,
+        "diagnostic_bytes": 69281,
+        "input_seconds": 0.001731395605020225,
+        "persistence_seconds": 0.1941359267802909,
+        "phases": {
+          "discovery_seconds": 0.5180545611074194,
+          "evidence_persistence_seconds": 0.025177048635669053,
+          "solve_check_seconds": 0.5014895118074492
+        },
+        "record_bytes": 782256,
+        "records": 487,
+        "warm_seconds": 0.2974142604507506
+      },
+      "fresh": {
+        "certificate_bytes": 0,
+        "certificate_compressed_bytes": 22,
+        "cold_seconds": 0.21376126050017774,
+        "complete_seconds": 0.701531239785254,
+        "diagnostic_bytes": 0,
+        "input_seconds": 0.0017366978572681546,
+        "persistence_seconds": 0.14640984404832125,
+        "phases": {
+          "solve_check_seconds": 0.3047608440974727
+        },
+        "record_bytes": 930348,
+        "records": 590,
+        "warm_seconds": 0.02848135423846543
+      },
+      "relations": {
+        "certificate_bytes": 3746557,
+        "certificate_compressed_bytes": 71488,
+        "cold_seconds": 0.7045094172935933,
+        "complete_seconds": 2.1678944478044286,
+        "diagnostic_bytes": 70136,
+        "input_seconds": 0.0017246875213459134,
+        "persistence_seconds": 0.19525393762160093,
+        "phases": {
+          "discovery_seconds": 0.48672740650363266,
+          "evidence_persistence_seconds": 0.022403726703487337,
+          "solve_check_seconds": 0.4728964592795819
+        },
+        "record_bytes": 773883,
+        "records": 476,
+        "warm_seconds": 0.27795321855228394
+      },
+      "units": {
+        "certificate_bytes": 4143384,
+        "certificate_compressed_bytes": 73295,
+        "cold_seconds": 0.7867900731507689,
+        "complete_seconds": 2.4242454689228907,
+        "diagnostic_bytes": 71387,
+        "input_seconds": 0.0017660416197031736,
+        "persistence_seconds": 0.1964129585539922,
+        "phases": {
+          "discovery_seconds": 0.5526589576620609,
+          "evidence_persistence_seconds": 0.025185532169416547,
+          "solve_check_seconds": 0.537108366494067
+        },
+        "record_bytes": 832384,
+        "records": 514,
+        "warm_seconds": 0.31705180183053017
+      }
+    }
+  },
+  "next": "Integrate and measure checked one-way binary forcing x -> not x before full buckets, retaining exact path sources, edge-specific unit/model transport and miss costs. Thirty-two observed forcing leaves offer more evidence than the single remaining SCC block. Five diagnostic leaf contradictions are not root coverage. Test whether consequences lower interaction or enable reuse. Cold verification remains the main cost, and wide arbitrary CNFs/general semantic canonicalization stay unresolved.",
+  "outcome": "Certifies 2/21 exposed acquisition gaps: one UNSAT binary-subset conflict and one SAT signed-quotient case. New unique coverage remains 16/24 and repeats 4/4 across structural arms; the fallback already supplies all 49 answers. No observed coverage losses. Conflict checking reduces complete cost 5.34% versus shared units; one equivalence block plus later units saves another 5.53%, or 10.57% overall. Relations still costs 3.09 times fresh; defaults remain unchanged.",
+  "parent": {
+    "path": "experiments/results/cnf-closed-buckets/checkpoint.json",
+    "sha256": "0d2815739b50fcd21accb42c06579276e76b49215e438bc0075b90cd98cef894"
+  },
+  "pattern": "Active binary clauses support implication edges. Opposite-literal paths in both directions refute the binary subset and full cofactor. Forward/reverse trees certify signed equivalence of a block to one representative; substitute throughout the full cofactor, clean duplicate literals/tautologies without renaming, then propagate units. Each incoming edge retains its own source-bound relation and unit evidence before sharing a normalized quotient/depth node.",
+  "recognition": "Reuse the existing binary graph recognizer and independent equivalence-tree checker. Binary conflict paths are separately checked against the exact binary-clause subsequence. The equivalence recognizer requires mixed binary/wide clauses and no active units/empty clause. It selects one largest block per edge, not full binary closure. Conflict and equivalence recognition currently traverse separate graphs. One-way implication is not equality. Reconstruct names and signed values before initial-unit transport and check every SAT edge witness.",
+  "resources": "Depth two, width eight, 262144 reserved bucket probes per node; each initial or post-substitution unit call allows 512 steps and 262144 reserved index-work units. Binary graph traversal, path generation, normalization, all checking/serialization, time and RAM are additional. At depth d there are at most 2^(d+1)-1 incoming requests, with preparation still charged on memo hits. No efficient unrestricted closure or small-state bound follows.",
+  "structure_profile": {
+    "path": "experiments/results/cnf-relation-buckets/remaining-structure-profile.json",
+    "sha256": "feea34b8b513c15d537a32dbcfaf731c1485dc119023353da5a5504b2a10e797"
+  }
+}

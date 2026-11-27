@@ -1,0 +1,26 @@
+..E.....F.
+======================================================================
+ERROR: test_corrupt_relation_graph_and_transport (solver.test_cnf_relation_buckets.RelationBucketTests.test_corrupt_relation_graph_and_transport)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_relation_buckets.py", line 76, in test_corrupt_relation_graph_and_transport
+    q=deepcopy(p);change(q)
+                  ~~~~~~^^^
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_relation_buckets.py", line 74, in <lambda>
+    changes=[lambda q:q.__setitem__('mode','units'),lambda q:q['edges'][0]['relation']['evidence']['backward'][0].__setitem__(2,999),lambda q:q['edges'][0]['after_units'][0].__setitem__('literal',-1),lambda q:q['edges'][0].__setitem__('residual',[[]]),lambda q:q['edges'][0].__setitem__('target',1),lambda q:q.__setitem__('model',[False]*3)]
+                                                                                                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+FAIL: test_signed_substitution_then_units (solver.test_cnf_relation_buckets.RelationBucketTests.test_signed_substitution_then_units)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_relation_buckets.py", line 40, in test_signed_substitution_then_units
+    self.assertTrue(any(e['relation'] and e['relation']['kind']=='equivalence' and e['after_units'] for e in p['edges']))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.213s
+
+FAILED (failures=1, errors=1)

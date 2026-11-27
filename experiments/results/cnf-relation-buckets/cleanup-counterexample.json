@@ -1,0 +1,6 @@
+{
+  "source": [[-1,2],[1,-2],[-1,-3],[1,3],[1,2,-3]],
+  "issue": "Signed substitution produced a repeated-literal clause [1,1,1] and tautological binary clauses. Feeding these directly to the unit index missed the new unit. Final normalization and bucket checks remained sound, but claimed post-substitution unit closure was incomplete.",
+  "fix": "Clean duplicate literals, tautologies and duplicate clauses without changing IDs before post-substitution unit indexing, in both discovery and independent replay. Retain incoming names for witness transport.",
+  "preserved": ["before-quotient-cleanup.py.txt", "new-tests-before-cleanup.log", "pilot-before-cleanup.json"]
+}

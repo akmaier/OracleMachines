@@ -15153,6 +15153,154 @@ witness transport and exact quotient reuse before forming full buckets. Wide
 cores may persist after substitution. General compact classification and
 polynomial unrestricted-SAT bounds remain open.
 
+\subsection{Binary conflicts and signed equivalence before full buckets}
+\label{sec:relation-conditioned-buckets}
+After incoming unit propagation, a cofactor can still have useful binary
+relations among its wide clauses. A new experiment checks the binary subset
+for contradiction, or substitutes one largest signed equivalence block before
+constructing a full bucket. Discovery uses the existing binary graph and SCC
+routines. Its certificates contain clause-supported paths or directed trees;
+replay does not trust the discovered SCC labels.
+
+\begin{proposition}[Binary-subset refutation and signed quotient transport]
+Let $B$ be the binary-clause subset of a CNF $F$. A clause $(a\lor b)$ supports
+$\neg a\to b$ and $\neg b\to a$. If supported paths connect $x$ to $\neg x$
+and $\neg x$ to $x$, then $F$ is unsatisfiable. Otherwise, suppose supported
+forward and reverse trees establish equivalence of a positive representative
+$r$ with every signed member of a block. Let $E$ express these signed equalities
+and let $Q$ substitute the corresponding signed representative for each block
+variable throughout $F$. Then $F\equiv E\land Q$ over the original variables,
+and satisfiability of $F$ and $Q$ agrees. A quotient model lifts by assigning
+each block variable its representative value with the certified sign. These
+transformations compose with incoming and subsequent unit restriction and with
+exact conditioning, provided each incoming edge retains its own evidence and
+inverse normalization transport.
+\end{proposition}
+\begin{proof}
+Each implication is an equivalent reading of its supporting binary clause, so
+paths compose implications valid in every model of $F$. Two paths between
+opposite literals exclude both values of $x$. For an equivalence block, the
+outgoing and returning trees give both implications between $r$ and every signed
+member. Hence $F$ implies $E$. Under $E$, each substitution preserves its literal
+value and therefore every clause, proving $F\equiv E\land Q$. Substitution
+removes nonrepresentative block variables from $Q$; any model of $Q$ extends by
+the prescribed signed values to satisfy $E$, and thus $F$. If the representative
+also disappears, its value is free. Duplicate-literal and tautology cleanup
+preserve the formula. The preceding unit-transport identity composes before and
+after this substitution, and the exact two-cofactor rule composes across a split.
+Identical normalized quotients may share a checked node, while the separate
+incoming transformations determine their model lifts. This proves restricted
+exactness, not that every input has a small or efficiently discoverable quotient.
+\end{proof}
+
+Conflict certificates index clauses in the exact binary subsequence and check
+both path endpoints. Equivalence certificates use the existing independent tree
+and substitution checker, requiring equal supports, supported edges and a strict
+variable reduction. The reused recognizer proposes blocks only for mixed
+binary/wide CNFs without active units or empty clauses. One-way implication
+alone is not accepted as equivalence.
+After substitution, the code removes duplicate literals, tautologies and duplicate
+clauses without changing IDs, then propagates units. Replay restores the later
+unit values, signed representatives, and incoming unit values in reverse order.
+Every SAT edge transport is checked, including edges not selected for the root
+witness. Source edits invalidate incoming evidence; policy or depth changes
+invalidate reuse identity. Unknown remains unknown, and UNSAT splits still need
+both exact children. Native, equivalence, affine and Lean authorities are
+unchanged; this uses a separate experimental JSON format.
+
+The cleanup step repairs a preserved failed draft. Substituting the signed block
+$x_1=x_2=\neg x_3$ into $(x_1\lor x_2\lor\neg x_3)$ initially left three copies of literal
+$x_1$. Passing this directly to the unit index missed the new unit. Later
+normalization and bucket verification remained sound, but the intended propagation
+was incomplete. The counterexample, failed tests, draft code and pilot remain
+saved; cleanup was fixed before freezing the measured implementation. Tests also
+cover disappearing representatives, sparse names, unsupported conflict paths,
+false equivalences and cold replay with recognition disabled.
+
+Four modes compare fresh fallback, the preceding shared-unit policy in the new
+wrapper, binary-conflict checking added to that policy, and conflict checking
+plus one largest equivalence block per incoming cofactor. The last mode propagates
+units again after substitution. These isolate the two additions; they do not
+compare tree and DAG implementations. Binary-conflict discovery and equivalence
+discovery currently perform separate graph traversals, both charged. All
+structural arms retain root folding, depth two, width eight and 262,144 reserved
+bucket probes per node. Each initial or subsequent unit invocation allows 512
+steps and 262,144 reserved index-work units. SCC traversal, path construction,
+normalization, checking, total time and RAM remain additional obligations. One
+block per incoming cofactor is not complete binary closure, and the conditioning
+request bound remains exponential in depth.
+
+The frozen comparison includes twenty-one exposed sources, sixteen SAT and five
+UNSAT; twenty-four new unique constructions, ten SAT and fourteen UNSAT; and four
+repeats, three SAT and one UNSAT. New controls include random three-CNFs at
+13/17/21 variables, guarded signed-alias cores and deleted implications, parity
+prisms at sizes 6/8/10, and binary-cycle mixtures with wide clauses at sizes
+10/14/18. Names, signs and order are scrambled; labels and descriptions are
+withheld from acquisition. No new normalized source duplicates the preceding
+panel. These are synthetic controls, not representative external SAT evidence.
+
+Binary conflict checking certifies one exposed UNSAT miss; equivalence
+substitution adds one exposed SAT miss. Thus the relation arm handles two of
+twenty-one exposed gaps. Every structural arm handles $16/24$ new unique inputs
+and all four repeats, with no observed coverage loss. All forty-nine answers
+already come from the fallback. Four cyclic process orders give mean complete
+costs 0.70153 seconds fresh, 2.42425 units, 2.29474 conflict and 2.16789 relations.
+Conflict checking reduces cost 5.34\% versus units; substitution saves another
+5.53\% versus conflict, or 10.57\% overall. Every paired comparison improves;
+relations-versus-units reductions range from 7.93\% to 13.52\%. Nevertheless,
+relations costs 3.09 times fresh solving, so defaults remain unchanged.
+
+Bucket calls fall from 204 to 196 to 187 across the structural arms, and bucket
+steps from 430 to 368 to 295. The relation arm records thirteen binary conflicts
+and fifty-four substitutions, merging 165 variable occurrences in local blocks.
+It performs 329 initial unit steps and thirty post-substitution unit steps, versus
+406 unit steps in the baseline. Root folding performs 665 steps in every arm.
+Twenty-nine queries perform substitutions; their discovery improves 8.88\% and
+solve/check 7.44\% versus conflict-only. The other twenty regress 1.60\% in
+discovery. Twenty-two targets are shared in relation mode, but only thirteen
+join distinct raw cofactors, all constant. The preceding unit policy has nine
+nonconstant distinct-cofactor merges on this panel. Thus smaller quotients do
+not establish improved nonconstant sharing: substitution also changes identities
+and branching trajectories.
+
+Pretty-printed certificate files occupy 4,143,384 bytes units, 3,999,432 conflict
+and 3,746,557 relations. Native record bytes are 930,348 fresh, 832,384 units,
+782,256 conflict and 773,883 relations. Combined compressed SQLite/JSON packages
+occupy 179,759, 225,856, 216,256 and 216,503 bytes respectively. Relations uses
+247 more compressed bytes than conflict-only despite smaller raw proofs.
+Peak RSS is respectively 72,138,752, 76,333,056, 75,055,104 and 74,498,048 bytes.
+Diagnostics, historical copies and container overhead are additional; smaller
+proofs do not guarantee lower peak memory than fresh solving.
+
+Relations spends 0.48673 seconds in discovery, 0.47290 in solve/check, 0.27795
+warm and 0.70451 cold. Cold verification remains the largest phase. Complete
+cost charges preparation, recognition, transport checks, evidence/database
+persistence, warm reuse, cold reconstruction and compression. Interpreter
+startup, report metadata, generation, post-hoc diagnostics and preservation audit
+are additional. Both native cold readers audit fallback archives; two additional
+JSON passes share the same checker, not independent implementations.
+
+Twenty-seven unique roots remain, nineteen exposed and eight new, with fifty
+unknown depth-zero nodes. Widths are nine for thirty-one nodes, ten for thirteen,
+and eleven for six. Thirty-seven retain partial bucket work before exceeding
+the cap. A separate source-bound diagnostic finds no active units, disconnected
+components, Horn or dual-Horn leaves, or contradictory binary subsets. Only one
+further equivalence block remains, merging one variable. Repeating SCC scans
+therefore has little observed coverage opportunity at these nodes.
+
+However, a consistent binary graph can force a literal without a nontrivial
+SCC: a one-way path $x\to\neg x$ entails $\neg x$. Separately checked paths
+find ninety-one forced-literal occurrences across thirty-two of the fifty
+leaves. Adding these consequences and propagating units assigns 116 variable
+occurrences and yields five leaf conflicts. This diagnostic was not read by the
+measured acquisition and supplies no additional root verdicts. Its complete
+unit/component/SCC/forcing profile costs 0.02944 seconds, including 1,364 forcing
+searches, 4,493 traversed implication edges and 346 checked path edges. The next
+target is checked one-way binary forcing before full buckets, charging unsuccessful
+searches and retaining incoming witness transport. General semantic
+canonicalization, compact closure and efficient coverage of unrestricted SAT
+remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

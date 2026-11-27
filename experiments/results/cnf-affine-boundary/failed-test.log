@@ -1,0 +1,13 @@
+...E....
+======================================================================
+ERROR: test_invisible_vector_cannot_replace_visible_direction (solver.test_cnf_affine_boundary.AffineBoundaryTests.test_invisible_vector_cannot_replace_visible_direction)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_affine_boundary.py", line 68, in test_invisible_vector_cannot_replace_visible_direction
+    invisible=next(i for i,v in enumerate(p['space']['directions']) if not v&keep)
+StopIteration
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.112s
+
+FAILED (errors=1)

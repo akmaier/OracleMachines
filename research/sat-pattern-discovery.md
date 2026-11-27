@@ -5,7 +5,32 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: exact residual sharing under deeper conditioning
+## Latest evidence: exact affine image on leftover-clause support
+
+[Checked boundary completion](affine-boundary-completion.md) enumerates one
+representative per distinct boundary assignment, reusing full affine solutions
+with the same visible restriction. Independence and spanning of the projected
+basis are both checked. Nonzero but dependent projections are a preserved control;
+dropping only zero projections is insufficient.
+
+Direct family coverage on 24 unique frozen synthetic constructions improves
+**14/24 to 18/24**, while all inputs already have a verdict from the existing
+fallback. The earlier five feedback gaps were affine-covered before this change.
+Four exact repeated queries are a separate reuse stratum. Across six process
+orders, boundary acquisition with fallback costs **0.09216 s versus 0.11470 s**
+for the current solver, with every cold/warm check charged. A separate JSON proof
+authority carries boundary exhaustion; native certificates remain unchanged.
+
+Six distinct random-three-CNF cases have no recognized parity blocks and remain
+outside this acquisition family. Next seek non-affine boundary relations or
+certified hidden structure, preserving these misses and all preparation costs.
+Image rank can still grow with input size; unrestricted polynomial SAT does not
+follow. Resume `experiments/results/cnf-affine-boundary/checkpoint.json`.
+
+All **2,234 full tests and 37 focused tests pass**; prior artifacts and all 65
+earlier proof blocks remain unchanged.
+
+## Previous evidence: exact residual sharing under deeper conditioning
 
 [Two additional conditioning levels](feedback-cofactor-dag.md) certify 5/6 exposed
 fresh UNSAT gaps and 6/10 UNSAT cases in a second frozen panel, versus 2/10 with

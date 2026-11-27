@@ -1,0 +1,160 @@
+{
+  "analysis": {
+    "path": "experiments/results/cnf-affine-boundary/analysis.json",
+    "sha256": "1acf3d2796daae4d136b520fac450e7c044c07de4287f4b87e618afbc55ac2e1"
+  },
+  "checkpoint": "affine-boundary",
+  "controls": [
+    "The frozen panel contains 24 distinct generated constructions, 15 SAT and nine UNSAT, plus four exact repetitions. There are no normalized duplicates of the previous panel; designed family controls are not representative external SAT evidence.",
+    "All 18 matched trials run in six process-order permutations, with common fallback, empty archives, stream reuse, persistence and cold verification. Interpreter startup, report metadata, panel generation and lineage audit are additional.",
+    "On the dimension-eight connected UNSAT control, actual enumeration falls 256 to 32. Dimension eleven would require 2048 full-space points, but the baseline gate stops and falls back; 2048 is not a measured baseline candidate count.",
+    "Complete cost improves 19.66% versus fresh and 21.90% versus explicit full-space completion, with all paired fresh improvements between 16.38% and 23.93%. Combined record/proof bytes improve 30.00%; extra diagnostic and historical storage is separately retained. Process peak RSS improves only about 2.7%.",
+    "Failed zero-projection test assumption, filename-too-long timing driver, and JSON key-order audit comparison are preserved with original scripts/logs. Failed timings are not in the selected averages.",
+    "All 223 prior manifests, 35068 artifact entries, 1228 sources and 65 old proof blocks are preserved. Five new source/test files and one restricted proof are added. All 2234 full tests and 37 focused tests pass."
+  ],
+  "date": "2026-11-27",
+  "docs": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "7cc599ecaa7dc9d4fa2c9fdc01942ebc82eecd8fc260feaa071f6ca308ca7e20",
+    "research/affine-boundary-completion.md": "65d6178d1613a1e126d8519b2fa0f70c43f75311acc21b946a7a75f26d78b742",
+    "research/implementation-gaps.md": "351d9a8bb411a109d9ec882ce83e7c5ea2eaf965c4decb0269433c12d2f827a3",
+    "research/sat-pattern-discovery.md": "ee1e189bc3d488c2142f3f999af820b51c4b219805c036c68474c8d597a14f85",
+    "research/structural-reuse-priorities.md": "942cfb7509691372c5586589b04625bde1aab4055ecdaae42c3ff9c5671f376d"
+  },
+  "measurements": {
+    "boundary_vs_percent": {
+      "fresh": -19.65531108622981,
+      "full": -21.901978296993917
+    },
+    "combined_compressed_bytes": {
+      "boundary": 16798,
+      "fresh": 24436,
+      "full": 23016
+    },
+    "coverage": {
+      "boundary": {
+        "development_cases": 5,
+        "development_direct": 5,
+        "development_sat": 0,
+        "repeats_cases": 4,
+        "repeats_direct": 2,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 18,
+        "unique_panel_sat": 15
+      },
+      "fresh": {
+        "development_cases": 5,
+        "development_direct": 0,
+        "development_sat": 0,
+        "repeats_cases": 4,
+        "repeats_direct": 0,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 0,
+        "unique_panel_sat": 15
+      },
+      "full": {
+        "development_cases": 5,
+        "development_direct": 5,
+        "development_sat": 0,
+        "repeats_cases": 4,
+        "repeats_direct": 1,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 14,
+        "unique_panel_sat": 15
+      }
+    },
+    "new_direct_cases": [
+      "b06",
+      "b12",
+      "b07",
+      "b22",
+      "b06r"
+    ],
+    "paired_vs_fresh_percent": [
+      -16.375123170466253,
+      -23.926857538227875,
+      -19.33245801792688,
+      -19.98392000500364,
+      -17.558155022840882,
+      -20.56392128436132
+    ],
+    "peak_rss_bytes": {
+      "boundary": 52297728,
+      "fresh": 53755904,
+      "full": 53084160
+    },
+    "remaining": [
+      "b17",
+      "b15",
+      "b18",
+      "b14",
+      "b16",
+      "b19",
+      "b17r",
+      "b15r"
+    ],
+    "selected": "boundary",
+    "totals": {
+      "boundary": {
+        "certificate_bytes": 33626,
+        "certificate_compressed_bytes": 8558,
+        "cold_seconds": 0.031100444418067735,
+        "complete_seconds": 0.0921556872005264,
+        "diagnostic_bytes": 9317,
+        "input_seconds": 0.0008522289960334698,
+        "persistence_seconds": 0.006348958471789956,
+        "phases": {
+          "discovery_seconds": 0.013031948901092013,
+          "evidence_persistence_seconds": 0.005693114673097928,
+          "solve_check_seconds": 0.021494555287063122
+        },
+        "record_bytes": 38144,
+        "records": 51,
+        "warm_seconds": 0.009258312871679664
+      },
+      "fresh": {
+        "certificate_bytes": 0,
+        "certificate_compressed_bytes": 22,
+        "cold_seconds": 0.03693972225300968,
+        "complete_seconds": 0.11470040950613718,
+        "diagnostic_bytes": 0,
+        "input_seconds": 0.0008592497712622086,
+        "persistence_seconds": 0.014048770535737276,
+        "phases": {
+          "solve_check_seconds": 0.04989480646327138
+        },
+        "record_bytes": 102523,
+        "records": 110,
+        "warm_seconds": 0.008695215142021576
+      },
+      "full": {
+        "certificate_bytes": 26327,
+        "certificate_compressed_bytes": 6681,
+        "cold_seconds": 0.03537627092252175,
+        "complete_seconds": 0.11800002764600019,
+        "diagnostic_bytes": 6386,
+        "input_seconds": 0.0008511388829598824,
+        "persistence_seconds": 0.01203822911096116,
+        "phases": {
+          "discovery_seconds": 0.011938215931877494,
+          "evidence_persistence_seconds": 0.006228735825667779,
+          "solve_check_seconds": 0.03783212540050348
+        },
+        "record_bytes": 71965,
+        "records": 91,
+        "warm_seconds": 0.009371972332398096
+      }
+    }
+  },
+  "next": "Investigate the six distinct random-three-CNF acquisition misses with no complete parity halves. Seek non-affine boundary relations or certified hidden structure, with recognition, recomposition and cold verification charged. Pure affine/rank-zero handling and checked basis reuse are supporting cost targets. No unrestricted small-rank or polynomial SAT guarantee is established.",
+  "outcome": "Exact boundary-image completion broadens direct affine acquisition from 14/24 to 18/24 unique generated inputs, including four dimension-eleven cases excluded by the old eight-free-coordinate gate. The current fallback already decides all 33 queries; the five preceding feedback gaps were already covered by its affine path.",
+  "parent": {
+    "path": "experiments/results/cnf-feedback-cofactor-dag/checkpoint.json",
+    "sha256": "5ce5f0670186b8b28155eeba13ec7dafb93023c933f8145b8914e48686758514"
+  },
+  "pattern": "Every leftover clause depends only on boundary variables. A checked complete affine basis projects to an image of rank b; selected original directions lift exactly 2^b distinct boundary assignments. One representative per boundary suffices, and one falsified leftover clause per representative certifies UNSAT. Nonzero projected vectors can be dependent.",
+  "recognition": "Check exact extraction and all full-space vectors, then independently check projected independence and spanning. Source normalization, input bounds, XOR discovery work and rank-eight eligibility are explicit. No-equation, size, XOR and boundary-rank misses produce no verdict. Exact accepted-source proofs can be reused within the stream; edited sources require new discovery.",
+  "resources": "A full affine basis is retained and checked even when the boundary is small. Existing projection-to-CNF is not used. New boundary JSON is a separate authority; old native/equivalence/affine tables are unchanged. Every warm and cold JSON load rechecks source and complete proof. Both native cold readers audit fallback records and share the same additional boundary checker. No production default is changed."
+}

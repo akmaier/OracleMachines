@@ -4,7 +4,21 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (27 November, exact cofactor feedback DAG):
+Latest expansion checkpoint (27 November, affine boundary completion):
+[Exact projected-image completion](affine-boundary-completion.md) replaces total
+free dimension with the rank visible to leftover clauses. It covers 18/24 unique
+synthetic controls directly versus 14/24 for the old gate; the existing fallback
+already decides all inputs. Complete matched time falls 19.66% against fresh,
+and raw record/proof bytes fall 30.00%. Full basis retention, normalization,
+projection, misses and cold verification remain charged. The previous five
+feedback gaps were already affine-covered, not new solver-completeness gaps.
+The remaining six distinct acquisition misses have no complete parity halves;
+non-affine boundary discovery is the next coverage target. Resume
+`experiments/results/cnf-affine-boundary/checkpoint.json`. Earlier 223 manifests,
+35,068 artifacts, 1,228 sources and 65 proofs remain unchanged; a separate JSON
+authority and one restricted completeness proof are added. No default changes.
+
+Previous expansion checkpoint (27 November, exact cofactor feedback DAG):
 [Bounded conditioning with shared residuals](feedback-cofactor-dag.md) closes
 5/6 exposed fresh gaps. The second panel rises from 2/10 to 6/10 UNSAT refutations,
 or 2/7 to 4/7 excluding three full-cube controls. Exact residual-plus-depth reuse

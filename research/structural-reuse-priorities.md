@@ -12,7 +12,34 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: deeper conditioning with exact cofactor sharing
+## Current investigation: completion over visible affine boundaries
+
+[Boundary completion](affine-boundary-completion.md) addresses the free-dimension
+cap, after confirming that all five preceding feedback gaps are already covered
+by the current affine path. A checked full affine basis is projected onto the
+variables in leftover clauses; complete image rank, not total free dimension,
+controls enumeration. A connected control reduces 256 candidates to 32, and
+rank-five boundaries with eleven total free coordinates now avoid the old cap.
+
+On 24 frozen unique synthetic constructions, direct completion coverage rises
+**14/24 to 18/24**; four exact repeats are reported separately. All 33 queries,
+including five development cases, are already decided by the current fallback.
+Complete cost is **0.11470 s fresh, 0.11800 s full-space, 0.09216 s boundary**:
+19.66% faster than fresh, including cold replay and persistence. Combined raw
+record/proof bytes fall 102,523 to 71,770; full basis retention remains charged.
+The new JSON authority is separate; existing native formats/defaults are unchanged.
+
+**Next:** the six distinct random-three-CNF acquisition misses contain no complete
+parity halves. Investigate non-affine boundary relations or certified hidden
+structure, with economical recognition. Pure affine/rank-zero handling and
+checked basis reuse are supporting cost targets. No uniform small-rank guarantee
+is known. Resume `experiments/results/cnf-affine-boundary/checkpoint.json`, key
+`affine_boundary.remaining`; repeat rows do not add distinct gaps.
+
+All **2,234 full tests and 37 focused tests pass**; prior artifacts and all 65
+earlier proof blocks remain unchanged.
+
+## Previous investigation: deeper conditioning with exact cofactor sharing
 
 [Cofactor DAG discovery](feedback-cofactor-dag.md) closes **5/6 exposed fresh
 UNSAT gaps** using two extra conditioning levels. On the second frozen panel it

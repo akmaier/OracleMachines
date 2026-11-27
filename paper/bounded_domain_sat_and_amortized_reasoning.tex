@@ -14557,6 +14557,114 @@ mixed-CNF boundary descriptions are the next coverage target, comparing existing
 exact affine recognizers before merely increasing depth again.  General compact
 closure and polynomial acquisition or source expansion remain unproved.
 
+\subsection{Completing the visible affine boundary}
+\label{sec:affine-boundary-completion}
+
+The five inputs left unresolved by the preceding bounded feedback rule are
+already covered by the current solver's affine path: four have contradictory
+extracted equations, and the bridge has seven free coordinates.  They are not
+new solver-completeness gaps.  The next experiment addresses the existing
+completion gate's eight-free-coordinate limit by reusing all affine solutions
+that agree on the variables mentioned in leftover clauses.  It uses the existing
+checked extraction of complete parity halves and complete affine-space basis;
+no new parity CNF is enumerated.
+
+\begin{proposition}[Completeness of affine boundary representatives]
+Let a checked extraction write a CNF as the conjunction of a consistent affine
+system with solution set $a+\operatorname{im}V$ and leftover clauses $L$.  Let
+$B$ be the variable support of $L$, let $\pi_B$ restrict to that support, and put
+$b=\operatorname{rank}(\pi_B V)$.  Select columns $W$ of $V$ whose restrictions
+form a basis of $\operatorname{im}(\pi_B V)$.  The CNF is satisfiable if and only
+if one of the $2^b$ representatives $a+Wu$, for $u\in\mathbb F_2^b$, satisfies
+$L$.  A falsified leftover clause for each representative certifies
+unsatisfiability, provided the extraction, full affine basis, and projected
+independence and spanning claims are checked.
+\end{proposition}
+\begin{proof}
+Every representative is an affine solution because its directions are columns
+of $V$.  Conversely, any affine solution $x$ has
+$\pi_B(x-a)\in\operatorname{im}(\pi_B V)=\operatorname{im}(\pi_B W)$, so some
+representative agrees with $x$ on every variable in $B$.  All clauses of $L$
+therefore have the same truth values on that representative and on $x$.
+Independence gives exactly $2^b$ distinct projected assignments, and spanning
+ensures that none is omitted.  If every representative falsifies a leftover
+clause, no affine solution satisfies all leftovers; if a representative satisfies
+them, it satisfies the entire extracted CNF and hence the source.
+\end{proof}
+
+The implementation selects original full-space directions by elimination on
+their boundary restrictions.  Verification uses the opposite pivot order to
+check independence and that every original direction projects into the selected
+span.  A control has six nonzero projected directions of rank five: simply
+discarding zero projections would not obtain the saving.  The full checked basis
+is still retained.  Discovery enumerates representatives in Gray order; the
+checker reconstructs binary coefficient vectors directly and uses inverse Gray
+indexing to find their rejection clauses.  Positive representatives are checked
+against all source clauses.  Rank above eight, absent equations and discovery
+budget stops yield no verdict.
+
+The resulting \texttt{cnf-affine-boundary-v1} JSON certificate is a separate
+authority.  Native, equivalence and earlier affine-negative tables are unchanged.
+All warm and cold loads check the exact normalized source and complete proof.
+Two native readers audit fallback records; each cold pass additionally invokes
+the same boundary checker, rather than a second independent boundary algorithm.
+Exact stream reuse needs the same canonical source; edited clauses invalidate
+it.  The implementation does not reuse a factorization across changed sources.
+
+Twenty-four synthetic constructions were frozen before implementation, together
+with four separately identified exact repeat queries.  The distinct panel has
+fifteen SAT and nine UNSAT inputs, including connected affine extensions of mixed
+cores, growing parity prisms, crossing edits, a clause deletion and random
+three-CNFs.  No normalized input duplicates the preceding panel, but these are
+designed controls rather than representative external SAT evidence.  Descriptions
+and independent DPLL audit labels are withheld from measured workflows.
+Direct full-space completion covers fourteen of the twenty-four constructions;
+boundary completion covers eighteen.  The four additional cases have eleven free
+coordinates and boundary ranks five, six or zero.  One repeat also gains a direct
+negative certificate.  The unchanged current fallback already decides all
+thirty-three queries, including the five exposed development cases.
+
+On the connected unsatisfiable control with three attached affine pairs,
+measured enumeration falls from 256 assignments to 32 representatives.  With
+six pairs, the preceding gate refuses dimension eleven and falls back, while the
+new method checks 32 representatives.  The comparison with $2^{11}=2048$ is an
+avoided full-space enumeration, not an observed baseline run with that enlarged
+cap.  A consistent thirty-variable parity control has eleven free coordinates,
+rank-zero boundary and one representative.  These are restricted reductions:
+$b$ can still be large, full-space preparation is not free, and the worst-case
+$2^b$ term remains exponential.
+
+Six process-order permutations compare current fresh solving, explicit old
+full-space acquisition followed by the same fallback, and boundary acquisition
+followed by that fallback.  The current solver already includes affine
+recognition.  Complete times are 0.11470, 0.11800 and 0.09216 seconds: boundary
+completion saves 19.66\% against fresh and 21.90\% against explicit full-space
+acquisition.  Paired savings against fresh range from 16.38\% to 23.93\%.
+Discovery itself grows from 0.01194 to 0.01303 seconds between the full and
+boundary policies; projection and checking add work.  Solve/check times are
+0.04989, 0.03783 and 0.02149 seconds; warm costs are 0.00870, 0.00937 and
+0.00926 seconds, and cold costs are 0.03694, 0.03538 and 0.03110 seconds.
+Recognition, preparation, evidence persistence, warm reuse, cold checking and
+archive compression are charged.  Interpreter startup, report metadata, panel
+generation and the final preservation audit are additional.
+
+Combined SQLite-record and JSON-proof bytes are 102,523, 98,292 and 71,770;
+combined compressed sizes are 24,436, 23,016 and 16,798 bytes.  Full and boundary
+policies additionally retain 6,386 and 9,317 diagnostic bytes.  These storage
+figures exclude repeated experimental reports, failed runs, historical archives
+and database/container overhead.  Peak process RSS is 53,755,904, 53,084,160 and
+52,297,728 bytes.  The modest RSS change does not imply an asymptotic memory
+improvement.  The full basis remains present even when the visible rank is small.
+
+Six distinct random-three-CNF acquisition misses contain no complete recognized
+parity halves; two repeats add no new structural gaps.  All are decided by the
+fallback.  Non-affine boundary relations or certified hidden structure are the
+next coverage targets, while pure affine handling and checked preparation reuse
+are supporting cost targets.  The experimental authority needs explicit dispatch
+before production integration; defaults remain unchanged.  No general compact
+classification, polynomial acquisition, or unrestricted-SAT expansion bound is
+established.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

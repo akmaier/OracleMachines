@@ -1,0 +1,92 @@
+{
+  "cost_comparisons_percent": {
+    "clause3_vs_hold": 29.735718067756565,
+    "clause4_vs_clause3": 54.84326231341934,
+    "clause4_vs_hold": 100.88701824185446,
+    "clause4_vs_wide": 11.952616776948343
+  },
+  "decision": "Retain exact local clause-width covers and independently checked negative witnesses as a sharper classification of the remaining gap. Every active factor has a width-four cover, but no new frontier/root verdict and no cost saving. Production defaults unchanged.",
+  "documents": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "80ee5dc5e8d8636fd8ed00c6064dbd4a40a32b1a0f00cf1cafc7f9c29f9c4160",
+    "research/factor-clause-width.md": "e8180dfa2237d0e00f8f5e651a16b25f5863d8362a61944b3a38b272e2178328",
+    "research/implementation-gaps.md": "333bed7433f160dcbe7e3a6ac1720052ac148acee5e0f3d150cc1f8383194624",
+    "research/sat-pattern-discovery.md": "10c29b4206c719c25298099f8bc461cbf1fc2f337e8ad278778b7714aca658e3",
+    "research/structural-reuse-priorities.md": "c152877cf4e5b59be23706bc55e007e32ae4b3cb225a2e3a32dc40d8aa507e3a"
+  },
+  "limitations": [
+    "The three saved unresolved active-factor frontiers of two SAT roots. Input is source CNF plus its previously checked width-nine projection prefix. Historical acquisition and full root preparation are additional, not included in this incremental-stage comparison.",
+    "Hold retains the same source-bound prefix and reconstructs active factors. Wide continues at width ten. Clause3 and clause4 classify all active tables as exact same-variable CNF covers, certified width obstructions, or budget-unresolved; only complete covers permit a new width-nine bucket continuation.",
+    "The old projection work remains charged against the total 262144 allowance before any continuation. Clause candidate/completion search has a separate 65536-unit cap per frontier; mask construction, subsumption, checking and bit-operation costs are additional measured work. These caps are not total runtime or unrestricted SAT bounds.",
+    "Each new terminal CNF is the exact conjunction of all checked covers. Its model is lifted through the full old prefix choices and checked against the source; no auxiliary variables or unchecked replacements are accepted. A leaf certificate is not automatically a whole-root verdict.",
+    "All modes use the previous bounded verified-operator bank across each phase. Warm and each cold pass start empty. Eight cyclic process orders charge input, recognition, prefix preparation, internal/explicit checking, writes, warm/cold replay and compression. Startup, final report metadata, earlier acquisition and independent audits are extra.",
+    "This is a focused stage study, not a complete end-to-end 182-query comparison or external generalization. Same-variable clause-width obstructions are representation lower bounds, not time lower bounds or obstructions to auxiliary encodings, conditioning or contextual simplification.",
+    "Exhaustive audits concern explicit local truth tables. Constructing arbitrary CNF truth tables and solving the coupled conjunction are separate obligations. No claim about efficient unrestricted SAT or new external-distribution coverage."
+  ],
+  "new_leaf_verdicts": 0,
+  "new_root_verdicts": 0,
+  "next_cost_target": "Exact validated source/intermediate reuse, as identified by the previous full-pipeline profile: 5449 normalizations and 6127 restrictions. Charge construction, binding and invalidation; this incremental study is not a new full-pipeline comparison.",
+  "next_coverage_target": "Separator or conditioning step on the coupled active-factor graph after exact local covers, with every branch and full source/root recomposition checked. Current greedy widths are not optimal-decomposition lower bounds; auxiliary and contextual representations remain open.",
+  "paired_percent": {
+    "clause3_vs_hold": [
+      28.98068699772647,
+      31.778470995407403,
+      29.578372436217904,
+      27.384835500229432,
+      35.90376265166031,
+      32.049031733162266,
+      26.756222900723948,
+      25.898066067710857
+    ],
+    "clause4_vs_clause3": [
+      50.86966107511435,
+      48.05974147923373,
+      61.166803946665425,
+      61.66920409198533,
+      51.295778335607565,
+      59.88772572187941,
+      53.73999671778118,
+      52.486662712567146
+    ],
+    "clause4_vs_hold": [
+      94.59272532582399,
+      95.1108634810872,
+      108.83732146155927,
+      105.9420496871057,
+      105.61665549120622,
+      111.13019367591602,
+      94.8750129271564,
+      91.97775936631523
+    ],
+    "clause4_vs_wide": [
+      9.62906327076114,
+      9.850258873632978,
+      16.327011495802047,
+      14.960398212745108,
+      14.156938561401834,
+      13.491954179224464,
+      12.177935426244012,
+      5.383086964574191
+    ]
+  },
+  "remaining": [
+    "d-d-d-j06",
+    "d-d-k09"
+  ],
+  "representation_census": {
+    "dense_factors": 17,
+    "dense_minimum_2": 1,
+    "dense_minimum_3": 4,
+    "dense_minimum_4": 12,
+    "factors": 244,
+    "minimum_0": 3,
+    "minimum_2": 89,
+    "minimum_3": 140,
+    "minimum_4": 12
+  },
+  "root_coverage_unchanged": 180,
+  "root_panel_size": 182,
+  "supplemental_checks": {
+    "path": "experiments/results/cnf-factor-refinement/supplemental-checks.json",
+    "sha256": "67aeae20ecc9032684b4c6b01f4903805d483eed63d9e6a0969c1d430ee9ddcc"
+  }
+}

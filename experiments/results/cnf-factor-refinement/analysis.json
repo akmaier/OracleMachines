@@ -1,0 +1,2961 @@
+{
+  "census": {
+    "dense_factors": 17,
+    "dense_minimum_2": 1,
+    "dense_minimum_3": 4,
+    "dense_minimum_4": 12,
+    "factors": 244,
+    "minimum_0": 3,
+    "minimum_2": 89,
+    "minimum_3": 140,
+    "minimum_4": 12
+  },
+  "comparisons_percent": {
+    "clause3_vs_hold": 29.735718067756565,
+    "clause4_vs_clause3": 54.84326231341934,
+    "clause4_vs_hold": 100.88701824185446,
+    "clause4_vs_wide": 11.952616776948343
+  },
+  "counts": {
+    "clause3": {
+      "cold_counts": {
+        "bucket_checked_steps": 42,
+        "bucket_verified_rows": 5928,
+        "bucket_verify_table_probes": 61472,
+        "clause_cover_verified_literals": 19136,
+        "clause_cover_verified_rows": 3910,
+        "clause_obstruction_verified_witnesses": 982,
+        "normalization_literal_visits": 3360,
+        "verified_operator_insertions": 42,
+        "verified_operator_key_factors": 196,
+        "verified_operator_key_scope_visits": 766,
+        "verified_operator_misses": 42,
+        "widen_materialized_leaf_rows": 4152,
+        "widen_materialized_steps": 42
+      },
+      "counts": {
+        "bucket_checked_steps": 63,
+        "bucket_verified_rows": 2964,
+        "bucket_verify_table_probes": 30736,
+        "clause_candidates": 6630,
+        "clause_cover_verified_literals": 28704,
+        "clause_cover_verified_rows": 5865,
+        "clause_direct_covers": 224,
+        "clause_mask_intersections": 18002,
+        "clause_mask_rows": 19552,
+        "clause_obstruction_candidates": 16298,
+        "clause_obstruction_verified_witnesses": 1473,
+        "normalization_literal_visits": 5040,
+        "verified_operator_hits": 42,
+        "verified_operator_insertions": 21,
+        "verified_operator_key_factors": 294,
+        "verified_operator_key_scope_visits": 1149,
+        "verified_operator_misses": 21,
+        "verified_operator_saved_constant_rows": 296,
+        "verified_operator_saved_nonconstant_rows": 5632,
+        "verified_operator_saved_probes": 61472,
+        "verified_operator_saved_rows": 5928,
+        "widen_materialized_leaf_rows": 6228,
+        "widen_materialized_steps": 63
+      },
+      "warm_counts": {
+        "bucket_checked_steps": 21,
+        "bucket_verified_rows": 2964,
+        "bucket_verify_table_probes": 30736,
+        "clause_cover_verified_literals": 9568,
+        "clause_cover_verified_rows": 1955,
+        "clause_obstruction_verified_witnesses": 491,
+        "normalization_literal_visits": 1680,
+        "verified_operator_insertions": 21,
+        "verified_operator_key_factors": 98,
+        "verified_operator_key_scope_visits": 383,
+        "verified_operator_misses": 21,
+        "widen_materialized_leaf_rows": 2076,
+        "widen_materialized_steps": 21
+      }
+    },
+    "clause4": {
+      "cold_counts": {
+        "bucket_checked_steps": 50,
+        "bucket_verified_rows": 7464,
+        "bucket_verify_table_probes": 79904,
+        "clause_cover_verified_literals": 96768,
+        "clause_cover_verified_rows": 8070,
+        "normalization_literal_visits": 6672,
+        "verified_operator_insertions": 50,
+        "verified_operator_key_factors": 244,
+        "verified_operator_key_scope_visits": 962,
+        "verified_operator_misses": 50,
+        "widen_materialized_leaf_rows": 8544,
+        "widen_materialized_steps": 50
+      },
+      "counts": {
+        "bucket_checked_steps": 75,
+        "bucket_compacted_rows": 672,
+        "bucket_leaf_rows": 2196,
+        "bucket_lookup_factors": 24,
+        "bucket_lookup_scope_visits": 70,
+        "bucket_operator_misses": 4,
+        "bucket_planning_scope_visits": 5313,
+        "bucket_projected_rows": 768,
+        "bucket_removed_coordinates": 2,
+        "bucket_reserved_probe_work": 9216,
+        "bucket_support_pair_checks": 448,
+        "bucket_table_probes": 5462,
+        "bucket_verified_rows": 3732,
+        "bucket_verify_table_probes": 39952,
+        "clause_candidates": 17670,
+        "clause_cover_verified_literals": 145152,
+        "clause_cover_verified_rows": 12105,
+        "clause_direct_covers": 224,
+        "clause_mask_intersections": 62162,
+        "clause_mask_rows": 19552,
+        "normalization_literal_visits": 10008,
+        "verified_operator_hits": 50,
+        "verified_operator_insertions": 25,
+        "verified_operator_key_factors": 366,
+        "verified_operator_key_scope_visits": 1443,
+        "verified_operator_misses": 25,
+        "verified_operator_saved_constant_rows": 296,
+        "verified_operator_saved_nonconstant_rows": 7168,
+        "verified_operator_saved_probes": 79904,
+        "verified_operator_saved_rows": 7464,
+        "widen_materialized_leaf_rows": 10620,
+        "widen_materialized_steps": 71
+      },
+      "warm_counts": {
+        "bucket_checked_steps": 25,
+        "bucket_verified_rows": 3732,
+        "bucket_verify_table_probes": 39952,
+        "clause_cover_verified_literals": 48384,
+        "clause_cover_verified_rows": 4035,
+        "normalization_literal_visits": 3336,
+        "verified_operator_insertions": 25,
+        "verified_operator_key_factors": 122,
+        "verified_operator_key_scope_visits": 481,
+        "verified_operator_misses": 25,
+        "widen_materialized_leaf_rows": 4272,
+        "widen_materialized_steps": 25
+      }
+    },
+    "hold": {
+      "cold_counts": {
+        "bucket_checked_steps": 42,
+        "bucket_verified_rows": 5928,
+        "bucket_verify_table_probes": 61472,
+        "normalization_literal_visits": 3360,
+        "verified_operator_insertions": 42,
+        "verified_operator_key_factors": 196,
+        "verified_operator_key_scope_visits": 766,
+        "verified_operator_misses": 42,
+        "widen_materialized_leaf_rows": 4152,
+        "widen_materialized_steps": 42
+      },
+      "counts": {
+        "bucket_checked_steps": 42,
+        "bucket_verified_rows": 2964,
+        "bucket_verify_table_probes": 30736,
+        "normalization_literal_visits": 3360,
+        "verified_operator_hits": 21,
+        "verified_operator_insertions": 21,
+        "verified_operator_key_factors": 196,
+        "verified_operator_key_scope_visits": 766,
+        "verified_operator_misses": 21,
+        "verified_operator_saved_constant_rows": 148,
+        "verified_operator_saved_nonconstant_rows": 2816,
+        "verified_operator_saved_probes": 30736,
+        "verified_operator_saved_rows": 2964,
+        "widen_materialized_leaf_rows": 4152,
+        "widen_materialized_steps": 42
+      },
+      "warm_counts": {
+        "bucket_checked_steps": 21,
+        "bucket_verified_rows": 2964,
+        "bucket_verify_table_probes": 30736,
+        "normalization_literal_visits": 1680,
+        "verified_operator_insertions": 21,
+        "verified_operator_key_factors": 98,
+        "verified_operator_key_scope_visits": 383,
+        "verified_operator_misses": 21,
+        "widen_materialized_leaf_rows": 2076,
+        "widen_materialized_steps": 21
+      }
+    },
+    "wide": {
+      "cold_counts": {
+        "bucket_checked_steps": 50,
+        "bucket_verified_rows": 10024,
+        "bucket_verify_table_probes": 108576,
+        "normalization_literal_visits": 3360,
+        "verified_operator_insertions": 50,
+        "verified_operator_key_factors": 242,
+        "verified_operator_key_scope_visits": 978,
+        "verified_operator_misses": 50,
+        "widen_checked_suffix_steps": 8,
+        "widen_materialized_leaf_rows": 4152,
+        "widen_materialized_steps": 50
+      },
+      "counts": {
+        "bucket_checked_steps": 71,
+        "bucket_compacted_rows": 1536,
+        "bucket_planning_scope_visits": 5467,
+        "bucket_projected_rows": 2048,
+        "bucket_removed_coordinates": 2,
+        "bucket_reserved_probe_work": 23552,
+        "bucket_support_pair_checks": 1706,
+        "bucket_table_probes": 13674,
+        "bucket_verified_rows": 5012,
+        "bucket_verify_table_probes": 54288,
+        "normalization_literal_visits": 5040,
+        "verified_operator_hits": 46,
+        "verified_operator_insertions": 25,
+        "verified_operator_key_factors": 340,
+        "verified_operator_key_scope_visits": 1361,
+        "verified_operator_misses": 25,
+        "verified_operator_saved_constant_rows": 296,
+        "verified_operator_saved_nonconstant_rows": 7680,
+        "verified_operator_saved_probes": 85024,
+        "verified_operator_saved_rows": 7976,
+        "widen_checked_suffix_steps": 8,
+        "widen_materialized_leaf_rows": 6228,
+        "widen_materialized_steps": 71,
+        "widen_new_projection_steps": 4,
+        "widen_reused_projection_steps": 21,
+        "widen_reused_reserved_work": 30736
+      },
+      "warm_counts": {
+        "bucket_checked_steps": 25,
+        "bucket_verified_rows": 5012,
+        "bucket_verify_table_probes": 54288,
+        "normalization_literal_visits": 1680,
+        "verified_operator_insertions": 25,
+        "verified_operator_key_factors": 121,
+        "verified_operator_key_scope_visits": 489,
+        "verified_operator_misses": 25,
+        "widen_checked_suffix_steps": 4,
+        "widen_materialized_leaf_rows": 2076,
+        "widen_materialized_steps": 25
+      }
+    }
+  },
+  "limitations": [
+    "The three saved unresolved active-factor frontiers of two SAT roots. Input is source CNF plus its previously checked width-nine projection prefix. Historical acquisition and full root preparation are additional, not included in this incremental-stage comparison.",
+    "Hold retains the same source-bound prefix and reconstructs active factors. Wide continues at width ten. Clause3 and clause4 classify all active tables as exact same-variable CNF covers, certified width obstructions, or budget-unresolved; only complete covers permit a new width-nine bucket continuation.",
+    "The old projection work remains charged against the total 262144 allowance before any continuation. Clause candidate/completion search has a separate 65536-unit cap per frontier; mask construction, subsumption, checking and bit-operation costs are additional measured work. These caps are not total runtime or unrestricted SAT bounds.",
+    "Each new terminal CNF is the exact conjunction of all checked covers. Its model is lifted through the full old prefix choices and checked against the source; no auxiliary variables or unchecked replacements are accepted. A leaf certificate is not automatically a whole-root verdict.",
+    "All modes use the previous bounded verified-operator bank across each phase. Warm and each cold pass start empty. Eight cyclic process orders charge input, recognition, prefix preparation, internal/explicit checking, writes, warm/cold replay and compression. Startup, final report metadata, earlier acquisition and independent audits are extra.",
+    "This is a focused stage study, not a complete end-to-end 182-query comparison or external generalization. Same-variable clause-width obstructions are representation lower bounds, not time lower bounds or obstructions to auxiliary encodings, conditioning or contextual simplification."
+  ],
+  "paired_percent": {
+    "clause3_vs_hold": [
+      28.98068699772647,
+      31.778470995407403,
+      29.578372436217904,
+      27.384835500229432,
+      35.90376265166031,
+      32.049031733162266,
+      26.756222900723948,
+      25.898066067710857
+    ],
+    "clause4_vs_clause3": [
+      50.86966107511435,
+      48.05974147923373,
+      61.166803946665425,
+      61.66920409198533,
+      51.295778335607565,
+      59.88772572187941,
+      53.73999671778118,
+      52.486662712567146
+    ],
+    "clause4_vs_hold": [
+      94.59272532582399,
+      95.1108634810872,
+      108.83732146155927,
+      105.9420496871057,
+      105.61665549120622,
+      111.13019367591602,
+      94.8750129271564,
+      91.97775936631523
+    ],
+    "clause4_vs_wide": [
+      9.62906327076114,
+      9.850258873632978,
+      16.327011495802047,
+      14.960398212745108,
+      14.156938561401834,
+      13.491954179224464,
+      12.177935426244012,
+      5.383086964574191
+    ]
+  },
+  "peak_rss_bytes": {
+    "clause3": 49774592,
+    "clause4": 49872896,
+    "hold": 49135616,
+    "wide": 49168384
+  },
+  "progress": {
+    "clause3": [
+      {
+        "diagnostic": {
+          "factors": [
+            {
+              "index": 0,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 1,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 2,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 3,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 4,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 5,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 6,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 7,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 8,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 9,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 10,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 11,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 12,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 13,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 16,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 17,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 18,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 19,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 21,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 22,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 23,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 25,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 26,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 28,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 29,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 30,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 31,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 32,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 33,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 34,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 35,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 36,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 37,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 40,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 44,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 45,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 46,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 49,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 50,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 51,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 52,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 53,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 54,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 55,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 56,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 60,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 62,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 63,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 65,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 67,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 69,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 71,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 72,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 73,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 74,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 76,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 77,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 79,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 80,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 83,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 90,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 91,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 93,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 94,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 95,
+              "reason": "tautology",
+              "spent": 0
+            },
+            {
+              "index": 96,
+              "reason": "tautology",
+              "spent": 0
+            },
+            {
+              "index": 97,
+              "reason": "exact-cover",
+              "spent": 130
+            },
+            {
+              "index": 98,
+              "reason": "width-obstruction",
+              "spent": 1688
+            },
+            {
+              "index": 99,
+              "reason": "width-obstruction",
+              "spent": 2066
+            },
+            {
+              "index": 100,
+              "reason": "width-obstruction",
+              "spent": 4505
+            },
+            {
+              "index": 101,
+              "reason": "width-obstruction",
+              "spent": 2509
+            }
+          ],
+          "spent": 10898,
+          "terminal": null
+        },
+        "id": "d-d-d-j06:1",
+        "status": "unresolved",
+        "steps": 0
+      },
+      {
+        "diagnostic": {
+          "factors": [
+            {
+              "index": 0,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 1,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 2,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 4,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 6,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 7,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 9,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 10,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 11,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 12,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 13,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 22,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 25,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 29,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 30,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 31,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 32,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 33,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 34,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 35,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 37,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 38,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 39,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 40,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 41,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 42,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 43,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 47,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 48,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 49,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 50,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 51,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 52,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 54,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 55,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 56,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 57,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 58,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 59,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 60,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 61,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 62,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 63,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 64,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 65,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 66,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 67,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 68,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 69,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 70,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 73,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 74,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 78,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 79,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 80,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 81,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 82,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 84,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 85,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 86,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 87,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 88,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 89,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 95,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 96,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 99,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 100,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 101,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 102,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 104,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 105,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 108,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 109,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 111,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 112,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 114,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 115,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 116,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 118,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 121,
+              "reason": "tautology",
+              "spent": 0
+            },
+            {
+              "index": 122,
+              "reason": "width-obstruction",
+              "spent": 463
+            },
+            {
+              "index": 123,
+              "reason": "exact-cover",
+              "spent": 232
+            },
+            {
+              "index": 124,
+              "reason": "width-obstruction",
+              "spent": 1904
+            },
+            {
+              "index": 125,
+              "reason": "width-obstruction",
+              "spent": 1103
+            },
+            {
+              "index": 126,
+              "reason": "exact-cover",
+              "spent": 378
+            },
+            {
+              "index": 127,
+              "reason": "exact-cover",
+              "spent": 576
+            }
+          ],
+          "spent": 4656,
+          "terminal": null
+        },
+        "id": "d-d-k09:0",
+        "status": "unresolved",
+        "steps": 0
+      },
+      {
+        "diagnostic": {
+          "factors": [
+            {
+              "index": 0,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 1,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 2,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 3,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 4,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 5,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 6,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 7,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 8,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 9,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 10,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 11,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 13,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 14,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 15,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 16,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 17,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 18,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 23,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 24,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 25,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 28,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 29,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 30,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 31,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 33,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 34,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 35,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 36,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 38,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 39,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 40,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 42,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 43,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 44,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 45,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 46,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 47,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 48,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 49,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 52,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 53,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 54,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 55,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 56,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 57,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 58,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 59,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 60,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 62,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 63,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 64,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 65,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 66,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 67,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 71,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 72,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 73,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 74,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 75,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 76,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 77,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 80,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 81,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 82,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 83,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 84,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 85,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 86,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 88,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 89,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 92,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 94,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 95,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 97,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 98,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 99,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 101,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 103,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 104,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 105,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 106,
+              "reason": "width-obstruction",
+              "spent": 174
+            },
+            {
+              "index": 107,
+              "reason": "exact-cover",
+              "spent": 130
+            },
+            {
+              "index": 108,
+              "reason": "width-obstruction",
+              "spent": 294
+            },
+            {
+              "index": 109,
+              "reason": "width-obstruction",
+              "spent": 1376
+            },
+            {
+              "index": 110,
+              "reason": "width-obstruction",
+              "spent": 4261
+            },
+            {
+              "index": 111,
+              "reason": "width-obstruction",
+              "spent": 1139
+            }
+          ],
+          "spent": 7374,
+          "terminal": null
+        },
+        "id": "d-d-k09:3",
+        "status": "unresolved",
+        "steps": 0
+      }
+    ],
+    "clause4": [
+      {
+        "diagnostic": {
+          "factors": [
+            {
+              "index": 0,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 1,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 2,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 3,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 4,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 5,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 6,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 7,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 8,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 9,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 10,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 11,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 12,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 13,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 16,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 17,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 18,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 19,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 21,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 22,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 23,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 25,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 26,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 28,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 29,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 30,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 31,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 32,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 33,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 34,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 35,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 36,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 37,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 40,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 44,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 45,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 46,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 49,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 50,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 51,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 52,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 53,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 54,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 55,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 56,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 60,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 62,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 63,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 65,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 67,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 69,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 71,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 72,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 73,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 74,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 76,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 77,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 79,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 80,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 83,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 90,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 91,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 93,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 94,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 95,
+              "reason": "tautology",
+              "spent": 0
+            },
+            {
+              "index": 96,
+              "reason": "tautology",
+              "spent": 0
+            },
+            {
+              "index": 97,
+              "reason": "exact-cover",
+              "spent": 210
+            },
+            {
+              "index": 98,
+              "reason": "exact-cover",
+              "spent": 938
+            },
+            {
+              "index": 99,
+              "reason": "exact-cover",
+              "spent": 938
+            },
+            {
+              "index": 100,
+              "reason": "exact-cover",
+              "spent": 1696
+            },
+            {
+              "index": 101,
+              "reason": "exact-cover",
+              "spent": 1696
+            }
+          ],
+          "spent": 5478,
+          "terminal": {
+            "reason": "bag-width",
+            "spent": 5120,
+            "width": 11
+          }
+        },
+        "id": "d-d-d-j06:1",
+        "status": "unresolved",
+        "steps": 2
+      },
+      {
+        "diagnostic": {
+          "factors": [
+            {
+              "index": 0,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 1,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 2,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 4,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 6,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 7,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 9,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 10,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 11,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 12,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 13,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 22,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 25,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 29,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 30,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 31,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 32,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 33,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 34,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 35,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 37,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 38,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 39,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 40,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 41,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 42,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 43,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 47,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 48,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 49,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 50,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 51,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 52,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 54,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 55,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 56,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 57,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 58,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 59,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 60,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 61,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 62,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 63,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 64,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 65,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 66,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 67,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 68,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 69,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 70,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 73,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 74,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 78,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 79,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 80,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 81,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 82,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 84,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 85,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 86,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 87,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 88,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 89,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 95,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 96,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 99,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 100,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 101,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 102,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 104,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 105,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 108,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 109,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 111,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 112,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 114,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 115,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 116,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 118,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 121,
+              "reason": "tautology",
+              "spent": 0
+            },
+            {
+              "index": 122,
+              "reason": "exact-cover",
+              "spent": 472
+            },
+            {
+              "index": 123,
+              "reason": "exact-cover",
+              "spent": 472
+            },
+            {
+              "index": 124,
+              "reason": "exact-cover",
+              "spent": 938
+            },
+            {
+              "index": 125,
+              "reason": "exact-cover",
+              "spent": 1696
+            },
+            {
+              "index": 126,
+              "reason": "exact-cover",
+              "spent": 938
+            },
+            {
+              "index": 127,
+              "reason": "exact-cover",
+              "spent": 1696
+            }
+          ],
+          "spent": 6212,
+          "terminal": {
+            "reason": "bag-width",
+            "spent": 3072,
+            "width": 10
+          }
+        },
+        "id": "d-d-k09:0",
+        "status": "unresolved",
+        "steps": 1
+      },
+      {
+        "diagnostic": {
+          "factors": [
+            {
+              "index": 0,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 1,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 2,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 3,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 4,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 5,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 6,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 7,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 8,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 9,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 10,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 11,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 13,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 14,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 15,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 16,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 17,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 18,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 23,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 24,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 25,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 28,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 29,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 30,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 31,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 33,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 34,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 35,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 36,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 38,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 39,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 40,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 42,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 43,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 44,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 45,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 46,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 47,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 48,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 49,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 52,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 53,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 54,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 55,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 56,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 57,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 58,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 59,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 60,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 62,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 63,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 64,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 65,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 66,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 67,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 71,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 72,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 73,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 74,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 75,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 76,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 77,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 80,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 81,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 82,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 83,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 84,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 85,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 86,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 88,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 89,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 92,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 94,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 95,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 97,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 98,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 99,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 101,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 103,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 104,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 105,
+              "reason": "single-clause",
+              "spent": 0
+            },
+            {
+              "index": 106,
+              "reason": "exact-cover",
+              "spent": 210
+            },
+            {
+              "index": 107,
+              "reason": "exact-cover",
+              "spent": 210
+            },
+            {
+              "index": 108,
+              "reason": "exact-cover",
+              "spent": 472
+            },
+            {
+              "index": 109,
+              "reason": "exact-cover",
+              "spent": 1696
+            },
+            {
+              "index": 110,
+              "reason": "exact-cover",
+              "spent": 1696
+            },
+            {
+              "index": 111,
+              "reason": "exact-cover",
+              "spent": 1696
+            }
+          ],
+          "spent": 5980,
+          "terminal": {
+            "reason": "bag-width",
+            "spent": 1024,
+            "width": 10
+          }
+        },
+        "id": "d-d-k09:3",
+        "status": "unresolved",
+        "steps": 1
+      }
+    ],
+    "hold": [
+      {
+        "diagnostic": {
+          "reason": "retained-prefix"
+        },
+        "id": "d-d-d-j06:1",
+        "status": "unresolved",
+        "steps": 0
+      },
+      {
+        "diagnostic": {
+          "reason": "retained-prefix"
+        },
+        "id": "d-d-k09:0",
+        "status": "unresolved",
+        "steps": 0
+      },
+      {
+        "diagnostic": {
+          "reason": "retained-prefix"
+        },
+        "id": "d-d-k09:3",
+        "status": "unresolved",
+        "steps": 0
+      }
+    ],
+    "wide": [
+      {
+        "diagnostic": {
+          "reason": "bag-width",
+          "spent": 22480,
+          "width": 12
+        },
+        "id": "d-d-d-j06:1",
+        "status": "unresolved",
+        "steps": 2
+      },
+      {
+        "diagnostic": {
+          "reason": "bag-width",
+          "spent": 19584,
+          "width": 11
+        },
+        "id": "d-d-k09:0",
+        "status": "unresolved",
+        "steps": 1
+      },
+      {
+        "diagnostic": {
+          "reason": "bag-width",
+          "spent": 12224,
+          "width": 11
+        },
+        "id": "d-d-k09:3",
+        "status": "unresolved",
+        "steps": 1
+      }
+    ]
+  },
+  "root_coverage_unchanged": 180,
+  "root_panel_size": 182,
+  "statuses": {
+    "clause3": [
+      "unresolved",
+      "unresolved",
+      "unresolved"
+    ],
+    "clause4": [
+      "unresolved",
+      "unresolved",
+      "unresolved"
+    ],
+    "hold": [
+      "unresolved",
+      "unresolved",
+      "unresolved"
+    ],
+    "wide": [
+      "unresolved",
+      "unresolved",
+      "unresolved"
+    ]
+  },
+  "totals": {
+    "clause3": {
+      "cold_seconds": 0.044929796655196697,
+      "complete_stage_seconds": 0.10822896857280284,
+      "compressed_bytes": 4054,
+      "input_seconds": 0.0005518074030987918,
+      "persistence_seconds": 0.0010054429294541478,
+      "phases": {
+        "acquisition_seconds": 0.034104807127732784,
+        "checking_seconds": 0.003908458224032074,
+        "writing_seconds": 0.0009500204469077289
+      },
+      "proof_bytes": 100319,
+      "warm_seconds": 0.02270649984711781
+    },
+    "clause4": {
+      "cold_seconds": 0.06495379144325852,
+      "complete_stage_seconds": 0.16758526570629328,
+      "compressed_bytes": 5438,
+      "input_seconds": 0.0005372136365622282,
+      "persistence_seconds": 0.0012307915021665394,
+      "phases": {
+        "acquisition_seconds": 0.05904127092799172,
+        "checking_seconds": 0.00831151520833373,
+        "writing_seconds": 0.0008806297555565834
+      },
+      "proof_bytes": 113513,
+      "warm_seconds": 0.032562927110120654
+    },
+    "hold": {
+      "cold_seconds": 0.04025916662067175,
+      "complete_stage_seconds": 0.0834226458100602,
+      "compressed_bytes": 48,
+      "input_seconds": 0.0005466561415232718,
+      "persistence_seconds": 0.00014521362027153373,
+      "phases": {
+        "acquisition_seconds": 0.020320942800026387,
+        "checking_seconds": 0.0014769845874980092,
+        "writing_seconds": 0.0003851561341434717
+      },
+      "proof_bytes": 87,
+      "warm_seconds": 0.020232307142578065
+    },
+    "wide": {
+      "cold_seconds": 0.06809853145387024,
+      "complete_stage_seconds": 0.1496930313296616,
+      "compressed_bytes": 730,
+      "input_seconds": 0.0005421041278168559,
+      "persistence_seconds": 0.0001801197067834437,
+      "phases": {
+        "acquisition_seconds": 0.0446313078282401,
+        "checking_seconds": 0.0014816195471212268,
+        "writing_seconds": 0.00040812994120642543
+      },
+      "proof_bytes": 2262,
+      "warm_seconds": 0.034291151096113026
+    }
+  }
+}

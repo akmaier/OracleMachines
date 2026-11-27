@@ -16560,6 +16560,140 @@ source snapshot and preliminary protocol remain retained, and the correction
 preceded every measured run.  Neither this audit nor finite-panel preservation
 establishes efficient recognition or solving of unrestricted SAT.
 
+\subsection{Exact clause-width partitions of residual factors}
+\label{sec:factor-clause-width}
+
+The two remaining roots contain 244 active factors, of which seventeen are dense
+relations created by earlier projections on five to eight coordinates.  A large
+table scope need not represent an irreducible interaction: the relation may be a
+conjunction of clauses on smaller subsets.  This experiment tests that possibility
+with an exact local classification and source-bound recomposition.  It also
+certifies when a prescribed clause width is insufficient over the same variables.
+
+\begin{proposition}[Exact covers and local width obstructions]
+Let $R\subseteq\{0,1\}^n$ be an explicit Boolean relation and $k\geq 0$.  Exactly
+one of the following holds: $R$ has an equivalent CNF of maximum clause width
+$k$ over those same coordinates, or there is an assignment $a\notin R$ such that
+for every coordinate subset $S$ of size $\min(k,n)$ there exists $b_S\in R$ with
+$b_S|_S=a|_S$.  A clause list can certify the first case by exact row equality;
+$a$ and the listed completions can certify the second.  The second case excludes
+auxiliary variables and use of constraints external to $R$.
+\end{proposition}
+\begin{proof}
+If a clause of width at most $k$ is entailed by $R$ and falsified by $a$, choose a
+size-$\min(k,n)$ set containing its coordinates.  The corresponding completion
+$b_S$ would falsify the same clause, contradicting entailment.  Hence an
+obstruction cannot coexist with an exact cover.  Conversely, conjoin every
+entailed clause of width at most $k$.  Every member of $R$ satisfies this
+conjunction.  If it has an additional model $a$, then each indicated coordinate
+restriction of $a$ has a completion in $R$: otherwise the clause forbidding that
+restriction would be entailed and would exclude $a$.  These completions supply
+the obstruction.  If there is no additional model, the conjunction is the exact
+cover.  Empty and full relations use an empty clause or an empty conjunction;
+the argument also covers $k=0$.  Finite exhaustive enumeration establishes the
+dichotomy, but a stopped implementation must return unresolved rather than infer
+an obstruction from failure to find a cover.  Replacing every active factor by
+an independently checked exact cover preserves their conjunction, so subsequent
+projection certificates compose with the earlier exact prefix; reverse traversal
+of all old choices reconstructs a source witness.  This does not bound the cost
+of obtaining a relation table from an arbitrary succinct CNF or of solving the
+remaining global conjunction.
+\end{proof}
+
+The implementation accepts materialized tables on at most twelve coordinates.
+It recognizes constants and single-clause tables directly, then enumerates
+bounded-width consequences with bit masks.  An excluded row not covered by those
+consequences supplies a candidate obstruction; a model extending each required
+restriction is retained.  A separate 65,536-unit candidate/completion-search cap
+applies per frontier.  Exhausting it gives unresolved.  Mask construction,
+subsumption, bit-operation cost and verification are additional charged work.
+The checker evaluates every row of a proposed cover, or checks every supplied
+completion, without rerunning the search.  This partitions explicit local
+relations under a representation restriction; it is not an efficient partition
+of all CNF inputs into tractable SAT classes.
+
+Each input to the stage study consists of a saved residual CNF and its checked
+unresolved width-nine projection prefix.  The prefix is independently validated
+and its active tables reconstructed.  Each active factor appears exactly once,
+with its full scope and table bound to its certificate.  Only complete cover
+coverage permits a replacement CNF and a new width-nine bucket program.  The
+original prefix's reserved projection work is deducted from the total allowance
+of 262,144 before the continuation; the budget is not reset.  Terminal SAT models
+are lifted through all old reconstruction choices and checked against the source;
+UNSAT follows through exact equivalence.  These are source/leaf certificates;
+using them as new root verdicts would still require earlier conditioning-graph
+recomposition.
+
+The census checks widths zero through four on all 244 active factors.  Their
+exact minimum widths are zero for three constant-true factors, two for 89 factors,
+three for 140, and four for twelve.  Among the seventeen dense projected factors,
+one has minimum width two, four have width three, and twelve have width four.
+Width-three classification covers 232 factors and certifies twelve obstructions
+with 491 completion witnesses.  Thus its incomplete cover is a proved local
+representation limitation, not just a failed search.  Width four covers every
+factor.  Its dense covers contain 78 clauses; together with 224 ordinary clauses
+there are 302 raw clauses, or 297 after normalization/deduplication.  The three
+constant-true factors disappear.
+
+Local primal-edge occurrences across dense factors fall from 355 to 224, but
+these occurrences overlap.  The actual frontier edge counts fall from 130 to 116,
+232 to 203, and 217 to 201.  Exact local decomposition exposes structure without
+removing the global interaction.  The width-nine continuation performs two, one
+and one further projections, then stops at widths eleven, ten and ten under its
+current order.  Continuing the original tables at width ten also performs four
+projections and stops at widths twelve, eleven and eleven.  Neither path certifies
+a new leaf or root, and these observed widths are not optimal-decomposition
+lower bounds.
+
+Eight cyclic process orders compare retaining/reconstructing the original
+frontier, continuing its tables at width ten, and classifying at clause widths
+three/four with width-nine continuation when possible.  Each mode uses the
+previous verified-operator bank; acquisition, warm replay and each of two cold
+passes start with an empty bank.  Mean incremental-stage seconds are $0.083423$
+for retention, $0.149693$ for width ten, $0.108229$ for clause width three and
+$0.167585$ for clause width four.  Width-four decomposition costs $100.89\%$ more
+than retention, $54.84\%$ more than width-three classification, and $11.95\%$
+more than width ten, with all eight paired signs unfavorable.  Production
+defaults remain unchanged.
+
+The decomposition projects 768 rows with 9,216 reserved probes, versus 2,048 rows
+and 23,552 probes for the width-ten control.  Nevertheless, recognition and
+evidence costs exceed the avoided projection work.  Width-four recognition makes
+17,670 candidate-clause checks and 62,162 mask intersections, before additional
+checking.  Its certificate uses 113,513 uncompressed bytes and 5,438 compressed
+bytes, versus 2,262 and 730 for width ten.  Clause-width-three evidence uses
+100,319 and 4,054 bytes.  Logical clause width shrinks while evidence grows.
+
+The measured stage charges input, prefix validation/reconstruction, recognition,
+internal and explicit checking, writes, warm/cold replay and compression.  Earlier
+acquisition, prior root preparation, startup, final report metadata and independent
+audits are additional.  This is a focused three-frontier study, not a new full
+182-query comparison: structural root coverage remains $180/182$.  The earlier
+static and dynamic factorization screens are retained as search diagnostics;
+refactoring newly projected tables in those screens also produced no new verdict.
+
+Tests cover all relations on at most three variables at every width, seeded
+larger tables, exhausted budgets, parity, scope transport, mutations, and SAT/UNSAT
+source reconstruction.  An independent exhaustive audit additionally classifies
+all 65,536 four-variable relations at width three: 43,146 covers and 22,390
+obstructions, with every complete certificate retained.  Its independent
+criterion is an excluded hypercube vertex whose four neighbors are included:
+that vertex has a feasible completion on every three-coordinate restriction.
+Without such an isolated excluded vertex, every excluded vertex belongs to an
+excluded edge, giving an exact cover by clauses of width at most three.  These
+finite counts do not estimate the distribution of arbitrary or external SAT
+workloads.
+
+The next coverage question is therefore the coupled factor graph: test a
+separator or conditioning step, with every branch obligation and exact model
+transport explicit.  More clause-width enumeration cannot improve the already
+complete local covers on these unchanged factors.  The twelve width-three
+obstructions do not exclude auxiliary encodings or context-dependent
+simplification; either would require its own binding and recomposition proof.
+The previous full-pipeline profile still identifies repeated validated source
+preparation as the next cost target.  Neither representation bounds nor small
+local factors settle unrestricted SAT complexity.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

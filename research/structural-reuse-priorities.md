@@ -12,7 +12,43 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: coupled factors and validated source contexts
+## Current investigation: interaction beyond exact local covers
+
+[Exact factor clause-width classification](factor-clause-width.md) identifies the
+remaining obstruction more precisely. All **244 active factors** have exact
+same-variable clause covers of width at most four. Among the seventeen dense
+projected relations, one needs width two, four need width three, and **twelve
+provably require width four**. The negative certificates supply local model
+completions, not a solver-time lower bound; auxiliaries and external context are
+outside this representation restriction.
+
+The exact covers reduce frontier primal edges **130→116, 232→203, 217→201** and
+permit four more width-nine eliminations, but **no new leaf or root verdict**.
+The next greedy widths are eleven, ten and ten. The incremental stage costs
+**11.95% more than width-ten continuation**, with all eight signs unfavorable,
+and its compressed evidence grows 730→5,438 bytes. This is a three-frontier stage
+comparison, not a new full-pipeline benchmark; structural coverage remains
+**180/182**, and production defaults stay unchanged.
+
+**Next coverage target: global interaction after exact local decomposition.**
+Investigate a separator or conditioning step on the coupled factor graph, with
+all branch obligations and source/model recomposition checked. Additional
+clause-width enumeration on these unchanged factors cannot improve their already
+complete covers. These current-order widths are not optimal-decomposition lower
+bounds. Contextual or auxiliary representations remain separate possibilities.
+**Next cost target:** validated source/intermediate reuse, still supported by the
+previous full-pipeline profile's 5,449 normalizations and 6,127 restrictions.
+
+The independent exhaustive audit checks all **65,536 four-variable relations**:
+43,146 width-three covers and 22,390 obstructions. This partitions explicit local
+tables; constructing those tables from arbitrary succinct CNFs and solving their
+global conjunction remain separate obligations. All **2,415 full and 14 focused
+tests pass**. Prior evidence and 80 proof blocks remain unchanged; unsuccessful
+static/dynamic factorization screens are retained. Resume
+`experiments/results/cnf-factor-refinement/checkpoint.json`, key
+`factor_clause_width`.
+
+## Previous investigation: coupled factors and validated source contexts
 
 [Verified operator reuse](verified-operator-reuse.md) reduces complete cost
 **10.37% versus unchanged checking**, with all five paired signs favorable.

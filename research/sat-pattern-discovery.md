@@ -5,7 +5,31 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: selective continuation and exhausted single probes
+## Latest evidence: paired constraints and source-bound prefix reuse
+
+[Checked pair consequences](joint-probe-discovery.md) increase structural coverage
+**124/138 to 131/138**, closing two exposed unique roots (SAT and UNSAT) plus a
+repeat, and raising new unique coverage **15/24 to 19/24**. Width nine stays at
+124/138. Shared prefixes avoid **6,935 state rebuilds** and about **42% of pair
+occurrence visits**; pooled local evidence is **27.93% smaller** than explicit
+prefix duplication. The complete cost is **11.62% below width nine**, but only
+0.98% below base and 0.72% below pair restart with **mixed paired signs**. It remains
+29.85% above fresh. No reliable baseline/restart runtime win or new nonconstant
+cross-leaf sharing is established; defaults stay unchanged.
+
+Seven unique roots remain, all with SAT labels. Their eight width-9–11 final
+leaves have no ordinary binary/forced structure and no failure in **606 complete
+single probes**. A separate next-pair diagnostic produces **177 new clauses** and
+three checked SAT leaf terminals, excluded from measured root coverage. **Next:
+bounded checked clause feedback versus a larger one-shot pair allowance**, with
+exact changing-source bindings and whole-root transport. Discovery including
+internal checks (**2.86258 s**) and cold replay (**2.62962 s**) dominate; validated
+source/intermediate reuse and repeated terminal checking remain the cost targets.
+Unrestricted efficient coverage and recomposition remain open. All **2,355 full
+and 55 focused tests pass**, and prior evidence/proofs are preserved. Resume
+`experiments/results/cnf-joint-probe-buckets/checkpoint.json`.
+
+## Previous evidence: selective continuation and exhausted single probes
 
 [Selective capped-probe continuation](selective-probe-discovery.md) raises
 structural coverage **97/110 to 105/110**, versus **103/110** with uniform doubling.

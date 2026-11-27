@@ -1,0 +1,344 @@
+{
+  "attempts": [
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "spent": 0
+      },
+      "node": 0
+    },
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "spent": 0
+      },
+      "node": 1
+    },
+    {
+      "diagnostic": {
+        "reason": "bag-width",
+        "spent": 3840,
+        "width": 11
+      },
+      "node": 2
+    },
+    {
+      "diagnostic": {
+        "reason": "bag-width",
+        "spent": 1280,
+        "width": 11
+      },
+      "node": 3
+    },
+    {
+      "diagnostic": {
+        "reason": "bag-width",
+        "spent": 2560,
+        "width": 11
+      },
+      "node": 4
+    }
+  ],
+  "edges": [
+    {
+      "diagnostic": {
+        "continuation": null,
+        "gate": null,
+        "post_relation": null,
+        "probes": {
+          "binary": {
+            "reason": "complete",
+            "relation": {
+              "after_units": null,
+              "units": {
+                "reason": "fixed-point",
+                "spent": 472
+              }
+            },
+            "rounds": [
+              {
+                "forcing": {
+                  "reason": "complete",
+                  "searches": 36,
+                  "spent": 30
+                }
+              }
+            ],
+            "spent": 30
+          },
+          "probes": [
+            {
+              "failures": 5,
+              "offset": 0,
+              "probes": 78,
+              "truncated": false,
+              "units": {
+                "reason": "empty-clause",
+                "spent": 534
+              },
+              "variables_removed": 39
+            }
+          ],
+          "reason": "constant",
+          "spent": 78
+        }
+      },
+      "edge": 0
+    },
+    {
+      "diagnostic": {
+        "continuation": {
+          "probes": [
+            {
+              "failures": 7,
+              "offset": 0,
+              "probes": 64,
+              "truncated": false,
+              "units": {
+                "reason": "empty-clause",
+                "spent": 678
+              },
+              "variables_removed": 32
+            }
+          ],
+          "reason": "constant",
+          "spent": 64
+        },
+        "gate": {
+          "reason": "bag-width",
+          "spent": 7168,
+          "width": 10
+        },
+        "post_relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 282
+          }
+        },
+        "probes": {
+          "binary": {
+            "reason": "complete",
+            "relation": {
+              "after_units": null,
+              "units": {
+                "reason": "fixed-point",
+                "spent": 426
+              }
+            },
+            "rounds": [
+              {
+                "forcing": {
+                  "reason": "complete",
+                  "searches": 46,
+                  "spent": 54
+                }
+              }
+            ],
+            "spent": 54
+          },
+          "probes": [
+            {
+              "failures": 2,
+              "offset": 0,
+              "probes": 76,
+              "truncated": false,
+              "units": {
+                "reason": "fixed-point",
+                "spent": 524
+              },
+              "variables_removed": 2
+            },
+            {
+              "failures": 4,
+              "offset": 0,
+              "probes": 52,
+              "truncated": true,
+              "units": {
+                "reason": "fixed-point",
+                "spent": 498
+              },
+              "variables_removed": 4
+            }
+          ],
+          "reason": "probe-limit",
+          "spent": 128
+        }
+      },
+      "edge": 1
+    },
+    {
+      "diagnostic": {
+        "continuation": {
+          "probes": [
+            {
+              "failures": 0,
+              "offset": 0,
+              "probes": 72,
+              "truncated": false
+            }
+          ],
+          "reason": "no-failed-literal",
+          "spent": 72
+        },
+        "gate": {
+          "reason": "bag-width",
+          "spent": 3840,
+          "width": 11
+        },
+        "post_relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 382
+          }
+        },
+        "probes": {
+          "binary": {
+            "reason": "complete",
+            "relation": {
+              "after_units": null,
+              "units": {
+                "reason": "fixed-point",
+                "spent": 430
+              }
+            },
+            "rounds": [
+              {
+                "forcing": {
+                  "reason": "complete",
+                  "searches": 52,
+                  "spent": 52
+                }
+              }
+            ],
+            "spent": 52
+          },
+          "probes": [
+            {
+              "failures": 1,
+              "offset": 0,
+              "probes": 76,
+              "truncated": false,
+              "units": {
+                "reason": "fixed-point",
+                "spent": 467
+              },
+              "variables_removed": 1
+            },
+            {
+              "failures": 1,
+              "offset": 0,
+              "probes": 52,
+              "truncated": true,
+              "units": {
+                "reason": "fixed-point",
+                "spent": 434
+              },
+              "variables_removed": 1
+            }
+          ],
+          "reason": "probe-limit",
+          "spent": 128
+        }
+      },
+      "edge": 2
+    },
+    {
+      "diagnostic": {
+        "continuation": null,
+        "gate": null,
+        "post_relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 468
+          }
+        },
+        "probes": {
+          "binary": {
+            "reason": "complete",
+            "relation": {
+              "after_units": null,
+              "units": {
+                "reason": "fixed-point",
+                "spent": 468
+              }
+            },
+            "rounds": [
+              {
+                "forcing": {
+                  "reason": "complete",
+                  "searches": 28,
+                  "spent": 20
+                }
+              }
+            ],
+            "spent": 20
+          },
+          "probes": [
+            {
+              "failures": 0,
+              "offset": 0,
+              "probes": 78,
+              "truncated": false
+            }
+          ],
+          "reason": "no-failed-literal",
+          "spent": 78
+        }
+      },
+      "edge": 3
+    },
+    {
+      "diagnostic": {
+        "continuation": null,
+        "gate": null,
+        "post_relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 510
+          }
+        },
+        "probes": {
+          "binary": {
+            "reason": "complete",
+            "relation": {
+              "after_units": null,
+              "units": {
+                "reason": "fixed-point",
+                "spent": 510
+              }
+            },
+            "rounds": [
+              {
+                "forcing": {
+                  "reason": "complete",
+                  "searches": 0,
+                  "spent": 0
+                }
+              }
+            ],
+            "spent": 0
+          },
+          "probes": [
+            {
+              "failures": 0,
+              "offset": 0,
+              "probes": 80,
+              "truncated": false
+            }
+          ],
+          "reason": "no-failed-literal",
+          "spent": 80
+        }
+      },
+      "edge": 4
+    }
+  ],
+  "preprocessing": {
+    "reason": "fixed-point",
+    "spent": 2040
+  }
+}

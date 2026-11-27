@@ -15987,6 +15987,144 @@ conditioning controls, with acquisition and recomposition fully charged.  This
 frontier explains a limit of the present recognizer; it neither proves hardness
 of these particular instances nor supplies an efficient arbitrary-SAT partition.
 
+\subsection{Binary consequences from paired assumptions}
+\label{sec:joint-probe-buckets}
+
+The previous frontier has no failed single assumption.  This experiment tests
+whether two assumptions together expose a conflict and thus a useful binary
+clause.  It extends checked consequence acquisition; the earlier joint-forcing
+work batches already available forced values, whereas this path derives new
+binary clauses from the full mixed-width source.  Neither mechanism is a new
+tractable SAT family.
+
+Every unresolved depth-zero bucket can receive one bounded acquisition pass,
+including leaves under an already-SAT parent.  Variables are ranked by descending
+source occurrence frequency, with identifier ties.  Distinct variable pairs and
+their signed values are considered in a fixed order, skipping binary clauses
+already present.  At most 256 pairs are tried and at most 32 new clauses retained
+per leaf.  All probes use the same original leaf CNF: new clauses do not feed back
+into this acquisition pass.  The resulting batch is checked, adjoined and passed
+to the preceding selective-restart engine at depth zero, with no recursive pair
+refinement.  Empty batches retain the original unknown bucket.
+
+\begin{proposition}[Checked binary consequences with shared propagation prefixes]
+Let $F$ be a fixed normalized CNF.  For distinct variables, suppose a checked unit
+trace under assumption $a$, followed by assumption $b$ and a checked suffix,
+falsifies a source clause.  The same conclusion holds if the prefix already
+conflicts or the prefix forces $\neg b$.  Then $F$ entails
+$C=(\neg a\lor\neg b)$.  A set of such clauses, each checked against $F$, preserves
+its full model set when adjoined.  Prefix traces may be checked once and reused
+across their suffixes, with separate branch assignments.  A verified terminal
+certificate for the augmented leaf therefore composes with its original incoming
+transport and the existing conditioning graph.
+\end{proposition}
+\begin{proof}
+Any model of $F$ with $a$ true must satisfy each prefix unit, by induction over
+its cited source clauses.  If that prefix conflicts, no such model exists.  If
+it forces $\neg b$, no model can satisfy both assumptions.  Otherwise any model
+also satisfying $b$ must satisfy every suffix unit, again by induction.  A source
+clause falsified at the end excludes that joint assignment.  In every case each
+model of $F$ satisfies $\neg a\lor\neg b$.  Conversely adjoining entailed clauses
+removes no model and introduces none.  The shared prefix has the same source and
+assumption each time, while suffix assignment maps are copied, so checking it
+once preserves each argument.  The augmented leaf's model is a model of the
+original leaf; its refutation also refutes that leaf.  Compose verified inverse
+restrictions and renamings along incoming edges.  A SAT child suffices for a split
+and both children are required for UNSAT.  An unresolved terminal supplies no
+verdict.  This argument bounds neither the number of useful consequences needed
+nor their acquisition cost on unrestricted formulas.
+\end{proof}
+
+Both acquisition controls build one occurrence index per leaf.  Restart rebuilds
+the first-assumption propagation state for each pair; shared retains the current
+first-assumption state for its consecutive second assumptions.  Suffix assignment,
+clause-counter and satisfaction sets are copied and charged.  Neither mode mutates
+the saved prefix or shares it across changed sources.  Persisted evidence pools
+used prefix traces in both controls, and every prefix is bound to the exact leaf
+through its containing certificate.  Cold checking validates each prefix once,
+every suffix, clause reference, assumption clash and final model transport; it
+runs no pair discovery.  Restart and shared yield identical evidence modulo the
+outer mode field.  The base control translates exactly to the previous engine;
+a width-nine control changes only the bucket allowance.
+
+At depth two, at most four leaves give 1,024 pair attempts and 128 retained binary
+clauses per root.  Prefix rebuilding, suffix copying and source scans are additional
+work within those attempts.  The original preparation has at most seven edges;
+nonempty refinements add at most four depth-zero terminal preparations, all with
+their existing separately charged quotas.  These are finite operation-schedule
+bounds, not total wall-time or unrestricted polynomial guarantees.  No learnt
+clause is trusted because it came from a particular search heuristic.
+
+The frozen panel retains all 110 preceding queries and adds 24 new unlabelled
+constructions and four exact normalized repeats.  It includes larger random
+three-CNFs, hidden binary constraints with deleted-conflict controls, and parity
+prisms.  The hidden constraint uses two simultaneous guard values to activate a
+nonfolding propagation conflict, while neither guard alone fails.  No new exact
+normalized source duplicates the preceding panel, although families recur.
+There are 84 SAT and 54 UNSAT queries; independent oracle labels are audit-only.
+
+Base and width nine both certify $124/138$ queries.  Pair learning certifies
+$131/138$: preceding coverage rises from $105/110$ to $108/110$, closing one
+exposed SAT source, its repeat and one UNSAT source.  New unique coverage rises
+from $15/24$ to $19/24$; all four new repeats remain covered.  No baseline verdict
+is lost.  The common fallback already answers every query, and this finite
+synthetic panel does not establish representative arbitrary-SAT coverage.
+
+Five cyclic process orders give mean complete seconds of $6.65687$ fresh,
+$8.72905$ base, $9.78001$ width nine, $8.70655$ pair restart and $8.64378$
+shared prefixes.  Shared is $11.62\%$ cheaper than width nine in all five pairs,
+but its $0.98\%$ lower mean than base and $0.72\%$ lower mean than pair restart
+have mixed paired signs.  Neither small difference establishes a reliable overall
+runtime improvement.  It remains $29.85\%$ above fresh; production defaults stay
+unchanged.  Total time includes input, discovery and internal checking, explicit
+checking, writes, warm/cold replay and compression.  Startup, labels, historical
+acquisition, lineage audit and post-hoc diagnostics are separate.  Both native
+cold readers audit fallback archives; the two JSON passes share one implementation.
+
+The pair policies attempt 7,062 pairs and retain 846 binary consequences across
+33 refined leaves in unique programs.  Of these clauses, 691 use a suffix
+conflict, 123 contradict a value forced by the prefix, and 32 have an already
+conflicting prefix.  Those last 32 also admit a unit consequence; the coverage
+result belongs to the complete acquisition policy.  Sharing reduces prefix-state builds from
+7,062 to 127, avoiding 6,935 rebuilds, and occurrence visits from 467,895 to
+272,842.  Both copy 181,592 suffix-state entries.  Pooled evidence stores 115
+prefixes with 244 unit steps; serializing a full prefix in each clause record
+would repeat 2,847 such steps.  Compact pooled evidence uses 132,005 bytes versus
+183,171 for that explicitly expanded representation, a $27.93\%$ reduction.
+This byte comparison does not benchmark an unpooled cold checker.
+
+Nineteen refined leaves receive verdicts, seven SAT and twelve UNSAT; fourteen
+remain unknown, including six below already-SAT parents.  The outer graph retains
+374 nodes and 147 splits, unchanged from base, with 37 shared targets and 32
+distinct-raw merges, all those merges constant.  Thirty-three separate terminal
+nodes and 152 terminal bucket steps are added to 1,303 outer bucket steps.
+No cross-leaf or broader nonconstant residual sharing is demonstrated.
+
+Combined compressed SQLite/JSON bytes are 1,595,454 fresh, 755,262 base, 761,157
+width nine, 535,762 restart and 536,114 shared.  Shared compressed JSON grows from
+291,751 base to 356,193 bytes; package savings come from reducing fallback records
+from 856 to 355.  Restart/shared proof structure is identical modulo mode strings,
+so their small compressed-byte difference is not a structural result.  Diagnostics
+add 698,253 bytes.  Peak RSS is respectively 221,233,152, 136,986,624, 140,656,640,
+114,343,936 and 115,474,432 bytes, measured process values rather than bounds.
+Shared discovery, including internal checking, costs $2.86258$ seconds and cold
+replay $2.62962$ seconds.  Most remaining cost lies outside the eliminated prefix
+rebuilds; validated intermediate-state reuse and repeated terminal checking remain
+cost investigations.
+
+Seven unique roots remain unresolved, all with SAT oracle labels.  Their eight
+final residual leaves have widths 9--11, with two stopping before an elimination
+step.  They have no units, component split, binary conflict, forced binary literal
+or equivalence block, and are neither Horn nor dual-Horn.  All 606 single-assumption
+probes finish without a conflict.  A separately charged next pair batch on each
+final residual derives 177 new clauses; five batches hit the pair limit and three
+the learned-clause limit.  Three ensuing depth-zero terminals have checked SAT
+witnesses.  These are post-hoc leaf results, not additional measured root coverage.
+Next compare bounded, checked clause feedback with a larger one-shot allowance,
+keeping exact source/index lifetimes, proof dependencies and whole-root transport
+explicit.  The experiment supplies neither a complete efficient SAT partition
+nor a bound on the useful number of feedback rounds.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

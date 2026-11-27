@@ -5,7 +5,45 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: bounded feedback and the width-nine frontier
+## Latest evidence: selective width and repeated verification
+
+[Selective width expansion](selective-width-discovery.md) raises structural
+coverage **177/182 to 180/182** after two checked pair rounds, with no feedback
+verdict lost. It closes three previously exposed SAT roots; the 18 new unique
+controls and four repeats were already covered. Complete cost rises **2.78%
+versus feedback** and **54.91% versus fresh**; defaults stay unchanged. One-round
+widening adds the same three roots but loses four feedback verdicts. Prefix reuse
+avoids 104 repeated projections but is **0.055% slower than restart on average**,
+with three favorable and three unfavorable pairs. Full checking offsets the
+avoided projection work; there is no reliable runtime win or new nonconstant
+merging across leaves.
+
+**Next cost target: reuse verified exact operators within a checking pass.**
+Discovery including internal checks (**5.15454 s**) and cold replay (**4.17227 s**)
+remain the largest phases. A separate census finds **39.51% of bucket-verification
+table probes** repeat exact local operators; within-query repetition accounts for
+14.71%. Among distinct normalized sources, cross-source matches account for
+15.90% of their probes. These are potential work savings, not runtime savings or
+proof of transfer across categories. Charge first-use checking, exact occurrence
+bindings, key construction, lookup, memory and invalidation before adopting reuse.
+
+**Next coverage target: the coupled factor frontier.** Two SAT roots remain,
+with three width-ten boundaries in the current factorization/order. A separately
+checked width-ten continuation certifies none and stops at widths eleven/twelve.
+These are not lower bounds on optimal decompositions. Investigate factor
+recognition, separators or conditioning with exact recomposition; blind uniform
+width growth has no new verdict in this screen. Broader external coverage,
+recognition across categories and efficient unrestricted SAT remain open.
+
+All **2,385 full and 30 focused tests pass**. The initial concurrent suite's
+existing 100 ms resource-test timeout is retained; that test and the full suite
+pass in isolation without changed deadlines or assertions. All 236 previous
+manifests, 60,847 artifact entries, 1,294 scientific sources and 78 proof blocks
+are preserved. Resume
+`experiments/results/cnf-selective-width-buckets/checkpoint.json`, key
+`selective_width_buckets`.
+
+## Previous evidence: bounded feedback and the width-nine frontier
 
 [Bounded checked pair feedback](pair-feedback-discovery.md) raises structural
 coverage **151/160 to 155/160**, versus **152/160** from a single batch with the

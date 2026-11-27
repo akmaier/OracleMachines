@@ -16257,6 +16257,174 @@ independent exhaustive semantic audit over 240 small CNFs checks 563 retained
 clauses, 295 refinement rounds and 671 residual-model lifts; it is outside the
 timed comparison and retains unresolved cases.
 
+\subsection{Selective width expansion with a retained projection prefix}
+\label{sec:selective-width-buckets}
+
+The preceding frontier suggests a different use of extra work: three unresolved
+leaves admit a width-nine bucket certificate after only one pair batch, while
+another pair batch and repeated width-eight preparation do not decide them.  This
+experiment widens only unresolved depth-zero leaves after checked pair closure.
+One policy uses at most one pair round, another at most two.  Both retain all
+outer conditioning and preparation rules.  The one-round policy also has a
+restart control to test whether reusing the already computed width-eight
+projection prefix pays for its validation and reconstruction costs.
+
+\begin{proposition}[Checked continuation of an exact projection prefix]
+Let $P$ be a source-bound, checked, unresolved semantic-bucket prefix for a CNF
+$F$, with complete factor tables and reconstruction choices.  Reconstruct its
+active factors in their original order, and append valid exact projections
+within a larger width limit.  The combined prefix and suffix preserve the
+existential relation on the remaining active variables.  A terminal SAT model
+reconstructs to a model of $F$ through the complete reverse choice sequence;
+a zero active factor proves $F$ unsatisfiable.  Persisting only the suffix is
+sufficient when its original prefix remains an exact checked dependency.
+\end{proposition}
+\begin{proof}
+The checked prefix establishes its active factor conjunction by repeated exact
+existential elimination.  Reconstructing these tables from validated records
+changes no relation, variable binding or factor index.  Each appended projection
+replaces all active factors incident to its pivot by their exact existential
+projection; all other factors remain unchanged.  Induction therefore gives the
+same existential relation as executing the entire concatenated program.  Support
+removal is allowed only where both cofactors agree; reconstruction choices still
+refer to the complete pre-reduction boundary.  Applying every suffix and prefix
+choice in reverse order thus satisfies all original clauses, and the final source
+witness is checked.  A zero active factor excludes every assignment and propagates
+UNSAT through the same equivalences.  Retaining the prefix once changes its
+representation, not this argument.  Earlier checked pair-consequence and
+preparation maps lift the verdict to the original conditioning graph.  Unfinished
+projections remain unresolved.  No finite width limit covers all CNFs efficiently.
+\end{proof}
+
+The default expansion is from width eight to nine, with the same total reserved
+projection-work allowance of 262,144 per bucket.  The prefix's reserved work is
+counted before admitting any suffix step; the allowance is not reset.  Table
+materialization, ordering, support reduction, prefix verification and complete
+combined replay remain additional charged work.  A source clause too wide for
+the expanded limit is rejected before its table is materialized.  At depth two
+there are at most four original leaves and four selective widening attempts.
+The one-round policy retains the 1,024-pair/128-clause maximum per root; the
+two-round policy retains 2,048/256.  These are bounded acquisition schedules,
+not total-time or unrestricted complexity guarantees.
+
+Resume independently checks the old prefix, reconstructs its active factors,
+and computes only new projections.  Restart runs the unchanged bucket acquisition
+from its source and must reproduce exactly that prefix.  Both store only the
+suffix and replay the complete combined projection independently, including all
+prefix choices.  Successful discovery uses the same internal final-check schedule
+in both controls.  A preliminary run with unequal final checking was stopped,
+preserved and excluded from the accepted timing comparison.  Complete checking
+still repeats some prefix work; no unmeasured reuse of checker contexts is assumed.
+
+The frozen panel retains all 160 preceding queries and adds eighteen unique
+random-three-CNF, hidden-pair/deletion and parity constructions plus four exact
+normalized repeats.  There are 114 SAT and 68 UNSAT queries; no new normalized
+source duplicates the preceding panel, although families recur.  Labels do not
+guide acquisition.  All new unique inputs and repeats are already handled by both
+preceding controls.  This is a synthetic comparison, not external generalization.
+
+The one-round control certifies $173/182$ queries and feedback certifies
+$177/182$.  Selective widening after one round reaches $176/182$, gaining three
+previously unresolved roots but missing the four roots certified by feedback.
+It therefore does not dominate feedback.  Widening after two rounds reaches
+$180/182$, gaining the same three roots without losing a feedback verdict.
+These are the three previously diagnostic leaf opportunities, now composed into
+original-source SAT certificates.  Previous-panel coverage is respectively
+$151/160$, $155/160$, $154/160$ and $158/160$; all controls cover the 22 new queries.
+The common fallback already answers all 182 queries.
+
+Six cyclic process orders give mean complete seconds of $9.06609$ fresh,
+$13.16906$ single round, $13.66497$ feedback, $13.74160$ one-round widening with
+restart, $13.74914$ one-round widening with resume, and $14.04422$ two-round
+widening with resume.  Two-round widening costs $2.78\%$ more than feedback
+in all six pairs and $54.91\%$ more than fresh.  One-round widening costs
+$4.40\%$ more than the single-round control and $0.62\%$ more than feedback
+on average; the latter has mixed signs.  Resume is $0.055\%$ slower than restart
+on average, with three favorable and three unfavorable pairs.  There is no
+reliable total-time gain from prefix reuse.  All regressions remain recorded,
+and production defaults stay unchanged.
+
+Complete time includes input, discovery with internal checking, explicit checks,
+evidence/database writes, warm/cold replay and compression.  Startup, final report
+metadata, labels, historical acquisition, lineage audits and post-hoc profiles are
+additional.  Native fallback archives have two independent readers; JSON replay
+uses two passes of the same checker.  The six one-round restart/resume pairs have
+identical certificates modulo the outer mode field and identical structural
+coverage.  Base control certificates for the preceding panel match their saved
+versions exactly.
+
+One-round widening reuses 104 projection steps and adds 71 suffix steps across
+20 attempts.  It avoids 3,960 projected rows and 34,024 reserved table probes
+relative to restart, but adds 3,960 independently verified rows and 34,024
+verification table probes.  Prefix validation offsets the saved computation;
+verification is not bypassed.  Five leaves become SAT, of which only three add
+root verdicts.  Retaining suffix step lists alone uses 10,293 compact bytes,
+versus 19,463 if each list also duplicated its already-retained prefix.  This is
+a representation comparison, not a timing comparison with an unimplemented
+storage format.  Two-round widening makes 15 attempts, reuses 78 prefix steps,
+adds 56 suffix steps and certifies three SAT leaves; twelve widened leaves remain
+unknown, including leaves below already-SAT roots.
+
+The outer graph is unchanged at 509 nodes, 202 splits and 2,133 bucket steps.
+Its 46 shared targets include 41 distinct-raw merges, all constant.  Thus the
+implemented reuse concerns a prefix of the same exact source; it demonstrates
+no new nonconstant merging between leaves.  Feedback and two-round widening both
+attempt 16,218 pairs and retain 1,706 clauses; selective widening introduces no
+new pair-learning allowance.
+
+Combined compressed SQLite/JSON bytes are 2,193,009 fresh, 792,451 single round,
+712,790 feedback, 684,474 one-round restart, 684,851 one-round resume and 607,765
+two-round resume.  Feedback-to-two-round JSON grows from 573,019 to 577,137 bytes,
+while fallback records fall from 300 to 61.  The tiny restart/resume compressed
+size difference reflects mode strings, not different projection programs.
+Two-round diagnostics add 1,068,073 bytes.  Peak RSS is respectively 281,706,496,
+141,737,984, 133,234,688, 136,232,960, 136,577,024 and 127,041,536 bytes; these
+are measured process peaks rather than worst-case bounds.
+
+Discovery including internal checking ($5.15454$ seconds) and cold replay
+($4.17227$ seconds) remain the two largest phases for two-round widening.
+A separately charged census of one cold pass finds 3,279 bucket-operator
+occurrences but only 1,325 distinct exact local descriptions.  Repeated operators
+account for 288,484 of 730,144 verification table probes ($39.51\%$) and 32,930 of
+87,474 verified rows.  Within-query repetition accounts for 107,408 probes;
+among 158 distinct normalized sources, first local occurrences matching an earlier
+source account for another 100,948 of 634,824 probes ($15.90\%$).  The full pass
+also includes 24 repeated queries.  Of the repeated rows, 26,668 have nonconstant
+outputs; this aggregate does not isolate nonconstant transfer across categories.
+The distinct proposed operator descriptions/results serialize to 127,839 bytes,
+not a bound on cache RAM.  The census exactly matches both measured cold-check
+counters after accounting for the two passes.  It implements no trusted cache
+and establishes no runtime saving.
+
+This evidence makes reuse of already verified exact operators within a checking
+pass the next concrete cost experiment.  Unlike the earlier proposal cache, it
+would avoid some repeated validation, while retaining checks of each source's
+input factors, variable bindings, result and witness tables.  Key construction,
+lookup, memory, invalidation and first-use verification must all be measured.
+A source-independent operator signature is not a general semantic or graph
+isomorphism recognizer, and cached results cannot justify their own inputs.
+
+Two distinct SAT roots remain structurally unresolved.  Their three checked
+width-nine frontiers contain 244 active factors over 78 active-variable
+occurrences and next require width ten.  These are exact Boolean factor relations,
+not unchanged CNF clauses.  A separately charged continuation to width ten
+certifies none: one frontier next requires width twelve and two require width
+eleven, all below the reserved-work ceiling.  This identifies remaining interaction
+width under the current factorization and order, rather than a depleted work
+quota; these are not lower bounds on optimal decompositions.  Broader coverage needs a useful factor
+recognizer, decomposition or conditioning step with exact recomposition; another
+uniform width increase has an explicit exponential table cost.  No new tractable
+family or efficient partition of arbitrary SAT has been established.
+
+An independent semantic audit enumerates 31,088 source assignments and 28,600
+active-factor assignments over 180 small CNFs.  It checks the exact existential
+projection after the old and combined prefixes and reconstructs all 1,410 feasible
+active assignments.  The audit exercises 90 reused prefix steps and 132 suffix
+steps, including 36 SAT and ten UNSAT continuations; 134 remain unresolved.
+Restart and resume agree exactly.  The initial dense-only audit, which exercised
+no nonempty retained prefix, is preserved separately; the final audit adds private
+variable tails and refutation controls.  This audit is outside measured cost.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

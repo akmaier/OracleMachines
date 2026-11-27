@@ -1,0 +1,151 @@
+{
+  "cost_comparisons_percent": {
+    "one_vs_feedback": 0.6159105543664056,
+    "one_vs_fresh": 51.65448833198214,
+    "one_vs_restart": 0.05484496100256475,
+    "one_vs_single": 4.404850952732331,
+    "two_vs_feedback": 2.775324504523602,
+    "two_vs_fresh": 54.90928984303225,
+    "two_vs_one": 2.1461953067456463
+  },
+  "cost_target": "Two-round discovery including internal checks costs 5.15454 s and cold replay 4.17227 s. A separate one-pass census finds 39.51% of bucket-verification probes repeating exact operators; this is potential work, not a measured runtime gain.",
+  "coverage": {
+    "feedback": {
+      "previous_panel_cases": 160,
+      "previous_panel_direct": 155,
+      "previous_panel_sat": 99,
+      "repeats_cases": 4,
+      "repeats_direct": 4,
+      "repeats_sat": 2,
+      "unique_panel_cases": 18,
+      "unique_panel_direct": 18,
+      "unique_panel_sat": 13
+    },
+    "fresh": {
+      "previous_panel_cases": 160,
+      "previous_panel_direct": 0,
+      "previous_panel_sat": 99,
+      "repeats_cases": 4,
+      "repeats_direct": 0,
+      "repeats_sat": 2,
+      "unique_panel_cases": 18,
+      "unique_panel_direct": 0,
+      "unique_panel_sat": 13
+    },
+    "one": {
+      "previous_panel_cases": 160,
+      "previous_panel_direct": 154,
+      "previous_panel_sat": 99,
+      "repeats_cases": 4,
+      "repeats_direct": 4,
+      "repeats_sat": 2,
+      "unique_panel_cases": 18,
+      "unique_panel_direct": 18,
+      "unique_panel_sat": 13
+    },
+    "restart": {
+      "previous_panel_cases": 160,
+      "previous_panel_direct": 154,
+      "previous_panel_sat": 99,
+      "repeats_cases": 4,
+      "repeats_direct": 4,
+      "repeats_sat": 2,
+      "unique_panel_cases": 18,
+      "unique_panel_direct": 18,
+      "unique_panel_sat": 13
+    },
+    "single": {
+      "previous_panel_cases": 160,
+      "previous_panel_direct": 151,
+      "previous_panel_sat": 99,
+      "repeats_cases": 4,
+      "repeats_direct": 4,
+      "repeats_sat": 2,
+      "unique_panel_cases": 18,
+      "unique_panel_direct": 18,
+      "unique_panel_sat": 13
+    },
+    "two": {
+      "previous_panel_cases": 160,
+      "previous_panel_direct": 158,
+      "previous_panel_sat": 99,
+      "repeats_cases": 4,
+      "repeats_direct": 4,
+      "repeats_sat": 2,
+      "unique_panel_cases": 18,
+      "unique_panel_direct": 18,
+      "unique_panel_sat": 13
+    }
+  },
+  "coverage_target": "Investigate recognition, separators or conditioning of the three remaining coupled active-factor frontiers with exact recomposition. Width ten alone certifies none; current order/factorization widths are not lower bounds on optimal decompositions.",
+  "decision": "Retain selective width continuation as verified structural coverage expansion, preserving all regressions. No production default change and no reliable runtime benefit from projection-prefix reuse.",
+  "documents": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "65775ff4bd14ae5558aa188d71ccb3c2b4d6c90e4fe95e33110d4613d40d7226",
+    "research/implementation-gaps.md": "6643407c0eb75f013e571e34ef799bf8a58b980c38a9bf77e53325144a87708a",
+    "research/sat-pattern-discovery.md": "af7432f9c615ea8e99654873a660ea56bfdbd3765c9f62998c9968b6b78d863f",
+    "research/selective-width-discovery.md": "6e03bca1b4461c2fcca81c45093e749c21ebcccd7e382f4207e49cbd41ce910c",
+    "research/structural-reuse-priorities.md": "3397a35a7383381f337acbb8008c62559af2d8d728bbf50fbb2709e22601f5f4"
+  },
+  "gains": {
+    "one_vs_feedback": [
+      "d-d-k14",
+      "d-d-k15",
+      "d-f03"
+    ],
+    "one_vs_single": [
+      "d-d-k14",
+      "d-d-k15",
+      "d-f03"
+    ],
+    "two_vs_feedback": [
+      "d-d-k14",
+      "d-d-k15",
+      "d-f03"
+    ],
+    "two_vs_single": [
+      "d-d-d-j07",
+      "d-d-k14",
+      "d-d-k15",
+      "d-d-k16",
+      "d-d-k17",
+      "d-f03",
+      "d-f05"
+    ]
+  },
+  "limitations": [
+    "All 160 preceding queries plus eighteen frozen new unique random/hidden-pair/deletion/parity constructions and four exact normalized repeats. Labels are audit-only; families recur. This is synthetic evidence, not external generalization.",
+    "Single and feedback execute the unchanged preceding one- and two-round modules. One/restart add a width-nine bucket only to unresolved depth-zero leaves after at most one pair batch. Two adds the same expansion after at most two batches. Known leaves and all outer splitting choices are unchanged.",
+    "Restart recomputes the width-nine elimination prefix. One resumes its independently checked width-eight prefix, reconstructs active factors, and projects only the suffix. Both persist only the suffix, referencing the already-retained prefix. Complete widened certificates must agree modulo outer mode; source-dependent traces and model transports remain separate.",
+    "Widening retains the same per-bucket total reserved-work cap, including the earlier prefix; it does not reset allowance for the suffix. Reconstruction, prefix validation and complete combined replay are charged. Complete checking still repeats prefix verification; no unmeasured checker-context optimization is assumed.",
+    "At depth two, at most four leaves and four widening attempts. One/restart keep the single-round maximum of 1024 pair attempts and 128 clauses per root; two keeps 2048/256. Earlier work, terminal preparation, unsuccessful acquisition and verification are separate charged costs. Finite limits are not unrestricted-SAT efficiency or exhaustion claims.",
+    "Six cyclic process orders start empty with the same fallback. Complete time includes input, discovery with internal checking, explicit checking, writes, warm/cold replay and compression. Startup, labels, historical acquisition, lineage audits and post-hoc profiles are extra. Two native readers audit fallback archives; JSON replay uses two passes of one checker. No production defaults change.",
+    "All eighteen new unique controls and four repeats are already covered by the preceding policies. The three gained SAT roots were previously exposed; families recur and there is no external generalization result.",
+    "One-round widening gains three roots but loses four feedback verdicts. Two-round widening retains all feedback verdicts, costing 2.78% more than feedback and 54.91% more than fresh. Prefix reuse is 0.055% slower on average than restart, with mixed signs.",
+    "Prefix reuse avoids 3960 projected rows and 34024 reserved table probes but adds exactly that many verified rows/probes. Cold replay still independently validates the complete source-bound prefix plus suffix.",
+    "Exact operator census matches measured counters; it implements no trusted cache. The 15.90% distinct-source weighted probe opportunity is not a claim of nonconstant transfer across SAT categories or runtime savings.",
+    "The three remaining frontiers are active Boolean factors after projection, not unchanged CNF clauses. Wider diagnostic certificates are checked leaf results and excluded from measured root coverage and costs.",
+    "The excluded preliminary pilot had unequal successful-discovery internal checks; all completed reports, incomplete artifacts and exact source snapshots are retained. Accepted timings use the corrected schedule.",
+    "The initial concurrent full suite hit an existing 100 ms lock test; isolated targeted and full reruns pass without modified thresholds. Logs and existing ResourceWarnings are retained.",
+    "Finite panel coverage, bounded projection schedules and complete unresolved classification do not imply efficient arbitrary SAT or a new tractable family."
+  ],
+  "losses": {
+    "one_vs_feedback": [
+      "d-d-d-j07",
+      "d-d-k16",
+      "d-d-k17",
+      "d-f05"
+    ],
+    "one_vs_single": [],
+    "two_vs_feedback": [],
+    "two_vs_single": []
+  },
+  "next_target": "Reuse already verified exact operators within a checking pass, with independent first-use checking and exact occurrence/input/result/choice bindings. Charge lookup, key construction, memory, lifetime and invalidation.",
+  "remaining": [
+    "d-d-d-j06",
+    "d-d-k09"
+  ],
+  "supplemental_checks": {
+    "path": "experiments/results/cnf-selective-width-buckets/supplemental-checks.json",
+    "sha256": "1ba359f5221963eca3526e8b2567b880d13606051794ba9790d029156b018802"
+  }
+}

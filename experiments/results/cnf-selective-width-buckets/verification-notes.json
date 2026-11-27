@@ -1,0 +1,22 @@
+{
+  "initial_full_suite": {
+    "tests": 2385,
+    "error": "BudgetExceeded in existing 100 ms write-lock timeout test before the expected SQLite lock exception",
+    "log": "full-tests-concurrent.log",
+    "concurrent_with": "certificate lineage and replay audits",
+    "no_unchecked_decision_accepted": true
+  },
+  "isolated_resource_recheck": {
+    "passed": true,
+    "log": "resource-test-recheck.log"
+  },
+  "resource_test_unchanged_sha256": "9c29eb6a596af18cdb096d5f1e3fd73cf914290d2eee718f65e3dfde6558f8b8",
+  "scope": "The observed error is consistent with scheduling pressure; no deadline or assertion was changed. Retain initial failure and isolate the full-suite rerun. Initial dense-only semantic audit retained because it exercised zero nonempty prefixes; final audit includes nonempty prefixes and refutations. The isolated full suite passed all 2385 tests; retained ResourceWarnings concern existing unclosed SQLite connections.",
+  "isolated_full_suite": {
+    "passed": true,
+    "tests": 2385,
+    "seconds": 272.11,
+    "log": "full-tests.log",
+    "other_audits_finished_before_start": true
+  }
+}

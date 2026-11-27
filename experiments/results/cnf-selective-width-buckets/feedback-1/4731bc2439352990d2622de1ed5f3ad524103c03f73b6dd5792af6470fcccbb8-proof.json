@@ -1,0 +1,352 @@
+{
+  "cnf": [
+    [
+      -12,
+      -7
+    ],
+    [
+      -12,
+      -4,
+      8
+    ],
+    [
+      -12,
+      -3
+    ],
+    [
+      -11,
+      -5
+    ],
+    [
+      -10,
+      1,
+      11
+    ],
+    [
+      -9,
+      4
+    ],
+    [
+      -8,
+      6,
+      9
+    ],
+    [
+      -6,
+      4
+    ],
+    [
+      -5,
+      -2,
+      12
+    ],
+    [
+      -5,
+      -1
+    ],
+    [
+      -4,
+      5,
+      12
+    ],
+    [
+      -2,
+      3,
+      7
+    ],
+    [
+      1,
+      10,
+      11
+    ],
+    [
+      2,
+      3,
+      7
+    ],
+    [
+      6,
+      8,
+      9
+    ]
+  ],
+  "edges": [
+    {
+      "after_units": [],
+      "cnf": [
+        [
+          -11,
+          -7
+        ],
+        [
+          -11,
+          -4,
+          8
+        ],
+        [
+          -11,
+          -3
+        ],
+        [
+          -10,
+          -5
+        ],
+        [
+          -9,
+          4
+        ],
+        [
+          -6,
+          4
+        ],
+        [
+          -5,
+          -2,
+          11
+        ],
+        [
+          -5,
+          -1
+        ],
+        [
+          -4,
+          5,
+          11
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          6,
+          9
+        ]
+      ],
+      "continuation": [],
+      "depth": 2,
+      "probe_rounds": [],
+      "relation": null,
+      "residual": [
+        []
+      ],
+      "rounds": [
+        {
+          "forcing": {
+            "kind": "paths",
+            "paths": [
+              {
+                "literal": 4,
+                "path": [
+                  [
+                    -9,
+                    3
+                  ],
+                  [
+                    6,
+                    8
+                  ],
+                  [
+                    4,
+                    4
+                  ]
+                ]
+              },
+              {
+                "literal": -5,
+                "path": [
+                  [
+                    -10,
+                    2
+                  ],
+                  [
+                    1,
+                    6
+                  ],
+                  [
+                    -5,
+                    5
+                  ]
+                ]
+              },
+              {
+                "literal": -11,
+                "path": [
+                  [
+                    -7,
+                    0
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    -11,
+                    1
+                  ]
+                ]
+              }
+            ]
+          },
+          "units": [
+            {
+              "kind": "unit",
+              "literal": -11
+            },
+            {
+              "kind": "unit",
+              "literal": -5
+            },
+            {
+              "kind": "unit",
+              "literal": -4
+            }
+          ]
+        }
+      ],
+      "tail": null,
+      "target": 0,
+      "units": []
+    }
+  ],
+  "format": "cnf-pair-feedback-buckets-v1",
+  "limits": {
+    "bag_limit": 8,
+    "continuation_limit": 128,
+    "depth_limit": 2,
+    "index_work_limit": 262144,
+    "learn_limit": 32,
+    "pair_limit": 256,
+    "probe_limit": 128,
+    "probe_round_limit": 8,
+    "round_limit": 8,
+    "step_limit": 512,
+    "work_limit": 262144
+  },
+  "mode": "feedback",
+  "model": null,
+  "nodes": [
+    {
+      "bucket": {
+        "cnf": [
+          []
+        ],
+        "format": "cnf-semantic-buckets-v1",
+        "limits": {
+          "bag_limit": 8,
+          "work_limit": 262144
+        },
+        "model": null,
+        "reduce": true,
+        "status": "unsat",
+        "steps": []
+      },
+      "cnf": [
+        []
+      ],
+      "depth": 2,
+      "kind": "leaf",
+      "refinement": null,
+      "status": "unsat"
+    }
+  ],
+  "prefix": [
+    {
+      "kind": "fold",
+      "left": [
+        -10,
+        1,
+        11
+      ],
+      "right": [
+        1,
+        10,
+        11
+      ]
+    },
+    {
+      "kind": "fold",
+      "left": [
+        -2,
+        3,
+        7
+      ],
+      "right": [
+        2,
+        3,
+        7
+      ]
+    },
+    {
+      "kind": "fold",
+      "left": [
+        -8,
+        6,
+        9
+      ],
+      "right": [
+        6,
+        8,
+        9
+      ]
+    }
+  ],
+  "residual": [
+    [
+      -11,
+      -7
+    ],
+    [
+      -11,
+      -4,
+      8
+    ],
+    [
+      -11,
+      -3
+    ],
+    [
+      -10,
+      -5
+    ],
+    [
+      -9,
+      4
+    ],
+    [
+      -6,
+      4
+    ],
+    [
+      -5,
+      -2,
+      11
+    ],
+    [
+      -5,
+      -1
+    ],
+    [
+      -4,
+      5,
+      11
+    ],
+    [
+      1,
+      10
+    ],
+    [
+      3,
+      7
+    ],
+    [
+      6,
+      9
+    ]
+  ],
+  "root": 0,
+  "status": "unsat"
+}

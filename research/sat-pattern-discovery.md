@@ -5,7 +5,53 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: checked capacity cores close five external originals
+## Latest evidence: checked choices complete the derived controls
+
+[Checked signed-choice witnesses](signed-choice-witnesses.md) close the edited
+`hole10` with a complete SAT assignment. On the **already exposed** external
+panel, original coverage stays **24/25**, and derived controls rise **11/12 →
+12/12**. No old verdict is lost. This is an exploratory follow-up, not a fresh
+external holdout; the prior synthetic 182/182 union remains separate.
+
+The proposer extracts signed, variable-disjoint choices, groups binary conflicts
+by connected component, and reuses the existing matching helper to construct an
+assignment. A component need not be a clique: capacity one is conservative and
+can miss SAT models. Matching success is only a proposal; **every original clause
+is checked**. Failed matching or a rejected assignment grants no UNSAT authority.
+The new edit has nonclique components and ten unclassified clauses, yet the
+complete witness satisfies all 560 source clauses. Source checks, not structure
+labels, authorize it.
+
+Mean measured complete cost falls **25.55132 → 23.38105 s (8.49%)**, with all four
+paired signs favorable. Discovery, verification, persistence and warm/two cold
+replays are charged; compressed proofs shrink **445,436 → 419,935 bytes**.
+There is no general fallback solver, so this is not complete solving cost or a
+fresh-CDCL comparison. The optional gate leaves production defaults unchanged.
+
+**Largest remaining external gap:** `uf50-01000.cnf`. Both choice attempts produce
+the same rejected assignment, violating **26 of 218 clauses**; fifteen selected
+ternary demands leave 203 clauses outside the proposed structure. The rejected
+assignments and violated-clause indices are retained for bounded repair or
+conditioning research, without assuming those repairs will be cheap.
+
+**General recognition gap:** the first extraction separates six strict choice
+instances, five fully represented nonclique instances and 26 partial structures.
+These are policy-dependent categories, not canonical semantic classes. The truth
+audit finds all 1,700 witnesses sound across 5,457 small/adversarial inputs, but
+only 19/247 satisfiable domain restrictions and 5/47 SAT fresh controls receive a
+witness. All 228 missed SAT domain inputs and fresh counterexamples are retained;
+these are gate-only misses. Nonclique compatibility, overlapping demand selection
+and remaining clauses need richer representations or explicit search.
+
+All **2,485 full and 18 focused tests pass**. The validator reproduces all eight
+runs and cold checks while preserving 242 prior manifests, 81,349 artifact entries,
+1,321 scientific sources and 83 proof blocks. Resume
+`experiments/results/cnf-choice-witness/checkpoint.json`, key `choice_witness`.
+Prioritize the surviving clause interactions and retained recognition failures,
+then freeze unseen external encodings before broader transfer claims. Unrestricted
+SAT acquisition/expansion bounds remain open.
+
+## Previous evidence: checked capacity cores close five external originals
 
 [Clause-derived capacity cores](capacity-core-certificates.md) close all five
 previously unresolved pigeonhole originals and their signed renaming. On the

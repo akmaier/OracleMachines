@@ -17088,6 +17088,133 @@ Validated context reuse and direct single-clause width reasoning remain cost
 opportunities.  None of these observations supplies a uniformly efficient
 partition or an unrestricted polynomial SAT procedure.
 
+\subsection{Checked signed choices and nonclique interaction}
+\label{sec:choice-witness}
+
+The constructive side of the preceding capacity representation closes the edited
+\texttt{hole10} control with a complete SAT witness.  On the same already exposed
+panel, original coverage remains 24/25 and derived controls rise from 11/12 to
+12/12.  The aggregate is 36/37, not 37 independent external samples.  No previous
+verdict is lost; the synthetic 182/182 union remains separate.  This is an
+exploratory response to a retained gap, not fresh external generalization.
+
+The new proposer reuses the existing native augmenting-path matching helper.
+Two fixed greedy selections take variable-disjoint source clauses, first of width
+at least three and then all nonempty clauses, ordered by decreasing width and
+literal tuple.  Each selected variable receives one signed choice literal.
+Binary clauses $(\neg a\lor\neg b)$ between selected literals supply conflict
+edges.  Connected conflict components become candidate capacity-one resources.
+A matching chooses one literal per demand and at most one per component; selected
+signed choices are set true, unselected ones false, and other source variables
+false.  The resulting assignment covers the raw source's full variable support,
+including variables occurring only in tautologies.
+
+A connected component need not be a clique.  Capacity one can therefore impose a
+stronger constraint than the actual exclusions, losing valid models.  Failed
+matching grants no UNSAT authority.  Successful matching is also only a proposal:
+clauses outside the extracted structure can invalidate it.  A separate checker
+validates the complete variable list, Boolean values and every original clause
+before accepting SAT.  The certificate is an ordinary full model; cold replay
+uses neither matching nor discovery.  Reuse after changes requires complete
+current-source verification.  No cached structural label, benchmark metadata or
+previous satisfied-clause list replaces that check.
+
+The two attempts share a 300,000-visit matching allowance.  Each proposed graph
+reserves $DE$, where $D$ is its demand count and $E$ its number of demand/resource
+edges, an upper bound on the unchanged helper's edge visits.  Input scans,
+sorting, graph construction, copies, model checking and storage are outside this
+allowance but included in measured time.  The 37-input run reserves 119,627 visits
+and records 2,303 matching edge visits.  These are not total operation counts or
+unrestricted runtime and memory bounds.
+
+The fixed first extraction identifies six strict choice inputs, five fully
+represented nonclique inputs and 26 partial structures with unclassified clauses.
+For the strict class, every normalized clause is a selected demand or an exclusion
+and every conflict component is a clique.  Signed variable flips give disjoint
+positive demands and complete exclusion cliques.  Satisfiability is equivalent
+to a matching covering all demands: a satisfying assignment supplies distinct
+resource representatives, while a covering matching supplies a model.  This is
+the signed form of the repository's earlier restricted matching method, not a
+new unrestricted SAT reduction.  The new gate still sends failed matching to
+the old portfolio instead of adding UNSAT proof authority.
+
+The five fully represented nonclique inputs collapse to a single connected
+resource, although their previous certificates prove them SAT.  A separate
+six-variable path-conflict example demonstrates the same false-negative behavior
+by explicit truth table.  Thus complete clause-syntax coverage is not enough:
+compatibility inside nonclique conflict components remains an interaction
+obligation.  These categories are outcomes of a fixed greedy extraction, not
+canonical semantic SAT classes; alternate extractions and existing recognizers
+can overlap.
+
+The edited \texttt{hole10} has 110 variables and 560 clauses.  Its first proposal
+has eleven demands and eleven components, but nonclique conflicts and ten
+unclassified clauses put it outside the strict class.  The full assignment
+satisfies all 560 clauses with ten variables true.  Its JSON wrapper occupies
+2,644 bytes.  The same assignment still works after restoring the deleted first
+exclusion, so the literal edit alone suffices for this particular SAT witness.
+It fails the original unedited formula; that failure alone is not an UNSAT proof.
+All other 36 gated payloads equal the corresponding baseline payloads, and every
+baseline payload equals the preceding capacity checkpoint's certificate.
+
+Only \texttt{uf50-01000.cnf} remains unresolved.  Both choice attempts select
+fifteen disjoint ternary demands over 45 variables and leave 203 clauses outside
+the proposed structure.  They produce the same complete assignment, rejected by
+26 of the source's 218 clauses.  Exact rejected candidates and violated-clause
+indices are retained alongside the previous incomplete proof.  They are not SAT
+certificates, and publisher labels do not close the case.  Bounded repair or
+conditioning around those interactions is a next experiment, not an established
+cheap completion method.
+
+Four paired process orders compare the optional gate with the unchanged previous
+capacity/expansion pipeline.  Source parsing, preparation, discovery/internal and
+explicit checks, writes, compression, warm reload and two cold passes are charged.
+Each replay reparses source and loads JSON; verified-operator banks start empty
+per phase, while operating-system caches are not flushed.  Startup, final metadata
+and independent audits remain additional.  There is no general SAT fallback, so
+this is not total cost to answer every input or a fresh-CDCL comparison.
+
+Mean complete time falls from 25.55132 to 23.38105\,s, an 8.49\% reduction.
+The paired reductions are 6.88\%, 9.89\%, 8.41\% and 8.73\%.  Acquisition/internal
+checking costs 12.06243 versus 11.21854\,s, explicit checking 2.56325 versus
+2.26089\,s, warm replay 3.51878 versus 3.18429\,s, and two cold passes 7.04633
+versus 6.38322\,s.  JSON evidence falls from 28,734,671 to 26,634,915 bytes,
+compressed evidence from 445,436 to 419,935 bytes, and maximum observed process
+RSS from 101,466,112 to 90,587,136 bytes.  Both arms use identical wrapper encoding;
+its indentation changes absolute JSON sizes from the preceding experiment.
+The new runner uses shallow JSON/hash helpers in both arms instead of extending
+the historical comparison-import chain.  Previous scientific sources and
+production defaults remain unchanged.  The cost benefit includes failed
+recognition on the other inputs and is not a worst-case bound.
+
+An independent explicit truth-table audit checks 5,457 inputs: all 512 normalized
+two-variable CNFs, 3,304 three-variable CNFs with at most three distinct clauses,
+576 domain restrictions, 1,000 newly seeded random small CNFs, 64 fresh signed,
+edited or mixed controls, and one nonclique counterexample.  All 1,700 emitted
+witnesses agree with truth tables.  All 158 strict-class attempt diagnostics agree
+with truth; these count attempts rather than unique recognized formulas.  Cold
+checks disable matching, and a repeated audit exactly reproduces the semantic
+records.  Five satisfied additions permit checked witness reuse; five contradicted
+additions invalidate those witnesses.
+
+The misses are equally explicit.  The gate finds only 19 of 247 SAT
+three-resource domain restrictions and five of 47 SAT fresh controls.  All 228
+missed SAT domain sources and all fresh controls are retained.  These are misses
+of this gate, not claims that the previous portfolio cannot decide them.  Eighteen
+focused tests cover signed sparse names, complete witnesses, changed sources,
+malformed values, unclassified constraints, conservative false negatives, budget
+admission, cold replay and unchanged fallback.  All older evidence and 83 proof
+blocks remain unchanged.
+
+Next, investigate the remaining 26 failed clauses and their shared variables,
+while preserving already satisfied constraints and verifying the complete source.
+Better demand selection and richer nonclique compatibility descriptions should be
+tested against the retained misses.  Unseen external encodings must be frozen
+before broader transfer claims; auxiliary representations, overlapping choices,
+ternary interactions, context reuse and unrestricted expansion bounds remain open.
+Completing the derived controls establishes none of the missing general SAT
+claims.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

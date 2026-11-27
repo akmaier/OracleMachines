@@ -4,7 +4,20 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (27 November, direct fresh-source feedback):
+Latest expansion checkpoint (27 November, exact cofactor feedback DAG):
+[Bounded conditioning with shared residuals](feedback-cofactor-dag.md) closes
+5/6 exposed fresh gaps. The second panel rises from 2/10 to 6/10 UNSAT refutations,
+or 2/7 to 4/7 excluding three full-cube controls. Exact residual-plus-depth reuse
+cuts calls 170 → 147, certificate bytes 14.67% and complete matched time 4.86%.
+Native graphs remain identical; the memoized workflow still costs 24.85 times fresh.
+Five bounded-feedback gaps remain, mainly parity interactions. Next compare
+non-unit affine/boundary descriptions with fully charged discovery and conversion.
+All 2,226 tests and 26 focused tests pass. Resume
+`experiments/results/cnf-feedback-cofactor-dag/checkpoint.json`. All old scientific
+sources, 222 manifests, 34,259 artifacts and 64 proof blocks remain unchanged;
+one restricted full-cube call-count proof is added, without an arbitrary-SAT claim.
+
+Previous expansion checkpoint (27 November, direct fresh-source feedback):
 [A source-only compiler](fresh-seed-feedback.md) eliminates historical B13 input
 requirements for checked feedback chains. Both cold readers validate eight
 refutations on 36 fresh generated CNFs, including one two-level case. Independent

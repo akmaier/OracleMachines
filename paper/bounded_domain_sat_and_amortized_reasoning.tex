@@ -14458,6 +14458,105 @@ remain necessary.  A shared shortcut allowance bounds only shortcut work, not
 total construction.  No uniform polynomial acquisition, closure or expansion
 bound follows.
 
+\subsection{Deeper conditioning and exact cofactor sharing}
+\label{sec:feedback-cofactor-dag}
+
+A bounded wrapper now runs the same feedback leaf routine on exact normalized
+cofactors, with two additional conditioning levels and a 64-state ceiling.
+A parent refutation requires both child refutations.  One open or budget-limited
+child leaves the parent unresolved, with no SAT authority.  Discovery memoization
+uses the pair consisting of the exact normalized CNF and remaining depth within
+one call with immutable limits.  Normalization recognizes sorting, duplicate and
+tautology removal, and compaction of sorted names; it does not recognize general
+isomorphism or semantic equivalence.  Different remaining depths do not share
+open outcomes.  Lookup and normalization costs are charged even on misses.
+
+Certificates store postorder nodes.  Every edge decreases both node index and
+remaining depth, and each child CNF must equal the corresponding normalized
+restriction.  All nodes must be reachable, and each feedback leaf is checked
+against its own CNF.  The unsuccessful feedback history preceding an internal
+split is unnecessary for that split's certificate and is retained only in the
+diagnostic search log.  Native construction compiles the feedback leaves and
+publishes ordinary source-residual splits.  One direct-unit allowance spans all
+leaf compilations.  Entire certificates are validated before warm root reuse.
+Inner search limits are configuration metadata, not by themselves a proof of
+historical work usage; the experiment audit replays discovery and counters.
+
+\begin{proposition}[A restricted cofactor-chain call count]
+Let $C_n$ be the CNF containing all $2^n$ clauses that choose one signed occurrence
+of each of $n\geq 3$ variables.  Use the feedback leaf routine described above,
+with enough inner budget to refute $C_3$.  For a conditioning limit $D\geq 0$,
+put $d=\min\{D,n-3\}$ and allow at least $2^{d+1}-1$ conditioning states.
+Discovery without cofactor memoization makes $2^{d+1}-1$ feedback calls; exact
+residual-and-depth memoization makes $d+1$.  Both refute the root exactly when
+$D\geq n-3$.
+\end{proposition}
+\begin{proof}
+Either assignment to any variable satisfies half of the clauses and removes
+that variable from the other half, leaving exactly the same normalized
+$C_{n-1}$.  On $C_3$, conditioning one variable leaves $C_2$, and either probe
+of another variable leaves contradictory units.  Both conditioning sides thus
+refute.  On $C_m$ with $m\geq4$, after conditioning and a single additional probe,
+every surviving original clause still has width at least two.  Unit propagation
+finds no conflict or new unit, so the failed-probe saturation and cross-pivot unit
+feedback cannot strengthen the bank.  Smaller budgets can only leave this
+outcome unresolved.  Therefore the wrapper stops at depth $d$, with a refuted
+leaf precisely when its residual is $C_3$.  Without memoization the full binary
+recursion has $1+2+\cdots+2^d=2^{d+1}-1$ calls.  At each level all residuals and
+remaining depths coincide, so memoization discovers one state per level, for
+$d+1$ calls.  The stated state allowance prevents truncation in either mode.
+\end{proof}
+
+This call-count result is restricted.  The explicit input already has $n2^n$
+literal occurrences, and its reading, canonicalization and checking are not
+free.  The recurrence supplies neither a general SAT runtime bound nor an
+exponential speedup measured against input length.  Executable controls cover
+widths three through six at depth two.  The width-six cube remains unresolved.
+
+The new conditioning closes five of six exposed UNSAT gaps from the preceding
+fresh panel.  A separately frozen second panel contains fourteen SAT and ten
+UNSAT inputs.  Depth-zero feedback refutes two of those ten; depth-two feedback
+refutes six.  Three full-cube cases are also analytic/unit-test controls, and two
+of them exactly duplicate previously normalized inputs.  They are not novel
+held-out structures.  Excluding all three controls, the remaining seven UNSAT
+cases improve from two to four refutations.  Descriptions and exhaustive truth
+labels are audit-only.  Across both cohorts, eleven of sixteen UNSAT inputs are
+certified by feedback.  Five remain unresolved: two twelve-edge parity
+presentations, a fifteen-edge parity case, a width-six cube and the largest bridge
+mixture.  The unchanged fresh fallback correctly decides all thirty inputs.
+
+Four cyclic process orders compare fresh solving, depth-zero feedback, depth-two
+conditioning without discovery memoization, and the same conditioning with
+memoization.  Complete times are 0.08160, 0.85712, 2.13136 and 2.02774 seconds.
+All modes start with an empty archive, share native residuals within one case
+order, repeat queries warm, replay both cold authority readers and compress the
+archive.  The feedback modes acquire and persist their histories online.  Fresh
+keeps its different 256-node allowance.  Interpreter startup, report-metadata
+writing and the final lineage audit are additional.  More coverage than depth
+zero also spends more conditioning work.
+
+Memoization reduces feedback calls and retained discovery states from 170 to
+147, with seventeen memo hits, and certificate bytes from 467,561 to 398,988
+(14.67\%).  Diagnostic search bytes fall from 7,728,917 to 7,398,513 (4.27\%).
+Complete time falls 4.86\%; the four paired savings range from 2.30\% to 6.98\%.
+On twelve cases with observed reuse, discovery falls from 0.50989 to 0.44666
+seconds (12.40\%); on eighteen cases without reuse it changes only from 1.18660
+to 1.18248 seconds.  The whole conditioned discovery time falls from 1.69649 to
+1.62914 seconds and remains about 80\% of the memoized workflow.  Warm time falls
+from 0.10886 to 0.09778 seconds.  Input canonicalization, identity recognition,
+history persistence and verification remain charged.
+
+Tree and memoized modes produce identical native graphs: 168 records, 104,798
+raw bytes and 21,858 compressed bytes.  Fresh uses seventy records, 63,806 raw
+bytes and 14,722 compressed bytes.  Peak RSS is 52,068,352 bytes fresh,
+57,327,616 at depth zero, 76,906,496 for the tree and 77,086,720 with memoization;
+there is no measured process-memory reduction.  Earlier histories and complete
+controls remain additional disk space.  The memoized online workflow still costs
+24.85 times fresh solving, so no default changes.  Non-unit parity relations and
+mixed-CNF boundary descriptions are the next coverage target, comparing existing
+exact affine recognizers before merely increasing depth again.  General compact
+closure and polynomial acquisition or source expansion remain unproved.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

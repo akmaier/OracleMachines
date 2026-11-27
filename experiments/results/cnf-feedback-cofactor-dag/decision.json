@@ -1,0 +1,183 @@
+{
+  "analysis": {
+    "path": "experiments/results/cnf-feedback-cofactor-dag/analysis.json",
+    "sha256": "93192cc6e99c36a99f9b9ab3b0f84c81685ee4cad8409eef2ab61b51a0eb64db"
+  },
+  "checkpoint": "feedback-cofactor-dag",
+  "controls": [
+    "Six development cases are exposed prior gaps; the second panel is frozen before implementation and its labels and descriptions are audit-only.",
+    "Three full-cube second-panel cases are analytic/unit-test controls; two exactly match earlier normalized inputs. They are not novel held-out structures. The remaining coverage is reported separately.",
+    "Four cyclic process orders compare fresh, flat, tree and memo with empty archives, common case order/fallback, warm repeats, both cold readers and archive compression. Discovery, recognition, checking and persistence are charged. Interpreter startup, report metadata and the final lineage audit are additional.",
+    "Memoization saves 4.86% complete time versus matched depth-two tree and 14.67% certificate bytes. It still costs 24.85 times fresh solving. No default policy changes.",
+    "Five UNSAT inputs remain unresolved by this bounded feedback rule: two twelve-edge parity presentations, a fifteen-edge parity case, a width-six cube and the largest bridge mixture. The fallback solves them.",
+    "All 222 parent manifests, 34,259 prior artifact entries and 1,223 prior source fingerprints are unchanged. Five new source/test files give 1,228 fingerprints. All 64 old proof blocks are unchanged; one restricted proposition is added. No unrestricted-SAT or P-versus-NP conclusion follows."
+  ],
+  "date": "2026-11-27",
+  "docs": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "716f48bfb7d7ecee94d3a913a0e249ae43bc680867d619dbbc17ea6d312093bd",
+    "research/feedback-cofactor-dag.md": "db000de43fcc0ca48b26dd86b44302be27fc04ce2daf38edf0c10a86379358f4",
+    "research/implementation-gaps.md": "a52ccdc68c78e0f8736d9614867df6ab1ebcc20e49530600e69bc0a5b51fb90f",
+    "research/sat-pattern-discovery.md": "3481d2cee2a75e98350356771e6301775e82580431aa22aacdd6f67ec9f7a84a",
+    "research/structural-reuse-priorities.md": "9598fa76f6a8c55f56e231d8de6aff4e9b5332540354ffa22e9eae20cc6c3114"
+  },
+  "measurements": {
+    "archive_bytes": {
+      "flat": 15056,
+      "fresh": 14722,
+      "memo": 21858,
+      "tree": 21858
+    },
+    "coverage": {
+      "flat": {
+        "development_refuted": 0,
+        "development_unsat": 6,
+        "second_excluding_cube_controls_refuted": 2,
+        "second_excluding_cube_controls_unsat": 7,
+        "second_panel_refuted": 2,
+        "second_panel_unsat": 10
+      },
+      "fresh": {
+        "development_refuted": 0,
+        "development_unsat": 6,
+        "second_excluding_cube_controls_refuted": 0,
+        "second_excluding_cube_controls_unsat": 7,
+        "second_panel_refuted": 0,
+        "second_panel_unsat": 10
+      },
+      "memo": {
+        "development_refuted": 5,
+        "development_unsat": 6,
+        "second_excluding_cube_controls_refuted": 4,
+        "second_excluding_cube_controls_unsat": 7,
+        "second_panel_refuted": 6,
+        "second_panel_unsat": 10
+      },
+      "tree": {
+        "development_refuted": 5,
+        "development_unsat": 6,
+        "second_excluding_cube_controls_refuted": 4,
+        "second_excluding_cube_controls_unsat": 7,
+        "second_panel_refuted": 6,
+        "second_panel_unsat": 10
+      }
+    },
+    "memo_vs_fresh_factor": 24.849523483933226,
+    "memo_vs_tree_percent": {
+      "certificate_bytes": -14.666107737813894,
+      "complete_seconds": -4.861757480898843,
+      "search_bytes": -4.274906820709812,
+      "warm_seconds": -10.182644188955381
+    },
+    "paired_complete_percent": [
+      -5.379327942764956,
+      -6.982338817680899,
+      -4.739036385871998,
+      -2.296128749977955
+    ],
+    "peak_rss_bytes": {
+      "flat": 57327616,
+      "fresh": 52068352,
+      "memo": 77086720,
+      "tree": 76906496
+    },
+    "remaining": [
+      "d-p23",
+      "h09",
+      "h04",
+      "h22",
+      "h11"
+    ],
+    "reuse_strata": {
+      "no_observed_reuse": {
+        "cases": 18,
+        "discovery_seconds": {
+          "memo": 1.1824824082432315,
+          "tree": 1.186602323432453
+        },
+        "percent": -0.34720269022430195
+      },
+      "observed_reuse": {
+        "cases": 12,
+        "discovery_seconds": {
+          "memo": 0.44665939558763057,
+          "tree": 0.50989239604678
+        },
+        "percent": -12.401244056471118
+      }
+    },
+    "selected": "fresh",
+    "totals": {
+      "flat": {
+        "certificate_bytes": 339988,
+        "cold_seconds": 0.02837342699058354,
+        "complete_seconds": 0.8571216562995687,
+        "input_seconds": 0.0006948953960090876,
+        "persistence_seconds": 0.007152708480134606,
+        "phases": {
+          "discovery_seconds": 0.605329146143049,
+          "history_persistence_seconds": 0.031128737842664123,
+          "solve_check_seconds": 0.10498244676273316
+        },
+        "record_bytes": 66257,
+        "records": 77,
+        "search_bytes": 2810921,
+        "warm_seconds": 0.07400793780107051
+      },
+      "fresh": {
+        "certificate_bytes": 0,
+        "cold_seconds": 0.028651072876527905,
+        "complete_seconds": 0.08160068781580776,
+        "input_seconds": 0.000691354158334434,
+        "persistence_seconds": 0.0072782086208462715,
+        "phases": {
+          "solve_check_seconds": 0.033607645658776164
+        },
+        "record_bytes": 63806,
+        "records": 70,
+        "search_bytes": 0,
+        "warm_seconds": 0.007333698216825724
+      },
+      "memo": {
+        "certificate_bytes": 398988,
+        "cold_seconds": 0.03709302062634379,
+        "complete_seconds": 2.0277382081840187,
+        "input_seconds": 0.0006926143541932106,
+        "persistence_seconds": 0.0123989685671404,
+        "phases": {
+          "discovery_seconds": 1.629141803830862,
+          "history_persistence_seconds": 0.07066178997047246,
+          "solve_check_seconds": 0.17377606057561934
+        },
+        "record_bytes": 104798,
+        "records": 168,
+        "search_bytes": 7398513,
+        "warm_seconds": 0.09777505206875503
+      },
+      "tree": {
+        "certificate_bytes": 467561,
+        "cold_seconds": 0.037383468355983496,
+        "complete_seconds": 2.1313597502885386,
+        "input_seconds": 0.0007275729440152645,
+        "persistence_seconds": 0.012369000003673136,
+        "phases": {
+          "discovery_seconds": 1.696494719479233,
+          "history_persistence_seconds": 0.07528308313339949,
+          "solve_check_seconds": 0.194155344623141
+        },
+        "record_bytes": 104798,
+        "records": 168,
+        "search_bytes": 7728917,
+        "warm_seconds": 0.1088598647620529
+      }
+    }
+  },
+  "next": "Investigate reusable non-unit parity relations and mixed-CNF boundary descriptions, comparing existing exact affine recognizers before increasing conditioning depth again. Charge recognition, conversion, checking, native recomposition and cold replay; reserve another panel with duplicate/control strata explicit. Checked preparation reuse remains supporting work because discovery is about 80% of conditioned total cost.",
+  "outcome": "Two additional conditioning levels close five of six exposed feedback gaps. On the separately frozen 24-case second panel, bounded feedback refutes six of ten UNSAT cases, versus two at depth zero; excluding three analytic cube controls, coverage improves from two of seven to four of seven. The existing fallback correctly decides all 30 combined cases. Earlier 246 retained frontier snapshots are unchanged.",
+  "parent": {
+    "path": "experiments/results/cnf-fresh-seed-feedback/checkpoint.json",
+    "sha256": "94b43e3e9aff448a33d0b3d1956a0af7e71da681470f966094124e59148be5cf"
+  },
+  "pattern": "Within one discovery call, share the exact normalized cofactor together with remaining depth under immutable limits. Each split requires both exact restriction refutations. Open and budget-limited nodes remain unresolved. Full-cube controls expose a restricted chain recurrence: 2^(d+1)-1 feedback calls without sharing, d+1 with sharing.",
+  "recognition": "Canonicalize and charge lookup before exact residual/depth comparison. Different remaining depths do not share outcomes. All certificate nodes, source bindings, child restrictions, decreasing depths and backward indices are validated before native warm lookup. This is not general isomorphism, semantic equivalence or persistent discovery resume.",
+  "resources": "A single direct-unit shortcut allowance spans source compilation at all leaves; it does not bound other expansion, validation, recursion or memory costs. Full unsuccessful search histories remain retained separately from certificates. Tree and memo native archives are identical, and peak RSS does not decrease."
+}

@@ -12,7 +12,36 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: direct certificates on fresh source CNFs
+## Current investigation: deeper conditioning with exact cofactor sharing
+
+[Cofactor DAG discovery](feedback-cofactor-dag.md) closes **5/6 exposed fresh
+UNSAT gaps** using two extra conditioning levels. On the second frozen panel it
+raises UNSAT coverage **2/10 to 6/10**, or **2/7 to 4/7** after excluding three
+full-cube analytic controls. Two controls duplicate earlier normalized sources.
+The existing fallback decides all cases; these are gains for the feedback rule.
+
+Exact residual-plus-depth memoization reduces feedback calls **170 → 147**,
+certificate bytes **467,561 → 398,988**, and complete matched time
+**2.13136 → 2.02774 s** (4.86%). On twelve cases with observed reuse, discovery
+saves 12.40%; eighteen cases without reuse show little change. Native graphs stay
+identical at 168 records and 104,798 raw bytes. RSS does not fall. Fresh solving is
+still far cheaper at **0.08160 s**, so no default changes. The full-cube recurrence
+proves a restricted reduction from a tree to one discovered residual per level;
+its explicit input already has exponentially many clauses in its variable count.
+
+**Next priority:** non-unit relations on the remaining parity cases, comparing
+existing exact affine/clause recognition and mixed-CNF boundary descriptions.
+Five bounded-feedback gaps remain across the two cohorts: two twelve-edge parity
+presentations, a fifteen-edge parity case, a width-six cube and a bridge mixture.
+Conditioned discovery is about 80% of total cost; reuse of checked preparation is
+supporting work. Charge recognition, conversion, clause growth and cold replay.
+
+Resume `experiments/results/cnf-feedback-cofactor-dag/checkpoint.json`, key
+`feedback_cofactor_dag.remaining`. All 2,226 tests and 26 focused tests pass.
+Previous sources, 222 manifests, 34,259 artifacts and 64 old proof blocks remain;
+one restricted call-count proof is added. Arbitrary-SAT resource bounds stay open.
+
+## Previous investigation: direct certificates on fresh source CNFs
 
 [Fresh-seed feedback](fresh-seed-feedback.md) removes the native compiler's
 historical B13 input requirement. Checked chains now compile directly from their

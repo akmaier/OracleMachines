@@ -5,7 +5,32 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: feedback transfer from fresh CNFs, with explicit gaps
+## Latest evidence: exact residual sharing under deeper conditioning
+
+[Two additional conditioning levels](feedback-cofactor-dag.md) certify 5/6 exposed
+fresh UNSAT gaps and 6/10 UNSAT cases in a second frozen panel, versus 2/10 with
+the original leaf rule. Three full-cube inputs are analytic controls, two exactly
+duplicating prior normalized sources. Excluding all three, second-panel coverage
+rises **2/7 to 4/7**. Inputs remain unlabelled to discovery; all open outcomes use
+the same existing fallback, which decides every case correctly.
+
+Recognition shares exactly equal normalized residuals at equal remaining depth
+within an immutable-policy call. Both partition children are checked; an open
+child never certifies SAT or UNSAT. A restricted full-cube recurrence demonstrates
+one state per level instead of a binary tree, while parity and bridge cases retain
+unresolved interactions. Memoization cuts calls 170 → 147 and certificate bytes
+14.67%, saving 4.86% complete time against the same conditioning tree. Native
+graphs are identical and process RSS does not improve. The memoized online workflow still costs 24.85 times fresh solving on this
+small panel.
+
+Next investigate non-unit parity/boundary relations, including the existing exact
+affine recognizers, before repeatedly increasing depth. Retain the five current
+UNSAT gaps, explicit duplicate/control strata and full discovery costs. Resume
+`experiments/results/cnf-feedback-cofactor-dag/checkpoint.json`, key
+`feedback_cofactor_dag.remaining`. All 2,226 tests pass; no unrestricted coverage
+or polynomial construction result follows.
+
+## Previous evidence: feedback transfer from fresh CNFs, with explicit gaps
 
 [Direct source-feedback compilation](fresh-seed-feedback.md) needs no historical
 B13 templates, closures or cursor histories. It checks the chain against the

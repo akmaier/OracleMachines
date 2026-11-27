@@ -37,6 +37,12 @@ Resume `experiments/results/cnf-probe-buckets/checkpoint.json`, key
 231 manifests, 43,681 artifact entries, 1,268 sources and 73 proofs are preserved.
 No efficient unrestricted-SAT or compact-closure theorem follows.
 
+The [27 November external watch](pequalnp-watch.md) supports these priorities:
+cross-instance component reuse requires exact changing-background bindings;
+bounded clause-vicinity proofs and functional reconstruction are further coverage
+experiments if the immediate relation/ordering controls miss. External papers
+and agent badges supply leads only; their reported gains are not our measurements.
+
 ## Previous investigation: repeated forcing before expansion
 
 [Repeated binary forcing](iterated-forcing-discovery.md) certifies **6/24**

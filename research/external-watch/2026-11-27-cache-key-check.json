@@ -1,0 +1,104 @@
+{
+  "date": "2026-11-27",
+  "research_checkpoint": "7e4b47cb",
+  "purpose": "Finite independent check of the implicit-background cache-key collision in arXiv:2605.00671 section 5.1, plus an OracleMachines SAT/UNSAT extension.",
+  "enumerated_assignments_per_case": 4,
+  "cases": [
+    {
+      "case": "one_binary",
+      "cnf": [
+        [
+          1,
+          2
+        ]
+      ],
+      "models_x1_x2": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "model_count": 3,
+      "all_binary_clauses_omitted_key": {
+        "variables": [
+          1,
+          2
+        ],
+        "clauses": []
+      }
+    },
+    {
+      "case": "two_binaries",
+      "cnf": [
+        [
+          1,
+          2
+        ],
+        [
+          -1,
+          -2
+        ]
+      ],
+      "models_x1_x2": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "model_count": 2,
+      "all_binary_clauses_omitted_key": {
+        "variables": [
+          1,
+          2
+        ],
+        "clauses": []
+      }
+    },
+    {
+      "case": "all_four_binaries",
+      "cnf": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          -2
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          -1,
+          -2
+        ]
+      ],
+      "models_x1_x2": [],
+      "model_count": 0,
+      "all_binary_clauses_omitted_key": {
+        "variables": [
+          1,
+          2
+        ],
+        "clauses": []
+      }
+    }
+  ],
+  "conclusion": "Omitting changed binary background can collide on both model count and SAT status. This tests the illustrative key only, not either external implementation or an OracleMachines production key.",
+  "source": "https://www.alphaxiv.org/abs/2605.00671",
+  "external_lean_compiled": false,
+  "external_benchmarks_reproduced": false
+}

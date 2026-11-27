@@ -16125,6 +16125,138 @@ keeping exact source/index lifetimes, proof dependencies and whole-root transpor
 explicit.  The experiment supplies neither a complete efficient SAT partition
 nor a bound on the useful number of feedback rounds.
 
+\subsection{Bounded feedback of checked binary consequences}
+\label{sec:pair-feedback-buckets}
+
+The next experiment turns the preceding diagnostic leaf witnesses into whole-root
+certificates.  It compares the current one-shot shared-prefix policy (256 pair
+attempts and 32 clauses per unresolved depth-zero leaf), the same implementation
+with a larger one-shot allowance (512/64), and at most two source-bound rounds
+of 256/32.  The feedback policy runs another round only when the previous
+nonempty batch's checked depth-zero terminal remains unresolved.  Its next source
+is that terminal's final normalized residual, after all recorded restrictions
+and substitutions.  It rebuilds the occurrence index and reranks variables on
+this changed source.  Thus this comparison tests the complete feedback policy;
+it does not isolate propagation from reranking or terminal simplification.
+
+\begin{proposition}[Source-bound consequence feedback and inverse transport]
+Let $F_0$ be an unresolved normalized leaf.  In each of at most two rounds, let
+$L_i$ contain only binary consequences checked against the exact current $F_i$.
+Let a checked depth-zero preparation of $F_i\land L_i$ produce residual
+$F_{i+1}$ and an inverse model map $T_i$, preserving satisfiability.  A subsequent
+checked SAT model or UNSAT certificate lifts to a verdict on $F_0$.  It then
+composes with the existing incoming transport and conditioning graph.  An
+unresolved final residual supplies no verdict.
+\end{proposition}
+\begin{proof}
+The preceding paired-assumption proposition proves $F_i\models L_i$, so adjoining
+$L_i$ preserves the entire model set of $F_i$.  The verified preparation is
+satisfiability-preserving, and $T_i$ maps each residual model to a model of the
+augmented source.  Starting with a final model, apply these maps in reverse
+round order.  Each result satisfies the preceding source and therefore reaches
+a model of $F_0$.  Conversely, a final refutation propagates backward through
+the same satisfiability equivalences.  Each consequence proof refers only to
+its current source; the next source is reconstructed from the preceding checked
+terminal, not asserted independently.  The ordered, bounded round list cannot
+use a later clause to justify an earlier clause.  The original graph's checked
+inverse maps and one-SAT-child/two-UNSAT-children rules finish recomposition.
+No inference follows from an unsuccessful search or an unresolved terminal.
+This argument supplies neither a useful-round bound for unrestricted CNFs nor
+an efficient arbitrary-SAT partition.
+\end{proof}
+
+The checker independently replays each intermediate terminal, reconstructs the
+transport needed for a following round, checks every prefix and suffix against
+that round's source, and verifies the lifted source witness.  It rejects empty
+retained batches, excessive rounds, continuation after a verdict, changed terminal
+policies and corrupted clause references.  Cold checking runs no discovery.
+Reconstructing a transport after validating its terminal repeats some checking
+work; that cost is retained.  No occurrence index is carried across changed CNFs.
+The two-round cap is a policy bound, not a fixed-point or exhaustion certificate.
+
+At depth two there are at most four original leaves.  Larger and feedback thus
+have the same maxima of 2,048 candidate pairs and 256 retained binary clauses
+per root, but their actual work differs.  Feedback can add up to eight terminal
+preparations, versus four for the larger one-shot control; their single-probe,
+relation and bucket work is additional and charged.  Pair certificates establish
+consequence validity and retained-clause caps, not the number of unsuccessful
+search attempts or completeness of the heuristic schedule.
+
+The frozen panel preserves all 138 previous queries and adds eighteen new unique
+constructions plus four exact normalized repeats: random three-CNFs with 32--48
+variables, hidden binary constraints with deleted-conflict controls, and parity
+prisms.  Labels are audit-only; there are 99 SAT and 61 UNSAT queries.  Families
+recur, and this remains a synthetic sample rather than an external SAT benchmark.
+The base and larger controls execute the unchanged parent implementation directly.
+The base certificates for every preceding query are identical to the saved
+parent certificates.
+
+Structural coverage is $151/160$ base, $152/160$ larger and $155/160$ feedback,
+with no baseline verdict lost.  Feedback raises preceding coverage from
+$131/138$ to $134/138$, certifying all three exposed SAT roots whose next-round
+leaf witnesses were previously only diagnostic.  Both expanded policies raise
+new unique coverage from $16/18$ to $17/18$; all four new repeats are covered.
+The common fallback already answers all 160 queries.  The matched allowance
+result shows that another batch on the rewritten residual can be more useful
+than continuing the original source's pair schedule; it is not a bound on the
+rounds needed by other CNFs.
+
+Four cyclic process orders give mean complete seconds of $8.17343$ fresh,
+$10.65167$ base, $10.72171$ larger and $11.01131$ feedback.  Feedback costs
+$3.38\%$ more than base, $2.70\%$ more than larger and $34.72\%$ more than fresh;
+all four paired signs are unfavorable in each comparison.  These regressions
+are retained, and production defaults stay unchanged.  Complete time charges
+input, acquisition including internal checking, explicit verification, evidence
+and database writes, warm/cold replay and compression.  Startup, labels, historical
+acquisition, lineage audits and post-hoc diagnostics remain additional.  Native
+fallback archives are audited with two readers; JSON replay uses two passes of
+one checker.
+
+Base attempts 8,591 pairs and retains 1,005 clauses; larger attempts 17,289 and
+retains 1,937; feedback attempts 12,130 and retains 1,351.  Feedback uses fewer
+pair attempts than larger while certifying three additional roots, but still
+costs more in total.  Sixteen of the 39 refinements receive a second round,
+adding 346 clauses and five terminal verdicts (four SAT and one UNSAT).  One of
+these leaf verdicts lies below an already-SAT parent.  Eleven refined leaves
+remain unknown.  Separate terminal nodes rise from 39 to 55 and their bucket
+steps from 172 to 296, with 49 intermediate-transport reconstructions during
+acquisition and explicit checking.  The outer graph stays at 434 nodes,
+172 splits and 1,626 bucket steps; its 43 shared targets include 38 distinct-raw
+merges, all constant.  No new nonconstant sharing across leaves is demonstrated.
+
+Combined compressed SQLite/JSON bytes are 1,944,229 fresh, 684,328 base,
+669,474 larger and 600,427 feedback.  Feedback's JSON component grows from
+431,825 base to 460,656 bytes, while fallback records fall from 491 to 300;
+the package reduction is not a smaller structural certificate.  Diagnostics
+add 882,348 bytes.  Peak RSS is respectively 250,740,736, 128,745,472, 127,107,072
+and 120,225,792 bytes; these are measured process peaks, not memory bounds.
+Feedback discovery including internal checks costs $3.81341$ seconds and cold
+replay $3.31908$ seconds, versus $3.44547$ and $3.28679$ base.  Solve/explicit
+checking falls from $1.77875$ to $1.69918$ seconds, insufficient to offset the
+extra discovery and replay.  Reusing an independently validated intermediate
+transport within one checking call remains an identifiable cost target.
+
+Five unique roots remain, all SAT by the independent oracle.  Their six final
+leaves all stop at width nine after positive elimination work.  A separate
+post-hoc screen enumerates 356 single assumptions and finds one checked failure;
+thus the earlier absence of all single failures no longer describes this changed
+frontier.  Another 256/32 pair batch on each final leaf adds 81 clauses but gives
+no terminal verdict.  Repeating the width-eight preparation also leaves all six
+unknown.  A bare width-nine bucket certifies three leaves SAT; the other three
+then stop at width ten.  Crucially, the same three leaf opportunities already
+exist after only one pair batch.  They must not be credited to feedback, and none
+is added to measured whole-root coverage.
+
+The next coverage comparison should therefore compose selective width-nine
+elimination after the existing one-round closure, with a two-round control and
+full source-model transport, before adding more feedback.  In parallel with
+that coverage question, repeated source and terminal checking is a concrete cost target within the
+two largest phases; its avoidable fraction has not yet been isolated.  Neither the finite frontier nor its leaf
+screens establishes a complete efficient partition of arbitrary SAT.  An
+independent exhaustive semantic audit over 240 small CNFs checks 563 retained
+clauses, 295 refinement rounds and 671 residual-model lifts; it is outside the
+timed comparison and retains unresolved cases.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

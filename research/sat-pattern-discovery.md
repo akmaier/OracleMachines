@@ -5,7 +5,35 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: paired constraints and source-bound prefix reuse
+## Latest evidence: bounded feedback and the width-nine frontier
+
+[Bounded checked pair feedback](pair-feedback-discovery.md) raises structural
+coverage **151/160 to 155/160**, versus **152/160** from a single batch with the
+same maximum pair budget. It certifies three exposed SAT roots and one new UNSAT
+root, with no baseline losses. Complete cost rises **3.38% versus current**,
+**2.70% versus the larger batch**, and **34.72% versus fresh**, with all four
+paired signs unfavorable. Defaults stay unchanged. Fewer pairs than the larger
+control do not offset extra preparation and checking; no new nonconstant
+cross-leaf sharing is demonstrated.
+
+Five unique SAT roots remain, with six width-nine leaves. A third pair batch adds
+81 clauses but certifies none; repeated width-eight preparation also certifies
+none. Width-nine buckets certify three diagnostic leaves, **already available
+after one pair batch**. Next compare selective width-nine elimination after
+one-round closure with a two-round control, including full root transport and
+complete costs. These leaf screens add no measured root verdicts. All 356 single
+assumptions were probed; one failure remains, so the earlier zero-failure claim
+does not apply to the changed frontier.
+
+Discovery including internal checking (**3.81341 s**) and cold replay
+(**3.31908 s**) remain the largest phases. Reusing validated intermediate maps
+within checking is a concrete cost target; its avoidable fraction remains
+unmeasured. All **2,368 full and 30 focused tests pass**; prior results and 77
+proof blocks are preserved. Resume
+`experiments/results/cnf-pair-feedback-buckets/checkpoint.json`. Efficient
+arbitrary-SAT coverage, broader transfer and external validation remain open.
+
+## Previous evidence: paired constraints and source-bound prefix reuse
 
 [Checked pair consequences](joint-probe-discovery.md) increase structural coverage
 **124/138 to 131/138**, closing two exposed unique roots (SAT and UNSAT) plus a

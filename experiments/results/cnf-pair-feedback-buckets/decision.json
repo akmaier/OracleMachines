@@ -1,0 +1,97 @@
+{
+  "cost_comparisons_percent": {
+    "feedback_vs_base": 3.376306711076138,
+    "feedback_vs_fresh": 34.72069251826326,
+    "feedback_vs_larger": 2.7010169442658327
+  },
+  "cost_target": "Discovery and cold replay dominate; reuse validated intermediate maps within checking and measure the avoidable cost.",
+  "coverage": {
+    "base": {
+      "previous_panel_cases": 138,
+      "previous_panel_direct": 131,
+      "previous_panel_sat": 84,
+      "repeats_cases": 4,
+      "repeats_direct": 4,
+      "repeats_sat": 3,
+      "unique_panel_cases": 18,
+      "unique_panel_direct": 16,
+      "unique_panel_sat": 12
+    },
+    "feedback": {
+      "previous_panel_cases": 138,
+      "previous_panel_direct": 134,
+      "previous_panel_sat": 84,
+      "repeats_cases": 4,
+      "repeats_direct": 4,
+      "repeats_sat": 3,
+      "unique_panel_cases": 18,
+      "unique_panel_direct": 17,
+      "unique_panel_sat": 12
+    },
+    "fresh": {
+      "previous_panel_cases": 138,
+      "previous_panel_direct": 0,
+      "previous_panel_sat": 84,
+      "repeats_cases": 4,
+      "repeats_direct": 0,
+      "repeats_sat": 3,
+      "unique_panel_cases": 18,
+      "unique_panel_direct": 0,
+      "unique_panel_sat": 12
+    },
+    "larger": {
+      "previous_panel_cases": 138,
+      "previous_panel_direct": 131,
+      "previous_panel_sat": 84,
+      "repeats_cases": 4,
+      "repeats_direct": 4,
+      "repeats_sat": 3,
+      "unique_panel_cases": 18,
+      "unique_panel_direct": 17,
+      "unique_panel_sat": 12
+    }
+  },
+  "decision": "Retain bounded feedback as verified structural coverage expansion, with all measured cost regressions; no production default change.",
+  "documents": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "b43d5b6a7f62cdf988c3acfc2854cdb603c677768551b5f98293a1cd8bdf2b6d",
+    "research/implementation-gaps.md": "af71f383b13ac3364ca3975ae26eac756c257fa3f035c6b790c83b4fe058e6de",
+    "research/pair-feedback-discovery.md": "9f8afce684eb2651a05de6a716a52650ac4934502e26551a969d8d532b18e10e",
+    "research/sat-pattern-discovery.md": "8e5b871e2a52ce0ac6b48fcf211ed8cc93444e385e3f4762ff395b7a973e4259",
+    "research/structural-reuse-priorities.md": "0bb09d546648ffe95eed1fb13987652b275ef23c983376b7ef64ddda61697360"
+  },
+  "gains": {
+    "feedback": [
+      "d-d-j07",
+      "d-k16",
+      "d-k17",
+      "f05"
+    ],
+    "larger": [
+      "f05"
+    ]
+  },
+  "limitations": [
+    "All 138 parent queries plus eighteen frozen unique random/hidden-binary/deletion/parity inputs and four exact normalized repeats. Labels never guide acquisition; synthetic families recur and this is not external generalization.",
+    "Base executes the unchanged current implementation: shared pair prefixes, one batch of 256 attempts and 32 clauses. Larger uses the same implementation with 512/64. Feedback uses at most two 256/32 batches, the second against the checked final residual of an unresolved depth-zero terminal. Each changed CNF gets a fresh occurrence index and pair ranking.",
+    "Larger and feedback share maximum pair/learned-clause allowances, not equal actual work. With depth two there are at most four original leaves: 2048 candidate pairs and 256 retained binary clauses per root. Feedback can run eight terminal preparations versus four for larger; all costs are charged. Pair checking verifies consequences and retained-clause caps; it does not certify the number of unsuccessful searches, exhaustion or deterministic selection.",
+    "Exact intermediate sources and all incoming model maps are checked; rounds form an ordered list of length at most two, with no continuation after a verdict and no empty retained batch. Certificates do not prove polynomial unrestricted complexity or a new tractable family.",
+    "Four cyclic process orders start empty with the same fallback. Complete time includes input, discovery with internal verification, explicit checking, persistence, warm/cold replay and compression. Startup, labels, diagnostics, lineage audit and historical acquisition are extra. Two native readers audit fallback archives; JSON replay has two passes of one checker.",
+    "Unknown leaves including those under SAT parents remain represented. No production default changes; regressions and unresolved cases are retained."
+  ],
+  "losses": {
+    "feedback": [],
+    "larger": []
+  },
+  "next_target": "Selective width-nine elimination after one-round pair closure, compared with a two-round control and full root transport. Three diagnostic leaf opportunities already exist after one round; do not attribute them to feedback.",
+  "remaining": [
+    "d-d-j06",
+    "d-k14",
+    "d-k15",
+    "d-k09",
+    "f03"
+  ],
+  "supplemental_checks": {
+    "path": "experiments/results/cnf-pair-feedback-buckets/supplemental-checks.json",
+    "sha256": "caedc7960691b5ed0fc842401d2ca042badfe899f3d7e3744bed255a8be2274a"
+  }
+}

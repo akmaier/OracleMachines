@@ -1,0 +1,366 @@
+{
+  "analysis": {
+    "path": "experiments/results/cnf-probe-buckets/analysis.json",
+    "sha256": "6fc935f5652768c3646f344628dc0df2bb353c6660e3f294d6fe89e1d8283f46"
+  },
+  "checkpoint": "probe-buckets",
+  "controls": [
+    "Twenty exposed unique sources, 24 frozen synthetic constructions and four repeats (26 SAT/22 UNSAT). Labels/descriptions withheld from acquisition; no new normalized duplicate of parent panel. Frozen wide-failure motifs have complementary clauses and may fold into binary constraints; limitation retained without replacement. Separate five-variable test demonstrates a nonfolding wide consequence missed by binary reachability.",
+    "Four cyclic process orders, one common fallback. Complete cost includes input, discovery, verification, evidence/database writes, warm/cold replay and compression. Startup, metadata, generation, historical acquisition, post-hoc profiles and final preservation audit additional. Two native cold readers plus two JSON passes sharing one checker.",
+    "Bucket nodes 158 to 101, split nodes 71 to 34, but elimination steps increase 272 to 327. Indexed evidence has 84 accepted rounds, 475 failures, 418 subsequent units, 3838 reason steps and 64110 compact bytes; scan has 4620 reason steps and 70075 bytes. All six distinct-raw joins are constant; no new nonconstant semantic sharing is established.",
+    "5116 probes use 151 immutable indexes, with 26573 setup-literal visits, 124804 occurrence visits and 25364 reason-scan literals. Scans charge 1455513 literal visits. Counters represent different operations. Acquisition checked-reason literals 31959 indexed versus 38364 scan exclude active-variable scans, which measured time includes.",
+    "Of 112 edges, 45 stop constant, 65 with no failed literal and two at the probe cap. Both capped edges belong to a certified root; the final miss does not exhaust a cap. Maximum accepted rounds is four; maximum attempted rounds is five.",
+    "Compressed SQLite/JSON bytes 178225 fresh, 177387 binary, 62907 scan, 61437 indexed; raw indexed certificates 2337285 and native records 18445. Diagnostics 119268 extra. Indexed peak RSS 60407808 bytes, observed process memory rather than a bound. Historical/container space remains additional.",
+    "Matched indexed discovery 0.37682 seconds includes an internal proof check; cold 0.36359. Post-hoc cProfile discovery/two-pass JSON cost 1.06136/0.99623 seconds with full-suite tests concurrently running; cumulative entries overlap and instrumented times are not matched speedups. First trial used 1334 probes on 27 queries already certified by the binary baseline.",
+    "The structural diagnostic costs 0.00120 seconds; full-CNF census 0.00512 seconds, 25630 propagation visits and 417 checked reason literals. No failed assumptions in 68 probes over two leaves. These diagnostics add no root authority.",
+    "All 231 prior research manifests, 43681 artifact entries, 1268 scientific sources and 73 proof blocks unchanged; five new files bring fingerprints to 1273 and one restricted proof is added. All 2312 full and 36 focused tests pass. Prior alphaXiv snapshots, SQLite ResourceWarnings, the folding limitation and unresolved source are retained. No efficient arbitrary-SAT or compact-closure claim."
+  ],
+  "cost_profile": {
+    "path": "experiments/results/cnf-probe-buckets/cost-profile.json",
+    "sha256": "fda0c9c126e78f943ff4c1003440ea8e3c5a8a785cfa4c9d745c1b135ccd18dc"
+  },
+  "date": "2026-11-27",
+  "docs": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "1af0f4b2f7bbe737a31ff0e4ad8e2166d2999f3e560b2d2ab4541b0641f255df",
+    "research/implementation-gaps.md": "c38accd9df28b61d8f9436ff31e61a42f59c68812b4dbe9fe49ea1ba6472d284",
+    "research/probe-bucket-discovery.md": "27d5ef1e61a300c52504e62afd5bfcde084d4ebe91a748c7a6f46c884502317f",
+    "research/sat-pattern-discovery.md": "e7d2bd0ba096771efc951591c47e445718574c4bdbe8c9bfe0cdcb38fbf28932",
+    "research/structural-reuse-priorities.md": "5b888db689d9d7166b700a62de499e40afb94f15354e17a9795dd88c6482523c"
+  },
+  "failed_probe_profile": {
+    "path": "experiments/results/cnf-probe-buckets/remaining-failed-probes.json",
+    "sha256": "3a4f96bbd5ddb4dcf05ea7fe5b1081f13a5226f36df7e2528f89e3fe6634590b"
+  },
+  "git_parent": "4e9fe251",
+  "maintenance": "Each round is bound to the reconstructed current CNF. Clause edits, restrictions and renaming invalidate its index and proof references. Full normalized residual/depth nodes share only under fixed policy; incoming transports stay separate, every SAT edge is checked and UNSAT splits require both children. Whole-root programs share within streams and every warm/cold use is checked. Native/equivalence/affine/Lean formats remain unchanged.",
+  "measurements": {
+    "combined_compressed_bytes": {
+      "binary": 177387,
+      "fresh": 178225,
+      "indexed": 61437,
+      "scan": 62907
+    },
+    "comparisons_percent": {
+      "indexed_vs_binary": -37.22929968834454,
+      "indexed_vs_fresh": 67.37674809785739,
+      "indexed_vs_scan": -12.886911359810615,
+      "scan_vs_binary": -27.94343388406003
+    },
+    "coverage": {
+      "binary": {
+        "development_cases": 20,
+        "development_direct": 0,
+        "development_sat": 14,
+        "repeats_cases": 4,
+        "repeats_direct": 4,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 23,
+        "unique_panel_sat": 10
+      },
+      "fresh": {
+        "development_cases": 20,
+        "development_direct": 0,
+        "development_sat": 14,
+        "repeats_cases": 4,
+        "repeats_direct": 0,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 0,
+        "unique_panel_sat": 10
+      },
+      "indexed": {
+        "development_cases": 20,
+        "development_direct": 19,
+        "development_sat": 14,
+        "repeats_cases": 4,
+        "repeats_direct": 4,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 24,
+        "unique_panel_sat": 10
+      },
+      "scan": {
+        "development_cases": 20,
+        "development_direct": 19,
+        "development_sat": 14,
+        "repeats_cases": 4,
+        "repeats_direct": 4,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 24,
+        "unique_panel_sat": 10
+      }
+    },
+    "coverage_losses": [],
+    "new_direct_cases": [
+      "d-d-d-d-d-d-c07",
+      "d-d-d-d-d-d-c05",
+      "d-d-d-d-d-y05",
+      "d-d-d-d-d-y07",
+      "d-d-d-d-d-y04",
+      "d-d-d-d-u10",
+      "d-d-d-d-u12",
+      "d-d-d-d-u04",
+      "d-d-d-d-u07",
+      "d-d-d-d-u06",
+      "d-d-d-v09",
+      "d-d-d-v04",
+      "d-d-d-v08",
+      "d-d-d-v05",
+      "d-d-d-v11",
+      "d-d-w09",
+      "d-d-w05",
+      "d-d-w11",
+      "d-i05",
+      "f04"
+    ],
+    "paired_percent": {
+      "indexed_vs_binary": [
+        -37.38490770650258,
+        -37.305264263635564,
+        -37.52314904086165,
+        -36.71261355426905
+      ],
+      "indexed_vs_fresh": [
+        59.862380032110465,
+        67.32043461804844,
+        68.89184530060461,
+        73.7601763805652
+      ],
+      "indexed_vs_scan": [
+        -13.346117574130268,
+        -13.433776913698702,
+        -12.880757141447575,
+        -11.904951151218546
+      ],
+      "scan_vs_binary": [
+        -27.74115764857611,
+        -27.575983448115128,
+        -28.28581963163257,
+        -28.1601097079063
+      ]
+    },
+    "peak_rss_bytes": {
+      "binary": 71270400,
+      "fresh": 71876608,
+      "indexed": 60407808,
+      "scan": 60489728
+    },
+    "remaining": [
+      "d-i04"
+    ],
+    "remaining_failed_probe_profile": {
+      "both_polarities_failed": 0,
+      "failed_literals": 0,
+      "leaves": 2,
+      "probes": 68,
+      "truncated_leaves": 0,
+      "with_failed_literals": 0
+    },
+    "remaining_shape": {
+      "positive_work_leaves": 2,
+      "reasons": {
+        "bag-width": 2
+      },
+      "repeated_queries": 0,
+      "unique_sources": 1,
+      "unknown_leaves": 2,
+      "width_counts": {
+        "9": 2
+      },
+      "zero_work_leaves": 0
+    },
+    "remaining_structure_profile": {
+      "after_forcing_conflicts": 0,
+      "binary_conflicts": 0,
+      "disconnected": 0,
+      "dual_horn": 0,
+      "equivalence_blocks": 1,
+      "forced_literals": 0,
+      "forcing_leaves": 0,
+      "forcing_propagated_variables": 0,
+      "horn": 0,
+      "leaves": 2,
+      "merged_variable_occurrences": 2,
+      "unit_conflicts": 0,
+      "with_units": 0
+    },
+    "selected": "fresh",
+    "structural": {
+      "binary": {
+        "after_unit_steps": 16,
+        "bucket_steps": 272,
+        "constant_raw_merges": 14,
+        "distinct_raw_merges": 14,
+        "edge_unit_steps": 320,
+        "edges": 186,
+        "forcing_compact_bytes": 13430,
+        "forcing_literals": 226,
+        "forcing_path_steps": 899,
+        "forcing_records": 55,
+        "forcing_rounds": 55,
+        "forcing_unit_steps": 261,
+        "iterated_edges": 12,
+        "leaf_nodes": 87,
+        "leaf_sat": 12,
+        "leaf_unresolved": 34,
+        "leaf_unsat": 41,
+        "max_probe_rounds_per_edge": 0,
+        "max_rounds_per_edge": 4,
+        "nodes": 158,
+        "prefix_fold_steps": 97,
+        "probe_rounds": 0,
+        "relation_conflict": 4,
+        "relation_equivalence": 37,
+        "shared_targets": 19,
+        "split_nodes": 71
+      },
+      "fresh": {},
+      "indexed": {
+        "after_unit_steps": 4,
+        "bucket_steps": 327,
+        "constant_raw_merges": 6,
+        "distinct_raw_merges": 6,
+        "edge_unit_steps": 31,
+        "edges": 112,
+        "failed_assumptions": 475,
+        "forcing_compact_bytes": 4916,
+        "forcing_literals": 89,
+        "forcing_path_steps": 301,
+        "forcing_records": 23,
+        "forcing_rounds": 23,
+        "forcing_unit_steps": 120,
+        "iterated_edges": 3,
+        "leaf_nodes": 67,
+        "leaf_sat": 27,
+        "leaf_unresolved": 2,
+        "leaf_unsat": 38,
+        "max_probe_rounds_per_edge": 4,
+        "max_rounds_per_edge": 2,
+        "nodes": 101,
+        "prefix_fold_steps": 97,
+        "probe_compact_bytes": 64110,
+        "probe_reason_steps": 3838,
+        "probe_rounds": 84,
+        "probe_unit_steps": 418,
+        "relation_equivalence": 21,
+        "shared_targets": 11,
+        "split_nodes": 34
+      },
+      "scan": {
+        "after_unit_steps": 4,
+        "bucket_steps": 327,
+        "constant_raw_merges": 6,
+        "distinct_raw_merges": 6,
+        "edge_unit_steps": 31,
+        "edges": 112,
+        "failed_assumptions": 475,
+        "forcing_compact_bytes": 4916,
+        "forcing_literals": 89,
+        "forcing_path_steps": 301,
+        "forcing_records": 23,
+        "forcing_rounds": 23,
+        "forcing_unit_steps": 120,
+        "iterated_edges": 3,
+        "leaf_nodes": 67,
+        "leaf_sat": 27,
+        "leaf_unresolved": 2,
+        "leaf_unsat": 38,
+        "max_probe_rounds_per_edge": 4,
+        "max_rounds_per_edge": 2,
+        "nodes": 101,
+        "prefix_fold_steps": 97,
+        "probe_compact_bytes": 70075,
+        "probe_reason_steps": 4620,
+        "probe_rounds": 84,
+        "probe_unit_steps": 418,
+        "relation_equivalence": 21,
+        "shared_targets": 11,
+        "split_nodes": 34
+      }
+    },
+    "totals": {
+      "binary": {
+        "certificate_bytes": 3210867,
+        "certificate_compressed_bytes": 59236,
+        "cold_seconds": 0.5911965416744351,
+        "complete_seconds": 1.8300901874899864,
+        "diagnostic_bytes": 144342,
+        "input_seconds": 0.0014217391144484282,
+        "persistence_seconds": 0.15935353096574545,
+        "phases": {
+          "discovery_seconds": 0.42672879446763545,
+          "evidence_persistence_seconds": 0.02142942708451301,
+          "solve_check_seconds": 0.3925541554344818
+        },
+        "record_bytes": 636170,
+        "records": 383,
+        "warm_seconds": 0.23111126048024744
+      },
+      "fresh": {
+        "certificate_bytes": 0,
+        "certificate_compressed_bytes": 22,
+        "cold_seconds": 0.21145356248598546,
+        "complete_seconds": 0.6863321459386498,
+        "diagnostic_bytes": 0,
+        "input_seconds": 0.0016457706224173307,
+        "persistence_seconds": 0.14181101066060364,
+        "phases": {
+          "solve_check_seconds": 0.3022240384016186
+        },
+        "record_bytes": 910854,
+        "records": 578,
+        "warm_seconds": 0.023260739631950855
+      },
+      "indexed": {
+        "certificate_bytes": 2337285,
+        "certificate_compressed_bytes": 56102,
+        "cold_seconds": 0.36358921835199,
+        "complete_seconds": 1.1487604270223528,
+        "diagnostic_bytes": 119268,
+        "input_seconds": 0.0014064377173781395,
+        "persistence_seconds": 0.04644330230075866,
+        "phases": {
+          "discovery_seconds": 0.3768200388876721,
+          "evidence_persistence_seconds": 0.017427393118850887,
+          "solve_check_seconds": 0.16409149998798966
+        },
+        "record_bytes": 18445,
+        "records": 17,
+        "warm_seconds": 0.17440914583858103
+      },
+      "scan": {
+        "certificate_bytes": 2399422,
+        "certificate_compressed_bytes": 57572,
+        "cold_seconds": 0.36429085419513285,
+        "complete_seconds": 1.3187001459300518,
+        "diagnostic_bytes": 119268,
+        "input_seconds": 0.0014256874565035105,
+        "persistence_seconds": 0.04762386460788548,
+        "phases": {
+          "discovery_seconds": 0.5432759799296036,
+          "evidence_persistence_seconds": 0.018453988479450345,
+          "solve_check_seconds": 0.1643896233290434
+        },
+        "record_bytes": 18445,
+        "records": 17,
+        "warm_seconds": 0.1742433434119448
+      }
+    }
+  },
+  "next": "For broader coverage, test checked relation substitution after full-CNF consequences, with progress/transport and bounded ordering or width-nine controls. The last SAT root has two width-nine leaves, no failures among 68 untruncated diagnostic probes, and one new signed-equivalence block merging two variables. Test new nonfolding wide mixtures and edits rather than tuning only to the one exposed source. For total cost, discovery and cold replay now dominate; profile-supported targets are reuse of verified normalization and intermediate residuals within one replay, with full source validation and invalidation. A structural-first probe gate is secondary because it may duplicate bucket discovery.",
+  "next_research_baseline": "indexed",
+  "outcome": "Full-CNF failed assumptions certify 19/20 exposed misses (13 SAT, six UNSAT), raise new unique coverage 23/24 to 24/24 and retain four repeats. There are no losses; 47/48 queries avoid the unchanged fallback, which already supplies all answers. Scans reduce complete cost 27.94% versus repeated binary forcing; indexed propagation saves another 12.89% against scans, 37.23% overall. All four pairs improve. Indexed still costs 1.67 times fresh, so production defaults stay unchanged.",
+  "parent": {
+    "path": "experiments/results/cnf-iterated-forcing/checkpoint.json",
+    "sha256": "5d534b11bdd2308aed56755cffcf5b82f2caf9d7359b1f069c539dcc2dec84a3"
+  },
+  "pattern": "A source-checked unit-propagation conflict under assumption a entails not a. Add checked opposite literals as units, restrict, normalize and retain round transport. The indexed engine shares one immutable literal-occurrence map and initial-unit list across a round, with private assignments, pending counts, satisfied clauses and queues per probe.",
+  "recognition": "Binary control exactly translates to previous closure authority. Scan and indexed modes use identical attempted-probe order and quotas; failed-assumption sets, unit steps, residual graph and verdicts agree. Reason traces can differ. Indexed-vs-scan comparison changes traversal and index reuse together; it does not isolate the runtime effect of sharing alone.",
+  "resources": "At most 128 attempted probes cumulatively per edge and eight rounds, with strict active-variable decrease before another accepted round. Replay caps stored failures, not unrecorded successful attempts. Prior binary/unit/bucket quotas remain separate. Index setup O(L+m), each probe O(L+m+n) in the constant-map unit-cost model; bit costs and all normalization/transport work are extra. Checker rebuilds variables per failure, costing O(L) besides reason checks. Probe counts are not work, RAM or wall-time caps. General conditioning remains exponential.",
+  "structure_profile": {
+    "path": "experiments/results/cnf-probe-buckets/remaining-structure-profile.json",
+    "sha256": "4fe278c2d43c5145dce757f5603c628b46765e55519185482f6a99b654db39c9"
+  }
+}

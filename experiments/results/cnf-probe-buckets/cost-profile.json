@@ -1,0 +1,953 @@
+{
+  "driver": {
+    "cold_json": "For two passes over all panel queries: normalize, load the stored JSON proof and check_certificate. No fallback SQLite readers in this separate profile.",
+    "discovery": "Deduplicate by normalized full source, then call discover(mode='indexed', **policy) once per distinct root; includes its internal check."
+  },
+  "first_trial_case_groups": {
+    "binary_direct": {
+      "discovery_seconds": 0.1377023346722126,
+      "probe_attempts": 1334,
+      "queries": 27
+    },
+    "binary_miss": {
+      "discovery_seconds": 0.23410829063504934,
+      "probe_attempts": 3782,
+      "queries": 21
+    }
+  },
+  "panel": {
+    "path": "experiments/results/cnf-probe-buckets/panel.json",
+    "sha256": "3d50eeee00bcb6b7bcf9b809a525bd4a8ede3c4e3b333777a66b06a3a72987c8"
+  },
+  "phases": {
+    "cold_json": {
+      "seconds": 0.9962335000745952,
+      "top_cumulative": [
+        {
+          "calls": 96,
+          "cumulative_seconds": 0.927843292,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_buckets.py",
+          "function": "check_certificate",
+          "line": 175,
+          "primitive_calls": 96,
+          "self_seconds": 0.01053195
+        },
+        {
+          "calls": 1616,
+          "cumulative_seconds": 0.373104676,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "normalize",
+          "line": 20,
+          "primitive_calls": 1616,
+          "self_seconds": 0.147645236
+        },
+        {
+          "calls": 210,
+          "cumulative_seconds": 0.327746376,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_semantic_buckets.py",
+          "function": "check_certificate",
+          "line": 114,
+          "primitive_calls": 210,
+          "self_seconds": 0.07833506100000001
+        },
+        {
+          "calls": 232,
+          "cumulative_seconds": 0.29162354700000004,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_buckets.py",
+          "function": "replay_edge",
+          "line": 111,
+          "primitive_calls": 232,
+          "self_seconds": 0.0014975210000000001
+        },
+        {
+          "calls": 588,
+          "cumulative_seconds": 0.23278804900000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_relation_buckets.py",
+          "function": "replay",
+          "line": 14,
+          "primitive_calls": 588,
+          "self_seconds": 0.006020978000000001
+        },
+        {
+          "calls": 189724,
+          "cumulative_seconds": 0.18455974900000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_semantic_buckets.py",
+          "function": "evaluate",
+          "line": 55,
+          "primitive_calls": 189724,
+          "self_seconds": 0.058944001
+        },
+        {
+          "calls": 222380,
+          "cumulative_seconds": 0.147586626,
+          "file": "~",
+          "function": "<built-in method builtins.sorted>",
+          "line": 0,
+          "primitive_calls": 128468,
+          "self_seconds": 0.069923102
+        },
+        {
+          "calls": 232,
+          "cumulative_seconds": 0.136771042,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_iterated_forcing.py",
+          "function": "replay_edge",
+          "line": 42,
+          "primitive_calls": 232,
+          "self_seconds": 0.000558161
+        },
+        {
+          "calls": 198062,
+          "cumulative_seconds": 0.130090705,
+          "file": "~",
+          "function": "<built-in method builtins.sum>",
+          "line": 0,
+          "primitive_calls": 198062,
+          "self_seconds": 0.061563347000000004
+        },
+        {
+          "calls": 1350,
+          "cumulative_seconds": 0.12551705100000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "restrict_scan",
+          "line": 63,
+          "primitive_calls": 1350,
+          "self_seconds": 0.062114195000000004
+        },
+        {
+          "calls": 232,
+          "cumulative_seconds": 0.100793828,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_relation_buckets.py",
+          "function": "replay_edge",
+          "line": 102,
+          "primitive_calls": 232,
+          "self_seconds": 0.000440107
+        },
+        {
+          "calls": 184,
+          "cumulative_seconds": 0.078773168,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_conditioned_buckets.py",
+          "function": "cofactor",
+          "line": 22,
+          "primitive_calls": 184,
+          "self_seconds": 0.000494242
+        },
+        {
+          "calls": 849036,
+          "cumulative_seconds": 0.066217628,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_semantic_buckets.py",
+          "function": "<genexpr>",
+          "line": 56,
+          "primitive_calls": 849036,
+          "self_seconds": 0.066217628
+        },
+        {
+          "calls": 1527770,
+          "cumulative_seconds": 0.062846082,
+          "file": "~",
+          "function": "<built-in method builtins.abs>",
+          "line": 0,
+          "primitive_calls": 1527770,
+          "self_seconds": 0.062846082
+        },
+        {
+          "calls": 382984,
+          "cumulative_seconds": 0.050724307,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 39,
+          "primitive_calls": 382984,
+          "self_seconds": 0.038390017000000005
+        },
+        {
+          "calls": 376,
+          "cumulative_seconds": 0.041005338,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_buckets.py",
+          "function": "edge_model",
+          "line": 194,
+          "primitive_calls": 376,
+          "self_seconds": 0.000115617
+        },
+        {
+          "calls": 376,
+          "cumulative_seconds": 0.040889721000000004,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_buckets.py",
+          "function": "relation_restore",
+          "line": 126,
+          "primitive_calls": 376,
+          "self_seconds": 0.000161113
+        },
+        {
+          "calls": 496,
+          "cumulative_seconds": 0.040618302,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_relation_buckets.py",
+          "function": "restore",
+          "line": 36,
+          "primitive_calls": 496,
+          "self_seconds": 0.007436823
+        },
+        {
+          "calls": 950,
+          "cumulative_seconds": 0.038278325,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_buckets.py",
+          "function": "check_probe",
+          "line": 67,
+          "primitive_calls": 950,
+          "self_seconds": 0.020743838
+        },
+        {
+          "calls": 644,
+          "cumulative_seconds": 0.038042885000000005,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "holds",
+          "line": 75,
+          "primitive_calls": 644,
+          "self_seconds": 0.0026522380000000003
+        },
+        {
+          "calls": 234408,
+          "cumulative_seconds": 0.031342399,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 68,
+          "primitive_calls": 234408,
+          "self_seconds": 0.023935349
+        },
+        {
+          "calls": 391544,
+          "cumulative_seconds": 0.031328596,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 30,
+          "primitive_calls": 391544,
+          "self_seconds": 0.031328596
+        },
+        {
+          "calls": 96,
+          "cumulative_seconds": 0.030280205,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_subsumption_transfer.py",
+          "function": "load",
+          "line": 54,
+          "primitive_calls": 96,
+          "self_seconds": 0.00019134300000000001
+        },
+        {
+          "calls": 214,
+          "cumulative_seconds": 0.029678929000000003,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_iterated_forcing.py",
+          "function": "relation_restore",
+          "line": 60,
+          "primitive_calls": 214,
+          "self_seconds": 9.139e-05
+        },
+        {
+          "calls": 214,
+          "cumulative_seconds": 0.028940915,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_relation_buckets.py",
+          "function": "relation_restore",
+          "line": 69,
+          "primitive_calls": 214,
+          "self_seconds": 0.001127823
+        }
+      ],
+      "top_self": [
+        {
+          "calls": 1616,
+          "cumulative_seconds": 0.373104676,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "normalize",
+          "line": 20,
+          "primitive_calls": 1616,
+          "self_seconds": 0.147645236
+        },
+        {
+          "calls": 210,
+          "cumulative_seconds": 0.327746376,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_semantic_buckets.py",
+          "function": "check_certificate",
+          "line": 114,
+          "primitive_calls": 210,
+          "self_seconds": 0.07833506100000001
+        },
+        {
+          "calls": 222380,
+          "cumulative_seconds": 0.147586626,
+          "file": "~",
+          "function": "<built-in method builtins.sorted>",
+          "line": 0,
+          "primitive_calls": 128468,
+          "self_seconds": 0.069923102
+        },
+        {
+          "calls": 849036,
+          "cumulative_seconds": 0.066217628,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_semantic_buckets.py",
+          "function": "<genexpr>",
+          "line": 56,
+          "primitive_calls": 849036,
+          "self_seconds": 0.066217628
+        },
+        {
+          "calls": 1527770,
+          "cumulative_seconds": 0.062846082,
+          "file": "~",
+          "function": "<built-in method builtins.abs>",
+          "line": 0,
+          "primitive_calls": 1527770,
+          "self_seconds": 0.062846082
+        },
+        {
+          "calls": 1350,
+          "cumulative_seconds": 0.12551705100000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "restrict_scan",
+          "line": 63,
+          "primitive_calls": 1350,
+          "self_seconds": 0.062114195000000004
+        },
+        {
+          "calls": 198062,
+          "cumulative_seconds": 0.130090705,
+          "file": "~",
+          "function": "<built-in method builtins.sum>",
+          "line": 0,
+          "primitive_calls": 198062,
+          "self_seconds": 0.061563347000000004
+        },
+        {
+          "calls": 189724,
+          "cumulative_seconds": 0.18455974900000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_semantic_buckets.py",
+          "function": "evaluate",
+          "line": 55,
+          "primitive_calls": 189724,
+          "self_seconds": 0.058944001
+        },
+        {
+          "calls": 382984,
+          "cumulative_seconds": 0.050724307,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 39,
+          "primitive_calls": 382984,
+          "self_seconds": 0.038390017000000005
+        },
+        {
+          "calls": 391544,
+          "cumulative_seconds": 0.031328596,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 30,
+          "primitive_calls": 391544,
+          "self_seconds": 0.031328596
+        },
+        {
+          "calls": 391544,
+          "cumulative_seconds": 0.028666196,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 33,
+          "primitive_calls": 391544,
+          "self_seconds": 0.028666196
+        },
+        {
+          "calls": 234408,
+          "cumulative_seconds": 0.031342399,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 68,
+          "primitive_calls": 234408,
+          "self_seconds": 0.023935349
+        },
+        {
+          "calls": 950,
+          "cumulative_seconds": 0.038278325,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_buckets.py",
+          "function": "check_probe",
+          "line": 67,
+          "primitive_calls": 950,
+          "self_seconds": 0.020743838
+        },
+        {
+          "calls": 200880,
+          "cumulative_seconds": 0.02494557,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 71,
+          "primitive_calls": 200880,
+          "self_seconds": 0.018957274
+        },
+        {
+          "calls": 241662,
+          "cumulative_seconds": 0.016459815000000003,
+          "file": "~",
+          "function": "<method 'append' of 'list' objects>",
+          "line": 0,
+          "primitive_calls": 241662,
+          "self_seconds": 0.016459815000000003
+        },
+        {
+          "calls": 260,
+          "cumulative_seconds": 0.026219246,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_relation_buckets.py",
+          "function": "clean_quotient",
+          "line": 59,
+          "primitive_calls": 260,
+          "self_seconds": 0.015233009
+        },
+        {
+          "calls": 102878,
+          "cumulative_seconds": 0.020449378,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 76,
+          "primitive_calls": 102878,
+          "self_seconds": 0.014223547000000001
+        },
+        {
+          "calls": 96,
+          "cumulative_seconds": 0.013405748,
+          "file": "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py",
+          "function": "raw_decode",
+          "line": 351,
+          "primitive_calls": 96,
+          "self_seconds": 0.013405748
+        },
+        {
+          "calls": 96,
+          "cumulative_seconds": 0.01223542,
+          "file": "~",
+          "function": "<method 'read' of '_io.TextIOWrapper' objects>",
+          "line": 0,
+          "primitive_calls": 96,
+          "self_seconds": 0.011877422
+        },
+        {
+          "calls": 229562,
+          "cumulative_seconds": 0.011471164,
+          "file": "~",
+          "function": "<built-in method builtins.len>",
+          "line": 0,
+          "primitive_calls": 229562,
+          "self_seconds": 0.011471164
+        },
+        {
+          "calls": 96,
+          "cumulative_seconds": 0.927843292,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_buckets.py",
+          "function": "check_certificate",
+          "line": 175,
+          "primitive_calls": 96,
+          "self_seconds": 0.01053195
+        },
+        {
+          "calls": 116138,
+          "cumulative_seconds": 0.010183158000000001,
+          "file": "~",
+          "function": "<method 'add' of 'set' objects>",
+          "line": 0,
+          "primitive_calls": 116138,
+          "self_seconds": 0.010183158000000001
+        },
+        {
+          "calls": 700,
+          "cumulative_seconds": 0.012425303,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_iterated_forcing.py",
+          "function": "variables",
+          "line": 18,
+          "primitive_calls": 700,
+          "self_seconds": 0.0077912630000000005
+        },
+        {
+          "calls": 496,
+          "cumulative_seconds": 0.040618302,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_relation_buckets.py",
+          "function": "restore",
+          "line": 36,
+          "primitive_calls": 496,
+          "self_seconds": 0.007436823
+        },
+        {
+          "calls": 588,
+          "cumulative_seconds": 0.23278804900000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_relation_buckets.py",
+          "function": "replay",
+          "line": 14,
+          "primitive_calls": 588,
+          "self_seconds": 0.006020978000000001
+        }
+      ]
+    },
+    "discovery": {
+      "seconds": 1.0613637920469046,
+      "top_cumulative": [
+        {
+          "calls": 44,
+          "cumulative_seconds": 1.0439997490000001,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_buckets.py",
+          "function": "discover",
+          "line": 133,
+          "primitive_calls": 44,
+          "self_seconds": 0.0037038640000000003
+        },
+        {
+          "calls": 112,
+          "cumulative_seconds": 0.549976585,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_buckets.py",
+          "function": "visit",
+          "line": 139,
+          "primitive_calls": 44,
+          "self_seconds": 0.0026716170000000003
+        },
+        {
+          "calls": 44,
+          "cumulative_seconds": 0.435816835,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_buckets.py",
+          "function": "check_certificate",
+          "line": 175,
+          "primitive_calls": 44,
+          "self_seconds": 0.0052905040000000006
+        },
+        {
+          "calls": 1480,
+          "cumulative_seconds": 0.333264243,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "normalize",
+          "line": 20,
+          "primitive_calls": 1480,
+          "self_seconds": 0.131940572
+        },
+        {
+          "calls": 112,
+          "cumulative_seconds": 0.24729341600000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_buckets.py",
+          "function": "prepare_edge",
+          "line": 87,
+          "primitive_calls": 112,
+          "self_seconds": 0.00590041
+        },
+        {
+          "calls": 166,
+          "cumulative_seconds": 0.227507742,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_semantic_buckets.py",
+          "function": "check_certificate",
+          "line": 114,
+          "primitive_calls": 166,
+          "self_seconds": 0.056011032
+        },
+        {
+          "calls": 101,
+          "cumulative_seconds": 0.21178395800000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_semantic_buckets.py",
+          "function": "discover",
+          "line": 65,
+          "primitive_calls": 101,
+          "self_seconds": 0.014490753
+        },
+        {
+          "calls": 210865,
+          "cumulative_seconds": 0.154123946,
+          "file": "~",
+          "function": "<built-in method builtins.sorted>",
+          "line": 0,
+          "primitive_calls": 126830,
+          "self_seconds": 0.068702702
+        },
+        {
+          "calls": 206402,
+          "cumulative_seconds": 0.14856870700000002,
+          "file": "~",
+          "function": "<built-in method builtins.sum>",
+          "line": 0,
+          "primitive_calls": 206402,
+          "self_seconds": 0.06719217100000001
+        },
+        {
+          "calls": 112,
+          "cumulative_seconds": 0.142563254,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_buckets.py",
+          "function": "replay_edge",
+          "line": 111,
+          "primitive_calls": 112,
+          "self_seconds": 0.000740697
+        },
+        {
+          "calls": 135512,
+          "cumulative_seconds": 0.13081626200000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_semantic_buckets.py",
+          "function": "evaluate",
+          "line": 55,
+          "primitive_calls": 135512,
+          "self_seconds": 0.041851789
+        },
+        {
+          "calls": 284,
+          "cumulative_seconds": 0.11291453800000001,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_relation_buckets.py",
+          "function": "replay",
+          "line": 14,
+          "primitive_calls": 284,
+          "self_seconds": 0.0028732890000000002
+        },
+        {
+          "calls": 112,
+          "cumulative_seconds": 0.10403237200000001,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_iterated_forcing.py",
+          "function": "prepare_edge",
+          "line": 21,
+          "primitive_calls": 112,
+          "self_seconds": 0.00063634
+        },
+        {
+          "calls": 112,
+          "cumulative_seconds": 0.086331079,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_relation_buckets.py",
+          "function": "prepare_edge",
+          "line": 81,
+          "primitive_calls": 112,
+          "self_seconds": 0.001421619
+        },
+        {
+          "calls": 184,
+          "cumulative_seconds": 0.07957515500000001,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_conditioned_buckets.py",
+          "function": "cofactor",
+          "line": 22,
+          "primitive_calls": 184,
+          "self_seconds": 0.000518202
+        },
+        {
+          "calls": 757,
+          "cumulative_seconds": 0.07831410600000001,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "restrict_scan",
+          "line": 63,
+          "primitive_calls": 757,
+          "self_seconds": 0.038213312
+        },
+        {
+          "calls": 284,
+          "cumulative_seconds": 0.070288046,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_symbolic_buckets.py",
+          "function": "preprocess",
+          "line": 24,
+          "primitive_calls": 284,
+          "self_seconds": 0.008121741
+        },
+        {
+          "calls": 112,
+          "cumulative_seconds": 0.06576950000000001,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_iterated_forcing.py",
+          "function": "replay_edge",
+          "line": 42,
+          "primitive_calls": 112,
+          "self_seconds": 0.000267467
+        },
+        {
+          "calls": 5116,
+          "cumulative_seconds": 0.063251769,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_buckets.py",
+          "function": "indexed_probe",
+          "line": 42,
+          "primitive_calls": 5116,
+          "self_seconds": 0.043334524
+        },
+        {
+          "calls": 1356497,
+          "cumulative_seconds": 0.057269324,
+          "file": "~",
+          "function": "<built-in method builtins.abs>",
+          "line": 0,
+          "primitive_calls": 1356497,
+          "self_seconds": 0.057269324
+        },
+        {
+          "calls": 112,
+          "cumulative_seconds": 0.048873998,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_relation_buckets.py",
+          "function": "replay_edge",
+          "line": 102,
+          "primitive_calls": 112,
+          "self_seconds": 0.000207037
+        },
+        {
+          "calls": 327,
+          "cumulative_seconds": 0.048017624,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_semantic_buckets.py",
+          "function": "project",
+          "line": 18,
+          "primitive_calls": 327,
+          "self_seconds": 0.019052259000000002
+        },
+        {
+          "calls": 602600,
+          "cumulative_seconds": 0.046920156000000005,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_semantic_buckets.py",
+          "function": "<genexpr>",
+          "line": 56,
+          "primitive_calls": 602600,
+          "self_seconds": 0.046920156000000005
+        },
+        {
+          "calls": 21911,
+          "cumulative_seconds": 0.045242437,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_symbolic_buckets.py",
+          "function": "add",
+          "line": 28,
+          "primitive_calls": 21911,
+          "self_seconds": 0.030140345000000002
+        },
+        {
+          "calls": 341934,
+          "cumulative_seconds": 0.045230485,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 39,
+          "primitive_calls": 341934,
+          "self_seconds": 0.034215047000000005
+        }
+      ],
+      "top_self": [
+        {
+          "calls": 1480,
+          "cumulative_seconds": 0.333264243,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "normalize",
+          "line": 20,
+          "primitive_calls": 1480,
+          "self_seconds": 0.131940572
+        },
+        {
+          "calls": 210865,
+          "cumulative_seconds": 0.154123946,
+          "file": "~",
+          "function": "<built-in method builtins.sorted>",
+          "line": 0,
+          "primitive_calls": 126830,
+          "self_seconds": 0.068702702
+        },
+        {
+          "calls": 206402,
+          "cumulative_seconds": 0.14856870700000002,
+          "file": "~",
+          "function": "<built-in method builtins.sum>",
+          "line": 0,
+          "primitive_calls": 206402,
+          "self_seconds": 0.06719217100000001
+        },
+        {
+          "calls": 1356497,
+          "cumulative_seconds": 0.057269324,
+          "file": "~",
+          "function": "<built-in method builtins.abs>",
+          "line": 0,
+          "primitive_calls": 1356497,
+          "self_seconds": 0.057269324
+        },
+        {
+          "calls": 166,
+          "cumulative_seconds": 0.227507742,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_semantic_buckets.py",
+          "function": "check_certificate",
+          "line": 114,
+          "primitive_calls": 166,
+          "self_seconds": 0.056011032
+        },
+        {
+          "calls": 602600,
+          "cumulative_seconds": 0.046920156000000005,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_semantic_buckets.py",
+          "function": "<genexpr>",
+          "line": 56,
+          "primitive_calls": 602600,
+          "self_seconds": 0.046920156000000005
+        },
+        {
+          "calls": 5116,
+          "cumulative_seconds": 0.063251769,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_buckets.py",
+          "function": "indexed_probe",
+          "line": 42,
+          "primitive_calls": 5116,
+          "self_seconds": 0.043334524
+        },
+        {
+          "calls": 135512,
+          "cumulative_seconds": 0.13081626200000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_semantic_buckets.py",
+          "function": "evaluate",
+          "line": 55,
+          "primitive_calls": 135512,
+          "self_seconds": 0.041851789
+        },
+        {
+          "calls": 757,
+          "cumulative_seconds": 0.07831410600000001,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "restrict_scan",
+          "line": 63,
+          "primitive_calls": 757,
+          "self_seconds": 0.038213312
+        },
+        {
+          "calls": 341934,
+          "cumulative_seconds": 0.045230485,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 39,
+          "primitive_calls": 341934,
+          "self_seconds": 0.034215047000000005
+        },
+        {
+          "calls": 21911,
+          "cumulative_seconds": 0.045242437,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_symbolic_buckets.py",
+          "function": "add",
+          "line": 28,
+          "primitive_calls": 21911,
+          "self_seconds": 0.030140345000000002
+        },
+        {
+          "calls": 350294,
+          "cumulative_seconds": 0.028090621000000003,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 30,
+          "primitive_calls": 350294,
+          "self_seconds": 0.028090621000000003
+        },
+        {
+          "calls": 350294,
+          "cumulative_seconds": 0.025807622000000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 33,
+          "primitive_calls": 350294,
+          "self_seconds": 0.025807622000000002
+        },
+        {
+          "calls": 464920,
+          "cumulative_seconds": 0.02268496,
+          "file": "~",
+          "function": "<built-in method builtins.len>",
+          "line": 0,
+          "primitive_calls": 464920,
+          "self_seconds": 0.02268496
+        },
+        {
+          "calls": 950,
+          "cumulative_seconds": 0.038719319,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_probe_buckets.py",
+          "function": "check_probe",
+          "line": 67,
+          "primitive_calls": 950,
+          "self_seconds": 0.020924482
+        },
+        {
+          "calls": 266191,
+          "cumulative_seconds": 0.020524425000000002,
+          "file": "~",
+          "function": "<method 'add' of 'set' objects>",
+          "line": 0,
+          "primitive_calls": 266191,
+          "self_seconds": 0.020524425000000002
+        },
+        {
+          "calls": 327,
+          "cumulative_seconds": 0.048017624,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_semantic_buckets.py",
+          "function": "project",
+          "line": 18,
+          "primitive_calls": 327,
+          "self_seconds": 0.019052259000000002
+        },
+        {
+          "calls": 238288,
+          "cumulative_seconds": 0.016125657,
+          "file": "~",
+          "function": "<method 'append' of 'list' objects>",
+          "line": 0,
+          "primitive_calls": 238288,
+          "self_seconds": 0.016125657
+        },
+        {
+          "calls": 146965,
+          "cumulative_seconds": 0.02011446,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 68,
+          "primitive_calls": 146965,
+          "self_seconds": 0.015354739000000001
+        },
+        {
+          "calls": 256,
+          "cumulative_seconds": 0.025716158000000003,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_relation_buckets.py",
+          "function": "clean_quotient",
+          "line": 59,
+          "primitive_calls": 256,
+          "self_seconds": 0.014975838000000002
+        },
+        {
+          "calls": 46268,
+          "cumulative_seconds": 0.014953161000000001,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_semantic_buckets.py",
+          "function": "<genexpr>",
+          "line": 83,
+          "primitive_calls": 46268,
+          "self_seconds": 0.014953161000000001
+        },
+        {
+          "calls": 204447,
+          "cumulative_seconds": 0.014571931000000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_semantic_buckets.py",
+          "function": "<genexpr>",
+          "line": 26,
+          "primitive_calls": 204447,
+          "self_seconds": 0.014571931000000002
+        },
+        {
+          "calls": 101,
+          "cumulative_seconds": 0.21178395800000002,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_semantic_buckets.py",
+          "function": "discover",
+          "line": 65,
+          "primitive_calls": 101,
+          "self_seconds": 0.014490753
+        },
+        {
+          "calls": 123422,
+          "cumulative_seconds": 0.015670937,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 71,
+          "primitive_calls": 123422,
+          "self_seconds": 0.01191003
+        },
+        {
+          "calls": 82668,
+          "cumulative_seconds": 0.016432847,
+          "file": "/Users/maier/Documents/code/OracleMachines/experiments/cnf_residual_dag.py",
+          "function": "<genexpr>",
+          "line": 76,
+          "primitive_calls": 82668,
+          "self_seconds": 0.011392393
+        }
+      ]
+    }
+  },
+  "probe_diagnostics": {
+    "edges": 112,
+    "max_rounds": 5,
+    "max_spent": 128,
+    "reasons": {
+      "constant": 45,
+      "no-failed-literal": 65,
+      "probe-limit": 2
+    }
+  },
+  "report": {
+    "path": "experiments/results/cnf-probe-buckets/indexed-0/report.json",
+    "sha256": "11308426990c9a84c968746797d3ba010fdc04c692c069922616be435df2804b"
+  },
+  "scope": "Post-hoc cProfile attribution only, separately charged, with full-suite validation running concurrently. Instrumented timings are not matched-trial speedups; cumulative entries overlap."
+}

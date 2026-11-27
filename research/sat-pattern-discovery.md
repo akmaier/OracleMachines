@@ -5,7 +5,28 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: repeated forcing and the wide-clause gap
+## Latest evidence: full-CNF probes with a shared occurrence index
+
+[Checked failed-assumption closure](probe-bucket-discovery.md) certifies **19/20**
+exposed misses and raises new unique-panel coverage **23/24 to 24/24**, with all
+four repeats covered and no losses: **47/48** queries avoid fallback. Complete
+cost falls **37.23%** versus repeated binary forcing. Indexed propagation saves
+**12.89%** versus full scans; that comparison includes both traversal and index
+reuse. The pipeline remains **1.67 times fresh**, so defaults stay unchanged.
+The fallback already decides all queries; synthetic coverage is not arbitrary
+SAT coverage. Foldable wide controls are retained with their limitation.
+
+One SAT root remains, with two width-nine leaves and no failed assumptions in
+68 untruncated diagnostic probes. One newly exposed signed-equivalence block
+merges two variables. **Next coverage target: compose relation substitution after
+probe consequences**, checked against bounded ordering/width controls and fresh
+nonfolding mixtures. Discovery and cold replay now dominate cost; normalization
+and repeated certificate reconstruction are the leading reuse targets. Full
+reasoning and evidence: [probe discovery record](probe-bucket-discovery.md).
+Resume `experiments/results/cnf-probe-buckets/checkpoint.json`.
+All **2,312 full and 36 focused tests pass**; prior results remain preserved.
+
+## Previous evidence: repeated forcing and the wide-clause gap
 
 [Bounded repeated forcing](iterated-forcing-discovery.md) certifies **6/24**
 exposed misses (three SAT, three UNSAT), while new unique coverage stays **22/24**

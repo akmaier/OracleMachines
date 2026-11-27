@@ -15603,6 +15603,178 @@ failed-literal closure, charging unsuccessful probes, repeated scans, exact
 round transport and cold verification.  General wide interactions and efficient
 unrestricted SAT coverage remain open.
 
+\subsection{Full-CNF failed assumptions and shared propagation indexes}
+\label{sec:probe-buckets}
+
+The next experiment implements the full-CNF consequence rule suggested by the
+preceding diagnostic.  After the existing unit, signed-relation and repeated
+binary preparation, it probes active literals with unit propagation over all
+clauses.  Failed-literal reasoning is an exact consequence rule; the contribution
+here is its bounded integration, source-only replay, model transport and measured
+reuse within this research pipeline.  A probe without conflict is not a SAT
+certificate.
+
+\begin{proposition}[Checked failed assumptions with reusable incidence]
+Let $F$ be a normalized CNF, and suppose unit propagation from an assumption $a$
+has a trace in which each propagated literal is the unique unassigned literal
+of a nonsatisfied source clause, followed by an entirely false source clause.
+Then $F\models\neg a$.  Adding any collection of such checked consequences,
+restricting by verified units and retaining inverse normalization maps preserves
+satisfiability and permits model lifting.  Repeating this operation only after
+strict active-variable decrease admits at most $n$ accepted rounds for $n$
+incoming variables, including a possible final nonprogressing round and excluding
+rounds on constants.
+
+For a fixed round CNF with $L$ literal occurrences, $m$ clauses and $n$ variables,
+an immutable literal-occurrence index can serve every probe.  With private
+assignment, satisfied-clause and pending-count state, index preparation costs
+$O(L+m)$ time and space, and each probe costs $O(L+m+n)$ in a unit-cost model
+with constant-time map access, including unit-reason scans.  This bound concerns
+local propagation, not complete SAT solving or certificate replay.
+\end{proposition}
+\begin{proof}
+Every model of $F$ satisfying $a$ must satisfy the first propagated literal,
+since its other reason literals are false.  Inducting along the checked trace
+forces every subsequent literal.  The final false clause contradicts such a
+model.  Thus $F\land a$ is unsatisfiable and $F\models\neg a$.  Adding verified
+consequences leaves the model set unchanged.  Each checked unit restriction and
+inverse normalization supplies the preceding exact transport identity, so their
+composition lifts any residual model and preserves refutation.  Strict variable
+decrease bounds productive rounds; once all variables disappear the formula is
+constant, and otherwise at most $n-1$ productive rounds precede a final
+nonprogressing one.
+
+Build the occurrence lists and initial-unit list once.  During a probe, processing
+a literal marks its true-occurrence clauses satisfied and decreases the pending
+count for its false occurrences.  A nonsatisfied clause with zero pending
+literals is a conflict; one pending literal supplies a unit reason.  Induction
+over processed assignments preserves these counts and the satisfied markers.
+Private state prevents one assumption from influencing another.  A variable is
+assigned at most once, each occurrence is processed at most once, and each clause
+crosses the unit threshold at most once, so the combined reason scans cost at
+most $L$.  Initial units, queues and sparse state add at most $O(m+n)$.  These
+facts prove the local bound and exact reuse for the unchanged round CNF.  Source
+edits, restriction or renaming require rebuilding or independently validating
+the index.  No claim follows about the size or difficulty of general residual
+SAT instances.
+\end{proof}
+
+The scan control repeatedly traverses all source clauses, with a local
+$O((n+1)(L+m))$ worst-case bound.  The indexed variant uses the shared occurrence
+lists but retains private queues and assignments per probe.  These variants
+therefore differ in both traversal and setup reuse; their timing comparison does
+not isolate the benefit of sharing an otherwise identical indexed engine.
+Integer bit costs, normalization and transport are additional to the unit-cost
+bounds.  The independent checker never uses the discovered index: it reconstructs
+the source, fixes the recorded assumption, checks each unit reason and checks
+the conflict.  It also rebuilds the active-variable set for every failed probe,
+so replay includes a full source scan as well as reason literals.  The reported
+reason-literal counter does not cover that scan, but measured time does.
+
+Discovery attempts at most 128 probes cumulatively per incoming cofactor and
+allows at most eight probe rounds.  Failed and nonfailed attempts both consume
+the quota.  Replay bounds stored failures; it does not reconstruct unrecorded
+unsuccessful attempts.  Earlier binary rounds keep their separate eight-round
+and 262,144-edge allowances.  Each unit invocation has 512 steps and 262,144
+reserved index-work units; bucket nodes retain depth two, width eight and a
+262,144-probe allowance.  These are not wall-time or RAM caps, and there is no
+per-probe work cutoff.  Partial processing remains exact without claiming a
+fixed point.  Conditioning is still exponentially branching as depth grows.
+
+Round certificates retain failed-assumption reasons, unit values and inverse
+renamings.  Lifting reverses these maps before the preceding relation maps.
+Every SAT incoming transport is checked, and a split refutation still requires
+both exact children.  Full normalized residual and remaining depth identify
+reusable nodes under fixed policy, while incoming histories remain separate.
+Whole-root programs share within a stream and are checked on warm and cold use.
+The binary control is audited against the preceding closure implementation by
+lossless proof translation.  Scan and indexed proofs agree in residual graph,
+failed-assumption sets, unit steps and verdicts; reason traces can differ.
+No native, equivalence, affine or Lean format changes.
+
+The frozen panel contains twenty exposed unique sources, twenty-four new
+constructions and four repeats: twenty-six SAT and twenty-two UNSAT queries.
+New controls include growing random three-CNFs, failure motifs with a deleted
+terminal clause, parity prisms and modules with compatible or opposed clauses.
+Names, signs and order are scrambled, and labels are audit-only.  No new
+normalized source duplicates the parent panel.  One limitation is retained:
+the constructed wide-failure motifs contain complementary clauses, so existing
+folding can turn them into binary constraints.  Their coverage cannot be credited
+to genuinely new wide reasoning.  A separate nonfolding five-variable test uses
+$(\neg x\lor a)$, $(\neg x\lor b)$, $(\neg a\lor\neg b\lor c)$,
+$(\neg a\lor\neg b\lor d)$ and $(\neg c\lor\neg d)$.  Assuming $x$ forces
+$a,b,c,d$ and a conflict although binary reachability alone forces nothing.
+Deleting the last clause invalidates this certificate.  Synthetic controls remain
+insufficient for representative arbitrary-SAT coverage claims.
+
+Full-CNF probing certifies nineteen of twenty exposed gaps, thirteen SAT and six
+UNSAT, and raises new unique coverage from $23/24$ to $24/24$.  All four repeats
+remain covered; no loss is observed.  Thus $47/48$ queries avoid fallback, which
+already supplies all answers.  Four cyclic orders run fresh, binary, scan and
+indexed modes in fresh processes.  Mean complete times are $0.68633$, $1.83009$,
+$1.31870$ and $1.14876$ seconds.  Scans save $27.94\%$ against binary closure;
+indexed propagation saves another $12.89\%$ against scans and $37.23\%$ overall.
+All paired reductions are positive: indexed versus scan ranges from $11.90\%$
+to $13.43\%$, and indexed versus binary from $36.71\%$ to $37.52\%$.  Indexed
+still costs $1.67$ times fresh, so production defaults stay unchanged.  Complete
+cost charges preparation, discovery, checking, writes, warm/cold replay and
+compression.  Startup, metadata, generation, historical acquisition, post-hoc
+profiles and final lineage audit are additional.
+
+Bucket nodes fall from 158 to 101 and split nodes from 71 to 34, but elimination
+steps rise from 272 to 327: useful preprocessing can expose more feasible bucket
+work.  The indexed certificates contain 84 probe rounds, 475 failed assumptions,
+418 ensuing unit steps and at most four accepted rounds per edge.  Their 3,838
+reason steps occupy 64,110 compact probe-round bytes; scans use 4,620 steps and
+70,075 bytes.  Different propagation order shortens these traces on this panel,
+without a general compression guarantee.  Both probe arms have eleven shared
+targets and six distinct-raw joins, all constant.  No new nonconstant semantic
+sharing is established.
+
+Both arms attempt 5,116 probes.  Indexed preparation builds 151 indexes with
+26,573 setup-literal visits, followed by 124,804 occurrence visits and 25,364
+unit-reason literal scans.  The scan arm charges 1,455,513 literal visits.
+These counters measure different operations, not interchangeable time units.
+Acquisition checks visit 31,959 reason/conflict literals indexed versus 38,364
+scan; additional checker scans are included in time.  Forty-five edges stop
+constant, 65 without another failure and two at the probe limit.  The capped
+edges belong to a source that the pipeline certifies.  The remaining miss reaches
+neither cap, so a larger allowance does not account for its failure.
+
+Raw certificate bytes are $3,210,867$ binary, $2,399,422$ scan and $2,337,285$
+indexed.  Native record bytes are $910,854$ fresh, $636,170$ binary and $18,445$
+in each probe arm.  Combined compressed SQLite/JSON packages occupy $178,225$,
+$177,387$, $62,907$ and $61,437$ bytes respectively.  Diagnostic bytes are
+separately $0$, $144,342$, $119,268$ and $119,268$.  Peak RSS is $71,876,608$,
+$71,270,400$, $60,489,728$ and $60,407,808$ bytes, a process-level observation
+rather than a memory bound.  Historical copies and container overhead are extra.
+Indexed discovery, solve/check, warm and cold phases take $0.37682$, $0.16409$,
+$0.17441$ and $0.36359$ seconds.  Both native readers audit fallback archives;
+two JSON replay passes share one checker, not independent implementations.
+
+One satisfiable 23-variable source remains structurally open.  Its two unresolved
+depth-zero leaves stop at width nine after 4,544 and 1,216 bucket probes.  Separate
+checked diagnostics find no units, disconnected components, Horn/dual-Horn form,
+binary conflict or forcing, and zero failed assumptions among 68 untruncated
+full-CNF probes.  One signed-equivalence block merges two variables.  The
+structural and probe diagnostics cost $0.00120$ and $0.00512$ seconds respectively
+and supply no additional root verdict.  Next test relation substitution after
+probe consequences, preserving progress and transport, against bounded ordering
+and width controls on this source and new nonfolding inputs.
+
+Discovery, including its internal check, and cold replay now dominate matched
+cost.  Separately charged profiling identifies normalization, bucket verification
+and restriction scans as leading work.  Its instrumented discovery and two-pass
+JSON costs are $1.06136$ and $0.99623$ seconds; concurrent full-suite validation
+and overlapping cumulative entries preclude using these as matched speedups.
+Reusing verified normalized state and intermediate residuals within one replay
+is the next cost target, with explicit source validation and invalidation.  A
+selective probe gate is another hypothesis: the first indexed trial uses 1,334
+probes on 27 queries the binary baseline already certifies, but obtaining that
+gate may itself duplicate discovery.  Neither bounded propagation, empirical
+coverage nor smaller certificates establishes efficient unrestricted SAT or
+compact closure.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

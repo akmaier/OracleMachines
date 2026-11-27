@@ -12,7 +12,32 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: repeated forcing before expansion
+## Current investigation: full-CNF consequences and reusable propagation indexes
+
+[Source-checked failed assumptions](probe-bucket-discovery.md) certify **19/20**
+exposed gaps and all **24/24** new constructions, with four repeats covered.
+Complete cost is **37.23% lower** than repeated binary closure; indexed propagation
+saves **12.89%** against full scans but remains **1.67 times fresh**. Production
+defaults stay unchanged. Index setup is shared across 5,116 probes in 151 rounds;
+propagation traces, per-probe state and incoming model transport stay separate.
+Combined compressed SQLite/JSON falls **177,387 to 61,437 bytes** versus binary.
+The frozen foldable-wide-control limitation and all regressions are preserved.
+
+**Next coverage target:** checked relation substitution after probe consequences,
+with progress and transport, versus bounded ordering/width controls on the last
+23-variable SAT root and new nonfolding controls. Its two width-nine leaves have
+no failed single assumption; one additional alias block merges two variables.
+More probing alone has weak evidence. **Largest costs:** discovery 0.37682 s
+(including checking) and cold replay 0.36359 s. Profiling points to normalization,
+bucket verification and restriction; reuse verified intermediate state within
+one replay before expanding persistence or bypassing source checks. A selective
+probe gate is a further hypothesis, with its own discovery cost to charge.
+Resume `experiments/results/cnf-probe-buckets/checkpoint.json`, key
+`probe_buckets.remaining`. All **2,312 full and 36 focused tests pass**; prior
+231 manifests, 43,681 artifact entries, 1,268 sources and 73 proofs are preserved.
+No efficient unrestricted-SAT or compact-closure theorem follows.
+
+## Previous investigation: repeated forcing before expansion
 
 [Repeated binary forcing](iterated-forcing-discovery.md) certifies **6/24**
 exposed structural misses and saves **18.23%** complete cost versus one pass.

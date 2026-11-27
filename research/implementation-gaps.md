@@ -4,7 +4,25 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-## Latest checkpoint: bounded repeated binary forcing
+## Latest checkpoint: full-CNF failed assumptions and shared probe indexes
+
+[Checked full-CNF probing](probe-bucket-discovery.md) closes **19/20** exposed
+structural gaps and increases new unique coverage **23/24 to 24/24**; all four
+repeats remain covered. The 47/48 structural answers cost **37.23% less** than
+repeated binary closure, still **1.67 times fresh**. Indexed traversal and shared
+setup save **12.89%** versus repeated scans. Defaults stay unchanged. All **2,312
+full and 36 focused tests pass**; previous scientific sources and 73 proofs remain
+intact. Resume `experiments/results/cnf-probe-buckets/checkpoint.json`.
+
+The last SAT source has two width-nine unknown leaves, no remaining failed
+single assumptions and one new signed-equivalence block. Test composition of
+relation substitution after full-CNF consequences, with bounded ordering/width
+controls and new nonfolding inputs. Discovery and cold replay dominate; repeated
+normalization and certificate reconstruction are the next cost-reuse gap.
+The frozen controls' foldable-wide limitation is retained, and neither empirical
+coverage nor local propagation bounds imply efficient arbitrary SAT.
+
+## Previous checkpoint: bounded repeated binary forcing
 
 [Repeated forcing](iterated-forcing-discovery.md) certifies six of 24 exposed
 misses and lowers matched complete cost 18.23% versus one pass, still 2.56 times

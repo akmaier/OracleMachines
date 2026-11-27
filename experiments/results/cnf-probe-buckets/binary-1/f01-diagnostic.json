@@ -1,0 +1,243 @@
+{
+  "attempts": [
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "spent": 0
+      },
+      "node": 0
+    },
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "spent": 0
+      },
+      "node": 1
+    },
+    {
+      "diagnostic": {
+        "reason": "bag-width",
+        "spent": 0,
+        "width": 10
+      },
+      "node": 2
+    },
+    {
+      "diagnostic": {
+        "reason": "bag-width",
+        "spent": 512,
+        "width": 9
+      },
+      "node": 3
+    },
+    {
+      "diagnostic": {
+        "reason": "bag-width",
+        "spent": 0,
+        "width": 11
+      },
+      "node": 4
+    }
+  ],
+  "edges": [
+    {
+      "diagnostic": {
+        "binary": {
+          "reason": "constant",
+          "relation": {
+            "after_units": {
+              "reason": "fixed-point",
+              "spent": 256
+            },
+            "units": {
+              "reason": "fixed-point",
+              "spent": 161
+            }
+          },
+          "rounds": [],
+          "spent": 0
+        },
+        "probes": [],
+        "reason": "disabled",
+        "spent": 0
+      },
+      "edge": 0
+    },
+    {
+      "diagnostic": {
+        "binary": {
+          "reason": "constant",
+          "relation": {
+            "after_units": null,
+            "units": {
+              "reason": "empty-clause",
+              "spent": 339
+            }
+          },
+          "rounds": [],
+          "spent": 0
+        },
+        "probes": [],
+        "reason": "disabled",
+        "spent": 0
+      },
+      "edge": 1
+    },
+    {
+      "diagnostic": {
+        "binary": {
+          "reason": "complete",
+          "relation": {
+            "after_units": null,
+            "units": {
+              "reason": "fixed-point",
+              "spent": 155
+            }
+          },
+          "rounds": [
+            {
+              "forcing": {
+                "reason": "complete",
+                "searches": 20,
+                "spent": 50
+              }
+            }
+          ],
+          "spent": 50
+        },
+        "probes": [],
+        "reason": "disabled",
+        "spent": 0
+      },
+      "edge": 2
+    },
+    {
+      "diagnostic": {
+        "binary": {
+          "reason": "constant",
+          "relation": {
+            "after_units": null,
+            "units": {
+              "reason": "empty-clause",
+              "spent": 159
+            }
+          },
+          "rounds": [],
+          "spent": 0
+        },
+        "probes": [],
+        "reason": "disabled",
+        "spent": 0
+      },
+      "edge": 3
+    },
+    {
+      "diagnostic": {
+        "binary": {
+          "reason": "constant",
+          "relation": {
+            "after_units": {
+              "reason": "fixed-point",
+              "spent": 38
+            },
+            "units": {
+              "reason": "fixed-point",
+              "spent": 123
+            }
+          },
+          "rounds": [
+            {
+              "forcing": {
+                "reason": "complete",
+                "searches": 12,
+                "spent": 57
+              },
+              "units": {
+                "reason": "fixed-point",
+                "spent": 100
+              },
+              "variables_removed": 6
+            }
+          ],
+          "spent": 57
+        },
+        "probes": [],
+        "reason": "disabled",
+        "spent": 0
+      },
+      "edge": 4
+    },
+    {
+      "diagnostic": {
+        "binary": {
+          "reason": "complete",
+          "relation": {
+            "after_units": null,
+            "units": {
+              "reason": "fixed-point",
+              "spent": 159
+            }
+          },
+          "rounds": [
+            {
+              "forcing": {
+                "reason": "complete",
+                "searches": 26,
+                "spent": 62
+              },
+              "units": {
+                "reason": "fixed-point",
+                "spent": 223
+              },
+              "variables_removed": 2
+            },
+            {
+              "forcing": {
+                "reason": "complete",
+                "searches": 26,
+                "spent": 56
+              }
+            }
+          ],
+          "spent": 118
+        },
+        "probes": [],
+        "reason": "disabled",
+        "spent": 0
+      },
+      "edge": 5
+    },
+    {
+      "diagnostic": {
+        "binary": {
+          "reason": "complete",
+          "relation": {
+            "after_units": null,
+            "units": {
+              "reason": "fixed-point",
+              "spent": 193
+            }
+          },
+          "rounds": [
+            {
+              "forcing": {
+                "reason": "complete",
+                "searches": 8,
+                "spent": 4
+              }
+            }
+          ],
+          "spent": 4
+        },
+        "probes": [],
+        "reason": "disabled",
+        "spent": 0
+      },
+      "edge": 6
+    }
+  ],
+  "preprocessing": {
+    "reason": "fixed-point",
+    "spent": 864
+  }
+}

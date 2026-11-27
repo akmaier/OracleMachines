@@ -14899,6 +14899,133 @@ recognition and invalidation. This next step is not implemented here. Neither a
 small conditioning depth for arbitrary CNF nor a polynomial unrestricted-SAT
 bound follows. Defaults remain unchanged.
 
+\subsection{Exact symbolic preprocessing before conditioned buckets}
+\label{sec:symbolic-bucket-preprocessing}
+A subsequent experiment exposes repeated cofactors directly in the source
+clauses. It compares the preceding conditioned method, indexed unit propagation
+before that method, and unit propagation with exact complementary-clause folding.
+A fold replaces $(C\lor x)$ and $(C\lor\neg x)$ by $C$. Both complete parents
+must be active and their remainders identical. The transformation is restricted:
+replacing arbitrary resolution parents by their resolvent is unsound. For
+example, $(x\lor a)\land(\neg x\lor b)$ implies $a\lor b$, but the latter
+accepts $x=0,a=0,b=1$, which violates the first parent. The checker retains this
+counterexample and rejects unequal remainders.
+
+\begin{proposition}[Symbolic folding, unit restriction and finite preprocessing]
+Let $F$ be a normalized CNF with $m$ distinct clauses. Starting from $F$, replace
+active complementary parents with equal remainders by that remainder, or record
+an active unit and restrict the current clauses by its value. After any number
+of such steps, $F$ is equivalent to the conjunction of the recorded units and
+the current residual, over the original variables. A residual model therefore
+lifts through its inverse normalization map and the recorded unit values. Each
+accepted transformation strictly reduces the number of distinct active clauses,
+so there are at most $m$ accepted steps, even without a step cap.
+\end{proposition}
+\begin{proof}
+The identity $(C\lor x)\land(C\lor\neg x)\equiv C$ holds for both values of
+$x$, and hence in conjunction with all other active clauses. If an active unit
+has literal $l$, every model must satisfy $l$; restricting all clauses by this
+value gives precisely the remaining obligations. Induction proves the stated
+invariant. A fold removes two distinct clauses and inserts at most one. A unit
+removes its own clause, while restriction inserts no more clauses than the other
+affected parents. Duplicate elimination can only decrease these counts further.
+Thus each step decreases the nonnegative clause count. The invariant gives the
+model lift after restoring names and recorded units; unrecorded variables absent
+from the residual can be assigned freely. This proves preprocessing exactness and termination, not an efficiency
+bound for the subsequent unrestricted SAT problem.
+\end{proof}
+
+Discovery maintains a literal-occurrence index and, in the folding arm, a
+single-literal-deletion index keyed by full remainder and pivot variable.
+Opposite signs propose a fold. Removing clauses invalidates their entries;
+shortened clauses insert new entries. Units touch only clauses containing either
+polarity of the forced variable. Stale heap candidates are revalidated before
+use. The independent checker instead scans all active clauses for a unit and
+checks active parent membership and set differences for a fold. It does not
+trust either maintained index. Preprocessing allows 512 steps and 262,144 reserved
+index-work units per root: width per occurrence update and additionally width
+squared for deletion signatures. Admission precedes mutation. Candidate handling,
+affected-clause reads, normalization, checking, time and RAM are not bounded by
+this index-work allowance. Partial transformations still satisfy the invariant.
+
+Preprocessing runs only at the source root. It is not repeated after each
+conditioning assignment. A separate symbolic JSON authority retains the
+transformation and a complete preceding conditioned proof. That terminal policy
+still has depth two, width eight and 262,144 reserved table probes per node.
+SAT restores recorded units and inverse residual renaming and checks the complete
+source witness. UNSAT needs a checked terminal verdict; unknown is not UNSAT.
+Every warm or cold program is fully checked. Native, equivalence, affine and
+Lean formats remain unchanged. Both native cold readers audit fallback records;
+two additional cold passes use the same symbolic/conditioned checker rather than
+two independently implemented JSON checkers.
+
+The frozen transfer panel has twenty-four unique synthetic constructions, eighteen
+SAT and six UNSAT: random three-CNFs on 11, 14, 18 and 22 variables, one- and
+two-layer guarded cores, deleted/flipped guard clauses, planted-unit problems and
+parity/gate mixtures. Four repeats contain two SAT and two UNSAT cases. Twelve
+exposed preceding misses contain eight SAT and four UNSAT cases. Names, signs and
+input order are scrambled; descriptions and independent DPLL labels do not guide
+solving. No new normalized source duplicates the preceding panel. These designed
+controls do not constitute representative external SAT evidence. Tests exhaust
+all 512 two-variable clause sets and check full assignment-set equivalence,
+sparse witness lifting, stale indexes, partial budgets and invalid resolution.
+
+The baseline handles $11/24$ new unique inputs, root units handle $13/24$, and
+folding with units handles $14/24$. All three handle $3/4$ separate repeats.
+Folding closes two of twelve exposed misses; units alone close none. All forty
+answers were already available through the fallback. Four cyclic process orders
+compare fresh solving, the baseline with identity preprocessing, units and
+folding. Their complete mean costs are respectively 0.47792, 2.24100, 1.98240
+and 2.04088 seconds. The baseline is wrapped in the new proof machinery, not a
+timing rerun of the earlier artifact. Units improve 11.54\% over baseline, with
+all paired improvements between 9.67\% and 12.78\%. Folding improves 8.93\% over
+baseline but regresses 2.95\% against units, with every paired regression between
+0.84\% and 5.61\%. Folding remains 4.27 times as costly as fresh solving; units
+remain 4.15 times as costly. No production default is changed.
+
+Across newly acquired root programs, folding performs 1,579 folds and forty unit
+steps, compared with thirty-nine unit steps alone. Maintenance charges 149,872
+signature-literal visits, 36,078 occurrence updates and 2,458 stale pair
+candidates. There is no matched full-index-rebuild ablation, so these counters do
+not establish a separate index speedup. Twenty-eight queries perform new folds;
+their discovery costs 12.44\% more than units. The other twelve queries include
+four exact root-program replays. Root residual literals nevertheless fall from
+14,527 to 5,941 relative to units, a 59.10\% reduction. Conditioned states rise
+from 173 to 188 and bucket steps from 252 to 391: removing guards changes which
+core variables consume the conditioning budget and can expose more work.
+
+Pretty-printed certificate files occupy 3,035,077 bytes for baseline, 2,779,900
+for units and 2,413,891 for folding. The units-to-folding decrease is 13.17\%.
+Native record bytes are 569,593 fresh, 503,671 baseline, 498,799 units and 455,322
+folding. Combined compressed SQLite/JSON packages are 108,094, 137,313, 132,352
+and 140,561 bytes respectively. Thus smaller raw evidence does not imply a smaller
+compressed package. Diagnostics add 0, 33,328, 30,671 and 32,710 bytes; historical
+archives, reports and database/container overhead are additional. Peak process
+RSS is 64,307,200, 67,862,528, 66,764,800 and 65,486,848 bytes. Folding's modest
+RSS reduction relative to units does not put it below fresh solving.
+
+Folding spends 0.67591 seconds in discovery, 0.37847 in solve/check, 0.25229 warm
+and 0.59924 cold. Discovery and cold checking are the largest measured phases.
+All arms start empty with the same fallback. Preparation, recognition, checking,
+index maintenance, evidence/SQLite persistence, warm replay, cold replay and
+compression are charged. Interpreter startup, report metadata, panel generation,
+post-hoc profiling and the preservation audit are additional.
+
+Twenty unique sources remain outside the root-preprocessed family, plus one
+repeat. Their seventy-four unresolved depth-zero cofactors include fifty-three
+of width nine, twenty of width ten and one of width eleven. Twenty-eight stop
+immediately; forty-six do some bucket work before exceeding width. Eighteen of
+the twenty roots have folds, but none obtains a root unit assignment. A separate
+post-hoc full-scan unit diagnostic finds assignments in fifty-five of those
+seventy-four cofactors and contradictions in twenty-eight, using 24,509 literal
+visits and 0.01775 seconds. These diagnostics were not used during acquisition
+and do not supply additional root verdicts. The next target is checked unit
+closure after conditioning, before building each full bucket, with exact proof
+transport and residual reuse. Root-only simplification omits consequences exposed
+by branching. Applying deletion-signature indexing everywhere or uniformly
+increasing depth is not justified by these timings. General compact classification
+and polynomial unrestricted-SAT bounds remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

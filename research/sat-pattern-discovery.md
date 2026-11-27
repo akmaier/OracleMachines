@@ -5,7 +5,28 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: conditioned access to bounded bucket relations
+## Latest evidence: exact symbolic clause folding
+
+[Complementary-clause preprocessing](symbolic-bucket-preprocessing.md) uses the
+exact identity `(C or x) and (C or not x) = C`, with independent checks of active
+parents and equal remainders. It closes **2/12** exposed misses. New unique-panel
+coverage increases **11/24 to 13/24 with units and 14/24 with folding**; the
+fallback already decides every query. Arbitrary resolvents cannot replace their
+parents, and that counterexample is retained.
+
+The unit-only arm cuts full cost 11.54% versus the wrapped baseline. Folding
+adds coverage but costs 2.95% more than units, and fresh solving remains much
+cheaper. Smaller literal counts can expose more conditioned core work; a compact
+residual is not an efficient classification theorem.
+
+Twenty unique sources remain, with 74 unresolved depth-zero cofactors. A separate
+unit diagnostic finds forced literals in 55 and contradictions in 28, without
+claiming new root verdicts. Next incorporate checked unit closure after
+conditioning, retaining exact witness transport and shared residual identities.
+Resume `experiments/results/cnf-symbolic-buckets/checkpoint.json`.
+All **2,258 full tests and 24 focused tests pass**; previous proofs are unchanged.
+
+## Previous evidence: conditioned access to bounded bucket relations
 
 [Two levels of exact conditioning](conditioned-bucket-discovery.md) resolve
 **6/10** preceding acquisition misses and raise frozen unique-panel coverage from

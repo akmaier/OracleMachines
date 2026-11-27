@@ -4,7 +4,18 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (27 November, conditioned buckets):
+Latest expansion checkpoint (27 November, symbolic bucket preprocessing):
+[Exact complementary-clause folding](symbolic-bucket-preprocessing.md) closes
+2/12 exposed misses and raises new unique coverage 11/24 to 14/24; units alone
+reach 13/24 and are 2.95% faster than folding. Both remain slower than fresh
+solving. Root-only preprocessing leaves 74 unresolved cofactors; a post-hoc
+unit diagnostic finds 28 contradictions. Next test checked unit closure after
+conditioning, without counting those diagnostics as root verdicts. Resume
+`experiments/results/cnf-symbolic-buckets/checkpoint.json`. All 226 earlier
+manifests, 37,635 artifacts, 1,243 sources and 68 proofs are preserved; one
+restricted proof and a separate experimental JSON authority are added.
+
+Previous expansion checkpoint (27 November, conditioned buckets):
 [Conditioning before complete buckets](conditioned-bucket-discovery.md) closes
 6/10 preceding acquisition misses and raises new unique synthetic coverage
 11/24 to 16/24. Exact residual sharing reduces 158 calls to 149 and complete cost

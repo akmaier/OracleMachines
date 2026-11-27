@@ -12,7 +12,28 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: conditioning before bounded buckets
+## Current investigation: symbolic preprocessing before conditioning
+
+[Exact complementary-clause folding](symbolic-bucket-preprocessing.md) closes
+**2/12** exposed acquisition gaps. Frozen unique coverage is **11/24 base,
+13/24 with units, 14/24 with folding**. All answers remain available through the
+fallback. Units lower complete cost **11.54%** versus base; folding lowers it
+8.93% but is **2.95% slower than units**, despite 59.10% fewer residual literals.
+Fresh solving remains cheapest: 0.47792 s versus 1.98240 s units and 2.04088 s
+folding. No default changes.
+
+**Next:** checked unit closure after each conditioning assignment, before bucket
+construction. Of 74 unresolved cofactors from twenty unique sources, a post-hoc
+diagnostic finds units in **55** and unit contradictions in **28**. This is not
+yet additional root coverage. Root-only preprocessing misses these consequences;
+unit closure is a more promising next step than indexing folds at every node or
+uniformly deepening search. Fold discovery and cold checking remain the largest
+measured costs. Preserve the unit-only ablation and general-resolution counterexample.
+Resume `experiments/results/cnf-symbolic-buckets/checkpoint.json`, key
+`symbolic_buckets.remaining`. All **2,258 full and 24 focused tests pass**.
+Earlier results and 68 proof blocks are preserved; unrestricted bounds remain open.
+
+## Previous investigation: conditioning before bounded buckets
 
 [Exact conditioned bucket acquisition](conditioned-bucket-discovery.md) closes
 **6/10** exposed misses and increases new unique synthetic coverage **11/24 to

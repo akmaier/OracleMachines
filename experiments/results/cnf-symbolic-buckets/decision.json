@@ -1,0 +1,373 @@
+{
+  "analysis": {
+    "path": "experiments/results/cnf-symbolic-buckets/analysis.json",
+    "sha256": "9bd85ec62028af8e68e5c86e21cdd003073d25b7528f56bbd468ea5364aa4a82"
+  },
+  "checkpoint": "symbolic-buckets",
+  "controls": [
+    "24 frozen unique synthetic constructions (18 SAT, six UNSAT), four exact repeats (two each), and twelve exposed misses (eight SAT, four UNSAT). No new normalized source duplicates the preceding panel; this is not a representative external benchmark. Labels and descriptions are withheld from solving.",
+    "Sixteen trials in four cyclic process orders start empty with a common fallback. Preparation, recognition, index maintenance, checking, persistence, warm reuse, cold replay and compression are charged. Interpreter startup, report metadata, panel generation, historical archives, post-hoc profiling and lineage audit are additional. Base wraps the preceding policy in the same new authority.",
+    "Folding performs 1579 folds and 40 units; units alone perform 39 units. Maintenance charges 149872 signature-literal visits, 36078 occurrence updates and 2458 stale pair candidates. No matched rebuilding ablation isolates an index-specific speedup.",
+    "Root residual literals fall 14527 to 5941 versus units, but conditioned states rise 173 to 188 and bucket steps 252 to 391. Smaller syntax can expose more core search. Pretty-printed certificate files shrink 13.17%, while compressed SQLite/JSON packages grow from 132352 to 140561 bytes. Diagnostics and historical storage are separate.",
+    "Fold discovery and cold replay are the largest measured phases. Fold remains 4.27 times as costly as fresh; units remain 4.15 times as costly. Twenty-eight queries do fresh folds and their discovery costs 12.44% more than units; the other twelve include four exact root-program replays.",
+    "Twenty unique sources remain with 74 unresolved depth-zero leaves, at widths nine through eleven. None obtains a root unit assignment, but a post-hoc full-scan profile finds units in 55 cofactors and contradictions in 28. Its 24509 literal visits and 0.01775 seconds are additional diagnostic work and do not establish new root coverage.",
+    "All 226 prior manifests, 37635 artifact entries, 1243 sources and 68 proof blocks remain unchanged. Five new source/test files raise the ledger to 1248; one restricted preprocessing proof is added. All 2258 full and 24 focused tests pass. Four unique SQLite archives pass both native readers. ResourceWarnings and all comparison regressions are retained."
+  ],
+  "date": "2026-11-27",
+  "docs": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "f396949137e9ec9921f80517fdbf484797826fed67c730810c5f9fdf448f8536",
+    "research/implementation-gaps.md": "21a81a9debbecf5745f65ab5451ade32e407ff2ebc4b2e8d4b8dba6c63575a4f",
+    "research/sat-pattern-discovery.md": "3279e4d1455b031d393463910588fff9210feaac7bd94980701fd193e32e9134",
+    "research/structural-reuse-priorities.md": "8076688ca82d65c966717f6e159fe715a3ee72de931d72239fcd5e8c6fe042d9",
+    "research/symbolic-bucket-preprocessing.md": "6ce57662f47002abf2fae087ca78e444dedeaaa5a92231c66a38f6b096eb10e8"
+  },
+  "measurements": {
+    "combined_compressed_bytes": {
+      "base": 137313,
+      "fold": 140561,
+      "fresh": 108094,
+      "units": 132352
+    },
+    "comparisons_percent": {
+      "fold_vs_base": -8.92983613730356,
+      "fold_vs_fresh": 327.03229142325876,
+      "fold_vs_units": 2.949694552022586,
+      "units_vs_base": -11.53916069495784
+    },
+    "coverage": {
+      "base": {
+        "development_cases": 12,
+        "development_direct": 0,
+        "development_sat": 8,
+        "repeats_cases": 4,
+        "repeats_direct": 3,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 11,
+        "unique_panel_sat": 18
+      },
+      "fold": {
+        "development_cases": 12,
+        "development_direct": 2,
+        "development_sat": 8,
+        "repeats_cases": 4,
+        "repeats_direct": 3,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 14,
+        "unique_panel_sat": 18
+      },
+      "fresh": {
+        "development_cases": 12,
+        "development_direct": 0,
+        "development_sat": 8,
+        "repeats_cases": 4,
+        "repeats_direct": 0,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 0,
+        "unique_panel_sat": 18
+      },
+      "units": {
+        "development_cases": 12,
+        "development_direct": 0,
+        "development_sat": 8,
+        "repeats_cases": 4,
+        "repeats_direct": 3,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 13,
+        "unique_panel_sat": 18
+      }
+    },
+    "coverage_losses": {
+      "fold": [],
+      "units": []
+    },
+    "fold_cases": [
+      "d-d-s04",
+      "d-d-s06",
+      "d-d-s07",
+      "d-c06",
+      "d-c07",
+      "d-c11",
+      "d-c12",
+      "d-c10",
+      "d-c13",
+      "d-c05",
+      "y14",
+      "y06",
+      "y10",
+      "y05",
+      "y01",
+      "y19",
+      "y09",
+      "y00",
+      "y17",
+      "y07",
+      "y15",
+      "y12",
+      "y16",
+      "y04",
+      "y13",
+      "y02",
+      "y08",
+      "y11"
+    ],
+    "folding_gains": [
+      "d-c11",
+      "d-c10",
+      "y11"
+    ],
+    "new_direct_cases": {
+      "fold": [
+        "d-c11",
+        "d-c10",
+        "y21",
+        "y20",
+        "y11"
+      ],
+      "units": [
+        "y21",
+        "y20"
+      ]
+    },
+    "observed_fold_strata": {
+      "folded": {
+        "cases": 28,
+        "discovery_seconds": {
+          "fold": 0.6020709277363494,
+          "percent": 12.44053273273491,
+          "units": 0.5354571995558217
+        },
+        "solve_check_seconds": {
+          "fold": 0.3290646872483194,
+          "percent": 0.018964914559882473,
+          "units": 0.3290022922446951
+        }
+      },
+      "no_folds": {
+        "cases": 12,
+        "discovery_seconds": {
+          "fold": 0.07383966620545834,
+          "percent": -1.3360516003640743,
+          "units": 0.07483956136275083
+        },
+        "solve_check_seconds": {
+          "fold": 0.049402093049138784,
+          "percent": -15.09006666840651,
+          "units": 0.05818175931926817
+        }
+      }
+    },
+    "paired_percent": {
+      "fold_vs_base": [
+        -7.888259130048425,
+        -8.02266580192782,
+        -10.880934113632856,
+        -8.909159442215309
+      ],
+      "fold_vs_fresh": [
+        338.41441595137735,
+        314.9851476867208,
+        326.99722067491115,
+        328.36232266522745
+      ],
+      "fold_vs_units": [
+        5.612365734493419,
+        4.2051901084795285,
+        1.2098152803697415,
+        0.8419971784618507
+      ],
+      "units_vs_base": [
+        -12.783185728915536,
+        -11.734401998286192,
+        -11.946222172729993,
+        -9.669737702061154
+      ]
+    },
+    "peak_rss_bytes": {
+      "base": 67862528,
+      "fold": 65486848,
+      "fresh": 64307200,
+      "units": 66764800
+    },
+    "remaining": [
+      "d-d-s04",
+      "d-d-s05",
+      "d-d-s06",
+      "d-d-s07",
+      "d-c06",
+      "d-c07",
+      "d-c04",
+      "d-c12",
+      "d-c13",
+      "d-c05",
+      "y06",
+      "y10",
+      "y05",
+      "y17",
+      "y07",
+      "y12",
+      "y16",
+      "y04",
+      "y13",
+      "y02",
+      "y06r"
+    ],
+    "remaining_shape": {
+      "no_fold_sources": 2,
+      "no_unit_sources": 20,
+      "positive_work_leaves": 46,
+      "reasons": {
+        "bag-width": 74
+      },
+      "repeated_queries": 1,
+      "unique_sources": 20,
+      "unknown_leaves": 74,
+      "width_counts": {
+        "10": 20,
+        "11": 1,
+        "9": 53
+      },
+      "zero_work_leaves": 28
+    },
+    "remaining_unit_profile": {
+      "assigned_variables": 331,
+      "leaves": 74,
+      "scope": "Post-hoc full-scan unit diagnostic on unresolved canonical cofactors; not used by acquisition or a new authority. No conditioned coverage gain is claimed from this profile.",
+      "unit_conflicts": 28,
+      "with_units": 55
+    },
+    "selected": "fresh",
+    "structural": {
+      "base": {
+        "bucket_steps": 316,
+        "leaf_nodes": 105,
+        "leaf_sat": 13,
+        "leaf_unresolved": 77,
+        "leaf_unsat": 15,
+        "nodes": 193,
+        "preprocessing_steps": 0,
+        "residual_clauses": 3897,
+        "residual_literals": 15437,
+        "source_clauses": 3897,
+        "source_literals": 15437,
+        "split_nodes": 88
+      },
+      "fold": {
+        "bucket_steps": 391,
+        "fold_steps": 1579,
+        "leaf_nodes": 112,
+        "leaf_sat": 13,
+        "leaf_unresolved": 80,
+        "leaf_unsat": 19,
+        "nodes": 188,
+        "preprocessing_steps": 1619,
+        "residual_clauses": 2002,
+        "residual_literals": 5941,
+        "source_clauses": 3897,
+        "source_literals": 15437,
+        "split_nodes": 76,
+        "unit_steps": 40
+      },
+      "fresh": {},
+      "units": {
+        "bucket_steps": 252,
+        "leaf_nodes": 95,
+        "leaf_sat": 13,
+        "leaf_unresolved": 73,
+        "leaf_unsat": 9,
+        "nodes": 173,
+        "preprocessing_steps": 39,
+        "residual_clauses": 3582,
+        "residual_literals": 14527,
+        "source_clauses": 3897,
+        "source_literals": 15437,
+        "split_nodes": 78,
+        "unit_steps": 39
+      }
+    },
+    "totals": {
+      "base": {
+        "certificate_bytes": 3035077,
+        "certificate_compressed_bytes": 46082,
+        "cold_seconds": 0.6527246562764049,
+        "complete_seconds": 2.2409954165341333,
+        "diagnostic_bytes": 33328,
+        "input_seconds": 0.0015704581746831536,
+        "persistence_seconds": 0.12046896852552891,
+        "phases": {
+          "discovery_seconds": 0.7287709562806413,
+          "evidence_persistence_seconds": 0.01862434600479901,
+          "solve_check_seconds": 0.42716434551402926
+        },
+        "record_bytes": 503671,
+        "records": 359,
+        "warm_seconds": 0.2858757395297289
+      },
+      "fold": {
+        "certificate_bytes": 2413891,
+        "certificate_compressed_bytes": 57400,
+        "cold_seconds": 0.599243875243701,
+        "complete_seconds": 2.040878197993152,
+        "diagnostic_bytes": 32710,
+        "input_seconds": 0.0015986146172508597,
+        "persistence_seconds": 0.11074139596894383,
+        "phases": {
+          "discovery_seconds": 0.6759105939418077,
+          "evidence_persistence_seconds": 0.01670479157473892,
+          "solve_check_seconds": 0.37846678029745817
+        },
+        "record_bytes": 455322,
+        "records": 323,
+        "warm_seconds": 0.25229022884741426
+      },
+      "fresh": {
+        "certificate_bytes": 0,
+        "certificate_compressed_bytes": 22,
+        "cold_seconds": 0.14451529178768396,
+        "complete_seconds": 0.4779212811263278,
+        "diagnostic_bytes": 0,
+        "input_seconds": 0.0016383854672312737,
+        "persistence_seconds": 0.08770562475547194,
+        "phases": {
+          "solve_check_seconds": 0.2130930309649557
+        },
+        "record_bytes": 569593,
+        "records": 416,
+        "warm_seconds": 0.025765635422430933
+      },
+      "units": {
+        "certificate_bytes": 2779900,
+        "certificate_compressed_bytes": 42240,
+        "cold_seconds": 0.5940232604043558,
+        "complete_seconds": 1.98240335425362,
+        "diagnostic_bytes": 30671,
+        "input_seconds": 0.0016216353978961706,
+        "persistence_seconds": 0.11473111435770988,
+        "phases": {
+          "discovery_seconds": 0.6102967609185725,
+          "evidence_persistence_seconds": 0.018733971402980387,
+          "solve_check_seconds": 0.3871840515639633
+        },
+        "record_bytes": 498799,
+        "records": 356,
+        "warm_seconds": 0.25008153112139553
+      }
+    }
+  },
+  "next": "Implement and compare checked unit closure after each conditioning assignment, before the full incident bucket. Preserve exact model transport and shared residual identities. Root-only preprocessing misses the 55 observed cofactor unit closures; the 28 diagnostic conflicts are not new root verdicts. First isolate the unit operation from deletion-signature indexing at every node. Do not infer that uniform extra depth or more folding pays. No unrestricted compactness or polynomial SAT guarantee.",
+  "outcome": "Root folding closes 2/12 exposed acquisition misses. Unique frozen-panel coverage is 11/24 base, 13/24 units and 14/24 fold; repeats stay 3/4. All forty answers were already available through the unchanged fallback. Units lower complete cost 11.54% versus the wrapped baseline; folding lowers it 8.93% but costs 2.95% more than units. Every paired comparison has the same sign. Fresh stays selected.",
+  "parent": {
+    "path": "experiments/results/cnf-conditioned-buckets/checkpoint.json",
+    "sha256": "244771f25ef5714a20cc509e0e99a2938172973b91fcafd443576e029824fdc0"
+  },
+  "pattern": "Replace complementary active clauses with identical full remainders by their remainder, preserving the entire assignment set. Active units restrict only affected clauses and record forced values. Both operations strictly reduce distinct clause count, giving at most m accepted preprocessing steps from m initial clauses.",
+  "recognition": "A maintained occurrence index and a full-remainder/pivot deletion-signature index propose steps. Deleting parents invalidates their signatures; new clauses add entries. Stale heap candidates are revalidated. The independent checker scans units and checks active fold parents and exact set differences. General resolvents cannot replace their parents; the concrete counterexample is preserved. Exact source-program reuse is policy-bound and edits invalidate it.",
+  "resources": "All structural arms retain the preceding memoized depth-two bucket policy. Symbolic preprocessing runs only at the root with 512 steps and 262144 reserved index-maintenance units. Candidate handling, unit affected-clause reads, normalization, verification, runtime and RAM remain outside that allowance. A partial transformation is exact. The separate JSON authority retains unit/fold steps and the full conditioned proof. Every warm/cold load checks all evidence. Both native cold readers audit fallback records; two additional passes share the same symbolic/conditioned checker. No production/native/Lean change.",
+  "unit_profile": {
+    "path": "experiments/results/cnf-symbolic-buckets/remaining-unit-profile.json",
+    "sha256": "be27c2464ccd75f5fb885799df7cc33b2f6fca8320eabbddd8be1833aa39c2e7"
+  }
+}

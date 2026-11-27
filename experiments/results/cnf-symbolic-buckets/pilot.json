@@ -1,0 +1,3373 @@
+[
+  {
+    "base": {
+      "counts": {
+        "bucket_checked_steps": 44,
+        "bucket_compacted_rows": 1613,
+        "bucket_leaf_rows": 2580,
+        "bucket_lookup_factors": 137,
+        "bucket_lookup_scope_visits": 382,
+        "bucket_operator_misses": 21,
+        "bucket_planning_scope_visits": 9648,
+        "bucket_projected_rows": 1984,
+        "bucket_removed_coordinates": 16,
+        "bucket_reserved_probe_work": 26240,
+        "bucket_support_pair_checks": 1964,
+        "bucket_table_probes": 14350,
+        "bucket_verified_rows": 4096,
+        "bucket_verify_table_probes": 54400,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1008,
+        "condition_pivot_literal_visits": 506,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 10000,
+        "restriction_literal_visits": 3036
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 4608,
+                "width": 10
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 3968,
+                "width": 10
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 3968,
+                "width": 9
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "complete",
+                "spent": 1920
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 5888,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 5888,
+                "width": 9
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "disabled",
+          "spent": 0
+        }
+      },
+      "status": "unresolved"
+    },
+    "fold": {
+      "counts": {
+        "bucket_checked_steps": 46,
+        "bucket_compacted_rows": 1741,
+        "bucket_leaf_rows": 2464,
+        "bucket_lookup_factors": 135,
+        "bucket_lookup_scope_visits": 374,
+        "bucket_operator_misses": 22,
+        "bucket_planning_scope_visits": 9701,
+        "bucket_projected_rows": 2048,
+        "bucket_removed_coordinates": 15,
+        "bucket_reserved_probe_work": 25600,
+        "bucket_support_pair_checks": 1969,
+        "bucket_table_probes": 14294,
+        "bucket_verified_rows": 4224,
+        "bucket_verify_table_probes": 52992,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 966,
+        "condition_pivot_literal_visits": 487,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 9602,
+        "restriction_literal_visits": 2922,
+        "symbolic_admission_literals": 198,
+        "symbolic_checked_folds": 2,
+        "symbolic_fold_steps": 2,
+        "symbolic_index_literal_updates": 214,
+        "symbolic_pair_lookups": 2,
+        "symbolic_remaining_clauses": 64,
+        "symbolic_reserved_index_work": 852,
+        "symbolic_signature_literal_visits": 638,
+        "symbolic_stale_pairs": 2,
+        "symbolic_verify_fold_literals": 12
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 4352,
+                "width": 10
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 3712,
+                "width": 10
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 3968,
+                "width": 9
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "complete",
+                "spent": 1792
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 4864,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 6912,
+                "width": 9
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 852
+        }
+      },
+      "status": "unresolved"
+    },
+    "id": "d-s04",
+    "units": {
+      "counts": {
+        "bucket_checked_steps": 44,
+        "bucket_compacted_rows": 1613,
+        "bucket_leaf_rows": 2580,
+        "bucket_lookup_factors": 137,
+        "bucket_lookup_scope_visits": 382,
+        "bucket_operator_misses": 21,
+        "bucket_planning_scope_visits": 9648,
+        "bucket_projected_rows": 1984,
+        "bucket_removed_coordinates": 16,
+        "bucket_reserved_probe_work": 26240,
+        "bucket_support_pair_checks": 1964,
+        "bucket_table_probes": 14350,
+        "bucket_verified_rows": 4096,
+        "bucket_verify_table_probes": 54400,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1008,
+        "condition_pivot_literal_visits": 506,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 10000,
+        "restriction_literal_visits": 3036,
+        "symbolic_admission_literals": 198,
+        "symbolic_index_literal_updates": 198,
+        "symbolic_remaining_clauses": 66,
+        "symbolic_reserved_index_work": 198
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 4608,
+                "width": 10
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 3968,
+                "width": 10
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 3968,
+                "width": 9
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "complete",
+                "spent": 1920
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 5888,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 5888,
+                "width": 9
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 198
+        }
+      },
+      "status": "unresolved"
+    }
+  },
+  {
+    "base": {
+      "counts": {
+        "bucket_checked_steps": 8,
+        "bucket_compacted_rows": 352,
+        "bucket_leaf_rows": 2720,
+        "bucket_lookup_factors": 22,
+        "bucket_lookup_scope_visits": 62,
+        "bucket_operator_misses": 4,
+        "bucket_planning_scope_visits": 4443,
+        "bucket_projected_rows": 352,
+        "bucket_removed_coordinates": 0,
+        "bucket_reserved_probe_work": 4096,
+        "bucket_support_pair_checks": 305,
+        "bucket_table_probes": 2549,
+        "bucket_verified_rows": 704,
+        "bucket_verify_table_probes": 8192,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1059,
+        "condition_pivot_literal_visits": 523,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 10335,
+        "restriction_literal_visits": 3138
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1792,
+                "width": 9
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1536,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 768,
+                "width": 9
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 11
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "disabled",
+          "spent": 0
+        }
+      },
+      "status": "unresolved"
+    },
+    "fold": {
+      "counts": {
+        "bucket_checked_steps": 8,
+        "bucket_compacted_rows": 352,
+        "bucket_leaf_rows": 2720,
+        "bucket_lookup_factors": 22,
+        "bucket_lookup_scope_visits": 62,
+        "bucket_operator_misses": 4,
+        "bucket_planning_scope_visits": 4443,
+        "bucket_projected_rows": 352,
+        "bucket_removed_coordinates": 0,
+        "bucket_reserved_probe_work": 4096,
+        "bucket_support_pair_checks": 305,
+        "bucket_table_probes": 2549,
+        "bucket_verified_rows": 704,
+        "bucket_verify_table_probes": 8192,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1059,
+        "condition_pivot_literal_visits": 523,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 10335,
+        "restriction_literal_visits": 3138,
+        "symbolic_admission_literals": 201,
+        "symbolic_index_literal_updates": 201,
+        "symbolic_remaining_clauses": 67,
+        "symbolic_reserved_index_work": 804,
+        "symbolic_signature_literal_visits": 603
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1792,
+                "width": 9
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1536,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 768,
+                "width": 9
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 11
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 804
+        }
+      },
+      "status": "unresolved"
+    },
+    "id": "d-s05",
+    "units": {
+      "counts": {
+        "bucket_checked_steps": 8,
+        "bucket_compacted_rows": 352,
+        "bucket_leaf_rows": 2720,
+        "bucket_lookup_factors": 22,
+        "bucket_lookup_scope_visits": 62,
+        "bucket_operator_misses": 4,
+        "bucket_planning_scope_visits": 4443,
+        "bucket_projected_rows": 352,
+        "bucket_removed_coordinates": 0,
+        "bucket_reserved_probe_work": 4096,
+        "bucket_support_pair_checks": 305,
+        "bucket_table_probes": 2549,
+        "bucket_verified_rows": 704,
+        "bucket_verify_table_probes": 8192,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1059,
+        "condition_pivot_literal_visits": 523,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 10335,
+        "restriction_literal_visits": 3138,
+        "symbolic_admission_literals": 201,
+        "symbolic_index_literal_updates": 201,
+        "symbolic_remaining_clauses": 67,
+        "symbolic_reserved_index_work": 201
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1792,
+                "width": 9
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1536,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 768,
+                "width": 9
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 11
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 201
+        }
+      },
+      "status": "unresolved"
+    }
+  },
+  {
+    "base": {
+      "counts": {
+        "bucket_leaf_rows": 3648,
+        "bucket_planning_scope_visits": 4063,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1405,
+        "condition_pivot_literal_visits": 675,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 13653,
+        "restriction_literal_visits": 4050
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "disabled",
+          "spent": 0
+        }
+      },
+      "status": "unresolved"
+    },
+    "fold": {
+      "counts": {
+        "bucket_leaf_rows": 3582,
+        "bucket_planning_scope_visits": 3986,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1382,
+        "condition_pivot_literal_visits": 663,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 13438,
+        "restriction_literal_visits": 3978,
+        "symbolic_admission_literals": 249,
+        "symbolic_checked_folds": 1,
+        "symbolic_fold_steps": 1,
+        "symbolic_index_literal_updates": 257,
+        "symbolic_pair_lookups": 1,
+        "symbolic_remaining_clauses": 82,
+        "symbolic_reserved_index_work": 1026,
+        "symbolic_signature_literal_visits": 769,
+        "symbolic_stale_pairs": 1,
+        "symbolic_verify_fold_literals": 6
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 1026
+        }
+      },
+      "status": "unresolved"
+    },
+    "id": "d-s06",
+    "units": {
+      "counts": {
+        "bucket_leaf_rows": 3648,
+        "bucket_planning_scope_visits": 4063,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1405,
+        "condition_pivot_literal_visits": 675,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 13653,
+        "restriction_literal_visits": 4050,
+        "symbolic_admission_literals": 249,
+        "symbolic_index_literal_updates": 249,
+        "symbolic_remaining_clauses": 83,
+        "symbolic_reserved_index_work": 249
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 249
+        }
+      },
+      "status": "unresolved"
+    }
+  },
+  {
+    "base": {
+      "counts": {
+        "bucket_checked_steps": 34,
+        "bucket_compacted_rows": 843,
+        "bucket_leaf_rows": 3378,
+        "bucket_lookup_factors": 92,
+        "bucket_lookup_scope_visits": 243,
+        "bucket_operator_misses": 16,
+        "bucket_planning_scope_visits": 10124,
+        "bucket_projected_rows": 1332,
+        "bucket_removed_coordinates": 27,
+        "bucket_reserved_probe_work": 16720,
+        "bucket_support_pair_checks": 2208,
+        "bucket_table_probes": 9687,
+        "bucket_verified_rows": 2792,
+        "bucket_verify_table_probes": 35360,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1316,
+        "condition_pivot_literal_visits": 659,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 13021,
+        "restriction_literal_visits": 3954
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "complete",
+                "spent": 1920
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 7680,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 2048,
+                "width": 9
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 2496,
+                "width": 9
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1808,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 768,
+                "width": 9
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "disabled",
+          "spent": 0
+        }
+      },
+      "status": "unresolved"
+    },
+    "fold": {
+      "counts": {
+        "bucket_checked_steps": 34,
+        "bucket_compacted_rows": 843,
+        "bucket_leaf_rows": 3198,
+        "bucket_lookup_factors": 88,
+        "bucket_lookup_scope_visits": 229,
+        "bucket_operator_misses": 16,
+        "bucket_planning_scope_visits": 9606,
+        "bucket_projected_rows": 1332,
+        "bucket_removed_coordinates": 27,
+        "bucket_reserved_probe_work": 15952,
+        "bucket_support_pair_checks": 2208,
+        "bucket_table_probes": 9350,
+        "bucket_verified_rows": 2792,
+        "bucket_verify_table_probes": 33696,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1250,
+        "condition_pivot_literal_visits": 621,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 12385,
+        "restriction_literal_visits": 3726,
+        "symbolic_admission_literals": 249,
+        "symbolic_checked_folds": 4,
+        "symbolic_fold_steps": 4,
+        "symbolic_index_literal_updates": 281,
+        "symbolic_pair_lookups": 4,
+        "symbolic_remaining_clauses": 79,
+        "symbolic_reserved_index_work": 1116,
+        "symbolic_signature_literal_visits": 835,
+        "symbolic_stale_pairs": 4,
+        "symbolic_verify_fold_literals": 24
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "complete",
+                "spent": 1792
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 7424,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1792,
+                "width": 9
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 2496,
+                "width": 9
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1808,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 640,
+                "width": 9
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 1116
+        }
+      },
+      "status": "unresolved"
+    },
+    "id": "d-s07",
+    "units": {
+      "counts": {
+        "bucket_checked_steps": 34,
+        "bucket_compacted_rows": 843,
+        "bucket_leaf_rows": 3378,
+        "bucket_lookup_factors": 92,
+        "bucket_lookup_scope_visits": 243,
+        "bucket_operator_misses": 16,
+        "bucket_planning_scope_visits": 10124,
+        "bucket_projected_rows": 1332,
+        "bucket_removed_coordinates": 27,
+        "bucket_reserved_probe_work": 16720,
+        "bucket_support_pair_checks": 2208,
+        "bucket_table_probes": 9687,
+        "bucket_verified_rows": 2792,
+        "bucket_verify_table_probes": 35360,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1316,
+        "condition_pivot_literal_visits": 659,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 13021,
+        "restriction_literal_visits": 3954,
+        "symbolic_admission_literals": 249,
+        "symbolic_index_literal_updates": 249,
+        "symbolic_remaining_clauses": 83,
+        "symbolic_reserved_index_work": 249
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "complete",
+                "spent": 1920
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 7680,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 2048,
+                "width": 9
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 2496,
+                "width": 9
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1808,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 768,
+                "width": 9
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 249
+        }
+      },
+      "status": "unresolved"
+    }
+  },
+  {
+    "base": {
+      "counts": {
+        "bucket_checked_steps": 14,
+        "bucket_compacted_rows": 512,
+        "bucket_leaf_rows": 3764,
+        "bucket_lookup_factors": 35,
+        "bucket_lookup_scope_visits": 100,
+        "bucket_operator_misses": 7,
+        "bucket_planning_scope_visits": 8066,
+        "bucket_projected_rows": 512,
+        "bucket_removed_coordinates": 0,
+        "bucket_reserved_probe_work": 5184,
+        "bucket_support_pair_checks": 548,
+        "bucket_table_probes": 2772,
+        "bucket_verified_rows": 1024,
+        "bucket_verify_table_probes": 10368,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1458,
+        "condition_pivot_literal_visits": 704,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 14178,
+        "restriction_literal_visits": 4224
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 320,
+                "width": 10
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 256,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 640,
+                "width": 11
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 768,
+                "width": 10
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1664,
+                "width": 10
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1536,
+                "width": 11
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "disabled",
+          "spent": 0
+        }
+      },
+      "status": "unresolved"
+    },
+    "fold": {
+      "counts": {
+        "bucket_checked_steps": 14,
+        "bucket_compacted_rows": 512,
+        "bucket_leaf_rows": 3716,
+        "bucket_lookup_factors": 35,
+        "bucket_lookup_scope_visits": 100,
+        "bucket_operator_misses": 7,
+        "bucket_planning_scope_visits": 7968,
+        "bucket_projected_rows": 512,
+        "bucket_removed_coordinates": 0,
+        "bucket_reserved_probe_work": 5184,
+        "bucket_support_pair_checks": 548,
+        "bucket_table_probes": 2772,
+        "bucket_verified_rows": 1024,
+        "bucket_verify_table_probes": 10368,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1440,
+        "condition_pivot_literal_visits": 692,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 14008,
+        "restriction_literal_visits": 4152,
+        "symbolic_admission_literals": 264,
+        "symbolic_checked_folds": 1,
+        "symbolic_fold_steps": 1,
+        "symbolic_index_literal_updates": 272,
+        "symbolic_pair_lookups": 1,
+        "symbolic_remaining_clauses": 87,
+        "symbolic_reserved_index_work": 1086,
+        "symbolic_signature_literal_visits": 814,
+        "symbolic_stale_pairs": 1,
+        "symbolic_verify_fold_literals": 6
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 320,
+                "width": 10
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 256,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 640,
+                "width": 11
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 768,
+                "width": 10
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1664,
+                "width": 10
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1536,
+                "width": 11
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 1086
+        }
+      },
+      "status": "unresolved"
+    },
+    "id": "c06",
+    "units": {
+      "counts": {
+        "bucket_checked_steps": 14,
+        "bucket_compacted_rows": 512,
+        "bucket_leaf_rows": 3764,
+        "bucket_lookup_factors": 35,
+        "bucket_lookup_scope_visits": 100,
+        "bucket_operator_misses": 7,
+        "bucket_planning_scope_visits": 8066,
+        "bucket_projected_rows": 512,
+        "bucket_removed_coordinates": 0,
+        "bucket_reserved_probe_work": 5184,
+        "bucket_support_pair_checks": 548,
+        "bucket_table_probes": 2772,
+        "bucket_verified_rows": 1024,
+        "bucket_verify_table_probes": 10368,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1458,
+        "condition_pivot_literal_visits": 704,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 14178,
+        "restriction_literal_visits": 4224,
+        "symbolic_admission_literals": 264,
+        "symbolic_index_literal_updates": 264,
+        "symbolic_remaining_clauses": 88,
+        "symbolic_reserved_index_work": 264
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 320,
+                "width": 10
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 256,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 640,
+                "width": 11
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 768,
+                "width": 10
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1664,
+                "width": 10
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1536,
+                "width": 11
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 264
+        }
+      },
+      "status": "unresolved"
+    }
+  },
+  {
+    "base": {
+      "counts": {
+        "bucket_leaf_rows": 3766,
+        "bucket_planning_scope_visits": 4193,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1451,
+        "condition_pivot_literal_visits": 698,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 14103,
+        "restriction_literal_visits": 4188
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 11
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 12
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "disabled",
+          "spent": 0
+        }
+      },
+      "status": "unresolved"
+    },
+    "fold": {
+      "counts": {
+        "bucket_leaf_rows": 3772,
+        "bucket_planning_scope_visits": 4200,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1454,
+        "condition_pivot_literal_visits": 694,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 14122,
+        "restriction_literal_visits": 4164,
+        "symbolic_admission_literals": 258,
+        "symbolic_checked_folds": 1,
+        "symbolic_fold_steps": 1,
+        "symbolic_index_literal_updates": 266,
+        "symbolic_pair_lookups": 1,
+        "symbolic_remaining_clauses": 85,
+        "symbolic_reserved_index_work": 1062,
+        "symbolic_signature_literal_visits": 796,
+        "symbolic_stale_pairs": 2,
+        "symbolic_verify_fold_literals": 6
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 11
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 11
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 11
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 12
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 1062
+        }
+      },
+      "status": "unresolved"
+    },
+    "id": "c07",
+    "units": {
+      "counts": {
+        "bucket_leaf_rows": 3766,
+        "bucket_planning_scope_visits": 4193,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1451,
+        "condition_pivot_literal_visits": 698,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 14103,
+        "restriction_literal_visits": 4188,
+        "symbolic_admission_literals": 258,
+        "symbolic_index_literal_updates": 258,
+        "symbolic_remaining_clauses": 86,
+        "symbolic_reserved_index_work": 258
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 11
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 12
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 258
+        }
+      },
+      "status": "unresolved"
+    }
+  },
+  {
+    "base": {
+      "counts": {
+        "bucket_checked_steps": 8,
+        "bucket_compacted_rows": 194,
+        "bucket_leaf_rows": 2998,
+        "bucket_lookup_factors": 20,
+        "bucket_lookup_scope_visits": 51,
+        "bucket_operator_misses": 4,
+        "bucket_planning_scope_visits": 4834,
+        "bucket_projected_rows": 384,
+        "bucket_removed_coordinates": 13,
+        "bucket_reserved_probe_work": 3968,
+        "bucket_support_pair_checks": 724,
+        "bucket_table_probes": 2598,
+        "bucket_verified_rows": 768,
+        "bucket_verify_table_probes": 7936,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1162,
+        "condition_pivot_literal_visits": 571,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 11310,
+        "restriction_literal_visits": 3426
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 2048,
+                "width": 9
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1920,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "disabled",
+          "spent": 0
+        }
+      },
+      "status": "unresolved"
+    },
+    "fold": {
+      "counts": {
+        "bucket_checked_steps": 8,
+        "bucket_compacted_rows": 194,
+        "bucket_leaf_rows": 2998,
+        "bucket_lookup_factors": 20,
+        "bucket_lookup_scope_visits": 51,
+        "bucket_operator_misses": 4,
+        "bucket_planning_scope_visits": 4834,
+        "bucket_projected_rows": 384,
+        "bucket_removed_coordinates": 13,
+        "bucket_reserved_probe_work": 3968,
+        "bucket_support_pair_checks": 724,
+        "bucket_table_probes": 2598,
+        "bucket_verified_rows": 768,
+        "bucket_verify_table_probes": 7936,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1162,
+        "condition_pivot_literal_visits": 571,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 11310,
+        "restriction_literal_visits": 3426,
+        "symbolic_admission_literals": 213,
+        "symbolic_index_literal_updates": 213,
+        "symbolic_remaining_clauses": 71,
+        "symbolic_reserved_index_work": 852,
+        "symbolic_signature_literal_visits": 639
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 2048,
+                "width": 9
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1920,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 852
+        }
+      },
+      "status": "unresolved"
+    },
+    "id": "c04",
+    "units": {
+      "counts": {
+        "bucket_checked_steps": 8,
+        "bucket_compacted_rows": 194,
+        "bucket_leaf_rows": 2998,
+        "bucket_lookup_factors": 20,
+        "bucket_lookup_scope_visits": 51,
+        "bucket_operator_misses": 4,
+        "bucket_planning_scope_visits": 4834,
+        "bucket_projected_rows": 384,
+        "bucket_removed_coordinates": 13,
+        "bucket_reserved_probe_work": 3968,
+        "bucket_support_pair_checks": 724,
+        "bucket_table_probes": 2598,
+        "bucket_verified_rows": 768,
+        "bucket_verify_table_probes": 7936,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1162,
+        "condition_pivot_literal_visits": 571,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 11310,
+        "restriction_literal_visits": 3426,
+        "symbolic_admission_literals": 213,
+        "symbolic_index_literal_updates": 213,
+        "symbolic_remaining_clauses": 71,
+        "symbolic_reserved_index_work": 213
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 2048,
+                "width": 9
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1920,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 213
+        }
+      },
+      "status": "unresolved"
+    }
+  },
+  {
+    "base": {
+      "counts": {
+        "bucket_checked_steps": 27,
+        "bucket_compacted_rows": 802,
+        "bucket_leaf_rows": 3552,
+        "bucket_lookup_factors": 76,
+        "bucket_lookup_scope_visits": 230,
+        "bucket_operator_misses": 11,
+        "bucket_planning_scope_visits": 6808,
+        "bucket_projected_rows": 896,
+        "bucket_removed_coordinates": 11,
+        "bucket_reserved_probe_work": 12928,
+        "bucket_support_pair_checks": 553,
+        "bucket_table_probes": 7912,
+        "bucket_verified_rows": 2272,
+        "bucket_verify_table_probes": 32896,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1151,
+        "condition_pivot_literal_visits": 693,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 12059,
+        "restriction_literal_visits": 4158
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "complete",
+                "spent": 7040
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1152,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 896,
+                "width": 9
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 896,
+                "width": 9
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 896,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 2048,
+                "width": 10
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "disabled",
+          "spent": 0
+        }
+      },
+      "status": "unresolved"
+    },
+    "fold": {
+      "counts": {
+        "bucket_checked_steps": 91,
+        "bucket_compacted_rows": 1210,
+        "bucket_leaf_rows": 1414,
+        "bucket_lookup_factors": 135,
+        "bucket_lookup_scope_visits": 412,
+        "bucket_operator_misses": 32,
+        "bucket_planning_scope_visits": 6643,
+        "bucket_projected_rows": 1311,
+        "bucket_removed_coordinates": 34,
+        "bucket_reserved_probe_work": 14982,
+        "bucket_support_pair_checks": 808,
+        "bucket_table_probes": 9922,
+        "bucket_verified_rows": 3709,
+        "bucket_verify_table_probes": 42066,
+        "condition_bucket_calls": 5,
+        "condition_checked_nodes": 10,
+        "condition_lookup_calls": 5,
+        "condition_lookup_literals": 546,
+        "condition_pivot_literal_visits": 261,
+        "condition_retained_nodes": 5,
+        "condition_split_nodes": 2,
+        "normalization_literal_visits": 6621,
+        "restriction_literal_visits": 2007,
+        "symbolic_admission_literals": 396,
+        "symbolic_checked_folds": 50,
+        "symbolic_fold_steps": 50,
+        "symbolic_index_literal_updates": 943,
+        "symbolic_pair_lookups": 50,
+        "symbolic_remaining_clauses": 49,
+        "symbolic_reserved_index_work": 4558,
+        "symbolic_signature_literal_visits": 3615,
+        "symbolic_stale_pairs": 52,
+        "symbolic_verify_fold_literals": 398
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "complete",
+                "spent": 6374
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "complete",
+                "spent": 3200
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "complete",
+                "spent": 2528
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1968,
+                "width": 9
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 912,
+                "width": 9
+              },
+              "node": 4
+            }
+          ],
+          "root_status": "sat"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 4558
+        }
+      },
+      "status": "sat"
+    },
+    "id": "c11",
+    "units": {
+      "counts": {
+        "bucket_checked_steps": 27,
+        "bucket_compacted_rows": 802,
+        "bucket_leaf_rows": 3552,
+        "bucket_lookup_factors": 76,
+        "bucket_lookup_scope_visits": 230,
+        "bucket_operator_misses": 11,
+        "bucket_planning_scope_visits": 6808,
+        "bucket_projected_rows": 896,
+        "bucket_removed_coordinates": 11,
+        "bucket_reserved_probe_work": 12928,
+        "bucket_support_pair_checks": 553,
+        "bucket_table_probes": 7912,
+        "bucket_verified_rows": 2272,
+        "bucket_verify_table_probes": 32896,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1151,
+        "condition_pivot_literal_visits": 693,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 12059,
+        "restriction_literal_visits": 4158,
+        "symbolic_admission_literals": 396,
+        "symbolic_index_literal_updates": 396,
+        "symbolic_remaining_clauses": 99,
+        "symbolic_reserved_index_work": 396
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "complete",
+                "spent": 7040
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1152,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 896,
+                "width": 9
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 896,
+                "width": 9
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 896,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 2048,
+                "width": 10
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 396
+        }
+      },
+      "status": "unresolved"
+    }
+  },
+  {
+    "base": {
+      "counts": {
+        "bucket_leaf_rows": 3536,
+        "bucket_planning_scope_visits": 3701,
+        "condition_bucket_calls": 4,
+        "condition_checked_nodes": 8,
+        "condition_lookup_calls": 5,
+        "condition_lookup_literals": 1268,
+        "condition_memo_hits": 1,
+        "condition_pivot_literal_visits": 737,
+        "condition_retained_nodes": 4,
+        "condition_split_nodes": 2,
+        "normalization_literal_visits": 12551,
+        "restriction_literal_visits": 4422
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 11
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 12
+              },
+              "node": 3
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "disabled",
+          "spent": 0
+        }
+      },
+      "status": "unresolved"
+    },
+    "fold": {
+      "counts": {
+        "bucket_checked_steps": 2,
+        "bucket_compacted_rows": 128,
+        "bucket_leaf_rows": 2690,
+        "bucket_lookup_factors": 4,
+        "bucket_lookup_scope_visits": 12,
+        "bucket_operator_misses": 1,
+        "bucket_planning_scope_visits": 3348,
+        "bucket_projected_rows": 128,
+        "bucket_removed_coordinates": 0,
+        "bucket_reserved_probe_work": 1024,
+        "bucket_support_pair_checks": 148,
+        "bucket_table_probes": 546,
+        "bucket_verified_rows": 256,
+        "bucket_verify_table_probes": 2048,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1048,
+        "condition_pivot_literal_visits": 519,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 10898,
+        "restriction_literal_visits": 3114,
+        "symbolic_admission_literals": 536,
+        "symbolic_checked_folds": 68,
+        "symbolic_fold_steps": 68,
+        "symbolic_index_literal_updates": 1281,
+        "symbolic_pair_lookups": 68,
+        "symbolic_remaining_clauses": 66,
+        "symbolic_reserved_index_work": 6194,
+        "symbolic_signature_literal_visits": 4913,
+        "symbolic_stale_pairs": 70,
+        "symbolic_verify_fold_literals": 542
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1024,
+                "width": 10
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 11
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 6194
+        }
+      },
+      "status": "unresolved"
+    },
+    "id": "c12",
+    "units": {
+      "counts": {
+        "bucket_leaf_rows": 3536,
+        "bucket_planning_scope_visits": 3701,
+        "condition_bucket_calls": 4,
+        "condition_checked_nodes": 8,
+        "condition_lookup_calls": 5,
+        "condition_lookup_literals": 1268,
+        "condition_memo_hits": 1,
+        "condition_pivot_literal_visits": 737,
+        "condition_retained_nodes": 4,
+        "condition_split_nodes": 2,
+        "normalization_literal_visits": 12551,
+        "restriction_literal_visits": 4422,
+        "symbolic_admission_literals": 536,
+        "symbolic_index_literal_updates": 536,
+        "symbolic_remaining_clauses": 134,
+        "symbolic_reserved_index_work": 536
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 11
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 12
+              },
+              "node": 3
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 536
+        }
+      },
+      "status": "unresolved"
+    }
+  },
+  {
+    "base": {
+      "counts": {
+        "bucket_checked_steps": 6,
+        "bucket_compacted_rows": 224,
+        "bucket_leaf_rows": 2596,
+        "bucket_lookup_factors": 22,
+        "bucket_lookup_scope_visits": 64,
+        "bucket_operator_misses": 3,
+        "bucket_planning_scope_visits": 3746,
+        "bucket_projected_rows": 224,
+        "bucket_removed_coordinates": 0,
+        "bucket_reserved_probe_work": 3456,
+        "bucket_support_pair_checks": 270,
+        "bucket_table_probes": 1809,
+        "bucket_verified_rows": 448,
+        "bucket_verify_table_probes": 6912,
+        "condition_bucket_calls": 4,
+        "condition_checked_nodes": 8,
+        "condition_lookup_calls": 5,
+        "condition_lookup_literals": 932,
+        "condition_memo_hits": 1,
+        "condition_pivot_literal_visits": 550,
+        "condition_retained_nodes": 4,
+        "condition_split_nodes": 2,
+        "normalization_literal_visits": 9238,
+        "restriction_literal_visits": 3300
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1024,
+                "width": 9
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 384,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 2048,
+                "width": 10
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 3
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "disabled",
+          "spent": 0
+        }
+      },
+      "status": "unresolved"
+    },
+    "fold": {
+      "counts": {
+        "bucket_checked_steps": 87,
+        "bucket_compacted_rows": 1436,
+        "bucket_leaf_rows": 1770,
+        "bucket_lookup_factors": 159,
+        "bucket_lookup_scope_visits": 474,
+        "bucket_operator_misses": 30,
+        "bucket_planning_scope_visits": 6122,
+        "bucket_projected_rows": 1652,
+        "bucket_removed_coordinates": 18,
+        "bucket_reserved_probe_work": 19880,
+        "bucket_support_pair_checks": 1542,
+        "bucket_table_probes": 11575,
+        "bucket_verified_rows": 4732,
+        "bucket_verify_table_probes": 56184,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 703,
+        "condition_pivot_literal_visits": 370,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 7758,
+        "restriction_literal_visits": 2220,
+        "symbolic_admission_literals": 400,
+        "symbolic_checked_folds": 51,
+        "symbolic_fold_steps": 51,
+        "symbolic_index_literal_updates": 958,
+        "symbolic_pair_lookups": 51,
+        "symbolic_remaining_clauses": 49,
+        "symbolic_reserved_index_work": 4630,
+        "symbolic_signature_literal_visits": 3672,
+        "symbolic_stale_pairs": 53,
+        "symbolic_verify_fold_literals": 406
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "complete",
+                "spent": 3432
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "complete",
+                "spent": 4224
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1024,
+                "width": 9
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "complete",
+                "spent": 4160
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "complete",
+                "spent": 4608
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 384,
+                "width": 9
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 2048,
+                "width": 10
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unsat"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 4630
+        }
+      },
+      "status": "unsat"
+    },
+    "id": "c10",
+    "units": {
+      "counts": {
+        "bucket_checked_steps": 6,
+        "bucket_compacted_rows": 224,
+        "bucket_leaf_rows": 2596,
+        "bucket_lookup_factors": 22,
+        "bucket_lookup_scope_visits": 64,
+        "bucket_operator_misses": 3,
+        "bucket_planning_scope_visits": 3746,
+        "bucket_projected_rows": 224,
+        "bucket_removed_coordinates": 0,
+        "bucket_reserved_probe_work": 3456,
+        "bucket_support_pair_checks": 270,
+        "bucket_table_probes": 1809,
+        "bucket_verified_rows": 448,
+        "bucket_verify_table_probes": 6912,
+        "condition_bucket_calls": 4,
+        "condition_checked_nodes": 8,
+        "condition_lookup_calls": 5,
+        "condition_lookup_literals": 932,
+        "condition_memo_hits": 1,
+        "condition_pivot_literal_visits": 550,
+        "condition_retained_nodes": 4,
+        "condition_split_nodes": 2,
+        "normalization_literal_visits": 9238,
+        "restriction_literal_visits": 3300,
+        "symbolic_admission_literals": 400,
+        "symbolic_index_literal_updates": 400,
+        "symbolic_remaining_clauses": 100,
+        "symbolic_reserved_index_work": 400
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1024,
+                "width": 9
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 384,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 2048,
+                "width": 10
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 3
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 400
+        }
+      },
+      "status": "unresolved"
+    }
+  },
+  {
+    "base": {
+      "counts": {
+        "bucket_leaf_rows": 4888,
+        "bucket_planning_scope_visits": 5215,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1585,
+        "condition_pivot_literal_visits": 931,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 16393,
+        "restriction_literal_visits": 5586
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 11
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 11
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 12
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "disabled",
+          "spent": 0
+        }
+      },
+      "status": "unresolved"
+    },
+    "fold": {
+      "counts": {
+        "bucket_checked_steps": 14,
+        "bucket_compacted_rows": 134,
+        "bucket_leaf_rows": 2734,
+        "bucket_lookup_factors": 10,
+        "bucket_lookup_scope_visits": 35,
+        "bucket_operator_misses": 7,
+        "bucket_planning_scope_visits": 5943,
+        "bucket_projected_rows": 172,
+        "bucket_removed_coordinates": 17,
+        "bucket_reserved_probe_work": 1112,
+        "bucket_support_pair_checks": 339,
+        "bucket_table_probes": 695,
+        "bucket_verified_rows": 344,
+        "bucket_verify_table_probes": 2224,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1054,
+        "condition_pivot_literal_visits": 522,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 10946,
+        "restriction_literal_visits": 3132,
+        "symbolic_admission_literals": 532,
+        "symbolic_checked_folds": 67,
+        "symbolic_fold_steps": 67,
+        "symbolic_index_literal_updates": 1266,
+        "symbolic_pair_lookups": 67,
+        "symbolic_remaining_clauses": 66,
+        "symbolic_reserved_index_work": 6122,
+        "symbolic_signature_literal_visits": 4856,
+        "symbolic_stale_pairs": 69,
+        "symbolic_verify_fold_literals": 534
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 8,
+                "width": 9
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 16,
+                "width": 10
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1040,
+                "width": 10
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 16,
+                "width": 9
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 16,
+                "width": 10
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 16,
+                "width": 11
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 6122
+        }
+      },
+      "status": "unresolved"
+    },
+    "id": "c13",
+    "units": {
+      "counts": {
+        "bucket_leaf_rows": 4888,
+        "bucket_planning_scope_visits": 5215,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1585,
+        "condition_pivot_literal_visits": 931,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 16393,
+        "restriction_literal_visits": 5586,
+        "symbolic_admission_literals": 532,
+        "symbolic_index_literal_updates": 532,
+        "symbolic_remaining_clauses": 133,
+        "symbolic_reserved_index_work": 532
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 11
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 11
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 12
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 532
+        }
+      },
+      "status": "unresolved"
+    }
+  },
+  {
+    "base": {
+      "counts": {
+        "bucket_checked_steps": 4,
+        "bucket_compacted_rows": 192,
+        "bucket_leaf_rows": 3008,
+        "bucket_lookup_factors": 13,
+        "bucket_lookup_scope_visits": 38,
+        "bucket_operator_misses": 2,
+        "bucket_planning_scope_visits": 4105,
+        "bucket_projected_rows": 192,
+        "bucket_removed_coordinates": 0,
+        "bucket_reserved_probe_work": 2560,
+        "bucket_support_pair_checks": 102,
+        "bucket_table_probes": 1496,
+        "bucket_verified_rows": 384,
+        "bucket_verify_table_probes": 5120,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1162,
+        "condition_pivot_literal_visits": 566,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 11304,
+        "restriction_literal_visits": 3396
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1792,
+                "width": 10
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 768,
+                "width": 10
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 11
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "disabled",
+          "spent": 0
+        }
+      },
+      "status": "unresolved"
+    },
+    "fold": {
+      "counts": {
+        "bucket_checked_steps": 4,
+        "bucket_compacted_rows": 160,
+        "bucket_leaf_rows": 2858,
+        "bucket_lookup_factors": 10,
+        "bucket_lookup_scope_visits": 26,
+        "bucket_operator_misses": 2,
+        "bucket_planning_scope_visits": 3926,
+        "bucket_projected_rows": 192,
+        "bucket_removed_coordinates": 1,
+        "bucket_reserved_probe_work": 2048,
+        "bucket_support_pair_checks": 134,
+        "bucket_table_probes": 1232,
+        "bucket_verified_rows": 384,
+        "bucket_verify_table_probes": 4096,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1111,
+        "condition_pivot_literal_visits": 542,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 10829,
+        "restriction_literal_visits": 3252,
+        "symbolic_admission_literals": 210,
+        "symbolic_checked_folds": 2,
+        "symbolic_fold_steps": 2,
+        "symbolic_index_literal_updates": 226,
+        "symbolic_pair_lookups": 2,
+        "symbolic_remaining_clauses": 68,
+        "symbolic_reserved_index_work": 900,
+        "symbolic_signature_literal_visits": 674,
+        "symbolic_stale_pairs": 2,
+        "symbolic_verify_fold_literals": 12
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1536,
+                "width": 10
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 512,
+                "width": 10
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 11
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 900
+        }
+      },
+      "status": "unresolved"
+    },
+    "id": "c05",
+    "units": {
+      "counts": {
+        "bucket_checked_steps": 4,
+        "bucket_compacted_rows": 192,
+        "bucket_leaf_rows": 3008,
+        "bucket_lookup_factors": 13,
+        "bucket_lookup_scope_visits": 38,
+        "bucket_operator_misses": 2,
+        "bucket_planning_scope_visits": 4105,
+        "bucket_projected_rows": 192,
+        "bucket_removed_coordinates": 0,
+        "bucket_reserved_probe_work": 2560,
+        "bucket_support_pair_checks": 102,
+        "bucket_table_probes": 1496,
+        "bucket_verified_rows": 384,
+        "bucket_verify_table_probes": 5120,
+        "condition_bucket_calls": 7,
+        "condition_checked_nodes": 14,
+        "condition_lookup_calls": 7,
+        "condition_lookup_literals": 1162,
+        "condition_pivot_literal_visits": 566,
+        "condition_retained_nodes": 7,
+        "condition_split_nodes": 3,
+        "normalization_literal_visits": 11304,
+        "restriction_literal_visits": 3396,
+        "symbolic_admission_literals": 210,
+        "symbolic_index_literal_updates": 210,
+        "symbolic_remaining_clauses": 70,
+        "symbolic_reserved_index_work": 210
+      },
+      "diagnostic": {
+        "conditioned": {
+          "attempts": [
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 0
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 1
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 10
+              },
+              "node": 2
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 1792,
+                "width": 10
+              },
+              "node": 3
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 768,
+                "width": 10
+              },
+              "node": 4
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 9
+              },
+              "node": 5
+            },
+            {
+              "diagnostic": {
+                "reason": "bag-width",
+                "spent": 0,
+                "width": 11
+              },
+              "node": 6
+            }
+          ],
+          "root_status": "unresolved"
+        },
+        "preprocessing": {
+          "reason": "fixed-point",
+          "spent": 210
+        }
+      },
+      "status": "unresolved"
+    }
+  }
+]

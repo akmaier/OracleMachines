@@ -12,7 +12,31 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: full-CNF consequences and reusable propagation indexes
+## Current investigation: post-probe relations and capped acquisition
+
+[One checked signed substitution after probe consequences](probe-relation-discovery.md)
+raises previous coverage **47/48 to 48/48**, retaining all 28 new queries:
+**76/76** structural verdicts. Complete cost is **6.70% below raising width to
+nine**, but **1.69% above the probe-only mean** with mixed paired signs, and
+**1.66 times fresh**. Preserve the regression and leave defaults unchanged.
+Sixteen extra substitutions remove 27 variable occurrences; elimination steps
+fall 587 to 567, but shared nodes stay 161 and no new nonconstant merges appear.
+
+**Largest costs:** discovery 0.70425 s, including its internal check, and cold
+replay 0.68073 s. Reuse validated normalized/intermediate state within one replay
+with exact source bindings; charge preparation, lookup, memory and invalidation.
+**Next coverage target:** selective continuation of capped probes. A separate
+six-case larger-input census leaves four roots unresolved; four of eight unknown
+leaves have thirteen failed assumptions, all after a 128-probe stop, and none has
+another alias block. Compare a selective policy with simply raising the quota,
+retaining the no-failure leaves and charging unsuccessful work. This census is
+post-hoc and excluded from the 76-query cost comparison. Broader external coverage
+and unrestricted expansion bounds remain open.
+Resume `experiments/results/cnf-probe-relations/checkpoint.json`, key
+`probe_relations.frontier`. All **2,323 full and 47 focused tests pass**; prior
+232 manifests, 44,871 artifacts, 1,273 sources and 74 proofs are preserved.
+
+## Previous investigation: full-CNF consequences and reusable propagation indexes
 
 [Source-checked failed assumptions](probe-bucket-discovery.md) certify **19/20**
 exposed gaps and all **24/24** new constructions, with four repeats covered.

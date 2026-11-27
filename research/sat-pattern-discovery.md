@@ -5,7 +5,28 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: full-CNF probes with a shared occurrence index
+## Latest evidence: relations exposed by probe consequences
+
+[Checked post-probe substitutions](probe-relation-discovery.md) close the last
+exposed root at width eight: previous coverage **47/48 to 48/48**, and **76/76**
+with 24 new unique controls and four repeats. The new controls are already covered
+by the baseline. Complete cost is **6.70% below a width-nine control**, but **1.69%
+above probe-only on average**, with mixed paired signs, and **1.66 times fresh**.
+Defaults stay unchanged; there is no new nonconstant sharing result.
+
+A separately frozen larger-input census exposes **four unresolved roots out of
+six**, at 32–48 variables. Four of eight unknown leaves have thirteen source-checked
+failed assumptions after reaching the 128-probe allowance; none has another
+signed-equivalence block. **Next coverage target: selective continuation of capped
+probes**, charging discovery and exact index lifetime, against a larger-allowance
+control. The leaves without failed assumptions remain controls. Discovery and
+cold replay dominate total cost; exact reuse of validated normalization remains
+its leading target. This synthetic census is separate from matched gains.
+All **2,323 full and 47 focused tests pass**; previous evidence is preserved.
+Resume `experiments/results/cnf-probe-relations/checkpoint.json`, including
+`probe_relations.frontier`. Efficient arbitrary-SAT classification remains open.
+
+## Previous evidence: full-CNF probes with a shared occurrence index
 
 [Checked failed-assumption closure](probe-bucket-discovery.md) certifies **19/20**
 exposed misses and raises new unique-panel coverage **23/24 to 24/24**, with all

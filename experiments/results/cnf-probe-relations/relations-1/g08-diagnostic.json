@@ -1,0 +1,90 @@
+{
+  "attempts": [
+    {
+      "diagnostic": {
+        "reason": "complete",
+        "spent": 52
+      },
+      "node": 0
+    }
+  ],
+  "edges": [
+    {
+      "diagnostic": {
+        "post_relation": {
+          "after_units": null,
+          "units": {
+            "reason": "fixed-point",
+            "spent": 10
+          }
+        },
+        "probes": {
+          "binary": {
+            "reason": "complete",
+            "relation": {
+              "after_units": null,
+              "units": {
+                "reason": "fixed-point",
+                "spent": 235
+              }
+            },
+            "rounds": [
+              {
+                "forcing": {
+                  "reason": "complete",
+                  "searches": 18,
+                  "spent": 10
+                }
+              }
+            ],
+            "spent": 10
+          },
+          "probes": [
+            {
+              "failures": 2,
+              "probes": 46,
+              "truncated": false,
+              "units": {
+                "reason": "fixed-point",
+                "spent": 293
+              },
+              "variables_removed": 2
+            },
+            {
+              "failures": 2,
+              "probes": 42,
+              "truncated": false,
+              "units": {
+                "reason": "fixed-point",
+                "spent": 300
+              },
+              "variables_removed": 2
+            },
+            {
+              "failures": 5,
+              "probes": 38,
+              "truncated": false,
+              "units": {
+                "reason": "fixed-point",
+                "spent": 392
+              },
+              "variables_removed": 13
+            },
+            {
+              "failures": 0,
+              "probes": 2,
+              "truncated": true
+            }
+          ],
+          "reason": "probe-limit",
+          "spent": 128
+        }
+      },
+      "edge": 0
+    }
+  ],
+  "preprocessing": {
+    "reason": "fixed-point",
+    "spent": 1026
+  }
+}

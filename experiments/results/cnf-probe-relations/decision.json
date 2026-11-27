@@ -1,0 +1,292 @@
+{
+  "cost": "6.70% below width nine in all four pairs, but 1.69% above probe-only mean with mixed paired signs, and 1.66 times fresh. Defaults unchanged. Compressed packages fall 96035 to 91554 bytes mainly by eliminating fallback records, not general semantic compression.",
+  "documents": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "dc021a1e46a546ee9df3f79ca7007b5b27e3c0b52b571667ff1346ae8ca99c56",
+    "research/implementation-gaps.md": "2d18a06169144b889683103eb951170a9303c61eee8e260acbb917539cc70d19",
+    "research/probe-relation-discovery.md": "127bce0ec3e286488e3dbb1c44377c303c16c62390319e480aaad3d83da47c7e",
+    "research/sat-pattern-discovery.md": "c907bf20bd08ab8a9f06648b0c7d52639f1554db978fa1863d714a8d8fe8ea93",
+    "research/structural-reuse-priorities.md": "f482565c02405f2154cc558763fd19e10334bec790e375e3bf0231a3dc7f57e1"
+  },
+  "frontier": {
+    "path": "experiments/results/cnf-probe-relations/frontier.json",
+    "sha256": "46d5b1be24bf679fd3d1be78d328a03b0e9e37324f75d9691d255c4f1ca7497e"
+  },
+  "frontier_validation": {
+    "path": "experiments/results/cnf-probe-relations/frontier-validation.json",
+    "sha256": "9d49a9b9f4c78f26aafac8d5e448262ee2897848d33c2b730541a44079048400"
+  },
+  "git_parent": "1b2e7f63",
+  "measurements": {
+    "combined_compressed_bytes": {
+      "fresh": 308459,
+      "probe": 96035,
+      "relations": 91554,
+      "width9": 92120
+    },
+    "comparisons_percent": {
+      "relations_vs_fresh": 65.87229838531998,
+      "relations_vs_probe": 1.6858143072666198,
+      "relations_vs_width9": -6.703080682693885,
+      "width9_vs_probe": 8.99160985308589
+    },
+    "coverage": {
+      "fresh": {
+        "previous_panel_cases": 48,
+        "previous_panel_direct": 0,
+        "previous_panel_sat": 26,
+        "repeats_cases": 4,
+        "repeats_direct": 0,
+        "repeats_sat": 4,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 0,
+        "unique_panel_sat": 18
+      },
+      "probe": {
+        "previous_panel_cases": 48,
+        "previous_panel_direct": 47,
+        "previous_panel_sat": 26,
+        "repeats_cases": 4,
+        "repeats_direct": 4,
+        "repeats_sat": 4,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 24,
+        "unique_panel_sat": 18
+      },
+      "relations": {
+        "previous_panel_cases": 48,
+        "previous_panel_direct": 48,
+        "previous_panel_sat": 26,
+        "repeats_cases": 4,
+        "repeats_direct": 4,
+        "repeats_sat": 4,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 24,
+        "unique_panel_sat": 18
+      },
+      "width9": {
+        "previous_panel_cases": 48,
+        "previous_panel_direct": 48,
+        "previous_panel_sat": 26,
+        "repeats_cases": 4,
+        "repeats_direct": 4,
+        "repeats_sat": 4,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 24,
+        "unique_panel_sat": 18
+      }
+    },
+    "coverage_losses": [],
+    "new_direct_cases": [
+      "d-d-i04"
+    ],
+    "paired_percent": {
+      "relations_vs_fresh": [
+        65.3033151248698,
+        63.57548067080279,
+        69.15689105247611,
+        65.45183178153742
+      ],
+      "relations_vs_probe": [
+        4.919957216514015,
+        -4.882455830216125,
+        8.616332217254907,
+        -1.0246703179395578
+      ],
+      "relations_vs_width9": [
+        -6.076048678662249,
+        -4.695597940271112,
+        -9.094275247953309,
+        -6.767609896854754
+      ],
+      "width9_vs_probe": [
+        11.707350191812216,
+        -0.1960642802500301,
+        19.482389600341943,
+        6.159811598267129
+      ]
+    },
+    "peak_rss_bytes": {
+      "fresh": 86179840,
+      "probe": 65880064,
+      "relations": 60817408,
+      "width9": 60850176
+    },
+    "structural": {
+      "fresh": {},
+      "probe": {
+        "after_unit_steps": 4,
+        "bucket_steps": 587,
+        "constant_raw_merges": 10,
+        "distinct_raw_merges": 10,
+        "edge_unit_steps": 40,
+        "edges": 176,
+        "failed_assumptions": 842,
+        "forcing_compact_bytes": 7153,
+        "forcing_literals": 131,
+        "forcing_path_steps": 439,
+        "forcing_records": 33,
+        "forcing_rounds": 33,
+        "forcing_unit_steps": 161,
+        "iterated_edges": 4,
+        "leaf_nodes": 107,
+        "leaf_sat": 49,
+        "leaf_unresolved": 3,
+        "leaf_unsat": 55,
+        "max_probe_rounds_per_edge": 4,
+        "max_rounds_per_edge": 2,
+        "nodes": 161,
+        "prefix_fold_steps": 113,
+        "probe_compact_bytes": 116111,
+        "probe_reason_steps": 7035,
+        "probe_rounds": 151,
+        "probe_unit_steps": 747,
+        "relation_equivalence": 33,
+        "shared_targets": 15,
+        "split_nodes": 54
+      },
+      "relations": {
+        "after_unit_steps": 4,
+        "bucket_steps": 567,
+        "constant_raw_merges": 10,
+        "distinct_raw_merges": 10,
+        "edge_unit_steps": 40,
+        "edges": 176,
+        "failed_assumptions": 842,
+        "forcing_compact_bytes": 7081,
+        "forcing_literals": 130,
+        "forcing_path_steps": 433,
+        "forcing_records": 33,
+        "forcing_rounds": 33,
+        "forcing_unit_steps": 161,
+        "iterated_edges": 4,
+        "leaf_nodes": 107,
+        "leaf_sat": 50,
+        "leaf_unresolved": 2,
+        "leaf_unsat": 55,
+        "max_probe_rounds_per_edge": 4,
+        "max_rounds_per_edge": 2,
+        "nodes": 161,
+        "post_probe_compact_bytes": 2449,
+        "post_probe_equivalence": 16,
+        "post_probe_transforms": 16,
+        "post_probe_unit_steps": 0,
+        "prefix_fold_steps": 113,
+        "probe_compact_bytes": 116111,
+        "probe_reason_steps": 7035,
+        "probe_rounds": 151,
+        "probe_unit_steps": 747,
+        "relation_equivalence": 28,
+        "shared_targets": 15,
+        "split_nodes": 54
+      },
+      "width9": {
+        "after_unit_steps": 4,
+        "bucket_steps": 569,
+        "constant_raw_merges": 10,
+        "distinct_raw_merges": 10,
+        "edge_unit_steps": 38,
+        "edges": 170,
+        "failed_assumptions": 832,
+        "forcing_compact_bytes": 6838,
+        "forcing_literals": 125,
+        "forcing_path_steps": 423,
+        "forcing_records": 31,
+        "forcing_rounds": 31,
+        "forcing_unit_steps": 153,
+        "iterated_edges": 4,
+        "leaf_nodes": 104,
+        "leaf_sat": 47,
+        "leaf_unresolved": 2,
+        "leaf_unsat": 55,
+        "max_probe_rounds_per_edge": 4,
+        "max_rounds_per_edge": 2,
+        "nodes": 155,
+        "prefix_fold_steps": 113,
+        "probe_compact_bytes": 114927,
+        "probe_reason_steps": 6984,
+        "probe_rounds": 147,
+        "probe_unit_steps": 737,
+        "relation_equivalence": 28,
+        "shared_targets": 15,
+        "split_nodes": 51
+      }
+    },
+    "totals": {
+      "fresh": {
+        "certificate_bytes": 0,
+        "certificate_compressed_bytes": 22,
+        "cold_seconds": 0.387032094062306,
+        "complete_seconds": 1.2977354793110862,
+        "diagnostic_bytes": 0,
+        "input_seconds": 0.0023631565272808075,
+        "persistence_seconds": 0.2727392917731777,
+        "phases": {
+          "solve_check_seconds": 0.5846316674724221
+        },
+        "record_bytes": 1570760,
+        "records": 973,
+        "warm_seconds": 0.042039437335915864
+      },
+      "probe": {
+        "certificate_bytes": 3756582,
+        "certificate_compressed_bytes": 90700,
+        "cold_seconds": 0.6876669478369877,
+        "complete_seconds": 2.1168967187404633,
+        "diagnostic_bytes": 217031,
+        "input_seconds": 0.0021862498251721263,
+        "persistence_seconds": 0.08363050024490803,
+        "phases": {
+          "discovery_seconds": 0.6662623840384185,
+          "evidence_persistence_seconds": 0.03963133366778493,
+          "solve_check_seconds": 0.29928547074086964
+        },
+        "record_bytes": 18445,
+        "records": 17,
+        "warm_seconds": 0.3315855204127729
+      },
+      "relations": {
+        "certificate_bytes": 3746502,
+        "certificate_compressed_bytes": 90559,
+        "cold_seconds": 0.6807259273482487,
+        "complete_seconds": 2.1525836664950475,
+        "diagnostic_bytes": 232434,
+        "input_seconds": 0.0031123016960918903,
+        "persistence_seconds": 0.08382214547600597,
+        "phases": {
+          "discovery_seconds": 0.7042531246552244,
+          "evidence_persistence_seconds": 0.04463317641057074,
+          "solve_check_seconds": 0.2937213000841439
+        },
+        "record_bytes": 0,
+        "records": 0,
+        "warm_seconds": 0.334325791685842
+      },
+      "width9": {
+        "certificate_bytes": 3686213,
+        "certificate_compressed_bytes": 91125,
+        "cold_seconds": 0.7528881981270388,
+        "complete_seconds": 2.3072398126823828,
+        "diagnostic_bytes": 209115,
+        "input_seconds": 0.0024180837208405137,
+        "persistence_seconds": 0.09067230217624456,
+        "phases": {
+          "discovery_seconds": 0.7337664172518998,
+          "evidence_persistence_seconds": 0.039694968960247934,
+          "solve_check_seconds": 0.32755262369755656
+        },
+        "record_bytes": 0,
+        "records": 0,
+        "warm_seconds": 0.35394303139764816
+      }
+    }
+  },
+  "next": "Selective continuation of capped probing versus a larger-allowance control, with exact unchanged-CNF index reuse and no-failure controls. Four new unresolved roots at 32-48 variables remain in frontier.json; four of eight unknown leaves have thirteen failed assumptions after the 128-probe cap and none has another equivalence block. For cost, reuse validated normalization/intermediate state within one replay; discovery and cold checking dominate.",
+  "outcome": "Checked post-probe signed substitution closes the last exposed SAT root at width eight. Previous coverage 47/48 to 48/48; all 28 new queries were already covered, giving 76/76 versus 75/76. No losses.",
+  "parent": {
+    "path": "experiments/results/cnf-probe-buckets/checkpoint.json",
+    "sha256": "6f3fecdf4f7b381fc244332b1d6c6713c81cac49d12bd4f0d5f0c25f7cd39ccd"
+  },
+  "pattern": "Checked full-CNF consequences expose binary equivalences. Two source-clause implication trees certify one signed block; substitute, clean, check units and retain inverse maps on the incoming edge. Nonconstant transforms strictly reduce active variables. Exact residual/depth targets may share computation.",
+  "recognition": "Probe control translates losslessly to the previous indexed certificate. Width-nine control changes only bag_limit. New frozen inputs use nonfolding motifs and deleted directions; labels are audit-only. Parity families recur; all new cases are already covered by baseline.",
+  "resources": "At most one added relation preparation per incoming edge; preceding quotas unchanged. Recognition scans, SCCs, quotient cleanup/normalization, checking, model lifting and persistence charged. No fixed point, global work bound or arbitrary-SAT efficiency follows."
+}

@@ -1,0 +1,6 @@
+{
+  "initial_failure": "AssertionError in separate frontier audit comparing encoded JSON strings for stored and fresh oracle labels.",
+  "cause": "Before serialization, model keys are integers; after loading, they are strings. Sorting produces different key orders despite equal JSON values.",
+  "correction": "Compare decoded JSON values; independently check SAT witnesses and re-run the oracle. All six label objects agree.",
+  "scientific_result_changed": false
+}

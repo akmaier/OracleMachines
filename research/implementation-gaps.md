@@ -4,7 +4,24 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-## Latest checkpoint: full-CNF failed assumptions and shared probe indexes
+## Latest checkpoint: source-checked relations after probing
+
+[Post-probe signed substitution](probe-relation-discovery.md) certifies the last
+exposed root within width eight and all 76 matched queries. It is 6.70% cheaper
+than width nine, but 1.69% slower on average than probe-only and 1.66 times fresh;
+production defaults remain unchanged. All **2,323 full and 47 focused tests pass**.
+Prior scientific files and 74 proof blocks are unchanged. Resume
+`experiments/results/cnf-probe-relations/checkpoint.json`.
+
+The new post-hoc census retains four unresolved roots among six larger formulas.
+Four of eight unknown leaves expose thirteen failed assumptions after the probe
+quota stops acquisition; no further equivalence block is found. Next compare
+selective probe continuation against a larger allowance with exact source/index
+lifetimes. Discovery and cold checking remain the largest costs; reuse verified
+normalization/intermediates before assuming extra preprocessing pays. Finite-panel
+completion is not an efficient partition of arbitrary SAT.
+
+## Previous checkpoint: full-CNF failed assumptions and shared probe indexes
 
 [Checked full-CNF probing](probe-bucket-discovery.md) closes **19/20** exposed
 structural gaps and increases new unique coverage **23/24 to 24/24**; all four

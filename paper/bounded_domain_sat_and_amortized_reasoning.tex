@@ -15775,6 +15775,100 @@ gate may itself duplicate discovery.  Neither bounded propagation, empirical
 coverage nor smaller certificates establishes efficient unrestricted SAT or
 compact closure.
 
+\subsection{Signed relations exposed by probe consequences}
+\label{sec:probe-relations}
+
+The previous gap was a missing composition: failed assumptions can expose binary
+relations after the initial relation pass has finished.  The new experimental
+path runs one more source-checked binary-conflict/equivalence preparation on
+each nonconstant incoming residual after indexed probing.  The disabled control
+translates exactly to the earlier indexed-probe certificate.  A separate control
+raises only the bucket width from eight to nine.
+
+\begin{proposition}[Post-consequence signed quotient transport]
+Suppose checked consequences and forced-unit restrictions transform $F$ to an
+equisatisfiable residual $R$ with a recorded inverse model map.  Suppose actual binary clauses of $R$ provide
+implication trees from a representative to each member of a signed block and
+back.  Substituting that block, cleaning tautologies and repeated literals,
+applying checked units and normalizing gives a quotient $Q$ equisatisfiable
+with $R$.  A model of $Q$ lifts through these maps to a model of $F$; a refutation
+of $Q$ refutes the corresponding incoming case.  Exact equal quotients under the
+same remaining policy may share their bucket computation while retaining distinct
+incoming maps.  No conclusion is licensed by an unresolved quotient.
+\end{proposition}
+\begin{proof}
+Each cited binary clause certifies its implication.  The two trees therefore
+force every signed member to equal its representative in every model of $R$.
+Restriction of an $R$ model yields a quotient model, and substitution of the
+recorded signed values extends any quotient model to $R$.  Tautology removal,
+literal deduplication, verified unit restriction and inverse normalization preserve
+these correspondences.  Compose the inverse maps with the previously checked map
+from $R$ to $F$.  Equal quotients have the same local model/refutation question,
+but their incoming assignments can differ, so transport remains edge-specific.
+For conditioning, a SAT child supplies a lifted witness whereas refutation of a
+split requires both exact children.  These facts establish the stated composition
+without a bound on unrestricted discovery or quotient size.
+\end{proof}
+
+The added nonconstant transform must strictly reduce active variables; only one
+additional preparation is attempted per incoming edge.  This is not a fixed-point
+claim.  Binary graph construction and SCC recognition have their usual linear
+graph costs, while full-source scanning, quotient normalization, unit processing,
+checking and lifting are additional.  The preceding probe, binary, unit and bucket
+allowances remain separate.  Cold checking reconstructs the source and checks
+relation paths without rerunning discovery.  Full normalized residual/depth pairs
+identify shared nodes; no omitted changing background is trusted.
+
+The matched panel preserves all 48 previous queries and adds 24 unique unlabelled
+constructions and four repeats, frozen before execution.  New controls include
+nonfolding failure motifs, probe-exposed aliases, deleted conflict or relation
+directions, growing random three-CNFs and parity prisms.  No new normalized source
+duplicates the parent panel, although parity families recur structurally.  Labels
+are audit-only.  There are 48 SAT and 28 UNSAT queries.
+
+The previous miss becomes SAT at width eight after a relevant leaf shrinks from
+16 to 14 variables.  Its other leaf remains unresolved; the lifted SAT witness
+certifies the root.  Previous coverage rises from $47/48$ to $48/48$.  All 28 new
+queries are already covered by the baseline, so overall coverage changes only
+from $75/76$ to $76/76$.  Width nine also covers every root.  Two unresolved leaves
+remain under SAT parents.  These finite synthetic results do not establish
+representative arbitrary-SAT coverage.
+
+Four cyclic process orders give mean complete costs of $1.29774$ seconds fresh,
+$2.11690$ probes, $2.15258$ post-probe relations and $2.30724$ width nine.
+Relations save $6.70\%$ against width nine, with all four paired comparisons
+favorable, but cost $1.69\%$ more than probes on average, with mixed paired signs.
+They remain $1.66$ times fresh; production defaults stay unchanged.  Complete time
+includes input, recognition, internal/explicit checking, writes, warm and cold
+replay and compression.  Startup, protocol construction, oracle labels, historical
+acquisition, post-hoc diagnostics and lineage audit are additional.
+
+The extra stage searches 111 times and retains sixteen equivalence transforms,
+removing 27 variable occurrences and storing 2,449 compact tail bytes across
+unique programs.  Elimination steps fall from 587 to 567; nodes remain 161 and
+splits remain 54.  Fifteen shared targets and ten distinct-raw merges remain,
+all those merges constant.  New nonconstant semantic sharing is not demonstrated.
+Combined compressed SQLite/JSON bytes fall from 96,035 to 91,554 versus probes;
+compressed JSON alone falls only from 90,700 to 90,559 bytes, so most savings come
+from avoiding fallback records.  Fresh and width-nine packages use 308,459 and
+92,120 bytes.  Diagnostic bytes are separate.  Peak RSS is respectively
+86,179,840, 65,880,064, 60,817,408 and 60,850,176 bytes, an observation rather
+than a worst-case bound.  Relation discovery, including internal checking, takes
+$0.70425$ seconds and cold replay $0.68073$ seconds; they dominate cost.
+
+A separate post-hoc census freezes six larger random three-CNFs at 32, 40 and
+48 variables and density $4.26$.  It is excluded from matched gains.  Only two
+roots have structural verdicts; four remain unresolved, with separate oracle
+labels of three SAT and one UNSAT.  Eight unknown leaves occur at widths 9--11,
+including one under a SAT parent.  Further source-checked probing finds thirteen
+failed assumptions in four leaves, each from an incoming preparation stopped at
+the 128-probe allowance, without a subsequent relation tail.  No further signed
+block is found.  These diagnostics supply no new root authority.  Next compare
+selective continuation of capped probes with a larger allowance, retaining
+no-failure controls and charging work and index lifetimes.  Reusing validated
+normalization and intermediate residuals within one replay remains the leading
+cost target.  Complete unrestricted coverage and efficient expansion remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

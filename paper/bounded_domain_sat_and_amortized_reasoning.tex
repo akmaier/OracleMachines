@@ -14782,6 +14782,123 @@ reconstruction or cold verification.  No production default, unrestricted
 small-width guarantee, polynomial acquisition theorem or new Lean refinement is
 claimed.
 
+\subsection{Conditioning before bounded Boolean buckets}
+\label{sec:conditioned-bucket-discovery}
+The preceding width obstruction motivates a bounded partition before further
+bucket elimination. Each state first tries the same complete semantic-bucket
+method. If that attempt is unresolved and depth remains, the algorithm fixes a
+most-frequent variable, breaking ties by canonical variable name, and recursively
+checks both normalized cofactors. The experimental policy permits two levels,
+with width eight and 262,144 reserved table probes per node. Thus it spends a
+larger discovery budget than the depth-zero control. Unknown branches remain
+unknown; no missing table row or unfinished branch is interpreted as false.
+
+\begin{proposition}[Checked conditioned buckets and residual reuse]
+Fix a bucket policy and a finite conditioning depth $d$. Suppose every terminal
+bucket verdict is checked, each partition edge is bound to the exact normalized
+cofactor, and depth decreases along every edge. A state with a SAT child admits
+a source witness obtained by reversing the child's renaming and adding the fixed
+branch value. A state whose two children are UNSAT is UNSAT. The same rules apply
+when identical normalized residuals with the same remaining depth share a node.
+Without sharing there are at most $2^{d+1}-1$ bucket acquisitions; with sharing
+there is one acquisition per distinct residual-and-depth pair encountered.
+\end{proposition}
+\begin{proof}
+For a pivot $x$, a satisfying source assignment restricts to a model of the
+cofactor indexed by its value of $x$. Conversely, any cofactor model
+extends by the fixed value of $x$; the inverse normalization map restores its
+variable names, and variables absent from the cofactor can be assigned freely.
+This proves the SAT lifting and two-child UNSAT rules. Induction on remaining
+depth, starting with checked bucket leaves, proves every asserted verdict.
+Identical normalized residuals under the same fixed policy and depth have the
+same subproblem; checking every incoming edge preserves the induction when the
+discovery result is shared. The binary recursion has at most
+$1+2+\cdots+2^d=2^{d+1}-1$ states. Memoization acquires each encountered exact key
+once. Key construction, comparison, edge checking and witness transport remain
+additional costs, and the number of distinct keys can attain the tree bound.
+\end{proof}
+
+The implementation retains complete and partial bucket attempts at internal
+nodes, checks every stored node, and checks every incoming edge. Bucket witness
+choices still use the full unreduced boundary. A SAT verdict also checks the
+lifted assignment against the complete source. The memo is local to one root and
+one policy; exact residual plus remaining depth is not permission to reuse
+arbitrary budget-dependent searches in other contexts. Normalization recognizes
+order-preserving renaming, not general variable/sign isomorphism. Both children
+are explored even after a SAT child is found; shorter witness paths could avoid
+some of this work but are not the policy measured here. A deliberately guarded
+full-cube control reduces seven states to three at depth two and width two. Its
+explicit full-cube input already has exponentially many clauses, so the control
+does not establish compact unrestricted acquisition.
+
+The frozen transfer panel contains twenty-four unique synthetic constructions:
+random three-CNFs on 10, 13, 17 and 21 variables, guarded duplicate cores and
+single-clause edits, parity prisms and linked gates. Sixteen are SAT and eight
+UNSAT. Four exact repeated queries contain two SAT and two UNSAT cases. Ten
+exposed preceding misses contain eight SAT and two UNSAT cases. Sparse variable
+names, signs and input order are scrambled; descriptions and independent DPLL
+truth labels do not guide discovery. No new normalized source duplicates the
+preceding panel. These are designed controls rather than representative external
+SAT evidence. Tests additionally exhaust the 512 two-variable clause sets and
+check sparse witness lifting, unknown leaves, corrupted edges and cold replay
+with discovery disabled.
+
+Two conditioning levels resolve six of the ten exposed acquisition misses and
+raise direct coverage on the new unique panel from $11/24$ to $16/24$. Repeat
+coverage rises from $1/4$ to $2/4$. Tree and memo have identical coverage. The
+unchanged fallback already decides all thirty-eight queries: this is expansion
+of the certified acquisition family, not an enlargement of the set of available
+SAT answers. Exact residual sharing reduces bucket calls from 158 to 149 and
+bucket steps from 517 to 503. Only three complete guarded-twin controls have
+internal memo hits, one each; each skips a three-node subtree. The corresponding
+clause-deletion controls do not supply those exact identities.
+
+Four cyclic process orders compare fresh solving, depth-zero buckets, depth-two
+trees and depth-two memoized DAGs. The depth-zero control wraps the preceding
+bucket method in the same new checking machinery; it is not a timing rerun of
+the older historical artifact. Mean complete costs are respectively 0.33567,
+0.50191, 1.59636 and 1.54155 seconds. Memo improves on tree by 3.43\%, with every
+paired order improving between 2.16\% and 5.18\%. On the three cases with observed
+reuse, discovery improves 43.68\%; on the other thirty-five queries it regresses
+0.65\%. Nevertheless, memo remains 4.59 times as costly as fresh solving, and
+fresh stays selected. Memo's discovery, solve/check, warm and cold phases cost
+0.44674, 0.29142, 0.22426 and 0.49723 seconds. Cold checking is the largest
+measured phase, followed by acquisition.
+
+Pretty-printed JSON certificate files occupy 474,405 bytes for flat, 1,437,097
+for tree and 1,373,023 for memo. The tree-to-memo reduction is 4.46\%. Native
+record bytes are 369,216 fresh, 326,806 flat and 235,256 for either conditioned
+workflow. Combined compressed SQLite/JSON packages are 73,230, 73,952, 77,400
+and 77,242 bytes. Thus state sharing saves only 158 combined compressed bytes.
+Diagnostic files add 0, 6,153, 21,751 and 20,605 bytes. Historical archives,
+reports and database/container overhead are additional. Peak process RSS is
+60,473,344, 59,195,392, 58,474,496 and 58,703,872 bytes respectively; the DAG's
+smaller state count does not imply smaller peak memory than the tree.
+
+All workers begin empty with the same fallback and reuse exact root programs
+within a stream. Every warm or cold program is fully checked. A separate
+conditioned-bucket JSON authority leaves native, equivalence, affine and Lean
+formats unchanged. Both native cold readers audit fallback records; two added
+cold passes use the same conditioned/bucket verifier, not two independently
+implemented JSON verifiers. Preparation, recognition, checking, persistence,
+warm replay, cold replay and compression are charged. Interpreter startup,
+report metadata, panel generation and the lineage audit are additional. The
+per-node discovery probe allowance does not bound planning, normalization,
+verification, runtime or memory.
+
+Twelve unique sources remain outside the bounded family, plus two repeated
+queries. They have forty-one unresolved depth-zero leaves: twenty-four of width
+nine and seventeen of width ten. Nineteen stop before bucket work and twenty-two
+make progress before width exceeds the cap. Conditioning therefore partly
+removes the initial obstruction but does not keep subsequent interaction small.
+The next hypothesis is inexpensive exact small-factor combination before deeper
+branching. The observed identity
+$(C\lor x)\land(C\lor\neg x)\equiv C$ suggests symbolic recognition of some
+repeated cofactors; edited guards and random cores must charge unsuccessful
+recognition and invalidation. This next step is not implemented here. Neither a
+small conditioning depth for arbitrary CNF nor a polynomial unrestricted-SAT
+bound follows. Defaults remain unchanged.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

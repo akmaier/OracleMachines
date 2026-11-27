@@ -1,0 +1,298 @@
+{
+  "analysis": {
+    "path": "experiments/results/cnf-conditioned-buckets/analysis.json",
+    "sha256": "dcaa0281732345fbe2aad314a5b8fe8d7deee20dca3f6089e39aa7c818fd478f"
+  },
+  "checkpoint": "conditioned-buckets",
+  "controls": [
+    "Frozen 24 synthetic constructions contain 16 SAT and eight UNSAT inputs; four exact repeats contain two each. Ten exposed cases contain eight SAT and two UNSAT. No new normalized source duplicates the preceding panel. Labels and descriptions are withheld from discovery; no representative external-benchmark claim.",
+    "Sixteen trials in four cyclic process orders charge recognition, preparation, acquisition, checking, persistence, warm reuse, cold replay and compression with common fallback and empty archives. Interpreter startup, report metadata, panel generation and lineage audit are additional. Flat wraps the prior reduced-bucket method in the same new certificate machinery.",
+    "Every paired memo-versus-tree comparison improves 2.16\u20135.18%. Only three complete guarded-twin constructions have memo hits, one each skipping a three-node subtree. Discovery improves 43.68% on those cases and regresses 0.65% on the other 35 queries. Edited guards do not yield the same identities.",
+    "Certificate-file bytes include pretty printing and fall 1437097 to 1373023 (4.46%). Compressed combined SQLite/JSON saving is only 158 bytes, 77400 to 77242. Native records are identical between tree and memo. Peak RSS rises slightly with memoization. Diagnostics and historical storage are additional.",
+    "Twelve unique remaining inputs contain 41 unresolved depth-zero leaves at width nine or ten; 19 stop immediately, 22 hit the cap after some elimination. Two repeated queries do not add structural gaps. Cold replay is the largest measured phase, followed by acquisition.",
+    "All 225 prior manifests, 36689 artifact entries, 1238 source fingerprints and 67 earlier proof blocks remain unchanged. Five new source/test files raise the ledger to 1243; one restricted proof is added. All 2250 full and 24 focused tests pass. Three unique SQLite archives pass both native cold readers. Existing SQLite ResourceWarnings and all negative comparison arms are retained."
+  ],
+  "date": "2026-11-27",
+  "docs": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "28b377fbab01009cb075832e6f8ec9d9b015a5d2b3113601613487e01237ac02",
+    "research/conditioned-bucket-discovery.md": "63699af110c333ce0e5a454928faa848606c1f7bfb8b8ff7fc621ffb54ed2c1b",
+    "research/implementation-gaps.md": "4825eb8886b9a15c9268721003264a3506cd565513522263b6d62280eb9d5214",
+    "research/sat-pattern-discovery.md": "495401d5bfbd91723b0515b14bd59df181dfc9f44b068195464485f5363aba9f",
+    "research/structural-reuse-priorities.md": "1d27e109fa6ef777439ba6ccdcc100f1955cd0c4809d744a1cc1c0a3bb5a6c17"
+  },
+  "measurements": {
+    "combined_compressed_bytes": {
+      "flat": 73952,
+      "fresh": 73230,
+      "memo": 77242,
+      "tree": 77400
+    },
+    "comparisons_percent": {
+      "memo_vs_fresh": 359.24358694038074,
+      "memo_vs_tree": -3.433213016929637,
+      "tree_vs_flat": 218.0565170290858
+    },
+    "coverage": {
+      "flat": {
+        "development_cases": 10,
+        "development_direct": 0,
+        "development_sat": 8,
+        "repeats_cases": 4,
+        "repeats_direct": 1,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 11,
+        "unique_panel_sat": 16
+      },
+      "fresh": {
+        "development_cases": 10,
+        "development_direct": 0,
+        "development_sat": 8,
+        "repeats_cases": 4,
+        "repeats_direct": 0,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 0,
+        "unique_panel_sat": 16
+      },
+      "memo": {
+        "development_cases": 10,
+        "development_direct": 6,
+        "development_sat": 8,
+        "repeats_cases": 4,
+        "repeats_direct": 2,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 16,
+        "unique_panel_sat": 16
+      },
+      "tree": {
+        "development_cases": 10,
+        "development_direct": 6,
+        "development_sat": 8,
+        "repeats_cases": 4,
+        "repeats_direct": 2,
+        "repeats_sat": 2,
+        "unique_panel_cases": 24,
+        "unique_panel_direct": 16,
+        "unique_panel_sat": 16
+      }
+    },
+    "new_direct_cases": [
+      "d-d-b17",
+      "d-d-b18",
+      "d-d-b16",
+      "d-d-b19",
+      "d-s03",
+      "d-s02",
+      "c09",
+      "c03",
+      "c08",
+      "c02",
+      "c00",
+      "c09r"
+    ],
+    "observed_reuse_strata": {
+      "no_observed_reuse": {
+        "cases": 35,
+        "discovery_seconds": {
+          "memo": 0.4205785838421434,
+          "percent": 0.6526793485382321,
+          "tree": 0.41785135434474796
+        },
+        "solve_check_seconds": {
+          "memo": 0.26910624792799354,
+          "percent": 0.5395353871922914,
+          "tree": 0.26766211609356105
+        }
+      },
+      "observed_reuse": {
+        "cases": 3,
+        "discovery_seconds": {
+          "memo": 0.026164770359173417,
+          "percent": -43.68017639797706,
+          "tree": 0.04645747924223542
+        },
+        "solve_check_seconds": {
+          "memo": 0.022318686824291945,
+          "percent": -26.605021095345638,
+          "tree": 0.03040901047643274
+        }
+      }
+    },
+    "paired_percent": {
+      "memo_vs_fresh": [
+        336.42232602958717,
+        364.49294219280375,
+        398.7137745361316,
+        342.14275261158195
+      ],
+      "memo_vs_tree": [
+        -2.762248647106791,
+        -3.591558232049219,
+        -2.1642707436449804,
+        -5.183350406814979
+      ],
+      "tree_vs_flat": [
+        228.9853917336976,
+        221.51015763062452,
+        195.12116955161912,
+        228.92751018485836
+      ]
+    },
+    "peak_rss_bytes": {
+      "flat": 59195392,
+      "fresh": 60473344,
+      "memo": 58703872,
+      "tree": 58474496
+    },
+    "remaining": [
+      "d-s04",
+      "d-s05",
+      "d-s06",
+      "d-s07",
+      "c06",
+      "c07",
+      "c04",
+      "c11",
+      "c12",
+      "c10",
+      "c13",
+      "c05",
+      "c06r",
+      "c07r"
+    ],
+    "remaining_shape": {
+      "positive_work_leaves": 22,
+      "reasons": {
+        "bag-width": 41
+      },
+      "repeated_queries": 2,
+      "unique_sources": 12,
+      "unknown_leaves": 41,
+      "width_counts": {
+        "10": 17,
+        "9": 24
+      },
+      "zero_work_leaves": 19
+    },
+    "reuse_cases": [
+      "c12",
+      "c10",
+      "c08"
+    ],
+    "selected": "fresh",
+    "structural": {
+      "flat": {
+        "bucket_steps": 178,
+        "choice_rows": 2433,
+        "leaf_nodes": 34,
+        "leaf_sat": 8,
+        "leaf_unresolved": 23,
+        "leaf_unsat": 3,
+        "nodes": 34,
+        "retained_relation_rows": 1693
+      },
+      "fresh": {},
+      "memo": {
+        "bucket_steps": 503,
+        "choice_rows": 21267,
+        "leaf_nodes": 90,
+        "leaf_sat": 18,
+        "leaf_unresolved": 47,
+        "leaf_unsat": 25,
+        "nodes": 149,
+        "retained_relation_rows": 15695,
+        "split_nodes": 59
+      },
+      "tree": {
+        "bucket_steps": 517,
+        "choice_rows": 22107,
+        "leaf_nodes": 96,
+        "leaf_sat": 18,
+        "leaf_unresolved": 51,
+        "leaf_unsat": 27,
+        "nodes": 158,
+        "retained_relation_rows": 16229,
+        "split_nodes": 62
+      }
+    },
+    "totals": {
+      "flat": {
+        "certificate_bytes": 474405,
+        "certificate_compressed_bytes": 12588,
+        "cold_seconds": 0.15931267698761076,
+        "complete_seconds": 0.5019100210629404,
+        "diagnostic_bytes": 6153,
+        "input_seconds": 0.0010830002138391137,
+        "persistence_seconds": 0.059105281019583344,
+        "phases": {
+          "discovery_seconds": 0.07161200977861881,
+          "evidence_persistence_seconds": 0.00871720677241683,
+          "solve_check_seconds": 0.1494083423167467
+        },
+        "record_bytes": 326806,
+        "records": 294,
+        "warm_seconds": 0.04750224994495511
+      },
+      "fresh": {
+        "certificate_bytes": 0,
+        "certificate_compressed_bytes": 22,
+        "cold_seconds": 0.09787468740250915,
+        "complete_seconds": 0.33567179180681705,
+        "diagnostic_bytes": 0,
+        "input_seconds": 0.0009856458054855466,
+        "persistence_seconds": 0.05880812543909997,
+        "phases": {
+          "solve_check_seconds": 0.15840942645445466
+        },
+        "record_bytes": 369216,
+        "records": 360,
+        "warm_seconds": 0.014026656281203032
+      },
+      "memo": {
+        "certificate_bytes": 1373023,
+        "certificate_compressed_bytes": 32301,
+        "cold_seconds": 0.4972293332684785,
+        "complete_seconds": 1.5415511770406738,
+        "diagnostic_bytes": 20605,
+        "input_seconds": 0.0009659997886046767,
+        "persistence_seconds": 0.0615879581309855,
+        "phases": {
+          "discovery_seconds": 0.44674335420131683,
+          "evidence_persistence_seconds": 0.013250780873931944,
+          "solve_check_seconds": 0.2914249347522855
+        },
+        "record_bytes": 235256,
+        "records": 177,
+        "warm_seconds": 0.22426206257659942
+      },
+      "tree": {
+        "certificate_bytes": 1437097,
+        "certificate_compressed_bytes": 32459,
+        "cold_seconds": 0.5202158126048744,
+        "complete_seconds": 1.596357531612739,
+        "diagnostic_bytes": 21751,
+        "input_seconds": 0.0009552919073030353,
+        "persistence_seconds": 0.06180450017563999,
+        "phases": {
+          "discovery_seconds": 0.4643088335869834,
+          "evidence_persistence_seconds": 0.013361979625187814,
+          "solve_check_seconds": 0.2980711265699938
+        },
+        "record_bytes": 235256,
+        "records": 177,
+        "warm_seconds": 0.23289822903461754
+      }
+    }
+  },
+  "next": "Test inexpensive exact small-factor combinations before spending more conditioning levels, starting with complementary clause pairs and unit consequences. Observed guarded-twin equivalence can potentially expose repeated cofactors without computing both branches; edited guards and random cores must charge invalidation and unsuccessful recognition. Shorter SAT proof paths and less repeated checking are secondary cost targets. No uniform small-depth/width classification or polynomial unrestricted-SAT guarantee.",
+  "outcome": "Two conditioning levels resolve 6/10 exposed acquisition misses and increase unique synthetic direct coverage 11/24 to 16/24; separate repeat coverage rises 1/4 to 2/4. Tree and memo coverage match. The current fallback already decides all 38 queries. Exact residual sharing reduces calls 158 to 149 and complete cost 3.43% on this panel, but the memo workflow remains 4.59 times as costly as fresh solving. Fresh remains selected.",
+  "parent": {
+    "path": "experiments/results/cnf-semantic-buckets/checkpoint.json",
+    "sha256": "3d4d624ccd048d9415b246be355fd7b4eb191b27465321bccd6dca64fcf20fbe"
+  },
+  "pattern": "Condition before complete bucket elimination when the full incident bucket is too wide. Each split has exact normalized cofactors. Memo identity is full normalized residual plus remaining depth under one fixed per-node bucket policy.",
+  "recognition": "Try the preceding semantic-bucket kernel first; unresolved states with remaining depth split on the most frequent variable. SAT lifts a checked cofactor witness through inverse normalization and the branch bit. UNSAT needs both exact cofactors. Every node and incoming edge is checked, including partial bucket attempts. Unknown never supplies a verdict. Cache is local to one root; changes to source or policy invalidate root-program reuse.",
+  "resources": "Depth two permits at most seven bucket calls, each with width eight and 262144 reserved discovery probes. Planning, normalization, pivot choice, checking, time and RAM are not bounded by this probe allowance. Full bucket witness choices and internal partial programs remain. Both children are explored even after finding SAT. Separate JSON authority and two added cold passes use the same conditioned/bucket checker; native, affine, equivalence and Lean formats/defaults remain unchanged."
+}

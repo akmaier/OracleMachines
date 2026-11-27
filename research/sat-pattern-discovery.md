@@ -5,7 +5,30 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: compressed non-affine bucket relations
+## Latest evidence: conditioned access to bounded bucket relations
+
+[Two levels of exact conditioning](conditioned-bucket-discovery.md) resolve
+**6/10** preceding acquisition misses and raise frozen unique-panel coverage from
+**11/24 to 16/24**. A SAT cofactor supplies a lifted source witness; UNSAT needs
+both exact cofactors. Unknown branches are not refutations. Memo identity is the
+full normalized residual plus remaining depth under one fixed policy.
+
+The DAG uses 149 states versus 158 for the tree and costs 3.43% less on the
+matched panel, but remains **4.59 times as costly as fresh solving**. Only three
+complete guarded-twin cases share internal states. All 38 answers were already
+available through the fallback. These are acquisition-family improvements, not
+new answers or a general compact partition.
+
+Twelve unique sources remain, with 41 unknown depth-zero leaves at width nine or
+ten. Next test exact small-factor combinations before spending more conditioning
+levels; complementary clause pairs suggest a symbolic way to expose repeated
+cofactors. Edited guards and random cores must keep unsuccessful recognition
+visible. Resume `experiments/results/cnf-conditioned-buckets/checkpoint.json`.
+
+All **2,250 full tests and 24 focused tests pass**; earlier results and all 67
+previous proof blocks remain unchanged.
+
+## Previous evidence: compressed non-affine bucket relations
 
 [Checked semantic support removal](semantic-bucket-support.md) deletes a boundary
 coordinate only when its two cofactors agree. It reduces 352 elimination steps to

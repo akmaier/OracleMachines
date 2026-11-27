@@ -4,7 +4,18 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-Latest expansion checkpoint (27 November, semantic bucket support):
+Latest expansion checkpoint (27 November, conditioned buckets):
+[Conditioning before complete buckets](conditioned-bucket-discovery.md) closes
+6/10 preceding acquisition misses and raises new unique synthetic coverage
+11/24 to 16/24. Exact residual sharing reduces 158 calls to 149 and complete cost
+3.43%, but remains 4.59 times as costly as fresh solving. Twelve unique sources
+still exceed the width cap after the two-level partition. Next test cheap exact
+small-factor combinations before deeper branching. Resume
+`experiments/results/cnf-conditioned-buckets/checkpoint.json`. Previous 225
+manifests, 36,689 artifacts, 1,238 sources and 67 proofs remain intact; a separate
+JSON authority and one restricted proof are added. No default changes.
+
+Previous expansion checkpoint (27 November, semantic bucket support):
 [Exact non-affine table compression](semantic-bucket-support.md) reduces stored
 output rows 35.26% and certificate bytes 12.51%, retaining full-boundary witness
 choices. It covers the same 2/6 exposed misses and 18/24 new unique constructions

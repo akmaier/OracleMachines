@@ -12,7 +12,29 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: semantic support in Boolean buckets
+## Current investigation: conditioning before bounded buckets
+
+[Exact conditioned bucket acquisition](conditioned-bucket-discovery.md) closes
+**6/10** exposed misses and increases new unique synthetic coverage **11/24 to
+16/24**. The fallback already decides all 38 queries. Exact residual-and-depth
+sharing reduces calls **158 to 149** and complete cost **1.59636 to 1.54155 s**
+(3.43%, with every paired order improving). Only three complete guarded-twin
+cases have internal reuse; discovery on the other 35 queries regresses 0.65%.
+Fresh solving remains much cheaper at **0.33567 s**, so defaults stay unchanged.
+
+**Next:** twelve unique sources still have 41 unresolved depth-zero leaves at
+width nine or ten; 22 leaves hit the width cap after some elimination. Test cheap
+exact small-factor combinations before deeper branching, starting with
+complementary clause pairs and unit consequences. Keep edited guards and random
+cores as recognition/invalidation controls. Cold verification is the largest
+measured phase, followed by discovery. Saving states does not remove either cost.
+Resume `experiments/results/cnf-conditioned-buckets/checkpoint.json`, key
+`conditioned_buckets.remaining`. No unrestricted efficiency claim follows.
+
+All **2,250 full tests and 24 focused tests pass**; earlier results and all 67
+previous proof blocks remain unchanged.
+
+## Previous investigation: semantic support in Boolean buckets
 
 [Complete non-affine bucket relations](semantic-bucket-support.md) handle **2/6**
 exposed affine-acquisition misses and **18/24** new unique synthetic inputs.

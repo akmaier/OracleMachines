@@ -1,0 +1,96 @@
+\subsection{Selective survival and exact composition after source edits}
+\label{sec:selective-learning}
+
+A deleted source premise need not invalidate every learned consequence.  The
+previous whole-collection guard rejected an entire proof whenever one referenced
+original clause disappeared.  The new experimental filter retains unrelated
+valid derivations and drops the affected descendants.  This expands reuse under
+edits without assuming semantic equivalence of the old and new formulas.
+
+First the old proof is independently checked.  Canonical original clauses are
+mapped to identical target clauses or marked absent.  In derivation order, a
+record survives exactly when its starting clause and every recorded resolution
+parent have a mapping.  Surviving references receive new indices; rejected
+records receive an absent marker.  This scans the recorded graph without
+constructing transitive support sets.  Canonicalization, old-proof checking,
+edge inspection, copying and target rechecking are charged.  A separate audit
+uses explicit transitive premise sets to check the filter's decisions.
+
+\begin{proposition}[Selective derivation survival and expansion composition]
+Fix an acyclic sequence of checked resolution derivations.  Keep each original
+premise that appears identically in a target CNF, and retain each derived record
+if all of its recorded parents have been retained.  Then a record is retained
+if and only if every original premise reachable along its recorded derivation
+paths survives.  Every retained clause is implied by the target.  Conjoining
+these clauses with the target preserves exactly its models.  A resolution proof
+from this augmented formula can be converted to a target proof by substituting
+the retained derivations for its learned-clause premises.
+\end{proposition}
+\begin{proof}
+For an original clause the claim is its membership test.  For a derived record,
+its reachable original premises are the union of those of its starting clause
+and its recorded resolution parents.  Induction in the acyclic order shows that
+all of this union survives exactly when every parent survives.  The unchanged
+resolution rule then derives the identical claimed clause from target premises.
+Thus adding retained clauses removes no target model, while keeping all target
+clauses gives the reverse inclusion of model sets.
+
+List the retained derivations before the new proof.  Map each augmented original
+clause either to its target-clause index or to a preceding retained derivation
+with the identical clause.  Remap each newly derived reference in order.  All
+parents still precede their use and each resolution step has the same literal
+parents and conclusion.  Induction therefore converts any final empty clause
+into a target refutation.  A full model is checked directly against the target;
+without a model or empty-clause conclusion, the outcome remains unknown.
+\end{proof}
+
+Survival is complete only for the supplied derivation paths.  A discarded clause
+may still be a consequence of the edited source via an alternative proof that
+has not been found.  No semantic completeness or minimal-support claim follows.
+Filtering and substitution are polynomial in the supplied sources and proof
+lengths, not necessarily in the target input length alone.  Acquiring and
+storing that prior knowledge remain additional obligations.
+Old SAT authority is never transported.  A surviving empty clause, including an
+empty target clause, can certify UNSAT without expansion; other retained
+knowledge remains unknown until further checking establishes an answer.
+
+For expansion, the unchanged learner receives the target plus retained clauses.
+Its complete initial proposal is computed from the target alone in both modes.
+Additional clauses can still change ordering, propagation and conflict activity.
+The final certificate substitutes all reused premises back into target-derived
+records and is accepted by the unchanged checker.  Cold replay needs only the
+target and that certificate, not the original source, its proof or the transport
+procedure.  All retained and newly acquired derivations are persisted, even for
+SAT and unknown outcomes; proof pruning and active-index optimization remain
+separate questions.
+
+SELECTIVE_MEASUREMENTS
+
+All 2,640 full and 22 focused tests pass.  Exhaustive and adversarial small-case
+validation checks 13,624 edited targets from all 512 two-variable clause sets,
+3,304 three-variable clause sets of at most three clauses, and 128 fresh sparse
+signed mixtures.  Every single canonical-clause deletion is tried for the
+two-variable parents; the other parents receive a fixed deletion.  Added
+clauses and empty targets are included.  Independent support unions agree with
+all survival decisions.  Truth tables verify 10,955 SAT and 2,669 UNSAT composed
+answers, and 1,270 retained-clause checks include 1,715 satisfying extensions.
+These are cumulative checks, not distinct models or independent problem draws.
+At zero expansion budget, 2,329 retained refutations remain certified while
+11,295 other results remain unknown.
+
+Focused tests include independent branches, invalid removed derivations,
+transitive invalidation, absent source clauses, target additions, empty sources,
+tautologies, changed clause indices, partial budgets and proof substitution.
+Filtering and certificate checking are exercised with search disabled.
+Validation preserves 250 prior manifests, 84,291 artifact entries, all 1,362
+prior scientific files and all 89 earlier proof blocks.  Five new scientific
+files bring the ledger to 1,367; earlier completed panels and cumulative tables
+remain separately denominated and unchanged.
+
+The remaining coverage obligation is new external transfer with a frozen policy.
+For edited inputs, further reuse requires finding alternative supports for
+rejected consequences and selecting retained knowledge economically.  Retaining
+more valid constraints can enlarge the propagation index and final proof enough
+to outweigh saved search.  Compact source guards, preprocessing and unrestricted
+expansion remain open; finite target coverage is not an efficient classification
+of arbitrary CNF.

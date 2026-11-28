@@ -18228,6 +18228,148 @@ Efficient recognition, preprocessing, compact general proofs and unrestricted
 expansion remain open.  Source-checked recomposition and complete finite panels
 do not establish a polynomial algorithm for SAT.
 
+\subsection{Selective survival and exact composition after source edits}
+\label{sec:selective-learning}
+
+A deleted source premise need not invalidate every learned consequence.  The
+previous whole-collection guard rejected an entire proof whenever one referenced
+original clause disappeared.  The new experimental filter retains unrelated
+valid derivations and drops the affected descendants.  This expands reuse under
+edits without assuming semantic equivalence of the old and new formulas.
+
+First the old proof is independently checked.  Canonical original clauses are
+mapped to identical target clauses or marked absent.  In derivation order, a
+record survives exactly when its starting clause and every recorded resolution
+parent have a mapping.  Surviving references receive new indices; rejected
+records receive an absent marker.  This scans the recorded graph without
+constructing transitive support sets.  Canonicalization, old-proof checking,
+edge inspection, copying and target rechecking are charged.  A separate audit
+uses explicit transitive premise sets to check the filter's decisions.
+
+\begin{proposition}[Selective derivation survival and expansion composition]
+Fix an acyclic sequence of checked resolution derivations.  Keep each original
+premise that appears identically in a target CNF, and retain each derived record
+if all of its recorded parents have been retained.  Then a record is retained
+if and only if every original premise reachable along its recorded derivation
+paths survives.  Every retained clause is implied by the target.  Conjoining
+these clauses with the target preserves exactly its models.  A resolution proof
+from this augmented formula can be converted to a target proof by substituting
+the retained derivations for its learned-clause premises.
+\end{proposition}
+\begin{proof}
+For an original clause the claim is its membership test.  For a derived record,
+its reachable original premises are the union of those of its starting clause
+and its recorded resolution parents.  Induction in the acyclic order shows that
+all of this union survives exactly when every parent survives.  The unchanged
+resolution rule then derives the identical claimed clause from target premises.
+Thus adding retained clauses removes no target model, while keeping all target
+clauses gives the reverse inclusion of model sets.
+
+List the retained derivations before the new proof.  Map each augmented original
+clause either to its target-clause index or to a preceding retained derivation
+with the identical clause.  Remap each newly derived reference in order.  All
+parents still precede their use and each resolution step has the same literal
+parents and conclusion.  Induction therefore converts any final empty clause
+into a target refutation.  A full model is checked directly against the target;
+without a model or empty-clause conclusion, the outcome remains unknown.
+\end{proof}
+
+Survival is complete only for the supplied derivation paths.  A discarded clause
+may still be a consequence of the edited source via an alternative proof that
+has not been found.  No semantic completeness or minimal-support claim follows.
+Filtering and substitution are polynomial in the supplied sources and proof
+lengths, not necessarily in the target input length alone.  Acquiring and
+storing that prior knowledge remain additional obligations.
+Old SAT authority is never transported.  A surviving empty clause, including an
+empty target clause, can certify UNSAT without expansion; other retained
+knowledge remains unknown until further checking establishes an answer.
+
+For expansion, the unchanged learner receives the target plus retained clauses.
+Its complete initial proposal is computed from the target alone in both modes.
+Additional clauses can still change ordering, propagation and conflict activity.
+The final certificate substitutes all reused premises back into target-derived
+records and is accepted by the unchanged checker.  Cold replay needs only the
+target and that certificate, not the original source, its proof or the transport
+procedure.  All retained and newly acquired derivations are persisted, even for
+SAT and unknown outcomes; proof pruning and active-index optimization remain
+separate questions.
+
+The selection rule and implementation hashes were frozen before target outcomes.
+For each of sixteen exposed parents, one target deletes the original clause
+starting its first retained derivation; a second target additionally receives a
+shared-variable binary bridge and fresh negative unit.  The old collection guard
+rejects all 32 targets.  The new filter keeps nonempty knowledge on 32/32,
+retaining 89,746 of 102,954 derivation occurrences (87.17\%),
+with 403--6,406 surviving records per target.  Occurrences across
+the two related edits are not distinct clauses or independent samples.
+All transported results remain unknown; none inherits its parent's refutation.
+
+The expansion comparison uses the sixteen edits of eight previously refuted
+parents, avoiding trivial reuse of old SAT models after pure deletion.  Both
+policies receive 2,000 entered contexts, an explicitly smaller cap than the
+parent-acquisition runs.  Fresh search certifies 0/16 targets; reuse certifies
+3/16, all UNSAT, leaving 13 unresolved in their union.  There are
+0 lost answers.  These are controlled edits of exposed inputs, not new
+external transfer or a representative distribution.  Target reference runs are
+kept separate from acquisition and from project-certified coverage.  All thirteen
+remaining expansion targets have trusted reference-UNSAT results.  The three
+new refutations depend on 1,400, 1,600 and 3,037 retained derivations, respectively,
+as checked by tracing their final empty-clause ancestors; their original-premise
+supports have sizes 534, 534 and 633.  This diagnoses proof use and does not
+measure a pruned-proof implementation.  All 32 targets remain connected in
+the variable incidence graph; no bounded interaction-width certificate follows.
+
+Across two fresh-process alternating pairs, contexts fall from
+32,000 to 30,395, but mean complete cost rises from
+25.37461 to 173.46278 seconds (+583.61\%).
+Paired changes are +595.34\% and +572.43\%.
+Mean acquisition including checks rises from 21.01470 to
+150.84327 seconds, explicit checking from
+0.71316 to 3.73680, warm replay from
+0.84674 to 4.45722, and two cold reload/checks from
+1.64005 to 8.64779.  Proof JSON grows from 21,961,855 to
+110,545,079 bytes and combined gzip from 805,149 to
+4,114,583 bytes.  Maximum observed process RSS changes from
+95,682,560 to 371,867,648 bytes.
+
+The measured workload charges target reads and hashes, candidate parent reads
+and proof checks, filtering, target checks, augmentation, expansion, substitution,
+writes, three compressions and replay.  The old acquisition cost is separately
+recorded and additional; there is no end-to-end amortization claim.
+Imports/startup, reporting and independent audits are additional, and cold replay
+does not flush operating-system caches.  The results establish broader guarded
+reuse and extra certified answers at higher cost, not cheaper expansion.
+
+
+All 2,640 full and 22 focused tests pass.  Exhaustive and adversarial small-case
+validation checks 13,624 edited targets from all 512 two-variable clause sets,
+3,304 three-variable clause sets of at most three clauses, and 128 fresh sparse
+signed mixtures.  Every single canonical-clause deletion is tried for the
+two-variable parents; the other parents receive a fixed deletion.  Added
+clauses and empty targets are included.  Independent support unions agree with
+all survival decisions.  Truth tables verify 10,955 SAT and 2,669 UNSAT composed
+answers, and 1,270 retained-clause checks include 1,715 satisfying extensions.
+These are cumulative checks, not distinct models or independent problem draws.
+At zero expansion budget, 2,329 retained refutations remain certified while
+11,295 other results remain unknown.
+
+Focused tests include independent branches, invalid removed derivations,
+transitive invalidation, absent source clauses, target additions, empty sources,
+tautologies, changed clause indices, partial budgets and proof substitution.
+Filtering and certificate checking are exercised with search disabled.
+Validation preserves 250 prior manifests, 84,291 artifact entries, all 1,362
+prior scientific files and all 89 earlier proof blocks.  Five new scientific
+files bring the ledger to 1,367; earlier completed panels and cumulative tables
+remain separately denominated and unchanged.
+
+The remaining coverage obligation is new external transfer with a frozen policy.
+For edited inputs, further reuse requires finding alternative supports for
+rejected consequences and selecting retained knowledge economically.  Retaining
+more valid constraints can enlarge the propagation index and final proof enough
+to outweigh saved search.  Compact source guards, preprocessing and unrestricted
+expansion remain open; finite target coverage is not an efficient classification
+of arbitrary CNF.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

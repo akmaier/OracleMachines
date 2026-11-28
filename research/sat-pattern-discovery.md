@@ -5,7 +5,45 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: checked learning closes the eleven larger-input gaps
+## Latest evidence: selective knowledge survives edits, with costly expansion
+
+[Selective learned knowledge after edits](selective-learned-knowledge.md) replaces
+whole-collection rejection with a dependency filter. Every old derivation is
+checked; records with missing source premises or rejected ancestors are dropped,
+while independent records survive. Fresh augmented search substitutes those
+records back into a certificate checked against the edited target alone.
+Survival is exact for recorded proof paths, not every semantic consequence.
+
+All **32** controlled edits defeat the old whole-collection guard. The filter
+retains nonempty knowledge on **32/32**, keeping **89,746/102,954
+derivation occurrences (87.17%)** across related targets. All transported
+results remain unknown. On sixteen edits of previously refuted parents, a frozen
+2,000-context expansion budget improves certified answers **0/16 → 3/16**,
+leaving **13 unresolved**. These are controlled edits of exposed parents,
+not new external transfer. Prior SAT-parent deletions are excluded from this
+comparison because old models already provide cheap answers there.
+
+Mean charged cost rises **25.37461 → 173.46278 seconds
+(+583.61%)**. Proof JSON grows **21,961,855 → 110,545,079
+bytes**; two cold replays rise **1.64005 → 8.64779 seconds**.
+Historical parent acquisition is additional. This expands guarded reuse and
+certified coverage at substantial cost; it does not make expansion cheaper.
+
+All **2,640 full and 22 focused tests pass**. A reproduced truth audit checks
+13,624 edited small formulas; independent transitive support sets agree with
+all filter decisions. Validation preserves 250 prior manifests, 84,291 artifacts,
+1,362 scientific sources and 89 earlier proofs; five source files and one proof
+are added. Previous panels and cumulative records remain separate. Resume
+`experiments/results/cnf-selective-learning/checkpoint.json`, key
+`selective_learning`.
+
+**Largest remaining gaps:** the 13 capped edited targets; economical selection
+and propagation of surviving knowledge; alternative supports for rejected
+consequences; and new frozen external transfer. Whole-collection guard failure
+no longer forces total knowledge loss, but efficient preprocessing and
+unrestricted SAT expansion remain open.
+
+## Previous evidence: checked learning closes the eleven larger-input gaps
 
 [Checked conflict learning and guarded negative knowledge](checked-conflict-learning.md)
 closes **all eleven larger-input gaps: 5/16 → 16/16**, with eight checked SAT

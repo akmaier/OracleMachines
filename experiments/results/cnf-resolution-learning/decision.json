@@ -1,0 +1,60 @@
+{
+  "comparison_percent": 504.21026928130834,
+  "coverage": {
+    "baseline": {
+      "edit": {
+        "sat": 1,
+        "unresolved": 3
+      },
+      "original": {
+        "sat": 3,
+        "unresolved": 5
+      },
+      "signed-permutation": {
+        "sat": 1,
+        "unresolved": 3
+      }
+    },
+    "learning": {
+      "edit": {
+        "sat": 2,
+        "unsat": 2
+      },
+      "original": {
+        "sat": 4,
+        "unsat": 4
+      },
+      "signed-permutation": {
+        "sat": 2,
+        "unsat": 2
+      }
+    }
+  },
+  "decision": "Retain checked first-UIP learning and guarded premise transport. All eleven exposed larger-input gaps close, reaching 16/16 with eight checked refutations; growing propagation and proof costs remain explicit.",
+  "documents": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "b64b45322221f9b68319fe54f6eb0f5b2744766be5d7cd5499e8d8a0e1a69c06",
+    "research/checked-conflict-learning.md": "31f5864c95e39b6361d31cd5dc35451b256678c56c6b19e92955c304f8735cee",
+    "research/implementation-gaps.md": "12529f4d5b0ae991a5b8d1f13231852bc9cdf43025faae83ea75824b68d292e1",
+    "research/sat-pattern-discovery.md": "2ee77e3efa39b7dcc9ad074658ae297b3d5e5b18812b5feb8435153c955157ab",
+    "research/structural-reuse-priorities.md": "fd7774d2b25d1ef52140d4e2f75574291be07c4415095cb0fee37d77be05ffea"
+  },
+  "limitations": [
+    "Development on the already exposed eight larger originals and eight related controls. No new external transfer or representative coverage claim. Preserve all old models, counterexamples, proof formats and source bytes.",
+    "Baseline is unchanged unit propagation/disjoint first-flip search with preorder refutations. Candidate implements standard first-UIP resolution learning, nonchronological backjumping, conflict-based variable activity, phase saving and binary decisions. This bundled policy change is not an isolated learning ablation or new tractability theorem. Both cap entered contexts at 20000, but work per context differs.",
+    "Every learned clause has a checked resolution derivation and exact claimed clause; it is globally implied by the source and can prune later contexts. Complete SAT models and derived empty clauses grant authority. A budget-exhausted run remains unknown even though its retained clauses are checked knowledge.",
+    "All learned clauses and derivations survive SAT and unknown outcomes and are persisted/rechecked. Input reads and hashes, proposer/index creation, activity and undo work, resolution, acquisition/internal and explicit checks, writes, three compressions, warm and two cold reload/checks are charged. Imports/startup, reporting metadata and independent audits are additional; no search state survives replay and OS caches are not flushed.",
+    "Two fresh-process alternating pairs are measured. Prior Z3/portfolio references are preserved audit results, not discovery inputs or matched solver speed comparisons. Old 36-input and constructed panels are separately rechecked.",
+    "Guarded knowledge transport permits clause-index changes and deletion of unused original clauses only when every actually referenced original clause survives exactly. It rechecks old and target proofs, never transports SAT authority, and never invokes search. This is same-variable source-premise reuse, not arbitrary semantic equivalence or renaming.",
+    "Initial fixed-branch and activity-based development probes and their exact source versions are retained. No production default changes. Learned clause count, width, source guards, proof size, recognition/preprocessing and unrestricted expansion remain explicit obligations."
+  ],
+  "next_cost_target": "Separate necessary proof retention from the growing active propagation index; retain still-valid derivation subsets when source premises disappear, and measure their useful-edit coverage without weakening source guards.",
+  "next_coverage_target": "Freeze unseen transfer after this policy change and investigate reusable shared interfaces, rather than treating finite panel closure as efficient arbitrary CNF coverage.",
+  "supplemental_checks": {
+    "path": "/Users/maier/Documents/code/OracleMachines/experiments/results/cnf-resolution-learning/supplemental-checks.json",
+    "sha256": "bca22ce8a7b8e559f8266994c2d611f57aaaada7a88a9740da4501ce06ff692c"
+  },
+  "union_counts": {
+    "sat": 8,
+    "unsat": 8
+  }
+}

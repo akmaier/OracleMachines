@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_resolution_learning.py", line 126, in <module>
+    if __name__=='__main__':globals()[sys.argv[1]](Path(sys.argv[2]))
+                            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/validate_cnf_resolution_learning.py", line 88, in validate
+    s.write(out/'transport'/(row['id']+'.json'),item);transport.append(dict(**s.binding(out/'transport'/(row['id']+'.json')),id=row['id'],kind=moved['kind'],seconds=seconds,guards=tc.get('knowledge_distinct_source_guards',0),guard_hits=tc.get('knowledge_guard_hits',0)))
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_partition_repair.py", line 18, in write
+    def write(path,value):Path(path).write_text(json.dumps(value,sort_keys=True,indent=2)+'\n')
+                          ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 809, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'experiments/results/cnf-resolution-learning/transport/l000.json'

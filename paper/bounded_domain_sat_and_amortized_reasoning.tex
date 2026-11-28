@@ -18062,6 +18062,172 @@ preprocessing, compact general proofs and unrestricted SAT expansion remain
 separate obligations.  Exact recomposition and finite coverage do not establish
 a polynomial solution of every CNF class.
 
+\subsection{Checked conflict learning and guarded negative knowledge}
+\label{sec:resolution-learning}
+
+Source-checked learned clauses close all eleven retained larger-input gaps in
+the final experimental policy.  Coverage grows from 5/16 to 16/16: eight checked
+SAT models and eight checked resolution refutations, covering all eight originals
+and eight related controls below the 20,000-context cap.  The largest run uses
+15,900 entered contexts.  This is development on an exposed panel, not new
+external transfer.  The implementation uses standard first-UIP conflict analysis,
+nonchronological backjumping, conflict-based variable activity, phase saving and
+binary decisions.  It is neither a new SAT algorithm nor an isolated ablation of
+clause learning.  Production defaults remain unchanged.
+
+Propagation records a reason clause for every implied value.  Conflict analysis
+resolves recent implications until one literal remains at the current decision
+level; root analysis continues to the empty clause.  Each retained record names
+a starting clause, ordered pivot/parent pairs and the exact claimed result.
+Only source and earlier learned clauses may be referenced.  A separate checker
+reconstructs each resolvent and verifies the claim without trusting the search's
+reasons, levels, activity, backjump destinations or occurrence counts.
+
+A learned clause of width $k$ forbids the partial assignment falsifying its $k$
+literals, independently of choices for other variables.  These forbidden regions
+can overlap.  Their conjunction preserves the source model set, so they are
+reusable exclusions rather than a disjoint family classification.  SAT still
+requires a full source model, and UNSAT requires a derived empty clause.
+A capped run can retain checked clauses while remaining unknown.  Certificate
+checking is polynomial in the supplied proof length; no polynomial bound on
+that length or its acquisition follows.
+
+\begin{proposition}[Checked reusable exclusions and source-premise guards]
+Suppose every learned clause has a finite resolution derivation from source
+clauses and earlier checked clauses.  Conjoining any collection of these clauses
+with the source preserves exactly its models.  An empty derived clause certifies
+unsatisfiability.  If a target CNF retains every original clause referenced by
+these derivations, remapping clause indices preserves the learned clauses and
+any empty-clause conclusion, even if unused original clauses are removed.
+Satisfiability of the old source alone gives no target SAT authority.
+\end{proposition}
+\begin{proof}
+For a resolution step on variable $v$, write the parents as
+$(A\lor v)$ and $(B\lor\neg v)$.  Any assignment satisfying both parents must
+satisfy $A\lor B$: otherwise the parents would require both truth values of $v$.
+Induction over the acyclic reference order proves that the source implies every
+checked learned clause.  Adding them therefore removes no source model; the
+reverse inclusion holds because the source clauses remain conjoined.  The empty
+clause has no models, proving the stated refutation rule.
+
+A learned clause excludes precisely those assignments that falsify all its
+literals, so its use is independent of the outside choices that produced the
+original conflict.  At a first-UIP backjump, retaining the lower-level false
+literals and freeing the sole highest-level literal makes the clause unit;
+forcing that literal loses no model compatible with the retained context.
+
+For transport, every original premise used in the derivations is still present
+in the target.  Substitute its new index and proceed in the same derivation
+order.  The identical resolution rule yields the identical claimed clauses,
+including any empty conclusion.  Removed unused clauses are never invoked in
+this induction.  Rechecking premises and claimed resolvents establishes this
+argument without trusting the index conversion.  Extra target constraints may
+eliminate an old satisfying assignment, so a transported old SAT witness must
+not acquire authority without a complete target check.
+\end{proof}
+
+Discovery shares occurrence lists, full-proposal and partial-assignment counts,
+reason/level information and an undo trail.  Learned clauses enter the same
+propagation index.  Activity changes branching priority and saved phases survive
+undo; no restart or clause-deletion policy is implemented.  All scans, index
+updates, resolution work and restoration are charged.  Fewer contexts can still
+mean more work when the active clause index becomes much larger.
+
+The guarded transport operation validates the old proof, canonicalizes the
+target, remaps source and derived references, caches repeated premise guards,
+and rechecks the exact claimed clauses against the target.  It invokes no
+search.  Only actually referenced original clauses must survive; unused ones
+may disappear.  Old SAT outcomes transport negative knowledge only and return
+unknown, since target additions can invalidate the old witness.  This operation
+handles exact same-variable source premises, not arbitrary semantic equivalence
+or renamed-source recognition.
+
+Two fresh-process alternating pairs compare the frozen learner with the
+unchanged unit/preorder kernel.  The baseline obtains five SAT outcomes and
+leaves eleven unknown; the candidate obtains four SAT and four UNSAT originals,
+plus two SAT and two UNSAT outcomes in each control group.  Entered contexts
+fall from 236,197 to 111,957, but mean complete time rises from 47.52141 to
+287.12925 seconds (504.21\%, or 6.04 times).  Both paired changes are slower:
+504.70\% and 503.73\%.  Work per context and the number of completed answers
+change, so this is not an equal-work speedup comparison.
+
+Mean acquisition including internal checks rises from 47.39490 to 271.00598
+seconds; explicit checking from 0.01021 to 2.69844; warm reload/check from
+0.03380 to 3.07490; and two cold reload/checks from 0.05644 to 6.22661 seconds.
+Writes rise from 0.00582 to 0.28182 seconds and three compressions from 0.00070
+to 3.82129.  Proof JSON grows from 20,023 to 93,048,057 bytes and combined gzip
+from 922 to 2,879,747 bytes.  Maximum observed process RSS grows from 43,515,904
+to 302,465,024 bytes.  Input reads and hashes, index/proposal creation, activity,
+undo, resolution, checks, writes, compressions and replay are charged.
+Imports/startup, reporting metadata and independent audits are additional.
+Cold replay discards search state without flushing operating-system caches.
+
+The final policy retains 51,477 learned clauses, produced by 1,372,091
+resolution steps.  They serve 78,745 propagations, and search makes 6,481
+nonchronological jumps.  Assignment occurrence updates grow from 76,856,480
+to 613,846,635 as the active propagation index expands.  This is a concrete
+reason that context reduction fails to reduce total cost.  All learned clauses
+and derivations are persisted even for SAT outcomes; the baseline has neither
+those retained consequences nor the eight new refutations.  Answer-only or
+pruned-proof costs have not been measured.
+
+A separate transport audit adds a shared-variable binary bridge and a fresh
+negative unit to each of the sixteen sources.  With search disabled, all
+sixteen knowledge sets transport and recheck: eight retain UNSAT and eight
+return unknown.  Deleting an actually required original premise is rejected
+in every case.  These are exact guard checks over constructed edits, not
+unseen transfer, and their separately recorded audit timings are not a matched
+speedup comparison against fresh acquisition.
+
+Learned-clause width has median 14 and maximum 36 across the retained set.
+Yet each complete knowledge set references 90.23--100\% of its canonical
+source clauses: 492--644 distinct premises, depending on the input.  This is
+support for the whole retained collection, not a minimal support bound for
+one learned clause.  Small exclusions need not give small edit guards.
+The present transport rejects a collection when any required premise vanishes;
+retaining its still-valid subset is a concrete further reuse target.
+
+
+The initial fixed-branch learning probe certifies ten of sixteen inputs, leaving
+six unknown; the final activity-based policy certifies all sixteen.  Activity
+is not universally cheaper: original l001 takes 381 contexts in the initial
+probe versus 7,489 in the final policy.  Both probes and exact source versions
+are retained.  The initial probe recorded the live source binding at completion
+after revision; the provenance record identifies its executed source archive,
+captured before revision, while preserving the late-bound raw field verbatim.
+Large probe JSON files are retained losslessly in gzip with uncompressed hashes.
+Only the frozen final policy is used for the matched cost comparison.
+
+All 2,618 full and 26 focused tests pass.  A reproduced truth audit checks
+8,882 queries, comprising 6,225 SAT and 2,657 UNSAT, and verifies 1,911 learned
+clauses against enumerated source models, with 2,591 satisfying-extension
+checks.  These are cumulative checks, not distinct models.  The audit covers
+every two-variable clause set with every seed, three-variable CNFs with at most
+three distinct clauses with two seeds, and 128 fresh sparse signed mixtures
+with duplicated and tautological clauses.  All 853 bounded unknown outcomes
+retain unknown authority.  The previous 36-input panel and 32 constructed cases
+also receive checked answers in separately denominated audits.
+
+Tests include empty sources and clauses, a 1,500-variable implication
+contradiction, sparse names, invalid pivots, forward references, changed claimed
+clauses, nonempty conclusions, source edits, partial knowledge, missing guards
+and deletion of unused source clauses.  Checking and transport run with search
+disabled.  Validation reruns both search policies, reproduces all four saved workflows'
+certificates and counters, checks replay, rechecks the old external union, and
+preserves 249 prior manifests,
+84,115 artifact entries, 1,357 scientific sources and all 88 preceding proof
+blocks.  Five new scientific files bring the source ledger to 1,362.  Earlier
+completed panels, counterexamples and cumulative records remain unchanged.
+
+New frozen transfer is required after this policy change.  The immediate cost
+questions are how to keep proof evidence without repeatedly scanning a growing
+propagation index, retain necessary derivation fragments economically, and
+measure useful edits over which source-premise guards survive.  Small learned
+literal width need not mean small source support or cheap acquisition.
+Efficient recognition, preprocessing, compact general proofs and unrestricted
+expansion remain open.  Source-checked recomposition and complete finite panels
+do not establish a polynomial algorithm for SAT.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -5,7 +5,51 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: smaller proofs and explicit larger-input limits
+## Latest evidence: checked learning closes the eleven larger-input gaps
+
+[Checked conflict learning and guarded negative knowledge](checked-conflict-learning.md)
+closes **all eleven larger-input gaps: 5/16 → 16/16**, with eight checked SAT
+models and eight checked resolution refutations. All eight originals and eight
+related controls finish below 20,000 contexts; the largest uses 15,900. This is
+standard first-UIP learning, backjumping, activity and phase saving on an exposed
+panel, not an isolated ablation, new external transfer or new tractability theorem.
+Production defaults remain unchanged.
+
+Each learned exclusion has a separately checked resolution derivation. Its
+forbidden partial assignment can overlap other exclusions; conjunction preserves
+exactly the source models. The run retains **51,477 clauses**, uses learned
+clauses for **78,745 propagations**, and makes **6,481 nonchronological jumps**.
+Guarded transport reuses all sixteen knowledge sets after shared-variable clause
+additions without search: eight retain UNSAT authority, eight remain unknown.
+Deleting a required source premise is rejected in every case; SAT authority is
+never inherited from the old source. Whole-collection premise guards cover
+90.23–100% of source clauses despite median learned width 14. Retaining valid
+subsets after premise deletion remains open.
+
+Contexts fall **236,197 → 111,957**, but mean complete cost rises **47.52141 →
+287.12925 seconds (+504.21%)** across two alternating pairs. Assignment occurrence
+updates grow almost eightfold. Proof JSON grows **20,023 → 93,048,057 bytes**;
+combined gzip grows **922 → 2,879,747 bytes**, and two cold checks grow **0.05644 →
+6.22661 seconds**. The learner completes more answers and retains negative
+knowledge for SAT outcomes. This is a coverage gain with a substantial cost,
+not an equal-work speedup.
+
+All **2,618 full and 26 focused tests pass**. Reproduced truth tables check 8,882
+queries and 1,911 learned clauses against source models; 853 bounded results
+remain unknown. Validation preserves 249 prior manifests, 84,115 artifact entries,
+1,357 scientific sources and 88 earlier proofs; five scientific files and one
+proof are added. Earlier completed panels retain their separate denominators.
+Resume `experiments/results/cnf-resolution-learning/checkpoint.json`, key
+`resolution_learning`.
+
+**Largest remaining gaps:** new frozen transfer after this policy change;
+cheaper propagation and retention of only necessary derivations; useful source
+edits over which checked premise guards survive; and efficient recognition,
+source-dependent preprocessing and unrestricted expansion. Finite panel closure
+and compact learned clauses do not bound acquisition, source support or general
+SAT cost.
+
+## Previous evidence: smaller proofs and explicit larger-input limits
 
 [Implicit proof contexts and larger transfer](linear-unit-proofs-and-larger-transfer.md)
 keeps the unit search fixed and removes explicit flip/keep keys from its

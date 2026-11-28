@@ -1,0 +1,112 @@
+{
+  "comparison_percent": 504.21026928130834,
+  "coverage": {
+    "baseline": {
+      "edit": {
+        "sat": 1,
+        "unresolved": 3
+      },
+      "original": {
+        "sat": 3,
+        "unresolved": 5
+      },
+      "signed-permutation": {
+        "sat": 1,
+        "unresolved": 3
+      }
+    },
+    "learning": {
+      "edit": {
+        "sat": 2,
+        "unsat": 2
+      },
+      "original": {
+        "sat": 4,
+        "unsat": 4
+      },
+      "signed-permutation": {
+        "sat": 2,
+        "unsat": 2
+      }
+    }
+  },
+  "gains": [
+    "l002",
+    "l003",
+    "l004",
+    "l006",
+    "l007",
+    "l010",
+    "l011",
+    "l012",
+    "l013",
+    "l014",
+    "l015"
+  ],
+  "limitations": [
+    "Development on the already exposed eight larger originals and eight related controls. No new external transfer or representative coverage claim. Preserve all old models, counterexamples, proof formats and source bytes.",
+    "Baseline is unchanged unit propagation/disjoint first-flip search with preorder refutations. Candidate implements standard first-UIP resolution learning, nonchronological backjumping, conflict-based variable activity, phase saving and binary decisions. This bundled policy change is not an isolated learning ablation or new tractability theorem. Both cap entered contexts at 20000, but work per context differs.",
+    "Every learned clause has a checked resolution derivation and exact claimed clause; it is globally implied by the source and can prune later contexts. Complete SAT models and derived empty clauses grant authority. A budget-exhausted run remains unknown even though its retained clauses are checked knowledge.",
+    "All learned clauses and derivations survive SAT and unknown outcomes and are persisted/rechecked. Input reads and hashes, proposer/index creation, activity and undo work, resolution, acquisition/internal and explicit checks, writes, three compressions, warm and two cold reload/checks are charged. Imports/startup, reporting metadata and independent audits are additional; no search state survives replay and OS caches are not flushed.",
+    "Two fresh-process alternating pairs are measured. Prior Z3/portfolio references are preserved audit results, not discovery inputs or matched solver speed comparisons. Old 36-input and constructed panels are separately rechecked.",
+    "Guarded knowledge transport permits clause-index changes and deletion of unused original clauses only when every actually referenced original clause survives exactly. It rechecks old and target proofs, never transports SAT authority, and never invokes search. This is same-variable source-premise reuse, not arbitrary semantic equivalence or renaming.",
+    "Initial fixed-branch and activity-based development probes and their exact source versions are retained. No production default changes. Learned clause count, width, source guards, proof size, recognition/preprocessing and unrestricted expansion remain explicit obligations."
+  ],
+  "paired_percent": [
+    504.69759003984205,
+    503.73123704632627
+  ],
+  "peak_rss_bytes": {
+    "baseline": 43515904,
+    "learning": 302465024
+  },
+  "remaining": [],
+  "states": {
+    "baseline": 236197,
+    "learning": 111957
+  },
+  "totals": {
+    "baseline": {
+      "cold_seconds": 0.056439562467858195,
+      "complete_seconds": 47.521411624969915,
+      "compressed_bytes": {
+        "certificates": 903,
+        "combined": 922,
+        "discovery": 29
+      },
+      "evidence_bytes": 131,
+      "input_seconds": 0.019260916858911514,
+      "persistence_seconds": 0.0006959165912121534,
+      "phases": {
+        "acquisition_seconds": 47.39490085467696,
+        "checking_seconds": 0.010206685867160559,
+        "writing_seconds": 0.005823167506605387
+      },
+      "proof_bytes": 20023,
+      "warm_seconds": 0.03380058333277702
+    },
+    "learning": {
+      "cold_seconds": 6.2266131460200995,
+      "complete_seconds": 287.1292491455097,
+      "compressed_bytes": {
+        "certificates": 2879728,
+        "combined": 2879747,
+        "discovery": 29
+      },
+      "evidence_bytes": 131,
+      "input_seconds": 0.018059041816741228,
+      "persistence_seconds": 3.821286958642304,
+      "phases": {
+        "acquisition_seconds": 271.0059803558979,
+        "checking_seconds": 2.6984371887519956,
+        "writing_seconds": 0.2818185850046575
+      },
+      "proof_bytes": 93048057,
+      "warm_seconds": 3.0748959169723094
+    }
+  },
+  "union_counts": {
+    "sat": 8,
+    "unsat": 8
+  }
+}

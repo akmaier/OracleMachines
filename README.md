@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Explain cyclic choices with exact separator tables](research/choice-separator-messages.md):
+the five retained nonclique cases now have checked structural explanations.
+Fresh generated control coverage grows **3/16 → 12/16**; the old control panel
+improves **32/40 → 36/40**. Larger tables cost more and do not improve the already
+known historical SAT answers. Unsupported clauses and excessive width are the
+next structural gaps. All **2,739 tests pass**.
+
 [Certify interacting signed choices](research/conditioned-choice-forests.md):
 on 40 frozen constructed inputs, coverage grows **4 → 20 → 32** from matching
 to forest tables to conditioning at most two demands. The retained nonclique path

@@ -4,7 +4,43 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-## Latest evidence: exact choices through cyclic interfaces
+## Latest evidence: exact separators explain the cyclic cases
+
+[Choice separator messages](choice-separator-messages.md) retain cycles inside
+elimination bags and certify their complete interface relations. All **five
+retained nonclique cases** now have structural certificates: four exposed SATLIB
+originals and one derived signed permutation. Their earlier SAT witnesses remain
+valid; this adds structural explanations, not new historical portfolio answers.
+Observed separator sizes are **6–9**, with **15,042–141,654** reserved bag
+assignments per case. The exposed pilot informed the fixed resource limits.
+
+On **16 fresh generated controls**, checked coverage grows **3/16 → 12/16**
+(nine separator-only, three shared, four unresolved). On the preceding 40
+constructed controls it grows **32/40 → 36/40**, adding four K5 refutations.
+Across all 94 inputs: **36 → 54** checked answers with no old-route-only result.
+These are route comparisons on designed/exposed inputs, not a representative
+external SAT survey or a universal superset under arbitrary resource caps.
+
+Remaining failures are explicit: **26 external inputs have unclassified clauses**,
+**six exceed the per-bag limit**, and **eight constructed inputs have unsupported
+ternary clauses**. Specialized capacity proofs remain preferable for the dense
+clique cases. Next: test source-bound separator tables beyond signed-choice
+syntax, preserving full Boolean semantics and charging the resulting width.
+Higher-arity exclusions preserve the current normalization; arbitrary positive
+interactions need a separate proof or Boolean domains. Reuse across edits and
+efficient unrestricted SAT remain open.
+
+The new route costs **1.56959 s discovery + 0.76843 s extra checking**, with
+**0.79480 s process-cold worker replay** across all 94 cases. Gzip certificates
+occupy **111,578 bytes**. These buy more answers than the forest route and are
+not a speedup claim; verification also enumerates omitted separator tuples.
+All **2,739 full and 16 focused tests pass**. Independent audits reproduce
+**3,880 small CNFs, 24,576 message projections and 32,768 prefix verdicts**.
+Validation preserves **257 prior manifests, 85,720 artifact entries, 1,392
+scientific sources and 94 earlier proof blocks**. Resume
+`experiments/results/cnf-choice-separator/checkpoint.json`, key `choice_separator`.
+
+## Previous evidence: exact choices through cyclic interfaces
 
 [Conditioned choice forests](conditioned-choice-forests.md) add an exact signed-choice
 route that preserves individual conflicts instead of collapsing connected

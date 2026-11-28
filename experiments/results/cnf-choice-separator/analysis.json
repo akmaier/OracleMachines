@@ -1,0 +1,2112 @@
+{
+  "accounting": "Two opposite-order fresh construction processes per route, plus four constructor-disabled process-cold replays. Source-only recognition; no fallback or labels. Discovery includes internal checking; extra checking, encoding, compression, writing, graph width, planned/reserved states, live rows, RSS and process wall time recorded separately. No OS cache flush. Audits, panel preparation and all prior acquisition/storage are additional.",
+  "arms": {
+    "cut2": {
+      "cold_peak_rss_bytes": 40878080,
+      "cold_process_seconds": 0.098760666558519,
+      "cold_worker_seconds": 0.02010727021843195,
+      "gzip_bytes": 13179,
+      "json_bytes": 45520,
+      "peak_rss_bytes": 41402368,
+      "phases": {
+        "compression_seconds": 0.0008208774961531162,
+        "discovery_seconds": 0.1202877932228148,
+        "encoding_seconds": 0.0006876080296933651,
+        "verification_seconds": 0.01264439127407968,
+        "write_seconds": 0.007714353734627366
+      },
+      "process_wall_seconds": 0.2341835629194975,
+      "strata": {
+        "exposed-controls": {
+          "cases": 40,
+          "sat": 19,
+          "unknown": 8,
+          "unsat": 13
+        },
+        "external": {
+          "cases": 37,
+          "sat": 0,
+          "unknown": 37,
+          "unsat": 0
+        },
+        "fresh-controls": {
+          "cases": 16,
+          "sat": 3,
+          "unknown": 13,
+          "unsat": 0
+        },
+        "regression": {
+          "cases": 1,
+          "sat": 1,
+          "unknown": 0,
+          "unsat": 0
+        }
+      }
+    },
+    "separator": {
+      "cold_peak_rss_bytes": 44859392,
+      "cold_process_seconds": 0.8745888751000166,
+      "cold_worker_seconds": 0.7948002291377634,
+      "gzip_bytes": 111578,
+      "json_bytes": 753180,
+      "peak_rss_bytes": 46612480,
+      "phases": {
+        "compression_seconds": 0.05753701808862388,
+        "discovery_seconds": 1.5695901834405959,
+        "encoding_seconds": 0.0073804783169180155,
+        "verification_seconds": 0.768431933131069,
+        "write_seconds": 0.008675063028931618
+      },
+      "process_wall_seconds": 2.5031636662315577,
+      "strata": {
+        "exposed-controls": {
+          "cases": 40,
+          "sat": 19,
+          "unknown": 4,
+          "unsat": 17
+        },
+        "external": {
+          "cases": 37,
+          "sat": 5,
+          "unknown": 32,
+          "unsat": 0
+        },
+        "fresh-controls": {
+          "cases": 16,
+          "sat": 12,
+          "unknown": 4,
+          "unsat": 0
+        },
+        "regression": {
+          "cases": 1,
+          "sat": 1,
+          "unknown": 0,
+          "unsat": 0
+        }
+      }
+    }
+  },
+  "limitations": "Complete projection only for fully checked signed-demand/exclusion descriptions. Greedy source extraction and min-fill order are incomplete. Fixed state/order caps do not bound total parsing, verification, storage or lifetime work. Tables are exponential in separator size, not a polynomial unrestricted SAT algorithm. No cross-edit cache, optimal decomposition or production default change.",
+  "overlaps": {
+    "exposed-controls": {
+      "both": 32,
+      "neither": 4,
+      "separator_only": 4
+    },
+    "external": {
+      "neither": 32,
+      "separator_only": 5
+    },
+    "fresh-controls": {
+      "both": 3,
+      "neither": 4,
+      "separator_only": 9
+    },
+    "regression": {
+      "both": 1
+    }
+  },
+  "prior_overall_coverage_unchanged": true,
+  "separator_details": [
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 6,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 6,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e000"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 6,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 6,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e001"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 6,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 6,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e002"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 5,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 5,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e003"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 14,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 14,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e004"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 13,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 13,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e005"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 14,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 14,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e006"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 15,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 15,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e007"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 13,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 13,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e008"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 13,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 13,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e009"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 14,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 14,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e010"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 14,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 14,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e011"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 30,
+            "demands": 30,
+            "edges": 60,
+            "full_plan_states": 70140,
+            "maximum_bag_states": 19683,
+            "maximum_separator_size": 8,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 70140,
+            "retained_rows": 5794
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "external",
+      "id": "e012"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 30,
+            "demands": 30,
+            "edges": 60,
+            "full_plan_states": 38640,
+            "maximum_bag_states": 6561,
+            "maximum_separator_size": 7,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 38640,
+            "retained_rows": 3211
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "external",
+      "id": "e013"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 30,
+            "demands": 30,
+            "edges": 60,
+            "full_plan_states": 141654,
+            "maximum_bag_states": 59049,
+            "maximum_separator_size": 9,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 141654,
+            "retained_rows": 10255
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "external",
+      "id": "e014"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 30,
+            "demands": 30,
+            "edges": 60,
+            "full_plan_states": 15042,
+            "maximum_bag_states": 2187,
+            "maximum_separator_size": 6,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 15042,
+            "retained_rows": 2704
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "external",
+      "id": "e015"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 14,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 14,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e016"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 59,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 128,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e017"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 14,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 14,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e018"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 59,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 121,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e019"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 0,
+            "demands": 11,
+            "edges": 55,
+            "full_plan_states": 111111111110,
+            "maximum_bag_states": 100000000000,
+            "maximum_separator_size": 10,
+            "minimum_width": 3,
+            "reason": "bag-limit",
+            "reserved_states": 0,
+            "retained_rows": 0
+          }
+        ],
+        "reason": "incomplete"
+      },
+      "group": "external",
+      "id": "e020"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 0,
+            "demands": 7,
+            "edges": 21,
+            "full_plan_states": 335922,
+            "maximum_bag_states": 279936,
+            "maximum_separator_size": 6,
+            "minimum_width": 3,
+            "reason": "bag-limit",
+            "reserved_states": 0,
+            "retained_rows": 0
+          }
+        ],
+        "reason": "incomplete"
+      },
+      "group": "external",
+      "id": "e021"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 0,
+            "demands": 8,
+            "edges": 28,
+            "full_plan_states": 6725600,
+            "maximum_bag_states": 5764801,
+            "maximum_separator_size": 7,
+            "minimum_width": 3,
+            "reason": "bag-limit",
+            "reserved_states": 0,
+            "retained_rows": 0
+          }
+        ],
+        "reason": "incomplete"
+      },
+      "group": "external",
+      "id": "e022"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 0,
+            "demands": 9,
+            "edges": 36,
+            "full_plan_states": 153391688,
+            "maximum_bag_states": 134217728,
+            "maximum_separator_size": 8,
+            "minimum_width": 3,
+            "reason": "bag-limit",
+            "reserved_states": 0,
+            "retained_rows": 0
+          }
+        ],
+        "reason": "incomplete"
+      },
+      "group": "external",
+      "id": "e023"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 0,
+            "demands": 10,
+            "edges": 45,
+            "full_plan_states": 3922632450,
+            "maximum_bag_states": 3486784401,
+            "maximum_separator_size": 9,
+            "minimum_width": 3,
+            "reason": "bag-limit",
+            "reserved_states": 0,
+            "retained_rows": 0
+          }
+        ],
+        "reason": "incomplete"
+      },
+      "group": "external",
+      "id": "e024"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 5,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 5,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e025"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 6,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 6,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e026"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 14,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 14,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e027"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 14,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 14,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e028"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 14,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 14,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e029"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 13,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 13,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e030"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 30,
+            "demands": 30,
+            "edges": 60,
+            "full_plan_states": 85206,
+            "maximum_bag_states": 19683,
+            "maximum_separator_size": 8,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 85206,
+            "retained_rows": 5845
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "external",
+      "id": "e031"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 30,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 30,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e032"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 12,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 13,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e033"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 14,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 14,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e034"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 0,
+            "demands": 11,
+            "edges": 55,
+            "full_plan_states": 111111111110,
+            "maximum_bag_states": 100000000000,
+            "maximum_separator_size": 10,
+            "minimum_width": 3,
+            "reason": "bag-limit",
+            "reserved_states": 0,
+            "retained_rows": 0
+          }
+        ],
+        "reason": "incomplete"
+      },
+      "group": "external",
+      "id": "e035"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 11,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 11,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "external",
+      "id": "e036"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 2,
+            "demands": 2,
+            "edges": 1,
+            "full_plan_states": 12,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 12,
+            "retained_rows": 4
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "regression",
+      "id": "nonclique-path"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 4,
+            "demands": 4,
+            "edges": 3,
+            "full_plan_states": 30,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 30,
+            "retained_rows": 10
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "4-private-path-0"
+    },
+    {
+      "answer": false,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 1,
+            "demands": 4,
+            "edges": 3,
+            "full_plan_states": 30,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "empty-message",
+            "reserved_states": 9,
+            "retained_rows": 0
+          }
+        ],
+        "reason": "unsat"
+      },
+      "group": "exposed-controls",
+      "id": "4-blocked-path-0"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 4,
+            "demands": 4,
+            "edges": 4,
+            "full_plan_states": 66,
+            "maximum_bag_states": 27,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 66,
+            "retained_rows": 22
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "4-cycle-0"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 6,
+            "demands": 6,
+            "edges": 7,
+            "full_plan_states": 84,
+            "maximum_bag_states": 27,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 84,
+            "retained_rows": 28
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "4-two-triangles-0"
+    },
+    {
+      "answer": false,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 3,
+            "demands": 4,
+            "edges": 6,
+            "full_plan_states": 120,
+            "maximum_bag_states": 81,
+            "maximum_separator_size": 3,
+            "minimum_width": 3,
+            "reason": "empty-message",
+            "reserved_states": 117,
+            "retained_rows": 24
+          }
+        ],
+        "reason": "unsat"
+      },
+      "group": "exposed-controls",
+      "id": "4-k4-tail-0"
+    },
+    {
+      "answer": false,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 3,
+            "demands": 5,
+            "edges": 10,
+            "full_plan_states": 363,
+            "maximum_bag_states": 243,
+            "maximum_separator_size": 4,
+            "minimum_width": 3,
+            "reason": "empty-message",
+            "reserved_states": 351,
+            "retained_rows": 48
+          }
+        ],
+        "reason": "unsat"
+      },
+      "group": "exposed-controls",
+      "id": "4-k5-tail-0"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 2,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 4,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "exposed-controls",
+      "id": "4-ternary-edit-0"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 4,
+            "demands": 4,
+            "edges": 3,
+            "full_plan_states": 30,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 30,
+            "retained_rows": 8
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "4-random-tree-0"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 4,
+            "demands": 4,
+            "edges": 3,
+            "full_plan_states": 30,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 30,
+            "retained_rows": 9
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "4-random-tree-1"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 4,
+            "demands": 4,
+            "edges": 3,
+            "full_plan_states": 30,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 30,
+            "retained_rows": 9
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "4-random-tree-2"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 8,
+            "demands": 8,
+            "edges": 7,
+            "full_plan_states": 66,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 66,
+            "retained_rows": 22
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "8-private-path-0"
+    },
+    {
+      "answer": false,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 4,
+            "demands": 8,
+            "edges": 7,
+            "full_plan_states": 66,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "empty-message",
+            "reserved_states": 36,
+            "retained_rows": 9
+          }
+        ],
+        "reason": "unsat"
+      },
+      "group": "exposed-controls",
+      "id": "8-blocked-path-0"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 8,
+            "demands": 8,
+            "edges": 8,
+            "full_plan_states": 174,
+            "maximum_bag_states": 27,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 174,
+            "retained_rows": 58
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "8-cycle-0"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 8,
+            "demands": 8,
+            "edges": 9,
+            "full_plan_states": 102,
+            "maximum_bag_states": 27,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 102,
+            "retained_rows": 34
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "8-two-triangles-0"
+    },
+    {
+      "answer": false,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 7,
+            "demands": 8,
+            "edges": 10,
+            "full_plan_states": 156,
+            "maximum_bag_states": 81,
+            "maximum_separator_size": 3,
+            "minimum_width": 3,
+            "reason": "empty-message",
+            "reserved_states": 153,
+            "retained_rows": 36
+          }
+        ],
+        "reason": "unsat"
+      },
+      "group": "exposed-controls",
+      "id": "8-k4-tail-0"
+    },
+    {
+      "answer": false,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 6,
+            "demands": 8,
+            "edges": 13,
+            "full_plan_states": 390,
+            "maximum_bag_states": 243,
+            "maximum_separator_size": 4,
+            "minimum_width": 3,
+            "reason": "empty-message",
+            "reserved_states": 378,
+            "retained_rows": 57
+          }
+        ],
+        "reason": "unsat"
+      },
+      "group": "exposed-controls",
+      "id": "8-k5-tail-0"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 8,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 8,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "exposed-controls",
+      "id": "8-ternary-edit-0"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 8,
+            "demands": 8,
+            "edges": 7,
+            "full_plan_states": 66,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 66,
+            "retained_rows": 17
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "8-random-tree-0"
+    },
+    {
+      "answer": false,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 8,
+            "demands": 8,
+            "edges": 7,
+            "full_plan_states": 66,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "empty-message",
+            "reserved_states": 66,
+            "retained_rows": 15
+          }
+        ],
+        "reason": "unsat"
+      },
+      "group": "exposed-controls",
+      "id": "8-random-tree-1"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 8,
+            "demands": 8,
+            "edges": 7,
+            "full_plan_states": 66,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 66,
+            "retained_rows": 14
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "8-random-tree-2"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 16,
+            "demands": 16,
+            "edges": 15,
+            "full_plan_states": 138,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 138,
+            "retained_rows": 46
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "16-private-path-0"
+    },
+    {
+      "answer": false,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 1,
+            "demands": 16,
+            "edges": 15,
+            "full_plan_states": 138,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "empty-message",
+            "reserved_states": 9,
+            "retained_rows": 0
+          }
+        ],
+        "reason": "unsat"
+      },
+      "group": "exposed-controls",
+      "id": "16-blocked-path-0"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 16,
+            "demands": 16,
+            "edges": 16,
+            "full_plan_states": 390,
+            "maximum_bag_states": 27,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 390,
+            "retained_rows": 130
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "16-cycle-0"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 16,
+            "demands": 16,
+            "edges": 17,
+            "full_plan_states": 174,
+            "maximum_bag_states": 27,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 174,
+            "retained_rows": 58
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "16-two-triangles-0"
+    },
+    {
+      "answer": false,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 15,
+            "demands": 16,
+            "edges": 18,
+            "full_plan_states": 228,
+            "maximum_bag_states": 81,
+            "maximum_separator_size": 3,
+            "minimum_width": 3,
+            "reason": "empty-message",
+            "reserved_states": 225,
+            "retained_rows": 60
+          }
+        ],
+        "reason": "unsat"
+      },
+      "group": "exposed-controls",
+      "id": "16-k4-tail-0"
+    },
+    {
+      "answer": false,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 14,
+            "demands": 16,
+            "edges": 21,
+            "full_plan_states": 462,
+            "maximum_bag_states": 243,
+            "maximum_separator_size": 4,
+            "minimum_width": 3,
+            "reason": "empty-message",
+            "reserved_states": 450,
+            "retained_rows": 81
+          }
+        ],
+        "reason": "unsat"
+      },
+      "group": "exposed-controls",
+      "id": "16-k5-tail-0"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 14,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 16,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "exposed-controls",
+      "id": "16-ternary-edit-0"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 16,
+            "demands": 16,
+            "edges": 15,
+            "full_plan_states": 138,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 138,
+            "retained_rows": 41
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "16-random-tree-0"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 16,
+            "demands": 16,
+            "edges": 15,
+            "full_plan_states": 138,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 138,
+            "retained_rows": 35
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "16-random-tree-1"
+    },
+    {
+      "answer": false,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 13,
+            "demands": 16,
+            "edges": 15,
+            "full_plan_states": 138,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "empty-message",
+            "reserved_states": 117,
+            "retained_rows": 26
+          }
+        ],
+        "reason": "unsat"
+      },
+      "group": "exposed-controls",
+      "id": "16-random-tree-2"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 32,
+            "demands": 32,
+            "edges": 31,
+            "full_plan_states": 282,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 282,
+            "retained_rows": 94
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "32-private-path-0"
+    },
+    {
+      "answer": false,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 5,
+            "demands": 32,
+            "edges": 31,
+            "full_plan_states": 282,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "empty-message",
+            "reserved_states": 45,
+            "retained_rows": 12
+          }
+        ],
+        "reason": "unsat"
+      },
+      "group": "exposed-controls",
+      "id": "32-blocked-path-0"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 32,
+            "demands": 32,
+            "edges": 32,
+            "full_plan_states": 822,
+            "maximum_bag_states": 27,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 822,
+            "retained_rows": 274
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "32-cycle-0"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 32,
+            "demands": 32,
+            "edges": 33,
+            "full_plan_states": 318,
+            "maximum_bag_states": 27,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 318,
+            "retained_rows": 106
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "exposed-controls",
+      "id": "32-two-triangles-0"
+    },
+    {
+      "answer": false,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 31,
+            "demands": 32,
+            "edges": 34,
+            "full_plan_states": 372,
+            "maximum_bag_states": 81,
+            "maximum_separator_size": 3,
+            "minimum_width": 3,
+            "reason": "empty-message",
+            "reserved_states": 369,
+            "retained_rows": 108
+          }
+        ],
+        "reason": "unsat"
+      },
+      "group": "exposed-controls",
+      "id": "32-k4-tail-0"
+    },
+    {
+      "answer": false,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 30,
+            "demands": 32,
+            "edges": 37,
+            "full_plan_states": 606,
+            "maximum_bag_states": 243,
+            "maximum_separator_size": 4,
+            "minimum_width": 3,
+            "reason": "empty-message",
+            "reserved_states": 594,
+            "retained_rows": 129
+          }
+        ],
+        "reason": "unsat"
+      },
+      "group": "exposed-controls",
+      "id": "32-k5-tail-0"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 32,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 32,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "exposed-controls",
+      "id": "32-ternary-edit-0"
+    },
+    {
+      "answer": false,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 11,
+            "demands": 32,
+            "edges": 31,
+            "full_plan_states": 282,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "empty-message",
+            "reserved_states": 99,
+            "retained_rows": 22
+          }
+        ],
+        "reason": "unsat"
+      },
+      "group": "exposed-controls",
+      "id": "32-random-tree-0"
+    },
+    {
+      "answer": false,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 29,
+            "demands": 32,
+            "edges": 31,
+            "full_plan_states": 282,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "empty-message",
+            "reserved_states": 261,
+            "retained_rows": 67
+          }
+        ],
+        "reason": "unsat"
+      },
+      "group": "exposed-controls",
+      "id": "32-random-tree-1"
+    },
+    {
+      "answer": false,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 15,
+            "demands": 32,
+            "edges": 31,
+            "full_plan_states": 282,
+            "maximum_bag_states": 9,
+            "maximum_separator_size": 1,
+            "minimum_width": 3,
+            "reason": "empty-message",
+            "reserved_states": 135,
+            "retained_rows": 37
+          }
+        ],
+        "reason": "unsat"
+      },
+      "group": "exposed-controls",
+      "id": "32-random-tree-2"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 8,
+            "demands": 8,
+            "edges": 10,
+            "full_plan_states": 174,
+            "maximum_bag_states": 27,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 174,
+            "retained_rows": 58
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "fresh-controls",
+      "id": "fresh-8-ladder"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 8,
+            "demands": 8,
+            "edges": 13,
+            "full_plan_states": 174,
+            "maximum_bag_states": 27,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 174,
+            "retained_rows": 58
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "fresh-controls",
+      "id": "fresh-8-triangles"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 8,
+            "demands": 8,
+            "edges": 10,
+            "full_plan_states": 264,
+            "maximum_bag_states": 48,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 264,
+            "retained_rows": 67
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "fresh-controls",
+      "id": "fresh-8-mixed-domains"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 8,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 8,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "fresh-controls",
+      "id": "fresh-8-ternary-edit"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 16,
+            "demands": 16,
+            "edges": 22,
+            "full_plan_states": 390,
+            "maximum_bag_states": 27,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 390,
+            "retained_rows": 130
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "fresh-controls",
+      "id": "fresh-16-ladder"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 16,
+            "demands": 16,
+            "edges": 29,
+            "full_plan_states": 390,
+            "maximum_bag_states": 27,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 390,
+            "retained_rows": 130
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "fresh-controls",
+      "id": "fresh-16-triangles"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 16,
+            "demands": 16,
+            "edges": 22,
+            "full_plan_states": 600,
+            "maximum_bag_states": 48,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 600,
+            "retained_rows": 128
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "fresh-controls",
+      "id": "fresh-16-mixed-domains"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 16,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 16,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "fresh-controls",
+      "id": "fresh-16-ternary-edit"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 24,
+            "demands": 24,
+            "edges": 34,
+            "full_plan_states": 606,
+            "maximum_bag_states": 27,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 606,
+            "retained_rows": 202
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "fresh-controls",
+      "id": "fresh-24-ladder"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 24,
+            "demands": 24,
+            "edges": 45,
+            "full_plan_states": 606,
+            "maximum_bag_states": 27,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 606,
+            "retained_rows": 202
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "fresh-controls",
+      "id": "fresh-24-triangles"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 24,
+            "demands": 24,
+            "edges": 34,
+            "full_plan_states": 936,
+            "maximum_bag_states": 48,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 936,
+            "retained_rows": 251
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "fresh-controls",
+      "id": "fresh-24-mixed-domains"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 24,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 24,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "fresh-controls",
+      "id": "fresh-24-ternary-edit"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 32,
+            "demands": 32,
+            "edges": 46,
+            "full_plan_states": 822,
+            "maximum_bag_states": 27,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 822,
+            "retained_rows": 274
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "fresh-controls",
+      "id": "fresh-32-ladder"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 32,
+            "demands": 32,
+            "edges": 61,
+            "full_plan_states": 822,
+            "maximum_bag_states": 27,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 822,
+            "retained_rows": 274
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "fresh-controls",
+      "id": "fresh-32-triangles"
+    },
+    {
+      "answer": true,
+      "diagnostic": {
+        "attempts": [
+          {
+            "completed_messages": 32,
+            "demands": 32,
+            "edges": 46,
+            "full_plan_states": 1272,
+            "maximum_bag_states": 48,
+            "maximum_separator_size": 2,
+            "minimum_width": 3,
+            "reason": "complete",
+            "reserved_states": 1272,
+            "retained_rows": 336
+          }
+        ],
+        "reason": "sat"
+      },
+      "group": "fresh-controls",
+      "id": "fresh-32-mixed-domains"
+    },
+    {
+      "answer": null,
+      "diagnostic": {
+        "attempts": [
+          {
+            "demands": 30,
+            "minimum_width": 3,
+            "reason": "unclassified-clauses"
+          },
+          {
+            "demands": 32,
+            "minimum_width": 1,
+            "reason": "unclassified-clauses"
+          }
+        ],
+        "reason": "unrecognized"
+      },
+      "group": "fresh-controls",
+      "id": "fresh-32-ternary-edit"
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+\subsection{Exact separator messages for cyclic signed choices}
+\label{sec:choice-separator}
+
+The preceding forest rule fails on five exposed demand graphs even after the best
+two-vertex removals. We retain the same checked signed-demand and binary-exclusion
+syntax, but now allow cycles inside elimination bags. The single-representative
+normalization of Section~\ref{sec:choice-forest} still applies. Discovery proposes
+a deterministic minimum-fill order: minimize missing pairs among current
+neighbors, then degree, then demand index. Fill neighbors into a clique before
+removing a vertex. This heuristic is not an optimal-width algorithm.
+
+The checker accepts the order, not trusted bags. It rebuilds elimination bags
+from every original demand-graph edge. At step $i$, the eliminated demand $v_i$
+and its later filled neighbors form a bag; those neighbors are separator $S_i$.
+A message is assigned to the earliest later vertex of its separator, or becomes
+a root message when that separator is empty. This construction covers every
+original edge and has running intersection. The checker also explicitly verifies
+that each child-message scope lies inside its parent bag. Messages describe
+complete feasible relations on their separators, including excluded tuples.
+
+\begin{samepage}
+\begin{proposition}[Exact elimination-message authority]
+For a fully checked signed-choice source and elimination order, let $R_i$ contain
+exactly the separator assignments that extend to a value of $v_i$ satisfying its
+original exclusions to later demands and every incoming message. Any verified
+empty $R_i$ proves UNSAT, even in an incomplete message prefix. Otherwise a
+proper prefix is unknown; complete nonempty messages admit a satisfying source
+model reconstructed in reverse order.
+\end{proposition}
+\end{samepage}
+\begin{proof}
+Treat exclusions as binary factors on representative choices, with their domains
+supplied by the demands. Assign an original exclusion to its earlier-eliminated
+endpoint. At step $i$, all active factors containing $v_i$ are its still-relevant
+original exclusions and the messages assigned to its bucket. Their scopes lie
+in $\{v_i\}\cup S_i$ by the filled-graph construction. Replace their conjunction
+by its existential projection over $v_i$. This is precisely $R_i$, since the
+checker tests every separator tuple for an extending value and checks both
+present and absent rows. All other active factors are independent of $v_i$.
+Induction therefore preserves the conjunction's satisfiability under elimination.
+An empty factor makes that conjunction false, regardless of unprocessed factors,
+so an empty verified message already proves UNSAT. No such conclusion follows
+from nonempty messages in a proper prefix.
+
+After complete elimination every root message is on an empty separator and is
+true exactly when its sole empty tuple is present. If all messages are nonempty,
+choose an extending value at each step in reverse order. The checked existential
+equations guarantee an extension compatible with the selected separator values
+and child messages. This reconstructs compatible representatives for all demands.
+The preceding normalization lifts them to a Boolean assignment; the implementation
+also checks that model against every raw source clause and its full variable
+support. This proves SAT without assuming that the order heuristic is complete
+or that the bag width is small.
+\end{proof}
+
+Write $B_i=|D_{v_i}|\prod_{j\in S_i}|D_j|$. Enumerating all bag assignments gives
+an upper bound proportional to
+\[
+ \sum_i B_i\left(1+|S_i|+\sum_{c\in\operatorname{children}(i)}|S_c|\right)
+\]
+for local compatibility and message lookup work, apart from input preparation,
+graph construction, sorting, persistence and raw-model verification. Actual
+search may stop at the first extending value for a tuple. Retained relations
+can be smaller than the enumerated space, but verification also checks omitted
+tuples. A short empty relation is therefore not a claim of polynomial-time
+verification for unrestricted width. Bounded separator width gives the familiar
+finite-domain dynamic-programming bound; unrestricted width can be exponential.
+The contribution here is checked integration and a measured structural boundary,
+not a new general tractability theorem or novelty of elimination.
+
+The frozen experimental limits are 200,000 reserved bag assignments in total,
+65,536 per bag, and 1,000,000 ordering pair tests. Each complete message reserves
+its whole $B_i$ before construction; a stopped attempt retains only complete
+messages. Checking and graph/source preparation have separate recorded costs.
+These caps are not total lifetime or memory bounds. A graph-only pre-freeze pilot
+on the five exposed cases found separator sizes 6--9, largest bags of
+2,187--59,049 assignments, and full plans of 15,042--141,654 assignments.
+The caps deliberately admit these exposed descriptions. Fresh controls are
+therefore required before discussing transfer. Greedy demand extraction remains
+incomplete; failure of a proposal is not exclusion of all possible descriptions.
+
+The measurement retains all 78 previous cases and adds sixteen signed sparse
+controls generated only after the source/protocol freeze: ladders, triangle
+strips, mixed-domain ladders and ternary edits at 8, 16, 24 and 32 demands.
+Inputs are unlabelled to both algorithms, and no outcomes are omitted. The old
+external panel contains 25 originals and twelve derived controls. The five
+nonclique cases are four original flat30 formulas and one signed permutation;
+they are exposed, not five independent fresh external observations.
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+Stratum & Two-cut answers & Separator answers & Total inputs \\
+\midrule
+Old external panel & 0 & 5 & 37 \\
+Retained nonclique path & 1 & 1 & 1 \\
+Exposed constructed controls & 32 & 36 & 40 \\
+Fresh constructed controls & 3 & 12 & 16 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The new route checks all five retained nonclique sources. Their maximum separator
+sizes are 8, 7, 9, 6 and 8; full reserved assignment counts are 70,140,
+38,640, 141,654, 15,042 and 85,206. Each completes thirty messages, with
+5,794, 3,211, 10,255, 2,704 and 5,845 retained relation rows, respectively.
+Their previous SAT witnesses remain valid: this gives an exact structural
+explanation, not new historical portfolio answers. On the exposed controls,
+the additional four results are $K_5$ refutations, yielding nineteen SAT and
+seventeen UNSAT results. The fresh controls yield twelve SAT results, including
+nine separator-only cases, three shared cases and four jointly unresolved cases.
+Across the 94 inputs, there are 36 shared answers, eighteen separator-only answers
+and forty jointly unresolved cases; none is two-cut-only. This is not a universal
+dominance claim under all possible limits and source descriptions.
+
+The unresolved cases separate into 26 external inputs with unclassified clauses,
+six external inputs stopped by the per-bag limit, and eight unsupported ternary
+controls (four exposed, four fresh). Source classification failure concerns the
+proposed descriptions, not a proof excluding every alternative description.
+Dense clique-capacity cases retain their earlier specialized proofs. Next we
+will test source-bound separator tables beyond the signed-choice grammar, with
+full Boolean semantics and resulting width made explicit. Higher-arity exclusions
+preserve the representative normalization; arbitrary positive interactions need
+a separate proof or full Boolean domains. Alternative orders, cross-edit message
+reuse, preprocessing and efficient unrestricted SAT remain open.
+
+Two construction orders and four constructor-disabled cold replays reproduce
+all certificates, answers and checker counters. On the complete 94-input panel,
+mean discovery is 0.12029 seconds for two-cut forests and 1.56959 for separators;
+further checking is 0.01264 versus 0.76843 seconds. Encoding, gzip and writing
+cost 0.00922 versus 0.07359 seconds; process wall time is 0.23418 versus
+2.50316 seconds. Compact JSON occupies 45,520 versus 753,180 bytes and gzip
+13,179 versus 111,578 bytes. Unknown markers and incomplete exact prefixes
+are included in storage but not counted as answers. More checked results cost
+more; these numbers are not a speedup comparison.
+
+Cold worker replay costs 0.02011 versus 0.79480 seconds, with process wall
+costs 0.09876 versus 0.87459 seconds. Construction peak RSS is 41,402,368
+versus 46,612,480 bytes; replay peaks at 40,878,080 versus 44,859,392 bytes.
+OS caches are not flushed. Prior acquisition, independent audits and retained
+historical storage remain additional. Complete structural replay has a different
+purpose and cost from checking an already available SAT witness alone.
+
+All 2,739 full and sixteen focused tests pass. Independent audits reproduce
+3,880 small CNFs, 24,576 separator-message projections and 32,768 prefix
+verdicts across all 4,096 cross-conflict subsets of three binary demands, using
+two reversed orders and alternating internal exclusions. Each message is checked
+against brute-force existential projection of its raw-constraint subtree.
+Validation preserves 257 earlier manifests, 85,720 artifact entries, 1,392
+scientific sources, all 94 earlier proof blocks and three publication snapshots.
+Four frozen scientific files and the proposition above extend this record.

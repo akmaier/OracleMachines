@@ -5,7 +5,39 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: frozen expansion budgets and reuse value
+## Latest evidence: frozen external reuse transfer
+
+[Frozen external transfer](frozen-external-reuse-transfer.md) evaluates eight new
+SATLIB originals and sixteen fixed related edits, including every parent outcome.
+At the unchanged 8,000-context target cap, fresh search checks **9/16**
+answers and reuse checks **16/16**. There are **7 reuse-only**,
+**0 fresh-only**, **9 shared** and **0 jointly unresolved**
+targets. **4 reuse-only answers come from SAT parents**, showing useful
+retained consequences without inheriting a parent model. These are related edits
+from the same size/distribution groups used in development, not a representative
+external SAT survey.
+
+Mean target workflow costs are **62.71 s fresh** and
+**116.00 s reused**. New parent acquisition costs
+**79.67 s**, bringing parent-plus-reuse to
+**195.67 s** before download, target preparation and
+independent audits. Coverage and cost must be assessed together; no universal
+speedup or efficient unrestricted class follows.
+
+All **2,697 full and eight focused tests pass**. Independent truth checks reproduce
+**15,520 outcomes on 7,760 small edited targets**.
+All five measured workflows, proofs and counters reproduce. Three fresh workers
+replay target-only certificates with discovery and transport disabled. Validation
+preserves **254 prior manifests, 84,935 artifact entries, 1,381 scientific sources**
+and all **92** previous proof blocks. Resume
+`experiments/results/cnf-reuse-transfer/checkpoint.json`, key `reuse_transfer`.
+
+**Next:** explain the observed coverage differences and retained-proof cost;
+seek compact supports or a justified admission/dispatch policy before raising
+budgets again. Broader distributions, alternative derivations after deleted
+premises, structural recognition and unrestricted expansion remain open.
+
+## Previous evidence: frozen expansion budgets and reuse value
 
 [Frozen expansion budgets](reuse-expansion-budget.md) compare the unchanged
 watched learner with all surviving knowledge at 2,000 and 8,000 contexts, plus

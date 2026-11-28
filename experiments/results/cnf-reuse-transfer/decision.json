@@ -1,0 +1,75 @@
+{
+  "coverage": {
+    "fresh8000": {
+      "sat": 3,
+      "unresolved": 7,
+      "unsat": 6
+    },
+    "parent20000": {
+      "sat": 4,
+      "unsat": 4
+    },
+    "reuse8000": {
+      "sat": 5,
+      "unsat": 11
+    }
+  },
+  "decision": "Retain unfiltered finite external-parent transfer evidence with parent acquisition charged, all fresh-only/reuse-only/unknown cases and independent target certificates. Keep original distributions and selection limits explicit; no production-default or complexity change.",
+  "documents": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "8515ccda0b21ff3a085868d266ad04c9774cec23c574626f0a6477c9796cbc53",
+    "research/frozen-external-reuse-transfer.md": "f7d39381bd3955ec4fec3f8ad1d5e6963040a01729993dc732d00b8f7d303164",
+    "research/implementation-gaps.md": "eb594b7e4740effd023f721fa532a39efaa91ffdb7dfc5222aa7e17c2a2645a5",
+    "research/sat-pattern-discovery.md": "3b9b0d543382818f54ca0c8ee15e28d457840bbc7beab07db6fe04c14cfd16fb",
+    "research/structural-reuse-priorities.md": "75ae9fc0cb137e95d9dc7f4152d7c8dfb129f1b6815169511f0a2f0bba3345c7"
+  },
+  "fresh_only": [],
+  "limitations": [
+    "Selection and scientific sources frozen before acquisition or evaluation. Eight external originals from four SATLIB groups; sixteen controlled proof-guided edits are related targets, not sixteen independent external samples. Same distributions as earlier development; no representative or all-history novelty claim.",
+    "Single measured parent acquisition at 20000 contexts; two reversed fresh-process target comparisons at 8000 contexts. Target-only deterministic proposal, unchanged watched engine, all surviving clauses active, no model inheritance, no outcome-dependent filtering, tuning or production-default changes.",
+    "Reuse independently checks the parent, transports only recorded derivations whose premises survive, searches an equivalent augmented target and substitutes premises to yield a target-only checked certificate. SAT requires a target model; UNSAT an empty clause; unknown carries no decision authority.",
+    "Complete cost charges raw reads/hash checks, required parent reads/checks, proposal, transport, search, substitution, explicit checks, writes, three compressions, warm replay and two reload rounds. Parent acquisition is separate and added once to the aggregate reuse cost. Download, edit preparation, imports/startup, report encoding, references and independent audits are additional.",
+    "Reload rounds named cold use fresh objects in the same worker, without flushing OS caches. Additional independent fresh-worker replays disable search and transport. Context caps are not equal work or wall time. Historical unions have no combined dispatcher timing.",
+    "Separate Z3 references use timeout 10000 ms, seed zero, fresh process timeout 30 seconds. SAT models are source checked; negative reference output is not project UNSAT authority. Labels and file names never enter discovery.",
+    "All earlier sources, coverage, counterexamples and proof blocks are preserved. Efficient recognition, alternative supports, compact interaction descriptions, preprocessing and unrestricted expansion remain open."
+  ],
+  "next_target": "Diagnose fresh/reuse coverage differences and proof cost; develop and separately test compact supports or a justified dispatch/admission policy, preserving structural-recognition and unrestricted-expansion obligations.",
+  "reuse_only": [
+    "t008",
+    "t009",
+    "t010",
+    "t011",
+    "t012",
+    "t013",
+    "t014"
+  ],
+  "strata": {
+    "sat": {
+      "fresh8000": {
+        "sat": 3,
+        "unresolved": 4,
+        "unsat": 1
+      },
+      "reuse8000": {
+        "sat": 5,
+        "unsat": 3
+      }
+    },
+    "unsat": {
+      "fresh8000": {
+        "unresolved": 3,
+        "unsat": 5
+      },
+      "reuse8000": {
+        "unsat": 8
+      }
+    }
+  },
+  "supplemental_checks": {
+    "path": "experiments/results/cnf-reuse-transfer/supplemental-checks.json",
+    "sha256": "2487ff20587798b5831d7f499a211011d0e5f3cd478c8e67d2d2865bbdbf6f23"
+  },
+  "union_counts": {
+    "sat": 5,
+    "unsat": 11
+  }
+}

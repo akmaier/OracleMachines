@@ -4,7 +4,49 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-## Latest evidence: watched propagation preserves full-reuse traces
+## Latest evidence: frozen expansion budgets and reuse value
+
+[Frozen expansion budgets](reuse-expansion-budget.md) compare the unchanged
+watched learner with all surviving knowledge at 2,000 and 8,000 contexts, plus
+fresh search at the same 8,000-context cap. The panel remains sixteen exposed
+edits of eight refuted parents. All runs start from empty search state.
+
+Checked coverage is **3/16 → 16/16** with reuse,
+versus **9/16** for fresh search at 8,000 contexts.
+There are **13 additional reuse answers**, **7 reuse-only** and
+**0 fresh-only** answers at the larger cap. The historical union covers
+**16/16**, leaving **0 unresolved**; it is not a measured combined dispatcher.
+All completed answers are checked UNSAT refutations. Earlier complete answers
+and all earlier derivation prefixes are preserved.
+
+A separate proof census finds all sixteen inputs connected. Their final
+refutations reach **43,740/59,480** retained derivation occurrences
+and **98.14–100.00%** of original clauses, spanning every source
+variable. These are stored proof dependencies, not minimal supports or a proof
+that every retained ancestor must be active in search.
+
+Mean complete seconds are **71.89307** for small reuse,
+**68.52685** for larger fresh search and
+**110.25145** for larger reuse. Larger reuse costs
+**+53.35%** relative to small reuse and
+**+60.89%** relative to equal-cap fresh search.
+Proof, acquisition, transport and replay remain charged. These are different
+search workloads on exposed inputs, not a uniform speedup or fresh transfer claim.
+
+All **2,689 full and 10 focused tests pass**. Reproduced independent truth checks
+cover **47,328 outcomes on 7,888 edited small targets**, including **31,552**
+budget-prefix checks. Three fresh workers replay target-only certificates with
+search and transport disabled. Validation preserves 253 prior manifests,
+84,766 artifact entries, 1,377 scientific sources and all 92 prior proof blocks.
+Resume `experiments/results/cnf-reuse-expansion/checkpoint.json`, key
+`reuse_expansion`.
+
+**Next priorities:** fresh frozen external transfer, diagnosis of the seven
+fresh-search misses, cheaper retained proofs and alternative
+supports after premise deletion. Efficient recognition, preprocessing and
+unrestricted SAT expansion remain open; no new tractable class is claimed.
+
+## Previous evidence: watched propagation preserves full-reuse traces
 
 [Watched propagation with full reuse](watched-propagation-and-full-reuse.md)
 keeps all surviving learned clauses active. Two watches replace partial-assignment

@@ -1,0 +1,54 @@
+{
+  "coverage": {
+    "fresh8000": {
+      "unresolved": 7,
+      "unsat": 9
+    },
+    "reuse2000": {
+      "unresolved": 13,
+      "unsat": 3
+    },
+    "reuse8000": {
+      "unsat": 16
+    }
+  },
+  "decision": "Retain the fixed-budget coverage and cost comparison, including fresh-search ablation, unknown targets and complete checked proof prefixes. Preserve old coverage separately; no production defaults or general complexity claim.",
+  "documents": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "23eae3239422b525f0eff0637d4ba76b67f5b4058b63d0dab35d48d0af1bc129",
+    "research/implementation-gaps.md": "84e63e910c85e0909be8b8fc5c981353a4b53963ff2875b1d461323a68b69e66",
+    "research/reuse-expansion-budget.md": "30e040c5ddcbf479bb37289cfce1f3b56a51c591546a4cd82edc524b5d5de7f2",
+    "research/sat-pattern-discovery.md": "b0f2344415a6437b62a998c02d4a7c30c4b198e84e4161065344cba789fc3946",
+    "research/structural-reuse-priorities.md": "e2ec0aa84c450f700ddb322528c9b620840929b224c9ce4c4cf54593d6706219"
+  },
+  "gains_over_reuse2000": [
+    "s004",
+    "s005",
+    "s006",
+    "s007",
+    "s012",
+    "s013",
+    "s014",
+    "s015",
+    "s020",
+    "s022",
+    "s028",
+    "s029",
+    "s030"
+  ],
+  "limitations": [
+    "Budget policy frozen before these runs: all 16 exposed edited targets, unchanged source bytes, target-only proposal and watched learner. Reuse at 2000 and 8000 contexts; fresh search at 8000. No label-dependent selection or tuning. This is exposed-policy development, not new external transfer.",
+    "Every reuse run starts from the original parent proof, transports all surviving derivations and searches from an empty trail. The larger run is not a continuation of the measured smaller run; their costs are not subtracted. All retained clauses are active. No pruning, restart, admission or production-default change.",
+    "Fresh8000 measures the same watched search budget without parent reads, transport, augmented clauses or retained proof. Equal context caps do not imply equal work. Reference outcomes remain audit-only; only original-target checked models or empty-clause proofs grant answers.",
+    "Two reversed fresh-process orders charge input reads/hashing, required parent reads/checks, transport, proposal, augmentation, search, proof substitution, checks, writes, three compressions and warm/two reload-check rounds. Imports/startup, final report encoding, original parent acquisition, historical storage and independent audits are additional.",
+    "Reload rounds called cold in inherited field names deserialize fresh objects in the same worker; OS caches are not flushed. Separate fresh workers perform target-only replay with search and transport disabled. Runtime and RSS are observations, not bounds.",
+    "Retain all earlier answers and counterexamples. Coverage unions are bookkeeping, not a measured dispatcher. General recognition, alternative premise support, proof size, unrestricted expansion and uniform polynomial SAT remain open."
+  ],
+  "next_target": "Fresh frozen external transfer and alternative premise supports; diagnose the seven fresh-search misses and the wide recorded proof supports to choose compact interaction or proof-retention investigations.",
+  "supplemental_checks": {
+    "path": "experiments/results/cnf-reuse-expansion/supplemental-checks.json",
+    "sha256": "74c8a92f8fc161c9875795f5f691cdd273e86024f524083cb91a5eb4e07bfcec"
+  },
+  "union_counts": {
+    "unsat": 16
+  }
+}

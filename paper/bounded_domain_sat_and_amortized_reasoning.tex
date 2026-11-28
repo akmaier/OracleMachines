@@ -18619,6 +18619,88 @@ edited targets.  Fresh external transfer, proof retention and alternative
 supports after source deletion remain open.  Equal-trace speedups do not define
 a larger tractable SAT class or prove an end-to-end amortization bound.
 
+\subsection{Expansion budgets and the marginal value of retained clauses}
+\label{sec:reuse-expansion-budget}
+
+The watched implementation preserves three checked answers on the sixteen edited
+targets, leaving thirteen at its 2,000-context cap.  A separately frozen comparison
+raises that cap to 8,000 and adds a fresh-search control at 8,000.  The original
+target bytes, proposal policy, watched learner, active-clause policy and two
+reversed process orders are fixed before execution.  All sixteen targets remain
+edits of eight already exposed refuted parents.  The other sixteen edits of SAT
+parents remain separate.  Neither publisher labels nor reference answers enter
+discovery; this is exposed-policy development, not fresh external transfer.
+
+Reuse checks the original parent proof, filters surviving recorded derivations,
+and searches the equivalent target with all surviving clauses active.  Exact
+proof substitution removes the augmented premises from the final target-only
+certificate.  The previous propositions justify this composition.  The larger
+run starts from an empty search state, not the measured smaller run's live state;
+its time is not a continuation cost.  Direct validation establishes that every
+smaller-budget derivation is an exact prefix of the larger proof and that all
+previously completed answers survive.  No production default changes.
+
+Checked coverage is 3/16 at 2,000 contexts with reuse,
+9/16 at 8,000 with fresh search, and
+16/16 at 8,000 with reuse.  The larger reuse run supplies
+13 additional answers.  At the larger cap there are 7
+reuse-only and 0 fresh-only answers.  Their historical union covers
+16/16 and leaves 0 unresolved; it is not a measured combined
+dispatcher.  Complete target models or target refutations alone grant authority.
+All completed outputs are checked UNSAT refutations.  Unfinished searches
+remain unknown, even when a trusted reference says UNSAT.
+
+A separately charged post-hoc census finds every target connected, with 125--151
+variables.  Final reused refutations reach 43,740 of 59,480
+retained derivation occurrences, ranging from 1,322 to
+5,057 per target.  Their recorded original-premise supports cover
+98.14--100.00\% of source clauses and all source variables.
+These are ancestors in the stored proof, not minimum supports, minimum active
+clause sets or lower bounds on alternative decompositions.  This census does not
+guide the frozen acquisition policy.
+
+Mean complete seconds in that order are 71.89307,
+68.52685 and 110.25145.
+Larger reuse changes cost by +53.35\% against smaller
+reuse and +60.89\% against equal-cap fresh search.
+The corresponding entered-context totals are 30,395,
+96,697 and 50,713; equal caps do not
+imply equal work or equal solved sets.  These are workflow costs, not a universal
+speedup or an end-to-end acquisition-amortization result.
+
+Proof JSON bytes are 110,545,079, 69,378,039
+and 125,646,317; combined gzip bytes are
+4,114,583, 2,493,833
+and 4,734,568.  Maximum observed process RSS is
+465,846,272, 263,913,472 and
+487,063,552 bytes.  Mean acquisition including checks is
+49.72763, 54.73619
+and 84.39776 seconds; explicit checking is
+3.68775, 2.31896
+and 4.29532.  The two reload/check rounds cost
+8.60082, 5.24295 and 9.94906
+seconds.  Source reads/hashes, required parent reads/checks, transport, proposals,
+augmentation, search, substitution, writes, compression and replay are charged.
+Historical acquisition/storage, imports/startup, report encoding and independent
+audits are additional.  Reload rounds deserialize in the same worker and do not
+flush OS caches; separate fresh workers check target-only answers with search
+and transport disabled.
+
+All 2,689 full and ten focused tests pass.  Independent truth audits are reproduced
+on 7,888 edited small targets, giving 47,328 outcome checks: 23,240 SAT, 8,918
+UNSAT and 15,170 unknown.  They cover all two-variable clause sets, three-variable
+sets of at most three clauses and 128 signed sparse mixtures, with deletions and
+shared-variable additions.  All 31,552 budget-prefix checks, 23,664 retained-prefix
+checks and 8,228 consequence-occurrence checks pass.  Related budgets and edits
+are not independent samples.  A missing output directory interrupted the first
+audit reproduction only at its final write; the error is retained and no frozen
+policy changed.  Validation preserves 253 previous manifests, 84,766 artifact
+entries, 1,377 scientific sources, all 92 earlier proof blocks and the three
+published snapshots.  Four scientific files are added.  No new tractability
+theorem is claimed.  Frozen external transfer, remaining interactions,
+alternative premise supports, proof retention cost and unrestricted SAT
+expansion remain separate obligations.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/audit_cnf_reuse_expansion.py", line 69, in <module>
+    if __name__ == '__main__': audit(Path(sys.argv[1]))
+                               ~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/audit_cnf_reuse_expansion.py", line 65, in audit
+    write(out / 'semantic-audit.json', dict(passed=True, counts=dict(counts), mixtures=mixtures,
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+          scope='All 512 canonical two-variable clause sets and 3304 three-variable clause sets of at most three clauses, plus 128 signed sparse mixtures with duplicates and tautologies. Each receives deletion and shared-variable-addition edits; fresh/reuse at caps 0, 2, 8000. Independent truth verifies outcomes and retained/new consequences; exact deterministic prefix checks verify completed-answer preservation. Related edits, policies and budgets are not independent samples.'))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/compare_cnf_partition_repair.py", line 18, in write
+    def write(path,value):Path(path).write_text(json.dumps(value,sort_keys=True,indent=2)+'\n')
+                          ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 809, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'experiments/results/cnf-reuse-expansion/semantic-reproduction/semantic-audit.json'

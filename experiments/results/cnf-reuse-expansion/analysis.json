@@ -1,0 +1,948 @@
+{
+  "baseline_matches_parent": true,
+  "budget_cost_percent": 53.35476470476459,
+  "coverage": {
+    "fresh8000": {
+      "unresolved": 7,
+      "unsat": 9
+    },
+    "reuse2000": {
+      "unresolved": 13,
+      "unsat": 3
+    },
+    "reuse8000": {
+      "unsat": 16
+    }
+  },
+  "fresh_only_at_8000": [],
+  "gains_over_reuse2000": [
+    "s004",
+    "s005",
+    "s006",
+    "s007",
+    "s012",
+    "s013",
+    "s014",
+    "s015",
+    "s020",
+    "s022",
+    "s028",
+    "s029",
+    "s030"
+  ],
+  "increasing_budget_preserves_derivation_prefix": true,
+  "limitations": [
+    "Budget policy frozen before these runs: all 16 exposed edited targets, unchanged source bytes, target-only proposal and watched learner. Reuse at 2000 and 8000 contexts; fresh search at 8000. No label-dependent selection or tuning. This is exposed-policy development, not new external transfer.",
+    "Every reuse run starts from the original parent proof, transports all surviving derivations and searches from an empty trail. The larger run is not a continuation of the measured smaller run; their costs are not subtracted. All retained clauses are active. No pruning, restart, admission or production-default change.",
+    "Fresh8000 measures the same watched search budget without parent reads, transport, augmented clauses or retained proof. Equal context caps do not imply equal work. Reference outcomes remain audit-only; only original-target checked models or empty-clause proofs grant answers.",
+    "Two reversed fresh-process orders charge input reads/hashing, required parent reads/checks, transport, proposal, augmentation, search, proof substitution, checks, writes, three compressions and warm/two reload-check rounds. Imports/startup, final report encoding, original parent acquisition, historical storage and independent audits are additional.",
+    "Reload rounds called cold in inherited field names deserialize fresh objects in the same worker; OS caches are not flushed. Separate fresh workers perform target-only replay with search and transport disabled. Runtime and RSS are observations, not bounds.",
+    "Retain all earlier answers and counterexamples. Coverage unions are bookkeeping, not a measured dispatcher. General recognition, alternative premise support, proof size, unrestricted expansion and uniform polynomial SAT remain open."
+  ],
+  "outcomes": [
+    {
+      "diagnostics": {
+        "fresh8000": {
+          "best_failed": 2,
+          "expanded": 5438,
+          "initial_failed": 68,
+          "learned": 2515,
+          "learned_literals": 31919,
+          "maximum_committed": 119,
+          "node_limit": 8000,
+          "reason": "unsat"
+        },
+        "reuse2000": {
+          "best_failed": 2,
+          "expanded": 2000,
+          "initial_failed": 73,
+          "learned": 950,
+          "learned_literals": 13452,
+          "maximum_committed": 119,
+          "node_limit": 2000,
+          "reason": "unknown",
+          "reused": 2095
+        },
+        "reuse8000": {
+          "best_failed": 2,
+          "expanded": 3305,
+          "initial_failed": 73,
+          "learned": 1573,
+          "learned_literals": 21263,
+          "maximum_committed": 119,
+          "node_limit": 8000,
+          "reason": "unsat",
+          "reused": 2095
+        }
+      },
+      "id": "s004",
+      "reference_answer": false,
+      "statuses": {
+        "fresh8000": "unsat",
+        "reuse2000": "unresolved",
+        "reuse8000": "unsat"
+      }
+    },
+    {
+      "diagnostics": {
+        "fresh8000": {
+          "best_failed": 2,
+          "expanded": 2001,
+          "initial_failed": 68,
+          "learned": 934,
+          "learned_literals": 11807,
+          "maximum_committed": 121,
+          "node_limit": 8000,
+          "reason": "unsat"
+        },
+        "reuse2000": {
+          "best_failed": 2,
+          "expanded": 2000,
+          "initial_failed": 73,
+          "learned": 951,
+          "learned_literals": 13461,
+          "maximum_committed": 120,
+          "node_limit": 2000,
+          "reason": "unknown",
+          "reused": 2095
+        },
+        "reuse8000": {
+          "best_failed": 2,
+          "expanded": 2088,
+          "initial_failed": 73,
+          "learned": 996,
+          "learned_literals": 13967,
+          "maximum_committed": 120,
+          "node_limit": 8000,
+          "reason": "unsat",
+          "reused": 2095
+        }
+      },
+      "id": "s005",
+      "reference_answer": false,
+      "statuses": {
+        "fresh8000": "unsat",
+        "reuse2000": "unresolved",
+        "reuse8000": "unsat"
+      }
+    },
+    {
+      "diagnostics": {
+        "fresh8000": {
+          "best_failed": 1,
+          "expanded": 8000,
+          "initial_failed": 85,
+          "learned": 3640,
+          "learned_literals": 49105,
+          "maximum_committed": 121,
+          "node_limit": 8000,
+          "reason": "unknown"
+        },
+        "reuse2000": {
+          "best_failed": 8,
+          "expanded": 2000,
+          "initial_failed": 105,
+          "learned": 931,
+          "learned_literals": 12815,
+          "maximum_committed": 120,
+          "node_limit": 2000,
+          "reason": "unknown",
+          "reused": 4352
+        },
+        "reuse8000": {
+          "best_failed": 7,
+          "expanded": 3329,
+          "initial_failed": 105,
+          "learned": 1562,
+          "learned_literals": 21693,
+          "maximum_committed": 120,
+          "node_limit": 8000,
+          "reason": "unsat",
+          "reused": 4352
+        }
+      },
+      "id": "s006",
+      "reference_answer": false,
+      "statuses": {
+        "fresh8000": "unresolved",
+        "reuse2000": "unresolved",
+        "reuse8000": "unsat"
+      }
+    },
+    {
+      "diagnostics": {
+        "fresh8000": {
+          "best_failed": 1,
+          "expanded": 5054,
+          "initial_failed": 86,
+          "learned": 2327,
+          "learned_literals": 30859,
+          "maximum_committed": 123,
+          "node_limit": 8000,
+          "reason": "unsat"
+        },
+        "reuse2000": {
+          "best_failed": 4,
+          "expanded": 2000,
+          "initial_failed": 105,
+          "learned": 933,
+          "learned_literals": 13841,
+          "maximum_committed": 121,
+          "node_limit": 2000,
+          "reason": "unknown",
+          "reused": 4352
+        },
+        "reuse8000": {
+          "best_failed": 4,
+          "expanded": 2135,
+          "initial_failed": 105,
+          "learned": 998,
+          "learned_literals": 14788,
+          "maximum_committed": 121,
+          "node_limit": 8000,
+          "reason": "unsat",
+          "reused": 4352
+        }
+      },
+      "id": "s007",
+      "reference_answer": false,
+      "statuses": {
+        "fresh8000": "unsat",
+        "reuse2000": "unresolved",
+        "reuse8000": "unsat"
+      }
+    },
+    {
+      "diagnostics": {
+        "fresh8000": {
+          "best_failed": 4,
+          "expanded": 8000,
+          "initial_failed": 75,
+          "learned": 3682,
+          "learned_literals": 53635,
+          "maximum_committed": 144,
+          "node_limit": 8000,
+          "reason": "unknown"
+        },
+        "reuse2000": {
+          "best_failed": 7,
+          "expanded": 2000,
+          "initial_failed": 86,
+          "learned": 906,
+          "learned_literals": 14028,
+          "maximum_committed": 141,
+          "node_limit": 2000,
+          "reason": "unknown",
+          "reused": 3701
+        },
+        "reuse8000": {
+          "best_failed": 7,
+          "expanded": 3274,
+          "initial_failed": 86,
+          "learned": 1508,
+          "learned_literals": 23048,
+          "maximum_committed": 141,
+          "node_limit": 8000,
+          "reason": "unsat",
+          "reused": 3701
+        }
+      },
+      "id": "s012",
+      "reference_answer": false,
+      "statuses": {
+        "fresh8000": "unresolved",
+        "reuse2000": "unresolved",
+        "reuse8000": "unsat"
+      }
+    },
+    {
+      "diagnostics": {
+        "fresh8000": {
+          "best_failed": 4,
+          "expanded": 5225,
+          "initial_failed": 75,
+          "learned": 2389,
+          "learned_literals": 34323,
+          "maximum_committed": 147,
+          "node_limit": 8000,
+          "reason": "unsat"
+        },
+        "reuse2000": {
+          "best_failed": 13,
+          "expanded": 2000,
+          "initial_failed": 86,
+          "learned": 914,
+          "learned_literals": 13897,
+          "maximum_committed": 145,
+          "node_limit": 2000,
+          "reason": "unknown",
+          "reused": 3701
+        },
+        "reuse8000": {
+          "best_failed": 10,
+          "expanded": 2755,
+          "initial_failed": 86,
+          "learned": 1271,
+          "learned_literals": 19415,
+          "maximum_committed": 145,
+          "node_limit": 8000,
+          "reason": "unsat",
+          "reused": 3701
+        }
+      },
+      "id": "s013",
+      "reference_answer": false,
+      "statuses": {
+        "fresh8000": "unsat",
+        "reuse2000": "unresolved",
+        "reuse8000": "unsat"
+      }
+    },
+    {
+      "diagnostics": {
+        "fresh8000": {
+          "best_failed": 7,
+          "expanded": 8000,
+          "initial_failed": 90,
+          "learned": 3690,
+          "learned_literals": 57717,
+          "maximum_committed": 146,
+          "node_limit": 8000,
+          "reason": "unknown"
+        },
+        "reuse2000": {
+          "best_failed": 17,
+          "expanded": 2000,
+          "initial_failed": 107,
+          "learned": 946,
+          "learned_literals": 17954,
+          "maximum_committed": 144,
+          "node_limit": 2000,
+          "reason": "unknown",
+          "reused": 6406
+        },
+        "reuse8000": {
+          "best_failed": 10,
+          "expanded": 7708,
+          "initial_failed": 107,
+          "learned": 3675,
+          "learned_literals": 62539,
+          "maximum_committed": 144,
+          "node_limit": 8000,
+          "reason": "unsat",
+          "reused": 6406
+        }
+      },
+      "id": "s014",
+      "reference_answer": false,
+      "statuses": {
+        "fresh8000": "unresolved",
+        "reuse2000": "unresolved",
+        "reuse8000": "unsat"
+      }
+    },
+    {
+      "diagnostics": {
+        "fresh8000": {
+          "best_failed": 13,
+          "expanded": 8000,
+          "initial_failed": 91,
+          "learned": 3695,
+          "learned_literals": 55351,
+          "maximum_committed": 143,
+          "node_limit": 8000,
+          "reason": "unknown"
+        },
+        "reuse2000": {
+          "best_failed": 15,
+          "expanded": 2000,
+          "initial_failed": 108,
+          "learned": 948,
+          "learned_literals": 15090,
+          "maximum_committed": 141,
+          "node_limit": 2000,
+          "reason": "unknown",
+          "reused": 6406
+        },
+        "reuse8000": {
+          "best_failed": 15,
+          "expanded": 7196,
+          "initial_failed": 108,
+          "learned": 3434,
+          "learned_literals": 57916,
+          "maximum_committed": 143,
+          "node_limit": 8000,
+          "reason": "unsat",
+          "reused": 6406
+        }
+      },
+      "id": "s015",
+      "reference_answer": false,
+      "statuses": {
+        "fresh8000": "unresolved",
+        "reuse2000": "unresolved",
+        "reuse8000": "unsat"
+      }
+    },
+    {
+      "diagnostics": {
+        "fresh8000": {
+          "best_failed": 2,
+          "expanded": 4558,
+          "initial_failed": 55,
+          "learned": 2107,
+          "learned_literals": 26127,
+          "maximum_committed": 120,
+          "node_limit": 8000,
+          "reason": "unsat"
+        },
+        "reuse2000": {
+          "best_failed": 4,
+          "expanded": 2000,
+          "initial_failed": 61,
+          "learned": 938,
+          "learned_literals": 14423,
+          "maximum_committed": 118,
+          "node_limit": 2000,
+          "reason": "unknown",
+          "reused": 2109
+        },
+        "reuse8000": {
+          "best_failed": 4,
+          "expanded": 2435,
+          "initial_failed": 61,
+          "learned": 1152,
+          "learned_literals": 17981,
+          "maximum_committed": 118,
+          "node_limit": 8000,
+          "reason": "unsat",
+          "reused": 2109
+        }
+      },
+      "id": "s020",
+      "reference_answer": false,
+      "statuses": {
+        "fresh8000": "unsat",
+        "reuse2000": "unresolved",
+        "reuse8000": "unsat"
+      }
+    },
+    {
+      "diagnostics": {
+        "fresh8000": {
+          "best_failed": 5,
+          "expanded": 3106,
+          "initial_failed": 55,
+          "learned": 1425,
+          "learned_literals": 18217,
+          "maximum_committed": 123,
+          "node_limit": 8000,
+          "reason": "unsat"
+        },
+        "reuse2000": {
+          "best_failed": 4,
+          "expanded": 1956,
+          "initial_failed": 61,
+          "learned": 897,
+          "learned_literals": 13726,
+          "maximum_committed": 118,
+          "node_limit": 2000,
+          "reason": "unsat",
+          "reused": 2109
+        },
+        "reuse8000": {
+          "best_failed": 4,
+          "expanded": 1956,
+          "initial_failed": 61,
+          "learned": 897,
+          "learned_literals": 13726,
+          "maximum_committed": 118,
+          "node_limit": 8000,
+          "reason": "unsat",
+          "reused": 2109
+        }
+      },
+      "id": "s021",
+      "reference_answer": false,
+      "statuses": {
+        "fresh8000": "unsat",
+        "reuse2000": "unsat",
+        "reuse8000": "unsat"
+      }
+    },
+    {
+      "diagnostics": {
+        "fresh8000": {
+          "best_failed": 3,
+          "expanded": 5774,
+          "initial_failed": 68,
+          "learned": 2683,
+          "learned_literals": 32690,
+          "maximum_committed": 120,
+          "node_limit": 8000,
+          "reason": "unsat"
+        },
+        "reuse2000": {
+          "best_failed": 4,
+          "expanded": 2000,
+          "initial_failed": 80,
+          "learned": 939,
+          "learned_literals": 12368,
+          "maximum_committed": 119,
+          "node_limit": 2000,
+          "reason": "unknown",
+          "reused": 2470
+        },
+        "reuse8000": {
+          "best_failed": 3,
+          "expanded": 2396,
+          "initial_failed": 80,
+          "learned": 1133,
+          "learned_literals": 14939,
+          "maximum_committed": 119,
+          "node_limit": 8000,
+          "reason": "unsat",
+          "reused": 2470
+        }
+      },
+      "id": "s022",
+      "reference_answer": false,
+      "statuses": {
+        "fresh8000": "unsat",
+        "reuse2000": "unresolved",
+        "reuse8000": "unsat"
+      }
+    },
+    {
+      "diagnostics": {
+        "fresh8000": {
+          "best_failed": 3,
+          "expanded": 2280,
+          "initial_failed": 68,
+          "learned": 1048,
+          "learned_literals": 12785,
+          "maximum_committed": 120,
+          "node_limit": 8000,
+          "reason": "unsat"
+        },
+        "reuse2000": {
+          "best_failed": 4,
+          "expanded": 1328,
+          "initial_failed": 80,
+          "learned": 622,
+          "learned_literals": 8362,
+          "maximum_committed": 120,
+          "node_limit": 2000,
+          "reason": "unsat",
+          "reused": 2470
+        },
+        "reuse8000": {
+          "best_failed": 4,
+          "expanded": 1328,
+          "initial_failed": 80,
+          "learned": 622,
+          "learned_literals": 8362,
+          "maximum_committed": 120,
+          "node_limit": 8000,
+          "reason": "unsat",
+          "reused": 2470
+        }
+      },
+      "id": "s023",
+      "reference_answer": false,
+      "statuses": {
+        "fresh8000": "unsat",
+        "reuse2000": "unsat",
+        "reuse8000": "unsat"
+      }
+    },
+    {
+      "diagnostics": {
+        "fresh8000": {
+          "best_failed": 7,
+          "expanded": 8000,
+          "initial_failed": 83,
+          "learned": 3694,
+          "learned_literals": 53627,
+          "maximum_committed": 142,
+          "node_limit": 8000,
+          "reason": "unknown"
+        },
+        "reuse2000": {
+          "best_failed": 10,
+          "expanded": 2000,
+          "initial_failed": 96,
+          "learned": 939,
+          "learned_literals": 13007,
+          "maximum_committed": 140,
+          "node_limit": 2000,
+          "reason": "unknown",
+          "reused": 4118
+        },
+        "reuse8000": {
+          "best_failed": 10,
+          "expanded": 3772,
+          "initial_failed": 96,
+          "learned": 1790,
+          "learned_literals": 26938,
+          "maximum_committed": 144,
+          "node_limit": 8000,
+          "reason": "unsat",
+          "reused": 4118
+        }
+      },
+      "id": "s028",
+      "reference_answer": false,
+      "statuses": {
+        "fresh8000": "unresolved",
+        "reuse2000": "unresolved",
+        "reuse8000": "unsat"
+      }
+    },
+    {
+      "diagnostics": {
+        "fresh8000": {
+          "best_failed": 9,
+          "expanded": 8000,
+          "initial_failed": 84,
+          "learned": 3687,
+          "learned_literals": 53015,
+          "maximum_committed": 145,
+          "node_limit": 8000,
+          "reason": "unknown"
+        },
+        "reuse2000": {
+          "best_failed": 13,
+          "expanded": 2000,
+          "initial_failed": 97,
+          "learned": 946,
+          "learned_literals": 14031,
+          "maximum_committed": 144,
+          "node_limit": 2000,
+          "reason": "unknown",
+          "reused": 4118
+        },
+        "reuse8000": {
+          "best_failed": 13,
+          "expanded": 3650,
+          "initial_failed": 97,
+          "learned": 1729,
+          "learned_literals": 26044,
+          "maximum_committed": 144,
+          "node_limit": 8000,
+          "reason": "unsat",
+          "reused": 4118
+        }
+      },
+      "id": "s029",
+      "reference_answer": false,
+      "statuses": {
+        "fresh8000": "unresolved",
+        "reuse2000": "unresolved",
+        "reuse8000": "unsat"
+      }
+    },
+    {
+      "diagnostics": {
+        "fresh8000": {
+          "best_failed": 4,
+          "expanded": 8000,
+          "initial_failed": 82,
+          "learned": 3689,
+          "learned_literals": 53901,
+          "maximum_committed": 144,
+          "node_limit": 8000,
+          "reason": "unknown"
+        },
+        "reuse2000": {
+          "best_failed": 4,
+          "expanded": 2000,
+          "initial_failed": 96,
+          "learned": 926,
+          "learned_literals": 15041,
+          "maximum_committed": 144,
+          "node_limit": 2000,
+          "reason": "unknown",
+          "reused": 4489
+        },
+        "reuse8000": {
+          "best_failed": 3,
+          "expanded": 2275,
+          "initial_failed": 96,
+          "learned": 1049,
+          "learned_literals": 16868,
+          "maximum_committed": 144,
+          "node_limit": 8000,
+          "reason": "unsat",
+          "reused": 4489
+        }
+      },
+      "id": "s030",
+      "reference_answer": false,
+      "statuses": {
+        "fresh8000": "unresolved",
+        "reuse2000": "unresolved",
+        "reuse8000": "unsat"
+      }
+    },
+    {
+      "diagnostics": {
+        "fresh8000": {
+          "best_failed": 4,
+          "expanded": 7261,
+          "initial_failed": 83,
+          "learned": 3374,
+          "learned_literals": 50060,
+          "maximum_committed": 146,
+          "node_limit": 8000,
+          "reason": "unsat"
+        },
+        "reuse2000": {
+          "best_failed": 4,
+          "expanded": 1111,
+          "initial_failed": 97,
+          "learned": 510,
+          "learned_literals": 7969,
+          "maximum_committed": 143,
+          "node_limit": 2000,
+          "reason": "unsat",
+          "reused": 4489
+        },
+        "reuse8000": {
+          "best_failed": 4,
+          "expanded": 1111,
+          "initial_failed": 97,
+          "learned": 510,
+          "learned_literals": 7969,
+          "maximum_committed": 143,
+          "node_limit": 8000,
+          "reason": "unsat",
+          "reused": 4489
+        }
+      },
+      "id": "s031",
+      "reference_answer": false,
+      "statuses": {
+        "fresh8000": "unsat",
+        "reuse2000": "unsat",
+        "reuse8000": "unsat"
+      }
+    }
+  ],
+  "paired_budget_percent": [
+    55.76190655738951,
+    51.027111300338014
+  ],
+  "paired_reuse_vs_fresh_percent": [
+    60.60765585403514,
+    61.168499234862004
+  ],
+  "peak_rss_bytes": {
+    "fresh8000": 263913472,
+    "reuse2000": 465846272,
+    "reuse8000": 487063552
+  },
+  "remaining": [],
+  "reuse_only_at_8000": [
+    "s006",
+    "s012",
+    "s014",
+    "s015",
+    "s028",
+    "s029",
+    "s030"
+  ],
+  "reuse_vs_fresh_percent": 60.887968781667844,
+  "states": {
+    "fresh8000": 96697,
+    "reuse2000": 30395,
+    "reuse8000": 50713
+  },
+  "totals": {
+    "fresh8000": {
+      "cold_seconds": 5.242950812447816,
+      "complete_seconds": 68.5268465206027,
+      "compressed_bytes": {
+        "certificates": 2493788,
+        "combined": 2493833,
+        "discovery": 29
+      },
+      "input_seconds": 0.04135327064432204,
+      "persistence_seconds": 3.308619124814868,
+      "phases": {
+        "acquisition_seconds": 54.73618827108294,
+        "checking_seconds": 2.318961458513513,
+        "writing_seconds": 0.21310429088771343
+      },
+      "proof_bytes": 69378039,
+      "warm_seconds": 2.6651810619514436
+    },
+    "reuse2000": {
+      "cold_seconds": 8.600822270382196,
+      "complete_seconds": 71.8930720211938,
+      "compressed_bytes": {
+        "certificates": 4114547,
+        "combined": 4114583,
+        "discovery": 29
+      },
+      "input_seconds": 0.03947547962889075,
+      "persistence_seconds": 5.305341874947771,
+      "phases": {
+        "acquisition_seconds": 49.727633354021236,
+        "checking_seconds": 3.6877505204174668,
+        "writing_seconds": 0.3366375407204032
+      },
+      "proof_bytes": 110545079,
+      "warm_seconds": 4.1945361671969295
+    },
+    "reuse8000": {
+      "cold_seconds": 9.949061187682673,
+      "complete_seconds": 110.25145143712871,
+      "compressed_bytes": {
+        "certificates": 4734524,
+        "combined": 4734568,
+        "discovery": 29
+      },
+      "input_seconds": 0.03822839609347284,
+      "persistence_seconds": 6.289068666752428,
+      "phases": {
+        "acquisition_seconds": 84.39776329160668,
+        "checking_seconds": 4.295316812349483,
+        "writing_seconds": 0.38053566426970065
+      },
+      "proof_bytes": 125646317,
+      "warm_seconds": 4.900807478930801
+    }
+  },
+  "union_counts": {
+    "unsat": 16
+  },
+  "work_counts": {
+    "fresh8000": {
+      "input_literals": 113400,
+      "learned_clause_propagations": 67537,
+      "learning_activity_bumps": 15305274,
+      "learning_activity_candidates": 7351448,
+      "learning_analysis_literal_charge": 15305274,
+      "learning_conflicts": 44579,
+      "learning_contexts": 96697,
+      "learning_decisions": 52118,
+      "learning_failed_scan": 5932407,
+      "learning_false_literal_charge": 12435101,
+      "learning_gain_occurrences": 3833,
+      "learning_index_occurrences": 653488,
+      "learning_levels_removed": 52073,
+      "learning_new_clauses": 44579,
+      "learning_nonchronological_jumps": 5554,
+      "learning_propagations": 2745126,
+      "learning_resolution_literal_charge": 18774900,
+      "learning_resolution_steps": 1196074,
+      "repair_seed_literal_charge": 28350,
+      "resolution_check_literal_charge": 37817274,
+      "resolution_lemmas_checked": 89158,
+      "resolution_steps_checked": 2392148,
+      "watch_agenda_candidates": 75938358,
+      "watch_agenda_literals": 13595059,
+      "watch_agenda_selections": 4132887,
+      "watch_candidate_literals": 39527714,
+      "watch_initial_links": 108041,
+      "watch_initial_literals": 653488,
+      "watch_model_assignment_occurrences": 192504057,
+      "watch_model_undo_occurrences": 192641529,
+      "watch_moves": 8541547,
+      "watch_satisfied_skips": 15010442,
+      "watch_stale_candidates": 1343182,
+      "watch_visits": 27935052
+    },
+    "reuse2000": {
+      "input_literals": 2859798,
+      "learned_clause_propagations": 16923,
+      "learning_activity_bumps": 5544428,
+      "learning_activity_candidates": 2234449,
+      "learning_analysis_literal_charge": 5544428,
+      "learning_conflicts": 14196,
+      "learning_contexts": 30395,
+      "learning_decisions": 16199,
+      "learning_failed_scan": 2048622,
+      "learning_false_literal_charge": 4499118,
+      "learning_gain_occurrences": 160923,
+      "learning_index_occurrences": 1081661,
+      "learning_levels_removed": 16130,
+      "learning_new_clauses": 14196,
+      "learning_nonchronological_jumps": 1462,
+      "learning_propagations": 791587,
+      "learning_resolution_literal_charge": 6755214,
+      "learning_resolution_steps": 345744,
+      "repair_seed_literal_charge": 28350,
+      "resolution_check_literal_charge": 145003246,
+      "resolution_lemmas_checked": 346174,
+      "resolution_steps_checked": 8962462,
+      "selective_augmented_literals": 868196,
+      "selective_composition_edges": 359940,
+      "selective_copied_literals": 839846,
+      "selective_discarded": 6186,
+      "selective_guard_literals": 28374,
+      "selective_parent_edges": 1823312,
+      "selective_parent_input_bytes": 128226,
+      "selective_parent_proof_bytes": 118831116,
+      "selective_retained": 59480,
+      "watch_agenda_candidates": 23994364,
+      "watch_agenda_literals": 4510435,
+      "watch_agenda_selections": 1267366,
+      "watch_candidate_literals": 30730939,
+      "watch_initial_links": 166248,
+      "watch_initial_literals": 1081661,
+      "watch_model_assignment_occurrences": 157265099,
+      "watch_model_undo_occurrences": 157104130,
+      "watch_moves": 7789144,
+      "watch_satisfied_skips": 10181187,
+      "watch_stale_candidates": 461583,
+      "watch_visits": 19313921
+    },
+    "reuse8000": {
+      "input_literals": 2859798,
+      "learned_clause_propagations": 28738,
+      "learning_activity_bumps": 9982173,
+      "learning_activity_candidates": 3782887,
+      "learning_analysis_literal_charge": 9982173,
+      "learning_conflicts": 23899,
+      "learning_contexts": 50713,
+      "learning_decisions": 26814,
+      "learning_failed_scan": 3599968,
+      "learning_false_literal_charge": 7952823,
+      "learning_gain_occurrences": 160923,
+      "learning_index_occurrences": 1235652,
+      "learning_levels_removed": 26814,
+      "learning_new_clauses": 23899,
+      "learning_nonchronological_jumps": 2247,
+      "learning_propagations": 1370312,
+      "learning_resolution_literal_charge": 12121651,
+      "learning_resolution_steps": 600085,
+      "repair_seed_literal_charge": 28350,
+      "resolution_check_literal_charge": 161221534,
+      "resolution_lemmas_checked": 375283,
+      "resolution_steps_checked": 9725485,
+      "selective_augmented_literals": 868196,
+      "selective_composition_edges": 623984,
+      "selective_copied_literals": 839846,
+      "selective_discarded": 6186,
+      "selective_guard_literals": 28374,
+      "selective_parent_edges": 1823312,
+      "selective_parent_input_bytes": 128226,
+      "selective_parent_proof_bytes": 118831116,
+      "selective_retained": 59480,
+      "watch_agenda_candidates": 44837833,
+      "watch_agenda_literals": 7998683,
+      "watch_agenda_selections": 2224229,
+      "watch_candidate_literals": 56396098,
+      "watch_initial_links": 185626,
+      "watch_initial_literals": 1235652,
+      "watch_model_assignment_occurrences": 331658586,
+      "watch_model_undo_occurrences": 331459326,
+      "watch_moves": 13865223,
+      "watch_satisfied_skips": 21663604,
+      "watch_stale_candidates": 830018,
+      "watch_visits": 37890660
+    }
+  }
+}

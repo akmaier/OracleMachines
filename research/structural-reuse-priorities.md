@@ -12,7 +12,39 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: bounded active knowledge and remaining transfer
+## Current investigation: cheaper full reuse and thirteen remaining targets
+
+[Watched propagation with full reuse](watched-propagation-and-full-reuse.md)
+keeps all surviving learned clauses active. Two watches replace partial-assignment
+occurrence updates, complete-model counts skip values equal to the proposal, and
+known list-length charges are accumulated in bulk. Validating the smallest actual
+unit/conflict candidate preserves the previous propagation order.
+
+All sixteen exposed edited targets reproduce **byte-identical certificates and identical search
+diagnostics**, including all **30,395 contexts** and **3/16 checked refutations**.
+There are **no lost answers or new answers**; **13 remain unresolved**. The old
+128-clause policy and its two lost answers remain preserved as a separate result.
+
+Across two alternating pairs, mean complete cost changes **173.19065
+→ 72.28360 seconds (-58.26%)**. Proof JSON remains
+**110,545,079 bytes**, with **4,114,583 combined gzip bytes**.
+Every retained clause and derivation stays available. Acquisition and proof costs
+remain charged; original acquisition is additional. This is a measured processing
+change on exposed inputs, not new external coverage or a new tractable class.
+
+All **2,679 full and 20 focused tests pass**. Reproduced independent truth checks
+cover **27,414 exact proof/diagnostic comparisons** and **1,024 composed traces**
+after edits. Fresh-worker target-only replay disables search and reproduces
+answers and checker counters. Validation preserves 252 prior manifests, 84,641
+artifacts, 1,372 scientific sources and 91 prior proofs. Resume
+`experiments/results/cnf-watched-learning/checkpoint.json`, key `watched_learning`.
+
+**Next priorities:** use a separately frozen budget to investigate the thirteen
+remaining edited targets; test fresh external transfer; reduce proof retention
+costs; and find alternative supports after premise deletion. Efficient structural
+recognition, preprocessing and unrestricted SAT expansion remain open.
+
+## Previous investigation: bounded active knowledge and remaining transfer
 
 [Bounded active knowledge](bounded-active-knowledge.md) admits at most 128 distinct
 non-source learned clauses, ranked by shorter width and then recency. Every

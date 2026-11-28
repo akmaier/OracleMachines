@@ -1,0 +1,14 @@
+...............F....
+======================================================================
+FAIL: test_satisfied_watch_skip (solver.test_cnf_watched_learning.WatchedLearningTests.test_satisfied_watch_skip)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_watched_learning.py", line 28, in test_satisfied_watch_skip
+    source=[[1,2,3],[1],[-2]];c=Counter();e.search(source,seed_for(source),c);self.assertGreater(c['watch_satisfied_skips'],0);self.compare(source)
+                                                                              ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 not greater than 0
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.010s
+
+FAILED (failures=1)

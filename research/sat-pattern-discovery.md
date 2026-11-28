@@ -5,7 +5,31 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: frozen external reuse transfer
+## Latest evidence: cheaper current-answer checking
+
+[Answer-certificate projection](answer-certificate-projection.md) separates
+current-answer checking from the complete retained knowledge archive. All sixteen
+reused targets keep their five SAT and eleven UNSAT answers. Their replay cost
+falls **4.77053 → 2.59003 seconds (-45.71%)**;
+matched gzip answer data falls **4,964,077 → 2,740,517 bytes**.
+Preparing the projected sidecars costs **9.79502 seconds**, roughly
+**five repeated replays** under this measured accounting. The original archive
+remains intact, so total retained storage grows; search/acquisition are unchanged.
+
+All **2,708 full and 11 focused tests pass**. Independent truth and reverse
+ancestry checks reproduce **7,760 projections on 3,880 small formulas**.
+Four fresh workers replay the fixed certificates with search, transport and
+projection disabled. Validation preserves **255 prior manifests, 85,130 artifact
+entries, 1,384 scientific sources and all 92 earlier proof blocks**.
+Resume `experiments/results/cnf-answer-certificate/checkpoint.json`, key
+`answer_certificate`. No new answers or arbitrary-CNF class are claimed.
+
+**Next:** reduce the cost of the still-retained archive and its use in expansion;
+investigate alternative supports after premise deletion and admission that
+preserves coverage. Broader distributions, structural recognition, preprocessing
+and unrestricted SAT expansion remain open.
+
+## Previous evidence: frozen external reuse transfer
 
 [Frozen external transfer](frozen-external-reuse-transfer.md) evaluates eight new
 SATLIB originals and sixteen fixed related edits, including every parent outcome.

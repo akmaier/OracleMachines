@@ -1,0 +1,89 @@
+{
+  "decision": "Keep the complete archive; offer a separately checked current-answer projection. No search or production-default change.",
+  "documents": {
+    "README.md": "a1959dd400d3733a465008607be32e6e6a9d3718b6c3d751c4b1ffeb11d1c81f",
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "32e748bb8924c643956a2fbdfb92e6a96ab775156f5e02cf819e70f013f7515f",
+    "research/answer-certificate-projection.md": "f0e79b34410eb20e249824a7761e4fac48b8e7cf96c07ed74efe6c10b447c4d1",
+    "research/implementation-gaps.md": "3eb23e7fe20d36a96c58303175edbc58613f4b99ae3385b686681f86c4ae64f4",
+    "research/sat-pattern-discovery.md": "23ac52fc5d03552883bc74b228446a1ab2c6ea3e5f4914573e4c37b06cd46687",
+    "research/structural-reuse-priorities.md": "15499b1f4fa2ee5205dc61c34b0304b8fba98d116127a15302606a7743029c82"
+  },
+  "limitations": [
+    "Current-answer projection is not archive deletion, admission tuning, a new SAT class, compact arbitrary proofs or an unrestricted polynomial-time solver. Unknown remains unknown; its empty marker gives no answer or reusable knowledge. No original source clauses are removed from checking.",
+    "Project once from each checked archive; keep every original archive. Persist both full and projected controls with identical canonical JSON and per-case gzip. Time reads, full validation, projection/output validation, encoding, compression and writes separately. Four new processes read/hash/decompress/check only their assigned certificate arm and original CNF. Process wall time includes startup; worker time excludes startup and report writing. OS caches not flushed; peak RSS is process high-water mark. Full control transcode is measurement setup, separately charged. Original discovery/acquisition, old archive storage and independent audits remain additional."
+  ],
+  "next_target": "Cheaper retained archives and expansion; alternative supports after deleted premises and admission preserving coverage. Broader distributions and unrestricted structural recognition remain open.",
+  "pdf": {
+    "pages": 378,
+    "path": "paper/bounded_domain_sat_and_amortized_reasoning.pdf",
+    "sha256": "e2901042516772222ed0c54ed523a3d106ea7eea4cd4c138af65df53eb92191e",
+    "visually_checked_pages": [
+      369,
+      370
+    ]
+  },
+  "primary_stratum": {
+    "archive_plus_answer_gzip_bytes": 7704594,
+    "archive_plus_answer_json_bytes": 40471687,
+    "arms": {
+      "answer": {
+        "by_kind": {
+          "sat": {
+            "cases": 5,
+            "gzip_bytes": 2183,
+            "json_bytes": 6642,
+            "replay_seconds": 0.008156083757057786
+          },
+          "unknown": {
+            "cases": 0,
+            "gzip_bytes": 0,
+            "json_bytes": 0,
+            "replay_seconds": 0
+          },
+          "unsat": {
+            "cases": 11,
+            "gzip_bytes": 2738334,
+            "json_bytes": 14100470,
+            "replay_seconds": 2.581873039714992
+          }
+        },
+        "gzip_bytes": 2740517,
+        "json_bytes": 14107112,
+        "replay_seconds": 2.59002912347205
+      },
+      "full": {
+        "by_kind": {
+          "sat": {
+            "cases": 5,
+            "gzip_bytes": 1370491,
+            "json_bytes": 7237743,
+            "replay_seconds": 1.3099904998671263
+          },
+          "unknown": {
+            "cases": 0,
+            "gzip_bytes": 0,
+            "json_bytes": 0,
+            "replay_seconds": 0
+          },
+          "unsat": {
+            "cases": 11,
+            "gzip_bytes": 3593586,
+            "json_bytes": 19126832,
+            "replay_seconds": 3.4605432299431413
+          }
+        },
+        "gzip_bytes": 4964077,
+        "json_bytes": 26364575,
+        "replay_seconds": 4.770533729810268
+      }
+    },
+    "coverage": {
+      "sat": 5,
+      "unsat": 11
+    },
+    "estimated_replays_to_repay_preparation": 5,
+    "incremental_answer_preparation_seconds": 9.795018623583019,
+    "projection_seconds": 7.4094801265746355
+  },
+  "secondary_unknowns": 7
+}

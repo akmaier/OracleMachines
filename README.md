@@ -28,6 +28,11 @@ classes.
 
 ## Paper
 
+[Separate answer certificates from retained knowledge](research/answer-certificate-projection.md):
+all sixteen reused answers are preserved while replay falls **45.71%**.
+Preparation costs **9.80 seconds**, about five repeated checks to repay;
+full archives remain stored, so total storage grows. All **2,708 tests pass**.
+
 [Reuse a local proof-checking context](research/prepared-prefix-replay.md): source
 reconstruction improves 45.00% and the complete measured workflow 23.41%, with
 identical hints and search results. Sparse-hint and missing-support regressions

@@ -1,0 +1,83 @@
+\subsection{Current-answer projection with complete knowledge retained}
+\label{sec:answer-certificate}
+
+A learned archive serves two different future uses: checking the current answer
+and supplying consequences for later edited inputs. We retain the entire archive
+and construct a separate certificate for the first use. The original checker
+validates every archive record before projection, including unused records.
+For SAT, the projected certificate contains only the same model. For UNSAT, it
+retains exactly the derived ancestors of the selected empty-clause conclusion,
+in their original order, with remapped derived references. Original indices
+still refer to the complete canonical source. Unknown produces an unknown
+marker, with no answer or retained-knowledge authority. The result is then
+checked against the original CNF by the unchanged checker.
+
+\begin{samepage}
+\begin{proposition}[Current-answer projection]
+Given a valid resolution archive for a CNF $F$, this projection preserves its
+checked answer and SAT witness, does not mutate the archive, and requires only
+polynomial work in the explicit sizes of $F$ and the archive. It need not retain
+a minimum refutation or establish a polynomial bound in $|F|$ alone.
+\end{proposition}
+\end{samepage}
+\begin{proof}
+For an UNSAT result, the retained set is closed under every derived premise of
+its selected conclusion. Original premises keep their original indices.
+Process retained records in increasing original index order. By induction, all
+premises have their former clauses, so each unchanged resolution pivot sequence
+produces its former resolvent after index remapping. In particular, the empty
+conclusion remains empty. A source empty clause is the zero-derivation case.
+For SAT the identical witness is checked against $F$; for unknown no decision is
+asserted. All retained lists and witness data are copied, so projection leaves
+the archive intact. Checking the explicit records, traversing their dependency
+graph, sorting retained indices, copying and checking the result have polynomial
+cost in the explicit input and proof sizes. Those proof sizes are not bounded
+here by a polynomial in the formula size.
+\end{proof}
+
+The experiment fixes the preceding sixteen edited targets and both stored search
+traces for each, without rerunning discovery or changing admission. Its primary
+comparison is the reused arm's five SAT and eleven UNSAT results; the fresh arm
+has three SAT, six UNSAT and seven unknowns. Both full and projected controls
+use the same compact JSON encoder and per-case gzip. This differs from the prior
+indented JSON representation; only matched columns are comparable. Two reversed
+pairs of fresh processes read, hash, decompress and check one arm with search,
+transport and projection disabled. OS caches are not flushed. Construction and
+its full-archive checks, compression, writes and memory are charged separately;
+old discovery, parent acquisition and retained storage remain additional.
+
+On the reused stratum, derived records fall from 87,054 to 46,960,
+compact JSON bytes from 26,364,575 to 14,107,112, and per-case
+gzip bytes from 4,964,077 to 2,740,517. All sixteen answers remain.
+Mean read/hash/decompress/check time falls from 4.77053 to
+2.59003 seconds (45.71\%). SAT replay changes from
+1.30999 to 0.00816 seconds and UNSAT replay from
+3.46054 to 2.58187 seconds. Sidecar preparation costs
+9.79502 seconds, including both archive and output validation;
+the measured per-case saving repays it after about five repeated replays.
+Shared setup and process startup are additional to that estimate. The old
+132,091,258-byte indented archives remain, and gzip answer sidecars add
+2,740,517 bytes. This is not an end-to-end solver speedup or a reduction
+in total retained storage. The fresh stratum retains three SAT, six UNSAT and
+seven unknowns, whose marker-only savings are reported separately.
+
+Across all 32 traces, mean fresh-process wall time is
+7.24189 versus 3.24801 seconds, with peak RSS
+96,550,912 versus 87,851,008 bytes. Single-run preparation of
+both controls takes 17.93170 seconds and peaks at
+207,929,344 bytes. Four fresh workers reproduce answers and
+checker counters. All 2,708 full and eleven focused tests pass; validation
+preserves 255 manifests, 85,130 prior artifact entries, 1,384 scientific sources,
+all 92 earlier proof blocks and three published snapshots. Four scientific
+files and the projection proof above are added.
+
+The projection is an answer artifact, not a replacement knowledge archive.
+Its unknown marker cannot be counted as a solved query. The closure is relative
+to a recorded proof, not a minimum support or semantic characterization of all
+necessary clauses. The independent finite audit checks 7,760 projections on
+3,880 formulas using exhaustive model enumeration and a reverse dependency scan.
+It covers every two-variable clause set, three-variable sets with at most three
+clauses, sparse signed mixtures, complete and capped traces, and deliberately
+appended valid unused records. Corrupt unused records are rejected before
+projection. Broader distribution coverage, smaller retained archives, alternative
+supports, preprocessing and efficient unrestricted expansion remain open.

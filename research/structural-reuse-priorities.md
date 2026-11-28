@@ -12,7 +12,48 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: unseen transfer and economical repair
+## Current investigation: three remaining repair interactions
+
+[Disjoint repair partitions](disjoint-repair-partitions.md) close **seven of the
+ten** retained repair misses at the unchanged 20,000-state cap: **22/32 → 29/32**
+on the already exposed constructed panel, with no lost SAT result. This is a
+repair-kernel comparison, not fresh external coverage or full-portfolio status.
+The old external 37/37 and synthetic 182/182 unions remain separate and unchanged.
+
+Each state records flipped variables and variables fixed at their seed values.
+A false clause branches on its first flipped available variable, keeping earlier
+candidates unflipped. These child solution sets form an exact disjoint partition.
+Occurrence lists and untouched satisfaction counts are shared across DFS states;
+independent checkers verify full models or complete source-bound exclusion trees.
+Budget exhaustion remains unknown. No production default changes.
+
+Mean complete kernel cost falls **4.05347 → 2.56805 s (36.65%)**, with all four
+paired signs favorable. Explored states fall 274,481 → 118,552. Storage grows
+because seven more complete witnesses are retained: gzip 4,184 → 5,547 bytes.
+A six-variable counterexample takes **9 states previously versus 13 now**, so
+there is no universal ordering or fixed-budget dominance claim.
+
+The prior radius-25 exclusion shrinks **35,065 → 4,307 states** and **272,571 →
+56,512 gzip bytes**. A checked distance-26 model reconfirms the same minimum
+repair distance. The new proof fits the 20,000-state cap; the old diagnosis and
+its larger allowance remain preserved.
+
+All **2,528 full and 23 focused tests pass**. Truth tables validate **25,534 ball
+queries over 5,108 inputs**. Validation
+reproduces all eight comparisons, checks 244 prior manifests and 82,078 artifact
+entries, preserves 1,331 old scientific sources and 84 old proof blocks, and
+rechecks the external 37/37 union. Resume
+`experiments/results/cnf-partition-repair/checkpoint.json`, key `partition_repair`.
+
+**Largest remaining gaps:** constructed IDs **24, 25 and 29** still exhaust the
+fixed cap. All have eighty variables; rejected near-models with **one, one and
+five false clauses** and their exact contexts are retained. Investigate small
+conditional interfaces and guarded reuse of the remaining interactions before
+raising budgets. Full-portfolio status of these three is unmeasured; freeze
+unseen external inputs before transfer claims. General efficient recognition,
+compact negative proof reuse and unrestricted expansion bounds remain open.
+
+## Previous investigation: unseen transfer and economical repair
 
 [Exact bounded repair](hamming-repair.md) closes `uf50-01000.cnf`, the last
 unresolved input on the **already exposed** external panel: **24/25 → 25/25

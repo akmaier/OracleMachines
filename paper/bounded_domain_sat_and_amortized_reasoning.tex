@@ -17376,6 +17376,142 @@ but efficient recognition, compact shared refutations, edit invalidation and
 unrestricted expansion bounds remain open.  No arbitrary-SAT efficiency claim
 follows from completing this exposed panel.
 
+\subsection{Disjoint repair partitions and explicit keep context}
+\label{sec:partition-repair}
+
+The ten repair-budget misses retained in the preceding study motivate a change
+to the decomposition itself.  On those same 32 exposed constructed inputs,
+checked repair coverage rises from 22/32 to 29/32 at the unchanged 20,000-state
+cap.  Seven misses close without losing an earlier SAT result.  This is a
+repair-kernel comparison, not new external transfer or measurement of the full
+portfolio on these inputs.  The external 37/37 and synthetic 182/182 unions
+remain separate, unchanged and preserved.  Production defaults are unchanged.
+
+The old branch on a false clause flips each available variable in turn.  Its
+extension sets can overlap, requiring exact-mask memoization.  The new state
+records both flipped variables $M$ and variables $K$ fixed at their seed values,
+with $M\cap K=\varnothing$.  For a fixed complete seed $s$, source $F$ and radius
+$r$, define the satisfying target set
+\[
+\mathcal S(M,K)=\{T\subseteq V:M\subseteq T,\ T\cap K=\varnothing,
+\ |T|\le r,\ F(s\oplus T)=1\}.
+\]
+Available variables of a currently false clause exclude both $M$ and $K$.
+
+\begin{proposition}[Disjoint first-flip recomposition]
+Let $C$ be false at $s\oplus M$, and let $v_1,\ldots,v_t$ be any ordering of
+$\operatorname{vars}(C)\setminus(M\cup K)$.  Then
+\[
+\mathcal S(M,K)=\bigsqcup_{j=1}^{t}
+\mathcal S\bigl(M\cup\{v_j\},\ K\cup\{v_1,\ldots,v_{j-1}\}\bigr).
+\]
+In particular, $t=0$ excludes all satisfying extensions.  A complete acyclic
+exclusion proof using these children and valid radius-packing leaves, rooted
+at $M=K=\varnothing$, excludes the radius-$r$ ball.
+\end{proposition}
+\begin{proof}
+Every literal of $C$ is currently false.  Variables in $M$ cannot be flipped
+again, and variables in $K$ must retain their seed values.  Thus any satisfying
+target must contain an available variable.  Its first such variable in the
+specified order determines exactly one child: that variable is flipped and
+all earlier available variables remain unflipped.  Conversely, every satisfying
+target of a child is a satisfying target of the parent.  Two children impose
+incompatible flip/keep requirements on the earlier of their selected variables,
+so their solution sets are disjoint.  Targets keeping all available variables
+violate $C$ and need no child.  The earlier disjoint-packing lower bound applies
+with available sets excluding $M\cup K$.  Every child increases $|M|$, so
+induction through a complete finite certificate proves root exclusion.
+\end{proof}
+
+The proposer, gain ranking, false-clause ordering, full-support radius and state
+cap are inherited unchanged.  Excluding kept variables can change subsequent
+clause choices; a flip/keep context is stronger than a bare flip mask.  Equal
+caps therefore do not mean equal computational work.  One freshly constructed
+occurrence index and the current clause-satisfaction counts are shared across
+an explicit DFS stack.  Flip/undo updates only incident clauses.  A keep decision
+changes future admissibility without changing the current Boolean assignment.
+The new search does not retain the old visited-mask set.  Optional exclusion
+recording still stores the explored proof, and no occurrence index is trusted
+across an edit or cold import.
+
+The independent checker identifies every exclusion state by both masks,
+recomputes false-clause premises, verifies disjoint available-variable packings
+and checks every child prescribed by a complete nonrepeating variable order.
+It rejects overlapping masks, lost keep constraints, missing children and
+unreachable records.  A ball exclusion is global UNSAT only at full-support
+radius.  Budget exhaustion remains unknown.  Positive answers remain complete
+models checked against every original clause, independent of branch history.
+This is ordinary exhaustive case partitioning, not a new tractable SAT class.
+There are up to three possible context states per variable; disjointness alone
+does not establish polynomially many contexts or uniformly cheaper search.
+
+Four fresh-process pairs alternate baseline/partition order on the same raw CNFs.
+Retained planted witnesses validate truth only in independent audits; they never
+seed discovery.  Initial JSON parsing, proposal construction, normalization,
+occurrence indexing, discovery/internal and explicit checking, writes,
+compression, warm reload and two cold reload/checks are charged.  Each replay
+reloads sources and certificates, with no surviving search state.  OS caches
+are not flushed.  Imports, final metadata, semantic audits and the auxiliary
+distance diagnosis remain additional.  The unchanged baseline results and
+counters exactly reproduce the previous constructed probe.
+
+Mean complete kernel time falls from 4.05347 to 2.56805\,s, a 36.65\% reduction;
+paired reductions are 36.20\%, 37.27\%, 35.10\% and 38.01\%.  Explored states
+fall from 274,481 to 118,552, generated edges from 282,392 to 119,341, and incident
+updates from 7,814,357 to 3,243,218.  False-clause literal charges fall from
+10,830,261 to 5,694,279 and gain occurrences from 3,924,656 to 1,640,059.
+Baseline memoization records 7,154 hits.  These operation categories are not a
+complete instruction count, and preparation remains charged in both arms.
+
+Acquisition/internal checks cost 3.99505 versus 2.50607\,s.  Explicit checking
+costs 0.01013 versus 0.01099\,s, warm replay 0.01347 versus 0.01430\,s, and two
+cold passes 0.02731 versus 0.02890\,s.  More checked models increase stored JSON
+from 37,061 to 49,362 bytes and gzip from 4,184 to 5,547 bytes.  Maximum observed
+RSS falls from 31,162,368 to 29,147,136 bytes.  The baseline leaves ten sources
+unanswered and the new method three, so this is neither complete-solving cost
+nor a fresh-CDCL comparison.  Per-trial storage excludes the growing append-only
+historical and supplementary archive.
+
+On the previous random external source and unchanged seed, the radius-25
+exclusion shrinks from 35,065 to 4,307 states: 3,225 splits, 695 blocked leaves
+and 387 packing leaves.  JSON falls from 2,408,673 to 432,642 bytes and gzip from
+272,571 to 56,512 bytes.  A distance-26 witness is found in 2,076 states, retaining
+the established seed-specific minimum distance 26.  Both new searches fit the
+20,000-state cap; the old radius-25 diagnosis had a 100,000-state allowance.
+The old proof is preserved.  New construction takes 0.08271\,s and two
+reload/checks take 0.01720 and 0.01635\,s, outside matched panel timing.
+
+A separately retained six-variable, twenty-clause SAT source prevents an
+unwarranted dominance claim.  The old ordering finds a model in nine states;
+the new one needs thirteen.  At an illustrative cap of nine, only the old search
+answers SAT.  Both complete witnesses, the exact source and the new interrupted
+result survive.  This post-hoc adversarial example never changes the frozen
+20,000-state panel policy.
+
+Independent explicit truth tables validate 25,534 ball queries over 5,108 inputs:
+512 two-variable CNFs with every seed, 3,304 three-variable CNFs with at most
+three distinct clauses, 1,000 newly seeded random small sources, the 228 old SAT
+domain misses, and 64 fresh signed/edited/mixed sources.  All 12,485 SAT balls
+and 13,049 exclusions agree with truth.  A one-state cap records 2,839 explicit
+unknown attempts.  All 39 fresh SAT witnesses survive a satisfied addition and
+fail a contradictory addition.  Cold exclusion checking disables discovery,
+and a repeated audit exactly reproduces semantic records.  Twenty-three focused
+tests exercise exact small balls, malformed masks and orders, signed sparse
+names, missing branches, packing overlap, changed sources and retained keep
+requirements.  All 2,528 full and twenty-three focused tests pass.
+All 84 preceding proof blocks remain unchanged.
+
+The three remaining constructed sources, IDs 24, 25 and 29, each have eighty
+variables and 349 clauses.  Their searches reach rejected assignments with one,
+one and five false clauses.  A trace-only copy retains strictly improving
+models and both masks while reproducing timed outputs and counters exactly;
+original and canonical violated-clause indices are checked independently.
+These are not SAT certificates or a resumable frontier.  They motivate small
+conditional interfaces and guarded reuse of the remaining coupled constraints
+before increasing the cap.  Full-portfolio status on this panel remains
+unmeasured.  Unseen external transfer, economical recognition, compact shared
+negative evidence and unrestricted expansion bounds remain open.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

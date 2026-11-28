@@ -1,0 +1,56 @@
+{
+  "comparison_percent": -36.64562921785113,
+  "coverage": {
+    "baseline": {
+      "sat": 22,
+      "unresolved": 10
+    },
+    "partition": {
+      "sat": 29,
+      "unresolved": 3
+    }
+  },
+  "decision": "Retain optional disjoint repair: exposed constructed kernel coverage 22/32 to 29/32, no lost SAT answer; complete measured kernel cost 36.65 percent lower, all paired signs favorable. Storage increases with new witnesses. No production defaults or full portfolio changes.",
+  "documents": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "016e8ffa80aa14f76b23d17dc8f4a6c916acce1fcc8e72f1924db61da6cf13c4",
+    "research/disjoint-repair-partitions.md": "6645d650d33f89d31c8c57e238fe5a7b94c365f2431b18fe4213d0a58d884736",
+    "research/implementation-gaps.md": "53a3e4f85cc9013d74c95da4612e971ccd16a29a0bfec068eea5584e44b5f3d8",
+    "research/sat-pattern-discovery.md": "f059d0215b08c9a09492cd37e9cd31f19436483b753ddadf19d5cb3013019c84",
+    "research/structural-reuse-priorities.md": "9c16d026595f9832bfd597d14dcee99bfef8eeec019231b6e7dc51e4f5257a0d"
+  },
+  "gains": [
+    3,
+    9,
+    19,
+    22,
+    23,
+    28,
+    30
+  ],
+  "limitations": [
+    "Exploratory follow-up on 32 already exposed constructed planted-SAT inputs, not fresh external generalization. Truth witnesses are read only by independent audits, never discovery or branch selection.",
+    "Repair-kernel comparison only. Baseline is the unchanged previous Hamming search; the candidate partitions false-clause extensions by the first flipped available variable, fixing earlier candidates at seed values. Both use the same proposer, ranking rule, radius and 20000-state cap.",
+    "A flip/keep context is stronger than a flip mask. Equal state caps do not imply equal work; full measured preparation, discovery, checking, writes, compression and replay are charged. No production default or existing portfolio changes.",
+    "SAT requires a complete original-source model check. Unknown results contain no negative authority. Independently checked exclusion trees certify only their stated ball; the root must have empty flip and keep masks.",
+    "Initial source JSON parsing, proposal construction, occurrence indexing, search/internal checks, explicit checking, JSON writes, compression and warm/two cold reloads are timed. Every replay reloads source and certificates. No search state is reused between phases; OS caches are not flushed. Imports, final metadata, audits and auxiliary minimum-distance diagnosis are additional.",
+    "Disjoint branches avoid overlapping extension spaces but need not have polynomial total size or uniformly outperform another ordering. Unrestricted expansion, transfer and compact proof obligations remain open.",
+    "All prior artifacts, scientific sources, the synthetic 182/182 union and external 37/37 union remain unchanged and distinct from this constructed repair-only panel."
+  ],
+  "next_cost_target": "Reduce coupled residual constraints and reuse checked negative supports without discarding flip/keep context. Disjointness does not imply uniformly fewer states, compact arbitrary-SAT proofs or polynomial expansion.",
+  "next_coverage_target": "Investigate exact conditional interfaces and guarded reuse around retained rejected near models for IDs 24,25,29 at fixed caps. Full-portfolio status on this constructed panel is unmeasured; freeze new external encodings before transfer claims.",
+  "paired_percent": [
+    -36.20316985171381,
+    -37.26559252063394,
+    -35.10123891267841,
+    -38.01023426956998
+  ],
+  "remaining": [
+    24,
+    25,
+    29
+  ],
+  "supplemental_checks": {
+    "path": "experiments/results/cnf-partition-repair/supplemental-checks.json",
+    "sha256": "72ab5060c79d830d2f4fc9438393678020533a46756dfd00227006a59fa12e12"
+  }
+}

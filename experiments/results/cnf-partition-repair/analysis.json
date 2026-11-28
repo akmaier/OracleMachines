@@ -1,0 +1,80 @@
+{
+  "comparison_percent": -36.64562921785113,
+  "coverage": {
+    "baseline": {
+      "sat": 22,
+      "unresolved": 10
+    },
+    "partition": {
+      "sat": 29,
+      "unresolved": 3
+    }
+  },
+  "gains": [
+    3,
+    9,
+    19,
+    22,
+    23,
+    28,
+    30
+  ],
+  "limitations": [
+    "Exploratory follow-up on 32 already exposed constructed planted-SAT inputs, not fresh external generalization. Truth witnesses are read only by independent audits, never discovery or branch selection.",
+    "Repair-kernel comparison only. Baseline is the unchanged previous Hamming search; the candidate partitions false-clause extensions by the first flipped available variable, fixing earlier candidates at seed values. Both use the same proposer, ranking rule, radius and 20000-state cap.",
+    "A flip/keep context is stronger than a flip mask. Equal state caps do not imply equal work; full measured preparation, discovery, checking, writes, compression and replay are charged. No production default or existing portfolio changes.",
+    "SAT requires a complete original-source model check. Unknown results contain no negative authority. Independently checked exclusion trees certify only their stated ball; the root must have empty flip and keep masks.",
+    "Initial source JSON parsing, proposal construction, occurrence indexing, search/internal checks, explicit checking, JSON writes, compression and warm/two cold reloads are timed. Every replay reloads source and certificates. No search state is reused between phases; OS caches are not flushed. Imports, final metadata, audits and auxiliary minimum-distance diagnosis are additional.",
+    "Disjoint branches avoid overlapping extension spaces but need not have polynomial total size or uniformly outperform another ordering. Unrestricted expansion, transfer and compact proof obligations remain open.",
+    "All prior artifacts, scientific sources, the synthetic 182/182 union and external 37/37 union remain unchanged and distinct from this constructed repair-only panel."
+  ],
+  "paired_percent": [
+    -36.20316985171381,
+    -37.26559252063394,
+    -35.10123891267841,
+    -38.01023426956998
+  ],
+  "peak_rss_bytes": {
+    "baseline": 31162368,
+    "partition": 29147136
+  },
+  "remaining": [
+    24,
+    25,
+    29
+  ],
+  "states": {
+    "baseline": 274481,
+    "partition": 118552
+  },
+  "totals": {
+    "baseline": {
+      "cold_seconds": 0.027311134850606322,
+      "complete_seconds": 4.053470844053663,
+      "compressed_bytes": 4184,
+      "input_seconds": 0.0024874270893633366,
+      "persistence_seconds": 0.0006540835602208972,
+      "phases": {
+        "acquisition_seconds": 3.9950475830119103,
+        "checking_seconds": 0.010130741051398218,
+        "writing_seconds": 0.0041044686222448945
+      },
+      "proof_bytes": 37061,
+      "warm_seconds": 0.013466552016325295
+    },
+    "partition": {
+      "cold_seconds": 0.028901958488859236,
+      "complete_seconds": 2.5680509480880573,
+      "compressed_bytes": 5547,
+      "input_seconds": 0.0023058645892888308,
+      "persistence_seconds": 0.0009069585939869285,
+      "phases": {
+        "acquisition_seconds": 2.506071323878132,
+        "checking_seconds": 0.010992343188263476,
+        "writing_seconds": 0.004317259648814797
+      },
+      "proof_bytes": 49362,
+      "warm_seconds": 0.014302010298706591
+    }
+  }
+}

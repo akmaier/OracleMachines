@@ -1,0 +1,93 @@
+def search(source, seed, radius, counts=None, *, node_limit=NODE_LIMIT, record=False):
+    counts = Counter() if counts is None else counts
+    if type(node_limit) is not int or node_limit < 0 or type(record) is not bool:
+        raise ValueError('Invalid repair budget or recording policy')
+    clauses, names, model = prepare(source, seed, radius, counts)
+    bits = {v: 1 << j for j, v in enumerate(names)}
+    occurrence = {v: [] for v in names}
+    satisfied = []
+    for i, c in enumerate(clauses):
+        satisfied.append(sum(model[abs(v)] == (v > 0) for v in c))
+        for v in c:
+            occurrence[abs(v)].append((i, v > 0))
+            counts['partition_index_occurrences'] += 1
+    bad = {i for i, n in enumerate(satisfied) if not n}
+    initial = len(bad); best = initial; used = set(); expanded = 0; nodes = {}; maximum_kept = 0
+    # Explicit enter/undo tasks avoid a recursion-depth admission restriction.
+    pending = [('enter', 0, 0, None)]
+
+    def flip(v):
+        model[v] = not model[v]
+        for i, positive in occurrence[v]:
+            counts['partition_update_occurrences'] += 1
+            satisfied[i] += 1 if model[v] == positive else -1
+            if satisfied[i]:
+                bad.discard(i)
+            else:
+                bad.add(i)
+
+    def result(reason, witness=None):
+        diagnostic = dict(reason=reason, radius=radius, node_limit=node_limit,
+                          expanded=expanded, initial_failed=initial, best_failed=best, maximum_kept=maximum_kept)
+        if witness is not None:
+            diagnostic['distance'] = sum(a != b for a, b in zip(seed['values'], witness['values']))
+        exclusion = None
+        if reason == 'radius-exhausted' and record:
+            exclusion = dict(format=EXCLUSION, seed=seed, radius=radius, nodes=nodes)
+        return dict(witness=witness, exclusion=exclusion, diagnostic=diagnostic)
+
+    while pending:
+        action, mask, kept, variable = pending.pop()
+        if action == 'undo':
+            flip(variable); used.remove(variable); continue
+        if variable is not None:
+            used.add(variable); flip(variable)
+            pending.append(('undo', mask, kept, variable))
+        if expanded == node_limit:
+            return result('budget')
+        expanded += 1; counts['partition_states'] += 1; best = min(best, len(bad))
+        if len(bad) < _trace_best[0]:
+            _trace_best[0] = len(bad)
+            _snapshots.append(dict(expanded=expanded, flipped=str(mask), kept=str(kept),
+                                   values=[model[v] for v in names], false_canonical=sorted(bad)))
+        maximum_kept = max(maximum_kept, kept.bit_count())
+        key = f'{mask}:{kept}'
+        if not bad:
+            witness = dict(format=previous.FORMAT, names=names, values=[model[v] for v in names])
+            previous.check(source, witness, counts)
+            return result('sat', witness)
+        remaining = radius - len(used)
+        choices = []
+        for i in sorted(bad):
+            counts['partition_false_literal_charge'] += len(clauses[i])
+            available = tuple(sorted(abs(v) for v in clauses[i] if not (mask | kept) & bits[abs(v)]))
+            choices.append((len(available), available, i))
+        choices.sort()
+        if not choices[0][0]:
+            if record: nodes[key] = dict(blocked=choices[0][2])
+            counts['partition_blocked_prunes'] += 1; continue
+        packed = set(); packing = []
+        for _, available, i in choices:
+            counts['partition_packing_variable_charge'] += len(available)
+            if not packed.intersection(available):
+                packed.update(available); packing.append(i)
+        if len(packing) > remaining:
+            if record: nodes[key] = dict(packing=packing)
+            counts['partition_packing_prunes'] += 1; continue
+
+        def gain(v):
+            score = 0
+            for i, positive in occurrence[v]:
+                counts['partition_gain_occurrences'] += 1
+                if model[v] != positive: score += satisfied[i] == 0
+                else: score -= satisfied[i] == 1
+            return score
+
+        order = sorted(choices[0][1], key=lambda v: (-gain(v), v))
+        if record: nodes[key] = dict(clause=choices[0][2], order=order)
+        children = []; prefix = kept
+        for v in order:
+            children.append(('enter', mask | bits[v], prefix, v))
+            prefix |= bits[v]; counts['partition_branch_edges'] += 1
+        pending.extend(reversed(children))
+    return result('radius-exhausted')

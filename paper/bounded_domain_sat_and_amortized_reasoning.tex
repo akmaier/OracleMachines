@@ -17512,6 +17512,151 @@ before increasing the cap.  Full-portfolio status on this panel remains
 unmeasured.  Unseen external transfer, economical recognition, compact shared
 negative evidence and unrestricted expansion bounds remain open.
 
+\subsection{Proof-guided boundary repair with exact outside contexts}
+\label{sec:boundary-repair}
+
+The three remaining repair misses from Section~\ref{sec:partition-repair} now
+have checked models at the unchanged 20,000-state total allowance per input.
+Coverage on the exposed constructed panel rises from 29/32 to 32/32, with all
+29 earlier models reproduced unchanged.  This is an exploratory repair-kernel
+result, not fresh external transfer or a new tractable class.  Production
+defaults and the separate external 37/37 and synthetic 182/182 unions remain
+unchanged.  The improvement conditions around a freshly acquired rejected
+proposal and uses local refutations to choose which outside variables to release.
+
+Let $a$ be a complete assignment on the source support $V$, and let $U\subseteq V$
+be free.  Form $F_{U,a}$ by dropping each clause satisfied by a literal outside
+$U$ under $a$, and otherwise retaining its literals whose variables lie in $U$.
+Empty projected clauses are retained.  Duplicate projections may share one
+local clause, with their original parents retained for provenance.  This is
+ordinary exact conditioning, applicable to every valid CNF, not a new
+tractability theorem.
+
+\begin{proposition}[Exact outside contexts and proof-supported escape]
+Models of $F_{U,a}$ on $U$ correspond exactly to models of $F$ agreeing with $a$
+on $V\setminus U$.  Suppose a checked complete refutation of $F_{U,a}$ uses
+projected clauses $D_1,\ldots,D_t$.  For each $D_i$, choose one original parent
+$C_i$ that survives conditioning, and put
+\[
+B=\bigcup_{i=1}^{t}\bigl(\operatorname{vars}(C_i)\setminus U\bigr).
+\]
+Every model of $F$ differs from $a$ on at least one variable in $B$.
+Consequently $U\cup B$ is a justified set to try freeing, although this does not
+assert that the resulting wider context is satisfiable.
+\end{proposition}
+\begin{proof}
+For any assignment on $U$, join it with $a$ outside $U$.  Every dropped source
+clause is already satisfied by that outside assignment.  In each surviving
+clause all outside literals are false, so its truth is exactly the truth of its
+projection on $U$.  This proves both directions of the correspondence.
+The checked refutation uses only its referenced clauses; all splitting and
+leaf premises remain valid for their conjunction.  They are therefore jointly
+unsatisfiable over the local variables.  If a model of $F$ agreed with $a$ on
+$B$, all outside literals of every chosen $C_i$ would still be false.  Satisfying
+those parents would require satisfying every $D_i$, contradicting their checked
+refutation.  Thus some variable in $B$ must change in every source model.
+\end{proof}
+
+For a fixed $U$, ranging over all outside assignments gives an exact disjoint
+partition of all source models.  There can be exponentially many such contexts.
+The implemented sequence instead enlarges $U$ around one assignment; those
+contexts are nested, not disjoint branches whose sizes can be added as coverage.
+A local UNSAT result excludes only its outside context.  For example,
+$(x\lor y)\land(\neg x\lor y)$ is contradictory when $x$ is free and $y$ is fixed
+false, but has global models with $y$ true.  The retained checker counterexample
+rejects the old proof after changing that outside value, freeing $y$, or deleting
+a clause.  Even if a particular exclusion could imply global UNSAT, this wrapper
+does not promote it to a global negative answer.
+
+Both measured arms collect the best complete proposal during the unchanged
+disjoint traversal.  The baseline continues for 20,000 states.  The new arm uses
+a 10,000-state prefix and shares the remaining allowance across at most eight
+conditional rounds.  Acquisition is fresh and charged: old retained near-models
+are used only in exploratory probes and validation.  Truth witnesses and case
+identifiers never enter search.  This policy was selected on already exposed
+cases, before freezing the matched comparisons; it is not an unseen transfer
+test.  Earlier flip/keep commitments are released when recentering, with no
+negative proof authority transferred across that context change.
+
+Initially $U$ contains all variables in the rejected proposal's false clauses.
+Every induced constraint is retained, including clauses satisfied before a
+free variable changes.  A fresh occurrence index and outside-satisfaction counts
+support monotone growth of $U$: release updates only incident clauses, and the
+active clause set grows.  Sorting, deduplication, parent selection and copying
+are charged.  Each used projected clause chooses one parent by fewest outside
+variables, then literal order.  Local disjoint search is rebuilt and restarted
+each round.  An independent checker reconstructs the entire cofactor directly
+from the raw source and outside context, then verifies the full-radius local
+refutation.  It never trusts the incremental index.  A local witness is lifted
+and checked against every original clause.  An exhausted allowance or stalled
+boundary returns unknown.
+
+The prefixes for IDs 24, 25 and 29 reach rejected proposals with two, one and
+eight false clauses.  The older 20,000-state proposals with one, one and five
+failures remain preserved but are not imported free.  The free-set sequences
+are $(6,15,25,39,59,77)$, $(3,8)$ and $(21,26,32,43,63,78)$, respectively.
+Eleven checked local refutations guide fourteen rounds.  Local search uses 468,
+11 and 5,731 states, giving charged totals 10,468, 10,011 and 15,731.  The final
+models differ from their near-models on 27, two and 42 variables.  All three
+sources have eighty variables and 349 clauses: one repair stays within eight
+free variables, while the others require 77/80 and 78/80 under this policy.
+These observed widths and distances are not proved minimal.  Broad coupling
+remains despite successful repair.  The shared source indexes contain 3,141
+occurrences and process 2,157 release incidences; snapshots scan 1,783 active
+clauses and charge 4,595 projected literals.  These categories do not constitute
+a full instruction count.
+
+Four fresh-process pairs alternate mode order.  Timing includes source JSON
+reads, proposals, index construction and updates, near-model copies, local
+restarts, discovery and explicit checks, model and discovery-sidecar writes,
+compression, warm replay and two cold replay/checks.  Every conditional proof
+and its outside context are persisted and rechecked.  Each replay reloads
+sources and certificates without surviving search state; OS caches are not
+flushed.  Imports, reporting metadata and independent audits are additional.
+Baseline traversal, results and existing counters reproduce the prior run exactly.
+
+Total explored states fall from 118,552 to 94,762.  Mean complete cost falls
+from 2.64746 to 2.18151\,s, a 17.60\% reduction; paired reductions are 15.92\%,
+19.88\%, 15.53\% and 19.05\%.  Acquisition/internal checks fall from 2.54117 to
+1.99924\,s.  Explicit checks rise from 0.02148 to 0.03862\,s, warm replay from
+0.02484 to 0.04344\,s, and two cold replays from 0.05011 to 0.08599\,s.
+Model JSON grows from 49,362 to 55,478 bytes and discovery JSON from 65,107 to
+204,878 bytes.  Model gzip grows from 5,547 to 6,217 bytes, discovery gzip from
+6,238 to 17,016 bytes, and combined gzip from 6,685 to 22,531 bytes.  Combined
+compression shares repeated content, so the separate sizes do not add to it;
+all three compressions are charged.  Maximum observed RSS rises from 29,376,512
+to 30,474,240 bytes.  The baseline still leaves three inputs unanswered, so these
+are fixed-policy costs, not equal complete-solving costs or a fresh-CDCL
+comparison.  Historical append-only storage is additional.
+
+A post-hoc four-variable, fourteen-raw-clause example rules out general
+restart-budget dominance: with two states the uninterrupted search finds a
+model, while a one-state prefix followed by one local state remains unknown.
+It does not test or alter the frozen 10,000/20,000 policy.  Equal state caps are
+not equal work, and neither expansion width nor negative evidence size is
+polynomially bounded for unrestricted inputs by these observations.
+
+Independent truth tables validate 8,402 conditional queries over 576 inputs:
+all 512 subsets of the nine canonical clauses on two named variables with every
+actual-support seed and free subset, plus 64 fresh sparse signed inputs with
+duplicates, tautologies and edits, using two seeds and three free sets each.
+All 1,033 satisfiable contexts and 7,369 exclusions agree with truth.  There are
+6,704 incremental/direct reconstruction checks and 1,728 bounded policy runs,
+312 yielding checked models.  A repeated audit reproduces all semantic records.
+All 2,546 full and eighteen focused tests pass, including independent checking
+with discovery disabled and stale-context rejection.  Validation reproduces all
+eight comparisons and cold counters, rechecks the external union, and preserves
+245 prior manifests, 82,407 artifact entries, 1,336 scientific sources and all
+85 preceding proof blocks.
+
+The next gaps are unseen external transfer, comparison with the full portfolio
+and a fresh solver, nearly full-width coupling in two repaired inputs, and
+cheaper guarded negative reuse across related contexts and edits.  General
+recognition, source-dependent preprocessing, compact acquisition and unrestricted
+SAT expansion bounds remain open.  Completing this finite panel and describing
+an exact decomposition of all valid CNFs do not establish efficient solution
+of every resulting class.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

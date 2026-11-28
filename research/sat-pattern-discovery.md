@@ -5,7 +5,48 @@ and a valid partition covering the entire problem. Continue improving known
 families as supporting work. This is a research plan, not an achieved efficient
 partition or a new tractability theorem.
 
-## Latest evidence: disjoint repair closes seven retained misses
+## Latest evidence: proof-guided repair completes the exposed panel
+
+[Proof-guided boundary repair](proof-guided-boundary-repair.md) closes the three
+retained misses: **29/32 → 32/32** checked models on the exposed constructed
+repair panel, at the unchanged **20,000 total states per input**. All 29 earlier
+models survive unchanged. This is an exploratory kernel result; the external
+37/37 and synthetic 182/182 unions remain separate and unchanged. No production
+default changes or fresh transfer claims.
+
+A freshly acquired near-model supplies an outside assignment. Exact conditioning
+keeps every induced constraint; independently checked local refutations identify
+outside variables to free. Prefix flip/keep commitments are released. Source
+occurrences and projections are reused across rounds, while local search is
+rebuilt and charged. Local UNSAT excludes only its outside context; SAT requires
+a complete original-source model check.
+
+The 10,000-state prefix and all subsequent rounds share the 20,000-state cap.
+IDs 24, 25 and 29 finish in **10,468, 10,011 and 15,731 states**. Their successful
+free sets have **77, 8 and 78 of 80 variables**. Eleven local exclusions guide
+fourteen rounds. Near-model acquisition is charged, and broad interactions
+remain in two cases; these widths are not proved minimal.
+
+Mean complete measured cost falls **2.64746 → 2.18151 seconds (17.60%)**, with all
+four paired signs favorable. States fall **118,552 → 94,762**. Checking and replay
+increase; combined compressed model/discovery evidence grows **6,685 → 22,531
+bytes**. A retained small-cap restart regression prevents a dominance claim.
+
+All **2,546 full and 18 focused tests pass**. Truth tables validate **8,402**
+conditional queries (1,033 SAT and 7,369 excluded), with 6,704 incremental/direct
+checks and a reproduced audit. Validation preserves 245 prior manifests, 82,407
+artifact entries, 1,336 old scientific sources and 85 old proof blocks, and
+rechecks the old external union. Resume
+`experiments/results/cnf-boundary-repair/checkpoint.json`, key `boundary_repair`.
+
+**Largest remaining gaps:** freeze unseen external sources for transfer; measure
+the fixed policy against the full portfolio and a fresh solver; explain the
+77/80 and 78/80 residual coupling; and reuse negative evidence across contexts
+and edits. Efficient recognition, preprocessing, compact proofs and unrestricted
+expansion remain open. Complete finite coverage and exact conditioning do not
+supply a polynomial solution of every CNF class.
+
+## Previous evidence: disjoint repair closes seven retained misses
 
 [Disjoint repair partitions](disjoint-repair-partitions.md) close **seven of the
 ten** retained repair misses at the unchanged 20,000-state cap: **22/32 → 29/32**

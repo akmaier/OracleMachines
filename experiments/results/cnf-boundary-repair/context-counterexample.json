@@ -1,0 +1,70 @@
+{
+  "conditional_exclusion": {
+    "format": "cnf-outside-context-exclusion-v1",
+    "proof": {
+      "format": "cnf-disjoint-repair-ball-v1",
+      "nodes": {
+        "0:0": {
+          "clause": 1,
+          "order": [
+            1
+          ]
+        },
+        "1:0": {
+          "blocked": 0
+        }
+      },
+      "radius": 1,
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          1
+        ],
+        "values": [
+          false
+        ]
+      }
+    },
+    "seed": {
+      "format": "cnf-choice-witness-v1",
+      "names": [
+        1,
+        2
+      ],
+      "values": [
+        false,
+        false
+      ]
+    },
+    "selected": [
+      1
+    ]
+  },
+  "global_sat": {
+    "format": "cnf-choice-witness-v1",
+    "names": [
+      1,
+      2
+    ],
+    "values": [
+      false,
+      true
+    ]
+  },
+  "invalidated_by": [
+    "outside",
+    "free",
+    "source"
+  ],
+  "scope": "Local UNSAT is compatible with global SAT. Changed outside assignment, widened free set and satisfiable source edit cannot inherit this proof.",
+  "source": [
+    [
+      1,
+      2
+    ],
+    [
+      -1,
+      2
+    ]
+  ]
+}

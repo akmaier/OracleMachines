@@ -1,0 +1,178 @@
+{
+  "baseline": {
+    "diagnostic": {
+      "best_failed": 0,
+      "distance": 1,
+      "expanded": 2,
+      "initial_failed": 4,
+      "maximum_kept": 0,
+      "node_limit": 2,
+      "radius": 4,
+      "reason": "sat"
+    },
+    "exclusion": null,
+    "witness": {
+      "format": "cnf-choice-witness-v1",
+      "names": [
+        203,
+        395,
+        404,
+        715
+      ],
+      "values": [
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+  "boundary": {
+    "diagnostic": {
+      "expanded": 2,
+      "prefix": {
+        "best_failed": 4,
+        "expanded": 1,
+        "initial_failed": 4,
+        "maximum_kept": 0,
+        "node_limit": 1,
+        "radius": 4,
+        "reason": "budget"
+      },
+      "reason": "unknown",
+      "rounds": [
+        {
+          "active_clauses": 10,
+          "local_clauses": 10,
+          "search": {
+            "best_failed": 4,
+            "expanded": 1,
+            "initial_failed": 4,
+            "maximum_kept": 0,
+            "node_limit": 1,
+            "radius": 4,
+            "reason": "budget"
+          },
+          "selected_variables": 4
+        }
+      ]
+    },
+    "evidence": {
+      "format": "cnf-boundary-repair-evidence-v1",
+      "rounds": [
+        {
+          "exclusion": null,
+          "selected": [
+            203,
+            395,
+            404,
+            715
+          ],
+          "witness": null
+        }
+      ],
+      "seed": {
+        "format": "cnf-choice-witness-v1",
+        "names": [
+          203,
+          395,
+          404,
+          715
+        ],
+        "values": [
+          false,
+          true,
+          false,
+          false
+        ]
+      }
+    },
+    "witness": null
+  },
+  "node_limit": 2,
+  "prefix_limit": 1,
+  "scope": "Post-hoc illustrative small-cap regression. Does not test or alter the frozen 10000/20000 policy; demonstrates lack of general restart-budget dominance.",
+  "seed": {
+    "format": "cnf-choice-witness-v1",
+    "names": [
+      203,
+      395,
+      404,
+      715
+    ],
+    "values": [
+      false,
+      true,
+      false,
+      false
+    ]
+  },
+  "source": [
+    [
+      203,
+      715,
+      -404,
+      -395
+    ],
+    [
+      395,
+      -715
+    ],
+    [
+      -395
+    ],
+    [
+      -203,
+      404
+    ],
+    [
+      -395,
+      715,
+      203,
+      404
+    ],
+    [
+      715,
+      -404,
+      -395
+    ],
+    [
+      -715,
+      404
+    ],
+    [
+      -395,
+      715
+    ],
+    [
+      -203,
+      404
+    ],
+    [
+      404,
+      -715,
+      203
+    ],
+    [
+      404,
+      -395
+    ],
+    [
+      203,
+      715,
+      -404,
+      -395
+    ],
+    [
+      203,
+      715,
+      -404,
+      -395,
+      203
+    ],
+    [
+      715,
+      -715
+    ]
+  ]
+}

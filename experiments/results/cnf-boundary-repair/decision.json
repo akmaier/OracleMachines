@@ -1,0 +1,41 @@
+{
+  "comparison_percent": -17.599703310748872,
+  "coverage": {
+    "baseline": {
+      "sat": 29,
+      "unresolved": 3
+    },
+    "boundary": {
+      "sat": 32
+    }
+  },
+  "decision": "Retain optional proof-guided boundary repair: exposed constructed kernel coverage 29/32 to 32/32 under the same total state cap, all 29 old models preserved, mean complete cost 17.60 percent lower. Cold checking and storage grow; no production default change or unseen transfer claim.",
+  "documents": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "181db782af0a1bccb2d80b40c9663a16b9bfce2aa29ebfa1cbf7dabef9df39c8",
+    "research/implementation-gaps.md": "76c6713b2bf34af80aef4a3c35f20e195896960b35167953d26d108981cbf50d",
+    "research/proof-guided-boundary-repair.md": "3ddd8b750ea232c2964af6de4989f51f70cdbdef8506ad51b19136a09cf19bc8",
+    "research/sat-pattern-discovery.md": "1277ba708b294b1ccfb3ba40ee344e1d933a1824ae9af4a9c3ecd3630f92dc22",
+    "research/structural-reuse-priorities.md": "91a416562b849d51a07c1c25f5d540adf8a067fdb86edaaf6ce90896a78d4270"
+  },
+  "limitations": [
+    "Exploratory follow-up on 32 exposed constructed planted-SAT sources, not fresh external transfer. Policy selected after probes on retained near models; timed discovery reacquires them from raw CNF. Audit truth witnesses and IDs never enter search.",
+    "Kernel-only comparison, unchanged production portfolio. Both arms collect near models with identical disjoint traversal. Baseline uses 20000 states; candidate uses an initial 10000 and shares the remaining allowance across at most eight conditional rounds. All prefix and local states count toward 20000.",
+    "Free all variables in currently false clauses, preserving all constraints induced by the fixed outside assignment. Rebuild local search per round; retain one incremental source projection index. Checked exclusion supports select outside variables to release; prefix flip/keep commitments are discarded on recentering.",
+    "Conditional UNSAT excludes one outside context only. All SAT answers require full original-source witnesses; no incomplete search or conditional proof is promoted to global UNSAT. A cap or stalled boundary returns unknown.",
+    "Time includes source JSON reads, proposals, acquisition, index construction and updates, local solver restarts, conditional checking, explicit model/evidence checking, proof and evidence writes/compression, and warm/two cold reloads. Discovery sidecars persist all conditional proofs. No search state survives replay; OS caches are not flushed. Imports, reporting metadata and independent audits are additional.",
+    "Equal state budgets do not imply equal work or a universal ordering guarantee. Wide neighborhoods may approach the whole input. No new tractability, compact arbitrary refutations or efficient unrestricted SAT expansion claim.",
+    "Prior external 37/37, synthetic 182/182, all historical artifacts and sources remain preserved and separate. Constructed panel completion alone is not general efficient coverage."
+  ],
+  "next_cost_target": "Understand the nearly full-width interactions and reuse checked negative supports across related contexts/edits, charging preparation, invalidation, reconstruction and persistence.",
+  "next_coverage_target": "Freeze unseen external inputs and compare the fixed policy with the full portfolio and a fresh solver. This exposed panel is complete; unrestricted efficient coverage remains open.",
+  "paired_percent": [
+    -15.922539891752196,
+    -19.881848399292178,
+    -15.533440140089716,
+    -19.045263642277266
+  ],
+  "supplemental_checks": {
+    "path": "experiments/results/cnf-boundary-repair/supplemental-checks.json",
+    "sha256": "8b584236c12d3b7e47237dc7ef41e67763746b7150d102cf455a22457d1e3951"
+  }
+}

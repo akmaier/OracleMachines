@@ -1,0 +1,22 @@
+{
+  "prior_near_models": {
+    "path": "experiments/results/cnf-partition-repair/near-models.json",
+    "sha256": "f25f6f10726731caf66a1d375be52ba368a3ce7e5931358e0228599762dcfc7a"
+  },
+  "scope": "Policy selected on exposed near models before timed comparisons. These probes read old retained snapshots at or before 10000 states; they do not charge reacquisition and are excluded from performance claims. Timed policy reacquires every seed and charges the common total 20000-state cap.",
+  "scripts": [
+    {
+      "path": "experiments/results/cnf-boundary-repair/exploratory-full-boundary.py",
+      "sha256": "f85f33ee03db61af51103e44716a6b05e665f583d6ae38295622ceb170b6f3f3"
+    },
+    {
+      "path": "experiments/results/cnf-boundary-repair/exploratory-support-boundary.py",
+      "sha256": "748eb5a2f2fdd2a68c677124093b23954d73372631bd20b31e6cde6363381624"
+    }
+  ],
+  "selected_policy": {
+    "max_rounds": 8,
+    "prefix": 10000,
+    "total": 20000
+  }
+}

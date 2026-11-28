@@ -12,7 +12,42 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: unit closure and fresh-transfer obligations
+## Current investigation: eleven larger-input gaps and cheaper proofs
+
+[Implicit proof contexts and larger transfer](linear-unit-proofs-and-larger-transfer.md)
+keeps the unit search fixed and removes explicit flip/keep keys from its
+refutations. A preorder checker reconstructs contexts with an undo trail and
+validates every source deduction, complete split and expected subtree.
+
+On the exposed 36-input panel, all answers and **58,118 search contexts** are
+identical. Combined gzip falls **1,754,249 → 830,927 bytes (52.63%)**; maximum
+observed RSS falls 29.38%. Mean complete time improves **12.73310 → 12.48055
+seconds (1.98%)**, with all four paired signs favorable. Packing increases
+acquisition cost; cheaper checking, storage and replay compensate. This is a
+representation improvement, not a new SAT algorithm.
+
+Fresh selection and policy hashes were frozen before acquiring **eight new
+125/150-variable originals plus eight related controls**. Both formats certify
+**3/8 originals and 2/8 controls**, all SAT. Eleven inputs hit the 20,000-context
+cap; no complete refutation is obtained, so packing is not exercised there.
+The unchanged portfolio answers none. Z3 supplies source-checked models for
+all eight SAT inputs and trusted reference UNSAT for the other eight. The
+structural union is **5/16**, with **three known-SAT and eight reference-UNSAT
+gaps**, all connected. This small sample is not representative.
+
+All **2,592 full and 20 focused tests pass**. A reproduced 8,882-query truth
+audit includes 2,709 rejected truncated refutations. Validation preserves 248
+prior manifests, 83,640 artifact entries, 1,351 scientific sources and 87 earlier
+proofs; one representation-equivalence proof is added. Previous 36/36, external
+37/37, constructed 32/32 and synthetic 182/182 panels remain separate. Resume
+`experiments/results/cnf-linear-unit-proof/checkpoint.json`, key `linear_unit_proof`.
+
+**Largest remaining gaps:** the eleven larger-input residuals; reusable negative
+consequences across related contexts and edits; and efficient recognition,
+source-dependent preprocessing and unrestricted expansion. The new format
+removes redundant context storage, but does not yet reuse logical subproofs.
+
+## Previous investigation: unit closure and fresh-transfer obligations
 
 [Unit propagation inside repair partitions](unit-closed-repair-partitions.md)
 closes **all fourteen retained combined-portfolio misses** on the exposed panel:

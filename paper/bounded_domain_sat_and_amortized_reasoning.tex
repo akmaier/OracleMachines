@@ -17917,6 +17917,151 @@ Efficient recognition, source-dependent preprocessing and unrestricted SAT
 expansion remain open.  Exact recomposition and finite panel completion do not
 supply a polynomial solution of all CNFs.
 
+\subsection{Implicit proof contexts and larger external transfer}
+\label{sec:linear-unit-proof}
+
+The next checkpoint separates proof cost from search coverage.  The previous
+unit/partition search, proposer, order and 20,000-context cap remain fixed.
+A preorder representation removes explicit context keys from negative proofs
+and reconstructs them during checking.  On the completed exposed panel this
+reduces combined compressed evidence by $52.63\%$ and mean complete runtime by
+$1.98\%$.  On a separately frozen larger sample, both representations certify
+only five of sixteen inputs.  The remaining eleven searches hit the cap before
+producing a complete refutation or model.  Encoding improvements do not remove
+this expansion obligation.
+
+Each preorder leaf stores its unit-clause sequence and conflict clause.  Each
+split stores its unit sequence, split clause and ordered available variables.
+The root has no commitments.  Source units determine forced values; the split
+order determines child assignments and their number.  An independent checker
+shares a partial-assignment undo trail across nodes.  It validates source
+premises, complete splits and exact stream consumption, without invoking search,
+packing or the old checker.  The unchanged search still records its explicit
+proof first; packing and temporary coexistence of both representations are
+charged.  Packing alone supplies no logical authority.  SAT witnesses and
+unknown results retain their previous obligations.
+
+\begin{proposition}[Implicit contexts in a preorder refutation]
+For a fixed source CNF and complete seed, a finite complete unit/first-flip
+refutation can be encoded in preorder using only each node's unit-clause indices,
+its terminal conflict clause or split clause, and the ordered split variables.
+Explicit flip/keep context keys are unnecessary.  A checker that reconstructs
+contexts, verifies each source deduction and complete split, and consumes exactly
+all expected subtrees certifies the same global unsatisfiability statement.
+\end{proposition}
+\begin{proof}
+Start at the empty partial assignment.  The seed and previously reconstructed
+commitments determine every unit premise and forced value.  A conflict node has
+no children.  At a split, the complete ordered list determines each child context:
+keep the earlier variables at their seed values and flip the selected variable.
+The arity therefore determines how many consecutive subtrees to consume after
+the node.  Recursively applying this rule, or implementing it with an explicit
+stack and undo trail, reconstructs every context uniquely.  Different children
+retain incompatible commitments, so their paths cannot converge to the same
+context.  Thus a complete explicit refutation has an unambiguous preorder
+encoding, independent of dictionary insertion order.
+
+Conversely, successful checking of a preorder stream reconstructs a finite tree
+whose units, conflicts and complete disjoint partitions satisfy the preceding
+unit-closure proposition.  Restoring the parent assignment before each child
+preserves its exact context.  Requiring all expected children rejects missing
+subtrees, and requiring exhaustion of the stream rejects trailing unconnected
+records.  Reintroducing each reconstructed flip/keep key yields an explicit
+root refutation.  The preceding composition argument then proves global
+unsatisfiability.  Packing or a partial stream alone has no such authority.
+\end{proof}
+
+Four fresh-process pairs alternate representation order on the exposed 36-input
+panel.  Both arms reproduce eighteen SAT models, eighteen UNSAT answers and
+exactly 58,118 entered search contexts.  The 42,333 stored negative-proof contexts
+correspond exactly in both formats, independent of dictionary insertion order.
+Mean complete time falls from 12.73310 to 12.48055\,s, a modest $1.98\%$;
+paired reductions are $2.50\%$, $3.52\%$, $1.02\%$ and $0.92\%$.  This compares
+the same completed workload on one host, not arbitrary inputs or a modern solver.
+Acquisition including internal checks increases from 9.27654 to 9.51494\,s,
+because conversion is additional.  Explicit checking falls from 0.64881 to
+0.54562\,s, warm replay from 0.72641 to 0.62710\,s and two cold checks from
+1.44707 to 1.23281\,s.
+
+Model/refutation JSON shrinks from 19,226,027 to 15,859,412 bytes, and combined
+gzip from 1,754,249 to 830,927 bytes, a $52.63\%$ reduction.  Maximum observed
+RSS falls from 108,396,544 to 76,546,048 bytes, or $29.38\%$.  These are corpus
+and format measurements; neither search nor proof size gains a general
+polynomial bound.  Timings include input JSON/DIMACS reads and hashes,
+preparation, search, conversion, internal and explicit checks, proof and sidecar
+writes, three compressions, warm replay and two cold source/proof reloads.
+No search state survives replay; OS caches are not flushed.  Imports/startup,
+reporting metadata, downloads, independent audits and historical append-only
+storage are additional.  Production defaults remain unchanged.
+
+Before acquiring new contents, we freeze member indices 20 and 40 in four
+SATLIB archives: \texttt{uf125-538}, \texttt{uuf125-538}, \texttt{uf150-645} and
+\texttt{uuf150-645} \citep{satlib}.  Indices are zero-based in lexicographic
+member order.  These supply eight originals.  Each group's first original also
+supplies a deterministic sparse signed permutation and an edit deleting the
+first clause and reversing one literal in the last nonempty clause.  The eight
+controls remain related; edited truth is not inherited.  Search and encoding
+source hashes are frozen before acquisition.  Only clauses enter discovery.
+Exact normalized comparison finds no duplicates within this sample or matches
+against the preceding 36-input transfer, external 37, constructed 32 and
+synthetic 182 panels.  This does not establish representative sampling,
+all-history novelty or semantic nonisomorphism.  Publisher member bytes survive
+exactly in gzip; workflow DIMACS is a whitespace-normalized re-emission with
+verified parsed equality.  No archive paths are extracted.
+
+Both formats certify three of eight originals and two of eight controls, all
+SAT, with identical models and 236,197 entered contexts.  The eleven remaining
+cases each reach 20,000 contexts.  No full UNSAT proof is obtained, so packing
+is not exercised on this sample.  The separately denominated single pair takes
+47.66420 versus 47.83883\,s, supplying no larger-input speedup evidence.
+Proof JSON occupies 20,071 versus 19,991 bytes, combined gzip 925 versus 919
+bytes, and maximum observed RSS 43,188,224 versus 44,646,400 bytes.  Small byte
+differences arise from format tags rather than compressed refutations.
+
+Separate isolated reference processes return zero checked answers for the
+unchanged full portfolio, while Z3 5.4.1 returns eight SAT and eight UNSAT.
+Every Z3 SAT model is checked against the source; its negative outputs remain
+trusted reference claims, not project refutations.  Process totals are 57.70698
+and 1.72154\,s, respectively, without the matched persistence/replay workload.
+No speedup ratio is inferred.  Neither reference reaches its outer timeout.
+Labels agree where applicable, and edits are assessed separately.  The structural
+union therefore remains 5/16, leaving three known-SAT and eight reference-UNSAT
+cases.  The known-SAT misses are original l004 and its signed and edited controls
+l012/l013; the other eight comprise the selected UNSAT originals and their
+controls.  All unresolved sources are connected.  Maximum visited commitments
+span 120--122 of 125 variables and 143--146 of 150, while smallest observed
+false-clause counts range from one to nine.  These are policy diagnostics, not
+minimum-width, minimum-repair or impossibility proofs.  Earlier completed panels
+remain unchanged and separately denominated.
+
+All 2,592 full and twenty focused tests pass.  A reproduced truth audit checks
+8,882 queries: 6,173 SAT and 2,709 UNSAT, rejecting all 2,709 truncated
+refutations.  Coverage includes every two-variable clause set with all seeds,
+three-variable CNFs with at most three distinct clauses with two seeds, and the
+retained 128 sparse signed edited sources.  Tests include empty and tautological
+sources, sparse names, duplicates, a 1,500-variable implication contradiction,
+reordered dictionaries, missing and trailing children, invalid units,
+incomplete split orders and changed sources.  Checking succeeds with search,
+packing and the old checker disabled.  Four eligible signed models transport
+back to independently checked original-source witnesses.
+
+Validation reproduces all eight exposed workflows and both larger workflows,
+their counters and replay checks, and the unchanged search against the previous
+checkpoint.  It preserves 248 prior manifests, 83,640 artifact entries, 1,351
+scientific sources and all 87 earlier proof blocks, rechecks the old external
+union, and validates original-byte and normalized-source equality.  Six new
+scientific files bring the source ledger to 1,357.
+
+The largest coverage target is now the eleven explicit larger-input residuals.
+Shared conditional structure and reusable negative consequences deserve
+investigation before merely raising the cap.  The new format removes redundant
+context storage but does not yet reuse logical subproofs across contexts or
+edits.  Source-index transport, guarded learned exclusions and component
+conditioning remain open directions.  Efficient recognition, source-dependent
+preprocessing, compact general proofs and unrestricted SAT expansion remain
+separate obligations.  Exact recomposition and finite coverage do not establish
+a polynomial solution of every CNF class.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

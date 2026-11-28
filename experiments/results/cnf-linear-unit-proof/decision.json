@@ -1,0 +1,408 @@
+{
+  "decision": "Retain exact preorder refutations: unchanged 36-input coverage/search, 52.63% smaller combined gzip and 1.98% lower complete cost. Frozen larger transfer certifies only five of sixteen inputs; eleven explicit residuals become the primary coverage target.",
+  "documents": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "aa9ecfa3543b3e94b8a3da8d73e284090f51dc4d342026d83f41a704eb7e26c1",
+    "research/implementation-gaps.md": "9c2e7cea67882d522c70dd66fb115ed16a2ac68985c1007faac978fab21f9e2c",
+    "research/linear-unit-proofs-and-larger-transfer.md": "07dd90f3e39b5a599940ba319a05f49dddfc4889006f8e4c6353dcbf245c7f6e",
+    "research/sat-pattern-discovery.md": "ac093eaff86dd1aa9fc2650d7a9907166d00d86ce6d23b84d5eb9bde0730fb97",
+    "research/structural-reuse-priorities.md": "46d1224a23cf4a6aa71d80ba78f16ddbf819d4e00ccef674ced933c9a6b3e7a0"
+  },
+  "exposed": {
+    "comparison_percent": -1.983352372901892,
+    "coverage": {
+      "explicit": {
+        "edit": {
+          "sat": 3,
+          "unsat": 3
+        },
+        "original": {
+          "sat": 12,
+          "unsat": 12
+        },
+        "signed-permutation": {
+          "sat": 3,
+          "unsat": 3
+        }
+      },
+      "linear": {
+        "edit": {
+          "sat": 3,
+          "unsat": 3
+        },
+        "original": {
+          "sat": 12,
+          "unsat": 12
+        },
+        "signed-permutation": {
+          "sat": 3,
+          "unsat": 3
+        }
+      }
+    },
+    "paired_percent": [
+      -2.502018046621113,
+      -3.5156529534349445,
+      -1.0210796305706427,
+      -0.9224287910936657
+    ],
+    "peak_rss_bytes": {
+      "explicit": 108396544,
+      "linear": 76546048
+    },
+    "states": {
+      "explicit": 58118,
+      "linear": 58118
+    },
+    "totals": {
+      "explicit": {
+        "cold_seconds": 1.4470711559988558,
+        "complete_seconds": 12.73309573950246,
+        "compressed_bytes": {
+          "certificates": 1754222,
+          "combined": 1754249,
+          "discovery": 29
+        },
+        "evidence_bytes": 291,
+        "input_seconds": 0.022563666570931673,
+        "persistence_seconds": 0.5482414793223143,
+        "phases": {
+          "acquisition_seconds": 9.276542301638983,
+          "checking_seconds": 0.6488082907162607,
+          "writing_seconds": 0.06305967550724745
+        },
+        "proof_bytes": 19226027,
+        "warm_seconds": 0.7264113225974143
+      },
+      "linear": {
+        "cold_seconds": 1.2328068955102935,
+        "complete_seconds": 12.480553583009169,
+        "compressed_bytes": {
+          "certificates": 830902,
+          "combined": 830927,
+          "discovery": 29
+        },
+        "evidence_bytes": 291,
+        "input_seconds": 0.02099431212991476,
+        "persistence_seconds": 0.500339531339705,
+        "phases": {
+          "acquisition_seconds": 9.51494089467451,
+          "checking_seconds": 0.5456197794992477,
+          "writing_seconds": 0.038339345483109355
+        },
+        "proof_bytes": 15859412,
+        "warm_seconds": 0.6270970207406208
+      }
+    }
+  },
+  "larger": {
+    "comparison_percent": 0.36638277468197256,
+    "coverage": {
+      "explicit": {
+        "edit": {
+          "sat": 1,
+          "unresolved": 3
+        },
+        "original": {
+          "sat": 3,
+          "unresolved": 5
+        },
+        "signed-permutation": {
+          "sat": 1,
+          "unresolved": 3
+        }
+      },
+      "linear": {
+        "edit": {
+          "sat": 1,
+          "unresolved": 3
+        },
+        "original": {
+          "sat": 3,
+          "unresolved": 5
+        },
+        "signed-permutation": {
+          "sat": 1,
+          "unresolved": 3
+        }
+      }
+    },
+    "paired_percent": [
+      0.36638277468197256
+    ],
+    "peak_rss_bytes": {
+      "explicit": 43188224,
+      "linear": 44646400
+    },
+    "reference_counts": {
+      "portfolio": {
+        "unknown": 16
+      },
+      "z3": {
+        "sat": 8,
+        "unsat": 8
+      }
+    },
+    "states": {
+      "explicit": 236197,
+      "linear": 236197
+    },
+    "totals": {
+      "explicit": {
+        "cold_seconds": 0.055717458948493004,
+        "complete_seconds": 47.66419954225421,
+        "compressed_bytes": {
+          "certificates": 905,
+          "combined": 925,
+          "discovery": 29
+        },
+        "evidence_bytes": 131,
+        "input_seconds": 0.019581125117838383,
+        "persistence_seconds": 0.0005814577452838421,
+        "phases": {
+          "acquisition_seconds": 47.540851664263755,
+          "checking_seconds": 0.010248041246086359,
+          "writing_seconds": 0.004095577634871006
+        },
+        "proof_bytes": 20071,
+        "warm_seconds": 0.032862875144928694
+      },
+      "linear": {
+        "cold_seconds": 0.05591808306053281,
+        "complete_seconds": 47.838832959067076,
+        "compressed_bytes": {
+          "certificates": 901,
+          "combined": 919,
+          "discovery": 29
+        },
+        "evidence_bytes": 131,
+        "input_seconds": 0.017410041764378548,
+        "persistence_seconds": 0.0006042090244591236,
+        "phases": {
+          "acquisition_seconds": 47.719464792404324,
+          "checking_seconds": 0.010152749251574278,
+          "writing_seconds": 0.004444872960448265
+        },
+        "proof_bytes": 19991,
+        "warm_seconds": 0.030603916849941015
+      }
+    },
+    "union_counts": {
+      "sat": 5,
+      "unresolved": 11
+    },
+    "unresolved": [
+      {
+        "clauses": 538,
+        "component_sizes": [
+          125
+        ],
+        "diagnostic": {
+          "best_failed": 3,
+          "expanded": 20000,
+          "initial_failed": 68,
+          "maximum_committed": 120,
+          "node_limit": 20000,
+          "reason": "budget"
+        },
+        "id": "l002",
+        "kind": "original",
+        "reference_answer": false,
+        "variables": 125
+      },
+      {
+        "clauses": 538,
+        "component_sizes": [
+          125
+        ],
+        "diagnostic": {
+          "best_failed": 1,
+          "expanded": 20000,
+          "initial_failed": 86,
+          "maximum_committed": 122,
+          "node_limit": 20000,
+          "reason": "budget"
+        },
+        "id": "l003",
+        "kind": "original",
+        "reference_answer": false,
+        "variables": 125
+      },
+      {
+        "clauses": 645,
+        "component_sizes": [
+          150
+        ],
+        "diagnostic": {
+          "best_failed": 3,
+          "expanded": 20000,
+          "initial_failed": 84,
+          "maximum_committed": 143,
+          "node_limit": 20000,
+          "reason": "budget"
+        },
+        "id": "l004",
+        "kind": "original",
+        "reference_answer": true,
+        "variables": 150
+      },
+      {
+        "clauses": 645,
+        "component_sizes": [
+          150
+        ],
+        "diagnostic": {
+          "best_failed": 4,
+          "expanded": 20000,
+          "initial_failed": 75,
+          "maximum_committed": 144,
+          "node_limit": 20000,
+          "reason": "budget"
+        },
+        "id": "l006",
+        "kind": "original",
+        "reference_answer": false,
+        "variables": 150
+      },
+      {
+        "clauses": 645,
+        "component_sizes": [
+          150
+        ],
+        "diagnostic": {
+          "best_failed": 9,
+          "expanded": 20000,
+          "initial_failed": 90,
+          "maximum_committed": 143,
+          "node_limit": 20000,
+          "reason": "budget"
+        },
+        "id": "l007",
+        "kind": "original",
+        "reference_answer": false,
+        "variables": 150
+      },
+      {
+        "clauses": 538,
+        "component_sizes": [
+          125
+        ],
+        "diagnostic": {
+          "best_failed": 2,
+          "expanded": 20000,
+          "initial_failed": 56,
+          "maximum_committed": 122,
+          "node_limit": 20000,
+          "reason": "budget"
+        },
+        "id": "l010",
+        "kind": "signed-permutation",
+        "reference_answer": false,
+        "variables": 125
+      },
+      {
+        "clauses": 537,
+        "component_sizes": [
+          125
+        ],
+        "diagnostic": {
+          "best_failed": 3,
+          "expanded": 20000,
+          "initial_failed": 68,
+          "maximum_committed": 120,
+          "node_limit": 20000,
+          "reason": "budget"
+        },
+        "id": "l011",
+        "kind": "edit",
+        "reference_answer": false,
+        "variables": 125
+      },
+      {
+        "clauses": 645,
+        "component_sizes": [
+          150
+        ],
+        "diagnostic": {
+          "best_failed": 4,
+          "expanded": 20000,
+          "initial_failed": 70,
+          "maximum_committed": 145,
+          "node_limit": 20000,
+          "reason": "budget"
+        },
+        "id": "l012",
+        "kind": "signed-permutation",
+        "reference_answer": true,
+        "variables": 150
+      },
+      {
+        "clauses": 644,
+        "component_sizes": [
+          150
+        ],
+        "diagnostic": {
+          "best_failed": 3,
+          "expanded": 20000,
+          "initial_failed": 83,
+          "maximum_committed": 146,
+          "node_limit": 20000,
+          "reason": "budget"
+        },
+        "id": "l013",
+        "kind": "edit",
+        "reference_answer": true,
+        "variables": 150
+      },
+      {
+        "clauses": 645,
+        "component_sizes": [
+          150
+        ],
+        "diagnostic": {
+          "best_failed": 5,
+          "expanded": 20000,
+          "initial_failed": 83,
+          "maximum_committed": 144,
+          "node_limit": 20000,
+          "reason": "budget"
+        },
+        "id": "l014",
+        "kind": "signed-permutation",
+        "reference_answer": false,
+        "variables": 150
+      },
+      {
+        "clauses": 644,
+        "component_sizes": [
+          150
+        ],
+        "diagnostic": {
+          "best_failed": 4,
+          "expanded": 20000,
+          "initial_failed": 82,
+          "maximum_committed": 145,
+          "node_limit": 20000,
+          "reason": "budget"
+        },
+        "id": "l015",
+        "kind": "edit",
+        "reference_answer": false,
+        "variables": 150
+      }
+    ]
+  },
+  "limitations": [
+    "Representation comparison on the exposed 36-input panel: identical frozen search, seed, order, cap and result sets. Unit search records the same full proof; candidate packs it afterward. Packing and checking are charged, including simultaneous old/new proof retention. No search novelty or production default change.",
+    "Linear preorder nodes omit explicit context keys. Independent checking reconstructs every context using a partial-assignment undo trail, source-clause unit deductions and complete first-flip branch orders. All expected children and exactly all supplied nodes must be consumed. Packing alone grants no authority.",
+    "Four fresh-process alternating pairs on exposed inputs; one separately denominated pair on eight frozen new 125/150-variable originals plus four signed and four edited controls. Selection and both search/encoding source hashes were frozen before acquisition. The small size-limited sample is not representative, and exact normalized nonoverlap is not all-history semantic novelty.",
+    "Input reads/hashes, preparation, acquisition/internal and explicit checks, conversion, persistence, three compressions, warm and two cold source/proof reloads are timed. No search state survives replay; OS caches are not flushed. Imports/startup, reporting metadata, downloads and independent audits are additional.",
+    "Source publisher bytes are preserved exactly in gzip. Workflow DIMACS is a whitespace-normalized re-emission, checked for parsed equality. Labels and reference models never enter search. Z3 UNSAT remains a trusted reference unless a project certificate independently certifies it.",
+    "Complete evidence can remain exponential. Finite coverage and exact recomposition do not imply efficient recognition, preprocessing or unrestricted expansion. Guarded negative reuse across different contexts/edits remains open."
+  ],
+  "next_coverage_target": "Investigate larger residual l004 and its related SAT controls, and all eight reference-UNSAT residuals; preserve the 20000-context diagnosis before changing policy or allowance.",
+  "next_reuse_target": "Reuse checked negative consequences across contexts and edits with exact guards; source-index transport and component conditioning are candidates. Preorder packing does not yet share logical subproofs.",
+  "supplemental_checks": {
+    "path": "/Users/maier/Documents/code/OracleMachines/experiments/results/cnf-linear-unit-proof/supplemental-checks.json",
+    "sha256": "e7fb2099ff03cec62756ac23ecf65914ce0e12532aa2424aacce14d333ff203c"
+  }
+}

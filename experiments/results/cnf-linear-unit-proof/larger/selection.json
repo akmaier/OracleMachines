@@ -1,0 +1,49 @@
+{
+  "controls": "For the first selected original of each group, append one signed sparse permutation (seed 202611280407 plus group index) and one edit removing the first clause and flipping the first literal in the last nonempty clause. Keep controls separate from originals.",
+  "groups": [
+    {
+      "archive": "uf125-538.tar.gz",
+      "name": "uf125",
+      "publisher_answer": true
+    },
+    {
+      "archive": "uuf125-538.tar.gz",
+      "name": "uuf125",
+      "publisher_answer": false
+    },
+    {
+      "archive": "uf150-645.tar.gz",
+      "name": "uf150",
+      "publisher_answer": true
+    },
+    {
+      "archive": "uuf150-645.tar.gz",
+      "name": "uuf150",
+      "publisher_answer": false
+    }
+  ],
+  "indices": [
+    20,
+    40
+  ],
+  "parent": {
+    "path": "experiments/results/cnf-unit-partition/checkpoint.json",
+    "sha256": "4b4f0b82c555f62245fd7d90af5be2766630176515301381298935db51c45bd0"
+  },
+  "parent_manifest": {
+    "path": "experiments/results/cnf-unit-partition/manifest.json",
+    "sha256": "8a1d68fe272ffe93ebd62518af33edfab00a826f5ac63b4811869db8db1aa55f"
+  },
+  "policy": {
+    "node_limit": 20000,
+    "representation": "explicit or linear preorder proof",
+    "search": "unchanged full-support unit partition"
+  },
+  "policy_files": {
+    "experiments/cnf_linear_unit_proof.py": "9cb5e40ed98f5e90f17d09864b882f53422ef9a8f959ddac60c5ba4983b3a5aa",
+    "experiments/cnf_partition_repair.py": "4597c4b7077366b760ad41476bb2ef0ea3d16b5397a097d7e045f012964dceb0",
+    "experiments/cnf_unit_partition.py": "f10d9aaa3efe0953804f671e619ab4caafb90adc360e836a8df54e9372f64d0a"
+  },
+  "scope": "Four size/truth groups; two zero-based lexicographic member indices per group, frozen before downloading new contents or evaluating. No outcome-guided filtering or tuning. Previously unused relative to the retained external, constructed and 182-case panels by exact normalized equality; not all-history semantic novelty or representative sampling.",
+  "source_index": "https://www.cs.ubc.ca/~hoos/SATLIB/benchm.html"
+}

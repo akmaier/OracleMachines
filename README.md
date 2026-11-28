@@ -28,6 +28,13 @@ classes.
 
 ## Paper
 
+[Certify interacting signed choices](research/conditioned-choice-forests.md):
+on 40 frozen constructed inputs, coverage grows **4 → 20 → 32** from matching
+to forest tables to conditioning at most two demands. The retained nonclique path
+also closes; the 37-case external panel gains no answers. Five difficult demand
+graphs retain cycle rank **21–22** after the best two removals, motivating exact
+separator tables for cyclic groups. All **2,723 tests pass**.
+
 [Separate answer certificates from retained knowledge](research/answer-certificate-projection.md):
 all sixteen reused answers are preserved while replay falls **45.71%**.
 Preparation costs **9.80 seconds**, about five repeated checks to repay;

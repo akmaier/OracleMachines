@@ -1,0 +1,137 @@
+\subsection{Exact signed choices with a conditioned forest of interactions}
+\label{sec:choice-forest}
+
+We return from proof-storage costs to structural recognition. A demand is a
+nonempty source clause of signed choice literals. Demands have pairwise disjoint
+variable supports. Every other normalized clause must be a binary exclusion
+$\neg a\vee\neg b$ between two such choices; no remaining source clause may be
+ignored. Within-demand exclusions are allowed. The demand graph has one vertex
+per demand and an edge for each pair of distinct demands joined by an exclusion.
+A connected component of conflicting choices need not be a clique, and is no
+longer collapsed into one capacity-one resource. This directly addresses the
+six-variable path missed by the conservative matching proposal.
+
+\begin{samepage}
+\begin{proposition}[Conditioned-forest choice certificate]
+Suppose the preceding source description is checked, and deleting a supplied
+set $S$ of at most two demand vertices leaves a forest. Enumerating one selected
+choice for each demand in $S$, followed by exact tree feasibility tables, decides
+satisfiability. A verified feasible branch certifies SAT; UNSAT requires every
+branch to be checked and infeasible. An incomplete prefix with no feasible branch
+has no decision authority.
+\end{proposition}
+\end{samepage}
+\begin{proof}
+In any satisfying Boolean assignment, select one true signed literal per demand.
+Set its other choice literals false. This is consistent because demand supports
+are disjoint. Demands stay satisfied, and an exclusion cannot become false when
+choice values only change from true to false. Hence a satisfying assignment
+exists if and only if a compatible single representative per demand exists.
+The converse follows by assigning each selected literal true and each other
+choice false. Tautology-only variables may be assigned arbitrarily. This is an
+existence equivalence, not equality of the original sets of Boolean models.
+
+Enumerate the Cartesian product of the domains in $S$. Reject a branch whose
+selected choices conflict. Otherwise remove all remaining domain values that
+conflict with a selected choice. Root each residual tree. A value is live at a
+vertex precisely when it survives this restriction and has a compatible live
+value at every child. Induction from the leaves proves this is equivalent to an
+extension to the whole subtree. Different child subtrees have no connecting
+exclusions, so their compatible extensions compose. A branch is feasible exactly
+when every root has a live value; choosing compatible child values constructs
+representatives, then an original-source model. The certificate checker verifies
+both live and omitted values through these local equations and rechecks the
+constructed model against the raw CNF. The branches partition representative
+assignments. Thus any feasible branch suffices for SAT, while complete negative
+coverage is necessary for UNSAT. No conclusion follows from an entirely negative
+proper prefix.
+\end{proof}
+
+For fixed supplied $S$, the number of branches is
+$B=\prod_{i\in S}|D_i|$. With constant-time conflict lookup, tree computation per
+branch costs
+\[
+ O\!\left(1+|S|^2+(|S|+1)\sum_{i\notin S}|D_i|
+       +\sum_{\{i,j\}\in E(G-S)}|D_i||D_j|\right).
+\]
+Checking the explicit source description and building conflict lookups are
+additional polynomial costs. Exhaustively trying all cutsets of size at most
+two is polynomial in the explicit graph size; an unbounded cutset would restore
+an exponential branch factor. The implementation uses greedy demand extraction,
+a total cap of 4,096 cutset candidates across its two proposals, and 50,000
+construction compatibility tests. Verification has its own recorded cost and is
+not hidden inside that cap. A failed proposal is unrecognized, not a negative
+SAT result or a proof that no alternative demand description exists. These are
+standard finite-domain tree and conditioning operations, with source-bound
+certification; no novelty of tree dynamic programming is asserted.
+
+The protocol fixes all 37 old external inputs, the retained nonclique path, and
+40 constructed controls generated after freezing the four scientific source
+files. Controls include sparse signed renamings of paths, blocked paths, cycles,
+two linked triangles, $K_4/K_5$ with tails, ternary edits and random conflict trees.
+No outcome filtering is used. This is a designed structural test, not a
+representative external SAT survey. Matching, forest-only and two-cut routes run
+in two opposite orders, without fallback. Six additional fresh processes replay
+the stored certificates with discovery, cutset search, table construction and
+matching disabled. OS caches are not flushed.
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+Route & Constructed SAT & Constructed UNSAT & Unknown \\
+\midrule
+Matching proposal & 4 & 0 & 36 \\
+Forest tables & 11 & 9 & 20 \\
+Condition at most two demands & 19 & 13 & 8 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The constructed overlap contains four shared answers, 28 two-cut-only answers
+and eight jointly unresolved inputs. The eight are the $K_5$-tail and ternary-edit
+controls. The six-variable path is answered by both new routes, and missed by the
+old proposal. Neither new route answers any of the 37 external cases. Matching
+still supplies one external witness outside the exact forest schema; all earlier
+portfolio witnesses remain valid. Thus this result widens experimental structural
+coverage but adds no external answer or historical portfolio coverage. It does
+not justify replacing the older routes. Four one-cut controls require three
+representative branches each; eight two-cut controls require nine each.
+
+Across all 78 inputs, mean discovery costs are 0.04985, 0.06508 and
+0.09637 seconds for matching, forest and two-cut routes, respectively. Further
+checking costs 0.00093, 0.00540 and 0.01129 seconds; encoding, gzip and writing
+cost 0.00818, 0.00794 and 0.00852 seconds. Process wall times are 0.14753,
+0.17185 and 0.20916 seconds. Compact JSON totals are 3,782, 15,244 and
+40,716 bytes, with gzip totals 3,146, 7,738 and 11,818 bytes. Unknown markers
+are included in storage but authorize no answer. These routes do different
+amounts of decision work; this is not a speedup comparison. At these small
+times, measurement noise and interpreter startup also matter.
+
+Cold worker replay costs 0.00657, 0.01143 and 0.01798 seconds, with process
+wall costs 0.08735, 0.09084 and 0.09592 seconds. The two-cut route peaks at
+40,894,464 bytes during construction and 40,255,488 during replay.
+Independent audits and old acquisition/storage costs are additional. No
+cross-edit table cache is introduced; changed sources must revalidate their
+classification and local equations.
+
+The five retained nonclique external cases remain informative failures of this
+rule, not new unresolved SAT inputs: previous portfolio models are preserved.
+Their proposed demand graphs each have 30 vertices, 60 edges and one connected
+component. A separate independent post-freeze census exhausts all 466 cuts of
+size zero, one or two for each graph. Their minimum remaining cycle ranks after
+two removals are 21, 22, 21, 21 and 21; the reported minimizers remain connected
+on 28 vertices. Cycle rank is $|E|-|V|+c$, not treewidth or a runtime lower bound.
+This excludes two-vertex forest cuts for those fixed descriptions. It motivates
+checking small separator relations between groups that retain internal cycles,
+with edge coverage, running intersection, width and costs made explicit.
+Alternative descriptions, larger separators and unclassified constraints remain
+open, as do preprocessing and efficient unrestricted SAT expansion.
+
+All 2,723 full and fifteen focused tests pass. Independent audits reproduce
+3,880 small CNFs and 12,288 branch prefixes across all 4,096 cross-conflict subsets
+of three binary demands, with alternating within-demand exclusions. Boolean and
+representative truth are enumerated independently. Source edits, corrupt live
+and dead tables, malformed schemas and stopped construction are checked.
+Validation preserves 256 prior manifests, 85,223 artifact entries, 1,388 earlier
+scientific sources, all 93 earlier proof blocks and three publication snapshots.
+The four frozen scientific files and the proposition above extend that record.

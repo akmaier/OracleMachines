@@ -4,7 +4,42 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-## Latest evidence: cheaper current-answer checking
+## Latest evidence: exact choices through cyclic interfaces
+
+[Conditioned choice forests](conditioned-choice-forests.md) add an exact signed-choice
+route that preserves individual conflicts instead of collapsing connected
+nonclique groups into one resource. One representative per demand suffices for
+satisfiability; after conditioning at most two demands, exact tree tables compose
+the remaining choices. A positive branch certifies SAT, while UNSAT requires all
+branches. Incomplete prefixes remain unknown.
+
+On **40 frozen constructed inputs**, the old matching proposal answers **4/40**,
+forest-only tables **20/40**, and conditioning up to two demands **32/40**
+(**19 SAT / 13 UNSAT**). There are **28 cutset-only**, **4 shared** and **8 jointly
+unresolved** constructed cases. The retained six-variable nonclique path also
+closes. These are designed controls, not representative external coverage.
+On **all 37 earlier external cases**, the new route adds **no answers**; the old
+proposal's one answer and all earlier portfolio results remain intact.
+
+The five retained nonclique external cases have 30 demands and 60 links each.
+Exhausting every cut of size at most two still leaves minimum cycle rank **21–22**.
+The gap is substantial cyclic interaction, not a missing one/two-demand cut.
+Next: check complete separator relations for small groups that retain internal
+cycles, with certified edge coverage/running intersection and explicit table
+width. Do not assume small separators or raise budgets without measuring them.
+
+All **2,723 full and 15 focused tests pass**. Independent audits reproduce
+**3,880 small CNFs** and **12,288 prefixes across 4,096 conflict patterns**.
+Six process-cold replays disable constructors. Validation preserves **256 prior
+manifests, 85,223 artifact entries, 1,388 scientific sources and 93 earlier proof
+blocks**. Resume `experiments/results/cnf-choice-forest/checkpoint.json`, key
+`choice_forest`. The new route takes **0.09637 s discovery + 0.01129 s extra
+checking** on the complete 78-input panel; cold worker replay takes **0.01798 s**.
+Persistence, process startup, memory and prior acquisition are reported separately.
+This is broader certified structure in the experiment, not an unrestricted SAT
+solver or a replacement for the previous portfolio.
+
+## Previous evidence: cheaper current-answer checking
 
 [Answer-certificate projection](answer-certificate-projection.md) separates
 current-answer checking from the complete retained knowledge archive. All sixteen

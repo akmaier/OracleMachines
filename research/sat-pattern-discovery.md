@@ -37,6 +37,14 @@ seek compact supports or a justified admission/dispatch policy before raising
 budgets again. Broader distributions, alternative derivations after deleted
 premises, structural recognition and unrestricted expansion remain open.
 
+The [28 November external review](pequalnp-watch.md#28-november-2026-proof-compaction-reuse-guards-and-bounded-obstructions)
+adds a checked counterexample separating SAT-preserving transformations from
+reusable consequences, plus a two-sample obstruction proof for monotone sample
+fitting (6,654 finite specifications checked). These restrict proposed reuse
+extensions; they do not classify additional arbitrary CNFs. The next measured
+step is a smaller answer certificate with the complete knowledge archive
+preserved, keeping construction, persistence and cold replay costs explicit.
+
 ## Previous evidence: frozen expansion budgets and reuse value
 
 [Frozen expansion budgets](reuse-expansion-budget.md) compare the unchanged

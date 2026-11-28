@@ -1,0 +1,196 @@
+{
+  "date": "2026-11-28",
+  "external_benchmarks_reproduced": false,
+  "external_code_executed": false,
+  "monotone_obstructions": {
+    "infeasible": 4671,
+    "parameters": {
+      "and_or_gate_budget": null,
+      "constants_allowed": [
+        0,
+        1
+      ],
+      "max_variables": 3,
+      "not_gates": 0,
+      "taps": 1
+    },
+    "rows": [
+      {
+        "feasible": 3,
+        "infeasible": 0,
+        "input_masks": 1,
+        "monotone_functions": 2,
+        "specifications": 3,
+        "variables": 0
+      },
+      {
+        "feasible": 8,
+        "infeasible": 1,
+        "input_masks": 2,
+        "monotone_functions": 3,
+        "specifications": 9,
+        "variables": 1
+      },
+      {
+        "feasible": 52,
+        "infeasible": 29,
+        "input_masks": 4,
+        "monotone_functions": 6,
+        "specifications": 81,
+        "variables": 2
+      },
+      {
+        "feasible": 1920,
+        "infeasible": 4641,
+        "input_masks": 8,
+        "monotone_functions": 20,
+        "specifications": 6561,
+        "variables": 3
+      }
+    ],
+    "scope": "Only the t=1,r=0 special case; no Lean build or general circuit-bound verification.",
+    "sharp_example": {
+      "after_deleting_mask_0": "constant 0",
+      "after_deleting_mask_1": "constant 1",
+      "masks": [
+        0,
+        1
+      ],
+      "required_outputs": [
+        1,
+        0
+      ],
+      "variables": 1
+    },
+    "specifications": 6654
+  },
+  "production_solver_changed": false,
+  "research_checkpoint": "7d3fad8d749daa3423a141c74dc362efdc02905c",
+  "resolution_checker_sha256": "1d3e6a90c01f6d599f8bd46e72e915388e71a64149e91104c61ec40b295e8284",
+  "reuse_guard": {
+    "cases": {
+      "edited_target": {
+        "cnf": [
+          [
+            1,
+            2
+          ],
+          [
+            -1
+          ]
+        ],
+        "models_x_y": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "source": {
+        "cnf": [
+          [
+            1,
+            2
+          ]
+        ],
+        "models_x_y": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "source_with_added_clause": {
+        "cnf": [
+          [
+            1,
+            2
+          ],
+          [
+            1
+          ]
+        ],
+        "models_x_y": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "target_with_unsafe_reuse": {
+        "cnf": [
+          [
+            1,
+            2
+          ],
+          [
+            -1
+          ],
+          [
+            1
+          ]
+        ],
+        "models_x_y": []
+      }
+    },
+    "entailed_by_source": false,
+    "forged_resolution_rejection": "Changed learned clause",
+    "safe_control": {
+      "checked_strengthenings": 512,
+      "entailed_clause": [
+        2
+      ],
+      "proof": {
+        "conclusion": null,
+        "derivations": [
+          [
+            0,
+            [
+              [
+                1,
+                1
+              ]
+            ],
+            [
+              2
+            ]
+          ]
+        ],
+        "format": "cnf-resolution-learning-v1",
+        "kind": "unknown",
+        "witness": null
+      },
+      "source": [
+        [
+          -1,
+          2
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    "scope": "Counterexample to unguarded transport of a SAT-preserving addition; not a bug in either implementation.",
+    "source_rat_on_x": "vacuous: no source clause contains NOT x",
+    "target_rat_on_x": "fails: the resolvent with NOT x is empty; target is SAT"
+  },
+  "script_sha256": "50da15f3c705cdf107d43bf126bd14fdcaf2bbf9744f99e0986931517f495d51",
+  "sources": [
+    "https://arxiv.org/abs/2508.09851v1",
+    "https://pequalnp.com/lemma#L-lib-1313",
+    "https://github.com/JLDC/pequalnp-proofs/blob/bde913e54059b1353b142b62c9a3e618e9d2280c/lean/PEqualNP/Outside/L_lib_1313.lean"
+  ]
+}

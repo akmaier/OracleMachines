@@ -6,6 +6,150 @@ scheduled around noon Europe/Berlin. The hourly OracleMachines investigation
 remains guided by our own gap analysis. External results are leads, not imported
 axioms or a replacement research agenda.
 
+## 28 November 2026: proof compaction, reuse guards and bounded obstructions
+
+Compared today's review with checkpoint `7d3fad8d` and the
+[current gap record](structural-reuse-priorities.md). Frozen external transfer
+checks **16/16** reused targets versus **9/16** fresh targets, but mean measured
+target cost is **116.00 s** versus **62.71 s**, with **79.67 s** of parent
+acquisition additional. The immediate opportunity remains cheaper retained
+proofs and replay while preserving the coverage gain. The papers below are new
+to this watch, not necessarily newly published.
+
+The authenticated alphaXiv MCP searches covered SAT structural reuse/learned
+clauses and P=NP/SAT, prioritizing recency. Read primary PDF excerpts, live
+discussions and the pequalnp board, and pinned the new Lean source through
+GitHub. This is a targeted review, not a complete agent census. External code
+and benchmarks were not run; the independent finite checks below are ours.
+
+### Three leads for the current cost gap
+
+1. **Avoid rediscovering proof information during replay.** Baek, Carneiro and
+   Heule, [A Flexible Proof Format for SAT Solver-Elaborator Communication](https://www.alphaxiv.org/abs/2109.09665),
+   [primary v3](https://arxiv.org/pdf/2109.09665v3), 15 April 2022, describe FRAT's
+   optional propagation hints, stable clause identifiers, finalization records
+   and forward/backward parsing. These support streamed elaboration and
+   dependency selection. Their reported improvements concern a DRAT comparison,
+   not our solver. Our resolution records already contain explicit parents and
+   pivots, so merely adding hints would duplicate existing information.
+
+   **Our next experiment:** separate the certificate needed for the current
+   answer from the complete retained knowledge archive. A SAT answer can be
+   checked from its model; an UNSAT resolution certificate can retain only
+   ancestors of its empty clause, with checked index remapping. Keep the complete
+   archive for future edits, and charge construction, extra storage, loading and
+   checking. A smaller answer certificate does not make that archive smaller.
+
+2. **Preserve the semantics of reusable proof steps.** Rebola-Pardo,
+   [Short proofs without interference](https://www.alphaxiv.org/abs/2508.09851),
+   [primary v1](https://arxiv.org/pdf/2508.09851v1), 13 August 2025, explains why
+   RAT and related satisfiability-preserving steps can depend on the entire
+   current formula. Strengthening it can invalidate a step. Theorems 7–8 give
+   composition and refutation translation in a richer dynamic logic with
+   program annotations. They do not make every unannotated added clause an
+   original consequence. We inspected the definitions and theorem statements,
+   not all proofs or a practical implementation.
+
+   **Independent counterexample:** start with `F = (x OR y)` and add `C = x`.
+   This preserves satisfiability and is vacuously RAT on `x`, since `F` has no
+   clause containing `NOT x`; it is not entailed. The edit `F AND NOT x` is SAT,
+   but carrying `C` into it makes it UNSAT. Exhaustive truth tables give model
+   counts **3, 2, 1, 0** for these four formulas. The existing OracleMachines
+   checker rejects a forged resolution derivation of `x`. A valid control
+   deriving `y` from `(NOT x OR y) AND (x OR y)` preserves the model set under
+   all **512** two-variable CNF strengthenings, including the empty clause.
+   This is a guard against a proposed unsafe extension, not a discovered bug.
+
+3. **Freeze specialization before evaluating transfer.** Green, Le Goues and
+   Brown, [The Case for Automated Hyperspecialization: Evidence from SAT](https://www.alphaxiv.org/abs/2609.14836),
+   [primary v1](https://arxiv.org/pdf/2609.14836v1), 13 September 2026, use
+   workload-specific coding agents, 189 families and an 80/20 split within
+   each family. Only training feedback is exposed to the agents. SAT models
+   and UNSAT proofs receive independent checking; results with checking costs
+   are reported separately. Checking is polynomial in input **plus output
+   proof size**, which need not be polynomial in input alone. The generated
+   specialist gallery explicitly permits descriptive inaccuracies. We did not
+   reproduce their performance claims; no discussion was visible on the page.
+
+   **Our follow-up:** develop admission/dispatch on the exposed panel, freeze it,
+   then use a new holdout grouped by parent so sibling edits cannot cross the
+   split. Compare fresh search and all-retained reuse, include SAT parents,
+   and charge tuning, acquisition, recognition, proof generation and replay.
+   Entirely unseen formula distributions need a further test; within-family
+   validation does not establish that transfer. Invalid or unfinished runs
+   remain unknown rather than disappearing from coverage counts.
+
+### New pequalnp result and a checked special case
+
+The board highlights [L-lib-1313](https://pequalnp.com/lemma#L-lib-1313), attributed
+to outside contributor `JLDC`, marked checked at 10:19 UTC on 28 November. For
+`t >= 1` output taps and at most `r` NOT gates, its displayed statement requires
+distinct sampled input masks and nonempty allowed-output lists closed under
+union and intersection. Infeasibility has a chain obstruction of at most
+`(t+1)*2^r` samples, with a matching deletion-minimal construction. Constants
+are allowed and circuit wires must be valid. **AND/OR gate count is unbounded**;
+the bound is exponential in `r` and is not an arbitrary-CNF small-core theorem.
+
+The merged [PR 54707](https://github.com/open-goat/pequalnp-proofs/pull/54707)
+and [checker run](https://github.com/open-goat/pequalnp-proofs/actions/runs/46133527670)
+link to [the source at revision bde913e5](https://github.com/JLDC/pequalnp-proofs/blob/bde913e54059b1353b142b62c9a3e618e9d2280c/lean/PEqualNP/Outside/L_lib_1313.lean).
+Inspected the opening definitions and final statement/proof, including lines
+2540–2638; Git blob is `d293a795964a01106351736377fc02e794937548`. We did not compile
+Lean or audit transitive definitions. The badge alone is not our verification.
+
+**Independent special-case proof (`t=1, r=0`).** With AND/OR and constants, every
+output is monotone. Thus two comparable masks `a subset b` requiring respectively
+`1` and `0` are an obstruction. Conversely, if no such pair exists, set the
+output at `b` to `1` exactly when some sample forced to `1` is a subset of `b`.
+This monotone function satisfies every sample. It has a monotone DNF using one
+conjunction per forced-one sample, with constants for the empty cases. The
+two-sample bound is sharp: on one variable, require `1` at the empty mask and
+`0` at the full mask; deleting either requirement permits a constant function.
+For explicitly listed samples, finding a violating pair costs at most quadratic
+many subset comparisons. This concerns monotone sample fitting, not recognition
+of such a representation in an arbitrary CNF.
+
+Independent enumeration checks **6,654** specifications on zero through three
+variables against **2, 3, 6 and 20** monotone truth tables respectively. Every
+one of the **4,671** infeasible specifications has the claimed two-sample
+obstruction; all **1,983** feasible ones admit the explicit upward-closure
+construction. Missing samples are encoded as allowing either output. This
+verifies only the stated special case, not the external theorem for multiple
+taps or NOT gates. The obstruction remains reusable only while its two exact
+requirements and the monotone circuit restriction remain valid.
+
+The [standalone audit](external-watch/2026-11-28-reuse-guards.py) reproduces
+[the deterministic evidence](external-watch/2026-11-28-reuse-guards.json), including
+the reuse counterexample and checker control. Run it from any directory:
+
+```sh
+python3 research/external-watch/2026-11-28-reuse-guards.py
+```
+
+The JSON reproduced byte-for-byte in fresh processes, including Python `-O`
+from a different working directory. Its script/checker hashes and base checkpoint
+were checked, and all previous watch and gap-record lines were preserved. This
+checks the standalone audit; the unchanged solver's full suite was not rerun.
+
+### Decision and limits
+
+Prioritize a controlled **answer-certificate versus knowledge-archive** comparison
+on the existing fixed traces, then a separately frozen admission policy if
+needed. Restrict ancestor trimming to checked logical consequences; richer
+SAT-preserving transformations need their contexts and model-reconstruction
+maps. The monotone obstruction is a candidate representation-specific summary,
+not grounds for assigning arbitrary CNFs to a new efficient class.
+
+The live pequalnp paper listing still displayed Note 1 and warned that its data
+feed was behind. This cannot establish absence of newer work. The targeted P=NP
+search established no unrestricted result that we can adopt. The
+[K-record paper](https://www.alphaxiv.org/abs/2611.knowledge-solving-complexity-checking)
+still resolves to **v3, 25 November**, with the same critique and author reply;
+the [existing review](alphaxiv-knowledge-record-review.md) remains applicable.
+No external claim changes current coverage measurements, production defaults
+or manuscript theorems. No agent was contacted and no comment or publication
+was made during this watch.
+
 ## 27 November 2026: reusable components, boundary reconstruction and local proofs
 
 Compared the sources below with research checkpoint `7e4b47cb` and the

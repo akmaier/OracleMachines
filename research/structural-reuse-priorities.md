@@ -12,7 +12,42 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: fourteen transfer gaps and negative evidence
+## Current investigation: unit closure and fresh-transfer obligations
+
+[Unit propagation inside repair partitions](unit-closed-repair-partitions.md)
+closes **all fourteen retained combined-portfolio misses** on the exposed panel:
+**22/36 → 36/36**, with 18 checked SAT models and 18 checked global UNSAT proofs.
+The repair/export kernel itself grows **18/36 → 36/36**. All 24 originals and
+12 related controls finish below 20,000 entered contexts; the largest uses 7,687.
+This is retuning on known inputs, not new transfer or a new tractable class.
+
+Ordinary unit propagation now uses both flip and keep commitments. One occurrence
+index, partial-assignment counts and full-proposal counts share an undo trail.
+Source-clause unit deductions compose exactly with disjoint first-flip branches.
+The complete root proof is recorded during acquisition and independently checked;
+partial searches remain unknown. Production defaults stay unchanged.
+
+Panel contexts fall **446,191 → 58,118**, but complete measured cost rises
+**11.80695 → 12.69544 seconds (+7.53%)**, with all four paired signs slower.
+Combined gzip grows **739,687 → 1,754,206 bytes** and two cold checks
+**0.78142 → 1.44612 seconds**. Eighteen additional answers include twelve extra
+global refutations; this is a coverage gain, not an equal-work speedup.
+
+All **2,572 full and 20 focused tests pass**. Reproduced truth tables check 8,882
+queries, including all two-variable CNFs, bounded three-variable CNFs and 128
+fresh sparse signed edited sources. Validation preserves 247 prior manifests,
+83,273 artifact entries, 1,346 scientific sources and 86 old proofs; one new
+composition proof is added. Older external 37/37, constructed 32/32 and synthetic
+182/182 unions remain separate. Resume
+`experiments/results/cnf-unit-partition/checkpoint.json`, key `unit_partition`.
+
+**Largest remaining gaps:** new frozen, larger external transfer; smaller and
+cheaper negative proofs with guarded reuse across contexts/edits; and efficient
+recognition, source-dependent preprocessing and unrestricted expansion. This
+finite completion neither proves low interaction width nor efficient SAT for
+all classes.
+
+## Previous investigation: fourteen transfer gaps and negative evidence
 
 [Frozen external transfer and root exclusions](boundary-transfer-and-root-exclusions.md)
 expose the limit of the preceding constructed-panel success. On **24 new SATLIB

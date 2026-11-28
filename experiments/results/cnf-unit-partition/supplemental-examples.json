@@ -1,0 +1,77 @@
+{
+  "keep_and_flip": {
+    "counts": {
+      "input_literals": 4,
+      "unit_agenda_scan_candidates": 5,
+      "unit_agenda_selections": 3,
+      "unit_assignment_occurrences": 4,
+      "unit_clause_literal_charge": 3,
+      "unit_conflicts": 1,
+      "unit_forced_flips": 1,
+      "unit_forced_keeps": 1,
+      "unit_index_occurrences": 4,
+      "unit_states": 1,
+      "unit_undo_occurrences": 4
+    },
+    "result": {
+      "diagnostic": {
+        "best_failed": 1,
+        "expanded": 1,
+        "initial_failed": 1,
+        "maximum_committed": 2,
+        "node_limit": 20000,
+        "reason": "exhausted"
+      },
+      "exclusion": {
+        "format": "cnf-unit-closed-partition-v1",
+        "nodes": {
+          "0:0": {
+            "blocked": 2,
+            "units": [
+              0,
+              1
+            ]
+          }
+        },
+        "seed": {
+          "format": "cnf-choice-witness-v1",
+          "names": [
+            1,
+            2
+          ],
+          "values": [
+            true,
+            false
+          ]
+        }
+      },
+      "witness": null
+    },
+    "seed": {
+      "format": "cnf-choice-witness-v1",
+      "names": [
+        1,
+        2
+      ],
+      "values": [
+        true,
+        false
+      ]
+    },
+    "source": [
+      [
+        1
+      ],
+      [
+        -1,
+        2
+      ],
+      [
+        -2
+      ]
+    ]
+  },
+  "ordering_regression": null,
+  "scope": "Illustration and deliberately searched counterexample, not held-out coverage. Ordering comparison uses the prior full-support partition kernel, not the matched boundary/export baseline.",
+  "searched": 1000
+}

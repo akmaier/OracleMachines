@@ -17786,6 +17786,137 @@ Efficient recognition, source-dependent preprocessing, compact certificates and
 unrestricted SAT expansion remain open.  Neither finite coverage nor an exact
 conditioning description establishes an efficient solution of every CNF class.
 
+\subsection{Unit propagation inside disjoint repair partitions}
+\label{sec:unit-partition}
+
+Unit propagation under both flip and keep commitments closes the fourteen
+combined-portfolio misses retained in Section~\ref{sec:boundary-transfer}.
+The new experimental kernel certifies eighteen SAT and eighteen UNSAT inputs,
+completing the exposed 24 originals and twelve related controls.  The preceding
+repair/export kernel certified twelve SAT and six UNSAT; its union with the older
+portfolio certified 22/36.  This is development on already observed inputs, not
+fresh external transfer.  The change implements ordinary unit propagation and
+exhaustive DPLL-style search inside the existing first-flip decomposition; it is
+not a new tractability theorem or a production-default change.
+
+The important distinction is between a full proposal and its committed partial
+assignment.  An uncommitted variable still has its seed value in the proposal.
+A clause currently satisfied only by such a variable can force that value to be
+kept.  Looking only for false proposal clauses misses this implication.  The
+new search recognizes unit clauses using all fixed flips and keeps, recording
+the source clause for each forced value.  A clause with no free variable and no
+fixed true literal closes the context.  A satisfying complete proposal is
+checked directly against the source.
+
+\begin{proposition}[Unit closure and exact first-flip recomposition]
+Fix a valid finite CNF, a complete seed assignment, and disjoint sets $M,K$ of
+variables committed respectively opposite to and equal to their seed values.
+Iterated source-clause unit deductions preserve exactly the satisfying
+assignments consistent with this context.  After these deductions, a conflict
+excludes the context; otherwise a clause false under the resulting full proposal
+admits an exact disjoint first-flip partition over its uncommitted variables.
+A complete finite root proof composed of these deductions, partitions and
+conflicts certifies global unsatisfiability.
+\end{proposition}
+\begin{proof}
+If a clause has no committed true literal and exactly one uncommitted literal,
+every satisfying extension must make that literal true.  Fixing its variable
+therefore removes no satisfying extension.  This applies whether its value is a
+flip or a keep.  Repeating the argument proves preservation through unit closure.
+With no uncommitted literal and no committed true literal, the clause has no
+satisfying extension, proving a conflict.
+
+Otherwise let $v_1,\ldots,v_k$ order the available variables of a clause false
+under the current full proposal.  Every satisfying extension must change at
+least one of these variables from its seed value.  Its first such variable
+$v_j$ identifies exactly one child: keep $v_1,\ldots,v_{j-1}$ and flip $v_j$.
+Conversely each child respects the parent commitments; filtering its extensions
+by the original CNF gives exactly the corresponding part of the parent's model
+set.  These parts are disjoint and cover that set.  Every edge adds a commitment,
+so the decomposition is acyclic.  Applying the preservation and partition
+identities from conflict leaves to the empty-commitment root proves that its
+model set is empty.  An incomplete tree cannot justify this last step.
+\end{proof}
+
+One source occurrence index, full-proposal satisfaction counts, free-variable
+counts and counts of committed true literals survive across search contexts.
+Assignment and undo update incident clauses; an explicit stack avoids recursive
+search depth.  Unit selection, literal scans, assignment copies and restoration
+are charged.  A recorded root proof contains each unit clause index, conflict
+clause, split order and all children.  The independent checker reconstructs these
+obligations from the source without invoking search or trusting its mutable
+counts.  Recording during acquisition avoids the second traversal previously
+needed to recover root refutations.  Interrupted searches still return unknown.
+Both search and complete proof size can remain exponential.
+
+The comparison freezes this candidate against the unchanged boundary policy
+plus its preserved root exporter.  Both use the existing proposer and gain
+ordering and allow 20,000 entered contexts per source, with different work per
+context.  Labels, descriptions and reference models stay outside discovery.
+Four fresh-process pairs alternate mode order.  Timing includes input
+JSON/DIMACS reads and hashes, proposal and index preparation, search, internal
+and explicit checks, model and sidecar writes, three compressions, warm replay
+and two cold source/proof reloads.  No search state survives replay; OS caches
+are not flushed.  Imports/startup, reporting metadata, independent audits and
+historical append-only storage are additional.
+
+Baseline certifies eight SAT and four UNSAT originals, plus two SAT and one
+UNSAT in each six-input control group.  The candidate certifies twelve SAT and
+twelve UNSAT originals, plus three SAT and three UNSAT in each control group.
+All eighteen previous kernel answers are retained.  Its six new SAT and twelve
+new UNSAT answers include four negatives already certified by the older
+portfolio.  Thus the combined union gains exactly fourteen answers, six SAT and
+eight UNSAT, and reaches 36/36.  All eighteen negatives now have project-checked
+root refutations; the earlier trusted Z3 negative reference was insufficient for
+that authority.  The largest candidate run uses 7,687 contexts.  Old external
+37/37, constructed 32/32 and synthetic 182/182 unions remain separate.
+
+Panel contexts fall from 446,191 to 58,118.  The new search performs 547,679
+forced keeps and 446,288 forced flips, retaining 42,333 contexts in its eighteen
+root refutations.  Mean acquisition including internal checks falls from
+9.97076 to 9.24028\,s, but mean complete time rises from 11.80695 to
+12.69544\,s, or $7.53\%$.  Paired increases are $9.28\%$, $4.79\%$, $8.94\%$
+and $7.12\%$.  Explicit checks rise from 0.34238 to 0.64448\,s, warm replay
+from 0.38365 to 0.72917\,s and two cold checks from 0.78142 to 1.44612\,s.
+These are different completed workloads: eighteen extra answers include twelve
+additional global refutations.  This is a coverage improvement, not a complete
+workflow speedup or a modern-solver comparison.
+
+Model/refutation JSON grows from 2,713,364 to 19,226,099 bytes, while discovery
+sidecars fall from 5,510,680 to 291 bytes.  Combined gzip grows from 739,687 to
+1,754,206 bytes and maximum observed RSS from 89,489,408 to 108,036,096 bytes.
+The added comparison envelope explains the baseline byte difference from the
+preceding single-export measurement.  Shared incident-clause state reduces
+search contexts but leaves substantial unit work, proof storage and replay.
+Full support is still searched; completion does not certify small separators,
+minimum interaction width or an efficient structural class.
+
+All 2,572 full and twenty focused tests pass.  A reproduced truth-table audit
+checks 8,882 queries: 6,173 SAT and 2,709 UNSAT.  It covers all 512 canonical
+two-variable CNFs with every seed, all 3,304 three-variable CNFs with at most
+three distinct clauses with all-false/all-true seeds, and 128 fresh sparse signed
+edited sources with two seeds.  All 836 one-context interruptions remain unknown.
+Forty-nine eligible SAT witnesses survive a satisfied addition and fail after a
+contradictory addition.  The prior 32 constructed inputs also yield checked
+models in a separate audit.  Tests exercise empty and tautological sources,
+duplicates, sparse names, undo restoration, a 1,500-variable implication
+contradiction, missing children, invalid units, changed sources and malformed
+masks.  Checkers run with discovery disabled.
+
+Validation reproduces all eight workflows, counters and replay checks, exactly
+reproduces the frozen baseline exporter, rechecks the earlier external union,
+and preserves 247 prior manifests, 83,273 artifact entries, 1,346 scientific
+sources and all 86 preceding proof blocks.  The five new scientific files bring
+the source ledger to 1,351.  The initial development probe and its exact source
+bytes are retained separately from the frozen final implementation.
+
+The largest next coverage obligation is new frozen, larger external transfer
+after this policy change.  The largest measured reuse gap is smaller and cheaper
+negative evidence, with sound guards for related contexts and source edits.
+Efficient recognition, source-dependent preprocessing and unrestricted SAT
+expansion remain open.  Exact recomposition and finite panel completion do not
+supply a polynomial solution of all CNFs.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

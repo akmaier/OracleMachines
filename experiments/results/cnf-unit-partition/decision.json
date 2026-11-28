@@ -1,0 +1,71 @@
+{
+  "comparison_percent": 7.525085147481159,
+  "coverage": {
+    "baseline": {
+      "edit": {
+        "sat": 2,
+        "unresolved": 3,
+        "unsat": 1
+      },
+      "original": {
+        "sat": 8,
+        "unresolved": 12,
+        "unsat": 4
+      },
+      "signed-permutation": {
+        "sat": 2,
+        "unresolved": 3,
+        "unsat": 1
+      }
+    },
+    "propagated": {
+      "edit": {
+        "sat": 3,
+        "unsat": 3
+      },
+      "original": {
+        "sat": 12,
+        "unsat": 12
+      },
+      "signed-permutation": {
+        "sat": 3,
+        "unsat": 3
+      }
+    }
+  },
+  "decision": "Retain exact unit closure under flip and keep commitments: all fourteen retained union misses close, reaching 36/36 exposed inputs. Total cost rises 7.53% with larger root refutations; no complete-workflow speedup or new transfer claim.",
+  "documents": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "4ea3053e8d5726616c85946910445d06d23d84833027e1633561d9c83a2534e6",
+    "research/implementation-gaps.md": "759ac35d31bd5d72b21b0b89c872d35bb5758bf9baa453db3c138c4324d9a812",
+    "research/sat-pattern-discovery.md": "6f398e236f67481b65033f64db0ddc85e6de844de6de6d8ba5cdc23eb7e6d94d",
+    "research/structural-reuse-priorities.md": "b138d8a2bdbe34c30316eb0d233fa170b4d15ced5217672ea91a00c01de7cef5",
+    "research/unit-closed-repair-partitions.md": "a5dce4b7970cd79e436e7c5083f1d3aeeba06e40beb6b5245ac2234063696ff9"
+  },
+  "limitations": [
+    "Development follow-up on the already exposed 24 external originals and 12 controls. No new transfer or representative generalization claim. Parent labels and reference models stay outside discovery.",
+    "Baseline is the unchanged boundary policy plus its preserved full-root recording replay. Candidate propagates source unit clauses under both flip and keep commitments before disjoint first-flip branching, with the same proposer and gain tie-break rule. Both charge at most 20000 entered contexts per source, but contexts have different work.",
+    "Candidate shares occurrence lists, fixed-true counts, free-variable counts and full-proposal satisfaction through an iterative undo trail. Unit closure may force keeping a seed value, not merely flipping a currently false clause. This is standard unit propagation and exhaustive DPLL-style search, not a new tractability theorem.",
+    "A complete source-bound unit/branch refutation is recorded during search and checked independently. SAT needs a complete original-source witness. Interrupted searches remain unknown. Recording, unit scans, queue selection and restoration cost are explicit; proof size and unrestricted expansion can remain exponential.",
+    "All source JSON/DIMACS reads, hashes, proposal/index construction, discovery/internal and explicit checks, proof/evidence writes and three compressions, warm and two cold reload/checks are timed. No search state survives replay; OS caches are not flushed. Imports, reporting metadata and independent audits are additional.",
+    "Baseline conditional evidence remains fully persisted and replayed. Candidate has no conditional discovery sidecar beyond its root certificate. Complete workflow costs therefore include their different proof obligations. There is no modern solver speedup ratio or equal completed-work assumption.",
+    "All old artifacts, scientific sources, prior coverage unions and counterexamples remain unchanged. Production defaults are unchanged. Fresh transfer after the policy change and unrestricted recognition/preprocessing/expansion obligations remain open."
+  ],
+  "next_cost_target": "Reduce unit-trace storage and replay, and investigate guarded negative reuse across contexts and edits without weakening complete-root or source-checking obligations.",
+  "next_coverage_target": "Freeze new larger external sources after the policy change; keep modern-solver reference work and related controls separately denominated.",
+  "paired_percent": [
+    9.278879062665624,
+    4.791762187622806,
+    8.9437600759952,
+    7.117981036519572
+  ],
+  "prior_union_gains": 14,
+  "supplemental_checks": {
+    "path": "/Users/maier/Documents/code/OracleMachines/experiments/results/cnf-unit-partition/supplemental-checks.json",
+    "sha256": "eaf47db3f8e28c2da022bc4775d8c407ac2bfe986a417b1af3d31223eecb4365"
+  },
+  "union_coverage": {
+    "sat": 18,
+    "unresolved": 0,
+    "unsat": 18
+  }
+}

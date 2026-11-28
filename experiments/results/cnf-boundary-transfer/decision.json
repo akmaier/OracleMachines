@@ -1,0 +1,72 @@
+{
+  "comparison_percent": -0.9218643102083868,
+  "coverage": {
+    "baseline": {
+      "edit": {
+        "sat": 2,
+        "unresolved": 4
+      },
+      "original": {
+        "sat": 8,
+        "unresolved": 16
+      },
+      "signed-permutation": {
+        "sat": 2,
+        "unresolved": 4
+      }
+    },
+    "boundary": {
+      "edit": {
+        "sat": 2,
+        "unresolved": 4
+      },
+      "original": {
+        "sat": 8,
+        "unresolved": 16
+      },
+      "signed-permutation": {
+        "sat": 2,
+        "unresolved": 4
+      }
+    }
+  },
+  "decision": "Retain negative transfer evidence and the six independently checked exported root refutations. No SAT coverage gain or reliable matched speedup on this sample; storage and replay grow sharply. The combined portfolio union remains 22/36, with fourteen explicit residual gaps.",
+  "documents": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "e83e49036f12e9f10ed7e19623f4ede8aa99697ba2036bef92a7f8752ce00b17",
+    "research/boundary-transfer-and-root-exclusions.md": "6bc7d66da264542b9a4e73016ba3644cacf383c93669c76cb7fbac143d0122f9",
+    "research/implementation-gaps.md": "26a616a0820b43e8aaf30e31930bcb909d7e4b0df4b2386c640d30ff2af2d702",
+    "research/sat-pattern-discovery.md": "af7d09b816bb9f44779a69678ab15674cf315093012f08bbdad41185da470442",
+    "research/structural-reuse-priorities.md": "6987921d33b3cfec7222b9face1e16f8df8df3dec632a63f4cd32ea068b032f1"
+  },
+  "export_coverage": {
+    "sat": 12,
+    "unknown": 18,
+    "unsat": 6
+  },
+  "limitations": [
+    "Frozen policy transfer to 24 previously unused SATLIB originals in six size/truth groups, plus six signed permutations and six edits. Selection indices and controls were frozen before acquiring new contents. This is size-limited nonrepresentative sampling, not a competition or all-history novelty claim.",
+    "No tuning or new solving algorithm. Compare unchanged full 20000-state disjoint traversal with the frozen 10000-state prefix plus proof-guided local repair, sharing 20000 total states and at most eight rounds. Publisher labels, file names and truth results never enter discovery.",
+    "Repair kernels provide SAT witnesses or unknown. A finished local or prefix exclusion is not promoted by these frozen wrappers to global UNSAT. UNSAT publisher labels and Z3 results are audit data, not new portfolio certificates.",
+    "All raw DIMACS rereads, input hashing, proposal/index preparation, search and conditional checks, evidence/model writes and three compressions, warm and two cold reload/checks are measured. No search state survives replay; OS caches are not flushed. Download, import/startup, final reports and independent reference runs are additional.",
+    "Separate one-shot fresh-process reference runs use the unchanged full portfolio and Z3 with fixed timeouts. Portfolio certificates receive independent project checks; Z3 SAT models receive full-source checks. Z3 UNSAT is trusted reference output, not a project-checkable refutation. Reference times do not include the matched persistence/replay workload and are not used for a speedup ratio.",
+    "Exact normalized overlap is checked against the retained external 37, constructed 32 and synthetic 182 panels. Controls are related inputs. No semantic-isomorphism or general distribution coverage claim.",
+    "Prior sources, artifacts and coverage unions are immutable. Remaining gaps include unrestricted preprocessing, conditional interaction width, guarded negative reuse and compact acquisition; finite holdout success would not prove a polynomial SAT method."
+  ],
+  "next_cost_target": "Reuse or compress checked conditional negative evidence and export completed full-support refutations without repeating acquisition. Preserve all outside-context and source-edit obligations.",
+  "next_coverage_target": "Investigate the six known-SAT and eight reference-UNSAT misses, especially the connected 100-variable originals; use new frozen inputs after any policy change.",
+  "paired_percent": [
+    -2.00764396813653,
+    -0.756287786181431,
+    0.8659029744363167,
+    -1.787947989814287
+  ],
+  "supplemental_checks": {
+    "path": "experiments/results/cnf-boundary-transfer/supplemental-checks.json",
+    "sha256": "5e32c7a62f25702fc2503457bfd479babf4fe4859eee7289c2cc7f65130d35de"
+  },
+  "union_coverage": {
+    "sat": 12,
+    "unresolved": 14,
+    "unsat": 10
+  }
+}

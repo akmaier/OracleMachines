@@ -4,7 +4,49 @@ This record tracks the work requested on 7 November 2026. A completed
 implementation is distinguished from a stronger theorem that it does not prove.
 Earlier experiments and persisted results must remain intact.
 
-## Latest evidence: proof-guided repair completes the exposed panel
+## Latest evidence: transfer limits and six exported root refutations
+
+[Frozen external transfer and root exclusions](boundary-transfer-and-root-exclusions.md)
+expose the limit of the preceding constructed-panel success. On **24 new SATLIB
+originals plus 12 derived controls**, both unchanged repair policies certify
+**8/24 originals and 4/12 controls**, with no gained or lost SAT answer. Selection,
+indices and policy were frozen before acquiring the new contents; this remains
+a nonrepresentative, size-limited sample.
+
+Mean complete cost changes **11.06400 → 10.96200 seconds (−0.92%)**, with mixed
+paired signs: no reliable transfer speedup. Combined compressed evidence grows
+**2,027 → 478,862 bytes** and two cold replays **0.09521 → 0.61522 seconds**.
+Reduced search work is largely offset by conditional-proof costs.
+
+A separate additive exporter recovers **six checked global root refutations**
+that the repair wrapper discarded: four originals and two controls. Fresh
+acquisition plus recording replay stays within the same 20,000 total states.
+The repair kernel then certifies **12 SAT + 6 UNSAT**, leaving 18 unknown. These
+six negatives overlap the older portfolio; the combined union stays **22/36**.
+Only a checked full-support root refutation grants global UNSAT authority.
+
+The unchanged portfolio certifies 9 SAT + 10 UNSAT. A fresh Z3 reference returns
+18 SAT + 18 UNSAT; its SAT models are source-checked, but its UNSAT outputs are
+trusted audit results, not project refutations. Combining the portfolio and
+repair kernels leaves **14 cases: six reference-SAT and eight reference-UNSAT**.
+All are connected. Attempted repair regions span **83–100 of 100 variables** or
+**69–72 of 75**; these are observed widths, not minimum-width proofs.
+
+All **2,552 full and six focused tests pass**. The exporter agrees with truth
+tables on all 512 two-variable CNFs (95 SAT, 417 UNSAT). Validation reproduces
+all paired outcomes/counters/replays and all exports, preserves 246 prior
+manifests, 82,741 artifact entries, 1,341 old scientific sources and 86 proofs,
+and rechecks the old external union. Old external 37/37, constructed 32/32 and
+synthetic 182/182 results remain separate. Resume
+`experiments/results/cnf-boundary-transfer/checkpoint.json`, key `boundary_transfer`.
+
+**Largest remaining gaps:** analyze the retained six SAT and eight UNSAT misses;
+reduce wide interactions; reuse or compress conditional negative evidence; and
+export completed refutations without duplicate acquisition. Retuning must be
+followed by new frozen transfer inputs. Efficient recognition, preprocessing and
+unrestricted expansion bounds remain open.
+
+## Previous evidence: proof-guided repair completes the exposed panel
 
 [Proof-guided boundary repair](proof-guided-boundary-repair.md) closes the three
 retained misses: **29/32 → 32/32** checked models on the exposed constructed

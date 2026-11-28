@@ -17657,6 +17657,135 @@ SAT expansion bounds remain open.  Completing this finite panel and describing
 an exact decomposition of all valid CNFs do not establish efficient solution
 of every resulting class.
 
+\subsection{Frozen external transfer and exported root refutations}
+\label{sec:boundary-transfer}
+
+The constructed-panel improvement in Section~\ref{sec:boundary-repair} does not
+increase coverage on the next external sample.  Both unchanged repair policies
+certify eight of 24 originals and four of twelve derived controls, with identical
+answered sets.  Mean complete cost changes by only $-0.92\%$, with mixed paired
+signs, while conditional evidence becomes much larger.  A separate follow-up
+exports six complete root refutations previously discarded by the repair
+wrapper.  These improve that kernel's negative output but overlap the older
+portfolio's coverage.  The frozen comparison and all preceding evidence remain
+unchanged.
+
+Before downloading new contents or evaluating them, we freeze zero-based
+lexicographic member indices 10, 30, 60 and 90 from six SATLIB archives:
+\texttt{uf50-218}, \texttt{uuf50-218}, \texttt{uf75-325}, \texttt{uuf75-325},
+\texttt{uf100-430} and \texttt{uuf100-430} \citep{satlib}.  This gives 24 originals.
+For the first selected source in each group, we add one deterministic sparse
+signed permutation and one edit deleting its first clause and reversing a
+literal in its last clause.  The twelve controls remain related inputs;
+changed-source truth is not inherited.  Exact normalized comparison finds no
+overlap with the retained 37 external, 32 constructed or 182 synthetic inputs,
+or any exact duplicate within the new sample.  This is a size-limited,
+nonrepresentative selection, not an all-history novelty or semantic-isomorphism
+claim.  Raw bytes, archive hashes, members, indices and transformations survive.
+Only clauses reach discovery; labels, names, identifiers and reference results
+do not select search.
+
+Baseline retains the full 20,000-state disjoint traversal.  Boundary repair keeps
+the 10,000-state prefix, shared remainder and eight-round maximum.  There is no
+retuning on these sources.  Four fresh-process pairs alternate mode order.
+Timing includes raw DIMACS reads and hashes, preparation, acquisition, internal
+and explicit checking, proof and sidecar writes, three compressions, warm replay
+and two cold replay/checks.  No search state survives replay; OS caches are not
+flushed.  Downloads, imports/startup, reporting metadata and independent reference
+runs are additional.  Both wrappers grant SAT authority through complete checked
+models, but still return unknown for negative or incomplete searches.
+
+Both arms answer all four selected 50-variable SAT originals and all four
+75-variable SAT originals.  All four 100-variable SAT originals remain
+unresolved.  Each arm also answers two signed and two edited controls; no SAT
+answer is gained or lost.  Explored states fall from 430,480 to 422,860.  Mean
+complete time changes from 11.06400 to 10.96200\,s; paired percentage changes are
+$-2.01$, $-0.76$, $+0.87$ and $-1.79$.  This does not establish a reliable
+transfer speedup.  Acquisition/internal checks fall from 10.86008 to 9.55053\,s,
+but explicit checks grow from 0.02620 to 0.26806\,s, warm replay from 0.05027 to
+0.31467\,s, and two cold replays from 0.09521 to 0.61522\,s.  Model JSON occupies
+20,171 versus 20,164 bytes; discovery JSON grows from 78,339 to 5,510,680 bytes,
+and combined gzip from 2,027 to 478,862 bytes.  Maximum observed RSS rises from
+33,325,056 to 78,151,680 bytes.  Historical append-only storage is additional.
+Equal state caps remain unequal work, and the policies still leave many sources
+unanswered.
+
+Separate one-shot reference runs start a fresh process for each input and mode.
+The unchanged full portfolio certifies nine SAT and ten UNSAT, leaving seventeen
+unresolved.  Z3 version 5.4.1, with seed zero and a ten-second solver timeout,
+returns eighteen SAT and eighteen UNSAT.  Neither mode reaches the thirty-second
+outer process timeout.  Project checkers independently validate portfolio
+certificates and every Z3 SAT model against the raw source.  Z3 UNSAT is a
+trusted reference result, not a project-checkable refutation.  Available publisher
+labels agree; edits are assessed separately and signed SAT models transport back
+to their originals.  Process totals are 55.67782\,s for the portfolio and
+3.07527\,s for Z3, including startup.  These runs do not perform the matched
+persistence/replay workload and do not support a speedup ratio.  Reference models
+are not counted as structural transfer coverage.
+
+Combining either repair kernel with the independently checked portfolio gives
+twelve SAT and ten UNSAT: fifteen of 24 originals and seven of twelve controls.
+Fourteen remain unresolved, with six reference-SAT and eight reference-UNSAT.
+They comprise one 75-variable UNSAT original and its signed control, all eight
+100-variable originals, and four 100-variable controls.  Every unresolved source
+has one primal connected component.  The final attempted free sets span 69 and
+72 of 75 variables, or 83--100 of 100 variables.  In the four 100-variable SAT
+originals, their sizes are 88, 100, 95 and 94.  These are observed policy widths,
+not minimum separators, irreducibility proofs or bounds against arbitrary
+algorithms.  Rejected near-models and their false-clause indices remain available
+without SAT authority.
+
+The audit also reveals a narrower certificate-export gap.  On six inputs, the
+initial full-support root traversal finishes below 10,000 states, but recording
+was disabled and the wrapper discards its refutation.  The additive exporter runs
+the unchanged boundary policy afresh.  Only if its root prefix reports complete
+radius exhaustion does it reconstruct the same seed and repeat that closed
+traversal with recording enabled, capped at the observed state count $k$.
+The old independent exclusion checker must accept the original source and a
+radius spanning every source variable.  Local exclusions, partial-radius balls
+and interrupted searches are never promoted to global UNSAT.  The earlier
+full-support exclusion argument supplies correctness; no new tractability
+claim is required.  Since $k\le 10{,}000$, initial acquisition and replay use
+$2k\le 20{,}000$ states in total.  Preparation, copies, checks, persistence and
+replays remain additional timed costs.
+
+This export policy is a post-transfer follow-up, chosen after observing the
+discarded refutations and frozen before its own runs.  It does not alter the
+matched transfer results, search order, source selection or production defaults.
+It certifies originals t004--t007 and controls t026--t027, with charged combined
+state counts 6,272, 7,344, 9,058, 8,174, 9,220 and 6,594.  The recording replays
+add 23,331 states, bringing the panel total to 446,191.  The exporter retains
+twelve SAT answers and adds six UNSAT answers, leaving eighteen unknown.
+All six negatives were already certified by the older portfolio, so their
+combined 22/36 union is unchanged.  The complete root refutations now survive as
+independently checkable evidence rather than an unrecorded search conclusion.
+
+The single complete export workflow takes 11.87175\,s: acquisition/internal
+checks 10.11165, explicit checks 0.35007, warm replay 0.39526 and two cold replays
+0.79990\,s.  Model/refutation JSON occupies 2,448,128 bytes, discovery JSON
+5,510,680 bytes, and combined gzip 739,493 bytes.  Peak RSS is 86,212,608 bytes.
+This is one separately measured workflow, not a matched speedup estimate.
+The double traversal is an explicit cost, motivating future proof retention or
+more economical negative reconstruction rather than hiding acquisition.
+
+All 2,552 full and six focused tests pass.  The export audit agrees with truth
+tables on all 512 canonical two-variable CNFs, comprising 95 SAT and 417 UNSAT,
+and rejects partial-ball promotion.  Validation reproduces all eight matched
+transfer runs, counters and cold replays, and all 36 export runs.  Input tests
+exercise signed transport, raw/parsed consistency, hash invalidation, empty and
+sparse sources, and unknown-versus-UNSAT separation.  The checkpoint preserves
+246 prior manifests, 82,741 artifact entries, 1,341 scientific sources and all
+86 preceding proof blocks.  The earlier external 37/37, constructed 32/32 and
+synthetic 182/182 unions remain separate and unchanged.
+
+The largest next gaps are the six known-SAT and eight reference-UNSAT misses,
+nearly full-width coupling, conditional negative evidence whose storage and replay
+grow sharply, and complete refutation export without duplicate acquisition.
+After any policy change, further transfer claims need newly frozen inputs.
+Efficient recognition, source-dependent preprocessing, compact certificates and
+unrestricted SAT expansion remain open.  Neither finite coverage nor an exact
+conditioning description establishes an efficient solution of every CNF class.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 

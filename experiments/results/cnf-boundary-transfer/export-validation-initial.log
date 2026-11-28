@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/experiments/results/cnf-boundary-transfer/validate_export.py", line 43, in <module>
+    if __name__=='__main__':validate(Path(sys.argv[1]))
+                            ~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/results/cnf-boundary-transfer/validate_export.py", line 11, in validate
+    report=s.load(out/'root-export.json');policy=s.bound(report['policy']);assert report['script']==policy['script']==s.binding(out/'export_root_exclusions.py')
+                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

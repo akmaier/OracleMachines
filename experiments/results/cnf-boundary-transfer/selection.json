@@ -1,0 +1,61 @@
+{
+  "controls": "For the first selected original of each group, append one signed sparse permutation (seed 202611280204 plus group index) and one edit removing the first clause and flipping the first literal in the last nonempty clause. Keep controls separate from originals.",
+  "groups": [
+    {
+      "archive": "uf50-218.tar.gz",
+      "name": "uf50",
+      "publisher_answer": true
+    },
+    {
+      "archive": "uuf50-218.tar.gz",
+      "name": "uuf50",
+      "publisher_answer": false
+    },
+    {
+      "archive": "uf75-325.tar.gz",
+      "name": "uf75",
+      "publisher_answer": true
+    },
+    {
+      "archive": "uuf75-325.tar.gz",
+      "name": "uuf75",
+      "publisher_answer": false
+    },
+    {
+      "archive": "uf100-430.tar.gz",
+      "name": "uf100",
+      "publisher_answer": true
+    },
+    {
+      "archive": "uuf100-430.tar.gz",
+      "name": "uuf100",
+      "publisher_answer": false
+    }
+  ],
+  "indices": [
+    10,
+    30,
+    60,
+    90
+  ],
+  "parent": {
+    "path": "experiments/results/cnf-boundary-repair/checkpoint.json",
+    "sha256": "e5efbe7e99e9f134f71be06c72a9306c1e48542993886e37d2bdd28ee8289cb2"
+  },
+  "parent_manifest": {
+    "path": "experiments/results/cnf-boundary-repair/manifest.json",
+    "sha256": "8f9714da3da363932eb080f8e550d681cb69f716a258a5f6bea449d8d0acdf8a"
+  },
+  "policy": {
+    "max_rounds": 8,
+    "node_limit": 20000,
+    "prefix_limit": 10000
+  },
+  "policy_files": {
+    "experiments/cnf_boundary_repair.py": "a97f8e6a3c238e6a684c21ef4d8e9508d87c3cbfe701108f011fc38c638d1273",
+    "experiments/cnf_hamming_repair.py": "6baa85acdd1cb86a9f792f1174a8b5393b73775951d239933488ee199280fe86",
+    "experiments/cnf_partition_repair.py": "4597c4b7077366b760ad41476bb2ef0ea3d16b5397a097d7e045f012964dceb0"
+  },
+  "scope": "Six size/truth groups; four zero-based lexicographic member indices per group, frozen before downloading new contents or evaluating. No outcome-guided filtering or tuning. Previously unused relative to the retained external, constructed and 182-case panels by exact normalized equality; not all-history semantic novelty or representative sampling.",
+  "source_index": "https://www.cs.ubc.ca/~hoos/SATLIB/benchm.html"
+}

@@ -1,0 +1,13 @@
+{
+  "parent_comparisons": {
+    "path": "experiments/results/cnf-boundary-transfer/comparisons.json",
+    "sha256": "d6bb7513d9512fbef28ae313490309871270028807efdc29acd3d74a981ef78a"
+  },
+  "policy": "Fresh unchanged boundary run. If root prefix exhausted, rebuild same seed and repeat only that closed traversal with recording enabled and cap equal to its observed state count. Check full-source exclusion independently. Combined states <= 2*10000. Existing SAT answers unchanged.",
+  "scope": "Post-transfer explanatory follow-up, frozen before export runs; separate from untouched matched transfer protocol. No result-driven changes to discovery order, limits or source selection.",
+  "script": {
+    "path": "experiments/results/cnf-boundary-transfer/export_root_exclusions.py",
+    "sha256": "f5dc7cdc47666cfd3bbf6b73d33f3411a8ce4f4a793217f48f01d84016eda56a"
+  },
+  "trigger": "Only full-support root prefix radius-exhausted; never a local exclusion or budget exhaustion."
+}

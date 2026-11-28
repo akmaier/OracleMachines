@@ -1,0 +1,69 @@
+EEE..............E
+======================================================================
+ERROR: test_all_admitted_matches_prior_certificate (solver.test_cnf_admitted_learning.AdmittedLearningTests.test_all_admitted_matches_prior_certificate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_admitted_learning.py", line 37, in test_all_admitted_matches_prior_certificate
+    source,p=independent();target=source+[[-3,99],[-99]];a,da=e.prior.expand(target,p);b,db=e.expand(target,p,clause_limit=999)
+                                                              ~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_selective_learning.py", line 43, in expand
+    got=prior.check_result(target,knowledge,counts)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_resolution_learning.py", line 41, in check_result
+    clauses=checked_clauses(source,proof['derivations'],counts)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_resolution_learning.py", line 28, in checked_clauses
+    else:raise ValueError('Missing complementary pivot')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Missing complementary pivot
+
+======================================================================
+ERROR: test_checker_independent (solver.test_cnf_admitted_learning.AdmittedLearningTests.test_checker_independent)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_admitted_learning.py", line 52, in test_checker_independent
+    source,p=independent();target=source+[[-3]];r,d=e.expand(target,p)
+                                                    ~~~~~~~~^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_admitted_learning.py", line 34, in expand
+    got=prior.prior.check_result(target,knowledge,counts)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_resolution_learning.py", line 41, in check_result
+    clauses=checked_clauses(source,proof['derivations'],counts)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_resolution_learning.py", line 28, in checked_clauses
+    else:raise ValueError('Missing complementary pivot')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Missing complementary pivot
+
+======================================================================
+ERROR: test_composed_proof_uses_retained_evidence (solver.test_cnf_admitted_learning.AdmittedLearningTests.test_composed_proof_uses_retained_evidence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_admitted_learning.py", line 42, in test_composed_proof_uses_retained_evidence
+    source,p=independent();target=source+[[-3]];r,d=e.expand(target,p,clause_limit=1);self.assertFalse(e.prior.prior.check_result(target,r)['answer']);self.assertEqual(r['derivations'][:3],p['derivations'])
+                                                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_admitted_learning.py", line 34, in expand
+    got=prior.prior.check_result(target,knowledge,counts)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_resolution_learning.py", line 41, in check_result
+    clauses=checked_clauses(source,proof['derivations'],counts)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_resolution_learning.py", line 28, in checked_clauses
+    else:raise ValueError('Missing complementary pivot')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Missing complementary pivot
+
+======================================================================
+ERROR: test_zero_admission_still_solves (solver.test_cnf_admitted_learning.AdmittedLearningTests.test_zero_admission_still_solves)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/maier/Documents/code/OracleMachines/solver/test_cnf_admitted_learning.py", line 40, in test_zero_admission_still_solves
+    source,p=independent();target=source+[[-3]];r,d=e.expand(target,p,clause_limit=0);self.assertFalse(e.prior.prior.check_result(target,r)['answer'])
+                                                    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_admitted_learning.py", line 34, in expand
+    got=prior.prior.check_result(target,knowledge,counts)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_resolution_learning.py", line 41, in check_result
+    clauses=checked_clauses(source,proof['derivations'],counts)
+  File "/Users/maier/Documents/code/OracleMachines/experiments/cnf_resolution_learning.py", line 28, in checked_clauses
+    else:raise ValueError('Missing complementary pivot')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Missing complementary pivot
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.004s
+
+FAILED (errors=4)

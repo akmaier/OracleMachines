@@ -12,7 +12,48 @@ Recognized-family optimization continues as supporting work. A complete
 classification and efficient solution of every resulting cell are separate
 obligations; retain overlaps, checked recognition and composition costs.
 
-## Current investigation: selective survival and economical expansion
+## Current investigation: bounded active knowledge and remaining transfer
+
+[Bounded active knowledge](bounded-active-knowledge.md) admits at most 128 distinct
+non-source learned clauses, ranked by shorter width and then recency. Every
+surviving derivation remains checked and persisted; inactive proof ancestors
+are available for exact substitution without entering the propagation input.
+This preserves the target model set for every admission subset.
+
+On the same sixteen exposed edited targets at 2,000 contexts, full admission
+certifies **3/16** and bounded admission **1/16**.
+There are **0 new answers and 2 baseline answers lost** by the
+bounded policy. The historical union certifies **3/16**, leaving
+**13 unresolved**. The union preserves earlier answers and is not
+a measured combined dispatcher. The bounded policy is not a replacement for full admission: it produces no new
+answer here and loses two earlier ones. This is exposed-policy development, not
+fresh external transfer or a new tractable SAT class.
+
+Initial imported clauses fall **59,480 → 2,048**.
+Mean complete measured cost falls **172.53374 → 60.19492
+seconds (-65.11%)**. Assignment occurrence updates change
+**319,681,345 → 43,207,707**.
+Proof JSON changes **110,545,079 → 111,384,453 bytes**;
+two reload/check rounds change **8.44631 → 8.56907 seconds**.
+Those rounds parse fresh objects in the same worker; a separate fresh-worker
+validation reproduces all target answers and checking counters without search.
+Retained-proof reads, checks and writes are charged; old acquisition is additional. The
+128 cap does not limit newly learned clauses or general expansion.
+
+All **2,659 full and 19 focused tests pass**. Reproduced small-case checks cover
+13,624 edited targets and 40,872 complete model-set comparisons at admission
+budgets 0, 1 and 128. Validation preserves 251 manifests, 84,515 artifacts,
+1,367 scientific sources and 90 prior proofs; five scientific files and one
+proof are added. Resume `experiments/results/cnf-admitted-learning/checkpoint.json`,
+key `admitted_learning`.
+
+**Largest remaining gaps:** the 13 unresolved edited targets; cheaper
+propagation with broader clause access or admission informed by proof use; fresh
+frozen external transfer; retained-proof cost; and alternative supports after
+source deletions. The active import cap
+preserves exactness, but does not bound unrestricted SAT complexity.
+
+## Previous investigation: selective survival and economical expansion
 
 [Selective learned knowledge after edits](selective-learned-knowledge.md) replaces
 whole-collection rejection with a dependency filter. Every old derivation is

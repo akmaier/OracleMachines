@@ -1,0 +1,43 @@
+{
+  "comparison_percent": -65.1112187735619,
+  "coverage": {
+    "admitted": {
+      "unresolved": 15,
+      "unsat": 1
+    },
+    "all": {
+      "unresolved": 13,
+      "unsat": 3
+    }
+  },
+  "decision": "Do not replace full admission with this 128-clause policy: it loses two baseline answers and provides no new answer on this exposed panel. Preserve the cheaper experimental policy, all evidence, and the historical union as evidence for the next admission/propagation investigation.",
+  "documents": {
+    "paper/bounded_domain_sat_and_amortized_reasoning.tex": "d18fb5799828eecba68c002a59a6356beade3b651dc2cd2c97c3f71fecf1a7d5",
+    "research/bounded-active-knowledge.md": "be24bfcc3cc87b1b5e6366901e965c692c5abeb88050a144bc345659ad28de99",
+    "research/implementation-gaps.md": "ac9555c384f836ff68c276b9df7228a7eb3e330082198efdd601c2b5856a7f4f",
+    "research/sat-pattern-discovery.md": "9d3a1a6077361702912c7f570cffd0b92dfaf481b0acd47ace8b2026239c1f84",
+    "research/structural-reuse-priorities.md": "fb0eef0c1dce32c7aca7a98ffd147afa0b7947917d041b8cc81a1ecb0982d933"
+  },
+  "gains": [],
+  "limitations": [
+    "Policy development on the exposed 16 edited targets from eight previously refuted parents. All previous target bytes, labels, references and unknowns remain unchanged. This is not new external transfer or a representative sample.",
+    "Baseline activates every surviving learned clause. Candidate admits at most 128 distinct non-source clauses, ranked by smaller width then more recent retained derivation; duplicate clauses use their most recent record. The rule uses proof syntax, not target truth or new trial outcomes. The same target-only proposal and unchanged learner are used with 2000 entered contexts.",
+    "Every surviving derivation is still checked, copied, retained and persisted, including inactive clauses and ancestors. Only active augmented input changes; no proof pruning, watched-literal propagation or production defaults change. Clauses discovered by new search are not subject to this initial admission cap.",
+    "Any admitted subset is implied by the target, so augmentation preserves its entire model set. Exact proof substitution produces an unchanged-format target certificate. SAT requires a full source model; UNSAT requires a checked empty clause; capped runs remain unknown.",
+    "Two fresh-process alternating pairs charge input/hash reads, parent proof reads and checks, selective transport, ranking, augmentation, search, substitution, checks, writes, three compressions, warm and two cold target-only reload/checks. Historical parent acquisition is additional. Imports/startup, reports and independent audits are additional; OS caches are not flushed.",
+    "The historical union preserves answers if bounded admission loses a baseline answer. A union is not a measured combined dispatcher. Per-policy misses, novel gains, retained evidence, replay costs and unresolved interactions are recorded separately. No polynomial arbitrary-CNF efficiency claim."
+  ],
+  "losses": [
+    "s021",
+    "s031"
+  ],
+  "next_target": "Remaining edited-input interactions, frozen external transfer of the admission policy, retained-proof costs and alternatives to vanished proof supports. The historical union is not a measured dispatcher.",
+  "supplemental_checks": {
+    "path": "experiments/results/cnf-admitted-learning/supplemental-checks.json",
+    "sha256": "ca5767a2b0ab06c64a746a389536f6d4fb7c00eb93c48bc55645c42e0861fe9d"
+  },
+  "union_counts": {
+    "unresolved": 13,
+    "unsat": 3
+  }
+}

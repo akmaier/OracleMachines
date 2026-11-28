@@ -18370,6 +18370,132 @@ to outweigh saved search.  Compact source guards, preprocessing and unrestricted
 expansion remain open; finite target coverage is not an efficient classification
 of arbitrary CNF.
 
+\subsection{Bounding active knowledge without discarding proof evidence}
+\label{sec:admitted-learning}
+
+The selective transport preserves valid knowledge after edits, but activating
+all surviving clauses made the measured expansion substantially more expensive.
+The next experiment separates logical availability from active search input.
+Every surviving derivation is still checked, copied and retained.  Only a bounded
+subset of its claimed clauses is added to the target's propagation input.
+No production default or proof format changes.
+
+The frozen policy admits at most 128 distinct learned clauses not already
+present as target clauses.  Smaller literal width ranks first; more recent
+retained derivations break ties.  Duplicate learned clauses use their most
+recent record.  Ranking uses proof syntax, not target truth.  It is a heuristic
+for economical admission, not a claim that short clauses always give better
+search.  The initial complete proposal still comes from the target alone,
+and both policies use the unchanged learner with 2,000 entered contexts.
+The cap applies only to imported active knowledge, not clauses subsequently
+learned during expansion.
+
+\begin{proposition}[Bounded active knowledge with complete proof retention]
+Let $F$ be a target CNF and let $K$ be any collection of clauses with checked
+resolution derivations from $F$.  For any selected subset $A\subseteq K$,
+including the empty subset, $F$ and $F\land\bigwedge A$ have exactly the same
+models.  Inactive clauses in $K\setminus A$ and their derivations may remain in
+the retained certificate and serve as ancestors of active-clause proofs without
+being inserted into the search input.  Exact substitution of those proofs
+converts a refutation of the augmented formula into a refutation of $F$.
+\end{proposition}
+\begin{proof}
+Every clause in $K$ is implied by $F$, so every model of $F$ satisfies every
+member of $A$.  The augmented formula also contains $F$, which gives the reverse
+model inclusion.  For proof substitution, place all retained derivations before
+the new derivations and map each augmented premise to a target clause or its
+checked earlier derivation.  The topological resolution order remains valid.
+An ancestor's presence in this certificate does not require its insertion into
+the search clause set.  The unchanged checker reconstructs every claimed clause
+and any final empty clause from $F$.  A SAT answer still requires a complete
+target model; an incomplete search remains unknown.
+\end{proof}
+
+This result justifies any admission subset, not the particular ranking's
+performance.  Old proofs, selective transport, ranking and full retained evidence
+are all charged.  Bounding the active import does not bound the size of its
+proof support, newly acquired clauses or unrestricted search.  Proof pruning,
+watched-literal propagation and alternative-support discovery remain separate
+work.  Inactive evidence is preserved, including for capped outcomes.
+
+On the same sixteen exposed edited targets, full admission certifies
+3/16 and bounded admission 1/16 within the fixed cap.
+There are 0 newly certified answers and 2 lost baseline answers.
+The preserved historical union certifies 3/16, leaving 13 unresolved.
+All target reference outcomes are trusted UNSAT claims; only checked project
+refutations contribute to certified coverage.  Gains, losses and remaining
+case diagnostics are recorded separately.  The historical union is not a
+measured combined dispatcher, and these exposed inputs are not fresh transfer.
+
+Imported active clauses fall from 59,480 to
+2,048 across the sixteen runs.  Entered contexts change
+from 30,395 to 31,224, and assignment occurrence updates
+from 319,681,345 to 43,207,707.
+Across two fresh-process alternating pairs, mean complete cost falls from
+172.53374 to 60.19492 seconds (-65.11\%).
+Paired changes are -65.15\% and -65.07\%.
+Mean acquisition including checks changes from 150.20742
+to 38.04885 seconds, explicit checking from
+3.67809 to 3.71559, warm replay from
+4.43460 to 4.25510, and two cold reload/checks from
+8.44631 to 8.56907 seconds.  Proof JSON changes from
+110,545,079 to 111,384,453 bytes and combined gzip from
+4,114,583 to 4,080,695 bytes.
+Maximum observed process RSS changes from 468,467,712 to
+463,896,576 bytes.
+
+The measured workload includes target and parent input/hash reads, parent proof
+checks, selective transport, ranking, augmentation, expansion, substitution,
+checks, writes, three compressions and replay.  The two reload/check rounds
+called cold in the counters deserialize fresh objects in the same worker, after
+its warm round; they are not independent cold-start processes.  Separate fresh
+workers reproduce every target answer and checker counter with search, expansion
+and transport disabled; this validation is outside benchmark costs.  Old acquisition is separately
+recorded and additional.  Imports/startup, reports and independent audits are
+additional; cold replay does not flush operating-system caches.  Search choices
+and answers can change, so the comparison is not equal-search proof packing.
+Both modes retain the identical complete prior proof prefix, including inactive
+ancestors.  Final proof-size differences reflect newly acquired records.
+
+
+A post-hoc trace of the earlier refutations counts distinct retained clauses
+used directly by reachable new derivations.  Lost cases \texttt{s021} and
+\texttt{s031} use 630 and 292 such clauses; the candidate admits only 122 and
+95, omitting 508 and 197.  These are properties of the recorded proof routes,
+not clauses necessary in all possible refutations.  Indeed, \texttt{s023}
+still succeeds despite admitting only 112 of the 578 clauses on its baseline
+route.  Different search can obtain a different proof.  This motivates testing
+use-informed admission or cheaper propagation with broader clause access; it
+does not establish a causal diagnosis of each capped outcome.
+
+The reproduced small-case audit checks 13,624 edited targets from all 512
+two-variable clause sets, 3,304 three-variable clause sets of at most three
+clauses, and 128 fresh sparse signed mixtures.  Admission budgets 0, 1 and 128
+receive independent ranking checks and complete model-set comparisons, giving
+40,872 admission checks, model-set equalities and composed-answer checks:
+32,853 SAT and 8,019 UNSAT.  Every output preserves the complete retained
+proof prefix.  At zero expansion budget, 11,285 cases remain unknown and the
+other 2,339 retain checked refutations.  Repeated budgets and related targets
+are not independent problem draws.
+
+All 2,659 full and 19 focused tests pass.  Tests cover duplicate claims, target
+clauses excluded from admission, newest-first ties, the 128-clause cap, corrupted
+inactive evidence, zero budgets, exact substitution, target additions and
+checking without search.  The initial test-fixture error log is preserved:
+four tests supplied old clause indices directly to an edited target and were
+correctly rejected.  Remapping those fixtures through checked transport fixes
+the tests; a dedicated rejection test retains the counterexample.
+
+Validation reruns both measured policies, reproduces their certificates and
+counters, and checks all saved compression and replay data.  The full-admission
+baseline reproduces its previous checkpoint exactly.  All 251 earlier manifests,
+84,515 artifact entries, 1,367 scientific sources and 90 preceding proof blocks
+remain unchanged; five scientific files and one proof are added.  Historical
+coverage, unknowns, counterexamples and cumulative tables remain separately
+preserved.  General preprocessing, efficient recognition and unrestricted SAT
+expansion remain open; finite edited-input results do not establish a polynomial
+SAT algorithm.
+
 \section{System 1, System 2, and the reuse of computation}
 \label{sec:discussion}
 
